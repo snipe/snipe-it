@@ -8,8 +8,8 @@ use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
-use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
-use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
+//use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
+//use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\Webhook\WebhookChannel;
 use NotificationChannels\Webhook\WebhookMessage;
@@ -46,37 +46,14 @@ class CheckinAssetNotification extends Notification
      */
     public function via()
     {
-        $notifyBy = [];
-
-        if (Setting::getSettings()->slack_endpoint != '') {
-            \Log::debug('use slack');
-            $notifyBy[] = 'slack';
-        }
-
-        if (Setting::getSettings()->msteams_endpoint != '') {
-            \Log::debug('use msteams');
-            $notifyBy[2] = MicrosoftTeamsChannel::class;
-        }
-        if (Setting::getSettings()->discord_endpoint != '') {
-            \Log::debug('use discord');
-            $notifyBy[3] = WebhookChannel::class;
-        }
-
-
-        /**
-         * Only send checkin notifications to users if the category
-         * has the corresponding checkbox checked.
-         */
-        if ($this->item->checkin_email() && $this->target instanceof User && $this->target->email != '') {
-            \Log::debug('use email');
-            $notifyBy[] = 'mail';
-        }
-
-        return $notifyBy;
+       
+        return NotificationIntegrations::notifyByChannels($this->item, $this->target);
+   
     }
 
     public function toSlack()
     {
+        
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note ?: 'No note provided.';
@@ -96,6 +73,7 @@ class CheckinAssetNotification extends Notification
                     ->fields($fields)
                     ->content($note);
             });
+            
     }
 
 
@@ -103,6 +81,9 @@ class CheckinAssetNotification extends Notification
     public function toMicrosoftTeams($notifiable)
     {
 
+        return NotificationIntegrations::msteamsMessageBuilder($this->item, $this->target, $this->admin, "in", $this->note, $this->expected_checkin);
+
+/*
         $target = $this->target;
         $admin = $this->admin;
         $item = $this->item;
@@ -119,7 +100,8 @@ class CheckinAssetNotification extends Notification
             ->fact('Status', $item->assetstatus->name ,$sectionId = 'action_msteams')
             ->fact('Location', $location, $sectionId = 'action_msteams')
             ->button('View in Browser', '' . $target->present()->viewUrl() . '', $params = ['section' => 'action_msteams']);
-    }
+    */
+        }
 
     
     public function toWebhook($notifiable)

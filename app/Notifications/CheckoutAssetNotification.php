@@ -66,12 +66,12 @@ class CheckoutAssetNotification extends Notification
 
     public function toSlack()
     {
-        return NotificationIntegrations::slackMessageBuilder($this->item, $this->target, $this->admin, "out", $this->note = 'No note provided.', $this->expected_checkin, $this->settings->slack_botname);
+        return NotificationIntegrations::slackMessageBuilder($this->item, $this->target, $this->admin, "out", $this->note, $this->expected_checkin, $this->settings->slack_botname);
     }
 
     public function toMicrosoftTeams($notifiable)
     {
-       return NotificationIntegrations::msteamsMessageBuilder($this->item, $this->target, $this->admin, "out", $this->note = 'No note provided.', $this->expected_checkin);
+       return NotificationIntegrations::msteamsMessageBuilder($this->item, $this->target, $this->admin, "out", $this->note, $this->expected_checkin);
     }
 
     public function toWebhook($notifiable)

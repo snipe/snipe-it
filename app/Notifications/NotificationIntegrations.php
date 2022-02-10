@@ -100,7 +100,7 @@ class NotificationIntegrations extends Notification
  *       $this->settings = Setting::getSettings();
  */
 
-    public static function msteamsMessageBuilder($item, $target, $admin, $direction, $note = 'No note provided.', $expectedCheckin = 'none')
+    public static function msteamsMessageBuilder($item, $target, $admin, $direction, $note, $expectedCheckin = 'none')
     {
           
             $type = class_basename($item);
@@ -111,19 +111,24 @@ class NotificationIntegrations extends Notification
                 "License" => "&#x1F4BE;",
                 "Consumable" => "&#x1F4CD;"
             ];
-            $directionicon = ($direction =="out" ? "&#x2B06;" : "&#x2B07;");
+            $directionicon = ($direction == "out" ? "&#x2B06;" : "&#x2B07;");
+            $tofrom = ($direction == "out" ? "To" : "From");
         
-        return MicrosoftTeamsMessage::create()
-            ->to(Setting::getSettings()->msteams_endpoint)
+            //in php8 this can be rewritten using nullsafe operator on Fluent interface method chaining
+       
+            $msTeamsMessage = (new MicrosoftTeamsMessage)->create();
+
+            $msTeamsMessage->to(Setting::getSettings()->msteams_endpoint)
             ->type('success')
             ->addStartGroupToSection($sectionId = 'action_msteams')
-            ->title(''.$directionicon.''.$typeicon[$type].' '.$type.' Checked '.$direction.': <a href=' . $item->present()->viewUrl() . '>' . $item->present()->fullName() . '</a>', $params = ['section' => 'action_msteams'])
-            ->content($note, $params = ['section' => 'action_msteams'])
-            ->fact('To','<a href='.$target->present()->viewUrl().'>'.$target->present()->fullName().'</a>', $sectionId = 'action_msteams')
+            ->title(''.$directionicon.''.$typeicon[$type].' '.$type.' Checked '.$direction.': <a href=' . $item->present()->viewUrl() . '>' . $item->present()->fullName() . '</a>', $params = ['section' => 'action_msteams']);
+            if ($note != '') $msTeamsMessage ->content($note, $params = ['section' => 'action_msteams']);
+            $msTeamsMessage->fact(''.$tofrom.'','<a href='.$target->present()->viewUrl().'>'.$target->present()->fullName().'</a>', $sectionId = 'action_msteams')
             ->fact('By', '<a href='.$admin->present()->viewUrl().'>'.$admin->present()->fullName().'</a>', $sectionId = 'action_msteams')
             ->fact('Expected Checkin', $expectedCheckin, $sectionId = 'action_msteams')
             ->button('View in Browser', ''.$target->present()->viewUrl().'', $params = ['section' => 'action_msteams']);
     
+            return $msTeamsMessage;
     }
 
     public static function slackMessageBuilder($item, $target, $admin, $direction, $note = 'No note provided.', $expectedCheckin = 'none', $botname = 'Snipe-Bot')
@@ -139,9 +144,10 @@ class NotificationIntegrations extends Notification
             ];
 
             $directionicon = ($direction =="out" ? ":arrow_up:" : ":arrow_down");;
+            $tofrom = ($direction == "out" ? "To" : "From");
             
             $fields = [
-                'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
+                ''.$tofrom.'' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
                 'By' => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
             ];
     
@@ -198,7 +204,7 @@ class NotificationIntegrations extends Notification
         ];
         $directionicon = ($direction =="out" ? ":arrow_up:" : ":arrow_down");;
 
-
+        //placeholder for possible custom webhook integration
     }
 
 }
