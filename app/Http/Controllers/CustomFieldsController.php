@@ -133,12 +133,23 @@ class CustomFieldsController extends Controller
 
         $this->authorize('update', $field);
 
-        if ($field->fieldset()->detach($fieldset_id)) {
-            return redirect()->route('fieldsets.show', ['fieldset' => $fieldset_id])
-                ->with("success", trans('admin/custom_fields/message.field.delete.success'));
+        // Check that the field exists - this is mostly related to the demo, where we 
+        // rewrite the data every x minutes, so it's possible someone might be disassociating 
+        // a field from a fieldset just as we're wiping the database
+        if (($field) && ($fieldset_id)) {
+
+            if ($field->fieldset()->detach($fieldset_id)) {
+                return redirect()->route('fieldsets.show', ['fieldset' => $fieldset_id])
+                    ->with("success", trans('admin/custom_fields/message.field.delete.success'));
+            } else {
+                return redirect()->back()->withErrors(['message' => "Field is in use and cannot be deleted."]);
+            }  
+
         }
 
-        return redirect()->back()->withErrors(['message' => "Field is in-use"]);
+        return redirect()->back()->withErrors(['message' => "Error deleting field from fieldset"]);
+
+       
     }
 
     /**
