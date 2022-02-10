@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Actionlog;
 use App\Models\Asset;
+use App\Models\Company;
 use App\Models\Location;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
@@ -78,6 +79,7 @@ class LocationsController extends Controller
         $location->created_by = auth()->id();
         $location->phone = request('phone');
         $location->fax = request('fax');
+        $location->company_id = Company::getIdForCurrentUser($request->input('company_id'));
 
         $location = $request->handleImages($location);
 
@@ -138,6 +140,7 @@ class LocationsController extends Controller
         $location->fax = request('fax');
         $location->ldap_ou = $request->input('ldap_ou');
         $location->manager_id = $request->input('manager_id');
+        $location->company_id = Company::getIdForCurrentUser($request->input('company_id'));
 
         $location = $request->handleImages($location);
 
@@ -211,20 +214,22 @@ class LocationsController extends Controller
 
     public function print_assigned($id) : View | RedirectResponse
     {
-
         if ($location = Location::where('id', $id)->first()) {
             $parent = Location::where('id', $location->parent_id)->first();
             $manager = User::where('id', $location->manager_id)->first();
+            $company = Company::where('id', $location->company_id)->first();
             $users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
             $assets = Asset::where('assigned_to', $id)->where('assigned_type', Location::class)->with('model', 'model.category')->get();
-            return view('locations/print')->with('assets', $assets)->with('users', $users)->with('location', $location)->with('parent', $parent)->with('manager', $manager);
-
+            return view('locations/print')
+                ->with('assets', $assets)
+                ->with('users',$users)
+                ->with('location', $location)
+                ->with('parent', $parent)
+                ->with('manager', $manager)
+                ->with('company', $company);
         }
 
         return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist'));
-
-
-
     }
 
 
@@ -296,10 +301,16 @@ class LocationsController extends Controller
         if ($location = Location::where('id', $id)->first()) {
             $parent = Location::where('id', $location->parent_id)->first();
             $manager = User::where('id', $location->manager_id)->first();
+            $company = Company::where('id', $location->company_id)->first();
             $users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
             $assets = Asset::where('location_id', $id)->with('model', 'model.category')->get();
-            return view('locations/print')->with('assets', $assets)->with('users', $users)->with('location', $location)->with('parent', $parent)->with('manager', $manager);
-
+            return view('locations/print')
+                ->with('assets', $assets)
+                ->with('users',$users)
+                ->with('location', $location)
+                ->with('parent', $parent)
+                ->with('manager', $manager)
+                ->with('company', $company);
         }
         return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist'));
     }
