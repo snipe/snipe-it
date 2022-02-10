@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\Helper;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Http\Transformers\LocationsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Location;
@@ -25,9 +26,23 @@ class LocationsController extends Controller
     {
         $this->authorize('view', Location::class);
         $allowed_columns = [
-            'id', 'name', 'address', 'address2', 'city', 'state', 'country', 'zip', 'created_at',
-            'updated_at', 'manager_id', 'image',
-            'assigned_assets_count', 'users_count', 'assets_count','assigned_assets_count', 'assets_count', 'rtd_assets_count', 'currency', 'ldap_ou', ];
+            'id',
+            'name',
+            'address',
+            'address2',
+            'city',
+            'state',
+            'country',
+            'zip',
+            'created_at',
+            'updated_at',
+            'manager_id',
+            'image',
+            'assigned_assets_count',
+            'users_count','assets_count',
+            'currency',
+            'ldap_ou',
+            'company_id'];
 
         $locations = Location::with('parent', 'manager', 'children')->select([
             'locations.id',
@@ -47,10 +62,13 @@ class LocationsController extends Controller
             'locations.image',
             'locations.ldap_ou',
             'locations.currency',
+            'locations.company_id',
         ])->withCount('assignedAssets as assigned_assets_count')
             ->withCount('assets as assets_count')
             ->withCount('rtd_assets as rtd_assets_count')
             ->withCount('users as users_count');
+
+        $locations = Company::scopeCompanyables($locations);
 
         if ($request->filled('search')) {
             $locations = $locations->TextSearch($request->input('search'));
@@ -80,6 +98,10 @@ class LocationsController extends Controller
             $locations->where('locations.country', '=', $request->input('country'));
         }
 
+        if ($request->filled('company_id')) {
+            $locations->where('locations.company_id', '=', $request->input('company_id'));
+        }
+
         // Make sure the offset and limit are actually integers and do not exceed system limits
         $offset = ($request->input('offset') > $locations->count()) ? $locations->count() : abs($request->input('offset'));
         $limit = app('api_limit_value');
@@ -95,6 +117,9 @@ class LocationsController extends Controller
                 break;
             case 'manager':
                 $locations->OrderManager($order);
+                break;
+            case 'company':
+                $locations->OrderCompany($order);
                 break;
             default:
                 $locations->orderBy($sort, $order);
@@ -122,6 +147,7 @@ class LocationsController extends Controller
         $this->authorize('create', Location::class);
         $location = new Location;
         $location->fill($request->all());
+        $location->company_id = Company::getIdForCurrentUser($request->get('company_id'));
         $location = $request->handleImages($location);
 
         if ($location->save()) {
@@ -142,7 +168,7 @@ class LocationsController extends Controller
     public function show($id)
     {
         $this->authorize('view', Location::class);
-        $location = Location::with('parent', 'manager', 'children')
+        $location = Location::with('parent', 'manager', 'children', 'company')
             ->select([
                 'locations.id',
                 'locations.name',
@@ -185,6 +211,10 @@ class LocationsController extends Controller
 
         $location->fill($request->all());
         $location = $request->handleImages($location);
+
+        if ($request->filled('company_id')) {
+            $location->company_id = Company::getIdForCurrentUser($request->get('company_id'));
+        }
 
         if ($location->isValid()) {
 
@@ -266,6 +296,8 @@ class LocationsController extends Controller
             'locations.parent_id',
             'locations.image',
         ]);
+
+        $locations = Company::scopeCompanyables($locations);
 
         $page = 1;
         if ($request->filled('page')) {
