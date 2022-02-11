@@ -174,9 +174,8 @@ class AuthServiceProvider extends ServiceProvider
         });
 
 
-        // This largely echoes the above backend.interact gate, but also determins 
-        // whether or not an API user should be able tp get the selectlists.
-        // This can seema a little confusing, since view properties may not have been granted
+        // This  determines whether or not an API user should be able to get the selectlists.
+        // This can seem a little confusing, since view properties may not have been granted
         // to the logged in API user, but creating assets, licenses, etc won't work 
         // if the user can't view and interact with the select lists.
         Gate::define('view.selectlists', function ($user) {
