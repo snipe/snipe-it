@@ -96,6 +96,7 @@
     'eol'					=> 'EOL',
     'email_domain'			=> 'Email Domain',
     'email_format'			=> 'Email Format',
+    'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'This is used to generate email addresses when importing',
     'error'				    => 'Error',
     'filastname_format'			=> 'First Initial Last Name (jsmith@example.com)',
