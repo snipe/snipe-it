@@ -8,6 +8,7 @@ return array(
     'assoc_child_loc'	 => 'This location is currently the parent of at least one child location and cannot be deleted. Please update your locations to no longer reference this location and try again. ',
 
     'create' => [
+        'bulk_parent_warn'  => 'Your locations have been successfully updated, however your parent entry was not saved because the parent you selected was also in the location list to be edited, and locations may not be their own parent. Please select your locations again, excluding the parent.',
         'error'   => 'Location was not created, please try again.',
         'success' => 'Location created successfully.',
     ],

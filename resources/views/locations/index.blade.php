@@ -18,9 +18,24 @@
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-body">
-        <div class="table-responsive">
+        {{ Form::open([
+          'method' => 'POST',
+          'route' => ['locations/bulkedit'],
+          'class' => 'form-inline',
+          'id' => 'bulkForm']) }}
+
+          @if (Request::get('status')!='Deleted')
+            <div id="toolbar">
+              <label for="bulk_actions"><span class="sr-only">Bulk Actions</span></label>
+              <select name="bulk_actions" class="form-control select2" style="width: 200px;" aria-label="bulk_actions">
+                <option value="edit">{{ trans('button.edit') }}</option>
+              </select>
+              <button class="btn btn-primary" id="bulkEdit" disabled>Go</button>
+            </div>
+          @endif
 
           <table
+                  data-click-to-select="true"
                   data-columns="{{ \App\Presenters\LocationPresenter::dataTableLayout() }}"
                   data-cookie-id-table="locationTable"
                   data-pagination="true"
@@ -32,6 +47,7 @@
                   data-show-export="true"
                   data-show-refresh="true"
                   data-sort-order="asc"
+                  data-toolbar="#toolbar"
                   id="locationTable"
                   class="table table-striped snipe-table"
                   data-url="{{ route('api.locations.index', array('company_id'=>e(Request::get('company_id')))) }}"
@@ -40,7 +56,7 @@
               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
               }'>
           </table>
-        </div>
+        {{ Form::close() }}
       </div>
     </div>
   </div>
