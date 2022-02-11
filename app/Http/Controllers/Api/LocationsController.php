@@ -223,6 +223,8 @@ class LocationsController extends Controller
     public function selectlist(Request $request)
     {
 
+        $this->authorize('view.selectlists');
+
         $locations = Location::select([
             'locations.id',
             'locations.name',

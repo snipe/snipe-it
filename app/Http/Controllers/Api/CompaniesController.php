@@ -159,7 +159,7 @@ class CompaniesController extends Controller
      */
     public function selectlist(Request $request)
     {
-
+        $this->authorize('view.selectlists');
         $companies = Company::select([
             'companies.id',
             'companies.name',

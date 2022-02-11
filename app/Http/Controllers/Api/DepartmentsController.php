@@ -168,6 +168,7 @@ class DepartmentsController extends Controller
     public function selectlist(Request $request)
     {
 
+        $this->authorize('view.selectlists');
         $departments = Department::select([
             'id',
             'name',
