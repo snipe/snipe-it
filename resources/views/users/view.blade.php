@@ -345,7 +345,7 @@
                       <div class="row">
 
                         <div class="col-md-3">
-                          {{ trans('general.employee_number') }}
+                          {{ trans('admin/users/table.employee_num') }}<
                         </div>
                         <div class="col-md-9">
                           {{ $user->employee_num }}
