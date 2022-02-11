@@ -180,7 +180,7 @@ class AuthServiceProvider extends ServiceProvider
         // if the user can't view and interact with the select lists.
         Gate::define('view.selectlists', function ($user) {
             return $user->can('update', Asset::class) 
-                || $user->can('create', License::class)    
+                || $user->can('create', Asset::class)    
                 || $user->can('update', License::class)   
                 || $user->can('create', License::class)   
                 || $user->can('update', Component::class)
