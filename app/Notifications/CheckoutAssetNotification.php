@@ -76,7 +76,7 @@ class CheckoutAssetNotification extends Notification
 
     public function toWebhook($notifiable)
     {
-        return NotificationIntegrations::webhookMessageBuilder($this->item, $this->target, $this->admin, "out", $this->note = 'No note provided.', $this->expected_checkin, $this->settings->slack_botname);
+        return NotificationIntegrations::webhookMessageBuilder($this->item, $this->target, $this->admin, "out", $this->note, $this->expected_checkin, $this->settings->slack_botname);
     }
 
     /**

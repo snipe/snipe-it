@@ -12,10 +12,12 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\SlackMessage;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
-//use NotificationChannels\Discord\DiscordChannel;
-//use NotificationChannels\Discord\DiscordMessage;
 use NotificationChannels\Webhook\WebhookChannel;
 use NotificationChannels\Webhook\WebhookMessage;
+
+//discrod channels below use bot api
+//use NotificationChannels\Discord\DiscordChannel;
+//use NotificationChannels\Discord\DiscordMessage;
 
 class NotificationIntegrations extends Notification
 { 
@@ -45,7 +47,7 @@ class NotificationIntegrations extends Notification
             }
             if (Setting::getSettings()->discord_endpoint != '') {
                 \Log::debug('use discord as webhook');
-                //TO DO: This should be changed to a maintained DiscordWebhook that supports "embeds"
+                //TO DO: This should be changed to a maintained DiscordWebhook that supports "embeds", update routes as well.
                 $notifyBy[3] = WebhookChannel::class;
             }
 
@@ -87,10 +89,10 @@ class NotificationIntegrations extends Notification
 
 /**
  * Returns the format of message requested
- * $service = msteams, slack, webhook, discordwebhook, discordbot
- * $direction = In or Out
- * $item = what is being checked
- * $type = asset, accessory, license, consumable (out only) = get_class($item)
+ * 
+ * $item = what is being checked out, get type from class
+ * $target = who/what its being checked out to
+ * $direction = "out" or "in" what
  * $admin = checked in/out by
  * 
  *       $this->item = $accessory;
@@ -100,7 +102,7 @@ class NotificationIntegrations extends Notification
  *       $this->settings = Setting::getSettings();
  */
 
-    public static function msteamsMessageBuilder($item, $target, $admin, $direction, $note, $expectedCheckin = 'none')
+    public static function msteamsMessageBuilder($item, $target, $admin, $direction, $note, $expectedCheckin)
     {
           
             $type = class_basename($item);
@@ -111,11 +113,11 @@ class NotificationIntegrations extends Notification
                 "License" => "&#x1F4BE;",
                 "Consumable" => "&#x1F4CD;"
             ];
+
             $directionicon = ($direction == "out" ? "&#x2B06;" : "&#x2B07;");
             $tofrom = ($direction == "out" ? "To" : "From");
         
             //in php8 this can be rewritten using nullsafe operator on Fluent interface method chaining
-       
             $msTeamsMessage = (new MicrosoftTeamsMessage)->create();
 
             $msTeamsMessage->to(Setting::getSettings()->msteams_endpoint)
@@ -124,14 +126,15 @@ class NotificationIntegrations extends Notification
             ->title(''.$directionicon.''.$typeicon[$type].' '.$type.' Checked '.$direction.': <a href=' . $item->present()->viewUrl() . '>' . $item->present()->fullName() . '</a>', $params = ['section' => 'action_msteams']);
             if ($note != '') $msTeamsMessage ->content($note, $params = ['section' => 'action_msteams']);
             $msTeamsMessage->fact(''.$tofrom.'','<a href='.$target->present()->viewUrl().'>'.$target->present()->fullName().'</a>', $sectionId = 'action_msteams')
-            ->fact('By', '<a href='.$admin->present()->viewUrl().'>'.$admin->present()->fullName().'</a>', $sectionId = 'action_msteams')
-            ->fact('Expected Checkin', $expectedCheckin, $sectionId = 'action_msteams')
-            ->button('View in Browser', ''.$target->present()->viewUrl().'', $params = ['section' => 'action_msteams']);
+            ->fact('By', '<a href='.$admin->present()->viewUrl().'>'.$admin->present()->fullName().'</a>', $sectionId = 'action_msteams');
+            if ($expectedCheckin != '') $msTeamsMessage->fact('Expected Checkin', $expectedCheckin, $sectionId = 'action_msteams');
+            if ($direction == 'in')  $msTeamsMessage->fact('Status', $item->assetstatus->name, $sectionId = 'action_msteams');
+            $msTeamsMessage->button('View in Browser', ''.$target->present()->viewUrl().'', $params = ['section' => 'action_msteams']);
     
             return $msTeamsMessage;
     }
 
-    public static function slackMessageBuilder($item, $target, $admin, $direction, $note = 'No note provided.', $expectedCheckin = 'none', $botname = 'Snipe-Bot')
+    public static function slackMessageBuilder($item, $target, $admin, $direction, $note, $expectedCheckin, $botname = 'Snipe-Bot')
     {
         
             $type = class_basename($item);
@@ -143,29 +146,37 @@ class NotificationIntegrations extends Notification
                 "Consumable" => ":paperclip:"
             ];
 
-            $directionicon = ($direction =="out" ? ":arrow_up:" : ":arrow_down");;
+            $directionicon = ($direction =="out" ? ":arrow_up:" : ":arrow_down:");
             $tofrom = ($direction == "out" ? "To" : "From");
-            
+
+            //set optional fields 
             $fields = [
                 ''.$tofrom.'' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
                 'By' => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
             ];
-    
+   
             if ($expectedCheckin && $expectedCheckin != '') {
                 $fields['Expected Checkin'] = $expectedCheckin;
             }
-    
-            return (new SlackMessage)
-                ->content(''.$directionicon.''.$typeicon[$type].' '.$type.' Checked '.$direction.'')
+            if ($direction == "in" && $item->location){
+                $fields[trans('general.location')] = $item->location->name;
+                $fields[trans('general.status')] = $item->assetstatus->name;
+                
+            }
+
+            $slackMessage = new SlackMessage();
+            
+            $slackMessage ->content(''.$directionicon.''.$typeicon[$type].' '.$type.' Checked '.$direction.'')
                 ->from($botname)
-                ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
+                ->attachment(function ($attachment) use ($target, $item, $note, $admin, $fields, $tofrom) {
                     $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
                         ->fields($fields)
                         ->content($note);
                 });
+                return $slackMessage;
     }
 
-    public static function webhookMessageBuilder($item, $target, $admin, $direction, $note = 'No note provided.', $expectedCheckin = 'none', $botname = '')
+    public static function webhookMessageBuilder($item, $target, $admin, $direction, $note, $expectedCheckin, $botname = 'Snipe-Bot')
     {
         
         $type = class_basename($item);
@@ -176,35 +187,20 @@ class NotificationIntegrations extends Notification
             "License" => ":floppy_disk:",
             "Consumable" => ":paperclip:"
         ];
-        $directionicon = ($direction =="out" ? ":arrow_up:" : ":arrow_down");;
+        $directionicon = ($direction =="out" ? ":arrow_up:" : ":arrow_down:");
+        $tofrom = ($direction == "out" ? "To" : "From");
   
       return WebhookMessage::create()
         ->data([
                 'content' => ''.$directionicon.''.$typeicon[$type].' **'.$type.' Checked '.$direction.'**['. $item->present()->fullName() .']('.$item->present()->viewUrl().')
-            *To:* ['.$target->present()->fullName().']('.$target->present()->viewUrl().')
-            *By:* ['.$admin->present()->fullName().']('.$admin->present()->viewUrl().')
-            *Note*: '.$note.'
-            [View in Browser]('.$target->present()->viewUrl().')',
+            *'.$tofrom.':* ['.$target->present()->fullName().']('.$target->present()->viewUrl().')
+            *By:* ['.$admin->present()->fullName().']('.$admin->present()->viewUrl().')\\r\\n'.($note != '' ? '*Note*: '.$note.'' : '').'
+            '.($direction == 'in' ? ''.trans('general.location').' : '.$item->location->name.'': '').'
+            '.'[View in Browser]('.$target->present()->viewUrl().')',
             
         ])
         ->header('Content-Type', 'application/json');
 
-    }
-
-    public static function customWebhookMessageBuilder($item, $target, $admin, $direction, $note = 'No note provided.', $expectedCheckin = 'none', $botname = '')
-    {
-        
-        $type = class_basename($item);
-
-        $typeicon = [
-            "Asset" => ":computer:",
-            "Accessory" => ":keyboard:",
-            "License" => ":floppy_disk:",
-            "Consumable" => ":paperclip:"
-        ];
-        $directionicon = ($direction =="out" ? ":arrow_up:" : ":arrow_down");;
-
-        //placeholder for possible custom webhook integration
     }
 
 }
