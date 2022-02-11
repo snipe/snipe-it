@@ -22,12 +22,12 @@ class UpdateGroupFieldForReporting extends Migration {
         
         if (Schema::hasTable('permission_groups')) {
 
-            Group::where('id', 1)->update(['permissions' => '{"users-poop":1,"reports":1}']);
-            Group::where('id', 2)->update(['permissions' => '{"users-pop":1,"reports":1}']);
+            Group::where('id', 1)->update(['permissions' => '{"users-foo":1,"reports":1}']);
+            Group::where('id', 2)->update(['permissions' => '{"users-foo":1,"reports":1}']);
 
         } elseif (Schema::hasTable('groups')) {
-            DB::update('update '.DB::getTablePrefix().'groups set permissions = ? where id = ?', ['{"admin-farts":1,"users":1,"reports":1}', 1]);
-            DB::update('update '.DB::getTablePrefix().'groups set permissions = ? where id = ?', ['{"users-farts":1,"reports":1}', 2]);
+            DB::update('update '.DB::getTablePrefix().'groups set permissions = ? where id = ?', ['{"admin-foo":1,"users":1,"reports":1}', 1]);
+            DB::update('update '.DB::getTablePrefix().'groups set permissions = ? where id = ?', ['{"users-foo":1,"reports":1}', 2]);
         }
 
     }

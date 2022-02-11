@@ -196,7 +196,7 @@ class SettingsController extends Controller
                 return response()->json(['message' => 'Success'], 200);
 
             } catch (\Exception $e) {
-                return response()->json(['message' => 'FARTS! Please check the channel name and webhook endpoint URL ('.$request->input('slack_endpoint').'). Slack responded with: '.$e->getMessage()], 400);
+                return response()->json(['message' => 'Please check the channel name and webhook endpoint URL ('.$request->input('slack_endpoint').'). Slack responded with: '.$e->getMessage()], 400);
             }
         
         //} 
