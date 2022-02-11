@@ -182,6 +182,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('view.selectlists', function ($user) {
             return $user->can('view', Asset::class)   
                 || $user->can('view', License::class)   
+                || $user->can('view', Component::class)   
                 || $user->can('view', Consumable::class)   
                 || $user->can('view', Accessory::class)   
                 || $user->can('view', User::class);   
