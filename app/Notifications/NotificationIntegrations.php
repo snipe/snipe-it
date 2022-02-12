@@ -97,14 +97,10 @@ class NotificationIntegrations extends Notification
  * 
  * $item = what is being checked out, get type from class
  * $target = who/what its being checked out to
- * $direction = "out" or "in" what
  * $admin = checked in/out by
+ * $direction = "out" or "in" what
+ * $note (optional)
  * 
- *       $this->item = $accessory;
- *       $this->target = $checkedOutTo;
- *       $this->admin = $checkedInby;
- *       $this->note = $note;
- *       $this->settings = Setting::getSettings();
  */
 
     public static function msteamsMessageBuilder($item, $target, $admin, $direction, $note, $expectedCheckin)
@@ -139,6 +135,16 @@ class NotificationIntegrations extends Notification
             return $msTeamsMessage;
     }
 
+/** 
+* Returns the format of message requested
+* 
+* $item = what is being checked out, get type from class
+* $target = who/what its being checked out to
+* $admin = checked in/out by
+* $direction = "out" or "in" what
+* $note (optional)
+* $botname (optional, default 'snipe-bot'); If Slack botname is provided, it will override default in discord as well.
+*/
     public static function slackMessageBuilder($item, $target, $admin, $direction, $note, $expectedCheckin, $botname = 'Snipe-Bot')
     {
         
