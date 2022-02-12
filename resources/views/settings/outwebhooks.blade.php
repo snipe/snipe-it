@@ -282,6 +282,81 @@
             </div> <!-- /box -->
         </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
+
+    <!-- webhook -->
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+
+
+            <div class="panel box box-default">
+                <div class="box-header with-border">
+                    <h2 class="box-title">
+                        <i class="fas fa-link"></i> webhook
+                    </h2>
+                </div>
+                <div class="box-body">
+
+
+                    <p style="padding: 20px;">
+                        {!! trans('admin/settings/general.webhook_integration_help',array('webhook_link' => 'https://google.com')) !!}
+
+                    @if ($setting->webhook_endpoint=='')
+                           {{ trans('admin/settings/general.webhook_integration_help_button') }}
+                    @endif
+                    </p>
+
+
+                    <div class="col-md-12" style="border-top: 0px;">
+
+
+                        <!-- webhook endpoint -->
+                        <div class="form-group required {{ $errors->has('webhook_endpoint') ? 'error' : '' }}">
+                            <div class="col-md-2">
+                                {{ Form::label('webhook_endpoint', trans('admin/settings/general.webhook_endpoint')) }}
+                            </div>
+                            <div class="col-md-10">
+                                @if (config('app.lock_passwords')===true)
+                                    {{ Form::text('webhook_endpoint', old('webhook_endpoint', $setting->webhook_endpoint), array('class' => 'form-control','disabled'=>'disabled','placeholder' => 'https://webhook.com/api/webhooks/XXXXXXXXXXX/XXXXXXXXXXXXXXXXXX', 'id' => 'webhook_endpoint')) }}
+                                    <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+
+                                @else
+                                    {{ Form::text('webhook_endpoint', old('webhook_endpoint', $setting->webhook_endpoint), array('class' => 'form-control','placeholder' => 'https://webhook.com/api/webhooks/XXXXXXXXXXX/XXXXXXXXXXXXXXXXXX', 'id' => 'webhook_endpoint')) }}
+                                @endif
+                                {!! $errors->first('webhook_endpoint', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                            </div>
+                        </div>
+
+
+                       <div class="form-group" id="webhooktestcontainer" style="display: none">
+                           
+                            <div class="col-md-2">
+                                {{ Form::label('test_webhook', 'Test webhook') }}
+                            </div>
+                            <div class="col-md-10" id="webhooktestrow">
+                                <a class="btn btn-default btn-sm pull-left" id="webhooktest" style="margin-right: 10px;">Test <i class="fas fa-link"></i> Integration</a>
+                            </div>
+                            <div class="col-md-10 col-md-offset-2">
+                                <span id="webhooktesticon"></span>
+                                <span id="webhooktestresult"></span>
+                                <span id="webhookteststatus"></span>
+                            </div>
+
+
+                        </div>
+                    </div> <!--/-->
+                </div> <!--/.box-body-->
+                <div class="box-footer">
+                    <div class="text-left col-md-6">
+                        <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
+                    </div>
+                    <div class="text-right col-md-6">
+                        <button type="submit" id="save_webhook" class="btn btn-primary" disabled><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                    </div>
+
+                </div>
+            </div> <!-- /box -->
+        </div> <!-- /.col-md-8-->
+    </div> <!-- /.row-->
     {{Form::close()}}
 
 @stop
@@ -317,6 +392,16 @@
                 $('#discordtestcontainer').fadeOut(500);
             }
 
+            
+            //webhook field check
+            if($('#webhook_endpoint').val() != "") {
+                //enable test button *only* if field is filled in
+                $('#webhooktestcontainer').fadeIn(500);
+            } else {
+                //otherwise it's hidden
+                $('#webhooktestcontainer').fadeOut(500);
+            }
+
             if(event) { //on 'initial load' we don't *have* an 'event', but in the regular keyup callback, we *do*. So this only fires on 'real' callback events, not on first load
                 
                 //initial load enable/disable Slack
@@ -334,6 +419,12 @@
                  if($('#discord_endpoint').val() == "") {
                     // if field is blank, the user may want to disable MS Teams integration; enable the Save button
                     $('#save_discord').removeAttr('disabled');
+                }
+
+                 //initial load enable/disable webhook
+                 if($('#webhook_endpoint').val() == "") {
+                    // if field is blank, the user may want to disable MS Teams integration; enable the Save button
+                    $('#save_webhook').removeAttr('disabled');
                 }
             }
             
@@ -519,7 +610,7 @@
             return false;
         });
 
-    //discord 
+        //discord 
         $("#discordtest").click(function() {
            
             $("#discordtestrow").removeClass('text-success');
@@ -603,6 +694,89 @@
             return false;
         });
         
+        //webhook 
+        $("#webhooktest").click(function() {
+            
+            $("#webhooktestrow").removeClass('text-success');
+            $("#webhooktestrow").removeClass('text-danger');
+            $("#webhookteststatus").removeClass('text-danger');
+            $("#webhookteststatus").html('');
+            $("#webhooktesticon").html('<i class="fas fa-spinner spin"></i> {{ trans('admin/settings/message.webhook.sending') }}');
+            $.ajax({
+                
+                url: '{{ route('api.settings.webhooktest') }}',
+                type: 'POST',
+                headers: {
+                    "X-Requested-With": 'XMLHttpRequest',
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content'),
+                },
+                data: {
+                    'webhook_endpoint': $('#webhook_endpoint').val(),
+
+                },
+
+                dataType: 'json',
+
+                success: function (data) {
+                    $('#save_webhook').removeAttr('disabled');
+                    $("#webhooktesticon").html('');
+                    $("#webhooktestrow").addClass('text-success');
+                    $("#webhookteststatus").addClass('text-success');
+                
+                    $("#webhookteststatus").html('<i class="fas fa-check text-success"></i> {{ trans('admin/settings/message.webhook.success_pt1') }} ' + '{{ trans('admin/settings/message.webhook.success_pt2') }}');
+                },
+
+                error: function (data) {
+
+
+                    if (data.responseJSON) {
+                        var errors = data.responseJSON.errors;
+                        
+                    } else {
+                        var errors;
+                    }
+
+                    var error_text = '';
+
+                    $('#save_webhook').attr("disabled", true);
+                    $("#webhooktesticon").html('');
+                    $("#webhookteststatus").addClass('text-danger');
+                    $("#webhooktesticon").html('<i class="fas fa-exclamation-triangle text-danger"></i><span class="text-danger">' + error_msg+ '</span>');
+
+                    
+                    if (data.status == 500) {
+                        $('#webhookteststatus').html('{{  trans('admin/settings/message.webhook.500') }}');
+                    } else if ((data.status == 400) || (data.status == 422)) {
+                        console.log('Type of errors is '+ typeof errors);
+                        console.log('Data status was 400 or 422');
+
+                        if (typeof errors != 'string') {
+                        
+                            console.log(errors.length);
+
+                            for (i in errors) {
+                                if (errors[i]) {
+                                    error_text += '<li>Error: ' + errors[i];
+                                }
+
+                            }
+
+                        } else {
+
+                            error_text = errors;
+                        }
+
+                        $('#webhookteststatus').html(error_text);
+
+                    } else {
+                        $('#webhookteststatus').html(data.responseText.message);
+                    }
+                }
+
+
+            });
+            return false;
+        });
     </script>
 
 @endpush

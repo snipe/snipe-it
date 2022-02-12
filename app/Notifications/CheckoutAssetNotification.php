@@ -23,6 +23,7 @@ class CheckoutAssetNotification extends Notification
      */
     public function __construct(Asset $asset, $checkedOutTo, User $checkedOutBy, $acceptance, $note)
     {
+        $this->direction = "out";
         $this->item = $asset;
         $this->admin = $checkedOutBy;
         $this->note = $note;
@@ -78,6 +79,11 @@ class CheckoutAssetNotification extends Notification
     {
         return NotificationIntegrations::webhookMessageBuilder($this->item, $this->target, $this->admin, "out", $this->note, $this->expected_checkin, $this->settings->slack_botname);
     }
+
+    public function toDiscord($notifiable)
+    {
+        return $this->toSlack($notifiable);
+     }
 
     /**
      * Get the mail representation of the notification.

@@ -672,16 +672,16 @@ class SettingsController extends Controller
         $setting->slack_channel = $request->input('slack_channel');
         $setting->slack_botname = $request->input('slack_botname');
 
-        $validatedData = $request->validate([
+        $validatedDataTeams = $request->validate([
             'msteams_endpoint'   => 'url|nullable',
         ]);
 
-        if ($validatedData) {
+        if ($validatedDataTeams) {
 
             $setting->msteams_endpoint = $request->input('msteams_endpoint');
 
         }
-/*
+
         $validatedDataDiscord = $request->validate([
             'discord_endpoint'   => 'url|nullable',
         ]);
@@ -691,8 +691,18 @@ class SettingsController extends Controller
             $setting->discord_endpoint = $request->input('discord_endpoint');
 
         }
-        */
-        $setting->discord_endpoint = $request->input('discord_endpoint');
+
+        $validatedDataWebhook = $request->validate([
+            'webhook_endpoint'   => 'url|nullable',
+        ]);
+
+        if ($validatedDataDiscord) {
+
+            $setting->webhook_endpoint = $request->input('webhook_endpoint');
+
+        }
+        
+       // $setting->discord_endpoint = $request->input('discord_endpoint');
 
         if ($setting->save()) {
             return redirect()->route('settings.index')

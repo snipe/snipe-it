@@ -104,6 +104,12 @@
                                     {{ trans('general.discord_msg_note')}}
                                     <br>
                                 @endif
+                                
+                                @if ($snipeSettings->webhook_endpoint!='')
+                                    <i class="fas fa-link" aria-hidden="true"></i>
+                                    {{ trans('general.webhook_msg_note')}}
+                                    <br>
+                                @endif
                             </div>
                         </div>
                     </div>

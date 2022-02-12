@@ -29,6 +29,7 @@ class CheckoutLicenseSeatNotification extends Notification
      */
     public function __construct(LicenseSeat $licenseSeat, $checkedOutTo, User $checkedOutBy, $acceptance, $note)
     {
+        $this->direction = "out";
         $this->item = $licenseSeat->license;
         $this->admin = $checkedOutBy;
         $this->note = $note;
@@ -57,130 +58,37 @@ class CheckoutLicenseSeatNotification extends Notification
 
     }
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @return array
-     */
     public function via()
     {
-        $notifyBy = [];
-
-        if (Setting::getSettings()->slack_endpoint != '') {
-            $notifyBy[] = 'slack';
-        }
-        
-        if (Setting::getSettings()->msteams_endpoint != '') {
-            \Log::debug('use msteams');
-            $notifyBy[2] = MicrosoftTeamsChannel::class;
-        }
-        
-        if (Setting::getSettings()->discord_endpoint != '') {
-            \Log::debug('use discord');
-            $notifyBy[3] = WebhookChannel::class;
-        }
-
-        /**
-         * Only send notifications to users that have email addresses
-         */
-        if ($this->target instanceof User && $this->target->email != '') {
-
-            /**
-             * Send an email if the asset requires acceptance,
-             * so the user can accept or decline the asset
-             */
-            if ($this->item->requireAcceptance()) {
-                $notifyBy[1] = 'mail';
-            }
-
-            /**
-             * Send an email if the item has a EULA, since the user should always receive it
-             */
-            if ($this->item->getEula()) {
-                $notifyBy[1] = 'mail';
-            }
-
-            /**
-             * Send an email if an email should be sent at checkin/checkout
-             */
-            if ($this->item->checkin_email()) {
-                $notifyBy[1] = 'mail';
-            }
-        }
-
-        return $notifyBy;
+       
+       return NotificationIntegrations::notifyByChannels($this->item, $this->target);
     }
+
+
+    /****
+     * Laravel Notifications Channels uses these to return message.
+     * We build messages in NotificationIntegration to keep formatting consistent.
+     */
 
     public function toSlack()
     {
-        $target = $this->target;
-        $admin = $this->admin;
-        $item = $this->item;
-        $note = $this->note ?: 'No note provided.';
-        $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot';
-
-        $fields = [
-            'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
-            'By' => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
-        ];
-
-        return (new SlackMessage)
-            ->content(':arrow_up: :floppy_disk: License Checked Out')
-            ->from($botname)
-            ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
-                $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
-                    ->fields($fields)
-                    ->content($note);
-            });
+        return NotificationIntegrations::slackMessageBuilder($this->item, $this->target, $this->admin, $this->direction, $this->note, $this->expected_checkin, $this->settings->slack_botname);
     }
-
-
 
     public function toMicrosoftTeams($notifiable)
     {
-        $expectedCheckin = 'None';
-        $target = $this->target;
-        $admin = $this->admin;
-        $item = $this->item;
-        $note = $this->note ?: 'No note provided.';
-
-        if (($this->expected_checkin) && ($this->expected_checkin != '')) {
-            $expectedCheckin = $this->expected_checkin;
-        }
-        
-        return MicrosoftTeamsMessage::create()
-            ->to(Setting::getSettings()->msteams_endpoint)
-            ->type('success')
-            ->addStartGroupToSection($sectionId = 'action_msteams')
-            ->title('&#x2B06;&#x1F4BE; License Checked Out: <a href=' . $item->present()->viewUrl() . '>' . $item->present()->fullName() . '</a>', $params = ['section' => 'action_msteams'])
-            ->content($note, $params = ['section' => 'action_msteams'])
-            ->fact('To', '<a href=' . $target->present()->viewUrl() . '>' . $target->present()->fullName() . '</a>', $sectionId = 'action_msteams')
-            ->fact('By', '<a href=' . $admin->present()->viewUrl() . '>' . $admin->present()->fullName() . '</a>', $sectionId = 'action_msteams')
-            ->fact('Expected Checkin', $expectedCheckin, $sectionId = 'action_msteams')
-            ->button('View in Browser', '' . $target->present()->viewUrl() . '', $params = ['section' => 'action_msteams']);
+       return NotificationIntegrations::msteamsMessageBuilder($this->item, $this->target, $this->admin, $this->direction, $this->note, $this->expected_checkin);
     }
-
 
     public function toWebhook($notifiable)
     {
-         $expectedCheckin = 'None';
-            $target = $this->target;
-            $admin = $this->admin;
-            $item = $this->item;
-            $note = $this->note ?: 'No note provided.';
-
-        return WebhookMessage::create()
-        ->data([
-                'content' => ':arrow_up: :floppy_disk:  **License Checked Out:** ['. $item->present()->fullName() .']('.$item->present()->viewUrl().')
-            *To:* ['.$target->present()->fullName().']('.$target->present()->viewUrl().')
-            *By:* ['.$admin->present()->fullName().']('.$admin->present()->viewUrl().')
-            *Note*: '.$note.'
-            [View in Browser]('.$target->present()->viewUrl().')',
-            
-        ])
-        ->header('Content-Type', 'application/json');
+        return NotificationIntegrations::webhookMessageBuilder($this->item, $this->target, $this->admin, $this->direction, $this->note, $this->expected_checkin, $this->settings->slack_botname);
     }
 
+    public function toDiscord($notifiable)
+    {
+        return $this->toSlack($notifiable);
+     }
 
     /**
      * Get the mail representation of the notification.

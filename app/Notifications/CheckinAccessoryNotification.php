@@ -7,8 +7,8 @@ use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
+use App\Notifications\NotificationIntegrations;
 
 class CheckinAccessoryNotification extends Notification
 {
@@ -21,6 +21,7 @@ class CheckinAccessoryNotification extends Notification
      */
     public function __construct(Accessory $accessory, $checkedOutTo, User $checkedInby, $note)
     {
+        $this->direction = "in";
         $this->item = $accessory;
         $this->target = $checkedOutTo;
         $this->admin = $checkedInby;
@@ -30,87 +31,43 @@ class CheckinAccessoryNotification extends Notification
     }
 
     /**
-     * Get the notification's delivery channels.
+     * Get the notification's delivery channels from NotificationIntegrations class.
+     * 
      *
      * @return array
      */
+
     public function via()
     {
-        \Log::debug('via called');
-        $notifyBy = [];
-
-        if (Setting::getSettings()->slack_endpoint) {
-            $notifyBy[] = 'slack';
-        }
-
-        if (Setting::getSettings()->slack_endpoint != '') {
-            $notifyBy[] = 'slack';
-        }
-
-        /**
-         * Only send notifications to users that have email addresses
-         */
-        if ($this->target instanceof User && $this->target->email != '') {
-            \Log::debug('The target is a user');
-
-            /**
-             * Send an email if the asset requires acceptance,
-             * so the user can accept or decline the asset
-             */
-            if (($this->item->requireAcceptance()) || ($this->item->getEula()) || ($this->item->checkin_email())) {
-                $notifyBy[] = 'mail';
-            }
-
-            /**
-             * Send an email if the asset requires acceptance,
-             * so the user can accept or decline the asset
-             */
-            if ($this->item->requireAcceptance()) {
-                \Log::debug('This accessory requires acceptance');
-            }
-
-            /**
-             * Send an email if the item has a EULA, since the user should always receive it
-             */
-            if ($this->item->getEula()) {
-                \Log::debug('This accessory has a EULA');
-            }
-
-            /**
-             * Send an email if an email should be sent at checkin/checkout
-             */
-            if ($this->item->checkin_email()) {
-                \Log::debug('This accessory has a checkin_email()');
-            }
-        }
-
-        \Log::debug('checkin_email on this category is '.$this->item->checkin_email());
-
-        return $notifyBy;
+       
+       return NotificationIntegrations::notifyByChannels($this->item, $this->target);
     }
+
+
+    /****
+     * Laravel Notifications Channels uses these to return message.
+     * We build messages in NotificationIntegration to keep formatting consistent.
+     */
 
     public function toSlack()
     {
-        $target = $this->target;
-        $admin = $this->admin;
-        $item = $this->item;
-        $note = $this->note;
-        $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot';
-
-        $fields = [
-            'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
-            'By' => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
-        ];
-
-        return (new SlackMessage)
-            ->content(':arrow_down: :keyboard: '.trans('mail.Accessory_Checkin_Notification'))
-            ->from($botname)
-            ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
-                $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
-                    ->fields($fields)
-                    ->content($note);
-            });
+        return NotificationIntegrations::slackMessageBuilder($this->item, $this->target, $this->admin, $this->direction, $this->note, $this->expected_checkin, $this->settings->slack_botname);
     }
+
+    public function toMicrosoftTeams($notifiable)
+    {
+       return NotificationIntegrations::msteamsMessageBuilder($this->item, $this->target, $this->admin, $this->direction, $this->note, $this->expected_checkin);
+    }
+
+    public function toWebhook($notifiable)
+    {
+        return NotificationIntegrations::webhookMessageBuilder($this->item, $this->target, $this->admin, $this->direction, $this->note, $this->expected_checkin, $this->settings->slack_botname);
+    }
+
+    public function toDiscord($notifiable)
+    {
+        return $this->toSlack($notifiable);
+     }
 
     /**
      * Get the mail representation of the notification.

@@ -353,4 +353,6 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'webhook_test_msg'      => 'Oh hai! Looks like your Webhook with Snipe-IT is working!',
+    'webhook_msg_note'       => 'A Webhook message will be sent',
 ];

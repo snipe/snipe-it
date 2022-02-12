@@ -15,7 +15,7 @@ use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
 use NotificationChannels\Webhook\WebhookChannel;
 use NotificationChannels\Webhook\WebhookMessage;
 
-//discrod channels below use bot api
+//discord channels below use bot api (not implemented)
 //use NotificationChannels\Discord\DiscordChannel;
 //use NotificationChannels\Discord\DiscordMessage;
 
@@ -31,7 +31,7 @@ class NotificationIntegrations extends Notification
     {
 
         //Build array of notification channels.  Typically this will only be one or two channels at a time but this allows for any combination.
-        //0= slack, 1=mail, 2=teams, 3=discord/generic Webhook 4=discordBot 5=...
+        //0= slack, 1=mail, 2=teams, 3=discordWebhookSlackFormat 4=generic Webhook 5=...
         $notifyBy = [];
 
         if (Setting::getSettings()) {
@@ -48,7 +48,12 @@ class NotificationIntegrations extends Notification
             if (Setting::getSettings()->discord_endpoint != '') {
                 \Log::debug('use discord as webhook');
                 //TO DO: This should be changed to a maintained DiscordWebhook that supports "embeds", update routes as well.
-                $notifyBy[3] = WebhookChannel::class;
+                $notifyBy[3] = 'discord';
+            }
+            if (Setting::getSettings()->webhook_endpoint != '') {
+                \Log::debug('use discord as webhook');
+                //TO DO: This should be changed to a maintained DiscordWebhook that supports "embeds", update routes as well.
+                $notifyBy[4] = WebhookChannel::class;
             }
 
         } else {
@@ -111,7 +116,7 @@ class NotificationIntegrations extends Notification
                 "Asset" => "&#x1F4BB;",
                 "Accessory" => "&#x2328;",
                 "License" => "&#x1F4BE;",
-                "Consumable" => "&#x1F4CD;"
+                "Consumable" => "&#x1F4CE;"
             ];
 
             $directionicon = ($direction == "out" ? "&#x2B06;" : "&#x2B07;");
@@ -123,13 +128,13 @@ class NotificationIntegrations extends Notification
             $msTeamsMessage->to(Setting::getSettings()->msteams_endpoint)
             ->type('success')
             ->addStartGroupToSection($sectionId = 'action_msteams')
-            ->title(''.$directionicon.''.$typeicon[$type].' '.$type.' Checked '.$direction.': <a href=' . $item->present()->viewUrl() . '>' . $item->present()->fullName() . '</a>', $params = ['section' => 'action_msteams']);
+            ->title(''.$directionicon.''.$typeicon[$type].' '.$type.' Checked '.$direction.': <a href=' . $item->present()->viewUrl() . '>' . $item->present()->name . '</a>', $params = ['section' => 'action_msteams']);
             if ($note != '') $msTeamsMessage ->content($note, $params = ['section' => 'action_msteams']);
             $msTeamsMessage->fact(''.$tofrom.'','<a href='.$target->present()->viewUrl().'>'.$target->present()->fullName().'</a>', $sectionId = 'action_msteams')
             ->fact('By', '<a href='.$admin->present()->viewUrl().'>'.$admin->present()->fullName().'</a>', $sectionId = 'action_msteams');
             if ($expectedCheckin != '') $msTeamsMessage->fact('Expected Checkin', $expectedCheckin, $sectionId = 'action_msteams');
             if ($direction == 'in')  $msTeamsMessage->fact('Status', $item->assetstatus->name, $sectionId = 'action_msteams');
-            $msTeamsMessage->button('View in Browser', ''.$target->present()->viewUrl().'', $params = ['section' => 'action_msteams']);
+           // $msTeamsMessage->button('View in Browser', ''.$target->present()->viewUrl().'', $params = ['section' => 'action_msteams']);
     
             return $msTeamsMessage;
     }
@@ -192,11 +197,7 @@ class NotificationIntegrations extends Notification
   
       return WebhookMessage::create()
         ->data([
-                'content' => ''.$directionicon.''.$typeicon[$type].' **'.$type.' Checked '.$direction.'**['. $item->present()->fullName() .']('.$item->present()->viewUrl().')
-            *'.$tofrom.':* ['.$target->present()->fullName().']('.$target->present()->viewUrl().')
-            *By:* ['.$admin->present()->fullName().']('.$admin->present()->viewUrl().')\\r\\n'.($note != '' ? '*Note*: '.$note.'' : '').'
-            '.($direction == 'in' ? ''.trans('general.location').' : '.$item->location->name.'': '').'
-            '.'[View in Browser]('.$target->present()->viewUrl().')',
+                'content' => 'Nothing here yet',
             
         ])
         ->header('Content-Type', 'application/json');

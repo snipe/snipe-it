@@ -74,7 +74,25 @@
                              @if ($snipeSettings->slack_endpoint!='')
                                  <i class="fab fa-slack"></i>
                                  A slack message will be sent
+                                 <br>
                              @endif
+                             
+                             @if ($snipeSettings->msteams_endpoint!='')
+                                    <i class="fab fa-windows"></i>
+                                    {{ trans('general.msteams_msg_note') }}
+                                    <br>
+                                @endif
+                                @if ($snipeSettings->discord_endpoint!='')
+                                    <i class="fab fa-discord" aria-hidden="true"></i>
+                                    {{ trans('general.discord_msg_note')}}
+                                    <br>
+                                @endif
+                                
+                                @if ($snipeSettings->webhook_endpoint!='')
+                                    <i class="fas fa-link" aria-hidden="true"></i>
+                                    {{ trans('general.webhook_msg_note')}}
+                                    <br>
+                                @endif
                          </div>
                      </div>
                  </div>

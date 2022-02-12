@@ -53,5 +53,12 @@ return [
         'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
         '500' => '500 Server Error.',
         'error' => 'Something went wrong.',
+    ],
+    'webhook' => [
+        'sending' => 'Sending webhook test message...',
+        'success_pt1' => 'Success! Check the ',
+        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
+        '500' => '500 Server Error.',
+        'error' => 'Something went wrong.',
     ]
 ];

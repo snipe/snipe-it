@@ -18,6 +18,7 @@
     "ext-mbstring": "*",
     "ext-pdo": "*",
     "alek13/slack": "^2.0",
+    "awssat/discord-notification-channel": "^1.4",
     "bacon/bacon-qr-code": "^2.0",
     "barryvdh/laravel-debugbar": "^3.6",
     "doctrine/cache": "^1.10",

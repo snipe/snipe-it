@@ -7,12 +7,8 @@ use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
-//use Illuminate\Notifications\Messages\SlackMessage;
-//use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
-//use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
 use Illuminate\Notifications\Notification;
-use NotificationChannels\Webhook\WebhookChannel;
-use NotificationChannels\Webhook\WebhookMessage;
+use App\Notifications\NotificationIntegrations;
 
 class CheckinAssetNotification extends Notification
 {
@@ -25,6 +21,7 @@ class CheckinAssetNotification extends Notification
      */
     public function __construct(Asset $asset, $checkedOutTo, User $checkedInBy, $note)
     {
+        $this->direction = "in";
         $this->target = $checkedOutTo;
         $this->item = $asset;
         $this->admin = $checkedInBy;
@@ -39,53 +36,38 @@ class CheckinAssetNotification extends Notification
         }
     }
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @return array
-     */
+   
     public function via()
     {
-        return NotificationIntegrations::notifyByChannels($this->item, $this->target);
-   
+       
+       return NotificationIntegrations::notifyByChannels($this->item, $this->target);
     }
+
+
+    /****
+     * Laravel Notifications Channels uses these to return message.
+     * We build messages in NotificationIntegration to keep formatting consistent.
+     */
 
     public function toSlack()
     {
-        return NotificationIntegrations::slackMessageBuilder($this->item, $this->target, $this->admin, "in", $this->note, $this->expected_checkin, $this->settings->slack_botname);
-            
+        return NotificationIntegrations::slackMessageBuilder($this->item, $this->target, $this->admin, $this->direction, $this->note, $this->expected_checkin, $this->settings->slack_botname);
     }
 
     public function toMicrosoftTeams($notifiable)
     {
-        return NotificationIntegrations::msteamsMessageBuilder($this->item, $this->target, $this->admin, "in", $this->note, $this->expected_checkin);
-
+       return NotificationIntegrations::msteamsMessageBuilder($this->item, $this->target, $this->admin, $this->direction, $this->note, $this->expected_checkin);
     }
 
-    
     public function toWebhook($notifiable)
     {
-        return NotificationIntegrations::webhookMessageBuilder($this->item, $this->target, $this->admin, "in", $this->note, $this->expected_checkin,$this->settings->slack_botname);
-
-        /*
-         $expectedCheckin = 'None';
-            $target = $this->target;
-            $admin = $this->admin;
-            $item = $this->item;
-            $note = $this->note ?: 'No note provided.';
-
-        return WebhookMessage::create()
-        ->data([
-                'content' => ':arrow_down: :computer:  **Asset Checked In: ** ['. $item->present()->fullName() .']('.$item->present()->viewUrl().')
-            *From:* ['.$target->present()->fullName().']('.$target->present()->viewUrl().')
-            *Status:* '.$item->assetstatus->name.'
-            *Note*: '.$note.'
-            [View in Browser]('.$target->present()->viewUrl().')',
-            
-        ])
-        ->header('Content-Type', 'application/json');
-        */
+        return NotificationIntegrations::webhookMessageBuilder($this->item, $this->target, $this->admin, $this->direction, $this->note, $this->expected_checkin, $this->settings->slack_botname);
     }
+
+    public function toDiscord($notifiable)
+    {
+        return $this->toSlack($notifiable);
+     }
 
     /**
      * Get the mail representation of the notification.

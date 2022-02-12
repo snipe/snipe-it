@@ -232,6 +232,30 @@ class SettingsController extends Controller
         return response()->json(['message' => 'Something went wrong :( '], 400);
     }
 
+    public function webhooktest(Request $request)
+    {
+        $webhook = new Client([
+                'headers' => ['Content-Type' => 'application/json'],
+                
+        ]);
+
+        $payload = json_encode(
+            [
+                'content'      => trans('general.webhook_test_msg')
+            ]
+        );
+
+        try {
+            
+            $webhook->post($request->input('webhook_endpoint'), ['body' => $payload]);
+            return response()->json(['message' => 'Success'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Oops! Please check the channel name and webhook endpoint URL. Your webhook target responded with: ' . $e->getMessage()], 400);
+        }
+
+        return response()->json(['message' => 'Something went wrong :( '], 400);
+    }
+
     /**
      * Test the email configuration
      *
