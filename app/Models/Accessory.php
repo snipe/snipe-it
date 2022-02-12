@@ -168,9 +168,11 @@ class Accessory extends SnipeModel
      * @since [v3.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
+    // Been messing around with the query and looking at documentation, I need a signature to in the database
+    // so I have a visual confirmation. none available to accessories at the moment. current q
     public function assetlog()
     {
-        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')->where('item_type', self::class)->orderBy('created_at', 'desc')->withTrashed();
+        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')->where('item_type', self::class)->orderBy('created_at', 'desc')->orderBy('')->withTrashed();
     }
 
     /**
@@ -199,9 +201,10 @@ class Accessory extends SnipeModel
      *
      * @see \App\Http\Controllers\Api\AccessoriesController\checkedout()
      */
+
     public function lastCheckout()
     {
-        return $this->assetlog()->where('action_type', '=', 'checkout')->take(1);
+        return $this->assetlog()->where('action_type', '=', 'checkout')->take(1) ;
     }
 
 
