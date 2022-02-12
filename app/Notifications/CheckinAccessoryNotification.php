@@ -22,6 +22,7 @@ class CheckinAccessoryNotification extends Notification
     public function __construct(Accessory $accessory, $checkedOutTo, User $checkedInby, $note)
     {
         $this->direction = "in";
+        $this->expected_checkin = '';
         $this->item = $accessory;
         $this->target = $checkedOutTo;
         $this->admin = $checkedInby;

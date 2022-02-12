@@ -42,30 +42,7 @@
                                           <p class="form-control-static">{{ $accessory->name }}</p>
                                         </div>
                                     </div>
-                                    @endif
-
-                                    @if ($snipeSettings->slack_endpoint!='')
-                                 <i class="fab fa-slack"></i>
-                                 A slack message will be sent
-                                 <br>
-                             @endif
-                             
-                             @if ($snipeSettings->msteams_endpoint!='')
-                                    <i class="fab fa-windows"></i>
-                                    {{ trans('general.msteams_msg_note') }}
-                                    <br>
-                                @endif
-                                @if ($snipeSettings->discord_endpoint!='')
-                                    <i class="fab fa-discord" aria-hidden="true"></i>
-                                    {{ trans('general.discord_msg_note')}}
-                                    <br>
-                                @endif
-                                
-                                @if ($snipeSettings->webhook_endpoint!='')
-                                    <i class="fas fa-link" aria-hidden="true"></i>
-                                    {{ trans('general.webhook_msg_note')}}
-                                    <br>
-                                @endif
+                                   @endif
                                     <!-- Note -->
                                     <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
                                         <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
@@ -87,8 +64,39 @@
                                     </div>
                                 </div>
                             </div>
-
+                           
                               </div>
+                              @if (($snipeSettings->slack_endpoint!='') || ($snipeSettings->msteams_endpoint!='')|| ($snipeSettings->discord_endpoint!=''))
+                    <div class="form-group notification-callout">
+                        <div class="col-md-8 col-md-offset-3">
+                            <div class="callout callout-info">
+
+                            @if ($snipeSettings->slack_endpoint!='')
+                                            <i class="fab fa-slack" aria-hidden="true"></i>
+                                            {{ trans('general.slack_msg_note')}}
+                                            <br>
+                                        @endif
+
+                                        @if ($snipeSettings->msteams_endpoint!='')
+                                    <i class="fab fa-windows"></i>
+                                    {{ trans('general.msteams_msg_note') }}
+                                    <br>
+                                @endif
+                                @if ($snipeSettings->discord_endpoint!='')
+                                    <i class="fab fa-discord" aria-hidden="true"></i>
+                                    {{ trans('general.discord_msg_note')}}
+                                    <br>
+                                @endif
+                                
+                                @if ($snipeSettings->webhook_endpoint!='')
+                                    <i class="fas fa-link" aria-hidden="true"></i>
+                                    {{ trans('general.webhook_msg_note')}}
+                                    <br>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                @endif
                         <div class="box-footer">
                             <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
                             <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i>

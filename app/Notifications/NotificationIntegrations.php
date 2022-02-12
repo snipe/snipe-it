@@ -133,7 +133,7 @@ class NotificationIntegrations extends Notification
             $msTeamsMessage->fact(''.$tofrom.'','<a href='.$target->present()->viewUrl().'>'.$target->present()->fullName().'</a>', $sectionId = 'action_msteams')
             ->fact('By', '<a href='.$admin->present()->viewUrl().'>'.$admin->present()->fullName().'</a>', $sectionId = 'action_msteams');
             if ($expectedCheckin != '') $msTeamsMessage->fact('Expected Checkin', $expectedCheckin, $sectionId = 'action_msteams');
-            if ($direction == 'in')  $msTeamsMessage->fact('Status', $item->assetstatus->name, $sectionId = 'action_msteams');
+            if ($direction == 'in' && $type == "Asset")  $msTeamsMessage->fact('Status', $item->assetstatus->name, $sectionId = 'action_msteams');
            // $msTeamsMessage->button('View in Browser', ''.$target->present()->viewUrl().'', $params = ['section' => 'action_msteams']);
     
             return $msTeamsMessage;
@@ -163,7 +163,7 @@ class NotificationIntegrations extends Notification
             if ($expectedCheckin && $expectedCheckin != '') {
                 $fields['Expected Checkin'] = $expectedCheckin;
             }
-            if ($direction == "in" && $item->location){
+            if ($direction == "in" && $item->location && $type == "Asset"){
                 $fields[trans('general.location')] = $item->location->name;
                 $fields[trans('general.status')] = $item->assetstatus->name;
                 

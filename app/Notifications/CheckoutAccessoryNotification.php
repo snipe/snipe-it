@@ -7,8 +7,8 @@ use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
+use App\Notifications\NotificationIntegrations;
 
 class CheckoutAccessoryNotification extends Notification
 {
@@ -19,6 +19,7 @@ class CheckoutAccessoryNotification extends Notification
      */
     public function __construct(Accessory $accessory, $checkedOutTo, User $checkedOutBy, $acceptance, $note)
     {
+        $this->expected_checkin = '';
         $this->item = $accessory;
         $this->admin = $checkedOutBy;
         $this->note = $note;

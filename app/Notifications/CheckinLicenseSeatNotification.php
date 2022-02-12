@@ -26,6 +26,7 @@ class CheckinLicenseSeatNotification extends Notification
     public function __construct(LicenseSeat $licenseSeat, $checkedOutTo, User $checkedInBy, $note)
     {
         $this->direction = "in";
+        $this->expected_checkin = '';
         $this->target = $checkedOutTo;
         $this->item = $licenseSeat->license;
         $this->admin = $checkedInBy;
