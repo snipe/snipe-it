@@ -184,6 +184,7 @@ class SuppliersController extends Controller
      */
     public function show($supplierId = null)
     {
+        $this->authorize('view', Supplier::class);
         $supplier = Supplier::find($supplierId);
 
         if (isset($supplier->id)) {
