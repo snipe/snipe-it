@@ -73,10 +73,9 @@ class Depreciable extends SnipeModel
         $deprecation_per_year= $numerator/$denominator;
         $deprecation_per_month= $deprecation_per_year/12;
 
-//      fraction of value left
         $months_remaining = $this->time_until_depreciated()->m + 12 * $this->time_until_depreciated()->y; //UGlY
-//        formula for current value is correct now. $months_remaining is not giving me the same value as expected. Considering how to fix this. -Godfrey M.
-        $current_value = $deprecation_per_month*27;
+        $months_depreciated=$this->get_depreciation()->months-$months_remaining;
+        $current_value = $deprecation_per_month*$months_depreciated;
 
         if($this->get_depreciation()->depreciation_min > $current_value) {
 
