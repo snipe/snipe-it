@@ -33,6 +33,7 @@ class AssetMaintenancesController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize('view', Asset::class);
         $maintenances = AssetMaintenance::with('asset', 'asset.model','asset.location', 'supplier', 'asset.company', 'admin');
 
         if ($request->filled('search')) {
@@ -101,6 +102,7 @@ class AssetMaintenancesController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('edit', Asset::class);
         // create a new model instance
         $assetMaintenance = new AssetMaintenance();
         $assetMaintenance->supplier_id = $request->input('supplier_id');
@@ -153,6 +155,7 @@ class AssetMaintenancesController extends Controller
      */
     public function update(Request $request, $assetMaintenanceId = null)
     {
+        $this->authorize('edit', Asset::class);
         // Check if the asset maintenance exists
         $assetMaintenance = AssetMaintenance::findOrFail($assetMaintenanceId);
 
@@ -216,6 +219,7 @@ class AssetMaintenancesController extends Controller
      */
     public function destroy($assetMaintenanceId)
     {
+        $this->authorize('edit', Asset::class);
         // Check if the asset maintenance exists
         $assetMaintenance = AssetMaintenance::findOrFail($assetMaintenanceId);
 
@@ -241,6 +245,7 @@ class AssetMaintenancesController extends Controller
      */
     public function show($assetMaintenanceId)
     {
+        $this->authorize('view', Asset::class);
         $assetMaintenance = AssetMaintenance::findOrFail($assetMaintenanceId);
         if (!Company::isCurrentUserHasAccess($assetMaintenance->asset)) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'You cannot view a maintenance for that asset'));
