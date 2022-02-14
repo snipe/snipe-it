@@ -79,7 +79,7 @@ class Depreciable extends SnipeModel
 
         if($this->get_depreciation()->depreciation_min > $current_value) {
 
-            $current_value=$this->get_depreciation()->depreciation_min;
+            $current_value=round($this->get_depreciation()->depreciation_min,2);
         }
         if ($current_value < 0) {
             $current_value = 0;
