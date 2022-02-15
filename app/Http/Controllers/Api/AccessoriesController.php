@@ -174,12 +174,13 @@ class AccessoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-//    I'm not sure If I have to touch this yet, but I have my eyes on it.
     public function checkedout($id, Request $request)
     {
         $this->authorize('view', Accessory::class);
 
         $accessory = Accessory::with('lastCheckout')->findOrFail($id);
+//       Getting info
+//        \Log::info($accessory->accept_signature);
         if (! Company::isCurrentUserHasAccess($accessory)) {
             return ['total' => 0, 'rows' => []];
         }

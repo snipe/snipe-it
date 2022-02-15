@@ -1,11 +1,9 @@
 <?php
-namespace Tests\Unit;
 
 use App\Models\Depreciation;
-use Tests\Unit\BaseTest;
-use App\Models\Category;
-use App\Models\License;
-use App\Models\AssetModel;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class DepreciationTest extends BaseTest
 {
@@ -14,38 +12,38 @@ class DepreciationTest extends BaseTest
      */
     protected $tester;
 
+    public function testFailsEmptyValidation()
+    {
+        // An Asset requires a name, a qty, and a category_id.
+        $a = Depreciation::create();
+        $this->assertFalse($a->isValid());
 
+        $fields = [
+             'name' => 'name',
+             'months' => 'months',
+         ];
+        $errors = $a->getErrors();
+        foreach ($fields as $field => $fieldTitle) {
+            $this->assertEquals($errors->get($field)[0], "The ${fieldTitle} field is required.");
+        }
+    }
 
     public function testADepreciationHasModels()
     {
         $this->createValidAssetModel();
-        $depreciation = Depreciation::factory()->create();
-
-        AssetModel::factory()
-                    ->mbp13Model()
-                    ->count(5)
-                    ->create(
-                        [
-                            'category_id' => Category::factory()->assetLaptopCategory(),
-                            'depreciation_id' => $depreciation->id               
-                        ]);
-
-
+        $depreciation = $this->createValidDepreciation('computer', ['name' => 'New Depreciation']);
+        $models = \App\Models\AssetModel::factory()->count(5)->mbp13Model()->create(['depreciation_id'=>$depreciation->id]);
         $this->assertEquals(5, $depreciation->models->count());
     }
 
     public function testADepreciationHasLicenses()
     {
-
-        $depreciation = Depreciation::factory()->create();
-        License::factory()
-                    ->count(5)
-                    ->photoshop()
-                    ->create(
-                        [
-                            'category_id' => Category::factory()->licenseGraphicsCategory(),
-                            'depreciation_id' => $depreciation->id               
-                        ]);
+        $category = $this->createValidCategory('license-graphics-category');
+        $depreciation = $this->createValidDepreciation('computer', ['name' => 'New Depreciation']);
+        $licenses = \App\Models\License::factory()->count(5)->photoshop()->create([
+             'depreciation_id'=>$depreciation->id,
+             'category_id' => $category->id,
+         ]);
 
         $this->assertEquals(5, $depreciation->licenses()->count());
     }

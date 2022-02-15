@@ -53,7 +53,6 @@
 
           @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'assigned_to'])
 
-{{--this if statement doesn't bring up the requireAcceptance() label or trigger the proper email. Haven't figured out why yet.--}}
              @if ($accessory->requireAcceptance() || $accessory->getEula() || ($snipeSettings->slack_endpoint!=''))
                  <div class="form-group notification-callout">
                      <div class="col-md-8 col-md-offset-3">

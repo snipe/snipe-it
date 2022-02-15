@@ -172,7 +172,7 @@ class Accessory extends SnipeModel
     // so I have a visual confirmation. none available to accessories at the moment. current q
     public function assetlog()
     {
-        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')->where('item_type', self::class)->orderBy('created_at', 'desc')->orderBy('')->withTrashed();
+            return $this->hasMany(\App\Models\Actionlog::class, 'item_id')->where('item_type', self::class)->orderBy('created_at', 'desc')->withTrashed();
     }
 
     /**
@@ -204,7 +204,7 @@ class Accessory extends SnipeModel
 
     public function lastCheckout()
     {
-        return $this->assetlog()->where('action_type', '=', 'checkout')->take(1) ;
+        return $this->assetlog()->where('action_type', '=', 'checkout')->orwhere('action_type', '=', 'accepted')->take(1) ;
     }
 
 

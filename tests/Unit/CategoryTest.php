@@ -1,14 +1,10 @@
 <?php
-namespace Tests\Unit;
 
 use App\Models\Category;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Tests\Unit\BaseTest;
-use App\Models\AssetModel;
-use App\Models\Asset;
-use App\Models\Accessory;
+use Illuminate\Support\Facades\Hash;
 
 class CategoryTest extends BaseTest
 {
@@ -35,65 +31,43 @@ class CategoryTest extends BaseTest
 
     public function testACategoryCanHaveAssets()
     {
-       $category = Category::factory()->assetDesktopCategory();
+        $this->createValidAssetModel(); //This will seed various things to make the following work better.
+        $category = $this->createValidCategory('asset-desktop-category');
+        $models = \App\Models\AssetModel::factory()->count(5)->mbp13Model()->create(['category_id' => $category->id]);
 
-       // Generate 5 models via factory
-       $models =  AssetModel::factory()
-            ->mbp13Model()
-            ->count(5)
-            ->create(
-                [
-                    'category_id' => $category->id
-                ]
-        );
+        $this->assertEquals(5, $category->models->count());
+        $this->assertCount(5, $category->models);
 
-        
-
-        // Loop through the models and create 2 assets in each model
-       $models->each(function ($model) {
-            //dd($model);
-            $asset = Asset::factory()
-            ->count(2)
-            ->create(
-                [
-                    'model_id' => $model->id,
-                ]
-            );
-            //dd($asset);
+        $models->each(function ($model) {
+            // This is intentionally run twice to generate the ten imagined assets, done this way to keep it in sync with createValidAsset rather than using the factory directly.
+            $this->createValidAsset(['model_id' => $model->id]);
+            $this->createValidAsset(['model_id' => $model->id]);
         });
-
-        $this->assertCount(5, $category->models);
-        $this->assertCount(5, $category->models);
         $this->assertEquals(10, $category->itemCount());
     }
 
+    public function testACategoryCanHaveAccessories()
+    {
+        $category = $this->createValidCategory('accessory-keyboard-category');
+        \App\Models\Accessory::factory()->count(5)->appleBtKeyboard()->create(['category_id' => $category->id]);
 
-    // public function testACategoryCanHaveAccessories()
-    // {
-    //     $category = Category::factory()->assetDesktopCategory()->create();
-    //     Accessory::factory()->count(5)->appleBtKeyboard()->create(
-    //         [
-    //             'category_id' => $category->id
-    //         ]
-    //     );
+        $this->assertCount(5, $category->accessories);
+        $this->assertEquals(5, $category->itemCount());
+    }
 
-    //     $this->assertCount(5, $category->accessories);
-    //     $this->assertEquals(5, $category->itemCount());
-    // }
+    public function testACategoryCanHaveConsumables()
+    {
+        $category = $this->createValidCategory('consumable-paper-category');
+        \App\Models\Consumable::factory()->count(5)->cardstock()->create(['category_id' => $category->id]);
+        $this->assertCount(5, $category->consumables);
+        $this->assertEquals(5, $category->itemCount());
+    }
 
-    // public function testACategoryCanHaveConsumables()
-    // {
-    //     $category = $this->createValidCategory('consumable-paper-category');
-    //     \App\Models\Consumable::factory()->count(5)->cardstock()->create(['category_id' => $category->id]);
-    //     $this->assertCount(5, $category->consumables);
-    //     $this->assertEquals(5, $category->itemCount());
-    // }
-
-    // public function testACategoryCanHaveComponents()
-    // {
-    //     $category = $this->createValidCategory('component-ram-category');
-    //     \App\Models\Component::factory()->count(5)->ramCrucial4()->create(['category_id' => $category->id]);
-    //     $this->assertCount(5, $category->components);
-    //     $this->assertEquals(5, $category->itemCount());
-    // }
+    public function testACategoryCanHaveComponents()
+    {
+        $category = $this->createValidCategory('component-ram-category');
+        \App\Models\Component::factory()->count(5)->ramCrucial4()->create(['category_id' => $category->id]);
+        $this->assertCount(5, $category->components);
+        $this->assertEquals(5, $category->itemCount());
+    }
 }

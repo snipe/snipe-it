@@ -4,6 +4,7 @@ namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
 use App\Models\Accessory;
+use App\Models\Actionlog;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
@@ -65,11 +66,10 @@ class AccessoriesTransformer
 
     public function transformCheckedoutAccessory($accessory, $accessory_users, $total)
     {
+        $accept_signature= json_decode($accessory->last_checkout);
         $array = [];
 
         foreach ($accessory_users as $user) {
-            \Log::debug(print_r($user->pivot, true));
-            \Log::debug(print_r($user->pivot, true));
             $array[] = [
 
                 'assigned_pivot_id' => $user->pivot->id,
@@ -80,6 +80,8 @@ class AccessoriesTransformer
                 'last_name'=> e($user->last_name),
                 'employee_number' =>  e($user->employee_num),
                 'checkout_notes' => e($user->pivot->note),
+//                I think this is how we get the signature file to populate correctly, Going to have to tweek the actionlog transformer a bit I think
+                'accept_signature' => $accessory->accept_signature ? route('log.signature.view', ['filename' => $accessory->accept_signature ]) : null,
                 'last_checkout' => Helper::getFormattedDateObject($user->pivot->created_at, 'datetime'),
                 'type' => 'user',
                 'available_actions' => ['checkin' => true],
