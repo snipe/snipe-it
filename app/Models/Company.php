@@ -73,20 +73,26 @@ final class Company extends SnipeModel
         }
     }
 
-    private static function scopeCompanyablesDirectly($query, $column = 'company_id', $table_name = null)
+    private static function scopeCompanyablesDirectly($query, $column = 'company_id', $table_name = null, $includenullcompanyid = false)
     {
-        if (Auth::user()) {
-            $company_id = Auth::user()->company_id;
-        } else {
-            $company_id = null;
-        }
-
+        $current_user = Auth::user();
         $table = ($table_name) ? $table_name."." : $query->getModel()->getTable().".";
 
-        if (\Schema::hasColumn($query->getModel()->getTable(), $column)) {
-             return $query->where($table.$column, '=', $company_id);
+        // join the users table if the specified table doesn't contain a company_id
+        if(!\Schema::hasColumn($query->getModel()->getTable(), $column)){
+            $query = $query->join('users as users_comp', 'users_comp.id', 'user_id');
+            $table = 'users_comp.';
+            $column = 'company_id';
+        }
+
+        if ($current_user->company_id != null) {
+            $query = $query->where($table.$column, $current_user->company_id);
+            if ($includenullcompanyid) {
+                $query = $query->orWhereNull($table.$column);
+            }
+            return $query;
         } else {
-            return $query->join('users as users_comp', 'users_comp.id', 'user_id')->where('users_comp.company_id', '=', $company_id);
+            return $query->where($table.$column, '=', null);
         }
     }
 
@@ -174,13 +180,13 @@ final class Company extends SnipeModel
         }
     }
 
-    public static function scopeCompanyables($query, $column = 'company_id', $table_name = null)
+    public static function scopeCompanyables($query, $column = 'company_id', $table_name = null, $includenullcompanyid = false)
     {
         // If not logged in and hitting this, assume we are on the command line and don't scope?'
         if (! static::isFullMultipleCompanySupportEnabled() || (Auth::check() && Auth::user()->isSuperUser()) || (! Auth::check())) {
             return $query;
         } else {
-            return static::scopeCompanyablesDirectly($query, $column, $table_name);
+            return static::scopeCompanyablesDirectly($query, $column, $table_name, $includenullcompanyid);
         }
     }
 

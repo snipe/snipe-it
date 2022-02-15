@@ -44,7 +44,7 @@ class LocationsController extends Controller
             'ldap_ou',
             'company'];
 
-        $locations = Company::scopeCompanyables(Location::Select('locations.*'))
+        $locations = Company::scopeCompanyables(Location::Select('locations.*'), 'company_id', 'locations', true)
             ->with('parent', 'manager', 'children', 'company')
             ->withCount('assignedAssets as assigned_assets_count')
             ->withCount('assets as assets_count')
