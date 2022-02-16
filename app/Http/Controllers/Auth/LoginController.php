@@ -363,7 +363,7 @@ class LoginController extends Controller
         if (Google2FA::verifyKey($user->two_factor_secret, $secret)) {
             $user->two_factor_enrolled = 1;
             $user->save();
-            $request->session()->put('2fa_authed', 'true');
+            $request->session()->put('2fa_authed', $user->id);
             return redirect()->route('home')->with('success', 'You are logged in!');
         }
 
