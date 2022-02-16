@@ -45,7 +45,9 @@ class LicensesTransformer
             'category' =>  ($license->category) ? ['id' => (int)  $license->category->id,'name'=> e($license->category->name)] : null,
             'created_at' => Helper::getFormattedDateObject($license->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($license->updated_at, 'datetime'),
+            'deleted_at' => Helper::getFormattedDateObject($license->deleted_at, 'datetime'),
             'user_can_checkout' => (bool) ($license->free_seats_count > 0),
+
         ];
 
         $permissions_array['available_actions'] = [
