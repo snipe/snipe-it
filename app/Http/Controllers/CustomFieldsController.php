@@ -92,6 +92,7 @@ class CustomFieldsController extends Controller
             "field_values" => $request->get("field_values"),
             "field_encrypted" => $request->get("field_encrypted", 0),
             "show_in_email" => $request->get("show_in_email", 0),
+            "is_unique" => $request->get("is_unique", 0),
             "user_id" => Auth::id()
         ]);
 
@@ -211,6 +212,7 @@ class CustomFieldsController extends Controller
         $field->user_id       = Auth::id();
         $field->help_text     = $request->get("help_text");
         $field->show_in_email = $request->get("show_in_email", 0);
+        $field->is_unique     = $request->get("is_unique", 0);
 
         if ($request->get('format') == 'CUSTOM REGEX') {
             $field->format = e($request->get('custom_format'));
