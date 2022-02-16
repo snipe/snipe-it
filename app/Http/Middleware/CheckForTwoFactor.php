@@ -31,8 +31,9 @@ class CheckForTwoFactor
         // Two-factor is enabled (either optional or required)
         if ($settings = Setting::getSettings()) {
             if (Auth::check() && ($settings->two_factor_enabled != '')) {
-                // This user is already 2fa-authed
-                if ($request->session()->get('2fa_authed')) {
+                
+                // This specific user is already 2fa-authed
+                if ($request->session()->get('2fa_authed')==Auth::user()->id) {
                     return $next($request);
                 }
 
