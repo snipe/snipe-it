@@ -82,7 +82,7 @@ class LicensesController extends Controller
             $licenses = $licenses->TextSearch($request->input('search'));
         }
 
-        if ($request->filled('deleted')) {
+        if ($request->input('deleted')=='true') {
             $licenses->onlyTrashed();
         }
 
