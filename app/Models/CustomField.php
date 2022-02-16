@@ -63,6 +63,7 @@ class CustomField extends Model
         'field_encrypted',
         'help_text',
         'show_in_email',
+        'is_unique',
     ];
 
     /**
