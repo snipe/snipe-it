@@ -830,7 +830,9 @@ class Asset extends Depreciable
      */
     public function checkin_email()
     {
-        return $this->model->category->checkin_email;
+        if (($this->model) && ($this->model->category)) {
+            return $this->model->category->checkin_email;
+        }
     }
 
     /**
