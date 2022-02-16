@@ -129,6 +129,7 @@
               <th data-searchable="true">{{ trans('general.name') }}</th>
               <th data-searchable="true">{{ trans('admin/custom_fields/general.help_text')}}</th>
               <th data-searchable="true">{{ trans('general.email') }}</th>
+              <th data-searchable="true">{{ trans('admin/custom_fields/general.unique') }}</th>
               <th data-visible="false">{{ trans('admin/custom_fields/general.db_field') }}</th>
               <th data-searchable="true">{{ trans('admin/custom_fields/general.field_format') }}</th>
               <th data-searchable="true">{{ trans('admin/custom_fields/general.field_element_short') }}</th>
@@ -142,6 +143,7 @@
               <td>{{ $field->name }}</td>
               <td>{{ $field->help_text }}</td>
               <td class='text-center'>{!! ($field->show_in_email=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fas fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
+              <td class='text-center'>{!! ($field->is_unique=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fas fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
               <td>
                  <code>{{ $field->convertUnicodeDbSlug() }}</code>
                 @if ($field->convertUnicodeDbSlug()!=$field->db_column)

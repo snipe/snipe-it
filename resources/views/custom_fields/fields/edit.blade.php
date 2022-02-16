@@ -116,6 +116,17 @@
 
           </div>
 
+          <!-- Value Must be Unique -->
+          <div class="form-group {{ $errors->has('is_unique') ? ' has-error' : '' }}"  id="is_unique">
+            <div class="col-md-8 col-md-offset-4">
+                <label for="is_unique">
+                    <input type="checkbox" name="is_unique" aria-label="is_unique" value="1" class="minimal"{{ (old('is_unique') || $field->is_unique) ? ' checked="checked"' : '' }}>
+                    {{ trans('admin/custom_fields/general.is_unique') }}
+                </label>
+            </div>
+
+        </div>
+
 
       @if (!$field->id)
         <!-- Encrypted  -->
