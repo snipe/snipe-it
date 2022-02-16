@@ -121,6 +121,11 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     protected function checkPermissionSection($section)
     {
+        //what is the actual **SECTION** that we're on, does it correspond to something?
+        // does it have a model?
+        // this would be the place to say 'hey' does this have a company in it? IF so, you'd better be super, or an admin here.
+        // otherwise, you're fucking b oned.
+        
         $user_groups = $this->groups;
         if (($this->permissions == '') && (count($user_groups) == 0)) {
 

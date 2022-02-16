@@ -36,11 +36,16 @@ abstract class SnipePermissionsPolicy
     public function before(User $user, $ability, $item)
     {
         // Lets move all company related checks here.
-        if ($item instanceof \App\Models\SnipeModel && ! Company::isCurrentUserHasAccess($item)) {
+        if ($item instanceof \App\Models\SnipeModel && ! Company::isCurrentUserHasAccess($item)) { // Question: what if $item is a _class_, not an actual object? Isn't that possible? e.g. for @can('create',Statuslabel::class)
             return false;
         }
         // If an admin, they can do all asset related tasks.
-        if ($user->hasAccess('admin')) {
+        if ($user->hasAccess('admin')) { //*THIS* I kinda think is the thing I'm looking for?
+            \Log::info("Yes, we have Admin. Is full company support enabled? ".(Company::isFullMultipleCompanySupportEnabled() ? " yes ": " no ")." what is the item? ".print_r($item,true)." ");
+            if (Company::isFullMultipleCompanySupportEnabled() && is_null($item->company_id) && $ability != 'view' ) {
+                //I suspect that is_null($item->company_id) will *ALWAYS* be true, because we probably caught any SnipeModel things (which have $company_id) above.
+                return false; //Admin users *CANNOT* make any changes to cross-company things.
+            }
             return true;
         }
     }
@@ -51,7 +56,7 @@ abstract class SnipePermissionsPolicy
     }
 
     /**
-     * Determine whether the user can view the accessory.
+     * Determine whether the user can view the $item.
      *
      * @param  \App\Models\User  $user
      * @return mixed
@@ -62,7 +67,7 @@ abstract class SnipePermissionsPolicy
     }
 
     /**
-     * Determine whether the user can create accessories.
+     * Determine whether the user can create $items.
      *
      * @param  \App\Models\User  $user
      * @return mixed
@@ -73,7 +78,7 @@ abstract class SnipePermissionsPolicy
     }
 
     /**
-     * Determine whether the user can update the accessory.
+     * Determine whether the user can update the $item.
      *
      * @param  \App\Models\User  $user
      * @return mixed
@@ -84,7 +89,7 @@ abstract class SnipePermissionsPolicy
     }
 
     /**
-     * Determine whether the user can delete the accessory.
+     * Determine whether the user can delete the $item.
      *
      * @param  \App\Models\User  $user
      * @return mixed
@@ -100,7 +105,7 @@ abstract class SnipePermissionsPolicy
     }
 
     /**
-     * Determine whether the user can manage the accessory.
+     * Determine whether the user can manage the $item.
      *
      * @param  \App\Models\User  $user
      * @return mixed
