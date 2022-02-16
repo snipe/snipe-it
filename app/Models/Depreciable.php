@@ -68,13 +68,18 @@ class Depreciable extends SnipeModel
      */
     public function getLinearDepreciatedValue()
     {
-        // fraction of value left
+        $numerator= (($this->purchase_cost-($this->purchase_cost*12/($this->get_depreciation()->months))));
+        $denominator=$this->get_depreciation()->months/12;
+        $deprecation_per_year= $numerator/$denominator;
+        $deprecation_per_month= $deprecation_per_year/12;
+
         $months_remaining = $this->time_until_depreciated()->m + 12 * $this->time_until_depreciated()->y; //UGlY
-        $current_value = round(($months_remaining / $this->get_depreciation()->months) * $this->purchase_cost, 2);
+        $months_depreciated=$this->get_depreciation()->months-$months_remaining;
+        $current_value = $this->purchase_cost-($deprecation_per_month*$months_depreciated);
 
         if($this->get_depreciation()->depreciation_min > $current_value) {
 
-            $current_value=$this->get_depreciation()->depreciation_min;
+            $current_value=round($this->get_depreciation()->depreciation_min,2);
         }
         if ($current_value < 0) {
             $current_value = 0;
