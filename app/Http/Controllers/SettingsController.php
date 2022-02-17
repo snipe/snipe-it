@@ -627,23 +627,16 @@ class SettingsController extends Controller
 
             // Be careful - this could be a negative number
             $audit_diff_months = ((int)$request->input('audit_interval') - (int)($setting->audit_interval));
-
-            \Log::debug('We need to update audit dates. Interval is changing from '.$setting->audit_interval.' to '.$request->input('audit_interval'));
-            \Log::debug('Audit difference: '.$audit_diff_months);
-
+            
+            // Grab all of the assets that have an existing next_audit_date
             $assets = Asset::whereNotNull('next_audit_date')->get();
 
+            // Update all of the assets' next_audit_date values
             foreach ($assets as $asset) {
 
                 if ($asset->next_audit_date != '') {
-
                     $old_next_audit = new \DateTime($asset->next_audit_date);
-                    \Log::debug('Old audit date: '.$old_next_audit->format('Y-m-d'));
-                    \Log::debug('Adding '.$audit_diff_months.' months');
-
                     $asset->next_audit_date = $old_next_audit->modify($audit_diff_months.' month')->format('Y-m-d');
-                    
-                    \Log::debug('New audit date: '.$asset->next_audit_date->format('Y-m-d'));
                     $asset->forceSave();
                 }
                 
