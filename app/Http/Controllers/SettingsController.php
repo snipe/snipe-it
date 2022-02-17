@@ -627,26 +627,24 @@ class SettingsController extends Controller
         if ($request->input('audit_interval') != $setting->audit_interval) {
 
             // Be careful - this could be a negative number
-            $audit_diff_months = ($setting->audit_interval - (int)$request->input('audit_interval'));
+            $audit_diff_months = ((int)$request->input('audit_interval') - (int)($setting->audit_interval));
 
-            \Log::error('we need to update audit dates');
-            \Log::error('Audit difference: '.$audit_diff_months);
+            \Log::debug('We need to update audit dates. Interval is changing from '.$setting->audit_interval.' to '.$request->input('audit_interval'));
+            \Log::debug('Audit difference: '.$audit_diff_months);
 
-            $assets = Asset::whereNotNull('next_audit_date')->take(10)->get();
+            $assets = Asset::whereNotNull('next_audit_date')->get();
 
             foreach ($assets as $asset) {
 
                 if ($asset->next_audit_date != '') {
 
-                    $old_next_audit = Carbon::parse($asset->next_audit_date);
-                    \Log::error('Old audit date: '.$old_next_audit);
-                    \Log::error('Adding '.$audit_diff_months.' months');
+                    $old_next_audit = new \DateTime($asset->next_audit_date);
+                    \Log::debug('Old audit date: '.$old_next_audit->format('Y-m-d'));
+                    \Log::debug('Adding '.$audit_diff_months.' months');
 
-                    $new_next_audit = $old_next_audit->addMonths($audit_diff_months)->format('Y-m-d');
+                    $asset->next_audit_date = $old_next_audit->modify($audit_diff_months.' month')->format('Y-m-d');
                     
-                    \Log::error('New audit date: '.$new_next_audit);
-
-                    $asset->next_audit_date = $new_next_audit;
+                    \Log::debug('New audit date: '.$asset->next_audit_date->format('Y-m-d'));
                     $asset->forceSave();
                 }
                 
