@@ -8,6 +8,7 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SettingsSamlRequest;
 use App\Http\Requests\SetupUserRequest;
 use App\Models\Setting;
+use App\Models\Asset;
 use App\Models\User;
 use App\Notifications\FirstAdminNotification;
 use App\Notifications\MailTest;
@@ -23,6 +24,7 @@ use Redirect;
 use Response;
 use App\Helpers\StorageHelper;
 use App\Http\Requests\SlackSettingsRequest;
+use Carbon\Carbon;
 
 /**
  * This controller handles all actions related to Settings for
@@ -621,6 +623,39 @@ class SettingsController extends Controller
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
+        // Check if the audit interval has changed - if it has, we want to update ALL of the assets audit dates
+        if ($request->input('audit_interval') != $setting->audit_interval) {
+
+            // Be careful - this could be a negative number
+            $audit_diff_months = ($setting->audit_interval - (int)$request->input('audit_interval'));
+
+            \Log::error('we need to update audit dates');
+            \Log::error('Audit difference: '.$audit_diff_months);
+
+            $assets = Asset::whereNotNull('next_audit_date')->take(10)->get();
+
+            foreach ($assets as $asset) {
+
+                if ($asset->next_audit_date != '') {
+
+                    $old_next_audit = Carbon::parse($asset->next_audit_date);
+                    \Log::error('Old audit date: '.$old_next_audit);
+                    \Log::error('Adding '.$audit_diff_months.' months');
+
+                    $new_next_audit = $old_next_audit->addMonths($audit_diff_months)->format('Y-m-d');
+                    
+                    \Log::error('New audit date: '.$new_next_audit);
+
+                    $asset->next_audit_date = $new_next_audit;
+                    $asset->forceSave();
+                }
+                
+            }
+
+        } 
+
+
+
         $alert_email    = rtrim($request->input('alert_email'), ',');
         $alert_email    = trim($alert_email);
         $admin_cc_email = rtrim($request->input('admin_cc_email'), ',');
@@ -635,6 +670,7 @@ class SettingsController extends Controller
         $setting->audit_warning_days  = $request->input('audit_warning_days');
         $setting->show_alerts_in_menu = $request->input('show_alerts_in_menu', '0');
 
+        
         if ($setting->save()) {
             return redirect()->route('settings.index')
                 ->with('success', trans('admin/settings/message.update.success'));
