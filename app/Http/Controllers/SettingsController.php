@@ -24,7 +24,6 @@ use Redirect;
 use Response;
 use App\Helpers\StorageHelper;
 use App\Http\Requests\SlackSettingsRequest;
-use Carbon\Carbon;
 
 /**
  * This controller handles all actions related to Settings for
