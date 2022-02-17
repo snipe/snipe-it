@@ -639,12 +639,8 @@ class SettingsController extends Controller
                     $asset->next_audit_date = $old_next_audit->modify($audit_diff_months.' month')->format('Y-m-d');
                     $asset->forceSave();
                 }
-                
             }
-
         } 
-
-
 
         $alert_email    = rtrim($request->input('alert_email'), ',');
         $alert_email    = trim($alert_email);
