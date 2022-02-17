@@ -1202,11 +1202,10 @@ class SettingsController extends Controller
                 // grab the user's info so we can make sure they exist in the system
                 $user = User::find(Auth::user()->id);
 
+                // TODO: run a backup
 
-                // TODO: run a backup 
 
-                // TODO: add db:wipe 
-
+                Artisan::call('db:wipe');
 
                 // run the restore command
                 Artisan::call('snipeit:restore', 
@@ -1216,10 +1215,8 @@ class SettingsController extends Controller
                     'filename' => storage_path($path).'/'.$filename
                 ]);
 
-                $output = Artisan::output();
-                    
-            
                 // If it's greater than 300, it probably worked
+                $output = Artisan::output();
                 if (strlen($output) > 300) {
                     \Auth::logout();
                     return redirect()->route('login')->with('success', 'Your system has been restored. Please login again.');
