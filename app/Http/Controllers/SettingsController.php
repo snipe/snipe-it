@@ -656,7 +656,6 @@ class SettingsController extends Controller
         $setting->audit_warning_days  = $request->input('audit_warning_days');
         $setting->show_alerts_in_menu = $request->input('show_alerts_in_menu', '0');
 
-        
         if ($setting->save()) {
             return redirect()->route('settings.index')
                 ->with('success', trans('admin/settings/message.update.success'));
