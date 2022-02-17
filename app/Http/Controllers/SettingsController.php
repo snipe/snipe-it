@@ -1218,6 +1218,12 @@ class SettingsController extends Controller
                 // If it's greater than 300, it probably worked
                 $output = Artisan::output();
                 if (strlen($output) > 300) {
+                    $find_user = DB::table('users')->where('first_name', $user->first_name)->where('last_name', $user->last_name)->exists();
+                    if(!$find_user){
+                        \Log::warning('Attempting to restore user: ' . $user->first_name . ' ' . $user->last_name);
+                        $new_user = $user->replicate();
+                        $new_user->push();
+                    }
                     \Auth::logout();
                     return redirect()->route('login')->with('success', 'Your system has been restored. Please login again.');
                 } else {
