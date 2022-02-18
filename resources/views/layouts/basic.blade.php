@@ -67,12 +67,12 @@
         @if (($snipeSettings) && ($snipeSettings->privacy_policy_link!=''))
         <a target="_blank" rel="noopener" href="{{  $snipeSettings->privacy_policy_link }}" target="_new">{{ trans('admin/settings/general.privacy_policy') }}</a>
     @endif
+    <p>IN CONSIDERATION OF and as a condition of the Employer employing the Employee and the Employer providing the Confidential Information to the Employee in addition to other valuable consideration, the receipt and sufficiency of which consideration is hereby acknowledged.</p>
     </div>
 
     {{-- Javascript files --}}
     <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
-
-
+    
     @stack('js')
 </body>
 
