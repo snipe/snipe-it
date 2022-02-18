@@ -1238,16 +1238,6 @@ class SettingsController extends Controller
                     return redirect()->route('settings.backups.index')->with('error', $output);
 
                 }
-                //dd($output);
-
-                // TODO: insert the user if they are not there in the old one
-                
-
-
-
-                // log the user out
-                
-
 
             } else {
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
