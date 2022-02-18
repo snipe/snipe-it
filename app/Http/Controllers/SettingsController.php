@@ -1230,6 +1230,7 @@ class SettingsController extends Controller
                         if (is_file($file))
                             unlink($file);
                     }
+                    DB::table('users')->update(['remember_token' => null]);
                     \Auth::logout();
 
                     return redirect()->route('login')->with('success', 'Your system has been restored. Please login again.');
