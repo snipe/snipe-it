@@ -1224,7 +1224,14 @@ class SettingsController extends Controller
                         $new_user = $user->replicate();
                         $new_user->push();
                     }
+
+                    $session_files = glob(storage_path("framework/sessions/*"));
+                    foreach ($session_files as $file) {
+                        if (is_file($file))
+                            unlink($file);
+                    }
                     \Auth::logout();
+
                     return redirect()->route('login')->with('success', 'Your system has been restored. Please login again.');
                 } else {
                     return redirect()->route('settings.backups.index')->with('error', $output);
