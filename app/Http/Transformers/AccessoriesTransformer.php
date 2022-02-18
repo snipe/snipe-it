@@ -64,28 +64,38 @@ class AccessoriesTransformer
         return $array;
     }
 
-    public function transformCheckedoutAccessory($accessory, $accessory_users, $total)
+    public function transformCheckedoutAccessory($accessory, $accessory_users, $accessory_sigs, $total)
     {
-        $accept_signature= json_decode($accessory->last_checkout);
+//        \Log::info($accessory_users); \Log::info($accessory);
+
         $array = [];
+//       My problem is when this array is populated it doesn't stop to look at $accessory->accepted_signatures.
+//       so I'm trying to get a for loop to check if the user->pivot->id matches $accessory_sigs->target_id (user id) to get the right signature.
+//       Sounds good in theory. Can I be doing it better?? Im not sure....I just realized that accessory only pulls the lastcheckout. Going to work on a query first.
+//       annoyed with this already..Something is broken and now the table won't populate. Ill give it another look tomorrow.
+        foreach($accessory_sigs as $accessory_sigs) {
+            $signature=null;
+            foreach ($accessory_users as $user) {
+                if ($user->pivot->id == $accessory_sigs->target_id) {
+                    $signature=$accessory_sigs->accept_signature;
+                }
+                    $array[] = [
 
-        foreach ($accessory_users as $user) {
-            $array[] = [
+                        'assigned_pivot_id' => $user->pivot->id,
+                        'id' => (int)$user->id,
+                        'username' => e($user->username),
+                        'name' => e($user->getFullNameAttribute()),
+                        'first_name' => e($user->first_name),
+                        'last_name' => e($user->last_name),
+                        'employee_number' => e($user->employee_num),
+                        'checkout_notes' => e($user->pivot->note),
+                        'accept_signature' => $signature,
+                        'last_checkout' => Helper::getFormattedDateObject($user->pivot->created_at, 'datetime'),
+                        'type' => 'user',
+                        'available_actions' => ['checkin' => true],
+                    ];
 
-                'assigned_pivot_id' => $user->pivot->id,
-                'id' => (int) $user->id,
-                'username' => e($user->username),
-                'name' => e($user->getFullNameAttribute()),
-                'first_name'=> e($user->first_name),
-                'last_name'=> e($user->last_name),
-                'employee_number' =>  e($user->employee_num),
-                'checkout_notes' => e($user->pivot->note),
-//                I think this is how we get the signature file to populate correctly, Going to have to tweek the actionlog transformer a bit I think
-                'accept_signature' => $accessory->accept_signature ? route('log.signature.view', ['filename' => $accessory->accept_signature ]) : null,
-                'last_checkout' => Helper::getFormattedDateObject($user->pivot->created_at, 'datetime'),
-                'type' => 'user',
-                'available_actions' => ['checkin' => true],
-            ];
+            }
         }
 
         return (new DatatablesTransformer)->transformDatatables($array, $total);

@@ -177,10 +177,9 @@ class AccessoriesController extends Controller
     public function checkedout($id, Request $request)
     {
         $this->authorize('view', Accessory::class);
-
+        $accessory_sigs = Accessory::with('hasSignature')->findorFail($id);
         $accessory = Accessory::with('lastCheckout')->findOrFail($id);
 //       Getting info
-//        \Log::info($accessory->accept_signature);
         if (! Company::isCurrentUserHasAccess($accessory)) {
             return ['total' => 0, 'rows' => []];
         }
@@ -209,7 +208,7 @@ class AccessoriesController extends Controller
             $total = $accessory_users->count();
         }
 
-        return (new AccessoriesTransformer)->transformCheckedoutAccessory($accessory, $accessory_users, $total);
+        return (new AccessoriesTransformer)->transformCheckedoutAccessory($accessory, $accessory_users, $accessory_sigs, $total);
     }
 
 

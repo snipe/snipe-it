@@ -78,7 +78,7 @@
                     <th data-searchable="false" data-sortable="false" data-field="checkout_notes">{{ trans('general.notes') }}</th>
                     <th data-searchable="false" data-formatter="dateDisplayFormatter" data-sortable="false" data-field="last_checkout">{{ trans('admin/hardware/table.checkout_date') }}</th>
                     @if  ($snipeSettings->require_accept_signature=='1')
-                        <th class="col-md-3" data-field="signature_file" data-visible="true"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
+                        <th class="col-md-3" data-field="accept_signature" data-visible="true"  data-formatter="imageFormatter">{{ trans('general.signature') }} </th>
                     @endif
                     <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="accessoriesInOutFormatter">{{ trans('table.actions') }}</th>
                 </tr>

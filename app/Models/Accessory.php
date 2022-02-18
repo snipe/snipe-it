@@ -168,13 +168,17 @@ class Accessory extends SnipeModel
      * @since [v3.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    // Been messing around with the query and looking at documentation, I need a signature to in the database
-    // so I have a visual confirmation. none available to accessories at the moment. current q
+
     public function assetlog()
     {
             return $this->hasMany(\App\Models\Actionlog::class, 'item_id')->where('item_type', self::class)->orderBy('created_at', 'desc')->withTrashed();
     }
-
+//    Working with a new query here
+    public function hasSignature()
+    {
+        return $this->assetLog()->where('action_type', '=', 'accepted')
+                                ->where('accept_signature', '!=', 'NULL');
+    }
     /**
      * Get the LAST checkout for this accessory.
      * 
