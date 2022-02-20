@@ -2558,6 +2558,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "insert-waffle",
+      "name": "waffle",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9415391?v=4",
+      "profile": "https://ditisjens.be/",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
