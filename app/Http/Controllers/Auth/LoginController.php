@@ -302,6 +302,7 @@ class LoginController extends Controller
         return redirect()->intended()->with('success', trans('auth/message.signin.success'));
     }
 
+
     /**
      * Two factor enrollment page
      *
@@ -402,13 +403,14 @@ class LoginController extends Controller
         if (Google2FA::verifyKey($user->two_factor_secret, $secret)) {
             $user->two_factor_enrolled = 1;
             $user->save();
-            $request->session()->put('2fa_authed', 'true');
+            $request->session()->put('2fa_authed', $user->id);
 
             return redirect()->route('home')->with('success', 'You are logged in!');
         }
 
         return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.invalid_code'));
     }
+
 
     /**
      * Logout page.
@@ -455,6 +457,7 @@ class LoginController extends Controller
 
         return redirect()->route('login')->with(['success' => trans('auth/message.logout.success'), 'loggedout' => true]);
     }
+
 
     /**
      * Get a validator for an incoming registration request.

@@ -50,6 +50,7 @@ class CategoriesController extends Controller
 
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -69,8 +70,8 @@ class CategoriesController extends Controller
         if ($category->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $category, trans('admin/categories/message.create.success')));
         }
-
         return response()->json(Helper::formatStandardApiResponse('error', null, $category->getErrors()));
+
     }
 
     /**
@@ -85,9 +86,10 @@ class CategoriesController extends Controller
     {
         $this->authorize('view', Category::class);
         $category = Category::findOrFail($id);
-
         return (new CategoriesTransformer)->transformCategory($category);
+
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -136,6 +138,7 @@ class CategoriesController extends Controller
         return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/categories/message.delete.success')));
     }
 
+
     /**
      * Gets a paginated collection for the select2 menus
      *
@@ -145,6 +148,7 @@ class CategoriesController extends Controller
      */
     public function selectlist(Request $request, $category_type = 'asset')
     {
+        $this->authorize('view.selectlists');
         $categories = Category::select([
             'id',
             'name',

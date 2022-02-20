@@ -8,6 +8,7 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SettingsSamlRequest;
 use App\Http\Requests\SetupUserRequest;
 use App\Models\Setting;
+use App\Models\Asset;
 use App\Models\User;
 use App\Notifications\FirstAdminNotification;
 use App\Notifications\MailTest;
@@ -419,6 +420,7 @@ class SettingsController extends Controller
                 $setting->brand = 1;
         }
 
+
         $setting = $request->handleImages($setting, 600, 'email_logo', '', 'email_logo');
 
 
@@ -475,6 +477,7 @@ class SettingsController extends Controller
 
         return redirect()->back()->withInput()->withErrors($setting->getErrors());
     }
+
 
     /**
      * Return a form to allow a super admin to update settings.
@@ -613,6 +616,26 @@ class SettingsController extends Controller
     {
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
+        }
+
+        // Check if the audit interval has changed - if it has, we want to update ALL of the assets audit dates
+        if ($request->input('audit_interval') != $setting->audit_interval) {
+
+            // Be careful - this could be a negative number
+            $audit_diff_months = ((int)$request->input('audit_interval') - (int)($setting->audit_interval));
+            
+            // Grab all of the assets that have an existing next_audit_date
+            $assets = Asset::whereNotNull('next_audit_date')->get();
+
+            // Update all of the assets' next_audit_date values
+            foreach ($assets as $asset) {
+
+                if ($asset->next_audit_date != '') {
+                    $old_next_audit = new \DateTime($asset->next_audit_date);
+                    $asset->next_audit_date = $old_next_audit->modify($audit_diff_months.' month')->format('Y-m-d');
+                    $asset->forceSave();
+                }
+            }
         }
 
         $alert_email = rtrim($request->input('alert_email'), ',');
@@ -1026,7 +1049,6 @@ class SettingsController extends Controller
                 if ((substr(basename($backup_files[$f]), 0, 1) != '.')) {
                     //$lastmodified = Carbon::parse(Storage::lastModified($backup_files[$f]))->toDatetimeString();
                     $file_timestamp = Storage::lastModified($backup_files[$f]);
-
 
                     $files_raw[] = [
                         'filename' => basename($backup_files[$f]),

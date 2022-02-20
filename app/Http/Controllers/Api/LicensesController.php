@@ -92,6 +92,10 @@ class LicensesController extends Controller
             $licenses = $licenses->TextSearch($request->input('search'));
         }
 
+        if ($request->input('deleted')=='true') {
+            $licenses->onlyTrashed();
+        }
+
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.
         $offset = (($licenses) && ($request->get('offset') > $licenses->count())) ? $licenses->count() : $request->get('offset', 0);

@@ -56,9 +56,10 @@ class CompaniesController extends Controller
 
         $total = $companies->count();
         $companies = $companies->skip($offset)->take($limit)->get();
-
         return (new CompaniesTransformer)->transformCompanies($companies, $total);
+
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -95,9 +96,10 @@ class CompaniesController extends Controller
     {
         $this->authorize('view', Company::class);
         $company = Company::findOrFail($id);
-
         return (new CompaniesTransformer)->transformCompany($company);
+
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -157,6 +159,7 @@ class CompaniesController extends Controller
      */
     public function selectlist(Request $request)
     {
+        $this->authorize('view.selectlists');
         $companies = Company::select([
             'companies.id',
             'companies.name',

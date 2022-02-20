@@ -285,7 +285,11 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                {{ Helper::getFormattedDateObject($audit_log->created_at, 'date', false) }} (by {{ link_to_route('users.show', $audit_log->user->present()->fullname(), [$audit_log->user->id]) }})
+                                                {{ \App\Helpers\Helper::getFormattedDateObject($audit_log->created_at, 'date', false) }} 
+                                                @if ($audit_log->user) 
+                                                    (by {{ link_to_route('users.show', $audit_log->user->present()->fullname(), [$audit_log->user->id]) }})
+                                                @endif 
+                                                
                                             </div>
                                         </div>
                                     @endif

@@ -2514,6 +2514,15 @@
         "code"
       ]
     },
+   {
+      "login": "Haxatron",
+      "name": "Haxatron",
+      "avatar_url": "https://avatars.githubusercontent.com/u/76475453?v=4",
+      "profile": "https://github.com/Haxatron",
+      "contributions": [
+        "code"
+      ]
+    },
     {
       "login": "PlaneNuts",
       "name": "PlaneNuts",
@@ -2528,6 +2537,15 @@
       "name": "Bradley Coudriet",
       "avatar_url": "https://avatars.githubusercontent.com/u/3842948?v=4",
       "profile": "http://bjcpgd.cias.rit.edu",
+      "contributions": [
+        "code"
+      ]
+    },
+   {
+      "login": "UniversalSuperBox",
+      "name": "Dalton Durst",
+      "avatar_url": "https://avatars.githubusercontent.com/u/21966173?v=4",
+      "profile": "https://daltondur.st",
       "contributions": [
         "code"
       ]

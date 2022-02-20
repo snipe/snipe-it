@@ -66,8 +66,8 @@ class DepartmentsController extends Controller
 
         $total = $departments->count();
         $departments = $departments->skip($offset)->take($limit)->get();
-
         return (new DepartmentsTransformer)->transformDepartments($departments, $total);
+
     }
 
     /**
@@ -91,8 +91,8 @@ class DepartmentsController extends Controller
         if ($department->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $department, trans('admin/departments/message.create.success')));
         }
-
         return response()->json(Helper::formatStandardApiResponse('error', null, $department->getErrors()));
+
     }
 
     /**
@@ -134,6 +134,7 @@ class DepartmentsController extends Controller
         return response()->json(Helper::formatStandardApiResponse('error', null, $department->getErrors()));
     }
 
+
     /**
      * Validates and deletes selected department.
      *
@@ -153,8 +154,8 @@ class DepartmentsController extends Controller
         }
 
         $department->delete();
-
         return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/departments/message.delete.success')));
+
     }
 
     /**
@@ -166,6 +167,8 @@ class DepartmentsController extends Controller
      */
     public function selectlist(Request $request)
     {
+
+        $this->authorize('view.selectlists');
         $departments = Department::select([
             'id',
             'name',
