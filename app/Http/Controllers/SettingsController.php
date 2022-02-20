@@ -1202,11 +1202,10 @@ class SettingsController extends Controller
                 // grab the user's info so we can make sure they exist in the system
                 $user = User::find(Auth::user()->id);
 
+                // TODO: run a backup
 
-                // TODO: run a backup 
 
-                // TODO: add db:wipe 
-
+                Artisan::call('db:wipe');
 
                 // run the restore command
                 Artisan::call('snipeit:restore', 
@@ -1216,27 +1215,29 @@ class SettingsController extends Controller
                     'filename' => storage_path($path).'/'.$filename
                 ]);
 
-                $output = Artisan::output();
-                    
-            
                 // If it's greater than 300, it probably worked
+                $output = Artisan::output();
                 if (strlen($output) > 300) {
+                    $find_user = DB::table('users')->where('first_name', $user->first_name)->where('last_name', $user->last_name)->exists();
+                    if(!$find_user){
+                        \Log::warning('Attempting to restore user: ' . $user->first_name . ' ' . $user->last_name);
+                        $new_user = $user->replicate();
+                        $new_user->push();
+                    }
+
+                    $session_files = glob(storage_path("framework/sessions/*"));
+                    foreach ($session_files as $file) {
+                        if (is_file($file))
+                            unlink($file);
+                    }
+                    DB::table('users')->update(['remember_token' => null]);
                     \Auth::logout();
+
                     return redirect()->route('login')->with('success', 'Your system has been restored. Please login again.');
                 } else {
                     return redirect()->route('settings.backups.index')->with('error', $output);
 
                 }
-                //dd($output);
-
-                // TODO: insert the user if they are not there in the old one
-                
-
-
-
-                // log the user out
-                
-
 
             } else {
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));

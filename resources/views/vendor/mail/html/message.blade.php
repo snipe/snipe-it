@@ -11,6 +11,7 @@
 @elseif ($snipeSettings->logo!='')
 <img style="max-height: 100px; vertical-align:middle;" src="{{ \Storage::disk('public')->url(e($snipeSettings->logo)) }}">
 @endif
+<br><br>
 {{ $snipeSettings->site_name }}
 <br><br>
 
