@@ -21,7 +21,7 @@ return [
     'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'Asset IDs',
     'audit_interval'            => 'Audit Interval',
-    'audit_interval_help'       => 'If you are required to regularly physically audit your assets, enter the interval in months.',
+    'audit_interval_help'       => 'If you are required to regularly physically audit your assets, enter the interval in months that you use. If you update this value, all of the "next audit dates" for assets with an upcoming audit date.',
     'audit_warning_days'        => 'Audit Warning Threshold',
     'audit_warning_days_help'   => 'How many days in advance should we warn you when assets are due for auditing?',
     'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
