@@ -2,7 +2,6 @@
 
 return [
     'ad'				        => 'Active Directory',
-    'update_null_audits'        => 'Also update audit dates on assets without a current next audit date set based on purchase date (if present)',
     'ad_domain'				    => 'Active Directory domain',
     'ad_domain_help'			=> 'This is sometimes the same as your email domain, but not always.',
     'ad_append_domain_label'    => 'Append domain name',
