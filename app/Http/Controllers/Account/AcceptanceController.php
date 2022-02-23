@@ -121,4 +121,9 @@ class AcceptanceController extends Controller
 
         return redirect()->to('account/accept')->with('success', $return_msg);
     }
+//    Just a heads start, Can't test right now, but kind of the jest of what needs to be here
+    public function SignatureEulaPDF($acceptance, $request) {
+        $pdf = PDF::loadView('test.pdf', $acceptance, $request->signature_output);
+        return $pdf->download('test.pdf');
+    }
 }

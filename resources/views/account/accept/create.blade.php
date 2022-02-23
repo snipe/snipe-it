@@ -57,7 +57,6 @@
                 {{ trans('general.i_decline') }}
               </label>
             </div>
-
             @if ($acceptance->checkoutable->getEula())
             <div class="col-md-12" style="padding-top: 20px">
               <div id="eula_div">
@@ -81,7 +80,7 @@
                 </div>
               </div>
             </div> <!-- .col-md-12.text-center-->
-            @endif
+              @endif
 
           </div><!-- / col-md-12 -->
 
@@ -92,8 +91,9 @@
       </div> <!-- / box-default -->
     </div> <!-- / col -->
   </div> <!-- / row -->
-</form>
+    {{--Going to need the Eula and Signature above to make a tidy signed agreement after the submit button is clicked--}}
 
+</form>
 @stop
 
 @section('moar_scripts')
