@@ -39,7 +39,7 @@
                 <div class="box-header with-border">
                     <h2 class="box-title">
                         <i class="fa fa-sign-in"></i> SAML
-                    </h4>
+                    </h2>
                 </div>
                 <div class="box-body">
 
