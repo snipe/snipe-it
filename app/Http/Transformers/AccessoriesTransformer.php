@@ -73,12 +73,8 @@ class AccessoriesTransformer
 //       so I'm trying to get a for loop to check if the user->pivot->id matches $accessory_sigs->target_id (user id) to get the right signature.
 //       Sounds good in theory. Can I be doing it better?? Im not sure....I just realized that accessory only pulls the lastcheckout. Going to work on a query first.
 //       annoyed with this already..Something is broken and now the table won't populate. Ill give it another look tomorrow.
-        foreach($accessory_sigs as $accessory_sigs) {
-            $signature=null;
             foreach ($accessory_users as $user) {
-                if ($user->pivot->id == $accessory_sigs->target_id) {
-                    $signature=$accessory_sigs->accept_signature;
-                }
+
                     $array[] = [
 
                         'assigned_pivot_id' => $user->pivot->id,
@@ -89,14 +85,14 @@ class AccessoriesTransformer
                         'last_name' => e($user->last_name),
                         'employee_number' => e($user->employee_num),
                         'checkout_notes' => e($user->pivot->note),
-                        'accept_signature' => $signature,
+                        'accept_signature' => $accessory->accepted_signature,
                         'last_checkout' => Helper::getFormattedDateObject($user->pivot->created_at, 'datetime'),
                         'type' => 'user',
                         'available_actions' => ['checkin' => true],
                     ];
 
             }
-        }
+
 
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
