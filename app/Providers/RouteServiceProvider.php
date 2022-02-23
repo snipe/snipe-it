@@ -78,7 +78,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         Route::group([
-            'middleware' => 'auth:api',
+            'middleware' => 'api', //this will load the *ENTIRE* middleware group called 'api' - which should include auth:api, as well as others
             'namespace' => $this->namespace,
             'prefix' => 'api',
         ], function ($router) {

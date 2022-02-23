@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 
-Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'auth:api'], function () {
+Route::group(['prefix' => 'v1','namespace' => 'Api'], function () { //we don't explicitly mention middleware here, because that is quite well-defined under the RouteServiceProvider - unless we need to override, of course
 
 
     Route::get('/', function() {
