@@ -15,6 +15,7 @@ class AddDiscordToSettings extends Migration
     {
         Schema::table('settings', function (Blueprint $table) {
             $table->string('discord_endpoint',255)->nullable()->default(NULL);
+            $table->string('discord_botname')->nullable()->default(NULL);
         });
     }
 
@@ -27,6 +28,7 @@ class AddDiscordToSettings extends Migration
     {
         Schema::table('settings', function (Blueprint $table) {
             $table->dropColumn('discord_endpoint');
+            $table->dropColumn('discord_botname');
         });
     }
 }

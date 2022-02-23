@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator; 
 use App\Http\Requests\SlackSettingsRequest;
+use App\Http\Requests\DiscordSettingsRequest;
 
 
 class SettingsController extends Controller
@@ -208,8 +209,17 @@ class SettingsController extends Controller
     }
 
     
-    public function discordtest(Request $request)
+    public function discordtest(DiscordSettingsRequest $request)
     {
+        $validator = Validator::make($request->all(), [
+            'discord_endpoint'                      => 'url|starts_with:"https://discord.com/api/webhooks"|nullable',
+            'discord_botname'                       => 'string|nullable',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['message' => 'Validation failed', 'errors' => $validator->errors()], 422);
+        }
+
         $discord = new Client([
                 'headers' => ['Content-Type' => 'application/json'],
                 
@@ -217,6 +227,7 @@ class SettingsController extends Controller
 
         $payload = json_encode(
             [
+                'username'    => e($request->input('discord_botname')),
                 'content'      => trans('general.discord_test_msg')
             ]
         );

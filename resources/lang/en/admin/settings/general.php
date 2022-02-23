@@ -48,6 +48,7 @@ return [
     'default_language'			=> 'Default Language',
     'default_eula_help_text'	=> 'You can also associate custom EULAs to specific asset categories.',
     'discord_endpoint'            => 'Discord Webhook',
+    'discord_botname'             => 'Discord Botname',
     'discord_integration_help'    => 'Discord integration is optional, however the webhook is required if you wish to use it. To configure Discord integration, you must first <a href=":discord_link" target="_new" rel="noopener">create a webhook</a> in your Discord channel. This setting sends a simple webhook (not a discord bot).  Click on the <strong>Test Discord Integration</strong> button to confirm your settings are correct before saving. ',
     'discord_integration_help_button'    => 'Once you have saved your Discord information, a test button will appear.',
     'discord_test_help'           => 'Test whether your Discord integration is configured correctly. YOU MUST SAVE YOUR UPDATED DISCORD SETTINGS FIRST.',

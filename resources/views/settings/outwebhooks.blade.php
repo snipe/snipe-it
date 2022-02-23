@@ -250,7 +250,22 @@
                                 {!! $errors->first('discord_endpoint', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
+                        <!-- Discord botname -->
+                        <div class="form-group required {{ $errors->has('discord_botname') ? 'error' : '' }}">
+                            <div class="col-md-2">
+                                {{ Form::label('discord_botname', trans('admin/settings/general.discord_botname')) }}
+                            </div>
+                            <div class="col-md-10">
+                                @if (config('app.lock_passwords')===true)
+                                    {{ Form::text('discord_botname', old('discord_botname', $setting->discord_botname), array('class' => 'form-control','disabled'=>'disabled','placeholder' => 'Snipe-Bot')) }}
+                                    <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
 
+                                @else
+                                    {{ Form::text('discord_botname', old('discord_botname', $setting->discord_botname), array('class' => 'form-control','placeholder' => 'Snipe-Bot')) }}
+                                @endif
+                                {!! $errors->first('discord_botname', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                            </div>
+                        </div>
 
                        <div class="form-group" id="discordtestcontainer" style="display: none">
                            
@@ -384,7 +399,7 @@
 
             
             //discord field check
-            if($('#discord_endpoint').val() != "") {
+            if($('#discord_endpoint').val() != "" && $('#discord_botname').val() != "") {
                 //enable test button *only* if field is filled in
                 $('#discordtestcontainer').fadeIn(500);
             } else {
@@ -416,7 +431,7 @@
                 }
 
                  //initial load enable/disable Discord
-                 if($('#discord_endpoint').val() == "") {
+                 if($('#discord_endpoint').val() == "" && $('#discord_botname').val() == "") {
                     // if field is blank, the user may want to disable MS Teams integration; enable the Save button
                     $('#save_discord').removeAttr('disabled');
                 }
@@ -628,6 +643,7 @@
                 },
                 data: {
                     'discord_endpoint': $('#discord_endpoint').val(),
+                    'discord_botname': $('#discord_botname').val(),
 
                 },
 
