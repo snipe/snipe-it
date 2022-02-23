@@ -87,7 +87,7 @@ class CheckoutLicenseSeatNotification extends Notification
 
     public function toDiscord($notifiable)
     {
-        return $this->toSlack($notifiable);
+        return NotificationIntegrations::slackMessageBuilder($this->item, $this->target, $this->admin, $this->direction, $this->note, $this->expected_checkin, $this->settings->discord_botname);
      }
 
     /**
