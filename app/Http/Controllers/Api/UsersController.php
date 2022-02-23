@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SaveUserRequest;
 use App\Http\Transformers\AccessoriesTransformer;
 use App\Http\Transformers\AssetsTransformer;
+use App\Http\Transformers\ConsumablesTransformer;
 use App\Http\Transformers\LicensesTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use App\Http\Transformers\UsersTransformer;
@@ -446,6 +447,24 @@ class UsersController extends Controller
         $this->authorize('view', Asset::class);
         $assets = Asset::where('assigned_to', '=', $id)->where('assigned_type', '=', User::class)->with('model')->get();
         return (new AssetsTransformer)->transformAssets($assets, $assets->count(), $request);
+    }
+
+
+    /**
+     * Return JSON containing a list of consumables assigned to a user.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @param $userId
+     * @return string JSON
+     */
+    public function consumables(Request $request, $id)
+    {
+        $this->authorize('view', User::class);
+        $this->authorize('view', Consumable::class);
+        $user = User::findOrFail($id);
+        $consumables = $user->consumables;
+        return (new ConsumablesTransformer)->transformConsumables($consumables, $consumables->count(), $request);
     }
 
     /**

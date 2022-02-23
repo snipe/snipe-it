@@ -858,6 +858,13 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'auth:api']
             ]
         );
 
+        Route::get('{user}/consumables',
+            [
+                'as' => 'api.users.consumablelist',
+                'uses' => 'UsersController@consumables'
+            ]
+        );
+
 
         Route::get('{user}/accessories',
             [
