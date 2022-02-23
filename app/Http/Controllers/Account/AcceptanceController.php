@@ -123,7 +123,7 @@ class AcceptanceController extends Controller
     }
 //    Just a heads start, Can't test right now, but kind of the jest of what needs to be here
     public function SignatureEulaPDF($acceptance, $request) {
-        $pdf = PDF::loadView('test.pdf', $acceptance, $request->signature_output);
+        $pdf = PDF::loadView('test.pdf', $acceptance->checkoutable->getEula(), $request->signature_output);
         return $pdf->download('test.pdf');
     }
 }
