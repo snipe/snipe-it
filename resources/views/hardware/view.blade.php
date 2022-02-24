@@ -315,7 +315,7 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                <ul class="list-unstyled" style="line-height: 25px;">
+                                                <ul class="list-unstyled">
                                                     @can('view', \App\Models\Manufacturer::class)
 
                                                         <li>
