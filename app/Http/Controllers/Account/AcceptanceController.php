@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CheckoutAcceptance;
 use App\Models\Company;
 use App\Models\Contracts\Acceptable;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -95,7 +96,6 @@ class AcceptanceController extends Controller
         if (! Storage::exists('private_uploads/signatures')) {
             Storage::makeDirectory('private_uploads/signatures', 775);
         }
-
         $sig_filename = '';
         if ($request->filled('signature_output')) {
             $sig_filename = 'siglog-'.Str::uuid().'-'.date('Y-m-d-his').'.png';
@@ -107,7 +107,6 @@ class AcceptanceController extends Controller
 
         if ($request->input('asset_acceptance') == 'accepted') {
             $acceptance->accept($sig_filename);
-
             event(new CheckoutAccepted($acceptance));
 
             $return_msg = trans('admin/users/message.accepted');
@@ -118,7 +117,21 @@ class AcceptanceController extends Controller
 
             $return_msg = trans('admin/users/message.declined');
         }
+        $sig_image=Storage::get('private_uploads/signatures/'.$sig_filename);
+        $this->SignatureEulaPDF($acceptance, $sig_image );
 
         return redirect()->to('account/accept')->with('success', $return_msg);
+    }
+
+    public function SignatureEulaPDF($acceptance, $sig_image)
+    {
+//        When I compact the $data I at least get back an ipsum string in the error message that is recognized as an
+//        "unknown variable". 2nd param in load view should be the array of things you wanted rendered in the pdf.
+        $data = [
+        'eula'=> $acceptance->checkoutable->getEula(),
+        'signature' => $sig_image,
+        ];
+        $pdf = PDF::loadView('account.accept.create', compact($data));
+        return $pdf->download('test.pdf');
     }
 }
