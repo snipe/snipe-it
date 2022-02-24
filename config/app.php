@@ -425,4 +425,15 @@ return [
 
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | API Throttling
+    |--------------------------------------------------------------------------
+    |
+    | This value determines the number of API requests permitted per minute
+    |
+    */
+
+    'api_throttle_per_minute' => env('API_THROTTLE_PER_MINUTE', 120),
+
 ];

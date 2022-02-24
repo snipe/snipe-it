@@ -11,10 +11,14 @@ use Illuminate\Http\Request;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
+| We *could* put the middleware speficication in the RouteServiceProvider's mapApiRoutes() 
+| method, but we felt it was clearer to keep it here, since we look at the api routes for more
+| often than we look at the RouteServiceProvider. - @snipe
+| 
 */
 
 
-Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'auth:api'], function () {
+Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => ['api', 'throttle:'.config('app.api_throttle_per_minute').',1']], function () {
 
 
     Route::get('/', function() {
