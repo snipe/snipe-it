@@ -124,7 +124,7 @@
                     <li>
                         <a href="#components" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
-                            <i class="far fa-hdd" aria-hidden="true"></i>
+                            <i class="far fa-hdd fa-2x" aria-hidden="true"></i>
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('general.components') }}
                             {!! ($asset->components->count() > 0 ) ? '<badge class="badge badge-secondary">'.$asset->components->count().'</badge>' : '' !!}
@@ -315,7 +315,7 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                <ul class="list-unstyled" style="line-height: 25px;">
+                                                <ul class="list-unstyled">
                                                     @can('view', \App\Models\Manufacturer::class)
 
                                                         <li>
