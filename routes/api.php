@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 
-Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'auth:api'], function () {
+Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => ['api', 'throttle:'.config('app.api_throttle_per_minute').',1']], function () {
 
 
     Route::get('/', function() {
