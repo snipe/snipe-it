@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
+| We *could* put the middleware speficication in the RouteServiceProvider's mapApiRoutes() 
+| method, but we felt it was clearer to keep it here, since we look at the api routes for more
+| often than we look at the RouteServiceProvider. - @snipe
+| 
 */
 
 
