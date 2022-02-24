@@ -1,10 +1,14 @@
 <?php
 
+$allowed_origins = env('CORS_ALLOWED_ORIGINS') !== null ?
+    explode(',', env('CORS_ALLOWED_ORIGINS')) : [];
+
+
 return [
 
     'supportsCredentials' => false,
 
-    'allowedOrigins' => ['*'],
+    'allowedOrigins' => $allowed_origins,
 
     'allowedHeaders' => ['*'],
 

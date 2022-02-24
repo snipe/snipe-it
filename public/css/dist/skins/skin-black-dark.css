@@ -37,7 +37,7 @@
     color: #fff;
   }
   .skin-black-dark .main-header .navbar .dropdown-menu li a {
-    color: #fff;
+    color: #000;
   }
   .skin-black-dark .main-header .navbar .dropdown-menu li a:hover {
     background: #040404;
