@@ -71,7 +71,7 @@ class AssetImporter extends ItemImporter
             $this->log("No Matching Asset, Creating a new one");
             $asset = new Asset;
         }
-
+        $this->item['notes'] = $this->findCsvMatch($row, 'asset_notes');
         $this->item['image'] = $this->findCsvMatch($row, "image");
         $this->item['requestable'] = $this->fetchHumanBoolean($this->findCsvMatch($row, "requestable"));;
         $asset->requestable =  $this->fetchHumanBoolean($this->findCsvMatch($row, "requestable"));
