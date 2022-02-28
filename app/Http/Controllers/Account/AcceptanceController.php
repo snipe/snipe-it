@@ -10,10 +10,12 @@ use App\Http\Controllers\Controller;
 use App\Models\CheckoutAcceptance;
 use App\Models\Company;
 use App\Models\Contracts\Acceptable;
+use FontLib\Table\Type\name;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AcceptanceController extends Controller
 {
@@ -107,7 +109,7 @@ class AcceptanceController extends Controller
 
         if ($request->input('asset_acceptance') == 'accepted') {
             $acceptance->accept($sig_filename);
-
+            $this->SignatureEulaPDF2($id);
             event(new CheckoutAccepted($acceptance));
 
             $return_msg = trans('admin/users/message.accepted');
@@ -122,8 +124,25 @@ class AcceptanceController extends Controller
         return redirect()->to('account/accept')->with('success', $return_msg);
     }
 //    Just a heads start, Can't test right now, but kind of the jest of what needs to be here
-    public function SignatureEulaPDF($acceptance, $request) {
-        $pdf = PDF::loadView('test.pdf', $acceptance->checkoutable->getEula(), $request->signature_output);
-        return $pdf->download('test.pdf');
+    public function SignatureEulaPDF() {
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML('<h1>Hello World</h1>');
+        \Log::info("There should be a Hello World streaming here");
+        return $pdf->stream();
+    }
+    public function SignatureEulaPDF2($id)
+    {
+        $acceptance = CheckoutAcceptance::find($id);
+        $eula=$acceptance->checkoutable->getEula();
+        $data=[
+               'eula'      =>  $eula,
+               'Signature' => 'This is a signature',
+        ];
+        $pdf = PDF::loadView('account.accept.pdf', $data);
+        \Log::info("There should be a Hello World downloading");
+        PDF::setOptions(['dpi' => 150, 'defaultFont' => 'Helvetica']);
+        $x= $pdf->save('/tmp/test.pdf');
+//        \Log::info("the value of x is: ".$x);
+        return $x;
     }
 }
