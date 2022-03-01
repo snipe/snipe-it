@@ -179,12 +179,21 @@ class AuthServiceProvider extends ServiceProvider
         // to the logged in API user, but creating assets, licenses, etc won't work 
         // if the user can't view and interact with the select lists.
         Gate::define('view.selectlists', function ($user) {
-            return $user->can(['create','update'], Asset::class) 
-                || $user->can(['create','update'], License::class)   
-                || $user->can(['create','update'], Component::class)
-                || $user->can(['create','update'], Consumable::class)   
-                || $user->can(['create','update'], Accessory::class)   
-                || $user->can(['create','update'], User::class);   
+            return $user->can('update', Asset::class) 
+                 || $user->can('create', Asset::class)    
+                 || $user->can('checkout', Asset::class)
+                 || $user->can('checkin', Asset::class)
+                 || $user->can('audit', Asset::class)       
+                 || $user->can('update', License::class)   
+                 || $user->can('create', License::class)   
+                 || $user->can('update', Component::class)
+                 || $user->can('create', Component::class)   
+                 || $user->can('update', Consumable::class)   
+                 || $user->can('create', Consumable::class)   
+                 || $user->can('update', Accessory::class)
+                 || $user->can('create', Accessory::class)   
+                 || $user->can('update', User::class)
+                 || $user->can('create', User::class);  
         });
     }
 }
