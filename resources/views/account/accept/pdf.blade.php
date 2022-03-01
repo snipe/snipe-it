@@ -7,9 +7,11 @@
     </div>
     <div>
         <body>
-            {{$eula}}
+        @foreach( $data as $pdf )
+            {{$pdf->eula}}
             <br>
-            {{$Signature}}
+            {{$pdf->Signature}}
+        @endforeach
         </body>
     </div>
 @endsection

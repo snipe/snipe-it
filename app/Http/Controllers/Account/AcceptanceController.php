@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CheckoutAcceptance;
 use App\Models\Company;
 use App\Models\Contracts\Acceptable;
+use Carbon\Carbon;
 use FontLib\Table\Type\name;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -99,6 +100,7 @@ class AcceptanceController extends Controller
         }
 
         $sig_filename = '';
+
         if ($request->filled('signature_output')) {
             $sig_filename = 'siglog-'.Str::uuid().'-'.date('Y-m-d-his').'.png';
             $data_uri = e($request->input('signature_output'));
@@ -109,7 +111,7 @@ class AcceptanceController extends Controller
 
         if ($request->input('asset_acceptance') == 'accepted') {
             $acceptance->accept($sig_filename);
-            $this->SignatureEulaPDF2($id);
+            $this->SignatureEulaPDF2($id, $sig_filename);
             event(new CheckoutAccepted($acceptance));
 
             $return_msg = trans('admin/users/message.accepted');
@@ -123,26 +125,20 @@ class AcceptanceController extends Controller
 
         return redirect()->to('account/accept')->with('success', $return_msg);
     }
-//    Just a heads start, Can't test right now, but kind of the jest of what needs to be here
-    public function SignatureEulaPDF() {
-        $pdf = App::make('dompdf.wrapper');
-        $pdf->loadHTML('<h1>Hello World</h1>');
-        \Log::info("There should be a Hello World streaming here");
-        return $pdf->stream();
-    }
-    public function SignatureEulaPDF2($id)
+//   The data is not being stored in the array properly.
+    public function SignatureEulaPDF2($id, $sig_filename)
     {
         $acceptance = CheckoutAcceptance::find($id);
-        $eula=$acceptance->checkoutable->getEula();
+        $sig_img= Storage::get('private_uploads/signatures/'.$sig_filename);
+        $eula= $acceptance->checkoutable->getEula();
         $data=[
                'eula'      =>  $eula,
-               'Signature' => 'This is a signature',
+               'Signature' =>  $sig_img,
         ];
+        \Log::info($sig_img);
         $pdf = PDF::loadView('account.accept.pdf', $data);
-        \Log::info("There should be a Hello World downloading");
         PDF::setOptions(['dpi' => 150, 'defaultFont' => 'Helvetica']);
-        $x= $pdf->save('/tmp/test.pdf');
-//        \Log::info("the value of x is: ".$x);
-        return $x;
+
+        return $pdf->save('/tmp/'.'_'.rtrim($sig_filename, ".png ").'.pdf');
     }
 }
