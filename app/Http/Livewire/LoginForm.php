@@ -38,11 +38,14 @@ class LoginForm extends Component
             $this->can_submit = false;
         } 
 
-        $this->validateOnly($fields);
-    
-        $this->can_submit = true;
-        
+        $whatever = $this->validateOnly($fields);
+        //\Log::info(print_r($whatever,true));
 
+        $errors = $this->getErrorBag();
+
+        $this->can_submit = $this->username !== "" && $this->password !== "" && !$errors->has('username') && !$errors->has('password') ; // wait, what?
+        
+        \Log::info("Oy - can we submit yet?!".$this->can_submit);
     }
     
     /**
@@ -58,7 +61,7 @@ class LoginForm extends Component
     public function submitForm()
     {
         
-        $this->can_submit = true;
+        //$this->can_submit = true;
         
         if (auth()->attempt($this->validate())) {
             return redirect()->intended('/');

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'פָּעִיל',
     'allow'  				=> 'להתיר',
     'checkedout'  			=> 'נכסים',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'הצג משתמשים נוכחיים',
     'show_deleted'          => 'הצג משתמשים שנמחקו',
     'title' 				=> 'כותרת',
-    'to_restore_them'		=> 'כדי לשחזר אותם.',
+	'to_restore_them'		=> 'כדי לשחזר אותם.',
     'updateuser' 			=> 'עדכן משתמש',
     'username' 				=> 'שם משתמש',
-    'user_deleted_text' 	=> 'משתמש זה סומן כממחק.',
+	'user_deleted_text' 	=> 'משתמש זה סומן כממחק.',
     'username_note' 		=> '(זה משמש רק עבור Active Directory מחייב, לא עבור התחברות.)',
     'cloneuser'             => 'משתמש משוכפל',
     'viewusers' 			=> 'הצג משתמשים',
-];
+);

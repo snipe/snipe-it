@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'create'				=> '新增資產樣板',
     'created_at' 			=> '新增於',
@@ -14,4 +14,4 @@ return [
     'update'				=> '更新資產樣板',
     'clone'				=> '複製樣板',
     'edit'				=> '編輯樣板',
-];
+);

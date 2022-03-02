@@ -1,5 +1,4 @@
 @extends('layouts/default')
-
 {{-- Page title --}}
 @section('title')
 	@if ($user->id)
@@ -76,8 +75,8 @@
         <!-- Custom Tabs -->
       <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
-          <li class="active"><a href="#tab_1" data-toggle="tab">Information</a></li>
-          <li><a href="#permissions" data-toggle="tab">Permissions</a></li>
+          <li class="active"><a href="#tab_1" data-toggle="tab">{{ trans('general.information') }} </a></li>
+          <li><a href="#permissions" data-toggle="tab">{{ trans('general.permissions') }} </a></li>
         </ul>
 
         <div class="tab-content">
@@ -122,7 +121,7 @@
                         <p class="help-block">{{ trans('admin/users/table.lock_passwords') }}</p>
                       @endif
                     @else
-                      (Managed via LDAP)
+                      {{ trans('general.managed_ldap') }}
                           <input type="hidden" name="username" value="{{ Request::old('username', $user->username) }}">
 
                     @endif
@@ -149,14 +148,14 @@
                         onfocus="this.removeAttribute('readonly');"
                         {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
                     @else
-                      (Managed via LDAP)
+                      {{ trans('general.managed_ldap') }}
                     @endif
                     <span id="generated-password"></span>
                     {!! $errors->first('password', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                   </div>
                   <div class="col-md-2">
                     @if ($user->ldap_import!='1')
-                      <a href="#" class="left" id="genPassword">Generate</a>
+                      <a href="#" class="left" id="genPassword">{{ trans('general.generate') }}</a>
                     @endif
                   </div>
                 </div>
@@ -200,7 +199,7 @@
                                   <div class="icheckbox disabled" style="padding-left: 10px;">
                                       <input type="checkbox" value="1" name="activated" class="minimal disabled" {{ (old('activated', $user->activated)) == '1' ? ' checked="checked"' : '' }} disabled="disabled" aria-label="activated">
                                       <!-- this is necessary because the field is disabled and will reset -->
-                                      <input type="hidden" name="activated" value="{{ $user->activated }}">
+                                      <input type="hidden" name="activated" value="{{ (int)$user->activated }}">
                                       {{ trans('admin/users/general.activated_help_text') }}
                                       <p class="help-block">{{ trans('general.feature_disabled') }}</p>
 
@@ -301,7 +300,7 @@
 
                 <!-- Employee Number -->
                 <div class="form-group {{ $errors->has('employee_num') ? 'has-error' : '' }}">
-                  <label class="col-md-3 control-label" for="employee_num">{{ trans('admin/users/table.employee_num') }}</label>
+                  <label class="col-md-3 control-label" for="employee_num">{{ trans('general.employee_number') }}</label>
                   <div class="col-md-6">
                     <input
                       class="form-control"
@@ -472,7 +471,7 @@
                                   </ul>
                               @endif
 
-                              <span class="help-block">Only superadmins may edit group memberships.</p>
+                              <span class="help-block">{{ trans('admin/users/general.group_memberships_helpblock') }}</p>
                                   @else
                                       <div class="controls">
                         <select
@@ -507,21 +506,21 @@
           <div class="tab-pane" id="permissions">
             <div class="col-md-12">
               @if (!Auth::user()->isSuperUser())
-                <p class="alert alert-warning">Only superadmins may grant a user superadmin access.</p>
+                <p class="alert alert-warning">{{ trans('admin/users/general.superadmin_permission_warning') }}</p>
               @endif
 
               @if (!Auth::user()->hasAccess('admin'))
-                <p class="alert alert-warning">Only users with admins rights or greater may grant a user admin access.</p>              
+                <p class="alert alert-warning">{{ trans('admin/users/general.admin_permission_warning') }}</p>
               @endif
             </div>
 
             <table class="table table-striped permissions">
               <thead>
                 <tr class="permissions-row">
-                  <th class="col-md-5">Permission</th>
-                  <th class="col-md-1">Grant</th>
-                  <th class="col-md-1">Deny</th>
-                  <th class="col-md-1">Inherit</th>
+                  <th class="col-md-5">{{ trans('admin/groups/titles.permission') }}</th>
+                  <th class="col-md-1">{{ trans('admin/groups/titles.grant') }}</th>
+                  <th class="col-md-1">{{ trans('admin/groups/titles.deny') }}</th>
+                  <th class="col-md-1">{{ trans('admin/users/table.inherit') }}</th>
                 </tr>
               </thead>
                 @include('partials.forms.edit.permissions-base')

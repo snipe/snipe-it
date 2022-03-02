@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Ativo',
     'allow'  				=> 'Permitir',
     'checkedout'  			=> 'Artigos',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Mostrar Utilizadores Ativos',
     'show_deleted'          => 'Mostrar Utilizadores Removidos',
     'title' 				=> 'Título',
-    'to_restore_them'		=> 'para restaurá-los.',
+	'to_restore_them'		=> 'para restaurá-los.',
     'updateuser' 			=> 'Atualizar utilizador',
     'username' 				=> 'Nome de utilizador',
-    'user_deleted_text' 	=> 'Este usuário foi marcado como excluído.',
+	'user_deleted_text' 	=> 'Este usuário foi marcado como excluído.',
     'username_note' 		=> '(Isto é usado apenas para vinculação com a Active Directory, para para login)',
     'cloneuser'             => 'Clonar Utilizador',
     'viewusers' 			=> 'Ver Utilizadores',
-];
+);

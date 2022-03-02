@@ -1,10 +1,10 @@
 @component('mail::message')
 # {{ trans('mail.hello') }},
 
-The following {{ $assets->count() }} items are due to be checked in soon:
+{{ trans('general.due_to_checkin', array('count' => $assets->count())) }}
 
 @component('mail::table')
-| Asset | Checked Out to | Expected Checkin |
+| {{ trans('general.assets') }} | {{ trans('general.checked_out_to') }} | {{ trans('general.expected_checkin') }} |
 | ------------- | ------------- | ------------- |
 @foreach ($assets as $asset)
 @php

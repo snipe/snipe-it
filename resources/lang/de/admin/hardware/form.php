@@ -40,4 +40,10 @@ return [
     'warranty'			=> 'Garantie',
         'warranty_expires'		=> 'Garantie Ablaufdatum',
     'years'				=> 'Jahre',
+    'asset_location' => 'Standort des Assets aktualisieren',
+    'asset_location_update_default_current' => 'Standardort und aktuellen Standort aktualisieren',
+    'asset_location_update_default' => 'Nur den Standardort aktualisieren',
+    'asset_not_deployable' => 'Dieses Asset ist nicht verfügbar und kann nicht herausgegeben werden.',
+    'asset_deployable' => 'Dieses Asset ist verfügbar und kann herausgegeben werden.',
+    'processing_spinner' => 'Wird verarbeitet...',
 ];

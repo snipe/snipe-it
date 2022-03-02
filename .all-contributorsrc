@@ -2479,10 +2479,109 @@
       ]
     },
     {
+      "login": "leitwerk-ag",
+      "name": "LEITWERK AG",
+      "avatar_url": "https://avatars.githubusercontent.com/u/24418301?v=4",
+      "profile": "https://www.leitwerk.de/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "adamboutcher",
+      "name": "Adam",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1911435?v=4",
+      "profile": "http://www.aboutcher.co.uk",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "sneak-it",
+      "name": "Ian",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16104273?v=4",
+      "profile": "https://snksrv.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "bestlong",
+      "name": "Shao Yu-Lung (Allen)",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4023909?v=4",
+      "profile": "http://blog.bestlong.idv.tw/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Haxatron",
+      "name": "Haxatron",
+      "avatar_url": "https://avatars.githubusercontent.com/u/76475453?v=4",
+      "profile": "https://github.com/Haxatron",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "PlaneNuts",
       "name": "PlaneNuts",
       "avatar_url": "https://avatars.githubusercontent.com/u/88776392?v=4",
       "profile": "https://github.com/PlaneNuts",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "exula",
+      "name": "Bradley Coudriet",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3842948?v=4",
+      "profile": "http://bjcpgd.cias.rit.edu",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "UniversalSuperBox",
+      "name": "Dalton Durst",
+      "avatar_url": "https://avatars.githubusercontent.com/u/21966173?v=4",
+      "profile": "https://daltondur.st",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "adagioajanes",
+      "name": "Alex Janes",
+      "avatar_url": "https://avatars.githubusercontent.com/u/38761237?v=4",
+      "profile": "https://adagiohealth.org",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "nuraeil",
+      "name": "Nuraeil",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32387849?v=4",
+      "profile": "https://github.com/nuraeil",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "TenOfTens",
+      "name": "TenOfTens",
+      "avatar_url": "https://avatars.githubusercontent.com/u/48162670?v=4",
+      "profile": "https://github.com/TenOfTens",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "insert-waffle",
+      "name": "waffle",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9415391?v=4",
+      "profile": "https://ditisjens.be/",
       "contributions": [
         "code"
       ]

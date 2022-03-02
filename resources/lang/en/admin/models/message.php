@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Model does not exist.',
     'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
@@ -38,4 +38,4 @@ return [
         'success_partial' 	=> ':success_count model(s) were deleted, however :fail_count were unable to be deleted because they still have assets associated with them.',
     ],
 
-];
+);

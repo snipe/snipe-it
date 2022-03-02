@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'Šos līdzekļus nevar nodot nevienam.',
-        'deployable'   => 'Šos aktīvus var pārbaudīt. Kad tie ir piešķirti, viņi uzņemsies meta statusu <i class="fas fa-circle text-blue"></i> <strong>detalizēti</strong>.',
+        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
         'archived'   => 'Šos līdzekļus nevar pārbaudīt, un tie tiks parādīti tikai arhivētajā skatā. Tas ir noderīgi, lai saglabātu informāciju par aktīviem budžetam / vēsturiskiem mērķiem, bet tos saglabātu ikdienas aktīvu sarakstā.',
         'pending'   => 'Šos aktīvus vēl nevar piešķirt ikvienam, bieži tos izmanto priekšmetos, kas paredzēti remontam, bet tiek sagaidīts, ka tie atgriezīsies apgrozībā.',
     ],

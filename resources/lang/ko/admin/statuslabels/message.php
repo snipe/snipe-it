@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => '이러한 자산은 누구에게도 할당 할 수 없습니다.',
-        'deployable'   => '이러한 자산은 체크 아웃 할 수 있습니다. 할당되면 <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>의 메타 상태로 가정합니다.',
+        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
         'archived'   => '이러한 애셋은 체크 아웃 할 수 없으며 보관 된보기에만 표시됩니다. 이는 예산 / 역사적 목적을 위해 자산에 대한 정보를 보유하지만 일상적인 자산 목록에서 유지하는 데 유용합니다.',
         'pending'   => '이러한 자산은 아직 수리를 위해 나가는 품목에 자주 사용되지만 누구에게나 할당 될 수는 없지만 유통에 회부 될 것으로 예상됩니다.',
     ],

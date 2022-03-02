@@ -72,8 +72,8 @@ class ManufacturersController extends Controller
         if ($manufacturer->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $manufacturer, trans('admin/manufacturers/message.create.success')));
         }
-
         return response()->json(Helper::formatStandardApiResponse('error', null, $manufacturer->getErrors()));
+
     }
 
     /**
@@ -131,11 +131,11 @@ class ManufacturersController extends Controller
 
         if ($manufacturer->isDeletable()) {
             $manufacturer->delete();
-
-            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/manufacturers/message.delete.success')));
+            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/manufacturers/message.delete.success')));
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/manufacturers/message.assoc_users')));
+        return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/manufacturers/message.assoc_users')));
+
     }
 
     /**
@@ -147,6 +147,8 @@ class ManufacturersController extends Controller
      */
     public function selectlist(Request $request)
     {
+
+        $this->authorize('view.selectlists');
         $manufacturers = Manufacturer::select([
             'id',
             'name',

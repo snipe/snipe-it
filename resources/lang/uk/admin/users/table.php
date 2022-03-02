@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Active',
     'allow'  				=> 'Дозволити',
     'checkedout'  			=> 'Активи',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Показати поточних користувачів',
     'show_deleted'          => 'Показати видалених користувачів',
     'title' 				=> 'Назва',
-    'to_restore_them'		=> 'щоб відновити їх.',
+	'to_restore_them'		=> 'щоб відновити їх.',
     'updateuser' 			=> 'Оновити користувача',
     'username' 				=> 'Ім\'я кристувача',
-    'user_deleted_text' 	=> 'Цього користувача було позначено видаленим.',
+	'user_deleted_text' 	=> 'Цього користувача було позначено видаленим.',
     'username_note' 		=> '(This is used for Active Directory binding only, not for login.)',
     'cloneuser'             => 'Клонувати користувача',
     'viewusers' 			=> 'Переглянути користувачів',
-];
+);

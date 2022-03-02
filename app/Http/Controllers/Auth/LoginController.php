@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use App\Models\User;
-use App\Services\LdapAd;
+use App\Models\Ldap;
 use App\Services\Saml;
 use Com\Tecnick\Barcode\Barcode;
 use Google2FA;
@@ -40,11 +40,6 @@ class LoginController extends Controller
     protected $redirectTo = '/';
 
     /**
-     * @var LdapAd
-     */
-    protected $ldap;
-
-    /**
      * @var Saml
      */
     protected $saml;
@@ -52,12 +47,11 @@ class LoginController extends Controller
     /**
      * Create a new authentication controller instance.
      *
-     * @param LdapAd $ldap
      * @param Saml $saml
      *
      * @return void
      */
-    public function __construct(/*LdapAd $ldap, */ Saml $saml)
+    public function __construct(Saml $saml)
     {
         parent::__construct();
         $this->middleware('guest', ['except' => ['logout', 'postTwoFactorAuth', 'getTwoFactorAuth', 'getTwoFactorEnroll']]);
@@ -72,6 +66,12 @@ class LoginController extends Controller
         $this->loginViaSaml($request);
         if (Auth::check()) {
             return redirect()->intended('/');
+        }
+
+        //If the environment is set to ALWAYS require SAML, go straight to the SAML route.
+        //We don't need to check other settings, as this should override those.
+        if(config('app.require_saml')) {
+            return redirect()->route('saml.login');
         }
 
         if ($this->saml->isEnabled() && Setting::getSettings()->saml_forcelogin == '1' && ! ($request->has('nosaml') || $request->session()->has('error'))) {
@@ -141,13 +141,47 @@ class LoginController extends Controller
      */
     private function loginViaLdap(Request $request): User
     {
-        $ldap = \App::make(LdapAd::class);
-        try {
-            return $ldap->ldapLogin($request->input('username'), $request->input('password'));
-        } catch (\Exception $ex) {
-            LOG::debug('LDAP user login: '.$ex->getMessage());
-            throw new \Exception($ex->getMessage());
-        }
+        Log::debug("Binding user to LDAP.");
+         $ldap_user = Ldap::findAndBindUserLdap($request->input('username'), $request->input('password'));
+         if (!$ldap_user) {
+             Log::debug("LDAP user ".$request->input('username')." not found in LDAP or could not bind");
+             throw new \Exception("Could not find user in LDAP directory");
+         } else {
+             Log::debug("LDAP user ".$request->input('username')." successfully bound to LDAP");
+         }
+
+         // Check if the user already exists in the database and was imported via LDAP
+         $user = User::where('username', '=', $request->input('username'))->whereNull('deleted_at')->where('ldap_import', '=', 1)->where('activated', '=', '1')->first(); // FIXME - if we get more than one we should fail. and we sure about this ldap_import thing?
+         Log::debug("Local auth lookup complete");
+
+         // The user does not exist in the database. Try to get them from LDAP.
+         // If user does not exist and authenticates successfully with LDAP we
+         // will create it on the fly and sign in with default permissions
+         if (!$user) {
+             Log::debug("Local user ".$request->input('username')." does not exist");
+             Log::debug("Creating local user ".$request->input('username'));
+
+             if ($user = Ldap::createUserFromLdap($ldap_user)) { //this handles passwords on its own
+                 Log::debug("Local user created.");
+             } else {
+                 Log::debug("Could not create local user.");
+                 throw new \Exception("Could not create local user");
+             }
+             // If the user exists and they were imported from LDAP already
+         } else {
+             Log::debug("Local user ".$request->input('username')." exists in database. Updating existing user against LDAP.");
+
+             $ldap_attr = Ldap::parseAndMapLdapAttributes($ldap_user);
+
+            if (Setting::getSettings()->ldap_pw_sync=='1') {
+                $user->password = bcrypt($request->input('password'));
+            }
+            $user->email = $ldap_attr['email'];
+            $user->first_name = $ldap_attr['firstname'];
+            $user->last_name = $ldap_attr['lastname']; //FIXME (or TODO?) - do we need to map additional fields that we now support? E.g. country, phone, etc.
+            $user->save();
+        } // End if(!user)
+        return $user;
     }
 
     private function loginViaRemoteUser(Request $request)
@@ -201,6 +235,11 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
+        //If the environment is set to ALWAYS require SAML, return access denied
+        if(config('app.require_saml')) {
+            return view('errors.403');
+        }
+
         if (Setting::getSettings()->login_common_disabled == '1') {
             return view('errors.403');
         }
@@ -262,6 +301,7 @@ class LoginController extends Controller
         // Redirect to the users page
         return redirect()->intended()->with('success', trans('auth/message.signin.success'));
     }
+
 
     /**
      * Two factor enrollment page
@@ -363,13 +403,14 @@ class LoginController extends Controller
         if (Google2FA::verifyKey($user->two_factor_secret, $secret)) {
             $user->two_factor_enrolled = 1;
             $user->save();
-            $request->session()->put('2fa_authed', 'true');
+            $request->session()->put('2fa_authed', $user->id);
 
             return redirect()->route('home')->with('success', 'You are logged in!');
         }
 
         return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.invalid_code'));
     }
+
 
     /**
      * Logout page.
@@ -416,6 +457,7 @@ class LoginController extends Controller
 
         return redirect()->route('login')->with(['success' => trans('auth/message.logout.success'), 'loggedout' => true]);
     }
+
 
     /**
      * Get a validator for an incoming registration request.

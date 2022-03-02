@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'component_name'                  => 'Ime komponente',
     'checkin'                             => 'Prevzem komponent',
     'checkout'                             => 'Izdaja komponent',
@@ -12,4 +12,4 @@ return [
     'remaining' 			             => 'Ostanek',
     'total' 			                 => 'Skupaj',
     'update'                            => 'Posodobi komponento',
-];
+);

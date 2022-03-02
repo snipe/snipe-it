@@ -10,5 +10,7 @@ return [
     'group_admin' 	 		=> 'Admin Kelompok',
     'allow' 	 			=> 'Izin',
     'deny' 	 				=> 'Tolak',
-
+    'permission'            => 'Permission',
+    'grant'                 => 'Grant',
+    'no_permissions'        => 'This group has no permissions.'
 ];

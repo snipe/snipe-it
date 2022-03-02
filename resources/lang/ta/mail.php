@@ -59,7 +59,7 @@ return [
     'test_mail_text' => 'இது Snipe-IT சொத்து முகாமைத்துவ கணினியிலிருந்து ஒரு சோதனை ஆகும். இதை நீங்கள் பெற்றிருந்தால், மின்னஞ்சல் வேலை செய்கிறது :)',
     'the_following_item' => 'பின்வரும் உருப்படி பின்வருமாறு சரிபார்க்கப்பட்டது:',
     'low_inventory_alert' => 'There is :count item that is below minimum inventory or will soon be low.|There are :count items that are below minimum inventory or will soon be low.',
-    'assets_warrantee_alert' => 'There is :count asset with a warrantee expiring in the next :threshold days.|There are :count assets with warrantees expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'to_reset' => 'உங்கள் கடவுச்சொல்லை மீட்டமைக்க, இந்த படிவத்தை பூர்த்தி செய்க:',
     'type' => 'வகை',

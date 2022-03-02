@@ -47,7 +47,7 @@ class SettingFactory extends Factory
             'alerts_enabled' => true,
             'brand' => 1,
             'default_currency' => $this->faker->currencyCode,
-            'locale' => $this->faker->locale,
+            'locale' => 'en',
             'pwd_secure_min' => 10, // Match web setup
             'email_domain' => 'test.com',
         ];

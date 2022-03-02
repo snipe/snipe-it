@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Uwaga: </strong> To aktywo zostało oznaczone jako tymczasowo niemożliwe do wdrożenia.
                         Jeśli jego stan się zmienił, zaktualizuj status aktywa.',
     'does_not_exist' 	=> 'Nabytek/zasób nie istnieje.',
-    'does_not_exist_or_not_requestable' => 'Niezła próba. Ten nabytek/zasób nie istnieje lub nie można go zażądać.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Ten nabytek/zasób jest przypisany do użytkownika i nie może być usunięty. Proszę sprawdzić przypisanie nabytków/zasobów a następnie spróbować ponownie.',
 
     'create' => [
@@ -29,6 +29,7 @@ return [
         'success' 		=> 'Audyt aktywów pomyślnie zarejestrowany.',
     ],
 
+
     'deletefile' => [
         'error'   => 'Plik nie zostały usunięte. Spróbuj ponownie.',
         'success' => 'Plik zostały usunięty.',
@@ -48,6 +49,7 @@ return [
         'file_delete_success'   => 'Twój plik został poprawnie usunięty',
         'file_delete_error'      => 'Plik nie może zostać usunięty',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Czy na pewno chcesz usunąć?',

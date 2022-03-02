@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about'      	=> '关于状态标签',
     'archived'      	=> '已存档',
     'create'      	=> '创建状态标签',
@@ -16,4 +16,4 @@ return [
     'title'      	=> '状态标签',
     'undeployable'  => '无法部署',
     'update'      	=> '更新状态标签',
-];
+);

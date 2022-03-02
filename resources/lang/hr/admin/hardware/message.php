@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Upozorenje: </strong> Ova je snimka označena kao trenutno nedjeljiva. Ako se ovaj status promijenio, ažurirajte status aktive.',
     'does_not_exist' 	=> 'Imovina ne postoji.',
-    'does_not_exist_or_not_requestable' => 'Dobar pokušaj. Ta imovina ne postoji ili nije potrebna.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Ovaj je entitet trenutno provjeren korisniku i ne može se izbrisati. Najprije provjerite snimljeni materijal, a zatim pokušajte ponovo ukloniti.',
 
     'create' => [
@@ -28,6 +28,7 @@ return [
         'success' 		=> 'Uspjeh uspješno prijavljen.',
     ],
 
+
     'deletefile' => [
         'error'   => 'Datoteka nije izbrisana. Molim te pokušaj ponovno.',
         'success' => 'Datoteka je uspješno obrisana.',
@@ -47,6 +48,7 @@ return [
         'file_delete_success'   => 'Vaša je datoteka uspješno izbrisana',
         'file_delete_error'      => 'Datoteka nije mogla biti izbrisana',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Jeste li sigurni da želite izbrisati ovaj materijal?',

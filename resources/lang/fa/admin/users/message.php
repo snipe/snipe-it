@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'accepted'                  => 'دارایی با موفقیت پذیرفته شد.',
     'declined'                  => 'شما با موفقیت این دارایی را به کاهش دادید.',
@@ -13,8 +13,10 @@ return [
     'user_deleted_warning'      => 'این کاربر حذف شده است.شما باید این کاربر را بازگردانی و آنها را ویرایش و دارایی به آنها اختصاص دهید.',
     'ldap_not_configured'        => 'LDAPبرای این نصب و راه اندازی پیکربندی نشده است.',
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
+    'password_reset_sent'       => 'A password reset link has been sent to :email!',
 
-    'success' => [
+
+    'success' => array(
         'create'    => 'کاربر با موفقیت ایجاد شد.',
         'update'    => 'کاربر با موفقیت به روز شد.',
         'update_bulk'    => 'کاربران با موفقیت به روز شد!',
@@ -25,9 +27,9 @@ return [
         'unsuspend' => 'تعلیق کاربر با موفقیت متوقف شد.',
         'restored'  => 'کابر با موفقیت بازگردانی شد.',
         'import'    => 'کاربران با موفقیت وارد شدند.',
-    ],
+    ),
 
-    'error' => [
+    'error' => array(
         'create' => 'اشکال در ایجاد کاربر.لطفا دوباره تلاش کنید.',
         'update' => 'اشکال در به روزرسانی کاربر.لطفا دوباره تلاش کنید.',
         'delete' => 'اشکال در حذف کاربر.لطفا دوباره تلاش کنید.',
@@ -42,18 +44,18 @@ return [
         'ldap_could_not_search' => 'جستجو در سرور LDPA انجام نشد.لطفا پیکربندی LDPA سرور را در فایل LDPA config بررسی کنید.<br>اشکال از سرور LDPA:',
         'ldap_could_not_get_entries' => 'مجوز از سرور LDPA گرفته نشد.لطفا پیکربندی LDPA سرور را در فایل LDPA config بررسی کنید.<br>اشکال از سرور LDPA:',
         'password_ldap' => 'رمز عبور این حساب توسط LDAP / Active Directory مدیریت می شود. برای تغییر رمز عبور خود، لطفا با بخش IT خود تماس بگیرید.',
-    ],
+    ),
 
-    'deletefile' => [
+    'deletefile' => array(
         'error'   => 'فایل حذف نشد.لطفا دوباره تلاش کنید.',
         'success' => 'نقش با موفقیت حذف شد.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'فایل(ها) بارگذاری نشدند.لطفا دوباره تلاش کنید.',
         'success' => 'فایل(ها) با موفقیت بارگذاری شدند.',
         'nofiles' => 'شما هیچ فایلی برای بارگذاری انتخاب نکرده اید.',
         'invalidfiles' => 'یک یا چندی از فایل های شما با پسوند غیرمجاز هستند.پسوند های مجاز شامل:png, gif, jpg, doc, docx, pdf و text می باشند.',
-    ],
+    ),
 
-];
+);

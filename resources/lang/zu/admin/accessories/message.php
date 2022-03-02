@@ -1,36 +1,37 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'The accessory [:id] does not exist.',
     'assoc_users'	 => 'Lesi sesekeli samanje sino: ukubala izinto ezihlolwe kubasebenzisi. Sicela uhlole izesekeli bese uzama futhi.',
 
-    'create' => [
+    'create' => array(
         'error'   => 'Impahla ayidalwanga, sicela uzame futhi.',
-        'success' => 'I-accessory yenziwe ngempumelelo.',
-    ],
+        'success' => 'I-accessory yenziwe ngempumelelo.'
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Isesekeli asizange sibuyekezwe, sicela uzame futhi',
-        'success' => 'I-accessory ibuyekezwe ngempumelelo.',
-    ],
+        'success' => 'I-accessory ibuyekezwe ngempumelelo.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Ingabe uqinisekile ukuthi ufisa ukususa le ndawo yokufinyelela?',
         'error'   => 'Kube nenkinga yokususa i-accessory. Ngicela uzame futhi.',
-        'success' => 'Isesekeli sisusiwe ngempumelelo.',
-    ],
+        'success' => 'Isesekeli sisusiwe ngempumelelo.'
+    ),
 
-     'checkout' => [
+     'checkout' => array(
         'error'   		=> 'Ukufinyelela akuzange kuhlolwe, sicela uzame futhi',
         'success' 		=> 'Ukufinyelela kufakwe ngempumelelo.',
-        'user_does_not_exist' => 'Lo msebenzisi awuvumelekile. Ngicela uzame futhi.',
-    ],
+        'user_does_not_exist' => 'Lo msebenzisi awuvumelekile. Ngicela uzame futhi.'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   		=> 'Ukufinyelela akuzange kungenwe, sicela uzame futhi',
         'success' 		=> 'Okufinyeleleka kuhlolwe ngempumelelo.',
-        'user_does_not_exist' => 'Lo msebenzisi awuvumelekile. Ngicela uzame futhi.',
-    ],
+        'user_does_not_exist' => 'Lo msebenzisi awuvumelekile. Ngicela uzame futhi.'
+    )
 
-];
+
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'asset'             => 'Vahend',
     'checkin'           => 'Checkin',
@@ -18,5 +18,5 @@ return [
     'to_email'          => 'Litsenseeritud e-mailile',
     'to_name'           => 'Litsenseeritud nimele',
     'update'            => 'Muuda litsentsi',
-    'checkout_help'     => 'Peate litsentsi kontrollima riistvara vara või isiku jaoks. Võite valida mõlemad, kuid vara omanik peab sobima selle isikuga, kellele vara kontrollitakse.',
-];
+    'checkout_help'     => 'Peate litsentsi kontrollima riistvara vara või isiku jaoks. Võite valida mõlemad, kuid vara omanik peab sobima selle isikuga, kellele vara kontrollitakse.'
+);

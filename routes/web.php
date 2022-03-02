@@ -60,7 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
     */
 
     Route::group(['prefix' => 'manufacturers', 'middleware' => ['auth']], function () {
-        Route::get('{manufacturers_id}/restore', [ManufacturersController::class, 'restore'] )->name('restore/manufacturer');
+        Route::post('{manufacturers_id}/restore', [ManufacturersController::class, 'restore'] )->name('restore/manufacturer');
     });
 
     Route::resource('manufacturers', ManufacturersController::class, [
@@ -259,7 +259,7 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
         'requestable-assets',
         [ViewAssetsController::class, 'getRequestableIndex']
     )->name('requestable-assets');
-    Route::get(
+    Route::post(
         'request-asset/{assetId}',
         [ViewAssetsController::class, 'getRequestAsset']
     )->name('account/request-asset');

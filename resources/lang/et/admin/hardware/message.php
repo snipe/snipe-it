@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Teenindus: </strong> See vara on märgitud kui praegu kasutatav. Kui see olek on muutunud, palun värskendage vara olekut.',
     'does_not_exist' 	=> 'Vahend puudub.',
-    'does_not_exist_or_not_requestable' => 'Hea katse. Seda vara ei eksisteeri või see ei ole kohustuslik.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Seda vara kontrollitakse kasutajale praegu ja seda ei saa kustutada. Esmalt kontrollige varast ja proovige seejärel uuesti kustutada.',
 
     'create' => [
@@ -28,6 +28,7 @@ return [
         'success' 		=> 'Varakontrolli sisselogimisel.',
     ],
 
+
     'deletefile' => [
         'error'   => 'Faili pole kustutatud. Palun proovi uuesti.',
         'success' => 'Fail edukalt kustutatud.',
@@ -47,6 +48,7 @@ return [
         'file_delete_success'   => 'Teie fail on edukalt kustutatud',
         'file_delete_error'      => 'Faili ei saanud kustutada',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Kas olete kindel, et soovite selle vara kustutada?',

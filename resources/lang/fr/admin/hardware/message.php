@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Attention: </strong> Ce bien a été marqué non déployable.
                         Si ce statut a changé, veuillez l\'actualiser.',
     'does_not_exist' 	=> 'Ce bien n\'existe pas.',
-    'does_not_exist_or_not_requestable' => 'Cet actif n\'existe pas ou ne peux pas être réquisitionné.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Ce bien est marqué sorti par un utilisateur et ne peut être supprimé. Veuillez d\'abord cliquer sur Retour de Biens, et réessayer.',
 
     'create' => [
@@ -29,6 +29,7 @@ return [
         'success' 		=> 'Audit des actifs consigné avec succès.',
     ],
 
+
     'deletefile' => [
         'error'   => 'Le fichier n\'a pas été détruit. Veuillez réessayer.',
         'success' => 'Fichier détruit correctement.',
@@ -48,6 +49,7 @@ return [
         'file_delete_success'   => 'Votre fichier a été correctement supprimé',
         'file_delete_error'      => 'Le fichier n’a pas pu être supprimé',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Etes-vous sûr de vouloir supprimer ce bien?',

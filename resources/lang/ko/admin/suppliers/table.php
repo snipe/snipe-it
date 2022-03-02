@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_suppliers_title' => '공급자란',
     'about_suppliers_text'  => '공급자는 품목의 원천을 추적할 때 사용된다',
     'address'               => '공급자 주소',
@@ -24,4 +24,4 @@ return [
     'view_assets_for'       => '자산 보기',
     'zip'                   => '우편번호',
 
-];
+);

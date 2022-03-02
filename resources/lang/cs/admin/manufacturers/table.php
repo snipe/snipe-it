@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_manufacturers_title'    => 'O výrobcích',
     'about_manufacturers_text'  => 'Výrobci jsou společnosti, které vytvářejí váš majetek. Zde můžete uložit důležitá kontaktní informace o podpoře, která se zobrazí na stránkách s podrobnostmi o majetku.',
     'asset_manufacturers'	=> 'Výrobci',
@@ -13,4 +13,4 @@ return [
     'update'				=> 'Upravit Výrobce',
     'url'   				=> 'URL',
 
-];
+);

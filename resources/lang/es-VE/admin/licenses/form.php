@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'asset'             => 'Activo',
     'checkin'           => 'Registro',
@@ -18,5 +18,5 @@ return [
     'to_email'          => 'Licenciado al Correo Electrónico',
     'to_name'           => 'Licenciado a Nombre',
     'update'            => 'Actualizar Licencia',
-    'checkout_help'     => 'Debes asignar una licencia a un activo de hardware o a una persona. Puedes seleccionar ambos pero el dueño del activo debe coincidir con la persona a la que le registras el activo.',
-];
+    'checkout_help'     => 'Debes asignar una licencia a un activo de hardware o a una persona. Puedes seleccionar ambos pero el dueño del activo debe coincidir con la persona a la que le registras el activo.'
+);

@@ -10,5 +10,7 @@ return [
     'group_admin' 	 		=> 'Csoport Admin-ok',
     'allow' 	 			=> 'Engedélyezés',
     'deny' 	 				=> 'Elutasítás',
-
+    'permission'            => 'Permission',
+    'grant'                 => 'Grant',
+    'no_permissions'        => 'This group has no permissions.'
 ];

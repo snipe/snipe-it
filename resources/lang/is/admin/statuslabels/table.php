@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about'      	=> 'About Status Labels',
     'archived'      	=> 'Safnvistað',
     'create'      	=> 'Create Status Label',
@@ -16,4 +16,4 @@ return [
     'title'      	=> 'Status Labels',
     'undeployable'  => 'Ónothæfar',
     'update'      	=> 'Update Status Label',
-];
+);

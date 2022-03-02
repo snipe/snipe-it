@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'assigned_to'   	=> 'Atanan',
     'checkout'   		=> 'Giriş/Çıkış',
@@ -14,4 +14,4 @@ return [
     'serial'   			=> 'Seri No',
     'title'      		=> 'Lisans',
 
-];
+);

@@ -59,7 +59,7 @@ return [
     'test_mail_text' => 'Ini adalah uji coba dari Snipe-IT Asset Management System. Jika Anda mendapatkan ini, mail sedang bekerja :)',
     'the_following_item' => 'Item berikut telah diperiksa: ',
     'low_inventory_alert' => 'Ada :count item yang di bawah minimum persediaan atau akan segera habis.|Ada :count item yang di bawah minimum persediaan atau akan segera habis.',
-    'assets_warrantee_alert' => 'Ada :count aset yang masa garansinya tinggal :threshold hari lagi.|Ada :count aset yang garansinya tinggal :threshold hari lagi.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'Ada :count lisensi yang masa berlakunya akan habis dalam :threshold hari.|Ada :count lisensi yang masa berlakunya akan habis dalam :threshold hari.',
     'to_reset' => 'Untuk atur ulang kata sandi situs web: anda, lengkapi formulir ini:',
     'type' => 'Jenis',

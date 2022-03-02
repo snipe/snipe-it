@@ -1,35 +1,36 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'El consumible no existe.',
 
-    'create' => [
+    'create' => array(
         'error'   => 'El consumible no fue creado, por favor inténtalo de nuevo.',
-        'success' => 'Consumible creado con éxito.',
-    ],
+        'success' => 'Consumible creado con éxito.'
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'El consumible no fue actualizado, por favor inténtalo de nuevo',
-        'success' => 'Consumible actualizado con éxito.',
-    ],
+        'success' => 'Consumible actualizado con éxito.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => '¿Estás seguro de que deseas borrar este consumible?',
         'error'   => 'Hubo un problema borrando el consumible. Por favor inténtalo de nuevo.',
-        'success' => 'El consumible fue borrado con éxito.',
-    ],
+        'success' => 'El consumible fue borrado con éxito.'
+    ),
 
-     'checkout' => [
+     'checkout' => array(
         'error'   		=> 'El consumible no fue retirado, por favor inténtelo de nuevo',
         'success' 		=> 'El consumible fue retirado con éxito.',
-        'user_does_not_exist' => 'El usuario es inválido. Por favor, inténtelo de nuevo.',
-    ],
+        'user_does_not_exist' => 'El usuario es inválido. Por favor, inténtelo de nuevo.'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   		=> 'El consumible no fue ingresado, por favor, inténtelo de nuevo',
         'success' 		=> 'El consumible fue ingresado con éxito.',
-        'user_does_not_exist' => 'El usuario es inválido. Por favor inténtelo de nuevo.',
-    ],
+        'user_does_not_exist' => 'El usuario es inválido. Por favor inténtelo de nuevo.'
+    )
 
-];
+
+);

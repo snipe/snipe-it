@@ -59,7 +59,7 @@ return [
     'test_mail_text' => 'Toto je test ze systému Snipe-IT Asset Management System. Pokud jste ho dostali, email funguje :)',
     'the_following_item' => 'Následující položka byla převzata: ',
     'low_inventory_alert' => 'Je zde :count položka která je pod minimálním stavem nebo brzy bude.|Jsou zde :count položky které jsou pod minimálním stavem nebo brzy budou.',
-    'assets_warrantee_alert' => 'Je zde :count majetek se zárukou končící v následujících :threshold dnech.|Jsou zde :count majetky se zárukou končící v následujících :threshold dnech.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'Je zde :count licence, které končí platnost v příštích :threshold dnech.|Jsou zde :count licence, kterým končí platnost v příštích :threshold dnech.',
     'to_reset' => 'Pro resetování vašeho hesla vyplňte tento formulář:',
     'type' => 'Typ',

@@ -6,8 +6,11 @@ return [
     'asset_depreciations'  					=> 'Aktiv Afskrivninger',
     'create'  					            => 'Opret afskrivninger',
     'depreciation_name'  					=> 'Afskrivningnavn',
+    'depreciation_min'                      => 'Floor Value of Depreciation',
     'number_of_months'  					=> 'Antal måneder',
     'update'  					            => 'Opdater Afskrivninger',
-    'depreciation_min'                      => 'Minimum Value after Depreciation'
-
+    'depreciation_min'                      => 'Minimum Value after Depreciation',
+    'no_depreciations_warning'               => '<strong>Warning: </strong>
+                      You do not currently have any depreciations set up.
+                      Please set up at least one depreciation to view the depreciation report.',
 ];

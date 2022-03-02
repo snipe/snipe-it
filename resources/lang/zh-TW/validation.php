@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => ':attribute 最少要有 :min 個字元',
         'array'   => ':attribute 最少要有 :min 個項目',
     ],
+    'starts_with'          => ':attribute 必須以下列之一做為開頭: :values.',
     'not_in'               => '選擇的 :attribute 無效',
     'numeric'              => ':attribute 必須是數字',
     'present'              => '：屬性字段必須存在。',
@@ -88,8 +89,8 @@ return array(
     'unique'               => ':attribute 已被採用',
     'uploaded'             => ':attribute 上傳失敗',
     'url'                  => ':attribute 格式不正確',
-    "unique_undeleted"     => ":attribute 必須是唯一值",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => ':attribute 必須是唯一值',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +102,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +115,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => ":attribute 含有無效字元",
-        "email_array"      => "一個或多個郵件地址不正確",
-        "hashed_pass"      => "當前密碼不正確！",
+        'alpha_space' => ':attribute 含有無效字元',
+        'email_array'      => '一個或多個郵件地址不正確',
+        'hashed_pass'      => '當前密碼不正確！',
         'dumbpwd'          => '該密碼太常見。',
-        "statuslabel_type" => "您必須選擇一個有效的狀態標籤",
+        'statuslabel_type' => '您必須選擇一個有效的狀態標籤',
     ],
 
     /*
@@ -135,4 +135,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

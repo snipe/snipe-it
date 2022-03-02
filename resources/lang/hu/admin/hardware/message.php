@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Figyelem: </strong> Ez az eszköz pillanatnyilag  nem kiadható. Ha ez a helyzet változott, kérjük, frissítse az eszköz állapotát.',
     'does_not_exist' 	=> 'Eszköz nem létezik.',
-    'does_not_exist_or_not_requestable' => 'Szép próbálkozás. Az eszköz nem létezik, vagy nem igényelhető.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Ez az eszköz jelenleg ki van jelölve egy felhasználónak, és nem törölhető. Kérjük, először ellenőrizze az eszközt, majd próbálja meg újra törölni.',
 
     'create' => [
@@ -28,6 +28,7 @@ return [
         'success' 		=> 'Az eszközellenőrzés sikeresen be van jelentkezve.',
     ],
 
+
     'deletefile' => [
         'error'   => 'A fájl nem törölve. Kérlek próbáld újra.',
         'success' => 'A fájl sikeresen törölve.',
@@ -47,6 +48,7 @@ return [
         'file_delete_success'   => 'A fájlt sikeresen törölték',
         'file_delete_error'      => 'A fájlt nem sikerült törölni',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Biztos benne, hogy törli ezt az elemet?',

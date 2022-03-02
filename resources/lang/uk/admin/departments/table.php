@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'id'                        => 'ID',
     'name'                      => 'Назва відділу',
@@ -8,4 +8,4 @@ return [
     'location'                  => 'Розташування',
     'create'                    => 'Створити відділ',
     'update'                    => 'Оновити відділ',
-    ];
+    );

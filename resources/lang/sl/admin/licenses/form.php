@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'asset'             => 'Sredstev',
     'checkin'           => 'Sprejem',
@@ -18,5 +18,5 @@ return [
     'to_email'          => 'Licenca registrirana na e-pošto',
     'to_name'           => 'Licenca registrirana na ime',
     'update'            => 'Posodobi licenco',
-    'checkout_help'     => 'Preveriti je potrebno ali je licenca vezana na strojno opremo ali osebo. Izberete lahko obe, vendar mora lastnik sredstva ustrezati osebi, s katero preverjate sredstva.',
-];
+    'checkout_help'     => 'Preveriti je potrebno ali je licenca vezana na strojno opremo ali osebo. Izberete lahko obe, vendar mora lastnik sredstva ustrezati osebi, s katero preverjate sredstva.'
+);

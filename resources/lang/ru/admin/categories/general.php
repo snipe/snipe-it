@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'asset_categories' 					=> 'Категории активов',
     'category_name'  					=> 'Имя категории',
     'checkin_email'                     => 'Отправить email пользователю при выдаче или возврате.',
@@ -18,5 +18,6 @@ return [
     'update'  							=> 'Изменить категорию',
     'use_default_eula'					=> 'Использовать <a href="#" data-toggle="modal" data-target="#eulaModal">главное пользовательское соглашение по умолчанию</a>.',
     'use_default_eula_disabled'			=> '<del>Использовать основное пользовательское соглашение.</del> Не задано основное пользовательское соглашение. Добавьте его в Настройках.',
+    'use_default_eula_column'			=> 'Использовать лицензию по умолчанию',
 
-];
+);

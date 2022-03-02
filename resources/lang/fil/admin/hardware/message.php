@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Babala: </strong> Ang asset na ito ay kasalukuyang namarkahan bilang hindi pwedeng mai-deploy..
                         Kung nabago na ang katayuang ito, paki-update ng katayuan ng asset.',
     'does_not_exist' 	=> 'Hindi umiiral ang asset.',
-    'does_not_exist_or_not_requestable' => 'Magaling na pagsubok. Ang asset na iyon ay hindi umiiral o hindi pwedeng i-rekwest.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Ang asset na ito ay kasalukuyang nai-check out sa isang user at hindi na maaaring mai-delete. Mangyaring suriin muna ang asset, at pagkatapos subukang i-delete muli. ',
 
     'create' => [
@@ -29,6 +29,7 @@ return [
         'success' 		=> 'Matagumpay na nai-log ang audit ng asset.',
     ],
 
+
     'deletefile' => [
         'error'   => 'Ang file ay hindi nai-delete. Mangyaring subukang muli.',
         'success' => 'Ang file ay matagumpay nang nai-delete.',
@@ -48,6 +49,7 @@ return [
         'file_delete_success'   => 'Ang iyong file ay matagumpay nang nai-upload',
         'file_delete_error'      => 'Ang file ay hindi mai-delete',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Sigurado kaba na gusto mong i-delete ang asset na ito?',

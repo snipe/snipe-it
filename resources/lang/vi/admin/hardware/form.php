@@ -40,4 +40,10 @@ return [
     'warranty'			=> 'Bảo hành',
         'warranty_expires'		=> 'Hết hạn bảo hành',
     'years'				=> 'năm',
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
 ];

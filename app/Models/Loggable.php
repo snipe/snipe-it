@@ -110,8 +110,10 @@ trait Loggable
             }
         }
 
+
         $log->location_id = null;
         $log->note = $note;
+        $log->action_date = $action_date;
 
         if (Auth::user()) {
             $log->user_id = Auth::user()->id;

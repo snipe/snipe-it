@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Licenzijos nėra.',
     'user_does_not_exist' => 'Naudotojo nėra.',
@@ -10,42 +10,43 @@ return [
     'select_asset_or_person' => 'Turite pasirinkti turtą arba naudotoją, bet ne abu.',
     'not_found' => 'License not found',
 
-    'create' => [
-        'error'   => 'Licenzija nesukurta, prašome bandykite dar kartą.',
-        'success' => 'Licenzija sukurta.',
-    ],
 
-    'deletefile' => [
+    'create' => array(
+        'error'   => 'Licenzija nesukurta, prašome bandykite dar kartą.',
+        'success' => 'Licenzija sukurta.'
+    ),
+
+    'deletefile' => array(
         'error'   => 'Failas neištrintas. Prašome bandykite dar kartą.',
         'success' => 'Failas sėkmingai ištrintas.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Failas (-ai) neįkelti. Prašome bandykite dar kartą.',
         'success' => 'Failas (-ai) sėkmingai įkelti.',
         'nofiles' => 'Jūs nepasirinkote įkelti jokių failų arba failas, kurį ketinate įkelti yra per didelis',
         'invalidfiles' => 'Vienas ar keli jūsų failai yra per dideli arba yra neleidžiamas failų tipas. Leidžiami failų tipai yra png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml ir lic.',
-    ],
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Licenzija nesukurta, prašome bandykite dar kartą',
-        'success' => 'Licenzija atnaujinta sėkmingai.',
-    ],
+        'success' => 'Licenzija atnaujinta sėkmingai.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Ar jūs tikrai norite ištrinti šią licenziją?',
         'error'   => 'Licenzijos nepavyko ištrinti. Prašome bandykite dar kartą.',
-        'success' => 'Licenzija sėkmingai ištrinta.',
-    ],
+        'success' => 'Licenzija sėkmingai ištrinta.'
+    ),
 
-    'checkout' => [
+    'checkout' => array(
         'error'   => 'Nepavyko išduoti licenzijos. Prašome bandykite dar kartą.',
-        'success' => 'Licenzija sėkmingai išduota',
-    ],
+        'success' => 'Licenzija sėkmingai išduota'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   => 'Nepavyko priimti licenzijos. Prašome bandykite dar kartą.',
-        'success' => 'Licenzija sėkmingai priimta',
-    ],
+        'success' => 'Licenzija sėkmingai priimta'
+    ),
 
-];
+);

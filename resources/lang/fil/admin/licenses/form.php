@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'asset'             => 'Ang Asset',
     'checkin'           => 'I-checkin',
@@ -18,5 +18,5 @@ return [
     'to_email'          => 'Ang Lisensya para Makapag-email',
     'to_name'           => 'Ang Lisensya para sa Pangalan',
     'update'            => 'I-update ang Lisensya',
-    'checkout_help'     => 'Dapat mong suriin ang isang lisensya na naipalabas sa asset ng hardware o sa isang tao. Pwedeng mong piliin ang dalawa, pero ang may-ari ng asset ay dapat na tumugma sa taong iyong tinitingnan ang asset nai-out sa.',
-];
+    'checkout_help'     => 'Dapat mong suriin ang isang lisensya na naipalabas sa asset ng hardware o sa isang tao. Pwedeng mong piliin ang dalawa, pero ang may-ari ng asset ay dapat na tumugma sa taong iyong tinitingnan ang asset nai-out sa.'
+);

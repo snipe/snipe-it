@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => 'يجب أن يكون :attribute على الأقل :min من الاحرف.',
         'array'   => 'يجب أن تحتوي :attribute على الأقل :min من العناصر.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => ':attribute المحدد غير صالح.',
     'numeric'              => 'يجب أن يكون :attribute رقما.',
     'present'              => 'يجب أن يكون :attribute موجود.',
@@ -88,8 +89,8 @@ return array(
     'unique'               => 'لقد تم أخذ :attribute مسبقا.',
     'uploaded'             => 'لقد فشل تحميل :attribute.',
     'url'                  => 'ان تنسيق :attribute غير صالح.',
-    "unique_undeleted"     => ":attribute يجب ان تكون فريدة.",
-    "non_circular"         => "يجب ألا تنشئ السمة مرجعًا دائريًا.",
+    'unique_undeleted'     => ':attribute يجب ان تكون فريدة.',
+    'non_circular'         => 'يجب ألا تنشئ السمة مرجعًا دائريًا.',
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +102,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +115,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "يحتوي الحقل :attribute على حرف غير مسموح به.",
-        "email_array"      => "عنوان بريد إلكتروني واحد أو أكثر غير صالح.",
-        "hashed_pass"      => "كلمة المرور الحالية غير صحيحة",
+        'alpha_space' => 'يحتوي الحقل :attribute على حرف غير مسموح به.',
+        'email_array'      => 'عنوان بريد إلكتروني واحد أو أكثر غير صالح.',
+        'hashed_pass'      => 'كلمة المرور الحالية غير صحيحة',
         'dumbpwd'          => 'كلمة المرور هذه شائعة جدا.',
-        "statuslabel_type" => "يجب تحديد نوع تسمية حالة صالح",
+        'statuslabel_type' => 'يجب تحديد نوع تسمية حالة صالح',
     ],
 
     /*
@@ -135,4 +135,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

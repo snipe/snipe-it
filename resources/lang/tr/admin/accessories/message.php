@@ -1,36 +1,37 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => '[:id] numaralı aksesuar bulunmuyor.',
     'assoc_users'	 => 'Bu aksesuardan :count adet kullanıcılara çıkış yapıldı. Lütfen aksesuar girişi yapınız ve tekrar deneyin.',
 
-    'create' => [
+    'create' => array(
         'error'   => 'Aksesuar oluşturma başarısız. lütfen tekrar deneyin.',
-        'success' => 'Aksesuar başarıyla güncellendi.',
-    ],
+        'success' => 'Aksesuar başarıyla güncellendi.'
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Aksesuar güncellenmedi. Lütfen tekrar deneyin',
-        'success' => 'Aksesuar başarı ile güncellendi.',
-    ],
+        'success' => 'Aksesuar başarı ile güncellendi.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Bu Aksesuar silmek istediğinizden emin misiniz?',
         'error'   => 'Aksesuarı silerken bir hata oluştu. Lütfen tekrar deneyin.',
-        'success' => 'Aksesuar başarıyla silindi.',
-    ],
+        'success' => 'Aksesuar başarıyla silindi.'
+    ),
 
-     'checkout' => [
+     'checkout' => array(
         'error'   		=> 'Aksesuar çıkışı yapılamadı, lütfen tekrar deneyin',
         'success' 		=> 'Aksesuar çıkışı yapıldı.',
-        'user_does_not_exist' => 'Bu kullanıcı geçersiz. Lütfen tekrar deneyin.',
-    ],
+        'user_does_not_exist' => 'Bu kullanıcı geçersiz. Lütfen tekrar deneyin.'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   		=> 'Aksesuar girişi yapılamadı, lütfen tekrar deneyin',
         'success' 		=> 'Aksesuar girişi yapıldı.',
-        'user_does_not_exist' => 'Bu kullanıcı geçersiz. Lütfen tekrar deneyin.',
-    ],
+        'user_does_not_exist' => 'Bu kullanıcı geçersiz. Lütfen tekrar deneyin.'
+    )
 
-];
+
+);

@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'これらのアセットを誰にも割り当てることはできません。',
-        'deployable'   => 'これらの資産はチェックアウトすることができます。割り当てられたら、<i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>というメタステータスを想定します。',
+        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
         'archived'   => 'これらのアセットはチェックアウトできず、アーカイブビューにのみ表示されます。これは、予算/歴史的な目的のために資産に関する情報を保持するが、それらを日々の資産リストから外すことに役立つ。',
         'pending'   => 'これらの資産は、誰にも割り当てられません。修理の対象外ではあるが、流通に戻ることが予想されるアイテムによく使用されます。',
     ],

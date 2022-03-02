@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'ใช้งาน',
     'allow'  				=> 'อนุญาต',
     'checkedout'  			=> 'ทรัพย์สิน',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'แสดงผู้ใช้งานปัจจุบัน',
     'show_deleted'          => 'แสดงผู้ใช้งานที่ถูกลบแล้ว',
     'title' 				=> 'ชื่อเรื่อง',
-    'to_restore_them'		=> 'เพื่อเรียกคืน',
+	'to_restore_them'		=> 'เพื่อเรียกคืน',
     'updateuser' 			=> 'แก้ไขผู้ใช้งาน',
     'username' 				=> 'ชื่อผู้ใช้',
-    'user_deleted_text' 	=> 'ผู้ใช้นี้ถูกทำเครื่องหมายว่าลบแล้ว',
+	'user_deleted_text' 	=> 'ผู้ใช้นี้ถูกทำเครื่องหมายว่าลบแล้ว',
     'username_note' 		=> '(ส่วนนี้มีผลเฉพาะกับ Active Directory เท่านั้น ไม่ใช่สำหรับการเข้าสู่ระบบ)',
     'cloneuser'             => 'คัดลอกผู้ใช้งาน',
     'viewusers' 			=> 'ดูผู้ใช้งาน',
-];
+);

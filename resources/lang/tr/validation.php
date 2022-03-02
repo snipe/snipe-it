@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => ':attribute :min karakterden küçük olmalı.',
         'array'   => ': Özelliği en az: dakika öğesine sahip olmalıdır.',
     ],
+    'starts_with'          => 'Özellik aşağıdaki değerlerden biriyle başlamalıdır.',
     'not_in'               => ':attribute geçersiz.',
     'numeric'              => ':attribute sayı olmalıdır.',
     'present'              => ': Attribute alanı bulunmalıdır.',
@@ -88,8 +89,8 @@ return array(
     'unique'               => ':attribute zaten alınmış.',
     'uploaded'             => ': Özniteliği yüklenemedi.',
     'url'                  => ':attribute biçim geçersiz.',
-    "unique_undeleted"     => ":attribute benzersiz olmalıdır.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => ':attribute benzersiz olmalıdır.',
+    'non_circular'         => ':attribute döngüsel bir başvuru oluşturmamalıdır.',
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +102,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +115,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => ": Attribute alanı, izin verilmeyen bir karakter içeriyor.",
-        "email_array"      => "Bir veya daha fazla e-posta adresi geçersiz.",
-        "hashed_pass"      => "Geçerli şifre yanlış",
+        'alpha_space' => ': Attribute alanı, izin verilmeyen bir karakter içeriyor.',
+        'email_array'      => 'Bir veya daha fazla e-posta adresi geçersiz.',
+        'hashed_pass'      => 'Geçerli şifre yanlış',
         'dumbpwd'          => 'Bu şifre çok yaygındır.',
-        "statuslabel_type" => "Geçerli bir durum etiketi türü seçmelisiniz",
+        'statuslabel_type' => 'Geçerli bir durum etiketi türü seçmelisiniz',
     ],
 
     /*
@@ -135,4 +135,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

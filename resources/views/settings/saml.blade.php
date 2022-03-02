@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Update SAML Settings
+    {{ trans('admin/settings/general.saml_title') }}
     @parent
 @stop
 
@@ -38,8 +38,8 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fas fa-sign-in-alt"></i> SAML
-                    </h4>
+                        <i class="fas fa-sign-in-alt"></i> {{ trans('admin/settings/general.saml') }}
+                    </h2>
                 </div>
                 <div class="box-body">
 
@@ -88,7 +88,7 @@
                                     {{ Form::text('saml_sp_metadata_url', route('saml.metadata'), ['class' => 'form-control', 'readonly']) }}
                                     <br>
                                     <p class="help-block">
-                                        <a href="{{ route('saml.metadata') }}" target="_blank" class="btn btn-default" style="margin-right: 5px;">Download Metadata</a>
+                                        <a href="{{ route('saml.metadata') }}" target="_blank" class="btn btn-default" style="margin-right: 5px;">{{ trans('admin/settings/general.saml_download') }}</a>
                                     </p>
                                 @endif
                                 {!! $errors->first('saml_enabled', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}

@@ -262,11 +262,12 @@ class Asset extends Depreciable
                 && ($this->assetstatus->deployable == '1')) 
             {
                 return true;
+
             }
         }
-
         return false;
     }
+
 
     /**
      * Checks the asset out to the target
@@ -300,6 +301,7 @@ class Asset extends Depreciable
         $this->last_checkout = $checkout_at;
 
         $this->assignedTo()->associate($target);
+
 
         if ($name != null) {
             $this->name = $name;
@@ -502,9 +504,10 @@ class Asset extends Depreciable
                 }
                 //this makes no sense
                 return $this->defaultLoc;
-            }
+
             }
 
+        }
         return $this->defaultLoc;
     }
 
@@ -675,13 +678,15 @@ class Asset extends Depreciable
      */
     public static function getExpiringWarrantee($days = 30)
     {
+        $days = (is_null($days)) ? 30 : $days;
+        
         return self::where('archived', '=', '0')
             ->whereNotNull('warranty_months')
             ->whereNotNull('purchase_date')
             ->whereNull('deleted_at')
             ->whereRaw(\DB::raw('DATE_ADD(`purchase_date`,INTERVAL `warranty_months` MONTH) <= DATE(NOW() + INTERVAL '
-                                 .$days
-                                 .' DAY) AND DATE_ADD(`purchase_date`,INTERVAL `warranty_months` MONTH) > NOW()'))
+                                 . $days
+                                 . ' DAY) AND DATE_ADD(`purchase_date`, INTERVAL `warranty_months` MONTH) > NOW()'))
             ->orderBy('purchase_date', 'ASC')
             ->get();
     }
@@ -825,7 +830,9 @@ class Asset extends Depreciable
      */
     public function checkin_email()
     {
-        return $this->model->category->checkin_email;
+        if (($this->model) && ($this->model->category)) {
+            return $this->model->category->checkin_email;
+        }
     }
 
     /**
@@ -1167,9 +1174,10 @@ class Asset extends Depreciable
     {
         return Company::scopeCompanyables($query->where('requestable', '=', 1))
         ->whereHas('assetstatus', function ($query) {
-            $query->where('deployable', '=', 1)
-                 ->where('pending', '=', 0)
-                 ->where('archived', '=', 0);
+            $query->where(function ($query) {
+                $query->where('deployable', '=', 1)
+                      ->where('archived', '=', 0); // you definitely can't request something that's archived
+            })->orWhere('pending', '=', 1); // we've decided that even though an asset may be 'pending', you can still request it
         });
     }
 
@@ -1315,6 +1323,7 @@ class Asset extends Depreciable
     {
         return $query->where(function ($query) use ($filter) {
             foreach ($filter as $key => $search_val) {
+
                 $fieldname = str_replace('custom_fields.', '', $key);
 
                 if ($fieldname == 'asset_tag') {
@@ -1451,6 +1460,7 @@ class Asset extends Depreciable
                 && ($fieldname!='status_label') && ($fieldname!='assigned_to') && ($fieldname!='model') && ($fieldname!='company') && ($fieldname!='manufacturer')) {
                     $query->where('assets.'.$fieldname, 'LIKE', '%' . $search_val . '%');
             }
+
 
             }
 

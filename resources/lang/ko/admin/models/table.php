@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'create'				=> '자산 모델 생성',
     'created_at' 			=> '생성 위치',
@@ -14,4 +14,4 @@ return [
     'update'				=> '자산 모델 갱신',
     'clone'				=> '모델 복제',
     'edit'				=> '모델 편집',
-];
+);

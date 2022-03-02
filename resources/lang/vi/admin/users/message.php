@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'accepted'                  => 'Bạn đã xác nhận tài sản này thành công.',
     'declined'                  => 'Bạn đã từ chối tài sản này thành công.',
@@ -13,8 +13,10 @@ return [
     'user_deleted_warning'      => 'Người dùng này đã bị xóa. Bạn sẽ phải phục hồi người dùng này để chỉnh sửa nó hoặc khởi gán nó đến tài sản mới.',
     'ldap_not_configured'        => 'Tích hợp LDAP thì chưa được cấu hình cho cài đặt này.',
     'password_resets_sent'      => 'Những người dùng với trạng thái kích hoạt đã chọn và có địa chỉ email hợp lệ sẽ nhận được liên kết đặt lại mật khẩu.',
+    'password_reset_sent'       => 'A password reset link has been sent to :email!',
 
-    'success' => [
+
+    'success' => array(
         'create'    => 'Người dùng đã được tạo thành công.',
         'update'    => 'Người dùng đã được cập nhật thành công.',
         'update_bulk'    => 'Người dùng đã được cập nhật thành công!',
@@ -25,9 +27,9 @@ return [
         'unsuspend' => 'Đã phục hồi người dùng bị tạm ngưng thành công.',
         'restored'  => 'Người dùng đã được phục hồi thành công.',
         'import'    => 'Nhập danh sách người dùng thành công.',
-    ],
+    ),
 
-    'error' => [
+    'error' => array(
         'create' => 'Có vấn đề xảy ra khi tạo người dùng. Xin thử lại lần nữa.',
         'update' => 'Có vấn đề xảy ra khi cập nhật người dùng. Xin thử lại lần nữa.',
         'delete' => 'Có vấn đề xảy ra khi xóa người dùng. Xin thử lại lần nữa.',
@@ -42,18 +44,18 @@ return [
         'ldap_could_not_search' => 'Không thể tìm thấy máy chủ LDAP. Xin vui lòng kiểm tra cấu hình cài đặt máy chủ LDAP của bạn ở trong tập tin cấu hình LDAP. <br>Lỗi từ máy chủ LDAP:',
         'ldap_could_not_get_entries' => 'Không thể lấy các mục từ máy chủ LDAP. Xin vui lòng kiểm tra lại cấu hình máy chủ LDAP của bạn ở trong tập tin cấu hình LDAP. <br>Lỗi từ máy chủ LDAP:',
         'password_ldap' => 'Mật khẩu cho tài khoản này được quản lý bởi LDAP / Active Directory. Vui lòng liên hệ với bộ phận CNTT của bạn để thay đổi mật khẩu.',
-    ],
+    ),
 
-    'deletefile' => [
+    'deletefile' => array(
         'error'   => 'Tập tin không xóa được. Xin vui lòng thử lại.',
         'success' => 'Tập tin đã xóa thành công.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Tập tin không tải lên được. Xin vui lòng thử lại.',
         'success' => 'Tập tin đã tải lên thành công.',
         'nofiles' => 'Bạn đã không chọn tập tin nào để tải lên',
         'invalidfiles' => 'Một hoặc nhiều tập tin của bạn có dung lượng quá lớn hoặc loại tập tin không cho phép tải lên. Chỉ cho phép những loại tập tin png, gif, jpg, doc, docx, pdf, and txt.',
-    ],
+    ),
 
-];
+);

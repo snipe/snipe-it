@@ -479,7 +479,6 @@ class UsersController extends Controller
             $user->first_name = '';
             $user->last_name = '';
             $user->email = substr($user->email, ($pos = strpos($user->email, '@')) !== false ? $pos : 0);
-
             $user->id = null;
 
             // Get this user groups
@@ -529,7 +528,7 @@ class UsersController extends Controller
                         strtolower(trans('general.id')),
                         trans('admin/companies/table.title'),
                         trans('admin/users/table.title'),
-                        trans('admin/users/table.employee_num'),
+                        trans('general.employee_number'),
                         trans('admin/users/table.name'),
                         trans('admin/users/table.username'),
                         trans('admin/users/table.email'),

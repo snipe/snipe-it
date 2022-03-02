@@ -8,7 +8,7 @@
         'repair'             => 'Remont',
         'maintenance'        => 'Hooldus',
         'upgrade'            => 'Uuendage',
-        'calibration'        => 'Calibration',
-        'software_support'   => 'Software Support',
-        'hardware_support'   => 'Hardware Support',
+        'calibration'        => 'Kalibreerimine',
+        'software_support'   => 'Tarkvara tugi',
+        'hardware_support'   => 'Riistvara tugi',
     ];

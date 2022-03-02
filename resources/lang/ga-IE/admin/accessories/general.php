@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'accessory_category' 				=> 'Catagóir Cúlpháirtí',
     'accessory_name'  					=> 'Ainm Cúlpháirtí',
     'checkout'  							=> 'Seiceáil Cúlpháirtí',
@@ -17,4 +17,4 @@ return [
     'use_default_eula'					=> 'Bain úsáid as an réamhshocraithe <a href="#" data-toggle="modal" data-target="#eulaModal"> réamhshocrú EULA</a> ina ionad.',
     'use_default_eula_disabled'			=> '<del>Cuir an príomh-réamhshocraithe EULA in ionad.</del> Níl aon réamhshocraithe EULA leagtha síos. Cuir ceann amháin i Socruithe le do thoil.',
 
-];
+);

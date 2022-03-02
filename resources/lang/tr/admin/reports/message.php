@@ -1,5 +1,5 @@
 <?php
 
-return [
-    'error'   => 'En az 1 seçenek seçmeniz gerekiyor.',
-];
+return array(
+    'error'   => 'En az 1 seçenek seçmeniz gerekiyor.'
+);

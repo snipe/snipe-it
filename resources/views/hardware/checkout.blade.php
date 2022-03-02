@@ -124,7 +124,7 @@
 
                                         @if ($snipeSettings->slack_endpoint!='')
                                             <i class="fab fa-slack" aria-hidden="true"></i>
-                                            A slack message will be sent
+                                            {{ trans('general.slack_msg_note')}}
                                         @endif
                                     </div>
                                 </div>

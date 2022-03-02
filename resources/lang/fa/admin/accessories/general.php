@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'accessory_category' 				=> 'دسته بندی لوازم جانبی',
     'accessory_name'  					=> 'نام وسیله',
     'checkout'  							=> 'چک کردن وسیله',
@@ -19,4 +19,4 @@ return [
     'use_default_eula_disabled'			=> 'از پیشفرض اولیه EULA استفاده کنید.<del>هیچ پیشفرضی اولیه ای تنظیم نشده است</del>
 در تنظیمات اضافه کنید',
 
-];
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'checkout'                          => 'Afhandeling Verbruiker na Gebruiker',
     'consumable_name'                   => 'Verbruikbare Naam',
     'create'                            => 'Skep Verbruik',
@@ -8,4 +8,4 @@ return [
     'remaining' 			            => 'oorblywende',
     'total' 			                => 'totale',
     'update'                            => 'Verbruik Verbruik',
-];
+);

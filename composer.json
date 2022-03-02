@@ -17,7 +17,6 @@
     "ext-json": "*",
     "ext-mbstring": "*",
     "ext-pdo": "*",
-    "adldap2/adldap2": "^10.2",
     "alek13/slack": "^2.0",
     "bacon/bacon-qr-code": "^2.0",
     "barryvdh/laravel-debugbar": "^3.6",

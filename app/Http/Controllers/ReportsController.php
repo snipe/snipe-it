@@ -513,6 +513,10 @@ class ReportsController extends Controller
                 $header[] = trans('general.department');
             }
 
+            if ($request->filled('title')) {
+                $header[] = trans('admin/users/table.title');
+            }
+
             if ($request->filled('status')) {
                 $header[] = trans('general.status');
             }
@@ -751,6 +755,14 @@ class ReportsController extends Controller
                     if ($request->filled('department')) {
                         if ($asset->checkedOutToUser()) {
                             $row[] = (($asset->assignedto) && ($asset->assignedto->department)) ? $asset->assignedto->department->name : '';
+                        } else {
+                            $row[] = ''; // Empty string if unassigned
+                        }
+                    }
+
+                    if ($request->filled('title')) {
+                        if ($asset->checkedOutToUser()) {
+                            $row[] = ($asset->assignedto) ? $asset->assignedto->jobtitle : '';
                         } else {
                             $row[] = ''; // Empty string if unassigned
                         }

@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Varování:</strong> Toto zařízení bylo označeno jako momentálně nepřiřaditelné.
                         Pokud se na jeho stavu něco změnilo, upravte jej.',
     'does_not_exist' 	=> 'Majetek nenalezen.',
-    'does_not_exist_or_not_requestable' => 'Hezký pokus, ale majetek buď neexistuje, nebo není možné jej převzít.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Majetek je předán svému uživateli a nelze jej odstranit. Před odstraněním jej nejprve převezměte. ',
 
     'create' => [
@@ -29,6 +29,7 @@ return [
         'success' 		=> 'Audit aktiv byl úspěšně zaznamenáván.',
     ],
 
+
     'deletefile' => [
         'error'   => 'Soubor se nesmazal, prosím zkuste to znovu.',
         'success' => 'Soubor byl úspěšně smazán.',
@@ -48,6 +49,7 @@ return [
         'file_delete_success'   => 'Váš soubor byl úspěšně odstraněn',
         'file_delete_error'      => 'Soubor nelze odstranit',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Opravdu si přejete tento majetek odstranit?',

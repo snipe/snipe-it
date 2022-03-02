@@ -1,5 +1,5 @@
 <?php
 
-return [
-    'error'   => '你至少选择一个选项。',
-];
+return array(
+    'error'   => '你至少选择一个选项。'
+);

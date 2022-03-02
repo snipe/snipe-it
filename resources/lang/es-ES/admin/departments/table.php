@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'id'                        => 'CARNÉ DE IDENTIDAD',
     'name'                      => 'Nombre de Departamento',
@@ -8,4 +8,4 @@ return [
     'location'                  => 'Ubicación',
     'create'                    => 'Crear departamento',
     'update'                    => 'Departamento de actualización',
-    ];
+    );

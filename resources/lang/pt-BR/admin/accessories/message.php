@@ -1,36 +1,37 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Este acessório [:id] não existe.',
     'assoc_users'	 => 'Este acessório tem atualmente :count itens alocado para os usuários. Por favor, verifique em acessórios e e tente novamente. ',
 
-    'create' => [
+    'create' => array(
         'error'   => 'Acessório não criado, Por favor tente novamente.',
-        'success' => 'Acessório criado com sucesso.',
-    ],
+        'success' => 'Acessório criado com sucesso.'
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Acessório não atualizado, Por favor tente novamente',
-        'success' => 'Acessório atualizado com sucesso.',
-    ],
+        'success' => 'Acessório atualizado com sucesso.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Tem certeza de que deseja excluir este acessório?',
         'error'   => 'Ocorreu um problema ao remover o acessório. Por favor, tente novamente.',
-        'success' => 'O acessório foi excluído com sucesso.',
-    ],
+        'success' => 'O acessório foi excluído com sucesso.'
+    ),
 
-     'checkout' => [
+     'checkout' => array(
         'error'   		=> 'O acessório não foi alocado, por favor tente novamente',
         'success' 		=> 'Acessório alocado com sucesso.',
-        'user_does_not_exist' => 'Este usuário é inválido. Tente novamente.',
-    ],
+        'user_does_not_exist' => 'Este usuário é inválido. Tente novamente.'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   		=> 'O acessório não foi devolvido, por favor, tente novamente',
         'success' 		=> 'Acessório devolvido com sucesso.',
-        'user_does_not_exist' => 'Este usuário é inválido. Tente novamente.',
-    ],
+        'user_does_not_exist' => 'Este usuário é inválido. Tente novamente.'
+    )
 
-];
+
+);

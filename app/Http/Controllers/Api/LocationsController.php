@@ -73,6 +73,7 @@ class LocationsController extends Controller
                 break;
         }
 
+
         $total = $locations->count();
         $locations = $locations->skip($offset)->take($limit)->get();
 
@@ -137,6 +138,7 @@ class LocationsController extends Controller
         return (new LocationsTransformer)->transformLocation($location);
     }
 
+
     /**
      * Update the specified resource in storage.
      *
@@ -155,8 +157,8 @@ class LocationsController extends Controller
         $location = $request->handleImages($location);
 
         if ($location->isValid()) {
-            $location->save();
 
+            $location->save();
             return response()->json(
                 Helper::formatStandardApiResponse(
                     'success',
@@ -221,6 +223,9 @@ class LocationsController extends Controller
      */
     public function selectlist(Request $request)
     {
+
+        $this->authorize('view.selectlists');
+
         $locations = Location::select([
             'locations.id',
             'locations.name',

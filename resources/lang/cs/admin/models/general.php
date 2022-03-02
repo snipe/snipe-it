@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_models_title'     => 'O modelech majetku',
     'about_models_text'           => 'Modely majetku jsou způsoby seskupení shodných majetků. "MBP 2013", "iPhone 6s" atd.',
     'deleted'  					        => 'This model has been deleted.',
@@ -9,10 +9,10 @@ return [
     'bulk_delete_warn'          => 'Chystáte se smazat :model_count asset models.',
     'restore'                   => 'Obnovení Modelu',
     'requestable'               => 'Uživatelé můžou požádat o tento model',
-    'show_mac_address'			      => 'Zobrazovat pole MAC adresa u zařízení tohoto druhu',
+	'show_mac_address'			      => 'Zobrazovat pole MAC adresa u zařízení tohoto druhu',
     'view_deleted'              => 'Zobrazit smazané',
     'view_models'               => 'Zobrazit Modely',
     'fieldset'                  => 'Sada polí',
     'no_custom_field'           => 'Bez vlastních polí',
     'add_default_values'        => 'Přidat výchozí hodnoty',
-];
+);

@@ -31,8 +31,8 @@ class PredefinedKitsController extends Controller
 
         $offset = $request->input('offset', 0);
         $limit = $request->input('limit', 50);
-        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'assets_count';
+        $order = $request->input('order') === 'desc' ? 'desc' : 'asc';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'name';
         $kits->orderBy($sort, $order);
 
         $total = $kits->count();
@@ -88,7 +88,7 @@ class PredefinedKitsController extends Controller
         $kit->fill($request->all());
 
         if ($kit->save()) {
-            return response()->json(Helper::formatStandardApiResponse('success', $kit, trans('admin/kits/general.update_success')));      // TODO: trans
+            return response()->json(Helper::formatStandardApiResponse('success', $kit, trans('admin/kits/general.update_success')));
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, $kit->getErrors()));
@@ -113,7 +113,7 @@ class PredefinedKitsController extends Controller
 
         $kit->delete();
 
-        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/kits/general.delete_success')));     // TODO: trans
+        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/kits/general.delete_success')));
     }
 
     /**
@@ -171,12 +171,12 @@ class PredefinedKitsController extends Controller
         $license_id = $request->get('license');
         $relation = $kit->licenses();
         if ($relation->find($license_id)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, ['license' => 'License already attached to kit']));
+            return response()->json(Helper::formatStandardApiResponse('error', null, ['license' => trans('admin/kits/general.license_error')]));
         }
 
         $relation->attach($license_id, ['quantity' => $quantity]);
 
-        return response()->json(Helper::formatStandardApiResponse('success', $kit, 'License added successfull'));     // TODO: trans
+        return response()->json(Helper::formatStandardApiResponse('success', $kit, trans('admin/kits/general.license_added_success')));
     }
 
     /**
@@ -196,7 +196,7 @@ class PredefinedKitsController extends Controller
         }
         $kit->licenses()->syncWithoutDetaching([$license_id => ['quantity' =>  $quantity]]);
 
-        return response()->json(Helper::formatStandardApiResponse('success', $kit, 'License updated'));  // TODO: trans
+        return response()->json(Helper::formatStandardApiResponse('success', $kit, trans('admin/kits/general.license_updated')));
     }
 
     /**
@@ -274,7 +274,7 @@ class PredefinedKitsController extends Controller
         }
         $kit->models()->syncWithoutDetaching([$model_id => ['quantity' =>  $quantity]]);
 
-        return response()->json(Helper::formatStandardApiResponse('success', $kit, 'License updated'));  // TODO: trans
+        return response()->json(Helper::formatStandardApiResponse('success', $kit, trans('admin/kits/general.license_updated')));
     }
 
     /**
@@ -327,12 +327,12 @@ class PredefinedKitsController extends Controller
         $consumable_id = $request->get('consumable');
         $relation = $kit->consumables();
         if ($relation->find($consumable_id)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, ['consumable' => 'Consumable already attached to kit']));
+            return response()->json(Helper::formatStandardApiResponse('error', null, ['consumable' => trans('admin/kits/general.consumable_error')]));
         }
 
         $relation->attach($consumable_id, ['quantity' => $quantity]);
 
-        return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Consumable added successfull'));     // TODO: trans
+        return response()->json(Helper::formatStandardApiResponse('success', $kit, trans('admin/kits/general.consumable_added_success')));
     }
 
     /**
@@ -352,7 +352,7 @@ class PredefinedKitsController extends Controller
         }
         $kit->consumables()->syncWithoutDetaching([$consumable_id => ['quantity' =>  $quantity]]);
 
-        return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Consumable updated'));  // TODO: trans
+        return response()->json(Helper::formatStandardApiResponse('success', $kit, trans('admin/kits/general.consumable_updated')));
     }
 
     /**
@@ -368,7 +368,7 @@ class PredefinedKitsController extends Controller
 
         $kit->consumables()->detach($consumable_id);
 
-        return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Delete was successfull'));     // TODO: trans
+        return response()->json(Helper::formatStandardApiResponse('success', $kit, trans('admin/kits/general.consumable_deleted')));
     }
 
     /**
@@ -405,12 +405,12 @@ class PredefinedKitsController extends Controller
         $accessory_id = $request->get('accessory');
         $relation = $kit->accessories();
         if ($relation->find($accessory_id)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, ['accessory' => 'Accessory already attached to kit']));
+            return response()->json(Helper::formatStandardApiResponse('error', null, ['accessory' => trans('admin/kits/general.accessory_error')]));
         }
 
         $relation->attach($accessory_id, ['quantity' => $quantity]);
 
-        return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Accessory added successfull'));     // TODO: trans
+        return response()->json(Helper::formatStandardApiResponse('success', $kit, trans('admin/kits/general.accessory_added_success')));
     }
 
     /**
@@ -430,7 +430,7 @@ class PredefinedKitsController extends Controller
         }
         $kit->accessories()->syncWithoutDetaching([$accessory_id => ['quantity' =>  $quantity]]);
 
-        return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Accessory updated'));  // TODO: trans
+        return response()->json(Helper::formatStandardApiResponse('success', $kit, trans('admin/kits/general.accessory_updated')));
     }
 
     /**
@@ -446,6 +446,6 @@ class PredefinedKitsController extends Controller
 
         $kit->accessories()->detach($accessory_id);
 
-        return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Delete was successfull'));     // TODO: trans
+        return response()->json(Helper::formatStandardApiResponse('success', $kit, trans('admin/kits/general.accessory_deleted')));
     }
 }

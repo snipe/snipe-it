@@ -296,7 +296,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
         ); // end depreciations API routes
 
 
-        Route::post('reports/depreciation',
+        Route::get('reports/depreciation',
         [
             Api\AssetsController::class, 
             'index'
@@ -368,18 +368,18 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
     
         });
 
-        Route::resource('fields', 
+        Route::resource('fieldsets', 
         Api\CustomFieldsetsController::class,
             ['names' => 
                 [
-                    'index' => 'api.customfields.index',
-                    'show' => 'api.customfields.show',
-                    'update' => 'api.customfields.update',
-                    'store' => 'api.customfields.store',
-                    'destroy' => 'api.customfields.destroy',
+                    'index' => 'api.fieldsets.index',
+                    'show' => 'api.fieldsets.show',
+                    'update' => 'api.fieldsets.update',
+                    'store' => 'api.fieldsets.store',
+                    'destroy' => 'api.fieldsets.destroy',
                 ],
             'except' => ['create', 'edit'],
-            'parameters' => ['field' => 'field_id'],
+            'parameters' => ['fieldset' => 'fieldset_id'],
             ]
         ); // end custom fieldsets API routes
 
@@ -389,7 +389,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
          * Groups API routes
         */
         Route::resource('groups', 
-        Api\GroupsCOntroller::class,
+        Api\GroupsController::class,
             ['names' => 
                 [
                     'index' => 'api.groups.index',
@@ -460,14 +460,21 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
         ]
         )->name('api.asset.audit');
 
-        Route::post('checkin',
+        Route::post('{id}/checkin',
         [
             Api\AssetsController::class, 
             'checkin'
         ]
         )->name('api.asset.checkin');
 
-        Route::post('checkout',
+        Route::post('checkinbytag',
+            [
+                Api\AssetsController::class,
+                'checkinbytag'
+            ]
+        )->name('api.asset.checkinbytag');
+
+        Route::post('{id}/checkout',
         [
             Api\AssetsController::class, 
             'checkout'
@@ -702,10 +709,10 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
         */
         Route::group(['middleware'=> ['auth', 'authorize:superuser'], 'prefix' => 'settings'], function () {
 
-            Route::post('ldaptest',
+            Route::get('ldaptest',
                 [
                     Api\SettingsController::class, 
-                    'ldapAdSettingsTest'
+                    'ldaptest'
                 ]
             )->name('api.settings.ldaptest');
 

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'accepted'                  => 'Je hebt dit asset succesvol geaccepteerd.',
     'declined'                  => 'Je hebt dit asset met succes geweigerd.',
@@ -13,8 +13,10 @@ return [
     'user_deleted_warning'      => 'Deze gebruiker is verwijderd. Je zult deze gebruiker moeten herstellen om hem te bewerken of om nieuwe assets toe te wijzen.',
     'ldap_not_configured'        => 'LDAP integratie is niet geconfigureerd voor deze installatie.',
     'password_resets_sent'      => 'De geselecteerde gebruikers die zijn geactiveerd en die een geldig e-mailadres hebben, hebben een wachtwoord reset link ontvangen.',
+    'password_reset_sent'       => 'Een link om het wachtwoord te resetten is verstuurd naar :email!',
 
-    'success' => [
+
+    'success' => array(
         'create'    => 'Gebruiker succesvol aangemaakt.',
         'update'    => 'Gebruiker succesvol bijgewerkt.',
         'update_bulk'    => 'Gebruikers zijn succesvol bijgewerkt!',
@@ -25,9 +27,9 @@ return [
         'unsuspend' => 'Gebruiker werd succesvol ingeschakeld.',
         'restored'  => 'Gebruiker werd succesvol opnieuw geactiveerd.',
         'import'    => 'Gebruikers met succes geïmporteerd.',
-    ],
+    ),
 
-    'error' => [
+    'error' => array(
         'create' => 'Er was een probleem tijdens het aanmaken van de gebruiker. Probeer opnieuw, aub.',
         'update' => 'Er was een probleem tijdens het bijwerken van de gebruiker. Probeer opnieuw, aub.',
         'delete' => 'Er was een probleem tijdens het verwijderen van de gebruiker. Probeer opnieuw, aub.',
@@ -42,18 +44,18 @@ return [
         'ldap_could_not_search' => 'Kan niet zoeken in de LDAP server. Controleer je LDAP server configuratie in de LDAP configuratie bestand. <br>Fout van LDAP server:',
         'ldap_could_not_get_entries' => 'Kan geen gegeven van de LDAP server krijgen. Controleer je LDAP server configuratie in de LDAP configuratie bestand. <br>Fout van LDAP server:',
         'password_ldap' => 'Het wachtwoord voor deze account wordt beheerd door LDAP/Active Directory. Neem contact op met uw IT-afdeling om uw wachtwoord te wijzigen. ',
-    ],
+    ),
 
-    'deletefile' => [
+    'deletefile' => array(
         'error'   => 'Bestand is niet verwijderd. Probeer het opnieuw.',
         'success' => 'Bestand met succes verwijderd.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Bestand(en) zijn niet geüpload. Probeer het opnieuw.',
         'success' => 'Bestand(en) zijn met succes geüpload.',
         'nofiles' => 'Je hebt geen bestanden geselecteerd voor de upload',
         'invalidfiles' => 'Een of meer van uw bestanden is te groot of is een bestandstype dat niet is toegestaan. Toegestaande bestandstypen png, gif, jpg, doc, docx, pdf en txt.',
-    ],
+    ),
 
-];
+);

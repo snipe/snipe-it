@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Aktibo',
     'allow'  				=> 'Pahintulutan',
     'checkedout'  			=> 'Ang mga asset',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Ipakita ang Kasalukuyang mga User',
     'show_deleted'          => 'Ipakita ang Nai-delete na mga User',
     'title' 				=> 'Ang Pamagat',
-    'to_restore_them'		=> 'upang ibalik sa dati.',
+	'to_restore_them'		=> 'upang ibalik sa dati.',
     'updateuser' 			=> 'I-update ang User',
     'username' 				=> 'Ang pangalan ng gumagamit',
-    'user_deleted_text' 	=> 'Ang user na ito ay namarkahang nai-delete na.',
+	'user_deleted_text' 	=> 'Ang user na ito ay namarkahang nai-delete na.',
     'username_note' 		=> '(Ito ay ginagamit para sa Aktibong binding ng Direktorya lamang, hindi sa login.)',
     'cloneuser'             => 'I-clone ang User',
     'viewusers' 			=> 'Tingnan ang mga Gumagamit',
-];
+);

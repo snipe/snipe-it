@@ -59,7 +59,7 @@ return [
     'test_mail_text' => 'يعتبر هذا اختبارا من نظام إدارة الأصول Snipe-IT. إذا كنت حصلت على هذا، فان البريد يعمل :)',
     'the_following_item' => 'تم ادخال العنصر التالي: ',
     'low_inventory_alert' => 'هنالك :count عناصر أقل من الحد الأدنى للمخزون أول سوف تصبح أقل منه قريباً.',
-    'assets_warrantee_alert' => 'هنالك :count أصل سوف تنتهي فترة الضمان الخاصة به في الأيام :threshold القادمة.| هنالك :count أصول سوف تنتهي فترة الضمان الخاصة بهم في الأيام :threshold القادمة.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'هنالك :count رخص سوف تنتهي في الأيام :threshold القادمة.',
     'to_reset' => 'لإعادة تعيين كلمة مرور على :web، رجاءا أكمل هذا النموذج:',
     'type' => 'اكتب',

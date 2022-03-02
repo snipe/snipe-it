@@ -59,7 +59,7 @@ return [
     'test_mail_text' => 'Tai yra "Snipe-IT Asset Management System" testas. Jei tai gavote, paštas dirba :)',
     'the_following_item' => 'Šis elementas buvo pažymėtas:',
     'low_inventory_alert' => 'Tai yra reikšmė minimalaus inventoriaus arba greitai pasibaigiančio.:count | Tai yra reikšmė minimalaus inventoriaus arba greitai pasibaigiančio.:count.',
-    'assets_warrantee_alert' => 'Tiek turto :count kurių garantinis aptarnavimas baigsis už :threshold days.|Tiek turto :count kurių garantinis aptarnavimas baigsis už :threshold days.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'Tiek licenzijų :count baigsis už :threshold days.|Tiek licenzijų :count baigsis už :threshold days.',
     'to_reset' => 'Jei norite iš naujo nustatyti savo: žiniatinklio slaptažodį, užpildykite šią formą:',
     'type' => 'Tipas',

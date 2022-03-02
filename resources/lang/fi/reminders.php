@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return [
     |
     */
 
-    'password' => 'Salasanan tulee olla 6 merkkiä pitkä ja sen tulee täsmätä vahvistukseen.',
+    "password" => "Salasanan tulee olla 6 merkkiä pitkä ja sen tulee täsmätä vahvistukseen.",
 
-    'user'     => 'Käyttäjätunnus tai sähköpostiosoite on virheellinen',
+    "user"     => "Käyttäjätunnus tai sähköpostiosoite on virheellinen",
 
-    'token'    => 'Tämä salasanan nollauspoletti on virheellinen.',
+    "token"    => "Tämä salasanan nollauspoletti on virheellinen.",
 
-    'sent' => 'Jos sähköpostiosoite löytyi, salasanan muistutusviesti lähetettiin!',
+    "sent" => "Jos sähköpostiosoite löytyi, salasanan muistutusviesti lähetettiin!",
 
-];
+);

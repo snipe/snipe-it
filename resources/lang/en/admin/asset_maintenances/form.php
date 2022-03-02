@@ -1,6 +1,6 @@
 <?php
 
-    return [
+    return array(
         'asset_maintenance_type' => 'Asset Maintenance Type',
         'title'                  => 'Title',
         'start_date'             => 'Start Date',
@@ -11,4 +11,4 @@
         'notes'                  => 'Notes',
         'update'                 => 'Update Asset Maintenance',
         'create'                 => 'Create Asset Maintenance',
-    ];
+    );

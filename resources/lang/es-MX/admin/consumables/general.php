@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'checkout'                          => 'Checkout de consumible a usuario',
     'consumable_name'                   => 'Nombre del Consumible',
     'create'                            => 'Crear Consumible',
@@ -8,4 +8,4 @@ return [
     'remaining' 			            => 'Restante',
     'total' 			                => 'Total',
     'update'                            => 'Actualizar Consumible',
-];
+);

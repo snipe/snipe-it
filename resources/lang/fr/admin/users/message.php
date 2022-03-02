@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'accepted'                  => 'Vous avez accepté cet actif.',
     'declined'                  => 'Vous avez refusé cet actif.',
@@ -13,8 +13,10 @@ return [
     'user_deleted_warning'      => 'Cet utilisateur a été supprimé. Vous devez le restaurer pour pouvoir l\'éditer ou lui assigner de nouveaux actifs.',
     'ldap_not_configured'        => 'L\'intégration LDAP n\'a pas été configuré pour cette installation .',
     'password_resets_sent'      => 'Les utilisateurs sélectionnés qui sont activés et ont une adresse e-mail valide ont reçu un lien de réinitialisation du mot de passe.',
+    'password_reset_sent'       => 'Un lien de réinitialisation du mot de passe a été envoyé à :email!',
 
-    'success' => [
+
+    'success' => array(
         'create'    => 'L’utilisateur a été créé avec succès.',
         'update'    => 'L’utilisateur a été mis à jour avec succès.',
         'update_bulk'    => 'Utilisateurs mis à jour avec succès !',
@@ -25,9 +27,9 @@ return [
         'unsuspend' => 'L’utilisateur a été activé avec succès.',
         'restored'  => 'L’utilisateur a été restauré avec succès.',
         'import'    => 'Les utilisateurs ont été importés correctement.',
-    ],
+    ),
 
-    'error' => [
+    'error' => array(
         'create' => 'Un problème a eu lieu pendant la création de l\'utilisateur. Veuillez essayer à nouveau.',
         'update' => 'Un problème a eu lieu pendant la mise à jour de l\'utilisateur. Veuillez essayer à nouveau.',
         'delete' => 'Un problème a eu lieu pendant la suppression de l\'utilisateur. Veuillez essayer à nouveau.',
@@ -42,18 +44,18 @@ return [
         'ldap_could_not_search' => 'Impossible de rechercher le serveur LDAP . S\'il vous plaît vérifier la configuration de votre serveur LDAP dans le fichier de configuration LDAP . <br> Erreur de serveur LDAP :',
         'ldap_could_not_get_entries' => 'Impossible d\'obtenir les entrées du serveur LDAP . S\'il vous plaît vérifier la configuration de votre serveur LDAP dans le fichier de configuration LDAP . <br> Erreur de serveur LDAP :',
         'password_ldap' => 'Le mot de passe de ce compte est géré par LDAP / Active Directory. Veuillez contacter votre service informatique pour changer votre mot de passe.',
-    ],
+    ),
 
-    'deletefile' => [
+    'deletefile' => array(
         'error'   => 'Le fichier n\'a pas pu être supprimé. Veuillez réessayer.',
         'success' => 'Le fichier a été supprimé correctement.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Le(s) fichier(s) n\'ont pas pu être téléversé. Veuillez réessayer.',
         'success' => 'Le(s) fichier(s) ont été téléversé correctement.',
         'nofiles' => 'Vous n\'avez pas sélectionné de fichier pour le téléversement',
         'invalidfiles' => 'Un ou plusieurs de vos fichiers sont trop gros, ou sont d\'un type non autorisé. Les types de fichiers autorisés sont png, gif, jpg, doc, docx, pdf et txt.',
-    ],
+    ),
 
-];
+);

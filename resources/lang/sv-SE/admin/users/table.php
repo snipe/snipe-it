@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Aktiva',
     'allow'  				=> 'Tillåta',
     'checkedout'  			=> 'Tillgångar',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Visa nuvarande användare',
     'show_deleted'          => 'Visa borttagna användare',
     'title' 				=> 'Titel',
-    'to_restore_them'		=> 'att återställa dem.',
+	'to_restore_them'		=> 'att återställa dem.',
     'updateuser' 			=> 'Uppdatera användaren',
     'username' 				=> 'Användarnamn',
-    'user_deleted_text' 	=> 'Den här användaren har markerats som borttagen.',
+	'user_deleted_text' 	=> 'Den här användaren har markerats som borttagen.',
     'username_note' 		=> '(Detta används endast för Active Directory-bindning, inte för inloggning.)',
     'cloneuser'             => 'Klonanvändare',
     'viewusers' 			=> 'Visa användare',
-];
+);

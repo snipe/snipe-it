@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'component_name'                  => '構成部品名',
     'checkin'                             => '構成品のチェックイン',
     'checkout'                             => '構成部品のチェックアウト',
@@ -12,4 +12,4 @@ return [
     'remaining' 			             => '残数',
     'total' 			                 => '合計',
     'update'                            => '構成部品の更新',
-];
+);

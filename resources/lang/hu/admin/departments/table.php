@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'id'                        => 'ID',
     'name'                      => 'Osztály neve',
@@ -8,4 +8,4 @@ return [
     'location'                  => 'Helyszín',
     'create'                    => 'Osztály létrehozása',
     'update'                    => 'Osztály frissítése',
-    ];
+    );

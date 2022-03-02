@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'assigned_to'   	=> 'ได้รับมอบหมายให้',
     'checkout'   		=> 'In / Out',
@@ -14,4 +14,4 @@ return [
     'serial'   			=> 'อนุกรม',
     'title'      		=> 'การอนุญาต',
 
-];
+);

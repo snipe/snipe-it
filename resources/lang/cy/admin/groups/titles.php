@@ -10,5 +10,7 @@ return [
     'group_admin' 	 		=> 'Gweinyddwr Grwp',
     'allow' 	 			=> 'Caniatau',
     'deny' 	 				=> 'Gwrthod',
-
+    'permission'            => 'Permission',
+    'grant'                 => 'Grant',
+    'no_permissions'        => 'This group has no permissions.'
 ];

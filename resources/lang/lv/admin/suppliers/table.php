@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_suppliers_title' => 'Par Piegādātājiem',
     'about_suppliers_text'  => 'Piegādātāji tiek izmantoti preču avota izsekošanai',
     'address'               => 'Piegādātāja adrese',
@@ -24,4 +24,4 @@ return [
     'view_assets_for'       => 'Skatīt aktīvu par',
     'zip'                   => 'Pasta indekss',
 
-];
+);

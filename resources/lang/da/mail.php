@@ -59,7 +59,7 @@ return [
     'test_mail_text' => 'Dette er en test fra Snipe-IT Asset Management System. Hvis du fik dette, virker mailen :)',
     'the_following_item' => 'Følgende vare er blevet kontrolleret i:',
     'low_inventory_alert' => 'Der er :count enhed som er under minimum lagertal eller som snart vil være det.|Der er :count enheder som er under minimum lagertal eller som snart vil være det.',
-    'assets_warrantee_alert' => 'Der er :count aktiv(er) hvor garantien udløber indenfor de næste :threshold dage.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'Der er :count licens(er) der udløber indenfor den/de næste :threshold dag(e).',
     'to_reset' => 'Nulstille din :web-adgangskode, udfylde denne formular:',
     'type' => 'Type',

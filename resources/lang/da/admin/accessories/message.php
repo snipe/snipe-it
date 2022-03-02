@@ -1,36 +1,37 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Tilbehøret [:id] findes ikke.',
     'assoc_users'	 => 'Dette tilbehør har pt. :count emner tjekket ud til brugere. Tjek tilbehør ind og prøv igen.',
 
-    'create' => [
+    'create' => array(
         'error'   => 'Tilbehøret blev ikke oprettet, prøv venligst igen.',
-        'success' => 'Tilbehøret blev oprettet.',
-    ],
+        'success' => 'Tilbehøret blev oprettet.'
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Tilbehøret blev ikke opdateret, prøv venligst igen',
-        'success' => 'Tilbehøret blev opdateret med success.',
-    ],
+        'success' => 'Tilbehøret blev opdateret med success.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Er du sikker på du vil slette dette tilbehør?',
         'error'   => 'Der opstod et problem under sletning af tilbehøret. Prøv venligst igen.',
-        'success' => 'Tilbehøret blev slettet med success.',
-    ],
+        'success' => 'Tilbehøret blev slettet med success.'
+    ),
 
-     'checkout' => [
+     'checkout' => array(
         'error'   		=> 'Tilbehør blev ikke tjekket ud, prøv igen',
         'success' 		=> 'Tilbehør er tjekket ud.',
-        'user_does_not_exist' => 'Den bruger er ikke gyldig. Prøv igen.',
-    ],
+        'user_does_not_exist' => 'Den bruger er ikke gyldig. Prøv igen.'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   		=> 'Tilbehør blev ikke tjekket ind, prøv igen',
         'success' 		=> 'Tilbehør er tjekket ind.',
-        'user_does_not_exist' => 'Den bruger er ikke gyldig. Prøv igen.',
-    ],
+        'user_does_not_exist' => 'Den bruger er ikke gyldig. Prøv igen.'
+    )
 
-];
+
+);

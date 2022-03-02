@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'create'				=> 'Skep bate model',
     'created_at' 			=> 'Geskep op',
@@ -14,4 +14,4 @@ return [
     'update'				=> 'Update Bate Model',
     'clone'				=> 'Klone Model',
     'edit'				=> 'Wysig Model',
-];
+);

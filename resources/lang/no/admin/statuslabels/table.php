@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about'      	=> 'Om statusmerker',
     'archived'      	=> 'Arkivert',
     'create'      	=> 'Opprett statusmerke',
@@ -16,4 +16,4 @@ return [
     'title'      	=> 'Statusmerke',
     'undeployable'  => 'Ikke utleverbar',
     'update'      	=> 'Oppdater statusmerke',
-];
+);

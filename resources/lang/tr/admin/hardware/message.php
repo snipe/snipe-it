@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Uyarı:</strong> Bu demirbaş dağıtılamaz olarak işlaretlenmiş.
                         Eğer durumu değişti ise, lütfen Demirbaş Durumu\'nu güncelleyiniz.',
     'does_not_exist' 	=> 'Demirbaş mevcut değil.',
-    'does_not_exist_or_not_requestable' => 'İyi denemeydi. Bu varlık mevcut değil veya talep edilebilir değil.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Bu demirbaş kullanıcıya çıkış yapılmış olaran görülüyor ve silinemez. Lütfen önce demirbaş girişi yapınız, ardından tekrar siliniz. ',
 
     'create' => [
@@ -29,6 +29,7 @@ return [
         'success' 		=> 'Varlık denetimi başarıyla günlüğe kaydedildi.',
     ],
 
+
     'deletefile' => [
         'error'   => 'Dosya silinemedi. Lütfen tekrar deneyin.',
         'success' => 'Dosya silindi.',
@@ -48,6 +49,7 @@ return [
         'file_delete_success'   => 'Dosyanız başarıyla silindi',
         'file_delete_error'      => 'Dosya silenemedi',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Demirbaşı silmek istediğinize emin misiniz?',

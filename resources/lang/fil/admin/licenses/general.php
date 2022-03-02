@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'Ang Tungkol sa mga Lisensya',
     'about_licenses'                  => 'Ang mga lisensya ay ay ginagamit para subaybayan ang software. Mayrron itong tuloy na mga numero ng seats na pwedeng i-check out sa mga indibidwal',
     'checkin'  					=> 'I-checkin ang Lisensya ng Seat',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'Ang mga Lisenysa ng Software',
     'user'  					=> 'Ang gumagamit',
     'view'  					=> 'Tingnan ang Lisensya',
-];
+);

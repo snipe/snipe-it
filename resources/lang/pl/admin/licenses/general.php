@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'O Licencjach',
     'about_licenses'                  => 'Licencje są używane do śledzenia oprogramowania.  Posiadają określoną liczbę stanowisk, które mogą być przypisane do osób fizycznych.',
     'checkin'  					=> 'Sprawdź płatność',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'Licencje oprogramowania',
     'user'  					=> 'Użytkownik',
     'view'  					=> 'Podgląd licencji',
-];
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'accepted'                  => 'Oled selle vahendi edukalt vastu võtnud.',
     'declined'                  => 'Oled selle vahendi tagasi lükanud.',
@@ -12,9 +12,11 @@ return [
     'insufficient_permissions'  => 'Ebapiisavad õigused.',
     'user_deleted_warning'      => 'See kasutaja on kustutatud. Et kasutajat muuta või talle uusi vahendeid anda, pead ta esmalt taastama.',
     'ldap_not_configured'        => 'LDAP-i integreerimine pole selle installi jaoks konfigureeritud.',
-    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
+    'password_resets_sent'      => 'Parooli taastamise link on saadetud valitud aktiivsetele kasutajatele kellel on õige emaili aadress.',
+    'password_reset_sent'       => 'Parooli taastamise aadress on saadetud :email!',
 
-    'success' => [
+
+    'success' => array(
         'create'    => 'Kasutaja loomine õnnestus.',
         'update'    => 'Kasutaja uuendamine õnnestus.',
         'update_bulk'    => 'Kasutajate uuendamine õnnestus!',
@@ -25,9 +27,9 @@ return [
         'unsuspend' => 'Kasutaja oli ebaõnnestunud.',
         'restored'  => 'Kasutaja taastamine õnnestus.',
         'import'    => 'Kasutajate importimine õnnestus.',
-    ],
+    ),
 
-    'error' => [
+    'error' => array(
         'create' => 'Kasutaja loomisel tekkis probleem. Palun proovi uuesti.',
         'update' => 'Kasutaja uuendamisel tekkis probleem. Palun proovi uuesti.',
         'delete' => 'Kasutaja kustutamisel tekkis probleem. Palun proovi uuesti.',
@@ -42,18 +44,18 @@ return [
         'ldap_could_not_search' => 'LDAP-serverit ei õnnestunud otsida. Palun kontrollige oma LDAP-i serveri konfiguratsiooni LDAP-i konfiguratsioonifailis. <br>Viga LDAP serverist:',
         'ldap_could_not_get_entries' => 'LDAP-serverisse tehtud sissekandeid ei saanud. Palun kontrollige oma LDAP-i serveri konfiguratsiooni LDAP-i konfiguratsioonifailis. <br>Viga LDAP serverist:',
         'password_ldap' => 'Selle konto parooli haldab LDAP / Active Directory. Parooli muutmiseks võtke ühendust oma IT-osakonnaga.',
-    ],
+    ),
 
-    'deletefile' => [
+    'deletefile' => array(
         'error'   => 'Faili ei kustustatud. Palun proovi uuesti.',
         'success' => 'Fail kustutati.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Fail(e) ei laetud üles. Palun proovi uuesti.',
         'success' => 'Fail(id) laeti edukalt üles.',
         'nofiles' => 'Sa ei valinud üles laadimiseks ühtegi faili',
         'invalidfiles' => 'Üks või mitu sibu failidest on kas liigas uured või ei ole lubatud tüüpi. Lobatud tüübid on png, gif, jpg, doc, docx, pdf, ja txt.',
-    ],
+    ),
 
-];
+);

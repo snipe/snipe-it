@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'Über Lizenzen',
     'about_licenses'                  => 'Lizenzen werden verwendet, um Software zu verfolgen.  Sie haben eine bestimmte Anzahl von Plätzen, die an Einzelpersonen ausgegeben werden können',
     'checkin'  					=> 'Lizenzaktivierung zurücknehmen',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'Software Lizenzen',
     'user'  					=> 'Nutzer',
     'view'  					=> 'Lizenz ansehen',
-];
+);

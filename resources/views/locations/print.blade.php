@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Assigned to {{ $location->present()->fullName() }} Location</title>
+    <title>{{ trans('admin/locations/general.assigned_location', array('location' => $location->present()->fullName())) }} </title>
     <style>
         body {
             font-family: "Arial, Helvetica", sans-serif;
@@ -49,16 +49,16 @@
     @endif
 @endif
 
-<h2>Asset Management System</h2>
-<b>Assigned To:</b> {{ $location->present()->fullName() }}
+<h2>{{ trans('admin/locations/general.asset_management_system') }}</h2>
+<b>{{ trans('admin/locations/general.assigned_to') }}</b> {{ $location->present()->fullName() }}
     @if ($parent)
         {{ $parent->present()->fullName() }}
     @endif
 <br>
 @if ($manager)
-    <b>Manager:</b> {{ $manager->present()->fullName() }}<br>
+    <b>{{ trans('admin/locations/general.manager') }}</b> {{ $manager->present()->fullName() }}<br>
 @endif
-<b>Current Date:</b> {{ date("d/m/Y h:i:s A") }}<br><br>
+<b>{{ trans('admin/locations/general.date') }}</b> {{ date("d/m/Y h:i:s A") }}<br><br>
 
 @if ($users->count() > 0)
     @php
@@ -73,11 +73,11 @@
         <thead>
             <tr>
             <th style="width: 5px;"></th>
-            <th style="width: 25%;">Company</th>
-            <th style="width: 25%;">User Name</th>
-            <th style="width: 10%;">Employee No.</th>
-	        <th style="width: 20%;">Department</th>
-		    <th style="width: 20%;">Location</th>
+            <th style="width: 25%;">{{ trans('general.company') }}</th>
+            <th style="width: 25%;">{{ trans('admin/locations/table.user_name') }}</th>
+            <th style="width: 10%;">{{ trans('general.employee_number') }}</th>
+	        <th style="width: 20%;">{{ trans('admin/locations/table.department') }}</th>
+		    <th style="width: 20%;">{{ trans('admin/locations/table.location') }}</th>
             </tr>
         </thead>
     @foreach ($users as $user)
@@ -110,15 +110,15 @@
         <thead>
             <tr>
             <th style="width: 20px;"></th>
-            <th style="width: 10%;">Asset Tag</th>
-            <th style="width: 10%;">Name</th>
-            <th style="width: 10%;">Category</th>
-	    <th style="width: 10%;">Manufacturer</th>
-            <th style="width: 15%;">Model</th>
-            <th style="width: 15%;">Serial</th>
-            <th style="width: 10%;">Location</th>
-            <th style="width: 10%;">Checked Out</th>
-            <th style="width: 10%;">Expected Checkin</th>
+            <th style="width: 10%;">{{ trans('admin/locations/table.asset_tag') }}</th>
+            <th style="width: 10%;">{{ trans('admin/locations/table.asset_name') }}</th>
+            <th style="width: 10%;">{{ trans('admin/locations/table.asset_category') }}</th>
+	        <th style="width: 10%;">{{ trans('admin/locations/table.asset_manufacturer') }}</th>
+            <th style="width: 15%;">{{ trans('admin/locations/table.asset_model') }}</th>
+            <th style="width: 15%;">{{ trans('admin/locations/table.asset_serial') }}</th>
+            <th style="width: 10%;">{{ trans('admin/locations/table.asset_location') }}</th>
+            <th style="width: 10%;">{{ trans('admin/locations/table.asset_checked_out') }}</th>
+            <th style="width: 10%;">{{ trans('admin/locations/table.asset_expected_checkin') }}</th>
             </tr>
         </thead>
 		@php
@@ -155,10 +155,10 @@
 <br>
 <table>
     <tr>
-        <td>Signed By (Asset Auditor):</td>
+        <td>{{ trans('admin/locations/table.signed_by_asset_auditor') }}</td>
         <td>___________________________</td>
         <td></td>
-        <td>Date:</td>
+        <td>{{ trans('admin/locations/table.date') }}</td>
         <td>____________________</td>
     </tr>
 </table>
@@ -167,10 +167,10 @@
 <br>
 <table>
     <tr>
-        <td>Signed By (Finance Asset Auditor):</td>
+        <td>{{ trans('admin/locations/table.signed_by_finance_auditor') }}</td>
         <td>____________________</td>
         <td></td>
-        <td>Date:</td>
+        <td>{{ trans('admin/locations/table.date') }}</td>
         <td>____________________</td>
     </tr>
 </table>
@@ -179,10 +179,10 @@
 <br>
 <table>
     <tr>
-        <td>Signed By (Location Manager):</td>
+        <td>{{ trans('admin/locations/table.signed_by_location_manager') }}</td>
         <td>_______________________</td>
         <td></td>
-        <td>Date:</td>
+        <td>{{ trans('admin/locations/table.date') }}</td>
         <td>____________________</td>
     </tr>
 </table>

@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'Disse eiendelene kan ikke tilordnes noen.',
-        'deployable'   => 'Disse eiendelene kan sjekkes ut. Når de er tildelt, antar de en metastatus på <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
+        'deployable'   => 'Disse eiendelene kan sjekkes ut. Når de er tildelt, antar de en metastatus på <i class="fas fa-circle text-blue"></i> <strong>Utlevert</strong>.',
         'archived'   => 'Disse eiendelene kan ikke sjekkes ut, og vises bare i arkivert visning. Dette er nyttig for å beholde informasjon om eiendeler for budsjettering / historiske formål, men å holde dem ut av den daglige aktivitetslisten.',
         'pending'   => 'Disse eiendelene kan ikke tildeles til noen, ofte brukt til gjenstander som er ute for reparasjon, men forventes å komme tilbake til omløp.',
     ],

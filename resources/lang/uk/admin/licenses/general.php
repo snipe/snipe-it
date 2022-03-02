@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'Про ліцензії',
     'about_licenses'                  => 'Licenses are used to track software.  They have a specified number of seats that can be checked out to individuals',
     'checkin'  					=> 'Checkin License Seat',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'Ліцензії на програмне забезпечення',
     'user'  					=> 'Користувач',
     'view'  					=> 'Переглянути ліцензію',
-];
+);

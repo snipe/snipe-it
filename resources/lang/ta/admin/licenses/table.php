@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'assigned_to'   	=> 'ஒதுக்கப்படும்',
     'checkout'   		=> 'உள்ளே வெளியே',
@@ -14,4 +14,4 @@ return [
     'serial'   			=> 'சீரியல்',
     'title'      		=> 'உரிமம்',
 
-];
+);

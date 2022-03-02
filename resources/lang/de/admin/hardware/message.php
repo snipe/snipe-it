@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Achtung:</strong>Dieses Asset wurde kürzlich als nicht verteilbar markiert.
                         Falls sich dieser Status verändert hat, aktualisieren Sie bitte den Asset Status.',
     'does_not_exist' 	=> 'Asset existiert nicht.',
-    'does_not_exist_or_not_requestable' => 'Netter Versuch. Dieses Asset existiert nicht oder ist nicht anforderbar.',
+    'does_not_exist_or_not_requestable' => 'Dieses Asset existiert nicht oder kann nicht angefordert werden.',
     'assoc_users'	 	=> 'Dieses Asset ist im Moment an einen Benutzer herausgegeben und kann nicht entfernt werden. Bitte buchen sie das Asset wieder ein und versuchen Sie dann erneut es zu entfernen. ',
 
     'create' => [
@@ -29,6 +29,7 @@ return [
         'success' 		=> 'Asset-Audit erfolgreich protokolliert.',
     ],
 
+
     'deletefile' => [
         'error'   => 'Datei wurde nicht gelöscht. Bitte versuchen Sie es erneut.',
         'success' => 'Datei erfolgreich gelöscht.',
@@ -48,6 +49,7 @@ return [
         'file_delete_success'   => 'Die Datei wurde erfolgreich gelöscht',
         'file_delete_error'      => 'Die Datei konnte nicht gelöscht werden',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Sind Sie sicher, dass Sie dieses Asset entfernen möchten?',

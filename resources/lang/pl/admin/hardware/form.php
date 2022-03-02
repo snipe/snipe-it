@@ -40,4 +40,10 @@ return [
     'warranty'			=> 'Gwarancja',
         'warranty_expires'		=> 'Gwarancja wygasa',
     'years'				=> 'rok',
+    'asset_location' => 'Zaktualizuj lokalizację aktywa',
+    'asset_location_update_default_current' => 'Zaktualizuj domyślną i aktualną lokalizację',
+    'asset_location_update_default' => 'Zaktualizuj tylko domyślną lokalizację',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Przetwarzanie...',
 ];

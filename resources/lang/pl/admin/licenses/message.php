@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Licencja nie istnieje.',
     'user_does_not_exist' => 'Użytkownik nie istnieje.',
@@ -10,42 +10,43 @@ return [
     'select_asset_or_person' => 'Musisz wybrać składnik aktywów lub użytkownika, ale nie oba.',
     'not_found' => 'Licencja nie została znaleziona',
 
-    'create' => [
-        'error'   => 'Licencja nie została utworzona, spróbuj ponownie.',
-        'success' => 'Licencja została utworzona pomyślnie.',
-    ],
 
-    'deletefile' => [
+    'create' => array(
+        'error'   => 'Licencja nie została utworzona, spróbuj ponownie.',
+        'success' => 'Licencja została utworzona pomyślnie.'
+    ),
+
+    'deletefile' => array(
         'error'   => 'Plik nie został usunięty. Spróbuj ponownie.',
         'success' => 'Plik został usunięty pomyślnie.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Plik(i) nie zostały wysłane. Spróbuj ponownie.',
         'success' => 'Plik(i) zostały wysłane poprawnie.',
         'nofiles' => 'Nie wybrałeś żadnych plików do przesłania, albo plik, który próbujesz przekazać jest zbyt duży',
         'invalidfiles' => 'Jeden lub więcej z wybranych przez ciebie plików jest za duży lub jego typ nie jest dopuszczony. Dopuszczalne typy plików: png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
-    ],
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Licencja nie została uaktualniona, spróbuj ponownie',
-        'success' => 'Licencja została zaktualizowana pomyślnie.',
-    ],
+        'success' => 'Licencja została zaktualizowana pomyślnie.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Czy jesteś pewny, że chcesz usunąć tą licencję?',
         'error'   => 'Wystąpił problem podczas usuwania licencji. Spróbuj ponownie.',
-        'success' => 'Licencja została usunięta pomyślnie.',
-    ],
+        'success' => 'Licencja została usunięta pomyślnie.'
+    ),
 
-    'checkout' => [
+    'checkout' => array(
         'error'   => 'Nastąpił problem podczas weryfikacji licencji. Spróbuj ponownie',
-        'success' => 'Licencja poprawna',
-    ],
+        'success' => 'Licencja poprawna'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   => 'Nastąpił problem podczas weryfikacji licencji. Spróbuj ponownie',
-        'success' => 'Licencja poprawna',
-    ],
+        'success' => 'Licencja poprawna'
+    ),
 
-];
+);

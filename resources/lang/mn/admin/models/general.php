@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_models_title'     => 'Активын загварууд',
     'about_models_text'           => 'Хөрөнгийн загвар нь ижил төрлийн хөрөнгийг бүлэглэх арга юм. "MBP 2013", "IPhone 6s", гэх мэт.',
     'deleted'  					        => 'This model has been deleted.',
@@ -9,10 +9,10 @@ return [
     'bulk_delete_warn'          => 'Та :asset_count ширхэг хөрөнгийн загвар устгах гэж байна.',
     'restore'                   => 'Загварыг сэргээх',
     'requestable'               => 'Хэрэглэгчид энэ загварыг хүсч болно',
-    'show_mac_address'			      => 'Энэ загварт буй MAC хаягийн талбарыг харуулах',
+	'show_mac_address'			      => 'Энэ загварт буй MAC хаягийн талбарыг харуулах',
     'view_deleted'              => 'Устгагдсан харах',
     'view_models'               => 'Загварыг үзэх',
     'fieldset'                  => 'Талбар',
     'no_custom_field'           => 'Өөрчлөгдсөн талбар байхгүй байна',
     'add_default_values'        => 'Анхдагч утга нэмэх',
-];
+);

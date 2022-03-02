@@ -8,7 +8,7 @@
         'repair'             => 'Popravi',
         'maintenance'        => 'Vzdrževanje',
         'upgrade'            => 'Nadgradnja',
-        'calibration'        => 'Calibration',
-        'software_support'   => 'Software Support',
-        'hardware_support'   => 'Hardware Support',
+        'calibration'        => 'Kalibracija',
+        'software_support'   => 'Podpora za programsko opremo',
+        'hardware_support'   => 'Podpora za strojno opremo',
     ];

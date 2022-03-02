@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'checkout'                          => 'ชำระเงินผ่าน Checkout สำหรับผู้ใช้',
     'consumable_name'                   => 'ชื่อวัสดุสิ้นเปลือง',
     'create'                            => 'สร้างวัสดุสิ้นเปลือง',
@@ -8,4 +8,4 @@ return [
     'remaining' 			            => 'คงค้าง',
     'total' 			                => 'รวมทั้งหมด',
     'update'                            => 'ปรับปรุงวัสดุสิ้นเปลือง',
-];
+);

@@ -1,35 +1,36 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Ingxenye ayikho.',
 
-    'create' => [
+    'create' => array(
         'error'   => 'Ingxenye ayizange idalwe, sicela uzame futhi.',
-        'success' => 'Ingxenye idalwe ngempumelelo.',
-    ],
+        'success' => 'Ingxenye idalwe ngempumelelo.'
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Ingxenye ayizange ibuyekezwe, sicela uzame futhi',
-        'success' => 'Ingxenye ibuyekezwe ngempumelelo.',
-    ],
+        'success' => 'Ingxenye ibuyekezwe ngempumelelo.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Uqinisekile ukuthi ufisa ukususa le ngxenye?',
         'error'   => 'Kube nenkinga yokususa ingxenye. Ngicela uzame futhi.',
-        'success' => 'Ingxenye isusiwe ngempumelelo.',
-    ],
+        'success' => 'Ingxenye isusiwe ngempumelelo.'
+    ),
 
-     'checkout' => [
+     'checkout' => array(
         'error'   		=> 'Ingxenye ayizange ihlolwe, sicela uzame futhi',
         'success' 		=> 'Ingxenye ihloliwe ngempumelelo.',
-        'user_does_not_exist' => 'Lo msebenzisi awuvumelekile. Ngicela uzame futhi.',
-    ],
+        'user_does_not_exist' => 'Lo msebenzisi awuvumelekile. Ngicela uzame futhi.'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   		=> 'Ingxenye ayizange ihlolwe, sicela uzame futhi',
         'success' 		=> 'Ingxenye ihlolwe ngempumelelo.',
-        'user_does_not_exist' => 'Lo msebenzisi awuvumelekile. Ngicela uzame futhi.',
-    ],
+        'user_does_not_exist' => 'Lo msebenzisi awuvumelekile. Ngicela uzame futhi.'
+    )
 
-];
+
+);

@@ -6,8 +6,11 @@ return [
     'asset_depreciations'  					=> 'சொத்து குறைபாடுகள்',
     'create'  					            => 'தேய்மானத்தை உருவாக்குங்கள்',
     'depreciation_name'  					=> 'தேய்மானி பெயர்',
+    'depreciation_min'                      => 'Floor Value of Depreciation',
     'number_of_months'  					=> 'மாதங்களின் எண்ணிக்கை',
     'update'  					            => 'தேய்மானம் புதுப்பிக்கவும்',
-    'depreciation_min'                      => 'Minimum Value after Depreciation'
-
+    'depreciation_min'                      => 'Minimum Value after Depreciation',
+    'no_depreciations_warning'               => '<strong>Warning: </strong>
+                      You do not currently have any depreciations set up.
+                      Please set up at least one depreciation to view the depreciation report.',
 ];

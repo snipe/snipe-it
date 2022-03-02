@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about'      	=> 'Info Statusbezeichnung',
     'archived'      	=> 'Archiviert',
     'create'      	=> 'Statusbezeichnung erstellen',
@@ -16,4 +16,4 @@ return [
     'title'      	=> 'Statusbezeichnungen',
     'undeployable'  => 'Nicht einsetzbar',
     'update'      	=> 'Statusbezeichnung bearbeiten',
-];
+);

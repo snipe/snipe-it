@@ -25,7 +25,7 @@
 | **{{ trans('general.status') }}** | {{ $item->assetstatus->name }}
 @endif
 @if ($item->assignedTo)
-| **Checked out to** | {!! $item->assignedTo->present()->nameUrl() !!} ({{ $item->present()->statusMeta }})
+| **{{ trans('general.checked_out_to') }}** | {!! $item->assignedTo->present()->nameUrl() !!} ({{ $item->present()->statusMeta }})
 @endif
 @if (isset($item->manufacturer))
 | **{{ trans('general.manufacturer') }}** | {{ $item->manufacturer->name }} |
@@ -40,7 +40,7 @@
 | **{{ trans('mail.serial') }}** | {{ $item->serial }} |
 @endif
 @if ((isset($last_checkout)) && ($last_checkout!=''))
-| **Last Checkout** | {{ $last_checkout }} |
+| **{{ trans('general.last_checkout') }}** | {{ $last_checkout }} |
 @endif
 @if ((isset($expected_checkin)) && ($expected_checkin!=''))
 | **{{ trans('mail.expecting_checkin_date') }}** | {{ $expected_checkin }} |

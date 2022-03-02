@@ -1,5 +1,5 @@
 <?php
 
-return [
+return array(
     'title'      				=> 'نام کامپیوننت',
-];
+);

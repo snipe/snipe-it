@@ -8,6 +8,7 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SettingsSamlRequest;
 use App\Http\Requests\SetupUserRequest;
 use App\Models\Setting;
+use App\Models\Asset;
 use App\Models\User;
 use App\Notifications\FirstAdminNotification;
 use App\Notifications\MailTest;
@@ -21,6 +22,7 @@ use Image;
 use Input;
 use Redirect;
 use Response;
+use App\Http\Requests\SlackSettingsRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Artisan;
 
@@ -418,6 +420,7 @@ class SettingsController extends Controller
                 $setting->brand = 1;
         }
 
+
         $setting = $request->handleImages($setting, 600, 'email_logo', '', 'email_logo');
 
 
@@ -427,7 +430,9 @@ class SettingsController extends Controller
             // If they are uploading an image, validate it and upload it
         }
 
+
         $setting = $request->handleImages($setting, 600, 'label_logo', '', 'label_logo');
+
 
         if ('1' == $request->input('clear_label_logo')) {
             Storage::disk('public')->delete($setting->label_logo);
@@ -472,6 +477,7 @@ class SettingsController extends Controller
 
         return redirect()->back()->withInput()->withErrors($setting->getErrors());
     }
+
 
     /**
      * Return a form to allow a super admin to update settings.
@@ -612,6 +618,26 @@ class SettingsController extends Controller
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
+        // Check if the audit interval has changed - if it has, we want to update ALL of the assets audit dates
+        if ($request->input('audit_interval') != $setting->audit_interval) {
+
+            // Be careful - this could be a negative number
+            $audit_diff_months = ((int)$request->input('audit_interval') - (int)($setting->audit_interval));
+            
+            // Grab all of the assets that have an existing next_audit_date
+            $assets = Asset::whereNotNull('next_audit_date')->get();
+
+            // Update all of the assets' next_audit_date values
+            foreach ($assets as $asset) {
+
+                if ($asset->next_audit_date != '') {
+                    $old_next_audit = new \DateTime($asset->next_audit_date);
+                    $asset->next_audit_date = $old_next_audit->modify($audit_diff_months.' month')->format('Y-m-d');
+                    $asset->forceSave();
+                }
+            }
+        }
+
         $alert_email = rtrim($request->input('alert_email'), ',');
         $alert_email = trim($alert_email);
         $admin_cc_email = rtrim($request->input('admin_cc_email'), ',');
@@ -659,11 +685,15 @@ class SettingsController extends Controller
      *
      * @return View
      */
-    public function postSlack(Request $request)
+    public function postSlack(SlackSettingsRequest $request)
     {
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
+
+        $setting->slack_endpoint = $request->input('slack_endpoint');
+        $setting->slack_channel = $request->input('slack_channel');
+        $setting->slack_botname = $request->input('slack_botname');
 
         if ($setting->save()) {
             return redirect()->route('settings.index')
@@ -826,6 +856,8 @@ class SettingsController extends Controller
         $setting->labels_pageheight = $request->input('labels_pageheight');
         $setting->labels_display_company_name = $request->input('labels_display_company_name', '0');
         $setting->labels_display_company_name = $request->input('labels_display_company_name', '0');
+
+
 
         if ($request->filled('labels_display_name')) {
             $setting->labels_display_name = 1;
@@ -1005,10 +1037,10 @@ class SettingsController extends Controller
      */
     public function getBackups()
     {
+
         $path = 'app/backups';
         $backup_files = Storage::files($path);
         $files_raw = [];
-
 
         if (count($backup_files) > 0) {
             for ($f = 0; $f < count($backup_files); $f++) {
@@ -1018,7 +1050,6 @@ class SettingsController extends Controller
                     //$lastmodified = Carbon::parse(Storage::lastModified($backup_files[$f]))->toDatetimeString();
                     $file_timestamp = Storage::lastModified($backup_files[$f]);
 
-
                     $files_raw[] = [
                         'filename' => basename($backup_files[$f]),
                         'filesize' => Setting::fileSizeConvert(Storage::size($backup_files[$f])),
@@ -1027,6 +1058,7 @@ class SettingsController extends Controller
                         
                     ];
                 }
+
                
             }
         }
@@ -1192,11 +1224,10 @@ class SettingsController extends Controller
                 // grab the user's info so we can make sure they exist in the system
                 $user = User::find(Auth::user()->id);
 
+                // TODO: run a backup
 
-                // TODO: run a backup 
 
-                // TODO: add db:wipe 
-
+                Artisan::call('db:wipe');
 
                 // run the restore command
                 Artisan::call('snipeit:restore', 
@@ -1206,27 +1237,29 @@ class SettingsController extends Controller
                     'filename' => storage_path($path).'/'.$filename
                 ]);
 
-                $output = Artisan::output();
-                    
-            
                 // If it's greater than 300, it probably worked
+                $output = Artisan::output();
                 if (strlen($output) > 300) {
+                    $find_user = DB::table('users')->where('first_name', $user->first_name)->where('last_name', $user->last_name)->exists();
+                    if(!$find_user){
+                        \Log::warning('Attempting to restore user: ' . $user->first_name . ' ' . $user->last_name);
+                        $new_user = $user->replicate();
+                        $new_user->push();
+                    }
+
+                    $session_files = glob(storage_path("framework/sessions/*"));
+                    foreach ($session_files as $file) {
+                        if (is_file($file))
+                            unlink($file);
+                    }
+                    DB::table('users')->update(['remember_token' => null]);
                     \Auth::logout();
+
                     return redirect()->route('login')->with('success', 'Your system has been restored. Please login again.');
                 } else {
                     return redirect()->route('settings.backups.index')->with('error', $output);
 
                 }
-                //dd($output);
-
-                // TODO: insert the user if they are not there in the old one
-                
-
-
-
-                // log the user out
-                
-
 
             } else {
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));

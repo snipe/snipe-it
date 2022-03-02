@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'accepted'                  => 'קיבלת בהצלחה את הנכס הזה.',
     'declined'                  => 'דחיית את הנכס הזה בהצלחה.',
@@ -13,8 +13,10 @@ return [
     'user_deleted_warning'      => 'משתמש זה נמחק. יהיה עליך לשחזר משתמש זה כדי לערוך אותם או להקצות להם נכסים חדשים.',
     'ldap_not_configured'        => 'שילוב LDAP לא הוגדר עבור התקנה זו.',
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
+    'password_reset_sent'       => 'A password reset link has been sent to :email!',
 
-    'success' => [
+
+    'success' => array(
         'create'    => 'המשתמש נוצר בהצלחה.',
         'update'    => 'המשתמש עודכן בהצלחה.',
         'update_bulk'    => 'המשתמשים עודכנו בהצלחה!',
@@ -25,9 +27,9 @@ return [
         'unsuspend' => 'המשתמש בוטל בהצלחה.',
         'restored'  => 'המשתמש שוחזר בהצלחה.',
         'import'    => 'המשתמשים יובאו בהצלחה.',
-    ],
+    ),
 
-    'error' => [
+    'error' => array(
         'create' => 'היתה בעיה ביצירת המשתמש. בבקשה נסה שוב.',
         'update' => 'היתה בעיה בעדכון המשתמש. בבקשה נסה שוב.',
         'delete' => 'היתה בעיה במחיקת המשתמש. בבקשה נסה שוב.',
@@ -42,18 +44,18 @@ return [
         'ldap_could_not_search' => 'לא ניתן לחפש בשרת LDAP. בדוק את תצורת שרת LDAP בקובץ תצורת LDAP. <br> שגיאה משרת LDAP:',
         'ldap_could_not_get_entries' => 'לא ניתן לקבל רשומות משרת LDAP. בדוק את תצורת שרת LDAP בקובץ תצורת LDAP. <br> שגיאה משרת LDAP:',
         'password_ldap' => 'הסיסמה עבור חשבון זה מנוהלת על ידי LDAP / Active Directory. צור קשר עם מחלקת ה- IT כדי לשנות את הסיסמה שלך.',
-    ],
+    ),
 
-    'deletefile' => [
+    'deletefile' => array(
         'error'   => 'הקובץ לא נמחק. בבקשה נסה שוב.',
         'success' => 'הקובץ נמחק בהצלחה.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'הקובץ לא הועלה. בבקשה נסה שוב.',
         'success' => 'הקבצים הועלו בהצלחה.',
         'nofiles' => 'לא בחרת קבצים להעלאה',
         'invalidfiles' => 'אחד או יותר מהקבצים שלך גדול מדי או שהוא סוג קובץ שאינו מותר. סוגי קבצים מותרים הם png, gif, jpg, doc, docx, pdf ו- txt.',
-    ],
+    ),
 
-];
+);

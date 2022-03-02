@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Aktivní',
     'allow'  				=> 'Povolit',
     'checkedout'  			=> 'Zařízení',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Zobraz aktuální uživatele',
     'show_deleted'          => 'Zobraz smazané uživatele',
     'title' 				=> 'Název',
-    'to_restore_them'		=> 'obnovit.',
+	'to_restore_them'		=> 'obnovit.',
     'updateuser' 			=> 'Aktualizace uživatele',
     'username' 				=> 'Uživatelské jméno',
-    'user_deleted_text' 	=> 'Tento uživatel byl označen jako smazaný.',
+	'user_deleted_text' 	=> 'Tento uživatel byl označen jako smazaný.',
     'username_note' 		=> '(Použije se pouze pro vazbu služby Active Directory, nikoliv pro přihlášení.)',
     'cloneuser'             => 'Duplikuj uživatele',
     'viewusers' 			=> 'Zobrazit uživatele',
-];
+);

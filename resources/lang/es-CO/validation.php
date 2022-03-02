@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,10 +13,10 @@ return array(
     |
     */
 
-    'accepted'             => ':attribute debe ser aceptado.',
-    'active_url'           => ':attribute no es una URL correcta.',
-    'after'                => ':attribute debe ser posterior a :date.',
-    'after_or_equal'       => 'El atributo: debe ser una fecha posterior o igual a: fecha.',
+    'accepted'             => 'El :attribute debe ser aceptado.',
+    'active_url'           => 'El campo :atribute no es una URL válida.',
+    'after'                => 'El campo :atribute debe ser una fecha posterior a :date.',
+    'after_or_equal'       => 'El campo :atribute debe ser una fecha posterior o igual a :date.',
     'alpha'                => ':attribute solo acepta letras.',
     'alpha_dash'           => ':attribute solo acepta letras, números y guiones.',
     'alpha_num'            => ':attribute solo acepta letras y números.',
@@ -64,6 +64,7 @@ return array(
         'string'  => ':attribute debe contener como mínimo :min caracteres.',
         'array'   => 'El atributo: debe tener al menos: elementos min.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'El :attribute seleccionado no es correcto.',
     'numeric'              => ':attribute debe ser un número.',
     'present'              => 'El campo: atributo debe estar presente.',
@@ -88,8 +89,8 @@ return array(
     'unique'               => ':attribute ya ha sido introducido.',
     'uploaded'             => 'El atributo: no se pudo cargar.',
     'url'                  => ':attribute formato incorrecto.',
-    "unique_undeleted"     => "El :atrribute debe ser único.",
-    "non_circular"         => ":attribute no debe crear una referencia circular.",
+    'unique_undeleted'     => 'El :atrribute debe ser único.',
+    'non_circular'         => ':attribute no debe crear una referencia circular.',
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +102,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +115,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "El campo: atributo contiene un carácter que no está permitido.",
-        "email_array"      => "Una o más direcciones de correo electrónico no es válida.",
-        "hashed_pass"      => "Tu contraseña actual es incorrecta",
+        'alpha_space' => 'El campo: atributo contiene un carácter que no está permitido.',
+        'email_array'      => 'Una o más direcciones de correo electrónico no es válida.',
+        'hashed_pass'      => 'Tu contraseña actual es incorrecta',
         'dumbpwd'          => 'Esa contraseña es muy común.',
-        "statuslabel_type" => "Debe seleccionar un tipo de etiqueta de estado válido.",
+        'statuslabel_type' => 'Debe seleccionar un tipo de etiqueta de estado válido.',
     ],
 
     /*
@@ -135,4 +135,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

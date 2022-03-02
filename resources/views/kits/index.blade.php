@@ -20,7 +20,6 @@
     <div class="box box-default">
       <div class="box-body">
         <div class="table-responsive">
-
             <table
                 data-cookie-id-table="kitsTable"
                 data-columns="{{ \App\Presenters\PredefinedKitPresenter::dataTableLayout() }}"
@@ -41,7 +40,6 @@
             }'>
           </table>
         </div>
-        
       </div> <!--.box-body-->
     </div> <!-- /.box.box-default-->
   </div> <!-- .col-md-12-->

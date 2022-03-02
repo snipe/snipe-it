@@ -57,7 +57,6 @@ class ItemImportRequest extends FormRequest
             }
             // We submit as csv field: column, but the importer is happier if we flip it here.
             $fieldMappings = array_change_key_case(array_flip($import->field_map), CASE_LOWER);
-            // dd($fieldMappings);
         }
         $importer->setCallbacks([$this, 'log'], [$this, 'progress'], [$this, 'errorCallback'])
                  ->setUserId(Auth::id())
@@ -65,8 +64,6 @@ class ItemImportRequest extends FormRequest
                  ->setShouldNotify($this->has('send-welcome'))
                  ->setUsernameFormat('firstname.lastname')
                  ->setFieldMappings($fieldMappings);
-        // $logFile = storage_path('logs/importer.log');
-        // \Log::useFiles($logFile);
         $importer->import();
 
         return $this->errors;

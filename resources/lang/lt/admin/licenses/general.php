@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'Apie licencijas',
     'about_licenses'                  => 'Licencijos naudojamos programinei įrangai stebėti. Jie turi tam tikrą skaičių vietų, kurias galima patikrinti asmenims',
     'checkin'  					=> 'Išduoti licenzijos prieigą',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'Programinės įrangos licenzijos',
     'user'  					=> 'Naudotojas',
     'view'  					=> 'Peržiūrėti licenziją',
-];
+);

@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'Potvrdiť hromadné odstránenie majetku',
+return [
+    'bulk_delete'		=> 'Potvrdiť hromadné odstránenie majetku',
   'bulk_delete_help'	=> 'Nižšie skontrolujte zoznam majetku na odstránenie. Po odstránení je možné tieto majetky obnoviť, nebudú už ale priradené k žiadnym používateľom, ku ktorým sú momentálne priradení.',
   'bulk_delete_warn'	=> 'Chystáte sa odstrániť :asset_count majetky.',
-	'bulk_update'		=> 'Hromadná úprava majetku',
-	'bulk_update_help'	=> 'Tento formulár umožňuje hromadnú úpravu majetku. Vyplňte iba položky, ktoré chcete zmeniť. Akékoľvek prázdne položky zostanú nezmenené. ',
-	'bulk_update_warn'	=> 'Chystáte sa upraviť vlastnosti :asset_count majetkov.',
+    'bulk_update'		=> 'Hromadná úprava majetku',
+    'bulk_update_help'	=> 'Tento formulár umožňuje hromadnú úpravu majetku. Vyplňte iba položky, ktoré chcete zmeniť. Akékoľvek prázdne položky zostanú nezmenené. ',
+    'bulk_update_warn'	=> 'Chystáte sa upraviť vlastnosti :asset_count majetkov.',
     'checkedout_to'		=> 'Odovzdané',
     'checkout_date'		=> 'Dátum odovzdania',
     'checkin_date'		=> 'Dátum prijatia',
@@ -38,7 +38,12 @@ return array(
     'tag'				=> 'Označenie majetku',
     'update'			=> 'Aktualizácia majetku',
     'warranty'			=> 'Záruka',
-		'warranty_expires'		=> 'Koniec záruky',
+        'warranty_expires'		=> 'Koniec záruky',
     'years'				=> 'roky/ov',
-)
-;
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+];

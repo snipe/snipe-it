@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'accepted'                  => 'Uwamukele ngempumelelo le mali.',
     'declined'                  => 'Uye wenqaba ngempumelelo le mali.',
@@ -13,8 +13,10 @@ return [
     'user_deleted_warning'      => 'Lo msebenzisi ususiwe. Kuzodingeka ubuyisele lo msebenzisi ukuwahlela noma ubanikeze amafa amasha.',
     'ldap_not_configured'        => 'Ukuhlanganiswa kwe-LDAP akulungiselelwe lokhu kufakwa.',
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
+    'password_reset_sent'       => 'A password reset link has been sent to :email!',
 
-    'success' => [
+
+    'success' => array(
         'create'    => 'Umsebenzisi udale ngempumelelo.',
         'update'    => 'Umsebenzisi ubuyekezwe ngempumelelo.',
         'update_bulk'    => 'Abasebenzisi baphinde babuyekezwe ngempumelelo!',
@@ -25,9 +27,9 @@ return [
         'unsuspend' => 'Umsebenzisi uphumelelwanga ngempumelelo.',
         'restored'  => 'Umsebenzisi ubuyiselwe ngempumelelo.',
         'import'    => 'Abasebenzisi bangeniswe ngempumelelo.',
-    ],
+    ),
 
-    'error' => [
+    'error' => array(
         'create' => 'Kube nenkinga yokudala umsebenzisi. Ngicela uzame futhi.',
         'update' => 'Kube nenkinga yokuvuselela umsebenzisi. Ngicela uzame futhi.',
         'delete' => 'Kube nenkinga yokusula umsebenzisi. Ngicela uzame futhi.',
@@ -42,18 +44,18 @@ return [
         'ldap_could_not_search' => 'Ayikwazanga ukusesha isiphakeli se-LDAP. Sicela uhlole ukumisa kweseva yakho ye-LDAP kufayili ye-LDAP config. <br>Iphutha kusuka kwiseva ye-LDAP:',
         'ldap_could_not_get_entries' => 'Ayikwazanga ukungena okuvela kuseva ye-LDAP. Sicela uhlole ukumisa kweseva yakho ye-LDAP kufayili ye-LDAP config. <br>Iphutha kusuka kwiseva ye-LDAP:',
         'password_ldap' => 'Iphasiwedi yale akhawunti ilawulwa yi-LDAP / Active Directory. Sicela uxhumane nomnyango wakho we-IT ukushintsha iphasiwedi yakho.',
-    ],
+    ),
 
-    'deletefile' => [
+    'deletefile' => array(
         'error'   => 'Ifayela alisusiwe. Ngicela uzame futhi.',
         'success' => 'Ifayili isusiwe ngempumelelo.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Amafayela (ama) awalayishiwe. Ngicela uzame futhi.',
         'success' => 'Amafayela (ama) alayishwe ngempumelelo.',
         'nofiles' => 'Awukakhethi noma yimaphi amafayela okulayishwa',
         'invalidfiles' => 'Ifayela elilodwa noma ngaphezulu likhulu kakhulu noma ifayelathi engavumelekile. Amafayela afakiwe avunyelwe i-png, i-gif, i-jpg, i-doc, i-docx, i-pdf, ne-txt.',
-    ],
+    ),
 
-];
+);

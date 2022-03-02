@@ -124,7 +124,7 @@
                     <li>
                         <a href="#components" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
-                            <i class="far fa-hdd" aria-hidden="true"></i>
+                            <i class="far fa-hdd fa-2x" aria-hidden="true"></i>
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('general.components') }}
                             {!! ($asset->components->count() > 0 ) ? '<badge class="badge badge-secondary">'.$asset->components->count().'</badge>' : '' !!}
@@ -285,7 +285,11 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                {{ Helper::getFormattedDateObject($audit_log->created_at, 'date', false) }} (by {{ link_to_route('users.show', $audit_log->user->present()->fullname(), [$audit_log->user->id]) }})
+                                                {{ \App\Helpers\Helper::getFormattedDateObject($audit_log->created_at, 'date', false) }} 
+                                                @if ($audit_log->user) 
+                                                    (by {{ link_to_route('users.show', $audit_log->user->present()->fullname(), [$audit_log->user->id]) }})
+                                                @endif 
+                                                
                                             </div>
                                         </div>
                                     @endif
@@ -311,7 +315,7 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                <ul class="list-unstyled" style="line-height: 25px;">
+                                                <ul class="list-unstyled">
                                                     @can('view', \App\Models\Manufacturer::class)
 
                                                         <li>
@@ -449,7 +453,7 @@
                                                         @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
                                                             <a href="{{ $asset->{$field->db_column_name()} }}" target="_new">{{ $asset->{$field->db_column_name()} }}</a>
                                                         @else
-                                                            {!! nl2br(e($asset->{$field->db_column_name()})) !!}
+                                                            {!! nl2br(e($asset->{$field->db_column_name()})) !!} &nbsp;
                                                         @endif
                                                     @endif
                                                 </div>
@@ -499,7 +503,6 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="col-md-6" style="margin-left:-15px;">
                                                     @if (($asset->id) && ($asset->location))
                                                         {{ $asset->location->currency }}
                                                     @elseif (($asset->id) && ($asset->location))
@@ -509,7 +512,7 @@
                                                     @endif
                                                     {{ Helper::formatCurrencyOutput($asset->getDepreciatedValue() )}}
 
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                     @endif
@@ -972,13 +975,13 @@
                                               'class' => 'form-inline',
                                                'id' => 'bulkForm']) }}
                                     <div id="toolbar">
-                                        <label for="bulk_actions"><span class="sr-only">Bulk Actions</span></label>
+                                        <label for="bulk_actions"><span class="sr-only">{{ trans('general.bulk_actions')}}</span></label>
                                         <select name="bulk_actions" class="form-control select2" style="width: 150px;" aria-label="bulk_actions">
-                                            <option value="edit">Edit</option>
-                                            <option value="delete">Delete</option>
-                                            <option value="labels">Generate Labels</option>
+                                            <option value="edit">{{ trans('button.edit') }}</option>
+                                            <option value="delete">{{ trans('button.delete')}}</option>
+                                            <option value="labels">{{ trans_choice('button.generate_labels', 2) }}</option>
                                         </select>
-                                        <button class="btn btn-primary" id="bulkEdit" disabled>Go</button>
+                                        <button class="btn btn-primary" id="bulkEdit" disabled>{{ trans('button.go') }}</button>
                                     </div>
 
                                     <!-- checked out assets table -->
@@ -1028,7 +1031,7 @@
                             <div class="col-md-12">
                                 @can('update', \App\Models\Asset::class)
                                     <div id="maintenance-toolbar">
-                                        <a href="{{ route('maintenances.create', ['asset_id' => $asset->id]) }}" class="btn btn-primary">Add Maintenance</a>
+                                        <a href="{{ route('maintenances.create', ['asset_id' => $asset->id]) }}" class="btn btn-primary">{{ trans('button.add_maintenance') }}</a>
                                     </div>
                             @endcan
 
@@ -1083,8 +1086,8 @@
                       data-cookie="true">
                 <thead>
                 <tr>
-                  <th data-visible="true" style="width: 40px;" class="hidden-xs">Icon</th>
-                  <th class="col-sm-2" data-visible="true" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
+                  <th data-visible="true" style="width: 40px;" class="hidden-xs">{{ trans('admin/hardware/table.icon') }}</th>
+                  <th class="col-sm-2" data-visible="true" data-field="action_date" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
                   <th class="col-sm-1" data-visible="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
                   <th class="col-sm-1" data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
                   <th class="col-sm-2" data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
@@ -1094,7 +1097,7 @@
                     <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
                   @endif
                   <th class="col-md-3" data-visible="false" data-field="file" data-visible="false"  data-formatter="fileUploadFormatter">{{ trans('general.download') }}</th>
-                  <th class="col-sm-2" data-field="log_meta" data-visible="true" data-formatter="changeLogFormatter">Changed</th>
+                  <th class="col-sm-2" data-field="log_meta" data-visible="true" data-formatter="changeLogFormatter">{{ trans('admin/hardware/table.changed')}}</th>
                 </tr>
                 </thead>
               </table>

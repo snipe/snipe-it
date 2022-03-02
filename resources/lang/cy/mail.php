@@ -60,7 +60,7 @@ return [
     'test_mail_text' => 'Prawf yw hwn o\'r System Rheoli Asedau Snipe-IT. Os cawsoch chi hwn, mae\'r ebostyn gweithio :)',
     'the_following_item' => 'Mae\'r eitem yma wedi nodi i fewn: ',
     'low_inventory_alert' => 'Mae yna :count eitem sy\'n is na\'r isafswm neu a fydd yn isel cyn bo hir. | Mae yna :count eitemau sy\'n is na\'r isafswm neu a fydd yn isel cyn bo hir.',
-    'assets_warrantee_alert' => 'Mae yna :count ased gyda gwarant yn dod i ben yn ystod y :threshold dydd nesaf | Mae :count asedau gyda gwarantau yn dod i ben yn y :threshold diwrnod nesaf.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'Mae yna :count trwydded yn dod i ben yn ystod y :threshold diwrnod nesaf | Mae :count trwyddedau yn dod i ben yn y :threshold diwrnod nesaf.',
     'to_reset' => 'I ailosod eich cyfrinair :web, cwblhewch y ffurflen hon:',
     'type' => 'Math',

@@ -1,8 +1,7 @@
 @extends('layouts/setup')
-
 {{-- Page title --}}
 @section('title')
-Create a User ::
+{{ trans('general.create_admin_user') }}
 @parent
 @stop
 
@@ -12,9 +11,9 @@ Create a User ::
 	<div class="col-md-12">
         <div class="alert alert-warning">
             <i class="fas fa-check"></i>
-            Success! Your admin user has been added!
+            {{ trans('general.create_admin_success') }}
         </div>
     </div>
-    <p>Click here to go to your app login! <a href="{{ url('/') }}">{{ url('/') }}</a></p>
+    <p>{{ trans('general.create_admin_redirect') }} <a href="{{ url('/') }}">{{ url('/') }}</a></p>
 </div>
 @stop

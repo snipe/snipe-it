@@ -1,35 +1,36 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'A fogyóeszköz nem létezik.',
 
-    'create' => [
+    'create' => array(
         'error'   => 'A kellék nem jött létre, kérlek próbáld meg újra.',
-        'success' => 'A Kellékek sikeresen létrejött.',
-    ],
+        'success' => 'A Kellékek sikeresen létrejött.'
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'A kellék nem frissült, kérlek próbáld meg újra',
-        'success' => 'A Kellékek sikeresen frissítve.',
-    ],
+        'success' => 'A Kellékek sikeresen frissítve.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Biztosan törli ezt a kelléket?',
         'error'   => 'Probléma támadt a kellék törlésével. Próbálkozz újra.',
-        'success' => 'A kellék sikeresen törölve lett.',
-    ],
+        'success' => 'A kellék sikeresen törölve lett.'
+    ),
 
-     'checkout' => [
+     'checkout' => array(
         'error'   		=> 'A kellék nem lett kiadva, próbálkozz újra',
         'success' 		=> 'A kellék sikeresen kiadva.',
-        'user_does_not_exist' => 'Érvénytelen felhasználó. Kérem, próbálja újra.',
-    ],
+        'user_does_not_exist' => 'Érvénytelen felhasználó. Kérem, próbálja újra.'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   		=> 'A kellék nem lett visszavéve, próbálkozz újra',
         'success' 		=> 'A kellék sikeresen visszavéve.',
-        'user_does_not_exist' => 'Érvénytelen felhasználó. Kérem, próbálja újra.',
-    ],
+        'user_does_not_exist' => 'Érvénytelen felhasználó. Kérem, próbálja újra.'
+    )
 
-];
+
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'checkout'                          => 'Kullanıcıya Sarf malzemesi Satın Alma',
     'consumable_name'                   => 'Sarf Malzemesi Adı',
     'create'                            => 'Sarf Malzemesi Oluştur',
@@ -8,4 +8,4 @@ return [
     'remaining' 			            => 'Kalan',
     'total' 			                => 'Toplam',
     'update'                            => 'Sarf malzemesini Güncelle',
-];
+);

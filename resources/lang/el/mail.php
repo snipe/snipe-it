@@ -59,7 +59,7 @@ return [
     'test_mail_text' => 'Πρόκειται για μια δοκιμή από το σύστημα διαχείρισης περιουσιακών στοιχείων της Snipe-IT. Αν το έχετε, το mail λειτουργεί :)',
     'the_following_item' => 'Το παρακάτω στοιχείο έχει ελεγχθεί:',
     'low_inventory_alert' => 'There is :count item that is below minimum inventory or will soon be low.|There are :count items that are below minimum inventory or will soon be low.',
-    'assets_warrantee_alert' => 'There is :count asset with a warrantee expiring in the next :threshold days.|There are :count assets with warrantees expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'to_reset' => 'Για να επαναφέρετε τον κωδικό πρόσβασης στον ιστό, συμπληρώστε αυτήν τη φόρμα:',
     'type' => 'Τύπος',

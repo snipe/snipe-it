@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'accepted'                  => 'Matagumpay mong natanggap ang asset na ito.',
     'declined'                  => 'Matagumpay mong hindi tinaggap ang asset na ito.',
@@ -13,8 +13,10 @@ return [
     'user_deleted_warning'      => 'Ang user na ito ay nai-delete na. Kailangang ibalik ang user na ito upang i-edit o mag-assign ng bagong mga asset.',
     'ldap_not_configured'        => 'Ang integrasyon ng LDAP ay hindi nai-configure sa pag-install na ito.',
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
+    'password_reset_sent'       => 'A password reset link has been sent to :email!',
 
-    'success' => [
+
+    'success' => array(
         'create'    => 'Ang user ay matagumpay na nalikha.',
         'update'    => 'Ang user ay matagumpay na nai-update.',
         'update_bulk'    => 'Ang mga user ay matagumpay nai-update!',
@@ -25,9 +27,9 @@ return [
         'unsuspend' => 'Ang user ay matagumpay na hindi na sinuspende.',
         'restored'  => 'Ang user ay matagumpay na naibalik sa dati.',
         'import'    => 'Ang mga user ay matagumpay nang na-import.',
-    ],
+    ),
 
-    'error' => [
+    'error' => array(
         'create' => 'Mayroong isyu sa pagsagawa ng user. Mangyaring subukang muli.',
         'update' => 'Mayroong isyu sa pag-update sa user. Mangyaring subukang muli.',
         'delete' => 'Mayroong isyu sa pag-delete ng user. Mangyaring subukang muli.',
@@ -43,18 +45,18 @@ return [
         'ldap_could_not_search' => 'Hindi makapaghanap ng serber ng LDAP. Mangyaring suriin ang iyong konpigurasyon ng serber ng LDAP sa LDAP config file. <br>may error mula sa Serber ng LDAP:',
         'ldap_could_not_get_entries' => 'Hindi makakuha ng entry mula sa serber ng LDAP. Mangyaring surrin ang iyong konpigurasyon ng serber ng LDAP sa LDAP config file. <br>May-error mula sa Serber ng LDAP:',
         'password_ldap' => 'Ang password sa account na ito ay pinamahalaan ng LDAP/Actibong Direktorya. Mangyaring komontak sa iyong IT department para baguhin ang iyong password. ',
-    ],
+    ),
 
-    'deletefile' => [
+    'deletefile' => array(
         'error'   => 'Ang file ay hindi nai-delete. Mangyaring subukang muli.',
         'success' => 'Ang file ay matagumpay nang nai-delete.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Ang file(s) ay hindi nai-upload. Mangyaring subukang muli.',
         'success' => 'Ang file(s) ay matagumpay na nai-upload.',
         'nofiles' => 'Hindi ka pumili ng kahit anong mga file para i-upload',
         'invalidfiles' => 'Ang isa o higit sa iyong mga file ay masyadong malaki o isang uri ng file na hindi pinapayagan. Ang mga pinapayagang mga file ay ang png, gif, jpg, doc, docx, pdf, at txt.',
-    ],
+    ),
 
-];
+);

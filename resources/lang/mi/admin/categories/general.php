@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'asset_categories' 					=> 'Ngā Kāwai Āhuatanga',
     'category_name'  					=> 'Ingoa Kāwai',
     'checkin_email'                     => 'Send email to user on checkin/checkout.',
@@ -18,5 +18,6 @@ return [
     'update'  							=> 'Whakahōuhia te Kāwai',
     'use_default_eula'					=> 'Whakamahia te taunoa 123_57__321primary taunoa EULA</a> hei utu mo tenei.',
     'use_default_eula_disabled'			=> '<del>Me te taunoa tuatahi o te EULA instead.</del> Karekau he tautuhinga taunoa EULA. Tēnā tāpirihia tētahi i Ngā Tautuhinga.',
+    'use_default_eula_column'			=> 'Use default EULA',
 
-];
+);

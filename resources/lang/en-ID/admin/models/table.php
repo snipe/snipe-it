@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'create'				=> 'Buat Model Aset',
     'created_at' 			=> 'Dibuat di',
@@ -14,4 +14,4 @@ return [
     'update'				=> 'Perbarui model aset',
     'clone'				=> 'Gandakan model',
     'edit'				=> 'Ubah model',
-];
+);

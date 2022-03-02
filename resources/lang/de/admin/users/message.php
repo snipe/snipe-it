@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'accepted'                  => 'Sie haben diesen Gegenstand erfolgreich angenommen.',
     'declined'                  => 'Sie haben diesen Gegenstand abgelehnt.',
@@ -13,8 +13,10 @@ return [
     'user_deleted_warning'      => 'Dieser Benutzer wurde gelöscht. Sie müssen ihn wiederherstellen, um ihn zu bearbeiten oder neue Assets zuzuweisen.',
     'ldap_not_configured'        => 'LDAP Integration wurde für diese Installation nicht konfiguriert.',
     'password_resets_sent'      => 'Den ausgewählten Benutzern, die aktiviert sind und eine gültige E-Mail-Adresse haben, wurde ein Link zum Zurücksetzen des Passworts gesendet.',
+    'password_reset_sent'       => 'Der Link zum Zurücksetzen des Passworts wurde an :email gesendet!',
 
-    'success' => [
+
+    'success' => array(
         'create'    => 'Benutzer wurde erfolgreich erstellt.',
         'update'    => 'Benutzer wurde erfolgreich bearbeitet.',
         'update_bulk'    => 'Benutzer erfolgreich geändert!',
@@ -25,9 +27,9 @@ return [
         'unsuspend' => 'Der Benutzer wurde erfolgreich reaktiviert.',
         'restored'  => 'Benutzer wurde erfolgreich wiederhergestellt.',
         'import'    => 'Benutzer erfolgreich Importiert.',
-    ],
+    ),
 
-    'error' => [
+    'error' => array(
         'create' => 'Beim Erstellen des Benutzers ist ein Fehler aufgetreten. Bitte probieren Sie es noch einmal.',
         'update' => 'Beim Aktualisieren des Benutzers ist ein Fehler aufgetreten. Bitte probieren Sie es noch einmal.',
         'delete' => 'Beim Entfernen des Benutzers ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
@@ -42,18 +44,18 @@ return [
         'ldap_could_not_search' => 'Konnte LDAP Server nicht suchen. Bitte LDAP Einstellungen in der LDAP Konfigurationsdatei prüfen. <br>Fehler vom LDAP Server:',
         'ldap_could_not_get_entries' => 'Konnte keine Einträge vom LDAP Server abrufen. Bitte LDAP Einstellungen in der LDAP Konfigurationsdatei prüfen. <br>Fehler vom LDAP Server:',
         'password_ldap' => 'Das Passwort für diesen Account wird vom LDAP/Active Directory verwaltet. Bitte kontaktieren Sie Ihre IT-Abteilung, um Ihr Passwort zu ändern. ',
-    ],
+    ),
 
-    'deletefile' => [
+    'deletefile' => array(
         'error'   => 'Datei nicht gelöscht. Bitte versuchen Sie es nochmals.',
         'success' => 'Datei erfolgreich gelöscht.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Datei(en) wurden nicht erfolgreich hochgeladen. Bitte versuchen Sie es nochmals.',
         'success' => 'Datei(en) wurden erfolgreich hochgeladen.',
         'nofiles' => 'Sie haben keine Dateien zum Hochladen ausgewählt.',
         'invalidfiles' => 'Eine oder mehrere Ihrer Dateien ist zu groß oder deren Dateityp ist nicht zugelassen. Zugelassene Dateitypen sind png, gif, jpg, doc, docx, pdf, und txt.',
-    ],
+    ),
 
-];
+);

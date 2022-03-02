@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'accessory_category' 				=> 'Zubehörkategorie',
     'accessory_name'  					=> 'Zubehör-Name',
     'checkout'  							=> 'Zubehör herausgeben',
@@ -17,4 +17,4 @@ return [
     'use_default_eula'					=> 'Die <a href="#" data-toggle="modal" data-target="#eulaModal">Standard EULA</a> stattdessen verwenden.',
     'use_default_eula_disabled'			=> '<del>Die Standard EULA stattdessen verwenden.</del> Keine Standard EULA definiert. Bitte fügen Sie eine in den Einstellungen hinzu.',
 
-];
+);

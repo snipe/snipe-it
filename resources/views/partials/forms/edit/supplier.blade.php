@@ -6,6 +6,6 @@
         {!! $errors->first('supplier_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
     <div class="col-md-1 col-sm-1 text-left">
-             <a href='{{ route('modal.show', 'supplier') }}' data-toggle="modal"  data-target="#createModal" data-dependency="supplier" data-select='supplier_select_id' class="btn btn-sm btn-primary">New</a>
+             <a href='{{ route('modal.show', 'supplier') }}' data-toggle="modal"  data-target="#createModal" data-dependency="supplier" data-select='supplier_select_id' class="btn btn-sm btn-primary">{{  trans('button.new') }}</a>
     </div>
 </div>

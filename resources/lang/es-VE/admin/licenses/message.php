@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'La licencia no existe.',
     'user_does_not_exist' => 'El usuario no existe.',
@@ -10,42 +10,43 @@ return [
     'select_asset_or_person' => 'Debes seleccionar un activo o un usuario, pero no ambos.',
     'not_found' => 'Licencia no encontrada',
 
-    'create' => [
-        'error'   => 'La licencia no se ha creado, inténtelo de nuevo.',
-        'success' => 'Licencia creada con éxito.',
-    ],
 
-    'deletefile' => [
+    'create' => array(
+        'error'   => 'La licencia no se ha creado, inténtelo de nuevo.',
+        'success' => 'Licencia creada con éxito.'
+    ),
+
+    'deletefile' => array(
         'error'   => 'El archivo no fue borrado. Por favor, inténtalo de nuevo.',
         'success' => 'Archivo borrado con éxito.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Archivo(s) no cargado(s). Por favor, inténtelo nuevamente.',
         'success' => 'Archivo(s) cargado(s) con éxito.',
         'nofiles' => 'No ha seleccionado ningun archivo para ser cargado, o el archivo que seleccionó es demasiado grande',
         'invalidfiles' => 'Uno o más de tus archivos son demasiado grandes o de un tipo no permitido. Los tipos permitidos son png, gif, jpg, doc, docx, pdf, txt, zip, rar, rtf, xml y lic.',
-    ],
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'La licencia no se ha actualizado, inténtalo de nuevo',
-        'success' => 'Licencia actualizada con éxito.',
-    ],
+        'success' => 'Licencia actualizada con éxito.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => '¿Estás seguro de querer borrar esta licencia?',
         'error'   => 'Hubo un problema al borrar la licencia. Por favor, inténtalo de nuevo.',
-        'success' => 'La licencia fue eliminada con éxito.',
-    ],
+        'success' => 'La licencia fue eliminada con éxito.'
+    ),
 
-    'checkout' => [
+    'checkout' => array(
         'error'   => 'Hubo un problema asignando la licencia. Por favor, inténtelo de nuevo.',
-        'success' => 'La licencia fue asignada con éxito',
-    ],
+        'success' => 'La licencia fue asignada con éxito'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   => 'Hubo un problema registrando la licencia. Por favor, inténtalo de nuevo.',
-        'success' => 'La licencia fue registrada con éxito',
-    ],
+        'success' => 'La licencia fue registrada con éxito'
+    ),
 
-];
+);

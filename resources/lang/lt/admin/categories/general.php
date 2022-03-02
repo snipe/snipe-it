@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'asset_categories' 					=> 'Įrangos kategorijos',
     'category_name'  					=> 'Kategorijos pavadinimas',
     'checkin_email'                     => 'Siųsti el. laišką vartotojui gavus/priskyrus.',
@@ -18,5 +18,6 @@ return [
     'update'  							=> 'Atnaujinti kategoriją',
     'use_default_eula'					=> 'Naudoti <a href="#" data-toggle="modal" data-target="#eulaModal"> pirminę numatytąją EULA</a>.',
     'use_default_eula_disabled'			=> '<del>Naudoti pirminė numatytąją EULA</del> Nėra pirminės numatytosios EULA. Prašome pridėkite ją nustatymuose.',
+    'use_default_eula_column'			=> 'Use default EULA',
 
-];
+);

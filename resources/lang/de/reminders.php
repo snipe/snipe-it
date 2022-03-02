@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return [
     |
     */
 
-    'password' => 'Das Passwort muss Sechs Zeichen haben und übereinstimmen.',
+    "password" => "Das Passwort muss Sechs Zeichen haben und übereinstimmen.",
 
-    'user'     => 'Benutzername oder Email-Adresse sind falsch',
+    "user"     => "Benutzername oder Email-Adresse sind falsch",
 
-    'token'    => 'Das Token um das Passwort zurückzusetzen ist ungültig.',
+    "token"    => "Das Token um das Passwort zurückzusetzen ist ungültig.",
 
-    'sent' => 'Wenn eine passende Email-Adresse gefunden wurde, wurde eine Passworterinnerung verschickt!',
+    "sent" => "Wenn eine passende Email-Adresse gefunden wurde, wurde eine Passworterinnerung verschickt!",
 
-];
+);

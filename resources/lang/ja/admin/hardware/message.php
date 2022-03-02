@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>警告:</strong>この資産は、現在 未配備としてマークされています。
                         この状態が変更された場合は、資産のステータスを更新してください。',
     'does_not_exist' 	=> '資産が存在しません。',
-    'does_not_exist_or_not_requestable' => '申し訳ありません。その資産が存在しないまたはリクエスト可能ではありません。',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'この資産は利用者にチェックされているため削除できません。資産をチェック後、もう一度、やり直して下さい。 ',
 
     'create' => [
@@ -29,6 +29,7 @@ return [
         'success' 		=> '資産の監査ログに記録しました。',
     ],
 
+
     'deletefile' => [
         'error'   => 'ファイルが削除できませんでした。もう一度、やり直して下さい。',
         'success' => 'ファイルは正常に削除されました。',
@@ -48,6 +49,7 @@ return [
         'file_delete_success'   => 'ファイルを削除しました。',
         'file_delete_error'      => 'ファイルが削除出来ませんでした。',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'この資産を削除してもよろしいですか？',

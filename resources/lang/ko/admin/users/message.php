@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'accepted'                  => '이 자산이 승인되었습니다.',
     'declined'                  => '이 자산이 거부되었습니다.',
@@ -13,8 +13,10 @@ return [
     'user_deleted_warning'      => '이 사용자는 삭제되었습니다. 그것들을 수정하려면 이 사용자를 복원하던가 새 자산들을 생성하세요.',
     'ldap_not_configured'        => '이 설치의 LDAP 통합이 구성이 되지 않았습니다.',
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
+    'password_reset_sent'       => ':email 로 패스워드 재설정 링크가 발송되었습니다.',
 
-    'success' => [
+
+    'success' => array(
         'create'    => '사용자가 생성되었습니다.',
         'update'    => '사용자가 갱신 되었습니다.',
         'update_bulk'    => '사용자가 갱신 되었습니다.',
@@ -25,9 +27,9 @@ return [
         'unsuspend' => '사용자의 대기를 해제하였습니다.',
         'restored'  => '사용자를 복원하였습니다.',
         'import'    => '사용자를 내보냈습니다.',
-    ],
+    ),
 
-    'error' => [
+    'error' => array(
         'create' => '사용자를 생성하는 중 문제가 발생했습니다. 다시 시도해 주세요.',
         'update' => '사용자를 갱신하는 중 오류가 발생했습니다. 다시 시도해 주세요.',
         'delete' => '사용자를 삭제하는 중 문제가 발생했습니다. 다시 시도해 주세요.',
@@ -42,18 +44,18 @@ return [
         'ldap_could_not_search' => 'LDAP 서버를 찾을 수 없습니다. LDAP 설정 파일의 LDAP 서버 구성을 확인해 보세요.<br>LDAP 서버 오류:',
         'ldap_could_not_get_entries' => 'LDAP 서버 목록을 가져올 수 없습니다. LDAP 설정 파일의 LDAP 서버 구성을 확인해 보세요.<br>LDAP 서버 오류:',
         'password_ldap' => '이 계정의 비밀번호는 LDAP/Active 디렉토리에 의해 관리됩니다. 비밀번호를 변경하려면 IT 부서에 문의하세요. ',
-    ],
+    ),
 
-    'deletefile' => [
+    'deletefile' => array(
         'error'   => '파일이 삭제되지 않았습니다. 다시 시도해 주세요.',
         'success' => '파일이 삭제되었습니다.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => '파일(들) 이 업로드 되지 않았습니다. 다시 시도해 주세요.',
         'success' => '파일(들) 이 업로드 되었습니다.',
         'nofiles' => '업로드 할 파일을 선택해 주세요',
         'invalidfiles' => '하나 이상의 파일이 너무 크거나 허용되지 않는 형식입니다. 허용되는 형식은 png, gif, jpg, doc, docx, pdf, txt 입니다.',
-    ],
+    ),
 
-];
+);

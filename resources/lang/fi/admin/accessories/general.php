@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'accessory_category' 				=> 'Kategoria',
     'accessory_name'  					=> 'Oheistarvikkeen nimi',
     'checkout'  							=> 'Oheistarvikkeen luovutus',
@@ -17,4 +17,4 @@ return [
     'use_default_eula'					=> 'Käytä <a href="#" data-toggle="modal" data-target="#eulaModal">yleisiä käyttöehtoja</a>.',
     'use_default_eula_disabled'			=> '<del>Käytä yleisiä käyttöehtoja.</del> Et ole vielä määritellyt yleisiä käyttöehtoja, voit lisätä ne asetuksista.',
 
-];
+);

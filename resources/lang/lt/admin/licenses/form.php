@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'asset'             => 'Įranga',
     'checkin'           => 'Pridėti',
@@ -18,5 +18,5 @@ return [
     'to_email'          => 'Gauta licenzija el. paštu',
     'to_name'           => 'Licenzija išduota šiuo vardu',
     'update'            => 'Atnaujinta licenzija',
-    'checkout_help'     => 'Jūs turite išduoti licenziją įrangai arba asmeniui. Jūs galite pasirinkti abu, bet savininkas naudojantis įrangą turi sutapti su asmeniu, kuriam ši įranga perduodama.',
-];
+    'checkout_help'     => 'Jūs turite išduoti licenziją įrangai arba asmeniui. Jūs galite pasirinkti abu, bet savininkas naudojantis įrangą turi sutapti su asmeniu, kuriam ši įranga perduodama.'
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'License does not exist.',
     'user_does_not_exist' => 'User does not exist.',
@@ -48,4 +48,4 @@ return [
         'success' => 'The license was checked in successfully',
     ],
 
-];
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'The accessory [:id] does not exist.',
     'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
@@ -33,4 +33,4 @@ return [
         'user_does_not_exist' => 'That user is invalid. Please try again.',
     ],
 
-];
+);

@@ -1,35 +1,36 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Consumable Tidak ada.',
 
-    'create' => [
+    'create' => array(
         'error'   => 'Consumable gagal dibuat, silahkan coba lagi.',
-        'success' => 'Consumable berhasil dibuat.',
-    ],
+        'success' => 'Consumable berhasil dibuat.'
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Consumable gagal diupdate, silahkan coba lagi',
-        'success' => 'Consumable berhasil diupdate.',
-    ],
+        'success' => 'Consumable berhasil diupdate.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Apakah Anda yakin ingin menghapus Consumable ini?',
         'error'   => 'Ada masalah menghapus Consumable. Silakan coba lagi.',
-        'success' => 'Consumable berhasil dihapus.',
-    ],
+        'success' => 'Consumable berhasil dihapus.'
+    ),
 
-     'checkout' => [
+     'checkout' => array(
         'error'   		=> 'Consumable tidak diperiksa, silakan coba lagi',
         'success' 		=> 'Consumable berhasil diperiksa.',
-        'user_does_not_exist' => 'Pengguna tidak valid. Silakan coba lagi.',
-    ],
+        'user_does_not_exist' => 'Pengguna tidak valid. Silakan coba lagi.'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   		=> 'Consumable tidak diperiksa, silakan coba lagi',
         'success' 		=> 'Consumable berhasil di-check in.',
-        'user_does_not_exist' => 'Pengguna tidak valid. Silakan coba lagi.',
-    ],
+        'user_does_not_exist' => 'Pengguna tidak valid. Silakan coba lagi.'
+    )
 
-];
+
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'accessory_category' 				=> 'Hạng Mục Phụ Kiện',
     'accessory_name'  					=> 'Tên Phụ Kiện',
     'checkout'  							=> 'Xuất kho Phụ kiện',
@@ -17,4 +17,4 @@ return [
     'use_default_eula'					=> 'Dùng <a href="#" data-toggle="modal" data-target="#eulaModal"> điều khoản sử dụng mặc định.',
     'use_default_eula_disabled'			=> '<del>Dùng điều khoản sử dụng mặc định.<del> Điều khoản sử dụng chưa được thiết lập. Hãy thêm một cái vào trong phần Settings.',
 
-];
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> '激活',
     'allow'  				=> '允许',
     'checkedout'  			=> '资产',
@@ -28,11 +28,11 @@ return [
     'show_current'          => '已当前用户',
     'show_deleted'          => '已删除用户',
     'title' 				=> '职位',
-    'to_restore_them'		=> '恢复它们。',
+	'to_restore_them'		=> '恢复它们。',
     'updateuser' 			=> '更新用户',
     'username' 				=> '用户名',
-    'user_deleted_text' 	=> '此用户已被标记为已删除。',
+	'user_deleted_text' 	=> '此用户已被标记为已删除。',
     'username_note' 		=> '（这个是用来活动目录「Active Directory」的绑定，非用来登录）',
     'cloneuser'             => '克隆用户',
     'viewusers' 			=> '查看用户',
-];
+);

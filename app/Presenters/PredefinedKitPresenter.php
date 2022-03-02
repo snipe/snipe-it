@@ -25,7 +25,7 @@ class PredefinedKitPresenter extends Presenter
                 'field' => 'name',
                 'searchable' => true,
                 'sortable' => true,
-                'title' => 'Name',                      // TODO: trans
+                'title' => trans('general.name'),
                 'formatter' => 'kitsLinkFormatter',
             ],
         ];
@@ -84,13 +84,13 @@ class PredefinedKitPresenter extends Presenter
                 'field' => 'name',
                 'searchable' => true,
                 'sortable' => true,
-                'title' => 'Name',                      // TODO: trans
+                'title' => trans('general.name'),
                 'formatter' => 'modelsLinkFormatter',
             ], [
                 'field' => 'quantity',
                 'searchable' => false,
                 'sortable' => false,
-                'title' => 'Quantity',                      // TODO: trans
+                'title' => trans('general.quantity'),
             ], [
                 'field' => 'actions',
                 'searchable' => false,
@@ -136,13 +136,13 @@ class PredefinedKitPresenter extends Presenter
                 'field' => 'name',
                 'searchable' => true,
                 'sortable' => true,
-                'title' => 'Name',                      // TODO: trans
+                'title' => trans('general.name'),
                 'formatter' => 'licensesLinkFormatter',
             ], [
                 'field' => 'quantity',
                 'searchable' => false,
                 'sortable' => false,
-                'title' => 'Quantity',                      // TODO: trans
+                'title' => trans('general.quantity'),
             ], [
                 'field' => 'actions',
                 'searchable' => false,
@@ -188,13 +188,13 @@ class PredefinedKitPresenter extends Presenter
                 'field' => 'name',
                 'searchable' => true,
                 'sortable' => true,
-                'title' => 'Name',                      // TODO: trans
+                'title' => trans('general.name'),
                 'formatter' => 'accessoriesLinkFormatter',
             ], [
                 'field' => 'quantity',
                 'searchable' => false,
                 'sortable' => false,
-                'title' => 'Quantity',                      // TODO: trans
+                'title' => trans('general.quantity'),
             ], [
                 'field' => 'actions',
                 'searchable' => false,
@@ -240,13 +240,13 @@ class PredefinedKitPresenter extends Presenter
                 'field' => 'name',
                 'searchable' => true,
                 'sortable' => true,
-                'title' => 'Name',                      // TODO: trans
+                'title' => trans('general.name'),
                 'formatter' => 'consumablesLinkFormatter',
             ], [
                 'field' => 'quantity',
                 'searchable' => false,
                 'sortable' => false,
-                'title' => 'Quantity',                      // TODO: trans
+                'title' => trans('general.quantity'),
             ], [
                 'field' => 'actions',
                 'searchable' => false,

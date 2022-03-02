@@ -4,11 +4,12 @@
 @endpush
 
 @push('js')
+
 <script src="{{ url(mix('js/dist/bootstrap-table.js')) }}"></script>
+
 <script nonce="{{ csrf_token() }}">
-
     $(function () {
-
+        var locale = '{{ config('app.locale') }}';
 
         var stickyHeaderOffsetY = 0;
 
@@ -38,6 +39,7 @@
                 }
             },
             stickyHeader: true,
+            locale: locale,
             stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
             undefinedText: '',
             iconsPrefix: 'fa',
@@ -145,7 +147,7 @@
     function genericRowLinkFormatter(destination) {
         return function (value,row) {
             if (value) {
-                return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '"> ' + value + '</a>';
+                return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '">' + value + '</a>';
             }
         };
     }
@@ -196,7 +198,7 @@
                     var dpolymorphicItemFormatterest = 'fields/';
                 }
 
-                return '<nobr><a href="{{ url('/') }}/' + dpolymorphicItemFormatterest + dest + '/' + value.id + '"> ' + value.name + '</a></span>';
+                return '<nobr><a href="{{ url('/') }}/' + dpolymorphicItemFormatterest + dest + '/' + value.id + '">' + value.name + '</a></span>';
             }
         };
     }
@@ -232,7 +234,7 @@
             }
 
             if ((row.available_actions) && (row.available_actions.clone === true)) {
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/clone" class="btn btn-sm btn-info" data-tooltip="true" title="Clone Item"><i class="far fa-clone" aria-hidden="true"></i><span class="sr-only">Clone</span></a>&nbsp;';
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/clone" class="btn btn-sm btn-info" data-tooltip="true" title="{{ trans('general.clone_item') }}"><i class="far fa-clone" aria-hidden="true"></i><span class="sr-only">Clone</span></a>&nbsp;';
             }
 
             if ((row.available_actions) && (row.available_actions.update === true)) {
@@ -249,6 +251,7 @@
             } else {
                 actions += '<a class="btn btn-danger btn-sm delete-asset disabled" onClick="return false;"><i class="fas fa-trash"></i></a>&nbsp;';
             }
+
 
             if ((row.available_actions) && (row.available_actions.restore === true)) {
                 actions += '<form style="display: inline;" method="POST" action="{{ url('/') }}/' + dest + '/' + row.id + '/restore"> ';
@@ -327,7 +330,7 @@
     function licenseSeatInOutFormatter(value, row) {
         // The user is allowed to check the license seat out and it's available
         if ((row.available_actions.checkout == true) && (row.user_can_checkout == true) && ((!row.asset_id) && (!row.assigned_to))) {
-            return '<a href="{{ url('/') }}/licenses/' + row.license_id + '/checkout/'+row.id+'" class="btn btn-sm bg-maroon" data-toggle="tooltip" title="Check this item out">{{ trans('general.checkout') }}</a>';
+            return '<a href="{{ url('/') }}/licenses/' + row.license_id + '/checkout/'+row.id+'" class="btn btn-sm bg-maroon" data-toggle="tooltip" title="{{ trans('general.checkout_tooltip') }}">{{ trans('general.checkout') }}</a>';
         } else {
             return '<a href="{{ url('/') }}/licenses/' + row.id + '/checkin" class="btn btn-sm bg-purple" data-toggle="tooltip" title="Check in this license seat.">{{ trans('general.checkin') }}</a>';
         }
@@ -339,7 +342,7 @@
 
             // The user is allowed to check items out, AND the item is deployable
             if ((row.available_actions.checkout == true) && (row.user_can_checkout == true) && ((!row.asset_id) && (!row.assigned_to))) {
-                    return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkout" class="btn btn-sm bg-maroon" data-toggle="tooltip" title="Check this item out">{{ trans('general.checkout') }}</a>';
+                    return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkout" class="btn btn-sm bg-maroon" data-toggle="tooltip" title="{{ trans('general.checkout_tooltip') }}">{{ trans('general.checkout') }}</a>';
 
             // The user is allowed to check items out, but the item is not deployable
             } else if (((row.user_can_checkout == false)) && (row.available_actions.checkout == true) && (!row.assigned_to)) {
@@ -366,9 +369,9 @@
         if (value.assigned_to_self == true){
             return '<button class="btn btn-danger btn-sm disabled" data-toggle="tooltip" title="Cancel this item request">{{ trans('button.cancel') }}</button>';
         } else if (value.available_actions.cancel == true)  {
-            return '<form action="{{ url('/') }}/account/request-asset/'+ value.id + '" method="GET"><button class="btn btn-danger btn-sm" data-toggle="tooltip" title="Cancel this item request">{{ trans('button.cancel') }}</button></form>';
+            return '<form action="{{ url('/') }}/account/request-asset/'+ value.id + '" method="POST">@csrf<button class="btn btn-danger btn-sm" data-toggle="tooltip" title="Cancel this item request">{{ trans('button.cancel') }}</button></form>';
         } else if (value.available_actions.request == true)  {
-            return '<form action="{{ url('/') }}/account/request-asset/'+ value.id + '" method="GET"><button class="btn btn-primary btn-sm" data-toggle="tooltip" title="Request this item">{{ trans('button.request') }}</button></form>';
+            return '<form action="{{ url('/') }}/account/request-asset/'+ value.id + '" method="POST">@csrf<button class="btn btn-primary btn-sm" data-toggle="tooltip" title="Request this item">{{ trans('button.request') }}</button></form>';
         }
 
     }
@@ -467,7 +470,7 @@
         if (value) {
             var groups = '';
             for (var index in value.rows) {
-                groups += '<a href="{{ url('/') }}/admin/groups/' + value.rows[index].id + '" class="label label-default"> ' + value.rows[index].name + '</a> ';
+                groups += '<a href="{{ url('/') }}/admin/groups/' + value.rows[index].id + '" class="label label-default">' + value.rows[index].name + '</a> ';
             }
             return groups;
         }
@@ -496,20 +499,20 @@
 
     function deployedLocationFormatter(row, value) {
         if ((row) && (row!=undefined)) {
-            return '<a href="{{ url('/') }}/locations/' + row.id + '"> ' + row.name + '</a>';
+            return '<a href="{{ url('/') }}/locations/' + row.id + '">' + row.name + '</a>';
         } else if (value.rtd_location) {
-            return '<a href="{{ url('/') }}/locations/' + value.rtd_location.id + '" data-toggle="tooltip" title="Default Location"> ' + value.rtd_location.name + '</a>';
+            return '<a href="{{ url('/') }}/locations/' + value.rtd_location.id + '" data-toggle="tooltip" title="Default Location">' + value.rtd_location.name + '</a>';
         }
 
     }
 
     function groupsAdminLinkFormatter(value, row) {
-        return '<a href="{{ url('/') }}/admin/groups/' + row.id + '"> ' + value + '</a>';
+        return '<a href="{{ url('/') }}/admin/groups/' + row.id + '">' + value + '</a>';
     }
 
     function assetTagLinkFormatter(value, row) {
         if ((row.asset) && (row.asset.id)) {
-            return '<a href="{{ url('/') }}/hardware/' + row.asset.id + '"> ' + row.asset.asset_tag + '</a>';
+            return '<a href="{{ url('/') }}/hardware/' + row.asset.id + '">' + row.asset.asset_tag + '</a>';
         }
         return '';
 
@@ -517,14 +520,14 @@
 
     function departmentNameLinkFormatter(value, row) {
         if ((row.assigned_user) && (row.assigned_user.department) && (row.assigned_user.department.name)) {
-            return '<a href="{{ url('/') }}/department/' + row.assigned_user.department.id + '"> ' + row.assigned_user.department.name + '</a>';
+            return '<a href="{{ url('/') }}/department/' + row.assigned_user.department.id + '">' + row.assigned_user.department.name + '</a>';
         }
 
     }
 
     function assetNameLinkFormatter(value, row) {
         if ((row.asset) && (row.asset.name)) {
-            return '<a href="{{ url('/') }}/hardware/' + row.asset.id + '"> ' + row.asset.name + '</a>';
+            return '<a href="{{ url('/') }}/hardware/' + row.asset.id + '">' + row.asset.name + '</a>';
         }
 
     }
@@ -551,31 +554,31 @@
 
     function emailFormatter(value) {
         if (value) {
-            return '<a href="mailto:' + value + '"> ' + value + '</a>';
+            return '<a href="mailto:' + value + '">' + value + '</a>';
         }
     }
 
     function linkFormatter(value) {
         if (value) {
-            return '<a href="' + value + '"> ' + value + '</a>';
+            return '<a href="' + value + '">' + value + '</a>';
         }
     }
 
     function assetCompanyFilterFormatter(value, row) {
         if (value) {
-            return '<a href="{{ url('/') }}/hardware/?company_id=' + row.id + '"> ' + value + '</a>';
+            return '<a href="{{ url('/') }}/hardware/?company_id=' + row.id + '">' + value + '</a>';
         }
     }
 
     function assetCompanyObjFilterFormatter(value, row) {
         if ((row) && (row.company)) {
-            return '<a href="{{ url('/') }}/hardware/?company_id=' + row.company.id + '"> ' + row.company.name + '</a>';
+            return '<a href="{{ url('/') }}/hardware/?company_id=' + row.company.id + '">' + row.company.name + '</a>';
         }
     }
 
     function usersCompanyObjFilterFormatter(value, row) {
         if (value) {
-            return '<a href="{{ url('/') }}/users/?company_id=' + row.id + '"> ' + value + '</a>';
+            return '<a href="{{ url('/') }}/users/?company_id=' + row.id + '">' + value + '</a>';
         } else {
             return value;
         }
@@ -584,13 +587,13 @@
     function employeeNumFormatter(value, row) {
 
         if ((row) && (row.assigned_to) && ((row.assigned_to.employee_number))) {
-            return '<a href="{{ url('/') }}/users/' + row.assigned_to.id + '"> ' + row.assigned_to.employee_number + '</a>';
+            return '<a href="{{ url('/') }}/users/' + row.assigned_to.id + '">' + row.assigned_to.employee_number + '</a>';
         }
     }
 
     function orderNumberObjFilterFormatter(value, row) {
         if (value) {
-            return '<a href="{{ url('/') }}/hardware/?order_number=' + row.order_number + '"> ' + row.order_number + '</a>';
+            return '<a href="{{ url('/') }}/hardware/?order_number=' + row.order_number + '">' + row.order_number + '</a>';
         }
     }
 

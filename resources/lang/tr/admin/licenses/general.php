@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'Lisanslar Hakkında',
     'about_licenses'                  => 'Lisanslar yazılım takibi için kullanılır.  Kullanıcı sayısı kadar kişide kullanılabilir',
     'checkin'  					=> 'Lisans Kullanıcısı Girişi',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'Yazılım Lisansları',
     'user'  					=> 'Kullanıcı',
     'view'  					=> 'Lisansı Göster',
-];
+);

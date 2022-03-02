@@ -135,7 +135,7 @@
                   <li aria-hidden="true"{!! (Request::is('hardware*') ? ' class="active"' : '') !!} tabindex="-1">
                       <a href="{{ url('hardware') }}" tabindex="-1">
                           <i class="fas fa-barcode" aria-hidden="true"></i>
-                          <span class="sr-only">Assets</span>
+                          <span class="sr-only">{{ trans('general.assets') }}</span>
                       </a>
                   </li>
                   @endcan
@@ -143,7 +143,7 @@
                   <li aria-hidden="true"{!! (Request::is('licenses*') ? ' class="active"' : '') !!} tabindex="-1">
                       <a href="{{ route('licenses.index') }}" tabindex="-1">
                           <i class="far fa-save"></i>
-                          <span class="sr-only">Licenses</span>
+                          <span class="sr-only">{{ trans('general.licenses') }}</span>
                       </a>
                   </li>
                   @endcan
@@ -151,7 +151,7 @@
                   <li aria-hidden="true"{!! (Request::is('accessories*') ? ' class="active"' : '') !!} tabindex="-1">
                       <a href="{{ route('accessories.index') }}" tabindex="-1">
                           <i class="far fa-keyboard"></i>
-                          <span class="sr-only">Accessories</span>
+                          <span class="sr-only">{{ trans('general.accessories') }}</span>
                       </a>
                   </li>
                   @endcan
@@ -159,7 +159,7 @@
                   <li aria-hidden="true"{!! (Request::is('consumables*') ? ' class="active"' : '') !!}>
                       <a href="{{ url('consumables') }}" tabindex="-1">
                           <i class="fas fa-tint"></i>
-                          <span class="sr-only">Consumables</span>
+                          <span class="sr-only">{{ trans('general.consumables') }}</span>
                       </a>
                   </li>
                   @endcan
@@ -167,7 +167,7 @@
                   <li aria-hidden="true"{!! (Request::is('components*') ? ' class="active"' : '') !!}>
                       <a href="{{ route('components.index') }}" tabindex="-1">
                           <i class="far fa-hdd"></i>
-                          <span class="sr-only">Components</span>
+                          <span class="sr-only">{{ trans('general.components') }}</span>
                       </a>
                   </li>
                   @endcan
@@ -184,7 +184,7 @@
                           <div class="col-xs-1">
                               <button type="submit" class="btn btn-primary pull-right">
                                   <i class="fas fa-search" aria-hidden="true"></i>
-                                  <span class="sr-only">Search</span>
+                                  <span class="sr-only">{{ trans('general.search') }}</span>
                               </button>
                           </div>
                       </div>
@@ -264,7 +264,7 @@
                    @endif
                  </a>
                  <ul class="dropdown-menu">
-                   <li class="header">You have {{ count($alert_items) }} items below or almost below minimum quantity levels</li>
+                   <li class="header">{{ trans('general.quantity_minimum', array('count' => count($alert_items))) }}</li>
                    <li>
                      <!-- inner menu: contains the actual data -->
                      <ul class="menu">
@@ -275,7 +275,7 @@
                           <a href="{{route($alert_items[$i]['type'].'.show', $alert_items[$i]['id'])}}">
                             <h2>{{ $alert_items[$i]['name'] }}
                               <small class="pull-right">
-                                {{ $alert_items[$i]['remaining'] }} remaining
+                                {{ $alert_items[$i]['remaining'] }} {{ trans('general.remaining') }}
                               </small>
                             </h2>
                             <div class="progress xs">
@@ -321,12 +321,12 @@
                      <li {!! (Request::is('account/requested') ? ' class="active"' : '') !!}>
                          <a href="{{ route('account.requested') }}">
                              <i class="fas fa-check fa-disk fa-fw" aria-hidden="true"></i>
-                             Requested Assets
+                             {{ trans('general.requested_assets_menu') }}
                          </a></li>
                      <li {!! (Request::is('account/accept') ? ' class="active"' : '') !!}>
                          <a href="{{ route('account.accept') }}">
                              <i class="fas fa-check fa-disk fa-fw"></i>
-                             Accept Assets
+                             {{ trans('general.accept_assets_menu') }}
                          </a></li>
 
 
@@ -349,7 +349,7 @@
                      @can('self.api')
                      <li>
                          <a href="{{ route('user.api') }}">
-                             <i class="fas fa-user-secret fa-fw" aria-hidden="true"></i> Manage API Keys
+                             <i class="fas fa-user-secret fa-fw" aria-hidden="true"></i> {{ trans('general.manage_api_keys') }}
                          </a>
                      </li>
                      @endcan
@@ -384,7 +384,7 @@
           </div>
       </nav>
        <a href="#" style="float:left" class="sidebar-toggle-mobile visible-xs btn" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
+        <span class="sr-only">{{ trans('general.toggle_navigation') }}</span>
         <i class="fas fa-bars"></i>
       </a>
        <!-- Sidebar toggle button-->
@@ -480,6 +480,14 @@
                     @endcan
 
                   <li class="divider">&nbsp;</li>
+                    @can('checkin', \App\Models\Asset::class)
+                        <li{!! (Request::is('hardware/quickscancheckin') ? ' class="active"' : '') !!}>
+                            <a href="{{ route('hardware/quickscancheckin') }}">
+                                {{ trans('general.quickscan_checkin') }}
+                            </a>
+                        </li>
+                    @endcan
+
                     @can('checkout', \App\Models\Asset::class)
                     <li{!! (Request::is('hardware/bulkcheckout') ? ' class="active"' : '') !!}>
                         <a href="{{ route('hardware/bulkcheckout') }}">
@@ -810,8 +818,8 @@
 
           @if ($snipeSettings->support_footer!='off')
               @if (($snipeSettings->support_footer=='on') || (($snipeSettings->support_footer=='admin') && (Auth::user()->isSuperUser()=='1')))
-                <a target="_blank" class="btn btn-default btn-xs" href="https://snipe-it.readme.io/docs/overview" rel="noopener">User's Manual</a>
-                <a target="_blank" class="btn btn-default btn-xs" href="https://snipeitapp.com/support/" rel="noopener">Report a Bug</a>
+                <a target="_blank" class="btn btn-default btn-xs" href="https://snipe-it.readme.io/docs/overview" rel="noopener">{{ trans('general.user_manual') }}</a>
+                <a target="_blank" class="btn btn-default btn-xs" href="https://snipeitapp.com/support/" rel="noopener">{{ trans('general.bug_report') }}</a>
                  @endif
           @endif
 
@@ -843,7 +851,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">&nbsp;</h4>
+                    <h2 class="modal-title" id="myModalLabel">&nbsp;</h2>
                 </div>
                 <div class="modal-body"></div>
                 <div class="modal-footer">

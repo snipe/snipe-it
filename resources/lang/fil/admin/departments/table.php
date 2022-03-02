@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'id'                        => 'Ang ID',
     'name'                      => 'Ang Pangalan ng Departamento',
@@ -8,4 +8,4 @@ return [
     'location'                  => 'Ang Lokasyon',
     'create'                    => 'Magsagawa ng Departamento',
     'update'                    => 'I-update ang Departamento',
-    ];
+    );

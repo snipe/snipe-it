@@ -70,8 +70,8 @@ class SuppliersController extends Controller
         if ($supplier->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $supplier, trans('admin/suppliers/message.create.success')));
         }
-
         return response()->json(Helper::formatStandardApiResponse('error', null, $supplier->getErrors()));
+
     }
 
     /**
@@ -89,6 +89,7 @@ class SuppliersController extends Controller
 
         return (new SuppliersTransformer)->transformSupplier($supplier);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -127,6 +128,7 @@ class SuppliersController extends Controller
         $supplier = Supplier::with('asset_maintenances', 'assets', 'licenses')->withCount('asset_maintenances as asset_maintenances_count', 'assets as assets_count', 'licenses as licenses_count')->findOrFail($id);
         $this->authorize('delete', $supplier);
 
+
         if ($supplier->assets_count > 0) {
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/suppliers/message.delete.assoc_assets', ['asset_count' => (int) $supplier->assets_count])));
         }
@@ -153,6 +155,9 @@ class SuppliersController extends Controller
      */
     public function selectlist(Request $request)
     {
+
+        $this->authorize('view.selectlists');
+
         $suppliers = Supplier::select([
             'id',
             'name',

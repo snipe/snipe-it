@@ -1,52 +1,57 @@
 <?php
 
-return [
+return array(
 
-    'field' => [
+    'field' => array(
         'invalid'   => 'Leyo nsiyo ayikho.',
         'already_added'   => 'Inkambu isivele iseziwe',
 
-        'create' => [
+        'create' => array(
             'error'   => 'Inkundla ayidalwanga, sicela uzame futhi.',
             'success' => 'Inkundla idalwe ngempumelelo.',
-            'assoc_success' => 'Inkambu ingezwe ngempumelelo ku-fieldset.',
-        ],
+            'assoc_success' => 'Inkambu ingezwe ngempumelelo ku-fieldset.'
+        ),
 
-        'update' => [
+        'update' => array(
             'error'   => 'Inkambu ayizange ibuyekezwe, sicela uzame futhi',
-            'success' => 'Inkundla ibuyekezwe ngempumelelo.',
-        ],
+            'success' => 'Inkundla ibuyekezwe ngempumelelo.'
+        ),
 
-        'delete' => [
+        'delete' => array(
             'confirm'   	=> 'Uqinisekile ukuthi ufisa ukususa le nsimu?',
             'error'   => 'Kube nenkinga yokususa insimu. Ngicela uzame futhi.',
             'success' => 'Insimu isusiwe ngempumelelo.',
             'in_use'   => 'Insimu isasebenza.',
-        ],
+        )
 
-    ],
+    ),
 
-    'fieldset' => [
+    'fieldset' => array(
 
         'does_not_exist' => 'I-Fieldset ayikho',
 
-        'create' => [
+        'create' => array(
             'error'   => 'I-Fieldset ayidalwanga, sicela uzame futhi.',
-            'success' => 'I-Fieldset idalwe ngempumelelo.',
-        ],
+            'success' => 'I-Fieldset idalwe ngempumelelo.'
+        ),
 
-        'update' => [
+        'update' => array(
             'error'   => 'I-Fieldset ayizange ibuyekezwe, sicela uzame futhi',
-            'success' => 'I-Fieldset ibuyekezwe ngempumelelo.',
-        ],
+            'success' => 'I-Fieldset ibuyekezwe ngempumelelo.'
+        ),
 
-        'delete' => [
+        'delete' => array(
             'confirm'   	=> 'Ingabe uqinisekile ukuthi ufisa ukususa lesi sigaba sendawo?',
             'error'   => 'Kube nenkinga ekususeni ukusethwa kwenkambu. Ngicela uzame futhi.',
             'success' => 'I-fieldset isusiwe ngempumelelo.',
             'in_use'   => 'I-Fieldset isasebenza.',
-        ],
+        )
 
-    ],
+    ),
 
-];
+
+
+
+
+
+);

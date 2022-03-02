@@ -1,35 +1,36 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Składnik nie istnieje.',
 
-    'create' => [
+    'create' => array(
         'error'   => 'Składnik nie został utworzony, spróbuj ponownie.',
-        'success' => 'Składnik został utworzony pomyślnie.',
-    ],
+        'success' => 'Składnik został utworzony pomyślnie.'
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Składnik nie został uaktualniony, spróbuj ponownie',
-        'success' => 'Składnik został zaktualizowany pomyślnie.',
-    ],
+        'success' => 'Składnik został zaktualizowany pomyślnie.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Czy na pewno chcesz usunąć ten składnik?',
         'error'   => 'Wystąpił problem podczas usuwania składnika. Spróbuj ponownie.',
-        'success' => 'Składnik został usunięty pomyślnie.',
-    ],
+        'success' => 'Składnik został usunięty pomyślnie.'
+    ),
 
-     'checkout' => [
+     'checkout' => array(
         'error'   		=> 'Składnik nie został wydany, spróbuj ponownie',
         'success' 		=> 'Składnik został wydany pomyślnie.',
-        'user_does_not_exist' => 'Nieprawidłowy użytkownik. Spróbuj ponownie.',
-    ],
+        'user_does_not_exist' => 'Nieprawidłowy użytkownik. Spróbuj ponownie.'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   		=> 'Składnik nie został odebrany, spróbuj ponownie',
         'success' 		=> 'Składnik został odebrany pomyślnie.',
-        'user_does_not_exist' => 'Nieprawidłowy użytkownik. Spróbuj ponownie.',
-    ],
+        'user_does_not_exist' => 'Nieprawidłowy użytkownik. Spróbuj ponownie.'
+    )
 
-];
+
+);

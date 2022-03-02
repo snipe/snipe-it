@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'id'                        => 'ID',
     'name'                      => 'Nodaļas nosaukums',
@@ -8,4 +8,4 @@ return [
     'location'                  => 'Atrašanās vieta',
     'create'                    => 'Izveidot departamentu',
     'update'                    => 'Atjaunināt departamentu',
-    ];
+    );

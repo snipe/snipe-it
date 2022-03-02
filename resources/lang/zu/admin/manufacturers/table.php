@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_manufacturers_title'    => 'Mayelana nabakhiqizi',
     'about_manufacturers_text'  => 'Abakhiqizi yizinkampani ezidala izimpahla zakho. Ungagcina imininingwane ebalulekile yokuxhumana yokusekela mayelana nabo lapha, ezoboniswa kumakhasi wakho imininingwane yempahla.',
     'asset_manufacturers'	=> 'Abakhiqizi befa',
@@ -13,4 +13,4 @@ return [
     'update'				=> 'Buyekeza umkhiqizi',
     'url'   				=> 'I-URL',
 
-];
+);

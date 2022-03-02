@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_manufacturers_title'    => 'Apie gamintojus',
     'about_manufacturers_text'  => 'Gamintojai yra įmonės, kurios kuria jūsų turtą. Čia galite išsaugoti svarbią palaikymo kontaktinę informaciją apie juos, kuri bus rodoma išsamiuose savo turinio puslapiuose.',
     'asset_manufacturers'	=> 'Įrangos gamintojai',
@@ -13,4 +13,4 @@ return [
     'update'				=> 'Atnaujinti gamintoją',
     'url'   				=> 'URL',
 
-];
+);

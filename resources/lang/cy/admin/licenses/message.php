@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Nid yw\'r trwydded yn bodoli.',
     'user_does_not_exist' => 'Nid yw\'r defnyddiwr yn bodoli.',
@@ -10,42 +10,43 @@ return [
     'select_asset_or_person' => 'Rhaid i chi ddewis ased neu defnyddiwr ond nid y ddau.',
     'not_found' => 'License not found',
 
-    'create' => [
-        'error'   => 'Ni crewyd y trwydded, ceisiwch eto o. g. y. dd.',
-        'success' => 'Trwydded wedi creu yn llwyddiannus.',
-    ],
 
-    'deletefile' => [
+    'create' => array(
+        'error'   => 'Ni crewyd y trwydded, ceisiwch eto o. g. y. dd.',
+        'success' => 'Trwydded wedi creu yn llwyddiannus.'
+    ),
+
+    'deletefile' => array(
         'error'   => 'Ffeil heb ei ddileu. Ceisiwch eto o. g. y. dd.',
         'success' => 'Ffeil wedi dileu yn llwyddiannus.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Ffeil(iau) heb ei uwchlwytho. Ceisiwch eto o. g. y. dd.',
         'success' => 'Ffeil(iau) wedi uwchlwytho yn llwyddiannus.',
         'nofiles' => 'Ni wnaethoch chi ddewis unrhyw ffeiliau i\'w uwchlwytho, neu mae\'r ffeil rydych chi\'n ceisio ei huwchlwytho yn rhy fawr',
         'invalidfiles' => 'Mae un neu mwy o\'r ffeiliau unai yn rhy fawr neu ddim y math cywir. Derbynir png, gif, fjp, doc, docx, pdf a txt.',
-    ],
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Ni diweddarwyd y trwydded, ceisiwch eto o. g. y. dd',
-        'success' => 'Trwydded wedi diweddaru\'n llwyddiannus.',
-    ],
+        'success' => 'Trwydded wedi diweddaru\'n llwyddiannus.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Ydych chi\'n siwr eich bod eisiau dileu\'r trwydded yma?',
         'error'   => 'Nid oedd yn bosib dileu\'r trwydded. Ceisiwch eto o. g. y. dd.',
-        'success' => 'Trwydded wedi dileu yn llwyddiannus.',
-    ],
+        'success' => 'Trwydded wedi dileu yn llwyddiannus.'
+    ),
 
-    'checkout' => [
+    'checkout' => array(
         'error'   => 'Nid oedd yn bosib nodi\'r trwydded allan. Ceisiwch eto o. g. y. dd.',
-        'success' => 'Trwydded wedi nodi allan yn llwyddiannus',
-    ],
+        'success' => 'Trwydded wedi nodi allan yn llwyddiannus'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   => 'Nid oedd yn bosib nodi\'r trwydded i mewn. Ceisiwch eto o. g. y. dd.',
-        'success' => 'Trwydded wedi nodi i fewn yn llwyddiannus',
-    ],
+        'success' => 'Trwydded wedi nodi i fewn yn llwyddiannus'
+    ),
 
-];
+);

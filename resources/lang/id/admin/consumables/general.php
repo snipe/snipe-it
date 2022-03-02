@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'checkout'                          => 'Periksa barang habis pakai ke Pengguna',
     'consumable_name'                   => 'Nama Barang Habis Pakai',
     'create'                            => 'Membuat Barang Habis Pakai',
@@ -8,4 +8,4 @@ return [
     'remaining' 			            => 'Sisa',
     'total' 			                => 'Total',
     'update'                            => 'Memperbarui Barang Habis Pakai',
-];
+);

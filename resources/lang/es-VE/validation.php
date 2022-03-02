@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => 'El :attribute debe ser como mínimo de :min kilobytes.',
         'array'   => 'El :attribute debe ser como mínimo de :min kilobytes.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'El :attribute seleccionado es inválido.',
     'numeric'              => 'El :attribute debe ser un número entero.',
     'present'              => 'El campo :attribute debe tener un valor.',
@@ -88,8 +89,8 @@ return array(
     'unique'               => 'El :attribute ya está en uso.',
     'uploaded'             => 'El :attribute fallo al cargar.',
     'url'                  => 'El formato :attribute es inválido.',
-    "unique_undeleted"     => "El :atrribute debe ser único.",
-    "non_circular"         => ":attribute no debe crear una referencia circular.",
+    'unique_undeleted'     => 'El :atrribute debe ser único.',
+    'non_circular'         => ':attribute no debe crear una referencia circular.',
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +102,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +115,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "El campo :attribute contiene un caracter que no está permitido.",
-        "email_array"      => "Una o más direcciones de correo electrónico no son válidas.",
-        "hashed_pass"      => "Tu contraseña actual es incorrecta",
+        'alpha_space' => 'El campo :attribute contiene un caracter que no está permitido.',
+        'email_array'      => 'Una o más direcciones de correo electrónico no son válidas.',
+        'hashed_pass'      => 'Tu contraseña actual es incorrecta',
         'dumbpwd'          => 'Esa contraseña es muy común.',
-        "statuslabel_type" => "Debe seleccionar un tipo de etiqueta de estado válido",
+        'statuslabel_type' => 'Debe seleccionar un tipo de etiqueta de estado válido',
     ],
 
     /*
@@ -135,4 +135,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

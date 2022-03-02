@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Gweithredol',
     'allow'  				=> 'Caniatau',
     'checkedout'  			=> 'Asedau',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Dangos Defnyddwyr Presennol',
     'show_deleted'          => 'Dangos Defnyddwyr sydd wedi\'i dileu',
     'title' 				=> 'Teitl',
-    'to_restore_them'		=> 'i adfer nhw.',
+	'to_restore_them'		=> 'i adfer nhw.',
     'updateuser' 			=> 'Diweddaru Defnyddiwr',
     'username' 				=> 'Enw defnyddiwr',
-    'user_deleted_text' 	=> 'Mae\'r defnyddiwr hwn wedi\'i farcio fel un sydd wedi\'i ddileu.',
+	'user_deleted_text' 	=> 'Mae\'r defnyddiwr hwn wedi\'i farcio fel un sydd wedi\'i ddileu.',
     'username_note' 		=> '(Wedi defnyddio ar gyfer clymu i Active Directory yn unig, nid ar gyfer mewngofnodi.)',
     'cloneuser'             => 'Dyblygu Defnyddiwr',
     'viewusers' 			=> 'Gweld Defnyddwyr',
-];
+);

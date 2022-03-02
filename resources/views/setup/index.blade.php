@@ -1,5 +1,5 @@
 @extends('layouts/setup')
-
+{{-- TODO: Translate --}}
 {{-- Page title --}}
 @section('title')
 Create a User ::

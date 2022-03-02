@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'accessory_category' 				=> 'Kāwai Accessory',
     'accessory_name'  					=> 'Ingoa Whakauru',
     'checkout'  							=> 'Whakaritea Whakairinga',
@@ -17,4 +17,4 @@ return [
     'use_default_eula'					=> 'Whakamahia te taunoa 123_57__321primary taunoa EULA</a> hei utu mo tenei.',
     'use_default_eula_disabled'			=> '<del>Me te taunoa tuatahi o te EULA instead.</del> Karekau he tautuhinga taunoa EULA. Tēnā tāpirihia tētahi i Ngā Tautuhinga.',
 
-];
+);

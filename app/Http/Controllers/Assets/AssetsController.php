@@ -761,6 +761,13 @@ class AssetsController extends Controller
         return view('hardware/quickscan')->with('next_audit_date', $dt);
     }
 
+    public function quickScanCheckin()
+    {
+        $this->authorize('checkin', Asset::class);
+
+        return view('hardware/quickscan-checkin');
+    }
+
     public function audit($id)
     {
         $settings = Setting::getSettings();

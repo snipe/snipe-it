@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Đang hoạt động',
     'allow'  				=> 'Cho phép',
     'checkedout'  			=> 'Tài sản',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Hiển thị người dùng hiện tại',
     'show_deleted'          => 'Hiển thị người dùng đã xóa',
     'title' 				=> 'Tiêu đề',
-    'to_restore_them'		=> 'để khôi phục lại chúng.',
+	'to_restore_them'		=> 'để khôi phục lại chúng.',
     'updateuser' 			=> 'Cập nhật người dùng',
     'username' 				=> 'Tên đăng nhập',
-    'user_deleted_text' 	=> 'Người dùng này đã bị đánh dấu là đã bị xóa.',
+	'user_deleted_text' 	=> 'Người dùng này đã bị đánh dấu là đã bị xóa.',
     'username_note' 		=> '(This is used for Active Directory binding only, not for login.)',
     'cloneuser'             => 'Nhân đôi người dùng',
     'viewusers' 			=> 'Xem Người dùng',
-];
+);

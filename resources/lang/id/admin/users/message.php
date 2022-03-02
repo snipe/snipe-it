@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'accepted'                  => 'Anda sukses menerima aset ini.',
     'declined'                  => 'Anda sukses menolak aset ini.',
@@ -12,9 +12,11 @@ return [
     'insufficient_permissions'  => 'Tidak ada hak akses.',
     'user_deleted_warning'      => 'Pengguna ini telah di hapus. Anda harus kembalikan dahulu pengguna ini jika ingin menyunting atau di berikan hak kelola aset.',
     'ldap_not_configured'        => 'Integrasi LDAP belum dikonfigurasi untuk instalasi ini.',
-    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
+    'password_resets_sent'      => 'Pengguna terpilih yang diaktifkan dan memiliki alamat email yang valid telah dikirimi tautan pengaturan ulang kata sandi.',
+    'password_reset_sent'       => 'Tautan reset kata sandi telah dikirim ke :email!',
 
-    'success' => [
+
+    'success' => array(
         'create'    => 'Pengguna sukses di buat.',
         'update'    => 'Pengguna sukses di perbarui.',
         'update_bulk'    => 'Pengguna berhasil diperbarui!',
@@ -25,9 +27,9 @@ return [
         'unsuspend' => 'Pengguna sukses tidak di tangguhkan.',
         'restored'  => 'Pengguna sukses di kembalikan.',
         'import'    => 'Sukses mengimpor pengguna.',
-    ],
+    ),
 
-    'error' => [
+    'error' => array(
         'create' => 'Terdapat kesalahan ketika membuat pengguna. Silahkan coba kembali.',
         'update' => 'Terdapat masalah ketika memperbarui pengguna. Silahkan coba kembali.',
         'delete' => 'Terdapat masalah ketika menghapus pengguna. Silahkan coba kembali.',
@@ -42,18 +44,18 @@ return [
         'ldap_could_not_search' => 'Gagal mencari server LDAP. Silahkan cek konfigurasi server LDAP di berkas config LDAP. <br>Eror dari server LDAP:',
         'ldap_could_not_get_entries' => 'Gagal menerima catatan dari server LDAP. Silahkan cek konfigurasi server LDAP di berkas config LDAP. <br>Eror dari server LDAP:',
         'password_ldap' => 'Kata sandi untuk akun ini dikelola oleh LDAP / Active Directory. Silakan menghubungi departemen TI Anda untuk mengganti kata sandi Anda.',
-    ],
+    ),
 
-    'deletefile' => [
+    'deletefile' => array(
         'error'   => 'Berkas belum terhapus. Silahkan coba kembali.',
         'success' => 'Berkas sukses di hapus.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Berkas belum terunggah. Silakan coba kembali.',
         'success' => 'Berkas sukses terunggah.',
         'nofiles' => 'Anda belum memilih berkas untuk di unggah',
         'invalidfiles' => 'Satu atau lebih dari file Anda terlalu besar atau jenis berkas yang tidak diperbolehkan. Tipe file diizinkan adalah png, gif, jpg, doc, docx, pdf, dan txt.',
-    ],
+    ),
 
-];
+);

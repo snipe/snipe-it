@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'aktiewe',
     'allow'  				=> 'laat',
     'checkedout'  			=> 'bates',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Wys huidige gebruikers',
     'show_deleted'          => 'Wys verwyderde gebruikers',
     'title' 				=> 'Titel',
-    'to_restore_them'		=> 'om hulle te herstel.',
+	'to_restore_them'		=> 'om hulle te herstel.',
     'updateuser' 			=> 'Update gebruiker',
     'username' 				=> 'Gebruikersnaam',
-    'user_deleted_text' 	=> 'Hierdie gebruiker is gemerk as verwyder.',
+	'user_deleted_text' 	=> 'Hierdie gebruiker is gemerk as verwyder.',
     'username_note' 		=> '(Dit word slegs vir Active Directory-binding gebruik, nie vir inskrywing nie.)',
     'cloneuser'             => 'Klone gebruiker',
     'viewusers' 			=> 'Bekyk gebruikers',
-];
+);

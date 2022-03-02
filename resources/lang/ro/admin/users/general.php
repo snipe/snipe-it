@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Acest utilizator se poate conecta',
     'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Activul desemnat catre :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Editeaza utilizator',
     'filetype_info'     => 'Tipurile de fișiere permise sunt png, gif, jpg, jpeg, doc, docx, pdf, txt, zip și rar.',
     'history_user'      => 'Istoric pentru :name',
-	'info'				=> 'Info',
+    'info'				=> 'Info',
     'restore_user'		=> 'Faceți clic aici pentru a le restaura.',
     'last_login'        => 'Ultima logare',
     'ldap_config_text'  => 'Setările de configurare LDAP pot fi găsite pe Administrator> Setări. Locația selectată (opțional) va fi setată pentru toți utilizatorii importați.',
@@ -25,4 +24,14 @@ return array(
     'two_factor_admin_optin_help' => 'Setările dvs. actuale de administrare permit executarea selectivă a autentificării cu două factori.',
     'two_factor_enrolled' => 'Dispozitivul 2FA Înregistrat',
     'two_factor_active'   => '2FA Active',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

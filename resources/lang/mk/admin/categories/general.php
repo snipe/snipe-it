@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'asset_categories' 					=> 'Категории на основни средства',
     'category_name'  					=> 'Име на категорија',
     'checkin_email'                     => 'Send email to user on checkin/checkout.',
@@ -18,5 +18,6 @@ return [
     'update'  							=> 'Уреди категорија',
     'use_default_eula'					=> 'Наместо ова, користете <a href="#" data-toggle="modal" data-target="#eulaModal">стандардни Услови за користење</a>.',
     'use_default_eula_disabled'			=> '<del>Наместо ова, користете стандардни Услови за користење.</del> Не се внесени стандардни Услови за користење. Ве молиме внесете ги во Поставки.',
+    'use_default_eula_column'			=> 'Use default EULA',
 
-];
+);

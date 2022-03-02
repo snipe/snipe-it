@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong> تحذير: </strong> تم تحديد الحالة لهذا الأصل بانه غير قابل للتوزيع حاليا. إذا تغيرت هذه الحالة، يرجى تحديث حالة الأصل.',
     'does_not_exist' 	=> 'الأصل غير موجود.',
-    'does_not_exist_or_not_requestable' => 'محاولة جيدة. هذا الأصل غير موجود أو غير قابل للطلب.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'هذا الأصل مخرج حاليا لمستخدم ولا يمكن حذفه. يرجى التحقق من الأصل أولا، ثم حاول الحذف مرة أخرى. ',
 
     'create' => [
@@ -28,6 +28,7 @@ return [
         'success' 		=> 'تم تسجيل تدقيق الأصل بنجاح.',
     ],
 
+
     'deletefile' => [
         'error'   => 'لم يتم حذف الملف. الرجاء المحاولة مرة اخرى.',
         'success' => 'تم حذف الملف بنجاح.',
@@ -47,6 +48,7 @@ return [
         'file_delete_success'   => 'تم حذف ملفك بنجاح',
         'file_delete_error'      => 'تعذر حذف الملف',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'هل تريد بالتأكيد حذف هذا الأصل؟',

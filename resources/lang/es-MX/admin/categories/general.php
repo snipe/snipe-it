@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'asset_categories' 					=> 'Categorias',
     'category_name'  					=> 'Categoría',
     'checkin_email'                     => 'Enviar un correo al usuario al asignar/desasignar.',
@@ -18,5 +18,6 @@ return [
     'update'  							=> 'Actualizar Categoría',
     'use_default_eula'					=> 'En su lugar, use el <a href="#" data-toggle="modal" data-target="#eulaModal">EULA por defecto</a>.',
     'use_default_eula_disabled'			=> '<del>En su lugar, use el EULA por defecto.</del> No esta configurado un EULA por defecto. Por favor agregue uno en Configuración.',
+    'use_default_eula_column'			=> 'Usar EULA por defecto',
 
-];
+);

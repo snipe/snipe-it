@@ -151,6 +151,8 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasAccess('self.checkout_assets');
         });
 
+        // This is largely used to determine whether to display the gear icon sidenav 
+        // in the left-side navigation
         Gate::define('backend.interact', function ($user) {
             return $user->can('view', Statuslabel::class)
                 || $user->can('view', AssetModel::class)
@@ -164,6 +166,29 @@ class AuthServiceProvider extends ServiceProvider
                 || $user->can('view', CustomField::class)
                 || $user->can('view', CustomFieldset::class)
                 || $user->can('view', Depreciation::class);
+        });
+
+
+        // This  determines whether or not an API user should be able to get the selectlists.
+        // This can seem a little confusing, since view properties may not have been granted
+        // to the logged in API user, but creating assets, licenses, etc won't work 
+        // if the user can't view and interact with the select lists.
+        Gate::define('view.selectlists', function ($user) {
+            return $user->can('update', Asset::class) 
+                || $user->can('create', Asset::class)    
+                || $user->can('checkout', Asset::class)
+                || $user->can('checkin', Asset::class)
+                || $user->can('audit', Asset::class)       
+                || $user->can('update', License::class)   
+                || $user->can('create', License::class)   
+                || $user->can('update', Component::class)
+                || $user->can('create', Component::class)   
+                || $user->can('update', Consumable::class)   
+                || $user->can('create', Consumable::class)   
+                || $user->can('update', Accessory::class)
+                || $user->can('create', Accessory::class)   
+                || $user->can('update', User::class)
+                || $user->can('create', User::class);  
         });
     }
 }

@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Update General Settings
+    {{ trans('admin/settings/general.general_title') }}
     @parent
 @stop
 
@@ -206,7 +206,7 @@
                            </div>
                            <div class="col-md-9" id="mailtestrow">
                                <a class="btn btn-default btn-sm pull-left" id="mailtest" style="margin-right: 10px;">
-                                   Send Test</a>
+                                   {{ trans('admin/settings/general.mail_test') }}</a>
                                <span id="mailtesticon"></span>
                                <span id="mailtestresult"></span>
                                <span id="mailteststatus"></span>
@@ -215,7 +215,7 @@
                                <div id="mailteststatus-error" class="text-danger"></div>
                            </div>
                            <div class="col-md-9 col-md-offset-3">
-                               <p class="help-block">This will attempt to send a test mail to {{ config('mail.reply_to.address') }}.</p>
+                               <div class="help-block"> {{ trans('admin/settings/general.mail_test_help', array('replyto' => config('mail.reply_to.address'))) }}</p>
                            </div>
 
                        </div>
@@ -366,7 +366,7 @@
             $("#mailtesticon").html('');
             $("#mailteststatus").html('');
             $('#mailteststatus-error').html('');
-            $("#mailtesticon").html('<i class="fas fa-spinner spin"></i> Sending Test Email...');
+            $("#mailtesticon").html('<i class="fas fa-spinner spin"></i> {{ trans('admin/settings/message.mail.sending') }}');
             $.ajax({
                 url: '{{ route('api.settings.mailtest') }}',
                 type: 'POST',
@@ -387,7 +387,7 @@
                     if (data.message) {
                         $("#mailteststatus").html('<i class="fas fa-check text-success"></i> ' + data.message);
                     } else {
-                        $("#mailteststatus").html('<i class="fas fa-check text-success"></i> Mail sent!');
+                        $("#mailteststatus").html('<i class="fas fa-check text-success"></i> {{ trans('admin/settings/message.mail.success') }}');
                     }
                 },
 
@@ -399,12 +399,12 @@
                     $("#mailteststatus").removeClass('text-success');
                     $("#mailteststatus").addClass('text-danger');
                     $("#mailtesticon").html('<i class="fas fa-exclamation-triangle text-danger"></i>');
-                    $('#mailteststatus').html('Mail could not be sent.');
+                    $('#mailteststatus').html('{{ trans('admin/settings/message.mail.error') }}');
                     if (data.responseJSON) {
                         if (data.responseJSON.messages) {
                             $('#mailteststatus-error').html('Error: ' + data.responseJSON.messages);
                         } else {
-                            $('#mailteststatus-error').html('No additional error message provided. Check your mail settings and your app log.');
+                            $('#mailteststatus-error').html('{{ trans('admin/settings/message.mail.additional') }}');
                         }
                     } else {
                         console.dir(data);

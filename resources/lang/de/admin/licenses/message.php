@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Die Lizenz existiert nicht.',
     'user_does_not_exist' => 'Benutzer existiert nicht.',
@@ -10,42 +10,43 @@ return [
     'select_asset_or_person' => 'Sie müssen ein Asset oder einen Benutzer auswählen, aber nicht beides.',
     'not_found' => 'Lizenz nicht gefunden',
 
-    'create' => [
-        'error'   => 'Lizenz wurde nicht erstellt, bitte versuchen Sie es erneut.',
-        'success' => 'Die Lizenz wurde erfolgreich erstellt.',
-    ],
 
-    'deletefile' => [
+    'create' => array(
+        'error'   => 'Lizenz wurde nicht erstellt, bitte versuchen Sie es erneut.',
+        'success' => 'Die Lizenz wurde erfolgreich erstellt.'
+    ),
+
+    'deletefile' => array(
         'error'   => 'Datei wurde nicht gelöscht. Bitte versuchen Sie es erneut.',
         'success' => 'Datei erfolgreich gelöscht.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Datei(en) wurden nicht hochgeladen. Bitte versuchen Sie es erneut.',
         'success' => 'Datei(en) erfolgreich hochgeladen.',
         'nofiles' => 'Sie haben keine Datei zum Hochladen ausgewählt oder die Datei, die Sie hochladen möchten, ist zu groß',
         'invalidfiles' => 'Eine oder mehrere Ihrer Dateien sind zu groß oder ist ein Dateityp, der nicht zulässig ist. Erlaubte Dateitypen sind png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml und lic.',
-    ],
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Die Lizenz wurde nicht aktualisiert, bitte versuchen Sie es erneut',
-        'success' => 'Die Lizenz wurde erfolgreich aktualisiert.',
-    ],
+        'success' => 'Die Lizenz wurde erfolgreich aktualisiert.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Sind Sie sicher, dass Sie diese Lizenz löschen wollen?',
         'error'   => 'Beim Löschen der Lizenz ist ein Problem aufgetreten. Bitte versuchen Sie es erneut.',
-        'success' => 'Die Lizenz wurde erfolgreich gelöscht.',
-    ],
+        'success' => 'Die Lizenz wurde erfolgreich gelöscht.'
+    ),
 
-    'checkout' => [
+    'checkout' => array(
         'error'   => 'Lizenz wurde nicht herausgegeben, bitte versuchen Sie es erneut.',
-        'success' => 'Lizenz wurde erfolgreich herausgegeben',
-    ],
+        'success' => 'Lizenz wurde erfolgreich herausgegeben'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   => 'Lizenz wurde nicht zurückgenommen, bitte versuchen Sie es erneut.',
-        'success' => 'Die Lizenz wurde erfolgreich zurückgenommen',
-    ],
+        'success' => 'Die Lizenz wurde erfolgreich zurückgenommen'
+    ),
 
-];
+);

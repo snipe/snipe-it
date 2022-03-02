@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_suppliers_title' => 'حول الموردين',
     'about_suppliers_text'  => 'يتم استخدام الموردين لتتبع مصدر العناصر',
     'address'               => 'عنوان المورد',
@@ -24,4 +24,4 @@ return [
     'view_assets_for'       => 'عرض الأصول لـ',
     'zip'                   => 'الرمز البريدي',
 
-];
+);

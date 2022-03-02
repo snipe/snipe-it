@@ -59,7 +59,7 @@ return [
     'test_mail_text' => 'Это тестовое сообщение от Snipe-IT. Если вы его получили, значит почта работает :)',
     'the_following_item' => 'Данный предмет был возвращен: ',
     'low_inventory_alert' => 'Осталась :count штука, что или уже ниже минимального запаса, или скоро будет ниже.|Осталось :count штук, что или уже ниже минимального запаса, или скоро будет ниже.',
-    'assets_warrantee_alert' => 'Имеется :count актив, гарантия на который истечет в следующ(ие/ий) :threshold дней/день.|Имеется :count активов, гарантия на которые истечет в следующ(ие/ий) :threshold дней/день.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'Имеется :count лицензия, срок которой истечет в следующ(ие/ий) :threshold дней/день.|Имеются :count лицензии, срок которых истечет в следующ(ие/ий) :threshold дней/день.',
     'to_reset' => 'Чтобы сбросить ваш :web пароль, заполните форму:',
     'type' => 'Тип',
@@ -73,7 +73,7 @@ return [
     'Asset_Checkin_Notification' => 'Asset checked in',
     'License_Checkin_Notification' => 'License checked in',
     'Expected_Checkin_Report' => 'Expected asset checkin report',
-    'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
+    'Expected_Checkin_Notification' => 'Напоминание: приближается крайний срок проверки :name',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'your_assets' => 'Посмотреть активы',
 ];

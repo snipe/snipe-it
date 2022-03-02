@@ -1,52 +1,57 @@
 <?php
 
-return [
+return array(
 
-    'field' => [
+    'field' => array(
         'invalid'   => 'שדה זה אינו קיים.',
         'already_added'   => 'השדה כבר נוסף',
 
-        'create' => [
+        'create' => array(
             'error'   => 'שדה לא נוצר, נסה שוב.',
             'success' => 'שדה נוצר בהצלחה.',
-            'assoc_success' => 'שדה נוסף בהצלחה ל- fieldset.',
-        ],
+            'assoc_success' => 'שדה נוסף בהצלחה ל- fieldset.'
+        ),
 
-        'update' => [
+        'update' => array(
             'error'   => 'השדה לא עודכן, נסה שוב',
-            'success' => 'שדה עודכן בהצלחה.',
-        ],
+            'success' => 'שדה עודכן בהצלחה.'
+        ),
 
-        'delete' => [
+        'delete' => array(
             'confirm'   	=> 'האם אתה בטוח שברצונך למחוק שדה זה?',
             'error'   => 'הייתה בעיה במחיקת השדה. בבקשה נסה שוב.',
             'success' => 'השדה נמחק בהצלחה.',
             'in_use'   => 'שדה עדיין בשימוש.',
-        ],
+        )
 
-    ],
+    ),
 
-    'fieldset' => [
+    'fieldset' => array(
 
         'does_not_exist' => 'Fieldset אינו קיים',
 
-        'create' => [
+        'create' => array(
             'error'   => 'Fieldset לא נוצר, נסה שוב.',
-            'success' => 'Fieldset נוצר בהצלחה.',
-        ],
+            'success' => 'Fieldset נוצר בהצלחה.'
+        ),
 
-        'update' => [
+        'update' => array(
             'error'   => 'Fieldset לא עודכן, נסה שוב',
-            'success' => 'Fieldset עודכן בהצלחה.',
-        ],
+            'success' => 'Fieldset עודכן בהצלחה.'
+        ),
 
-        'delete' => [
+        'delete' => array(
             'confirm'   	=> 'האם אתה בטוח שברצונך למחוק את השדה הזה?',
             'error'   => 'היתה בעיה במחיקת השדה. בבקשה נסה שוב.',
             'success' => 'ה- fieldset נמחק בהצלחה.',
             'in_use'   => 'Fieldset עדיין בשימוש.',
-        ],
+        )
 
-    ],
+    ),
 
-];
+
+
+
+
+
+);

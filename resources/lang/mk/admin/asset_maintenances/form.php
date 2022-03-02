@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Денови',
         'notes'                  => 'Забелешки',
         'update'                 => 'Ажурирање',
-        'create'                 => 'Креирај',
+        'create'                 => 'Креирај'
     ];

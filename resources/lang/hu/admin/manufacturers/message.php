@@ -1,29 +1,29 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Gyártó nem létezik.',
     'assoc_users'	 => 'Ez a gyártó jelenleg legalább egy modellel társítva van, így nem lehet törölni. Kérjük, frissítse a modellt úgy, hogy ne hivatkozzon erre a gyártóra, és próbálkozzon újra. ',
 
-    'create' => [
+    'create' => array(
         'error'   => 'Gyártó nem jött létre, próbálkozz újra.',
-        'success' => 'Gyártó sikeresen létrehozva.',
-    ],
+        'success' => 'Gyártó sikeresen létrehozva.'
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Gyártó nem lett frissítve, próbálkozz újra',
-        'success' => 'Gyártó sikeresen frissítve.',
-    ],
+        'success' => 'Gyártó sikeresen frissítve.'
+    ),
 
-    'restore' => [
+    'restore' => array(
         'error'   => 'A gyártó nem lett visszaállítva, próbálja újra',
-        'success' => 'Gyártó sikeresen visszaállítva.',
-    ],
+        'success' => 'Gyártó sikeresen visszaállítva.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Biztosan törölni szeretnéd ezt a gyártót?',
         'error'   => 'Probléma adódott a gyártó törlése közben. Próbálkozz újra.',
-        'success' => 'A gyártó sikeresen törölve.',
-    ],
+        'success' => 'A gyártó sikeresen törölve.'
+    )
 
-];
+);

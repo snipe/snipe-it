@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_models_title'     => 'Par īpašuma modeļiem',
     'about_models_text'           => 'Aktīvu modeļi ir veids, kā grupēt identiskus aktīvus. "MBP 2013", "IPhone 6s" uc',
     'deleted'  					        => 'This model has been deleted.',
@@ -9,10 +9,10 @@ return [
     'bulk_delete_warn'          => 'Tiks dzēsti :model_count līdzekļu modeļi.',
     'restore'                   => 'Atjaunot modeli',
     'requestable'               => 'Lietotāji var pieprasīt šo modeli',
-    'show_mac_address'			      => 'Parādiet MAC adreses lauku šī modeļa aktīvos',
+	'show_mac_address'			      => 'Parādiet MAC adreses lauku šī modeļa aktīvos',
     'view_deleted'              => 'Skatīt dzēsto',
     'view_models'               => 'Skatīt modeļus',
     'fieldset'                  => 'Lauka laukums',
     'no_custom_field'           => 'Nav pielāgotu lauku',
     'add_default_values'        => 'Pievienot noklusējuma vērtības',
-];
+);

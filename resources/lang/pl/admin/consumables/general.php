@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'checkout'                          => 'Rozliczenie dla użytkownika',
     'consumable_name'                   => 'Nazwa materiału eksploatacyjnego',
     'create'                            => 'Utwórz materiał eksploatacyjny',
@@ -8,4 +8,4 @@ return [
     'remaining' 			            => 'Pozostało',
     'total' 			                => 'Łącznie',
     'update'                            => 'Aktualizuj materiał eksploatacyjny',
-];
+);

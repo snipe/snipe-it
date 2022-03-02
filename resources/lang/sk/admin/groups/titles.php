@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'O skupinách',
     'about_groups'                  => 'Skupiny sa používajú k zobecneniu používateľských opravnení.',
     'group_management' 	 	=> 'Správa skupín',
@@ -10,5 +10,7 @@ return array(
     'group_admin' 	 		=> 'Administrátor skupiny',
     'allow' 	 			=> 'Povoliť',
     'deny' 	 				=> 'Odmietnuť',
-
-);
+    'permission'            => 'Permission',
+    'grant'                 => 'Grant',
+    'no_permissions'        => 'This group has no permissions.'
+];

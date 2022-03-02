@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'Aset ini tidak boleh diberikan kepada sesiapa sahaja.',
-        'deployable'   => 'Aset ini boleh diperiksa. Sebaik sahaja mereka ditugaskan, mereka akan menerima status meta <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
+        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
         'archived'   => 'Aset-aset ini tidak boleh diperiksa, dan hanya akan dipaparkan dalam pandangan Arkib. Ini berguna untuk mengekalkan maklumat mengenai aset untuk tujuan belanjawan / bersejarah tetapi menyimpannya daripada senarai aset harian.',
         'pending'   => 'Aset-aset ini belum dapat ditugaskan kepada sesiapa sahaja, sering kali digunakan untuk barang-barang yang hendak dibaiki, tetapi diharapkan dapat kembali ke peredaran.',
     ],

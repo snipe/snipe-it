@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'accepted'                  => 'Ha aceptado con éxito este equipo.',
     'declined'                  => 'Ha declinado con éxito este equipo.',
@@ -13,8 +13,10 @@ return [
     'user_deleted_warning'      => 'Este usuario ha sido eliminado. Deberá restaurarlo para editarlo o asignarle nuevos Equipos.',
     'ldap_not_configured'        => 'La integración con LDAP no ha sido configurada para esta instalación.',
     'password_resets_sent'      => 'Los usuarios seleccionados que están activados y tienen una dirección de correo electrónico válida han sido enviados un enlace de restablecimiento de contraseña.',
+    'password_reset_sent'       => '¡Se ha enviado un enlace de restablecimiento de contraseña a :email!',
 
-    'success' => [
+
+    'success' => array(
         'create'    => 'Usuario correctamente creado.',
         'update'    => 'Usuario correctamente actualizado.',
         'update_bulk'    => 'Usuarios correctamente actualizados!',
@@ -25,9 +27,9 @@ return [
         'unsuspend' => 'Usuario correctamente no suspendido.',
         'restored'  => 'Usuario correctamente restaurado.',
         'import'    => 'Usuarios importados correctamente.',
-    ],
+    ),
 
-    'error' => [
+    'error' => array(
         'create' => 'Ha habido un problema creando el Usuario. Intentalo de nuevo.',
         'update' => 'Ha habido un problema actualizando el Usuario. Intentalo de nuevo.',
         'delete' => 'Ha habido un problema eliminando el  Usuario. Intentalo de nuevo.',
@@ -42,18 +44,18 @@ return [
         'ldap_could_not_search' => 'No se ha podido buscar en el servidor LDAP. Por favor verifique la configuración de su servidor LDAP en su archivo de configuración.<br> Error del servidor LDAP:',
         'ldap_could_not_get_entries' => 'No se han podido obtener entradas del servidor LDAP. Por favor verifique la configuración de su servidor LDAP en su archivo de configuración.<br> Error del servidor LDAP:',
         'password_ldap' => 'La contraseña para esta cuenta es administrada por LDAP / Active Directory. Póngase en contacto con su departamento de TI para cambiar su contraseña.',
-    ],
+    ),
 
-    'deletefile' => [
+    'deletefile' => array(
         'error'   => 'Archivo no eliminado. Por favor, vuelva a intentarlo.',
         'success' => 'Archivo eliminado correctamente.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Archivo(s) no cargado. Por favor, vuelva a intentarlo.',
         'success' => 'Archivo(s) cargado correctamente.',
         'nofiles' => 'No ha seleccionado ningún archivo para subir',
         'invalidfiles' => 'Uno o más sus archivos es demasiado grande o es de un tipo no permitido. Los tipos de archivo permitidos son png, gif, jpg, doc, docx, pdf y txt.',
-    ],
+    ),
 
-];
+);

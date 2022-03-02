@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'Ova se imovina ne može dodijeliti nikome.',
-        'deployable'   => 'Ova se imovina može provjeriti. Nakon dodjeljivanja, oni će preuzeti meta status <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
+        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
         'archived'   => 'Ove se imovine ne može izbrisati, a prikazat će se samo u arhiviranom vlasničkom pregledu. To je korisno za zadržavanje informacija o imovini za proračunsko / povijesne svrhe, ali ih ne bi smjelo ostati iz dnevnog popisa imovine.',
         'pending'   => 'Ovu imovinu još se ne može dodijeliti nikome, često se koristi za predmete koji se vraćaju na popravak, ali se očekuje povratak u promet.',
     ],

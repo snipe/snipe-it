@@ -1,52 +1,57 @@
 <?php
 
-return [
+return array(
 
-    'field' => [
+    'field' => array(
         'invalid'   => 'To polje ne postoji.',
         'already_added'   => 'Polje je već dodano',
 
-        'create' => [
+        'create' => array(
             'error'   => 'Polje nije izrađeno, pokušajte ponovo.',
             'success' => 'Polje je uspješno izrađeno.',
-            'assoc_success' => 'Polje je uspješno dodano u fieldset.',
-        ],
+            'assoc_success' => 'Polje je uspješno dodano u fieldset.'
+        ),
 
-        'update' => [
+        'update' => array(
             'error'   => 'Polje nije ažurirano, pokušajte ponovo',
-            'success' => 'Polje je uspješno ažurirano.',
-        ],
+            'success' => 'Polje je uspješno ažurirano.'
+        ),
 
-        'delete' => [
+        'delete' => array(
             'confirm'   	=> 'Jeste li sigurni da želite izbrisati ovo polje?',
             'error'   => 'Došlo je do problema s brisanjem polja. Molim te pokušaj ponovno.',
             'success' => 'Polje je uspješno obrisano.',
             'in_use'   => 'Polje je još u upotrebi.',
-        ],
+        )
 
-    ],
+    ),
 
-    'fieldset' => [
+    'fieldset' => array(
 
         'does_not_exist' => 'Fieldset ne postoji',
 
-        'create' => [
+        'create' => array(
             'error'   => 'Fieldset nije izrađen, pokušajte ponovo.',
-            'success' => 'Fieldset je uspješno izrađen.',
-        ],
+            'success' => 'Fieldset je uspješno izrađen.'
+        ),
 
-        'update' => [
+        'update' => array(
             'error'   => 'Fieldset nije ažuriran, pokušajte ponovo',
-            'success' => 'Fieldset je uspješno ažuriran.',
-        ],
+            'success' => 'Fieldset je uspješno ažuriran.'
+        ),
 
-        'delete' => [
+        'delete' => array(
             'confirm'   	=> 'Jeste li sigurni da želite izbrisati ovu grupu polja?',
             'error'   => 'Došlo je do problema s brisanjem fieldseta. Molim te pokušaj ponovno.',
             'success' => 'Fieldset je uspješno izbrisan.',
             'in_use'   => 'Fieldset je još uvijek u upotrebi.',
-        ],
+        )
 
-    ],
+    ),
 
-];
+
+
+
+
+
+);

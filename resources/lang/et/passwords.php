@@ -2,5 +2,5 @@
 
 return [
     'sent'	        => 'Sinu paroolilink on saadetud!',
-    'user'			=> 'No matching active user found with that email.',
+    'user'			=> 'Sellise emailiga aktiivset kasutajat ei leitud.',
 ];

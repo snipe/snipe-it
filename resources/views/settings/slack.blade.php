@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Update Slack Settings
+    {{ trans('admin/settings/general.slack_title') }}
     @parent
 @stop
 
@@ -32,7 +32,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fab fa-slack"></i> Slack
+                        <i class="fab fa-slack"></i> {{ trans('admin/settings/general.slack') }}
                     </h2>
                 </div>
                 <div class="box-body">
@@ -106,7 +106,7 @@
                                 {{ Form::label('test_slack', 'Test Slack') }}
                             </div>
                             <div class="col-md-10" id="slacktestrow">
-                                <a class="btn btn-default btn-sm pull-left" id="slacktest" style="margin-right: 10px;">Test <i class="fab fa-slack"></i> Integration</a>
+                                <a class="btn btn-default btn-sm pull-left" id="slacktest" style="margin-right: 10px;">{!! trans('admin/settings/general.slack_test') !!}</a>
                             </div>
                             <div class="col-md-10 col-md-offset-2">
                                 <span id="slacktesticon"></span>
@@ -158,20 +158,30 @@
 
         $('input:text').keyup(fieldcheck); // if *any* text field changes, we recalculate button states
 
-
         $("#slacktest").click(function() {
 
             $("#slacktestrow").removeClass('text-success');
             $("#slacktestrow").removeClass('text-danger');
             $("#slackteststatus").removeClass('text-danger');
             $("#slackteststatus").html('');
-            $("#slacktesticon").html('<i class="fas fa-spinner spin"></i> Sending Slack test message...');
+            $("#slacktesticon").html('<i class="fas fa-spinner spin"></i> {{ trans('admin/settings/message.slack.sending') }}');
             $.ajax({
+                
+                // If I comment this back in, I always get a success (200) message
+                // Without it, I get 
+                    //  beforeSend: function (xhr) { 
+                    //  xhr.setRequestHeader("Content-Type","application/json");
+                    // xhr.setRequestHeader("Accept","text/json");
+                    // },
+            
+                
                 url: '{{ route('api.settings.slacktest') }}',
                 type: 'POST',
                 headers: {
                     "X-Requested-With": 'XMLHttpRequest',
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content'),
+                //    'Accept': 'application/json',
+                //    'Content-Type': 'application/json',
                 },
                 data: {
                     'slack_endpoint': $('#slack_endpoint').val(),
@@ -182,12 +192,17 @@
 
                 dataType: 'json',
 
+                accepts: {
+                    text: "application/json"
+                },
+
                 success: function (data) {
                     $('#save_slack').removeAttr('disabled');
                     $("#slacktesticon").html('');
                     $("#slacktestrow").addClass('text-success');
                     $("#slackteststatus").addClass('text-success');
-                    $("#slackteststatus").html('<i class="fas fa-check text-success"></i> Success! Check the ' + $('#slack_channel').val() + ' channel for your test message, and be sure to click SAVE below to store your settings.');
+                    //TODO: This is a bit hacky...Might need some cleanup
+                    $("#slackteststatus").html('<i class="fas fa-check text-success"></i> {{ trans('admin/settings/message.slack.success_pt1') }} ' + $('#slack_channel').val() + '{{ trans('admin/settings/message.slack.success_pt2') }}');
                 },
 
                 error: function (data) {
@@ -198,7 +213,7 @@
                         var error_msg = data.responseJSON.message;
                     } else {
                         var errors;
-                        var error_msg = 'Something went wrong.';
+                        var error_msg = trans('admin/settings/message.slack.error');
                     }
 
                     var error_text = '';
@@ -210,7 +225,7 @@
 
                     
                     if (data.status == 500) {
-                        $('#slackteststatus').html('500 Server Error');
+                        $('#slackteststatus').html('{{  trans('admin/settings/message.slack.500') }}');
                     } else if ((data.status == 400) || (data.status == 422)) {
                         console.log('Type of errors is '+ typeof errors);
                         console.log('Data status was 400 or 422');

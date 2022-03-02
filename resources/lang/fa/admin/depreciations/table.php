@@ -6,5 +6,6 @@ return [
     'months'   => 'ماه ها',
     'term'   => 'مدت زمان',
     'title'      => 'نام ',
+    'depreciation_min' => 'Floor Value',
 
 ];

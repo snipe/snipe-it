@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Advarsel:</strong> Denne eiendelen er merket som ikke utleverbar.
                         Oppdater eiendelsstatus hvis situasjonen har endret seg.',
     'does_not_exist' 	=> 'Eiendel eksisterer ikke.',
-    'does_not_exist_or_not_requestable' => 'Eiendelen eksisterer ikke eller kan ikke forespørres.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Denne eiendelen er merket som utsjekket til en bruker og kan ikke slettes. Vennligst sjekk inn eiendelen først, og forsøk sletting på nytt. ',
 
     'create' => [
@@ -29,6 +29,7 @@ return [
         'success' 		=> 'Asset audit ble logget.',
     ],
 
+
     'deletefile' => [
         'error'   => 'Fil ble ikke slettet. Prøv igjen.',
         'success' => 'Vellykket sletting av fil.',
@@ -48,6 +49,7 @@ return [
         'file_delete_success'   => 'Filen har blitt slettet',
         'file_delete_error'      => 'Filen kunne ikke bli slettet',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Er du sikker på at du vil slette eiendelen?',

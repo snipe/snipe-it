@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'create'				=> 'Cruthaigh Samhail Sócmhainne',
     'created_at' 			=> 'Cruthaithe ag',
@@ -14,4 +14,4 @@ return [
     'update'				=> 'Nuashonraigh an tSamhail Sócmhainní',
     'clone'				=> 'Samhail Clón',
     'edit'				=> 'Modúl a Athrú',
-];
+);

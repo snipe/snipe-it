@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_models_title'     => 'About Asset Models',
     'about_models_text'           => 'Asset Models are a way to group identical assets. "MBP 2013", "IPhone 6s", etc.',
     'deleted'  					        => 'This model has been deleted.',
@@ -15,4 +15,4 @@ return [
     'fieldset'                  => 'Fieldset',
     'no_custom_field'           => 'No custom fields',
     'add_default_values'        => 'Add default values',
-];
+);

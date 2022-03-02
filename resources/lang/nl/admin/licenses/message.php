@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Licentie bestaat niet.',
     'user_does_not_exist' => 'Gebruiker bestaat niet.',
@@ -10,42 +10,43 @@ return [
     'select_asset_or_person' => 'U moet een asset of een gebruiker selecteren, maar niet beide.',
     'not_found' => 'Licentie niet gevonden',
 
-    'create' => [
-        'error'   => 'Licentie is niet aangemaakt, probeer het opnieuw.',
-        'success' => 'Licentie is met succes aangemaakt.',
-    ],
 
-    'deletefile' => [
+    'create' => array(
+        'error'   => 'Licentie is niet aangemaakt, probeer het opnieuw.',
+        'success' => 'Licentie is met succes aangemaakt.'
+    ),
+
+    'deletefile' => array(
         'error'   => 'Bestand is niet verwijderd. Probeer het opnieuw.',
         'success' => 'Bestand is met succes verwijderd.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Bestand(en) zijn niet geüpload. Probeer het opnieuw.',
         'success' => 'Bestand(en) zijn met succes geüpload.',
         'nofiles' => 'Je hebt geen bestanden geselecteerd om te uploaden, of het bestand wat je probeert te uploaden is te groot',
         'invalidfiles' => 'Een of meer van de bestanden is te groot of het bestandstype is niet toegestaan. Toegestane bestandstypes zijn png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml en lic.',
-    ],
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Licentie is niet gewijzigd, probeer het opnieuw',
-        'success' => 'Licentie is met succes gewijzigd.',
-    ],
+        'success' => 'Licentie is met succes gewijzigd.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Weet je het zeker dat je deze licentie wilt verwijderen?',
         'error'   => 'Er was een probleem tijdens het verwijderen van deze licentie, probeer het opnieuw.',
-        'success' => 'De licentie is met succes verwijderd.',
-    ],
+        'success' => 'De licentie is met succes verwijderd.'
+    ),
 
-    'checkout' => [
+    'checkout' => array(
         'error'   => 'Er was een probleem met het uitchecken van deze licentie. Probeer het opnieuw.',
-        'success' => 'De licentie is met succes uitgecheckt',
-    ],
+        'success' => 'De licentie is met succes uitgecheckt'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   => 'Er was een probleem met het inchecken van deze licentie. Probeer het opnieuw.',
-        'success' => 'De licentie is met succes ingecheckt',
-    ],
+        'success' => 'De licentie is met succes ingecheckt'
+    ),
 
-];
+);

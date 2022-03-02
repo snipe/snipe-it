@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Upozorenje: </strong> Ovaj resurs, imovina je označena kao trenutno nedeljiva. Ako se ovaj status promenio, ažurirajte status imovine.',
     'does_not_exist' 	=> 'Imovina ne postoji.',
-    'does_not_exist_or_not_requestable' => 'Dobar pokušaj. Ta imovina ne postoji ili nije moguće da se potražuje.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Ovaj je resurs trenutno poveren korisniku i ne može se izbrisati. Najprije proverite resurs, a zatim ponovo pokušajte brisanje. ',
 
     'create' => [
@@ -28,6 +28,7 @@ return [
         'success' 		=> 'Provera imovine uspešno je evidentirana.',
     ],
 
+
     'deletefile' => [
         'error'   => 'Fajl nije izbrisan. Molim pokušajte ponovo.',
         'success' => 'Fajl uspešno obrisan.',
@@ -47,6 +48,7 @@ return [
         'file_delete_success'   => 'Vaš je fajl uspešno izbrisan',
         'file_delete_error'      => 'Fajl nime moguće izbrisati',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Jeste li sigurni da želite izbrisati ovaj resurs?',

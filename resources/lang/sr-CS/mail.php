@@ -60,7 +60,7 @@ return [
     'test_mail_text' => 'This is a test from the Snipe-IT Asset Management System. If you got this, mail is working :)',
     'the_following_item' => 'The following item has been checked in: ',
     'low_inventory_alert' => 'Postoji :count artikla ispod minimalne zalihe ili će uskoro biti nizak. |Postoje :count artikla koji su ispod minimalne zalihe ili će uskoro biti.',
-    'assets_warrantee_alert' => 'There is :count asset with a warrantee expiring in the next :threshold days.|There are :count assets with warrantees expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'Postoji :count licenci koja/e ističe u narednih treshold dana.|Postoje :count licencei koje ističu u narednih :treshold dana.',
     'to_reset' => 'Da biste resetovali svoju :web lozinku, ispunite ovaj obrazac:',
     'type' => 'Tip',

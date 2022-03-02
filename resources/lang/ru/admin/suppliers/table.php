@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_suppliers_title' => 'О поставщиках',
     'about_suppliers_text'  => 'Поставщики используются для отслеживания источника поставок',
     'address'               => 'Адрес поставщика',
@@ -24,4 +24,4 @@ return [
     'view_assets_for'       => 'Список активов от',
     'zip'                   => 'Почтовый индекс',
 
-];
+);

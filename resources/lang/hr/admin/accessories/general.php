@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'accessory_category' 				=> 'Kategorija dodatne opreme',
     'accessory_name'  					=> 'Naziv dodatne opreme',
     'checkout'  							=> 'Dodatna oprema za naplatu',
@@ -17,4 +17,4 @@ return [
     'use_default_eula'					=> 'Umjesto toga upotrijebite <a href="#" data-toggle="modal" data-target="#eulaModal">primarnu postavku EULA</a>.',
     'use_default_eula_disabled'			=> '<del>Uporedi primarnu zadanu EULA.</del> Nije postavljena primarna zadana EULA. Dodajte jednu u Postavke.',
 
-];
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_manufacturers_title'    => '关于制造商',
     'about_manufacturers_text'  => '制造商是您资产的生产厂家。您可以保存一些重要的客服信息，可以方便进行故障报修等操作，这些信息将显示到资产的详情页中。',
     'asset_manufacturers'	=> '资产制造商',
@@ -13,4 +13,4 @@ return [
     'update'				=> '更新制造商',
     'url'   				=> 'URL',
 
-];
+);

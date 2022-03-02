@@ -1,35 +1,36 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Az alkatrész nem létezik.',
 
-    'create' => [
+    'create' => array(
         'error'   => 'Összetevő nem jött létre, próbálkozz újra.',
-        'success' => 'Az alkatrész sikeresen létrejött.',
-    ],
+        'success' => 'Az alkatrész sikeresen létrejött.'
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Az alkatrész nem frissült, próbálkozz újra',
-        'success' => 'Az alkatrész sikeresen létrejött.',
-    ],
+        'success' => 'Az alkatrész sikeresen létrejött.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Biztosan törölni szeretnéd az alkatrészt?',
         'error'   => 'Probléma támadt a vállalat törlésével. Próbálkozz újra.',
-        'success' => 'Az alkatrész sikeresen törlődött.',
-    ],
+        'success' => 'Az alkatrész sikeresen törlődött.'
+    ),
 
-     'checkout' => [
+     'checkout' => array(
         'error'   		=> 'Az alkatrész nem lett kiadva, próbálkozz újra',
         'success' 		=> 'Az alkatrész sikeresen kiadva.',
-        'user_does_not_exist' => 'Érvénytelen felhasználó. Kérem, próbálja újra.',
-    ],
+        'user_does_not_exist' => 'Érvénytelen felhasználó. Kérem, próbálja újra.'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   		=> 'Az alkatrész nem lett visszavéve, próbálkozz újra',
         'success' 		=> 'Az alkatrész sikeresen visszavéve.',
-        'user_does_not_exist' => 'Érvénytelen felhasználó. Kérem, próbálja újra.',
-    ],
+        'user_does_not_exist' => 'Érvénytelen felhasználó. Kérem, próbálja újra.'
+    )
 
-];
+
+);

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Bir kullanıcı web sitede öğe talebinden vazgeçti',
     'a_user_requested' => 'Bir kullanıcı websitede bir öğe talebinde bulundu',
     'accessory_name' => 'Aksesuar Adı:',
@@ -19,11 +19,11 @@ return array(
     'click_on_the_link_accessory' => 'Lütfen aşağıdaki bağlantıya tıklayarak aksesuar talebinizi onaylayın.',
     'click_on_the_link_asset' => 'Lütfen aşağıdaki bağlantıya tıklayarak varlık talebinizi onaylayın.',
     'Confirm_Asset_Checkin' => 'Varlık Kabul Onayı',
-    'Confirm_Accessory_Checkin' => 'Accessory checkin confirmation',
-    'Confirm_accessory_delivery' => 'Accessory delivery confirmation',
-    'Confirm_license_delivery' => 'License delivery confirmation',
+    'Confirm_Accessory_Checkin' => 'Aksesuar giriş onayı',
+    'Confirm_accessory_delivery' => 'Aksesuar teslimat onayı',
+    'Confirm_license_delivery' => 'Lisans teslim onayı',
     'Confirm_asset_delivery' => 'Varlık Kabul Onayı',
-    'Confirm_consumable_delivery' => 'Consumable delivery confirmation',
+    'Confirm_consumable_delivery' => 'Sarf malzemesi teslimat onayı',
     'current_QTY' => 'Mevcut miktar',
     'Days' => 'Günler',
     'days' => 'Günler',
@@ -60,11 +60,11 @@ return array(
     'test_mail_text' => 'Snipe-IT varlık yönetim sisteminden bir denemedir',
     'the_following_item' => 'Aşağıdaki varlık geri alındı olarak işaretlendi: ',
     'low_inventory_alert' => 'Şu var: Minimum envanterin altında olan veya yakında düşük olacak olan sayı maddesi. | Şunlar var: Minimum envanterin altında olan veya yakında olacak olan sayım maddeleri.',
-    'assets_warrantee_alert' => 'Şu var: gelecek vadede garanti süresi dolmuş varlık sayımı: eşik günler. | Şunlar var: gelecek yıl sona ermesi garantili varlıklar sayılır: eşik günleri.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'Şu var: bir sonraki günlerde süren lisans sayımı: eşik günleri. | Şunlar var: bir sonraki günlerde süren sayım lisansları: eşik günleri.',
     'to_reset' => 'Şifre sıfırlamak için :web password, formu doldurun:',
     'type' => 'Tür',
-    'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
+    'upcoming-audits' => ':count gün içinde denetime yaklaşan :count varlık var.|Eşik gün içinde denetime yaklaşan :count varlık var.',
     'user' => 'Kullanıcı',
     'username' => 'Kullanıcı Adı',
     'welcome' => 'Hoşgeldiniz, :name',
@@ -73,8 +73,8 @@ return array(
     'Accessory_Checkin_Notification' => 'Aksesuar Zimmet Kabul',
     'Asset_Checkin_Notification' => 'Varlık Zimmet Kabul',
     'License_Checkin_Notification' => 'Lisans Zimmet Kabul',
-    'Expected_Checkin_Report' => 'Expected asset checkin report',
+    'Expected_Checkin_Report' => 'Beklenen varlık iade raporu',
     'Expected_Checkin_Notification' => 'Hatırlatma ::name Son seçim zamanı yaklaşıyor',
-    'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'Varlıkları Görüntüleme'
-);
+    'Expected_Checkin_Date' => 'Size teslim edilen bir varlık :date tarihinde tekrar teslim edilecektir',
+    'your_assets' => 'Varlıkları Görüntüleme',
+];

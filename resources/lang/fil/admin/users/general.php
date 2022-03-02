@@ -24,4 +24,14 @@ return [
     'two_factor_admin_optin_help' => 'Ang iyong kasalukuyang mga admin settings ay napapahintulot ng selektibong pagpapatupad ng two-factor authentication.  ',
     'two_factor_enrolled' => 'Ang Na-enroll na 2FA Device ',
     'two_factor_active'   => 'Ang 2FA Active ',
-    ];
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

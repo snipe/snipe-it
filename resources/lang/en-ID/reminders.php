@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return [
     |
     */
 
-    'password' => 'Kata sandi harus ada enam karakter dan sesuai dengan konfirmasi.',
+    "password" => "Kata sandi harus ada enam karakter dan sesuai dengan konfirmasi.",
 
-    'user'     => 'Nama pengguna atau alamat surel salah',
+    "user"     => "Nama pengguna atau alamat surel salah",
 
-    'token'    => 'Token atur ulang kata sandi ini tidak valid.',
+    "token"    => "Token atur ulang kata sandi ini tidak valid.",
 
-    'sent' => 'Jika alamat surel yang sesuai ditemukan, pengingat kata sandi sudah dikirim!',
+    "sent" => "Jika alamat surel yang sesuai ditemukan, pengingat kata sandi sudah dikirim!",
 
-];
+);

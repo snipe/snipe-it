@@ -64,9 +64,11 @@ class ProfileController extends Controller
             $user->location_id = $request->input('location_id');
         }
 
+
         if ($request->input('avatar_delete') == 1) {
             $user->avatar = null;
         }
+
 
         if ($request->hasFile('avatar')) {
             $path = 'avatars';
@@ -101,6 +103,7 @@ class ProfileController extends Controller
         return redirect()->back()->withInput()->withErrors($user->getErrors());
     }
 
+
     /**
      * Returns a page with the API token generation interface.
      *
@@ -113,6 +116,12 @@ class ProfileController extends Controller
      */
     public function api()
     {
+
+        // Make sure the self.api permission has been granted
+        if (!Gate::allows('self.api')) {
+            abort(403);
+        }
+
         return view('account/api');
     }
 
@@ -177,11 +186,12 @@ class ProfileController extends Controller
         if (! $validator->fails()) {
             $user->password = Hash::make($request->input('password'));
             $user->save();
-
             return redirect()->route('account.password.index')->with('success', 'Password updated!');
-        }
 
+        }
         return redirect()->back()->withInput()->withErrors($validator);
+
+
     }
 
     /**

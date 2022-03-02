@@ -13,6 +13,7 @@ return array(
     'user_deleted_warning'      => 'Tento používateľ bol odstránený. Používateľa musíte obnoviť, ak ho chcete upraviť alebo mu priradiť majetok.',
     'ldap_not_configured'        => 'LDAP prepojenie nebolo nastavené pre túto inštaláciu.',
     'password_resets_sent'      => 'Vybraní používatelia sú aktivovaný. Na ich adresu bola zaslaný okaz na resetovanie hesla.',
+    'password_reset_sent'       => 'A password reset link has been sent to :email!',
 
 
     'success' => array(

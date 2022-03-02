@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'asset'             => 'Impahla',
     'checkin'           => 'Ngena',
@@ -18,5 +18,5 @@ return [
     'to_email'          => 'Ilayisensi ye-imeyili',
     'to_name'           => 'Ilayisensi Yegama',
     'update'            => 'Buyekeza i-License',
-    'checkout_help'     => 'Kumele uhlole ilayisense ku-hardware yefa noma umuntu. Ungakhetha kokubili, kodwa umnikazi wefa kufanele afane nomuntu ohlola ifa lakho.',
-];
+    'checkout_help'     => 'Kumele uhlole ilayisense ku-hardware yefa noma umuntu. Ungakhetha kokubili, kodwa umnikazi wefa kufanele afane nomuntu ohlola ifa lakho.'
+);

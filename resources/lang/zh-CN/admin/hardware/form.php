@@ -40,4 +40,10 @@ return [
     'warranty'			=> '质保',
         'warranty_expires'		=> '保修期已过',
     'years'				=> '年',
+    'asset_location' => '更新资产位置',
+    'asset_location_update_default_current' => '更新默认位置与实际位置',
+    'asset_location_update_default' => '仅更新默认位置',
+    'asset_not_deployable' => '该资产状态为不可部署。无法签出此资产。',
+    'asset_deployable' => '该状态为可部署。可以签出此资产。',
+    'processing_spinner' => '处理中……',
 ];

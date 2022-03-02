@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'Amdan trwyddedau',
     'about_licenses'                  => 'Mae trwyddedau yn tracio feddalwedd. May yna nifer o seddi fedrwch nodi yn erbyn unigolion',
     'checkin'  					=> 'Nodi sedd trwydded i fewn',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'Trwyddedau Meddalwedd',
     'user'  					=> 'Defnyddiwr',
     'view'  					=> 'Gweld Trwydded',
-];
+);

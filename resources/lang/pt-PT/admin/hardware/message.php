@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Aviso: </strong> Este artigo foi assinalado como "não implementável".
                         Se este estado mudou, por favor atualize o estado do artigo.',
     'does_not_exist' 	=> 'Artigo não existente.',
-    'does_not_exist_or_not_requestable' => 'Boa tentativa. Esse artigo não existe ou não é solicitável.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Este artigo está correntemente alocado a um utilizador e não pode ser removido. Por favor devolva o artigo e de seguida tente remover novamente. ',
 
     'create' => [
@@ -29,6 +29,7 @@ return [
         'success' 		=> 'Auditoria de ativos logada com sucesso.',
     ],
 
+
     'deletefile' => [
         'error'   => 'Ficheiro não removido. Por favor, tente novamente.',
         'success' => 'Ficheiro removido com sucesso.',
@@ -48,6 +49,7 @@ return [
         'file_delete_success'   => 'Ficheiro eliminado com sucesso',
         'file_delete_error'      => 'Não foi possível eliminar o ficheiro',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Tem a certeza de que pretende eliminar este artigo?',

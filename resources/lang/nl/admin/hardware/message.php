@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Waarschuwing: </strong> Dit bestand is gemarkeerd als niet-uitgeefbaar.
                         Als deze status is veranderd, update dan de asset status.',
     'does_not_exist' 	=> 'Dit asset bestaat niet.',
-    'does_not_exist_or_not_requestable' => 'Leuk geprobeerd. Het asset bestaat niet of is niet aanvraagbaar.',
+    'does_not_exist_or_not_requestable' => 'Die asset bestaat niet of is niet aanvraagbaar.',
     'assoc_users'	 	=> 'Dit asset is momenteel toegewezen aan een gebruiker en kan niet worden verwijderd. Controleer het asset eerst en probeer het opnieuw. ',
 
     'create' => [
@@ -29,6 +29,7 @@ return [
         'success' 		=> 'Asset audit succesvol geregistreerd.',
     ],
 
+
     'deletefile' => [
         'error'   => 'Bestand is niet verwijderd. Probeer het opnieuw.',
         'success' => 'Bestand is met succes verwijderd.',
@@ -48,6 +49,7 @@ return [
         'file_delete_success'   => 'Je bestand is succesvol verwijderd',
         'file_delete_error'      => 'Het bestand kon niet worden verwijderd',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Weet je zeker dat je dit asset wilt verwijderen?',

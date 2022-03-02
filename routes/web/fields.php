@@ -29,7 +29,7 @@ Route::group([ 'prefix' => 'fields','middleware' => ['auth'] ], function () {
 
     Route::post(
         'fieldsets/{id}/associate',
-        [CustomFieldsController::class, 'associate']
+        [CustomFieldsetsController::class, 'associate']
     )->name('fieldsets.associate');
 
     Route::resource('fieldsets', CustomFieldsetsController::class, [

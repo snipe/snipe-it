@@ -10,5 +10,7 @@ return [
     'group_admin' 	 		=> 'Riarachán Grúpa',
     'allow' 	 			=> 'Ceadaigh',
     'deny' 	 				=> 'Diúltaigh',
-
+    'permission'            => 'Permission',
+    'grant'                 => 'Grant',
+    'no_permissions'        => 'This group has no permissions.'
 ];

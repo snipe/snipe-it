@@ -96,11 +96,11 @@
           <!-- Help Text -->
           <div class="form-group {{ $errors->has('help_text') ? ' has-error' : '' }}">
               <label for="help_text" class="col-md-4 control-label">
-                  Help Text
+                  {{ trans('admin/custom_fields/general.help_text') }}
               </label>
               <div class="col-md-6">
                   {{ Form::text('help_text', old('help_text', $field->help_text), array('class' => 'form-control', 'aria-label'=>'help_text')) }}
-                  <p class="help-block">This is optional text that will appear below the form elements while editing an asset to provide context on the field.</p>
+                  <p class="help-block">{{ trans('admin/custom_fields/general.help_text_description') }}</p>
                   {!! $errors->first('help_text', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
               </div>
           </div>
@@ -115,6 +115,17 @@
               </div>
 
           </div>
+
+          <!-- Value Must be Unique -->
+          <div class="form-group {{ $errors->has('is_unique') ? ' has-error' : '' }}"  id="is_unique">
+            <div class="col-md-8 col-md-offset-4">
+                <label for="is_unique">
+                    <input type="checkbox" name="is_unique" aria-label="is_unique" value="1" class="minimal"{{ (old('is_unique') || $field->is_unique) ? ' checked="checked"' : '' }}>
+                    {{ trans('admin/custom_fields/general.is_unique') }}
+                </label>
+            </div>
+
+        </div>
 
 
       @if (!$field->id)
@@ -147,8 +158,8 @@
   </div> <!--/.col-md-9-->
 
   <div class="col-md-3">
-    <h2>About Custom Fields</h2>
-    <p>Custom fields allow you to add arbitrary attributes to assets.</p>
+    <h2>{{ trans('admin/custom_fields/general.about_custom_fields_title') }}</h2>
+    <p>{{ trans('admin/custom_fields/general.about_custom_fields_text') }}</p>
   </div>
   
 </div>

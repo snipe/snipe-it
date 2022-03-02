@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Varning: </strong> Den här tillgången har markerats som omöjlig för närvarande. Om denna status har ändrats uppdaterar du tillgångsstatusen.',
     'does_not_exist' 	=> 'Tillgång existerar inte.',
-    'does_not_exist_or_not_requestable' => 'Bra försök. Den tillgången existerar inte eller är inte tillgänglig.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Denna tillgång kontrolleras för närvarande till en användare och kan inte raderas. Kontrollera tillgången först och försök sedan radera igen.',
 
     'create' => [
@@ -28,6 +28,7 @@ return [
         'success' 		=> 'Inventeringen av tillgången har loggats.',
     ],
 
+
     'deletefile' => [
         'error'   => 'Filen har inte tagits bort. Var god försök igen.',
         'success' => 'Filen har tagits bort.',
@@ -47,6 +48,7 @@ return [
         'file_delete_success'   => 'Din fil har tagits bort',
         'file_delete_error'      => 'Filen kunde inte raderas',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Är du säker på att du vill radera den här tillgången?',

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'create'				=> 'Eszköz modell létrehozása',
     'created_at' 			=> 'Létrehozva',
@@ -14,4 +14,4 @@ return [
     'update'				=> 'Eszközmodell frissítése',
     'clone'				=> 'Modell klónozása',
     'edit'				=> 'Modell szerkesztése',
-];
+);

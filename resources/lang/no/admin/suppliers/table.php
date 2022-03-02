@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_suppliers_title' => 'Om leverandører',
     'about_suppliers_text'  => 'Leverandører brukes til å spore kilden til varer',
     'address'               => 'Leverandøradresse',
@@ -24,4 +24,4 @@ return [
     'view_assets_for'       => 'Vis eiendeler for',
     'zip'                   => 'Postnummer',
 
-];
+);

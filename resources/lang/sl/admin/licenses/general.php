@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'O licencah',
     'about_licenses'                  => 'Licence se uporabljajo za sledenje programske opreme. Imajo določeno število prostih mest, ki jih je mogoče izdati posameznikom',
     'checkin'  					=> 'Prevzem licenčnih mest',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'Licence za programsko opremo',
     'user'  					=> 'Uporabnik',
     'view'  					=> 'Ogled licence',
-];
+);

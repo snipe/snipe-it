@@ -39,7 +39,6 @@ class ActionlogFactory extends Factory
             'item_type' => get_class($asset),
             'item_id' => 1,
             'user_id' => 1,
-            'filename' => $this->faker->word,
             'action_type' => 'uploaded',
         ];
     }
@@ -49,7 +48,7 @@ class ActionlogFactory extends Factory
     {
         return $this->state(function () {
             $target = \App\Models\User::inRandomOrder()->first();
-            $item = \App\Models\Asset::inRandomOrder()->RTD()->first();
+            $item = \App\Models\Asset::RTD()->inRandomOrder()->first();
             $user_id = rand(1, 2); // keep it simple - make it one of the two superadmins
             $asset = Asset::where('id', $item->id)
                 ->update(

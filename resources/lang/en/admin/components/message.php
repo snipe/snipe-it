@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Component does not exist.',
 
@@ -32,4 +32,4 @@ return [
         'user_does_not_exist' => 'That user is invalid. Please try again.',
     ],
 
-];
+);

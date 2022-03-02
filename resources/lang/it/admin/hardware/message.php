@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Attenzione: </strong> Questo asset è stato marcato come non distribuibile.
                        Se lo stato è cambiato,aggiorna lo stato dell\'asset.',
     'does_not_exist' 	=> 'Questo Asset non esiste.',
-    'does_not_exist_or_not_requestable' => 'Ci hai provato. Questo prodotto non esiste o non è disponibile.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Questo asset è stato assegnato ad un Utente e non può essere cancellato. Per favore Riassegnalo in magazzino,e dopo riprova a cancellarlo.',
 
     'create' => [
@@ -29,6 +29,7 @@ return [
         'success' 		=> 'L\'audit di risorse si è registrato con successo.',
     ],
 
+
     'deletefile' => [
         'error'   => 'File non cancellato. Riprova.',
         'success' => 'File cancellato con successo.',
@@ -48,6 +49,7 @@ return [
         'file_delete_success'   => 'Il file è stato cancellato con successo',
         'file_delete_error'      => 'Impossibile eliminare il file',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Sei sicuro di voler eliminare questo bene?',

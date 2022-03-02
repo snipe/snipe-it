@@ -1,9 +1,9 @@
 <?php
 
-return [
+return array(
 
     'id'         => 'Id',
     'name'       => 'Ngalan',
     'users'      => '# ng mga Gumagamit',
 
-];
+);

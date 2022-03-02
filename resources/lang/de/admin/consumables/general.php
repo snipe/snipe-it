@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'checkout'                          => 'Verbrauchsmaterial an Benutzer herausgeben',
     'consumable_name'                   => 'Name des Verbrauchsmaterials',
     'create'                            => 'Verbrauchsmaterial erstellen',
@@ -8,4 +8,4 @@ return [
     'remaining' 			            => 'Verbleibend',
     'total' 			                => 'Gesamt',
     'update'                            => 'Verbrauchsmaterial bearbeiten',
-];
+);

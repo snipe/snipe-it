@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'asset_categories' 					=> '資產類別',
     'category_name'  					=> '類別名稱',
     'checkin_email'                     => '在借出/繳回時發送郵件給使用者。',
@@ -18,5 +18,6 @@ return [
     'update'  							=> '更新類別',
     'use_default_eula'					=> '用<a href="#" data-toggle="modal" data-target="#eulaModal">預設EULA（最終使用者許可協議）</a> 進行替換。',
     'use_default_eula_disabled'			=> '<del>使用預設EULA（最終使用者許可協議）替換。</del>沒有找到預設EULA（最終使用者許可協議）。請在設定中增加一個。',
+    'use_default_eula_column'			=> '使用預設的 EULA',
 
-];
+);

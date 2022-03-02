@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Licenca ne postoji.',
     'user_does_not_exist' => 'Korisnik ne postoji.',
@@ -10,42 +10,43 @@ return [
     'select_asset_or_person' => 'Morate odabrati neku vrstu imovine ili korisnika, ali ne oboje.',
     'not_found' => 'License not found',
 
-    'create' => [
-        'error'   => 'Licenca nije izrađena, pokušajte ponovo.',
-        'success' => 'Licenca je uspješno stvorena.',
-    ],
 
-    'deletefile' => [
+    'create' => array(
+        'error'   => 'Licenca nije izrađena, pokušajte ponovo.',
+        'success' => 'Licenca je uspješno stvorena.'
+    ),
+
+    'deletefile' => array(
         'error'   => 'Datoteka nije izbrisana. Molim te pokušaj ponovno.',
         'success' => 'Datoteka je uspješno obrisana.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Datoteke nisu prenesene. Molim te pokušaj ponovno.',
         'success' => 'Datoteke su uspješno učitane.',
         'nofiles' => 'Niste odabrali nijednu datoteku za prijenos ili je datoteka koju pokušavate prenijeti prevelika',
         'invalidfiles' => 'Jedna ili više datoteka je prevelika ili je vrsta datoteke koja nije dopuštena. Dopuštene vrste datoteka su png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml i lic.',
-    ],
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Licenca nije ažurirana, pokušajte ponovo',
-        'success' => 'Licenca je uspješno ažurirana.',
-    ],
+        'success' => 'Licenca je uspješno ažurirana.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Jeste li sigurni da želite izbrisati ovu licencu?',
         'error'   => 'Došlo je do problema s brisanjem licence. Molim te pokušaj ponovno.',
-        'success' => 'Licenca je uspješno obrisana.',
-    ],
+        'success' => 'Licenca je uspješno obrisana.'
+    ),
 
-    'checkout' => [
+    'checkout' => array(
         'error'   => 'Došlo je do problema prilikom provjere licence. Molim te pokušaj ponovno.',
-        'success' => 'Licenca je uspješno provjerena',
-    ],
+        'success' => 'Licenca je uspješno provjerena'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   => 'U licenci se provjeravala problem. Molim te pokušaj ponovno.',
-        'success' => 'Licenca je uspješno provjerena',
-    ],
+        'success' => 'Licenca je uspješno provjerena'
+    ),
 
-];
+);

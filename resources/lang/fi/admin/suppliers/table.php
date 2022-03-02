@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_suppliers_title' => 'Tietoa toimittajista',
     'about_suppliers_text'  => 'Toimittajien avulla seurataan nimikkeiden lähdettä',
     'address'               => 'Toimittajan osoite',
@@ -24,4 +24,4 @@ return [
     'view_assets_for'       => 'Laitteet kohteella',
     'zip'                   => 'Postinumero',
 
-];
+);

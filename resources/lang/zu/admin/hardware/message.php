@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Thola: </strong> Lelifa limakwe njengamanje elingenakutholakali. Uma lesi simo sesishintshile, sicela ubuyekeze isimo sesifa.',
     'does_not_exist' 	=> 'Impahla ayikho.',
-    'does_not_exist_or_not_requestable' => 'Zama okuhle. Lelifa alikho noma aliceli.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Leli fayela okwamanje lihlolwe kumsebenzisi futhi alikwazi ukususwa. Sicela uhlole ifa ekuqaleni, bese uzama ukususa futhi.',
 
     'create' => [
@@ -28,6 +28,7 @@ return [
         'success' 		=> 'I-akhawunti yokuthengisa ilandelwe ngempumelelo.',
     ],
 
+
     'deletefile' => [
         'error'   => 'Ifayela alisusiwe. Ngicela uzame futhi.',
         'success' => 'Ifayili isusiwe ngempumelelo.',
@@ -47,6 +48,7 @@ return [
         'file_delete_success'   => 'Ifayela lakho lisusiwe ngempumelelo',
         'file_delete_error'      => 'Ifayela alikwazanga ukususwa',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Uqinisekile ukuthi ufisa ukususa le mali?',

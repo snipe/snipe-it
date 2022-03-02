@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Licensen finns inte.',
     'user_does_not_exist' => 'Användare finns inte.',
@@ -10,42 +10,43 @@ return [
     'select_asset_or_person' => 'Du måste välja en tillgång eller en användare, men inte båda.',
     'not_found' => 'Licensen hittades inte',
 
-    'create' => [
-        'error'   => 'Licensen skapades inte, försök igen.',
-        'success' => 'Licensen skapades framgångsrikt.',
-    ],
 
-    'deletefile' => [
+    'create' => array(
+        'error'   => 'Licensen skapades inte, försök igen.',
+        'success' => 'Licensen skapades framgångsrikt.'
+    ),
+
+    'deletefile' => array(
         'error'   => 'Filen har inte tagits bort. Var god försök igen.',
         'success' => 'Filen har tagits bort.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Fil (er) inte uppladdade. Var god försök igen.',
         'success' => 'Filer som har laddats upp.',
         'nofiles' => 'Du valde inte några filer för uppladdning, eller filen du försöker ladda upp är för stor',
         'invalidfiles' => 'En eller flera av dina filer är för stora eller är en filtyp som inte är tillåten. Tillåtna filtyper är png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml och lic.',
-    ],
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Licensen uppdaterades inte, var god försök igen',
-        'success' => 'Licensen uppdateras framgångsrikt.',
-    ],
+        'success' => 'Licensen uppdateras framgångsrikt.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Är du säker på att du vill radera denna licens?',
         'error'   => 'Det gick inte att ta bort licensen. Var god försök igen.',
-        'success' => 'Licensen har tagits bort.',
-    ],
+        'success' => 'Licensen har tagits bort.'
+    ),
 
-    'checkout' => [
+    'checkout' => array(
         'error'   => 'Det gick inte att kontrollera licensen. Var god försök igen.',
-        'success' => 'Licensen utcheckades framgångsrikt',
-    ],
+        'success' => 'Licensen utcheckades framgångsrikt'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   => 'Det gick inte att kontrollera licensen. Var god försök igen.',
-        'success' => 'Licensen incheckades med framgång',
-    ],
+        'success' => 'Licensen incheckades med framgång'
+    ),
 
-];
+);

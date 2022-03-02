@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return [
     |
     */
 
-    'password' => 'Los passwords deben tener mínimo 6 caracteres y coincidir.',
+    "password" => "Los passwords deben tener mínimo 6 caracteres y coincidir.",
 
-    'user'     => 'Usuario o E-Mail incorrectos',
+    "user"     => "Usuario o E-Mail incorrectos",
 
-    'token'    => 'El token para resetear el password no es válido.',
+    "token"    => "El token para resetear el password no es válido.",
 
-    'sent' => 'Si existe cuenta con el e-mail introducido, se enviará mensaje para resetear el password!',
+    "sent" => "Si existe cuenta con el e-mail introducido, se enviará mensaje para resetear el password!",
 
-];
+);

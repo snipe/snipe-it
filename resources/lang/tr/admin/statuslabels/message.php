@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'Bu varlıklar kimseye atanamaz.',
-        'deployable'   => 'Bu varlıklar kontrol edilebilir. Bunlar atandıktan sonra, <i class="fas fa-circle text-blue"></i> <strong>Devlete</strong> bir meta statüsü üstleneceklerdir.',
+        'deployable'   => 'Bu varlıklar kontrol edilebilir. Atandıkları anda <i class="fas fa-circle text-blue"></i> meta statüsünü alaca</i>klar.<strong>Atandı</strong>.',
         'archived'   => 'Bu öğeler kontrol edilemez ve yalnızca Arşivlenmiş görünümde görünür. Bu, bütçeleme / tarihi amaçlar için varlıklarla ilgili bilgileri korumakta, ancak bunları günlük günlük varlık listesinin dışında tutmak için kullanışlıdır.',
         'pending'   => 'Bu varlıklar kimseye atanamıyor, genellikle onarım için olan ancak dolaşıma dönmesi beklenen öğeler için kullanılıyor.',
     ],

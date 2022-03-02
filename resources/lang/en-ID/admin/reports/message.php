@@ -1,5 +1,5 @@
 <?php
 
-return [
-    'error'   => 'Anda harus memilih setidaknya satu pilihan.',
-];
+return array(
+    'error'   => 'Anda harus memilih setidaknya satu pilihan.'
+);

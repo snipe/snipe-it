@@ -1,5 +1,5 @@
 <?php
 
-return [
-    'error'   => 'Sinun tulee valita ainakin YKSI vaihtoehto.',
-];
+return array(
+    'error'   => 'Sinun tulee valita ainakin YKSI vaihtoehto.'
+);

@@ -6,8 +6,11 @@ return [
     'asset_depreciations'  					=> 'Asset afschrijvingen',
     'create'  					            => 'Afschrijving aanmaken',
     'depreciation_name'  					=> 'Afschrijvingsnaam',
+    'depreciation_min'                      => 'Floor Value of Depreciation',
     'number_of_months'  					=> 'Aantal maanden',
     'update'  					            => 'Afschrijving bijwerken',
-    'depreciation_min'                      => 'Minimale waarde na afschrijving'
-
+    'depreciation_min'                      => 'Minimale waarde na afschrijving',
+    'no_depreciations_warning'               => '<strong>Warning: </strong>
+                      You do not currently have any depreciations set up.
+                      Please set up at least one depreciation to view the depreciation report.',
 ];

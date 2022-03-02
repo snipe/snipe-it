@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Ievadīšana: </strong> Šis īpašums ir atzīmēts kā pašlaik nederīgs. Ja šis statuss ir mainījies, lūdzu, atjauniniet aktīvu statusu.',
     'does_not_exist' 	=> 'Aktīvs neeksistē.',
-    'does_not_exist_or_not_requestable' => 'Labs mēģinājums. Šis īpašums nepastāv vai nav pieprasāms.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Šobrīd šis īpašums tiek pārbaudīts lietotājam un to nevar izdzēst. Vispirms pārbaudiet aktīvu, un pēc tam mēģiniet vēlreiz izdzēst.',
 
     'create' => [
@@ -28,6 +28,7 @@ return [
         'success' 		=> 'Aktīvu audits ir veiksmīgi reģistrēts.',
     ],
 
+
     'deletefile' => [
         'error'   => 'Fails nav izdzēsts. Lūdzu mēģiniet vēlreiz.',
         'success' => 'Fails veiksmīgi izdzēsts.',
@@ -47,6 +48,7 @@ return [
         'file_delete_success'   => 'Jūsu fails ir veiksmīgi izdzēsts',
         'file_delete_error'      => 'Failu nevarēja dzēst',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Vai tiešām vēlaties dzēst šo īpašumu?',
