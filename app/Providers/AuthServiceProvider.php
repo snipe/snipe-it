@@ -109,8 +109,7 @@ class AuthServiceProvider extends ServiceProvider
         // These control general sections of the admin
         // --------------------------------
         Gate::define('admin', function ($user) {
-            // important piece here - if multicompany support is enabled and the thing you're admin-ing *doesn't* have a company_id on it, then you can't admin it.
-            if ($user->hasAccess('admin')) { //this probably needs to change? I don't want this to shortcut what's in SnipePermissionsPolicy ...
+            if ($user->hasAccess('admin')) {
                 return true;
             }
         });

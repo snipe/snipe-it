@@ -61,7 +61,7 @@ final class Company extends SnipeModel
      */
     protected $fillable = ['name'];
 
-    public static function isFullMultipleCompanySupportEnabled()
+    private static function isFullMultipleCompanySupportEnabled()
     {
         $settings = Setting::getSettings();
 
