@@ -40,8 +40,8 @@ class ActionlogsTransformer
 
             if ($meta_array) {
                 foreach ($meta_array as $fieldname => $fieldata) {
-                    $clean_meta[$fieldname]['old'] = $this->clean_field($fieldata['old']);
-                    $clean_meta[$fieldname]['new'] = $this->clean_field($fieldata['new']);
+                    $clean_meta[$fieldname]['old'] = $this->clean_field($fieldata->old);
+                    $clean_meta[$fieldname]['new'] = $this->clean_field($fieldata->new);
                 }
 
             }
