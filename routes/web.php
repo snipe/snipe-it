@@ -438,3 +438,15 @@ Route::middleware(['auth'])->get(
     '/',
     [DashboardController::class, 'index']
 )->name('home');
+
+//Notifications
+Route::post('notifications', [NotificationController::class, 'store']);
+Route::get('notifications', [NotificationController::class, 'index']);
+Route::patch('notifications/{id}/read', [NotificationController::class, 'markAsRead']);
+Route::post('notifications/mark-all-read', [NotificationController::class, 'markAllRead']);
+Route::post('notifications/{id}/dismiss', [NotificationController::class, 'dismiss']);
+
+// Push Subscriptions
+Route::post('subscriptions', [PushSubscriptionController::class, 'update']);
+Route::post('subscriptions/delete', [PushSubscriptionController::class, 'destroy']);
+
