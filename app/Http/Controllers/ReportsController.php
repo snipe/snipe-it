@@ -985,7 +985,7 @@ class ReportsController extends Controller
         ];
 
         $header = array_map('trim', $header);
-        $rows[] = implode($header, ',');
+        $rows[] = implode(',', $header);
 
         foreach ($assetsForReport as $assetItem) {
             $row    = [ ];
@@ -994,11 +994,11 @@ class ReportsController extends Controller
             $row[]  = str_replace(',', '', e($assetItem->assetlog->present()->name()));
             $row[]  = str_replace(',', '', e($assetItem->assetlog->asset_tag));
             $row[]  = str_replace(',', '', e($assetItem->assetlog->assignedTo->present()->name()));
-            $rows[] = implode($row, ',');
+            $rows[] = implode(',' ,$row);
         }
 
         // spit out a csv
-        $csv      = implode($rows, "\n");
+        $csv      = implode("\n", $rows);
         $response = Response::make($csv, 200);
         $response->header('Content-Type', 'text/csv');
         $response->header('Content-disposition', 'attachment;filename=report.csv');
@@ -1086,6 +1086,6 @@ class ReportsController extends Controller
     protected function getAssetsNotAcceptedYet()
     {
         $this->authorize('reports.view');
-        return Asset::unaccepted();
+        return CheckoutAcceptance::pending()->get('id');
     }
 }
