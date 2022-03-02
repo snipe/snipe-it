@@ -15,7 +15,7 @@
 @section('content')
 <div class="row">
   <!-- left column -->
-  <div class="col-md-12">
+  <div class="col-md-8 col-md-offset-2">
     <p>{{ trans('admin/hardware/form.bulk_delete_help') }}</p>
     <form class="form-horizontal" method="post" action="{{ route('hardware/bulkdelete') }}" autocomplete="off" role="form">
       {{csrf_field()}}
