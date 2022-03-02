@@ -1138,18 +1138,4 @@ class ReportsController extends Controller
             $this->getModelsInCategoriesThatRequireAcceptance($this->getCategoriesThatRequireAcceptance())
         );
     }
-
-    /**
-     * getAssetsNotAcceptedYet
-     *
-     * @return array
-     * @author  Vincent Sposato <vincent.sposato@gmail.com>
-     * @version v1.0
-     */
-    protected function getAssetsNotAcceptedYet()
-    {
-        $this->authorize('reports.view');
-
-        return Asset::unaccepted();
-    }
 }
