@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers\Assets;
 
+use App\Events\CheckoutableCheckedIn;
 use App\Models\Actionlog;
 use App\Helpers\Helper;
 use App\Http\Controllers\CheckInOutRequest;
+use App\Models\CheckoutAcceptance;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\AssetCheckinRequest;
+use Illuminate\Database\Eloquent\Builder;
+
+
 
 class BulkAssetsController extends Controller
 {
@@ -49,8 +55,14 @@ class BulkAssetsController extends Controller
                     $assets->each(function ($asset) {
                         $this->authorize('delete', $asset);
                     });
-
                     return view('hardware/bulk-delete')->with('assets', $assets);
+                
+                case 'checkin':
+                        $assets = Asset::with('assignedTo', 'location')->find($asset_ids);
+                        $assets->each(function ($asset) {
+                            $this->authorize('checkin', $asset);
+                        });
+                        return view('hardware/bulk-checkin')->with('assets', $assets);    
                 case 'edit':
                     return view('hardware/bulk')
                         ->with('assets', $asset_ids)
@@ -206,6 +218,8 @@ class BulkAssetsController extends Controller
         return redirect()->to('hardware')->with('info', trans('admin/hardware/message.delete.nothing_updated'));
     }
 
+
+
     /**
      * Show Bulk Checkout Page
      * @return View View to checkout multiple assets
@@ -213,8 +227,6 @@ class BulkAssetsController extends Controller
     public function showCheckout()
     {
         $this->authorize('checkout', Asset::class);
-        // Filter out assets that are not deployable.
-
         return view('hardware/bulk-checkout');
     }
 
@@ -282,4 +294,55 @@ class BulkAssetsController extends Controller
             return redirect()->to('hardware/bulk-checkout')->with('error', $e->getErrors());
         }
     }
+
+    /**
+     * Show Bulk Checkout Page
+     * @return View View to checkout multiple assets
+     */
+    public function showCheckin(Request $request)
+    {
+        $this->authorize('checkin', Asset::class);
+        $assets = Asset::find($request->input('ids'));
+        return view('hardware/bulk-checkin')->with($assets);
+    }
+
+    /**
+     * Process Multiple Checkout Request
+     * @return View
+     */
+    public function storeCheckin(AssetCheckinRequest $request)
+    {
+        $this->authorize('checkin', Asset::class);
+
+
+            if (! is_array($request->get('ids'))) {
+                return redirect()->route('hardware')->withInput()->with('error', trans('admin/hardware/message.checkout.no_assets_selected'));
+            }
+
+            $asset_ids = array_filter($request->get('ids'));
+
+            DB::transaction(function () use ($asset_ids, $request) {
+                foreach ($asset_ids as $asset_id) {
+                    $asset = Asset::findOrFail($asset_id);
+                    $this->authorize('checkin', $asset);
+                    event(new CheckoutableCheckedIn($asset, '', Auth::user(), $request->input('note')));
+
+                }
+            });
+
+            // Get all pending Acceptances for this asset and delete them
+            $assets = Asset::find($request->input('ids'));
+                $acceptances = CheckoutAcceptance::pending()->whereHasMorph('checkoutable',
+                [Asset::class],
+                function (Builder $query) use ($asset) {
+                    $query->where('id', $asset->id);
+                })->get();
+            $acceptances->map(function($acceptance) {
+                $acceptance->delete();
+            });
+
+            return redirect()->to('hardware');
+
+    }
+
 }
