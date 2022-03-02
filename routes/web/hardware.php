@@ -165,7 +165,7 @@ Route::group(
             [BulkAssetsController::class, 'update']
         )->name('hardware/bulksave');
 
-        // Bulk checkout / checkin
+        // Bulk checkout 
         Route::get('bulkcheckout',
             [BulkAssetsController::class, 'showCheckout']
         )->name('hardware/bulkcheckout');
@@ -173,7 +173,17 @@ Route::group(
         Route::post('bulkcheckout',
             [BulkAssetsController::class, 'storeCheckout']
         )->name('hardware/bulkcheckout');
-    });
+
+         // Bulk checkin
+         Route::get('bulkcheckin',
+         [BulkAssetsController::class, 'showCheckin']
+         )->name('hardware/bulkcheckin');
+
+         Route::post('bulkcheckin',
+         [BulkAssetsController::class, 'storeCheckin']
+         )->name('hardware/bulkcheckin');
+
+  });
 
 Route::resource('hardware', 
         AssetsController::class, 
