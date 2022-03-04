@@ -93,8 +93,8 @@ class UsersController extends Controller
         $this->authorize('create', User::class);
         $user = new User;
         //Username, email, and password need to be handled specially because the need to respect config values on an edit.
-        $user->email = e($request->input('email'));
-        $user->username = e($request->input('username'));
+        $user->email = trim($request->input('email'));
+        $user->username = trim($request->input('username'));
         if ($request->filled('password')) {
             $user->password = bcrypt($request->input('password'));
         }
@@ -243,9 +243,9 @@ class UsersController extends Controller
 
         // Update the user
         if ($request->filled('username')) {
-            $user->username = $request->input('username');
+            $user->username = trim($request->input('username'));
         }
-        $user->email = $request->input('email');
+        $user->email = trim($request->input('email'));
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
         $user->two_factor_optin = $request->input('two_factor_optin') ?: 0;
@@ -622,7 +622,7 @@ class UsersController extends Controller
     public function sendPasswordReset($id)
     {
         if (($user = User::find($id)) && ($user->activated == '1') && ($user->email != '') && ($user->ldap_import == '0')) {
-            $credentials = ['email' => $user->email];
+            $credentials = ['email' => trim($user->email)];
 
             try {
                 \Password::sendResetLink($credentials, function (Message $message) use ($user) {
