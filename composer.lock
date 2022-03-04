@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "442a6af235589e35cfcaa7e5e39e75ec",
+    "content-hash": "448c7508ab99eb86eb62e5cac3e9ee59",
     "packages": [
         {
             "name": "alek13/slack",
@@ -71,6 +71,65 @@
                 }
             ],
             "time": "2021-10-20T22:52:32+00:00"
+        },
+        {
+            "name": "arietimmerman/laravel-scim-server",
+            "version": "v0.5.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arietimmerman/laravel-scim-server.git",
+                "reference": "8fb5b1cc0d28ace820b5b38a543d801fd49ada90"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arietimmerman/laravel-scim-server/zipball/8fb5b1cc0d28ace820b5b38a543d801fd49ada90",
+                "reference": "8fb5b1cc0d28ace820b5b38a543d801fd49ada90",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^6.0|^7.0|^8.0",
+                "illuminate/database": "^6.0|^7.0|^8.0",
+                "illuminate/support": "^6.0|^7.0|^8.0",
+                "php": "^7.0|^8.0",
+                "tmilos/scim-filter-parser": "^1.3",
+                "tmilos/scim-schema": "^0.1.0"
+            },
+            "require-dev": {
+                "laravel/legacy-factories": "*",
+                "orchestra/testbench": "^5.0|^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ArieTimmerman\\Laravel\\SCIMServer\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "SCIMServerHelper": "ArieTimmerman\\Laravel\\SCIMServer\\Helper"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ArieTimmerman\\Laravel\\SCIMServer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Arie Timmerman",
+                    "email": "arietimmerman@gmail.com"
+                }
+            ],
+            "description": "Laravel Package for creating a SCIM server",
+            "support": {
+                "issues": "https://github.com/arietimmerman/laravel-scim-server/issues",
+                "source": "https://github.com/arietimmerman/laravel-scim-server/tree/v0.5.5"
+            },
+            "time": "2022-02-03T20:56:31+00:00"
         },
         {
             "name": "asm89/stack-cors",
@@ -11031,72 +11090,6 @@
             "time": "2021-12-31T09:40:23+00:00"
         },
         {
-            "name": "tightenco/ziggy",
-            "version": "v1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tighten/ziggy.git",
-                "reference": "147804d5f3e98b897fc1ed15efc2807f1099cf83"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tighten/ziggy/zipball/147804d5f3e98b897fc1ed15efc2807f1099cf83",
-                "reference": "147804d5f3e98b897fc1ed15efc2807f1099cf83",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/framework": ">=5.4@dev"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^6.0",
-                "phpunit/phpunit": "^9.2"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Tightenco\\Ziggy\\ZiggyServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tightenco\\Ziggy\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Daniel Coulbourne",
-                    "email": "daniel@tighten.co"
-                },
-                {
-                    "name": "Jake Bathman",
-                    "email": "jake@tighten.co"
-                },
-                {
-                    "name": "Jacob Baker-Kretzmar",
-                    "email": "jacob@tighten.co"
-                }
-            ],
-            "description": "Generates a Blade directive exporting all of your named Laravel routes. Also provides a nice route() helper function in JavaScript.",
-            "homepage": "https://github.com/tighten/ziggy",
-            "keywords": [
-                "Ziggy",
-                "javascript",
-                "laravel",
-                "routes"
-            ],
-            "support": {
-                "issues": "https://github.com/tighten/ziggy/issues",
-                "source": "https://github.com/tighten/ziggy/tree/v1.2.0"
-            },
-            "time": "2021-05-24T22:46:59+00:00"
-        },
-        {
             "name": "tijsverkoyen/css-to-inline-styles",
             "version": "2.2.4",
             "source": {
@@ -11148,6 +11141,199 @@
                 "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/2.2.4"
             },
             "time": "2021-12-08T09:12:39+00:00"
+        },
+        {
+            "name": "tmilos/lexer",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tmilos/lexer.git",
+                "reference": "e7885595614759f1da2ff79b66e3fb26d7f875fa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tmilos/lexer/zipball/e7885595614759f1da2ff79b66e3fb26d7f875fa",
+                "reference": "e7885595614759f1da2ff79b66e3fb26d7f875fa",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.6",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tmilos\\Lexer\\": "src/",
+                    "Tests\\Tmilos\\Lexer\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Milos Tomic",
+                    "email": "tmilos@gmail.com"
+                }
+            ],
+            "description": "Lexical analyzer with individual token definition with regular expressions",
+            "keywords": [
+                "lexer",
+                "parser"
+            ],
+            "support": {
+                "issues": "https://github.com/tmilos/lexer/issues",
+                "source": "https://github.com/tmilos/lexer/tree/master"
+            },
+            "time": "2016-12-21T11:22:39+00:00"
+        },
+        {
+            "name": "tmilos/scim-filter-parser",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tmilos/scim-filter-parser.git",
+                "reference": "cfd9ba1f33e1e15adcab2481bffd74cb9fb35704"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tmilos/scim-filter-parser/zipball/cfd9ba1f33e1e15adcab2481bffd74cb9fb35704",
+                "reference": "cfd9ba1f33e1e15adcab2481bffd74cb9fb35704",
+                "shasum": ""
+            },
+            "require": {
+                "tmilos/lexer": "^1.0",
+                "tmilos/value": "^1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tmilos\\ScimFilterParser\\": "src/",
+                    "Tests\\Tmilos\\ScimFilterParser\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Milos Tomic",
+                    "email": "tmilos@gmail.com"
+                }
+            ],
+            "description": "System for Cross-domain Identity Management SCIM AST filter parser PHP library",
+            "keywords": [
+                "SCIM AST",
+                "SCIM filter parser",
+                "SCIM parser",
+                "ast",
+                "parser",
+                "scim",
+                "simplecloud"
+            ],
+            "support": {
+                "issues": "https://github.com/tmilos/scim-filter-parser/issues",
+                "source": "https://github.com/tmilos/scim-filter-parser/tree/master"
+            },
+            "time": "2017-01-19T11:17:42+00:00"
+        },
+        {
+            "name": "tmilos/scim-schema",
+            "version": "0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tmilos/scim-schema.git",
+                "reference": "bb871e667b33080b4cd36d7a9b2ac2cdbf796062"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tmilos/scim-schema/zipball/bb871e667b33080b4cd36d7a9b2ac2cdbf796062",
+                "reference": "bb871e667b33080b4cd36d7a9b2ac2cdbf796062",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8|^5.6",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tmilos\\ScimSchema\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Milos Tomic",
+                    "email": "tmilos@gmail.com"
+                }
+            ],
+            "description": "SCIM schema library",
+            "support": {
+                "issues": "https://github.com/tmilos/scim-schema/issues",
+                "source": "https://github.com/tmilos/scim-schema/tree/master"
+            },
+            "time": "2017-11-25T22:18:16+00:00"
+        },
+        {
+            "name": "tmilos/value",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tmilos/value.git",
+                "reference": "9e78ad9c026b14cacec1a27552ee0ada9d7d1c06"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tmilos/value/zipball/9e78ad9c026b14cacec1a27552ee0ada9d7d1c06",
+                "reference": "9e78ad9c026b14cacec1a27552ee0ada9d7d1c06",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.1"
+            },
+            "require-dev": {
+                "moontoast/math": "~1.1",
+                "phpunit/phpunit": "~4.8",
+                "ramsey/uuid": "^3.3",
+                "satooshi/php-coveralls": "~0.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Tmilos\\Value\\": "src/",
+                    "Tmilos\\Value\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Milos Tomic",
+                    "email": "tmilos@gmail.com",
+                    "homepage": "https://github.com/tmilos/",
+                    "role": "Developer"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/tmilos/value/issues",
+                "source": "https://github.com/tmilos/value/tree/master"
+            },
+            "time": "2016-06-06T10:22:16+00:00"
         },
         {
             "name": "unicodeveloper/laravel-password",
@@ -13474,5 +13660,5 @@
         "ext-pdo": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.1.0"
 }
