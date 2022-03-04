@@ -273,7 +273,7 @@
                     @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.select_company'), 'fieldname' => 'company_id'])
                 @endif
 
-
+              
               <!-- Image -->
                   @if ($user->avatar)
                       <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
@@ -338,7 +338,20 @@
               @include ('partials.forms.edit.department-select', ['translated_name' => trans('general.department'), 'fieldname' => 'department_id'])
 
 
-                  <!-- Location -->
+              <!-- remote checkbox -->
+              <div class="form-group">
+                <div class="col-md-7 col-md-offset-3">
+                    <label for="remote">
+                      <input type="checkbox" value="1" name="remote" class="minimal" {{ (old('remote', $user->remote)) == '1' ? ' checked="checked"' : '' }} aria-label="remote">
+                        {{ trans('admin/users/general.remote_label') }}
+                        
+                    </label>
+                    <p class="help-block">{{ trans('admin/users/general.remote_help') }}
+                    </p>
+                </div>
+             </div>
+
+              <!-- Location -->
               @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
 
                 <!-- Phone -->

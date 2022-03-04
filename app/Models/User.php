@@ -58,6 +58,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'state',
         'username',
         'zip',
+        'remote',
     ];
 
     protected $casts = [

@@ -63,6 +63,7 @@ class UsersController extends Controller
             'users.updated_at',
             'users.username',
             'users.zip',
+            'users.remote',
             'users.ldap_import',
 
         ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables')
@@ -134,6 +135,10 @@ class UsersController extends Controller
 
         if ($request->filled('ldap_import')) {
             $users = $users->where('ldap_import', '=', $request->input('ldap_import'));
+        }
+
+        if ($request->filled('remote')) {
+            $users = $users->where('remote', '=', $request->input('remote'));
         }
 
         if ($request->filled('assets_count')) {

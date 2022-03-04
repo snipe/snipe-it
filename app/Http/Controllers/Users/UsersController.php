@@ -115,6 +115,7 @@ class UsersController extends Controller
         $user->state = $request->input('state', null);
         $user->country = $request->input('country', null);
         $user->zip = $request->input('zip', null);
+        $user->remote = $request->input('remote', 0);
 
         // Strip out the superuser permission if the user isn't a superadmin
         $permissions_array = $request->input('permission');
@@ -179,7 +180,6 @@ class UsersController extends Controller
         if ($user = User::find($id)) {
             $this->authorize('update', $user);
             $permissions = config('permissions');
-
             $groups = Group::pluck('name', 'id');
 
             $userGroups = $user->groups()->pluck('name', 'id');
@@ -190,9 +190,7 @@ class UsersController extends Controller
             return view('users/edit', compact('user', 'groups', 'userGroups', 'permissions', 'userPermissions'))->with('item', $user);
         }
 
-        $error = trans('admin/users/message.user_not_found', compact('id'));
-
-        return redirect()->route('users.index')->with('error', $error);
+        return redirect()->route('users.index')->with('error', trans('admin/users/message.user_not_found', compact('id')));
     }
 
     /**
@@ -267,6 +265,7 @@ class UsersController extends Controller
         $user->country = $request->input('country', null);
         $user->activated = $request->input('activated', 0);
         $user->zip = $request->input('zip', null);
+        $user->remote = $request->input('remote', 0);
 
         // Update the location of any assets checked out to this user
         Asset::where('assigned_type', User::class)

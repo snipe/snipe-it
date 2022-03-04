@@ -86,6 +86,15 @@ class UserPresenter extends Presenter
                 'formatter' => 'usersLinkFormatter',
             ],
             [
+                'field' => 'remote',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('admin/users/general.remote'),
+                'visible' => false,
+                'formatter' => 'trueFalseFormatter',
+            ],
+            [
                 'field' => 'email',
                 'searchable' => true,
                 'sortable' => true,
