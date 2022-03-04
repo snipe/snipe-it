@@ -30,7 +30,7 @@ class ActionlogsTransformer
         // {"old":null,"new":{"value":"1579490695972","_snipeit_new_field_2":2,"_snipeit_new_field_3":"Monday, 20 January 2020 2:24:55 PM"}}
         // so we have to walk down that next level
         if(is_object($value) && isset($value->value)) {
-            return clean_field($value->value);
+            return $this->clean_field($value->value);
         }
         return is_scalar($value) || is_null($value) ? e($value) : e(json_encode($value));
     }
