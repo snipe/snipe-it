@@ -6,6 +6,7 @@
  */
 require('./bootstrap');
 
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -29,6 +30,14 @@ Vue.component(
 Vue.component(
     'importer',
     require('./components/importer/importer.vue').default
+);
+Vue.component(
+    'notification',
+    require('./components/notifications/Notification.vue').default
+);
+Vue.component(
+    'notification-dropdown',
+    require('./components/notifications/NotificationsDropdown.vue').default
 );
 
 // This component has been removed and replaced with a Livewire implementation

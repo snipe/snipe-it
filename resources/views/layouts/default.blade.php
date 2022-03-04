@@ -23,9 +23,18 @@
       <meta name="csrf-token" content="{{ csrf_token() }}">
       <meta name="baseUrl" content="{{ url('/') }}/">
 
-    <script nonce="{{ csrf_token() }}">
-      window.Laravel = { csrfToken: '{{ csrf_token() }}' };
+    <script>
+      window.Laravel = {
+         csrfToken: "{{csrf_token()}}",
+         user: {{Auth::user()->id}},
+         vapidPublicKey: "{{config('webpush.vapid.public_key')}}",
+         pusher: {
+             key: {{ config('broadcasting.connections.pusher.key')}},
+             cluster:{{config('broadcasting.connections.pusher.options.cluster')}}
+         },
+    };
     </script>
+
 
     {{-- stylesheets --}}
     <link rel="stylesheet" href="{{ url(mix('css/dist/all.css')) }}">
@@ -130,7 +139,8 @@
 
           <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
-              <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav">
+                    <notifications-dropdown></notifications-dropdown>
                   @can('index', \App\Models\Asset::class)
                   <li aria-hidden="true"{!! (Request::is('hardware*') ? ' class="active"' : '') !!} tabindex="-1">
                       <a href="{{ url('hardware') }}" tabindex="-1">
@@ -891,7 +901,7 @@
 
     {{-- Javascript files --}}
     <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
-
+    <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
     <!-- v5-beta: This pGenerator call must remain here for v5 - until fixed - so that the JS password generator works for the user create modal. -->
     <script src="{{ url('js/pGenerator.jquery.js') }}"></script>
 
@@ -966,3 +976,9 @@
     @livewireScripts
   </body>
 </html>
+<script>
+    import NotificationsDropdown from "../../assets/js/components/notifications/NotificationsDropdown";
+    export default {
+        components: {NotificationsDropdown}
+    }
+</script>

@@ -58,6 +58,7 @@
     "phpdocumentor/reflection-docblock": "^5.1",
     "phpspec/prophecy": "^1.10",
     "pragmarx/google2fa-laravel": "^1.3",
+    "pusher/pusher-php-server": "^7.0",
     "rollbar/rollbar-laravel": "^7.0",
     "spatie/laravel-backup": "^6.16",
     "tecnickcom/tc-lib-barcode": "^1.15",

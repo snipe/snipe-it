@@ -61594,7 +61594,15 @@ __webpack_require__(/*! ./bootstrap */ "./resources/assets/js/bootstrap.js");
 Vue.component('passport-clients', (__webpack_require__(/*! ./components/passport/Clients.vue */ "./resources/assets/js/components/passport/Clients.vue")["default"]));
 Vue.component('passport-authorized-clients', (__webpack_require__(/*! ./components/passport/AuthorizedClients.vue */ "./resources/assets/js/components/passport/AuthorizedClients.vue")["default"]));
 Vue.component('passport-personal-access-tokens', (__webpack_require__(/*! ./components/passport/PersonalAccessTokens.vue */ "./resources/assets/js/components/passport/PersonalAccessTokens.vue")["default"]));
-Vue.component('importer', (__webpack_require__(/*! ./components/importer/importer.vue */ "./resources/assets/js/components/importer/importer.vue")["default"])); // This component has been removed and replaced with a Livewire implementation
+Vue.component('importer', (__webpack_require__(/*! ./components/importer/importer.vue */ "./resources/assets/js/components/importer/importer.vue")["default"])); // Vue.component(
+//     'notification',
+//     require('./components/notifications/Notification.vue').default
+// );
+// Vue.component(
+//     'notification-dropdown',
+//     require('./components/notifications/NotificationsDropdown.vue').default
+// );
+// This component has been removed and replaced with a Livewire implementation
 // Vue.component(
 //     'fieldset-default-values',
 //     require('./components/forms/asset-models/fieldset-default-values.vue').default
