@@ -121,6 +121,7 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
+
         // -----------------------------------------
         // Reports
         // -----------------------------------------

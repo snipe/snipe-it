@@ -30,7 +30,7 @@
     "erusev/parsedown": "^1.7",
     "facade/ignition": "^2.10",
     "fideloper/proxy": "^4.3",
-    "fruitcake/laravel-cors": "^2.0",
+    "fruitcake/laravel-cors": "^2.2",
     "guzzlehttp/guzzle": "^7.0.1",
     "intervention/image": "^2.5",
     "javiereguiluz/easyslugger": "^1.0",

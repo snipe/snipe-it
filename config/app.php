@@ -250,6 +250,7 @@ return [
 
     'enable_csp' => env('ENABLE_CSP', false),
 
+
     /*
     |--------------------------------------------------------------------------
     | Require SAML Login
@@ -265,7 +266,6 @@ return [
 
     'require_saml' => env('REQUIRE_SAML', false),
     
-
     /*
     |--------------------------------------------------------------------------
     | Demo Mode Lockdown
@@ -417,5 +417,16 @@ return [
 
 
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | API Throttling
+    |--------------------------------------------------------------------------
+    |
+    | This value determines the number of API requests permitted per minute
+    |
+    */
+
+    'api_throttle_per_minute' => env('API_THROTTLE_PER_MINUTE', 120),
 
 ];

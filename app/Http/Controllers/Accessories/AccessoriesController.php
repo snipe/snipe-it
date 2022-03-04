@@ -79,6 +79,8 @@ class AccessoriesController extends Controller
         $accessory->qty                     = request('qty');
         $accessory->user_id                 = Auth::user()->id;
         $accessory->supplier_id             = request('supplier_id');
+        $accessory->notes                   = request('notes');
+
 
         $accessory = $request->handleImages($accessory);
 
@@ -143,6 +145,7 @@ class AccessoriesController extends Controller
         $accessory->purchase_cost           = Helper::ParseCurrency(request('purchase_cost'));
         $accessory->qty                     = request('qty');
         $accessory->supplier_id             = request('supplier_id');
+        $accessory->notes                   = request('notes');
 
         $accessory = $request->handleImages($accessory);
 

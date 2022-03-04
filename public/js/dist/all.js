@@ -59445,6 +59445,12 @@ __webpack_require__.r(__webpack_exports__);
           id: 'asset_model',
           text: 'Model Name'
         }, {
+          id: 'asset_notes',
+          text: 'Asset Notes'
+        }, {
+          id: 'model_notes',
+          text: 'Model Notes'
+        }, {
           id: 'checkout_class',
           text: 'Checkout Type'
         }, {
@@ -59510,6 +59516,9 @@ __webpack_require__.r(__webpack_exports__);
           id: 'license_name',
           text: 'Licensed To Name'
         }, {
+          id: 'notes',
+          text: 'Notes'
+        }, {
           id: 'purchase_order',
           text: 'Purchase Order'
         }, {
@@ -59543,6 +59552,9 @@ __webpack_require__.r(__webpack_exports__);
         }, {
           id: 'manager_last_name',
           text: 'Manager Last Name'
+        }, {
+          id: 'notes',
+          text: 'Notes'
         }, {
           id: 'activated',
           text: 'Activated'

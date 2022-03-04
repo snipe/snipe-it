@@ -39,6 +39,7 @@ class AssetImporter extends ItemImporter
             }
         }
 
+
         $this->createAssetIfNotExists($row);
     }
 

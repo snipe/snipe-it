@@ -116,6 +116,13 @@ class ConsumablePresenter extends Presenter
                 'footerFormatter' => 'sumFormatterQuantity',
                 'class' => 'text-right',
             ], [
+                'field' => 'notes',
+                'searchable' => true,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('general.notes'),
+                'formatter' => 'notesFormatter',
+            ], [
                 'field' => 'change',
                 'searchable' => false,
                 'sortable' => false,

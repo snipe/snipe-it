@@ -35,6 +35,8 @@
     </div>
 @endif
 
+@include ('partials.forms.edit.notes')
+
 @include ('partials.forms.edit.image-upload')
 
 @stop

@@ -27,7 +27,8 @@ class Consumable extends SnipeModel
         'category_id'    => 'integer',
         'company_id'     => 'integer',
         'qty'            => 'integer',
-        'min_amt'        => 'integer',    ];
+        'min_amt'        => 'integer',    
+     ];
 
     /**
      * Category validation rules
@@ -70,6 +71,7 @@ class Consumable extends SnipeModel
         'qty',
         'min_amt',
         'requestable',
+        'notes',
     ];
 
     use Searchable;
@@ -79,7 +81,7 @@ class Consumable extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['name', 'order_number', 'purchase_cost', 'purchase_date', 'item_no', 'model_number'];
+    protected $searchableAttributes = ['name', 'order_number', 'purchase_cost', 'purchase_date', 'item_no', 'model_number', 'notes'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
