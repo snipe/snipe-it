@@ -461,6 +461,7 @@
                       <label class="col-md-3 control-label" for="groups[]"> {{ trans('general.groups') }}</label>
                       <div class="col-md-6">
 
+                          @if ($groups->count())
                           @if ((Config::get('app.lock_passwords') || (!Auth::user()->isSuperUser())))
 
                               @if (count($userGroups->keys()) > 0)
@@ -494,6 +495,9 @@
                         </span>
                     </div>
                           @endif
+                        @else
+                            <p>No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.</p>
+                        @endif
 
                       </div>
                   </div>
