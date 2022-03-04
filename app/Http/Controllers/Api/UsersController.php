@@ -140,6 +140,18 @@ class UsersController extends Controller
            $users->has('assets', '=', $request->input('assets_count'));
         }
 
+        if ($request->filled('consumables_count')) {
+            $users->has('consumables', '=', $request->input('consumables_count'));
+        }
+
+        if ($request->filled('licenses_count')) {
+            $users->has('licenses', '=', $request->input('licenses_count'));
+        }
+
+        if ($request->filled('accessories_count')) {
+            $users->has('accessories', '=', $request->input('accessories_count'));
+        }
+
         if ($request->filled('search')) {
             $users = $users->TextSearch($request->input('search'));
         }
