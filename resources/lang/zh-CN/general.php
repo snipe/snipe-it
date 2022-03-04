@@ -305,7 +305,7 @@
     'report_fields_info'    => '<p>选择您想要在自定义报告中包含的字段，然后单击生成. 该文件 (cunstom-YYYY-mm-dd.csv) 将自动下载，您可以在 Excel中打开它。</p>
             <p>如果您只想导出某些资产，使用下面的选项来微调您的结果。</p>',
     'range'                 => '范围',
-    'bom_remark'            => 'Add a BOM (byte-order mark) to this CSV',
+    'bom_remark'            => '向这个CSV文件添加一个BOM(字节顺序标记)',
     'improvements'          => '改进',
     'information'           => '信息',
     'permissions'           => '权限',

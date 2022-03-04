@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'sent'	        => 'Er is een wachtwoord link naar je verstuurd!',
+    'sent'	        => 'Succes: Als dit e-mailadres bestaat in ons systeem, is er een wachtwoord herstel e-mail verzonden.',
     'user'			=> 'Geen overeenkomende actieve gebruiker gevonden met dit e-mailadres.',
 ];

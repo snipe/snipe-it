@@ -6,11 +6,11 @@ return [
     'asset_depreciations'  					=> 'Obsolescenza Asset',
     'create'  					            => 'Crea un deprezzamento',
     'depreciation_name'  					=> 'Nome Obsolescenza',
-    'depreciation_min'                      => 'Floor Value of Depreciation',
+    'depreciation_min'                      => 'Valore Minimo di Ammortamento',
     'number_of_months'  					=> 'Numero di Mesi',
     'update'  					            => 'Aggiorna l\'ammortamento',
     'depreciation_min'                      => 'Valore minimo dopo ammortamento',
-    'no_depreciations_warning'               => '<strong>Warning: </strong>
-                      You do not currently have any depreciations set up.
-                      Please set up at least one depreciation to view the depreciation report.',
+    'no_depreciations_warning'               => '<strong>Attenzione: </strong>
+                      Nessun ammortamento impostato.
+                      Si prega di impostare almeno un ammortamento per visualizzare il rapporto di ammortamento.',
 ];

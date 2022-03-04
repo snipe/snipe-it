@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'sent'	        => 'Nuoroda atkurti slaptažodį išsiųsta!',
+    'sent'	        => 'Success: If that email address exists in our system, a password recovery email has been sent.',
     'user'			=> 'Neaptikta vartotojo su šiuo elektroninio pašto adresu.',
 ];

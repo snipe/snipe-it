@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'sent'	        => 'Ο σύνδεσμος κωδικού πρόσβασης σας έχει σταλεί!',
+    'sent'	        => 'Success: If that email address exists in our system, a password recovery email has been sent.',
     'user'			=> 'Δεν βρέθηκε ενεργός χρήστης με αυτό το email.',
 ];

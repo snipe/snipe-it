@@ -11,8 +11,8 @@ return [
         'file_deleted'          => 'Il file di backup è stato cancellato con successo. ',
         'generated'             => 'Un nuovo file di backup è stato creato con successo.',
         'file_not_found'        => 'Quel file di backup non può essere trovato sul server.',
-        'restore_warning'       => 'Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This will also log out all of your existing users (including you).',
-        'restore_confirm'       => 'Are you sure you wish to restore your database from :filename?'
+        'restore_warning'       => 'Si, ripristina. Riconosco che il ripristino sovrascriverà tutti i dati al momento presenti nel database. Inoltre, tutti gli utenti verranno disconnessi (incluso te).',
+        'restore_confirm'       => 'Sei sicuro di voler ripristinare il tuo database da :filename?'
     ],
     'purge' => [
         'error'     => 'Si è verificato un errore durante la pulizia. ',
@@ -20,24 +20,24 @@ return [
         'success'               => 'I record cancellati sono stati correttamente eliminati.',
     ],
     'mail' => [
-        'sending' => 'Sending Test Email...',
-        'success' => 'Mail sent!',
-        'error' => 'Mail could not be sent.',
-        'additional' => 'No additional error message provided. Check your mail settings and your app log.'
+        'sending' => 'Invio Email Di Prova...',
+        'success' => 'Mail inviata!',
+        'error' => 'Non è stato possibile inviare l\'email.',
+        'additional' => 'Nessun messaggio di errore aggiuntivo fornito. Controlla le impostazioni della posta e il log dell\'app.'
     ],
     'ldap' => [
-        'testing' => 'Testing LDAP Connection, Binding & Query ...',
-        '500' => '500 Server Error. Please check your server logs for more information.',
-        'error' => 'Something went wrong :(',
-        'sync_success' => 'A sample of 10 users returned from the LDAP server based on your settings:',
-        'testing_authentication' => 'Testing LDAP Authentication...',
-        'authentication_success' => 'User authenticated against LDAP successfully!'
+        'testing' => 'Testo Connessione, Binding e Query LDAP ...',
+        '500' => 'Errore del server 500. Controlla i log del tuo server per maggiori informazioni.',
+        'error' => 'Qualcosa è andato storto :(',
+        'sync_success' => 'Un campione di 10 utenti restituiti dal server LDAP in base alle tue impostazioni:',
+        'testing_authentication' => 'Testo l\'Autenticazione LDAP...',
+        'authentication_success' => 'Utente autenticato correttamente con LDAP!'
     ],
     'slack' => [
-        'sending' => 'Sending Slack test message...',
-        'success_pt1' => 'Success! Check the ',
-        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
-        '500' => '500 Server Error.',
-        'error' => 'Something went wrong.',
+        'sending' => 'Invio messaggio di test su Slack...',
+        'success_pt1' => 'Successo! Controlla il ',
+        'success_pt2' => ' canale del messaggio di prova, e assicurati di fare clic su SALVA qui sotto per memorizzare le impostazioni.',
+        '500' => 'Errore del server 500.',
+        'error' => 'Qualcosa è andato storto.',
     ]
 ];

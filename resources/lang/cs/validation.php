@@ -64,7 +64,7 @@ return [
         'string'  => ':attribute musí mít minimálně :min znaků.',
         'array'   => 'Atribut musí mít alespoň: min položky.',
     ],
-    'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'starts_with'          => ':attribute musí končit jednou z následujících hodnot: :values.',
     'not_in'               => 'Zvolený :attribute je neplatný.',
     'numeric'              => ':attribute musí být číslo.',
     'present'              => 'Pole atributu musí být přítomno.',
@@ -90,7 +90,7 @@ return [
     'uploaded'             => 'Atribut: se nepodařilo nahrát.',
     'url'                  => 'Formát :attribute je neplatný.',
     'unique_undeleted'     => 'Je třeba, aby se :attribute neopakoval.',
-    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'non_circular'         => ':attribute nesmí vytvořit kruhový odkaz.',
 
     /*
     |--------------------------------------------------------------------------

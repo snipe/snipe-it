@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'sent'	        => 'Mật khẩu của bạn đã được gửi đi!',
+    'sent'	        => 'Success: If that email address exists in our system, a password recovery email has been sent.',
     'user'			=> 'Không tìn thấy người dùng được kích hoạt với email này.',
 ];

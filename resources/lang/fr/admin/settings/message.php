@@ -20,24 +20,24 @@ return [
         'success'               => 'Les enregistrements supprimés ont bien été purgés.',
     ],
     'mail' => [
-        'sending' => 'Sending Test Email...',
-        'success' => 'Mail sent!',
-        'error' => 'Mail could not be sent.',
+        'sending' => 'Envoi du message électronique de test...',
+        'success' => 'Courrier électronique envoyé !',
+        'error' => 'Le courrier électronique n\'a pas pu être envoyé.',
         'additional' => 'No additional error message provided. Check your mail settings and your app log.'
     ],
     'ldap' => [
-        'testing' => 'Testing LDAP Connection, Binding & Query ...',
+        'testing' => 'Test de la connexion, de la liaison et de la requête LDAP ...',
         '500' => '500 Server Error. Please check your server logs for more information.',
-        'error' => 'Something went wrong :(',
+        'error' => 'Une erreur est survenue :(',
         'sync_success' => 'A sample of 10 users returned from the LDAP server based on your settings:',
-        'testing_authentication' => 'Testing LDAP Authentication...',
-        'authentication_success' => 'User authenticated against LDAP successfully!'
+        'testing_authentication' => 'Test de l\'authentification LDAP...',
+        'authentication_success' => 'Utilisateur authentifié contre LDAP avec succès !'
     ],
     'slack' => [
-        'sending' => 'Sending Slack test message...',
-        'success_pt1' => 'Success! Check the ',
+        'sending' => 'Envoi du message de test Slack...',
+        'success_pt1' => 'Succès ! Vérifiez le ',
         'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
-        '500' => '500 Server Error.',
-        'error' => 'Something went wrong.',
+        '500' => '500 Erreur du serveur.',
+        'error' => 'Une erreur est survenue.',
     ]
 ];

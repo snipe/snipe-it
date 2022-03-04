@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'Diese Assets können niemandem zugeordnet werden.',
-        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
+        'deployable'   => 'Diese Assets können ausgecheckt werden. Sobald sie zugewiesen sind, nehmen sie den Meta-Status <i class="fas fa-circle text-blue"></i> <strong>Platziert</strong> an.',
         'archived'   => 'Diese Assets können nicht ausgecheckt werden und erscheinen nur in der Ansicht "Archiviert". Dies ist nützlich, um Informationen zu Assets für Budgetierungs- / historische Zwecke beizubehalten, aber sie aus der täglichen Assetliste herauszuhalten.',
         'pending'   => 'Diese Vermögenswerte können noch niemandem zugewiesen werden, die oft für Gegenstände verwendet werden, die nicht repariert werden können, aber voraussichtlich in den Kreislauf zurückkehren werden.',
     ],

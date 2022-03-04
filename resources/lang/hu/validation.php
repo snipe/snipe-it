@@ -64,7 +64,7 @@ return [
         'string'  => 'A :attribute legalább :min karakter kell lenni.',
         'array'   => 'A: attribútumnak rendelkeznie kell legalább: min elemekkel.',
     ],
-    'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'starts_with'          => 'A(z) :attribute a következővel kell kezdődnie: :values.',
     'not_in'               => 'A kiválasztott :attribute étvénytelen.',
     'numeric'              => 'A :attribute csak szám lehet.',
     'present'              => 'A: attribútum mezőnek jelen kell lennie.',
@@ -90,7 +90,7 @@ return [
     'uploaded'             => 'A: attribútum nem sikerült feltölteni.',
     'url'                  => 'Az :attribute formátuma érvénytelen.',
     'unique_undeleted'     => 'A(z) :attribute egyedinek kell lennie.',
-    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'non_circular'         => 'A(z) :attribute nem hozhat létre körkörös hivatkozást.',
 
     /*
     |--------------------------------------------------------------------------

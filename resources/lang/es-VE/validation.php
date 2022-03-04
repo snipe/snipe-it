@@ -64,7 +64,7 @@ return [
         'string'  => 'El :attribute debe ser como mínimo de :min kilobytes.',
         'array'   => 'El :attribute debe ser como mínimo de :min kilobytes.',
     ],
-    'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'starts_with'          => 'El :attribute debe comenzar con uno de los siguientes: :values.',
     'not_in'               => 'El :attribute seleccionado es inválido.',
     'numeric'              => 'El :attribute debe ser un número entero.',
     'present'              => 'El campo :attribute debe tener un valor.',
