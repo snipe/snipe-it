@@ -132,6 +132,14 @@ class UsersController extends Controller
             $users = $users->where('users.manager_id','=',$request->input('manager_id'));
         }
 
+        if ($request->filled('ldap_import')) {
+            $users = $users->where('users.ldap_import', '=', $request->input('ldap_import'));
+        }
+
+        if ($request->filled('assets_count')) {
+           $users->has('assets', '=', $request->input('assets_count'));
+        }
+
         if ($request->filled('search')) {
             $users = $users->TextSearch($request->input('search'));
         }
