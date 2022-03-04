@@ -24,7 +24,7 @@ class RouteServiceProvider extends ServiceProvider
 
             $this->mapWebRoutes();
 
-            //
+            require base_path('routes/scim.php'); //require SCIM routes, which have differentt prefixes
         });
     }
 

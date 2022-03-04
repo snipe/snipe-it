@@ -18,6 +18,7 @@
     "ext-mbstring": "*",
     "ext-pdo": "*",
     "alek13/slack": "^2.0",
+    "arietimmerman/laravel-scim-server": "^0.5.5",
     "bacon/bacon-qr-code": "^2.0",
     "barryvdh/laravel-debugbar": "^3.6",
     "doctrine/cache": "^1.10",

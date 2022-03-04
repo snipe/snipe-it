@@ -8,6 +8,7 @@ use App\Models\Component;
 use App\Models\Consumable;
 use App\Models\License;
 use App\Models\Setting;
+use App\Models\SnipeSCIMConfig;
 use App\Observers\AccessoryObserver;
 use App\Observers\AssetObserver;
 use App\Observers\ComponentObserver;
@@ -80,6 +81,10 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment(['local', 'develop'])) {
             $this->app->register(\Laravel\Dusk\DuskServiceProvider::class);
         } 
+
+        $this->app->singleton('ArieTimmerman\Laravel\SCIMServer\SCIMConfig', SnipeSCIMConfig::class); //do we need this? yes.
+        // $this->app->singleton('ArieTimmerman\Laravel\SCIMServer\RouteProvider', SnipeSCIMCRouteProvider::class);
+
     
     }
 }
