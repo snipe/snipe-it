@@ -128,6 +128,38 @@ class Consumable extends SnipeModel
         return $this->belongsTo(\App\Models\User::class, 'user_id');
     }
 
+     /**
+     * Get the LAST checkout for this consumable.
+     * 
+     * This is kinda gross, but is necessary for how the consumable
+     * pivot stuff works for now.
+     *
+     * It looks like we should be able to use ->first() here and
+     * return an object instead of a collection, but we actually
+     * cannot.
+     *
+     * In short, you cannot execute the query defined when you're eager loading.
+     * and in order to avoid 1001 query problems when displaying the most
+     * recent checkout note, we have to eager load this.
+     *
+     * This means we technically return a collection of one here, and then
+     * in the controller, we convert that collection to an array, so we can
+     * use it in the transformer to display only the notes of the LAST
+     * checkout.
+     *
+     * It's super-mega-assy, but it's the best I could do for now.
+     *
+     * @author  A. Gianotto <snipe@snipe.net>
+     * @since v6.0.0
+     *
+     * @see \App\Http\Controllers\Api\AccessoriesController\checkedout()
+     */
+    public function lastCheckout()
+    {
+        return $this->assetlog()->where('action_type', '=', 'checkout')->take(1);
+    }
+
+
     /**
      * Establishes the component -> assignments relationship
      *
@@ -226,7 +258,7 @@ class Consumable extends SnipeModel
      */
     public function users()
     {
-        return $this->belongsToMany(\App\Models\User::class, 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('user_id')->withTrashed()->withTimestamps();
+        return $this->belongsToMany(\App\Models\User::class, 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('id', 'user_id', 'assigned_qty')->withTrashed()->withTimestamps();
     }
 
 

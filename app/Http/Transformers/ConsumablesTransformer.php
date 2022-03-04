@@ -69,4 +69,29 @@ class ConsumablesTransformer
 
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
+
+    public function transformCheckedoutConsumable($consumable, $consumable_users, $total)
+    {
+        $array = [];
+
+        foreach ($consumable_users as $user) {
+
+            $array[] = [
+
+                'assigned_pivot_id' => $user->pivot->id,
+                'id' => (int) $user->id,
+                'assigned_qty' => (int) $user->pivot->assigned_qty,
+                'username' => e($user->username),
+                'name' => e($user->getFullNameAttribute()),
+                'first_name'=> e($user->first_name),
+                'last_name'=> e($user->last_name),
+                'employee_number' =>  e($user->employee_num),
+                'checkout_notes' => ($user->pivot->note!='') ? e($user->pivot->note) : null,
+                'last_checkout' => Helper::getFormattedDateObject($user->pivot->created_at, 'datetime'),
+                'type' => 'user',
+            ];
+        }
+
+        return (new DatatablesTransformer)->transformDatatables($array, $total);
+    }
 }

@@ -199,6 +199,8 @@ class ConsumablesController extends Controller
     /**
     * Returns a JSON response containing details on the users associated with this consumable.
     *
+    * @todo DEPRICATE IN NEXT MAJOR RELEASE - /checkedout should be used instead
+    * 
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @see \App\Http\Controllers\Consumables\ConsumablesController::getView() method that returns the form.
     * @since [v1.0]
@@ -307,4 +309,49 @@ class ConsumablesController extends Controller
 
         return (new SelectlistTransformer)->transformSelectlist($consumables);
     }
+
+    /**
+     * Return all targets with a specified consumable checked out
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v6.0.0]
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function checkedout($id, Request $request)
+    {
+        $this->authorize('view', Consumable::class);
+
+        $consumable = Consumable::with('lastCheckout')->findOrFail($id);
+        if (! Company::isCurrentUserHasAccess($consumable)) {
+            return ['total' => 0, 'rows' => []];
+        }
+
+        $offset = request('offset', 0);
+        $limit = request('limit', 50);
+
+        $accessory_users = $consumable->users;
+        $total = $accessory_users->count();
+
+        if ($total < $offset) {
+            $offset = 0;
+        }
+
+        $consumable_users = $consumable->users()->skip($offset)->take($limit)->get();
+
+        if ($request->filled('search')) {
+            $consumable_users = $consumable->users()
+                                         ->where(function ($query) use ($request) {
+                                             $search_str = '%' . $request->input('search') . '%';
+                                             $query->where('first_name', 'like', $search_str)
+                                                   ->orWhere('last_name', 'like', $search_str)
+                                                   ->orWhere('note', 'like', $search_str);
+                                         })
+                                         ->get();
+            $total = $accessory_users->count();
+        }
+
+        return (new ConsumablesTransformer)->transformCheckedoutConsumable($consumable, $consumable_users, $total);
+    }
+
 }

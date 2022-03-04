@@ -244,12 +244,24 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:'.config('app.
             ]
         )->name('api.consumables.selectlist');
 
+
+        // DEPRICATE IN NEXT MAJOR RELEASE - /checkedout should be used instead
         Route::get('view/{id}/users',
             [
                 Api\ConsumablesController::class, 
                 'getDataView'
             ]
         )->name('api.consumables.showUsers');
+        
+
+
+        Route::get('{id}/checkedout',
+            [
+                Api\ConsumablesController::class, 
+                'checkedout'
+            ]
+        )->name('api.consumables.checkedout');
+
 
         Route::get('{consumable}/checkout',
             [
