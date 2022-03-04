@@ -36,5 +36,6 @@ return [
     'checkin_user_properties' => 'Check in all properties associated with these users',
     'remote_label'   => 'This is a remote user',
     'remote'   => 'Remote',
-    'remote_help' => 'This can be useful if you need to filter by remote users who never or rarely come into your physical locations.'
+    'remote_help' => 'This can be useful if you need to filter by remote users who never or rarely come into your physical locations.',
+    'not_remote_label' => 'This is not a remote user',
 ];

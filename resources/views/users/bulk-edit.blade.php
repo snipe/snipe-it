@@ -63,6 +63,23 @@
                             </div>
                         </div>
 
+                         <!-- remote -->
+                         <div class="form-group">
+                            <div class="col-sm-3 control-label">
+                                {{ trans('admin/users/general.remote') }}
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="checkbox">
+                                    <label for="remote">
+                                        {{ Form::radio('remote', '', true, ['aria-label'=>'remote']) }} {{  trans('general.do_not_change') }} <br>
+                                        {{ Form::radio('remote', '1', old('remote'), ['aria-label'=>'remote']) }}   {{ trans('admin/users/general.remote_label') }}<br>
+                                        {{ Form::radio('remote', '0', old('remote'), ['aria-label'=>'remote']) }}   {{ trans('admin/users/general.not_remote_label') }}
+
+                                    </label>
+                                </div>
+                            </div>
+                        </div> <!--/form-group-->
+
                         <!-- activated -->
                         <div class="form-group">
                             <div class="col-sm-3 control-label">
