@@ -39,7 +39,8 @@ class AccessoriesController extends Controller
                 'notes',
                 'created_at',
                 'min_amt',
-                'company_id'
+                'company_id',
+                'notes',
             ];
 
 
@@ -67,6 +68,10 @@ class AccessoriesController extends Controller
 
         if ($request->filled('location_id')) {
             $accessories->where('location_id','=',$request->input('location_id'));
+        }
+
+        if ($request->filled('notes')) {
+            $accessories->where('notes','=',$request->input('notes'));
         }
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which

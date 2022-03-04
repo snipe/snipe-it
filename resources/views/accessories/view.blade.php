@@ -102,6 +102,20 @@
               <a href="{{ route('checkout/accessory', $accessory->id) }}" style="margin-right:5px;" class="btn btn-primary btn-sm" {{ (($accessory->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
           @endcan
       </div>
+
+      @if ($accessory->notes)
+
+        <div class="col-md-12">
+          <strong>
+            {{ trans('general.notes') }}
+          </strong>
+        </div>
+        <div class="col-md-12">
+          {!! nl2br(e($accessory->notes)) !!}
+        </div>
+      </div>
+      @endif
+
   </div>
 </div>
 @stop

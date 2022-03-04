@@ -40,6 +40,7 @@ class ComponentsController extends Controller
                 'purchase_cost',
                 'qty',
                 'image',
+                'notes',
             ];
 
 
@@ -60,6 +61,10 @@ class ComponentsController extends Controller
 
         if ($request->filled('location_id')) {
             $components->where('location_id','=',$request->input('location_id'));
+        }
+
+        if ($request->filled('notes')) {
+            $components->where('notes','=',$request->input('notes'));
         }
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which

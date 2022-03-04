@@ -118,13 +118,20 @@ class ConsumablePresenter extends Presenter
                 "visible" => true,
                 "footerFormatter" => 'sumFormatter',
             ],[
+                "field" => "notes",
+                "searchable" => true,
+                "sortable" => true,
+                "visible" => false,
+                "title" => trans('general.notes'),
+                "formatter" => "notesFormatter"
+            ], [
                 "field" => "change",
                 "searchable" => false,
                 "sortable" => false,
                 "visible" => true,
                 "title" => trans('general.change'),
                 "formatter" => "consumablesInOutFormatter",
-            ], [
+            ],  [
                 "field" => "actions",
                 "searchable" => false,
                 "sortable" => false,
