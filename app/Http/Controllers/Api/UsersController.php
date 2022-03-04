@@ -133,7 +133,7 @@ class UsersController extends Controller
         }
 
         if ($request->filled('ldap_import')) {
-            $users = $users->where('users.ldap_import', '=', $request->input('ldap_import'));
+            $users = $users->where('ldap_import', '=', $request->input('ldap_import'));
         }
 
         if ($request->filled('assets_count')) {
