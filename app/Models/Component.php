@@ -60,6 +60,7 @@ class Component extends SnipeModel
         'order_number',
         'qty',
         'serial',
+        'notes',
     ];
 
     use Searchable;
@@ -69,7 +70,7 @@ class Component extends SnipeModel
      * 
      * @var array
      */
-    protected $searchableAttributes = ['name', 'order_number', 'serial', 'purchase_cost', 'purchase_date'];
+    protected $searchableAttributes = ['name', 'order_number', 'serial', 'purchase_cost', 'purchase_date', 'notes'];
 
     /**
      * The relations and their attributes that should be included when searching the model.

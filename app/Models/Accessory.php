@@ -35,7 +35,7 @@ class Accessory extends SnipeModel
      * 
      * @var array
      */
-    protected $searchableAttributes = ['name', 'model_number', 'order_number', 'purchase_date'];
+    protected $searchableAttributes = ['name', 'model_number', 'order_number', 'purchase_date', 'notes'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -92,7 +92,8 @@ class Accessory extends SnipeModel
         'image',
         'qty',
         'min_amt',
-        'requestable'
+        'requestable',
+        'notes',
     ];
 
 
