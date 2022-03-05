@@ -410,7 +410,23 @@ class AssetsController extends Controller
         return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.delete.success'));
     }
 
+    /**
+     * Searches the assets table by serial, and redirects if it finds one
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return Redirect
+     */
+    public function getAssetBySerial(Request $request)
+    {
+        $topsearch = ($request->get('topsearch')=="true");
 
+        if (!$asset = Asset::where('serial', '=', $request->get('serial'))->first()) {
+            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
+        }
+        $this->authorize('view', $asset);
+        return redirect()->route('hardware.show', $asset->id)->with('topsearch', $topsearch);
+    }
 
     /**
      * Searches the assets table by asset tag, and redirects if it finds one
@@ -429,6 +445,8 @@ class AssetsController extends Controller
         $this->authorize('view', $asset);
         return redirect()->route('hardware.show', $asset->id)->with('topsearch', $topsearch);
     }
+
+
     /**
      * Return a QR code for the asset
      *
