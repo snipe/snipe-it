@@ -33,7 +33,7 @@
                         id="depreciationReport"
                         data-url="{{ route('api.depreciation-report.index') }}"
                         data-mobile-responsive="true"
-                        data-toggle="table"
+                        {{-- data-toggle="table" --}}
                         class="table table-striped snipe-table"
                         data-columns="{{ \App\Presenters\DepreciationReportPresenter::dataTableLayout() }}"
                         data-export-options='{
