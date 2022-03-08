@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'actions' 	                => 'การกระทำ',
     'add'    	                => 'เพิ่มใหม่',
     'cancel'                    => 'ยกเลิก',
@@ -8,10 +8,17 @@ return array(
     'delete'  	                => 'ลบ',
     'edit'    	                => 'แก้ไข',
     'restore' 	                => 'นำกลับ',
+    'remove'                    => 'Remove',
     'request'                   => 'ร้องขอ',
     'submit'  	                => 'ตกลง',
     'upload'                    => 'อัพโหลด',
-	'select_file'				=> 'เลือกไฟล์...',
+    'select_file'				=> 'เลือกไฟล์...',
     'select_files'				=> 'เลือกไฟล์...',
     'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
-);
+    'send_password_link'        => 'ส่งลิงก์รีเซ็ตรหัสผ่าน',
+    'go'                        => 'Go',
+    'bulk_actions'              => 'Bulk Actions',
+    'add_maintenance'           => 'Add Maintenance',
+    'append'                    => 'Append',
+    'new'                       => 'New',
+];

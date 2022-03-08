@@ -8,7 +8,7 @@
         'repair'             => 'Sửa chữa',
         'maintenance'        => 'Bảo trì',
         'upgrade'            => 'Nâng cấp',
-        'calibration'        => 'Calibration',
+        'calibration'        => 'Hiệu chỉnh',
         'software_support'   => 'Hỗ trợ phần mềm',
         'hardware_support'   => 'Hỗ trợ phần cứng',
     ];

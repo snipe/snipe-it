@@ -94,12 +94,10 @@
 }
 .skin-contrast .sidebar-form input[type="text"],
 .skin-contrast .sidebar-form .btn {
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
   background-color: #374850;
   border: 1px solid transparent;
   height: 35px;
-  -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 .skin-contrast .sidebar-form input[type="text"] {
@@ -191,7 +189,7 @@ a.btn:visited {
 }
 .pagination > .active > a {
   background-color: #001F3F;
-  color: #FFF!important;
+  color: #FFF !important;
 }
 btn-success {
   background-color: #000d07;
@@ -218,3 +216,8 @@ input::-ms-input-placeholder {
 .fixed-table-container tbody .selected td {
   background-color: #fff8af;
 }
+.search-highlight,
+.search-highlight:hover {
+  background-color: #e9d15b;
+}
+

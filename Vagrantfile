@@ -8,25 +8,34 @@ Vagrant.configure("2") do |config|
   config.vm.define "bionic" do |bionic|
     bionic.vm.box = "ubuntu/bionic64"
     bionic.vm.hostname = 'bionic'
-    bionic.vm.network "public_network", bridge: NETWORK_BRIDGE
-    bionic.vm.provision :shell, :inline => "wget #{SNIPEIT_SH_URL}"
-    bionic.vm.provision :shell, :inline => "chmod 755 snipeit.sh"
+    bionic.vm.network "forwarded_port", guest: 80, host: 8080
+    bionic.vm.synced_folder ".", "/vagrant", :owner => 'www-data',
+      :group => 'vagrant', :mount_options => ['dmode=775', 'fmode=775']
+    bionic.vm.provision "ansible_local" do |ansible|
+      ansible.playbook = "ansible/ubuntu/vagrant_playbook.yml"
+    end
   end
 
   config.vm.define "xenial" do |xenial|
     xenial.vm.box = "ubuntu/xenial64"
     xenial.vm.hostname = 'xenial'
-    xenial.vm.network "public_network", bridge: NETWORK_BRIDGE
-    xenial.vm.provision :shell, :inline => "wget #{SNIPEIT_SH_URL}"
-    xenial.vm.provision :shell, :inline => "chmod 755 snipeit.sh"
+    xenial.vm.network "forwarded_port", guest: 80, host: 8080
+    xenial.vm.synced_folder ".", "/vagrant", :owner => 'www-data',
+      :group => 'vagrant', :mount_options => ['dmode=775', 'fmode=775']
+    xenial.vm.provision "ansible_local" do |ansible|
+      ansible.playbook = "ansible/ubuntu/vagrant_playbook.yml"
+    end
   end
 
   config.vm.define "trusty" do |trusty|
     trusty.vm.box = "ubuntu/trusty32"
     trusty.vm.hostname = 'trusty'
-    trusty.vm.network "public_network", bridge: NETWORK_BRIDGE
-    trusty.vm.provision :shell, :inline => "wget #{SNIPEIT_SH_URL}"
-    trusty.vm.provision :shell, :inline => "chmod 755 snipeit.sh"
+    trusty.vm.network "forwarded_port", guest: 80, host: 8080
+    trusty.vm.synced_folder ".", "/vagrant", :owner => 'www-data',
+      :group => 'vagrant', :mount_options => ['dmode=775', 'fmode=775']
+    trusty.vm.provision "ansible_local" do |ansible|
+      ansible.playbook = "ansible/ubuntu/vagrant_playbook.yml"
+    end
   end
 
   config.vm.define "centos7" do |centos7|

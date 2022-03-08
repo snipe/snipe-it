@@ -19,6 +19,22 @@ class ActionlogsTransformer
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
+    private function clean_field($value)
+    {
+        // This object stuff is weird, and is used to make up for the fact that
+        // older data can get strangely formatted if an asset existed,
+        // then a new custom field is added, and the asset is saved again.
+        // It can result in funnily-formatted strings like:
+        //
+        // {"_snipeit_right_sized_fault_tolerant_localareanetwo_1":
+        // {"old":null,"new":{"value":"1579490695972","_snipeit_new_field_2":2,"_snipeit_new_field_3":"Monday, 20 January 2020 2:24:55 PM"}}
+        // so we have to walk down that next level
+        if(is_object($value) && isset($value->value)) {
+            return $this->clean_field($value->value);
+        }
+        return is_scalar($value) || is_null($value) ? e($value) : e(json_encode($value));
+    }
+
     public function transformActionlog (Actionlog $actionlog, $settings = null)
     {
         $icon = $actionlog->present()->icon();
@@ -31,45 +47,9 @@ class ActionlogsTransformer
             $meta_array = json_decode($actionlog->log_meta);
 
             if ($meta_array) {
-                foreach ($meta_array as $key => $value) {
-                    foreach ($value as $meta_key => $meta_value) {
-
-                        if (is_array($meta_value)) {
-                            foreach ($meta_value as $meta_value_key => $meta_value_value) {
-                                $clean_meta[$key][$meta_value_key] = e($meta_value_value);
-                            }
-                        } else {
-
-                            // This object stuff is weird, and is used to make up for the fact that
-                            // older data can get strangely formatted if an asset existed,
-                            // then a new custom field is added, and the asset is saved again.
-                            // It can result in funnily-formatted strings like:
-                            //
-                            // {"_snipeit_right_sized_fault_tolerant_localareanetwo_1":
-                            // {"old":null,"new":{"value":"1579490695972","_snipeit_new_field_2":2,"_snipeit_new_field_3":"Monday, 20 January 2020 2:24:55 PM"}}
-                            // so we have to walk down that next level
-
-                            if (is_object($meta_value)) {
-
-                                foreach ($meta_value as $meta_value_key => $meta_value_value) {
-
-                                    if ($meta_value_key == 'value') {
-                                        $clean_meta[$key]['old'] = null;
-                                        $clean_meta[$key]['new'] = e($meta_value->value);
-                                    } else {
-                                        $clean_meta[$meta_value_key]['old'] = null;
-                                        $clean_meta[$meta_value_key]['new'] = e($meta_value_value);
-                                    }
-                                }
-
-
-
-                            } else {
-                                $clean_meta[$key][$meta_key] = e($meta_value);
-                            }
-                        }
-
-                    }
+                foreach ($meta_array as $fieldname => $fieldata) {
+                    $clean_meta[$fieldname]['old'] = $this->clean_field($fieldata->old);
+                    $clean_meta[$fieldname]['new'] = $this->clean_field($fieldata->new);
                 }
 
             }
@@ -83,7 +63,7 @@ class ActionlogsTransformer
                 [
                     'url' => route('show/assetfile', ['assetId' => $actionlog->item->id, 'fileId' => $actionlog->id]),
                     'filename' => $actionlog->filename,
-                    'inlineable' => (bool) \App\Helpers\Helper::show_file_inline($actionlog->filename),
+                    'inlineable' => (bool) Helper::show_file_inline($actionlog->filename),
                 ] : null,
 
             'item' => ($actionlog->item) ? [
@@ -93,7 +73,7 @@ class ActionlogsTransformer
             ] : null,
             'location' => ($actionlog->location) ? [
                 'id' => (int) $actionlog->location->id,
-                'name' => e($actionlog->location->name)
+                'name' => e($actionlog->location->name),
             ] : null,
             'created_at'    => Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
             'updated_at'    => Helper::getFormattedDateObject($actionlog->updated_at, 'datetime'),
@@ -115,9 +95,10 @@ class ActionlogsTransformer
             'note'          => ($actionlog->note) ? e($actionlog->note): null,
             'signature_file'   => ($actionlog->accept_signature) ? route('log.signature.view', ['filename' => $actionlog->accept_signature ]) : null,
             'log_meta'          => ((isset($clean_meta)) && (is_array($clean_meta))) ? $clean_meta: null,
-            'action_date'   => ($actionlog->action_date) ? Helper::getFormattedDateObject($actionlog->action_date, 'datetime'): null,
+            'action_date'   => ($actionlog->action_date) ? Helper::getFormattedDateObject($actionlog->action_date, 'datetime'): Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
 
         ];
+        //\Log::info("Clean Meta is: ".print_r($clean_meta,true));
 
         return $array;
     }

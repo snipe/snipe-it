@@ -27,5 +27,4 @@ class AddOptionLabelToSettingsTable extends Migration
         //     $table->dropColumn('option_label');
         // });
     }
-
 }

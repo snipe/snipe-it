@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class AddShowToUsers extends Migration
 {
@@ -13,7 +13,7 @@ class AddShowToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-          $table->boolean('show_in_list')->default(1);
+            $table->boolean('show_in_list')->default(1);
         });
     }
 

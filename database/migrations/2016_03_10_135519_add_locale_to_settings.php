@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class AddLocaleToSettings extends Migration
 {
@@ -12,9 +12,9 @@ class AddLocaleToSettings extends Migration
      */
     public function up()
     {
-      Schema::table('settings', function (Blueprint $table) {
-        $table->string('locale',5)->nullable()->default(config('app.locale'));
-      });
+        Schema::table('settings', function (Blueprint $table) {
+            $table->string('locale', 5)->nullable()->default(config('app.locale'));
+        });
     }
 
     /**
@@ -24,8 +24,8 @@ class AddLocaleToSettings extends Migration
      */
     public function down()
     {
-      Schema::table('settings', function ($table) {
-          $table->dropColumn('locale');
-      });
+        Schema::table('settings', function ($table) {
+            $table->dropColumn('locale');
+        });
     }
 }

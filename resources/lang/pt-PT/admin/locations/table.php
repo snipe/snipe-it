@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'Sobre as Localizações',
     'about_locations'           => 'As localizações são usadas para seguir informações de utilizadores, assets, e outros itens',
     'assets_rtd'                => 'Artigos', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -11,6 +11,8 @@ return array(
     'country'                   => 'País',
     'create'                    => 'Criar localização',
     'update'                    => 'Atualizar localização',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Nome da localização',
     'address'                   => 'Morada',
     'zip'                       => 'Código postal',
@@ -18,4 +20,21 @@ return array(
     'parent'                    => 'Pertence a',
     'currency'                  => 'Moeda',
     'ldap_ou'                   => 'LDAP Search OU',
-    );
+    'user_name'                 => 'User Name',
+    'department'                => 'Department',
+    'location'                  => 'Location',
+    'asset_tag'                 => 'Assets Tag',
+    'asset_name'                => 'Name',
+    'asset_category'            => 'Category',
+    'asset_manufacturer'        => 'Manufacturer',
+    'asset_model'               => 'Model',
+    'asset_serial'              => 'Serial',
+    'asset_location'            => 'Location',
+    'asset_checked_out'         => 'Checked Out',
+    'asset_expected_checkin'    => 'Expected Checkin',
+    'date'                      => 'Date:',
+    'signed_by_asset_auditor'   => 'Signed By (Asset Auditor):',
+    'signed_by_finance_auditor' => 'Signed By (Finance Auditor):',
+    'signed_by_location_manager' => 'Signed By (Location Manager):',
+    'signed_by'                 => 'Signed Off By:',
+];

@@ -12,7 +12,8 @@ return array(
     'insufficient_permissions'  => 'Utilstrækkelige tilladelser.',
     'user_deleted_warning'      => 'Denne bruger er blevet slettet. Du skal gendanne denne bruger for at redigere dem eller tildele dem nye aktiver.',
     'ldap_not_configured'        => 'LDAP-integration er ikke konfigureret til denne installation.',
-    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
+    'password_resets_sent'      => 'De valgte brugere, der er aktiveret og har en gyldig e-mail-adresser, har fået tilsendt et link til nulstilling af adgangskode.',
+    'password_reset_sent'       => 'A password reset link has been sent to :email!',
 
 
     'success' => array(

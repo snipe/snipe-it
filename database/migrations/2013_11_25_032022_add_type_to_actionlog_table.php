@@ -29,5 +29,4 @@ class AddTypeToActionlogTable extends Migration
             $table->dropColumn('asset_type');
         });
     }
-
 }

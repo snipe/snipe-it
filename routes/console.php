@@ -16,10 +16,10 @@ use Illuminate\Foundation\Inspiring;
 
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
-})->describe('Display an inspiring quote');
+})->purpose('Display an inspiring quote');
 
 Artisan::command('snipeit:travisci-install', function () {
-    if(!Setting::setupCompleted()) {
+    if (! Setting::setupCompleted()) {
         $settings = new Setting;
         $settings->site_name = 'test-ci';
         $settings->alert_email = 'test@example.com';
@@ -34,4 +34,4 @@ Artisan::command('snipeit:travisci-install', function () {
     } else {
         $this->comment('Setup already ran');
     }
-})->describe('Travis-cli install script for unit tests');
+})->purpose('Travis-cli install script for unit tests');

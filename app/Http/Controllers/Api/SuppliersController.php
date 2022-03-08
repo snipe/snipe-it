@@ -8,6 +8,7 @@ use App\Http\Transformers\SelectlistTransformer;
 use App\Http\Transformers\SuppliersTransformer;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Storage;
 
 class SuppliersController extends Controller
@@ -22,10 +23,10 @@ class SuppliersController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Supplier::class);
-        $allowed_columns = ['id','name','address','phone','contact','fax','email','image','assets_count','licenses_count', 'accessories_count','url'];
+        $allowed_columns = ['id', 'name', 'address', 'phone', 'contact', 'fax', 'email', 'image', 'assets_count', 'licenses_count', 'accessories_count', 'url'];
         
         $suppliers = Supplier::select(
-                array('id','name','address','address2','city','state','country','fax', 'phone','email','contact','created_at','updated_at','deleted_at','image','notes')
+                ['id', 'name', 'address', 'address2', 'city', 'state', 'country', 'fax', 'phone', 'email', 'contact', 'created_at', 'updated_at', 'deleted_at', 'image', 'notes']
             )->withCount('assets as assets_count')->withCount('licenses as licenses_count')->withCount('accessories as accessories_count');
 
 
@@ -46,6 +47,7 @@ class SuppliersController extends Controller
 
         $total = $suppliers->count();
         $suppliers = $suppliers->skip($offset)->take($limit)->get();
+
         return (new SuppliersTransformer)->transformSuppliers($suppliers, $total);
     }
 
@@ -55,14 +57,15 @@ class SuppliersController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ImageUploadRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ImageUploadRequest $request)
     {
         $this->authorize('create', Supplier::class);
         $supplier = new Supplier;
         $supplier->fill($request->all());
+        $supplier = $request->handleImages($supplier);
 
         if ($supplier->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $supplier, trans('admin/suppliers/message.create.success')));
@@ -83,6 +86,7 @@ class SuppliersController extends Controller
     {
         $this->authorize('view', Supplier::class);
         $supplier = Supplier::findOrFail($id);
+
         return (new SuppliersTransformer)->transformSupplier($supplier);
     }
 
@@ -92,15 +96,16 @@ class SuppliersController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ImageUploadRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ImageUploadRequest $request, $id)
     {
         $this->authorize('update', Supplier::class);
         $supplier = Supplier::findOrFail($id);
         $supplier->fill($request->all());
+        $supplier = $request->handleImages($supplier);
 
         if ($supplier->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $supplier, trans('admin/suppliers/message.update.success')));
@@ -120,16 +125,16 @@ class SuppliersController extends Controller
     public function destroy($id)
     {
         $this->authorize('delete', Supplier::class);
-        $supplier = Supplier::with('asset_maintenances', 'assets', 'licenses')->withCount('asset_maintenances as asset_maintenances_count','assets as assets_count', 'licenses as licenses_count')->findOrFail($id);
+        $supplier = Supplier::with('asset_maintenances', 'assets', 'licenses')->withCount('asset_maintenances as asset_maintenances_count', 'assets as assets_count', 'licenses as licenses_count')->findOrFail($id);
         $this->authorize('delete', $supplier);
 
 
         if ($supplier->assets_count > 0) {
-            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/suppliers/message.delete.assoc_assets', ['asset_count' => (int) $supplier->assets_count])));
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/suppliers/message.delete.assoc_assets', ['asset_count' => (int) $supplier->assets_count])));
         }
 
         if ($supplier->asset_maintenances_count > 0) {
-            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/suppliers/message.delete.assoc_maintenances', ['asset_maintenances_count' => $supplier->asset_maintenances_count])));
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/suppliers/message.delete.assoc_maintenances', ['asset_maintenances_count' => $supplier->asset_maintenances_count])));
         }
 
         if ($supplier->licenses_count > 0) {
@@ -137,8 +142,8 @@ class SuppliersController extends Controller
         }
 
         $supplier->delete();
-        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/suppliers/message.delete.success')));
 
+        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/suppliers/message.delete.success')));
     }
 
     /**
@@ -147,10 +152,11 @@ class SuppliersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
-     *
      */
     public function selectlist(Request $request)
     {
+
+        $this->authorize('view.selectlists');
 
         $suppliers = Supplier::select([
             'id',
@@ -173,7 +179,5 @@ class SuppliersController extends Controller
         }
 
         return (new SelectlistTransformer)->transformSelectlist($suppliers);
-
     }
-
 }

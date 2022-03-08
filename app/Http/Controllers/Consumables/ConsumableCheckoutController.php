@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Input;
 
 class ConsumableCheckoutController extends Controller
 {
-
     /**
      * Return a view to checkout a consumable to a user.
      *
@@ -29,6 +28,7 @@ class ConsumableCheckoutController extends Controller
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
         }
         $this->authorize('checkout', $consumable);
+
         return view('consumables/checkout', compact('consumable'));
     }
 
@@ -65,13 +65,12 @@ class ConsumableCheckoutController extends Controller
         $consumable->users()->attach($consumable->id, [
             'consumable_id' => $consumable->id,
             'user_id' => $admin_user->id,
-            'assigned_to' => e($request->input('assigned_to'))
+            'assigned_to' => e($request->input('assigned_to')),
         ]);
 
         event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note')));
 
         // Redirect to the new consumable page
         return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.checkout.success'));
-
     }
 }

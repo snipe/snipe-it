@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Transformers;
 
 use App\Models\Import;
@@ -6,20 +7,20 @@ use App\Models\Setting;
 
 class ImportsTransformer
 {
-
     public function transformImports($imports)
     {
-        $array = array();
+        $array = [];
         foreach ($imports as $import) {
             $array[] = self::transformImport($import);
         }
+
         return $array;
     }
 
     public function transformImport(Import $import)
     {
         $array = [
-            'id' => (int)  $import->id,
+            'id' => (int) $import->id,
             'file_path' => e($import->file_path),
             'filesize' => Setting::fileSizeConvert($import->filesize),
             'name' => e($import->name),

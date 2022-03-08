@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\Saml;
+use Illuminate\Http\Request;
 use Log;
 
 /**
@@ -30,20 +30,20 @@ class SamlController extends Controller
     {
         $this->saml = $saml;
 
-        $this->middleware('guest', ['except' => ['metadata','sls']]);
+        $this->middleware('guest', ['except' => ['metadata', 'sls']]);
     }
 
     /**
      * Return SAML SP metadata for Snipe-IT
-     * 
+     *
      * /saml/metadata
-     * 
+     *
      * @author Johnson Yi <jyi.dev@outlook.com>
-     * 
+     *
      * @since 5.0.0
      *
      * @param Request $request
-     * 
+     *
      * @return Response
      */
     public function metadata(Request $request)
@@ -53,7 +53,7 @@ class SamlController extends Controller
         if (empty($metadata)) {
             return response()->view('errors.403', [], 403);
         }
-    
+
         return response()->streamDownload(function () use ($metadata) {
             echo $metadata;
         }, 'snipe-it-metadata.xml', ['Content-Type' => 'text/xml']);
@@ -61,36 +61,37 @@ class SamlController extends Controller
 
     /**
      * Begin the SP-Initiated SSO by sending AuthN to the IdP.
-     * 
+     *
      * /login/saml
-     * 
+     *
      * @author Johnson Yi <jyi.dev@outlook.com>
-     * 
+     *
      * @since 5.0.0
      *
      * @param Request $request
-     * 
+     *
      * @return Redirect
      */
     public function login(Request $request)
     {
         $auth = $this->saml->getAuth();
-        $ssoUrl = $auth->login(null, array(), false, false, false, false);
+        $ssoUrl = $auth->login(null, [], false, false, false, false);
+
         return redirect()->away($ssoUrl);
     }
 
     /**
      * Receives, parses the assertion from IdP and flashes SAML data
      * back to the LoginController for authentication.
-     * 
+     *
      * /saml/acs
-     * 
+     *
      * @author Johnson Yi <jyi.dev@outlook.com>
-     * 
+     *
      * @since 5.0.0
      *
      * @param Request $request
-     * 
+     *
      * @return Redirect
      */
     public function acs(Request $request)
@@ -100,9 +101,10 @@ class SamlController extends Controller
         $auth->processResponse();
         $errors = $auth->getErrors();
 
-        if (!empty($errors)) {
-            Log::error("There was an error with SAML ACS: " . implode(', ', $errors));
-            Log::error("Reason: " . $auth->getLastErrorReason());
+        if (! empty($errors)) {
+            Log::error('There was an error with SAML ACS: '.implode(', ', $errors));
+            Log::error('Reason: '.$auth->getLastErrorReason());
+
             return redirect()->route('login')->with('error', trans('auth/message.signin.error'));
         }
 
@@ -114,15 +116,15 @@ class SamlController extends Controller
     /**
      * Receives LogoutRequest/LogoutResponse from IdP and flashes
      * back to the LoginController for logging out.
-     * 
+     *
      * /saml/sls
-     * 
+     *
      * @author Johnson Yi <jyi.dev@outlook.com>
-     * 
+     *
      * @since 5.0.0
      *
      * @param Request $request
-     * 
+     *
      * @return Redirect
      */
     public function sls(Request $request)
@@ -131,10 +133,11 @@ class SamlController extends Controller
         $retrieveParametersFromServer = $this->saml->getSetting('retrieveParametersFromServer', false);
         $sloUrl = $auth->processSLO(true, null, $retrieveParametersFromServer, null, true);
         $errors = $auth->getErrors();
-        
-        if (!empty($errors)) {
-            Log::error("There was an error with SAML SLS: " . implode(', ', $errors));
-            Log::error("Reason: " . $auth->getLastErrorReason());
+
+        if (! empty($errors)) {
+            Log::error('There was an error with SAML SLS: '.implode(', ', $errors));
+            Log::error('Reason: '.$auth->getLastErrorReason());
+
             return view('errors.403');
         }
 

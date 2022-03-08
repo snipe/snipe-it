@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => '使用者已取消項目申請',
     'a_user_requested' => '使用者已申請項目',
     'accessory_name' => '配件名稱：',
@@ -9,7 +9,7 @@ return array(
     'asset' => '資產：',
     'asset_name' => '資產名稱：',
     'asset_requested' => '申請資產',
-    'asset_tag' => '資產標籤：',
+    'asset_tag' => '資產標籤',
     'assigned_to' => '分配給',
     'best_regards' => 'Best regards,',
     'canceled' => '取消：',
@@ -18,12 +18,12 @@ return array(
     'click_to_confirm' => '請點擊鏈結啟用您 :web 的帳戶：',
     'click_on_the_link_accessory' => '請點擊鏈結確認您已收到配件。',
     'click_on_the_link_asset' => '請點擊鏈結確認您已收到資產。',
-    'Confirm_Asset_Checkin' => 'Asset checkin confirmation',
-    'Confirm_Accessory_Checkin' => 'Accessory checkin confirmation',
-    'Confirm_accessory_delivery' => 'Accessory delivery confirmation',
-    'Confirm_license_delivery' => 'License delivery confirmation',
-    'Confirm_asset_delivery' => 'Asset delivery confirmation',
-    'Confirm_consumable_delivery' => 'Consumable delivery confirmation',
+    'Confirm_Asset_Checkin' => '確認資產繳回',
+    'Confirm_Accessory_Checkin' => '確認配件繳回',
+    'Confirm_accessory_delivery' => '確認交付配件',
+    'Confirm_license_delivery' => '確認交付授權',
+    'Confirm_asset_delivery' => '確認交付資產',
+    'Confirm_consumable_delivery' => '確認交付耗材',
     'current_QTY' => '目前數量',
     'Days' => '日',
     'days' => '日',
@@ -59,7 +59,7 @@ return array(
     'test_mail_text' => '這是一封 Snipe-IT 資產管理系統的測試電子郵件，如果您收到，表示郵件通知正常運作 :)',
     'the_following_item' => '以下項目已繳回：',
     'low_inventory_alert' => '有 :count 種物品已經低於或者接近最小庫存。|有 :count 種物品已經低於或者接近最小庫存。',
-    'assets_warrantee_alert' => '有 :count 項資產的保固將在 :threshold 天後到期。|有 :count 項資產的保固將在 :threshold 天後到期。',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => '有 :count 個授權將在 :threshold 天後到期。|有 :count 個授權將在 :threshold 天後到期。',
     'to_reset' => '要重設 :web 的密碼，請完成此表單：',
     'type' => '類型',
@@ -69,11 +69,11 @@ return array(
     'welcome' => '歡迎您 :name',
     'welcome_to' => '歡迎來到 :web！',
     'your_credentials' => '您的 Snipe-IT 憑證',
-    'Accessory_Checkin_Notification' => 'Accessory checked in',
-    'Asset_Checkin_Notification' => 'Asset checked in',
-    'License_Checkin_Notification' => 'License checked in',
-    'Expected_Checkin_Report' => 'Expected asset checkin report',
-    'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
+    'Accessory_Checkin_Notification' => '配件繳回',
+    'Asset_Checkin_Notification' => '資產繳回',
+    'License_Checkin_Notification' => '授權繳回',
+    'Expected_Checkin_Report' => '預計資產繳回報告',
+    'Expected_Checkin_Notification' => '提醒: :name 接近繳回最後期限',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => '查看您的資產',
+];

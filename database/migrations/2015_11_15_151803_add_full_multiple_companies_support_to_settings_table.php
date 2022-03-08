@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class AddFullMultipleCompaniesSupportToSettingsTable extends Migration {
-
+class AddFullMultipleCompaniesSupportToSettingsTable extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -12,9 +12,8 @@ class AddFullMultipleCompaniesSupportToSettingsTable extends Migration {
      */
     public function up()
     {
-        Schema::table('settings', function(Blueprint $table)
-        {
-            $table->boolean('full_multiple_companies_support')->default(FALSE);
+        Schema::table('settings', function (Blueprint $table) {
+            $table->boolean('full_multiple_companies_support')->default(false);
         });
     }
 
@@ -25,10 +24,8 @@ class AddFullMultipleCompaniesSupportToSettingsTable extends Migration {
      */
     public function down()
     {
-        Schema::table('settings', function(Blueprint $table)
-        {
+        Schema::table('settings', function (Blueprint $table) {
             $table->dropColumn('full_multiple_companies_support');
         });
     }
-
 }

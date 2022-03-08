@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class AddLogoToPrintAssets extends Migration
 {
@@ -16,8 +16,6 @@ class AddLogoToPrintAssets extends Migration
         Schema::table('settings', function (Blueprint $table) {
             $table->boolean('logo_print_assets')->default('0');
         });
-
-
     }
 
     /**

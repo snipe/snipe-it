@@ -19,10 +19,14 @@
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
                 <li class="active">
-                    <a href="#assets" data-toggle="tab" title="{{ trans('general.assets') }}">{{ trans('general.assets') }}</a>
+                    <a href="#assets" data-toggle="tab" title="{{ trans('general.assets') }}">{{ trans('general.assets') }}
+                        <badge class="badge badge-secondary"> {{ $assets->count()}}</badge>
+                    </a>               
                 </li>
                 <li>
-                    <a href="#models" data-toggle="tab" title="{{ trans('general.asset_models') }}">{{ trans('general.asset_models') }}</a>
+                    <a href="#models" data-toggle="tab" title="{{ trans('general.asset_models') }}">{{ trans('general.asset_models') }}
+                        <badge class="badge badge-secondary"> {{ $models->count()}}</badge>
+                    </a>                   
                 </li>
             </ul>
             <div class="tab-content">
@@ -72,7 +76,7 @@
                         <div class="col-md-12">
 
                             @if ($models->count() > 0)
-                            <h2>Requestable Models</h4>
+                            <h2>{{ trans('general.requestable_models') }}</h4>
                                 <table
                                         name="requested-assets"
                                         data-toolbar="#toolbar"
@@ -128,7 +132,7 @@
 
                             @else
                                 <div class="alert alert-info alert-block">
-                                    <i class="fa fa-info-circle"></i>
+                                    <i class="fas fa-info-circle"></i>
                                     {{ trans('general.no_results') }}
                                 </div>
                             @endif

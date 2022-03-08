@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => '該用戶可以登錄',
     'activated_disabled_help_text' => '您無法編輯自己帳戶的啟動狀態。',
     'assets_user'       => '分配給 :name 的資產',
@@ -13,7 +12,7 @@ return array(
     'edit'              => '編輯使用者',
     'filetype_info'     => '允許檔案類型：png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar。',
     'history_user'      => ':name 的歷史記錄',
-	'info'				=> '資訊',
+    'info'				=> '資訊',
     'restore_user'		=> '點擊此處可將它們還原。',
     'last_login'        => '上次登入',
     'ldap_config_text'  => 'LDAP 設定在 管理 > 設定。所選位置將套用至匯入的使用者。',
@@ -25,4 +24,14 @@ return array(
     'two_factor_admin_optin_help' => '您當前的管理員設置允許使用雙因素身份驗證。',
     'two_factor_enrolled' => '雙因素認證設備登記',
     'two_factor_active'   => '啟用雙因素認證',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

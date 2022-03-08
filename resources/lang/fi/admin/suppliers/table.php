@@ -2,11 +2,11 @@
 
 return array(
     'about_suppliers_title' => 'Tietoa toimittajista',
-    'about_suppliers_text'  => 'Toimittajien avulla seurataan tuotteiden lähdettä',
+    'about_suppliers_text'  => 'Toimittajien avulla seurataan nimikkeiden lähdettä',
     'address'               => 'Toimittajan osoite',
     'assets'                => 'Laitteet',
     'city'                  => 'Kaupunki',
-    'contact'               => 'Yhteyshenkilön Nimi',
+    'contact'               => 'Yhteyshenkilön nimi',
     'country'               => 'Maa',
     'create'                => 'Uusi toimittaja',
     'email'                 => 'Sähköposti',
@@ -16,7 +16,7 @@ return array(
     'name'                  => 'Toimittajan nimi',
     'notes'                 => 'Muistiinpanot',
     'phone'                 => 'Puhelin',
-    'state'                 => 'Lääni',
+    'state'                 => 'Maakunta',
     'suppliers'             => 'Toimittajat',
     'update'                => 'Päivitä toimittaja',
     'url'                   => 'Kotisivu',

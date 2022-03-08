@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Update Label Settings
+    {{ trans('admin/settings/general.labels_title') }}
     @parent
 @stop
 
@@ -32,7 +32,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fa fa-tags"></i> Labels
+                        <i class="fas fa-tags"></i> {{ trans('admin/settings/general.labels') }}
                     </h4>
                 </div>
                 <div class="box-body">
@@ -204,7 +204,7 @@
                         <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                     </div>
                     <div class="text-right col-md-6">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                     </div>
 
                 </div>

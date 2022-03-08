@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class AddMinStockToTables extends Migration
 {
@@ -12,15 +12,15 @@ class AddMinStockToTables extends Migration
      */
     public function up()
     {
-      Schema::table('accessories', function (Blueprint $table) {
-        $table->integer('min_amt')->nullable()->default(NULL);
-      });
-      Schema::table('consumables', function (Blueprint $table) {
-        $table->integer('min_amt')->nullable()->default(NULL);
-      });
-      Schema::table('components', function (Blueprint $table) {
-        $table->integer('min_amt')->nullable()->default(NULL);
-      });
+        Schema::table('accessories', function (Blueprint $table) {
+            $table->integer('min_amt')->nullable()->default(null);
+        });
+        Schema::table('consumables', function (Blueprint $table) {
+            $table->integer('min_amt')->nullable()->default(null);
+        });
+        Schema::table('components', function (Blueprint $table) {
+            $table->integer('min_amt')->nullable()->default(null);
+        });
     }
 
     /**
@@ -30,14 +30,14 @@ class AddMinStockToTables extends Migration
      */
     public function down()
     {
-      Schema::table('accessories', function ($table) {
-          $table->dropColumn('min_amt');
-      });
-      Schema::table('components', function ($table) {
-          $table->dropColumn('min_amt');
-      });
-      Schema::table('consumables', function ($table) {
-          $table->dropColumn('min_amt');
-      });
+        Schema::table('accessories', function ($table) {
+            $table->dropColumn('min_amt');
+        });
+        Schema::table('components', function ($table) {
+            $table->dropColumn('min_amt');
+        });
+        Schema::table('consumables', function ($table) {
+            $table->dropColumn('min_amt');
+        });
     }
 }

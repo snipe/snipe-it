@@ -26,62 +26,75 @@ class LicensesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', License::class);
-        $licenses = Company::scopeCompanyables(License::with('company', 'manufacturer', 'freeSeats', 'supplier','category')->withCount('freeSeats as free_seats_count'));
-
+        $licenses = Company::scopeCompanyables(License::with('company', 'manufacturer', 'supplier', 'category')->withCount('freeSeats as free_seats_count'));
 
         if ($request->filled('company_id')) {
-            $licenses->where('company_id','=',$request->input('company_id'));
+            $licenses->where('company_id', '=', $request->input('company_id'));
         }
 
         if ($request->filled('name')) {
-            $licenses->where('licenses.name','=',$request->input('name'));
+            $licenses->where('licenses.name', '=', $request->input('name'));
         }
 
         if ($request->filled('product_key')) {
-            $licenses->where('licenses.serial','=',$request->input('product_key'));
+            $licenses->where('licenses.serial', '=', $request->input('product_key'));
         }
 
         if ($request->filled('order_number')) {
-            $licenses->where('order_number','=',$request->input('order_number'));
+            $licenses->where('order_number', '=', $request->input('order_number'));
         }
 
         if ($request->filled('purchase_order')) {
-            $licenses->where('purchase_order','=',$request->input('purchase_order'));
+            $licenses->where('purchase_order', '=', $request->input('purchase_order'));
         }
 
         if ($request->filled('license_name')) {
-            $licenses->where('license_name','=',$request->input('license_name'));
+            $licenses->where('license_name', '=', $request->input('license_name'));
         }
 
         if ($request->filled('license_email')) {
-            $licenses->where('license_email','=',$request->input('license_email'));
+            $licenses->where('license_email', '=', $request->input('license_email'));
         }
 
         if ($request->filled('manufacturer_id')) {
-            $licenses->where('manufacturer_id','=',$request->input('manufacturer_id'));
+            $licenses->where('manufacturer_id', '=', $request->input('manufacturer_id'));
         }
 
         if ($request->filled('supplier_id')) {
-            $licenses->where('supplier_id','=',$request->input('supplier_id'));
+            $licenses->where('supplier_id', '=', $request->input('supplier_id'));
         }
 
         if ($request->filled('category_id')) {
-            $licenses->where('category_id','=',$request->input('category_id'));
+            $licenses->where('category_id', '=', $request->input('category_id'));
         }
 
         if ($request->filled('depreciation_id')) {
-            $licenses->where('depreciation_id','=',$request->input('depreciation_id'));
+            $licenses->where('depreciation_id', '=', $request->input('depreciation_id'));
         }
 
         if ($request->filled('supplier_id')) {
-            $licenses->where('supplier_id','=',$request->input('supplier_id'));
+            $licenses->where('supplier_id', '=', $request->input('supplier_id'));
         }
 
+        if (($request->filled('maintained')) && ($request->input('maintained')=='true')) {
+            $licenses->where('maintained','=',1);
+        } elseif (($request->filled('maintained')) && ($request->input('maintained')=='false')) {
+            $licenses->where('maintained','=',0);
+        }
+
+        if (($request->filled('expires')) && ($request->input('expires')=='true')) {
+            $licenses->whereNotNull('expiration_date');
+        } elseif (($request->filled('expires')) && ($request->input('expires')=='false')) {
+            $licenses->whereNull('expiration_date');
+        }
 
         if ($request->filled('search')) {
             $licenses = $licenses->TextSearch($request->input('search'));
         }
 
+        if ($request->input('deleted')=='true') {
+            $licenses->onlyTrashed();
+        }
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.
@@ -91,7 +104,6 @@ class LicensesController extends Controller
         ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-
 
         switch ($request->input('sort')) {
                 case 'manufacturer':
@@ -128,24 +140,18 @@ class LicensesController extends Controller
                         'free_seats_count',
                         'seats',
                         'termination_date',
-                        'depreciation_id'
+                        'depreciation_id',
                     ];
                 $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
                 $licenses = $licenses->orderBy($sort, $order);
                 break;
         }
 
-
-
         $total = $licenses->count();
-
         $licenses = $licenses->skip($offset)->take($limit)->get();
+
         return (new LicensesTransformer)->transformLicenses($licenses, $total);
-
     }
-
-
-
 
     /**
      * Store a newly created resource in storage.
@@ -162,9 +168,10 @@ class LicensesController extends Controller
         $license = new License;
         $license->fill($request->all());
 
-        if($license->save()) {
+        if ($license->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $license, trans('admin/licenses/message.create.success')));
         }
+
         return response()->json(Helper::formatStandardApiResponse('error', null, $license->getErrors()));
     }
 
@@ -180,9 +187,9 @@ class LicensesController extends Controller
         $this->authorize('view', License::class);
         $license = License::withCount('freeSeats')->findOrFail($id);
         $license = $license->load('assignedusers', 'licenseSeats.user', 'licenseSeats.asset');
+
         return (new LicensesTransformer)->transformLicense($license);
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -222,22 +229,23 @@ class LicensesController extends Controller
         $license = License::findOrFail($id);
         $this->authorize('delete', $license);
 
-        if($license->assigned_seats_count == 0) {
+        if ($license->assigned_seats_count == 0) {
             // Delete the license and the associated license seats
             DB::table('license_seats')
                 ->where('id', $license->id)
-                ->update(array('assigned_to' => null,'asset_id' => null));
+                ->update(['assigned_to' => null, 'asset_id' => null]);
 
             $licenseSeats = $license->licenseseats();
             $licenseSeats->delete();
             $license->delete();
 
             // Redirect to the licenses management page
-            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/licenses/message.delete.success')));
+            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/licenses/message.delete.success')));
         }
+
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/licenses/message.assoc_users')));
     }
-    
+
     /**
      * Gets a paginated collection for the select2 menus
      *
@@ -245,10 +253,9 @@ class LicensesController extends Controller
      */
     public function selectlist(Request $request)
     {
-
         $licenses = License::select([
             'licenses.id',
-            'licenses.name'
+            'licenses.name',
         ]);
 
         if ($request->filled('search')) {
@@ -257,9 +264,6 @@ class LicensesController extends Controller
 
         $licenses = $licenses->orderBy('name', 'ASC')->paginate(50);
 
-
         return (new SelectlistTransformer)->transformSelectlist($licenses);
     }
-
-
 }

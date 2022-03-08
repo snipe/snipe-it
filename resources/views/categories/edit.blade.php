@@ -16,7 +16,7 @@
     <label for="category_type" class="col-md-3 control-label">{{ trans('general.type') }}</label>
     <div class="col-md-7 required">
         {{ Form::select('category_type', $category_types , old('category_type', $item->category_type), array('class'=>'select2', 'style'=>'min-width:350px', 'aria-label'=>'category_type', $item->itemCount() > 0 ? 'disabled' : '')) }}
-        {!! $errors->first('category_type', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+        {!! $errors->first('category_type', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
 </div>
 
@@ -108,7 +108,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h2 class="modal-title" id="eulaModalLabel">{{ trans('admin/settings/general.default_eula_text') }}</h4>
+                <h2 class="modal-title" id="eulaModalLabel">{{ trans('admin/settings/general.default_eula_text') }}</h2>
             </div>
             <div class="modal-body">
                 {{ \App\Models\Setting::getDefaultEula() }}

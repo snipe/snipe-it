@@ -15,7 +15,7 @@ return array(
     'remaining_seats'   => 'Jäljellä oleva määrä',
     'seats'             => 'Määrä',
     'termination_date'  => 'Päättymispäivä',
-    'to_email'          => 'Lisenssille määritetty email',
+    'to_email'          => 'Lisenssille määritetty sähköpostiosoite',
     'to_name'           => 'Lisenssille määritetty nimi',
     'update'            => 'Päivitä lisenssi',
     'checkout_help'     => 'Lisenssi tulee luovuttaa laitteelle tai henkilölle. Voit valita molemmat, mutta laitteen omistajan tulee täsmätä lisenssin omistajaan.'

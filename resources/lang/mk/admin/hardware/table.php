@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Код на основното средство',
     'asset_model'       => 'Модел',
-    'book_value'  	=> 'Вредност',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'Раздолжи/Задолжи',
     'checkout_date' => 'Датум на задолжување',
     'checkoutto' 	=> 'Задолжен на',
+    'current_value' => 'Current Value',
     'diff' 			=> 'Разлика',
     'dl_csv' 		=> 'Преземи CSV',
     'eol' 			=> 'EOL',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> 'Сериски број',
     'status'   		=> 'Состојба',
     'title'      	=> 'Основно средство ',
-    'image'		=> 'Слика',
+    'image'		    => 'Слика',
     'days_without_acceptance' => 'Денови без прифаќање',
-    'monthly_depreciation' => 'Monthly Depreciation'
-
-);
+    'monthly_depreciation' => 'Monthly Depreciation',
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

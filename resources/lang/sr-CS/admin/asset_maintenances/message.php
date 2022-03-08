@@ -5,15 +5,15 @@
         'delete'                       => [
             'confirm' => 'Da li ste sigurni da želite izbrisati ovo održavanje imovine?',
             'error'   => 'Došlo je do problema s brisanjem održavanja imovine. Molim pokušaj te ponovo.',
-            'success' => 'Održavanje imovine uspešno izbrisano.'
+            'success' => 'Održavanje imovine uspešno izbrisano.',
         ],
         'create'                       => [
             'error'   => 'Održavanje imovine nije kreirano, pokušajte ponovo.',
-            'success' => 'Održavanje imovine uspešno kreirano.'
+            'success' => 'Održavanje imovine uspešno kreirano.',
         ],
         'edit'                       => [
             'error'   => 'Održavanje imovine nije uređeno, pokušajte ponovo.',
-            'success' => 'Održavanje imovine uspješno je uređeno.'
+            'success' => 'Održavanje imovine uspješno je uređeno.',
         ],
         'asset_maintenance_incomplete' => 'Nije još završeno',
         'warranty'                     => 'Garancija',

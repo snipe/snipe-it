@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'Относно местоположения',
     'about_locations'           => 'Местоположения се използват за проследяване на информация за местоположението  за потребители, активи и други елементи',
     'assets_rtd'                => 'Активи', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Държава',
     'create'                    => 'Създаване на местоположение',
     'update'                    => 'Обновяване на местоположение',
+    'print_assigned'            => 'Печат',
+    'print_all_assigned'        => 'Печат на всички отдадени',
     'name'                      => 'Местоположение',
     'address'                   => 'Aдрес',
     'zip'                       => 'Пощенски код',
@@ -18,4 +20,21 @@ return array(
     'parent'                    => 'Присъединено към',
     'currency'                  => 'Валута на местоположението',
     'ldap_ou'                   => 'Търсене в LDAP OU',
-    );
+    'user_name'                 => 'User Name',
+    'department'                => 'Department',
+    'location'                  => 'Location',
+    'asset_tag'                 => 'Assets Tag',
+    'asset_name'                => 'Name',
+    'asset_category'            => 'Category',
+    'asset_manufacturer'        => 'Manufacturer',
+    'asset_model'               => 'Model',
+    'asset_serial'              => 'Serial',
+    'asset_location'            => 'Location',
+    'asset_checked_out'         => 'Checked Out',
+    'asset_expected_checkin'    => 'Expected Checkin',
+    'date'                      => 'Date:',
+    'signed_by_asset_auditor'   => 'Signed By (Asset Auditor):',
+    'signed_by_finance_auditor' => 'Signed By (Finance Auditor):',
+    'signed_by_location_manager' => 'Signed By (Location Manager):',
+    'signed_by'                 => 'Signed Off By:',
+];

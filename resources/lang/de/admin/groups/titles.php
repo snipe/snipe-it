@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Über Gruppen',
     'about_groups'                  => 'Gruppen werden verwendet, um die Benutzerberechtigungen zu verallgemeinern.',
     'group_management' 	 	=> 'Gruppenverwaltung',
@@ -10,5 +10,7 @@ return array(
     'group_admin' 	 		=> 'Gruppenadministrator',
     'allow' 	 			=> 'Erlauben',
     'deny' 	 				=> 'Nicht erlauben',
-
-);
+    'permission'            => 'Berechtigung',
+    'grant'                 => 'Erlauben',
+    'no_permissions'        => 'Diese Gruppe hat keine Berechtigungen.'
+];

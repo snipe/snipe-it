@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => 'Ní mór: tréith a bheith ar a laghad: carachtair min.',
         'array'   => 'Ní mór go mbeadh míreanna min ar a laghad ag an tréith.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'An roghnaithe: tá tréith neamhbhailí.',
     'numeric'              => 'An: Ní mór tréith a bheith ina líon.',
     'present'              => 'Ní mór an réimse tréith a bheith i láthair.',
@@ -88,7 +89,8 @@ return array(
     'unique'               => 'An: tá tréith déanta cheana féin.',
     'uploaded'             => 'The: theip ar an tréith a uaslódáil.',
     'url'                  => 'Tá an fhormáid tréithbhail neamhbhailí.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    'unique_undeleted'     => 'The :attribute must be unique.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
 
     /*
     |--------------------------------------------------------------------------
@@ -100,7 +102,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -114,11 +115,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "An: sa réimse tréith tá carachtar nach bhfuil ceadaithe.",
-        "email_array"      => "Tá seoltaí ríomhphoist amháin nó níos mó neamhbhailí.",
-        "hashed_pass"      => "Tá do phasfhocal reatha mícheart",
+        'alpha_space' => 'An: sa réimse tréith tá carachtar nach bhfuil ceadaithe.',
+        'email_array'      => 'Tá seoltaí ríomhphoist amháin nó níos mó neamhbhailí.',
+        'hashed_pass'      => 'Tá do phasfhocal reatha mícheart',
         'dumbpwd'          => 'Tá an focal faire sin ró-choitianta.',
-        "statuslabel_type" => "Ní mór duit cineál lipéad stádas bailí a roghnú",
+        'statuslabel_type' => 'Ní mór duit cineál lipéad stádas bailí a roghnú',
     ],
 
     /*
@@ -134,4 +135,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

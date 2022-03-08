@@ -14,8 +14,7 @@ use App\Models\Manufacturer;
  use App\Models\Supplier;
  use App\Models\User;
 
-
- /**
+/**
  * Inherited Methods
  * @method void wantToTest($text)
  * @method void wantTo($text)
@@ -29,33 +28,32 @@ use App\Models\Manufacturer;
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
  *
  * @SuppressWarnings(PHPMD)
-*/
+ */
 class FunctionalTester extends \Codeception\Actor
 {
     use _generated\FunctionalTesterActions;
 
-   /**
-    * Define custom actions here
-    */
-
+    /**
+     * Define custom actions here
+     */
     public function getCompanyId()
     {
-       return Company::inRandomOrder()->first()->id;
+        return Company::inRandomOrder()->first()->id;
     }
 
     public function getCategoryId()
     {
-       return Category::inRandomOrder()->first()->id;
+        return Category::inRandomOrder()->first()->id;
     }
 
     public function getManufacturerId()
     {
-       return Manufacturer::inRandomOrder()->first()->id;
+        return Manufacturer::inRandomOrder()->first()->id;
     }
 
     public function getLocationId()
     {
-       return Location::inRandomOrder()->first()->id;
+        return Location::inRandomOrder()->first()->id;
     }
 
     /**
@@ -63,7 +61,7 @@ class FunctionalTester extends \Codeception\Actor
      */
     public function getAccessoryId()
     {
-      return Accessory::inRandomOrder()->first()->id;
+        return Accessory::inRandomOrder()->first()->id;
     }
 
     /**

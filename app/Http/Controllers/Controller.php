@@ -19,6 +19,7 @@
  * etc have been included in this documentation (excluding vendors, Laravel core, etc)
  * for simplicity.
  */
+
 namespace App\Http\Controllers;
 
 use Auth;

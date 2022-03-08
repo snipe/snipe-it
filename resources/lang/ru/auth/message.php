@@ -7,13 +7,13 @@ return array(
     'account_not_activated'  => 'Эта учетная запись не активирована.',
     'account_suspended'      => 'Эта учетная запись приостановлена.',
     'account_banned'         => 'Эта учетная запись заблокирована.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'throttle'               => 'Слишком много неудачных попыток входа. Пожалуйста, попробуйте через :minutes минут.',
 
     'two_factor' => array(
-        'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
+        'already_enrolled'      => 'Ваше устройство уже зарегистрировано.',
+        'success'               => 'Вы успешно вошли.',
+        'code_required'         => 'Требуется Двух-Факторный код подтверждения.',
+        'invalid_code'          => 'Недействительный Двух-Факторный код подтверждения.',
     ),
 
     'signin' => array(
@@ -22,8 +22,8 @@ return array(
     ),
 
     'logout' => array(
-        'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
+        'error'   => 'При попытке входа возникла проблема, пожалуйста попробуйте позже.',
+        'success' => 'Вы успешно вышли из системы.',
     ),
 
     'signup' => array(
@@ -33,7 +33,7 @@ return array(
 
     'forgot-password' => array(
         'error'   => 'При попытке сброса возникла проблема, пожалуйста попробуйте позже.',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
+        'success' => 'Если данный адрес электронной почты существует в нашей системе - будет отправлено письмо с возможностью восстановление пароля.',
     ),
 
     'forgot-password-confirm' => array(

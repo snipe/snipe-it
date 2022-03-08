@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'ألغى المستخدم طلب عنصر على الموقع',
     'a_user_requested' => 'طلب مستخدم عنصر على الموقع',
     'accessory_name' => 'اسم الملحق:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'أصل:',
     'asset_name' => 'اسم الأصل:',
     'asset_requested' => 'تم طلب مادة العرض',
-    'asset_tag' => 'ترميز الأصل:',
+    'asset_tag' => 'وسم الأصل',
     'assigned_to' => 'عينت الى',
     'best_regards' => 'أفضل التحيات،',
     'canceled' => 'ملغى:',
@@ -59,7 +59,7 @@ return array(
     'test_mail_text' => 'يعتبر هذا اختبارا من نظام إدارة الأصول Snipe-IT. إذا كنت حصلت على هذا، فان البريد يعمل :)',
     'the_following_item' => 'تم ادخال العنصر التالي: ',
     'low_inventory_alert' => 'هنالك :count عناصر أقل من الحد الأدنى للمخزون أول سوف تصبح أقل منه قريباً.',
-    'assets_warrantee_alert' => 'هنالك :count أصل سوف تنتهي فترة الضمان الخاصة به في الأيام :threshold القادمة.| هنالك :count أصول سوف تنتهي فترة الضمان الخاصة بهم في الأيام :threshold القادمة.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'هنالك :count رخص سوف تنتهي في الأيام :threshold القادمة.',
     'to_reset' => 'لإعادة تعيين كلمة مرور على :web، رجاءا أكمل هذا النموذج:',
     'type' => 'اكتب',
@@ -69,11 +69,11 @@ return array(
     'welcome' => 'مرحباً :name',
     'welcome_to' => 'مرحبا بكم في :web!',
     'your_credentials' => 'أوراق اعتماد قنص-إيت الخاص بك',
-    'Accessory_Checkin_Notification' => 'Accessory checked in',
-    'Asset_Checkin_Notification' => 'Asset checked in',
-    'License_Checkin_Notification' => 'License checked in',
-    'Expected_Checkin_Report' => 'Expected asset checkin report',
+    'Accessory_Checkin_Notification' => 'تم تسحيل الملحق',
+    'Asset_Checkin_Notification' => 'تم تسجيل الأصل',
+    'License_Checkin_Notification' => 'تم تسجيل الرخصة',
+    'Expected_Checkin_Report' => 'تقرير تسجيل الأصول المتوقع',
     'Expected_Checkin_Notification' => 'تذكير: تاريخ تحقق :name يقترب من الموعد النهائي',
     'Expected_Checkin_Date' => 'من المقرر أن يتم التحقق من الأصول التي تم إخراجها إليك في :date',
-    'your_assets' => 'عرض الأصول الخاصة بك'
-);
+    'your_assets' => 'عرض الأصول الخاصة بك',
+];

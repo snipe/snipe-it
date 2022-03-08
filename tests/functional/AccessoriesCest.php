@@ -1,15 +1,14 @@
 <?php
 
-
 class AccessoriesCest
 {
     public function _before(FunctionalTester $I)
     {
-         $I->amOnPage('/login');
-         $I->fillField('username', 'admin');
-         $I->fillField('password', 'password');
-         $I->click('Login');
-         $I->seeAuthentication();
+        $I->amOnPage('/login');
+        $I->fillField('username', 'admin');
+        $I->fillField('password', 'password');
+        $I->click('Login');
+        $I->seeAuthentication();
     }
 
     // tests
@@ -25,7 +24,7 @@ class AccessoriesCest
 
     public function failsEmptyValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with blank elements");
+        $I->wantTo('Test Validation Fails with blank elements');
         $I->amOnPage('/accessories/create');
         $I->seeResponseCodeIs(200);
         $I->click('Save');
@@ -37,7 +36,7 @@ class AccessoriesCest
 
     public function failsShortValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with short name");
+        $I->wantTo('Test Validation Fails with short name');
         $I->amOnPage('/accessories/create');
         $I->seeResponseCodeIs(200);
         $I->fillField('name', 't2');
@@ -53,7 +52,7 @@ class AccessoriesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $accessory = factory(App\Models\Accessory::class)->states('apple-bt-keyboard')->make();
+        $accessory = \App\Models\Accessory::factory()->appleBtKeyboard()->make();
         $values = [
             'category_id'   => $accessory->category_id,
             'location_id'      => $accessory->location_id,
@@ -65,7 +64,7 @@ class AccessoriesCest
             'qty'           => $accessory->qty,
         ];
 
-        $I->wantTo("Test Validation Succeeds");
+        $I->wantTo('Test Validation Succeeds');
         $I->amOnPage('/accessories/create');
         $I->seeResponseCodeIs(200);
 
@@ -79,7 +78,7 @@ class AccessoriesCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete an accessory');
-        $I->sendDelete( route('accessories.destroy', $I->getAccessoryId() ), ['_token' => csrf_token()] );
+        $I->sendDelete(route('accessories.destroy', $I->getAccessoryId()), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);
     }
 }

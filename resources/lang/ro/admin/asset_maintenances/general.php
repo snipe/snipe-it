@@ -8,7 +8,7 @@
         'repair'             => 'Reparație',
         'maintenance'        => 'întreținere',
         'upgrade'            => 'Actualizare',
-        'calibration'        => 'Calibration',
-        'software_support'   => 'Software Support',
-        'hardware_support'   => 'Hardware Support',
+        'calibration'        => 'Calibrare',
+        'software_support'   => 'Suport software',
+        'hardware_support'   => 'Suport hardware',
     ];

@@ -37,12 +37,13 @@ return [
     |
     */
    
-    'supportsCredentials' => false,
-    'allowedOrigins' => $allowed_origins,
-    'allowedOriginsPatterns' => [],
-    'allowedHeaders' => ['*'],
-    'allowedMethods' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-    'exposedHeaders' => [],
-    'maxAge' => 0,
+    'supports_credentials' => false,
+    'allowed_origins' => $allowed_origins,
+    'allowed_origins_patterns' => [],
+    'allowed_headers' => ['*'],
+    'allowed_methods' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    'exposed_headers' => [],
+    'max_age' => 0,
+    'paths' => ['api/*', 'sanctum/csrf-cookie'],
 
 ];

@@ -21,10 +21,10 @@ class CheckinAccessoryNotification extends Notification
      */
     public function __construct(Accessory $accessory, $checkedOutTo, User $checkedInby, $note)
     {
-        $this->item     = $accessory;
-        $this->target   = $checkedOutTo;
-        $this->admin    = $checkedInby;
-        $this->note     = $note;
+        $this->item = $accessory;
+        $this->target = $checkedOutTo;
+        $this->admin = $checkedInby;
+        $this->note = $note;
         $this->settings = Setting::getSettings();
         \Log::debug('Constructor for notification fired');
     }
@@ -43,16 +43,14 @@ class CheckinAccessoryNotification extends Notification
             $notifyBy[] = 'slack';
         }
 
-        if (Setting::getSettings()->slack_endpoint!='') {
+        if (Setting::getSettings()->slack_endpoint != '') {
             $notifyBy[] = 'slack';
         }
-
 
         /**
          * Only send notifications to users that have email addresses
          */
         if ($this->target instanceof User && $this->target->email != '') {
-
             \Log::debug('The target is a user');
 
             /**
@@ -63,16 +61,12 @@ class CheckinAccessoryNotification extends Notification
                 $notifyBy[] = 'mail';
             }
 
-
-
-
-
             /**
              * Send an email if the asset requires acceptance,
              * so the user can accept or decline the asset
              */
             if ($this->item->requireAcceptance()) {
-               \Log::debug('This accessory requires acceptance');
+                \Log::debug('This accessory requires acceptance');
             }
 
             /**
@@ -88,7 +82,6 @@ class CheckinAccessoryNotification extends Notification
             if ($this->item->checkin_email()) {
                 \Log::debug('This accessory has a checkin_email()');
             }
-
         }
 
         \Log::debug('checkin_email on this category is '.$this->item->checkin_email());
@@ -98,12 +91,11 @@ class CheckinAccessoryNotification extends Notification
 
     public function toSlack()
     {
-
         $target = $this->target;
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
-        $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot' ;
+        $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot';
 
         $fields = [
             'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
@@ -119,6 +111,7 @@ class CheckinAccessoryNotification extends Notification
                     ->content($note);
             });
     }
+
     /**
      * Get the mail representation of the notification.
      *
@@ -128,6 +121,7 @@ class CheckinAccessoryNotification extends Notification
     public function toMail()
     {
         \Log::debug('to email called');
+
         return (new MailMessage)->markdown('notifications.markdown.checkin-accessory',
             [
                 'item'          => $this->item,
@@ -136,6 +130,5 @@ class CheckinAccessoryNotification extends Notification
                 'target'        => $this->target,
             ])
             ->subject(trans('mail.Accessory_Checkin_Notification'));
-
     }
 }

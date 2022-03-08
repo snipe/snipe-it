@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Oznaka sredstva',
     'asset_model'       => 'Model',
-    'book_value'  	=> 'Vrednost',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'Prejeto/Izdano',
     'checkout_date' => 'Datum Izdaje',
     'checkoutto' 	=> 'Izdano',
+    'current_value' => 'Current Value',
     'diff' 			=> 'Razlika',
     'dl_csv' 		=> 'Prenesi CSV',
     'eol' 			=> 'EOL',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> 'Serijska številka',
     'status'   		=> 'Status',
     'title'      	=> 'Sredstvo ',
-    'image'		=> 'Slika naprave',
+    'image'		    => 'Slika naprave',
     'days_without_acceptance' => 'Dnevi brez sprejema',
-    'monthly_depreciation' => 'Monthly Depreciation'
-
-);
+    'monthly_depreciation' => 'Mesečna amortizacija',
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

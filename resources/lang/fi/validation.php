@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
         'numeric' => ':attribute ei saa olla suurempi kuin :max.',
         'file'    => ':attribute ei saa olla suurempi kuin :max kilotavua.',
         'string'  => ':attribute ei saa olla suurempi kuin :max merkkiä.',
-        'array'   => ':attribute ei saa olla enempää kuin :max kohdetta.',
+        'array'   => ':attribute ei saa olla enempää kuin :max nimikettä.',
     ],
     'mimes'                => ':attribute tulee olla tiedosto jonka tyyppi on: :values.',
     'mimetypes'            => ':attribute on oltava tyyppiä tyyppi: :values.',
@@ -62,8 +62,9 @@ return array(
         'numeric' => ':attribute tulee olla vähintään :min.',
         'file'    => ':attribute tulee olla vähintään :min kilotavua.',
         'string'  => ':attribute tulee olla vähintään :min merkkiä.',
-        'array'   => ':attribute on oltava vähintään :min kohteet.',
+        'array'   => ':attribute on oltava vähintään :min nimikettä.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'Valittu :attribute on virheellinen.',
     'numeric'              => ':attribute tulee olla numero.',
     'present'              => ':attribute kentän on oltava määritettynä.',
@@ -81,14 +82,15 @@ return array(
         'numeric' => ':attribute tulee olla :size.',
         'file'    => ':attribute tulee olla :size kilotavua.',
         'string'  => ':attribute tulee olla :size merkkiä.',
-        'array'   => ':attribute -kenttän pitää sisältää :size kohdetta.',
+        'array'   => ':attribute -kentän pitää sisältää :size nimikettä.',
     ],
     'string'               => ':attribute on oltava merkkijono.',
     'timezone'             => ':attribute tulee olla kelvollinen verkkoalue.',
     'unique'               => ':attribute on jo käytössä.',
     'uploaded'             => ':attribute -kenttää ei onnistuttu lähettämään.',
     'url'                  => ':attribute muotoilu on virheellinen.',
-    "unique_undeleted"     => ":attribute on oltava ainutlaatuinen.",
+    'unique_undeleted'     => ':attribute on oltava ainutlaatuinen.',
+    'non_circular'         => ':attribute ei saa luoda kehäviittausta.',
 
     /*
     |--------------------------------------------------------------------------
@@ -100,7 +102,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -114,11 +115,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => ":attribute -kenttä sisältää merkin, jota ei sallita.",
-        "email_array"      => "Yksi tai useampi sähköpostiosoite on virheellinen.",
-        "hashed_pass"      => "Nykyinen salasanasi on virheellinen",
+        'alpha_space' => ':attribute -kenttä sisältää merkin, jota ei sallita.',
+        'email_array'      => 'Yksi tai useampi sähköpostiosoite on virheellinen.',
+        'hashed_pass'      => 'Nykyinen salasanasi on virheellinen',
         'dumbpwd'          => 'Salasana on liian yleinen.',
-        "statuslabel_type" => "Sinun on valittava kelvollinen tilamerkintätyyppi",
+        'statuslabel_type' => 'Sinun on valittava kelvollinen tilamerkintätyyppi',
     ],
 
     /*
@@ -134,4 +135,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

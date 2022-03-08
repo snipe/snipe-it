@@ -13,14 +13,13 @@ class CreateOauthPersonalAccessClientsTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('oauth_personal_access_clients')) {
+        if (! Schema::hasTable('oauth_personal_access_clients')) {
             Schema::create('oauth_personal_access_clients', function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->unsignedBigInteger('client_id');
                 $table->timestamps();
             });
         }
-
     }
 
     /**
@@ -30,6 +29,6 @@ class CreateOauthPersonalAccessClientsTable extends Migration
      */
     public function down()
     {
-            Schema::dropIfExists('oauth_personal_access_clients');
+        Schema::dropIfExists('oauth_personal_access_clients');
     }
 }

@@ -1,24 +1,23 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class Alpha042Release extends Migration {
+class Alpha042Release extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        $prefix = DB::getTablePrefix();
+        Schema::table('assets', function (Blueprint $table) {
+            //
+        });
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		$prefix = DB::getTablePrefix();
-		Schema::table('assets', function(Blueprint $table)
-		{
-			//
-		});
-
-                // DB::statement('UPDATE '.$prefix.'assets SET status_id="0" where status_id is null');
+        // DB::statement('UPDATE '.$prefix.'assets SET status_id="0" where status_id is null');
                 // DB::statement('UPDATE '.$prefix.'assets SET purchase_cost=0 where purchase_cost is null');
                 // DB::statement('UPDATE '.$prefix.'models SET eol=0 where eol is null');
                 // DB::statement('UPDATE '.$prefix.'users SET location_id=0 where location_id is null');
@@ -26,8 +25,6 @@ class Alpha042Release extends Migration {
                 // DB::statement('UPDATE '.$prefix.'locations SET state=" " where state is null');
                 // DB::statement('UPDATE '.$prefix.'models SET manufacturer_id="0" where manufacturer_id is null');
                 // DB::statement('UPDATE '.$prefix.'models SET category_id="0" where category_id is null');
-
-
 
                 // DB::statement('ALTER TABLE '.$prefix.'assets '
                 //     . 'MODIFY COLUMN name VARCHAR(255) NULL , '
@@ -62,19 +59,17 @@ class Alpha042Release extends Migration {
                 //     . 'MODIFY COLUMN first_name VARCHAR(255) NOT NULL , '
                 //     . 'MODIFY COLUMN last_name VARCHAR(255) NOT NULL , '
                 //     . 'MODIFY COLUMN location_id INT(11) NOT NULL');
-	}
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::table('assets', function(Blueprint $table)
-		{
-			//
-		});
-	}
-
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('assets', function (Blueprint $table) {
+            //
+        });
+    }
 }

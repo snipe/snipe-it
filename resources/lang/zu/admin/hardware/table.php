@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Ithegi lefa',
     'asset_model'       => 'Isibonelo',
-    'book_value'  	=> 'Inani',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'In / Out',
     'checkout_date' => 'Usuku lokuhlola',
     'checkoutto' 	=> 'Ikhishiwe',
+    'current_value' => 'Current Value',
     'diff' 			=> 'Ukuhluka',
     'dl_csv' 		=> 'Landa i-CSV',
     'eol' 			=> 'I-EOL',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> 'Serial',
     'status'   		=> 'Isimo',
     'title'      	=> 'Impahla',
-    'image'		=> 'Isithombe sedivayisi',
+    'image'		    => 'Isithombe sedivayisi',
     'days_without_acceptance' => 'Izinsuku Ngaphandle Kwemukelwa',
-    'monthly_depreciation' => 'Monthly Depreciation'
-
-);
+    'monthly_depreciation' => 'Monthly Depreciation',
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

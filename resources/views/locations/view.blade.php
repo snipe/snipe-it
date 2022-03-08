@@ -9,10 +9,6 @@
 @parent
 @stop
 
-@section('header_right')
-<a href="{{ route('locations.edit', ['location' => $location->id]) }}" class="btn btn-sm btn-primary pull-right">{{ trans('admin/locations/table.update') }} </a>
-@stop
-
 {{-- Page content --}}
 @section('content')
 
@@ -86,6 +82,71 @@
             </div><!-- /.box-body -->
           </div> <!--/.box-->
 
+      <div class="box box-default">
+        <div class="box-header with-border">
+          <div class="box-heading">
+            <h2 class="box-title">{{ trans('general.accessories') }}</h2>
+          </div>
+        </div>
+        <div class="box-body">
+              <div class="table table-responsive">
+
+                  <table
+                          data-columns="{{ \App\Presenters\AccessoryPresenter::dataTableLayout() }}"
+                          data-cookie-id-table="accessoriesListingTable"
+                          data-pagination="true"
+                          data-id-table="accessoriesListingTable"
+                          data-search="true"
+                          data-side-pagination="server"
+                          data-show-columns="true"
+                          data-show-export="true"
+                          data-show-refresh="true"
+                          data-sort-order="asc"
+                          id="accessoriesListingTable"
+                          class="table table-striped snipe-table"
+                          data-url="{{route('api.accessories.index', ['location_id' => $location->id]) }}"
+                          data-export-options='{
+                              "fileName": "export-locations-{{ str_slug($location->name) }}-accessories-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
+                  </table>
+
+              </div><!-- /.table-responsive -->
+            </div><!-- /.box-body -->
+          </div> <!--/.box-->
+
+      <div class="box box-default">
+        <div class="box-header with-border">
+          <div class="box-heading">
+            <h2 class="box-title">{{ trans('general.consumables') }}</h2>
+          </div>
+        </div>
+        <div class="box-body">
+              <div class="table table-responsive">
+
+                  <table
+                          data-columns="{{ \App\Presenters\ConsumablePresenter::dataTableLayout() }}"
+                          data-cookie-id-table="consumablesListingTable"
+                          data-pagination="true"
+                          data-id-table="consumablesListingTable"
+                          data-search="true"
+                          data-side-pagination="server"
+                          data-show-columns="true"
+                          data-show-export="true"
+                          data-show-refresh="true"
+                          data-sort-order="asc"
+                          id="consumablesListingTable"
+                          class="table table-striped snipe-table"
+                          data-url="{{route('api.consumables.index', ['location_id' => $location->id]) }}"
+                          data-export-options='{
+                              "fileName": "export-locations-{{ str_slug($location->name) }}-consumables-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
+                  </table>
+
+              </div><!-- /.table-responsive -->
+            </div><!-- /.box-body -->
+          </div> <!--/.box-->
 
       <div class="box box-default">
           <div class="box-header with-border">
@@ -158,16 +219,21 @@
           </div>
         @endif
 
-
       </div>
 
+		<div class="col-md-12">
+			<a href="{{ route('locations.edit', ['location' => $location->id]) }}" style="width: 50%;" class="btn btn-sm btn-primary pull-left">{{ trans('admin/locations/table.update') }} </a>
+		</div>
+        <div class="col-md-12" style="padding-top: 5px;">
+			<a href="{{ route('locations.print_assigned', ['locationId' => $location->id]) }}" style="width: 50%;" class="btn btn-sm btn-default pull-left">{{ trans('admin/locations/table.print_assigned') }} </a>
+		</div>
+		<div class="col-md-12" style="padding-top: 5px;">
+			<a href="{{ route('locations.print_all_assigned', ['locationId' => $location->id]) }}" style="width: 50%;" class="btn btn-sm btn-default pull-left">{{ trans('admin/locations/table.print_all_assigned') }} </a>
+		</div>
+		
+  </div>
 
   </div>
-</div>
-
-
-
-
 </div>
 
 @stop

@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Šis vartotojas gali prisijungti',
     'activated_disabled_help_text' => 'Jūs negalite keisti savosios pąskyros aktyvacijos statuso.',
     'assets_user'       => 'Priskirta įranga :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Redaguoti naudotoją',
     'filetype_info'     => 'Leidžiami dokumentų formatai png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar.',
     'history_user'      => ':name naudotojo istorija',
-	'info'				=> 'Informacija',
+    'info'				=> 'Informacija',
     'restore_user'		=> 'Spauskite čia norėdami juos atkurti.',
     'last_login'        => 'Paskutinis prisijungimas',
     'ldap_config_text'  => 'LDAP konfigūracijos parametrus galite rasti Administratorius> Nustatymai. Pasirinkta vieta (pasirinktinai) bus nustatyta visiems importuojamiems vartotojams.',
@@ -25,4 +24,14 @@ return array(
     'two_factor_admin_optin_help' => 'Dabartiniai jūsų nustatymai leidžia pasirinkti dviejų veiksnių autentifikavimą.',
     'two_factor_enrolled' => 'Įrašytas 2FA įrenginys',
     'two_factor_active'   => '2FA aktyvus',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

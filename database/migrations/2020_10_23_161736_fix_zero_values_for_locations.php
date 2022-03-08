@@ -1,10 +1,10 @@
 <?php
 
+use App\Models\Asset;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\User;
-use App\Models\Asset;
 
 class FixZeroValuesForLocations extends Migration
 {
@@ -23,7 +23,6 @@ class FixZeroValuesForLocations extends Migration
 
         App\Models\User::where('location_id', '=', '0')
             ->update(['location_id' => null]);
-
     }
 
     /**

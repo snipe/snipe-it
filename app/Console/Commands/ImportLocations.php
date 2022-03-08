@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Location;
 use Illuminate\Console\Command;
 use League\Csv\Reader;
-use App\Models\Location;
 
 class ImportLocations extends Command
 {
@@ -39,10 +39,8 @@ class ImportLocations extends Command
      */
     public function handle()
     {
-
-
-        if (!ini_get("auto_detect_line_endings")) {
-            ini_set("auto_detect_line_endings", '1');
+        if (! ini_get('auto_detect_line_endings')) {
+            ini_set('auto_detect_line_endings', '1');
         }
 
         $filename = $this->argument('filename');
@@ -53,18 +51,17 @@ class ImportLocations extends Command
 
         // Import parent location names first if they don't exist
         foreach ($results as $parent_index => $parent_row) {
-
             if (array_key_exists('Parent Name', $parent_row)) {
                 $parent_name = trim($parent_row['Parent Name']);
                 if (array_key_exists('Name', $parent_row)) {
-                    $this->info('- Parent: ' . $parent_name . ' in row as: ' . trim($parent_row['Parent Name']));
+                    $this->info('- Parent: '.$parent_name.' in row as: '.trim($parent_row['Parent Name']));
                 }
 
                 // Save parent location name
                 // This creates a sort of name-stub that we'll update later on in this script
-                $parent_location = Location::firstOrCreate(array('name' => $parent_name));
+                $parent_location = Location::firstOrCreate(['name' => $parent_name]);
                 if (array_key_exists('Name', $parent_row)) {
-                    $this->info('Parent for ' . $parent_row['Name'] . ' is ' . $parent_name . '. Attempting to save ' . $parent_name . '.');
+                    $this->info('Parent for '.$parent_row['Name'].' is '.$parent_name.'. Attempting to save '.$parent_name.'.');
                 }
 
                 // Check if the record was updated or created.
@@ -74,18 +71,15 @@ class ImportLocations extends Command
                 } else {
                     $this->info('- Parent location '.$parent_name.' was created.');
                 }
-
             } else {
                 $this->info('- No Parent Name provided, so no parent location will be created.');
             }
-
         }
 
         $this->info('----- Parents Created.... backfilling additional details... --------');
         // Loop through ALL records and add/update them if there are additional fields
         // besides name
         foreach ($results as $index => $row) {
-
             if (array_key_exists('Parent Name', $row)) {
                 $parent_name = trim($row['Parent Name']);
             } else {
@@ -94,11 +88,12 @@ class ImportLocations extends Command
 
             // Set the location attributes to save
             if (array_key_exists('Name', $row)) {
-                $location = Location::firstOrCreate(array('name' => trim($row['Name'])));
+                $location = Location::firstOrCreate(['name' => trim($row['Name'])]);
                 $location->name = trim($row['Name']);
                 $this->info('Checking location: '.$location->name);
             } else {
                 $this->error('Location name is required and is missing from at least one row in this dataset. Check your CSV for extra trailing rows and try again.');
+
                 return false;
             }
             if (array_key_exists('Currency', $row)) {
@@ -126,7 +121,6 @@ class ImportLocations extends Command
                 $location->ldap_ou = trim($row['OU']);
             }
 
-
             // If a parent name is provided, we created it earlier in the script,
             // so let's grab that ID
             if ($parent_name) {
@@ -142,21 +136,15 @@ class ImportLocations extends Command
                 // Check if the record was updated or created.
                 // This is mostly for clearer debugging.
                 if ($location->exists) {
-                    $this->info('Location ' . $location->name . ' already exists. Updating...');
+                    $this->info('Location '.$location->name.' already exists. Updating...');
                 } else {
                     $this->info('- Location '.$location->name.' was created. ');
                 }
 
-            // If there's a validation error, display that
+                // If there's a validation error, display that
             } else {
-                $this->error('- Non-parent Location '.$location->name.' could not be created: '.$location->getErrors() );
+                $this->error('- Non-parent Location '.$location->name.' could not be created: '.$location->getErrors());
             }
-
-
-
-
         }
-
-
     }
 }

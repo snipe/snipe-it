@@ -7,13 +7,13 @@ return array(
     'account_not_activated'  => 'Denne brugerkonto er ikke aktiveret.',
     'account_suspended'      => 'Denne brugerkonto er suspenderet.',
     'account_banned'         => 'Denne brugerkonto er blokeret.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'throttle'               => 'For mange mislykkede loginforsøg. Prøv igen om : minutter minutter.',
 
     'two_factor' => array(
-        'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
+        'already_enrolled'      => 'Din enhed er allerede tilmeldt.',
+        'success'               => 'Du er blevet logget ind.',
+        'code_required'         => 'To-faktor-kode er påkrævet.',
+        'invalid_code'          => 'To-faktor kode er ugyldig.',
     ),
 
     'signin' => array(
@@ -22,8 +22,8 @@ return array(
     ),
 
     'logout' => array(
-        'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
+        'error'   => 'Der opstod et problem under forsøget på at logge dig ud, prøv venligst igen.',
+        'success' => 'Du har logget ud.',
     ),
 
     'signup' => array(
@@ -33,7 +33,7 @@ return array(
 
     'forgot-password' => array(
         'error'   => 'Der opstod et problem, ved forsøg på at nulstille din adgangkode, prøv igen.',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
+        'success' => 'Hvis e-mail-adressen findes i vores system, er en mail med gendannelse af adgangskode blevet sendt.',
     ),
 
     'forgot-password-confirm' => array(

@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class RenameModelnoToModelNumber extends Migration
 {
@@ -28,7 +28,6 @@ class RenameModelnoToModelNumber extends Migration
         Schema::table('models', function (Blueprint $table) {
             //
             $table->renameColumn('model_number', 'modelno');
-
         });
     }
 }

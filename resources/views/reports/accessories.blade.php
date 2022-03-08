@@ -36,6 +36,7 @@
                             <tr>
                                 <th class="col-sm-1">{{ trans('admin/companies/table.title') }}</th>
                                 <th class="col-sm-1">{{ trans('admin/accessories/table.title') }}</th>
+                                <th class="col-sm-1">{{ trans('general.model_no') }}</th>
                                 <th class="col-sm-1">{{ trans('admin/accessories/general.total') }}</th>
                                 <th class="col-sm-1">{{ trans('admin/accessories/general.remaining') }}</th>
                             </tr>
@@ -45,6 +46,7 @@
                                 <tr>
                                     <td>{{ is_null($accessory->company) ? '' : $accessory->company->name }}</td>
                                     <td>{{ $accessory->name }}</td>
+                                    <td>{{ $accessory->model_number }}</td>
                                     <td>{{ $accessory->qty }}</td>
                                     <td>{{ $accessory->numRemaining() }}</td>
                                 </tr>

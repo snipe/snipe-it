@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
@@ -9,28 +10,28 @@ use Illuminate\Support\Facades\Storage;
 
 class AccessoriesTransformer
 {
-
-    public function transformAccessories (Collection $accessories, $total)
+    public function transformAccessories(Collection $accessories, $total)
     {
-        $array = array();
+        $array = [];
         foreach ($accessories as $accessory) {
             $array[] = self::transformAccessory($accessory);
         }
+
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
-    public function transformAccessory (Accessory $accessory)
+    public function transformAccessory(Accessory $accessory)
     {
         $array = [
             'id' => $accessory->id,
             'name' => e($accessory->name),
             'image' => ($accessory->image) ? Storage::disk('public')->url('accessories/'.e($accessory->image)) : null,
-            'company' => ($accessory->company) ? ['id' => $accessory->company->id,'name'=> e($accessory->company->name)] : null,
-            'manufacturer' => ($accessory->manufacturer) ? ['id' => $accessory->manufacturer->id,'name'=> e($accessory->manufacturer->name)] : null,
-            'supplier' => ($accessory->supplier) ? ['id' => $accessory->supplier->id,'name'=> e($accessory->supplier->name)] : null,
+            'company' => ($accessory->company) ? ['id' => $accessory->company->id, 'name'=> e($accessory->company->name)] : null,
+            'manufacturer' => ($accessory->manufacturer) ? ['id' => $accessory->manufacturer->id, 'name'=> e($accessory->manufacturer->name)] : null,
+            'supplier' => ($accessory->supplier) ? ['id' => $accessory->supplier->id, 'name'=> e($accessory->supplier->name)] : null,
             'model_number' => ($accessory->model_number) ? e($accessory->model_number) : null,
-            'category' => ($accessory->category) ? ['id' => $accessory->category->id,'name'=> e($accessory->category->name)] : null,
-            'location' => ($accessory->location) ? ['id' => $accessory->location->id,'name'=> e($accessory->location->name)] : null,
+            'category' => ($accessory->category) ? ['id' => $accessory->category->id, 'name'=> e($accessory->category->name)] : null,
+            'location' => ($accessory->location) ? ['id' => $accessory->location->id, 'name'=> e($accessory->location->name)] : null,
             'notes' => ($accessory->notes) ? e($accessory->notes) : null,
             'qty' => ($accessory->qty) ? (int) $accessory->qty : null,
             'purchase_date' => ($accessory->purchase_date) ? Helper::getFormattedDateObject($accessory->purchase_date, 'date') : null,
@@ -47,7 +48,7 @@ class AccessoriesTransformer
         $permissions_array['available_actions'] = [
             'checkout' => Gate::allows('checkout', Accessory::class),
             'checkin' =>  false,
-            'update' => Gate::allows('update', Accessory::class) ,
+            'update' => Gate::allows('update', Accessory::class),
             'delete' => Gate::allows('delete', Accessory::class),
         ];
 
@@ -62,13 +63,9 @@ class AccessoriesTransformer
         return $array;
     }
 
-
-    public function transformCheckedoutAccessory ($accessory, $accessory_users, $total)
+    public function transformCheckedoutAccessory($accessory, $accessory_users, $total)
     {
-
-
-        $array = array();
-
+        $array = [];
 
         foreach ($accessory_users as $user) {
             \Log::debug(print_r($user->pivot, true));
@@ -82,17 +79,13 @@ class AccessoriesTransformer
                 'first_name'=> e($user->first_name),
                 'last_name'=> e($user->last_name),
                 'employee_number' =>  e($user->employee_num),
-                'checkout_notes' => $user->pivot->note,
+                'checkout_notes' => e($user->pivot->note),
                 'last_checkout' => Helper::getFormattedDateObject($user->pivot->created_at, 'datetime'),
                 'type' => 'user',
-                'available_actions' => ['checkin' => true]
+                'available_actions' => ['checkin' => true],
             ];
-
         }
 
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
-
-
-
 }

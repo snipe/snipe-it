@@ -57,7 +57,7 @@
     <label for="name" class="col-md-3 control-label">{{ trans('admin/groups/titles.group_name') }}</label>
     <div class="col-md-6 required">
         <input class="form-control" type="text" name="name" id="name" value="{{ old('name', $group->name) }}" />
-        {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+        {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
 </div>
 <div class="col-md-12">
@@ -65,9 +65,9 @@
     <table class="table table-striped permissions">
         <thead>
         <tr class="permissions-row">
-            <th class="col-md-5">Permission</th>
-            <th class="col-md-1">Grant</th>
-            <th class="col-md-1">Deny</th>
+            <th class="col-md-5">{{ trans('admin/groups/titles.permission')}}</th>
+            <th class="col-md-1">{{ trans('admin/groups/titles.grant')}}</th>
+            <th class="col-md-1">{{ trans('admin/groups/titles.deny')}}</th>
         </tr>
         </thead>
         @foreach ($permissions as $area => $area_permission)
@@ -87,11 +87,11 @@
                             @endunless
                     </td>
                     <td class="col-md-1 permissions-item">
-                        <label for="{{ 'permission['.$localPermission['permission'].']' }}"><span class="sr-only">Allow {{ 'permission['.$localPermission['permission'].']' }}</span></label>
+                        <label for="{{ 'permission['.$localPermission['permission'].']' }}"><span class="sr-only">{{ trans('admin/groups/titles.allow')}} {{ 'permission['.$localPermission['permission'].']' }}</span></label>
                         {{ Form::radio('permission['.$localPermission['permission'].']', '1',(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '1' : null),['value'=>"grant", 'class'=>'minimal', 'aria-label'=> 'permission['.$localPermission['permission'].']']) }}
                     </td>
                     <td class="col-md-1 permissions-item">
-                        <label for="{{ 'permission['.$localPermission['permission'].']' }}"><span class="sr-only">Deny {{ 'permission['.$localPermission['permission'].']' }}</span></label>
+                        <label for="{{ 'permission['.$localPermission['permission'].']' }}"><span class="sr-only">{{ trans('admin/groups/titles.deny')}} {{ 'permission['.$localPermission['permission'].']' }}</span></label>
                         {{ Form::radio('permission['.$localPermission['permission'].']', '0',(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '0' : null),['value'=>"grant", 'class'=>'minimal', 'aria-label'=> 'permission['.$localPermission['permission'].']']) }}
                     </td>
                 </tr>
@@ -108,11 +108,11 @@
 
                     </td>
                     <td class="col-md-1 permissions-item" style="vertical-align: bottom">
-                        <label for="{{ $area }}"><span class="sr-only">Allow {{ $area }}</span></label>
+                        <label for="{{ $area }}"><span class="sr-only">{{ trans('admin/groups/titles.allow')}} {{ $area }}</span></label>
                         {{ Form::radio("$area", '1',false,['value'=>"grant", 'class'=>'minimal', 'data-checker-group' => str_slug($area), 'aria-label'=> $area]) }}
                     </td>
                     <td class="col-md-1 permissions-item">
-                        <label for="{{ $area }}"><span class="sr-only">Deny {{ $area }}</span></label>
+                        <label for="{{ $area }}"><span class="sr-only">{{ trans('admin/groups/titles.deny')}} {{ $area }}</span></label>
                         {{ Form::radio("$area", '0',false,['value'=>"deny", 'class'=>'minimal', 'data-checker-group' => str_slug($area), 'aria-label'=> $area]) }}
                     </td>
                 </tr>
@@ -128,11 +128,11 @@
                                 {{ $this_permission['label'] }}
                         </td>
                         <td class="col-md-1 permissions-item">
-                            <label for="{{ 'permission['.$this_permission['permission'].']' }}"><span class="sr-only">Allow {{ 'permission['.$this_permission['permission'].']' }}</span></label>
+                            <label for="{{ 'permission['.$this_permission['permission'].']' }}"><span class="sr-only">{{ trans('admin/groups/titles.allow')}} {{ 'permission['.$this_permission['permission'].']' }}</span></label>
                             {{ Form::radio('permission['.$this_permission['permission'].']', '1',(array_key_exists($this_permission['permission'], $groupPermissions) ? $groupPermissions[$this_permission['permission'] ] == '1' : null),['class'=>'minimal radiochecker-'.str_slug($area), 'aria-label'=>'permission['.$this_permission['permission'].']']) }}
                         </td>
                         <td class="col-md-1 permissions-item">
-                            <label for="{{ 'permission['.$this_permission['permission'].']' }}"><span class="sr-only">Deny {{ 'permission['.$this_permission['permission'].']' }}</span></label>
+                            <label for="{{ 'permission['.$this_permission['permission'].']' }}"><span class="sr-only">{{ trans('admin/groups/titles.deny')}} {{ 'permission['.$this_permission['permission'].']' }}</span></label>
                             {{ Form::radio('permission['.$this_permission['permission'].']', '0',(array_key_exists($this_permission['permission'], $groupPermissions) ? $groupPermissions[$this_permission['permission'] ] == '0' : null),['class'=>'minimal radiochecker-'.str_slug($area), 'aria-label'=>'permission['.$this_permission['permission'].']']) }}
                         </td>
 

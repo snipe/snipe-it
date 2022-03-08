@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => '该用户可以登录',
     'activated_disabled_help_text' => '您无法编辑自己帐户的激活状态。',
     'assets_user'       => '分配给:name的资产',
@@ -13,16 +12,26 @@ return array(
     'edit'              => '编辑用户',
     'filetype_info'     => '允许的文件类型有： png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar',
     'history_user'      => ':name的历史',
-	'info'				=> '信息',
+    'info'				=> '信息',
     'restore_user'		=> '单击此处可将其还原。',
     'last_login'        => '上一次登陆',
     'ldap_config_text'  => 'LDAP配置在 管理 > 设置。所选位置将为导入的用户所用',
     'print_assigned'    => '打印所有已分配资产',
     'software_user'     => ':name 借走的软件',
-    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
+    'send_email_help'   => '您必须为此用户提供电子邮件地址才能发送他们的凭据。电子邮件凭据只能在用户创建时完成。 密码存储在单向散列中，保存后无法检索。',
     'view_user'         => '查看用户： :name',
     'usercsv'           => 'CSV 档案',
     'two_factor_admin_optin_help' => '您当前的管理员设置允许使用双重认证。 ',
     'two_factor_enrolled' => '双重认证设备登记',
     'two_factor_active'   => '启用双重认证',
-    );
+    'user_deactivated'  => '用户已取消激活',
+    'activation_status_warning' => '不要改变激活状态',
+    'group_memberships_helpblock' => '只有超级管理员可以编辑群组成员。',
+    'superadmin_permission_warning' => '只有超级管理员可以授予用户超级管理员访问权限。',
+    'admin_permission_warning' => '只有拥有管理员权限或更大权限的用户才能授予用户管理员权限。',
+    'remove_group_memberships' => '删除群组成员',
+    'warning_deletion' => '警告：',
+    'warning_deletion_information' => '您将要删除下列 :count 用户。超级管理员名称高亮为红色。',
+    'update_user_asssets_status' => '将这些用户的所有资源更新到此状态',
+    'checkin_user_properties' => '归还与这些用户相关的所有资产',
+];

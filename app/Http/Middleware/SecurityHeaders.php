@@ -68,10 +68,8 @@ class SecurityHeaders
         $feature_policy[] = "wake-lock 'none'";
         $feature_policy[] = "xr-spatial-tracking 'none'";
 
-        $feature_policy = join(';', $feature_policy);
+        $feature_policy = implode(';', $feature_policy);
         $response->headers->set('Feature-Policy', $feature_policy);
-
-
 
         // Defaults to same-origin if REFERRER_POLICY is not set in the .env
         $response->headers->set('Referrer-Policy', config('app.referrer_policy'));
@@ -86,7 +84,6 @@ class SecurityHeaders
             $response->headers->set('X-Frame-Options', 'DENY');
         }
 
-
         // This defaults to false to maintain backwards compatibility for
         // people who are not running Snipe-IT over TLS (shame, shame, shame!)
         // Seriously though, please run Snipe-IT over TLS. Let's Encrypt is free.
@@ -99,15 +96,20 @@ class SecurityHeaders
         // We have to exclude debug mode here because debugbar pulls from a CDN or two
         // and it will break things.
 
-        if ((config('app.debug')!='true')  || (config('app.enable_csp')=='true')) {
+        if ((config('app.debug') != 'true') && (config('app.enable_csp') == 'true')) {
             $csp_policy[] = "default-src 'self'";
             $csp_policy[] = "style-src 'self' 'unsafe-inline'";
             $csp_policy[] = "script-src 'self' 'unsafe-inline' 'unsafe-eval'";
             $csp_policy[] = "connect-src 'self'";
             $csp_policy[] = "object-src 'none'";
             $csp_policy[] = "font-src 'self' data:";
-            $csp_policy[] = "img-src 'self' data: ".config('app.url')." ".env('PUBLIC_AWS_URL')." https://secure.gravatar.com http://gravatar.com maps.google.com maps.gstatic.com *.googleapis.com";
+            $csp_policy[] = "img-src 'self' data: ".config('app.url').' '.env('PUBLIC_AWS_URL').' https://secure.gravatar.com http://gravatar.com maps.google.com maps.gstatic.com *.googleapis.com';
+	          
+            if (config('filesystems.disks.public.driver') == 's3') {
+               $csp_policy[] = "img-src 'self' data:  ".config('filesystems.disks.public.url');
+            }
             $csp_policy = join(';', $csp_policy);
+           
             $response->headers->set('Content-Security-Policy', $csp_policy);
         }
 
@@ -116,7 +118,8 @@ class SecurityHeaders
 
     private function removeUnwantedHeaders($headerList)
     {
-        foreach ($headerList as $header)
+        foreach ($headerList as $header) {
             header_remove($header);
+        }
     }
 }

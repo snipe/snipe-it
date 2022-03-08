@@ -4,7 +4,7 @@ return array(
 
     'does_not_exist' => 'Kategoriaa ei löydy.',
     'assoc_models'	 => 'Kategoriaan on tällä hetkellä liitettynä vähintään yksi malli, eikä sitä voi poistaa. Päivitä mallejasi, jotta ne eivät enää viittaa tähän kategoriaan ja yritä uudelleen. ',
-    'assoc_items'	 => 'Tällä kategorialla on tällä hetkellä vähintään yksi :asset_type ja sitä ei voi poistaa. Poista  :asset_type viittaus tähän kategoriaan ja yritä uudelleen. ',
+    'assoc_items'	 => 'Tähän kategoriaan on yhdistettynä vähintään yksi :asset_type ja sitä ei voi poistaa. Poista  :asset_type viittaus tähän kategoriaan ja yritä uudelleen. ',
 
     'create' => array(
         'error'   => 'Kategoriaa ei luotu, yritä uudelleen.',

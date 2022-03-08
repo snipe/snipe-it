@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'Bekræft massefortegnelser',
+return [
+    'bulk_delete'		=> 'Bekræft massefortegnelser',
   'bulk_delete_help'	=> 'Gennemgå aktiver for massesletning nedenfor. Disse aktiver kan gendannes når slettet, men de vil ikke længere være forbundet med eventuelle brugere, de i øjeblikket er tildelt.',
   'bulk_delete_warn'	=> 'Du er i gang med at slette :asset_count aktiver.',
-	'bulk_update'		=> 'Masseopdater Aktiver',
-	'bulk_update_help'	=> 'Denne form tillader dig at opdatere flere aktiver på en gang. Udfyld kun de felter der skal ændres. Ikke udfyldte feltet forbilver uændret.',
-	'bulk_update_warn'	=> 'Du er i færd med at redigere egenskaber på :asset_count aktiver.',
+    'bulk_update'		=> 'Masseopdater Aktiver',
+    'bulk_update_help'	=> 'Denne form tillader dig at opdatere flere aktiver på en gang. Udfyld kun de felter der skal ændres. Ikke udfyldte feltet forbilver uændret.',
+    'bulk_update_warn'	=> 'Du er i færd med at redigere egenskaber på :asset_count aktiver.',
     'checkedout_to'		=> 'Tjekket Ud Til',
     'checkout_date'		=> 'Tjekket Ud Dato',
     'checkin_date'		=> 'Tjekket Ind Dato',
@@ -38,7 +38,12 @@ return array(
     'tag'				=> 'Aktiv mærkat',
     'update'			=> 'Aktiv Opdatering',
     'warranty'			=> 'Garanti',
-		'warranty_expires'		=> 'Garantiudløb',
+        'warranty_expires'		=> 'Garantiudløb',
     'years'				=> 'år',
-)
-;
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+];

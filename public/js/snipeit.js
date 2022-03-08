@@ -132,7 +132,7 @@ pieOptions = {
     maintainAspectRatio: false,
 
     //String - A legend template
-    legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li>" + "<i class='fa fa-circle-o' style='color: <%=segments[i].fillColor%>'></i>" + "<%if(segments[i].label){%><%=segments[i].label%><%}%> foo</li><%}%></ul>",
+    legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li>" + "<i class='fas fa-circle-o' style='color: <%=segments[i].fillColor%>'></i>" + "<%if(segments[i].label){%><%=segments[i].label%><%}%> foo</li><%}%></ul>",
     //String - A tooltip template
     tooltipTemplate: "<%=value %> <%=label%> "
 };
@@ -170,6 +170,36 @@ pieOptions = {
 
         var render = function render() {
             $el.on('click', '.delete-asset', events['click']);
+        };
+
+        return {
+            render: render
+        };
+
+    // confirm restore modal
+    Components.modals.confirmRestore = function () {
+        var $el = $('table');
+
+        var events = {
+            'click': function click(evnt) {
+                var $context = $(this);
+                var $dataConfirmModal = $('#restoreConfirmModal');
+                var href = $context.attr('href');
+                var message = $context.attr('data-content');
+                var title = $context.attr('data-title');
+
+                $('#myModalLabel').text(title);
+                $dataConfirmModal.find('.modal-body').text(message);
+                $('#confirmRestoreForm').attr('action', href);
+                $dataConfirmModal.modal({
+                    show: true
+                });
+                return false;
+            }
+        };
+
+        var render = function render() {
+            $el.on('click', '.restore-modal', events['click']);
         };
 
         return {
@@ -395,7 +425,7 @@ $(document).ready(function () {
     });
 
     function formatDatalist(datalist) {
-        var loading_markup = '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
+        var loading_markup = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
         if (datalist.loading) {
             return loading_markup;
         }
@@ -514,9 +544,9 @@ $(document).ready(function () {
         }
 
         if (total_size > max_size) {
-            $('#upload-file-status').addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fa fa-times"></i> ').append('<span class="previewSize"> Upload is ' + formatBytes(total_size) + '.</span>');
+            $('#upload-file-status').addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fas fa-times"></i> ').append('<span class="previewSize"> Upload is ' + formatBytes(total_size) + '.</span>');
         } else {
-            $('#upload-file-status').addClass('text-success').removeClass('help-block').prepend('<i class="goodfile fa fa-check"></i> ');
+            $('#upload-file-status').addClass('text-success').removeClass('help-block').prepend('<i class="goodfile fas fa-check"></i> ');
             readURL(this);
             $('#imagePreview').fadeIn();
         }
@@ -672,7 +702,7 @@ $(function () {
 });
 
 function formatDatalist(datalist) {
-    var loading_markup = '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
+    var loading_markup = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
     if (datalist.loading) {
         return loading_markup;
     }

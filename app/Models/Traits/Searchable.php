@@ -7,16 +7,16 @@ use App\Models\CustomField;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * This trait allows for cleaner searching of models, 
+ * This trait allows for cleaner searching of models,
  * moving from complex queries to an easier declarative syntax.
  *
  * @author Till Deeke <kontakt@tilldeeke.de>
  */
-trait Searchable {
-
+trait Searchable
+{
     /**
      * Performs a search on the model, using the provided search terms
-     * 
+     *
      * @param  \Illuminate\Database\Eloquent\Builder $query The query to start the search on
      * @param  string $search
      * @return \Illuminate\Database\Eloquent\Builder A query with added "where" clauses
@@ -27,13 +27,13 @@ trait Searchable {
 
         /**
          * Search the attributes of this model
-         */            
+         */
         $query = $this->searchAttributes($query, $terms);
 
         /**
          * Search through the custom fields of the model
          */
-        $query = $this->searchCustomFields($query, $terms);                
+        $query = $this->searchCustomFields($query, $terms);
 
         /**
          * Search through the relations of the model
@@ -53,32 +53,32 @@ trait Searchable {
      * @param  string $search The search term
      * @return array         An array of search terms
      */
-	private function prepeareSearchTerms($search) {
-		return explode(' OR ', $search);
-	}
+    private function prepeareSearchTerms($search)
+    {
+        return explode(' OR ', $search);
+    }
 
     /**
      * Searches the models attributes for the search terms
-     * 
+     *
      * @param  Illuminate\Database\Eloquent\Builder $query
      * @param  array  $terms
      * @return Illuminate\Database\Eloquent\Builder
      */
-    private function searchAttributes(Builder $query, array $terms) {
-        
+    private function searchAttributes(Builder $query, array $terms)
+    {
         $table = $this->getTable();
 
         $firstConditionAdded = false;
 
-        foreach($this->getSearchableAttributes() as $column) {
-
-            foreach($terms as $term) {
+        foreach ($this->getSearchableAttributes() as $column) {
+            foreach ($terms as $term) {
                 /**
                  * Making sure to only search in date columns if the search term consists of characters that can make up a MySQL timestamp!
                  *
                  * @see https://github.com/snipe/snipe-it/issues/4590
                  */
-                if (!preg_match('/^[0-9 :-]++$/', $term) && in_array($column, $this->getDates())) {
+                if (! preg_match('/^[0-9 :-]++$/', $term) && in_array($column, $this->getDates())) {
                     continue;
                 }
 
@@ -88,29 +88,30 @@ trait Searchable {
                  *
                  * @todo  This does the job, but is inelegant and fragile
                  */
-                if (!$firstConditionAdded) {
-                    $query = $query->where($table . '.' . $column, 'LIKE', '%'.$term.'%');
+                if (! $firstConditionAdded) {
+                    $query = $query->where($table.'.'.$column, 'LIKE', '%'.$term.'%');
 
                     $firstConditionAdded = true;
                     continue;
                 }
-                
-                $query = $query->orWhere($table . '.' . $column, 'LIKE', '%'.$term.'%');
+
+                $query = $query->orWhere($table.'.'.$column, 'LIKE', '%'.$term.'%');
             }
         }
 
-        return $query;        
+        return $query;
     }
 
     /**
      * Searches the models custom fields for the search terms
-     *             
-     * @param  Illuminate\Database\Eloquent\Builder $query 
+     *
+     * @param  Illuminate\Database\Eloquent\Builder $query
      * @param  array  $terms
      * @return Illuminate\Database\Eloquent\Builder
      */
-    private function searchCustomFields(Builder $query, array $terms) {
-        
+    private function searchCustomFields(Builder $query, array $terms)
+    {
+
         /**
          * If we are searching on something other that an asset, skip custom fields.
          */
@@ -121,29 +122,27 @@ trait Searchable {
         $customFields = CustomField::all();
 
         foreach ($customFields as $field) {
-            foreach($terms as $term) {
-                $query->orWhere($this->getTable() . '.'. $field->db_column_name(), 'LIKE', '%'.$term.'%');
+            foreach ($terms as $term) {
+                $query->orWhere($this->getTable().'.'.$field->db_column_name(), 'LIKE', '%'.$term.'%');
             }
         }
 
-        return $query;        
-    }    
+        return $query;
+    }
 
     /**
      * Searches the models relations for the search terms
-     * 
+     *
      * @param  Illuminate\Database\Eloquent\Builder $query
      * @param  array  $terms
      * @return Illuminate\Database\Eloquent\Builder
      */
-    private function searchRelations(Builder $query, array $terms) {
-
-        foreach($this->getSearchableRelations() as $relation => $columns) {
-
-            $query = $query->orWhereHas($relation, function($query) use ($relation, $columns, $terms) {
-                
+    private function searchRelations(Builder $query, array $terms)
+    {
+        foreach ($this->getSearchableRelations() as $relation => $columns) {
+            $query = $query->orWhereHas($relation, function ($query) use ($relation, $columns, $terms) {
                 $table = $this->getRelationTable($relation);
-                
+
                 /**
                  * We need to form the query properly, starting with a "where",
                  * otherwise the generated nested select is wrong.
@@ -152,72 +151,75 @@ trait Searchable {
                  */
                 $firstConditionAdded = false;
 
-                foreach($columns as $column) {
-                    foreach($terms as $term) {
-                        if (!$firstConditionAdded) {
-                            $query->where($table . '.' . $column, 'LIKE', '%'.$term.'%');
+                foreach ($columns as $column) {
+                    foreach ($terms as $term) {
+                        if (! $firstConditionAdded) {
+                            $query->where($table.'.'.$column, 'LIKE', '%'.$term.'%');
                             $firstConditionAdded = true;
                             continue;
                         }
 
-                        $query->orWhere($table . '.' . $column, 'LIKE', '%'.$term.'%');
+                        $query->orWhere($table.'.'.$column, 'LIKE', '%'.$term.'%');
                     }
                 }
             });
+        }
 
-        }  
-
-        return $query;        
+        return $query;
     }
 
     /**
      * Run additional, advanced searches that can't be done using the attributes or relations.
      *
      * This is a noop in this trait, but can be overridden in the implementing model, to allow more advanced searches
-     * 
+     *
      * @param  Illuminate\Database\Eloquent\Builder $query
      * @param  array  $terms The search terms
      * @return Illuminate\Database\Eloquent\Builder
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function advancedTextSearch(Builder $query, array $terms) {
+    public function advancedTextSearch(Builder $query, array $terms)
+    {
         return $query;
-    }        
+    }
 
     /**
      * Get the searchable attributes, if defined. Otherwise it returns an empty array
-     * 
+     *
      * @return array The attributes to search in
      */
-    private function getSearchableAttributes() {
+    private function getSearchableAttributes()
+    {
         return isset($this->searchableAttributes) ? $this->searchableAttributes : [];
     }
 
     /**
      * Get the searchable relations, if defined. Otherwise it returns an empty array
-     * 
+     *
      * @return array The relations to search in
-     */    
-    private function getSearchableRelations() {
+     */
+    private function getSearchableRelations()
+    {
         return isset($this->searchableRelations) ? $this->searchableRelations : [];
     }
 
     /**
      * Get the table name of a relation.
      *
-     * This method loops over a relation name, 
+     * This method loops over a relation name,
      * getting the table name of the last relation in the series.
-     * So "category" would get the table name for the Category model, 
+     * So "category" would get the table name for the Category model,
      * "model.manufacturer" would get the tablename for the Manufacturer model.
-     * 
+     *
      * @param  string $relation
      * @return string            The table name
      */
-    private function getRelationTable($relation) {
+    private function getRelationTable($relation)
+    {
         $related = $this;
 
-        foreach(explode('.', $relation) as $relationName) {
+        foreach (explode('.', $relation) as $relationName) {
             $related = $related->{$relationName}()->getRelated();
         }
 
@@ -249,6 +251,6 @@ trait Searchable {
             return implode('_', $parts->toArray());
         }
 
-        return $related->getTable();   
+        return $related->getTable();
     }
 }

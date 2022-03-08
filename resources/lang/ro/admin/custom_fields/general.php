@@ -1,11 +1,12 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'câmpuri customizate',
+    'manage'                    => 'Gestionează',
     'field'		                => 'Camp',
     'about_fieldsets_title'		=> 'Despre câmpuri',
-    'about_fieldsets_text'		=> 'Seturile de câmpuri vă permit să creați grupuri de câmpuri personalizate care sunt frecvent reutilizate utilizate pentru tipurile de modele specifice de materiale.',
-    'custom_format'             => 'Formatul personalizat ...',
+    'about_fieldsets_text'		=> 'Seturile de câmpuri vă permit să grupați câmpurile personalizate care sunt frecvent utilizate pentru tipuri specifice de modele ale activelor.',
+    'custom_format'             => 'Format Regex personalizat...',
     'encrypt_field'      	        => 'Criptați valoarea acestui câmp în baza de date',
     'encrypt_field_help'      => 'AVERTISMENT: Criptarea unui câmp o face imposibilă.',
     'encrypted'      	        => 'criptat',
@@ -26,7 +27,19 @@ return array(
     'used_by_models'   		    => 'Folosit de modele',
     'order'   		            => 'Ordin',
     'create_fieldset'         => 'Setul de câmpuri noi',
+    'create_fieldset_title' => 'Creați un nou set de câmpuri',
     'create_field'            => 'Noul câmp personalizat',
+    'create_field_title' => 'Creați un nou câmp personalizat',
     'value_encrypted'      	        => 'Valoarea acestui câmp este criptată în baza de date. Numai utilizatorii de administrare vor putea vizualiza valoarea decriptată',
     'show_in_email'     => 'Includeți valoarea acestui câmp în e-mailurile trimise utilizatorului? Căsuțele criptate nu pot fi incluse în e-mailuri.',
-);
+    'help_text' => 'Text de ajutor',
+    'help_text_description' => 'Acesta este un text opțional care va apărea mai jos de elementele formularului în timp ce editezi un activ pentru a oferi informații contextuale pentru fiecare câmp.',
+    'about_custom_fields_title' => 'Despre câmpuri personalizate',
+    'about_custom_fields_text' => 'Câmpurile personalizate vă permit să adăugați atribute arbitrare la active.',
+    'add_field_to_fieldset' => 'Adaugă câmp la un set de câmpuri',
+    'make_optional' => 'Obligatoriu - faceți clic pentru a deveni opțional',
+    'make_required' => 'Opțional - faceți clic pentru a deveni obligatoriu',
+    'reorder' => 'Reordonare',
+    'db_field' => 'Câmp în baza de date',
+    'db_convert_warning' => 'AVERTISMENT. Acest câmp este în tabelul câmpurilor personalizate ca <code> :db_column </code> dar ar trebui să fie :expected </code>.'
+];

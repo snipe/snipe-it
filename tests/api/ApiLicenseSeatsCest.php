@@ -30,14 +30,14 @@ class ApiLicenseSeatsCest
 
         // sample verify
         $licenseSeats = App\Models\LicenseSeat::where('license_id', 1)
-            ->orderBy('id','desc')->take(10)->get();
+            ->orderBy('id', 'desc')->take(10)->get();
         // pick a random seat
         $licenseSeat = $licenseSeats->random();
         // need the index in the original list so that the "name" field is determined correctly
         $licenseSeatNumber = 0;
-        foreach($licenseSeats as $index=>$seat) {
+        foreach ($licenseSeats as $index=>$seat) {
             if ($licenseSeat === $seat) {
-                $licenseSeatNumber = $index+1;
+                $licenseSeatNumber = $index + 1;
             }
         }
         $I->seeResponseContainsJson($I->removeTimestamps((new LicenseSeatsTransformer)->transformLicenseSeat($licenseSeat, $licenseSeatNumber)));
@@ -69,7 +69,7 @@ class ApiLicenseSeatsCest
 
         $data = [
             'assigned_to' => $user->id,
-            'note' => 'Test Checkout to User via API'
+            'note' => 'Test Checkout to User via API',
         ];
 
         // update
@@ -95,7 +95,7 @@ class ApiLicenseSeatsCest
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson([
-            "action_type" => "checkout"
+            'action_type' => 'checkout',
         ]);
     }
 
@@ -110,7 +110,7 @@ class ApiLicenseSeatsCest
 
         $data = [
             'asset_id' => $asset->id,
-            'note' => 'Test Checkout to Asset via API'
+            'note' => 'Test Checkout to Asset via API',
         ];
 
         // update
@@ -136,7 +136,7 @@ class ApiLicenseSeatsCest
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson([
-            "action_type" => "checkout"
+            'action_type' => 'checkout',
         ]);
     }
 
@@ -153,7 +153,7 @@ class ApiLicenseSeatsCest
         $data = [
             'asset_id' => $asset->id,
             'assigned_to' => $user->id,
-            'note' => 'Test Checkout to User and Asset via API'
+            'note' => 'Test Checkout to User and Asset via API',
         ];
 
         // update
@@ -179,7 +179,7 @@ class ApiLicenseSeatsCest
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson([
-            "action_type" => "checkout"
+            'action_type' => 'checkout',
         ]);
     }
 }

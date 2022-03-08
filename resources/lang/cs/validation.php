@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => ':attribute musí mít minimálně :min znaků.',
         'array'   => 'Atribut musí mít alespoň: min položky.',
     ],
+    'starts_with'          => ':attribute musí končit jednou z následujících hodnot: :values.',
     'not_in'               => 'Zvolený :attribute je neplatný.',
     'numeric'              => ':attribute musí být číslo.',
     'present'              => 'Pole atributu musí být přítomno.',
@@ -88,7 +89,8 @@ return array(
     'unique'               => ':attribute byl již vybrán.',
     'uploaded'             => 'Atribut: se nepodařilo nahrát.',
     'url'                  => 'Formát :attribute je neplatný.',
-    "unique_undeleted"     => "Je třeba, aby se :attribute neopakoval.",
+    'unique_undeleted'     => 'Je třeba, aby se :attribute neopakoval.',
+    'non_circular'         => ':attribute nesmí vytvořit kruhový odkaz.',
 
     /*
     |--------------------------------------------------------------------------
@@ -100,7 +102,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -114,11 +115,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Pole atributu: atribut obsahuje znak, který není povolen.",
-        "email_array"      => "Jedna nebo více e-mailových adres je neplatná.",
-        "hashed_pass"      => "Vaše současné heslo je nesprávné",
+        'alpha_space' => 'Pole atributu: atribut obsahuje znak, který není povolen.',
+        'email_array'      => 'Jedna nebo více e-mailových adres je neplatná.',
+        'hashed_pass'      => 'Vaše současné heslo je nesprávné',
         'dumbpwd'          => 'Toto heslo je příliš běžné.',
-        "statuslabel_type" => "Musíte vybrat platný typ štítku stavu",
+        'statuslabel_type' => 'Musíte vybrat platný typ štítku stavu',
     ],
 
     /*
@@ -134,4 +135,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

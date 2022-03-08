@@ -9,10 +9,11 @@ use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Accessory;
 use App\Models\Company;
 use App\Models\User;
-use Carbon\Carbon;
 use Auth;
+use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
+use App\Http\Requests\ImageUploadRequest;
 
 class AccessoriesController extends Controller
 {
@@ -26,28 +27,52 @@ class AccessoriesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Accessory::class);
-        $allowed_columns = ['id','name','model_number','eol','notes','created_at','min_amt','company_id'];
+        $allowed_columns = ['id', 'name', 'model_number', 'eol', 'notes', 'created_at', 'min_amt', 'company_id'];
+        
+        // This array is what determines which fields should be allowed to be sorted on ON the table itself, no relations
+        // Relations will be handled in query scopes a little further down.
+        $allowed_columns = 
+            [
+                'id',
+                'name',
+                'model_number',
+                'eol',
+                'notes',
+                'created_at',
+                'min_amt',
+                'company_id',
+                'notes',
+            ];
 
-        $accessories = Accessory::with('category', 'company', 'manufacturer', 'users', 'location');
+
+        $accessories = Accessory::select('accessories.*')->with('category', 'company', 'manufacturer', 'users', 'location', 'supplier');
 
         if ($request->filled('search')) {
             $accessories = $accessories->TextSearch($request->input('search'));
         }
 
         if ($request->filled('company_id')) {
-            $accessories->where('company_id','=',$request->input('company_id'));
+            $accessories->where('company_id', '=', $request->input('company_id'));
         }
 
         if ($request->filled('category_id')) {
-            $accessories->where('category_id','=',$request->input('category_id'));
+            $accessories->where('category_id', '=', $request->input('category_id'));
         }
 
         if ($request->filled('manufacturer_id')) {
-            $accessories->where('manufacturer_id','=',$request->input('manufacturer_id'));
+            $accessories->where('manufacturer_id', '=', $request->input('manufacturer_id'));
         }
 
         if ($request->filled('supplier_id')) {
-            $accessories->where('supplier_id','=',$request->input('supplier_id'));
+            $accessories->where('supplier_id', '=', $request->input('supplier_id'));
+        }
+
+        if ($request->filled('location_id')) {
+            $accessories->where('location_id','=',$request->input('location_id'));
+        }
+
+        if ($request->filled('notes')) {
+            $accessories->where('notes','=',$request->input('notes'));
         }
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
@@ -57,26 +82,34 @@ class AccessoriesController extends Controller
         // Check to make sure the limit is not higher than the max allowed
         ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
 
-
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
+        $sort_override =  $request->input('sort');
+        $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'created_at';
 
-        switch ($sort) {
+        switch ($sort_override) {
             case 'category':
                 $accessories = $accessories->OrderCategory($order);
                 break;
             case 'company':
                 $accessories = $accessories->OrderCompany($order);
                 break;
+            case 'location':
+                $accessories = $accessories->OrderLocation($order);
+                break;
+            case 'manufacturer':
+                $accessories = $accessories->OrderManufacturer($order);
+                break;    
+            case 'supplier':
+                $accessories = $accessories->OrderSupplier($order);
+                break;       
             default:
-                $accessories = $accessories->orderBy($sort, $order);
+                $accessories = $accessories->orderBy($column_sort, $order);
                 break;
         }
-
-        $accessories->orderBy($sort, $order);
-
+ 
         $total = $accessories->count();
         $accessories = $accessories->skip($offset)->take($limit)->get();
+
         return (new AccessoriesTransformer)->transformAccessories($accessories, $total);
     }
 
@@ -86,18 +119,20 @@ class AccessoriesController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ImageUploadRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ImageUploadRequest $request)
     {
         $this->authorize('create', Accessory::class);
         $accessory = new Accessory;
         $accessory->fill($request->all());
+        $accessory = $request->handleImages($accessory);
 
         if ($accessory->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $accessory, trans('admin/accessories/message.create.success')));
         }
+
         return response()->json(Helper::formatStandardApiResponse('error', null, $accessory->getErrors()));
 
     }
@@ -114,6 +149,7 @@ class AccessoriesController extends Controller
     {
         $this->authorize('view', Accessory::class);
         $accessory = Accessory::findOrFail($id);
+
         return (new AccessoriesTransformer)->transformAccessory($accessory);
     }
 
@@ -130,6 +166,7 @@ class AccessoriesController extends Controller
     {
         $this->authorize('view', Accessory::class);
         $accessory = Accessory::findOrFail($id);
+
         return (new AccessoriesTransformer)->transformAccessory($accessory);
     }
 
@@ -147,7 +184,7 @@ class AccessoriesController extends Controller
         $this->authorize('view', Accessory::class);
 
         $accessory = Accessory::with('lastCheckout')->findOrFail($id);
-        if (!Company::isCurrentUserHasAccess($accessory)) {
+        if (! Company::isCurrentUserHasAccess($accessory)) {
             return ['total' => 0, 'rows' => []];
         }
 
@@ -157,7 +194,7 @@ class AccessoriesController extends Controller
         $accessory_users = $accessory->users;
         $total = $accessory_users->count();
 
-        if($total < $offset){
+        if ($total < $offset) {
             $offset = 0;
         }
 
@@ -165,9 +202,13 @@ class AccessoriesController extends Controller
 
         if ($request->filled('search')) {
             $accessory_users = $accessory->users()
-                                ->where('first_name', 'like', '%'.$request->input('search').'%')
-                                ->orWhere('last_name', 'like', '%'.$request->input('search').'%')
-                                ->get();
+                                         ->where(function ($query) use ($request) {
+                                             $search_str = '%' . $request->input('search') . '%';
+                                             $query->where('first_name', 'like', $search_str)
+                                                   ->orWhere('last_name', 'like', $search_str)
+                                                   ->orWhere('note', 'like', $search_str);
+                                         })
+                                         ->get();
             $total = $accessory_users->count();
         }
 
@@ -180,15 +221,16 @@ class AccessoriesController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ImageUploadRequest $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ImageUploadRequest $request, $id)
     {
         $this->authorize('update', Accessory::class);
         $accessory = Accessory::findOrFail($id);
         $accessory->fill($request->all());
+        $accessory = $request->handleImages($accessory);
 
         if ($accessory->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $accessory, trans('admin/accessories/message.update.success')));
@@ -212,12 +254,12 @@ class AccessoriesController extends Controller
         $this->authorize($accessory);
 
         if ($accessory->hasUsers() > 0) {
-            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/accessories/message.assoc_users', array('count'=> $accessory->hasUsers()))));
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/accessories/message.assoc_users', ['count'=> $accessory->hasUsers()])));
         }
 
         $accessory->delete();
-        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.delete.success')));
 
+        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/accessories/message.delete.success')));
     }
 
 
@@ -243,7 +285,7 @@ class AccessoriesController extends Controller
 
         if ($accessory->numRemaining() > 0) {
 
-            if (!$user = User::find($request->input('assigned_to'))) {
+            if (! $user = User::find($request->input('assigned_to'))) {
                 return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/accessories/message.checkout.user_does_not_exist')));
             }
 
@@ -254,12 +296,13 @@ class AccessoriesController extends Controller
                 'accessory_id' => $accessory->id,
                 'created_at' => Carbon::now(),
                 'user_id' => Auth::id(),
-                'assigned_to' => $request->get('assigned_to')
+                'assigned_to' => $request->get('assigned_to'),
+                'note' => $request->get('note'),
             ]);
 
             $accessory->logCheckout($request->input('note'), $user);
 
-            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.checkout.success')));
+            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/accessories/message.checkout.success')));
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, 'No accessories remaining'));
@@ -272,7 +315,7 @@ class AccessoriesController extends Controller
      * @uses Accessory::checkin_email() to determine if an email can and should be sent
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param Request $request
-     * @param integer $accessoryUserId
+     * @param int $accessoryUserId
      * @param string $backto
      * @return Redirect
      * @internal param int $accessoryId
@@ -286,11 +329,11 @@ class AccessoriesController extends Controller
         $accessory = Accessory::find($accessory_user->accessory_id);
         $this->authorize('checkin', $accessory);
 
-        $logaction = $accessory->logCheckin(User::find($accessoryUserId), $request->input('note'));
+        $logaction = $accessory->logCheckin(User::find($accessory_user->user_id), $request->input('note'));
 
         // Was the accessory updated?
         if (DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {
-            if (!is_null($accessory_user->assigned_to)) {
+            if (! is_null($accessory_user->assigned_to)) {
                 $user = User::find($accessory_user->assigned_to);
             }
 
@@ -305,7 +348,7 @@ class AccessoriesController extends Controller
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.checkin.success')));
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/accessories/message.checkin.error')));
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/accessories/message.checkin.error')));
 
     }
 
@@ -321,7 +364,7 @@ class AccessoriesController extends Controller
 
         $accessories = Accessory::select([
             'accessories.id',
-            'accessories.name'
+            'accessories.name',
         ]);
 
         if ($request->filled('search')) {
@@ -330,10 +373,7 @@ class AccessoriesController extends Controller
 
         $accessories = $accessories->orderBy('name', 'ASC')->paginate(50);
 
-
         return (new SelectlistTransformer)->transformSelectlist($accessories);
     }
-
-
 
 }

@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Tag Harta',
     'asset_model'       => 'Model',
-    'book_value'  	=> 'Nilai',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'Masuk/Keluar',
     'checkout_date' => 'Tarikh Agihan',
     'checkoutto' 	=> 'Agihan',
+    'current_value' => 'Current Value',
     'diff' 			=> 'Beza',
     'dl_csv' 		=> 'Muat Turun CSV',
     'eol' 			=> 'EOL',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> 'Siri',
     'status'   		=> 'Status',
     'title'      	=> 'Harta ',
-    'image'		=> 'Imej Peranti',
+    'image'		    => 'Imej Peranti',
     'days_without_acceptance' => 'Hari Tanpa Penerimaan',
-    'monthly_depreciation' => 'Monthly Depreciation'
-
-);
+    'monthly_depreciation' => 'Susut Nilai Bulanan',
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

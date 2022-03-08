@@ -1,5 +1,5 @@
-FROM ubuntu:bionic
-LABEL maintainer Brady Wetherington <uberbrady@gmail.com>
+FROM ubuntu:20.04
+LABEL maintainer="Brady Wetherington <bwetherington@grokability.com>"
 
 # No need to add `apt-get clean` here, reference:
 # - https://github.com/snipe/snipe-it/pull/9201
@@ -14,15 +14,15 @@ RUN export DEBIAN_FRONTEND=noninteractive; \
 apt-utils \
 apache2 \
 apache2-bin \
-libapache2-mod-php7.2 \
-php7.2-curl \
-php7.2-ldap \
-php7.2-mysql \
-php7.2-gd \
-php7.2-xml \
-php7.2-mbstring \
-php7.2-zip \
-php7.2-bcmath \
+libapache2-mod-php7.4 \
+php7.4-curl \
+php7.4-ldap \
+php7.4-mysql \
+php7.4-gd \
+php7.4-xml \
+php7.4-mbstring \
+php7.4-zip \
+php7.4-bcmath \
 patch \
 curl \
 wget  \
@@ -38,25 +38,26 @@ autoconf \
 libc-dev \
 pkg-config \
 libmcrypt-dev \
-php7.2-dev \
+php7.4-dev \
 ca-certificates \
 unzip \
+dnsutils \
 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
 RUN curl -L -O https://github.com/pear/pearweb_phars/raw/master/go-pear.phar
 RUN php go-pear.phar
 
-RUN pecl install mcrypt-1.0.2
+RUN pecl install mcrypt-1.0.3
 
-RUN bash -c "echo extension=/usr/lib/php/20170718/mcrypt.so > /etc/php/7.2/mods-available/mcrypt.ini"
+RUN bash -c "echo extension=/usr/lib/php/20190902/mcrypt.so > /etc/php/7.4/mods-available/mcrypt.ini"
 
 RUN phpenmod mcrypt
 RUN phpenmod gd
 RUN phpenmod bcmath
 
-RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.2/apache2/php.ini
-RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.2/cli/php.ini
+RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.4/apache2/php.ini
+RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.4/cli/php.ini
 
 RUN useradd -m --uid 1000 --gid 50 docker
 
@@ -77,6 +78,8 @@ COPY . /var/www/html
 
 RUN a2enmod rewrite
 
+COPY docker/column-statistics.cnf /etc/mysql/conf.d/column-statistics.cnf
+
 ############ INITIAL APPLICATION SETUP #####################
 
 WORKDIR /var/www/html
@@ -96,8 +99,10 @@ RUN \
       && rm -r "/var/www/html/storage/app/backups" && ln -fs "/var/lib/snipeit/dumps" "/var/www/html/storage/app/backups" \
       && mkdir -p "/var/lib/snipeit/keys" && ln -fs "/var/lib/snipeit/keys/oauth-private.key" "/var/www/html/storage/oauth-private.key" \
       && ln -fs "/var/lib/snipeit/keys/oauth-public.key" "/var/www/html/storage/oauth-public.key" \
+      && ln -fs "/var/lib/snipeit/keys/ldap_client_tls.cert" "/var/www/html/storage/ldap_client_tls.cert" \
+      && ln -fs "/var/lib/snipeit/keys/ldap_client_tls.key" "/var/www/html/storage/ldap_client_tls.key" \
       && chown docker "/var/lib/snipeit/keys/" \
-      && chown -h docker "/var/www/html/storage/*.key" \
+      && chown -h docker "/var/www/html/storage/" \
       && chmod +x /var/www/html/artisan \
       && echo "Finished setting up application in /var/www/html"
 

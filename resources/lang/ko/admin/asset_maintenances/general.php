@@ -8,7 +8,7 @@
         'repair'             => '수리',
         'maintenance'        => '관리',
         'upgrade'            => '개선',
-        'calibration'        => 'Calibration',
-        'software_support'   => 'Software Support',
-        'hardware_support'   => 'Hardware Support',
+        'calibration'        => '측정',
+        'software_support'   => '스프트웨어 지원',
+        'hardware_support'   => '하드웨어 지원',
     ];

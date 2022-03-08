@@ -20,9 +20,9 @@ class DepreciationsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Depreciation::class);
-        $allowed_columns = ['id','name','months','created_at'];
+        $allowed_columns = ['id','name','months','depreciation_min','created_at'];
 
-        $depreciations = Depreciation::select('id','name','months','user_id','created_at','updated_at');
+        $depreciations = Depreciation::select('id','name','months','depreciation_min','user_id','created_at','updated_at');
 
         if ($request->filled('search')) {
             $depreciations = $depreciations->TextSearch($request->input('search'));
@@ -41,9 +41,9 @@ class DepreciationsController extends Controller
 
         $total = $depreciations->count();
         $depreciations = $depreciations->skip($offset)->take($limit)->get();
+
         return (new DepreciationsTransformer)->transformDepreciations($depreciations, $total);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -62,8 +62,8 @@ class DepreciationsController extends Controller
         if ($depreciation->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $depreciation, trans('admin/depreciations/message.create.success')));
         }
-        return response()->json(Helper::formatStandardApiResponse('error', null, $depreciation->getErrors()));
 
+        return response()->json(Helper::formatStandardApiResponse('error', null, $depreciation->getErrors()));
     }
 
     /**
@@ -78,9 +78,9 @@ class DepreciationsController extends Controller
     {
         $this->authorize('view', Depreciation::class);
         $depreciation = Depreciation::findOrFail($id);
+
         return (new DepreciationsTransformer)->transformDepreciation($depreciation);
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -123,10 +123,7 @@ class DepreciationsController extends Controller
         }
 
         $depreciation->delete();
-        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/depreciations/message.delete.success')));
 
+        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/depreciations/message.delete.success')));
     }
-
-
-
 }

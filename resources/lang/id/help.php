@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,24 +13,22 @@ return array(
     |
     */
 
-    "more_info_title" => "More Info",
+    'more_info_title' => 'Lebih Lanjut',
 
-    "audit_help" => "Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to.",
+    'audit_help' => 'Mencentang kotak ini akan mengedit catatan aset untuk mencerminkan lokasi baru ini. Membiarkannya tidak dicentang hanya akan mencatat lokasi di log audit.<br><br>Perhatikan bahwa aset ini diperiksa, itu tidak akan mengubah lokasi orang, aset, atau lokasi yang diperiksa.',
 
-    'assets' => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'assets' => 'Aset adalah barang yang dilacak dengan nomor seri atau tanda aset. Cenderung menjadi barang dengan nilai lebih tinggi dimana identifikasi barang secara spesifik berpengaruh.',
 
-    'categories' => 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'categories' => 'Kategori membantu meng-organisir aset anda. Beberapa contoh kategori mungkin seperti &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, dan seterusnya, tapi anda bisa menggunakan kategori sesuai kebutuhan anda.',
 
-    'accessories' => 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
+    'accessories' => 'Aksesoris apapun yang Anda keluarkan untuk pengguna, yang tidak memiliki nomor seri (atau Anda tidak peduli untuk dilacak). Misalnya, mouse komputer atau keyboard.',
 
-    'companies'     => 'Companies can be used as a simple identifier field, or can be used to limit visibility of assets, users, etc if full company support is enabled in your Admin settings.',
+    'companies'     => 'Perusahaan dapat digunakan sebagai kolom pengenal, atau dapat digunakan untuk membatasi visibilitas aset, pengguna, dll jika dukungan penuh perusahaan diaktifkan pada pengaturan Admin anda.',
 
-    'components'    => 'Components are items that are part of an asset, for example HDD, RAM, etc.',
+    'components'    => 'Komponen adalah bagian dari aset, contoh HDD, RAM, dan sebagainya.',
 
-    'consumables'   => 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
+    'consumables'   => 'Barang Habis Pakai adalah segala sesuatu yang dibeli dan nantinya akan habis terpakai. Sebagai contoh, tinta printer atau kertas untuk mesin fotokopi.',
 
-    'depreciations' => 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
+    'depreciations' => 'Anda dapat mengatur penyusutan aset dengan perhitungan penyusutan garis lurus.',
 
-
-
-);
+];

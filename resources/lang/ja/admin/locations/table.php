@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => '設置場所について',
     'about_locations'           => '設置場所はユーザー、資産、およびその他のアイテムの情報追跡に使用されます。',
     'assets_rtd'                => '資産', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -11,6 +11,8 @@ return array(
     'country'                   => '国',
     'create'                    => '所在地を作成',
     'update'                    => '所在地を更新',
+    'print_assigned'            => '割り当て先を印刷',
+    'print_all_assigned'        => '割り当て先をすべて印刷',
     'name'                      => 'ロケーション名',
     'address'                   => '住所',
     'zip'                       => '郵便番号',
@@ -18,4 +20,21 @@ return array(
     'parent'                    => '上位',
     'currency'                  => '現地通貨',
     'ldap_ou'                   => 'LDAP OU を検索',
-    );
+    'user_name'                 => 'User Name',
+    'department'                => 'Department',
+    'location'                  => 'Location',
+    'asset_tag'                 => 'Assets Tag',
+    'asset_name'                => 'Name',
+    'asset_category'            => 'Category',
+    'asset_manufacturer'        => 'Manufacturer',
+    'asset_model'               => 'Model',
+    'asset_serial'              => 'Serial',
+    'asset_location'            => 'Location',
+    'asset_checked_out'         => 'Checked Out',
+    'asset_expected_checkin'    => 'Expected Checkin',
+    'date'                      => 'Date:',
+    'signed_by_asset_auditor'   => 'Signed By (Asset Auditor):',
+    'signed_by_finance_auditor' => 'Signed By (Finance Auditor):',
+    'signed_by_location_manager' => 'Signed By (Location Manager):',
+    'signed_by'                 => 'Signed Off By:',
+];

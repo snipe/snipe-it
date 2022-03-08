@@ -29,7 +29,6 @@ class LogSuccessfulLogin
         $now = new Carbon();
 
         try {
-
             DB::table('login_attempts')->insert(
                 [
                     'username' => $event->user->username,
@@ -42,7 +41,5 @@ class LogSuccessfulLogin
         } catch (\Exception $e) {
             \Log::debug($e);
         }
-
-
     }
 }

@@ -8,7 +8,6 @@
  | be modified directly.
 */
 
-
 return [
 
     /*
@@ -50,10 +49,8 @@ return [
         'stripe_id'    => env('STUNNING_STRIPE_ID'),
     ],
 
-
     'google' => [
-        'maps_api_key' => env('GOOGLE_MAPS_API')
+        'maps_api_key' => env('GOOGLE_MAPS_API'),
     ],
-
 
 ];

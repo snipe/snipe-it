@@ -18,5 +18,6 @@ return array(
     'update'  							=> 'Catagóir Nuashonraithe',
     'use_default_eula'					=> 'Bain úsáid as an réamhshocraithe <a href="#" data-toggle="modal" data-target="#eulaModal"> réamhshocrú EULA</a> ina ionad.',
     'use_default_eula_disabled'			=> '<del>Cuir an príomh-réamhshocraithe EULA in ionad.</del> Níl aon réamhshocraithe EULA leagtha síos. Cuir ceann amháin i Socruithe le do thoil.',
+    'use_default_eula_column'			=> 'Use default EULA',
 
 );

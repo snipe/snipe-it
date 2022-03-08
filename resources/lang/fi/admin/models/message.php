@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Malli ei löydy.',
-    'assoc_users'	 => 'Tämä malli on määritetty käyttöön yhdelle tai useammalle laitteelle joten sitä ei voida poistaa. Poista malli käytöstä kaikilta laitteilta ja yritä uudelleen. ',
+    'assoc_users'	 => 'Tämä malli on käytössä yhdellä tai useammalla laitteella joten sitä ei voida poistaa. Poista malli käytöstä kaikilta laitteilta ja yritä uudelleen. ',
 
 
     'create' => array(
@@ -29,7 +29,7 @@ return array(
     ),
 
     'bulkedit' => array(
-        'error'   		=> 'Mitään kenttistä ei ollut muutettu, joten mitään ei päivitetty.',
+        'error'   		=> 'Mitään kentistä ei ollut muutettu, joten mitään ei päivitetty.',
         'success' 		=> 'Mallit päivitetty.'
     ),
 

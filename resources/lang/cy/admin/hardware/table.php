@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Rhif Ased (tag)',
     'asset_model'       => 'Model',
-    'book_value'  	=> 'Gwerth',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'Mewn/Allan',
     'checkout_date' => 'Dyddiad Allan',
     'checkoutto' 	=> 'Allan',
+    'current_value' => 'Current Value',
     'diff' 			=> 'Gwahaniaeth',
     'dl_csv' 		=> 'Lawrlwytho CSV',
     'eol' 			=> 'DB',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> 'Serial',
     'status'   		=> 'Statws',
     'title'      	=> 'Ased ',
-    'image'		=> 'Delwedd Dyfais',
+    'image'		    => 'Delwedd Dyfais',
     'days_without_acceptance' => 'Diwrnodau Heb Derbyn',
-    'monthly_depreciation' => 'Monthly Depreciation'
-
-);
+    'monthly_depreciation' => 'Monthly Depreciation',
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

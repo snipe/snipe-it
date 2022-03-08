@@ -6,9 +6,11 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\DepartmentsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use App\Models\Company;
 use App\Models\Department;
 use Auth;
 use Illuminate\Http\Request;
+use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Storage;
 
 class DepartmentsController extends Controller
@@ -23,9 +25,9 @@ class DepartmentsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Department::class);
-        $allowed_columns = ['id','name','image','users_count'];
+        $allowed_columns = ['id', 'name', 'image', 'users_count'];
 
-        $departments = Department::select([
+        $departments = Company::scopeCompanyables(Department::select(
             'departments.id',
             'departments.name',
             'departments.location_id',
@@ -33,8 +35,8 @@ class DepartmentsController extends Controller
             'departments.manager_id',
             'departments.created_at',
             'departments.updated_at',
-            'departments.image'
-        ])->with('users')->with('location')->with('manager')->with('company')->withCount('users as users_count');
+            'departments.image'),
+             "company_id", "departments")->with('users')->with('location')->with('manager')->with('company')->withCount('users as users_count');
 
         if ($request->filled('search')) {
             $departments = $departments->TextSearch($request->input('search'));
@@ -73,16 +75,18 @@ class DepartmentsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ImageUploadRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ImageUploadRequest $request)
     {
         $this->authorize('create', Department::class);
         $department = new Department;
         $department->fill($request->all());
+        $department = $request->handleImages($department);
+
         $department->user_id = Auth::user()->id;
-        $department->manager_id = ($request->filled('manager_id' ) ? $request->input('manager_id') : null);
+        $department->manager_id = ($request->filled('manager_id') ? $request->input('manager_id') : null);
 
         if ($department->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $department, trans('admin/departments/message.create.success')));
@@ -103,6 +107,7 @@ class DepartmentsController extends Controller
     {
         $this->authorize('view', Department::class);
         $department = Department::findOrFail($id);
+
         return (new DepartmentsTransformer)->transformDepartment($department);
     }
 
@@ -111,15 +116,16 @@ class DepartmentsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v5.0]
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ImageUploadRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ImageUploadRequest $request, $id)
     {
         $this->authorize('update', Department::class);
         $department = Department::findOrFail($id);
         $department->fill($request->all());
+        $department = $request->handleImages($department);
 
         if ($department->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $department, trans('admin/departments/message.update.success')));
@@ -127,7 +133,6 @@ class DepartmentsController extends Controller
 
         return response()->json(Helper::formatStandardApiResponse('error', null, $department->getErrors()));
     }
-
 
 
     /**
@@ -159,11 +164,11 @@ class DepartmentsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
-     *
      */
     public function selectlist(Request $request)
     {
 
+        $this->authorize('view.selectlists');
         $departments = Department::select([
             'id',
             'name',
@@ -184,7 +189,5 @@ class DepartmentsController extends Controller
         }
 
         return (new SelectlistTransformer)->transformSelectlist($departments);
-
     }
-
 }

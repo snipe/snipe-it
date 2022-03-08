@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Over groepen',
     'about_groups'                  => 'Groepen die gebruikt worden om gebruikerspermissies te generaliseren.',
     'group_management' 	 	=> 'Groepsmanagement',
@@ -10,5 +10,7 @@ return array(
     'group_admin' 	 		=> 'Groepsbeheerder',
     'allow' 	 			=> 'Toestaan',
     'deny' 	 				=> 'Weigeren',
-
-);
+    'permission'            => 'Bevoegdheden',
+    'grant'                 => 'Toestaan',
+    'no_permissions'        => 'Deze groep heeft geen rechten.'
+];

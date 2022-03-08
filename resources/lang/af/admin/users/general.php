@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'This user can login',
     'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Bates toegewys aan: naam',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Wysig gebruiker',
     'filetype_info'     => 'Toegelate filetipes is png, gif, jpg, jpeg, doc, docx, pdf, txt, zip en rar.',
     'history_user'      => 'Geskiedenis vir: naam',
-	'info'				=> 'info',
+    'info'				=> 'info',
     'restore_user'		=> 'Klik hier om dit te herstel.',
     'last_login'        => 'Laaste Aanmelding',
     'ldap_config_text'  => 'LDAP-konfigurasie-instellings kan Admin> Instellings gevind word. Die (opsionele) gekose ligging sal vir alle ingevoerde gebruikers gestel word.',
@@ -25,4 +24,14 @@ return array(
     'two_factor_admin_optin_help' => 'Jou huidige administrasie-instellings laat selektiewe handhawing van twee-faktor-verifikasie toe.',
     'two_factor_enrolled' => '2FA-toestel ingeskryf',
     'two_factor_active'   => '2FA aktief',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

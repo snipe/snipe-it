@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-View Assets for  {{ $user->present()->fullName() }}
+{{ trans('general.viewassetsfor', array('name' => $user->present()->fullName())) }}
 @parent
 @stop
 
@@ -221,7 +221,7 @@ View Assets for  {{ $user->present()->fullName() }}
               @foreach ($user->consumables as $consumable)
               <tr>
                 <td>{{ $consumable->name }}</td>
-                <td>{{ $consumable->category->name }}</td>
+                <td>{{ (($consumable->category) ? $consumable->category->name : 'deleted category') }}</td>
               </tr>
               @endforeach
             </tbody>
@@ -294,7 +294,7 @@ View Assets for  {{ $user->present()->fullName() }}
       @if ($user->id)
       <div class="box-header with-border">
         <div class="box-heading">
-          <h2 class="box-title"> History</h2>
+          <h2 class="box-title"> {{ trans('general.history') }}</h2>
         </div>
       </div><!-- /.box-header -->
       @endif

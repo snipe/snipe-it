@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => 'Attributtet :attribute må være minst :min tegn.',
         'array'   => 'Attributtet må ha minst: min elementer.',
     ],
+    'starts_with'          => ':attribute må starte med en av følgende: :values.',
     'not_in'               => 'Attributtet :attribute er ugyldig.',
     'numeric'              => 'Attributtet :attribute må være et nummer.',
     'present'              => 'Atributtfeltet :attribute må ha en verdi.',
@@ -88,7 +89,8 @@ return array(
     'unique'               => 'Attributtet :attribute er allerede tatt.',
     'uploaded'             => 'Atribbutet :attribute kunne ikke lastes opp.',
     'url'                  => 'Attributt-formatet :attribute er ugyldig.',
-    "unique_undeleted"     => ":attribute må være unikt.",
+    'unique_undeleted'     => ':attribute må være unikt.',
+    'non_circular'         => 'Attributtet :attribute kan ikke opprette en sirkulær referanse.',
 
     /*
     |--------------------------------------------------------------------------
@@ -100,7 +102,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -114,11 +115,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Attributtfeltet inneholder et tegn som ikke er tillatt.",
-        "email_array"      => "En eller flere e-postadresser er ugyldige.",
-        "hashed_pass"      => "Gjeldende passord er feil",
+        'alpha_space' => 'Attributtfeltet inneholder et tegn som ikke er tillatt.',
+        'email_array'      => 'En eller flere e-postadresser er ugyldige.',
+        'hashed_pass'      => 'Gjeldende passord er feil',
         'dumbpwd'          => 'Passordet er for vanlig.',
-        "statuslabel_type" => "Du må velge en gyldig statusetikett-type",
+        'statuslabel_type' => 'Du må velge en gyldig statusetikett-type',
     ],
 
     /*
@@ -134,4 +135,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

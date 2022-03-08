@@ -2,7 +2,7 @@
 
 return array(
 
-    'create'				=> 'Uusi Laitemalli',
+    'create'				=> 'Uusi laitemalli',
     'created_at' 			=> 'Luontiaika',
     'eol'	 				=> 'Elinaika',
     'modelnumber'   		=> 'Mallinumero',

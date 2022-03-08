@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Denne bruger kan logge ind',
     'activated_disabled_help_text' => 'Du kan ikke redigere rettigheder for din egen konto.',
     'assets_user'       => 'Aktiver tildelt :navn',
@@ -13,16 +12,26 @@ return array(
     'edit'              => 'Redigér bruger',
     'filetype_info'     => 'Tilladte filtyper er png, gif, jpg, jpeg, doc, docx, pdf, txt, zip og rar.',
     'history_user'      => 'Historie for: navn',
-	'info'				=> 'Information',
+    'info'				=> 'Information',
     'restore_user'		=> 'Klik her for at gendanne dem.',
     'last_login'        => 'Sidste Login',
     'ldap_config_text'  => 'LDAP-konfigurationsindstillinger kan findes Admin> Indstillinger. Den (valgfrie) valgte placering vil blive indstillet for alle importerede brugere.',
     'print_assigned'    => 'Udskriv alle tildelte',
     'software_user'     => 'Software Checket ud til: navn',
-    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
+    'send_email_help'   => 'Du skal angive en e-mail-adresse for denne bruger for at sende dem legitimationsoplysninger. E-mailing af legitimationsoplysninger kan kun gøres ved brugeroprettelse. Adgangskoder gemmes i en envejs hash og kan ikke hentes når de er gemt.',
     'view_user'         => 'Se bruger :navn',
     'usercsv'           => 'CSV-fil',
     'two_factor_admin_optin_help' => 'Dine nuværende administratorindstillinger tillader selektiv håndhævelse af tofaktors godkendelse.',
     'two_factor_enrolled' => '2FA Device Enrolled',
     'two_factor_active'   => '2FA aktiv ',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

@@ -32,6 +32,7 @@ class ComponentCheckoutController extends Controller
             return redirect()->route('components.index')->with('error', trans('admin/components/message.not_found'));
         }
         $this->authorize('checkout', $component);
+
         return view('components/checkout', compact('component'));
     }
 
@@ -58,8 +59,8 @@ class ComponentCheckoutController extends Controller
 
         $max_to_checkout = $component->numRemaining();
         $validator = Validator::make($request->all(), [
-            "asset_id"          => "required",
-            "assigned_qty"      => "required|numeric|between:1,$max_to_checkout"
+            'asset_id'          => 'required',
+            'assigned_qty'      => "required|numeric|between:1,$max_to_checkout",
         ]);
 
         if ($validator->fails()) {
@@ -78,14 +79,14 @@ class ComponentCheckoutController extends Controller
         }
 
         // Update the component data
-        $component->asset_id =   $asset_id;
+        $component->asset_id = $asset_id;
 
         $component->assets()->attach($component->id, [
             'component_id' => $component->id,
             'user_id' => $admin_user->id,
             'created_at' => date('Y-m-d H:i:s'),
             'assigned_qty' => $request->input('assigned_qty'),
-            'asset_id' => $asset_id
+            'asset_id' => $asset_id,
         ]);
 
         event(new CheckoutableCheckedOut($component, $asset, Auth::user(), $request->input('note')));

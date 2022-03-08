@@ -2,9 +2,9 @@
 <div class="col-md-12">
     <div class="alert alert-danger fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <i class="fa fa-exclamation-circle faa-pulse animated"></i>
-        <strong>Error: </strong>
-         Please check the form below for errors
+        <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
+        <strong>{{ trans('general.notification_error') }}</strong>
+         {{ trans('general.notification_error_hint') }}
     </div>
 </div>
 
@@ -15,8 +15,8 @@
     <div class="col-md-12">
         <div class="alert alert-success fade in">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <i class="fa fa-check faa-pulse animated"></i>
-            <strong>Success: </strong>
+            <i class="fas fa-check faa-pulse animated"></i>
+            <strong>{{ trans('general.notification_success') }} </strong>
             {{ $message }}
         </div>
     </div>
@@ -27,8 +27,8 @@
 <div class="col-md-12">
     <div class="alert alert-success fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <i class="fa fa-check faa-pulse animated"></i>
-        <strong>Success: </strong>
+        <i class="fas fa-check faa-pulse animated"></i>
+        <strong>{{ trans('general.notification_success') }} </strong>
         {{ $message }}
     </div>
 </div>
@@ -40,16 +40,16 @@
         <div class="col-md-12">
             <div class="alert alert-info fade in">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <i class="fa fa-info-circle faa-pulse animated"></i>
-                <strong>Asset Information: </strong>
+                <i class="fas fa-info-circle faa-pulse animated"></i>
+                <strong>{{ trans('general.asset_information') }} </strong>
                 <ul>
                     @isset ($asset->model->name)
-                        <li><b>Model Name: </b> {{ $asset->model->name }}</li>
+                        <li><b>{{ trans('general.model_name') }} </b> {{ $asset->model->name }}</li>
                     @endisset
                     @isset ($asset->name)
-                        <li><b>Asset Name: </b> {{ $asset->model->name }}</li>
+                        <li><b>{{ trans('general.asset_name') }} </b> {{ $asset->model->name }}</li>
                     @endisset
-                    <li><b>Asset Tag:</b> {{ $asset->asset_tag }}</li>
+                    <li><b>{{ trans('general.asset_tag') }}</b> {{ $asset->asset_tag }}</li>
                 </ul>
 
             </div>
@@ -63,9 +63,9 @@
         <div class="col-md-12">
             <div class="alert alert-info fade in">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <i class="fa fa-info-circle faa-pulse animated"></i>
-                <strong>Consumable Information: </strong>
-                <ul><li><b>Name:</b> {{ $consumable->name }}</li></ul>
+                <i class="fas fa-info-circle faa-pulse animated"></i>
+                <strong>{{ trans('general.consumable_information') }} </strong>
+                <ul><li><b>{{ trans('general.consumable_name') }}</b> {{ $consumable->name }}</li></ul>
             </div>
         </div>
     @endforeach
@@ -77,9 +77,9 @@
         <div class="col-md-12">
             <div class="alert alert-info fade in">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <i class="fa fa-info-circle faa-pulse animated"></i>
-                <strong>Accessory Information: </strong>
-                <ul><li><b>Name:</b> {{ $accessory->name }}</li></ul>
+                <i class="fas fa-info-circle faa-pulse animated"></i>
+                <strong>{{ trans('general.accessory_information') }} </strong>
+                <ul><li><b>{{ trans('general.accessory_name') }}</b> {{ $accessory->name }}</li></ul>
             </div>
         </div>
     @endforeach
@@ -90,8 +90,8 @@
 <div class="col-md-12">
     <div class="alert alert alert-danger fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <i class="fa fa-exclamation-circle faa-pulse animated"></i>
-        <strong>Error: </strong>
+        <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
+        <strong>{{ trans('general.error') }} </strong>
         {{ $message }}
     </div>
 </div>
@@ -103,8 +103,8 @@
 <div class="col-md-12">
     <div class="alert alert alert-danger fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <i class="fa fa-exclamation-circle faa-pulse animated"></i>
-        <strong>Error: </strong>
+        <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
+        <strong>{{ trans('general.notification_error') }} </strong>
         {{ $message }}
     </div>
 </div>
@@ -116,8 +116,8 @@
 <div class="col-md-12">
     <div class="alert alert-warning fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <i class="fa fa-warning faa-pulse animated"></i>
-        <strong>Warning: </strong>
+        <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
+        <strong>{{ trans('general.notification_warning') }} </strong>
         {{ $message }}
     </div>
 </div>
@@ -128,8 +128,8 @@
 <div class="col-md-12">
     <div class="alert alert-info fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <i class="fa fa-info-circle faa-pulse animated"></i>
-        <strong>Info: </strong>
+        <i class="fas fa-info-circle faa-pulse animated"></i>
+        <strong>{{ trans('general.notification_info') }} </strong>
         {{ $message }}
     </div>
 </div>

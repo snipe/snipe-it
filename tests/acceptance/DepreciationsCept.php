@@ -1,4 +1,5 @@
 <?php
+
 $I = new AcceptanceTester($scenario);
 AcceptanceTester::test_login($I);
 $I->am('logged in user');
@@ -8,7 +9,7 @@ $I->lookForwardTo('seeing it load without errors');
 $I->amOnPage('/depreciations');
 $I->seeInTitle('Depreciations');
 $I->waitForElement('.table', 5); // secs
-$I->seeNumberOfElements('table[name="depreciations"] tbody tr', [1,5]);
+$I->seeNumberOfElements('table[name="depreciations"] tbody tr', [1, 5]);
 $I->seeInPageSource('/depreciations/create');
 $I->dontSee('Depreciations', '.page-header');
 $I->see('Depreciations', 'h1.pull-left');

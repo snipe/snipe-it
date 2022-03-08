@@ -1,6 +1,5 @@
 <?php
 
-
 class AssetModelsCest
 {
     public function _before(FunctionalTester $I)
@@ -10,6 +9,7 @@ class AssetModelsCest
         $I->fillField('password', 'password');
         $I->click('Login');
     }
+
     // tests
     public function tryToTest(FunctionalTester $I)
     {
@@ -22,7 +22,7 @@ class AssetModelsCest
 
     public function failsEmptyValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with blank elements");
+        $I->wantTo('Test Validation Fails with blank elements');
         $I->amOnPage(route('models.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
@@ -33,7 +33,7 @@ class AssetModelsCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $model = factory(App\Models\AssetModel::class)->states('mbp-13-model')->make(['name'=>'Test Model']);
+        $model = \App\Models\AssetModel::factory()->mbp13Model()->make(['name'=>'Test Model']);
         $values = [
             'category_id'       => $model->category_id,
             'depreciation_id'   => $model->depreciation_id,
@@ -44,7 +44,7 @@ class AssetModelsCest
             'notes'             => $model->notes,
         ];
 
-        $I->wantTo("Test Validation Succeeds");
+        $I->wantTo('Test Validation Succeeds');
         $I->amOnPage(route('models.create'));
 
         $I->submitForm('form#create-form', $values);
@@ -56,9 +56,8 @@ class AssetModelsCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete an asset model');
-        $model = factory(App\Models\AssetModel::class)->states('mbp-13-model')->create(['name' => "Test Model"]);
+        $model = \App\Models\AssetModel::factory()->mbp13Model()->create(['name' => 'Test Model']);
         $I->sendDelete(route('models.destroy', $model->id), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);
     }
-
 }

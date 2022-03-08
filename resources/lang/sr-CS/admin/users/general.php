@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Ovaj korisnik može da se uloguje',
     'activated_disabled_help_text' => 'Ne možete da menjate status aktivacije za sopstveni nalog.',
     'assets_user'       => 'Imovina dodijeljena za :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Edit User',
     'filetype_info'     => 'Dopuštene vrste datoteka su png, gif, jpg, jpeg, doc, docx, pdf, txt, zip i rar.',
     'history_user'      => 'Istorija za :name',
-	'info'				=> 'Info',
+    'info'				=> 'Info',
     'restore_user'		=> 'Kliknite ovdje da biste ih vratili.',
     'last_login'        => 'Poslednja prijava',
     'ldap_config_text'  => 'Postavke LDAP konfiguracije mogu se pronaći u Administrator> Postavke. Odabrana lokacija (opcionalno) će biti podešena za sve importovane korisnike.',
@@ -25,4 +24,14 @@ return array(
     'two_factor_admin_optin_help' => 'Your current admin settings allow selective enforcement of two-factor authentication.  ',
     'two_factor_enrolled' => '2FA Device Enrolled ',
     'two_factor_active'   => '2FA Active ',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

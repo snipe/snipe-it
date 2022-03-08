@@ -18,5 +18,6 @@ return array(
     'update'  							=> 'تحديث التصنيف',
     'use_default_eula'					=> 'قم باستعمال <a href="#" data-toggle="modal" data-target="#eulaModal">إتفاقية الترخيص الإفتراضية</a>.',
     'use_default_eula_disabled'			=> '<del>استخدام (اتفاقية ترخيص المستخدم) الافتراضية الأساسية بدلا من ذلك.</del> لم يتم تحديد (اتفاقية ترخيص المستخدم) الافتراضية الأساسية. الرجاء إضافتها من الإعدادات.',
+    'use_default_eula_column'			=> 'استخدم EULA الافتراضي',
 
 );

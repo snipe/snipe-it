@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Gruplar hakkında',
     'about_groups'                  => 'Gruplar, kullanıcı izinlerini genellemek için kullanılır.',
     'group_management' 	 	=> 'Grup Yönetimi',
@@ -10,5 +10,7 @@ return array(
     'group_admin' 	 		=> 'Grup Yöneticisi',
     'allow' 	 			=> 'Kabul Et',
     'deny' 	 				=> 'Reddet',
-
-);
+    'permission'            => 'Permission',
+    'grant'                 => 'Grant',
+    'no_permissions'        => 'This group has no permissions.'
+];

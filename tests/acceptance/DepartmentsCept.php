@@ -1,4 +1,5 @@
 <?php
+
 $I = new AcceptanceTester($scenario);
 AcceptanceTester::test_login($I);
 
@@ -7,7 +8,7 @@ $I->wantTo('ensure that the department listing page loads without errors');
 $I->lookForwardTo('seeing it load without errors');
 $I->amOnPage('/departments');
 $I->waitForElement('.table', 5); // secs
-$I->seeNumberOfElements('table[name="departments"] tr', [5,30]);
+$I->seeNumberOfElements('table[name="departments"] tr', [5, 30]);
 $I->seeInTitle('Departments');
 $I->see('Departments');
 $I->seeInPageSource('departments/create');

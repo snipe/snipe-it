@@ -1,8 +1,7 @@
 @extends('layouts/default')
-
 {{-- Page title --}}
 @section('title')
-Bulk Checkin &amp; Delete
+{!! trans('general.bulk_checkin_delete') !!}
 @parent
 @stop
 
@@ -18,9 +17,9 @@ Bulk Checkin &amp; Delete
           {{csrf_field()}}
           <div class="col-md-12">
             <div class="callout callout-danger">
-              <i class="fa fa-exclamation-circle"></i>
-              <strong>WARNING: </strong>
-              You are about to delete the {{ count($users) }} user(s) listed below. Super admin names are highlighted in red.
+              <i class="fas fa-exclamation-triangle"></i>
+              <strong>{{ trans('admin/users/general.warning_deletion') }} </strong>
+              {{ trans('admin/users/general.warning_deletion_information', array('count' => count($users))) }}
             </div>
           </div>
 
@@ -38,11 +37,11 @@ Bulk Checkin &amp; Delete
                 <thead>
                   <tr>
                     <th class="col-md-1"></th>
-                    <th class="col-md-6">Name</th>
-                    <th class="col-md-5">Groups</th>
-                    <th class="col-md-5">Assets</th>
-                    <th class="col-md-5">Accessories</th>
-                    <th class="col-md-5">Licenses</th>
+                    <th class="col-md-6">{{ trans('general.name') }}</th>
+                    <th class="col-md-5">{{ trans('general.groups') }}</th>
+                    <th class="col-md-5">{{ trans('general.assets') }}</th>
+                    <th class="col-md-5">{{ trans('general.accessories') }}</th>
+                    <th class="col-md-5">{{ trans('general.licenses') }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -85,12 +84,12 @@ Bulk Checkin &amp; Delete
                   <tr>
                     <td colspan="6" class="warning">
                       {{ Form::select('status_id', $statuslabel_list , Request::old('status_id'), array('class'=>'select2', 'style'=>'width:250px')) }}
-                      <label>Update all assets for these users to this status</label>
+                      <label>{{ trans('admin/users/general.update_user_assets_status') }}</label></label>
                     </td>
                   </tr>
                   <tr>
                     <td colspan="6" class="warning">
-                      <label><input type="checkbox" name="ids['.e($user->id).']" checked> Check in all properties associated with these users</label>
+                      <label><input type="checkbox" name="ids['.e($user->id).']" checked>{{ trans('admin/users/general.checkin_user_properties') }}</label>
                     </td>
                   </tr>
                 </tfoot>
@@ -100,7 +99,7 @@ Bulk Checkin &amp; Delete
         </div> <!--/box-body-->
         <div class="box-footer text-right">
           <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-          <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('button.submit') }}</button>
+          <button type="submit" class="btn btn-success"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('button.submit') }}</button>
         </div><!-- /.box-footer -->
       </form>
     </div>

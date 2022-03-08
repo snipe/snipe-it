@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => '關於群組',
     'about_groups'                  => '群組用來區分使用者權限。',
     'group_management' 	 	=> '群組管理',
@@ -10,5 +10,7 @@ return array(
     'group_admin' 	 		=> '群組管理員',
     'allow' 	 			=> '允許',
     'deny' 	 				=> '拒絕',
-
-);
+    'permission'            => 'Permission',
+    'grant'                 => 'Grant',
+    'no_permissions'        => 'This group has no permissions.'
+];

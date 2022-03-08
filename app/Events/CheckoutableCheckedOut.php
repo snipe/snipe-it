@@ -25,6 +25,6 @@ class CheckoutableCheckedOut
         $this->checkoutable = $checkoutable;
         $this->checkedOutTo = $checkedOutTo;
         $this->checkedOutBy = $checkedOutBy;
-        $this->note         = $note;
+        $this->note = $note;
     }
 }

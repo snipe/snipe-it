@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Update Barcode Settings
+    {{  trans('admin/settings/general.barcode_title') }}
     @parent
 @stop
 
@@ -32,7 +32,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fa fa-barcode" aria-hidden="true"></i> Barcodes
+                        <i class="fas fa-barcode" aria-hidden="true"></i> {{ trans('admin/settings/general.barcodes') }}
                     </h2>
                 </div>
                 <div class="box-body">
@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     {!! Form::barcode_types('barcode_type', old('barcode_type', $setting->barcode_type), 'select2 col-md-4') !!}
-                                    {!! $errors->first('barcode_type', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                    {!! $errors->first('barcode_type', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                                 </div>
                             </div>
 
@@ -81,7 +81,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     {!! Form::alt_barcode_types('alt_barcode', old('alt_barcode', $setting->alt_barcode), 'select2 col-md-4') !!}
-                                    {!! $errors->first('barcode_type', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                    {!! $errors->first('barcode_type', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                                 </div>
                             </div>
                         @else
@@ -119,7 +119,7 @@
                             </div>
                             <div class="col-md-9" id="purgebarcodesrow">
                                 <a class="btn btn-default btn-sm pull-left" id="purgebarcodes" style="margin-right: 10px;">
-                                    Delete Barcode Cache</a>
+                                    {{ trans('admin/settings/general.barcode_delete_cache') }}</a>
                                 <span id="purgebarcodesicon"></span>
                                 <span id="purgebarcodesresult"></span>
                                 <span id="purgebarcodesstatus"></span>
@@ -128,7 +128,7 @@
                                 <div id="purgebarcodesstatus-error" class="text-danger"></div>
                             </div>
                             <div class="col-md-9 col-md-offset-3">
-                                <p class="help-block">This will attempt to delete cached barcodes. This would typically only be used if your barcode settings have changed, or if your Snipe-IT URL has changed. Barcodes will be re-generated when accessed next.</p>
+                                <p class="help-block">{{ trans('admin/settings/general.barcodes_help') }}</p>
                             </div>
 
                         </div>
@@ -142,7 +142,7 @@
                         <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                     </div>
                     <div class="text-right col-md-6">
-                        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                        <button type="submit" class="btn btn-success"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                     </div>
 
                 </div>
@@ -164,7 +164,7 @@
             $("#purgebarcodesicon").html('');
             $("#purgebarcodesstatus").html('');
             $('#purgebarcodesstatus-error').html('');
-            $("#purgebarcodesicon").html('<i class="fa fa-spinner spin"></i> Attempting to delete files...');
+            $("#purgebarcodesicon").html('<i class="fas fa-spinner spin"></i> {{ trans('admin/settings/general.barcodes_spinner') }}');
             $.ajax({
                 url: '{{ route('api.settings.purgebarcodes') }}',
                 type: 'POST',
@@ -183,7 +183,7 @@
                     $("#purgebarcodesstatus").removeClass('text-danger');
                     $("#purgebarcodesstatus").addClass('text-success');
                     if (data.message) {
-                        $("#purgebarcodesstatus").html('<i class="fa fa-check text-success"></i> ' + data.message);
+                        $("#purgebarcodesstatus").html('<i class="fas fa-check text-success"></i> ' + data.message);
                     }
                 },
 
@@ -194,7 +194,7 @@
                     $('#purgebarcodesstatus-error').html('');
                     $("#purgebarcodesstatus").removeClass('text-success');
                     $("#purgebarcodesstatus").addClass('text-danger');
-                    $("#purgebarcodesicon").html('<i class="fa fa-exclamation-triangle text-danger"></i>');
+                    $("#purgebarcodesicon").html('<i class="fas fa-exclamation-triangle text-danger"></i>');
                     $('#purgebarcodesstatus').html('Files could not be deleted.');
                     if (data.responseJSON) {
                         $('#purgebarcodesstatus-error').html('Error: ' + data.responseJSON.messages);

@@ -89,19 +89,73 @@
 
 
   <!-- side address column -->
+
   <div class="col-md-3">
 
       @if ($accessory->image!='')
+      <div class="row">
           <div class="col-md-12 text-center" style="padding-bottom: 15px;">
               <a href="{{ Storage::disk('public')->url('accessories/'.e($accessory->image)) }}" data-toggle="lightbox"><img src="{{ Storage::disk('public')->url('accessories/'.e($accessory->image)) }}" class="img-responsive img-thumbnail" alt="{{ $accessory->name }}"></a>
           </div>
+      </div>
       @endif
 
-      <div class="text-center">
-          @can('checkout', \App\Models\Accessory::class)
-              <a href="{{ route('checkout/accessory', $accessory->id) }}" style="margin-right:5px;" class="btn btn-primary btn-sm" {{ (($accessory->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
-          @endcan
+      @if ($accessory->company)
+        <div class="row">
+          <div class="col-md-4" style="padding-bottom: 15px;">
+            {{ trans('general.company')}}
+          </div>
+          <div class="col-md-8">
+            <a href="{{ route('companies.show', $accessory->company->id) }}">{{ $accessory->company->name }} </a>
+          </div>
+        </div>
+      @endif 
+      
+
+    @if ($accessory->category)
+        <div class="row">
+          <div class="col-md-4" style="padding-bottom: 15px;">
+            {{ trans('general.category')}}
+          </div>
+          <div class="col-md-8">
+            <a href="{{ route('categories.show', $accessory->category->id) }}">{{ $accessory->category->name }} </a>
+          </div>
+        </div>
+      @endif 
+
+
+      @if ($accessory->notes)
+
+        <div class="col-md-12">
+          <strong>
+            {{ trans('general.notes') }}
+          </strong>
+          </div>
+        <div class="col-md-12">
+          {!! nl2br(e($accessory->notes)) !!}
+          </div>
+        </div>
+      @endif 
+      
+
+        <div class="row">
+          <div class="col-md-4" style="padding-bottom: 15px;">
+            Number remaining
+          </div>
+          <div class="col-md-8">
+            {{ $accessory->numRemaining() }}
+          </div>
+        </div>
+
+
+
+      @can('checkout', \App\Models\Accessory::class)
+      <div class="row">
+        <div class="col-md-12 text-center">
+              <a href="{{ route('checkout/accessory', $accessory->id) }}" style="margin-right:5px;" class="btn btn-primary btn-sm" {{ (($accessory->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>   
+        </div>
       </div>
+      @endcan
   </div>
 </div>
 @stop

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,24 +13,22 @@ return array(
     |
     */
 
-    "more_info_title" => "More Info",
+    'more_info_title' => 'Več informacij',
 
-    "audit_help" => "Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to.",
+    'audit_help' => 'Če potrdite to polje, boste spremenili zapis sredstva, da bo odražal to novo lokacijo. Če je ne potrdite, boste lokacijo preprosto zabeležili v revizijskem dnevniku.<br><br>Upoštevajte, da če je to sredstvo izdano, to ne bo spremenilo lokacije osebe, sredstva ali lokacije, na katero je izdano.',
 
-    'assets' => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'assets' => 'Sredstva so stvari, ki so sledene po serijski številki ali oznaki sredstva. Ponavadi so stvari z višjo vrednostjo, pri katerih je opredelitev določenega predmeta pomembna.',
 
-    'categories' => 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'categories' => 'Kategorije vam pomagajo organizirati vaše predmete. Nekari primeri kategorij so &quot;Namizni računalniki&quot;, &quot;Prenosni računalniki&quot;, &quot;Mobilni telefoni&quot;, &quot;Tablice&quot;in tako naprej, vendar lahko kategorije uporabite kakor koli je smiselno za vas.',
 
-    'accessories' => 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
+    'accessories' => 'Dodatki so vse stvari, ki se izdajajo uporabnikom, vendar niso vodeni kot osnovna sredstva (oziroma nimajo serijskih številk). Na primer, računalniške miške ali tipkovnice.',
 
-    'companies'     => 'Companies can be used as a simple identifier field, or can be used to limit visibility of assets, users, etc if full company support is enabled in your Admin settings.',
+    'companies'     => 'Podjetja je mogoče uporabiti kot polje za preprosto identifikacijo ali se jih lahko uporabi za omejitev prepoznavnosti sredstev, uporabnikov itd., če je v vaših skrbniških nastavitvah omogočena popolna podpora podjetja.',
 
-    'components'    => 'Components are items that are part of an asset, for example HDD, RAM, etc.',
+    'components'    => 'Komponente so stvari, ki so del sredstva. Na primer trdi disk, RAM, ipd.',
 
-    'consumables'   => 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
+    'consumables'   => 'Potrošni materiali so na primer karrtuše ali kopirni papir.',
 
-    'depreciations' => 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
+    'depreciations' => 'Za amortizacijo sredstev lahko določite amortizacijo sredstev, ki temelji na enakomerni amortizaciji.',
 
-
-
-);
+];

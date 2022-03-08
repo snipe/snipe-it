@@ -120,9 +120,9 @@
         },
 
         components: {
-            alert: require('../alert.vue'),
-            errors: require('./importer-errors.vue'),
-            importFile: require('./importer-file.vue'),
+            alert: require('../alert.vue').default,
+            errors: require('./importer-errors.vue').default,
+            importFile: require('./importer-file.vue').default,
         }
     }
 

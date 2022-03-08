@@ -2,15 +2,15 @@
 
 namespace App\Services;
 
-use OneLogin\Saml2\Auth as OneLogin_Saml2_Auth;
-use OneLogin\Saml2\IdPMetadataParser as OneLogin_Saml2_IdPMetadataParser;
-use OneLogin\Saml2\Settings as OneLogin_Saml2_Settings;
-use OneLogin\Saml2\Utils as OneLogin_Saml2_Utils;
 use App\Models\Setting;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
+use OneLogin\Saml2\Auth as OneLogin_Saml2_Auth;
+use OneLogin\Saml2\IdPMetadataParser as OneLogin_Saml2_IdPMetadataParser;
+use OneLogin\Saml2\Settings as OneLogin_Saml2_Settings;
+use OneLogin\Saml2\Utils as OneLogin_Saml2_Utils;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
@@ -112,15 +112,15 @@ class Saml
 
     /**
      * Initializes the SAML service and builds the OneLogin_Saml2_Auth instance.
-     * 
+     *
      * @author Johnson Yi <jyi.dev@outlook.com>
-     * 
+     *
      * @since 5.0.0
-     * 
+     *
      * @throws Exception
      * @throws Error
      */
-    function __construct()
+    public function __construct()
     {
         $this->loadSettings();
 
@@ -139,9 +139,10 @@ class Saml
 
     /**
      * Builds settings from Snipe-IT for OneLogin_Saml2_Auth.
-     * 
+     *
      * @author Johnson Yi <jyi.dev@outlook.com>
-     * 
+     * @author Michael Pietsch <skywalker-11@mi-pietsch.de>
+     *
      * @since 5.0.0
      *
      * @return void
@@ -162,14 +163,19 @@ class Saml
             data_set($settings, 'sp.singleLogoutService.url', route('saml.sls'));
             data_set($settings, 'sp.x509cert', $setting->saml_sp_x509cert);
             data_set($settings, 'sp.privateKey', $setting->saml_sp_privatekey);
+            if (! empty($setting->saml_sp_x509certNew)) {
+                data_set($settings, 'sp.x509certNew', $setting->saml_sp_x509certNew);
+            } else {
+                data_set($settings, 'sp.x509certNew', '');
+            }
 
-            if (!empty(data_get($settings, 'sp.privateKey'))) {
+            if (! empty(data_get($settings, 'sp.privateKey'))) {
                 data_set($settings, 'security.logoutRequestSigned', true);
                 data_set($settings, 'security.logoutResponseSigned', true);
             }
 
             $idpMetadata = $setting->saml_idp_metadata;
-            if (!empty($idpMetadata)) {
+            if (! empty($idpMetadata)) {
                 $updatedAt = $setting->updated_at->timestamp;
                 $metadataCache = Cache::get('saml_idp_metadata_cache');
                 try {
@@ -197,16 +203,16 @@ class Saml
                 } catch (Exception $e) {
                 }
             }
-        
+
             $custom_settings = preg_split('/\r\n|\r|\n/', $setting->saml_custom_settings);
-            if ($custom_settings){
-                foreach($custom_settings as $custom_setting) {
+            if ($custom_settings) {
+                foreach ($custom_settings as $custom_setting) {
                     $split = explode('=', $custom_setting, 2);
 
                     if (count($split) == 2) {
                         $boolValue = filter_var($split[1], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
 
-                        if (!is_null($boolValue)) {
+                        if (! is_null($boolValue)) {
                             $split[1] = $boolValue;
                         }
 
@@ -214,23 +220,23 @@ class Saml
                     }
                 }
             }
-
             $this->_settings = $settings;
         }
     }
 
     /**
      * Load SAML data from Session.
-     * 
+     *
      * @author Johnson Yi <jyi.dev@outlook.com>
-     * 
+     *
      * @since 5.0.0
-     * 
+     *
      * @return void
      */
-    private function loadDataFromSession() {
+    private function loadDataFromSession()
+    {
         $samlData = collect(session(self::DATA_SESSION_KEY));
-        $this->_authenticated = !$samlData->isEmpty();
+        $this->_authenticated = ! $samlData->isEmpty();
         $this->_nameid = $samlData->get('nameId');
         $this->_nameidFormat = $samlData->get('nameIdFormat');
         $this->_nameidNameQualifier = $samlData->get('nameIdNameQualifier');
@@ -243,9 +249,9 @@ class Saml
 
     /**
      * Save SAML data to Session.
-     * 
+     *
      * @author Johnson Yi <jyi.dev@outlook.com>
-     * 
+     *
      * @since 5.0.0
      *
      * @param string $data
@@ -259,9 +265,9 @@ class Saml
 
     /**
      * Check to see if SAML is enabled and has valid settings.
-     * 
+     *
      * @author Johnson Yi <jyi.dev@outlook.com>
-     * 
+     *
      * @since 5.0.0
      *
      * @return bool
@@ -273,9 +279,9 @@ class Saml
 
     /**
      * Clear SAML data from session.
-     * 
+     *
      * @author Johnson Yi <jyi.dev@outlook.com>
-     * 
+     *
      * @since 5.0.0
      *
      * @return void
@@ -288,36 +294,38 @@ class Saml
 
     /**
      * Find user from SAML data.
-     * 
+     *
      * @author Johnson Yi <jyi.dev@outlook.com>
-     * 
+     *
      * @since 5.0.0
      *
      * @param string $data
      *
      * @return \App\Models\User
      */
-    public function samlLogin($data) {
+    public function samlLogin($data)
+    {
         $setting = Setting::getSettings();
         $this->saveDataToSession($data);
         $this->loadDataFromSession();
-    
+
         $username = $this->getUsername();
-    
+
         return User::where('username', '=', $username)->whereNull('deleted_at')->where('activated', '=', '1')->first();
     }
 
     /**
-     * Returns the OneLogin_Saml2_Auth instance. 
-     * 
+     * Returns the OneLogin_Saml2_Auth instance.
+     *
      * @author Johnson Yi <jyi.dev@outlook.com>
-     * 
+     *
      * @since 5.0.0
-     * 
+     *
      * @return OneLogin\Saml2\Auth
      */
-    public function getAuth() {
-        if (!$this->isEnabled()) {
+    public function getAuth()
+    {
+        if (! $this->isEnabled()) {
             throw new HttpException(403, 'SAML not enabled.');
         }
 
@@ -326,15 +334,16 @@ class Saml
 
     /**
      * Get a setting.
-     * 
+     *
      * @author Johnson Yi <jyi.dev@outlook.com>
-     * 
+     *
      * @param string|array|int $key
      * @param mixed $default
-     * 
+     *
      * @return void
      */
-    public function getSetting($key, $default = null) {
+    public function getSetting($key, $default = null)
+    {
         return data_get($this->_settings, $key, $default);
     }
 
@@ -354,27 +363,28 @@ class Saml
     public function getSPMetadata($alwaysPublishEncryptionCert = false, $validUntil = null, $cacheDuration = null)
     {
         try {
-            $settings = new OneLogin_Saml2_Settings($this->_settings , true);
+            $settings = new OneLogin_Saml2_Settings($this->_settings, true);
             $metadata = $settings->getSPMetadata($alwaysPublishEncryptionCert, $validUntil, $cacheDuration);
-    
+
             return $metadata;
         } catch (Exception $e) {
-            return "";
+            return '';
         }
     }
 
     /**
-     * Extract data from SAML Response. 
-     * 
+     * Extract data from SAML Response.
+     *
      * @author Johnson Yi <jyi.dev@outlook.com>
-     * 
+     *
      * @since 5.0.0
-     * 
+     *
      * @return array
      */
     public function extractData()
     {
         $auth = $this->getAuth();
+
         return [
             'attributes' => $auth->getAttributes(),
             'attributesWithFriendlyName' => $auth->getAttributesWithFriendlyName(),
@@ -478,12 +488,12 @@ class Saml
     }
 
     /**
-     * Returns the correct username from SAML Response. 
-     * 
+     * Returns the correct username from SAML Response.
+     *
      * @author Johnson Yi <jyi.dev@outlook.com>
-     * 
+     *
      * @since 5.0.0
-     * 
+     *
      * @return string
      */
     public function getUsername()
@@ -491,8 +501,7 @@ class Saml
         $setting = Setting::getSettings();
         $username = $this->getNameId();
 
-        if (!empty($setting->saml_attr_mapping_username))
-        {
+        if (! empty($setting->saml_attr_mapping_username)) {
             $attributes = $this->getAttributes();
 
             if (isset($attributes[$setting->saml_attr_mapping_username])) {

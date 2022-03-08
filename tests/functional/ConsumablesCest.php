@@ -1,14 +1,13 @@
 <?php
 
-
 class ConsumablesCest
 {
     public function _before(FunctionalTester $I)
     {
-         $I->amOnPage('/login');
-         $I->fillField('username', 'admin');
-         $I->fillField('password', 'password');
-         $I->click('Login');
+        $I->amOnPage('/login');
+        $I->fillField('username', 'admin');
+        $I->fillField('password', 'password');
+        $I->click('Login');
     }
 
     // tests
@@ -23,7 +22,7 @@ class ConsumablesCest
 
     public function failsEmptyValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with blank elements");
+        $I->wantTo('Test Validation Fails with blank elements');
         $I->amOnPage(route('consumables.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
@@ -34,7 +33,7 @@ class ConsumablesCest
 
     public function failsShortValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with short name");
+        $I->wantTo('Test Validation Fails with short name');
         $I->amOnPage(route('consumables.create'));
         $I->fillField('name', 't2');
         $I->fillField('qty', '-15');
@@ -48,9 +47,9 @@ class ConsumablesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $consumable = factory(App\Models\Consumable::class)->states('cardstock')->make([
+        $consumable = \App\Models\Consumable::factory()->cardstock()->make([
             'name' => 'Test Consumable',
-            'model_number' => 23520
+            'model_number' => 23520,
         ]);
         // dd($consumable);
         $values = [
@@ -66,7 +65,7 @@ class ConsumablesCest
             'purchase_date'     => '2016-01-01',
             'qty'               => $consumable->qty,
         ];
-        $I->wantTo("Test Validation Succeeds");
+        $I->wantTo('Test Validation Succeeds');
         $I->amOnPage(route('consumables.create'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('consumables', $values);

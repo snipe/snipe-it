@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Mō Ngā Rōpū',
     'about_groups'                  => 'Ka whakamahia nga röpü ki te whakawhäiti i nga whakaaetanga kaiwhakamahi.',
     'group_management' 	 	=> 'Whakahaere Rōpū',
@@ -10,5 +10,7 @@ return array(
     'group_admin' 	 		=> 'Kaiwhakahaere Rōpū',
     'allow' 	 			=> 'Tukua',
     'deny' 	 				=> 'Whakaae',
-
-);
+    'permission'            => 'Permission',
+    'grant'                 => 'Grant',
+    'no_permissions'        => 'This group has no permissions.'
+];

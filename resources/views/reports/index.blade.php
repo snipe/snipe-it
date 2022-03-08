@@ -11,7 +11,7 @@
 
 <div class="page-header">
     <div class="pull-right">
-        <a href="{{ route('reports/export') }}" class="btn btn-flat gray pull-right"><i class="fa fa-download icon-white" aria-hidden="true"></i>
+        <a href="{{ route('reports/export') }}" class="btn btn-flat gray pull-right"><i class="fas fa-download icon-white" aria-hidden="true"></i>
         {{ trans('admin/hardware/table.dl_csv') }}</a>
         </div>
     <h2>{{ trans('general.depreciation_report') }}</h2>
@@ -66,7 +66,7 @@
                     @if ($asset->purchase_cost > 0)
                     <td class="align-right">
                         {{ $snipeSettings->default_currency }}
-                        {{ \App\Helpers\Helper::formatCurrencyOutput($asset->purchase_cost) }}
+                        {{ Helper::formatCurrencyOutput($asset->purchase_cost) }}
                     </td>
                     <td class="align-right">
                         {{ $snipeSettings->default_currency }}

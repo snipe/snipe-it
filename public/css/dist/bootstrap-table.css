@@ -1,6 +1,6 @@
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
- * version: 1.18.0
+ * version: 1.19.1
  * https://github.com/wenzhixin/bootstrap-table/
  */
 .bootstrap-table .fixed-table-toolbar::after {
@@ -138,7 +138,12 @@
   font-weight: bold;
   display: inline-block;
   min-width: 30%;
+  width: auto !important;
   text-align: left !important;
+}
+
+.bootstrap-table .fixed-table-container .table tbody tr .card-view .card-view-value {
+  width: 100% !important;
 }
 
 .bootstrap-table .fixed-table-container .table .bs-checkbox {
@@ -198,6 +203,7 @@
   position: absolute;
   bottom: 0;
   width: 100%;
+  max-width: 100%;
   z-index: 1000;
   transition: visibility 0s, opacity 0.15s ease-in-out;
   opacity: 0;
@@ -298,11 +304,6 @@
   margin: 0;
 }
 
-.bootstrap-table .fixed-table-pagination > .pagination ul.pagination a {
-  padding: 6px 12px;
-  line-height: 1.428571429;
-}
-
 .bootstrap-table .fixed-table-pagination > .pagination ul.pagination li.page-intermediate a {
   color: #c8c8c8;
 }
@@ -329,6 +330,18 @@
   background: #fff;
   height: calc(100vh);
   overflow-y: scroll;
+}
+
+.bootstrap-table.bootstrap4 .pagination-lg .page-link, .bootstrap-table.bootstrap5 .pagination-lg .page-link {
+  padding: .5rem 1rem;
+}
+
+.bootstrap-table.bootstrap5 .float-left {
+  float: left;
+}
+
+.bootstrap-table.bootstrap5 .float-right {
+  float: right;
 }
 
 /* calculate scrollbar width */

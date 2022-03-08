@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Ten użytkownik może się zalogować',
     'activated_disabled_help_text' => 'Nie możesz edytować statusu aktywacji dla własnego konta.',
     'assets_user'       => 'Aktywa przypisane do :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Edycja Użytkownika',
     'filetype_info'     => 'Dozwolone typy plików: png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar.',
     'history_user'      => 'Historia',
-	'info'				=> 'Informacje',
+    'info'				=> 'Informacje',
     'restore_user'		=> 'Kliknij tutaj, aby je przywrócić.',
     'last_login'        => 'Ostatnie logowanie',
     'ldap_config_text'  => 'Ustawienia konfiguracji LDAP mogą być znalezione w Administracja -> Ustawienia. Opcjonalnie wybierz lokalizacje, która będzie ustawiona dla zaimportowanych użytkowników.',
@@ -25,4 +24,14 @@ return array(
     'two_factor_admin_optin_help' => 'Bieżące ustawienia administracyjne pozwalają na wybiórcze rejestrowanie uwierzytelniania dwuskładnikowego.  ',
     'two_factor_enrolled' => 'Zarejestrowane urządzenie 2FA ',
     'two_factor_active'   => 'Aktywuj 2FA ',
-    );
+    'user_deactivated'  => 'Użytkownik jest dezaktywowany',
+    'activation_status_warning' => 'Nie zmieniaj statusu aktywacji',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'OSTRZEŻENIE:',
+    'warning_deletion_information' => 'Zamierzasz usunąć :count użytkowników wymienionych poniżej. Superadministratorzy zaznaczeni są na czerwono.',
+    'update_user_asssets_status' => 'Zaktualizuj wszystkie zasoby dla tych użytkowników do tego statusu',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

@@ -18,5 +18,6 @@ return array(
     'update'  							=> 'Kemaskini Kategori',
     'use_default_eula'					=> 'Gunakan <a href="#" data-toggle="modal" data-target="#eulaModal">pilihan utama lalai EULA</a> sebaliknya.',
     'use_default_eula_disabled'			=> '<del>Gunakan EULA lalai utama bukannya.</del> Tiada seting utama EULA ditetapkan. Sila tambah satu dalam Tetapan.',
+    'use_default_eula_column'			=> 'Guna EULA lalai',
 
 );

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'El usuario ha cancelado el item solicitado en la pagina Web',
     'a_user_requested' => 'Un usuario a solicitado un item en la pagina Web',
     'accessory_name' => 'Nombre de accesorio:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'Activo:',
     'asset_name' => 'Nombre del activo:',
     'asset_requested' => 'Activo solicitado',
-    'asset_tag' => 'Etiqueta de activo:',
+    'asset_tag' => 'Etiqueta de activo',
     'assigned_to' => 'Asignado a',
     'best_regards' => 'Cordialmente,',
     'canceled' => 'Cancelado:',
@@ -18,12 +18,12 @@ return array(
     'click_to_confirm' => 'Por favor, pulsa en el siguiente enlace para verificar tu cuenta de :web:',
     'click_on_the_link_accessory' => 'Haga clic en el enlace en la parte inferior para confirmar que ha recibido el accesorio.',
     'click_on_the_link_asset' => 'Haga clic en el enlace en la parte inferior para confirmar que ha recibido el activo.',
-    'Confirm_Asset_Checkin' => 'Asset checkin confirmation',
-    'Confirm_Accessory_Checkin' => 'Accessory checkin confirmation',
-    'Confirm_accessory_delivery' => 'Accessory delivery confirmation',
-    'Confirm_license_delivery' => 'License delivery confirmation',
-    'Confirm_asset_delivery' => 'Asset delivery confirmation',
-    'Confirm_consumable_delivery' => 'Consumable delivery confirmation',
+    'Confirm_Asset_Checkin' => 'Confirmar devolución del activo',
+    'Confirm_Accessory_Checkin' => 'Confirmar devolución del accesorio',
+    'Confirm_accessory_delivery' => 'Confirma entrega de accesorio',
+    'Confirm_license_delivery' => 'Confirma entrega de licencia',
+    'Confirm_asset_delivery' => 'Confirma entrega de activo',
+    'Confirm_consumable_delivery' => 'Confirma entrega de consumible',
     'current_QTY' => 'Cantidad actual',
     'Days' => 'Días',
     'days' => 'Días',
@@ -59,11 +59,11 @@ return array(
     'test_mail_text' => 'Esto es una prueba desde el sistema de gestión de activos de Snipe-IT. Si tienes esto, correo está funcionando :)',
     'the_following_item' => 'El siguiente artículo ha sido devuelto: ',
     'low_inventory_alert' => 'Hay :count item por debajo del inventario mínimo o próximo a bajar.|Hay are :count elementos por debajo del inventario mínimo o próximos a bajar.',
-    'assets_warrantee_alert' => 'Hay :count asiento de licencia que expira en los próximos :threshold días. | Hay :count asientos de licencias que expiran en los próximos :threshold días.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'Hay :count licencia que expira en los próximos :threshold días. | Hay :count licencias que expiran en los próximos :threshold días.',
     'to_reset' => 'Para restaurar tu contraseña de :web, rellena este formulario:',
     'type' => 'Tipo',
-    'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
+    'upcoming-audits' => 'Hay :count activo que se está preparando para auditoría dentro de :threshold days.|Hay :count activos que se están preparando para auditoría en :threshold days.',
     'user' => 'User',
     'username' => 'Username',
     'welcome' => 'Bienvenido, :name',
@@ -72,8 +72,8 @@ return array(
     'Accessory_Checkin_Notification' => 'Accesorio devuelto',
     'Asset_Checkin_Notification' => 'Activo devuelto',
     'License_Checkin_Notification' => 'Licencia devuelta',
-    'Expected_Checkin_Report' => 'Expected asset checkin report',
+    'Expected_Checkin_Report' => 'Informe de devolución de activo esperado',
     'Expected_Checkin_Notification' => 'Recordatorio: :name se acerca la fecha de devolución',
     'Expected_Checkin_Date' => 'Un activo asignado a ti debe ser devuelto en :date',
-    'your_assets' => 'Ver tus activos'
-);
+    'your_assets' => 'Ver tus activos',
+];

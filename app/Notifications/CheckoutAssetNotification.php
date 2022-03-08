@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Helpers\Helper;
 use App\Models\Asset;
 use App\Models\Setting;
 use App\Models\User;
@@ -21,7 +22,6 @@ class CheckoutAssetNotification extends Notification
      */
     public function __construct(Asset $asset, $checkedOutTo, User $checkedOutBy, $acceptance, $note)
     {
-
         $this->item = $asset;
         $this->admin = $checkedOutBy;
         $this->note = $note;
@@ -34,16 +34,14 @@ class CheckoutAssetNotification extends Notification
         $this->expected_checkin = '';
 
         if ($this->item->last_checkout) {
-            $this->last_checkout = \App\Helpers\Helper::getFormattedDateObject($this->item->last_checkout, 'date',
+            $this->last_checkout = Helper::getFormattedDateObject($this->item->last_checkout, 'date',
                 false);
         }
 
         if ($this->item->expected_checkin) {
-            $this->expected_checkin = \App\Helpers\Helper::getFormattedDateObject($this->item->expected_checkin, 'date',
+            $this->expected_checkin = Helper::getFormattedDateObject($this->item->expected_checkin, 'date',
                 false);
         }
-
-
     }
 
     /**
@@ -53,10 +51,9 @@ class CheckoutAssetNotification extends Notification
      */
     public function via()
     {
-
         $notifyBy = [];
 
-        if (Setting::getSettings()->slack_endpoint!='') {
+        if ((Setting::getSettings()) && (Setting::getSettings()->slack_endpoint != '')) {
             \Log::debug('use slack');
             $notifyBy[] = 'slack';
         }
@@ -87,7 +84,6 @@ class CheckoutAssetNotification extends Notification
             if ($this->item->checkin_email()) {
                 $notifyBy[1] = 'mail';
             }
-
         }
 
         return $notifyBy;
@@ -95,19 +91,18 @@ class CheckoutAssetNotification extends Notification
 
     public function toSlack()
     {
-
         $target = $this->target;
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
-        $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot' ;
+        $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot';
 
         $fields = [
             'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
             'By' => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
         ];
 
-        if (($this->expected_checkin) && ($this->expected_checkin!='')) {
+        if (($this->expected_checkin) && ($this->expected_checkin != '')) {
             $fields['Expected Checkin'] = $this->expected_checkin;
         }
 
@@ -120,6 +115,7 @@ class CheckoutAssetNotification extends Notification
                     ->content($note);
             });
     }
+
     /**
      * Get the mail representation of the notification.
      *
@@ -128,8 +124,7 @@ class CheckoutAssetNotification extends Notification
      */
     public function toMail()
     {
-
-        $eula =  method_exists($this->item, 'getEula') ? $this->item->getEula() : '';
+        $eula = method_exists($this->item, 'getEula') ? $this->item->getEula() : '';
         $req_accept = method_exists($this->item, 'requireAcceptance') ? $this->item->requireAcceptance() : 0;
 
         $fields = [];
@@ -156,9 +151,6 @@ class CheckoutAssetNotification extends Notification
             ])
             ->subject(trans('mail.Confirm_asset_delivery'));
 
-
         return $message;
-
     }
-
 }

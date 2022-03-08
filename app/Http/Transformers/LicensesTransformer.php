@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
@@ -8,30 +9,31 @@ use Illuminate\Database\Eloquent\Collection;
 
 class LicensesTransformer
 {
-
-    public function transformLicenses (Collection $licenses, $total)
+    public function transformLicenses(Collection $licenses, $total)
     {
-        $array = array();
+        $array = [];
         foreach ($licenses as $license) {
             $array[] = self::transformLicense($license);
         }
+
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
-    public function transformLicense (License $license)
+    public function transformLicense(License $license)
     {
         $array = [
             'id' => (int) $license->id,
             'name' => e($license->name),
-            'company' => ($license->company) ? ['id' => (int) $license->company->id,'name'=> e($license->company->name)] : null,
-            'manufacturer' =>  ($license->manufacturer) ? ['id' => (int) $license->manufacturer->id,'name'=> e($license->manufacturer->name)] : null,
+            'company' => ($license->company) ? ['id' => (int) $license->company->id, 'name'=> e($license->company->name)] : null,
+            'manufacturer' =>  ($license->manufacturer) ? ['id' => (int) $license->manufacturer->id, 'name'=> e($license->manufacturer->name)] : null,
             'product_key' => (Gate::allows('viewKeys', License::class)) ? e($license->serial) : '------------',
             'order_number' => e($license->order_number),
             'purchase_order' => e($license->purchase_order),
             'purchase_date' => Helper::getFormattedDateObject($license->purchase_date, 'date'),
             'termination_date' => Helper::getFormattedDateObject($license->termination_date, 'date'),
             'depreciation' => ($license->depreciation) ? ['id' => (int) $license->depreciation->id,'name'=> e($license->depreciation->name)] : null,
-            'purchase_cost' => e($license->purchase_cost),
+            'purchase_cost' => Helper::formatCurrencyOutput($license->purchase_cost),
+            'purchase_cost_numeric' => $license->purchase_cost,
             'notes' => e($license->notes),
             'expiration_date' => Helper::getFormattedDateObject($license->expiration_date, 'date'),
             'seats' => (int) $license->seats,
@@ -40,11 +42,13 @@ class LicensesTransformer
             'license_email' => e($license->license_email),
             'reassignable' => ($license->reassignable == 1) ? true : false,
             'maintained' => ($license->maintained == 1) ? true : false,
-            'supplier' =>  ($license->supplier) ? ['id' => (int)  $license->supplier->id,'name'=> e($license->supplier->name)] : null,
-            'category' =>  ($license->category) ? ['id' => (int)  $license->category->id,'name'=> e($license->category->name)] : null,
+            'supplier' =>  ($license->supplier) ? ['id' => (int) $license->supplier->id, 'name'=> e($license->supplier->name)] : null,
+            'category' =>  ($license->category) ? ['id' => (int) $license->category->id, 'name'=> e($license->category->name)] : null,
             'created_at' => Helper::getFormattedDateObject($license->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($license->updated_at, 'datetime'),
+            'deleted_at' => Helper::getFormattedDateObject($license->deleted_at, 'datetime'),
             'user_can_checkout' => (bool) ($license->free_seats_count > 0),
+
         ];
 
         $permissions_array['available_actions'] = [
@@ -60,7 +64,8 @@ class LicensesTransformer
         return $array;
     }
 
-    public function transformAssetsDatatable($licenses) {
+    public function transformAssetsDatatable($licenses)
+    {
         return (new DatatablesTransformer)->transformDatatables($licenses);
     }
 

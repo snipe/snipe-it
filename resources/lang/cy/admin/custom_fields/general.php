@@ -1,11 +1,12 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Meysydd addasedig',
+    'manage'                    => 'Manage',
     'field'		                => 'Meysydd',
     'about_fieldsets_title'		=> 'Amdan grwpiau meysydd',
-    'about_fieldsets_text'		=> 'Mae grwpiau meysydd yn caniatau i chi creu grwpiau o meysydd addasedig sydd yn cael ei defnyddio yn amal ar gyfer mathau penodol o asedau.',
-    'custom_format'             => 'Fformat Regex addasedig...',
+    'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used for specific asset model types.',
+    'custom_format'             => 'Custom Regex format...',
     'encrypt_field'      	        => 'Hamcryptio gwerth y maes yma yn y basdata',
     'encrypt_field_help'      => 'RHYBUDD: Mae hamcryptio maes yn feddwl nid oes modd chwilio amdano.',
     'encrypted'      	        => 'Wedi hamcryptio',
@@ -26,7 +27,19 @@ return array(
     'used_by_models'   		    => 'Defnyddir gan modelau',
     'order'   		            => 'Trefn',
     'create_fieldset'         => 'Set maes newydd',
+    'create_fieldset_title' => 'Create a new fieldset',
     'create_field'            => 'Maes Addasedig newydd',
+    'create_field_title' => 'Create a new custom field',
     'value_encrypted'      	        => 'Mae gwerth y maes hwn wedi\'i amgryptio yn y gronfa ddata. Dim ond defnyddwyr gweinyddol fydd yn gallu gweld y gwerth wedi\'i ddadgryptio',
     'show_in_email'     => 'Cynnwys gwerth y maes hwn mewn e-byst talu a anfonir at y defnyddiwr? Ni ellir cynnwys meysydd wedi\'u hamgryptio mewn e-byst.',
-);
+    'help_text' => 'Help Text',
+    'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
+    'about_custom_fields_title' => 'About Custom Fields',
+    'about_custom_fields_text' => 'Custom fields allow you to add arbitrary attributes to assets.',
+    'add_field_to_fieldset' => 'Add Field to Fieldset',
+    'make_optional' => 'Required - click to make optional',
+    'make_required' => 'Optional - click to make required',
+    'reorder' => 'Reorder',
+    'db_field' => 'DB Field',
+    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.'
+];

@@ -25,5 +25,4 @@ class AddCheckedoutToToAssets extends Migration
     {
         //
     }
-
 }

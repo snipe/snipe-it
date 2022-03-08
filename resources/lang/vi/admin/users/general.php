@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Người dùng này có thể đăng nhập',
     'activated_disabled_help_text' => 'Bạn không thể sửa tình trạng kích hoạt của tài khoản quản trị.',
     'assets_user'       => 'Tài sản đã được cấp phát đến :name',
@@ -13,16 +12,26 @@ return array(
     'edit'              => 'Sửa người dùng',
     'filetype_info'     => 'Cho phép loại tập tin are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'history_user'      => 'Lịch sử cấp phát của :name',
-	'info'				=> 'Thông tin',
+    'info'				=> 'Thông tin',
     'restore_user'		=> 'Nhấp vào đây để khôi phục chúng.',
     'last_login'        => 'Lần đăng nhập trước',
     'ldap_config_text'  => 'Bạn có thể tìm thấy cài đặt cấu hình LDAP Quản trị> Cài đặt. Địa điểm đã chọn (tùy chọn) sẽ được đặt cho tất cả người dùng được nhập.',
     'print_assigned'    => 'In tất cả tài sản đã cấp phát',
     'software_user'     => 'Phần mềm đã được checkout đến :name',
-    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
+    'send_email_help'   => 'Bạn phải cung cấp địa chỉ email của người dùng để gửi chứng thực. Gửi mail chứng thực chỉ có hiệu lực đối với người dùng tạo ra. Mật khẩu được mã hóa một chiều và không thể lấy lại một khi đã lưu.',
     'view_user'         => 'Xem người dùng :name',
     'usercsv'           => 'Tập tin CSV',
     'two_factor_admin_optin_help' => 'Cài đặt quản trị hiện tại của bạn cho phép thực thi có chọn lọc xác thực hai yếu tố.',
     'two_factor_enrolled' => 'Thiết bị 2FA đã đăng ký',
     'two_factor_active'   => '2FA Hoạt động',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

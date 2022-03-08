@@ -18,5 +18,6 @@ return array(
     'update'  							=> 'Actualizar Categoría',
     'use_default_eula'					=> 'Usa la <a href="#" data-toggle="modal" data-target="#eulaModal">licencia primaria por defecto</a> en su lugar.',
     'use_default_eula_disabled'			=> '<del>Usa la licencia primaria por defecto en su lugar.</del> No se ha establecido una licencia primaria por defecto. Por favor, añade una en las configuraciones.',
+    'use_default_eula_column'			=> 'Usar EULA por defecto',
 
 );

@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    {{trans('general.accept', ['asset' => $item->present()->name()])}}
+    {{ trans('general.accept', ['asset' => $item->present()->name()]) }}
     @parent
 @stop
 
@@ -11,7 +11,7 @@
 @section('content')
 
 
-<link rel="stylesheet" href="{{ url(mix('css/build/signature-pad.min.css')) }}">
+<link rel="stylesheet" href="{{ url(mix('css/dist/signature-pad.min.css')) }}">
 
 <style>
 .form-horizontal .control-label, .form-horizontal .radio, .form-horizontal .checkbox, .form-horizontal .radio-inline, .form-horizontal .checkbox-inline {
@@ -82,7 +82,7 @@
 
         </div> <!-- / box-body -->
         <div class="box-footer text-right">
-            <button type="submit" class="btn btn-success" id="submit-button"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.submit') }}</button>
+            <button type="submit" class="btn btn-success" id="submit-button"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.submit') }}</button>
         </div><!-- /.box-footer -->
       </div> <!-- / box-default -->
     </div> <!-- / col -->

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
@@ -15,6 +16,7 @@ use Watson\Validating\ValidatingTrait;
  */
 class Setting extends Model
 {
+    use HasFactory;
     use Notifiable, ValidatingTrait;
 
     /**
@@ -52,10 +54,7 @@ class Setting extends Model
           'admin_cc_email'                      => 'email|nullable',
           'default_currency'                    => 'required',
           'locale'                              => 'required',
-          'slack_endpoint'                      => 'url|required_with:slack_channel|nullable',
           'labels_per_page'                     => 'numeric',
-          'slack_channel'                       => 'regex:/^[\#\@]?\w+/|required_with:slack_endpoint|nullable',
-          'slack_botname'                       => 'string|nullable',
           'labels_width'                        => 'numeric',
           'labels_height'                       => 'numeric',
           'labels_pmargin_left'                 => 'numeric|nullable',
@@ -96,7 +95,7 @@ class Setting extends Model
      *
      * @return \App\Models\Setting|null
      */
-    public static function getSettings(): ?Setting
+    public static function getSettings(): ?self
     {
         return Cache::rememberForever(self::APP_SETTINGS_KEY, function () {
             // Need for setup as no tables exist
@@ -106,7 +105,7 @@ class Setting extends Model
                 return null;
             }
         });
-        }
+    }
 
     /**
      * Check to see if setup process is complete.
@@ -116,17 +115,16 @@ class Setting extends Model
      */
     public static function setupCompleted(): bool
     {
-            try {
-                $usercount = User::withTrashed()->count();
-                $settingsCount = self::count();
-                return $usercount > 0 && $settingsCount > 0;
-            } catch (\Throwable $th) {
-                \Log::debug('User table and settings table DO NOT exist or DO NOT have records');
-                // Catch the error if the tables dont exit
-                return false;
-            }
+        try {
+            $usercount = User::withTrashed()->count();
+            $settingsCount = self::count();
 
-
+            return $usercount > 0 && $settingsCount > 0;
+        } catch (\Throwable $th) {
+            \Log::debug('User table and settings table DO NOT exist or DO NOT have records');
+            // Catch the error if the tables dont exit
+            return false;
+        }
     }
 
     /**
@@ -187,9 +185,9 @@ class Setting extends Model
      * Escapes the custom CSS, and then un-escapes the greater-than symbol
      * so it can work with direct descendant characters for bootstrap
      * menu overrides like:.
-     * 
+     *
      * .skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li:hover>a
-     * 
+     *
      * Important: Do not remove the e() escaping here, as we output raw in the blade.
      *
      * @return string escaped CSS
@@ -210,14 +208,14 @@ class Setting extends Model
     }
 
     /**
-    * Converts bytes into human readable file size.
-    *
-    * @param string $bytes
+     * Converts bytes into human readable file size.
      *
-    * @return string human readable file size (2,87 Мб)
+     * @param string $bytes
      *
-    * @author Mogilev Arseny
-    */
+     * @return string human readable file size (2,87 Мб)
+     *
+     * @author Mogilev Arseny
+     */
     public static function fileSizeConvert($bytes): string
     {
         $bytes = floatval($bytes);
@@ -244,15 +242,15 @@ class Setting extends Model
                 ],
             ];
 
-            foreach ($arBytes as $arItem) {
+        foreach ($arBytes as $arItem) {
             if ($bytes >= $arItem['VALUE']) {
                 $result = $bytes / $arItem['VALUE'];
                 $result = round($result, 2).$arItem['UNIT'];
-                    break;
-                }
+                break;
             }
+        }
 
-            return $result;
+        return $result;
     }
 
     /**
@@ -307,8 +305,6 @@ class Setting extends Model
         return 'required|min:'.$settings->pwd_secure_min.$security_rules;
     }
 
-
-
     /**
      * Get the specific LDAP settings
      *
@@ -342,8 +338,60 @@ class Setting extends Model
             'is_ad',
             'ad_domain',
             'ad_append_domain',
+            'ldap_client_tls_key',
+            'ldap_client_tls_cert'
             ])->first()->getAttributes();
 
         return collect($ldapSettings);
     }
+
+    /**
+     * Return the filename for the client-side SSL cert
+     *
+     * @var string
+     */
+    public static function get_client_side_cert_path()
+    {
+        return storage_path().'/ldap_client_tls.cert';
+    }
+
+    /**
+     * Return the filename for the client-side SSL key
+     *
+     * @var string
+     */
+    public static function get_client_side_key_path()
+    {
+        return storage_path().'/ldap_client_tls.key';
+    }
+
+    public function update_client_side_cert_files()
+    {
+        /**
+         * I'm not sure if it makes sense to have a cert but no key
+         * nor vice versa, but for now I'm just leaving it like this.
+         *
+         * Also, we could easily set this up with an event handler and
+         * self::saved() or something like that but there's literally only
+         * one place where we will do that, so I'll just explicitly call
+         * this method at that spot instead. It'll be easier to debug and understand.
+         */
+        if ($this->ldap_client_tls_cert) {
+            file_put_contents(self::get_client_side_cert_path(), $this->ldap_client_tls_cert);
+        } else {
+            if (file_exists(self::get_client_side_cert_path())) {
+                unlink(self::get_client_side_cert_path());
+            }
+        }
+
+        if ($this->ldap_client_tls_key) {
+            file_put_contents(self::get_client_side_key_path(), $this->ldap_client_tls_key);
+        } else {
+            if (file_exists(self::get_client_side_key_path())) {
+                unlink(self::get_client_side_key_path());
+            }
+        }
+    }
+
+
 }

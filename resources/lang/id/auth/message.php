@@ -7,13 +7,13 @@ return array(
     'account_not_activated'  => 'Akun pengguna ini belum ter-aktivasi.',
     'account_suspended'      => 'Akun pengguna ini di tangguhkan.',
     'account_banned'         => 'Akun pengguna ini dilarang.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'throttle'               => 'Terlalu banyak upaya login yang gagal. Silakan coba lagi dalam :minutes menit.',
 
     'two_factor' => array(
-        'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
+        'already_enrolled'      => 'Perangkat Anda sudah terdaftar.',
+        'success'               => 'Anda telah berhasil login.',
+        'code_required'         => 'Kode Two-factor diperlukan.',
+        'invalid_code'          => 'Kode Two-factor tidak valid.',
     ),
 
     'signin' => array(
@@ -22,8 +22,8 @@ return array(
     ),
 
     'logout' => array(
-        'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
+        'error'   => 'Terjadi masalah saat Anda mencoba logout, harap coba lagi.',
+        'success' => 'Anda telah berhasil logout.',
     ),
 
     'signup' => array(
@@ -33,7 +33,7 @@ return array(
 
     'forgot-password' => array(
         'error'   => 'Terdapat kesalahan ketika reset kode kata sandi anda, silahkan coba kembali.',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
+        'success' => 'Jika alamat email anda ada di sistem kami, email pemulihan kata sandi telah dikirim.',
     ),
 
     'forgot-password-confirm' => array(

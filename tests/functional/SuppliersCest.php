@@ -4,10 +4,10 @@ class SuppliersCest
 {
     public function _before(FunctionalTester $I)
     {
-         $I->amOnPage('/login');
-         $I->fillField('username', 'admin');
-         $I->fillField('password', 'password');
-         $I->click('Login');
+        $I->amOnPage('/login');
+        $I->fillField('username', 'admin');
+        $I->fillField('password', 'password');
+        $I->click('Login');
     }
 
     // tests
@@ -22,7 +22,7 @@ class SuppliersCest
 
     public function failsEmptyValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with blank elements");
+        $I->wantTo('Test Validation Fails with blank elements');
         $I->amOnPage(route('suppliers.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
@@ -31,7 +31,7 @@ class SuppliersCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $supplier = factory(App\Models\Supplier::class)->make();
+        $supplier = \App\Models\Supplier::factory()->make();
 
         $values = [
             'name'              => $supplier->name,
@@ -46,9 +46,9 @@ class SuppliersCest
             'fax'               => $supplier->fax,
             'email'             => $supplier->email,
             'url'               => $supplier->url,
-            'notes'             => $supplier->notes
+            'notes'             => $supplier->notes,
         ];
-        $I->wantTo("Test Validation Succeeds");
+        $I->wantTo('Test Validation Succeeds');
         $I->amOnPage(route('suppliers.create'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('suppliers', $values);
@@ -58,7 +58,7 @@ class SuppliersCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a supplier');
-        $supplier = factory(App\Models\Supplier::class)->create();
+        $supplier = \App\Models\Supplier::factory()->create();
         $I->sendDelete(route('suppliers.destroy', $supplier->id), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);
     }

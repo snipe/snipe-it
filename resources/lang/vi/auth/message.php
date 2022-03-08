@@ -7,13 +7,13 @@ return array(
     'account_not_activated'  => 'Tài khoản người dùng này chưa được kích hoạt.',
     'account_suspended'      => 'Tài khoản người dùng này đã bị tạm ngưng.',
     'account_banned'         => 'Tài khoản người dùng này đã bị cấm.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'throttle'               => 'Quá nhiều lần đăng nhập thất bại. Vui lòng thử lại trong khoảng :minutes phút.',
 
     'two_factor' => array(
-        'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
+        'already_enrolled'      => 'Thiết bị của bạn đã được ghi danh.',
+        'success'               => 'Bạn đã đăng nhập thành công.',
+        'code_required'         => 'Mã xác thực hai yếu tố là bắt buộc.',
+        'invalid_code'          => 'Mã xác thực hai yếu tố chưa đúng.',
     ),
 
     'signin' => array(
@@ -22,8 +22,8 @@ return array(
     ),
 
     'logout' => array(
-        'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
+        'error'   => 'Có vấn đề khi đăng xuất, xin vui lòng thử lại.',
+        'success' => 'Đăng xuất thành công.',
     ),
 
     'signup' => array(
@@ -33,7 +33,7 @@ return array(
 
     'forgot-password' => array(
         'error'   => 'Có vấn đề khi cố gắng nhận một mã phục hồi mật khẩu, xin thử lại.',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
+        'success' => 'Nếu email đã cung cấp có tồn tại trên hệ thống, một email phục hồi mật khẩu sẽ được gửi.',
     ),
 
     'forgot-password-confirm' => array(

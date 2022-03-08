@@ -1,11 +1,12 @@
 <?php
+
 namespace App\Http\Controllers\Users;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\UserNotFoundException;
-use App\Http\Requests\SaveUserRequest;
 use App\Http\Requests\ImageUploadRequest;
+use App\Http\Requests\SaveUserRequest;
 use App\Models\Asset;
 use App\Models\Company;
 use App\Models\Group;
@@ -15,13 +16,13 @@ use App\Models\User;
 use App\Notifications\WelcomeNotification;
 use Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
 use Input;
 use Redirect;
 use Str;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use View;
-use Illuminate\Http\Request;
-
 
 /**
  * This controller handles all actions related to Users for
@@ -29,12 +30,8 @@ use Illuminate\Http\Request;
  *
  * @version    v1.0
  */
-
-
 class UsersController extends Controller
 {
-
-
     /**
      * Returns a view that invokes the ajax tables which actually contains
      * the content for the users listing, which is generated in getDatatable().
@@ -48,6 +45,7 @@ class UsersController extends Controller
     public function index()
     {
         $this->authorize('index', User::class);
+
         return view('users/index');
     }
 
@@ -71,7 +69,7 @@ class UsersController extends Controller
         }
 
         $permissions = config('permissions');
-        $userPermissions = Helper::selectedPermissionsArray($permissions, $request->old('permissions', array()));
+        $userPermissions = Helper::selectedPermissionsArray($permissions, $request->old('permissions', []));
         $permissions = $this->filterDisplayable($permissions);
 
         $user = new User;
@@ -95,8 +93,8 @@ class UsersController extends Controller
         $this->authorize('create', User::class);
         $user = new User;
         //Username, email, and password need to be handled specially because the need to respect config values on an edit.
-        $user->email =  e($request->input('email'));
-        $user->username = e($request->input('username'));
+        $user->email = trim($request->input('email'));
+        $user->username = trim($request->input('username'));
         if ($request->filled('password')) {
             $user->password = bcrypt($request->input('password'));
         }
@@ -117,29 +115,29 @@ class UsersController extends Controller
         $user->state = $request->input('state', null);
         $user->country = $request->input('country', null);
         $user->zip = $request->input('zip', null);
+        $user->remote = $request->input('remote', 0);
 
         // Strip out the superuser permission if the user isn't a superadmin
         $permissions_array = $request->input('permission');
 
-        if (!Auth::user()->isSuperUser()) {
+        if (! Auth::user()->isSuperUser()) {
             unset($permissions_array['superuser']);
         }
-        $user->permissions =  json_encode($permissions_array);
-
+        $user->permissions = json_encode($permissions_array);
 
         // we have to invoke the
-        app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
+        app(\App\Http\Requests\ImageUploadRequest::class)->handleImages($user, 600, 'image', 'avatars', 'avatar');
 
         if ($user->save()) {
             if ($request->filled('groups')) {
                 $user->groups()->sync($request->input('groups'));
             } else {
-                $user->groups()->sync(array());
+                $user->groups()->sync([]);
             }
 
             if (($request->input('email_user') == 1) && ($request->filled('email'))) {
                 // Send the credentials through email
-                $data = array();
+                $data = [];
                 $data['email'] = e($request->input('email'));
                 $data['username'] = e($request->input('username'));
                 $data['first_name'] = e($request->input('first_name'));
@@ -148,12 +146,12 @@ class UsersController extends Controller
 
                 $user->notify(new WelcomeNotification($data));
             }
+
             return redirect::route('users.index')->with('success', trans('admin/users/message.success.create'));
         }
+
         return redirect()->back()->withInput()->withErrors($user->getErrors());
     }
-
-
 
     private function filterDisplayable($permissions)
     {
@@ -163,6 +161,7 @@ class UsersController extends Controller
                 return $p['display'] === true;
             });
         }
+
         return $output;
     }
 
@@ -178,10 +177,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        if ($user =  User::find($id)) {
+        if ($user = User::find($id)) {
             $this->authorize('update', $user);
             $permissions = config('permissions');
-
             $groups = Group::pluck('name', 'id');
 
             $userGroups = $user->groups()->pluck('name', 'id');
@@ -192,8 +190,7 @@ class UsersController extends Controller
             return view('users/edit', compact('user', 'groups', 'userGroups', 'permissions', 'userPermissions'))->with('item', $user);
         }
 
-        $error = trans('admin/users/message.user_not_found', compact('id'));
-        return redirect()->route('users.index')->with('error', $error);
+        return redirect()->route('users.index')->with('error', trans('admin/users/message.user_not_found', compact('id')));
     }
 
     /**
@@ -211,7 +208,7 @@ class UsersController extends Controller
 
         // We need to reverse the UI specific logic for our
         // permissions here before we update the user.
-        $permissions = $request->input('permissions', array());
+        $permissions = $request->input('permissions', []);
         app('request')->request->set('permissions', $permissions);
 
         // This is a janky hack to prevent people from changing admin demo user data on the public demo.
@@ -244,12 +241,11 @@ class UsersController extends Controller
             $user->groups()->sync($request->input('groups'));
         }
 
-
         // Update the user
         if ($request->filled('username')) {
-            $user->username = $request->input('username');
+            $user->username = trim($request->input('username'));
         }
-        $user->email = $request->input('email');
+        $user->email = trim($request->input('email'));
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
         $user->two_factor_optin = $request->input('two_factor_optin') ?: 0;
@@ -269,7 +265,7 @@ class UsersController extends Controller
         $user->country = $request->input('country', null);
         $user->activated = $request->input('activated', 0);
         $user->zip = $request->input('zip', null);
-
+        $user->remote = $request->input('remote', 0);
 
         // Update the location of any assets checked out to this user
         Asset::where('assigned_type', User::class)
@@ -284,16 +280,15 @@ class UsersController extends Controller
         $permissions_array = $request->input('permission');
 
         // Strip out the superuser permission if the user isn't a superadmin
-        if (!Auth::user()->isSuperUser()) {
+        if (! Auth::user()->isSuperUser()) {
             unset($permissions_array['superuser']);
             $permissions_array['superuser'] = $orig_superuser;
         }
 
-        $user->permissions =  json_encode($permissions_array);
+        $user->permissions = json_encode($permissions_array);
 
         // Handle uploaded avatar
-        app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'avatar', 'avatars', 'avatar');
-
+        app(\App\Http\Requests\ImageUploadRequest::class)->handleImages($user, 600, 'avatar', 'avatars', 'avatar');
 
         //\Log::debug(print_r($user, true));
 
@@ -303,6 +298,7 @@ class UsersController extends Controller
             return redirect()->route('users.index')
                 ->with('success', trans('admin/users/message.success.update'));
         }
+
         return redirect()->back()->withInput()->withErrors($user->getErrors());
     }
 
@@ -333,25 +329,25 @@ class UsersController extends Controller
             if (($user->assets()) && (($assetsCount = $user->assets()->count()) > 0)) {
                 // Redirect to the user management page
                 return redirect()->route('users.index')
-                    ->with('error', 'This user still has ' . $assetsCount . ' assets associated with them.');
+                    ->with('error', 'This user still has '.$assetsCount.' assets associated with them.');
             }
 
             if (($user->licenses()) && (($licensesCount = $user->licenses()->count())) > 0) {
                 // Redirect to the user management page
                 return redirect()->route('users.index')
-                    ->with('error', 'This user still has ' . $licensesCount . ' licenses associated with them.');
+                    ->with('error', 'This user still has '.$licensesCount.' licenses associated with them.');
             }
 
             if (($user->accessories()) && (($accessoriesCount = $user->accessories()->count()) > 0)) {
                 // Redirect to the user management page
                 return redirect()->route('users.index')
-                    ->with('error', 'This user still has ' . $accessoriesCount . ' accessories associated with them.');
+                    ->with('error', 'This user still has '.$accessoriesCount.' accessories associated with them.');
             }
 
             if (($user->managedLocations()) && (($managedLocationsCount = $user->managedLocations()->count())) > 0) {
                 // Redirect to the user management page
                 return redirect()->route('users.index')
-                    ->with('error', 'This user still has ' . $managedLocationsCount . ' locations that they manage.');
+                    ->with('error', 'This user still has '.$managedLocationsCount.' locations that they manage.');
             }
 
             // Delete the user
@@ -381,7 +377,7 @@ class UsersController extends Controller
     {
         $this->authorize('update', User::class);
         // Get user information
-        if (!User::onlyTrashed()->find($id)) {
+        if (! User::onlyTrashed()->find($id)) {
             return redirect()->route('users.index')->with('error', trans('admin/users/messages.user_not_found'));
         }
 
@@ -389,9 +385,9 @@ class UsersController extends Controller
         if (User::withTrashed()->where('id', $id)->restore()) {
             return redirect()->route('users.index')->with('success', trans('admin/users/message.success.restored'));
         }
+
         return redirect()->route('users.index')->with('error', 'User could not be restored.');
     }
-
 
     /**
      * Return a view with user detail
@@ -404,7 +400,7 @@ class UsersController extends Controller
      */
     public function show($userId = null)
     {
-        if (!$user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($userId)) {
+        if (! $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($userId)) {
             // Redirect to the user management page
             return redirect()->route('users.index')
                 ->with('error', trans('admin/users/message.user_not_found', ['id' => $userId]));
@@ -413,6 +409,7 @@ class UsersController extends Controller
         $userlog = $user->userlog->load('item');
 
         $this->authorize('view', $user);
+
         return view('users/view', compact('user', 'userlog'))
             ->with('settings', Setting::getSettings());
     }
@@ -442,7 +439,7 @@ class UsersController extends Controller
             }
 
             // Do we have permission to unsuspend this user?
-            if ($user->isSuperUser() && !Auth::user()->isSuperUser()) {
+            if ($user->isSuperUser() && ! Auth::user()->isSuperUser()) {
                 // Redirect to the user management page
                 return redirect()->route('users.index')->with('error', 'Insufficient permissions!');
             }
@@ -455,7 +452,6 @@ class UsersController extends Controller
                 ->with('error', trans('admin/users/message.user_not_found', compact('id')));
         }
     }
-
 
     /**
      * Return a view containing a pre-populated new user form,
@@ -472,9 +468,8 @@ class UsersController extends Controller
         $this->authorize('create', User::class);
         // We need to reverse the UI specific logic for our
         // permissions here before we update the user.
-        $permissions = $request->input('permissions', array());
+        $permissions = $request->input('permissions', []);
         app('request')->request->set('permissions', $permissions);
-
 
         try {
             // Get the user information
@@ -483,7 +478,6 @@ class UsersController extends Controller
             $user->first_name = '';
             $user->last_name = '';
             $user->email = substr($user->email, ($pos = strpos($user->email, '@')) !== false ? $pos : 0);
-
             $user->id = null;
 
             // Get this user groups
@@ -508,7 +502,6 @@ class UsersController extends Controller
         }
     }
 
-
     /**
      * Exports users to CSV
      *
@@ -529,12 +522,12 @@ class UsersController extends Controller
             User::with('assets', 'accessories', 'consumables', 'department', 'licenses', 'manager', 'groups', 'userloc', 'company')
                 ->orderBy('created_at', 'DESC')
                 ->chunk(500, function ($users) use ($handle) {
-                    $headers=[
+                    $headers = [
                         // strtolower to prevent Excel from trying to open it as a SYLK file
                         strtolower(trans('general.id')),
                         trans('admin/companies/table.title'),
                         trans('admin/users/table.title'),
-                        trans('admin/users/table.employee_num'),
+                        trans('general.employee_number'),
                         trans('admin/users/table.name'),
                         trans('admin/users/table.username'),
                         trans('admin/users/table.email'),
@@ -548,7 +541,7 @@ class UsersController extends Controller
                         trans('admin/users/table.groups'),
                         trans('general.notes'),
                         trans('admin/users/table.activated'),
-                        trans('general.created_at')
+                        trans('general.created_at'),
                     ];
 
                     fputcsv($handle, $headers);
@@ -578,7 +571,7 @@ class UsersController extends Controller
                             $user->consumables->count(),
                             $user_groups,
                             $user->notes,
-                            ($user->activated=='1') ?  trans('general.yes') : trans('general.no'),
+                            ($user->activated == '1') ? trans('general.yes') : trans('general.no'),
                             $user->created_at,
                         ];
 
@@ -610,11 +603,38 @@ class UsersController extends Controller
         $assets = Asset::where('assigned_to', $id)->where('assigned_type', User::class)->with('model', 'model.category')->get();
         $accessories = $show_user->accessories()->get();
         $consumables = $show_user->consumables()->get();
+
         return view('users/print')->with('assets', $assets)
             ->with('licenses', $show_user->licenses()->get())
             ->with('accessories', $accessories)
             ->with('consumables', $consumables)
             ->with('show_user', $show_user)
             ->with('settings', Setting::getSettings());
+    }
+
+    /**
+     * Send individual password reset email
+     *
+     * @author A. Gianotto
+     * @since [v5.0.15]
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function sendPasswordReset($id)
+    {
+        if (($user = User::find($id)) && ($user->activated == '1') && ($user->email != '') && ($user->ldap_import == '0')) {
+            $credentials = ['email' => trim($user->email)];
+
+            try {
+                \Password::sendResetLink($credentials, function (Message $message) use ($user) {
+                    $message->subject($this->getEmailSubject());
+                });
+
+                return redirect()->back()->with('success', trans('admin/users/message.password_reset_sent', ['email' => $user->email]));
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', ' Error sending email. :( ');
+            }
+        }
+
+        return redirect()->back()->with('error', 'User is not activated, is LDAP synced, or does not have an email address ');
     }
 }

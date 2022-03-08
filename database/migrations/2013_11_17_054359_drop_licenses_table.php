@@ -11,7 +11,7 @@ class DropLicensesTable extends Migration
      */
     public function up()
     {
-        Schema::drop('licenses');
+        Schema::dropIfExists('licenses');
     }
 
     /**
@@ -23,5 +23,4 @@ class DropLicensesTable extends Migration
     {
         //
     }
-
 }
