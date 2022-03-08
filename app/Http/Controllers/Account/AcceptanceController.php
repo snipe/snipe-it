@@ -129,11 +129,11 @@ class AcceptanceController extends Controller
         $data = [
             'item' => $item,
             'eula' => $item->getEula(),
-            'signature' => app_path().'/private_uploads/signatures/'.$sig_filename,
+            'signature' => storage_path().'/private_uploads/signatures/'.$sig_filename,
             'logo' => public_path().'/uploads/snipe-logo.png',
         ];
 
-        \Log::error(storage_path().'/pdfs/'.$sig_filename);
+        \Log::error(storage_path().'/eula-pdfs/'.$sig_filename);
 
         $pdf = Pdf::loadView('account.accept-eula', $data);
         Storage::put('private_uploads/eula-pdfs/accepted-eula-'.date('Y-m-d-h-i-s').'.pdf', $pdf->output());

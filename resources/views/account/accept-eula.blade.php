@@ -17,7 +17,7 @@
     <br>
     
     <h2>{{ $item->name }}</h2>
-    
+    <p>Date: {{ date('Y-m-d h:i') }} </p>
     @if ($eula)
         {!!  $eula !!}
     @endif
@@ -25,7 +25,7 @@
     <br><br>
     @if ($signature)
     <center>
-        <img src="{{ $signature }}">
+        <img src="{{ $signature }}" style="max-width: 50%">
     </center>
     @endif
   </body>
