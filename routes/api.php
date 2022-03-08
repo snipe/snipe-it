@@ -3,30 +3,6 @@
 use App\Http\Controllers\Api;
 // use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use ArieTimmerman\Laravel\SCIMServer\RouteProvider as SCIMRouteProvider;
-
-
-/*
-|--------------------------------------------------------------------------
-| SCIM Routes
-|--------------------------------------------------------------------------
-|
-| These are the routes that we have to explicitly inject from the 
-| laravel-scim-server project, which gives Snipe-IT SCIM support
-|
-*/
-
-Route::middleware('auth:api')->group(function () {
-    SCIMRouteProvider::routes(
-        [
-            'public_routes' => false // do not hide public routes (metadata) behind authentication
-        ]
-    );
-
-    SCIMRouteProvider::meRoutes();
-});
-
-SCIMRouteProvider::publicRoutes();
 
 
 /*
