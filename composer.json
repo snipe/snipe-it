@@ -20,6 +20,7 @@
     "alek13/slack": "^2.0",
     "bacon/bacon-qr-code": "^2.0",
     "barryvdh/laravel-debugbar": "^3.6",
+    "barryvdh/laravel-dompdf": "^1.0",
     "doctrine/cache": "^1.10",
     "doctrine/common": "^2.12",
     "doctrine/dbal": "^3.1",
