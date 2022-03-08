@@ -21,6 +21,7 @@ class AssetsTransformer
 
     public function transformAsset(Asset $asset)
     {
+        // This uses the getSettings() method so we're pulling from the cache versus querying the settings on single asset
         $setting = Setting::getSettings();
 
         $array = [
