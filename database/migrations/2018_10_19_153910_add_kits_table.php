@@ -12,13 +12,14 @@ class AddKitsTable extends Migration {
 	 */
 	public function up()
 	{
-		//
-		 Schema::create('kits', function ($table) {
-            $table->increments('id');
-            $table->string('name')->nullable()->default(NULL);
-            $table->timestamps();
-            $table->engine = 'InnoDB';
-        });
+		if (!Schema::hasTable('kits')) {
+			Schema::create('kits', function ($table) {
+				$table->increments('id');
+				$table->string('name')->nullable()->default(NULL);
+				$table->timestamps();
+				$table->engine = 'InnoDB';
+			});
+		}
 
 	}
 
@@ -29,8 +30,9 @@ class AddKitsTable extends Migration {
 	 */
 	public function down()
 	{
-		//
-		Schema::drop('kits');
+		if (Schema::hasTable('kits')) {
+			Schema::drop('kits');
+		}
 
 	}
 
