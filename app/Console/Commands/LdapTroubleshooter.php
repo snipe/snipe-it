@@ -220,7 +220,6 @@ class LdapTroubleshooter extends Command
         $ldap_urls = [];
         $pretty_ldap_urls = [];
         foreach($open_ports as $port) {
-            //if($port == 389) { continue; } // FIXME GET RID OF THIS LINE! THIS SUCKS!!!!!!
             $this->line("Trying TLS first for port $port");
             $ldap_url = "ldaps://".$parsed['host'].":$port";
             if($this->test_anonymous_bind($ldap_url)) {
