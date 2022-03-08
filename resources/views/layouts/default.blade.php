@@ -29,8 +29,8 @@
          user: {{Auth::user()->id}},
          vapidPublicKey: "{{config('webpush.vapid.public_key')}}",
          pusher: {
-             key: {{ config('broadcasting.connections.pusher.key')}},
-             cluster:{{config('broadcasting.connections.pusher.options.cluster')}}
+             key: "{{ config('broadcasting.connections.pusher.key')}}",
+             cluster:"{{config('broadcasting.connections.pusher.options.cluster')}}"
          },
     };
     </script>
@@ -138,9 +138,9 @@
             </div>
 
           <!-- Navbar Right Menu -->
-            <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
-                    <notifications-dropdown></notifications-dropdown>
+            <div class="navbar-custom-menu" >
+                <ul class="nav navbar-nav" >
+                    <li id="notifications"><notification-dropdown></notification-dropdown></li>
                   @can('index', \App\Models\Asset::class)
                   <li aria-hidden="true"{!! (Request::is('hardware*') ? ' class="active"' : '') !!} tabindex="-1">
                       <a href="{{ url('hardware') }}" tabindex="-1">
@@ -976,9 +976,8 @@
     @livewireScripts
   </body>
 </html>
-<script>
-    import NotificationsDropdown from "../../assets/js/components/notifications/NotificationsDropdown";
-    export default {
-        components: {NotificationsDropdown}
-    }
+<script nonce="{{ csrf_token() }}">
+    new Vue({
+        el: '#notifications'
+    });
 </script>

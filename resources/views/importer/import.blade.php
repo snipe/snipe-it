@@ -21,7 +21,6 @@
         <div class="row">
         <alert v-show="alert.visible" :alert-type="alert.type" v-on:hide="alert.visible = false">@{{ alert.message }}</alert>
             <errors :errors="importErrors"></errors>
-
             <div class="col-md-9">
                 <div class="box">
                     <div class="box-body">

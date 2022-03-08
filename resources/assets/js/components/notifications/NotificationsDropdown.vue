@@ -1,5 +1,4 @@
 <template>
-
   <li ref="dropdown" class="dropdown dropdown-notifications">
     <a class="dropdown-toggle" href="#" @click.prevent="toggleDropdown">
       <i :data-count="total" class="fa fa-bell notification-icon" :class="{ 'hide-count': !hasUnread }" />
