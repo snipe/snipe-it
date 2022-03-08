@@ -12,14 +12,15 @@ class AddKitsLicensesTable extends Migration {
 	 */
 	public function up()
 	{
-		//
-		Schema::create('kits_licenses', function ($table) {
-            $table->increments('id');
-            $table->integer('kit_id')->nullable()->default(NULL); 
-            $table->integer('license_id')->nullable()->default(NULL);    
-            $table->integer('quantity')->default(1);
-            $table->timestamps();
-        });
+		if (!Schema::hasTable('kits_licenses')) {
+			Schema::create('kits_licenses', function ($table) {
+				$table->increments('id');
+				$table->integer('kit_id')->nullable()->default(NULL); 
+				$table->integer('license_id')->nullable()->default(NULL);    
+				$table->integer('quantity')->default(1);
+				$table->timestamps();
+			});
+		}
 	}
 
 	/**
@@ -29,8 +30,9 @@ class AddKitsLicensesTable extends Migration {
 	 */
 	public function down()
 	{
-		//
-		Schema::drop('kits_licenses');
+		if (Schema::hasTable('kits_licenses')) {
+			Schema::drop('kits_licenses');
+		}
 	}
 
 }

@@ -13,14 +13,15 @@ class AddKitsConsumablesTable extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('kits_consumables', function ($table) {
-            $table->increments('id');
-            $table->integer('kit_id')->nullable()->default(NULL); 
-            $table->integer('consumable_id')->nullable()->default(NULL);    
-            $table->integer('quantity')->default(1);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('kits_consumables')) {
+            Schema::create('kits_consumables', function ($table) {
+                $table->increments('id');
+                $table->integer('kit_id')->nullable()->default(NULL); 
+                $table->integer('consumable_id')->nullable()->default(NULL);    
+                $table->integer('quantity')->default(1);
+                $table->timestamps();
+            });
+        }
     }
 
     /**
@@ -30,7 +31,8 @@ class AddKitsConsumablesTable extends Migration
      */
     public function down()
     {
-        //
-		Schema::drop('kits_consumables');
+        if (Schema::hasTable('kits_consumables')) {
+		    Schema::drop('kits_consumables');
+        }
     }
 }

@@ -13,14 +13,15 @@ class AddKitsAccessoriesTable extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('kits_accessories', function ($table) {
-            $table->increments('id');
-            $table->integer('kit_id')->nullable()->default(NULL); 
-            $table->integer('accessory_id')->nullable()->default(NULL);    
-            $table->integer('quantity')->default(1);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('kits_accessories')) {
+            Schema::create('kits_accessories', function ($table) {
+                $table->increments('id');
+                $table->integer('kit_id')->nullable()->default(NULL); 
+                $table->integer('accessory_id')->nullable()->default(NULL);    
+                $table->integer('quantity')->default(1);
+                $table->timestamps();
+            });
+        }
     }
 
     /**
@@ -30,7 +31,8 @@ class AddKitsAccessoriesTable extends Migration
      */
     public function down()
     {
-        //
-		Schema::drop('kits_accessories');
+        if (Schema::hasTable('kits_accessories')) {
+		    Schema::drop('kits_accessories');
+        }
     }
 }

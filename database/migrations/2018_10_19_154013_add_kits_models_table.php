@@ -12,14 +12,15 @@ class AddKitsModelsTable extends Migration {
 	 */
 	public function up()
 	{
-		//
-		Schema::create('kits_models', function ($table) {
-            $table->increments('id');
-            $table->integer('kit_id')->nullable()->default(NULL); 
-            $table->integer('model_id')->nullable()->default(NULL);    
-            $table->integer('quantity')->default(1);
-            $table->timestamps();
-        });
+		if (!Schema::hasTable('kits_models')) {
+			Schema::create('kits_models', function ($table) {
+				$table->increments('id');
+				$table->integer('kit_id')->nullable()->default(NULL); 
+				$table->integer('model_id')->nullable()->default(NULL);    
+				$table->integer('quantity')->default(1);
+				$table->timestamps();
+			});
+		}
 	}
 
 	/**
@@ -29,8 +30,9 @@ class AddKitsModelsTable extends Migration {
 	 */
 	public function down()
 	{
-		//
-		Schema::drop('kits_models');
+		if (Schema::hasTable('kits_models')) {
+			Schema::drop('kits_models');
+		}
 	}
 
 }
