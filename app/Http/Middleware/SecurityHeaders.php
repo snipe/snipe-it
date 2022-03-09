@@ -42,7 +42,6 @@ class SecurityHeaders
         //           - https://github.com/w3c/webappsec-feature-policy/issues/189
 
         $feature_policy[] = "accelerometer 'none'";
-        $feature_policy[] = "animations 'none'";
         $feature_policy[] = "autoplay 'none'";
         $feature_policy[] = "camera 'none'";
         $feature_policy[] = "display-capture 'none'";
@@ -51,7 +50,6 @@ class SecurityHeaders
         $feature_policy[] = "fullscreen 'none'";
         $feature_policy[] = "geolocation 'none'";
         $feature_policy[] = "sync-xhr 'none'";
-        $feature_policy[] = "unsized-media 'none'";
         $feature_policy[] = "usb 'none'";
         $feature_policy[] = "xr-spatial-tracking 'none'";
 
