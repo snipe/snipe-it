@@ -10,11 +10,11 @@ use App\Http\Controllers\Controller;
 use App\Models\CheckoutAcceptance;
 use App\Models\Company;
 use App\Models\Contracts\Acceptable;
-use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AcceptanceController extends Controller
 {
@@ -39,6 +39,7 @@ class AcceptanceController extends Controller
     public function create($id)
     {
         $acceptance = CheckoutAcceptance::find($id);
+
 
         if (is_null($acceptance)) {
             return redirect()->route('account.accept')->with('error', trans('admin/hardware/message.does_not_exist'));
@@ -96,20 +97,25 @@ class AcceptanceController extends Controller
         if (! Storage::exists('private_uploads/signatures')) {
             Storage::makeDirectory('private_uploads/signatures', 775);
         }
+
         $sig_filename = '';
+
         if ($request->filled('signature_output')) {
             $sig_filename = 'siglog-'.Str::uuid().'-'.date('Y-m-d-his').'.png';
             $data_uri = e($request->input('signature_output'));
             $encoded_image = explode(',', $data_uri);
             $decoded_image = base64_decode($encoded_image[1]);
-            Storage::put('private_uploads/signatures/'.$sig_filename, (string) $decoded_image);
+            $path = Storage::put('private_uploads/signatures/'.$sig_filename, (string) $decoded_image);
         }
 
         if ($request->input('asset_acceptance') == 'accepted') {
             $acceptance->accept($sig_filename);
+
             event(new CheckoutAccepted($acceptance));
 
             $return_msg = trans('admin/users/message.accepted');
+
+
         } else {
             $acceptance->decline($sig_filename);
 
@@ -117,21 +123,24 @@ class AcceptanceController extends Controller
 
             $return_msg = trans('admin/users/message.declined');
         }
-        $sig_image=Storage::get('private_uploads/signatures/'.$sig_filename);
-        $this->SignatureEulaPDF($acceptance, $sig_image );
+
+        $item = $acceptance->checkoutable_type::find($acceptance->checkoutable_id);
+
+        $data = [
+            'item' => $item,
+            'eula' => $item->getEula(),
+            'signature' => storage_path().'/private_uploads/signatures/'.$sig_filename,
+            'logo' => public_path().'/uploads/snipe-logo.png',
+        ];
+
+        \Log::error(storage_path().'/eula-pdfs/'.$sig_filename);
+
+        $pdf = Pdf::loadView('account.accept.accept-eula', $data);
+        $stored_eula = Storage::put('private_uploads/eula-pdfs/accepted-eula-'.date('Y-m-d-h-i-s').'.pdf', $pdf->output());
+
+        //not sure what im doing here,but I think its something of this.
+        route('log.storedeula.download', $stored_eula);
 
         return redirect()->to('account/accept')->with('success', $return_msg);
-    }
-
-    public function SignatureEulaPDF($acceptance, $sig_image)
-    {
-//        When I compact the $data I at least get back an ipsum string in the error message that is recognized as an
-//        "unknown variable". 2nd param in load view should be the array of things you wanted rendered in the pdf.
-        $data = [
-        'eula'=> $acceptance->checkoutable->getEula(),
-        'signature' => $sig_image,
-        ];
-        $pdf = PDF::loadView('account.accept.create', compact($data));
-        return $pdf->download('test.pdf');
     }
 }
