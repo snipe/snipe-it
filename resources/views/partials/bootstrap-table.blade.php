@@ -31,7 +31,7 @@
             return false;
         }
 
-        $('.snipe-table').bootstrapTable('destroy').bootstrapTable({
+        $('.snipe-table').bootstrapTable({
             classes: 'table table-responsive table-no-bordered',
             ajaxOptions: {
                 headers: {
