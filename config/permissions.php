@@ -8,10 +8,10 @@
 
 return [
 
-    'Global' => [
+    'Super User' => [
         [
             'permission' => 'superuser',
-            'label'      => 'Super User',
+            'label'      => '',
             'note'       => 'Determines whether the user has full access to all aspects of the admin. This setting overrides any more specific permissions throughout the system. ',
             'display'    => true,
         ],

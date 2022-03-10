@@ -31,7 +31,7 @@
             @if (count($section_permission) == 1)
 
 
-                    <div class="col-md-3 col-lg-3 col-sm-6 col-xl-1">
+                    <div class="col-md-3 col-lg-4 col-sm-6 col-xl-1">
                         <div class="box box-{{ (($localPermission['permission']=='superuser') ? 'danger' : (($localPermission['permission']=='admin') ? 'warning' : 'default'))  }} flex-aligned-box">
                             <div class="box-body text-center flex-aligned-box">
                                 @unless (empty($localPermission['label']))
