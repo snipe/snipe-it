@@ -268,9 +268,9 @@
                       <div class="col-md-9">
 
                         @if ($user->isSuperUser())
-                          <label class="label label-danger"><i class="fas fa-crown" title="superuser"></i></label> {{ $user->username }}
+                          <label class="label label-danger"><i class="fas fa-crown"></i></label> {{ $user->username }}
                         @elseif ($user->hasAccess('admin'))
-                          <label class="label label-warning"><i class="fas fa-crown" title="superuser"></i></label> {{ $user->username }}
+                          <label class="label label-warning"><i class="fas fa-crown"></i></label> {{ $user->username }}
                         @endif
 
                       
