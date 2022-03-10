@@ -34,7 +34,6 @@
                     <div class="col-md-3 col-lg-3 col-sm-6 col-xl-1">
                         <div class="box box-{{ (($localPermission['permission']=='superuser') ? 'danger' : (($localPermission['permission']=='admin') ? 'warning' : 'default'))  }} flex-aligned-box">
                             <div class="box-body text-center flex-aligned-box">
-                                {{ $localPermission['permission'] }}
                                 @unless (empty($localPermission['label']))
                                     <h3>{{ $section . ': ' . $localPermission['label'] }}</h3>
                                 @else
