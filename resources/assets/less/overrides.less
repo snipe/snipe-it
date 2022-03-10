@@ -654,3 +654,33 @@ th.css-accessory > .th-inner::before
 .select2-container--default .select2-selection--multiple {
   border-radius: 0px;
 }
+
+.flex-aligned-row {
+  display: flex;
+  flex-flow: row wrap;
+
+  &::before {
+    display: block;
+  }
+}
+
+.flex-aligned-box {
+ height: 100%;
+  margin-bottom: 10px;
+}
+
+.flex-aligned-row > [class*='col-'] {
+  margin-bottom: 20px;
+  margin-bottom: 25px;
+}
+
+.bottom-align-text {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.top-bottom-pad-15 {
+  padding-bottom: 15px;
+  padding-top: 15px;
+}

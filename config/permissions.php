@@ -21,7 +21,7 @@ return [
         [
             'permission' => 'admin',
             'label'      => '',
-            'note'       => 'Determines whether the user has access to most aspects of the admin. ',
+            'note'       => 'Determines whether the user has access to all settings except admin settings (LDAP, Branding, etc) ',
             'display'    => true,
         ],
     ],
