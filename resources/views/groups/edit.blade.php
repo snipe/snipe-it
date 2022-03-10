@@ -32,9 +32,9 @@
 
 
                     <div class="col-md-3 col-lg-3 col-sm-6 col-xl-1">
-                        <div class="box box-default flex-aligned-box">
+                        <div class="box box-{{ (($localPermission['permission']=='superuser') ? 'danger' : (($localPermission['permission']=='admin') ? 'warning' : 'default'))  }} flex-aligned-box">
                             <div class="box-body text-center flex-aligned-box">
-
+                                {{ $localPermission['permission'] }}
                                 @unless (empty($localPermission['label']))
                                     <h3>{{ $section . ': ' . $localPermission['label'] }}</h3>
                                 @else
@@ -52,7 +52,7 @@
                                                         ['id'=> 'permission['.$localPermission['permission'].']',
                                                         'aria-label'=> 'permission['.$localPermission['permission'].']']) }}
 
-                                                <i class="fa fa-check"></i> {{ trans('admin/groups/titles.grant')}}
+                                                <i class="fa fa-check" aria-hidden="true"></i> {{ trans('admin/groups/titles.grant')}}
                                             </label>
 
                                             <label class="btn btn-danger">
@@ -60,7 +60,7 @@
                                                     '0',(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '0' : null),
                                                     ['id'=> 'permission['.$localPermission['permission'].']',
                                                     'aria-label'=> 'permission['.$localPermission['permission'].']']) }}
-                                                <i class="fa fa-times"></i> {{ trans('admin/groups/titles.deny')}}
+                                                <i class="fa fa-times" aria-hidden="true"></i> {{ trans('admin/groups/titles.deny')}}
                                             </label>
                                         </div>
                                     </div>
