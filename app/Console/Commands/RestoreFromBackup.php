@@ -14,7 +14,7 @@ class RestoreFromBackup extends Command
      * @var string
      */
     protected $signature = 'snipeit:restore 
-                                            {--force : Skip the danger prompt; assuming you hit "y"} 
+                                            {--force : Skip the danger prompt; assuming you enter "y"} 
                                             {filename : The zip file to be migrated}
                                             {--no-progress : Don\'t show a progress bar}';
 
