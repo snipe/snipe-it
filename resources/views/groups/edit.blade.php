@@ -48,15 +48,18 @@
 
                                             <label class="btn btn-default">
                                                 {{ Form::radio('permission['.$localPermission['permission'].']',
-                                                        'grant',(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '1' : null),
-                                                        ['value'=>"1", 'id'=> 'permission['.$localPermission['permission'].']',
+                                                        '1',(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '1' : null),
+                                                        ['id'=> 'permission['.$localPermission['permission'].']',
                                                         'aria-label'=> 'permission['.$localPermission['permission'].']']) }}
 
                                                 <i class="fa fa-check"></i> {{ trans('admin/groups/titles.grant')}}
                                             </label>
 
                                             <label class="btn btn-danger">
-                                                {{ Form::radio('permission['.$localPermission['permission'].']', 'deny',(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '0' : null),['value'=>"0", 'id'=> 'permission['.$localPermission['permission'].']', 'aria-label'=> 'permission['.$localPermission['permission'].']']) }}
+                                                {{ Form::radio('permission['.$localPermission['permission'].']',
+                                                    '0',(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '0' : null),
+                                                    ['id'=> 'permission['.$localPermission['permission'].']',
+                                                    'aria-label'=> 'permission['.$localPermission['permission'].']']) }}
                                                 <i class="fa fa-times"></i> {{ trans('admin/groups/titles.deny')}}
                                             </label>
                                         </div>
@@ -79,26 +82,20 @@
 
         $(document).ready(function(){
 
-            // Toggle the button states
-            $(".btn-group > .btn").click(function(event){
+            // Toggle the button states - since this is a bootstrap button group, we have to introspect into the
+            // button (which is really a label masquerading as button!) The button group and "button" (label) have no
+            // values and the radio button isn't visible, which is why there is all this BS to get the value.
 
-                console.log('Event target:');
-                console.dir(event.target);
-                console.log('This: ');
-                console.dir($(this));
+            $(".btn-group > .btn > input[type='radio']").change(function(event) {
+                var clickedRadioValue = $(event.target).val();
 
-
-                var activeRadioValue = $(".btn-group > .btn.active > input[type='radio']:checked").attr('value');
-
-                    if (activeRadioValue == 1) {
-                        $(this).siblings().removeClass("active").removeClass("btn-danger").removeClass("btn-success").addClass('btn-default');
-                        $(this).addClass("active").addClass("btn-danger").removeClass("btn-success").removeClass('btn-default');
-                    } else if (activeRadioValue == 0) {
-                        $(this).siblings().removeClass("active").removeClass("btn-danger").removeClass("btn-success").addClass('btn-default');
-                        $(this).addClass("active").addClass("btn-success").removeClass("btn-danger").removeClass('btn-default');
-                    }
-
-                console.log('activeRadioValue:  ' + activeRadioValue);
+                if (clickedRadioValue == 1) {
+                    $(this).parent().siblings().removeClass("active").removeClass("btn-danger").removeClass("btn-success").addClass('btn-default');
+                    $(this).parent().addClass("active").addClass("btn-success").removeClass("btn-danger").removeClass('btn-default');
+                } else if (clickedRadioValue == 0) {
+                    $(this).parent().siblings().removeClass("active").removeClass("btn-danger").removeClass("btn-success").addClass('btn-default');
+                    $(this).parent().addClass("active").addClass("btn-danger").removeClass("btn-success").removeClass('btn-default');
+                }
 
             });
 
