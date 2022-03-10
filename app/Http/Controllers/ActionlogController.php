@@ -21,6 +21,7 @@ class ActionlogController extends Controller
         $this->authorize('view', \App\Models\Asset::class);
         $file = config('app.private_uploads').'/eula-pdfs/'.$filename;
 
+
         return Response::download($file);
     }
 }

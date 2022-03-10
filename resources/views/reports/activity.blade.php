@@ -53,7 +53,6 @@
                             <th class="col-sm-2" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.to') }}</th>
                             <th class="col-sm-1" data-field="note">{{ trans('general.notes') }}</th>
                             <th class="col-sm-2" data-field="log_meta" data-visible="false" data-formatter="changeLogFormatter">{{ trans('general.changed') }}</th>
-                            <th class="col-sm-1" data-field="stored_eula_file" data-visible="true">{{ trans('general.accept_eula') }}</th>
                         </tr>
                     </thead>
                 </table>

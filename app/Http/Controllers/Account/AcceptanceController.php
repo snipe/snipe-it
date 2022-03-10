@@ -7,9 +7,12 @@ use App\Events\CheckoutDeclined;
 use App\Events\ItemAccepted;
 use App\Events\ItemDeclined;
 use App\Http\Controllers\Controller;
+use App\Models\Actionlog;
+use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
 use App\Models\Company;
 use App\Models\Contracts\Acceptable;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -136,10 +139,19 @@ class AcceptanceController extends Controller
         \Log::error(storage_path().'/eula-pdfs/'.$sig_filename);
 
         $pdf = Pdf::loadView('account.accept.accept-eula', $data);
-        $stored_eula = Storage::put('private_uploads/eula-pdfs/accepted-eula-'.date('Y-m-d-h-i-s').'.pdf', $pdf->output());
-
+        $stored_eula= Storage::put('private_uploads/eula-pdfs/accepted-eula-'.date('Y-m-d-h-i-s').'.pdf', $pdf->output());
+        \Log::info($stored_eula);
         //not sure what im doing here,but I think its something of this.
-        route('log.storedeula.download', $stored_eula);
+        Actionlog::Create([
+            'item_id' => $acceptance->id,
+            'stored_eula' => $stored_eula,
+            'action_type'   => 'accepted',
+        ]);
+        \log::info(Actionlog::Create([
+            'item_id' => $acceptance->id,
+            'stored_eula' => $stored_eula,
+            'action_type'   => 'accepted',
+        ]));
 
         return redirect()->to('account/accept')->with('success', $return_msg);
     }
