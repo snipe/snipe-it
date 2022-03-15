@@ -1093,11 +1093,51 @@
                   <th class="col-sm-2" data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
                   <th class="col-sm-2" data-visible="true" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
                   <th class="col-sm-2" data-field="note">{{ trans('general.notes') }}</th>
-                  <th class="col-sm-1" data-field="stored_eula_file" data-visible="true">{{ trans('general.accept_eula') }}</th>
+                  <th class="col-sm-1" data-field="stored_eula_file" data-visible="true" data-formatter="fileUploadFormatter">{{ trans('general.accept_eula') }}</th>
                   <th class="col-md-3" data-visible="false" data-field="file" data-visible="false"  data-formatter="fileUploadFormatter">{{ trans('general.download') }}</th>
                   <th class="col-sm-2" data-field="log_meta" data-visible="true" data-formatter="changeLogFormatter">{{ trans('admin/hardware/table.changed')}}</th>
                 </tr>
                 </thead>
+                    @foreach($action_logs as $log)
+                        <tr>
+                            <td><i class="{{ Helper::filetype_icon($log->filename) }} icon-med" aria-hidden="true"></i></td>
+                            <td>
+                               @if($log->created_at)
+                                    {{ Helper::getFormattedDateObject($file->created_at, 'datetime', false) }}
+                               @endif
+                            </td>
+                            <td>
+                                {{$log->user_id}}
+                            </td>
+                            <td>
+                                {{$log->action_type}}
+                            </td>
+                            <td>
+                                {{$log->item_type}}
+                            </td>
+                            <td>
+                                {{$log->item_type}}
+                            </td>
+                            <td>
+                                @if($log->note)
+                                    {{$log->note}}
+                                @endif
+                            </td>
+                            <td>
+                                @if($log->stored_eula_file)
+                                    {{$log->stored_eula_file}}
+                                @endif
+                            </td>
+                            <td>
+                                @if($log->file)
+                                    {{$log->file}}
+                                @endif
+                            </td>
+                            <td>
+                                {{$log->log_meta}}
+                            </td>
+                        </tr>
+                    @endforeach
               </table>
             </div>
           </div> <!-- /.row -->

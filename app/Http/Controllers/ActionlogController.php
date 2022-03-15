@@ -19,7 +19,7 @@ class ActionlogController extends Controller
 
     public function getStoredEula($filename){
         $this->authorize('view', \App\Models\Asset::class);
-        $file = config('app.private_uploads').'/eula-pdfs/'.$filename;
+        $file = config('app'.$filename);
 
 
         return Response::download($file);

@@ -102,12 +102,12 @@ class AcceptanceController extends Controller
         }
 
         $sig_filename = '';
-
         if ($request->filled('signature_output')) {
             $sig_filename = 'siglog-'.Str::uuid().'-'.date('Y-m-d-his').'.png';
             $data_uri = e($request->input('signature_output'));
             $encoded_image = explode(',', $data_uri);
             $decoded_image = base64_decode($encoded_image[1]);
+            $acceptance->stored_eula_file = 'private_uploads/eula-pdfs/accepted-eula-'.date('Y-m-d-h-i-s').'.pdf';
             $path = Storage::put('private_uploads/signatures/'.$sig_filename, (string) $decoded_image);
         }
 
@@ -139,19 +139,13 @@ class AcceptanceController extends Controller
         \Log::error(storage_path().'/eula-pdfs/'.$sig_filename);
 
         $pdf = Pdf::loadView('account.accept.accept-eula', $data);
-        $stored_eula= Storage::put('private_uploads/eula-pdfs/accepted-eula-'.date('Y-m-d-h-i-s').'.pdf', $pdf->output());
-        \Log::info($stored_eula);
-        //not sure what im doing here,but I think its something of this.
-        Actionlog::Create([
-            'item_id' => $acceptance->id,
-            'stored_eula' => $stored_eula,
-            'action_type'   => 'accepted',
-        ]);
-        \log::info(Actionlog::Create([
-            'item_id' => $acceptance->id,
-            'stored_eula' => $stored_eula,
-            'action_type'   => 'accepted',
-        ]));
+        Storage::put($acceptance->stored_eula_file, $pdf->output());
+        $a=new Actionlog();
+         $a->stored_eula = $item->getEula();
+         $a->stored_eula_file = $acceptance->stored_eula_file;
+         $a->save();
+        \log::info($a);
+
 
         return redirect()->to('account/accept')->with('success', $return_msg);
     }
