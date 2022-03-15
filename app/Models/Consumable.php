@@ -277,6 +277,21 @@ class Consumable extends SnipeModel
     }
 
     /**
+     * Check how many items within a consumable are checked out
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.0]
+     * @return int
+     */
+    public function numCheckedOut()
+    {
+        $checkedout = 0;
+        $checkedout = $this->users->count();
+
+        return $checkedout;
+    }
+
+    /**
      * Checks the number of available consumables
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
