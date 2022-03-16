@@ -17,9 +17,9 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.0'
-          coverage: none
+          #coverage: none
           ini-values: "memory_limit=-1"
-          extensions: mbstring, intl
+          #extensions: mbstring, intl
       - name: Download deps
         run: composer update --no-interaction --no-progress
       - name: Download PHPStan
@@ -32,3 +32,5 @@ jobs:
         run: rm -f database/migrations/2015_11_05_183749_image.php
       - name: Execute PHPStan
         run: vendor/bin/phpstan analyze app config routes --no-progress --error-format=github -l 5
+        env: 
+          APP_KEY: APP_KEY_CREATED_FOR_PHPSTAN_SDLC
