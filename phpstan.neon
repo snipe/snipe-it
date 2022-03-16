@@ -12,3 +12,4 @@ parameters:
         - tests/*
         - vendor/*
         - database/*
+        - resources/*
