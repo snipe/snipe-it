@@ -82,6 +82,7 @@ class RestoreFromBackup extends Command
             return $this->error('Could not access file: '.$filename.' - '.array_key_exists($errcode, $errors) ? $errors[$errcode] : " Unknown reason: $errcode");
         }
 
+
         $private_dirs = [
             'storage/private_uploads/assets', // these are asset _files_, not the pictures.
             'storage/private_uploads/audits',
@@ -256,7 +257,6 @@ class RestoreFromBackup extends Command
                 $this->info($stderr);
 
                 return false;
-            }
         }
         if (!feof($sql_contents) || $bytes_read == 0) {
             return $this->error("Not at end of file for sql file, or zero bytes read. aborting!");
