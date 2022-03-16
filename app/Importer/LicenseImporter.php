@@ -48,9 +48,9 @@ class LicenseImporter extends ItemImporter
         }
         $asset_tag = $this->item['asset_tag'] = $this->findCsvMatch($row, 'asset_tag'); // used for checkout out to an asset.
 
-        $this->item['expiration_date'] = null;
-        if ($this->findCsvMatch($row, 'expiration_date') != '') {
-            $this->item['expiration_date'] = date('Y-m-d 00:00:01', strtotime($this->findCsvMatch($row, 'expiration_date')));
+        $this->item["expiration_date"] = null;
+        if ($this->findCsvMatch($row, "expiration_date")!='') {
+            $this->item["expiration_date"] = date("Y-m-d 00:00:01", strtotime($this->findCsvMatch($row, "expiration_date")));
         }
         $this->item['license_email'] = $this->findCsvMatch($row, 'license_email');
         $this->item['license_name'] = $this->findCsvMatch($row, 'license_name');
@@ -59,9 +59,9 @@ class LicenseImporter extends ItemImporter
         $this->item['reassignable'] = $this->findCsvMatch($row, 'reassignable');
         $this->item['seats'] = $this->findCsvMatch($row, 'seats');
         
-        $this->item['termination_date'] = null;
-        if ($this->findCsvMatch($row, 'termination_date') != '') {
-            $this->item['termination_date'] = date('Y-m-d 00:00:01', strtotime($this->findCsvMatch($row, 'termination_date')));
+        $this->item["termination_date"] = null;
+        if ($this->findCsvMatch($row, "termination_date")!='') {
+            $this->item["termination_date"] = date("Y-m-d 00:00:01", strtotime($this->findCsvMatch($row, "termination_date")));
         }
 
         if ($editingLicense) {

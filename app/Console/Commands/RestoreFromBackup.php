@@ -82,6 +82,7 @@ class RestoreFromBackup extends Command
             return $this->error('Could not access file: '.$filename.' - '.array_key_exists($errcode, $errors) ? $errors[$errcode] : " Unknown reason: $errcode");
         }
 
+
         $private_dirs = [
             'storage/private_uploads/assets', // these are asset _files_, not the pictures.
             'storage/private_uploads/audits',
@@ -245,19 +246,21 @@ class RestoreFromBackup extends Command
             return false;
         }
         $bytes_read = 0;
+
         while (($buffer = fgets($sql_contents, self::$buffer_size)) !== false) {
             $bytes_read += strlen($buffer);
             // \Log::debug("Buffer is: '$buffer'");
             $bytes_written = fwrite($pipes[0], $buffer);
+
             if ($bytes_written === false) {
                 $stdout = fgets($pipes[1]);
                 $this->info($stdout);
                 $stderr = fgets($pipes[2]);
                 $this->info($stderr);
-
                 return false;
             }
         }
+        
         if (!feof($sql_contents) || $bytes_read == 0) {
             return $this->error("Not at end of file for sql file, or zero bytes read. aborting!");
         }
