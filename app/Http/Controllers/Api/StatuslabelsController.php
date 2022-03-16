@@ -42,7 +42,6 @@ class StatuslabelsController extends Controller
             } elseif (strtolower($request->input('status_type'))== 'undeployable') {
                 $statuslabels = $statuslabels->Undeployable();
             }
-
         }
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
