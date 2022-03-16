@@ -12,4 +12,3 @@ parameters:
         - tests/*
         - vendor/*
         - database/*
-        
