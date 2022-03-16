@@ -121,7 +121,7 @@ class Statuslabel extends SnipeModel
     }
 
     /**
-     * Query builder scope for deployable status types
+     * Query builder scope for undeployable status types
      *
      * @return \Illuminate\Database\Query\Builder Modified query builder
      */
