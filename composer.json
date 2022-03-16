@@ -61,7 +61,6 @@
     "rollbar/rollbar-laravel": "^7.0",
     "spatie/laravel-backup": "^6.16",
     "tecnickcom/tc-lib-barcode": "^1.15",
-    "tightenco/ziggy": "v1.2.0",
     "unicodeveloper/laravel-password": "^1.0",
     "watson/validating": "^6.1"
   },

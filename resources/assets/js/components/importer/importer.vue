@@ -63,7 +63,7 @@
 
         methods: {
             fetchFiles() {
-                this.$http.get(route('api.imports.index'))
+                this.$http.get('api/v1/imports')
                 .then( ({data}) => this.files = data, // Success
                     //Fail
                 (response) => {
@@ -73,7 +73,7 @@
                 });
             },
             fetchCustomFields() {
-                this.$http.get(route('api.customfields.index'))
+                this.$http.get('api/v1/fields')
                 .then( ({data}) => {
                     data = data.rows;
                     data.forEach((item) => {
@@ -85,7 +85,7 @@
                 });
             },
             deleteFile(file, key) {
-                this.$http.delete(route('api.imports.destroy', file.id))
+                this.$http.delete('api/v1/imports/' + file.id)
                 .then(
                     // Success, remove file from array.
                     (response) => {

@@ -266,7 +266,7 @@
                 }
                 this.statusType='pending';
                 this.statusText = "Processing...";
-                this.$http.post(route('api.imports.importFile', this.file.id), {
+                this.$http.post('api/v1/imports/process/' + this.file.id, {
                     'import-update': this.options.update,
                     'send-welcome': this.options.send_welcome,
                     'import-type': this.options.importType,

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 SCIMRouteProvider::publicRoutes(); // Make sure to load public routes *FIRST*
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware(['auth:api','authorize:superadmin'])->group(function () {
     SCIMRouteProvider::routes(
         [
             'public_routes' => false // do not hide public routes (metadata) behind authentication
@@ -24,4 +24,4 @@ Route::middleware('auth:api')->group(function () {
     );
 
     SCIMRouteProvider::meRoutes();
-});
+}); // ->can('superuser');
