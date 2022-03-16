@@ -613,6 +613,11 @@
             return '<a href="' + value + '" data-toggle="lightbox" data-type="image"><img src="' + value + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive" alt="' + altName + '"></a>';
         }
     }
+    function downloadFormatter(value) {
+        if (value) {
+            return '<a href="' + value + '" target="_blank"><i class="fas fa-download"></i></a>';
+        }
+    }
 
     function fileUploadFormatter(value) {
         if ((value) && (value.url) && (value.inlineable)) {

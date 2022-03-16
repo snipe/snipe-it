@@ -8,7 +8,6 @@ use Response;
 
 class ActionlogController extends Controller
 {
-
     public function displaySig($filename)
     {
         $this->authorize('view', \App\Models\Asset::class);
@@ -17,5 +16,11 @@ class ActionlogController extends Controller
         $contents = file_get_contents($file);
 
         return Response::make($contents)->header('Content-Type', $filetype);
+    }
+    public function getStoredEula($filename){
+        $this->authorize('view', \App\Models\Asset::class);
+        $file = config('app.private_uploads').'/eula-pdfs/'.$filename;
+
+        return Response::download($file);
     }
 }

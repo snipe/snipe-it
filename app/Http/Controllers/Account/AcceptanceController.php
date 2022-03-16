@@ -107,7 +107,7 @@ class AcceptanceController extends Controller
             $data_uri = e($request->input('signature_output'));
             $encoded_image = explode(',', $data_uri);
             $decoded_image = base64_decode($encoded_image[1]);
-            $acceptance->stored_eula_file = 'private_uploads/eula-pdfs/accepted-eula-'.date('Y-m-d-h-i-s').'.pdf';
+            $acceptance->stored_eula_file = 'accepted-eula-'.date('Y-m-d-h-i-s').'.pdf';
             $path = Storage::put('private_uploads/signatures/'.$sig_filename, (string) $decoded_image);
         }
 
@@ -136,10 +136,9 @@ class AcceptanceController extends Controller
             'logo' => public_path().'/uploads/snipe-logo.png',
         ];
 
-        \Log::error(storage_path().'/eula-pdfs/'.$sig_filename);
-
         $pdf = Pdf::loadView('account.accept.accept-eula', $data);
-        Storage::put($acceptance->stored_eula_file, $pdf->output());
+        Storage::put('private_uploads/eula-pdfs/'.$acceptance->stored_eula_file, $pdf->output());
+
         $a=new Actionlog();
          $a->stored_eula = $item->getEula();
          $a->stored_eula_file = $acceptance->stored_eula_file;
