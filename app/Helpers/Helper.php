@@ -780,12 +780,12 @@ class Helper
     /**
      * Check to see if the given key exists in the array, and trim excess white space before returning it
      *
+     * @author Daniel Melzter
+     * @since 3.0
      * @param $array array
      * @param $key string
      * @param $default string
      * @return string
-     *@author Daniel Melzter
-     * @since 3.0
      */
     public static function array_smart_fetch(array $array, string $key, string $default = '')
     {
