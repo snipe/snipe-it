@@ -1,5 +1,3 @@
-# This workflow runs PHPStan security analysis tool
-# More information: https://github.com/phpstan/phpstan
 name: PHPStan Security Scan
 on:
   push:
@@ -17,14 +15,14 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.0'
-          #coverage: none
+          coverage: none
           ini-values: "memory_limit=-1"
-          #extensions: mbstring, intl
+          extensions: mbstring, intl
       - name: Download deps
         run: composer update --no-interaction --no-progress
       - name: Download PHPStan
-        run: composer require --dev phpstan/phpstan
-      - name: Download Larastan v1 # (Laravel Framework 6.20.44), v2 is for Laravel >=9
+        run: composer require --dev phpstan/phpstan #:1.5.x-dev
+      - name: Download Larastan v1 # (Laravel Framework 6.20.44)
         run: composer require nunomaduro/larastan:^1.0 --dev
       - name: Download mcrypt helper
         run: wget https://raw.githubusercontent.com/JetBrains/phpstorm-stubs/master/mcrypt/mcrypt.php -O _mcrypt_helper.php
@@ -32,5 +30,3 @@ jobs:
         run: rm -f database/migrations/2015_11_05_183749_image.php
       - name: Execute PHPStan
         run: vendor/bin/phpstan analyze app config routes --no-progress --error-format=github -l 5
-        env: 
-          APP_KEY: APP_KEY_CREATED_FOR_PHPSTAN_SDLC
