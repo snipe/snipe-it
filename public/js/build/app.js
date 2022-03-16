@@ -2241,7 +2241,8 @@ If you want to pass additional variables to the modal (In the Category Create on
 
 */
 $(function () {
-  //handle modal-add-interstitial calls
+  var baseUrl = $('meta[name="baseUrl"]').attr('content'); //handle modal-add-interstitial calls
+
   var model, select, refreshSelector;
 
   if ($('#createModal').length == 0) {

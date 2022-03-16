@@ -36,7 +36,7 @@
     background-color: rgba(255, 255, 255, 0.1);
   }
   .skin-green .main-header .navbar .dropdown-menu li a {
-    color: #fff;
+    color: #333;
   }
   .skin-green .main-header .navbar .dropdown-menu li a:hover {
     background: #008d4c;
