@@ -459,6 +459,7 @@
                                                         @else
                                                             {!! nl2br(e($asset->{$field->db_column_name()})) !!} &nbsp;
                                                         @endif
+
                                                     @endif
                                                 </div>
                                             </div>

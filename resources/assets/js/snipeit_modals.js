@@ -26,7 +26,7 @@
 
 $(function () {
 
-
+  var baseUrl = $('meta[name="baseUrl"]').attr('content');
   //handle modal-add-interstitial calls
   var model, select, refreshSelector;
 

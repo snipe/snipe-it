@@ -13,20 +13,22 @@ class CreateCheckoutAcceptancesTable extends Migration
      */
     public function up()
     {
-        Schema::create('checkout_acceptances', function (Blueprint $table) {
-            $table->increments('id');
+        if (!Schema::hasTable('checkout_acceptances')) {
+            Schema::create('checkout_acceptances', function (Blueprint $table) {
+                $table->increments('id');
 
-            $table->morphs('checkoutable');
-            $table->integer('assigned_to_id')->nullable();
+                $table->morphs('checkoutable');
+                $table->integer('assigned_to_id')->nullable();
 
-            $table->string('signature_filename')->nullable();
+                $table->string('signature_filename')->nullable();
 
-            $table->timestamp('accepted_at')->nullable();
-            $table->timestamp('declined_at')->nullable();
+                $table->timestamp('accepted_at')->nullable();
+                $table->timestamp('declined_at')->nullable();
 
-            $table->timestamps();
-            $table->softDeletes();
-        });
+                $table->timestamps();
+                $table->softDeletes();
+            });
+        }
     }
 
     /**
@@ -36,6 +38,8 @@ class CreateCheckoutAcceptancesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('checkout_acceptances');
+        if (Schema::hasTable('checkout_acceptances')) {
+            Schema::dropIfExists('checkout_acceptances');
+        }
     }
 }

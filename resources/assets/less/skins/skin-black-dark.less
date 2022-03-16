@@ -26,7 +26,7 @@
               color: #fff;
             }
             a {
-              color: #fff;
+              color: #333;
               &:hover {
                 background: darken(@black, 5%);
                 color: #fff;
@@ -34,6 +34,11 @@
             }
           }
         }
+      }
+    }
+    @media (max-width: 991px) {
+      .navbar-custom-menu > .navbar-nav > li > .dropdown-menu {
+        background-color: var(--back-sub);
       }
     }
     //Logo
@@ -244,10 +249,6 @@ body {
 }
 #details>div>div>div>table {
   background-color: transparent;
-}
-.dropdown-menu, .dropdown-menu>li>a {
-  background-color: var(--back-sub);
-  color: var(--text-main) !important;
 }
 .dropdown-menu>li>a:hover {
   background-color: var(--back-main);
