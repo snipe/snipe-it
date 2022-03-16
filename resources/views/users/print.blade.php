@@ -230,7 +230,7 @@
                         {{ ($consumable->manufacturer) ? $consumable->manufacturer->name : '' }}  {{ $consumable->name }} {{ $consumable->model_number }}
                     @endif
                 </td>
-                    <td>{{ ($consumable->category) ? $consumable->category->name : '{{ trans('general.invalid_category') }}' }} </td>
+                    <td>{{ ($consumable->category) ? $consumable->category->name :  trans('general.invalid_category') }} </td>
                     <td>{{  $consumable->assetlog->first()->created_at }}</td>
                 </tr>
                 @php
