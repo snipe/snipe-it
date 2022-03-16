@@ -30,3 +30,5 @@ jobs:
         run: rm -f database/migrations/2015_11_05_183749_image.php
       - name: Execute PHPStan
         run: vendor/bin/phpstan analyze app config routes --no-progress --error-format=github -l 5
+        env:
+          APP_KEY: APP_KEY_CREATED_FOR_PHPSTAN_TEST
