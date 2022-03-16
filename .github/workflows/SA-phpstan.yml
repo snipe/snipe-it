@@ -1,3 +1,7 @@
+# This workflow runs PHPStan security analysis tool
+# Uses `phpstan.neon` configuration file
+# More information: https://github.com/phpstan/phpstan
+
 name: PHPStan Security Scan
 on:
   push:
@@ -20,14 +24,21 @@ jobs:
       - name: Download deps
         run: composer update --no-interaction --no-progress
       - name: Download PHPStan
-        run: composer require --dev phpstan/phpstan #:1.5.x-dev
-      - name: Download Larastan v1 # (Laravel Framework 6.20.44)
+        run: composer require --dev phpstan/phpstan
+      - name: Download Larastan v1
+        # Larastan adds static typing to Laravel framework
+        # Larastan v1 is intended for Laraval < 9. For Laraval >= 9 use v2
         run: composer require nunomaduro/larastan:^1.0 --dev
       - name: Download mcrypt helper
+        # Download mcrypt stub to cover mcrypt functions
         run: wget https://raw.githubusercontent.com/JetBrains/phpstorm-stubs/master/mcrypt/mcrypt.php -O _mcrypt_helper.php
       - name: Delete conflicting file
+        # Crashes PHPStan and cannot be excluded in the 'phpstan.neon' config
         run: rm -f database/migrations/2015_11_05_183749_image.php
       - name: Execute PHPStan
-        run: vendor/bin/phpstan analyze app config routes --no-progress --error-format=github -l 5
+        # Run the PHPStan tool for the 'app', 'config', and 'routes' dirs
+        # Rule level (-l) set to 5. More information: https://phpstan.org/user-guide/rule-levels
+        run: vendor/bin/phpstan analyze app config routes --no-progress --error-format=github -l 5 -c phpstan.neon
         env:
+          # Example 32 bytes key to avoid `No application encryption key has been specified` error
           APP_KEY: APP_KEY_CREATED_FOR_PHPSTAN_TEST
