@@ -1,0 +1,15 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+parameters:
+    reportUnmatchedIgnoredErrors: false
+    bootstrapFiles:
+        - dotenv.php
+        - c3.php
+        - _mcrypt_helper.php
+    ignoreErrors:
+        - '#PHPDoc tag .#'
+    excludePaths:
+        - tests/*
+        - vendor/*
+        - database/*
+        

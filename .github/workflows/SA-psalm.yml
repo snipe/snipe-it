@@ -1,0 +1,57 @@
+name: Psalm Security Scan
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  psalm-security-scan-basic:
+    name: Psalm Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+          coverage: none
+          ini-values: "memory_limit=-1"
+          extensions: mbstring, intl
+      - name: Download deps
+        run: composer update --no-interaction --no-progress
+      - name: Install laravel-ide-helper
+        run: composer require --dev barryvdh/laravel-ide-helper
+      - name: Download Psalm
+        run: composer require --dev vimeo/psalm
+      - name: PHPDoc generation for Laravel Facades
+        run: php artisan ide-helper:generate
+      - name: Download mcrypt helper
+        run: wget https://raw.githubusercontent.com/JetBrains/phpstorm-stubs/master/mcrypt/mcrypt.php -O _mcrypt_helper.php
+      - name: Execute Psalm
+        run: ./vendor/bin/psalm --long-progress --output-format=github --no-cache
+
+  psalm-security-scan-taint-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+          coverage: none
+          ini-values: "memory_limit=-1"
+          extensions: mbstring, intl
+      - name: Download deps
+        run: composer update --no-interaction --no-progress
+      - name: Install laravel-ide-helper
+        run: composer require --dev barryvdh/laravel-ide-helper
+      - name: Download Psalm
+        run: composer require --dev vimeo/psalm
+      - name: Download mcrypt helper
+        run: wget https://raw.githubusercontent.com/JetBrains/phpstorm-stubs/master/mcrypt/mcrypt.php -O _mcrypt_helper.php
+      - name: PHPDoc generation for Laravel Facades
+        run: php artisan ide-helper:generate
+      - name: Execute Psalm (Taint Analysis)
+        run: ./vendor/bin/psalm --long-progress --output-format=github --taint-analysis
