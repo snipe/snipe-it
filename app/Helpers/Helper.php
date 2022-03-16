@@ -60,7 +60,7 @@ class Helper
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.3]
-     * @return array
+     * @return string
      */
     public static function defaultChartColors($index = 0)
     {
@@ -333,8 +333,6 @@ class Helper
             '#92896B',
         ];
 
-
-
         return $colors[$index];
     }
 
@@ -416,8 +414,7 @@ class Helper
          * 
          */
         $LocaleInfo = localeconv();
-        $floatString = str_replace(',', '', $floatString);
-        $floatString = str_replace($LocaleInfo['decimal_point'], '.', $floatString);
+        $floatString = str_replace(array(',', $LocaleInfo['decimal_point']), array('', '.'), $floatString);
         // Strip Currency symbol
         // If no currency symbol is set, default to $ because Murica
         $currencySymbol = $LocaleInfo['currency_symbol'];
@@ -427,7 +424,7 @@ class Helper
 
         $floatString = str_replace($currencySymbol, '', $floatString);
 
-        return floatval($floatString);
+        return (float)$floatString;
     }
     
     /**
@@ -435,7 +432,7 @@ class Helper
      * 
      * @author [B. Wetherington] [<bwetherington@grokability.com>]
      * @since [v5.2]
-     * @return Float
+     * @return float
      */
     public static function ParseCurrency($currencyString) {
         $without_currency = str_replace(Setting::getSettings()->default_currency, '', $currencyString); //generally shouldn't come up, since we don't do this in fields, but just in case it does...
@@ -595,10 +592,11 @@ class Helper
 
     /**
      * Generates a random string
+     * This function does not generate cryptographically secure values, and should not be used for cryptographic purposes
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return array
+     * @return string
      */
     public static function generateRandomString($length = 10)
     {
@@ -606,7 +604,7 @@ class Helper
         $charactersLength = strlen($characters);
         $randomString = '';
         for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
+            $randomString .= $characters[random_int(0, $charactersLength - 1)];
         }
 
         return $randomString;
@@ -782,17 +780,15 @@ class Helper
     /**
      * Check to see if the given key exists in the array, and trim excess white space before returning it
      *
-     * @author Daniel Melzter
-     * @since 3.0
      * @param $array array
      * @param $key string
      * @param $default string
      * @return string
+     *@author Daniel Melzter
+     * @since 3.0
      */
-    public static function array_smart_fetch(array $array, $key, $default = '')
+    public static function array_smart_fetch(array $array, string $key, string $default = '')
     {
-        array_change_key_case($array, CASE_LOWER);
-
         return array_key_exists(strtolower($key), array_change_key_case($array)) ? e(trim($array[$key])) : $default;
     }
 
@@ -973,7 +969,6 @@ class Helper
                 case 'gif':
                 case 'png':
                     return true;
-                    break;
                 default:
                     return false;
             }
