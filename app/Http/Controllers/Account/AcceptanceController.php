@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Http\Controllers\SettingsController;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class AcceptanceController extends Controller
@@ -128,12 +129,21 @@ class AcceptanceController extends Controller
         }
 
         $item = $acceptance->checkoutable_type::find($acceptance->checkoutable_id);
-
+        $assigned_to = User::find($item->assigned_to);
+        $branding_settings= SettingsController::getPDFBranding();
         $data = [
-            'item' => $item,
-            'eula' => $item->getEula(),
-            'signature' => storage_path().'/private_uploads/signatures/'.$sig_filename,
-            'logo' => public_path().'/uploads/snipe-logo.png',
+            'item_tag'       => $item->asset_tag,
+            'item_model'     => $item->model_id,
+            'item_serial'    => $item->serial,
+            'eula'           => $item->getEula(),
+            'check_out_date' => $acceptance->created_at,
+            'accepted_date'  => $acceptance->accepted_at,
+//          'assigned_by'    => self
+            'assigned_to'    => $assigned_to->first_name.' '.$assigned_to->last_name,
+            'company_name'   => $branding_settings->site_name,
+            'signature'      => storage_path().'/private_uploads/signatures/'.$sig_filename,
+            'logo'           => public_path().'/uploads/'.$branding_settings->logo,
+            'date_settings'  => $branding_settings->date_display_format,
         ];
 
         $pdf = Pdf::loadView('account.accept.accept-eula', $data);
@@ -143,8 +153,6 @@ class AcceptanceController extends Controller
          $a->stored_eula = $item->getEula();
          $a->stored_eula_file = $acceptance->stored_eula_file;
          $a->save();
-        \log::info($a);
-
 
         return redirect()->to('account/accept')->with('success', $return_msg);
     }

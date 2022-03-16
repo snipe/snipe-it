@@ -7,7 +7,6 @@
 
 <script src="{{ url(mix('js/dist/bootstrap-table.js')) }}"></script>
 <script nonce="{{ csrf_token() }}">
-
     $(function () {
         var locale = '{{ config('app.locale') }}';
 

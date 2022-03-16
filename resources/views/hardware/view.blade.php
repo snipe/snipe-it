@@ -1098,7 +1098,6 @@
                   <th class="col-sm-2" data-field="log_meta" data-visible="true" data-formatter="changeLogFormatter">{{ trans('admin/hardware/table.changed')}}</th>
                 </tr>
                 </thead>
-{{--                  --}}
               </table>
             </div>
           </div> <!-- /.row -->

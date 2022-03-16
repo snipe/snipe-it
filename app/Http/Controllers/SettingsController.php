@@ -1025,6 +1025,12 @@ class SettingsController extends Controller
 
         return redirect()->back()->withInput()->withErrors($setting->getErrors());
     }
+    public static function getPDFBranding()
+    {
+        $pdf_branding= Setting::getSettings();
+
+        return $pdf_branding;
+    }
 
     /**
      * Show the listing of backups.
