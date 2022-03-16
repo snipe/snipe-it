@@ -3,7 +3,7 @@ includes:
 parameters:
     reportUnmatchedIgnoredErrors: false
     bootstrapFiles:
-        - dotenv.php
+        # - dotenv.php
         - c3.php
         - _mcrypt_helper.php
     ignoreErrors:
