@@ -43,6 +43,7 @@ jobs:
       #   if: always()
 
   psalm-security-scan-taint-analysis:
+    name: Psalm Security Scan (Taint Analysis)
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
