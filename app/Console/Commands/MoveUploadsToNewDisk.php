@@ -69,7 +69,7 @@ class MoveUploadsToNewDisk extends Command
                 $filename = basename($public_upload[$i]);
 
                 try {
-                    Storage::disk('public')->put('uploads/'.public_type.'/'.$filename, file_get_contents($public_upload[$i]));
+                    Storage::disk('public')->put('uploads/'.$public_type.'/'.$filename, file_get_contents($public_upload[$i]));
                     $new_url = Storage::disk('public')->url('uploads/'.$public_type.'/'.$filename, $filename);
                     $this->info($type_count.'. PUBLIC: '.$filename.' was copied to '.$new_url);
                 } catch (\Exception $e) {

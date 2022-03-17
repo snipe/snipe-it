@@ -38,11 +38,11 @@ class Handler extends ExceptionHandler
      * @param  \Throwable  $exception
      * @return void
      */
-    public function report(Throwable $exception)
+    public function report(Throwable $e)
     {
-        if ($this->shouldReport($exception)) {
-            Log::error($exception);
-            return parent::report($exception);
+        if ($this->shouldReport($e)) {
+            Log::error($e);
+            return parent::report($e);
         }
     }
 

@@ -12,7 +12,7 @@ class AssetPresenter extends Presenter
 {
     /**
      * Json Column Layout for bootstrap table
-     * @return string
+     * @return string|false
      */
     public static function dataTableLayout()
     {
@@ -330,7 +330,7 @@ class AssetPresenter extends Presenter
             $imageAlt = $this->model->name;
         }
         $url = config('app.url');
-        if (! empty($imagePath)) {
+        if (! empty($imagePath) && !empty($imageAlt)) {
             $imagePath = '<img src="'.$url.'/uploads/assets/'.$imagePath.' height="50" width="50" alt="'.$imageAlt.'">';
         }
 

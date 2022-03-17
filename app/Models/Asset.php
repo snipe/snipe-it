@@ -189,7 +189,7 @@ class Asset extends Depreciable
      *
      * @var array
      */
-    public function save(array $params = [])
+    public function save(array $options = [])
     {
         if ($this->model_id != '') {
             $model = AssetModel::find($this->model_id);
@@ -199,7 +199,7 @@ class Asset extends Depreciable
             }
         }
 
-        return parent::save($params);
+        return parent::save($options);
     }
 
 
@@ -215,7 +215,7 @@ class Asset extends Depreciable
     public function getWarrantyExpiresAttribute()
     {
         if (isset($this->attributes['warranty_months']) && isset($this->attributes['purchase_date'])) {
-            if (is_string($this->attributes['purchase_date']) || is_string($this->attributes['purchase_date'])) {
+            if (is_string($this->attributes['purchase_date'])) {
                 $purchase_date = \Carbon\Carbon::parse($this->attributes['purchase_date']);
             } else {
                 $purchase_date = \Carbon\Carbon::instance($this->attributes['purchase_date']);
