@@ -8,6 +8,9 @@
 >
     <projectFiles>
         <directory name="app" />
+        <directory name="config" />
+        <directory name="routes" />
+        <directory name="resources" />
         <ignoreFiles>
             <directory name="vendor" />
             <directory name="tests" />
@@ -19,5 +22,6 @@
     </stubs>
     <issueHandlers>
         <UndefinedDocblockClass errorLevel="suppress" />
+        <UndefinedClass errorLevel="suppress" />
     </issueHandlers>
 </psalm>

@@ -55,3 +55,4 @@ jobs:
         run: php artisan ide-helper:generate
       - name: Execute Psalm (Taint Analysis)
         run: ./vendor/bin/psalm --long-progress --output-format=github --taint-analysis
+
