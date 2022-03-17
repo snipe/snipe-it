@@ -4,6 +4,11 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+    
+permissions:
+  contents: read
+  security-events: write
+    
 jobs:
   psalm-security-scan-basic:
     name: Psalm Security Scan
@@ -29,7 +34,13 @@ jobs:
       - name: Download mcrypt helper
         run: wget https://raw.githubusercontent.com/JetBrains/phpstorm-stubs/master/mcrypt/mcrypt.php -O _mcrypt_helper.php
       - name: Execute Psalm
-        run: ./vendor/bin/psalm --long-progress --output-format=github --no-cache
+        run: ./vendor/bin/psalm --long-progress --no-cache --report=results_base.sarif
+      # Upload findings to GitHub Advanced Security Dashboard - disabled for 'base' scan
+      # - name: Upload SARIF file for GitHub Advanced Security Dashboard
+      #   uses: github/codeql-action/upload-sarif@v1
+      #   with:
+      #     sarif_file: results_base.sarif
+      #   if: always()
 
   psalm-security-scan-taint-analysis:
     runs-on: ubuntu-latest
@@ -54,5 +65,10 @@ jobs:
       - name: PHPDoc generation for Laravel Facades
         run: php artisan ide-helper:generate
       - name: Execute Psalm (Taint Analysis)
-        run: ./vendor/bin/psalm --long-progress --output-format=github --taint-analysis
-
+        run: ./vendor/bin/psalm --long-progress --taint-analysis --report=results_taint.sarif
+      # Upload findings to GitHub Advanced Security Dashboard
+      - name: Upload SARIF file for GitHub Advanced Security Dashboard
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: results_taint.sarif
+        if: always()
