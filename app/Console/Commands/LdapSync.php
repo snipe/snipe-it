@@ -49,7 +49,7 @@ class LdapSync extends Command
         $ldap_result_last_name = Setting::getSettings()->ldap_lname_field;
         $ldap_result_first_name = Setting::getSettings()->ldap_fname_field;
 
-        $ldap_result_active_flag = Setting::getSettings()->ldap_active_flag;
+        $ldap_result_active_flag = Setting::getSettings()->ldap_active_flag_field;
         $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num;
         $ldap_result_email = Setting::getSettings()->ldap_email;
         $ldap_result_phone = Setting::getSettings()->ldap_phone_field;
@@ -253,8 +253,8 @@ class LdapSync extends Command
 
                 if ($item['ldap_location_override'] == true) {
                     $user->location_id = $item['location_id'];
-                } elseif ((isset($location))) {
-                    if ((array_key_exists('id', $location))) {
+                } elseif ((isset($location)) && (! empty($location))) {
+                    if ((is_array($location)) && (array_key_exists('id', $location))) {
                         $user->location_id = $location['id'];
                     } elseif (is_object($location)) {
                         $user->location_id = $location->id;
@@ -276,7 +276,7 @@ class LdapSync extends Command
                     $item['status'] = 'error';
                 }
 
-                $summary[] = $item;
+                array_push($summary, $item);
             }
         }
 
