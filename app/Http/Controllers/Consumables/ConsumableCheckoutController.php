@@ -66,9 +66,11 @@ class ConsumableCheckoutController extends Controller
             'consumable_id' => $consumable->id,
             'user_id' => $admin_user->id,
             'assigned_to' => e($request->input('assigned_to')),
+            'totalnum' => e($request->input('totalnum')),
+            'checkoutnote' => e($request->input('checkoutnote'))
         ]);
 
-        event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note')));
+        event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note'), $request->input('totalnum')));
 
         // Redirect to the new consumable page
         return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.checkout.success'));

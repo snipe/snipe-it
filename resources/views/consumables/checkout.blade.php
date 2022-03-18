@@ -37,6 +37,15 @@
           </div>
           @endif
 
+          <!-- number of consumables -->         
+            <div class="form-group {{ $errors->has('total') ? ' has-error' : '' }}">
+              <label for="total" class="col-md-3 control-label">{{ trans('admin/consumables/general.total') }}
+                <i class='icon-asterisk'></i></label>
+              <div class="col-md-9">
+                <input class="form-control" type="text" name="totalnum" id="totalnum" style="width: 70px;" value="{{ old('total') ?? 1 }}" />
+                {!! $errors->first('total', '<br><span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+              </div>
+            </div>
           <!-- User -->
             @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'assigned_to', 'required'=> 'true'])
 
@@ -67,11 +76,11 @@
               </div>
             @endif
           <!-- Note -->
-          <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
+          <div class="form-group {{ $errors->has('checkoutnote') ? 'error' : '' }}">
             <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
             <div class="col-md-7">
-              <textarea class="col-md-6 form-control" id="note" name="note">{{ old('note', $consumable->note) }}</textarea>
-              {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+              <textarea class="col-md-6 form-control" id="checkoutnote" name="checkoutnote">{{ old('note', $consumable->checkoutnote) }}</textarea>	      
+              {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
         </div> <!-- .box-body -->

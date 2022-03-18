@@ -60,13 +60,13 @@ class ConsumablesTransformer
         return $array;
     }
 
-    public function transformCheckedoutConsumables(Collection $consumables_users, $total)
+    public function transformCheckedoutConsumables (Collection $consumables_users, $totalnum, $checkoutnote)
     {
         $array = [];
         foreach ($consumables_users as $user) {
             $array[] = (new UsersTransformer)->transformUser($user);
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
+        return (new DatatablesTransformer)->transformDatatables($array, $totalnum, $checkoutnote);
     }
 }

@@ -285,9 +285,15 @@ class Consumable extends SnipeModel
      */
     public function numRemaining()
     {
+        $checkedouttotal = null;
         $checkedout = $this->users->count();
+        foreach($this->users as $data){
+                $totalnum = $data['pivot']['totalnum'];
+                Log:info($totalnum);
+                $checkedouttotal += $totalnum;            
+        }        
         $total = $this->qty;
-        $remaining = $total - $checkedout;
+        $remaining = $total - $checkedouttotal;
 
         return $remaining;
     }
