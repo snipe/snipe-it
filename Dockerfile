@@ -1,4 +1,4 @@
-FROM ubuntu:focal
+FROM ubuntu:20.04
 LABEL maintainer Brady Wetherington <bwetherington@grokability.com>
 
 # No need to add `apt-get clean` here, reference:
