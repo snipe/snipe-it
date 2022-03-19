@@ -82,9 +82,7 @@ class AppServiceProvider extends ServiceProvider
             $this->app->register(\Laravel\Dusk\DuskServiceProvider::class);
         } 
 
-        $this->app->singleton('ArieTimmerman\Laravel\SCIMServer\SCIMConfig', SnipeSCIMConfig::class); //do we need this? yes.
-        // $this->app->singleton('ArieTimmerman\Laravel\SCIMServer\RouteProvider', SnipeSCIMCRouteProvider::class);
-
+        $this->app->singleton('ArieTimmerman\Laravel\SCIMServer\SCIMConfig', SnipeSCIMConfig::class); // this overrides the default SCIM configuration with our own
     
     }
 }

@@ -24,7 +24,7 @@ class RouteServiceProvider extends ServiceProvider
 
             $this->mapWebRoutes();
 
-            require base_path('routes/scim.php'); //This 'require' thing feels janky, but, well, whatever. I dunno
+            require base_path('routes/scim.php');
         });
     }
 
