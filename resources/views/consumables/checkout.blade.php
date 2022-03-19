@@ -21,7 +21,7 @@
         @if ($consumable->id)
           <div class="box-header with-border">
             <div class="box-heading">
-              <h2 class="box-title">{{ $consumable->name }} </h2>
+              <h2 class="box-title">{{ $consumable->name }}   ({{ $consumable->numRemaining()  }} out of {{ $consumable->qty}}  {{ trans('admin/consumables/general.remaining') }}) </h2>
             </div>
           </div><!-- /.box-header -->
         @endif
@@ -41,9 +41,14 @@
             <div class="form-group {{ $errors->has('total') ? ' has-error' : '' }}">
               <label for="total" class="col-md-3 control-label">{{ trans('admin/consumables/general.total') }}
                 <i class='icon-asterisk'></i></label>
-              <div class="col-md-9">
-                <input class="form-control" type="text" name="totalnum" id="totalnum" style="width: 70px;" value="{{ old('total') ?? 1 }}" />
-                {!! $errors->first('total', '<br><span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+              <div class="col-md-5" >
+                    <input class="form-control" type="text" name="totalnum" id="totalnum" style="width: 70px; float:left;" value="{{ old('totalnum') ?? 1 }}" > &nbsp;&nbsp;
+                    <label class="control-label"> / {{ $consumable->numRemaining()  }}</label>
+                    <div style="float:right;" class="col-ld-1">
+                    {!! $errors->first('totalnum', '<span class="alert-msg" aria-hidden="true" width=100% position=absolute><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}    
+</div>
+                    </input>               
+                             
               </div>
             </div>
           <!-- User -->
@@ -85,7 +90,7 @@
           </div>
         </div> <!-- .box-body -->
         <div class="box-footer">
-          <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
+          <a class="btn btn-link" href="{{ route('consumables.index') }}">{{ trans('button.cancel') }}</a>
           <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
        </div>
       </div>

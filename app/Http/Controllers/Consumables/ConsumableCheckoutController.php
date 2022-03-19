@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Validation\Rule;
 
 class ConsumableCheckoutController extends Controller
 {
@@ -47,6 +48,14 @@ class ConsumableCheckoutController extends Controller
         if (is_null($consumable = Consumable::find($consumableId))) {
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
         }
+
+        $request->validate([
+            "totalnum" => "required|regex:/^[0-9]*$/|max:{{$consumable->numRemaining()}}"
+          ],[
+              'totalnum.max' => 'Total number to be checkout is greater than available stock',
+              'totalnum.required' => 'Total checkout number must be filled',
+              'totalnum.regex' => 'Total number must be numeric'
+          ]);
 
         $this->authorize('checkout', $consumable);
 
