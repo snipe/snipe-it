@@ -40,6 +40,7 @@ class Consumable extends SnipeModel
         'company_id'  => 'integer|nullable',
         'min_amt'     => 'integer|min:0|nullable',
         'purchase_cost'   => 'numeric|nullable',
+        'total'       => 'integer|min:1',
     ];
 
     /**
@@ -226,7 +227,7 @@ class Consumable extends SnipeModel
      */
     public function users()
     {
-        return $this->belongsToMany(\App\Models\User::class, 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('user_id')->withTrashed()->withTimestamps();
+        return $this->belongsToMany(\App\Models\User::class, 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('user_id', 'totalnum')->withTrashed()->withTimestamps();
     }
 
 
