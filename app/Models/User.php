@@ -59,9 +59,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'username',
         'zip',
         'remote',
-        'start_date',
-        'end_date',
-        'scim_externalid'
     ];
 
     protected $casts = [
@@ -71,33 +68,22 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'company_id'   => 'integer',
     ];
 
-
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
-        'start_date',
-        'end_date',
-    ];
-
-
     /**
      * Model validation rules
      *
      * @var array
      */
 
+    // 'username' => 'required|string|min:1|unique:users,username,NULL,id,deleted_at,NULL',
     protected $rules = [
-        'first_name'              => 'required|string|min:1|max:191',
-        'username'                => 'required|string|min:1|unique_undeleted|max:191',
-        'email'                   => 'email|nullable|max:191',
+        'first_name'              => 'required|string|min:1',
+        'username'                => 'required|string|min:1|unique_undeleted',
+        'email'                   => 'email|nullable',
         'password'                => 'required|min:8',
         'locale'                  => 'max:10|nullable',
-        'website'                 => 'url|nullable|max:191',
+        'website'                 => 'url|nullable',
         'manager_id'              => 'nullable|exists:users,id|cant_manage_self',
         'location_id'             => 'exists:locations,id|nullable',
-        'start_date'              => 'nullable|date',
-        'end_date'                => 'nullable|date|after_or_equal:start_date',
     ];
 
     /**
@@ -273,7 +259,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         return $this->endpoint;
     }
 
-
     /**
      * Establishes the user -> assets relationship
      *
@@ -323,7 +308,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function consumables()
     {
-        return $this->belongsToMany(\App\Models\Consumable::class, 'consumables_users', 'assigned_to', 'consumable_id')->withPivot('id','created_at','note')->withTrashed();
+        return $this->belongsToMany(\App\Models\Consumable::class, 'consumables_users', 'assigned_to', 'consumable_id', 'totalnum', 'notes')->withPivot('id')->withTrashed();
     }
 
     /**
@@ -513,15 +498,13 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
             $last_name = '';
             $username = $users_name;
         } else {
-
             list($first_name, $last_name) = explode(' ', $users_name, 2);
 
             // Assume filastname by default
             $username = str_slug(substr($first_name, 0, 1).$last_name);
 
-            if ($format=='firstname.lastname') {
-                $username = str_slug($first_name) . '.' . str_slug($last_name);
-
+            if ($format == 'firstname.lastname') {
+                $username = str_slug($first_name).'.'.str_slug($last_name);
             } elseif ($format == 'lastnamefirstinitial') {
                 $username = str_slug($last_name.substr($first_name, 0, 1));
             } elseif ($format == 'firstintial.lastname') {
@@ -544,7 +527,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         $user['first_name'] = $first_name;
         $user['last_name'] = $last_name;
         $user['username'] = strtolower($username);
-
 
         return $user;
     }
@@ -577,18 +559,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     }
 
     /**
-     * Get the admin user who created this user
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v6.0.5]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
-     */
-    public function createdBy()
-    {
-        return $this->belongsTo(\App\Models\User::class, 'created_by')->withTrashed();
-    }
-
-    /**
      * Check whether two-factor authorization is required and the user has activated it
      * and enrolled a device
      *
@@ -612,8 +582,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         elseif ((Setting::getSettings()->two_factor_enabled == '2') && ($this->two_factor_enrolled)) {
             return true;
         }
-        return false;
 
+        return false;
     }
 
 
@@ -671,7 +641,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         });
     }
 
-
     /**
      * Query builder scope to order on manager
      *
@@ -711,23 +680,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
         return $query->leftJoin('departments as departments_users', 'users.department_id', '=', 'departments_users.id')->orderBy('departments_users.name', $order);
     }
-
-    /**
-     * Query builder scope to order on admin user
-     *
-     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param string                              $order         Order
-     *
-     * @return \Illuminate\Database\Query\Builder          Modified query builder
-     */
-    public function scopeOrderByCreatedBy($query, $order)
-    {
-        // Left join here, or it will only return results with parents
-        return $query->leftJoin('users as admin_user', 'users.created_by', '=', 'admin_user.id')
-            ->orderBy('admin_user.first_name', $order)
-            ->orderBy('admin_user.last_name', $order);
-    }
-
 
     /**
      * Query builder scope to order on company
