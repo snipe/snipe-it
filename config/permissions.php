@@ -14,6 +14,7 @@ return [
             'label'      => '',
             'note'       => 'Determines whether the user has full access to all aspects of the admin. This setting overrides any more specific permissions throughout the system. ',
             'display'    => true,
+            'css-style'  => 'danger',
         ],
     ],
 
@@ -23,6 +24,7 @@ return [
             'label'      => '',
             'note'       => 'Determines whether the user has access to all settings except admin settings (LDAP, Branding, etc) ',
             'display'    => true,
+            'css-style'  => 'warning',
         ],
     ],
 
@@ -32,6 +34,7 @@ return [
             'label'      => '',
             'note'       => 'This will allow users to import even if access to users, assets, etc is denied elsewhere.',
             'display'    => true,
+            'css-style'  => 'primary',
         ],
     ],
 
@@ -41,6 +44,7 @@ return [
             'label'      => 'View',
             'note'       => 'Determines whether the user has the ability to view reports.',
             'display'    => true,
+            'css-style'  => 'primary',
         ],
     ],
 

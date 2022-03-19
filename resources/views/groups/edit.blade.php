@@ -31,14 +31,19 @@
             @if (count($section_permission) == 1)
 
 
-                    <div class="col-md-3 col-lg-4 col-sm-6 col-xl-1">
-                        <div class="box box-{{ (($localPermission['permission']=='superuser') ? 'danger' : (($localPermission['permission']=='admin') ? 'warning' : 'default'))  }} flex-aligned-box">
+                    <div class="col-md-3">
+                        <div class="box box-solid box-{{ (array_key_exists('css-style', $localPermission) ? $localPermission['css-style'] : 'default')  }} flex-aligned-box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">
+                                    @unless (empty($localPermission['label']))
+                                    {{ $section . ': ' . $localPermission['label'] }}
+                                    @else
+                                       {{ $section }}
+                                    @endunless
+                                </h3>
+                            </div>
                             <div class="box-body text-center flex-aligned-box">
-                                @unless (empty($localPermission['label']))
-                                    <h3>{{ $section . ': ' . $localPermission['label'] }}</h3>
-                                @else
-                                    <h3>{{ $section }}</h3>
-                                @endunless
+
                                     <p class="text-left">{{ $localPermission['note'] }}</p>
                                     <br><br>
 
@@ -63,6 +68,51 @@
                                             </label>
                                         </div>
                                     </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                @else
+
+                    <div class="col-md-3">
+                        <div class="box box-solid box-default flex-aligned-box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">
+                                    @unless (empty($localPermission['label']))
+                                        {{ $section . ': ' . $localPermission['label'] }}
+                                    @else
+                                        {{ $section }}
+                                    @endunless
+                                </h3>
+                            </div>
+                            <div class="box-body text-center flex-aligned-box">
+
+                                <p class="text-left">{{ $localPermission['note'] }}</p>
+                                <br><br>
+
+                                <div class="col-md-12 bottom-align-text text-center">
+                                    <div class="btn-group" data-toggle="buttons" style="padding-top: 20px; padding-bottom: 20px;">
+
+                                        <label class="btn btn-default">
+                                            {{ Form::radio('permission['.$localPermission['permission'].']',
+                                                    '1',(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '1' : null),
+                                                    ['id'=> 'permission['.$localPermission['permission'].']',
+                                                    'aria-label'=> 'permission['.$localPermission['permission'].']']) }}
+
+                                            <i class="fa fa-check" aria-hidden="true"></i> {{ trans('admin/groups/titles.grant')}}
+                                        </label>
+
+                                        <label class="btn btn-danger">
+                                            {{ Form::radio('permission['.$localPermission['permission'].']',
+                                                '0',(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '0' : null),
+                                                ['id'=> 'permission['.$localPermission['permission'].']',
+                                                'aria-label'=> 'permission['.$localPermission['permission'].']']) }}
+                                            <i class="fa fa-times" aria-hidden="true"></i> {{ trans('admin/groups/titles.deny')}}
+                                        </label>
+                                    </div>
+                                </div>
 
 
                             </div>
@@ -97,32 +147,6 @@
                 }
 
             });
-
-
-
-
-            $('.tooltip-base').tooltip({container: 'body'});
-            $(".superuser").change(function() {
-                var perms = $(this).val();
-                if (perms =='1') {
-                    $("#nonadmin").hide();
-                } else {
-                    $("#nonadmin").show();
-                }
-            });
-
-            // Check/Uncheck all radio buttons in the group
-            $('tr.header-row input:radio').on('ifClicked', function () {
-                value = $(this).attr('value');
-                area = $(this).data('checker-group');
-                $('.radiochecker-'+area+'[value='+value+']').iCheck('check');
-            });
-
-
-            $('.header-name').click(function() {
-                $(this).parent().nextUntil('tr.header-row').slideToggle(500);
-            });
-
 
         });
 
