@@ -12,7 +12,7 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
 {
     public function getUserConfig()
     {
-        $config = super::getUserConfig();
+        $config = parent::getUserConfig();
 
         // Much of this is copied verbatim from the library, then adjusted for our needs
         $config['class'] = User::class;
