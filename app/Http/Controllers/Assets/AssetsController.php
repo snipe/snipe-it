@@ -137,12 +137,12 @@ class AssetsController extends Controller
             $asset->archived                = '0';
             $asset->physical                = '1';
             $asset->depreciate              = '0';
-            $asset->status_id               = request('status_id', 0);
+            $asset->status_id               = request('status_id');
             $asset->warranty_months         = request('warranty_months', null);
             $asset->purchase_cost           = Helper::ParseCurrency($request->get('purchase_cost'));
             $asset->purchase_date           = request('purchase_date', null);
             $asset->assigned_to             = request('assigned_to', null);
-            $asset->supplier_id             = request('supplier_id', 0);
+            $asset->supplier_id             = request('supplier_id', null);
             $asset->requestable             = request('requestable', 0);
             $asset->rtd_location_id         = request('rtd_location_id', null);
 
