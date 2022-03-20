@@ -645,6 +645,11 @@
         return parseFloat(decimalfixed);
     }
 
+    
+    function totalFormatter(data) {
+        return 'Total : ' + data.length;
+    }
+
     function sumFormatter(data) {
         if (Array.isArray(data)) {
             var field = this.field;

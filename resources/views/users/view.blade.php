@@ -705,6 +705,7 @@
         </div><!-- /accessories-tab -->
 
         <div class="tab-pane" id="consumables">
+          <h2>Consumable Checkout History</h2>
           <div class="table-responsive">
             <table
                     data-cookie-id-table="userConsumableTable"
@@ -726,9 +727,10 @@
                     }'>
               <thead>
                 <tr>
-                  <th class="col-md-6">{{ trans('general.name') }}</th>
-                  <th class="col-md-2" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
-                  <th class="col-md-4">{{ trans('general.date') }}</th>
+                  <th class="col-md-3" data-footer-formatter="totalFormatter" >{{ trans('general.name') }}</th>
+                  <th class="col-md-1" data-fieldname="purchase_cost">{{ trans('general.quantity') }}</th>
+                  <th class="col-md-1">{{ trans('general.requested_date') }}</th>
+                  <th class="col-ld-8">{{ trans('general.notes') }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -736,9 +738,10 @@
                 <tr>
                   <td>{!! $consumable->present()->nameUrl() !!}</td>
                   <td>
-                    {!! Helper::formatCurrencyOutput($consumable->purchase_cost) !!}
+                    {!! $consumable->pivot->totalnum !!}
                   </td>
-                  <td>{{ $consumable->created_at }}</td>
+                  <td>{{ $consumable->pivot->created_at }}</td>
+                  <td>{{ $consumable->pivot->checkoutnote }}</td>
                 </tr>
                 @endforeach
               </tbody>
