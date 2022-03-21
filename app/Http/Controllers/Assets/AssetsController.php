@@ -861,7 +861,7 @@ class AssetsController extends Controller
 
 
             $asset->logAudit($request->input('note'), $request->input('location_id'), $file_name);
-            return redirect()->to('hardware')->with('success', trans('admin/hardware/message.audit.success'));
+            return redirect()->route('assets.audit.due')->with('success', trans('admin/hardware/message.audit.success'));
         }
     }
 
