@@ -1,3 +1,13 @@
+# This workflow checks out code and performs a Psalm analysis.
+# This workflow is divided into two jobs.
+# First, the basic scan - due to the verbosity, the results are shown under the `Execute Psalm`
+# in the specific GitHub Action.
+# The second one - Taint Analysis - tries to find connections between user-controlled input
+# and places that are not user-controlled. The results from the taint analysis are integrated
+# with the GitHub Advanced Security Dashboard.
+# Both jobs use the `psalm.xml` configuration file.
+# More information: https://github.com/vimeo/psalm
+
 name: Psalm Security Scan
 on:
   push:
@@ -35,7 +45,7 @@ jobs:
         run: wget https://raw.githubusercontent.com/JetBrains/phpstorm-stubs/master/mcrypt/mcrypt.php -O _mcrypt_helper.php
       - name: Execute Psalm
         run: ./vendor/bin/psalm --long-progress --no-cache --report=results_base.sarif
-      # Upload findings to GitHub Advanced Security Dashboard - disabled for 'base' scan
+      # Upload findings to GitHub Advanced Security Dashboard - disabled for 'base' scan due to verbosity
       # - name: Upload SARIF file for GitHub Advanced Security Dashboard
       #   uses: github/codeql-action/upload-sarif@v1
       #   with:
