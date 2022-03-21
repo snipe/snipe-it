@@ -52,9 +52,9 @@ class ConsumableCheckoutController extends Controller
         $request->validate([
             "totalnum" => "required|regex:/^[0-9]*$/|max:{{$consumable->numRemaining()}}"
           ],[
-              'totalnum.max' => 'Total number to be checkout is greater than available stock',
-              'totalnum.required' => 'Total checkout number must be filled',
-              'totalnum.regex' => 'Total number must be numeric'
+            'totalnum.max' =>  trans('admin/consumables/message.over'),
+            'totalnum.required' => trans('admin/consumables/message.required'),
+            'totalnum.regex' => trans('admin/consumables/message.numeric'),
           ]);
 
         $this->authorize('checkout', $consumable);

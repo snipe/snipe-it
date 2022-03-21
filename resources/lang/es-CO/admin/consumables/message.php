@@ -30,7 +30,12 @@ return array(
         'error'   		=> 'Consumible no fue registrado, por favor, inténtelo de nuevo',
         'success' 		=> 'Consumible fue registrado con éxito.',
         'user_does_not_exist' => 'El usuario no es válido. Por favor inténtalo de nuevo.'
-    )
+    ),    
+
+    'numeric'  => 'El número total debe ser numérico' ,
+    'required' => 'El número total no puede estar vacío' ,
+    'over'     => 'El número total prestado es mayor que el stock disponible',
+    
 
 
 );

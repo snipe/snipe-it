@@ -30,7 +30,13 @@ return array(
         'error'   		=> 'Consumible no fue ingresado, por favor, inténtelo de nuevo',
         'success' 		=> 'Consumible fue ingresado satisfactoriamente.',
         'user_does_not_exist' => 'Este usuario es inválido . Inténtalo de nuevo.'
-    )
+    ),
+
+    
+    'numeric'  => 'El número total debe ser numérico' ,
+    'required' => 'El número total no puede estar vacío' ,
+    'over'     => 'El número total prestado es mayor que el stock disponible',
+    
 
 
 );
