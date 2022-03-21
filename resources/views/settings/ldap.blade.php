@@ -383,6 +383,19 @@
                                 @endif
                             </div>
                         </div>
+                        <!-- LDAP Manager -->
+                        <div class="form-group {{ $errors->has('ldap_dept') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('ldap_dept', trans('admin/settings/general.ldap_manager')) }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ Form::text('ldap_manager', Request::old('ldap_manager', $setting->ldap_manager), ['class' => 'form-control','placeholder' => 'manager', $setting->demoMode]) }}
+                                {!! $errors->first('ldap_manager', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                @if (config('app.lock_passwords')===true)
+                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                @endif
+                            </div>
+                        </div>
 
                         <!-- LDAP email -->
                         <div class="form-group {{ $errors->has('ldap_email') ? 'error' : '' }}">
