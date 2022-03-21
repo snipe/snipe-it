@@ -199,6 +199,12 @@ class Asset extends Depreciable
             }
         }
 
+        foreach ($this->model->fieldset->fields as $field){
+            if($field->format == 'BOOLEAN'){
+                $this->{$field->db_column} = filter_var($this->{$field->db_column}, FILTER_VALIDATE_BOOLEAN);
+            }
+        }
+
         return parent::save($options);
     }
 
@@ -215,7 +221,7 @@ class Asset extends Depreciable
     public function getWarrantyExpiresAttribute()
     {
         if (isset($this->attributes['warranty_months']) && isset($this->attributes['purchase_date'])) {
-            if (is_string($this->attributes['purchase_date'])) {
+            if (is_string($this->attributes['purchase_date']) || is_string($this->attributes['purchase_date'])) {
                 $purchase_date = \Carbon\Carbon::parse($this->attributes['purchase_date']);
             } else {
                 $purchase_date = \Carbon\Carbon::instance($this->attributes['purchase_date']);
