@@ -1,3 +1,6 @@
+# This workflow checks out code, performs a CodeQL analysis (for JavaScript) and integrates the results
+# with the GitHub Advanced Security code scanning feature.
+# More information: https://codeql.github.com/
 name: CodeQL Security Scan
 
 on:
