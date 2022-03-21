@@ -32,7 +32,11 @@ return array(
         'error'   		=> 'Consumable tidak diperiksa, silakan coba lagi',
         'success' 		=> 'Consumable berhasil di-check in.',
         'user_does_not_exist' => 'Pengguna tidak valid. Silakan coba lagi.'
-    )
+    ),
 
+    'numeric'  => 'Input total harus numerik' ,
+    'required' => 'Input total tidak bisa kosong' ,
+    'over'     => 'input total lebih besar dari jumlah consumable yang tersedia'
+    
 
 );

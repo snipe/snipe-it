@@ -32,12 +32,7 @@ return array(
         'error'   		=> 'Consumable was not checked in, please try again',
         'success' 		=> 'Consumable checked in successfully.',
         'user_does_not_exist' => 'That user is invalid. Please try again.'
-    ),
+    )
 
-    'numeric'  => 'Total number must be numeric' ,
-    'required' => 'Total number cannot be empty' ,
-    'over'     => 'Total checked out number is greater than available stock',
-    'under'    => 'Total number cannot be zero'
-    
 
 );
