@@ -1,9 +1,9 @@
 includes:
     - ./vendor/nunomaduro/larastan/extension.neon
 parameters:
+    level: 5
     reportUnmatchedIgnoredErrors: false
     bootstrapFiles:
-        # - dotenv.php
         - c3.php
         - _mcrypt_helper.php
     ignoreErrors:

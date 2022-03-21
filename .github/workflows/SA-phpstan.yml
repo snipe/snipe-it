@@ -32,13 +32,10 @@ jobs:
       - name: Download mcrypt helper
         # Download mcrypt stub to cover mcrypt functions
         run: wget https://raw.githubusercontent.com/JetBrains/phpstorm-stubs/master/mcrypt/mcrypt.php -O _mcrypt_helper.php
-      - name: Delete conflicting file
-        # Crashes PHPStan and cannot be excluded in the 'phpstan.neon' config
-        run: rm -f database/migrations/2015_11_05_183749_image.php
       - name: Execute PHPStan
         # Run the PHPStan tool for the whole directory ('.'), excluded directories are in the phpstan.neon conf file
-        # Rule level (-l) set to 5. More information: https://phpstan.org/user-guide/rule-levels
-        run: vendor/bin/phpstan analyze . --no-progress --error-format=github -l 5 -c phpstan.neon
+        # along with the `rule level (-l)`. More information: https://phpstan.org/user-guide/rule-levels
+        run: vendor/bin/phpstan analyze . --no-progress --error-format=github -c phpstan.neon
         env:
           # Example 32 bytes key to avoid `No application encryption key has been specified` error
           APP_KEY: APP_KEY_CREATED_FOR_PHPSTAN_TEST
