@@ -10,6 +10,7 @@
 @if ($signature)
     <center>
         <img src="{{ $logo }}">
+        <p>{{$company_name}}</p>
     </center>
 @endif
 <br>
@@ -17,16 +18,15 @@
 <p>Date: {{ date($date_settings) }} </p><br>
 <p>Asset Tag: {{ $item_tag }}</p>
 <p>Asset Model: {{ $item_model }}</p>
-<p>Asset Tag: {{ $item_serial }}</p><br>
+<p>Asset Serial: {{ $item_serial }}</p><br>
 @if ($eula)
     {!!  $eula !!}
 @endif
 
-<br><br>
-<p> On {{$check_out_date}} {{$company_name}} is assigning item {{$item_tag}} to {{$assigned_to}}. <br>
-    They accept responsibility of said item until it is returned.</p><br>
+<br>
+
 <p>Assigned on: {{$check_out_date}}</p>
-<p>Accepted on: {{$accepted_date}}</p><br>
+<p>Accepted on: {{$accepted_date}}</p>
 <p>Assigned to: {{$assigned_to}}</p>
 @if ($signature)
     <center>
