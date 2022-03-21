@@ -1,5 +1,6 @@
 # This workflow runs PHPStan security analysis tool
-# Uses `phpstan.neon` configuration file
+# PHPStan uses `phpstan.neon` configuration file.
+# The results are shown under the `Execute PHPStan` in the specific GitHub Action
 # More information: https://github.com/phpstan/phpstan
 
 name: PHPStan Security Scan
