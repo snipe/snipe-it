@@ -1,0 +1,41 @@
+# This workflow checks out code, performs a Semgrep analysis and integrates the results
+# with the GitHub Advanced Security Dashboard.
+
+name: Semgrep Security Scan
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  semgrep-security-scan:
+    name: Semgrep Security Scan
+    runs-on: ubuntu-latest
+    # Skip any PR created by dependabot to avoid permission issues
+    if: (github.actor != 'dependabot[bot]')
+    steps:
+      # Fetch project source
+      - uses: actions/checkout@v2
+
+      - uses: returntocorp/semgrep-action@v1
+        with:
+          config: >- # more at semgrep.dev/explore
+            p/security-audit
+            p/secrets
+            p/phpcs-security-audit
+          generateSarif: "1"
+        env:
+          SEMGREP_TIMEOUT: 9900
+          
+      # Upload findings to GitHub Advanced Security Dashboard
+      - name: Upload SARIF file for GitHub Advanced Security Dashboard
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: semgrep.sarif
+        if: always()
