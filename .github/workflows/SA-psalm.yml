@@ -3,7 +3,7 @@
 # First, the basic scan - due to the verbosity, the results are shown under the `Execute Psalm`
 # in the specific GitHub Action.
 # The second one - Taint Analysis - tries to find connections between user-controlled input
-# and places that are not user-controlled. The results from the taint analysis are integrated
+# and places that are unsanitized. The results from the taint analysis are integrated
 # with the GitHub Advanced Security Dashboard.
 # Both jobs use the `psalm.xml` configuration file.
 # More information: https://github.com/vimeo/psalm
