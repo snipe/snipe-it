@@ -80,6 +80,15 @@ class AssetCheckoutController extends Controller
                 $asset->status_id = $request->get('status_id');
             }
 
+            if(!empty($asset->licenseseats->all())){
+                if(request('checkout_to_type') == 'user') {
+                    foreach ($asset->licenseseats as $seat){
+                        $seat->assigned_to = $target->id;
+                        $seat->save();
+                    }
+                }
+            }
+
             if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), $request->get('name'))) {
                 return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkout.success'));
             }
