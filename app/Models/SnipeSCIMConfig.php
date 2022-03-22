@@ -15,12 +15,12 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
         $config = parent::getUserConfig();
 
         // Much of this is copied verbatim from the library, then adjusted for our needs
-        $config['class'] = User::class;
+        $config['class'] = SCIMUser::class;
 
         unset($config['mapping']['example:name:space']);
 
         $config['validations']['urn:ietf:params:scim:schemas:core:2.0:User:name.givenName'] = 'required';
-        $config['validations']['urn:ietf:params:scim:schemas:core:2.0:User:password'] = 'required'; //we won't want this in production, but this WORKS!!!!
+        $config['validations']['urn:ietf:params:scim:schemas:core:2.0:User:password'] = 'null';
         $config['validations']['urn:ietf:params:scim:schemas:core:2.0:User:name.familyName'] = 'string'; //not required
 
 
