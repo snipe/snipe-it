@@ -31,14 +31,9 @@
         }
 
         $('.snipe-table').bootstrapTable('destroy').each(function () {
-            {{-- console.warn("Okay, what's 'this'?");
-            console.dir(this); --}}
             export_options = JSON.parse($(this).attr('data-export-options'));
-            export_options['htmlContent'] = true //always append this to the given data-export-options
+            export_options['htmlContent'] = true; //always enforce this on the given data-export-options (to prevent XSS)
             
-            console.log("Export options on the table are:");
-            console.dir(export_options)
-
             $(this).bootstrapTable({
                 classes: 'table table-responsive table-no-bordered',
                 ajaxOptions: {
