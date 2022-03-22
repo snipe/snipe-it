@@ -106,4 +106,11 @@ class LicenseCheckinController extends Controller
         // Redirect to the license page with error
         return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.checkin.error'));
     }
+
+    public function checkinAll(Request $request){
+        $licenseSeats = LicenseSeat::where('license_id', '=', $license_id)
+            ->whereNotNull('assigned_to')
+            ->with('user')
+            ->get();
+    }
 }
