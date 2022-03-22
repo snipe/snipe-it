@@ -447,7 +447,9 @@
                                                         @endcan
 
                                                     @else
-                                                        @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
+                                                        @if (($field->format=='BOOLEAN') && ($asset->{$field->db_column_name()}!=''))
+                                                            {!! ($asset->{$field->db_column_name()} == 1) ? "<span class='fas fa-check-circle' style='color:green' />" : "<span class='fas fa-times-circle' style='color:red' />" !!}
+                                                        @elseif (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
                                                             <a href="{{ $asset->{$field->db_column_name()} }}" target="_new">{{ $asset->{$field->db_column_name()} }}</a>
                                                         @elseif (($field->format=='DATE') && ($asset->{$field->db_column_name()}!=''))
                                                             {{ \App\Helpers\Helper::getFormattedDateObject($asset->{$field->db_column_name()}, 'date', false) }}
