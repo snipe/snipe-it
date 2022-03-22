@@ -42,6 +42,7 @@ class ConsumablesController extends Controller
                 'item_no', 
                 'qty',
                 'image',
+                'notes',
                 ];
 
 
@@ -72,6 +73,10 @@ class ConsumablesController extends Controller
 
         if ($request->filled('location_id')) {
             $consumables->where('location_id','=',$request->input('location_id'));
+        }
+
+        if ($request->filled('notes')) {
+            $consumables->where('notes','=',$request->input('notes'));
         }
 
 

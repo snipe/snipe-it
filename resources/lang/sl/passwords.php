@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'sent'	        => 'Povezava za vaše geslo je bila poslana!',
+    'sent'	        => 'Success: If that email address exists in our system, a password recovery email has been sent.',
     'user'			=> 'No matching active user found with that email.',
 ];

@@ -112,13 +112,27 @@
       @endif 
       
 
-      @if ($accessory->category)
+    @if ($accessory->category)
         <div class="row">
           <div class="col-md-4" style="padding-bottom: 15px;">
             {{ trans('general.category')}}
           </div>
           <div class="col-md-8">
             <a href="{{ route('categories.show', $accessory->category->id) }}">{{ $accessory->category->name }} </a>
+          </div>
+        </div>
+      @endif 
+
+
+      @if ($accessory->notes)
+
+        <div class="col-md-12">
+          <strong>
+            {{ trans('general.notes') }}
+          </strong>
+          </div>
+        <div class="col-md-12">
+          {!! nl2br(e($accessory->notes)) !!}
           </div>
         </div>
       @endif 

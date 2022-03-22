@@ -125,17 +125,24 @@
                   </div>
                 @endif
 
-                @can('checkout', \App\Models\Accessory::class)
-                <div class="col-md-12 text-center">
+    @can('checkout', \App\Models\Consumable::class)
+    <div class="col-md-12">
                     <a href="{{ route('checkout/consumable', $consumable->id) }}" style="padding-bottom:5px;" class="btn btn-primary btn-sm" {{ (($consumable->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
                 </div>
                 @endcan
 
+    @if ($consumable->notes)
        
+    <div class="col-md-12">
+      <strong>
+        {{ trans('general.notes') }}
+      </strong>
               </div>
+    <div class="col-md-12">
+      {!! nl2br(e($consumable->notes)) !!}
             </div>
           </div>
-        </div>
+  @endif
 
     </div>
     

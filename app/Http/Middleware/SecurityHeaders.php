@@ -42,30 +42,15 @@ class SecurityHeaders
         //           - https://github.com/w3c/webappsec-feature-policy/issues/189
 
         $feature_policy[] = "accelerometer 'none'";
-        $feature_policy[] = "ambient-light-sensor 'none'";
-        $feature_policy[] = "animations 'none'";
         $feature_policy[] = "autoplay 'none'";
-        $feature_policy[] = "battery 'none'";
         $feature_policy[] = "camera 'none'";
         $feature_policy[] = "display-capture 'none'";
         $feature_policy[] = "document-domain 'none'";
         $feature_policy[] = "encrypted-media 'none'";
         $feature_policy[] = "fullscreen 'none'";
         $feature_policy[] = "geolocation 'none'";
-        $feature_policy[] = "gyroscope 'none'";
-        $feature_policy[] = "legacy-image-formats 'none'";
-        $feature_policy[] = "magnetometer 'none'";
-        $feature_policy[] = "microphone 'none'";
-        $feature_policy[] = "midi 'none'";
-        $feature_policy[] = "oversized-images 'none'";
-        $feature_policy[] = "payment 'none'";
-        $feature_policy[] = "picture-in-picture 'none'";
-        $feature_policy[] = "publickey-credentials 'none'";
         $feature_policy[] = "sync-xhr 'none'";
-        $feature_policy[] = "unsized-media 'none'";
         $feature_policy[] = "usb 'none'";
-        $feature_policy[] = "vibrate 'none'";
-        $feature_policy[] = "wake-lock 'none'";
         $feature_policy[] = "xr-spatial-tracking 'none'";
 
         $feature_policy = implode(';', $feature_policy);

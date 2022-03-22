@@ -64,7 +64,7 @@ return [
         'string'  => ':attribute debe contener como mínimo :min caracteres.',
         'array'   => 'El atributo: debe tener al menos: elementos min.',
     ],
-    'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'starts_with'          => 'El :attribute debe comenzar con uno de los siguientes: :values.',
     'not_in'               => 'El :attribute seleccionado no es correcto.',
     'numeric'              => ':attribute debe ser un número.',
     'present'              => 'El campo: atributo debe estar presente.',

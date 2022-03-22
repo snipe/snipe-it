@@ -137,12 +137,12 @@ class AssetsController extends Controller
             $asset->archived                = '0';
             $asset->physical                = '1';
             $asset->depreciate              = '0';
-            $asset->status_id               = request('status_id', 0);
+            $asset->status_id               = request('status_id');
             $asset->warranty_months         = request('warranty_months', null);
             $asset->purchase_cost           = Helper::ParseCurrency($request->get('purchase_cost'));
             $asset->purchase_date           = request('purchase_date', null);
             $asset->assigned_to             = request('assigned_to', null);
-            $asset->supplier_id             = request('supplier_id', 0);
+            $asset->supplier_id             = request('supplier_id', null);
             $asset->requestable             = request('requestable', 0);
             $asset->rtd_location_id         = request('rtd_location_id', null);
 
@@ -235,6 +235,7 @@ class AssetsController extends Controller
             ->with('statuslabel_types', Helper::statusTypeList());
     }
 
+
     /**
      * Returns a view that presents information about an asset for detail view.
      *
@@ -308,6 +309,7 @@ class AssetsController extends Controller
         if ($asset->assigned_to == '') {
             $asset->location_id = $request->input('rtd_location_id', null);
         }
+
 
         if ($request->filled('image_delete')) {
             try {
@@ -402,6 +404,24 @@ class AssetsController extends Controller
     }
 
     /**
+     * Searches the assets table by serial, and redirects if it finds one
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return Redirect
+     */
+    public function getAssetBySerial(Request $request)
+    {
+        $topsearch = ($request->get('topsearch')=="true");
+
+        if (!$asset = Asset::where('serial', '=', $request->get('serial'))->first()) {
+            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
+        }
+        $this->authorize('view', $asset);
+        return redirect()->route('hardware.show', $asset->id)->with('topsearch', $topsearch);
+    }
+
+    /**
      * Searches the assets table by asset tag, and redirects if it finds one
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -419,6 +439,7 @@ class AssetsController extends Controller
 
         return redirect()->route('hardware.show', $asset->id)->with('topsearch', $topsearch);
     }
+
 
     /**
      * Return a QR code for the asset
@@ -792,6 +813,7 @@ class AssetsController extends Controller
         return view('hardware/audit-overdue');
     }
 
+
     public function auditStore(Request $request, $id)
     {
         $this->authorize('audit', Asset::class);
@@ -822,6 +844,7 @@ class AssetsController extends Controller
             $asset->location_id = $request->input('location_id');
         }
 
+
         if ($asset->save()) {
             $file_name = '';
             // Upload an image, if attached
@@ -838,7 +861,7 @@ class AssetsController extends Controller
 
 
             $asset->logAudit($request->input('note'), $request->input('location_id'), $file_name);
-            return redirect()->to('hardware')->with('success', trans('admin/hardware/message.audit.success'));
+            return redirect()->route('assets.audit.due')->with('success', trans('admin/hardware/message.audit.success'));
         }
     }
 

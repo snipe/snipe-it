@@ -6,6 +6,6 @@ return [
     'months'   => 'Hónapok',
     'term'   => 'Időszak',
     'title'      => 'Név ',
-    'depreciation_min' => 'Floor Value',
+    'depreciation_min' => 'Alapérték',
 
 ];

@@ -103,6 +103,13 @@ class ComponentPresenter extends Presenter
                 'visible' => true,
                 'footerFormatter' => 'sumFormatterQuantity',
                 'class' => 'text-right',
+            ], [
+                'field' => 'notes',
+                'searchable' => true,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('general.notes'),
+                'formatter' => 'notesFormatter',
             ],
         ];
 

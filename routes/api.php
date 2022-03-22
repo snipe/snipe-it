@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
+Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:'.config('app.api_throttle_per_minute').',1']], function () {
+
 
     Route::get('/', function () {
         return response()->json(

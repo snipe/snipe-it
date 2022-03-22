@@ -39,6 +39,7 @@ class AssetImporter extends ItemImporter
             }
         }
 
+
         $this->createAssetIfNotExists($row);
     }
 
@@ -68,7 +69,7 @@ class AssetImporter extends ItemImporter
             $this->log('No Matching Asset, Creating a new one');
             $asset = new Asset;
         }
-
+        $this->item['notes'] = $this->findCsvMatch($row, 'asset_notes');
         $this->item['image'] = $this->findCsvMatch($row, 'image');
         $this->item['requestable'] = $this->fetchHumanBoolean($this->findCsvMatch($row, 'requestable'));
         $asset->requestable = $this->fetchHumanBoolean($this->findCsvMatch($row, 'requestable'));
@@ -96,10 +97,12 @@ class AssetImporter extends ItemImporter
             $item['rtd_location_id'] = $this->item['location_id'];
         }
 
+        $item['last_audit_date'] = null;
         if (isset($this->item['last_audit_date'])) {
             $item['last_audit_date'] = $this->item['last_audit_date'];
         }
 
+        $item['next_audit_date'] = null;
         if (isset($this->item['next_audit_date'])) {
             $item['next_audit_date'] = $this->item['next_audit_date'];
         }

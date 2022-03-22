@@ -10,7 +10,7 @@ return [
     'checkout'  				=> 'Activo de pago',
     'clone'  					=> 'Clonar Equipo',
     'deployable'  				=> 'Desplegable',
-    'deleted'  					=> 'Este activo fue eliminado.',
+    'deleted'  					=> 'Este activo ha sido eliminado.',
     'edit'  					=> 'Editar Equipo',
     'model_deleted'  			=> 'Este Modelo de activo fue eliminado. Debes restaurar este modelo antes de poder restaurar el Activo.',
     'requestable'               => 'Requerible',

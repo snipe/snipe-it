@@ -93,8 +93,8 @@ class UsersController extends Controller
         $this->authorize('create', User::class);
         $user = new User;
         //Username, email, and password need to be handled specially because the need to respect config values on an edit.
-        $user->email = e($request->input('email'));
-        $user->username = e($request->input('username'));
+        $user->email = trim($request->input('email'));
+        $user->username = trim($request->input('username'));
         if ($request->filled('password')) {
             $user->password = bcrypt($request->input('password'));
         }
@@ -115,6 +115,7 @@ class UsersController extends Controller
         $user->state = $request->input('state', null);
         $user->country = $request->input('country', null);
         $user->zip = $request->input('zip', null);
+        $user->remote = $request->input('remote', 0);
 
         // Strip out the superuser permission if the user isn't a superadmin
         $permissions_array = $request->input('permission');
@@ -179,7 +180,6 @@ class UsersController extends Controller
         if ($user = User::find($id)) {
             $this->authorize('update', $user);
             $permissions = config('permissions');
-
             $groups = Group::pluck('name', 'id');
 
             $userGroups = $user->groups()->pluck('name', 'id');
@@ -190,9 +190,7 @@ class UsersController extends Controller
             return view('users/edit', compact('user', 'groups', 'userGroups', 'permissions', 'userPermissions'))->with('item', $user);
         }
 
-        $error = trans('admin/users/message.user_not_found', compact('id'));
-
-        return redirect()->route('users.index')->with('error', $error);
+        return redirect()->route('users.index')->with('error', trans('admin/users/message.user_not_found', compact('id')));
     }
 
     /**
@@ -245,9 +243,9 @@ class UsersController extends Controller
 
         // Update the user
         if ($request->filled('username')) {
-            $user->username = $request->input('username');
+            $user->username = trim($request->input('username'));
         }
-        $user->email = $request->input('email');
+        $user->email = trim($request->input('email'));
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
         $user->two_factor_optin = $request->input('two_factor_optin') ?: 0;
@@ -267,6 +265,7 @@ class UsersController extends Controller
         $user->country = $request->input('country', null);
         $user->activated = $request->input('activated', 0);
         $user->zip = $request->input('zip', null);
+        $user->remote = $request->input('remote', 0);
 
         // Update the location of any assets checked out to this user
         Asset::where('assigned_type', User::class)
@@ -623,7 +622,7 @@ class UsersController extends Controller
     public function sendPasswordReset($id)
     {
         if (($user = User::find($id)) && ($user->activated == '1') && ($user->email != '') && ($user->ldap_import == '0')) {
-            $credentials = ['email' => $user->email];
+            $credentials = ['email' => trim($user->email)];
 
             try {
                 \Password::sendResetLink($credentials, function (Message $message) use ($user) {

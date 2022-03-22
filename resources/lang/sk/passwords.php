@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'sent'	        => 'Your password link has been sent!',
+    'sent'	        => 'Úspech: Ak táto e-mailová adresa v našom systéme existuje, bol vám odoslaný e-mail na obnovenie hesla.',
     'user'			=> 'No matching active user found with that email.',
 ];

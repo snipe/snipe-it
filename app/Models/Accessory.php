@@ -37,7 +37,7 @@ class Accessory extends SnipeModel
      * 
      * @var array
      */
-    protected $searchableAttributes = ['name', 'model_number', 'order_number', 'purchase_date'];
+    protected $searchableAttributes = ['name', 'model_number', 'order_number', 'purchase_date', 'notes'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -63,6 +63,7 @@ class Accessory extends SnipeModel
         'min_amt'           => 'integer|min:0|nullable',
         'purchase_cost'     => 'numeric|nullable',
     ];
+
 
     /**
     * Whether the model should inject it's identifier to the unique
@@ -94,6 +95,7 @@ class Accessory extends SnipeModel
         'qty',
         'min_amt',
         'requestable',
+        'notes',
     ];
 
 
@@ -109,6 +111,7 @@ class Accessory extends SnipeModel
     {
         return $this->belongsTo(\App\Models\Supplier::class, 'supplier_id');
     }
+
 
     /**
      * Sets the requestable attribute on the accessory
@@ -220,8 +223,8 @@ class Accessory extends SnipeModel
         if ($this->image) {
             return Storage::disk('public')->url(app('accessories_upload_path').$this->image);
         }
-
         return false;
+
     }
 
     /**

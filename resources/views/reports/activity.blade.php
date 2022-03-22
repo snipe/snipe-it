@@ -35,7 +35,7 @@
                         id="activityReport"
                         data-url="{{ route('api.activity.index') }}"
                         data-mobile-responsive="true"
-                        data-toggle="table"
+                        {{-- data-toggle="table" --}}
                         class="table table-striped snipe-table"
                         data-export-options='{
                         "fileName": "activity-report-{{ date('Y-m-d') }}",

@@ -17,8 +17,8 @@ return [
     'generate_labels'           => '{1} Generuj etykietę|[2,*] Generuj etykiety',
     'send_password_link'        => 'Wyślij e-mail z linkiem resetującym hasło',
     'go'                        => 'Dalej',
-    'bulk_actions'              => 'Bulk Actions',
-    'add_maintenance'           => 'Add Maintenance',
+    'bulk_actions'              => 'Akcje zbiorcze',
+    'add_maintenance'           => 'Dodaj konserwację',
     'append'                    => 'Dołącz',
     'new'                       => 'Nowy',
 ];

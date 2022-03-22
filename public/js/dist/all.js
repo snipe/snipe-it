@@ -59404,9 +59404,6 @@ __webpack_require__.r(__webpack_exports__);
           id: 'manufacturer',
           text: 'Manufacturer'
         }, {
-          id: 'notes',
-          text: 'Notes'
-        }, {
           id: 'order_number',
           text: 'Order Number'
         }, {
@@ -59437,6 +59434,9 @@ __webpack_require__.r(__webpack_exports__);
         accessories: [{
           id: 'model_number',
           text: 'Model Number'
+        }, {
+          id: 'notes',
+          text: 'Notes'
         }],
         assets: [{
           id: 'asset_tag',
@@ -59444,6 +59444,12 @@ __webpack_require__.r(__webpack_exports__);
         }, {
           id: 'asset_model',
           text: 'Model Name'
+        }, {
+          id: 'asset_notes',
+          text: 'Asset Notes'
+        }, {
+          id: 'model_notes',
+          text: 'Model Notes'
         }, {
           id: 'checkout_class',
           text: 'Checkout Type'
@@ -59456,6 +59462,12 @@ __webpack_require__.r(__webpack_exports__);
         }, {
           id: 'model_number',
           text: 'Model Number'
+        }, {
+          id: 'asset_notes',
+          text: 'Asset Notes'
+        }, {
+          id: 'model_notes',
+          text: 'Model Notes'
         }, {
           id: 'full_name',
           text: 'Full Name'
@@ -59481,6 +59493,9 @@ __webpack_require__.r(__webpack_exports__);
         }, {
           id: 'min_amt',
           text: "Minimum Quantity"
+        }, {
+          id: 'notes',
+          text: 'Notes'
         }],
         licenses: [{
           id: 'asset_tag',
@@ -59492,11 +59507,17 @@ __webpack_require__.r(__webpack_exports__);
           id: 'full_name',
           text: 'Full Name'
         }, {
+          id: 'notes',
+          text: 'Notes'
+        }, {
           id: 'license_email',
           text: 'Licensed To Email'
         }, {
           id: 'license_name',
           text: 'Licensed To Name'
+        }, {
+          id: 'notes',
+          text: 'Notes'
         }, {
           id: 'purchase_order',
           text: 'Purchase Order'
@@ -59526,8 +59547,14 @@ __webpack_require__.r(__webpack_exports__);
           id: 'manager_first_name',
           text: 'Manager First Name'
         }, {
+          id: 'notes',
+          text: 'Notes'
+        }, {
           id: 'manager_last_name',
           text: 'Manager Last Name'
+        }, {
+          id: 'notes',
+          text: 'Notes'
         }, {
           id: 'activated',
           text: 'Activated'
@@ -61352,7 +61379,8 @@ If you want to pass additional variables to the modal (In the Category Create on
 
 */
 $(function () {
-  //handle modal-add-interstitial calls
+  var baseUrl = $('meta[name="baseUrl"]').attr('content'); //handle modal-add-interstitial calls
+
   var model, select, refreshSelector;
 
   if ($('#createModal').length == 0) {

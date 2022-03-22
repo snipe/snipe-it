@@ -33,5 +33,5 @@ return [
     'warning_deletion' => '警告：',
     'warning_deletion_information' => '您将要删除下列 :count 用户。超级管理员名称高亮为红色。',
     'update_user_asssets_status' => '将这些用户的所有资源更新到此状态',
-    'checkin_user_properties' => '检查与这些用户相关的所有属性',
+    'checkin_user_properties' => '归还与这些用户相关的所有资产',
 ];

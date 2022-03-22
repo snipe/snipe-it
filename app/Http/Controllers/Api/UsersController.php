@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SaveUserRequest;
 use App\Http\Transformers\AccessoriesTransformer;
 use App\Http\Transformers\AssetsTransformer;
+use App\Http\Transformers\ConsumablesTransformer;
 use App\Http\Transformers\LicensesTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use App\Http\Transformers\UsersTransformer;
@@ -62,6 +63,7 @@ class UsersController extends Controller
             'users.updated_at',
             'users.username',
             'users.zip',
+            'users.remote',
             'users.ldap_import',
 
         ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables')
@@ -131,6 +133,30 @@ class UsersController extends Controller
             $users = $users->where('users.manager_id','=',$request->input('manager_id'));
         }
 
+        if ($request->filled('ldap_import')) {
+            $users = $users->where('ldap_import', '=', $request->input('ldap_import'));
+        }
+
+        if ($request->filled('remote')) {
+            $users = $users->where('remote', '=', $request->input('remote'));
+        }
+
+        if ($request->filled('assets_count')) {
+           $users->has('assets', '=', $request->input('assets_count'));
+        }
+
+        if ($request->filled('consumables_count')) {
+            $users->has('consumables', '=', $request->input('consumables_count'));
+        }
+
+        if ($request->filled('licenses_count')) {
+            $users->has('licenses', '=', $request->input('licenses_count'));
+        }
+
+        if ($request->filled('accessories_count')) {
+            $users->has('accessories', '=', $request->input('accessories_count'));
+        }
+
         if ($request->filled('search')) {
             $users = $users->TextSearch($request->input('search'));
         }
@@ -166,7 +192,7 @@ class UsersController extends Controller
                         'assets', 'accessories', 'consumables', 'licenses', 'groups', 'activated', 'created_at',
                         'two_factor_enrolled', 'two_factor_optin', 'last_login', 'assets_count', 'licenses_count',
                         'consumables_count', 'accessories_count', 'phone', 'address', 'city', 'state',
-                        'country', 'zip', 'id', 'ldap_import',
+                        'country', 'zip', 'id', 'ldap_import', 'remote',
                     ];
 
                 $sort = in_array($request->get('sort'), $allowed_columns) ? $request->get('sort') : 'first_name';
@@ -443,6 +469,24 @@ class UsersController extends Controller
         $assets = Asset::where('assigned_to', '=', $id)->where('assigned_type', '=', User::class)->with('model')->get();
 
         return (new AssetsTransformer)->transformAssets($assets, $assets->count(), $request);
+    }
+
+
+    /**
+     * Return JSON containing a list of consumables assigned to a user.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @param $userId
+     * @return string JSON
+     */
+    public function consumables(Request $request, $id)
+    {
+        $this->authorize('view', User::class);
+        $this->authorize('view', Consumable::class);
+        $user = User::findOrFail($id);
+        $consumables = $user->consumables;
+        return (new ConsumablesTransformer)->transformConsumables($consumables, $consumables->count(), $request);
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'sent'	        => 'Лінк на пароль було надіслано!',
+    'sent'	        => 'Success: If that email address exists in our system, a password recovery email has been sent.',
     'user'			=> 'No matching active user found with that email.',
 ];
