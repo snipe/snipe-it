@@ -18,17 +18,9 @@
 <div class="row">
   <div class="col-md-9">
 
-    <div class="box box-default">
-      @if ($consumable->id)
-      <div class="box-header with-border">
-        <div class="box-heading">
-          <h2 class="box-title"> {{ $consumable->name }}</h2>
-        </div>
-      </div><!-- /.box-header -->
-      @endif
-
     <div class="nav-tabs-custom">
       <ul class="nav nav-tabs hidden-print">
+
 
         <li class="active">
           <a href="#checkouthistory" data-toggle="tab">
@@ -578,20 +570,6 @@
                 </tr>
                 </thead>
               </table>
-<<<<<<< HEAD
-            </div>
-          </div><!-- /.tab-pane -->
-      </div><!-- /.tab-content -->
-    </div><!-- nav-tabs-custom -->
-  </div>
-
-  @can('update', \App\Models\User::class)
-    @include ('modals.upload-file', ['item_type' => 'consumable', 'item_id' => $consumable->id])
-  @endcan
-
-
-=======
-
         <li>
           <a href="#replenishhistory" data-toggle="tab">
             <span class="hidden-lg hidden-md">
@@ -786,29 +764,10 @@
 
                 </div>
             </div> <!-- /.row-->
->>>>>>> 52b442328 (- initial implementation of the feature)
-
   </div> <!-- /.col-md-8-->
   @stop
 
 @section('moar_scripts')
-<<<<<<< HEAD
-
-        <script>
-
-          $('#dataConfirmModal').on('show.bs.modal', function (event) {
-            var content = $(event.relatedTarget).data('content');
-            var title = $(event.relatedTarget).data('title');
-            $(this).find(".modal-body").text(content);
-            $(this).find(".modal-header").text(title);
-          });
-
-        </script>
-
-
-  @include ('partials.bootstrap-table', ['simple_view' => true])
-@endsection
-=======
 @include ('partials.bootstrap-table', ['exportFile' => 'consumable' . $consumable->name . '-export', 'search' => false])
 @stop 
 </div>      
@@ -818,4 +777,4 @@
                   </div>
 
 
->>>>>>> 52b442328 (- initial implementation of the feature)
+

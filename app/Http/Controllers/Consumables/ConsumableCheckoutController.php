@@ -67,17 +67,6 @@ class ConsumableCheckoutController extends Controller
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
         }
 
-<<<<<<< HEAD
-=======
-        $request->validate([
-            "totalnum" => "required|regex:/^[0-9]*$/|max:{{$consumable->numRemaining()}}"
-          ],[
-            'totalnum.max' =>  trans('admin/consumables/message.over'),
-            'totalnum.required' => trans('admin/consumables/message.required'),
-            'totalnum.regex' => trans('admin/consumables/message.numeric'),
-          ]);
-
->>>>>>> 71c07607b (- updating validator to use localized strings)
         $this->authorize('checkout', $consumable);
 
         // If the quantity is not present in the request or is not a positive integer, set it to 1

@@ -364,6 +364,7 @@ return [
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+<<<<<<< HEAD:resources/lang/en/general.php.bak
 <<<<<<< HEAD
     'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
     'maintenance_mode_title' => 'System Temporarily Unavailable',
@@ -385,12 +386,7 @@ return [
     'start_date'            => 'Start Date',
     'end_date'            => 'End Date',
     'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
-    'placeholder_kit'       => 'Select a kit'
-
-
-
+    'placeholder_kit'       => 'Select a kit',
+    'total'                 => 'Total Items',
+    'replenish_history'     => 'Item Replenish Hist
 ];
-=======
-    'total'                 => 'Total Items'
-];
->>>>>>> 3ae4c8ec8 (incorporating number of checked out consumables in the email notification message)
