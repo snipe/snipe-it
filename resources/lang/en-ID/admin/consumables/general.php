@@ -8,4 +8,5 @@ return array(
     'remaining' 			            => 'Tersisa',
     'total' 			                => 'Total',
     'update'                            => 'Update Consumable',
+    'replenish'                         => 'Tambah Stok Consumable'
 );

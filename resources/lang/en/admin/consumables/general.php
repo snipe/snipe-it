@@ -8,4 +8,5 @@ return array(
     'remaining' 			            => 'Remaining',
     'total' 			                => 'Total',
     'update'                            => 'Update Consumable',
+    'replenish'                         => 'Replenish Consumable Stock'
 );

@@ -18,17 +18,9 @@
 <div class="row">
   <div class="col-md-9">
 
-    <div class="box box-default">
-      @if ($consumable->id)
-      <div class="box-header with-border">
-        <div class="box-heading">
-          <h2 class="box-title"> {{ $consumable->name }}</h2>
-        </div>
-      </div><!-- /.box-header -->
-      @endif
-
     <div class="nav-tabs-custom">
       <ul class="nav nav-tabs hidden-print">
+
 
         <li class="active">
           <a href="#checkouthistory" data-toggle="tab">
@@ -39,34 +31,6 @@
           </a>
         </li>
 
-
-              <table
-                      data-cookie-id-table="consumablesCheckedoutTable"
-                      data-pagination="true"
-                      data-id-table="consumablesCheckedoutTable"
-                      data-search="false"
-                      data-side-pagination="server"
-                      data-show-columns="true"
-                      data-show-export="true"
-                      data-show-footer="true"
-                      data-show-refresh="true"
-                      data-sort-order="asc"
-                      data-sort-name="name"
-                      id="consumablesCheckedoutTable"
-                      class="table table-striped snipe-table"
-                      data-url="{{route('api.consumables.showUsers', $consumable->id)}}"
-                      data-export-options='{
-                "fileName": "export-consumables-{{ str_slug($consumable->name) }}-checkedout-{{ date('Y-m-d') }}",
-                "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                }'>
-                <thead>
-                  <tr>
-                    <th data-searchable="false" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
-                    <th data-searchable="false" data-sortable="false" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
-                    <th data-searchable="false" data-sortable="false" data-field="admin">{{ trans('general.admin') }}</th>
-                  </tr>
-                </thead>
-              </table>
 
         <li>
           <a href="#replenishhistory" data-toggle="tab">
