@@ -111,6 +111,13 @@ class AssetCheckinController extends Controller
             $checkin_at = $request->input('checkin_at');
         }
 
+        if(!empty($asset->licenseseats->all())){
+            foreach ($asset->licenseseats as $seat){
+                $seat->assigned_to = null;
+                $seat->save();
+            }
+        }
+
         // Get all pending Acceptances for this asset and delete them
         $acceptances = CheckoutAcceptance::pending()->whereHasMorph('checkoutable',
             [Asset::class],
