@@ -110,6 +110,13 @@ class AssetCheckinController extends Controller
             $checkin_at = $request->input('checkin_at');
         }
 
+        if(!empty($asset->licenseseats->all())){
+            foreach ($asset->licenseseats as $seat){
+                $seat->assigned_to = null;
+                $seat->save();
+            }
+        }
+
         // Was the asset updated?
         if ($asset->save()) {
             event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at));
