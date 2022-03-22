@@ -10,7 +10,7 @@ class SCIMUser extends User
 
     public function __construct(array $attributes = []) {
         $attributes['password'] = "*NO PASSWORD*";
-        $attributes['activated'] = 1;
+        // $attributes['activated'] = 1;
         parent::__construct($attributes);
     }
 }

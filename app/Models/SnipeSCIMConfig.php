@@ -19,19 +19,75 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
 
         unset($config['mapping']['example:name:space']);
 
-        $config['validations']['urn:ietf:params:scim:schemas:core:2.0:User:name.givenName'] = 'required';
-        $config['validations']['urn:ietf:params:scim:schemas:core:2.0:User:password'] = 'null';
-        $config['validations']['urn:ietf:params:scim:schemas:core:2.0:User:name.familyName'] = 'string'; //not required
+        $core = 'urn:ietf:params:scim:schemas:core:2.0:User:';
+        $mappings =& $config['mapping']['urn:ietf:params:scim:schemas:core:2.0:User']; //grab this entire key, we don't want to be repeating ourselves
 
+        //username - *REQUIRED*
+        $config['validations'][$core.'userName'] = 'required';
+        $mappings['userName'] = AttributeMapping::eloquent('username');
 
-        $config['mapping']['urn:ietf:params:scim:schemas:core:2.0:User']['userName'] = AttributeMapping::eloquent("username");
-        //$config['mapping']['urn:ietf:params:scim:schemas:core:2.0:User']['formatted'] = null; // Snipe-IT only has first_name, last_name, not "name" or "fullname"
-        $config['mapping']['urn:ietf:params:scim:schemas:core:2.0:User']['name']['familyName'] = AttributeMapping::eloquent("last_name");
-        $config['mapping']['urn:ietf:params:scim:schemas:core:2.0:User']['name']['givenName'] = AttributeMapping::eloquent("first_name");
-        $config['mapping']['urn:ietf:params:scim:schemas:core:2.0:User']['name']['formatted'] = null;
+        //human name - *FIRST NAME REQUIRED*
+        $config['validations'][$core.'name.givenName'] = 'required';
+        $config['validations'][$core.'name.familyName'] = 'string'; //not required
 
-        $config['mapping']['urn:ietf:params:scim:schemas:core:2.0:User']['password'] = AttributeMapping::eloquent("password"); //FIXME this is dumb
+        $mappings['name']['familyName'] = AttributeMapping::eloquent("last_name");
+        $mappings['name']['givenName'] = AttributeMapping::eloquent("first_name");
+        $mappings['name']['formatted'] = null;
+        //active
+        $config['validations'][$core.'active'] = 'boolean';
 
+        $mappings['active'] = AttributeMapping::eloquent('activated');//blah blah blah (maybe we can just say 'boolean' and be done with it?)
+
+        //phone
+        $config['validations'][$core.'phoneNumbers'] = 'nullable|array';
+        $config['validations'][$core.'phoneNumbers.*.value'] = 'required';
+
+        $mappings['phoneNumbers'] = [[
+            "value" => AttributeMapping::eloquent("phone"),
+            "display" => null,
+            "type" => AttributeMapping::constant("work")->ignoreWrite(),
+            "primary" => AttributeMapping::constant(true)->ignoreWrite()
+        ]];
+
+        //address
+        $config['validations'][$core.'addresses'] = 'nullable|array';
+        $config['validations'][$core.'addresses.*.streetAddress'] = 'required';
+        $config['validations'][$core.'addresses.*.locality'] = 'string';
+        $config['validations'][$core.'addresses.*.region'] = 'string';
+        $config['validations'][$core.'addresses.*.postalCode'] = 'string';
+        $config['validations'][$core.'addresses.*.country'] = 'string';
+
+        $mappings['addresses'] = [[
+            'formatted' => null,
+            'streetAddress' => AttributeMapping::eloquent("address"),
+            'locality' => AttributeMapping::eloquent("city"),
+            'region' => AttributeMapping::eloquent("state"),
+            'postalCode' => AttributeMapping::eloquent("zip"),
+            'country' => AttributeMapping::eloquent("country"),
+            "primary" => AttributeMapping::constant(true)->ignoreWrite() //this isn't in the example?
+        ]];
+
+        //title
+        $config['validations'][$core.'name.title'] = 'string';
+        $mappings['title'] = AttributeMapping::eloquent('jobtitle');
+
+        /* 
+          more snipe-it attributes I'd like to check out (to map to 'enterprise' maybe?):
+          (namespace) "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"
+         - website
+         - manager_id ? manager (how to handle?!)
+         - employee_num ? employeeNumber
+         - notes?
+         - remote???
+         - location_id ?
+         - department_id ? department
+         - company_id to "organization?"
+        */
+
+        //finally, write our temp $mappings back to $config['mappings']
+        //$config['mapping']['urn:ietf:params:scim:schemas:core:2.0:User'] = $mappings; //FIXME - try references?
+
+        // \Log::error("Config is: ".print_r($config,true));
         return $config;
     }
 
