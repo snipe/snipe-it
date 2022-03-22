@@ -15,9 +15,9 @@
 
 {{-- Page content --}}
 @section('content')
-
 <div class="row">
   <div class="col-md-9">
+
     <div class="box box-default">
       @if ($consumable->id)
       <div class="box-header with-border">
@@ -27,10 +27,18 @@
       </div><!-- /.box-header -->
       @endif
 
-      <div class="box-body">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="table table-responsive">
+    <div class="nav-tabs-custom">
+      <ul class="nav nav-tabs hidden-print">
+
+        <li class="active">
+          <a href="#checkouthistory" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+            <i class="fas fa-info-circle fa-2x"></i>
+            </span>
+            <span class="hidden-xs hidden-sm">{{ trans('admin/users/general.checkout_history') }}</span>
+          </a>
+        </li>
+
 
               <table
                       data-cookie-id-table="consumablesCheckedoutTable"
@@ -59,16 +67,124 @@
                   </tr>
                 </thead>
               </table>
-            </div>
-          </div> <!-- /.col-md-12-->
 
+        <li>
+          <a href="#replenishhistory" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+            <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
+            </span>
+            <span class="hidden-xs hidden-sm">{{ trans('general.replenish_history') }}
+              {!! ($user->assets->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->assets->count().'</badge>' : '' !!}
+            </span>
+          </a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="checkouthistory">
+          <div class="tab-pane" id="checkouthistory">
+            <div class="row">
+    
+              <div class="col-md-12">
+                <div class="box box-default">
+                  @if ($consumable->id)
+                  <div class="box-header with-border">
+                    <div class="box-heading">
+                      <h2 class="box-title"> {{ $consumable->name }}   ({{ $consumable->numRemaining()  }} out of {{ $consumable->qty}}  {{ trans('admin/consumables/general.remaining') }})</h2>
+                    </div>
+                  </div><!-- /.box-header -->
+                  @endif
+      
+                  <div class="box-body">
+                    <div class="row">          
+                      <div class="col-md-18">
+                        <div class="table table-responsive table-striped">
+                          <h2 class="box-title"> Check Out History</h2>
+                          <table
+                                  data-cookie-id-table="consumablesCheckedoutTable"
+                                  data-pagination="true"
+                                  data-id-table="consumablesCheckedoutTable"
+                                  data-search="false"
+                                  data-side-pagination="server"
+                                  data-show-columns="true"
+                                  data-show-export="true"
+                                  data-show-footer="true"
+                                  data-show-refresh="true"
+                                  data-sort-order="asc"
+                                  data-sort-name="name"
+                                  id="consumablesCheckedoutTable"
+                                  class="table table-striped snipe-table"
+                                  data-url="{{route('api.consumables.showUsers', $consumable->id)}}"
+                                  data-export-options='{
+                            "fileName": "export-consumables-{{ str_slug($consumable->name) }}-checkedout-{{ date('Y-m-d') }}",
+                            "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                            }'>
+                            <thead>
+                              <tr>
+                                <th data-searchable="false" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
+                                <th data-searchable="false" data-sortable="false" data-field="totalnum">{{ trans('admin/consumables/general.total') }}</th>
+                                <th data-searchable="false" data-sortable="false" data-field="checkoutnote">{{ trans('admin/consumables/general.note') }}</th>
+                                <th data-searchable="false" data-sortable="false" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
+                                <th data-searchable="false" data-sortable="false" data-field="admin">{{ trans('general.admin') }}</th>
+                              </tr>
+                            </thead>
+                          </table>
+                        </div>
+                      </div> <!-- /.col-md-12-->
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane"  id="replenishhistory">             
+
+          <!-- Replenishment list -->
+          <div class="box-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="table table-responsive">
+                  <h2 class="box-title"> Replenishment History</h2>
+                  <table
+                          data-cookie-id-table="consumablesReplenishmentTable"
+                          data-pagination="true"
+                          data-id-table="consumablesReplenishmentTable"
+                          data-search="false"
+                          data-side-pagination="server"
+                          data-show-columns="true"
+                          data-show-export="true"
+                          data-show-footer="true"
+                          data-show-refresh="true"
+                          data-sort-order="asc"
+                          data-sort-name="name"
+                          id="consumablesReplenishmentTable"
+                          class="table table-striped snipe-table"
+                          data-url="{{route('api.consumables.showUsers', $consumable->id)}}"
+                          data-export-options='{
+                    "fileName": "export-consumables-{{ str_slug($consumable->name) }}-checkedout-{{ date('Y-m-d') }}",
+                    "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                    }'>
+                    <thead>
+                      <tr>
+                        <th data-searchable="false" data-sortable="false" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
+                        <th data-searchable="false" data-sortable="false" data-field="totalnum">{{ trans('admin/consumables/general.total') }}</th>
+                        <th data-searchable="false" data-sortable="false" data-field="checkoutnote">{{ trans('admin/consumables/general.note') }}</th>                    
+                        <th data-searchable="false" data-sortable="false" data-field="admin">{{ trans('general.admin') }}</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div> <!-- /.col-md-12-->
+
+            </div>
+          </div>
         </div>
       </div>
+    </div>
     </div> <!-- /.box.box-default-->
-  </div> <!-- /.col-md-9-->
-  <div class="col-md-3">
-
-
+    <div class="col-md-3">
         <div class="box box-default">
           <div class="box-body">
             <div class="row">
@@ -125,32 +241,38 @@
                   </div>
                 @endif
 
-    @can('checkout', \App\Models\Consumable::class)
-    <div class="col-md-12">
-                    <a href="{{ route('checkout/consumable', $consumable->id) }}" style="padding-bottom:5px;" class="btn btn-primary btn-sm" {{ (($consumable->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
+                @can('checkout', \App\Models\Consumable::class)
+                <div class="col-md-12">
+                                <a href="{{ route('checkout/consumable', $consumable->id) }}" style="padding-bottom:5px;" class="btn btn-primary btn-sm" {{ (($consumable->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
+                            </div>
+                            @endcan
+
+                @if ($consumable->notes)
+                  
+                <div class="col-md-12">
+                  <strong>
+                    {{ trans('general.notes') }}
+                  </strong>
                 </div>
-                @endcan
-
-    @if ($consumable->notes)
-       
-    <div class="col-md-12">
-      <strong>
-        {{ trans('general.notes') }}
-      </strong>
+                <div class="col-md-12">
+                  {!! nl2br(e($consumable->notes)) !!}
+                </div>
               </div>
-    <div class="col-md-12">
-      {!! nl2br(e($consumable->notes)) !!}
-            </div>
-          </div>
-  @endif
+              @endif
 
-    </div>
-    
-  </div> <!-- /.col-md-3-->
-</div> <!-- /.row-->
+                </div>
+            </div> <!-- /.row-->
 
-@stop
+  </div> <!-- /.col-md-8-->
+  @stop
 
 @section('moar_scripts')
 @include ('partials.bootstrap-table', ['exportFile' => 'consumable' . $consumable->name . '-export', 'search' => false])
-@stop
+@stop 
+</div>      
+
+</div>
+                  </div>
+                  </div>
+
+

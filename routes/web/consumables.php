@@ -16,6 +16,16 @@ Route::group(['prefix' => 'consumables', 'middleware' => ['auth']], function () 
         [Consumables\ConsumableCheckoutController::class, 'store']
     )->name('checkout/consumable');
 
+    Route::get(
+        '{consumablesID}/replenish',
+        [Consumables\ConsumableReplenishController::class, 'create']
+    )->name('replenish/consumable');
+
+    Route::post(
+        '{consumablesID}/replenish',
+        [Consumables\ConsumableReplenishController::class, 'store']
+    )->name('replenish/consumable');
+
 
 });
     

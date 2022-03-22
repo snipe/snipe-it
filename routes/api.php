@@ -250,6 +250,13 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:'.config('app.
                 'getDataView'
             ]
         )->name('api.consumables.showUsers');
+        
+        Route::get('view/{id}/users',
+            [
+                Api\ConsumablesController::class, 
+                'getDataView'
+            ]
+        )->name('api.consumables.showUsers');
 
         Route::get('{consumable}/checkout',
             [
