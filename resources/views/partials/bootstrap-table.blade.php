@@ -30,62 +30,64 @@
             return false;
         }
 
-        $('.snipe-table').bootstrapTable('destroy').bootstrapTable({
-            classes: 'table table-responsive table-no-bordered',
-            ajaxOptions: {
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            },
-            stickyHeader: true,
-            stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
-            undefinedText: '',
-            iconsPrefix: 'fa',
-            cookie: true,
-            cookieExpire: '2y',
-            mobileResponsive: true,
-            maintainSelected: true,
-            trimOnSearch: false,
-            showSearchClearButton: true,
-            paginationFirstText: "{{ trans('general.first') }}",
-            paginationLastText: "{{ trans('general.last') }}",
-            paginationPreText: "{{ trans('general.previous') }}",
-            paginationNextText: "{{ trans('general.next') }}",
-            pageList: ['10','20', '30','50','100','150','200'{!! ((config('app.max_results') > 200) ? ",'500'" : '') !!}{!! ((config('app.max_results') > 500) ? ",'".config('app.max_results')."'" : '') !!}],
-            pageSize: {{  (($snipeSettings->per_page!='') && ($snipeSettings->per_page > 0)) ? $snipeSettings->per_page : 20 }},
-            paginationVAlign: 'both',
-            queryParams: function (params) {
-                var newParams = {};
-                for(var i in params) {
-                    if(!keyBlocked(i)) { // only send the field if it's not in blockedFields
-                        newParams[i] = params[i];
+        $('.snipe-table').bootstrapTable('destroy').each(function () {
+            export_options = JSON.parse($(this).attr('data-export-options'));
+            export_options['htmlContent'] = true; //always enforce this on the given data-export-options (to prevent XSS)
+            
+            $(this).bootstrapTable({
+                classes: 'table table-responsive table-no-bordered',
+                ajaxOptions: {
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
+                },
+                stickyHeader: true,
+                stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
+                undefinedText: '',
+                iconsPrefix: 'fa',
+                cookie: true,
+                cookieExpire: '2y',
+                mobileResponsive: true,
+                maintainSelected: true,
+                trimOnSearch: false,
+                showSearchClearButton: true,
+                paginationFirstText: "{{ trans('general.first') }}",
+                paginationLastText: "{{ trans('general.last') }}",
+                paginationPreText: "{{ trans('general.previous') }}",
+                paginationNextText: "{{ trans('general.next') }}",
+                pageList: ['10','20', '30','50','100','150','200'{!! ((config('app.max_results') > 200) ? ",'500'" : '') !!}{!! ((config('app.max_results') > 500) ? ",'".config('app.max_results')."'" : '') !!}],
+                pageSize: {{  (($snipeSettings->per_page!='') && ($snipeSettings->per_page > 0)) ? $snipeSettings->per_page : 20 }},
+                paginationVAlign: 'both',
+                queryParams: function (params) {
+                    var newParams = {};
+                    for(var i in params) {
+                        if(!keyBlocked(i)) { // only send the field if it's not in blockedFields
+                            newParams[i] = params[i];
+                        }
+                    }
+                    return newParams;
+                },
+                formatLoadingMessage: function () {
+                    return '<h2><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
+                },
+                icons: {
+                    advancedSearchIcon: 'fa fa-search-plus',
+                    paginationSwitchDown: 'fa-caret-square-o-down',
+                    paginationSwitchUp: 'fa-caret-square-o-up',
+                    columns: 'fa-columns',
+                    refresh: 'fa-refresh',
+                    export: 'fa-download',
+                    clearSearch: 'fa-times'
+                },
+                exportOptions: export_options,
+
+                exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
+                onLoadSuccess: function () {
+                    $('[data-toggle="tooltip"]').tooltip(); // Needed to attach tooltips after ajax call
                 }
-                return newParams;
-            },
-            formatLoadingMessage: function () {
-                return '<h2><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
-            },
-            icons: {
-                advancedSearchIcon: 'fa fa-search-plus',
-                paginationSwitchDown: 'fa-caret-square-o-down',
-                paginationSwitchUp: 'fa-caret-square-o-up',
-                columns: 'fa-columns',
-                refresh: 'fa-refresh',
-                export: 'fa-download',
-                clearSearch: 'fa-times'
-            },
-            exportOptions: {
-                htmlContent: true,
-            },
 
-            exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
-            onLoadSuccess: function () {
-                $('[data-toggle="tooltip"]').tooltip(); // Needed to attach tooltips after ajax call
-            }
-
-        });   
-
+            });
+        });
     });
 
 
