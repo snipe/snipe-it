@@ -145,7 +145,6 @@ class AcceptanceController extends Controller
                 'eula' => $item->getEula(),
                 'check_out_date' => Carbon::parse($acceptance->created_at)->format($branding_settings->date_display_format),
                 'accepted_date' => Carbon::parse($acceptance->accepted_at)->format($branding_settings->date_display_format),
-//          'assigned_by'    => self
                 'assigned_to' => $assigned_to->first_name . ' ' . $assigned_to->last_name,
                 'company_name' => $branding_settings->site_name,
                 'signature' => storage_path() . '/private_uploads/signatures/' . $sig_filename,
@@ -162,7 +161,7 @@ class AcceptanceController extends Controller
 
             return redirect()->to('account/accept')->with('success', $return_msg);
         }
-//        TBC: trying to get the user_id here
+//
         $accessory_user= DB::table('checkout_acceptances')->find($acceptance->assigned_to_id);
         $assigned_to = User::find($accessory_user->assigned_to_id);
         $accessory_model = Accessory::find($item->id);
