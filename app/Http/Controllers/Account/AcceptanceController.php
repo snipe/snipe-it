@@ -163,8 +163,8 @@ class AcceptanceController extends Controller
             return redirect()->to('account/accept')->with('success', $return_msg);
         }
 //        TBC: trying to get the user_id here
-        $accessory_user= DB::table('accessories_users')->find($acceptance->assigned_to_id);
-        $assigned_to = User::find($accessory_user);
+        $accessory_user= DB::table('checkout_acceptances')->find($acceptance->assigned_to_id);
+        $assigned_to = User::find($accessory_user->assigned_to_id);
         $accessory_model = Accessory::find($item->id);
         $branding_settings = SettingsController::getPDFBranding();
         $data = [
