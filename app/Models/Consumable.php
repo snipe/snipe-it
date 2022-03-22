@@ -271,6 +271,18 @@ class Consumable extends SnipeModel
         return $this->belongsTo(Supplier::class, 'supplier_id');
     }
 
+    
+    /**
+     * Establishes the component -> users relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function replenishusers()
+    {
+        return $this->belongsToMany(\App\Models\User::class, 'consumables_stock', 'consumable_id', 'user_id')->withPivot('id')->withTrashed()->withTimestamps();
+    }
 
     /**
      * Determine whether to send a checkin/checkout email based on
@@ -343,6 +355,43 @@ class Consumable extends SnipeModel
 
         return $remaining;
     }
+
+
+
+    
+    /**
+     * Gets the number of consumed consumables
+     *
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @since [v.5.5]
+     * @return int
+     */
+    public function numConsumed()
+    {
+        $checkedouttotal = null;        
+        foreach($this->users as $data){
+                $totalnum = $data['pivot']['totalnum'];
+                $checkedouttotal += $totalnum;            
+        }        
+        
+        return $checkedouttotal;
+    }
+
+    
+    /**
+     * Gets the number of checked out consumables
+     *
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @since [v.5.5]
+     * @return int
+     */
+    public function checkoutTotal()
+    {
+        $checkedout = $this->users->count();
+        
+        return $checkedout;
+    }
+  
 
     /**
      * -----------------------------------------------
