@@ -438,6 +438,8 @@
                 if ((row.custom_fields[field_column_plain].field_format) && (row.custom_fields[field_column_plain].value)) {
                     if (row.custom_fields[field_column_plain].field_format=='URL') {
                         return '<a href="' + row.custom_fields[field_column_plain].value + '" target="_blank" rel="noopener">' + row.custom_fields[field_column_plain].value + '</a>';
+                    }else if (row.custom_fields[field_column_plain].field_format=='BOOLEAN') {
+                        return (row.custom_fields[field_column_plain].value == 1) ? "<span class='fas fa-check-circle' style='color:green' />" : "<span class='fas fa-times-circle' style='color:red' />";
                     } else if (row.custom_fields[field_column_plain].field_format=='EMAIL') {
                         return '<a href="mailto:' + row.custom_fields[field_column_plain].value + '">' + row.custom_fields[field_column_plain].value + '</a>';
                     }
