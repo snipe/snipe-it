@@ -34,7 +34,9 @@ return array(
 
     'numeric'  => 'Total number must be numeric' ,
     'required' => 'Total number cannot be empty' ,
-    'over'     => 'Total checked out number is greater than available stock'
+    'over'     => 'Total checked out number is greater than available stock',
+    'under'    => 'Total number below minimum acceptable amount',
+    'not_in'   => 'Total checked out number cannot be zero',
     
 
 );

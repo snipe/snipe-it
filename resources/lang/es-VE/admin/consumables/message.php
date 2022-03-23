@@ -35,6 +35,8 @@ return array(
     'numeric'  => 'El número total debe ser numérico' ,
     'required' => 'El número total no puede estar vacío' ,
     'over'     => 'El número total prestado es mayor que el stock disponible',
+    'under'    => 'Número total por debajo de la cantidad mínima aceptable',
+    'not_in'   => 'El número total prestado no puede ser cero',
     
 
 

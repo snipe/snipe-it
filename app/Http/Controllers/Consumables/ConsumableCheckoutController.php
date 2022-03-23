@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Log;
 
 class ConsumableCheckoutController extends Controller
 {
@@ -49,12 +50,16 @@ class ConsumableCheckoutController extends Controller
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
         }
 
+        // Validating input number and compared to currently remaining amount of stock
+        $totalremaining = (int)$consumable->numRemaining();        
         $request->validate([
-            "totalnum" => "required|regex:/^[0-9]*$/|max:{{$consumable->numRemaining()}}"
-          ],[
-            'totalnum.max' =>  trans('admin/consumables/message.over'),
+            'totalnum' => "required|regex:/^[0-9]*$/|gt:0|lte:$totalremaining"
+          ],
+          [
+            'totalnum.gt'       => trans('admin/consumables/message.under'),
+            'totalnum.lte'      => trans('admin/consumables/message.over'),
             'totalnum.required' => trans('admin/consumables/message.required'),
-            'totalnum.regex' => trans('admin/consumables/message.numeric'),
+            'totalnum.regex'    => trans('admin/consumables/message.numeric'),
           ]);
 
         $this->authorize('checkout', $consumable);
@@ -73,10 +78,10 @@ class ConsumableCheckoutController extends Controller
 
         $consumable->users()->attach($consumable->id, [
             'consumable_id' => $consumable->id,
-            'user_id' => $admin_user->id,
-            'assigned_to' => e($request->input('assigned_to')),
-            'totalnum' => e($request->input('totalnum')),
-            'checkoutnote' => e($request->input('checkoutnote'))
+            'user_id'       => $admin_user->id,
+            'assigned_to'   => e($request->input('assigned_to')),
+            'totalnum'      => e($request->input('totalnum')),
+            'checkoutnote'  => e($request->input('checkoutnote'))
         ]);
 
         event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note'), $request->input('totalnum')));
