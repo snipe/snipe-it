@@ -100,6 +100,7 @@
 </template>
 
 <script>
+    var baseUrl = $('meta[name="baseUrl"]').attr('content');
     export default {
         props: ['file', 'customFields'],
         data() {

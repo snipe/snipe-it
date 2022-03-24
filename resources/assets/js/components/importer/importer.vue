@@ -2,6 +2,7 @@
 
 <script>
     require('blueimp-file-upload');
+    var baseUrl = $('meta[name="baseUrl"]').attr('content');
     export default {
         /*
          * The component's data.
