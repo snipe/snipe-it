@@ -253,8 +253,8 @@ class LdapSync extends Command
 
                 if ($item['ldap_location_override'] == true) {
                     $user->location_id = $item['location_id'];
-                } elseif ((isset($location))) {
-                    if ((array_key_exists('id', $location))) {
+                } elseif ((isset($location)) && (! empty($location))) {
+                    if ((is_array($location)) && (array_key_exists('id', $location))) {
                         $user->location_id = $location['id'];
                     } elseif (is_object($location)) {
                         $user->location_id = $location->id;
