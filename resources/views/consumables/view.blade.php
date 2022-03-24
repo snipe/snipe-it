@@ -606,7 +606,7 @@
                                   data-pagination="true"
                                   data-id-table="consumablesCheckedoutTable"
                                   data-search="false"
-                                  data-side-pagination="server"
+                                  data-side-pagination="client"
                                   data-show-columns="true"
                                   data-show-export="true"
                                   data-show-footer="true"
@@ -619,30 +619,27 @@
                                   data-export-options='{
                             "fileName": "export-consumables-{{ str_slug($consumable->name) }}-checkedout-{{ date('Y-m-d') }}",
                             "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                            }'>
+                            }'>                            
                             <thead>
                               <tr>
                                 <th data-searchable="false" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
                                 <th data-searchable="false" data-sortable="false" data-field="totalnum">{{ trans('admin/consumables/general.total') }}</th>
                                 <th data-searchable="false" data-sortable="false" data-field="checkoutnote">{{ trans('admin/consumables/general.note') }}</th>
                                 <th data-searchable="false" data-sortable="false" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
-                                <th data-searchable="false" data-sortable="false" data-field="admin">{{ trans('general.admin') }}</th>
+                                <th data-searchable="false" data-sortable="false" data-field="admin">{{ trans('general.admin') }}</th>                                
                               </tr>
                             </thead>
                           </table>
                         </div>
                       </div> <!-- /.col-md-12-->
-
                     </div>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
-        <div class="tab-pane"  id="replenishhistory">             
-
+        <div class="tab-pane"  id="replenishhistory">            
           <!-- Replenishment list -->
           <div class="box-body">
             <div class="row">
@@ -654,32 +651,32 @@
                           data-pagination="true"
                           data-id-table="consumablesReplenishmentTable"
                           data-search="false"
-                          data-side-pagination="server"
+                          data-side-pagination="client"
                           data-show-columns="true"
                           data-show-export="true"
                           data-show-footer="true"
                           data-show-refresh="true"
-                          data-sort-order="asc"
+                          data-sort-order="desc"
                           data-sort-name="name"
                           id="consumablesReplenishmentTable"
                           class="table table-striped snipe-table"
-                          data-url="{{route('api.consumables.showUsers', $consumable->id)}}"
+                          data-url="{{route('api.consumables.showReplenishedUsers', $consumable->id)}}"
                           data-export-options='{
-                    "fileName": "export-consumables-{{ str_slug($consumable->name) }}-checkedout-{{ date('Y-m-d') }}",
+                    "fileName": "export-consumables-{{ str_slug($consumable->name) }}-replenish-{{ date('Y-m-d') }}",
                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                     }'>
                     <thead>
                       <tr>
                         <th data-searchable="false" data-sortable="false" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
-                        <th data-searchable="false" data-sortable="false" data-field="totalnum">{{ trans('admin/consumables/general.total') }}</th>
-                        <th data-searchable="false" data-sortable="false" data-field="checkoutnote">{{ trans('admin/consumables/general.note') }}</th>                    
+                        <th data-searchable="false" data-sortable="false" data-field="initial_qty">{{ trans('admin/consumables/general.initial_qty') }}</th>
+                        <th data-searchable="false" data-sortable="false" data-field="total_replenish">{{ trans('admin/consumables/general.totalreplenish') }}</th>
+                        <th data-searchable="false" data-sortable="false" data-field="replenishnote">{{ trans('admin/consumables/general.replenishnote') }}</th>                    
                         <th data-searchable="false" data-sortable="false" data-field="admin">{{ trans('general.admin') }}</th>
                       </tr>
                     </thead>
                   </table>
                 </div>
               </div> <!-- /.col-md-12-->
-
             </div>
           </div>
         </div>
@@ -745,9 +742,9 @@
 
                 @can('checkout', \App\Models\Consumable::class)
                 <div class="col-md-12">
-                                <a href="{{ route('checkout/consumable', $consumable->id) }}" style="padding-bottom:5px;" class="btn btn-primary btn-sm" {{ (($consumable->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
-                            </div>
-                            @endcan
+                  <a href="{{ route('checkout/consumable', $consumable->id) }}" style="padding-bottom:5px;" class="btn btn-primary btn-sm" {{ (($consumable->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
+                </div>
+                @endcan
 
                 @if ($consumable->notes)
                   

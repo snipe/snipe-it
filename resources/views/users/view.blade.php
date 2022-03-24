@@ -835,6 +835,7 @@
 
         <div class="tab-pane" id="consumables">
           <div class="table-responsive">
+          <h2 class="box-title"> Check Out History</h2>
             <table
                     data-cookie-id-table="userConsumableTable"
                     data-id-table="userConsumableTable"
@@ -863,6 +864,7 @@
                 </tr>
               </thead>
               <tbody>
+                {{$user}}
                 @foreach ($user->consumables as $consumable)
                 <tr>
                   <td>{!! $consumable->present()->nameUrl() !!}</td>
@@ -875,6 +877,62 @@
                 @endforeach
               </tbody>
           </table>
+          </div>
+          <!-- Replenishment list -->
+          <div class="box-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="table table-responsive">
+                  <h2 class="box-title"> Replenishment History</h2>
+                  <table
+                          data-cookie-id-table="consumablesReplenishmentTable"
+                          data-pagination="true"
+                          data-id-table="consumablesReplenishmentTable"
+                          data-search="false"
+                          data-side-pagination="client"
+                          data-show-columns="true"
+                          data-show-export="true"
+                          data-show-footer="true"
+                          data-show-refresh="true"
+                          data-sort-order="desc"
+                          data-sort-name="name"
+                          id="consumablesReplenishmentTable"
+                          class="table table-striped snipe-table"                          
+                          data-export-options='{
+                    "fileName": "export-consumables-{{ str_slug($user->username) }}-replenish-{{ date('Y-m-d') }}",
+                    "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                    }'>
+                    <thead>
+                      <tr>
+                        <th data-searchable="false" data-sortable="false" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
+                        <th data-searchable="false" data-sortable="false" data-field="initial_qty">{{ trans('admin/consumables/general.initial_qty') }}</th>
+                        <th data-searchable="false" data-sortable="false" data-field="total_replenish">{{ trans('admin/consumables/general.totalreplenish') }}</th>
+                        <th data-searchable="false" data-sortable="false" data-field="replenishnote">{{ trans('admin/consumables/general.replenishnote') }}</th>                    
+                        <th data-searchable="false" data-sortable="false" data-field="admin">{{ trans('general.admin') }}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {{ str_slug($user->username) }}
+                      {{$user}}
+                @foreach ($user->replenishconsumables as $replenishconsumable)
+                <tr>                  
+                  <td>
+                    {{$replenishconsumable->initial_qty}}
+                  </td>
+                  <td>
+                    {{$replenishconsumable->total_replenish}}
+                  </td>
+                  <td>
+                    {{$replenishconsumable->replenishnote}}
+                  </td>
+                  <td>{{ $replenishconsumable->created_at }}</td>
+                </tr>
+                @endforeach
+              </tbody>
+                  </table>
+                </div>
+              </div> <!-- /.col-md-12-->
+            </div>
           </div>
         </div><!-- /consumables-tab -->
 

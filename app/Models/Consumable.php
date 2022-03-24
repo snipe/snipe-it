@@ -172,6 +172,17 @@ class Consumable extends SnipeModel
     }
 
     /**
+     * Establishes the component -> replenish assignments relationship
+     *
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @since [v6.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function consumableReplenishAssignments()
+    {
+        return $this->hasMany(\App\Models\ConsumableReplenishAssignment::class);
+    }
+    /**
      * Establishes the component -> company relationship
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -273,15 +284,15 @@ class Consumable extends SnipeModel
 
     
     /**
-     * Establishes the component -> users relationship
+     * Establishes the consumables_stock -> users relationship
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v3.0]
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @since [v6.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
     public function replenishusers()
     {
-        return $this->belongsToMany(\App\Models\User::class, 'consumables_stock', 'consumable_id', 'user_id')->withPivot('id')->withTrashed()->withTimestamps();
+        return $this->belongsToMany(\App\Models\User::class, 'consumables_stock', 'consumable_id', 'total_replenish')->withPivot('user_id')->withTrashed()->withTimestamps();
     }
 
     /**

@@ -43,6 +43,7 @@ class ConsumablesTransformer
             'created_at' => Helper::getFormattedDateObject($consumable->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($consumable->updated_at, 'datetime'),
         ];
+        
 
         $permissions_array['user_can_checkout'] = false;
 

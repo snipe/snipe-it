@@ -52,7 +52,7 @@ class ConsumableReplenishController extends Controller
         }
 
         $request->validate([
-            "totalnum" => "required|regex:/^[0-9]*$/|min:1"
+            "totalnum" => "required|regex:/^[0-9]*$/|gt:0"
           ],[
             'totalnum.min' =>  trans('admin/consumables/message.below'),
             'totalnum.required' => trans('admin/consumables/message.required'),
@@ -75,12 +75,14 @@ class ConsumableReplenishController extends Controller
         ]);
 
         $addedquantity = $consumable->qty + e($request->input('totalnum'));
+        
+        // Storing value to database
+        event(new ConsumableCheckedOut($consumable, Auth::user(), $consumable->qty, $request->input('note'), $request->input('totalnum')));
 
+        // Updating quantity to consumable
         DB::table('consumables')
         ->where('id',$consumable->id)
         ->update(['qty'=> $addedquantity]);
-
-        event(new ConsumableCheckedOut($consumable, Auth::user(), $consumable->qty, $request->input('note'), $request->input('totalnum')));
 
         // Redirect to the new consumable page
         return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.checkout.success'));
