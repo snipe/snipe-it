@@ -11,7 +11,7 @@ use App\Models\Consumable;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
-
+use Illuminate\Support\Facades\Log;
 class ConsumablesController extends Controller
 {
     /**
@@ -156,6 +156,21 @@ class ConsumablesController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showreplenish($id)
+    {
+        $this->authorize('viewreplenish', Consumable::class);
+        $consumable = Consumable::findOrFail($id);
+
+        return (new ConsumablesTransformer)->transformConsumable($consumable);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -227,6 +242,51 @@ class ConsumablesController extends Controller
                 'name' => ($consumable_assignment->user) ? $consumable_assignment->user->present()->nameUrl() : 'Deleted User',
                 'created_at' => Helper::getFormattedDateObject($consumable_assignment->created_at, 'datetime'),
                 'admin' => ($consumable_assignment->admin) ? $consumable_assignment->admin->present()->nameUrl() : '',
+            ];
+        }
+
+        $consumableCount = $consumable->users->count();
+        $data = ['total' => $consumableCount, 'rows' => $rows];
+
+        return $data;
+    }
+
+    
+    /**
+    * Returns a JSON response containing details on the users associated with this consumable replenishment.
+    *
+    * @author [A. Rahardianto] [<veenone@veenone.com>]
+    * @see \App\Http\Controllers\Consumables\ConsumablesController::getView() method that returns the form.
+    * @since [v6.0]
+    * @param int $consumableId
+    * @return array
+     */
+    public function getReplenishDataView($consumableId)
+    {
+        $consumable = Consumable::with(['consumableReplenishAssignments'=> function ($query) {
+            $query->orderBy($query->getModel()->getTable().'.created_at', 'DESC');
+        },
+        'consumableReplenishAssignments.admin'=> function ($query) {
+        },
+        ])->find($consumableId);
+
+        if (! Company::isCurrentUserHasAccess($consumable)) {
+            return ['total' => 0, 'rows' => []];
+        }
+        $this->authorize('view', Consumable::class);
+        
+        $rows = [];
+        $consumable->consumableReplenishAssignments;
+        
+        foreach ($consumable->consumableReplenishAssignments as $consumable_replenish_assignment) {
+            Log::debug('item : ' . $consumable_replenish_assignment);
+            $rows[] = [
+                // 'name' => ($consumable_replenish_assignment->user) ? $consumable_replenish_assignment->user->present()->nameUrl() : 'Deleted User',
+                'created_at' => Helper::getFormattedDateObject($consumable_replenish_assignment->created_at, 'datetime'),
+                'initial_qty' => ($consumable_replenish_assignment->initial_qty),
+                'total_replenish' => ($consumable_replenish_assignment->total_replenish),
+                'replenishnote' => ($consumable_replenish_assignment->replenishnote),
+                'admin' => ($consumable_replenish_assignment->admin) ? $consumable_replenish_assignment->admin->present()->nameUrl() : '',
             ];
         }
 
