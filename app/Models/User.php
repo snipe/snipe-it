@@ -52,6 +52,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'locale',
         'location_id',
         'manager_id',
+        'manager_name',
         'password',
         'phone',
         'notes',
