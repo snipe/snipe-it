@@ -54,7 +54,6 @@ class UsersController extends Controller
             'users.locale',
             'users.location_id',
             'users.manager_id',
-            'users.manager_name',
             'users.notes',
             'users.permissions',
             'users.phone',
