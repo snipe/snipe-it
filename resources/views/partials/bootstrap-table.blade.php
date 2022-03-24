@@ -6,7 +6,6 @@
 @push('js')
 
 <script src="{{ url(mix('js/dist/bootstrap-table.js')) }}"></script>
-
 <script nonce="{{ csrf_token() }}">
     $(function () {
         var locale = '{{ config('app.locale') }}';
@@ -613,6 +612,11 @@
                 var altName = row.model.name;
            }
             return '<a href="' + value + '" data-toggle="lightbox" data-type="image"><img src="' + value + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive" alt="' + altName + '"></a>';
+        }
+    }
+    function downloadFormatter(value) {
+        if (value) {
+            return '<a href="' + value + '" target="_blank"><i class="fas fa-download"></i></a>';
         }
     }
 

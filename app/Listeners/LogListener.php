@@ -34,11 +34,12 @@ class LogListener
 
     public function onCheckoutAccepted(CheckoutAccepted $event)
     {
-        $logaction = new Actionlog();
 
+        $logaction = new Actionlog();
         $logaction->item()->associate($event->acceptance->checkoutable);
         $logaction->target()->associate($event->acceptance->assignedTo);
         $logaction->accept_signature = $event->acceptance->signature_filename;
+        $logaction->stored_eula_file = $event->acceptance->stored_eula_file;
         $logaction->action_type = 'accepted';
 
         // TODO: log the actual license seat that was checked out
