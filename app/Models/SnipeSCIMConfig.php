@@ -33,6 +33,7 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
         $mappings['name']['familyName'] = AttributeMapping::eloquent("last_name");
         $mappings['name']['givenName'] = AttributeMapping::eloquent("first_name");
         $mappings['name']['formatted'] = null;
+        $mappings['name']['displayName'] = AttributeMapping::constant("n/a")->ignoreWrite(); // TODO - another weird one here
         //active
         $config['validations'][$core.'active'] = 'boolean';
 
@@ -58,17 +59,18 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
         $config['validations'][$core.'addresses.*.country'] = 'string';
 
         $mappings['addresses'] = [[
-            'formatted' => null,
+            'type' => AttributeMapping::constant("other")->ignoreWrite(),
+            'formatted' => AttributeMapping::constant("n/a")->ignoreWrite(), // TODO - is this right? This doesn't look right.
             'streetAddress' => AttributeMapping::eloquent("address"),
             'locality' => AttributeMapping::eloquent("city"),
             'region' => AttributeMapping::eloquent("state"),
             'postalCode' => AttributeMapping::eloquent("zip"),
             'country' => AttributeMapping::eloquent("country"),
-            "primary" => AttributeMapping::constant(true)->ignoreWrite() //this isn't in the example?
+            'primary' => AttributeMapping::constant(true)->ignoreWrite() //this isn't in the example?
         ]];
 
         //title
-        $config['validations'][$core.'name.title'] = 'string';
+        $config['validations'][$core.'title'] = 'string';
         $mappings['title'] = AttributeMapping::eloquent('jobtitle');
 
         /* 
