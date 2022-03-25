@@ -122,6 +122,18 @@ class Statuslabel extends SnipeModel
     }
 
     /**
+     * Query builder scope for undeployable status types
+     *
+     * @return \Illuminate\Database\Query\Builder Modified query builder
+     */
+    public function scopeUndeployable()
+    {
+        return $this->where('pending', '=', 0)
+            ->where('archived', '=', 0)
+            ->where('deployable', '=', 0);
+    }
+
+    /**
      * Helper function to determine type attributes
      *
      * @author A. Gianotto <snipe@snipe.net>

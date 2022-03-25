@@ -30,6 +30,19 @@ class StatuslabelsController extends Controller
             $statuslabels = $statuslabels->TextSearch($request->input('search'));
         }
 
+        // if a status_type is passed, filter by that
+        if ($request->filled('status_type')) {
+            if (strtolower($request->input('status_type')) == 'pending') {
+                $statuslabels = $statuslabels->Pending();
+            } elseif (strtolower($request->input('status_type')) == 'archived') {
+                $statuslabels = $statuslabels->Archived();
+            } elseif (strtolower($request->input('status_type')) == 'deployable') {
+                $statuslabels = $statuslabels->Deployable();
+            } elseif (strtolower($request->input('status_type')) == 'undeployable') {
+                $statuslabels = $statuslabels->Undeployable();
+            }
+        }
+
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.
         $offset = (($statuslabels) && ($request->get('offset') > $statuslabels->count())) ? $statuslabels->count() : $request->get('offset', 0);
