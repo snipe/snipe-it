@@ -19,7 +19,7 @@ class CreateConsumablesStock extends Migration
             $table->integer('consumable_id')->nullable()->default(null);
             $table->integer('initial_qty');       
             $table->integer('total_replenish');                                         
-            $table->string('notes')->nullable()->default(null);
+            $table->string('replenishnote')->nullable()->default(null);
             $table->timestamps();           
         });
     }
