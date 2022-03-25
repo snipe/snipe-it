@@ -7,10 +7,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\ConsumablesController;
 use App\Models\Consumable;
 use App\Models\User;
+use App\Models\Actionlog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Validation\Rule;
+
 use DB;
 
 class ConsumableReplenishController extends Controller
@@ -18,9 +20,9 @@ class ConsumableReplenishController extends Controller
     /**
      * Return a view to replenish a consumable .
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @see ConsumableCheckoutController::store() method that stores the data.
-     * @since [v1.0]
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @see ConsumableReplenishController::store() method that stores the data.
+     * @since [v6.0]
      * @param int $consumableId
      * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
@@ -83,6 +85,14 @@ class ConsumableReplenishController extends Controller
         DB::table('consumables')
         ->where('id',$consumable->id)
         ->update(['qty'=> $addedquantity]);
+        
+        // Updating activity 
+        $logAction = new Actionlog();
+        $logAction->item_type = Consumable::class;
+        $logAction->item_id = $consumable->id;
+        $logAction->created_at = date('Y-m-d H:i:s');
+        $logAction->user_id = Auth::id();        
+        $logAction->logaction('replenish');
 
         // Redirect to the new consumable page
         return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.checkout.success'));
