@@ -559,4 +559,7 @@ return [
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count Remaining',
 
+    'replenish_history'     => 'Item Replenish History',
+    'replenish'             => 'Replenish Stock',
+    'checkout_history'      => 'Item Chekcout History'
 ];

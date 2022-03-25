@@ -29,23 +29,16 @@ return array(
     ),
 
     'checkin' => array(
-<<<<<<< HEAD
         'error'   		=> 'El consumible no fue ingresado, por favor inténtelo de nuevo',
         'success' 		=> 'El consumible fue ingresado correctamente.',
         'user_does_not_exist' => 'Ese usuario no es válido. Por favor, inténtelo de nuevo.'
-    )
-=======
-        'error'   		=> 'Consumible no fue ingresado, por favor, inténtelo de nuevo',
-        'success' 		=> 'Consumible fue ingresado satisfactoriamente.',
-        'user_does_not_exist' => 'Este usuario es inválido . Inténtalo de nuevo.'
     ),
 
     
     'numeric'  => 'El número total debe ser numérico' ,
     'required' => 'El número total no puede estar vacío' ,
     'over'     => 'El número total prestado es mayor que el stock disponible',
-    
->>>>>>> 6945fbb0c (- updating validator to use localized strings)
+    'under'    => 'El número total no puede ser cero'
 
 
 );

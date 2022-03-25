@@ -63,13 +63,44 @@ class ConsumablesTransformer
         return $array;
     }
 
-    public function transformCheckedoutConsumables(Collection $consumables_users, $total)
+    public function transformCheckedoutConsumables(Collection $consumables, $total)
     {
         $array = [];
-        foreach ($consumables_users as $user) {
-            $array[] = (new UsersTransformer)->transformUser($user);
+        foreach ($consumables as $consumable) {
+            Log::debug($consumable);
+            $array[] = self::transformCheckedoutConsumable($consumable);
         }
 
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
+
+    
+    public function transformCheckedoutConsumable(Consumable $consumable)
+    {
+        $array = [
+            'id'            => (int) $consumable->id,           
+            'initial_qty'           => (int) $consumable->initial_qty,
+            'checkoutnotes'         => ($consumable->checkoutnotes) ? e($consumable->checkoutnotes) : null,
+            'created_at' => Helper::getFormattedDateObject($consumable->created_at, 'datetime'),
+            'updated_at' => Helper::getFormattedDateObject($consumable->updated_at, 'datetime'),
+        ];
+        
+
+        $permissions_array['user_can_checkout'] = false;
+
+        if ($consumable->numRemaining() > 0) {
+            $permissions_array['user_can_checkout'] = true;
+        }
+
+        $permissions_array['available_actions'] = [
+            'checkout' => Gate::allows('checkout', Consumable::class),
+            'checkin' => Gate::allows('checkin', Consumable::class),
+            'update' => Gate::allows('update', Consumable::class),
+            'delete' => Gate::allows('delete', Consumable::class),
+        ];
+        $array += $permissions_array;
+
+        return $array;
+    }
+
 }

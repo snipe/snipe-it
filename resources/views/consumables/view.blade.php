@@ -610,7 +610,7 @@
                                   data-show-columns="true"
                                   data-show-export="true"
                                   data-show-footer="true"
-                                  data-show-refresh="true"
+                                  data-show-refresh="false"
                                   data-sort-order="asc"
                                   data-sort-name="name"
                                   id="consumablesCheckedoutTable"
@@ -645,7 +645,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="table table-responsive">
-                  <h2 class="box-title"> Replenishment History</h2>
+                  <h2 class="box-title">{{ trans('general.replenish_history') }}</h2>
                   <table
                           data-cookie-id-table="consumablesReplenishmentTable"
                           data-pagination="true"
@@ -655,7 +655,7 @@
                           data-show-columns="true"
                           data-show-export="true"
                           data-show-footer="true"
-                          data-show-refresh="true"
+                          data-show-refresh="false"
                           data-sort-order="desc"
                           data-sort-name="name"
                           id="consumablesReplenishmentTable"

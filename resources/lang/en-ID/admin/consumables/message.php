@@ -36,7 +36,8 @@ return array(
 
     'numeric'  => 'Input total harus numerik' ,
     'required' => 'Input total tidak bisa kosong' ,
-    'over'     => 'input total lebih besar dari jumlah consumable yang tersedia'
+    'over'     => 'Input total lebih besar dari jumlah consumable yang tersedia',
+    'under'    => 'Total barang tidak boleh nol'
     
 
 );

@@ -388,5 +388,9 @@ return [
     'total'                 => 'Total Items',
     'replenish_history'     => 'Item Replenish Hist
     'replenish'             => 'Replenish Stock'
+    'replenish_history'     => 'Item Replenish History',
+    'replenish'             => 'Replenish Stock',
+    'checkout_history'      => 'Item Chekcout History'
+
 ];
 

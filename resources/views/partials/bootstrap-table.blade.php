@@ -304,11 +304,10 @@
 
             if ((row.available_actions) && (row.available_actions.update === true)) {
                 if (dest == 'consumables') {
-                    actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/replenish" class="btn btn-sm bg-green" data-tooltip="true" title="{{ trans('general.replenish') }}"><i class="fas fa-plus" aria-hidden="true"></i><span class="sr-only">{{ trans('general.replenish') }}</span></a>&nbsp;';
-                    actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="{{ trans('general.update') }}"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="sr-only">{{ trans('general.update') }}</span></a>&nbsp;';
-                }else {
-                    actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="{{ trans('general.update') }}"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="sr-only">{{ trans('general.update') }}</span></a>&nbsp;';
+                    actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/replenish" class="btn btn-sm bg-green" data-tooltip="true" title="{{ trans('general.replenish') }}"><i class="fas fa-plus" aria-hidden="true"></i><span class="sr-only">{{ trans('general.replenish') }}</span></a>&nbsp;';                    
                 }
+                    actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="{{ trans('general.update') }}"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="sr-only">{{ trans('general.update') }}</span></a>&nbsp;';
+                
                 
             }
 

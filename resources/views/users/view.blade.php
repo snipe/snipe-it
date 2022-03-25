@@ -640,7 +640,6 @@
                             @endif 
                   @endif
                     
-
                     @if ($user->notes)
                      <!-- empty -->
                      <div class="row">
@@ -835,7 +834,7 @@
 
         <div class="tab-pane" id="consumables">
           <div class="table-responsive">
-          <h2 class="box-title"> Check Out History</h2>
+          <h2 class="box-title">{{ trans('general.checkout_history') }}</h2>
             <table
                     data-cookie-id-table="userConsumableTable"
                     data-id-table="userConsumableTable"
@@ -863,8 +862,7 @@
                     <th class="col-md-5">{{ trans('general.notes') }}</th>
                 </tr>
               </thead>
-              <tbody>
-                {{$user}}
+              <tbody>                
                 @foreach ($user->consumables as $consumable)
                 <tr>
                   <td>{!! $consumable->present()->nameUrl() !!}</td>
@@ -878,12 +876,13 @@
               </tbody>
           </table>
           </div>
+          <hr>
           <!-- Replenishment list -->
           <div class="box-body">
             <div class="row">
               <div class="col-md-12">
                 <div class="table table-responsive">
-                  <h2 class="box-title"> Replenishment History</h2>
+                  <h2 class="box-title">{{ trans('general.replenish_history') }}</h2>
                   <table
                           data-cookie-id-table="consumablesReplenishmentTable"
                           data-pagination="true"
@@ -904,28 +903,32 @@
                     }'>
                     <thead>
                       <tr>
-                        <th data-searchable="false" data-sortable="false" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
+                        <th data-searchable="false" data-sortable="false" data-field="created_at" >{{ trans('general.date') }}</th>
                         <th data-searchable="false" data-sortable="false" data-field="initial_qty">{{ trans('admin/consumables/general.initial_qty') }}</th>
                         <th data-searchable="false" data-sortable="false" data-field="total_replenish">{{ trans('admin/consumables/general.totalreplenish') }}</th>
                         <th data-searchable="false" data-sortable="false" data-field="replenishnote">{{ trans('admin/consumables/general.replenishnote') }}</th>                    
                         <th data-searchable="false" data-sortable="false" data-field="admin">{{ trans('general.admin') }}</th>
                       </tr>
                     </thead>
-                    <tbody>
-                    {{ str_slug($user->username) }}
-                      {{$user}}
-                @foreach ($user->replenishconsumables as $replenishconsumable)
+                    <tbody>                    
+                      <!-- {{$user}} -->
+                @foreach ($user->replenishconsumables as $replenishconsumable)                     
                 <tr>                  
                   <td>
-                    {{$replenishconsumable->initial_qty}}
+                    {{$replenishconsumable->pivot->created_at}}                    
                   </td>
                   <td>
-                    {{$replenishconsumable->total_replenish}}
+                    {{$replenishconsumable->pivot->initial_qty}}
                   </td>
                   <td>
-                    {{$replenishconsumable->replenishnote}}
+                    {{$replenishconsumable->pivot->total_replenish}}
                   </td>
-                  <td>{{ $replenishconsumable->created_at }}</td>
+                  <td>
+                    {{$replenishconsumable->pivot->replenishnote}}
+                  </td>
+                  <td>
+                    {{$user->username}}
+                  </td>
                 </tr>
                 @endforeach
               </tbody>

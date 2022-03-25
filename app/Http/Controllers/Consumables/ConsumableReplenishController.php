@@ -30,7 +30,7 @@ class ConsumableReplenishController extends Controller
         if (is_null($consumable = Consumable::find($consumableId))) {
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
         }
-        $this->authorize('replenish', $consumable);
+        $this->authorize('update', $consumable);
 
         return view('consumables/replenish', compact('consumable'));
     }
@@ -38,9 +38,9 @@ class ConsumableReplenishController extends Controller
     /**
      * Saves the replenish information
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @see ConsumableCheckoutController::create() method that returns the form.
-     * @since [v1.0]
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @see ConsumableReplenishCheckoutController::create() method that returns the form.
+     * @since [v6.0]
      * @param int $consumableId
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
@@ -53,13 +53,13 @@ class ConsumableReplenishController extends Controller
 
         $request->validate([
             "totalnum" => "required|regex:/^[0-9]*$/|gt:0"
-          ],[
-            'totalnum.min' =>  trans('admin/consumables/message.below'),
+          ],[            
+            'totalnum.gt' =>  trans('admin/consumables/message.under'),
             'totalnum.required' => trans('admin/consumables/message.required'),
             'totalnum.regex' => trans('admin/consumables/message.numeric'),
           ]);
 
-        $this->authorize('replenish', $consumable);
+        $this->authorize('update', $consumable);
 
         $admin_user = Auth::user();
 
