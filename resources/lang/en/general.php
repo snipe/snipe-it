@@ -351,5 +351,7 @@
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
     'replenish_history'     => 'Item Replenish History',
-    'replenish'             => 'Replenish Stock'
+    'replenish'             => 'Replenish Stock',
+    'checkout_history'      => 'Item Chekcout History'
+
 ];

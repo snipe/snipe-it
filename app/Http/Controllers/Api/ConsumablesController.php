@@ -163,11 +163,12 @@ class ConsumablesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function showreplenish($id)
-    {
-        $this->authorize('viewreplenish', Consumable::class);
-        $consumable = Consumable::findOrFail($id);
+    {        
+        // $this->authorize('view', Consumable::class);
+        // $this->authorize('view', User::class);        
+        // $consumable = Consumable::findOrFail($id);
 
-        return (new ConsumablesTransformer)->transformConsumable($consumable);
+        return (new ConsumablesTransformer)->transformCheckedoutConsumables($consumable);
     }
 
     /**
