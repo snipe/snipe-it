@@ -77,6 +77,20 @@
                 </div>
               </div>
             @endif
+
+          <!-- order number -->         
+          <div class="form-group {{ $errors->has('order_number') ? ' has-error' : '' }}">
+              <label for="order_number" class="col-md-3 control-label">{{ trans('general.order_number') }}
+                <i class='icon-asterisk'></i></label>
+              <div class="col-md-5" >
+                    <input class="form-control" type="text" name="order_number" id="order_number" style="width: 250px; float:left;" value="{{ old('order_number') ?? null }}" > &nbsp;&nbsp;                    
+                    <div style="float:right;" class="col-ld-1">
+                    {!! $errors->first('order_number', '<span class="alert-msg" aria-hidden="true" width=100% position=absolute><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}    
+                    </div>
+                    </input>               
+                             
+              </div>
+            </div>  
           <!-- Note -->
           <div class="form-group {{ $errors->has('replenishnote') ? 'error' : '' }}">
             <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
@@ -86,6 +100,7 @@
             </div>
           </div>
         </div> <!-- .box-body -->
+        
         <div class="box-footer">
           <a class="btn btn-link" href="{{ route('consumables.index') }}">{{ trans('button.cancel') }}</a>
           <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.update') }}</button>
