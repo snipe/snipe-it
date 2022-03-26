@@ -285,7 +285,8 @@ class ConsumablesController extends Controller
                 'created_at' => Helper::getFormattedDateObject($consumable_replenish_assignment->created_at, 'datetime'),
                 'initial_qty' => ($consumable_replenish_assignment->initial_qty),
                 'total_replenish' => ($consumable_replenish_assignment->total_replenish),
-                'replenishnote' => ($consumable_replenish_assignment->replenishnote),
+                'order_number' => $consumable_replenish_assignment->order_number ? ($consumable_replenish_assignment->order_number) : 'N/A',
+                'replenishnote' => $consumable_replenish_assignment->replenishnote ?  ($consumable_replenish_assignment->replenishnote) : '-',
                 'admin' => ($consumable_replenish_assignment->admin) ? $consumable_replenish_assignment->admin->present()->nameUrl() : '',
             ];
         }

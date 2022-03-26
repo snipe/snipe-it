@@ -73,7 +73,8 @@ class ConsumableReplenishController extends Controller
             'user_id' => $admin_user->id,
             'initial_qty' => $consumable->qty,            
             'total_replenish' => e($request->input('totalnum')),
-            'replenishnote' => e($request->input('replenishnote'))
+            'replenishnote' => e($request->input('replenishnote')),
+            'order_number'  => e($request->input('order_number'))
         ]);
 
         $addedquantity = $consumable->qty + e($request->input('totalnum'));
