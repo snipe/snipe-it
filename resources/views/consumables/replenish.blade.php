@@ -12,7 +12,7 @@
 <div class="row">
   <div class="col-md-9">
 
-    <form class="form-horizontal" method="post" action="" autocomplete="off">
+    <form class="form-horizontal" method="post" action="" autocomplete="off" enctype="multipart/form-data">
       <!-- CSRF Token -->
       <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
@@ -78,7 +78,17 @@
               </div>
             @endif
 
-          <!-- order number -->         
+<!--             
+            @can('update', \App\Models\Asset::class)
+                        <li class="pull-right">
+                            <a href="#" data-toggle="modal" data-target="#uploadFileModal">
+                                <i class="fas fa-paperclip" aria-hidden="true"></i>
+                                {{ trans('button.upload') }}
+                            </a>
+                        </li>
+                    @endcan -->
+          <!-- order number -->        
+           
           <div class="form-group {{ $errors->has('order_number') ? ' has-error' : '' }}">
               <label for="order_number" class="col-md-3 control-label">{{ trans('general.order_number') }}
                 <i class='icon-asterisk'></i></label>
@@ -91,6 +101,21 @@
                              
               </div>
             </div>  
+          <!-- document archive -->         
+          <div class="form-group {{ $errors->has('order_number') ? ' has-error' : '' }}">
+              <label for="document_archive" class="col-md-3 control-label">{{ trans('general.document_archive') }}
+                <i class='icon-asterisk'></i></label>
+              <div class="col-md-5" >
+              Select file : <input type='file' name='file' id='file' class='form-control' ><br>
+              <input type="submit" value="Upload" class="btn btn-primary">
+               <!-- <input type='button' class='btn btn-info' value='Upload' id='btn_upload'> -->
+                    <div style="float:right;" class="col-ld-1">
+                    {!! $errors->first('order_number', '<span class="alert-msg" aria-hidden="true" width=100% position=absolute><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}    
+                    </div>
+                    <!-- </input>                -->
+                             
+              </div>
+            </div>    
           <!-- Note -->
           <div class="form-group {{ $errors->has('replenishnote') ? 'error' : '' }}">
             <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
