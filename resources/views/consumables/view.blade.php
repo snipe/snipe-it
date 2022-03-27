@@ -595,6 +595,8 @@
                     </div>
                   </div><!-- /.box-header -->
                   @endif
+
+                  
       
                   <div class="box-body">
                     <div class="row">          
@@ -673,6 +675,7 @@
                         <th data-searchable="false" data-sortable="false" data-field="order_number">{{ trans('general.order_number') }}</th>   
                         <th data-searchable="false" data-sortable="false" data-field="replenishnote">{{ trans('admin/consumables/general.replenishnote') }}</th>                    
                         <th data-searchable="false" data-sortable="false" data-field="admin">{{ trans('general.admin') }}</th>
+                        <th data-searchable="false" data-sortable="false" data-field="file">{{ trans('general.documents') }}</th>
                       </tr>
                     </thead>
                   </table>

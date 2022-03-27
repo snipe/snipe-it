@@ -45,7 +45,10 @@ Route::group(['prefix' => 'consumables', 'middleware' => ['auth']], function () 
         [Consumables\ConsumableReplenishController::class, 'store']
     )->name('replenish/consumable');
 
-
+    Route::get(
+        '{consumablesID}/showfile/{file}',
+        [Consumables\ConsumableReplenishController::class, 'show']
+    )->name('replenish/showdocument');
 });
     
 Route::resource('consumables', Consumables\ConsumablesController::class, [

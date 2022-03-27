@@ -292,7 +292,7 @@ class Consumable extends SnipeModel
      */
     public function replenishusers()
     {
-        return $this->belongsToMany(\App\Models\User::class, 'consumables_stock', 'consumable_id', 'total_replenish')->withPivot('user_id')->withTrashed()->withTimestamps();
+        return $this->belongsToMany(\App\Models\User::class, 'consumables_stock', 'consumable_id', 'total_replenish')->withPivot('id', 'user_id','order_number','file')->withTrashed()->withTimestamps();
     }
 
     /**
