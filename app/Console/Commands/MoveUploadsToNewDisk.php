@@ -47,18 +47,18 @@ class MoveUploadsToNewDisk extends Command
         }
         $delete_local = $this->argument('delete_local');
 
-        $public_uploads['accessories'] = glob('public/accessories'."/*.*");
-        $public_uploads['assets'] = glob('public/assets'."/*.*");
-        $public_uploads['avatars'] = glob('public/avatars'."/*.*");
-        $public_uploads['categories'] = glob('public/categories'."/*.*");
-        $public_uploads['companies'] = glob('public/companies'."/*.*");
-        $public_uploads['components'] = glob('public/components'."/*.*");
-        $public_uploads['consumables'] = glob('public/consumables'."/*.*");
-        $public_uploads['departments'] = glob('public/departments'."/*.*");
-        $public_uploads['locations'] = glob('public/locations'."/*.*");
-        $public_uploads['manufacturers'] = glob('public/manufacturers'."/*.*");
-        $public_uploads['suppliers'] = glob('public/suppliers'."/*.*");
-        $public_uploads['assetmodels'] = glob('public/models'."/*.*");
+        $public_uploads['accessories'] = glob('public/uploads/accessories'."/*.*");
+        $public_uploads['assets'] = glob('public/uploads/assets'."/*.*");
+        $public_uploads['avatars'] = glob('public/uploads/avatars'."/*.*");
+        $public_uploads['categories'] = glob('public/uploads/categories'."/*.*");
+        $public_uploads['companies'] = glob('public/uploads/companies'."/*.*");
+        $public_uploads['components'] = glob('public/uploads/components'."/*.*");
+        $public_uploads['consumables'] = glob('public/uploads/consumables'."/*.*");
+        $public_uploads['departments'] = glob('public/uploads/departments'."/*.*");
+        $public_uploads['locations'] = glob('public/uploads/locations'."/*.*");
+        $public_uploads['manufacturers'] = glob('public/uploads/manufacturers'."/*.*");
+        $public_uploads['suppliers'] = glob('public/uploads/suppliers'."/*.*");
+        $public_uploads['assetmodels'] = glob('public/uploads/models'."/*.*");
 
 
         // iterate files
@@ -72,7 +72,7 @@ class MoveUploadsToNewDisk extends Command
                 $filename = basename($public_upload[$i]);
 
                 try  {
-                    Storage::disk('public')->put('uploads/'.public_type.'/'.$filename, file_get_contents($public_upload[$i]));
+                    Storage::disk('public')->put('uploads/'.$public_type.'/'.$filename, file_get_contents($public_upload[$i]));
                     $new_url = Storage::disk('public')->url('uploads/'.$public_type.'/'.$filename, $filename);
                     $this->info($type_count.'. PUBLIC: '.$filename.' was copied to '.$new_url);
                 } catch (\Exception $e) {
@@ -103,7 +103,7 @@ class MoveUploadsToNewDisk extends Command
         $private_uploads['imports'] = glob('storage/private_uploads/imports'."/*.*");
         $private_uploads['licenses'] = glob('storage/private_uploads/licenses'."/*.*");
         $private_uploads['users'] = glob('storage/private_uploads/users'."/*.*");
-        $private_uploads['backups'] = glob('storage/private_uploads/users'."/*.*");
+        $private_uploads['backups'] = glob('storage/private_uploads/backups'."/*.*");
 
 
         foreach($private_uploads as $private_type => $private_upload)
