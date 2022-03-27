@@ -31,7 +31,8 @@
         }
 
         $('.snipe-table').bootstrapTable('destroy').each(function () {
-            export_options = JSON.parse($(this).attr('data-export-options'));
+            data_export_options = $(this).attr('data-export-options');
+            export_options = data_export_options? JSON.parse(data_export_options): {};
             export_options['htmlContent'] = true; //always enforce this on the given data-export-options (to prevent XSS)
             
             $(this).bootstrapTable({
