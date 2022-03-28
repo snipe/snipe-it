@@ -29,7 +29,7 @@
 
     <!-- Custom Tabs -->
     <div class="nav-tabs-custom">
-      
+
       <ul class="nav nav-tabs hidden-print">
 
         <li class="active">
@@ -72,6 +72,10 @@
 
     
         @can('update', $license)
+          <div class=" btn-group pull-right">
+
+          </div>
+
           <li class="dropdown pull-right">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
               <i class="fas fa-cog" aria-hidden="true"></i> {{ trans('button.actions') }}
@@ -88,6 +92,10 @@
           <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal">
               <i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}</a>
           </li>
+          <li class="pull-right"><a href="#" class="alert alert-danger" data-toggle="modal" data-target="#checkInAllLicenses">
+              <i class="fas fa-exchange"></i>Checkin All Seats</a>
+          </li>
+
         @endcan
       </ul>
 
@@ -560,6 +568,26 @@
     </div> <!-- nav-tabs-custom -->
   </div>  <!-- /.col -->
 </div> <!-- /.row -->
+<div class="modal fade" id="checkInAllLicenses" tabindex="-1" role="dialog" aria-labelledby="checkInAllLicenses" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="checkInAllLicenseSeats">Check-in All Seats for this License</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{\App\Http\Controllers\Licenses\LicenseCheckinController::checkinCount($license->id)}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger"><a href={{route('licenses/checkin-all', [$license->id])}} style="color:white;">Checkin All Seats</a></button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 @can('update', \App\Models\License::class)
   @include ('modals.upload-file', ['item_type' => 'license', 'item_id' => $license->id])

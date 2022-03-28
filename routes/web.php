@@ -19,6 +19,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\StatuslabelsController;
 use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\ViewAssetsController;
+use App\Http\Controllers\Licenses\LicenseCheckinController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -253,6 +254,11 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
         'accept-asset/{logID}',
         [ViewAssetsController::class, 'getAcceptAsset']
     )->name('account/accept-assets');
+    // Bulk License Checkin
+    Route::get(
+        'api/v1/licenses/checkin-all/{license_id}',
+        [LicenseCheckinController::class, 'checkinLicense']
+    )->name('licenses/checkin-all');
 
     // Profile
     Route::get(
