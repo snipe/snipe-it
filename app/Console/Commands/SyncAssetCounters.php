@@ -45,14 +45,14 @@ class SyncAssetCounters extends Command
         if ($assets) {
             if ($assets->count() > 0) {
                 $bar = $this->output->createProgressBar($assets->count());
-                
+
                 foreach ($assets as $asset) {
                     $asset->checkin_counter = (int) $asset->checkins_count;
                     $asset->checkout_counter = (int) $asset->checkouts_count;
                     $asset->requests_counter = (int) $asset->user_requests_count;
                     $asset->unsetEventDispatcher();
                     $asset->save();
-                    $output['info'][] = 'Asset: ' . $asset->id . ' has ' . $asset->checkin_counter . ' checkins, ' . $asset->checkout_counter . ' checkouts, and ' . $asset->requests_counter . ' requests';
+                    $output['info'][] = 'Asset: '.$asset->id.' has '.$asset->checkin_counter.' checkins, '.$asset->checkout_counter.' checkouts, and '.$asset->requests_counter.' requests';
                     $bar->advance();
                 }
                 $bar->finish();
@@ -62,15 +62,10 @@ class SyncAssetCounters extends Command
                 }
 
                 $time_elapsed_secs = microtime(true) - $start;
-                $this->info('Sync executed in ' . $time_elapsed_secs . ' seconds');
-
+                $this->info('Sync executed in '.$time_elapsed_secs.' seconds');
             } else {
                 $this->info('No assets to sync');
             }
-
         }
-
-
-
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,24 +13,22 @@ return array(
     |
     */
 
-    "more_info_title" => "Több információ",
+    'more_info_title' => 'Több információ',
 
-    "audit_help" => "Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to.",
+    'audit_help' => 'Ha bejelöli ezt a négyzetet, az eszközrekordot úgy szerkeszti, hogy az tükrözze az új helyet. A jelölőnégyzet kipipálásának kihagyásával a hely egyszerűen felkerül az ellenőrzési naplóba.<br><br>Vegye figyelembe, hogy ha ez az eszköz ki van jelölve, akkor az nem változtatja meg a személy, az eszköz vagy a helyszín helyét, ahová ki van jelölve.',
 
-    'assets' => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'assets' => 'Az eszközök sorozatszám vagy eszközcímke alapján nyomon követhető tételek.  Ezek általában nagyobb értékű tételek, ahol egy adott tétel azonosítása fontos.',
 
-    'categories' => 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'categories' => 'A kategóriák segítenek a tételek rendszerezésében. Néhány példa a következő kategóriákra: &quot;asztali számítógépek&quot;, &quot;laptopok&quot;, &quot;mobiltelefonok&quot;, &quot;táblagépek&quot; és így tovább, de a kategóriákat bármilyen módon használhatja, aminek értelme van az Ön számára.',
 
-    'accessories' => 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
+    'accessories' => 'A tartozékok mindazok, amelyeket a felhasználóknak ad ki, de amelyek nem rendelkeznek sorozatszámmal (vagy nem törődik azok egyedi nyomon követésével). Például számítógépes egerek vagy billentyűzetek.',
 
-    'companies'     => 'Companies can be used as a simple identifier field, or can be used to limit visibility of assets, users, etc if full company support is enabled in your Admin settings.',
+    'companies'     => 'A cégek használhatók egyszerű azonosító mezőként, vagy az eszközök, felhasználók stb. láthatóságának korlátozására, ha a teljes cégtámogatás engedélyezve van a rendszergazdai beállításokban.',
 
-    'components'    => 'Components are items that are part of an asset, for example HDD, RAM, etc.',
+    'components'    => 'Az alkatrészek olyan elemek, amelyek egy eszköz részét képezik, például HDD, RAM stb.',
 
-    'consumables'   => 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
+    'consumables'   => 'A fogyasztási cikkek minden olyan megvásárolt dolog, amely idővel elhasználódik. Például nyomtatótinta vagy fénymásolópapír.',
 
-    'depreciations' => 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
+    'depreciations' => 'Az eszközök értékcsökkenését beállíthatja úgy, hogy az eszközök értékcsökkenése lineáris értékcsökkenés alapján történjen.',
 
-
-
-);
+];

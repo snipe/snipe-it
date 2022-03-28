@@ -1,11 +1,12 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Bidang Kustom',
+    'manage'                    => 'Manage',
     'field'		                => 'Bidang',
     'about_fieldsets_title'		=> 'Tentang Fieldsets',
-    'about_fieldsets_text'		=> 'Fieldsets memungkinkan Anda membuat kelompok bidang khusus yang sering digunakan kembali untuk jenis model aset tertentu.',
-    'custom_format'             => 'Format regex khusus...',
+    'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used for specific asset model types.',
+    'custom_format'             => 'Custom Regex format...',
     'encrypt_field'      	        => 'Enkripsikan nilai bidang ini di database',
     'encrypt_field_help'      => 'PERINGATAN: Mengenkripsi sebuah field membuatnya tidak bisa ditelusuri.
  .',
@@ -27,7 +28,19 @@ return array(
     'used_by_models'   		    => 'Digunakan oleh Model',
     'order'   		            => 'Pesanan',
     'create_fieldset'         => 'Atur bidang baru',
+    'create_fieldset_title' => 'Create a new fieldset',
     'create_field'            => 'Kostum field baru',
+    'create_field_title' => 'Create a new custom field',
     'value_encrypted'      	        => 'Nilai field ini dienkripsi dalam database. Hanya pengguna admin yang bisa melihat nilai dekripsi',
     'show_in_email'     => 'Sertakan nilai bidang ini dalam semua email keluar yang dikirim ke pengguna? Bidang yang terenkripsi tidak dapat disertakan dalam email.',
-);
+    'help_text' => 'Help Text',
+    'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
+    'about_custom_fields_title' => 'About Custom Fields',
+    'about_custom_fields_text' => 'Custom fields allow you to add arbitrary attributes to assets.',
+    'add_field_to_fieldset' => 'Add Field to Fieldset',
+    'make_optional' => 'Required - click to make optional',
+    'make_required' => 'Optional - click to make required',
+    'reorder' => 'Reorder',
+    'db_field' => 'DB Field',
+    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.'
+];

@@ -1,9 +1,8 @@
 <?php
 
-
-return array(
-    'activated_help_text' => 'This user can login',
-    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
+return [
+    'activated_help_text' => 'Ta uporabnik se lahko prijavi',
+    'activated_disabled_help_text' => 'Ne moreš urejati stanja aktivacije lastnega računa.',
     'assets_user'       => 'Sredstva dodeljena osebi: ime',
     'bulk_update_warn'	=> 'Uredili boste lastnosti :user_count uporabnikov. Upoštevajte, da s tem obrazcem ne morete spremeniti lastnosti svojega uporabniškega računa, lastnosti lahko spremenite samo posamično.',
     'bulk_update_help'	=> 'Ta obrazec omogoča, da posodobite več uporabnikov hkrati. Izpolnite le polja, ki jih morate spremeniti. Vsa polja, ki ostanejo prazna, ostanejo nespremenjena.',
@@ -13,16 +12,26 @@ return array(
     'edit'              => 'Uredi uporabnika',
     'filetype_info'     => 'Dovoljene oblike datotek so png, gif, jpg, jpeg, doc, docx, pdf, txt, zip in rar.',
     'history_user'      => 'Zgodovina za :name',
-	'info'				=> 'Informacije',
+    'info'				=> 'Informacije',
     'restore_user'		=> 'Kliknite tukaj, da jih obnovite.',
     'last_login'        => 'Zadnja prijava',
     'ldap_config_text'  => 'Nastavitve konfiguracije LDAP-a lahko najdete v zavihku Admin> Nastavitve. Izbrana lokacija bo nastavljena za vse uvožene uporabnike.',
     'print_assigned'    => 'Natisni vse dodeljene',
     'software_user'     => 'Programska oprema izdana osebi :name',
-    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
+    'send_email_help'   => 'Obvezno je potrebno navesti e-poštni račun za tega uporabnika kamor bo prejel poverilnice. Pošiljanje poverilnic je mogoče le ob ustvarjanju uporabnika. Gesla so shranjena eno-smerno šifrirano in jih je nemogoče pridobiti po shranjenju.',
     'view_user'         => 'Ogled uporabnika :name',
     'usercsv'           => 'Datoteko CSV',
     'two_factor_admin_optin_help' => 'Vaše trenutne nastavitve skrbnika omogočajo selektivno uveljavljanje dvotaktne pristnosti.  ',
     'two_factor_enrolled' => 'Vgrajena naprava 2FA ',
     'two_factor_active'   => '2FA aktivna ',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

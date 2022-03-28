@@ -25,7 +25,6 @@ class CheckoutConsumableNotification extends Notification
      */
     public function __construct(Consumable $consumable, $checkedOutTo, User $checkedOutBy, $acceptance, $note)
     {
-
         $this->item = $consumable;
         $this->admin = $checkedOutBy;
         $this->note = $note;
@@ -33,7 +32,6 @@ class CheckoutConsumableNotification extends Notification
         $this->acceptance = $acceptance;
 
         $this->settings = Setting::getSettings();
-
     }
 
     /**
@@ -45,7 +43,7 @@ class CheckoutConsumableNotification extends Notification
     {
         $notifyBy = [];
 
-        if (Setting::getSettings()->slack_endpoint!='') {
+        if (Setting::getSettings()->slack_endpoint != '') {
             $notifyBy[] = 'slack';
         }
 
@@ -72,12 +70,9 @@ class CheckoutConsumableNotification extends Notification
             /**
              * Send an email if an email should be sent at checkin/checkout
              */
-
             if ((method_exists($this->item, 'checkin_email')) && ($this->item->checkin_email())) {
-
                 $notifyBy[1] = 'mail';
             }
-
         }
 
         return $notifyBy;
@@ -89,7 +84,7 @@ class CheckoutConsumableNotification extends Notification
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
-        $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot' ;
+        $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot';
 
         $fields = [
             'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
@@ -105,6 +100,7 @@ class CheckoutConsumableNotification extends Notification
                     ->content($note);
             });
     }
+
     /**
      * Get the mail representation of the notification.
      *
@@ -112,9 +108,8 @@ class CheckoutConsumableNotification extends Notification
      */
     public function toMail()
     {
-
         \Log::debug($this->item->getImageUrl());
-        $eula =  $this->item->getEula();
+        $eula = $this->item->getEula();
         $req_accept = $this->item->requireAcceptance();
 
         $accept_url = is_null($this->acceptance) ? null : route('account.accept.item', $this->acceptance);
@@ -130,7 +125,5 @@ class CheckoutConsumableNotification extends Notification
                 'accept_url'    => $accept_url,
             ])
             ->subject(trans('mail.Confirm_consumable_delivery'));
-
     }
-
 }

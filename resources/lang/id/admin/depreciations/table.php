@@ -1,10 +1,11 @@
 <?php
 
-return array(
+return [
 
     'id'      => 'ID',
     'months'   => 'Bulan',
     'term'   => 'Syarat',
     'title'      => 'Nama ',
+    'depreciation_min' => 'Floor Value',
 
-);
+];

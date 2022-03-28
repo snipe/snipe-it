@@ -6,7 +6,7 @@ use App\Models\AssetModel;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
 
-class ApiAssetModelsCest
+class ApiModelsCest
 {
     protected $user;
     protected $timeFormat;
@@ -21,7 +21,6 @@ class ApiAssetModelsCest
     /** @test */
     public function indexAssetModels(ApiTester $I)
     {
-
         $I->wantTo('Get a list of assetmodels');
 
         // call
@@ -40,8 +39,8 @@ class ApiAssetModelsCest
     {
         $I->wantTo('Create a new assetmodel');
 
-        $temp_assetmodel = factory(\App\Models\AssetModel::class)->states('mbp-13-model')->make([
-            'name' => "Test AssetModel Tag",
+        $temp_assetmodel = \App\Models\AssetModel::factory()->mbp13Model()->make([
+            'name' => 'Test AssetModel Tag',
         ]);
 
         // setup
@@ -64,19 +63,20 @@ class ApiAssetModelsCest
 
     // Put is routed to the same method in the controller
     // DO we actually need to test both?
+
     /** @test */
     public function updateAssetModelWithPatch(ApiTester $I, $scenario)
     {
         $I->wantTo('Update an assetmodel with PATCH');
 
         // create
-        $assetmodel = factory(\App\Models\AssetModel::class)->states('mbp-13-model')->create([
+        $assetmodel = \App\Models\AssetModel::factory()->mbp13Model()->create([
             'name' => 'Original AssetModel Name',
         ]);
         $I->assertInstanceOf(\App\Models\AssetModel::class, $assetmodel);
 
-        $temp_assetmodel = factory(\App\Models\AssetModel::class)->states('polycomcx-model')->make([
-            'name' => "updated AssetModel name",
+        $temp_assetmodel = \App\Models\AssetModel::factory()->polycomcxModel()->make([
+            'name' => 'updated AssetModel name',
             'fieldset_id' => 2,
         ]);
 
@@ -95,7 +95,7 @@ class ApiAssetModelsCest
         $I->assertNotEquals($assetmodel->name, $data['name']);
 
         // update
-        $I->sendPATCH('/models/' . $assetmodel->id, $data);
+        $I->sendPATCH('/models/'.$assetmodel->id, $data);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -111,7 +111,7 @@ class ApiAssetModelsCest
         $temp_assetmodel->updated_at = Carbon::parse($response->payload->updated_at);
         $temp_assetmodel->id = $assetmodel->id;
         // verify
-        $I->sendGET('/models/' . $assetmodel->id);
+        $I->sendGET('/models/'.$assetmodel->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson((new AssetModelsTransformer)->transformAssetModel($temp_assetmodel));
@@ -123,13 +123,13 @@ class ApiAssetModelsCest
         $I->wantTo('Delete an assetmodel');
 
         // create
-        $assetmodel = factory(\App\Models\AssetModel::class)->states('mbp-13-model')->create([
-            'name' => "Soon to be deleted"
+        $assetmodel = \App\Models\AssetModel::factory()->mbp13Model()->create([
+            'name' => 'Soon to be deleted',
         ]);
         $I->assertInstanceOf(\App\Models\AssetModel::class, $assetmodel);
 
         // delete
-        $I->sendDELETE('/models/' . $assetmodel->id);
+        $I->sendDELETE('/models/'.$assetmodel->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -138,7 +138,7 @@ class ApiAssetModelsCest
         $I->assertEquals(trans('admin/models/message.delete.success'), $response->messages);
 
         // verify, expect a 200
-        $I->sendGET('/models/' . $assetmodel->id);
+        $I->sendGET('/models/'.$assetmodel->id);
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
     }

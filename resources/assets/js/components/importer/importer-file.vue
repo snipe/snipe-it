@@ -130,7 +130,6 @@
                         {id: 'location', text: 'Location' },
                         {id: 'maintained', text: 'Maintained' },
                         {id: 'manufacturer', text: 'Manufacturer' },
-                        {id: 'notes', text: 'Notes' },
                         {id: 'order_number', text: 'Order Number' },
                         {id: 'purchase_cost', text: 'Purchase Cost' },
                         {id: 'purchase_date', text: 'Purchase Date' },
@@ -143,28 +142,39 @@
                     ],
                     accessories:[
                         {id: 'model_number', text: 'Model Number'},
+                        {id: 'notes', text: 'Notes' },
                     ],
                     assets: [
                         {id: 'asset_tag', text: 'Asset Tag' },
                         {id: 'asset_model', text: 'Model Name' },
+                        {id: 'asset_notes', text: 'Asset Notes' },
+                        {id: 'model_notes', text: 'Model Notes' },
                         {id: 'checkout_class', text: 'Checkout Type' },
                         {id: 'checkout_location', text: 'Checkout Location' },
                         {id: 'image', text: 'Image Filename' },
                         {id: 'model_number', text: 'Model Number' },
+                        {id: 'asset_notes', text: 'Asset Notes' },
+                        {id: 'model_notes', text: 'Model Notes' },
                         {id: 'full_name', text: 'Full Name' },
                         {id: 'status', text: 'Status' },
                         {id: 'warranty_months', text: 'Warranty Months' },
+                        {id: 'last_audit_date', text: 'Last Audit Date' },
+                        {id: 'next_audit_date', text: 'Audit Date' },
                     ],
                     consumables: [
                         {id: 'item_no', text: "Item Number"},
                         {id: 'model_number', text: "Model Number"},
+                        {id: 'min_amt', text: "Minimum Quantity"},
+                        {id: 'notes', text: 'Notes' },
                     ],
                     licenses: [
                         {id: 'asset_tag', text: 'Assigned To Asset'},
                         {id: 'expiration_date', text: 'Expiration Date' },
                         {id: 'full_name', text: 'Full Name' },
+                        {id: 'notes', text: 'Notes' },
                         {id: 'license_email', text: 'Licensed To Email' },
                         {id: 'license_name', text: 'Licensed To Name' },
+                        {id: 'notes', text: 'Notes' },
                         {id: 'purchase_order', text: 'Purchase Order' },
                         {id: 'reassignable', text: 'Reassignable' },
                         {id: 'seats', text: 'Seats' },
@@ -176,13 +186,16 @@
                         {id: 'last_name', text: 'Last Name' },
                         {id: 'phone_number', text: 'Phone Number' },
                         {id: 'manager_first_name', text: 'Manager First Name' },
+                        {id: 'notes', text: 'Notes' },
                         {id: 'manager_last_name', text: 'Manager Last Name' },
-                        {id: 'department', text: 'Department' },
+                        {id: 'notes', text: 'Notes' },
                         {id: 'activated', text: 'Activated' },
                         {id: 'address', text: 'Address' },
                         {id: 'city', text: 'City' },
                         {id: 'state', text: 'State' },
+                        {id: 'zip', text: 'ZIP' },
                         {id: 'country', text: 'Country' },
+                        {id: 'zip', text: 'ZIP' },
 
                     ],
                     customFields: this.customFields,
@@ -216,6 +229,7 @@
                             .concat(this.columnOptions.accessories)
                             .sort(sorter);
                     case 'consumable':
+                    	console.log('Returned consumable');
                         return this.columnOptions.general
                             .concat(this.columnOptions.consumables)
                             .sort(sorter);

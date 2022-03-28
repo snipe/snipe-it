@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'O skupinah',
     'about_groups'                  => 'Skupine se uporabljajo za določanje uporabniških pravic.',
     'group_management' 	 	=> 'Upravljanje skupine',
@@ -10,5 +10,7 @@ return array(
     'group_admin' 	 		=> 'Skrbnik skupine',
     'allow' 	 			=> 'Dovoli',
     'deny' 	 				=> 'Zavrni',
-
-);
+    'permission'            => 'Permission',
+    'grant'                 => 'Grant',
+    'no_permissions'        => 'This group has no permissions.'
+];

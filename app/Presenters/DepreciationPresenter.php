@@ -4,7 +4,6 @@ namespace App\Presenters;
 
 /**
  * Class DepreciationPresenter
- * @package App\Presenters
  */
 class DepreciationPresenter extends Presenter
 {
@@ -16,41 +15,47 @@ class DepreciationPresenter extends Presenter
     {
         $layout = [
             [
-                "field" => "id",
-                "searchable" => false,
-                "sortable" => true,
-                "switchable" => true,
-                "title" => trans('general.id'),
-                "visible" => false
+                'field' => 'id',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.id'),
+                'visible' => false,
             ], [
-                "field" => "name",
-                "searchable" => true,
-                "sortable" => true,
-                "title" => trans('general.name'),
-                "visible" => true,
-                "formatter" => 'depreciationsLinkFormatter',
+                'field' => 'name',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => trans('general.name'),
+                'visible' => true,
+                'formatter' => 'depreciationsLinkFormatter',
             ],
 
             [
-                "field" => "months",
-                "searchable" => true,
-                "sortable" => true,
-                "title" =>  trans('admin/depreciations/table.term'),
-                "visible" => true,
+                'field' => 'months',
+                'searchable' => true,
+                'sortable' => true,
+                'title' =>  trans('admin/depreciations/table.term'),
+                'visible' => true,
             ],
 
             [
-                "field" => "actions",
+                "field" => 'depreciation_min',
                 "searchable" => false,
-                "sortable" => false,
-                "switchable" => false,
-                "title" => trans('table.actions'),
+                "sortable" => true,
+                "title" => trans('admin/depreciations/table.depreciation_min'),
                 "visible" => true,
-                "formatter" => "depreciationsActionsFormatter",
-            ]
+            ],
+            [
+                'field' => 'actions',
+                'searchable' => false,
+                'sortable' => false,
+                'switchable' => false,
+                'title' => trans('table.actions'),
+                'visible' => true,
+                'formatter' => 'depreciationsActionsFormatter',
+            ],
         ];
 
         return json_encode($layout);
     }
-
 }

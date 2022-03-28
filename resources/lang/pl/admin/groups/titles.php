@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'O Grupach użytkowników',
     'about_groups'                  => 'Grupy są używane do generalizowania uprawnień użytkowników.',
     'group_management' 	 	=> 'Zarządzanie grupą',
@@ -10,5 +10,7 @@ return array(
     'group_admin' 	 		=> 'Admin grupy',
     'allow' 	 			=> 'Zezwól',
     'deny' 	 				=> 'Odmów',
-
-);
+    'permission'            => 'Uprawnienie',
+    'grant'                 => 'Przyznaj',
+    'no_permissions'        => 'Ta grupa nie ma żadnych uprawnień.'
+];

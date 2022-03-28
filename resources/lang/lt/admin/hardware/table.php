@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Įrangos kortelė',
     'asset_model'       => 'Modelis',
-    'book_value'  	=> 'Vertė',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'Priimta/Išduota',
     'checkout_date' => 'Išdavimo data',
     'checkoutto' 	=> 'Išduota',
+    'current_value' => 'Current Value',
     'diff' 			=> 'Skirtumas',
     'dl_csv' 		=> 'Atsisiųti CSV fromatu',
     'eol' 			=> 'Nurašymo data',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> 'Serijinis numeris',
     'status'   		=> 'Būklė',
     'title'      	=> 'Įranga ',
-    'image'		=> 'Įrenginio nuotrauka',
+    'image'		    => 'Įrenginio nuotrauka',
     'days_without_acceptance' => 'Dienų skaičius be priėmimo',
-    'monthly_depreciation' => 'Monthly Depreciation'
-
-);
+    'monthly_depreciation' => 'Monthly Depreciation',
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

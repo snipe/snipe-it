@@ -1,0 +1,129 @@
+name: Bug Report
+description: Create a report to help us improve
+body:
+  - type: checkboxes
+    attributes:
+      label: Debug mode
+      description: Please confirm you have done the following before posting your bug report
+      options:
+        - label: I have enabled debug mode
+          required: true
+        - label: I have read [checked the Common Issues page](https://snipe-it.readme.io/docs/common-issues)
+          required: true
+  - type: textarea
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Reproduction steps
+      description: Steps to reproduce the behavior.
+      value: |
+        1.
+        2.
+        3.
+        ...
+    validations:
+        required: true
+  - type: textarea
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Screenshots
+      description: 'If applicable, add screenshots to help explain your problem.'
+  - type: markdown
+    attributes:
+      value: "### Server"
+  - type: input
+    attributes:
+      label: Snipe-IT Version
+    validations:
+      required: true
+  - type: input
+    id: server_operatingSystem
+    attributes:
+      label: Operating System
+      description: 'e.g. Ubuntu, Windows'
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Web Server
+      description: 'e.g. Apache, IIS'
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: PHP Version
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: "### Desktop"
+  - type: input
+    id: desktop_operatingSystem
+    attributes:
+      label: Operating System
+      description: 'e.g. Ubuntu, Windows'
+  - type: input
+    id: desktop_browser
+    attributes:
+      label: Browser
+      description: 'e.g. Google Chrome, Safari'
+  - type: input
+    id: desktop_version
+    attributes:
+      label: Version
+      description: 'e.g. 93'
+  - type: markdown
+    attributes:
+      value: "### Mobile"
+  - type: input
+    attributes:
+      label: Device
+      description: 'e.g. iPhone 6, Pixel 4a'
+  - type: input
+    id: mobile_operatingSystem
+    attributes:
+      label: Operating System
+      description: 'e.g. iOS 8.1, Android 9'
+  - type: input
+    id: mobile_browser
+    attributes:
+      label: Browser
+      description: 'e.g. Google Chrome, Safari'
+  - type: input
+    id: mobile_version
+    attributes:
+      label: Version
+      description: 'e.g. 93'
+  - type: textarea
+    attributes:
+      label: Error messages
+      description: |
+        WITH DEBUG TURNED ON, if you're getting an error in your browser, include that error
+        If a stacktrace is provided in the error, include that too.
+        Any errors that appear in your browser's error console.
+        Confirm whether the error is reproducible on the demo: https://snipeitapp.com/demo.
+        Include any additional information you can find in `storage/logs` and your webserver's logs.
+        Include the output from `php -m` (this should display what modules you have enabled.)
+      render: shell
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: |
+        Is this a fresh install or an upgrade?
+        What OS and web server you're running Snipe-IT on
+        What method you used to install Snipe-IT (install.sh, manual installation, docker, etc)
+        Include what you've done so far in the installation, and if you got any error messages along the way.
+        Indicate whether or not you've manually edited any data directly in the database
+        Add any other context about the problem here.
+  - type: markdown
+    attributes:
+      value: Please do not post an issue without answering the related questions above. If you have opened a different issue and already answered these questions, answer them again, once for every ticket. It will be next to impossible for us to help you.

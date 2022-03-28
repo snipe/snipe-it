@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_kits_title'                  => 'Ön Tanımlı Kitler Hakkında',
     'about_kits_text'                   => 'Ön Tanımlı Kit (sarf malzeme, lisans vb).',
     'checkout'                          => 'Çıkış Tarihi ',
@@ -13,5 +13,38 @@ return array(
     'none_licenses'                     => 'Çıkış yapılabilecek sayıda :license lisansı bulunmamaktadır. :qty adet gereklidir. ',
     'none_consumables'                  => 'Yeterli sayıda :consumable olmadığından çıkış yapılamıyor. :qty adet gereklidir. ',
     'none_accessory'                    => 'Çıkış yapılabilecek sayıda :accessory bulunmamaktadır. :qty adet gereklidir. ',
-
-);
+    'append_accessory'                  => 'Append Accessory',
+    'update_appended_accessory'         => 'Update appended Accessory',
+    'append_consumable'                 => 'Append Consumable',
+    'update_appended_consumable'        => 'Eklenmiş sarf malzemeyi güncelle',
+    'append_license'                    => 'Lisans ekle',
+    'update_appended_license'           => 'Eklenmiş lisansı güncelle',
+    'append_model'                      => 'Model ekle',
+    'update_appended_model'             => 'Update appended model',
+    'license_error'                     => 'License already attached to kit',
+    'license_added_success'             => 'Lisans sorunsuz eklendi',
+    'license_updated'                   => 'License was successfully updated',
+    'license_none'                      => 'Lisans mevcut değil',
+    'license_detached'                  => 'License was successfully detached',
+    'consumable_added_success'          => 'Consumable added successfully',
+    'consumable_updated'                => 'Consumable was successfully updated',
+    'consumable_error'                  => 'Consumable already attached to kit',
+    'consumable_deleted'                => 'Silme işlemi sorunsuz tamamlandı',
+    'consumable_none'                   => 'Sarf malzeme mevcut değil',
+    'consumable_detached'               => 'Consumable was successfully detached',
+    'accessory_added_success'           => 'Accessory added successfully',
+    'accessory_updated'                 => 'Accessory was successfully updated',
+    'accessory_detached'                => 'Accessory was successfully detached',
+    'accessory_error'                   => 'Accessory already attached to kit',
+    'accessory_deleted'                 => 'Delete was successful',
+    'accessory_none'                    => 'Accessory does not exist',
+    'checkout_success'                  => 'Checkout was successful',
+    'checkout_error'                    => 'Checkout error',
+    'kit_none'                          => 'Kit does not exist',
+    'kit_created'                       => 'Kit was successfully created',
+    'kit_updated'                       => 'Kit was successfully updated',
+    'kit_not_found'                     => 'Kit not found',
+    'kit_deleted'                       => 'Kit was successfully deleted',
+    'kit_model_updated'                 => 'Model was successfully updated',
+    'kit_model_detached'                => 'Model was successfully detached',
+];

@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'Confirmar eliminación masiva de bienes',
+return [
+    'bulk_delete'		=> 'Confirmar eliminación masiva de bienes',
   'bulk_delete_help'	=> 'Revisar los bienes para eliminación masiva. Una vez eliminados, esos bienes pueden ser restaurados, pero no volverán a estar asociados con ningún usuario a los que esté asignado.',
   'bulk_delete_warn'	=> 'Está a punto de borrar :asset_count.',
-	'bulk_update'		=> 'Actualización masiva de Equipos',
-	'bulk_update_help'	=> 'Este formulario le permite actualizar múltiples Equipos simultáneamente. Solo complete los campos que quiere modificar. Todo campo en blanco permanecerá sin cambios. ',
-	'bulk_update_warn'	=> 'Esta a punto de editar las propiedades de :asset_count equipos.',
+    'bulk_update'		=> 'Actualización masiva de Equipos',
+    'bulk_update_help'	=> 'Este formulario le permite actualizar múltiples Equipos simultáneamente. Solo complete los campos que quiere modificar. Todo campo en blanco permanecerá sin cambios. ',
+    'bulk_update_warn'	=> 'Esta a punto de editar las propiedades de :asset_count equipos.',
     'checkedout_to'		=> 'Asignado a',
     'checkout_date'		=> 'Fecha de asignación',
     'checkin_date'		=> 'Fecha de devolución',
@@ -38,7 +38,12 @@ return array(
     'tag'				=> 'Etiqueta',
     'update'			=> 'Actualizar Equipo',
     'warranty'			=> 'Garantía',
-		'warranty_expires'		=> 'Vencimiento de la Garantía',
+        'warranty_expires'		=> 'Vencimiento de la Garantía',
     'years'				=> 'años',
-)
-;
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+];

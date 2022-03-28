@@ -34,11 +34,11 @@
 
                         <thead>
                             <tr>
-                                <th class="col-sm-2" data-field="username" data-visible="true" data-sortable="true">Username</th>
-                                <th class="col-sm-2" data-field="created_at" data-visible="true" data-sortable="true" data-formatter="dateDisplayFormatter">Login Attempt</th>
-                                <th class="col-sm-2" data-field="user_agent" data-visible="true" data-sortable="true">User Agent</th>
-                                <th class="col-sm-2" data-field="remote_ip" data-visible="true" data-sortable="true">IP</th>
-                                <th class="col-sm-2" data-field="successful" data-visible="true" data-formatter="trueFalseFormatter" data-sortable="true">Success</th>
+                                <th class="col-sm-2" data-field="username" data-visible="true" data-sortable="true">{{ trans('mail.username') }}</th>
+                                <th class="col-sm-2" data-field="created_at" data-visible="true" data-sortable="true" data-formatter="dateDisplayFormatter">{{ trans('admin/settings/general.login_attempt') }}</th>
+                                <th class="col-sm-2" data-field="user_agent" data-visible="true" data-sortable="true">{{ trans('admin/settings/general.login_user_agent') }}</th>
+                                <th class="col-sm-2" data-field="remote_ip" data-visible="true" data-sortable="true">{{ trans('admin/settings/general.login_ip') }}</th>
+                                <th class="col-sm-2" data-field="successful" data-visible="true" data-formatter="trueFalseFormatter" data-sortable="true">{{ trans('admin/settings/general.login_success') }}</th>
                             </tr>
                         </thead>
                     </table>

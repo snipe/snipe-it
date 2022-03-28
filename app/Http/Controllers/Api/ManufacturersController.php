@@ -23,20 +23,19 @@ class ManufacturersController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Manufacturer::class);
-        $allowed_columns = ['id','name','url','support_url','support_email','support_phone','created_at','updated_at','image', 'assets_count', 'consumables_count', 'components_count', 'licenses_count'];
+        $allowed_columns = ['id', 'name', 'url', 'support_url', 'support_email', 'support_phone', 'created_at', 'updated_at', 'image', 'assets_count', 'consumables_count', 'components_count', 'licenses_count'];
 
         $manufacturers = Manufacturer::select(
-            array('id','name','url','support_url','support_email','support_phone','created_at','updated_at','image', 'deleted_at')
+            ['id', 'name', 'url', 'support_url', 'support_email', 'support_phone', 'created_at', 'updated_at', 'image', 'deleted_at']
         )->withCount('assets as assets_count')->withCount('licenses as licenses_count')->withCount('consumables as consumables_count')->withCount('accessories as accessories_count');
 
-        if ($request->input('deleted')=='true') {
+        if ($request->input('deleted') == 'true') {
             $manufacturers->onlyTrashed();
         }
 
         if ($request->filled('search')) {
             $manufacturers = $manufacturers->TextSearch($request->input('search'));
         }
-
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.
@@ -51,9 +50,9 @@ class ManufacturersController extends Controller
 
         $total = $manufacturers->count();
         $manufacturers = $manufacturers->skip($offset)->take($limit)->get();
+
         return (new ManufacturersTransformer)->transformManufacturers($manufacturers, $total);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -89,9 +88,9 @@ class ManufacturersController extends Controller
     {
         $this->authorize('view', Manufacturer::class);
         $manufacturer = Manufacturer::withCount('assets as assets_count')->withCount('licenses as licenses_count')->withCount('consumables as consumables_count')->withCount('accessories as accessories_count')->findOrFail($id);
+
         return (new ManufacturersTransformer)->transformManufacturer($manufacturer);
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -126,7 +125,6 @@ class ManufacturersController extends Controller
      */
     public function destroy($id)
     {
-
         $this->authorize('delete', Manufacturer::class);
         $manufacturer = Manufacturer::findOrFail($id);
         $this->authorize('delete', $manufacturer);
@@ -138,10 +136,6 @@ class ManufacturersController extends Controller
 
         return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/manufacturers/message.assoc_users')));
 
-
-
-
-
     }
 
     /**
@@ -150,11 +144,11 @@ class ManufacturersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
-     *
      */
     public function selectlist(Request $request)
     {
 
+        $this->authorize('view.selectlists');
         $manufacturers = Manufacturer::select([
             'id',
             'name',
@@ -176,6 +170,5 @@ class ManufacturersController extends Controller
         }
 
         return (new SelectlistTransformer)->transformSelectlist($manufacturers);
-
     }
 }

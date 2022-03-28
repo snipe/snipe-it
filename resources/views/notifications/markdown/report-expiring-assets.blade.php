@@ -6,7 +6,7 @@
 <tr><td>&nbsp;</td><td>{{ trans('mail.name') }}</td><td>{{ trans('mail.Days') }}</td><td>{{ trans('mail.expires') }}</td><td>{{ trans('mail.supplier') }}</td><td>{{ trans('mail.assigned_to') }}</td></tr>
 @foreach ($assets as $asset)
 @php
-$expires = \App\Helpers\Helper::getFormattedDateObject($asset->present()->warrantee_expires, 'date');
+$expires = Helper::getFormattedDateObject($asset->present()->warrantee_expires, 'date');
 $diff = round(abs(strtotime($asset->present()->warrantee_expires) - strtotime(date('Y-m-d')))/86400);
 $icon = ($diff <= ($threshold / 2)) ? '🚨' : (($diff <= $threshold) ? '⚠️' : ' ');
 @endphp

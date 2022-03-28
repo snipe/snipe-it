@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class ExtendPhoneLengthsInSupplierAndElsewhere extends Migration
 {
@@ -15,8 +15,8 @@ class ExtendPhoneLengthsInSupplierAndElsewhere extends Migration
     {
         Schema::table('suppliers', function (Blueprint $table) {
             //
-            $table->string('phone',35)->nullable()->default(NULL)->change();
-            $table->string('fax',35)->nullable()->default(NULL)->change();
+            $table->string('phone', 35)->nullable()->default(null)->change();
+            $table->string('fax', 35)->nullable()->default(null)->change();
         });
     }
 
@@ -29,9 +29,8 @@ class ExtendPhoneLengthsInSupplierAndElsewhere extends Migration
     {
         Schema::table('suppliers', function (Blueprint $table) {
             //
-            $table->string('phone',20)->nullable()->default(NULL)->change();
-            $table->string('fax',20)->nullable()->default(NULL)->change();
-
+            $table->string('phone', 20)->nullable()->default(null)->change();
+            $table->string('fax', 20)->nullable()->default(null)->change();
         });
     }
 }

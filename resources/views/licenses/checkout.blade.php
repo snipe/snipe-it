@@ -59,7 +59,7 @@
                         <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
                         <div class="col-md-7">
                             <textarea class="col-md-6 form-control" id="note" name="note">{{ old('note') }}</textarea>
-                            {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                            {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                         </div>
                     </div>
                 </div>
@@ -71,26 +71,26 @@
                             <div class="callout callout-info">
 
                                 @if ($license->requireAcceptance())
-                                    <i class="fa fa-envelope"></i>
+                                    <i class="far fa-envelope"></i>
                                     {{ trans('admin/categories/general.required_acceptance') }}
                                     <br>
                                 @endif
 
                                 @if ($license->getEula())
-                                    <i class="fa fa-envelope"></i>
+                                    <i class="far fa-envelope"></i>
                                     {{ trans('admin/categories/general.required_eula') }}
                                     <br>
                                 @endif
 
                                 @if (($license->category) && ($license->category->checkin_email))
-                                    <i class="fa fa-envelope"></i>
+                                    <i class="far fa-envelope"></i>
                                     {{ trans('admin/categories/general.checkin_email_notification') }}
                                     <br>
                                 @endif
 
                                 @if ($snipeSettings->slack_endpoint!='')
-                                    <i class="fa fa-slack"></i>
-                                    A slack message will be sent
+                                    <i class="fab fa-slack"></i>
+                                    {{ trans('general.slack_msg_note') }}
                                 @endif
                             </div>
                         </div>
@@ -99,7 +99,7 @@
 
                 <div class="box-footer">
                     <a class="btn btn-link" href="{{ route('licenses.index') }}">{{ trans('button.cancel') }}</a>
-                    <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
+                    <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
                 </div>
             </div> <!-- /.box-->
         </form>

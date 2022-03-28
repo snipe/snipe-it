@@ -1,82 +1,82 @@
 <?php
 
-return array(
+return [
 
     'undeployable' 		=> '<strong>Dėmesio: </strong> Ši įranga pažymėta kaip negalima naudoti. Jei būklė  pasikeitė, prašome atnaujinti įrangos būklę.',
     'does_not_exist' 	=> 'Tokios įrangos nėra.',
-    'does_not_exist_or_not_requestable' => 'Tokios įrangos nėra arba jos negalima užklausti.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Ši įranga šiuo metu yra išduota naudotojui ir negali būti ištrinta. Prašome pirmiausia patikrinkite įrangą, tuomet bandykite ištrinti vėl. ',
 
-    'create' => array(
+    'create' => [
         'error'   		=> 'Įrangos sukurti nepavyko, prašome bandykite dar kartą. :(',
-        'success' 		=> 'Įranga sėkminga sukurta. :)'
-    ),
+        'success' 		=> 'Įranga sėkminga sukurta. :)',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   			=> 'Įrangos atnaujinti nepavyko, prašome bandykite dar kartą',
         'success' 			=> 'Įranga sėkmingai atnaujinta.',
         'nothing_updated'	=>  'Nei vienas laukelis nepasirinktas, tad niekas nebuvo atnaujinta.',
-    ),
+    ],
 
-    'restore' => array(
+    'restore' => [
         'error'   		=> 'Įranga nebuvo atkurta, prašome bandykite dar kartą',
-        'success' 		=> 'Įranga atkurta sėkmingai.'
-    ),
+        'success' 		=> 'Įranga atkurta sėkmingai.',
+    ],
 
-    'audit' => array(
+    'audit' => [
         'error'   		=> 'Turto auditas buvo nesėkmingas. Prašau, pabandykite dar kartą.',
-        'success' 		=> 'Turto auditas sėkmingai registruotas.'
-    ),
+        'success' 		=> 'Turto auditas sėkmingai registruotas.',
+    ],
 
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Failas neištrintas. Prašome bandykite dar kartą.',
         'success' => 'Failas sėkmingai ištrintas.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Failas (-ai) neįkelti. Prašome bandykite dar kartą.',
         'success' => 'Failas (-ai) sėkmingai įkelti.',
         'nofiles' => 'Jūs nepasirinkote nė vieno failo įkėlimui arba failai, kuriuos ketinate įkelti yra per dideli',
         'invalidfiles' => 'Vienas ar keli failai yra per didelis arba neleidžiamas šis failų formatas. primename, kad leidžiami sekantys formatai png, gif, jpg, doc, docx, pdf, txt.',
-    ),
+    ],
 
-    'import' => array(
+    'import' => [
         'error'                 => 'Nepavyko teisingai importuoti kai kurių įrašų.',
         'errorDetail'           => 'Šie elementai nebuvo importuoti dėl klaidų.',
-        'success'               => "Jūsų failas importuotas",
-        'file_delete_success'   => "Jūsų failas buvo sėkmingai ištrintas",
-        'file_delete_error'      => "Nepavyko ištrinti failo",
-    ),
+        'success'               => 'Jūsų failas importuotas',
+        'file_delete_success'   => 'Jūsų failas buvo sėkmingai ištrintas',
+        'file_delete_error'      => 'Nepavyko ištrinti failo',
+    ],
 
 
-    'delete' => array(
+    'delete' => [
         'confirm'   	=> 'Ar jūs tikrai norite ištrinti šią įrangą?',
         'error'   		=> 'Nepavyko ištrinti įrangos. Prašome bandykite dar kartą.',
         'nothing_updated'   => 'Nebuvo pasirinkta jokio turto, taigi niekas nebuvo ištrintas.',
-        'success' 		=> 'Įranga sėkmingai ištrinta.'
-    ),
+        'success' 		=> 'Įranga sėkmingai ištrinta.',
+    ],
 
-    'checkout' => array(
+    'checkout' => [
         'error'   		=> 'Įranga neišduota, prašome bandyti dar kartą',
         'success' 		=> 'Įranga išduota sėkmingai.',
         'user_does_not_exist' => 'Netinkamas naudotojas. Prašome bandykite dar kartą.',
         'not_available' => 'Šis turtas negali būti išsiunčiamas!',
-        'no_assets_selected' => 'Jūs turite pasirinkti bent vieną turtą iš sąrašo'
-    ),
+        'no_assets_selected' => 'Jūs turite pasirinkti bent vieną turtą iš sąrašo',
+    ],
 
-    'checkin' => array(
+    'checkin' => [
         'error'   		=> 'Įranga neišduota, prašome bandyti dar kartą',
         'success' 		=> 'Įranga išduota sėkmingai.',
         'user_does_not_exist' => 'Šis naudotojas neteisingas. Prašome bandykite dar kartą.',
         'already_checked_in'  => 'Šis turtas jau yra registruotas.',
 
-    ),
+    ],
 
-    'requests' => array(
+    'requests' => [
         'error'   		=> 'Įranga nebuvo užklausta, prašome bandyti dar kartą',
         'success' 		=> 'Įrangos užklausa sėkmingai išsiusta.',
-        'canceled'      => 'Patikros užklausa sėkmingai atšaukta'
-    )
+        'canceled'      => 'Patikros užklausa sėkmingai atšaukta',
+    ],
 
-);
+];

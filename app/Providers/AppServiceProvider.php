@@ -1,6 +1,6 @@
 <?php
-namespace App\Providers;
 
+namespace App\Providers;
 
 use App\Models\Accessory;
 use App\Models\Asset;
@@ -14,9 +14,9 @@ use App\Observers\ComponentObserver;
 use App\Observers\ConsumableObserver;
 use App\Observers\LicenseObserver;
 use App\Observers\SettingObserver;
+use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Routing\UrlGenerator;
 
 /**
  * This service provider handles setting the observers on models
@@ -24,7 +24,6 @@ use Illuminate\Routing\UrlGenerator;
  * PHP version 5.5.9
  * @version    v3.0
  */
-
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -43,6 +42,19 @@ class AppServiceProvider extends ServiceProvider
                 \Log::warning("'APP_FORCE_TLS' is set to true, but 'APP_URL' does not start with 'https://'. Will not force TLS on connections.");
             }
         }
+
+        // TODO - isn't it somehow 'gauche' to check the environment directly; shouldn't we be using config() somehow?
+        if ( ! env('APP_ALLOW_INSECURE_HOSTS')) {  // unless you set APP_ALLOW_INSECURE_HOSTS, you should PROHIBIT forging domain parts of URL via Host: headers
+            $url_parts = parse_url(config('app.url'));
+            if ($url_parts && array_key_exists('scheme', $url_parts) && array_key_exists('host', $url_parts)) { // check for the *required* parts of a bare-minimum URL
+                \URL::forceRootUrl(config('app.url'));
+            } else {
+                \Log::error("Your APP_URL in your .env is misconfigured - it is: ".config('app.url').". Many things will work strangely unless you fix it.");
+            }
+        }
+
+        \Illuminate\Pagination\Paginator::useBootstrap();
+
         Schema::defaultStringLength(191);
         Asset::observe(AssetObserver::class);
         Accessory::observe(AccessoryObserver::class);
@@ -59,10 +71,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
-        if (($this->app->environment('production'))  && (config('logging.channels.rollbar.access_token'))) {
+        // Only load rollbar if there is a rollbar key and the app is in production
+        if (($this->app->environment('production')) && (config('logging.channels.rollbar.access_token'))) {
             $this->app->register(\Rollbar\Laravel\RollbarServiceProvider::class);
-        }
+        } 
 
+        // Only load dusk's service provider if the app is in local or develop mode
+        if ($this->app->environment(['local', 'develop'])) {
+            $this->app->register(\Laravel\Dusk\DuskServiceProvider::class);
+        } 
+    
     }
 }

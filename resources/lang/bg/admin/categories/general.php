@@ -18,5 +18,6 @@ return array(
     'update'  							=> 'Обновяване на категория',
     'use_default_eula'					=> 'Използване на <a href="#" data-toggle="modal" data-target="#eulaModal">EULA по подразбиране</a>.',
     'use_default_eula_disabled'			=> '<del>Използване на EULA по подразбиране</del> Няма EULA по подразбиране. Добавете я в Настройки.',
+    'use_default_eula_column'			=> 'Use default EULA',
 
 );

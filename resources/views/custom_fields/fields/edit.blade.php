@@ -40,7 +40,7 @@
             </label>
             <div class="col-md-6 required">
                 {{ Form::text('name', old('name', $field->name), array('class' => 'form-control', 'aria-label'=>'name')) }}
-                {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
 
@@ -52,7 +52,7 @@
             <div class="col-md-6 required">
 
             {!! Form::customfield_elements('element', old('element', $field->element), 'field_element select2 form-control') !!}
-            {!! $errors->first('element', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+            {!! $errors->first('element', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
 
             </div>
           </div>
@@ -64,7 +64,7 @@
             </label>
             <div class="col-md-6 required">
               {!! Form::textarea('field_values', old('name', $field->field_values), ['style' => 'width: 100%', 'rows' => 4, 'class' => 'form-control', 'aria-label'=>'field_values']) !!}
-              {!! $errors->first('field_values', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+              {!! $errors->first('field_values', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
               <p class="help-block">{{ trans('admin/custom_fields/general.field_values_help') }}</p>
             </div>
           </div>
@@ -75,8 +75,8 @@
               {{ trans('admin/custom_fields/general.field_format') }}
             </label>
             <div class="col-md-6 required">
-              {{ Form::select("format",\App\Helpers\Helper::predefined_formats(), $field->format, array('class'=>'format select2 form-control', 'aria-label'=>'format')) }}
-              {!! $errors->first('format', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+              {{ Form::select("format",Helper::predefined_formats(), $field->format, array('class'=>'format select2 form-control', 'aria-label'=>'format')) }}
+              {!! $errors->first('format', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
           <!-- Custom Format -->
@@ -88,7 +88,7 @@
                 {{ Form::text('custom_format', old('custom_format', (($field->format!='') && (stripos($field->format,'regex')===0)) ? $field->format : ''), array('class' => 'form-control', 'id' => 'custom_format','aria-label'=>'custom_format', 'placeholder'=>'regex:/^[0-9]{15}$/')) }}
                 <p class="help-block">{!! trans('admin/custom_fields/general.field_custom_format_help') !!}</p>
 
-              {!! $errors->first('custom_format', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+              {!! $errors->first('custom_format', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
 
             </div>
           </div>
@@ -96,12 +96,12 @@
           <!-- Help Text -->
           <div class="form-group {{ $errors->has('help_text') ? ' has-error' : '' }}">
               <label for="help_text" class="col-md-4 control-label">
-                  Help Text
+                  {{ trans('admin/custom_fields/general.help_text') }}
               </label>
               <div class="col-md-6">
                   {{ Form::text('help_text', old('help_text', $field->help_text), array('class' => 'form-control', 'aria-label'=>'help_text')) }}
-                  <p class="help-block">This is optional text that will appear below the form elements while editing an asset to provide context on the field.</p>
-                  {!! $errors->first('help_text', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                  <p class="help-block">{{ trans('admin/custom_fields/general.help_text_description') }}</p>
+                  {!! $errors->first('help_text', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
               </div>
           </div>
 
@@ -116,6 +116,17 @@
 
           </div>
 
+          <!-- Value Must be Unique -->
+          <div class="form-group {{ $errors->has('is_unique') ? ' has-error' : '' }}"  id="is_unique">
+            <div class="col-md-8 col-md-offset-4">
+                <label for="is_unique">
+                    <input type="checkbox" name="is_unique" aria-label="is_unique" value="1" class="minimal"{{ (old('is_unique') || $field->is_unique) ? ' checked="checked"' : '' }}>
+                    {{ trans('admin/custom_fields/general.is_unique') }}
+                </label>
+            </div>
+
+        </div>
+
 
       @if (!$field->id)
         <!-- Encrypted  -->
@@ -129,7 +140,7 @@
           <div class="col-md-6 col-md-offset-4" id="encrypt_warning" style="display:none;">
 
               <div class="callout callout-danger">
-                <p><i class="fa fa-warning" aria-hidden="true"></i> {{ trans('admin/custom_fields/general.encrypt_field_help') }}</p>
+                <p><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> {{ trans('admin/custom_fields/general.encrypt_field_help') }}</p>
             </div>
           </div>
         </div>
@@ -147,8 +158,8 @@
   </div> <!--/.col-md-9-->
 
   <div class="col-md-3">
-    <h2>About Custom Fields</h2>
-    <p>Custom fields allow you to add arbitrary attributes to assets.</p>
+    <h2>{{ trans('admin/custom_fields/general.about_custom_fields_title') }}</h2>
+    <p>{{ trans('admin/custom_fields/general.about_custom_fields_text') }}</p>
   </div>
   
 </div>

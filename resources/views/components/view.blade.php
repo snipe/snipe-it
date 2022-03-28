@@ -16,6 +16,7 @@
         {{ trans('button.actions') }}
           <span class="caret"></span>
       </button>
+      
       <ul class="dropdown-menu pull-right" role="menu22">
         @if ($component->assigned_to != '')
           @can('checkin', $component)
@@ -128,13 +129,27 @@
     <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/components/general.cost') }}:</strong>
     {{ $snipeSettings->default_currency }}
 
-    {{ \App\Helpers\Helper::formatCurrencyOutput($component->purchase_cost) }} </div>
+    {{ Helper::formatCurrencyOutput($component->purchase_cost) }} </div>
     @endif
 
     @if ($component->order_number)
     <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('general.order_number') }}:</strong>
     {{ $component->order_number }} </div>
     @endif
+
+    @if ($component->notes)
+
+      <div class="col-md-12">
+        <strong>
+          {{ trans('general.notes') }}
+        </strong>
+      </div>
+      <div class="col-md-12">
+        {!! nl2br(e($component->notes)) !!}
+      </div>
+    </div>
+    @endif
+
   </div>
 </div> <!-- .row-->
 

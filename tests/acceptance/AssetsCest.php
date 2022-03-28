@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class AssetsCest
 {
@@ -6,7 +6,6 @@ class AssetsCest
     {
         AcceptanceTester::test_login($I);
     }
-
 
     public function listAssets(AcceptanceTester $I)
     {
@@ -16,7 +15,7 @@ class AssetsCest
         $I->lookForwardTo('seeing it load without errors');
         $I->amOnPage('/hardware');
         $I->waitForElement('.table', 20); // secs
-        $I->seeNumberOfElements('table[name="assets"] tr', [5,50]);
+        $I->seeNumberOfElements('table[name="assets"] tr', [5, 50]);
         $I->seeInTitle(trans('general.assets'));
         $I->see(trans('general.assets'));
         $I->seeInPageSource('hardware/create');

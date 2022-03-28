@@ -1,32 +1,31 @@
 <?php
 
-return array(
+return [
 
-    'does_not_exist' => '狀態標籤不存在',
-    'assoc_assets'	 => '至少還有一個資產與此狀態標籤關聯，目前不能被删除，請確認後重試。 ',
+    'does_not_exist' => 'Status Label does not exist.',
+    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
 
+    'create' => [
+        'error'   => 'Status Label was not created, please try again.',
+        'success' => 'Status Label created successfully.',
+    ],
 
-    'create' => array(
-        'error'   => '新增狀態標籤失敗，請重試。',
-        'success' => '新增狀態標籤成功。'
-    ),
+    'update' => [
+        'error'   => 'Status Label was not updated, please try again',
+        'success' => 'Status Label updated successfully.',
+    ],
 
-    'update' => array(
-        'error'   => '更新狀態標籤失敗，請重試。',
-        'success' => '更新狀態標籤成功。'
-    ),
+    'delete' => [
+        'confirm'   => 'Are you sure you wish to delete this Status Label?',
+        'error'   => 'There was an issue deleting the Status Label. Please try again.',
+        'success' => 'The Status Label was deleted successfully.',
+    ],
 
-    'delete' => array(
-        'confirm'   => '您確定要刪除此狀態標籤嗎？',
-        'error'   => '刪除狀態標籤失敗，請重試。',
-        'success' => '刪除狀態標籤成功。'
-    ),
+    'help' => [
+        'undeployable'   => 'These assets cannot be assigned to anyone.',
+        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
+        'archived'   => 'These assets cannot be checked out, and will only show up in the Archived view. This is useful for retaining information about assets for budgeting/historic purposes but keeping them out of the day-to-day asset list.',
+        'pending'   => 'These assets can not yet be assigned to anyone, often used for items that are out for repair, but are expected to return to circulation.',
+    ],
 
-    'help' => array(
-        'undeployable'   => '這些資產不能分配給任何人。',
-        'deployable'   => '這些資產可以檢出。一旦分配了它們，它們將承擔一個元狀態<i class="fa fa-circle text-blue"></i> <strong>Deployed</strong>。',
-        'archived'   => '這些資產無法簽出，只會顯示在“存檔”視圖中。這有助於保留有關資產的預算/歷史目的信息，但將其保留在日常資產清單之外。',
-        'pending'   => '這些資產不能分配給任何人，經常用於修理的物品，但預計將重新流通。',
-    ),
-
-);
+];

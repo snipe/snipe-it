@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Mayelana namaqembu',
     'about_groups'                  => 'Amaqembu asetshenziselwa ukukhiqiza izimvume zomsebenzisi.',
     'group_management' 	 	=> 'Ukuphathwa kweqembu',
@@ -10,5 +10,7 @@ return array(
     'group_admin' 	 		=> 'I-Group Admin',
     'allow' 	 			=> 'Vumela',
     'deny' 	 				=> 'Yeka',
-
-);
+    'permission'            => 'Permission',
+    'grant'                 => 'Grant',
+    'no_permissions'        => 'This group has no permissions.'
+];

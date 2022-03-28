@@ -17,7 +17,7 @@ class AccessoryCheckinController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param Request $request
-     * @param integer $accessoryUserId
+     * @param int $accessoryUserId
      * @param string $backto
      * @return View
      * @internal param int $accessoryId
@@ -33,6 +33,7 @@ class AccessoryCheckinController extends Controller
 
         $accessory = Accessory::find($accessory_user->accessory_id);
         $this->authorize('checkin', $accessory);
+
         return view('accessories/checkin', compact('accessory'))->with('backto', $backto);
     }
 
@@ -49,7 +50,7 @@ class AccessoryCheckinController extends Controller
      */
     public function store(Request $request, $accessoryUserId = null, $backto = null)
     {
-      // Check if the accessory exists
+        // Check if the accessory exists
         if (is_null($accessory_user = DB::table('accessories_users')->find($accessoryUserId))) {
             // Redirect to the accessory management page with error
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
@@ -60,7 +61,7 @@ class AccessoryCheckinController extends Controller
         $this->authorize('checkin', $accessory);
 
         $checkin_at = date('Y-m-d');
-        if($request->filled('checkin_at')){
+        if ($request->filled('checkin_at')) {
             $checkin_at = $request->input('checkin_at');
         }
 
@@ -70,7 +71,7 @@ class AccessoryCheckinController extends Controller
 
             event(new CheckoutableCheckedIn($accessory, User::find($return_to), Auth::user(), $request->input('note'), $checkin_at));
 
-            return redirect()->route("accessories.show", $accessory->id)->with('success', trans('admin/accessories/message.checkin.success'));
+            return redirect()->route('accessories.show', $accessory->id)->with('success', trans('admin/accessories/message.checkin.success'));
         }
         // Redirect to the accessory management page with error
         return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.checkin.error'));

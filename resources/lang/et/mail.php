@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Kasutaja on veebisaidil tühistanud üksuse taotluse',
     'a_user_requested' => 'Kasutaja on taotlenud üksuse veebisaidil',
     'accessory_name' => 'Lisaseade Nimi:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'Vahend:',
     'asset_name' => 'Vahendi nimi:',
     'asset_requested' => 'Vara nõutud',
-    'asset_tag' => 'Vara silt:',
+    'asset_tag' => 'Varade silt',
     'assigned_to' => 'Määratud',
     'best_regards' => 'Parimate soovidega,',
     'canceled' => 'Tühistatud:',
@@ -18,11 +18,11 @@ return array(
     'click_to_confirm' => 'Kinnitamiseks klõpsake järgmisel lingil: veebikonto:',
     'click_on_the_link_accessory' => 'Klõpsake allosas oleval lingil, et kinnitada, et olete lisaseadme kätte saanud.',
     'click_on_the_link_asset' => 'Klõpsake allosas oleval lingil, et kinnitada, et olete vara vastu võtnud.',
-    'Confirm_Asset_Checkin' => 'Asset checkin confirmation',
-    'Confirm_Accessory_Checkin' => 'Accessory checkin confirmation',
-    'Confirm_accessory_delivery' => 'Accessory delivery confirmation',
-    'Confirm_license_delivery' => 'License delivery confirmation',
-    'Confirm_asset_delivery' => 'Asset delivery confirmation',
+    'Confirm_Asset_Checkin' => 'Vara sissevõtmise kinnitus',
+    'Confirm_Accessory_Checkin' => 'Tarvitu sissevõtmise kinnitus',
+    'Confirm_accessory_delivery' => 'Tarvitu tarne kinnitus',
+    'Confirm_license_delivery' => 'Litsentsi tarne kinnitus',
+    'Confirm_asset_delivery' => 'Vara tarne kinnitus',
     'Confirm_consumable_delivery' => 'Consumable delivery confirmation',
     'current_QTY' => 'Praegune QTY',
     'Days' => 'Päeva',
@@ -59,7 +59,7 @@ return array(
     'test_mail_text' => 'See on Snipe-IT-i varahaldussüsteemi test. Kui sul on see, töötab post. :)',
     'the_following_item' => 'Järgmine element on kontrollitud:',
     'low_inventory_alert' => 'There is :count item that is below minimum inventory or will soon be low.|There are :count items that are below minimum inventory or will soon be low.',
-    'assets_warrantee_alert' => 'There is :count asset with a warrantee expiring in the next :threshold days.|There are :count assets with warrantees expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'to_reset' => 'Selleks, et lähtestada oma: veebiparool, täitke see vorm:',
     'type' => 'Tüüp',
@@ -69,11 +69,11 @@ return array(
     'welcome' => 'Tere tulemast, :name',
     'welcome_to' => 'Teretulemast lehele :web!',
     'your_credentials' => 'Sinu Snipe-IT rekvisiidid',
-    'Accessory_Checkin_Notification' => 'Accessory checked in',
-    'Asset_Checkin_Notification' => 'Asset checked in',
-    'License_Checkin_Notification' => 'License checked in',
+    'Accessory_Checkin_Notification' => 'Tarvikud sisse võetud',
+    'Asset_Checkin_Notification' => 'Vara sissevõetud',
+    'License_Checkin_Notification' => 'Litsents sisse võetud',
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'Vaata oma varasi',
+];

@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-   OAuth API Settings
+    {{ trans('admin/settings/general.oauth_title') }}
     @parent
 @stop
 
@@ -18,7 +18,7 @@
             <passport-authorized-clients clients-url="{{ url('oauth/clients') }}" tokens-url="{{ url('oauth/tokens') }}"></passport-authorized-clients>
         </div>
     @else
-        <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+        <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
     @endif
 
 @stop

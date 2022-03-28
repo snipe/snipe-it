@@ -15,11 +15,11 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         'Illuminate\Auth\Events\Login' => [
-            'App\Listeners\LogSuccessfulLogin',
+            \App\Listeners\LogSuccessfulLogin::class,
         ],
 
         'Illuminate\Auth\Events\Failed' => [
-            'App\Listeners\LogFailedLogin',
+            \App\Listeners\LogFailedLogin::class,
         ],
     ];
 
@@ -30,6 +30,6 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $subscribe = [
         LogListener::class,
-        CheckoutableListener::class
+        CheckoutableListener::class,
     ];
 }

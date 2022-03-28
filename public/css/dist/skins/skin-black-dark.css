@@ -37,11 +37,16 @@
     color: #fff;
   }
   .skin-black-dark .main-header .navbar .dropdown-menu li a {
-    color: #fff;
+    color: #333;
   }
   .skin-black-dark .main-header .navbar .dropdown-menu li a:hover {
     background: #040404;
     color: #fff;
+  }
+}
+@media (max-width: 991px) {
+  .skin-black-dark .main-header .navbar-custom-menu > .navbar-nav > li > .dropdown-menu {
+    background-color: var(--back-sub);
   }
 }
 .skin-black-dark .main-header li.user-header {
@@ -315,11 +320,6 @@ body {
 #details > div > div > div > table {
   background-color: transparent;
 }
-.dropdown-menu,
-.dropdown-menu > li > a {
-  background-color: var(--back-sub);
-  color: var(--text-main) !important;
-}
 .dropdown-menu > li > a:hover {
   background-color: var(--back-main);
   color: var(--nav-link);
@@ -488,3 +488,4 @@ a:visited {
 .search-highlight:hover {
   background-color: #e9d15b;
 }
+

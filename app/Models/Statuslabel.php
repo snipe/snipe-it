@@ -1,30 +1,32 @@
 <?php
+
 namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Searchable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 
 class Statuslabel extends SnipeModel
 {
+    use HasFactory;
     use SoftDeletes;
     use ValidatingTrait;
     use UniqueUndeletedTrait;
 
     protected $injectUniqueIdentifier = true;
-    protected $dates = ['deleted_at'];
+
     protected $table = 'status_labels';
-    protected $hidden = ['user_id','deleted_at'];
+    protected $hidden = ['user_id', 'deleted_at'];
 
-
-    protected $rules = array(
+    protected $rules = [
         'name'  => 'required|string|unique_undeleted',
         'notes'   => 'string|nullable',
         'deployable' => 'required',
         'pending' => 'required',
         'archived' => 'required',
-    );
+    ];
 
     protected $fillable = [
         'archived',
@@ -35,21 +37,20 @@ class Statuslabel extends SnipeModel
     ];
 
     use Searchable;
-    
+
     /**
      * The attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableAttributes = ['name', 'notes'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableRelations = [];
-
 
     /**
      * Establishes the status label -> assets relationship
@@ -60,7 +61,7 @@ class Statuslabel extends SnipeModel
      */
     public function assets()
     {
-        return $this->hasMany('\App\Models\Asset', 'status_id');
+        return $this->hasMany(\App\Models\Asset::class, 'status_id');
     }
 
     /**
@@ -72,17 +73,15 @@ class Statuslabel extends SnipeModel
      */
     public function getStatuslabelType()
     {
-
-        if (($this->pending == '1') && ($this->archived == '0')  && ($this->deployable == '0')) {
+        if (($this->pending == '1') && ($this->archived == '0') && ($this->deployable == '0')) {
             return 'pending';
-        } elseif (($this->pending == '0') && ($this->archived == '1')  && ($this->deployable == '0')) {
+        } elseif (($this->pending == '0') && ($this->archived == '1') && ($this->deployable == '0')) {
             return 'archived';
-        } elseif (($this->pending == '0') && ($this->archived == '0')  && ($this->deployable == '0')) {
+        } elseif (($this->pending == '0') && ($this->archived == '0') && ($this->deployable == '0')) {
             return 'undeployable';
         }
 
         return 'deployable';
-
     }
 
     /**
@@ -122,6 +121,18 @@ class Statuslabel extends SnipeModel
     }
 
     /**
+     * Query builder scope for undeployable status types
+     *
+     * @return \Illuminate\Database\Query\Builder Modified query builder
+     */
+    public function scopeUndeployable()
+    {
+        return $this->where('pending', '=', 0)
+            ->where('archived', '=', 0)
+            ->where('deployable', '=', 0);
+    }
+
+    /**
      * Helper function to determine type attributes
      *
      * @author A. Gianotto <snipe@snipe.net>
@@ -130,7 +141,6 @@ class Statuslabel extends SnipeModel
      */
     public static function getStatuslabelTypesForDB($type)
     {
-
         $statustype['pending'] = 0;
         $statustype['deployable'] = 0;
         $statustype['archived'] = 0;
@@ -139,12 +149,10 @@ class Statuslabel extends SnipeModel
             $statustype['pending'] = 1;
             $statustype['deployable'] = 0;
             $statustype['archived'] = 0;
-
         } elseif ($type == 'deployable') {
             $statustype['pending'] = 0;
             $statustype['deployable'] = 1;
             $statustype['archived'] = 0;
-
         } elseif ($type == 'archived') {
             $statustype['pending'] = 0;
             $statustype['deployable'] = 0;

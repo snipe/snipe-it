@@ -40,9 +40,9 @@ class ApiComponentsCest
     {
         $I->wantTo('Create a new component');
 
-        $temp_component = factory(\App\Models\Component::class)->states('ram-crucial4')->make([
-            'name' => "Test Component Name",
-            'company_id' => 2
+        $temp_component = \App\Models\Component::factory()->ramCrucial4()->make([
+            'name' => 'Test Component Name',
+            'company_id' => 2,
         ]);
 
         // setup
@@ -57,7 +57,7 @@ class ApiComponentsCest
             'purchase_cost' => $temp_component->purchase_cost,
             'purchase_date' => $temp_component->purchase_date,
             'qty' => $temp_component->qty,
-            'serial' => $temp_component->serial
+            'serial' => $temp_component->serial,
         ];
 
         // create
@@ -68,22 +68,23 @@ class ApiComponentsCest
 
     // Put is routed to the same method in the controller
     // DO we actually need to test both?
+
     /** @test */
     public function updateComponentWithPatch(ApiTester $I, $scenario)
     {
         $I->wantTo('Update an component with PATCH');
 
         // create
-        $component = factory(\App\Models\Component::class)->states('ram-crucial4')->create([
+        $component = \App\Models\Component::factory()->ramCrucial4()->create([
             'name' => 'Original Component Name',
             'company_id' => 2,
-            'location_id' => 3
+            'location_id' => 3,
         ]);
         $I->assertInstanceOf(\App\Models\Component::class, $component);
 
-        $temp_component = factory(\App\Models\Component::class)->states('ssd-crucial240')->make([
+        $temp_component = \App\Models\Component::factory()->ssdCrucial240()->make([
             'company_id' => 3,
-            'name' => "updated component name",
+            'name' => 'updated component name',
             'location_id' => 1,
         ]);
 
@@ -103,7 +104,7 @@ class ApiComponentsCest
         $I->assertNotEquals($component->name, $data['name']);
 
         // update
-        $I->sendPATCH('/components/' . $component->id, $data);
+        $I->sendPATCH('/components/'.$component->id, $data);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -119,7 +120,7 @@ class ApiComponentsCest
         $temp_component->updated_at = Carbon::parse($response->payload->updated_at);
         $temp_component->id = $component->id;
         // verify
-        $I->sendGET('/components/' . $component->id);
+        $I->sendGET('/components/'.$component->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson((new ComponentsTransformer)->transformComponent($temp_component));
@@ -131,13 +132,13 @@ class ApiComponentsCest
         $I->wantTo('Delete an component');
 
         // create
-        $component = factory(\App\Models\Component::class)->states('ram-crucial4')->create([
-            'name' => "Soon to be deleted"
+        $component = \App\Models\Component::factory()->ramCrucial4()->create([
+            'name' => 'Soon to be deleted',
         ]);
         $I->assertInstanceOf(\App\Models\Component::class, $component);
 
         // delete
-        $I->sendDELETE('/components/' . $component->id);
+        $I->sendDELETE('/components/'.$component->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -147,7 +148,7 @@ class ApiComponentsCest
         $I->assertEquals(trans('admin/components/message.delete.success'), $response->messages);
 
         // verify, expect a 200
-        $I->sendGET('/components/' . $component->id);
+        $I->sendGET('/components/'.$component->id);
 
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();

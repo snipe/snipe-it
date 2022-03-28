@@ -14,6 +14,7 @@ use App\Models\User;
 class ItemImporter extends Importer
 {
     protected $item;
+
     public function __construct($filename)
     {
         parent::__construct($filename);
@@ -24,67 +25,78 @@ class ItemImporter extends Importer
         // Need to reset this between iterations or we'll have stale data.
         $this->item = [];
 
-        $item_category = $this->findCsvMatch($row, "category");
+        $item_category = $this->findCsvMatch($row, 'category');
         if ($this->shouldUpdateField($item_category)) {
-            $this->item["category_id"] = $this->createOrFetchCategory($item_category);
+            $this->item['category_id'] = $this->createOrFetchCategory($item_category);
         }
 
-        $item_company_name = $this->findCsvMatch($row, "company");
+        $item_company_name = $this->findCsvMatch($row, 'company');
         if ($this->shouldUpdateField($item_company_name)) {
-            $this->item["company_id"] = $this->createOrFetchCompany($item_company_name);
+            $this->item['company_id'] = $this->createOrFetchCompany($item_company_name);
         }
 
-        $item_location = $this->findCsvMatch($row, "location");
+        $item_location = $this->findCsvMatch($row, 'location');
         if ($this->shouldUpdateField($item_location)) {
-            $this->item["location_id"] = $this->createOrFetchLocation($item_location);
+            $this->item['location_id'] = $this->createOrFetchLocation($item_location);
         }
 
-        $item_manufacturer = $this->findCsvMatch($row, "manufacturer");
+        $item_manufacturer = $this->findCsvMatch($row, 'manufacturer');
         if ($this->shouldUpdateField($item_manufacturer)) {
-            $this->item["manufacturer_id"] = $this->createOrFetchManufacturer($item_manufacturer);
+            $this->item['manufacturer_id'] = $this->createOrFetchManufacturer($item_manufacturer);
         }
 
-        $item_status_name = $this->findCsvMatch($row, "status");
+        $item_status_name = $this->findCsvMatch($row, 'status');
         if ($this->shouldUpdateField($item_status_name)) {
-            $this->item["status_id"] = $this->createOrFetchStatusLabel($item_status_name);
+            $this->item['status_id'] = $this->createOrFetchStatusLabel($item_status_name);
         }
 
-        $item_supplier = $this->findCsvMatch($row, "supplier");
+        $item_supplier = $this->findCsvMatch($row, 'supplier');
         if ($this->shouldUpdateField($item_supplier)) {
             $this->item['supplier_id'] = $this->createOrFetchSupplier($item_supplier);
         }
 
-        $item_department = $this->findCsvMatch($row, "department");
+        $item_department = $this->findCsvMatch($row, 'department');
         if ($this->shouldUpdateField($item_department)) {
             $this->item['department_id'] = $this->createOrFetchDepartment($item_department);
         }
 
-        $item_manager_first_name = $this->findCsvMatch($row, "manage_first_name");
-        $item_manager_last_name = $this->findCsvMatch($row, "manage_last_name");
+        $item_manager_first_name = $this->findCsvMatch($row, 'manage_first_name');
+        $item_manager_last_name = $this->findCsvMatch($row, 'manage_last_name');
 
         if ($this->shouldUpdateField($item_manager_first_name)) {
             $this->item['manager_id'] = $this->fetchManager($item_manager_first_name, $item_manager_last_name);
         }
 
-        $this->item["name"] = $this->findCsvMatch($row, "item_name");
-        $this->item["notes"] = $this->findCsvMatch($row, "notes");
-        $this->item["order_number"] = $this->findCsvMatch($row, "order_number");
-        $this->item["purchase_cost"] = $this->findCsvMatch($row, "purchase_cost");
+        $this->item['name'] = $this->findCsvMatch($row, 'item_name');
+        $this->item['notes'] = $this->findCsvMatch($row, 'notes');
+        $this->item['order_number'] = $this->findCsvMatch($row, 'order_number');
+        $this->item['purchase_cost'] = $this->findCsvMatch($row, 'purchase_cost');
 
-        $this->item["purchase_date"] = null;
-        if ($this->findCsvMatch($row, "purchase_date")!='') {
-            $this->item["purchase_date"] = date("Y-m-d 00:00:01", strtotime($this->findCsvMatch($row, "purchase_date")));
+        $this->item['purchase_date'] = null;
+        if ($this->findCsvMatch($row, 'purchase_date') != '') {
+            $this->item['purchase_date'] = date('Y-m-d 00:00:01', strtotime($this->findCsvMatch($row, 'purchase_date')));
         }
-        $this->item["qty"] = $this->findCsvMatch($row, "quantity");
-        $this->item["requestable"] = $this->findCsvMatch($row, "requestable");
-        $this->item["user_id"] = $this->user_id;
-        $this->item['serial'] = $this->findCsvMatch($row, "serial");
+
+        $this->item['last_audit_date'] = null;
+        if ($this->findCsvMatch($row, 'last_audit_date') != '') {
+            $this->item['last_audit_date'] = date('Y-m-d', strtotime($this->findCsvMatch($row, 'last_audit_date')));
+        }
+
+        $this->item['next_audit_date'] = null;
+        if ($this->findCsvMatch($row, 'next_audit_date') != '') {
+            $this->item['next_audit_date'] = date('Y-m-d', strtotime($this->findCsvMatch($row, 'next_audit_date')));
+        }
+
+        $this->item['qty'] = $this->findCsvMatch($row, 'quantity');
+        $this->item['requestable'] = $this->findCsvMatch($row, 'requestable');
+        $this->item['user_id'] = $this->user_id;
+        $this->item['serial'] = $this->findCsvMatch($row, 'serial');
         // NO need to call this method if we're running the user import.
         // TODO: Merge these methods.
-        $this->item['checkout_class'] = $this->findCsvMatch($row, "checkout_class");
-        if(get_class($this) !== UserImporter::class) {
+        $this->item['checkout_class'] = $this->findCsvMatch($row, 'checkout_class');
+        if (get_class($this) !== UserImporter::class) {
             // $this->item["user"] = $this->createOrFetchUser($row);
-            $this->item["checkout_target"] = $this->determineCheckout($row);
+            $this->item['checkout_target'] = $this->determineCheckout($row);
         }
     }
 
@@ -92,20 +104,19 @@ class ItemImporter extends Importer
      * Parse row to determine what (if anything) we should checkout to.
      * @param  array $row CSV Row being parsed
      * @return SnipeModel      Model to be checked out to
-     */ 
+     */
     protected function determineCheckout($row)
     {
         // We only support checkout-to-location for asset, so short circuit otherwise.
-        if(get_class($this) != AssetImporter::class) {
+        if (get_class($this) != AssetImporter::class) {
             return $this->createOrFetchUser($row);
         }
 
-        if ($this->item['checkout_class'] === 'location') {
+        if (strtolower($this->item['checkout_class']) === 'location') {
             return Location::findOrFail($this->createOrFetchLocation($this->findCsvMatch($row, 'checkout_location')));
         }
 
         return $this->createOrFetchUser($row);
-
     }
 
     /**
@@ -119,7 +130,6 @@ class ItemImporter extends Importer
      * @param $updating boolean Should we remove blank values?
      * @return array
      */
-
     protected function sanitizeItemForStoring($model, $updating = false)
     {
         // Create a collection for all manipulations to come.
@@ -138,10 +148,10 @@ class ItemImporter extends Importer
     }
 
     /**
-    * Convenience function for updating that strips the empty values.
+     * Convenience function for updating that strips the empty values.
      * @param $model SnipeModel Model that's being updated.
      * @return array
-    */
+     */
     protected function sanitizeItemForUpdating($model)
     {
         return $this->sanitizeItemForStoring($model, true);
@@ -156,15 +166,17 @@ class ItemImporter extends Importer
      * @author Daniel Melzter
      * @since 4.0
      * @param $field string
-     * @return boolean
+     * @return bool
      */
     protected function shouldUpdateField($field)
     {
         if (empty($field)) {
             return false;
         }
-        return !($this->updating && empty($field));
+
+        return ! ($this->updating && empty($field));
     }
+
     /**
      * Select the asset model if it exists, otherwise create it.
      *
@@ -177,50 +189,68 @@ class ItemImporter extends Importer
      */
     public function createOrFetchAssetModel(array $row)
     {
-
-        $asset_model_name = $this->findCsvMatch($row, "asset_model");
-        $asset_modelNumber = $this->findCsvMatch($row, "model_number");
+        $condition = array();
+        $asset_model_name = $this->findCsvMatch($row, 'asset_model');
+        $asset_modelNumber = $this->findCsvMatch($row, 'model_number');
         // TODO: At the moment, this means  we can't update the model number if the model name stays the same.
-        if (!$this->shouldUpdateField($asset_model_name)) {
+        if (! $this->shouldUpdateField($asset_model_name)) {
             return;
         }
-        if ((empty($asset_model_name))  && (!empty($asset_modelNumber))) {
+        if ((empty($asset_model_name)) && (! empty($asset_modelNumber))) {
             $asset_model_name = $asset_modelNumber;
-        } elseif ((empty($asset_model_name))  && (empty($asset_modelNumber))) {
-            $asset_model_name ='Unknown';
+        } elseif ((empty($asset_model_name)) && (empty($asset_modelNumber))) {
+            $asset_model_name = 'Unknown';
         }
+
+        if ((!empty($asset_model_name)) && (empty($asset_modelNumber))) {
+            $condition[] = ['name', '=', $asset_model_name];
+        } elseif ((!empty($asset_model_name)) && (!empty($asset_modelNumber))) {
+            $condition[] = ['name', '=', $asset_model_name];
+            $condition[] = ['model_number', '=', $asset_modelNumber];
+        }
+
         $editingModel = $this->updating;
-        $asset_model = AssetModel::where(['name' => $asset_model_name, 'model_number' => $asset_modelNumber])->first();
+        $asset_model = AssetModel::where($condition)->first();
 
         if ($asset_model) {
-            if (!$this->updating) {
-                $this->log("A matching model already exists, returning it.");
+            if (! $this->updating) {
+                $this->log('A matching model already exists, returning it.');
+
                 return $asset_model->id;
             }
-            $this->log("Matching Model found, updating it.");
+            $this->log('Matching Model found, updating it.');
             $item = $this->sanitizeItemForStoring($asset_model, $editingModel);
             $item['name'] = $asset_model_name;
-            $item['model_number'] = $asset_modelNumber;
+            $item['notes'] = $this->findCsvMatch($row, 'model_notes');
+            
+            if(!empty($asset_modelNumber)){
+                $item['model_number'] = $asset_modelNumber;
+            }
+            
             $asset_model->update($item);
             $asset_model->save();
-            $this->log("Asset Model Updated");
+            $this->log('Asset Model Updated');
+
             return $asset_model->id;
         }
-        $this->log("No Matching Model, Creating a new one");
+        $this->log('No Matching Model, Creating a new one');
 
         $asset_model = new AssetModel();
         $item = $this->sanitizeItemForStoring($asset_model, $editingModel);
         $item['name'] = $asset_model_name;
         $item['model_number'] = $asset_modelNumber;
+        $item['notes'] = $this->findCsvMatch($row, 'model_notes');
 
         $asset_model->fill($item);
         $item = null;
 
         if ($asset_model->save()) {
-            $this->log('Asset Model ' . $asset_model_name . ' with model number ' . $asset_modelNumber . ' was created');
+            $this->log('Asset Model '.$asset_model_name.' with model number '.$asset_modelNumber.' was created');
+
             return $asset_model->id;
         }
-        $this->logError($asset_model, 'Asset Model "' . $asset_model_name . '"');
+        $this->logError($asset_model, 'Asset Model "'.$asset_model_name.'"');
+
         return null;
     }
 
@@ -245,7 +275,8 @@ class ItemImporter extends Importer
         $category = Category::where(['name' => $asset_category, 'category_type' => $item_type])->first();
 
         if ($category) {
-            $this->log("A matching category: " . $asset_category . " already exists");
+            $this->log('A matching category: '.$asset_category.' already exists');
+
             return $category->id;
         }
 
@@ -255,11 +286,12 @@ class ItemImporter extends Importer
         $category->user_id = $this->user_id;
 
         if ($category->save()) {
-            $this->log('Category ' . $asset_category . ' was created');
+            $this->log('Category '.$asset_category.' was created');
+
             return $category->id;
         }
-
         $this->logError($category, 'Category "'. $asset_category. '"');
+
         return null;
     }
 
@@ -275,21 +307,22 @@ class ItemImporter extends Importer
     {
         $company = Company::where(['name' => $asset_company_name])->first();
         if ($company) {
-            $this->log('A matching Company ' . $asset_company_name . ' already exists');
+            $this->log('A matching Company '.$asset_company_name.' already exists');
+
             return $company->id;
         }
         $company = new Company();
         $company->name = $asset_company_name;
 
         if ($company->save()) {
-            $this->log('Company ' . $asset_company_name . ' was created');
+            $this->log('Company '.$asset_company_name.' was created');
+
             return $company->id;
         }
         $this->logError($company, 'Company');
+
         return null;
     }
-
-
 
     /**
      * Fetch an existing manager
@@ -304,13 +337,14 @@ class ItemImporter extends Importer
         $manager = User::where('first_name', '=', $user_manager_first_name)
             ->where('last_name', '=', $user_manager_last_name)->first();
         if ($manager) {
-            $this->log('A matching Manager ' . $user_manager_first_name . ' '. $user_manager_last_name . ' already exists');
+            $this->log('A matching Manager '.$user_manager_first_name.' '.$user_manager_last_name.' already exists');
+
             return $manager->id;
         }
-        $this->log('No matching Manager ' . $user_manager_first_name . ' '. $user_manager_last_name . ' found. If their user account is being created through this import, you should re-process this file again. ');
+        $this->log('No matching Manager '.$user_manager_first_name.' '.$user_manager_last_name.' found. If their user account is being created through this import, you should re-process this file again. ');
+
         return null;
     }
-
 
     /**
      * Fetch the existing status label or create new if it doesn't exist.
@@ -322,17 +356,17 @@ class ItemImporter extends Importer
      */
     public function createOrFetchStatusLabel($asset_statuslabel_name)
     {
-
         if (empty($asset_statuslabel_name)) {
             return null;
         }
         $status = Statuslabel::where(['name' => $asset_statuslabel_name])->first();
 
         if ($status) {
-            $this->log('A matching Status ' . $asset_statuslabel_name . ' already exists');
+            $this->log('A matching Status '.$asset_statuslabel_name.' already exists');
+
             return $status->id;
         }
-        $this->log("Creating a new status");
+        $this->log('Creating a new status');
         $status = new Statuslabel();
         $status->name = $asset_statuslabel_name;
 
@@ -341,11 +375,12 @@ class ItemImporter extends Importer
         $status->archived = 0;
 
         if ($status->save()) {
-            $this->log('Status ' . $asset_statuslabel_name . ' was created');
+            $this->log('Status '.$asset_statuslabel_name.' was created');
+
             return $status->id;
         }
 
-        $this->logError($status, 'Status "'. $asset_statuslabel_name . '"');
+        $this->logError($status, 'Status "'.$asset_statuslabel_name.'"');
         return null;
     }
 
@@ -357,17 +392,16 @@ class ItemImporter extends Importer
      * @param $item_manufacturer string
      * @return Manufacturer
      */
-
     public function createOrFetchManufacturer($item_manufacturer)
     {
-
         if (empty($item_manufacturer)) {
-            $item_manufacturer='Unknown';
+            $item_manufacturer = 'Unknown';
         }
         $manufacturer = Manufacturer::where(['name'=> $item_manufacturer])->first();
 
         if ($manufacturer) {
-            $this->log('Manufacturer ' . $item_manufacturer . ' already exists') ;
+            $this->log('Manufacturer '.$item_manufacturer.' already exists');
+
             return $manufacturer->id;
         }
 
@@ -377,10 +411,12 @@ class ItemImporter extends Importer
         $manufacturer->user_id = $this->user_id;
 
         if ($manufacturer->save()) {
-            $this->log('Manufacturer ' . $manufacturer->name . ' was created');
+            $this->log('Manufacturer '.$manufacturer->name.' was created');
+
             return $manufacturer->id;
         }
-        $this->logError($manufacturer, 'Manufacturer "'. $manufacturer->name . '"');
+        $this->logError($manufacturer, 'Manufacturer "'.$manufacturer->name.'"');
+
         return null;
     }
 
@@ -396,12 +432,14 @@ class ItemImporter extends Importer
     {
         if (empty($asset_location)) {
             $this->log('No location given, so none created.');
+
             return null;
         }
         $location = Location::where(['name' => $asset_location])->first();
 
         if ($location) {
-            $this->log('Location ' . $asset_location . ' already exists');
+            $this->log('Location '.$asset_location.' already exists');
+
             return $location->id;
         }
         // No matching locations in the collection, create a new one.
@@ -414,10 +452,12 @@ class ItemImporter extends Importer
         $location->user_id = $this->user_id;
 
         if ($location->save()) {
-            $this->log('Location ' . $asset_location . ' was created');
+            $this->log('Location '.$asset_location.' was created');
+
             return $location->id;
         }
         $this->logError($location, 'Location');
+
         return null;
     }
 
@@ -432,13 +472,14 @@ class ItemImporter extends Importer
     public function createOrFetchSupplier($item_supplier)
     {
         if (empty($item_supplier)) {
-            $item_supplier='Unknown';
+            $item_supplier = 'Unknown';
         }
 
-        $supplier = Supplier::where(['name' => $item_supplier ])->first();
+        $supplier = Supplier::where(['name' => $item_supplier])->first();
 
         if ($supplier) {
-            $this->log('Supplier ' . $item_supplier . ' already exists');
+            $this->log('Supplier '.$item_supplier.' already exists');
+
             return $supplier->id;
         }
 
@@ -447,10 +488,12 @@ class ItemImporter extends Importer
         $supplier->user_id = $this->user_id;
 
         if ($supplier->save()) {
-            $this->log('Supplier ' . $item_supplier . ' was created');
+            $this->log('Supplier '.$item_supplier.' was created');
+
             return $supplier->id;
         }
         $this->logError($supplier, 'Supplier');
+
         return null;
     }
 }

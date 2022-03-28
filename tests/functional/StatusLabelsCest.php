@@ -1,16 +1,15 @@
 <?php
 
-
 use App\Models\Statuslabel;
 
 class StatusLabelsCest
 {
     public function _before(FunctionalTester $I)
     {
-         $I->amOnPage('/login');
-         $I->fillField('username', 'admin');
-         $I->fillField('password', 'password');
-         $I->click('Login');
+        $I->amOnPage('/login');
+        $I->fillField('username', 'admin');
+        $I->fillField('password', 'password');
+        $I->click('Login');
     }
 
     // tests
@@ -25,7 +24,7 @@ class StatusLabelsCest
 
     public function failsEmptyValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with blank elements");
+        $I->wantTo('Test Validation Fails with blank elements');
         $I->amOnPage(route('statuslabels.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
@@ -34,7 +33,7 @@ class StatusLabelsCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $status = factory(App\Models\Statuslabel::class)->states('pending')->make();
+        $status = \App\Models\Statuslabel::factory()->pending()->make();
         $submitValues = [
             'name'                  => 'Testing Status',
             'statuslabel_types'     => 'pending',
@@ -52,7 +51,7 @@ class StatusLabelsCest
             'notes'                 => $status->notes,
             'show_in_nav'           => true,
         ];
-        $I->wantTo("Test Validation Succeeds");
+        $I->wantTo('Test Validation Succeeds');
         $I->amOnPage(route('statuslabels.create'));
         $I->submitForm('form#create-form', $submitValues);
         $I->seeRecord('status_labels', $recordValues);

@@ -2,19 +2,17 @@
 
 namespace App\Models;
 
+use App\Models\Setting;
 use App\Notifications\AuditNotification;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Setting;
 
 trait Loggable
 {
-
     /**
      * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
      * @since [v3.4]
      * @return \App\Models\Actionlog
      */
-
     public function log()
     {
         return $this->morphMany(Actionlog::class, 'item');
@@ -33,19 +31,20 @@ trait Loggable
             $log->user_id = Auth::user()->id;
         }
 
-        if (!isset($target)) {
+        if (! isset($target)) {
             throw new \Exception('All checkout logs require a target.');
+
             return;
         }
 
-        if (!isset($target->id)) {
+        if (! isset($target->id)) {
             throw new \Exception('That target seems invalid (no target ID available).');
+
             return;
         }
 
         $log->target_type = get_class($target);
         $log->target_id = $target->id;
-
 
         // Figure out what the target is
         if ($log->target_type == Location::class) {
@@ -59,7 +58,7 @@ trait Loggable
         $log->note = $note;
         $log->action_date = $action_date;
 
-        if (!$log->action_date) {
+        if (! $log->action_date) {
             $log->action_date = date('Y-m-d H:i:s');
         }
 
@@ -69,8 +68,8 @@ trait Loggable
     }
 
     /**
-    * Helper method to determine the log item type
-    */
+     * Helper method to determine the log item type
+     */
     private function determineLogItemType($log)
     {
         // We need to special case licenses because of license_seat vs license.  So much for clean polymorphism :
@@ -84,6 +83,7 @@ trait Loggable
 
         return $log;
     }
+
     /**
      * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
      * @since [v3.4]
@@ -100,7 +100,6 @@ trait Loggable
             $log->item_type = License::class;
             $log->item_id = $this->license_id;
         } else {
-
             $log->item_type = static::class;
             $log->item_id = $this->id;
 
@@ -109,17 +108,17 @@ trait Loggable
                     $asset->increment('checkin_counter', 1);
                 }
             }
-
         }
 
 
         $log->location_id = null;
         $log->note = $note;
+        $log->action_date = $action_date;
 
         if (Auth::user()) {
             $log->user_id = Auth::user()->id;
         }
-        
+
         $log->logaction('checkin from');
 
 //        $params = [
@@ -158,7 +157,6 @@ trait Loggable
         return $log;
     }
 
-
     /**
      * @author  A. Gianotto <snipe@snipe.net>
      * @since [v4.0]
@@ -186,14 +184,12 @@ trait Loggable
             'filename' => $log->filename,
             'admin' => $log->user,
             'location' => ($location) ? $location->name : '',
-            'note' => $note
+            'note' => $note,
         ];
         Setting::getSettings()->notify(new AuditNotification($params));
 
         return $log;
     }
-
-
 
     /**
      * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
@@ -219,6 +215,7 @@ trait Loggable
         $log->user_id = $user_id;
         $log->logaction('create');
         $log->save();
+
         return $log;
     }
 
@@ -239,9 +236,9 @@ trait Loggable
         }
         $log->user_id = Auth::user()->id;
         $log->note = $note;
-        $log->target_id =  null;
-        $log->created_at =  date("Y-m-d H:i:s");
-        $log->filename =  $filename;
+        $log->target_id = null;
+        $log->created_at = date('Y-m-d H:i:s');
+        $log->filename = $filename;
         $log->logaction('uploaded');
 
         return $log;

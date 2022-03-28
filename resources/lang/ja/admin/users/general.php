@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'このユーザはログインすることができます。',
     'activated_disabled_help_text' => '自分自身のアカウント有効化状態は編集できません。',
     'assets_user'       => ':name に資産を割り当てる',
@@ -13,7 +12,7 @@ return array(
     'edit'              => '利用者を編集',
     'filetype_info'     => '許可するファイルタイプ（png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar）',
     'history_user'      => ':nameの履歴',
-	'info'				=> '情報',
+    'info'				=> '情報',
     'restore_user'		=> '復元するには、ここをクリックします。',
     'last_login'        => '最終ログイン',
     'ldap_config_text'  => 'LDAP 構成設定 管理者 > 設定。 選択した場所は、インポートされたすべてのユーザーに対して設定されます。',
@@ -25,4 +24,14 @@ return array(
     'two_factor_admin_optin_help' => '現在の管理者設定では、2段階認証は任意です。  ',
     'two_factor_enrolled' => '二段階認証デバイスの登録 ',
     'two_factor_active'   => '二段階認証有効 ',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

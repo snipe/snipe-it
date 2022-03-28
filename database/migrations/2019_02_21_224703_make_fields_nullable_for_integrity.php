@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class MakeFieldsNullableForIntegrity extends Migration
 {
@@ -13,8 +13,6 @@ class MakeFieldsNullableForIntegrity extends Migration
      */
     public function up()
     {
-
-
         Schema::table('locations', function (Blueprint $table) {
             $table->string('city')->nullable()->default(null)->change();
             $table->string('state')->nullable()->default(null)->change();

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'เกี่ยวกับสถานที่',
     'about_locations'           => 'สถานที่ถูกใช้เพื่อติดตามข้อมูลตำแหน่งสำหรับผู้ใช้เนื้อหาและรายการอื่น ๆ',
     'assets_rtd'                => 'สินทรัพย์', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -11,8 +11,8 @@ return array(
     'country'                   => 'ประเทศ',
     'create'                    => 'สร้างสถานที่',
     'update'                    => 'อัพเดทสถานที่',
-    'print_assigned'            => 'Print Assigned',
-    'print_all_assigned'        => 'Print All Assigned',
+    'print_assigned'            => 'พิมพ์ งานที่มอบหมาย',
+    'print_all_assigned'        => 'พิมพ์ งานที่มอบหมาย ทั้งหมด',
     'name'                      => 'ชื่อสถานที่',
     'address'                   => 'ที่อยู่',
     'zip'                       => 'รหัสไปรษณีย์',
@@ -20,4 +20,21 @@ return array(
     'parent'                    => 'หมวดแม่',
     'currency'                  => 'สกุลเงินตามสถานที่',
     'ldap_ou'                   => 'LDU Search OU',
-    );
+    'user_name'                 => 'User Name',
+    'department'                => 'Department',
+    'location'                  => 'Location',
+    'asset_tag'                 => 'Assets Tag',
+    'asset_name'                => 'Name',
+    'asset_category'            => 'Category',
+    'asset_manufacturer'        => 'Manufacturer',
+    'asset_model'               => 'Model',
+    'asset_serial'              => 'Serial',
+    'asset_location'            => 'Location',
+    'asset_checked_out'         => 'Checked Out',
+    'asset_expected_checkin'    => 'Expected Checkin',
+    'date'                      => 'Date:',
+    'signed_by_asset_auditor'   => 'Signed By (Asset Auditor):',
+    'signed_by_finance_auditor' => 'Signed By (Finance Auditor):',
+    'signed_by_location_manager' => 'Signed By (Location Manager):',
+    'signed_by'                 => 'Signed Off By:',
+];

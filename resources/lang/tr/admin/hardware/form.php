@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'Toplu varlık silmeyi onaylıyor musunuz?',
+return [
+    'bulk_delete'		=> 'Toplu varlık silmeyi onaylıyor musunuz?',
   'bulk_delete_help'	=> 'Toplu silme için aşağıdaki Varlıkları gözden geçirin. Silindikten sonra bu varlıkların geri yüklenebilir fakat atanmış olan herhangi bir kullanıcı ile ilişkili olmayacaktır.',
   'bulk_delete_warn'	=> ':asset_count adet varlığı düzenlemek üzeresiniz.',
-	'bulk_update'		=> 'Demirbaşları Toplu Güncelle',
-	'bulk_update_help'	=> 'Bu form birden çok demirbaşı tek seferde güncellemenizi sağlar. Lütfen sadece değiştirmek istediğiniz alanları doldurunuz. Değiştirilmesini istemediğiniz alanları boş bırakınız. ',
-	'bulk_update_warn'	=> ':asset_count adet demirbaşı düzenlemek üzeresiniz.',
+    'bulk_update'		=> 'Demirbaşları Toplu Güncelle',
+    'bulk_update_help'	=> 'Bu form birden çok demirbaşı tek seferde güncellemenizi sağlar. Lütfen sadece değiştirmek istediğiniz alanları doldurunuz. Değiştirilmesini istemediğiniz alanları boş bırakınız. ',
+    'bulk_update_warn'	=> ':asset_count adet demirbaşı düzenlemek üzeresiniz.',
     'checkedout_to'		=> 'Çıkış Yapılmış Olan Kişi',
     'checkout_date'		=> 'Çıkış Tarihi',
     'checkin_date'		=> 'Giriş Tarihi',
@@ -38,7 +38,12 @@ return array(
     'tag'				=> 'Demirbaş Etiketi',
     'update'			=> 'Demirbaş Güncelle',
     'warranty'			=> 'Garanti',
-		'warranty_expires'		=> 'Garanti Süresi Sona Erdi',
+        'warranty_expires'		=> 'Garanti Süresi Sona Erdi',
     'years'				=> 'yıl',
-)
-;
+    'asset_location' => 'Varlık konumunu güncelle',
+    'asset_location_update_default_current' => 'Varsayılan konumu ve gerçek konumu güncelle',
+    'asset_location_update_default' => 'Sadece varsayılan konumu güncelle',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+];

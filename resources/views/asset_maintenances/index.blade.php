@@ -53,7 +53,7 @@
     function maintenanceActions(value, row) {
         var actions = '<nobr>';
         if ((row) && (row.available_actions.update === true)) {
-            actions += '<a href="{{ url('/') }}/hardware/maintenances/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="Update"><i class="fa fa-pencil"></i></a>&nbsp;';
+            actions += '<a href="{{ url('/') }}/hardware/maintenances/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="Update"><i class="fas fa-pencil-alt"></i></a>&nbsp;';
         }
         actions += '</nobr>'
         if ((row) && (row.available_actions.delete === true)) {
@@ -62,7 +62,7 @@
                 + ' data-toggle="modal" '
                 + ' data-content="{{ trans('general.sure_to_delete') }} ' + row.name + '?" '
                 + ' data-title="{{  trans('general.delete') }}" onClick="return false;">'
-                + '<i class="fa fa-trash"></i></a></nobr>';
+                + '<i class="fas fa-trash"></i></a></nobr>';
         }
 
         return actions;

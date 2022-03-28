@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,9 +13,9 @@ return array(
     |
     */
 
-    "more_info_title" => "詳細",
+    'more_info_title' => '詳細',
 
-    "audit_help" => "Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to.",
+    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
     'assets' => '資産はシリアル番号または資産タグで追跡されるアイテムです。特定のアイテムを識別することが重要なより高い価値のアイテムである傾向があります。',
 
@@ -31,6 +31,4 @@ return array(
 
     'depreciations' => '定額法に基づいて資産の減価償却を設定することができます。',
 
-
-
-);
+];

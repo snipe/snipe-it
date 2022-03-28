@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'Потвърдете масовото изтриване на активи',
+return [
+    'bulk_delete'		=> 'Потвърдете масовото изтриване на активи',
   'bulk_delete_help'	=> 'Прегледайте активите, маркирани за масово изтриване. Веднъж изтрити, активите могат да бъдат възстановени, но те вече няма да бъдат асоциирани с потребителите, на които са изписани в момента.',
   'bulk_delete_warn'	=> 'Ще бъдат изтрити :asset_count актива.',
-	'bulk_update'		=> 'Масово обновяване на активи',
-	'bulk_update_help'	=> 'Тук можете да обновите множество активи едновременно. Попълнете единствено полетата, които желаете да промените. Всички празни полета няма да бъдат променени.',
-	'bulk_update_warn'	=> 'Ще бъдат променени записите за :asset_count актива.',
+    'bulk_update'		=> 'Масово обновяване на активи',
+    'bulk_update_help'	=> 'Тук можете да обновите множество активи едновременно. Попълнете единствено полетата, които желаете да промените. Всички празни полета няма да бъдат променени.',
+    'bulk_update_warn'	=> 'Ще бъдат променени записите за :asset_count актива.',
     'checkedout_to'		=> 'Изписано на',
     'checkout_date'		=> 'Дата на изписване',
     'checkin_date'		=> 'Дата на вписване',
@@ -38,7 +38,12 @@ return array(
     'tag'				=> 'Инвентарен номер',
     'update'			=> 'Обновяване на актив',
     'warranty'			=> 'Гаранция',
-		'warranty_expires'		=> 'Гаранцията изтича',
+        'warranty_expires'		=> 'Гаранцията изтича',
     'years'				=> 'години',
-)
-;
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+];

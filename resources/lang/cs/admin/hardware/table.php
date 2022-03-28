@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Označení majetku',
     'asset_model'       => 'Model',
-    'book_value'  	=> 'Hodnota',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'Příjem/Výdej',
     'checkout_date' => 'Datum vydání',
     'checkoutto' 	=> 'Vydané',
+    'current_value' => 'Current Value',
     'diff' 			=> 'Rozdíl',
     'dl_csv' 		=> 'Stáhnout CSV',
     'eol' 			=> 'Konec životnosti',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> 'Sériové číslo',
     'status'   		=> 'Stav',
     'title'      	=> 'Majetek ',
-    'image'		=> 'Obrázek zařízení',
+    'image'		    => 'Obrázek zařízení',
     'days_without_acceptance' => 'Dní bez schválení',
-    'monthly_depreciation' => 'Monthly Depreciation'
-
-);
+    'monthly_depreciation' => 'Monthly Depreciation',
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Ikona',
+];

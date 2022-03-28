@@ -56,7 +56,7 @@
                                 <!-- Delete Button -->
                                 <td style="vertical-align: middle;" class="text-right">
                                     <a class="action-link btn btn-danger btn-sm" @click="revoke(token)">
-                                      <i class="fa fa-trash"></i>
+                                      <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
                             </tr>

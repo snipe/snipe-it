@@ -13,6 +13,7 @@ return array(
     'user_deleted_warning'      => 'Cet utilisateur a été supprimé. Vous devez le restaurer pour pouvoir l\'éditer ou lui assigner de nouveaux actifs.',
     'ldap_not_configured'        => 'L\'intégration LDAP n\'a pas été configuré pour cette installation .',
     'password_resets_sent'      => 'Les utilisateurs sélectionnés qui sont activés et ont une adresse e-mail valide ont reçu un lien de réinitialisation du mot de passe.',
+    'password_reset_sent'       => 'Un lien de réinitialisation du mot de passe a été envoyé à :email!',
 
 
     'success' => array(

@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class LabelsDisplayModelName extends Migration
 {
@@ -14,7 +14,7 @@ class LabelsDisplayModelName extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-		$table->boolean('labels_display_model')->default(0);
+            $table->boolean('labels_display_model')->default(0);
         });
     }
 

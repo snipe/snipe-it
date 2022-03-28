@@ -27,8 +27,8 @@ class ImportController extends Controller
     {
         $this->authorize('import');
         $imports = Import::latest()->get();
-        return (new ImportsTransformer)->transformImports($imports);
 
+        return (new ImportsTransformer)->transformImports($imports);
     }
 
     /**
@@ -40,27 +40,28 @@ class ImportController extends Controller
     public function store()
     {
         $this->authorize('import');
-        if (!config('app.lock_passwords')) {
+        if (! config('app.lock_passwords')) {
             $files = Request::file('files');
             $path = config('app.private_uploads').'/imports';
             $results = [];
             $import = new Import;
             foreach ($files as $file) {
-                if (!in_array($file->getMimeType(), array(
+                if (! in_array($file->getMimeType(), [
                     'application/vnd.ms-excel',
                     'text/csv',
                     'application/csv',
                     'text/x-Algol68', // because wtf CSV files?
                     'text/plain',
                     'text/comma-separated-values',
-                    'text/tsv'))) {
-                    $results['error']='File type must be CSV. Uploaded file is '.$file->getMimeType();
+                    'text/tsv', ])) {
+                    $results['error'] = 'File type must be CSV. Uploaded file is '.$file->getMimeType();
+
                     return response()->json(Helper::formatStandardApiResponse('error', null, $results['error']), 500);
                 }
 
                 //TODO: is there a lighter way to do this?
-                if (! ini_get("auto_detect_line_endings")) {
-                    ini_set("auto_detect_line_endings", '1');
+                if (! ini_get('auto_detect_line_endings')) {
+                    ini_set('auto_detect_line_endings', '1');
                 }
                 $reader = Reader::createFromFileObject($file->openFile('r')); //file pointer leak?
                 $import->header_row = $reader->fetchOne(0);
@@ -68,20 +69,20 @@ class ImportController extends Controller
                 //duplicate headers check
                 $duplicate_headers = [];
 
-                for($i = 0; $i<count($import->header_row); $i++) {
+                for ($i = 0; $i < count($import->header_row); $i++) {
                     $header = $import->header_row[$i];
-                    if(in_array($header, $import->header_row)) {
+                    if (in_array($header, $import->header_row)) {
                         $found_at = array_search($header, $import->header_row);
-                        if($i > $found_at) {
+                        if ($i > $found_at) {
                             //avoid reporting duplicates twice, e.g. "1 is same as 17! 17 is same as 1!!!"
                             //as well as "1 is same as 1!!!" (which is always true)
                             //has to be > because otherwise the first result of array_search will always be $i itself(!)
-                            array_push($duplicate_headers,"Duplicate header '$header' detected, first at column: ".($found_at+1).", repeats at column: ".($i+1));
+                            array_push($duplicate_headers, "Duplicate header '$header' detected, first at column: ".($found_at + 1).', repeats at column: '.($i + 1));
                         }
                     }
                 }
-                if(count($duplicate_headers) > 0) {
-                    return response()->json(Helper::formatStandardApiResponse('error',null, implode("; ",$duplicate_headers)), 500); //should this be '4xx'?
+                if (count($duplicate_headers) > 0) {
+                    return response()->json(Helper::formatStandardApiResponse('error', null, implode('; ', $duplicate_headers)), 500); //should this be '4xx'?
                 }
 
                 // Grab the first row to display via ajax as the user picks fields
@@ -92,10 +93,11 @@ class ImportController extends Controller
                 try {
                     $file->move($path, $date.'-'.$fixed_filename);
                 } catch (FileException $exception) {
-                    $results['error']=trans('admin/hardware/message.upload.error');
+                    $results['error'] = trans('admin/hardware/message.upload.error');
                     if (config('app.debug')) {
-                        $results['error'].= ' ' . $exception->getMessage();
+                        $results['error'] .= ' '.$exception->getMessage();
                     }
+
                     return response()->json(Helper::formatStandardApiResponse('error', null, $results['error']), 500);
                 }
                 $file_name = date('Y-m-d-his').'-'.$fixed_filename;
@@ -105,12 +107,15 @@ class ImportController extends Controller
                 $results[] = $import;
             }
             $results = (new ImportsTransformer)->transformImports($results);
+
             return [
                 'files' => $results,
             ];
         }
+
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.feature_disabled')), 500);
     }
+
     /**
      * Processes the specified Import.
      *
@@ -130,25 +135,25 @@ class ImportController extends Controller
         }
 
         $errors = $request->import(Import::find($import_id));
-        $redirectTo = "hardware.index";
+        $redirectTo = 'hardware.index';
         switch ($request->get('import-type')) {
-            case "asset":
-                $redirectTo = "hardware.index";
+            case 'asset':
+                $redirectTo = 'hardware.index';
                 break;
-            case "accessory":
-                $redirectTo = "accessories.index";
+            case 'accessory':
+                $redirectTo = 'accessories.index';
                 break;
-            case "consumable":
-                $redirectTo = "consumables.index";
+            case 'consumable':
+                $redirectTo = 'consumables.index';
                 break;
-            case "component":
-                $redirectTo = "components.index";
+            case 'component':
+                $redirectTo = 'components.index';
                 break;
-            case "license":
-                $redirectTo = "licenses.index";
+            case 'license':
+                $redirectTo = 'licenses.index';
                 break;
-            case "user":
-                $redirectTo = "users.index";
+            case 'user':
+                $redirectTo = 'users.index';
                 break;
         }
 
@@ -157,8 +162,8 @@ class ImportController extends Controller
         }
         //Flash message before the redirect
         Session::flash('success', trans('admin/hardware/message.import.success'));
-        return response()->json(Helper::formatStandardApiResponse('success', null, ['redirect_url' => route($redirectTo)]));
 
+        return response()->json(Helper::formatStandardApiResponse('success', null, ['redirect_url' => route($redirectTo)]));
     }
 
     /**
@@ -170,20 +175,20 @@ class ImportController extends Controller
     public function destroy($import_id)
     {
         $this->authorize('create', Asset::class);
-        
+
         if ($import = Import::find($import_id)) {
             try {
                 // Try to delete the file
                 Storage::delete('imports/'.$import->file_path);
                 $import->delete();
-                return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.import.file_delete_success')));
 
+                return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.import.file_delete_success')));
             } catch (\Exception $e) {
                 // If the file delete didn't work, remove it from the database anyway and return a warning
                 $import->delete();
+
                 return response()->json(Helper::formatStandardApiResponse('warning', null, trans('admin/hardware/message.import.file_not_deleted_warning')));
             }
         }
-
     }
 }

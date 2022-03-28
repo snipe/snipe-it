@@ -1,4 +1,9 @@
 
+
+// var jQuery = require('jquery');
+// window.jQuery = jQuery
+// window.$ = jQuery
+
 /**
  * Module containing core application logic.
  * @param  {jQuery} $        Insulated jQuery object
@@ -63,7 +68,7 @@ pieOptions = {
 
     //String - A legend template
     legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li>" +
-    "<i class='fa fa-circle-o' style='color: <%=segments[i].fillColor%>'></i>" +
+    "<i class='fas fa-circle-o' style='color: <%=segments[i].fillColor%>'></i>" +
     "<%if(segments[i].label){%><%=segments[i].label%><%}%> foo</li><%}%></ul>",
     //String - A tooltip template
     tooltipTemplate: "<%=value %> <%=label%> "
@@ -78,6 +83,37 @@ var baseUrl = $('meta[name="baseUrl"]').attr('content');
 (function($, settings) {
     var Components = {};
     Components.modals = {};
+
+    // confirm restore modal
+    Components.modals.confirmRestore = function() {
+        var $el = $('table');
+
+        var events = {
+            'click': function(evnt) {
+                var $context = $(this);
+                var $restoreConfirmModal = $('#restoreConfirmModal');
+                var href = $context.attr('href');
+                var message = $context.attr('data-content');
+                var title = $context.attr('data-title');
+
+                $('#restoreConfirmModalLabel').text(title);
+                $restoreConfirmModal.find('.modal-body').text(message);
+                $('#restoreForm').attr('action', href);
+                $restoreConfirmModal.modal({
+                    show: true
+                });
+                return false;
+            }
+        };
+
+        var render = function() {
+            $el.on('click', '.restore-asset', events['click']);
+        };
+
+        return {
+            render: render
+        };
+    };
 
     // confirm delete modal
     Components.modals.confirmDelete = function() {
@@ -116,6 +152,7 @@ var baseUrl = $('meta[name="baseUrl"]').attr('content');
      * Component definition stays out of load event, execution only happens.
      */
     $(function() {
+        new Components.modals.confirmRestore().render();
         new Components.modals.confirmDelete().render();
     });
 }(jQuery, window.snipeit.settings));
@@ -197,7 +234,7 @@ $(document).ready(function () {
             ajax: {
 
                 // the baseUrl includes a trailing slash
-                url: Ziggy.baseUrl + 'api/v1/' + endpoint + '/selectlist',
+                url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
                 dataType: 'json',
                 delay: 250,
                 headers: {
@@ -282,7 +319,7 @@ $(document).ready(function () {
 			var endpoint = element.data("endpoint");
 			var assetStatusType = element.data("asset-status-type");
 			$.ajax({
-				url: Ziggy.baseUrl + 'api/v1/' + endpoint + '/selectlist?search='+value+'&page=1' + (assetStatusType ? '&assetStatusType='+assetStatusType : ''),
+				url: baseUrl + 'api/v1/' + endpoint + '/selectlist?search='+value+'&page=1' + (assetStatusType ? '&assetStatusType='+assetStatusType : ''),
 				dataType: 'json',
 				headers: {
 					"X-Requested-With": 'XMLHttpRequest',
@@ -296,11 +333,11 @@ $(document).ready(function () {
                 });
 				
 				// makes sure we're not selecting the same thing twice for multiples
-				var filteredResponse = response.items.filter(function(item) {
+				var filteredResponse = response.results.filter(function(item) {
 					return currentlySelected.indexOf(+item.id) < 0;
 				});
 
-				var first = (currentlySelected.length > 0) ? filteredResponse[0] : response.items[0];
+				var first = (currentlySelected.length > 0) ? filteredResponse[0] : response.results[0];
 				
 				if(first && first.id) {
 					first.selected = true;
@@ -326,7 +363,7 @@ $(document).ready(function () {
 	});
 
     function formatDatalist (datalist) {
-        var loading_markup = '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
+        var loading_markup = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
         if (datalist.loading) {
             return loading_markup;
         }
@@ -348,7 +385,7 @@ $(document).ready(function () {
         // console.warn("What in the hell is going on with Select2?!?!!?!?");
         // console.warn($.select2);
         if (datalist.loading) {
-            return $('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...');
+            return $('<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...');
         }
 
         var root_div = $("<div class='clearfix'>") ;
@@ -514,17 +551,17 @@ $(document).ready(function () {
 
         for (var i = 0; i < this.files.length; i++) {
             total_size += this.files[i].size;
-            $(id + '-info').append('<span class="label label-default">' + this.files[i].name + ' (' + formatBytes(this.files[i].size) + ')</span> ');
+            $(id + '-info').append('<span class="label label-default">' + htmlEntities(this.files[i].name) + ' (' + formatBytes(this.files[i].size) + ')</span> ');
         }
 
         console.log('Max size is: ' + max_size);
         console.log('Real size is: ' + total_size);
 
         if (total_size > max_size) {
-            $status.addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fa fa-times"></i> ').append('<span class="previewSize"> Upload is ' + formatBytes(total_size) + '.</span>');
+            $status.addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fas fa-times"></i> ').append('<span class="previewSize"> Upload is ' + formatBytes(total_size) + '.</span>');
         } else {
 
-            $status.addClass('text-success').removeClass('help-block').prepend('<i class="goodfile fa fa-check"></i> ');
+            $status.addClass('text-success').removeClass('help-block').prepend('<i class="goodfile fas fa-check"></i> ');
             var $preview =  $(id + '-imagePreview');
             readURL(this, $preview);
             $preview.fadeIn();
@@ -534,6 +571,11 @@ $(document).ready(function () {
     });
 
 });
+
+function htmlEntities(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
 
 
 /**

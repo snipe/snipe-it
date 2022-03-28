@@ -1,11 +1,12 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Egendefinerte Felt',
+    'manage'                    => 'Administrer',
     'field'		                => 'Felt',
     'about_fieldsets_title'		=> 'Om Feltsett',
-    'about_fieldsets_text'		=> 'Feltsett lar deg opprette grupper av egendefinerte felt som ofte gjenbrukes brukes til bestemte modelltyper.',
-    'custom_format'             => 'Egendefinert format...',
+    'about_fieldsets_text'		=> 'Feltsett lar deg opprette grupper av egendefinerte felt som kan gjenbrukes til bestemte modelltyper.',
+    'custom_format'             => 'Tilpasset Regex-format...',
     'encrypt_field'      	        => 'Kryptere verdien av dette feltet i databasen',
     'encrypt_field_help'      => 'ADVARSEL: Ved å kryptere et felt gjør du at det ikke kan søkes på.',
     'encrypted'      	        => 'Kryptert',
@@ -26,7 +27,19 @@ return array(
     'used_by_models'   		    => 'Brukes av modeller',
     'order'   		            => 'Bestill',
     'create_fieldset'         => 'Nytt Feltsett',
+    'create_fieldset_title' => 'Opprett et nytt feltsett',
     'create_field'            => 'Nytt Egendefinert Felt',
+    'create_field_title' => 'Opprett nytt egendefinert felt',
     'value_encrypted'      	        => 'Verdien i dette feltet er kryptert i databasen. Bare administratorer kan se hva som står i dette feltet',
     'show_in_email'     => 'Inkluder verdien i dette feltet i utsjekkseposter sendt til brukeren? Krypterte felter kan ikke inkluderes i eposter.',
-);
+    'help_text' => 'Hjelpetekst',
+    'help_text_description' => 'Dette er en valgfri tekst som vises under feltet når man redigerer et element, ment for å gi kontekst til feltets innhold.',
+    'about_custom_fields_title' => 'Om egendefinerte felt',
+    'about_custom_fields_text' => 'Egendefinerte felt lar deg legge til vilkårlige attributter til eiendeler.',
+    'add_field_to_fieldset' => 'Legg feltet inn i feltsett',
+    'make_optional' => 'Påkrevd - klikk for å gjøre valgfritt',
+    'make_required' => 'Valgfritt - klikk for å gjøre påkrevd',
+    'reorder' => 'Endre rekkefølge',
+    'db_field' => 'DB-felt',
+    'db_convert_warning' => 'ADVARSEL: Dette feltet er i tabellen for egendefinerte felt som <code>:db_column</code>, men burde være <code>:expected</code>.'
+];

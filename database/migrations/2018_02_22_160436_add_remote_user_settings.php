@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class AddRemoteUserSettings extends Migration
 {
@@ -16,7 +16,7 @@ class AddRemoteUserSettings extends Migration
         Schema::table('settings', function (Blueprint $table) {
             $table->boolean('login_remote_user_enabled')->default(0);
             $table->boolean('login_common_disabled')->default(0);
-            $table->string('login_remote_user_custom_logout_url')->default("");
+            $table->string('login_remote_user_custom_logout_url')->default('');
         });
     }
 

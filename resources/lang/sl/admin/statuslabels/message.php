@@ -1,32 +1,31 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Oznaka statusa ne obstaja.',
     'assoc_assets'	 => 'Ta oznaka statusa je trenutno povezana z vsaj enim sredstvom in je ni mogoče izbrisati. Posodobite svoja sredstva, da ne bodo več v tem stanju in poskusite znova. ',
 
-
-    'create' => array(
+    'create' => [
         'error'   => 'Oznaka statusa ni bila ustvarjena, poskusite znova.',
-        'success' => 'Oznaka statusa je bil uspešno ustvarjena.'
-    ),
+        'success' => 'Oznaka statusa je bil uspešno ustvarjena.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Oznaka statusa ni bila posodobljena, poskusite znova',
-        'success' => 'Oznaka statusa je bila uspešno posodobljena.'
-    ),
+        'success' => 'Oznaka statusa je bila uspešno posodobljena.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Ali ste prepričani, da želite izbrisati to oznako statusa?',
         'error'   => 'Prišlo je do težave z izbrisom oznake statusa. Prosim poskusite ponovno.',
-        'success' => 'Oznaka statusa je bila uspešno izbrisana.'
-    ),
+        'success' => 'Oznaka statusa je bila uspešno izbrisana.',
+    ],
 
-    'help' => array(
+    'help' => [
         'undeployable'   => 'Tega sredstva ni mogoče dodeliti nikomur.',
-        'deployable'   => 'Teh sredstev ni mogoče izdati. Ko bodo dodeljeni, bodo prevzeli meta status <i class="fa fa-circle text-blue"></i> <strong>Razporejeno</strong>.',
+        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
         'archived'   => 'Teh sredstev ni mogoče izdati in se bodo prikazala samo v pogledu Arhivirano. To je koristno za ohranjanje informacij o sredstvih za računovodske namene / zgodovinske namene, vendar jih ni na seznamu uporabnih sredstev.',
         'pending'   => 'Teh sredstev trnutno ni mogoče dodeliti nikomur, pogosto se uporablja za sredstva, ki so ne popravilu, in se pričakuje, da se bodo vrnila v obtok.',
-    ),
+    ],
 
-);
+];

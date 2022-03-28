@@ -18,5 +18,6 @@ return array(
     'update'  							=> 'Actualizar Categoria',
     'use_default_eula'					=> 'Em vez disso, utilize o <a href="#" data-toggle="modal" data-target="#eulaModal">EULA padrão</a>.',
     'use_default_eula_disabled'			=> '<del>Em vez disso, utilize o EULA padrão</del> Nenhum foi definido. Adicione um nas Configurações.',
+    'use_default_eula_column'			=> 'Usar EULA padrão',
 
 );

@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Eszköz cimke',
     'asset_model'       => 'Modell',
-    'book_value'  	=> 'Érték',
+    'book_value'  	=> 'Jelenlegi érték',
     'change' 		=> 'Be/ki',
     'checkout_date' => 'Kiadási dátum',
     'checkoutto' 	=> 'Kiadva',
+    'current_value' => 'Jelenlegi érték',
     'diff' 			=> 'Eltérés',
     'dl_csv' 		=> 'Cvs letöltése',
     'eol' 			=> 'Lejárat',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> 'Sorozatszám',
     'status'   		=> 'Állapot',
     'title'      	=> 'Eszköz ',
-    'image'		=> 'Készülék kép',
+    'image'		    => 'Készülék kép',
     'days_without_acceptance' => 'Nem elfogadás óta eltelt napok száma',
-    'monthly_depreciation' => 'Havi értékcsökkenés'
-
-);
+    'monthly_depreciation' => 'Havi értékcsökkenés',
+    'assigned_to'    => 'Felelős',
+    'requesting_user' => 'Igénylő felhasználó',
+    'requested_date' => 'Kért időpont',
+    'changed'       => 'Módosítva',
+    'icon' => 'Ikon',
+];

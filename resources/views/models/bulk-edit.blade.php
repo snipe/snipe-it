@@ -22,7 +22,7 @@
 
                 <div class="box box-default">
                     <div class="box-header with-border">
-                        <div class="box-title"><i class="fa fa-warning"></i> You are about to edit the following: </div>
+                        <div class="box-title"><i class="fas fa-exclamation-triangle"></i>{{ trans('general.bulk_edit_about_to') }}</div>
                     </div>
                     <div class="box-body">
 
@@ -56,7 +56,7 @@
                                 </label>
                                 <div class="col-md-7">
                                     {{ Form::select('fieldset_id', $fieldset_list , old('fieldset_id', 'NC'), array('class'=>'select2 js-fieldset-field', 'style'=>'width:350px')) }}
-                                    {!! $errors->first('fieldset_id', '<span class="alert-msg" aria-hidden="true"><br><i class="fa fa-times"></i> :message</span>') !!}
+                                    {!! $errors->first('fieldset_id', '<span class="alert-msg" aria-hidden="true"><br><i class="fas fa-times"></i> :message</span>') !!}
                                 </div>
                             </div>
 
@@ -68,9 +68,26 @@
                                 </label>
                                 <div class="col-md-7">
                                     {{ Form::select('depreciation_id', $depreciation_list , old('depreciation_id', 'NC'), array('class'=>'select2', 'style'=>'width:350px')) }}
-                                    {!! $errors->first('depreciation_id', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                    {!! $errors->first('depreciation_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                                 </div>
                             </div>
+
+                            <!-- requestable -->
+                                <div class="form-group {{ $errors->has('requestable') ? 'has-error' : '' }}">
+                                <div class="col-md-7 col-md-offset-3">
+                            
+
+                                    <div class="checkbox">
+                                        <label for="requestable">
+                                            {{ Form::radio('requestable', '', true, ['aria-label'=>'requestable']) }} {{  trans('admin/hardware/general.requestable_status_warning')}}<br>
+                                            {{ Form::radio('requestable', '1', old('requestable'), ['aria-label'=>'requestable']) }}  {{  trans('admin/hardware/general.requestable')}} <br>
+                                            {{ Form::radio('requestable', '0', old('requestable'), ['aria-label'=>'requestable']) }}  {{  trans('admin/hardware/general.not_requestable')}}
+    
+                                        </label>
+                                    </div>
+
+                                </div>
+                                </div>
 
                             @foreach ($models as $model)
                                 <input type="hidden" name="ids[{{ $model->id }}]" value="{{ $model->id }}">
@@ -78,8 +95,8 @@
                         </div>
                     </div> <!--/.box-body-->
 
-                    <div class="box-footer text-right">
-                        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                    <div class="text-right box-footer">
+                        <button type="submit" class="btn btn-success"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                     </div>
                 </div> <!--/.box.box-default-->
             </form>

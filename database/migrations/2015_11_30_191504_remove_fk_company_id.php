@@ -1,18 +1,18 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class RemoveFkCompanyId extends Migration {
-
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		//
+class RemoveFkCompanyId extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        //
     // Schema::table('users', function(Blueprint $table)
     // {
     //   $table->dropForeign('users_company_id_foreign');
@@ -37,18 +37,15 @@ class RemoveFkCompanyId extends Migration {
     // {
     //   $table->dropForeign('licenses_company_id_foreign');
     // });
+    }
 
-
-	}
-
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		//
-	}
-
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        //
+    }
 }

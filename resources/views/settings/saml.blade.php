@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Update SAML Settings
+    {{ trans('admin/settings/general.saml_title') }}
     @parent
 @stop
 
@@ -38,8 +38,8 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fa fa-sign-in"></i> SAML
-                    </h4>
+                        <i class="fas fa-sign-in-alt"></i> {{ trans('admin/settings/general.saml') }}
+                    </h2>
                 </div>
                 <div class="box-body">
 
@@ -57,7 +57,7 @@
                                 {{ trans('admin/settings/general.saml_enabled') }}
                                 {!! $errors->first('saml_integration', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}<br>
                                 @if (config('app.lock_passwords')===true)
-                                <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                                <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @endif
 
 
@@ -88,7 +88,7 @@
                                     {{ Form::text('saml_sp_metadata_url', route('saml.metadata'), ['class' => 'form-control', 'readonly']) }}
                                     <br>
                                     <p class="help-block">
-                                        <a href="{{ route('saml.metadata') }}" target="_blank" class="btn btn-default" style="margin-right: 5px;">Download Metadata</a>
+                                        <a href="{{ route('saml.metadata') }}" target="_blank" class="btn btn-default" style="margin-right: 5px;">{{ trans('admin/settings/general.saml_download') }}</a>
                                     </p>
                                 @endif
                                 {!! $errors->first('saml_enabled', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
@@ -105,7 +105,7 @@
                             {!! $errors->first('saml_idp_metadata', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}<br>
                             <button type="button" class="btn btn-default" id="saml_idp_metadata_upload_btn">{{ trans('button.select_file') }}</button>
                             <input type="file" class="js-uploadFile" id="saml_idp_metadata_upload"
-                                data-maxsize="{{ \App\Helpers\Helper::file_upload_max_size() }}"
+                                data-maxsize="{{ Helper::file_upload_max_size() }}"
                                 accept="text/xml,application/xml" style="display:none; max-width: 90%">
                             
                             <p class="help-block">{{ trans('admin/settings/general.saml_idp_metadata_help') }}</p>
@@ -171,7 +171,7 @@
                         <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                     </div>
                     <div class="text-right col-md-6">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                     </div>
 
                 </div>

@@ -51,11 +51,11 @@
                       'id' => 'bulkForm']) }}
                   <div id="toolbar">
                       <select name="bulk_actions" class="form-control select2">
-                          <option value="edit">Edit</option>
-                          <option value="delete">Delete</option>
-                          <option value="labels">Generate Labels</option>
+                          <option value="edit">{{ trans('button.edit') }}</option>
+                          <option value="delete">{{ trans('button.delete') }}</option>
+                          <option value="labels">{{ trans_choice('button.generate_labels', 2) }}</option>
                       </select>
-                      <button class="btn btn-primary" id="bulkEdit" disabled>Go</button>
+                      <button class="btn btn-primary" id="bulkEdit" disabled>{{ trans('button.go') }}</button>
                   </div>
 
                   <table
@@ -90,7 +90,7 @@
       <div class="box box-default">
               <div class="box-header with-border">
                   <div class="box-heading">
-                      <h2 class="box-title"> More Info:</h2>
+                      <h2 class="box-title"> {{ trans('general.moreinfo') }}:</h2>
                   </div>
               </div><!-- /.box-header -->
           <div class="box-body">
@@ -115,19 +115,19 @@
 
                   @if ($model->manufacturer->url)
                       <li>
-                          <i class="fa fa-globe"></i> <a href="{{ $model->manufacturer->url }}">{{ $model->manufacturer->url }}</a>
+                          <i class="fas fa-globe-americas"></i> <a href="{{ $model->manufacturer->url }}">{{ $model->manufacturer->url }}</a>
                       </li>
                   @endif
 
                   @if ($model->manufacturer->support_url)
                       <li>
-                          <i class="fa fa-life-ring"></i> <a href="{{ $model->manufacturer->support_url }}">{{ $model->manufacturer->support_url }}</a>
+                          <i class="far fa-life-ring"></i> <a href="{{ $model->manufacturer->support_url }}">{{ $model->manufacturer->support_url }}</a>
                       </li>
                   @endif
 
                   @if ($model->manufacturer->support_phone)
                       <li>
-                          <i class="fa fa-phone"></i>
+                          <i class="fas fa-phone"></i>
                           <a href="tel:{{ $model->manufacturer->support_phone }}">{{ $model->manufacturer->support_phone }}</a>
 
                       </li>
@@ -135,7 +135,7 @@
 
                   @if ($model->manufacturer->support_email)
                       <li>
-                          <i class="fa fa-envelope"></i> <a href="mailto:{{ $model->manufacturer->support_email }}">{{ $model->manufacturer->support_email }}</a>
+                          <i class="far fa-envelope"></i> <a href="mailto:{{ $model->manufacturer->support_email }}">{{ $model->manufacturer->support_email }}</a>
                       </li>
                   @endif
                 @endif

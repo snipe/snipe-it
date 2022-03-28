@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Models;
 
 use App\Helpers\Helper;
 use App\Models\Traits\Searchable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
@@ -14,12 +16,14 @@ use Watson\Validating\ValidatingTrait;
  */
 class AssetMaintenance extends Model implements ICompanyableChild
 {
+    use HasFactory;
     use SoftDeletes;
     use CompanyableChildTrait;
     use ValidatingTrait;
-
-
-    protected $dates = [ 'deleted_at', 'start_date' , 'completion_date'];
+    protected $casts = [
+        'start_date' => 'datetime',
+        'completion_date' => 'datetime',
+    ];
     protected $table = 'asset_maintenances';
     protected $rules = [
         'asset_id'               => 'required|integer',
@@ -30,21 +34,21 @@ class AssetMaintenance extends Model implements ICompanyableChild
         'start_date'             => 'required|date',
         'completion_date'        => 'nullable|date',
         'notes'                  => 'string|nullable',
-        'cost'                   => 'numeric|nullable'
+        'cost'                   => 'numeric|nullable',
     ];
 
     use Searchable;
-    
+
     /**
      * The attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableAttributes = ['title', 'notes', 'asset_maintenance_type', 'cost', 'start_date', 'completion_date'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableRelations = [
@@ -52,22 +56,20 @@ class AssetMaintenance extends Model implements ICompanyableChild
         'asset.model'     => ['name', 'model_number'],
     ];
 
-
     public function getCompanyableParents()
     {
-        return [ 'asset' ];
+        return ['asset'];
     }
 
     /**
-       * getImprovementOptions
-       *
-       * @return array
-       * @author  Vincent Sposato <vincent.sposato@gmail.com>
-       * @version v1.0
-       */
+     * getImprovementOptions
+     *
+     * @return array
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @version v1.0
+     */
     public static function getImprovementOptions()
     {
-
         return [
             trans('admin/asset_maintenances/general.maintenance') => trans('admin/asset_maintenances/general.maintenance'),
             trans('admin/asset_maintenances/general.repair')      => trans('admin/asset_maintenances/general.repair'),
@@ -92,7 +94,7 @@ class AssetMaintenance extends Model implements ICompanyableChild
      */
     public function setCostAttribute($value)
     {
-        $value =  Helper::ParseFloat($value);
+        $value = Helper::ParseFloat($value);
         if ($value == '0.0') {
             $value = null;
         }
@@ -115,24 +117,23 @@ class AssetMaintenance extends Model implements ICompanyableChild
      */
     public function setCompletionDateAttribute($value)
     {
-        if ($value == '' || $value == "0000-00-00") {
+        if ($value == '' || $value == '0000-00-00') {
             $value = null;
         }
         $this->attributes['completion_date'] = $value;
     }
 
     /**
-       * asset
-       * Get asset for this improvement
-       *
-       * @return mixed
-       * @author  Vincent Sposato <vincent.sposato@gmail.com>
-       * @version v1.0
-       */
+     * asset
+     * Get asset for this improvement
+     *
+     * @return mixed
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @version v1.0
+     */
     public function asset()
     {
-
-        return $this->belongsTo('\App\Models\Asset', 'asset_id')
+        return $this->belongsTo(\App\Models\Asset::class, 'asset_id')
                     ->withTrashed();
     }
 
@@ -145,25 +146,21 @@ class AssetMaintenance extends Model implements ICompanyableChild
      */
     public function admin()
     {
-
-        return $this->belongsTo('\App\Models\User', 'user_id')
+        return $this->belongsTo(\App\Models\User::class, 'user_id')
             ->withTrashed();
     }
 
     public function supplier()
     {
-
-        return $this->belongsTo('\App\Models\Supplier', 'supplier_id')
+        return $this->belongsTo(\App\Models\Supplier::class, 'supplier_id')
                     ->withTrashed();
     }
 
-
     /**
-   * -----------------------------------------------
-   * BEGIN QUERY SCOPES
-   * -----------------------------------------------
-   **/ 
-
+     * -----------------------------------------------
+     * BEGIN QUERY SCOPES
+     * -----------------------------------------------
+     **/
 
     /**
      * Query builder scope to order on admin user
@@ -207,6 +204,4 @@ class AssetMaintenance extends Model implements ICompanyableChild
         return $query->leftJoin('assets', 'asset_maintenances.asset_id', '=', 'assets.id')
             ->orderBy('assets.name', $order);
     }
-
-
 }

@@ -1,11 +1,12 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'ฟิลด์ที่กำหนดเอง',
+    'manage'                    => 'Manage',
     'field'		                => 'สนาม',
     'about_fieldsets_title'		=> 'เกี่ยวกับ Fieldsets',
-    'about_fieldsets_text'		=> 'ฟิลด์ช่วยให้คุณสามารถสร้างกลุ่มของฟิลด์ที่กำหนดเองซึ่งมักใช้ซ้ำสำหรับรูปแบบโมเดลของเนื้อหาบางประเภท',
-    'custom_format'             => 'รูปแบบที่กำหนดเอง ...',
+    'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used for specific asset model types.',
+    'custom_format'             => 'Custom Regex format...',
     'encrypt_field'      	        => 'เข้ารหัสค่าของฟิลด์นี้ในฐานข้อมูล',
     'encrypt_field_help'      => 'คำเตือน: การเข้ารหัสฟิลด์ทำให้ไม่สามารถค้นหาได้',
     'encrypted'      	        => 'เข้ารหัส',
@@ -26,7 +27,19 @@ return array(
     'used_by_models'   		    => 'ใช้ตามโมเดล',
     'order'   		            => 'ใบสั่ง',
     'create_fieldset'         => 'Fieldset ใหม่',
+    'create_fieldset_title' => 'Create a new fieldset',
     'create_field'            => 'ฟิลด์ที่กำหนดเองใหม่',
+    'create_field_title' => 'Create a new custom field',
     'value_encrypted'      	        => 'ค่าของฟิลด์นี้ถูกเข้ารหัสในฐานข้อมูล เฉพาะผู้ดูแลระบบเท่านั้นที่สามารถดูค่าที่ถอดรหัสได้',
     'show_in_email'     => 'ใส่ค่าของฟิลด์นี้ลงในอีเมลเช็คเอาต์ที่ส่งถึงผู้ใช้หรือไม่? ฟิลด์ที่เข้ารหัสไม่สามารถรวมอยู่ในอีเมลได้',
-);
+    'help_text' => 'Help Text',
+    'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
+    'about_custom_fields_title' => 'About Custom Fields',
+    'about_custom_fields_text' => 'Custom fields allow you to add arbitrary attributes to assets.',
+    'add_field_to_fieldset' => 'Add Field to Fieldset',
+    'make_optional' => 'Required - click to make optional',
+    'make_required' => 'Optional - click to make required',
+    'reorder' => 'Reorder',
+    'db_field' => 'DB Field',
+    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.'
+];

@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> '자산 태그',
     'asset_model'       => '모델',
-    'book_value'  	=> '가치',
+    'book_value'  	=> 'Current Value',
     'change' 		=> '입/출',
     'checkout_date' => '반출 일자',
     'checkoutto' 	=> '반출 확인',
+    'current_value' => 'Current Value',
     'diff' 			=> '차액',
     'dl_csv' 		=> 'CSV로 내려받기',
     'eol' 			=> '폐기일',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> '일련번호',
     'status'   		=> '상태',
     'title'      	=> '자산 ',
-    'image'		=> '장비 사진',
+    'image'		    => '장비 사진',
     'days_without_acceptance' => '미 승인 기간',
-    'monthly_depreciation' => '월간 감가상각'
-
-);
+    'monthly_depreciation' => '월간 감가상각',
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

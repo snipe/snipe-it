@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Pengguna ini boleh log masuk',
     'activated_disabled_help_text' => 'Anda tidak boleh kemaskini status pengaktifan akaun anda sendiri.',
     'assets_user'       => 'Serahkan harta kepada :nama',
@@ -13,16 +12,26 @@ return array(
     'edit'              => 'Kemaskini Pengguna',
     'filetype_info'     => 'Filetype yang dibenarkan adalah png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, dan rar.',
     'history_user'      => 'Sejarah untuk :nama',
-	'info'				=> 'Maklumat',
+    'info'				=> 'Maklumat',
     'restore_user'		=> 'Klik di sini untuk memulihkannya.',
     'last_login'        => 'Log masuk terakhir',
     'ldap_config_text'  => 'Tetapan konfigurasi LDAP boleh didapati Admin> Tetapan. Lokasi (pilihan) yang dipilih akan ditetapkan untuk semua pengguna yang diimport.',
     'print_assigned'    => 'Cetak Semua yang Diperuntukkan',
     'software_user'     => 'Perisian diagihkan kepada :nama',
-    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
+    'send_email_help'   => 'Anda mesti memberikan alamat e-mel untuk pengguna ini menghantar bukti kelayakan kepada mereka. Bukti kelayakan e-mel hanya boleh dilakukan pada penciptaan pengguna. Kata laluan disimpan dalam cincang sehala dan tidak boleh diambil semula setelah disimpan.',
     'view_user'         => 'Papar Pengguna :nama',
     'usercsv'           => 'Fail CSV',
     'two_factor_admin_optin_help' => 'Tetapan admin semasa anda membenarkan penguatkuasaan selektif pengesahan dua faktor.',
     'two_factor_enrolled' => '2FA Device Enrolled',
     'two_factor_active'   => '2FA Aktif',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

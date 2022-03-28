@@ -24,28 +24,26 @@ class CustomFieldRequest extends FormRequest
      */
     public function rules(Request $request)
     {
-
         $rules = [];
 
-        switch($this->method())
-        {
+        switch ($this->method()) {
 
             // Brand new
             case 'POST':
             {
-                $rules['name'] = "required|unique:custom_fields";
+                $rules['name'] = 'required|unique:custom_fields';
                 break;
             }
 
             // Save all fields
             case 'PUT':
-                $rules['name'] = "required";
+                $rules['name'] = 'required';
                 break;
 
             // Save only what's passed
             case 'PATCH':
             {
-                $rules['name'] = "required";
+                $rules['name'] = 'required';
                 break;
             }
 

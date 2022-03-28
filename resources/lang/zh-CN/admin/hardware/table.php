@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> '资产标签',
     'asset_model'       => '型号',
-    'book_value'  	=> '价值',
+    'book_value'  	=> '当前值',
     'change' 		=> '进/出',
     'checkout_date' => '借出日期',
     'checkoutto' 	=> '已借出',
+    'current_value' => '当前值',
     'diff' 			=> '差价',
     'dl_csv' 		=> '下载CSV格式',
     'eol' 			=> '寿命',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> '序列号',
     'status'   		=> '状态',
     'title'      	=> '资产',
-    'image'		=> '设备图片',
+    'image'		    => '设备图片',
     'days_without_acceptance' => '过期天数',
-    'monthly_depreciation' => '每月折旧率'
-
-);
+    'monthly_depreciation' => '每月折旧率',
+    'assigned_to'    => '已分配给',
+    'requesting_user' => '申领中的用户',
+    'requested_date' => '请求日期',
+    'changed'       => '已修改',
+    'icon' => '图标',
+];

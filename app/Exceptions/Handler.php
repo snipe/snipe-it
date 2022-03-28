@@ -2,18 +2,19 @@
 
 namespace App\Exceptions;
 
-use Exception;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use App\Helpers\Helper;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\AuthenticationException;
 use Log;
+use Throwable;
+use JsonException;
 
 
 class Handler extends ExceptionHandler
 {
     /**
-     * A list of the exception types that should not be reported.
+     * A list of the exception types that are not reported.
      *
      * @var array
      */
@@ -26,6 +27,7 @@ class Handler extends ExceptionHandler
         \Illuminate\Validation\ValidationException::class,
         \Intervention\Image\Exception\NotSupportedException::class,
         \League\OAuth2\Server\Exception\OAuthServerException::class,
+        JsonException::class,
     ];
 
     /**
@@ -33,31 +35,37 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception  $exception
+     * @param  \Throwable  $exception
      * @return void
      */
-    public function report(Exception $exception)
+    public function report(Throwable $exception)
     {
         if ($this->shouldReport($exception)) {
-            \Log::error($exception);
+            Log::error($exception);
             return parent::report($exception);
         }
     }
 
     /**
      * Render an exception into an HTTP response.
-     *
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $e
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $e)
+    public function render($request, Throwable $e)
     {
 
 
         // CSRF token mismatch error
         if ($e instanceof \Illuminate\Session\TokenMismatchException) {
             return redirect()->back()->with('error', trans('general.token_expired'));
+        }
+
+        // Invalid JSON exception
+        // TODO: don't understand why we have to do this when we have the invalidJson() method, below, but, well, whatever
+        if ($e instanceof JsonException) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'invalid JSON'), 422);
         }
 
 
@@ -76,10 +84,12 @@ class Handler extends ExceptionHandler
                 switch ($e->getStatusCode()) {
                     case '404':
                        return response()->json(Helper::formatStandardApiResponse('error', null, $statusCode . ' endpoint not found'), 404);
-                    case '405':
+                    case '429':
+                        return response()->json(Helper::formatStandardApiResponse('error', null, 'Too many requests'), 429);
+                     case '405':
                         return response()->json(Helper::formatStandardApiResponse('error', null, 'Method not allowed'), 405);
                     default:
-                        return response()->json(Helper::formatStandardApiResponse('error', null, $statusCode), 405);
+                        return response()->json(Helper::formatStandardApiResponse('error', null, $statusCode), $statusCode);
 
                 }
             }
@@ -96,7 +106,7 @@ class Handler extends ExceptionHandler
 
     }
 
-    /**
+ /**
      * Convert an authentication exception into an unauthenticated response.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -112,15 +122,27 @@ class Handler extends ExceptionHandler
         return redirect()->guest('login');
     }
 
-    /**
-     * Convert a validation exception into a JSON response.
+
+    /** 
+     * A list of the inputs that are never flashed for validation exceptions.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Validation\ValidationException  $exception
-     * @return \Illuminate\Http\JsonResponse
+     * @var array
      */
-    protected function invalidJson($request, ValidationException $exception)
+    protected $dontFlash = [
+        'current_password',
+        'password',
+        'password_confirmation',
+    ];
+
+    /**
+     * Register the exception handling callbacks for the application.
+     *
+     * @return void
+     */
+    public function register()
     {
-        return response()->json(Helper::formatStandardApiResponse('error', null, $exception->errors(), 400));
+        $this->reportable(function (Throwable $e) {
+            //
+        });
     }
 }

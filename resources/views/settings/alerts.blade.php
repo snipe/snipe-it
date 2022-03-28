@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Update Alert Settings
+    {{ trans('admin/settings/general.alert_title') }}
     @parent
 @stop
 
@@ -32,7 +32,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fa fa-bell"></i> Alerts
+                        <i class="fas fa-bell"></i> {{ trans('admin/settings/general.alerts') }}
                     </h2>
                 </div>
                 <div class="box-body">
@@ -73,7 +73,7 @@
                                 {{ Form::text('alert_email', old('alert_email', $setting->alert_email), array('class' => 'form-control','placeholder' => 'admin@yourcompany.com')) }}
                                 {!! $errors->first('alert_email', '<span class="alert-msg" aria-hidden="true">:message</span><br>') !!}
 
-                                <p class="help-block">Email addresses or distribution lists you want alerts to be sent to, comma separated</p>
+                                <p class="help-block">{{ trans('admin/settings/general.alert_email_help') }}</p>
 
 
                             </div>
@@ -160,7 +160,7 @@
                         <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                     </div>
                     <div class="text-right col-md-6">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                     </div>
 
                 </div>

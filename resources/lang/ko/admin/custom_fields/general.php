@@ -1,11 +1,12 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => '사용자 정의 항목들',
+    'manage'                    => '관리',
     'field'		                => '항목',
     'about_fieldsets_title'		=> '항목세트란',
-    'about_fieldsets_text'		=> '항목세트는 특정 자산 모델에 사용하기 위해 빈번하게 재사용되는 사용자 정의 항목의 그룹을 생성하는 것을 허용합니다.',
-    'custom_format'             => '사용자 지정 형식...',
+    'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used for specific asset model types.',
+    'custom_format'             => 'Custom Regex format...',
     'encrypt_field'      	        => '필드 암호화',
     'encrypt_field_help'      => '경고: 항목을 암호화 하면 검색을 할 수 없습니다.',
     'encrypted'      	        => '암호화',
@@ -26,7 +27,19 @@ return array(
     'used_by_models'   		    => '적용 모델',
     'order'   		            => '순서',
     'create_fieldset'         => '신규 항목세트',
+    'create_fieldset_title' => 'Create a new fieldset',
     'create_field'            => '신규 사용자 항목',
+    'create_field_title' => 'Create a new custom field',
     'value_encrypted'      	        => '이 항목의 값은 데이터베이스 내에서 암호화 되었습니다. 관리자만이 해독된 값을 확인 할 수 있습니다.',
     'show_in_email'     => '사용자에게 전송된 반출 이메일에 이 항목의 값을 포함 시키시겠습니까? 암호화 된 항목들은 이메일에 포함될 수 없습니다.',
-);
+    'help_text' => 'Help Text',
+    'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
+    'about_custom_fields_title' => 'About Custom Fields',
+    'about_custom_fields_text' => 'Custom fields allow you to add arbitrary attributes to assets.',
+    'add_field_to_fieldset' => 'Add Field to Fieldset',
+    'make_optional' => 'Required - click to make optional',
+    'make_required' => 'Optional - click to make required',
+    'reorder' => 'Reorder',
+    'db_field' => 'DB Field',
+    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.'
+];

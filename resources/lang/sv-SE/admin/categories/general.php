@@ -18,5 +18,6 @@ return array(
     'update'  							=> 'Uppdatera kategori',
     'use_default_eula'					=> 'Använd <a href="#" data-toggle="modal" data-target="#eulaModal">standard-licensavtal, EULA</a> istället.',
     'use_default_eula_disabled'			=> '<del>Använd den primära licensavtalet, EULA:n, istället.</del> Inget primärt licensavtal, EULA, är satt. Vänligen lägg till en under Inställningar.',
+    'use_default_eula_column'			=> 'Use default EULA',
 
 );

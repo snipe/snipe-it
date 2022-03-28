@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'Tentang Lokasi',
     'about_locations'           => 'Lokasi digunakan untuk melacak informasi lokasi bagi pengguna, aset, dan item lainnya',
     'assets_rtd'                => 'Aset', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -11,8 +11,8 @@ return array(
     'country'                   => 'Negara',
     'create'                    => 'Membuat Lokasi',
     'update'                    => 'Perbarui Lokasi',
-    'print_assigned'            => 'Print Assigned',
-    'print_all_assigned'        => 'Print All Assigned',
+    'print_assigned'            => 'Cetak Semua Ditugaskan',
+    'print_all_assigned'        => 'Cetak Semua Ditugaskan',
     'name'                      => 'Nama lokasi',
     'address'                   => 'Alamat',
     'zip'                       => 'Kode Pos',
@@ -20,4 +20,21 @@ return array(
     'parent'                    => 'Induk',
     'currency'                  => 'Lokasi Mata Uang',
     'ldap_ou'                   => 'LDAP Cari OU',
-    );
+    'user_name'                 => 'User Name',
+    'department'                => 'Department',
+    'location'                  => 'Location',
+    'asset_tag'                 => 'Assets Tag',
+    'asset_name'                => 'Name',
+    'asset_category'            => 'Category',
+    'asset_manufacturer'        => 'Manufacturer',
+    'asset_model'               => 'Model',
+    'asset_serial'              => 'Serial',
+    'asset_location'            => 'Location',
+    'asset_checked_out'         => 'Checked Out',
+    'asset_expected_checkin'    => 'Expected Checkin',
+    'date'                      => 'Date:',
+    'signed_by_asset_auditor'   => 'Signed By (Asset Auditor):',
+    'signed_by_finance_auditor' => 'Signed By (Finance Auditor):',
+    'signed_by_location_manager' => 'Signed By (Location Manager):',
+    'signed_by'                 => 'Signed Off By:',
+];

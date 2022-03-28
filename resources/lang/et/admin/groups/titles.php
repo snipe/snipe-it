@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Gruppidest',
     'about_groups'                  => 'Gruppe kastatakse kasutajaõiguste koondamiseks.',
     'group_management' 	 	=> 'Gruppide haldus',
@@ -10,5 +10,7 @@ return array(
     'group_admin' 	 		=> 'Grupi admin',
     'allow' 	 			=> 'Luba',
     'deny' 	 				=> 'Keela',
-
-);
+    'permission'            => 'Permission',
+    'grant'                 => 'Grant',
+    'no_permissions'        => 'This group has no permissions.'
+];

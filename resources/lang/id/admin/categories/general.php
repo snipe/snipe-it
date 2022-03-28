@@ -18,5 +18,6 @@ return array(
     'update'  							=> 'Perbarui kategori',
     'use_default_eula'					=> 'Gunakan <a href="#" data-toggle="modal" data-target="#eulaModal"> pilihan utama</a> sebagai gantinya.',
     'use_default_eula_disabled'			=> '<del>Gunakan pilihan EULA utama sebagai gantinya.</del> Tidak ada pilihan utama yang diatur. Silahkan tambahkan di Pengaturan.',
+    'use_default_eula_column'			=> 'Gunakan aturan baku',
 
 );

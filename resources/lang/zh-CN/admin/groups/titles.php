@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => '关于分组',
     'about_groups'                  => '分组用来区分用户的权限。',
     'group_management' 	 	=> '分组管理',
@@ -10,5 +10,7 @@ return array(
     'group_admin' 	 		=> '分组管理员',
     'allow' 	 			=> '允许',
     'deny' 	 				=> '拒绝',
-
-);
+    'permission'            => '权限',
+    'grant'                 => '授权',
+    'no_permissions'        => '此组没有权限。'
+];

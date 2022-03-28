@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'Потврди масовно бришење на основни средства',
+return [
+    'bulk_delete'		=> 'Потврди масовно бришење на основни средства',
   'bulk_delete_help'	=> 'Прегледајте ги основните средства за масовно бришење подолу. Откако ќе се избришат, овие основни средства можат да бидат обновени, но повеќе нема да бидат задолжени на корисник.',
   'bulk_delete_warn'	=> 'Ќе избришете :assets_count основни средства.',
-	'bulk_update'		=> 'Масовно ажурирање на основни средства',
-	'bulk_update_help'	=> 'Оваа форма ви овозможува да ажурирате повеќе основни средства одеднаш. Пополнете ги полињата што треба да ги промените. Сите полиња што остануваат празни ќе останат непроменети. ',
-	'bulk_update_warn'	=> 'Ќе ажурирате :assets_count основни средства.',
+    'bulk_update'		=> 'Масовно ажурирање на основни средства',
+    'bulk_update_help'	=> 'Оваа форма ви овозможува да ажурирате повеќе основни средства одеднаш. Пополнете ги полињата што треба да ги промените. Сите полиња што остануваат празни ќе останат непроменети. ',
+    'bulk_update_warn'	=> 'Ќе ажурирате :assets_count основни средства.',
     'checkedout_to'		=> 'Задолжен на',
     'checkout_date'		=> 'Датум на задолжување',
     'checkin_date'		=> 'Датум на раздолжување',
@@ -38,7 +38,12 @@ return array(
     'tag'				=> 'Код на основното средство',
     'update'			=> 'Ажурирање на основни средства',
     'warranty'			=> 'Гаранција',
-		'warranty_expires'		=> 'Гаранцијата истекува',
+        'warranty_expires'		=> 'Гаранцијата истекува',
     'years'				=> 'години',
-)
-;
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+];

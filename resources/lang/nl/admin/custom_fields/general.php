@@ -1,11 +1,12 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Speciale velden',
+    'manage'                    => 'Beheren',
     'field'		                => 'Veld',
     'about_fieldsets_title'		=> 'Over veldverzamelingen',
     'about_fieldsets_text'		=> 'Veldverzamelingen stellen je in staat groepen van aangepaste velden te maken die vaak worden hergebruikt voor specifieke soorten asset modellen.',
-    'custom_format'             => 'Aangepaste indeling...',
+    'custom_format'             => 'Aangepaste Regex formaat...',
     'encrypt_field'      	        => 'Encrypt de waarde van dit veld in de database',
     'encrypt_field_help'      => 'Waarschuwing: Versleutelen van dit veld maakt het onmogelijk om hierop te zoeken.',
     'encrypted'      	        => 'Versleuteld',
@@ -26,7 +27,19 @@ return array(
     'used_by_models'   		    => 'Gebruikt door modellen',
     'order'   		            => 'Bestelling',
     'create_fieldset'         => 'Nieuwe veldset',
+    'create_fieldset_title' => 'Maak een nieuwe veldset aan',
     'create_field'            => 'Nieuw aangepast veld',
+    'create_field_title' => 'Maak een nieuw aangepast veld',
     'value_encrypted'      	        => 'De waarde van dit veld is versleuteld in de database. Alleen beheerders zullen de onversleutelde waarde kunnen weergeven.',
     'show_in_email'     => 'De waarde van dit veld opnemen in de checkout-e-mails die naar de gebruiker zijn verzonden? Versleutelde velden kunnen niet worden opgenomen in e-mails.',
-);
+    'help_text' => 'Help tekst',
+    'help_text_description' => 'Dit is een optionele tekst die onder de formulierelementen verschijnt terwijl een asset wordt bewerkt om context op te geven in het veld.',
+    'about_custom_fields_title' => 'Over Aangepaste Velden',
+    'about_custom_fields_text' => 'Met Aangepaste velden kun je willekeurige attributen toevoegen aan assets.',
+    'add_field_to_fieldset' => 'Veld toevoegen aan Fieldset',
+    'make_optional' => 'Vereist - klik om optioneel te maken',
+    'make_required' => 'Optioneel - klik om vereist te maken',
+    'reorder' => 'Herordenen',
+    'db_field' => 'DB veld',
+    'db_convert_warning' => 'WAARSCHUWING. Dit veld staat in de tabel met aangepaste velden als <code> :db_column </code> maar moet :expected </code> zijn.'
+];

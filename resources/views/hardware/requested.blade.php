@@ -49,8 +49,8 @@
                         <th class="col-md-2">Item Name</th>
                         <th class="col-md-2" data-sortable="true">{{ trans('admin/hardware/table.location') }}</th>
                         <th class="col-md-2" data-sortable="true">{{ trans('admin/hardware/form.expected_checkin') }}</th>
-                        <th class="col-md-3" data-sortable="true">Requesting User</th>
-                        <th class="col-md-2">Requested Date</th>
+                        <th class="col-md-3" data-sortable="true">{{ trans('admin/hardware/form.requesting_user') }}</th>
+                        <th class="col-md-2">{{ trans('admin/hardware/form.requested_date') }}</th>
                         <th class="col-md-1"></th>
                         <th class="col-md-1"></th>
                     </tr>
@@ -107,9 +107,9 @@
                             <td>
                                 @if ($request->itemType() == "asset")
                                     @if ($request->requestable->assigned_to=='')
-                                        <a href="{{ url('/') }}/hardware/{{ $request->requestable->id }}/checkout" class="btn btn-sm bg-maroon" data-tooltip="true" title="Check this item out to a user">{{ trans('general.checkout') }}</a>
+                                        <a href="{{ url('/') }}/hardware/{{ $request->requestable->id }}/checkout" class="btn btn-sm bg-maroon" data-tooltip="true" title="{{ trans('general.checkout_user_tooltip') }}">{{ trans('general.checkout') }}</a>
                                         @else
-                                        <a href="{{ url('/') }}/hardware/{{ $request->requestable->id }}/checkin" class="btn btn-sm bg-purple" data-tooltip="true" title="Check this itemi">{{ trans('general.checkin') }}</a>
+                                        <a href="{{ url('/') }}/hardware/{{ $request->requestable->id }}/checkin" class="btn btn-sm bg-purple" data-tooltip="true" title="{{ trans('general.checkin_toolip') }}">{{ trans('general.checkin') }}</a>
                                     @endif
 
                                 @endif
@@ -126,7 +126,7 @@
         @else
         <div class="col-md-12">
             <div class="alert alert-info alert-block">
-                <i class="fa fa-info-circle"></i>
+                <i class="fas fa-info-circle"></i>
                 {{ trans('general.no_results') }}
             </div>
         </div>

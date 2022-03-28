@@ -13,6 +13,7 @@ return array(
     'user_deleted_warning'      => 'Энэ хэрэглэгч устгагдсан. Та энэ хэрэглэгчийг засварлах, шинэ актив үүсгэх эрхтэй.',
     'ldap_not_configured'        => 'LDAP интеграци нь энэ суулгацыг тохируулаагүй байна.',
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
+    'password_reset_sent'       => 'A password reset link has been sent to :email!',
 
 
     'success' => array(

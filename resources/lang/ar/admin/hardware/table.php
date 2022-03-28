@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'ترميز الأصل',
     'asset_model'       => 'الموديل',
-    'book_value'  	=> 'القيمة',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'ادخال \\ اخراج',
     'checkout_date' => 'تاريخ الاخراج',
     'checkoutto' 	=> 'الاخراج',
+    'current_value' => 'Current Value',
     'diff' 			=> 'الفرق',
     'dl_csv' 		=> 'التنزيل كملف CSV',
     'eol' 			=> 'نهاية العمر',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> 'التسلسل',
     'status'   		=> 'الحالة',
     'title'      	=> 'أصل ',
-    'image'		=> 'صورة الجهاز',
+    'image'		    => 'صورة الجهاز',
     'days_without_acceptance' => 'أيام بدون قبول',
-    'monthly_depreciation' => 'الإهلاك الشهري'
-
-);
+    'monthly_depreciation' => 'الإهلاك الشهري',
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

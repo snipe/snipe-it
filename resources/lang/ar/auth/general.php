@@ -8,8 +8,9 @@ return [
     'login'                         => 'الدخول',
     'login_prompt'                  => 'الرجاء تسجيل الدخول',
     'forgot_password'               => 'نسيت كلمة المرور',
+    'ldap_reset_password'           => 'الرجاء النقر هنا لإعادة تعيين كلمة مرور LDAP',
     'remember_me'                   => 'تذكرني',
-    'username_help_top'                 => 'Enter your <strong>username</strong> to be emailed a password reset link.',
-    'username_help_bottom'          => 'Your username and email address <em>may</em> be the same, but may not be, depending on your configuration. If you cannot remember your username, contact your administrator. <br><br><strong>Usernames without an associated email address will not be emailed a password reset link.</strong> ',
+    'username_help_top'                 => 'أدخل اسم المستخدم الخاص بك <strong></strong> ليتم إرسال رابط إعادة تعيين كلمة المرور إلى البريد الإلكتروني.',
+    'username_help_bottom'          => 'قد يكون اسم المستخدم وعنوان البريد الإلكتروني الخاصين بك متماثلين، ولكن قد لا يكونا كذلك، بناءً على الإعدادات الخاصة بك. إذا كنت لا تستطيع تذكر اسم المستخدم الخاص بك، اتصل بالمسؤول. لن يتم إرسال رابط إعادة تعيين كلمة المرور عبر البريد الإلكتروني إلى أسماء المستخدمين التي لا تحتوي على عنوان بريد إلكتروني مرتبط بها ',
     ];
 

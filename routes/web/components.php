@@ -1,28 +1,33 @@
 <?php
 
-# Components
-Route::group([ 'prefix' => 'components','middleware' => ['auth'] ], function () {
+use App\Http\Controllers\Components;
+use Illuminate\Support\Facades\Route;
+
+// Components
+Route::group(['prefix' => 'components', 'middleware' => ['auth']], function () {
+    Route::get(
+        '{componentID}/checkout',
+        [Components\ComponentCheckoutController::class, 'create']
+    )->name('checkout/component');
+
+    Route::post(
+        '{componentID}/checkout',
+        [Components\ComponentCheckoutController::class, 'store']
+    )->name('checkout/component');
 
     Route::get(
-        '{componentID}/checkout',
-        [ 'as' => 'checkout/component', 'uses' => 'Components\ComponentCheckoutController@create' ]
-    );
+        '{componentID}/checkin/{backto?}',
+        [Components\ComponentCheckinController::class, 'create']
+    )->name('checkin/component');
+
     Route::post(
-        '{componentID}/checkout',
-        [ 'as' => 'checkout/component', 'uses' => 'Components\ComponentCheckoutController@store' ]
-    );
-    Route::get(
-        '{componentID}/checkin',
-        [ 'as' => 'checkin/component', 'uses' => 'Components\ComponentCheckinController@create' ]
-    );
-    Route::post(
-        '{componentID}/checkin',
-        [ 'as' => 'component.checkin.save', 'uses' => 'Components\ComponentCheckinController@store' ]
-    );
+        '{componentID}/checkin/{backto?}',
+        [Components\ComponentCheckinController::class, 'store']
+    )->name('component.checkin.save');
 
 });
 
-Route::resource('components', 'Components\ComponentsController', [
+Route::resource('components', Components\ComponentsController::class, [
     'middleware' => ['auth'],
-    'parameters' => ['component' => 'component_id']
+    'parameters' => ['component' => 'component_id'],
 ]);

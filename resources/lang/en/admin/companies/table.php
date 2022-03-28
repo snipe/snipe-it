@@ -1,4 +1,5 @@
 <?php
+
 return array(
     'companies' => 'Companies',
     'create'    => 'Create Company',

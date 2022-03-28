@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'சொத்து டேக்',
     'asset_model'       => 'மாதிரி',
-    'book_value'  	=> 'மதிப்பு',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'உள்ளே வெளியே',
     'checkout_date' => 'புதுப்பிப்பு தேதி',
     'checkoutto' 	=> 'சரிபார்க்கப்பட்டது',
+    'current_value' => 'Current Value',
     'diff' 			=> 'வேறுபாடு',
     'dl_csv' 		=> 'CSV ஐ பதிவிறக்குக',
     'eol' 			=> ', EOL',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> 'சீரியல்',
     'status'   		=> 'நிலைமை',
     'title'      	=> 'சொத்து',
-    'image'		=> 'சாதன படம்',
+    'image'		    => 'சாதன படம்',
     'days_without_acceptance' => 'ஏற்றுக்கொள்ளாத நாட்கள்',
-    'monthly_depreciation' => 'Monthly Depreciation'
-
-);
+    'monthly_depreciation' => 'Monthly Depreciation',
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

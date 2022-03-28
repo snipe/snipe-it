@@ -1,5 +1,4 @@
 @extends('layouts/default')
-
 {{-- Page title --}}
 @section('title')
 
@@ -17,7 +16,7 @@
 
     @can('create', \App\Models\User::class)
         @if ($snipeSettings->ldap_enabled == 1)
-            <a href="{{ route('ldap/user') }}" class="btn btn-default pull-right"><span class="fa fa-sitemap"></span> LDAP Sync</a>
+            <a href="{{ route('ldap/user') }}" class="btn btn-default pull-right"><span class="fas fa-sitemap"></span>{{trans('general.ldap_sync')}}</a>
         @endif
         <a href="{{ route('users.create') }}" class="btn btn-primary pull-right" style="margin-right: 5px;">  {{ trans('general.create') }}</a>
     @endcan
@@ -28,7 +27,7 @@
         <a class="btn btn-default pull-right" href="{{ route('users.index', ['status' => 'deleted']) }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_deleted') }}</a>
     @endif
     @can('view', \App\Models\User::class)
-        <a class="btn btn-default pull-right" href="{{ route('users.export') }}" style="margin-right: 5px;">Export</a>
+        <a class="btn btn-default pull-right" href="{{ route('users.export') }}" style="margin-right: 5px;">{{ trans('general.export') }}</a>
     @endcan
 @stop
 
@@ -48,13 +47,13 @@
             @if (request('status')!='deleted')
               @can('delete', \App\Models\User::class)
                 <div id="toolbar">
-                    <label for="bulk_actions" class="sr-only">Bulk Actions</label>
+                    <label for="bulk_actions" class="sr-only">{{ trans('general.bulk_actions') }}</label>
                   <select name="bulk_actions" class="form-control select2" style="width: 200px;" aria-label="bulk_actions">
-                    <option value="delete">Bulk Checkin &amp; Delete</option>
-                    <option value="edit">Bulk Edit</option>
+                    <option value="delete">{!! trans('general.bulk_checkin_delete') !!}</option>
+                    <option value="edit">{{ trans('general.bulk_edit') }}</option>
                     <option value="bulkpasswordreset">{{ trans('button.send_password_link') }}</option>
                   </select>
-                  <button class="btn btn-default" id="bulkEdit" disabled>Go</button>
+                  <button class="btn btn-default" id="bulkEdit" disabled>{{ trans('button.go') }}</button>
                 </div>
               @endcan
             @endif

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'O lokacijah',
     'about_locations'           => 'Lokacije se uporabljajo za sledenje informacij o lokaciji uporabnika, sredstva in drugih elementov',
     'assets_rtd'                => 'Sredstva', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -11,8 +11,8 @@ return array(
     'country'                   => 'Država',
     'create'                    => 'Ustvari lokacijo',
     'update'                    => 'Posodobi lokacijo',
-    'print_assigned'            => 'Print Assigned',
-    'print_all_assigned'        => 'Print All Assigned',
+    'print_assigned'            => 'Natisni dodeljene',
+    'print_all_assigned'        => 'Natisni vse dodeljene',
     'name'                      => 'Ime lokacije',
     'address'                   => 'Naslov',
     'zip'                       => 'Poštna številka',
@@ -20,4 +20,21 @@ return array(
     'parent'                    => 'Starš',
     'currency'                  => 'Lokalna valuta',
     'ldap_ou'                   => 'LDAP Search OU',
-    );
+    'user_name'                 => 'User Name',
+    'department'                => 'Department',
+    'location'                  => 'Location',
+    'asset_tag'                 => 'Assets Tag',
+    'asset_name'                => 'Name',
+    'asset_category'            => 'Category',
+    'asset_manufacturer'        => 'Manufacturer',
+    'asset_model'               => 'Model',
+    'asset_serial'              => 'Serial',
+    'asset_location'            => 'Location',
+    'asset_checked_out'         => 'Checked Out',
+    'asset_expected_checkin'    => 'Expected Checkin',
+    'date'                      => 'Date:',
+    'signed_by_asset_auditor'   => 'Signed By (Asset Auditor):',
+    'signed_by_finance_auditor' => 'Signed By (Finance Auditor):',
+    'signed_by_location_manager' => 'Signed By (Location Manager):',
+    'signed_by'                 => 'Signed Off By:',
+];

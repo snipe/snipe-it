@@ -114,7 +114,7 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
 
         @if ($settings->qr_code=='1')
             <div class="qr_img">
-                <img src="./{{ $asset->id }}/qr_code" class="qr_img">
+                <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/qr_code" class="qr_img">
             </div>
         @endif
 
@@ -160,7 +160,7 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
 
         @if ((($settings->alt_barcode_enabled=='1') && $settings->alt_barcode!=''))
             <div class="barcode_container">
-                <img src="./{{ $asset->id }}/barcode" class="barcode">
+                <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/barcode" class="barcode">
             </div>
         @endif
 

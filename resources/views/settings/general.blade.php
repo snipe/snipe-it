@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Update General Settings
+    {{ trans('admin/settings/general.general_title') }}
     @parent
 @stop
 
@@ -33,7 +33,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fa fa-wrench" aria-hidden="true"></i>
+                        <i class="fas fa-wrench" aria-hidden="true"></i>
                         {{ trans('admin/settings/general.general_settings') }}
                     </h2>
                 </div>
@@ -190,7 +190,7 @@
 
                                 <textarea class="form-control disabled" name="login_note" placeholder="If you do not have a login or have found a device belonging to this company, please call technical support at 888-555-1212. Thank you." rows="2" aria-label="login_note" readonly>{{ old('login_note', $setting->login_note) }}</textarea>
                                 {!! $errors->first('login_note', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                                <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                                <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                             @else
                                 <textarea class="form-control" name="login_note" aria-label="login_note" placeholder="If you do not have a login or have found a device belonging to this company, please call technical support at 888-555-1212. Thank you." rows="2">{{ old('login_note', $setting->login_note) }}</textarea>
                                 {!! $errors->first('login_note', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
@@ -206,7 +206,7 @@
                            </div>
                            <div class="col-md-9" id="mailtestrow">
                                <a class="btn btn-default btn-sm pull-left" id="mailtest" style="margin-right: 10px;">
-                                   Send Test</a>
+                                   {{ trans('admin/settings/general.mail_test') }}</a>
                                <span id="mailtesticon"></span>
                                <span id="mailtestresult"></span>
                                <span id="mailteststatus"></span>
@@ -215,7 +215,7 @@
                                <div id="mailteststatus-error" class="text-danger"></div>
                            </div>
                            <div class="col-md-9 col-md-offset-3">
-                               <p class="help-block">This will attempt to send a test mail to {{ config('mail.reply_to.address') }}.</p>
+                               <div class="help-block"> {{ trans('admin/settings/general.mail_test_help', array('replyto' => config('mail.reply_to.address'))) }}</p>
                            </div>
 
                        </div>
@@ -230,7 +230,7 @@
 
                                    <textarea class="form-control disabled" name="login_note" placeholder="If you do not have a login or have found a device belonging to this company, please call technical support at 888-555-1212. Thank you." rows="2" aria-label="dashboard_message" readonly>{{ old('dashboard_message', $setting->login_note) }}</textarea>
                                    {!! $errors->first('dashboard_message', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                                   <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                                   <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                @else
                                    <textarea class="form-control" aria-label="dashboard_message" name="dashboard_message" rows="2">{{ old('login_note', $setting->dashboard_message) }}</textarea>
                                    {!! $errors->first('dashboard_message', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
@@ -319,7 +319,7 @@
                                {!! $errors->first('privacy_policy_link', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
 
                                @if (config('app.lock_passwords')===true)
-                                   <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                                   <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                @endif
 
                            </div>
@@ -332,7 +332,7 @@
                     <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                 </div>
                 <div class="text-right col-md-6">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                 </div>
 
             </div>
@@ -366,7 +366,7 @@
             $("#mailtesticon").html('');
             $("#mailteststatus").html('');
             $('#mailteststatus-error').html('');
-            $("#mailtesticon").html('<i class="fa fa-spinner spin"></i> Sending Test Email...');
+            $("#mailtesticon").html('<i class="fas fa-spinner spin"></i> {{ trans('admin/settings/message.mail.sending') }}');
             $.ajax({
                 url: '{{ route('api.settings.mailtest') }}',
                 type: 'POST',
@@ -385,9 +385,9 @@
                     $("#mailteststatus").removeClass('text-danger');
                     $("#mailteststatus").addClass('text-success');
                     if (data.message) {
-                        $("#mailteststatus").html('<i class="fa fa-check text-success"></i> ' + data.message);
+                        $("#mailteststatus").html('<i class="fas fa-check text-success"></i> ' + data.message);
                     } else {
-                        $("#mailteststatus").html('<i class="fa fa-check text-success"></i> Mail sent!');
+                        $("#mailteststatus").html('<i class="fas fa-check text-success"></i> {{ trans('admin/settings/message.mail.success') }}');
                     }
                 },
 
@@ -398,13 +398,13 @@
                     $('#mailteststatus-error').html('');
                     $("#mailteststatus").removeClass('text-success');
                     $("#mailteststatus").addClass('text-danger');
-                    $("#mailtesticon").html('<i class="fa fa-exclamation-triangle text-danger"></i>');
-                    $('#mailteststatus').html('Mail could not be sent.');
+                    $("#mailtesticon").html('<i class="fas fa-exclamation-triangle text-danger"></i>');
+                    $('#mailteststatus').html('{{ trans('admin/settings/message.mail.error') }}');
                     if (data.responseJSON) {
                         if (data.responseJSON.messages) {
                             $('#mailteststatus-error').html('Error: ' + data.responseJSON.messages);
                         } else {
-                            $('#mailteststatus-error').html('No additional error message provided. Check your mail settings and your app log.');
+                            $('#mailteststatus-error').html('{{ trans('admin/settings/message.mail.additional') }}');
                         }
                     } else {
                         console.dir(data);

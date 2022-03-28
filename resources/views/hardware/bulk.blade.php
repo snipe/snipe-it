@@ -20,7 +20,7 @@
     <p>{{ trans('admin/hardware/form.bulk_update_help') }}</p>
 
     <div class="callout callout-warning">
-      <i class="fa fa-warning"></i> {{ trans('admin/hardware/form.bulk_update_warn', ['asset_count' => count($assets)]) }}
+      <i class="fas fa-exclamation-triangle"></i> {{ trans('admin/hardware/form.bulk_update_warn', ['asset_count' => count($assets)]) }}
     </div>
 
     <form class="form-horizontal" method="post" action="{{ route('hardware/bulksave') }}" autocomplete="off" role="form">
@@ -34,9 +34,9 @@
             <div class="input-group col-md-3">
               <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
                 <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="purchase_date" id="purchase_date" value="{{ old('purchase_date') }}">
-                <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
               </div>
-              {!! $errors->first('purchase_date', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+              {!! $errors->first('purchase_date', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
             </div>
           </div>
           <!-- Expected Checkin Date -->
@@ -45,9 +45,9 @@
              <div class="input-group col-md-3">
                   <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
                       <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="expected_checkin" id="expected_checkin" value="{{ old('expected_checkin') }}">
-                      <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                      <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
                  </div>
-                 {!! $errors->first('expected_checkin', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                 {!! $errors->first('expected_checkin', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
              </div>
           </div>
 
@@ -59,7 +59,7 @@
             </label>
             <div class="col-md-7">
               {{ Form::select('status_id', $statuslabel_list , old('status_id'), array('class'=>'select2', 'style'=>'width:350px', 'aria-label'=>'status_id')) }}
-              {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+              {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
 
@@ -75,12 +75,12 @@
 
                 <label for="update_real_loc">
                   {{ Form::radio('update_real_loc', '1', old('update_real_loc'), ['class'=>'minimal', 'aria-label'=>'update_real_loc']) }}
-                  Update default location AND actual location
+                  {{ trans('admin/hardware/form.asset_location_update_default_current') }}
                 </label>
                 <br>
                 <label for="update_default_loc">
                   {{ Form::radio('update_real_loc', '0', old('update_real_loc'), ['class'=>'minimal', 'aria-label'=>'update_default_loc']) }}
-                  Update only default location
+                  {{ trans('admin/hardware/form.asset_location_update_default') }}
                 </label>
 
             </div>
@@ -96,7 +96,7 @@
             <div class="input-group col-md-3">
               <span class="input-group-addon">{{ $snipeSettings->default_currency }}</span>
                 <input type="text" class="form-control"  maxlength="10" placeholder="{{ trans('admin/hardware/form.cost') }}" name="purchase_cost" id="purchase_cost" value="{{ old('purchase_cost') }}">
-                {!! $errors->first('purchase_cost', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                {!! $errors->first('purchase_cost', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
 
@@ -112,7 +112,7 @@
             </label>
             <div class="col-md-7">
               <input class="form-control" type="text" maxlength="200" name="order_number" id="order_number" value="{{ old('order_number') }}" />
-              {!! $errors->first('order_number', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+              {!! $errors->first('order_number', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
 
@@ -125,7 +125,7 @@
               <div class="input-group">
                 <input class="col-md-3 form-control" maxlength="4" type="text" name="warranty_months" id="warranty_months" value="{{ old('warranty_months') }}" />
                 <span class="input-group-addon">{{ trans('admin/hardware/form.months') }}</span>
-                {!! $errors->first('warranty_months', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                {!! $errors->first('warranty_months', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
               </div>
             </div>
           </div>
@@ -137,24 +137,24 @@
             </div>
             <div class="col-md-7">
               <label class="radio">
-                <input type="radio" class="minimal" name="requestable" value="1"> Yes
+                <input type="radio" class="minimal" name="requestable" value="1"> {{ trans('general.yes')}}
               </label>
               <label class="radio">
-                <input type="radio" class="minimal" name="requestable" value="0"> No
+                <input type="radio" class="minimal" name="requestable" value="0"> {{ trans('general.no')}}
               </label>
               <label class="radio">
-                <input type="radio" class="minimal" name="requestable" value=""> Do Not Change
+                <input type="radio" class="minimal" name="requestable" value=""> {{ trans('general.do_not_change')}}
               </label>
             </div>
           </div>
 
           @foreach ($assets as $key => $value)
-            <input type="hidden" name="ids[{{ $key }}]" value="1">
+            <input type="hidden" name="ids[{{ $value }}]" value="1">
           @endforeach
         </div> <!--/.box-body-->
 
         <div class="text-right box-footer">
-          <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+          <button type="submit" class="btn btn-success"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
         </div>
       </div> <!--/.box.box-default-->
     </form>

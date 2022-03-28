@@ -19,25 +19,25 @@ class ReportsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('reports.view');
-        
-        $actionlogs = Actionlog::with('item', 'user', 'target','location');
+
+        $actionlogs = Actionlog::with('item', 'user', 'target', 'location');
 
         if ($request->filled('search')) {
             $actionlogs = $actionlogs->TextSearch(e($request->input('search')));
         }
 
-        if (($request->filled('target_type'))  && ($request->filled('target_id'))) {
-            $actionlogs = $actionlogs->where('target_id','=',$request->input('target_id'))
-                ->where('target_type','=',"App\\Models\\".ucwords($request->input('target_type')));
+        if (($request->filled('target_type')) && ($request->filled('target_id'))) {
+            $actionlogs = $actionlogs->where('target_id', '=', $request->input('target_id'))
+                ->where('target_type', '=', 'App\\Models\\'.ucwords($request->input('target_type')));
         }
 
-        if (($request->filled('item_type'))  && ($request->filled('item_id'))) {
-            $actionlogs = $actionlogs->where('item_id','=',$request->input('item_id'))
-                ->where('item_type','=',"App\\Models\\".ucwords($request->input('item_type')));
+        if (($request->filled('item_type')) && ($request->filled('item_id'))) {
+            $actionlogs = $actionlogs->where('item_id', '=', $request->input('item_id'))
+                ->where('item_type', '=', 'App\\Models\\'.ucwords($request->input('item_type')));
         }
 
         if ($request->filled('action_type')) {
-            $actionlogs = $actionlogs->where('action_type','=',$request->input('action_type'))->orderBy('created_at', 'desc');
+            $actionlogs = $actionlogs->where('action_type', '=', $request->input('action_type'))->orderBy('created_at', 'desc');
         }
 
         if ($request->filled('uploads')) {
@@ -51,9 +51,9 @@ class ReportsController extends Controller
             'user_id',
             'accept_signature',
             'action_type',
-            'note'
+            'note',
         ];
-        
+
         $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
         $order = ($request->input('order') == 'asc') ? 'asc' : 'desc';
         $offset = request('offset', 0);
@@ -62,6 +62,5 @@ class ReportsController extends Controller
         $actionlogs = $actionlogs->orderBy($sort, $order)->skip($offset)->take($limit)->get();
 
         return response()->json((new ActionlogsTransformer)->transformActionlogs($actionlogs, $total), 200, ['Content-Type' => 'application/json;charset=utf8'], JSON_UNESCAPED_UNICODE);
-
     }
 }

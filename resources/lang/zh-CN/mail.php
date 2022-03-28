@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => '用户已取消物品申请',
     'a_user_requested' => '用户已申请物品',
     'accessory_name' => '配件名称：',
@@ -9,7 +9,7 @@ return array(
     'asset' => '资产：',
     'asset_name' => '资产名称：',
     'asset_requested' => '已申请资产',
-    'asset_tag' => '资产标签：',
+    'asset_tag' => '资产标签',
     'assigned_to' => '已分配给',
     'best_regards' => '此致',
     'canceled' => '已取消：',
@@ -59,7 +59,7 @@ return array(
     'test_mail_text' => '这是一封 Snipe-IT 资产管理系统的测试电子邮件，如果您收到，表示邮件通知正常运作 :)',
     'the_following_item' => '以下项目已交回：',
     'low_inventory_alert' => '有：种物品已经低于或者接近最小库存。|有：种物品已经低于或者接近最小库存。',
-    'assets_warrantee_alert' => '有：项资产的维保将在：天后到期。|有：项资产的维保将在：天后到期。',
+    'assets_warrantee_alert' => '有 :count 个资产保修期将于 :threshold 天到期。|有 :count 个资产 保修期将于 :threshold 天到期。',
     'license_expiring_alert' => '有：个许可将在：天后到期。|有：个许可将在：天后到期。',
     'to_reset' => '要重置 :web 的密码，请完成此表格：',
     'type' => '类型',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => '预期的资产检查报告',
     'Expected_Checkin_Notification' => '提醒：:name 签入截止日期已接近。',
     'Expected_Checkin_Date' => '借出的资产将在 :date 重新签入',
-    'your_assets' => '查看您的资产'
-);
+    'your_assets' => '查看您的资产',
+];

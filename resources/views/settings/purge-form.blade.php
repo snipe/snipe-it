@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Purge Deleted
+    {{ trans('admin/settings/general.purge_deleted') }}
     @parent
 @stop
 
@@ -18,7 +18,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="box box-solid box-danger">
                 <div class="box-header with-border">
-                    <h2 class="box-title"><i class="fa fa-warning"></i> {{ trans('admin/settings/general.purge') }}</h2>
+                    <h2 class="box-title"><i class="fas fa-exclamation-triangle"></i> {{ trans('admin/settings/general.purge') }}</h2>
                 </div>
             {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
             <!-- CSRF Token -->
@@ -36,7 +36,7 @@
                         @endif
 
                         @if (config('app.lock_passwords')===true)
-                            <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                            <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                         @endif
                     </div>
                 </div>

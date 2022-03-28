@@ -1,14 +1,13 @@
 <?php
 
-
 class CompaniesCest
 {
     public function _before(FunctionalTester $I)
     {
-         $I->amOnPage('/login');
-         $I->fillField('username', 'admin');
-         $I->fillField('password', 'password');
-         $I->click('Login');
+        $I->amOnPage('/login');
+        $I->fillField('username', 'admin');
+        $I->fillField('password', 'password');
+        $I->click('Login');
     }
 
     // tests
@@ -23,7 +22,7 @@ class CompaniesCest
 
     public function failsEmptyValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with blank elements");
+        $I->wantTo('Test Validation Fails with blank elements');
         $I->amOnPage(route('companies.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
@@ -32,11 +31,11 @@ class CompaniesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $company = factory(App\Models\Company::class)->make();
+        $company = \App\Models\Company::factory()->make();
         $values = [
-            'name' => $company->name
+            'name' => $company->name,
         ];
-        $I->wantTo("Test Validation Succeeds");
+        $I->wantTo('Test Validation Succeeds');
         $I->amOnPage(route('companies.create'));
         $I->fillField('name', 'TestCompany');
         $I->submitForm('form#create-form', $values);

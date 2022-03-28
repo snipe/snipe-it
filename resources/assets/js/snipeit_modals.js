@@ -26,7 +26,7 @@
 
 $(function () {
 
-
+  var baseUrl = $('meta[name="baseUrl"]').attr('content');
   //handle modal-add-interstitial calls
   var model, select, refreshSelector;
 
@@ -54,7 +54,7 @@ $(function () {
                 ajax: {
 
                     // the baseUrl includes a trailing slash
-                    url: Ziggy.baseUrl + 'api/v1/' + endpoint + '/selectlist',
+                    url: baseUrl + 'api/v1/' + endpoint + '/selectlist', //WARNING - we're hoping that's defined on the page somewhere...
                     dataType: 'json',
                     delay: 250,
                     headers: {
@@ -163,7 +163,7 @@ function formatDatalistSafe(datalist) {
     // console.warn("What in the hell is going on with Select2?!?!!?!?");
     // console.warn($.select2);
     if (datalist.loading) {
-        return $('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...');
+        return $('<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...');
     }
 
     var root_div = $("<div class='clearfix'>") ;
@@ -212,7 +212,7 @@ function formatDatalistSafe(datalist) {
 }
 
 function formatDatalist (datalist) {
-    var loading_markup = '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
+    var loading_markup = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
     if (datalist.loading) {
         return loading_markup;
     }

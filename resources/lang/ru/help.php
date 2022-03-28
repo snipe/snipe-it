@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,15 +13,15 @@ return array(
     |
     */
 
-    "more_info_title" => "More Info",
+    'more_info_title' => 'Подробнее',
 
-    "audit_help" => "Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to.",
+    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
     'assets' => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
 
-    'categories' => 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'categories' => 'Категории помогут вам распределить ваше оборудование по группам. Такими категориями могут быть: &quot;Ноутбуки&quot;, &quot;Мобильные телефоны&quot;, &quot;Планшеты&quot; и так далее, но вы также можете использовать их по своему усмотрению.',
 
-    'accessories' => 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
+    'accessories' => 'Аксессуары — это периферийное оборудование, которое выдаётся пользователям, но не имеет серийного номера (или вам не требуется его учитывать индивидуально). Например, компьютерная мышь или клавиатура.',
 
     'companies'     => 'Companies can be used as a simple identifier field, or can be used to limit visibility of assets, users, etc if full company support is enabled in your Admin settings.',
 
@@ -31,6 +31,4 @@ return array(
 
     'depreciations' => 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
 
-
-
-);
+];

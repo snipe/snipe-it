@@ -33,5 +33,4 @@ class CreateLicenseSeatsTable extends Migration
     {
         //
     }
-
 }

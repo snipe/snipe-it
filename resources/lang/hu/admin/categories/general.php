@@ -18,5 +18,6 @@ return array(
     'update'  							=> 'Kategória módosítása',
     'use_default_eula'					=> 'Használja inkább az <a href="#" data-toggle="modal" data-target="#eulaModal">alapértelmezett EULA</a>-t.',
     'use_default_eula_disabled'			=> '<del>Használja inkább az alapértelmezett EULA-t.</del> Nincs alapértelmezett EULA beállítva. Kérem adjon hozzá egyet a Beállításokban.',
+    'use_default_eula_column'			=> 'Alapértelmezett végfelhasználói engedély használata',
 
 );

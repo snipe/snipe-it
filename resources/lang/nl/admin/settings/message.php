@@ -1,22 +1,43 @@
 <?php
 
-return array(
+return [
 
-
-    'update' => array(
+    'update' => [
         'error'                 => 'Er is een fout opgetreden tijdens het updaten. ',
-        'success'               => 'Instellingen zijn met succes gewijzigd.'
-    ),
-    'backup' => array(
+        'success'               => 'Instellingen zijn met succes gewijzigd.',
+    ],
+    'backup' => [
         'delete_confirm'        => 'Weet je het zeker dat je deze Back-up bestand wilt verwijderen? Dit kan niet meer terug gedraaid worden. ',
         'file_deleted'          => 'De Back-up bestand is met succes verwijderd. ',
         'generated'             => 'Een nieuw Back-up bestand is met succes aangemaakt.',
         'file_not_found'        => 'Die Back-up bestand kon niet gevonden worden op de server.',
-    ),
-    'purge' => array(
+        'restore_warning'       => 'Ja, herstellen. Ik bevestig dat dit alle bestaande gegevens die momenteel in de database aanwezig zijn, overschreven worden. Dit zal ook alle bestaande gebruikers uitloggen (inclusief jijzelf).',
+        'restore_confirm'       => 'Weet je zeker dat je je database wilt herstellen met :filename?'
+    ],
+    'purge' => [
         'error'     => 'Er is iets fout gegaan tijdens het opschonen.',
         'validation_failed'     => 'De opschoon bevestiging is niet correct. Typ het woord "DELETE" in het bevestigingsveld.',
-        'success'               => 'Verwijderde items succesvol opgeschoond'
-    ),
-
-);
+        'success'               => 'Verwijderde items succesvol opgeschoond',
+    ],
+    'mail' => [
+        'sending' => 'Test e-mail wordt verzonden...',
+        'success' => 'E-mail verzonden!',
+        'error' => 'E-mail kon niet verzonden worden.',
+        'additional' => 'Geen extra foutmelding beschikbaar. Controleer je e-mailinstellingen en je app log.'
+    ],
+    'ldap' => [
+        'testing' => 'LDAP-verbinding testen, Binding & Query ...',
+        '500' => '500 serverfout. Controleer de logbestanden van uw server voor meer informatie.',
+        'error' => 'Er ging iets mis :(',
+        'sync_success' => 'Een voorbeeld van 10 gebruikers is teruggekomen van de LDAP-server op basis van jouw instellingen:',
+        'testing_authentication' => 'LDAP-authenticatie testen...',
+        'authentication_success' => 'Gebruiker met succes geverifieerd met LDAP!'
+    ],
+    'slack' => [
+        'sending' => 'Slack testbericht wordt verzonden...',
+        'success_pt1' => 'Gelukt! Controleer de ',
+        'success_pt2' => ' kanaal voor je testbericht, klik op OPSLAAN om je instellingen op te slaan.',
+        '500' => '500 serverfout.',
+        'error' => 'Er ging iets mis.',
+    ]
+];

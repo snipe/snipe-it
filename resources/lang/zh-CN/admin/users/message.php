@@ -13,6 +13,7 @@ return array(
     'user_deleted_warning'      => '用户已经被删除，你需要恢复这个用户编辑他或者重新指定新资产。',
     'ldap_not_configured'        => '安装过程中未启用LDAP集成的功能。',
     'password_resets_sent'      => '被选中的已激活并拥有有效电子邮件地址的用户已经收到了一个密码重置链接。',
+    'password_reset_sent'       => '密码重置链接已发送至 :email!',
 
 
     'success' => array(

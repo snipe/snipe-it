@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'Despre Locații',
     'about_locations'           => 'Locațiile sunt utilizate pentru a urmări informațiile despre locație pentru utilizatori, active și alte elemente',
     'assets_rtd'                => 'bunuri', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -11,8 +11,8 @@ return array(
     'country'                   => 'Tara',
     'create'                    => 'Creeaza locatie',
     'update'                    => 'Actualizeaza locatie',
-    'print_assigned'            => 'Print Assigned',
-    'print_all_assigned'        => 'Print All Assigned',
+    'print_assigned'            => 'Tipărește active atribuite',
+    'print_all_assigned'        => 'Tipărește toate activele atribuite',
     'name'                      => 'Nume locatie',
     'address'                   => 'Adresa',
     'zip'                       => 'Cod postal',
@@ -20,4 +20,21 @@ return array(
     'parent'                    => 'Mamă',
     'currency'                  => 'Locație Monedă',
     'ldap_ou'                   => 'LDAP Căutați OU',
-    );
+    'user_name'                 => 'Nume utilizator',
+    'department'                => 'Departament',
+    'location'                  => 'Locatie',
+    'asset_tag'                 => 'Eticheta activului',
+    'asset_name'                => 'Nume',
+    'asset_category'            => 'Categorie',
+    'asset_manufacturer'        => 'Producator',
+    'asset_model'               => 'Model',
+    'asset_serial'              => 'Serie',
+    'asset_location'            => 'Locatie',
+    'asset_checked_out'         => 'Checked Out',
+    'asset_expected_checkin'    => 'Expected Checkin',
+    'date'                      => 'Date:',
+    'signed_by_asset_auditor'   => 'Signed By (Asset Auditor):',
+    'signed_by_finance_auditor' => 'Signed By (Finance Auditor):',
+    'signed_by_location_manager' => 'Signed By (Location Manager):',
+    'signed_by'                 => 'Signed Off By:',
+];

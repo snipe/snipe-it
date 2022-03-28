@@ -7,7 +7,7 @@
 @stop
 
 @section('header_right')
-<a href="{{ route('reports/export/assets') }}" class="btn btn-default"><i class="fa fa-download icon-white" aria-hidden="true"></i>
+<a href="{{ route('reports/export/assets') }}" class="btn btn-default"><i class="fas fa-download icon-white" aria-hidden="true"></i>
 {{ trans('admin/hardware/table.dl_csv') }}</a>
 @stop
 
@@ -43,7 +43,7 @@
                                 <th data-sortable="true" data-field="model_number" data-visible="false">{{ trans('admin/models/table.modelnumber') }}</th>
                                 <th data-sortable="true" data-field="status_label">{{ trans('admin/hardware/table.status') }}</th>
                                 <th data-sortable="true" data-field="assigned_to">{{ trans('admin/hardware/form.checkedout_to') }}</th>
-                                <th data-sortable="true" data-field="employee_number">{{ trans('admin/users/table.employee_num') }}</th>
+                                <th data-sortable="true" data-field="employee_number">{{ trans('general.employee_number') }}</th>
                                 <th data-sortable="true" data-field="location" data-searchable="true">{{ trans('admin/hardware/table.location') }}</th>
                                 <th data-sortable="true" data-field="category" data-searchable="true">{{ trans('general.category') }}</th>
                                 <th data-sortable="true" data-field="manufacturer" data-searchable="true" data-visible="false">{{ trans('general.manufacturer') }}</th>
@@ -59,7 +59,7 @@
 
                                 <th data-sortable="{{ ($field->field_encrypted=='1' ? 'false' : 'true') }}" data-visible="false" data-field="{{$field->db_column_name()}}">
                                     @if ($field->field_encrypted=='1')
-                                    <i class="fa fa-lock"></i>
+                                    <i class="fas fa-lock"></i>
                                     @endif
 
                                     {{$field->name}}

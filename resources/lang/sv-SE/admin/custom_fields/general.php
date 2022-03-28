@@ -1,11 +1,12 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Anpassade fält',
+    'manage'                    => 'Manage',
     'field'		                => 'Fält',
     'about_fieldsets_title'		=> 'Om fältsamlingar',
-    'about_fieldsets_text'		=> 'Fieldsets låter dig skapa grupper av fält som är anpassade efter och ofta använda av en viss typ av tillgång. Ex. "CPU", "RAM", "HDD", etc.',
-    'custom_format'             => 'Anpassat format ...',
+    'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used for specific asset model types.',
+    'custom_format'             => 'Custom Regex format...',
     'encrypt_field'      	        => 'Kryptera värdet på det här fältet i databasen',
     'encrypt_field_help'      => 'VARNING: Kryptering av ett fält gör det oförsvarligt.',
     'encrypted'      	        => 'krypterad',
@@ -26,7 +27,19 @@ return array(
     'used_by_models'   		    => 'Används av modeller',
     'order'   		            => 'Sortering',
     'create_fieldset'         => 'Ny fältsamling',
+    'create_fieldset_title' => 'Create a new fieldset',
     'create_field'            => 'Nytt anpassat fält',
+    'create_field_title' => 'Create a new custom field',
     'value_encrypted'      	        => 'Värdet på det här fältet är krypterat i databasen. Endast adminanvändare kan se det dekrypterade värdet',
     'show_in_email'     => 'Inkludera värdet på det här fältet i utcheckning mailen som skickas till användarna? Krypterade fält kan inte inkluderas i e-postmeddelanden.',
-);
+    'help_text' => 'Help Text',
+    'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
+    'about_custom_fields_title' => 'About Custom Fields',
+    'about_custom_fields_text' => 'Custom fields allow you to add arbitrary attributes to assets.',
+    'add_field_to_fieldset' => 'Add Field to Fieldset',
+    'make_optional' => 'Required - click to make optional',
+    'make_required' => 'Optional - click to make required',
+    'reorder' => 'Reorder',
+    'db_field' => 'DB Field',
+    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.'
+];

@@ -21,7 +21,7 @@
           </label>
           <div class="col-md-8 required">
             <input class="form-control" type="text" name="first_name" id="first_name" value="{{ old('first_name', $user->first_name) }}" />
-            {!! $errors->first('first_name', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+            {!! $errors->first('first_name', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
 
@@ -32,7 +32,7 @@
           </label>
           <div class="col-md-8 required">
             <input class="form-control" type="text" name="last_name" id="last_name" value="{{ old('last_name', $user->last_name) }}" />
-            {!! $errors->first('last_name', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+            {!! $errors->first('last_name', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
 
@@ -83,7 +83,7 @@
           <label for="website" class="col-md-3 control-label">{{ trans('general.website') }}</label>
           <div class="col-md-8">
             <input class="form-control" type="text" name="website" id="website" value="{{ old('website', $user->website) }}" />
-            {!! $errors->first('website', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+            {!! $errors->first('website', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
 
@@ -94,10 +94,10 @@
           </label>
           <div class="col-md-8">
             <input class="form-control" type="text" name="gravatar" id="gravatar" value="{{ old('gravatar', $user->gravatar) }}" />
-            {!! $errors->first('gravatar', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+            {!! $errors->first('gravatar', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             <p>
               <img src="//secure.gravatar.com/avatar/{{ md5(strtolower(trim($user->gravatar))) }}" width="30" height="30" alt="{{ $user->present()->fullName() }} avatar image">
-              <a href="http://gravatar.com"><small>Change your avatar at Gravatar.com</small></a>.
+              {!! trans('general.gravatar_url') !!}
             </p>
           </div>
         </div>
@@ -125,10 +125,10 @@
 
         <!-- Two factor opt in -->
         @if ($snipeSettings->two_factor_enabled=='1')
-        <div class="form-group {{ $errors->has('avatar') ? 'has-error' : '' }}">
+        <div class="form-group {{ $errors->has('two_factor_optin') ? 'has-error' : '' }}">
           <div class="col-md-7 col-md-offset-3">
             @can('self.two_factor')
-              <label for="avatar">{{ Form::checkbox('two_factor_optin', '1', Request::old('two_factor_optin', $user->two_factor_optin),array('class' => 'minimal')) }}
+              <label for="two_factor_optin">{{ Form::checkbox('two_factor_optin', '1', Request::old('two_factor_optin', $user->two_factor_optin),array('class' => 'minimal')) }}
             @else
                 <label for="avatar">{{ Form::checkbox('two_factor_optin', '1', Request::old('two_factor_optin', $user->two_factor_optin),['class' => 'disabled minimal', 'disabled' => 'disabled']) }}
             @endcan
@@ -148,9 +148,9 @@
 
 
       </div> <!-- .box-body -->
-      <div class="box-footer text-right">
+      <div class="text-right box-footer">
         <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-        <button type="submit" class="btn btn-primary"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
       </div>
     </div> <!-- .box-default -->
     {{ Form::close() }}

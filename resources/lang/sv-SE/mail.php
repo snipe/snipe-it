@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'En användare har avbrutit en artikelförfrågan på webbplatsen',
     'a_user_requested' => 'En användare har efterfrågat en artikel webbplatsen',
     'accessory_name' => 'Tillbehörsnamn:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'Tillgång:',
     'asset_name' => 'Tillgångsnamn:',
     'asset_requested' => 'Tillgången begärd',
-    'asset_tag' => 'Tillgångstagg:',
+    'asset_tag' => 'Tillgångstagg',
     'assigned_to' => 'Tilldelats',
     'best_regards' => 'Vänliga hälsningar,',
     'canceled' => 'Avbruten:',
@@ -59,11 +59,11 @@ return array(
     'test_mail_text' => 'Detta är ett test från Snipe-IT Asset Management System. Om du får detta, så fungerar mailen :)',
     'the_following_item' => 'Följande artikel har blivit incheckad: ',
     'low_inventory_alert' => ':count artikel understiger det lägsta tillåtna lagersaldot eller håller på att ta slut.|:count artiklar understiger det lägsta tillåtna lagersaldot eller håller på att ta slut.',
-    'assets_warrantee_alert' => 'Garantin för :count tillgång löper ut inom :threshold dagar.|Garantin för :count tillgångar löper ut inom :threshold dagar.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => ':count licens löper ut inom :threshold dagar.|:count licenser löper ut inom :threshold days.',
     'to_reset' => 'För att återställa ditt :web lösenord, fyll i det här formuläret:',
     'type' => 'Typ',
-    'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
+    'upcoming-audits' => 'Det finns :count tillgång som kommer upp för revision inom :threshold days.|Det finns :count tillgångar som kommer upp för revision inom :threshold dagar.',
     'user' => 'Användare',
     'username' => 'Användarnamn',
     'welcome' => 'Välkommen: namn',
@@ -74,6 +74,6 @@ return array(
     'License_Checkin_Notification' => 'Licensen har checkats in',
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
-    'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'Visa dina tillgångar'
-);
+    'Expected_Checkin_Date' => 'En tillgång som checkas ut till dig kommer att checkas in igen :date',
+    'your_assets' => 'Visa dina tillgångar',
+];

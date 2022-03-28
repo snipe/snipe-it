@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'This user can login',
     'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Amafa abelwe: igama',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Hlela umsebenzisi',
     'filetype_info'     => 'Amafayela afakiwe avunyelwe yi-png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, ne-rar.',
     'history_user'      => 'Umlando wegama: igama',
-	'info'				=> 'Ulwazi',
+    'info'				=> 'Ulwazi',
     'restore_user'		=> 'Chofoza lapha ukuze ubuyisele.',
     'last_login'        => 'Ukungena ngemvume kokugcina',
     'ldap_config_text'  => 'Izilungiselelo zokuhlela ze-LDAP zitholakala Admin> Izilungiselelo. Indawo (okukhethwa kukho) ekhethiwe izobekwa kuwo wonke abasebenzisi abangenisiwe.',
@@ -25,4 +24,14 @@ return array(
     'two_factor_admin_optin_help' => 'Izilungiselelo zakho zamanje zomlawuli zivumela ukusethwa okukhethiwe kokuqinisekiswa kwezinto ezimbili.',
     'two_factor_enrolled' => 'I-2FA Idivayisi ibhalisiwe',
     'two_factor_active'   => 'I-2FA isebenza',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

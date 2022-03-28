@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenances' => 'Asset Maintenances',
-        'edit'               => 'Edit Asset Maintenance',
-        'delete'             => 'Delete Asset Maintenance',
-        'view'               => 'View Asset Maintenance Details',
-        'repair'             => 'Repair',
+        'asset_maintenances' => 'Viðhaldssaga eignar',
+        'edit'               => 'Breyta viðhaldsskráningu',
+        'delete'             => 'Eyða viðhaldsskráningu',
+        'view'               => 'Sjá nánari upplýsingar um viðhald eignar',
+        'repair'             => 'Viðgerð',
         'maintenance'        => 'Viðhalda',
         'upgrade'            => 'Uppfæra',
-        'calibration'        => 'Calibration',
-        'software_support'   => 'Software Support',
-        'hardware_support'   => 'Hardware Support',
+        'calibration'        => 'Kvörðun',
+        'software_support'   => 'Þjónusta við hugbúnað',
+        'hardware_support'   => 'Þjónusta við vélbúnað',
     ];

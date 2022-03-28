@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'Confirma la Eliminación Masiva de Equipos',
+return [
+    'bulk_delete'		=> 'Confirma la Eliminación Masiva de Equipos',
   'bulk_delete_help'	=> 'Revisar los equipos para eliminación masiva. Una vez eliminados, esos equipos pueden ser restaurados, pero no volverán a estar asociados a ninguno de los usuarios a los que estén asignados actualmente.',
   'bulk_delete_warn'	=> 'Estás a punto de eliminar :asset_count equipos.',
-	'bulk_update'		=> 'Actualización masiva de Equipos',
-	'bulk_update_help'	=> 'Este formulario te permite actualizar múltiples equipos simultáneamente. Solo debes completar los campos que quieres modificar. Todo campo en blanco permanecerá sin cambios. ',
-	'bulk_update_warn'	=> 'Estás a punto de editar las propiedades de :asset_count equipos.',
+    'bulk_update'		=> 'Actualización masiva de Equipos',
+    'bulk_update_help'	=> 'Este formulario te permite actualizar múltiples equipos simultáneamente. Solo debes completar los campos que quieres modificar. Todo campo en blanco permanecerá sin cambios. ',
+    'bulk_update_warn'	=> 'Estás a punto de editar las propiedades de :asset_count equipos.',
     'checkedout_to'		=> 'Asignado a',
     'checkout_date'		=> 'Fecha de asignación',
     'checkin_date'		=> 'Fecha de devolución',
@@ -38,7 +38,12 @@ return array(
     'tag'				=> 'Etiqueta del Equipo',
     'update'			=> 'Actualizar Equipo',
     'warranty'			=> 'Garantía',
-		'warranty_expires'		=> 'Vencimiento de Garantía',
+        'warranty_expires'		=> 'Vencimiento de Garantía',
     'years'				=> 'años',
-)
-;
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+];

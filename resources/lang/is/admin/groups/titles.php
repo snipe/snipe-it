@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'About Groups',
     'about_groups'                  => 'Groups are used to generalize user permissions.',
     'group_management' 	 	=> 'Group Management',
@@ -8,7 +8,9 @@ return array(
     'update' 	 		        => 'Edit Group',
     'group_name' 	 		=> 'Group Name',
     'group_admin' 	 		=> 'Group Admin',
-    'allow' 	 			=> 'Allow',
-    'deny' 	 				=> 'Deny',
-
-);
+    'allow' 	 			=> 'Leyfa',
+    'deny' 	 				=> 'Hafna',
+    'permission'            => 'Permission',
+    'grant'                 => 'Grant',
+    'no_permissions'        => 'This group has no permissions.'
+];

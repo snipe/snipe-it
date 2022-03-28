@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Update Asset Tag Settings
+    {{ trans('admin/settings/general.asset_tag_title') }}
     @parent
 @stop
 
@@ -32,7 +32,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fa fa-list-ol"></i> Asset Tags
+                        <i class="fas fa-list-ol"></i> {{ trans('general.asset_tags') }}
                     </h4>
                 </div>
                 <div class="box-body">
@@ -43,11 +43,11 @@
                         <!-- auto ids -->
                         <div class="form-group">
                             <div class="col-md-5">
-                                {{ Form::label('auto_increment_assets', trans('admin/settings/general.asset_ids')) }}
+                                {{ Form::label('auto_increment_assets', trans('admin/settings/general.auto_increment_assets')) }}
                             </div>
                             <div class="col-md-7">
                                 {{ Form::checkbox('auto_increment_assets', '1', old('auto_increment_assets', $setting->auto_increment_assets),array('class' => 'minimal', 'aria-label'=>'auto_increment_assets')) }}
-                                {{ trans('admin/settings/general.auto_increment_assets') }}
+                                {{ trans('admin/settings/general.enabled') }}
                             </div>
                         </div>
 
@@ -96,7 +96,7 @@
                         <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                     </div>
                     <div class="text-right col-md-6">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                     </div>
 
                 </div>

@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class AddModelMfgToConsumable extends Migration
 {
@@ -13,9 +13,9 @@ class AddModelMfgToConsumable extends Migration
     public function up()
     {
         Schema::table('consumables', function (Blueprint $table) {
-            $table->integer('model_no')->nullable()->default(NULL);
-            $table->integer('manufacturer_id')->nullable()->default(NULL);
-            $table->string('item_no')->nullable()->default(NULL);
+            $table->integer('model_no')->nullable()->default(null);
+            $table->integer('manufacturer_id')->nullable()->default(null);
+            $table->string('item_no')->nullable()->default(null);
         });
     }
 

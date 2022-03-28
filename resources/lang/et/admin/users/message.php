@@ -12,7 +12,8 @@ return array(
     'insufficient_permissions'  => 'Ebapiisavad õigused.',
     'user_deleted_warning'      => 'See kasutaja on kustutatud. Et kasutajat muuta või talle uusi vahendeid anda, pead ta esmalt taastama.',
     'ldap_not_configured'        => 'LDAP-i integreerimine pole selle installi jaoks konfigureeritud.',
-    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
+    'password_resets_sent'      => 'Parooli taastamise link on saadetud valitud aktiivsetele kasutajatele kellel on õige emaili aadress.',
+    'password_reset_sent'       => 'Parooli taastamise aadress on saadetud :email!',
 
 
     'success' => array(

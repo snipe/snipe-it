@@ -54,29 +54,25 @@ class ResetPasswordController extends Controller
         ];
     }
 
-
     protected function credentials(Request $request)
     {
         return $request->only(
             'username', 'password', 'password_confirmation', 'token'
         );
     }
-    
 
     public function showResetForm(Request $request, $token = null)
     {
         return view('auth.passwords.reset')->with(
             [
                 'token' => $token,
-                'username' => $request->input('username')
+                'username' => $request->input('username'),
             ]
         );
     }
 
-
     public function reset(Request $request)
     {
-
         $messages = [
             'password.not_in' => trans('validation.disallow_same_pwd_as_user_fields'),
         ];
@@ -87,14 +83,12 @@ class ResetPasswordController extends Controller
         $user = User::where('username', '=', $request->input('username'))->first();
 
         $broker = $this->broker();
-        if (strpos(Setting::passwordComplexityRulesSaving('store'), 'disallow_same_pwd_as_user_fields') !== FALSE) {
+        if (strpos(Setting::passwordComplexityRulesSaving('store'), 'disallow_same_pwd_as_user_fields') !== false) {
             $request->validate(
                 [
-                'password' => 'required|notIn:["'.$user->email.'","'.$user->username.'","'.$user->first_name.'","'.$user->last_name.'"'
+                'password' => 'required|notIn:["'.$user->email.'","'.$user->username.'","'.$user->first_name.'","'.$user->last_name.'"',
             ], $messages);
-            
         }
-
 
         $response = $broker->reset(
             $this->credentials($request), function ($user, $password) {
@@ -107,14 +101,10 @@ class ResetPasswordController extends Controller
             : $this->sendResetFailedResponse($request, $response);
     }
 
-
     protected function sendResetFailedResponse(Request $request, $response)
     {
         return redirect()->back()
             ->withInput(['username'=> $request->input('username')])
             ->withErrors(['username' => trans($response), 'password' => trans($response)]);
     }
-
-
-
 }

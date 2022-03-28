@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ImageUploadRequest;
@@ -28,7 +29,6 @@ class SuppliersController extends Controller
         return view('suppliers/index');
     }
 
-
     /**
      * Supplier create.
      *
@@ -38,9 +38,9 @@ class SuppliersController extends Controller
     public function create()
     {
         $this->authorize('create', Supplier::class);
+
         return view('suppliers/edit')->with('item', new Supplier);
     }
-
 
     /**
      * Supplier create form processing.
@@ -55,26 +55,26 @@ class SuppliersController extends Controller
         // Create a new supplier
         $supplier = new Supplier;
         // Save the location data
-        $supplier->name                 = request('name');
-        $supplier->address              = request('address');
-        $supplier->address2             = request('address2');
-        $supplier->city                 = request('city');
-        $supplier->state                = request('state');
-        $supplier->country              = request('country');
-        $supplier->zip                  = request('zip');
-        $supplier->contact              = request('contact');
-        $supplier->phone                = request('phone');
-        $supplier->fax                  = request('fax');
-        $supplier->email                = request('email');
-        $supplier->notes                = request('notes');
-        $supplier->url                  = $supplier->addhttp(request('url'));
-        $supplier->user_id              = Auth::id();
+        $supplier->name = request('name');
+        $supplier->address = request('address');
+        $supplier->address2 = request('address2');
+        $supplier->city = request('city');
+        $supplier->state = request('state');
+        $supplier->country = request('country');
+        $supplier->zip = request('zip');
+        $supplier->contact = request('contact');
+        $supplier->phone = request('phone');
+        $supplier->fax = request('fax');
+        $supplier->email = request('email');
+        $supplier->notes = request('notes');
+        $supplier->url = $supplier->addhttp(request('url'));
+        $supplier->user_id = Auth::id();
         $supplier = $request->handleImages($supplier);
-
 
         if ($supplier->save()) {
             return redirect()->route('suppliers.index')->with('success', trans('admin/suppliers/message.create.success'));
         }
+
         return redirect()->back()->withInput()->withErrors($supplier->getErrors());
     }
 
@@ -98,7 +98,6 @@ class SuppliersController extends Controller
         return view('suppliers/edit', compact('item'));
     }
 
-
     /**
      * Supplier update form processing page.
      *
@@ -116,19 +115,19 @@ class SuppliersController extends Controller
         }
 
         // Save the  data
-        $supplier->name                 = request('name');
-        $supplier->address              = request('address');
-        $supplier->address2             = request('address2');
-        $supplier->city                 = request('city');
-        $supplier->state                = request('state');
-        $supplier->country              = request('country');
-        $supplier->zip                  = request('zip');
-        $supplier->contact              = request('contact');
-        $supplier->phone                = request('phone');
-        $supplier->fax                  = request('fax');
-        $supplier->email                = request('email');
-        $supplier->url                  = $supplier->addhttp(request('url'));
-        $supplier->notes                = request('notes');
+        $supplier->name = request('name');
+        $supplier->address = request('address');
+        $supplier->address2 = request('address2');
+        $supplier->city = request('city');
+        $supplier->state = request('state');
+        $supplier->country = request('country');
+        $supplier->zip = request('zip');
+        $supplier->contact = request('contact');
+        $supplier->phone = request('phone');
+        $supplier->fax = request('fax');
+        $supplier->email = request('email');
+        $supplier->url = $supplier->addhttp(request('url'));
+        $supplier->notes = request('notes');
         $supplier = $request->handleImages($supplier);
 
         if ($supplier->save()) {
@@ -136,7 +135,6 @@ class SuppliersController extends Controller
         }
 
         return redirect()->back()->withInput()->withErrors($supplier->getErrors());
-
     }
 
     /**
@@ -149,10 +147,9 @@ class SuppliersController extends Controller
     public function destroy($supplierId)
     {
         $this->authorize('delete', Supplier::class);
-        if (is_null($supplier = Supplier::with('asset_maintenances', 'assets', 'licenses')->withCount('asset_maintenances as asset_maintenances_count','assets as assets_count','licenses as licenses_count')->find($supplierId))) {
+        if (is_null($supplier = Supplier::with('asset_maintenances', 'assets', 'licenses')->withCount('asset_maintenances as asset_maintenances_count', 'assets as assets_count', 'licenses as licenses_count')->find($supplierId))) {
             return redirect()->route('suppliers.index')->with('error', trans('admin/suppliers/message.not_found'));
         }
-
 
         if ($supplier->assets_count > 0) {
             return redirect()->route('suppliers.index')->with('error', trans('admin/suppliers/message.delete.assoc_assets', ['asset_count' => (int) $supplier->assets_count]));
@@ -167,13 +164,11 @@ class SuppliersController extends Controller
         }
 
         $supplier->delete();
+
         return redirect()->route('suppliers.index')->with('success',
             trans('admin/suppliers/message.delete.success')
         );
-
-
     }
-
 
     /**
      *  Get the asset information to present to the supplier view page
@@ -184,13 +179,13 @@ class SuppliersController extends Controller
      */
     public function show($supplierId = null)
     {
+        $this->authorize('view', Supplier::class);
         $supplier = Supplier::find($supplierId);
 
         if (isset($supplier->id)) {
-                return view('suppliers/view', compact('supplier'));
+            return view('suppliers/view', compact('supplier'));
         }
 
         return redirect()->route('suppliers.index')->with('error', trans('admin/suppliers/message.does_not_exist'));
     }
-
 }

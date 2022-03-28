@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Import History
+    {{ trans('general.import-history') }}
     @parent
 @stop
 
@@ -21,9 +21,9 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="box box-default">
                         <div class="alert alert-danger">
-                            <i class="fa fa-exclamation-circle faa-pulse animated"></i>
-                            <strong>{{ count($status['error']) }} Error Messagess: </strong>
-                            Please see below for errors.
+                            <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
+                            <strong>{{ count($status['error']) }} {{ trans('admin/hardware/general.error_messages') }}</strong> </strong>
+                            {{ trans('admin/hardware/general.alert_details') }}
                         </div>
                     </div>
                 </div>
@@ -34,9 +34,9 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="box box-default">
                     <div class="alert alert-success">
-                        <i class="fa fa-check faa-pulse animated"></i>
-                        <strong>{{ count($status['success']) }} Success Messages: </strong>
-                        Please see below for details.
+                        <i class="fas fa-check faa-pulse animated"></i>
+                        <strong>{{ count($status['success']) }} {{ trans('admin/hardware/general.success_messages') }} </strong>
+                        {{ trans('admin/hardware/general.alert_details') }}
                     </div>
                 </div>
             </div>
@@ -55,25 +55,19 @@
 
                         @if (Session::get('message'))
                             <p class="alert-danger">
-                                You have an error in your CSV file:<br />
+                                {{ trans('admin/hardware/general.csv_error') }}<br />
                                 {{ Session::get('message') }}
                             </p>
                         @endif
 
-                        <p>
-                           Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user's name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
-                        </p>
-
-                        <p>Fields included in the CSV must match the headers: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Any additional fields will be ignored. </p>
-
-                        <p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
+                        {!! trans('admin/hardware/general.import_text') !!}
 
                         <div class="form-group">
                             <label for="first_name" class="col-sm-3 control-label">{{ trans('admin/users/general.usercsv') }}</label>
                             <div class="col-sm-9">
                                 <input type="file" name="user_import_csv" id="user_import_csv"{{ (config('app.lock_passwords')===true) ? ' disabled' : '' }}>
                                 @if (config('app.lock_passwords')===true)
-                                    <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                                    <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @endif
                             </div>
                         </div>
@@ -86,7 +80,7 @@
                     <div class="col-sm-2">
                     </div>
                     <div class="col-sm-10">
-                        {{ Form::checkbox('match_firstnamelastname', '1', Request::old('match_firstnamelastname')) }} Try to match users by firstname.lastname (jane.smith) format
+                        {{ Form::checkbox('match_firstnamelastname', '1', Request::old('match_firstnamelastname')) }} {{ trans('admin/hardware/general.csv_import_match_f-l') }}
                     </div>
                 </div>
 
@@ -95,7 +89,7 @@
                     <div class="col-sm-2">
                     </div>
                     <div class="col-sm-10">
-                        {{ Form::checkbox('match_flastname', '1', Request::old('match_flastname')) }} Try to match users by first initial last name (jsmith) format
+                        {{ Form::checkbox('match_flastname', '1', Request::old('match_flastname')) }} {{ trans('admin/hardware/general.csv_import_match_initial_last') }}
                     </div>
                 </div>
 
@@ -104,7 +98,7 @@
                     <div class="col-sm-2">
                     </div>
                     <div class="col-sm-10">
-                        {{ Form::checkbox('match_firstname', '1', Request::old('match_firstname')) }} Try to match users by first name (jane) format
+                        {{ Form::checkbox('match_firstname', '1', Request::old('match_firstname')) }} {{ trans('admin/hardware/general.csv_import_match_first') }}
                     </div>
                 </div>
 
@@ -113,7 +107,7 @@
                     <div class="col-sm-2">
                     </div>
                     <div class="col-sm-10">
-                        {{ Form::checkbox('match_email', '1', Request::old('match_email')) }} Try to match users by email as username
+                        {{ Form::checkbox('match_email', '1', Request::old('match_email')) }} {{ trans('admin/hardware/general.csv_import_match_email') }}
                     </div>
                 </div>
 
@@ -122,7 +116,7 @@
                     <div class="col-sm-2">
                     </div>
                     <div class="col-sm-10">
-                        {{ Form::checkbox('match_username', '1', Request::old('match_username')) }} Try to match users by username
+                        {{ Form::checkbox('match_username', '1', Request::old('match_username')) }} {{ trans('admin/hardware/general.csv_import_match_username') }}
                     </div>
                 </div>
 
@@ -158,7 +152,7 @@
                     <div class="col-md-12">
                         <div class="box box-default">
                             <div class="box-header with-border">
-                                <h2 class="box-title"> {{ count($status['error']) }} Error Messages </h2>
+                                <h2 class="box-title"> {{ count($status['error']) }} {{ trans('admin/hardware/general.error_messages') }} </h2>
                             </div>
                             <div class="box-body">
                                 <div style="height : 400px; overflow : auto;">
@@ -185,7 +179,7 @@
                             <div class="col-md-12">
                                 <div class="box box-default">
                                     <div class="box-header with-border">
-                                        <h2 class="box-title"> {{ count($status['success']) }} Success Messages </h2>
+                                        <h2 class="box-title"> {{ count($status['success']) }} {{ trans('admin/hardware/general.success_messages') }} </h2>
                                     </div>
                                     <div class="box-body">
                                         <div style="height : 400px; overflow : auto;">

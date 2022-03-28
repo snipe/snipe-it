@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => '장소 란',
     'about_locations'           => '장소는 사용자, 자산, 그리고 그외의 품목들에 대한 위치 정보 추적에 사용된다',
     'assets_rtd'                => '자산', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -11,8 +11,8 @@ return array(
     'country'                   => '국가명',
     'create'                    => '장소 생성',
     'update'                    => '장소 갱신',
-    'print_assigned'            => 'Print Assigned',
-    'print_all_assigned'        => 'Print All Assigned',
+    'print_assigned'            => '할당된 항목 인쇄',
+    'print_all_assigned'        => '할당된 항목 모두 인쇄',
     'name'                      => '장소 명',
     'address'                   => '주소',
     'zip'                       => '우편번호',
@@ -20,4 +20,21 @@ return array(
     'parent'                    => '상위',
     'currency'                  => '현지 통화',
     'ldap_ou'                   => 'LDAP 검색 OU',
-    );
+    'user_name'                 => 'User Name',
+    'department'                => 'Department',
+    'location'                  => 'Location',
+    'asset_tag'                 => 'Assets Tag',
+    'asset_name'                => 'Name',
+    'asset_category'            => 'Category',
+    'asset_manufacturer'        => 'Manufacturer',
+    'asset_model'               => 'Model',
+    'asset_serial'              => 'Serial',
+    'asset_location'            => 'Location',
+    'asset_checked_out'         => 'Checked Out',
+    'asset_expected_checkin'    => 'Expected Checkin',
+    'date'                      => 'Date:',
+    'signed_by_asset_auditor'   => 'Signed By (Asset Auditor):',
+    'signed_by_finance_auditor' => 'Signed By (Finance Auditor):',
+    'signed_by_location_manager' => 'Signed By (Location Manager):',
+    'signed_by'                 => 'Signed Off By:',
+];

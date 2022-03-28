@@ -18,26 +18,26 @@ class CustomFieldsController extends Controller
      * @author [Brady Wetherington] [<uberbrady@gmail.com>]
      * @param  int  $id
      * @since [v3.0]
-     * @return Array
+     * @return array
      */
-
     public function index()
     {
         $this->authorize('index', CustomField::class);
         $fields = CustomField::get();
+
         return (new CustomFieldsTransformer)->transformCustomFields($fields, $fields->count());
     }
 
     /**
-    * Shows the given field
-    * @author [V. Cordes] [<volker@fdatek.de>]
-    * @param int $id
-    * @since [v4.1.10]
-    * @return View
-    */
+     * Shows the given field
+     * @author [V. Cordes] [<volker@fdatek.de>]
+     * @param int $id
+     * @since [v4.1.10]
+     * @return View
+     */
     public function show($id)
     {
-      $this->authorize('view', CustomField::class);
+        $this->authorize('view', CustomField::class);
         if ($field = CustomField::find($id)) {
             return (new CustomFieldsTransformer)->transformCustomField($field);
         }
@@ -45,7 +45,7 @@ class CustomFieldsController extends Controller
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/custom_fields/message.field.invalid')), 200);
     }
 
-     /**
+    /**
      * Update the specified field
      *
      * @author [V. Cordes] [<volker@fdatek.de>]
@@ -80,7 +80,6 @@ class CustomFieldsController extends Controller
         return response()->json(Helper::formatStandardApiResponse('error', null, $field->getErrors()));
     }
 
-
     /**
      * Store a newly created field.
      *
@@ -96,9 +95,9 @@ class CustomFieldsController extends Controller
 
         $data = $request->all();
         $regex_format = null;
-        
-        if (str_contains($data["format"], "regex:")){
-            $regex_format = $data["format"];
+
+        if (str_contains($data['format'], 'regex:')) {
+            $regex_format = $data['format'];
         }
 
         $validator = Validator::make($data, $field->validationRules($regex_format));
@@ -111,8 +110,8 @@ class CustomFieldsController extends Controller
         if ($field->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $field, trans('admin/custom_fields/message.field.create.success')));
         }
-        return response()->json(Helper::formatStandardApiResponse('error', null, $field->getErrors()));
 
+        return response()->json(Helper::formatStandardApiResponse('error', null, $field->getErrors()));
     }
 
     public function postReorder(Request $request, $id)
@@ -121,8 +120,8 @@ class CustomFieldsController extends Controller
 
         $this->authorize('update', $fieldset);
 
-        $fields = array();
-        $order_array = array();
+        $fields = [];
+        $order_array = [];
 
         $items = $request->input('item');
 
@@ -135,7 +134,6 @@ class CustomFieldsController extends Controller
         }
 
         return $fieldset->fields()->sync($fields);
-
     }
 
     public function associate(Request $request, $field_id)
@@ -152,7 +150,8 @@ class CustomFieldsController extends Controller
         }
 
         $fieldset = CustomFieldset::findOrFail($fieldset_id);
-        $fieldset->fields()->attach($field->id, ["required" => ($request->input('required') == "on"), "order" => $request->input('order', $fieldset->fields->count())]);
+        $fieldset->fields()->attach($field->id, ['required' => ($request->input('required') == 'on'), 'order' => $request->input('order', $fieldset->fields->count())]);
+
         return response()->json(Helper::formatStandardApiResponse('success', $fieldset, trans('admin/custom_fields/message.fieldset.update.success')));
     }
 
@@ -166,10 +165,12 @@ class CustomFieldsController extends Controller
         foreach ($field->fieldset as $fieldset) {
             if ($fieldset->id == $fieldset_id) {
                 $fieldset->fields()->detach($field->id);
+
                 return response()->json(Helper::formatStandardApiResponse('success', $fieldset, trans('admin/custom_fields/message.fieldset.update.success')));
             }
         }
         $fieldset = CustomFieldset::findOrFail($fieldset_id);
+
         return response()->json(Helper::formatStandardApiResponse('success', $fieldset, trans('admin/custom_fields/message.fieldset.update.success')));
     }
 
@@ -186,13 +187,12 @@ class CustomFieldsController extends Controller
 
         $this->authorize('delete', $field);
 
-        if ($field->fieldset->count() >0) {
+        if ($field->fieldset->count() > 0) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Field is in use.'));
         }
 
         $field->delete();
-        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/custom_fields/message.field.delete.success')));
 
+        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/custom_fields/message.field.delete.success')));
     }
-
 }

@@ -301,7 +301,7 @@ echo '
 '
 
 echo ""
-echo "  Welcome to Snipe-IT Inventory Installer for CentOS, Fedora, Debian and Ubuntu!"
+echo "  Welcome to Snipe-IT Inventory Installer for CentOS, Rocky, Fedora, Debian and Ubuntu!"
 echo ""
 shopt -s nocasematch
 case $distro in
@@ -323,7 +323,7 @@ case $distro in
     apache_group=www-data
     apachefile=/etc/apache2/sites-available/$APP_NAME.conf
     ;;
-  *centos*|*redhat*|*ol*|*rhel*)
+  *centos*|*redhat*|*ol*|*rhel*|*rocky*)
     echo "  The installer has detected $distro version $version."
     distro=centos
     apache_group=apache
@@ -374,7 +374,39 @@ done
 
 case $distro in
   debian)
-  if [[ "$version" =~ ^10 ]]; then
+    if [[ "$version" =~ ^11 ]]; then
+    # Install for Debian 11.x
+    tzone=$(cat /etc/timezone)
+
+    echo "* Adding PHP repository."
+    log "apt-get install -y apt-transport-https lsb-release ca-certificates"
+    log "wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg"
+    echo "deb https://packages.sury.org/php/ $codename main" > /etc/apt/sources.list.d/php.list
+
+    echo -n "* Updating installed packages."
+    log "apt-get update && apt-get -y upgrade" & pid=$!
+    progress
+
+    echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+    PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php7.4 php7.4 php7.4-mcrypt php7.4-curl php7.4-mysql php7.4-gd php7.4-ldap php7.4-zip php7.4-mbstring php7.4-xml php7.4-bcmath curl git unzip"
+    install_packages
+
+    echo "* Configuring Apache."
+    create_virtualhost
+    log "a2enmod rewrite"
+    log "a2ensite $APP_NAME.conf"
+	rename_default_vhost
+
+    set_hosts
+
+    echo "* Securing MariaDB."
+    /usr/bin/mysql_secure_installation
+
+    install_snipeit
+
+    echo "* Restarting Apache httpd."
+    log "service apache2 restart"
+  elif [[ "$version" =~ ^10 ]]; then
     # Install for Debian 10.x
     tzone=$(cat /etc/timezone)
 

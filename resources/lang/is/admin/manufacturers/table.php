@@ -1,12 +1,12 @@
 <?php
 
 return array(
-    'about_manufacturers_title'    => 'About manufacturers',
-    'about_manufacturers_text'  => 'Manufacturers are the companies that create your assets. You can store important support contact information about them here, which will be displayed on your asset detail pages.',
-    'asset_manufacturers'	=> 'Asset Manufacturers',
-    'create'				=> 'Create Manufacturer',
+    'about_manufacturers_title'    => 'Um framleiðendur',
+    'about_manufacturers_text'  => 'Framleiðendur eru fyrirtæki sem búa til eignir. Þú getur skráð upplýsingar um það hvernig hægt er að hafa samband við framleiðandann til að fá aðstoð eða þjónustu sem birtar verða samhliða öðrum upplýsingum um eignirnar.',
+    'asset_manufacturers'	=> 'Framleiðendur eigna',
+    'create'				=> 'Skrá framleiðanda',
     'id'   					=> 'ID',
-    'name'      			=> 'Name',
+    'name'      			=> 'Heiti',
     'support_email'   		=> 'Support Email',
     'support_phone'   		=> 'Support Phone',
     'support_url'   		=> 'Support URL',

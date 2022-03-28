@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,24 +13,22 @@ return array(
     |
     */
 
-    "more_info_title" => "More Info",
+    'more_info_title' => 'Mer info',
 
-    "audit_help" => "Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to.",
+    'audit_help' => 'Kryss av for å endre eiendelen til å bruke denne nye lokasjonen. Hvis du ikke krysser av vil lokasjonen kun bli notert i revisjonsloggen.<br><br>Merk at hvis denne eiendelen er sjekket ut vil det ikke endre lokasjon for brukeren, eiendelen eller lokasjonen den er sjekket ut til.',
 
-    'assets' => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'assets' => 'Eiendeler er enheter som spores på serienummer eller annen merking. Typisk er dette kostbare enheter der det gir mening å spore enkeltenheter.',
 
-    'categories' => 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'categories' => 'Kategorier hjelper deg med å organisere ting. Eksempeler på kategorier kan være &quot;Skrivebord&quot;, &quot;Bærbare&quot;, &quot;Mobiltelefon&quot;, &quot;Nettbrett&quot; og så videre, men du kan bruke kategorier som gir mening for deg.',
 
-    'accessories' => 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
+    'accessories' => 'Tilbehør er ting du leverer ut som ikke har serienummer (eller som du ikke sporer enkeltvis), for eksempel datamus og tastaturer.',
 
-    'companies'     => 'Companies can be used as a simple identifier field, or can be used to limit visibility of assets, users, etc if full company support is enabled in your Admin settings.',
+    'companies'     => 'Firma kan brukes som et enkelt identifikatorfelt, eller det kan brukes til å begrense eksponeringen av eiendeler, brukere, etc hvis full firmastøtte er aktivert i innstillingene.',
 
-    'components'    => 'Components are items that are part of an asset, for example HDD, RAM, etc.',
+    'components'    => 'Komponenter er ting som er del av en eiendel, f. eks. internminne, disk o. l.',
 
-    'consumables'   => 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
+    'consumables'   => 'Forbruksvarer er alle varer som blir brukt opp over tid. For eksempel skrivertoner eller kopipapir.',
 
-    'depreciations' => 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
+    'depreciations' => 'Du kan sette opp avskrivninger for å kostnadsføre eiendeler basert på en lineær avskrivning i perioden.',
 
-
-
-);
+];

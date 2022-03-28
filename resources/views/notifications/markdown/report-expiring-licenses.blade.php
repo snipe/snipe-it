@@ -6,7 +6,7 @@
 <tr><td>&nbsp;</td><td>{{ trans('mail.name') }}</td><td>{{ trans('mail.Days') }}</td><td>{{ trans('mail.expires') }}</td></tr>
 @foreach ($licenses as $license)
 @php
-$expires = \App\Helpers\Helper::getFormattedDateObject($license->expiration_date, 'date');
+$expires = Helper::getFormattedDateObject($license->expiration_date, 'date');
 $diff = round(abs(strtotime($license->expiration_date->format('Y-m-d')) - strtotime(date('Y-m-d')))/86400);
 $icon = ($diff <= ($threshold / 2)) ? '🚨' : (($diff <= $threshold) ? '⚠️' : ' ');
 @endphp

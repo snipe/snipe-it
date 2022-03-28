@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ImageUploadRequest;
@@ -21,46 +22,46 @@ use View;
 class ProfileController extends Controller
 {
     /**
-    * Returns a view with the user's profile form for editing
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v1.0]
-    * @return \Illuminate\Contracts\View\View
+     * Returns a view with the user's profile form for editing
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @return \Illuminate\Contracts\View\View
      */
     public function getIndex()
     {
         $user = Auth::user();
+
         return view('account/profile', compact('user'));
     }
 
     /**
-    * Validates and stores the user's update data.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v1.0]
-    * @return \Illuminate\Http\RedirectResponse
+     * Validates and stores the user's update data.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postIndex(ImageUploadRequest $request)
     {
-
         $user = Auth::user();
         $user->first_name = $request->input('first_name');
-        $user->last_name  = $request->input('last_name');
-        $user->website    = $request->input('website');
-        $user->gravatar   = $request->input('gravatar');
-        $user->skin   = $request->input('skin');
-        $user->phone   = $request->input('phone');
+        $user->last_name = $request->input('last_name');
+        $user->website = $request->input('website');
+        $user->gravatar = $request->input('gravatar');
+        $user->skin = $request->input('skin');
+        $user->phone = $request->input('phone');
 
-        if (!config('app.lock_passwords')) {
+        if (! config('app.lock_passwords')) {
             $user->locale = $request->input('locale', 'en');
         }
 
-        if ((Gate::allows('self.two_factor')) && ((Setting::getSettings()->two_factor_enabled=='1') && (!config('app.lock_passwords')))) {
+        if ((Gate::allows('self.two_factor')) && ((Setting::getSettings()->two_factor_enabled == '1') && (! config('app.lock_passwords')))) {
             $user->two_factor_optin = $request->input('two_factor_optin', '0');
         }
 
-        if (Gate::allows('self.edit_location')  && (!config('app.lock_passwords'))) {
-            $user->location_id    = $request->input('location_id');
+        if (Gate::allows('self.edit_location') && (! config('app.lock_passwords'))) {
+            $user->location_id = $request->input('location_id');
         }
 
 
@@ -72,18 +73,20 @@ class ProfileController extends Controller
         if ($request->hasFile('avatar')) {
             $path = 'avatars';
 
-            if(!Storage::disk('public')->exists($path)) Storage::disk('public')->makeDirectory($path, 775);
+            if (! Storage::disk('public')->exists($path)) {
+                Storage::disk('public')->makeDirectory($path, 775);
+            }
 
             $upload = $image = $request->file('avatar');
             $ext = $image->getClientOriginalExtension();
             $file_name = 'avatar-'.str_random(18).'.'.$ext;
 
-            if ($image->getClientOriginalExtension()!='svg') {
-                $upload =  Image::make($image->getRealPath())->resize(84, 84);
+            if ($image->getClientOriginalExtension() != 'svg') {
+                $upload = Image::make($image->getRealPath())->resize(84, 84);
             }
 
             // This requires a string instead of an object, so we use ($string)
-            Storage::disk('public')->put($path.'/'.$file_name, (string)$upload->encode());
+            Storage::disk('public')->put($path.'/'.$file_name, (string) $upload->encode());
 
             // Remove Current image if exists
             if (($user->avatar) && (Storage::disk('public')->exists($path.'/'.$user->avatar))) {
@@ -93,11 +96,10 @@ class ProfileController extends Controller
             $user->avatar = $file_name;
         }
 
-
-
         if ($user->save()) {
             return redirect()->route('profile')->with('success', 'Account successfully updated');
         }
+
         return redirect()->back()->withInput()->withErrors($user->getErrors());
     }
 
@@ -112,7 +114,14 @@ class ProfileController extends Controller
      * @since [v4.0]
      * @return View
      */
-    public function api() {
+    public function api()
+    {
+
+        // Make sure the self.api permission has been granted
+        if (!Gate::allows('self.api')) {
+            abort(403);
+        }
+
         return view('account/api');
     }
 
@@ -124,6 +133,7 @@ class ProfileController extends Controller
     public function password()
     {
         $user = Auth::user();
+
         return view('account/change-password', compact('user'));
     }
 
@@ -134,25 +144,23 @@ class ProfileController extends Controller
      */
     public function passwordSave(Request $request)
     {
-
         if (config('app.lock_passwords')) {
             return redirect()->route('account.password.index')->with('error', trans('admin/users/table.lock_passwords'));
         }
 
         $user = Auth::user();
-        if ($user->ldap_import=='1') {
+        if ($user->ldap_import == '1') {
             return redirect()->route('account.password.index')->with('error', trans('admin/users/message.error.password_ldap'));
         }
 
-        $rules = array(
+        $rules = [
             'current_password'     => 'required',
             'password'         => Setting::passwordComplexityRulesSaving('store').'|confirmed',
-        );
+        ];
 
         $validator = \Validator::make($request->all(), $rules);
-        $validator->after(function($validator) use ($request, $user) {
-
-            if (!Hash::check($request->input('current_password'), $user->password)) {
+        $validator->after(function ($validator) use ($request, $user) {
+            if (! Hash::check($request->input('current_password'), $user->password)) {
                 $validator->errors()->add('current_password', trans('validation.hashed_pass'));
             }
 
@@ -165,22 +173,17 @@ class ProfileController extends Controller
             // There may be a more elegant way to do this in the future.
 
             // First let's see if that option is enabled in the settings
-            if (strpos(Setting::passwordComplexityRulesSaving('store'), 'disallow_same_pwd_as_user_fields') !== FALSE) {
+            if (strpos(Setting::passwordComplexityRulesSaving('store'), 'disallow_same_pwd_as_user_fields') !== false) {
                 if (($request->input('password') == $user->username) ||
                     ($request->input('password') == $user->email) ||
                     ($request->input('password') == $user->first_name) ||
-                    ($request->input('password') == $user->last_name))
-                {
+                    ($request->input('password') == $user->last_name)) {
                     $validator->errors()->add('password', trans('validation.disallow_same_pwd_as_user_fields'));
                 }
             }
-
-
-
-            
         });
 
-        if (!$validator->fails()) {
+        if (! $validator->fails()) {
             $user->password = Hash::make($request->input('password'));
             $user->save();
             return redirect()->route('account.password.index')->with('success', 'Password updated!');
@@ -202,14 +205,12 @@ class ProfileController extends Controller
      * @since [v4.0]
      * @return View
      */
-
-    public function getMenuState(Request $request) {
-        if ($request->input('state')=='open') {
+    public function getMenuState(Request $request)
+    {
+        if ($request->input('state') == 'open') {
             $request->session()->put('menu_state', 'open');
         } else {
             $request->session()->put('menu_state', 'closed');
         }
     }
-
-
 }

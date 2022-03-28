@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Password;
 
 class BulkUsersController extends Controller
 {
-
     /**
      * Returns a view that confirms the user's a bulk delete will be applied to.
      *
@@ -34,35 +33,31 @@ class BulkUsersController extends Controller
         // Make sure there were users selected
         if (($request->filled('ids')) && (count($request->input('ids')) > 0)) {
             // Get the list of affected users
-            $users = User::whereIn('id', array_keys(request('ids')))
+            $user_raw_array = request('ids');
+            $users = User::whereIn('id', $user_raw_array)
                 ->with('groups', 'assets', 'licenses', 'accessories')->get();
 
             if ($request->input('bulk_actions') == 'edit') {
                 return view('users/bulk-edit', compact('users'))
                     ->with('groups', Group::pluck('name', 'id'));
-
             } elseif ($request->input('bulk_actions') == 'delete') {
-                return view('users/confirm-bulk-delete')->with('users', $users)->with('statuslabel_list',  Helper::statusLabelList());
-
-
+                return view('users/confirm-bulk-delete')->with('users', $users)->with('statuslabel_list', Helper::statusLabelList());
             } elseif ($request->input('bulk_actions') == 'bulkpasswordreset') {
                 foreach ($users as $user) {
-                    if (($user->activated=='1') && ($user->email!='')) {
+                    if (($user->activated == '1') && ($user->email != '')) {
                         $credentials = ['email' => $user->email];
                         Password::sendResetLink($credentials, function (Message $message) {
                             $message->subject($this->getEmailSubject());
                         });
                     }
                 }
+
                 return redirect()->back()->with('success', trans('admin/users/message.password_resets_sent'));
-
             }
-
         }
 
         return redirect()->back()->with('error', 'No users selected');
     }
-
 
     /**
      * Save bulk-edited users
@@ -77,7 +72,7 @@ class BulkUsersController extends Controller
     {
         $this->authorize('update', User::class);
 
-        if((!$request->filled('ids')) || $request->input('ids') <= 0) {
+        if ((! $request->filled('ids')) || $request->input('ids') <= 0) {
             return redirect()->back()->with('error', 'No users selected');
         }
         $user_raw_array = $request->input('ids');
@@ -88,27 +83,26 @@ class BulkUsersController extends Controller
         $users = User::whereIn('id', $user_raw_array)->where('id', '!=', Auth::user()->id)->get();
 
         $return_array = [
-            'success' => trans('admin/users/message.success.update_bulk')
+            'success' => trans('admin/users/message.success.update_bulk'),
         ];
-
 
         $this->conditionallyAddItem('location_id')
             ->conditionallyAddItem('department_id')
             ->conditionallyAddItem('company_id')
             ->conditionallyAddItem('locale')
-            ->conditionallyAddItem('activated')
-;
+            ->conditionallyAddItem('remote')
+            ->conditionallyAddItem('activated');
+            
         // If the manager_id is one of the users being updated, generate a warning.
         if (array_search($request->input('manager_id'), $user_raw_array)) {
             $manager_conflict = true;
             $return_array = [
-                'warning' => trans('admin/users/message.bulk_manager_warn')
+                'warning' => trans('admin/users/message.bulk_manager_warn'),
             ];
         }
-        if (!$manager_conflict) {
+        if (! $manager_conflict) {
             $this->conditionallyAddItem('manager_id');
         }
-
 
         // Save the updated info
         User::whereIn('id', $user_raw_array)
@@ -127,20 +121,21 @@ class BulkUsersController extends Controller
 
     /**
      * Array to store update data per item
-     * @var Array
+     * @var array
      */
     private $update_array = [];
 
     /**
      * Adds parameter to update array for an item if it exists in request
-     * @param  String $field field name
+     * @param  string $field field name
      * @return BulkUsersController Model for Chaining
      */
     protected function conditionallyAddItem($field)
     {
-        if(request()->filled($field)) {
+        if (request()->filled($field)) {
             $this->update_array[$field] = request()->input($field);
         }
+
         return $this;
     }
 
@@ -157,10 +152,10 @@ class BulkUsersController extends Controller
     {
         $this->authorize('update', User::class);
 
-        if ((!$request->filled('ids')) || (count($request->input('ids')) == 0)) {
+        if ((! $request->filled('ids')) || (count($request->input('ids')) == 0)) {
             return redirect()->back()->with('error', 'No users selected');
         }
-        if ((!$request->filled('status_id')) || ($request->input('status_id')=='')) {
+        if ((! $request->filled('status_id')) || ($request->input('status_id') == '')) {
             return redirect()->route('users.index')->with('error', 'No status selected');
         }
 
@@ -174,10 +169,9 @@ class BulkUsersController extends Controller
         }
 
         $users = User::whereIn('id', $user_raw_array)->get();
-        $assets = Asset::whereIn('assigned_to', $user_raw_array)->where('assigned_type', 'App\Models\User')->get();
+        $assets = Asset::whereIn('assigned_to', $user_raw_array)->where('assigned_type', \App\Models\User::class)->get();
         $accessories = DB::table('accessories_users')->whereIn('assigned_to', $user_raw_array)->get();
         $licenses = DB::table('license_seats')->whereIn('assigned_to', $user_raw_array)->get();
-
 
         $this->logItemCheckinAndDelete($assets, Asset::class);
         $this->logItemCheckinAndDelete($accessories, Accessory::class);
@@ -188,7 +182,6 @@ class BulkUsersController extends Controller
             'assigned_to'   => null,
             'assigned_type' => null,
         ]);
-
 
         LicenseSeat::whereIn('id', $licenses->pluck('id'))->update(['assigned_to' => null]);
 
@@ -205,9 +198,9 @@ class BulkUsersController extends Controller
      * @param $items
      * @param $itemType string name of items being passed.
      */
-    protected function logItemCheckinAndDelete($items, $itemType) {
-
-        foreach($items as $item) {
+    protected function logItemCheckinAndDelete($items, $itemType)
+    {
+        foreach ($items as $item) {
             $logAction = new Actionlog();
             $logAction->item_id = $item->id;
             // We can't rely on get_class here because the licenses/accessories fetched above are not eloquent models, but simply arrays.
@@ -219,7 +212,4 @@ class BulkUsersController extends Controller
             $logAction->logaction('checkin from');
         }
     }
-
-
-
 }

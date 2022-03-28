@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class AddZipToSupplier extends Migration
 {
@@ -13,8 +13,7 @@ class AddZipToSupplier extends Migration
     public function up()
     {
         Schema::table('suppliers', function ($table) {
-            $table->string('zip',10)->nullable()->default(NULL);
-
+            $table->string('zip', 10)->nullable()->default(null);
         });
     }
 
@@ -29,6 +28,4 @@ class AddZipToSupplier extends Migration
             $table->dropColumn('zip');
         });
     }
-
-
 }

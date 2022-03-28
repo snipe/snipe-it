@@ -1,8 +1,13 @@
 <?php
 
+namespace Database\Factories;
+
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Category;
+use App\Models\Location;
+use App\Models\Supplier;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,204 +18,275 @@ use App\Models\Category;
 |
 */
 
-$factory->define(Asset::class, function (Faker\Generator $faker) {
-    return [
-        'name' => null,
-        'rtd_location_id' => rand(1,10),
-        'serial' => $faker->uuid,
-        'status_id' => 1,
-        'user_id' => 1,
-        'asset_tag' => $faker->unixTime('now'),
-        'notes'   => 'Created by DB seeder',
-        'purchase_date' => $faker->dateTimeBetween('-1 years','now', date_default_timezone_get()),
-        'purchase_cost' => $faker->randomFloat(2, '299.99', '2999.99'),
-        'order_number' => $faker->numberBetween(1000000, 50000000),
-        'supplier_id' => 1,
-        'requestable' => $faker->boolean(),
-        'assigned_to' => null,
-        'assigned_type' => null,
-        'next_audit_date' => null,
-        'last_checkout' => null,
-    ];
-});
-
-
-
-
-$factory->state(Asset::class, 'laptop-mbp', function ($faker) {
-    return [
-        'model_id' => 1
-    ];
-});
-
-$factory->state(Asset::class, 'laptop-mbp-pending', function ($faker) {
-    return [
-        'model_id' => 1,
-         'status_id' => 2,
-    ];
-});
-
-$factory->state(Asset::class, 'laptop-mbp-archived', function ($faker) {
-    return [
-        'model_id' => 1,
-        'status_id' => 3,
-    ];
-});
-
-$factory->state(Asset::class, 'laptop-air', function ($faker) {
-    return [
-        'model_id' => 2
-    ];
-});
-
-$factory->state(Asset::class, 'laptop-surface', function ($faker) {
-    return [
-        'model_id' => 3
-    ];
-});
-
-$factory->state(Asset::class, 'laptop-xps', function ($faker) {
-    return [
-        'model_id' => 4
-    ];
-});
-
-$factory->state(Asset::class, 'laptop-spectre', function ($faker) {
-    return [
-        'model_id' => 5
-    ];
-});
-
-$factory->state(Asset::class, 'laptop-zenbook', function ($faker) {
-    return [
-        'model_id' => 6
-    ];
-});
-
-$factory->state(Asset::class, 'laptop-yoga', function ($faker) {
-    return [
-        'model_id' => 7
-    ];
-});
-
-$factory->state(Asset::class, 'desktop-macpro', function ($faker) {
-    return [
-        'model_id' => 8
-    ];
-});
-
-$factory->state(Asset::class, 'desktop-lenovo-i5', function ($faker) {
-    return [
-        'model_id' => 9
-    ];
-});
-
-$factory->state(Asset::class, 'desktop-optiplex', function ($faker) {
-    return [
-        'model_id' => 10
-    ];
-});
-
-$factory->state(Asset::class, 'conf-polycom', function ($faker) {
-    return [
-        'model_id' => 11
-    ];
-});
-
-$factory->state(Asset::class, 'conf-polycomcx', function ($faker) {
-    return [
-        'model_id' => 12
-    ];
-});
-
-$factory->state(Asset::class, 'tablet-ipad', function ($faker) {
-    return [
-        'model_id' => 13
-    ];
-});
-
-$factory->state(Asset::class, 'tablet-tab3', function ($faker) {
-    return [
-        'model_id' => 14
-    ];
-});
-
-$factory->state(Asset::class, 'phone-iphone6s', function ($faker) {
-    return [
-        'model_id' => 15
-    ];
-});
-
-$factory->state(Asset::class, 'phone-iphone7', function ($faker) {
-    return [
-        'model_id' => 16
-    ];
-});
-
-$factory->state(Asset::class, 'ultrafine', function ($faker) {
-    return [
-        'model_id' => 17
-    ];
-});
-
-$factory->state(Asset::class, 'ultrasharp', function ($faker) {
-    return [
-        'model_id' => 18
-    ];
-});
-
-
 // These are just for unit tests, not to generate data
 
-$factory->state(Asset::class, 'assigned-to-user', function ($faker) {
-    return [
-        'model_id' => 1,
-        'assigned_to' => factory(App\Models\User::class)->create()->id,
-        'assigned_type' => App\Models\User::class,
-    ];
-});
-$factory->state(Asset::class, 'assigned-to-location', function ($faker) {
-    return [
-        'model_id' => 1,
-        'assigned_to' => factory(App\Models\Location::class)->create()->id,
-        'assigned_type' => App\Models\Location::class,
-    ];
-});
-$factory->state(Asset::class, 'assigned-to-asset', function ($faker) {
-    return [
-        'model_id' => 1,
-        'assigned_to' => factory(App\Models\Asset::class)->create()->id,
-        'assigned_type' => App\Models\Asset::class,
-    ];
-});
+class AssetFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Asset::class;
 
-$factory->state(Asset::class, 'requires-acceptance', function ($faker) {
-    return [
-        'model_id' => 1,
-    ];
-});
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'name' => null,
+            'rtd_location_id' => Location::all()->random()->id,
+            'serial' => $this->faker->uuid,
+            'status_id' => 1,
+            'user_id' => 1,
+            'asset_tag' => $this->faker->unixTime('now'),
+            'notes'   => 'Created by DB seeder',
+            'purchase_date' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
+            'purchase_cost' => $this->faker->randomFloat(2, '299.99', '2999.99'),
+            'order_number' => $this->faker->numberBetween(1000000, 50000000),
+            'supplier_id' => Supplier::all()->random()->id,
+            'requestable' => $this->faker->boolean(),
+            'assigned_to' => null,
+            'assigned_type' => null,
+            'next_audit_date' => null,
+            'last_checkout' => null,
+        ];
+    }
 
+    public function laptopMbp()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 1,
+            ];
+        });
+    }
 
-$factory->state(Asset::class, 'deleted', function ($faker) {
-    return [
-        'model_id' => 1,
-        'deleted_at' => $faker->dateTime()
-    ];
-});
+    public function laptopMbpPending()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 1,
+                'status_id' => 2,
+            ];
+        });
+    }
 
+    public function laptopMbpArchived()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 1,
+                'status_id' => 3,
+            ];
+        });
+    }
 
-$factory->define(App\Models\AssetMaintenance::class, function (Faker\Generator $faker) {
-    return [
-        'asset_id' => function () {
-            return factory(App\Models\Asset::class)->create()->id;
-        },
-        'supplier_id' => function () {
-            return factory(App\Models\Supplier::class)->create()->id;
-        },
-        'asset_maintenance_type' => $faker->randomElement(['maintenance', 'repair', 'upgrade']),
-        'title' => $faker->sentence,
-        'start_date' => $faker->date(),
-        'is_warranty' => $faker->boolean(),
-        'notes' => $faker->paragraph(),
-    ];
-});
+    public function laptopAir()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 2,
+            ];
+        });
+    }
+
+    public function laptopSurface()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 3,
+            ];
+        });
+    }
+
+    public function laptopXps()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 4,
+            ];
+        });
+    }
+
+    public function laptopSpectre()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 5,
+            ];
+        });
+    }
+
+    public function laptopZenbook()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 6,
+            ];
+        });
+    }
+
+    public function laptopYoga()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 7,
+            ];
+        });
+    }
+
+    public function desktopMacpro()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 8,
+            ];
+        });
+    }
+
+    public function desktopLenovoI5()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 9,
+            ];
+        });
+    }
+
+    public function desktopOptiplex()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 10,
+            ];
+        });
+    }
+
+    public function confPolycom()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 11,
+            ];
+        });
+    }
+
+    public function confPolycomcx()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 12,
+            ];
+        });
+    }
+
+    public function tabletIpad()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 13,
+            ];
+        });
+    }
+
+    public function tabletTab3()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 14,
+            ];
+        });
+    }
+
+    public function phoneIphone11()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 15,
+            ];
+        });
+    }
+
+    public function phoneIphone12()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 16,
+            ];
+        });
+    }
+
+    public function ultrafine()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 17,
+            ];
+        });
+    }
+
+    public function ultrasharp()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 18,
+            ];
+        });
+    }
+
+    public function assignedToUser()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 1,
+                'assigned_to' => \App\Models\User::factory()->create()->id,
+                'assigned_type' => \App\Models\User::class,
+            ];
+        });
+    }
+
+    public function assignedToLocation()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 1,
+                'assigned_to' => \App\Models\Location::factory()->create()->id,
+                'assigned_type' => \App\Models\Location::class,
+            ];
+        });
+    }
+
+    public function assignedToAsset()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 1,
+                'assigned_to' => \App\Models\Asset::factory()->create()->id,
+                'assigned_type' => \App\Models\Asset::class,
+            ];
+        });
+    }
+
+    public function requiresAcceptance()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 1,
+            ];
+        });
+    }
+
+    public function deleted()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => 1,
+                'deleted_at' => $this->faker->dateTime(),
+            ];
+        });
+    }
+}

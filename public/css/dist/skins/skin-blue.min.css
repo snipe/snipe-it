@@ -36,7 +36,7 @@
     background-color: rgba(255, 255, 255, 0.1);
   }
   .skin-blue .main-header .navbar .dropdown-menu li a {
-    color: #fff;
+    color: #333;
   }
   .skin-blue .main-header .navbar .dropdown-menu li a:hover {
     background: #367fa9;
@@ -194,3 +194,4 @@ a:visited {
 .search-highlight:hover {
   background-color: #e9d15b;
 }
+

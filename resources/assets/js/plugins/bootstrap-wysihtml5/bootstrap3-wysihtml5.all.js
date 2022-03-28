@@ -14515,7 +14515,7 @@ function program5(depth0,data) {
 function program7(depth0,data) {
   
   
-  return "\n      <span class=\"fa fa-list-ol\"></span>\n    ";
+  return "\n      <span class=\"fas fa-list-ol\"></span>\n    ";
   }
 
 function program9(depth0,data) {

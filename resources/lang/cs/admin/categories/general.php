@@ -18,5 +18,6 @@ return array(
     'update'  							=> 'Upravit kategorii',
     'use_default_eula'					=> 'Použijte raději <a href="#" data-toggle="modal" data-target="#eulaModal">primární výchozí EULA</a>.',
     'use_default_eula_disabled'			=> '<del>Použijte raději primární výchozí EULA.</del> Nenalezena primární výchozí EULA. Přidejte ji v Nastaveních prosím.',
+    'use_default_eula_column'			=> 'Použít výchozí EULA',
 
 );

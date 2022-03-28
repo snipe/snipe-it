@@ -20,36 +20,36 @@
 
     <!-- Old Password -->
     <div class="form-group {{ $errors->has('current_password') ? ' has-error' : '' }}">
-        <label for="current_password" class="col-md-3 control-label">Current Password
+        <label for="current_password" class="col-md-3 control-label"> {{ trans('general.current_password') }} </label>
         </label>
         <div class="col-md-5 required">
             <input class="form-control" type="password" name="current_password" id="current_password" {{ (config('app.lock_passwords') ? ' disabled' : '') }}>
-            {!! $errors->first('current_password', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+            {!! $errors->first('current_password', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             @if (config('app.lock_passwords')===true)
-                <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
             @endif
         </div>
     </div>
 
     <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
-        <label for="password" class="col-md-3 control-label">New Password</label>
+        <label for="password" class="col-md-3 control-label">{{ trans('general.new_password') }}</label>
         <div class="col-md-5 required">
             <input class="form-control" type="password" name="password" id="password" {{ (config('app.lock_passwords') ? ' disabled' : '') }}>
-            {!! $errors->first('password', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+            {!! $errors->first('password', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             @if (config('app.lock_passwords')===true)
-                <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
             @endif
         </div>
     </div>
 
 
     <div class="form-group {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-        <label for="password_confirmation" class="col-md-3 control-label">New Password</label>
+        <label for="password_confirmation" class="col-md-3 control-label">{{ trans('general.new_password') }}</label>
         <div class="col-md-5 required">
             <input class="form-control" type="password" name="password_confirmation" id="password_confirmation"  {{ (config('app.lock_passwords') ? ' disabled' : '') }} aria-label="password_confirmation">
-            {!! $errors->first('password_confirmation', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+            {!! $errors->first('password_confirmation', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             @if (config('app.lock_passwords')===true)
-                <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
             @endif
         </div>
     </div>
@@ -59,7 +59,7 @@
             </div> <!-- .box-body -->
             <div class="box-footer text-right">
                 <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-                <button type="submit" class="btn btn-primary"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
             </div>
 
         </div> <!-- .box-default -->

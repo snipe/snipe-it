@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class AddAssetNameToSettings extends Migration
 {
-     /**
+    /**
      * Run the migrations.
      *
      * @return void
@@ -13,8 +13,7 @@ class AddAssetNameToSettings extends Migration
     public function up()
     {
         Schema::table('settings', function ($table) {
-            $table->integer('display_asset_name')->nullable()->default(NULL);
-
+            $table->integer('display_asset_name')->nullable()->default(null);
         });
     }
 
@@ -29,5 +28,4 @@ class AddAssetNameToSettings extends Migration
             $table->dropColumn('display_asset_name');
         });
     }
-
 }

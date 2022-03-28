@@ -1,22 +1,25 @@
 <?php
+
 namespace App\Models;
 
 use Gate;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Watson\Validating\ValidatingTrait;
 
 class CustomFieldset extends Model
 {
+    use HasFactory;
     use ValidatingTrait;
 
-    protected $guarded=["id"];
+    protected $guarded = ['id'];
 
     /**
      * Validation rules
      * @var array
      */
     public $rules = [
-        "name" => "required|unique:custom_fieldsets"
+        'name' => 'required|unique:custom_fieldsets',
     ];
 
     /**
@@ -24,10 +27,9 @@ class CustomFieldset extends Model
      * validation rules before attempting validation. If this property
      * is not set in the model it will default to true.
      *
-     * @var boolean
+     * @var bool
      */
     protected $injectUniqueIdentifier = true;
-
 
     /**
      * Establishes the fieldset -> field relationship
@@ -38,7 +40,7 @@ class CustomFieldset extends Model
      */
     public function fields()
     {
-        return $this->belongsToMany('\App\Models\CustomField')->withPivot(["required","order"])->orderBy("pivot_order");
+        return $this->belongsToMany(\App\Models\CustomField::class)->withPivot(['required', 'order'])->orderBy('pivot_order');
     }
 
     /**
@@ -50,7 +52,7 @@ class CustomFieldset extends Model
      */
     public function models()
     {
-        return $this->hasMany('\App\Models\AssetModel', "fieldset_id");
+        return $this->hasMany(\App\Models\AssetModel::class, 'fieldset_id');
     }
 
     /**
@@ -62,7 +64,7 @@ class CustomFieldset extends Model
      */
     public function user()
     {
-        return $this->belongsTo('\App\Models\User'); //WARNING - not all CustomFieldsets have a User!!
+        return $this->belongsTo(\App\Models\User::class); //WARNING - not all CustomFieldsets have a User!!
     }
 
     /**
@@ -75,18 +77,23 @@ class CustomFieldset extends Model
      */
     public function validation_rules()
     {
-        $rules=[];
+        $rules = [];
         foreach ($this->fields as $field) {
             $rule = [];
 
-            if (($field->field_encrypted!='1') ||
-                  (($field->field_encrypted =='1')  && (Gate::allows('admin')) )) {
-                    $rule[] = ($field->pivot->required=='1') ? "required" : "nullable";
+            if (($field->field_encrypted != '1') ||
+                  (($field->field_encrypted == '1') && (Gate::allows('admin')))) {
+                    $rule[] = ($field->pivot->required == '1') ? 'required' : 'nullable';
+            }
+
+            if ($field->is_unique == '1') {
+                    $rule[] = 'unique';
             }
 
             array_push($rule, $field->attributes['format']);
-            $rules[$field->db_column_name()]=$rule;
+            $rules[$field->db_column_name()] = $rule;
         }
+
         return $rules;
     }
 }

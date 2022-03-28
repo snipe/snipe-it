@@ -1,0 +1,154 @@
+{
+    "name": "Snipe-IT",
+    "description": "Open source asset management.",
+    "keywords": [
+      "asset management",
+      "it asset"
+    ],
+    "website": "https://snipeitapp.com/",
+    "repository": "https://github.com/snipe/snipe-it",
+    "logo": "https://pbs.twimg.com/profile_images/976748875733020672/K-HnZCCK_400x400.jpg",
+    "success_url": "/setup",
+    "env": {
+      "APP_ENV": {
+        "description": "Laravel environment mode. Unless developing the application, this should be production.",
+        "value": "production"
+      },
+      "APP_DEBUG": {
+        "description": "Laravel debug mode. Unless developing the application or actively debugging a problem, this should be set to false.",
+        "value": "false"
+      },
+      "APP_KEY": {
+        "description": "A secret key for verifying the integrity of signed cookies. (See either https://snipe-it.readme.io/docs/generate-your-app-key or generate at https://coderstoolbox.online/toolbox/generate-symfony-secret)",
+        "value": ""
+      },
+      "APP_URL": {
+        "description": "URL where your Snipe-IT install will be available at.",
+        "value": "https://your-app-name.herokuapp.com"
+      },
+      "APP_TIMEZONE": {
+        "description": "Which timezone do you want to use for your install? (http://php.net/manual/en/timezones.php)",
+        "value": "UTC"
+      },
+      "APP_LOCALE": {
+        "description": "Which language do you want to use for your install? (https://snipe-it.readme.io/docs/configuration#setting-a-language)",
+        "value": "en"
+      },
+      "MAX_RESULTS": {
+        "description": "The maximum number of search results that can be returned at one time.",
+        "value": "500"
+      },
+      "MAIL_DRIVER": {
+        "description": "Mail driver - Generally SMTP on Heroku - https://snipe-it.readme.io/docs/configuration#required-outgoing-mail-settings",
+        "value": "smtp"
+      },
+      "MAIL_HOST": {
+        "description": "SMTP Server Hostname",
+        "value": "smtp.your.domain.name"
+      },
+      "MAIL_PORT": {
+        "description": "SMTP Server Port",
+        "value": "25"
+      },
+      "MAIL_USERNAME": {
+        "description": "SMTP Server Username",
+        "value": "YOURUSERNAME"
+      },
+      "MAIL_PASSWORD": {
+        "description": "SMTP Server Password",
+        "value": "YOURPASSWORD"
+      },
+      "MAIL_ENCRYPTION": {
+        "description": "Encryption protocol for email sending.",
+        "value": "null"
+      },
+      "MAIL_FROM_ADDR": {
+        "description": "Email from address",
+        "value": "no-reply@domain.name"
+      },
+      "MAIL_FROM_NAME": {
+        "description": "Email from Name",
+        "value": "Snipe-IT"
+      },
+      "MAIL_REPLYTO_ADDR": {
+        "description": "Email Reply-To address",
+        "value": "your@domain.name"
+      },
+      "MAIL_REPLYTO_NAME": {
+        "description": "Email Reply-To Name",
+        "value": "Snipe-IT"
+      },
+      "MAIL_AUTO_EMBED": {
+        "description": "Whether or not to embed images in emails (via CID or base64) versus linking to them.",
+        "value": "true"
+      },
+      "MAIL_AUTO_EMBED_METHOD": {
+        "description": "Method that should be used for attaching inline images.",
+        "value": "base64"
+      },
+      "SESSION_LIFETIME": {
+        "description": "Specify the time in minutes that the session should remain valid.",
+        "value": "12000"
+      },
+      "EXPIRE_ON_CLOSE": {
+        "description": "Specify whether or not the logged in session should be expired when the user closes their browser window.",
+        "value": "false"
+      },
+      "ENCRYPT": {
+        "description": "Specify whether you wish to use encrypted cookies for your Snipe-IT sessions.",
+        "value": "true"
+      },
+      "COOKIE_NAME": {
+        "description": "The name of the cookie set by Snipe-IT for session management.",
+        "value": "snipeit_session"
+      },
+      "COOKIE_DOMAIN": {
+        "description": "The domain name that the session cookie should be sent for.",
+        "value": "your-app-name.herokuapp.com"
+      },
+      "SECURE_COOKIES": {
+        "description": "Should cookies only be sent for HTTPS connections? Generally true on Heroku.",
+        "value": "true"
+      },
+      "LOGIN_MAX_ATTEMPTS": {
+        "description": "The maximum number of failed attempts allowed before the user is throttled.",
+        "value": "5"
+      },
+      "LOGIN_LOCKOUT_DURATION": {
+        "description": "The duration (in seconds) that the user should be blocked from attempting to authenticate again.",
+        "value": "60"
+      },
+      "APP_LOG": {
+        "description": "Driver to send logs to. (errorlog for stderr)",
+        "value": "errorlog"
+      },
+      "ALLOW_IFRAMING": {
+        "description": "Allow Snipe-IT to be loaded using an iFrame?",
+        "value": "false"
+      },
+      "GOOGLE_MAPS_API": {
+        "description": "Include your Google Maps API key here if you'd like Snipe-IT to load maps from Google on your locations and suppliers pages.",
+        "required": false
+      },
+      "BACKUP_ENV": {
+        "description": "Set this to true if you wish to backup your .env file in your Admin > Backups process.",
+        "value": "true"
+      },
+      "ENABLE_HSTS": {
+        "description": "Whether or not to send the HSTS security policy header.",
+        "value": "false"
+      }
+    },
+    "formation": {
+      "web": {
+        "quantity": 1,
+        "size": "free"
+      }
+    },
+    "image": "heroku/php",
+    "addons": [
+      "cleardb:ignite",
+      "heroku-redis:hobby-dev",
+      "papertrail:choklad"
+    ]
+  }

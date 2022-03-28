@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Amdan Grwpiau',
     'about_groups'                  => 'Defnyddir grwpiau i gosod hawliau defnyddwyr.',
     'group_management' 	 	=> 'Rheoli Grwpiau',
@@ -10,5 +10,7 @@ return array(
     'group_admin' 	 		=> 'Gweinyddwr Grwp',
     'allow' 	 			=> 'Caniatau',
     'deny' 	 				=> 'Gwrthod',
-
-);
+    'permission'            => 'Permission',
+    'grant'                 => 'Grant',
+    'no_permissions'        => 'This group has no permissions.'
+];

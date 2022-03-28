@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'Apstiprināt lielapjoma aktīvu dzēšanu',
+return [
+    'bulk_delete'		=> 'Apstiprināt lielapjoma aktīvu dzēšanu',
   'bulk_delete_help'	=> 'Pārskatīt aktīvu lielapjoma dzēšanu zemāk. Dzēstos aktīvus var atjaunot, bet tie vairs nebūs saistīti ar šībrīža lietotāju.',
   'bulk_delete_warn'	=> 'Jūs gatavojaties dzēst: asset_count aktīvi.',
-	'bulk_update'		=> 'Lielapjoma atjaunināšanas līdzekļi',
-	'bulk_update_help'	=> 'Šī veidlapa ļauj vienlaikus atjaunināt vairākus aktīvus. Aizpildiet tikai nepieciešamos laukus. Jebkurš tukšs laukums paliek nemainīgs.',
-	'bulk_update_warn'	=> 'Jūs gatavojaties rediģēt: asset_count īpašumus.',
+    'bulk_update'		=> 'Lielapjoma atjaunināšanas līdzekļi',
+    'bulk_update_help'	=> 'Šī veidlapa ļauj vienlaikus atjaunināt vairākus aktīvus. Aizpildiet tikai nepieciešamos laukus. Jebkurš tukšs laukums paliek nemainīgs.',
+    'bulk_update_warn'	=> 'Jūs gatavojaties rediģēt: asset_count īpašumus.',
     'checkedout_to'		=> 'Izrakstīts uz',
     'checkout_date'		=> 'Izrakstīšanās datums',
     'checkin_date'		=> 'Reģistrēšanās datums',
@@ -38,7 +38,12 @@ return array(
     'tag'				=> 'Asset Tag',
     'update'			=> 'Aktīvu atjaunošana',
     'warranty'			=> 'Garantija',
-		'warranty_expires'		=> 'Garantija beidzās',
+        'warranty_expires'		=> 'Garantija beidzās',
     'years'				=> 'gadiem',
-)
-;
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+];

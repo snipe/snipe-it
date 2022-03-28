@@ -23,10 +23,10 @@ class CategoriesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Category::class);
-        $allowed_columns = ['id', 'name','category_type', 'category_type','use_default_eula','eula_text', 'require_acceptance','checkin_email', 'assets_count', 'accessories_count', 'consumables_count', 'components_count','licenses_count', 'image'];
+        $allowed_columns = ['id', 'name', 'category_type', 'category_type', 'use_default_eula', 'eula_text', 'require_acceptance', 'checkin_email', 'assets_count', 'accessories_count', 'consumables_count', 'components_count', 'licenses_count', 'image'];
 
-        $categories = Category::select(['id', 'created_at', 'updated_at', 'name','category_type','use_default_eula','eula_text', 'require_acceptance','checkin_email','image'])
-            ->withCount('assets as assets_count', 'accessories as accessories_count', 'consumables as consumables_count', 'components as components_count','licenses as licenses_count');
+        $categories = Category::select(['id', 'created_at', 'updated_at', 'name', 'category_type', 'use_default_eula', 'eula_text', 'require_acceptance', 'checkin_email', 'image'])
+            ->withCount('assets as assets_count', 'accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'licenses as licenses_count');
 
         if ($request->filled('search')) {
             $categories = $categories->TextSearch($request->input('search'));
@@ -45,6 +45,7 @@ class CategoriesController extends Controller
 
         $total = $categories->count();
         $categories = $categories->skip($offset)->take($limit)->get();
+
         return (new CategoriesTransformer)->transformCategories($categories, $total);
 
     }
@@ -63,6 +64,7 @@ class CategoriesController extends Controller
         $this->authorize('create', Category::class);
         $category = new Category;
         $category->fill($request->all());
+        $category->category_type = strtolower($request->input('category_type'));
         $category = $request->handleImages($category);
 
         if ($category->save()) {
@@ -103,6 +105,7 @@ class CategoriesController extends Controller
         $this->authorize('update', Category::class);
         $category = Category::findOrFail($id);
         $category->fill($request->all());
+        $category->category_type = strtolower($request->input('category_type'));
         $category = $request->handleImages($category);
 
         if ($category->save()) {
@@ -125,14 +128,14 @@ class CategoriesController extends Controller
         $this->authorize('delete', Category::class);
         $category = Category::findOrFail($id);
 
-        if (!$category->isDeletable()) {
+        if (! $category->isDeletable()) {
             return response()->json(
-                Helper::formatStandardApiResponse('error', null,  trans('admin/categories/message.assoc_items', ['asset_type'=>$category->category_type]))
+                Helper::formatStandardApiResponse('error', null, trans('admin/categories/message.assoc_items', ['asset_type'=>$category->category_type]))
             );
         }
         $category->delete();
-        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/categories/message.delete.success')));
 
+        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/categories/message.delete.success')));
     }
 
 
@@ -142,11 +145,10 @@ class CategoriesController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
-     *
      */
     public function selectlist(Request $request, $category_type = 'asset')
     {
-
+        $this->authorize('view.selectlists');
         $categories = Category::select([
             'id',
             'name',
@@ -167,7 +169,5 @@ class CategoriesController extends Controller
         }
 
         return (new SelectlistTransformer)->transformSelectlist($categories);
-
     }
-
 }

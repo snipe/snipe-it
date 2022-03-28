@@ -37,9 +37,9 @@ class LicenseCheckoutController extends Controller
         }
 
         $this->authorize('checkout', $license);
+
         return view('licenses/checkout', compact('license'));
     }
-
 
     /**
      * Validates and stores the license checkout action.
@@ -51,10 +51,9 @@ class LicenseCheckoutController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-
     public function store(LicenseCheckoutRequest $request, $licenseId, $seatId = null)
     {
-        if (!$license = License::find($licenseId)) {
+        if (! $license = License::find($licenseId)) {
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         }
 
@@ -65,24 +64,25 @@ class LicenseCheckoutController extends Controller
 
         $checkoutMethod = 'checkoutTo'.ucwords(request('checkout_to_type'));
         if ($this->$checkoutMethod($licenseSeat)) {
-            return redirect()->route("licenses.index")->with('success', trans('admin/licenses/message.checkout.success'));
+            return redirect()->route('licenses.index')->with('success', trans('admin/licenses/message.checkout.success'));
         }
 
-        return redirect()->route("licenses.index")->with('error', trans('Something went wrong handling this checkout.'));
+        return redirect()->route('licenses.index')->with('error', trans('Something went wrong handling this checkout.'));
     }
 
     protected function findLicenseSeatToCheckout($license, $seatId)
     {
         $licenseSeat = LicenseSeat::find($seatId) ?? $license->freeSeat();
 
-        if (!$licenseSeat) {
+        if (! $licenseSeat) {
             if ($seatId) {
                 return redirect()->route('licenses.index')->with('error', 'This Seat is not available for checkout.');
             }
+
             return redirect()->route('licenses.index')->with('error', 'There are no available seats for this license');
         }
 
-        if(!$licenseSeat->license->is($license)) {
+        if (! $licenseSeat->license->is($license)) {
             return redirect()->route('licenses.index')->with('error', 'The license seat provided does not match the license.');
         }
 
@@ -98,14 +98,14 @@ class LicenseCheckoutController extends Controller
 
         // Override asset's assigned user if available
         if ($target->checkedOutToUser()) {
-            $licenseSeat->assigned_to =  $target->assigned_to;
+            $licenseSeat->assigned_to = $target->assigned_to;
         }
         if ($licenseSeat->save()) {
-
             event(new CheckoutableCheckedOut($licenseSeat, $target, Auth::user(), request('note')));
 
             return true;
         }
+
         return false;
     }
 
@@ -118,11 +118,11 @@ class LicenseCheckoutController extends Controller
         $licenseSeat->assigned_to = request('assigned_to');
 
         if ($licenseSeat->save()) {
-
             event(new CheckoutableCheckedOut($licenseSeat, $target, Auth::user(), request('note')));
 
             return true;
         }
+
         return false;
     }
 }

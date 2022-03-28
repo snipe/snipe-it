@@ -1,16 +1,15 @@
 <?php
 
-
 use App\Models\License;
 
 class LicensesCest
 {
     public function _before(FunctionalTester $I)
     {
-         $I->amOnPage('/login');
-         $I->fillField('username', 'admin');
-         $I->fillField('password', 'password');
-         $I->click('Login');
+        $I->amOnPage('/login');
+        $I->fillField('username', 'admin');
+        $I->fillField('password', 'password');
+        $I->click('Login');
     }
 
     // tests
@@ -25,7 +24,7 @@ class LicensesCest
 
     public function failsEmptyValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with blank elements");
+        $I->wantTo('Test Validation Fails with blank elements');
         $I->amOnPage(route('licenses.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
@@ -36,7 +35,7 @@ class LicensesCest
 
     public function failsShortValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with short name");
+        $I->wantTo('Test Validation Fails with short name');
         $I->amOnPage(route('licenses.create'));
         $I->fillField('name', 't2');
         $I->fillField('seats', '-15');
@@ -48,7 +47,7 @@ class LicensesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $license = factory(App\Models\License::class)->states('photoshop')->make([
+        $license = \App\Models\License::factory()->photoshop()->make([
             'name' => 'Test License',
             'company_id' => 3,
         ]);
@@ -72,7 +71,7 @@ class LicensesCest
             'termination_date'  => '2020-01-01',
         ];
 
-        $I->wantTo("Test Validation Succeeds");
+        $I->wantTo('Test Validation Succeeds');
         $I->amOnPage(route('licenses.create'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('licenses', $values);
@@ -86,5 +85,4 @@ class LicensesCest
         $I->sendDelete(route('licenses.destroy', License::doesntHave('assignedUsers')->first()->id), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);
     }
-
 }

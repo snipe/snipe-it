@@ -21,7 +21,6 @@ class ApiManufacturersCest
     /** @test */
     public function indexManufacturers(ApiTester $I)
     {
-
         $I->wantTo('Get a list of manufacturers');
 
         // call
@@ -31,7 +30,7 @@ class ApiManufacturersCest
 
         $response = json_decode($I->grabResponse(), true);
         // sample verify
-        $manufacturer = App\Models\Manufacturer::withCount('assets as assets_count','accessories as accessories_count','consumables as consumables_count','licenses as licenses_count')
+        $manufacturer = App\Models\Manufacturer::withCount('assets as assets_count', 'accessories as accessories_count', 'consumables as consumables_count', 'licenses as licenses_count')
             ->orderByDesc('created_at')->take(10)->get()->shuffle()->first();
 
         $I->seeResponseContainsJson($I->removeTimestamps((new ManufacturersTransformer)->transformManufacturer($manufacturer)));
@@ -42,8 +41,8 @@ class ApiManufacturersCest
     {
         $I->wantTo('Create a new manufacturer');
 
-        $temp_manufacturer = factory(\App\Models\Manufacturer::class)->states('apple')->make([
-            'name' => "Test Manufacturer Tag",
+        $temp_manufacturer = \App\Models\Manufacturer::factory()->apple()->make([
+            'name' => 'Test Manufacturer Tag',
         ]);
 
         // setup
@@ -64,20 +63,21 @@ class ApiManufacturersCest
 
     // Put is routed to the same method in the controller
     // DO we actually need to test both?
+
     /** @test */
     public function updateManufacturerWithPatch(ApiTester $I, $scenario)
     {
         $I->wantTo('Update an manufacturer with PATCH');
 
         // create
-        $manufacturer = factory(\App\Models\Manufacturer::class)->states('apple')
+        $manufacturer = \App\Models\Manufacturer::factory()->apple()
             ->create([
                 'name' => 'Original Manufacturer Name',
         ]);
         $I->assertInstanceOf(\App\Models\Manufacturer::class, $manufacturer);
 
-        $temp_manufacturer = factory(\App\Models\Manufacturer::class)->states('dell')->make([
-            'name' => "updated manufacturer name",
+        $temp_manufacturer = \App\Models\Manufacturer::factory()->dell()->make([
+            'name' => 'updated manufacturer name',
         ]);
 
         $data = [
@@ -92,7 +92,7 @@ class ApiManufacturersCest
         $I->assertNotEquals($manufacturer->name, $data['name']);
 
         // update
-        $I->sendPATCH('/manufacturers/' . $manufacturer->id, $data);
+        $I->sendPATCH('/manufacturers/'.$manufacturer->id, $data);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -108,11 +108,10 @@ class ApiManufacturersCest
         $temp_manufacturer->id = $manufacturer->id;
 
         // verify
-        $I->sendGET('/manufacturers/' . $manufacturer->id);
+        $I->sendGET('/manufacturers/'.$manufacturer->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson((new ManufacturersTransformer)->transformManufacturer($temp_manufacturer));
-
     }
 
     /** @test */
@@ -121,13 +120,13 @@ class ApiManufacturersCest
         $I->wantTo('Delete an manufacturer');
 
         // create
-        $manufacturer = factory(\App\Models\Manufacturer::class)->states('apple')->create([
-            'name' => "Soon to be deleted"
+        $manufacturer = \App\Models\Manufacturer::factory()->apple()->create([
+            'name' => 'Soon to be deleted',
         ]);
         $I->assertInstanceOf(\App\Models\Manufacturer::class, $manufacturer);
 
         // delete
-        $I->sendDELETE('/manufacturers/' . $manufacturer->id);
+        $I->sendDELETE('/manufacturers/'.$manufacturer->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -136,7 +135,7 @@ class ApiManufacturersCest
         $I->assertEquals(trans('admin/manufacturers/message.delete.success'), $response->messages);
 
         // verify, expect a 200
-        $I->sendGET('/manufacturers/' . $manufacturer->id);
+        $I->sendGET('/manufacturers/'.$manufacturer->id);
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
     }

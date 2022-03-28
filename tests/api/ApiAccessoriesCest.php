@@ -21,7 +21,6 @@ class ApiAccessoriesCest
     /** @test */
     public function indexAccessories(ApiTester $I)
     {
-
         $I->wantTo('Get a list of accessories');
 
         // call
@@ -40,9 +39,9 @@ class ApiAccessoriesCest
     {
         $I->wantTo('Create a new accessory');
 
-        $temp_accessory = factory(\App\Models\Accessory::class)->states('apple-bt-keyboard')->make([
-            'name' => "Test Accessory Name",
-            'company_id' => 2
+        $temp_accessory = \App\Models\Accessory::factory()->appleBtKeyboard()->make([
+            'name' => 'Test Accessory Name',
+            'company_id' => 2,
         ]);
 
         // setup
@@ -68,22 +67,23 @@ class ApiAccessoriesCest
 
     // Put is routed to the same method in the controller
     // DO we actually need to test both?
+
     /** @test */
     public function updateAccessoryWithPatch(ApiTester $I, $scenario)
     {
         $I->wantTo('Update an accessory with PATCH');
 
         // create
-        $accessory = factory(\App\Models\Accessory::class)->states('apple-bt-keyboard')->create([
+        $accessory = \App\Models\Accessory::factory()->appleBtKeyboard()->create([
             'name' => 'Original Accessory Name',
             'company_id' => 2,
-            'location_id' => 3
+            'location_id' => 3,
         ]);
         $I->assertInstanceOf(\App\Models\Accessory::class, $accessory);
 
-        $temp_accessory = factory(\App\Models\Accessory::class)->states('microsoft-mouse')->make([
+        $temp_accessory = \App\Models\Accessory::factory()->microsoftMouse()->make([
             'company_id' => 3,
-            'name' => "updated accessory name",
+            'name' => 'updated accessory name',
             'location_id' => 1,
         ]);
 
@@ -105,7 +105,7 @@ class ApiAccessoriesCest
         $I->assertNotEquals($accessory->name, $data['name']);
 
         // update
-        $I->sendPATCH('/accessories/' . $accessory->id, $data);
+        $I->sendPATCH('/accessories/'.$accessory->id, $data);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -121,7 +121,7 @@ class ApiAccessoriesCest
         $temp_accessory->updated_at = Carbon::parse($response->payload->updated_at);
         $temp_accessory->id = $accessory->id;
         // verify
-        $I->sendGET('/accessories/' . $accessory->id);
+        $I->sendGET('/accessories/'.$accessory->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson((new AccessoriesTransformer)->transformAccessory($temp_accessory));
@@ -133,13 +133,13 @@ class ApiAccessoriesCest
         $I->wantTo('Delete an accessory');
 
         // create
-        $accessory = factory(\App\Models\Accessory::class)->states('apple-bt-keyboard')->create([
-            'name' => "Soon to be deleted"
+        $accessory = \App\Models\Accessory::factory()->appleBtKeyboard()->create([
+            'name' => 'Soon to be deleted',
         ]);
         $I->assertInstanceOf(\App\Models\Accessory::class, $accessory);
 
         // delete
-        $I->sendDELETE('/accessories/' . $accessory->id);
+        $I->sendDELETE('/accessories/'.$accessory->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -148,7 +148,7 @@ class ApiAccessoriesCest
         $I->assertEquals(trans('admin/accessories/message.delete.success'), $response->messages);
 
         // verify, expect a 200
-        $I->sendGET('/accessories/' . $accessory->id);
+        $I->sendGET('/accessories/'.$accessory->id);
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
     }

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Om grupper',
     'about_groups'                  => 'Grupper brukes til å generalisere brukertillatelser.',
     'group_management' 	 	=> 'Gruppeadministrasjon',
@@ -10,5 +10,7 @@ return array(
     'group_admin' 	 		=> 'Gruppeadministrator',
     'allow' 	 			=> 'Tillat',
     'deny' 	 				=> 'Avslå',
-
-);
+    'permission'            => 'Rettigheter',
+    'grant'                 => 'Gi tilgang',
+    'no_permissions'        => 'Denne gruppen har ingen rettigheter.'
+];

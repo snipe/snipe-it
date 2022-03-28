@@ -1,8 +1,7 @@
 @extends('layouts/default')
-
 {{-- Page title --}}
 @section('title')
-    Bulk Edit
+    {{ trans('general.bulk_edit') }}
     @parent
 @stop
 
@@ -20,7 +19,7 @@
             <p>{{ trans('admin/users/general.bulk_update_help') }}</p>
 
             <div class="callout callout-warning">
-                <i class="fa fa-warning"></i> {{ trans('admin/users/general.bulk_update_warn', ['user_count' => count($users)]) }}
+                <i class="fas fa-exclamation-triangle"></i> {{ trans('admin/users/general.bulk_update_warn', ['user_count' => count($users)]) }}
             </div>
 
             <form class="form-horizontal" method="post" action="{{ route('users/bulkeditsave') }}" autocomplete="off" role="form">
@@ -64,17 +63,34 @@
                             </div>
                         </div>
 
+                         <!-- remote -->
+                         <div class="form-group">
+                            <div class="col-sm-3 control-label">
+                                {{ trans('admin/users/general.remote') }}
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="checkbox">
+                                    <label for="remote">
+                                        {{ Form::radio('remote', '', true, ['aria-label'=>'remote']) }} {{  trans('general.do_not_change') }} <br>
+                                        {{ Form::radio('remote', '1', old('remote'), ['aria-label'=>'remote']) }}   {{ trans('admin/users/general.remote_label') }}<br>
+                                        {{ Form::radio('remote', '0', old('remote'), ['aria-label'=>'remote']) }}   {{ trans('admin/users/general.not_remote_label') }}
+
+                                    </label>
+                                </div>
+                            </div>
+                        </div> <!--/form-group-->
+
                         <!-- activated -->
                         <div class="form-group">
                             <div class="col-sm-3 control-label">
-                                Activated
+                                {{ trans('general.activated') }}
                             </div>
                             <div class="col-sm-9">
                                 <div class="checkbox">
                                     <label for="activated">
-                                        {{ Form::radio('activated', '', true, ['aria-label'=>'activated']) }} Do not change activation status <br>
-                                        {{ Form::radio('activated', '1', old('activated'), ['aria-label'=>'activated']) }}  User is activated<br>
-                                        {{ Form::radio('activated', '0', old('activated'), ['aria-label'=>'activated']) }}  User is de-activated
+                                        {{ Form::radio('activated', '', true, ['aria-label'=>'activated']) }} {{  trans('admin/users/general.activation_status_warning') }} <br>
+                                        {{ Form::radio('activated', '1', old('activated'), ['aria-label'=>'activated']) }}  {{  trans('general.login_enabled')}} <br>
+                                        {{ Form::radio('activated', '0', old('activated'), ['aria-label'=>'activated']) }}  {{  trans('admin/users/general.user_deactivated')}}
 
                                     </label>
                                 </div>
@@ -88,11 +104,11 @@
                             <div class="col-md-6">
                                 @if ((Config::get('app.lock_passwords') || (!Auth::user()->isSuperUser())))
 
-                                    <span class="help-block">Only superadmins may edit group memberships.</p>
+                                    <span class="help-block">{{  trans('admin/users/general.group_memberships_helpblock') }}</p>
                                 @else
                                     <div class="controls">
                                         <select name="groups[]" id="groups[]" multiple="multiple" class="form-control" aria-label="groups">
-                                        <option value="">Remove Group Memberships </option>
+                                        <option value="">{{  trans('admin/users/general.remove_group_memberships') }} </option>
 
                                   @foreach ($groups as $id => $group)
                                         <option value="{{ $id }}">{{ $group }} </option>
@@ -113,8 +129,8 @@
                         @endforeach
                     </div> <!--/.box-body-->
 
-                    <div class="box-footer text-right">
-                        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                    <div class="text-right box-footer">
+                        <button type="submit" class="btn btn-success"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                     </div>
                 </div> <!--/.box.box-default-->
             </form>

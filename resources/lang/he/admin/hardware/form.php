@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'אשר מחיקה גורפת של נכסים',
+return [
+    'bulk_delete'		=> 'אשר מחיקה גורפת של נכסים',
   'bulk_delete_help'	=> 'עיין בנכסים למחיקה בכמות גדולה בהמשך. לאחר המחיקה, ניתן לשחזר נכסים אלה, אך הם לא יהיו משויכים עוד עם משתמשים שאליהם הם מוקצים כעת.',
   'bulk_delete_warn'	=> 'אתה עומד למחוק את הנכסים: asset_count.',
-	'bulk_update'		=> 'עדכון גורפת נכסים',
-	'bulk_update_help'	=> 'טופס זה מאפשר לך לעדכן מספר נכסים בבת אחת. מלא רק את השדות שאתה צריך לשנות. כל השדות שנותרו ריקים יישארו ללא שינוי.',
-	'bulk_update_warn'	=> 'אתה עומד לערוך את המאפיינים של: asset_count נכסים.',
+    'bulk_update'		=> 'עדכון גורפת נכסים',
+    'bulk_update_help'	=> 'טופס זה מאפשר לך לעדכן מספר נכסים בבת אחת. מלא רק את השדות שאתה צריך לשנות. כל השדות שנותרו ריקים יישארו ללא שינוי.',
+    'bulk_update_warn'	=> 'אתה עומד לערוך את המאפיינים של: asset_count נכסים.',
     'checkedout_to'		=> 'הוצא אל',
     'checkout_date'		=> 'תבדוק את התאריך',
     'checkin_date'		=> 'תאריך הגעה',
@@ -38,7 +38,12 @@ return array(
     'tag'				=> 'תג נכס',
     'update'			=> 'עדכון נכס',
     'warranty'			=> 'אַחֲרָיוּת',
-		'warranty_expires'		=> 'תפוגת האחריות',
+        'warranty_expires'		=> 'תפוגת האחריות',
     'years'				=> 'שנים',
-)
-;
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+];

@@ -1,6 +1,6 @@
 @extends('layouts/edit-form', [
-    'createText' => 'Append license',          // TODO: trans
-    'updateText' => 'Update appended license', // TODO: trans
+    'createText' => {{ trans('admin/kits/general.append_license') }},
+    'updateText' => {{ trans('admin/kits/general.update_appended_license') }},
     'formAction' => (isset($item->id)) ? route('kits.licenses.update', ['kit_id' => $kit->id, 'license_id' => $item->license_id]) : route('kits.licenses.store', ['kit_id' => $kit->id]),
 ])
 
@@ -13,7 +13,7 @@
         <div class="col-md-2" style="padding-left:0px">
             <input class="form-control" type="text" name="quantity" id="quantity" value="{{ Request::old('quantity', $item->quantity) }}" />
         </div>
-        {!! $errors->first('quantity', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+        {!! $errors->first('quantity', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
     </div>
 </div>
 

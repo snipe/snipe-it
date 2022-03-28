@@ -18,5 +18,6 @@ return array(
     'update'  							=> 'Uuenda kategooriat',
     'use_default_eula'					=> 'Kasuta hoopis <a href="#" data-toggle="modal" data-target="#eulaModal">peamist vaikimisi EULA-t</a>.',
     'use_default_eula_disabled'			=> '<del>Kasuta hoopis peamist vaikimisi EULAt.</del> Peamine vaikumisi EULA puudub. Lisa see seadete alt.',
+    'use_default_eula_column'			=> 'Kasuta vaikimisi EULA',
 
 );

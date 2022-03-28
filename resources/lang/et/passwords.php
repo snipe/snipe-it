@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'sent'	        => 'Sinu paroolilink on saadetud!',
-    'user'			=> 'No matching active user found with that email.',
+    'sent'	        => 'Success: If that email address exists in our system, a password recovery email has been sent.',
+    'user'			=> 'Sellise emailiga aktiivset kasutajat ei leitud.',
 ];
-

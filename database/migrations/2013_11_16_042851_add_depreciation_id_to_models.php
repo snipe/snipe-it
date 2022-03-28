@@ -25,5 +25,4 @@ class AddDepreciationIdToModels extends Migration
     {
         //
     }
-
 }

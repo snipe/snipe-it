@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Assets;
 
-
 use App\Exceptions\CheckoutNotAllowed;
 use App\Helpers\Helper;
 use App\Http\Controllers\CheckInOutRequest;
@@ -15,15 +14,16 @@ use Illuminate\Support\Facades\Auth;
 class AssetCheckoutController extends Controller
 {
     use CheckInOutRequest;
+
     /**
-    * Returns a view that presents a form to check an asset out to a
-    * user.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param int $assetId
-    * @since [v1.0]
-    * @return View
-    */
+     * Returns a view that presents a form to check an asset out to a
+     * user.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $assetId
+     * @since [v1.0]
+     * @return View
+     */
     public function create($assetId)
     {
         // Check if the asset exists
@@ -37,9 +37,8 @@ class AssetCheckoutController extends Controller
             return view('hardware/checkout', compact('asset'))
                 ->with('statusLabel_list', Helper::deployableStatusLabelList());
         }
+
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkout.not_available'));
-
-
     }
 
     /**
@@ -55,9 +54,9 @@ class AssetCheckoutController extends Controller
     {
         try {
             // Check if the asset exists
-            if (!$asset = Asset::find($assetId)) {
+            if (! $asset = Asset::find($assetId)) {
                 return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-            } elseif (!$asset->availableForCheckout()) {
+            } elseif (! $asset->availableForCheckout()) {
                 return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkout.not_available'));
             }
             $this->authorize('checkout', $asset);
@@ -67,8 +66,8 @@ class AssetCheckoutController extends Controller
 
             $asset = $this->updateAssetLocation($asset, $target);
 
-            $checkout_at = date("Y-m-d H:i:s");
-            if (($request->filled('checkout_at')) && ($request->get('checkout_at')!= date("Y-m-d"))) {
+            $checkout_at = date('Y-m-d H:i:s');
+            if (($request->filled('checkout_at')) && ($request->get('checkout_at') != date('Y-m-d'))) {
                 $checkout_at = $request->get('checkout_at');
             }
 
@@ -81,8 +80,17 @@ class AssetCheckoutController extends Controller
                 $asset->status_id = $request->get('status_id');
             }
 
+            if(!empty($asset->licenseseats->all())){
+                if(request('checkout_to_type') == 'user') {
+                    foreach ($asset->licenseseats as $seat){
+                        $seat->assigned_to = $target->id;
+                        $seat->save();
+                    }
+                }
+            }
+
             if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), $request->get('name'))) {
-                return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.checkout.success'));
+                return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkout.success'));
             }
 
             // Redirect to the asset management page with error
@@ -93,5 +101,4 @@ class AssetCheckoutController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
-
 }

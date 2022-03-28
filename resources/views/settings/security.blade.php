@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Update Security Settings
+    {{ trans('admin/settings/general.security_title') }}
     @parent
 @stop
 
@@ -27,7 +27,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fa fa-lock" aria-hidden="true"></i> Security
+                        <i class="fas fa-lock" aria-hidden="true"></i> {{ trans('admin/settings/general.security') }}
                     </h2>
                 </div>
                 <div class="box-body">
@@ -47,7 +47,7 @@
                                 <p class="help-block">{{ trans('admin/settings/general.two_factor_enabled_warning') }}</p>
 
                                 @if (config('app.lock_passwords'))
-                                    <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                                    <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @endif
 
                                 {!! $errors->first('two_factor_enabled', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
@@ -100,20 +100,20 @@
                             <div class="col-md-9">
 
                                 {{ Form::checkbox("pwd_secure_complexity['disallow_same_pwd_as_user_fields']", 'disallow_same_pwd_as_user_fields', old('disallow_same_pwd_as_user_fields', strpos($setting->pwd_secure_complexity, 'disallow_same_pwd_as_user_fields')!==false), array('class' => 'minimal', 'aria-label'=>'pwd_secure_complexity')) }}
-                                Password cannot be the same as first name, last name, email, or username<br>
+                                {{ trans('admin/settings/general.pwd_secure_complexity_disallow_same_pwd_as_user_fields') }}<br>
 
 
                                 {{ Form::checkbox("pwd_secure_complexity['letters']", 'letters', old('pwd_secure_uncommon', strpos($setting->pwd_secure_complexity, 'letters')!==false), array('class' => 'minimal', 'aria-label'=>'pwd_secure_complexity')) }}
-                                Require at least one letter <br>
+                                {{ trans('admin/settings/general.pwd_secure_complexity_letters') }}<br>
 
                                 {{ Form::checkbox("pwd_secure_complexity['numbers']", 'numbers', old('pwd_secure_uncommon', strpos($setting->pwd_secure_complexity, 'numbers')!==false), array('class' => 'minimal', 'aria-label'=>'pwd_secure_complexity')) }}
-                                Require at least one number<br>
+                                {{ trans('admin/settings/general.pwd_secure_complexity_numbers') }}<br>
 
                                 {{ Form::checkbox("pwd_secure_complexity['symbols']", 'symbols', old('pwd_secure_uncommon', strpos($setting->pwd_secure_complexity, 'symbols')!==false), array('class' => 'minimal', 'aria-label'=>'pwd_secure_complexity')) }}
-                                Require at least one symbol<br>
+                                {{ trans('admin/settings/general.pwd_secure_complexity_symbols') }}<br>
 
                                 {{ Form::checkbox("pwd_secure_complexity['case_diff']", 'case_diff', old('pwd_secure_uncommon', strpos($setting->pwd_secure_complexity, 'case_diff')!==false), array('class' => 'minimal', 'aria-label'=>'pwd_secure_complexity')) }}
-                                Require at least one uppercase and one lowercase
+                                {{ trans('admin/settings/general.pwd_secure_complexity_case_diff') }}
 
                                 <p class="help-block">
                                     {{ trans('admin/settings/general.pwd_secure_complexity_help') }}
@@ -131,7 +131,7 @@
                                 <!--  Enable Remote User Login -->
 
                                 @if (config('app.lock_passwords'))
-                                    <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                                    <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
                                     {{ Form::checkbox('login_remote_user_enabled', '1', old('login_remote_user_enabled', $setting->login_remote_user_enabled),array('class' => 'minimal', 'aria-label'=>'login_remote_user')) }}
                                     {{ Form::label('login_remote_user_enabled',  trans('admin/settings/general.login_remote_user_enabled_text')) }}
@@ -179,7 +179,7 @@
                         <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                     </div>
                     <div class="text-right col-md-6">
-                        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                        <button type="submit" class="btn btn-success"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                     </div>
 
                 </div>

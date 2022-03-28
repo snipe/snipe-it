@@ -45,10 +45,10 @@
 
             @if (Request::get('status')!='deleted')
               <div id="toolbar">
-                <label for="bulk_actions" class="sr-only">Bulk Actions</label>
+                <label for="bulk_actions" class="sr-only">{{ trans('general.bulk_actions') }}</label>
                 <select id="bulk_actions" name="bulk_actions" class="form-control select2" aria-label="bulk_actions" style="width: 300px;">
-                  <option value="edit">Bulk Edit</option>
-                  <option value="delete">Bulk Delete</option>
+                  <option value="edit">{{ trans('general.bulk_edit') }}</option>
+                  <option value="delete">{{ trans('general.bulk_delete') }}</option>
                 </select>
                 <button class="btn btn-primary" id="bulkEdit" disabled>Go</button>
               </div>
@@ -69,7 +69,7 @@
                         data-sort-order="asc"
                         id="asssetModelsTable"
                         class="table table-striped snipe-table"
-                        data-url="{{ route('api.models.index') }}"
+                        data-url="{{ route('api.models.index', ['status' => request('status')]) }}"
                         data-export-options='{
               "fileName": "export-models-{{ date('Y-m-d') }}",
               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]

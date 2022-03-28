@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'แท็กเนื้อหา',
     'asset_model'       => 'แบบ',
-    'book_value'  	=> 'ความคุ้มค่า',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'In / Out',
     'checkout_date' => 'ชำระเงินวันที่',
     'checkoutto' 	=> 'เช็คเอาท์',
+    'current_value' => 'Current Value',
     'diff' 			=> 'diff',
     'dl_csv' 		=> 'ดาวน์โหลด CSV',
     'eol' 			=> 'EOL',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> 'อนุกรม',
     'status'   		=> 'สถานะ',
     'title'      	=> 'สินทรัพย์',
-    'image'		=> 'ภาพอุปกรณ์',
+    'image'		    => 'ภาพอุปกรณ์',
     'days_without_acceptance' => 'วันโดยปราศจากการยอมรับ',
-    'monthly_depreciation' => 'ค่าเสื่อมราคารายเดือน'
-
-);
+    'monthly_depreciation' => 'ค่าเสื่อมราคารายเดือน',
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

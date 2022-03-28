@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
@@ -12,6 +13,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
@@ -20,7 +22,9 @@ use Watson\Validating\ValidatingTrait;
 
 class User extends SnipeModel implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, HasLocalePreference
 {
-    protected $presenter = 'App\Presenters\UserPresenter';
+    use HasFactory;
+
+    protected $presenter = \App\Presenters\UserPresenter::class;
     use SoftDeletes, ValidatingTrait;
     use Authenticatable, Authorizable, CanResetPassword, HasApiTokens;
     use UniqueUndeletedTrait;
@@ -28,8 +32,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     use Presentable;
     use Searchable;
 
-    protected $dates = ['deleted_at'];
-    protected $hidden = ['password','remember_token','permissions','reset_password_code','persist_code'];
+    protected $hidden = ['password', 'remember_token', 'permissions', 'reset_password_code', 'persist_code'];
     protected $table = 'users';
     protected $injectUniqueIdentifier = true;
 
@@ -55,6 +58,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'state',
         'username',
         'zip',
+        'remote',
     ];
 
     protected $casts = [
@@ -82,7 +86,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'location_id'             => 'exists:locations,id|nullable',
     ];
 
-
     /**
      * The attributes that should be included when searching the model.
      *
@@ -96,7 +99,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'notes',
         'phone',
         'jobtitle',
-        'employee_num'
+        'employee_num',
     ];
 
     /**
@@ -109,21 +112,19 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'department' => ['name'],
         'groups'     => ['name'],
         'company'    => ['name'],
-        'manager'    => ['first_name', 'last_name', 'username']
+        'manager'    => ['first_name', 'last_name', 'username'],
     ];
-
 
     /**
      * Internally check the user permission for the given section
      *
-     * @return boolean
+     * @return bool
      */
     protected function checkPermissionSection($section)
     {
         $user_groups = $this->groups;
+        if (($this->permissions == '') && (count($user_groups) == 0)) {
 
-
-        if (($this->permissions=='')  && (count($user_groups) == 0)) {
             return false;
         }
 
@@ -131,18 +132,18 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
 
         $is_user_section_permissions_set = ($user_permissions != '') && array_key_exists($section, $user_permissions);
         //If the user is explicitly granted, return true
-        if ($is_user_section_permissions_set && ($user_permissions[$section]=='1')) {
+        if ($is_user_section_permissions_set && ($user_permissions[$section] == '1')) {
             return true;
         }
         // If the user is explicitly denied, return false
-        if ($is_user_section_permissions_set && ($user_permissions[$section]=='-1')) {
+        if ($is_user_section_permissions_set && ($user_permissions[$section] == '-1')) {
             return false;
         }
 
         // Loop through the groups to see if any of them grant this permission
         foreach ($user_groups as $user_group) {
             $group_permissions = (array) json_decode($user_group->permissions, true);
-            if (((array_key_exists($section, $group_permissions)) && ($group_permissions[$section]=='1'))) {
+            if (((array_key_exists($section, $group_permissions)) && ($group_permissions[$section] == '1'))) {
                 return true;
             }
         }
@@ -158,13 +159,14 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      *
      * @author A. Gianotto <snipe@snipe.net>
      * @since [v1.0]
-     * @return boolean
+     * @return bool
      */
     public function hasAccess($section)
     {
         if ($this->isSuperUser()) {
             return true;
         }
+
         return $this->checkPermissionSection($section);
     }
 
@@ -173,7 +175,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      *
      * @author A. Gianotto <snipe@snipe.net>
      * @since [v1.0]
-     * @return boolean
+     * @return bool
      */
     public function isSuperUser()
     {
@@ -190,7 +192,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function company()
     {
-        return $this->belongsTo('\App\Models\Company', 'company_id');
+        return $this->belongsTo(\App\Models\Company::class, 'company_id');
     }
 
     /**
@@ -202,7 +204,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function department()
     {
-        return $this->belongsTo('\App\Models\Department', 'department_id');
+        return $this->belongsTo(\App\Models\Department::class, 'department_id');
     }
 
     /**
@@ -210,11 +212,11 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      *
      * @author A. Gianotto <snipe@snipe.net>
      * @since [v1.0]
-     * @return boolean
+     * @return bool
      */
     public function isActivated()
     {
-        return $this->activated ==1;
+        return $this->activated == 1;
     }
 
     /**
@@ -226,7 +228,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function getFullNameAttribute()
     {
-        return $this->first_name . " " . $this->last_name;
+        return $this->first_name.' '.$this->last_name;
     }
 
     /**
@@ -240,7 +242,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function getCompleteNameAttribute()
     {
-        return $this->last_name . ", " . $this->first_name . " (" . $this->username . ")";
+        return $this->last_name.', '.$this->first_name.' ('.$this->username.')';
     }
 
     /**
@@ -253,9 +255,9 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         // At this point the endpoint is the same for everything.
         //  In the future this may want to be adapted for individual notifications.
         $this->endpoint = \App\Models\Setting::getSettings()->slack_endpoint;
+
         return $this->endpoint;
     }
-
 
     /**
      * Establishes the user -> assets relationship
@@ -266,7 +268,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function assets()
     {
-        return $this->morphMany('App\Models\Asset', 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
+        return $this->morphMany(\App\Models\Asset::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
     }
 
     /**
@@ -281,7 +283,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function assetmaintenances()
     {
-        return $this->hasMany('\App\Models\AssetMaintenance', 'user_id')->withTrashed();
+        return $this->hasMany(\App\Models\AssetMaintenance::class, 'user_id')->withTrashed();
     }
 
     /**
@@ -293,7 +295,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function accessories()
     {
-        return $this->belongsToMany('\App\Models\Accessory', 'accessories_users', 'assigned_to', 'accessory_id')
+        return $this->belongsToMany(\App\Models\Accessory::class, 'accessories_users', 'assigned_to', 'accessory_id')
             ->withPivot('id', 'created_at', 'note')->withTrashed();
     }
 
@@ -306,7 +308,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function consumables()
     {
-        return $this->belongsToMany('\App\Models\Consumable', 'consumables_users', 'assigned_to', 'consumable_id')->withPivot('id')->withTrashed();
+        return $this->belongsToMany(\App\Models\Consumable::class, 'consumables_users', 'assigned_to', 'consumable_id')->withPivot('id')->withTrashed();
     }
 
     /**
@@ -318,7 +320,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function licenses()
     {
-        return $this->belongsToMany('\App\Models\License', 'license_seats', 'assigned_to', 'license_id')->withPivot('id');
+        return $this->belongsToMany(\App\Models\License::class, 'license_seats', 'assigned_to', 'license_id')->withPivot('id');
     }
 
     /**
@@ -330,9 +332,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function userlog()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'target_id')->where('target_type', '=', 'App\Models\User')->orderBy('created_at', 'DESC')->withTrashed();
+        return $this->hasMany(\App\Models\Actionlog::class, 'target_id')->where('target_type', '=', self::class)->orderBy('created_at', 'DESC')->withTrashed();
     }
-
 
     /**
      * Establishes the user -> location relationship
@@ -345,12 +346,10 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      * @since [v4.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-
     public function userloc()
     {
-        return $this->belongsTo('\App\Models\Location', 'location_id')->withTrashed();
+        return $this->belongsTo(\App\Models\Location::class, 'location_id')->withTrashed();
     }
-
 
     /**
      * Establishes the user -> location relationship
@@ -361,7 +360,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function location()
     {
-        return $this->belongsTo('\App\Models\Location', 'location_id')->withTrashed();
+        return $this->belongsTo(\App\Models\Location::class, 'location_id')->withTrashed();
     }
 
     /**
@@ -373,7 +372,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function manager()
     {
-        return $this->belongsTo('\App\Models\User', 'manager_id')->withTrashed();
+        return $this->belongsTo(self::class, 'manager_id')->withTrashed();
     }
 
     /**
@@ -385,7 +384,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function managedLocations()
     {
-        return $this->hasMany('\App\Models\Location', 'manager_id');
+        return $this->hasMany(\App\Models\Location::class, 'manager_id');
     }
 
     /**
@@ -397,7 +396,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function groups()
     {
-        return $this->belongsToMany('\App\Models\Group', 'users_groups');
+        return $this->belongsToMany(\App\Models\Group::class, 'users_groups');
     }
 
     /**
@@ -409,7 +408,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function assetlog()
     {
-        return $this->hasMany('\App\Models\Asset', 'id')->withTrashed();
+        return $this->hasMany(\App\Models\Asset::class, 'id')->withTrashed();
     }
 
     /**
@@ -423,8 +422,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function uploads()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')
-            ->where('item_type', User::class)
+        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')
+            ->where('item_type', self::class)
             ->where('action_type', '=', 'uploaded')
             ->whereNotNull('filename')
             ->orderBy('created_at', 'desc');
@@ -485,7 +484,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public static function generateEmailFromFullName($name)
     {
-        $username = User::generateFormattedNameFromFullName($name, Setting::getSettings()->email_format);
+        $username = self::generateFormattedNameFromFullName($name, Setting::getSettings()->email_format);
+
         return $username['username'].'@'.Setting::getSettings()->email_domain;
     }
 
@@ -496,40 +496,30 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         if (strpos($users_name, ' ') === false) {
             $first_name = $users_name;
             $last_name = '';
-            $username  = $users_name;
-
+            $username = $users_name;
         } else {
-
-            list($first_name, $last_name) = explode(" ", $users_name, 2);
+            list($first_name, $last_name) = explode(' ', $users_name, 2);
 
             // Assume filastname by default
             $username = str_slug(substr($first_name, 0, 1).$last_name);
 
-            if ($format=='firstname.lastname') {
-                $username = str_slug($first_name) . '.' . str_slug($last_name);
-
-            } elseif ($format=='lastnamefirstinitial') {
+            if ($format == 'firstname.lastname') {
+                $username = str_slug($first_name).'.'.str_slug($last_name);
+            } elseif ($format == 'lastnamefirstinitial') {
                 $username = str_slug($last_name.substr($first_name, 0, 1));
-
-            } elseif ($format=='firstintial.lastname') {
+            } elseif ($format == 'firstintial.lastname') {
                 $username = substr($first_name, 0, 1).'.'.str_slug($last_name);
-
-            } elseif ($format=='firstname_lastname') {
+            } elseif ($format == 'firstname_lastname') {
                 $username = str_slug($first_name).'_'.str_slug($last_name);
-
-            } elseif ($format=='firstname') {
+            } elseif ($format == 'firstname') {
                 $username = str_slug($first_name);
-            }
-              elseif ($format=='firstinitial.lastname') {
-                $username = str_slug(substr($first_name, 0, 1). '.' . str_slug($last_name));
-            }
-              elseif ($format=='lastname_firstinitial') {
+            } elseif ($format == 'firstinitial.lastname') {
+                $username = str_slug(substr($first_name, 0, 1).'.'.str_slug($last_name));
+            } elseif ($format == 'lastname_firstinitial') {
                 $username = str_slug($last_name).'_'.str_slug(substr($first_name, 0, 1));
-            }
-              elseif ($format=='firstnamelastname') {
-                $username = str_slug($first_name) . str_slug($last_name);
-            }
-              elseif ($format=='firstnamelastinitial') {
+            } elseif ($format == 'firstnamelastname') {
+                $username = str_slug($first_name).str_slug($last_name);
+            } elseif ($format == 'firstnamelastinitial') {
                 $username = str_slug(($first_name.substr($last_name, 0, 1)));
               }
         }
@@ -537,9 +527,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         $user['first_name'] = $first_name;
         $user['last_name'] = $last_name;
         $user['username'] = strtolower($username);
+
         return $user;
-
-
     }
 
     /**
@@ -554,21 +543,19 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      *
      * @return bool
      */
-    public function two_factor_active () {
+    public function two_factor_active()
+    {
 
         // If the 2FA is optional and the user has opted in
-        if ((Setting::getSettings()->two_factor_enabled =='1') && ($this->two_factor_optin =='1'))
-        {
+        if ((Setting::getSettings()->two_factor_enabled == '1') && ($this->two_factor_optin == '1')) {
             return true;
         }
         // If the 2FA is required for everyone so is implicitly active
-        elseif (Setting::getSettings()->two_factor_enabled =='2')
-        {
+        elseif (Setting::getSettings()->two_factor_enabled == '2') {
             return true;
         }
 
         return false;
-
     }
 
     /**
@@ -584,20 +571,19 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      *
      * @return bool
      */
-    public function two_factor_active_and_enrolled () {
+    public function two_factor_active_and_enrolled()
+    {
 
         // If the 2FA is optional and the user has opted in and is enrolled
-        if ((Setting::getSettings()->two_factor_enabled =='1') && ($this->two_factor_optin =='1') && ($this->two_factor_enrolled =='1'))
-        {
+        if ((Setting::getSettings()->two_factor_enabled == '1') && ($this->two_factor_optin == '1') && ($this->two_factor_enrolled == '1')) {
             return true;
         }
         // If the 2FA is required for everyone and the user has enrolled
-        elseif ((Setting::getSettings()->two_factor_enabled =='2') && ($this->two_factor_enrolled))
-        {
+        elseif ((Setting::getSettings()->two_factor_enabled == '2') && ($this->two_factor_enrolled)) {
             return true;
         }
-        return false;
 
+        return false;
     }
 
 
@@ -615,14 +601,14 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      * @param  array  $terms The search terms
      * @return \Illuminate\Database\Query\Builder
      */
-    public function scopeSimpleNameSearch($query,  $search) {
-
+    public function scopeSimpleNameSearch($query, $search)
+    {
            $query = $query->where('first_name', 'LIKE', '%'.$search.'%')
                ->orWhere('last_name', 'LIKE', '%'.$search.'%')
-               ->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%$search%", "%$search%"]);
+               ->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%$search%"]);
+
         return $query;
     }
-
 
 
     /**
@@ -635,7 +621,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     public function advancedTextSearch(Builder $query, array $terms) {
 
         foreach($terms as $term) {
-            $query = $query->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%$term%", "%$term%"]);
+            $query = $query->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%$term%"]);
         }
 
         return $query;
@@ -648,12 +634,12 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      * @param  int $id
      * @return \Illuminate\Database\Query\Builder
      */
-    public function scopeByGroup($query, $id) {
+    public function scopeByGroup($query, $id)
+    {
         return $query->whereHas('groups', function ($query) use ($id) {
             $query->where('permission_groups.id', '=', $id);
         });
     }
-
 
     /**
      * Query builder scope to order on manager
@@ -682,7 +668,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         return $query->leftJoin('locations as locations_users', 'users.location_id', '=', 'locations_users.id')->orderBy('locations_users.name', $order);
     }
 
-
     /**
      * Query builder scope to order on department
      *
@@ -709,9 +694,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         return $query->leftJoin('companies as companies_user', 'users.company_id', '=', 'companies_user.id')->orderBy('companies_user.name', $order);
     }
 
-    public function preferredLocale(){
+    public function preferredLocale()
+    {
         return $this->locale;
     }
-
-
 }

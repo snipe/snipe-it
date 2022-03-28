@@ -1,5 +1,4 @@
 @extends('layouts/default')
-
 {{-- Page title --}}
 @section('title')
 {{ trans('admin/suppliers/table.view') }} -
@@ -155,7 +154,7 @@
           @if ($supplier->id)
             <div class="box-header with-border">
               <div class="box-heading">
-                <h2 class="box-title"> Improvements</h2>
+                <h2 class="box-title"> {{ trans('general.improvements') }}</h2>
               </div>
             </div><!-- /.box-header -->
           @endif
@@ -191,9 +190,9 @@
                       <td>{{ $improvement->start_date }}</td>
                       <td>{{ $improvement->completion_date }}</td>
                       <td>{{ $improvement->is_warranty ? trans('admin/asset_maintenances/message.warranty') : trans('admin/asset_maintenances/message.not_warranty') }}</td>
-                      <td>{{ sprintf( $snipeSettings->default_currency. '%01.2f', $improvement->cost) }}</td>
+                      <td>{{ $snipeSettings->default_currency. ' '. Helper::formatCurrencyOutput($improvement->cost) }}</td>
                         <?php $totalCost += $improvement->cost; ?>
-                      <td><a href="{{ route('maintenances.edit', $improvement->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white" aria-hidden="true"></i></a>
+                      <td><a href="{{ route('maintenances.edit', $improvement->id) }}" class="btn btn-warning"><i class="fas fa-pencil-alt icon-white" aria-hidden="true"></i></a>
                       </td>
                     </tr>
                   @endif
@@ -207,7 +206,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>{{sprintf($snipeSettings->default_currency . '%01.2f', $totalCost)}}</td>
+                <td>{{ $snipeSettings->default_currency . ' '.Helper::formatCurrencyOutput($totalCost) }}</td>
               </tr>
               </tfoot>
             </table>
@@ -229,20 +228,20 @@
 
     <ul class="list-unstyled" style="line-height: 25px; padding-bottom: 20px; padding-top: 20px;">
       @if ($supplier->contact)
-      <li><i class="fa fa-user" aria-hidden="true"></i> {{ $supplier->contact }}</li>
+      <li><i class="fas fa-user" aria-hidden="true"></i> {{ $supplier->contact }}</li>
       @endif
       @if ($supplier->phone)
-      <li><i class="fa fa-phone"></i>
+      <li><i class="fas fa-phone"></i>
         <a href="tel:{{ $supplier->phone }}">{{ $supplier->phone }}</a>
       </li>
       @endif
       @if ($supplier->fax)
-      <li><i class="fa fa-print"></i> {{ $supplier->fax }}</li>
+      <li><i class="fas fa-print"></i> {{ $supplier->fax }}</li>
       @endif
 
       @if ($supplier->email)
       <li>
-        <i class="fa fa-envelope-o"></i>
+        <i class="far fa-envelope"></i>
         <a href="mailto:{{ $supplier->email }}">
         {{ $supplier->email }}
         </a>
@@ -251,7 +250,7 @@
 
       @if ($supplier->url)
       <li>
-        <i class="fa fa-globe"></i>
+        <i class="fas fa-globe-americas"></i>
         <a href="{{ $supplier->url }}" target="_new">{{ $supplier->url }}</a>
       </li>
       @endif

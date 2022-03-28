@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'ผู้ใช้ยกเลิกคำร้องขอสินค้าในเว็บไซต์แล้ว',
     'a_user_requested' => 'ผู้ใช้ร้องขอรายการบนเว็บไซต์',
     'accessory_name' => 'ชื่ออุปกรณ์เสริม:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'ทรัพย์สิน:',
     'asset_name' => 'ชื่อสินทรัพย์:',
     'asset_requested' => 'สินทรัพย์ที่ขอ',
-    'asset_tag' => 'แท็กเนื้อหา:',
+    'asset_tag' => 'แท็กทรัพย์สิน',
     'assigned_to' => 'ได้รับมอบหมายให้',
     'best_regards' => 'ด้วยความเคารพ,',
     'canceled' => 'ยกเลิก:',
@@ -18,12 +18,12 @@ return array(
     'click_to_confirm' => 'โปรดคลิกลิงก์ต่อไปนี้เพื่อยืนยันข้อมูล: บัญชีเว็บ:',
     'click_on_the_link_accessory' => 'โปรดคลิกที่ลิงค์ด้านล่างเพื่อยืนยันว่าคุณได้รับอุปกรณ์เสริมแล้ว',
     'click_on_the_link_asset' => 'โปรดคลิกลิงก์ที่ด้านล่างเพื่อยืนยันว่าคุณได้รับเนื้อหาแล้ว',
-    'Confirm_Asset_Checkin' => 'Asset checkin confirmation',
-    'Confirm_Accessory_Checkin' => 'Accessory checkin confirmation',
-    'Confirm_accessory_delivery' => 'Accessory delivery confirmation',
-    'Confirm_license_delivery' => 'License delivery confirmation',
-    'Confirm_asset_delivery' => 'Asset delivery confirmation',
-    'Confirm_consumable_delivery' => 'Consumable delivery confirmation',
+    'Confirm_Asset_Checkin' => 'ยืนยันการเช็คอินสินทรัพย์',
+    'Confirm_Accessory_Checkin' => 'ยืนยันการเช็คอินอุปกรณ์เสริม',
+    'Confirm_accessory_delivery' => 'ยืนยันการจัดส่งอุปกรณ์เสริม',
+    'Confirm_license_delivery' => 'การยืนยันการส่งมอบใบอนุญาต',
+    'Confirm_asset_delivery' => 'ยืนยันการจัดส่งสินทรัพย์',
+    'Confirm_consumable_delivery' => 'ยืนยันการจัดส่งวัสดุสิ้นเปลือง',
     'current_QTY' => 'QTY ปัจจุบัน',
     'Days' => 'วัน',
     'days' => 'วัน',
@@ -59,7 +59,7 @@ return array(
     'test_mail_text' => 'นี่เป็นการทดสอบจาก Snipe-IT Asset Management System ถ้าคุณได้รับอีเมลนี้จะทำงาน :)',
     'the_following_item' => 'รายการต่อไปนี้ได้รับการตรวจสอบใน:',
     'low_inventory_alert' => 'มี: นับสินค้าที่ต่ำกว่าสินค้าคงคลังขั้นต่ำหรือเร็ว ๆ นี้จะต่ำ|มี: นับสินค้าที่ต่ำกว่าสินค้าคงคลังขั้นต่ำหรือจะเร็วเกินไป',
-    'assets_warrantee_alert' => 'มี: จำนวนสินทรัพย์ที่สิ้นสุดระยะรับประกันในถัดไป: เกณฑ์วัน|มี: นับสินทรัพย์ที่จะสิ้นสุดระยะประกันในถัดไป: เกณฑ์วัน',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'มี: ใบอนุญาตที่จะหมดอายุในวันถัดไป: วันที่กำหนด|มี: ใบอนุญาตที่จะหมดอายุในวันถัดไป: วันที่กำหนด',
     'to_reset' => 'ในการรีเซ็ตรหัสผ่านเว็บของคุณโปรดกรอกแบบฟอร์มนี้:',
     'type' => 'ชนิด',
@@ -69,11 +69,11 @@ return array(
     'welcome' => 'ยินดีต้อนรับ: ชื่อ',
     'welcome_to' => 'ยินดีต้อนรับสู่: web!',
     'your_credentials' => 'ข้อมูลรับรอง Snipe-IT ของคุณ',
-    'Accessory_Checkin_Notification' => 'Accessory checked in',
-    'Asset_Checkin_Notification' => 'Asset checked in',
-    'License_Checkin_Notification' => 'License checked in',
+    'Accessory_Checkin_Notification' => 'เช็คอินอุปกรณ์เสริมแล้ว',
+    'Asset_Checkin_Notification' => 'เช็คอินสินทรัพย์แล้ว',
+    'License_Checkin_Notification' => 'เช็คอินใบอนุญาตแล้ว',
     'Expected_Checkin_Report' => 'Expected asset checkin report',
-    'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
+    'Expected_Checkin_Notification' => 'เตือนความจำ :: ใกล้หมดเวลาเช็คอิน',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'ดูสินทรัพย์ที่มี',
+];
