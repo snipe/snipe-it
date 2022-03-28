@@ -19,7 +19,7 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
 
         unset($config['mapping']['example:name:space']);
 
-        $core = 'urn:ietf:params:scim:schemas:core:2.0:User:';
+        $core = 'urn:ietf:params:scim:schemas:core:2.0:User:'; //TODO - these paths *still* repeat too often - you can do better :)
         $mappings =& $config['mapping']['urn:ietf:params:scim:schemas:core:2.0:User']; //grab this entire key, we don't want to be repeating ourselves
 
         //username - *REQUIRED*
@@ -32,8 +32,43 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
 
         $mappings['name']['familyName'] = AttributeMapping::eloquent("last_name");
         $mappings['name']['givenName'] = AttributeMapping::eloquent("first_name");
-        $mappings['name']['formatted'] = null;
-        $mappings['name']['displayName'] = AttributeMapping::constant("n/a")->ignoreWrite(); // TODO - another weird one here
+        $mappings['name']['formatted'] = (new AttributeMapping())->ignoreWrite()->setRead(
+            function (&$object) {
+                \Log::error("Weird name.formatted reader firing...");
+                return $object->getFullNameAttribute();
+            } 
+        );
+        $mappings['name']['displayName'] = (new AttributeMapping())->ignoreWrite()->ignoreRead(); // AttributeMapping::noMapping(); //AttributeMapping::constant("n/a")->ignoreWrite(); // TODO - another weird one here
+        // ^^^^^^^ this 'displayName' is wrong - formatted is what I meant, and displayName is correctly done below...
+
+        //display name (synthetic, ignore writes)
+        $mappings['displayName'] = (new AttributeMapping())->ignoreWrite()->setRead(
+            function (&$object) {
+                \Log::error("Weird displayName reader firing...");
+                return $object->getFullNameAttribute();
+            } 
+        );
+
+        //external ID - what the heck is that? Are these people even *READING* my schema?!
+        $config['validations'][$core.'externalId'] = 'string'; //UGH. Ignored
+        $mappings['externalId'] = (new AttributeMapping())->ignoreWrite()->setRead(
+            function (&$object) {
+                \Log::error("external ID reader firing...");
+                return $object->username; //uh, I guess?
+            } 
+        );
+
+        $mappings['emails'] = [[
+            "value" => AttributeMapping::eloquent("email")->setSchema(['urn:ietf:params:scim:schemas:core:2.0:User']), // FIXME - if this works it's only because I patched the library! is *this* the thing that's blowing us up?
+            "display" => null,
+            "type" => AttributeMapping::constant("work")->ignoreWrite(),
+            "primary" => AttributeMapping::constant(true)->ignoreWrite()
+        ]];
+
+        
+        
+        //AttributeMapping::noMapping(); //(new AttributeMapping())->ignoreWrite()->ignoreRead(); // AttributeMapping::noMapping(); //AttributeMapping::constant("n/a")->ignoreWrite(); // TODO - another weird one here
+
         //active
         $config['validations'][$core.'active'] = 'boolean';
 
@@ -59,7 +94,7 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
         $config['validations'][$core.'addresses.*.country'] = 'string';
 
         $mappings['addresses'] = [[
-            'type' => AttributeMapping::constant("other")->ignoreWrite(),
+            'type' => AttributeMapping::constant("work")->ignoreWrite(),
             'formatted' => AttributeMapping::constant("n/a")->ignoreWrite(), // TODO - is this right? This doesn't look right.
             'streetAddress' => AttributeMapping::eloquent("address"),
             'locality' => AttributeMapping::eloquent("city"),
@@ -72,6 +107,10 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
         //title
         $config['validations'][$core.'title'] = 'string';
         $mappings['title'] = AttributeMapping::eloquent('jobtitle');
+
+        //Preferred Language
+        $config['validations'][$core.'preferredLanguage'] = 'string';
+        $mappings['preferredLanguage'] = AttributeMapping::eloquent('locale');
 
         /* 
           more snipe-it attributes I'd like to check out (to map to 'enterprise' maybe?):
@@ -86,8 +125,68 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
          - company_id to "organization?"
         */
 
-        //finally, write our temp $mappings back to $config['mappings']
-        //$config['mapping']['urn:ietf:params:scim:schemas:core:2.0:User'] = $mappings; //FIXME - try references?
+        $ent = "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:";
+
+        // we remove the 'example' namespace and add the Enterprise one
+        $config['mapping']['schemas'] = AttributeMapping::constant(
+            [
+            'urn:ietf:params:scim:schemas:core:2.0:User',
+            'urn:ietf:params:scim:schemas:extension:enterprise:2.0:User'
+            ]
+        )->ignoreWrite();
+
+        $config['validations'][$ent.'employeeNumber'] = 'string';
+        $config['validations'][$ent.'department'] = 'string';
+        $config['validations'][$ent.'manager'] = 'nullable';
+        $config['validations'][$ent.'manager.value'] = 'string';
+
+        $config['mapping']['urn:ietf:params:scim:schemas:extension:enterprise:2.0:User'] = [
+            'employeeNumber' => AttributeMapping::eloquent('employee_num'),
+            'department' =>(new AttributeMapping())->setAdd( // FIXME parent?
+                function ($value, &$object) {
+                    \Log::error("Department-Add: $value");
+                    $department = Department::where("name", $value)->first();
+                    if ($department) {
+                        $object->department_id = $department->id;
+                    }
+                }
+                )->setReplace(
+                    function ($value, &$object) {
+                        \Log::error("Department-Replace: $value");
+                        $department = Department::where("name", $value)->first();
+                        if ($department) {
+                            $object->department_id = $department->id;
+                        }
+                    }
+                )->setRead(
+                    function (&$object) {
+                        \Log::error("Weird department reader firing...");
+                        return $object->department ? $object->department->name : null;
+                    } 
+                ),
+            'manager' =>(new AttributeMapping())->setAdd( // FIXME parent?
+                function ($value, &$object) {
+                    \Log::error("Manager-Add: $value");
+                    $manager = User::find($value);
+                    if ($manager) {
+                        $object->manager_id = $manager->id; //TODO - I might be able to strip this back down to a plain Eloquent relationship?
+                    }
+                }
+                )->setReplace(
+                    function ($value, &$object) {
+                        \Log::error("Manager-Replace: $value");
+                        $manager = User::find($value);
+                        if ($manager) {
+                            $object->manager_id = $manager->id;
+                        }
+                    }
+                )->setRead(
+                    function (&$object) {
+                        \Log::error("Weird manager reader firing...");
+                        return $object->manager_id;
+                    } 
+                ),
+            ];
 
         // \Log::error("Config is: ".print_r($config,true));
         return $config;
