@@ -61,8 +61,8 @@ class ItemImportRequest extends FormRequest
         }
         $importer->setCallbacks([$this, 'log'], [$this, 'progress'], [$this, 'errorCallback'])
                  ->setUserId(Auth::id())
-                 ->setUpdating($this->has('import-update'))
-                 ->setShouldNotify($this->has('send-welcome'))
+                 ->setUpdating($this->get('import-update'))
+                 ->setShouldNotify($this->get('send-welcome'))
                  ->setUsernameFormat('firstname.lastname')
                  ->setFieldMappings($fieldMappings);
         // $logFile = storage_path('logs/importer.log');
