@@ -17,8 +17,8 @@ class AddKitsLicensesTable extends Migration
 		if (!Schema::hasTable('kits_licenses')) {
             Schema::create('kits_licenses', function ($table) {
                 $table->increments('id');
-                $table->integer('kit_id')->nullable()->default(null);
-                $table->integer('license_id')->nullable()->default(null);
+				$table->integer('kit_id')->nullable()->default(NULL); 
+				$table->integer('license_id')->nullable()->default(NULL);    
                 $table->integer('quantity')->default(1);
                 $table->timestamps();
             });

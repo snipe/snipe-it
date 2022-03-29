@@ -17,8 +17,8 @@ class AddKitsModelsTable extends Migration
 		if (!Schema::hasTable('kits_models')) {
             Schema::create('kits_models', function ($table) {
                 $table->increments('id');
-                $table->integer('kit_id')->nullable()->default(null);
-                $table->integer('model_id')->nullable()->default(null);
+				$table->integer('kit_id')->nullable()->default(NULL); 
+				$table->integer('model_id')->nullable()->default(NULL);    
                 $table->integer('quantity')->default(1);
                 $table->timestamps();
             });
@@ -36,4 +36,5 @@ class AddKitsModelsTable extends Migration
            Schema::drop('kits_models');
         }
     }
+
 }
