@@ -70,14 +70,47 @@ class ConsumableReplenishController extends Controller
         $admin_user = Auth::user();
 
         //upload file
+        // $file_name = null;
+        if ($request->hasFile('file')) {
+            if (! Storage::exists('private_uploads/consumables/docs')) {
+                Storage::makeDirectory('private_uploads/consumables/docs', 775);
+            }
 
-          
-        $docfilepath = $request->file('file');
-        Log::debug('doc file path: '. $request->input('file'));
-        $uploadpath = public_path('uploads/consumables/replenish_doc');
-        $formattedfilename = 'consumable_replenish_' . time() . $docfilepath->getClientOriginalName();
-        $docfilepath->move($uploadpath, $formattedfilename);
+            // foreach ($request->file('file') as $file) {
+                Log::debug( 'kakakaka' . $request->file('file')->getClientOriginalName());
+            $file = $request->file('file');
+            $extension =  $request->file('file')->getClientOriginalExtension();
+            $file_name = 'consumable_replenish-'.$consumable->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
+        
+            if ($extension=='svg') {
+                Log::debug('This is an SVG');
 
+                    $sanitizer = new Sanitizer();
+                    $dirtySVG = file_get_contents($file->getRealPath());
+                    $cleanSVG = $sanitizer->sanitize($dirtySVG);
+
+                    try {
+                        Storage::put('private_uploads/consumables/docs/'.$file_name, $cleanSVG);
+                    } catch (\Exception $e) {
+                        Log::debug('Upload no workie :( ');
+                        Log::debug($e);
+                    }
+            } else {
+            Storage::put('private_uploads/consumables/docs/'.$file_name, file_get_contents($file));
+            }
+            $consumable->logUpload($file_name, e($request->get('notes')));
+            // }
+            // return redirect()->back()->with('success', trans('admin/hardware/message.upload.success'));
+
+            // $docfilepath = $request->file('file');
+            // Log::debug('doc file path: '. $request->input('file'));
+            // $uploadpath = public_path('uploads/consumables/replenish_doc');
+            // $formattedfilename = 'consumable_replenish_' . time() . $docfilepath->getClientOriginalName();
+            // $docfilepath->move($uploadpath, $formattedfilename);
+
+        } 
+
+        
         // Update the consumable data
         $consumable->assigned_to = e($request->input('assigned_to'));
 
@@ -88,7 +121,7 @@ class ConsumableReplenishController extends Controller
             'total_replenish' => e($request->input('totalnum')),
             'replenishnote' => e($request->input('replenishnote')),
             'order_number'  => e($request->input('order_number')),
-            'file' => $formattedfilename
+            'file' => $file_name
         ]);
 
         $addedquantity = $consumable->qty + e($request->input('totalnum'));
@@ -126,50 +159,18 @@ class ConsumableReplenishController extends Controller
      */
     public function show($consumableId,$file)
     {
-        // if (is_null($consumable = Consumable::find($consumableId))) {
-        //     return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
-        // }
-        // the asset is valid
-        // if (isset($asset->id)) {
-            // $this->authorize('view', $asset);
+        $docfile = ('private_uploads/consumables/docs/'.$file);
+        Log::debug('file : ' . $docfile);
+        // Storage::download($file->getClientOriginalName());
+        // $docfile = 'private_uploads/consumables/docs/'. $file;
+        // Log::debug('Checking for '.$docfile);
 
-            // if (! $log = Actionlog::find($fileId)) {
-            //     return response('No matching record for that asset/file', 500)
-            //         ->header('Content-Type', 'text/plain');
-            // }
+        if (! Storage::exists($docfile)) {
+            return response('File '.$docfile.' not found on server' , 404)
+                ->header('Content-Type', 'text/plain');
+        }
 
-            $docfile = public_path('uploads/consumables/replenish_doc/'.$file);
-            // Log::debug('Checking for '.$docfile);
-            Log::debug('id : ' . $consumableId);
-            Log::debug('file : ' . $file);
-            // Log::debug($consumable->replenishusers()->where('consumables_stock.id',$consumableId)->first());
-            // Log::debug($consumable->replenishusers()->where('pivot.id',$consumableId)->first());
-
-            // if ($log->action_type == 'audit') {
-            //     $file = 'private_uploads/audits/'.$log->filename;
-            // }
-
-            if (! file_exists($docfile)) {
-                Log::debug($docfile);
-                return response('File '. $docfile.' not found on server' . $file . ' lalalala ' , 404)
-                    ->header('Content-Type', 'text/plain');
-            }
-
-            // if ($download != 'true') {
-                // if ($contents = file_get_contents(Storage::url($docfile))) {
-                //     return Response::make(Storage::url($docfile)->header('Content-Type', mime_content_type($docfile)));
-                // }
-
-                // return JsonResponse::create(['error' => 'Failed validation: '], 500);
-            // }
-
-            // return StorageHelper::downloader($docfile);
-            return response()->download($docfile);
-        // }
-        // Prepare the error message
-        $error = trans('admin/consumable/message.does_not_exist', ['id' => $consumableId]);
-
-        // Redirect to the hardware management page
-        return redirect()->route('consumables.index')->with('error', $error);
+        return StorageHelper::downloader($docfile);
+       
     }
 }

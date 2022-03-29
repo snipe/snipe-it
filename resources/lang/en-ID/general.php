@@ -349,5 +349,7 @@
     'checkout_user_tooltip' => 'Check this item out to a user',
     'replenish_history'     => 'Sejarah Replenish Item',
     'replenish'             => 'Replenish Stok',
-    'checkout_history'      => 'Sejarah Item Chekcout'
+    'checkout_history'      => 'Sejarah Item Chekcout',
+    'documents'             => 'Dokumen',
+    'document_archive'      => 'Dokumen Pendukung'
 ];
