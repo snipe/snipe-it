@@ -4,8 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use Auth;
 
-class Authenticate
+class CheckUserIsActivated
 {
     /**
      * The Guard implementation.
@@ -34,14 +35,16 @@ class Authenticate
      */
     public function handle($request, Closure $next)
     {
-        if ($this->auth->guest()) {
-            if ($request->ajax()) {
-                return response('Unauthorized.', 401);
-            } else {
-                return redirect()->guest('login');
-            }
+
+        // If there is a user AND the user is NOT activated, send them to the login page
+        // This prevents people who still have active sessions logged in and their status gets toggled
+        // to inactive (aka unable to login)
+        if (($request->user()) && (!$request->user()->isActivated())) {
+            Auth::logout();
+            return redirect()->guest('login');
         }
 
         return $next($request);
+
     }
 }
