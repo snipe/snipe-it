@@ -277,11 +277,11 @@ class ConsumablesController extends Controller
         
         $rows = [];
         $consumable->consumableReplenishAssignments;
-        $upload_path = public_path('uploads/consumables/replenish_doc/');
+        $upload_path = public_path('private_uploads/consumables/replenish_doc/');
         
         foreach ($consumable->consumableReplenishAssignments as $consumable_replenish_assignment) {
             Log::debug('item : ' . $consumable_replenish_assignment);
-            Log::debug(public_path('uploads/consumables/replenish_doc/'));
+            Log::debug(public_path('private_uploads/consumables/replenish_doc/'));
             $rows[] = [
                 // 'name' => ($consumable_replenish_assignment->user) ? $consumable_replenish_assignment->user->present()->nameUrl() : 'Deleted User',
                 'created_at' => Helper::getFormattedDateObject($consumable_replenish_assignment->created_at, 'datetime'),
@@ -290,7 +290,7 @@ class ConsumablesController extends Controller
                 'order_number' => $consumable_replenish_assignment->order_number ? ($consumable_replenish_assignment->order_number) : 'N/A',
                 'replenishnote' => $consumable_replenish_assignment->replenishnote ?  ($consumable_replenish_assignment->replenishnote) : '-',
                 'admin' => ($consumable_replenish_assignment->admin) ? $consumable_replenish_assignment->admin->present()->nameUrl() : '',
-                'file'=> ($consumable_replenish_assignment->file) ? '<a href="'.route('replenish/showdocument',[$consumable_replenish_assignment->id, $consumable_replenish_assignment->file]).'" class="btn bg-purple"><i class="fas fa-download" aria-hidden="true"></i></a>' : '-',
+                'file'=> ($consumable_replenish_assignment->file) ? '<a href="'.route('replenish/showdocument',[$consumable_replenish_assignment->id, $consumable_replenish_assignment->file]).'" class="btn"><i class="fas fa-download" aria-hidden="true"></i></a>' : '-',
             ];
             Log::debug('item : ' . $consumable_replenish_assignment->file);
         }

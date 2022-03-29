@@ -390,7 +390,9 @@ return [
     'replenish'             => 'Replenish Stock'
     'replenish_history'     => 'Item Replenish History',
     'replenish'             => 'Replenish Stock',
-    'checkout_history'      => 'Item Chekcout History'
+    'checkout_history'      => 'Item Chekcout History',
+    'documents'             => 'Documents',
+    'document_archive'      => 'Supporting Document'
 
 ];
 
