@@ -19,6 +19,9 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
 
         unset($config['mapping']['example:name:space']);
 
+        $config['map_unmapped'] = false; //not sure if this is helping?
+
+
         $core = 'urn:ietf:params:scim:schemas:core:2.0:User:'; //TODO - these paths *still* repeat too often - you can do better :)
         $mappings =& $config['mapping']['urn:ietf:params:scim:schemas:core:2.0:User']; //grab this entire key, we don't want to be repeating ourselves
 
@@ -42,24 +45,27 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
         // ^^^^^^^ this 'displayName' is wrong - formatted is what I meant, and displayName is correctly done below...
 
         //display name (synthetic, ignore writes)
-        $mappings['displayName'] = (new AttributeMapping())->ignoreWrite()->setRead(
-            function (&$object) {
-                \Log::error("Weird displayName reader firing...");
-                return $object->getFullNameAttribute();
-            } 
-        );
+        // temp yanking *THIS* too
+        // $mappings['displayName'] = (new AttributeMapping())->ignoreWrite()->setRead(
+        //     function (&$object) {
+        //         \Log::error("Weird displayName reader firing...");
+        //         return $object->getFullNameAttribute();
+        //     } 
+        // );
 
         //external ID - what the heck is that? Are these people even *READING* my schema?!
-        $config['validations'][$core.'externalId'] = 'string'; //UGH. Ignored
-        $mappings['externalId'] = (new AttributeMapping())->ignoreWrite()->setRead(
-            function (&$object) {
-                \Log::error("external ID reader firing...");
-                return $object->username; //uh, I guess?
-            } 
-        );
+        //temp yanking this?
+        // $config['validations'][$core.'externalId'] = 'string'; //UGH. Ignored
+        // $mappings['externalId'] = (new AttributeMapping())->ignoreWrite()->setRead(
+        //     function (&$object) {
+        //         \Log::error("external ID reader firing...");
+        //         return $object->username; //uh, I guess?
+        //     } 
+        // );
 
+        // let's maybe use the defaults from the library, I guess?
         $mappings['emails'] = [[
-            "value" => AttributeMapping::eloquent("email")->setSchema(['urn:ietf:params:scim:schemas:core:2.0:User']), // FIXME - if this works it's only because I patched the library! is *this* the thing that's blowing us up?
+            "value" => AttributeMapping::eloquent("email"), // ->setSchema(['urn:ietf:params:scim:schemas:core:2.0:User']), // FIXME - if this works it's only because I patched the library! is *this* the thing that's blowing us up?
             "display" => null,
             "type" => AttributeMapping::constant("work")->ignoreWrite(),
             "primary" => AttributeMapping::constant(true)->ignoreWrite()
@@ -136,10 +142,30 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
         )->ignoreWrite();
 
         $config['validations'][$ent.'employeeNumber'] = 'string';
-        $config['validations'][$ent.'department'] = 'string';
+        $config['validations'][$ent.'department'] = 'string'; //I think *this* one is ok? (WEIRD!)
         $config['validations'][$ent.'manager'] = 'nullable';
         $config['validations'][$ent.'manager.value'] = 'string';
 
+        // ALSO fixme, WRONG NAMESPACE!!!!! WEIRD FIXME
+        // $mappings['department'] = (new AttributeMapping())->setAdd( // FIXME parent?
+        //     function ($value, &$object) {
+        //         \Log::error("Department-Add WRONG NAMESPACE: $value");
+        //         $department = Department::firstOrCreate(["name" => $value]);
+        //         $object->department_id = $department->id;
+        //     }
+        //     )->setReplace(
+        //         function ($value, &$object) {
+        //             \Log::error("Department-Replace WRONG NAMESPACE: $value");
+        //             $department = Department::firstOrCreate(["name" => $value]);
+        //             $object->department_id = $department->id;
+        //         }
+        //     )->setRead(
+        //         function (&$object) {
+        //             \Log::error("Weird department reader firing... WRONG NAMESPACE");
+        //             return $object->department ? $object->department->name : null;
+        //         } 
+        //     );
+//                          urn:ietf:params:scim:schemas:extension:enterprise:2.0:User //?
         $config['mapping']['urn:ietf:params:scim:schemas:extension:enterprise:2.0:User'] = [
             'employeeNumber' => AttributeMapping::eloquent('employee_num'),
             'department' =>(new AttributeMapping())->setAdd( // FIXME parent?
@@ -164,7 +190,9 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
                         return $object->department ? $object->department->name : null;
                     } 
                 ),
-            'manager' =>(new AttributeMapping())->setAdd( // FIXME parent?
+                // wait should that be manager => { 'value' => ?}
+            'manager' => [ 
+                'value' => (new AttributeMapping())->setAdd( // FIXME parent?
                 function ($value, &$object) {
                     \Log::error("Manager-Add: $value");
                     $manager = User::find($value);
@@ -186,7 +214,7 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
                         return $object->manager_id;
                     } 
                 ),
-            ];
+            ]];
 
         // \Log::error("Config is: ".print_r($config,true));
         return $config;
