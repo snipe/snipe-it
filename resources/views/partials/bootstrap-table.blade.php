@@ -30,11 +30,11 @@
             return false;
         }
 
-        $('.snipe-table').bootstrapTable({
+        $('.snipe-table').bootstrapTable('destroy').each(function () {
             data_export_options = $(this).attr('data-export-options');
             export_options = data_export_options? JSON.parse(data_export_options): {};
             export_options['htmlContent'] = true; //always enforce this on the given data-export-options (to prevent XSS)
-            
+
             $(this).bootstrapTable({
             classes: 'table table-responsive table-no-bordered',
             ajaxOptions: {
