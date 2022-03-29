@@ -933,12 +933,17 @@ class ReportsController extends Controller
         /**
          * Get all assets with pending checkout acceptances
          */
-
-        $acceptances = CheckoutAcceptance::pending()->with('assignedTo')->get();
+        if($showDeleted) {
+            $acceptances = CheckoutAcceptance::pending()->withTrashed()->with(['assignedTo' , 'checkoutable.assignedTo', 'checkoutable.model'])->get();
+        } else {
+            $acceptances = CheckoutAcceptance::pending()->with(['assignedTo' => function ($query) {
+                $query->withTrashed();
+            }, 'checkoutable.assignedTo', 'checkoutable.model'])->get();
+        }
 
         $assetsForReport = $acceptances
-            ->filter(function($acceptance) {
-                return $acceptance->checkoutable_type == 'App\Models\Asset' && !is_null($acceptance->assignedTo);
+            ->filter(function ($acceptance) {
+                return $acceptance->checkoutable_type == 'App\Models\Asset';
             })
             ->map(function($acceptance) {
                 return ['assetItem' => $acceptance->checkoutable, 'acceptance' => $acceptance];
