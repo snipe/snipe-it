@@ -88,7 +88,7 @@
                             <div class="col-sm-9">
                                 <div class="checkbox">
                                     <label for="activated">
-                                        {{ Form::radio('activated', '', true, ['aria-label'=>'activated']) }} {{  trans('admin/users/general.activation_status_warning') }} <br>
+                                        {{ Form::radio('remote', '', true, ['aria-label'=>'activated']) }} {{  trans('general.do_not_change') }} <br>
                                         {{ Form::radio('activated', '1', old('activated'), ['aria-label'=>'activated']) }}  {{  trans('general.login_enabled')}} <br>
                                         {{ Form::radio('activated', '0', old('activated'), ['aria-label'=>'activated']) }}  {{  trans('admin/users/general.user_deactivated')}}
 
