@@ -31,6 +31,11 @@
         }
 
         $('.snipe-table').bootstrapTable({
+            data_export_options = $(this).attr('data-export-options');
+            export_options = data_export_options? JSON.parse(data_export_options): {};
+            export_options['htmlContent'] = true; //always enforce this on the given data-export-options (to prevent XSS)
+            
+            $(this).bootstrapTable({
             classes: 'table table-responsive table-no-bordered',
             ajaxOptions: {
                 headers: {
@@ -76,17 +81,15 @@
                 export: 'fa-download',
                 clearSearch: 'fa-times'
             },
-            exportOptions: {
-                htmlContent: true,
-            },
+                exportOptions: export_options,
 
             exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
             onLoadSuccess: function () {
                 $('[data-toggle="tooltip"]').tooltip(); // Needed to attach tooltips after ajax call
             }
 
+            });
         });
-
     });
 
 

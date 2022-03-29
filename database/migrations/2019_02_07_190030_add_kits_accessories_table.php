@@ -16,8 +16,8 @@ class AddKitsAccessoriesTable extends Migration
         if (!Schema::hasTable('kits_accessories')) {
             Schema::create('kits_accessories', function ($table) {
                 $table->increments('id');
-                $table->integer('kit_id')->nullable()->default(null);
-                $table->integer('accessory_id')->nullable()->default(null);
+                $table->integer('kit_id')->nullable()->default(NULL); 
+                $table->integer('accessory_id')->nullable()->default(NULL);    
                 $table->integer('quantity')->default(1);
                 $table->timestamps();
             });

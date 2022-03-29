@@ -195,6 +195,13 @@ class Asset extends Depreciable
             $model = AssetModel::find($this->model_id);
 
             if (($model) && ($model->fieldset)) {
+
+                foreach ($model->fieldset->fields as $field){
+                    if($field->format == 'BOOLEAN'){
+                        $this->{$field->db_column} = filter_var($this->{$field->db_column}, FILTER_VALIDATE_BOOLEAN);
+                    }
+                }
+
                 $this->rules += $model->fieldset->validation_rules();
 
                 foreach ($this->model->fieldset->fields as $field){
@@ -204,6 +211,8 @@ class Asset extends Depreciable
                 }
             }
         }
+
+
 
         return parent::save($params);
     }
