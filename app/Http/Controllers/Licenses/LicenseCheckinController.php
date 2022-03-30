@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use phpDocumentor\Reflection\Types\Boolean;
+
 
 class LicenseCheckinController extends Controller
 {
@@ -115,9 +117,23 @@ class LicenseCheckinController extends Controller
 
         return('There are '.$licenseSeats->count().' seats checked out. Are you sure you want to check all of them in?');
     }
+    public function replacementList(){
+        $license_name = LicensesController::getLicenseList();
+        $license_list =array();
+        foreach($license_name as $license) {
+            $licenseSeat = LicenseSeat::where('license_id', '=', $license->id)
+                ->whereNull('assigned_to')
+                ->withOut('user')
+                ->get();
+
+            $license_list[] = $license->name.'        Seats Available:'.$licenseSeat->count();
+
+        }
+        return $license_list;
+    }
 
 
-    public static function checkinLicense($license_id){
+    public static function checkinLicense($license_id, $replace, Request $request){
 
         $licenseSeats = LicenseSeat::where('license_id', '=', $license_id)
             ->whereNotNull('assigned_to')
@@ -133,6 +149,19 @@ class LicenseCheckinController extends Controller
             return redirect()->to('/licenses')->with('error', 'Invalid license ID.');
         }
 
+            foreach ($licenseSeats as $seat) {
+                $seat->assigned_to = null;
+
+                if ($seat->save()) {
+                    // Override the email address so we don't notify on checkin
+                    $seat->user->email = null;
+
+                    // Log the checkin
+                    $seat->logCheckin($seat->user, 'Checked in via UI');
+                }
+
+            }
+        $replacement_seats=$licenseSeats;
         foreach ($licenseSeats as $seat) {
             $seat->assigned_to = null;
 
@@ -142,6 +171,20 @@ class LicenseCheckinController extends Controller
 
                 // Log the checkin
                 $seat->logCheckin($seat->user, 'Checked in via UI');
+            }
+            if ($replace== true) {
+
+                foreach($licenseSeats as $seat) {
+                    foreach ($replacement_seats as $original_seat) {
+
+                        $seat->assigned_to = $original_seat->assigned_to;
+                        $seat->user->email = $original_seat->email;
+                        $seat->license_id = $request->input('replacement_license');
+                        $seat->logCheckout($seat->user, 'replacing '.$original_seat->license_id);
+
+                    }
+                }
+                return redirect()->to('/licenses')->with('success', 'License has been replaced');
             }
         }
         return redirect()->to('/licenses')->with('success', 'All seats checked in');

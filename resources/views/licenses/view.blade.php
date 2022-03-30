@@ -84,6 +84,12 @@
             <ul class="dropdown-menu">
               <li><a href="{{ route('licenses.edit', $user->id) }}">{{ trans('admin/users/general.edit') }}</a></li>
               <li><a href="{{ route('clone/license', $user->id) }}">{{ trans('admin/users/general.clone') }}</a></li>
+              <li class="pull-right"><a href="#" class="alert alert-danger" data-toggle="modal" data-target="#checkInAllLicenses">
+                  <i class="fas fa-exchange"></i>Checkin All Seats</a>
+              </li>
+              <li class="pull-right"><a href="#" class="alert alert-danger" data-toggle="modal" data-target="#replaceLicense">
+                  <i class="fas fa-exchange"></i>Replace all seats</a>
+              </li>
             </ul>
           </li>
         @endcan
@@ -92,9 +98,7 @@
           <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal">
               <i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}</a>
           </li>
-          <li class="pull-right"><a href="#" class="alert alert-danger" data-toggle="modal" data-target="#checkInAllLicenses">
-              <i class="fas fa-exchange"></i>Checkin All Seats</a>
-          </li>
+
 
         @endcan
       </ul>
@@ -568,25 +572,56 @@
     </div> <!-- nav-tabs-custom -->
   </div>  <!-- /.col -->
 </div> <!-- /.row -->
+
 <div class="modal fade" id="checkInAllLicenses" tabindex="-1" role="dialog" aria-labelledby="checkInAllLicenses" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="checkInAllLicenseSeats">Check-in All Seats for this License</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
+        <br>
+        <h3 class="modal-title" id="checkInAllLicense">Check-in All Seats for this License</h3>
       </div>
       <div class="modal-body">
-        {{\App\Http\Controllers\Licenses\LicenseCheckinController::checkinCount($license->id)}}
+        <h4>{{\App\Http\Controllers\Licenses\LicenseCheckinController::checkinCount($license->id)}}</h4>
+        <br><br>
+        <div class="form-group">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger"><a href={{route('licenses/checkin-all', [$license->id])}} style="color:white;">Checkin All Seats</a></button>
+        <button type="button" class="btn btn-danger"><a href={{route('licenses/checkin-all', [$license->id, $replace= false])}} style="color:white;">Checkin All Seats</a></button>
       </div>
     </div>
   </div>
 </div>
+</div>
+  <div class="modal fade" id="replaceLicense" tabindex="-1" role="dialog" aria-labelledby="replaceLicense" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <br>
+          <h3 class="modal-title" id="replaceLicense">Replace Current License</h3>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            {{ Form::label('replacement_license', trans('general.replacement_license'), array('class' =>'col-md-3 control-label')) }}
+            <div class="col-md-9 required">
+              {{Form::select('replacement_license', array(App\Http\Controllers\Licenses\LicenseCheckinController::replacementList()), array('class'=>'select2', 'style'=> 'width:100%', 'aria-label'=>'replacement_license'))}}
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger"><a href={{route('licenses/checkin-all', [$license->id, $replace= true])}} style="color:white;">Replace All Seats</a></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 
 @can('update', \App\Models\License::class)

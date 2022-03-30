@@ -13,6 +13,8 @@ return array(
     'in_out'  					=> 'In/Out',
     'info'  					=> 'License Info',
     'license_seats'  			=> 'License Seats',
+    'replace_license'       => 'Replace License',
+    'license_checkin_all'    => 'Check-in All Seats',
     'seat'  					=> 'Seat',
     'seats'  					=> 'Seats',
     'software_licenses'  		=> 'Software Licenses',

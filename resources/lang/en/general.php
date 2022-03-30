@@ -319,6 +319,8 @@
     'synchronize'           => 'Synchronize',
     'sync_results'          => 'Synchronization Results',
     'license_serial'        => 'Serial/Product Key',
+    'replacement_license'   => 'Replacement License',
+    'replacement_select'    => 'Would you like to replace it with another license now?',
     'invalid_category'      => 'Invalid category',
     'dashboard_info'        => 'This is your dashboard. There are many like it, but this one is yours.',
     '60_percent_warning'    => '60% Complete (warning)',

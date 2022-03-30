@@ -266,4 +266,10 @@ class LicensesController extends Controller
         ->with('item', $license)
         ->with('maintained_list', $maintained_list);
     }
+    public function getLicenseList(){
+        $license_list= DB::table('licenses')->get();
+
+        return ($license_list);
+
+    }
 }
