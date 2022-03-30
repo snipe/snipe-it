@@ -254,12 +254,6 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
         'accept-asset/{logID}',
         [ViewAssetsController::class, 'getAcceptAsset']
     )->name('account/accept-assets');
-    // Bulk License Checkin
-    Route::get(
-        'api/v1/licenses/checkin-all/{license_id}',
-        [LicenseCheckinController::class, 'checkinLicense']
-    )->name('licenses/checkin-all');
-
     // Profile
     Route::get(
         'requestable-assets',
