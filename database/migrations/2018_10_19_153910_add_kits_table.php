@@ -16,7 +16,7 @@ class AddKitsTable extends Migration
 		if (!Schema::hasTable('kits')) {
             Schema::create('kits', function ($table) {
                 $table->increments('id');
-                $table->string('name')->nullable()->default(null);
+				$table->string('name')->nullable()->default(NULL);
                 $table->timestamps();
                 $table->engine = 'InnoDB';
             });
@@ -34,6 +34,7 @@ class AddKitsTable extends Migration
 		if (Schema::hasTable('kits')) {
            Schema::drop('kits');
         }
+
 	}
 
 }

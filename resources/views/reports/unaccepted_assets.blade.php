@@ -71,7 +71,7 @@
                   @if ($item['assetItem'])
                   <tr @if($item['acceptance']->trashed()) style="text-decoration: line-through" @endif>
                     <td>{{ $item['acceptance']->created_at }}</td>
-                    <td>{{ ($item['assetItem']->company) ? $assetItem->company->name : '' }}</td>
+                    <td>{{ ($item['assetItem']->company) ? $item['assetItem']->company->name : '' }}</td>
                     <td>{!! $item['assetItem']->model->category->present()->nameUrl() !!}</td>
                     <td>{!! $item['assetItem']->present()->modelUrl() !!}</td>
                     <td>{!! $item['assetItem']->present()->nameUrl() !!}</td>

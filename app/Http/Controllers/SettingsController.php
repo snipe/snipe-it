@@ -946,6 +946,7 @@ class SettingsController extends Controller
             $setting->ldap_active_flag = $request->input('ldap_active_flag');
             $setting->ldap_emp_num = $request->input('ldap_emp_num');
             $setting->ldap_email = $request->input('ldap_email');
+            $setting->ldap_manager = $request->input('ldap_manager');
             $setting->ad_domain = $request->input('ad_domain');
             $setting->is_ad = $request->input('is_ad', '0');
             $setting->ad_append_domain = $request->input('ad_append_domain', '0');
@@ -1024,6 +1025,12 @@ class SettingsController extends Controller
         }
 
         return redirect()->back()->withInput()->withErrors($setting->getErrors());
+    }
+    public static function getPDFBranding()
+    {
+        $pdf_branding= Setting::getSettings();
+
+        return $pdf_branding;
     }
 
     /**

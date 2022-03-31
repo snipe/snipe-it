@@ -16,8 +16,8 @@ class AddKitsConsumablesTable extends Migration
         if (!Schema::hasTable('kits_consumables')) {
             Schema::create('kits_consumables', function ($table) {
                 $table->increments('id');
-                $table->integer('kit_id')->nullable()->default(null);
-                $table->integer('consumable_id')->nullable()->default(null);
+                $table->integer('kit_id')->nullable()->default(NULL); 
+                $table->integer('consumable_id')->nullable()->default(NULL);    
                 $table->integer('quantity')->default(1);
                 $table->timestamps();
             });
