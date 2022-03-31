@@ -3,7 +3,7 @@
 use App\Http\Controllers\Api;
 // use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Licenses\LicenseCheckinController;
+
 
 
 /*
@@ -427,8 +427,11 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:'.config('app.
 
 
       Route::get(
-          'api/v1/licenses/checkin-all/{license_id}',
-          [LicenseCheckinController::class, 'checkinLicense']
+          '/licenses/checkin-all/{licenseID}',
+          [
+              Api\LicenseSeatsController::class,
+              'checkinLicense'
+          ]
       )->name('licenses/checkin-all');
 
         Route::get('bytag/{tag}',

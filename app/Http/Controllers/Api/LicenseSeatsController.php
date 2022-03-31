@@ -147,8 +147,8 @@ class LicenseSeatsController extends Controller
             ->whereNotNull('assigned_to')
             ->with('user')
             ->get();
+        return response()->json(Helper::formatStandardApiResponse(null,'There are '.$licenseSeats->count().' seats checked out. Are you sure you want to check all of them in?', 'admin/licenses/message.update.success' ));
 
-        return('There are '.$licenseSeats->count().' seats checked out. Are you sure you want to check all of them in?');
     }
     public function replacementList(){
         $license_name = LicensesController::getLicenseList();

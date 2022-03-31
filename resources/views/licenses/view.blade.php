@@ -584,7 +584,7 @@
         <h3 class="modal-title" id="checkInAllLicense">Check-in All Seats for this License</h3>
       </div>
       <div class="modal-body">
-        <h4>{{\App\Http\Controllers\Licenses\LicenseCheckinController::checkinCount($license->id)}}</h4>
+        <h4>{{\App\Http\Controllers\Api\LicenseSeatsController::checkinCount($license->id)}}</h4>
         <br><br>
         <div class="form-group">
       </div>
@@ -610,7 +610,7 @@
           <div class="form-group">
             {{ Form::label('replacement_license', trans('general.replacement_license'), array('class' =>'col-md-3 control-label')) }}
             <div class="col-md-9 required">
-              {{Form::select('replacement_license', array(App\Http\Controllers\Licenses\LicenseCheckinController::replacementList()), array('class'=>'select2', 'style'=> 'width:100%', 'aria-label'=>'replacement_license'))}}
+              {{Form::select('replacement_license', array(App\Http\Controllers\Api\LicenseSeatsController::replacementList()), array('class'=>'select2', 'style'=> 'width:100%', 'aria-label'=>'replacement_license'))}}
             </div>
           </div>
           <div class="modal-footer">
