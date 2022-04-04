@@ -147,7 +147,7 @@ class LicenseSeatsController extends Controller
             ->whereNotNull('assigned_to')
             ->with('user')
             ->get();
-        return response()->json(Helper::formatStandardApiResponse(null,'There are '.$licenseSeats->count().' seats checked out. Are you sure you want to check all of them in?', 'admin/licenses/message.update.success' ));
+        return response()->json(Helper::formatStandardApiResponse('success','There are '.$licenseSeats->count().' seats checked out. Are you sure you want to check all of them in?' ,trans('admin/licenses/message.update.success')));
 
     }
     public function replacementList(){
@@ -165,7 +165,9 @@ class LicenseSeatsController extends Controller
         return $license_list;
     }
 
-    public static function checkinLicense($license_id, $replace, Request $request){
+    public function checkinLicense($license_id, $replace, Request $request)
+    {
+        $this->authorize('edit', LicenseSeat::class);
 
         $licenseSeats = LicenseSeat::where('license_id', '=', $license_id)
             ->whereNotNull('assigned_to')
@@ -173,7 +175,8 @@ class LicenseSeatsController extends Controller
             ->get();
 
         if (!License::where('id', '=', $license_id)->first()) {
-            return redirect()->to('/licenses')->with('error', 'Invalid license ID.');
+
+            return redirect()->to('api.licenseseat.checkin-all')->with('error', 'Invalid license ID.');
         }
 
         foreach ($licenseSeats as $seat) {
@@ -211,9 +214,9 @@ class LicenseSeatsController extends Controller
 
                     }
                 }
-                return redirect()->to('/licenses')->with('success', 'License has been replaced');
+                return redirect()->to('api.licenseseat.checkin-all')->with('success', 'License has been replaced');
             }
         }
-        return redirect()->to('/licenses')->with('success', 'All seats checked in');
+        return redirect()->to('api.licenseseat.checkin-all')->with('success', 'All seats checked in');
     }
 }

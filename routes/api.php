@@ -425,15 +425,6 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:'.config('app.
             ]
         )->name('api.assets.licenselist');
 
-
-      Route::get(
-          '/licenses/checkin-all/{licenseID}',
-          [
-              Api\LicenseSeatsController::class,
-              'checkinLicense'
-          ]
-      )->name('licenses/checkin-all');
-
         Route::get('bytag/{tag}',
             [
                 Api\AssetsController::class, 
@@ -571,7 +562,14 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:'.config('app.
             ]
         )->name('api.licenses.selectlist');
 
-        }); 
+        Route::get(
+            '{licenseID}/checkin-all',
+            [
+                Api\LicenseSeatsController::class,
+                'checkinLicense'
+            ]
+        )->name('api.licenseseat.checkin-all');
+        });
 
         Route::resource('licenses', 
         Api\LicensesController::class,

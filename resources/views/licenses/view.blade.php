@@ -590,7 +590,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger"><a href={{route('licenses/checkin-all', [$license->id, $replace= false])}} style="color:white;">Checkin All Seats</a></button>
+        <button type="button" class="btn btn-danger"><a href={{route('api.licenseseat.checkin-all', [$license->id, $replace= false])}} style="color:white;">Checkin All Seats</a></button>
       </div>
     </div>
   </div>
@@ -615,7 +615,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-danger"><a href={{route('licenses/checkin-all', [$license->id, $replace= true])}} style="color:white;">Replace All Seats</a></button>
+            <button type="button" class="btn btn-danger"><a href={{route('api.licenseseat.checkin-all', [$license->id, $replace= true])}} style="color:white;">Replace All Seats</a></button>
           </div>
         </div>
       </div>
