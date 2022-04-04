@@ -910,13 +910,12 @@ class SettingsController extends Controller
         public function measurementConverter($setting, $old_measurement_type)
         {
             $cm_to_mm= pow(10,1);
-            $cm_to_in= 2.54;
+            $cm_to_in= (1/2.54);
             $mm_to_cm = pow(10,-1);
-            $mm_to_in= 25.4;
+            $mm_to_in= (1/25.4);
             $in_to_cm= 2.54;
             $inches_to_mm=25.4;
             $convert_measurement='';
-
             switch ($setting->labels_measurement_type) {
 
                 case "in":
@@ -950,16 +949,16 @@ class SettingsController extends Controller
                         $convert_measurement=$inches_to_mm;
                     break;
             }
-            $setting->labels_width = ($setting->labels_width) / $convert_measurement;
-            $setting->labels_height = ($setting->labels_height) / $convert_measurement;
-            $setting->labels_pmargin_left = ($setting->labels_pmargin_left) / $convert_measurement;
-            $setting->labels_pmargin_right = ($setting->labels_pmargin_right) / $convert_measurement;
-            $setting->labels_pmargin_top = ($setting->labels_pmargin_top) / $convert_measurement;
-            $setting->labels_pmargin_bottom = ($setting->labels_pmargin_bottom) / $convert_measurement;
-            $setting->labels_display_bgutter = ($setting->labels_display_bgutter) / $convert_measurement;
-            $setting->labels_display_sgutter = ($setting->labels_display_sgutter) / $convert_measurement;
-            $setting->labels_pagewidth = ($setting->labels_pagewidth) / $convert_measurement;
-            $setting->labels_pageheight = ($setting->labels_pageheight) / $convert_measurement;
+            $setting->labels_width = ($setting->labels_width) * $convert_measurement;
+            $setting->labels_height = ($setting->labels_height) *$convert_measurement;
+            $setting->labels_pmargin_left = ($setting->labels_pmargin_left) * $convert_measurement;
+            $setting->labels_pmargin_right = ($setting->labels_pmargin_right) * $convert_measurement;
+            $setting->labels_pmargin_top = ($setting->labels_pmargin_top) * $convert_measurement;
+            $setting->labels_pmargin_bottom = ($setting->labels_pmargin_bottom) * $convert_measurement;
+            $setting->labels_display_bgutter = ($setting->labels_display_bgutter) * $convert_measurement;
+            $setting->labels_display_sgutter = ($setting->labels_display_sgutter) * $convert_measurement;
+            $setting->labels_pagewidth = ($setting->labels_pagewidth) * $convert_measurement;
+            $setting->labels_pageheight = ($setting->labels_pageheight) * $convert_measurement;
         }
 
 
