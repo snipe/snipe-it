@@ -131,7 +131,7 @@ class AccessoriesController extends Controller
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
         }
 
-        $min = $accessory->numCHeckedOut();
+        $min = $accessory->numCheckedOut();
         $validator = Validator::make($request->all(), [
             "qty" => "required|numeric|min:$min"
         ]);
