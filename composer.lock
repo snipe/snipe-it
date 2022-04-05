@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "448c7508ab99eb86eb62e5cac3e9ee59",
+    "content-hash": "5bf3cc38d83f8169e830432666fa57f5",
     "packages": [
         {
             "name": "alek13/slack",
@@ -74,16 +74,16 @@
         },
         {
             "name": "arietimmerman/laravel-scim-server",
-            "version": "v0.5.5",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/arietimmerman/laravel-scim-server.git",
-                "reference": "8fb5b1cc0d28ace820b5b38a543d801fd49ada90"
+                "url": "https://github.com/grokability/laravel-scim-server.git",
+                "reference": "10be959682d47bb8c78255168262a7cbb7586146"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arietimmerman/laravel-scim-server/zipball/8fb5b1cc0d28ace820b5b38a543d801fd49ada90",
-                "reference": "8fb5b1cc0d28ace820b5b38a543d801fd49ada90",
+                "url": "https://api.github.com/repos/grokability/laravel-scim-server/zipball/10be959682d47bb8c78255168262a7cbb7586146",
+                "reference": "10be959682d47bb8c78255168262a7cbb7586146",
                 "shasum": ""
             },
             "require": {
@@ -98,6 +98,7 @@
                 "laravel/legacy-factories": "*",
                 "orchestra/testbench": "^5.0|^6.0"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -114,7 +115,11 @@
                     "ArieTimmerman\\Laravel\\SCIMServer\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "ArieTimmerman\\Laravel\\SCIMServer\\Tests\\": "tests"
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -126,10 +131,9 @@
             ],
             "description": "Laravel Package for creating a SCIM server",
             "support": {
-                "issues": "https://github.com/arietimmerman/laravel-scim-server/issues",
-                "source": "https://github.com/arietimmerman/laravel-scim-server/tree/v0.5.5"
+                "source": "https://github.com/grokability/laravel-scim-server/tree/master"
             },
-            "time": "2022-02-03T20:56:31+00:00"
+            "time": "2022-03-31T19:29:59+00:00"
         },
         {
             "name": "asm89/stack-cors",
@@ -13648,7 +13652,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "arietimmerman/laravel-scim-server": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

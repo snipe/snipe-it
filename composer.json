@@ -10,6 +10,12 @@
   ],
   "license": "AGPL-3.0-or-later",
   "type": "project",
+  "repositories": [
+      {
+          "type": "vcs",
+          "url": "https://github.com/grokability/laravel-scim-server"
+      }
+  ],
   "require": {
     "php": ">=7.4 <8.1",
     "ext-curl": "*",
@@ -18,7 +24,7 @@
     "ext-mbstring": "*",
     "ext-pdo": "*",
     "alek13/slack": "^2.0",
-    "arietimmerman/laravel-scim-server": "^0.5.5",
+    "arietimmerman/laravel-scim-server": "dev-master",
     "bacon/bacon-qr-code": "^2.0",
     "barryvdh/laravel-debugbar": "^3.6",
     "barryvdh/laravel-dompdf": "^1.0",
