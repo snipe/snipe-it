@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
-
+use Illuminate\Support\Facades\Log;
 class Consumable extends SnipeModel
 {
     use HasFactory;
@@ -227,7 +227,7 @@ class Consumable extends SnipeModel
      */
     public function users()
     {
-        return $this->belongsToMany(\App\Models\User::class, 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('id', 'totalnum')->withTrashed()->withTimestamps();
+        return $this->belongsToMany(\App\Models\User::class, 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('id', 'totalnum','checkoutnote')->withTrashed()->withTimestamps();
     }
 
 
@@ -304,7 +304,7 @@ class Consumable extends SnipeModel
      * Gets the number of consumed consumables
      *
      * @author [A. Rahardianto] [<veenone@gmail.com>]
-     * @since [v.5.5]
+     * @since [v.6]
      * @return int
      */
     public function numConsumed()
@@ -318,12 +318,28 @@ class Consumable extends SnipeModel
         return $checkedouttotal;
     }
 
-    
+
+    /**
+     * Gets the number of last checked out consumables
+     *
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @since [v.6]
+     * @return int
+     */
+    public function lastConsumed()
+    {
+        $checkedouttotal = null;      
+        $checkoutnote = $this->users()->orderBy('created_at','desc')->get();
+        $last = $checkoutnote->last()['pivot']['totalnum'];  
+        return $last; 
+    }
+
+        
     /**
      * Gets the number of checked out consumables
      *
      * @author [A. Rahardianto] [<veenone@gmail.com>]
-     * @since [v.5.5]
+     * @since [v.6]
      * @return int
      */
     public function checkoutTotal()
@@ -331,6 +347,24 @@ class Consumable extends SnipeModel
         $checkedout = $this->users->count();
         
         return $checkedout;
+    }
+
+        
+    /**
+     * Gets the latest checkout note
+     *
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @since [v.6]
+     * @return string
+     */
+    public function checkoutNote()
+    {        
+        $checkoutnote=null;   
+        $first=null;             
+        $checkoutnote = $this->users()->orderBy('created_at','desc')->get();
+        $last = $checkoutnote->last()['pivot']['checkoutnote'];  
+        return $last;              
+        
     }
 
     /**

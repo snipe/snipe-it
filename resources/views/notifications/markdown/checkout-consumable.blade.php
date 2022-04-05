@@ -17,8 +17,11 @@
 @if (isset($item->model_no))
 | **{{ trans('general.model_no') }}** | {{ $item->model_no }} |
 @endif
-@if ($note)
-| **{{ trans('mail.additional_notes') }}** | {{ $note }} |
+@if (isset($totalnum))
+| **{{ trans('general.total') }}** | {{$item->present()->lastConsumed() }} pc(s)|
+@endif
+@if (isset($checkoutnote))
+| **{{ trans('mail.additional_notes') }}** | {{ $item->present()->checkoutNote() }} |
 @endif
 @if ($admin)
 | **{{ trans('general.administrator') }}** | {{ $admin->present()->fullName() }} |
@@ -43,6 +46,10 @@
 **[✔ {{ trans('mail.i_have_read') }}]({{ $accept_url }})**
 @endif
 
+@component('mail::table')
+|        |          |
+| ------------- | ------------- |
+@endcomponent
 
 {{ trans('mail.best_regards') }}
 
