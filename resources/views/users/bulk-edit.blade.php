@@ -97,6 +97,22 @@
                             </div>
                         </div> <!--/form-group-->
 
+                        <!--LDAP imported-->
+                        <div class="form-group">
+                            <div class="col-sm-3 control-label">
+                                {{ trans('general.ldap_import') }}
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="checkbox">
+                                    <label for="ldap_import">
+                                        {{ Form::checkbox('ldap_import', 1, false, ['aria-label'=>'ldap_import']) }} {{  trans('general.ldap_import_select') }} <br>
+                                        {{ Form::checkbox('ldap_import', 0, false, ['aria-label'=>'ldap_import']) }} {{  trans('general.ldap_import_unselect') }} <br>
+
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
 
                         <!--  Groups -->
                         <div class="form-group{{ $errors->has('groups') ? ' has-error' : '' }}">
