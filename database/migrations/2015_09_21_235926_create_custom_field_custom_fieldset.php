@@ -14,13 +14,14 @@ class CreateCustomFieldCustomFieldset extends Migration {
 	{
 		Schema::create('custom_field_custom_fieldset', function(Blueprint $table)
 		{
+            $table->bigIncrements('id')->first();
 			$table->integer('custom_field_id');
 			$table->integer('custom_fieldset_id');
-
 			$table->integer('order');
 			$table->boolean('required');
-      $table->engine = 'InnoDB';
+            $table->engine = 'InnoDB';
 		});
+
 	}
 
 	/**
