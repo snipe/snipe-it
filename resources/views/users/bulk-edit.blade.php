@@ -105,8 +105,8 @@
                             <div class="col-sm-9">
                                 <div class="checkbox">
                                     <label for="ldap_import">
-                                        {{ Form::checkbox('ldap_import', 1, false, ['aria-label'=>'ldap_import']) }} {{  trans('general.ldap_import_select') }} <br>
-                                        {{ Form::checkbox('ldap_import', 0, false, ['aria-label'=>'ldap_import']) }} {{  trans('general.ldap_import_unselect') }} <br>
+                                        {{ Form::radio('ldap_import', 1, false, ['aria-label'=>'ldap_import']) }} {{  trans('general.ldap_import_select') }} <br>
+                                        {{ Form::radio('ldap_import', 0, false, ['aria-label'=>'ldap_import']) }} {{  trans('general.ldap_import_unselect') }} <br>
 
                                     </label>
                                 </div>
