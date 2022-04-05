@@ -30,7 +30,7 @@ class Actionlog extends SnipeModel
      * 
      * @var array
      */
-    protected $searchableAttributes = ['action_type', 'note', 'log_meta'];
+    protected $searchableAttributes = ['action_type', 'note', 'log_meta','user_id'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -38,7 +38,8 @@ class Actionlog extends SnipeModel
      * @var array
      */
     protected $searchableRelations = [
-        'company' => ['name']
+        'company' => ['name'],
+        'user' => ['first_name','last_name','username'],
     ];
 
     /**
