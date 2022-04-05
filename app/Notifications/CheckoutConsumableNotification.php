@@ -10,6 +10,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 
+
 class CheckoutConsumableNotification extends Notification
 {
     use Queueable;
@@ -112,8 +113,7 @@ class CheckoutConsumableNotification extends Notification
         $eula = $this->item->getEula();
         $req_accept = $this->item->requireAcceptance();
 
-        $accept_url = is_null($this->acceptance) ? null : route('account.accept.item', $this->acceptance);
-
+        $accept_url = is_null($this->acceptance) ? null : route('account.accept.item', $this->acceptance);        
         return (new MailMessage)->markdown('notifications.markdown.checkout-consumable',
             [
                 'item'          => $this->item,
@@ -123,6 +123,8 @@ class CheckoutConsumableNotification extends Notification
                 'eula'          => $eula,
                 'req_accept'    => $req_accept,
                 'accept_url'    => $accept_url,
+                'totalnum'      => $this->item->lastConsumed(),
+                'checkoutnote'  => $this->item->checkoutNote()
             ])
             ->subject(trans('mail.Confirm_consumable_delivery'));
     }
