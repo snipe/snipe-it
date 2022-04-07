@@ -105,9 +105,9 @@ class AssetCheckinController extends Controller
             $asset->location_id =  e($request->get('location_id'));
         }
 
-        $checkin_at = date('Y-m-d');
-        if($request->filled('checkin_at')){
-            $checkin_at = $request->input('checkin_at');
+        $checkin_at = date('Y-m-d H:i:s');
+        if (($request->filled('checkin_at')) && ($request->get('checkin_at') != date('Y-m-d'))) {
+            $checkin_at = $request->get('checkin_at');
         }
 
         // Was the asset updated?
