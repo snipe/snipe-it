@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Setting;
 use App\Notifications\AuditNotification;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 trait Loggable
@@ -114,6 +115,10 @@ trait Loggable
         $log->location_id = null;
         $log->note = $note;
         $log->action_date = $action_date;
+
+        if (! $log->action_date) {
+            $log->action_date = date('Y-m-d H:i:s');
+        }
 
         if (Auth::user()) {
             $log->user_id = Auth::user()->id;
