@@ -108,6 +108,12 @@ class BulkUsersController extends Controller
         User::whereIn('id', $user_raw_array)
             ->where('id', '!=', Auth::id())->update($this->update_array);
 
+        if(array_key_exists('location_id', $this->update_array)){
+            Asset::where('assigned_type', User::class)
+                ->whereIn('assigned_to', $user_raw_array)
+                ->update(['location_id' => $this->update_array['location_id']]);
+        }
+
         // Only sync groups if groups were selected
         if ($request->filled('groups')) {
             foreach ($users as $user) {
