@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Setting;
 use App\Notifications\AuditNotification;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 trait Loggable

@@ -111,7 +111,6 @@ class AssetCheckinController extends Controller
             $checkin_at = $request->get('checkout_at');
         }
 
-
         if(!empty($asset->licenseseats->all())){
             foreach ($asset->licenseseats as $seat){
                 $seat->assigned_to = null;
