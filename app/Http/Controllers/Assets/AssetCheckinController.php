@@ -107,7 +107,7 @@ class AssetCheckinController extends Controller
         }
 
         $checkin_at = date('Y-m-d H:i:s');
-        if (($request->filled('checkin_at')) && ($request->get('checkin_at') != date('Y-m-d'))) {
+        if (($request->filled('checkout_at')) && ($request->get('checkin_at') != date('Y-m-d'))) {
             $checkin_at = $request->get('checkout_at');
         }
 
