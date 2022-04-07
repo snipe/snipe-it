@@ -37,6 +37,15 @@
           </div>
           @endif
 
+          <!-- Notes -->         	  
+	    <div class="form-group {{ $errors->has('notes') ? 'error' : '' }}">
+            <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
+            <div class="col-md-7">
+              <textarea class="col-md-6 form-control" id="notes" name="notes" disabled>{{ old('notes', $consumable->notes) }}</textarea>
+              {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+            </div>
+          </div>
+
           <!-- number of consumables -->         
             <div class="form-group {{ $errors->has('total') ? ' has-error' : '' }}">
               <label for="total" class="col-md-3 control-label">{{ trans('admin/consumables/general.total') }}
@@ -61,28 +70,28 @@
                   <div class="callout callout-info">
 
                     @if ($consumable->category->require_acceptance=='1')
-                      <i class="far fa-envelope"></i>
+                      <i class="fa fa-envelope"></i>
                       {{ trans('admin/categories/general.required_acceptance') }}
                       <br>
                     @endif
 
                     @if ($consumable->getEula())
-                      <i class="far fa-envelope"></i>
+                      <i class="fa fa-envelope"></i>
                       {{ trans('admin/categories/general.required_eula') }}
                         <br>
                     @endif
 
                     @if ($snipeSettings->slack_endpoint!='')
-                        <i class="fab fa-slack"></i>
+                        <i class="fa fa-slack"></i>
                         A slack message will be sent
                     @endif
                   </div>
                 </div>
               </div>
             @endif
-          <!-- Note -->
+          <!-- Checout Note -->
           <div class="form-group {{ $errors->has('checkoutnote') ? 'error' : '' }}">
-            <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
+            <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.checkoutnotes') }}</label>
             <div class="col-md-7">
               <textarea class="col-md-6 form-control" id="checkoutnote" name="checkoutnote"></textarea>	      
               {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}

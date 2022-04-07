@@ -350,5 +350,6 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
-    'total'                 => 'Total Items'
+    'total'                 => 'Total Items',
+    'consumable_checkout_history_title' => 'Consumable Checkout History',
 ];

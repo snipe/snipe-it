@@ -22,7 +22,7 @@
       @if ($consumable->id)
       <div class="box-header with-border">
         <div class="box-heading">
-          <h2 class="box-title"> {{ $consumable->name }}   ({{ $consumable->numRemaining()  }} out of {{ $consumable->qty}}  {{ trans('admin/consumables/general.remaining') }})</h2>
+          <h2 class="box-title"> {{ $consumable->name }}   ({{ $consumable->numRemaining()  }} / {{ $consumable->qty}}  {{ trans('admin/consumables/general.remaining') }})</h2>
         </div>
       </div><!-- /.box-header -->
       @endif
