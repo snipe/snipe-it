@@ -647,7 +647,7 @@
 
     
     function totalFormatter(data) {
-        return 'Total : ' + data.length;
+        return "{{trans('general.total')}} : " + data.length;
     }
 
     function sumFormatter(data) {
