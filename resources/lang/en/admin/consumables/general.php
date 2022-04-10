@@ -11,5 +11,5 @@ return array(
     'replenish'                         => 'Replenish Consumable Stock',
     'initial_qty'                       => 'Initial Quantity',
     'totalreplenish'                    => 'Replenish Quantity',
-    'replenishnote'                     => 'Remark',
+    'replenishnote'                     => 'Replenish Note',
 );
