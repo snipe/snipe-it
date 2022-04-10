@@ -21,7 +21,7 @@
         @if ($consumable->id)
           <div class="box-header with-border">
             <div class="box-heading">
-              <h2 class="box-title">{{ $consumable->name }}   ({{ $consumable->numRemaining()  }} out of {{ $consumable->qty}}  {{ trans('admin/consumables/general.remaining') }}) </h2>
+              <h2 class="box-title">{{ $consumable->name }}   ({{ $consumable->numRemaining()  }} / {{ $consumable->qty}}  {{ trans('admin/consumables/general.remaining') }}) </h2>
             </div>
           </div><!-- /.box-header -->
         @endif
@@ -78,17 +78,15 @@
               </div>
             @endif
 
-<!--             
-            @can('update', \App\Models\Asset::class)
-                        <li class="pull-right">
-                            <a href="#" data-toggle="modal" data-target="#uploadFileModal">
-                                <i class="fas fa-paperclip" aria-hidden="true"></i>
-                                {{ trans('button.upload') }}
-                            </a>
-                        </li>
-                    @endcan -->
-          <!-- order number -->        
-           
+          <!-- Consumable Note -->
+          <div class="form-group {{ $errors->has('notes') ? 'error' : '' }}">
+            <label for="notes" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
+            <div class="col-md-7">
+              <label class="col-md-6 form-control" id="notes" name="notes" disabled="disabled">{{ old('notes', $consumable->notes) }}</label>	      
+              {!! $errors->first('notes', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+            </div>
+          </div>
+          <!-- order number -->                   
           <div class="form-group {{ $errors->has('order_number') ? ' has-error' : '' }}">
               <label for="order_number" class="col-md-3 control-label">{{ trans('general.order_number') }}
                 <i class='icon-asterisk'></i></label>
@@ -106,17 +104,13 @@
               <label for="document_archive" class="col-md-3 control-label">{{ trans('general.document_archive') }}
                 <i class='icon-asterisk'></i></label>
               <div class="col-md-5" >
-              Select file : <input type='file' name='file' id='file' class='form-control' ><br>
-              <input type="submit" value="Upload" class="btn btn-primary">
-               <!-- <input type='button' class='btn btn-info' value='Upload' id='btn_upload'> -->
-                    <div style="float:right;" class="col-ld-1">
+              <input type='file' name='file' id='file' class='form-control' >             
+                  <div style="float:right;" class="col-ld-1">
                     {!! $errors->first('order_number', '<span class="alert-msg" aria-hidden="true" width=100% position=absolute><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}    
-                    </div>
-                    <!-- </input>                -->
-                             
+                  </div>
               </div>
             </div>    
-          <!-- Note -->
+          <!-- Replenish Note -->
           <div class="form-group {{ $errors->has('replenishnote') ? 'error' : '' }}">
             <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
             <div class="col-md-7">

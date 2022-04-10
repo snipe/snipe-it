@@ -76,8 +76,6 @@ class ConsumableReplenishController extends Controller
                 Storage::makeDirectory('private_uploads/consumables/docs', 775);
             }
 
-            // foreach ($request->file('file') as $file) {
-                Log::debug( 'kakakaka' . $request->file('file')->getClientOriginalName());
             $file = $request->file('file');
             $extension =  $request->file('file')->getClientOriginalExtension();
             $file_name = 'consumable_replenish-'.$consumable->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
@@ -99,15 +97,6 @@ class ConsumableReplenishController extends Controller
             Storage::put('private_uploads/consumables/docs/'.$file_name, file_get_contents($file));
             }
             $consumable->logUpload($file_name, e($request->get('notes')));
-            // }
-            // return redirect()->back()->with('success', trans('admin/hardware/message.upload.success'));
-
-            // $docfilepath = $request->file('file');
-            // Log::debug('doc file path: '. $request->input('file'));
-            // $uploadpath = public_path('uploads/consumables/replenish_doc');
-            // $formattedfilename = 'consumable_replenish_' . time() . $docfilepath->getClientOriginalName();
-            // $docfilepath->move($uploadpath, $formattedfilename);
-
         } 
 
         
