@@ -112,7 +112,7 @@
             </div>    
           <!-- Replenish Note -->
           <div class="form-group {{ $errors->has('replenishnote') ? 'error' : '' }}">
-            <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
+            <label for="note" class="col-md-3 control-label">{{ trans('admin/consumables/general.replenishnote') }}</label>
             <div class="col-md-7">
               <textarea class="col-md-6 form-control" id="replenishnote" name="replenishnote">{{ old('note', $consumable->checkoutnote) }}</textarea>	      
               {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
