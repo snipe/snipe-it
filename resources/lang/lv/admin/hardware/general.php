@@ -6,6 +6,7 @@ return [
     'archived'  				=> 'Arhivēts',
     'asset'  					=> 'Aktīvs',
     'bulk_checkout'             => 'Lielapjoma izsniegšana',
+    'bulk_checkin'              => 'Checkin Assets',
     'checkin'  					=> 'Reģistrēšanās aktīvs',
     'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Clone Asset',

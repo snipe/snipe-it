@@ -41,5 +41,7 @@ return [
     'make_required' => 'Valgfritt - klikk for å gjøre påkrevd',
     'reorder' => 'Endre rekkefølge',
     'db_field' => 'DB-felt',
-    'db_convert_warning' => 'ADVARSEL: Dette feltet er i tabellen for egendefinerte felt som <code>:db_column</code>, men burde være <code>:expected</code>.'
+    'db_convert_warning' => 'ADVARSEL: Dette feltet er i tabellen for egendefinerte felt som <code>:db_column</code>, men burde være <code>:expected</code>.',
+    'is_unique' => 'This value must be unique across all assets',
+    'unique' => 'Unique',
 ];

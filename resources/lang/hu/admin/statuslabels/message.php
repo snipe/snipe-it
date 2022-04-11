@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'Ezeket az eszközöket senkihez nem lehet hozzárendelni.',
-        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
+        'deployable'   => 'Ezek az eszközök kiadásra készek. Ha kiadásra kerülnek, akkor a <i class="fas fa-circle text-blue"></i> <strong>Kiadva</strong> állapotot veszik fel.',
         'archived'   => 'Ezeket az eszközöket nem lehet kijelölni, és csak az Archivált nézetben jelenhetnek meg. Ez hasznos lehet az eszközökkel kapcsolatos információk megőrzésére költségvetés / történelmi célokra, de a napi eszközlista megtartásával.',
         'pending'   => 'Ezeket az eszközöket még nem lehet bárkihez hozzárendelni, gyakran azokat a tételeket használják, amelyek ki vannak javítva, de várhatóan visszatérnek a forgalomba.',
     ],

@@ -24,7 +24,7 @@ return [
     'two_factor_admin_optin_help' => 'Vaše současná nastavení administrátora umožňují selektivní vynucení dvoufaktorového ověřování.  ',
     'two_factor_enrolled' => 'Přihlášeno zařízení 2FA ',
     'two_factor_active'   => '2FA aktivní ',
-    'user_deactivated'  => 'User is de-activated',
+    'user_deactivated'  => 'Uživatel je deaktivován',
     'activation_status_warning' => 'Do not change activation status',
     'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
     'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',

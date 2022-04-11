@@ -19,6 +19,6 @@ return [
     'go'                        => 'Go',
     'bulk_actions'              => 'Bulk Actions',
     'add_maintenance'           => 'Add Maintenance',
-    'append'                    => 'Append',
+    'append'                    => 'הוסף',
     'new'                       => 'New',
 ];

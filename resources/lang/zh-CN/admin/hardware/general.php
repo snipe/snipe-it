@@ -6,6 +6,7 @@ return [
     'archived'  				=> '已存档',
     'asset'  					=> '资产',
     'bulk_checkout'             => '分配资产',
+    'bulk_checkin'              => '归还资产',
     'checkin'  					=> '借入资产',
     'checkout'  				=> '借出资产',
     'clone'  					=> '复制资产',

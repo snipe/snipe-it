@@ -6,6 +6,7 @@ return [
     'archived'  				=> 'Arhiveeritud',
     'asset'  					=> 'Vahend',
     'bulk_checkout'             => 'Vara kasutusele võtt',
+    'bulk_checkin'              => 'Checkin Assets',
     'checkin'  					=> 'Checkin Asset',
     'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Klooni vahend',

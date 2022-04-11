@@ -2,6 +2,6 @@
 
 return [
     'select_company' => 'Vállalat kiválasztása',
-    'about_companies' => 'About Companies',
-    'about_companies_description' => '        You can use companies as a simple informative field, or you can use them to restrict asset visibility and availability to users with a specific company by enabling Full Company Support in your Admin Settings.',
+    'about_companies' => 'A vállalatokról',
+    'about_companies_description' => '        Használhatja a vállalatokat egyszerű tájékoztató mezőként, vagy használhatja őket arra, hogy az eszközök láthatóságát és elérhetőségét egy adott vállalathoz tartozó felhasználókra korlátozza, ha engedélyezi a Teljes vállalat-támogatást a Rendszergazdai beállításokban.',
 ];

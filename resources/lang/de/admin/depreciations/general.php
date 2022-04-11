@@ -10,7 +10,7 @@ return [
     'number_of_months'  					=> 'Anzahl der Monate',
     'update'  					            => 'Abschreibung aktualisieren',
     'depreciation_min'                      => 'Minimaler Wert nach Abschreibung',
-    'no_depreciations_warning'               => '<strong>Warning: </strong>
-                      You do not currently have any depreciations set up.
-                      Please set up at least one depreciation to view the depreciation report.',
+    'no_depreciations_warning'               => '<strong>Warnung: </strong>
+                      Sie haben derzeit keine Abschreibungen eingerichtet.
+                      Bitte richten Sie mindestens eine Abschreibung ein, um den Abschreibungsbericht anzuzeigen.',
 ];

@@ -41,5 +41,7 @@ return [
     'make_required' => 'Optional - click to make required',
     'reorder' => 'Reorder',
     'db_field' => 'DB Field',
-    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.'
+    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.',
+    'is_unique' => 'This value must be unique across all assets',
+    'unique' => 'Unique',
 ];

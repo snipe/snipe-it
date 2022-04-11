@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'sent'	        => 'உங்கள் கடவுச்சொல் இணைப்பு அனுப்பப்பட்டது!',
+    'sent'	        => 'Success: If that email address exists in our system, a password recovery email has been sent.',
     'user'			=> 'No matching active user found with that email.',
 ];

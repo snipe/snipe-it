@@ -6,6 +6,7 @@ return [
     'archived'  				=> 'Archifwyd',
     'asset'  					=> 'Ased',
     'bulk_checkout'             => 'Nodi Asedau Allan',
+    'bulk_checkin'              => 'Checkin Assets',
     'checkin'  					=> 'Nodi Asedau I Mewn',
     'checkout'  				=> 'Nodi Asedau Allan',
     'clone'  					=> 'Dyblygu Ased',

@@ -6,6 +6,7 @@ return [
     'archived'  				=> 'Zarchiwizowane',
     'asset'  					=> 'Nabytek',
     'bulk_checkout'             => 'Przypisz aktywa',
+    'bulk_checkin'              => 'Checkin Assets',
     'checkin'  					=> 'Potwierdzanie zasobu/aktywa',
     'checkout'  				=> 'Przypisz zasób',
     'clone'  					=> 'Klonuj zasób',
@@ -21,7 +22,7 @@ return [
     'pending'  					=> 'Oczekuje',
     'undeployable'  			=> 'Niemożliwe do wdrożenia',
     'view'  					=> 'Wyświetl nabytki',
-    'csv_error' => 'You have an error in your CSV file:',
+    'csv_error' => 'Wystąpił błąd w twoim pliku CSV:',
     'import_text' => '
     <p>
     Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
@@ -38,6 +39,6 @@ return [
     'csv_import_match_username' => 'Spróbuj dopasować użytkowników po nazwie użytkownika',
     'error_messages' => 'Komunikat błędu:',
     'success_messages' => 'Success messages:',
-    'alert_details' => 'Please see below for details.',
+    'alert_details' => 'Więcej szczegółów znajduje się poniżej.',
     'custom_export' => 'Eksport niestandardowy'
 ];

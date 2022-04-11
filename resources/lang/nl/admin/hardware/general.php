@@ -6,6 +6,7 @@ return [
     'archived'  				=> 'Gearchiveerd',
     'asset'  					=> 'Asset',
     'bulk_checkout'             => 'Asset uitchecken',
+    'bulk_checkin'              => 'Assets inchecken',
     'checkin'  					=> 'Asset inchecken',
     'checkout'  				=> 'Asset uitchecken',
     'clone'  					=> 'Dupliceer Asset',
@@ -24,18 +25,18 @@ return [
     'csv_error' => 'Je hebt een fout in je CSV-bestand:',
     'import_text' => '
     <p>
-    Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
+    Upload een CSV bestand dat de asset historie bevat. De assets en gebruikers MOETEN al in het systeem staan anders worden ze overgeslagen. Het koppelen van assets gebeurt op basis van assets Tag. We proberen om een gebruiker te vinden op basis van de gebruikersnaam die je hebt opgegeven en de onderstaande criteria. Indien je geen criteria selecteert proberen we te koppelen op het gebruikersnaam formaat zoals geconfigureerd in de Admin &gt; Algemene Instellingen.
     </p>
 
-    <p>Fields included in the CSV must match the headers: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Any additional fields will be ignored. </p>
+    <p>Velden in de CSV moet overeenkomen met de headers: <strong>Asset Tag, Naam, Check-out Datum, Check-in Datum</strong>. Alle additionele velden worden overgeslagen. </p>
 
-    <p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
+    <p>Check-in Datum: lege of toekomstige check-in datum worden ingecheckt aan de betreffende gebruiker. Zonder Check-in kolom maken we een check-in datum met vandaag als datum.</p>
     ',
-    'csv_import_match_f-l' => 'Try to match users by firstname.lastname (jane.smith) format',
-    'csv_import_match_initial_last' => 'Try to match users by first initial last name (jsmith) format',
-    'csv_import_match_first' => 'Try to match users by first name (jane) format',
-    'csv_import_match_email' => 'Try to match users by email as username',
-    'csv_import_match_username' => 'Try to match users by username',
+    'csv_import_match_f-l' => 'Probeer gebruikers te koppelen via voornaam.achternaam (Jan.Janssen) opmaak',
+    'csv_import_match_initial_last' => 'Probeer gebruikers te koppelen via eerste initiaal en achternaam (jjanssen) opmaak',
+    'csv_import_match_first' => 'Probeer gebruikers te koppelen via voornaam (jan) opmaak',
+    'csv_import_match_email' => 'Probeer gebruikers te koppelen via e-mail als gebruikersnaam',
+    'csv_import_match_username' => 'Probeer gebruikers te koppelen via gebruikersnaam',
     'error_messages' => 'Foutmeldingen:',
     'success_messages' => 'Succesvolle berichten:',
     'alert_details' => 'Zie hieronder voor details.',

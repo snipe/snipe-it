@@ -5,14 +5,15 @@ return [
     'about_assets_text'            => 'נכסים הם פריטים במעקב לפי מספר סידורי או תג נכס. הם נוטים להיות פריטים בעלי ערך גבוה יותר, כאשר מזהים פריטים ספציפיים.',
     'archived'  				=> 'בארכיון',
     'asset'  					=> 'נכס',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => 'שייך נכס',
+    'bulk_checkin'              => 'החזר נכסים לזמינות',
     'checkin'  					=> 'רכוש',
     'checkout'  				=> 'רכוש Checkout',
     'clone'  					=> 'נכס משוכפל',
     'deployable'  				=> 'ניתן לפריסה',
-    'deleted'  					=> 'This asset has been deleted.',
+    'deleted'  					=> 'הנכס הזה נמחק.',
     'edit'  					=> 'ערוך נכס',
-    'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
+    'model_deleted'  			=> 'המודל של הנכס נמחק. יש לשחזר את המודל לפני שניתן לשחזר את הנכס.',
     'requestable'               => 'ניתן לבקש',
     'requested'				    => 'מבוקש',
     'not_requestable'           => 'Not Requestable',
@@ -21,7 +22,7 @@ return [
     'pending'  					=> 'ממתין ל',
     'undeployable'  			=> 'לא ניתן לפריסה',
     'view'  					=> 'הצג נכס',
-    'csv_error' => 'You have an error in your CSV file:',
+    'csv_error' => 'קיימת שגיאה בקובץ ה-CSV שלך:',
     'import_text' => '
     <p>
     Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
@@ -36,8 +37,8 @@ return [
     'csv_import_match_first' => 'Try to match users by first name (jane) format',
     'csv_import_match_email' => 'Try to match users by email as username',
     'csv_import_match_username' => 'Try to match users by username',
-    'error_messages' => 'Error messages:',
-    'success_messages' => 'Success messages:',
-    'alert_details' => 'Please see below for details.',
-    'custom_export' => 'Custom Export'
+    'error_messages' => 'שגיאות:',
+    'success_messages' => 'אישור:',
+    'alert_details' => 'נא ראה הסבר בהמשך.',
+    'custom_export' => 'יבוא מותאם'
 ];

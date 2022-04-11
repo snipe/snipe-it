@@ -6,6 +6,7 @@ return [
     'archived'  				=> 'Архивлагдсан',
     'asset'  					=> 'Актив',
     'bulk_checkout'             => 'Хөрөнгийг олгох',
+    'bulk_checkin'              => 'Checkin Assets',
     'checkin'  					=> 'Checkin Asset',
     'checkout'  				=> 'Тооцоот Хөрөнгийн',
     'clone'  					=> 'Clone Asset',

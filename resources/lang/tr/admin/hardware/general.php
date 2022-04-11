@@ -6,6 +6,7 @@ return [
     'archived'  				=> 'Arşivlenmiş',
     'asset'  					=> 'Demirbaş',
     'bulk_checkout'             => 'Varlıkları Kullanıma Alma',
+    'bulk_checkin'              => 'Checkin Assets',
     'checkin'  					=> 'Demirbaş Girişi Yap',
     'checkout'  				=> 'Ödenme Öğe',
     'clone'  					=> 'Demirbaşı Kopyala',

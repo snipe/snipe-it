@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'sent'	        => 'Le lien vers votre mot de passe a bien été envoyé!',
+    'sent'	        => 'Success: If that email address exists in our system, a password recovery email has been sent.',
     'user'			=> 'Aucun utilisateur actif correspondant trouvé avec ce courriel.',
 ];

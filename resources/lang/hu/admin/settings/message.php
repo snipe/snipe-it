@@ -11,8 +11,8 @@ return [
         'file_deleted'          => 'A biztonsági mentés sikeresen törölve lett.',
         'generated'             => 'Új biztonsági másolatot sikerült létrehozni.',
         'file_not_found'        => 'A biztonsági másolat nem található a kiszolgálón.',
-        'restore_warning'       => 'Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This will also log out all of your existing users (including you).',
-        'restore_confirm'       => 'Are you sure you wish to restore your database from :filename?'
+        'restore_warning'       => 'Igen, állítsa vissza. Tudomásul veszem, hogy ez felülírja az adatbázisban jelenleg meglévő adatokat. Ez egyben az összes meglévő felhasználó (beleértve Önt is) kijelentkezik.',
+        'restore_confirm'       => 'Biztos, hogy vissza szeretné állítani az adatbázisát a :filename -ből?'
     ],
     'purge' => [
         'error'     => 'Hiba történt a tisztítás során.',
@@ -20,24 +20,24 @@ return [
         'success'               => 'A törölt rekordok sikeresen feltöltöttek.',
     ],
     'mail' => [
-        'sending' => 'Sending Test Email...',
-        'success' => 'Mail sent!',
-        'error' => 'Mail could not be sent.',
-        'additional' => 'No additional error message provided. Check your mail settings and your app log.'
+        'sending' => 'Teszt e-mail küldése...',
+        'success' => 'Levél elküldve!',
+        'error' => 'A levelet nem lehetett elküldeni.',
+        'additional' => 'Nincs további hibaüzenet. Ellenőrizze a levelezési beállításokat és az alkalmazás naplóját.'
     ],
     'ldap' => [
-        'testing' => 'Testing LDAP Connection, Binding & Query ...',
-        '500' => '500 Server Error. Please check your server logs for more information.',
-        'error' => 'Something went wrong :(',
-        'sync_success' => 'A sample of 10 users returned from the LDAP server based on your settings:',
-        'testing_authentication' => 'Testing LDAP Authentication...',
-        'authentication_success' => 'User authenticated against LDAP successfully!'
+        'testing' => 'LDAP kapcsolat, kötés és lekérdezés tesztelése ...',
+        '500' => '500 Szerverhiba. Kérjük, további információkért ellenőrizze a szervernaplókat.',
+        'error' => 'Valami hiba történt :(',
+        'sync_success' => 'Az LDAP-kiszolgálóról visszaküldött 10 felhasználó mintája az Ön beállításai alapján:',
+        'testing_authentication' => 'LDAP-hitelesítés tesztelése...',
+        'authentication_success' => 'A felhasználó sikeresen hitelesített az LDAP-nál!'
     ],
     'slack' => [
-        'sending' => 'Sending Slack test message...',
-        'success_pt1' => 'Success! Check the ',
-        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
-        '500' => '500 Server Error.',
-        'error' => 'Something went wrong.',
+        'sending' => 'Slack tesztüzenet küldése...',
+        'success_pt1' => 'Siker! Ellenőrizze a ',
+        'success_pt2' => ' csatornát a tesztüzenethez, és ne felejtsen el a MENTÉS gombra kattintani a beállítások tárolásához.',
+        '500' => '500 Szerverhiba.',
+        'error' => 'Valami hiba történt.',
     ]
 ];

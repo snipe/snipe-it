@@ -23,8 +23,8 @@ return [
     'days_without_acceptance' => 'Nem elfogadás óta eltelt napok száma',
     'monthly_depreciation' => 'Havi értékcsökkenés',
     'assigned_to'    => 'Felelős',
-    'requesting_user' => 'Requesting User',
-    'requested_date' => 'Requested Date',
-    'changed'       => 'Changed',
-    'icon' => 'Icon',
+    'requesting_user' => 'Igénylő felhasználó',
+    'requested_date' => 'Kért időpont',
+    'changed'       => 'Módosítva',
+    'icon' => 'Ikon',
 ];

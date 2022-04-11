@@ -6,6 +6,7 @@ return [
     'archived'  				=> 'Retiré',
     'asset'  					=> 'Biens',
     'bulk_checkout'             => 'Attribuer les actifs',
+    'bulk_checkin'              => 'Restitution d\'actifs',
     'checkin'  					=> 'Retour des Biens',
     'checkout'  				=> 'Commander l\'actif',
     'clone'  					=> 'Cloner le Bien',
@@ -15,13 +16,13 @@ return [
     'model_deleted'  			=> 'Ce modèle d\'actifs a été supprimé. Vous devez restaurer le modèle avant de pouvoir restaurer l\'actif.',
     'requestable'               => 'Réquisitionnable',
     'requested'				    => 'Demandé',
-    'not_requestable'           => 'Not Requestable',
-    'requestable_status_warning' => 'Do not change  requestable status',
+    'not_requestable'           => 'Non-réquisitionnable',
+    'requestable_status_warning' => 'Ne pas modifier le statut de demande',
     'restore'  					=> 'Restaurer l\'actif',
     'pending'  					=> 'En attente',
     'undeployable'  			=> 'Non déployable',
     'view'  					=> 'Voir le Bien',
-    'csv_error' => 'You have an error in your CSV file:',
+    'csv_error' => 'Vous avez une erreur dans votre fichier CSV :',
     'import_text' => '
     <p>
     Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
@@ -34,10 +35,10 @@ return [
     'csv_import_match_f-l' => 'Try to match users by firstname.lastname (jane.smith) format',
     'csv_import_match_initial_last' => 'Try to match users by first initial last name (jsmith) format',
     'csv_import_match_first' => 'Try to match users by first name (jane) format',
-    'csv_import_match_email' => 'Try to match users by email as username',
-    'csv_import_match_username' => 'Try to match users by username',
-    'error_messages' => 'Error messages:',
-    'success_messages' => 'Success messages:',
-    'alert_details' => 'Please see below for details.',
-    'custom_export' => 'Custom Export'
+    'csv_import_match_email' => 'Essayer de faire correspondre l\'adresse de courrier électronique des utilisateurs au nom d\'utilisateur',
+    'csv_import_match_username' => 'Essayer de faire correspondre les utilisateurs par nom d\'utilisateur',
+    'error_messages' => 'Messages d\'erreur:',
+    'success_messages' => 'Messages de succès:',
+    'alert_details' => 'Voir ci-dessous pour plus de détails.',
+    'custom_export' => 'Exportation personnalisée'
 ];
