@@ -68,7 +68,7 @@
     'record_created' 		=> 'Rekord utworzony',
     'updated_at' 			=> 'Zaktualizowano',
     'currency'  			=> 'PLN', // this is deprecated
-    'current'  				=> 'Lista urzytkowników',
+    'current'  				=> 'Lista użytkowników',
     'current_password'      => 'Bieżące hasło',
     'customize_report'      => 'Dostosuj raport',
     'custom_report'         => 'Raport niestandardowy składnik aktywów',
