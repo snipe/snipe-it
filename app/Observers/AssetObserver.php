@@ -18,7 +18,7 @@ class AssetObserver
     public function updating(Asset $asset)
     {
         $attributes = $asset->getAttributes();
-        $attributesOriginal = $asset->getAttributes();
+        $attributesOriginal = $asset->getOriginal();
         
         // If the asset isn't being checked out or audited, log the update.
         // (Those other actions already create log entries.)
