@@ -26,7 +26,12 @@ class CheckoutConsumableNotification extends Notification
     public function __construct(Consumable $consumable, $checkedOutTo, User $checkedOutBy, $acceptance, $note)
     {
         $this->item = $consumable;
+        if ($checkedOutBy !== null){
         $this->admin = $checkedOutBy;
+        } else {
+    $this->admin = null;            
+        }
+        
         $this->note = $note;
         $this->target = $checkedOutTo;
         $this->acceptance = $acceptance;

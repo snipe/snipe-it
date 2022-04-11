@@ -176,6 +176,12 @@ return [
             'note'       => '',
             'display'    => true,
         ],
+        [
+            'permission' => 'consumables.selfcheckout',
+            'label'      => 'Self Checkout ',
+            'note'       => '',
+            'display'    => true,
+        ],
     ],
 
     'Licenses' => [
