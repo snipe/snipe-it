@@ -738,7 +738,7 @@
                   <td>
                     {!! Helper::formatCurrencyOutput($consumable->purchase_cost) !!}
                   </td>
-                  <td>{{ $consumable->created_at }}</td>
+                  <td>{{ $consumable->pivot->created_at }}</td>                      
                 </tr>
                 @endforeach
               </tbody>

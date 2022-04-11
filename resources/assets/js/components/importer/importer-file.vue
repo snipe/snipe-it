@@ -21,7 +21,7 @@
                         <label for="import-update">Update Existing Values?:</label>
                     </div>
                     <div class="col-md-7 col-xs-12">
-                        <input type="checkbox" class="iCheck minimal" name="import-update" v-model="options.update">
+                        <input type="checkbox" class="icheckbox_minimal" name="import-update" v-model="options.update">
                     </div>
                 </div><!-- /dynamic-form-row -->
 
@@ -30,7 +30,7 @@
                         <label for="send-welcome">Send Welcome Email for new Users?</label>
                     </div>
                     <div class="col-md-7 col-xs-12">
-                        <input type="checkbox" class="minimal" name="send-welcome" v-model="options.send_welcome">
+                        <input type="checkbox" class="icheckbox_minimal" name="send-welcome" v-model="options.send_welcome">
                     </div>
                 </div><!-- /dynamic-form-row -->
 
@@ -39,7 +39,7 @@
                         <label for="run-backup">Backup before importing?</label>
                     </div>
                     <div class="col-md-7 col-xs-12">
-                        <input type="checkbox" class="minimal" name="run-backup" v-model="options.run_backup">
+                        <input type="checkbox" class="icheckbox_minimal" name="run-backup" v-model="options.run_backup">
                     </div>
                 </div><!-- /dynamic-form-row -->
 
@@ -100,6 +100,7 @@
 </template>
 
 <script>
+    var baseUrl = $('meta[name="baseUrl"]').attr('content');
     export default {
         props: ['file', 'customFields'],
         data() {
@@ -111,6 +112,8 @@
                 options: {
                     importType: this.file.import_type,
                     update: false,
+                    send_welcome: false,
+                    run_backup: false,
                     importTypes: [
                         { id: 'asset', text: 'Assets' },
                         { id: 'accessory', text: 'Accessories' },
@@ -266,7 +269,7 @@
                 }
                 this.statusType='pending';
                 this.statusText = "Processing...";
-                this.$http.post(route('api.imports.importFile', this.file.id), {
+                this.$http.post(baseUrl + 'api/v1/imports/process/' + this.file.id, {
                     'import-update': this.options.update,
                     'send-welcome': this.options.send_welcome,
                     'import-type': this.options.importType,
