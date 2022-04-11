@@ -17,11 +17,13 @@
 @if (isset($item->model_no))
 | **{{ trans('general.model_no') }}** | {{ $item->model_no }} |
 @endif
+| **{{ trans('mail.notes') }}** | {{ $item->present()->notes }} this is note |
+|        |          |
 @if (isset($totalnum))
-| **{{ trans('general.total') }}** | {{$item->present()->lastConsumed() }} pc(s)|
+| **{{ trans('general.total') }}** | {{$item->present()->lastConsumed() }} pc(s) |
 @endif
 @if (isset($checkoutnote))
-| **{{ trans('mail.additional_notes') }}** | {{ $item->present()->checkoutNote() }} |
+| **{{ trans('mail.checkout_note') }}** | {{ $item->present()->checkoutNote() }} |
 @endif
 @if ($admin)
 | **{{ trans('general.administrator') }}** | {{ $admin->present()->fullName() }} |

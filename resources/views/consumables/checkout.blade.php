@@ -54,8 +54,8 @@
                     <input class="form-control" type="text" name="totalnum" id="totalnum" style="width: 70px; float:left;" value="{{ old('totalnum') ?? 1 }}" > &nbsp;&nbsp;
                     <label class="control-label"> / {{ $consumable->numRemaining()  }}</label>
                     <div style="float:right;" class="col-ld-1">
-                    {!! $errors->first('totalnum', '<span class="alert-msg" aria-hidden="true" width=100% position=absolute><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}    
-</div>
+                       {!! $errors->first('totalnum', '<span class="alert-msg" aria-hidden="true" width=100% position=absolute><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}    
+                    </div>
                     </input>               
                              
               </div>
@@ -99,7 +99,7 @@
           </div>
         </div> <!-- .box-body -->
         <div class="box-footer">
-          <a class="btn btn-link" href="{{ route('consumables.index') }}">{{ trans('button.cancel') }}</a>
+          <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
           <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
        </div>
       </div>

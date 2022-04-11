@@ -77,4 +77,6 @@ return [
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'your_assets' => 'View Your Assets',
+    'notes' => 'Note',
+    'checkout_note' => 'Checkout Note'
 ];
