@@ -211,6 +211,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+var baseUrl = $('meta[name="baseUrl"]').attr('content');
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['file', 'customFields'],
   data: function data() {
@@ -222,6 +223,8 @@ __webpack_require__.r(__webpack_exports__);
       options: {
         importType: this.file.import_type,
         update: false,
+        send_welcome: false,
+        run_backup: false,
         importTypes: [{
           id: 'asset',
           text: 'Assets'
@@ -510,7 +513,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.statusType = 'pending';
       this.statusText = "Processing...";
-      this.$http.post(route('api.imports.importFile', this.file.id), {
+      this.$http.post(baseUrl + 'api/v1/imports/process/' + this.file.id, {
         'import-update': this.options.update,
         'send-welcome': this.options.send_welcome,
         'import-type': this.options.importType,
@@ -593,6 +596,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 __webpack_require__(/*! blueimp-file-upload */ "./node_modules/blueimp-file-upload/js/jquery.fileupload.js");
 
+var baseUrl = $('meta[name="baseUrl"]').attr('content');
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   /*
    * The component's data.
@@ -656,7 +660,7 @@ __webpack_require__(/*! blueimp-file-upload */ "./node_modules/blueimp-file-uplo
     fetchFiles: function fetchFiles() {
       var _this = this;
 
-      this.$http.get(route('api.imports.index')).then(function (_ref) {
+      this.$http.get(baseUrl + 'api/v1/imports').then(function (_ref) {
         var data = _ref.data;
         return _this.files = data;
       }, // Success
@@ -670,7 +674,7 @@ __webpack_require__(/*! blueimp-file-upload */ "./node_modules/blueimp-file-uplo
     fetchCustomFields: function fetchCustomFields() {
       var _this2 = this;
 
-      this.$http.get(route('api.customfields.index')).then(function (_ref2) {
+      this.$http.get(baseUrl + 'api/v1/fields').then(function (_ref2) {
         var data = _ref2.data;
         data = data.rows;
         data.forEach(function (item) {
@@ -684,7 +688,7 @@ __webpack_require__(/*! blueimp-file-upload */ "./node_modules/blueimp-file-uplo
     deleteFile: function deleteFile(file, key) {
       var _this3 = this;
 
-      this.$http["delete"](route('api.imports.destroy', file.id)).then( // Success, remove file from array.
+      this.$http["delete"](baseUrl + 'api/v1/imports/' + file.id).then( // Success, remove file from array.
       function (response) {
         _this3.files.splice(key, 1);
 
@@ -36899,7 +36903,7 @@ var render = function() {
                         expression: "options.update"
                       }
                     ],
-                    staticClass: "iCheck minimal",
+                    staticClass: "icheckbox_minimal",
                     attrs: { type: "checkbox", name: "import-update" },
                     domProps: {
                       checked: Array.isArray(_vm.options.update)
@@ -36944,7 +36948,7 @@ var render = function() {
                         expression: "options.send_welcome"
                       }
                     ],
-                    staticClass: "minimal",
+                    staticClass: "icheckbox_minimal",
                     attrs: { type: "checkbox", name: "send-welcome" },
                     domProps: {
                       checked: Array.isArray(_vm.options.send_welcome)
@@ -36990,7 +36994,7 @@ var render = function() {
                         expression: "options.run_backup"
                       }
                     ],
-                    staticClass: "minimal",
+                    staticClass: "icheckbox_minimal",
                     attrs: { type: "checkbox", name: "run-backup" },
                     domProps: {
                       checked: Array.isArray(_vm.options.run_backup)

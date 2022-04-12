@@ -187,10 +187,9 @@
 
   // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
   var global_1 =
-    // eslint-disable-next-line es/no-global-this -- safe
+    /* global globalThis -- safe */
     check(typeof globalThis == 'object' && globalThis) ||
     check(typeof window == 'object' && window) ||
-    // eslint-disable-next-line no-restricted-globals -- safe
     check(typeof self == 'object' && self) ||
     check(typeof commonjsGlobal == 'object' && commonjsGlobal) ||
     // eslint-disable-next-line no-new-func -- fallback
@@ -206,23 +205,21 @@
 
   // Detect IE8's incomplete defineProperty implementation
   var descriptors = !fails(function () {
-    // eslint-disable-next-line es/no-object-defineproperty -- required for testing
     return Object.defineProperty({}, 1, { get: function () { return 7; } })[1] != 7;
   });
 
-  var $propertyIsEnumerable = {}.propertyIsEnumerable;
-  // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
+  var nativePropertyIsEnumerable = {}.propertyIsEnumerable;
   var getOwnPropertyDescriptor$4 = Object.getOwnPropertyDescriptor;
 
   // Nashorn ~ JDK8 bug
-  var NASHORN_BUG = getOwnPropertyDescriptor$4 && !$propertyIsEnumerable.call({ 1: 2 }, 1);
+  var NASHORN_BUG = getOwnPropertyDescriptor$4 && !nativePropertyIsEnumerable.call({ 1: 2 }, 1);
 
   // `Object.prototype.propertyIsEnumerable` method implementation
   // https://tc39.es/ecma262/#sec-object.prototype.propertyisenumerable
   var f$4 = NASHORN_BUG ? function propertyIsEnumerable(V) {
     var descriptor = getOwnPropertyDescriptor$4(this, V);
     return !!descriptor && descriptor.enumerable;
-  } : $propertyIsEnumerable;
+  } : nativePropertyIsEnumerable;
 
   var objectPropertyIsEnumerable = {
   	f: f$4
@@ -302,22 +299,20 @@
 
   // Thank's IE8 for his funny defineProperty
   var ie8DomDefine = !descriptors && !fails(function () {
-    // eslint-disable-next-line es/no-object-defineproperty -- requied for testing
     return Object.defineProperty(documentCreateElement('div'), 'a', {
       get: function () { return 7; }
     }).a != 7;
   });
 
-  // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
-  var $getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+  var nativeGetOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
 
   // `Object.getOwnPropertyDescriptor` method
   // https://tc39.es/ecma262/#sec-object.getownpropertydescriptor
-  var f$3 = descriptors ? $getOwnPropertyDescriptor : function getOwnPropertyDescriptor(O, P) {
+  var f$3 = descriptors ? nativeGetOwnPropertyDescriptor : function getOwnPropertyDescriptor(O, P) {
     O = toIndexedObject(O);
     P = toPrimitive(P, true);
     if (ie8DomDefine) try {
-      return $getOwnPropertyDescriptor(O, P);
+      return nativeGetOwnPropertyDescriptor(O, P);
     } catch (error) { /* empty */ }
     if (has$1(O, P)) return createPropertyDescriptor(!objectPropertyIsEnumerable.f.call(O, P), O[P]);
   };
@@ -332,17 +327,16 @@
     } return it;
   };
 
-  // eslint-disable-next-line es/no-object-defineproperty -- safe
-  var $defineProperty = Object.defineProperty;
+  var nativeDefineProperty = Object.defineProperty;
 
   // `Object.defineProperty` method
   // https://tc39.es/ecma262/#sec-object.defineproperty
-  var f$2 = descriptors ? $defineProperty : function defineProperty(O, P, Attributes) {
+  var f$2 = descriptors ? nativeDefineProperty : function defineProperty(O, P, Attributes) {
     anObject(O);
     P = toPrimitive(P, true);
     anObject(Attributes);
     if (ie8DomDefine) try {
-      return $defineProperty(O, P, Attributes);
+      return nativeDefineProperty(O, P, Attributes);
     } catch (error) { /* empty */ }
     if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported');
     if ('value' in Attributes) O[P] = Attributes.value;
@@ -392,7 +386,7 @@
   (module.exports = function (key, value) {
     return sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {});
   })('versions', []).push({
-    version: '3.10.1',
+    version: '3.9.1',
     mode: 'global',
     copyright: '© 2021 Denis Pushkarev (zloirock.ru)'
   });
@@ -604,7 +598,6 @@
 
   // `Object.getOwnPropertyNames` method
   // https://tc39.es/ecma262/#sec-object.getownpropertynames
-  // eslint-disable-next-line es/no-object-getownpropertynames -- safe
   var f$1 = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
     return objectKeysInternal(O, hiddenKeys);
   };
@@ -613,7 +606,6 @@
   	f: f$1
   };
 
-  // eslint-disable-next-line es/no-object-getownpropertysymbols -- safe
   var f = Object.getOwnPropertySymbols;
 
   var objectGetOwnPropertySymbols = {
@@ -803,7 +795,7 @@
     return RegExp(s, f);
   }
 
-  var UNSUPPORTED_Y$3 = fails(function () {
+  var UNSUPPORTED_Y$2 = fails(function () {
     // babel-minify transpiles RegExp('a', 'y') -> /a/y and it causes SyntaxError
     var re = RE('a', 'y');
     re.lastIndex = 2;
@@ -818,12 +810,15 @@
   });
 
   var regexpStickyHelpers = {
-  	UNSUPPORTED_Y: UNSUPPORTED_Y$3,
+  	UNSUPPORTED_Y: UNSUPPORTED_Y$2,
   	BROKEN_CARET: BROKEN_CARET
   };
 
   var nativeExec = RegExp.prototype.exec;
-  var nativeReplace = shared('native-string-replace', String.prototype.replace);
+  // This always refers to the native implementation, because the
+  // String#replace polyfill uses ./fix-regexp-well-known-symbol-logic.js,
+  // which loads this file before patching the method.
+  var nativeReplace = String.prototype.replace;
 
   var patchedExec = nativeExec;
 
@@ -835,19 +830,19 @@
     return re1.lastIndex !== 0 || re2.lastIndex !== 0;
   })();
 
-  var UNSUPPORTED_Y$2 = regexpStickyHelpers.UNSUPPORTED_Y || regexpStickyHelpers.BROKEN_CARET;
+  var UNSUPPORTED_Y$1 = regexpStickyHelpers.UNSUPPORTED_Y || regexpStickyHelpers.BROKEN_CARET;
 
   // nonparticipating capturing group, copied from es5-shim's String#split patch.
   // eslint-disable-next-line regexp/no-assertion-capturing-group, regexp/no-empty-group -- required for testing
   var NPCG_INCLUDED = /()??/.exec('')[1] !== undefined;
 
-  var PATCH = UPDATES_LAST_INDEX_WRONG || NPCG_INCLUDED || UNSUPPORTED_Y$2;
+  var PATCH = UPDATES_LAST_INDEX_WRONG || NPCG_INCLUDED || UNSUPPORTED_Y$1;
 
   if (PATCH) {
     patchedExec = function exec(str) {
       var re = this;
       var lastIndex, reCopy, match, i;
-      var sticky = UNSUPPORTED_Y$2 && re.sticky;
+      var sticky = UNSUPPORTED_Y$1 && re.sticky;
       var flags = regexpFlags.call(re);
       var source = re.source;
       var charsAdded = 0;
@@ -932,19 +927,16 @@
 
   var engineV8Version = version && +version;
 
-  // eslint-disable-next-line es/no-object-getownpropertysymbols -- required for testing
   var nativeSymbol = !!Object.getOwnPropertySymbols && !fails(function () {
-    // eslint-disable-next-line es/no-symbol -- required for testing
+    /* global Symbol -- required for testing */
     return !Symbol.sham &&
       // Chrome 38 Symbol has incorrect toString conversion
       // Chrome 38-40 symbols are not inherited from DOM collections prototypes to instances
       (engineIsNode ? engineV8Version === 38 : engineV8Version > 37 && engineV8Version < 41);
   });
 
-  /* eslint-disable es/no-symbol -- required for testing */
-
-
   var useSymbolAsUid = nativeSymbol
+    /* global Symbol -- safe */
     && !Symbol.sham
     && typeof Symbol.iterator == 'symbol';
 
@@ -969,6 +961,7 @@
 
 
 
+
   var SPECIES$5 = wellKnownSymbol('species');
 
   var REPLACE_SUPPORTS_NAMED_GROUPS = !fails(function () {
@@ -987,7 +980,6 @@
   // IE <= 11 replaces $0 with the whole match, as if it was $&
   // https://stackoverflow.com/questions/6024666/getting-ie-to-replace-a-regex-with-the-literal-string-0
   var REPLACE_KEEPS_$0 = (function () {
-    // eslint-disable-next-line regexp/prefer-escape-replacement-dollar-char -- required for testing
     return 'a'.replace(/./, '$0') === '$0';
   })();
 
@@ -1057,7 +1049,7 @@
     ) {
       var nativeRegExpMethod = /./[SYMBOL];
       var methods = exec(SYMBOL, ''[KEY], function (nativeMethod, regexp, str, arg2, forceStringMethod) {
-        if (regexp.exec === RegExp.prototype.exec) {
+        if (regexp.exec === regexpExec) {
           if (DELEGATES_TO_SYMBOL && !forceStringMethod) {
             // The native String method already delegates to @@method (this
             // polyfilled function), leasing to infinite recursion.
@@ -1165,10 +1157,12 @@
     return regexpExec.call(R, S);
   };
 
-  var UNSUPPORTED_Y$1 = regexpStickyHelpers.UNSUPPORTED_Y;
   var arrayPush = [].push;
   var min$4 = Math.min;
   var MAX_UINT32 = 0xFFFFFFFF;
+
+  // babel-minify transpiles RegExp('x', 'y') -> /x/y and it causes SyntaxError
+  var SUPPORTS_Y = !fails(function () { return !RegExp(MAX_UINT32, 'y'); });
 
   // @@split logic
   fixRegexpWellKnownSymbolLogic('split', 2, function (SPLIT, nativeSplit, maybeCallNative) {
@@ -1252,11 +1246,11 @@
         var flags = (rx.ignoreCase ? 'i' : '') +
                     (rx.multiline ? 'm' : '') +
                     (rx.unicode ? 'u' : '') +
-                    (UNSUPPORTED_Y$1 ? 'g' : 'y');
+                    (SUPPORTS_Y ? 'y' : 'g');
 
         // ^(? + rx + ) is needed, in combination with some S slicing, to
         // simulate the 'y' flag.
-        var splitter = new C(UNSUPPORTED_Y$1 ? '^(?:' + rx.source + ')' : rx, flags);
+        var splitter = new C(SUPPORTS_Y ? rx : '^(?:' + rx.source + ')', flags);
         var lim = limit === undefined ? MAX_UINT32 : limit >>> 0;
         if (lim === 0) return [];
         if (S.length === 0) return regexpExecAbstract(splitter, S) === null ? [S] : [];
@@ -1264,12 +1258,12 @@
         var q = 0;
         var A = [];
         while (q < S.length) {
-          splitter.lastIndex = UNSUPPORTED_Y$1 ? 0 : q;
-          var z = regexpExecAbstract(splitter, UNSUPPORTED_Y$1 ? S.slice(q) : S);
+          splitter.lastIndex = SUPPORTS_Y ? q : 0;
+          var z = regexpExecAbstract(splitter, SUPPORTS_Y ? S : S.slice(q));
           var e;
           if (
             z === null ||
-            (e = min$4(toLength(splitter.lastIndex + (UNSUPPORTED_Y$1 ? q : 0)), S.length)) === p
+            (e = min$4(toLength(splitter.lastIndex + (SUPPORTS_Y ? 0 : q)), S.length)) === p
           ) {
             q = advanceStringIndex(S, q, unicodeMatching);
           } else {
@@ -1286,58 +1280,16 @@
         return A;
       }
     ];
-  }, UNSUPPORTED_Y$1);
+  }, !SUPPORTS_Y);
 
   // `Object.keys` method
   // https://tc39.es/ecma262/#sec-object.keys
-  // eslint-disable-next-line es/no-object-keys -- safe
   var objectKeys = Object.keys || function keys(O) {
     return objectKeysInternal(O, enumBugKeys);
   };
 
-  var propertyIsEnumerable = objectPropertyIsEnumerable.f;
-
-  // `Object.{ entries, values }` methods implementation
-  var createMethod$1 = function (TO_ENTRIES) {
-    return function (it) {
-      var O = toIndexedObject(it);
-      var keys = objectKeys(O);
-      var length = keys.length;
-      var i = 0;
-      var result = [];
-      var key;
-      while (length > i) {
-        key = keys[i++];
-        if (!descriptors || propertyIsEnumerable.call(O, key)) {
-          result.push(TO_ENTRIES ? [key, O[key]] : O[key]);
-        }
-      }
-      return result;
-    };
-  };
-
-  var objectToArray = {
-    // `Object.entries` method
-    // https://tc39.es/ecma262/#sec-object.entries
-    entries: createMethod$1(true),
-    // `Object.values` method
-    // https://tc39.es/ecma262/#sec-object.values
-    values: createMethod$1(false)
-  };
-
-  var $entries = objectToArray.entries;
-
-  // `Object.entries` method
-  // https://tc39.es/ecma262/#sec-object.entries
-  _export({ target: 'Object', stat: true }, {
-    entries: function entries(O) {
-      return $entries(O);
-    }
-  });
-
   // `Object.defineProperties` method
   // https://tc39.es/ecma262/#sec-object.defineproperties
-  // eslint-disable-next-line es/no-object-defineproperties -- safe
   var objectDefineProperties = descriptors ? Object.defineProperties : function defineProperties(O, Properties) {
     anObject(O);
     var keys = objectKeys(Properties);
@@ -1454,7 +1406,6 @@
 
   // `IsArray` abstract operation
   // https://tc39.es/ecma262/#sec-isarray
-  // eslint-disable-next-line es/no-array-isarray -- safe
   var isArray = Array.isArray || function isArray(arg) {
     return classofRaw(arg) == 'Array';
   };
@@ -1579,7 +1530,7 @@
   var push = [].push;
 
   // `Array.prototype.{ forEach, map, filter, some, every, find, findIndex, filterOut }` methods implementation
-  var createMethod = function (TYPE) {
+  var createMethod$1 = function (TYPE) {
     var IS_MAP = TYPE == 1;
     var IS_FILTER = TYPE == 2;
     var IS_SOME = TYPE == 3;
@@ -1619,28 +1570,28 @@
   var arrayIteration = {
     // `Array.prototype.forEach` method
     // https://tc39.es/ecma262/#sec-array.prototype.foreach
-    forEach: createMethod(0),
+    forEach: createMethod$1(0),
     // `Array.prototype.map` method
     // https://tc39.es/ecma262/#sec-array.prototype.map
-    map: createMethod(1),
+    map: createMethod$1(1),
     // `Array.prototype.filter` method
     // https://tc39.es/ecma262/#sec-array.prototype.filter
-    filter: createMethod(2),
+    filter: createMethod$1(2),
     // `Array.prototype.some` method
     // https://tc39.es/ecma262/#sec-array.prototype.some
-    some: createMethod(3),
+    some: createMethod$1(3),
     // `Array.prototype.every` method
     // https://tc39.es/ecma262/#sec-array.prototype.every
-    every: createMethod(4),
+    every: createMethod$1(4),
     // `Array.prototype.find` method
     // https://tc39.es/ecma262/#sec-array.prototype.find
-    find: createMethod(5),
+    find: createMethod$1(5),
     // `Array.prototype.findIndex` method
     // https://tc39.es/ecma262/#sec-array.prototype.findIndex
-    findIndex: createMethod(6),
+    findIndex: createMethod$1(6),
     // `Array.prototype.filterOut` method
     // https://github.com/tc39/proposal-array-filtering
-    filterOut: createMethod(7)
+    filterOut: createMethod$1(7)
   };
 
   var $find = arrayIteration.find;
@@ -1737,7 +1688,6 @@
   // https://tc39.es/ecma262/#sec-array.prototype.foreach
   var arrayForEach = !STRICT_METHOD$2 ? function forEach(callbackfn /* , thisArg */) {
     return $forEach(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
-  // eslint-disable-next-line es/no-array-prototype-foreach -- safe
   } : [].forEach;
 
   for (var COLLECTION_NAME$1 in domIterables) {
@@ -1771,7 +1721,45 @@
     parseFloat: numberParseFloat
   });
 
-  /* eslint-disable es/no-array-prototype-indexof -- required for testing */
+  var propertyIsEnumerable = objectPropertyIsEnumerable.f;
+
+  // `Object.{ entries, values }` methods implementation
+  var createMethod = function (TO_ENTRIES) {
+    return function (it) {
+      var O = toIndexedObject(it);
+      var keys = objectKeys(O);
+      var length = keys.length;
+      var i = 0;
+      var result = [];
+      var key;
+      while (length > i) {
+        key = keys[i++];
+        if (!descriptors || propertyIsEnumerable.call(O, key)) {
+          result.push(TO_ENTRIES ? [key, O[key]] : O[key]);
+        }
+      }
+      return result;
+    };
+  };
+
+  var objectToArray = {
+    // `Object.entries` method
+    // https://tc39.es/ecma262/#sec-object.entries
+    entries: createMethod(true),
+    // `Object.values` method
+    // https://tc39.es/ecma262/#sec-object.values
+    values: createMethod(false)
+  };
+
+  var $entries = objectToArray.entries;
+
+  // `Object.entries` method
+  // https://tc39.es/ecma262/#sec-object.entries
+  _export({ target: 'Object', stat: true }, {
+    entries: function entries(O) {
+      return $entries(O);
+    }
+  });
 
   var $indexOf = arrayIncludes.indexOf;
 
@@ -1946,16 +1934,14 @@
     ];
   });
 
-  // eslint-disable-next-line es/no-object-assign -- safe
-  var $assign = Object.assign;
-  // eslint-disable-next-line es/no-object-defineproperty -- required for testing
+  var nativeAssign = Object.assign;
   var defineProperty$3 = Object.defineProperty;
 
   // `Object.assign` method
   // https://tc39.es/ecma262/#sec-object.assign
-  var objectAssign = !$assign || fails(function () {
+  var objectAssign = !nativeAssign || fails(function () {
     // should have correct order of operations (Edge bug)
-    if (descriptors && $assign({ b: 1 }, $assign(defineProperty$3({}, 'a', {
+    if (descriptors && nativeAssign({ b: 1 }, nativeAssign(defineProperty$3({}, 'a', {
       enumerable: true,
       get: function () {
         defineProperty$3(this, 'b', {
@@ -1967,12 +1953,12 @@
     // should work with symbols and should have deterministic property order (V8 bug)
     var A = {};
     var B = {};
-    // eslint-disable-next-line es/no-symbol -- safe
+    /* global Symbol -- required for testing */
     var symbol = Symbol();
     var alphabet = 'abcdefghijklmnopqrst';
     A[symbol] = 7;
     alphabet.split('').forEach(function (chr) { B[chr] = chr; });
-    return $assign({}, A)[symbol] != 7 || objectKeys($assign({}, B)).join('') != alphabet;
+    return nativeAssign({}, A)[symbol] != 7 || objectKeys(nativeAssign({}, B)).join('') != alphabet;
   }) ? function assign(target, source) { // eslint-disable-line no-unused-vars -- required for `.length`
     var T = toObject(target);
     var argumentsLength = arguments.length;
@@ -1990,11 +1976,10 @@
         if (!descriptors || propertyIsEnumerable.call(S, key)) T[key] = S[key];
       }
     } return T;
-  } : $assign;
+  } : nativeAssign;
 
   // `Object.assign` method
   // https://tc39.es/ecma262/#sec-object.assign
-  // eslint-disable-next-line es/no-object-assign -- required for testing
   _export({ target: 'Object', stat: true, forced: Object.assign !== objectAssign }, {
     assign: objectAssign
   });
@@ -2015,7 +2000,6 @@
 
   // `SameValue` abstract operation
   // https://tc39.es/ecma262/#sec-samevalue
-  // eslint-disable-next-line es/no-object-is -- safe
   var sameValue = Object.is || function is(x, y) {
     // eslint-disable-next-line no-self-compare -- NaN check
     return x === y ? x !== 0 || 1 / x === 1 / y : x != x && y != y;
@@ -2116,13 +2100,11 @@
   // `Object.setPrototypeOf` method
   // https://tc39.es/ecma262/#sec-object.setprototypeof
   // Works with __proto__ only. Old v8 can't work with null proto objects.
-  // eslint-disable-next-line es/no-object-setprototypeof -- safe
   var objectSetPrototypeOf = Object.setPrototypeOf || ('__proto__' in {} ? function () {
     var CORRECT_SETTER = false;
     var test = {};
     var setter;
     try {
-      // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
       setter = Object.getOwnPropertyDescriptor(Object.prototype, '__proto__').set;
       setter.call(test, []);
       CORRECT_SETTER = test instanceof Array;
@@ -2348,7 +2330,6 @@
   var correctPrototypeGetter = !fails(function () {
     function F() { /* empty */ }
     F.prototype.constructor = null;
-    // eslint-disable-next-line es/no-object-getprototypeof -- required for testing
     return Object.getPrototypeOf(new F()) !== F.prototype;
   });
 
@@ -2357,7 +2338,6 @@
 
   // `Object.getPrototypeOf` method
   // https://tc39.es/ecma262/#sec-object.getprototypeof
-  // eslint-disable-next-line es/no-object-getprototypeof -- safe
   var objectGetPrototypeOf = correctPrototypeGetter ? Object.getPrototypeOf : function (O) {
     O = toObject(O);
     if (has$1(O, IE_PROTO)) return O[IE_PROTO];
@@ -2375,7 +2355,6 @@
   // https://tc39.es/ecma262/#sec-%iteratorprototype%-object
   var IteratorPrototype$2, PrototypeOfArrayIteratorPrototype, arrayIterator;
 
-  /* eslint-disable es/no-array-prototype-keys -- safe */
   if ([].keys) {
     arrayIterator = [].keys();
     // Safari 8 has buggy iterators w/o `next`
@@ -2717,7 +2696,7 @@
 
   /* eslint-disable no-unused-vars */
 
-  var VERSION = '1.19.1';
+  var VERSION = '1.18.3';
   var bootstrapVersion = 4;
 
   try {
@@ -2834,19 +2813,19 @@
       }
     },
     5: {
-      iconsPrefix: 'bi',
+      iconsPrefix: 'fa',
       icons: {
-        paginationSwitchDown: 'bi-caret-down-square',
-        paginationSwitchUp: 'bi-caret-up-square',
-        refresh: 'bi-arrow-clockwise',
-        toggleOff: 'bi-toggle-off',
-        toggleOn: 'bi-toggle-on',
-        columns: 'bi-list-ul',
-        detailOpen: 'bi-plus',
-        detailClose: 'bi-dash',
-        fullscreen: 'bi-arrows-move',
-        search: 'bi-search',
-        clearSearch: 'bi-trash'
+        paginationSwitchDown: 'fa-caret-square-down',
+        paginationSwitchUp: 'fa-caret-square-up',
+        refresh: 'fa-sync',
+        toggleOff: 'fa-toggle-off',
+        toggleOn: 'fa-toggle-on',
+        columns: 'fa-th-list',
+        detailOpen: 'fa-plus',
+        detailClose: 'fa-minus',
+        fullscreen: 'fa-arrows-alt',
+        search: 'fa-search',
+        clearSearch: 'fa-trash'
       },
       classes: {
         buttonsPrefix: 'btn',
@@ -2874,7 +2853,7 @@
         pagination: ['<ul class="pagination%s">', '</ul>'],
         paginationItem: '<li class="page-item%s"><a class="page-link" aria-label="%s" href="javascript:void(0)">%s</a></li>',
         icon: '<i class="%s %s"></i>',
-        inputGroup: '<div class="input-group">%s%s</div>',
+        inputGroup: '<div class="input-group">%s<div class="input-group-append">%s</div></div>',
         searchInput: '<input class="%s%s" type="text" placeholder="%s">',
         searchButton: '<button class="%s" type="button" name="search" title="%s">%s %s</button>',
         searchClearButton: '<button class="%s" type="button" name="clearSearch" title="%s">%s %s</button>'
@@ -2959,7 +2938,6 @@
     searchHighlight: false,
     searchOnEnterKey: false,
     strictSearch: false,
-    regexSearch: false,
     searchSelector: false,
     visibleSearch: false,
     showButtonIcons: true,
@@ -3111,9 +3089,6 @@
     },
     onScrollBody: function onScrollBody() {
       return false;
-    },
-    onTogglePagination: function onTogglePagination(newState) {
-      return false;
     }
   };
   var EN = {
@@ -3254,9 +3229,7 @@
     'refresh-options.bs.table': 'onRefreshOptions',
     'reset-view.bs.table': 'onResetView',
     'refresh.bs.table': 'onRefresh',
-    'scroll-body.bs.table': 'onScrollBody',
-    'toggle-pagination.bs.table': 'onTogglePagination',
-    'virtual-scroll.bs.table': 'onVirtualScroll'
+    'scroll-body.bs.table': 'onScrollBody'
   };
   Object.assign(DEFAULTS, EN);
   var Constants = {
@@ -3283,43 +3256,6 @@
     }
   });
 
-  // @@match logic
-  fixRegexpWellKnownSymbolLogic('match', 1, function (MATCH, nativeMatch, maybeCallNative) {
-    return [
-      // `String.prototype.match` method
-      // https://tc39.es/ecma262/#sec-string.prototype.match
-      function match(regexp) {
-        var O = requireObjectCoercible(this);
-        var matcher = regexp == undefined ? undefined : regexp[MATCH];
-        return matcher !== undefined ? matcher.call(regexp, O) : new RegExp(regexp)[MATCH](String(O));
-      },
-      // `RegExp.prototype[@@match]` method
-      // https://tc39.es/ecma262/#sec-regexp.prototype-@@match
-      function (regexp) {
-        var res = maybeCallNative(nativeMatch, regexp, this);
-        if (res.done) return res.value;
-
-        var rx = anObject(regexp);
-        var S = String(this);
-
-        if (!rx.global) return regexpExecAbstract(rx, S);
-
-        var fullUnicode = rx.unicode;
-        rx.lastIndex = 0;
-        var A = [];
-        var n = 0;
-        var result;
-        while ((result = regexpExecAbstract(rx, S)) !== null) {
-          var matchStr = String(result[0]);
-          A[n] = matchStr;
-          if (matchStr === '') rx.lastIndex = advanceStringIndex(S, toLength(rx.lastIndex), fullUnicode);
-          n++;
-        }
-        return n === 0 ? null : A;
-      }
-    ];
-  });
-
   var getOwnPropertyDescriptor$1 = objectGetOwnPropertyDescriptor.f;
 
 
@@ -3327,8 +3263,7 @@
 
 
 
-  // eslint-disable-next-line es/no-string-prototype-startswith -- safe
-  var $startsWith = ''.startsWith;
+  var nativeStartsWith = ''.startsWith;
   var min$1 = Math.min;
 
   var CORRECT_IS_REGEXP_LOGIC$1 = correctIsRegexpLogic('startsWith');
@@ -3346,8 +3281,8 @@
       notARegexp(searchString);
       var index = toLength(min$1(arguments.length > 1 ? arguments[1] : undefined, that.length));
       var search = String(searchString);
-      return $startsWith
-        ? $startsWith.call(that, search, index)
+      return nativeStartsWith
+        ? nativeStartsWith.call(that, search, index)
         : that.slice(index, index + search.length) === search;
     }
   });
@@ -3359,8 +3294,7 @@
 
 
 
-  // eslint-disable-next-line es/no-string-prototype-endswith -- safe
-  var $endsWith = ''.endsWith;
+  var nativeEndsWith = ''.endsWith;
   var min = Math.min;
 
   var CORRECT_IS_REGEXP_LOGIC = correctIsRegexpLogic('endsWith');
@@ -3380,8 +3314,8 @@
       var len = toLength(that.length);
       var end = endPosition === undefined ? len : min(toLength(endPosition), len);
       var search = String(searchString);
-      return $endsWith
-        ? $endsWith.call(that, search, end)
+      return nativeEndsWith
+        ? nativeEndsWith.call(that, search, end)
         : that.slice(end - search.length, end) === search;
     }
   });
@@ -3648,30 +3582,19 @@
 
       return true;
     },
-    regexCompare: function regexCompare(value, search) {
-      try {
-        var regexpParts = search.match(/^\/(.*?)\/([gim]*)$/);
-
-        if (value.toString().search(regexpParts ? new RegExp(regexpParts[1], regexpParts[2]) : new RegExp(search, 'gim')) !== -1) {
-          return true;
-        }
-      } catch (e) {
-        return false;
-      }
-    },
     escapeHTML: function escapeHTML(text) {
-      if (!text) {
-        return text;
+      if (typeof text === 'string') {
+        return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;').replace(/`/g, '&#x60;');
       }
 
-      return text.toString().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+      return text;
     },
     unescapeHTML: function unescapeHTML(text) {
-      if (!text) {
-        return text;
+      if (typeof text === 'string') {
+        return text.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#039;/g, '\'').replace(/&#x60;/g, '`');
       }
 
-      return text.toString().replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, '\'');
+      return text;
     },
     getRealDataAttr: function getRealDataAttr(dataAttr) {
       for (var _i3 = 0, _Object$entries = Object.entries(dataAttr); _i3 < _Object$entries.length; _i3++) {
@@ -3900,7 +3823,7 @@
         if (_this.lastCluster !== (_this.lastCluster = _this.getNum())) {
           _this.initDOM(_this.rows);
 
-          _this.callback(_this.startIndex, _this.endIndex);
+          _this.callback();
         }
       };
 
@@ -3940,8 +3863,6 @@
             html.push(this.getExtra('bottom', data.bottomOffset));
           }
 
-          this.startIndex = data.start;
-          this.endIndex = data.end;
           this.contentEl.innerHTML = html.join('');
 
           if (fixedScroll) {
@@ -3998,8 +3919,6 @@
         }
 
         return {
-          start: start,
-          end: end,
           topOffset: topOffset,
           bottomOffset: bottomOffset,
           rowsAbove: rowsAbove,
@@ -4088,26 +4007,12 @@
             parts[1] = parts[1].toUpperCase();
           }
 
-          var localesToExtend = {};
-
           if (locales[this.options.locale]) {
-            localesToExtend = locales[this.options.locale];
+            $__default['default'].extend(this.options, locales[this.options.locale]);
           } else if (locales[parts.join('-')]) {
-            localesToExtend = locales[parts.join('-')];
+            $__default['default'].extend(this.options, locales[parts.join('-')]);
           } else if (locales[parts[0]]) {
-            localesToExtend = locales[parts[0]];
-          }
-
-          for (var _i = 0, _Object$entries = Object.entries(localesToExtend); _i < _Object$entries.length; _i++) {
-            var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
-                formatName = _Object$entries$_i[0],
-                func = _Object$entries$_i[1];
-
-            if (this.options[formatName] !== BootstrapTable.DEFAULTS[formatName]) {
-              continue;
-            }
-
-            this.options[formatName] = func;
+            $__default['default'].extend(this.options, locales[parts[0]]);
           }
         }
       }
@@ -4294,10 +4199,10 @@
             var classes = '';
 
             if (headerStyle && headerStyle.css) {
-              for (var _i2 = 0, _Object$entries2 = Object.entries(headerStyle.css); _i2 < _Object$entries2.length; _i2++) {
-                var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
-                    key = _Object$entries2$_i[0],
-                    value = _Object$entries2$_i[1];
+              for (var _i = 0, _Object$entries = Object.entries(headerStyle.css); _i < _Object$entries.length; _i++) {
+                var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+                    key = _Object$entries$_i[0],
+                    value = _Object$entries$_i[1];
 
                 csses.push("".concat(key, ": ").concat(value));
               }
@@ -4387,6 +4292,16 @@
 
           if (_this2.options.sortable && $this.parent().data().sortable) {
             _this2.onSort(e);
+          }
+        });
+        this.$header.children().children().off('keypress').on('keypress', function (e) {
+          if (_this2.options.sortable && $__default['default'](e.currentTarget).data().sortable) {
+            var code = e.keyCode || e.which;
+
+            if (code === 13) {
+              // Enter keycode
+              _this2.onSort(e);
+            }
           }
         });
         var resizeEvent = Utils.getEventName('resize.bootstrap-table', this.$el.attr('id'));
@@ -4667,10 +4582,10 @@
         });
         var buttonsHtml = {};
 
-        for (var _i3 = 0, _Object$entries3 = Object.entries(this.buttons); _i3 < _Object$entries3.length; _i3++) {
-          var _Object$entries3$_i = _slicedToArray(_Object$entries3[_i3], 2),
-              buttonName = _Object$entries3$_i[0],
-              buttonConfig = _Object$entries3$_i[1];
+        for (var _i2 = 0, _Object$entries2 = Object.entries(this.buttons); _i2 < _Object$entries2.length; _i2++) {
+          var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
+              buttonName = _Object$entries2$_i[0],
+              buttonConfig = _Object$entries2$_i[1];
 
           var buttonHtml = void 0;
 
@@ -4684,10 +4599,10 @@
             buttonHtml = "<button class=\"".concat(this.constants.buttonsClass, "\" type=\"button\" name=\"").concat(buttonName, "\"");
 
             if (buttonConfig.hasOwnProperty('attributes')) {
-              for (var _i4 = 0, _Object$entries4 = Object.entries(buttonConfig.attributes); _i4 < _Object$entries4.length; _i4++) {
-                var _Object$entries4$_i = _slicedToArray(_Object$entries4[_i4], 2),
-                    attributeName = _Object$entries4$_i[0],
-                    value = _Object$entries4$_i[1];
+              for (var _i3 = 0, _Object$entries3 = Object.entries(buttonConfig.attributes); _i3 < _Object$entries3.length; _i3++) {
+                var _Object$entries3$_i = _slicedToArray(_Object$entries3[_i3], 2),
+                    attributeName = _Object$entries3$_i[0],
+                    value = _Object$entries3$_i[1];
 
                 buttonHtml += " ".concat(attributeName, "=\"").concat(value, "\"");
               }
@@ -4744,10 +4659,10 @@
           this.$toolbar.append(html.join(''));
         }
 
-        for (var _i5 = 0, _Object$entries5 = Object.entries(this.buttons); _i5 < _Object$entries5.length; _i5++) {
-          var _Object$entries5$_i = _slicedToArray(_Object$entries5[_i5], 2),
-              _buttonName = _Object$entries5$_i[0],
-              _buttonConfig = _Object$entries5$_i[1];
+        for (var _i4 = 0, _Object$entries4 = Object.entries(this.buttons); _i4 < _Object$entries4.length; _i4++) {
+          var _Object$entries4$_i = _slicedToArray(_Object$entries4[_i4], 2),
+              _buttonName = _Object$entries4$_i[0],
+              _buttonConfig = _Object$entries4$_i[1];
 
           if (_buttonConfig.hasOwnProperty('event')) {
             if (typeof _buttonConfig.event === 'function' || typeof _buttonConfig.event === 'string') {
@@ -4765,9 +4680,9 @@
             }
 
             var _loop = function _loop() {
-              var _Object$entries6$_i = _slicedToArray(_Object$entries6[_i6], 2),
-                  eventType = _Object$entries6$_i[0],
-                  eventFunction = _Object$entries6$_i[1];
+              var _Object$entries5$_i = _slicedToArray(_Object$entries5[_i5], 2),
+                  eventType = _Object$entries5$_i[0],
+                  eventFunction = _Object$entries5$_i[1];
 
               var event = typeof eventFunction === 'string' ? window[eventFunction] : eventFunction;
 
@@ -4776,7 +4691,7 @@
               });
             };
 
-            for (var _i6 = 0, _Object$entries6 = Object.entries(_buttonConfig.event); _i6 < _Object$entries6.length; _i6++) {
+            for (var _i5 = 0, _Object$entries5 = Object.entries(_buttonConfig.event); _i5 < _Object$entries5.length; _i5++) {
               _loop();
             }
           }
@@ -4921,10 +4836,7 @@
             return;
           }
 
-          var $searchInput = Utils.getSearchInput(this);
-          var $currentTarget = currentTarget instanceof jQuery ? currentTarget : $__default['default'](currentTarget);
-
-          if ($currentTarget.is($searchInput) || $currentTarget.hasClass('search-input')) {
+          if (currentTarget === Utils.getSearchInput(this)[0] || $__default['default'](currentTarget).hasClass('search-input')) {
             this.searchText = text;
             this.options.searchText = text;
           }
@@ -4964,12 +4876,11 @@
             return;
           }
 
-          var rawSearchText = this.searchText && (this.fromHtml ? Utils.escapeHTML(this.searchText) : this.searchText);
-          var searchText = rawSearchText ? rawSearchText.toLowerCase() : '';
+          var s = this.searchText && (this.fromHtml ? Utils.escapeHTML(this.searchText) : this.searchText).toLowerCase();
           var f = Utils.isEmptyObject(this.filterColumns) ? null : this.filterColumns;
 
           if (this.options.searchAccentNeutralise) {
-            searchText = Utils.normalizeAccent(searchText);
+            s = Utils.normalizeAccent(s);
           } // Check filter
 
 
@@ -5004,7 +4915,7 @@
           }
 
           var visibleFields = this.getVisibleFields();
-          this.data = searchText ? this.data.filter(function (item, i) {
+          this.data = s ? this.data.filter(function (item, i) {
             for (var j = 0; j < _this5.header.fields.length; j++) {
               if (!_this5.header.searchables[j] || _this5.options.visibleSearch && visibleFields.indexOf(_this5.header.fields[j]) === -1) {
                 continue;
@@ -5018,9 +4929,9 @@
                 value = item;
                 var props = key.split('.');
 
-                for (var _i7 = 0; _i7 < props.length; _i7++) {
-                  if (value[props[_i7]] !== null) {
-                    value = value[props[_i7]];
+                for (var _i6 = 0; _i6 < props.length; _i6++) {
+                  if (value[props[_i6]] !== null) {
+                    value = value[props[_i6]];
                   }
                 }
               } else {
@@ -5037,49 +4948,51 @@
               }
 
               if (typeof value === 'string' || typeof value === 'number') {
-                if (_this5.options.strictSearch && "".concat(value).toLowerCase() === searchText || _this5.options.regexSearch && Utils.regexCompare(value, rawSearchText)) {
-                  return true;
-                }
-
-                var largerSmallerEqualsRegex = /(?:(<=|=>|=<|>=|>|<)(?:\s+)?(-?\d+)?|(-?\d+)?(\s+)?(<=|=>|=<|>=|>|<))/gm;
-                var matches = largerSmallerEqualsRegex.exec(_this5.searchText);
-                var comparisonCheck = false;
-
-                if (matches) {
-                  var operator = matches[1] || "".concat(matches[5], "l");
-                  var comparisonValue = matches[2] || matches[3];
-                  var int = parseInt(value, 10);
-                  var comparisonInt = parseInt(comparisonValue, 10);
-
-                  switch (operator) {
-                    case '>':
-                    case '<l':
-                      comparisonCheck = int > comparisonInt;
-                      break;
-
-                    case '<':
-                    case '>l':
-                      comparisonCheck = int < comparisonInt;
-                      break;
-
-                    case '<=':
-                    case '=<':
-                    case '>=l':
-                    case '=>l':
-                      comparisonCheck = int <= comparisonInt;
-                      break;
-
-                    case '>=':
-                    case '=>':
-                    case '<=l':
-                    case '=<l':
-                      comparisonCheck = int >= comparisonInt;
-                      break;
+                if (_this5.options.strictSearch) {
+                  if ("".concat(value).toLowerCase() === s) {
+                    return true;
                   }
-                }
+                } else {
+                  var largerSmallerEqualsRegex = /(?:(<=|=>|=<|>=|>|<)(?:\s+)?(-?\d+)?|(-?\d+)?(\s+)?(<=|=>|=<|>=|>|<))/gm;
+                  var matches = largerSmallerEqualsRegex.exec(_this5.searchText);
+                  var comparisonCheck = false;
 
-                if (comparisonCheck || "".concat(value).toLowerCase().includes(searchText)) {
-                  return true;
+                  if (matches) {
+                    var operator = matches[1] || "".concat(matches[5], "l");
+                    var comparisonValue = matches[2] || matches[3];
+                    var int = parseInt(value, 10);
+                    var comparisonInt = parseInt(comparisonValue, 10);
+
+                    switch (operator) {
+                      case '>':
+                      case '<l':
+                        comparisonCheck = int > comparisonInt;
+                        break;
+
+                      case '<':
+                      case '>l':
+                        comparisonCheck = int < comparisonInt;
+                        break;
+
+                      case '<=':
+                      case '=<':
+                      case '>=l':
+                      case '=>l':
+                        comparisonCheck = int <= comparisonInt;
+                        break;
+
+                      case '>=':
+                      case '=>':
+                      case '<=l':
+                      case '=<l':
+                        comparisonCheck = int >= comparisonInt;
+                        break;
+                    }
+                  }
+
+                  if (comparisonCheck || "".concat(value).toLowerCase().includes(s)) {
+                    return true;
+                  }
                 }
               }
             }
@@ -5306,7 +5219,7 @@
 
           if (opts.smartDisplay) {
             if (pageList.length < 2 || opts.totalRows <= pageList[0]) {
-              this.$pagination.find('div.page-list').hide();
+              this.$pagination.find('span.page-list').hide();
             }
           } // when data is empty, hide the pagination
 
@@ -5377,10 +5290,6 @@
     }, {
       key: "onPagePre",
       value: function onPagePre(event) {
-        if ($__default['default'](event.target).hasClass('disabled')) {
-          return;
-        }
-
         event.preventDefault();
 
         if (this.options.pageNumber - 1 === 0) {
@@ -5395,10 +5304,6 @@
     }, {
       key: "onPageNext",
       value: function onPageNext(event) {
-        if ($__default['default'](event.target).hasClass('disabled')) {
-          return;
-        }
-
         event.preventDefault();
 
         if (this.options.pageNumber + 1 > this.options.totalPages) {
@@ -5443,10 +5348,10 @@
         style = Utils.calculateObjectValue(this.options, this.options.rowStyle, [item, i], style);
 
         if (style && style.css) {
-          for (var _i8 = 0, _Object$entries7 = Object.entries(style.css); _i8 < _Object$entries7.length; _i8++) {
-            var _Object$entries7$_i = _slicedToArray(_Object$entries7[_i8], 2),
-                key = _Object$entries7$_i[0],
-                value = _Object$entries7$_i[1];
+          for (var _i7 = 0, _Object$entries6 = Object.entries(style.css); _i7 < _Object$entries6.length; _i7++) {
+            var _Object$entries6$_i = _slicedToArray(_Object$entries6[_i7], 2),
+                key = _Object$entries6$_i[0],
+                value = _Object$entries6$_i[1];
 
             csses.push("".concat(key, ": ").concat(value));
           }
@@ -5455,20 +5360,20 @@
         attributes = Utils.calculateObjectValue(this.options, this.options.rowAttributes, [item, i], attributes);
 
         if (attributes) {
-          for (var _i9 = 0, _Object$entries8 = Object.entries(attributes); _i9 < _Object$entries8.length; _i9++) {
-            var _Object$entries8$_i = _slicedToArray(_Object$entries8[_i9], 2),
-                _key2 = _Object$entries8$_i[0],
-                _value = _Object$entries8$_i[1];
+          for (var _i8 = 0, _Object$entries7 = Object.entries(attributes); _i8 < _Object$entries7.length; _i8++) {
+            var _Object$entries7$_i = _slicedToArray(_Object$entries7[_i8], 2),
+                _key2 = _Object$entries7$_i[0],
+                _value = _Object$entries7$_i[1];
 
             htmlAttributes.push("".concat(_key2, "=\"").concat(Utils.escapeHTML(_value), "\""));
           }
         }
 
         if (item._data && !Utils.isEmptyObject(item._data)) {
-          for (var _i10 = 0, _Object$entries9 = Object.entries(item._data); _i10 < _Object$entries9.length; _i10++) {
-            var _Object$entries9$_i = _slicedToArray(_Object$entries9[_i10], 2),
-                k = _Object$entries9$_i[0],
-                v = _Object$entries9$_i[1];
+          for (var _i9 = 0, _Object$entries8 = Object.entries(item._data); _i9 < _Object$entries8.length; _i9++) {
+            var _Object$entries8$_i = _slicedToArray(_Object$entries8[_i9], 2),
+                k = _Object$entries8$_i[0],
+                v = _Object$entries8$_i[1];
 
             // ignore data-index
             if (k === 'index') {
@@ -5579,10 +5484,10 @@
           if (cellStyle.css) {
             var csses_ = [];
 
-            for (var _i11 = 0, _Object$entries10 = Object.entries(cellStyle.css); _i11 < _Object$entries10.length; _i11++) {
-              var _Object$entries10$_i = _slicedToArray(_Object$entries10[_i11], 2),
-                  _key3 = _Object$entries10$_i[0],
-                  _value2 = _Object$entries10$_i[1];
+            for (var _i10 = 0, _Object$entries9 = Object.entries(cellStyle.css); _i10 < _Object$entries9.length; _i10++) {
+              var _Object$entries9$_i = _slicedToArray(_Object$entries9[_i10], 2),
+                  _key3 = _Object$entries9$_i[0],
+                  _value2 = _Object$entries9$_i[1];
 
               csses_.push("".concat(_key3, ": ").concat(_value2));
             }
@@ -5596,7 +5501,7 @@
             value = typeof value === 'undefined' || value === null ? _this7.options.undefinedText : value;
           }
 
-          if (column.searchable && _this7.searchText && _this7.options.searchHighlight && !(column.checkbox || column.radio)) {
+          if (column.searchable && _this7.searchText && _this7.options.searchHighlight) {
             var defValue = '';
             var regExp = new RegExp("(".concat(_this7.searchText.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), ")"), 'gim');
             var marker = '<mark>$1</mark>';
@@ -5606,7 +5511,6 @@
               // value can contains a HTML tags
               var textContent = new DOMParser().parseFromString(value.toString(), 'text/html').documentElement.textContent;
               var textReplaced = textContent.replace(regExp, marker);
-              textContent = textContent.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
               defValue = value.replace(new RegExp("(>\\s*)(".concat(textContent, ")(\\s*)"), 'gm'), "$1".concat(textReplaced, "$3"));
             } else {
               // but usually not
@@ -5617,10 +5521,10 @@
           }
 
           if (item["_".concat(field, "_data")] && !Utils.isEmptyObject(item["_".concat(field, "_data")])) {
-            for (var _i12 = 0, _Object$entries11 = Object.entries(item["_".concat(field, "_data")]); _i12 < _Object$entries11.length; _i12++) {
-              var _Object$entries11$_i = _slicedToArray(_Object$entries11[_i12], 2),
-                  _k = _Object$entries11$_i[0],
-                  _v = _Object$entries11$_i[1];
+            for (var _i11 = 0, _Object$entries10 = Object.entries(item["_".concat(field, "_data")]); _i11 < _Object$entries10.length; _i11++) {
+              var _Object$entries10$_i = _slicedToArray(_Object$entries10[_i11], 2),
+                  _k = _Object$entries10$_i[0],
+                  _v = _Object$entries10$_i[1];
 
               // ignore data-index
               if (_k === 'index') {
@@ -5666,7 +5570,7 @@
       }
     }, {
       key: "initBody",
-      value: function initBody(fixedScroll, updatedUid) {
+      value: function initBody(fixedScroll) {
         var _this8 = this;
 
         var data = this.getData();
@@ -5686,7 +5590,6 @@
         var rows = [];
         var trFragments = $__default['default'](document.createDocumentFragment());
         var hasTr = false;
-        var toExpand = [];
         this.autoMergeCells = Utils.checkAutoMergeCells(data.slice(this.pageFrom - 1, this.pageTo));
 
         for (var i = this.pageFrom - 1; i < this.pageTo; i++) {
@@ -5695,22 +5598,6 @@
           hasTr = hasTr || !!tr;
 
           if (tr && typeof tr === 'string') {
-            var uniqueId = this.options.uniqueId;
-
-            if (uniqueId && item.hasOwnProperty(uniqueId)) {
-              var itemUniqueId = item[uniqueId];
-              var oldTr = this.$body.find(Utils.sprintf('> tr[data-uniqueid="%s"][data-has-detail-view]', itemUniqueId));
-              var oldTrNext = oldTr.next();
-
-              if (oldTrNext.is('tr.detail-view')) {
-                toExpand.push(i);
-
-                if (!updatedUid || itemUniqueId !== updatedUid) {
-                  tr += oldTrNext[0].outerHTML;
-                }
-              }
-            }
-
             if (!this.options.virtualScroll) {
               trFragments.append(tr);
             } else {
@@ -5735,28 +5622,22 @@
             scrollEl: this.$tableBody[0],
             contentEl: this.$body[0],
             itemHeight: this.options.virtualScrollItemHeight,
-            callback: function callback(startIndex, endIndex) {
+            callback: function callback() {
               _this8.fitHeader();
 
               _this8.initBodyEvent();
-
-              _this8.trigger('virtual-scroll', startIndex, endIndex);
             }
           });
         }
-
-        toExpand.forEach(function (index) {
-          _this8.expandRow(index);
-        });
 
         if (!fixedScroll) {
           this.scrollTo(0);
         }
 
         this.initBodyEvent();
+        this.updateSelected();
         this.initFooter();
         this.resetView();
-        this.updateSelected();
 
         if (this.options.sidePagination !== 'server') {
           this.options.totalRows = data.length;
@@ -5910,9 +5791,9 @@
 
           if (this.options.pagination && this.options.sidePagination === 'server') {
             params.offset = this.options.pageSize === this.options.formatAllRows() ? 0 : this.options.pageSize * (this.options.pageNumber - 1);
-            params.limit = this.options.pageSize;
+            params.limit = this.options.pageSize === this.options.formatAllRows() ? this.options.totalRows : this.options.pageSize;
 
-            if (params.limit === 0 || this.options.pageSize === this.options.formatAllRows()) {
+            if (params.limit === 0) {
               delete params.limit;
             }
           }
@@ -5974,17 +5855,11 @@
               _this10.hideLoading();
             }
 
-            if (_this10.options.sidePagination === 'server' && _this10.options.pageNumber > 1 && res[_this10.options.totalField] > 0 && !res[_this10.options.dataField].length) {
+            if (_this10.options.sidePagination === 'server' && res[_this10.options.totalField] > 0 && !res[_this10.options.dataField].length) {
               _this10.updatePagination();
             }
           },
           error: function error(jqXHR) {
-            // abort ajax by multiple request
-            if (jqXHR && jqXHR.status === 0 && _this10._xhrAbort) {
-              _this10._xhrAbort = false;
-              return;
-            }
-
             var data = [];
 
             if (_this10.options.sidePagination === 'server') {
@@ -6005,8 +5880,6 @@
           Utils.calculateObjectValue(this, this.options.ajax, [request], null);
         } else {
           if (this._xhr && this._xhr.readyState !== 4) {
-            this._xhrAbort = true;
-
             this._xhr.abort();
           }
 
@@ -6247,10 +6120,10 @@
             style = Utils.calculateObjectValue(null, this.options.footerStyle, [column]);
 
             if (style && style.css) {
-              for (var _i13 = 0, _Object$entries12 = Object.entries(style.css); _i13 < _Object$entries12.length; _i13++) {
-                var _Object$entries12$_i = _slicedToArray(_Object$entries12[_i13], 2),
-                    key = _Object$entries12$_i[0],
-                    _value3 = _Object$entries12$_i[1];
+              for (var _i12 = 0, _Object$entries11 = Object.entries(style.css); _i12 < _Object$entries11.length; _i12++) {
+                var _Object$entries11$_i = _slicedToArray(_Object$entries11[_i12], 2),
+                    key = _Object$entries11$_i[0],
+                    _value3 = _Object$entries11$_i[1];
 
                 csses.push("".concat(key, ": ").concat(_value3));
               }
@@ -6452,10 +6325,10 @@
 
         if (params && params.formatted) {
           data.forEach(function (row) {
-            for (var _i14 = 0, _Object$entries13 = Object.entries(row); _i14 < _Object$entries13.length; _i14++) {
-              var _Object$entries13$_i = _slicedToArray(_Object$entries13[_i14], 2),
-                  key = _Object$entries13$_i[0],
-                  value = _Object$entries13$_i[1];
+            for (var _i13 = 0, _Object$entries12 = Object.entries(row); _i13 < _Object$entries12.length; _i13++) {
+              var _Object$entries12$_i = _slicedToArray(_Object$entries12[_i13], 2),
+                  key = _Object$entries12$_i[0],
+                  value = _Object$entries12$_i[1];
 
               var column = _this17.columns[_this17.fieldsColumnsIndex[key]];
 
@@ -6632,7 +6505,7 @@
             id = id.toString();
           } else if (typeof rowUniqueId === 'number') {
             if (Number(rowUniqueId) === rowUniqueId && rowUniqueId % 1 === 0) {
-              id = parseInt(id, 10);
+              id = parseInt(id);
             } else if (rowUniqueId === Number(rowUniqueId) && rowUniqueId !== 0) {
               id = parseFloat(id);
             }
@@ -6650,7 +6523,6 @@
       key: "updateByUniqueId",
       value: function updateByUniqueId(params) {
         var allParams = Array.isArray(params) ? params : [params];
-        var updatedUid = null;
 
         var _iterator7 = _createForOfIteratorHelper(allParams),
             _step7;
@@ -6674,8 +6546,6 @@
             } else {
               $__default['default'].extend(this.options.data[rowId], _params2.row);
             }
-
-            updatedUid = _params2.id;
           }
         } catch (err) {
           _iterator7.e(err);
@@ -6686,7 +6556,7 @@
         this.initSearch();
         this.initPagination();
         this.initSort();
-        this.initBody(true, updatedUid);
+        this.initBody(true);
       }
     }, {
       key: "removeByUniqueId",
@@ -6958,7 +6828,7 @@
         var colspan = options.colspan || 1;
         var i;
         var j;
-        var $tr = this.$body.find('>tr[data-index]');
+        var $tr = this.$body.find('>tr');
         col += Utils.getDetailViewIndexOffset(this.options);
         var $td = $tr.eq(row).find('>td').eq(col);
 
@@ -7101,10 +6971,9 @@
           if (obj.values.includes(row[obj.field])) {
             var $el = _this24.$selectItem.filter(':enabled').filter(Utils.sprintf('[data-index="%s"]', i));
 
-            var onlyCurrentPage = obj.hasOwnProperty('onlyCurrentPage') ? obj.onlyCurrentPage : false;
             $el = checked ? $el.not(':checked') : $el.filter(':checked');
 
-            if (!$el.length && onlyCurrentPage) {
+            if (!$el.length) {
               return;
             }
 
@@ -7153,6 +7022,7 @@
           this.options.height = params.height;
         }
 
+        this.$selectAll.prop('checked', this.$selectItem.length > 0 && this.$selectItem.length === this.$selectItem.filter(':checked').length);
         this.$tableContainer.toggleClass('has-card-view', this.options.cardView);
 
         if (!this.options.cardView && this.options.showHeader && this.options.height) {
@@ -7242,7 +7112,6 @@
         var text = this.options.showButtonText ? this.options.pagination ? this.options.formatPaginationSwitchUp() : this.options.formatPaginationSwitchDown() : '';
         this.$toolbar.find('button[name="paginationSwitch"]').html("".concat(Utils.sprintf(this.constants.html.icon, this.options.iconsPrefix, icon), " ").concat(text));
         this.updatePagination();
-        this.trigger('toggle-pagination', this.options.pagination);
       }
     }, {
       key: "toggleFullscreen",
@@ -7354,12 +7223,12 @@
         var row = this.data[index];
         var $tr = this.$body.find(Utils.sprintf('> tr[data-index="%s"][data-has-detail-view]', index));
 
-        if (this.options.detailViewIcon) {
-          $tr.find('a.detail-icon').html(Utils.sprintf(this.constants.html.icon, this.options.iconsPrefix, this.options.icons.detailClose));
-        }
-
         if ($tr.next().is('tr.detail-view')) {
           return;
+        }
+
+        if (this.options.detailViewIcon) {
+          $tr.find('a.detail-icon').html(Utils.sprintf(this.constants.html.icon, this.options.iconsPrefix, this.options.icons.detailClose));
         }
 
         $tr.after(Utils.sprintf('<tr class="detail-view"><td colspan="%s"></td></tr>', $tr.children('td').length));
@@ -7561,10 +7430,9 @@
 
 	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
 	var global_1 =
-	  // eslint-disable-next-line es/no-global-this -- safe
+	  /* global globalThis -- safe */
 	  check(typeof globalThis == 'object' && globalThis) ||
 	  check(typeof window == 'object' && window) ||
-	  // eslint-disable-next-line no-restricted-globals -- safe
 	  check(typeof self == 'object' && self) ||
 	  check(typeof commonjsGlobal == 'object' && commonjsGlobal) ||
 	  // eslint-disable-next-line no-new-func -- fallback
@@ -7580,23 +7448,21 @@
 
 	// Detect IE8's incomplete defineProperty implementation
 	var descriptors = !fails(function () {
-	  // eslint-disable-next-line es/no-object-defineproperty -- required for testing
 	  return Object.defineProperty({}, 1, { get: function () { return 7; } })[1] != 7;
 	});
 
-	var $propertyIsEnumerable = {}.propertyIsEnumerable;
-	// eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
+	var nativePropertyIsEnumerable = {}.propertyIsEnumerable;
 	var getOwnPropertyDescriptor$1 = Object.getOwnPropertyDescriptor;
 
 	// Nashorn ~ JDK8 bug
-	var NASHORN_BUG = getOwnPropertyDescriptor$1 && !$propertyIsEnumerable.call({ 1: 2 }, 1);
+	var NASHORN_BUG = getOwnPropertyDescriptor$1 && !nativePropertyIsEnumerable.call({ 1: 2 }, 1);
 
 	// `Object.prototype.propertyIsEnumerable` method implementation
 	// https://tc39.es/ecma262/#sec-object.prototype.propertyisenumerable
 	var f$4 = NASHORN_BUG ? function propertyIsEnumerable(V) {
 	  var descriptor = getOwnPropertyDescriptor$1(this, V);
 	  return !!descriptor && descriptor.enumerable;
-	} : $propertyIsEnumerable;
+	} : nativePropertyIsEnumerable;
 
 	var objectPropertyIsEnumerable = {
 		f: f$4
@@ -7676,22 +7542,20 @@
 
 	// Thank's IE8 for his funny defineProperty
 	var ie8DomDefine = !descriptors && !fails(function () {
-	  // eslint-disable-next-line es/no-object-defineproperty -- requied for testing
 	  return Object.defineProperty(documentCreateElement('div'), 'a', {
 	    get: function () { return 7; }
 	  }).a != 7;
 	});
 
-	// eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
-	var $getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+	var nativeGetOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
 
 	// `Object.getOwnPropertyDescriptor` method
 	// https://tc39.es/ecma262/#sec-object.getownpropertydescriptor
-	var f$3 = descriptors ? $getOwnPropertyDescriptor : function getOwnPropertyDescriptor(O, P) {
+	var f$3 = descriptors ? nativeGetOwnPropertyDescriptor : function getOwnPropertyDescriptor(O, P) {
 	  O = toIndexedObject(O);
 	  P = toPrimitive(P, true);
 	  if (ie8DomDefine) try {
-	    return $getOwnPropertyDescriptor(O, P);
+	    return nativeGetOwnPropertyDescriptor(O, P);
 	  } catch (error) { /* empty */ }
 	  if (has$1(O, P)) return createPropertyDescriptor(!objectPropertyIsEnumerable.f.call(O, P), O[P]);
 	};
@@ -7706,17 +7570,16 @@
 	  } return it;
 	};
 
-	// eslint-disable-next-line es/no-object-defineproperty -- safe
-	var $defineProperty = Object.defineProperty;
+	var nativeDefineProperty = Object.defineProperty;
 
 	// `Object.defineProperty` method
 	// https://tc39.es/ecma262/#sec-object.defineproperty
-	var f$2 = descriptors ? $defineProperty : function defineProperty(O, P, Attributes) {
+	var f$2 = descriptors ? nativeDefineProperty : function defineProperty(O, P, Attributes) {
 	  anObject(O);
 	  P = toPrimitive(P, true);
 	  anObject(Attributes);
 	  if (ie8DomDefine) try {
-	    return $defineProperty(O, P, Attributes);
+	    return nativeDefineProperty(O, P, Attributes);
 	  } catch (error) { /* empty */ }
 	  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported');
 	  if ('value' in Attributes) O[P] = Attributes.value;
@@ -7766,7 +7629,7 @@
 	(module.exports = function (key, value) {
 	  return sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {});
 	})('versions', []).push({
-	  version: '3.10.1',
+	  version: '3.9.1',
 	  mode: 'global',
 	  copyright: '© 2021 Denis Pushkarev (zloirock.ru)'
 	});
@@ -7978,7 +7841,6 @@
 
 	// `Object.getOwnPropertyNames` method
 	// https://tc39.es/ecma262/#sec-object.getownpropertynames
-	// eslint-disable-next-line es/no-object-getownpropertynames -- safe
 	var f$1 = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
 	  return objectKeysInternal(O, hiddenKeys);
 	};
@@ -7987,7 +7849,6 @@
 		f: f$1
 	};
 
-	// eslint-disable-next-line es/no-object-getownpropertysymbols -- safe
 	var f = Object.getOwnPropertySymbols;
 
 	var objectGetOwnPropertySymbols = {
@@ -8087,7 +7948,6 @@
 
 	// `IsArray` abstract operation
 	// https://tc39.es/ecma262/#sec-isarray
-	// eslint-disable-next-line es/no-array-isarray -- safe
 	var isArray = Array.isArray || function isArray(arg) {
 	  return classofRaw(arg) == 'Array';
 	};
@@ -8126,19 +7986,16 @@
 
 	var engineV8Version = version && +version;
 
-	// eslint-disable-next-line es/no-object-getownpropertysymbols -- required for testing
 	var nativeSymbol = !!Object.getOwnPropertySymbols && !fails(function () {
-	  // eslint-disable-next-line es/no-symbol -- required for testing
+	  /* global Symbol -- required for testing */
 	  return !Symbol.sham &&
 	    // Chrome 38 Symbol has incorrect toString conversion
 	    // Chrome 38-40 symbols are not inherited from DOM collections prototypes to instances
 	    (engineIsNode ? engineV8Version === 38 : engineV8Version > 37 && engineV8Version < 41);
 	});
 
-	/* eslint-disable es/no-symbol -- required for testing */
-
-
 	var useSymbolAsUid = nativeSymbol
+	  /* global Symbol -- safe */
 	  && !Symbol.sham
 	  && typeof Symbol.iterator == 'symbol';
 
@@ -9665,37 +9522,36 @@
 	 * Author: Felix Vera (felix.vera@gmail.com)
 	 * Copiado: Mauricio Vera (mauricioa.vera@gmail.com)
 	 * Revisión: J Manuel Corona (jmcg92@gmail.com) (13/Feb/2018).
-	 * Revisión: Ricardo González (rickygzz85@gmail.com) (20/Oct/2021)
 	 */
 
 	$__default['default'].fn.bootstrapTable.locales['es-MX'] = {
 	  formatCopyRows: function formatCopyRows() {
-	    return 'Copiar Filas';
+	    return 'Copy Rows';
 	  },
 	  formatPrint: function formatPrint() {
-	    return 'Imprimir';
+	    return 'Print';
 	  },
 	  formatLoadingMessage: function formatLoadingMessage() {
 	    return 'Cargando, espere por favor';
 	  },
 	  formatRecordsPerPage: function formatRecordsPerPage(pageNumber) {
-	    return "".concat(pageNumber, " resultados por p\xE1gina");
+	    return "".concat(pageNumber, " registros por p\xE1gina");
 	  },
 	  formatShowingRows: function formatShowingRows(pageFrom, pageTo, totalRows, totalNotFiltered) {
 	    if (totalNotFiltered !== undefined && totalNotFiltered > 0 && totalNotFiltered > totalRows) {
-	      return "Mostrando ".concat(pageFrom, " a ").concat(pageTo, " de ").concat(totalRows, " filas (filtrado de ").concat(totalNotFiltered, " filas totales)");
+	      return "Mostrando ".concat(pageFrom, " a ").concat(pageTo, " de ").concat(totalRows, " filas (filtered from ").concat(totalNotFiltered, " total rows)");
 	    }
 
 	    return "Mostrando ".concat(pageFrom, " a ").concat(pageTo, " de ").concat(totalRows, " filas");
 	  },
 	  formatSRPaginationPreText: function formatSRPaginationPreText() {
-	    return 'página anterior';
+	    return 'previous page';
 	  },
 	  formatSRPaginationPageText: function formatSRPaginationPageText(page) {
-	    return "ir a la p\xE1gina ".concat(page);
+	    return "to page ".concat(page);
 	  },
 	  formatSRPaginationNextText: function formatSRPaginationNextText() {
-	    return 'página siguiente';
+	    return 'next page';
 	  },
 	  formatDetailPagination: function formatDetailPagination(totalRows) {
 	    return "Mostrando ".concat(totalRows, " filas");
@@ -9713,10 +9569,10 @@
 	    return 'Mostrar/ocultar paginación';
 	  },
 	  formatPaginationSwitchDown: function formatPaginationSwitchDown() {
-	    return 'Mostrar paginación';
+	    return 'Show pagination';
 	  },
 	  formatPaginationSwitchUp: function formatPaginationSwitchUp() {
-	    return 'Ocultar paginación';
+	    return 'Hide pagination';
 	  },
 	  formatRefresh: function formatRefresh() {
 	    return 'Actualizar';
@@ -9725,16 +9581,16 @@
 	    return 'Cambiar vista';
 	  },
 	  formatToggleOn: function formatToggleOn() {
-	    return 'Mostrar vista';
+	    return 'Show card view';
 	  },
 	  formatToggleOff: function formatToggleOff() {
-	    return 'Ocultar vista';
+	    return 'Hide card view';
 	  },
 	  formatColumns: function formatColumns() {
 	    return 'Columnas';
 	  },
 	  formatColumnsToggleAll: function formatColumnsToggleAll() {
-	    return 'Alternar todo';
+	    return 'Toggle all';
 	  },
 	  formatFullscreen: function formatFullscreen() {
 	    return 'Pantalla completa';
@@ -9743,19 +9599,19 @@
 	    return 'Todo';
 	  },
 	  formatAutoRefresh: function formatAutoRefresh() {
-	    return 'Auto actualizar';
+	    return 'Auto Refresh';
 	  },
 	  formatExport: function formatExport() {
-	    return 'Exportar datos';
+	    return 'Export data';
 	  },
 	  formatJumpTo: function formatJumpTo() {
-	    return 'IR';
+	    return 'GO';
 	  },
 	  formatAdvancedSearch: function formatAdvancedSearch() {
-	    return 'Búsqueda avanzada';
+	    return 'Advanced search';
 	  },
 	  formatAdvancedCloseButton: function formatAdvancedCloseButton() {
-	    return 'Cerrar';
+	    return 'Close';
 	  },
 	  formatFilterControlSwitch: function formatFilterControlSwitch() {
 	    return 'Ocultar/Mostrar controles';
@@ -14070,10 +13926,9 @@
 
   // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
   var global_1 =
-    // eslint-disable-next-line es/no-global-this -- safe
+    /* global globalThis -- safe */
     check(typeof globalThis == 'object' && globalThis) ||
     check(typeof window == 'object' && window) ||
-    // eslint-disable-next-line no-restricted-globals -- safe
     check(typeof self == 'object' && self) ||
     check(typeof commonjsGlobal == 'object' && commonjsGlobal) ||
     // eslint-disable-next-line no-new-func -- fallback
@@ -14089,23 +13944,21 @@
 
   // Detect IE8's incomplete defineProperty implementation
   var descriptors = !fails(function () {
-    // eslint-disable-next-line es/no-object-defineproperty -- required for testing
     return Object.defineProperty({}, 1, { get: function () { return 7; } })[1] != 7;
   });
 
-  var $propertyIsEnumerable = {}.propertyIsEnumerable;
-  // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
+  var nativePropertyIsEnumerable = {}.propertyIsEnumerable;
   var getOwnPropertyDescriptor$1 = Object.getOwnPropertyDescriptor;
 
   // Nashorn ~ JDK8 bug
-  var NASHORN_BUG = getOwnPropertyDescriptor$1 && !$propertyIsEnumerable.call({ 1: 2 }, 1);
+  var NASHORN_BUG = getOwnPropertyDescriptor$1 && !nativePropertyIsEnumerable.call({ 1: 2 }, 1);
 
   // `Object.prototype.propertyIsEnumerable` method implementation
   // https://tc39.es/ecma262/#sec-object.prototype.propertyisenumerable
   var f$4 = NASHORN_BUG ? function propertyIsEnumerable(V) {
     var descriptor = getOwnPropertyDescriptor$1(this, V);
     return !!descriptor && descriptor.enumerable;
-  } : $propertyIsEnumerable;
+  } : nativePropertyIsEnumerable;
 
   var objectPropertyIsEnumerable = {
   	f: f$4
@@ -14185,22 +14038,20 @@
 
   // Thank's IE8 for his funny defineProperty
   var ie8DomDefine = !descriptors && !fails(function () {
-    // eslint-disable-next-line es/no-object-defineproperty -- requied for testing
     return Object.defineProperty(documentCreateElement('div'), 'a', {
       get: function () { return 7; }
     }).a != 7;
   });
 
-  // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
-  var $getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+  var nativeGetOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
 
   // `Object.getOwnPropertyDescriptor` method
   // https://tc39.es/ecma262/#sec-object.getownpropertydescriptor
-  var f$3 = descriptors ? $getOwnPropertyDescriptor : function getOwnPropertyDescriptor(O, P) {
+  var f$3 = descriptors ? nativeGetOwnPropertyDescriptor : function getOwnPropertyDescriptor(O, P) {
     O = toIndexedObject(O);
     P = toPrimitive(P, true);
     if (ie8DomDefine) try {
-      return $getOwnPropertyDescriptor(O, P);
+      return nativeGetOwnPropertyDescriptor(O, P);
     } catch (error) { /* empty */ }
     if (has$1(O, P)) return createPropertyDescriptor(!objectPropertyIsEnumerable.f.call(O, P), O[P]);
   };
@@ -14215,17 +14066,16 @@
     } return it;
   };
 
-  // eslint-disable-next-line es/no-object-defineproperty -- safe
-  var $defineProperty = Object.defineProperty;
+  var nativeDefineProperty = Object.defineProperty;
 
   // `Object.defineProperty` method
   // https://tc39.es/ecma262/#sec-object.defineproperty
-  var f$2 = descriptors ? $defineProperty : function defineProperty(O, P, Attributes) {
+  var f$2 = descriptors ? nativeDefineProperty : function defineProperty(O, P, Attributes) {
     anObject(O);
     P = toPrimitive(P, true);
     anObject(Attributes);
     if (ie8DomDefine) try {
-      return $defineProperty(O, P, Attributes);
+      return nativeDefineProperty(O, P, Attributes);
     } catch (error) { /* empty */ }
     if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported');
     if ('value' in Attributes) O[P] = Attributes.value;
@@ -14275,7 +14125,7 @@
   (module.exports = function (key, value) {
     return sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {});
   })('versions', []).push({
-    version: '3.10.1',
+    version: '3.9.1',
     mode: 'global',
     copyright: '© 2021 Denis Pushkarev (zloirock.ru)'
   });
@@ -14487,7 +14337,6 @@
 
   // `Object.getOwnPropertyNames` method
   // https://tc39.es/ecma262/#sec-object.getownpropertynames
-  // eslint-disable-next-line es/no-object-getownpropertynames -- safe
   var f$1 = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
     return objectKeysInternal(O, hiddenKeys);
   };
@@ -14496,7 +14345,6 @@
   	f: f$1
   };
 
-  // eslint-disable-next-line es/no-object-getownpropertysymbols -- safe
   var f = Object.getOwnPropertySymbols;
 
   var objectGetOwnPropertySymbols = {
@@ -14596,7 +14444,6 @@
 
   // `IsArray` abstract operation
   // https://tc39.es/ecma262/#sec-isarray
-  // eslint-disable-next-line es/no-array-isarray -- safe
   var isArray = Array.isArray || function isArray(arg) {
     return classofRaw(arg) == 'Array';
   };
@@ -14635,19 +14482,16 @@
 
   var engineV8Version = version && +version;
 
-  // eslint-disable-next-line es/no-object-getownpropertysymbols -- required for testing
   var nativeSymbol = !!Object.getOwnPropertySymbols && !fails(function () {
-    // eslint-disable-next-line es/no-symbol -- required for testing
+    /* global Symbol -- required for testing */
     return !Symbol.sham &&
       // Chrome 38 Symbol has incorrect toString conversion
       // Chrome 38-40 symbols are not inherited from DOM collections prototypes to instances
       (engineIsNode ? engineV8Version === 38 : engineV8Version > 37 && engineV8Version < 41);
   });
 
-  /* eslint-disable es/no-symbol -- required for testing */
-
-
   var useSymbolAsUid = nativeSymbol
+    /* global Symbol -- safe */
     && !Symbol.sham
     && typeof Symbol.iterator == 'symbol';
 
@@ -14749,14 +14593,12 @@
 
   // `Object.keys` method
   // https://tc39.es/ecma262/#sec-object.keys
-  // eslint-disable-next-line es/no-object-keys -- safe
   var objectKeys = Object.keys || function keys(O) {
     return objectKeysInternal(O, enumBugKeys);
   };
 
   // `Object.defineProperties` method
   // https://tc39.es/ecma262/#sec-object.defineproperties
-  // eslint-disable-next-line es/no-object-defineproperties -- safe
   var objectDefineProperties = descriptors ? Object.defineProperties : function defineProperties(O, Properties) {
     anObject(O);
     var keys = objectKeys(Properties);
@@ -15020,7 +14862,6 @@
   // https://tc39.es/ecma262/#sec-array.prototype.foreach
   var arrayForEach = !STRICT_METHOD ? function forEach(callbackfn /* , thisArg */) {
     return $forEach(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
-  // eslint-disable-next-line es/no-array-prototype-foreach -- safe
   } : [].forEach;
 
   for (var COLLECTION_NAME in domIterables) {
@@ -15470,10 +15311,9 @@
 
   // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
   var global_1 =
-    // eslint-disable-next-line es/no-global-this -- safe
+    /* global globalThis -- safe */
     check(typeof globalThis == 'object' && globalThis) ||
     check(typeof window == 'object' && window) ||
-    // eslint-disable-next-line no-restricted-globals -- safe
     check(typeof self == 'object' && self) ||
     check(typeof commonjsGlobal == 'object' && commonjsGlobal) ||
     // eslint-disable-next-line no-new-func -- fallback
@@ -15489,23 +15329,21 @@
 
   // Detect IE8's incomplete defineProperty implementation
   var descriptors = !fails(function () {
-    // eslint-disable-next-line es/no-object-defineproperty -- required for testing
     return Object.defineProperty({}, 1, { get: function () { return 7; } })[1] != 7;
   });
 
-  var $propertyIsEnumerable = {}.propertyIsEnumerable;
-  // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
+  var nativePropertyIsEnumerable = {}.propertyIsEnumerable;
   var getOwnPropertyDescriptor$1 = Object.getOwnPropertyDescriptor;
 
   // Nashorn ~ JDK8 bug
-  var NASHORN_BUG = getOwnPropertyDescriptor$1 && !$propertyIsEnumerable.call({ 1: 2 }, 1);
+  var NASHORN_BUG = getOwnPropertyDescriptor$1 && !nativePropertyIsEnumerable.call({ 1: 2 }, 1);
 
   // `Object.prototype.propertyIsEnumerable` method implementation
   // https://tc39.es/ecma262/#sec-object.prototype.propertyisenumerable
   var f$4 = NASHORN_BUG ? function propertyIsEnumerable(V) {
     var descriptor = getOwnPropertyDescriptor$1(this, V);
     return !!descriptor && descriptor.enumerable;
-  } : $propertyIsEnumerable;
+  } : nativePropertyIsEnumerable;
 
   var objectPropertyIsEnumerable = {
   	f: f$4
@@ -15585,22 +15423,20 @@
 
   // Thank's IE8 for his funny defineProperty
   var ie8DomDefine = !descriptors && !fails(function () {
-    // eslint-disable-next-line es/no-object-defineproperty -- requied for testing
     return Object.defineProperty(documentCreateElement('div'), 'a', {
       get: function () { return 7; }
     }).a != 7;
   });
 
-  // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
-  var $getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+  var nativeGetOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
 
   // `Object.getOwnPropertyDescriptor` method
   // https://tc39.es/ecma262/#sec-object.getownpropertydescriptor
-  var f$3 = descriptors ? $getOwnPropertyDescriptor : function getOwnPropertyDescriptor(O, P) {
+  var f$3 = descriptors ? nativeGetOwnPropertyDescriptor : function getOwnPropertyDescriptor(O, P) {
     O = toIndexedObject(O);
     P = toPrimitive(P, true);
     if (ie8DomDefine) try {
-      return $getOwnPropertyDescriptor(O, P);
+      return nativeGetOwnPropertyDescriptor(O, P);
     } catch (error) { /* empty */ }
     if (has$1(O, P)) return createPropertyDescriptor(!objectPropertyIsEnumerable.f.call(O, P), O[P]);
   };
@@ -15615,17 +15451,16 @@
     } return it;
   };
 
-  // eslint-disable-next-line es/no-object-defineproperty -- safe
-  var $defineProperty = Object.defineProperty;
+  var nativeDefineProperty = Object.defineProperty;
 
   // `Object.defineProperty` method
   // https://tc39.es/ecma262/#sec-object.defineproperty
-  var f$2 = descriptors ? $defineProperty : function defineProperty(O, P, Attributes) {
+  var f$2 = descriptors ? nativeDefineProperty : function defineProperty(O, P, Attributes) {
     anObject(O);
     P = toPrimitive(P, true);
     anObject(Attributes);
     if (ie8DomDefine) try {
-      return $defineProperty(O, P, Attributes);
+      return nativeDefineProperty(O, P, Attributes);
     } catch (error) { /* empty */ }
     if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported');
     if ('value' in Attributes) O[P] = Attributes.value;
@@ -15675,7 +15510,7 @@
   (module.exports = function (key, value) {
     return sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {});
   })('versions', []).push({
-    version: '3.10.1',
+    version: '3.9.1',
     mode: 'global',
     copyright: '© 2021 Denis Pushkarev (zloirock.ru)'
   });
@@ -15887,7 +15722,6 @@
 
   // `Object.getOwnPropertyNames` method
   // https://tc39.es/ecma262/#sec-object.getownpropertynames
-  // eslint-disable-next-line es/no-object-getownpropertynames -- safe
   var f$1 = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
     return objectKeysInternal(O, hiddenKeys);
   };
@@ -15896,7 +15730,6 @@
   	f: f$1
   };
 
-  // eslint-disable-next-line es/no-object-getownpropertysymbols -- safe
   var f = Object.getOwnPropertySymbols;
 
   var objectGetOwnPropertySymbols = {
@@ -16031,7 +15864,6 @@
 
   // `IsArray` abstract operation
   // https://tc39.es/ecma262/#sec-isarray
-  // eslint-disable-next-line es/no-array-isarray -- safe
   var isArray = Array.isArray || function isArray(arg) {
     return classofRaw(arg) == 'Array';
   };
@@ -16058,19 +15890,16 @@
 
   var engineV8Version = version && +version;
 
-  // eslint-disable-next-line es/no-object-getownpropertysymbols -- required for testing
   var nativeSymbol = !!Object.getOwnPropertySymbols && !fails(function () {
-    // eslint-disable-next-line es/no-symbol -- required for testing
+    /* global Symbol -- required for testing */
     return !Symbol.sham &&
       // Chrome 38 Symbol has incorrect toString conversion
       // Chrome 38-40 symbols are not inherited from DOM collections prototypes to instances
       (engineIsNode ? engineV8Version === 38 : engineV8Version > 37 && engineV8Version < 41);
   });
 
-  /* eslint-disable es/no-symbol -- required for testing */
-
-
   var useSymbolAsUid = nativeSymbol
+    /* global Symbol -- safe */
     && !Symbol.sham
     && typeof Symbol.iterator == 'symbol';
 
@@ -16174,14 +16003,12 @@
 
   // `Object.keys` method
   // https://tc39.es/ecma262/#sec-object.keys
-  // eslint-disable-next-line es/no-object-keys -- safe
   var objectKeys = Object.keys || function keys(O) {
     return objectKeysInternal(O, enumBugKeys);
   };
 
   // `Object.defineProperties` method
   // https://tc39.es/ecma262/#sec-object.defineproperties
-  // eslint-disable-next-line es/no-object-defineproperties -- safe
   var objectDefineProperties = descriptors ? Object.defineProperties : function defineProperties(O, Properties) {
     anObject(O);
     var keys = objectKeys(Properties);
@@ -16322,7 +16149,7 @@
     return RegExp(s, f);
   }
 
-  var UNSUPPORTED_Y$2 = fails(function () {
+  var UNSUPPORTED_Y$1 = fails(function () {
     // babel-minify transpiles RegExp('a', 'y') -> /a/y and it causes SyntaxError
     var re = RE('a', 'y');
     re.lastIndex = 2;
@@ -16337,12 +16164,15 @@
   });
 
   var regexpStickyHelpers = {
-  	UNSUPPORTED_Y: UNSUPPORTED_Y$2,
+  	UNSUPPORTED_Y: UNSUPPORTED_Y$1,
   	BROKEN_CARET: BROKEN_CARET
   };
 
   var nativeExec = RegExp.prototype.exec;
-  var nativeReplace = shared('native-string-replace', String.prototype.replace);
+  // This always refers to the native implementation, because the
+  // String#replace polyfill uses ./fix-regexp-well-known-symbol-logic.js,
+  // which loads this file before patching the method.
+  var nativeReplace = String.prototype.replace;
 
   var patchedExec = nativeExec;
 
@@ -16354,19 +16184,19 @@
     return re1.lastIndex !== 0 || re2.lastIndex !== 0;
   })();
 
-  var UNSUPPORTED_Y$1 = regexpStickyHelpers.UNSUPPORTED_Y || regexpStickyHelpers.BROKEN_CARET;
+  var UNSUPPORTED_Y = regexpStickyHelpers.UNSUPPORTED_Y || regexpStickyHelpers.BROKEN_CARET;
 
   // nonparticipating capturing group, copied from es5-shim's String#split patch.
   // eslint-disable-next-line regexp/no-assertion-capturing-group, regexp/no-empty-group -- required for testing
   var NPCG_INCLUDED = /()??/.exec('')[1] !== undefined;
 
-  var PATCH = UPDATES_LAST_INDEX_WRONG || NPCG_INCLUDED || UNSUPPORTED_Y$1;
+  var PATCH = UPDATES_LAST_INDEX_WRONG || NPCG_INCLUDED || UNSUPPORTED_Y;
 
   if (PATCH) {
     patchedExec = function exec(str) {
       var re = this;
       var lastIndex, reCopy, match, i;
-      var sticky = UNSUPPORTED_Y$1 && re.sticky;
+      var sticky = UNSUPPORTED_Y && re.sticky;
       var flags = regexpFlags.call(re);
       var source = re.source;
       var charsAdded = 0;
@@ -16436,6 +16266,7 @@
 
 
 
+
   var SPECIES$3 = wellKnownSymbol('species');
 
   var REPLACE_SUPPORTS_NAMED_GROUPS = !fails(function () {
@@ -16454,7 +16285,6 @@
   // IE <= 11 replaces $0 with the whole match, as if it was $&
   // https://stackoverflow.com/questions/6024666/getting-ie-to-replace-a-regex-with-the-literal-string-0
   var REPLACE_KEEPS_$0 = (function () {
-    // eslint-disable-next-line regexp/prefer-escape-replacement-dollar-char -- required for testing
     return 'a'.replace(/./, '$0') === '$0';
   })();
 
@@ -16524,7 +16354,7 @@
     ) {
       var nativeRegExpMethod = /./[SYMBOL];
       var methods = exec(SYMBOL, ''[KEY], function (nativeMethod, regexp, str, arg2, forceStringMethod) {
-        if (regexp.exec === RegExp.prototype.exec) {
+        if (regexp.exec === regexpExec) {
           if (DELEGATES_TO_SYMBOL && !forceStringMethod) {
             // The native String method already delegates to @@method (this
             // polyfilled function), leasing to infinite recursion.
@@ -16626,10 +16456,12 @@
     return regexpExec.call(R, S);
   };
 
-  var UNSUPPORTED_Y = regexpStickyHelpers.UNSUPPORTED_Y;
   var arrayPush = [].push;
   var min$1 = Math.min;
   var MAX_UINT32 = 0xFFFFFFFF;
+
+  // babel-minify transpiles RegExp('x', 'y') -> /x/y and it causes SyntaxError
+  var SUPPORTS_Y = !fails(function () { return !RegExp(MAX_UINT32, 'y'); });
 
   // @@split logic
   fixRegexpWellKnownSymbolLogic('split', 2, function (SPLIT, nativeSplit, maybeCallNative) {
@@ -16713,11 +16545,11 @@
         var flags = (rx.ignoreCase ? 'i' : '') +
                     (rx.multiline ? 'm' : '') +
                     (rx.unicode ? 'u' : '') +
-                    (UNSUPPORTED_Y ? 'g' : 'y');
+                    (SUPPORTS_Y ? 'y' : 'g');
 
         // ^(? + rx + ) is needed, in combination with some S slicing, to
         // simulate the 'y' flag.
-        var splitter = new C(UNSUPPORTED_Y ? '^(?:' + rx.source + ')' : rx, flags);
+        var splitter = new C(SUPPORTS_Y ? rx : '^(?:' + rx.source + ')', flags);
         var lim = limit === undefined ? MAX_UINT32 : limit >>> 0;
         if (lim === 0) return [];
         if (S.length === 0) return regexpExecAbstract(splitter, S) === null ? [S] : [];
@@ -16725,12 +16557,12 @@
         var q = 0;
         var A = [];
         while (q < S.length) {
-          splitter.lastIndex = UNSUPPORTED_Y ? 0 : q;
-          var z = regexpExecAbstract(splitter, UNSUPPORTED_Y ? S.slice(q) : S);
+          splitter.lastIndex = SUPPORTS_Y ? q : 0;
+          var z = regexpExecAbstract(splitter, SUPPORTS_Y ? S : S.slice(q));
           var e;
           if (
             z === null ||
-            (e = min$1(toLength(splitter.lastIndex + (UNSUPPORTED_Y ? q : 0)), S.length)) === p
+            (e = min$1(toLength(splitter.lastIndex + (SUPPORTS_Y ? 0 : q)), S.length)) === p
           ) {
             q = advanceStringIndex(S, q, unicodeMatching);
           } else {
@@ -16747,7 +16579,7 @@
         return A;
       }
     ];
-  }, UNSUPPORTED_Y);
+  }, !SUPPORTS_Y);
 
   var floor = Math.floor;
   var replace = ''.replace;
@@ -16950,16 +16782,14 @@
     }
   });
 
-  // eslint-disable-next-line es/no-object-assign -- safe
-  var $assign = Object.assign;
-  // eslint-disable-next-line es/no-object-defineproperty -- required for testing
+  var nativeAssign = Object.assign;
   var defineProperty = Object.defineProperty;
 
   // `Object.assign` method
   // https://tc39.es/ecma262/#sec-object.assign
-  var objectAssign = !$assign || fails(function () {
+  var objectAssign = !nativeAssign || fails(function () {
     // should have correct order of operations (Edge bug)
-    if (descriptors && $assign({ b: 1 }, $assign(defineProperty({}, 'a', {
+    if (descriptors && nativeAssign({ b: 1 }, nativeAssign(defineProperty({}, 'a', {
       enumerable: true,
       get: function () {
         defineProperty(this, 'b', {
@@ -16971,12 +16801,12 @@
     // should work with symbols and should have deterministic property order (V8 bug)
     var A = {};
     var B = {};
-    // eslint-disable-next-line es/no-symbol -- safe
+    /* global Symbol -- required for testing */
     var symbol = Symbol();
     var alphabet = 'abcdefghijklmnopqrst';
     A[symbol] = 7;
     alphabet.split('').forEach(function (chr) { B[chr] = chr; });
-    return $assign({}, A)[symbol] != 7 || objectKeys($assign({}, B)).join('') != alphabet;
+    return nativeAssign({}, A)[symbol] != 7 || objectKeys(nativeAssign({}, B)).join('') != alphabet;
   }) ? function assign(target, source) { // eslint-disable-line no-unused-vars -- required for `.length`
     var T = toObject(target);
     var argumentsLength = arguments.length;
@@ -16994,11 +16824,10 @@
         if (!descriptors || propertyIsEnumerable.call(S, key)) T[key] = S[key];
       }
     } return T;
-  } : $assign;
+  } : nativeAssign;
 
   // `Object.assign` method
   // https://tc39.es/ecma262/#sec-object.assign
-  // eslint-disable-next-line es/no-object-assign -- required for testing
   _export({ target: 'Object', stat: true, forced: Object.assign !== objectAssign }, {
     assign: objectAssign
   });
@@ -17118,7 +16947,6 @@
   // https://tc39.es/ecma262/#sec-array.prototype.foreach
   var arrayForEach = !STRICT_METHOD ? function forEach(callbackfn /* , thisArg */) {
     return $forEach(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
-  // eslint-disable-next-line es/no-array-prototype-foreach -- safe
   } : [].forEach;
 
   for (var COLLECTION_NAME in domIterables) {
@@ -17174,7 +17002,6 @@
   $__default['default'].extend($__default['default'].fn.bootstrapTable.defaults.icons, {
     export: {
       bootstrap3: 'glyphicon-export icon-share',
-      bootstrap5: 'bi-download',
       materialize: 'file_download',
       'bootstrap-table': 'icon-download'
     }[$__default['default'].fn.bootstrapTable.theme] || 'fa-download'
@@ -17210,8 +17037,8 @@
     _createClass(_class, [{
       key: "initToolbar",
       value: function initToolbar() {
-        var _this = this,
-            _get2;
+        var _get2,
+            _this = this;
 
         var o = this.options;
         var exportTypes = o.exportTypes;
@@ -17234,36 +17061,7 @@
 
           this.buttons = Object.assign(this.buttons, {
             export: {
-              html: function html() {
-                if (exportTypes.length === 1) {
-                  return "\n                  <div class=\"export ".concat(_this.constants.classes.buttonsDropdown, "\"\n                  data-type=\"").concat(exportTypes[0], "\">\n                  <button class=\"").concat(_this.constants.buttonsClass, "\"\n                  aria-label=\"Export\"\n                  type=\"button\"\n                  title=\"").concat(o.formatExport(), "\">\n                  ").concat(o.showButtonIcons ? Utils.sprintf(_this.constants.html.icon, o.iconsPrefix, o.icons.export) : '', "\n                  ").concat(o.showButtonText ? o.formatExport() : '', "\n                  </button>\n                  </div>\n                ");
-                }
-
-                var html = [];
-                html.push("\n                <div class=\"export ".concat(_this.constants.classes.buttonsDropdown, "\">\n                <button class=\"").concat(_this.constants.buttonsClass, " dropdown-toggle\"\n                aria-label=\"Export\"\n                ").concat(_this.constants.dataToggle, "=\"dropdown\"\n                type=\"button\"\n                title=\"").concat(o.formatExport(), "\">\n                ").concat(o.showButtonIcons ? Utils.sprintf(_this.constants.html.icon, o.iconsPrefix, o.icons.export) : '', "\n                ").concat(o.showButtonText ? o.formatExport() : '', "\n                ").concat(_this.constants.html.dropdownCaret, "\n                </button>\n                ").concat(_this.constants.html.toolbarDropdown[0], "\n              "));
-
-                var _iterator = _createForOfIteratorHelper(exportTypes),
-                    _step;
-
-                try {
-                  for (_iterator.s(); !(_step = _iterator.n()).done;) {
-                    var type = _step.value;
-
-                    if (TYPE_NAME.hasOwnProperty(type)) {
-                      var $item = $__default['default'](Utils.sprintf(_this.constants.html.pageDropdownItem, '', TYPE_NAME[type]));
-                      $item.attr('data-type', type);
-                      html.push($item.prop('outerHTML'));
-                    }
-                  }
-                } catch (err) {
-                  _iterator.e(err);
-                } finally {
-                  _iterator.f();
-                }
-
-                html.push(_this.constants.html.toolbarDropdown[1], '</div>');
-                return html.join('');
-              }
+              html: exportTypes.length === 1 ? "\n            <div class=\"export ".concat(this.constants.classes.buttonsDropdown, "\"\n            data-type=\"").concat(exportTypes[0], "\">\n            <button class=\"").concat(this.constants.buttonsClass, "\"\n            aria-label=\"Export\"\n            type=\"button\"\n            title=\"").concat(o.formatExport(), "\">\n            ").concat(o.showButtonIcons ? Utils.sprintf(this.constants.html.icon, o.iconsPrefix, o.icons.export) : '', "\n            ").concat(o.showButtonText ? o.formatExport() : '', "\n            </button>\n            </div>\n          ") : "\n            <div class=\"export ".concat(this.constants.classes.buttonsDropdown, "\">\n            <button class=\"").concat(this.constants.buttonsClass, " dropdown-toggle\"\n            aria-label=\"Export\"\n            ").concat(this.constants.dataToggle, "=\"dropdown\"\n            type=\"button\"\n            title=\"").concat(o.formatExport(), "\">\n            ").concat(o.showButtonIcons ? Utils.sprintf(this.constants.html.icon, o.iconsPrefix, o.icons.export) : '', "\n            ").concat(o.showButtonText ? o.formatExport() : '', "\n            ").concat(this.constants.html.dropdownCaret, "\n            </button>\n            </div>\n          ")
             }
           });
         }
@@ -17280,14 +17078,40 @@
           return;
         }
 
-        this.updateExportButton();
-        var $exportButtons = this.$export.find('[data-type]');
+        var $menu = $__default['default'](this.constants.html.toolbarDropdown.join(''));
+        var $items = this.$export;
 
-        if (exportTypes.length === 1) {
-          $exportButtons = this.$export.find('button');
+        if (exportTypes.length > 1) {
+          this.$export.append($menu); // themes support
+
+          if ($menu.children().length) {
+            $menu = $menu.children().eq(0);
+          }
+
+          var _iterator = _createForOfIteratorHelper(exportTypes),
+              _step;
+
+          try {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+              var type = _step.value;
+
+              if (TYPE_NAME.hasOwnProperty(type)) {
+                var $item = $__default['default'](Utils.sprintf(this.constants.html.pageDropdownItem, '', TYPE_NAME[type]));
+                $item.attr('data-type', type);
+                $menu.append($item);
+              }
+            }
+          } catch (err) {
+            _iterator.e(err);
+          } finally {
+            _iterator.f();
+          }
+
+          $items = $menu.children();
         }
 
-        $exportButtons.click(function (e) {
+        this.updateExportButton();
+        $items.click(function (e) {
           e.preventDefault();
           var type = $__default['default'](e.currentTarget).data('type');
           var exportOptions = {
@@ -17705,10 +17529,9 @@
 
   // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
   var global_1 =
-    // eslint-disable-next-line es/no-global-this -- safe
+    /* global globalThis -- safe */
     check(typeof globalThis == 'object' && globalThis) ||
     check(typeof window == 'object' && window) ||
-    // eslint-disable-next-line no-restricted-globals -- safe
     check(typeof self == 'object' && self) ||
     check(typeof commonjsGlobal == 'object' && commonjsGlobal) ||
     // eslint-disable-next-line no-new-func -- fallback
@@ -17724,23 +17547,21 @@
 
   // Detect IE8's incomplete defineProperty implementation
   var descriptors = !fails(function () {
-    // eslint-disable-next-line es/no-object-defineproperty -- required for testing
     return Object.defineProperty({}, 1, { get: function () { return 7; } })[1] != 7;
   });
 
-  var $propertyIsEnumerable = {}.propertyIsEnumerable;
-  // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
+  var nativePropertyIsEnumerable = {}.propertyIsEnumerable;
   var getOwnPropertyDescriptor$1 = Object.getOwnPropertyDescriptor;
 
   // Nashorn ~ JDK8 bug
-  var NASHORN_BUG = getOwnPropertyDescriptor$1 && !$propertyIsEnumerable.call({ 1: 2 }, 1);
+  var NASHORN_BUG = getOwnPropertyDescriptor$1 && !nativePropertyIsEnumerable.call({ 1: 2 }, 1);
 
   // `Object.prototype.propertyIsEnumerable` method implementation
   // https://tc39.es/ecma262/#sec-object.prototype.propertyisenumerable
   var f$4 = NASHORN_BUG ? function propertyIsEnumerable(V) {
     var descriptor = getOwnPropertyDescriptor$1(this, V);
     return !!descriptor && descriptor.enumerable;
-  } : $propertyIsEnumerable;
+  } : nativePropertyIsEnumerable;
 
   var objectPropertyIsEnumerable = {
   	f: f$4
@@ -17820,22 +17641,20 @@
 
   // Thank's IE8 for his funny defineProperty
   var ie8DomDefine = !descriptors && !fails(function () {
-    // eslint-disable-next-line es/no-object-defineproperty -- requied for testing
     return Object.defineProperty(documentCreateElement('div'), 'a', {
       get: function () { return 7; }
     }).a != 7;
   });
 
-  // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
-  var $getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+  var nativeGetOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
 
   // `Object.getOwnPropertyDescriptor` method
   // https://tc39.es/ecma262/#sec-object.getownpropertydescriptor
-  var f$3 = descriptors ? $getOwnPropertyDescriptor : function getOwnPropertyDescriptor(O, P) {
+  var f$3 = descriptors ? nativeGetOwnPropertyDescriptor : function getOwnPropertyDescriptor(O, P) {
     O = toIndexedObject(O);
     P = toPrimitive(P, true);
     if (ie8DomDefine) try {
-      return $getOwnPropertyDescriptor(O, P);
+      return nativeGetOwnPropertyDescriptor(O, P);
     } catch (error) { /* empty */ }
     if (has$1(O, P)) return createPropertyDescriptor(!objectPropertyIsEnumerable.f.call(O, P), O[P]);
   };
@@ -17850,17 +17669,16 @@
     } return it;
   };
 
-  // eslint-disable-next-line es/no-object-defineproperty -- safe
-  var $defineProperty = Object.defineProperty;
+  var nativeDefineProperty = Object.defineProperty;
 
   // `Object.defineProperty` method
   // https://tc39.es/ecma262/#sec-object.defineproperty
-  var f$2 = descriptors ? $defineProperty : function defineProperty(O, P, Attributes) {
+  var f$2 = descriptors ? nativeDefineProperty : function defineProperty(O, P, Attributes) {
     anObject(O);
     P = toPrimitive(P, true);
     anObject(Attributes);
     if (ie8DomDefine) try {
-      return $defineProperty(O, P, Attributes);
+      return nativeDefineProperty(O, P, Attributes);
     } catch (error) { /* empty */ }
     if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported');
     if ('value' in Attributes) O[P] = Attributes.value;
@@ -17910,7 +17728,7 @@
   (module.exports = function (key, value) {
     return sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {});
   })('versions', []).push({
-    version: '3.10.1',
+    version: '3.9.1',
     mode: 'global',
     copyright: '© 2021 Denis Pushkarev (zloirock.ru)'
   });
@@ -18122,7 +17940,6 @@
 
   // `Object.getOwnPropertyNames` method
   // https://tc39.es/ecma262/#sec-object.getownpropertynames
-  // eslint-disable-next-line es/no-object-getownpropertynames -- safe
   var f$1 = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
     return objectKeysInternal(O, hiddenKeys);
   };
@@ -18131,7 +17948,6 @@
   	f: f$1
   };
 
-  // eslint-disable-next-line es/no-object-getownpropertysymbols -- safe
   var f = Object.getOwnPropertySymbols;
 
   var objectGetOwnPropertySymbols = {
@@ -18231,7 +18047,6 @@
 
   // `IsArray` abstract operation
   // https://tc39.es/ecma262/#sec-isarray
-  // eslint-disable-next-line es/no-array-isarray -- safe
   var isArray = Array.isArray || function isArray(arg) {
     return classofRaw(arg) == 'Array';
   };
@@ -18270,19 +18085,16 @@
 
   var engineV8Version = version && +version;
 
-  // eslint-disable-next-line es/no-object-getownpropertysymbols -- required for testing
   var nativeSymbol = !!Object.getOwnPropertySymbols && !fails(function () {
-    // eslint-disable-next-line es/no-symbol -- required for testing
+    /* global Symbol -- required for testing */
     return !Symbol.sham &&
       // Chrome 38 Symbol has incorrect toString conversion
       // Chrome 38-40 symbols are not inherited from DOM collections prototypes to instances
       (engineIsNode ? engineV8Version === 38 : engineV8Version > 37 && engineV8Version < 41);
   });
 
-  /* eslint-disable es/no-symbol -- required for testing */
-
-
   var useSymbolAsUid = nativeSymbol
+    /* global Symbol -- safe */
     && !Symbol.sham
     && typeof Symbol.iterator == 'symbol';
 
@@ -18423,7 +18235,7 @@
     return RegExp(s, f);
   }
 
-  var UNSUPPORTED_Y$2 = fails(function () {
+  var UNSUPPORTED_Y$1 = fails(function () {
     // babel-minify transpiles RegExp('a', 'y') -> /a/y and it causes SyntaxError
     var re = RE('a', 'y');
     re.lastIndex = 2;
@@ -18438,12 +18250,15 @@
   });
 
   var regexpStickyHelpers = {
-  	UNSUPPORTED_Y: UNSUPPORTED_Y$2,
+  	UNSUPPORTED_Y: UNSUPPORTED_Y$1,
   	BROKEN_CARET: BROKEN_CARET
   };
 
   var nativeExec = RegExp.prototype.exec;
-  var nativeReplace = shared('native-string-replace', String.prototype.replace);
+  // This always refers to the native implementation, because the
+  // String#replace polyfill uses ./fix-regexp-well-known-symbol-logic.js,
+  // which loads this file before patching the method.
+  var nativeReplace = String.prototype.replace;
 
   var patchedExec = nativeExec;
 
@@ -18455,19 +18270,19 @@
     return re1.lastIndex !== 0 || re2.lastIndex !== 0;
   })();
 
-  var UNSUPPORTED_Y$1 = regexpStickyHelpers.UNSUPPORTED_Y || regexpStickyHelpers.BROKEN_CARET;
+  var UNSUPPORTED_Y = regexpStickyHelpers.UNSUPPORTED_Y || regexpStickyHelpers.BROKEN_CARET;
 
   // nonparticipating capturing group, copied from es5-shim's String#split patch.
   // eslint-disable-next-line regexp/no-assertion-capturing-group, regexp/no-empty-group -- required for testing
   var NPCG_INCLUDED = /()??/.exec('')[1] !== undefined;
 
-  var PATCH = UPDATES_LAST_INDEX_WRONG || NPCG_INCLUDED || UNSUPPORTED_Y$1;
+  var PATCH = UPDATES_LAST_INDEX_WRONG || NPCG_INCLUDED || UNSUPPORTED_Y;
 
   if (PATCH) {
     patchedExec = function exec(str) {
       var re = this;
       var lastIndex, reCopy, match, i;
-      var sticky = UNSUPPORTED_Y$1 && re.sticky;
+      var sticky = UNSUPPORTED_Y && re.sticky;
       var flags = regexpFlags.call(re);
       var source = re.source;
       var charsAdded = 0;
@@ -18537,6 +18352,7 @@
 
 
 
+
   var SPECIES$1 = wellKnownSymbol('species');
 
   var REPLACE_SUPPORTS_NAMED_GROUPS = !fails(function () {
@@ -18555,7 +18371,6 @@
   // IE <= 11 replaces $0 with the whole match, as if it was $&
   // https://stackoverflow.com/questions/6024666/getting-ie-to-replace-a-regex-with-the-literal-string-0
   var REPLACE_KEEPS_$0 = (function () {
-    // eslint-disable-next-line regexp/prefer-escape-replacement-dollar-char -- required for testing
     return 'a'.replace(/./, '$0') === '$0';
   })();
 
@@ -18625,7 +18440,7 @@
     ) {
       var nativeRegExpMethod = /./[SYMBOL];
       var methods = exec(SYMBOL, ''[KEY], function (nativeMethod, regexp, str, arg2, forceStringMethod) {
-        if (regexp.exec === RegExp.prototype.exec) {
+        if (regexp.exec === regexpExec) {
           if (DELEGATES_TO_SYMBOL && !forceStringMethod) {
             // The native String method already delegates to @@method (this
             // polyfilled function), leasing to infinite recursion.
@@ -18733,10 +18548,12 @@
     return regexpExec.call(R, S);
   };
 
-  var UNSUPPORTED_Y = regexpStickyHelpers.UNSUPPORTED_Y;
   var arrayPush = [].push;
   var min$1 = Math.min;
   var MAX_UINT32 = 0xFFFFFFFF;
+
+  // babel-minify transpiles RegExp('x', 'y') -> /x/y and it causes SyntaxError
+  var SUPPORTS_Y = !fails(function () { return !RegExp(MAX_UINT32, 'y'); });
 
   // @@split logic
   fixRegexpWellKnownSymbolLogic('split', 2, function (SPLIT, nativeSplit, maybeCallNative) {
@@ -18820,11 +18637,11 @@
         var flags = (rx.ignoreCase ? 'i' : '') +
                     (rx.multiline ? 'm' : '') +
                     (rx.unicode ? 'u' : '') +
-                    (UNSUPPORTED_Y ? 'g' : 'y');
+                    (SUPPORTS_Y ? 'y' : 'g');
 
         // ^(? + rx + ) is needed, in combination with some S slicing, to
         // simulate the 'y' flag.
-        var splitter = new C(UNSUPPORTED_Y ? '^(?:' + rx.source + ')' : rx, flags);
+        var splitter = new C(SUPPORTS_Y ? rx : '^(?:' + rx.source + ')', flags);
         var lim = limit === undefined ? MAX_UINT32 : limit >>> 0;
         if (lim === 0) return [];
         if (S.length === 0) return regexpExecAbstract(splitter, S) === null ? [S] : [];
@@ -18832,12 +18649,12 @@
         var q = 0;
         var A = [];
         while (q < S.length) {
-          splitter.lastIndex = UNSUPPORTED_Y ? 0 : q;
-          var z = regexpExecAbstract(splitter, UNSUPPORTED_Y ? S.slice(q) : S);
+          splitter.lastIndex = SUPPORTS_Y ? q : 0;
+          var z = regexpExecAbstract(splitter, SUPPORTS_Y ? S : S.slice(q));
           var e;
           if (
             z === null ||
-            (e = min$1(toLength(splitter.lastIndex + (UNSUPPORTED_Y ? q : 0)), S.length)) === p
+            (e = min$1(toLength(splitter.lastIndex + (SUPPORTS_Y ? 0 : q)), S.length)) === p
           ) {
             q = advanceStringIndex(S, q, unicodeMatching);
           } else {
@@ -18854,7 +18671,7 @@
         return A;
       }
     ];
-  }, UNSUPPORTED_Y);
+  }, !SUPPORTS_Y);
 
   var floor = Math.floor;
   var replace = ''.replace;
@@ -19119,7 +18936,6 @@
   // https://tc39.es/ecma262/#sec-array.prototype.foreach
   var arrayForEach = !STRICT_METHOD ? function forEach(callbackfn /* , thisArg */) {
     return $forEach(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
-  // eslint-disable-next-line es/no-array-prototype-foreach -- safe
   } : [].forEach;
 
   for (var COLLECTION_NAME in domIterables) {
@@ -19197,14 +19013,12 @@
 
   // `Object.keys` method
   // https://tc39.es/ecma262/#sec-object.keys
-  // eslint-disable-next-line es/no-object-keys -- safe
   var objectKeys = Object.keys || function keys(O) {
     return objectKeysInternal(O, enumBugKeys);
   };
 
   // `Object.defineProperties` method
   // https://tc39.es/ecma262/#sec-object.defineproperties
-  // eslint-disable-next-line es/no-object-defineproperties -- safe
   var objectDefineProperties = descriptors ? Object.defineProperties : function defineProperties(O, Properties) {
     anObject(O);
     var keys = objectKeys(Properties);
@@ -19355,7 +19169,6 @@
 
   // `SameValue` abstract operation
   // https://tc39.es/ecma262/#sec-samevalue
-  // eslint-disable-next-line es/no-object-is -- safe
   var sameValue = Object.is || function is(x, y) {
     // eslint-disable-next-line no-self-compare -- NaN check
     return x === y ? x !== 0 || 1 / x === 1 / y : x != x && y != y;
@@ -19400,11 +19213,9 @@
     cookieIds: {
       sortOrder: 'bs.table.sortOrder',
       sortName: 'bs.table.sortName',
-      sortPriority: 'bs.table.sortPriority',
       pageNumber: 'bs.table.pageNumber',
       pageList: 'bs.table.pageList',
       columns: 'bs.table.columns',
-      cardView: 'bs.table.cardView',
       searchText: 'bs.table.searchText',
       reorderColumns: 'bs.table.reorderColumns',
       filterControl: 'bs.table.filterControl',
@@ -19660,7 +19471,7 @@
     cookieSecure: null,
     cookieSameSite: 'Lax',
     cookieIdTable: '',
-    cookiesEnabled: ['bs.table.sortOrder', 'bs.table.sortName', 'bs.table.sortPriority', 'bs.table.pageNumber', 'bs.table.pageList', 'bs.table.columns', 'bs.table.searchText', 'bs.table.filterControl', 'bs.table.filterBy', 'bs.table.reorderColumns', 'bs.table.cardView'],
+    cookiesEnabled: ['bs.table.sortOrder', 'bs.table.sortName', 'bs.table.pageNumber', 'bs.table.pageList', 'bs.table.columns', 'bs.table.searchText', 'bs.table.filterControl', 'bs.table.filterBy', 'bs.table.reorderColumns'],
     cookieStorage: 'cookieStorage',
     // localStorage, sessionStorage, customStorage
     cookieCustomStorageGet: null,
@@ -19786,57 +19597,35 @@
         if (this.options.sortName === undefined || this.options.sortOrder === undefined) {
           UtilsCookie.deleteCookie(this, this.options.cookieIdTable, UtilsCookie.cookieIds.sortName);
           UtilsCookie.deleteCookie(this, this.options.cookieIdTable, UtilsCookie.cookieIds.sortOrder);
-        } else {
-          this.options.sortPriority = null;
-          UtilsCookie.deleteCookie(this, this.options.cookieIdTable, UtilsCookie.cookieIds.sortPriority);
-          UtilsCookie.setCookie(this, UtilsCookie.cookieIds.sortOrder, this.options.sortOrder);
-          UtilsCookie.setCookie(this, UtilsCookie.cookieIds.sortName, this.options.sortName);
+          return;
         }
+
+        UtilsCookie.setCookie(this, UtilsCookie.cookieIds.sortOrder, this.options.sortOrder);
+        UtilsCookie.setCookie(this, UtilsCookie.cookieIds.sortName, this.options.sortName);
       }
     }, {
-      key: "onMultipleSort",
-      value: function onMultipleSort() {
+      key: "onPageNumber",
+      value: function onPageNumber() {
         var _get5;
 
         for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
           args[_key4] = arguments[_key4];
         }
 
-        (_get5 = _get(_getPrototypeOf(_class.prototype), "onMultipleSort", this)).call.apply(_get5, [this].concat(args));
-
-        if (this.options.sortPriority === undefined) {
-          UtilsCookie.deleteCookie(this, this.options.cookieIdTable, UtilsCookie.cookieIds.sortPriority);
-        } else {
-          this.options.sortName = undefined;
-          this.options.sortOrder = undefined;
-          UtilsCookie.deleteCookie(this, this.options.cookieIdTable, UtilsCookie.cookieIds.sortName);
-          UtilsCookie.deleteCookie(this, this.options.cookieIdTable, UtilsCookie.cookieIds.sortOrder);
-          UtilsCookie.setCookie(this, UtilsCookie.cookieIds.sortPriority, JSON.stringify(this.options.sortPriority));
-        }
-      }
-    }, {
-      key: "onPageNumber",
-      value: function onPageNumber() {
-        var _get6;
-
-        for (var _len5 = arguments.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
-          args[_key5] = arguments[_key5];
-        }
-
-        (_get6 = _get(_getPrototypeOf(_class.prototype), "onPageNumber", this)).call.apply(_get6, [this].concat(args));
+        (_get5 = _get(_getPrototypeOf(_class.prototype), "onPageNumber", this)).call.apply(_get5, [this].concat(args));
 
         UtilsCookie.setCookie(this, UtilsCookie.cookieIds.pageNumber, this.options.pageNumber);
       }
     }, {
       key: "onPageListChange",
       value: function onPageListChange() {
-        var _get7;
+        var _get6;
 
-        for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-          args[_key6] = arguments[_key6];
+        for (var _len5 = arguments.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+          args[_key5] = arguments[_key5];
         }
 
-        (_get7 = _get(_getPrototypeOf(_class.prototype), "onPageListChange", this)).call.apply(_get7, [this].concat(args));
+        (_get6 = _get(_getPrototypeOf(_class.prototype), "onPageListChange", this)).call.apply(_get6, [this].concat(args));
 
         UtilsCookie.setCookie(this, UtilsCookie.cookieIds.pageList, this.options.pageSize);
         UtilsCookie.setCookie(this, UtilsCookie.cookieIds.pageNumber, this.options.pageNumber);
@@ -19844,39 +19633,39 @@
     }, {
       key: "onPagePre",
       value: function onPagePre() {
-        var _get8;
+        var _get7;
 
-        for (var _len7 = arguments.length, args = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
-          args[_key7] = arguments[_key7];
+        for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+          args[_key6] = arguments[_key6];
         }
 
-        (_get8 = _get(_getPrototypeOf(_class.prototype), "onPagePre", this)).call.apply(_get8, [this].concat(args));
+        (_get7 = _get(_getPrototypeOf(_class.prototype), "onPagePre", this)).call.apply(_get7, [this].concat(args));
 
         UtilsCookie.setCookie(this, UtilsCookie.cookieIds.pageNumber, this.options.pageNumber);
       }
     }, {
       key: "onPageNext",
       value: function onPageNext() {
-        var _get9;
+        var _get8;
 
-        for (var _len8 = arguments.length, args = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
-          args[_key8] = arguments[_key8];
+        for (var _len7 = arguments.length, args = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+          args[_key7] = arguments[_key7];
         }
 
-        (_get9 = _get(_getPrototypeOf(_class.prototype), "onPageNext", this)).call.apply(_get9, [this].concat(args));
+        (_get8 = _get(_getPrototypeOf(_class.prototype), "onPageNext", this)).call.apply(_get8, [this].concat(args));
 
         UtilsCookie.setCookie(this, UtilsCookie.cookieIds.pageNumber, this.options.pageNumber);
       }
     }, {
       key: "_toggleColumn",
       value: function _toggleColumn() {
-        var _get10;
+        var _get9;
 
-        for (var _len9 = arguments.length, args = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
-          args[_key9] = arguments[_key9];
+        for (var _len8 = arguments.length, args = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+          args[_key8] = arguments[_key8];
         }
 
-        (_get10 = _get(_getPrototypeOf(_class.prototype), "_toggleColumn", this)).call.apply(_get10, [this].concat(args));
+        (_get9 = _get(_getPrototypeOf(_class.prototype), "_toggleColumn", this)).call.apply(_get9, [this].concat(args));
 
         UtilsCookie.setCookie(this, UtilsCookie.cookieIds.columns, JSON.stringify(this.getVisibleColumns().map(function (column) {
           return column.field;
@@ -19885,24 +19674,17 @@
     }, {
       key: "_toggleAllColumns",
       value: function _toggleAllColumns() {
-        var _get11;
+        var _get10;
 
-        for (var _len10 = arguments.length, args = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
-          args[_key10] = arguments[_key10];
+        for (var _len9 = arguments.length, args = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+          args[_key9] = arguments[_key9];
         }
 
-        (_get11 = _get(_getPrototypeOf(_class.prototype), "_toggleAllColumns", this)).call.apply(_get11, [this].concat(args));
+        (_get10 = _get(_getPrototypeOf(_class.prototype), "_toggleAllColumns", this)).call.apply(_get10, [this].concat(args));
 
         UtilsCookie.setCookie(this, UtilsCookie.cookieIds.columns, JSON.stringify(this.getVisibleColumns().map(function (column) {
           return column.field;
         })));
-      }
-    }, {
-      key: "toggleView",
-      value: function toggleView() {
-        _get(_getPrototypeOf(_class.prototype), "toggleView", this).call(this);
-
-        UtilsCookie.setCookie(this, UtilsCookie.cookieIds.cardView, this.options.cardView);
       }
     }, {
       key: "selectPage",
@@ -19925,17 +19707,17 @@
     }, {
       key: "initHeader",
       value: function initHeader() {
-        var _get12;
+        var _get11;
 
         if (this.options.reorderableColumns) {
           this.columnsSortOrder = JSON.parse(UtilsCookie.getCookie(this, this.options.cookieIdTable, UtilsCookie.cookieIds.reorderColumns));
         }
 
-        for (var _len11 = arguments.length, args = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
-          args[_key11] = arguments[_key11];
+        for (var _len10 = arguments.length, args = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
+          args[_key10] = arguments[_key10];
         }
 
-        (_get12 = _get(_getPrototypeOf(_class.prototype), "initHeader", this)).call.apply(_get12, [this].concat(args));
+        (_get11 = _get(_getPrototypeOf(_class.prototype), "initHeader", this)).call.apply(_get11, [this].concat(args));
       }
     }, {
       key: "persistReorderColumnsState",
@@ -19945,13 +19727,13 @@
     }, {
       key: "filterBy",
       value: function filterBy() {
-        var _get13;
+        var _get12;
 
-        for (var _len12 = arguments.length, args = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
-          args[_key12] = arguments[_key12];
+        for (var _len11 = arguments.length, args = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
+          args[_key11] = arguments[_key11];
         }
 
-        (_get13 = _get(_getPrototypeOf(_class.prototype), "filterBy", this)).call.apply(_get13, [this].concat(args));
+        (_get12 = _get(_getPrototypeOf(_class.prototype), "filterBy", this)).call.apply(_get12, [this].concat(args));
 
         UtilsCookie.setCookie(this, UtilsCookie.cookieIds.filterBy, JSON.stringify(this.filterColumns));
       }
@@ -19973,11 +19755,9 @@
 
         var sortOrderCookie = UtilsCookie.getCookie(this, this.options.cookieIdTable, UtilsCookie.cookieIds.sortOrder);
         var sortOrderNameCookie = UtilsCookie.getCookie(this, this.options.cookieIdTable, UtilsCookie.cookieIds.sortName);
-        var sortPriorityCookie = UtilsCookie.getCookie(this, this.options.cookieIdTable, UtilsCookie.cookieIds.sortPriority);
         var pageNumberCookie = UtilsCookie.getCookie(this, this.options.cookieIdTable, UtilsCookie.cookieIds.pageNumber);
         var pageListCookie = UtilsCookie.getCookie(this, this.options.cookieIdTable, UtilsCookie.cookieIds.pageList);
         var searchTextCookie = UtilsCookie.getCookie(this, this.options.cookieIdTable, UtilsCookie.cookieIds.searchText);
-        var cardViewCookie = UtilsCookie.getCookie(this, this.options.cookieIdTable, UtilsCookie.cookieIds.cardView);
         var columnsCookieValue = UtilsCookie.getCookie(this, this.options.cookieIdTable, UtilsCookie.cookieIds.columns);
 
         if (typeof columnsCookieValue === 'boolean' && !columnsCookieValue) {
@@ -19990,42 +19770,18 @@
           columnsCookie = JSON.parse(columnsCookieValue);
         } catch (e) {
           throw new Error('Could not parse the json of the columns cookie!', columnsCookieValue);
-        }
-
-        try {
-          sortPriorityCookie = JSON.parse(sortPriorityCookie);
-        } catch (e) {
-          throw new Error('Could not parse the json of the sortPriority cookie!', sortPriorityCookie);
         } // sortOrder
 
 
-        this.options.sortOrder = undefined; // sortName
+        this.options.sortOrder = sortOrderCookie ? sortOrderCookie : this.options.sortOrder; // sortName
 
-        this.options.sortName = undefined;
-
-        if (!sortPriorityCookie) {
-          // sortOrder
-          this.options.sortOrder = sortOrderCookie ? sortOrderCookie : this.options.sortOrder; // sortName
-
-          this.options.sortName = sortOrderNameCookie ? sortOrderNameCookie : this.options.sortName;
-        } // sortPriority
-
-
-        this.options.sortPriority = sortPriorityCookie ? sortPriorityCookie : this.options.sortPriority;
-
-        if (this.options.sortOrder || this.options.sortName) {
-          // sortPriority
-          this.options.sortPriority = null;
-        } // pageNumber
-
+        this.options.sortName = sortOrderNameCookie ? sortOrderNameCookie : this.options.sortName; // pageNumber
 
         this.options.pageNumber = pageNumberCookie ? +pageNumberCookie : this.options.pageNumber; // pageSize
 
         this.options.pageSize = pageListCookie ? pageListCookie === this.options.formatAllRows() ? pageListCookie : +pageListCookie : this.options.pageSize; // searchText
 
-        this.options.searchText = searchTextCookie ? searchTextCookie : ''; // cardView
-
-        this.options.cardView = cardViewCookie === 'true' ? cardViewCookie : false;
+        this.options.searchText = searchTextCookie ? searchTextCookie : '';
 
         if (columnsCookie) {
           var _iterator = _createForOfIteratorHelper(this.columns),
@@ -20034,7 +19790,7 @@
           try {
             var _loop = function _loop() {
               var column = _step.value;
-              var filteredColumns = columnsCookie.filter(function (columnField) {
+              column.visible = columnsCookie.filter(function (columnField) {
                 if (_this.isSelectionColumn(column)) {
                   return true;
                 }
@@ -20050,8 +19806,7 @@
                 }
 
                 return columnField === column.field;
-              });
-              column.visible = (filteredColumns.length > 0 || !column.switchable) && column.visible;
+              }).length > 0 || !column.switchable;
             };
 
             for (_iterator.s(); !(_step = _iterator.n()).done;) {
@@ -20930,10 +20685,9 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
 
   // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
   var global_1 =
-    // eslint-disable-next-line es/no-global-this -- safe
+    /* global globalThis -- safe */
     check(typeof globalThis == 'object' && globalThis) ||
     check(typeof window == 'object' && window) ||
-    // eslint-disable-next-line no-restricted-globals -- safe
     check(typeof self == 'object' && self) ||
     check(typeof commonjsGlobal == 'object' && commonjsGlobal) ||
     // eslint-disable-next-line no-new-func -- fallback
@@ -20949,23 +20703,21 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
 
   // Detect IE8's incomplete defineProperty implementation
   var descriptors = !fails(function () {
-    // eslint-disable-next-line es/no-object-defineproperty -- required for testing
     return Object.defineProperty({}, 1, { get: function () { return 7; } })[1] != 7;
   });
 
-  var $propertyIsEnumerable = {}.propertyIsEnumerable;
-  // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
+  var nativePropertyIsEnumerable = {}.propertyIsEnumerable;
   var getOwnPropertyDescriptor$1 = Object.getOwnPropertyDescriptor;
 
   // Nashorn ~ JDK8 bug
-  var NASHORN_BUG = getOwnPropertyDescriptor$1 && !$propertyIsEnumerable.call({ 1: 2 }, 1);
+  var NASHORN_BUG = getOwnPropertyDescriptor$1 && !nativePropertyIsEnumerable.call({ 1: 2 }, 1);
 
   // `Object.prototype.propertyIsEnumerable` method implementation
   // https://tc39.es/ecma262/#sec-object.prototype.propertyisenumerable
   var f$4 = NASHORN_BUG ? function propertyIsEnumerable(V) {
     var descriptor = getOwnPropertyDescriptor$1(this, V);
     return !!descriptor && descriptor.enumerable;
-  } : $propertyIsEnumerable;
+  } : nativePropertyIsEnumerable;
 
   var objectPropertyIsEnumerable = {
   	f: f$4
@@ -21045,22 +20797,20 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
 
   // Thank's IE8 for his funny defineProperty
   var ie8DomDefine = !descriptors && !fails(function () {
-    // eslint-disable-next-line es/no-object-defineproperty -- requied for testing
     return Object.defineProperty(documentCreateElement('div'), 'a', {
       get: function () { return 7; }
     }).a != 7;
   });
 
-  // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
-  var $getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+  var nativeGetOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
 
   // `Object.getOwnPropertyDescriptor` method
   // https://tc39.es/ecma262/#sec-object.getownpropertydescriptor
-  var f$3 = descriptors ? $getOwnPropertyDescriptor : function getOwnPropertyDescriptor(O, P) {
+  var f$3 = descriptors ? nativeGetOwnPropertyDescriptor : function getOwnPropertyDescriptor(O, P) {
     O = toIndexedObject(O);
     P = toPrimitive(P, true);
     if (ie8DomDefine) try {
-      return $getOwnPropertyDescriptor(O, P);
+      return nativeGetOwnPropertyDescriptor(O, P);
     } catch (error) { /* empty */ }
     if (has$1(O, P)) return createPropertyDescriptor(!objectPropertyIsEnumerable.f.call(O, P), O[P]);
   };
@@ -21075,17 +20825,16 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
     } return it;
   };
 
-  // eslint-disable-next-line es/no-object-defineproperty -- safe
-  var $defineProperty = Object.defineProperty;
+  var nativeDefineProperty = Object.defineProperty;
 
   // `Object.defineProperty` method
   // https://tc39.es/ecma262/#sec-object.defineproperty
-  var f$2 = descriptors ? $defineProperty : function defineProperty(O, P, Attributes) {
+  var f$2 = descriptors ? nativeDefineProperty : function defineProperty(O, P, Attributes) {
     anObject(O);
     P = toPrimitive(P, true);
     anObject(Attributes);
     if (ie8DomDefine) try {
-      return $defineProperty(O, P, Attributes);
+      return nativeDefineProperty(O, P, Attributes);
     } catch (error) { /* empty */ }
     if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported');
     if ('value' in Attributes) O[P] = Attributes.value;
@@ -21135,7 +20884,7 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
   (module.exports = function (key, value) {
     return sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {});
   })('versions', []).push({
-    version: '3.10.1',
+    version: '3.9.1',
     mode: 'global',
     copyright: '© 2021 Denis Pushkarev (zloirock.ru)'
   });
@@ -21347,7 +21096,6 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
 
   // `Object.getOwnPropertyNames` method
   // https://tc39.es/ecma262/#sec-object.getownpropertynames
-  // eslint-disable-next-line es/no-object-getownpropertynames -- safe
   var f$1 = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
     return objectKeysInternal(O, hiddenKeys);
   };
@@ -21356,7 +21104,6 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
   	f: f$1
   };
 
-  // eslint-disable-next-line es/no-object-getownpropertysymbols -- safe
   var f = Object.getOwnPropertySymbols;
 
   var objectGetOwnPropertySymbols = {
@@ -21456,7 +21203,6 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
 
   // `IsArray` abstract operation
   // https://tc39.es/ecma262/#sec-isarray
-  // eslint-disable-next-line es/no-array-isarray -- safe
   var isArray = Array.isArray || function isArray(arg) {
     return classofRaw(arg) == 'Array';
   };
@@ -21495,19 +21241,16 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
 
   var engineV8Version = version && +version;
 
-  // eslint-disable-next-line es/no-object-getownpropertysymbols -- required for testing
   var nativeSymbol = !!Object.getOwnPropertySymbols && !fails(function () {
-    // eslint-disable-next-line es/no-symbol -- required for testing
+    /* global Symbol -- required for testing */
     return !Symbol.sham &&
       // Chrome 38 Symbol has incorrect toString conversion
       // Chrome 38-40 symbols are not inherited from DOM collections prototypes to instances
       (engineIsNode ? engineV8Version === 38 : engineV8Version > 37 && engineV8Version < 41);
   });
 
-  /* eslint-disable es/no-symbol -- required for testing */
-
-
   var useSymbolAsUid = nativeSymbol
+    /* global Symbol -- safe */
     && !Symbol.sham
     && typeof Symbol.iterator == 'symbol';
 
@@ -21705,14 +21448,12 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
 
   // `Object.keys` method
   // https://tc39.es/ecma262/#sec-object.keys
-  // eslint-disable-next-line es/no-object-keys -- safe
   var objectKeys = Object.keys || function keys(O) {
     return objectKeysInternal(O, enumBugKeys);
   };
 
   // `Object.defineProperties` method
   // https://tc39.es/ecma262/#sec-object.defineproperties
-  // eslint-disable-next-line es/no-object-defineproperties -- safe
   var objectDefineProperties = descriptors ? Object.defineProperties : function defineProperties(O, Properties) {
     anObject(O);
     var keys = objectKeys(Properties);
@@ -21991,11 +21732,8 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
 
         if (top > start && top <= end) {
           // ensure clone and source column widths are the same
-          this.$stickyHeader.find('tr').each(function (indexRows, rows) {
-            var columns = $__default['default'](rows).find('th');
-            columns.each(function (indexColumns, celd) {
-              $__default['default'](celd).css('min-width', _this4.$header.find("tr:eq(".concat(indexRows, ")")).find("th:eq(".concat(indexColumns, ")")).css('width'));
-            });
+          this.$stickyHeader.find('tr:eq(0)').find('th').each(function (index, el) {
+            $__default['default'](el).css('min-width', _this4.$header.find('tr:eq(0)').find('th').eq(index).css('width'));
           }); // match bootstrap table style
 
           this.$stickyContainer.show().addClass('fix-sticky fixed-table-container'); // stick it in position
@@ -22328,10 +22066,9 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
 
   // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
   var global_1 =
-    // eslint-disable-next-line es/no-global-this -- safe
+    /* global globalThis -- safe */
     check(typeof globalThis == 'object' && globalThis) ||
     check(typeof window == 'object' && window) ||
-    // eslint-disable-next-line no-restricted-globals -- safe
     check(typeof self == 'object' && self) ||
     check(typeof commonjsGlobal == 'object' && commonjsGlobal) ||
     // eslint-disable-next-line no-new-func -- fallback
@@ -22347,23 +22084,21 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
 
   // Detect IE8's incomplete defineProperty implementation
   var descriptors = !fails(function () {
-    // eslint-disable-next-line es/no-object-defineproperty -- required for testing
     return Object.defineProperty({}, 1, { get: function () { return 7; } })[1] != 7;
   });
 
-  var $propertyIsEnumerable = {}.propertyIsEnumerable;
-  // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
+  var nativePropertyIsEnumerable = {}.propertyIsEnumerable;
   var getOwnPropertyDescriptor$1 = Object.getOwnPropertyDescriptor;
 
   // Nashorn ~ JDK8 bug
-  var NASHORN_BUG = getOwnPropertyDescriptor$1 && !$propertyIsEnumerable.call({ 1: 2 }, 1);
+  var NASHORN_BUG = getOwnPropertyDescriptor$1 && !nativePropertyIsEnumerable.call({ 1: 2 }, 1);
 
   // `Object.prototype.propertyIsEnumerable` method implementation
   // https://tc39.es/ecma262/#sec-object.prototype.propertyisenumerable
   var f$4 = NASHORN_BUG ? function propertyIsEnumerable(V) {
     var descriptor = getOwnPropertyDescriptor$1(this, V);
     return !!descriptor && descriptor.enumerable;
-  } : $propertyIsEnumerable;
+  } : nativePropertyIsEnumerable;
 
   var objectPropertyIsEnumerable = {
   	f: f$4
@@ -22443,22 +22178,20 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
 
   // Thank's IE8 for his funny defineProperty
   var ie8DomDefine = !descriptors && !fails(function () {
-    // eslint-disable-next-line es/no-object-defineproperty -- requied for testing
     return Object.defineProperty(documentCreateElement('div'), 'a', {
       get: function () { return 7; }
     }).a != 7;
   });
 
-  // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
-  var $getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+  var nativeGetOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
 
   // `Object.getOwnPropertyDescriptor` method
   // https://tc39.es/ecma262/#sec-object.getownpropertydescriptor
-  var f$3 = descriptors ? $getOwnPropertyDescriptor : function getOwnPropertyDescriptor(O, P) {
+  var f$3 = descriptors ? nativeGetOwnPropertyDescriptor : function getOwnPropertyDescriptor(O, P) {
     O = toIndexedObject(O);
     P = toPrimitive(P, true);
     if (ie8DomDefine) try {
-      return $getOwnPropertyDescriptor(O, P);
+      return nativeGetOwnPropertyDescriptor(O, P);
     } catch (error) { /* empty */ }
     if (has$1(O, P)) return createPropertyDescriptor(!objectPropertyIsEnumerable.f.call(O, P), O[P]);
   };
@@ -22473,17 +22206,16 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
     } return it;
   };
 
-  // eslint-disable-next-line es/no-object-defineproperty -- safe
-  var $defineProperty = Object.defineProperty;
+  var nativeDefineProperty = Object.defineProperty;
 
   // `Object.defineProperty` method
   // https://tc39.es/ecma262/#sec-object.defineproperty
-  var f$2 = descriptors ? $defineProperty : function defineProperty(O, P, Attributes) {
+  var f$2 = descriptors ? nativeDefineProperty : function defineProperty(O, P, Attributes) {
     anObject(O);
     P = toPrimitive(P, true);
     anObject(Attributes);
     if (ie8DomDefine) try {
-      return $defineProperty(O, P, Attributes);
+      return nativeDefineProperty(O, P, Attributes);
     } catch (error) { /* empty */ }
     if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported');
     if ('value' in Attributes) O[P] = Attributes.value;
@@ -22533,7 +22265,7 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
   (module.exports = function (key, value) {
     return sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {});
   })('versions', []).push({
-    version: '3.10.1',
+    version: '3.9.1',
     mode: 'global',
     copyright: '© 2021 Denis Pushkarev (zloirock.ru)'
   });
@@ -22745,7 +22477,6 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
 
   // `Object.getOwnPropertyNames` method
   // https://tc39.es/ecma262/#sec-object.getownpropertynames
-  // eslint-disable-next-line es/no-object-getownpropertynames -- safe
   var f$1 = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
     return objectKeysInternal(O, hiddenKeys);
   };
@@ -22754,7 +22485,6 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
   	f: f$1
   };
 
-  // eslint-disable-next-line es/no-object-getownpropertysymbols -- safe
   var f = Object.getOwnPropertySymbols;
 
   var objectGetOwnPropertySymbols = {
@@ -22892,7 +22622,10 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
   };
 
   var nativeExec = RegExp.prototype.exec;
-  var nativeReplace = shared('native-string-replace', String.prototype.replace);
+  // This always refers to the native implementation, because the
+  // String#replace polyfill uses ./fix-regexp-well-known-symbol-logic.js,
+  // which loads this file before patching the method.
+  var nativeReplace = String.prototype.replace;
 
   var patchedExec = nativeExec;
 
@@ -23001,19 +22734,16 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
 
   var engineV8Version = version && +version;
 
-  // eslint-disable-next-line es/no-object-getownpropertysymbols -- required for testing
   var nativeSymbol = !!Object.getOwnPropertySymbols && !fails(function () {
-    // eslint-disable-next-line es/no-symbol -- required for testing
+    /* global Symbol -- required for testing */
     return !Symbol.sham &&
       // Chrome 38 Symbol has incorrect toString conversion
       // Chrome 38-40 symbols are not inherited from DOM collections prototypes to instances
       (engineIsNode ? engineV8Version === 38 : engineV8Version > 37 && engineV8Version < 41);
   });
 
-  /* eslint-disable es/no-symbol -- required for testing */
-
-
   var useSymbolAsUid = nativeSymbol
+    /* global Symbol -- safe */
     && !Symbol.sham
     && typeof Symbol.iterator == 'symbol';
 
@@ -23038,6 +22768,7 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
 
 
 
+
   var SPECIES$2 = wellKnownSymbol('species');
 
   var REPLACE_SUPPORTS_NAMED_GROUPS = !fails(function () {
@@ -23056,7 +22787,6 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
   // IE <= 11 replaces $0 with the whole match, as if it was $&
   // https://stackoverflow.com/questions/6024666/getting-ie-to-replace-a-regex-with-the-literal-string-0
   var REPLACE_KEEPS_$0 = (function () {
-    // eslint-disable-next-line regexp/prefer-escape-replacement-dollar-char -- required for testing
     return 'a'.replace(/./, '$0') === '$0';
   })();
 
@@ -23126,7 +22856,7 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
     ) {
       var nativeRegExpMethod = /./[SYMBOL];
       var methods = exec(SYMBOL, ''[KEY], function (nativeMethod, regexp, str, arg2, forceStringMethod) {
-        if (regexp.exec === RegExp.prototype.exec) {
+        if (regexp.exec === regexpExec) {
           if (DELEGATES_TO_SYMBOL && !forceStringMethod) {
             // The native String method already delegates to @@method (this
             // polyfilled function), leasing to infinite recursion.
@@ -23159,7 +22889,6 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
 
   // `SameValue` abstract operation
   // https://tc39.es/ecma262/#sec-samevalue
-  // eslint-disable-next-line es/no-object-is -- safe
   var sameValue = Object.is || function is(x, y) {
     // eslint-disable-next-line no-self-compare -- NaN check
     return x === y ? x !== 0 || 1 / x === 1 / y : x != x && y != y;
@@ -23214,7 +22943,6 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
 
   // `Object.keys` method
   // https://tc39.es/ecma262/#sec-object.keys
-  // eslint-disable-next-line es/no-object-keys -- safe
   var objectKeys = Object.keys || function keys(O) {
     return objectKeysInternal(O, enumBugKeys);
   };
@@ -23225,16 +22953,14 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
     return Object(requireObjectCoercible(argument));
   };
 
-  // eslint-disable-next-line es/no-object-assign -- safe
-  var $assign = Object.assign;
-  // eslint-disable-next-line es/no-object-defineproperty -- required for testing
+  var nativeAssign = Object.assign;
   var defineProperty = Object.defineProperty;
 
   // `Object.assign` method
   // https://tc39.es/ecma262/#sec-object.assign
-  var objectAssign = !$assign || fails(function () {
+  var objectAssign = !nativeAssign || fails(function () {
     // should have correct order of operations (Edge bug)
-    if (descriptors && $assign({ b: 1 }, $assign(defineProperty({}, 'a', {
+    if (descriptors && nativeAssign({ b: 1 }, nativeAssign(defineProperty({}, 'a', {
       enumerable: true,
       get: function () {
         defineProperty(this, 'b', {
@@ -23246,12 +22972,12 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
     // should work with symbols and should have deterministic property order (V8 bug)
     var A = {};
     var B = {};
-    // eslint-disable-next-line es/no-symbol -- safe
+    /* global Symbol -- required for testing */
     var symbol = Symbol();
     var alphabet = 'abcdefghijklmnopqrst';
     A[symbol] = 7;
     alphabet.split('').forEach(function (chr) { B[chr] = chr; });
-    return $assign({}, A)[symbol] != 7 || objectKeys($assign({}, B)).join('') != alphabet;
+    return nativeAssign({}, A)[symbol] != 7 || objectKeys(nativeAssign({}, B)).join('') != alphabet;
   }) ? function assign(target, source) { // eslint-disable-line no-unused-vars -- required for `.length`
     var T = toObject(target);
     var argumentsLength = arguments.length;
@@ -23269,11 +22995,10 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
         if (!descriptors || propertyIsEnumerable.call(S, key)) T[key] = S[key];
       }
     } return T;
-  } : $assign;
+  } : nativeAssign;
 
   // `Object.assign` method
   // https://tc39.es/ecma262/#sec-object.assign
-  // eslint-disable-next-line es/no-object-assign -- required for testing
   _export({ target: 'Object', stat: true, forced: Object.assign !== objectAssign }, {
     assign: objectAssign
   });
@@ -23330,7 +23055,6 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
 
   // `IsArray` abstract operation
   // https://tc39.es/ecma262/#sec-isarray
-  // eslint-disable-next-line es/no-array-isarray -- safe
   var isArray = Array.isArray || function isArray(arg) {
     return classofRaw(arg) == 'Array';
   };
@@ -23421,7 +23145,6 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
 
   // `Object.defineProperties` method
   // https://tc39.es/ecma262/#sec-object.defineproperties
-  // eslint-disable-next-line es/no-object-defineproperties -- safe
   var objectDefineProperties = descriptors ? Object.defineProperties : function defineProperties(O, Properties) {
     anObject(O);
     var keys = objectKeys(Properties);
@@ -23667,8 +23390,6 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
     }
   });
 
-  /* eslint-disable es/no-array-prototype-indexof -- required for testing */
-
   var $indexOf = arrayIncludes.indexOf;
 
 
@@ -23819,7 +23540,7 @@ Ov(t);if(e.SheetNames.indexOf(t)>=0)throw new Error("Worksheet with name |"+t+"|
     },
     bootstrap5: {
       icons: {
-        advancedSearchIcon: 'bi-chevron-down'
+        advancedSearchIcon: 'fa-chevron-down'
       },
       html: {
         modal: "\n        <div id=\"avdSearchModal_%s\"  class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"mySmallModalLabel\" aria-hidden=\"true\">\n          <div class=\"modal-dialog modal-xs\">\n            <div class=\"modal-content\">\n              <div class=\"modal-header\">\n                <h4 class=\"modal-title\">%s</h4>\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                  <span aria-hidden=\"true\">&times;</span>\n                </button>\n              </div>\n              <div class=\"modal-body modal-body-custom\">\n                <div class=\"container-fluid\" id=\"avdSearchModalContent_%s\"\n                  style=\"padding-right: 0; padding-left: 0;\" >\n                </div>\n              </div>\n              <div class=\"modal-footer\">\n                <button type=\"button\" id=\"btnCloseAvd_%s\" class=\"btn btn-%s\">%s</button>\n              </div>\n            </div>\n          </div>\n        </div>\n      "
