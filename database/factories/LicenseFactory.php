@@ -1,4 +1,8 @@
 <?php
+namespace Database\Factories;
+
+use App\Models\Category;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,16 +17,18 @@ $factory->define(App\Models\License::class, function (Faker\Generator $faker) {
 
     return [
         'user_id' => 1,
-        'license_name' => $faker->name,
+        'name' => $this->faker->name,
         'license_email' => $faker->safeEmail,
         'serial' => $faker->uuid,
         'notes'   => 'Created by DB seeder',
+        'seats' => $this->faker->numberBetween(1, 10),
         'purchase_date' => $faker->dateTimeBetween('-1 years','now', date_default_timezone_get()),
         'order_number' => $faker->numberBetween(1000000, 50000000),
         'expiration_date' => $faker->dateTimeBetween('now', '+3 years', date_default_timezone_get())->format('Y-m-d H:i:s'),
         'reassignable' => $faker->boolean(),
         'termination_date' => $faker->dateTimeBetween('-1 years','now', date_default_timezone_get())->format('Y-m-d H:i:s'),
         'supplier_id' => $faker->numberBetween(1,5),
+        'category_id' => Category::where('category_type', '=', 'license')->inRandomOrder()->first()->id,
     ];
 });
 

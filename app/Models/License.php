@@ -45,7 +45,7 @@ class License extends Depreciable
 
     protected $rules = array(
         'name'   => 'required|string|min:3|max:255',
-        'seats'   => 'required|min:1|max:999|integer',
+        'seats'   => 'required|min:1|max:9999|integer',
         'license_email'   => 'email|nullable|max:120',
         'license_name'   => 'string|nullable|max:100',
         'notes'   => 'string|nullable',
@@ -173,13 +173,25 @@ class License extends Depreciable
             $logAction->logaction('delete seats');
             return true;
         }
-        // Else we're adding seats.
-        DB::transaction(function () use ($license, $oldSeats, $newSeats) {
-            for ($i = $oldSeats; $i < $newSeats; $i++) {
-                $license->licenseSeatsRelation()->save(new LicenseSeat, ['user_id' => Auth::id()]);
-            }
+        //Create enough seats for the change.
+        $licenseInsert = [];
+        for ($i = $oldSeats; $i < $newSeats; $i++) {
+            $licenseInsert[] = [
+                'user_id' => Auth::id(),
+                'license_id' => $license->id,
+                'created_at' => now(),
+                'updated_at' => now()
+            ];
+        }
+        //Chunk and use DB transactions to prevent timeouts.
+
+        collect($licenseInsert)->chunk(1000)->each(function ($chunk) {
+            DB::transaction(function () use ($chunk) {
+                 LicenseSeat::insert($chunk->toArray());
+             });
         });
-        // On initail create, we shouldn't log the addition of seats.
+
+        // On initial create, we shouldn't log the addition of seats.
         if ($license->id) {
             //Log the addition of license to the log.
             $logAction = new Actionlog();
