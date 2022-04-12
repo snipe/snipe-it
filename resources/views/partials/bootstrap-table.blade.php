@@ -340,18 +340,23 @@
     function genericCheckinCheckoutFormatter(destination) {
         return function (value,row) {
             var actions = '<nobr>';
-            // The user is allowed to check items out, AND the item is deployable
-            if ((row.available_actions.checkout == true) && (row.user_can_checkout == true) && ((!row.asset_id) && (!row.assigned_to))) {
-                if ((row.available_actions.selfcheckout == true))
+
+            if ((row.user_can_checkout == true) && ((!row.asset_id) && (!row.assigned_to))) {
+                if (row.available_actions.selfcheckout == true)
                 {
                     actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/selfcheckout" class="btn btn-sm bg-green" data-toggle="tooltip" title="{{ trans('general.selfcheckout_tooltip') }}">{{ trans('general.selfcheckout') }}</a>';
                     actions += '&nbsp;&nbsp;'
-                    actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkout" class="btn btn-sm bg-maroon" data-toggle="tooltip" title="{{ trans('general.checkout_tooltip') }}">{{ trans('general.checkout') }}</a>';
-                } else {
-                    actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkout" class="btn btn-sm bg-maroon" data-toggle="tooltip" title="{{ trans('general.checkout_tooltip') }}">{{ trans('general.checkout') }}</a>';
                 }
+                if( row.available_actions.checkout == true )
+                {
+                    actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkout" class="btn btn-sm bg-maroon" data-toggle="tooltip" title="{{ trans('general.checkout_tooltip') }}">{{ trans('general.checkout') }}</a>';
+                }            
+            }            
+            // The user is allowed to check items out, AND the item is deployable
+            else if ((row.available_actions.selfcheckout == false)  &&(row.available_actions.checkout == true) && (row.user_can_checkout == true) && ((!row.asset_id) && (!row.assigned_to))) {                
+                actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkout" class="btn btn-sm bg-maroon" data-toggle="tooltip" title="{{ trans('general.checkout_tooltip') }}">{{ trans('general.checkout') }}</a>';                
 
-            // The user is allowed to check items out, but the item is not deployable
+                // The user is allowed to check items out, but the item is not deployable
             } else if (((row.user_can_checkout == false)) && (row.available_actions.checkout == true) && (!row.assigned_to)) {
                 actions+= '<div  data-toggle="tooltip" title="This item has a status label that is undeployable and cannot be checked out at this time."><a class="btn btn-sm bg-maroon disabled">{{ trans('general.checkout') }}</a></div>';
 

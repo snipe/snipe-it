@@ -125,15 +125,26 @@
                   </div>
                 @endif
 
-    @can('checkout', \App\Models\Consumable::class)
-    <div class="col-md-12">
-                    <a href="{{ route('checkout/consumable', $consumable->id) }}" style="padding-bottom:5px;" class="btn btn-primary btn-sm" {{ (($consumable->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
-                </div>
-                @endcan
+    <div class="container col-md-12 ms-auto">
+      <div class="row col-xs-16 ">
+          @can('selfcheckout', \App\Models\Consumable::class)
+          <div class="col-xs-3">
+            <a href="{{ route('selfcheckout/consumable', $consumable->id) }}" style="padding-bottom:5px;" class="btn btn-primary btn-sm" {{ (($consumable->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.selfcheckout') }}</a>
+          </div>
+          @endcan
+
+          @can('checkout', \App\Models\Consumable::class)
+          <div class="col-xs-8">
+            <a href="{{ route('checkout/consumable', $consumable->id) }}" style="padding-bottom:5px;" class="btn btn-primary btn-sm" {{ (($consumable->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
+          </div>
+          @endcan          
+      </div>
+    </div>
+              
 
     @if ($consumable->notes)
        
-    <div class="col-md-12">
+    <div class="col-md-12" style="margin-top:10px">
       <strong>
         {{ trans('general.notes') }}
       </strong>

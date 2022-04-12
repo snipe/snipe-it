@@ -65,3 +65,4 @@ _ide_helper_models.php
 /.phplint-cache
 storage/ldap_client_tls.cert
 storage/ldap_client_tls.key
+/database/migrations/2013_11_25_013244_recreate_licenses_table.php

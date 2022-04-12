@@ -56,15 +56,15 @@ class ConsumableCheckoutController extends Controller
         if ($byAdmin)
         {        
 
-        // Check if the user exists
-        if (is_null($user = User::find($assigned_to))) {
-            // Redirect to the consumable management page with error
-            return redirect()->route('checkout/consumable', $consumable)->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'));
-        }
+            // Check if the user exists
+            if (is_null($user = User::find($assigned_to))) {
+                // Redirect to the consumable management page with error
+                return redirect()->route('checkout/consumable', $consumable)->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'));
+            }
 
-        // Update the consumable data
-        $consumable->assigned_to = e($request->input('assigned_to'));
-        
+            // Update the consumable data
+            $consumable->assigned_to = e($request->input('assigned_to'));
+            
             $target = e($request->input('assigned_to'));
             $assigned_by = $admin_user->id;
         }
@@ -110,11 +110,11 @@ class ConsumableCheckoutController extends Controller
 
     
     /**
-     * Saves the checkout information
+     * Saves the selfcheckout information
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
      * @see ConsumableCheckoutController::create() method that returns the form.
-     * @since [v1.0]
+     * @since [v6.0]
      * @param int $consumableId
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
