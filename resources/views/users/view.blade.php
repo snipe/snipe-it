@@ -184,6 +184,11 @@
                   <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print" target="_blank" rel="noopener">{{ trans('admin/users/general.print_assigned') }}</a>
                 </div>
                 @endcan
+                @can('view', $user)
+                    <div class="col-md-12" style="padding-top: 5px;">
+                        <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print" target="_blank" rel="noopener">{{ trans('admin/users/general.email_assigned') }}</a>
+                    </div>
+                @endcan
 
                 @can('update', $user)
                   @if (($user->activated == '1') && ($user->email != '') && ($user->ldap_import == '0'))

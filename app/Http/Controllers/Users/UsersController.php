@@ -611,6 +611,17 @@ class UsersController extends Controller
             ->with('show_user', $show_user)
             ->with('settings', Setting::getSettings());
     }
+    public function emailAssetList($id)
+    {
+        $this->authorize('view', User::class);
+        $show_user = User::where('id', $id)->withTrashed()->first();
+        $assets = Asset::where('assigned_to', $id)->where('assigned_type', User::class)->with('model', 'model.category')->get();
+        $accessories = $show_user->accessories()->get();
+        $consumables = $show_user->consumables()->get();
+
+    //Should we go with a PDF, was there a command already set up for this somewhere. Ponder on this I must.
+
+    }
 
     /**
      * Send individual password reset email
