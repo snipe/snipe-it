@@ -186,7 +186,10 @@
                 @endcan
                 @can('view', $user)
                     <div class="col-md-12" style="padding-top: 5px;">
-                        <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print" target="_blank" rel="noopener">{{ trans('admin/users/general.email_assigned') }}</a>
+                        <form action="{{ route('users.email',['userId'=> $user->id]) }}" method="POST">
+                            {{ csrf_field() }}
+                            <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener">{{ trans('admin/users/general.email_assigned') }}</button>
+                        </form>
                     </div>
                 @endcan
 

@@ -341,7 +341,6 @@
     'notification_warning'   => 'Warning:',
     'notification_info'      => 'Info:',
     'asset_information'     => 'Asset Information',
-    'asset_serial'          => 'Serial',
     'model_name'            => 'Model Name:',
     'asset_name'            => 'Asset Name:',
     'consumable_information' => 'Consumable Information:',
