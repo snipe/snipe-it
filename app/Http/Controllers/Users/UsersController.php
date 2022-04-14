@@ -23,6 +23,7 @@ use Redirect;
 use Str;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use View;
+use App\Notifications\CurrentInventory;
 
 /**
  * This controller handles all actions related to Users for
@@ -614,10 +615,11 @@ class UsersController extends Controller
     public function emailAssetList($id)
     {
         $this->authorize('view', User::class);
-        $show_user = User::where('id', $id)->withTrashed()->first();
-        $assets = Asset::where('assigned_to', $id)->where('assigned_type', User::class)->with('model', 'model.category')->get();
-        $accessories = $show_user->accessories()->get();
-        $consumables = $show_user->consumables()->get();
+        $user = User::where('id', $id)->withTrashed()->first();
+        $user->notify((new CurrentInventory($user)));
+
+        return redirect()->back()->with('success', 'admin/users/general.user_notified');
+
 
     //Should we go with a PDF, was there a command already set up for this somewhere. Ponder on this I must.
 
