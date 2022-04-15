@@ -788,6 +788,9 @@ class AssetsController extends Controller
             $error_payload['target_type'] = 'user';
         }
 
+        if ($request->filled('status_id')) {
+            $asset->status_id = $request->get('status_id');
+        }
 
 
         if (!isset($target)) {
