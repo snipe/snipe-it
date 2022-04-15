@@ -30,11 +30,11 @@ class ProfileController extends Controller
             // Make sure the asset and request still exist
             if ($checkoutRequest && $checkoutRequest->itemRequested()) {
                 $results['rows'][] = [
-                    'image' => $checkoutRequest->itemRequested()->present()->getImageUrl(),
-                    'name' => $checkoutRequest->itemRequested()->present()->name(),
-                    'type' => $checkoutRequest->itemType(),
-                    'qty' => $checkoutRequest->quantity,
-                    'location' => ($checkoutRequest->location()) ? $checkoutRequest->location()->name : null,
+                    'image' => e($checkoutRequest->itemRequested()->present()->getImageUrl()),
+                    'name' => e($checkoutRequest->itemRequested()->present()->name()),
+                    'type' => e($checkoutRequest->itemType()),
+                    'qty' => (int) $checkoutRequest->quantity,
+                    'location' => ($checkoutRequest->location()) ? e($checkoutRequest->location()->name) : null,
                     'expected_checkin' => Helper::getFormattedDateObject($checkoutRequest->itemRequested()->expected_checkin, 'datetime'),
                     'request_date' => Helper::getFormattedDateObject($checkoutRequest->created_at, 'datetime'),
                 ];
