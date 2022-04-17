@@ -21,7 +21,7 @@
 | **{{ trans('mail.additional_notes') }}** | {{ $item->notes }} |
 @endif
 @if ($admin == null)
-| **{{ trans('general.checkout_by') }}** | Self-Checkout |
+| **{{ trans('general.checkout_by') }}** | {{trans('general.selfcheckout')}} |
 @else
 | **{{ trans('general.administrator') }}** | {{ $admin->present()->fullName() }} |
 @endif

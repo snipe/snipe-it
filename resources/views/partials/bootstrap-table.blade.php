@@ -342,8 +342,6 @@
             var actions = '<nobr>';
 
             if ((row.user_can_checkout == true) && ((!row.asset_id) && (!row.assigned_to))) {
-                // actions += row.available_actions.consumables_selfcheckout;
-                // actions += row.available_actions.checkout;
                 if( row.available_actions.checkout == true )
                 {
                     actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkout" class="btn btn-sm bg-maroon" data-toggle="tooltip" title="{{ trans('general.checkout_tooltip') }}">{{ trans('general.checkout') }}</a>';
