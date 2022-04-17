@@ -254,6 +254,16 @@ class UserFactory extends Factory
         });
     }
 
+    
+    public function selfcheckoutConsumables()
+    {
+        return $this->state(function () {
+            return [
+                'permissions' => '{"consumables_selfcheckout":"1"}',
+            ];
+        });
+    }
+
     public function viewLicenses()
     {
         return $this->state(function () {

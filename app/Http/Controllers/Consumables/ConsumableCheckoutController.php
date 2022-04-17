@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
 
 class ConsumableCheckoutController extends Controller
 {
@@ -42,7 +43,7 @@ class ConsumableCheckoutController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function store(Request $request, $consumableId, $byAdmin = true)
+    public function store(Request $request, $consumableId)
     {
         if (is_null($consumable = Consumable::find($consumableId))) {
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
@@ -52,8 +53,8 @@ class ConsumableCheckoutController extends Controller
 
         $admin_user = Auth::user();
         $assigned_to = e($request->input('assigned_to'));
-
-        if ($byAdmin)
+        Log::debug("byAdmin in controller : " . $request->checkoutmode );
+        if ($request->checkoutmode !== 'selfcheckout')
         {        
 
             // Check if the user exists
@@ -81,7 +82,7 @@ class ConsumableCheckoutController extends Controller
             
         ]);
 
-        event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note')));
+        event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('notes'), $request->checkoutmode));
 
         // Redirect to the new consumable page
         return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.checkout.success'));
@@ -103,7 +104,7 @@ class ConsumableCheckoutController extends Controller
         if (is_null($consumable = Consumable::find($consumableId))) {
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
         }
-        $this->authorize('selfcheckout', $consumable);
+        $this->authorize('consumables_selfcheckout', $consumable);
 
         return view('consumables/selfcheckout', compact('consumable'));
     }
@@ -121,7 +122,8 @@ class ConsumableCheckoutController extends Controller
      */
     public function selfstore(Request $request, $consumableId)
     {
-        return $this->store($request, $consumableId, false);
+        $request->request->add(['checkoutmode' => 'selfcheckout']);
+        return $this->store($request, $consumableId);
     }
 
     

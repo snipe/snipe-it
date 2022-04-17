@@ -191,5 +191,11 @@ class AuthServiceProvider extends ServiceProvider
                 || $user->can('update', User::class)
                 || $user->can('create', User::class);  
         });
+
+        
+        Gate::define('consumables_selfcheckout', function ($user) {
+            return $user->hasAccess('consumables_selfcheckout');
+        });
+
     }
-}
+}            

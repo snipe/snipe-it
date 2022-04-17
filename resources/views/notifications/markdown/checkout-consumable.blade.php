@@ -17,12 +17,15 @@
 @if (isset($item->model_no))
 | **{{ trans('general.model_no') }}** | {{ $item->model_no }} |
 @endif
-@if ($note)
-| **{{ trans('mail.additional_notes') }}** | {{ $note }} |
+@if ($item->notes)
+| **{{ trans('mail.additional_notes') }}** | {{ $item->notes }} |
 @endif
-@if ($admin)
+@if ($admin == null)
+| **{{ trans('general.checkout_by') }}** | Self-Checkout |
+@else
 | **{{ trans('general.administrator') }}** | {{ $admin->present()->fullName() }} |
 @endif
+
 @endcomponent
 
 @if (($req_accept == 1) && ($eula!=''))

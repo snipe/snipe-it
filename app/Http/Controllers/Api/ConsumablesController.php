@@ -226,7 +226,7 @@ class ConsumablesController extends Controller
             $rows[] = [
                 'name' => ($consumable_assignment->user) ? $consumable_assignment->user->present()->nameUrl() : 'Deleted User',
                 'created_at' => Helper::getFormattedDateObject($consumable_assignment->created_at, 'datetime'),
-                'admin' => ($consumable_assignment->admin) ? $consumable_assignment->admin->present()->nameUrl() : 'Self Checkout',
+                'admin' => ($consumable_assignment->admin) ? $consumable_assignment->admin->present()->nameUrl() : 'Self-Checkout',
             ];
         }
 
@@ -252,6 +252,58 @@ class ConsumablesController extends Controller
         }
 
         $this->authorize('checkout', $consumable);
+
+        if ($consumable->qty > 0) {
+
+            // Check if the user exists
+            $assigned_to = $request->input('assigned_to');
+            if (is_null($user = User::find($assigned_to))) {
+                // Return error message
+                return response()->json(Helper::formatStandardApiResponse('error', null, 'No user found'));
+            }
+
+            // Update the consumable data
+            $consumable->assigned_to = e($assigned_to);
+
+            $consumable->users()->attach($consumable->id, [
+                'consumable_id' => $consumable->id,
+                'user_id' => $user->id,
+                'assigned_to' => $assigned_to,
+            ]);
+
+            // Log checkout event
+            $logaction = $consumable->logCheckout(e($request->input('note')), $user);
+            $data['log_id'] = $logaction->id;
+            $data['eula'] = $consumable->getEula();
+            $data['first_name'] = $user->first_name;
+            $data['item_name'] = $consumable->name;
+            $data['checkout_date'] = $logaction->created_at;
+            $data['note'] = $logaction->note;
+            $data['require_acceptance'] = $consumable->requireAcceptance();
+
+            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/consumables/message.checkout.success')));
+        }
+
+        return response()->json(Helper::formatStandardApiResponse('error', null, 'No consumables remaining'));
+    }
+
+    
+    /**
+     * Checkout a consumable
+     *
+     * @author [A. Gutierrez] [<andres@baller.tv>]
+     * @param int $id
+     * @since [v4.9.5]
+     * @return JsonResponse
+     */
+    public function selfcheckout(Request $request, $id)
+    {
+        // Check if the consumable exists
+        if (is_null($consumable = Consumable::find($id))) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/consumables/message.does_not_exist')));
+        }
+
+        $this->authorize('selfcheckout', $consumable);
 
         if ($consumable->qty > 0) {
 

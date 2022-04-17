@@ -184,7 +184,7 @@ class CheckoutableListener
     private function getCheckoutNotification($event, $acceptance)
     {
         $notificationClass = null;
-
+        $hasSelfCheckout = false;
         switch (get_class($event->checkoutable)) {
             case Accessory::class:
                 $notificationClass = CheckoutAccessoryNotification::class;
@@ -194,13 +194,18 @@ class CheckoutableListener
                 break;
             case Consumable::class:
                 $notificationClass = CheckoutConsumableNotification::class;
+                $hasSelfCheckout = true;
                 break;    
             case LicenseSeat::class:
                 $notificationClass = CheckoutLicenseSeatNotification::class;
                 break;                
         }
 
-        return new $notificationClass($event->checkoutable, $event->checkedOutTo, $event->checkedOutBy, $acceptance, $event->note);
+        if ($hasSelfCheckout) {
+            return new $notificationClass($event->checkoutable, $event->checkedOutTo, $event->checkedOutBy, $acceptance, $event->note, $event->checkoutmode); 
+        } else {
+            return new $notificationClass($event->checkoutable, $event->checkedOutTo, $event->checkedOutBy, $acceptance, $event->note);
+        }
     }
 
     /**

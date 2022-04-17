@@ -177,8 +177,8 @@ return [
             'display'    => true,
         ],
         [
-            'permission' => 'consumables.selfcheckout',
-            'label'      => 'Self Checkout ',
+            'permission' => 'consumables_selfcheckout',
+            'label'      => 'Self-Checkout ',
             'note'       => '',
             'display'    => true,
         ],

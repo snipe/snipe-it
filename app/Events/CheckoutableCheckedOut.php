@@ -20,11 +20,12 @@ class CheckoutableCheckedOut
      *
      * @return void
      */
-    public function __construct($checkoutable, $checkedOutTo, User $checkedOutBy, $note)
+    public function __construct($checkoutable, $checkedOutTo, User $checkedOutBy, $note, $checkoutmode='normal')
     {
         $this->checkoutable = $checkoutable;
         $this->checkedOutTo = $checkedOutTo;
         $this->checkedOutBy = $checkedOutBy;
         $this->note = $note;
+        $this->checkoutmode = $checkoutmode;
     }
 }

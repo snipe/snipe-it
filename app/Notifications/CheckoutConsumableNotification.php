@@ -23,18 +23,18 @@ class CheckoutConsumableNotification extends Notification
      *
      * @param $params
      */
-    public function __construct(Consumable $consumable, $checkedOutTo, User $checkedOutBy, $acceptance, $note)
+    public function __construct(Consumable $consumable, $checkedOutTo, User $checkedOutBy, $acceptance, $note, $checkoutmode)
     {
         $this->item = $consumable;
-        if ($checkedOutBy !== null){
         $this->admin = $checkedOutBy;
-        } else {
-    $this->admin = null;            
+        if ($checkoutmode == 'selfcheckout')
+        {
+            $this->admin = null;
         }
-        
         $this->note = $note;
         $this->target = $checkedOutTo;
         $this->acceptance = $acceptance;
+        $this->checkoutmode = $checkoutmode;
 
         $this->settings = Setting::getSettings();
     }
