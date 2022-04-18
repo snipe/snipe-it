@@ -584,13 +584,13 @@
         <h3 class="modal-title" id="checkInAllLicense">Check-in All Seats for this License</h3>
       </div>
       <div class="modal-body">
-        <h4>{{\App\Http\Controllers\Api\LicenseSeatsController::checkinCount($license->id)}}</h4>
+        <h4>{{\App\Http\Controllers\Licenses\LicenseCheckinController::checkinCount($license->id)}}</h4>
         <br><br>
         <div class="form-group">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger"><a href={{route('api.licenseseat.checkin-all', [$license->id, $replace= false])}} style="color:white;">Checkin All Seats</a></button>
+        <button type="button" class="btn btn-danger"><a href={{route('icenseseat.checkin-all', [$license->id, $replace= false])}} style="color:white;">Checkin All Seats</a></button>
       </div>
     </div>
   </div>
@@ -610,12 +610,12 @@
           <div class="form-group">
             {{ Form::label('replacement_license', trans('general.replacement_license'), array('class' =>'col-md-3 control-label')) }}
             <div class="col-md-9 required">
-              {{Form::select('replacement_license', array(App\Http\Controllers\Api\LicenseSeatsController::replacementList()), array('class'=>'select2', 'style'=> 'width:100%', 'aria-label'=>'replacement_license'))}}
+              {{Form::select('replacement_license', array(App\Http\Controllers\Licenses\LicenseCheckinController::replacementList(), 'method'=>'POST'), array('class'=>'select2', 'style'=> 'width:100%', 'aria-label'=>'replacement_license'))}}
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-danger"><a href={{route('api.licenseseat.checkin-all', [$license->id, $replace= true])}} style="color:white;">Replace All Seats</a></button>
+            <button type="button" class="btn btn-danger"><a href={{route('licenseseat.checkin-all', [$license->id, $replace= true])}} style="color:white;">Replace All Seats</a></button>
           </div>
         </div>
       </div>

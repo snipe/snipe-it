@@ -561,14 +561,6 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:'.config('app.
                 'selectlist'
             ]
         )->name('api.licenses.selectlist');
-
-        Route::get(
-            '{licenseID}/checkin-all',
-            [
-                Api\LicenseSeatsController::class,
-                'checkinLicense'
-            ]
-        )->name('api.licenseseat.checkin-all');
         });
 
         Route::resource('licenses', 
