@@ -38,6 +38,8 @@ Snipe-IT
                 @elseif (($snipeSettings->brand == '2') && ($snipeSettings->show_images_in_email=='1' ))
                     @if ($snipeSettings->logo!='')
                         <img class="navbar-brand-img logo" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+                    @else
+                        {{ $snipeSettings->site_name }}
                     @endif
                 @else
                     {{ $snipeSettings->site_name }}
