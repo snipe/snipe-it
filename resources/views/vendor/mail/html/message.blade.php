@@ -34,7 +34,12 @@
 @elseif (($snipeSettings->brand == '2') && ($snipeSettings->show_images_in_email=='1' ))
 @if ($snipeSettings->logo!='')
     <img class="navbar-brand-img logo" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+<<<<<<< HEAD
 >>>>>>> 0a7c57e51 (show site name if show images in emails is not enabled)
+=======
+@else
+    {{ $snipeSettings->site_name }}
+>>>>>>> 9a9192148 (fallback if show images is selected but no logo exists)
 @endif
 
 @else
