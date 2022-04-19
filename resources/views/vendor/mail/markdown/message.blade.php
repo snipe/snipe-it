@@ -1,4 +1,5 @@
 @component('mail::layout')
+<<<<<<< HEAD
 {{-- Header --}}
 @slot('header')
 @component('mail::header', ['url' => config('app.url')])
@@ -22,6 +23,31 @@ Snipe-IT
 @endif
 @endcomponent
 @endslot
+=======
+    {{-- Header --}}
+    @slot('header')
+        @component('mail::header', ['url' => config('app.url')])
+            @if ($snipeSettings::setupCompleted())
+
+                @if (($snipeSettings->brand == '3') && ($snipeSettings->show_images_in_email=='1' ))
+                    @if ($snipeSettings->logo!='')
+                        <img class="navbar-brand-img logo" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+                    @endif
+                    {{ $snipeSettings->site_name }}
+
+                @elseif (($snipeSettings->brand == '2') && ($snipeSettings->show_images_in_email=='1' ))
+                    @if ($snipeSettings->logo!='')
+                        <img class="navbar-brand-img logo" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+                    @endif
+                @else
+                    {{ $snipeSettings->site_name }}
+                @endif
+            @else
+                Snipe-IT
+            @endif
+        @endcomponent
+    @endslot
+>>>>>>> 0a7c57e51 (show site name if show images in emails is not enabled)
 
 {{-- Body --}}
 {{ $slot }}
