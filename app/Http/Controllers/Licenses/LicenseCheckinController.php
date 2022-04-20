@@ -117,7 +117,7 @@ class LicenseCheckinController extends Controller
 
     }
 
-    public function checkinLicense($license_id)
+    public function checkinAllLicenseSeats($license_id)
     {
 
         $this->authorize('edit', LicenseSeat::class);

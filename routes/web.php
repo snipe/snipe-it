@@ -316,7 +316,7 @@ Route::group(['middleware' => ['auth']], function () {
     )->name('reports/export/licenses');
     Route::post(
         '{licenseID}/checkin-all',
-        [LicenseCheckinController::class, 'checkinLicense']
+        [LicenseCheckinController::class, 'checkinAllLicenseSeats']
     )->name('licenseseat.checkin-all');
 
     Route::get('reports/accessories', [ReportsController::class, 'getAccessoryReport'])->name('reports/accessories');
