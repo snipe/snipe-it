@@ -4,7 +4,9 @@ return array(
 
     'asset'             => 'Asset',
     'checkin'           => 'Checkin',
+    'checkinall'        => 'Checkin All Seats',
     'create'            => 'Create License',
+    'close'             => 'Close',
     'expiration'        => 'Expiration Date',
     'license_key'       => 'Product Key',
     'maintained'        => 'Maintained',

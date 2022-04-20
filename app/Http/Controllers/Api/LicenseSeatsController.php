@@ -142,13 +142,6 @@ class LicenseSeatsController extends Controller
 
         return Helper::formatStandardApiResponse('error', null, $licenseSeat->getErrors());
     }
-    public function checkinCount($license_id){
-        $licenseSeats = LicenseSeat::where('license_id', '=', $license_id)
-            ->whereNotNull('assigned_to')
-            ->with('user')
-            ->get();
-        return response()->json(Helper::formatStandardApiResponse('success','There are '.$licenseSeats->count().' seats checked out. Are you sure you want to check all of them in?' ,trans('admin/licenses/message.update.success')));
 
-    }
 
 }
