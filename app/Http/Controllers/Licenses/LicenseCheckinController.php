@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Licenses\LicenseCheckoutController;
 
 class LicenseCheckinController extends Controller
 {
@@ -117,7 +118,7 @@ class LicenseCheckinController extends Controller
 
     }
 
-    public function checkinAllLicenseSeats($license_id)
+    public function checkinAllLicenseSeats($license_id, Request $request)
     {
 
         $this->authorize('edit', LicenseSeat::class);
@@ -128,15 +129,15 @@ class LicenseCheckinController extends Controller
             ->get();
 
         if($licenseSeats->count()==0){
-            return redirect()->to('licenses/')->with('error', 'There are no seats checked out.');
 
+            return redirect()->to('licenses/')->with('error', 'There are no seats checked out.');
         }
 
         if (!License::where('id', '=', $license_id)->first()) {
 
             return redirect()->to('licenses/')->with('error', 'Invalid license ID.');
         }
-
+        $replacement_seats = $licenseSeats;
         foreach ($licenseSeats as $seat) {
             $seat->assigned_to = null;
 
@@ -150,6 +151,12 @@ class LicenseCheckinController extends Controller
 
         }
 
-        return redirect()->to('licenses/')->with('success', 'All seats checked in');
+        if ($request->input('replacement_checkbox') == true) {
+            $alt_license = License::where('id', '=', $request->input('replacement_license'))->get();
+            LicenseCheckoutController::replaceAllLicenseSeats($licenseSeats, $alt_license, $replacement_seats);
+        }
+
+
+            return redirect()->to('licenses/')->with('success', 'All seats checked in');
     }
 }

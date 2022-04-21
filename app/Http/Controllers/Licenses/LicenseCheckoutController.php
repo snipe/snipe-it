@@ -9,7 +9,9 @@ use App\Models\Asset;
 use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\User;
+use http\Env\Request;
 use Illuminate\Support\Facades\Auth;
+
 
 class LicenseCheckoutController extends Controller
 {
@@ -125,4 +127,38 @@ class LicenseCheckoutController extends Controller
 
         return false;
     }
-}
+    public function replacementList(){
+        $license_name = LicensesController::getLicenseList();
+        $license_list =array();
+        foreach($license_name as $license) {
+            $licenseSeat = LicenseSeat::where('license_id', '=', $license->id)
+                ->whereNull('assigned_to')
+                ->withOut('user')
+                ->get();
+
+            $license_list[] = $license->name.'        Seats Available:'.$licenseSeat->count();
+
+        }
+        return $license_list;
+    }
+    public static function replaceAllLicenseSeats($licenseSeats, $alt_license, $replacement_seats)
+    {
+//        dd($replacement_seats);
+        if ($alt_license == null) {
+            return redirect()->to('licenses/')->with('error', trans('admin/licenses/message.user_does_not_exist'));
+        }
+
+                foreach ($licenseSeats as $seat) {
+                    foreach ($replacement_seats as $original_seat) {
+
+                        $seat->assigned_to = $original_seat->assigned_to;
+                        $seat->user->email = $original_seat->email;
+                        $seat->license_id = $alt_license;
+                        $seat->logCheckout($seat->user, 'replacing ' . $original_seat->license_id);
+
+                    }
+                }
+                return redirect()->to('licenses/')->with('success', 'License has been replaced');
+        }
+
+    }
