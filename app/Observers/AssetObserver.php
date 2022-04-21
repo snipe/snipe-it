@@ -17,12 +17,13 @@ class AssetObserver
      */
     public function updating(Asset $asset)
     {
-
-        // If the asset isn't being checked out or audited, log the update.
-        // (Those other actions already create log entries.)
-        if (($asset->getAttributes()['assigned_to'] == $asset->getOriginal()['assigned_to'])
-            && ($asset->getAttributes()['next_audit_date'] == $asset->getOriginal()['next_audit_date'])
-            && ($asset->getAttributes()['last_checkout'] == $asset->getOriginal()['last_checkout']))
+        $attributes = $asset->getAttributes();
+        $attributesOriginal = $asset->getOriginal();
+// If the asset isn't being checked out or audited, log the update.
+// (Those other actions already create log entries.)
+        if (($attributes['assigned_to'] == $attributesOriginal['assigned_to'])
+            && ((isset( $attributes['next_audit_date']) ? $attributes['next_audit_date'] : null) == (isset($attributesOriginal['next_audit_date']) ? $attributesOriginal['next_audit_date']: null))
+            && ($attributes['last_checkout']   == $attributesOriginal['last_checkout']))
         {
             $changed = [];
 
