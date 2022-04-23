@@ -15,7 +15,6 @@
 
     @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
 
-
   <!-- Asset Tag -->
   <div class="form-group {{ $errors->has('asset_tag') ? ' has-error' : '' }}">
     <label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }}</label>
@@ -41,77 +40,103 @@
           </div>
       @endif
   </div>
-    @include ('partials.forms.edit.serial', ['fieldname'=> 'serials[1]', 'translated_serial' => trans('admin/hardware/form.serial')])
+    
 
     <div class="input_fields_wrap">
     </div>
 
 
     @include ('partials.forms.edit.model-select', ['translated_name' => trans('admin/hardware/form.model'), 'fieldname' => 'model_id', 'field_req' => true])
+    @include ('partials.forms.edit.serial', ['fieldname'=> 'serials[1]', 'translated_serial' => trans('admin/hardware/form.serial')])
 
 
-  <div id='custom_fields_content'>
-      <!-- Custom Fields -->
-      @if ($item->model && $item->model->fieldset)
-      <?php $model=$item->model; ?>
-      @endif
-      @if (Request::old('model_id'))
-        <?php $model=\App\Models\AssetModel::find(Request::old('model_id')); ?>
-      @elseif (isset($selected_model))
-        <?php $model=$selected_model; ?>
-      @endif
-      @if (isset($model) && $model)
-      @include("models/custom_fields_form",["model" => $model])
-      @endif
-  </div>
+    @include ('partials.forms.edit.status', [ 'required' => 'true'])
+    @if (!$item->id)
+        @include ('partials.forms.checkout-selector', ['user_select' => 'true','asset_select' => 'true', 'location_select' => 'true', 'style' => 'display:none;'])
+        @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_user', 'style' => 'display:none;', 'required' => 'false'])
+        @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_asset', 'style' => 'display:none;', 'required' => 'false'])
+        @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_location', 'style' => 'display:none;', 'required' => 'false'])
+    @elseif (($item->assignedTo) && ($item->deleted_at==''))
+        <!-- This is an asset and it's currently deployed, so let them edit the expected checkin date -->
+        @include ('partials.forms.edit.datepicker', ['translated_name' => trans('admin/hardware/form.expected_checkin'),'fieldname' => 'expected_checkin'])
+    @endif
 
-  @include ('partials.forms.edit.status', [ 'required' => 'true'])
-  @if (!$item->id)
-      @include ('partials.forms.checkout-selector', ['user_select' => 'true','asset_select' => 'true', 'location_select' => 'true', 'style' => 'display:none;'])
-      @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_user', 'style' => 'display:none;', 'required' => 'false'])
-      @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_asset', 'style' => 'display:none;', 'required' => 'false'])
-      @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_location', 'style' => 'display:none;', 'required' => 'false'])
-  @elseif (($item->assignedTo) && ($item->deleted_at==''))
-      <!-- This is an asset and it's currently deployed, so let them edit the expected checkin date -->
-      @include ('partials.forms.edit.datepicker', ['translated_name' => trans('admin/hardware/form.expected_checkin'),'fieldname' => 'expected_checkin'])
-  @endif
+    @include ('partials.forms.edit.notes')
+    @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.default_location'), 'fieldname' => 'rtd_location_id'])
+    @include ('partials.forms.edit.requestable', ['requestable_text' => trans('admin/hardware/general.requestable')])
 
-  @include ('partials.forms.edit.name', ['translated_name' => trans('admin/hardware/form.name')])
-  @include ('partials.forms.edit.purchase_date')
-  @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
-  @include ('partials.forms.edit.order_number')
-    <?php
-    $currency_type=null;
-    if ($item->id && $item->location) {
-        $currency_type = $item->location->currency;
-    }
-    ?>
-  @include ('partials.forms.edit.purchase_cost', ['currency_type' => $currency_type])
-  @include ('partials.forms.edit.warranty')
-  @include ('partials.forms.edit.notes')
+    <!-- Image -->
+    @if ($item->image)
+    <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
+        <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
+        <div class="col-md-5">
+            <label class="control-label" for="image_delete">
+            <input type="checkbox" value="1" name="image_delete" id="image_delete" class="minimal" {{ Request::old('image_delete') == '1' ? ' checked="checked"' : '' }}>
+            {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
+            </label>
+            <div style="margin-top: 0.5em">
+                <img src="{{ Storage::disk('public')->url(app('assets_upload_path').e($item->image)) }}" class="img-responsive" />
+            </div>
+        </div>
+    </div>
+    @endif
 
-  @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.default_location'), 'fieldname' => 'rtd_location_id'])
+    @include ('partials.forms.edit.image-upload')
 
+    <div id='custom_fields_content'>
+        <!-- Custom Fields -->
+        @if ($item->model && $item->model->fieldset)
+        <?php $model=$item->model; ?>
+        @endif
+        @if (Request::old('model_id'))
+            <?php $model=\App\Models\AssetModel::find(Request::old('model_id')); ?>
+        @elseif (isset($selected_model))
+            <?php $model=$selected_model; ?>
+        @endif
+        @if (isset($model) && $model)
+        @include("models/custom_fields_form",["model" => $model])
+        @endif
+    </div>
 
-  @include ('partials.forms.edit.requestable', ['requestable_text' => trans('admin/hardware/general.requestable')])
+    <div class="form-group" >
+    <label class="col-md-3 control-label"></label> 
+        <div class="col-md-2 col-sm-2 text-left form-check" style="z-index:1;">   
+        <input class="form-check-input" type="checkbox" id="optional_info" >
+        <label class="form-check-label" for="flexCheckDefault">
+        {{ trans('admin/hardware/form.optional_infos') }}
+        </label>
+        </div>
+        
+        <div id="optional_details" class="col-md-12">
+        @include ('partials.forms.edit.name', ['translated_name' => trans('admin/hardware/form.name')])
+        @include ('partials.forms.edit.warranty')
+        </div>
+    </div>
 
-  <!-- Image -->
-  @if ($item->image)
-  <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
-      <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
-      <div class="col-md-5">
-          <label class="control-label" for="image_delete">
-          <input type="checkbox" value="1" name="image_delete" id="image_delete" class="minimal" {{ Request::old('image_delete') == '1' ? ' checked="checked"' : '' }}>
-          {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
-          </label>
-          <div style="margin-top: 0.5em">
-              <img src="{{ Storage::disk('public')->url(app('assets_upload_path').e($item->image)) }}" class="img-responsive" />
-          </div>
-      </div>
-  </div>
-  @endif
+    <div class="form-group">
+    <label class="col-md-3 control-label"></label> 
+        <div class="col-md-2 col-sm-2 text-left form-check" style="z-index:2;">   
+        <input class="form-check-input" type="checkbox" id="order_info" >
+        <label class="form-check-label" for="flexCheckDefault">
+        {{ trans('admin/hardware/form.order_details') }}
+    </label>
+        </div>
 
-@include ('partials.forms.edit.image-upload')
+        <div id='order_details' class="col-md-12" style="z-index:1;">
+            @include ('partials.forms.edit.order_number')
+            @include ('partials.forms.edit.purchase_date')
+            @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
+
+                <?php
+                $currency_type=null;
+                if ($item->id && $item->location) {
+                    $currency_type = $item->location->currency;
+                }
+                ?>
+            @include ('partials.forms.edit.purchase_cost', ['currency_type' => $currency_type])
+
+        </div>
+    </div>
 
 @stop
 
@@ -278,6 +303,32 @@
         })
     });
 
+    $( document ).ready(function() {
+    checkOrderDetailOption();
+    checkOptionalOption();
+    });
 
+    $('#order_info').change(function(){
+        checkOrderDetailOption();
+    });
+
+    $('#optional_info').change(function(){
+        checkOptionalOption();
+    });
+
+    function checkOptionalOption(){
+    if ($("#optional_info").prop('checked')==true) {
+        $('#optional_details').fadeIn('slow');
+    } else {
+        $('#optional_details').fadeOut('slow');
+    }                   
+    }
+    function checkOrderDetailOption(){
+    if ($("#order_info").prop('checked')==true) {
+        $('#order_details').fadeIn('slow');
+    } else {
+        $('#order_details').fadeOut('slow');
+    }                   
+    }
 </script>
 @stop
