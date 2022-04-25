@@ -64,8 +64,6 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
         height: 0.5in;
     }
     .qr_text {
-        width: {{ $settings->labels_width }}in;
-        height: {{ $settings->labels_height }}in;
         padding-top: {{$settings->labels_display_bgutter}}in;
         font-family: arial, helvetica, sans-serif;
         font-size: {{$settings->labels_fontsize}}pt;
