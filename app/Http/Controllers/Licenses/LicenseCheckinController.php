@@ -146,13 +146,15 @@ class LicenseCheckinController extends Controller
                 $seat->user->email = null;
 
                 // Log the checkin
-                $seat->logCheckin($seat->user, 'Checked in via UI');
+                $seat->logCheckin($seat->user,  'Checked in via UI');
             }
 
         }
 
         if ($request->input('replacement_checkbox') == true) {
-            $alt_license = License::where('id', '=', $request->input('replacement_license'))->get();
+            $alt_license = LicenseSeat::where('license_id', '=', $request->input('replacement_license'))
+                    ->whereNull('assigned_to')
+                    ->get();
             LicenseCheckoutController::replaceAllLicenseSeats($licenseSeats, $alt_license, $replacement_seats);
         }
 
