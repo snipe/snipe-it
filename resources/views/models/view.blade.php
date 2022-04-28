@@ -74,7 +74,7 @@
                   data-url="{{ route('api.assets.index',['model_id'=> $model->id]) }}"
                   class="table table-striped snipe-table"
                   data-export-options='{
-                "fileName": "export-models-{{ $model->name }}-assets-{{ date('Y-m-d') }}",
+                "fileName": "export-models-{{ str_slug($model->name) }}-assets-{{ date('Y-m-d') }}",
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                 }'>
                 </table>
