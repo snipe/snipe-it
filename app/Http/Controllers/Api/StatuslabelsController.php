@@ -178,6 +178,7 @@ class StatuslabelsController extends Controller
     }
 
 
+
      /**
      * Show a count of assets by status label for pie chart
      *

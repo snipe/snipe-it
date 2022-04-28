@@ -2,7 +2,7 @@
 
 return [
     'custom_fields'		        => 'Özel alanlar',
-    'manage'                    => 'Manage',
+    'manage'                    => 'Yönet',
     'field'		                => 'Alan',
     'about_fieldsets_title'		=> 'Alan kümeleri hakkında',
     'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used for specific asset model types.',
@@ -39,7 +39,9 @@ return [
     'add_field_to_fieldset' => 'Add Field to Fieldset',
     'make_optional' => 'Required - click to make optional',
     'make_required' => 'Optional - click to make required',
-    'reorder' => 'Reorder',
-    'db_field' => 'DB Field',
-    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.'
+    'reorder' => 'Yeniden Sırala',
+    'db_field' => 'Veri Tabanı Sütunları',
+    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.',
+    'is_unique' => 'Bu değer tüm varlıklarda benzersiz olmalıdır',
+    'unique' => 'Benzersiz',
 ];

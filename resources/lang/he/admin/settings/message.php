@@ -22,8 +22,8 @@ return [
     'mail' => [
         'sending' => 'Sending Test Email...',
         'success' => 'Mail sent!',
-        'error' => 'Mail could not be sent.',
-        'additional' => 'No additional error message provided. Check your mail settings and your app log.'
+        'error' => 'מייל לא נשלח.',
+        'additional' => 'קיימות שגיאות נוספות. בדוק במייל שלך ובלוגים.'
     ],
     'ldap' => [
         'testing' => 'Testing LDAP Connection, Binding & Query ...',

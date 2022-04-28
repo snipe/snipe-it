@@ -6,6 +6,7 @@ return [
     'archived'  				=> 'Arkistoitu',
     'asset'  					=> 'Laite',
     'bulk_checkout'             => 'Laitteiden luovutus',
+    'bulk_checkin'              => 'Palauta laitteita',
     'checkin'  					=> 'Palauta laite',
     'checkout'  				=> 'Luovuta laite',
     'clone'  					=> 'Monista laite',

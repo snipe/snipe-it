@@ -6,6 +6,7 @@ return [
     'archived'  				=> 'Đã lưu trữ',
     'asset'  					=> 'Tài sản',
     'bulk_checkout'             => 'Checkout Tài sản',
+    'bulk_checkin'              => 'Checkin Assets',
     'checkin'  					=> 'Checkin tài sản',
     'checkout'  				=> 'Tài sản thanh toán',
     'clone'  					=> 'Nhân đôi tài sản',

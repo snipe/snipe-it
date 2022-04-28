@@ -6,6 +6,7 @@ return [
     'archived'  				=> 'Archiviato',
     'asset'  					=> 'Asset',
     'bulk_checkout'             => 'Ritiro Asset',
+    'bulk_checkin'              => 'Check-in Bene',
     'checkin'  					=> 'Ingresso Asset',
     'checkout'  				=> 'Asset Checkout',
     'clone'  					=> 'Copia Asset',

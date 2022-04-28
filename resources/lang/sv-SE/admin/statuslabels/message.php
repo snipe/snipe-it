@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'Dessa tillgångar kan inte tilldelas någon.',
-        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
+        'deployable'   => 'Dessa tillgångar kan checkas ut. När de har tilldelats, antar de en metastatus på <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
         'archived'   => 'Dessa tillgångar kan inte checkas ut och visas bara i arkiverad vy. Detta är användbart för att behålla information om tillgångar för budgetering / historiska ändamål men att hålla dem borta från den dagliga tillgångslistan.',
         'pending'   => 'Dessa tillgångar kan ännu inte tilldelas någon som ofta används för föremål som är ute för reparation, men förväntas återgå till omlopp.',
     ],

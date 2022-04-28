@@ -6,6 +6,7 @@ return [
     'archived'  				=> 'بایگانی شد',
     'asset'  					=> 'دارایی',
     'bulk_checkout'             => 'خروج دارایی ها',
+    'bulk_checkin'              => 'Checkin Assets',
     'checkin'  					=> 'دارایی checkin',
     'checkout'  				=> 'دارایی پرداخت',
     'clone'  					=> 'دارایی شگرف',

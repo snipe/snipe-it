@@ -186,6 +186,7 @@ class License extends Depreciable
             ];
         }
         //Chunk and use DB transactions to prevent timeouts.
+
         collect($licenseInsert)->chunk(1000)->each(function ($chunk) {
             DB::transaction(function () use ($chunk) {
                 LicenseSeat::insert($chunk->toArray());
@@ -387,6 +388,7 @@ class License extends Depreciable
             ->whereNotNull('filename')
             ->orderBy('created_at', 'desc');
     }
+
 
     /**
      * Establishes the license -> admin user relationship
@@ -616,6 +618,7 @@ class License extends Depreciable
                     ->orderBy('id', 'asc')
                     ->first();
     }
+
 
     /**
      * Establishes the license -> free seats relationship

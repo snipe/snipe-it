@@ -134,6 +134,7 @@ class LicensesController extends Controller
             ->with('maintained_list', $maintained_list);
     }
 
+
     /**
      * Validates and stores the license form data submitted from the edit
      * license form.

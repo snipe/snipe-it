@@ -6,6 +6,7 @@ return [
     'archived'  				=> '已封存',
     'asset'  					=> '資產',
     'bulk_checkout'             => '借出資產',
+    'bulk_checkin'              => 'Checkin Assets',
     'checkin'  					=> '資產繳回',
     'checkout'  				=> '借出資產',
     'clone'  					=> '複製資產',

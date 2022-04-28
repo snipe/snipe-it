@@ -6,6 +6,7 @@ return [
     'archived'  				=> 'Arkivert',
     'asset'  					=> 'Eiendel',
     'bulk_checkout'             => 'Sjekk ut Eiendeler',
+    'bulk_checkin'              => 'Checkin Assets',
     'checkin'  					=> 'Sjekk inn eiendel',
     'checkout'  				=> 'Sjekk ut asset',
     'clone'  					=> 'Klon eiendel',

@@ -51,8 +51,8 @@ class BulkUsersController extends Controller
                         });
                     }
                 }
-
                 return redirect()->back()->with('success', trans('admin/users/message.password_resets_sent'));
+
             }
         }
 
@@ -103,7 +103,6 @@ class BulkUsersController extends Controller
         if (! $manager_conflict) {
             $this->conditionallyAddItem('manager_id');
         }
-
         // Save the updated info
         User::whereIn('id', $user_raw_array)
             ->where('id', '!=', Auth::id())->update($this->update_array);
@@ -179,6 +178,7 @@ class BulkUsersController extends Controller
         $accessories = DB::table('accessories_users')->whereIn('assigned_to', $user_raw_array)->get();
         $licenses = DB::table('license_seats')->whereIn('assigned_to', $user_raw_array)->get();
 
+
         $this->logItemCheckinAndDelete($assets, Asset::class);
         $this->logItemCheckinAndDelete($accessories, Accessory::class);
         $this->logItemCheckinAndDelete($licenses, LicenseSeat::class);
@@ -188,6 +188,7 @@ class BulkUsersController extends Controller
             'assigned_to'   => null,
             'assigned_type' => null,
         ]);
+
 
         LicenseSeat::whereIn('id', $licenses->pluck('id'))->update(['assigned_to' => null]);
 

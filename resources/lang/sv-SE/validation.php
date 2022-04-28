@@ -64,7 +64,7 @@ return [
         'string'  => ':attribute måste vara minst :min tecken.',
         'array'   => ':attribute måste innehålla minst :min saker.',
     ],
-    'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'starts_with'          => ':attribute måste börja med något av följande: :values.',
     'not_in'               => 'Det valda :attribute är ogiltigt.',
     'numeric'              => ':attribute måste vara ett nummer.',
     'present'              => ':attribute fältet måste finnas.',
@@ -90,7 +90,7 @@ return [
     'uploaded'             => 'Uppladdningen av :attribute misslyckades.',
     'url'                  => ':attribute Formatet är ogiltigt.',
     'unique_undeleted'     => ':attribute måste vara unikt.',
-    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'non_circular'         => ':attribute får inte skapa en cirkulär referens.',
 
     /*
     |--------------------------------------------------------------------------
