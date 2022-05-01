@@ -195,7 +195,7 @@ class CustomFieldsetsController extends Controller
                 }
             }
 
-            $results = $set->fields()->attach($request->input('field_id'), ["required" => ($request->input('required') == "on"),"order" => $request->input('order', 1)]);
+            $results = $set->fields()->attach($request->input('field_id'), ["required" => ($request->input('required') == "on"),"order" => (int)$request->input('order', 1)]);
 
             return redirect()->route("fieldsets.show", [$id])->with("success", trans('admin/custom_fields/message.field.create.assoc_success'));
         }
