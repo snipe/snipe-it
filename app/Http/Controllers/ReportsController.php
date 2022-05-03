@@ -272,13 +272,18 @@ class ReportsController extends Controller
                         }
                     }
 
+                    if($actionlog->item){
+                        $item_name = e($actionlog->item->getDisplayNameAttribute());
+                    } else {
+                        $item_name ='';
+                    }
 
                     $row = [
                         $actionlog->created_at,
                         ($actionlog->user) ? e($actionlog->user->getFullNameAttribute()) : '',
                         $actionlog->present()->actionType(),
                         e($actionlog->itemType()),
-                        ($actionlog->itemType()=='user') ? $actionlog->filename : e($actionlog->item->getDisplayNameAttribute()),
+                        ($actionlog->itemType()=='user') ? $actionlog->filename : $item_name,
                         $target_name,
                         ($actionlog->note) ? e($actionlog->note): '',
                         $actionlog->log_meta,
