@@ -6,6 +6,7 @@ return [
     'archived'  				=> '보관됨',
     'asset'  					=> '자산',
     'bulk_checkout'             => '반출 자산',
+    'bulk_checkin'              => 'Checkin Assets',
     'checkin'  					=> '반입 자산',
     'checkout'  				=> '반출 자산',
     'clone'  					=> '자산 복제',

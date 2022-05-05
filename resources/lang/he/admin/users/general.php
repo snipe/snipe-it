@@ -30,7 +30,7 @@ return [
     'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
     'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
     'remove_group_memberships' => 'Remove Group Memberships',
-    'warning_deletion' => 'WARNING:',
+    'warning_deletion' => 'אזהרה:',
     'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
     'update_user_asssets_status' => 'Update all assets for these users to this status',
     'checkin_user_properties' => 'Check in all properties associated with these users',

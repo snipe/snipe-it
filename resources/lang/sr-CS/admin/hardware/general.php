@@ -6,6 +6,7 @@ return [
     'archived'  				=> 'Arhivirano',
     'asset'  					=> 'Imovina',
     'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkin'              => 'Checkin Assets',
     'checkin'  					=> 'Checkin Asset',
     'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Kloniraj imovinu',

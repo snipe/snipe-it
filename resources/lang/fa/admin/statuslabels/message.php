@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'این دارایی ها را نمی توان به کسی اختصاص داد.',
-        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
+        'deployable'   => 'این دارایی ها قابل بررسی هستند. هنگامی که آن‌ها تخصیص داده شدند، وضعیت متا <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong> نظر گرفته می‌شود.',
         'archived'   => 'این دارایی ها قابل چک نیست و فقط در نمای Archived نمایش داده می شوند. این امر برای حفظ اطلاعات مربوط به دارایی ها برای بودجه بندی / اهداف تاریخی مفید است اما نگه داشتن آنها از فهرست دارایی روزمره.',
         'pending'   => 'این دارایی ها هنوز نمی توانند به هر کسی اختصاص داده شوند، که اغلب برای مواردی که برای تعمیر وجود دارد، مورد استفاده قرار می گیرند، اما انتظار می رود که به گردش درآید.',
     ],

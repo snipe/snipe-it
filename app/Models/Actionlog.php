@@ -34,7 +34,7 @@ class Actionlog extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['action_type', 'note', 'log_meta'];
+    protected $searchableAttributes = ['action_type', 'note', 'log_meta','user_id'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -43,6 +43,7 @@ class Actionlog extends SnipeModel
      */
     protected $searchableRelations = [
         'company' => ['name'],
+        'user' => ['first_name','last_name','username'],
     ];
 
     /**
@@ -68,6 +69,7 @@ class Actionlog extends SnipeModel
             }
         });
     }
+
 
     /**
      * Establishes the actionlog -> item relationship
@@ -124,6 +126,7 @@ class Actionlog extends SnipeModel
 
         return camel_case(class_basename($this->target_type));
     }
+
 
     /**
      * Establishes the actionlog -> uploads relationship
@@ -187,6 +190,7 @@ class Actionlog extends SnipeModel
     {
         return $this->belongsTo(\App\Models\Location::class, 'location_id')->withTrashed();
     }
+
 
     /**
      * Check if the file exists, and if it does, force a download

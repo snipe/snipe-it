@@ -258,6 +258,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         return $this->endpoint;
     }
 
+
     /**
      * Establishes the user -> assets relationship
      *
@@ -497,13 +498,15 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
             $last_name = '';
             $username = $users_name;
         } else {
+
             list($first_name, $last_name) = explode(' ', $users_name, 2);
 
             // Assume filastname by default
             $username = str_slug(substr($first_name, 0, 1).$last_name);
 
-            if ($format == 'firstname.lastname') {
-                $username = str_slug($first_name).'.'.str_slug($last_name);
+            if ($format=='firstname.lastname') {
+                $username = str_slug($first_name) . '.' . str_slug($last_name);
+
             } elseif ($format == 'lastnamefirstinitial') {
                 $username = str_slug($last_name.substr($first_name, 0, 1));
             } elseif ($format == 'firstintial.lastname') {
@@ -526,6 +529,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         $user['first_name'] = $first_name;
         $user['last_name'] = $last_name;
         $user['username'] = strtolower($username);
+
 
         return $user;
     }
@@ -581,8 +585,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         elseif ((Setting::getSettings()->two_factor_enabled == '2') && ($this->two_factor_enrolled)) {
             return true;
         }
-
         return false;
+
     }
 
 
@@ -639,6 +643,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
             $query->where('permission_groups.id', '=', $id);
         });
     }
+
 
     /**
      * Query builder scope to order on manager

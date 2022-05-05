@@ -151,7 +151,7 @@
                        <i class="fa-lock" aria-hidden="true"></i> {{ str_repeat('x', 15) }}
                     @endcan
                 </td>
-                <td>{{  $license->assetlog->first()->created_at }}</td>
+                <td>{{  $license->pivot->created_at }}</td>
             </tr>
             @php
                 $lcounter++
@@ -187,7 +187,7 @@
                     <td>{{ $acounter }}</td>
                     <td>{{ ($accessory->manufacturer) ? $accessory->manufacturer->name : '' }} {{ $accessory->name }} {{ $accessory->model_number }}</td>
                     <td>{{ $accessory->category->name }}</td>
-                    <td>{{  $accessory->assetlog->first()->created_at }}</td>
+                    <td>{{ $accessory->pivot->created_at }}</td>
                 </tr>
                 @php
                     $acounter++
