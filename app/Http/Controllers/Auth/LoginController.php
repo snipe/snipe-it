@@ -415,10 +415,8 @@ class LoginController extends Controller
             return redirect()->away($sloRequestUrl);
         }
 
-        $request->session()->regenerate(true);
-
-        $request->session()->regenerate(true);
         Auth::logout();
+        $request->session()->flush();
 
         if (!empty($sloRedirectUrl)) {
             return redirect()->away($sloRedirectUrl);
