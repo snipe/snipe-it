@@ -67,7 +67,7 @@
                 <th style="width: 20%;">{{ trans('general.name') }}</th>
                 <th style="width: 10%;">{{ trans('general.category') }}</th>
                 <th style="width: 20%;">{{ trans('general.asset_model') }}</th>
-                <th style="width: 20%;">{{ trans('general.asset_serial') }}</th>
+                <th style="width: 20%;">{{ trans('admin/hardware/form.serial') }}</th>
                 <th style="width: 10%;">{{ trans('general.checked_out') }}</th>
                 <th data-formatter="imageFormatter" style="width: 20%;">{{ trans('general.signature') }}</th>
             </tr>
@@ -86,7 +86,7 @@
                 {{ $asset->last_checkout }}</td>
             <td>
                 @if ($asset->assetlog->first())
-                <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $asset->assetlog->first()->accept_signature }}">
+                    <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $asset->assetlog->firstWhere('action_type', 'accepted')->accept_signature}}">
                 @endif
            </td>
         </tr>
