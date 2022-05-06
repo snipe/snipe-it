@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Accessories',
     'activated'			    => 'Activated',
     'accessory'				=> 'Accessory',
@@ -26,6 +26,7 @@
     'audit'				    => 'Audit',
     'audit_report'			=> 'Audit Log',
     'assets'				=> 'Assets',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => 'Delete Avatar',
     'avatar_upload'         => 'Upload Avatar',
     'back'      			=> 'Back',
