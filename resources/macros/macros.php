@@ -402,6 +402,9 @@ Form::macro('digit_separator', function ($name = 'digit_separator', $selected = 
     $formats = [
         '1,234.56',
         '1.234,56',
+        '1234,56',
+        '1 234,56',
+        '1 234.56',
     ];
 
     foreach ($formats as $format) {

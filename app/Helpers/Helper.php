@@ -48,6 +48,20 @@ class Helper
             if (Setting::getSettings()->digit_separator=='1.234,56') {
                 return number_format($cost, 2, ',', '.');
             }
+
+            if (Setting::getSettings()->digit_separator=='1234,56') {
+                return number_format($cost, 2, ',', '');
+            }
+
+            if (Setting::getSettings()->digit_separator=='1 234,56') {
+                return number_format($cost, 2, ',', ' ');
+            }
+
+            if (Setting::getSettings()->digit_separator=='1 234.56') {
+                return number_format($cost, 2, '.', ' ');
+            }
+
+            // Default to US style
             return number_format($cost, 2, '.', ',');
         }
         // It's already been parsed.
@@ -394,7 +408,7 @@ class Helper
 
 
     /**
-     * Format currency using comma for thousands until local info is property used.
+     * Format currency using comma for thousands until local info is properly used.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v2.7]
@@ -402,19 +416,7 @@ class Helper
      */
     public static function ParseFloat($floatString)
     {
-        /*******
-         * 
-         * WARNING: This does conversions based on *locale* - a Unix-ey-like thing.
-         * 
-         * Everything else in the system tends to convert based on the Snipe-IT settings
-         * 
-         * So it's very likely this is *not* what you want - instead look for the new
-         * 
-         * ParseCurrency($currencyString)
-         * 
-         * Which should be directly below here
-         * 
-         */
+
         $LocaleInfo = localeconv();
         $floatString = str_replace(',', '', $floatString);
         $floatString = str_replace($LocaleInfo['decimal_point'], '.', $floatString);
@@ -439,15 +441,33 @@ class Helper
      */
     public static function ParseCurrency($currencyString) {
         $without_currency = str_replace(Setting::getSettings()->default_currency, '', $currencyString); //generally shouldn't come up, since we don't do this in fields, but just in case it does...
-        if(Setting::getSettings()->digit_separator=='1.234,56') {
-            //EU format
+
+        if (Setting::getSettings()->digit_separator=='1.234,56') {
             $without_thousands = str_replace('.', '', $without_currency);
             $corrected_decimal = str_replace(',', '.', $without_thousands);
+
+        } elseif (Setting::getSettings()->digit_separator=='1 234,56') {
+            $without_thousands = str_replace(' ', '', $without_currency);
+            $corrected_decimal = str_replace(',', '.', $without_thousands);
+
+        } elseif (Setting::getSettings()->digit_separator=='1 234.56') {
+            $corrected_decimal = str_replace(' ', '', $without_currency);
+
         } else {
             $without_thousands = str_replace(',', '', $without_currency);
             $corrected_decimal = $without_thousands;  // decimal is already OK
         }
         return floatval($corrected_decimal);
+    }
+
+
+    public static function getFormattedCurrencyObject($cost)
+    {
+
+        $cost_array['numeric'] = (float) $cost;
+        $cost_array['formatted'] = Helper::ParseCurrency(floatval($cost_array['numeric']));
+        return $cost_array;
+
     }
 
     /**

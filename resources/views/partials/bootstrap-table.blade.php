@@ -646,31 +646,53 @@
         }
     }
 
+    /**
+     * This is used to return a numeric value so that javascript can correctly do the addition in the sum footer
+     */
     function cleanFloat(number) {
-        if(!number) { // in a JavaScript context, meaning, if it's null or zero or unset
+
+        if (!number) { // in a JavaScript context, meaning, if it's null or zero or unset
             return 0.0;
         }
+
         if ("{{$snipeSettings->digit_separator}}" == "1.234,56") {
             // yank periods, change commas to periods
             periodless = number.toString().replace(/\./g,"");
             decimalfixed = periodless.replace(/,/g,".");
+
+        } else if ("{{$snipeSettings->digit_separator}}" == "1234,56") {
+            // yank periods
+            decimalfixed = number.toString().replace(/\./g,",");
+
+        } else if ("{{$snipeSettings->digit_separator}}" == "1 234,56") {
+            // yank spaces, convert commas
+            spaceless = number.toString().replace(/\ /g,"");
+            decimalfixed = spaceless.replace(/,/g,".");
+
+        } else if ("{{$snipeSettings->digit_separator}}" == "1 234.56") {
+            // yank spaces, convert commas
+            decimalfixed = number.toString().replace(/\ /g,"");
+
         } else {
-            // yank commas, that's it.
+            // yank commas
             decimalfixed = number.toString().replace(/\,/g,"");
         }
+
         return parseFloat(decimalfixed);
     }
 
     function sumFormatter(data) {
+
         if (Array.isArray(data)) {
+
             var field = this.field;
             var total_sum = data.reduce(function(sum, row) {
-                
                 return (sum) + (cleanFloat(row[field]) || 0);
             }, 0);
             
             return numberWithCommas(total_sum.toFixed(2));
         }
+
         return 'not an array';
     }
 
