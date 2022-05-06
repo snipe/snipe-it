@@ -83,7 +83,11 @@ class BulkAssetsController extends Controller
         $this->authorize('update', Asset::class);
 
         // Get the back url from the session and then destroy the session
-        $bulk_back_url = $request->session()->pull('bulk_back_url');
+        $bulk_back_url = route('hardware');
+        if ($request->session()->has('bulk_back_url')) {
+            $bulk_back_url = $request->session()->pull('bulk_back_url');
+        }
+
 
         if (! $request->filled('ids') || count($request->input('ids')) <= 0) {
             return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.update.no_assets_selected'));
@@ -200,8 +204,10 @@ class BulkAssetsController extends Controller
     {
         $this->authorize('delete', Asset::class);
 
-        // Get the back url from the session and then destroy the session
-        $bulk_back_url = $request->session()->pull('bulk_back_url');
+        $bulk_back_url = route('hardware');
+        if ($request->session()->has('bulk_back_url')) {
+            $bulk_back_url = $request->session()->pull('bulk_back_url');
+        }
 
         if ($request->filled('ids')) {
             $assets = Asset::find($request->get('ids'));
