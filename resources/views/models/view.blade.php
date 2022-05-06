@@ -69,8 +69,7 @@
                 }'>
                 </table>
                   {{ Form::close() }}
-              </div>
-          </div>
+
       </div> <!-- /.box-body-->
     </div> <!-- /.box-default-->
   </div> <!-- /.col-md-9-->
