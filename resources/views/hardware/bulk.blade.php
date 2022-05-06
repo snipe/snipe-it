@@ -143,7 +143,7 @@
                 <input type="radio" class="minimal" name="requestable" value="0"> {{ trans('general.no')}}
               </label>
               <label class="radio">
-                <input type="radio" class="minimal" name="requestable" value=""> {{ trans('general.do_not_change')}}
+                <input type="radio" class="minimal" name="requestable" value="" checked> {{ trans('general.do_not_change')}}
               </label>
             </div>
           </div>
