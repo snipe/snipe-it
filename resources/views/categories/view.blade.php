@@ -28,6 +28,9 @@
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-body">
+          @if ($category->category_type=='asset')
+            @include('partials.asset-bulk-actions')
+          @endif
 
         <table
 

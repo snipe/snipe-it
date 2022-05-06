@@ -23,6 +23,7 @@
         </div>
     </div>
       <div class="box-body">
+
             <div class="table table-responsive">
 
                 <table
@@ -56,6 +57,10 @@
           </div>
         </div>
         <div class="box-body">
+
+
+            @include('partials.asset-bulk-actions')
+
               <div class="table table-responsive">
 
                   <table
