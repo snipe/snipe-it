@@ -11,6 +11,7 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class BulkAssetsController extends Controller
 {
@@ -32,6 +33,12 @@ class BulkAssetsController extends Controller
         if (! $request->filled('ids')) {
             return redirect()->back()->with('error', 'No assets selected');
         }
+        
+        $bulk_back_url = request()->headers->get('referer');
+        session(['bulk_back_url' => $bulk_back_url]);
+
+        \Log::debug('Back to url: '.$bulk_back_url);
+
 
 
         $asset_ids = array_values(array_unique($request->input('ids')));
@@ -73,10 +80,11 @@ class BulkAssetsController extends Controller
     {
         $this->authorize('update', Asset::class);
 
-        \Log::debug($request->input('ids'));
+        // Get the back url from the session and then destroy the session
+        $bulk_back_url = $request->session()->pull('bulk_back_url');
 
         if (! $request->filled('ids') || count($request->input('ids')) <= 0) {
-            return redirect()->route('hardware.index')->with('warning', trans('No assets selected, so nothing was updated.'));
+            return redirect($back_to_url)->with('warning', trans('No assets selected, so nothing was updated.'));
         }
 
         $assets = array_keys($request->input('ids'));
@@ -147,11 +155,13 @@ class BulkAssetsController extends Controller
                     ->update($this->update_array);
             } // endforeach
 
-            return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.update.success'));
-            // no values given, nothing to update
+            return redirect($bulk_back_url)->with('success', trans('admin/hardware/message.update.success'));
+
+
         }
 
-        return redirect()->route('hardware.index')->with('warning', trans('admin/hardware/message.update.nothing_updated'));
+        // no values given, nothing to update
+        return redirect($bulk_back_url)->with('warning', trans('admin/hardware/message.update.nothing_updated'));
     }
 
     /**
@@ -188,6 +198,9 @@ class BulkAssetsController extends Controller
     {
         $this->authorize('delete', Asset::class);
 
+        // Get the back url from the session and then destroy the session
+        $bulk_back_url = $request->session()->pull('bulk_back_url');
+
         if ($request->filled('ids')) {
             $assets = Asset::find($request->get('ids'));
             foreach ($assets as $asset) {
@@ -199,11 +212,11 @@ class BulkAssetsController extends Controller
                     ->update($update_array);
             } // endforeach
 
-            return redirect()->to('hardware')->with('success', trans('admin/hardware/message.delete.success'));
+            return redirect($bulk_back_url)->with('success', trans('admin/hardware/message.delete.success'));
             // no values given, nothing to update
         }
 
-        return redirect()->to('hardware')->with('info', trans('admin/hardware/message.delete.nothing_updated'));
+        return redirect($bulk_back_url)->with('info', trans('admin/hardware/message.delete.nothing_updated'));
     }
 
     /**
