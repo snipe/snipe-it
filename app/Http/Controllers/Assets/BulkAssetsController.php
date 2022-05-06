@@ -224,6 +224,9 @@ class BulkAssetsController extends Controller
      */
     public function storeCheckout(Request $request)
     {
+
+        $this->authorize('checkout', Asset::class);
+
         try {
             $admin = Auth::user();
 
