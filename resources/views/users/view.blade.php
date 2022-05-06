@@ -799,6 +799,7 @@
         <div class="tab-pane" id="history">
           <div class="table-responsive">
 
+
             <table
                     data-click-to-select="true"
                     data-cookie-id-table="usersHistoryTable"
@@ -810,7 +811,6 @@
                     data-show-export="true"
                     data-show-refresh="true"
                     data-sort-order="desc"
-                    data-toolbar="#toolbar"
                     id="usersHistoryTable"
                     class="table table-striped snipe-table"
                     data-url="{{ route('api.activity.index', ['target_id' => $user->id, 'target_type' => 'user']) }}"
