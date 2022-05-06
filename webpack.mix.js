@@ -182,24 +182,21 @@ mix.combine(
  */
 mix
   .combine(
-    [
-      "./node_modules/bootstrap-table/dist/bootstrap-table.js",
-      "./node_modules/bootstrap-table/dist/bootstrap-table-locale-all.js",
-      "./node_modules/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.js",
-      "./node_modules/bootstrap-table/dist/extensions/export/bootstrap-table-export.js",
-      "./node_modules/bootstrap-table/dist/extensions/cookie/bootstrap-table-cookie.js",
-      "./resources/assets/js/extensions/jquery.base64.js",
-      "./node_modules/tableexport.jquery.plugin/tableExport.min.js",
-      "./node_modules/tableexport.jquery.plugin/libs/jsPDF/polyfills.umd.min.js",
-      "./node_modules/tableexport.jquery.plugin/libs/jsPDF/jspdf.umd.min.js",
-      "./resources/assets/js/FileSaver.min.js",
-      "./node_modules/xlsx/dist/xlsx.core.min.js",
-      "./node_modules/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.js",
-      "./node_modules/bootstrap-table/dist/extensions/toolbar/bootstrap-table-toolbar.js",
-    ],
-    "public/js/dist/bootstrap-table.js"
-  )
-  .version();
+        [
+            './node_modules/bootstrap-table/dist/bootstrap-table.js',
+            './node_modules/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.js',
+            './node_modules/bootstrap-table/dist/extensions/export/bootstrap-table-export.js',
+            './node_modules/bootstrap-table/dist/extensions/cookie/bootstrap-table-cookie.js',
+            './resources/assets/js/extensions/jquery.base64.js',
+            './node_modules/tableexport.jquery.plugin/tableExport.min.js',
+            './node_modules/tableexport.jquery.plugin/libs/jsPDF/jspdf.umd.min.js',
+            './resources/assets/js/FileSaver.min.js',
+            './node_modules/xlsx/dist/xlsx.core.min.js',
+            './node_modules/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.js',
+            './node_modules/bootstrap-table/dist/extensions/toolbar/bootstrap-table-toolbar.js'
+        ],
+        'public/js/dist/bootstrap-table.js'
+ ).version();
 
 mix
   .combine(

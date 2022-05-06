@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Assigned to {{ $show_user->present()->fullName() }}</title>
@@ -174,7 +174,7 @@
                 <th style="width: 20px;"></th>
                 <th style="width: 40%;">{{ trans('general.name') }}</th>
                 <th style="width: 50%;">{{ trans('general.category') }}</th>
-                <th style="width: 10%;">{{ trans('general.checked_out') }}</th>
+                <th style="width: 10%;">{{ trans('admin/hardware/table.checkout_date') }}</th>
             </tr>
         </thead>
         @php
@@ -210,7 +210,7 @@
             <th style="width: 20px;"></th>
             <th style="width: 40%;">{{ trans('general.name') }}</th>
             <th style="width: 50%;">{{ trans('general.category') }}</th>
-            <th style="width: 10%;">{{ trans('general.checked_out') }}</th>
+            <th style="width: 10%;">{{ trans('admin/hardware/table.checkout_date') }}</th>
         </tr>
         </thead>
         @php
@@ -246,10 +246,10 @@
 <br>
 <table>
     <tr>
-        <td>{{ trans('admin/locations/table.signed_by') }}</td>
+        <td>{{ trans('general.signed_off_by') }}:</td>
         <td>________________________________________________________</td>
         <td></td>
-        <td>{{ trans('general.date') }}</td>
+        <td>{{ trans('general.date') }}:</td>
         <td>________________________________________________________</td>
     </tr>
 </table>

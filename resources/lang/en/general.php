@@ -229,6 +229,7 @@
     'show_current'  		=> 'Show Current',
     'sign_in'				=> 'Sign in',
     'signature'             => 'Signature',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Skin',
     'slack_msg_note'        => 'A slack message will be sent',
     'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',

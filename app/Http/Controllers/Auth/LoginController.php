@@ -446,8 +446,6 @@ class LoginController extends Controller
         }
 
         $request->session()->regenerate(true);
-
-        $request->session()->regenerate(true);
         Auth::logout();
 
         if (! empty($sloRedirectUrl)) {
