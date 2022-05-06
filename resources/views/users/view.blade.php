@@ -61,7 +61,8 @@
         <li>
           <a href="#consumables" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fas fa-tint fa-2x"></i></span>
+                <i class="fas fa-tint fa-2x"></i>
+            </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.consumables') }}
               {!! ($user->consumables->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->consumables->count().'</badge>' : '' !!}
             </span>
@@ -71,7 +72,8 @@
         <li>
           <a href="#files" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="far fa-file fa-2x"></i></span>
+                <i class="far fa-file fa-2x"></i>
+            </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.file_uploads') }}
               {!! ($user->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->uploads->count().'</badge>' : '' !!}
             </span>
@@ -81,7 +83,8 @@
         <li>
           <a href="#history" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fas fa-history fa-2x"></i></span>
+                <i class="fas fa-history fa-2x"></i>
+            </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.history') }}</span>
           </a>
         </li>
