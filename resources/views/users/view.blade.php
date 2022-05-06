@@ -566,10 +566,13 @@
           </div> <!--/.row-->
         </div><!-- /.tab-pane -->
 
-
         <div class="tab-pane" id="asset">
           <!-- checked out assets table -->
-          <div class="table-responsive table-striped">
+
+            @include('partials.asset-bulk-actions')
+
+            <div class="table table-responsive">
+
             <table
                     data-click-to-select="true"
                     data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
