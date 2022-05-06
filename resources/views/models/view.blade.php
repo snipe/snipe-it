@@ -42,21 +42,11 @@
         </div><!-- /.box-header -->
       @endif
       <div class="box-body">
-          <div class="row">
-              <div class="col-md-12">
-                  {{ Form::open([
-                     'method' => 'POST',
-                     'route' => ['hardware/bulkedit'],
-                     'class' => 'form-inline',
-                      'id' => 'bulkForm']) }}
-                  <div id="toolbar">
-                      <select name="bulk_actions" class="form-control select2">
-                          <option value="edit">{{ trans('button.edit') }}</option>
-                          <option value="delete">{{ trans('button.delete') }}</option>
-                          <option value="labels">{{ trans_choice('button.generate_labels', 2) }}</option>
-                      </select>
-                      <button class="btn btn-primary" id="bulkEdit" disabled>{{ trans('button.go') }}</button>
-                  </div>
+
+          @include('partials.asset-bulk-actions')
+
+
+
 
                   <table
                   data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
