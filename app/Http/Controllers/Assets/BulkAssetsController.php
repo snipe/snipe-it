@@ -85,7 +85,7 @@ class BulkAssetsController extends Controller
         $bulk_back_url = $request->session()->pull('bulk_back_url');
 
         if (! $request->filled('ids') || count($request->input('ids')) <= 0) {
-            return redirect($back_to_url)->with('warning', trans('No assets selected, so nothing was updated.'));
+            return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.update.no_assets_selected'));
         }
 
         $assets = array_keys($request->input('ids'));
