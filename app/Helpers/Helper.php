@@ -61,6 +61,10 @@ class Helper
                 return number_format($cost, 2, '.', ' ');
             }
 
+            if (Setting::getSettings()->digit_separator=='1234.56') {
+                return number_format($cost, 2, '.', '');
+            }
+
             // Default to US style
             return number_format($cost, 2, '.', ',');
         }
@@ -442,15 +446,18 @@ class Helper
     public static function ParseCurrency($currencyString) {
         $without_currency = str_replace(Setting::getSettings()->default_currency, '', $currencyString); //generally shouldn't come up, since we don't do this in fields, but just in case it does...
 
-        if (Setting::getSettings()->digit_separator=='1.234,56') {
+        if (Setting::getSettings()->digit_separator == '1.234,56') {
             $without_thousands = str_replace('.', '', $without_currency);
             $corrected_decimal = str_replace(',', '.', $without_thousands);
 
-        } elseif (Setting::getSettings()->digit_separator=='1 234,56') {
+        } elseif (Setting::getSettings()->digit_separator == '1 234,56') {
             $without_thousands = str_replace(' ', '', $without_currency);
             $corrected_decimal = str_replace(',', '.', $without_thousands);
 
-        } elseif (Setting::getSettings()->digit_separator=='1 234.56') {
+        } elseif (Setting::getSettings()->digit_separator == '1 234.56') {
+            $corrected_decimal = str_replace(' ', '', $without_currency);
+
+        } elseif (Setting::getSettings()->digit_separator == '1234.56') {
             $corrected_decimal = str_replace(' ', '', $without_currency);
 
         } else {
@@ -465,7 +472,7 @@ class Helper
     {
 
         $cost_array['numeric'] = (float) $cost;
-        $cost_array['formatted'] = Helper::ParseCurrency(floatval($cost_array['numeric']));
+        $cost_array['formatted'] = Helper::formatCurrencyOutput($cost_array['numeric']);
         return $cost_array;
 
     }

@@ -146,6 +146,7 @@ class AssetPresenter extends Presenter
                 'sortable' => true,
                 'title' => trans('general.purchase_cost'),
                 'footerFormatter' => 'sumFormatter',
+                'formatter' => 'costDisplayFormatter',
                 'class' => 'text-right',
             ], [
                 'field' => 'order_number',

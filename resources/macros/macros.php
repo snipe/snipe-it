@@ -403,6 +403,7 @@ Form::macro('digit_separator', function ($name = 'digit_separator', $selected = 
         '1,234.56',
         '1.234,56',
         '1234,56',
+        '1234.56',
         '1 234,56',
         '1 234.56',
     ];

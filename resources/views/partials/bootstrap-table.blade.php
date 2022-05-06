@@ -470,6 +470,18 @@
         }
     }
 
+    function createdAtFormatter(value) {
+        if ((value) && (value.formatted)) {
+            return value.formatted;
+        }
+    }
+
+    function costDisplayFormatter(value) {
+        if (value) {
+            return  value.numeric;
+        }
+    }
+
     function externalLinkFormatter(value) {
         if (value) {
             return '<a href="' + value + '" target="_blank">' + value + '</a>';
@@ -673,8 +685,12 @@
             // yank spaces, convert commas
             decimalfixed = number.toString().replace(/\ /g,"");
 
+        } else if ("{{$snipeSettings->digit_separator}}" == "1234.56") {
+            // yank spaces, convert commas
+            decimalfixed = number.toString().replace(/\ /g,"");
+
         } else {
-            // yank commas
+            // this is for 1,234.56
             decimalfixed = number.toString().replace(/\,/g,"");
         }
 
@@ -685,7 +701,7 @@
 
         if (Array.isArray(data)) {
 
-            var field = this.field;
+            var field = this.field.numeric;
             var total_sum = data.reduce(function(sum, row) {
                 return (sum) + (cleanFloat(row[field]) || 0);
             }, 0);

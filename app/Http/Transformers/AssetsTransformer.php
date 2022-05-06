@@ -81,7 +81,6 @@ class AssetsTransformer
             'deleted_at' => Helper::getFormattedDateObject($asset->deleted_at, 'datetime'),
             'purchase_date' => Helper::getFormattedDateObject($asset->purchase_date, 'date'),
             'purchase_cost' => Helper::getFormattedCurrencyObject($asset->purchase_cost),
-            'current_value' => Helper::getFormattedCurrencyObject($asset->getDepreciatedValue()),
             'last_checkout' => Helper::getFormattedDateObject($asset->last_checkout, 'datetime'),
             'expected_checkin' => Helper::getFormattedDateObject($asset->expected_checkin, 'date'),
             'checkin_counter' => (int) $asset->checkin_counter,
