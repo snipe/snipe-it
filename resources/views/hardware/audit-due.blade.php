@@ -23,11 +23,9 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-body">
-                    {{ Form::open([
-                      'method' => 'POST',
-                      'route' => ['hardware/bulkedit'],
-                      'class' => 'form-inline',
-                       'id' => 'bulkForm']) }}
+
+                    @include('partials.asset-bulk-actions')
+
                     <div class="row">
                         <div class="col-md-12">
 

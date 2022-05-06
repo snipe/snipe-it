@@ -45,6 +45,8 @@
       <div class="tab-content">
         <div class="tab-pane fade in active" id="assets">
 
+          @include('partials.asset-bulk-actions')
+          <div class="table table-responsive">
           <table
                   data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
                   data-cookie-id-table="assetsListingTable"
@@ -65,6 +67,7 @@
               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
               }'>
           </table>
+          </div>
 
         </div> <!-- /.tab-pane assets -->
 

@@ -14,9 +14,10 @@ return [
     ],
 
     'update' => [
-        'error'   			=> 'Asset was not updated, please try again',
-        'success' 			=> 'Asset updated successfully.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'error'   			  => 'Asset was not updated, please try again',
+        'success' 			  => 'Asset updated successfully.',
+        'nothing_updated'	  =>  'No fields were selected, so nothing was updated.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [
