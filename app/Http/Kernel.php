@@ -41,12 +41,14 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\CheckLocale::class,
             \App\Http\Middleware\CheckUserIsActivated::class,
             \App\Http\Middleware\CheckForTwoFactor::class,
-            \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
+            // \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class, //these tokens are too long-lived
             \App\Http\Middleware\AssetCountForSidebar::class,
         ],
 
         'api' => [
-            'auth:api',
+            //'auth:api', // the old way
+            //'any:auth,auth:api' //any of 'auth' or 'auth:api' needs to pass for this middleware to call $next() (doesn't work :/)
+            'anyauth'
         ],
     ];
 
@@ -64,5 +66,6 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'anyauth' => \App\Http\Middleware\AnyAuthMiddleware::class,
     ];
 }

@@ -78,7 +78,9 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         Route::group([
-            'middleware' => 'auth:api',
+            // this seems scary to comment-out, but the 'anyauth' middleware is explicitly
+            // mentioned in the api middleware route-group, so I think it's ok.
+            //'middleware' => 'auth:api',
             'namespace' => $this->namespace,
             'prefix' => 'api',
         ], function ($router) {
