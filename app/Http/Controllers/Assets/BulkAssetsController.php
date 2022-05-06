@@ -83,7 +83,7 @@ class BulkAssetsController extends Controller
         $this->authorize('update', Asset::class);
 
         // Get the back url from the session and then destroy the session
-        $bulk_back_url = route('hardware');
+        $bulk_back_url = route('hardware.index');
         if ($request->session()->has('bulk_back_url')) {
             $bulk_back_url = $request->session()->pull('bulk_back_url');
         }
@@ -204,7 +204,7 @@ class BulkAssetsController extends Controller
     {
         $this->authorize('delete', Asset::class);
 
-        $bulk_back_url = route('hardware');
+        $bulk_back_url = route('hardware.index');
         if ($request->session()->has('bulk_back_url')) {
             $bulk_back_url = $request->session()->pull('bulk_back_url');
         }
