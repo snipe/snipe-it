@@ -31,7 +31,8 @@ class BulkAssetsController extends Controller
         $this->authorize('update', Asset::class);
 
         if (! $request->filled('ids')) {
-            return redirect()->back()->with('error', 'No assets selected');
+            return redirect()->back()->with('error', trans('admin/hardware/message.update.no_assets_selected'));
+
         }
 
         // Figure out where we need to send the user after the update is complete, and store that in the session
@@ -217,7 +218,7 @@ class BulkAssetsController extends Controller
             // no values given, nothing to update
         }
 
-        return redirect($bulk_back_url)->with('info', trans('admin/hardware/message.delete.nothing_updated'));
+        return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.delete.nothing_updated'));
     }
 
     /**
