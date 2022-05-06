@@ -33,7 +33,8 @@ class BulkAssetsController extends Controller
         if (! $request->filled('ids')) {
             return redirect()->back()->with('error', 'No assets selected');
         }
-        
+
+        // Figure out where we need to send the user after the update is complete, and store that in the session
         $bulk_back_url = request()->headers->get('referer');
         session(['bulk_back_url' => $bulk_back_url]);
 
