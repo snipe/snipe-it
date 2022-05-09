@@ -13,7 +13,6 @@ class CreateCustomFieldCustomFieldset extends Migration
     public function up()
     {
         Schema::create('custom_field_custom_fieldset', function (Blueprint $table) {
-		{
             $table->bigIncrements('id');
             $table->integer('custom_field_id');
             $table->integer('custom_fieldset_id');
