@@ -191,6 +191,14 @@ class LicensePresenter extends Presenter
     public static function dataTableLayoutSeats()
     {
         $layout = [
+            [
+                'field' => 'id',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.id'),
+                'visible' => false,
+           ],
            [
                 "field" => "name",
                 "searchable" => false,
