@@ -48,6 +48,7 @@ class License extends Depreciable
         'notes'   => 'string|nullable',
         'category_id' => 'required|exists:categories,id',
         'company_id' => 'integer|nullable',
+        'purchase_cost'=> 'numeric|nullable|gte:0',
     ];
 
     /**
