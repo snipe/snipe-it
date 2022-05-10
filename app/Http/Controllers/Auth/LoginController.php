@@ -120,7 +120,8 @@ class LoginController extends Controller
             try {
                 Log::debug("Attempting to log user in by SAML authentication.");
                 $user = $saml->samlLogin($samlData);
-                if(!is_null($user)) {
+
+                if (!is_null($user)) {
                     Auth::login($user);
                 } else {
                     $username = $saml->getUsername();
@@ -133,11 +134,26 @@ class LoginController extends Controller
                     $user->last_login = \Carbon::now();
                     $user->save();
                 }
+                
             } catch (\Exception $e) {
                 \Log::warning("There was an error authenticating the SAML user: " . $e->getMessage());
                 throw new \Exception($e->getMessage());
             }
+
+        // Fallthrough with better logging
+        } else {
+
+            // Better logging
+            if (!$saml->isEnabled()) {
+                \Log::warning("SAML page requested, but SAML does not seem to enabled.");
+            } else {
+                \Log::warning("SAML page requested, but samlData seems empty.");
+            }
         }
+
+        \Log::warning("Something else went wrong while trying to login as SAML user");
+
+
     }
 
     /**
