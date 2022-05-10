@@ -54,7 +54,6 @@ class AssetsController extends Controller
     public function index(Request $request, $audit = null) 
     {
 
-        \Log::debug(Route::currentRouteName());
         $filter_non_deprecable_assets = false;
 
         /**
