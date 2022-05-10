@@ -17,14 +17,8 @@ class AssetObserver
      */
     public function updating(Asset $asset)
     {
-        $attributes = $asset->getAttributes();
-        $attributesOriginal = $asset->getOriginal();
-        
-        // If the asset isn't being checked out or audited, log the update.
-        // (Those other actions already create log entries.)
-          if (($attributes['assigned_to'] == $attributesOriginal['assigned_to'])
-            && ((isset( $attributes['next_audit_date']) ? $attributes['next_audit_date'] : null) == (isset($attributesOriginal['next_audit_date']) ? $attributesOriginal['next_audit_date']: null))
-            && ($attributes['last_checkout']   == $attributesOriginal['last_checkout']))
+        // if anything changes on the model level of the asset an action log will be registered.
+        if($asset->isDirty())
         {
             $changed = [];
 
