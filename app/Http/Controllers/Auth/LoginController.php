@@ -86,7 +86,9 @@ class LoginController extends Controller
             return redirect()->route('saml.login');
         }
 
+
         if (Setting::getSettings()->login_common_disabled == "1") {
+            \Log::debug('login_common_disabled is set to 1 - return a 403');
             return view('errors.403');
         }
 
@@ -207,10 +209,12 @@ class LoginController extends Controller
 
         //If the environment is set to ALWAYS require SAML, return access denied
         if (config('app.require_saml')) {
+            \Log::debug('require SAML is enabled in the .env - return a 403');
             return view('errors.403');
         }
 
         if (Setting::getSettings()->login_common_disabled == "1") {
+            \Log::debug('login_common_disabled is set to 1 - return a 403');
             return view('errors.403');
         }
 

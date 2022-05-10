@@ -51,6 +51,7 @@ class SamlController extends Controller
         $metadata = $this->saml->getSPMetadata();
 
         if (empty($metadata)) {
+            \Log::debug('SAML metadata is empty - return a 403');
             return response()->view('errors.403', [], 403);
         }
     
