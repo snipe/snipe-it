@@ -95,8 +95,47 @@ class Ldap extends Model
         $connection = self::connectToLdap();
         $ldap_username_field = $settings->ldap_username_field;
         $baseDn = $settings->ldap_basedn;
-        $userDn = $ldap_username_field.'='.$username.','.$settings->ldap_basedn;
 
+        // FIND the user first, then attempt to log in as them using the appropriate attribute
+        $filterQuery = $settings->ldap_auth_filter_query.$username;
+        $filter = Setting::getSettings()->ldap_filter; //FIXME - this *does* respect the ldap filter, but I believe that AdLdap2 did *not*.
+        $filterQuery = "({$filter}({$filterQuery}))"; // FIXME - this makes an incorrect LDAP filter if there is no filter query
+
+        \Log::debug('Filter query: '.$filterQuery);
+
+
+        if (! self::bindAdminToLdap($connection) ) { //
+            \Log::debug("Uh, we could *NOT* bind as admin?! I don't understand how this ever worked.");
+            return false; // also FIXME? Maybe this one is OK?
+        }
+        \Log::debug("Well, I guess we at least bound as somebody?");
+        if (! $results = ldap_search($connection, $baseDn, $filterQuery)) {
+            throw new Exception('Could not search LDAP: '); // FIXME - I'm worried these early returns are somehow bad, in that they might disclose whether or not users exist?
+        }
+
+        if (! $entry = ldap_first_entry($connection, $results)) {
+            throw new Exception('Could not retrieve LDAP entry'); // TODO - should this throw an exception or just return false?
+            return false;
+        }
+
+        if (! $user = ldap_get_attributes($connection, $entry)) {
+            throw new Exception('Could not fetch LDAP attributes'); // TODO - should this throw an exception or just return false?
+            return false;
+        }
+
+        if ( ldap_next_entry($connection, $entry) !== false ) { //if there's a 'next' entry, then that's more than one - failure.
+            throw new Exception('Too many entries returned'); // (new) - TODO - should this throw an exception or just return false?
+            return false; //
+        }
+
+        \Log::debug("Entry retrieved was: ".print_r($user, true));
+        \Log::debug("The calculated LDAP username IS: ".print_r(array_change_key_case($user)[$ldap_username_field],true));
+
+        $username = array_change_key_case($user)[$ldap_username_field][0]; // TODO - is this right?
+        $userDn = $ldap_username_field.'='.$username.','.$settings->ldap_basedn; // FIXME (do we still append basedn?) <- this was the 'classic' way of assembling a userDn - simple string appends
+        \Log::debug("initial username we think is: $userDn");
+        // *Now* we should try to bind as that found user
+        // first, AD has its own username-assembly system
         if ($settings->is_ad == '1') {
             // Check if they are using the userprincipalname for the username field.
             // If they are, we can skip building the UPN to authenticate against AD
@@ -113,44 +152,11 @@ class Ldap extends Model
             }
         }
 
-        $filterQuery = $settings->ldap_auth_filter_query.$username;
-        $filter = Setting::getSettings()->ldap_filter; //FIXME - this *does* respect the ldap filter, but I believe that AdLdap2 did *not*.
-        $filterQuery = "({$filter}({$filterQuery}))";
-
-        \Log::debug('Filter query: '.$filterQuery);
-
         if (! $ldapbind = @ldap_bind($connection, $userDn, $password)) {
-            \Log::debug("Status of binding user: $userDn to directory: (directly!) ".($ldapbind ? "success" : "FAILURE"));
-            if (! $ldapbind = self::bindAdminToLdap($connection)) {
-                /*
-                 * TODO PLEASE:
-                 *
-                 * this isn't very clear, so it's important to note: the $ldapbind value is never correctly returned - we never 'return true' from self::bindAdminToLdap() (the function
-                 * just "falls off the end" without ever explictly returning 'true')
-                 *
-                 * but it *does* have an interesting side-effect of checking for the LDAP password being incorrectly encrypted with the wrong APP_KEY, so I'm leaving it in for now.
-                 *
-                 * If it *did* correctly return 'true' on a succesful bind, it would _probably_ allow users to log in with an incorrect password. Which would be horrible!
-                 *
-                 * Let's definitely fix this at the next refactor!!!!
-                 *
-                 */
-                \Log::debug("Status of binding Admin user: $userDn to directory instead: ".($ldapbind ? "success" : "FAILURE"));
-                return false;
-            }
+            \Log::debug("Failed to log in to: $userDn with password '$password'");
+            throw new Exception("Unable to bind as user: $userDn");
         }
-
-        if (! $results = ldap_search($connection, $baseDn, $filterQuery)) {
-            throw new Exception('Could not search LDAP: ');
-        }
-
-        if (! $entry = ldap_first_entry($connection, $results)) {
-            return false;
-        }
-
-        if (! $user = ldap_get_attributes($connection, $entry)) {
-            return false;
-        }
+        \Log::debug("Status of binding user: $userDn to directory: (directly!) ".($ldapbind ? "success" : "FAILURE"));
 
         return array_change_key_case($user);
     }
@@ -179,11 +185,7 @@ class Ldap extends Model
         if (! $ldapbind = @ldap_bind($connection, $ldap_username, $ldap_pass)) {
             throw new Exception('Could not bind to LDAP: '.ldap_error($connection));
         }
-        // TODO - this just "falls off the end" but the function states that it should return true or false
-        // unfortunately, one of the use cases for this function is wrong and *needs* for that failure mode to fire
-        // so I don't want to fix this right now.
-        // this method MODIFIES STATE on the passed-in $connection and just returns true or false (or, in this case, undefined)
-        // at the next refactor, this should be appropriately modified to be more consistent.
+        return $ldapbind; // will always be true - if it were false, we would've thrown an Exception
     }
 
 

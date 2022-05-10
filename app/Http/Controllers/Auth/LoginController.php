@@ -150,19 +150,20 @@ class LoginController extends Controller
              Log::debug("LDAP user ".$request->input('username')." not found in LDAP or could not bind");
              throw new \Exception("Could not find user in LDAP directory");
          } else {
-             Log::debug("LDAP user ".$request->input('username')." successfully bound to LDAP");
+             $username = $ldap_user[Setting::getSettings()->ldap_username_field][0]; // TODO - uh, I guess? I hate that we're doing this twice though
+             Log::debug("LDAP user $username successfully bound to LDAP");
          }
 
          // Check if the user already exists in the database and was imported via LDAP
-         $user = User::where('username', '=', $request->input('username'))->whereNull('deleted_at')->where('ldap_import', '=', 1)->where('activated', '=', '1')->first(); // FIXME - if we get more than one we should fail. and we sure about this ldap_import thing?
+         $user = User::where('username', '=', $username)->whereNull('deleted_at')->where('ldap_import', '=', 1)->where('activated', '=', '1')->first(); // FIXME - if we get more than one we should fail. and we sure about this ldap_import thing?
          Log::debug("Local auth lookup complete");
 
          // The user does not exist in the database. Try to get them from LDAP.
          // If user does not exist and authenticates successfully with LDAP we
          // will create it on the fly and sign in with default permissions
          if (!$user) {
-             Log::debug("Local user ".$request->input('username')." does not exist");
-             Log::debug("Creating local user ".$request->input('username'));
+             Log::debug("Local user ".$username." does not exist");
+             Log::debug("Creating local user ".username);
 
              if ($user = Ldap::createUserFromLdap($ldap_user)) { //this handles passwords on its own
                  Log::debug("Local user created.");
@@ -172,7 +173,7 @@ class LoginController extends Controller
              }
              // If the user exists and they were imported from LDAP already
          } else {
-             Log::debug("Local user ".$request->input('username')." exists in database. Updating existing user against LDAP.");
+             Log::debug("Local user ".$username." exists in database. Updating existing user against LDAP.");
 
              $ldap_attr = Ldap::parseAndMapLdapAttributes($ldap_user);
 
