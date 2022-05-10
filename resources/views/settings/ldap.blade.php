@@ -256,6 +256,20 @@
                             </div>
                         </div>
 
+                        <!-- LDAP append basedn to username -->
+                        <div class="form-group {{ $errors->has('ldap_basedn') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('ldap_append_basedn_to_username', trans('admin/settings/general.ldap_append_basedn_to_username')) }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ Form::checkbox('ldap_append_basedn_to_username', '1', Request::old('ldap_append_basedn_to_username', $setting->ldap_append_basedn_to_username), [((config('app.lock_passwords')===true)) ? 'disabled ': '', 'class' => 'minimal '. $setting->demoMode, $setting->demoMode]) }}
+                                {!! $errors->first('ldap_append_basedn_to_username', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                @if (config('app.lock_passwords')===true)
+                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                @endif
+                            </div>
+                        </div>
+
                         <!-- LDAP filter -->
                         <div class="form-group {{ $errors->has('ldap_filter') ? 'error' : '' }}">
                             <div class="col-md-3">

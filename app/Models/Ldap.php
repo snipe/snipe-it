@@ -132,7 +132,10 @@ class Ldap extends Model
         \Log::debug("The calculated LDAP username IS: ".print_r(array_change_key_case($user)[$ldap_username_field],true));
 
         $username = array_change_key_case($user)[$ldap_username_field][0]; // TODO - is this right?
-        $userDn = $ldap_username_field.'='.$username.','.$settings->ldap_basedn; // FIXME (do we still append basedn?) <- this was the 'classic' way of assembling a userDn - simple string appends
+        $userDn = $ldap_username_field.'='.$username;
+        if ( $settings->ldap_append_basedn_to_username ) { // TODO - we *could* actually disable/enable this field based on whether AD is on or not? (it will be ignored if AD is on, right?)
+            $userDn .= ','.$settings->ldap_basedn;
+        }
         \Log::debug("initial username we think is: $userDn");
         // *Now* we should try to bind as that found user
         // first, AD has its own username-assembly system
