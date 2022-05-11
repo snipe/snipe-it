@@ -111,7 +111,7 @@ class Asset extends Depreciable
         'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
         'status'          => 'integer',
         'serial'          => 'unique_serial|nullable',
-        'purchase_cost'   => 'numeric|nullable',
+        'purchase_cost'   => 'numeric|nullable|gte:0',
         'next_audit_date' => 'date|nullable',
         'last_audit_date' => 'date|nullable',
         'supplier_id'     => 'exists:suppliers,id|nullable',
