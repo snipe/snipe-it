@@ -130,9 +130,11 @@ class Saml
             $this->clearData();
         }
 
+        \Log::debug('Trying to create a new OneLogin_Saml2_Auth object ');
         try {
             $this->_auth = new OneLogin_Saml2_Auth($this->_settings);
         } catch (Exception $e) {
+            \Log::error('Trying OneLogin_Saml2_Auth failed. Setting SAML enabled to false. OneLogin_Saml2_Auth error message is: '.  $e->getMessage());
             $this->_enabled = false;
         }
     }
@@ -155,6 +157,7 @@ class Saml
         $this->_enabled = $setting->saml_enabled == '1';
 
         if ($this->isEnabled()) {
+            \Log::debug('SAML is enabled according to loadSettings()');
             //Let onelogin/php-saml know to use 'X-Forwarded-*' headers if it is from a trusted proxy
             OneLogin_Saml2_Utils::setProxyVars(request()->isFromTrustedProxy());
 

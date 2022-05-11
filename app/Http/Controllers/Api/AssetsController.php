@@ -52,7 +52,7 @@ class AssetsController extends Controller
      */
     public function index(Request $request, $audit = null) 
     {
-        \Log::debug(Route::currentRouteName());
+
         $filter_non_deprecable_assets = false;
 
         /**
@@ -343,6 +343,7 @@ class AssetsController extends Controller
                 $query->orderBy('created_at', 'desc');
             }]);
         }
+
 
 
         /**
@@ -730,6 +731,7 @@ class AssetsController extends Controller
             $logaction->logaction('restored');
 
             return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.restore.success')));
+        
 
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
