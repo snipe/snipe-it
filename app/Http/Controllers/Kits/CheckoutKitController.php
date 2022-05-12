@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Kits;
 use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Controllers\Controller;
 use App\Models\PredefinedKit;
+use App\Models\Asset;
 use App\Models\PredefinedLicence;
 use App\Models\PredefinedModel;
 use App\Models\User;
