@@ -83,6 +83,18 @@ abstract class SnipePermissionsPolicy
         return $user->hasAccess($this->columnName().'.edit');
     }
 
+
+    /**
+     * Determine whether the user can update the accessory.
+     *
+     * @param  \App\Models\User  $user
+     * @return mixed
+     */
+    public function checkout(User $user, $item = null)
+    {
+        return $user->hasAccess($this->columnName().'.checkout');
+    }
+
     /**
      * Determine whether the user can delete the accessory.
      *
