@@ -87,7 +87,7 @@
                 <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
                   <label class="col-md-3 control-label" for="first_name">{{ trans('general.first_name') }}</label>
                   <div class="col-md-6{{  (Helper::checkIfRequired($user, 'first_name')) ? ' required' : '' }}">
-                    <input class="form-control" type="text" name="first_name" id="first_name" value="{{ old('first_name', $user->first_name) }}" />
+                    <input class="form-control" type="text" name="first_name" id="first_name" value="{{ old('first_name', $user->first_name) }}" maxlength=191" />
                     {!! $errors->first('first_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                   </div>
                 </div>
@@ -96,7 +96,7 @@
                 <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
                   <label class="col-md-3 control-label" for="last_name">{{ trans('general.last_name') }} </label>
                   <div class="col-md-6{{  (Helper::checkIfRequired($user, 'last_name')) ? ' required' : '' }}">
-                    <input class="form-control" type="text" name="last_name" id="last_name" value="{{ old('last_name', $user->last_name) }}" />
+                    <input class="form-control" type="text" name="last_name" id="last_name" value="{{ old('last_name', $user->last_name) }}" maxlength=191" />
                     {!! $errors->first('last_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                   </div>
                 </div>
@@ -113,6 +113,7 @@
                         id="username"
                         value="{{ Request::old('username', $user->username) }}"
                         autocomplete="off"
+                        maxlength=191"
                         readonly
                         onfocus="this.removeAttribute('readonly');"
                         {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}
@@ -235,6 +236,7 @@
                       type="text"
                       name="email"
                       id="email"
+                      maxlength=191"
                       value="{{ Request::old('email', $user->email) }}"
                       {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}
                       autocomplete="off"
@@ -307,6 +309,7 @@
                       type="text"
                       aria-label="employee_num"
                       name="employee_num"
+                      maxlength=191"
                       id="employee_num"
                       value="{{ Request::old('employee_num', $user->employee_num) }}"
                     />
@@ -322,6 +325,7 @@
                     <input
                       class="form-control"
                       type="text"
+                      maxlength=191"
                       name="jobtitle"
                       id="jobtitle"
                       value="{{ Request::old('jobtitle', $user->jobtitle) }}"
@@ -358,7 +362,7 @@
                 <div class="form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
                   <label class="col-md-3 control-label" for="phone">{{ trans('admin/users/table.phone') }}</label>
                   <div class="col-md-6">
-                    <input class="form-control" type="text" name="phone" id="phone" value="{{ old('phone', $user->phone) }}" />
+                    <input class="form-control" type="text" name="phone" id="phone" value="{{ old('phone', $user->phone) }}" maxlength=191" />
                     {!! $errors->first('phone', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                   </div>
                 </div>
@@ -367,7 +371,7 @@
                   <div class="form-group {{ $errors->has('website') ? ' has-error' : '' }}">
                       <label for="website" class="col-md-3 control-label">{{ trans('general.website') }}</label>
                       <div class="col-md-6">
-                          <input class="form-control" type="text" name="website" id="website" value="{{ old('website', $user->website) }}" />
+                          <input class="form-control" type="text" name="website" id="website" value="{{ old('website', $user->website) }}" maxlength=191" />
                           {!! $errors->first('website', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                       </div>
                   </div>
@@ -376,7 +380,7 @@
                   <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                       <label class="col-md-3 control-label" for="address">{{ trans('general.address') }}</label>
                       <div class="col-md-6">
-                          <input class="form-control" type="text" name="address" id="address" value="{{ old('address', $user->address) }}" />
+                          <input class="form-control" type="text" name="address" id="address" value="{{ old('address', $user->address) }}" maxlength=191" />
                           {!! $errors->first('address', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                       </div>
                   </div>
@@ -385,7 +389,7 @@
                   <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
                       <label class="col-md-3 control-label" for="city">{{ trans('general.city') }}</label>
                       <div class="col-md-6">
-                          <input class="form-control" type="text" name="city" id="city" aria-label="city" value="{{ old('city', $user->city) }}" />
+                          <input class="form-control" type="text" name="city" id="city" aria-label="city" value="{{ old('city', $user->city) }}" maxlength=191" />
                           {!! $errors->first('city', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                       </div>
                   </div>
