@@ -358,7 +358,6 @@ class LoginController extends Controller
 
         $secret = Google2FA::generateSecretKey();
         $user->two_factor_secret = $secret;
-        $user->save();
 
         $barcode = new Barcode();
         $barcode_obj =
@@ -375,6 +374,8 @@ class LoginController extends Controller
                 'black',
                 [-2, -2, -2, -2]
             );
+
+        $user->save(); // make sure to save *AFTER* displaying the barcode, or else we might save a two_factor_secret that we never actually displayed to the user if the barcode fails
 
         return view('auth.two_factor_enroll')->with('barcode_obj', $barcode_obj);
     }
@@ -420,7 +421,7 @@ class LoginController extends Controller
             return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.code_required'));
         }
 
-        if (! $request->has('two_factor_secret')) {
+        if (! $request->has('two_factor_secret')) { // TODO this seems almost the same as above?
             return redirect()->route('two-factor')->with('error', 'Two-factor code is required.');
         }
 
