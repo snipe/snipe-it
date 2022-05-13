@@ -395,26 +395,12 @@ Route::group(['prefix' => 'setup', 'middleware' => 'web'], function () {
     )->name('setup');
 });
 
-Route::middleware(['web'], function () {
-    Route::get(
-        'two-factor-enroll',
-        [LoginController::class, 'getTwoFactorEnroll']
-    )->name('two-factor-enroll');
-    
-    Route::get(
-        'two-factor',
-        [LoginController::class, 'getTwoFactorAuth']
-    )->name('two-factor');
-    
-    Route::post(
-        'two-factor',
-        [LoginController::class, 'postTwoFactorAuth']
-    );    
-});
+
 
 
 
 Route::group(['middleware' => 'web'], function () {
+
     Route::get(
         'login',
         [LoginController::class, 'showLoginForm']
@@ -423,6 +409,38 @@ Route::group(['middleware' => 'web'], function () {
     Route::post(
         'login',
         [LoginController::class, 'login']
+    );
+
+    Route::get(
+        'two-factor-enroll',
+        [
+            'as' => 'two-factor-enroll',
+            'middleware' => ['web'],
+            'uses' => 'Auth\LoginController@getTwoFactorEnroll' ]
+    );
+
+    Route::get(
+        'two-factor',
+        [
+            'as' => 'two-factor',
+            'middleware' => ['web'],
+            'uses' => 'Auth\LoginController@getTwoFactorAuth' ]
+    );
+
+    Route::post(
+        'two-factor',
+        [
+            'as' => 'two-factor',
+            'middleware' => ['web'],
+            'uses' => 'Auth\LoginController@postTwoFactorAuth' ]
+    );
+
+    Route::get(
+        '/',
+        [
+            'as' => 'home',
+            'middleware' => ['auth'],
+            'uses' => 'DashboardController@getIndex' ]
     );
 
     Route::get(
