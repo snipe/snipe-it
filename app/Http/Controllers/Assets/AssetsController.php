@@ -168,9 +168,9 @@ class AssetsController extends Controller
                     if ($field->field_encrypted == '1') {
                         if (Gate::allows('admin')) {
                             if (is_array($request->input($field->convertUnicodeDbSlug()))) {
-                                $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(e(implode(', ', $request->input($field->convertUnicodeDbSlug()))));
+                                $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(implode(', ', $request->input($field->convertUnicodeDbSlug())));
                             } else {
-                                $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(e($request->input($field->convertUnicodeDbSlug())));
+                                $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
                             }
                         }
                     } else {
@@ -344,9 +344,9 @@ class AssetsController extends Controller
                 if ($field->field_encrypted == '1') {
                     if (Gate::allows('admin')) {
                         if (is_array($request->input($field->convertUnicodeDbSlug()))) {
-                            $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(e(implode(', ', $request->input($field->convertUnicodeDbSlug()))));
+                            $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(implode(', ', $request->input($field->convertUnicodeDbSlug())));
                         } else {
-                            $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(e($request->input($field->convertUnicodeDbSlug())));
+                            $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
                         }
                     }
                 } else {
