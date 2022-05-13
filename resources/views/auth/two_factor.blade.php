@@ -42,15 +42,16 @@
                             <button class="btn btn-lg btn-primary btn-block">{{ trans('general.submit')  }}</button>
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12 text-right" style="padding-top: 10px;">
-                            <a href="{{ route('logout') }}" onclick="function (event) { event.preventDefault(); document.getElementById('logout-form').submit();}">
+                            <a href="{{ route('logout') }}" onclick="document.getElementById('logout-form').submit(); return false;">
                                 {{ trans('general.cancel')  }}
                             </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                            </form>
                         </div>
             </div>
             </form>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            {{ csrf_field() }}
+            </form>
+
         </div>
     </div>
 
