@@ -1000,7 +1000,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:'.config('app.
             Route::post('models',
                 [
                     Api\PredefinedKitsController::class, 
-                    'storeModels'
+                    'storeModel'
                 ]
             )->name('api.kits.models.store');
 
