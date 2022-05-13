@@ -144,6 +144,7 @@
                         class="form-control"
                         id="password"
                         value=""
+                        maxlength="500"
                         autocomplete="off"
                         readonly
                         onfocus="this.removeAttribute('readonly');"
@@ -167,13 +168,14 @@
                   <label class="col-md-3 control-label" for="password_confirmation">
                     {{ trans('admin/users/table.password_confirm') }}
                   </label>
-                  <div class="col-md-6{{  ((Helper::checkIfRequired($user, 'first_name')) && (!$user->id)) ? ' required' : '' }}">
+                  <div class="col-md-6{{  ((Helper::checkIfRequired($user, 'password_confirmation')) && (!$user->id)) ? ' required' : '' }}">
                     <input
                     type="password"
                     name="password_confirmation"
                     id="password_confirm"
                     class="form-control"
                     value=""
+                    maxlength="500"
                     autocomplete="off"
                     aria-label="password_confirmation"
                     readonly
