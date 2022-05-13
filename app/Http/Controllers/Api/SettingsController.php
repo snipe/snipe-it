@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator; 
 use App\Http\Requests\SlackSettingsRequest;
+use App\Http\Transformers\LoginAttemptsTransformer;
 
 
 class SettingsController extends Controller
