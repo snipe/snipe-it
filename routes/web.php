@@ -413,26 +413,17 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get(
         'two-factor-enroll',
-        [
-            'as' => 'two-factor-enroll',
-            'middleware' => ['web'],
-            'uses' => 'Auth\LoginController@getTwoFactorEnroll' ]
-    );
+        [LoginController::class, 'getTwoFactorEnroll']
+    )->name('two-factor-enroll');
 
     Route::get(
         'two-factor',
-        [
-            'as' => 'two-factor',
-            'middleware' => ['web'],
-            'uses' => 'Auth\LoginController@getTwoFactorAuth' ]
-    );
+        [LoginController::class, 'getTwoFactorAuth']
+    )->name('two-factor');
 
     Route::post(
         'two-factor',
-        [
-            'as' => 'two-factor',
-            'middleware' => ['web'],
-            'uses' => 'Auth\LoginController@postTwoFactorAuth' ]
+        [LoginController::class, 'postTwoFactorAuth']
     );
 
     Route::get(
