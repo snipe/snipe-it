@@ -53,7 +53,7 @@
         "papaparse": "^4.3.3",
         "select2": "4.0.13",
         "sheetjs": "^2.0.0",
-        "tableexport.jquery.plugin": "1.25.0",
+        "tableexport.jquery.plugin": "1.26.0",
         "tether": "^1.4.0",
         "vue-resource": "^1.5.2",
         "webpack": "^5.65.0"
