@@ -75,12 +75,12 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
 
     protected $rules = [
-        'first_name'              => 'required|string|min:1',
-        'username'                => 'required|string|min:1|unique_undeleted',
-        'email'                   => 'email|nullable',
+        'first_name'              => 'required|string|min:1|max:191',
+        'username'                => 'required|string|min:1|unique_undeleted|max:191',
+        'email'                   => 'email|nullable|max:191',
         'password'                => 'required|min:8',
         'locale'                  => 'max:10|nullable',
-        'website'                 => 'url|nullable',
+        'website'                 => 'url|nullable|max:191',
         'manager_id'              => 'nullable|exists:users,id|cant_manage_self',
         'location_id'             => 'exists:locations,id|nullable',
     ];
