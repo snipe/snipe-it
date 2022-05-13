@@ -434,7 +434,7 @@ Route::group(['middleware' => 'web'], function () {
             'uses' => 'DashboardController@getIndex' ]
     );
 
-    Route::get(
+    Route::post(
         'logout',
         [LoginController::class, 'logout']
     )->name('logout');
