@@ -773,7 +773,7 @@
                           data-sort-name="name"
                           class="table table-striped snipe-table"
                           data-export-options='{
-                    "fileName": "export-license-uploads-{{ str_slug($license->name) }}-{{ date('Y-m-d') }}",
+                    "fileName": "export-license-uploads-{{ str_slug($user->name) }}-{{ date('Y-m-d') }}",
                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","delete","download","icon"]
                     }'>
 
@@ -825,12 +825,16 @@
                                 @endif
                             </td>
                             <td>{{ $file->created_at }}</td>
+
                             <td>
-                                <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}" data-content="{{ trans('general.delete_confirm', array('item' => $file)) }}" data-title="{{ trans('general.delete') }} {{ $file->filename }}?">
-                                    <i class="fas fa-trash icon-white" aria-hidden="true"></i>
+                                <a class="btn delete-asset btn-danger btn-sm hidden-print" href="{{ route('userfile.destroy', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?">
+                                    <i class="fa fa-trash icon-white" aria-hidden="true"></i>
                                     <span class="sr-only">{{ trans('general.delete') }}</span>
                                 </a>
                             </td>
+
+
+
                         </tr>
                     @endforeach
 
