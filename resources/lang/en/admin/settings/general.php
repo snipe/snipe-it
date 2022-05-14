@@ -28,6 +28,7 @@ return [
     'auto_increment_prefix'		=> 'Prefix (optional)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'Backups',
+    'backups_help'              => 'Create, download, and restore backups ',
     'backups_restoring'         => 'Restoring from Backup',
     'backups_upload'            => 'Upload Backup',
     'backups_path'              => 'Backups on the server are stored in <code>:path</code>',
