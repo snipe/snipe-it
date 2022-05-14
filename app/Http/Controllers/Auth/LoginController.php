@@ -449,10 +449,17 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
+        // Logout is only allowed with a http POST but we need to allow GET for SAML SLO
         $settings = Setting::getSettings();
         $saml = $this->saml;
+        $samlLogout = $request->session()->get('saml_logout');
         $sloRedirectUrl = null;
         $sloRequestUrl = null;
+    
+        // Only allow GET if we are doing SAML SLO otherwise abort with 405
+        if ($request->isMethod('GET') && !$samlLogout) {
+            abort(405);
+        }
 
         if ($saml->isEnabled()) {
             $auth = $saml->getAuth();
