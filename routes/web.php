@@ -434,6 +434,12 @@ Route::group(['middleware' => 'web'], function () {
             'uses' => 'DashboardController@getIndex' ]
     );
 
+    // need to keep GET /logout for SAML SLO
+    Route::get(
+        'logout',
+        [LoginController::class, 'logout']
+    )->name('logout');
+
     Route::post(
         'logout',
         [LoginController::class, 'logout']
