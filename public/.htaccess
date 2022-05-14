@@ -37,6 +37,22 @@
 </IfModule>
 Options -Indexes
 
-<Files "web.config">
-    Deny from all
-</Files>
+# DENY ACCESS TO IIS CONFIG FILE
+
+# Apache 2.2+
+<IfModule !authz_core_module>
+	<Files "web.config">
+	    Order allow,deny
+    	Deny from all
+    </Files>
+</IfModule>
+
+# Apache 2.4+
+<IfModule authz_core_module>
+	<Files "web.config">
+      Require all denied
+    </Files>
+</IfModule>
+
+
+
