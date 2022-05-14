@@ -138,14 +138,7 @@
               <i class="fas fa-paperclip" aria-hidden="true"></i>
                 {{ trans('button.select_file')  }}
 
-                
-                 
-               
-                
-                  <!-- screen reader only -->
-                  <input type="file" id="file" name="file" aria-label="file" class="sr-only">
-
-                  <input type="file" name="file" class="js-uploadFile" id="uploadFile" data-maxsize="{{ Helper::file_upload_max_size() }}" accept="application/zip" style="display:none;" aria-label="file" aria-hidden="true">
+                <input type="file" name="file" class="js-uploadFile" id="uploadFile" data-maxsize="{{ Helper::file_upload_max_size() }}" accept="application/zip" style="display:none;" aria-label="file" aria-hidden="true">
                 
                 
             </label>   
