@@ -115,6 +115,7 @@ return [
     'files'                 => 'Files',
     'file_name'				=> 'File',
     'file_type'             => 'File Type',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'File Uploads',
     'file_upload'           => 'File Upload',
     'generate'				=> 'Generate',

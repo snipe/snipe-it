@@ -1122,6 +1122,7 @@
                       data-id-table="assetFileHistory"
                       data-search="true"
                       data-side-pagination="client"
+                      data-sortable="true"
                       data-show-columns="true"
                       data-show-refresh="true"
                       data-sort-order="desc"
@@ -1134,12 +1135,13 @@
                                             data-cookie-id-table="assetFileHistory">
                                         <thead>
                                         <tr>
-                                            <th data-visible="true" data-field="icon">{{trans('general.file_type')}}</th>
-                                            <th class="col-md-2" data-searchable="true" data-visible="true" data-field="notes">{{ trans('general.notes') }}</th>
+                                            <th data-visible="true" data-field="icon" data-sortable="true">{{trans('general.file_type')}}</th>
                                             <th class="col-md-2" data-searchable="true" data-visible="true" data-field="image">{{ trans('general.image') }}</th>
-                                            <th class="col-md-2" data-searchable="true" data-visible="true" data-field="filename">{{ trans('general.file_name') }}</th>
-                                            <th class="col-md-2" data-searchable="true" data-visible="true" data-field="download">{{ trans('general.download') }}</th>
-                                            <th class="col-md-2" data-searchable="true" data-visible="true" data-field="created_at">{{ trans('general.created_at') }}</th>
+                                            <th class="col-md-2" data-searchable="true" data-visible="true" data-field="filename" data-sortable="true">{{ trans('general.file_name') }}</th>
+                                            <th class="col-md-1" data-searchable="true" data-visible="true" data-field="filesize">{{ trans('general.filesize') }}</th>
+                                            <th class="col-md-2" data-searchable="true" data-visible="true" data-field="notes" data-sortable="true">{{ trans('general.notes') }}</th>
+                                            <th class="col-md-1" data-searchable="true" data-visible="true" data-field="download">{{ trans('general.download') }}</th>
+                                            <th class="col-md-2" data-searchable="true" data-visible="true" data-field="created_at" data-sortable="true">{{ trans('general.created_at') }}</th>
                                             <th class="col-md-1" data-searchable="true" data-visible="true" data-field="actions">{{ trans('table.actions') }}</th>
                                         </tr>
                                         </thead>
@@ -1148,11 +1150,6 @@
                                         @foreach ($asset->uploads as $file)
                                             <tr>
                                                 <td><i class="{{ Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i></td>
-                                                <td>
-                                                    @if ($file->note)
-                                                        {{ $file->note }}
-                                                    @endif
-                                                </td>
                                                 <td>
                                                     @if ( Helper::checkUploadIsImage($file->get_src('assets')))
                                                         <a href="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" data-toggle="lightbox" data-type="image" data-title="{{ $file->filename }}" data-footer="{{ Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}">
@@ -1163,6 +1160,14 @@
                                                 <td>
                                                     {{ $file->filename }}
                                                 </td>
+                                                <td data-value="{{ filesize(storage_path('private_uploads/assets/').$file->filename) }}">
+                                                    {{ Helper::formatFilesizeUnits(filesize(storage_path('private_uploads/assets/').$file->filename)) }}
+                                                </td>
+                                                <td>
+                                                    @if ($file->note)
+                                                        {{ $file->note }}
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     @if ($file->filename)
                                                         <a href="{{ route('show/assetfile', [$asset->id, $file->id]) }}" class="btn btn-default">
@@ -1170,14 +1175,11 @@
                                                         </a>
                                                     @endif
                                                 </td>
-
                                                 <td>
                                                     @if ($file->created_at)
                                                         {{ Helper::getFormattedDateObject($file->created_at, 'datetime', false) }}
                                                     @endif
                                                 </td>
-
-
                                                 <td>
                                                     @can('update', \App\Models\Asset::class)
                                                         <a class="btn delete-asset btn-sm btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}" data-tooltip="true" data-title="Delete" data-content="{{ trans('general.delete_confirm', ['item' => $file->filename]) }}"><i class="fas fa-trash icon-white" aria-hidden="true"></i></a>
