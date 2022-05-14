@@ -454,13 +454,14 @@
                     }'>
             <thead>
               <tr>
-                <th data-visible="true" aria-hidden="true">{{ trans('admin/hardware/table.icon') }}</th>
-                <th class="col-md-3" data-field="file_name" data-visible="true" data-sortable="true" data-switchable="true">{{ trans('general.file_name') }}</th>
-                <th class="col-md-3" data-field="notes" data-visible="true" data-sortable="true" data-switchable="true">{{ trans('general.notes') }}</th>
-                <th class="col-md-2" data-field="created_at" data-visible="true"  data-sortable="true" data-switchable="true">{{ trans('general.created_at') }}</th>
-                <th class="col-md-2" data-searchable="true" data-visible="true">{{ trans('general.image') }}</th>
-                <th class="col-md-2" data-field="download" data-visible="true"  data-sortable="false" data-switchable="true">{{ trans('general.download') }}</th>
-                <th class="col-md-2" data-field="delete" data-visible="true"  data-sortable="false" data-switchable="true">{{ trans('general.delete') }}</th>
+                <th data-visible="true" data-field="icon" data-sortable="true">{{trans('general.file_type')}}</th>
+                <th class="col-md-2" data-searchable="true" data-visible="true" data-field="image">{{ trans('general.image') }}</th>
+                <th class="col-md-2" data-searchable="true" data-visible="true" data-field="filename" data-sortable="true">{{ trans('general.file_name') }}</th>
+                <th class="col-md-1" data-searchable="true" data-visible="true" data-field="filesize">{{ trans('general.filesize') }}</th>
+                <th class="col-md-2" data-searchable="true" data-visible="true" data-field="notes" data-sortable="true">{{ trans('general.notes') }}</th>
+                <th class="col-md-1" data-searchable="true" data-visible="true" data-field="download">{{ trans('general.download') }}</th>
+                <th class="col-md-2" data-searchable="true" data-visible="true" data-field="created_at" data-sortable="true">{{ trans('general.created_at') }}</th>
+                <th class="col-md-1" data-searchable="true" data-visible="true" data-field="actions">{{ trans('table.actions') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -473,21 +474,23 @@
 
                 </td>
                 <td>
-                  {{ $file->filename }}
-
+                  @if ($file->filename)
+                    @if ( Helper::checkUploadIsImage($file->get_src('licenses')))
+                      <a href="{{ route('show.licensefile', ['licenseId' => $license->id, 'fileId' => $file->id, 'download' => 'false']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show.licensefile', ['licenseId' => $license->id, 'fileId' => $file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
+                    @endif
+                  @endif
                 </td>
+                <td>
+                  {{ $file->filename }}
+                </td>
+                <td data-value="{{ filesize(storage_path('private_uploads/licenses/').$file->filename) }}">
+                  {{ Helper::formatFilesizeUnits(filesize(storage_path('private_uploads/licenses/').$file->filename)) }}
+                </td>
+
                 <td>
                   @if ($file->note)
                     {{ $file->note }}
                   @endif
-                </td>
-                <td>{{ $file->created_at }}</td>
-                <td>
-                @if ($file->filename)
-                    @if ( Helper::checkUploadIsImage($file->get_src('licenses')))
-                      <a href="{{ route('show.licensefile', ['licenseId' => $license->id, 'fileId' => $file->id, 'download' => 'false']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show.licensefile', ['licenseId' => $license->id, 'fileId' => $file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
-                    @endif
-                @endif
                 </td>
                 <td>
                   @if ($file->filename)
@@ -497,6 +500,7 @@
                     </a>
                   @endif
                 </td>
+                <td>{{ $file->created_at }}</td>
                 <td>
                   <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}" data-content="{{ trans('general.delete_confirm', array('item' => $file)) }}" data-title="{{ trans('general.delete') }} {{ $file->filename }}?">
                     <i class="fas fa-trash icon-white" aria-hidden="true"></i>
@@ -507,7 +511,7 @@
               @endforeach
             @else
               <tr>
-              <td colspan="6">{{ trans('general.no_results') }}</td>
+              <td colspan="8">{{ trans('general.no_results') }}</td>
               </tr>
             @endif
             </tbody>
