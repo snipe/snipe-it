@@ -213,12 +213,14 @@ class LdapSync extends Command
                 $user->country = $item['country'];
                 $user->department_id = $department->id;
 
-                if($item['manager']!= null) {
+                if($item['manager'] != null) {
                     //Captures only the Canonical Name
                     $item['manager'] = ltrim($item['manager'], "CN=");
                     $item['manager'] = substr($item['manager'],0, strpos($item['manager'], ','));
                     $ldap_manager = User::where('username', $item['manager'])->first();
-                    $user->manager_id = $ldap_manager->id;
+                    if ( $ldap_manager && isset($ldap_manager->id) ) {
+                        $user->manager_id = $ldap_manager->id;
+                    }
                 }
 
 
