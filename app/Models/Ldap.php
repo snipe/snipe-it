@@ -233,7 +233,7 @@ class Ldap extends Model
      * @param $ldapatttibutes
      * @return array|bool
      */
-    public static function createUserFromLdap($ldapatttibutes)
+    public static function createUserFromLdap($ldapatttibutes, $password)
     {
         $item = self::parseAndMapLdapAttributes($ldapatttibutes);
 
@@ -246,7 +246,8 @@ class Ldap extends Model
             $user->email = $item['email'];
 
             if (Setting::getSettings()->ldap_pw_sync == '1') {
-                $user->password = bcrypt(Input::get('password'));
+
+                $user->password = bcrypt($password);
             } else {
                 $pass = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 25);
                 $user->password = bcrypt($pass);
