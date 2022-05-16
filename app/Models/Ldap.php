@@ -6,6 +6,7 @@ use App\Models\Setting;
 use App\Models\User;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Log;
 
 /***********************************************
@@ -245,7 +246,7 @@ class Ldap extends Model
             $user->email = $item['email'];
 
             if (Setting::getSettings()->ldap_pw_sync == '1') {
-                $user->password = bcrypt(Input::get('password'));
+                $user->password = bcrypt(Request::input('password'));
             } else {
                 $pass = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 25);
                 $user->password = bcrypt($pass);
