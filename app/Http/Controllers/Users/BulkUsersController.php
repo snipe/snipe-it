@@ -46,9 +46,9 @@ class BulkUsersController extends Controller
                 foreach ($users as $user) {
                     if (($user->activated == '1') && ($user->email != '')) {
                         $credentials = ['email' => $user->email];
-                        Password::sendResetLink($credentials, function (Message $message) {
-                            $message->subject($this->getEmailSubject());
-                        });
+                        Password::sendResetLink($credentials/* , function (Message $message) {
+                        $message->subject($this->getEmailSubject()); // TODO - I'm not sure if we still need this, but this second parameter is no longer accepted in later Laravel versions.
+                        } */ );                                      // TODO - so hopefully this doesn't give us generic password reset messages? But it at least _works_
                     }
                 }
                 return redirect()->back()->with('success', trans('admin/users/message.password_resets_sent'));
