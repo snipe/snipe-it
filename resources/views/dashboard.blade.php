@@ -301,7 +301,7 @@
 
                             <thead>
                             <tr>
-                                <th class="col-sm-3" data-visible="true" data-field="name" data-formatter="categoriesLinkFormatter" data-sortable="true">{{ trans('general.name') }}</th>
+                                <th class="col-sm-3" data-visible="true" data-field="name" data-formatter="locationsLinkFormatter" data-sortable="true">{{ trans('general.name') }}</th>
                                 
                                 <th class="col-sm-1" data-visible="true" data-field="assets_count" data-sortable="true">
                                     <i class="fas fa-barcode" aria-hidden="true"></i>
