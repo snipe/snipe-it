@@ -185,7 +185,7 @@ class LoginController extends Controller
              Log::debug("Local user ".$request->input('username')." does not exist");
              Log::debug("Creating local user ".$request->input('username'));
 
-             if ($user = Ldap::createUserFromLdap($ldap_user)) { //this handles passwords on its own
+             if ($user = Ldap::createUserFromLdap($ldap_user, $request->input('password'))) {
                  Log::debug("Local user created.");
              } else {
                  Log::debug("Could not create local user.");
