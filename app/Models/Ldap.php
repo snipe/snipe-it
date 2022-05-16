@@ -6,7 +6,6 @@ use App\Models\Setting;
 use App\Models\User;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
-use Input;
 use Log;
 
 /***********************************************
