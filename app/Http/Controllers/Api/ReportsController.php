@@ -52,7 +52,6 @@ class ReportsController extends Controller
             'accept_signature',
             'action_type',
             'note',
-            'stored_eula_file',
         ];
 
         $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
