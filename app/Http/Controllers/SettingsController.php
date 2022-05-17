@@ -1061,7 +1061,7 @@ class SettingsController extends Controller
                         'filename' => basename($backup_files[$f]),
                         'filesize' => Setting::fileSizeConvert(Storage::size($backup_files[$f])),
                         'modified_value' => $file_timestamp,
-                        'modified_display' => Helper::getFormattedDateObject($file_timestamp, $type = 'datetime', false),
+                        'modified_display' => date("M d, Y g:i A", $file_timestamp),
                         
                     ];
                 }
