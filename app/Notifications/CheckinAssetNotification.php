@@ -54,7 +54,6 @@ class CheckinAssetNotification extends Notification
          * has the corresponding checkbox checked.
          */
         if ($this->item->checkin_email() && $this->target instanceof User && $this->target->email != '') {
-            \Log::debug('use email');
             $notifyBy[] = 'mail';
         }
 
