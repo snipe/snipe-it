@@ -103,7 +103,7 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
         }
     }
     @if ($snipeSettings->custom_css)
-        {{ $snipeSettings->show_custom_css() }}
+        {!! $snipeSettings->show_custom_css() !!}
     @endif
 </style>
 
