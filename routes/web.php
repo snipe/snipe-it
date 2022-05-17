@@ -125,7 +125,7 @@ Route::group(['middleware' => 'auth'], function () {
         [ActionlogController::class, 'displaySig']
     )->name('log.signature.view');
     Route::get(
-        'stored-eula-file/{filename}/',
+        'stored-eula-file/{filename}',
         [ActionlogController::class, 'getStoredEula']
     )->name('log.storedeula.download');
 });
