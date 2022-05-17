@@ -36,7 +36,6 @@
 
 <p>
 Assigned on: {{$check_out_date}}<br>
-Accepted on: {{$accepted_date}}<br>
 Assigned to: {{$assigned_to}}
 </p>
 
@@ -44,11 +43,7 @@ Assigned to: {{$assigned_to}}
 @if ($signature)
     <div style="width: 60%; float:left">
         <img src="{{ $signature }}" style="max-width: 100%; border-bottom: black solid 1px;"><br>
-        {{ trans('general.signature') }}
-    </div>
-    <div style="width: 40%; float:left">
-
-        {{$accepted_date}}
+        {{ trans('general.signature') }}: {{$accepted_date}}
     </div>
 @endif
 </body>
