@@ -1238,6 +1238,8 @@ class SettingsController extends Controller
                     '--force' => true,
                 ]);
 
+                \Log::debug('Attempting to restore from: '. storage_path($path).'/'.$filename);
+
                 // run the restore command
                 Artisan::call('snipeit:restore', 
                 [
