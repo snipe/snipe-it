@@ -48,7 +48,7 @@
               <th data-sortable="true">{{ trans('general.file_name') }}</th>
               <th data-sortable="true" data-field="modified_display" data-sort-name="modified_value">{{ trans('admin/settings/table.created') }}</th>
               <th data-field="modified_value" data-visible="false"></th>
-              <th data-sortable="true">{{ trans('admin/settings/table.created') }}</th>
+              <th data-sortable="true">{{ trans('admin/settings/table.size') }}</th>
               <th><span class="sr-only">{{ trans('general.delete') }}</span></th>
               </tr>
             </thead>
