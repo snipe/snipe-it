@@ -1234,7 +1234,9 @@ class SettingsController extends Controller
                 // TODO: run a backup
 
 
-                Artisan::call('db:wipe');
+                Artisan::call('db:wipe', [
+                    '--force' => true,
+                ]);
 
                 // run the restore command
                 Artisan::call('snipeit:restore', 
