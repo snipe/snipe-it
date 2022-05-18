@@ -181,6 +181,7 @@ $unused_files = [
     "bootstrap/cache/compiled.php",
     "bootstrap/cache/services.php",
     "bootstrap/cache/config.php",
+    "vendor/symfony/translation/TranslatorInterface.php",
 ];
 
 foreach ($unused_files as $unused_file) {
