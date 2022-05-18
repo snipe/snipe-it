@@ -102,6 +102,26 @@ a {
 .text-primary {
   color: darken(@black, 20%);
 }
+:root {
+  --button-default: darken(@black, 15%);
+  --button-primary: darken(@black, 25%);
+  --button-hover: darken(@black, 30%);
+  --header: @black; /* Use same as Header picker */
+  --text-main: #BBB;
+  --text-sub: #9b9b9b;
+  --link: #AAA; /* Use same as Header picker, lighten by 70% */
+  --visited-link: lighten(@black, 40%); /* Use same as Header picker, lighten by 70% */
+  --hover-link: lighten(@black, 45%); /* Use same as Header picker, lighten by 70% */
+  --nav-link: #FFF; /* Use same as Header picker */
+  --light-link: #fff; /* Use same as Header picker */
+}
+a:link {
+  color: var(--link);
+}
+
+a:visited {
+  color: var(--visited-link);
+}
 
 .skin-black .main-header .navbar .nav>li>a, .skin-black .main-header .navbar .nav>li>a {
   text-decoration: none;
