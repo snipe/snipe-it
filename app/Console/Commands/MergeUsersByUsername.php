@@ -46,9 +46,14 @@ class MergeUsersByUsername extends Command
 
         foreach ($users as $user) {
             $parts = explode('@', $user->username);
-            $bad_users = User::where('username', '=', $parts[0])->whereNull('deleted_at')->with('assets', 'manager', 'userlog', 'licenses', 'consumables', 'accessories', 'managedLocations')->get();
+            $this->info('Checking against username '.$parts[0].'.');
 
-            $this->info($bad_users->count().' total non-deleted users whose usernames DO NOT contain a @ symbol.');
+
+            $bad_users = User::where('username', '=', $parts[0])
+                ->whereNull('deleted_at')
+                ->with('assets', 'manager', 'userlog', 'licenses', 'consumables', 'accessories', 'managedLocations')
+                ->get();
+
 
 
             foreach ($bad_users as $bad_user) {
