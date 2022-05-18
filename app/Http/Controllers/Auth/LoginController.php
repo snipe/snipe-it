@@ -104,15 +104,12 @@ class LoginController extends Controller
      */
     private function loginViaSaml(Request $request)
     {
-        \Log::debug('Attempting to login via SAML');
         $saml = $this->saml;
         $samlData = $request->session()->get('saml_login');
 
         if ($saml->isEnabled() && ! empty($samlData)) {
-            \Log::debug('SAML is enabled, and the samleData is not empty');
 
             try {
-                Log::debug('Attempting to log user in by SAML authentication.');
                 $user = $saml->samlLogin($samlData);
 
                 if (!is_null($user)) {
