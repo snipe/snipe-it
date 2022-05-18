@@ -46,10 +46,10 @@ class MergeUsersByUsername extends Command
 
         foreach ($users as $user) {
             $parts = explode('@', $user->username);
-            $this->info('Checking against username '.$parts[0].'.');
+            $this->info('Checking against username '.trim($parts[0]).'.');
 
 
-            $bad_users = User::where('username', '=', $parts[0])
+            $bad_users = User::where('username', '=', trim($parts[0]))
                 ->whereNull('deleted_at')
                 ->with('assets', 'manager', 'userlog', 'licenses', 'consumables', 'accessories', 'managedLocations')
                 ->get();
