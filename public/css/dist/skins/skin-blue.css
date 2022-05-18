@@ -181,6 +181,31 @@ a:hover {
 a:visited {
   color: #3c8dbc;
 }
+:root {
+  --button-default: #00436b;
+  --button-primary: #002338;
+  --button-hover: #00131e;
+  --header: #0073b7;
+  /* Use same as Header picker */
+  --text-main: #BBB;
+  --text-sub: #9b9b9b;
+  --link: #1978D4;
+  /* Use same as Header picker, lighten by 70% */
+  --visited-link: #3c8dbc;
+  /* Use same as Header picker, lighten by 70% */
+  --hover-link: #4B77BE;
+  /* Use same as Header picker, lighten by 70% */
+  --nav-link: #FFF;
+  /* Use same as Header picker */
+  --light-link: #fff;
+  /* Use same as Header picker */
+}
+a:link {
+  color: var(--link);
+}
+a:visited {
+  color: var(--visited-link);
+}
 .text-primary {
   color: #23536f;
 }

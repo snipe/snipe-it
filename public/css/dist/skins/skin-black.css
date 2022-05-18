@@ -168,6 +168,31 @@ a:visited {
 .text-primary {
   color: #000000;
 }
+:root {
+  --button-default: #000000;
+  --button-primary: #000000;
+  --button-hover: #000000;
+  --header: #111;
+  /* Use same as Header picker */
+  --text-main: #BBB;
+  --text-sub: #9b9b9b;
+  --link: #AAA;
+  /* Use same as Header picker, lighten by 70% */
+  --visited-link: #777777;
+  /* Use same as Header picker, lighten by 70% */
+  --hover-link: #848484;
+  /* Use same as Header picker, lighten by 70% */
+  --nav-link: #FFF;
+  /* Use same as Header picker */
+  --light-link: #fff;
+  /* Use same as Header picker */
+}
+a:link {
+  color: var(--link);
+}
+a:visited {
+  color: var(--visited-link);
+}
 .skin-black .main-header .navbar .nav > li > a,
 .skin-black .main-header .navbar .nav > li > a {
   text-decoration: none;

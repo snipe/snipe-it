@@ -2,6 +2,23 @@
  * Skin: Green
  * ----------
  */
+:root {
+  --visited-link: #5D995D;
+  /* Use same as Header picker, lighten by 70% */
+  --background: #222;
+  --back-main: #333;
+  --back-sub: #3d4144;
+  --back-sub-alt: rgba(0, 0, 0, 0.36);
+  --button-default: #005a31;
+  --button-primary: #002715;
+  --button-hover: #000d07;
+  --header: #00a65a;
+  /* Use same as Header picker */
+  --text-main: #BBB;
+  --text-sub: #9b9b9b;
+  --link: #28A228;
+  /* Use same as Header picker, lighten by 70% */
+}
 .skin-green .main-header .navbar {
   background-color: #00a65a;
 }
@@ -148,6 +165,12 @@
 .btn:hover.btn-white:hover {
   background-color: #000d07;
   color: #fff;
+}
+a:link {
+  color: var(--link);
+}
+a:visited {
+  color: var(--visited-link);
 }
 a {
   color: #00a65a;

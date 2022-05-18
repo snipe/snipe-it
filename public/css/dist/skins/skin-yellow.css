@@ -161,6 +161,31 @@ a:visited {
 .text-primary {
   color: #976008;
 }
+:root {
+  --button-default: #b06f09;
+  --button-primary: #7f5006;
+  --button-hover: #674105;
+  --header: #f39c12;
+  /* Use same as Header picker */
+  --text-main: #BBB;
+  --text-sub: #9b9b9b;
+  --link: #f5b043;
+  /* Use same as Header picker, lighten by 70% */
+  --visited-link: #f8c573;
+  /* Use same as Header picker, lighten by 70% */
+  --hover-link: #fef7ec;
+  /* Use same as Header picker, lighten by 70% */
+  --nav-link: #FFF;
+  /* Use same as Header picker */
+  --light-link: #fff;
+  /* Use same as Header picker */
+}
+a:link {
+  color: var(--link);
+}
+a:visited {
+  color: var(--visited-link);
+}
 .fixed-table-container tbody .selected td {
   background-color: #fff8af;
 }
