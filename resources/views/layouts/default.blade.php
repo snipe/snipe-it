@@ -592,8 +592,8 @@
                     </a>
                     <ul class="treeview-menu">
                         @if(Gate::allows('view', App\Models\CustomField::class) || Gate::allows('view', App\Models\CustomFieldset::class))
-                            <li>
-                                <a href="{{ route('fields.index') }}" class="{!! Request::is(route('fields.index') ? ' class="active"' : '') !!}">
+                            <li {!! (Request::is('fields*') ? ' class="active"' : '') !!}>
+                                <a href="{{ route('fields.index') }}">
                                     {{ trans('admin/custom_fields/general.custom_fields') }}
                                 </a>
                             </li>
