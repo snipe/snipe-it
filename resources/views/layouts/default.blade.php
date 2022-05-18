@@ -588,8 +588,8 @@
                     links in this tree apply the active class after being clicked. Nothing i've tried has worked yet.
                     Will con't later--}}
 
-                <li class="treeview{{ (Request::is('settings*')? ' active' : '') }}">
-                    <a href="#">
+                <li class="treeview {!! in_array(Request::route()->getName(),App\Helpers\Helper::SettingUrls()) ? ' active': '' !!}">
+                    <a href="#" id="settings" class="">
                         <i class="fas fa-cog" aria-hidden="true"></i>
                         <span>{{ trans('general.settings') }}</span>
                         <i class="fa fa-angle-left pull-right"></i>
@@ -597,15 +597,15 @@
 
                     <ul class="treeview-menu">
                         @if(Gate::allows('view', App\Models\CustomField::class) || Gate::allows('view', App\Models\CustomFieldset::class))
-                            <li {!! (Request::is('fields*') ? ' class="active"' : '') !!}>
-                                <a href="{{ route('fields.index') }}">
+                            <li {!!Request::route()->getName() == 'fields.index'? ' active': ''!!}>
+                                <a href="{{ route('fields.index') }}" class="{!! Request::is(route('fields.index') ? ' class="active"' : '') !!}">
                                     {{ trans('admin/custom_fields/general.custom_fields') }}
                                 </a>
                             </li>
                         @endif
 
                         @can('view', \App\Models\Statuslabel::class)
-                            <li {!! (Request::is('statuslabels*') ? ' class="active"' : '') !!}>
+                            <li >
                                 <a href="{{ route('statuslabels.index') }}">
                                     {{ trans('general.status_labels') }}
                                 </a>
@@ -614,7 +614,7 @@
 
                         @can('view', \App\Models\AssetModel::class)
                             <li>
-                                <a href="{{ route('models.index') }}" {{ (Request::is('/assetmodels') ? ' class="active"' : '') }}>
+                                <a href="{{ route('models.index') }}">
                                     {{ trans('general.asset_models') }}
                                 </a>
                             </li>
@@ -623,7 +623,7 @@
 
                         @can('view', \App\Models\Category::class)
                             <li>
-                                <a href="{{ route('categories.index') }}" {{ (Request::is('/categories') ? ' class="active"' : '') }}>
+                                <a href="{{ route('categories.index') }}">
                                     {{ trans('general.categories') }}
                                 </a>
                             </li>
@@ -631,7 +631,7 @@
 
                         @can('view', \App\Models\Manufacturer::class)
                             <li>
-                                <a href="{{ route('manufacturers.index') }}" {{ (Request::is('/manufacturers') ? ' class="active"' : '') }}>
+                                <a href="{{ route('manufacturers.index') }}">
                                     {{ trans('general.manufacturers') }}
                                 </a>
                             </li>
@@ -639,7 +639,7 @@
 
                         @can('view', \App\Models\Supplier::class)
                             <li>
-                                <a href="{{ route('suppliers.index') }}" {{ (Request::is('/suppliers') ? ' class="active"' : '') }}>
+                                <a href="{{ route('suppliers.index') }}">
                                     {{ trans('general.suppliers') }}
                                 </a>
                             </li>
@@ -647,7 +647,7 @@
 
                         @can('view', \App\Models\Department::class)
                             <li>
-                                <a href="{{ route('departments.index') }}" {{ (Request::is('/departments') ? ' class="active"' : '') }}>
+                                <a href="{{ route('departments.index') }}">
                                     {{ trans('general.departments') }}
                                 </a>
                             </li>
@@ -655,7 +655,7 @@
 
                         @can('view', \App\Models\Location::class)
                             <li>
-                                <a href="{{ route('locations.index') }}" {{ (Request::is('/locations') ? ' class="active"' : '') }}>
+                                <a href="{{ route('locations.index') }}">
                                     {{ trans('general.locations') }}
                                 </a>
                             </li>
@@ -663,7 +663,7 @@
 
                         @can('view', \App\Models\Company::class)
                             <li>
-                                <a href="{{ route('companies.index') }}" {{ (Request::is('/companies') ? ' class="active"' : '') }}>
+                                <a href="{{ route('companies.index') }}">
                                     {{ trans('general.companies') }}
                                 </a>
                             </li>
@@ -671,7 +671,7 @@
 
                         @can('view', \App\Models\Depreciation::class)
                             <li>
-                                <a href="{{ route('depreciations.index') }}" {{ (Request::is('/depreciations') ? ' class="active"' : '') }}>
+                                <a href="{{ route('depreciations.index') }}">
                                     {{ trans('general.depreciation') }}
                                 </a>
                             </li>
