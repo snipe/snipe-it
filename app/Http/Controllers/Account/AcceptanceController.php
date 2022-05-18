@@ -132,27 +132,17 @@ class AcceptanceController extends Controller
 
 
             // this is horrible
-            if ($acceptance->checkoutable_type== 'App\Models\Asset') {
+            if ($acceptance->checkoutable_type == 'App\Models\Asset') {
                 $pdf_view_route ='account.accept.accept-asset-eula';
                 $asset_model = AssetModel::find($item->model_id);
                 $display_model = $asset_model->name;
-
-
-//            } elseif ($acceptance->checkoutable_type== 'App\Models\License') {
-//                $pdf_view_route ='account.accept.accept-license-eula';
-//                $license = License::find($item->id);
-//                $display_model = $license->name;
+                $assigned_to = User::find($item->assigned_to);
 
             } elseif ($acceptance->checkoutable_type== 'App\Models\Accessory') {
                 $pdf_view_route ='account.accept.accept-accessory-eula';
                 $accessory = Accessory::find($item->id);
                 $display_model = $accessory->name;
                 $assigned_to = User::find($item->assigned_to);
-
-//            } elseif ($acceptance->checkoutable_type== 'App\Models\Consumable') {
-//                $pdf_view_route ='account.accept.accept-consumable-eula';
-//                $consumable = Consumable::find($item->id);
-//                $display_model = $consumable->name;
 
             }
 
