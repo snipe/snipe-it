@@ -100,6 +100,28 @@ a {
   color: darken(@red, 20%);
 }
 
+:root {
+  --button-default: darken(@red, 15%);
+  --button-primary: darken(@red, 25%);
+  --button-hover: darken(@red, 30%);
+  --header: @red; /* Use same as Header picker */
+  --text-main: #BBB;
+  --text-alt: #222;
+  --text-sub: #9b9b9b;
+  --link: #e00000; /* Use same as Header picker, lighten by 70% */
+  --visited-link: #D24D57; /* Use same as Header picker, lighten by 70% */
+  --hover-link: #D24D57; /* Use same as Header picker, lighten by 70% */
+  --nav-link: #FFF; /* Use same as Header picker */
+  --light-link: #fff; /* Use same as Header picker */
+}
+a:link {
+  color: var(--link);
+}
+
+a:visited {
+  color: var(--visited-link);
+}
+
 .fixed-table-container tbody .selected td {
   background-color: #fff8af;
 }
