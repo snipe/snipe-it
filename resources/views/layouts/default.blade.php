@@ -386,7 +386,7 @@
        <!-- Sidebar toggle button-->
       </header>
 
-      <!-- Left side column. contains the logo and sidebar -->
+
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
@@ -584,7 +584,11 @@
             @endcan
 
             @can('backend.interact')
-                <li class="treeview">
+{{--                not only does settings* not work in the request but it would seem none of the
+                    links in this tree apply the active class after being clicked. Nothing i've tried has worked yet.
+                    Will con't later--}}
+
+                <li class="treeview{{ (Request::is('settings*')? ' active' : '') }}">
                     <a href="#">
                         <i class="fas fa-cog" aria-hidden="true"></i>
                         <span>{{ trans('general.settings') }}</span>
