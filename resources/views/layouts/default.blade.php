@@ -385,8 +385,6 @@
       </a>
        <!-- Sidebar toggle button-->
       </header>
-
-
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
@@ -584,10 +582,6 @@
             @endcan
 
             @can('backend.interact')
-{{--                not only does settings* not work in the request but it would seem none of the
-                    links in this tree apply the active class after being clicked. Nothing i've tried has worked yet.
-                    Will con't later--}}
-
                 <li class="treeview {!! in_array(Request::route()->getName(),App\Helpers\Helper::SettingUrls()) ? ' active': '' !!}">
                     <a href="#" id="settings" class="">
                         <i class="fas fa-cog" aria-hidden="true"></i>
@@ -597,8 +591,8 @@
 
                     <ul class="treeview-menu">
                         @if(Gate::allows('view', App\Models\CustomField::class) || Gate::allows('view', App\Models\CustomFieldset::class))
-                            <li {!!Request::route()->getName() == 'fields.index'? ' active': ''!!}>
-                                <a href="{{ route('fields.index') }}" class="{!! Request::is(route('fields.index') ? ' class="active"' : '') !!}">
+                            <li>
+                                <a href="{{ route('fields.index') }}">
                                     {{ trans('admin/custom_fields/general.custom_fields') }}
                                 </a>
                             </li>
@@ -619,8 +613,6 @@
                                 </a>
                             </li>
                         @endcan
-
-
                         @can('view', \App\Models\Category::class)
                             <li>
                                 <a href="{{ route('categories.index') }}">
@@ -628,7 +620,6 @@
                                 </a>
                             </li>
                         @endcan
-
                         @can('view', \App\Models\Manufacturer::class)
                             <li>
                                 <a href="{{ route('manufacturers.index') }}">
@@ -636,7 +627,6 @@
                                 </a>
                             </li>
                         @endcan
-
                         @can('view', \App\Models\Supplier::class)
                             <li>
                                 <a href="{{ route('suppliers.index') }}">
@@ -644,7 +634,6 @@
                                 </a>
                             </li>
                         @endcan
-
                         @can('view', \App\Models\Department::class)
                             <li>
                                 <a href="{{ route('departments.index') }}">
@@ -652,7 +641,6 @@
                                 </a>
                             </li>
                         @endcan
-
                         @can('view', \App\Models\Location::class)
                             <li>
                                 <a href="{{ route('locations.index') }}">
@@ -660,7 +648,6 @@
                                 </a>
                             </li>
                         @endcan
-
                         @can('view', \App\Models\Company::class)
                             <li>
                                 <a href="{{ route('companies.index') }}">
@@ -668,7 +655,6 @@
                                 </a>
                             </li>
                         @endcan
-
                         @can('view', \App\Models\Depreciation::class)
                             <li>
                                 <a href="{{ route('depreciations.index') }}">
@@ -676,9 +662,7 @@
                                 </a>
                             </li>
                         @endcan
-
                     </ul>
-
                 </li>
             @endcan
 

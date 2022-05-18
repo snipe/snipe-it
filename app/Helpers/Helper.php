@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Helpers;
-
-use App\Http\Requests\Request;
 use App\Models\Accessory;
 use App\Models\Component;
 use App\Models\Consumable;
