@@ -7,6 +7,7 @@
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
         }
     </style>
 </head>
@@ -24,7 +25,7 @@
 {{ trans('general.date') }}: {{ date($date_settings) }} <br>
 {{ trans('general.asset_tag') }}: {{ $item_tag }}<br>
 {{ trans('general.asset_model') }}: {{ $item_model }}<br>
-{{ trans('general.serial') }}: {{ $item_serial }}</p>
+{{ trans('admin/hardward/form.serial') }}: {{ $item_serial }}</p>
 
 
 @if ($eula)
