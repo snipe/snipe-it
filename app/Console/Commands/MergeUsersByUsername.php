@@ -45,7 +45,7 @@ class MergeUsersByUsername extends Command
 
 
         foreach ($users as $user) {
-            $parts = explode('@', $user->username);
+            $parts = explode('@', trim($user->username));
             $this->info('Checking against username '.trim($parts[0]).'.');
 
 
