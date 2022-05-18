@@ -87,22 +87,24 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:'.config('app.
             ]
         )->name('api.accessories.selectlist');
 
-        Route::resource('accessories', 
-            Api\AccessoriesController::class,
-            ['names' => 
-                [
-                    'index' => 'api.accessories.index',
-                    'show' => 'api.accessories.show',
-                    'update' => 'api.accessories.update',
-                    'store' => 'api.accessories.store',
-                    'destroy' => 'api.accessories.destroy',
-                    ],
-            'except' => ['create', 'edit'],
-            'parameters' => ['accessory' => 'accessory_id'],
-            ]
-        );
+
 
      }); // end accessories group
+
+    Route::resource('accessories',
+        Api\AccessoriesController::class,
+        ['names' =>
+            [
+                'index' => 'api.accessories.index',
+                'show' => 'api.accessories.show',
+                'update' => 'api.accessories.update',
+                'store' => 'api.accessories.store',
+                'destroy' => 'api.accessories.destroy',
+            ],
+            'except' => ['create', 'edit'],
+            'parameters' => ['accessory' => 'accessory_id'],
+        ]
+    );
 
      
      /**
