@@ -16,7 +16,7 @@
         "@fortawesome/fontawesome-free": "^5.15.4",
         "axios": "^0.20.0",
         "babel-preset-latest": "^6.24.1",
-        "jquery": "^3.6.0",
+        "jquery": "<3.6.0",
         "laravel-mix": "^6.0.39",
         "lodash": "^4.17.20",
         "postcss": "^8.4.5",
