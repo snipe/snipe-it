@@ -91,11 +91,10 @@ class BulkUsersController extends Controller
             ->conditionallyAddItem('company_id')
             ->conditionallyAddItem('locale')
             ->conditionallyAddItem('remote')
-            ->conditionallyAddItem('ldap_sync')
+            ->conditionallyAddItem('ldap_import')
             ->conditionallyAddItem('activated');
 
-        //dd($this);
-            
+
         // If the manager_id is one of the users being updated, generate a warning.
         if (array_search($request->input('manager_id'), $user_raw_array)) {
             $manager_conflict = true;
