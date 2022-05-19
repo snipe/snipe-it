@@ -13,7 +13,7 @@
 </head>
 <body>
 
-@if ($signature)
+@if ($logo)
     <center>
         <img src="{{ $logo }}">
         <p>{{$company_name}}</p>
@@ -25,7 +25,7 @@
 {{ trans('general.date') }}: {{ date($date_settings) }} <br>
 {{ trans('general.asset_tag') }}: {{ $item_tag }}<br>
 {{ trans('general.asset_model') }}: {{ $item_model }}<br>
-{{ trans('admin/hardward/form.serial') }}: {{ $item_serial }}</p>
+{{ trans('admin/hardware/form.serial') }}: {{ $item_serial }}</p>
 
 
 @if ($eula)
