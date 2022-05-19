@@ -218,6 +218,7 @@ class Setting extends Model
      */
     public static function fileSizeConvert($bytes): string
     {
+        $result = 0;
         $bytes = floatval($bytes);
         $arBytes = [
                 0 => [
