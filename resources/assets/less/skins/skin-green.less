@@ -6,7 +6,20 @@
 @import "../bootstrap-less/variables.less";
 @import "../variables.less";
 @import "../mixins.less";
-
+:root{
+  --visited-link: #5D995D; /* Use same as Header picker, lighten by 70% */
+  --background: #222;
+  --back-main: #333;
+  --back-sub: #3d4144;
+  --back-sub-alt: rgba(0, 0, 0, 0.36);
+  --button-default: darken(@green, 15%);
+  --button-primary: darken(@green, 25%);
+  --button-hover: darken(@green, 30%);
+  --header: @green; /* Use same as Header picker */
+  --text-main: #BBB;
+  --text-sub: #9b9b9b;
+  --link: #28A228; /* Use same as Header picker, lighten by 70% */
+}
 .skin-green {
   //Navbar
   .main-header {
@@ -85,6 +98,13 @@
   }
 }
 
+a:link {
+  color: var(--link);
+}
+
+a:visited {
+  color: var(--visited-link);
+}
 
 a {
   color: @green;

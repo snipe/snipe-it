@@ -91,8 +91,10 @@ class BulkUsersController extends Controller
             ->conditionallyAddItem('company_id')
             ->conditionallyAddItem('locale')
             ->conditionallyAddItem('remote')
+            ->conditionallyAddItem('ldap_import')
             ->conditionallyAddItem('activated');
-            
+
+
         // If the manager_id is one of the users being updated, generate a warning.
         if (array_search($request->input('manager_id'), $user_raw_array)) {
             $manager_conflict = true;
@@ -107,7 +109,7 @@ class BulkUsersController extends Controller
         User::whereIn('id', $user_raw_array)
             ->where('id', '!=', Auth::id())->update($this->update_array);
 
-        if(array_key_exists('location_id', $this->update_array)){
+        if (array_key_exists('location_id', $this->update_array)){
             Asset::where('assigned_type', User::class)
                 ->whereIn('assigned_to', $user_raw_array)
                 ->update(['location_id' => $this->update_array['location_id']]);
