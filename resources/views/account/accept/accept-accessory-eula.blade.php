@@ -7,12 +7,13 @@
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
         }
     </style>
 </head>
 <body>
 
-@if ($signature)
+@if ($logo)
     <center>
         <img src="{{ $logo }}">
         <p>{{$company_name}}</p>
@@ -22,10 +23,8 @@
 
 <p>
     {{ trans('general.date') }}: {{ date($date_settings) }} <br>
-    {{ trans('general.asset_tag') }}: {{ $item_tag }}<br>
     {{ trans('general.asset_model') }}: {{ $item_model }}<br>
-    {{ trans('general.serial') }}: {{ $item_serial }}</p>
-
+</p>
 
 @if ($eula)
     <hr>
@@ -36,15 +35,13 @@
 
 <p>
     Assigned on: {{$check_out_date}}<br>
-    Assigned to: {{$assigned_to}}
+    Assigned to: {{$assigned_to}}<br>
+    Accepted on: {{$accepted_date}}
 </p>
 
 
-@if ($signature)
-    <div style="width: 60%; float:left">
-        <img src="{{ $signature }}" style="max-width: 100%; border-bottom: black solid 1px;"><br>
-        {{ trans('general.signature') }}: {{$accepted_date}}
-    </div>
+@if ($signature!='')
+    <img src="{{ $signature }}" style="max-width: 600px; border-bottom: black solid 1px;">
 @endif
 </body>
 </html>

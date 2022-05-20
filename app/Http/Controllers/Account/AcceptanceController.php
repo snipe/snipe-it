@@ -113,11 +113,12 @@ class AcceptanceController extends Controller
             Storage::makeDirectory('private_uploads/eula-pdfs', 775);
         }
 
-        $sig_filename = '';
         $item = $acceptance->checkoutable_type::find($acceptance->checkoutable_id);
         $display_model = '';
         $pdf_view_route = '';
         $pdf_filename = 'accepted-eula-'.date('Y-m-d-h-i-s').'.pdf';
+        $sig_filename='';
+
 
         if ($request->input('asset_acceptance') == 'accepted') {
 
@@ -160,7 +161,7 @@ class AcceptanceController extends Controller
                 'accepted_date' => Carbon::parse($acceptance->accepted_at)->format($branding_settings->date_display_format),
                 'assigned_to' => $assigned_to,
                 'company_name' => $branding_settings->site_name,
-                'signature' => '',
+                'signature' => ($sig_filename) ? storage_path() . '/private_uploads/signatures/' . $sig_filename : null,
                 'logo' => public_path() . '/uploads/' . $branding_settings->logo,
                 'date_settings' => $branding_settings->date_display_format,
             ];
