@@ -59,9 +59,14 @@ class ActionlogsTransformer
             $array = [
             'id'          => (int) $actionlog->id,
             'icon'          => $icon,
-            'file' => ($actionlog->filename!='') ?
+            'file' => ($actionlog->filename!='')
+                ?
                 [
-                    'url' => route('show/assetfile', ['assetId' => $actionlog->item->id, 'fileId' => $actionlog->id]),
+                    'url' => ($actionlog->present()->actionType()=='accepted')
+                            ?
+                            route('log.storedeula.download', ['filename' => $actionlog->filename])
+                            :
+                            route('show/assetfile', ['assetId' => $actionlog->id, 'fileId' => $actionlog->id]),
                     'filename' => $actionlog->filename,
                     'inlineable' => (bool) Helper::show_file_inline($actionlog->filename),
                 ] : null,
@@ -96,7 +101,6 @@ class ActionlogsTransformer
             'signature_file'   => ($actionlog->accept_signature) ? route('log.signature.view', ['filename' => $actionlog->accept_signature ]) : null,
             'log_meta'          => ((isset($clean_meta)) && (is_array($clean_meta))) ? $clean_meta: null,
             'action_date'   => ($actionlog->action_date) ? Helper::getFormattedDateObject($actionlog->action_date, 'datetime'): Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
-            'stored_eula_file' => ($actionlog->stored_eula_file) ? route('log.storedeula.download', ['filename' => $actionlog->stored_eula_file]) : null,
         ];
         //\Log::info("Clean Meta is: ".print_r($clean_meta,true));
 

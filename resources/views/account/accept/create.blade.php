@@ -46,14 +46,14 @@
           <div class="col-md-12">
             <div class="radio">
               <label>
-                <input type="radio" name="asset_acceptance" id="accepted" value="accepted">
+                <input type="radio" name="asset_acceptance" id="accepted" value="accepted" class="minimal">
                 {{ trans('general.i_accept') }}
               </label>
             </div>
 
             <div class="radio">
               <label>
-                <input type="radio" name="asset_acceptance" id="declined" value="declined">
+                <input type="radio" name="asset_acceptance" id="declined" value="declined" class="minimal">
                 {{ trans('general.i_decline') }}
               </label>
             </div>
@@ -77,7 +77,7 @@
                     <input type="hidden" name="signature_output" id="signature_output">
                 </div>
                <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 text-center">
-                  <button type="button" class="btn btn-sm btn-default clear" data-action="clear" id="clear_button">{{ trans('general.clear_signature') }}</button>
+                  <button type="button" class="btn btn-sm btn-primary clear" data-action="clear" id="clear_button">{{ trans('general.clear_signature') }}</button>
                 </div>
               </div>
             </div> <!-- .col-md-12.text-center-->

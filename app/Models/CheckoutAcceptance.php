@@ -57,20 +57,24 @@ class CheckoutAcceptance extends Model
     }
 
     /**
-     * Accept the checkout acceptance
+     * Add a record to the checkout_acceptance table ONLY.
+     * Do not add stuff here that doesn't have a corresponding column in the
+     * checkout_acceptances table or you'll get an error.
      *
      * @param  string $signature_filename
      */
-    public function accept($signature_filename)
+    public function accept($signature_filename, $eula = null, $filename = null)
     {
         $this->accepted_at = now();
         $this->signature_filename = $signature_filename;
+        $this->stored_eula = $eula;
+        $this->stored_eula_file = $filename;
         $this->save();
 
         /**
          * Update state for the checked out item
          */
-        $this->checkoutable->acceptedCheckout($this->assignedTo, $signature_filename);
+        $this->checkoutable->acceptedCheckout($this->assignedTo, $signature_filename, $filename);
     }
 
     /**

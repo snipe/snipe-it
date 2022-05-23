@@ -36,6 +36,11 @@ class SettingsServiceProvider extends ServiceProvider
 
         // Model paths and URLs
 
+
+        \App::singleton('eula_pdf_path', function () {
+            return 'eula_pdf_path/';
+        });
+
         \App::singleton('assets_upload_path', function () {
             return 'assets/';
         });
