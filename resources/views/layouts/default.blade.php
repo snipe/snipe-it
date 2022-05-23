@@ -399,7 +399,6 @@
               </a>
             </li>
             @endcan
-
             @can('index', \App\Models\Asset::class)
             <li class="treeview{{ (Request::is('hardware*') ? ' active' : '') }}">
                 <a href="#"><i class="fas fa-barcode" aria-hidden="true"></i>
@@ -673,7 +672,6 @@
                             </li>
                         @endcan
                     </ul>
-
                 </li>
             @endcan
 
