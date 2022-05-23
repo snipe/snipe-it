@@ -386,7 +386,7 @@
        <!-- Sidebar toggle button-->
       </header>
 
-
+        <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
@@ -399,6 +399,7 @@
               </a>
             </li>
             @endcan
+
             @can('index', \App\Models\Asset::class)
             <li class="treeview{{ (Request::is('hardware*') ? ' active' : '') }}">
                 <a href="#"><i class="fas fa-barcode" aria-hidden="true"></i>
@@ -590,6 +591,7 @@
                         <span>{{ trans('general.settings') }}</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
+
                     <ul class="treeview-menu">
                         @if(Gate::allows('view', App\Models\CustomField::class) || Gate::allows('view', App\Models\CustomFieldset::class))
                             <li {!! (Request::is('fields*') ? ' class="active"' : '') !!}>
@@ -598,6 +600,7 @@
                                 </a>
                             </li>
                         @endif
+
                         @can('view', \App\Models\Statuslabel::class)
                             <li {!! (Request::is('statuslabels*') ? ' class="active"' : '') !!}>
                                 <a href="{{ route('statuslabels.index') }}">
@@ -605,6 +608,7 @@
                                 </a>
                             </li>
                         @endcan
+
                         @can('view', \App\Models\AssetModel::class)
                             <li>
                                 <a href="{{ route('models.index') }}" {{ (Request::is('/assetmodels') ? ' class="active"' : '') }}>
@@ -612,6 +616,7 @@
                                 </a>
                             </li>
                         @endcan
+
                         @can('view', \App\Models\Category::class)
                             <li>
                                 <a href="{{ route('categories.index') }}" {{ (Request::is('/categories') ? ' class="active"' : '') }}>
@@ -619,6 +624,7 @@
                                 </a>
                             </li>
                         @endcan
+
                         @can('view', \App\Models\Manufacturer::class)
                             <li>
                                 <a href="{{ route('manufacturers.index') }}" {{ (Request::is('/manufacturers') ? ' class="active"' : '') }}>
@@ -626,6 +632,7 @@
                                 </a>
                             </li>
                         @endcan
+
                         @can('view', \App\Models\Supplier::class)
                             <li>
                                 <a href="{{ route('suppliers.index') }}" {{ (Request::is('/suppliers') ? ' class="active"' : '') }}>
@@ -633,6 +640,7 @@
                                 </a>
                             </li>
                         @endcan
+
                         @can('view', \App\Models\Department::class)
                             <li>
                                 <a href="{{ route('departments.index') }}" {{ (Request::is('/departments') ? ' class="active"' : '') }}>
@@ -640,6 +648,7 @@
                                 </a>
                             </li>
                         @endcan
+
                         @can('view', \App\Models\Location::class)
                             <li>
                                 <a href="{{ route('locations.index') }}" {{ (Request::is('/locations') ? ' class="active"' : '') }}>
@@ -647,6 +656,7 @@
                                 </a>
                             </li>
                         @endcan
+
                         @can('view', \App\Models\Company::class)
                             <li>
                                 <a href="{{ route('companies.index') }}" {{ (Request::is('/companies') ? ' class="active"' : '') }}>
@@ -654,6 +664,7 @@
                                 </a>
                             </li>
                         @endcan
+
                         @can('view', \App\Models\Depreciation::class)
                             <li>
                                 <a href="{{ route('depreciations.index') }}" {{ (Request::is('/depreciations') ? ' class="active"' : '') }}>
