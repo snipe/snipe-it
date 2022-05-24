@@ -64,8 +64,8 @@ class Ldap extends Model
         ldap_set_option($connection, LDAP_OPT_NETWORK_TIMEOUT, 20);
 
         if (Setting::getSettings()->ldap_client_tls_cert && Setting::getSettings()->ldap_client_tls_key) {
-            ldap_set_option($connection, LDAP_OPT_X_TLS_CERTFILE, Setting::get_client_side_cert_path());
-            ldap_set_option($connection, LDAP_OPT_X_TLS_KEYFILE, Setting::get_client_side_key_path());
+            ldap_set_option(null, LDAP_OPT_X_TLS_CERTFILE, Setting::get_client_side_cert_path());
+            ldap_set_option(null, LDAP_OPT_X_TLS_KEYFILE, Setting::get_client_side_key_path());
         }
 
         if ($ldap_use_tls=='1') {
