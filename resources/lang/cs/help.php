@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'more_info_title' => 'More Info',
+    'more_info_title' => 'Více informací',
 
     'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
@@ -21,14 +21,14 @@ return [
 
     'categories' => 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
 
-    'accessories' => 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
+    'accessories' => 'Příslušenství je cokoliv, co předáte uživatelům, ale nemá to sériové číslo (nebo je neevidujete), např. myš, nebo klávesnice.',
 
-    'companies'     => 'Companies can be used as a simple identifier field, or can be used to limit visibility of assets, users, etc if full company support is enabled in your Admin settings.',
+    'companies'     => 'Společnost může být použita jen jako běžná vlastnost majetku, nebo také k omezení viditelnosti majetku, uživatelů atd., pakliže je v nastavení administrátora povolena plná podpora společností.',
 
-    'components'    => 'Components are items that are part of an asset, for example HDD, RAM, etc.',
+    'components'    => 'Díly jsou položky, které jsou součástí majetku, jako např. HDD, RAM atp.',
 
-    'consumables'   => 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
+    'consumables'   => 'Spotřební materiál jsou takové položky, které jsou v čase spotřebovávány, jako např. toner, inkoust či papír do tiskáren.',
 
-    'depreciations' => 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
+    'depreciations' => 'Můžete nastavit amortizaci majetku pro jeho rovnoměrné odepisování.',
 
 ];

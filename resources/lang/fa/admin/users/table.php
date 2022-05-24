@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'ایمیل',
     'employee_num'      	=> 'کد کارمند',
     'first_name' 			=> 'نام',
-    'groupnotes'			=> 'یک گروه برای عضو کردن کاربر انتخاب کنید،به یاد داشته باشید که کاربر مجوز گروه هایی را که عضو میشود را دارا خواهد بود.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'شناسه',
     'inherit'  				=> 'ارث بری',
     'job' 					=> 'عنوان شغلی',

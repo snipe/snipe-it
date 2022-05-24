@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Zubehör',
     'activated'			    => 'Aktiviert',
     'accessory'				=> 'Zubehör',
@@ -26,6 +26,7 @@
     'audit'				    => 'Prüfung',
     'audit_report'			=> 'Audit-Log',
     'assets'				=> 'Assets',
+    'assigned_to'           => 'Herausgegeben an :name',
     'avatar_delete'         => 'Avatar löschen',
     'avatar_upload'         => 'Avatar hochladen',
     'back'      			=> 'Zurück',
@@ -114,6 +115,7 @@
     'files'                 => 'Dateien',
     'file_name'				=> 'Datei',
     'file_type'             => 'Dateityp',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'Datei-Uploads',
     'file_upload'           => 'Datei-Upload',
     'generate'				=> 'Generieren',
@@ -229,6 +231,7 @@
     'show_current'  		=> 'Aktuelles anzeigen',
     'sign_in'				=> 'Anmelden',
     'signature'             => 'Unterschrift',
+    'signed_off_by'         => 'Unterschrieben von',
     'skin'       			=> 'Skin',
     'slack_msg_note'        => 'Eine Slack Nachricht wird gesendet',
     'slack_test_msg'        => 'Oh hai! Sieht so aus, als ob deine Slack Integration mit Snipe-IT funktioniert!',
@@ -237,6 +240,7 @@
     'state'  				=> 'Bundesland',
     'status_labels'			=> 'Statusbezeichnungen',
     'status'    			=> 'Status',
+    'accept_eula'           => 'Annahmeerklärung',
     'supplier'              => 'Lieferant',
     'suppliers'  			=> 'Lieferanten',
     'sure_to_delete'    => 'Sind Sie sich sicher, dass Sie löschen möchten?',
@@ -350,4 +354,7 @@
     'checkout_tooltip' => 'Diesen Gegenstand zuweisen',
     'checkin_tooltip' => 'Diesen Artikel zurücknehmen',
     'checkout_user_tooltip' => 'Diesen Artikel an einen Benutzer herausgeben',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Įrangos',
     'activated'			    => 'Aktyvuota',
     'accessory'				=> 'Įranga',
@@ -26,6 +26,7 @@
     'audit'				    => 'Auditas',
     'audit_report'			=> 'Audito žurnalas',
     'assets'				=> 'Įranga',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => 'Ištrinti ikoną',
     'avatar_upload'         => 'Įkelti ikoną',
     'back'      			=> 'Grįžti',
@@ -114,6 +115,7 @@
     'files'                 => 'Failas',
     'file_name'				=> 'Failas',
     'file_type'             => 'File Type',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'Failo Įkėlimas',
     'file_upload'           => 'File Upload',
     'generate'				=> 'Sukurti',
@@ -229,6 +231,7 @@
     'show_current'  		=> 'Rodyti dabartinį',
     'sign_in'				=> 'Prisijungti',
     'signature'             => 'Parašas',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Išvaizda',
     'slack_msg_note'        => 'A slack message will be sent',
     'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',
@@ -237,6 +240,7 @@
     'state'  				=> 'Rajonas',
     'status_labels'			=> 'Būklės kortelės',
     'status'    			=> 'Būklė',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Tiekėjas',
     'suppliers'  			=> 'Tiekėjai',
     'sure_to_delete'    => 'Ar tikrai norite ištrinti',
@@ -350,4 +354,7 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

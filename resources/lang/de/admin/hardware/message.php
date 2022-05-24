@@ -17,6 +17,7 @@ return [
         'error'   			=> 'Asset wurde nicht aktualisiert. Bitte versuchen Sie es erneut',
         'success' 			=> 'Asset wurde erfolgreich aktualisiert.',
         'nothing_updated'	=>  'Es wurden keine Felder ausgewählt, somit wurde auch nichts aktualisiert.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

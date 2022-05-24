@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'E-Mail',
     'employee_num'      	=> '従業員 No.',
     'first_name' 			=> '名',
-    'groupnotes'			=> 'ユーザーを割り当てるグループを選択して下さい。グループの権限がユーザーに付与されます。',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'ID',
     'inherit'  				=> '継承',
     'job' 					=> '役職',

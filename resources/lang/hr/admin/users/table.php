@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'E-mail',
     'employee_num'      	=> 'Broj zaposlenika',
     'first_name' 			=> 'Ime',
-    'groupnotes'			=> 'Odaberite grupu koju ćete dodijeliti korisniku, ne zaboravite da korisnik preuzima dozvole skupine kojoj su dodijeljeni.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Iskaznica',
     'inherit'  				=> 'nasljediti',
     'job' 					=> 'Naziv posla',

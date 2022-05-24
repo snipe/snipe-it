@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'sent'	        => 'Success: If that email address exists in our system, a password recovery email has been sent.',
-    'user'			=> 'No matching active user found with that email.',
+    'sent'	        => 'Uspešno: Ako ta adresa e-pošte već postoji u našem sistemu, e-poruka za povraćaj lozinke je poslata.',
+    'user'			=> 'Nije pronađen aktivni korisnik sa tom adresom e-pošte.',
 ];

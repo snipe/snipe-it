@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'E-bost',
     'employee_num'      	=> 'Rhif Cyflogai.',
     'first_name' 			=> 'Enw cyntaf',
-    'groupnotes'			=> 'Dewiswch grwp i asseinio i\'r defnyddiwr, cofiwch bod y defnyddiwr yn etifeddu hawliau\'r grwp.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Rhif Unigryw',
     'inherit'  				=> 'Etifeddu',
     'job' 					=> 'Teitl Swydd',

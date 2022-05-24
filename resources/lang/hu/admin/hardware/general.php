@@ -6,7 +6,7 @@ return [
     'archived'  				=> 'Arhivált',
     'asset'  					=> 'Eszköz',
     'bulk_checkout'             => 'Eszközök kiadása',
-    'bulk_checkin'              => 'Checkin Assets',
+    'bulk_checkin'              => 'Eszköz visszavétele',
     'checkin'  					=> 'Eszköz visszavétele',
     'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Eszköz klónozása',

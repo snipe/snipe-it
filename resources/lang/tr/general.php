@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Aksesuarlar',
     'activated'			    => 'Aktif edildi',
     'accessory'				=> 'Aksesuar',
@@ -26,6 +26,7 @@
     'audit'				    => 'Denetim',
     'audit_report'			=> 'Denetim Günlüğü',
     'assets'				=> 'Demirbaşlar',
+    'assigned_to'           => 'Bana Atanmış',
     'avatar_delete'         => 'Profil Resmini Sil',
     'avatar_upload'         => 'Profil Resmi Yükle',
     'back'      			=> 'Geri',
@@ -99,6 +100,7 @@ Context | Request Context
     'eol'					=> 'Kullanım Ömrü',
     'email_domain'			=> 'E-posta etki alanı',
     'email_format'			=> 'E-posta biçimi',
+    'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'İçe aktarırken e-posta adresleri oluşturmak için kullanılır',
     'error'				    => 'Hata',
     'filastname_format'			=> 'Ad başharfi Soyad (jsmith@example.com)',
@@ -116,6 +118,7 @@ Context | Request Context
     'files'                 => 'Dosyalar',
     'file_name'				=> 'Dosya',
     'file_type'             => 'Dosya Türü',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'Dosya Yüklemeleri',
     'file_upload'           => 'Dosya Yükleme',
     'generate'				=> 'Oluştur',
@@ -195,6 +198,8 @@ Context | Request Context
     'qty'		            => 'Miktar',
     'quantity'		        => 'Miktar',
     'quantity_minimum'      => 'Asgari :count adet miktarın altındasınız yada neredeyse asgari miktar seviyesinin altındasınız',
+    'quickscan_checkin'  	=> 'Quick Scan Checkin',
+    'quickscan_checkin_status'  	=> 'Checkin Status',
     'ready_to_deploy'		=> 'Atamaya Hazır',
     'recent_activity'		=> 'Son Etkinlik',
     'remaining'             => 'Kalan',
@@ -229,6 +234,7 @@ Context | Request Context
     'show_current'  		=> 'Mevcutu Göster',
     'sign_in'				=> 'Oturum Aç',
     'signature'             => 'İmza',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Tema',
     'slack_msg_note'        => 'Bir slack mesajı gönderilecek',
     'slack_test_msg'        => 'Oo merhaba! Görünüşe göre Snipe-IT ile Slack entegrasyonunuz çalışıyor!',
@@ -237,6 +243,7 @@ Context | Request Context
     'state'  				=> 'İlçe',
     'status_labels'			=> 'Durum Etiketleri',
     'status'    			=> 'Durum',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Tedarikçi',
     'suppliers'  			=> 'Tedarikçiler',
     'sure_to_delete'    => 'Silmek istediğinize emin misiniz',
@@ -350,4 +357,7 @@ Context | Request Context
     'checkout_tooltip' => 'Öğenin çıkışını yapın',
     'checkin_tooltip' => 'Öğenin girişini yapın',
     'checkout_user_tooltip' => 'Öğenin kullanıcıya çıkışını yapın',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

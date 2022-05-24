@@ -16,6 +16,7 @@ return [
         'error'   			=> 'הנכס לא עודכן, נסה שוב',
         'success' 			=> 'הנכס עודכן בהצלחה.',
         'nothing_updated'	=>  'לא נבחרו שדות, ולכן דבר לא עודכן.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

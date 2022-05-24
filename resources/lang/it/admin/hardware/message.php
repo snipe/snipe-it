@@ -17,6 +17,7 @@ return [
         'error'   			=> 'Il bene non è stato aggiornato, si prega di riprovare',
         'success' 			=> 'Bene aggiornato con successo.',
         'nothing_updated'	=>  'Non è stato selezionato nessun campo, nulla è stato aggiornato.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

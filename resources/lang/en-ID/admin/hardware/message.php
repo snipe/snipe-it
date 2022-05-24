@@ -16,6 +16,7 @@ return [
         'error'   			=> 'Aset tidak diperbarui, coba lagi',
         'success' 			=> 'Aset Berhasil diperbarui.',
         'nothing_updated'	=>  'Tidak ada kategori yang dipilih, jadi tidak ada yang diperbarui.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

@@ -6,7 +6,7 @@ return [
     'asset_depreciations'  					=> 'Asset-Abschreibungen',
     'create'  					            => 'Abschreibung erstellen',
     'depreciation_name'  					=> 'Abschreibungs Name',
-    'depreciation_min'                      => 'Floor Value of Depreciation',
+    'depreciation_min'                      => 'Abschreibungsuntergrenze',
     'number_of_months'  					=> 'Anzahl der Monate',
     'update'  					            => 'Abschreibung aktualisieren',
     'depreciation_min'                      => 'Minimaler Wert nach Abschreibung',

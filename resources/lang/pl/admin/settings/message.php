@@ -23,7 +23,7 @@ return [
         'sending' => 'Wysyłanie testowej wiadomości e-mail...',
         'success' => 'Wiadomość wysłana!',
         'error' => 'Wiadomość nie może zostać wysłana.',
-        'additional' => 'No additional error message provided. Check your mail settings and your app log.'
+        'additional' => 'Nie podano dodatkowego komunikatu o błędzie. Sprawdź ustawienia poczty i logu aplikacji.'
     ],
     'ldap' => [
         'testing' => 'Testowanie połączenia LDAP, powiązania i zapytania ...',

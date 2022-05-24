@@ -16,6 +16,7 @@ return [
         'error'   			=> 'ไม่ได้อัปเดตเนื้อหาโปรดลองอีกครั้ง',
         'success' 			=> 'อัปเดตเนื้อหาสำเร็จแล้ว',
         'nothing_updated'	=>  'ไม่มีการเลือกเขตข้อมูลดังนั้นไม่มีการอัปเดตอะไรเลย',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

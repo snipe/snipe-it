@@ -17,6 +17,7 @@ return [
         'error'   			=> 'Gagal perbarui aset, silahkan coba kembali',
         'success' 			=> 'Sukses perbarui aset.',
         'nothing_updated'	=>  'Tidak ada kolom yang dipilih, jadi tidak ada yang diperbaharui.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

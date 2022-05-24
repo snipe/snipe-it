@@ -16,6 +16,7 @@ return [
         'error'   			=> 'Ifa alizange libuyekezwe, sicela uzame futhi',
         'success' 			=> 'Ifa libuyekezwe ngempumelelo.',
         'nothing_updated'	=>  'Awekho amasimu akhethiwe, ngakho-ke akukho lutho olubuyekeziwe.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

@@ -91,6 +91,10 @@ return [
     'url'                  => ':attribute muotoilu on virheellinen.',
     'unique_undeleted'     => ':attribute on oltava ainutlaatuinen.',
     'non_circular'         => ':attribute ei saa luoda kehäviittausta.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

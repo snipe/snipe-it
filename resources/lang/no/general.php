@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Tilbehør',
     'activated'			    => 'Aktivert',
     'accessory'				=> 'Tilbehør',
@@ -26,6 +26,7 @@
     'audit'				    => 'Revisjon',
     'audit_report'			=> 'Overvåkingslogg',
     'assets'				=> 'Eiendeler',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => 'Slett Avatar',
     'avatar_upload'         => 'Last opp Avatar',
     'back'      			=> 'Tilbake',
@@ -114,6 +115,7 @@
     'files'                 => 'Filer',
     'file_name'				=> 'Fil',
     'file_type'             => 'Filtype',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'Filopplastinger',
     'file_upload'           => 'Filopplastning',
     'generate'				=> 'Generer',
@@ -229,6 +231,7 @@
     'show_current'  		=> 'Vis gjeldende',
     'sign_in'				=> 'Logg inn',
     'signature'             => 'Signatur',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Tema',
     'slack_msg_note'        => 'En slack-melding vil bli sendt',
     'slack_test_msg'        => 'Hei-hå! Ser som din Slack-integrasjon med Snipe-IT fungerer!',
@@ -237,6 +240,7 @@
     'state'  				=> 'Stat',
     'status_labels'			=> 'Statusmerker',
     'status'    			=> 'Status',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Leverandør',
     'suppliers'  			=> 'Leverandører',
     'sure_to_delete'    => 'Er du sikker på at du vil slette',
@@ -350,4 +354,7 @@
     'checkout_tooltip' => 'Sjekk ut denne gjenstanden',
     'checkin_tooltip' => 'Sjekk inn dette elementet',
     'checkout_user_tooltip' => 'Sjekk dette elementet ut til en bruker',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

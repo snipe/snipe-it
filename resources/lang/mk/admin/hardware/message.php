@@ -16,6 +16,7 @@ return [
         'error'   			=> 'Основното средство не е ажурирано, обидете се повторно',
         'success' 			=> 'Основното средство е успешно ажурирано.',
         'nothing_updated'	=>  'Не беа избрани полиња, затоа ништо не беше ажурирано.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

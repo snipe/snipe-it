@@ -16,6 +16,7 @@ return [
         'error'   			=> 'Níor tugadh nuashonrú ar an tsócmhainn, déan iarracht arís',
         'success' 			=> 'Nuashonraíodh sócmhainn go rathúil',
         'nothing_updated'	=>  'Níor roghnaíodh réimsí ar bith, mar sin níor nuashonraíodh aon rud.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

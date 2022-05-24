@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Tillbehör',
     'activated'			    => 'Aktiverad',
     'accessory'				=> 'Tillbehör',
@@ -26,6 +26,7 @@
     'audit'				    => 'Inventera',
     'audit_report'			=> 'Inventeringsloggar',
     'assets'				=> 'Tillgångar',
+    'assigned_to'           => 'Tillgångar tilldelade: namn',
     'avatar_delete'         => 'Ta bort Avatar',
     'avatar_upload'         => 'Ladda upp Avatar',
     'back'      			=> 'Bakåt',
@@ -114,6 +115,7 @@
     'files'                 => 'Filer',
     'file_name'				=> 'Fil',
     'file_type'             => 'Filtyp',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'Filuppladdning',
     'file_upload'           => 'Ladda upp fil',
     'generate'				=> 'Generera',
@@ -229,6 +231,7 @@
     'show_current'  		=> 'Visa nuvarande',
     'sign_in'				=> 'Logga in',
     'signature'             => 'Signatur',
+    'signed_off_by'         => 'Signerad av',
     'skin'       			=> 'Skal',
     'slack_msg_note'        => 'Ett slack meddelande kommer att skickas',
     'slack_test_msg'        => 'Åh hai! Ser ut som din Slack integration med Snipe-IT fungerar!',
@@ -237,6 +240,7 @@
     'state'  				=> 'stat',
     'status_labels'			=> 'Statusetiketter',
     'status'    			=> 'Status',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Leverantör',
     'suppliers'  			=> 'Leverantörer',
     'sure_to_delete'    => 'Är du säker på att du vill radera',
@@ -350,4 +354,7 @@
     'checkout_tooltip' => 'Låna utdetta objekt',
     'checkin_tooltip' => 'Checka in detta objekt',
     'checkout_user_tooltip' => 'Låna utdetta objekt till en användare',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

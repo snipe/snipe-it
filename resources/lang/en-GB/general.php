@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Accessories',
     'activated'			    => 'Activated',
     'accessory'				=> 'Accessory',
@@ -26,6 +26,7 @@
     'audit'				    => 'Audit',
     'audit_report'			=> 'Audit Log',
     'assets'				=> 'Assets',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => 'Delete Avatar',
     'avatar_upload'         => 'Upload Avatar',
     'back'      			=> 'Back',
@@ -70,7 +71,7 @@
     'currency'  			=> '£', // this is deprecated
     'current'  				=> 'Current',
     'current_password'      => 'Current Password',
-    'customize_report'      => 'Customize Report',
+    'customize_report'      => 'Customise Report',
     'custom_report'         => 'Custom Asset Report',
     'dashboard'				=> 'Dashboard',
     'days'      			=> 'days',
@@ -114,6 +115,7 @@
     'files'                 => 'Files',
     'file_name'				=> 'File',
     'file_type'             => 'File Type',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'File Uploads',
     'file_upload'           => 'File Upload',
     'generate'				=> 'Generate',
@@ -229,6 +231,7 @@
     'show_current'  		=> 'Show Current',
     'sign_in'				=> 'Sign in',
     'signature'             => 'Signature',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Skin',
     'slack_msg_note'        => 'A slack message will be sent',
     'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',
@@ -237,6 +240,7 @@
     'state'  				=> 'State',
     'status_labels'			=> 'Status Labels',
     'status'    			=> 'Status',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Suppliers',
     'sure_to_delete'    => 'Are you sure you wish to delete',
@@ -316,8 +320,8 @@
     'export'                => 'Export',
     'ldap_sync'             => 'LDAP Sync',
     'ldap_user_sync'        => 'LDAP User Sync',
-    'synchronize'           => 'Synchronize',
-    'sync_results'          => 'Synchronization Results',
+    'synchronize'           => 'Synchronise',
+    'sync_results'          => 'Synchronisation Results',
     'license_serial'        => 'Serial/Product Key',
     'invalid_category'      => 'Invalid category',
     'dashboard_info'        => 'This is your dashboard. There are many like it, but this one is yours.',
@@ -350,4 +354,7 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

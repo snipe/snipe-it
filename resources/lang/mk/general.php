@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Додатоци',
     'activated'			    => 'Активиран',
     'accessory'				=> 'Додаток',
@@ -26,6 +26,7 @@
     'audit'				    => 'Ревизија',
     'audit_report'			=> 'Дневник за ревизија',
     'assets'				=> 'Основни средства',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => 'Избриши аватар',
     'avatar_upload'         => 'Прикачи аватар',
     'back'      			=> 'Назад',
@@ -114,6 +115,7 @@
     'files'                 => 'Датотеки',
     'file_name'				=> 'Датотека',
     'file_type'             => 'File Type',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'Прикачување датотеки',
     'file_upload'           => 'File Upload',
     'generate'				=> 'Генерирање',
@@ -229,6 +231,7 @@
     'show_current'  		=> 'Прикажи тековно',
     'sign_in'				=> 'Најави се',
     'signature'             => 'Потпис',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Кожа',
     'slack_msg_note'        => 'A slack message will be sent',
     'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',
@@ -237,6 +240,7 @@
     'state'  				=> 'Состојба',
     'status_labels'			=> 'Етикети со статус',
     'status'    			=> 'Статус',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Добавувач',
     'suppliers'  			=> 'Добавувачи',
     'sure_to_delete'    => 'Дали сте сигурни дека сакате да ја избришете',
@@ -350,4 +354,7 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

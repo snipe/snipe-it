@@ -91,6 +91,10 @@ return [
     'url'                  => 'Η μορφή του χαρακτηριστικού είναι μη έγκυρη.',
     'unique_undeleted'     => 'Το :χαρακτηριστικό πρέπει να είναι μοναδικό.',
     'non_circular'         => 'The :attribute must not create a circular reference.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

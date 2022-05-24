@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Aksesori',
     'activated'			    => 'Diaktifkan',
     'accessory'				=> 'Aksesori',
@@ -26,6 +26,7 @@
     'audit'				    => 'Audit',
     'audit_report'			=> 'Log Audit',
     'assets'				=> 'Harta',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => 'Hapuskan Avatar',
     'avatar_upload'         => 'Muat naik Avatar',
     'back'      			=> 'Belakang',
@@ -114,6 +115,7 @@
     'files'                 => 'Fail-fail',
     'file_name'				=> 'Fail',
     'file_type'             => 'File Type',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'Muat Naik Fail',
     'file_upload'           => 'File Upload',
     'generate'				=> 'Laksanakan',
@@ -229,6 +231,7 @@
     'show_current'  		=> 'Papar Semasa',
     'sign_in'				=> 'Log masuk',
     'signature'             => 'Tandatangan',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Kulit',
     'slack_msg_note'        => 'A slack message will be sent',
     'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',
@@ -237,6 +240,7 @@
     'state'  				=> 'Negeri',
     'status_labels'			=> 'Label Status',
     'status'    			=> 'Status',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Pembekal',
     'suppliers'  			=> 'Pembekal',
     'sure_to_delete'    => 'Adakah anda pasti ingin memadamkannya',
@@ -350,4 +354,7 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

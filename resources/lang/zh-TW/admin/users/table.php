@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'Email',
     'employee_num'      	=> '員工編號',
     'first_name' 			=> '名',
-    'groupnotes'			=> '請選擇一個群組給使用者，注意，使用者將擁有該群組的所有權限。',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'ID',
     'inherit'  				=> '繼承',
     'job' 					=> '職稱',

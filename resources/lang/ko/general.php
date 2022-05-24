@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> '부속품들',
     'activated'			    => '활성화',
     'accessory'				=> '부속품',
@@ -26,6 +26,7 @@
     'audit'				    => '감사',
     'audit_report'			=> '감사 기록',
     'assets'				=> '자산',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => '아바타 삭제',
     'avatar_upload'         => '아바타 올리기',
     'back'      			=> '이전',
@@ -114,6 +115,7 @@
     'files'                 => '파일',
     'file_name'				=> '파일',
     'file_type'             => '파일 형식',
+    'filesize'              => 'File Size',
     'file_uploads'			=> '파일 올리기',
     'file_upload'           => '파일 올리기',
     'generate'				=> '생성',
@@ -229,6 +231,7 @@
     'show_current'  		=> '현재 보기',
     'sign_in'				=> '로그인',
     'signature'             => '서명',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> '스킨',
     'slack_msg_note'        => '슬랙으로 메세지 보내기',
     'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',
@@ -237,6 +240,7 @@
     'state'  				=> '주',
     'status_labels'			=> '상태 딱지',
     'status'    			=> '상태',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => '공급자',
     'suppliers'  			=> '공급자',
     'sure_to_delete'    => '정말로 삭제 하시겠습니까',
@@ -350,4 +354,7 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

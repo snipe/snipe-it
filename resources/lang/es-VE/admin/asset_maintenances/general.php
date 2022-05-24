@@ -8,7 +8,7 @@
         'repair'             => 'Reparar',
         'maintenance'        => 'Mantenimiento',
         'upgrade'            => 'Mejorar',
-        'calibration'        => 'Calibrar',
-        'software_support'   => 'Servicio de software',
-        'hardware_support'   => 'Servicio de software',
+        'calibration'        => 'Calibración',
+        'software_support'   => 'Soporte de Software',
+        'hardware_support'   => 'Soporte de Hardware',
     ];

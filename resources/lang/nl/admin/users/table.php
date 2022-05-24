@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'E-mail',
     'employee_num'      	=> 'Werknemersnummer',
     'first_name' 			=> 'Voornaam',
-    'groupnotes'			=> 'Selecteer een groep om toe te wijzen aan de gebruiker. Onthoud dat de gebruiker de rechten overneemt van de groep waaraan hij/zij wordt toegewezen.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Overnemen',
     'job' 					=> 'Functie omschrijving',

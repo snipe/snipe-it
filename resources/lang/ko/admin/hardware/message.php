@@ -17,6 +17,7 @@ return [
         'error'   			=> '자산이 갱신되지 않았습니다. 다시 시도해 주세요.',
         'success' 			=> '자산이 갱신되었습니다.',
         'nothing_updated'	=>  '선택된 항목이 없어서, 갱신 되지 않습니다.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

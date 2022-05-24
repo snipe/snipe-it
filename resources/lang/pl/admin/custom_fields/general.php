@@ -41,5 +41,7 @@ return [
     'make_required' => 'Opcjonalnie - kliknij, aby ustawić jako wymagane',
     'reorder' => 'Zmień kolejność',
     'db_field' => 'Pole bazy danych',
-    'db_convert_warning' => 'UWAGA. To pole znajduje się w tabeli pól niestandardowych jako <code> :db_column </code> ale powinno być :expected </code>.'
+    'db_convert_warning' => 'UWAGA. To pole znajduje się w tabeli pól niestandardowych jako <code> :db_column </code> ale powinno być :expected </code>.',
+    'is_unique' => 'This value must be unique across all assets',
+    'unique' => 'Unique',
 ];

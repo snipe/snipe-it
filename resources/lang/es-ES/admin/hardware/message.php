@@ -17,6 +17,7 @@ return [
         'error'   			=> 'Equipo no actualizado, intentalo de nuevo',
         'success' 			=> 'Equipo actualizado.',
         'nothing_updated'	=>  'Ningún campo fue seleccionado, por lo que nada ha sido actualizado.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

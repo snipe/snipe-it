@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'Īmēra',
     'employee_num'      	=> 'Nga kaimahi No.',
     'first_name' 			=> 'Ingoa Tuatahi',
-    'groupnotes'			=> 'Tīpakohia he rōpū ki te tautuhi ki te kaiwhakamahi, maharahia kei te whakaaetia e te kaiwhakamahi nga whakaaetanga o te rōpū e tohaina ana.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Tuhinga',
     'inherit'  				=> 'Whakauru',
     'job' 					=> 'Taitara Job',
