@@ -109,8 +109,14 @@
 
                                                 </td>
 
+                                                <td>
+                                                    @can('view', \App\Models\AssetModel::class)
+                                                        <a href='{{ url("/models/{$requestableModel->id}") }}'>{{ $requestableModel->name }}</a>
+                                                    @else
+                                                        {{ $requestableModel->name }}
+                                                    @endcan
+                                                </td>
 
-                                                <td>{{$requestableModel->name}}</td>
                                                 <td>{{$requestableModel->assets->where('requestable', '1')->count()}}</td>
 
                                                 <td>
