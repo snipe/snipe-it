@@ -109,8 +109,7 @@
 
                                                 </td>
 
-
-                                                <td>{{$requestableModel->name}}</td>
+                                            <td><a href='{{ url("/models/{$requestableModel->id}") }}' > {{ $requestableModel->name }} </a></td>
                                                 <td>{{$requestableModel->assets->where('requestable', '1')->count()}}</td>
 
                                                 <td>
