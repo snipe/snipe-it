@@ -691,9 +691,24 @@
                                             </div>
                                             <div class="col-md-6">
                                                 @can('superuser')
+                                             
                                                     <a href="{{ route('locations.show', ['location' => $asset->location->id]) }}">
                                                         {{ $asset->location->name }}
                                                     </a>
+
+                                                   @php  $asset_current_location = $asset->location;
+                                                   @endphp
+
+                                                    @while ($asset_current_location->parent_id != null)
+                                                    < <a href="{{ route('locations.show', ['location' => $asset_current_location->parent_id]) }}">
+                                                        {{  $asset_current_location->parent->name }}
+                                                    </a>
+
+                                                       @php  $asset_current_location = $asset_current_location->parent;
+                                                       @endphp
+
+                                                    @endwhile
+                                                   
                                                 @else
                                                     {{ $asset->location->name }}
                                                 @endcan
