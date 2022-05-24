@@ -123,8 +123,7 @@
                         <div class="form-group{{ $errors->has('groups') ? ' has-error' : '' }}">
                             <label class="col-md-3 control-label" for="groups"> {{ trans('general.groups') }}</label>
                             <div class="col-md-6">
-                                @if ((Config::get('app.lock_passwords') || (!Auth::user()->isSuperUser())))
-
+                                @if ((config('app.lock_passwords') || (!Auth::user()->isSuperUser())))
                                     <span class="help-block">{{  trans('admin/users/general.group_memberships_helpblock') }}</p>
                                 @else
                                     <div class="controls">
