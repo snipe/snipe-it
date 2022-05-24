@@ -109,7 +109,14 @@
 
                                                 </td>
 
-                                            <td><a href='{{ url("/models/{$requestableModel->id}") }}' > {{ $requestableModel->name }} </a></td>
+                                                <td>
+                                                    @if (Gate::allows('superadmin'))
+                                                        <a href='{{ url("/models/{$requestableModel->id}") }}' > {{ $requestableModel->name }} </a></td>
+                                                    @else
+                                                        {{ $requestableModel->name }}
+                                                    @endif
+                                                </td>
+
                                                 <td>{{$requestableModel->assets->where('requestable', '1')->count()}}</td>
 
                                                 <td>
