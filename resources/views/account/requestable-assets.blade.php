@@ -110,11 +110,11 @@
                                                 </td>
 
                                                 <td>
-                                                    @if (Gate::allows('superadmin'))
+                                                    @can('view', \App\Models\AssetModel::class)
                                                         <a href='{{ url("/models/{$requestableModel->id}") }}' > {{ $requestableModel->name }} </a></td>
                                                     @else
                                                         {{ $requestableModel->name }}
-                                                    @endif
+                                                    @endcan
                                                 </td>
 
                                                 <td>{{$requestableModel->assets->where('requestable', '1')->count()}}</td>
