@@ -17,8 +17,9 @@ trait Acceptable
      * @param  User   $acceptedBy
      * @param  string $signature
      */
-    public function acceptedCheckout(User $acceptedBy, $signature)
+    public function acceptedCheckout(User $acceptedBy, $signature, $filename = null)
     {
+        \Log::debug('acceptedCheckout in Acceptable trait fired, tho it doesn\'t do anything?');
     }
 
     /**

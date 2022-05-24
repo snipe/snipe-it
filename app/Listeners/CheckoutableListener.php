@@ -24,10 +24,14 @@ use Illuminate\Support\Facades\Notification;
 class CheckoutableListener
 {
     /**
-     * Notify the user about the checked out checkoutable
+     * Notify the user about the checked out checkoutable and add a record to the
+     * checkout_requests table.
      */
     public function onCheckedOut($event)
     {
+
+        \Log::debug('onCheckedOut in the Checkoutable listener fired');
+
         /**
          * When the item wasn't checked out to a user, we can't send notifications
          */
@@ -58,14 +62,12 @@ class CheckoutableListener
      */    
     public function onCheckedIn($event)
     {
-        \Log::debug('checkin fired');
+        \Log::debug('onCheckedIn in the Checkoutable listener fired');
 
         /**
          * When the item wasn't checked out to a user, we can't send notifications
          */
         if (! $event->checkedOutTo instanceof User) {
-            \Log::debug('checked out to not a user');
-
             return;
         }
 
@@ -81,16 +83,14 @@ class CheckoutableListener
                 $acceptance->delete();
             }
         }
-        \Log::debug('checked out to a user');
+
+        // Use default locale
         if (! $event->checkedOutTo->locale) {
-            \Log::debug('Use default settings locale');
             Notification::locale(Setting::getSettings()->locale)->send(
                 $this->getNotifiables($event),
                 $this->getCheckinNotification($event)
             );
         } else {
-            \Log::debug('Use user locale? I do not think this works as expected yet');
-            // \Log::debug(print_r($this->getNotifiables($event), true));
             Notification::send(
                 $this->getNotifiables($event),
                 $this->getCheckinNotification($event)
@@ -150,10 +150,6 @@ class CheckoutableListener
      */
     private function getCheckinNotification($event)
     {
-
-        // $model = get_class($event->checkoutable);
-
-
 
         $notificationClass = null;
 

@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+        }
+    </style>
 </head>
 <body>
 
-@if ($signature)
+@if ($logo)
     <center>
         <img src="{{ $logo }}">
         <p>{{$company_name}}</p>
@@ -15,22 +21,27 @@
 @endif
 <br>
 
-<p>Date: {{ date($date_settings) }} </p><br>
-<p>Asset Tag: {{ $item_tag }}</p>
-<p>Asset Model: {{ $item_model }}</p>
+<p>
+    {{ trans('general.date') }}: {{ date($date_settings) }} <br>
+    {{ trans('general.asset_model') }}: {{ $item_model }}<br>
+</p>
+
 @if ($eula)
+    <hr>
     {!!  $eula !!}
+    <hr>
 @endif
 
-<br>
 
-<p>Assigned on: {{$check_out_date}}</p>
-<p>Accepted on: {{$accepted_date}}</p>
-<p>Assigned to: {{$assigned_to}}</p>
-@if ($signature)
-    <center>
-        <img src="{{ $signature }}" style="max-width: 50%">
-    </center>
+<p>
+    Assigned on: {{$check_out_date}}<br>
+    Assigned to: {{$assigned_to}}<br>
+    Accepted on: {{$accepted_date}}
+</p>
+
+
+@if ($signature!='')
+    <img src="{{ $signature }}" style="max-width: 600px; border-bottom: black solid 1px;">
 @endif
 </body>
 </html>
