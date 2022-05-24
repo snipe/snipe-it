@@ -273,11 +273,11 @@
                         @if ($user->isSuperUser())
                           <label class="label label-danger">
                               <i class="fas fa-crown" title="superuser"></i>
-                          </label>
+                          </label>&nbsp;
                         @elseif ($user->hasAccess('admin'))
                           <label class="label label-warning">
                               <i class="fas fa-crown" title="admin"></i>
-                          </label>
+                          </label>&nbsp;
                         @endif
                          {{ $user->username }}
 
