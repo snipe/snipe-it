@@ -10,7 +10,7 @@ return [
     'group_admin' 	 		=> 'Quản lý nhóm',
     'allow' 	 			=> 'Cho phép',
     'deny' 	 				=> 'Từ chối',
-    'permission'            => 'Permission',
-    'grant'                 => 'Grant',
-    'no_permissions'        => 'This group has no permissions.'
+    'permission'            => 'Quyền',
+    'grant'                 => 'Chấp thuận',
+    'no_permissions'        => 'Không có quyền trong nhóm này.'
 ];

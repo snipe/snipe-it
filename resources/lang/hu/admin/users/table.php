@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'E-mail cím',
     'employee_num'      	=> 'Munkavállaló száma',
     'first_name' 			=> 'Keresztnév',
-    'groupnotes'			=> 'Válasszon ki egy csoportot a felhasználó hozzárendeléséhez, ne felejtse el, hogy a felhasználó átveszi a hozzárendelt csoport engedélyeit.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Örököl',
     'job' 					=> 'Munka megnevezése',

@@ -16,6 +16,7 @@ return [
         'error'   			=> 'O ativo não foi atualizado, tente novamente',
         'success' 			=> 'Ativo atualizado com sucesso.',
         'nothing_updated'	=>  'Nenhum campo foi selecionado, então nada foi atualizado.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

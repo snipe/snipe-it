@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Acessórios',
     'activated'			    => 'Ativado',
     'accessory'				=> 'Acessório',
@@ -26,6 +26,7 @@
     'audit'				    => 'Auditoria',
     'audit_report'			=> 'Registro de auditoria',
     'assets'				=> 'Ativos',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => 'Excluir Avatar',
     'avatar_upload'         => 'Carregar Avatar',
     'back'      			=> 'Voltar',
@@ -114,6 +115,7 @@
     'files'                 => 'Arquivos',
     'file_name'				=> 'Arquivo',
     'file_type'             => 'Tipo de arquivo',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'Carregamentos de Arquivos',
     'file_upload'           => 'Upload de Arquivo',
     'generate'				=> 'Gerar',
@@ -229,6 +231,7 @@
     'show_current'  		=> 'Visualização Atual',
     'sign_in'				=> 'Entrar',
     'signature'             => 'Assinatura',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Temas',
     'slack_msg_note'        => 'Uma mensagem será enviada via Slack',
     'slack_test_msg'        => 'Ah é! Parece que sua integração com o Snipe-IT está funcionando!',
@@ -237,6 +240,7 @@
     'state'  				=> 'Estado',
     'status_labels'			=> 'Rótulos de Status',
     'status'    			=> 'Status',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Fornecedor',
     'suppliers'  			=> 'Fornecedores',
     'sure_to_delete'    => 'Você tem certeza que deseja apagar',
@@ -350,4 +354,7 @@
     'checkout_tooltip' => 'Fazer check-out do item',
     'checkin_tooltip' => 'Fazer check-in do item',
     'checkout_user_tooltip' => 'Fazer check-out deste item para um usuário',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

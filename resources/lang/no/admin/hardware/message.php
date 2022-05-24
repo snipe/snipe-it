@@ -17,6 +17,7 @@ return [
         'error'   			=> 'Eiendelen ble ikke oppdatert, prøv igjen',
         'success' 			=> 'Oppdatering av eiendel vellykket.',
         'nothing_updated'	=>  'Ingen felter er valgt, så ingenting ble endret.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

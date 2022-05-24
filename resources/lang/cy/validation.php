@@ -91,6 +91,10 @@ return [
     'url'                  => 'Mae fformat :attribute yn annilys.',
     'unique_undeleted'     => 'Rhaid i\'r :attribute bod yn unigryw.',
     'non_circular'         => 'The :attribute must not create a circular reference.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

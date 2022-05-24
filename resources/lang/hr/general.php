@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Pribor',
     'activated'			    => 'aktiviran',
     'accessory'				=> 'Oprema',
@@ -26,6 +26,7 @@
     'audit'				    => 'Revizija',
     'audit_report'			=> 'Zapisnik revizije',
     'assets'				=> 'Imovina',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => 'Obriši avatar',
     'avatar_upload'         => 'Učitaj avatar',
     'back'      			=> 'Nazad',
@@ -114,6 +115,7 @@
     'files'                 => 'Datoteke',
     'file_name'				=> 'Datoteka',
     'file_type'             => 'File Type',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'Prijenos datoteka',
     'file_upload'           => 'File Upload',
     'generate'				=> 'Generirati',
@@ -229,6 +231,7 @@
     'show_current'  		=> 'Prikaži trenutno',
     'sign_in'				=> 'Prijaviti se',
     'signature'             => 'Potpis',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Skin',
     'slack_msg_note'        => 'A slack message will be sent',
     'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',
@@ -237,6 +240,7 @@
     'state'  				=> 'država',
     'status_labels'			=> 'Oznake statusa',
     'status'    			=> 'Status',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Dobavljač',
     'suppliers'  			=> 'Dobavljači',
     'sure_to_delete'    => 'Jeste li sigurni da želite izbrisati',
@@ -350,4 +354,7 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

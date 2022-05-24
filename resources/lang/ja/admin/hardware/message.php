@@ -17,6 +17,7 @@ return [
         'error'   			=> '資産は更新されませんでした。もう一度、やり直して下さい。',
         'success' 			=> '資産は正常に更新されました。',
         'nothing_updated'	=>  'フィールドが選択されていないため、更新されませんでした。',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

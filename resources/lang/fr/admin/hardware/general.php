@@ -6,6 +6,7 @@ return [
     'archived'  				=> 'Retiré',
     'asset'  					=> 'Biens',
     'bulk_checkout'             => 'Attribuer les actifs',
+    'bulk_checkin'              => 'Restitution d\'actifs',
     'checkin'  					=> 'Retour des Biens',
     'checkout'  				=> 'Commander l\'actif',
     'clone'  					=> 'Cloner le Bien',
@@ -16,7 +17,7 @@ return [
     'requestable'               => 'Réquisitionnable',
     'requested'				    => 'Demandé',
     'not_requestable'           => 'Non-réquisitionnable',
-    'requestable_status_warning' => 'Do not change  requestable status',
+    'requestable_status_warning' => 'Ne pas modifier le statut de demande',
     'restore'  					=> 'Restaurer l\'actif',
     'pending'  					=> 'En attente',
     'undeployable'  			=> 'Non déployable',
@@ -31,13 +32,13 @@ return [
 
     <p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
     ',
-    'csv_import_match_f-l' => 'Try to match users by firstname.lastname (jane.smith) format',
-    'csv_import_match_initial_last' => 'Try to match users by first initial last name (jsmith) format',
-    'csv_import_match_first' => 'Try to match users by first name (jane) format',
+    'csv_import_match_f-l' => 'Essayez de faire correspondre les utilisateurs par prénom.nom (julie.tremblay)',
+    'csv_import_match_initial_last' => 'Essayez de faire correspondre les utilisateurs par initial nom de famille (jtremblay)',
+    'csv_import_match_first' => 'Essayez de faire correspondre les utilisateurs par leur prénom (julie)',
     'csv_import_match_email' => 'Essayer de faire correspondre l\'adresse de courrier électronique des utilisateurs au nom d\'utilisateur',
     'csv_import_match_username' => 'Essayer de faire correspondre les utilisateurs par nom d\'utilisateur',
     'error_messages' => 'Messages d\'erreur:',
     'success_messages' => 'Messages de succès:',
-    'alert_details' => 'Please see below for details.',
+    'alert_details' => 'Voir ci-dessous pour plus de détails.',
     'custom_export' => 'Exportation personnalisée'
 ];

@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'E-mel',
     'employee_num'      	=> 'No. Pekerja',
     'first_name' 			=> 'Nama pertama',
-    'groupnotes'			=> 'Pilih kumpulan untuk pengguna ini, kuasa kumpulan akan diberikan kepada pengguna mengikut pemilihan kumpulan.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Warisi',
     'job' 					=> 'Jawatan',

@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'تجهیزات جانبی',
     'activated'			    => 'فعال شد',
     'accessory'				=> 'لوازم جانبی',
@@ -26,6 +26,7 @@
     'audit'				    => 'حسابرسی',
     'audit_report'			=> 'حسابرسی حسابرسی',
     'assets'				=> 'دارایی ها',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => 'حذف آواتار',
     'avatar_upload'         => 'بارگذاری آواتار',
     'back'      			=> 'بازگشت',
@@ -116,6 +117,7 @@
     'files'                 => 'فایل ها',
     'file_name'				=> 'فایل',
     'file_type'             => 'نوع فايل',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'بارگذاری پرونده',
     'file_upload'           => 'File Upload',
     'generate'				=> 'تولید',
@@ -232,6 +234,7 @@
     'show_current'  		=> 'Show Current',
     'sign_in'				=> 'ورود به سیستم',
     'signature'             => 'امضا',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Skin',
     'slack_msg_note'        => 'A slack message will be sent',
     'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',
@@ -240,6 +243,7 @@
     'state'  				=> 'وضعیت',
     'status_labels'			=> 'برچسب های وضعیت',
     'status'    			=> 'وضعیت',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'تامین کننده',
     'suppliers'  			=> 'تامین کننده',
     'sure_to_delete'    => 'مطمئنید که میخواهید حذف شود',
@@ -353,4 +357,7 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

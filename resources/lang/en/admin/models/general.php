@@ -9,7 +9,7 @@ return array(
     'bulk_delete_warn'          => 'You are about to delete :model_count asset models.',
     'restore'                   => 'Restore Model',
     'requestable'               => 'Users may request this model',
-    'show_mac_address'			      => 'Show MAC address field in assets in this model',
+	'show_mac_address'			      => 'Show MAC address field in assets in this model',
     'view_deleted'              => 'View Deleted',
     'view_models'               => 'View Models',
     'fieldset'                  => 'Fieldset',

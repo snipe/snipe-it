@@ -64,7 +64,7 @@ return [
         'string'  => ':attribute mora biti najmanje :min znakova.',
         'array'   => ':attribute mora imati barem :min stavke.',
     ],
-    'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'starts_with'          => ':attribute mora da počne sa jednom od sledećih vrednosti: :values.',
     'not_in'               => 'Odabrani :attribute nije ispravan.',
     'numeric'              => ':attribute mora biti broj.',
     'present'              => ':attribute polje mora biti prisutno.',
@@ -91,6 +91,10 @@ return [
     'url'                  => ':attribute format je neispravan.',
     'unique_undeleted'     => ':attribute mora biti jedinstven.',
     'non_circular'         => 'The :attribute must not create a circular reference.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

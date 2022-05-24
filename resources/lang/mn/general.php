@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Дагалдах хэрэгсэл',
     'activated'			    => 'Идэвхжүүлсэн',
     'accessory'				=> 'Дагалдах хэрэгсэл',
@@ -26,6 +26,7 @@
     'audit'				    => 'Аудит',
     'audit_report'			=> 'Аудитын бүртгэл',
     'assets'				=> 'Актив',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => 'Хөрөг устгах',
     'avatar_upload'         => 'Хөрөгийг байршуулах',
     'back'      			=> 'Буцах',
@@ -114,6 +115,7 @@
     'files'                 => 'Файлууд',
     'file_name'				=> 'Файл',
     'file_type'             => 'File Type',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'Файл оруулах',
     'file_upload'           => 'File Upload',
     'generate'				=> 'Үүсгэх',
@@ -229,6 +231,7 @@
     'show_current'  		=> 'Байгааг харах',
     'sign_in'				=> 'Нэвтрэх',
     'signature'             => 'Гарын үсэг',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Гадарга',
     'slack_msg_note'        => 'A slack message will be sent',
     'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',
@@ -237,6 +240,7 @@
     'state'  				=> 'Улс',
     'status_labels'			=> 'Статусын шошго',
     'status'    			=> 'Статус',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Нийлүүлэгч',
     'suppliers'  			=> 'Нийлүүлэгч',
     'sure_to_delete'    => 'Та устгахыг хүсч байгаадаа итгэлтэй байна уу',
@@ -350,4 +354,7 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

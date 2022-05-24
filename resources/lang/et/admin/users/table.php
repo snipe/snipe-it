@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'E-mail',
     'employee_num'      	=> 'Töötaja Nr.',
     'first_name' 			=> 'Eesnimi',
-    'groupnotes'			=> 'Vali kasutajale grupp. Pea meeles, et kasutajale laienevad kõik grupile omistatud õigused.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Päri',
     'job' 					=> 'Ametikoht',

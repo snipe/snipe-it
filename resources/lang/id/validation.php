@@ -91,6 +91,10 @@ return [
     'url'                  => 'Format :attribute tidak benar.',
     'unique_undeleted'     => ':attribute harus unik.',
     'non_circular'         => ':attribute tidak boleh membuat referensi melingkar.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

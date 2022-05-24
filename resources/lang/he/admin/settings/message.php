@@ -12,7 +12,7 @@ return [
         'generated'             => 'קובץ גיבוי חדש נוצר בהצלחה.',
         'file_not_found'        => 'קובץ גיבוי זה לא נמצא בשרת.',
         'restore_warning'       => 'Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This will also log out all of your existing users (including you).',
-        'restore_confirm'       => 'Are you sure you wish to restore your database from :filename?'
+        'restore_confirm'       => 'האם ברצונך לשחזר את המסד נתונים מ: קובץ?'
     ],
     'purge' => [
         'error'     => 'אירעה שגיאה בעת הטיהור.',
@@ -20,24 +20,24 @@ return [
         'success'               => 'רשומות נמחקו בהצלחה.',
     ],
     'mail' => [
-        'sending' => 'Sending Test Email...',
-        'success' => 'Mail sent!',
+        'sending' => 'שולח מייל לבדיקה...',
+        'success' => 'המייל נשלח!',
         'error' => 'מייל לא נשלח.',
         'additional' => 'קיימות שגיאות נוספות. בדוק במייל שלך ובלוגים.'
     ],
     'ldap' => [
-        'testing' => 'Testing LDAP Connection, Binding & Query ...',
-        '500' => '500 Server Error. Please check your server logs for more information.',
-        'error' => 'Something went wrong :(',
-        'sync_success' => 'A sample of 10 users returned from the LDAP server based on your settings:',
-        'testing_authentication' => 'Testing LDAP Authentication...',
-        'authentication_success' => 'User authenticated against LDAP successfully!'
+        'testing' => 'בודק חיבור LDAP, שאילתות ומבנה נתונים...',
+        '500' => 'שגיאה 500, בבקשה בודק את הלוגים בשרת לעוד נתונים.',
+        'error' => 'משהו השתבש אופסי פופסי :(',
+        'sync_success' => 'בדיקה מול שרת LDAP ל 10 משתמשים בוצעה בהתאם להגדרות שלך:',
+        'testing_authentication' => 'בודק אימות מול שרת LDAP...',
+        'authentication_success' => 'התחברות לשרת LDAפ עברה בהצלחה!'
     ],
     'slack' => [
-        'sending' => 'Sending Slack test message...',
-        'success_pt1' => 'Success! Check the ',
+        'sending' => 'שולח הודעת Slack לבדיקה...',
+        'success_pt1' => 'הבדיקה עברה בהצלחה! בדוק את ',
         'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
-        '500' => '500 Server Error.',
-        'error' => 'Something went wrong.',
+        '500' => '500 שגיאת שרת.',
+        'error' => 'משהו השתבש אופסי פופסי.',
     ]
 ];

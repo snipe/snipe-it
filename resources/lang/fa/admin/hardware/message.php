@@ -16,6 +16,7 @@ return [
         'error'   			=> 'دارایی به روز نیست، لطفا دوباره امتحان کنید',
         'success' 			=> 'دارایی ها با موفقیت به روز رسانی.',
         'nothing_updated'	=>  'هیچ زمینه، انتخاب شدند تا هیچ چیز به روز شد.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

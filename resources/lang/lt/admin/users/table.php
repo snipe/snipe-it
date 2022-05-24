@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'El. paštas',
     'employee_num'      	=> 'Darbuotojo nr.',
     'first_name' 			=> 'Vardas',
-    'groupnotes'			=> 'Pasirinkite grupę, kuriai priskirti naudotoją. Prisiminkite, kad naudotojas gauna visas teises, kurioms turi grupė.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Paveldėjo/gavo iš',
     'job' 					=> 'Pozicija',

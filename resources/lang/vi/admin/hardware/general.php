@@ -17,7 +17,7 @@ return [
     'requestable'               => 'Cho phép đề xuất',
     'requested'				    => 'Yêu cầu',
     'not_requestable'           => 'Not Requestable',
-    'requestable_status_warning' => 'Do not change  requestable status',
+    'requestable_status_warning' => 'Không đổi trạng thái yêu cầu được',
     'restore'  					=> 'Phục hồi tài sản',
     'pending'  					=> 'Đang chờ',
     'undeployable'  			=> 'Không cho phép cấp phát',
@@ -38,7 +38,7 @@ return [
     'csv_import_match_email' => 'Try to match users by email as username',
     'csv_import_match_username' => 'Try to match users by username',
     'error_messages' => 'Error messages:',
-    'success_messages' => 'Success messages:',
-    'alert_details' => 'Please see below for details.',
+    'success_messages' => 'Thông báo thành công:',
+    'alert_details' => 'Xem bên dưới để biết thêm chi tiết.',
     'custom_export' => 'Custom Export'
 ];

@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> '配件',
     'activated'			    => '已啟用',
     'accessory'				=> '配件',
@@ -26,6 +26,7 @@
     'audit'				    => '稽核',
     'audit_report'			=> '稽核記錄',
     'assets'				=> '資產',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => '刪除頭像',
     'avatar_upload'         => '上傳頭像',
     'back'      			=> '返回',
@@ -114,6 +115,7 @@
     'files'                 => '檔案',
     'file_name'				=> '檔案',
     'file_type'             => '檔案類型',
+    'filesize'              => 'File Size',
     'file_uploads'			=> '上傳檔案',
     'file_upload'           => 'File Upload',
     'generate'				=> '產生',
@@ -229,6 +231,7 @@
     'show_current'  		=> '顯示當前',
     'sign_in'				=> '登入',
     'signature'             => '簽名',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> '主題',
     'slack_msg_note'        => 'A slack message will be sent',
     'slack_test_msg'        => '看起來 Slack 已成功整合到 Snipe-IT 了!',
@@ -237,6 +240,7 @@
     'state'  				=> '省份',
     'status_labels'			=> '狀態標籤',
     'status'    			=> '狀態',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => '供應商',
     'suppliers'  			=> '供應商',
     'sure_to_delete'    => '您確定要刪除嗎？',
@@ -350,4 +354,7 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

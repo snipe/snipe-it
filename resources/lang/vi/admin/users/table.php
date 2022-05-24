@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'Email',
     'employee_num'      	=> 'Mã nhân viên',
     'first_name' 			=> 'Họ và tên đệm',
-    'groupnotes'			=> 'Lựa chọn một nhóm để gán đến người dùng, hãy nhớ rằng người dùng đó có quyền truy cập vào nhóm được gán.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Kế thừa',
     'job' 					=> 'Tiêu đề công việc',

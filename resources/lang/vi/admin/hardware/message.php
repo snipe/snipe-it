@@ -17,6 +17,7 @@ return [
         'error'   			=> 'Tài sản chưa được cập nhật. Bạn hãy thử lại',
         'success' 			=> 'Tài sản được cập nhật thành công.',
         'nothing_updated'	=>  'Bạn đã không chọn trường nào vì thế đã không có gì được cập nhật.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

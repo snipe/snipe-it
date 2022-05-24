@@ -17,6 +17,7 @@ return [
         'error'   			=> 'Nie zaktualizowano nabytku/zasobu, proszę spróbować ponownie',
         'success' 			=> 'Aktualizacja poprawna.',
         'nothing_updated'	=>  'Żadne pole nie zostało wybrane, więc nic nie zostało zmienione.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

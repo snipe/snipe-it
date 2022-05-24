@@ -16,6 +16,7 @@ return [
         'error'   			=> 'Activul nu a fost actualizat, va rugam incercati iar',
         'success' 			=> 'Activul a fost actualizat.',
         'nothing_updated'	=>  'Nu au fost selectate câmpuri, deci nimic nu a fost actualizat.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

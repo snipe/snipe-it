@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Αξεσουάρ',
     'activated'			    => 'Ενεργοποιήθηκε',
     'accessory'				=> 'Αξεσουάρ',
@@ -26,6 +26,7 @@
     'audit'				    => 'Ελεγχος',
     'audit_report'			=> 'Αρχείο ελέγχου',
     'assets'				=> 'Πάγια',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => 'Διαγραφή Avatar',
     'avatar_upload'         => 'Ανεβάστε την εικόνα προφίλ σας',
     'back'      			=> 'Προηγούμενο',
@@ -114,6 +115,7 @@
     'files'                 => 'Αρχεία',
     'file_name'				=> 'Αρχείο',
     'file_type'             => 'File Type',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'Ανέβασμα αρχείου',
     'file_upload'           => 'File Upload',
     'generate'				=> 'Δημιουργία',
@@ -229,6 +231,7 @@
     'show_current'  		=> 'Show Current',
     'sign_in'				=> 'Είσοδος',
     'signature'             => 'Υπογραφή',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Skin',
     'slack_msg_note'        => 'A slack message will be sent',
     'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',
@@ -237,6 +240,7 @@
     'state'  				=> 'Κατάσταση',
     'status_labels'			=> 'Ετικέτα Κατάστασης',
     'status'    			=> 'Κατάσταση',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Προμηθευτής',
     'suppliers'  			=> 'Προμηθευτές',
     'sure_to_delete'    => 'Είστε βέβαιοι ότι θέλετε να διαγράψετε',
@@ -350,4 +354,7 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

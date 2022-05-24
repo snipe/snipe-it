@@ -17,6 +17,7 @@ return [
         'error'   			=> 'Demirbaş güncellenemedi, lütfen tekrar deneyin',
         'success' 			=> 'Demirbaş güncellendi.',
         'nothing_updated'	=>  'Hiçbir alan seçilmedi, dolayısıyla hiç bir alan güncellenmedi.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

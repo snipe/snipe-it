@@ -31,7 +31,7 @@ return [
     'asset_serial'              => 'Seri No',
     'asset_location'            => 'Konum',
     'asset_checked_out'         => 'Çıkış Yapıldı',
-    'asset_expected_checkin'    => 'Expected Checkin',
+    'asset_expected_checkin'    => 'Beklenen geri alma tarihi',
     'date'                      => 'Tarih:',
     'signed_by_asset_auditor'   => 'Signed By (Asset Auditor):',
     'signed_by_finance_auditor' => 'Signed By (Finance Auditor):',

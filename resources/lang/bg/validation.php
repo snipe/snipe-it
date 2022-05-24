@@ -91,6 +91,10 @@ return [
     'url'                  => 'Форматът на :attribute е невалиден.',
     'unique_undeleted'     => ':attribute трябва да бъде уникален.',
     'non_circular'         => ':attribute не трябва да създава препрадка към себе си.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

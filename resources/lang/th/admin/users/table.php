@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'อีเมล',
     'employee_num'      	=> 'เลขพนักงาน',
     'first_name' 			=> 'ชื่อ',
-    'groupnotes'			=> 'เลือกกลุ่มเพื่อกำหนดให้ผู้ใช้งาน ซึ่งผู้ใช้งานจะได้รับสิทธิ์การใช้งานตามสิทธิ์การใช้งานของกลุ่มนั้นๆ ตามที่ได้กำหนด',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'รหัส',
     'inherit'  				=> 'สืบทอด',
     'job' 					=> 'ลักษณะงาน',

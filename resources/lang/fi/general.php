@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Oheistarvikkeet',
     'activated'			    => 'Aktivoitu',
     'accessory'				=> 'Oheistarvike',
@@ -26,6 +26,7 @@
     'audit'				    => 'Tarkasta',
     'audit_report'			=> 'Tarkastusloki',
     'assets'				=> 'Laitteet',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => 'Poista käyttäjäkuva',
     'avatar_upload'         => 'Lähetä käyttäjäkuva',
     'back'      			=> 'Edellinen',
@@ -114,6 +115,7 @@
     'files'                 => 'Tiedostot',
     'file_name'				=> 'Tiedosto',
     'file_type'             => 'Tiedostotyyppi',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'Tiedostot',
     'file_upload'           => 'File Upload',
     'generate'				=> 'Luo',
@@ -229,6 +231,7 @@
     'show_current'  		=> 'Näytä nykyiset',
     'sign_in'				=> 'Kirjaudu sisään',
     'signature'             => 'Allekirjoitus',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Ulkoasu',
     'slack_msg_note'        => 'A slack message will be sent',
     'slack_test_msg'        => 'Jestas! Näyttää siltä, että Slack integrointi Snipe-IT. n kanssa toimii!',
@@ -237,6 +240,7 @@
     'state'  				=> 'Maakunta',
     'status_labels'			=> 'Tilamerkinnät',
     'status'    			=> 'Tila',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Toimittaja',
     'suppliers'  			=> 'Toimittajat',
     'sure_to_delete'    => 'Haluatko varmasti poistaa',
@@ -350,4 +354,7 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

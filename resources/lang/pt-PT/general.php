@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Acessórios',
     'activated'			    => 'Activado',
     'accessory'				=> 'Acessório',
@@ -26,6 +26,7 @@
     'audit'				    => 'Auditoria',
     'audit_report'			=> 'Registro de auditoria',
     'assets'				=> 'Artigos',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => 'Remover Avatar',
     'avatar_upload'         => 'Carregar Avatar',
     'back'      			=> 'Voltar',
@@ -114,6 +115,7 @@
     'files'                 => 'Ficheiros',
     'file_name'				=> 'Ficheiro',
     'file_type'             => 'Tipo de ficheiro',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'Upload de Ficheiros',
     'file_upload'           => 'Envio de Ficheiro',
     'generate'				=> 'Gerar',
@@ -229,6 +231,7 @@
     'show_current'  		=> 'Mostrar atual',
     'sign_in'				=> 'Iniciar sessão',
     'signature'             => 'Assinatura',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Skin',
     'slack_msg_note'        => 'Uma mensagem de slack será enviada',
     'slack_test_msg'        => 'Parece que a integração Slack com o Snipe-IT está a funcionar!',
@@ -237,6 +240,7 @@
     'state'  				=> 'Distrito',
     'status_labels'			=> 'Estados',
     'status'    			=> 'Estado',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Fornecedor',
     'suppliers'  			=> 'Fornecedores',
     'sure_to_delete'    => 'Tem certeza de que deseja excluir',
@@ -350,4 +354,7 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

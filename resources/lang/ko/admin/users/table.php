@@ -10,7 +10,7 @@ return array(
     'email'      			=> '이메일 주소',
     'employee_num'      	=> '사원 번호.',
     'first_name' 			=> '이름',
-    'groupnotes'			=> '사용자의 그룹을 선택하세요. 사용자는 그룹에 할당된 허용 정책을 따릅니다.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> '아이디',
     'inherit'  				=> '상속',
     'job' 					=> '직위',

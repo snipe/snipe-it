@@ -2,7 +2,7 @@
 
 return [
     'custom_fields'		        => 'Vlastní pole',
-    'manage'                    => 'Manage',
+    'manage'                    => 'Spravovat',
     'field'		                => 'Pole',
     'about_fieldsets_title'		=> 'O sadách polí',
     'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used for specific asset model types.',
@@ -43,5 +43,5 @@ return [
     'db_field' => 'DB Field',
     'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.',
     'is_unique' => 'This value must be unique across all assets',
-    'unique' => 'Unique',
+    'unique' => 'Unikátní',
 ];
