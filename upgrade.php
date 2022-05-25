@@ -43,6 +43,8 @@ echo "--------------------------------------------------------\n\n";
 // Check the .env looks ok
 $env = file('.env');
 $env_error_count = 0;
+$env_good = '';
+$env_bad = '';
 
 // Loop through each line of the .env
 foreach ($env as $line_num => $line) {
@@ -51,14 +53,16 @@ foreach ($env as $line_num => $line) {
 
         list ($env_key, $env_value) = $env_line = explode('=', $line);
 
+        // The array starts at 0
+        $show_line_num = $line_num+1;
+
         $env_value = trim($env_value);
 
         if ($env_key == 'APP_KEY') {
             if (($env_value=='')  || (strlen($env_value) < 20)) {
-                echo "✘ APP_KEY ERROR in your .env: Your APP_KEY should not be blank. Run php artisan key:generate to generate one.";
-                $env_error_count++;
+                $env_bad .= "✘ APP_KEY ERROR in your .env on line #'.$show_line_num.': Your APP_KEY should not be blank. Run `php artisan key:generate` to generate one.\n";
             } else {
-                echo "√ Your APP_KEY is not blank. \n";
+                $env_good .= "√ Your APP_KEY is not blank. \n";
             }
         }
 
@@ -67,26 +71,23 @@ foreach ($env as $line_num => $line) {
             $app_url_length = strlen($env_value);
 
             if (($env_value!="null") && ($env_value!="")) {
-                echo '√ Your APP_URL is not null or blank. It is set to '.$env_value."\n";
+                $env_good .= '√ Your APP_URL is not null or blank. It is set to '.$env_value."\n";
 
                 if (!str_begins(trim($env_value), 'http://') && (!str_begins($env_value, 'https://'))) {
-                    echo '✘ APP_URL ERROR in your .env on line #'.$line_num.' of your .env: Your APP_URL should start with https:// or http://!! It is currently set to: '.$env_value;
-                    $env_error_count++;
+                    $env_bad .= '✘ APP_URL ERROR in your .env on line #'.$show_line_num.': Your APP_URL should start with https:// or http://!! It is currently set to: '.$env_value;
                 } else {
-                    echo '√ Your APP_URL is set to '.$env_value.' and starts with the protocol (https:// or http://)'."\n";
+                    $env_good .= '√ Your APP_URL is set to '.$env_value.' and starts with the protocol (https:// or http://)'."\n";
                 }
 
                 if (str_ends(trim($env_value), "/")) {
-                    echo '✘ APP_URL ERROR in your .env on line #'.$line_num.' of your .env: Your APP_URL should NOT end with a trailing slash. It is currently set to: '.$env_value;
-                    $env_error_count++;
+                    $env_bad .= '✘ APP_URL ERROR in your .env on line #'.$show_line_num.': Your APP_URL should NOT end with a trailing slash. It is currently set to: '.$env_value;
                 } else {
-                    echo '√ Your APP_URL ('.$env_value.') does not have a trailing slash.'."\n";
+                    $env_good .= '√ Your APP_URL ('.$env_value.') does not have a trailing slash.'."\n";
                 }
 
 
             } else {
-                echo "✘ APP_URL ERROR in your .env on line #".$line_num.": Your APP_URL CANNOT be set to null or left blank.\n";
-                $env_error_count++;
+                $env_bad .= "✘ APP_URL ERROR in your .env on line #".$show_line_num.": Your APP_URL CANNOT be set to null or left blank.\n";
             }
 
         }
@@ -96,15 +97,21 @@ foreach ($env as $line_num => $line) {
 
 }
 
-if ($env_error_count > 0) {
-    echo "\n\n--------------------- !! ERROR !! ----------------------\n";
+echo $env_good;
+
+if ($env_bad !='') {
+
+    echo "\n--------------------- !! ERROR !! ----------------------\n";
     echo "Your .env file is misconfigured. Upgrade cannot continue.\n";
-    echo "------------------------- :( ---------------------------\n";
+    echo "--------------------------------------------------------\n\n";
+    echo $env_bad;
+    echo "\n\n--------------------------------------------------------\n";
     echo "ABORTING THE INSTALLER  \n";
     echo "Please correct the issues above in ".getcwd()."/.env and try again.\n";
-    echo "------------------------- :( ---------------------------\n";
+    echo "--------------------------------------------------------\n";
     exit;
 }
+
 
 echo "--------------------------------------------------------\n";
 echo "STEP 2: Checking PHP requirements: \n";
@@ -198,10 +205,10 @@ if ($ext_missing!='') {
 
     echo "--------------------- !! ERROR !! ----------------------\n";
     echo $ext_missing;
-    echo "------------------------- :( ---------------------------\n";
+    echo "--------------------------------------------------------\n";
     echo "ABORTING THE INSTALLER  \n";
     echo "Please install the extensions above and re-run this script.\n";
-    echo "------------------------- :( ---------------------------\n";
+    echo "--------------------------------------------------------\n";
     exit;
 } else {
     echo $ext_installed."\n";
