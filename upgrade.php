@@ -1,7 +1,7 @@
 <?php
 (PHP_SAPI !== 'cli' || isset($_SERVER['HTTP_USER_AGENT'])) && die('Access denied.');
 
-$required_version = '7.4.0';
+$required_php_min = '7.4.0';
 
 if ((strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') || (!function_exists('posix_getpwuid'))) {
 	echo "Skipping user check as it is not supported on Windows or Posix is not installed on this server. \n";
@@ -15,6 +15,7 @@ if ((strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') || (!function_exists('posix_get
 }
 
 
+
 // Check if a branch or tag was passed in the command line,
 // otherwise just use master
 (array_key_exists('1', $argv)) ? $branch = $argv[1] : $branch = 'master';
@@ -23,25 +24,91 @@ echo "--------------------------------------------------------\n";
 echo "WELCOME TO THE SNIPE-IT UPGRADER! \n";
 echo "--------------------------------------------------------\n\n";
 echo "This script will attempt to: \n\n";
+echo "- validate some very basic .env file settings \n";
 echo "- check your PHP version and extension requirements \n";
 echo "- do a git pull to bring you to the latest version \n";
 echo "- run composer install to get your vendors up to date \n";
 echo "- run migrations to get your schema up to date \n";
 echo "- clear out old cache settings\n\n";
 
+
+
 echo "--------------------------------------------------------\n";
-echo "STEP 1: Checking PHP requirements: \n";
+echo "STEP 1: Checking .env file: \n";
+echo "- Your .env is located at ".getcwd()."/.env \n";
 echo "--------------------------------------------------------\n\n";
 
-if (version_compare(PHP_VERSION, $required_version, '<')) {
+
+// Check the .env looks ok
+$env = file('.env');
+$env_error_count = 0;
+
+// Loop through each line of the .env
+foreach ($env as $line_num => $line) {
+
+    if ((strlen($line) > 1) && (strpos($line, "#") !== 0)) {
+
+        list ($env_key, $env_value) = $env_line = explode('=', $line);
+
+        $env_value = trim($env_value);
+
+        if ($env_key == 'APP_URL') {
+
+            $app_url_length = strlen($env_value);
+
+            if (($env_value!="null") && ($env_value!="")) {
+                echo '√ Your APP_URL is not null or blank. It is set to '.$env_value."\n";
+
+                if (!str_begins(trim($env_value), 'http://') && (!str_begins($env_value, 'https://'))) {
+                    echo '✘ APP_URL ERROR in Line #'.$line_num.' of your .env: Your APP_URL should start with https:// or http://!! It is currently set to: '.$env_value;
+                    $env_error_count++;
+                } else {
+                    echo '√ Your APP_URL is set to '.$env_value.' and starts with the protocol (https:// or http://)'."\n";
+                }
+
+                if (str_ends(trim($env_value), "/")) {
+                    echo '✘ APP_URL ERROR in Line #'.$line_num.' of your .env: Your APP_URL should NOT end with a trailing slash. It is currently set to: '.$env_value;
+                    $env_error_count++;
+                } else {
+                    echo '√ Your APP_URL ('.$env_value.') does not have a trailing slash.'."\n";
+                }
+
+
+            } else {
+                echo "✘ APP_URL ERROR in Line #".$line_num.": Your APP_URL CANNOT be set to null or left blank.\n";
+                $env_error_count++;
+            }
+
+        }
+
+
+    }
+
+}
+
+if ($env_error_count > 0) {
+    echo "\n\n--------------------- !! ERROR !! ----------------------\n";
+    echo "Your .env file is misconfigured. Upgrade cannot continue.\n";
+    echo "------------------------- :( ---------------------------\n";
+    echo "ABORTING THE INSTALLER  \n";
+    echo "Please correct the issues above in ".getcwd()."/.env and try again.\n";
+    echo "------------------------- :( ---------------------------\n";
+    exit;
+}
+
+echo "--------------------------------------------------------\n";
+echo "STEP 2: Checking PHP requirements: \n";
+echo "--------------------------------------------------------\n\n";
+
+if (version_compare(PHP_VERSION, $required_php_min, '<')) {
     echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ERROR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
     echo "This version of PHP (".PHP_VERSION.") is not compatible with Snipe-IT.\n";
-    echo "Snipe-IT requires PHP version ".$required_version." or greater. Please upgrade \n";
+    echo "Snipe-IT requires PHP version ".$required_php_min." or greater. Please upgrade \n";
     echo "your version of PHP (web/php-fcgi and cli) and try running this script again.\n\n\n";
     exit;
 
 } else {
-    echo "Current PHP version: (" . PHP_VERSION . ") is at least ".$required_version." - continuing... \n";
+    echo "Current PHP version: (" . PHP_VERSION . ") is at least ".$required_php_min." - continuing... \n";
     echo sprintf("FYI: The php.ini used by this PHP is: %s\n\n", get_cfg_var('cfg_file_path'));
 }
 
@@ -133,20 +200,20 @@ if ($ext_missing!='') {
 
 
 echo "--------------------------------------------------------\n";
-echo "STEP 2: Backing up database: \n";
+echo "STEP 3: Backing up database: \n";
 echo "--------------------------------------------------------\n\n";
 $backup = shell_exec('php artisan snipeit:backup');
 echo '-- '.$backup."\n\n";
 
 echo "--------------------------------------------------------\n";
-echo "STEP 3: Putting application into maintenance mode: \n";
+echo "STEP 4: Putting application into maintenance mode: \n";
 echo "--------------------------------------------------------\n\n";
 $down = shell_exec('php artisan down');
 echo '-- '.$down."\n";
 
 
 echo "--------------------------------------------------------\n";
-echo "STEP 4: Pulling latest from Git (".$branch." branch): \n";
+echo "STEP 5: Pulling latest from Git (".$branch." branch): \n";
 echo "--------------------------------------------------------\n\n";
 $git_version = shell_exec('git --version');
 
@@ -172,7 +239,7 @@ if ((strpos('git version', $git_version)) === false) {
 
 
 echo "--------------------------------------------------------\n";
-echo "Step 5: Cleaning up old cached files:\n";
+echo "STEP 6: Cleaning up old cached files:\n";
 echo "--------------------------------------------------------\n\n";
 
 // Build an array of the files we generally want to delete because they
@@ -205,7 +272,7 @@ echo '-- '.$view_clear;
 echo "\n";
 
 echo "--------------------------------------------------------\n";
-echo "Step 6: Updating composer dependencies:\n";
+echo "STEP 7: Updating composer dependencies:\n";
 echo "(This may take a moment.)\n";
 echo "--------------------------------------------------------\n\n";
 
@@ -231,7 +298,7 @@ echo $composer;
 
 
 echo "--------------------------------------------------------\n";
-echo "Step 7: Migrating database:\n";
+echo "STEP 8: Migrating database:\n";
 echo "--------------------------------------------------------\n\n";
 
 $migrations = shell_exec('php artisan migrate --force');
@@ -239,7 +306,7 @@ echo $migrations."\n";
 
 
 echo "--------------------------------------------------------\n";
-echo "Step 8: Checking for OAuth keys:\n";
+echo "STEP 9: Checking for OAuth keys:\n";
 echo "--------------------------------------------------------\n\n";
 
 
@@ -253,7 +320,7 @@ if ((!file_exists('storage/oauth-public.key')) || (!file_exists('storage/oauth-p
 
 
 echo "--------------------------------------------------------\n";
-echo "Step 9: Taking application out of maintenance mode:\n";
+echo "STEP 10: Taking application out of maintenance mode:\n";
 echo "--------------------------------------------------------\n\n";
 
 $up = shell_exec('php artisan up');
@@ -265,5 +332,15 @@ echo "---------------------- FINISHED! -----------------------\n";
 echo "All done! Clear your browser cookies and re-login to use \n";
 echo "your upgraded Snipe-IT!\n";
 echo "--------------------------------------------------------\n\n";
+
+
+function str_begins($haystack, $needle) {
+    return 0 === substr_compare($haystack, $needle, 0, strlen($needle));
+}
+
+function str_ends($haystack,  $needle) {
+    return 0 === substr_compare($haystack, $needle, -strlen($needle));
+}
+
 
 
