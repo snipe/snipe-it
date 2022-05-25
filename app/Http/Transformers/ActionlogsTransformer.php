@@ -55,17 +55,17 @@ class ActionlogsTransformer
             }
         }
 
-        $url = '';
+        $file_url = '';
         if($actionlog->filename!='') {
             if ($actionlog->present()->actionType() == 'accepted') {
-                $url = route('log.storedeula.download', ['filename' => $actionlog->filename]);
+                $file_url = route('log.storedeula.download', ['filename' => $actionlog->filename]);
             } else {
                 if ($actionlog->itemType() == 'asset') {
-                    $url = route('show/assetfile', ['assetId' => $actionlog->id, 'fileId' => $actionlog->id]);
+                    $file_url = route('show/assetfile', ['assetId' => $actionlog->id, 'fileId' => $actionlog->id]);
                 } elseif ($actionlog->itemType() == 'license') {
-                    $url = route('show.licensefile', ['licenseId' => $actionlog->item->id, 'fileId' => $actionlog->id]);
+                    $file_url = route('show.licensefile', ['licenseId' => $actionlog->item->id, 'fileId' => $actionlog->id]);
                 } elseif ($actionlog->itemType() == 'user') {
-                    $url = route('show/userfile', ['userId' => $actionlog->item->id, 'fileId' => $actionlog->id]);
+                    $file_url = route('show/userfile', ['userId' => $actionlog->item->id, 'fileId' => $actionlog->id]);
                 }
             }
         }
@@ -76,7 +76,7 @@ class ActionlogsTransformer
             'file' => ($actionlog->filename!='')
                 ?
                 [
-                    'url' => $url,
+                    'url' => $file_url,
                     'filename' => $actionlog->filename,
                     'inlineable' => (bool) Helper::show_file_inline($actionlog->filename),
                 ] : null,
