@@ -26,6 +26,7 @@ echo "--------------------------------------------------------\n\n";
 echo "This script will attempt to: \n\n";
 echo "- validate some very basic .env file settings \n";
 echo "- check your PHP version and extension requirements \n";
+echo "- check directory permissions \n";
 echo "- do a git pull to bring you to the latest version \n";
 echo "- run composer install to get your vendors up to date \n";
 echo "- run migrations to get your schema up to date \n";
@@ -199,21 +200,72 @@ if ($ext_missing!='') {
 }
 
 
+
 echo "--------------------------------------------------------\n";
-echo "STEP 3: Backing up database: \n";
+echo "STEP 3: Checking directory permissions: \n";
+echo "--------------------------------------------------------\n\n";
+
+
+$writable_dirs_array =
+    [
+        'bootstrap/cache',
+        'storage',
+        'storage/logs',
+        'storage/logs/laravel.log',
+        'storage/framework',
+        'storage/framework/cache',
+        'storage/framework/sessions',
+        'storage/framework/views',
+        'storage/app',
+        'storage/app/backups',
+        'storage/app/backups-temp',
+        'storage/private_uploads',
+        'public/uploads',
+    ];
+
+$dirs_writable = '';
+$dirs_not_writable = '';
+
+// Loop through the directories that need to be writable
+foreach ($writable_dirs_array as $writable_dir) {
+    if (is_writable($writable_dir)) {
+        $dirs_writable .= '√ '.getcwd().'/'.$writable_dir." is writable \n";
+    } else {
+        $dirs_not_writable .= '✘ PERMISSIONS ERROR: '.getcwd().'/'.$writable_dir." is NOT writable\n";
+    }
+}
+
+echo $dirs_writable."\n";
+
+// Print out a useful error message
+if ($dirs_not_writable!='') {
+    echo "--------------------------------------------------------\n";
+    echo "The following directories/files do not seem writable: \n";
+    echo "--------------------------------------------------------\n";
+
+    echo $dirs_not_writable;
+
+    echo "--------------------- !! ERROR !! ----------------------\n";
+    echo "Please check the permissions on the directories above and re-run this script.\n";
+    echo "------------------------- :( ---------------------------\n";
+}
+
+
+echo "--------------------------------------------------------\n";
+echo "STEP 4: Backing up database: \n";
 echo "--------------------------------------------------------\n\n";
 $backup = shell_exec('php artisan snipeit:backup');
 echo '-- '.$backup."\n\n";
 
 echo "--------------------------------------------------------\n";
-echo "STEP 4: Putting application into maintenance mode: \n";
+echo "STEP 5: Putting application into maintenance mode: \n";
 echo "--------------------------------------------------------\n\n";
 $down = shell_exec('php artisan down');
 echo '-- '.$down."\n";
 
 
 echo "--------------------------------------------------------\n";
-echo "STEP 5: Pulling latest from Git (".$branch." branch): \n";
+echo "STEP 6: Pulling latest from Git (".$branch." branch): \n";
 echo "--------------------------------------------------------\n\n";
 $git_version = shell_exec('git --version');
 
@@ -239,7 +291,7 @@ if ((strpos('git version', $git_version)) === false) {
 
 
 echo "--------------------------------------------------------\n";
-echo "STEP 6: Cleaning up old cached files:\n";
+echo "STEP 7: Cleaning up old cached files:\n";
 echo "--------------------------------------------------------\n\n";
 
 // Build an array of the files we generally want to delete because they
@@ -272,7 +324,7 @@ echo '-- '.$view_clear;
 echo "\n";
 
 echo "--------------------------------------------------------\n";
-echo "STEP 7: Updating composer dependencies:\n";
+echo "STEP 8: Updating composer dependencies:\n";
 echo "(This may take a moment.)\n";
 echo "--------------------------------------------------------\n\n";
 
@@ -298,7 +350,7 @@ echo $composer;
 
 
 echo "--------------------------------------------------------\n";
-echo "STEP 8: Migrating database:\n";
+echo "STEP 9: Migrating database:\n";
 echo "--------------------------------------------------------\n\n";
 
 $migrations = shell_exec('php artisan migrate --force');
@@ -306,7 +358,7 @@ echo $migrations."\n";
 
 
 echo "--------------------------------------------------------\n";
-echo "STEP 9: Checking for OAuth keys:\n";
+echo "STEP 10: Checking for OAuth keys:\n";
 echo "--------------------------------------------------------\n\n";
 
 
@@ -320,7 +372,7 @@ if ((!file_exists('storage/oauth-public.key')) || (!file_exists('storage/oauth-p
 
 
 echo "--------------------------------------------------------\n";
-echo "STEP 10: Taking application out of maintenance mode:\n";
+echo "STEP 11: Taking application out of maintenance mode:\n";
 echo "--------------------------------------------------------\n\n";
 
 $up = shell_exec('php artisan up');
