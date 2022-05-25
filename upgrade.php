@@ -218,7 +218,7 @@ $writable_dirs_array =
         'storage/framework/views',
         'storage/app',
         'storage/app/backups',
-        'storage/app/backups-temp',
+        'storage/app/backup-temp',
         'storage/private_uploads',
         'public/uploads',
     ];
@@ -247,8 +247,9 @@ if ($dirs_not_writable!='') {
 
     echo "--------------------- !! ERROR !! ----------------------\n";
     echo "Please check the permissions on the directories above and re-run this script.\n";
-    echo "------------------------- :( ---------------------------\n";
+    echo "------------------------- :( ---------------------------\n\n";
 }
+
 
 
 echo "--------------------------------------------------------\n";
