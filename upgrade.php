@@ -365,7 +365,7 @@ echo "--------------------------------------------------------\n";
 echo "STEP 8: Updating composer dependencies:\n";
 echo "(This may take a moment.)\n";
 echo "--------------------------------------------------------\n\n";
-
+echo "-- Running the app in ".$app_environment." mode.\n";
 
 // Composer install
 if (file_exists('composer.phar')) {
@@ -374,7 +374,7 @@ if (file_exists('composer.phar')) {
     $composer_update = shell_exec('php composer.phar self-update');
     echo $composer_update."\n\n";
 
-    $composer_dump = shell_exec('php composer.phar dump');
+
 
     // Use --no-dev only if we are in production mode.
     // This will cause errors otherwise, if the user is in develop or local for their APP_ENV
@@ -383,17 +383,22 @@ if (file_exists('composer.phar')) {
     } else {
         $composer = shell_exec('php composer.phar install --prefer-source');
     }
+    $composer_dump = shell_exec('php composer.phar dump');
+
+
 
 } else {
-
-    echo "-- We couldn't find a local composer.phar. No worries, trying globally.\n\n";
-    $composer_dump = shell_exec('composer dump');
 
     if ($app_environment == 'production') {
         $composer = shell_exec('composer install --no-dev --prefer-source');
     } else {
         $composer = shell_exec('composer install --prefer-source');
     }
+
+    echo "-- We couldn't find a local composer.phar. No worries, trying globally.\n";
+    $composer_dump = shell_exec('composer dump');
+
+
 
 }
 
