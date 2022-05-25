@@ -15,6 +15,7 @@ if ((strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') || (!function_exists('posix_get
 }
 
 
+$app_environment = 'develop';
 
 // Check if a branch or tag was passed in the command line,
 // otherwise just use master
@@ -57,6 +58,26 @@ foreach ($env as $line_num => $line) {
         $show_line_num = $line_num+1;
 
         $env_value = trim($env_value);
+
+
+        /**
+         * We set this $app_environment here to determine which version of composer to use, --no-dev or with dev dependencies.
+         * This doesn't actually *change* anything in the .env file, but if the user is running this with
+         * APP_ENV set to anything OTHER than production, they'll get an error when they try to dump-autoload
+         * because the Dusk service provider only tries to load if the app is not in production mode.
+         *
+         * It's 100% okay if they're not in production mode, but this will avoid any confusion as they get
+         * erroneous errors using this upgrader if they are not in production mode when they run this script.
+         *
+         * We use this further down in the composer section of this upgrader.
+         */
+
+        if ($env_key == "APP_ENV") {
+            if ($env_value == 'production') {
+                $app_environment = 'production';
+            }
+        }
+
 
         if ($env_key == 'APP_KEY') {
             if (($env_value=='')  || (strlen($env_value) < 20)) {
@@ -113,7 +134,7 @@ if ($env_bad !='') {
 }
 
 
-echo "--------------------------------------------------------\n";
+echo "\n--------------------------------------------------------\n";
 echo "STEP 2: Checking PHP requirements: \n";
 echo "--------------------------------------------------------\n\n";
 
@@ -344,7 +365,7 @@ echo "--------------------------------------------------------\n";
 echo "STEP 8: Updating composer dependencies:\n";
 echo "(This may take a moment.)\n";
 echo "--------------------------------------------------------\n\n";
-
+echo "-- Running the app in ".$app_environment." mode.\n";
 
 // Composer install
 if (file_exists('composer.phar')) {
@@ -353,13 +374,32 @@ if (file_exists('composer.phar')) {
     $composer_update = shell_exec('php composer.phar self-update');
     echo $composer_update."\n\n";
 
+
+
+    // Use --no-dev only if we are in production mode.
+    // This will cause errors otherwise, if the user is in develop or local for their APP_ENV
+    if ($app_environment == 'production') {
+        $composer = shell_exec('php composer.phar install --no-dev --prefer-source');
+    } else {
+        $composer = shell_exec('php composer.phar install --prefer-source');
+    }
     $composer_dump = shell_exec('php composer.phar dump');
-    $composer = shell_exec('php composer.phar install --no-dev --prefer-source');
+
+
 
 } else {
-    echo "-- We couldn't find a local composer.phar. No worries, trying globally.\n\n";
+
+    if ($app_environment == 'production') {
+        $composer = shell_exec('composer install --no-dev --prefer-source');
+    } else {
+        $composer = shell_exec('composer install --prefer-source');
+    }
+
+    echo "-- We couldn't find a local composer.phar. No worries, trying globally.\n";
     $composer_dump = shell_exec('composer dump');
-    $composer = shell_exec('composer install --no-dev --prefer-source');
+
+
+
 }
 
 echo $composer_dump."\n";
