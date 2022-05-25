@@ -53,6 +53,15 @@ foreach ($env as $line_num => $line) {
 
         $env_value = trim($env_value);
 
+        if ($env_key == 'APP_KEY') {
+            if (($env_value=='')  || (strlen($env_value) < 20)) {
+                echo "✘ APP_KEY ERROR in your .env: Your APP_KEY should not be blank. Run php artisan key:generate to generate one.";
+                $env_error_count++;
+            } else {
+                echo "√ Your APP_KEY is not blank. \n";
+            }
+        }
+
         if ($env_key == 'APP_URL') {
 
             $app_url_length = strlen($env_value);
