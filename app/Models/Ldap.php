@@ -304,14 +304,13 @@ class Ldap extends Model
 
             // HUGE thanks to this article: https://stackoverflow.com/questions/68275972/how-to-get-paged-ldap-queries-in-php-8-and-read-more-than-1000-entries
             // which helped me wrap my head around paged results!
-            \Log::info("ldap conn is: ".$ldapconn." basedn is: $base_dn, filter is: $filter - count is: $count. page size is: $page_size"); //FIXME - remove
             // if a $count is set and it's smaller than $page_size then use that as the page size
             $ldap_controls = [];
             //if($count == -1) { //count is -1 means we have to employ paging to query the entire directory
                 $ldap_controls = [['oid' => LDAP_CONTROL_PAGEDRESULTS, 'iscritical' => false, 'value' => ['size'=> $count == -1||$count>$page_size ? $page_size : $count, 'cookie' => $cookie]]];
             //}
             $search_results = ldap_search($ldapconn, $base_dn, $filter, [], 0, /* $page_size */ -1, -1, LDAP_DEREF_NEVER, $ldap_controls); // TODO - I hate the @, and I hate that we get a full page even if we ask for 10 records. Can we use an ldap_control?
-            \Log::info("did the search run? I guess so if you got here!");
+            \Log::debug("did the search run? I guess so if you got here!");
             if (! $search_results) {
                 return redirect()->route('users.index')->with('error', trans('admin/users/message.error.ldap_could_not_search').ldap_error($ldapconn)); // TODO this is never called in any routed context - only from the Artisan command. So this redirect will never work.
             }
