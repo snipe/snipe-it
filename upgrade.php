@@ -60,14 +60,14 @@ foreach ($env as $line_num => $line) {
                 echo '√ Your APP_URL is not null or blank. It is set to '.$env_value."\n";
 
                 if (!str_begins(trim($env_value), 'http://') && (!str_begins($env_value, 'https://'))) {
-                    echo '✘ APP_URL ERROR in Line #'.$line_num.' of your .env: Your APP_URL should start with https:// or http://!! It is currently set to: '.$env_value;
+                    echo '✘ APP_URL ERROR in your .env on line #'.$line_num.' of your .env: Your APP_URL should start with https:// or http://!! It is currently set to: '.$env_value;
                     $env_error_count++;
                 } else {
                     echo '√ Your APP_URL is set to '.$env_value.' and starts with the protocol (https:// or http://)'."\n";
                 }
 
                 if (str_ends(trim($env_value), "/")) {
-                    echo '✘ APP_URL ERROR in Line #'.$line_num.' of your .env: Your APP_URL should NOT end with a trailing slash. It is currently set to: '.$env_value;
+                    echo '✘ APP_URL ERROR in your .env on line #'.$line_num.' of your .env: Your APP_URL should NOT end with a trailing slash. It is currently set to: '.$env_value;
                     $env_error_count++;
                 } else {
                     echo '√ Your APP_URL ('.$env_value.') does not have a trailing slash.'."\n";
@@ -75,7 +75,7 @@ foreach ($env as $line_num => $line) {
 
 
             } else {
-                echo "✘ APP_URL ERROR in Line #".$line_num.": Your APP_URL CANNOT be set to null or left blank.\n";
+                echo "✘ APP_URL ERROR in your .env on line #".$line_num.": Your APP_URL CANNOT be set to null or left blank.\n";
                 $env_error_count++;
             }
 
