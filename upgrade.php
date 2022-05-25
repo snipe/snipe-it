@@ -59,6 +59,10 @@ foreach ($env as $line_num => $line) {
 
         $env_value = trim($env_value);
 
+        // Strip out the quote marks if there are any
+        $env_value = str_replace('"', '',$env_value);
+        $env_value = str_replace("'", '',$env_value);
+
 
         /**
          * We set this $app_environment here to determine which version of composer to use, --no-dev or with dev dependencies.
