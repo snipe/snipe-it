@@ -725,9 +725,24 @@
                                             </div>
                                             <div class="col-md-6">
                                                 @can('superuser')
-                                                    <a href="{{ route('locations.show', ['location' => $asset->defaultLoc->id]) }}">
-                                                        {{ $asset->defaultLoc->name }}
-                                                    </a>
+
+                                                <a href="{{ route('locations.show', ['location' => $asset->defaultLoc->id]) }}">
+                                                    {{ $asset->defaultLoc->name }}
+                                                </a>
+                                                
+                                                @php  $asset_current_deflocation = $asset->defaultLoc;
+                                                @endphp
+
+                                                 @while ($asset_current_deflocation->parent_id != null)
+                                                 < <a href="{{ route('locations.show', ['location' => $asset_current_deflocation->parent_id]) }}">
+                                                     {{  $asset_current_deflocation->parent->name }}
+                                                 </a>
+
+                                                    @php  $asset_current_deflocation = $asset_current_deflocation->parent;
+                                                    @endphp
+
+                                                 @endwhile
+
                                                 @else
                                                     {{ $asset->defaultLoc->name }}
                                                 @endcan
