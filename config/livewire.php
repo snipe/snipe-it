@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'asset_url' => env('APP_URL').'/vendor/livewire',
+    'asset_url' => env('APP_URL'),
 
     /*
     |--------------------------------------------------------------------------
