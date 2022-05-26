@@ -55,25 +55,35 @@ class ActionlogsTransformer
             }
         }
 
+        $file_url = '';
+        if($actionlog->filename!='') {
+            if ($actionlog->present()->actionType() == 'accepted') {
+                $file_url = route('log.storedeula.download', ['filename' => $actionlog->filename]);
+            } else {
+                if ($actionlog->itemType() == 'asset') {
+                    $file_url = route('show/assetfile', ['assetId' => $actionlog->id, 'fileId' => $actionlog->id]);
+                } elseif ($actionlog->itemType() == 'license') {
+                    $file_url = route('show.licensefile', ['licenseId' => $actionlog->item->id, 'fileId' => $actionlog->id]);
+                } elseif ($actionlog->itemType() == 'user') {
+                    $file_url = route('show/userfile', ['userId' => $actionlog->item->id, 'fileId' => $actionlog->id]);
+                }
+            }
+        }
 
-            $array = [
+        $array = [
             'id'          => (int) $actionlog->id,
             'icon'          => $icon,
             'file' => ($actionlog->filename!='')
                 ?
                 [
-                    'url' => ($actionlog->present()->actionType()=='accepted')
-                            ?
-                            route('log.storedeula.download', ['filename' => $actionlog->filename])
-                            :
-                            route('show/assetfile', ['assetId' => $actionlog->id, 'fileId' => $actionlog->id]),
+                    'url' => $file_url,
                     'filename' => $actionlog->filename,
                     'inlineable' => (bool) Helper::show_file_inline($actionlog->filename),
                 ] : null,
 
             'item' => ($actionlog->item) ? [
                 'id' => (int) $actionlog->item->id,
-                'name' => ($actionlog->itemType()=='user') ? $actionlog->filename : e($actionlog->item->getDisplayNameAttribute()),
+                'name' => ($actionlog->itemType()=='user') ? e($actionlog->item->getFullNameAttribute()) : e($actionlog->item->getDisplayNameAttribute()),
                 'type' => e($actionlog->itemType()),
             ] : null,
             'location' => ($actionlog->location) ? [
@@ -104,6 +114,7 @@ class ActionlogsTransformer
         ];
         //\Log::info("Clean Meta is: ".print_r($clean_meta,true));
 
+        //dd($array);
         return $array;
     }
 
