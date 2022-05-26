@@ -698,7 +698,7 @@
 
                                                    @php  $asset_current_location = $asset->location;
                                                             $depth = 0;
-                                                            $max_depth = 2;
+                                                            $max_depth = 10;
                                                    @endphp
 
                                                     @while (($asset_current_location->parent_id != null))
@@ -739,7 +739,7 @@
 
                                                 @php  $asset_current_deflocation = $asset->defaultLoc;
                                                     $depth = 0;
-                                                    $max_depth = 2;
+                                                    $max_depth = 10;
                                                 @endphp
 
                                                  @while (($asset_current_deflocation->parent_id != null) && ($depth < $max_depth )) 
