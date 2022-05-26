@@ -73,6 +73,7 @@ return [
     'current_password'      => 'Current Password',
     'customize_report'      => 'Customize Report',
     'custom_report'         => 'Custom Asset Report',
+    'custom_license_report' => 'Custom License Report',
     'dashboard'				=> 'Dashboard',
     'days'      			=> 'days',
     'days_to_next_audit'    => 'Days to Next Audit',

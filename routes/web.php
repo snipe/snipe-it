@@ -322,6 +322,8 @@ Route::group(['middleware' => ['auth']], function () {
     )->name('reports/export/accessories');
     Route::get('reports/custom', [ReportsController::class, 'getCustomReport'])->name('reports/custom');
     Route::post('reports/custom', [ReportsController::class, 'postCustom']);
+    Route::get('reports/custom_license', [ReportsController::class, 'getCustomLicenseReport'])->name('reports/custom_license');
+    Route::post('reports/custom_license', [ReportsController::class, 'postCustomLicense']);
 
     Route::get(
         'reports/activity',

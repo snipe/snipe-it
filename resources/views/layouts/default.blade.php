@@ -726,6 +726,11 @@
                             {{ trans('general.custom_report') }}
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ url('reports/custom_license') }}" {{ (Request::is('reports/custom_license') ? ' class="active"' : '') }}>
+                            {{ trans('general.custom_license_report') }}
+                        </a>
+                    </li>
                 </ul>
             </li>
             @endcan

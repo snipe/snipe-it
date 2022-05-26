@@ -393,6 +393,13 @@ class ReportsController extends Controller
 
         return view('reports/custom')->with('customfields', $customfields);
     }
+    public function getCustomLicenseReport()
+    {
+        $this->authorize('reports.view');
+
+
+        return view('reports/custom_license');
+    }
 
     /**
      * Exports the custom report to CSV
@@ -841,7 +848,296 @@ class ReportsController extends Controller
 
         return $response;
     }
+    public function postCustomlicense(Request $request)
+    {
+        ini_set('max_execution_time', env('REPORT_TIME_LIMIT', 12000)); //12000 seconds = 200 minutes
+        $this->authorize('reports.view');
 
+        \Debugbar::disable();
+        $response = new StreamedResponse(function () use ($request) {
+            \Log::debug('Starting streamed response');
+
+            // Open output stream
+            $handle = fopen('php://output', 'w');
+            stream_set_timeout($handle, 2000);
+
+            if ($request->filled('use_bom')) {
+                fprintf($handle, chr(0xEF).chr(0xBB).chr(0xBF));
+            }
+
+            $header = [];
+
+
+            if ($request->filled('company')) {
+                $header[] = trans('general.company');
+            }
+
+            if ($request->filled('name')) {
+                $header[] = trans('admin/licenses/table.title');
+            }
+
+            if ($request->filled('product_key')) {
+                $header[] = trans('admin/licenses/form.license_key');
+            }
+
+            if ($request->filled('expiration_date')) {
+                $header[] = trans('admin/licenses/form.expiration');
+            }
+
+            if ($request->filled('license_email')) {
+                $header[] = trans('admin/licenses/form.to_email');
+            }
+
+            if ($request->filled('license_name')) {
+                $header[] = trans('admin/licenses/form.to_name');
+            }
+
+            if ($request->filled('category')) {
+                $header[] = trans('general.category');
+            }
+            if ($request->filled('supplier')) {
+                $header[] = trans('general.supplier');
+            }
+
+            if ($request->filled('manufacturer')) {
+                $header[] = trans('general.manufacturer');
+            }
+
+            if ($request->filled('seats')) {
+                $header[] = trans('admin/accessories/general.total');
+            }
+
+            if ($request->filled('free_seats_count')) {
+                $header[] = trans('admin/accessories/general.remaining');
+            }
+
+            if ($request->filled('purchase_date')) {
+                $header[] = trans('general.purchase_date');
+            }
+
+            if ($request->filled('termination_date')) {
+                $header[] = trans('admin/licenses/form.termination_date');
+            }
+
+            if ($request->filled('depreciation')) {
+                $header[] = trans('admin/hardware/form.depreciation');
+            }
+
+            if ($request->filled('maintained')) {
+                $header[] = trans('admin/licenses/form.maintained');
+            }
+
+            if ($request->filled('reassignable')) {
+                $header[] = trans('admin/licenses/form.reassignable');
+            }
+
+            if ($request->filled('purchase_cost')) {
+                $header[] = trans('general.purchase_cost');
+            }
+
+            if ($request->filled('purchase_order')) {
+                $header[] = trans('admin/licenses/form.purchase_order');
+            }
+
+            if ($request->filled('notes')) {
+                $header[] = trans('general.notes');
+            }
+
+            $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
+            \Log::debug('Starting headers: '.$executionTime);
+            fputcsv($handle, $header);
+            $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
+            \Log::debug('Added headers: '.$executionTime);
+
+            $licenses = \App\Models\LicenseSeat::license()->with(
+                'company_id',
+                'depreciation_id',
+                'expiration_date',
+                'license_email',
+                'license_name',
+                'maintained',
+                'manufacturer_id',
+                'category_id',
+                'name',
+                'notes',
+                'order_number',
+                'purchase_cost',
+                'purchase_date',
+                'purchase_order',
+                'reassignable',
+                'seats',
+                'serial',
+                'supplier_id',
+                'termination_date',
+                'user_id');
+
+
+            if ($request->filled('by_supplier_id')) {
+                $licenses->where('licenses.supplier_id', $request->input('by_supplier_id'));
+            }
+
+            if ($request->filled('by_company_id')) {
+                $licenses->where('licenses.company_id', $request->input('by_company_id'));
+            }
+
+            if ($request->filled('by_category_id')) {
+                $licenses->InCategory($request->input('by_category_id'));
+            }
+
+            if ($request->filled('by_dept_id')) {
+                \Log::debug('Only users in dept '.$request->input('by_dept_id'));
+                $licenses->CheckedOutToTargetInDepartment($request->input('by_dept_id'));
+            }
+
+            if ($request->filled('by_manufacturer_id')) {
+                $licenses->ByManufacturer($request->input('by_manufacturer_id'));
+            }
+
+            if ($request->filled('by_order_number')) {
+                $licenses->where('licenses.order_number', $request->input('by_order_number'));
+            }
+
+            if (($request->filled('purchase_start')) && ($request->filled('purchase_end'))) {
+                $licenses->whereBetween('licenses.purchase_date', [$request->input('purchase_start'), $request->input('purchase_end')]);
+            }
+
+            if (($request->filled('created_start')) && ($request->filled('created_end'))) {
+                $licenses->whereBetween('licenses.created_at', [$request->input('created_start'), $request->input('created_end')]);
+            }
+
+            $licenses->orderBy('licenses.id', 'ASC')->chunk(20, function ($licenses) use ($handle, $request) {
+
+                $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
+                \Log::debug('Walking results: '.$executionTime);
+                $count = 0;
+                foreach ($licenses as $license) {
+                    $count++;
+                    $row = [];
+
+                    if ($request->filled('company')) {
+                        $row[] = ($license->company) ? $license->company->name : '';
+                    }
+
+                    if ($request->filled('license_name')) {
+                        $row[] = ($license->name) ? $license->name : '';
+                    }
+
+//                    if ($request->filled('category')) {
+//                        $row[] = (($license->category_id) && ($license->model->category)) ? $license->model->category->name : '';
+//                    }
+//
+//                    if ($request->filled('manufacturer')) {
+//                        $row[] = ($license->model && $license->model->manufacturer) ? $license->model->manufacturer->name : '';
+//                    }
+
+                    if ($request->filled('serial')) {
+                        $row[] = ($license->serial) ? $license->serial : '';
+                    }
+
+                    if ($request->filled('purchase_date')) {
+                        $row[] = ($license->purchase_date) ? $license->purchase_date : '';
+                    }
+
+                    if ($request->filled('purchase_cost')) {
+                        $row[] = ($license->purchase_cost) ? Helper::formatCurrencyOutput($license->purchase_cost) : '';
+                    }
+
+                    if ($request->filled('eol')) {
+                        $row[] = ($license->purchase_date != '') ? $license->present()->eol_date() : '';
+                    }
+
+                    if ($request->filled('order')) {
+                        $row[] = ($license->order_number) ? $license->order_number : '';
+                    }
+
+                    if ($request->filled('supplier')) {
+                        $row[] = ($license->supplier) ? $license->supplier->name : '';
+                    }
+
+                    if ($request->filled('assigned_to')) {
+                        $row[] = ($license->checkedOutToUser() && $license->assigned) ? $license->assigned->getFullNameAttribute() : ($license->assigned ? $license->assigned->display_name : '');
+                        $row[] = ($license->checkedOutToUser() && $license->assigned) ? 'user' : $license->assignedType();
+                    }
+
+                    if ($request->filled('username')) {
+                        // Only works if we're checked out to a user, not anything else.
+                        if ($license->checkedOutToUser()) {
+                            $row[] = ($license->assignedto) ? $license->assignedto->username : '';
+                        } else {
+                            $row[] = ''; // Empty string if unassigned
+                        }
+                    }
+
+                    if ($request->filled('employee_num')) {
+                        // Only works if we're checked out to a user, not anything else.
+                        if ($license->checkedOutToUser()) {
+                            $row[] = ($license->assignedto) ? $license->assignedto->employee_num : '';
+                        } else {
+                            $row[] = ''; // Empty string if unassigned
+                        }
+                    }
+
+                    if ($request->filled('manager')) {
+                        if ($license->checkedOutToUser()) {
+                            $row[] = (($license->assignedto) && ($license->assignedto->manager)) ? $license->assignedto->manager->present()->fullName : '';
+                        } else {
+                            $row[] = ''; // Empty string if unassigned
+                        }
+                    }
+
+                    if ($request->filled('department')) {
+                        if ($license->checkedOutToUser()) {
+                            $row[] = (($license->assignedto) && ($license->assignedto->department)) ? $license->assignedto->department->name : '';
+                        } else {
+                            $row[] = ''; // Empty string if unassigned
+                        }
+                    }
+
+                    if ($request->filled('title')) {
+                        if ($license->checkedOutToUser()) {
+                            $row[] = ($license->assignedto) ? $license->assignedto->jobtitle : '';
+                        } else {
+                            $row[] = ''; // Empty string if unassigned
+                        }
+                    }
+
+                    if ($request->filled('depreciation')) {
+                        $depreciation = $license->getDepreciatedValue();
+                        $diff = ($license->purchase_cost - $depreciation);
+                        $row[] = Helper::formatCurrencyOutput($depreciation);
+                        $row[] = Helper::formatCurrencyOutput($diff);
+                        $row[] = ($license->depreciation) ? $license->depreciated_date()->format('Y-m-d') : '';
+                    }
+
+                    if ($request->filled('created_at')) {
+                        $row[] = ($license->created_at) ? $license->created_at : '';
+                    }
+
+                    if ($request->filled('updated_at')) {
+                        $row[] = ($license->updated_at) ? $license->updated_at : '';
+                    }
+
+                    if ($request->filled('notes')) {
+                        $row[] = ($license->notes) ? $license->notes : '';
+                    }
+
+                    fputcsv($handle, $row);
+                    $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
+                    \Log::debug('-- Record '.$count.' License ID:'.$license->id.' in '.$executionTime);
+                }
+            });
+
+            // Close the output stream
+            fclose($handle);
+            $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
+            \Log::debug('-- SCRIPT COMPLETED IN '.$executionTime);
+        }, 200, [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="custom-assets-report-'.date('Y-m-d-his').'.csv"',
+        ]);
+
+        return $response;
+    }
     /**
      * getImprovementsReport
      *
