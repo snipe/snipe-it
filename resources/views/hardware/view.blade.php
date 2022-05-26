@@ -698,7 +698,7 @@
 
                                                    @php  $asset_current_location = $asset->location;
                                                             $depth = 0;
-                                                            $max_depth = 3;
+                                                            $max_depth = 10;
                                                             $path_delimiter = "<";
                                                             $ellipsis = "...";
                                                    @endphp
@@ -741,7 +741,7 @@
 
                                                 @php  $asset_current_deflocation = $asset->defaultLoc;
                                                     $depth = 0;
-                                                    $max_depth = 3;
+                                                    $max_depth = 10;
                                                     $path_delimiter = "<";
                                                     $ellipsis = "...";
                                                 @endphp
