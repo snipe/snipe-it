@@ -697,14 +697,21 @@
                                                     </a>
 
                                                    @php  $asset_current_location = $asset->location;
+                                                            $depth = 0;
+                                                            $max_depth = 2;
                                                    @endphp
 
-                                                    @while ($asset_current_location->parent_id != null)
-                                                    < <a href="{{ route('locations.show', ['location' => $asset_current_location->parent_id]) }}">
+                                                    @while (($asset_current_location->parent_id != null))
+                                                        @if($depth >= $max_depth ) <<a href="{{ route('locations.show', ['location' => $asset_current_location->parent_id]) }}">
+                                                        ...
+                                                        </a>
+                                                        @else
+                                                    <<a href="{{ route('locations.show', ['location' => $asset_current_location->parent_id]) }}">
                                                         {{  $asset_current_location->parent->name }}
                                                     </a>
-
+                                                        @endif
                                                        @php  $asset_current_location = $asset_current_location->parent;
+                                                       $depth += 1;
                                                        @endphp
 
                                                     @endwhile
@@ -729,16 +736,19 @@
                                                 <a href="{{ route('locations.show', ['location' => $asset->defaultLoc->id]) }}">
                                                     {{ $asset->defaultLoc->name }}
                                                 </a>
-                                                
+
                                                 @php  $asset_current_deflocation = $asset->defaultLoc;
+                                                    $depth = 0;
+                                                    $max_depth = 2;
                                                 @endphp
 
-                                                 @while ($asset_current_deflocation->parent_id != null)
-                                                 < <a href="{{ route('locations.show', ['location' => $asset_current_deflocation->parent_id]) }}">
+                                                 @while (($asset_current_deflocation->parent_id != null) && ($depth < $max_depth )) 
+                                                 <<a href="{{ route('locations.show', ['location' => $asset_current_deflocation->parent_id]) }}">
                                                      {{  $asset_current_deflocation->parent->name }}
                                                  </a>
 
                                                     @php  $asset_current_deflocation = $asset_current_deflocation->parent;
+                                                        $depth += 1;
                                                     @endphp
 
                                                  @endwhile
