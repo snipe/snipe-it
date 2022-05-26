@@ -393,13 +393,17 @@ if (file_exists('composer.phar')) {
 
 } else {
 
+    echo "-- We couldn't find a local composer.phar. No worries, trying globally.\n";
+    echo "Since you are running composer globally, we won't try to update it for you.\n";
+    echo "If you run into issues with this step, try running `composer self-update` \n";
+    echo "before running this updater again\n\n";
+
     if ($app_environment == 'production') {
         $composer = shell_exec('composer install --no-dev --prefer-source');
     } else {
         $composer = shell_exec('composer install --prefer-source');
     }
 
-    echo "-- We couldn't find a local composer.phar. No worries, trying globally.\n";
     $composer_dump = shell_exec('composer dump');
 
 
