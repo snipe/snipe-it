@@ -554,8 +554,8 @@ $(document).ready(function () {
             $(id + '-info').append('<span class="label label-default">' + htmlEntities(this.files[i].name) + ' (' + formatBytes(this.files[i].size) + ')</span> ');
         }
 
-        console.log('Max size is: ' + max_size);
-        console.log('Real size is: ' + total_size);
+        //console.log('Max size is: ' + max_size);
+        //console.log('Real size is: ' + total_size);
 
         if (total_size > max_size) {
             $status.addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fas fa-times"></i> ').append('<span class="previewSize"> Upload is ' + formatBytes(total_size) + '.</span>');
