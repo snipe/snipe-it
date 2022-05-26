@@ -11,6 +11,7 @@ use App\Http\Controllers\GroupsController;
 use App\Http\Controllers\HealthController;
 use App\Http\Controllers\ImportsController;
 use App\Http\Controllers\LocationsController;
+use App\Http\Controllers\Licenses\LicenseCheckinController;
 use App\Http\Controllers\ManufacturersController;
 use App\Http\Controllers\ModalController;
 use App\Http\Controllers\ProfileController;
@@ -314,7 +315,10 @@ Route::group(['middleware' => ['auth']], function () {
         'reports/export/licenses',
         [ReportsController::class, 'exportLicenseReport']
     )->name('reports/export/licenses');
-
+    Route::post(
+        '/checkin-all-licenses',
+        [LicenseCheckinController::class, 'checkinAllLicenses']
+    )->name('/checkin-all-licenses');
     Route::get('reports/accessories', [ReportsController::class, 'getAccessoryReport'])->name('reports/accessories');
     Route::get(
         'reports/export/accessories',

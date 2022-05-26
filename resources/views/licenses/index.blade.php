@@ -12,6 +12,8 @@
     <a href="{{ route('licenses.create') }}" class="btn btn-primary pull-right">
       {{ trans('general.create') }}
     </a>
+    <a href="#"   class="btn btn-danger pull-right" style="color:#FFFFFF;" data-toggle="modal" data-target="#checkInAllLicenses">{{ trans('admin/licenses/form.checkinall') }}</a>
+
     @endcan
 @stop
 
@@ -51,6 +53,32 @@
       </div>
     </div><!-- /.box -->
   </div>
+</div>
+<div class="modal fade" id="checkInAllLicenses" tabindex="-1" role="dialog" aria-labelledby="checkInAllLicenses" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <br>
+                <h3 class="modal-title" id="checkInAllLicense">Check-in All Seats for All Licenses</h3>
+            </div>
+            <div class="modal-body">
+                <h4>Warning: this checks in all seats for all licenses? Do you wish to continue?</h4>
+                <br><br>
+                <div class="form-group">
+                </div>
+                <div class="modal-footer">
+                    <form action="{{route('/checkin-all-licenses')}}" method="POST">
+                        {{csrf_field()}}
+                        <button type="submit" style="width:100%;" class="btn btn-danger">{{trans('admin/licenses/form.checkinall')}}</button>
+                    </form>
+                    <button type="button" style="width:100%;" class="btn btn-primary" data-dismiss="modal">{{trans('button.cancel')}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @stop
 

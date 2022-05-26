@@ -106,4 +106,34 @@ class LicenseCheckinController extends Controller
         // Redirect to the license page with error
         return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.checkin.error'));
     }
+
+    /**
+     * Checks in all seats for all licenses
+     *
+     * @author [G. Martinez] [<godmartinz@gmail.com>]
+     * @since [v6.02]
+
+     */
+    public static function checkinAllLicenses(){
+
+        $licenseSeats = LicenseSeat::whereNotNull('assigned_to')
+            ->with('user')
+            ->get();
+
+        if($licenseSeats->count()==0){
+            return redirect()->to('licenses/')->with('error', 'All seats for all licenses are checked in');
+        }
+            foreach($licenseSeats as $seat){
+                $seat->assigned_to=null;
+
+                if ($seat->save()) {
+                    // Override the email address so we don't notify on checkin
+                    $seat->user->email = null;
+
+                    // Log the checkin
+                    $seat->logCheckin($seat->user, 'Checked in via UI');
+                }
+            }
+        return redirect()->to('licenses/')->with('success', 'All licenses checked in');
+    }
 }

@@ -18,5 +18,6 @@ return array(
     'to_email'          => 'Licensed to Email',
     'to_name'           => 'Licensed to Name',
     'update'            => 'Update License',
+    'checkinall'        => 'Check in all Licenses',
     'checkout_help'     => 'You must check a license out to a hardware asset or a person. You can select both, but the owner of the asset must match the person you\'re checking the asset out to.'
 );
