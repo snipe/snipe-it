@@ -125,7 +125,7 @@ class LicenseSeatsController extends Controller
             $target = $is_checkin ? $oldAsset : Asset::find($licenseSeat->asset_id);
         }
 
-        if(is_null($target)){
+        if (is_null($target)){
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Target not found'));
         }
 
