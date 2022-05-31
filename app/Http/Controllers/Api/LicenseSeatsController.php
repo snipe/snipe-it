@@ -116,16 +116,20 @@ class LicenseSeatsController extends Controller
             return response()->json(Helper::formatStandardApiResponse('success', $licenseSeat, trans('admin/licenses/message.update.success')));
         }
 
+        // the logging functions expect only one "target". if both asset and user are present in the request,
+        // we simply let assets take precedence over users...
+        if ($licenseSeat->isDirty('assigned_to')) {
+            $target = $is_checkin ? $oldUser : User::find($licenseSeat->assigned_to);
+        }
+        if ($licenseSeat->isDirty('asset_id')) {
+            $target = $is_checkin ? $oldAsset : Asset::find($licenseSeat->asset_id);
+        }
+
+        if (is_null($target)){
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'Target not found'));
+        }
+
         if ($licenseSeat->save()) {
-            // the logging functions expect only one "target". if both asset and user are present in the request,
-            // we simply let assets take precedence over users...
-            $changes = $licenseSeat->getChanges();
-            if (array_key_exists('assigned_to', $changes)) {
-                $target = $is_checkin ? $oldUser : User::find($changes['assigned_to']);
-            }
-            if (array_key_exists('asset_id', $changes)) {
-                $target = $is_checkin ? $oldAsset : Asset::find($changes['asset_id']);
-            }
 
             if ($is_checkin) {
                 $licenseSeat->logCheckin($target, $request->input('note'));

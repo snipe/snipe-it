@@ -152,6 +152,13 @@ class AcceptanceController extends Controller
              * since we want the moment-in-time proof of what the EULA was when they accepted it.
              */
             $branding_settings = SettingsController::getPDFBranding();
+
+            if (is_null($branding_settings->logo)){
+                $path_logo = "";
+            } else {
+                $path_logo = public_path() . '/uploads/' . $branding_settings->logo;
+            }
+            
             $data = [
                 'item_tag' => $item->asset_tag,
                 'item_model' => $display_model,
@@ -162,7 +169,7 @@ class AcceptanceController extends Controller
                 'assigned_to' => $assigned_to,
                 'company_name' => $branding_settings->site_name,
                 'signature' => ($sig_filename) ? storage_path() . '/private_uploads/signatures/' . $sig_filename : null,
-                'logo' => public_path() . '/uploads/' . $branding_settings->logo,
+                'logo' => $path_logo,
                 'date_settings' => $branding_settings->date_display_format,
             ];
 
