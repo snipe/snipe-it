@@ -129,14 +129,14 @@
 }
 .btn,
 .btn:hover {
-  color: #fff;
+  color: #fff !important;
 }
 .btn.btn-primary,
 .btn:hover.btn-primary,
 .btn .btn-primary:link,
 .btn:hover .btn-primary:link {
   background-color: #cc7000;
-  border-color: #995400;
+  border-color: #fff;
   color: #fff;
 }
 .btna.btn-primary:hover,
@@ -153,12 +153,6 @@
 .btn.btn-white:hover,
 .btn:hover.btn-white:hover {
   background-color: #663800;
-  color: #fff;
-}
-a:hover {
-  color: #fff;
-}
-a:visited {
   color: #fff;
 }
 .text-primary {
@@ -208,7 +202,7 @@ a:link {
   color: var(--link);
 }
 a:visited {
-  color: var(--nav-link);
+  color: var(--visited-link);
 }
 a:hover {
   color: var(--hover-link);
@@ -271,6 +265,7 @@ a:link.btn-default {
 .btn-primary:active,
 .text-orange {
   color: var(--nav-link) !important;
+  border-color: var(--button-primary);
 }
 .btn-primary:hover {
   background-color: var(--button-primary);
@@ -435,19 +430,6 @@ input[type=search] {
 }
 .box-header.with-border {
   border-bottom: #000;
-}
-a {
-  color: var(--link);
-}
-a:link {
-  color: var(--link);
-}
-a:hover {
-  color: var(--hover-link);
-  text-decoration: underline;
-}
-a:visited {
-  color: var(--visited-link);
 }
 .row-striped {
   vertical-align: top;

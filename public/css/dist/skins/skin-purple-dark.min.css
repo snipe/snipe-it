@@ -129,14 +129,14 @@
 }
 .btn,
 .btn:hover {
-  color: #fff;
+  color: #fff !important;
 }
 .btn.btn-primary,
 .btn:hover.btn-primary,
 .btn .btn-primary:link,
 .btn:hover .btn-primary:link {
   background-color: #4c4988;
-  border-color: #3a3767;
+  border-color: #FFF;
   color: #fff;
 }
 .btna.btn-primary:hover,
@@ -156,10 +156,10 @@
   color: #fff;
 }
 a:hover {
-  color: #fff;
+  color: var(--hover-link);
 }
 a:visited {
-  color: #fff;
+  color: var(--visited-link);
 }
 .text-primary {
   color: #fff;
@@ -167,7 +167,7 @@ a:visited {
 :root {
   --background: #222;
   --back-main: #333;
-  --back-sub: #3d4144;
+  --back-sub: #080808;
   --back-sub-alt: rgba(0, 0, 0, 0.36);
   --button-default: #434078;
   --button-primary: #302e56;
@@ -176,11 +176,11 @@ a:visited {
   /* Use same as Header picker */
   --text-main: #BBB;
   --text-sub: #9b9b9b;
-  --link: #9370DB;
+  --link: #AC83FF;
   /* Use same as Header picker, lighten by 70% */
-  --visited-link: #B93CF6;
+  --visited-link: #dfd0ff;
   /* Use same as Header picker, lighten by 70% */
-  --hover-link: #BF55EC;
+  --hover-link: #ffffff;
   /* Use same as Header picker, lighten by 70% */
   --nav-link: #FFF;
   /* Use same as Header picker */
@@ -200,18 +200,16 @@ a:visited {
 .navbar-nav > li > a:link {
   color: var(--nav-link);
 }
+.label-default {
+  background-color: var(--back-sub);
+  color: #fff;
+}
 .modal-content {
   background-color: var(--back-main);
   color: var(--text-main);
 }
 a:link {
   color: var(--link);
-}
-a:visited {
-  color: var(--nav-link);
-}
-a:hover {
-  color: var(--hover-link);
 }
 .btn-primary.hover {
   color: var(--nav-link);

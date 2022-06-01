@@ -129,37 +129,37 @@
 }
 .btn,
 .btn:hover {
-  color: #fff;
+  color: #FFF !important;
 }
 .btn.btn-primary,
 .btn:hover.btn-primary,
 .btn .btn-primary:link,
 .btn:hover .btn-primary:link {
   background-color: #00733e;
-  border-color: #004023;
-  color: #fff;
+  border-color: #FFF;
+  color: #FFF;
 }
 .btna.btn-primary:hover,
 .btn:hovera.btn-primary:hover {
   background-color: #004023;
   border-color: #004023;
-  color: #fff;
+  color: #FFF;
 }
 .btn.btn-white:link,
 .btn:hover.btn-white:link {
   background-color: #00733e;
-  color: #fff;
+  color: #FFF;
 }
 .btn.btn-white:hover,
 .btn:hover.btn-white:hover {
   background-color: #000d07;
-  color: #fff;
+  color: #FFF;
 }
 a:hover {
-  color: #fff;
+  color: var(--hover-link);
 }
 a:visited {
-  color: #fff;
+  color: var(--visited-link);
 }
 .text-primary {
   color: #fff;
@@ -167,20 +167,20 @@ a:visited {
 :root {
   --background: #222;
   --back-main: #333;
-  --back-sub: #3d4144;
+  --back-sub: #312F2F;
   --back-sub-alt: rgba(0, 0, 0, 0.36);
-  --button-default: #005a31;
-  --button-primary: #002715;
-  --button-hover: #000d07;
-  --header: #00a65a;
+  --button-default: #006400;
+  --button-primary: #003100;
+  --button-hover: #000000;
+  --header: #006400;
   /* Use same as Header picker */
-  --text-main: #BBB;
+  --text-main: #FFF;
   --text-sub: #9b9b9b;
-  --link: #28A228;
+  --link: #9ACD32;
   /* Use same as Header picker, lighten by 70% */
-  --visited-link: #5D995D;
+  --visited-link: #b8dc70;
   /* Use same as Header picker, lighten by 70% */
-  --hover-link: #00AA00;
+  --hover-link: #d7ebad;
   /* Use same as Header picker, lighten by 70% */
   --nav-link: #FFF;
   /* Use same as Header picker */
@@ -206,12 +206,6 @@ a:visited {
 }
 a:link {
   color: var(--link);
-}
-a:visited {
-  color: var(--nav-link);
-}
-a:hover {
-  color: var(--hover-link);
 }
 .btn-primary.hover {
   color: var(--nav-link);
@@ -267,7 +261,7 @@ body {
 .btn-primary.hover,
 .btn-primary:active,
 .text-green {
-  color: var(--text-main) !important;
+  color: var(--text-main);
 }
 .btn-primary:hover {
   background-color: var(--button-primary);

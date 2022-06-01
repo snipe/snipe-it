@@ -129,7 +129,7 @@
 }
 .btn,
 .btn:hover {
-  color: #fff;
+  color: #fff !important;
 }
 .btn.btn-primary,
 .btn:hover.btn-primary,
