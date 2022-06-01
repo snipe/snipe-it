@@ -61,7 +61,7 @@
 
 
 .btn, .btn:hover {
-  color: #fff;
+  color: #fff !important; /* makes sure the clone/edit/delete buttons stay white */
 
   &.btn-primary, .btn-primary:link {
     background-color: darken(@blue, 10%);
@@ -87,13 +87,15 @@
   }
 }
 
-
 a {
+  &:link{
+    color:var(--link);
+  }
   &:hover {
-    color: #fff;
+    color:var(--hover-link);
   }
   &:visited {
-    color: #fff;
+    color:var(--visited-link);
   }
 }
 
@@ -107,7 +109,7 @@ a {
 :root {
   --background: #222;
   --back-main: #333;
-  --back-sub: #3d4144;
+  --back-sub: #272727;
   --back-sub-alt: rgba(0, 0, 0, 0.36);
   --button-default: darken(@blue, 15%);
   --button-primary: darken(@blue, 25%);
@@ -115,9 +117,9 @@ a {
   --header: @blue; /* Use same as Header picker */
   --text-main: #BBB;
   --text-sub: #9b9b9b;
-  --link: #1978D4; /* Use same as Header picker, lighten by 70% */
-  --visited-link: #3c8dbc ; /* Use same as Header picker, lighten by 70% */
-  --hover-link: #4B77BE; /* Use same as Header picker, lighten by 70% */
+  --link: #00BFFF; /* Use same as Header picker, lighten by 70% */
+  --visited-link: lighten(#00BFFF,15%); /* Use same as Header picker, lighten by 70% */
+  --hover-link: lighten(#00BFFF,30%); /* Use same as Header picker, lighten by 70% */
   --nav-link: #FFF; /* Use same as Header picker */
   --light-link: #fff; /* Use same as Header picker */
 }
@@ -140,18 +142,6 @@ a {
 .modal-content {
   background-color: var(--back-main);
   color: var(--text-main);
-}
-
-a:link {
-  color: var(--link);
-}
-
-a:visited {
-  color: var(--nav-link);
-}
-
-a:hover {
-  color: var(--hover-link);
 }
 
 .btn-primary.hover {
@@ -190,7 +180,7 @@ body {
 }
 .btn-default{
   background-color: var(--button-default);
-  color: var(--link);
+  //color: var(--link);
 }
 
 .btn-default dropdown-toggle {
@@ -263,6 +253,10 @@ input[type=text], input[type=search] {
 }
 #licensesTable>tbody>tr>td>nobr>a>i.fa {
   color: var(--text-main);
+}
+.label-default{
+  background-color:var(--back-sub);
+  color:#fff;
 }
 .main-footer {
   background-color: var(--back-main);
@@ -344,20 +338,6 @@ input[type=text], input[type=search] {
 
 .box-header.with-border {
   border-bottom: #000;
-}
-
-a {
-  color: var(--link);
-
-  &:link {
-    color: var(--link)  }
-  &:hover {
-    color: var(--hover-link);
-    text-decoration: underline;
-  }
-  &:visited {
-    color: var(--visited-link)
-  }
 }
 
 .row-striped {

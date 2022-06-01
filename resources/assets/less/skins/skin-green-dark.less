@@ -61,18 +61,18 @@
 
 
 .btn, .btn:hover {
-  color: #fff;
+  color: #fff !important; /* makes sure the clone/edit/delete buttons stay white */
 
   &.btn-primary, .btn-primary:link {
-    background-color: darken(@green, 10%);
-    border-color: darken(@green, 20%);
+    background-color: #006400;
+    border-color: var(--button-primary);
     color: #fff;
   }
 
 
   &a.btn-primary:hover {
-    background-color: darken(@green, 20%);
-    border-color: darken(@green, 20%);
+    background-color: var(--button-hover);
+    border-color: var(--button-hover);
     color: #fff;
   }
 
@@ -82,7 +82,7 @@
   }
 
   &.btn-white:hover {
-    background-color: darken(@green, 30%);
+    background-color: var(--button-hover);
     color: #fff;
   }
 }
@@ -107,17 +107,17 @@ a {
 :root {
   --background: #222;
   --back-main: #333;
-  --back-sub: #3d4144;
+  --back-sub: #312F2F;
   --back-sub-alt: rgba(0, 0, 0, 0.36);
-  --button-default: darken(@green, 15%);
-  --button-primary: darken(@green, 25%);
-  --button-hover: darken(@green, 30%);
-  --header: @green; /* Use same as Header picker */
-  --text-main: #BBB;
+  --button-default: darken(#006400, 15%);
+  --button-primary: darken(#006400, 10%);
+  --button-hover: darken(#006400, 30%);
+  --header: #006400; /* Use same as Header picker */
+  --text-main: #FFF;
   --text-sub: #9b9b9b;
-  --link: #28A228; /* Use same as Header picker, lighten by 70% */
-  --visited-link: #5D995D; /* Use same as Header picker, lighten by 70% */
-  --hover-link: #00AA00; /* Use same as Header picker, lighten by 70% */
+  --link: #9ACD32; /* Use same as Header picker, lighten by 70% */
+  --visited-link: lighten(#9ACD32, 15%); /* Use same as Header picker, lighten by 70% */
+  --hover-link: lighten(#9ACD32, 30%); /* Use same as Header picker, lighten by 70% */
   --nav-link: #FFF; /* Use same as Header picker */
   --light-link: #fff; /* Use same as Header picker */
 }
@@ -140,10 +140,6 @@ a {
 .modal-content {
   background-color: var(--back-main);
   color: var(--text-main);
-}
-
-a:link {
-  color: var(--link);
 }
 
 a:visited {

@@ -1,5 +1,5 @@
 /*
- * Skin: yellow dark
+ * Skin: green dark
  * ----------
  */
 @import "../bootstrap-less/mixins.less";
@@ -7,15 +7,15 @@
 @import "../variables.less";
 @import "../mixins.less";
 
-.skin-yellow-dark {
+.skin-green-dark {
   //Navbar
   .main-header {
     .navbar {
-      .navbar-variant(@yellow; #fff);
+      .navbar-variant(@green; #fff);
       .sidebar-toggle {
         color: #fff;
         &:hover {
-          background-color: darken(@yellow, 5%);
+          background-color: darken(@green, 5%);
         }
       }
       @media (max-width: @screen-header-collapse) {
@@ -28,7 +28,7 @@
             a {
               color: #fff;
               &:hover {
-                background: darken(@yellow, 5%);
+                background: darken(@green, 5%);
                 color: #fff;
               }
             }
@@ -39,7 +39,7 @@
     //Logo
 
     li.user-header {
-      background-color: @yellow;
+      background-color: @green;
     }
   }
 
@@ -49,10 +49,10 @@
   }
 
   //Create the sidebar skin
-  .skin-dark-sidebar(@yellow);
+  .skin-dark-sidebar(@green);
 }
 
-.skin-yellow-dark.layout-top-nav .main-header > .logo {
+.skin-green-dark.layout-top-nav .main-header > .logo {
   .logo-variant {
     background-color: none;
   }
@@ -61,28 +61,28 @@
 
 
 .btn, .btn:hover {
-  color: #fff;
+  color: #fff !important; /* makes sure the clone/edit/delete buttons stay white */
 
   &.btn-primary, .btn-primary:link {
-    background-color: darken(@yellow, 10%);
-    border-color: darken(@yellow, 20%);
+    background-color: #006400;
+    border-color: var(--button-primary);
     color: #fff;
   }
 
 
   &a.btn-primary:hover {
-    background-color: darken(@yellow, 20%);
-    border-color: darken(@yellow, 20%);
+    background-color: var(--button-hover);
+    border-color: var(--button-hover);
     color: #fff;
   }
 
   &.btn-white:link {
-    background-color: darken(@yellow, 10%);
+    background-color: darken(@green, 10%);
     color: #fff;
   }
 
   &.btn-white:hover {
-    background-color: darken(@yellow, 30%);
+    background-color: var(--button-hover);
     color: #fff;
   }
 }
@@ -107,17 +107,17 @@ a {
 :root {
   --background: #222;
   --back-main: #333;
-  --back-sub: #3d4144;
+  --back-sub: #312F2F;
   --back-sub-alt: rgba(0, 0, 0, 0.36);
-  --button-default: darken(@yellow, 15%);
-  --button-primary: darken(@yellow, 25%);
-  --button-hover: darken(@yellow, 30%);
-  --header: @yellow; /* Use same as Header picker */
-  --text-main: #BBB;
+  --button-default: darken(#006400, 15%);
+  --button-primary: darken(#006400, 10%);
+  --button-hover: darken(#006400, 30%);
+  --header: #006400; /* Use same as Header picker */
+  --text-main: #FFF;
   --text-sub: #9b9b9b;
-  --link: lighten(@yellow, 30%); /* Use same as Header picker, lighten by 70% */
-  --visited-link: lighten(@yellow, 40%); /* Use same as Header picker, lighten by 70% */
-  --hover-link: lighten(@yellow, 45%); /* Use same as Header picker, lighten by 70% */
+  --link: #9ACD32; /* Use same as Header picker, lighten by 70% */
+  --visited-link: lighten(#9ACD32, 15%); /* Use same as Header picker, lighten by 70% */
+  --hover-link: lighten(#9ACD32, 30%); /* Use same as Header picker, lighten by 70% */
   --nav-link: #FFF; /* Use same as Header picker */
   --light-link: #fff; /* Use same as Header picker */
 }
@@ -142,10 +142,6 @@ a {
   color: var(--text-main);
 }
 
-a:link {
-  color: var(--link);
-}
-
 a:visited {
   color: var(--nav-link);
 }
@@ -153,9 +149,7 @@ a:visited {
 a:hover {
   color: var(--hover-link);
 }
-a:link.btn-default{
-  color: var(--nav-link);
-}
+
 .btn-primary.hover {
   color: var(--nav-link);
 }
@@ -197,19 +191,19 @@ body {
 
 .btn-default dropdown-toggle {
   background-color: var(--button-default);
-  color: var(--nav-link);
+  color: var(--link);
 }
 
 .btn-default:active, .btn-default:focus, .btn-default:hover, .btn-default.active {
   background-color: var(--button-hover);
-  color: var(--nav-link);
+  color: var(--link);
 }
-.btn-primary, .btn-primary.hover, .btn-primary:active, .text-yellow {
-  color: var(--nav-link)!important;
+.btn-primary, .btn-primary.hover, .btn-primary:active, .text-green {
+  color: var(--text-main)!important;
 }
 .btn-primary:hover {
   background-color: var(--button-primary);
-  color: var(--nav-link)!important;
+  color: var(--link)!important;
 }
 #componentsTable>tbody>tr>td>nobr>a>i.fa {
   color: var(--text-main);
@@ -236,6 +230,9 @@ body {
 }
 .dropdown-menu>li>a:hover {
   background-color: var(--back-main);
+  color: var(--nav-link);
+}
+.fixed-table-body thead th .th-inner{
   color: var(--nav-link);
 }
 .form-control {
@@ -321,10 +318,10 @@ input[type=text], input[type=search] {
   background-color: var(--back-main);
   color: var(--text-main);
 }
-.skin-yellow-dark .main-header .navbar .dropdown-menu li a {
+.skin-green-dark .main-header .navbar .dropdown-menu li a {
   color: var(--header);
 }
-.fixed-table-body thead th .th-inner, .skin-yellow-dark .sidebar-menu>li.active>a, .skin-yellow .sidebar-menu>li:hover>a, .sidebar-toggle:hover {
+.fixed-table-body thead th .th-inner, .skin-green-dark .sidebar-menu>li.active>a, .skin-green .sidebar-menu>li:hover>a, .sidebar-toggle:hover {
   background-color: var(--header)!important;
 }
 .tab-content, .tab-pane {
@@ -336,7 +333,6 @@ input[type=text], input[type=search] {
 }
 .table-striped>tbody>tr:nth-of-type(even){
   background-color: var(--back-sub-alt);
-
 }
 #webui>div>div>div>div>div>table>tbody>tr>td>a>i.fa, .box-body, .box-footer, .box-header {
   color: var(--text-main);
@@ -386,7 +382,6 @@ a {
   border-top: 1px solid #dddddd;
   display: table-cell;
 }
-
 .row-new-striped > .row:nth-of-type(odd){
   background-color: var(--back-sub);
   color: var(--text-main);
@@ -395,6 +390,7 @@ a {
   background-color: var(--back-sub-alt);
   color: var(--text-main);
 }
+
 
 .search-highlight, .search-highlight:hover {
   background-color: #e9d15b;
