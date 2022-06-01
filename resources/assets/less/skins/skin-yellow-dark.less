@@ -1,5 +1,5 @@
 /*
- * Skin: green dark
+ * Skin: yellow dark
  * ----------
  */
 @import "../bootstrap-less/mixins.less";
@@ -7,15 +7,14 @@
 @import "../variables.less";
 @import "../mixins.less";
 
-.skin-green-dark {
+.skin-yellow-dark {
   //Navbar
   .main-header {
     .navbar {
-      .navbar-variant(@green; #fff);
       .sidebar-toggle {
-        color: #fff;
+        color: #000 !important;
         &:hover {
-          background-color: darken(@green, 5%);
+          background-color: var(--link);
         }
       }
       @media (max-width: @screen-header-collapse) {
@@ -28,7 +27,7 @@
             a {
               color: #fff;
               &:hover {
-                background: darken(@green, 5%);
+                background: darken(@yellow, 5%);
                 color: #fff;
               }
             }
@@ -39,7 +38,7 @@
     //Logo
 
     li.user-header {
-      background-color: @green;
+      background-color: @yellow;
     }
   }
 
@@ -49,51 +48,46 @@
   }
 
   //Create the sidebar skin
-  .skin-dark-sidebar(@green);
+  .skin-dark-sidebar(@yellow);
 }
-
-.skin-green-dark.layout-top-nav .main-header > .logo {
-  .logo-variant {
-    background-color: none;
-  }
-}
-
-
 
 .btn, .btn:hover {
-  color: #fff !important; /* makes sure the clone/edit/delete buttons stay white */
+  color: #000;
 
   &.btn-primary, .btn-primary:link {
-    background-color: #006400;
-    border-color: var(--button-primary);
-    color: #fff;
+    background-color: var(--button-default);
+    border-color: var(--button-default);
+    color: #545454;
   }
 
 
   &a.btn-primary:hover {
     background-color: var(--button-hover);
     border-color: var(--button-hover);
-    color: #fff;
+    color: #545454;
   }
 
   &.btn-white:link {
-    background-color: darken(@green, 10%);
-    color: #fff;
+    background-color: var(--button-default);
+    color: #545454;
   }
 
   &.btn-white:hover {
-    background-color: var(--button-hover);
-    color: #fff;
+    background-color: var(--hover-link);
+    color: #545454;
   }
 }
 
 
 a {
+  &:link {
+    color: var(--link);
+  }
   &:hover {
-    color: #fff;
+    color: var(--hover-link);
   }
   &:visited {
-    color: #fff;
+    color: var(--visited-link);
   }
 }
 
@@ -107,19 +101,19 @@ a {
 :root {
   --background: #222;
   --back-main: #333;
-  --back-sub: #312F2F;
+  --back-sub: #3d4144;
   --back-sub-alt: rgba(0, 0, 0, 0.36);
-  --button-default: darken(#006400, 15%);
-  --button-primary: darken(#006400, 10%);
-  --button-hover: darken(#006400, 30%);
-  --header: #006400; /* Use same as Header picker */
-  --text-main: #FFF;
+  --button-default: #FFFF00;
+  --button-primary: darken(#FFFF00, 25%);
+  --button-hover: darken(#FFFF00, 30%);
+  --header: #FFFF00; /* Use same as Header picker */
+  --text-main: #BBB;
   --text-sub: #9b9b9b;
-  --link: #9ACD32; /* Use same as Header picker, lighten by 70% */
-  --visited-link: lighten(#9ACD32, 15%); /* Use same as Header picker, lighten by 70% */
-  --hover-link: lighten(#9ACD32, 30%); /* Use same as Header picker, lighten by 70% */
-  --nav-link: #FFF; /* Use same as Header picker */
-  --light-link: #fff; /* Use same as Header picker */
+  --link: #F0E68C; /* Use same as Header picker, lighten by 70% */
+  --visited-link: lighten(#F0E68C, 15%); /* Use same as Header picker, lighten by 70% */
+  --hover-link: lighten(#F0E68C, 45%); /* Use same as Header picker, lighten by 70% */
+  --nav-link: #222; /* Use same as Header picker */
+  --light-link: #545454; /* Use same as Header picker */
 }
 
 .main-header .navbar, .main-header .logo {
@@ -128,12 +122,20 @@ a {
   background: linear-gradient(to bottom, var(--header) 0%,var(--header) 100%);
   border-color: var(--header);
 }
-
+.label-default{
+  background-color:var(--back-sub);
+}
+a.btn.btn-default{
+  color:var(--nav-link);
+}
 .bootstrap-table .fixed-table-container .table thead th .sortable {
   color: var(--nav-link);
 }
 
 .thead, .navbar-nav>li>a:link {
+  color: var(--nav-link);
+}
+.navbar-nav>li>a:visited {
   color: var(--nav-link);
 }
 
@@ -142,26 +144,20 @@ a {
   color: var(--text-main);
 }
 
-a:visited {
+a:link.btn-default{
   color: var(--nav-link);
 }
-
-a:hover {
-  color: var(--hover-link);
-}
-
 .btn-primary.hover {
   color: var(--nav-link);
 }
 
 .small-box h3, .small-box p {
-  color: var(--nav-link) !important;
+  color: #fff !important;
   a:hover {
     text-decoration: none;
     color: var(--nav-link) !important;
   }
 }
-
 
 #accessoriesTable>tbody>tr>td>nobr>a>i.fa {
   color: var(--text-main);
@@ -186,24 +182,24 @@ body {
 }
 .btn-default{
   background-color: var(--button-default);
-  color: var(--link);
+
 }
 
 .btn-default dropdown-toggle {
   background-color: var(--button-default);
-  color: var(--link);
+  color: var(--nav-link);
 }
 
 .btn-default:active, .btn-default:focus, .btn-default:hover, .btn-default.active {
   background-color: var(--button-hover);
-  color: var(--link);
+  color: var(--nav-link);
 }
-.btn-primary, .btn-primary.hover, .btn-primary:active, .text-green {
-  color: var(--text-main)!important;
+.btn-primary, .btn-primary.hover, .btn-primary:active, .text-yellow {
+  color: var(--nav-link)!important;
 }
 .btn-primary:hover {
   background-color: var(--button-primary);
-  color: var(--link)!important;
+  color: var(--nav-link)!important;
 }
 #componentsTable>tbody>tr>td>nobr>a>i.fa {
   color: var(--text-main);
@@ -232,9 +228,7 @@ body {
   background-color: var(--back-main);
   color: var(--nav-link);
 }
-.fixed-table-body thead th .th-inner{
-  color: var(--nav-link);
-}
+
 .form-control {
   background-color: var(--back-main);
   color: var(--text-main);
@@ -318,10 +312,13 @@ input[type=text], input[type=search] {
   background-color: var(--back-main);
   color: var(--text-main);
 }
-.skin-green-dark .main-header .navbar .dropdown-menu li a {
+.skin-yellow-dark .main-header .navbar .dropdown-menu li a {
   color: var(--header);
 }
-.fixed-table-body thead th .th-inner, .skin-green-dark .sidebar-menu>li.active>a, .skin-green .sidebar-menu>li:hover>a, .sidebar-toggle:hover {
+div.th-inner{
+  color:var(--text-main);
+}
+.fixed-table-body thead th .th-inner, .skin-yellow-dark, .skin-yellow, {
   background-color: var(--header)!important;
 }
 .tab-content, .tab-pane {
@@ -333,6 +330,10 @@ input[type=text], input[type=search] {
 }
 .table-striped>tbody>tr:nth-of-type(even){
   background-color: var(--back-sub-alt);
+
+}
+.th-inner{
+  color: var(--nav-link);
 }
 #webui>div>div>div>div>div>table>tbody>tr>td>a>i.fa, .box-body, .box-footer, .box-header {
   color: var(--text-main);
@@ -340,20 +341,6 @@ input[type=text], input[type=search] {
 
 .box-header.with-border {
   border-bottom: #000;
-}
-
-a {
-  color: var(--link);
-
-  &:link {
-    color: var(--link)  }
-  &:hover {
-    color: var(--hover-link);
-    text-decoration: underline;
-  }
-  &:visited {
-    color: var(--visited-link)
-  }
 }
 
 .row-striped {
@@ -365,7 +352,6 @@ a {
   //border-left: 1px solid #dddddd;
   //border-right: 1px solid #dddddd;
   display: table;
-
 }
 
 .row-striped .row:nth-of-type(odd) div {
@@ -373,7 +359,6 @@ a {
   color: var(--text-main);
   border-top: 1px solid #dddddd;
   display: table-cell;
-
 }
 
 .row-striped .row:nth-of-type(even) div {
@@ -382,6 +367,7 @@ a {
   border-top: 1px solid #dddddd;
   display: table-cell;
 }
+
 .row-new-striped > .row:nth-of-type(odd){
   background-color: var(--back-sub);
   color: var(--text-main);
@@ -390,7 +376,6 @@ a {
   background-color: var(--back-sub-alt);
   color: var(--text-main);
 }
-
 
 .search-highlight, .search-highlight:hover {
   background-color: #e9d15b;
