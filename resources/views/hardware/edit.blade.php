@@ -10,15 +10,16 @@
 
 
 {{-- Page content --}}
-
 @section('inputFields')
 
     @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
 
+
+<!-- {{Request::cookie('optional_info');}} -->
   <!-- Asset Tag -->
   <div class="form-group {{ $errors->has('asset_tag') ? ' has-error' : '' }}">
     <label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }}</label>
-
+    
       <!-- we are editing an existing asset -->
       @if  ($item->id)
           <div class="col-md-7 col-sm-12{{  (Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
@@ -101,13 +102,14 @@
     <div class="form-group" >
     <label class="col-md-3 control-label"></label> 
         <div class="col-md-2 col-sm-2 text-left form-check" style="z-index:1;">   
-        <input class="form-check-input" type="checkbox" id="optional_info" >
+
+        <input class="form-check-input" type="checkbox" id="optional_info" name="options[]" value="optional" <?php if (!empty (json_decode(Cookie::get('optional_info')))) {if(in_array('optional',json_decode(Cookie::get('optional_info')))) {echo 'checked';} else {echo 'unchecked';}} else {echo 'unchecked';} ?>>
         <label class="form-check-label" for="flexCheckDefault">
         {{ trans('admin/hardware/form.optional_infos') }}
         </label>
         </div>
         
-        <div id="optional_details" class="col-md-12">
+        <div id="optional_details" class="col-md-12" style="display:none">
         @include ('partials.forms.edit.name', ['translated_name' => trans('admin/hardware/form.name')])
         @include ('partials.forms.edit.warranty')
         </div>
@@ -116,13 +118,13 @@
     <div class="form-group">
     <label class="col-md-3 control-label"></label> 
         <div class="col-md-2 col-sm-2 text-left form-check" style="z-index:2;">   
-        <input class="form-check-input" type="checkbox" id="order_info" >
+        <input class="form-check-input" type="checkbox" id="order_info" name="options[]" value="order" <?php if (!empty (json_decode(Cookie::get('optional_info')))) {if(in_array('order',json_decode(Cookie::get('optional_info')))) {echo 'checked';} else {echo 'unchecked';}} else {echo 'unchecked';} ?>>
         <label class="form-check-label" for="flexCheckDefault">
         {{ trans('admin/hardware/form.order_details') }}
     </label>
         </div>
 
-        <div id='order_details' class="col-md-12" style="z-index:1;">
+        <div id='order_details' class="col-md-12" style="z-index:1;"  style="display:none">
             @include ('partials.forms.edit.order_number')
             @include ('partials.forms.edit.purchase_date')
             @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
@@ -137,7 +139,7 @@
 
         </div>
     </div>
-
+   
 @stop
 
 @section('moar_scripts')
@@ -145,7 +147,6 @@
 
 
 <script nonce="{{ csrf_token() }}">
-
 
     var transformed_oldvals={};
 
@@ -303,32 +304,42 @@
         })
     });
 
-    $( document ).ready(function() {
-    checkOrderDetailOption();
-    checkOptionalOption();
+    $(document).ready(function() {
+        checkOrderDetailOption();
+        checkOptionalOption();
     });
 
+    if ($('#order_info').is(":checked")){
+        checkOrderDetailOption();
+    }
+    
     $('#order_info').change(function(){
         checkOrderDetailOption();
     });
+
+    if ($('#optional_info').is(":checked")){
+        checkOptionalOption();
+    }
 
     $('#optional_info').change(function(){
         checkOptionalOption();
     });
 
     function checkOptionalOption(){
-    if ($("#optional_info").prop('checked')==true) {
-        $('#optional_details').fadeIn('slow');
-    } else {
-        $('#optional_details').fadeOut('slow');
-    }                   
+        if ($("#optional_info").prop('checked')==true) {
+            $('#optional_details').show();
+        } else {
+            $('#optional_details').hide();
+        }             
     }
+
     function checkOrderDetailOption(){
-    if ($("#order_info").prop('checked')==true) {
-        $('#order_details').fadeIn('slow');
-    } else {
-        $('#order_details').fadeOut('slow');
-    }                   
+        if ($("#order_info").prop('checked')==true) {
+            $('#order_details').show();
+        } else {
+            $('#order_details').hide();
+        }                   
     }
+
 </script>
 @stop
