@@ -54,9 +54,9 @@
 
             <li class="active">
                 <a href="#details" data-toggle="tab">
-                          <span class="hidden-lg hidden-md">
-                          <i class="fas fa-info-circle fa-2x"x></i>
-                          </span>
+                  <span class="hidden-lg hidden-md">
+                  <i class="fas fa-info-circle fa-2x"x></i>
+                  </span>
                     <span class="hidden-xs hidden-sm">{{ trans('admin/users/general.info') }}</span>
                 </a>
             </li>
@@ -106,7 +106,7 @@
 
 
 
-          <!-- side address column -->
+<!-- side address column -->
 
 <div class="col-md-3">
 
@@ -153,7 +153,7 @@
               {!! nl2br(e($accessory->notes)) !!}
           </div>
 
-  @endif
+     @endif
 
 
       <div class="row">
@@ -218,8 +218,8 @@
             </div> <!-- /.row-->
         </div><!--tab history-->
     </div><!--tab-content-->
-        @stop
 </div><!--/.nav-tabs-custom-->
+        git
 
 
 
