@@ -219,7 +219,7 @@
         </div><!--tab history-->
     </div><!--tab-content-->
 </div><!--/.nav-tabs-custom-->
-        git
+@stop
 
 
 
