@@ -61,39 +61,39 @@
 
 
 .btn, .btn:hover {
-  color: #fff !important; /* makes sure the clone/edit/delete buttons stay white */
+  color: #FFF !important;
 
   &.btn-primary, .btn-primary:link {
-    background-color: #006400;
-    border-color: var(--button-primary);
-    color: #fff;
+    background-color: darken(@green, 10%);
+    border-color: #FFF;
+    color: #FFF;
   }
 
 
   &a.btn-primary:hover {
-    background-color: var(--button-hover);
-    border-color: var(--button-hover);
-    color: #fff;
+    background-color: darken(@green, 20%);
+    border-color: darken(@green, 20%);
+    color: #FFF;
   }
 
   &.btn-white:link {
     background-color: darken(@green, 10%);
-    color: #fff;
+    color: #FFF;
   }
 
   &.btn-white:hover {
-    background-color: var(--button-hover);
-    color: #fff;
+    background-color: darken(@green, 30%);
+    color: #FFF;
   }
 }
 
 
 a {
   &:hover {
-    color: #fff;
+    color: var(--hover-link);
   }
   &:visited {
-    color: #fff;
+    color: var(--visited-link);
   }
 }
 
@@ -109,7 +109,7 @@ a {
   --back-main: #333;
   --back-sub: #312F2F;
   --back-sub-alt: rgba(0, 0, 0, 0.36);
-  --button-default: darken(#006400, 15%);
+  --button-default: #006400;
   --button-primary: darken(#006400, 10%);
   --button-hover: darken(#006400, 30%);
   --header: #006400; /* Use same as Header picker */
@@ -142,12 +142,8 @@ a {
   color: var(--text-main);
 }
 
-a:visited {
-  color: var(--nav-link);
-}
-
-a:hover {
-  color: var(--hover-link);
+a:link {
+  color: var(--link);
 }
 
 .btn-primary.hover {
@@ -199,7 +195,7 @@ body {
   color: var(--link);
 }
 .btn-primary, .btn-primary.hover, .btn-primary:active, .text-green {
-  color: var(--text-main)!important;
+  color: var(--text-main);
 }
 .btn-primary:hover {
   background-color: var(--button-primary);

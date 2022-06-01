@@ -61,11 +61,11 @@
 
 
 .btn, .btn:hover {
-  color: #fff;
+  color: #fff !important;
 
   &.btn-primary, .btn-primary:link {
     background-color: darken(@purple, 10%);
-    border-color: darken(@purple, 20%);
+    border-color: #FFF;
     color: #fff;
   }
 
@@ -90,10 +90,10 @@
 
 a {
   &:hover {
-    color: #fff;
+    color: var(--hover-link);
   }
   &:visited {
-    color: #fff;
+    color: var(--visited-link);
   }
 }
 
@@ -148,14 +148,6 @@ a {
 
 a:link {
   color: var(--link);
-}
-
-a:visited {
-  color: var(--nav-link);
-}
-
-a:hover {
-  color: var(--hover-link);
 }
 
 .btn-primary.hover {

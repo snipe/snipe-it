@@ -61,11 +61,11 @@
 
 
 .btn, .btn:hover {
-  color: #fff;
+  color: #fff !important;
 
   &.btn-primary, .btn-primary:link {
     background-color: darken(@orange, 10%);
-    border-color: darken(@orange, 20%);
+    border-color: #fff;
     color: #fff;
   }
 
@@ -87,22 +87,9 @@
   }
 }
 
-
-a {
-  &:hover {
-    color: #fff;
-  }
-  &:visited {
-    color: #fff;
-  }
-}
-
 .text-primary {
   color: #fff;
 }
-
-
-
 
 :root {
   --background: #222;
@@ -147,7 +134,7 @@ a:link {
 }
 
 a:visited {
-  color: var(--nav-link);
+  color: var(--visited-link);
 }
 
 a:hover {
@@ -206,6 +193,7 @@ a:link.btn-default{
 }
 .btn-primary, .btn-primary.hover, .btn-primary:active, .text-orange {
   color: var(--nav-link)!important;
+  border-color: var(--button-primary);
 }
 .btn-primary:hover {
   background-color: var(--button-primary);
@@ -346,20 +334,6 @@ input[type=text], input[type=search] {
 
 .box-header.with-border {
   border-bottom: #000;
-}
-
-a {
-  color: var(--link);
-
-  &:link {
-    color: var(--link)  }
-  &:hover {
-    color: var(--hover-link);
-    text-decoration: underline;
-  }
-  &:visited {
-    color: var(--visited-link)
-  }
 }
 
 .row-striped {

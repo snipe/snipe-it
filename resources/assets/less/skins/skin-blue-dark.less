@@ -61,12 +61,12 @@
 
 
 .btn, .btn:hover {
-  color: #fff !important; /* makes sure the clone/edit/delete buttons stay white */
+  color: #fff !important;
 
   &.btn-primary, .btn-primary:link {
     background-color: darken(@blue, 10%);
-    border-color: darken(@blue, 20%);
-    color: #fff;
+    border-color: #FFF;
+    color: #FFF;
   }
 
 
@@ -87,15 +87,13 @@
   }
 }
 
+
 a {
-  &:link{
-    color:var(--link);
-  }
   &:hover {
-    color:var(--hover-link);
+    color: var(--hover-link);
   }
   &:visited {
-    color:var(--visited-link);
+    color: var(--visited-link);
   }
 }
 
@@ -144,6 +142,10 @@ a {
   color: var(--text-main);
 }
 
+a:link {
+  color: var(--link);
+}
+
 .btn-primary.hover {
   color: var(--nav-link);
 }
@@ -180,7 +182,7 @@ body {
 }
 .btn-default{
   background-color: var(--button-default);
-  //color: var(--link);
+  color: var(--link);
 }
 
 .btn-default dropdown-toggle {
@@ -193,7 +195,7 @@ body {
   color: var(--link);
 }
 .btn-primary, .btn-primary.hover, .btn-primary:active, .text-blue {
-  color: var(--text-main)!important;
+  color: var(--text-main);
 }
 .btn-primary:hover {
   background-color: var(--button-primary);
@@ -253,10 +255,6 @@ input[type=text], input[type=search] {
 }
 #licensesTable>tbody>tr>td>nobr>a>i.fa {
   color: var(--text-main);
-}
-.label-default{
-  background-color:var(--back-sub);
-  color:#fff;
 }
 .main-footer {
   background-color: var(--back-main);
@@ -338,6 +336,20 @@ input[type=text], input[type=search] {
 
 .box-header.with-border {
   border-bottom: #000;
+}
+
+a {
+  color: var(--link);
+
+  &:link {
+    color: var(--link)  }
+  &:hover {
+    color: var(--hover-link);
+    text-decoration: underline;
+  }
+  &:visited {
+    color: var(--visited-link)
+  }
 }
 
 .row-striped {
