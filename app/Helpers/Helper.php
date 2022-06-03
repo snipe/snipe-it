@@ -850,6 +850,7 @@ class Helper
      * @param $array
      * @return array|string|null
      */
+
     public static function getFormattedDateObject($date, $type = 'datetime', $array = true)
     {
         if ($date == '') {
@@ -869,7 +870,7 @@ class Helper
          * database before then - or if they manually edited the field's value - it will crash.
          *
          */
-=
+
 
         try {
             $tmp_date = new \Carbon($date);
