@@ -864,7 +864,7 @@ class Helper
          *
          * While this *shouldn't* typically happen since we validate dates before entering them
          * into the database (and we use date/datetime fields for native fields in the system),
-         * It is a possible scenario that a custom field could be created as an "ANY" field, data gets
+         * it is a possible scenario that a custom field could be created as an "ANY" field, data gets
          * added, and then the custom field format gets edited later. If someone put bad data in the
          * database before then - or if they manually edited the field's value - it will crash.
          *
