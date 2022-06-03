@@ -891,7 +891,7 @@ class Helper
 
         } catch (\Exception $e) {
             \Log::warning($e);
-            return 'ERROR: Date value is invalid';
+            return $date.' (Invalid '.$type.' value.)';
         }
 
     }
