@@ -27,6 +27,7 @@ RUN  apk add --no-cache \
         php7-xmlwriter \
         php7-xmlreader \
         php7-sodium \
+        php7-redis \
         curl \
         wget \
         vim \
