@@ -53,7 +53,9 @@
                     data-show-export="true"
                     data-show-refresh="true"
                     data-sort-order="asc"
-                    data-toolbar="#toolbar"
+                    data-toolbar="#userBulkEditToolbar"
+                    data-bulk-button-id="#bulkUserEditButton"
+                    data-bulk-form-id="#usersBulkForm"
                     id="usersTable"
                     class="table table-striped snipe-table"
                     data-url="{{ route('api.users.index',
