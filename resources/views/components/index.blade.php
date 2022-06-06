@@ -21,7 +21,6 @@
         <table
                 data-columns="{{ \App\Presenters\ComponentPresenter::dataTableLayout() }}"
                 data-cookie-id-table="componentsTable"
-                data-toolbar="#toolbar"
                 data-pagination="true"
                 data-id-table="componentsTable"
                 data-search="true"
