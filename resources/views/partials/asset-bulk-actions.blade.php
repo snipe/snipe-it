@@ -1,4 +1,4 @@
-<div id="toolbar">
+<div id="assets-toolbar">
     {{ Form::open([
       'method' => 'POST',
       'route' => ['hardware/bulkedit'],
