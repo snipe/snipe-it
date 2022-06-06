@@ -145,12 +145,6 @@
 
         var buttonName =  $(this).data('bulk-button-id');
 
-        console.log('Something was unchecked');
-        console.log($(this).bootstrapTable('getSelections').length);
-        console.log(buttonName);
-
-        var formName =  $(this).data('id');
-
         if ($(this).bootstrapTable('getSelections').length == 0) {
             $(buttonName).attr('disabled', 'disabled');
         }
