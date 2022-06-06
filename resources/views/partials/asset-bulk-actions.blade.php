@@ -1,9 +1,9 @@
-<div id="assets-toolbar">
+<div id="toolbar">
     {{ Form::open([
       'method' => 'POST',
       'route' => ['hardware/bulkedit'],
       'class' => 'form-inline',
-      'id' => 'bulkForm']) }}
+      'id' => 'assetToolbar']) }}
 
 
     <label for="bulk_actions">

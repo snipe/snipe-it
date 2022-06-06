@@ -114,8 +114,11 @@
 
     // These methods dynamically add/remove hidden input values in the bulk actions form
     $('.snipe-table').on('check.bs.table .btSelectItem', function (row, $element) {
-        $('#bulkEdit').removeAttr('disabled');
-        $('#bulkEdit').prepend('<input id="checkbox_' + $element.id + '" type="hidden" name="ids[]" value="' + $element.id + '">');
+        var buttonName =  $(this).data('bulk-action-id');
+        var formName =  this;
+
+        $(buttonName).removeAttr('disabled');
+        $(formName).prepend('<input id="checkbox_' + $element.id + '" type="hidden" name="ids[]" value="' + $element.id + '">');
     });
 
     $('.snipe-table').on('uncheck.bs.table .btSelectItem', function (row, $element) {
@@ -125,14 +128,23 @@
 
     // Handle whether or not the edit button should be disabled
     $('.snipe-table').on('uncheck.bs.table', function () {
+
+        var buttonName =  $(this).data('bulk-action-id');
+
+        console.log('Something was unchecked');
+        console.log($('.snipe-table').bootstrapTable('getSelections').length);
+
         if ($('.snipe-table').bootstrapTable('getSelections').length == 0) {
-            $('#bulkEdit').attr('disabled', 'disabled');
+            console.log('length is 0');
+            $(buttonName).attr('disabled', 'disabled');
         }
     });
 
     $('.snipe-table').on('uncheck-all.bs.table', function (event, rowsAfter, rowsBefore) {
-        $('#bulkEdit').attr('disabled', 'disabled');
-        //console.dir(rowsBefore);
+
+        var buttonName =  $(this).data('bulk-action-id');
+        $(buttonName).attr('disabled', 'disabled');
+        console.log('all are unchecked');
 
         for (var i in rowsBefore) {
             $( "#checkbox_" + rowsBefore[i].id).remove();
@@ -141,13 +153,15 @@
     });
 
     $('.snipe-table').on('check-all.bs.table', function (event, rowsAfter, rowsBefore) {
-        
-        $('#bulkEdit').removeAttr('disabled');
-        //console.dir(rowsAfter);
-        
+
+        var buttonName =  $(this).data('bulk-action-id');
+        $(buttonName).removeAttr('disabled');
+        var formName =  this;
+        console.log('check all fired');
+
         for (var i in rowsAfter) {
             // console.log(rowsAfter[i].id);
-            $('#bulkEdit').prepend('<input id="checkbox_' + rowsAfter[i].id + '" type="hidden" name="ids[]" value="' + rowsAfter[i].id + '">');
+            $(formName).prepend('<input id="checkbox_' + rowsAfter[i].id + '" type="hidden" name="ids[]" value="' + rowsAfter[i].id + '">');
         }
     });
 

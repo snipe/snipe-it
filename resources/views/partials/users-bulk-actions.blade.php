@@ -1,8 +1,9 @@
-{{ Form::open([
+<div id="toolbar">
+    {{ Form::open([
               'method' => 'POST',
               'route' => ['users/bulkedit'],
               'class' => 'form-inline',
-               'id' => 'bulkForm']) }}
+              'id' => 'usersBulkForm']) }}
 
 @if (request('status')!='deleted')
     @can('delete', \App\Models\User::class)
@@ -13,7 +14,8 @@
                 <option value="edit">{{ trans('general.bulk_edit') }}</option>
                 <option value="bulkpasswordreset">{{ trans('button.send_password_link') }}</option>
             </select>
-            <button class="btn btn-default" id="bulkEdit" disabled>{{ trans('button.go') }}</button>
+            <button class="btn btn-default" id="bulkEditButton" disabled>{{ trans('button.go') }}</button>
         </div>
     @endcan
 @endif
+</div>
