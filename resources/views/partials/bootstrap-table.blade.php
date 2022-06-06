@@ -114,11 +114,12 @@
 
     // These methods dynamically add/remove hidden input values in the bulk actions form
     $('.snipe-table').on('check.bs.table .btSelectItem', function (row, $element) {
-        var buttonName =  $(this).data('bulk-action-id');
-        var formName =  this;
+        var buttonName =  $(this).data('bulk-button-id');
+        var formName =  $(this).data('bulk-form-id');
+        var tableId =  $(this).data('id-table');
 
         $(buttonName).removeAttr('disabled');
-        $(formName).prepend('<input id="checkbox_' + $element.id + '" type="hidden" name="ids[]" value="' + $element.id + '">');
+        $(formName).prepend('<input id="' + tableId + '_checkbox_' + $element.id + '" type="hidden" name="ids[]" value="' + $element.id + '">');
     });
 
     $('.snipe-table').on('uncheck.bs.table .btSelectItem', function (row, $element) {
@@ -126,44 +127,48 @@
     });
 
 
+    $('.snipe-table').on('check-all.bs.table', function (event, rowsAfter, rowsBefore) {
+
+        var buttonName =  $(this).data('bulk-button-id');
+        $(buttonName).removeAttr('disabled');
+        var formName =  $(this).data('bulk-form-id');
+        var tableId =  $(this).data('id-table');
+
+        for (var i in rowsAfter) {
+            $(formName).prepend('<input id="' + tableId + '_checkbox_' + rowsAfter[i].id + '" type="hidden" name="ids[]" value="' + rowsAfter[i].id + '">');
+        }
+    });
+
+
     // Handle whether or not the edit button should be disabled
     $('.snipe-table').on('uncheck.bs.table', function () {
 
-        var buttonName =  $(this).data('bulk-action-id');
+        var buttonName =  $(this).data('bulk-button-id');
 
         console.log('Something was unchecked');
-        console.log($('.snipe-table').bootstrapTable('getSelections').length);
+        console.log($(this).bootstrapTable('getSelections').length);
+        console.log(buttonName);
 
-        if ($('.snipe-table').bootstrapTable('getSelections').length == 0) {
-            console.log('length is 0');
+        var formName =  $(this).data('id');
+
+        if ($(this).bootstrapTable('getSelections').length == 0) {
             $(buttonName).attr('disabled', 'disabled');
         }
     });
 
     $('.snipe-table').on('uncheck-all.bs.table', function (event, rowsAfter, rowsBefore) {
 
-        var buttonName =  $(this).data('bulk-action-id');
+        var buttonName =  $(this).data('bulk-button-id');
         $(buttonName).attr('disabled', 'disabled');
-        console.log('all are unchecked');
+        var tableId =  $(this).data('id-table');
 
         for (var i in rowsBefore) {
-            $( "#checkbox_" + rowsBefore[i].id).remove();
+            $( tableId + "_checkbox_" + rowsBefore[i].id).remove();
         }
 
     });
 
-    $('.snipe-table').on('check-all.bs.table', function (event, rowsAfter, rowsBefore) {
 
-        var buttonName =  $(this).data('bulk-action-id');
-        $(buttonName).removeAttr('disabled');
-        var formName =  this;
-        console.log('check all fired');
-
-        for (var i in rowsAfter) {
-            // console.log(rowsAfter[i].id);
-            $(formName).prepend('<input id="checkbox_' + rowsAfter[i].id + '" type="hidden" name="ids[]" value="' + rowsAfter[i].id + '">');
-        }
-    });
 
     
 
