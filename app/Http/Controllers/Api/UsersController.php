@@ -519,10 +519,14 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
         $this->authorize('view', License::class);
-        $user = User::where('id', $id)->withTrashed()->first();
-        $licenses = $user->licenses()->get();
+        
+        if ($user = User::where('id', $id)->withTrashed()->first()) {
+            $licenses = $user->licenses()->get();
+            return (new LicensesTransformer())->transformLicenses($licenses, $licenses->count());
+        }
 
-        return (new LicensesTransformer())->transformLicenses($licenses, $licenses->count());
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found', compact('id'))));
+
     }
 
     /**

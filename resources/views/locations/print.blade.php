@@ -156,34 +156,23 @@
 <table>
     <tr>
         <td>{{ trans('admin/locations/table.signed_by_asset_auditor') }}</td>
-        <td>___________________________</td>
-        <td></td>
+        <td><br>------------------------------------------------------ &nbsp;&nbsp;&nbsp;<br></td>
         <td>{{ trans('admin/locations/table.date') }}</td>
-        <td>____________________</td>
+        <td><br>------------------------------ &nbsp;&nbsp;&nbsp;<br></td>
     </tr>
-</table>
-<br>
-<br>
-<br>
-<table>
+
     <tr>
         <td>{{ trans('admin/locations/table.signed_by_finance_auditor') }}</td>
-        <td>____________________</td>
-        <td></td>
+        <td><br>------------------------------------------------------ &nbsp;&nbsp;&nbsp;<br></td>
         <td>{{ trans('admin/locations/table.date') }}</td>
-        <td>____________________</td>
+        <td><br>------------------------------ &nbsp;&nbsp;&nbsp;<br></td>
     </tr>
-</table>
-<br>
-<br>
-<br>
-<table>
+
     <tr>
         <td>{{ trans('admin/locations/table.signed_by_location_manager') }}</td>
-        <td>_______________________</td>
-        <td></td>
+        <td><br>------------------------------------------------------ &nbsp;&nbsp;&nbsp;<br></td>
         <td>{{ trans('admin/locations/table.date') }}</td>
-        <td>____________________</td>
+        <td><br>------------------------------ &nbsp;&nbsp;&nbsp;<br></td>
     </tr>
 </table>
 

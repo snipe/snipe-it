@@ -191,9 +191,20 @@
 
   <div class="col-md-3">
 
+      <div class="col-md-12">
+          <a href="{{ route('locations.edit', ['location' => $location->id]) }}" style="width: 100%;" class="btn btn-sm btn-primary pull-left">{{ trans('admin/locations/table.update') }} </a>
+      </div>
+      <div class="col-md-12" style="padding-top: 5px;">
+          <a href="{{ route('locations.print_assigned', ['locationId' => $location->id]) }}" style="width: 100%;" class="btn btn-sm btn-default pull-left">{{ trans('admin/locations/table.print_assigned') }} </a>
+      </div>
+      <div class="col-md-12" style="padding-top: 5px; padding-bottom: 20px;">
+          <a href="{{ route('locations.print_all_assigned', ['locationId' => $location->id]) }}" style="width: 100%;" class="btn btn-sm btn-default pull-left">{{ trans('admin/locations/table.print_all_assigned') }} </a>
+      </div>
+
+
     @if ($location->image!='')
       <div class="col-md-12 text-center" style="padding-bottom: 20px;">
-        <img src="{{ Storage::disk('public')->url('locations/'.e($location->image)) }}" class="img-responsive img-thumbnail" alt="{{ $location->name }}">
+        <img src="{{ Storage::disk('public')->url('locations/'.e($location->image)) }}" class="img-responsive img-thumbnail" style="width:100%" alt="{{ $location->name }}">
       </div>
     @endif
       <div class="col-md-12">
@@ -220,21 +231,13 @@
 
         @if (($location->state!='') && ($location->country!='') && (config('services.google.maps_api_key')))
           <div class="col-md-12 text-center">
-            <img src="https://maps.googleapis.com/maps/api/staticmap?markers={{ urlencode($location->address.','.$location->city.' '.$location->state.' '.$location->country.' '.$location->zip) }}&size=500x300&maptype=roadmap&key={{ config('services.google.maps_api_key') }}" class="img-responsive img-thumbnail" alt="Map">
+            <img src="https://maps.googleapis.com/maps/api/staticmap?markers={{ urlencode($location->address.','.$location->city.' '.$location->state.' '.$location->country.' '.$location->zip) }}&size=700x500&maptype=roadmap&key={{ config('services.google.maps_api_key') }}" class="img-thumbnail" style="width:100%" alt="Map">
           </div>
         @endif
 
       </div>
 
-		<div class="col-md-12">
-			<a href="{{ route('locations.edit', ['location' => $location->id]) }}" style="width: 50%;" class="btn btn-sm btn-primary pull-left">{{ trans('admin/locations/table.update') }} </a>
-		</div>
-        <div class="col-md-12" style="padding-top: 5px;">
-			<a href="{{ route('locations.print_assigned', ['locationId' => $location->id]) }}" style="width: 50%;" class="btn btn-sm btn-default pull-left">{{ trans('admin/locations/table.print_assigned') }} </a>
-		</div>
-		<div class="col-md-12" style="padding-top: 5px;">
-			<a href="{{ route('locations.print_all_assigned', ['locationId' => $location->id]) }}" style="width: 50%;" class="btn btn-sm btn-default pull-left">{{ trans('admin/locations/table.print_all_assigned') }} </a>
-		</div>
+
 		
   </div>
 
