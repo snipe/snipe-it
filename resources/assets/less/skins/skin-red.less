@@ -108,9 +108,9 @@ a {
   --text-main: #BBB;
   --text-alt: #222;
   --text-sub: #9b9b9b;
-  --link: #e00000; /* Use same as Header picker, lighten by 70% */
-  --visited-link: #D24D57; /* Use same as Header picker, lighten by 70% */
-  --hover-link: #D24D57; /* Use same as Header picker, lighten by 70% */
+  --link: @red; /* Use same as Header picker, lighten by 70% */
+  --visited-link: lighten(@red, 15%); /* Use same as Header picker, lighten by 70% */
+  --hover-link: lighten(@red, 30%); /* Use same as Header picker, lighten by 70% */
   --nav-link: #FFF; /* Use same as Header picker */
   --light-link: #fff; /* Use same as Header picker */
 }
@@ -120,6 +120,12 @@ a:link {
 
 a:visited {
   color: var(--visited-link);
+}
+a.btn-info:link, a.btn-warning:link, a.btn-danger:link{
+  color: #FFF;
+}
+&a.btn-info:visited, a.btn-warning:visited, a.btn-danger:visited{
+  color: #FFF;
 }
 
 .fixed-table-container tbody .selected td {
