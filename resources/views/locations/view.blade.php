@@ -172,6 +172,8 @@
 
 
               <div class="tab-pane" id="consumables">
+                  <h2 class="box-title">{{ trans('general.consumables') }}</h2>
+
                       <div class="table table-responsive">
                           <table
                                   data-columns="{{ \App\Presenters\ConsumablePresenter::dataTableLayout() }}"
@@ -197,7 +199,7 @@
               </div><!-- /.tab-pane -->
 
               <div class="tab-pane" id="components">
-
+                  <h2 class="box-title">{{ trans('general.components') }}</h2>
                       <div class="table table-responsive">
 
                           <table
