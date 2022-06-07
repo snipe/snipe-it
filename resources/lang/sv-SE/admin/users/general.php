@@ -33,7 +33,7 @@ return [
     'remove_group_memberships' => 'Ta bort gruppmedlemskap',
     'warning_deletion' => 'VARNING:',
     'warning_deletion_information' => 'Du håller på att ta bort :count användare som anges nedan. Super admin namn markeras med rött.',
-    'update_user_asssets_status' => 'Uppdatera alla tillgångar för dessa användare till denna status',
+    'update_user_assets_status' => 'Uppdatera alla tillgångar för dessa användare till denna status',
     'checkin_user_properties' => 'Kolla in alla egenskaper som är associerade med dessa användare',
     'remote_label'   => 'This is a remote user',
     'remote'   => 'Remote',

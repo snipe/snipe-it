@@ -33,7 +33,7 @@ return [
     'remove_group_memberships' => 'Rimuove Membri del Gruppo',
     'warning_deletion' => 'ATTENZIONE:',
     'warning_deletion_information' => 'Stai per eliminare :count utenti listati qui sotto. I superamministratori sono evidenziati in rosso.',
-    'update_user_asssets_status' => 'Aggiorna tutti i beni per questi utenti a questo stato',
+    'update_user_assets_status' => 'Aggiorna tutti i beni per questi utenti a questo stato',
     'checkin_user_properties' => 'Esegui il check-in di tutte le proprietà associate a questi utenti',
     'remote_label'   => 'This is a remote user',
     'remote'   => 'Remote',

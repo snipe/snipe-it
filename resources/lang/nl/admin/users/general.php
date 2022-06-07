@@ -33,7 +33,7 @@ return [
     'remove_group_memberships' => 'Groep lidmaatschappen verwijderen',
     'warning_deletion' => 'WAARSCHUWING:',
     'warning_deletion_information' => 'U staat op het punt om de :count gebruiker(s) hieronder te verwijderen. Superadmin namen worden rood gemarkeerd.',
-    'update_user_asssets_status' => 'Alle assets voor deze gebruikers naar deze status updaten',
+    'update_user_assets_status' => 'Alle assets voor deze gebruikers naar deze status updaten',
     'checkin_user_properties' => 'Check-in alle eigendommen gekoppeld aan deze gebruikers',
     'remote_label'   => 'This is a remote user',
     'remote'   => 'Remote',

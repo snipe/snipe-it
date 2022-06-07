@@ -33,7 +33,7 @@ return [
     'remove_group_memberships' => 'Csoporttagságok eltávolítása',
     'warning_deletion' => 'FIGYELMEZTETÉS:',
     'warning_deletion_information' => 'Az alább felsorolt :count felhasználó(k) törlésére készülsz. A szuperadminok nevei pirossal vannak kiemelve.',
-    'update_user_asssets_status' => 'Frissítse ezen felhasználók összes eszközét erre az állapotra',
+    'update_user_assets_status' => 'Frissítse ezen felhasználók összes eszközét erre az állapotra',
     'checkin_user_properties' => 'Ellenőrizze a felhasználókhoz kapcsolódó összes tulajdonságot',
     'remote_label'   => 'This is a remote user',
     'remote'   => 'Remote',
