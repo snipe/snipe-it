@@ -942,7 +942,7 @@ class SettingsController extends Controller
             $setting->ldap_lname_field = $request->input('ldap_lname_field');
             $setting->ldap_fname_field = $request->input('ldap_fname_field');
             $setting->ldap_auth_filter_query = $request->input('ldap_auth_filter_query');
-            $setting->ldap_version = $request->input('ldap_version');
+            $setting->ldap_version = $request->input('ldap_version', 3);
             $setting->ldap_active_flag = $request->input('ldap_active_flag');
             $setting->ldap_emp_num = $request->input('ldap_emp_num');
             $setting->ldap_email = $request->input('ldap_email');
