@@ -6,4 +6,5 @@ return array(
     'assigned_to' => 'Assigned To:',
     'manager' => 'Manager',
     'date' => 'Current Date:',
+
 );
