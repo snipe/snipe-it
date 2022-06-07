@@ -18,19 +18,21 @@ class AssetObserver
     public function updating(Asset $asset)
     {
         $attributes = $asset->getAttributes();
-        $attributesOriginal = $asset->getOriginal();
-        
+        $attributesOriginal = $asset->getRawOriginal();
+
         // If the asset isn't being checked out or audited, log the update.
         // (Those other actions already create log entries.)
-          if (($attributes['assigned_to'] == $attributesOriginal['assigned_to'])
+	if (($attributes['assigned_to'] == $attributesOriginal['assigned_to']) 
+	    && ($attributes['checkout_counter'] == $attributesOriginal['checkout_counter'])
+	    && ($attributes['checkin_counter'] == $attributesOriginal['checkin_counter'])
             && ((isset( $attributes['next_audit_date']) ? $attributes['next_audit_date'] : null) == (isset($attributesOriginal['next_audit_date']) ? $attributesOriginal['next_audit_date']: null))
             && ($attributes['last_checkout']   == $attributesOriginal['last_checkout']))
         {
             $changed = [];
 
-            foreach ($asset->getOriginal() as $key => $value) {
-                if ($asset->getOriginal()[$key] != $asset->getAttributes()[$key]) {
-                    $changed[$key]['old'] = $asset->getOriginal()[$key];
+            foreach ($asset->getRawOriginal() as $key => $value) {
+                if ($asset->getRawOriginal()[$key] != $asset->getAttributes()[$key]) {
+                    $changed[$key]['old'] = $asset->getRawOriginal()[$key];
                     $changed[$key]['new'] = $asset->getAttributes()[$key];
                 }
             }
