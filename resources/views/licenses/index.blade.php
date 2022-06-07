@@ -12,9 +12,10 @@
     <a href="{{ route('licenses.create') }}" class="btn btn-primary pull-right">
       {{ trans('general.create') }}
     </a>
-    <a href="#"   class="btn btn-danger pull-right" style="color:#FFFFFF;" data-toggle="modal" data-target="#checkInAllLicenses">{{ trans('admin/licenses/form.checkinall') }}</a>
-
     @endcan
+@can('delete', \App\Models\License::class)
+    <a href="#"   class="btn btn-danger pull-right" style="color:#FFFFFF;" data-toggle="modal" data-target="#checkInAllLicenses">{{ trans('admin/licenses/form.checkinall') }}</a>
+@endcan
 @stop
 
 {{-- Page content --}}
@@ -54,6 +55,8 @@
     </div><!-- /.box -->
   </div>
 </div>
+
+<!-- Check-in all licenses Modal -->
 <div class="modal fade" id="checkInAllLicenses" tabindex="-1" role="dialog" aria-labelledby="checkInAllLicenses" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -79,7 +82,7 @@
             </div>
         </div>
     </div>
-</div>
+</div><!--end of Modal -->
 @stop
 
 @section('moar_scripts')
