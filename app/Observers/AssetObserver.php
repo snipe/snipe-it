@@ -26,7 +26,7 @@ class AssetObserver
 	    && ($attributes['checkout_counter'] == $attributesOriginal['checkout_counter'])
 	    && ($attributes['checkin_counter'] == $attributesOriginal['checkin_counter'])
             && ((isset( $attributes['next_audit_date']) ? $attributes['next_audit_date'] : null) == (isset($attributesOriginal['next_audit_date']) ? $attributesOriginal['next_audit_date']: null))
-            && ($attributes['last_checkout']   == $attributesOriginal['last_checkout']))
+            && ($attributes['last_checkout'] == $attributesOriginal['last_checkout']))
         {
             $changed = [];
 
@@ -35,7 +35,11 @@ class AssetObserver
                     $changed[$key]['old'] = $asset->getRawOriginal()[$key];
                     $changed[$key]['new'] = $asset->getAttributes()[$key];
                 }
-            }
+	    }
+
+	    if (empty($changed)){
+	        return;
+	    }
 
             $logAction = new Actionlog();
             $logAction->item_type = Asset::class;
