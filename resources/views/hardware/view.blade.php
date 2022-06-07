@@ -626,7 +626,7 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                {{ $asset->present()->eol_date() }}
+                                                {{ Helper::getFormattedDateObject($asset->present()->eol_date(), 'date', false) }}
 
 
                                                 @if ($asset->present()->months_until_eol())
