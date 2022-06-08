@@ -129,7 +129,7 @@ class ComponentsController extends Controller
         if (is_null($component = Component::find($componentId))) {
             return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));
         }
-        $min = $component->numCHeckedOut();
+        $min = $component->numCheckedOut();
         $validator = Validator::make($request->all(), [
             'qty' => "required|numeric|min:$min",
         ]);

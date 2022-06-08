@@ -9,6 +9,7 @@ use App\Models\Company;
 use App\Models\Consumable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * This controller handles all actions related to Consumables for
@@ -126,6 +127,17 @@ class ConsumablesController extends Controller
     {
         if (is_null($consumable = Consumable::find($consumableId))) {
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
+        }
+
+        $min = $consumable->numCheckedOut();
+        $validator = Validator::make($request->all(), [
+            "qty" => "required|numeric|min:$min"
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
         }
 
         $this->authorize($consumable);
