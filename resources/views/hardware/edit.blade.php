@@ -30,7 +30,12 @@
       @else
           <!-- we are creating a new asset - let people use more than one asset tag -->
           <div class="col-md-7 col-sm-12{{  (Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
-              <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ Request::old('asset_tag', \App\Models\Asset::autoincrement_asset()) }}" data-validation="required">
+              <input class="form-control" type="text" name="asset_tags[1]" id="asset_tags[1]" value="{{ old('asset_tag', \App\Models\Asset::autoincrement_asset()) }}" data-validation="required">
+              @if(old('asset_tag'))
+                  @for( $i=1; $i < count(old('asset_tags')); $i++)
+              <input class="form-control" type="text" name="asset_tags[{{$i}}]" id="asset_tags[{{$i}}]" value="{{ old('asset_tag.'.$i, \App\Models\Asset::autoincrement_asset()) }}" data-validation="required">
+                  @endfor
+              @endif
               {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
               {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
           </div>
