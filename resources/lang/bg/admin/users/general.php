@@ -33,7 +33,7 @@ return [
     'remove_group_memberships' => 'Премахни членовете на групата',
     'warning_deletion' => 'ВНИМАНИЕ:',
     'warning_deletion_information' => 'Ще изтриете всичките :count потребител(и) посочени в списъка. Супер админ имената са оцветени в червено.',
-    'update_user_assets_status' => 'Обнови всички активи за посочените потребители към следния статус',
+    'update_user_asssets_status' => 'Обнови всички активи за посочените потребители към следния статус',
     'checkin_user_properties' => 'Впиши всички асоцирани настройки към тези потребители',
     'remote_label'   => 'This is a remote user',
     'remote'   => 'Remote',

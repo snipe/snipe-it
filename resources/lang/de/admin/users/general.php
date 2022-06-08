@@ -33,7 +33,7 @@ return [
     'remove_group_memberships' => 'Gruppenmitgliedschaften entfernen',
     'warning_deletion' => 'WARNUNG:',
     'warning_deletion_information' => 'Sie sind dabei, die :count unten aufgelisteten Benutzer zu löschen. Super-Admin-Namen sind rot markiert.',
-    'update_user_assets_status' => 'Alle Assets für diese Benutzer auf diesen Status aktualisieren',
+    'update_user_asssets_status' => 'Alle Assets für diese Benutzer auf diesen Status aktualisieren',
     'checkin_user_properties' => 'Alle diesen Benutzern zugeordneten Objekte zurücknehmen',
     'remote_label'   => 'This is a remote user',
     'remote'   => 'Remote',

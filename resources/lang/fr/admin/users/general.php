@@ -33,7 +33,7 @@ return [
     'remove_group_memberships' => 'Supprimer les appartenances de groupe',
     'warning_deletion' => 'AVERTISSEMENT :',
     'warning_deletion_information' => 'Vous êtes sur le point de supprimer les :count utilisateur(s) listé(s) ci-dessous. Les super-administrateurs sont surlignés en rouge.',
-    'update_user_assets_status' => 'Mettre à jour tous les actifs pour ces utilisateurs à ce statut',
+    'update_user_asssets_status' => 'Mettre à jour tous les actifs pour ces utilisateurs à ce statut',
     'checkin_user_properties' => 'Soumettre toutes les propriétés associées à ces utilisateurs',
     'remote_label'   => 'This is a remote user',
     'remote'   => 'Remote',

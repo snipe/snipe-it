@@ -33,7 +33,7 @@ return [
     'remove_group_memberships' => 'Remove Group Memberships',
     'warning_deletion' => 'OSTRZEŻENIE:',
     'warning_deletion_information' => 'Zamierzasz usunąć :count użytkowników wymienionych poniżej. Superadministratorzy zaznaczeni są na czerwono.',
-    'update_user_assets_status' => 'Zaktualizuj wszystkie zasoby dla tych użytkowników do tego statusu',
+    'update_user_asssets_status' => 'Zaktualizuj wszystkie zasoby dla tych użytkowników do tego statusu',
     'checkin_user_properties' => 'Check in all properties associated with these users',
     'remote_label'   => 'This is a remote user',
     'remote'   => 'Remote',

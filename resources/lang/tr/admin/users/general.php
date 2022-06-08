@@ -33,7 +33,7 @@ return [
     'remove_group_memberships' => 'Grup Üyeliklerini Kaldır',
     'warning_deletion' => 'UYARILAR:',
     'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
-    'update_user_assets_status' => 'Bu kullanıcılar için tüm varlıkları bu duruma güncelleyin',
+    'update_user_asssets_status' => 'Bu kullanıcılar için tüm varlıkları bu duruma güncelleyin',
     'checkin_user_properties' => 'Bu kullanıcılarla ilişkili tüm mülkleri kontrol edin',
     'remote_label'   => 'This is a remote user',
     'remote'   => 'Remote',
