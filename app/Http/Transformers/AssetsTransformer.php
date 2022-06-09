@@ -102,7 +102,7 @@ class AssetsTransformer
                             'field' => e($field->convertUnicodeDbSlug()),
                             'value' => e($value),
                             'field_format' => $field->format,
-                            'element' =>$field->element,
+                            'element' => $field->element,
 
                         ];
 
@@ -111,7 +111,7 @@ class AssetsTransformer
                         'field' => e($field->convertUnicodeDbSlug()),
                         'value' => e($asset->{$field->convertUnicodeDbSlug()}),
                         'field_format' => $field->format,
-                        'element' =>$field->element,
+                        'element' => $field->element,
                     ];
 
 
