@@ -714,23 +714,32 @@ class AssetsController extends Controller
      * @since [v5.1.18]
      * @return JsonResponse
      */
-    public function restore($assetId = null)
+    public function restore(Request $request, $assetId = null)
     {
         // Get asset information
         $asset = Asset::withTrashed()->find($assetId);
         $this->authorize('delete', $asset);
+
         if (isset($asset->id)) {
-            // Restore the asset
-            Asset::withTrashed()->where('id', $assetId)->restore();
 
-            $logaction = new Actionlog();
-            $logaction->item_type = Asset::class;
-            $logaction->item_id = $asset->id;
-            $logaction->created_at =  date("Y-m-d H:i:s");
-            $logaction->user_id = Auth::user()->id;
-            $logaction->logaction('restored');
+            if ($asset->deleted_at=='') {
+               $message = 'Asset was not deleted. No data was changed.';
 
-            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.restore.success')));
+            } else {
+
+                $message = trans('admin/hardware/message.restore.success');
+                // Restore the asset
+                Asset::withTrashed()->where('id', $assetId)->restore();
+
+                $logaction = new Actionlog();
+                $logaction->item_type = Asset::class;
+                $logaction->item_id = $asset->id;
+                $logaction->created_at =  date("Y-m-d H:i:s");
+                $logaction->user_id = Auth::user()->id;
+                $logaction->logaction('restored');
+            }
+
+            return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset, $request), $message));
         
 
         }

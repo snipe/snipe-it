@@ -483,7 +483,18 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:'.config('app.
             'checkout'
         ]
         )->name('api.asset.checkout');
-      }); 
+
+      Route::post('{asset_id}/restore',
+          [
+              Api\AssetsController::class,
+              'restore'
+          ]
+      )->name('api.assets.restore');
+
+      });
+
+
+
 
 
         Route::resource('hardware', 
