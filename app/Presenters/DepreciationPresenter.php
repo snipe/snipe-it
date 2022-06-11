@@ -39,10 +39,10 @@ class DepreciationPresenter extends Presenter
             ],
 
             [
-                "field" => 'depreciation_min',
+                "field" => 'purchase_date',
                 "searchable" => false,
                 "sortable" => true,
-                "title" => trans('admin/depreciations/table.depreciation_min'),
+                "title" => trans('admin/asset/table.purchase_date'),
                 "visible" => true,
             ],
             [

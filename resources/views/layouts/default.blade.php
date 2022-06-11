@@ -719,6 +719,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ url('reports/eol_assets') }}" {{ (Request::is('reports/eol_assets') ? ' class="active"' : '') }}>
+                            {{ trans('general.eol_assets_report') }}
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ url('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }}>
                             {{ trans('general.custom_report') }}
                         </a>
