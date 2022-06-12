@@ -358,4 +358,9 @@ return [
     'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
     'maintenance_mode_title' => 'System Temporarily Unavailable',
     'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
+    'eol_assets_report'      => 'EOL Assets Report',
+    'obsolete'              => 'Obsolete',
+    'years'                 => 'Years',
+    'months'                => 'Months',
+    'days'                  => 'Days',
 ];

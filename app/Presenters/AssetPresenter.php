@@ -527,49 +527,61 @@ class AssetPresenter extends Presenter
         return '<i class="fas fa-barcode" aria-hidden="true"></i>';
     }
 
+    /**
+     * Returns the EOL date basen on purchase date.
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @since [v6.0.3]
+     * @return null|DateTime
+     */
+    public function get_expiry_days()
+    {
+        $date = null;
+        if (($this->purchase_date) && ($this->model->model) && ($this->model->model->eol)) {
+            $date = date_create($this->purchase_date);
+            date_add($date, date_interval_create_from_date_string($this->model->model->eol . " " . trans('general.months')));
+        }
+        return $date;
+    }
     
     /**
      * Returns the days this item until hits EOL.
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @since [v6.0.3]
      * @return false|string
      */
     public function days_until_eol_date()
     {
-        if (($this->purchase_date) && ($this->model->model) && ($this->model->model->eol)) {
-            $date = date_create($this->purchase_date);
-            date_add($date, date_interval_create_from_date_string($this->model->model->eol.' months'));
+        $from = date_create(date("Y-m-d"));
+        $diff = date_diff($from,$this->get_expiry_days());
 
-            // $to = \Carbon\Carbon::createFromFormat('Y-m-d', $date->format('Y-m-d'));
-            // $from = \Carbon\Carbon::now();
-            $from = date_create(date("Y-m-d"));
-            $diff = date_diff($from,$date);
-            if ($diff->invert == 1)
-            {
-                $past_prefix = 'End Of Life (';
-                $past_suffix = ' Ago)';
-            }else
-            {
-                $past_prefix = 'Active (';
-                $past_suffix = ')';
-            }
-
-            // $diff_in_days = $to->diffInDays($from);
-            // $diff_in_days =now()->diffInDays(\Carbon\Carbon::parse($to), false);
-            // $years = now()->diffInYears(\Carbon\Carbon::parse($to),false);
-            // $months = now()->diffInMonths(\Carbon\Carbon::parse($to),false);
-            // $weeks = now()->diffInWeeks(\Carbon\Carbon::parse($to),false);
-            // $days = now()->diffInDays(\Carbon\Carbon::parse($to),false);
-            // $hours = $to->diffInHours($from);
-            // $minutes = $to->diffInMinutes($from);
-            // $seconds = $to->diffInSeconds($from);
-
-            // print_r($diff_in_days); // Output: 1
-
-            // $datetimenow = new DateTime(now());
-            // $interval = $date->diff($datetimenow);
-            // $days = $interval->format('%a');
-            // return ($years . " Years" . $months . " Months" . $days . " Days");
-            return($diff->format($past_prefix . "%y years %m months %d days" . $past_suffix));
+        if ($this->get_expiry_status($diff))
+        {                
+            $past_prefix = trans('general.obsolete') . ' (';
+            $past_suffix = ')';
+        } else
+        {                
+            $past_prefix = '';
+            $past_suffix = '';
         }
+
+        return($diff->format($past_prefix  . "%y " . trans('general.years') . " %m " . trans('general.months') . " %d " .trans('general.days') . $past_suffix));
+     
+    }
+
+    /**
+     * get EOL status whether obsolete (in the past already) / not
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @since [v6.0.3]
+     * @return true|false
+     */
+    public function get_expiry_status($datediff)
+    {
+        $expiry_status = false;
+        if ($datediff->invert == 1)
+        {
+            $expiry_status = true;    
+        }
+        return $expiry_status;
     }
 
 }

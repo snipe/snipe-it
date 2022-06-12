@@ -346,16 +346,10 @@ Route::group(['middleware' => ['auth']], function () {
         'reports/unaccepted_assets/{deleted?}',
         [ReportsController::class, 'postAssetAcceptanceReport']
     )->name('reports/export/unaccepted_assets');
-    
     Route::get(
         'reports/eol_assets',
         [ReportsController::class, 'getEOLReport']
-    )->name('reports.eol_assets');
-    Route::get(
-        'reports/export/eol_assets',
-        [ReportsController::class, 'getDeprecationReport']
-    )->name('reports/export/depreciation');
-    
+    )->name('reports.eol_assets');    
 });
 
 Route::get(
