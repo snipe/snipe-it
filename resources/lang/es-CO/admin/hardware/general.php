@@ -6,6 +6,7 @@ return [
     'archived'  				=> 'Archivado',
     'asset'  					=> 'Equipo',
     'bulk_checkout'             => 'Asignar Equipos',
+    'bulk_checkin'              => 'Checkin Assets',
     'checkin'  					=> 'Devolver Equipo',
     'checkout'  				=> 'Asignar Equipo',
     'clone'  					=> 'Clonar Equipo',

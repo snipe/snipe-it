@@ -130,7 +130,7 @@ class AssetImporter extends ItemImporter
             //-- user_id is a property of the abstract class Importer, which this class inherits from and it's setted by
             //-- the class that needs to use it (command importer or GUI importer inside the project).
             if (isset($target)) {
-                $asset->fresh()->checkOut($target, $this->user_id);
+                $asset->fresh()->checkOut($target, $this->user_id, date('Y-m-d H:i:s'));
             }
 
             return;

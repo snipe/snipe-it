@@ -91,6 +91,10 @@ return [
     'url'                  => 'Форматот на :attribute не е валиден.',
     'unique_undeleted'     => ':attribute мора да биде уникатен.',
     'non_circular'         => 'The :attribute must not create a circular reference.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

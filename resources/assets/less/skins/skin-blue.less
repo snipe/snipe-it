@@ -109,6 +109,26 @@ a {
     color: @light-blue;
   }
 }
+:root {
+  --button-default: darken(@blue, 15%);
+  --button-primary: darken(@blue, 25%);
+  --button-hover: darken(@blue, 30%);
+  --header: @blue; /* Use same as Header picker */
+  --text-main: #BBB;
+  --text-sub: #9b9b9b;
+  --link: #1978D4; /* Use same as Header picker, lighten by 70% */
+  --visited-link: #3c8dbc ; /* Use same as Header picker, lighten by 70% */
+  --hover-link: #4B77BE; /* Use same as Header picker, lighten by 70% */
+  --nav-link: #FFF; /* Use same as Header picker */
+  --light-link: #fff; /* Use same as Header picker */
+}
+a:link {
+  color: var(--link);
+}
+
+a:visited {
+  color: var(--visited-link);
+}
 
 .text-primary {
   color: darken(@light-blue, 20%);

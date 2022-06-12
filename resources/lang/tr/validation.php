@@ -91,6 +91,10 @@ return [
     'url'                  => ':attribute biçim geçersiz.',
     'unique_undeleted'     => ':attribute benzersiz olmalıdır.',
     'non_circular'         => ':attribute döngüsel bir başvuru oluşturmamalıdır.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

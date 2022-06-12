@@ -15,9 +15,9 @@
 
 
 
-      <link rel="apple-touch-icon" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url(e($snipeSettings->logo)) : '/img/logo.png' }}">
-      <link rel="apple-touch-startup-image" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url(e($snipeSettings->logo)) : '/img/logo.png' }}">
-      <link rel="shortcut icon" type="image/ico" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url(e($snipeSettings->favicon)) : '/favicon.ico' }} ">
+      <link rel="apple-touch-icon" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url(e($snipeSettings->logo)) :  config('app.url').'/img/logo.png' }}">
+      <link rel="apple-touch-startup-image" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url(e($snipeSettings->logo)) :  config('app.url').'/img/logo.png' }}">
+      <link rel="shortcut icon" type="image/ico" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url(e($snipeSettings->favicon)) : config('app.url').'/favicon.ico' }} ">
 
 
       <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -73,8 +73,6 @@
               }
           };
     </script>
-    <!-- Add laravel routes into javascript  Primarily useful for vue.-->
-    @routes
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <script src="{{ url(asset('js/html5shiv.js')) }}" nonce="{{ csrf_token() }}"></script>
@@ -358,14 +356,12 @@
 
                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="fa fa-sign-out fa-fw"></i> {{ trans('general.logout') }}
-                                    {{ csrf_field() }}
-                         </a>
+                        </a>
                         
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
                         </form>
 
-                    
                      </li>
                  </ul>
                </li>
@@ -390,7 +386,7 @@
        <!-- Sidebar toggle button-->
       </header>
 
-      <!-- Left side column. contains the logo and sidebar -->
+        <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
@@ -588,8 +584,8 @@
             @endcan
 
             @can('backend.interact')
-                <li class="treeview">
-                    <a href="#">
+                <li class="treeview {!! in_array(Request::route()->getName(),App\Helpers\Helper::SettingUrls()) ? ' active': '' !!}">
+                    <a href="#" id="settings" class="">
                         <i class="fas fa-cog" aria-hidden="true"></i>
                         <span>{{ trans('general.settings') }}</span>
                         <i class="fa fa-angle-left pull-right"></i>
@@ -619,7 +615,6 @@
                                 </a>
                             </li>
                         @endcan
-
 
                         @can('view', \App\Models\Category::class)
                             <li>
@@ -676,9 +671,7 @@
                                 </a>
                             </li>
                         @endcan
-
                     </ul>
-
                 </li>
             @endcan
 

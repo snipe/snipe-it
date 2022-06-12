@@ -275,13 +275,18 @@ class ReportsController extends Controller
                         }
                     }
 
+                    if($actionlog->item){
+                        $item_name = e($actionlog->item->getDisplayNameAttribute());
+                    } else {
+                        $item_name = '';
+                    }
 
                     $row = [
                         $actionlog->created_at,
                         ($actionlog->user) ? e($actionlog->user->getFullNameAttribute()) : '',
                         $actionlog->present()->actionType(),
                         e($actionlog->itemType()),
-                        ($actionlog->itemType() == 'user') ? $actionlog->filename : e($actionlog->item->getDisplayNameAttribute()),
+                        ($actionlog->itemType() == 'user') ? $actionlog->filename : $item_name,
                         $target_name,
                         ($actionlog->note) ? e($actionlog->note) : '',
                         $actionlog->log_meta,
@@ -933,12 +938,17 @@ class ReportsController extends Controller
         /**
          * Get all assets with pending checkout acceptances
          */
-
-        $acceptances = CheckoutAcceptance::pending()->with('assignedTo')->get();
+        if($showDeleted) {
+            $acceptances = CheckoutAcceptance::pending()->where('checkoutable_type', 'App\Models\Asset')->withTrashed()->with(['assignedTo' , 'checkoutable.assignedTo', 'checkoutable.model'])->get();
+        } else {
+            $acceptances = CheckoutAcceptance::pending()->where('checkoutable_type', 'App\Models\Asset')->with(['assignedTo' => function ($query) {
+                $query->withTrashed();
+            }, 'checkoutable.assignedTo', 'checkoutable.model'])->get();
+        }
 
         $assetsForReport = $acceptances
-            ->filter(function($acceptance) {
-                return $acceptance->checkoutable_type == 'App\Models\Asset' && !is_null($acceptance->assignedTo);
+            ->filter(function ($acceptance) {
+                return $acceptance->checkoutable_type == 'App\Models\Asset';
             })
             ->map(function($acceptance) {
                 return ['assetItem' => $acceptance->checkoutable, 'acceptance' => $acceptance];

@@ -946,6 +946,7 @@ class SettingsController extends Controller
             $setting->ldap_active_flag = $request->input('ldap_active_flag');
             $setting->ldap_emp_num = $request->input('ldap_emp_num');
             $setting->ldap_email = $request->input('ldap_email');
+            $setting->ldap_manager = $request->input('ldap_manager');
             $setting->ad_domain = $request->input('ad_domain');
             $setting->is_ad = $request->input('is_ad', '0');
             $setting->ad_append_domain = $request->input('ad_append_domain', '0');
@@ -1025,6 +1026,12 @@ class SettingsController extends Controller
 
         return redirect()->back()->withInput()->withErrors($setting->getErrors());
     }
+    public static function getPDFBranding()
+    {
+        $pdf_branding= Setting::getSettings();
+
+        return $pdf_branding;
+    }
 
     /**
      * Show the listing of backups.
@@ -1037,7 +1044,7 @@ class SettingsController extends Controller
      */
     public function getBackups()
     {
-
+        $settings = Setting::getSettings();
         $path = 'app/backups';
         $backup_files = Storage::files($path);
         $files_raw = [];
@@ -1054,7 +1061,7 @@ class SettingsController extends Controller
                         'filename' => basename($backup_files[$f]),
                         'filesize' => Setting::fileSizeConvert(Storage::size($backup_files[$f])),
                         'modified_value' => $file_timestamp,
-                        'modified_display' => Helper::getFormattedDateObject($file_timestamp, $type = 'datetime', false),
+                        'modified_display' => date($settings->date_display_format.' '.$settings->time_display_format, $file_timestamp),
                         
                     ];
                 }
@@ -1227,7 +1234,11 @@ class SettingsController extends Controller
                 // TODO: run a backup
 
 
-                Artisan::call('db:wipe');
+                Artisan::call('db:wipe', [
+                    '--force' => true,
+                ]);
+
+                \Log::debug('Attempting to restore from: '. storage_path($path).'/'.$filename);
 
                 // run the restore command
                 Artisan::call('snipeit:restore', 
@@ -1239,19 +1250,26 @@ class SettingsController extends Controller
 
                 // If it's greater than 300, it probably worked
                 $output = Artisan::output();
+
                 if (strlen($output) > 300) {
                     $find_user = DB::table('users')->where('first_name', $user->first_name)->where('last_name', $user->last_name)->exists();
-                    if(!$find_user){
+
+                    if (!$find_user){
                         \Log::warning('Attempting to restore user: ' . $user->first_name . ' ' . $user->last_name);
                         $new_user = $user->replicate();
                         $new_user->push();
                     }
 
-                    $session_files = glob(storage_path("framework/sessions/*"));
-                    foreach ($session_files as $file) {
-                        if (is_file($file))
-                            unlink($file);
-                    }
+
+                    \Log::debug('Logging all users out..');
+                    Artisan::call('snipeit:global-logout', ['--force' => true]);
+                    
+                    /* run migrations */
+                    \Log::debug('Migrating database...');
+                    Artisan::call('migrate', ['--force' => true]);
+                    $migrate_output = Artisan::output();
+                    \Log::debug($migrate_output);
+
                     DB::table('users')->update(['remember_token' => null]);
                     \Auth::logout();
 

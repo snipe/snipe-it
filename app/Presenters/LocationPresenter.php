@@ -91,6 +91,14 @@ class LocationPresenter extends Presenter
                 'visible' => true,
             ],
             [
+                'field' => 'address2',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' =>  trans('admin/locations/table.address'),
+                'visible' => false,
+            ],
+            [
                 'field' => 'city',
                 'searchable' => true,
                 'sortable' => true,

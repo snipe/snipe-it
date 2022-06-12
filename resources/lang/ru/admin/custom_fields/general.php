@@ -41,5 +41,7 @@ return [
     'make_required' => 'Необязательное - нажмите чтобы сделать обязательным',
     'reorder' => 'Изменить порядок',
     'db_field' => 'Поле БД',
-    'db_convert_warning' => 'ВНИМАНИЕ. Это поле находится в пользовательской таблице как <code> :db_column </code> но должно быть :expected </code>.'
+    'db_convert_warning' => 'ВНИМАНИЕ. Это поле находится в пользовательской таблице как <code> :db_column </code> но должно быть :expected </code>.',
+    'is_unique' => 'This value must be unique across all assets',
+    'unique' => 'Unique',
 ];

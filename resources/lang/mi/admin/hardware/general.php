@@ -6,6 +6,7 @@ return [
     'archived'  				=> 'Whakamahia',
     'asset'  					=> 'Tahua',
     'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkin'              => 'Checkin Assets',
     'checkin'  					=> 'Tirohia te Ahua',
     'checkout'  				=> 'Whakaritehia te Ahua',
     'clone'  					=> 'Te Tino Tae',

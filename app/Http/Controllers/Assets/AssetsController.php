@@ -137,12 +137,12 @@ class AssetsController extends Controller
             $asset->archived                = '0';
             $asset->physical                = '1';
             $asset->depreciate              = '0';
-            $asset->status_id               = request('status_id', 0);
+            $asset->status_id               = request('status_id');
             $asset->warranty_months         = request('warranty_months', null);
             $asset->purchase_cost           = Helper::ParseCurrency($request->get('purchase_cost'));
             $asset->purchase_date           = request('purchase_date', null);
             $asset->assigned_to             = request('assigned_to', null);
-            $asset->supplier_id             = request('supplier_id', 0);
+            $asset->supplier_id             = request('supplier_id', null);
             $asset->requestable             = request('requestable', 0);
             $asset->rtd_location_id         = request('rtd_location_id', null);
 
@@ -168,9 +168,9 @@ class AssetsController extends Controller
                     if ($field->field_encrypted == '1') {
                         if (Gate::allows('admin')) {
                             if (is_array($request->input($field->convertUnicodeDbSlug()))) {
-                                $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(e(implode(', ', $request->input($field->convertUnicodeDbSlug()))));
+                                $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(implode(', ', $request->input($field->convertUnicodeDbSlug())));
                             } else {
-                                $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(e($request->input($field->convertUnicodeDbSlug())));
+                                $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
                             }
                         }
                     } else {
@@ -344,9 +344,9 @@ class AssetsController extends Controller
                 if ($field->field_encrypted == '1') {
                     if (Gate::allows('admin')) {
                         if (is_array($request->input($field->convertUnicodeDbSlug()))) {
-                            $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(e(implode(', ', $request->input($field->convertUnicodeDbSlug()))));
+                            $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(implode(', ', $request->input($field->convertUnicodeDbSlug())));
                         } else {
-                            $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(e($request->input($field->convertUnicodeDbSlug())));
+                            $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
                         }
                     }
                 } else {
@@ -861,12 +861,13 @@ class AssetsController extends Controller
 
 
             $asset->logAudit($request->input('note'), $request->input('location_id'), $file_name);
-            return redirect()->to('hardware')->with('success', trans('admin/hardware/message.audit.success'));
+            return redirect()->route('assets.audit.due')->with('success', trans('admin/hardware/message.audit.success'));
         }
     }
 
     public function getRequestedIndex($user_id = null)
     {
+        $this->authorize('index', Asset::class);
         $requestedItems = CheckoutRequest::with('user', 'requestedItem')->whereNull('canceled_at')->with('user', 'requestedItem');
 
         if ($user_id) {

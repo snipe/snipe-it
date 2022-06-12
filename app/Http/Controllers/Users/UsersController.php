@@ -625,9 +625,8 @@ class UsersController extends Controller
             $credentials = ['email' => trim($user->email)];
 
             try {
-                \Password::sendResetLink($credentials, function (Message $message) use ($user) {
-                    $message->subject($this->getEmailSubject());
-                });
+
+                Password::sendResetLink($credentials);
 
                 return redirect()->back()->with('success', trans('admin/users/message.password_reset_sent', ['email' => $user->email]));
             } catch (\Exception $e) {

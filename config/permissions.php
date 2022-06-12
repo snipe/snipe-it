@@ -6,6 +6,7 @@
  |--------------------------------------------------------------------------
 */
 
+
 return [
 
     'Global' => [
@@ -97,6 +98,7 @@ return [
             'display'    => true,
         ],
 
+
         [
             'permission' => 'assets.view.requestable',
             'label'      => 'View Requestable Assets',
@@ -184,6 +186,7 @@ return [
         ],
     ],
 
+
     'Licenses' => [
         [
             'permission' => 'licenses.view',
@@ -228,6 +231,7 @@ return [
             'display'    => true,
         ],
     ],
+
 
     'Components' => [
         [
@@ -291,13 +295,6 @@ return [
         [
             'permission' => 'kits.delete',
             'label'      => 'Delete ',
-            'note'       => '',
-            'display'    => true,
-        ],
-
-        [
-            'permission' => 'kits.checkout',
-            'label'      => 'Checkout ',
             'note'       => '',
             'display'    => true,
         ],
@@ -494,6 +491,7 @@ return [
         ],
     ],
 
+
     'Manufacturers' => [
         [
             'permission' => 'manufacturers.view',
@@ -601,6 +599,9 @@ return [
             'display'    => true,
         ],
     ],
+
+
+
 
     'Self' => [
         [

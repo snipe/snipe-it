@@ -16,6 +16,7 @@ return [
         'error'   			=> 'Kāore i te whakahouhia te tahua, tēnā whakamātau anō',
         'success' 			=> 'Kua whakahoutia te tahua.',
         'nothing_updated'	=>  'Kaore i whiriwhiria he mahinga, na reira kaore i whakahoutia.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

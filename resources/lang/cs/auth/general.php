@@ -4,13 +4,13 @@ return [
     'send_password_link'	        => 'Poslat odkaz na obnovení hesla',
     'email_reset_password'			=> 'Poslat odkaz na obnovení hesla',
     'reset_password'			    => 'Obnovit heslo',
-    'saml_login'                    => 'Login via SAML',
+    'saml_login'                    => 'Přihlásit se pomocí SAML',
     'login'                         => 'Přihlášení',
     'login_prompt'                  => 'Přihlaste se prosím',
     'forgot_password'               => 'Zapomněl jsem heslo',
-    'ldap_reset_password'           => 'Please click here to reset your LDAP password',
+    'ldap_reset_password'           => 'Prosím klikněte zde pro obnovu vašeho LDAP hesla',
     'remember_me'                   => 'Pamatovat si mě',
-    'username_help_top'                 => 'Enter your <strong>username</strong> to be emailed a password reset link.',
-    'username_help_bottom'          => 'Your username and email address <em>may</em> be the same, but may not be, depending on your configuration. If you cannot remember your username, contact your administrator. <br><br><strong>Usernames without an associated email address will not be emailed a password reset link.</strong> ',
+    'username_help_top'                 => 'Zadejte své <strong>uživatelské jméno</strong> pro zaslání e-mailu s odkazem pro obnovení hesla.',
+    'username_help_bottom'          => 'Vaše uživatelské jméno a e-mailová adresa <em>mohou</em> být stejná, ale nemusí být, záleží na Vašem nastavení. Pokud si nepamatujete Vaše uživatelské jméno, kontaktujte Vašeho správce. <br><br><strong>Uživatelským jménům bez přidružené e-mailové adresy nebude zaslán odkaz pro obnovu hesla.</strong> ',
     ];
 

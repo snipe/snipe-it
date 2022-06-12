@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'И-мэйл хаяг',
     'employee_num'      	=> 'Ажилчдын тоо',
     'first_name' 			=> 'Нэр',
-    'groupnotes'			=> 'Хэрэглэгч рүү томилсон бүлэг сонгох, хэрэглэгч өөрсдийн өгсөн бүлгүүдийн зөвшөөрлийг авдаг гэдгийг санаарай.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Өв залгамжлах',
     'job' 					=> 'Албан тушаал',

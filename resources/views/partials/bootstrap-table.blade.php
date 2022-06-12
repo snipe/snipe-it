@@ -6,7 +6,6 @@
 @push('js')
 
 <script src="{{ url(mix('js/dist/bootstrap-table.js')) }}"></script>
-
 <script nonce="{{ csrf_token() }}">
     $(function () {
         var locale = '{{ config('app.locale') }}';
@@ -31,7 +30,20 @@
             return false;
         }
 
-        $('.snipe-table').bootstrapTable({
+        $('.snipe-table').bootstrapTable('destroy').each(function () {
+            data_export_options = $(this).attr('data-export-options');
+            export_options = data_export_options ? JSON.parse(data_export_options) : {};
+            export_options['htmlContent'] = false; // this is already the default; but let's be explicit about it
+            export_options['jspdf']= {"orientation": "l"};
+            // the following callback method is necessary to prevent XSS vulnerabilities
+            // (this is taken from Bootstrap Tables's default wrapper around jQuery Table Export)
+            export_options['onCellHtmlData'] = function (cell, rowIndex, colIndex, htmlData) {
+                if (cell.is('th')) {
+                    return cell.find('.th-inner').text()
+                }
+                return htmlData
+            }
+            $(this).bootstrapTable({
             classes: 'table table-responsive table-no-bordered',
             ajaxOptions: {
                 headers: {
@@ -77,17 +89,15 @@
                 export: 'fa-download',
                 clearSearch: 'fa-times'
             },
-            exportOptions: {
-                htmlContent: true,
-            },
+                exportOptions: export_options,
 
             exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
             onLoadSuccess: function () {
                 $('[data-toggle="tooltip"]').tooltip(); // Needed to attach tooltips after ajax call
             }
 
+            });
         });
-
     });
 
 
@@ -104,8 +114,12 @@
 
     // These methods dynamically add/remove hidden input values in the bulk actions form
     $('.snipe-table').on('check.bs.table .btSelectItem', function (row, $element) {
-        $('#bulkEdit').removeAttr('disabled');
-        $('#bulkEdit').prepend('<input id="checkbox_' + $element.id + '" type="hidden" name="ids[]" value="' + $element.id + '">');
+        var buttonName =  $(this).data('bulk-button-id');
+        var formName =  $(this).data('bulk-form-id');
+        var tableId =  $(this).data('id-table');
+
+        $(buttonName).removeAttr('disabled');
+        $(formName).prepend('<input id="' + tableId + '_checkbox_' + $element.id + '" type="hidden" name="ids[]" value="' + $element.id + '">');
     });
 
     $('.snipe-table').on('uncheck.bs.table .btSelectItem', function (row, $element) {
@@ -113,33 +127,42 @@
     });
 
 
+    $('.snipe-table').on('check-all.bs.table', function (event, rowsAfter, rowsBefore) {
+
+        var buttonName =  $(this).data('bulk-button-id');
+        $(buttonName).removeAttr('disabled');
+        var formName =  $(this).data('bulk-form-id');
+        var tableId =  $(this).data('id-table');
+
+        for (var i in rowsAfter) {
+            $(formName).prepend('<input id="' + tableId + '_checkbox_' + rowsAfter[i].id + '" type="hidden" name="ids[]" value="' + rowsAfter[i].id + '">');
+        }
+    });
+
+
     // Handle whether or not the edit button should be disabled
     $('.snipe-table').on('uncheck.bs.table', function () {
-        if ($('.snipe-table').bootstrapTable('getSelections').length == 0) {
-            $('#bulkEdit').attr('disabled', 'disabled');
+
+        var buttonName =  $(this).data('bulk-button-id');
+
+        if ($(this).bootstrapTable('getSelections').length == 0) {
+            $(buttonName).attr('disabled', 'disabled');
         }
     });
 
     $('.snipe-table').on('uncheck-all.bs.table', function (event, rowsAfter, rowsBefore) {
-        $('#bulkEdit').attr('disabled', 'disabled');
-        //console.dir(rowsBefore);
+
+        var buttonName =  $(this).data('bulk-button-id');
+        $(buttonName).attr('disabled', 'disabled');
+        var tableId =  $(this).data('id-table');
 
         for (var i in rowsBefore) {
-            $( "#checkbox_" + rowsBefore[i].id).remove();
+            $( tableId + "_checkbox_" + rowsBefore[i].id).remove();
         }
 
     });
 
-    $('.snipe-table').on('check-all.bs.table', function (event, rowsAfter, rowsBefore) {
-        
-        $('#bulkEdit').removeAttr('disabled');
-        //console.dir(rowsAfter);
-        
-        for (var i in rowsAfter) {
-            // console.log(rowsAfter[i].id);
-            $('#bulkEdit').prepend('<input id="checkbox_' + rowsAfter[i].id + '" type="hidden" name="ids[]" value="' + rowsAfter[i].id + '">');
-        }
-    });
+
 
     
 
@@ -458,6 +481,8 @@
                 if ((row.custom_fields[field_column_plain].field_format) && (row.custom_fields[field_column_plain].value)) {
                     if (row.custom_fields[field_column_plain].field_format=='URL') {
                         return '<a href="' + row.custom_fields[field_column_plain].value + '" target="_blank" rel="noopener">' + row.custom_fields[field_column_plain].value + '</a>';
+                    }else if (row.custom_fields[field_column_plain].field_format=='BOOLEAN') {
+                        return (row.custom_fields[field_column_plain].value == 1) ? "<span class='fas fa-check-circle' style='color:green' />" : "<span class='fas fa-times-circle' style='color:red' />";
                     } else if (row.custom_fields[field_column_plain].field_format=='EMAIL') {
                         return '<a href="mailto:' + row.custom_fields[field_column_plain].value + '">' + row.custom_fields[field_column_plain].value + '</a>';
                     }
@@ -627,6 +652,11 @@
                 var altName = row.model.name;
            }
             return '<a href="' + value + '" data-toggle="lightbox" data-type="image"><img src="' + value + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive" alt="' + altName + '"></a>';
+        }
+    }
+    function downloadFormatter(value) {
+        if (value) {
+            return '<a href="' + value + '" target="_blank"><i class="fas fa-download"></i></a>';
         }
     }
 

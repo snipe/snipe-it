@@ -16,6 +16,7 @@ return [
         'error'   			=> 'Vara ei värskendatud, proovige uuesti',
         'success' 			=> 'Vara värskendati edukalt',
         'nothing_updated'	=>  'Pole ühtegi välju valitud, nii et midagi ei uuendatud.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

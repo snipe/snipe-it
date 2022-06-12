@@ -68,18 +68,21 @@ class LoginController extends Controller
             return redirect()->intended('/');
         }
 
-        // If the environment is set to ALWAYS require SAML, go straight to the SAML route.
-        // We don't need to check other settings, as this should override those.
-        if (config('app.require_saml')) {
-            return redirect()->route('saml.login');
-        }
+        if (!$request->session()->has('loggedout')) {
+            // If the environment is set to ALWAYS require SAML, go straight to the SAML route.
+            // We don't need to check other settings, as this should override those.
+            if (config('app.require_saml')) {
+                return redirect()->route('saml.login');
+            }
 
 
-        if ($this->saml->isEnabled() && Setting::getSettings()->saml_forcelogin == '1' && ! ($request->has('nosaml') || $request->session()->has('error'))) {
-            return redirect()->route('saml.login');
+            if ($this->saml->isEnabled() && Setting::getSettings()->saml_forcelogin == '1' && ! ($request->has('nosaml') || $request->session()->has('error'))) {
+                return redirect()->route('saml.login');
+            }
         }
 
         if (Setting::getSettings()->login_common_disabled == '1') {
+            \Log::debug('login_common_disabled is set to 1 - return a 403');
             return view('errors.403');
         }
 
@@ -103,11 +106,13 @@ class LoginController extends Controller
     {
         $saml = $this->saml;
         $samlData = $request->session()->get('saml_login');
+
         if ($saml->isEnabled() && ! empty($samlData)) {
+
             try {
-                Log::debug('Attempting to log user in by SAML authentication.');
                 $user = $saml->samlLogin($samlData);
-                if (! is_null($user)) {
+
+                if (!is_null($user)) {
                     Auth::login($user);
                 } else {
                     $username = $saml->getUsername();
@@ -120,11 +125,26 @@ class LoginController extends Controller
                     $user->last_login = \Carbon::now();
                     $user->save();
                 }
+                
             } catch (\Exception $e) {
                 \Log::warning('There was an error authenticating the SAML user: '.$e->getMessage());
                 throw new \Exception($e->getMessage());
             }
+
+        // Fallthrough with better logging
+        } else {
+
+            // Better logging
+            if (!$saml->isEnabled()) {
+                \Log::warning("SAML page requested, but SAML does not seem to enabled.");
+            } else {
+                \Log::warning("SAML page requested, but samlData seems empty.");
+            }
         }
+
+        \Log::warning("Something else went wrong while trying to login as SAML user");
+
+
     }
 
     /**
@@ -162,7 +182,7 @@ class LoginController extends Controller
              Log::debug("Local user ".$request->input('username')." does not exist");
              Log::debug("Creating local user ".$request->input('username'));
 
-             if ($user = Ldap::createUserFromLdap($ldap_user)) { //this handles passwords on its own
+             if ($user = Ldap::createUserFromLdap($ldap_user, $request->input('password'))) {
                  Log::debug("Local user created.");
              } else {
                  Log::debug("Could not create local user.");
@@ -239,10 +259,12 @@ class LoginController extends Controller
 
         //If the environment is set to ALWAYS require SAML, return access denied
         if (config('app.require_saml')) {
+            \Log::debug('require SAML is enabled in the .env - return a 403');
             return view('errors.403');
         }
 
         if (Setting::getSettings()->login_common_disabled == '1') {
+            \Log::debug('login_common_disabled is set to 1 - return a 403');
             return view('errors.403');
         }
 
@@ -333,7 +355,6 @@ class LoginController extends Controller
 
         $secret = Google2FA::generateSecretKey();
         $user->two_factor_secret = $secret;
-        $user->save();
 
         $barcode = new Barcode();
         $barcode_obj =
@@ -350,6 +371,8 @@ class LoginController extends Controller
                 'black',
                 [-2, -2, -2, -2]
             );
+
+        $user->save(); // make sure to save *AFTER* displaying the barcode, or else we might save a two_factor_secret that we never actually displayed to the user if the barcode fails
 
         return view('auth.two_factor_enroll')->with('barcode_obj', $barcode_obj);
     }
@@ -395,7 +418,7 @@ class LoginController extends Controller
             return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.code_required'));
         }
 
-        if (! $request->has('two_factor_secret')) {
+        if (! $request->has('two_factor_secret')) { // TODO this seems almost the same as above?
             return redirect()->route('two-factor')->with('error', 'Two-factor code is required.');
         }
 
@@ -423,10 +446,17 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
+        // Logout is only allowed with a http POST but we need to allow GET for SAML SLO
         $settings = Setting::getSettings();
         $saml = $this->saml;
+        $samlLogout = $request->session()->get('saml_logout');
         $sloRedirectUrl = null;
         $sloRequestUrl = null;
+    
+        // Only allow GET if we are doing SAML SLO otherwise abort with 405
+        if ($request->isMethod('GET') && !$samlLogout) {
+            abort(405);
+        }
 
         if ($saml->isEnabled()) {
             $auth = $saml->getAuth();
@@ -442,8 +472,6 @@ class LoginController extends Controller
         if (! empty($sloRequestUrl)) {
             return redirect()->away($sloRequestUrl);
         }
-
-        $request->session()->regenerate(true);
 
         $request->session()->regenerate(true);
         Auth::logout();
@@ -475,6 +503,7 @@ class LoginController extends Controller
         ]);
     }
 
+
     public function username()
     {
         return 'username';
@@ -500,6 +529,7 @@ class LoginController extends Controller
             ->withInput($request->only($this->username(), 'remember'))
             ->withErrors([$this->username() => $message]);
     }
+
 
     /**
      * Override the lockout time and duration

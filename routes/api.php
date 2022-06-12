@@ -87,22 +87,24 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:'.config('app.
             ]
         )->name('api.accessories.selectlist');
 
-        Route::resource('accessories', 
-            Api\AccessoriesController::class,
-            ['names' => 
-                [
-                    'index' => 'api.accessories.index',
-                    'show' => 'api.accessories.show',
-                    'update' => 'api.accessories.update',
-                    'store' => 'api.accessories.store',
-                    'destroy' => 'api.accessories.destroy',
-                    ],
-            'except' => ['create', 'edit'],
-            'parameters' => ['accessory' => 'accessory_id'],
-            ]
-        );
+
 
      }); // end accessories group
+
+    Route::resource('accessories',
+        Api\AccessoriesController::class,
+        ['names' =>
+            [
+                'index' => 'api.accessories.index',
+                'show' => 'api.accessories.show',
+                'update' => 'api.accessories.update',
+                'store' => 'api.accessories.store',
+                'destroy' => 'api.accessories.destroy',
+            ],
+            'except' => ['create', 'edit'],
+            'parameters' => ['accessory' => 'accessory_id'],
+        ]
+    );
 
      
      /**
@@ -488,7 +490,18 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:'.config('app.
             'checkout'
         ]
         )->name('api.asset.checkout');
-      }); 
+
+      Route::post('{asset_id}/restore',
+          [
+              Api\AssetsController::class,
+              'restore'
+          ]
+      )->name('api.assets.restore');
+
+      });
+
+
+
 
 
         Route::resource('hardware', 
@@ -1007,7 +1020,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:'.config('app.
             Route::post('models',
                 [
                     Api\PredefinedKitsController::class, 
-                    'storeModels'
+                    'storeModel'
                 ]
             )->name('api.kits.models.store');
 

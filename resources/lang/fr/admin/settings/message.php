@@ -11,8 +11,8 @@ return [
         'file_deleted'          => 'Le fichier de sauvegarde a été supprimé correctement. ',
         'generated'             => 'Un nouveau fichier de sauvegarde a été créé correctement.',
         'file_not_found'        => 'Ce fichier de sauvegarde n\'a pas pu être trouvé sur le serveur .',
-        'restore_warning'       => 'Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This will also log out all of your existing users (including you).',
-        'restore_confirm'       => 'Are you sure you wish to restore your database from :filename?'
+        'restore_warning'       => 'Oui, restaurez-le. Je reconnais que cela écrasera toutes les données existantes actuellement dans la base de données. Cela déconnectera également tous vos utilisateurs existants (vous y compris).',
+        'restore_confirm'       => 'Êtes-vous sûr de vouloir restaurer votre base de données à partir de :filename ?'
     ],
     'purge' => [
         'error'     => 'Une erreur est survenue durant la purge. ',
@@ -27,7 +27,7 @@ return [
     ],
     'ldap' => [
         'testing' => 'Test de la connexion, de la liaison et de la requête LDAP ...',
-        '500' => '500 Server Error. Please check your server logs for more information.',
+        '500' => 'Erreur500 : Erreur de serveur. Veuillez vérifier les journaux de votre serveur pour plus d\'informations.',
         'error' => 'Une erreur est survenue :(',
         'sync_success' => 'A sample of 10 users returned from the LDAP server based on your settings:',
         'testing_authentication' => 'Test de l\'authentification LDAP...',

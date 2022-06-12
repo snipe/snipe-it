@@ -91,6 +91,10 @@ return [
     'url'                  => 'Az :attribute formátuma érvénytelen.',
     'unique_undeleted'     => 'A(z) :attribute egyedinek kell lennie.',
     'non_circular'         => 'A(z) :attribute nem hozhat létre körkörös hivatkozást.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

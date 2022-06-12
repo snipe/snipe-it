@@ -387,6 +387,15 @@ a {
   display: table-cell;
 }
 
+.row-new-striped > .row:nth-of-type(odd){
+  background-color: var(--back-sub);
+  color: var(--text-main);
+}
+.row-new-striped > .row:nth-of-type(even){
+  background-color: var(--back-sub-alt);
+  color: var(--text-main);
+}
+
 .search-highlight, .search-highlight:hover {
   background-color: #e9d15b;
 }

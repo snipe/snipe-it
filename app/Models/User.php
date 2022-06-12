@@ -74,14 +74,13 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      * @var array
      */
 
-    // 'username' => 'required|string|min:1|unique:users,username,NULL,id,deleted_at,NULL',
     protected $rules = [
-        'first_name'              => 'required|string|min:1',
-        'username'                => 'required|string|min:1|unique_undeleted',
-        'email'                   => 'email|nullable',
+        'first_name'              => 'required|string|min:1|max:191',
+        'username'                => 'required|string|min:1|unique_undeleted|max:191',
+        'email'                   => 'email|nullable|max:191',
         'password'                => 'required|min:8',
         'locale'                  => 'max:10|nullable',
-        'website'                 => 'url|nullable',
+        'website'                 => 'url|nullable|max:191',
         'manager_id'              => 'nullable|exists:users,id|cant_manage_self',
         'location_id'             => 'exists:locations,id|nullable',
     ];
@@ -259,6 +258,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         return $this->endpoint;
     }
 
+
     /**
      * Establishes the user -> assets relationship
      *
@@ -308,7 +308,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function consumables()
     {
-        return $this->belongsToMany(\App\Models\Consumable::class, 'consumables_users', 'assigned_to', 'consumable_id')->withPivot('id')->withTrashed();
+        return $this->belongsToMany(\App\Models\Consumable::class, 'consumables_users', 'assigned_to', 'consumable_id')->withPivot('id','created_at')->withTrashed();
     }
 
     /**
@@ -498,13 +498,15 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
             $last_name = '';
             $username = $users_name;
         } else {
+
             list($first_name, $last_name) = explode(' ', $users_name, 2);
 
             // Assume filastname by default
             $username = str_slug(substr($first_name, 0, 1).$last_name);
 
-            if ($format == 'firstname.lastname') {
-                $username = str_slug($first_name).'.'.str_slug($last_name);
+            if ($format=='firstname.lastname') {
+                $username = str_slug($first_name) . '.' . str_slug($last_name);
+
             } elseif ($format == 'lastnamefirstinitial') {
                 $username = str_slug($last_name.substr($first_name, 0, 1));
             } elseif ($format == 'firstintial.lastname') {
@@ -527,6 +529,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         $user['first_name'] = $first_name;
         $user['last_name'] = $last_name;
         $user['username'] = strtolower($username);
+
 
         return $user;
     }
@@ -582,8 +585,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         elseif ((Setting::getSettings()->two_factor_enabled == '2') && ($this->two_factor_enrolled)) {
             return true;
         }
-
         return false;
+
     }
 
 
@@ -640,6 +643,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
             $query->where('permission_groups.id', '=', $id);
         });
     }
+
 
     /**
      * Query builder scope to order on manager

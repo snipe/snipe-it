@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'கருவிகள்',
     'activated'			    => 'இயக்கப்பட்டது',
     'accessory'				=> 'துணை',
@@ -26,6 +26,7 @@
     'audit'				    => 'தணிக்கை',
     'audit_report'			=> 'தணிக்கைப் பதிவு',
     'assets'				=> 'சொத்துக்கள்',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => 'Avatar நீக்கு',
     'avatar_upload'         => 'Avatar பதிவேற்றவும்',
     'back'      			=> 'மீண்டும்',
@@ -96,6 +97,7 @@
     'eol'					=> ', EOL',
     'email_domain'			=> 'மின்னஞ்சல் டொமைன்',
     'email_format'			=> 'மின்னஞ்சல் வடிவமைப்பு',
+    'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'இறக்குமதி செய்யும் போது மின்னஞ்சல் முகவரிகள் உருவாக்க இது பயன்படுகிறது',
     'error'				    => 'Error',
     'filastname_format'			=> 'முதல் தொடக்க கடைசி பெயர் (jsmith@example.com)',
@@ -113,6 +115,7 @@
     'files'                 => 'Files',
     'file_name'				=> 'கோப்பு',
     'file_type'             => 'File Type',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'கோப்பு பதிவேற்றங்கள்',
     'file_upload'           => 'File Upload',
     'generate'				=> 'உருவாக்குதல்',
@@ -192,6 +195,8 @@
     'qty'		            => 'கொத்தமல்லி',
     'quantity'		        => 'அளவு',
     'quantity_minimum'      => 'You have :count items below or almost below minimum quantity levels',
+    'quickscan_checkin'  	=> 'Quick Scan Checkin',
+    'quickscan_checkin_status'  	=> 'Checkin Status',
     'ready_to_deploy'		=> 'வரிசைப்படுத்த தயாராக உள்ளது',
     'recent_activity'		=> 'சமீபத்திய நடவடிக்கை',
     'remaining'             => 'Remaining',
@@ -226,6 +231,7 @@
     'show_current'  		=> 'Show Current',
     'sign_in'				=> 'உள்நுழைக',
     'signature'             => 'கையொப்பம்',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Skin',
     'slack_msg_note'        => 'A slack message will be sent',
     'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',
@@ -234,6 +240,7 @@
     'state'  				=> 'நிலை',
     'status_labels'			=> 'நிலை லேபிள்கள்',
     'status'    			=> 'நிலைமை',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'சப்ளையர்',
     'suppliers'  			=> 'சப்ளையர்கள்',
     'sure_to_delete'    => 'நீங்கள் நிச்சயமாக நீக்க விரும்புகிறீர்களா?',
@@ -347,4 +354,7 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

@@ -16,6 +16,7 @@ return [
         'error'   			=> 'Įrangos atnaujinti nepavyko, prašome bandykite dar kartą',
         'success' 			=> 'Įranga sėkmingai atnaujinta.',
         'nothing_updated'	=>  'Nei vienas laukelis nepasirinktas, tad niekas nebuvo atnaujinta.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

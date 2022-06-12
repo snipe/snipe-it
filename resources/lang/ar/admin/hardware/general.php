@@ -6,6 +6,7 @@ return [
     'archived'  				=> 'مؤرشفة',
     'asset'  					=> 'أصل',
     'bulk_checkout'             => 'إخراج الأصول',
+    'bulk_checkin'              => 'ادخال الأصل',
     'checkin'  					=> 'ادخال الأصل',
     'checkout'  				=> 'اخراج الأصل',
     'clone'  					=> 'استنساخ الأصل',

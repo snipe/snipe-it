@@ -111,7 +111,7 @@ class Asset extends Depreciable
         'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
         'status'          => 'integer',
         'serial'          => 'unique_serial|nullable',
-        'purchase_cost'   => 'numeric|nullable',
+        'purchase_cost'   => 'numeric|nullable|gte:0',
         'next_audit_date' => 'date|nullable',
         'last_audit_date' => 'date|nullable',
         'supplier_id'     => 'exists:suppliers,id|nullable',
@@ -195,9 +195,24 @@ class Asset extends Depreciable
             $model = AssetModel::find($this->model_id);
 
             if (($model) && ($model->fieldset)) {
+
+                foreach ($model->fieldset->fields as $field){
+                    if($field->format == 'BOOLEAN'){
+                        $this->{$field->db_column} = filter_var($this->{$field->db_column}, FILTER_VALIDATE_BOOLEAN);
+                    }
+                }
+
                 $this->rules += $model->fieldset->validation_rules();
+
+                foreach ($this->model->fieldset->fields as $field){
+                    if($field->format == 'BOOLEAN'){
+                        $this->{$field->db_column} = filter_var($this->{$field->db_column}, FILTER_VALIDATE_BOOLEAN);
+                    }
+                }
             }
         }
+
+
 
         return parent::save($params);
     }
@@ -1172,7 +1187,9 @@ class Asset extends Depreciable
 
     public function scopeRequestableAssets($query)
     {
-        return Company::scopeCompanyables($query->where('requestable', '=', 1))
+        $table = $query->getModel()->getTable();
+
+        return Company::scopeCompanyables($query->where($table.'.requestable', '=', 1))
         ->whereHas('assetstatus', function ($query) {
             $query->where(function ($query) {
                 $query->where('deployable', '=', 1)

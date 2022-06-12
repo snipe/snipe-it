@@ -8,7 +8,7 @@
 @stop
 
 @section('header_right')
-  @can('superuser')
+  @can('update', \App\Models\AssetModel::class)
   <div class="btn-group pull-right">
      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
           <span class="caret"></span>
@@ -42,21 +42,11 @@
         </div><!-- /.box-header -->
       @endif
       <div class="box-body">
-          <div class="row">
-              <div class="col-md-12">
-                  {{ Form::open([
-                     'method' => 'POST',
-                     'route' => ['hardware/bulkedit'],
-                     'class' => 'form-inline',
-                      'id' => 'bulkForm']) }}
-                  <div id="toolbar">
-                      <select name="bulk_actions" class="form-control select2">
-                          <option value="edit">{{ trans('button.edit') }}</option>
-                          <option value="delete">{{ trans('button.delete') }}</option>
-                          <option value="labels">{{ trans_choice('button.generate_labels', 2) }}</option>
-                      </select>
-                      <button class="btn btn-primary" id="bulkEdit" disabled>{{ trans('button.go') }}</button>
-                  </div>
+
+          @include('partials.asset-bulk-actions')
+
+
+
 
                   <table
                   data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
@@ -66,7 +56,9 @@
                   data-search="true"
                   data-side-pagination="server"
                   data-show-columns="true"
-                  data-toolbar="#toolbar"
+                  data-toolbar="#assetsBulkEditToolbar"
+                  data-bulk-button-id="#bulkAssetEditButton"
+                  data-bulk-form-id="#assetsBulkForm"
                   data-show-export="true"
                   data-show-refresh="true"
                   data-sort-order="asc"
@@ -74,13 +66,12 @@
                   data-url="{{ route('api.assets.index',['model_id'=> $model->id]) }}"
                   class="table table-striped snipe-table"
                   data-export-options='{
-                "fileName": "export-models-{{ $model->name }}-assets-{{ date('Y-m-d') }}",
+                "fileName": "export-models-{{ str_slug($model->name) }}-assets-{{ date('Y-m-d') }}",
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                 }'>
                 </table>
                   {{ Form::close() }}
-              </div>
-          </div>
+
       </div> <!-- /.box-body-->
     </div> <!-- /.box-default-->
   </div> <!-- /.col-md-9-->

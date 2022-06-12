@@ -16,6 +16,7 @@ return [
         'error'   			=> 'சொத்து புதுப்பிக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்',
         'success' 			=> 'சொத்து வெற்றிகரமாக புதுப்பிக்கப்பட்டது.',
         'nothing_updated'	=>  'எந்த துறைகளும் தேர்ந்தெடுக்கப்படவில்லை, அதனால் எதுவும் புதுப்பிக்கப்படவில்லை.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

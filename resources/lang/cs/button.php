@@ -18,7 +18,7 @@ return [
     'send_password_link'        => 'Poslat odkaz na obnovení hesla',
     'go'                        => 'Spustit',
     'bulk_actions'              => 'Hromadné operace',
-    'add_maintenance'           => 'Add Maintenance',
+    'add_maintenance'           => 'Přidat údržbu',
     'append'                    => 'Připojit',
     'new'                       => 'Nový',
 ];

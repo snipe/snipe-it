@@ -91,6 +91,10 @@ return [
     'url'                  => 'I: ifomethi yokwaziswa ayivumelekile.',
     'unique_undeleted'     => 'The :attribute must be unique.',
     'non_circular'         => 'The :attribute must not create a circular reference.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

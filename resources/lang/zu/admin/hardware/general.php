@@ -6,6 +6,7 @@ return [
     'archived'  				=> 'I-Archived',
     'asset'  					=> 'Impahla',
     'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkin'              => 'Checkin Assets',
     'checkin'  					=> 'I-Checkin Asset',
     'checkout'  				=> 'I-Asset ye-Checkout',
     'clone'  					=> 'Clone Asset',

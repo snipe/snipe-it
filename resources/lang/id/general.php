@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Aksesoris',
     'activated'			    => 'Diaktifkan',
     'accessory'				=> 'Aksesori',
@@ -26,6 +26,7 @@
     'audit'				    => 'Audit',
     'audit_report'			=> 'Log Audit',
     'assets'				=> 'Aset',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => 'Hapus avatar',
     'avatar_upload'         => 'Unggah avatar',
     'back'      			=> 'Kembali',
@@ -96,6 +97,7 @@
     'eol'					=> 'MHP',
     'email_domain'			=> 'Domain email',
     'email_format'			=> 'Format email',
+    'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'Ini digunakan untuk untuk membuat email ketika melakukan proses import',
     'error'				    => 'Error',
     'filastname_format'			=> 'Inisial pertama - Nama belakang (jsmith@example.com)',
@@ -113,6 +115,7 @@
     'files'                 => 'File',
     'file_name'				=> 'Berkas',
     'file_type'             => 'Tipe Berkas',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'Unggah Berkas',
     'file_upload'           => 'File Upload',
     'generate'				=> 'Generate',
@@ -192,6 +195,8 @@
     'qty'		            => 'JML',
     'quantity'		        => 'Jumlah',
     'quantity_minimum'      => 'You have :count items below or almost below minimum quantity levels',
+    'quickscan_checkin'  	=> 'Quick Scan Checkin',
+    'quickscan_checkin_status'  	=> 'Checkin Status',
     'ready_to_deploy'		=> 'Siap digunakan',
     'recent_activity'		=> 'Aktivitas Terakhir',
     'remaining'             => 'Remaining',
@@ -226,6 +231,7 @@
     'show_current'  		=> 'Tampilkan Saat Ini',
     'sign_in'				=> 'Masuk',
     'signature'             => 'Tanda tangan',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Tema',
     'slack_msg_note'        => 'A slack message will be sent',
     'slack_test_msg'        => 'Hai! Sepertinya integrasi Slack Anda dengan Snipe-IT berfungsi!',
@@ -234,6 +240,7 @@
     'state'  				=> 'Provinsi',
     'status_labels'			=> 'Status label',
     'status'    			=> 'Status',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Pemasok',
     'suppliers'  			=> 'Pemasok',
     'sure_to_delete'    => 'Yakin ingin menghapusnya',
@@ -347,4 +354,7 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

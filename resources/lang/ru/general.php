@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Аксессуары',
     'activated'			    => 'Активно',
     'accessory'				=> 'Аксессуар',
@@ -26,6 +26,7 @@
     'audit'				    => 'аудит',
     'audit_report'			=> 'Журнал аудита',
     'assets'				=> 'Активы',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => 'Удалить аватар',
     'avatar_upload'         => 'Загрузить аватар',
     'back'      			=> 'Назад',
@@ -96,6 +97,7 @@
     'eol'					=> 'EOL',
     'email_domain'			=> 'Домен адреса электронной почты',
     'email_format'			=> 'Формат адреса электронной почты',
+    'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'Он используется для генерации адреса при импорте',
     'error'				    => 'Ошибка',
     'filastname_format'			=> 'Первая буква имени и фамилия (jsmith@example.com)',
@@ -113,6 +115,7 @@
     'files'                 => 'Файлы',
     'file_name'				=> 'Файл',
     'file_type'             => 'Тип файла',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'Загрузка файла',
     'file_upload'           => 'File Upload',
     'generate'				=> 'Сгенерировать',
@@ -192,6 +195,8 @@
     'qty'		            => 'Кол-во',
     'quantity'		        => 'Количество',
     'quantity_minimum'      => 'You have :count items below or almost below minimum quantity levels',
+    'quickscan_checkin'  	=> 'Quick Scan Checkin',
+    'quickscan_checkin_status'  	=> 'Checkin Status',
     'ready_to_deploy'		=> 'Готов к установке',
     'recent_activity'		=> 'Недавняя активность',
     'remaining'             => 'Remaining',
@@ -226,6 +231,7 @@
     'show_current'  		=> 'Показать текущий',
     'sign_in'				=> 'Вход',
     'signature'             => 'Подпись',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Оформление',
     'slack_msg_note'        => 'A slack message will be sent',
     'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',
@@ -234,6 +240,7 @@
     'state'  				=> 'Область/Регион',
     'status_labels'			=> 'Этикетки',
     'status'    			=> 'Статус',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Поставщик',
     'suppliers'  			=> 'Поставщики',
     'sure_to_delete'    => 'Вы действительно хотите удалить',
@@ -347,4 +354,7 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

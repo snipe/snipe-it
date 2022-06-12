@@ -6,6 +6,7 @@ return [
     'archived'  				=> 'Safnvistað',
     'asset'  					=> 'Eign',
     'bulk_checkout'             => 'Ráðstafa eignum',
+    'bulk_checkin'              => 'Checkin Assets',
     'checkin'  					=> 'Skila eign',
     'checkout'  				=> 'Ráðstafa eign',
     'clone'  					=> 'Clone Asset',

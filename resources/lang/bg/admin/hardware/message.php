@@ -16,6 +16,7 @@ return [
         'error'   			=> 'Активът не беше обновен. Моля опитайте отново.',
         'success' 			=> 'Активът обновен успешно.',
         'nothing_updated'	=>  'Няма избрани полета, съответно нищо не беше обновено.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

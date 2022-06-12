@@ -16,6 +16,7 @@ return [
         'error'   			=> 'Harta gagal dikemaskini, sila cuba semula',
         'success' 			=> 'Harta berjaya dikemaskini.',
         'nothing_updated'	=>  'Tiada medan dipilih, jadi tiada apa yang dikemas kini.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

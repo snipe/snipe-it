@@ -6,6 +6,7 @@ return [
     'archived'  				=> 'Zarchiwizowane',
     'asset'  					=> 'Nabytek',
     'bulk_checkout'             => 'Przypisz aktywa',
+    'bulk_checkin'              => 'Checkin Assets',
     'checkin'  					=> 'Potwierdzanie zasobu/aktywa',
     'checkout'  				=> 'Przypisz zasób',
     'clone'  					=> 'Klonuj zasób',

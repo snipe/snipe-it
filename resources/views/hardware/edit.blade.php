@@ -151,7 +151,12 @@
                     //now re-populate the custom fields based on the previously saved values
                     $('#custom_fields_content').find('input,select').each(function (index,elem) {
                         if(transformed_oldvals[elem.name]) {
-                            $(elem).val(transformed_oldvals[elem.name]).trigger('change'); //the trigger is for select2-based objects, if we have any
+                             {{-- If there already *is* is a previously-input 'transformed_oldvals' handy,
+                                  overwrite with that previously-input value *IF* this is an edit of an existing item *OR*
+                                  if there is no new default custom field value coming from the model --}}
+                            if({{ $item->id ? 'true' : 'false' }} || $(elem).val() == '') {
+                                $(elem).val(transformed_oldvals[elem.name]).trigger('change'); //the trigger is for select2-based objects, if we have any
+                            }
                         }
 
                     });

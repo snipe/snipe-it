@@ -64,8 +64,8 @@ class Ldap extends Model
         ldap_set_option($connection, LDAP_OPT_NETWORK_TIMEOUT, 20);
 
         if (Setting::getSettings()->ldap_client_tls_cert && Setting::getSettings()->ldap_client_tls_key) {
-            ldap_set_option($connection, LDAP_OPT_X_TLS_CERTFILE, Setting::get_client_side_cert_path());
-            ldap_set_option($connection, LDAP_OPT_X_TLS_KEYFILE, Setting::get_client_side_key_path());
+            ldap_set_option(null, LDAP_OPT_X_TLS_CERTFILE, Setting::get_client_side_cert_path());
+            ldap_set_option(null, LDAP_OPT_X_TLS_KEYFILE, Setting::get_client_side_key_path());
         }
 
         if ($ldap_use_tls=='1') {
@@ -208,6 +208,7 @@ class Ldap extends Model
         $ldap_result_jobtitle = Setting::getSettings()->ldap_jobtitle;
         $ldap_result_country = Setting::getSettings()->ldap_country;
         $ldap_result_dept = Setting::getSettings()->ldap_dept;
+        $ldap_result_manager = Setting::getSettings()->ldap_manager;
         // Get LDAP user data
         $item = [];
         $item['username'] = isset($ldapattributes[$ldap_result_username][0]) ? $ldapattributes[$ldap_result_username][0] : '';
@@ -219,6 +220,7 @@ class Ldap extends Model
         $item['jobtitle'] = isset($ldapattributes[$ldap_result_jobtitle][0]) ? $ldapattributes[$ldap_result_jobtitle][0] : '';
         $item['country'] = isset($ldapattributes[$ldap_result_country][0]) ? $ldapattributes[$ldap_result_country][0] : '';
         $item['department'] = isset($ldapattributes[$ldap_result_dept][0]) ? $ldapattributes[$ldap_result_dept][0] : '';
+        $item['manager'] = isset($ldapattributes[$ldap_result_manager][0]) ? $ldapattributes[$ldap_result_manager][0] : '';
 
         return $item;
     }
@@ -231,7 +233,7 @@ class Ldap extends Model
      * @param $ldapatttibutes
      * @return array|bool
      */
-    public static function createUserFromLdap($ldapatttibutes)
+    public static function createUserFromLdap($ldapatttibutes, $password)
     {
         $item = self::parseAndMapLdapAttributes($ldapatttibutes);
 
@@ -244,7 +246,8 @@ class Ldap extends Model
             $user->email = $item['email'];
 
             if (Setting::getSettings()->ldap_pw_sync == '1') {
-                $user->password = bcrypt(Input::get('password'));
+
+                $user->password = bcrypt($password);
             } else {
                 $pass = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 25);
                 $user->password = bcrypt($pass);
@@ -301,14 +304,13 @@ class Ldap extends Model
 
             // HUGE thanks to this article: https://stackoverflow.com/questions/68275972/how-to-get-paged-ldap-queries-in-php-8-and-read-more-than-1000-entries
             // which helped me wrap my head around paged results!
-            \Log::info("ldap conn is: ".$ldapconn." basedn is: $base_dn, filter is: $filter - count is: $count. page size is: $page_size"); //FIXME - remove
             // if a $count is set and it's smaller than $page_size then use that as the page size
             $ldap_controls = [];
             //if($count == -1) { //count is -1 means we have to employ paging to query the entire directory
                 $ldap_controls = [['oid' => LDAP_CONTROL_PAGEDRESULTS, 'iscritical' => false, 'value' => ['size'=> $count == -1||$count>$page_size ? $page_size : $count, 'cookie' => $cookie]]];
             //}
             $search_results = ldap_search($ldapconn, $base_dn, $filter, [], 0, /* $page_size */ -1, -1, LDAP_DEREF_NEVER, $ldap_controls); // TODO - I hate the @, and I hate that we get a full page even if we ask for 10 records. Can we use an ldap_control?
-            \Log::info("did the search run? I guess so if you got here!");
+            \Log::debug("did the search run? I guess so if you got here!");
             if (! $search_results) {
                 return redirect()->route('users.index')->with('error', trans('admin/users/message.error.ldap_could_not_search').ldap_error($ldapconn)); // TODO this is never called in any routed context - only from the Artisan command. So this redirect will never work.
             }

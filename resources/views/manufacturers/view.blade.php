@@ -45,11 +45,16 @@
       <div class="tab-content">
         <div class="tab-pane fade in active" id="assets">
 
+          @include('partials.asset-bulk-actions')
+          <div class="table table-responsive">
           <table
                   data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
                   data-cookie-id-table="assetsListingTable"
                   data-pagination="true"
                   data-id-table="assetsListingTable"
+                  data-toolbar="#assetsBulkEditToolbar"
+                  data-bulk-button-id="#bulkAssetEditButton"
+                  data-bulk-form-id="#assetsBulkForm"
                   data-search="true"
                   data-show-footer="true"
                   data-side-pagination="server"
@@ -65,6 +70,7 @@
               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
               }'>
           </table>
+          </div>
 
         </div> <!-- /.tab-pane assets -->
 

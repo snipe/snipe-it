@@ -17,6 +17,7 @@ return [
         'error'   			=> 'Актив не был изменен, пожалуйста попробуйте снова',
         'success' 			=> 'Актив успешно изменен.',
         'nothing_updated'	=>  'Поля не выбраны, нечего обновлять.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

@@ -8,7 +8,7 @@ return [
     'delete'  	                => '삭제',
     'edit'    	                => '편집',
     'restore' 	                => '복원',
-    'remove'                    => 'Remove',
+    'remove'                    => '삭제',
     'request'                   => '요청',
     'submit'  	                => '제출',
     'upload'                    => '올리기',
@@ -18,7 +18,7 @@ return [
     'send_password_link'        => '패스워드 재설정 메일 전송',
     'go'                        => 'Go',
     'bulk_actions'              => 'Bulk Actions',
-    'add_maintenance'           => 'Add Maintenance',
+    'add_maintenance'           => '유지 보수 정보 추가',
     'append'                    => 'Append',
-    'new'                       => 'New',
+    'new'                       => '신규',
 ];

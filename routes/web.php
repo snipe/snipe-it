@@ -124,6 +124,10 @@ Route::group(['middleware' => 'auth'], function () {
         'display-sig/{filename}',
         [ActionlogController::class, 'displaySig']
     )->name('log.signature.view');
+    Route::get(
+        'stored-eula-file/{filename}',
+        [ActionlogController::class, 'getStoredEula']
+    )->name('log.storedeula.download');
 });
 
 /*
@@ -391,26 +395,12 @@ Route::group(['prefix' => 'setup', 'middleware' => 'web'], function () {
     )->name('setup');
 });
 
-Route::middleware(['web'], function () {
-    Route::get(
-        'two-factor-enroll',
-        [LoginController::class, 'getTwoFactorEnroll']
-    )->name('two-factor-enroll');
-    
-    Route::get(
-        'two-factor',
-        [LoginController::class, 'getTwoFactorAuth']
-    )->name('two-factor');
-    
-    Route::post(
-        'two-factor',
-        [LoginController::class, 'postTwoFactorAuth']
-    );    
-});
+
 
 
 
 Route::group(['middleware' => 'web'], function () {
+
     Route::get(
         'login',
         [LoginController::class, 'showLoginForm']
@@ -422,6 +412,35 @@ Route::group(['middleware' => 'web'], function () {
     );
 
     Route::get(
+        'two-factor-enroll',
+        [LoginController::class, 'getTwoFactorEnroll']
+    )->name('two-factor-enroll');
+
+    Route::get(
+        'two-factor',
+        [LoginController::class, 'getTwoFactorAuth']
+    )->name('two-factor');
+
+    Route::post(
+        'two-factor',
+        [LoginController::class, 'postTwoFactorAuth']
+    );
+
+    Route::get(
+        '/',
+        [
+            'as' => 'home',
+            'middleware' => ['auth'],
+            'uses' => 'DashboardController@getIndex' ]
+    );
+
+    // need to keep GET /logout for SAML SLO
+    Route::get(
+        'logout',
+        [LoginController::class, 'logout']
+    )->name('logout');
+
+    Route::post(
         'logout',
         [LoginController::class, 'logout']
     )->name('logout');

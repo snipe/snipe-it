@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'E-post',
     'employee_num'      	=> 'Ansattnummer',
     'first_name' 			=> 'Fornavn',
-    'groupnotes'			=> 'Velg en gruppe for brukeren. Husk at brukeren får samme rettigheter som gruppen han tildeles.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Arv',
     'job' 					=> 'Jobbtittel',

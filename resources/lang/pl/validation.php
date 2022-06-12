@@ -64,7 +64,7 @@ return [
         'string'  => ':attribute musi być posiadać minimum :min znaki.',
         'array'   => 'Atrybut: musi zawierać co najmniej: min.',
     ],
-    'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'starts_with'          => ':attribute musi zaczynać się jednym z następujących wartości: :values.',
     'not_in'               => 'Wybrany :attribute jest nieprawidłowy.',
     'numeric'              => ':attribute musi być liczbą.',
     'present'              => ':attribute nie może być puste.',
@@ -91,6 +91,10 @@ return [
     'url'                  => 'Format pola :attribute jest niewłaściwy.',
     'unique_undeleted'     => 'Wartość :attribute musi być unikalna.',
     'non_circular'         => ':attribute nie może tworzyć odwołań cyklicznych.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

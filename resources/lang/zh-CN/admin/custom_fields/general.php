@@ -41,5 +41,7 @@ return [
     'make_required' => '可选 - 点击转为必填项',
     'reorder' => '重新排序',
     'db_field' => '数据库字段',
-    'db_convert_warning' => '警告。该字段在自定义字段表中为 <code> :db_column </code> 但应该是 :expected </code>'
+    'db_convert_warning' => '警告。该字段在自定义字段表中为 <code> :db_column </code> 但应该是 :expected </code>',
+    'is_unique' => '此值在所有资产中必须是唯一的',
+    'unique' => '唯一的',
 ];

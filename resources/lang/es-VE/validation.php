@@ -91,6 +91,10 @@ return [
     'url'                  => 'El formato :attribute es inválido.',
     'unique_undeleted'     => 'El :atrribute debe ser único.',
     'non_circular'         => ':attribute no debe crear una referencia circular.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

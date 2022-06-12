@@ -91,6 +91,10 @@ return [
     'url'                  => ':attribute 格式不正確',
     'unique_undeleted'     => ':attribute 必須是唯一值',
     'non_circular'         => 'The :attribute must not create a circular reference.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

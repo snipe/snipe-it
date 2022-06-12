@@ -91,6 +91,10 @@ return [
     'url'                  => 'Oblika atributa je neveljavna.',
     'unique_undeleted'     => 'Atribut mora biti edinstven.',
     'non_circular'         => 'The :attribute must not create a circular reference.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

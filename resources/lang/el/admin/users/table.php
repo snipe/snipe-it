@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'Ηλεκτρονικό ταχυδρομείο',
     'employee_num'      	=> 'Αριθμός Υπαλλήλου.',
     'first_name' 			=> 'Όνομα',
-    'groupnotes'			=> 'Επιλέξτε μια ομάδα για να εκχωρήσετε στο χρήστη, να θυμάστε ότι ο χρήστης παίρνει τα δικαιώματα της ομάδας που του έχουν ανατεθεί.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Inherit',
     'job' 					=> 'Τίτλος εργασίας',

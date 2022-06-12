@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Accessoires',
     'activated'			    => 'Geactiveerd',
     'accessory'				=> 'Accessoire',
@@ -26,6 +26,7 @@
     'audit'				    => 'Audit',
     'audit_report'			=> 'Auditlogboek',
     'assets'				=> 'Assets',
+    'assigned_to'           => 'Toegewezen aan :name',
     'avatar_delete'         => 'Verwijder profielafbeelding',
     'avatar_upload'         => 'Upload profielafbeelding',
     'back'      			=> 'Terug',
@@ -96,6 +97,7 @@
     'eol'					=> 'EOL',
     'email_domain'			=> 'E-mail domein',
     'email_format'			=> 'E-mail indeling',
+    'employee_number'       => 'Personeelsnummer',
     'email_domain_help'		=> 'Dit wordt gebruikt voor het genereren van e-mailadressen bij het importeren',
     'error'				    => 'Foutmelding',
     'filastname_format'			=> 'Eerste Initiaal Achternaam (jsmith@example.com)',
@@ -113,6 +115,7 @@
     'files'                 => 'Bestanden',
     'file_name'				=> 'Bestand',
     'file_type'             => 'Bestandstype',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'Bestand uploaden',
     'file_upload'           => 'Bestand uploaden',
     'generate'				=> 'Genereer',
@@ -192,6 +195,8 @@
     'qty'		            => 'Stks',
     'quantity'		        => 'Aantal',
     'quantity_minimum'      => 'Je hebt :count items onder of bijna onder de minimale hoeveelheid',
+    'quickscan_checkin'  	=> 'Snelle Scan Checkin',
+    'quickscan_checkin_status'  	=> 'Checkin Status',
     'ready_to_deploy'		=> 'Klaar voor uitgifte',
     'recent_activity'		=> 'Recente activiteit',
     'remaining'             => 'Resterend',
@@ -226,6 +231,7 @@
     'show_current'  		=> 'Toon huidige',
     'sign_in'				=> 'Aanmelden',
     'signature'             => 'Handtekening',
+    'signed_off_by'         => 'Afgetekend door',
     'skin'       			=> 'Skin',
     'slack_msg_note'        => 'Er wordt een slack bericht verzonden',
     'slack_test_msg'        => 'Oh hai! Het lijkt erop dat uw Slack integratie met Snipe-IT werkt!',
@@ -234,6 +240,7 @@
     'state'  				=> 'Status',
     'status_labels'			=> 'Statuslabels',
     'status'    			=> 'Status',
+    'accept_eula'           => 'Aanvaarding overeenkomst',
     'supplier'              => 'Leverancier',
     'suppliers'  			=> 'Leveranciers',
     'sure_to_delete'    => 'Weet u zeker dat u wilt verwijderen',
@@ -347,4 +354,7 @@
     'checkout_tooltip' => 'Check dit item uit',
     'checkin_tooltip' => 'Check dit item in',
     'checkout_user_tooltip' => 'Check dit item uit aan een gebruiker',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

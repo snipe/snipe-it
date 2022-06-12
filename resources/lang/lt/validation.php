@@ -91,6 +91,10 @@ return [
     'url'                  => ':attribute formatas neteisingas.',
     'unique_undeleted'     => ':attribute turi būti unikalus.',
     'non_circular'         => 'The :attribute must not create a circular reference.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

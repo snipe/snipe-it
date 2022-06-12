@@ -2,6 +2,6 @@
 
 return [
     'select_company' => 'Firma Seç',
-    'about_companies' => 'About Companies',
-    'about_companies_description' => '        You can use companies as a simple informative field, or you can use them to restrict asset visibility and availability to users with a specific company by enabling Full Company Support in your Admin Settings.',
+    'about_companies' => 'Firmalar Hakkında',
+    'about_companies_description' => '        Firmaları basit bir bilgi alanı olarak kullanabilir veya Yönetici Ayarlarında "Tam Firma Desteği"ni aktifleştirerek envanter görünürlüğü ve müsaitliğini belirtilen firmanın kullanıcılarına kısıtlayabilirsiniz.',
 ];

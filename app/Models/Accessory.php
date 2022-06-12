@@ -61,7 +61,7 @@ class Accessory extends SnipeModel
         'category_id'       => 'required|integer|exists:categories,id',
         'company_id'        => 'integer|nullable',
         'min_amt'           => 'integer|min:0|nullable',
-        'purchase_cost'     => 'numeric|nullable',
+        'purchase_cost'     => 'numeric|nullable|gte:0',
     ];
 
 
@@ -308,6 +308,21 @@ class Accessory extends SnipeModel
         }
 
             return null;
+    }
+
+     /**
+     * Check how many items within an accessory are checked out
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.0]
+     * @return int
+     */
+    public function numCheckedOut()
+    {
+        $checkedout = 0;
+        $checkedout = $this->users->count();
+
+        return $checkedout;
     }
 
     /**
