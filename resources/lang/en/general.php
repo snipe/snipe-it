@@ -351,5 +351,6 @@
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
     'selfcheckout'          => 'Self-Checkout',
+    'selfcheckout_tooltip'  => 'Self-checkout this item',
     'checkout_by'           => 'Check Out by'
 ];
