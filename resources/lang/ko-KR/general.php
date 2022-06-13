@@ -1,15 +1,11 @@
 <?php
 
 return array(
-    'component_name'                  => 'Component Name',
-    'checkin'                             => 'Checkin Component',
-    'checkout'                             => 'Checkout Component',
-    'cost'				=> 'Purchase Cost',
-    'create'                             => 'Create Component',
-    'edit'                             => 'Edit Component',
-    'date'					=> 'Purchase Date',
-    'order'					=> 'Order Number',
-    'remaining' 			             => 'Remaining',
-    'total' 			                 => 'Total',
-    'update'                            => 'Update Component',
+    'checkout'                          => 'Checkout Consumable to User',
+    'consumable_name'                   => 'Consumable Name',
+    'create'                            => 'Create Consumable',
+    'item_no'                           => 'Item No.',
+    'remaining' 			            => 'Remaining',
+    'total' 			                => 'Total',
+    'update'                            => 'Update Consumable',
 );
