@@ -3,12 +3,12 @@
     return [
         'asset_maintenance_type' => 'Asset Maintenance Type',
         'title'                  => 'Title',
-        'start_date'             => 'Start Date',
+        'start_date'             => 'Data rozpoczęcia',
         'completion_date'        => 'Completion Date',
-        'cost'                   => 'Cost',
-        'is_warranty'            => 'Warranty Improvement',
+        'cost'                   => 'Koszt',
+        'is_warranty'            => 'Przedłużenie gwarancji',
         'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
-        'notes'                  => 'Notes',
+        'notes'                  => 'Notatki',
         'update'                 => 'Update Asset Maintenance',
         'create'                 => 'Create Asset Maintenance'
     ];
