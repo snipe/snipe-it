@@ -2,35 +2,56 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'field' => array(
+        'invalid'   => 'That field does not exist.',
+        'already_added'   => 'Field already added',
 
-    'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'create' => array(
+            'error'   => 'Field was not created, please try again.',
+            'success' => 'Field created successfully.',
+            'assoc_success' => 'Field successfully added to fieldset.'
+        ),
+
+        'update' => array(
+            'error'   => 'Field was not updated, please try again',
+            'success' => 'Field updated successfully.'
+        ),
+
+        'delete' => array(
+            'confirm'   	=> 'Are you sure you wish to delete this field?',
+            'error'   => 'There was an issue deleting the field. Please try again.',
+            'success' => 'The field was deleted successfully.',
+            'in_use'   => 'Field is still in use.',
+        )
+
     ),
 
-    'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+    'fieldset' => array(
+
+        'does_not_exist' => 'Fieldset does not exist',
+
+        'create' => array(
+            'error'   => 'Fieldset was not created, please try again.',
+            'success' => 'Fieldset created successfully.'
+        ),
+
+        'update' => array(
+            'error'   => 'Fieldset was not updated, please try again',
+            'success' => 'Fieldset updated successfully.'
+        ),
+
+        'delete' => array(
+            'confirm'   	=> 'Are you sure you wish to delete this fieldset?',
+            'error'   => 'There was an issue deleting the fieldset. Please try again.',
+            'success' => 'The fieldset was deleted successfully.',
+            'in_use'   => 'Fieldset is still in use.',
+        )
+
     ),
 
-    'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The consumable was deleted successfully.'
-    ),
 
-     'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
-    ),
 
-    'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
-    )
+
 
 
 );
