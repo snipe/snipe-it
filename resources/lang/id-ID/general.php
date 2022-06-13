@@ -1,7 +1,15 @@
 <?php
 
-return [
-    'select_company' => 'Select Company',
-    'about_companies' => 'About Companies',
-    'about_companies_description' => '        You can use companies as a simple informative field, or you can use them to restrict asset visibility and availability to users with a specific company by enabling Full Company Support in your Admin Settings.',
-];
+return array(
+    'component_name'                  => 'Component Name',
+    'checkin'                             => 'Checkin Component',
+    'checkout'                             => 'Checkout Component',
+    'cost'				=> 'Purchase Cost',
+    'create'                             => 'Create Component',
+    'edit'                             => 'Edit Component',
+    'date'					=> 'Purchase Date',
+    'order'					=> 'Order Number',
+    'remaining' 			             => 'Remaining',
+    'total' 			                 => 'Total',
+    'update'                            => 'Update Component',
+);
