@@ -1,5 +1,5 @@
 <?php
 
 return array(
-    'title'      				=> 'Component Name',
+    'title'      				=> 'Consumable Name',
 );
