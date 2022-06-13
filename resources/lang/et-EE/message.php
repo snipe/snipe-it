@@ -2,24 +2,21 @@
 
 return array(
 
-    'does_not_exist' => 'Depreciation class does not exist.',
-    'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
+    'group_exists'        => 'Group already exists!',
+    'group_not_found'     => 'Group [:id] does not exist.',
+    'group_name_required' => 'The name field is required',
 
-
-    'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
-    ),
-
-    'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+    'success' => array(
+        'create' => 'Group was successfully created.',
+        'update' => 'Group was successfully updated.',
+        'delete' => 'Group was successfully deleted.',
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this depreciation class?',
-        'error'   => 'There was an issue deleting the depreciation class. Please try again.',
-        'success' => 'The depreciation class was deleted successfully.'
-    )
+        'confirm'   => 'Are you sure you wish to delete this group?',
+        'create' => 'There was an issue creating the group. Please try again.',
+        'update' => 'There was an issue updating the group. Please try again.',
+        'delete' => 'There was an issue deleting the group. Please try again.',
+    ),
 
 );
