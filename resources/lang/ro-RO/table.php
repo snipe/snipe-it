@@ -1,11 +1,8 @@
 <?php
 
-return array(
-	'dl_csv'      				=> 'Download CSV',
-	'eula_text'      			=> 'EULA',
-    'id'      					=> 'ID',
-    'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Accessory Name',
-
-
-);
+    return [
+        'title'         => 'Asset Maintenance',
+        'asset_name'    => 'Asset Name',
+        'is_warranty'   => 'Warranty',
+        'dl_csv'        => 'Download CSV',
+    ];
