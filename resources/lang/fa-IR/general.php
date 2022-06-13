@@ -1,12 +1,20 @@
 <?php
 
 return array(
-    'personal_api_keys' => 'Personal API Keys',
-    'api_key_warning' => 'When generating an API token, be sure to copy it down immediately as they
-                    will not be visible to you again.',
-    'api_base_url' => 'Your API base url is located at:',
-    'api_base_url_endpoint' => '/&lt;endpoint&gt;',
-    'api_token_expiration_time' => 'API tokens are set to expire in:',
-    'api_reference' => 'Please check the <a href="https://snipe-it.readme.io/reference" target="_blank">API reference</a> to
-                    find specific API endpoints and additional API documentation.',
+    'accessory_category' 				=> 'Accessory Category',
+    'accessory_name'  					=> 'Accessory Name',
+    'checkout'  							=> 'Checkout Accessory',
+    'checkin'  							=> 'Checkin Accessory',
+    'create'  							=> 'Create Accessory',
+    'edit'  							=> 'Edit Accessory',
+    'eula_text'							=> 'Category EULA',
+    'eula_text_help'					=> 'This field allows you to customize your EULAs for specific types of assets. If you only have one EULA for all of your assets, you can check the box below to use the primary default.',
+    'require_acceptance'				=> 'Require users to confirm acceptance of assets in this category.',
+    'no_default_eula'					=> 'No primary default EULA found. Add one in Settings.',
+    'total'  							=> 'Total',
+    'remaining'  						=> 'Avail',
+    'update'  							=> 'Update Accessory',
+    'use_default_eula'					=> 'Use the <a href="#" data-toggle="modal" data-target="#eulaModal">primary default EULA</a> instead.',
+    'use_default_eula_disabled'			=> '<del>Use the primary default EULA instead.</del> No primary default EULA is set. Please add one in Settings.',
+
 );
