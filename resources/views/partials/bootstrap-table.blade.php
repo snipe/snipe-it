@@ -318,7 +318,7 @@
                 item_icon = 'fas fa-user';
             } else if (value.type == 'location') {
                 item_destination = 'locations'
-                item_icon = 'far fa-map-marker-alt';
+                item_icon = 'fas fa-map-marker-alt';
             }
 
             return '<nobr><a href="{{ url('/') }}/' + item_destination +'/' + value.id + '" data-tooltip="true" title="' + value.type + '"><i class="' + item_icon + ' text-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} "></i> ' + value.name + '</a></nobr>';
