@@ -2,8 +2,9 @@
 
 return array(
 
-    'id'         => 'Id',
-    'name'       => 'Name',
-    'users'      => '# of Users',
-
+    'file' => 'File',
+    'created' => 'Created',
+    'size' => 'Size',
+    'process' => 'Process',
+    'delete' => 'Delete',
 );
