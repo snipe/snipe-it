@@ -1,10 +1,9 @@
 <?php
-
 return array(
-	'eula_text'      			=> 'EULA',
-    'id'      					=> 'ID',
-    'parent'   					=> 'Parent',
-    'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Asset Category Name',
-
+    'companies' => 'Companies',
+    'create'    => 'Create Company',
+    'title'     => 'Company',
+    'update'    => 'Update Company',
+    'name'      => 'Company Name',
+    'id'        => 'ID',
 );
