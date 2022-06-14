@@ -36,24 +36,7 @@
     <div class="box box-default">
       <div class="box-body">
 
-        {{ Form::open([
-          'method' => 'POST',
-          'route' => ['models.bulkedit.index'],
-          'class' => 'form-inline',
-           'id' => 'modelsBulkForm']) }}
-        <div class="row">
-          <div class="col-md-12">
-
-            @if (Request::get('status')!='deleted')
-              <div id="modelBulkEditToolbar">
-                <label for="bulk_actions" class="sr-only">{{ trans('general.bulk_actions') }}</label>
-                <select id="bulk_actions" name="bulk_actions" class="form-control select2" aria-label="bulk_actions" style="width: 300px;">
-                  <option value="edit">{{ trans('general.bulk_edit') }}</option>
-                  <option value="delete">{{ trans('general.bulk_delete') }}</option>
-                </select>
-                <button class="btn btn-primary" id="bulkModelsEditButton" disabled>{{ trans('button.go') }}</button>
-              </div>
-            @endif
+        @include('partials.models-bulk-actions')
               <div class="table-responsive">
                 <table
                         data-columns="{{ \App\Presenters\AssetModelPresenter::dataTableLayout() }}"

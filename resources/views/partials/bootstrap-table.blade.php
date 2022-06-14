@@ -123,7 +123,9 @@
     });
 
     $('.snipe-table').on('uncheck.bs.table .btSelectItem', function (row, $element) {
-        $( "#checkbox_" + $element.id).remove();
+        var tableId =  $(this).data('id-table');
+        $( "#" + tableId + "checkbox_" + $element.id).remove();
+        console.log("#" + tableId + "checkbox_" + $element.id);
     });
 
 
@@ -157,7 +159,7 @@
         var tableId =  $(this).data('id-table');
 
         for (var i in rowsBefore) {
-            $( tableId + "_checkbox_" + rowsBefore[i].id).remove();
+            $('#' + tableId + "_checkbox_" + rowsBefore[i].id).remove();
         }
 
     });
