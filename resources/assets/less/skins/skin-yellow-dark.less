@@ -11,11 +11,10 @@
   //Navbar
   .main-header {
     .navbar {
-      .navbar-variant(@yellow; #fff);
       .sidebar-toggle {
-        color: #fff;
+        color: #000 !important;
         &:hover {
-          background-color: darken(@yellow, 5%);
+          background-color: var(--link);
         }
       }
       @media (max-width: @screen-header-collapse) {
@@ -52,48 +51,43 @@
   .skin-dark-sidebar(@yellow);
 }
 
-.skin-yellow-dark.layout-top-nav .main-header > .logo {
-  .logo-variant {
-    background-color: none;
-  }
-}
-
-
-
 .btn, .btn:hover {
-  color: #fff;
+  color: #000;
 
   &.btn-primary, .btn-primary:link {
-    background-color: darken(@yellow, 10%);
-    border-color: darken(@yellow, 20%);
-    color: #fff;
+    background-color: var(--button-default);
+    border-color: var(--button-default);
+    color: #545454;
   }
 
 
   &a.btn-primary:hover {
-    background-color: darken(@yellow, 20%);
-    border-color: darken(@yellow, 20%);
-    color: #fff;
+    background-color: var(--button-hover);
+    border-color: var(--button-hover);
+    color: #545454;
   }
 
   &.btn-white:link {
-    background-color: darken(@yellow, 10%);
-    color: #fff;
+    background-color: var(--button-default);
+    color: #545454;
   }
 
   &.btn-white:hover {
-    background-color: darken(@yellow, 30%);
-    color: #fff;
+    background-color: var(--hover-link);
+    color: #545454;
   }
 }
 
 
 a {
+  &:link {
+    color: var(--link);
+  }
   &:hover {
-    color: #fff;
+    color: var(--hover-link);
   }
   &:visited {
-    color: #fff;
+    color: var(--visited-link);
   }
 }
 
@@ -109,17 +103,17 @@ a {
   --back-main: #333;
   --back-sub: #3d4144;
   --back-sub-alt: rgba(0, 0, 0, 0.36);
-  --button-default: darken(@yellow, 15%);
-  --button-primary: darken(@yellow, 25%);
-  --button-hover: darken(@yellow, 30%);
-  --header: @yellow; /* Use same as Header picker */
+  --button-default: #FFFF00;
+  --button-primary: darken(#FFFF00, 25%);
+  --button-hover: darken(#FFFF00, 30%);
+  --header: #FFFF00; /* Use same as Header picker */
   --text-main: #BBB;
   --text-sub: #9b9b9b;
-  --link: lighten(@yellow, 30%); /* Use same as Header picker, lighten by 70% */
-  --visited-link: lighten(@yellow, 40%); /* Use same as Header picker, lighten by 70% */
-  --hover-link: lighten(@yellow, 45%); /* Use same as Header picker, lighten by 70% */
-  --nav-link: #FFF; /* Use same as Header picker */
-  --light-link: #fff; /* Use same as Header picker */
+  --link: #F0E68C; /* Use same as Header picker, lighten by 70% */
+  --visited-link: lighten(#F0E68C, 15%); /* Use same as Header picker, lighten by 70% */
+  --hover-link: lighten(#F0E68C, 45%); /* Use same as Header picker, lighten by 70% */
+  --nav-link: #222; /* Use same as Header picker */
+  --light-link: #545454; /* Use same as Header picker */
 }
 
 .main-header .navbar, .main-header .logo {
@@ -128,12 +122,20 @@ a {
   background: linear-gradient(to bottom, var(--header) 0%,var(--header) 100%);
   border-color: var(--header);
 }
-
+.label-default{
+  background-color:var(--back-sub);
+}
+a.btn.btn-default{
+  color:var(--nav-link);
+}
 .bootstrap-table .fixed-table-container .table thead th .sortable {
   color: var(--nav-link);
 }
 
 .thead, .navbar-nav>li>a:link {
+  color: var(--nav-link);
+}
+.navbar-nav>li>a:visited {
   color: var(--nav-link);
 }
 
@@ -142,17 +144,6 @@ a {
   color: var(--text-main);
 }
 
-a:link {
-  color: var(--link);
-}
-
-a:visited {
-  color: var(--nav-link);
-}
-
-a:hover {
-  color: var(--hover-link);
-}
 a:link.btn-default{
   color: var(--nav-link);
 }
@@ -161,13 +152,12 @@ a:link.btn-default{
 }
 
 .small-box h3, .small-box p {
-  color: var(--nav-link) !important;
+  color: #fff !important;
   a:hover {
     text-decoration: none;
     color: var(--nav-link) !important;
   }
 }
-
 
 #accessoriesTable>tbody>tr>td>nobr>a>i.fa {
   color: var(--text-main);
@@ -192,7 +182,7 @@ body {
 }
 .btn-default{
   background-color: var(--button-default);
-  color: var(--link);
+
 }
 
 .btn-default dropdown-toggle {
@@ -324,7 +314,10 @@ input[type=text], input[type=search] {
 .skin-yellow-dark .main-header .navbar .dropdown-menu li a {
   color: var(--header);
 }
-.fixed-table-body thead th .th-inner, .skin-yellow-dark .sidebar-menu>li.active>a, .skin-yellow .sidebar-menu>li:hover>a, .sidebar-toggle:hover {
+div.th-inner{
+  color:var(--text-main);
+}
+.fixed-table-body thead th .th-inner, .skin-yellow-dark, .skin-yellow {
   background-color: var(--header)!important;
 }
 .tab-content, .tab-pane {
@@ -336,7 +329,9 @@ input[type=text], input[type=search] {
 }
 .table-striped>tbody>tr:nth-of-type(even){
   background-color: var(--back-sub-alt);
-
+}
+.th-inner{
+  color: var(--nav-link);
 }
 #webui>div>div>div>div>div>table>tbody>tr>td>a>i.fa, .box-body, .box-footer, .box-header {
   color: var(--text-main);
@@ -344,20 +339,6 @@ input[type=text], input[type=search] {
 
 .box-header.with-border {
   border-bottom: #000;
-}
-
-a {
-  color: var(--link);
-
-  &:link {
-    color: var(--link)  }
-  &:hover {
-    color: var(--hover-link);
-    text-decoration: underline;
-  }
-  &:visited {
-    color: var(--visited-link)
-  }
 }
 
 .row-striped {
@@ -369,7 +350,6 @@ a {
   //border-left: 1px solid #dddddd;
   //border-right: 1px solid #dddddd;
   display: table;
-
 }
 
 .row-striped .row:nth-of-type(odd) div {
@@ -377,7 +357,6 @@ a {
   color: var(--text-main);
   border-top: 1px solid #dddddd;
   display: table-cell;
-
 }
 
 .row-striped .row:nth-of-type(even) div {
