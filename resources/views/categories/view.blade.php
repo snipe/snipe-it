@@ -71,6 +71,7 @@
                                             data-toolbar="#assetsBulkEditToolbar"
                                             data-bulk-button-id="#bulkAssetEditButton"
                                             data-bulk-form-id="#assetsBulkForm"
+                                            data-click-to-select="true"
                                             data-export-options='{
                     "fileName": "export-{{ str_slug($category->name) }}-assets-{{ date('Y-m-d') }}",
                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
