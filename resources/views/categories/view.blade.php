@@ -32,7 +32,7 @@
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li class="active">
-                        <a href="#items" data-toggle="tab" title="{{ trans('general.items') }}">{{ trans('general.'.$category->category_type) }}
+                        <a href="#items" data-toggle="tab" title="{{ trans('general.items') }}"> {{ ucwords($category_type_route) }}
                             @if ($category->category_type=='asset')
                             <badge class="badge badge-secondary"> {{ $category->assets->count() }}</badge>
                             @endif
