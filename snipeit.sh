@@ -237,7 +237,7 @@ install_snipeit () {
   log "php $APP_PATH/artisan migrate --force"
 
   echo "* Creating scheduler cron."
-  (crontab -l ; echo "* * * * * /usr/bin/php $APP_PATH/artisan schedule:run >> /dev/null 2>&1") | crontab -
+  (run_as_app_user crontab -l ; echo "* * * * * /usr/bin/php $APP_PATH/artisan schedule:run >> /dev/null 2>&1") | run_as_app_user crontab -
 }
 
 set_firewall () {
