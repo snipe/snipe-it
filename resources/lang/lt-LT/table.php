@@ -1,30 +1,17 @@
 <?php
 
-return [
+return array(
 
-    'asset_tag'   	=> 'Asset Tag',
-    'asset_model'       => 'Model',
-    'book_value'  	=> 'Current Value',
-    'change' 		=> 'In/Out',
-    'checkout_date' => 'Checkout Date',
-    'checkoutto' 	=> 'Checked Out',
-    'current_value' => 'Current Value',
-    'diff' 			=> 'Diff',
-    'dl_csv' 		=> 'Download CSV',
-    'eol' 			=> 'EOL',
-    'id'      		=> 'ID',
-    'location' 		=> 'Location',
-    'purchase_cost'	=> 'Cost',
-    'purchase_date'	=> 'Purchased',
-    'serial'   		=> 'Serial',
-    'status'   		=> 'Status',
-    'title'      	=> 'Asset ',
-    'image'		    => 'Device Image',
-    'days_without_acceptance' => 'Days Without Acceptance',
-    'monthly_depreciation' => 'Monthly Depreciation',
-    'assigned_to'    => 'Assigned To',
-    'requesting_user' => 'Requesting User',
-    'requested_date' => 'Requested Date',
-    'changed'       => 'Changed',
-    'icon' => 'Icon',
-];
+    'assigned_to'   	=> 'Assigned To',
+    'checkout'   		=> 'In/Out',
+    'id'      			=> 'ID',
+    'license_email'   	=> 'License Email',
+    'license_name'   	=> 'Licensed To',
+    'purchase_date'   	=> 'Purchase Date',
+    'purchased'   		=> 'Purchased',
+    'seats'   			=> 'Seats',
+    'hardware'   		=> 'Hardware',
+    'serial'   			=> 'Serial',
+    'title'      		=> 'License',
+
+);
