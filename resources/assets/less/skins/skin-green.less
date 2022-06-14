@@ -7,7 +7,6 @@
 @import "../variables.less";
 @import "../mixins.less";
 :root{
-  --visited-link: #5D995D; /* Use same as Header picker, lighten by 70% */
   --background: #222;
   --back-main: #333;
   --back-sub: #3d4144;
@@ -18,7 +17,9 @@
   --header: @green; /* Use same as Header picker */
   --text-main: #BBB;
   --text-sub: #9b9b9b;
-  --link: #28A228; /* Use same as Header picker, lighten by 70% */
+  --link: @green; /* Use same as Header picker, lighten by 70% */
+  --visited-link: lighten(@green, 15%); /* Use same as Header picker, lighten by 70% */
+  --hover-link: lighten(@green, 20%);
 }
 .skin-green {
   //Navbar
@@ -97,7 +98,12 @@
     color: #fff;
   }
 }
-
+a.btn-info:link, a.btn-warning:link, a.btn-danger:link{
+  color: #FFF;
+}
+&a.btn-info:visited, a.btn-warning:visited, a.btn-danger:visited{
+  color: #FFF;
+}
 a:link {
   color: var(--link);
 }
