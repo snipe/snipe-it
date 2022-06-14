@@ -124,8 +124,7 @@
 
     $('.snipe-table').on('uncheck.bs.table .btSelectItem', function (row, $element) {
         var tableId =  $(this).data('id-table');
-        $( "#" + tableId + "checkbox_" + $element.id).remove();
-        console.log("#" + tableId + "checkbox_" + $element.id);
+        $( "#" + tableId + "_checkbox_" + $element.id).remove();
     });
 
 
