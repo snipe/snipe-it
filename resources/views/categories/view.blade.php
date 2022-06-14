@@ -10,6 +10,10 @@
 @stop
 
 @section('header_right')
+
+    <a href="{{ URL::previous() }}" class="btn btn-primary" style="margin-right: 10px;">
+        {{ trans('general.back') }}</a>
+
 <div class="btn-group pull-right">
   <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
     <span class="caret"></span>
@@ -18,6 +22,7 @@
     <li><a href="{{ route('categories.edit', ['category' => $category->id]) }}">{{ trans('admin/categories/general.edit') }}</a></li>
     <li><a href="{{ route('categories.create') }}">{{ trans('general.create') }}</a></li>
   </ul>
+
 </div>
 @stop
 
