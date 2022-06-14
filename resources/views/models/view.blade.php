@@ -59,6 +59,7 @@
                   data-toolbar="#assetsBulkEditToolbar"
                   data-bulk-button-id="#bulkAssetEditButton"
                   data-bulk-form-id="#assetsBulkForm"
+                  data-click-to-select="true"
                   data-show-export="true"
                   data-show-refresh="true"
                   data-sort-order="asc"
