@@ -114,8 +114,16 @@ class Ldap extends Model
         }
 
         $filterQuery = $settings->ldap_auth_filter_query.$username;
-        $filter = Setting::getSettings()->ldap_filter; //FIXME - this *does* respect the ldap filter, but I believe that AdLdap2 did *not*.
-        $filterQuery = "({$filter}({$filterQuery}))";
+        $filter = Setting::getSettings()->ldap_filter;
+
+        // TODO - this is copypasta from findLdapUsers() - we should abstract this out and put it somewhere (static method?)
+        if ($filter != '' && substr($filter, 0, 1) != '(') { // wrap parens around NON-EMPTY filters that DON'T have them, for back-compatibility with AdLdap2-based filters
+            $filter = "($filter)";
+        } elseif ($filter == '') {
+            $filter = '(cn=*)';
+        }
+
+        $filterQuery = "(&{$filter}({$filterQuery}))"; // ensuring that the $filter is wrapped with parentheses (above) ensures that this is always interpreted as an 'AND' query.
 
         \Log::debug('Filter query: '.$filterQuery);
 
