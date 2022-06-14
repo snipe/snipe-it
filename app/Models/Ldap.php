@@ -37,7 +37,7 @@ class Ldap extends Model
     public static function connectToLdap()
     {
         $ldap_host = Setting::getSettings()->ldap_server;
-        $ldap_version = Setting::getSettings()->ldap_version;
+        $ldap_version = Setting::getSettings()->ldap_version ?: 3;
         $ldap_server_cert_ignore = Setting::getSettings()->ldap_server_cert_ignore;
         $ldap_use_tls = Setting::getSettings()->ldap_tls;
 
