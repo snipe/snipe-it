@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family:'Dejavu Sans', Arial, Helvetica, sans-serif;
             font-size: 11px;
         }
     </style>
