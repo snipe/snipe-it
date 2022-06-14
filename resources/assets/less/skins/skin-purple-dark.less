@@ -61,11 +61,11 @@
 
 
 .btn, .btn:hover {
-  color: #fff;
+  color: #fff !important;
 
   &.btn-primary, .btn-primary:link {
     background-color: darken(@purple, 10%);
-    border-color: darken(@purple, 20%);
+    border-color: #FFF;
     color: #fff;
   }
 
@@ -90,10 +90,10 @@
 
 a {
   &:hover {
-    color: #fff;
+    color: var(--hover-link);
   }
   &:visited {
-    color: #fff;
+    color: var(--visited-link);
   }
 }
 
@@ -107,7 +107,7 @@ a {
 :root {
   --background: #222;
   --back-main: #333;
-  --back-sub: #3d4144;
+  --back-sub: #080808;
   --back-sub-alt: rgba(0, 0, 0, 0.36);
   --button-default: darken(@purple, 15%);
   --button-primary: darken(@purple, 25%);
@@ -115,9 +115,9 @@ a {
   --header: @purple; /* Use same as Header picker */
   --text-main: #BBB;
   --text-sub: #9b9b9b;
-  --link: #9370DB; /* Use same as Header picker, lighten by 70% */
-  --visited-link: #B93CF6; /* Use same as Header picker, lighten by 70% */
-  --hover-link: #BF55EC; /* Use same as Header picker, lighten by 70% */
+  --link: #AC83FF; /* Use same as Header picker, lighten by 70% */
+  --visited-link: lighten(#AC83FF, 15%); /* Use same as Header picker, lighten by 70% */
+  --hover-link: lighten(#AC83FF, 30%); /* Use same as Header picker, lighten by 70% */
   --nav-link: #FFF; /* Use same as Header picker */
   --light-link: #fff; /* Use same as Header picker */
 }
@@ -136,6 +136,10 @@ a {
 .thead, .navbar-nav>li>a:link {
   color: var(--nav-link);
 }
+.label-default{
+  background-color:var(--back-sub);
+  color:#fff;
+}
 
 .modal-content {
   background-color: var(--back-main);
@@ -144,14 +148,6 @@ a {
 
 a:link {
   color: var(--link);
-}
-
-a:visited {
-  color: var(--nav-link);
-}
-
-a:hover {
-  color: var(--hover-link);
 }
 
 .btn-primary.hover {

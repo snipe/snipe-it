@@ -19,6 +19,8 @@ on:
 
 jobs:
   codacy-security-scan:
+    # Ensure schedule job never runs on forked repos. It's only executed for 'snipe/snipe-it'
+    if: (github.repository == 'snipe/snipe-it') || ((github.repository != 'snipe/snipe-it') && (github.event_name != 'schedule'))
     name: Codacy Security Scan
     runs-on: ubuntu-latest
     steps:

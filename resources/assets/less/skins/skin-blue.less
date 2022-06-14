@@ -64,7 +64,7 @@
   &.btn-primary, .btn-primary:link {
     background-color: darken(@light-blue, 10%);
     border-color: darken(@light-blue, 20%);
-    color: #fff;
+    color: #fff !important;
   }
 
 
@@ -99,16 +99,6 @@
 }
 
 
-
-a {
-  color: @light-blue;
-  &:hover {
-    color: darken(@light-blue, 20%);
-  }
-  &:visited {
-    color: @light-blue;
-  }
-}
 :root {
   --button-default: darken(@blue, 15%);
   --button-primary: darken(@blue, 25%);
@@ -116,11 +106,17 @@ a {
   --header: @blue; /* Use same as Header picker */
   --text-main: #BBB;
   --text-sub: #9b9b9b;
-  --link: #1978D4; /* Use same as Header picker, lighten by 70% */
-  --visited-link: #3c8dbc ; /* Use same as Header picker, lighten by 70% */
-  --hover-link: #4B77BE; /* Use same as Header picker, lighten by 70% */
+  --link: @blue; /* Use same as Header picker, lighten by 70% */
+  --visited-link: lighten(@blue,10%); /* Use same as Header picker, lighten by 70% */
+  --hover-link: lighten(@blue,20%); /* Use same as Header picker, lighten by 70% */
   --nav-link: #FFF; /* Use same as Header picker */
   --light-link: #fff; /* Use same as Header picker */
+}
+a.btn-info:link, a.btn-warning:link, a.btn-danger:link{
+  color: #FFF;
+}
+&a.btn-info:visited, a.btn-warning:visited, a.btn-danger:visited{
+  color: #FFF;
 }
 a:link {
   color: var(--link);
@@ -128,6 +124,10 @@ a:link {
 
 a:visited {
   color: var(--visited-link);
+}
+
+a:hover {
+  color: var(--hover-link);
 }
 
 .text-primary {

@@ -87,12 +87,12 @@
 
 
 a {
-  color: @orange;
+  color: var(--link);
   &:hover {
-    color: darken(@orange, 20%);
+    color: var(--hover-link);
   }
   &:visited {
-    color: @orange;
+    color: var(--visited-link);
   }
 }
 
@@ -106,18 +106,18 @@ a {
   --header: @orange; /* Use same as Header picker */
   --text-main: #BBB;
   --text-sub: #9b9b9b;
-  --link: #D43900; /* Use same as Header picker, lighten by 70% */
-  --visited-link: #D46A43; /* Use same as Header picker, lighten by 70% */
-  --hover-link: #FF4500; /* Use same as Header picker, lighten by 70% */
+  --link: @orange; /* Use same as Header picker, lighten by 70% */
+  --visited-link: lighten(@orange, 10%); /* Use same as Header picker, lighten by 70% */
+  --hover-link: lighten(@orange, 15%); /* Use same as Header picker, lighten by 70% */
   --nav-link: #FFF; /* Use same as Header picker */
   --light-link: #fff; /* Use same as Header picker */
 }
-a:link {
-  color: var(--link);
-}
 
-a:visited {
-  color: var(--visited-link);
+a.btn-info:link, a.btn-warning:link, a.btn-danger:link{
+  color: #FFF;
+}
+&a.btn-info:visited, a.btn-warning:visited, a.btn-danger:visited{
+  color: #FFF;
 }
 
 .fixed-table-container tbody .selected td {

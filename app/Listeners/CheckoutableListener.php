@@ -30,7 +30,6 @@ class CheckoutableListener
     public function onCheckedOut($event)
     {
 
-        \Log::debug('onCheckedOut in the Checkoutable listener fired');
 
         /**
          * When the item wasn't checked out to a user, we can't send notifications
