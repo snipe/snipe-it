@@ -129,11 +129,13 @@
                         <div class="row">
                             <div class="col-md-12">
 
+                                @can('update', \App\Models\AssetModel::class)
                                 @if ($category->models->count() > 0)
                                     @if ($category->category_type=='asset')
                                         @include('partials.models-bulk-actions')
                                     @endif
                                 @endif
+                                @endcan
 
                                     <table
                                             data-columns="{{ \App\Presenters\AssetModelPresenter::dataTableLayout() }}"
@@ -152,7 +154,7 @@
                                             data-sort-order="asc"
                                             id="asssetModelsTable"
                                             class="table table-striped snipe-table"
-                                            data-url="{{ route('api.models.index', ['status' => request('status')]) }}"
+                                            data-url="{{ route('api.models.index', ['status' => request('status'), 'category_id' => $category->id]) }}"
                                             data-export-options='{
               "fileName": "export-models-{{ date('Y-m-d') }}",
               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
