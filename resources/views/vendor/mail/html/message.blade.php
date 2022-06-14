@@ -28,7 +28,7 @@
 @endif
 
 @else
-Snipe-IT
+{{ $snipeSettings->site_name }}
 @endif
 @endcomponent
 @endslot
