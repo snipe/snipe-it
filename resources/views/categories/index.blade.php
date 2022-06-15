@@ -27,7 +27,6 @@
             data-pagination="true"
             data-id-table="categoryTable"
             data-search="true"
-            data-show-footer="true"
             data-side-pagination="server"
             data-show-columns="true"
             data-show-export="true"
