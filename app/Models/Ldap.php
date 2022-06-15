@@ -96,6 +96,7 @@ class Ldap extends Model
         $ldap_username_field = $settings->ldap_username_field;
         $baseDn = $settings->ldap_basedn;
         $userDn = $ldap_username_field.'='.$username.','.$settings->ldap_basedn;
+        $filterQuery = '';
 
         if ($settings->is_ad == '1') {
             // Check if they are using the userprincipalname for the username field.
@@ -111,9 +112,18 @@ class Ldap extends Model
                 // Hopefully that should handle all of our use cases, but if not we can backport our old logic.
                 $userDn = ($settings->ad_domain != '') ? $username.'@'.$settings->ad_domain : $username.'@'.$settings->email_domain;
             }
+            // Note: AD completely **ignores** the ldap_auth_filter_query!
+            // it just does a simple query for whatever the username field is equalling whatever the username is
+            // typically samaccountname=shortname or userprincipalname=shortname@domain.com
+            // I kinda don't like this because it feels far more limited relative to a full LDAP configuration
+            // and if you wanted to do something funky or clever with AD - you can't.
+            $filterQuery = $ldap_username_field."=".$username;
+        } else {
+            // non-LDAP auth query is the auth filter, with the username appended
+            // e.g. filter query of 'uid=' and username of 'brady' becomes:
+            // uid=brady
+            $filterQuery = $settings->ldap_auth_filter_query.$username;
         }
-
-        $filterQuery = $settings->ldap_auth_filter_query.$username;
         $filter = Setting::getSettings()->ldap_filter; //FIXME - this *does* respect the ldap filter, but I believe that AdLdap2 did *not*.
         $filterQuery = "({$filter}({$filterQuery}))";
 
