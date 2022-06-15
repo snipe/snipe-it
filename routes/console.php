@@ -35,3 +35,13 @@ Artisan::command('snipeit:travisci-install', function () {
         $this->comment('Setup already ran');
     }
 })->purpose('Travis-cli install script for unit tests');
+
+Artisan::command('logs:clear', function() {
+
+    exec('rm -f ' . storage_path('logs/*.log'));
+
+    exec('rm -f ' . base_path('*.log'));
+
+    $this->comment('Logs have been cleared!');
+
+})->describe('Clear log files');

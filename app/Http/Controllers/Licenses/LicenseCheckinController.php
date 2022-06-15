@@ -129,16 +129,18 @@ class LicenseCheckinController extends Controller
             ->get();
 
         if($licenseSeats->count()==0){
-
             return redirect()->to('licenses/')->with('error', 'There are no seats checked out.');
+
         }
 
         if (!License::where('id', '=', $license_id)->first()) {
 
             return redirect()->to('licenses/')->with('error', 'Invalid license ID.');
         }
-        $replacement_seats = $licenseSeats;
+        $replacement_seats= [];
+
         foreach ($licenseSeats as $seat) {
+            $replacement_seats[]=$seat->assigned_to;
             $seat->assigned_to = null;
 
             if ($seat->save()) {
@@ -146,19 +148,15 @@ class LicenseCheckinController extends Controller
                 $seat->user->email = null;
 
                 // Log the checkin
-                $seat->logCheckin($seat->user,  'Checked in via UI');
+                $seat->logCheckin($seat->user, 'Checked in via UI');
             }
 
         }
-
-        if ($request->input('replacement_checkbox') == true) {
-            $alt_license = LicenseSeat::where('license_id', '=', $request->input('replacement_license'))
-                    ->whereNull('assigned_to')
-                    ->get();
-            LicenseCheckoutController::replaceAllLicenseSeats($licenseSeats, $alt_license, $replacement_seats);
+        if($request->input('replace')== true){
+            $alt_license = $request->input('replacement_license') +1;
+            return LicenseCheckoutController::replaceAllLicenseSeats( $alt_license, $replacement_seats);
         }
 
-
-            return redirect()->to('licenses/')->with('success', 'All seats checked in');
+        return redirect()->to('licenses/')->with('success', 'All seats checked in');
     }
 }

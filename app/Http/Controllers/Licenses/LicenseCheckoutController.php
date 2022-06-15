@@ -141,23 +141,24 @@ class LicenseCheckoutController extends Controller
         }
         return $license_list;
     }
-    public static function replaceAllLicenseSeats($licenseSeats, $alt_license, $replacement_seats)
+    public function replaceAllLicenseSeats($alt_license, $replacement_seats)
     {
-//        dd($replacement_seats);
-        if ($alt_license == null) {
+        $licenseSeats = LicenseSeat::where('license_id', '=', $alt_license)
+            ->whereNull('assigned_to')
+            ->take(count($replacement_seats))
+            ->get();
+
+                if ($alt_license == null) {
             return redirect()->to('licenses/')->with('error', trans('admin/licenses/message.user_does_not_exist'));
         }
 
-                foreach ($licenseSeats as $seat) {
-                    foreach ($replacement_seats as $original_seat) {
-
-                        $seat->assigned_to = $original_seat->assigned_to;
-                        $seat->user->email = $original_seat->email;
-                        $seat->license_id = $alt_license;
-                        $seat->logCheckout($seat->user, 'replacing ' . $original_seat->license_id);
-
+                    foreach($licenseSeats as $seat) {
+                        foreach($replacement_seats as $assigned_to){
+                            $seat->assigned_to = $assigned_to;
+                            $seat->license_id = $alt_license;
+                        }
                     }
-                }
+
                 return redirect()->to('licenses/')->with('success', 'License has been replaced');
         }
 

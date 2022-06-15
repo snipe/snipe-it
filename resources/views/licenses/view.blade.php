@@ -624,10 +624,7 @@
       <div class="modal-footer">
         <button style= width:100%; type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
         <br>
-          <button style= width:100%; type="submit" class="btn btn-danger" rel="noopener">Replace All Seats</button>
-          <label for="replacement_checkbox">
-            <input type="checkbox" value= "true" name="replacement_checkbox" id="replacement_checkbox" aria-label= "replacement_checkbox" checked>
-          </label>
+        <button style= width:100%; type="submit" class="btn btn-danger" name="replace" value="true" rel="noopener">Replace All Seats</button>
       </div>
         </form>
     </div>
