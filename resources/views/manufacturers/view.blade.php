@@ -102,7 +102,7 @@
                   data-bulk-button-id="#bulkAssetEditButton"
                   data-bulk-form-id="#assetsBulkForm"
                   data-search="true"
-                  data-show-footer="true"
+                  data-show-fullscreen="true"
                   data-side-pagination="server"
                   data-show-columns="true"
                   data-show-export="true"
