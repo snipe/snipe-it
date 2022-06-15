@@ -104,7 +104,7 @@
                       <strong>{{ trans('general.company') }}</strong>
                     </div>
                     <div class="col-md-9">
-                      {{ $license->company->name }}
+                      <a href="{{ route('companies.show', $license->company->id) }}">{{ $license->company->name }}</a>
                     </div>
                   </div>
                 @endif
