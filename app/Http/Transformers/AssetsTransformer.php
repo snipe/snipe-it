@@ -111,13 +111,12 @@ class AssetsTransformer
                             'value' => e($value),
                             'field_format' => $field->format,
                             'element' => $field->element,
-
                         ];
 
                 } else {
                     $value = $asset->{$field->convertUnicodeDbSlug()};
 
-                    if ($field->format == 'DATE' && !is_null($value)){
+                    if (($field->format == 'DATE') && (!is_null($value)) && ($value!='')){
                         $value = Helper::getFormattedDateObject($value)['formatted'];
                     }
                     
