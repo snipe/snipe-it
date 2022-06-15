@@ -393,3 +393,29 @@ div.fixed-table-scroll-outer {
 .fix-sticky table thead.thead-dark {
   background: #212529;
 }
+
+.fixed-columns,
+.fixed-columns-right {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background-color: #fff;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.fixed-columns {
+  left: 0;
+}
+
+.fixed-columns .fixed-table-body {
+  overflow: hidden !important;
+}
+
+.fixed-columns-right {
+  right: 0;
+}
+
+.fixed-columns-right .fixed-table-body {
+  overflow-x: hidden !important;
+}

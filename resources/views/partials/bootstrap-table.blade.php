@@ -85,6 +85,7 @@
                 paginationSwitchDown: 'fa-caret-square-o-down',
                 paginationSwitchUp: 'fa-caret-square-o-up',
                 fullscreen: 'fa-expand',
+                print: 'fa-print',
                 columns: 'fa-columns',
                 refresh: 'fas fa-sync-alt',
                 export: 'fa-download',
