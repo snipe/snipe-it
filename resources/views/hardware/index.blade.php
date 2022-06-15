@@ -86,7 +86,7 @@
                 data-sort-name="name"
                 data-show-fullscreen="true"
                 data-fixed-columns="true"
-                data-fixed-right-number="1"
+                data-fixed-right-number="2"
                 data-sticky-header="true"
                 data-height="800"
                 data-show-print="true"
