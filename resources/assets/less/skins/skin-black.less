@@ -59,12 +59,12 @@
 
 
 .btn, .btn:hover {
+  color: #000 ;
 
-  text-decoration: none;
   &.btn-primary, .btn-primary:link {
     background-color: @dark-gray;
-    border-color: darken(@gray, 10%);
-    color: #fff;
+    border-color: #FFF;
+    color: #FFF;
   }
 
 
@@ -89,13 +89,13 @@
 
 
 a {
-  color: @black;
+  color: var(--link);
   text-decoration: underline;
   &:hover {
-    color: darken(@black, 20%);
+    color: var(--hover-link);
   }
   &:visited {
-    color: @black;
+    color: var(--visited-link);
   }
 }
 
@@ -109,18 +109,17 @@ a {
   --header: @black; /* Use same as Header picker */
   --text-main: #BBB;
   --text-sub: #9b9b9b;
-  --link: #AAA; /* Use same as Header picker, lighten by 70% */
+  --link: @black; /* Use same as Header picker, lighten by 70% */
   --visited-link: lighten(@black, 40%); /* Use same as Header picker, lighten by 70% */
   --hover-link: lighten(@black, 45%); /* Use same as Header picker, lighten by 70% */
   --nav-link: #FFF; /* Use same as Header picker */
   --light-link: #fff; /* Use same as Header picker */
 }
-a:link {
-  color: var(--link);
+a.btn-info:link, a.btn-warning:link, a.btn-danger:link{
+  color: #FFF;
 }
-
-a:visited {
-  color: var(--visited-link);
+&a.btn-info:visited, a.btn-warning:visited, a.btn-danger:visited{
+  color: #FFF;
 }
 
 .skin-black .main-header .navbar .nav>li>a, .skin-black .main-header .navbar .nav>li>a {
