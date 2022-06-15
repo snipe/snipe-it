@@ -84,6 +84,7 @@
                 advancedSearchIcon: 'fas fa-search-plus',
                 paginationSwitchDown: 'fa-caret-square-o-down',
                 paginationSwitchUp: 'fa-caret-square-o-up',
+                fullscreen: 'fa-expand',
                 columns: 'fa-columns',
                 refresh: 'fas fa-sync-alt',
                 export: 'fa-download',

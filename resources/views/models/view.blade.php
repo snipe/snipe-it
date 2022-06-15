@@ -56,6 +56,7 @@
                   data-search="true"
                   data-side-pagination="server"
                   data-show-columns="true"
+                  data-show-fullscreen="true"
                   data-toolbar="#assetsBulkEditToolbar"
                   data-bulk-button-id="#bulkAssetEditButton"
                   data-bulk-form-id="#assetsBulkForm"

@@ -84,6 +84,7 @@
                 data-show-refresh="true"
                 data-sort-order="asc"
                 data-sort-name="name"
+                data-show-fullscreen="true"
                 data-toolbar="#assetsBulkEditToolbar"
                 data-bulk-button-id="#bulkAssetEditButton"
                 data-bulk-form-id="#assetsBulkForm"
