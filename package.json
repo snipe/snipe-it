@@ -46,7 +46,7 @@
         "jquery-ui": "^1.13.1",
         "jquery-ui-bundle": "^1.12.1",
         "jquery.iframe-transport": "^1.0.0",
-        "jspdf-autotable": "^3.5.23",
+        "jspdf-autotable": "^3.5.24",
         "less": "^4.1.2",
         "less-loader": "^5.0.0",
         "list.js": "^1.5.0",
