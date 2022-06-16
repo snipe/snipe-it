@@ -21,7 +21,7 @@
                             <i class="fas fa-barcode" aria-hidden="true"></i>
                             </span>
                             <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}
-                                {!! (($company->assets) && ($company->assets->count() > 0 )) ? '<badge class="badge badge-secondary">'.$company->assets->count().'</badge>' : '' !!}
+                                {!! (($company->assets) && ($company->assets->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($company->assets->count()).'</badge>' : '' !!}
 
                             </span>
                         </a>
@@ -33,7 +33,7 @@
                             <i class="far fa-save"></i>
                             </span>
                             <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}
-                                {!! (($company->licenses) && ($company->licenses->count() > 0 )) ? '<badge class="badge badge-secondary">'.$company->licenses->count().'</badge>' : '' !!}
+                                {!! (($company->licenses) && ($company->licenses->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($company->licenses->count()).'</badge>' : '' !!}
                             </span>
                         </a>
                     </li>
@@ -43,7 +43,7 @@
                             <span class="hidden-lg hidden-md">
                             <i class="far fa-keyboard"></i>
                             </span> <span class="hidden-xs hidden-sm">{{ trans('general.accessories') }}
-                                {!! (($company->accessories) && ($company->accessories->count() > 0 )) ? '<badge class="badge badge-secondary">'.$company->accessories->count().'</badge>' : '' !!}
+                                {!! (($company->accessories) && ($company->accessories->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($company->accessories->count()).'</badge>' : '' !!}
                             </span>
                         </a>
                     </li>
@@ -53,7 +53,7 @@
                             <span class="hidden-lg hidden-md">
                             <i class="fas fa-tint"></i></span>
                             <span class="hidden-xs hidden-sm">{{ trans('general.consumables') }}
-                                {!! (($company->consumables) && ($company->consumables->count() > 0 )) ? '<badge class="badge badge-secondary">'.$company->consumables->count().'</badge>' : '' !!}
+                                {!! (($company->consumables) && ($company->consumables->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($company->consumables->count()).'</badge>' : '' !!}
                             </span>
                         </a>
                     </li>
@@ -63,7 +63,7 @@
                             <span class="hidden-lg hidden-md">
                             <i class="far fa-hdd"></i></span>
                             <span class="hidden-xs hidden-sm">{{ trans('general.components') }}
-                                {!! (($company->components) && ($company->components->count() > 0 )) ? '<badge class="badge badge-secondary">'.$company->components->count().'</badge>' : '' !!}
+                                {!! (($company->components) && ($company->components->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($company->components->count()).'</badge>' : '' !!}
                             </span>
                         </a>
                     </li>
@@ -73,7 +73,7 @@
                             <span class="hidden-lg hidden-md">
                             <i class="fas fa-users"></i></span>
                             <span class="hidden-xs hidden-sm">{{ trans('general.people') }}
-                                {!! (($company->users) && ($company->users->count() > 0 )) ? '<badge class="badge badge-secondary">'.$company->users->count().'</badge>' : '' !!}
+                                {!! (($company->users) && ($company->users->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($company->users->count()).'</badge>' : '' !!}
                             </span>
                         </a>
                     </li>

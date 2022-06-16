@@ -35,7 +35,7 @@
                 </span>
                 <span class="hidden-xs hidden-sm">
                     {{ trans('general.assets') }}
-                    {!! (($supplier->assets) && ($supplier->assets->count() > 0 )) ? '<badge class="badge badge-secondary">'.$supplier->assets->count().'</badge>' : '' !!}
+                    {!! (($supplier->assets) && ($supplier->assets->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($supplier->assets->count()).'</badge>' : '' !!}
                </span>
 
             </a>
@@ -48,7 +48,7 @@
                     </span>
               <span class="hidden-xs hidden-sm">
                           {{ trans('general.accessories') }}
-                          {!! (($supplier->accessories) && ($supplier->accessories->count() > 0 )) ? '<badge class="badge badge-secondary">'.$supplier->accessories->count().'</badge>' : '' !!}
+                          {!! (($supplier->accessories) && ($supplier->accessories->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($supplier->accessories->count()).'</badge>' : '' !!}
                     </span>
             </a>
           </li>
@@ -60,7 +60,7 @@
                     </span>
               <span class="hidden-xs hidden-sm">
                           {{ trans('general.licenses') }}
-                          {!! (($supplier->licenses) && ($supplier->licenses->count() > 0 )) ? '<badge class="badge badge-secondary">'.$supplier->licenses->count().'</badge>' : '' !!}
+                          {!! (($supplier->licenses) && ($supplier->licenses->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($supplier->licenses->count()).'</badge>' : '' !!}
                     </span>
             </a>
           </li>
@@ -72,7 +72,7 @@
                     </span>
               <span class="hidden-xs hidden-sm">
                         {{ trans('admin/asset_maintenances/general.asset_maintenances') }}
-                        {!! (($supplier->asset_maintenances) && ($supplier->asset_maintenances->count() > 0 )) ? '<badge class="badge badge-secondary">'.$supplier->asset_maintenances->count().'</badge>' : '' !!}
+                        {!! (($supplier->asset_maintenances) && ($supplier->asset_maintenances->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($supplier->asset_maintenances->count()).'</badge>' : '' !!}
                     </span>
             </a>
           </li>

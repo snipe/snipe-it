@@ -47,7 +47,7 @@
               <i class="far fa-list-alt fa-2x" aria-hidden="true"></i>
               </span>
               <span class="hidden-xs hidden-sm">{{ trans('admin/licenses/form.seats') }}</span>
-              <span class="badge badge-secondary">{{ $license->availCount()->count() }} / {{ $license->seats }}</span>
+              <span class="badge badge-secondary">{{ number_format($license->availCount()->count()) }} / {{ number_format($license->seats) }}</span>
 
             </a>
         </li>
@@ -57,7 +57,7 @@
             <span class="hidden-lg hidden-md">
             <i class="far fa-file fa-2x" aria-hidden="true"></i></span>
             <span class="hidden-xs hidden-sm">{{ trans('general.file_uploads') }}
-              {!! ($license->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.$license->uploads->count().'</badge>' : '' !!}
+              {!! ($license->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($license->uploads->count()).'</badge>' : '' !!}
             </span>
           </a>
         </li>
