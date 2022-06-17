@@ -25,7 +25,7 @@
                         </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('general.users') }}
-                          {!! (($location->users) && ($location->users->count() > 0 )) ? '<badge class="badge badge-secondary">'.$location->users->count().'</badge>' : '' !!}
+                          {!! (($location->users) && ($location->users->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($location->users->count()).'</badge>' : '' !!}
 
                       </span>
                   </a>
@@ -38,7 +38,7 @@
                     </span>
                     <span class="hidden-xs hidden-sm">
                           {{ trans('general.assets') }}
-                          {!! (($location->assets) && ($location->assets->count() > 0 )) ? '<badge class="badge badge-secondary">'.$location->assets->count().'</badge>' : '' !!}
+                          {!! (($location->assets) && ($location->assets->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($location->assets->count()).'</badge>' : '' !!}
                     </span>
                   </a>
               </li>
@@ -50,7 +50,7 @@
                     </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('general.accessories') }}
-                          {!! (($location->accessories) && ($location->accessories->count() > 0 )) ? '<badge class="badge badge-secondary">'.$location->accessories->count().'</badge>' : '' !!}
+                          {!! (($location->accessories) && ($location->accessories->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($location->accessories->count()).'</badge>' : '' !!}
                     </span>
                   </a>
               </li>
@@ -62,7 +62,7 @@
                     </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('general.consumables') }}
-                          {!! (($location->consumables) && ($location->consumables->count() > 0 )) ? '<badge class="badge badge-secondary">'.$location->consumables->count().'</badge>' : '' !!}
+                          {!! (($location->consumables) && ($location->consumables->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($location->consumables->count()).'</badge>' : '' !!}
                     </span>
                   </a>
               </li>
@@ -74,7 +74,7 @@
                     </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('general.components') }}
-                          {!! (($location->components) && ($location->components->count() > 0 )) ? '<badge class="badge badge-secondary">'.$location->components->count().'</badge>' : '' !!}
+                          {!! (($location->components) && ($location->components->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($location->components->count()).'</badge>' : '' !!}
                     </span>
                   </a>
               </li>
