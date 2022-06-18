@@ -3,6 +3,7 @@
 {{-- Page title --}}
 @section('title')
     {{ $company->name }}
+    {{ trans('general.company') }}
     @parent
 @stop
 
