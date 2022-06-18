@@ -130,7 +130,8 @@
 
     @if ($component->purchase_date)
     <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/components/general.date') }}: </strong>
-    {{ $component->purchase_date }} </div>
+      {{ Helper::getFormattedDateObject($component->purchase_date, 'date', false) }}
+    </div>
     @endif
 
     @if ($component->purchase_cost)
