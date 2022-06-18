@@ -69,6 +69,7 @@ class Component extends SnipeModel
         'serial',
         'notes',
         'supplier_id',
+        'manufacturer_id',
     ];
 
     use Searchable;
@@ -90,6 +91,7 @@ class Component extends SnipeModel
         'company'      => ['name'],
         'location'     => ['name'],
         'supplier'     => ['name'],
+        'manufacturer' => ['name'],
     ];
 
     /**
@@ -166,6 +168,12 @@ class Component extends SnipeModel
         return $this->belongsTo(\App\Models\Category::class, 'category_id');
     }
 
+
+    public function manufacturer()
+    {
+        return $this->belongsTo(\App\Models\Manufacturer::class, 'manufacturer_id');
+    }
+
     /**
      * Establishes the component -> action logs relationship
      *
@@ -232,6 +240,19 @@ class Component extends SnipeModel
     public function scopeOrderCategory($query, $order)
     {
         return $query->join('categories', 'components.category_id', '=', 'categories.id')->orderBy('categories.name', $order);
+    }
+
+    /**
+     * Query builder scope to order on manufacturer
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderManufacturer($query, $order)
+    {
+        return $query->leftJoin('manufacturers', 'componentsd.manufacturer_id', '=', 'manufacturers.id')->orderBy('manufacturers.name', $order);
     }
 
     /**

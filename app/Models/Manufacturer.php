@@ -75,7 +75,8 @@ class Manufacturer extends SnipeModel
             && ($this->assets()->count() === 0)
             && ($this->licenses()->count() === 0)
             && ($this->consumables()->count() === 0)
-            && ($this->accessories()->count() === 0);
+            && ($this->accessories()->count() === 0)
+            && ($this->components()->count() === 0);
     }
 
     public function assets()
@@ -101,5 +102,10 @@ class Manufacturer extends SnipeModel
     public function consumables()
     {
         return $this->hasMany(\App\Models\Consumable::class, 'manufacturer_id');
+    }
+
+    public function components()
+    {
+        return $this->hasMany(\App\Models\Component::class, 'manufacturer_id');
     }
 }
