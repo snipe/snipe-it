@@ -6,6 +6,25 @@
     @parent
 @stop
 
+{{-- Right header --}}
+@section('header_right')
+    @can('manage', \App\Models\Company::class)
+        <div class="dropdown pull-right">
+            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                {{ trans('button.actions') }}
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                @can('update', \App\Models\Company::class)
+                    <li role="menuitem">
+                        <a href="{{ route('companies.edit', $company->id) }}">{{ trans('admin/companies/table.update') }}</a>
+                    </li>
+                @endcan
+            </ul>
+        </div>
+    @endcan
+@stop
+
 {{-- Page content --}}
 @section('content')
 
@@ -252,4 +271,3 @@
     @include ('partials.bootstrap-table')
 
 @stop
-
