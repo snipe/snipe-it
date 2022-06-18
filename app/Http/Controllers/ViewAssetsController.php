@@ -99,8 +99,10 @@ class ViewAssetsController extends Controller
         }
 
         $settings = Setting::getSettings();
-
+       
+        
         if ($item_request = $item->isRequestedBy($user)) {
+            
             $item->cancelRequest();
             $data['item_quantity'] = $item_request->qty;
             $logaction->logaction('request_canceled');
@@ -111,7 +113,7 @@ class ViewAssetsController extends Controller
 
             return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
         } else {
-            $item->request();
+            $item->request($data['item_quantity']);
             if (($settings->alert_email != '') && ($settings->alerts_enabled == '1') && (! config('app.lock_passwords'))) {
                 $logaction->logaction('requested');
                 $settings->notify(new RequestAssetNotification($data));
