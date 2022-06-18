@@ -34,6 +34,10 @@ class ConsumablesTransformer
             'min_amt'       => (int) $consumable->min_amt,
             'model_number'  => ($consumable->model_number != '') ? e($consumable->model_number) : null,
             'remaining'  => $consumable->numRemaining(),
+            'supplier' => ($consumable->supplier) ? [
+                'id' => (int) $consumable->supplier->id,
+                'name'=> e($consumable->supplier->name),
+            ] : null,
             'order_number'  => e($consumable->order_number),
             'purchase_cost'  => Helper::formatCurrencyOutput($consumable->purchase_cost),
             'purchase_date'  => Helper::getFormattedDateObject($consumable->purchase_date, 'date'),

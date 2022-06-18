@@ -161,6 +161,17 @@ class Supplier extends SnipeModel
         return $this->hasMany(\App\Models\License::class, 'supplier_id');
     }
 
+    public function components()
+    {
+        return $this->hasMany(\App\Models\Component::class, 'supplier_id');
+    }
+
+    public function consumables()
+    {
+        return $this->hasMany(\App\Models\Consumable::class, 'supplier_id');
+    }
+
+
     /**
      * Return the number of licenses by supplier
      *

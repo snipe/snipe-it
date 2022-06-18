@@ -37,6 +37,10 @@ class ComponentsTransformer
                 'id' => (int) $component->category->id,
                 'name' => e($component->category->name),
             ] : null,
+            'supplier' => ($component->supplier) ? [
+                'id' => (int) $component->supplier->id,
+                'name'=> e($component->supplier->name),
+            ] : null,
             'order_number'  => e($component->order_number),
             'purchase_date' =>  Helper::getFormattedDateObject($component->purchase_date, 'date'),
             'purchase_cost' => Helper::formatCurrencyOutput($component->purchase_cost),

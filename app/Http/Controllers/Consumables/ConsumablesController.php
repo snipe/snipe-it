@@ -80,6 +80,7 @@ class ConsumablesController extends Controller
         $consumable->qty                    = $request->input('qty');
         $consumable->user_id                = Auth::id();
         $consumable->notes                  = $request->input('notes');
+        $consumable->supplier_id            = $request->input('supplier_id', null);
 
 
         $consumable = $request->handleImages($consumable);
@@ -155,6 +156,7 @@ class ConsumablesController extends Controller
         $consumable->purchase_cost          = Helper::ParseCurrency($request->input('purchase_cost'));
         $consumable->qty                    = Helper::ParseFloat($request->input('qty'));
         $consumable->notes                  = $request->input('notes');
+        $consumable->supplier_id            = $request->input('supplier_id', null);
 
         $consumable = $request->handleImages($consumable);
 

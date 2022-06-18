@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'checkout'                          => 'Checkout Consumable to User',
+    'checkout'                          => 'Checkout Consumable',
     'consumable_name'                   => 'Consumable Name',
     'create'                            => 'Create Consumable',
     'item_no'                           => 'Item No.',

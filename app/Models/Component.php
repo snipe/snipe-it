@@ -23,6 +23,7 @@ class Component extends SnipeModel
     use SoftDeletes;
     protected $casts = [
         'purchase_date' => 'datetime',
+        'supplier_id'    => 'integer',
     ];
     protected $table = 'components';
 
@@ -37,6 +38,7 @@ class Component extends SnipeModel
         'min_amt'        => 'integer|min:0|nullable',
         'purchase_date'  => 'date|nullable',
         'purchase_cost'  => 'numeric|nullable|gte:0',
+        'supplier_id'     => 'exists:suppliers,id|numeric|nullable',
     ];
 
     /**
@@ -66,6 +68,7 @@ class Component extends SnipeModel
         'qty',
         'serial',
         'notes',
+        'supplier_id',
     ];
 
     use Searchable;
@@ -86,7 +89,20 @@ class Component extends SnipeModel
         'category'     => ['name'],
         'company'      => ['name'],
         'location'     => ['name'],
+        'supplier'     => ['name'],
     ];
+
+    /**
+     * Establishes the component -> aupplier relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function supplier()
+    {
+        return $this->belongsTo(\App\Models\Supplier::class, 'supplier_id');
+    }
 
     /**
      * Establishes the component -> location relationship
@@ -189,6 +205,20 @@ class Component extends SnipeModel
     public function numRemaining()
     {
         return $this->qty - $this->numCheckedOut();
+    }
+
+    /**
+     * Query builder scope to order on supplier name
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderSupplier($query, $order)
+    {
+        return $query->leftJoin('suppliers as suppliers_components', 'components.supplier_id', '=', 'suppliers_components.id')
+            ->orderBy('suppliers_components.name', $order);
     }
 
     /**

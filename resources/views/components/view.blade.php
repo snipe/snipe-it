@@ -120,6 +120,14 @@
     {{ $component->serial }} </div>
     @endif
 
+    @if ($component->supplier_id)
+    <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('general.supplier') }}: </strong>
+      <a href="{{ route('suppliers.show', $component->supplier_id) }}">
+        {{ $component->supplier->name }}
+      </a>
+    </div>
+    @endif
+
     @if ($component->purchase_date)
     <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/components/general.date') }}: </strong>
     {{ $component->purchase_date }} </div>

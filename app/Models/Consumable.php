@@ -27,7 +27,8 @@ class Consumable extends SnipeModel
         'category_id'    => 'integer',
         'company_id'     => 'integer',
         'qty'            => 'integer',
-        'min_amt'        => 'integer',    
+        'min_amt'        => 'integer',
+        'supplier_id'    => 'integer',
      ];
 
     /**
@@ -40,6 +41,7 @@ class Consumable extends SnipeModel
         'company_id'  => 'integer|nullable',
         'min_amt'     => 'integer|min:0|nullable',
         'purchase_cost'   => 'numeric|nullable|gte:0',
+        'supplier_id'     => 'exists:suppliers,id|numeric|nullable',
     ];
 
     /**
@@ -72,6 +74,7 @@ class Consumable extends SnipeModel
         'min_amt',
         'requestable',
         'notes',
+        'supplier_id',
     ];
 
     use Searchable;
@@ -93,6 +96,7 @@ class Consumable extends SnipeModel
         'company'      => ['name'],
         'location'     => ['name'],
         'manufacturer' => ['name'],
+        'supplier'     => ['name'],
     ];
 
     /**
@@ -188,6 +192,17 @@ class Consumable extends SnipeModel
         return $this->belongsTo(\App\Models\Category::class, 'category_id');
     }
 
+    /**
+     * Establishes the component -> aupplier relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function supplier()
+    {
+        return $this->belongsTo(\App\Models\Supplier::class, 'supplier_id');
+    }
 
     /**
      * Establishes the component -> action logs relationship
@@ -305,6 +320,20 @@ class Consumable extends SnipeModel
         $remaining = $total - $checkedout;
 
         return $remaining;
+    }
+
+    /**
+     * Query builder scope to order on supplier name
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderSupplier($query, $order)
+    {
+        return $query->leftJoin('suppliers as suppliers_consumables', 'consumables.supplier_id', '=', 'suppliers_consumables.id')
+            ->orderBy('suppliers_consumables.name', $order);
     }
 
     /**
