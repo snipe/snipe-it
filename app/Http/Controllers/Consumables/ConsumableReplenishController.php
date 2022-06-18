@@ -69,8 +69,6 @@ class ConsumableReplenishController extends Controller
 
         $admin_user = Auth::user();
 
-        //upload file
-        // $file_name = null;
         if ($request->hasFile('file')) {
             if (! Storage::exists('private_uploads/consumables/docs')) {
                 Storage::makeDirectory('private_uploads/consumables/docs', 775);
@@ -102,6 +100,8 @@ class ConsumableReplenishController extends Controller
         
         // Update the consumable data
         $consumable->assigned_to = e($request->input('assigned_to'));
+
+        isset($file_name) ? $file_name : $file_name = ''; 
 
         $consumable->replenishusers()->attach($consumable->id, [
             'consumable_id' => $consumable->id,            
