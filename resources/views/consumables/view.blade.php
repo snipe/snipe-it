@@ -114,53 +114,30 @@
             @endif
               @if ($consumable->company)
                 <div class="row">
-                  <div class="col-md-4" style="padding-bottom: 5px;">
-                    {{ trans('general.company')}}
+                  <div class="col-md-4">
+                    <strong>{{ trans('general.company')}}</strong>
                   </div>
                   <div class="col-md-8">
                     <a href="{{ route('companies.show', $consumable->company->id) }}">{{ $consumable->company->name }} </a>
                   </div>
                 </div>
               @endif
-              @if ($consumable->supplier_id)
+
+              @if ($consumable->category)
                 <div class="row">
-                  <div class="col-md-4" style="padding-bottom: 5px;">
-                    {{ trans('general.supplier') }}
+                  <div class="col-md-4">
+                    <strong>{{ trans('general.category')}}</strong>
                   </div>
                   <div class="col-md-8">
-                    <a href="{{ route('suppliers.show', $consumable->supplier_id) }}">
-                      {{ $consumable->supplier->name }}
-                    </a>
+                    <a href="{{ route('categories.show', $consumable->category->id) }}">{{ $consumable->category->name }} </a>
                   </div>
                 </div>
-              @endif
-              @if ($consumable->purchase_date)
-                <div class="row">
-                <div class="col-md-4" style="padding-bottom: 5px;">
-                  {{ trans('general.purchase_date') }}
-                </div>
-                <div class="col-md-8">
-                  {{ Helper::getFormattedDateObject($consumable->purchase_date, 'date', false) }}
-                </div>
-                </div>
-              @endif
-
-              @if ($consumable->purchase_cost)
-                    <div class="row">
-                <div class="col-md-4" style="padding-bottom: 5px;">
-                  {{ trans('general.purchase_cost') }}
-                </div>
-                <div class="col-md-8">
-                  {{ $snipeSettings->default_currency }}
-                  {{ Helper::formatCurrencyOutput($consumable->purchase_cost) }}
-                </div>
-                    </div>
               @endif
 
               @if ($consumable->item_no)
                         <div class="row">
-                <div class="col-md-4" style="padding-bottom: 5px;">
-                  {{ trans('admin/consumables/general.item_no') }}
+                <div class="col-md-4">
+                  <strong>{{ trans('admin/consumables/general.item_no') }}</strong>
                 </div>
                 <div class="col-md-8">
                   {{ $consumable->item_no }}
@@ -170,8 +147,8 @@
 
               @if ($consumable->model_number)
                             <div class="row">
-                <div class="col-md-4" style="padding-bottom: 5px;">
-                  {{ trans('general.model_no') }}
+                <div class="col-md-4">
+                  <strong>{{ trans('general.model_no') }}</strong>
                 </div>
                 <div class="col-md-8">
                   {{ $consumable->model_number }}
@@ -181,8 +158,8 @@
 
               @if ($consumable->manufacturer)
                                 <div class="row">
-                <div class="col-md-4" style="padding-bottom: 5px;">
-                 {{ trans('general.manufacturer') }}
+                <div class="col-md-4">
+                  <strong>{{ trans('general.manufacturer') }}</strong>
                 </div>
                 <div class="col-md-8">
                   <a href="{{ route('manufacturers.show', $consumable->manufacturer->id) }}">{{ $consumable->manufacturer->name }}</a>
@@ -190,31 +167,74 @@
                                 </div>
               @endif
 
-              @if ($consumable->order_number)
-                                    <div class="row">
-                <div class="col-md-4" style="padding-bottom: 5px;">
-                  {{ trans('general.order_number') }}
+              @if ($consumable->supplier_id)
+                <div class="row">
+                  <div class="col-md-4">
+                    <strong>{{ trans('general.supplier') }}</strong>
+                  </div>
+                  <div class="col-md-8">
+                    <a href="{{ route('suppliers.show', $consumable->supplier_id) }}">
+                      {{ $consumable->supplier->name }}
+                    </a>
+                  </div>
                 </div>
-                <div class="col-md-8">
-                  {{ $consumable->order_number }}
-                </div>
-                                    </div>
               @endif
-              @if ($consumable->notes)
+              @if ($consumable->order_number)
+                <div class="row">
+                  <div class="col-md-4">
+                    <strong>{{ trans('general.order_number') }}</strong>
+                  </div>
+                  <div class="col-md-8">
+                    {{ $consumable->order_number }}
+                  </div>
+                </div>
+              @endif
+              @if ($consumable->purchase_date)
+                <div class="row">
+                  <div class="col-md-4">
+                    <strong>{{ trans('general.purchase_date') }}</strong>
+                  </div>
+                  <div class="col-md-8">
+                    {{ Helper::getFormattedDateObject($consumable->purchase_date, 'date', false) }}
+                  </div>
+                </div>
+              @endif
 
+              @if ($consumable->purchase_cost)
+                <div class="row">
+                  <div class="col-md-4">
+                    <strong>{{ trans('general.purchase_cost') }}</strong>
+                  </div>
+                  <div class="col-md-8">
+                    {{ $snipeSettings->default_currency }}
+                    {{ Helper::formatCurrencyOutput($consumable->purchase_cost) }}
+                  </div>
+                </div>
+              @endif
+
+              @if ($consumable->notes)
+              <div class="row"  style="padding-bottom: 15px;">
                 <div class="col-md-12">
                   <strong>
-                    {{ trans('general.notes') }}
+                    <strong>{{ trans('general.notes') }}</strong>
                   </strong>
                 </div>
                 <div class="col-md-12">
                   {!! nl2br(e($consumable->notes)) !!}
                 </div>
-
+              </div>
               @endif
+              <div class="row">
+                <div class="col-md-4">
+                  <strong>Number remaining</strong>
+                </div>
+                <div class="col-md-8">
+                  {{ $consumable->numRemaining() }}
+                </div>
+              </div>
               @can('checkout', \App\Models\Consumable::class)
                 <div class="row">
-                  <div class="col-md-12 text-center">
+                  <div class="col-md-12 text-center" style="padding-top: 15px;">
                     <a href="{{ route('checkout/consumable', $consumable->id) }}" style="margin-right:5px;" class="btn btn-primary btn-sm" {{ (($consumable->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
                   </div>
                 </div>
@@ -245,7 +265,7 @@
               <thead>
               <tr>
                 <th class="col-sm-2" data-visible="false" data-sortable="true" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.record_created') }}</th>
-                <th class="col-sm-2"data-visible="true" data-sortable="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
+                <th class="col-sm-2" data-visible="true" data-sortable="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
                 <th class="col-sm-2" data-sortable="true"  data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
                 <th class="col-sm-2" data-sortable="true"  data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
                 <th class="col-sm-2" data-visible="true" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
