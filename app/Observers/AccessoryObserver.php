@@ -14,13 +14,27 @@ class AccessoryObserver
      * @param  Accessory  $accessory
      * @return void
      */
-    public function updated(Accessory $accessory)
+    public function updating(Accessory $accessory)
     {
+        $changed = [];
+
+        foreach ($accessory->getRawOriginal() as $key => $value) {
+            if ($accessory->getRawOriginal()[$key] != $accessory->getAttributes()[$key]) {
+                $changed[$key]['old'] = $accessory->getRawOriginal()[$key];
+                $changed[$key]['new'] = $accessory->getAttributes()[$key];
+            }
+        }
+
+        if (empty($changed)){
+            return;
+        }
+
         $logAction = new Actionlog();
         $logAction->item_type = Accessory::class;
         $logAction->item_id = $accessory->id;
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->user_id = Auth::id();
+        $logAction->log_meta = json_encode($changed);
         $logAction->logaction('update');
     }
 

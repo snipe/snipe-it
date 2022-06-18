@@ -14,13 +14,27 @@ class ConsumableObserver
      * @param  Consumable  $consumable
      * @return void
      */
-    public function updated(Consumable $consumable)
+    public function updating(Consumable $consumable)
     {
+        $changed = [];
+
+        foreach ($consumable->getRawOriginal() as $key => $value) {
+            if ($consumable->getRawOriginal()[$key] != $consumable->getAttributes()[$key]) {
+                $changed[$key]['old'] = $consumable->getRawOriginal()[$key];
+                $changed[$key]['new'] = $consumable->getAttributes()[$key];
+            }
+        }
+
+        if (empty($changed)){
+            return;
+        }
+
         $logAction = new Actionlog();
         $logAction->item_type = Consumable::class;
         $logAction->item_id = $consumable->id;
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->user_id = Auth::id();
+        $logAction->log_meta = json_encode($changed);
         $logAction->logaction('update');
     }
 

@@ -14,13 +14,27 @@ class LicenseObserver
      * @param  License  $license
      * @return void
      */
-    public function updated(License $license)
+    public function updating(License $license)
     {
+        $changed = [];
+
+        foreach ($license->getRawOriginal() as $key => $value) {
+            if ($license->getRawOriginal()[$key] != $license->getAttributes()[$key]) {
+                $changed[$key]['old'] = $license->getRawOriginal()[$key];
+                $changed[$key]['new'] = $license->getAttributes()[$key];
+            }
+        }
+
+        if (empty($changed)){
+            return;
+        }
+
         $logAction = new Actionlog();
         $logAction->item_type = License::class;
         $logAction->item_id = $license->id;
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->user_id = Auth::id();
+        $logAction->log_meta = json_encode($changed);
         $logAction->logaction('update');
     }
 

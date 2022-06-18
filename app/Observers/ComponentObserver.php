@@ -14,13 +14,27 @@ class ComponentObserver
      * @param  Component  $component
      * @return void
      */
-    public function updated(Component $component)
+    public function updating(Component $component)
     {
+        $changed = [];
+
+        foreach ($component->getRawOriginal() as $key => $value) {
+            if ($component->getRawOriginal()[$key] != $component->getAttributes()[$key]) {
+                $changed[$key]['old'] = $component->getRawOriginal()[$key];
+                $changed[$key]['new'] = $component->getAttributes()[$key];
+            }
+        }
+
+        if (empty($changed)){
+            return;
+        }
+
         $logAction = new Actionlog();
         $logAction->item_type = Component::class;
         $logAction->item_id = $component->id;
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->user_id = Auth::id();
+        $logAction->log_meta = json_encode($changed);
         $logAction->logaction('update');
     }
 

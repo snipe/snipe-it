@@ -66,7 +66,7 @@
                 <a href="#consumables" data-toggle="tab">
 
                 <span class="hidden-lg hidden-md">
-                    <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
+                    <i class="fas fa-tint fa-2x" aria-hidden="true"></i>
                 </span>
                     <span class="hidden-xs hidden-sm">
                     {{ trans('general.consumables') }}
@@ -79,7 +79,7 @@
                 <a href="#components" data-toggle="tab">
 
                 <span class="hidden-lg hidden-md">
-                    <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
+                    <i class="far fa-hdd fa-2x" aria-hidden="true"></i>
                 </span>
                     <span class="hidden-xs hidden-sm">
                     {{ trans('general.components') }}
@@ -111,70 +111,79 @@
 
 
           <div class="tab-pane active" id="assets">
-            <h2 class="box-title">{{ trans('general.assets') }}</h2>
-
-            <div class="table table-responsive">
-              @include('partials.asset-bulk-actions')
-              <table
-                      data-cookie-id-table="suppliersAssetsTable"
-                      data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
-                      data-pagination="true"
-                      data-id-table="suppliersAssetsTable"
-                      data-search="true"
-                      data-show-footer="true"
-                      data-side-pagination="server"
-                      data-show-columns="true"
-                      data-show-export="true"
-                      data-show-refresh="true"
-                      data-show-fullscreen="true"
-                      data-sort-order="asc"
-                      data-toolbar="#assetsBulkEditToolbar"
-                      data-bulk-button-id="#bulkAssetEditButton"
-                      data-bulk-form-id="#assetsBulkForm"
-                      data-click-to-select="true"
-                      id="suppliersAssetsTable"
-                      class="table table-striped snipe-table"
-                      data-url="{{route('api.assets.index', ['supplier_id' => $supplier->id]) }}"
-                      data-export-options='{
+              @if ($supplier->assets->count() > 0)
+                  @include('partials.asset-bulk-actions')
+                  <table
+                          data-cookie-id-table="suppliersAssetsTable"
+                          data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
+                          data-pagination="true"
+                          data-id-table="suppliersAssetsTable"
+                          data-search="true"
+                          data-show-footer="true"
+                          data-side-pagination="server"
+                          data-show-columns="true"
+                          data-show-export="true"
+                          data-show-refresh="true"
+                          data-show-fullscreen="true"
+                          data-sort-order="asc"
+                          data-toolbar="#assetsBulkEditToolbar"
+                          data-bulk-button-id="#bulkAssetEditButton"
+                          data-bulk-form-id="#assetsBulkForm"
+                          data-click-to-select="true"
+                          id="suppliersAssetsTable"
+                          class="table table-striped snipe-table"
+                          data-url="{{route('api.assets.index', ['supplier_id' => $supplier->id]) }}"
+                          data-export-options='{
                               "fileName": "export-suppliers-{{ str_slug($supplier->name) }}-assets-{{ date('Y-m-d') }}",
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                               }'>
-              </table>
+                  </table>
+              @else
 
-            </div><!-- /.table-responsive -->
+                  <div class="alert alert-info alert-block">
+                      <i class="fas fa-info-circle"></i>
+                      {{ trans('general.no_results') }}
+                  </div>
+              @endif
+
+
+
           </div><!-- /.tab-pane -->
 
 
 
           <div class="tab-pane" id="accessories">
-            <h2 class="box-title">{{ trans('general.accessories') }}</h2>
-            <div class="table table-responsive">
-              <table
-                      data-columns="{{ \App\Presenters\AccessoryPresenter::dataTableLayout() }}"
-                      data-cookie-id-table="accessoriesListingTable"
-                      data-pagination="true"
-                      data-id-table="accessoriesListingTable"
-                      data-search="true"
-                      data-side-pagination="server"
-                      data-show-columns="true"
-                      data-show-fullscreen="true"
-                      data-show-export="true"
-                      data-show-refresh="true"
-                      data-sort-order="asc"
-                      id="accessoriesListingTable"
-                      class="table table-striped snipe-table"
-                      data-url="{{route('api.accessories.index', ['supplier_id' => $supplier->id]) }}"
-                      data-export-options='{
+              @if ($supplier->accessories->count() > 0)
+                  <table
+                          data-columns="{{ \App\Presenters\AccessoryPresenter::dataTableLayout() }}"
+                          data-cookie-id-table="accessoriesListingTable"
+                          data-pagination="true"
+                          data-id-table="accessoriesListingTable"
+                          data-search="true"
+                          data-side-pagination="server"
+                          data-show-columns="true"
+                          data-show-fullscreen="true"
+                          data-show-export="true"
+                          data-show-refresh="true"
+                          data-sort-order="asc"
+                          id="accessoriesListingTable"
+                          class="table table-striped snipe-table"
+                          data-url="{{route('api.accessories.index', ['supplier_id' => $supplier->id]) }}"
+                          data-export-options='{
                               "fileName": "export-suppliers-{{ str_slug($supplier->name) }}-accessories-{{ date('Y-m-d') }}",
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                               }'>
-              </table>
-            </div><!-- /.table-responsive -->
+                  </table>
+              @else
+                  <div class="alert alert-info alert-block">
+                      <i class="fas fa-info-circle"></i>
+                      {{ trans('general.no_results') }}
+                  </div>
+              @endif
           </div><!-- /.tab-pane -->
 
             <div class="tab-pane" id="components">
-                <h2 class="box-title">{{ trans('general.components') }}</h2>
-                <div class="table table-responsive">
+                @if ($supplier->components->count() > 0)
                     <table
                             data-columns="{{ \App\Presenters\ComponentPresenter::dataTableLayout() }}"
                             data-cookie-id-table="componentsListingTable"
@@ -195,12 +204,16 @@
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                               }'>
                     </table>
-                </div><!-- /.table-responsive -->
+                @else
+                    <div class="alert alert-info alert-block">
+                        <i class="fas fa-info-circle"></i>
+                        {{ trans('general.no_results') }}
+                    </div>
+                @endif
             </div><!-- /.tab-pane -->
 
             <div class="tab-pane" id="consumables">
-                <h2 class="box-title">{{ trans('general.consumables') }}</h2>
-                <div class="table table-responsive">
+                @if ($supplier->consumables->count() > 0)
                     <table
                             data-columns="{{ \App\Presenters\ConsumablePresenter::dataTableLayout() }}"
                             data-cookie-id-table="consumablesListingTable"
@@ -221,13 +234,17 @@
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                               }'>
                     </table>
-                </div><!-- /.table-responsive -->
+                @else
+                    <div class="alert alert-info alert-block">
+                        <i class="fas fa-info-circle"></i>
+                        {{ trans('general.no_results') }}
+                    </div>
+                @endif
+
             </div><!-- /.tab-pane -->
 
           <div class="tab-pane" id="licenses">
-            <h2 class="box-title">{{ trans('general.licenses') }}</h2>
-
-            <div class="table table-responsive">
+              @if ($supplier->licenses->count() > 0)
               <table
                       data-columns="{{ \App\Presenters\LicensePresenter::dataTableLayout() }}"
                       data-cookie-id-table="licensesListingTable"
@@ -248,14 +265,18 @@
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                               }'>
               </table>
+              @else
+                  <div class="alert alert-info alert-block">
+                      <i class="fas fa-info-circle"></i>
+                      {{ trans('general.no_results') }}
+                  </div>
+              @endif
 
-            </div><!-- /.table-responsive -->
+
           </div><!-- /.tab-pane -->
 
           <div class="tab-pane" id="maintenances">
-            <h2 class="box-title">{{ trans('admin/asset_maintenances/general.asset_maintenances') }}</h2>
-            <div class="table table-responsive">
-
+              @if ($supplier->asset_maintenances->count() > 0)
               <table
                       data-columns="{{ \App\Presenters\AssetMaintenancesPresenter::dataTableLayout() }}"
                       data-cookie-id-table="maintenancesTable"
@@ -277,7 +298,13 @@
                               }'>
 
               </table>
-            </div><!-- /.table-responsive -->
+              @else
+                  <div class="alert alert-info alert-block">
+                      <i class="fas fa-info-circle"></i>
+                      {{ trans('general.no_results') }}
+                  </div>
+              @endif
+
           </div><!-- /.tab-pane -->
 
         </div><!--/.col-md-9-->
