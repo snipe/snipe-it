@@ -27,7 +27,12 @@ class ManufacturersController extends Controller
 
         $manufacturers = Manufacturer::select(
             ['id', 'name', 'url', 'support_url', 'support_email', 'support_phone', 'created_at', 'updated_at', 'image', 'deleted_at']
-        )->withCount('assets as assets_count')->withCount('licenses as licenses_count')->withCount('consumables as consumables_count')->withCount('accessories as accessories_count');
+        )
+            ->withCount('assets as assets_count')
+            ->withCount('licenses as licenses_count')
+            ->withCount('consumables as consumables_count')
+            ->withCount('accessories as accessories_count')
+            ->withCount('components as components_count');
 
         if ($request->input('deleted') == 'true') {
             $manufacturers->onlyTrashed();

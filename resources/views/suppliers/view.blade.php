@@ -40,7 +40,17 @@
 
             </a>
           </li>
-
+            <li>
+                <a href="#licenses" data-toggle="tab">
+                    <span class="hidden-lg hidden-md">
+                        <i class="far fa-save fa-2x" aria-hidden="true"></i>
+                    </span>
+                    <span class="hidden-xs hidden-sm">
+                          {{ trans('general.licenses') }}
+                        {!! (($supplier->licenses) && ($supplier->licenses->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($supplier->licenses->count()).'</badge>' : '' !!}
+                    </span>
+                </a>
+            </li>
           <li>
             <a href="#accessories" data-toggle="tab">
                     <span class="hidden-lg hidden-md">
@@ -52,7 +62,19 @@
                     </span>
             </a>
           </li>
+            <li>
+                <a href="#consumables" data-toggle="tab">
 
+                <span class="hidden-lg hidden-md">
+                    <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
+                </span>
+                    <span class="hidden-xs hidden-sm">
+                    {{ trans('general.consumables') }}
+                        {!! (($supplier->consumables) && ($supplier->consumables->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($supplier->consumables->count()).'</badge>' : '' !!}
+               </span>
+
+                </a>
+            </li>
             <li>
                 <a href="#components" data-toggle="tab">
 
@@ -67,31 +89,9 @@
                 </a>
             </li>
 
-            <li>
-                <a href="#consumables" data-toggle="tab">
 
-                <span class="hidden-lg hidden-md">
-                    <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
-                </span>
-                    <span class="hidden-xs hidden-sm">
-                    {{ trans('general.consumables') }}
-                        {!! (($supplier->consumables) && ($supplier->consumables->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($supplier->consumables->count()).'</badge>' : '' !!}
-               </span>
 
-                </a>
-            </li>
 
-          <li>
-            <a href="#licenses" data-toggle="tab">
-                    <span class="hidden-lg hidden-md">
-                        <i class="far fa-save fa-2x" aria-hidden="true"></i>
-                    </span>
-              <span class="hidden-xs hidden-sm">
-                          {{ trans('general.licenses') }}
-                          {!! (($supplier->licenses) && ($supplier->licenses->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($supplier->licenses->count()).'</badge>' : '' !!}
-                    </span>
-            </a>
-          </li>
 
           <li>
             <a href="#maintenances" data-toggle="tab">

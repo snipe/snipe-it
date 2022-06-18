@@ -35,6 +35,7 @@ class ManufacturersTransformer
                 'licenses_count' => (int) $manufacturer->licenses_count,
                 'consumables_count' => (int) $manufacturer->consumables_count,
                 'accessories_count' => (int) $manufacturer->accessories_count,
+                'components_count' => (int) $manufacturer->components_count,
                 'created_at' => Helper::getFormattedDateObject($manufacturer->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($manufacturer->updated_at, 'datetime'),
                 'deleted_at' => Helper::getFormattedDateObject($manufacturer->deleted_at, 'datetime'),

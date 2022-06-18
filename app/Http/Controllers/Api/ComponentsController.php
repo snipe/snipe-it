@@ -45,7 +45,7 @@ class ComponentsController extends Controller
 
 
         $components = Company::scopeCompanyables(Component::select('components.*')
-            ->with('company', 'location', 'category', 'assets', 'supplier'));
+            ->with('company', 'location', 'category', 'assets', 'supplier', 'manufacturer'));
 
         if ($request->filled('search')) {
             $components = $components->TextSearch($request->input('search'));
@@ -61,6 +61,10 @@ class ComponentsController extends Controller
 
         if ($request->filled('supplier_id')) {
             $components->where('supplier_id', '=', $request->input('supplier_id'));
+        }
+
+        if ($request->filled('manufacturer_id')) {
+            $components->where('manufacturer_id', '=', $request->input('manufacturer_id'));
         }
 
         if ($request->filled('location_id')) {
@@ -95,6 +99,9 @@ class ComponentsController extends Controller
                 break;
             case 'supplier':
                 $components = $components->OrderSupplier($order);
+                break;
+            case 'manufacturer':
+                $components = $components->OrderManufacturer($order);
                 break;
             default:
                 $components = $components->orderBy($column_sort, $order);

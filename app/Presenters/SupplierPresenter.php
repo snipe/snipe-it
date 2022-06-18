@@ -5,7 +5,7 @@ namespace App\Presenters;
 /**
  * Class ManufacturerPresenter
  */
-class ManufacturerPresenter extends Presenter
+class SupplierPresenter extends Presenter
 {
     /**
      * Json Column Layout for bootstrap table
@@ -27,9 +27,9 @@ class ManufacturerPresenter extends Presenter
                 'field' => 'name',
                 'searchable' => true,
                 'sortable' => true,
-                'title' => trans('admin/manufacturers/table.name'),
+                'title' => trans('admin/suppliers/table.name'),
                 'visible' => true,
-                'formatter' => 'manufacturersLinkFormatter',
+                'formatter' => 'suppliersLinkFormatter',
             ],
             [
                 'field' => 'image',
@@ -41,42 +41,55 @@ class ManufacturerPresenter extends Presenter
                 'formatter' => 'imageFormatter',
             ],
             [
+                'field' => 'address',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('admin/suppliers/table.address'),
+                'visible' => true,
+            ],
+            [
+                'field' => 'contact',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('admin/suppliers/table.contact'),
+                'visible' => true,
+            ],
+            [
+                'field' => 'email',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('admin/suppliers/table.email'),
+                'visible' => true,
+                'formatter' => 'emailFormatter',
+            ],
+            [
+                'field' => 'phone',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('admin/suppliers/table.phone'),
+                'visible' => true,
+                'formatter' => 'phoneFormatter',
+            ],
+            [
+                'field' => 'fax',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('admin/suppliers/table.fax'),
+                'visible' => false,
+            ],
+            [
                 'field' => 'url',
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
-                'title' => trans('admin/manufacturers/table.url'),
-                'visible' => true,
+                'title' => trans('admin/suppliers/table.url'),
+                'visible' => false,
                 'formatter' => 'linkFormatter',
-            ],
-            [
-                'field' => 'support_url',
-                'searchable' => true,
-                'sortable' => true,
-                'switchable' => true,
-                'title' => trans('admin/manufacturers/table.support_url'),
-                'visible' => true,
-                'formatter' => 'linkFormatter',
-            ],
-
-            [
-                'field' => 'support_phone',
-                'searchable' => true,
-                'sortable' => true,
-                'switchable' => true,
-                'title' => trans('admin/manufacturers/table.support_phone'),
-                'visible' => true,
-                'formatter' => 'phoneFormatter',
-            ],
-
-            [
-                'field' => 'support_email',
-                'searchable' => true,
-                'sortable' => true,
-                'switchable' => true,
-                'title' => trans('admin/manufacturers/table.support_email'),
-                'visible' => true,
-                'formatter' => 'emailFormatter',
             ],
             [
                 'field' => 'assets_count',
@@ -124,23 +137,13 @@ class ManufacturerPresenter extends Presenter
                 'visible' => true,
             ],
             [
-                'field' => 'created_at',
-                'searchable' => true,
-                'sortable' => true,
-                'switchable' => true,
-                'title' => trans('general.created_at'),
-                'visible' => false,
-                'formatter' => 'dateDisplayFormatter',
-            ],
-
-            [
                 'field' => 'actions',
                 'searchable' => false,
                 'sortable' => false,
                 'switchable' => false,
                 'title' => trans('table.actions'),
                 'visible' => true,
-                'formatter' => 'manufacturersActionsFormatter',
+                'formatter' => 'suppliersActionsFormatter',
             ],
         ];
 

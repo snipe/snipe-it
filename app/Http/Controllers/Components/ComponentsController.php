@@ -82,6 +82,7 @@ class ComponentsController extends Controller
         $component->user_id                = Auth::id();
         $component->notes                  = $request->input('notes');
         $component->supplier_id            = $request->input('supplier_id', null);
+        $component->manufacturer_id        = $request->input('manufacturer_id', null);
 
         $component = $request->handleImages($component);
 
@@ -156,6 +157,7 @@ class ComponentsController extends Controller
         $component->qty                    = $request->input('qty');
         $component->notes                  = $request->input('notes');
         $component->supplier_id            = $request->input('supplier_id', null);
+        $component->manufacturer_id        = $request->input('manufacturer_id', null);
 
         $component = $request->handleImages($component);
 
