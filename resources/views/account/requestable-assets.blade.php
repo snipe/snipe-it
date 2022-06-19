@@ -2,7 +2,6 @@
 
 @section('title0')
   {{ trans('admin/hardware/general.requestable') }}
-  {{ trans('general.assets') }}
 @stop
 
 {{-- Page title --}}
@@ -33,6 +32,7 @@
                 <div class="tab-pane fade in active" id="assets">
                     <div class="row">
                         <div class="col-md-12">
+                        <h2>  {{ trans('admin/hardware/general.requestable') }} {{ trans('general.assets') }}</h2>
                                 <div class="table-responsive">
                                     <table
                                         data-click-to-select="true"
@@ -76,14 +76,20 @@
                         <div class="col-md-12">
 
                             @if ($models->count() > 0)
-                            <h2>{{ trans('general.requestable_models') }}</h4>
+                            <h2>{{ trans('general.requestable_models') }}</h2>
                                 <table
                                         name="requested-assets"
                                         data-toolbar="#toolbar"
                                         class="table table-striped snipe-table"
                                         id="table"
-                                        data-advanced-search="true"
+                                        data-advanced-search="false"
                                         data-id-table="advancedTable"
+                                        data-search="true"
+                                        data-pagination="true"
+                                        data-show-export="false"
+                                        data-show-footer="false"
+                                        data-show-refresh="true"
+                                        data-show-columns="true"
                                         data-cookie-id-table="requestableAssets">
                                 <thead>
                                     <tr role="row">
@@ -122,7 +128,7 @@
                                                 <td>
                                                     <form  action="{{ route('account/request-item', ['itemType' => 'asset_model', 'itemId' => $requestableModel->id])}}" method="POST" accept-charset="utf-8">
                                                         {{ csrf_field() }}
-                                                    <input type="text" style="width: 70px; margin-right: 10px;" class="form-control pull-left" name="request-quantity" value="1" placeholder="{{ trans('general.qty') }}">
+                                                    <input type="text" style="width: 70px; margin-right: 10px;" class="form-control pull-left" name="request-quantity" value="" placeholder="{{ trans('general.qty') }}">
                                                     @if ($requestableModel->isRequestedBy(Auth::user()))
                                                         {{ Form::submit(trans('button.cancel'), ['class' => 'btn btn-danger btn-sm'])}}
                                                     @else
