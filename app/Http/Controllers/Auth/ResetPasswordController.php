@@ -72,15 +72,18 @@ class ResetPasswordController extends Controller
     public function reset(Request $request)
     {
 
+        $broker = $this->broker();
+
         $messages = [
             'password.not_in' => trans('validation.disallow_same_pwd_as_user_fields'),
         ];
 
         $request->validate($this->rules(), $request->all(), $this->validationErrorMessages());
 
-        // Check to see if the user even exists
+        \Log::debug('Checking if '.$request->input('username').' exists');
+        // Check to see if the user even exists - we'll treat the response the same to prevent user sniffing
         if ($user = User::where('username', '=', $request->input('username'))->whereNotNull('email')->first()) {
-            $broker = $this->broker();
+            \Log::debug($user->username.' exists');
 
             // handle the password validation rules set by the admin settings
             if (strpos(Setting::passwordComplexityRulesSaving('store'), 'disallow_same_pwd_as_user_fields') !== false) {
@@ -90,25 +93,29 @@ class ResetPasswordController extends Controller
                     ], $messages);
             }
 
-            // send the reset
+            // set the response
+            \Log::debug('Setting the broker and resetting the password');
             $response = $broker->reset(
                 $this->credentials($request), function ($user, $password) {
                 $this->resetPassword($user, $password);
             });
 
+            // Check if the password reset above actually worked
+            if ($response == \Password::PASSWORD_RESET) {
+                \Log::debug('Password reset for '.$user->username.' worked');
+                return redirect('/')->with('success', trans('passwords.reset'));
+            }
+
+            \Log::debug('Password reset for '.$user->username.' FAILED - this user exists but the token is not valid');
+            return redirect()->back()->withInput($request->only('email'))->with('error', trans('passwords.token'));
+
         }
-        // This is laravel magic - we override the sendResetFailedResponse further down to send a success message even if it failed
-        return $response == \Password::PASSWORD_RESET
-            ? $this->sendResetResponse($request, $response)
-            : $this->sendResetFailedResponse($request, $response);
+
+        \Log::debug('Password reset for '.$request->input('username').' FAILED - user does not exist or does not have an email address - but make it look like it succeeded');
+        return redirect()->route('login')->with('success', trans('passwords.sent'));
 
     }
 
 
-    protected function sendResetFailedResponse(Request $request, $response)
-    {
-        return redirect()->back()
-            ->withInput(['username'=> $request->input('username')])
-            ->with('success', trans('passwords.sent'));
-    }
+
 }
