@@ -17,7 +17,7 @@ return array(
 
     "user"     => "Username or email address is incorrect",
 
-    "token"    => "This password reset token is invalid.",
+    "token"    =>  "This password reset token is invalid or expired.",
 
     "sent" => "If a matching email address was found, a password reminder has been sent!",
 

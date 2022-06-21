@@ -73,6 +73,7 @@ class ResetPasswordController extends Controller
 
     public function reset(Request $request)
     {
+
         $messages = [
             'password.not_in' => trans('validation.disallow_same_pwd_as_user_fields'),
         ];
@@ -80,26 +81,35 @@ class ResetPasswordController extends Controller
         $request->validate($this->rules(), $request->all(), $this->validationErrorMessages());
 
         // Check to see if the user even exists
-        $user = User::where('username', '=', $request->input('username'))->first();
+        if ($user = User::where('username', '=', $request->input('username'))->first()) {
+            $broker = $this->broker();
 
-        $broker = $this->broker();
-        if (strpos(Setting::passwordComplexityRulesSaving('store'), 'disallow_same_pwd_as_user_fields') !== false) {
-            $request->validate(
-                [
-                'password' => 'required|notIn:["'.$user->email.'","'.$user->username.'","'.$user->first_name.'","'.$user->last_name.'"',
-            ], $messages);
-        }
+            if (strpos(Setting::passwordComplexityRulesSaving('store'), 'disallow_same_pwd_as_user_fields') !== false) {
+                $request->validate(
+                    [
+                        'password' => 'required|notIn:["'.$user->email.'","'.$user->username.'","'.$user->first_name.'","'.$user->last_name.'"',
+                    ], $messages);
+            }
 
-        $response = $broker->reset(
-            $this->credentials($request), function ($user, $password) {
+            $response = $broker->reset(
+                $this->credentials($request), function ($user, $password) {
                 $this->resetPassword($user, $password);
             }
         );
 
-        return $response == \Password::PASSWORD_RESET
-            ? $this->sendResetResponse($request, $response)
-            : $this->sendResetFailedResponse($request, $response);
+            return $response == \Password::PASSWORD_RESET
+                    ? $this->sendResetResponse($request, $response)
+                    : $this->sendResetFailedResponse($request, $response);
+        }
+
+        // the user doesn't exist, so we're not really sending anything here
+        return redirect()->route('login')
+            ->withInput(['username'=> $request->input('username')])
+            ->with('success', trans('passwords.sent'));
+
     }
+
+
 
     protected function sendResetFailedResponse(Request $request, $response)
     {
