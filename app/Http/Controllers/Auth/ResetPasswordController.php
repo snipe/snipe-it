@@ -81,9 +81,10 @@ class ResetPasswordController extends Controller
         $request->validate($this->rules(), $request->all(), $this->validationErrorMessages());
 
         // Check to see if the user even exists
-        if ($user = User::where('username', '=', $request->input('username'))->first()) {
+        if ($user = User::where('username', '=', $request->input('username'))->whereNotNull('email')->first()) {
             $broker = $this->broker();
 
+            // handle the password validation rules set by the admin settings
             if (strpos(Setting::passwordComplexityRulesSaving('store'), 'disallow_same_pwd_as_user_fields') !== false) {
                 $request->validate(
                     [
@@ -91,30 +92,25 @@ class ResetPasswordController extends Controller
                     ], $messages);
             }
 
+            // send the reset
             $response = $broker->reset(
                 $this->credentials($request), function ($user, $password) {
                 $this->resetPassword($user, $password);
-            }
-        );
+            });
 
-            return $response == \Password::PASSWORD_RESET
-                    ? $this->sendResetResponse($request, $response)
-                    : $this->sendResetFailedResponse($request, $response);
         }
-
-        // the user doesn't exist, so we're not really sending anything here
-        return redirect()->route('login')
-            ->withInput(['username'=> $request->input('username')])
-            ->with('success', trans('passwords.sent'));
+        // This is laravel magic - we override the sendResetFailedResponse further down to send a success message even if it failed
+        return $response == \Password::PASSWORD_RESET
+            ? $this->sendResetResponse($request, $response)
+            : $this->sendResetFailedResponse($request, $response);
 
     }
-
 
 
     protected function sendResetFailedResponse(Request $request, $response)
     {
         return redirect()->back()
             ->withInput(['username'=> $request->input('username')])
-            ->withErrors(['username' => trans($response), 'password' => trans($response)]);
+            ->with('success', trans('passwords.sent'));
     }
 }
