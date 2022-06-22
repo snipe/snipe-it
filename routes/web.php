@@ -20,6 +20,8 @@ use App\Http\Controllers\StatuslabelsController;
 use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\ViewAssetsController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -424,7 +426,40 @@ Route::group(['middleware' => 'web'], function () {
     Route::post(
         'two-factor',
         [LoginController::class, 'postTwoFactorAuth']
-    );
+    )->middleware('throttle:'.config('auth.passwords.users.throttle.max_attempts').','.config('auth.passwords.users.throttle.lockout_duration'));
+
+
+
+    Route::post(
+        'password/email',
+        [ForgotPasswordController::class, 'sendResetLinkEmail']
+    )->name('password.email')->middleware('throttle:'.config('auth.passwords.users.throttle.max_attempts').','.config('auth.passwords.users.throttle.lockout_duration'));
+
+    Route::get(
+        'password/reset',
+        [ForgotPasswordController::class, 'showLinkRequestForm']
+    )->name('password.request');
+
+
+    Route::post(
+        'password/reset',
+        [ResetPasswordController::class, 'reset']
+    )->name('password.update')->middleware('throttle:'.config('auth.passwords.users.throttle.password_max_attempts').','.config('auth.passwords.users.throttle.password_lockout_duration'));
+
+    Route::get(
+        'password/reset/{token}',
+        [ResetPasswordController::class, 'showResetForm']
+    )->name('password.reset')->middleware('throttle:'.config('auth.passwords.users.throttle.password_max_attempts').','.config('auth.passwords.users.throttle.lockout_duration'));
+
+
+    Route::post(
+        'password/email',
+        [ResetPasswordController::class, 'showLinkRequestForm']
+    )->name('password.request')->middleware('throttle:'.config('auth.passwords.users.throttle.password_max_attempts').','.config('auth.passwords.users.throttle.password_lockout_duration'));
+
+
+
+
 
     Route::get(
         '/',
@@ -446,7 +481,7 @@ Route::group(['middleware' => 'web'], function () {
     )->name('logout');
 });
 
-Auth::routes();
+//Auth::routes();
 
 Route::get(
     '/health', 
