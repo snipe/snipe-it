@@ -115,7 +115,7 @@ return [
     */
     'password_reset' => [
         'throttle' => [
-            'max_attempts' => env('PASSWORD_MAX_ATTEMPTS', 10),
+            'max_attempts' => env('PASSWORD_MAX_ATTEMPTS', 30),
             'lockout_duration' => env('PASSWORD_LOCKOUT_DURATION', 60),
         ],
     ],
