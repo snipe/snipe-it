@@ -438,7 +438,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get(
         'password/reset',
         [ForgotPasswordController::class, 'showLinkRequestForm']
-    )->name('password.request');
+    )->name('password.request')->middleware('throttle:'.config('auth.password_reset.throttle.max_attempts').','.config('auth.password_reset.throttle.lockout_duration'));
 
 
     Route::post(
