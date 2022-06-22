@@ -98,10 +98,12 @@ return [
             'email' => 'auth.emails.password',
             'table' => 'password_resets',
             'expire' => env('RESET_PASSWORD_LINK_EXPIRES', 900),
-            'throttle' => 60,
+            'throttle' => [
                 'max_attempts' => env('LOGIN_MAX_ATTEMPTS', 5),
-
                 'lockout_duration' => env('LOGIN_LOCKOUT_DURATION', 60),
+                'password_max_attempts' => env('PASSWORD_MAX_ATTEMPTS', 20),
+                'password_lockout_duration' => env('PASSWORD_LOCKOUT_DURATION', 60),
+            ]
 
         ],
     ],
