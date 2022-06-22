@@ -858,7 +858,7 @@ class AssetsController extends Controller
         $asset->assignedTo()->disassociate($asset);
         $asset->accepted = null;
 
-        if ($request->filled('name')) {
+        if ($request->has('name')) {
             $asset->name = $request->input('name');
         }
 
