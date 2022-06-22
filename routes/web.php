@@ -426,25 +426,25 @@ Route::group(['middleware' => 'web'], function () {
     Route::post(
         'two-factor',
         [LoginController::class, 'postTwoFactorAuth']
-    )->middleware('throttle:'.config('auth.password_reset.throttle.max_attempts').','.config('auth.password_reset.throttle.lockout_duration'));
+    );
 
 
 
     Route::post(
         'password/email',
         [ForgotPasswordController::class, 'sendResetLinkEmail']
-    )->name('password.email')->middleware('throttle:'.config('auth.password_reset.throttle.max_attempts').','.config('auth.password_reset.throttle.lockout_duration'));
+    )->name('password.email')->middleware('throttle:forgotten_password');
 
     Route::get(
         'password/reset',
         [ForgotPasswordController::class, 'showLinkRequestForm']
-    )->name('password.request')->middleware('throttle:'.config('auth.password_reset.throttle.max_attempts').','.config('auth.password_reset.throttle.lockout_duration'));
+    )->name('password.request')->middleware('throttle:forgotten_password');
 
 
     Route::post(
         'password/reset',
         [ResetPasswordController::class, 'reset']
-    )->name('password.update')->middleware('throttle:'.config('auth.password_reset.throttle.max_attempts').','.config('auth.password_reset.throttle.lockout_duration'));
+    )->name('password.update')->middleware('throttle:forgotten_password');
 
     Route::get(
         'password/reset/{token}',
@@ -455,7 +455,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post(
         'password/email',
         [ForgotPasswordController::class, 'sendResetLinkEmail']
-    )->name('password.email')->middleware('throttle:'.config('auth.password_reset.throttle.max_attempts').','.config('auth.password_reset.throttle.lockout_duration'));
+    )->name('password.email')->middleware('throttle:forgotten_password');
 
 
 

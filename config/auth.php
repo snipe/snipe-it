@@ -114,10 +114,7 @@ return [
     |
     */
     'password_reset' => [
-        'throttle' => [
-            'max_attempts' => env('PASSWORD_MAX_ATTEMPTS', 30),
-            'lockout_duration' => env('PASSWORD_LOCKOUT_DURATION', 60),
-        ],
+       'max_attempts_per_min' => env('PASSWORD_RESET_MAX_ATTEMPTS_PER_MIN', 50),
     ],
 
 
@@ -133,6 +130,6 @@ return [
     |
     */
 
-    'password_timeout' => 10800,
+    'password_timeout' =>  env('PASSWORD_CONFIRM_TIMEOUT', 10800),
 
 ];

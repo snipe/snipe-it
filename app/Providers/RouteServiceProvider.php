@@ -75,12 +75,22 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Configure the rate limiters for the application.
      *
+     * https://laravel.com/docs/8.x/routing#rate-limiting
+     *
      * @return void
      */
     protected function configureRateLimiting()
     {
+
+        // Rate limiter for API calls
         RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
+            return Limit::perMinute(config('app.api_throttle_per_minute'))->by(optional($request->user())->id ?: $request->ip());
         });
+
+        // Rate limiter for forgotten password requests
+        RateLimiter::for('forgotten_password', function (Request $request) {
+            return Limit::perMinute(config('auth.password_reset.max_attempts_per_min'))->by(optional($request->user())->id ?: $request->ip());
+        });
+
     }
 }
