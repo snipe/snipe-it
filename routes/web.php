@@ -449,7 +449,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get(
         'password/reset/{token}',
         [ResetPasswordController::class, 'showResetForm']
-    )->name('password.reset')->middleware('throttle:'.config('auth.passwords.users.throttle.password_max_attempts').','.config('auth.passwords.users.throttle.lockout_duration'));
+    )->name('password.reset');
 
 
     Route::post(
