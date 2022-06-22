@@ -305,6 +305,9 @@
                           @if ($user->country)
                             {{ $user->country }}
                           @endif
+                          @if ($user->zip)
+                              {{ $user->zip }}
+                          @endif
 
                       </div>
                     </div>
