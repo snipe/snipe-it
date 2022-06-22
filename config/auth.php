@@ -101,12 +101,20 @@ return [
             'throttle' => [
                 'max_attempts' => env('LOGIN_MAX_ATTEMPTS', 5),
                 'lockout_duration' => env('LOGIN_LOCKOUT_DURATION', 60),
-                'password_max_attempts' => env('PASSWORD_MAX_ATTEMPTS', 20),
-                'password_lockout_duration' => env('PASSWORD_LOCKOUT_DURATION', 60),
             ]
 
         ],
     ],
+
+
+    'password_reset' => [
+        'throttle' => [
+            'max_attempts' => env('PASSWORD_MAX_ATTEMPTS', 10),
+            'lockout_duration' => env('PASSWORD_LOCKOUT_DURATION', 60),
+        ],
+    ],
+
+
 
     /*
     |--------------------------------------------------------------------------
