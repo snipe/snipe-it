@@ -106,7 +106,13 @@ return [
         ],
     ],
 
-
+    /*
+    |--------------------------------------------------------------------------
+    | Resetting Password Requests
+    |--------------------------------------------------------------------------
+    | This sets the throttle for forgotten password requests
+    |
+    */
     'password_reset' => [
         'throttle' => [
             'max_attempts' => env('PASSWORD_MAX_ATTEMPTS', 10),
