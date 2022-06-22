@@ -14,7 +14,7 @@ class ConsumableObserver
      * @param  Consumable  $consumable
      * @return void
      */
-    public function updating(Consumable $consumable)
+    public function updated(Consumable $consumable)
     {
         $changed = [];
 

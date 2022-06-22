@@ -14,7 +14,7 @@ class ComponentObserver
      * @param  Component  $component
      * @return void
      */
-    public function updating(Component $component)
+    public function updated(Component $component)
     {
         $changed = [];
 

@@ -14,7 +14,7 @@ class AccessoryObserver
      * @param  Accessory  $accessory
      * @return void
      */
-    public function updating(Accessory $accessory)
+    public function updated(Accessory $accessory)
     {
         $changed = [];
 

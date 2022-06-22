@@ -14,7 +14,7 @@ class LicenseObserver
      * @param  License  $license
      * @return void
      */
-    public function updating(License $license)
+    public function updated(License $license)
     {
         $changed = [];
 
