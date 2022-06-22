@@ -61,6 +61,14 @@ class ResetPasswordController extends Controller
 
     public function showResetForm(Request $request, $token = null)
     {
+
+        $credentials =  $request->only('email', 'token');
+
+        if (is_null($this->broker()->getUser($credentials))) {
+            \Log::debug('Password reset form FAILED - this token is not valid.');
+            return redirect()->route('password.request')->with('error', trans('passwords.token'));
+        }
+
         return view('auth.passwords.reset')->with(
             [
                 'token' => $token,
