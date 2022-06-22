@@ -82,8 +82,9 @@ class ResetPasswordController extends Controller
 
         \Log::debug('Checking if '.$request->input('username').' exists');
         // Check to see if the user even exists - we'll treat the response the same to prevent user sniffing
-        if ($user = User::where('username', '=', $request->input('username'))->whereNotNull('email')->first()) {
+        if ($user = User::where('username', '=', $request->input('username'))->where('activated', '1')->whereNotNull('email')->first()) {
             \Log::debug($user->username.' exists');
+
 
             // handle the password validation rules set by the admin settings
             if (strpos(Setting::passwordComplexityRulesSaving('store'), 'disallow_same_pwd_as_user_fields') !== false) {
@@ -93,8 +94,8 @@ class ResetPasswordController extends Controller
                     ], $messages);
             }
 
+
             // set the response
-            \Log::debug('Setting the broker and resetting the password');
             $response = $broker->reset(
                 $this->credentials($request), function ($user, $password) {
                 $this->resetPassword($user, $password);
@@ -103,7 +104,7 @@ class ResetPasswordController extends Controller
             // Check if the password reset above actually worked
             if ($response == \Password::PASSWORD_RESET) {
                 \Log::debug('Password reset for '.$user->username.' worked');
-                return redirect('/')->with('success', trans('passwords.reset'));
+                return redirect()->guest('login')->with('success', trans('passwords.reset'));
             }
 
             \Log::debug('Password reset for '.$user->username.' FAILED - this user exists but the token is not valid');
@@ -111,8 +112,9 @@ class ResetPasswordController extends Controller
 
         }
 
+
         \Log::debug('Password reset for '.$request->input('username').' FAILED - user does not exist or does not have an email address - but make it look like it succeeded');
-        return redirect()->route('login')->with('success', trans('passwords.sent'));
+        return redirect()->guest('login')->with('success', trans('passwords.reset'));
 
     }
 
