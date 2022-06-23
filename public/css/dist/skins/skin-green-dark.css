@@ -129,7 +129,7 @@
 }
 .btn,
 .btn:hover {
-  color: #FFF !important;
+  color: #FFF;
 }
 .btn.btn-primary,
 .btn:hover.btn-primary,
@@ -249,6 +249,9 @@ body {
 .btn-default dropdown-toggle {
   background-color: var(--button-default);
   color: var(--link);
+}
+.bootstrap-table .fixed-table-toolbar .columns label {
+  color: #000;
 }
 .btn-default:active,
 .btn-default:focus,

@@ -61,7 +61,7 @@
 
 
 .btn, .btn:hover {
-  color: #FFF !important;
+  color: #FFF;
 
   &.btn-primary, .btn-primary:link {
     background-color: darken(@green, 10%);
@@ -86,6 +86,7 @@
     color: #FFF;
   }
 }
+
 
 
 a {
@@ -189,7 +190,9 @@ body {
   background-color: var(--button-default);
   color: var(--link);
 }
-
+.bootstrap-table .fixed-table-toolbar .columns label {
+  color:#000;
+}
 .btn-default:active, .btn-default:focus, .btn-default:hover, .btn-default.active {
   background-color: var(--button-hover);
   color: var(--link);
