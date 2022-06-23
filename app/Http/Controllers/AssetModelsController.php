@@ -92,7 +92,7 @@ class AssetModelsController extends Controller
         if ($model->save()) {
             if ($this->shouldAddDefaultValues($request->input())) {
                 if (!$this->assignCustomFieldsDefaultValues($model, $request->input('default_values'))){
-                    return redirect()->back()->withInput()->withErrors($model->getErrors());
+                    return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.fieldset_default_value.error'));
                 }
             }
 
@@ -167,7 +167,7 @@ class AssetModelsController extends Controller
 
             if ($this->shouldAddDefaultValues($request->input())) {
                 if (!$this->assignCustomFieldsDefaultValues($model, $request->input('default_values'))){
-                    return redirect()->back()->withInput()->withErrors("Error");
+                    return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.fieldset_default_value.error'));
                 }
             }
         }
