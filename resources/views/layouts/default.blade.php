@@ -490,10 +490,6 @@
                             {{ trans('general.bulk_checkout') }}
                         </a>
                     </li>
-                    <li{!! (Request::is('hardware/requested') ? ' class="active"' : '') !!}>
-                        <a href="{{ route('assets.requested') }}">
-                            {{ trans('general.requested') }}</a>
-                    </li>
                     @endcan
 
                     @can('create', \App\Models\Asset::class)
@@ -719,6 +715,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ url('reports/eol_assets') }}" {{ (Request::is('reports/eol_assets') ? ' class="active"' : '') }}>
+                            {{ trans('general.eol_assets_report') }}
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ url('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }}>
                             {{ trans('general.custom_report') }}
                         </a>
@@ -728,11 +729,29 @@
             @endcan
 
             @can('viewRequestable', \App\Models\Asset::class)
-            <li{!! (Request::is('account/requestable-assets') ? ' class="active"' : '') !!}>
-            <a href="{{ route('requestable-assets') }}">
-            <i class="fa fa-laptop"></i>
-            <span>{{ trans('admin/hardware/general.requestable') }}</span>
-            </a>
+            <li class="treeview{{ (Request::is('account/requestable-assets') ? ' active' : '') }}">
+                <a href="#"  class="dropdown-toggle">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>{{ trans('general.request_manager') }}</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+
+                <ul class="treeview-menu">
+                    <li{!! (Request::is('account/requestable-assets') ? ' class="active"' : '') !!}>
+                        <a href="{{ route('requestable-assets') }}">
+                            <i class="fas fa-laptop"></i>
+                            <span>{{ trans('admin/hardware/general.requestable_list') }}</span>
+                        </a>
+                    </li>
+                    @can('checkout', \App\Models\Asset::class)
+                    <li{!! (Request::is('hardware/requested') ? ' class="active"' : '') !!}>
+                        <a href="{{ route('assets.requested') }}">
+                        <i class="fas fa-check"></i>
+                            <span>{{ trans('general.requested_list') }}</span>
+                        </a>
+                    </li>
+                    @endcan
+                </ul>
             </li>
             @endcan
 
