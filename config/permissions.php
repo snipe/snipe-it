@@ -178,6 +178,12 @@ return [
             'note'       => '',
             'display'    => true,
         ],
+        [
+            'permission' => 'consumables_selfcheckout',
+            'label'      => 'Self-Checkout ',
+            'note'       => '',
+            'display'    => true,
+        ],
     ],
 
 

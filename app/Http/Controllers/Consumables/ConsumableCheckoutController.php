@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
 
 class ConsumableCheckoutController extends Controller
 {
@@ -52,25 +53,78 @@ class ConsumableCheckoutController extends Controller
 
         $admin_user = Auth::user();
         $assigned_to = e($request->input('assigned_to'));
+        Log::debug("byAdmin in controller : " . $request->checkoutmode );
+        if ($request->checkoutmode !== 'selfcheckout')
+        {        
 
-        // Check if the user exists
-        if (is_null($user = User::find($assigned_to))) {
-            // Redirect to the consumable management page with error
-            return redirect()->route('checkout/consumable', $consumable)->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'));
+            // Check if the user exists
+            if (is_null($user = User::find($assigned_to))) {
+                // Redirect to the consumable management page with error
+                return redirect()->route('checkout/consumable', $consumable)->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'));
+            }
+
+            // Update the consumable data
+            $consumable->assigned_to = e($request->input('assigned_to'));
+            
+            $target = e($request->input('assigned_to'));
+            $assigned_by = $admin_user->id;
         }
-
-        // Update the consumable data
-        $consumable->assigned_to = e($request->input('assigned_to'));
+        else {
+            $target = $admin_user->id;
+            $user = $admin_user;
+            $assigned_by = null;
+        }
 
         $consumable->users()->attach($consumable->id, [
             'consumable_id' => $consumable->id,
-            'user_id' => $admin_user->id,
-            'assigned_to' => e($request->input('assigned_to')),
+            'user_id' => $assigned_by,          
+            'assigned_to' => $target,            
+            
         ]);
 
-        event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note')));
+        event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('notes'), $request->checkoutmode));
 
         // Redirect to the new consumable page
         return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.checkout.success'));
     }
+
+    
+    /**
+     * Return a view to checkout a consumable to a user.
+     *
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @see ConsumableCheckoutController::store() method that stores the data.
+     * @since [v6.0]
+     * @param int $consumableId
+     * @return \Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function selfcreate($consumableId)
+    {
+        if (is_null($consumable = Consumable::find($consumableId))) {
+            return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
+        }
+        $this->authorize('consumables_selfcheckout', $consumable);
+
+        return view('consumables/selfcheckout', compact('consumable'));
+    }
+
+    
+    /**
+     * Saves the selfcheckout information
+     *
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @see ConsumableCheckoutController::create() method that returns the form.
+     * @since [v6.0]
+     * @param int $consumableId
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function selfstore(Request $request, $consumableId)
+    {
+        $request->request->add(['checkoutmode' => 'selfcheckout']);
+        return $this->store($request, $consumableId);
+    }
+
+    
 }

@@ -260,6 +260,13 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             ]
         )->name('api.consumables.checkout');
 
+        Route::get('{consumable}/selfcheckout',
+            [
+                Api\ConsumablesController::class, 
+                'selfcheckout'
+            ]
+        )->name('api.consumables.selfcheckout');
+
       }); 
 
 
