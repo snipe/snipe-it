@@ -21,7 +21,7 @@
                             <i class="fas fa-barcode" aria-hidden="true"></i>
                             </span>
                             <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}
-                                {!! (($company->assets) && ($company->assets->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($company->assets->count()).'</badge>' : '' !!}
+                                {!! (($company->assets) && ($company->assets()->AssetsForShow()->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($company->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
 
                             </span>
                         </a>

@@ -92,7 +92,7 @@
             },
                 exportOptions: export_options,
 
-            exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
+            exportTypes: ['xlsx', 'excel', 'csv', 'pdf','json', 'xml', 'txt', 'sql', 'doc' ],
             onLoadSuccess: function () {
                 $('[data-toggle="tooltip"]').tooltip(); // Needed to attach tooltips after ajax call
             }
