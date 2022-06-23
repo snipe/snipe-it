@@ -1147,6 +1147,27 @@ class Asset extends Depreciable
     }
 
 
+    /**
+     * Query builder scope for Archived assets
+     *
+     * @param  \Illuminate\Database\Query\Builder $query Query builder instance
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+
+    public function scopeAssetsForShow($query)
+    {
+
+        if (Setting::getSettings()->show_archived_in_list!=1) {
+            return $query->whereHas('assetstatus', function ($query) {
+                $query->where('archived', '=', 0);
+            });
+        } else {
+            return $query;
+        }
+
+    }
+
   /**
    * Query builder scope for Archived assets
    *
