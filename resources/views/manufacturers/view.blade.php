@@ -41,7 +41,7 @@
             </span>
             <span class="hidden-xs hidden-sm">
                 {{ trans('general.assets') }}
-                {!! (($manufacturer->assets) && ($manufacturer->assets->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($manufacturer->assets->count()).'</badge>' : '' !!}
+                {!! (($manufacturer->assets) && ($manufacturer->assets()->AssetsForShow()->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($manufacturer->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
             </span>
 
           </a>
