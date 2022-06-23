@@ -20,6 +20,8 @@ use App\Http\Controllers\StatuslabelsController;
 use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\ViewAssetsController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -426,6 +428,39 @@ Route::group(['middleware' => 'web'], function () {
         [LoginController::class, 'postTwoFactorAuth']
     );
 
+
+
+    Route::post(
+        'password/email',
+        [ForgotPasswordController::class, 'sendResetLinkEmail']
+    )->name('password.email')->middleware('throttle:forgotten_password');
+
+    Route::get(
+        'password/reset',
+        [ForgotPasswordController::class, 'showLinkRequestForm']
+    )->name('password.request')->middleware('throttle:forgotten_password');
+
+
+    Route::post(
+        'password/reset',
+        [ResetPasswordController::class, 'reset']
+    )->name('password.update')->middleware('throttle:forgotten_password');
+
+    Route::get(
+        'password/reset/{token}',
+        [ResetPasswordController::class, 'showResetForm']
+    )->name('password.reset');
+
+
+    Route::post(
+        'password/email',
+        [ForgotPasswordController::class, 'sendResetLinkEmail']
+    )->name('password.email')->middleware('throttle:forgotten_password');
+
+
+
+
+
     Route::get(
         '/',
         [
@@ -446,7 +481,7 @@ Route::group(['middleware' => 'web'], function () {
     )->name('logout');
 });
 
-Auth::routes();
+//Auth::routes();
 
 Route::get(
     '/health', 

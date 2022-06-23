@@ -100,7 +100,7 @@ class AssetsTransformer
 
                     if ($field->format == 'DATE'){
                         if (Gate::allows('superadmin')){
-                            $value = Helper::getFormattedDateObject($value)['formatted'];
+                            $value = Helper::getFormattedDateObject($value, 'date', false);
                         } else {
                            $value = strtoupper(trans('admin/custom_fields/general.encrypted'));
                         }
@@ -117,7 +117,7 @@ class AssetsTransformer
                     $value = $asset->{$field->convertUnicodeDbSlug()};
 
                     if (($field->format == 'DATE') && (!is_null($value)) && ($value!='')){
-                        $value = Helper::getFormattedDateObject($value)['formatted'];
+                        $value = Helper::getFormattedDateObject($value, 'date', false);
                     }
                     
                     $fields_array[$field->name] = [

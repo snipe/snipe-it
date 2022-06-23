@@ -531,7 +531,7 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                #{{ $asset->order_number }}
+                                                <a href="{{ route('hardware.index', ['order_number' => $asset->order_number]) }}">#{{ $asset->order_number }}</a>
                                             </div>
                                         </div>
                                     @endif
