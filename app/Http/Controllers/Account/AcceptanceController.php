@@ -145,6 +145,24 @@ class AcceptanceController extends Controller
                 $display_model = $accessory->name;
                 $assigned_to = User::find($item->assignedTo);
 
+            } elseif ($acceptance->checkoutable_type== 'App\Models\License') {
+                $pdf_view_route ='account.accept.accept-license-eula';
+                $license = License::find($item->id);
+                $display_model = $license->name;
+                $assigned_to = User::find($item->assignedTo);
+
+            } elseif ($acceptance->checkoutable_type== 'App\Models\Component') {
+                $pdf_view_route ='account.accept.accept-component-eula';
+                $component = Component::find($item->id);
+                $display_model = $component->name;
+                $assigned_to = User::find($item->assignedTo);
+
+            } elseif ($acceptance->checkoutable_type== 'App\Models\Consumable') {
+                $pdf_view_route ='account.accept.accept-consumable-eula';
+                $consumable = Consumable::find($item->id);
+                $display_model = $consumable->name;
+                $assigned_to = User::find($item->assignedTo);
+
             }
 
             /**
