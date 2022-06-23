@@ -16,6 +16,8 @@ use App\Models\User;
 use App\Models\AssetModel;
 use App\Models\Accessory;
 use App\Models\License;
+use App\Models\Component;
+use App\Models\Consumable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -24,6 +26,7 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\SettingsController;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+use phpDocumentor\Reflection\Types\Compound;
 
 class AcceptanceController extends Controller
 {
@@ -141,16 +144,32 @@ class AcceptanceController extends Controller
                         $display_model = $asset_model->name;
                         $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
                 break;
+
                 case 'App\Models\Accessory':
                         $pdf_view_route ='account.accept.accept-accessory-eula';
                         $accessory = Accessory::find($item->id);
                         $display_model = $accessory->name;
                         $assigned_to = User::find($item->assignedTo);
                 break;
+
                 case 'App\Models\LicenseSeat':
                         $pdf_view_route ='account.accept.accept-license-eula';
                         $license = License::find($item->license_id);
                         $display_model = $license->name;
+                        $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
+                break;
+
+                case 'App\Models\Component':
+                        $pdf_view_route ='account.accept.accept-component-eula';
+                        $component = Component::find($item->id);
+                        $display_model = $component->name;
+                        $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
+                break;
+
+                case 'App\Models\Consumable':
+                        $pdf_view_route ='account.accept.accept-consumable-eula';
+                        $consumable = Consumable::find($item->id);
+                        $display_model = $consumable->name;
                         $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
                 break;
             }
