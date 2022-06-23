@@ -15,6 +15,7 @@ use App\Models\Contracts\Acceptable;
 use App\Models\User;
 use App\Models\AssetModel;
 use App\Models\Accessory;
+use App\Models\License;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -148,7 +149,7 @@ class AcceptanceController extends Controller
                 break;
                 case 'App\Models\LicenseSeat':
                         $pdf_view_route ='account.accept.accept-license-eula';
-                        $license = License::find($item->id);
+                        $license = License::find($item->license_id);
                         $display_model = $license->name;
                         $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
                 break;
