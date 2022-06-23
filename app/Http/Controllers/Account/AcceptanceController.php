@@ -133,19 +133,39 @@ class AcceptanceController extends Controller
 
 
             // this is horrible
-            if ($acceptance->checkoutable_type == 'App\Models\Asset') {
-                $pdf_view_route ='account.accept.accept-asset-eula';
-                $asset_model = AssetModel::find($item->model_id);
-                $display_model = $asset_model->name;
-                $assigned_to = User::find($item->assigned_to)->present()->fullName;
-
-            } elseif ($acceptance->checkoutable_type== 'App\Models\Accessory') {
-                $pdf_view_route ='account.accept.accept-accessory-eula';
-                $accessory = Accessory::find($item->id);
-                $display_model = $accessory->name;
-                $assigned_to = User::find($item->assignedTo);
-
+            switch($acceptance->checkoutable_type){
+                case 'App\Models\Asset':
+                        $pdf_view_route ='account.accept.accept-asset-eula';
+                        $asset_model = AssetModel::find($item->model_id);
+                        $display_model = $asset_model->name;
+                        $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
+                break;
+                case 'App\Models\Accessory':
+                        $pdf_view_route ='account.accept.accept-accessory-eula';
+                        $accessory = Accessory::find($item->id);
+                        $display_model = $accessory->name;
+                        $assigned_to = User::find($item->assignedTo);
+                break;
+                case 'App\Models\LicenseSeat':
+                        $pdf_view_route ='account.accept.accept-license-eula';
+                        $license = License::find($item->id);
+                        $display_model = $license->name;
+                        $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
+                break;
             }
+//            if ($acceptance->checkoutable_type == 'App\Models\Asset') {
+//                $pdf_view_route ='account.accept.accept-asset-eula';
+//                $asset_model = AssetModel::find($item->model_id);
+//                $display_model = $asset_model->name;
+//                $assigned_to = User::find($item->assigned_to)->present()->fullName;
+//
+//            } elseif ($acceptance->checkoutable_type== 'App\Models\Accessory') {
+//                $pdf_view_route ='account.accept.accept-accessory-eula';
+//                $accessory = Accessory::find($item->id);
+//                $display_model = $accessory->name;
+//                $assigned_to = User::find($item->assignedTo);
+//
+//            }
 
             /**
              * Gather the data for the PDF. We fire this whether there is a signature required or not,
