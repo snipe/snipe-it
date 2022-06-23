@@ -1148,7 +1148,11 @@ class Asset extends Depreciable
 
 
     /**
-     * Query builder scope for Archived assets
+     * Query builder scope for Archived assets counting
+     *
+     * This is primarily used for the tab counters so that IF the admin
+     * has chosen to not display archived assets in their regular lists
+     * and views, it will return the correct number.
      *
      * @param  \Illuminate\Database\Query\Builder $query Query builder instance
      *
