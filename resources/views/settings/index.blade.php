@@ -6,6 +6,32 @@
 @parent
 @stop
 
+@section('header_right')
+
+
+
+  <!-- search filter box -->
+  <div class="pull-right">
+
+
+    <form onsubmit="return false;">
+      <div class="btn-group">
+        <input id="searchinput" name="search" type="search" class="search form-control" placeholder="{{ trans('admin/settings/general.filter_by_keyword') }}">
+        <span id="searchclear" class="fas fa-times" aria-hidden="true"></span>
+        <button type="submit" disabled style="display: none" aria-hidden="true"></button>
+      </div>
+      <a href="{{ route('settings.index') }}" class="btn btn-primary pull-right" style="margin-left: 10px;">{{ trans('general.back') }}</a>
+
+    </form>
+
+
+
+
+  </div>
+  <!--/ search filter box -->
+@stop
+
+
 {{-- Page content --}}
 @section('content')
 
@@ -27,20 +53,6 @@
       color: #ccc;
     }
   </style>
-
-  <div class="row" id="setting-list">
-
-    <!-- search filter box -->
-    <div class="col-md-3 col-md-offset-9 form-group">
-      <form onsubmit="return false;">
-        <div class="btn-group">
-          <input id="searchinput" name="search" type="search" class="search form-control" placeholder="{{ trans('admin/settings/general.filter_by_keyword') }}">
-          <span id="searchclear" class="fas fa-times" aria-hidden="true"></span>
-          <button type="submit" disabled style="display: none" aria-hidden="true"></button>
-        </div>
-      </form>
-    </div>
-    <!--/ search filter box -->
 
 
     <!-- search filter list -->
@@ -386,11 +398,11 @@
     valueNames: [ 'name', 'keywords', 'summary', 'help-block']
   };
 
-  var userList = new List('setting-list', options);
+  var settingList = new List('setting-list', options);
 
   $("#searchclear").click(function(){
     $("#searchinput").val('');
-    userList.search();
+    settingList.search();
   });
 
 
