@@ -172,19 +172,24 @@ a.btn-danger:hover,
 .btn-danger:visited {
   color: #fff;
 }
+.btn-default:link,
+a.btn-default:hover,
+.btn-default:visited {
+  color: #505156;
+}
 :root {
-  --button-default: #00436b;
-  --button-primary: #002338;
-  --button-hover: #00131e;
-  --header: #0073b7;
+  --button-default: #505156;
+  --button-primary: #1d455b;
+  --button-hover: #173648;
+  --header: #3c8dbc;
   /* Use same as Header picker */
   --text-main: #BBB;
   --text-sub: #9b9b9b;
-  --link: #0073b7;
+  --link: #296282;
   /* Use same as Header picker, lighten by 70% */
-  --visited-link: #0093ea;
+  --visited-link: #5fa4cc;
   /* Use same as Header picker, lighten by 70% */
-  --hover-link: #1eabff;
+  --hover-link: #86bad8;
   /* Use same as Header picker, lighten by 70% */
   --nav-link: #FFF;
   /* Use same as Header picker */
@@ -222,5 +227,10 @@ a:hover {
 .search-highlight,
 .search-highlight:hover {
   background-color: #e9d15b;
+}
+a.settings_button:link,
+a.settings_button:visited,
+a.settings_button:hover {
+  color: #3c8dbc;
 }
 
