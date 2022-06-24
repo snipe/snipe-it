@@ -188,7 +188,7 @@ class UsersController extends Controller
                 $users = $users->OrderDepartment($order);
                 break;
             case 'created_by':
-                $users = $users->OrderAdmin($order);
+                $users = $users->CreatedBy($order);
                 break;
             case 'company':
                 $users = $users->OrderCompany($order);

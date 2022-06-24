@@ -568,7 +568,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      * @since [v1.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function adminuser()
+    public function createdBy()
     {
         return $this->belongsTo(\App\Models\User::class, 'created_by')->withTrashed();
     }
@@ -705,7 +705,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      *
      * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
-    public function scopeOrderAdmin($query, $order)
+    public function scopeCreatedBy($query, $order)
     {
         // Left join here, or it will only return results with parents
         return $query->leftJoin('users as admin_user', 'users.created_by', '=', 'admin_user.id')
