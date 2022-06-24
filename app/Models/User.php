@@ -705,7 +705,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      *
      * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
-    public function scopeCreatedBy($query, $order)
+    public function scopeOrderByCreatedBy($query, $order)
     {
         // Left join here, or it will only return results with parents
         return $query->leftJoin('users as admin_user', 'users.created_by', '=', 'admin_user.id')
