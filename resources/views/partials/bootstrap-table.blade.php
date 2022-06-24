@@ -188,6 +188,7 @@
                 var status_meta = {
                   'deployed': '{{ strtolower(trans('general.deployed')) }}',
                   'deployable': '{{ strtolower(trans('admin/hardware/general.deployable')) }}',
+                  'archived': '{{ strtolower(trans('general.archived')) }}',
                   'pending': '{{ strtolower(trans('general.pending')) }}'
                 }
 
