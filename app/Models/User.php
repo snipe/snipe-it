@@ -562,10 +562,10 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     }
 
     /**
-     * Get action logs history for this asset
+     * Get the admin user who created this user
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v1.0]
+     * @since [v6.0.5]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
     public function createdBy()
