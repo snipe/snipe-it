@@ -98,15 +98,20 @@
     color: #fff;
 }
 
+.btn-default:link, a.btn-default:hover, .btn-default:visited,
+{
+  color: @dark-gray;
+}
+
 
 :root {
-  --button-default: darken(@blue, 15%);
+  --button-default: @dark-gray;
   --button-primary: darken(@blue, 25%);
   --button-hover: darken(@blue, 30%);
   --header: @blue; /* Use same as Header picker */
   --text-main: #BBB;
   --text-sub: #9b9b9b;
-  --link: @blue; /* Use same as Header picker, lighten by 70% */
+  --link:darken(@blue, 15%); /* Use same as Header picker, lighten by 70% */
   --visited-link: lighten(@blue,10%); /* Use same as Header picker, lighten by 70% */
   --hover-link: lighten(@blue,20%); /* Use same as Header picker, lighten by 70% */
   --nav-link: #FFF; /* Use same as Header picker */
@@ -144,4 +149,9 @@ a:hover {
 
 .search-highlight, .search-highlight:hover {
   background-color: #e9d15b;
+}
+
+// Link colors for the settings page
+a.settings_button:link, a.settings_button:visited, a.settings_button:hover {
+  color: @light-blue;
 }
