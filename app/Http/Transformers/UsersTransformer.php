@@ -63,6 +63,10 @@ class UsersTransformer
                 'accessories_count' => (int) $user->accessories_count,
                 'consumables_count' => (int) $user->consumables_count,
                 'company' => ($user->company) ? ['id' => (int) $user->company->id, 'name'=> e($user->company->name)] : null,
+                'created_by' => ($user->adminuser) ? [
+                    'id' => (int) $user->adminuser->id,
+                    'name'=> e($user->adminuser->present()->fullName),
+                ] : null,
                 'created_at' => Helper::getFormattedDateObject($user->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($user->updated_at, 'datetime'),
                 'last_login' => Helper::getFormattedDateObject($user->last_login, 'datetime'),
