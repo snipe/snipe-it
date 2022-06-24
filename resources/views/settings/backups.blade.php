@@ -66,6 +66,7 @@
               <td>
 
                   @can('superadmin')
+                      @if (config('app.allow_backup_delete')=='true')
                       <a data-html="false"
                          class="btn delete-asset btn-danger btn-sm {{ (config('app.lock_passwords')) ? ' disabled': '' }}" 
                          data-toggle="modal" href="{{ route('settings.backups.destroy', $file['filename']) }}" 
@@ -75,6 +76,13 @@
                           <i class="fas fa-trash icon-white" aria-hidden="true"></i>
                           <span class="sr-only">{{ trans('general.delete') }}</span>
                       </a>
+                      @else
+                          <a href="#"
+                             class="btn delete-asset btn-danger btn-sm disabled">
+                              <i class="fas fa-trash icon-white" aria-hidden="true"></i>
+                              <span class="sr-only">{{ trans('general.delete') }}</span>
+                          </a>
+                      @endif
 
                      <a data-html="true" 
                      href="{{ route('settings.backups.restore', $file['filename']) }}" 

@@ -430,4 +430,28 @@ return [
 
     'api_throttle_per_minute' => env('API_THROTTLE_PER_MINUTE', 120),
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Allow Web-Based Purge
+    |--------------------------------------------------------------------------
+    |
+    | This sets whether or not to allow superadmins to purge deleted data
+    |
+    */
+
+    'allow_purge' => env('ALLOW_DATA_PURGE', false),
+
+
+    /*
+   |--------------------------------------------------------------------------
+   | Allow Backup Deletion
+   |--------------------------------------------------------------------------
+   |
+   | This sets whether or not to allow superadmins to delete backups
+   |
+   */
+
+    'allow_backup_delete' => env('ALLOW_BACKUP_DELETE', false),
+
 ];
