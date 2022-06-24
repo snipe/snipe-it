@@ -463,6 +463,17 @@
                       </div>
                       <div class="col-md-9">
                         {{ \App\Helpers\Helper::getFormattedDateObject($user->created_at, 'datetime')['formatted']}}
+
+                          @if ($user->createdBy)
+                              by
+                              @if ($user->createdBy->deleted_at=='')
+                                  <a href="{{ route('users.show', ['user' => $user->created_by]) }}">{{ $user->createdBy->present()->fullName }}</a>
+                              @else
+                                  <del>{{ $user->createdBy->present()->fullName }}</del>
+                              @endif
+
+
+                          @endif
                       </div>
                     </div>
                     @endif

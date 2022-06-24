@@ -117,6 +117,7 @@ class UsersController extends Controller
         $user->zip = $request->input('zip', null);
         $user->remote = $request->input('remote', 0);
         $user->website = $request->input('website', null);
+        $user->created_by = Auth::user()->id;
 
         // Strip out the superuser permission if the user isn't a superadmin
         $permissions_array = $request->input('permission');
