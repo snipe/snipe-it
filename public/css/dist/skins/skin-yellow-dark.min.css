@@ -146,10 +146,10 @@ a:visited {
   --back-main: #333;
   --back-sub: #3d4144;
   --back-sub-alt: rgba(0, 0, 0, 0.36);
-  --button-default: #FFFF00;
-  --button-primary: #7f8000;
-  --button-hover: #666600;
-  --header: #FFFF00;
+  --button-default: #FFCC32;
+  --button-primary: #b28500;
+  --button-hover: #987200;
+  --header: #FFCC32;
   /* Use same as Header picker */
   --text-main: #BBB;
   --text-sub: #9b9b9b;
@@ -178,6 +178,9 @@ a.btn.btn-default {
 }
 .bootstrap-table .fixed-table-container .table thead th .sortable {
   color: var(--nav-link);
+}
+.bootstrap-table .fixed-table-toolbar .columns label {
+  color: #000;
 }
 .thead,
 .navbar-nav > li > a:link {
