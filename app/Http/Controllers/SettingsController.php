@@ -1299,8 +1299,13 @@ class SettingsController extends Controller
     public function getPurge()
     {
         \Log::warning('User ID '.Auth::user()->id.' is attempting a PURGE');
+        if (config('app.allow_purge')=='true') {
 
-        return view('settings.purge-form');
+            return view('settings.purge-form');
+        }
+
+        return redirect()->back()->with('error', trans('general.purge_not_allowed'));
+
     }
 
     /**
@@ -1314,21 +1319,25 @@ class SettingsController extends Controller
      */
     public function postPurge(Request $request)
     {
-        if (! config('app.lock_passwords')) {
-            if ('DELETE' == $request->input('confirm_purge')) {
-                \Log::warning('User ID '.Auth::user()->id.' initiated a PURGE!');
-                // Run a backup immediately before processing
-                Artisan::call('backup:run');
-                Artisan::call('snipeit:purge', ['--force' => 'true', '--no-interaction' => true]);
-                $output = Artisan::output();
+        if (config('app.allow_purge')=='true') {
+            if (!config('app.lock_passwords')) {
+                if ('DELETE' == $request->input('confirm_purge')) {
+                    \Log::warning('User ID ' . Auth::user()->id . ' initiated a PURGE!');
+                    // Run a backup immediately before processing
+                    Artisan::call('backup:run');
+                    Artisan::call('snipeit:purge', ['--force' => 'true', '--no-interaction' => true]);
+                    $output = Artisan::output();
 
-                return view('settings/purge')
-                    ->with('output', $output)->with('success', trans('admin/settings/message.purge.success'));
+                    return view('settings/purge')
+                        ->with('output', $output)->with('success', trans('admin/settings/message.purge.success'));
+                } else {
+                    return redirect()->back()->with('error', trans('admin/settings/message.purge.validation_failed'));
+                }
             } else {
-                return redirect()->back()->with('error', trans('admin/settings/message.purge.validation_failed'));
+                return redirect()->back()->with('error', trans('general.feature_disabled'));
             }
-        } else {
-            return redirect()->back()->with('error', trans('general.feature_disabled'));
+
+            return redirect()->back()->with('error', trans('general.purge_not_allowed'));
         }
     }
 
