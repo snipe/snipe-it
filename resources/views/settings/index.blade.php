@@ -314,7 +314,7 @@
           </div>
         @endif
 
-      @if (config('app.allow_purge')=='true')
+
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-danger">
         <div class="box-body text-center">
@@ -329,10 +329,6 @@
           <p class="help-block">{{ trans('admin/settings/general.purge_help') }}</p>
         </div>
       </div>
-    </div>
-        @endif
-
-
     </div>
   </div>
 
