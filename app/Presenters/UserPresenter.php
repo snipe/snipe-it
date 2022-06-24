@@ -290,7 +290,7 @@ class UserPresenter extends Presenter
                 'searchable' => false,
                 'sortable' => true,
                 'title' => trans('general.admin'),
-                'visible' => true,
+                'visible' => false,
                 'formatter' => 'usersLinkObjFormatter',
             ],
             [
