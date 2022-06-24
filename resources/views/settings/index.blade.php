@@ -8,17 +8,25 @@
 
 @section('header_right')
 
-  <a href="{{ route('settings.index') }}" class="btn btn-primary text-right" style="margin-right: 10px;">{{ trans('general.back') }}</a>
+
 
   <!-- search filter box -->
   <div class="pull-right">
+
+
     <form onsubmit="return false;">
       <div class="btn-group">
         <input id="searchinput" name="search" type="search" class="search form-control" placeholder="{{ trans('admin/settings/general.filter_by_keyword') }}">
         <span id="searchclear" class="fas fa-times" aria-hidden="true"></span>
         <button type="submit" disabled style="display: none" aria-hidden="true"></button>
       </div>
+      <a href="{{ route('settings.index') }}" class="btn btn-primary pull-right" style="margin-left: 10px;">{{ trans('general.back') }}</a>
+
     </form>
+
+
+
+
   </div>
   <!--/ search filter box -->
 @stop
