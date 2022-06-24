@@ -65,7 +65,8 @@ return [
     'create'				=> 'Create New',
     'created'               => 'Item Created',
     'created_asset'			=> 'created asset',
-    'created_at' 			=> 'Created at',
+    'created_at' 			=> 'Created At',
+    'created_by'            => 'Created By',
     'record_created' 		=> 'Record Created',
     'updated_at' 			=> 'Updated at',
     'currency'  			=> '$', // this is deprecated
