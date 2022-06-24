@@ -1147,23 +1147,31 @@ class SettingsController extends Controller
      */
     public function deleteFile($filename = null)
     {
-        if (! config('app.lock_passwords')) {
-            $path = 'app/backups';
+        if (config('app.allow_backup_delete')=='true') {
 
-            if (Storage::exists($path.'/'.$filename)) {
-                try {
-                    Storage::delete($path.'/'.$filename);
+            if (!config('app.lock_passwords')) {
+                $path = 'app/backups';
 
-                    return redirect()->route('settings.backups.index')->with('success', trans('admin/settings/message.backup.file_deleted'));
-                } catch (\Exception $e) {
-                    \Log::debug($e);
+                if (Storage::exists($path . '/' . $filename)) {
+
+                    try {
+                        Storage::delete($path . '/' . $filename);
+                        return redirect()->route('settings.backups.index')->with('success', trans('admin/settings/message.backup.file_deleted'));
+                    } catch (\Exception $e) {
+                        \Log::debug($e);
+                    }
+
+                } else {
+                    return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
                 }
-            } else {
-                return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
             }
-        } else {
+
             return redirect()->route('settings.backups.index')->with('error', trans('general.feature_disabled'));
         }
+
+        // Hell to the no
+        \Log::warning('User ID '.Auth::user()->id.' is attempting to delete backup file '.$filename.' and is not authorized to.');
+        return redirect()->route('settings.backups.index')->with('error', trans('general.backup_delete_not_allowed'));
     }
 
 
@@ -1198,9 +1206,10 @@ class SettingsController extends Controller
                         Storage::putFileAs('app/backups', $request->file('file'), $upload_filename);
             
                         return redirect()->route('settings.backups.index')->with('success', 'File uploaded');
-                } else {
-                    return redirect()->route('settings.backups.index')->withErrors($request->getErrors());
                 }
+
+                return redirect()->route('settings.backups.index')->withErrors($request->getErrors());
+
             }
 
         } else {
@@ -1298,13 +1307,14 @@ class SettingsController extends Controller
      */
     public function getPurge()
     {
-        \Log::warning('User ID '.Auth::user()->id.' is attempting a PURGE');
-        if (config('app.allow_purge')=='true') {
 
+        \Log::warning('User '.Auth::user()->username.' (ID'.Auth::user()->id.') is attempting a PURGE');
+
+        if (config('app.allow_purge')=='true') {
             return view('settings.purge-form');
         }
 
-        return redirect()->back()->with('error', trans('general.purge_not_allowed'));
+        return redirect()->route('settings.index')->with('error', trans('general.purge_not_allowed'));
 
     }
 
@@ -1319,26 +1329,40 @@ class SettingsController extends Controller
      */
     public function postPurge(Request $request)
     {
+        \Log::warning('User '.Auth::user()->username.' (ID'.Auth::user()->id.') is attempting a PURGE');
+
         if (config('app.allow_purge')=='true') {
+            \Log::debug('Purging is not allowed via the .env');
+
             if (!config('app.lock_passwords')) {
-                if ('DELETE' == $request->input('confirm_purge')) {
+
+                if ($request->input('confirm_purge')=='DELETE') {
+
                     \Log::warning('User ID ' . Auth::user()->id . ' initiated a PURGE!');
                     // Run a backup immediately before processing
                     Artisan::call('backup:run');
                     Artisan::call('snipeit:purge', ['--force' => 'true', '--no-interaction' => true]);
                     $output = Artisan::output();
 
-                    return view('settings/purge')
+                    return redirect()->route('settings.index')
                         ->with('output', $output)->with('success', trans('admin/settings/message.purge.success'));
+
                 } else {
-                    return redirect()->back()->with('error', trans('admin/settings/message.purge.validation_failed'));
+                    return redirect()->route('settings.purge.index')
+                        ->with('error', trans('admin/settings/message.purge.validation_failed'));
                 }
             } else {
-                return redirect()->back()->with('error', trans('general.feature_disabled'));
+                return redirect()->route('settings.index')
+                    ->with('error', trans('general.feature_disabled'));
             }
-
-            return redirect()->back()->with('error', trans('general.purge_not_allowed'));
         }
+
+        \Log::error('User '.Auth::user()->username.' (ID'.Auth::user()->id.') is attempting to purge deleted data and is not authorized to.');
+
+
+        // Nope.
+        return redirect()->route('settings.index')
+            ->with('error', trans('general.purge_not_allowed'));
     }
 
     /**
