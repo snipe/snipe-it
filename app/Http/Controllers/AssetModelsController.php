@@ -8,6 +8,7 @@ use App\Models\AssetModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Validator;
 use Redirect;
 use Request;
 use Storage;
@@ -90,7 +91,9 @@ class AssetModelsController extends Controller
         // Was it created?
         if ($model->save()) {
             if ($this->shouldAddDefaultValues($request->input())) {
-                $this->assignCustomFieldsDefaultValues($model, $request->input('default_values'));
+                if (!$this->assignCustomFieldsDefaultValues($model, $request->input('default_values'))){
+                    return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.fieldset_default_value.error'));
+                }
             }
 
             // Redirect to the new model  page
@@ -163,7 +166,9 @@ class AssetModelsController extends Controller
             $model->fieldset_id = $request->input('custom_fieldset');
 
             if ($this->shouldAddDefaultValues($request->input())) {
-                $this->assignCustomFieldsDefaultValues($model, $request->input('default_values'));
+                if (!$this->assignCustomFieldsDefaultValues($model, $request->input('default_values'))){
+                    return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.fieldset_default_value.error'));
+                }
             }
         }
 
@@ -451,6 +456,21 @@ class AssetModelsController extends Controller
      */
     private function assignCustomFieldsDefaultValues(AssetModel $model, array $defaultValues)
     {
+        $data = array();
+        foreach ($defaultValues as $customFieldId => $defaultValue) {
+            $customField = \App\Models\CustomField::find($customFieldId);
+
+            $data[$customField->db_column] = $defaultValue;
+        }
+
+        $rules = $model->fieldset->validation_rules();
+
+        $validator = Validator::make($data, $rules);
+
+        if($validator->fails()){
+            return false;
+        }
+
         foreach ($defaultValues as $customFieldId => $defaultValue) {
             if(is_array($defaultValue)){
                 $model->defaultValues()->attach($customFieldId, ['default_value' => implode(', ', $defaultValue)]);
@@ -458,6 +478,7 @@ class AssetModelsController extends Controller
                 $model->defaultValues()->attach($customFieldId, ['default_value' => $defaultValue]);
             }
         }
+        return true;
     }
 
     /**
