@@ -150,7 +150,8 @@
               <td>
                  <code>{{ $field->convertUnicodeDbSlug() }}</code>
                 @if ($field->convertUnicodeDbSlug()!=$field->db_column)
-                  <br><i class="fas fa-exclamation-triangle text-danger"></i>{{!! trans('admin/custom_fields/general.db_convert_warning', array('db_column' => $field->db_column, 'expected' => $field->convertUnicodeDbSlug())) !!}}
+                  <br><i class="fas fa-exclamation-triangle text-danger"></i>
+                  {!! trans('admin/custom_fields/general.db_convert_warning',['db_column' => $field->db_column, 'expected' => $field->convertUnicodeDbSlug()]) !!}
                 @endif
               </td>
               <td>{{ $field->format }}</td>
