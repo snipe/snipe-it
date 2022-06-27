@@ -94,8 +94,8 @@ class AssetsTransformer
             $fields_array = [];
 
             foreach ($asset->model->fieldset->fields as $field) {
-                if ($field->isFieldDecryptable($asset->{$field->convertUnicodeDbSlug()})) {
-                    $decrypted = Helper::gracefulDecrypt($field, $asset->{$field->convertUnicodeDbSlug()});
+                if ($field->isFieldDecryptable($asset->{$field->db_column})) {
+                    $decrypted = Helper::gracefulDecrypt($field, $asset->{$field->db_column});
                     $value = (Gate::allows('superadmin')) ? $decrypted : strtoupper(trans('admin/custom_fields/general.encrypted'));
 
                     if ($field->format == 'DATE'){
@@ -107,21 +107,21 @@ class AssetsTransformer
                     }
 
                     $fields_array[$field->name] = [
-                            'field' => e($field->convertUnicodeDbSlug()),
+                            'field' => e($field->db_column),
                             'value' => e($value),
                             'field_format' => $field->format,
                             'element' => $field->element,
                         ];
 
                 } else {
-                    $value = $asset->{$field->convertUnicodeDbSlug()};
+                    $value = $asset->{$field->db_column};
 
                     if (($field->format == 'DATE') && (!is_null($value)) && ($value!='')){
                         $value = Helper::getFormattedDateObject($value, 'date', false);
                     }
                     
                     $fields_array[$field->name] = [
-                        'field' => e($field->convertUnicodeDbSlug()),
+                        'field' => e($field->db_column),
                         'value' => e($value),
                         'field_format' => $field->format,
                         'element' => $field->element,

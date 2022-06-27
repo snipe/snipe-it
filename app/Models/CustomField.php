@@ -111,7 +111,7 @@ class CustomField extends Model
 
             // Column already exists on the assets table - nothing to do here.
             // This *shouldn't* happen in the wild.
-            if (Schema::hasColumn(self::$table_name, $custom_field->convertUnicodeDbSlug())) {
+            if (Schema::hasColumn(self::$table_name, $custom_field->db_column)) {
                 return false;
             }
 
@@ -156,7 +156,7 @@ class CustomField extends Model
         // Drop the assets column if we've deleted it from custom fields
         self::deleting(function ($custom_field) {
             return Schema::table(self::$table_name, function ($table) use ($custom_field) {
-                $table->dropColumn($custom_field->convertUnicodeDbSlug());
+                $table->dropColumn($custom_field->db_column);
             });
         });
     }
