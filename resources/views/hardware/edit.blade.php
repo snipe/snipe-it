@@ -327,20 +327,18 @@
 
 
         $("#optional_info").on("click",function(){
-            $("#optional_info_icon").addClass("fa-caret-down").removeClass("fa-caret-right");
-            $('#optional_details').show();
+            //$("#optional_info_icon").addClass("fa-caret-down").removeClass("fa-caret-right");
+            $('#optional_details').fadeToggle(300);
+            $('#optional_info_icon').toggleClass('fa-caret-right fa-caret-down');
         })
 
         $("#order_info").on("click",function(){
-            $("#order_info_icon").addClass("fa-caret-down").removeClass("fa-caret-right");
-            $('#order_details').show();
+            $("#order_info_icon").toggleClass('fa-caret-right fa-caret-down');
+            $('#order_details').fadeToggle(300);
         })
 
 
     });
-
-
-
 
 
 
