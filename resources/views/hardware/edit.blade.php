@@ -106,13 +106,17 @@
     <div class="form-group">
     <label class="col-md-3 control-label"></label>
 
-        <div class="col-md-9 col-sm-9 col-md-offset-3 text-left">
+        <div class="col-md-9 col-sm-9 col-md-offset-3">
 
-        <a href="javascript:toggleDiv('optional_info')" id="optional_info"><i class="fa fa-caret-right fa-2x" id="optional_info_icon"></i></a>
-        {{ trans('admin/hardware/form.optional_infos') }}
+        <a id="optional_info" class="text-primary">
+            <i class="fa fa-caret-right fa-2x" id="optional_info_icon"></i>
+            <strong>{{ trans('admin/hardware/form.optional_infos') }}</strong>
+        </a>
+
         </div>
         
         <div id="optional_details" class="col-md-12" style="display:none">
+        <br>
         @include ('partials.forms.edit.name', ['translated_name' => trans('admin/hardware/form.name')])
         @include ('partials.forms.edit.warranty')
         </div>
@@ -120,13 +124,15 @@
 
     <div class="form-group">
         <div class="col-md-9 col-sm-9 col-md-offset-3">
-            <a href="javascript:toggleDiv('optional_info')" id="order_info">
+            <a id="order_info" class="text-primary">
                 <i class="fa fa-caret-right fa-2x" id="order_info_icon"></i>
+                <strong>{{ trans('admin/hardware/form.order_details') }}</strong>
             </a>
-            {{ trans('admin/hardware/form.order_details') }}
+
         </div>
 
         <div id='order_details' class="col-md-12" style="display:none">
+            <br>
             @include ('partials.forms.edit.order_number')
             @include ('partials.forms.edit.purchase_date')
             @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
@@ -327,14 +333,15 @@
 
 
         $("#optional_info").on("click",function(){
-            //$("#optional_info_icon").addClass("fa-caret-down").removeClass("fa-caret-right");
             $('#optional_details').fadeToggle(300);
             $('#optional_info_icon').toggleClass('fa-caret-right fa-caret-down');
+            $('#optional_info_expand').val("true");
         })
 
         $("#order_info").on("click",function(){
             $("#order_info_icon").toggleClass('fa-caret-right fa-caret-down');
             $('#order_details').fadeToggle(300);
+            $('#order_info_expand').val("true");
         })
 
 
