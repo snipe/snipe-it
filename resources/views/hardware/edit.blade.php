@@ -57,7 +57,7 @@
         @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_user', 'style' => 'display:none;', 'required' => 'false'])
         @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_asset', 'style' => 'display:none;', 'required' => 'false'])
         @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_location', 'style' => 'display:none;', 'required' => 'false'])
-    @elseif (($item->assignedTo) && ($item->deleted_at==''))
+    @elseif (($item->assignedTo) && ($item->deleted_at == ''))
         <!-- This is an asset and it's currently deployed, so let them edit the expected checkin date -->
         @include ('partials.forms.edit.datepicker', ['translated_name' => trans('admin/hardware/form.expected_checkin'),'fieldname' => 'expected_checkin'])
     @endif
@@ -87,26 +87,29 @@
     <div id='custom_fields_content'>
         <!-- Custom Fields -->
         @if ($item->model && $item->model->fieldset)
-        <?php $model=$item->model; ?>
+        <?php $model = $item->model; ?>
         @endif
         @if (Request::old('model_id'))
-            <?php $model=\App\Models\AssetModel::find(Request::old('model_id')); ?>
+            @php
+                $model = \App\Models\AssetModel::find(Request::old('model_id'));
+            @endphp
         @elseif (isset($selected_model))
-            <?php $model=$selected_model; ?>
+            @php
+                $model = $selected_model;
+            @endphp
         @endif
         @if (isset($model) && $model)
         @include("models/custom_fields_form",["model" => $model])
         @endif
     </div>
 
-    <div class="form-group" >
-    <label class="col-md-3 control-label"></label> 
-        <div class="col-md-2 col-sm-2 text-left form-check" style="z-index:1;">   
+    <div class="form-group">
+    <label class="col-md-3 control-label"></label>
 
-        <input class="form-check-input" type="checkbox" id="optional_info" name="options[]" value="optional" <?php if (!empty (json_decode(Cookie::get('optional_info')))) {if(in_array('optional',json_decode(Cookie::get('optional_info')))) {echo 'checked';} else {echo 'unchecked';}} else {echo 'unchecked';} ?>>
-        <label class="form-check-label" for="flexCheckDefault">
+        <div class="col-md-9 col-sm-9 col-md-offset-3 text-left">
+
+        <a href="javascript:toggleDiv('optional_info')" id="optional_info"><i class="fa fa-caret-right fa-2x" id="optional_info_icon"></i></a>
         {{ trans('admin/hardware/form.optional_infos') }}
-        </label>
         </div>
         
         <div id="optional_details" class="col-md-12" style="display:none">
@@ -116,25 +119,25 @@
     </div>
 
     <div class="form-group">
-    <label class="col-md-3 control-label"></label> 
-        <div class="col-md-2 col-sm-2 text-left form-check" style="z-index:2;">   
-        <input class="form-check-input" type="checkbox" id="order_info" name="options[]" value="order" <?php if (!empty (json_decode(Cookie::get('optional_info')))) {if(in_array('order',json_decode(Cookie::get('optional_info')))) {echo 'checked';} else {echo 'unchecked';}} else {echo 'unchecked';} ?>>
-        <label class="form-check-label" for="flexCheckDefault">
-        {{ trans('admin/hardware/form.order_details') }}
-    </label>
+        <div class="col-md-9 col-sm-9 col-md-offset-3">
+            <a href="javascript:toggleDiv('optional_info')" id="order_info">
+                <i class="fa fa-caret-right fa-2x" id="order_info_icon"></i>
+            </a>
+            {{ trans('admin/hardware/form.order_details') }}
         </div>
 
-        <div id='order_details' class="col-md-12" style="z-index:1;"  style="display:none">
+        <div id='order_details' class="col-md-12" style="display:none">
             @include ('partials.forms.edit.order_number')
             @include ('partials.forms.edit.purchase_date')
             @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
 
-                <?php
-                $currency_type=null;
+                @php
+                $currency_type = null;
                 if ($item->id && $item->location) {
                     $currency_type = $item->location->currency;
                 }
-                ?>
+                @endphp
+
             @include ('partials.forms.edit.purchase_cost', ['currency_type' => $currency_type])
 
         </div>
@@ -164,7 +167,7 @@
 
             $.ajax({
                 type: 'GET',
-                url: "{{url('/') }}/models/" + modelid + "/custom_fields",
+                url: "{{ url('/') }}/models/" + modelid + "/custom_fields",
                 headers: {
                     "X-Requested-With": 'XMLHttpRequest',
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
@@ -302,49 +305,45 @@
             $(".add_field_button").removeAttr('disabled');
             $(".add_field_button").removeClass('disabled');
             e.preventDefault();
-            console.log(x);
+            //console.log(x);
 
             $(this).parent('div').parent('div').parent('span').remove();
             x--;
-        })
-    });
+        });
 
-    $(document).ready(function() {
-        checkOrderDetailOption();
-        checkOptionalOption();
-    });
 
-    if ($('#order_info').is(":checked")){
-        checkOrderDetailOption();
-    }
-    
-    $('#order_info').change(function(){
-        checkOrderDetailOption();
-    });
+        $('.expand').click(function(){
+            id = $(this).attr('id');
+            fields = $(this).text();
+            if (txt == '+'){
+                $(this).text('-');
+            }
+            else{
+                $(this).text('+');
+            }
+            $("#"+id).toggle();
 
-    if ($('#optional_info').is(":checked")){
-        checkOptionalOption();
-    }
+        });
 
-    $('#optional_info').change(function(){
-        checkOptionalOption();
-    });
 
-    function checkOptionalOption(){
-        if ($("#optional_info").prop('checked')==true) {
+        $("#optional_info").on("click",function(){
+            $("#optional_info_icon").addClass("fa-caret-down").removeClass("fa-caret-right");
             $('#optional_details').show();
-        } else {
-            $('#optional_details').hide();
-        }             
-    }
+        })
 
-    function checkOrderDetailOption(){
-        if ($("#order_info").prop('checked')==true) {
+        $("#order_info").on("click",function(){
+            $("#order_info_icon").addClass("fa-caret-down").removeClass("fa-caret-right");
             $('#order_details').show();
-        } else {
-            $('#order_details').hide();
-        }                   
-    }
+        })
+
+
+    });
+
+
+
+
+
+
 
 </script>
 @stop
