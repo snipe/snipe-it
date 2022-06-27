@@ -11,7 +11,7 @@
 
 {{-- Page content --}}
 @section('inputFields')
-
+    
     @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
 
 
@@ -43,12 +43,14 @@
   </div>
     
 
+
+
+    @include ('partials.forms.edit.serial', ['fieldname'=> 'serials[1]', 'translated_serial' => trans('admin/hardware/form.serial')])
+
     <div class="input_fields_wrap">
     </div>
 
-
     @include ('partials.forms.edit.model-select', ['translated_name' => trans('admin/hardware/form.model'), 'fieldname' => 'model_id', 'field_req' => true])
-    @include ('partials.forms.edit.serial', ['fieldname'=> 'serials[1]', 'translated_serial' => trans('admin/hardware/form.serial')])
 
 
     @include ('partials.forms.edit.status', [ 'required' => 'true'])
@@ -117,8 +119,8 @@
         
         <div id="optional_details" class="col-md-12" style="display:none">
         <br>
-        @include ('partials.forms.edit.name', ['translated_name' => trans('admin/hardware/form.name')])
-        @include ('partials.forms.edit.warranty')
+            @include ('partials.forms.edit.name', ['translated_name' => trans('admin/hardware/form.name')])
+            @include ('partials.forms.edit.warranty')
         </div>
     </div>
 
@@ -333,16 +335,14 @@
 
 
         $("#optional_info").on("click",function(){
-            $('#optional_details').fadeToggle(300);
+            $('#optional_details').fadeToggle(100);
             $('#optional_info_icon').toggleClass('fa-caret-right fa-caret-down');
-            $('#optional_info_expand').val("true");
-        })
+        });
 
         $("#order_info").on("click",function(){
+            $('#order_details').fadeToggle(100);
             $("#order_info_icon").toggleClass('fa-caret-right fa-caret-down');
-            $('#order_details').fadeToggle(300);
-            $('#order_info_expand').val("true");
-        })
+        });
 
 
     });
