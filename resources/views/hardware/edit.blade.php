@@ -333,17 +333,37 @@
 
         });
 
-
+        {{-- TODO: Clean up some of the duplication in here. Not too high of a priority since we only copied it once. --}}
         $("#optional_info").on("click",function(){
             $('#optional_details').fadeToggle(100);
             $('#optional_info_icon').toggleClass('fa-caret-right fa-caret-down');
+            var optional_info_open = $('#optional_info_icon').hasClass('fa-caret-down');
+            document.cookie = "optional_info_open="+optional_info_open+'; path=/';
         });
 
         $("#order_info").on("click",function(){
             $('#order_details').fadeToggle(100);
             $("#order_info_icon").toggleClass('fa-caret-right fa-caret-down');
+            var order_info_open = $('#order_info_icon').hasClass('fa-caret-down');
+            document.cookie = "order_info_open="+order_info_open+'; path=/';
         });
 
+        var all_cookies = document.cookie.split(';')
+        for(var i in all_cookies) {
+            var trimmed_cookie = all_cookies[i].trim(' ')
+            if (trimmed_cookie.startsWith('optional_info_open=')) {
+                elems = all_cookies[i].split('=', 2)
+                if (elems[1] == 'true') {
+                    $('#optional_info').trigger('click')
+                }
+            }
+            if (trimmed_cookie.startsWith('order_info_open=')) {
+                elems = all_cookies[i].split('=', 2)
+                if (elems[1] == 'true') {
+                    $('#order_info').trigger('click')
+                }
+            }
+        }
 
     });
 
