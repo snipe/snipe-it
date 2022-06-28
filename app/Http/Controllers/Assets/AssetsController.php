@@ -203,11 +203,6 @@ class AssetsController extends Controller
 
                 $success = true;
                 
-                // $cookie = Cookie::queue(Cookie::make('optional_info', $_POST['options'],$minutes));
-                // $data = $request->session()->all();
-                
-                // dd($_POST['options']);
-                
             }
         }
 
@@ -217,8 +212,7 @@ class AssetsController extends Controller
             // dd( $_POST['options']);
             // Cookie::queue(Cookie::make('optional_info', json_decode($_POST['options']), $minutes));
             return redirect()->route('hardware.index')
-                ->with('success', trans('admin/hardware/message.create.success'))
-                ->withCookie(cookie('optional_info',json_encode($_POST['options']),$minutes,null,null,null,false));
+                ->with('success', trans('admin/hardware/message.create.success'));
                
       
         }
