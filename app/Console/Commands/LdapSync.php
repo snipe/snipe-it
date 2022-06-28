@@ -17,7 +17,7 @@ class LdapSync extends Command
      *
      * @var string
      */
-    protected $signature = 'snipeit:ldap-sync {--location=} {--location_id=} {--base_dn=} {--summary} {--json_summary}';
+    protected $signature = 'snipeit:ldap-sync {--location=} {--location_id=} {--base_dn=} {--filter=} {--summary} {--json_summary}';
 
     /**
      * The console command description.
@@ -80,7 +80,11 @@ class LdapSync extends Command
             } else {
                 $search_base = null;
             }
-            $results = Ldap::findLdapUsers($search_base);
+            if ($this->option('filter') != '') {
+                $results = Ldap::findLdapUsers($search_base, -1, $this->option('filter'));
+            } else {
+                $results = Ldap::findLdapUsers($search_base);
+            }
         } catch (\Exception $e) {
             if ($this->option('json_summary')) {
                 $json_summary = ['error' => true, 'error_message' => $e->getMessage(), 'summary' => []];
@@ -109,7 +113,7 @@ class LdapSync extends Command
         }
 
         /* Process locations with explicitly defined OUs, if doing a full import. */
-        if ($this->option('base_dn') == '') {
+        if ($this->option('base_dn') == '' && $this->option('filter') == '') {
             // Retrieve locations with a mapped OU, and sort them from the shallowest to deepest OU (see #3993)
             $ldap_ou_locations = Location::where('ldap_ou', '!=', '')->get()->toArray();
             $ldap_ou_lengths = [];
