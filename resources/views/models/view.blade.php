@@ -204,13 +204,6 @@
 
     <div class="col-md-3">
         <div class="row">
-        <div class="col-md-12" style="padding-bottom: 5px;">
-            <a href="{{ route('models.edit', $model->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/models/table.edit') }}</a>
-        </div>
-        <div class="col-md-12" style="padding-bottom: 10px;">
-            <a href="{{ route('clone/model', $model->id) }}" style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('admin/models/table.clone') }}</a>
-        </div>
-
             <div class="col-md-12">
                 <div class="box box-default">
                     <div class="box-header with-border">
@@ -315,6 +308,31 @@
             </div>
         </div>
         </div>
+            @can('update', \App\Models\AssetModel::class)
+            <div class="col-md-12" style="padding-bottom: 5px;">
+                <a href="{{ route('models.edit', $model->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/models/table.edit') }}</a>
+            </div>
+            @endcan
+
+            @can('create', \App\Models\AssetModel::class)
+            <div class="col-md-12" style="padding-bottom: 5px;">
+                <a href="{{ route('clone/model', $model->id) }}" style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('admin/models/table.clone') }}</a>
+            </div>
+            @endcan
+
+            @can('delete', \App\Models\AssetModel::class)
+                @if ($model->assets->count() > 0)
+
+                    <div class="col-md-12" style="padding-bottom: 5px;">
+                        <a href="{{ route('models.destroy', $model->id) }}" style="width: 100%;" class="btn btn-sm btn-danger hidden-print disabled">{{ trans('general.delete') }}</a>
+                    </div>
+                @else
+
+                    <div class="col-md-12" style="padding-bottom: 10px;">
+                        <a href="{{ route('models.destroy', $model->id) }}" style="width: 100%;" class="btn btn-sm btn-danger hidden-print">{{ trans('general.delete') }}</a>
+                    </div>
+                @endif
+           @endcan
         </div>
 </div> <!-- /.row -->
 
