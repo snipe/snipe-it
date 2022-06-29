@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Laravel\Passport\TokenRepository;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 use Gate;
+use DB;
 
 class ProfileController extends Controller
 {
@@ -87,9 +88,14 @@ class ProfileController extends Controller
         $accessTokenName = $request->input('name', 'Auth Token');
 
         if ($accessToken = Auth::user()->createToken($accessTokenName)->accessToken) {
-            return response()->json(Helper::formatStandardApiResponse('success', $accessToken, 'Personal access token '.$accessTokenName.' created successfully'));
-        }
 
+            // Get the ID so we can return that with the payload
+            $token = DB::table('oauth_access_tokens')->where('user_id', '=', Auth::user()->id)->where('name','=',$accessTokenName)->orderBy('created_at', 'desc')->first();
+            $accessTokenData['id'] = $token->id;
+            $accessTokenData['token'] = $accessToken;
+            $accessTokenData['name'] = $accessTokenName;
+            return response()->json(Helper::formatStandardApiResponse('success', $accessTokenData, 'Personal access token '.$accessTokenName.' created successfully'));
+        }
         return response()->json(Helper::formatStandardApiResponse('error', null, 'Token could not be created.'));
 
     }
