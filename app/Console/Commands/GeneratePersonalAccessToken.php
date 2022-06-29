@@ -19,14 +19,14 @@ class GeneratePersonalAccessToken extends Command
     protected $signature = 'snipeit:make-api-key 
                         {user : The ID of the user to create the token for}
                         {--name= : The name of the new API token}
-                        {--key-only= : Only return the value of the API key}';
+                        {--key-only : Only return the value of the API key}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'This console command allows you to generate Personal API tokens to be used with the Snipe-IT JSON REST API on behalf of a user.';
 
 
     /**
@@ -68,7 +68,7 @@ class GeneratePersonalAccessToken extends Command
 
         if ($user = User::find($this->argument('user'))) {
 
-            if ($this->option('key-only')=='true') {
+            if ($this->option('key-only')) {
                 $this->info($user->createToken($accessTokenName)->accessToken);
             } else {
                 $this->warn('Your API Token has been created. Be sure to copy this token now, as it will not be accessible again.');
