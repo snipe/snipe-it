@@ -477,6 +477,13 @@ Route::group(['middleware' => 'web'], function () {
 
 //Auth::routes();
 
+
+Route::group(['prefix' => 'templates', 'middleware' => ['auth']], function () {
+    Route::view('/tabbed-1', 'templates/tabbed-right-side');
+});
+
+
+
 Route::get(
     '/health', 
     [HealthController::class, 'get']
