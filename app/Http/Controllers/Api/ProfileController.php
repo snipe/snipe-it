@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Laravel\Passport\TokenRepository;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
+use Gate;
 
 class ProfileController extends Controller
 {
@@ -79,6 +80,10 @@ class ProfileController extends Controller
      */
     public function createApiToken(Request $request) {
 
+        if (!Gate::allows('self.api')) {
+            abort(403);
+        }
+
         $accessTokenName = $request->input('name', 'Auth Token');
 
         if ($accessToken = Auth::user()->createToken($accessTokenName)->accessToken) {
@@ -99,6 +104,10 @@ class ProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function deleteApiToken($tokenId) {
+
+        if (!Gate::allows('self.api')) {
+            abort(403);
+        }
 
         $token = $this->tokenRepository->findForUser(
             $tokenId, Auth::user()->getAuthIdentifier()
@@ -125,6 +134,10 @@ class ProfileController extends Controller
      */
     public function showApiTokens(Request $request) {
 
+        if (!Gate::allows('self.api')) {
+            abort(403);
+        }
+        
         $tokens = $this->tokenRepository->forUser(Auth::user()->getAuthIdentifier());
 
         return $tokens->load('client')->filter(function ($token) {
