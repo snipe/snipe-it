@@ -188,6 +188,15 @@
                 </div>
                 @endcan
 
+                @can('view', $user)
+                    <div class="col-md-12" style="padding-top: 5px;">
+                        <form action="{{ route('users.email',['userId'=> $user->id]) }}" method="POST">
+                            {{ csrf_field() }}
+                            <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener">{{ trans('admin/users/general.email_assigned') }}</button>
+                        </form>
+                    </div>
+                @endcan
+
                 @can('update', $user)
                   @if (($user->activated == '1') && ($user->email != '') && ($user->ldap_import == '0'))
                       <div class="col-md-12" style="padding-top: 5px;">
