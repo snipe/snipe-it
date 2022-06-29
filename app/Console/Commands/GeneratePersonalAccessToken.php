@@ -57,7 +57,8 @@ class GeneratePersonalAccessToken extends Command
     public function handle()
     {
 
-        if ($this->option('name')=='') {
+        $accessTokenName = $this->option('name');
+        if ($accessTokenName=='') {
             $accessTokenName = 'CLI Auth Token';
         }
 
