@@ -441,6 +441,13 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         )->name('api.assets.show.bytag')
         ->where('any', '.*');
 
+        Route::post('bytag/{any}/checkout',
+            [
+                Api\AssetsController::class, 
+                'checkoutByTag'
+            ]
+        )->name('api.assets.checkout.bytag');
+
         Route::get('byserial/{any}',
             [
                 Api\AssetsController::class, 
