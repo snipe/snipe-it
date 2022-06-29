@@ -51,6 +51,10 @@ class ComponentsController extends Controller
             $components = $components->TextSearch($request->input('search'));
         }
 
+        if ($request->filled('name')) {
+            $components->where('name', '=', $request->input('name'));
+        }
+
         if ($request->filled('company_id')) {
             $components->where('company_id', '=', $request->input('company_id'));
         }

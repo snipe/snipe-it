@@ -48,6 +48,27 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             ]
         )->name('api.assets.requestable');
 
+        Route::post('personal-access-tokens',
+            [
+                Api\ProfileController::class,
+                'createApiToken'
+            ]
+        )->name('api.personal-access-token.create');
+
+        Route::get('personal-access-tokens',
+            [
+                Api\ProfileController::class,
+                'showApiTokens'
+            ]
+        )->name('api.personal-access-token.index');
+
+        Route::delete('personal-access-tokens/{tokenId}',
+            [
+                Api\ProfileController::class,
+                'deleteApiToken'
+            ]
+        )->name('api.personal-access-token.delete');
+
 
 
      }); // end account group
@@ -764,6 +785,20 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                 'ajaxTestEmail'
             ]
             )->name('api.settings.mailtest');
+
+            Route::get('backups',
+                [
+                    Api\SettingsController::class,
+                    'listBackups'
+                ]
+            )->name('api.settings.backups.index');
+
+            Route::get('backups/download/{file}',
+                [
+                    Api\SettingsController::class,
+                    'downloadBackup'
+                ]
+            )->name('api.settings.backups.download');
 
         }); 
         
