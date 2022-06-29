@@ -58,7 +58,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         Route::get('personal-access-tokens',
             [
                 Api\ProfileController::class,
-                'showTokens'
+                'showApiTokens'
             ]
         )->name('api.personal-access-token.index');
 

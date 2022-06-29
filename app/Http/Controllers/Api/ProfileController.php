@@ -123,7 +123,7 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showTokens(Request $request) {
+    public function showApiTokens(Request $request) {
 
         $tokens = $this->tokenRepository->forUser(Auth::user()->getAuthIdentifier());
 
