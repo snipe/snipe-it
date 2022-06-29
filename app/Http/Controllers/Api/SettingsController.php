@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Transformers\BackupsTransformer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Ldap;
@@ -264,5 +265,46 @@ class SettingsController extends Controller
         $login_attempt_results = $login_attempts->skip(request('offset', 0))->take(request('limit', 20))->get();
 
         return (new LoginAttemptsTransformer)->transformLoginAttempts($login_attempt_results, $total);
+    }
+
+
+    public function listBackups() {
+        $settings = Setting::getSettings();
+        $path = 'app/backups';
+        $backup_files = Storage::files($path);
+        $files_raw = [];
+        $count = 0;
+
+        if (count($backup_files) > 0) {
+
+            for ($f = 0; $f < count($backup_files); $f++) {
+
+                // Skip dotfiles like .gitignore and .DS_STORE
+                if ((substr(basename($backup_files[$f]), 0, 1) != '.')) {
+                    $file_timestamp = Storage::lastModified($backup_files[$f]);
+
+                    $files_raw[] = [
+                        'filename' => basename($backup_files[$f]),
+                        'filesize' => Setting::fileSizeConvert(Storage::size($backup_files[$f])),
+                        'modified_value' => $file_timestamp,
+                        'modified_display' => date($settings->date_display_format.' '.$settings->time_display_format, $file_timestamp),
+
+                    ];
+                    $count++;
+                }
+
+
+            }
+        }
+
+        $files = array_reverse($files_raw);
+        return (new BackupsTransformer())->transformBackups($files, $count);
+
+    }
+
+
+    public function downloadBackup($file) {
+        $path = '';
+        return response()->download($path, $file->name, $headers);
     }
 }
