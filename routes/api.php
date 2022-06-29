@@ -48,7 +48,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             ]
         )->name('api.assets.requestable');
 
-        Route::post('personal-access-token',
+        Route::post('personal-access-tokens',
             [
                 Api\ProfileController::class,
                 'createApiToken'
@@ -62,7 +62,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             ]
         )->name('api.personal-access-token.index');
 
-        Route::delete('personal-access-token/{tokenId}',
+        Route::delete('personal-access-tokens/{tokenId}',
             [
                 Api\ProfileController::class,
                 'deleteApiToken'
