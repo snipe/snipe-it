@@ -145,10 +145,11 @@ class ProfileController extends Controller
         }
         
         $tokens = $this->tokenRepository->forUser(Auth::user()->getAuthIdentifier());
-
-        return $tokens->load('client')->filter(function ($token) {
+        $token_values = $tokens->load('client')->filter(function ($token) {
             return $token->client->personal_access_client && ! $token->revoked;
         })->values();
+
+        return response()->json(Helper::formatStandardApiResponse('success', $token_values, null));
 
     }
 
