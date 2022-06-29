@@ -32,6 +32,28 @@ class CategoriesController extends Controller
             $categories = $categories->TextSearch($request->input('search'));
         }
 
+        if ($request->filled('name')) {
+            $categories->where('name', '=', $request->input('name'));
+        }
+
+        if ($request->filled('category_type')) {
+            $categories->where('category_type', '=', $request->input('category_type'));
+        }
+
+        if ($request->filled('use_default_eula')) {
+            $categories->where('use_default_eula', '=', $request->input('use_default_eula'));
+        }
+
+        if ($request->filled('require_acceptance')) {
+            $categories->where('require_acceptance', '=', $request->input('require_acceptance'));
+        }
+
+        if ($request->filled('checkin_email')) {
+            $categories->where('checkin_email', '=', $request->input('checkin_email'));
+        }
+
+
+
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.
         $offset = (($categories) && ($request->get('offset') > $categories->count())) ? $categories->count() : $request->get('offset', 0);
