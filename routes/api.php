@@ -786,6 +786,20 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             ]
             )->name('api.settings.mailtest');
 
+            Route::get('backups',
+                [
+                    Api\SettingsController::class,
+                    'listBackups'
+                ]
+            )->name('api.settings.backups.index');
+
+            Route::get('backups/download/{file}',
+                [
+                    Api\SettingsController::class,
+                    'downloadBackup'
+                ]
+            )->name('api.settings.backups.download');
+
         }); 
         
         Route::resource('settings', 
