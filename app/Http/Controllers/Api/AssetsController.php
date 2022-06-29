@@ -756,7 +756,7 @@ class AssetsController extends Controller
      */
     public function checkoutByTag(AssetCheckoutRequest $request, $tag)
     {
-        if ($asset = Asset::with('assetstatus')->with('assignedTo')->where('asset_tag', $tag)->first()) {
+        if ($asset = Asset::where('asset_tag', $tag)->first()) {
             return $this->checkout($request, $asset->id);
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 200);
