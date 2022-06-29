@@ -746,7 +746,21 @@ class AssetsController extends Controller
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
     }
 
-
+    /**
+     * Checkout an asset by its tag.
+     *
+     * @author [N. Butler]
+     * @param string $tag
+     * @since [v6.0.5]
+     * @return JsonResponse
+     */
+    public function checkoutByTag(AssetCheckoutRequest $request, $tag)
+    {
+        if ($asset = Asset::where('asset_tag', $tag)->first()) {
+            return $this->checkout($request, $asset->id);
+        }
+        return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 200);
+    }
 
     /**
      * Checkout an asset
