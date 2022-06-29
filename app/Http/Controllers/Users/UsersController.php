@@ -615,6 +615,15 @@ class UsersController extends Controller
             ->with('show_user', $show_user)
             ->with('settings', Setting::getSettings());
     }
+
+    /**
+     * Emails user a list of assigned assets
+     *
+     * @author [G. Martinez] [<godmartinz@gmail.com>]
+     * @since [v6.0.5]
+     * @param  \App\Http\Controllers\Users\UsersController  $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function emailAssetList($id)
     {
         $this->authorize('view', User::class);
