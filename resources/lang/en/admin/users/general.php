@@ -17,6 +17,8 @@ return [
     'last_login'        => 'Last Login',
     'ldap_config_text'  => 'LDAP configuration settings can be found Admin > Settings. The (optional) selected location will be set for all imported users.',
     'print_assigned'    => 'Print All Assigned',
+    'email_assigned'    => 'Email List of All Assigned',
+    'user_notified'     => 'User has been emailed a list of their currently assigned items.',
     'software_user'     => 'Software Checked out to :name',
     'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'View User :name',
