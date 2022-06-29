@@ -71,6 +71,7 @@ class GeneratePersonalAccessToken extends Command
                 $this->info($user->createToken($accessTokenName)->accessToken);
             } else {
                 $this->warn('Your API Token has been created. Be sure to copy this token now, as it will not be accessible again.');
+                $this->info('API Token User: '.$user->present()->fullName.' ('.$user->username.')');
                 $this->info('API Token Name: '.$accessTokenName);
                 $this->info('API Token: '.$user->createToken($accessTokenName)->accessToken);
             }
