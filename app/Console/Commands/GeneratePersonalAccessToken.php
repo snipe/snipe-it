@@ -69,16 +69,22 @@ class GeneratePersonalAccessToken extends Command
 
         if ($user = User::find($this->option('user_id'))) {
 
+            $createAccessToken = $user->createToken($accessTokenName)->accessToken;
+
             if ($this->option('key-only')) {
-                $this->info($user->createToken($accessTokenName)->accessToken);
+                $this->info($createAccessToken);
+
             } else {
-                $token = DB::table('oauth_access_tokens')->where('user_id', '=', $user->id)->where('name','=',$accessTokenName)->orderBy('created_at', 'desc')->first();
 
                 $this->warn('Your API Token has been created. Be sure to copy this token now, as it will not be accessible again.');
-                $this->info('API Token ID: '.$token->id);
+
+                if ($token = DB::table('oauth_access_tokens')->where('user_id', '=', $user->id)->where('name','=',$accessTokenName)->orderBy('created_at', 'desc')->first()) {
+                    $this->info('API Token ID: '.$token->id);
+                }
+
                 $this->info('API Token User: '.$user->present()->fullName.' ('.$user->username.')');
                 $this->info('API Token Name: '.$accessTokenName);
-                $this->info('API Token: '.$user->createToken($accessTokenName)->accessToken);
+                $this->info('API Token: '.$createAccessToken);
             }
         } else {
            return $this->error('ERROR: Invalid user. API key was not created.');
