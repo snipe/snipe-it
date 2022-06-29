@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Transformers\BackupsTransformer;
+use App\Helpers\Helper;
+use App\Helpers\StorageHelper;
+use App\Http\Transformers\DatatablesTransformer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Ldap;
@@ -298,13 +300,20 @@ class SettingsController extends Controller
         }
 
         $files = array_reverse($files_raw);
-        return (new BackupsTransformer())->transformBackups($files, $count);
+        return (new DatatablesTransformer)->transformDatatables($files, $count);
 
     }
 
 
     public function downloadBackup($file) {
-        $path = '';
-        return response()->download($path, $file->name, $headers);
+
+        $path = 'app/backups';
+        if (Storage::exists($path.'/'.$file)) {
+            $headers = ['ContentType' => 'application/zip'];
+            return Storage::download($path.'/'.$file, $file, $headers);
+        } else {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'File not found'));
+        }
+
     }
 }
