@@ -11,7 +11,7 @@ class CheckForTwoFactor
     /**
      * Routes to ignore for Two Factor Auth
      */
-    const IGNORE_ROUTES = ['two-factor', 'two-factor-enroll', 'setup', 'logout'];
+    const IGNORE_ROUTES = ['two-factor', 'two-factor-enroll', 'setup', 'logout.store', 'logout.show'];
 
     /**
      * Handle an incoming request.

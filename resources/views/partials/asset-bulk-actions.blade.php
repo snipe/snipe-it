@@ -1,7 +1,7 @@
 <div id="assetsBulkEditToolbar" style="min-width:400px">
     {{ Form::open([
       'method' => 'POST',
-      'route' => ['hardware/bulkedit'],
+      'route' => ['hardware.bulksave.update'],
       'class' => 'form-inline',
       'id' => 'assetsBulkForm']) }}
 

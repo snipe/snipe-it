@@ -473,12 +473,12 @@ Route::group(['middleware' => 'web'], function () {
     Route::get(
         'logout',
         [LoginController::class, 'logout']
-    )->name('logout');
+    )->name('logout.show');
 
     Route::post(
         'logout',
         [LoginController::class, 'logout']
-    )->name('logout');
+    )->name('logout.store');
 });
 
 //Auth::routes();

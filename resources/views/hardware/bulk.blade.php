@@ -23,7 +23,7 @@
       <i class="fas fa-exclamation-triangle"></i> {{ trans('admin/hardware/form.bulk_update_warn', ['asset_count' => count($assets)]) }}
     </div>
 
-    <form class="form-horizontal" method="post" action="{{ route('hardware/bulksave') }}" autocomplete="off" role="form">
+    <form class="form-horizontal" method="post" action="{{ route('hardware.bulkedit.store') }}" autocomplete="off" role="form">
       {{ csrf_field() }}
 
       <div class="box box-default">

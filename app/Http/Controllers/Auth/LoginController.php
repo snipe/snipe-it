@@ -54,7 +54,7 @@ class LoginController extends Controller
     public function __construct(Saml $saml)
     {
         parent::__construct();
-        $this->middleware('guest', ['except' => ['logout', 'postTwoFactorAuth', 'getTwoFactorAuth', 'getTwoFactorEnroll']]);
+        $this->middleware('guest', ['except' => ['logout.store', 'logout.show','postTwoFactorAuth', 'getTwoFactorAuth', 'getTwoFactorEnroll']]);
         Session::put('backUrl', \URL::previous());
         // $this->ldap = $ldap;
         $this->saml = $saml;
@@ -484,7 +484,7 @@ class LoginController extends Controller
             return redirect()->away($customLogoutUrl);
         }
 
-        return redirect()->route('login')->with(['success' => trans('auth/message.logout.success'), 'loggedout' => true]);
+        return redirect()->route('login.show')->with(['success' => trans('auth/message.logout.success'), 'loggedout' => true]);
     }
 
 

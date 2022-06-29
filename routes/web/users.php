@@ -19,15 +19,7 @@ use Illuminate\Support\Facades\Route;
             Users\UsersController::class, 
             'getRestore'
         ]
-    )->name('restore/user');
-
-    Route::get(
-        '{userId}/unsuspend',
-        [
-            Users\UsersController::class, 
-            'getUnsuspend'
-        ]
-    )->name('unsuspend/user');
+    )->name('users.restore.store');
 
     Route::post(
         '{userId}/upload',
@@ -78,15 +70,15 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
             Users\UsersController::class, 
             'getClone'
         ]
-    )->name('clone/user');
+    )->name('users.clone.show');
 
     Route::post(
         '{userId}/clone',
         [
-            Users\UsersController::class, 
+            Users\UsersController::class,
             'postCreate'
         ]
-    )->name('clone/user');
+    )->name('users.clone.store');
 
     Route::get(
         '{userId}/restore',
@@ -94,7 +86,7 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
             Users\UsersController::class, 
             'getRestore'
         ]
-    )->name('restore/user');
+    )->name('users.restore.show');
 
     Route::get(
         '{userId}/unsuspend',
@@ -104,21 +96,6 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
         ]
     )->name('unsuspend/user');
 
-    Route::post(
-        '{userId}/upload',
-        [
-            Users\UserFilesController::class, 
-            'store'
-        ]
-    )->name('upload/user');
-
-    Route::delete(
-        '{userId}/deletefile/{fileId}',
-        [
-            Users\UserFilesController::class, 
-            'destroy'
-        ]
-    )->name('userfile.destroy');
 
     Route::get(
         '{userId}/showfile/{fileId}',
