@@ -34,7 +34,7 @@
                     <strong>{{ config('passport.expiration_years') }} {{ trans('general.years') }} </strong>.</p>
 
 
-                <p>{{!! trans('account/general.api_reference') !!}}</p>
+                <p>{!! trans('account/general.api_reference') !!}</p>
             </div>
         </div>
 
