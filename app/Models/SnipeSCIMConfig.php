@@ -42,7 +42,7 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
         );
 
         $config['validations'][$core.'emails'] = 'nullable|array';         // emails are not required in Snipe-IT...
-        $config['validations'][$core.'emails.*.value'] = 'required|email'; // ...but if you give us one, it better be an email address
+        $config['validations'][$core.'emails.*.value'] = 'email'; // ...(had to remove the recommended 'required' here)
 
         $mappings['emails'] = [[
             "value" => AttributeMapping::eloquent("email"),
@@ -58,7 +58,7 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
 
         //phone
         $config['validations'][$core.'phoneNumbers'] = 'nullable|array';
-        $config['validations'][$core.'phoneNumbers.*.value'] = 'required';
+        $config['validations'][$core.'phoneNumbers.*.value'] = 'string'; // another one where want to say 'we don't _need_ a phone number, but if you have one it better have a value.
 
         $mappings['phoneNumbers'] = [[
             "value" => AttributeMapping::eloquent("phone"),
@@ -69,10 +69,10 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
 
         //address
         $config['validations'][$core.'addresses'] = 'nullable|array';
-        $config['validations'][$core.'addresses.*.streetAddress'] = 'required';
+        $config['validations'][$core.'addresses.*.streetAddress'] = 'string';
         $config['validations'][$core.'addresses.*.locality'] = 'string';
-        $config['validations'][$core.'addresses.*.region'] = 'string';
-        $config['validations'][$core.'addresses.*.postalCode'] = 'string';
+        $config['validations'][$core.'addresses.*.region'] = 'nullable|string';
+        $config['validations'][$core.'addresses.*.postalCode'] = 'nullable|string';
         $config['validations'][$core.'addresses.*.country'] = 'string';
 
         $mappings['addresses'] = [[
@@ -118,7 +118,6 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
             'employeeNumber' => AttributeMapping::eloquent('employee_num'),
             'department' =>(new AttributeMapping())->setAdd( // FIXME parent?
                 function ($value, &$object) {
-                    \Log::error("Department-Add: $value"); //FIXME
                     $department = Department::where("name", $value)->first();
                     if ($department) {
                         $object->department_id = $department->id;
@@ -126,7 +125,6 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
                 }
                 )->setReplace(
                     function ($value, &$object) {
-                        \Log::error("Department-Replace: $value"); //FIXME
                         $department = Department::where("name", $value)->first();
                         if ($department) {
                             $object->department_id = $department->id;
@@ -134,7 +132,6 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
                     }
                 )->setRead(
                     function (&$object) {
-                        \Log::error("Weird department reader firing..."); //FIXME
                         return $object->department ? $object->department->name : null;
                     } 
                 ),
@@ -145,7 +142,6 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
                 // NOTE: you could probably do a 'plain' Eloquent mapping here, but we don't for future-proofing
                 'value' => (new AttributeMapping())->setAdd(
                     function ($value, &$object) {
-                        \Log::error("Manager-Add: $value"); //FIXME
                         $manager = User::find($value);
                         if ($manager) {
                             $object->manager_id = $manager->id;
@@ -153,7 +149,6 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
                     }
                     )->setReplace(
                         function ($value, &$object) {
-                            \Log::error("Manager-Replace: $value"); //FIXME
                             $manager = User::find($value);
                             if ($manager) {
                                 $object->manager_id = $manager->id;
@@ -161,7 +156,6 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
                         }
                     )->setRead(
                         function (&$object) {
-                            \Log::error("Weird manager reader firing..."); //FIXME
                             return $object->manager_id;
                         } 
                     ),
