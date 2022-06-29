@@ -43,6 +43,11 @@ class CompaniesController extends Controller
             $companies->TextSearch($request->input('search'));
         }
 
+        if ($request->filled('name')) {
+            $companies->where('name', '=', $request->input('name'));
+        }
+
+
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.
         $offset = (($companies) && ($request->get('offset') > $companies->count())) ? $companies->count() : $request->get('offset', 0);

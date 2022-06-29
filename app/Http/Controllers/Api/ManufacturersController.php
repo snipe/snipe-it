@@ -37,6 +37,26 @@ class ManufacturersController extends Controller
             $manufacturers = $manufacturers->TextSearch($request->input('search'));
         }
 
+        if ($request->filled('name')) {
+            $manufacturers->where('name', '=', $request->input('name'));
+        }
+
+        if ($request->filled('url')) {
+            $manufacturers->where('url', '=', $request->input('url'));
+        }
+
+        if ($request->filled('support_url')) {
+            $manufacturers->where('support_url', '=', $request->input('support_url'));
+        }
+
+        if ($request->filled('support_phone')) {
+            $manufacturers->where('support_phone', '=', $request->input('support_phone'));
+        }
+
+        if ($request->filled('support_email')) {
+            $manufacturers->where('support_email', '=', $request->input('support_email'));
+        }
+
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.
         $offset = (($manufacturers) && ($request->get('offset') > $manufacturers->count())) ? $manufacturers->count() : $request->get('offset', 0);
