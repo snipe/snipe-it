@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> '附属品',
     'activated'			    => '已激活',
     'accessory'				=> '附属品',
@@ -26,6 +26,7 @@
     'audit'				    => '审计',
     'audit_report'			=> '审核日志',
     'assets'				=> '资产',
+    'assigned_to'           => '借出给:name的资产',
     'avatar_delete'         => '删除头像',
     'avatar_upload'         => '上传头像',
     'back'      			=> '后退',
@@ -96,6 +97,7 @@
     'eol'					=> '寿命',
     'email_domain'			=> '邮件域',
     'email_format'			=> '电子邮件格式',
+    'employee_number'       => '员工号码',
     'email_domain_help'		=> '这在导入时用以生成电子邮件地址',
     'error'				    => '错误',
     'filastname_format'			=> '缩写名 姓，例如(jsmith@example.com)',
@@ -113,6 +115,7 @@
     'files'                 => '文件',
     'file_name'				=> '文件',
     'file_type'             => '文件类型',
+    'filesize'              => 'File Size',
     'file_uploads'			=> '文件上传',
     'file_upload'           => '文件上传',
     'generate'				=> '生成',
@@ -192,6 +195,8 @@
     'qty'		            => '数量',
     'quantity'		        => '数量',
     'quantity_minimum'      => '您有 :count 物品低于或几乎低于最低数量级别',
+    'quickscan_checkin'  	=> '快速扫描归还',
+    'quickscan_checkin_status'  	=> '归还状态',
     'ready_to_deploy'		=> '待分配',
     'recent_activity'		=> '最近操作活动',
     'remaining'             => '剩余',
@@ -226,6 +231,7 @@
     'show_current'  		=> '查看当前',
     'sign_in'				=> '登录',
     'signature'             => '签名',
+    'signed_off_by'         => '管理员签名',
     'skin'       			=> '主题',
     'slack_msg_note'        => '将发送一条slack消息',
     'slack_test_msg'        => '哦哈！看起来 Slack 已经成功应用到 Snipe-IT 了！',
@@ -234,6 +240,7 @@
     'state'  				=> '省份',
     'status_labels'			=> '状态标签',
     'status'    			=> '状态',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => '供应商',
     'suppliers'  			=> '供应商',
     'sure_to_delete'    => '是否确认要删除',
@@ -347,4 +354,7 @@
     'checkout_tooltip' => '借出此物品',
     'checkin_tooltip' => '归还此物品',
     'checkout_user_tooltip' => '借出此物品给一个用户',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

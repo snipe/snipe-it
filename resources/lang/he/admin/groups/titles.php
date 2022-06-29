@@ -12,5 +12,5 @@ return [
     'deny' 	 				=> 'לְהַכּחִישׁ',
     'permission'            => 'Permission',
     'grant'                 => 'Grant',
-    'no_permissions'        => 'This group has no permissions.'
+    'no_permissions'        => 'לקבוצה זו אין הרשאות.'
 ];

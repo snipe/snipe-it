@@ -46,5 +46,8 @@ return [
     'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
     'asset_deployable' => 'That status is deployable. This asset can be checked out.',
     'processing_spinner' => 'Processing...',
-    'checkoutnotes' => 'Checkout Note'
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information',
+    'checkoutnotes' => 'Checkout Note',
+
 ];

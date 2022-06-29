@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'Ríomhphost',
     'employee_num'      	=> 'Uimhir an Fhostaí',
     'first_name' 			=> 'Ainm',
-    'groupnotes'			=> 'Roghnaigh grúpa chun an t-úsáideoir a shannadh, cuimhnigh go nglacann úsáideoir ceadanna an ghrúpa a sannfar iad.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Inherit',
     'job' 					=> 'Teideal an phoist',

@@ -17,6 +17,7 @@ return [
         'error'   			=> 'Artigo não foi atualizado. Por favor, tente novamente',
         'success' 			=> 'Artigo atualizado com sucesso.',
         'nothing_updated'	=>  'Nenhum atributo foi selecionado, portanto nada foi atualizado.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

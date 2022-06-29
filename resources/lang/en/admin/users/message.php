@@ -16,7 +16,7 @@ return array(
     'password_reset_sent'       => 'A password reset link has been sent to :email!',
 
 
-    'success' => [
+    'success' => array(
         'create'    => 'User was successfully created.',
         'update'    => 'User was successfully updated.',
         'update_bulk'    => 'Users were successfully updated!',
@@ -27,9 +27,9 @@ return array(
         'unsuspend' => 'User was successfully unsuspended.',
         'restored'  => 'User was successfully restored.',
         'import'    => 'Users imported successfully.',
-    ],
+    ),
 
-    'error' => [
+    'error' => array(
         'create' => 'There was an issue creating the user. Please try again.',
         'update' => 'There was an issue updating the user. Please try again.',
         'delete' => 'There was an issue deleting the user. Please try again.',
@@ -44,18 +44,18 @@ return array(
         'ldap_could_not_search' => 'Could not search the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
         'ldap_could_not_get_entries' => 'Could not get entries from the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
         'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
-    ],
+    ),
 
-    'deletefile' => [
+    'deletefile' => array(
         'error'   => 'File not deleted. Please try again.',
         'success' => 'File successfully deleted.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'File(s) not uploaded. Please try again.',
         'success' => 'File(s) successfully uploaded.',
         'nofiles' => 'You did not select any files for upload',
         'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
-    ],
+    ),
 
 );

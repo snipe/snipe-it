@@ -91,6 +91,10 @@ return [
     'url'                  => 'Formát :attribute je neplatný.',
     'unique_undeleted'     => 'Je třeba, aby se :attribute neopakoval.',
     'non_circular'         => ':attribute nesmí vytvořit kruhový odkaz.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'Email',
     'employee_num'      	=> 'Ang Numero ng Empleyado.',
     'first_name' 			=> 'Ang Unang Pangalan',
-    'groupnotes'			=> 'Pumili ng grupo para mag-talaga ng user, tandaan na ang user ay may mga permiso sa grupo kung saan sila ay naka-assign.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Ang Id',
     'inherit'  				=> 'Minana',
     'job' 					=> 'Ang Titulo sa Trabaho',

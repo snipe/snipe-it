@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Izesekeli',
     'activated'			    => 'Kuvunyelwe',
     'accessory'				=> 'Ukufinyelela',
@@ -26,6 +26,7 @@
     'audit'				    => 'I-Audit',
     'audit_report'			=> 'I-Audit Log',
     'assets'				=> 'Amafa',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => 'Susa i-Avatar',
     'avatar_upload'         => 'Layisha i-Avatar',
     'back'      			=> 'Emuva',
@@ -96,6 +97,7 @@
     'eol'					=> 'I-EOL',
     'email_domain'			=> 'Domain Imeyili',
     'email_format'			=> 'Ifomethi ye-imeyli',
+    'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'Lokhu kusetshenziselwa ukhiqiza amakheli e-imeyili uma ungenisa',
     'error'				    => 'Error',
     'filastname_format'			=> 'Igama Lokuqala Lokuqala Lokuqala (jsmith@example.com)',
@@ -113,6 +115,7 @@
     'files'                 => 'Files',
     'file_name'				=> 'Ifayela',
     'file_type'             => 'File Type',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'Ukulayishwa kwamafayela',
     'file_upload'           => 'File Upload',
     'generate'				=> 'Qalisa',
@@ -192,6 +195,8 @@
     'qty'		            => 'QTY',
     'quantity'		        => 'Inani',
     'quantity_minimum'      => 'You have :count items below or almost below minimum quantity levels',
+    'quickscan_checkin'  	=> 'Quick Scan Checkin',
+    'quickscan_checkin_status'  	=> 'Checkin Status',
     'ready_to_deploy'		=> 'Ukulungele Ukusebenzisa',
     'recent_activity'		=> 'Umsebenzi wakamuva',
     'remaining'             => 'Remaining',
@@ -226,6 +231,7 @@
     'show_current'  		=> 'Show Current',
     'sign_in'				=> 'Ngena ngemvume',
     'signature'             => 'Isiginesha',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Skin',
     'slack_msg_note'        => 'A slack message will be sent',
     'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',
@@ -234,6 +240,7 @@
     'state'  				=> 'Isimo',
     'status_labels'			=> 'Amalebula wesimo',
     'status'    			=> 'Isimo',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Umphakeli',
     'suppliers'  			=> 'Abahlinzeki',
     'sure_to_delete'    => 'Uqinisekile ukuthi ufisa ukususa',
@@ -347,4 +354,7 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

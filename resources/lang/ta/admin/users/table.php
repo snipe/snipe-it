@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'மின்னஞ்சல்',
     'employee_num'      	=> 'பணியாளர் எண்',
     'first_name' 			=> 'முதல் பெயர்',
-    'groupnotes'			=> 'பயனர் ஒதுக்க ஒரு குழுவை தேர்ந்தெடுத்து, பயனர் அவர்கள் ஒதுக்கப்பட்டுள்ள குழுவின் அனுமதியை எடுத்துக்கொள்வதை நினைவில் கொள்க.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'ஐடி',
     'inherit'  				=> 'மரபுரிமையாக',
     'job' 					=> 'வேலை தலைப்பு',

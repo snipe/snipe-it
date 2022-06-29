@@ -28,13 +28,13 @@
                 </div>
 
                 <p>{{ trans('account/general.api_base_url') }}<br>
-                    <code>{{ url('/api/v1') }}{{!! trans('account/general.api_base_url_endpoint') !!}}</code></p>
+                    <code>{{ url('/api/v1') }}{!! trans('account/general.api_base_url_endpoint') !!}</code></p>
 
                 <p>{{ trans('account/general.api_token_expiration_time') }}
                     <strong>{{ config('passport.expiration_years') }} {{ trans('general.years') }} </strong>.</p>
 
 
-                <p>{{!! trans('account/general.api_reference') !!}}</p>
+                <p>{!! trans('account/general.api_reference') !!}</p>
             </div>
         </div>
 

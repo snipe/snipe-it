@@ -16,6 +16,7 @@ return [
         'error'   			=> 'Akten blev ikke opdateret, prøv igen',
         'success' 			=> 'Asset opdateret med succes.',
         'nothing_updated'	=>  'Ingen felter blev valgt, så intet blev opdateret.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

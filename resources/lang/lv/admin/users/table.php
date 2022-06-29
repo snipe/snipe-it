@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'E-pasts',
     'employee_num'      	=> 'Darbinieku skaits',
     'first_name' 			=> 'Vārds',
-    'groupnotes'			=> 'Izvēlieties grupu, kas piešķirta lietotājam, atcerieties, ka lietotājs uzņemas piešķirtās grupas atļaujas.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Mantot',
     'job' 					=> 'Amata nosaukums',

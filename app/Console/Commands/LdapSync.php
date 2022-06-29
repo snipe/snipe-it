@@ -17,7 +17,7 @@ class LdapSync extends Command
      *
      * @var string
      */
-    protected $signature = 'snipeit:ldap-sync {--location=} {--location_id=} {--base_dn=} {--summary} {--json_summary}';
+    protected $signature = 'snipeit:ldap-sync {--location=} {--location_id=} {--base_dn=} {--filter=} {--summary} {--json_summary}';
 
     /**
      * The console command description.
@@ -56,6 +56,7 @@ class LdapSync extends Command
         $ldap_result_jobtitle = Setting::getSettings()->ldap_jobtitle;
         $ldap_result_country = Setting::getSettings()->ldap_country;
         $ldap_result_dept = Setting::getSettings()->ldap_dept;
+        $ldap_result_manager = Setting::getSettings()->ldap_manager;
 
         try {
             $ldapconn = Ldap::connectToLdap();
@@ -79,7 +80,11 @@ class LdapSync extends Command
             } else {
                 $search_base = null;
             }
-            $results = Ldap::findLdapUsers($search_base);
+            if ($this->option('filter') != '') {
+                $results = Ldap::findLdapUsers($search_base, -1, $this->option('filter'));
+            } else {
+                $results = Ldap::findLdapUsers($search_base);
+            }
         } catch (\Exception $e) {
             if ($this->option('json_summary')) {
                 $json_summary = ['error' => true, 'error_message' => $e->getMessage(), 'summary' => []];
@@ -108,7 +113,7 @@ class LdapSync extends Command
         }
 
         /* Process locations with explicitly defined OUs, if doing a full import. */
-        if ($this->option('base_dn') == '') {
+        if ($this->option('base_dn') == '' && $this->option('filter') == '') {
             // Retrieve locations with a mapped OU, and sort them from the shallowest to deepest OU (see #3993)
             $ldap_ou_locations = Location::where('ldap_ou', '!=', '')->get()->toArray();
             $ldap_ou_lengths = [];
@@ -184,11 +189,11 @@ class LdapSync extends Command
                 $item['jobtitle'] = isset($results[$i][$ldap_result_jobtitle][0]) ? $results[$i][$ldap_result_jobtitle][0] : '';
                 $item['country'] = isset($results[$i][$ldap_result_country][0]) ? $results[$i][$ldap_result_country][0] : '';
                 $item['department'] = isset($results[$i][$ldap_result_dept][0]) ? $results[$i][$ldap_result_dept][0] : '';
+                $item['manager'] = isset($results[$i][$ldap_result_manager][0]) ? $results[$i][$ldap_result_manager][0] : '';
 
                 $department = Department::firstOrCreate([
                     'name' => $item['department'],
                 ]);
-
 
                 $user = User::where('username', $item['username'])->first();
                 if ($user) {
@@ -211,6 +216,17 @@ class LdapSync extends Command
                 $user->jobtitle = $item['jobtitle'];
                 $user->country = $item['country'];
                 $user->department_id = $department->id;
+
+                if($item['manager'] != null) {
+                    //Captures only the Canonical Name
+                    $item['manager'] = ltrim($item['manager'], "CN=");
+                    $item['manager'] = substr($item['manager'],0, strpos($item['manager'], ','));
+                    $ldap_manager = User::where('username', $item['manager'])->first();
+                    if ( $ldap_manager && isset($ldap_manager->id) ) {
+                        $user->manager_id = $ldap_manager->id;
+                    }
+                }
+
 
                 // Sync activated state for Active Directory.
                 if (array_key_exists('useraccountcontrol', $results[$i])) {

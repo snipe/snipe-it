@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'bykomstighede',
     'activated'			    => 'geaktiveer',
     'accessory'				=> 'Bykomstigheid',
@@ -26,6 +26,7 @@
     'audit'				    => 'oudit',
     'audit_report'			=> 'Ouditlogboek',
     'assets'				=> 'bates',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => 'Verwyder Avatar',
     'avatar_upload'         => 'Laai avatar op',
     'back'      			=> 'terug',
@@ -96,6 +97,7 @@
     'eol'					=> 'EOL',
     'email_domain'			=> 'E-pos Domein',
     'email_format'			=> 'E-pos formaat',
+    'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'Dit word gebruik om e-posadresse te genereer wanneer u dit invoer',
     'error'				    => 'Error',
     'filastname_format'			=> 'Eerste Voorletter (jsmith@voorbeeld.com)',
@@ -113,6 +115,7 @@
     'files'                 => 'Files',
     'file_name'				=> 'lêer',
     'file_type'             => 'File Type',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'Lêeroplaaie',
     'file_upload'           => 'File Upload',
     'generate'				=> 'genereer',
@@ -192,6 +195,8 @@
     'qty'		            => 'HOEV',
     'quantity'		        => 'hoeveelheid',
     'quantity_minimum'      => 'You have :count items below or almost below minimum quantity levels',
+    'quickscan_checkin'  	=> 'Quick Scan Checkin',
+    'quickscan_checkin_status'  	=> 'Checkin Status',
     'ready_to_deploy'		=> 'Klaar om te implementeer',
     'recent_activity'		=> 'Onlangse aktiwiteite',
     'remaining'             => 'Remaining',
@@ -226,6 +231,7 @@
     'show_current'  		=> 'Show Current',
     'sign_in'				=> 'Teken in',
     'signature'             => 'Handtekening',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Skin',
     'slack_msg_note'        => 'A slack message will be sent',
     'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',
@@ -234,6 +240,7 @@
     'state'  				=> 'staat',
     'status_labels'			=> 'Status etikette',
     'status'    			=> 'status',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'verskaffer',
     'suppliers'  			=> 'Verskaffers',
     'sure_to_delete'    => 'Is jy seker jy wil verwyder',
@@ -347,4 +354,7 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

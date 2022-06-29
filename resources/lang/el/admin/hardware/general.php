@@ -6,6 +6,7 @@ return [
     'archived'  				=> 'Αρχειοθετημένα',
     'asset'  					=> 'Πάγιο',
     'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkin'              => 'Checkin Assets',
     'checkin'  					=> 'Checkin Asset',
     'checkout'  				=> 'Ταμείο ελέγχου',
     'clone'  					=> 'Κλώνος χρήστη',

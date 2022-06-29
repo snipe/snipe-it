@@ -137,7 +137,9 @@ a {
 .bootstrap-table .fixed-table-container .table thead th .sortable {
   color: var(--nav-link);
 }
-
+.bootstrap-table .fixed-table-toolbar .columns label {
+  color:#000;
+}
 .thead, .navbar-nav>li>a:link {
   color: var(--nav-link);
 }
@@ -355,6 +357,14 @@ input[type=text], input[type=search] {
   background-color: var(--back-sub-alt);
   color: var(--text-main);
 }
+.row-new-striped > .row:nth-of-type(odd){
+  background-color: var(--back-sub);
+  color: var(--text-main);
+}
+.row-new-striped > .row:nth-of-type(even){
+  background-color: var(--back-sub-alt);
+  color: var(--text-main);
+}
 #webui>div>div>div>div>div>table>tbody>tr>td>a>i.fa, .box-body, .box-footer, .box-header {
   color: var(--text-main);
 }
@@ -406,4 +416,7 @@ a {
 
 .search-highlight, .search-highlight:hover {
   background-color: #e9d15b;
+}
+div.container.row-new-striped{
+  background-color:  var(--back-sub);
 }

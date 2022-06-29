@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Accesorii',
     'activated'			    => 'activat',
     'accessory'				=> 'Accesorii',
@@ -26,6 +26,7 @@
     'audit'				    => 'Audit',
     'audit_report'			=> 'Jurnal de audit',
     'assets'				=> 'Active',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => 'Sterge avatar',
     'avatar_upload'         => 'Upload Avatar',
     'back'      			=> 'Inapoi',
@@ -96,6 +97,7 @@
     'eol'					=> 'EOL',
     'email_domain'			=> 'Domeniul de e-mail',
     'email_format'			=> 'Formatul e-mailului',
+    'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'Acesta este folosit pentru a genera adrese de e-mail atunci când importați',
     'error'				    => 'Error',
     'filastname_format'			=> 'Primul nume inițial (jsmith@example.com)',
@@ -113,6 +115,7 @@
     'files'                 => 'Files',
     'file_name'				=> 'Fisier',
     'file_type'             => 'File Type',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'Upload fisier',
     'file_upload'           => 'File Upload',
     'generate'				=> 'Genereaza',
@@ -192,6 +195,8 @@
     'qty'		            => 'QTY',
     'quantity'		        => 'Cantitate',
     'quantity_minimum'      => 'You have :count items below or almost below minimum quantity levels',
+    'quickscan_checkin'  	=> 'Quick Scan Checkin',
+    'quickscan_checkin_status'  	=> 'Checkin Status',
     'ready_to_deploy'		=> 'Gata de lansare',
     'recent_activity'		=> 'Activitate recentă',
     'remaining'             => 'Remaining',
@@ -226,6 +231,7 @@
     'show_current'  		=> 'Show Current',
     'sign_in'				=> 'Logheaza-te',
     'signature'             => 'Semnătură',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Skin',
     'slack_msg_note'        => 'A slack message will be sent',
     'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',
@@ -234,6 +240,7 @@
     'state'  				=> 'Judet',
     'status_labels'			=> 'Etichete status',
     'status'    			=> 'Stare',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Furnizor',
     'suppliers'  			=> 'Furnizori',
     'sure_to_delete'    => 'Sigur doriți să ștergeți',
@@ -347,4 +354,7 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

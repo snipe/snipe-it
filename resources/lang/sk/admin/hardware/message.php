@@ -17,6 +17,7 @@ return [
         'error'   			=> 'Majetok sa nepodarilo upraviť, skúste prosím znovu',
         'success' 			=> 'Majetok bol úspešne upravený.',
         'nothing_updated'	=>  'Neboli vybrané žiadne položky, preto nebolo nič upravené.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

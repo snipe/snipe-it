@@ -132,6 +132,9 @@
               <th data-searchable="true">{{ trans('admin/custom_fields/general.unique') }}</th>
               <th data-visible="false">{{ trans('admin/custom_fields/general.db_field') }}</th>
               <th data-searchable="true">{{ trans('admin/custom_fields/general.field_format') }}</th>
+              <th><i class="fa fa-lock" aria-hidden="true"></i>
+                <span class="hidden-xs hidden-sm hidden-md hidden-lg">{{ trans('admin/custom_fields/general.encrypted') }}</span>
+              </th>
               <th data-searchable="true">{{ trans('admin/custom_fields/general.field_element_short') }}</th>
               <th data-searchable="true">{{ trans('admin/custom_fields/general.fieldsets') }}</th>
               <th>{{ trans('button.actions') }}</th>
@@ -147,10 +150,12 @@
               <td>
                  <code>{{ $field->convertUnicodeDbSlug() }}</code>
                 @if ($field->convertUnicodeDbSlug()!=$field->db_column)
-                  <br><i class="fas fa-exclamation-triangle text-danger"></i>{{!! trans('admin/custom_fields/general.db_convert_warning', array('db_column' => $field->db_column, 'expected' => $field->convertUnicodeDbSlug())) !!}}
+                  <br><i class="fas fa-exclamation-triangle text-danger"></i>
+                  {!! trans('admin/custom_fields/general.db_convert_warning',['db_column' => $field->db_column, 'expected' => $field->convertUnicodeDbSlug()]) !!}
                 @endif
               </td>
               <td>{{ $field->format }}</td>
+              <td>{!!  ($field->field_encrypted=='1' ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times text-danger"></i>') !!}</td>
               <td>{{ $field->element }}</td>
               <td>
                 @foreach($field->fieldset as $fieldset)

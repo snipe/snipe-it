@@ -51,6 +51,7 @@ class SamlController extends Controller
         $metadata = $this->saml->getSPMetadata();
 
         if (empty($metadata)) {
+            \Log::debug('SAML metadata is empty - return a 403');
             return response()->view('errors.403', [], 403);
         }
 
@@ -141,6 +142,6 @@ class SamlController extends Controller
             return view('errors.403');
         }
 
-        return redirect()->route('logout')->with('saml_slo_redirect_url', $sloUrl);
+        return redirect()->route('logout')->with(['saml_logout' => true,'saml_slo_redirect_url' => $sloUrl]);
     }
 }

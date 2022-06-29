@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Advertencia:</strong> este activo ha sido marcado actualmente como no enviable.                         Si este estado cambia, por favor actualiza el estado de activos.',
     'does_not_exist' 	=> 'El activo no existe.',
-    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
+    'does_not_exist_or_not_requestable' => 'Ese activo no existe o no es solicitable.',
     'assoc_users'	 	=> 'Este activo está actualmente asignado a un usuario y no puede ser borrado. Por favor, revisa el activo primero y luego intenta borrarlo. ',
 
     'create' => [
@@ -16,6 +16,7 @@ return [
         'error'   			=> 'Activo no ha sido actualizado, por favor, inténtelo de nuevo',
         'success' 			=> 'Activo actualizado con éxito.',
         'nothing_updated'	=>  'Ningún campo fue seleccionado, así que nada se actualizó.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

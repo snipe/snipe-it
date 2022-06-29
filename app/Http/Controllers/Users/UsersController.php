@@ -116,6 +116,8 @@ class UsersController extends Controller
         $user->country = $request->input('country', null);
         $user->zip = $request->input('zip', null);
         $user->remote = $request->input('remote', 0);
+        $user->website = $request->input('website', null);
+        $user->created_by = Auth::user()->id;
 
         // Strip out the superuser permission if the user isn't a superadmin
         $permissions_array = $request->input('permission');
@@ -266,6 +268,7 @@ class UsersController extends Controller
         $user->activated = $request->input('activated', 0);
         $user->zip = $request->input('zip', null);
         $user->remote = $request->input('remote', 0);
+        $user->website = $request->input('website', null);
 
         // Update the location of any assets checked out to this user
         Asset::where('assigned_type', User::class)
@@ -625,9 +628,8 @@ class UsersController extends Controller
             $credentials = ['email' => trim($user->email)];
 
             try {
-                \Password::sendResetLink($credentials, function (Message $message) use ($user) {
-                    $message->subject($this->getEmailSubject());
-                });
+
+                Password::sendResetLink($credentials);
 
                 return redirect()->back()->with('success', trans('admin/users/message.password_reset_sent', ['email' => $user->email]));
             } catch (\Exception $e) {

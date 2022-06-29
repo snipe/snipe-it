@@ -16,6 +16,7 @@ return [
         'error'   			=> 'Sredstvo ni bilo posodobljeno, poskusite znova',
         'success' 			=> 'Sredstvo je uspešno posodobljeno.',
         'nothing_updated'	=>  'Nobeno polje ni bilo izbrana, zato nebo nič posodobljeno.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

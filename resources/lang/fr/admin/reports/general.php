@@ -5,6 +5,6 @@ return [
     'deleted_user' => 'Utilisateur supprimé',
     'send_reminder' => 'Envoyer un rappel',
     'reminder_sent' => 'Rappel envoyé',
-    'acceptance_deleted' => 'Acceptance request deleted',
-    'acceptance_request' => 'Acceptance request'
+    'acceptance_deleted' => 'Demande d\'acceptation supprimée',
+    'acceptance_request' => 'Demande d\'acceptation'
 ];

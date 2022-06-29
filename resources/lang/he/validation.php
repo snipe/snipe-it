@@ -64,11 +64,11 @@ return [
         'string'  => 'התכונה: חייבת להיות לפחות: דקות תווים.',
         'array'   => 'התכונה: חייבת לכלול לפחות פריטים מינימליים.',
     ],
-    'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'starts_with'          => 'השדה חייב להכיל לפחות אחד מהערכים הבאים.',
     'not_in'               => 'התכונה שנבחרה: אינה חוקית.',
     'numeric'              => 'התכונה: חייבת להיות מספר.',
     'present'              => 'שדה התכונה: חייב להיות נוכח.',
-    'valid_regex'          => 'That is not a valid regex. ',
+    'valid_regex'          => 'הקלט לא חוקי. ',
     'regex'                => 'תבנית התכונה: אינה חוקית.',
     'required'             => 'שדה התכונה: נדרש.',
     'required_if'          => 'שדה התכונה: נדרש כאשר: other is: value.',
@@ -89,8 +89,12 @@ return [
     'unique'               => 'התכונה: כבר נלקחה.',
     'uploaded'             => 'התכונה: נכשלה.',
     'url'                  => 'תבנית התכונה: אינה חוקית.',
-    'unique_undeleted'     => 'The :attribute must be unique.',
+    'unique_undeleted'     => 'השדה חייב מזהה יחודי.',
     'non_circular'         => 'The :attribute must not create a circular reference.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

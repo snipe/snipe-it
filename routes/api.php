@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:'.config('app.api_throttle_per_minute').',1']], function () {
+Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], function () {
 
 
     Route::get('/', function () {
@@ -47,6 +47,27 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:'.config('app.
                 'requestable'
             ]
         )->name('api.assets.requestable');
+
+        Route::post('personal-access-tokens',
+            [
+                Api\ProfileController::class,
+                'createApiToken'
+            ]
+        )->name('api.personal-access-token.create');
+
+        Route::get('personal-access-tokens',
+            [
+                Api\ProfileController::class,
+                'showApiTokens'
+            ]
+        )->name('api.personal-access-token.index');
+
+        Route::delete('personal-access-tokens/{tokenId}',
+            [
+                Api\ProfileController::class,
+                'deleteApiToken'
+            ]
+        )->name('api.personal-access-token.delete');
 
 
 
@@ -87,22 +108,24 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:'.config('app.
             ]
         )->name('api.accessories.selectlist');
 
-        Route::resource('accessories', 
-            Api\AccessoriesController::class,
-            ['names' => 
-                [
-                    'index' => 'api.accessories.index',
-                    'show' => 'api.accessories.show',
-                    'update' => 'api.accessories.update',
-                    'store' => 'api.accessories.store',
-                    'destroy' => 'api.accessories.destroy',
-                    ],
-            'except' => ['create', 'edit'],
-            'parameters' => ['accessory' => 'accessory_id'],
-            ]
-        );
+
 
      }); // end accessories group
+
+    Route::resource('accessories',
+        Api\AccessoriesController::class,
+        ['names' =>
+            [
+                'index' => 'api.accessories.index',
+                'show' => 'api.accessories.show',
+                'update' => 'api.accessories.update',
+                'store' => 'api.accessories.store',
+                'destroy' => 'api.accessories.destroy',
+            ],
+            'except' => ['create', 'edit'],
+            'parameters' => ['accessory' => 'accessory_id'],
+        ]
+    );
 
      
      /**
@@ -439,6 +462,13 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:'.config('app.
         )->name('api.assets.show.bytag')
         ->where('any', '.*');
 
+        Route::post('bytag/{any}/checkout',
+            [
+                Api\AssetsController::class, 
+                'checkoutByTag'
+            ]
+        )->name('api.assets.checkout.bytag');
+
         Route::get('byserial/{any}',
             [
                 Api\AssetsController::class, 
@@ -481,7 +511,18 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:'.config('app.
             'checkout'
         ]
         )->name('api.asset.checkout');
-      }); 
+
+      Route::post('{asset_id}/restore',
+          [
+              Api\AssetsController::class,
+              'restore'
+          ]
+      )->name('api.assets.restore');
+
+      });
+
+
+
 
 
         Route::resource('hardware', 
@@ -752,6 +793,20 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:'.config('app.
             ]
             )->name('api.settings.mailtest');
 
+            Route::get('backups',
+                [
+                    Api\SettingsController::class,
+                    'listBackups'
+                ]
+            )->name('api.settings.backups.index');
+
+            Route::get('backups/download/{file}',
+                [
+                    Api\SettingsController::class,
+                    'downloadBackup'
+                ]
+            )->name('api.settings.backups.download');
+
         }); 
         
         Route::resource('settings', 
@@ -1000,7 +1055,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:'.config('app.
             Route::post('models',
                 [
                     Api\PredefinedKitsController::class, 
-                    'storeModels'
+                    'storeModel'
                 ]
             )->name('api.kits.models.store');
 

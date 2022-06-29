@@ -91,6 +91,10 @@ return [
     'url'                  => 'ان تنسيق :attribute غير صالح.',
     'unique_undeleted'     => ':attribute يجب ان تكون فريدة.',
     'non_circular'         => 'يجب ألا تنشئ السمة مرجعًا دائريًا.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

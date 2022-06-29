@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'Е-пошта',
     'employee_num'      	=> 'Број на вработен',
     'first_name' 			=> 'Име',
-    'groupnotes'			=> 'Изберете група во која ќе биде вклучен корисникот. Корисникот ги презема дозволите на групата што му е доделена.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'ID',
     'inherit'  				=> 'Наследено',
     'job' 					=> 'Работна позиција',

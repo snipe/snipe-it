@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Tuhinga',
     'activated'			    => 'Kua whakahohe',
     'accessory'				=> 'Waea Uru',
@@ -26,6 +26,7 @@
     'audit'				    => 'Arotake',
     'audit_report'			=> 'Manatoko Whakamuri',
     'assets'				=> 'Ngā taonga',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => 'Mukua te Avatar',
     'avatar_upload'         => 'Tukuake Avatar',
     'back'      			=> 'Hoki',
@@ -96,6 +97,7 @@
     'eol'					=> 'EOL',
     'email_domain'			=> 'Ingoa Īmēra',
     'email_format'			=> 'Hōputu Īmēra',
+    'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'Ka whakamahia tenei ki te whakaputa i nga wahitau īmēra ina kawemai',
     'error'				    => 'Error',
     'filastname_format'			=> 'Tuatahi Ingoa Tuatahi (jsmith@example.com)',
@@ -113,6 +115,7 @@
     'files'                 => 'Files',
     'file_name'				=> 'Kōnae',
     'file_type'             => 'File Type',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'Ngā Tukunga Kōnae',
     'file_upload'           => 'File Upload',
     'generate'				=> 'Whakanuia',
@@ -192,6 +195,8 @@
     'qty'		            => 'QTY',
     'quantity'		        => 'Maha',
     'quantity_minimum'      => 'You have :count items below or almost below minimum quantity levels',
+    'quickscan_checkin'  	=> 'Quick Scan Checkin',
+    'quickscan_checkin_status'  	=> 'Checkin Status',
     'ready_to_deploy'		=> 'Kua rite ki te Whakamahia',
     'recent_activity'		=> 'Mahi Hou',
     'remaining'             => 'Remaining',
@@ -226,6 +231,7 @@
     'show_current'  		=> 'Show Current',
     'sign_in'				=> 'Waitohu',
     'signature'             => 'Waitohu',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Skin',
     'slack_msg_note'        => 'A slack message will be sent',
     'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',
@@ -234,6 +240,7 @@
     'state'  				=> 'State',
     'status_labels'			=> 'Ngā Tapanga Tūnga',
     'status'    			=> 'Tūnga',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Kaihoko',
     'suppliers'  			=> 'Kaihoko',
     'sure_to_delete'    => 'Kei te hiahia koe kia mukua',
@@ -347,4 +354,7 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

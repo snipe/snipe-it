@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'I-imeyili',
     'employee_num'      	=> 'I-Employee No.',
     'first_name' 			=> 'Igama',
-    'groupnotes'			=> 'Khetha iqembu ukuze ulinike umsebenzisi, khumbula ukuthi umsebenzisi uthatha izimvume zeqembu abelwe zona.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Ifa',
     'job' 					=> 'Isihloko somsebenzi',

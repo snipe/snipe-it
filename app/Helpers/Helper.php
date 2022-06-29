@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Helpers;
-
 use App\Models\Accessory;
 use App\Models\Component;
 use App\Models\Consumable;
@@ -842,6 +841,16 @@ class Helper
         return preg_replace('/\s+/u', '_', trim($string));
     }
 
+    /**
+     * Return an array (or null) of the the raw and formatted date object for easy use in
+     * the API and the bootstrap table listings.
+     *
+     * @param $date
+     * @param $type
+     * @param $array
+     * @return array|string|null
+     */
+
     public static function getFormattedDateObject($date, $type = 'datetime', $array = true)
     {
         if ($date == '') {
@@ -849,21 +858,42 @@ class Helper
         }
 
         $settings = Setting::getSettings();
-        $tmp_date = new \Carbon($date);
 
-        if ($type == 'datetime') {
-            $dt['datetime'] = $tmp_date->format('Y-m-d H:i:s');
-            $dt['formatted'] = $tmp_date->format($settings->date_display_format.' '.$settings->time_display_format);
-        } else {
-            $dt['date'] = $tmp_date->format('Y-m-d');
-            $dt['formatted'] = $tmp_date->format($settings->date_display_format);
+        /**
+         * Wrap this in a try/catch so that if Carbon crashes, for example if the $date value
+         * isn't actually valid, we don't crash out completely.
+         *
+         * While this *shouldn't* typically happen since we validate dates before entering them
+         * into the database (and we use date/datetime fields for native fields in the system),
+         * it is a possible scenario that a custom field could be created as an "ANY" field, data gets
+         * added, and then the custom field format gets edited later. If someone put bad data in the
+         * database before then - or if they manually edited the field's value - it will crash.
+         *
+         */
+
+
+        try {
+            $tmp_date = new \Carbon($date);
+
+            if ($type == 'datetime') {
+                $dt['datetime'] = $tmp_date->format('Y-m-d H:i:s');
+                $dt['formatted'] = $tmp_date->format($settings->date_display_format.' '.$settings->time_display_format);
+            } else {
+                $dt['date'] = $tmp_date->format('Y-m-d');
+                $dt['formatted'] = $tmp_date->format($settings->date_display_format);
+            }
+
+            if ($array == 'true') {
+                return $dt;
+            }
+
+            return $dt['formatted'];
+
+        } catch (\Exception $e) {
+            \Log::warning($e);
+            return $date.' (Invalid '.$type.' value.)';
         }
 
-        if ($array == 'true') {
-            return $dt;
-        }
-
-        return $dt['formatted'];
     }
 
     // Nicked from Drupal :)
@@ -1059,4 +1089,40 @@ class Helper
 
         return $file_name;
     }
+
+    public static function formatFilesizeUnits($bytes)
+    {
+        if ($bytes >= 1073741824)
+        {
+            $bytes = number_format($bytes / 1073741824, 2) . ' GB';
+        }
+        elseif ($bytes >= 1048576)
+        {
+            $bytes = number_format($bytes / 1048576, 2) . ' MB';
+        }
+        elseif ($bytes >= 1024)
+        {
+            $bytes = number_format($bytes / 1024, 2) . ' KB';
+        }
+        elseif ($bytes > 1)
+        {
+            $bytes = $bytes . ' bytes';
+        }
+        elseif ($bytes == 1)
+        {
+            $bytes = $bytes . ' byte';
+        }
+        else
+        {
+            $bytes = '0 bytes';
+        }
+
+        return $bytes;
+    }
+    public static function SettingUrls(){
+        $settings=['#','fields.index', 'statuslabels.index', 'models.index', 'categories.index', 'manufacturers.index', 'suppliers.index', 'departments.index', 'locations.index', 'companies.index', 'depreciations.index'];
+
+        return $settings;
+        }
+
 }

@@ -6,6 +6,7 @@ return [
     'archived'  				=> 'காப்பகப்படுத்தியவை',
     'asset'  					=> 'சொத்து',
     'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkin'              => 'Checkin Assets',
     'checkin'  					=> 'சரிபார்ப்பு சொத்து',
     'checkout'  				=> 'சரிபார்ப்புச் சொத்து',
     'clone'  					=> 'குளோன் சொத்து',

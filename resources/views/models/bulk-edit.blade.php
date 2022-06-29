@@ -75,14 +75,14 @@
                             <!-- requestable -->
                                 <div class="form-group {{ $errors->has('requestable') ? 'has-error' : '' }}">
                                 <div class="col-md-7 col-md-offset-3">
-                            
+
 
                                     <div class="checkbox">
                                         <label for="requestable">
-                                            {{ Form::radio('requestable', '', true, ['aria-label'=>'requestable']) }} {{  trans('admin/hardware/general.requestable_status_warning')}}<br>
-                                            {{ Form::radio('requestable', '1', old('requestable'), ['aria-label'=>'requestable']) }}  {{  trans('admin/hardware/general.requestable')}} <br>
-                                            {{ Form::radio('requestable', '0', old('requestable'), ['aria-label'=>'requestable']) }}  {{  trans('admin/hardware/general.not_requestable')}}
-    
+                                            {{ Form::radio('requestable', '', true, ['aria-label'=>'requestable', 'class'=>'minimal']) }} {{  trans('admin/hardware/general.requestable_status_warning')}}<br>
+                                            {{ Form::radio('requestable', '1', old('requestable'), ['aria-label'=>'requestable', 'class'=>'minimal']) }}  {{  trans('admin/hardware/general.requestable')}} <br>
+                                            {{ Form::radio('requestable', '0', old('requestable'), ['aria-label'=>'requestable', 'class'=>'minimal']) }}  {{  trans('admin/hardware/general.not_requestable')}}
+
                                         </label>
                                     </div>
 

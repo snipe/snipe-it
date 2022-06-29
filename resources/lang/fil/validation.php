@@ -91,6 +91,10 @@ return [
     'url'                  => 'Ang :pormat ng katangian ng pormat ay hindi balido.',
     'unique_undeleted'     => 'Ang :katangian ay dapat na natatangi.',
     'non_circular'         => 'The :attribute must not create a circular reference.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

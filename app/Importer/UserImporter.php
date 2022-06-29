@@ -2,7 +2,9 @@
 
 namespace App\Importer;
 
+use App\Models\Asset;
 use App\Models\Department;
+use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\WelcomeNotification;
 
@@ -60,6 +62,13 @@ class UserImporter extends ItemImporter
         if ($this->shouldUpdateField($user_department)) {
             $this->item['department_id'] = $this->createOrFetchDepartment($user_department);
         }
+
+        if (is_null($this->item['username']) || $this->item['username'] == "") {
+            $user_full_name = $this->item['first_name'] . ' ' . $this->item['last_name'];
+            $user_formatted_array = User::generateFormattedNameFromFullName($user_full_name, Setting::getSettings()->username_format);
+            $this->item['username'] = $user_formatted_array['username'];
+        }
+        
         $user = User::where('username', $this->item['username'])->first();
         if ($user) {
             if (! $this->updating) {
@@ -71,6 +80,12 @@ class UserImporter extends ItemImporter
             $this->log('Updating User');
             $user->update($this->sanitizeItemForUpdating($user));
             $user->save();
+
+            // Update the location of any assets checked out to this user
+            Asset::where('assigned_type', User::class)
+                ->where('assigned_to', $user->id)
+                ->update(['location_id' => $user->location_id]);
+            
             // \Log::debug('UserImporter.php Updated User ' . print_r($user, true));
             return;
         }

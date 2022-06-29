@@ -68,8 +68,6 @@ class AccessoriesTransformer
         $array = [];
 
         foreach ($accessory_users as $user) {
-            \Log::debug(print_r($user->pivot, true));
-            \Log::debug(print_r($user->pivot, true));
             $array[] = [
 
                 'assigned_pivot_id' => $user->pivot->id,

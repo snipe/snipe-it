@@ -17,6 +17,7 @@ return [
         'error'   			=> 'Ang asset ay hindi nai-update, mangyaring subukang muli',
         'success' 			=> 'Ang asset ay matagumpay na nai-update.',
         'nothing_updated'	=>  'Walang napiling mga fields, kaya walang nai-update.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

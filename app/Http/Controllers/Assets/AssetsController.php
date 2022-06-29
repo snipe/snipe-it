@@ -20,6 +20,7 @@ use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Cookie;
 use Input;
 use Intervention\Image\Facades\Image;
 use League\Csv\Reader;
@@ -137,12 +138,12 @@ class AssetsController extends Controller
             $asset->archived                = '0';
             $asset->physical                = '1';
             $asset->depreciate              = '0';
-            $asset->status_id               = request('status_id', 0);
+            $asset->status_id               = request('status_id');
             $asset->warranty_months         = request('warranty_months', null);
             $asset->purchase_cost           = Helper::ParseCurrency($request->get('purchase_cost'));
             $asset->purchase_date           = request('purchase_date', null);
             $asset->assigned_to             = request('assigned_to', null);
-            $asset->supplier_id             = request('supplier_id', 0);
+            $asset->supplier_id             = request('supplier_id', null);
             $asset->requestable             = request('requestable', 0);
             $asset->rtd_location_id         = request('rtd_location_id', null);
 
@@ -167,17 +168,17 @@ class AssetsController extends Controller
                 foreach ($model->fieldset->fields as $field) {
                     if ($field->field_encrypted == '1') {
                         if (Gate::allows('admin')) {
-                            if (is_array($request->input($field->convertUnicodeDbSlug()))) {
-                                $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(e(implode(', ', $request->input($field->convertUnicodeDbSlug()))));
+                            if (is_array($request->input($field->db_column))) {
+                                $asset->{$field->db_column} = \Crypt::encrypt(implode(', ', $request->input($field->db_column)));
                             } else {
-                                $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(e($request->input($field->convertUnicodeDbSlug())));
+                                $asset->{$field->db_column} = \Crypt::encrypt($request->input($field->db_column));
                             }
                         }
                     } else {
-                        if (is_array($request->input($field->convertUnicodeDbSlug()))) {
-                            $asset->{$field->convertUnicodeDbSlug()} = implode(', ', $request->input($field->convertUnicodeDbSlug()));
+                        if (is_array($request->input($field->db_column))) {
+                            $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
                         } else {
-                            $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
+                            $asset->{$field->db_column} = $request->input($field->db_column);
                         }
                     }
                 }
@@ -201,17 +202,29 @@ class AssetsController extends Controller
                 }
 
                 $success = true;
+                
             }
         }
 
         if ($success) {
             // Redirect to the asset listing page
+            $minutes = 518400;
+            // dd( $_POST['options']);
+            // Cookie::queue(Cookie::make('optional_info', json_decode($_POST['options']), $minutes));
             return redirect()->route('hardware.index')
                 ->with('success', trans('admin/hardware/message.create.success'));
+               
+      
         }
 
         return redirect()->back()->withInput()->withErrors($asset->getErrors());
     }
+
+    public function getOptionCookie(Request $request){
+        $value = $request->cookie('optional_info');
+        echo $value;
+        return $value;
+     }
 
     /**
      * Returns a view that presents a form to edit an existing asset.
@@ -343,17 +356,17 @@ class AssetsController extends Controller
             foreach ($model->fieldset->fields as $field) {
                 if ($field->field_encrypted == '1') {
                     if (Gate::allows('admin')) {
-                        if (is_array($request->input($field->convertUnicodeDbSlug()))) {
-                            $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(e(implode(', ', $request->input($field->convertUnicodeDbSlug()))));
+                        if (is_array($request->input($field->db_column))) {
+                            $asset->{$field->db_column} = \Crypt::encrypt(implode(', ', $request->input($field->db_column)));
                         } else {
-                            $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(e($request->input($field->convertUnicodeDbSlug())));
+                            $asset->{$field->db_column} = \Crypt::encrypt($request->input($field->db_column));
                         }
                     }
                 } else {
-                    if (is_array($request->input($field->convertUnicodeDbSlug()))) {
-                        $asset->{$field->convertUnicodeDbSlug()} = implode(', ', $request->input($field->convertUnicodeDbSlug()));
+                    if (is_array($request->input($field->db_column))) {
+                        $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
                     } else {
-                        $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
+                        $asset->{$field->db_column} = $request->input($field->db_column);
                     }
                 }
             }
@@ -861,12 +874,13 @@ class AssetsController extends Controller
 
 
             $asset->logAudit($request->input('note'), $request->input('location_id'), $file_name);
-            return redirect()->to('hardware')->with('success', trans('admin/hardware/message.audit.success'));
+            return redirect()->route('assets.audit.due')->with('success', trans('admin/hardware/message.audit.success'));
         }
     }
 
     public function getRequestedIndex($user_id = null)
     {
+        $this->authorize('index', Asset::class);
         $requestedItems = CheckoutRequest::with('user', 'requestedItem')->whereNull('canceled_at')->with('user', 'requestedItem');
 
         if ($user_id) {

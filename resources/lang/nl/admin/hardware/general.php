@@ -6,6 +6,7 @@ return [
     'archived'  				=> 'Gearchiveerd',
     'asset'  					=> 'Asset',
     'bulk_checkout'             => 'Asset uitchecken',
+    'bulk_checkin'              => 'Assets inchecken',
     'checkin'  					=> 'Asset inchecken',
     'checkout'  				=> 'Asset uitchecken',
     'clone'  					=> 'Dupliceer Asset',

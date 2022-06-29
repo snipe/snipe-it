@@ -37,7 +37,7 @@ return array(
     'over'     => 'Total checked out number is greater than available stock',
     'under'    => 'Total number below minimum acceptable amount',
     'not_in'   => 'Total checked out number cannot be zero',
-    
+  
 
 
 );

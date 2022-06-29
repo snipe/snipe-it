@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Tarvikud',
     'activated'			    => 'Aktiveeritud',
     'accessory'				=> 'Tarvik',
@@ -26,6 +26,7 @@
     'audit'				    => 'Auditeerimine',
     'audit_report'			=> 'Auditilogi',
     'assets'				=> 'Vahendid',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => 'Kustuta profiilipilt',
     'avatar_upload'         => 'Lae profiilipilt',
     'back'      			=> 'Tagasi',
@@ -96,6 +97,7 @@
     'eol'					=> 'EOL',
     'email_domain'			=> 'E-posti domeen',
     'email_format'			=> 'E-maili formaat',
+    'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'Seda kasutatakse importimisel e-posti aadresside loomiseks',
     'error'				    => 'Error',
     'filastname_format'			=> 'Esimene esmane perekonnanimi (jsmith@example.com)',
@@ -113,6 +115,7 @@
     'files'                 => 'Failid',
     'file_name'				=> 'Fail',
     'file_type'             => 'Faili tüüp',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'Faili üleslaadimine',
     'file_upload'           => 'File Upload',
     'generate'				=> 'Genereeri',
@@ -192,6 +195,8 @@
     'qty'		            => 'Hulk',
     'quantity'		        => 'Hulk',
     'quantity_minimum'      => 'You have :count items below or almost below minimum quantity levels',
+    'quickscan_checkin'  	=> 'Quick Scan Checkin',
+    'quickscan_checkin_status'  	=> 'Checkin Status',
     'ready_to_deploy'		=> 'Kasutamine valmis',
     'recent_activity'		=> 'Viimane tegevus',
     'remaining'             => 'Remaining',
@@ -226,6 +231,7 @@
     'show_current'  		=> 'Näita käesolevat',
     'sign_in'				=> 'Logi sisse',
     'signature'             => 'Allkiri',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Väljanägemine',
     'slack_msg_note'        => 'A slack message will be sent',
     'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',
@@ -234,6 +240,7 @@
     'state'  				=> 'Maakond',
     'status_labels'			=> 'Oleku sildid',
     'status'    			=> 'Staatus',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Tarnija',
     'suppliers'  			=> 'Tarnijad',
     'sure_to_delete'    => 'Kas olete kindel, et soovite kustutada',
@@ -347,4 +354,7 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

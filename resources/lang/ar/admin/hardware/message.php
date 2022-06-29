@@ -16,6 +16,7 @@ return [
         'error'   			=> 'لم يتم تحديث الأصل، يرجى إعادة المحاولة',
         'success' 			=> 'تم تحديث الأصل بنجاح.',
         'nothing_updated'	=>  'لم يتم اختيار أي حقول، لذلك لم يتم تحديث أي شيء.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [

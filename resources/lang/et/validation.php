@@ -91,6 +91,10 @@ return [
     'url'                  => 'Atribuudivorming on vale.',
     'unique_undeleted'     => ':attribute peab olema ainulaadne.',
     'non_circular'         => 'The :attribute must not create a circular reference.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

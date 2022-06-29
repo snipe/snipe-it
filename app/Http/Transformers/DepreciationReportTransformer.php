@@ -98,7 +98,7 @@ class DepreciationReportTransformer
             'purchase_cost' => Helper::formatCurrencyOutput($asset->purchase_cost),
             'book_value' => Helper::formatCurrencyOutput($depreciated_value),
             'monthly_depreciation' => $monthly_depreciation,
-            'checked_out_to' => $checkout_target,
+            'checked_out_to' => ($checkout_target) ? e($checkout_target) : null,
             'diff' =>  Helper::formatCurrencyOutput($diff),
             'number_of_months' =>  ($asset->model && $asset->model->depreciation) ? e($asset->model->depreciation->months) : null,
             'depreciation' => (($asset->model) && ($asset->model->depreciation)) ?  e($asset->model->depreciation->name) : null,

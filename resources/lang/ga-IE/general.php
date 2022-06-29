@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Accessories',
     'activated'			    => 'Gníomhachtaithe',
     'accessory'				=> 'Cúlpháirtí',
@@ -26,6 +26,7 @@
     'audit'				    => 'Iniúchadh',
     'audit_report'			=> 'Logáil Iniúchta',
     'assets'				=> 'Sócmhainní',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => 'Scrios Avatar',
     'avatar_upload'         => 'Upload Upload',
     'back'      			=> 'Ar ais',
@@ -96,6 +97,7 @@
     'eol'					=> 'EOL',
     'email_domain'			=> 'Fearann ​​Ríomhphoist',
     'email_format'			=> 'Foirm Ríomhphoist',
+    'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'Úsáidtear é seo chun seoltaí ríomhphoist a ghiniúint nuair a allmhairítear iad',
     'error'				    => 'Error',
     'filastname_format'			=> 'An Chéad Ainm Deiridh Tosaigh (jsmith@example.com)',
@@ -113,6 +115,7 @@
     'files'                 => 'Files',
     'file_name'				=> 'Comhad',
     'file_type'             => 'File Type',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'Uaslódáil comhad',
     'file_upload'           => 'File Upload',
     'generate'				=> 'Gin',
@@ -192,6 +195,8 @@
     'qty'		            => 'QTY',
     'quantity'		        => 'Cainníocht',
     'quantity_minimum'      => 'You have :count items below or almost below minimum quantity levels',
+    'quickscan_checkin'  	=> 'Quick Scan Checkin',
+    'quickscan_checkin_status'  	=> 'Checkin Status',
     'ready_to_deploy'		=> 'Réidh le Imscaradh',
     'recent_activity'		=> 'Gníomhaíocht le déanaí',
     'remaining'             => 'Remaining',
@@ -226,6 +231,7 @@
     'show_current'  		=> 'Show Current',
     'sign_in'				=> 'Sínigh isteach',
     'signature'             => 'Síniú',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Skin',
     'slack_msg_note'        => 'A slack message will be sent',
     'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',
@@ -234,6 +240,7 @@
     'state'  				=> 'Stáit',
     'status_labels'			=> 'Lipéid Stádas',
     'status'    			=> 'Stádas',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Soláthraí',
     'suppliers'  			=> 'Soláthraithe',
     'sure_to_delete'    => 'An bhfuil tú cinnte gur mian leat a scriosadh',
@@ -347,4 +354,7 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

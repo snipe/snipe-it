@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'לא ניתן להקצות נכסים אלה לאף אחד.',
-        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
+        'deployable'   => 'ניתן להסיר את הנכסים האלו. לאחר שיוך הם יקבלו סטטוס של <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
         'archived'   => 'לא ניתן לבדוק את הנכסים האלה, והם יופיעו רק בתצוגה המפורטת בארכיון. אפשרות זו שימושית לשמירת מידע על נכסים לצורך תקצוב / מטרות היסטוריות, אך שמירה על רשימת הנכסים היומיומית.',
         'pending'   => 'נכסים אלה עדיין לא ניתן להקצות לאף אחד, משמש לעתים קרובות עבור פריטים כי הם לתיקון, אבל הם צפויים לחזור למחזור.',
     ],

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Models\Actionlog;
 use Response;
 
 class ActionlogController extends Controller
@@ -25,5 +26,11 @@ class ActionlogController extends Controller
             return Response::make($contents)->header('Content-Type', $filetype);
         }
        
+    }
+    public function getStoredEula($filename){
+        $this->authorize('view', \App\Models\Asset::class);
+        $file = config('app.private_uploads').'/eula-pdfs/'.$filename;
+
+        return Response::download($file);
     }
 }

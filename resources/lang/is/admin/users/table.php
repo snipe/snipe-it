@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'Netfang',
     'employee_num'      	=> 'Employee No.',
     'first_name' 			=> 'First Name',
-    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Inherit',
     'job' 					=> 'Starfsheiti',

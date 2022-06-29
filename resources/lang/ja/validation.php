@@ -91,6 +91,10 @@ return [
     'url'                  => ':attribute フォーマットが不正です。',
     'unique_undeleted'     => ':attribute は 一意の値である必要があります。',
     'non_circular'         => ':attribute は、循環参照を作成してはいけません。',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

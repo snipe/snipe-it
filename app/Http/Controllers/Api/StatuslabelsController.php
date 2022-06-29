@@ -30,16 +30,20 @@ class StatuslabelsController extends Controller
             $statuslabels = $statuslabels->TextSearch($request->input('search'));
         }
 
+        if ($request->filled('name')) {
+            $statuslabels->where('name', '=', $request->input('name'));
+        }
+
 
         // if a status_type is passed, filter by that
         if ($request->filled('status_type')) {
-            if (strtolower($request->input('status_type'))== 'pending') {
+            if (strtolower($request->input('status_type')) == 'pending') {
                 $statuslabels = $statuslabels->Pending();
-            } elseif (strtolower($request->input('status_type'))== 'archived') {
+            } elseif (strtolower($request->input('status_type')) == 'archived') {
                 $statuslabels = $statuslabels->Archived();
-            } elseif (strtolower($request->input('status_type'))== 'deployable') {
+            } elseif (strtolower($request->input('status_type')) == 'deployable') {
                 $statuslabels = $statuslabels->Deployable();
-            } elseif (strtolower($request->input('status_type'))== 'undeployable') {
+            } elseif (strtolower($request->input('status_type')) == 'undeployable') {
                 $statuslabels = $statuslabels->Undeployable();
             }
         }
@@ -94,8 +98,8 @@ class StatuslabelsController extends Controller
         if ($statuslabel->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $statuslabel, trans('admin/statuslabels/message.create.success')));
         }
-
         return response()->json(Helper::formatStandardApiResponse('error', null, $statuslabel->getErrors()));
+
     }
 
     /**
@@ -114,6 +118,7 @@ class StatuslabelsController extends Controller
         return (new StatuslabelsTransformer)->transformStatuslabel($statuslabel);
     }
 
+
     /**
      * Update the specified resource in storage.
      *
@@ -129,6 +134,7 @@ class StatuslabelsController extends Controller
         $statuslabel = Statuslabel::findOrFail($id);
         
         $request->except('deployable', 'pending', 'archived');
+
 
         if (! $request->filled('type')) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Status label type is required.'));
@@ -174,6 +180,8 @@ class StatuslabelsController extends Controller
 
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/statuslabels/message.assoc_assets')));
     }
+
+
 
      /**
      * Show a count of assets by status label for pie chart

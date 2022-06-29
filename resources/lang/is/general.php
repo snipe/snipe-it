@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Aukahlutir',
     'activated'			    => 'Virkjað',
     'accessory'				=> 'Aukahlutur',
@@ -26,6 +26,7 @@
     'audit'				    => 'Úttekt',
     'audit_report'			=> 'Úttektarsaga',
     'assets'				=> 'Eignir',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => 'Delete Avatar',
     'avatar_upload'         => 'Upload Avatar',
     'back'      			=> 'Til baka',
@@ -96,6 +97,7 @@
     'eol'					=> 'Lok línu',
     'email_domain'			=> 'Lén tölvupósts',
     'email_format'			=> 'Email Format',
+    'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'This is used to generate email addresses when importing',
     'error'				    => 'Error',
     'filastname_format'			=> 'First Initial Last Name (jsmith@example.com)',
@@ -113,6 +115,7 @@
     'files'                 => 'Files',
     'file_name'				=> 'Skrá',
     'file_type'             => 'Skráartegund',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'File Uploads',
     'file_upload'           => 'File Upload',
     'generate'				=> 'Generate',
@@ -192,6 +195,8 @@
     'qty'		            => 'Fj',
     'quantity'		        => 'Fjöldi',
     'quantity_minimum'      => 'You have :count items below or almost below minimum quantity levels',
+    'quickscan_checkin'  	=> 'Quick Scan Checkin',
+    'quickscan_checkin_status'  	=> 'Checkin Status',
     'ready_to_deploy'		=> 'Tilbúin til notkunar',
     'recent_activity'		=> 'Nýleg virkni',
     'remaining'             => 'Remaining',
@@ -226,6 +231,7 @@
     'show_current'  		=> 'Sýna núverandi',
     'sign_in'				=> 'Skrá inn',
     'signature'             => 'Undirskrift',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Útlit',
     'slack_msg_note'        => 'A slack message will be sent',
     'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',
@@ -234,6 +240,7 @@
     'state'  				=> 'Ríki',
     'status_labels'			=> 'Status Labels',
     'status'    			=> 'Staða',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Framleiðandi',
     'suppliers'  			=> 'Framleiðendur',
     'sure_to_delete'    => 'Are you sure you wish to delete',
@@ -347,4 +354,7 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];

@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'אֶלֶקטרוֹנִי',
     'employee_num'      	=> 'מספר עובד',
     'first_name' 			=> 'שם פרטי',
-    'groupnotes'			=> 'בחר קבוצה כדי להקצות למשתמש, זכור כי משתמש לוקח את ההרשאות של הקבוצה הם מוקצים.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'תְעוּדַת זֶהוּת',
     'inherit'  				=> 'לָרֶשֶׁת',
     'job' 					=> 'הגדרת תפקיד',

@@ -65,7 +65,7 @@
 
   &.btn-primary, .btn-primary:link {
     background-color: darken(@red, 10%);
-    border-color: darken(@red, 20%);
+    border-color: #FFF;
     color: #fff;
   }
 
@@ -132,6 +132,9 @@ a {
 
 .bootstrap-table .fixed-table-container .table thead th .sortable {
   color: var(--nav-link);
+}
+.bootstrap-table .fixed-table-toolbar .columns label {
+  color:#000;
 }
 
 .thead, .navbar-nav>li>a:link {
@@ -204,7 +207,7 @@ body {
   color: var(--link);
 }
 .btn-primary, .btn-primary.hover, .btn-primary:active, .text-red {
-  color: var(--text-main)!important;
+  color: var(--button-primary);
 }
 .btn-primary:hover {
   background-color: var(--button-primary);
@@ -387,6 +390,15 @@ a {
   color: var(--text-main);
   border-top: 1px solid #dddddd;
   display: table-cell;
+}
+
+.row-new-striped > .row:nth-of-type(odd){
+  background-color: var(--back-sub);
+  color: var(--text-main);
+}
+.row-new-striped > .row:nth-of-type(even){
+  background-color: var(--back-sub-alt);
+  color: var(--text-main);
 }
 
 .search-highlight, .search-highlight:hover {

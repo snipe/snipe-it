@@ -1,6 +1,6 @@
 <?php
 
-    return array(
+    return [
         'asset_maintenances' => 'Asset Maintenances',
         'edit'               => 'Edit Asset Maintenance',
         'delete'             => 'Delete Asset Maintenance',
@@ -11,4 +11,4 @@
         'calibration'        => 'Calibration',
         'software_support'   => 'Software Support',
         'hardware_support'   => 'Hardware Support',
-    );
+    ];

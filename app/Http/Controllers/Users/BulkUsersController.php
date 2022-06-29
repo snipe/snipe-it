@@ -46,13 +46,13 @@ class BulkUsersController extends Controller
                 foreach ($users as $user) {
                     if (($user->activated == '1') && ($user->email != '')) {
                         $credentials = ['email' => $user->email];
-                        Password::sendResetLink($credentials, function (Message $message) {
-                            $message->subject($this->getEmailSubject());
-                        });
+                        Password::sendResetLink($credentials/* , function (Message $message) {
+                        $message->subject($this->getEmailSubject()); // TODO - I'm not sure if we still need this, but this second parameter is no longer accepted in later Laravel versions.
+                        } */ );                                      // TODO - so hopefully this doesn't give us generic password reset messages? But it at least _works_
                     }
                 }
-
                 return redirect()->back()->with('success', trans('admin/users/message.password_resets_sent'));
+
             }
         }
 
@@ -91,8 +91,10 @@ class BulkUsersController extends Controller
             ->conditionallyAddItem('company_id')
             ->conditionallyAddItem('locale')
             ->conditionallyAddItem('remote')
+            ->conditionallyAddItem('ldap_import')
             ->conditionallyAddItem('activated');
-            
+
+
         // If the manager_id is one of the users being updated, generate a warning.
         if (array_search($request->input('manager_id'), $user_raw_array)) {
             $manager_conflict = true;
@@ -103,10 +105,15 @@ class BulkUsersController extends Controller
         if (! $manager_conflict) {
             $this->conditionallyAddItem('manager_id');
         }
-
         // Save the updated info
         User::whereIn('id', $user_raw_array)
             ->where('id', '!=', Auth::id())->update($this->update_array);
+
+        if (array_key_exists('location_id', $this->update_array)){
+            Asset::where('assigned_type', User::class)
+                ->whereIn('assigned_to', $user_raw_array)
+                ->update(['location_id' => $this->update_array['location_id']]);
+        }
 
         // Only sync groups if groups were selected
         if ($request->filled('groups')) {
@@ -173,6 +180,7 @@ class BulkUsersController extends Controller
         $accessories = DB::table('accessories_users')->whereIn('assigned_to', $user_raw_array)->get();
         $licenses = DB::table('license_seats')->whereIn('assigned_to', $user_raw_array)->get();
 
+
         $this->logItemCheckinAndDelete($assets, Asset::class);
         $this->logItemCheckinAndDelete($accessories, Accessory::class);
         $this->logItemCheckinAndDelete($licenses, LicenseSeat::class);
@@ -182,6 +190,7 @@ class BulkUsersController extends Controller
             'assigned_to'   => null,
             'assigned_type' => null,
         ]);
+
 
         LicenseSeat::whereIn('id', $licenses->pluck('id'))->update(['assigned_to' => null]);
 

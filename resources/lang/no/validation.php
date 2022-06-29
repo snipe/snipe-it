@@ -91,6 +91,10 @@ return [
     'url'                  => 'Attributt-formatet :attribute er ugyldig.',
     'unique_undeleted'     => ':attribute må være unikt.',
     'non_circular'         => 'Attributtet :attribute kan ikke opprette en sirkulær referanse.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

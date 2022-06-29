@@ -104,7 +104,7 @@
                     <li class="active">
                         <a href="#details" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
-                          <i class="fas fa-info-circle fa-2x"x></i>
+                          <i class="fas fa-info-circle fa-2x"></i>
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('admin/users/general.info') }}</span>
                         </a>
@@ -116,7 +116,7 @@
                             <i class="far fa-save fa-2x" aria-hidden="true"></i>
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}
-                            {!! ($asset->licenses->count() > 0 ) ? '<badge class="badge badge-secondary">'.$asset->licenses->count().'</badge>' : '' !!}
+                            {!! ($asset->licenses->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($asset->licenses->count()).'</badge>' : '' !!}
                           </span>
                         </a>
                     </li>
@@ -127,7 +127,7 @@
                             <i class="far fa-hdd fa-2x" aria-hidden="true"></i>
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('general.components') }}
-                            {!! ($asset->components->count() > 0 ) ? '<badge class="badge badge-secondary">'.$asset->components->count().'</badge>' : '' !!}
+                            {!! ($asset->components->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($asset->components->count()).'</badge>' : '' !!}
                           </span>
                         </a>
                     </li>
@@ -138,7 +138,7 @@
                             <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}
-                            {!! ($asset->assignedAssets()->count() > 0 ) ? '<badge class="badge badge-secondary">'.$asset->assignedAssets()->count().'</badge>' : '' !!}
+                            {!! ($asset->assignedAssets()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($asset->assignedAssets()->count()).'</badge>' : '' !!}
                             
                           </span>
                         </a>
@@ -161,7 +161,7 @@
                             <i class="fas fa-wrench fa-2x" aria-hidden="true"></i>
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('general.maintenances') }}
-                            {!! ($asset->assetmaintenances()->count() > 0 ) ? '<badge class="badge badge-secondary">'.$asset->assetmaintenances()->count().'</badge>' : '' !!}
+                            {!! ($asset->assetmaintenances()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($asset->assetmaintenances()->count()).'</badge>' : '' !!}
                           </span>
                         </a>
                     </li>
@@ -172,9 +172,21 @@
                             <i class="far fa-file fa-2x" aria-hidden="true"></i>
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('general.files') }}
-                            {!! ($asset->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.$asset->uploads->count().'</badge>' : '' !!}
+                            {!! ($asset->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($asset->uploads->count()).'</badge>' : '' !!}
                           </span>
                         </a>
+                    </li>
+
+                    <li>
+                    <a href="#modelfiles" data-toggle="tab">
+                          <span class="hidden-lg hidden-md">
+                            <i class="far fa-file fa-2x" aria-hidden="true"></i>
+                          </span>
+                        <span class="hidden-xs hidden-sm">
+                            {{ trans('general.additional_files') }}
+                            {!! ($asset->model->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($asset->model->uploads->count()).'</badge>' : '' !!}
+                          </span>
+                    </a>
                     </li>
 
                    
@@ -186,6 +198,7 @@
                             </a>
                         </li>
                     @endcan
+
 
                 </ul>
                 
@@ -452,7 +465,9 @@
                                                         @endcan
 
                                                     @else
-                                                        @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
+                                                        @if (($field->format=='BOOLEAN') && ($asset->{$field->db_column_name()}!=''))
+                                                            {!! ($asset->{$field->db_column_name()} == 1) ? "<span class='fas fa-check-circle' style='color:green' />" : "<span class='fas fa-times-circle' style='color:red' />" !!}
+                                                        @elseif (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
                                                             <a href="{{ $asset->{$field->db_column_name()} }}" target="_new">{{ $asset->{$field->db_column_name()} }}</a>
                                                         @elseif (($field->format=='DATE') && ($asset->{$field->db_column_name()}!=''))
                                                             {{ \App\Helpers\Helper::getFormattedDateObject($asset->{$field->db_column_name()}, 'date', false) }}
@@ -529,7 +544,7 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                #{{ $asset->order_number }}
+                                                <a href="{{ route('hardware.index', ['order_number' => $asset->order_number]) }}">#{{ $asset->order_number }}</a>
                                             </div>
                                         </div>
                                     @endif
@@ -624,7 +639,7 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                {{ $asset->present()->eol_date() }}
+                                                {{ Helper::getFormattedDateObject($asset->present()->eol_date(), 'date', false) }}
 
 
                                                 @if ($asset->present()->months_until_eol())
@@ -1000,6 +1015,7 @@
                                                 data-search="true"
                                                 data-side-pagination="server"
                                                 data-show-columns="true"
+                                                data-show-fullscreen="true"
                                                 data-show-export="true"
                                                 data-show-refresh="true"
                                                 data-sort-order="asc"
@@ -1051,6 +1067,7 @@
                                         data-side-pagination="server"
                                         data-toolbar="#maintenance-toolbar"
                                         data-show-columns="true"
+                                        data-show-fullscreen="true"
                                         data-show-refresh="true"
                                         data-show-export="true"
                                         data-export-options='{
@@ -1077,6 +1094,7 @@
                                         data-search="true"
                                         data-side-pagination="server"
                                         data-show-columns="true"
+                                        data-show-fullscreen="true"
                                         data-show-refresh="true"
                                         data-sort-order="desc"
                                         data-sort-name="created_at"
@@ -1098,15 +1116,14 @@
                   <th class="col-sm-2" data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
                   <th class="col-sm-2" data-visible="true" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
                   <th class="col-sm-2" data-field="note">{{ trans('general.notes') }}</th>
-                  @if  ($snipeSettings->require_accept_signature=='1')
-                    <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
-                  @endif
-                  <th class="col-md-3" data-visible="false" data-field="file" data-visible="false"  data-formatter="fileUploadFormatter">{{ trans('general.download') }}</th>
+                    @if  ($snipeSettings->require_accept_signature=='1')
+                        <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
+                    @endif
+                    <th class="col-md-3" data-visible="false" data-field="file" data-visible="false"  data-formatter="fileUploadFormatter">{{ trans('general.download') }}</th>
                   <th class="col-sm-2" data-field="log_meta" data-visible="true" data-formatter="changeLogFormatter">{{ trans('admin/hardware/table.changed')}}</th>
                 </tr>
                 </thead>
               </table>
-
             </div>
           </div> <!-- /.row -->
         </div> <!-- /.tab-pane history -->
@@ -1123,7 +1140,9 @@
                       data-id-table="assetFileHistory"
                       data-search="true"
                       data-side-pagination="client"
+                      data-sortable="true"
                       data-show-columns="true"
+                      data-show-fullscreen="true"
                       data-show-refresh="true"
                       data-sort-order="desc"
                       data-sort-name="created_at"
@@ -1135,12 +1154,13 @@
                                             data-cookie-id-table="assetFileHistory">
                                         <thead>
                                         <tr>
-                                            <th data-visible="true" data-field="icon">{{trans('general.file_type')}}</th>
-                                            <th class="col-md-2" data-searchable="true" data-visible="true" data-field="notes">{{ trans('general.notes') }}</th>
+                                            <th data-visible="true" data-field="icon" data-sortable="true">{{trans('general.file_type')}}</th>
                                             <th class="col-md-2" data-searchable="true" data-visible="true" data-field="image">{{ trans('general.image') }}</th>
-                                            <th class="col-md-2" data-searchable="true" data-visible="true" data-field="filename">{{ trans('general.file_name') }}</th>
-                                            <th class="col-md-2" data-searchable="true" data-visible="true" data-field="download">{{ trans('general.download') }}</th>
-                                            <th class="col-md-2" data-searchable="true" data-visible="true" data-field="created_at">{{ trans('general.created_at') }}</th>
+                                            <th class="col-md-2" data-searchable="true" data-visible="true" data-field="filename" data-sortable="true">{{ trans('general.file_name') }}</th>
+                                            <th class="col-md-1" data-searchable="true" data-visible="true" data-field="filesize">{{ trans('general.filesize') }}</th>
+                                            <th class="col-md-2" data-searchable="true" data-visible="true" data-field="notes" data-sortable="true">{{ trans('general.notes') }}</th>
+                                            <th class="col-md-1" data-searchable="true" data-visible="true" data-field="download">{{ trans('general.download') }}</th>
+                                            <th class="col-md-2" data-searchable="true" data-visible="true" data-field="created_at" data-sortable="true">{{ trans('general.created_at') }}</th>
                                             <th class="col-md-1" data-searchable="true" data-visible="true" data-field="actions">{{ trans('table.actions') }}</th>
                                         </tr>
                                         </thead>
@@ -1149,11 +1169,6 @@
                                         @foreach ($asset->uploads as $file)
                                             <tr>
                                                 <td><i class="{{ Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i></td>
-                                                <td>
-                                                    @if ($file->note)
-                                                        {{ $file->note }}
-                                                    @endif
-                                                </td>
                                                 <td>
                                                     @if ( Helper::checkUploadIsImage($file->get_src('assets')))
                                                         <a href="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" data-toggle="lightbox" data-type="image" data-title="{{ $file->filename }}" data-footer="{{ Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}">
@@ -1164,6 +1179,14 @@
                                                 <td>
                                                     {{ $file->filename }}
                                                 </td>
+                                                <td data-value="{{ filesize(storage_path('private_uploads/assets/').$file->filename) }}">
+                                                    {{ Helper::formatFilesizeUnits(filesize(storage_path('private_uploads/assets/').$file->filename)) }}
+                                                </td>
+                                                <td>
+                                                    @if ($file->note)
+                                                        {{ $file->note }}
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     @if ($file->filename)
                                                         <a href="{{ route('show/assetfile', [$asset->id, $file->id]) }}" class="btn btn-default">
@@ -1171,17 +1194,107 @@
                                                         </a>
                                                     @endif
                                                 </td>
-
                                                 <td>
                                                     @if ($file->created_at)
                                                         {{ Helper::getFormattedDateObject($file->created_at, 'datetime', false) }}
                                                     @endif
                                                 </td>
-
-
                                                 <td>
                                                     @can('update', \App\Models\Asset::class)
                                                         <a class="btn delete-asset btn-sm btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}" data-tooltip="true" data-title="Delete" data-content="{{ trans('general.delete_confirm', ['item' => $file->filename]) }}"><i class="fas fa-trash icon-white" aria-hidden="true"></i></a>
+                                                    @endcan
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+
+                                @else
+
+                                    <div class="alert alert-info alert-block">
+                                        <i class="fas fa-info-circle"></i>
+                                        {{ trans('general.no_results') }}
+                                    </div>
+                                @endif
+
+                            </div> <!-- /.col-md-12 -->
+                        </div> <!-- /.row -->
+                    </div> <!-- /.tab-pane files -->
+
+                    <div class="tab-pane fade" id="modelfiles">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                @if ($asset->model->uploads->count() > 0)
+                                    <table
+                                            class="table table-striped snipe-table"
+                                            id="assetModelFileHistory"
+                                            data-pagination="true"
+                                            data-id-table="assetModelFileHistory"
+                                            data-search="true"
+                                            data-side-pagination="client"
+                                            data-sortable="true"
+                                            data-show-columns="true"
+                                            data-show-fullscreen="true"
+                                            data-show-refresh="true"
+                                            data-sort-order="desc"
+                                            data-sort-name="created_at"
+                                            data-show-export="true"
+                                            data-export-options='{
+                         "fileName": "export-assetmodel-{{ $asset->model->id }}-files",
+                         "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                       }'
+                                            data-cookie-id-table="assetFileHistory">
+                                        <thead>
+                                        <tr>
+                                            <th data-visible="true" data-field="icon" data-sortable="true">{{trans('general.file_type')}}</th>
+                                            <th class="col-md-2" data-searchable="true" data-visible="true" data-field="image">{{ trans('general.image') }}</th>
+                                            <th class="col-md-2" data-searchable="true" data-visible="true" data-field="filename" data-sortable="true">{{ trans('general.file_name') }}</th>
+                                            <th class="col-md-1" data-searchable="true" data-visible="true" data-field="filesize">{{ trans('general.filesize') }}</th>
+                                            <th class="col-md-2" data-searchable="true" data-visible="true" data-field="notes" data-sortable="true">{{ trans('general.notes') }}</th>
+                                            <th class="col-md-1" data-searchable="true" data-visible="true" data-field="download">{{ trans('general.download') }}</th>
+                                            <th class="col-md-2" data-searchable="true" data-visible="true" data-field="created_at" data-sortable="true">{{ trans('general.created_at') }}</th>
+                                            <th class="col-md-1" data-searchable="true" data-visible="true" data-field="actions">{{ trans('table.actions') }}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        @foreach ($asset->model->uploads as $file)
+                                            <tr>
+                                                <td><i class="{{ Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i></td>
+                                                <td>
+                                                    @if ( Helper::checkUploadIsImage($file->get_src('assets')))
+                                                        <a href="{{ route('show/modelfile', ['assetId' => $asset->model->id, 'fileId' =>$file->id]) }}" data-toggle="lightbox" data-type="image" data-title="{{ $file->filename }}" data-footer="{{ Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}">
+                                                            <img src="{{ route('show/modelfile', ['assetId' => $asset->model->id, 'fileId' =>$file->id]) }}" style="max-width: 50px;">
+                                                        </a>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    {{ $file->filename }}
+                                                </td>
+                                                <td data-value="{{ filesize(storage_path('private_uploads/assetmodels/').$file->filename) }}">
+                                                    {{ Helper::formatFilesizeUnits(filesize(storage_path('private_uploads/assetmodels/').$file->filename)) }}
+                                                </td>
+                                                <td>
+                                                    @if ($file->note)
+                                                        {{ $file->note }}
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if ($file->filename)
+                                                        <a href="{{ route('show/modelfile', [$asset->model->id, $file->id]) }}" class="btn btn-default">
+                                                            <i class="fas fa-download" aria-hidden="true"></i>
+                                                        </a>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if ($file->created_at)
+                                                        {{ Helper::getFormattedDateObject($file->created_at, 'datetime', false) }}
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @can('update', \App\Models\AssetModel::class)
+                                                        <a class="btn delete-asset btn-sm btn-danger btn-sm" href="{{ route('delete/modelfile', [$asset->model->id, $file->id]) }}" data-tooltip="true" data-title="Delete" data-content="{{ trans('general.delete_confirm', ['item' => $file->filename]) }}"><i class="fas fa-trash icon-white" aria-hidden="true"></i></a>
                                                     @endcan
                                                 </td>
                                             </tr>

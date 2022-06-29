@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'อุปกรณ์',
     'activated'			    => 'เปิดใช้งาน',
     'accessory'				=> 'อุปกรณ์',
@@ -26,6 +26,7 @@
     'audit'				    => 'การตรวจสอบบัญชี',
     'audit_report'			=> 'บันทึกการตรวจสอบ',
     'assets'				=> 'ทรัพย์สิน',
+    'assigned_to'           => 'Assigned to :name',
     'avatar_delete'         => 'ลบรูปภาพประจำตัว',
     'avatar_upload'         => 'อัพโหลดภาพประจำตัว',
     'back'      			=> 'ย้อนกลับ',
@@ -96,6 +97,7 @@
     'eol'					=> 'อายุการใช้งาน',
     'email_domain'			=> 'โดเมนอีเมล',
     'email_format'			=> 'รูปแบบอีเมล',
+    'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'ใช้เพื่อสร้างที่อยู่อีเมลเมื่อนำเข้า',
     'error'				    => 'Error',
     'filastname_format'			=> 'ชื่อย่อครั้งแรก (jsmith@example.com)',
@@ -113,6 +115,7 @@
     'files'                 => 'ไฟล์',
     'file_name'				=> 'ไฟล์',
     'file_type'             => 'File Type',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'อัปโหลดไฟล์',
     'file_upload'           => 'File Upload',
     'generate'				=> 'สร้าง',
@@ -192,6 +195,8 @@
     'qty'		            => 'จำนวน',
     'quantity'		        => 'ปริมาณ',
     'quantity_minimum'      => 'You have :count items below or almost below minimum quantity levels',
+    'quickscan_checkin'  	=> 'Quick Scan Checkin',
+    'quickscan_checkin_status'  	=> 'Checkin Status',
     'ready_to_deploy'		=> 'พร้อมใช้งาน',
     'recent_activity'		=> 'กิจกรรมล่าสุด',
     'remaining'             => 'Remaining',
@@ -226,6 +231,7 @@
     'show_current'  		=> 'แสดงรายการปัจจุบัน',
     'sign_in'				=> 'ลงชื่อเข้าใช้',
     'signature'             => 'ลายเซ็น',
+    'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'รูปแบบ/เทมเพลต',
     'slack_msg_note'        => 'A slack message will be sent',
     'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',
@@ -234,6 +240,7 @@
     'state'  				=> 'รัฐ',
     'status_labels'			=> 'ป้ายสถานะ',
     'status'    			=> 'สถานะ',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'ผู้ผลิต',
     'suppliers'  			=> 'ตัวแทนจำหน่าย',
     'sure_to_delete'    => 'คุณแน่ใจหรือไม่ว่าต้องการลบ',
@@ -347,4 +354,7 @@
     'checkout_tooltip' => 'Check this item out',
     'checkin_tooltip' => 'Check this item in',
     'checkout_user_tooltip' => 'Check this item out to a user',
+    'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
+    'maintenance_mode_title' => 'System Temporarily Unavailable',
+    'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
 ];
