@@ -67,7 +67,6 @@
                 <th style="width: 20%;">{{ trans('admin/hardware/table.asset_tag') }}</th>
                 <th style="width: 20%;">{{ trans('general.name') }}</th>
                 <th style="width: 10%;">{{ trans('general.category') }}</th>
-                <th style="width: 20%;">{{ trans('admin/hardware/form.serial') }}</th>
                 <th style="width: 20%;">{{ trans('admin/hardware/form.model') }}</th>
                 <th style="width: 20%;">{{ trans('admin/hardware/form.serial') }}</th>
                 <th style="width: 10%;">{{ trans('admin/hardware/table.checkout_date') }}</th>
