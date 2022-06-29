@@ -254,12 +254,6 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
 
     Route::get('requested', [ViewAssetsController::class, 'getRequestedAssets'])->name('account.requested');
 
-    // Accept Asset
-    Route::get(
-        'accept-asset/{logID}',
-        [ViewAssetsController::class, 'getAcceptAsset']
-    )->name('account/accept-assets');
-
     // Profile
     Route::get(
         'requestable-assets',
