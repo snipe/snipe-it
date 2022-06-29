@@ -17,7 +17,7 @@ class GeneratePersonalAccessToken extends Command
      * @var string
      */
     protected $signature = 'snipeit:make-api-key 
-                        {user : The ID of the user to create the token for}
+                        {--user_id= : The ID of the user to create the token for.}
                         {--name= : The name of the new API token}
                         {--key-only : Only return the value of the API key}';
 
@@ -62,11 +62,11 @@ class GeneratePersonalAccessToken extends Command
             $accessTokenName = 'CLI Auth Token';
         }
 
-        if ($this->argument('user')=='') {
-            return false;
+        if ($this->option('user_id')=='') {
+            return $this->error('ERROR: user_id cannot be blank.');
         }
 
-        if ($user = User::find($this->argument('user'))) {
+        if ($user = User::find($this->option('user_id'))) {
 
             if ($this->option('key-only')) {
                 $this->info($user->createToken($accessTokenName)->accessToken);
