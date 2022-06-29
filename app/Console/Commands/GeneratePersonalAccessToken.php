@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 use App\Models\User;
 use Laravel\Passport\TokenRepository;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
+use DB;
 
 class GeneratePersonalAccessToken extends Command
 {
@@ -71,7 +72,10 @@ class GeneratePersonalAccessToken extends Command
             if ($this->option('key-only')) {
                 $this->info($user->createToken($accessTokenName)->accessToken);
             } else {
+                $token = DB::table('oauth_access_tokens')->where('user_id', '=', $user->id)->where('name','=',$accessTokenName)->orderBy('created_at', 'desc')->first();
+
                 $this->warn('Your API Token has been created. Be sure to copy this token now, as it will not be accessible again.');
+                $this->info('API Token ID: '.$token->id);
                 $this->info('API Token User: '.$user->present()->fullName.' ('.$user->username.')');
                 $this->info('API Token Name: '.$accessTokenName);
                 $this->info('API Token: '.$user->createToken($accessTokenName)->accessToken);
