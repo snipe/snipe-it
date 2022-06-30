@@ -544,11 +544,11 @@ class AssetsController extends Controller
             foreach ($model->fieldset->fields as $field) {
 
                 // Set the field value based on what was sent in the request
-                $field_val = $request->input($field->convertUnicodeDbSlug(), null);
+                $field_val = $request->input($field->db_column, null);
 
                 // If input value is null, use custom field's default value
                 if ($field_val == null) {
-                    \Log::debug('Field value for '.$field->convertUnicodeDbSlug().' is null');
+                    \Log::debug('Field value for '.$field->db_column.' is null');
                     $field_val = $field->defaultValue($request->get('model_id'));
                     \Log::debug('Use the default fieldset value of '.$field->defaultValue($request->get('model_id')));
                 }
@@ -563,13 +563,13 @@ class AssetsController extends Controller
                         if (($field_val == null) && ($request->has('model_id') != '')) {
                             $field_val = \Crypt::encrypt($field->defaultValue($request->get('model_id')));
                         } else {
-                            $field_val = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
+                            $field_val = \Crypt::encrypt($request->input($field->db_column));
                         }
                     }
                 }
 
 
-                $asset->{$field->convertUnicodeDbSlug()} = $field_val;
+                $asset->{$field->db_column} = $field_val;
             }
         }
 
@@ -634,13 +634,13 @@ class AssetsController extends Controller
             // Update custom fields
             if (($model = AssetModel::find($asset->model_id)) && (isset($model->fieldset))) {
                 foreach ($model->fieldset->fields as $field) {
-                    if ($request->has($field->convertUnicodeDbSlug())) {
+                    if ($request->has($field->db_column)) {
                         if ($field->field_encrypted == '1') {
                             if (Gate::allows('admin')) {
-                                $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
+                                $asset->{$field->db_column} = \Crypt::encrypt($request->input($field->db_column));
                             }
                         } else {
-                            $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
+                            $asset->{$field->db_column} = $request->input($field->db_column);
                         }
                     }
                 }
@@ -714,30 +714,53 @@ class AssetsController extends Controller
      * @since [v5.1.18]
      * @return JsonResponse
      */
-    public function restore($assetId = null)
+    public function restore(Request $request, $assetId = null)
     {
         // Get asset information
         $asset = Asset::withTrashed()->find($assetId);
         $this->authorize('delete', $asset);
+
         if (isset($asset->id)) {
-            // Restore the asset
-            Asset::withTrashed()->where('id', $assetId)->restore();
 
-            $logaction = new Actionlog();
-            $logaction->item_type = Asset::class;
-            $logaction->item_id = $asset->id;
-            $logaction->created_at =  date("Y-m-d H:i:s");
-            $logaction->user_id = Auth::user()->id;
-            $logaction->logaction('restored');
+            if ($asset->deleted_at=='') {
+               $message = 'Asset was not deleted. No data was changed.';
 
-            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.restore.success')));
+            } else {
+
+                $message = trans('admin/hardware/message.restore.success');
+                // Restore the asset
+                Asset::withTrashed()->where('id', $assetId)->restore();
+
+                $logaction = new Actionlog();
+                $logaction->item_type = Asset::class;
+                $logaction->item_id = $asset->id;
+                $logaction->created_at =  date("Y-m-d H:i:s");
+                $logaction->user_id = Auth::user()->id;
+                $logaction->logaction('restored');
+            }
+
+            return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset, $request), $message));
         
 
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
     }
 
-
+    /**
+     * Checkout an asset by its tag.
+     *
+     * @author [N. Butler]
+     * @param string $tag
+     * @since [v6.0.5]
+     * @return JsonResponse
+     */
+    public function checkoutByTag(AssetCheckoutRequest $request, $tag)
+    {
+        if ($asset = Asset::where('asset_tag', $tag)->first()) {
+            return $this->checkout($request, $asset->id);
+        }
+        return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 200);
+    }
 
     /**
      * Checkout an asset
@@ -849,7 +872,7 @@ class AssetsController extends Controller
         $asset->assignedTo()->disassociate($asset);
         $asset->accepted = null;
 
-        if ($request->filled('name')) {
+        if ($request->has('name')) {
             $asset->name = $request->input('name');
         }
 

@@ -103,6 +103,7 @@ class Location extends SnipeModel
         return $this->hasMany(\App\Models\User::class, 'location_id');
     }
 
+
     public function assets()
     {
         return $this->hasMany(\App\Models\Asset::class, 'location_id')
@@ -128,6 +129,23 @@ class Location extends SnipeModel
         */
         return $this->hasMany(\App\Models\Asset::class, 'rtd_location_id');
     }
+
+    public function consumables()
+    {
+        return $this->hasMany(\App\Models\Consumable::class, 'location_id');
+    }
+
+    public function components()
+    {
+        return $this->hasMany(\App\Models\Component::class, 'location_id');
+    }
+
+    public function accessories()
+    {
+        return $this->hasMany(\App\Models\Accessory::class, 'location_id');
+    }
+
+
 
     public function parent()
     {

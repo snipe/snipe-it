@@ -36,6 +36,7 @@ class UsersController extends Controller
 
         $users = User::select([
             'users.activated',
+            'users.created_by',
             'users.address',
             'users.avatar',
             'users.city',
@@ -66,7 +67,7 @@ class UsersController extends Controller
             'users.remote',
             'users.ldap_import',
 
-        ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables')
+        ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy',)
             ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count');
         $users = Company::scopeCompanyables($users);
 
@@ -87,6 +88,10 @@ class UsersController extends Controller
 
         if ($request->filled('location_id')) {
             $users = $users->where('users.location_id', '=', $request->input('location_id'));
+        }
+
+        if ($request->filled('created_by')) {
+            $users = $users->where('users.created_by', '=', $request->input('created_by'));
         }
 
         if ($request->filled('email')) {
@@ -181,6 +186,9 @@ class UsersController extends Controller
                 break;
             case 'department':
                 $users = $users->OrderDepartment($order);
+                break;
+            case 'created_by':
+                $users = $users->OrderByCreatedBy($order);
                 break;
             case 'company':
                 $users = $users->OrderCompany($order);

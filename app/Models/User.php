@@ -562,6 +562,18 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     }
 
     /**
+     * Get the admin user who created this user
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v6.0.5]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function createdBy()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'created_by')->withTrashed();
+    }
+
+    /**
      * Check whether two-factor authorization is required and the user has activated it
      * and enrolled a device
      *
@@ -684,6 +696,23 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
         return $query->leftJoin('departments as departments_users', 'users.department_id', '=', 'departments_users.id')->orderBy('departments_users.name', $order);
     }
+
+    /**
+     * Query builder scope to order on admin user
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param string                              $order         Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderByCreatedBy($query, $order)
+    {
+        // Left join here, or it will only return results with parents
+        return $query->leftJoin('users as admin_user', 'users.created_by', '=', 'admin_user.id')
+            ->orderBy('admin_user.first_name', $order)
+            ->orderBy('admin_user.last_name', $order);
+    }
+
 
     /**
      * Query builder scope to order on company

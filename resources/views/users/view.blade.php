@@ -31,7 +31,7 @@
             <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}
-              {!! ($user->assets->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->assets->count().'</badge>' : '' !!}
+              {!! ($user->assets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
             </span>
           </a>
         </li>
@@ -42,7 +42,7 @@
             <i class="far fa-save fa-2x"></i>
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}
-              {!! ($user->licenses->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->licenses->count().'</badge>' : '' !!}
+              {!! ($user->licenses->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->licenses->count()).'</badge>' : '' !!}
             </span>
           </a>
         </li>
@@ -53,7 +53,7 @@
             <i class="far fa-keyboard fa-2x"></i>
             </span> 
             <span class="hidden-xs hidden-sm">{{ trans('general.accessories') }}
-              {!! ($user->accessories->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->accessories->count().'</badge>' : '' !!}
+              {!! ($user->accessories->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->accessories->count()).'</badge>' : '' !!}
             </span>
           </a>
         </li>
@@ -64,7 +64,7 @@
                 <i class="fas fa-tint fa-2x"></i>
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.consumables') }}
-              {!! ($user->consumables->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->consumables->count().'</badge>' : '' !!}
+              {!! ($user->consumables->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->consumables->count()).'</badge>' : '' !!}
             </span>
           </a>
         </li>
@@ -75,7 +75,7 @@
                 <i class="far fa-file fa-2x"></i>
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.file_uploads') }}
-              {!! ($user->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->uploads->count().'</badge>' : '' !!}
+              {!! ($user->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->uploads->count()).'</badge>' : '' !!}
             </span>
           </a>
         </li>
@@ -95,7 +95,7 @@
             <span class="hidden-lg hidden-md">
               <i class="fas fa-map-marker-alt fa-2x"></i></span>
             <span class="hidden-xs hidden-sm">{{ trans('admin/users/table.managed_locations') }}
-              {!! ($user->managedLocations->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->managedLocations->count().'</badge>' : '' !!}
+              {!! ($user->managedLocations->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->managedLocations->count()).'</badge>' : '' !!}
           </a>
         </li>
         @endif
@@ -186,6 +186,15 @@
                 <div class="col-md-12" style="padding-top: 5px;">
                   <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print" target="_blank" rel="noopener">{{ trans('admin/users/general.print_assigned') }}</a>
                 </div>
+                @endcan
+
+                @can('view', $user)
+                    <div class="col-md-12" style="padding-top: 5px;">
+                        <form action="{{ route('users.email',['userId'=> $user->id]) }}" method="POST">
+                            {{ csrf_field() }}
+                            <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener">{{ trans('admin/users/general.email_assigned') }}</button>
+                        </form>
+                    </div>
                 @endcan
 
                 @can('update', $user)
@@ -304,6 +313,9 @@
                           @endif
                           @if ($user->country)
                             {{ $user->country }}
+                          @endif
+                          @if ($user->zip)
+                              {{ $user->zip }}
                           @endif
 
                       </div>
@@ -460,6 +472,17 @@
                       </div>
                       <div class="col-md-9">
                         {{ \App\Helpers\Helper::getFormattedDateObject($user->created_at, 'datetime')['formatted']}}
+
+                          @if ($user->createdBy)
+                              -
+                              @if ($user->createdBy->deleted_at=='')
+                                  <a href="{{ route('users.show', ['user' => $user->created_by]) }}">{{ $user->createdBy->present()->fullName }}</a>
+                              @else
+                                  <del>{{ $user->createdBy->present()->fullName }}</del>
+                              @endif
+
+
+                          @endif
                       </div>
                     </div>
                     @endif
@@ -586,12 +609,15 @@
                     data-search="true"
                     data-side-pagination="server"
                     data-show-columns="true"
+                    data-show-fullscreen="true"
                     data-show-export="true"
                     data-show-footer="true"
                     data-show-refresh="true"
                     data-sort-order="asc"
                     data-sort-name="name"
-                    data-toolbar="#toolbar"
+                    data-toolbar="#assetsBulkEditToolbar"
+                    data-bulk-button-id="#bulkAssetEditButton"
+                    data-bulk-form-id="#assetsBulkForm"
                     id="userAssetsListingTable"
                     class="table table-striped snipe-table"
                     data-url="{{ route('api.assets.index',['assigned_to' => e($user->id), 'assigned_type' => 'App\Models\User']) }}"
@@ -613,6 +639,7 @@
                     data-pagination="true"
                     data-side-pagination="client"
                     data-show-columns="true"
+                    data-show-fullscreen="true"
                     data-show-export="true"
                     data-show-footer="true"
                     data-show-refresh="true"
@@ -678,6 +705,7 @@
                     data-pagination="true"
                     data-side-pagination="client"
                     data-show-columns="true"
+                    data-show-fullscreen="true"
                     data-show-export="true"
                     data-show-footer="true"
                     data-show-refresh="true"
@@ -724,6 +752,7 @@
                     data-pagination="true"
                     data-side-pagination="client"
                     data-show-columns="true"
+                    data-show-fullscreen="true"
                     data-show-export="true"
                     data-show-footer="true"
                     data-show-refresh="true"
@@ -769,6 +798,7 @@
                           data-pagination="true"
                           data-side-pagination="client"
                           data-show-columns="true"
+                          data-show-fullscreen="true"
                           data-show-export="true"
                           data-show-footer="true"
                           data-toolbar="#upload-toolbar"
@@ -861,6 +891,7 @@
                     data-search="true"
                     data-side-pagination="server"
                     data-show-columns="true"
+                    data-show-fullscreen="true"
                     data-show-export="true"
                     data-show-refresh="true"
                     data-sort-order="desc"

@@ -38,26 +38,8 @@
   <div class="col-md-12">
     <div class="box box-default">
         <div class="box-body">
-          {{ Form::open([
-               'method' => 'POST',
-               'route' => ['users/bulkedit'],
-               'class' => 'form-inline',
-                'id' => 'bulkForm']) }}
 
-            @if (request('status')!='deleted')
-              @can('delete', \App\Models\User::class)
-                <div id="toolbar">
-                    <label for="bulk_actions" class="sr-only">{{ trans('general.bulk_actions') }}</label>
-                  <select name="bulk_actions" class="form-control select2" style="width: 200px;" aria-label="bulk_actions">
-                    <option value="delete">{!! trans('general.bulk_checkin_delete') !!}</option>
-                    <option value="edit">{{ trans('general.bulk_edit') }}</option>
-                    <option value="bulkpasswordreset">{{ trans('button.send_password_link') }}</option>
-                  </select>
-                  <button class="btn btn-default" id="bulkEdit" disabled>{{ trans('button.go') }}</button>
-                </div>
-              @endcan
-            @endif
-
+            @include('partials.users-bulk-actions')
 
             <table
                     data-click-to-select="true"
@@ -68,10 +50,13 @@
                     data-search="true"
                     data-side-pagination="server"
                     data-show-columns="true"
+                    data-show-fullscreen="true"
                     data-show-export="true"
                     data-show-refresh="true"
                     data-sort-order="asc"
-                    data-toolbar="#toolbar"
+                    data-toolbar="#userBulkEditToolbar"
+                    data-bulk-button-id="#bulkUserEditButton"
+                    data-bulk-form-id="#usersBulkForm"
                     id="usersTable"
                     class="table table-striped snipe-table"
                     data-url="{{ route('api.users.index',

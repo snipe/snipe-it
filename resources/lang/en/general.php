@@ -65,7 +65,8 @@ return [
     'create'				=> 'Create New',
     'created'               => 'Item Created',
     'created_asset'			=> 'created asset',
-    'created_at' 			=> 'Created at',
+    'created_at' 			=> 'Created At',
+    'created_by'            => 'Created By',
     'record_created' 		=> 'Record Created',
     'updated_at' 			=> 'Updated at',
     'currency'  			=> '$', // this is deprecated
@@ -257,6 +258,7 @@ return [
     'undeployable'			=> 'Un-deployable',
     'unknown_admin'			=> 'Unknown Admin',
     'username_format'		=> 'Username Format',
+    'username'              => 'Username',
     'update'                => 'Update',
     'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf and rar. Max upload size allowed is :size.',
     'uploaded'              => 'Uploaded',
@@ -358,9 +360,13 @@ return [
     'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
     'maintenance_mode_title' => 'System Temporarily Unavailable',
     'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
+    'purge_not_allowed'     => 'Purging deleted data has been disabled in the .env file. Contact support or your systems administrator.',
+    'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
+    'additional_files'           => 'Additional Files',
     'eol_assets_report'      => 'EOL Assets Report',
     'obsolete'              => 'Obsolete',
     'years'                 => 'Years',
     'months'                => 'Months',
     'days'                  => 'Days',
+
 ];

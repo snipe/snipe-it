@@ -56,7 +56,7 @@
 
     @if (($snipeSettings) && ($snipeSettings->logo!=''))
         <center>
-            <img id="login-logo" src="{{ Storage::disk('public')->url('').e($snipeSettings->logo) }}">
+            <a href="{{ config('app.url') }}"><img id="login-logo" src="{{ Storage::disk('public')->url('').e($snipeSettings->logo) }}"></a>
         </center>
     @endif
   <!-- Content -->

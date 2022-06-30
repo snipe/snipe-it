@@ -61,7 +61,7 @@ class ActionlogsTransformer
                 $file_url = route('log.storedeula.download', ['filename' => $actionlog->filename]);
             } else {
                 if ($actionlog->itemType() == 'asset') {
-                    $file_url = route('show/assetfile', ['assetId' => $actionlog->id, 'fileId' => $actionlog->id]);
+                    $file_url = route('show/assetfile', ['assetId' => $actionlog->item->id, 'fileId' => $actionlog->id]);
                 } elseif ($actionlog->itemType() == 'license') {
                     $file_url = route('show.licensefile', ['licenseId' => $actionlog->item->id, 'fileId' => $actionlog->id]);
                 } elseif ($actionlog->itemType() == 'user') {

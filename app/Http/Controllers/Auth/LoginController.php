@@ -136,13 +136,12 @@ class LoginController extends Controller
 
             // Better logging
             if (!$saml->isEnabled()) {
-                \Log::warning("SAML page requested, but SAML does not seem to enabled.");
+                \Log::debug("SAML page requested, but SAML does not seem to enabled.");
             } else {
                 \Log::warning("SAML page requested, but samlData seems empty.");
             }
         }
 
-        \Log::warning("Something else went wrong while trying to login as SAML user");
 
 
     }

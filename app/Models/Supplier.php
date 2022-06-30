@@ -184,7 +184,7 @@ class Supplier extends SnipeModel
      */
     public function addhttp($url)
     {
-        if (! preg_match('~^(?:f|ht)tps?://~i', $url)) {
+        if (($url!='') && (! preg_match('~^(?:f|ht)tps?://~i', $url))) {
             $url = 'http://'.$url;
         }
 

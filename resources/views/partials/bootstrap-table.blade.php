@@ -84,6 +84,7 @@
                 advancedSearchIcon: 'fas fa-search-plus',
                 paginationSwitchDown: 'fa-caret-square-o-down',
                 paginationSwitchUp: 'fa-caret-square-o-up',
+                fullscreen: 'fa-expand',
                 columns: 'fa-columns',
                 refresh: 'fas fa-sync-alt',
                 export: 'fa-download',
@@ -91,7 +92,7 @@
             },
                 exportOptions: export_options,
 
-            exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
+            exportTypes: ['xlsx', 'excel', 'csv', 'pdf','json', 'xml', 'txt', 'sql', 'doc' ],
             onLoadSuccess: function () {
                 $('[data-toggle="tooltip"]').tooltip(); // Needed to attach tooltips after ajax call
             }
@@ -114,42 +115,56 @@
 
     // These methods dynamically add/remove hidden input values in the bulk actions form
     $('.snipe-table').on('check.bs.table .btSelectItem', function (row, $element) {
-        $('#bulkEdit').removeAttr('disabled');
-        $('#bulkEdit').prepend('<input id="checkbox_' + $element.id + '" type="hidden" name="ids[]" value="' + $element.id + '">');
+        var buttonName =  $(this).data('bulk-button-id');
+        var formName =  $(this).data('bulk-form-id');
+        var tableId =  $(this).data('id-table');
+
+        $(buttonName).removeAttr('disabled');
+        $(formName).prepend('<input id="' + tableId + '_checkbox_' + $element.id + '" type="hidden" name="ids[]" value="' + $element.id + '">');
     });
 
     $('.snipe-table').on('uncheck.bs.table .btSelectItem', function (row, $element) {
-        $( "#checkbox_" + $element.id).remove();
+        var tableId =  $(this).data('id-table');
+        $( "#" + tableId + "_checkbox_" + $element.id).remove();
+    });
+
+
+    $('.snipe-table').on('check-all.bs.table', function (event, rowsAfter, rowsBefore) {
+
+        var buttonName =  $(this).data('bulk-button-id');
+        $(buttonName).removeAttr('disabled');
+        var formName =  $(this).data('bulk-form-id');
+        var tableId =  $(this).data('id-table');
+
+        for (var i in rowsAfter) {
+            $(formName).prepend('<input id="' + tableId + '_checkbox_' + rowsAfter[i].id + '" type="hidden" name="ids[]" value="' + rowsAfter[i].id + '">');
+        }
     });
 
 
     // Handle whether or not the edit button should be disabled
     $('.snipe-table').on('uncheck.bs.table', function () {
-        if ($('.snipe-table').bootstrapTable('getSelections').length == 0) {
-            $('#bulkEdit').attr('disabled', 'disabled');
+
+        var buttonName =  $(this).data('bulk-button-id');
+
+        if ($(this).bootstrapTable('getSelections').length == 0) {
+            $(buttonName).attr('disabled', 'disabled');
         }
     });
 
     $('.snipe-table').on('uncheck-all.bs.table', function (event, rowsAfter, rowsBefore) {
-        $('#bulkEdit').attr('disabled', 'disabled');
-        //console.dir(rowsBefore);
+
+        var buttonName =  $(this).data('bulk-button-id');
+        $(buttonName).attr('disabled', 'disabled');
+        var tableId =  $(this).data('id-table');
 
         for (var i in rowsBefore) {
-            $( "#checkbox_" + rowsBefore[i].id).remove();
+            $('#' + tableId + "_checkbox_" + rowsBefore[i].id).remove();
         }
 
     });
 
-    $('.snipe-table').on('check-all.bs.table', function (event, rowsAfter, rowsBefore) {
-        
-        $('#bulkEdit').removeAttr('disabled');
-        //console.dir(rowsAfter);
-        
-        for (var i in rowsAfter) {
-            // console.log(rowsAfter[i].id);
-            $('#bulkEdit').prepend('<input id="checkbox_' + rowsAfter[i].id + '" type="hidden" name="ids[]" value="' + rowsAfter[i].id + '">');
-        }
-    });
+
 
     
 
@@ -173,6 +188,7 @@
                 var status_meta = {
                   'deployed': '{{ strtolower(trans('general.deployed')) }}',
                   'deployable': '{{ strtolower(trans('admin/hardware/general.deployable')) }}',
+                  'archived': '{{ strtolower(trans('general.archived')) }}',
                   'pending': '{{ strtolower(trans('general.pending')) }}'
                 }
 
@@ -305,7 +321,10 @@
                 item_icon = 'fas fa-user';
             } else if (value.type == 'location') {
                 item_destination = 'locations'
-                item_icon = 'far fa-map-marker-alt';
+                item_icon = 'fas fa-map-marker-alt';
+            } else if (value.type == 'model') {
+                item_destination = 'models'
+                item_icon = '';
             }
 
             return '<nobr><a href="{{ url('/') }}/' + item_destination +'/' + value.id + '" data-tooltip="true" title="' + value.type + '"><i class="' + item_icon + ' text-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} "></i> ' + value.name + '</a></nobr>';
@@ -452,7 +471,7 @@
                 if ((row.custom_fields[field_column_plain].field_format) && (row.custom_fields[field_column_plain].value)) {
                     if (row.custom_fields[field_column_plain].field_format=='URL') {
                         return '<a href="' + row.custom_fields[field_column_plain].value + '" target="_blank" rel="noopener">' + row.custom_fields[field_column_plain].value + '</a>';
-                    }else if (row.custom_fields[field_column_plain].field_format=='BOOLEAN') {
+                    } else if (row.custom_fields[field_column_plain].field_format=='BOOLEAN') {
                         return (row.custom_fields[field_column_plain].value == 1) ? "<span class='fas fa-check-circle' style='color:green' />" : "<span class='fas fa-times-circle' style='color:red' />";
                     } else if (row.custom_fields[field_column_plain].field_format=='EMAIL') {
                         return '<a href="mailto:' + row.custom_fields[field_column_plain].value + '">' + row.custom_fields[field_column_plain].value + '</a>';

@@ -163,6 +163,20 @@ class AssetMaintenance extends Model implements ICompanyableChild
      **/
 
     /**
+     * Query builder scope to order on a supplier
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  string                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderBySupplier($query, $order)
+    {
+        return $query->leftJoin('suppliers as suppliers_maintenances', 'asset_maintenances.supplier_id', '=', 'suppliers_maintenances.id')
+            ->orderBy('suppliers_maintenances.name', $order);
+    }
+
+    /**
      * Query builder scope to order on admin user
      *
      * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance

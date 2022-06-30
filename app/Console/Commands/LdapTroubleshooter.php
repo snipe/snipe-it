@@ -27,6 +27,19 @@ function ip_in_range( $ip, $range ) {
 }
 // NOTE - this function was shamelessly stolen from this gist: https://gist.github.com/tott/7684443
 
+/**
+ * Ensure LDAP filters are parentheses-wrapped
+ */
+function parenthesized_filter($filter)
+{
+    if(substr($filter,0,1) == "(" ) {
+        return $filter;
+    } else {
+        return "(".$filter.")";
+    }
+
+}
+
 class LdapTroubleshooter extends Command
 {
     /**
@@ -71,6 +84,47 @@ class LdapTroubleshooter extends Command
     }
 
     /**
+     * Clean the results from ldap_get_entries into something useful
+     * @param array $array
+     * @return array
+     */
+    public function ldap_results_cleaner ($array) {
+        $cleaned = [];
+        for($i = 0; $i < $array['count']; $i++) {
+            $row = $array[$i];
+            $clean_row = [];
+            foreach($row AS $key => $val ) {
+                $this->debugout("Key is: ".$key);
+                if($key == "count" || is_int($key) || $key == "dn") {
+                    $this->debugout(" and we're gonna skip it\n");
+                    continue;
+                }
+                $this->debugout(" And that seems fine.\n");
+                if(array_key_exists('count',$val)) {
+                    if($val['count'] == 1) {
+                        $clean_row[$key] = $val[0];
+                    } else {
+                        unset($val['count']); //these counts are annoying
+                        $elements = [];
+                        foreach($val as $entry) {
+                            if(isset($ldap_constants[$entry])) {
+                                $elements[] = $ldap_constants[$entry];
+                            } else {
+                                $elements[] = $entry;
+                            }
+                        }
+                        $clean_row[$key] = $elements;
+                    }
+                } else {
+                    $clean_row[$key] = $val;
+                }
+            }
+            $cleaned[$i] = $clean_row;
+        }
+        return $cleaned;
+    }
+
+    /**
      * Execute the console command.
      *
      * @return mixed
@@ -102,16 +156,12 @@ class LdapTroubleshooter extends Command
                 $output[] = "LDAPTLS_KEY=storage/ldap_client_tls.key";
             }
             $output[] = "ldapsearch";
-            $output[] = $settings->ldap_server;
+            $output[] = "-H ".$settings->ldap_server;
             $output[] = "-x";
             $output[] = "-b ".escapeshellarg($settings->ldap_basedn);
             $output[] = "-D ".escapeshellarg($settings->ldap_uname);
             $output[] = "-w ".escapeshellarg(\Crypt::Decrypt($settings->ldap_pword));
-            if(substr($settings->ldap_filter,0,1) == "(" ) {
-                $output[] = escapeshellarg($settings->ldap_filter);
-            } else {
-                $output[] = escapeshellarg("(".$settings->ldap_filter.")");
-            }
+            $output[] = escapeshellarg(parenthesized_filter($settings->ldap_filter));
             if($settings->ldap_tls) {
                 $this->line("# adding STARTTLS option");
                 $output[] = "-Z";
@@ -290,45 +340,8 @@ class LdapTroubleshooter extends Command
         }
         $this->debugout("LDAP constants are: ".print_r($ldap_constants,true));
 
-        // recursive function that 'cleans' the returned array from ldap_get_entries which are formatted awfully
-        $cleaner = function ($array) {
-            $cleaned = [];
-            for($i = 0; $i < $array['count']; $i++) {
-                $row = $array[$i];
-                $clean_row = [];
-                foreach($row AS $key => $val ) {
-                    $this->debugout("Key is: ".$key);
-                    if($key == "count" || is_int($key) || $key == "dn") {
-                        $this->debugout(" and we're gonna skip it\n");
-                        continue;
-                    }
-                    $this->debugout(" And that seems fine.\n");
-                    if(array_key_exists('count',$val)) {
-                        if($val['count'] == 1) {
-                            $clean_row[$key] = $val[0];
-                        } else {
-                            unset($val['count']); //these counts are annoying
-                            $elements = [];
-                            foreach($val as $entry) {
-                                if(isset($ldap_constants[$entry])) {
-                                    $elements[] = $ldap_constants[$entry];
-                                } else {
-                                    $elements[] = $entry;
-                                }
-                            }
-                            $clean_row[$key] = $elements;
-                        }
-                    } else {
-                        $clean_row[$key] = $val;
-                    }
-                }
-                $cleaned[$i] = $clean_row;
-            }
-            return $cleaned;
-        };
-        
         foreach($ldap_urls AS $ldap_url) {
-            if($this->test_informational_bind($ldap_url[0],$ldap_url[1],$ldap_url[2],$settings->ldap_uname,Crypt::decrypt($settings->ldap_pword))) {
+            if($this->test_informational_bind($ldap_url[0],$ldap_url[1],$ldap_url[2],$settings->ldap_uname,Crypt::decrypt($settings->ldap_pword),$settings)) {
                 $this->info("Success getting informational bind!");
             } else {
                 $this->error("Unable to get information from bind.");
@@ -422,9 +435,9 @@ class LdapTroubleshooter extends Command
         });
     }
 
-    public function test_informational_bind($ldap_url, $check_cert, $start_tls, $username, $password)
+    public function test_informational_bind($ldap_url, $check_cert, $start_tls, $username, $password,$settings)
     {
-        return $this->timed_boolean_execute(function () use ($ldap_url, $check_cert, $start_tls, $username, $password) {
+        return $this->timed_boolean_execute(function () use ($ldap_url, $check_cert, $start_tls, $username, $password, $settings) {
             try { // TODO - copypasta'ed from test_authed_bind
                 $conn = $this->connect_to_ldap($ldap_url, $check_cert, $start_tls);
                 $bind_results = ldap_bind($conn, $username, $password);
@@ -435,12 +448,13 @@ class LdapTroubleshooter extends Command
                 $this->info("SUCCESS - Able to bind to $ldap_url as $username");
                 $result = ldap_read($conn, '', '(objectClass=*)'/* , ['supportedControl']*/);
                 $results = ldap_get_entries($conn, $result);
-                $cleaned_results = $cleaner($results);
+                $cleaned_results = $this->ldap_results_cleaner($results);
                 $this->line(print_r($cleaned_results,true));
                 //okay, great - now how do we display those results? I have no idea.
                 // I don't see why this throws an Exception for Google LDAP, but I guess we ought to try and catch it?
                 $this->comment("I guess we're trying to do the ldap search here, but sometimes it takes too long?");
-                $search_results = ldap_search($conn, $settings->base_dn, $settings->filter);
+                $this->debugout("Base DN is: ".$settings->ldap_basedn." and filter is: ".parenthesized_filter($settings->ldap_filter));
+                $search_results = ldap_search($conn, $settings->ldap_basedn, parenthesized_filter($settings->ldap_filter));
                 $this->info("Printing first 10 results: ");
                 for($i=0;$i<10;$i++) {
                     $this->info($search_results[$i]);
