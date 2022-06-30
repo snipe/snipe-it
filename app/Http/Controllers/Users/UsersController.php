@@ -632,7 +632,7 @@ class UsersController extends Controller
             {
                 $user= User::where('id', $id)->first();
                 $user->notify((new CurrentInventory($user)));
-                return redirect()->back()->with('success', 'admin/users/general.user_notified');
+                return redirect()->back()->with('success', trans('admin/users/general.user_notified'));
             }
 
         return redirect()->back()->with('error', 'admin/accessories/message.user_does_not_exist');
