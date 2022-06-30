@@ -1174,7 +1174,7 @@ class ReportsController extends Controller
     public function getEOLReport()    
     {
         $this->authorize('reports.view');
-        $eol_assets = Asset::orderBy('created_at', 'DESC')->where('purchase_date','<>','')->get();
+        $eol_assets = Asset::orderBy('created_at', 'DESC')->whereNotNull('purchase_date')->get();
 
         return view('reports/eol_assets', compact('eol_assets'));
     }

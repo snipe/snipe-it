@@ -20,7 +20,7 @@
                                 data-pagination="true"
                                 data-id-table="eolAssetsReport"
                                 data-search="true"
-                                data-side-pagination="client"
+                                data-side-pagination="server"
                                 data-show-columns="true"
                                 data-show-export="true"
                                 data-show-refresh="true"
