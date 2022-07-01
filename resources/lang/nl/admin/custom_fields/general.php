@@ -41,7 +41,7 @@ return [
     'make_required' => 'Optioneel - klik om vereist te maken',
     'reorder' => 'Herordenen',
     'db_field' => 'DB veld',
-    'db_convert_warning' => 'WAARSCHUWING. Dit veld staat in de tabel met aangepaste velden als <code> :db_column </code> maar moet :expected </code> zijn.',
+    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code>:db_column</code> but should be <code>:expected</code>.',
     'is_unique' => 'Deze waarde moet uniek zijn voor alle assets',
     'unique' => 'Uniek',
 ];

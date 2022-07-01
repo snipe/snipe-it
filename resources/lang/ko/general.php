@@ -65,7 +65,8 @@ return [
     'create'				=> '새로 생성',
     'created'               => '품목 생성됨',
     'created_asset'			=> '생성된 자산',
-    'created_at' 			=> '생성 위치',
+    'created_at' 			=> 'Created At',
+    'created_by'            => 'Created By',
     'record_created' 		=> '레코드 생성',
     'updated_at' 			=> '업데이트',
     'currency'  			=> '원', // this is deprecated
@@ -100,6 +101,7 @@ return [
     'employee_number'       => 'Employee Number',
     'email_domain_help'		=> '읽어오기시 전자 우편 주소를 생성하는데 사용됩니다.',
     'error'				    => '오류',
+    'example'				=> 'Example: ',
     'filastname_format'			=> '초기 성명 (jsmith@example.com)',
     'firstname_lastname_format'	=> '이름 성 (jane.smith@example.com)',
     'firstname_lastname_underscore_format' => '이름 성 (jane.smith@example.com)',
@@ -256,6 +258,7 @@ return [
     'undeployable'			=> '사용불가',
     'unknown_admin'			=> '알수없는 관리자',
     'username_format'		=> '사용자명 형식',
+    'username'              => 'Username',
     'update'                => '갱신',
     'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf and rar. Max upload size allowed is :size.',
     'uploaded'              => '업로드됨',
@@ -357,4 +360,8 @@ return [
     'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
     'maintenance_mode_title' => 'System Temporarily Unavailable',
     'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
+    'purge_not_allowed'     => 'Purging deleted data has been disabled in the .env file. Contact support or your systems administrator.',
+    'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
+    'additional_files'           => 'Additional Files',
+
 ];

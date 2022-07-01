@@ -65,7 +65,8 @@ return [
     'create'				=> 'Шинэ болгох',
     'created'               => 'Үүссэн зүйл',
     'created_asset'			=> 'актив үүсгэсэн',
-    'created_at' 			=> 'Үүсгэгдсэн',
+    'created_at' 			=> 'Created At',
+    'created_by'            => 'Created By',
     'record_created' 		=> 'Record Created',
     'updated_at' 			=> 'Дээр шинэчилсэн',
     'currency'  			=> '$', // this is deprecated
@@ -100,6 +101,7 @@ return [
     'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'Энэ нь импортлох үед имэйл хаяг үүсгэхэд ашиглагддаг',
     'error'				    => 'Error',
+    'example'				=> 'Example: ',
     'filastname_format'			=> 'Эхний анхны нэр (jsmith@example.com)',
     'firstname_lastname_format'	=> 'Эхний нэрний нэр (jane.smith@example.com)',
     'firstname_lastname_underscore_format' => 'Oвог нэр (jane_smith@example.com)',
@@ -256,6 +258,7 @@ return [
     'undeployable'			=> 'Дахин ашиглах боломжгүй байна',
     'unknown_admin'			=> 'Unknown Admin',
     'username_format'		=> 'Хэрэглэгчийн нэр Формат',
+    'username'              => 'Username',
     'update'                => 'Шинэчлэх',
     'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf and rar. Max upload size allowed is :size.',
     'uploaded'              => 'Байршуулсан байна',
@@ -357,4 +360,8 @@ return [
     'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
     'maintenance_mode_title' => 'System Temporarily Unavailable',
     'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
+    'purge_not_allowed'     => 'Purging deleted data has been disabled in the .env file. Contact support or your systems administrator.',
+    'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
+    'additional_files'           => 'Additional Files',
+
 ];

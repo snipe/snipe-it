@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'Email',
     'employee_num'      	=> 'Num. Dipendenti',
     'first_name' 			=> 'Nome',
-    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
+    'groupnotes'			=> 'Seleziona un gruppo da assegnare all\'utente, ricorda che un utente eredita i permessi del gruppo assegnatogli. Usa ctrl+click (o cmd+click su MacOS) per deselezionare i gruppi.',
     'id'         			=> 'ID',
     'inherit'  				=> 'Eredita',
     'job' 					=> 'Professione',

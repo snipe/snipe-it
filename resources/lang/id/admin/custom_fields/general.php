@@ -41,7 +41,7 @@ return [
     'make_required' => 'Opsional - klik untuk ubah menjadi Diperlukan',
     'reorder' => 'Susun ulang',
     'db_field' => 'Field Database',
-    'db_convert_warning' => 'PERINGATAN. Field ini berada dalam tabel field kustom sebagai <code>:db_colume</code> namun seharusnya :expected</code>.',
+    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code>:db_column</code> but should be <code>:expected</code>.',
     'is_unique' => 'Nilai ini harus unik di semua aset',
     'unique' => 'Unik',
 ];

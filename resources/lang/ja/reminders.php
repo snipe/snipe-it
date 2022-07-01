@@ -14,11 +14,8 @@ return array(
     */
 
     "password" => "パスワードは6文字以上および確認用と一致する必要があります。",
-
     "user"     => "ユーザー名またはメールアドレスが不正です。",
-
-    "token"    => "パスワードリセットのトークンが不正です。",
-
-    "sent" => "メールアドレスが一致した場合、パスワードリマインダーが送信されます！",
+    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
+    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
 
 );

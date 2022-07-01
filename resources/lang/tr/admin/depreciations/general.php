@@ -6,11 +6,11 @@ return [
     'asset_depreciations'  					=> 'Demirbaş Amortismanları',
     'create'  					            => 'Değer Kaybı Oluştur',
     'depreciation_name'  					=> 'Amortisman Adı',
-    'depreciation_min'                      => 'Floor Value of Depreciation',
+    'depreciation_min'                      => 'Amortisman Taban Değeri',
     'number_of_months'  					=> 'Ay Sayısı',
     'update'  					            => 'Değer Kaybını Güncelle',
     'depreciation_min'                      => 'Değişiklik sonrası minumum değer',
-    'no_depreciations_warning'               => '<strong>Warning: </strong>
-                      You do not currently have any depreciations set up.
-                      Please set up at least one depreciation to view the depreciation report.',
+    'no_depreciations_warning'               => '<strong>Uyarı: </strong>
+                      Şu anda ayarlanmış herhangi bir amortismanınız yok.
+                      Amortisman raporunu görüntülemek için lütfen en az bir amortisman ayarlayın.',
 ];

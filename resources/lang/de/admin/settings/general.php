@@ -28,7 +28,7 @@ return [
     'auto_increment_prefix'		=> 'Präfix (optional)',
     'auto_incrementing_help'    => 'Aktiviere zuerst fortlaufende Asset Tags um dies zu setzen',
     'backups'					=> 'Sicherungen',
-    'backups_help'              => 'Create, download, and restore backups ',
+    'backups_help'              => 'Backups erstellen, herunterladen und wiederherstellen ',
     'backups_restoring'         => 'Aus Backup wiederherstellen',
     'backups_upload'            => 'Backup hochladen',
     'backups_path'              => 'Sicherungen auf dem Server werden in <code>:path</code> gespeichert',

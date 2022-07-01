@@ -10,7 +10,7 @@ return [
     'group_admin' 	 		=> '群組管理員',
     'allow' 	 			=> '允許',
     'deny' 	 				=> '拒絕',
-    'permission'            => 'Permission',
-    'grant'                 => 'Grant',
-    'no_permissions'        => 'This group has no permissions.'
+    'permission'            => '權限',
+    'grant'                 => '授權',
+    'no_permissions'        => '此群組沒有權限'
 ];

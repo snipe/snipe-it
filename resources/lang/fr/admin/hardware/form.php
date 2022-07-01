@@ -46,4 +46,6 @@ return [
     'asset_not_deployable' => 'L\'actif n\'est pas déployable. L\'actif ne peut pas être affecté.',
     'asset_deployable' => 'L\'actif est déployable. L\'actif peut être affecté.',
     'processing_spinner' => 'Traitement en cours...',
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information'
 ];

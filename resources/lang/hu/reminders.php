@@ -14,11 +14,8 @@ return array(
     */
 
     "password" => "A jelszónak 6 karakteresnek kell lennie és egyeznie kell a megerősítésével.",
-
     "user"     => "A felhasználónév vagy az e-mail cím téves",
-
-    "token"    => "Ez a jelszó visszaállítási kérelem érvénytelen.",
-
-    "sent" => "Ha megfelelő az email cím, egy jelszó emlékeztetőt küldünk!",
+    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
+    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
 
 );

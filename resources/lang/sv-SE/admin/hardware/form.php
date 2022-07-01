@@ -46,4 +46,6 @@ return [
     'asset_not_deployable' => 'Denna tillgångs status kan inte distribueras. Denna tillgång kan inte checkas ut.',
     'asset_deployable' => 'Denna status är distribuerbar. Denna tillgång kan checkas ut.',
     'processing_spinner' => 'Bearbetar...',
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information'
 ];

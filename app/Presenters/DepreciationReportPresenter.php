@@ -48,13 +48,7 @@ class DepreciationReportPresenter extends Presenter
                 "sortable" => true,
                 "title" => trans('general.asset_model'),
                 "visible" => true,
-            ], [
-                "field" => "model",
-                "searchable" => true,
-                "sortable" => true,
-                "title" => trans('admin/hardware/form.model'),
-                "visible" => true,
-            ], [
+            ],  [
                 "field" => "model_number",
                 "searchable" => true,
                 "sortable" => true,

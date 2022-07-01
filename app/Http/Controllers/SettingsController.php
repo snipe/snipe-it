@@ -25,6 +25,7 @@ use Response;
 use App\Http\Requests\SlackSettingsRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Artisan;
+use Validator;
 
 /**
  * This controller handles all actions related to Settings for
@@ -910,7 +911,24 @@ class SettingsController extends Controller
     {
         $setting = Setting::getSettings();
 
-        return view('settings.ldap', compact('setting'));
+        /**
+         * This validator is only temporary (famous last words.) - @snipe
+         */
+        $messages = [
+            'ldap_username_field.not_in' => '<code>sAMAccountName</code> (mixed case) will likely not work. You should use <code>samaccountname</code> (lowercase) instead. ',
+            'ldap_auth_filter_query.not_in' => '<code>uid=samaccountname</code> is probably not a valid auth filter. You probably want <code>uid=</code> ',
+            'ldap_filter.regex' => 'This value should probably not be wrapped in parentheses.',
+        ];
+
+        $validator = Validator::make($setting->toArray(), [
+            'ldap_username_field' => 'not_in:sAMAccountName',
+            'ldap_auth_filter_query' => 'not_in:uid=samaccountname',
+            'ldap_filter' => 'regex:"^[^(]"',
+        ],  $messages);
+
+
+
+        return view('settings.ldap', compact('setting'))->withErrors($validator);
     }
 
     /**

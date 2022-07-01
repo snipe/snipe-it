@@ -46,4 +46,6 @@ return [
     'asset_not_deployable' => 'Deze Asset status is niet uitgeefbaar. Dit Asset kan niet uitgegeven worden.',
     'asset_deployable' => 'Deze status is uitgeefbaar. Dit Asset kan uitgegeven worden.',
     'processing_spinner' => 'Verwerken...',
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information'
 ];

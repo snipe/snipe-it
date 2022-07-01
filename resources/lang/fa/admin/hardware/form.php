@@ -60,4 +60,6 @@ return [
     'asset_not_deployable' => 'این وضعیت دارایی قابل استقرار نیست. این دارایی قابل پذیرش نیست.',
     'asset_deployable' => 'این وضعیت دارایی قابل استقرار است. این دارایی قابل پذیرش است.',
     'processing_spinner' => 'در حال پردازش...',
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information'
 ];

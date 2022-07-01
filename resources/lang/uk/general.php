@@ -65,7 +65,8 @@ return [
     'create'				=> 'Створити новий',
     'created'               => 'Елемент створено',
     'created_asset'			=> 'створений актив',
-    'created_at' 			=> 'Створено',
+    'created_at' 			=> 'Created At',
+    'created_by'            => 'Created By',
     'record_created' 		=> 'Record Created',
     'updated_at' 			=> 'Оновлено',
     'currency'  			=> '$', // this is deprecated
@@ -100,6 +101,7 @@ return [
     'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'Це використовується для генерації адрес електронної пошти під час імпортування',
     'error'				    => 'Error',
+    'example'				=> 'Example: ',
     'filastname_format'			=> 'First Initial Last Name (jsmith@example.com)',
     'firstname_lastname_format'	=> 'First Name Last Name (jane.smith@example.com)',
     'firstname_lastname_underscore_format' => 'First Name Last Name (jane_smith@example.com)',
@@ -256,6 +258,7 @@ return [
     'undeployable'			=> 'Не доступний для встановлення',
     'unknown_admin'			=> 'Невідомий адміністратор',
     'username_format'		=> 'Формат імені користувача',
+    'username'              => 'Username',
     'update'                => 'Оновлення',
     'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf and rar. Max upload size allowed is :size.',
     'uploaded'              => 'Завантажено',
@@ -357,4 +360,8 @@ return [
     'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
     'maintenance_mode_title' => 'System Temporarily Unavailable',
     'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
+    'purge_not_allowed'     => 'Purging deleted data has been disabled in the .env file. Contact support or your systems administrator.',
+    'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
+    'additional_files'           => 'Additional Files',
+
 ];

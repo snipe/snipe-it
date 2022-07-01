@@ -14,11 +14,8 @@ return array(
     */
 
     "password" => "Пароли должны совпадать и содержать минимум 6 символов.",
-
     "user"     => "Имя пользователя или адрес почты не верен",
-
-    "token"    => "Этот токен сброса пароля просрочен или неверен.",
-
-    "sent" => "Если такой адрес почты будет найден, напоминание пароля будет отправлено!",
+    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
+    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
 
 );
