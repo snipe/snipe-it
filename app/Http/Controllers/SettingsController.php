@@ -916,7 +916,7 @@ class SettingsController extends Controller
          */
         $messages = [
             'ldap_username_field.not_in' => '<code>sAMAccountName</code> (mixed case) will likely not work. You should use <code>samaccountname</code> (lowercase) instead. ',
-            'ldap_auth_filter_query.not_in' => '<code>uid=samaccountname</code> is probably not a valud auth filter. You probably want <code>uid=</code> ',
+            'ldap_auth_filter_query.not_in' => '<code>uid=samaccountname</code> is probably not a valid auth filter. You probably want <code>uid=</code> ',
             'ldap_filter.regex' => 'This value should probably not be wrapped in parentheses.',
         ];
 
