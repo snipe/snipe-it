@@ -110,12 +110,7 @@ class AcceptanceController extends Controller
             Storage::makeDirectory('private_uploads/signatures', 775);
         }
 
-        /**
-         * Check for the eula-pdfs directory
-         */
-        if (! Storage::exists('private_uploads/eula-pdfs')) {
-            Storage::makeDirectory('private_uploads/eula-pdfs', 775);
-        }
+
 
         $item = $acceptance->checkoutable_type::find($acceptance->checkoutable_id);
         $display_model = '';
@@ -126,19 +121,33 @@ class AcceptanceController extends Controller
 
         if ($request->input('asset_acceptance') == 'accepted') {
 
-            // The item was accepted, check for a signature
-            if ($request->filled('signature_output')) {
-                $sig_filename = 'siglog-'.Str::uuid().'-'.date('Y-m-d-his').'.png';
-                $data_uri = $request->input('signature_output');
-                $encoded_image = explode(',', $data_uri);
-                $decoded_image = base64_decode($encoded_image[1]);
-                Storage::put('private_uploads/signatures/'.$sig_filename, (string) $decoded_image);
+            /**
+             * Check for the eula-pdfs directory
+             */
+            if (! Storage::exists('private_uploads/eula-pdfs')) {
+                Storage::makeDirectory('private_uploads/eula-pdfs', 775);
+            }
 
-            // No image data is present, kick them back.
-            // This mostly only applies to users on super-duper crapola browsers *cough* IE *cough*
-            } else {
-                return redirect()->back()->with('error', trans('general.shitty_browser'));
+            if (Setting::getSettings()->require_accept_signature == '1') {
+                
+                // Check if the signature directory exists, if not create it
+                if (!Storage::exists('private_uploads/signatures')) {
+                    Storage::makeDirectory('private_uploads/signatures', 775);
+                }
 
+                // The item was accepted, check for a signature
+                if ($request->filled('signature_output')) {
+                    $sig_filename = 'siglog-' . Str::uuid() . '-' . date('Y-m-d-his') . '.png';
+                    $data_uri = $request->input('signature_output');
+                    $encoded_image = explode(',', $data_uri);
+                    $decoded_image = base64_decode($encoded_image[1]);
+                    Storage::put('private_uploads/signatures/' . $sig_filename, (string)$decoded_image);
+
+                    // No image data is present, kick them back.
+                    // This mostly only applies to users on super-duper crapola browsers *cough* IE *cough*
+                } else {
+                    return redirect()->back()->with('error', trans('general.shitty_browser'));
+                }
             }
 
 
