@@ -135,7 +135,7 @@ class AcceptanceController extends Controller
                 Storage::put('private_uploads/signatures/'.$sig_filename, (string) $decoded_image);
 
             // No image data is present, kick them back.
-            // This mostly only applies to users on supoer-deuper crapola browsers *cough* IE *cough*
+            // This mostly only applies to users on super-duper crapola browsers *cough* IE *cough*
             } else {
                 return redirect()->back()->with('error', trans('general.shitty_browser'));
 
