@@ -65,7 +65,8 @@ return [
     'create'				=> 'Skep nuwe',
     'created'               => 'Item geskep',
     'created_asset'			=> 'geskep bate',
-    'created_at' 			=> 'Geskep op',
+    'created_at' 			=> 'Created At',
+    'created_by'            => 'Created By',
     'record_created' 		=> 'Record Created',
     'updated_at' 			=> 'Opgedateer op',
     'currency'  			=> '$', // this is deprecated
@@ -100,6 +101,7 @@ return [
     'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'Dit word gebruik om e-posadresse te genereer wanneer u dit invoer',
     'error'				    => 'Error',
+    'example'				=> 'Example: ',
     'filastname_format'			=> 'Eerste Voorletter (jsmith@voorbeeld.com)',
     'firstname_lastname_format'	=> 'Vir Naam Van (jane.smith@example.com)',
     'firstname_lastname_underscore_format' => 'First Name Last Name (jane_smith@example.com)',
@@ -256,6 +258,7 @@ return [
     'undeployable'			=> 'Un-verbintenis',
     'unknown_admin'			=> 'Onbekende Admin',
     'username_format'		=> 'Gebruikernaam',
+    'username'              => 'Username',
     'update'                => 'Opdateer',
     'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf and rar. Max upload size allowed is :size.',
     'uploaded'              => 'opgelaai',
@@ -357,4 +360,8 @@ return [
     'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
     'maintenance_mode_title' => 'System Temporarily Unavailable',
     'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
+    'purge_not_allowed'     => 'Purging deleted data has been disabled in the .env file. Contact support or your systems administrator.',
+    'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
+    'additional_files'           => 'Additional Files',
+
 ];

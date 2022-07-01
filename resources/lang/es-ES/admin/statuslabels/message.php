@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'Estos activos no pueden asignarse a nadie.',
-        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
+        'deployable'   => 'Estos activos pueden ser retirados. Una vez asignados, asumirán un estado meta de <i class="fas fa-circle text-blue"></i> <strong>Desplegado</strong>.',
         'archived'   => 'Estos activos no pueden desprotegerse y solo aparecerán en la vista Archivada. Esto es útil para retener información sobre activos para presupuestos / propósitos históricos, pero mantenerlos fuera de la lista de activos del día a día.',
         'pending'   => 'Estos activos aún no se pueden asignar a nadie, a menudo se utilizan para artículos que están pendientes de reparación, pero se espera que vuelvan a la circulación.',
     ],

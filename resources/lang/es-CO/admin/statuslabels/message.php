@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'Estos equipos no pueden ser asignados.',
-        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
+        'deployable'   => 'Estos activos pueden ser retirados. Una vez asignados, asumirán un estado meta de <i class="fas fa-circle text-blue"></i> <strong>Desplegado</strong>.',
         'archived'   => 'Estos equipos no pueden ser asignados, y solo se mostrarán en la vista de Archivados. Esto es útil para retener información sobre equipos por razones de presupuesto/revisión histórica, mientras están fuera de la lista de equipos del día a día.',
         'pending'   => 'Estos equipos no pueden ser asignados, suele usarse para ítems que están en reparación, o que se espera que regresen a circulación eventualmente.',
     ],

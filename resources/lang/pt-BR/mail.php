@@ -59,7 +59,7 @@ return [
     'test_mail_text' => 'Isto é um e-mail de teste do Snipe-IT Asset Management System. Se você recebeu essa mensagem, quer dizer que o e-mail está funcionando :)',
     'the_following_item' => 'O Item a seguir foi devolvido: ',
     'low_inventory_alert' => 'Há um :count que está abaixo do estoque mínimo ou em breve estará abaixo. | Existem :count items que estão abaixo do estoque mínimo ou em breve estarão baixos.',
-    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'Há um :count ativo com a garantia expirando nos próximos :threshold dias. Existem :count ativos com a garantia expirando nos próximos :threshold dias.',
     'license_expiring_alert' => 'Há uma :count licença expirando nos próximos :threshold dias. | Existem :count licenças expirand nos próximos :threshold dias.',
     'to_reset' => 'Para fazer reset da senha do :web, preencha este formulário:',
     'type' => 'Tipo',

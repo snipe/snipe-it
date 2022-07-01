@@ -14,11 +14,8 @@ return array(
     */
 
     "password" => "Rhaid i cyfrineiriau fod yn chwe nod ac cyfateb i'r cadarnhad.",
-
     "user"     => "Enw defnyddiwr neu cyfrinair yn anghywir",
-
-    "token"    => "Nid yw'r tocyn ail-osod cyfrinair yma yn ddilys.",
-
-    "sent" => "Os yw'r cyfeiriad ebost yn ddilys, cewch nodyn atgoffa!",
+    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
+    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
 
 );

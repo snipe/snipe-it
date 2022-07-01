@@ -65,7 +65,8 @@ return [
     'create'				=> '新增',
     'created'               => '項目已新增',
     'created_asset'			=> '新增資產',
-    'created_at' 			=> '新增於',
+    'created_at' 			=> 'Created At',
+    'created_by'            => 'Created By',
     'record_created' 		=> '記錄已建立',
     'updated_at' 			=> '更新日',
     'currency'  			=> '$', // this is deprecated
@@ -100,6 +101,7 @@ return [
     'employee_number'       => 'Employee Number',
     'email_domain_help'		=> '這用在匯入時產生電子郵件地址',
     'error'				    => 'Error',
+    'example'				=> 'Example: ',
     'filastname_format'			=> '縮寫名 姓，例如 (jsmith@example.com)',
     'firstname_lastname_format'	=> '名 姓，例如 (jane.smith@example.com)',
     'firstname_lastname_underscore_format' => '名字姓氏，例如（jane_smith@example.com）',
@@ -256,6 +258,7 @@ return [
     'undeployable'			=> '不可佈署',
     'unknown_admin'			=> '未知管理員',
     'username_format'		=> '使用者名稱格式',
+    'username'              => 'Username',
     'update'                => '更新',
     'upload_filetypes_help'      => '允許的檔案類別為 png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf 與 rar. 最大允許上傳的大小是 :size.',
     'uploaded'              => '已上傳',
@@ -357,4 +360,8 @@ return [
     'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
     'maintenance_mode_title' => 'System Temporarily Unavailable',
     'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
+    'purge_not_allowed'     => 'Purging deleted data has been disabled in the .env file. Contact support or your systems administrator.',
+    'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
+    'additional_files'           => 'Additional Files',
+
 ];

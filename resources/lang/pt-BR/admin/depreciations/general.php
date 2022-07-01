@@ -6,11 +6,11 @@ return [
     'asset_depreciations'  					=> 'Depreciações de Ativos',
     'create'  					            => 'Criar Depreciação',
     'depreciation_name'  					=> 'Nome da Depreciação',
-    'depreciation_min'                      => 'Floor Value of Depreciation',
+    'depreciation_min'                      => 'Valor mínimo de depreciação',
     'number_of_months'  					=> 'Número de Meses',
     'update'  					            => 'Atualizar Depreciação',
     'depreciation_min'                      => 'Valor Mínimo após Depreciação',
-    'no_depreciations_warning'               => '<strong>Warning: </strong>
-                      You do not currently have any depreciations set up.
-                      Please set up at least one depreciation to view the depreciation report.',
+    'no_depreciations_warning'               => '<strong>Aviso: </strong>
+                      Você não tem atualmente nenhuma depreciação configurada.
+                      Por favor, defina pelo menos uma depreciação para visualizar o relatório de depreciação.',
 ];

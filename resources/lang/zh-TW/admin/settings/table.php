@@ -2,5 +2,5 @@
 
 return array(
     'created'   => 'Created',
-    'size' => 'Size',
+    'size' => '尺寸',
 );

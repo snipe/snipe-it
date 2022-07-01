@@ -2,6 +2,6 @@
 
 return [
     'select_company' => '選擇公司',
-    'about_companies' => 'About Companies',
-    'about_companies_description' => '        You can use companies as a simple informative field, or you can use them to restrict asset visibility and availability to users with a specific company by enabling Full Company Support in your Admin Settings.',
+    'about_companies' => '關於公司',
+    'about_companies_description' => '        你可以將公司當做一個簡單資訊欄位, 也可以通過在管理設置中啟用全面公司支持來使用它們來限制特定公司的用戶的資產可見性和可用性.',
 ];

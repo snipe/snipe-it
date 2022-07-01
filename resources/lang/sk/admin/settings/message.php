@@ -21,8 +21,8 @@ return [
     ],
     'mail' => [
         'sending' => 'Sending Test Email...',
-        'success' => 'Mail sent!',
-        'error' => 'Mail could not be sent.',
+        'success' => 'Email odoslaný!',
+        'error' => 'Email sa nepodarilo odoslať.',
         'additional' => 'No additional error message provided. Check your mail settings and your app log.'
     ],
     'ldap' => [
@@ -37,7 +37,7 @@ return [
         'sending' => 'Sending Slack test message...',
         'success_pt1' => 'Success! Check the ',
         'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
-        '500' => '500 Server Error.',
-        'error' => 'Something went wrong.',
+        '500' => '500 Chyba servera.',
+        'error' => 'Niečo sa pokazilo.',
     ]
 ];

@@ -40,10 +40,12 @@ return [
     'warranty'			=> 'Garantía',
         'warranty_expires'		=> 'Vencimiento de la Garantía',
     'years'				=> 'años',
-    'asset_location' => 'Update Asset Location',
-    'asset_location_update_default_current' => 'Update default location AND actual location',
-    'asset_location_update_default' => 'Update only default location',
-    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
-    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
-    'processing_spinner' => 'Processing...',
+    'asset_location' => 'Actualizar ubicación del recurso',
+    'asset_location_update_default_current' => 'Actualizar ubicación predeterminada y ubicación actual',
+    'asset_location_update_default' => 'Actualizar sólo la ubicación predeterminada',
+    'asset_not_deployable' => 'Ese estado de activos no es desplegable. Este activo no puede ser verificado.',
+    'asset_deployable' => 'Ese estado de activos no es desplegable. Este activo no puede ser verificado.',
+    'processing_spinner' => 'Procesando...',
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information'
 ];

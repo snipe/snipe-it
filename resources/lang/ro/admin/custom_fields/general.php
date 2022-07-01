@@ -41,7 +41,7 @@ return [
     'make_required' => 'Opțional - faceți clic pentru a deveni obligatoriu',
     'reorder' => 'Reordonare',
     'db_field' => 'Câmp în baza de date',
-    'db_convert_warning' => 'AVERTISMENT. Acest câmp este în tabelul câmpurilor personalizate ca <code> :db_column </code> dar ar trebui să fie :expected </code>.',
+    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code>:db_column</code> but should be <code>:expected</code>.',
     'is_unique' => 'This value must be unique across all assets',
     'unique' => 'Unique',
 ];

@@ -8,7 +8,7 @@ return [
     'change' 		=> 'Giriş/Çıkış',
     'checkout_date' => 'Çıkış Tarihi',
     'checkoutto' 	=> 'Çıkış Yapıldı',
-    'current_value' => 'Current Value',
+    'current_value' => 'Mevcut Değer',
     'diff' 			=> 'Fark',
     'dl_csv' 		=> 'CSV Dosyasını İndir',
     'eol' 			=> 'Ömür Süresi',
@@ -26,5 +26,5 @@ return [
     'requesting_user' => 'Talep Sahibi',
     'requested_date' => 'Talep Edilen Tarih',
     'changed'       => 'Değişti',
-    'icon' => 'Icon',
+    'icon' => 'Simge',
 ];

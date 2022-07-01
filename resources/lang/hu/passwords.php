@@ -1,6 +1,8 @@
 <?php
 
 return [
-    'sent'	        => 'Sikeres: Ha az email cím létezik a rendszerünkben, akkor a jelszó visszaállító emailt elküldtük.',
-    'user'			=> 'Nem található aktív felhasználó a megadott email címmel.',
+    'sent'	        => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
+    'user'			=> 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
+    'token'         => 'This password reset token is invalid or expired, or does not match the username provided.',
+    'reset'         => 'Your password has been reset!',
 ];

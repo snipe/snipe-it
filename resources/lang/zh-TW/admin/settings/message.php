@@ -20,9 +20,9 @@ return [
         'success'               => '已成功清除刪除記錄。',
     ],
     'mail' => [
-        'sending' => 'Sending Test Email...',
+        'sending' => '正在發送測試郵件...',
         'success' => 'Mail sent!',
-        'error' => 'Mail could not be sent.',
+        'error' => '郵件無法發送',
         'additional' => 'No additional error message provided. Check your mail settings and your app log.'
     ],
     'ldap' => [
@@ -30,11 +30,11 @@ return [
         '500' => '500 Server Error. Please check your server logs for more information.',
         'error' => 'Something went wrong :(',
         'sync_success' => 'A sample of 10 users returned from the LDAP server based on your settings:',
-        'testing_authentication' => 'Testing LDAP Authentication...',
-        'authentication_success' => 'User authenticated against LDAP successfully!'
+        'testing_authentication' => 'LDAP 授權測試中...',
+        'authentication_success' => '用戶成功透過 LDAP 驗證'
     ],
     'slack' => [
-        'sending' => 'Sending Slack test message...',
+        'sending' => 'Slack 測試訊息送出中...',
         'success_pt1' => 'Success! Check the ',
         'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
         '500' => '500 Server Error.',

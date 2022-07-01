@@ -29,7 +29,7 @@ return [
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'Zálohy',
     'backups_help'              => 'Create, download, and restore backups ',
-    'backups_restoring'         => 'Restoring from Backup',
+    'backups_restoring'         => 'Obnovenie zo zálohy',
     'backups_upload'            => 'Upload Backup',
     'backups_path'              => 'Backups on the server are stored in <code>:path</code>',
     'backups_restore_warning'   => 'Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to restore from a previous backup. (This does not currently work with S3 file storage or Docker.<br><br>Your <strong>entire :app_name database and any uploaded files will be completely replaced</strong> by what\'s in the backup file.  ',

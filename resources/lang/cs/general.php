@@ -65,7 +65,8 @@ return [
     'create'				=> 'Vytvořit nové',
     'created'               => 'Položka vytvořena',
     'created_asset'			=> 'vytvořit majetek',
-    'created_at' 			=> 'Vytvořeno',
+    'created_at' 			=> 'Created At',
+    'created_by'            => 'Created By',
     'record_created' 		=> 'Záznam vytvořen',
     'updated_at' 			=> 'Aktualizováno',
     'currency'  			=> 'Kč', // this is deprecated
@@ -100,6 +101,7 @@ return [
     'employee_number'       => 'Číslo zaměstnance',
     'email_domain_help'		=> 'Toto je použito na generování e-mailových adres při importu',
     'error'				    => 'Chyba',
+    'example'				=> 'Example: ',
     'filastname_format'			=> 'Iniciál Jména Příjmení (jsmith@example.com)',
     'firstname_lastname_format'	=> 'Jméno Příjmení (jane.smith@example.com)',
     'firstname_lastname_underscore_format' => 'Jméno Příjmení (jan_novak@example.com)',
@@ -256,6 +258,7 @@ return [
     'undeployable'			=> 'Ne-přiřaditelné',
     'unknown_admin'			=> 'Neznámy správce',
     'username_format'		=> 'Formát uživatelského jména',
+    'username'              => 'Username',
     'update'                => 'Aktualizace',
     'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf and rar. Max upload size allowed is :size.',
     'uploaded'              => 'Nahráno',
@@ -357,4 +360,8 @@ return [
     'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
     'maintenance_mode_title' => 'System Temporarily Unavailable',
     'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
+    'purge_not_allowed'     => 'Purging deleted data has been disabled in the .env file. Contact support or your systems administrator.',
+    'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
+    'additional_files'           => 'Additional Files',
+
 ];

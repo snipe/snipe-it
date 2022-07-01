@@ -65,7 +65,8 @@ return [
     'create'				=> 'Buat baru',
     'created'               => 'Item dibuat',
     'created_asset'			=> 'Buat aset',
-    'created_at' 			=> 'Dibuat di',
+    'created_at' 			=> 'Created At',
+    'created_by'            => 'Created By',
     'record_created' 		=> 'Rekam Dibuat',
     'updated_at' 			=> 'Diperbarui pada',
     'currency'  			=> '$', // this is deprecated
@@ -100,6 +101,7 @@ return [
     'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'Ini digunakan untuk untuk membuat email ketika melakukan proses import',
     'error'				    => 'Error',
+    'example'				=> 'Example: ',
     'filastname_format'			=> 'Inisial pertama - Nama belakang (jsmith@example.com)',
     'firstname_lastname_format'	=> 'Nama depan - Nama belakang (jane.smith@example.com)',
     'firstname_lastname_underscore_format' => 'Nama Depan Nama Belakang (jane_smith@example.com)',
@@ -256,6 +258,7 @@ return [
     'undeployable'			=> 'Belum siap digunakan',
     'unknown_admin'			=> 'Admin tidak diketahui',
     'username_format'		=> 'Format pengguna',
+    'username'              => 'Username',
     'update'                => 'Memperbarui',
     'upload_filetypes_help'      => 'Jenis file yang diizinkan adalah png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf, dan rar. Ukuran unggahan maksimum yang diizinkan adalah :size.',
     'uploaded'              => 'Terunggah',
@@ -357,4 +360,8 @@ return [
     'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
     'maintenance_mode_title' => 'System Temporarily Unavailable',
     'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
+    'purge_not_allowed'     => 'Purging deleted data has been disabled in the .env file. Contact support or your systems administrator.',
+    'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
+    'additional_files'           => 'Additional Files',
+
 ];

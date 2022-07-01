@@ -14,11 +14,8 @@ return array(
     */
 
     "password" => "Şifre en az 6 karakter olmalı ve birbiriyle eşleşmeli.",
-
     "user"     => "Kullanıcı adı veya e-mail adresi hatalı",
-
-    "token"    => "Şifre sıfırlama anahtarı geçersiz.",
-
-    "sent" => "Eşleşen email bulunsaydı, şifre gönderilirdi!",
+    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
+    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
 
 );
