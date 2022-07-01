@@ -65,7 +65,8 @@ return [
     'create'				=> 'Loo uus',
     'created'               => 'Üksus on loodud',
     'created_asset'			=> 'loodud vara',
-    'created_at' 			=> 'Loodud',
+    'created_at' 			=> 'Created At',
+    'created_by'            => 'Created By',
     'record_created' 		=> 'Väärtus loodud',
     'updated_at' 			=> 'Viimati muudetud',
     'currency'  			=> '$', // this is deprecated
@@ -100,6 +101,7 @@ return [
     'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'Seda kasutatakse importimisel e-posti aadresside loomiseks',
     'error'				    => 'Error',
+    'example'				=> 'Example: ',
     'filastname_format'			=> 'Esimene esmane perekonnanimi (jsmith@example.com)',
     'firstname_lastname_format'	=> 'Eesnimi eesnimi (jane.smith@example.com)',
     'firstname_lastname_underscore_format' => 'Eesnimi Perenimi (eesnimi.perenimi@poleolemas.ee)',
@@ -256,6 +258,7 @@ return [
     'undeployable'			=> 'Unableployable',
     'unknown_admin'			=> 'Tundmatu Admin',
     'username_format'		=> 'Kasutajanime formaat',
+    'username'              => 'Username',
     'update'                => 'Uuenda',
     'upload_filetypes_help'      => 'Lubatud failileiendid on png, gif, jpg, jpeg, doc, docx, pdf, xls, txt, lic, zip ja rar. Suurim lubatud üleslaadimise maht on :size.',
     'uploaded'              => 'Üles laetud',
@@ -357,4 +360,8 @@ return [
     'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
     'maintenance_mode_title' => 'System Temporarily Unavailable',
     'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
+    'purge_not_allowed'     => 'Purging deleted data has been disabled in the .env file. Contact support or your systems administrator.',
+    'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
+    'additional_files'           => 'Additional Files',
+
 ];

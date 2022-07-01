@@ -14,11 +14,8 @@ return array(
     */
 
     "password" => "Les mots de passe doivent contenir six caractères et correspondre à la confirmation.",
-
     "user"     => "Le nom d'utilisateur ou l'e-mail est incorrect",
-
-    "token"    => "Ce jeton de réinitialisation est invalide.",
-
-    "sent" => "Si votre adresse e-mail est trouvée, un rappel de mot de passe a été envoyé !",
+    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
+    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
 
 );

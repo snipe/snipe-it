@@ -1,6 +1,8 @@
 <?php
 
 return [
-    'sent'	        => 'Successo: Se l\'indirizzo email esiste nel sistema, riceverà un\'email di recupero password.',
-    'user'			=> 'Non risulta nessun utente attivo con questa email.',
+    'sent'	        => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
+    'user'			=> 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
+    'token'         => 'This password reset token is invalid or expired, or does not match the username provided.',
+    'reset'         => 'Your password has been reset!',
 ];

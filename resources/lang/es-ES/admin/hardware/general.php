@@ -6,7 +6,7 @@ return [
     'archived'  				=> 'Archivado',
     'asset'  					=> 'Equipo',
     'bulk_checkout'             => 'Activos Asignados',
-    'bulk_checkin'              => 'Checkin Assets',
+    'bulk_checkin'              => 'Quitar Equipo',
     'checkin'  					=> 'Quitar Equipo',
     'checkout'  				=> 'Activo de pago',
     'clone'  					=> 'Clonar Equipo',
@@ -16,29 +16,29 @@ return [
     'model_deleted'  			=> 'Este Modelo de activo fue eliminado. Debes restaurar este modelo antes de poder restaurar el Activo.',
     'requestable'               => 'Requerible',
     'requested'				    => 'Solicitado',
-    'not_requestable'           => 'Not Requestable',
-    'requestable_status_warning' => 'Do not change  requestable status',
+    'not_requestable'           => 'No solicitable',
+    'requestable_status_warning' => 'No cambiar el estado solicitable',
     'restore'  					=> 'Restaurar equipo',
     'pending'  					=> 'Pendiente',
     'undeployable'  			=> 'No desplegable',
     'view'  					=> 'Ver Equipo',
-    'csv_error' => 'You have an error in your CSV file:',
+    'csv_error' => 'Tiene un error en su archivo CSV:',
     'import_text' => '
     <p>
-    Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
+    Sube un CSV que contenga historial de activos. Los activos y los usuarios DEBEN existir en el sistema, o se omitirán. Los activos coincidentes para importar el historial ocurren contra la etiqueta de activos. Intentaremos encontrar un usuario que coincida con el nombre del usuario que proporciones, y los criterios que seleccionas a continuación. Si no selecciona ningún criterio a continuación, simplemente tratará de coincidir con el formato de nombre de usuario que configuraste en el Administrador &gt; Configuración General.
     </p>
 
-    <p>Fields included in the CSV must match the headers: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Any additional fields will be ignored. </p>
+    <p>Los campos incluidos en el CSV deben coincidir con los encabezados: <strong>Etiqueta de activos, Nombre, Fecha de salida, Fecha de comprobación</strong>. Cualquier campo adicional será ignorado. </p>
 
-    <p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
+    <p>Fecha de Checkin: las fechas de check-in en blanco o futuro comprobarán los elementos al usuario asociado. Excluyendo la columna Fecha de Checkin creará una fecha de check-in con la fecha de hoy.</p>
     ',
-    'csv_import_match_f-l' => 'Try to match users by firstname.lastname (jane.smith) format',
-    'csv_import_match_initial_last' => 'Try to match users by first initial last name (jsmith) format',
-    'csv_import_match_first' => 'Try to match users by first name (jane) format',
-    'csv_import_match_email' => 'Try to match users by email as username',
-    'csv_import_match_username' => 'Try to match users by username',
-    'error_messages' => 'Error messages:',
-    'success_messages' => 'Success messages:',
-    'alert_details' => 'Please see below for details.',
-    'custom_export' => 'Custom Export'
+    'csv_import_match_f-l' => 'Intentar coincidir con los usuarios por el formato firstname.lastname (jane.smith)',
+    'csv_import_match_initial_last' => 'Intentar coincidir los usuarios con el primer apellido inicial (jsmith) formato',
+    'csv_import_match_first' => 'Intentar coincidir con los usuarios por nombre de usuario (jane) formato',
+    'csv_import_match_email' => 'Intentar coincidir con los usuarios por correo electrónico como nombre de usuario',
+    'csv_import_match_username' => 'Intentar coincidir con los usuarios por correo electrónico como nombre de usuario',
+    'error_messages' => 'Mensajes de error:',
+    'success_messages' => 'Mensajes de éxito:',
+    'alert_details' => 'Por favor vea abajo para más detalles.',
+    'custom_export' => 'Personalizar exportación'
 ];

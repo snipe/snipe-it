@@ -91,8 +91,13 @@ return [
     'url'                  => 'Het formaat van :attribute is ongeldig.',
     'unique_undeleted'     => 'De :attribute moet uniek zijn. ',
     'non_circular'         => ':attribute mag geen circulaire referentie aanmaken.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
     'gte'                  => [
-        'numeric'          => 'Value cannot be negative'
+        'numeric'          => 'Waarde mag niet negatief zijn'
     ],
 
 

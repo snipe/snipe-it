@@ -17,7 +17,7 @@ return [
         'error'   			=> 'Ce bien n\'a pas été actualisé, veuillez réessayer',
         'success' 			=> 'Bien actualisé correctement.',
         'nothing_updated'	=>  'Aucun champ n\'a été sélectionné, rien n\'a été actualisé.',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'no_assets_selected'  =>  'Aucune ressource n\'a été sélectionnée, rien n\'a donc été mis à jour.',
     ],
 
     'restore' => [

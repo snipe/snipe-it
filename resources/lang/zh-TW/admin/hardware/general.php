@@ -6,7 +6,7 @@ return [
     'archived'  				=> '已封存',
     'asset'  					=> '資產',
     'bulk_checkout'             => '借出資產',
-    'bulk_checkin'              => 'Checkin Assets',
+    'bulk_checkin'              => '資產繳回',
     'checkin'  					=> '資產繳回',
     'checkout'  				=> '借出資產',
     'clone'  					=> '複製資產',
@@ -16,13 +16,13 @@ return [
     'model_deleted'  			=> '此資產模板已被刪除. 你必須先還原資產模板才可還原資產.',
     'requestable'               => '可申領',
     'requested'				    => '已申領',
-    'not_requestable'           => 'Not Requestable',
+    'not_requestable'           => '不可申請',
     'requestable_status_warning' => 'Do not change  requestable status',
     'restore'  					=> '還原資產',
     'pending'  					=> '待處理',
     'undeployable'  			=> '不可部署',
     'view'  					=> '檢視資產',
-    'csv_error' => 'You have an error in your CSV file:',
+    'csv_error' => '你的 CSV 檔案有錯誤',
     'import_text' => '
     <p>
     Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
@@ -37,8 +37,8 @@ return [
     'csv_import_match_first' => 'Try to match users by first name (jane) format',
     'csv_import_match_email' => 'Try to match users by email as username',
     'csv_import_match_username' => 'Try to match users by username',
-    'error_messages' => 'Error messages:',
-    'success_messages' => 'Success messages:',
-    'alert_details' => 'Please see below for details.',
-    'custom_export' => 'Custom Export'
+    'error_messages' => '錯誤訊息:',
+    'success_messages' => '成功訊息:',
+    'alert_details' => '請看下面的詳細資料.',
+    'custom_export' => '自定義匯出'
 ];

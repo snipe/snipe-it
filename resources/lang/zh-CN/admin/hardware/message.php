@@ -16,7 +16,7 @@ return [
         'error'   			=> '资产更新失败，请重试。',
         'success' 			=> '资产更新成功。',
         'nothing_updated'	=>  '一个也没有选，所以什么也不会更新。',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'no_assets_selected'  =>  '没有选择任何资产，因此没有更新任何内容。',
     ],
 
     'restore' => [

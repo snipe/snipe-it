@@ -6,11 +6,11 @@ return [
     'asset_depreciations'  					=> '償却資産',
     'create'  					            => '減価償却の作成',
     'depreciation_name'  					=> '減価償却名',
-    'depreciation_min'                      => 'Floor Value of Depreciation',
+    'depreciation_min'                      => '減価償却の残存簿価',
     'number_of_months'  					=> '月数',
     'update'  					            => '減価償却の更新',
     'depreciation_min'                      => '残存簿価',
-    'no_depreciations_warning'               => '<strong>Warning: </strong>
-                      You do not currently have any depreciations set up.
-                      Please set up at least one depreciation to view the depreciation report.',
+    'no_depreciations_warning'               => '<strong>警告: </strong>
+                      現在、減価償却が設定されていません。
+                      減価償却レポートを表示するには、少なくとも1つの減価償却を設定してください。',
 ];

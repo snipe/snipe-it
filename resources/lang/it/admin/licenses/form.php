@@ -3,7 +3,7 @@
 return array(
 
     'asset'             => 'Bene',
-    'checkin'           => 'Carica',
+    'checkin'           => 'Disassegnare',
     'create'            => 'Crea Licenza',
     'expiration'        => 'Data di scadenza',
     'license_key'       => 'Chiave licenza',

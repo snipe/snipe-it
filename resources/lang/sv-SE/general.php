@@ -65,7 +65,8 @@ return [
     'create'				=> 'Skapa Ny',
     'created'               => 'Artikel skapad',
     'created_asset'			=> 'skapa tillgång',
-    'created_at' 			=> 'Skapad',
+    'created_at' 			=> 'Created At',
+    'created_by'            => 'Created By',
     'record_created' 		=> 'Poster skapade',
     'updated_at' 			=> 'Uppdaterad på',
     'currency'  			=> 'SEK', // this is deprecated
@@ -100,6 +101,7 @@ return [
     'employee_number'       => 'Anställningsnummer',
     'email_domain_help'		=> 'Detta används för att generera e-postadresser vid import',
     'error'				    => 'Fel',
+    'example'				=> 'Example: ',
     'filastname_format'			=> 'Första Initiala Efternamn (jsmith@example.com)',
     'firstname_lastname_format'	=> 'Förnamn Efternamn (jane.smith@example.com)',
     'firstname_lastname_underscore_format' => 'Förnamn Efternamn (jane.smith@example.com)',
@@ -256,6 +258,7 @@ return [
     'undeployable'			=> 'Ej tillgängliga',
     'unknown_admin'			=> 'Okänd Admin',
     'username_format'		=> 'Användarnamn Format',
+    'username'              => 'Username',
     'update'                => 'Uppdatering',
     'upload_filetypes_help'      => 'Tillåtna filtyper är png, gif, jpg, jpeg, doc, docx, pdf, xls, txt, lic, zip och rar. Max tillåten uppladdningsstorlek är: storlek.',
     'uploaded'              => 'Uppladdad',
@@ -357,4 +360,8 @@ return [
     'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
     'maintenance_mode_title' => 'System Temporarily Unavailable',
     'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
+    'purge_not_allowed'     => 'Purging deleted data has been disabled in the .env file. Contact support or your systems administrator.',
+    'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
+    'additional_files'           => 'Additional Files',
+
 ];

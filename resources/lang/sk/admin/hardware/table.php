@@ -26,5 +26,5 @@ return [
     'requesting_user' => 'Requesting User',
     'requested_date' => 'Requested Date',
     'changed'       => 'Changed',
-    'icon' => 'Icon',
+    'icon' => 'Ikona',
 ];

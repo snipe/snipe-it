@@ -6,7 +6,7 @@ return [
     'archived'  				=> 'Arquivado',
     'asset'  					=> 'Ativo',
     'bulk_checkout'             => 'Alocação de Ativos',
-    'bulk_checkin'              => 'Checkin Assets',
+    'bulk_checkin'              => 'Check-in de Ativo',
     'checkin'  					=> 'Retornar Ativo',
     'checkout'  				=> 'Checkout de Ativo',
     'clone'  					=> 'Clonar Ativo',
@@ -16,29 +16,29 @@ return [
     'model_deleted'  			=> 'Este modelo de Ativos foi excluído. Você deve restaurar o modelo antes de restaurar o Ativo.',
     'requestable'               => 'Solicitável',
     'requested'				    => 'Solicitado',
-    'not_requestable'           => 'Not Requestable',
-    'requestable_status_warning' => 'Do not change  requestable status',
+    'not_requestable'           => 'Não solicitável',
+    'requestable_status_warning' => 'Não altere o status solicitável',
     'restore'  					=> 'Restaurar Ativo',
     'pending'  					=> 'Pendente',
     'undeployable'  			=> 'Não implementável',
     'view'  					=> 'Ver Ativo',
-    'csv_error' => 'You have an error in your CSV file:',
+    'csv_error' => 'Você tem um erro no seu arquivo CSV:',
     'import_text' => '
     <p>
-    Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
+    Envie um CSV que contém o histórico de ativos. Os ativos e usuários DEVEM já existir no sistema, ou eles serão ignorados. Correspondendo mídias para a importação de histórico acontece com a tag de conteúdo. Tentaremos encontrar um usuário correspondente com base no nome de usuário que você fornece, e nos critérios que você selecionar abaixo. Se você não selecionar nenhum critério abaixo, ele vai simplesmente tentar combinar com o formato de nome de usuário configurado nas configurações de Administrador &gt; Geral.
     </p>
 
-    <p>Fields included in the CSV must match the headers: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Any additional fields will be ignored. </p>
+    <p>Campos incluídos no CSV devem corresponder os cabeçalhos: <strong>Marcador de Ativo, Nome, data de check-out, data</strong>. check-in. Quaisquer campos adicionais serão ignorados. </p>
 
-    <p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
+    <p>Data de Checkin: em branco ou em datas futuras de check-in fará check-in dos itens para o usuário associado. Excluindo a coluna Data de check-in criará uma data de check-in com a data de hoje.</p>
     ',
-    'csv_import_match_f-l' => 'Try to match users by firstname.lastname (jane.smith) format',
-    'csv_import_match_initial_last' => 'Try to match users by first initial last name (jsmith) format',
-    'csv_import_match_first' => 'Try to match users by first name (jane) format',
-    'csv_import_match_email' => 'Try to match users by email as username',
-    'csv_import_match_username' => 'Try to match users by username',
-    'error_messages' => 'Error messages:',
-    'success_messages' => 'Success messages:',
-    'alert_details' => 'Please see below for details.',
-    'custom_export' => 'Custom Export'
+    'csv_import_match_f-l' => 'Tente corresponder aos usuários pelo formato firstname.lastname (jane.smith)',
+    'csv_import_match_initial_last' => 'Tente combinar os usuários pelo primeiro formato de sobrenome (jsmith)',
+    'csv_import_match_first' => 'Tente combinar os usuários pelo formato do primeiro nome (jane)',
+    'csv_import_match_email' => 'Tentar corresponder aos usuários por e-mail como nome de usuário',
+    'csv_import_match_username' => 'Tente corresponder aos usuários pelo nome de usuário',
+    'error_messages' => 'Mensagens de erro:',
+    'success_messages' => 'Mensagens de sucesso:',
+    'alert_details' => 'Por favor, veja abaixo para detalhes.',
+    'custom_export' => 'Exportação Personalizada'
 ];

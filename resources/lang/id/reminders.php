@@ -14,11 +14,8 @@ return array(
     */
 
     "password" => "Kata sandi harus 6 karakter dan sama.",
-
     "user"     => "Nama pengguna atau alamat email salah",
-
-    "token"    => "Password reset token tidak valid.",
-
-    "sent" => "Jika alamat email yang cocok ditemukan, pengingat password telah dikirim!",
+    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
+    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
 
 );

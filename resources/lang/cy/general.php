@@ -65,7 +65,8 @@ return [
     'create'				=> 'Creu newydd',
     'created'               => 'Eitem wedi\'i Greu',
     'created_asset'			=> 'ased wedi creu',
-    'created_at' 			=> 'Crëwyd',
+    'created_at' 			=> 'Created At',
+    'created_by'            => 'Created By',
     'record_created' 		=> 'Record Created',
     'updated_at' 			=> 'Diweddarwyd ar',
     'currency'  			=> '$', // this is deprecated
@@ -100,6 +101,7 @@ return [
     'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'Defnyddir hwn i gynhyrchu cyfeiriadau e-bost wrth fewnforio',
     'error'				    => 'Error',
+    'example'				=> 'Example: ',
     'filastname_format'			=> 'Llythyren Cyntaf Enw Cyntaf Cyfenw (jsmith@example.com)',
     'firstname_lastname_format'	=> 'Enw Cyntaf Enw Olaf (jane.smith@example.com)',
     'firstname_lastname_underscore_format' => 'Enw Cyntaf Enw Olaf (jane.smith@example.com)',
@@ -256,6 +258,7 @@ return [
     'undeployable'			=> 'Ddim modd nodi allan',
     'unknown_admin'			=> 'Gweinydd Anhysbys',
     'username_format'		=> 'Fformat enw defnyddiwr',
+    'username'              => 'Username',
     'update'                => 'Diweddaru',
     'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf and rar. Max upload size allowed is :size.',
     'uploaded'              => 'Wedi Uwchlwytho',
@@ -357,4 +360,8 @@ return [
     'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
     'maintenance_mode_title' => 'System Temporarily Unavailable',
     'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
+    'purge_not_allowed'     => 'Purging deleted data has been disabled in the .env file. Contact support or your systems administrator.',
+    'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
+    'additional_files'           => 'Additional Files',
+
 ];

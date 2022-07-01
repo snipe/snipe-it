@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'Esses ativos não podem ser atribuídos a ninguém.',
-        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
+        'deployable'   => 'Esses ativos podem ser retirados. Uma vez que são retirados, eles assumirão um status meta de <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
         'archived'   => 'Esses ativos não podem ser verificados, e só aparecerão na visão arquivada. Isso é útil para manter informações sobre recursos para fins orçamentários / históricos, mas mantendo-os fora da lista de ativos do dia-a-dia.',
         'pending'   => 'Esses ativos ainda não podem ser atribuídos a ninguém, muitas vezes usado para itens que estão fora para reparo, mas é esperado que retornem à circulação.',
     ],

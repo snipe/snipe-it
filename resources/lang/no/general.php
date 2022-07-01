@@ -65,7 +65,8 @@ return [
     'create'				=> 'Opprett ny',
     'created'               => 'Enhet opprettet',
     'created_asset'			=> 'eiendel opprettet',
-    'created_at' 			=> 'Opprettet',
+    'created_at' 			=> 'Created At',
+    'created_by'            => 'Created By',
     'record_created' 		=> 'Post opprettet',
     'updated_at' 			=> 'Oppdatert',
     'currency'  			=> '$', // this is deprecated
@@ -100,6 +101,7 @@ return [
     'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'Brukes til å generere e-postadresser ved import',
     'error'				    => 'Feil',
+    'example'				=> 'Example: ',
     'filastname_format'			=> 'Fornavn (kun initial) Etternavn (oladunk@example.com)',
     'firstname_lastname_format'	=> 'Fornavn Etternavn (oladunk@example.com)',
     'firstname_lastname_underscore_format' => 'Fornavn Etternavn (oladunk@example.com)',
@@ -256,6 +258,7 @@ return [
     'undeployable'			=> 'Ikke utleverbar',
     'unknown_admin'			=> 'Ukjent admin',
     'username_format'		=> 'Format brukernavn',
+    'username'              => 'Username',
     'update'                => 'Oppdater',
     'upload_filetypes_help'      => 'Tillatte filtyper er png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf og rar. Maks. filstørrelse er :size.',
     'uploaded'              => 'Lastet opp',
@@ -357,4 +360,8 @@ return [
     'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
     'maintenance_mode_title' => 'System Temporarily Unavailable',
     'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
+    'purge_not_allowed'     => 'Purging deleted data has been disabled in the .env file. Contact support or your systems administrator.',
+    'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
+    'additional_files'           => 'Additional Files',
+
 ];

@@ -46,4 +46,6 @@ return [
     'asset_not_deployable' => 'Activul este indisponibil și nu poate fi eliberat.',
     'asset_deployable' => 'Activul e disponibil și poate fi eliberat.',
     'processing_spinner' => 'În curs de procesare...',
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information'
 ];
