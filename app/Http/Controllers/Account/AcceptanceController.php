@@ -133,6 +133,12 @@ class AcceptanceController extends Controller
                 $encoded_image = explode(',', $data_uri);
                 $decoded_image = base64_decode($encoded_image[1]);
                 Storage::put('private_uploads/signatures/'.$sig_filename, (string) $decoded_image);
+
+            // No image data is present, kick them back.
+            // This mostly only applies to users on supoer-deuper crapola browsers *cough* IE *cough*
+            } else {
+                return redirect()->back()->with('error', trans('general.shitty_browser'));
+
             }
 
 
