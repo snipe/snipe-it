@@ -86,7 +86,7 @@ class ViewAssetsController extends Controller
         $logaction->target_id = $data['user_id'] = Auth::user()->id;
         $logaction->target_type = User::class;
 
-        $data['item_quantity'] = $request->has('request-quantity') ? e($request->input('request-quantity')) : 1;
+        $data['item_quantity'] = e($request->input('request-quantity'));
         $data['requested_by'] = $user->present()->fullName();
         $data['item'] = $item;
         $data['item_type'] = $itemType;
@@ -99,7 +99,15 @@ class ViewAssetsController extends Controller
         }
 
         $settings = Setting::getSettings();
-       
+        
+        $request->validate( [
+            "request-quantity" => 'required|numeric|min:1',            
+        ],[
+            "request-quantity.min" => trans('admin/hardware/form.quantity_minimal'),      
+            "request-quantity.numeric" => trans('admin/hardware/form.quantity_numeric'),
+            'request-quantity.required' => trans('admin/hardware/form.quantity_required'),       
+        ]);
+        
         
         if ($item_request = $item->isRequestedBy($user)) {
             
@@ -119,7 +127,7 @@ class ViewAssetsController extends Controller
                 $settings->notify(new RequestAssetNotification($data));
             }
 
-            return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
+            return redirect()->route('requestable-assets#models')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
         }
     }
 
@@ -144,7 +152,7 @@ class ViewAssetsController extends Controller
 
         $data['item'] = $asset;
         $data['target'] = Auth::user();
-        $data['item_quantity'] = 1;
+        // $data['item_quantity'] = 1;
         $settings = Setting::getSettings();
 
         $logaction = new Actionlog();

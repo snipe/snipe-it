@@ -46,4 +46,7 @@ return [
     'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
     'asset_deployable' => 'That status is deployable. This asset can be checked out.',
     'processing_spinner' => 'Processing...',
+    'quantity_minimal'  => 'Requested quantity cannot be zero',
+    'quantity_numeric' => 'Requested quantity shall be numeric',
+    'quantity_required' => 'Requested quantity should be set'
 ];

@@ -123,19 +123,21 @@
                                                 </td>
 
                                                 <td>{{$requestableModel->assets->where('assigned_to', null)->count()}}</td>
-                                                <!-- <td>{{$requestableModel->assets->where('requestable', '1')->count()}}</td> -->
 
                                                 <td>
                                                     <form  action="{{ route('account/request-item', ['itemType' => 'asset_model', 'itemId' => $requestableModel->id])}}" method="POST" accept-charset="utf-8">
                                                         {{ csrf_field() }}
-                                                    <input type="text" style="width: 70px; margin-right: 10px;" class="form-control pull-left" name="request-quantity" value="" placeholder="{{ trans('general.qty') }}">
+                                                    <input type="text" style="width: 70px; margin-right: 10px;" class="form-control pull-left" name="request-quantity" id="request-quantity" value="{{(($requestableModel->assets->where('assigned_to', null)->count()) > 0) ? 1 : 0}}" placeholder="{{ trans('general.qty') }}">
+                                                   
                                                     @if ($requestableModel->isRequestedBy(Auth::user()))
                                                         {{ Form::submit(trans('button.cancel'), ['class' => 'btn btn-danger btn-sm'])}}
                                                     @else
                                                         {{ Form::submit(trans('button.request'), ['class' => 'btn btn-primary btn-sm'])}}
-                                                    @endif
+                                                    @endif                                                    
+                                                    {!! $errors->first('request-quantity', '<span class="alert-msg" aria-hidden="true" width=100% position=absolute><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!} 
+                                                   
                                                     </form>
-                                                </td>
+</div>                                          </td>
                                         </tr>
 
                                     @endforeach
@@ -175,6 +177,16 @@
         currentUrl = $(this).attr('href');
         // $(this).attr('href', currentUrl + '?quantity=' + quantity);
         // alert($(this).attr('href'));
+ 
+    });
+
+    $(document).ready(function(){
+        var qtyText = document.getElementById("request-quantity").value  ;
+        if (qtyText == "0" ){
+        document.getElementById('request-quantity').disabled = true;
+        } else {
+        document.getElementById('request-quantity').disabled = false;
+        }
     });
 </script>
 @stop
