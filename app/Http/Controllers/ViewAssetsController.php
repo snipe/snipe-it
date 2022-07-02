@@ -127,7 +127,7 @@ class ViewAssetsController extends Controller
                 $settings->notify(new RequestAssetNotification($data));
             }
 
-            return redirect()->route('requestable-assets#models')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
+            return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
         }
     }
 
