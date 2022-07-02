@@ -37,7 +37,7 @@ class Ldap extends Model
     public static function connectToLdap()
     {
         $ldap_host = Setting::getSettings()->ldap_server;
-        $ldap_version = Setting::getSettings()->ldap_version;
+        $ldap_version = Setting::getSettings()->ldap_version ?: 3;
         $ldap_server_cert_ignore = Setting::getSettings()->ldap_server_cert_ignore;
         $ldap_use_tls = Setting::getSettings()->ldap_tls;
 
@@ -275,9 +275,10 @@ class Ldap extends Model
      * @since [v3.0]
      * @param $base_dn
      * @param $count
+     * @param $filter
      * @return array|bool
      */
-    public static function findLdapUsers($base_dn = null, $count = -1)
+    public static function findLdapUsers($base_dn = null, $count = -1, $filter = null)
     {
         $ldapconn = self::connectToLdap();
         self::bindAdminToLdap($ldapconn);
@@ -285,7 +286,9 @@ class Ldap extends Model
         if (is_null($base_dn)) {
             $base_dn = Setting::getSettings()->ldap_basedn;
         }
-        $filter = Setting::getSettings()->ldap_filter;
+        if($filter === null) {
+            $filter = Setting::getSettings()->ldap_filter;
+        }
 
         // Set up LDAP pagination for very large databases
         $page_size = 500;
@@ -310,7 +313,7 @@ class Ldap extends Model
                 $ldap_controls = [['oid' => LDAP_CONTROL_PAGEDRESULTS, 'iscritical' => false, 'value' => ['size'=> $count == -1||$count>$page_size ? $page_size : $count, 'cookie' => $cookie]]];
             //}
             $search_results = ldap_search($ldapconn, $base_dn, $filter, [], 0, /* $page_size */ -1, -1, LDAP_DEREF_NEVER, $ldap_controls); // TODO - I hate the @, and I hate that we get a full page even if we ask for 10 records. Can we use an ldap_control?
-            \Log::debug("did the search run? I guess so if you got here!");
+            \Log::debug("LDAP search executed successfully.");
             if (! $search_results) {
                 return redirect()->route('users.index')->with('error', trans('admin/users/message.error.ldap_could_not_search').ldap_error($ldapconn)); // TODO this is never called in any routed context - only from the Artisan command. So this redirect will never work.
             }

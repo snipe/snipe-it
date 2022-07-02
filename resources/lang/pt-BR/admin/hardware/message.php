@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Aviso:</strong> Este ativo foi marcado como atualmente não implementável.                        Se este status mudou, atualize o status do ativo.',
     'does_not_exist' 	=> 'O ativo não existe.',
-    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
+    'does_not_exist_or_not_requestable' => 'Esse ativo não existe ou não pode ser solicitado.',
     'assoc_users'	 	=> 'Este bem está no momento associado com pelo menos um usuário e não pode ser deletado. Por favor, atualize seu bem para que não referencie mais este usuário e tente novamente. ',
 
     'create' => [
@@ -16,7 +16,7 @@ return [
         'error'   			=> 'O ativo não foi atualizado, tente novamente',
         'success' 			=> 'Ativo atualizado com sucesso.',
         'nothing_updated'	=>  'Nenhum campo foi selecionado, então nada foi atualizado.',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'no_assets_selected'  =>  'Nenhum ativo foi selecionado, portanto, nada foi atualizado.',
     ],
 
     'restore' => [

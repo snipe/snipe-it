@@ -42,7 +42,7 @@ return [
     'make_required' => 'Opcional - clique para tornar obrigatório',
     'reorder' => 'Reordenar',
     'db_field' => 'Campo DB',
-    'db_convert_warning' => 'AVISO. Este campo está na tabela de campos personalizados como <code> :db_column </code> mas deve ser :expected </code>.',
+    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code>:db_column</code> but should be <code>:expected</code>.',
     'is_unique' => 'This value must be unique across all assets',
     'unique' => 'Unique',
 ];

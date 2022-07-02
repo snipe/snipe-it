@@ -46,4 +46,6 @@ return [
     'asset_not_deployable' => 'Den eiendelstatusen gjør at denne eiendelen ikke kan sjekkes ut.',
     'asset_deployable' => 'Den statusen gjør det mulig å sjekke ut denne eiendelen.',
     'processing_spinner' => 'Behandler...',
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information'
 ];

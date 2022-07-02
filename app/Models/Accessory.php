@@ -310,6 +310,21 @@ class Accessory extends SnipeModel
             return null;
     }
 
+     /**
+     * Check how many items within an accessory are checked out
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.0]
+     * @return int
+     */
+    public function numCheckedOut()
+    {
+        $checkedout = 0;
+        $checkedout = $this->users->count();
+
+        return $checkedout;
+    }
+
     /**
      * Check how many items of an accessory remain
      *

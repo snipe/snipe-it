@@ -7,11 +7,11 @@ return array(
     'account_not_activated'  => 'Ovaj korisnički nalog nije aktiviran.',
     'account_suspended'      => 'Ovaj je korisnički nalog je blokiran.',
     'account_banned'         => 'Ovaj je korisnički nalog je zabranjen.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'throttle'               => 'Previše neuspelih pokušaja. Pokušajte ponovo za :seconds sekundi.',
 
     'two_factor' => array(
         'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
+        'success'               => 'Uspešno ste se prijavili.',
         'code_required'         => 'Two-factor code is required.',
         'invalid_code'          => 'Two-factor code is invalid.',
     ),
@@ -22,7 +22,7 @@ return array(
     ),
 
     'logout' => array(
-        'error'   => 'There was a problem while trying to log you out, please try again.',
+        'error'   => 'Došlo je do problema prilikom pokušaja prijavljivanja, pokušajte ponovo.',
         'success' => 'You have successfully logged out.',
     ),
 
@@ -33,7 +33,7 @@ return array(
 
     'forgot-password' => array(
         'error'   => 'Pojavio se problem prilikom pokušaja ponovnog unosa lozinke, pokušajte ponovo.',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
+        'success' => 'Uspešno: Ako ta adresa e-pošte već postoji u našem sistemu, e-poruka za povraćaj lozinke je poslata.',
     ),
 
     'forgot-password-confirm' => array(

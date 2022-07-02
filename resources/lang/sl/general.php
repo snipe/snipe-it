@@ -65,7 +65,8 @@ return [
     'create'				=> 'Ustvari novo',
     'created'               => 'Ustvarjeno',
     'created_asset'			=> 'ustvarjeno sredstvo',
-    'created_at' 			=> 'Ustvarjen ob',
+    'created_at' 			=> 'Created At',
+    'created_by'            => 'Created By',
     'record_created' 		=> 'Zapis ustvarjen',
     'updated_at' 			=> 'Posodobljeno ob',
     'currency'  			=> '$', // this is deprecated
@@ -100,6 +101,7 @@ return [
     'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'To se uporablja za ustvarjanje e-poštnih naslovov pri uvozu',
     'error'				    => 'Error',
+    'example'				=> 'Example: ',
     'filastname_format'			=> 'Prva črka imena priimek (jsmith@example.com)',
     'firstname_lastname_format'	=> 'Ime priimek (jane.smith@example.com)',
     'firstname_lastname_underscore_format' => 'Ime priimek (jane.smith@example.com)',
@@ -257,6 +259,7 @@ return [
     'undeployable'			=> 'Nerazporejeno',
     'unknown_admin'			=> 'Neznan skrbnik',
     'username_format'		=> 'Format za uporabniško ime',
+    'username'              => 'Username',
     'update'                => 'Posodobi',
     'upload_filetypes_help'      => 'Dovoljeni tipi datotek so png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf in rar. Dovoljena je največja velikost nalaganja :size.',
     'uploaded'              => 'Naloženo',
@@ -358,4 +361,8 @@ return [
     'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
     'maintenance_mode_title' => 'System Temporarily Unavailable',
     'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
+    'purge_not_allowed'     => 'Purging deleted data has been disabled in the .env file. Contact support or your systems administrator.',
+    'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
+    'additional_files'           => 'Additional Files',
+
 ];

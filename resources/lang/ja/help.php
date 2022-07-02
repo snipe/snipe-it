@@ -15,13 +15,13 @@ return [
 
     'more_info_title' => '詳細',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'このボックスにチェックを入れると、この新しいロケーションを反映する資産レコードが編集されます。チェックを外すと、監査ログ内のロケーションが表示されます。<br><br>この資産はチェックアウトされていることに注意してください。 人物の場所や場所を変えることはありません。',
 
     'assets' => '資産はシリアル番号または資産タグで追跡されるアイテムです。特定のアイテムを識別することが重要なより高い価値のアイテムである傾向があります。',
 
     'categories' => 'カテゴリーはアイテムを整理するのに役立ちます。カテゴリーの例としては &quot;デスクトップ&quot;、&quot; ラップトップ&quot;、&quot； 携帯電話 &quot;、&quot; タブレット&quot; などがあります。資産カテゴリは任意に設定することができます。',
 
-    'accessories' => 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
+    'accessories' => '付属品は利用者に支給されますが、シリアル番号がありません(または厳密に追跡する必要はありません)。例えば、マウスやキーボードなど。',
 
     'companies'     => '会社フィールドは単純な識別子フィールドとして使用することができます。また、資産、ユーザーなどの権限を制限する設定も管理者が設定できます。',
 

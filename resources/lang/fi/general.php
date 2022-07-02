@@ -65,7 +65,8 @@ return [
     'create'				=> 'Luo uusi',
     'created'               => 'Nimike luotiin',
     'created_asset'			=> 'laite luotu',
-    'created_at' 			=> 'Luontiaika',
+    'created_at' 			=> 'Created At',
+    'created_by'            => 'Created By',
     'record_created' 		=> 'Tietue luotu',
     'updated_at' 			=> 'Päivitetty klo',
     'currency'  			=> '€', // this is deprecated
@@ -100,6 +101,7 @@ return [
     'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'Käytetään sähköpostiosoitteiden luontiin tietoja tuotaessa',
     'error'				    => 'Error',
+    'example'				=> 'Example: ',
     'filastname_format'			=> 'Ensimmäinen nimikirjain sukunimi (pvirtanen@example.com)',
     'firstname_lastname_format'	=> 'Etunimi . Sukunimi (jane.smith@example.com)',
     'firstname_lastname_underscore_format' => 'Etunimi Sukunimi (paivi_virtanen@example.com)',
@@ -256,6 +258,7 @@ return [
     'undeployable'			=> 'Ei käyttöönotettavissa',
     'unknown_admin'			=> 'Tuntematon ylläpitäjä',
     'username_format'		=> 'Käyttäjätunnuksen muoto',
+    'username'              => 'Username',
     'update'                => 'Päivitä',
     'upload_filetypes_help'      => 'Sallitut tiedostotyypit ovat png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf ja rar. Suurin sallittu lähetyskoko on :size.',
     'uploaded'              => 'Lähetetty',
@@ -357,4 +360,8 @@ return [
     'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
     'maintenance_mode_title' => 'System Temporarily Unavailable',
     'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
+    'purge_not_allowed'     => 'Purging deleted data has been disabled in the .env file. Contact support or your systems administrator.',
+    'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
+    'additional_files'           => 'Additional Files',
+
 ];

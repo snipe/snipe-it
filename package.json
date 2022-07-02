@@ -14,10 +14,10 @@
     },
     "devDependencies": {
         "@fortawesome/fontawesome-free": "^5.15.4",
-        "axios": "^0.20.0",
+        "axios": "^0.27.2",
         "babel-preset-latest": "^6.24.1",
         "jquery": "<3.6.0",
-        "laravel-mix": "^6.0.39",
+        "laravel-mix": "^6.0.49",
         "lodash": "^4.17.20",
         "postcss": "^8.4.5",
         "vue": "2.4.4",
@@ -34,7 +34,7 @@
         "bootstrap-colorpicker": "^2.5.3",
         "bootstrap-datepicker": "^1.9.0",
         "bootstrap-less": "^3.3.8",
-        "bootstrap-table": "1.20.0",
+        "bootstrap-table": "1.20.2",
         "chart.js": "^2.9.4",
         "css-loader": "^3.6.0",
         "ekko-lightbox": "^5.1.1",
@@ -46,7 +46,7 @@
         "jquery-ui": "^1.13.1",
         "jquery-ui-bundle": "^1.12.1",
         "jquery.iframe-transport": "^1.0.0",
-        "jspdf-autotable": "^3.5.23",
+        "jspdf-autotable": "^3.5.24",
         "less": "^4.1.2",
         "less-loader": "^5.0.0",
         "list.js": "^1.5.0",
@@ -56,6 +56,6 @@
         "tableexport.jquery.plugin": "1.26.0",
         "tether": "^1.4.0",
         "vue-resource": "^1.5.2",
-        "webpack": "^5.72.0"
+        "webpack": "^5.73.0"
     }
 }

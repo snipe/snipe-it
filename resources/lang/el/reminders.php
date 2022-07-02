@@ -14,11 +14,8 @@ return array(
     */
 
     "password" => "Οι κωδικοί πρόσβασης πρέπει να είναι έξι χαρακτήρες και να ταιριάζουν με την επιβεβαίωση.",
-
     "user"     => "Το όνομα χρήστη ή η διεύθυνση ηλεκτρονικού ταχυδρομείου είναι εσφαλμένη",
-
-    "token"    => "Αυτό το διακριτικό επαναφοράς κωδικού πρόσβασης δεν είναι έγκυρο.",
-
-    "sent" => "Εάν βρεθεί μια αντίστοιχη διεύθυνση ηλεκτρονικού ταχυδρομείου, μια υπενθύμιση κωδικού πρόσβασης έχει σταλεί!",
+    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
+    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
 
 );

@@ -11,8 +11,8 @@ return [
         'file_deleted'          => 'バックアップファイルの削除に成功しました。 ',
         'generated'             => '新しいバックアップファイルが作成されました。',
         'file_not_found'        => 'そのバックアップファイルをサーバー上に見つけることが出来ませんでした。',
-        'restore_warning'       => 'Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This will also log out all of your existing users (including you).',
-        'restore_confirm'       => 'Are you sure you wish to restore your database from :filename?'
+        'restore_warning'       => '復元を行います。現在データベースにある既存のデータを上書きします。 これにより、既存のすべてのユーザー(あなたを含む) もログアウトします。',
+        'restore_confirm'       => ':filename からデータベースを復元してもよろしいですか？'
     ],
     'purge' => [
         'error'     => 'パージ中にエラーが発生しました。 ',
@@ -20,24 +20,24 @@ return [
         'success'               => 'パージによりレコードは削除されました',
     ],
     'mail' => [
-        'sending' => 'Sending Test Email...',
-        'success' => 'Mail sent!',
-        'error' => 'Mail could not be sent.',
-        'additional' => 'No additional error message provided. Check your mail settings and your app log.'
+        'sending' => 'テストメールを送信しています...',
+        'success' => 'メール送信完了',
+        'error' => 'メールが送信できません',
+        'additional' => '追加のエラーメッセージはありません。メール設定とアプリのログを確認してください。'
     ],
     'ldap' => [
-        'testing' => 'Testing LDAP Connection, Binding & Query ...',
-        '500' => '500 Server Error. Please check your server logs for more information.',
-        'error' => 'Something went wrong :(',
-        'sync_success' => 'A sample of 10 users returned from the LDAP server based on your settings:',
-        'testing_authentication' => 'Testing LDAP Authentication...',
-        'authentication_success' => 'User authenticated against LDAP successfully!'
+        'testing' => 'LDAP接続のテスト中…バインディングとクエリを行っています…',
+        '500' => '500 Server Error. 詳しくは、サーバーのログをご確認ください。',
+        'error' => '問題が発生しました。',
+        'sync_success' => '設定に基づいてLDAPサーバーから返された10人のユーザーのサンプル:',
+        'testing_authentication' => 'LDAP認証のテスト中...',
+        'authentication_success' => 'LDAPによるユーザー認証に成功しました！'
     ],
     'slack' => [
-        'sending' => 'Sending Slack test message...',
-        'success_pt1' => 'Success! Check the ',
-        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
+        'sending' => 'Slackのテストメッセージを送信しています...',
+        'success_pt1' => 'チェックに成功 ',
+        'success_pt2' => ' テストメッセージのチャンネルで、設定を保存するには以下の「保存」をクリックしてください。',
         '500' => '500 Server Error.',
-        'error' => 'Something went wrong.',
+        'error' => '問題が発生しました。',
     ]
 ];

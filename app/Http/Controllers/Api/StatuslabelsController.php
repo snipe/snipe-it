@@ -30,6 +30,10 @@ class StatuslabelsController extends Controller
             $statuslabels = $statuslabels->TextSearch($request->input('search'));
         }
 
+        if ($request->filled('name')) {
+            $statuslabels->where('name', '=', $request->input('name'));
+        }
+
 
         // if a status_type is passed, filter by that
         if ($request->filled('status_type')) {

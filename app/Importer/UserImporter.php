@@ -2,6 +2,7 @@
 
 namespace App\Importer;
 
+use App\Models\Asset;
 use App\Models\Department;
 use App\Models\Setting;
 use App\Models\User;
@@ -79,6 +80,12 @@ class UserImporter extends ItemImporter
             $this->log('Updating User');
             $user->update($this->sanitizeItemForUpdating($user));
             $user->save();
+
+            // Update the location of any assets checked out to this user
+            Asset::where('assigned_type', User::class)
+                ->where('assigned_to', $user->id)
+                ->update(['location_id' => $user->location_id]);
+            
             // \Log::debug('UserImporter.php Updated User ' . print_r($user, true));
             return;
         }

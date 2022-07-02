@@ -20,7 +20,7 @@ class AssetModel extends SnipeModel
     use HasFactory;
     use SoftDeletes;
     protected $presenter = \App\Presenters\AssetModelPresenter::class;
-    use Requestable, Presentable;
+    use Loggable, Requestable, Presentable;
 
     protected $table = 'models';
     protected $hidden = ['user_id', 'deleted_at'];
@@ -180,6 +180,23 @@ class AssetModel extends SnipeModel
 
         return false;
     }
+
+    /**
+     * Get uploads for this model
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function uploads()
+    {
+        return $this->hasMany('\App\Models\Actionlog', 'item_id')
+            ->where('item_type', '=', AssetModel::class)
+            ->where('action_type', '=', 'uploaded')
+            ->whereNotNull('filename')
+            ->orderBy('created_at', 'desc');
+    }
+
 
     /**
      * -----------------------------------------------

@@ -21,12 +21,12 @@
         <table
                 data-columns="{{ \App\Presenters\ComponentPresenter::dataTableLayout() }}"
                 data-cookie-id-table="componentsTable"
-                data-toolbar="#toolbar"
                 data-pagination="true"
                 data-id-table="componentsTable"
                 data-search="true"
                 data-side-pagination="server"
                 data-show-columns="true"
+                data-show-fullscreen="true"
                 data-show-export="true"
                 data-show-footer="true"
                 data-show-refresh="true"

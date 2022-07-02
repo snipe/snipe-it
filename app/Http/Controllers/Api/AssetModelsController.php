@@ -70,6 +70,10 @@ class AssetModelsController extends Controller
             $assetmodels->onlyTrashed();
         }
 
+        if ($request->filled('category_id')) {
+            $assetmodels = $assetmodels->where('models.category_id', '=', $request->input('category_id'));
+        }
+
         if ($request->filled('search')) {
             $assetmodels->TextSearch($request->input('search'));
         }

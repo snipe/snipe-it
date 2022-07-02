@@ -15,6 +15,9 @@ use App\Models\Contracts\Acceptable;
 use App\Models\User;
 use App\Models\AssetModel;
 use App\Models\Accessory;
+use App\Models\License;
+use App\Models\Component;
+use App\Models\Consumable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -23,6 +26,7 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\SettingsController;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+use phpDocumentor\Reflection\Types\Compound;
 
 class AcceptanceController extends Controller
 {
@@ -106,12 +110,7 @@ class AcceptanceController extends Controller
             Storage::makeDirectory('private_uploads/signatures', 775);
         }
 
-        /**
-         * Check for the eula-pdfs directory
-         */
-        if (! Storage::exists('private_uploads/eula-pdfs')) {
-            Storage::makeDirectory('private_uploads/eula-pdfs', 775);
-        }
+
 
         $item = $acceptance->checkoutable_type::find($acceptance->checkoutable_id);
         $display_model = '';
@@ -122,30 +121,86 @@ class AcceptanceController extends Controller
 
         if ($request->input('asset_acceptance') == 'accepted') {
 
-            // The item was accepted, check for a signature
-            if ($request->filled('signature_output')) {
-                $sig_filename = 'siglog-'.Str::uuid().'-'.date('Y-m-d-his').'.png';
-                $data_uri = $request->input('signature_output');
-                $encoded_image = explode(',', $data_uri);
-                $decoded_image = base64_decode($encoded_image[1]);
-                Storage::put('private_uploads/signatures/'.$sig_filename, (string) $decoded_image);
+            /**
+             * Check for the eula-pdfs directory
+             */
+            if (! Storage::exists('private_uploads/eula-pdfs')) {
+                Storage::makeDirectory('private_uploads/eula-pdfs', 775);
+            }
+
+            if (Setting::getSettings()->require_accept_signature == '1') {
+                
+                // Check if the signature directory exists, if not create it
+                if (!Storage::exists('private_uploads/signatures')) {
+                    Storage::makeDirectory('private_uploads/signatures', 775);
+                }
+
+                // The item was accepted, check for a signature
+                if ($request->filled('signature_output')) {
+                    $sig_filename = 'siglog-' . Str::uuid() . '-' . date('Y-m-d-his') . '.png';
+                    $data_uri = $request->input('signature_output');
+                    $encoded_image = explode(',', $data_uri);
+                    $decoded_image = base64_decode($encoded_image[1]);
+                    Storage::put('private_uploads/signatures/' . $sig_filename, (string)$decoded_image);
+
+                    // No image data is present, kick them back.
+                    // This mostly only applies to users on super-duper crapola browsers *cough* IE *cough*
+                } else {
+                    return redirect()->back()->with('error', trans('general.shitty_browser'));
+                }
             }
 
 
             // this is horrible
-            if ($acceptance->checkoutable_type == 'App\Models\Asset') {
-                $pdf_view_route ='account.accept.accept-asset-eula';
-                $asset_model = AssetModel::find($item->model_id);
-                $display_model = $asset_model->name;
-                $assigned_to = User::find($item->assigned_to)->present()->fullName;
+            switch($acceptance->checkoutable_type){
+                case 'App\Models\Asset':
+                        $pdf_view_route ='account.accept.accept-asset-eula';
+                        $asset_model = AssetModel::find($item->model_id);
+                        $display_model = $asset_model->name;
+                        $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
+                break;
 
-            } elseif ($acceptance->checkoutable_type== 'App\Models\Accessory') {
-                $pdf_view_route ='account.accept.accept-accessory-eula';
-                $accessory = Accessory::find($item->id);
-                $display_model = $accessory->name;
-                $assigned_to = User::find($item->assignedTo);
+                case 'App\Models\Accessory':
+                        $pdf_view_route ='account.accept.accept-accessory-eula';
+                        $accessory = Accessory::find($item->id);
+                        $display_model = $accessory->name;
+                        $assigned_to = User::find($item->assignedTo);
+                break;
 
+                case 'App\Models\LicenseSeat':
+                        $pdf_view_route ='account.accept.accept-license-eula';
+                        $license = License::find($item->license_id);
+                        $display_model = $license->name;
+                        $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
+                break;
+
+                case 'App\Models\Component':
+                        $pdf_view_route ='account.accept.accept-component-eula';
+                        $component = Component::find($item->id);
+                        $display_model = $component->name;
+                        $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
+                break;
+
+                case 'App\Models\Consumable':
+                        $pdf_view_route ='account.accept.accept-consumable-eula';
+                        $consumable = Consumable::find($item->id);
+                        $display_model = $consumable->name;
+                        $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
+                break;
             }
+//            if ($acceptance->checkoutable_type == 'App\Models\Asset') {
+//                $pdf_view_route ='account.accept.accept-asset-eula';
+//                $asset_model = AssetModel::find($item->model_id);
+//                $display_model = $asset_model->name;
+//                $assigned_to = User::find($item->assigned_to)->present()->fullName;
+//
+//            } elseif ($acceptance->checkoutable_type== 'App\Models\Accessory') {
+//                $pdf_view_route ='account.accept.accept-accessory-eula';
+//                $accessory = Accessory::find($item->id);
+//                $display_model = $accessory->name;
+//                $assigned_to = User::find($item->assignedTo);
+//
+//            }
 
             /**
              * Gather the data for the PDF. We fire this whether there is a signature required or not,

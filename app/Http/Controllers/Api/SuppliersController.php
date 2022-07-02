@@ -34,6 +34,46 @@ class SuppliersController extends Controller
             $suppliers = $suppliers->TextSearch($request->input('search'));
         }
 
+        if ($request->filled('name')) {
+            $suppliers->where('name', '=', $request->input('name'));
+        }
+
+        if ($request->filled('address')) {
+            $suppliers->where('address', '=', $request->input('address'));
+        }
+
+        if ($request->filled('address2')) {
+            $suppliers->where('address2', '=', $request->input('address2'));
+        }
+
+        if ($request->filled('city')) {
+            $suppliers->where('city', '=', $request->input('city'));
+        }
+
+        if ($request->filled('zip')) {
+            $suppliers->where('zip', '=', $request->input('zip'));
+        }
+
+        if ($request->filled('country')) {
+            $suppliers->where('country', '=', $request->input('country'));
+        }
+
+        if ($request->filled('fax')) {
+            $suppliers->where('fax', '=', $request->input('fax'));
+        }
+
+        if ($request->filled('email')) {
+            $suppliers->where('email', '=', $request->input('email'));
+        }
+
+        if ($request->filled('url')) {
+            $suppliers->where('url', '=', $request->input('url'));
+        }
+
+        if ($request->filled('notes')) {
+            $suppliers->where('notes', '=', $request->input('notes'));
+        }
+
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.
         $offset = (($suppliers) && ($request->get('offset') > $suppliers->count())) ? $suppliers->count() : $request->get('offset', 0);

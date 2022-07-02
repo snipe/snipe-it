@@ -53,6 +53,30 @@ class LocationsController extends Controller
             $locations = $locations->TextSearch($request->input('search'));
         }
 
+        if ($request->filled('name')) {
+            $locations->where('locations.name', '=', $request->input('name'));
+        }
+
+        if ($request->filled('address')) {
+            $locations->where('locations.address', '=', $request->input('address'));
+        }
+
+        if ($request->filled('address2')) {
+            $locations->where('locations.address2', '=', $request->input('address2'));
+        }
+
+        if ($request->filled('city')) {
+            $locations->where('locations.city', '=', $request->input('city'));
+        }
+
+        if ($request->filled('zip')) {
+            $locations->where('locations.zip', '=', $request->input('zip'));
+        }
+
+        if ($request->filled('country')) {
+            $locations->where('locations.country', '=', $request->input('country'));
+        }
+
         $offset = (($locations) && (request('offset') > $locations->count())) ? $locations->count() : request('offset', 0);
 
         // Check to make sure the limit is not higher than the max allowed

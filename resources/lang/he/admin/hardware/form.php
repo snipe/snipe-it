@@ -46,4 +46,6 @@ return [
     'asset_not_deployable' => 'הנכס הזה לא זמין. לא ניתן לספק ללקוח.',
     'asset_deployable' => 'הנכס זמין. ניתן לשייך למיקום.',
     'processing_spinner' => 'מעבד...',
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information'
 ];

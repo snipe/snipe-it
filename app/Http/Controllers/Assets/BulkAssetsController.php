@@ -39,10 +39,6 @@ class BulkAssetsController extends Controller
         $bulk_back_url = request()->headers->get('referer');
         session(['bulk_back_url' => $bulk_back_url]);
 
-        \Log::debug('Back to url: '.$bulk_back_url);
-
-
-
         $asset_ids = array_values(array_unique($request->input('ids')));
 
         if ($request->filled('bulk_actions')) {

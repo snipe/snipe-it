@@ -11,10 +11,10 @@
   "license": "AGPL-3.0-or-later",
   "type": "project",
   "repositories": [
-      {
-          "type": "vcs",
-          "url": "https://github.com/grokability/laravel-scim-server"
-      }
+    {
+      "type": "vcs",
+      "url": "https://github.com/grokability/laravel-scim-server"
+    }
   ],
   "require": {
     "php": ">=7.4 <8.3",

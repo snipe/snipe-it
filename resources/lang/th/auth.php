@@ -13,8 +13,8 @@ return array(
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed' => 'ข้อมูลที่ใช้ในการยืนยันตัวตนไม่ถูกต้อง',
+    'password' => 'รหัสผ่านนี้ไม่ถูกต้อง',
+    'throttle' => 'คุณได้พยายามเข้าระบบหลายครั้งเกินไป กรุณาลองใหม่ใน :seconds วินาทีข้างหน้า.',
 
 );

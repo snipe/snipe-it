@@ -286,6 +286,14 @@ class UserPresenter extends Presenter
                 'formatter' => 'trueFalseFormatter',
             ],
             [
+                'field' => 'created_by',
+                'searchable' => false,
+                'sortable' => true,
+                'title' => trans('general.created_by'),
+                'visible' => false,
+                'formatter' => 'usersLinkObjFormatter',
+            ],
+            [
                 'field' => 'created_at',
                 'searchable' => true,
                 'sortable' => true,

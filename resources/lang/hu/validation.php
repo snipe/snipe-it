@@ -91,8 +91,13 @@ return [
     'url'                  => 'Az :attribute formátuma érvénytelen.',
     'unique_undeleted'     => 'A(z) :attribute egyedinek kell lennie.',
     'non_circular'         => 'A(z) :attribute nem hozhat létre körkörös hivatkozást.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
     'gte'                  => [
-        'numeric'          => 'Value cannot be negative'
+        'numeric'          => 'Az érték nem lehet negatív'
     ],
 
 

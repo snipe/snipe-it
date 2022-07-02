@@ -14,11 +14,8 @@ return array(
     */
 
     "password" => "As senhas devem ter seis caracteres e corresponderem à confirmação.",
-
     "user"     => "O nome de usuário ou endereço de e-mail está incorreto",
-
-    "token"    => "Este token de redefinição da senha é inválido.",
-
-    "sent" => "Se um endereço de e-mail correspondente foi encontrado, um lembrete de senha foi enviado!",
+    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
+    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
 
 );

@@ -43,7 +43,9 @@ return [
     'asset_location' => 'Zaktualizuj lokalizację aktywa',
     'asset_location_update_default_current' => 'Zaktualizuj domyślną i aktualną lokalizację',
     'asset_location_update_default' => 'Zaktualizuj tylko domyślną lokalizację',
-    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
-    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'asset_not_deployable' => 'Ten status oznacza brak możliwości wdrożenia. Ten zasób nie może zostać przypisany.',
+    'asset_deployable' => 'Ten status oznacza możliwość wdrożenia. Ten zasób może zostać przypisany.',
     'processing_spinner' => 'Przetwarzanie...',
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information'
 ];

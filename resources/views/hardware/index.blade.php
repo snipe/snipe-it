@@ -84,7 +84,10 @@
                 data-show-refresh="true"
                 data-sort-order="asc"
                 data-sort-name="name"
-                data-toolbar="#toolbar"
+                data-show-fullscreen="true"
+                data-toolbar="#assetsBulkEditToolbar"
+                data-bulk-button-id="#bulkAssetEditButton"
+                data-bulk-form-id="#assetsBulkForm"
                 id="assetsListingTable"
                 class="table table-striped snipe-table"
                 data-url="{{ route('api.assets.index',

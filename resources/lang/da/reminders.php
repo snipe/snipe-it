@@ -14,11 +14,8 @@ return array(
     */
 
     "password" => "Adgangskoder skal være seks tegn og svare til bekræftelsen.",
-
     "user"     => "Brugernavn eller email adresse er forkert",
-
-    "token"    => "Denne adgangskode nulstillingstoken er ugyldig.",
-
-    "sent" => "Hvis en tilsvarende email adresse blev fundet, er der afsendt en påmindelse om adgangskode!",
+    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
+    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
 
 );

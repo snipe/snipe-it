@@ -65,7 +65,8 @@ return [
     'create'				=> 'Magsagawa ng Bago',
     'created'               => 'Ang Naisagawang Aytem',
     'created_asset'			=> 'ang naisagawang asset',
-    'created_at' 			=> 'Naisagawa sa',
+    'created_at' 			=> 'Created At',
+    'created_by'            => 'Created By',
     'record_created' 		=> 'Record Created',
     'updated_at' 			=> 'Na-update sa',
     'currency'  			=> '$', // this is deprecated
@@ -100,6 +101,7 @@ return [
     'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'Ito ay ginagamit para makapagsagawa ng email address kapag mag-import',
     'error'				    => 'Error',
+    'example'				=> 'Example: ',
     'filastname_format'			=> 'Ang Unang Inisyal Huling Pangalan (jsmith@example.com)',
     'firstname_lastname_format'	=> 'Unang Pangalan Huling Pangalan (jane.smith@example.com)',
     'firstname_lastname_underscore_format' => 'Unang Pangalan Huling Pangalan (jane.smith@example.com)',
@@ -256,6 +258,7 @@ return [
     'undeployable'			=> 'Hindi pwedeng i-depoy',
     'unknown_admin'			=> 'Hindi matukoy na Admin',
     'username_format'		=> 'Ang Pormat sa Pangalan ng Gumagamit',
+    'username'              => 'Username',
     'update'                => 'I-update',
     'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf and rar. Max upload size allowed is :size.',
     'uploaded'              => 'Nai-upload',
@@ -357,4 +360,8 @@ return [
     'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
     'maintenance_mode_title' => 'System Temporarily Unavailable',
     'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
+    'purge_not_allowed'     => 'Purging deleted data has been disabled in the .env file. Contact support or your systems administrator.',
+    'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
+    'additional_files'           => 'Additional Files',
+
 ];

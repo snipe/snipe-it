@@ -65,7 +65,8 @@ return [
     'create'				=> 'Креирај Нов {0}',
     'created'               => 'Креирана ставка',
     'created_asset'			=> 'креирано основно средство',
-    'created_at' 			=> 'Креиран во',
+    'created_at' 			=> 'Created At',
+    'created_by'            => 'Created By',
     'record_created' 		=> 'Record Created',
     'updated_at' 			=> 'Ажурирано во',
     'currency'  			=> '$', // this is deprecated
@@ -100,6 +101,7 @@ return [
     'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'Ова се користи за генерирање на адреси на е-пошта при увоз',
     'error'				    => 'Error',
+    'example'				=> 'Example: ',
     'filastname_format'			=> 'Почетна буква од име, Презиме (jjankov@example.com)',
     'firstname_lastname_format'	=> 'Име, точка, Презиме (janko.jankov@example.com)',
     'firstname_lastname_underscore_format' => 'Име, _, Презиме (janko_jankov@example.com)',
@@ -256,6 +258,7 @@ return [
     'undeployable'			=> 'Не може да се распореди',
     'unknown_admin'			=> 'Непознат Администратор',
     'username_format'		=> 'Формат на корисничко име',
+    'username'              => 'Username',
     'update'                => 'Ажурирање',
     'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf and rar. Max upload size allowed is :size.',
     'uploaded'              => 'Прикачено',
@@ -357,4 +360,8 @@ return [
     'maintenance_mode'      => 'The service is temporarily unavailable for system updates. Please check back later.',
     'maintenance_mode_title' => 'System Temporarily Unavailable',
     'ldap_import'           => 'User password should not be managed by LDAP. (This allows you to send forgotten password requests.)',
+    'purge_not_allowed'     => 'Purging deleted data has been disabled in the .env file. Contact support or your systems administrator.',
+    'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
+    'additional_files'           => 'Additional Files',
+
 ];

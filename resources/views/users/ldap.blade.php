@@ -69,7 +69,7 @@
         <table class="table table-bordered">
           <tr>
               <th>{{ trans('general.username') }}</th><th>{{ trans('general.employee_number') }}</th>
-              <th>{{ trans('general.firstname') }}</th><th>{{ trans('general.lastname') }}</th>
+              <th>{{ trans('general.first_name') }}</th><th>{{ trans('general.last_name') }}</th>
               <th>{{ trans('general.email') }}</th><th>{{ trans('general.notes') }}</th>
           </tr>
 

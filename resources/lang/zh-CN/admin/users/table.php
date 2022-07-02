@@ -10,7 +10,7 @@ return array(
     'email'      			=> '邮箱',
     'employee_num'      	=> '员工号',
     'first_name' 			=> '名',
-    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
+    'groupnotes'			=> '选择要分配给用户的组。请注意，用户将拥有分配给他们的组的权限。使用ctrl+单击(MacOS为cmd+单击) 取消选择组。',
     'id'         			=> '编号',
     'inherit'  				=> '继承',
     'job' 					=> '职位名称',
