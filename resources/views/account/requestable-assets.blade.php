@@ -114,10 +114,10 @@
                                                     @endif
 
                                                 </td>
-
+                                                    
                                                 <td>
-                                                    @can('view', \App\Models\AssetModel::class)
-                                                        <a href="{{ url('/') }}'/models/'.{{ $requestableModel->id }}) }}">{{ $requestableModel->name }}</a>
+                                                    @can('view', \App\Models\AssetModel::class)                                                    
+                                                        <a href="{{ url('/') }}/models/{{$requestableModel->id }} }}">{{$requestableModel->name}} </a>
                                                     @else
                                                         {{ $requestableModel->name }}
                                                     @endcan
