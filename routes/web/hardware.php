@@ -134,7 +134,7 @@ Route::group(
             [AssetsController::class, 'getBarCode']
         )->name('barcode/hardware');
 
-        Route::get('{assetId}/restore',
+        Route::post('{assetId}/restore',
             [AssetsController::class, 'getRestore']
         )->name('restore/hardware');
 
