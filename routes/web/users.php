@@ -88,7 +88,7 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
         ]
     )->name('clone/user');
 
-    Route::get(
+    Route::post(
         '{userId}/restore',
         [
             Users\UsersController::class, 
