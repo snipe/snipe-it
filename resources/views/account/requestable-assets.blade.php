@@ -95,8 +95,7 @@
                                     <tr role="row">
                                         <th class="col-md-1" data-sortable="true">{{ trans('general.image') }}</th>
                                         <th class="col-md-6" data-sortable="true">{{ trans('admin/hardware/table.asset_model') }}</th>
-                                        <th class="col-md-3" data-sortable="true">{{ trans('admin/accessories/general.remaining') }}</th>
-
+                                        <th class="col-md-3" data-sortable="true">{{ trans('admin/hardware/table.available_qty') }}</th>
                                         <th class="col-md-2 actions" data-sortable="false">{{ trans('table.actions') }}</th>
                                     </tr>
                                 </thead>
@@ -123,7 +122,8 @@
                                                     @endcan
                                                 </td>
 
-                                                <td>{{$requestableModel->assets->where('requestable', '1')->count()}}</td>
+                                                <td>{{$requestableModel->assets->where('assigned_to', null)->count()}}</td>
+                                                <!-- <td>{{$requestableModel->assets->where('requestable', '1')->count()}}</td> -->
 
                                                 <td>
                                                     <form  action="{{ route('account/request-item', ['itemType' => 'asset_model', 'itemId' => $requestableModel->id])}}" method="POST" accept-charset="utf-8">

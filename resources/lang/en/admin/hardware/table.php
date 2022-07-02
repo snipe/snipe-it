@@ -28,4 +28,5 @@ return [
     'changed'       => 'Changed',
     'icon' => 'Icon',
     'requested_qty' => 'Quantity',
+    'available_qty' => 'Available Quantity',
 ];
