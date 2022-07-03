@@ -141,11 +141,6 @@
                 <div class="callout callout-warning">
                   <i class="icon fas fa-exclamation-triangle"></i>
                   {{ trans('admin/users/message.user_deleted_warning') }}
-                  @can('update', $user)
-                      <a href="{{ route('restore/user', $user->id) }}">
-                        {{ trans('admin/users/general.restore_user') }}
-                      </a>
-                  @endcan
                 </div>
               </div>
             @endif
@@ -229,7 +224,10 @@
                     </div>
                   @else
                     <div class="col-md-12" style="padding-top: 5px;">
-                      <a href="{{ route('restore/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.restore') }}</a>
+                        <form method="POST" action="{{ route('restore/user', $user->id) }}">
+                            @csrf
+                            <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.restore') }}</button>
+                        </form>
                     </div>
                   @endif
                 @endcan
