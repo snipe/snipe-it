@@ -5,8 +5,10 @@ namespace App\Services;
 use App\Helpers\StorageHelper;
 use App\Models\Actionlog;
 use enshrined\svgSanitize\Sanitizer;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class FileStorageService
@@ -29,44 +31,42 @@ class FileStorageService
     }
 
     public static function store(string $directory, array $files, Model $model, $notes, string $fileSlug = ''): void {
-        if (Storage::missing(FileStorageService::$uploadsDir . $directory)) {
-            Storage::makeDirectory(FileStorageService::$uploadsDir . $directory);
-        }
         $fileSlug = $fileSlug ?? str_singular($directory);
 
         foreach ($files as $file) {
-            $fileName = FileStorageService::generateFileName($fileSlug, $model->id, $file);
+            $fileName = self::generateFileName($fileSlug, $model->id, $file);
 
             // Check for SVG and sanitize it
             if ($file->getClientOriginalExtension() === 'svg') {
-                \Log::debug('This is an SVG');
+                Log::debug('This is an SVG');
                 $sanitizer = new Sanitizer();
                 try {
                     Storage::put(
-                        FileStorageService::$uploadsDir . $directory . '/' . $fileName,
+                        self::$uploadsDir . $directory . '/' . $fileName,
                         $sanitizer->sanitize($file->getContent())
                     );
-                } catch (\Exception $e) {
-                    \Log::debug('Upload no workie :( ');
-                    \Log::debug($e);
+                } catch (Exception $e) {
+                    Log::debug('Upload no workie :( ');
+                    Log::debug($e);
                 }
             } else {
-                Storage::put(FileStorageService::$uploadsDir . $directory . '/' . $fileName, $file->getContent());
+                Storage::put(self::$uploadsDir . $directory . '/' . $fileName, $file->getContent());
             }
             $model->logUpload($fileName, e($notes));
         }
     }
 
-    public static function destroy(string $directory, ActionLog $log)
+    public static function destroy(string $directory, ActionLog $log): void
     {
-        $log->delete();
-        Storage::delete(FileStorageService::$uploadsDir . $directory . '/' . $log->filename);
+        if ($log->delete()) {
+            Storage::delete(self::$uploadsDir . $directory . '/' . $log->filename);
+        }
     }
 
     public static function show(string $directory, string $fileName)
     {
-        $file = FileStorageService::$uploadsDir . '/' . $directory . '/' . $fileName;
-        \Log::debug('Checking for ' . $file);
+        $file = self::$uploadsDir . '/' . $directory . '/' . $fileName;
+        Log::debug('Checking for ' . $file);
         if (Storage::missing($file)) {
             return response('File ' . $file . ' not found on server', 404)
                 ->header('Content-Type', 'text/plain');
