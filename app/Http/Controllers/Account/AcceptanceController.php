@@ -12,6 +12,7 @@ use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
 use App\Models\Company;
 use App\Models\Contracts\Acceptable;
+use App\Models\Setting;
 use App\Models\User;
 use App\Models\AssetModel;
 use App\Models\Accessory;
