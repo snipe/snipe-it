@@ -329,7 +329,7 @@ return [
     'invalid_category'      => 'Categoria non valida',
     'dashboard_info'        => 'Questa è la tua dashboard. Ce ne sono tante, ma questa è solo tua.',
     '60_percent_warning'    => 'Completo al 60% (Avvertimento)',
-    'dashboard_empty'       => 'It looks like you haven not added anything yet, so we do not have anything awesome to display. Get started by adding some assets, accessories, consumables, or licenses now!',
+    'dashboard_empty'       => 'It looks like you have not added anything yet, so we do not have anything awesome to display. Get started by adding some assets, accessories, consumables, or licenses now!',
     'new_asset'             => 'New Asset',
     'new_license'           => 'New License',
     'new_accessory'         => 'New Accessory',

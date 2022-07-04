@@ -329,7 +329,7 @@ return [
     'invalid_category'      => 'Catégorie invalide',
     'dashboard_info'        => 'Ceci est votre tableau de bord. Il y en a beaucoup d\'autres comme lui, mais celui-ci est le vôtre.',
     '60_percent_warning'    => 'Terminé à 60% (avertissement)',
-    'dashboard_empty'       => 'It looks like you haven not added anything yet, so we do not have anything awesome to display. Get started by adding some assets, accessories, consumables, or licenses now!',
+    'dashboard_empty'       => 'It looks like you have not added anything yet, so we do not have anything awesome to display. Get started by adding some assets, accessories, consumables, or licenses now!',
     'new_asset'             => 'Nouvel actif',
     'new_license'           => 'Nouvelle licence',
     'new_accessory'         => 'Nouvel accessoire',
