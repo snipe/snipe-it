@@ -2655,6 +2655,17 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "reederda",
+      "name": "Daniel Reeder",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7991086?v=4",
+      "profile": "https://github.com/reederda",
+      "contributions": [
+        "translations",
+        "translation",
+        "code"
+      ]
     }
   ]
 }
