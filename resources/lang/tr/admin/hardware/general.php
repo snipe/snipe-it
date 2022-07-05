@@ -6,7 +6,7 @@ return [
     'archived'  				=> 'Arşivlenmiş',
     'asset'  					=> 'Demirbaş',
     'bulk_checkout'             => 'Varlıkları Kullanıma Alma',
-    'bulk_checkin'              => 'Checkin Assets',
+    'bulk_checkin'              => 'Demirbaş Girişi Yap',
     'checkin'  					=> 'Demirbaş Girişi Yap',
     'checkout'  				=> 'Ödenme Öğe',
     'clone'  					=> 'Demirbaşı Kopyala',
@@ -16,29 +16,28 @@ return [
     'model_deleted'  			=> 'Bu varlık modeli silindi. Varlığı geri almak için modelini geri almalısınız.',
     'requestable'               => 'Talep edilebilir',
     'requested'				    => 'Talep edildi',
-    'not_requestable'           => 'Not Requestable',
-    'requestable_status_warning' => 'Do not change  requestable status',
+    'not_requestable'           => 'Talep Edilemez',
+    'requestable_status_warning' => 'Talep edilebilirlik durumunu değiştirmeyin',
     'restore'  					=> 'Demirbaşı Geri Getir',
     'pending'  					=> 'Bekliyor',
     'undeployable'  			=> 'Dağtılamaz',
     'view'  					=> 'Demirbaşı Görüntüle',
-    'csv_error' => 'You have an error in your CSV file:',
+    'csv_error' => 'CSV dosyanızda bir hata var:',
     'import_text' => '
-    <p>
-    Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
-    </p>
+<p>
+     Varlık geçmişini içeren bir CSV yükleyin. Varlıklar ve kullanıcılar sistemde zaten mevcut OLMALIDIR, aksi takdirde atlanırlar. Varlıkları geçmişteki içe aktarmalarla eşleştirmek, varlık etiketlerine rağmen gerçekleşir. Sağladığınız kullanıcı adına ve aşağıda seçtiğiniz kriterlere göre eşleşen bir kullanıcı bulmaya çalışacağız. Aşağıda herhangi bir ölçüt seçmezseniz, Yönetici &gt; Genel Ayarlar.
+     </p>
 
-    <p>Fields included in the CSV must match the headers: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Any additional fields will be ignored. </p>
+     <p>CSV\'ye dahil edilen alanlar şu başlıklarla eşleşmelidir: <strong>Varlık Etiketi, İsim, Çıkış Tarihi, Giriş Tarihi</strong>. Bunların dışındaki alanlar yoksayılacaktır. </p>
 
-    <p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
-    ',
-    'csv_import_match_f-l' => 'Try to match users by firstname.lastname (jane.smith) format',
-    'csv_import_match_initial_last' => 'Try to match users by first initial last name (jsmith) format',
-    'csv_import_match_first' => 'Try to match users by first name (jane) format',
-    'csv_import_match_email' => 'Try to match users by email as username',
-    'csv_import_match_username' => 'Try to match users by username',
-    'error_messages' => 'Error messages:',
-    'success_messages' => 'Success messages:',
-    'alert_details' => 'Please see below for details.',
-    'custom_export' => 'Custom Export'
+     <p>Giriş Tarihi: boş bırakılan veya gelecek tarihli giriş tarihleri, o öğelerin ilgili kullanıcıya çıkışını yapacaktır. Giriş Tarihi sütununun bulunmaması halinde, bugünün tarihiyle bir giriş tarihi oluşturulacaktır.</p>    ',
+    'csv_import_match_f-l' => 'Kullanıcıları ad.soyad (jane.smith) biçimiyle eşleştirmeye çalışın',
+    'csv_import_match_initial_last' => 'Kullanıcıları adın ilk harfi ve soyad (jsmith) biçimiyle eşleştirmeye çalışın',
+    'csv_import_match_first' => 'Kullanıcıları ad (jane) biçimiyle eşleştirmeye çalışın',
+    'csv_import_match_email' => 'Kullanıcıları kullanıcı adı olarak e-postalarıyla eşleştirmeye çalışın',
+    'csv_import_match_username' => 'Kullanıcıları kullanıcı adlarıyla eşleştirmeye çalışın',
+    'error_messages' => 'Hata mesajı:',
+    'success_messages' => 'Başarı mesajı:',
+    'alert_details' => 'Detaylar için aşağıyı okuyun.',
+    'custom_export' => 'Özel Dışarı Aktar'
 ];

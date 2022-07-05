@@ -40,12 +40,12 @@ return [
     'warranty'			=> 'Garancija',
         'warranty_expires'		=> 'Garancija ističe',
     'years'				=> 'godina',
-    'asset_location' => 'Update Asset Location',
-    'asset_location_update_default_current' => 'Update default location AND actual location',
-    'asset_location_update_default' => 'Update only default location',
+    'asset_location' => 'Izmeni lokaciju imovine',
+    'asset_location_update_default_current' => 'Izmeni predefinisanu i stvarnu lokaciju',
+    'asset_location_update_default' => 'Izmeni samo predefinisanu lokaciju',
     'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
     'asset_deployable' => 'That status is deployable. This asset can be checked out.',
-    'processing_spinner' => 'Processing...',
-    'optional_infos'  => 'Optional Information',
-    'order_details'   => 'Order Related Information'
+    'processing_spinner' => 'Obrada...',
+    'optional_infos'  => 'Opcione informacije',
+    'order_details'   => 'Redosledne informacije'
 ];

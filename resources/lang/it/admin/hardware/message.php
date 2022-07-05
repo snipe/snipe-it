@@ -45,7 +45,7 @@ return [
 
     'import' => [
         'error'                 => 'Alcuni elementi non sono stati importati correttamente.',
-        'errorDetail'           => 'Gli elementi seguenti non sono stati importati correttamente a causa di errori.',
+        'errorDetail'           => 'Gli articoli seguenti non sono stati importati correttamente a causa di errori.',
         'success'               => 'Il file è stato importato con successo',
         'file_delete_success'   => 'Il file è stato cancellato con successo',
         'file_delete_error'      => 'Impossibile eliminare il file',

@@ -41,7 +41,7 @@ return [
     'make_required' => '可選的 - 點擊切換成必選的',
     'reorder' => '重新排序',
     'db_field' => '資料庫欄位',
-    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.',
+    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code>:db_column</code> but should be <code>:expected</code>.',
     'is_unique' => '此值在所有資產之中必須是唯一的',
     'unique' => 'Unique',
 ];
