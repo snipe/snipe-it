@@ -329,7 +329,7 @@ return [
     'invalid_category'      => 'Categoria inválida',
     'dashboard_info'        => 'Este é o seu painel. Há muitos como este, mas este é o seu.',
     '60_percent_warning'    => '60% Completo (aviso)',
-    'dashboard_empty'       => 'It looks like you haven not added anything yet, so we do not have anything awesome to display. Get started by adding some assets, accessories, consumables, or licenses now!',
+    'dashboard_empty'       => 'It looks like you have not added anything yet, so we do not have anything awesome to display. Get started by adding some assets, accessories, consumables, or licenses now!',
     'new_asset'             => 'Novo Artigo',
     'new_license'           => 'Nova Licença',
     'new_accessory'         => 'Novo Acessório',
