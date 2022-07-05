@@ -159,6 +159,7 @@
 <script nonce="{{ csrf_token() }}">
 
     @if(Request::has('model_id'))
+        //TODO: Refactor custom fields to use Livewire, populate from server on page load when requested with model_id
     $(document).ready(function() {
         fetchCustomFields()
     });
