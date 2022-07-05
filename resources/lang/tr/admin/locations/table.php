@@ -33,8 +33,8 @@ return [
     'asset_checked_out'         => 'Çıkış Yapıldı',
     'asset_expected_checkin'    => 'Beklenen geri alma tarihi',
     'date'                      => 'Tarih:',
-    'signed_by_asset_auditor'   => 'Signed By (Asset Auditor):',
-    'signed_by_finance_auditor' => 'Signed By (Finance Auditor):',
-    'signed_by_location_manager' => 'Signed By (Location Manager):',
-    'signed_by'                 => 'Signed Off By:',
+    'signed_by_asset_auditor'   => 'İmzalayan (Demirbaş Denetçisi):',
+    'signed_by_finance_auditor' => 'İmzalayan (Maliye Denetçisi):',
+    'signed_by_location_manager' => 'İmzalayan (Mekan Sorumlusu):',
+    'signed_by'                 => 'İmzalayan:',
 ];

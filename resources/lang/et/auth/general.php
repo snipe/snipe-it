@@ -4,13 +4,13 @@ return [
     'send_password_link'	        => 'Saada parooli taastamise link',
     'email_reset_password'			=> 'E-posti parool lähtesta',
     'reset_password'			    => 'Taasta parool',
-    'saml_login'                    => 'Login via SAML',
+    'saml_login'                    => 'Logi sisse SAML-i kaudu',
     'login'                         => 'Logi sisse',
     'login_prompt'                  => 'Palun logi sisse',
     'forgot_password'               => 'Ma unustasin oma parooli',
-    'ldap_reset_password'           => 'Please click here to reset your LDAP password',
+    'ldap_reset_password'           => 'LDAP parooli lähtestamiseks klõpsake siin',
     'remember_me'                   => 'Jäta mind meelde',
-    'username_help_top'                 => 'Enter your <strong>username</strong> to be emailed a password reset link.',
-    'username_help_bottom'          => 'Your username and email address <em>may</em> be the same, but may not be, depending on your configuration. If you cannot remember your username, contact your administrator. <br><br><strong>Usernames without an associated email address will not be emailed a password reset link.</strong> ',
+    'username_help_top'                 => 'Parooli lähtestamiseks sisesta oma <strong>kasutajanimi</strong>.',
+    'username_help_bottom'          => 'Kasutajanimi ja e-posti aadress <em>võivad</em> olla samad, aga ei pruugi olla. Kui oled kasutajanime unustanud, võta ühendust oma süsteemiadministraatoriga. <br><br><strong>Kasutajatele ilma liidetud e-posti aadressita ei saa parooli lähtestamise linki saata.</strong> ',
     ];
 

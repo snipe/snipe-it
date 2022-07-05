@@ -22,7 +22,7 @@ return [
     'image'		    => 'Cihaz resmi',
     'days_without_acceptance' => 'Kabul edilmeden geçen gün',
     'monthly_depreciation' => 'Aylık Amortisman',
-    'assigned_to'    => 'Assigned To',
+    'assigned_to'    => 'Atanan',
     'requesting_user' => 'Talep Sahibi',
     'requested_date' => 'Talep Edilen Tarih',
     'changed'       => 'Değişti',

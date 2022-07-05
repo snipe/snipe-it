@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Uyarı:</strong> Bu demirbaş dağıtılamaz olarak işlaretlenmiş.
                         Eğer durumu değişti ise, lütfen Demirbaş Durumu\'nu güncelleyiniz.',
     'does_not_exist' 	=> 'Demirbaş mevcut değil.',
-    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
+    'does_not_exist_or_not_requestable' => 'Bu varlık mevcut değil veya talep edilebilir değil.',
     'assoc_users'	 	=> 'Bu demirbaş kullanıcıya çıkış yapılmış olaran görülüyor ve silinemez. Lütfen önce demirbaş girişi yapınız, ardından tekrar siliniz. ',
 
     'create' => [

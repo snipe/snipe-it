@@ -13,8 +13,8 @@ return array(
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed' => 'Sisestatud mandaadid ei ühti meie andmetega.',
+    'password' => 'Sisestatud parool on vale.',
+    'throttle' => 'Liiga palju ebaõnnestunud sisselogimiskatseid. Palun proovi uuesti :seconds sekundi pärast.',
 
 );
