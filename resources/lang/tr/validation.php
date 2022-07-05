@@ -91,11 +91,11 @@ return [
     'url'                  => ':attribute biçim geçersiz.',
     'unique_undeleted'     => ':attribute benzersiz olmalıdır.',
     'non_circular'         => ':attribute döngüsel bir başvuru oluşturmamalıdır.',
-    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
-    'letters'              => 'Password must contain at least one letter.',
-    'numbers'              => 'Password must contain at least one number.',
-    'case_diff'            => 'Password must use mixed case.',
-    'symbols'              => 'Password must contain symbols.',
+    'disallow_same_pwd_as_user_fields' => 'Şifre kullanıcı adı ile aynı olamaz.',
+    'letters'              => 'Şifre en az bir harf içermelidir.',
+    'numbers'              => 'Şifre en az bir rakam içermelidir.',
+    'case_diff'            => 'Şifre hem büyük hem küçük harf içermelidir.',
+    'symbols'              => 'Şifre sembol içermelidir.',
     'gte'                  => [
         'numeric'          => 'Değer negatif olamaz'
     ],

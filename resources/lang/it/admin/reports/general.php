@@ -2,9 +2,9 @@
 
 return [
     'info'   => 'Selezionare le opzioni desiderate per il vostro report di beni.',
-    'deleted_user' => 'Deleted user',
-    'send_reminder' => 'Send reminder',
-    'reminder_sent' => 'Reminder sent',
-    'acceptance_deleted' => 'Acceptance request deleted',
-    'acceptance_request' => 'Acceptance request'
+    'deleted_user' => 'Utente eliminato',
+    'send_reminder' => 'Invia promemoria',
+    'reminder_sent' => 'Promemoria spedito',
+    'acceptance_deleted' => 'Richiesta di accettazione eliminata',
+    'acceptance_request' => 'Richiesta di accettazione'
 ];

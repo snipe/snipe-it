@@ -10,7 +10,7 @@ return [
     'checkin'  					=> 'Ingresso Asset',
     'checkout'  				=> 'Asset Checkout',
     'clone'  					=> 'Copia Asset',
-    'deployable'  				=> 'Distribuibile',
+    'deployable'  				=> 'Assegnabile',
     'deleted'  					=> 'Questo bene è stato eliminato.',
     'edit'  					=> 'Modifica Asset',
     'model_deleted'  			=> 'Questo modello di asset è stato eliminato. Devi ripristinare il modello prima di poter ripristinare il bene.',

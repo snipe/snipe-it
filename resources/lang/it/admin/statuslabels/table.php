@@ -7,7 +7,7 @@ return array(
     'color'      	=> 'Colore del grafico',
     'default_label' => 'Etichetta predefinita',
     'default_label_help' => 'Viene utilizzato per garantire che le etichette di stato più comuni vengano visualizzate nella parte superiore della casella di selezione durante la creazione / modifica delle risorse.',
-    'deployable'      	=> 'Distribuibile',
+    'deployable'      	=> 'Assegnabile',
     'info'      	=> 'Le etichette di stato sono usate per descrivere i vari stati dei beni. Essi possono essere fuori per la riparazione, perso o rubato, etc. È possibile creare nuove etichette di stato per schierabili, in attesa e dei beni archiviati.',
     'name'      	=> 'Nome Stato',
     'pending'      	=> 'In attesa',

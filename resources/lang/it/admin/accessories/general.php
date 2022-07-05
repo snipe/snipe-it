@@ -12,7 +12,7 @@ return array(
     'require_acceptance'				=> 'Richiedere agli utenti di confermare l\'accettazione di attività in questa categoria.',
     'no_default_eula'					=> 'Non è stata trovata EULA predefinita. Aggiungine un altra nei settaggi.',
     'total'  							=> 'Totale',
-    'remaining'  						=> 'Utilità',
+    'remaining'  						=> 'Disponib',
     'update'  							=> 'Aggiorna Accessorio',
     'use_default_eula'					=> 'Usa <a href="#" data-toggle="modal" data-target="#eulaModal">L\'EULA predefinita</a> invece.',
     'use_default_eula_disabled'			=> '<del>Usa L\'EULA predefinita.</del> Nessuna EULA predefinita è in uso. Per favore aggiungine una nei Settaggi.',

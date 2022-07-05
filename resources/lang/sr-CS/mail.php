@@ -37,7 +37,7 @@ return [
     'item' => 'Artikal:',
     'Item_Request_Canceled' => 'Zahtev za stavku je otkazan',
     'Item_Requested' => 'Zahtevana stavka',
-    'link_to_update_password' => 'Kliknite na sledeću vezu kako biste potvrdili svoj :web nalog:',
+    'link_to_update_password' => 'Kliknite na sledeću vezu kako biste obnovili svoju :web lozinku:',
     'login_first_admin' => 'Login to your new Snipe-IT installation using the credentials below:',
     'login' => 'Login:',
     'Low_Inventory_Report' => 'Izveštaj o niskim zalihama',
