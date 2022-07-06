@@ -54,7 +54,7 @@ class LogListener
     public function onCheckoutAccepted(CheckoutAccepted $event)
     {
 
-        \Log::error('event passed to the onCheckoutAccepted listener:');
+        \Log::debug('event passed to the onCheckoutAccepted listener:');
         $logaction = new Actionlog();
         $logaction->item()->associate($event->acceptance->checkoutable);
         $logaction->target()->associate($event->acceptance->assignedTo);
