@@ -6,12 +6,12 @@ return [
     'archived'  				=> 'Arhivirano',
     'asset'  					=> 'Imovina',
     'bulk_checkout'             => 'Checkout Assets',
-    'bulk_checkin'              => 'Checkin Assets',
+    'bulk_checkin'              => 'Razduži imovinu',
     'checkin'  					=> 'Checkin Asset',
     'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Kloniraj imovinu',
     'deployable'  				=> 'Može se razmestiti',
-    'deleted'  					=> 'This asset has been deleted.',
+    'deleted'  					=> 'Imovina je obrisana.',
     'edit'  					=> 'Uređivanje imovine',
     'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
     'requestable'               => 'Može da se potražuje',
@@ -22,7 +22,7 @@ return [
     'pending'  					=> 'U čekanju',
     'undeployable'  			=> 'Ne može da se razmesti',
     'view'  					=> 'Prikaz imovine',
-    'csv_error' => 'You have an error in your CSV file:',
+    'csv_error' => 'Postoji greška u tvojoj CSV datoteci:',
     'import_text' => '
     <p>
     Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.

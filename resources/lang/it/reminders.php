@@ -15,7 +15,7 @@ return array(
 
     "password" => "Le passwords devono essere almeno di 6 caratteri e uguali alla conferma.",
     "user"     => "Nome utente o indirizzo email non corretto",
-    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
-    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
+    "token"    => 'Questo token di reimpostazione della password non è valido o è scaduto oppure non corrisponde al nome utente fornito.',
+    'sent'	   => 'Se nel nostro sistema esiste un utente corrispondente con un indirizzo e-mail valido, è stata inviata un\'e-mail di recupero password.',
 
 );

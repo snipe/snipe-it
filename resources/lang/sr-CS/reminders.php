@@ -15,7 +15,7 @@ return array(
 
     "password" => "Lozinke moraju imati šest znakova i odgovarati potvrdi.",
     "user"     => "Korisničko ime ili e-adresa nisu ispravni",
-    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
-    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
+    "token"    => 'Token za resetovanje lozinke je neispravan, istekao ili se ne poklapa sa unešenim korisničkim imenom.',
+    'sent'	   => 'Ako odgovarajući korisnik sa ispravnom adresom e-pošte postoji u našem sistemu, e-poruka za promenu lozinke je poslata.',
 
 );

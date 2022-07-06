@@ -51,7 +51,7 @@ return array(
 
     'fieldset_default_value' => array(
 
-        'error' => 'Error validating default fieldset values.',
+        'error' => 'Varsayılan alan kümesi değerleri doğrulanırken bir hatayla karşılaşıldı.',
 
     ),
 

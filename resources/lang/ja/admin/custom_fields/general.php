@@ -41,7 +41,7 @@ return [
     'make_required' => 'オプション - クリックで必須にします',
     'reorder' => '並べ替え',
     'db_field' => 'DBフィールド',
-    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code>:db_column</code> but should be <code>:expected</code>.',
+    'db_convert_warning' => '警告。このフィールドは <code>:db_column</code> としてカスタムフィールドテーブルにありますが、 <code>:expected</code> でなければなりません。',
     'is_unique' => 'この値はすべての資産で一意である必要があります',
     'unique' => '一意',
 ];

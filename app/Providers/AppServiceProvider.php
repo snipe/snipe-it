@@ -40,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
             if (strpos(env('APP_URL'), 'https') === 0) {
                 $url->forceScheme('https');
             } else {
-                \Log::warning("'APP_FORCE_TLS' is set to true, but 'APP_URL' does not start with 'https://'. Will not force TLS on connections.");
+                \Log::debug("'APP_FORCE_TLS' is set to true, but 'APP_URL' does not start with 'https://'. Will not force TLS on connections.");
             }
         }
 
