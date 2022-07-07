@@ -14,7 +14,7 @@ class CheckoutableCheckedOut
     public $checkedOutTo;
     public $checkedOutBy;
     public $note;
-    public $checkoutnote;
+    public $checkout_note;
     public $total;
 
     /**
@@ -22,17 +22,17 @@ class CheckoutableCheckedOut
      *
      * @return void
      */
-    public function __construct($checkoutable, $checkedOutTo, User $checkedOutBy, $note, $totalnum=null, $checkoutnote=null)
+    public function __construct($checkoutable, $checkedOutTo, User $checkedOutBy, $note, $checkout_qty=null, $checkout_note=null)
     {
         $this->checkoutable = $checkoutable;
         $this->checkedOutTo = $checkedOutTo;
         $this->checkedOutBy = $checkedOutBy;
         $this->note = $note;
-        if ($totalnum != null) {
-            $this->totalnum         = $totalnum;
+        if ($checkout_qty != null) {
+            $this->checkout_qty         = $checkout_qty;
         }
-        if ($checkoutnote != null) {
-            $this->checkoutnote         = $checkoutnote;
+        if ($checkout_note != null) {
+            $this->checkout_note         = $checkout_note;
         }
     }
 }

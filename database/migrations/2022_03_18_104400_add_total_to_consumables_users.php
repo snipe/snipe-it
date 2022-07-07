@@ -14,8 +14,8 @@ class AddTotalToConsumablesUsers extends Migration
     public function up()
     {
         Schema::table('consumables_users', function (Blueprint $table) {
-            $table->integer('totalnum')->default(1);
-            $table->text('checkoutnote')->nullable();
+            $table->integer('checkout_qty')->default(1);
+            $table->text('checkout_note')->nullable();
         });
     }
 
@@ -27,11 +27,11 @@ class AddTotalToConsumablesUsers extends Migration
     public function down()
     {
         Schema::table('consumables_users', function (Blueprint $table) {
-            if (Schema::hasColumn('consumables_users', 'totalnum')) {
-                $table->dropColumn('totalnum');
+            if (Schema::hasColumn('consumables_users', 'checkout_qty')) {
+                $table->dropColumn('checkout_qty');
             }
-            if (Schema::hasColumn('consumables_users', 'checkoutnote')) {
-                $table->dropColumn('checkoutnote');
+            if (Schema::hasColumn('consumables_users', 'checkout_note')) {
+                $table->dropColumn('checkout_note');
             }
         });
     }

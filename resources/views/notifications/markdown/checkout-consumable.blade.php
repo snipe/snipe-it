@@ -19,11 +19,11 @@
 @endif
 | **{{ trans('mail.notes') }}** | {{ $item->present()->notes }} this is note |
 |        |          |
-@if (isset($totalnum))
+@if (isset($checkout_qty))
 | **{{ trans('general.total') }}** | {{$item->present()->lastConsumed() }} pc(s) |
 @endif
-@if (isset($checkoutnote))
-| **{{ trans('mail.checkout_note') }}** | {{ $item->present()->checkoutNote() }} |
+@if (isset($checkout_note))
+| **{{ trans('mail.checkout_note') }}** | {{ $item->present()->checkout_note() }} |
 @endif
 @if ($admin)
 | **{{ trans('general.administrator') }}** | {{ $admin->present()->fullName() }} |

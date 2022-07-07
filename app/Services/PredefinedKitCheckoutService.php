@@ -172,10 +172,10 @@ class PredefinedKitCheckoutService
                         'consumable_id' => $consumable->id,
                         'user_id' => $admin->id,
                         'assigned_to' => $user->id,
-                        'totalnum' => $consumable->pivot->$totalnum,
-                        'checkoutnote' => $consumable->pivot->$checkoutnote
+                        'checkout_qty' => $consumable->pivot->$checkout_qty,
+                        'checkout_note' => $consumable->pivot->$checkout_note
                     ]);
-                    event(new CheckoutableCheckedOut($consumable, $user, $admin, $note, $totalnum));
+                    event(new CheckoutableCheckedOut($consumable, $user, $admin, $note, $checkout_qty));
                 }
                 //accessories
                 foreach ($accessories_to_add as $accessory) {

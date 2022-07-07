@@ -742,10 +742,10 @@
 		    {!! Helper::formatCurrencyOutput($consumable->purchase_cost) !!}                  
                   </td>
 		  <td>
-	      	    {!! $consumable->pivot->totalnum !!}
+	      	    {!! $consumable->pivot->checkout_qty !!}
 		  </td>
                   <td>{{ $consumable->pivot->created_at }}</td>
-                  <td>{{ $consumable->pivot->checkoutnote }}</td>
+                  <td>{{ $consumable->pivot->checkout_note }}</td>
                 </tr>
                 @endforeach
               </tbody>

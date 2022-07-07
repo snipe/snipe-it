@@ -87,10 +87,10 @@ class ComponentCheckoutController extends Controller
             'created_at' => date('Y-m-d H:i:s'),
             'assigned_qty' => $request->input('assigned_qty'),
             'asset_id' => $asset_id,
-            'totalnum' => e($request->input('totalnum'))
+            'checkout_qty' => e($request->input('checkout_qty'))
         ]);
 
-        event(new CheckoutableCheckedOut($component, $asset, Auth::user(), $request->input('note'), $request->input('totalnum')));
+        event(new CheckoutableCheckedOut($component, $asset, Auth::user(), $request->input('note'), $request->input('checkout_qty')));
 
         return redirect()->route('components.index')->with('success', trans('admin/components/message.checkout.success'));
     }
