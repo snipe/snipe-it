@@ -2,10 +2,27 @@
 
 namespace App\Helpers;
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 class StorageHelper
 {
+    const uploadsDirectory = 'private_uploads/';
+
+    public static function generateFileName($slug, $id, UploadedFile $file): string
+    {
+        return
+            $slug .
+            '-' .
+            $id .
+            '-' .
+            str_random(8) .
+            '-' .
+            str_slug(basename($file->getClientOriginalName(), '.' . $file->getClientOriginalExtension())) .
+            '.' .
+            $file->getClientOriginalExtension();
+    }
+
     public static function downloader($filename, $disk = 'default')
     {
         if ($disk == 'default') {
