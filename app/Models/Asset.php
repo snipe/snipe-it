@@ -8,6 +8,7 @@ use App\Exceptions\CheckoutNotAllowed;
 use App\Http\Traits\UniqueSerialTrait;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Acceptable;
+use App\Models\Traits\Attachable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use AssetPresenter;
@@ -31,6 +32,7 @@ class Asset extends Depreciable
     protected $presenter = \App\Presenters\AssetPresenter::class;
 
     use CompanyableTrait;
+    use Attachable;
     use HasFactory, Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait, UniqueSerialTrait;
 
     const LOCATION = 'location';

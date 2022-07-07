@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Assets;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetFileRequest;
-use App\Http\Traits\Attachable;
 use App\Models\Actionlog;
 use App\Models\Asset;
+use App\Models\Traits\Attachable;
 use Illuminate\Http\RedirectResponse;
 
 class AssetFilesController extends Controller
@@ -30,7 +30,7 @@ class AssetFilesController extends Controller
         }
 
         $this->authorize('update', $asset);
-        $this->storeFile('assets', $request->file('file'), $asset, $request->get('notes'), 'hardware');
+        $asset->storeFiles($request->file('file'), $request->get('notes'));
         return redirect()->back()->with('success', trans('admin/hardware/message.upload.success'));
     }
 
@@ -57,7 +57,7 @@ class AssetFilesController extends Controller
             return response('No matching record for that asset/file', 500)
                 ->header('Content-Type', 'text/plain');
         }
-        return $this->showFile($log->action_type == 'audit' ? 'audits' : 'assets', $log->filename);
+        return $asset->showFile($log->filename);
     }
 
     /**
@@ -79,7 +79,7 @@ class AssetFilesController extends Controller
 
         $this->authorize('update', $asset);
         if ($log = Actionlog::find($fileId)) {
-            $this->destroyFile('assets', $log);
+            $asset->destroyFile($log);
         }
         return redirect()->back()->with('success', trans('admin/hardware/message.deletefile.success'));
     }
