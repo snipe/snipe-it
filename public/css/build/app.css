@@ -883,14 +883,13 @@ th.css-accessory > .th-inner::before {
   display: inline-block;
   font-size: 20px;
   font-family: "Font Awesome 5 Free";
-  font-weight: 300;
+  font-weight: 900;
 }
 th.css-padlock > .th-inner::before {
   content: "\f023";
   font-family: "Font Awesome 5 Free";
-  font-weight: 400;
+  font-weight: 900;
   padding-right: 4px;
-  font-weight: 300;
   font-size: 12px;
 }
 /**

@@ -190,6 +190,7 @@ mix.combine(
 mix
   .combine(
         [
+            './node_modules/@fortawesome/fontawesome-free/js/all.js',
             './node_modules/bootstrap-table/dist/bootstrap-table.js',
             './node_modules/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.js',
             './node_modules/bootstrap-table/dist/extensions/export/bootstrap-table-export.js',
