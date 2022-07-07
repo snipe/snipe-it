@@ -60,7 +60,7 @@ trait Attachable
             $file->getClientOriginalExtension();
     }
 
-    public function storeSanitizedSvg(UploadedFile $file, string $fileName)
+    private function storeSanitizedSvg(UploadedFile $file, string $fileName)
     {
         $sanitizer = new Sanitizer();
         try {
@@ -87,9 +87,9 @@ trait Attachable
     {
         foreach ($files as $file) {
             $fileName = $this->generateFileName($file);
-
             // Check for SVG and sanitize it
-            if ($file->getClientOriginalExtension() === 'svg') {
+            if ($file->getClientOriginalExtension() === 'svg' || str_contains($file->getMimeType(), 'svg')) {
+//                dd("this is an svg");
                 Log::debug('This is an SVG');
                 $this->storeSanitizedSvg($file, $fileName);
             } else {
