@@ -51,10 +51,10 @@
               <label for="total" class="col-md-3 control-label">{{ trans('admin/consumables/general.total') }}
                 <i class='icon-asterisk'></i></label>
               <div class="col-md-5" >
-                    <input class="form-control" type="text" name="totalnum" id="totalnum" style="width: 70px; float:left;" value="{{ old('totalnum') ?? 1 }}" > &nbsp;&nbsp;
+                    <input class="form-control" type="text" name="checkout_qty" id="checkout_qty" style="width: 70px; float:left;" value="{{ old('checkout_qty') ?? 1 }}" > &nbsp;&nbsp;
                     <label class="control-label"> / {{ $consumable->numRemaining()  }}</label>
                     <div style="float:right;" class="col-ld-1">
-                       {!! $errors->first('totalnum', '<span class="alert-msg" aria-hidden="true" width=100% position=absolute><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}    
+                       {!! $errors->first('checkout_qty', '<span class="alert-msg" aria-hidden="true" width=100% position=absolute><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}    
                     </div>
                     </input>               
                              
@@ -90,10 +90,10 @@
               </div>
             @endif
           <!-- Checout Note -->
-          <div class="form-group {{ $errors->has('checkoutnote') ? 'error' : '' }}">
-            <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.checkoutnotes') }}</label>
+          <div class="form-group {{ $errors->has('checkout_note') ? 'error' : '' }}">
+            <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.checkout_notes') }}</label>
             <div class="col-md-7">
-              <textarea class="col-md-6 form-control" id="checkoutnote" name="checkoutnote"></textarea>	      
+              <textarea class="col-md-6 form-control" id="checkout_note" name="checkout_note"></textarea>	      
               {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>

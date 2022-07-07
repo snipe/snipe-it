@@ -54,8 +54,8 @@
                 <thead>
                   <tr>
                     <th data-searchable="false" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
-                    <th data-searchable="false" data-sortable="false" data-field="totalnum">{{ trans('admin/consumables/general.total') }}</th>
-                    <th data-searchable="false" data-sortable="false" data-field="checkoutnote">{{ trans('admin/consumables/general.note') }}</th>
+                    <th data-searchable="false" data-sortable="false" data-field="checkout_qty">{{ trans('admin/consumables/general.total') }}</th>
+                    <th data-searchable="false" data-sortable="false" data-field="checkout_note">{{ trans('admin/consumables/general.note') }}</th>
                     <th data-searchable="false" data-sortable="false" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
                     <th data-searchable="false" data-sortable="false" data-field="admin">{{ trans('general.admin') }}</th>
                   </tr>

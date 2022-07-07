@@ -53,13 +53,13 @@ class ConsumableCheckoutController extends Controller
         // Validating input number and compared to currently remaining amount of stock
         $totalremaining = (int)$consumable->numRemaining();        
         $request->validate([
-            'totalnum' => "required|regex:/^[0-9]*$/|gt:0|lte:$totalremaining"
+            'checkout_qty' => "required|regex:/^[0-9]*$/|gt:0|lte:$totalremaining"
           ],
           [
-            'totalnum.gt'       => trans('admin/consumables/message.under'),
-            'totalnum.lte'      => trans('admin/consumables/message.over'),
-            'totalnum.required' => trans('admin/consumables/message.required'),
-            'totalnum.regex'    => trans('admin/consumables/message.numeric'),
+            'checkout_qty.gt'       => trans('admin/consumables/message.under'),
+            'checkout_qty.lte'      => trans('admin/consumables/message.over'),
+            'checkout_qty.required' => trans('admin/consumables/message.required'),
+            'checkout_qty.regex'    => trans('admin/consumables/message.numeric'),
           ]);
 
         $this->authorize('checkout', $consumable);
@@ -80,11 +80,11 @@ class ConsumableCheckoutController extends Controller
             'consumable_id' => $consumable->id,
             'user_id'       => $admin_user->id,
             'assigned_to'   => e($request->input('assigned_to')),
-            'totalnum'      => e($request->input('totalnum')),
-            'checkoutnote'  => e($request->input('checkoutnote'))
+            'checkout_qty'      => e($request->input('checkout_qty')),
+            'checkout_note'  => e($request->input('checkout_note'))
         ]);
 
-        event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), e($request->input('checkoutnote')), $request->input('totalnum')), e($request->input('checkoutnote')));
+        event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), e($request->input('checkout_note')), $request->input('checkout_qty')), e($request->input('checkout_note')));
 
         // Redirect to the new consumable page
         return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.checkout.success'));

@@ -227,7 +227,7 @@ class Consumable extends SnipeModel
      */
     public function users()
     {
-        return $this->belongsToMany(\App\Models\User::class, 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('id', 'totalnum','checkoutnote')->withTrashed()->withTimestamps();
+        return $this->belongsToMany(\App\Models\User::class, 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('id', 'checkout_qty','checkout_note')->withTrashed()->withTimestamps();
     }
 
 
@@ -320,8 +320,8 @@ class Consumable extends SnipeModel
     {
         $checkedouttotal = null;        
         foreach($this->users as $data){
-                $totalnum = $data['pivot']['totalnum'];
-                $checkedouttotal += $totalnum;            
+                $checkout_qty = $data['pivot']['checkout_qty'];
+                $checkedouttotal += $checkout_qty;            
         }        
         
         return $checkedouttotal;
@@ -338,8 +338,8 @@ class Consumable extends SnipeModel
     public function lastConsumed()
     {
         $checkedouttotal = null;      
-        $checkoutnote = $this->users()->orderBy('created_at','desc')->get();
-        $last = $checkoutnote->last()['pivot']['totalnum'];  
+        $checkout_note = $this->users()->orderBy('created_at','desc')->get();
+        $last = $checkout_note->last()['pivot']['checkout_qty'];  
         return $last; 
     }
 
@@ -366,12 +366,12 @@ class Consumable extends SnipeModel
      * @since [v.6]
      * @return string
      */
-    public function checkoutNote()
+    public function checkout_note()
     {        
-        $checkoutnote=null;   
+        $checkout_note=null;   
         $first=null;             
-        $checkoutnote = $this->users()->orderBy('created_at','desc')->get();
-        $last = $checkoutnote->last()['pivot']['checkoutnote'];  
+        $checkout_note = $this->users()->orderBy('created_at','desc')->get();
+        $last = $checkout_note->last()['pivot']['checkout_note'];  
         return $last;              
         
     }

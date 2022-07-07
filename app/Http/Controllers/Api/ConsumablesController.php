@@ -229,10 +229,10 @@ class ConsumablesController extends Controller
         foreach ($consumable->consumableAssignments as $consumable_assignment) {
             $rows[] = [
                 'name' => ($consumable_assignment->user) ? $consumable_assignment->user->present()->nameUrl() : 'Deleted User',
-                'totalnum' => ($consumable_assignment->totalnum),
+                'checkout_qty' => ($consumable_assignment->checkout_qty),
                 'created_at' => Helper::getFormattedDateObject($consumable_assignment->created_at, 'datetime'),
                 'admin' => ($consumable_assignment->admin) ? $consumable_assignment->admin->present()->nameUrl() : '',
-                'checkoutnote' => ($consumable_assignment->checkoutnote)
+                'checkout_note' => ($consumable_assignment->checkout_note)
             ];
         }
 
@@ -275,8 +275,8 @@ class ConsumablesController extends Controller
                 'consumable_id' => $consumable->id,
                 'user_id' => $user->id,
                 'assigned_to' => $assigned_to,
-                'totalnum' => $totalnum,
-                'checkoutnote' => $checkoutnote
+                'checkout_qty' => $checkout_qty,
+                'checkout_note' => $checkout_note
             ]);
 
             // Log checkout event

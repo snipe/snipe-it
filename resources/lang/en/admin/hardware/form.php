@@ -48,6 +48,6 @@ return [
     'processing_spinner' => 'Processing...',
     'optional_infos'  => 'Optional Information',
     'order_details'   => 'Order Related Information',
-    'checkoutnotes' => 'Checkout Note',
+    'checkout_notes' => 'Checkout Note',
 
 ];
