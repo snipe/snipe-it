@@ -14,6 +14,7 @@ class CheckoutableCheckedOut
     public $checkedOutTo;
     public $checkedOutBy;
     public $note;
+    public $checkoutnote;
     public $total;
 
     /**

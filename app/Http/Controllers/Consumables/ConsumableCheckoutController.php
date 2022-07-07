@@ -84,7 +84,7 @@ class ConsumableCheckoutController extends Controller
             'checkoutnote'  => e($request->input('checkoutnote'))
         ]);
 
-        event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note'), $request->input('totalnum')));
+        event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), e($request->input('checkoutnote')), $request->input('totalnum')), e($request->input('checkoutnote')));
 
         // Redirect to the new consumable page
         return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.checkout.success'));
