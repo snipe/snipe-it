@@ -678,7 +678,7 @@
             @can('reports.view')
             <li class="treeview{{ (Request::is('reports*') ? ' active' : '') }}">
                 <a href="#"  class="dropdown-toggle">
-                    <i class="fas fa-chart-bar"></i>
+                    <i class="fas fa-chart-bar fa-fw"></i>
                     <span>{{ trans('general.reports') }}</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
@@ -730,7 +730,7 @@
             @can('viewRequestable', \App\Models\Asset::class)
             <li{!! (Request::is('account/requestable-assets') ? ' class="active"' : '') !!}>
             <a href="{{ route('requestable-assets') }}">
-            <i class="fa fa-laptop"></i>
+            <i class="fa fa-laptop fa-fw"></i>
             <span>{{ trans('admin/hardware/general.requestable') }}</span>
             </a>
             </li>
