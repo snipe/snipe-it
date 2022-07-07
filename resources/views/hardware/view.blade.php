@@ -180,7 +180,7 @@
                     <li>
                     <a href="#modelfiles" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
-                            <i class="far fa-file fa-2x" aria-hidden="true"></i>
+                              <i class="fa-solid fa-laptop-file fa-2x" aria-hidden="true"></i>
                           </span>
                         <span class="hidden-xs hidden-sm">
                             {{ trans('general.additional_files') }}
