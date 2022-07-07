@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Storage;
 
 class StorageHelper
 {
-
     public static function downloader($filename, $disk = 'default')
     {
         if ($disk == 'default') {
