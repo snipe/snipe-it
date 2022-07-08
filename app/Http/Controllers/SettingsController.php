@@ -1278,6 +1278,12 @@ class SettingsController extends Controller
                 // If it's greater than 300, it probably worked
                 $output = Artisan::output();
 
+                /* Run migrations */
+                \Log::debug('Migrating database...');
+                Artisan::call('migrate', ['--force' => true]);
+                $migrate_output = Artisan::output();
+                \Log::debug($migrate_output);
+
                 if (strlen($output) > 300) {
                     $find_user = DB::table('users')->where('first_name', $user->first_name)->where('last_name', $user->last_name)->exists();
 
@@ -1287,15 +1293,8 @@ class SettingsController extends Controller
                         $new_user->push();
                     }
 
-
                     \Log::debug('Logging all users out..');
                     Artisan::call('snipeit:global-logout', ['--force' => true]);
-                    
-                    /* run migrations */
-                    \Log::debug('Migrating database...');
-                    Artisan::call('migrate', ['--force' => true]);
-                    $migrate_output = Artisan::output();
-                    \Log::debug($migrate_output);
 
                     DB::table('users')->update(['remember_token' => null]);
                     \Auth::logout();
@@ -1303,7 +1302,6 @@ class SettingsController extends Controller
                     return redirect()->route('login')->with('success', 'Your system has been restored. Please login again.');
                 } else {
                     return redirect()->route('settings.backups.index')->with('error', $output);
-
                 }
 
             } else {
