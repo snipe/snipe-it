@@ -13,10 +13,12 @@ class AddEulaToCheckoutAcceptance extends Migration
      */
     public function up()
     {
-        Schema::table('checkout_acceptances', function (Blueprint $table) {
-            $table->text('stored_eula')->nullable()->default(null);
-            $table->string('stored_eula_file')->nullable()->default(null);
-        });
+        if (!Schema::hasColumn('checkout_acceptances', 'stored_eula')) {
+            Schema::table('checkout_acceptances', function (Blueprint $table) {
+                $table->text('stored_eula')->nullable()->default(null);
+                $table->string('stored_eula_file')->nullable()->default(null);
+            });
+        }
     }
 
     /**
@@ -26,13 +28,15 @@ class AddEulaToCheckoutAcceptance extends Migration
      */
     public function down()
     {
-        Schema::table('checkout_acceptances', function (Blueprint $table) {
-            if (Schema::hasColumn('checkout_acceptances', 'stored_eula')) {
-                $table->dropColumn('stored_eula');
-            }
-            if (Schema::hasColumn('checkout_acceptances', 'stored_eula_file')) {
-                $table->dropColumn('stored_eula_file');
-            }
-        });
+        if (Schema::hasColumn('checkout_acceptances', 'stored_eula')) {
+            Schema::table('checkout_acceptances', function (Blueprint $table) {
+                if (Schema::hasColumn('checkout_acceptances', 'stored_eula')) {
+                    $table->dropColumn('stored_eula');
+                }
+                if (Schema::hasColumn('checkout_acceptances', 'stored_eula_file')) {
+                    $table->dropColumn('stored_eula_file');
+                }
+            });
+        }
     }
 }
