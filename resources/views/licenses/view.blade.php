@@ -503,7 +503,7 @@
                 </td>
                 <td>{{ $file->created_at }}</td>
                 <td>
-                  <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}" data-content="{{ trans('general.delete_confirm', array('item' => $file)) }}" data-title="{{ trans('general.delete') }} {{ $file->filename }}?">
+                  <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}" data-content="{{ trans('general.delete_confirm', ['item' => $file->filename]) }}" data-title="{{ trans('general.delete') }}">
                     <i class="fas fa-trash icon-white" aria-hidden="true"></i>
                     <span class="sr-only">{{ trans('general.delete') }}</span>
                   </a>
@@ -576,4 +576,3 @@
 @section('moar_scripts')
   @include ('partials.bootstrap-table')
 @stop
-
