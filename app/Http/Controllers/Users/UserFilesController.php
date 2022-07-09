@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AssetFileRequest;
+use App\Http\Requests\FileAttachmentRequest;
 use App\Models\Actionlog;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -18,76 +18,23 @@ class UserFilesController extends Controller
     /**
      * Return JSON response with a list of user details for the getIndex() view.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v1.6]
-     * @param AssetFileRequest $request
+     * @param FileAttachmentRequest $request
      * @param int $userId
      * @return string JSON
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     *@author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.6]
      */
-    public function store(AssetFileRequest $request, $userId = null)
+    public function store(FileAttachmentRequest $request, $userId = null)
     {
-        $user = User::find($userId);
-        $destinationPath = config('app.private_uploads').'/users';
-
-        if (isset($user->id)) {
-            $this->authorize('update', $user);
-
-            $logActions = [];
-            $files = $request->file('file');
-
-            if (is_null($files)) {
-                return redirect()->back()->with('error', trans('admin/users/message.upload.nofiles'));
-            }
-            foreach ($files as $file) {
-                
-                $extension = $file->getClientOriginalExtension();
-                $file_name = 'user-'.$user->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
-
-
-                    // Check for SVG and sanitize it
-                    if ($extension == 'svg') {
-                        \Log::debug('This is an SVG');
-                        \Log::debug($file_name);
-
-                            $sanitizer = new Sanitizer();
-
-                            $dirtySVG = file_get_contents($file->getRealPath());
-                            $cleanSVG = $sanitizer->sanitize($dirtySVG);
-
-                            try {
-                                Storage::put('private_uploads/users/'.$file_name, $cleanSVG);
-                            } catch (\Exception $e) {
-                                \Log::debug('Upload no workie :( ');
-                                \Log::debug($e);
-                            }
-
-                    } else {
-                        Storage::put('private_uploads/users/'.$file_name, file_get_contents($file));
-                }
-
-                //Log the uploaded file to the log
-                $logAction = new Actionlog();
-                $logAction->item_id = $user->id;
-                $logAction->item_type = User::class;
-                $logAction->user_id = Auth::id();
-                $logAction->note = $request->input('notes');
-                $logAction->target_id = null;
-                $logAction->created_at = date("Y-m-d H:i:s");
-                $logAction->filename = $file_name;
-                $logAction->action_type = 'uploaded';
-
-                if (! $logAction->save()) {
-                    return JsonResponse::create(['error' => 'Failed validation: '.print_r($logAction->getErrors(), true)], 500);
-                }
-                $logActions[] = $logAction;
-            }
-            // dd($logActions);
-            return redirect()->back()->with('success', trans('admin/users/message.upload.success'));
+        if (!$user = User::find($userId)) {
+            return redirect()->route('users.index')
+                ->with('error', trans('admin/users/message.user_not_found', ['id' => '$userId']));
         }
-        return redirect()->back()->with('error', trans('admin/users/message.upload.nofiles'));
 
-
+        $this->authorize('update', $user);
+        $user->storeFiles($request->file('file'), $request->get('notes'));
+        return redirect()->back()->with('success', trans('admin/users/message.upload.success'));
     }
 
     /**

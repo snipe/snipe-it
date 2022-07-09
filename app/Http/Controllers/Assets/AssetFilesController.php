@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Assets;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AssetFileRequest;
+use App\Http\Requests\FileAttachmentRequest;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Traits\Attachable;
@@ -16,14 +16,14 @@ class AssetFilesController extends Controller
     /**
      * Upload a file to the server.
      *
-     * @param AssetFileRequest $request
+     * @param FileAttachmentRequest $request
      * @param int|null $assetId
      * @return RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      *@since [v1.0]
      * @author [A. Gianotto] [<snipe@snipe.net>]
      */
-    public function store(AssetFileRequest $request, int $assetId = null)
+    public function store(FileAttachmentRequest $request, int $assetId = null)
     {
         if (!$asset = Asset::find($assetId)) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));

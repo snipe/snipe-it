@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-class AssetFileRequest extends Request
+class FileAttachmentRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Attachable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Carbon\Carbon;
@@ -23,6 +24,7 @@ class License extends Depreciable
     use Loggable, Presentable;
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
+    use Attachable;
 
     // We set these as protected dates so that they will be easily accessible via Carbon
 
