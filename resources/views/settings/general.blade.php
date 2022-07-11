@@ -72,6 +72,18 @@
                             <p class="help-block">{{ trans('admin/settings/general.require_accept_signature_help_text') }}</p>
                         </div>
                     </div>
+                   <div class="form-group" {{ $errors->has('require_return_signature') ? 'error' : '' }}>
+                       <div class="col-md-3">
+                           {{ Form::label('require_return_signature',
+                                          trans('admin/settings/general.require_return_signature')) }}
+                       </div>
+                       <div class="col-md-9">
+                           {{ Form::checkbox('require_return_signature', '1', Request::old('require_return_signature', $setting->require_return_signature), array('class' => 'minimal')) }}
+                           {{ trans('general.yes') }}
+                           {!! $errors->first('require_return_signature', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                           <p class = "help-block"> {{trans('admin/settings/general.require_return_signature_help_text')}}</p>
+                       </div>
+                   </div>
                     <!-- /.form-group -->
 
 
