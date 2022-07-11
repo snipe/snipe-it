@@ -694,7 +694,7 @@ class Asset extends Depreciable
     public static function getExpiringWarrantee($days = 30)
     {
         $days = (is_null($days)) ? 30 : $days;
-        
+
         return self::where('archived', '=', '0')
             ->whereNotNull('warranty_months')
             ->whereNotNull('purchase_date')
@@ -702,7 +702,7 @@ class Asset extends Depreciable
             ->whereRaw(\DB::raw('DATE_ADD(`purchase_date`,INTERVAL `warranty_months` MONTH) <= DATE(NOW() + INTERVAL '
                                  . $days
                                  . ' DAY) AND DATE_ADD(`purchase_date`, INTERVAL `warranty_months` MONTH) > NOW()'))
-            ->orderBy('purchase_date', 'ASC')
+            ->orderByRaw(\DB::raw('DATE_ADD(`purchase_date`,INTERVAL `warranty_months` MONTH)'))
             ->get();
     }
 
