@@ -1285,6 +1285,7 @@ class SettingsController extends Controller
                 \Log::debug($migrate_output);
 
                 $find_user = DB::table('users')->where('username', $user->username)->exists();
+                
                 if (!$find_user){
                     \Log::warning('Attempting to restore user: ' . $user->username);
                     $new_user = $user->replicate();
@@ -1300,8 +1301,7 @@ class SettingsController extends Controller
                 \Auth::logout();
 
                 return redirect()->route('login')->with('success', 'Your system has been restored. Please login again.');
-                }
-
+                
             } else {
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
             }
