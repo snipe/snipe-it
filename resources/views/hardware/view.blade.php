@@ -1125,7 +1125,7 @@
                     @if  ($snipeSettings->require_accept_signature=='1')
                         <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
                     @endif
-                    <th class="col-md-3" data-visible="false" data-field="file" data-visible="false"  data-formatter="eulaFileformatter">{{ trans('general.download') }}</th>
+                    <th class="col-md-3" data-visible="false" data-field="file" data-visible="false"  data-formatter="fileUploadFormatter">{{ trans('general.download') }}</th>
                   <th class="col-sm-2" data-field="log_meta" data-visible="true" data-formatter="changeLogFormatter">{{ trans('admin/hardware/table.changed')}}</th>
                 </tr>
                 </thead>
