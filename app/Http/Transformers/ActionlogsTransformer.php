@@ -57,7 +57,7 @@ class ActionlogsTransformer
 
         $file_url = '';
         if($actionlog->filename!='') {
-            if ($actionlog->present()->actionType() == 'accepted') {
+            if ($actionlog->action_type == 'accepted') {
                 $file_url = route('log.storedeula.download', ['filename' => $actionlog->filename]);
             } else {
                 if ($actionlog->itemType() == 'asset') {
