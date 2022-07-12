@@ -238,4 +238,22 @@ class AcceptanceController extends Controller
 
     }
 
+    public function resignAcceptance($id){
+
+        $acceptance = CheckoutAcceptance::forUser(Auth::user())
+            ->find($id,'checkoutable_id')
+            ->first('created_at');
+
+
+            $acceptance->accepted_at = null;
+            $acceptance->declined_at = null;
+
+            $acceptance->save();
+
+            return redirect()->to('/hardware')->with('success', trans('admin/users/general.resend_eula'));
+
+
+
+    }
+
 }
