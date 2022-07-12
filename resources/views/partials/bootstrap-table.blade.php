@@ -657,7 +657,6 @@
         }
     }
 
-
     function fileUploadNameFormatter(value) {
         console.dir(value);
         if ((value) && (value.filename) && (value.url)) {
