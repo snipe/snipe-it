@@ -643,7 +643,8 @@ class ReportsController extends Controller
                 $assets->whereBetween('assets.next_audit_date', [$request->input('next_audit_start'), $request->input('next_audit_end')]);
             }
             if($request->filled('exclude_archived')){
-                $assets->where('archived', '=', 0) && $assets->where('status_id', '!=', 3);
+                $assets->notArchived();
+//                where('archived', '=', 0) && $assets->where('status_id', '!=', 3);
             }
 
             $assets->orderBy('assets.id', 'ASC')->chunk(20, function ($assets) use ($handle, $customfields, $request) {
