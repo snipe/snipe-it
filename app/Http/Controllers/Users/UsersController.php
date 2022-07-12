@@ -628,14 +628,16 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
 
-        if( User::where('id', $id)->first()->exists())
-            {
-                $user= User::where('id', $id)->first();
-                $user->notify((new CurrentInventory($user)));
-                return redirect()->back()->with('success', trans('admin/users/general.user_notified'));
-            }
+        if (!$user = User::find($id)) {
+            return redirect()->back()
+                ->with('error', trans('admin/users/message.user_not_found', ['id' => $id]));
+        }
+        if (empty($user->email)) {
+            return redirect()->back()->with('error', trans('admin/users/message.user_has_no_email'));
+        }
 
-        return redirect()->back()->with('error', 'admin/accessories/message.user_does_not_exist');
+        $user->notify((new CurrentInventory($user)));
+        return redirect()->back()->with('success', trans('admin/users/general.user_notified'));
     }
 
     /**
