@@ -867,11 +867,13 @@
                                                 </li>
                                             @endif
 
-                                            @if($asset->checkedOutToUser())
+                                            @can('superadmin')
+                                                @if($asset->checkedOutToUser())
                                                     <div class="col-md-12" style="padding-top: 5px;">
                                                         <a href="{{route('account.accept.resign', $asset->id)}}" style="width: 100%; font-size: 14px;" class="btn btn-sm btn-primary hidden-print"><i class="fas fa-fw fa-repeat"></i>{{trans('admin/users/general.resend_eula_label')}}</a>
                                                     </div>
-                                            @endif
+                                                @endif
+                                            @endcan
 
                                             @if (isset($asset->location))
                                                 <li>{{ $asset->location->name }}</li>

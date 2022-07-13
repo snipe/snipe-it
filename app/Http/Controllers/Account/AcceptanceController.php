@@ -237,13 +237,20 @@ class AcceptanceController extends Controller
         return redirect()->to('account/accept')->with('success', $return_msg);
 
     }
+    /**
+     * returns the checkout Acceptance agreement to a pending state for user to resign the agreement.
+     *
+     * @param  int  $id
+     * @return redirect
+     */
 
     public function resignAcceptance($id){
 
-        $acceptance = CheckoutAcceptance::forUser(Auth::user())
-            ->find($id,'checkoutable_id')
-            ->first('created_at');
-
+        $acceptance = CheckoutAcceptance::where('checkoutable_id', $id)
+                                        ->where('checkoutable_type','App\Models\Asset')
+                                        ->latest('created_at')
+                                        ->get()
+                                        ->first();
 
             $acceptance->accepted_at = null;
             $acceptance->declined_at = null;
