@@ -179,7 +179,7 @@ class CheckoutableListener
     private function getCheckoutNotification($event, $acceptance)
     {
         $notificationClass = null;
-
+        dd($event->checkoutable);
         switch (get_class($event->checkoutable)) {
             case Accessory::class:
                 $notificationClass = CheckoutAccessoryNotification::class;

@@ -251,6 +251,7 @@ class AcceptanceController extends Controller
                                         ->latest('created_at')
                                         ->get()
                                         ->first();
+        dd($acceptance);
 
             $acceptance->accepted_at = null;
             $acceptance->declined_at = null;
@@ -258,9 +259,15 @@ class AcceptanceController extends Controller
             $acceptance->save();
 
             return redirect()->to('/hardware')->with('success', trans('admin/users/general.resend_eula'));
+    }
+    public function resendEula($id){
+        $acceptance = CheckoutAcceptance::where('checkoutable_id', $id)
+            ->where('checkoutable_type','App\Models\Asset')
+            ->latest('created_at')
+            ->get()
+            ->first();
 
-
-
+        Notification::send(getCheckoutNotification('Asset', $acceptance));
     }
 
 }

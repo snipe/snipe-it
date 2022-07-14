@@ -870,7 +870,7 @@
                                             @can('superadmin')
                                                 @if($asset->checkedOutToUser())
                                                     <div class="col-md-12" style="padding-top: 5px;">
-                                                        <a href="{{route('account.accept.resign', $asset->id)}}" style="width: 100%; font-size: 14px;" class="btn btn-sm btn-primary hidden-print"><i class="fas fa-fw fa-repeat"></i>{{trans('admin/users/general.resend_eula_label')}}</a>
+                                                        <a href="#" data-toggle="modal" data-target="#redoEula" style="width: 100%; font-size: 14px;" class="btn btn-sm btn-primary"><i class="fas fa-fw fa-repeat"></i>{{trans('admin/users/general.resend_eula_label')}}</a>
                                                     </div>
                                                 @endif
                                             @endcan
@@ -1328,6 +1328,7 @@
 
     @can('update', \App\Models\Asset::class)
         @include ('modals.upload-file', ['item_type' => 'asset', 'item_id' => $asset->id])
+        @include ('modals.redo-eula', ['asset_id'=> $asset->id])
     @endcan
 
 @stop
@@ -1336,3 +1337,4 @@
     @include ('partials.bootstrap-table')
 
 @stop
+
