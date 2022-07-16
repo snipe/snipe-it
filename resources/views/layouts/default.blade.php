@@ -271,7 +271,7 @@
 
                         <li><!-- Task item -->
                           <a href="{{route($alert_items[$i]['type'].'.show', $alert_items[$i]['id'])}}">
-                            <h2>{{ $alert_items[$i]['name'] }}
+                            <h2 class="task_menu">{{ $alert_items[$i]['name'] }}
                               <small class="pull-right">
                                 {{ $alert_items[$i]['remaining'] }} {{ trans('general.remaining') }}
                               </small>
