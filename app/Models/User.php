@@ -356,7 +356,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function replenishconsumables()
     {
-        return $this->belongsToMany(\App\Models\Consumable::class, 'consumables_stock', 'user_id', 'consumable_id')->withPivot('id','created_at','initial_qty','total_replenish','order_number','replenishnote')->withTrashed();
+        return $this->belongsToMany(\App\Models\Consumable::class, 'consumables_stock', 'user_id', 'consumable_id')->withPivot('id','created_at','initial_qty','total_replenish','order_number','replenish_note')->withTrashed();
     }
 
 

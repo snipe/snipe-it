@@ -907,7 +907,7 @@
                         <th data-searchable="false" data-sortable="false" data-field="initial_qty">{{ trans('admin/consumables/general.initial_qty') }}</th>
                         <th data-searchable="false" data-sortable="false" data-field="total_replenish">{{ trans('admin/consumables/general.totalreplenish') }}</th>
                         <th data-searchable="false" data-sortable="false" data-field="order_number">{{ trans('general.order_number') }}</th>
-                        <th data-searchable="false" data-sortable="false" data-field="replenishnote">{{ trans('admin/consumables/general.replenishnote') }}</th>                    
+                        <th data-searchable="false" data-sortable="false" data-field="replenish_note">{{ trans('admin/consumables/general.replenish_note') }}</th>                    
                         <th data-searchable="false" data-sortable="false" data-field="admin">{{ trans('general.admin') }}</th>
                       </tr>
                     </thead>
@@ -928,7 +928,7 @@
                     {{$replenishconsumable->pivot->order_number ?  $replenishconsumable->pivot->order_number : 'N/A'}}
                   </td>
                   <td>
-                    {{$replenishconsumable->pivot->replenishnote ? $replenishconsumable->pivot->replenishnote : '-'}}
+                    {{$replenishconsumable->pivot->replenish_note ? $replenishconsumable->pivot->replenish_note : '-'}}
                   </td>
                   <td>
                     {{$user->username}}

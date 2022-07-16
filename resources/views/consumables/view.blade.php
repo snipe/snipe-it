@@ -625,7 +625,7 @@
                             <thead>
                               <tr>
                                 <th data-searchable="false" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
-                                <th data-searchable="false" data-sortable="false" data-field="totalnum">{{ trans('admin/consumables/general.total') }}</th>
+                                <th data-searchable="false" data-sortable="false" data-field="checkout_qty">{{ trans('admin/consumables/general.total') }}</th>
                                 <th data-searchable="false" data-sortable="false" data-field="checkoutnote">{{ trans('admin/consumables/general.note') }}</th>
                                 <th data-searchable="false" data-sortable="false" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
                                 <th data-searchable="false" data-sortable="false" data-field="admin">{{ trans('general.admin') }}</th>                                
@@ -673,7 +673,7 @@
                         <th data-searchable="false" data-sortable="false" data-field="initial_qty">{{ trans('admin/consumables/general.initial_qty') }}</th>
                         <th data-searchable="false" data-sortable="false" data-field="total_replenish">{{ trans('admin/consumables/general.totalreplenish') }}</th>
                         <th data-searchable="false" data-sortable="false" data-field="order_number">{{ trans('general.order_number') }}</th>   
-                        <th data-searchable="false" data-sortable="false" data-field="replenishnote">{{ trans('admin/consumables/general.replenishnote') }}</th>                    
+                        <th data-searchable="false" data-sortable="false" data-field="replenish_note">{{ trans('admin/consumables/general.replenish_note') }}</th>                    
                         <th data-searchable="false" data-sortable="false" data-field="admin">{{ trans('general.admin') }}</th>
                         <th data-searchable="false" data-sortable="false" data-field="file">{{ trans('general.documents') }}</th>
                       </tr>

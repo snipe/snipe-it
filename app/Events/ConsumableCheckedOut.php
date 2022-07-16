@@ -21,14 +21,14 @@ class ConsumableCheckedOut
      *
      * @return void
      */
-    public function __construct($checkoutable, User $checkedOutBy, $quantity, $note, $totalnum=null, $checkoutnote=null)
+    public function __construct($checkoutable, User $checkedOutBy, $quantity, $note, $checkout_qty=null, $checkoutnote=null)
     {
         $this->checkoutable = $checkoutable;        
         $this->checkedOutBy = $checkedOutBy;
         $this->$quantity = $quantity;
         $this->note = $note;
-        if ($totalnum != null) {
-            $this->totalnum         = $totalnum;
+        if ($checkout_qty != null) {
+            $this->checkout_qty         = $checkout_qty;
         }
         if ($checkoutnote != null) {
             $this->checkoutnote         = $checkoutnote;

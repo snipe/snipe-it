@@ -381,8 +381,8 @@ class Consumable extends SnipeModel
     {
         $checkedouttotal = null;        
         foreach($this->users as $data){
-                $totalnum = $data['pivot']['totalnum'];
-                $checkedouttotal += $totalnum;            
+                $checkout_qty = $data['pivot']['checkout_qty'];
+                $checkedouttotal += $checkout_qty;            
         }        
         
         return $checkedouttotal;

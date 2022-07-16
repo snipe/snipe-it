@@ -58,11 +58,11 @@ class ConsumableReplenishController extends Controller
         }
 
         $request->validate([
-            "totalnum" => "required|regex:/^[0-9]*$/|gt:0"
+            "checkout_qty" => "required|regex:/^[0-9]*$/|gt:0"
           ],[            
-            'totalnum.gt' =>  trans('admin/consumables/message.under'),
-            'totalnum.required' => trans('admin/consumables/message.required'),
-            'totalnum.regex' => trans('admin/consumables/message.numeric'),
+            'checkout_qty.gt' =>  trans('admin/consumables/message.under'),
+            'checkout_qty.required' => trans('admin/consumables/message.required'),
+            'checkout_qty.regex' => trans('admin/consumables/message.numeric'),
           ]);
 
         $this->authorize('update', $consumable);
@@ -107,16 +107,16 @@ class ConsumableReplenishController extends Controller
             'consumable_id' => $consumable->id,            
             'user_id' => $admin_user->id,
             'initial_qty' => $consumable->qty,            
-            'total_replenish' => e($request->input('totalnum')),
-            'replenishnote' => e($request->input('replenishnote')),
+            'total_replenish' => e($request->input('checkout_qty')),
+            'replenish_note' => e($request->input('replenish_note')),
             'order_number'  => e($request->input('order_number')),
             'file' => $file_name
         ]);
 
-        $addedquantity = $consumable->qty + e($request->input('totalnum'));
+        $addedquantity = $consumable->qty + e($request->input('checkout_qty'));
         
         // Storing value to database
-        event(new ConsumableCheckedOut($consumable, Auth::user(), $consumable->qty, $request->input('note'), $request->input('totalnum')));
+        event(new ConsumableCheckedOut($consumable, Auth::user(), $consumable->qty, $request->input('note'), $request->input('checkout_qty')));
 
         // Updating quantity to consumable
         DB::table('consumables')

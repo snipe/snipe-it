@@ -288,7 +288,7 @@ class ConsumablesController extends Controller
                 'initial_qty' => ($consumable_replenish_assignment->initial_qty),
                 'total_replenish' => ($consumable_replenish_assignment->total_replenish),
                 'order_number' => $consumable_replenish_assignment->order_number ? ($consumable_replenish_assignment->order_number) : 'N/A',
-                'replenishnote' => $consumable_replenish_assignment->replenishnote ?  ($consumable_replenish_assignment->replenishnote) : '-',
+                'replenish_note' => $consumable_replenish_assignment->replenish_note ?  ($consumable_replenish_assignment->replenish_note) : '-',
                 'admin' => ($consumable_replenish_assignment->admin) ? $consumable_replenish_assignment->admin->present()->nameUrl() : '',
                 'file'=> ($consumable_replenish_assignment->file) ? '<a href="'.route('replenish/showdocument',[$consumable_replenish_assignment->id, $consumable_replenish_assignment->file]).'" class="btn"><i class="fas fa-download" aria-hidden="true"></i></a>' : '-',
             ];
