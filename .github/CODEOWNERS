@@ -15,8 +15,8 @@
 #  *.js    @octocat @github/js
 
 
-app/Importer/*  @dmeltzer
 app/Http/Controllers/CustomFields* @uberbrady
 app/Http/Controllers/Api/CustomFields* @uberbrady
 resources/views/custom_fields/* @uberbrady
 docker/* @uberbrady
+app/Providers/SamlServiceProvider.php @uberbrady
