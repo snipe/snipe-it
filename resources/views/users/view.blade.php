@@ -184,12 +184,16 @@
                 @endcan
 
                 @can('view', $user)
-                    <div class="col-md-12" style="padding-top: 5px;">
-                        <form action="{{ route('users.email',['userId'=> $user->id]) }}" method="POST">
-                            {{ csrf_field() }}
-                            <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener">{{ trans('admin/users/general.email_assigned') }}</button>
-                        </form>
-                    </div>
+                  <div class="col-md-12" style="padding-top: 5px;">
+                  @if(!empty($user->email))
+                    <form action="{{ route('users.email',['userId'=> $user->id]) }}" method="POST">
+                      {{ csrf_field() }}
+                      <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener">{{ trans('admin/users/general.email_assigned') }}</button>
+                    </form>
+                  @else
+                      <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_email') }}">{{ trans('admin/users/general.email_assigned') }}</button>
+                  @endif
+                  </div>
                 @endcan
 
                 @can('update', $user)

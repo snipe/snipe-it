@@ -340,11 +340,14 @@
               </div>
 
             <div class="col-md-9 col-md-offset-3">
+            <label>
+              {{ Form::checkbox('exclude_archived', '1') }}
+              {{ trans('general.exclude_archived') }}
+            </label>
               <label>
                 {{ Form::checkbox('use_bom', '1') }}
                 {{ trans('general.bom_remark') }}
               </label>
-
             </div>
 
           </div>
