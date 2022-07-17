@@ -30,7 +30,9 @@ return array(
         'error'   		=> 'Component was not checked in, please try again',
         'success' 		=> 'Component checked in successfully.',
         'user_does_not_exist' => 'That user is invalid. Please try again.'
-    )
+    ),
 
-
+    'under' => 'Qty cannot below 1',
+    'required' => 'Qty must be defined',
+    'numeric'  => 'Data must be numeric',  
 );

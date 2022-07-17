@@ -70,9 +70,9 @@ class ComponentReplenishController extends Controller
         $request->validate([
             "checkout_qty" => "required|regex:/^[0-9]*$/|gt:0"
           ],[            
-            'checkout_qty.gt' =>  trans('admin/component/message.under'),
-            'checkout_qty.required' => trans('admin/component/message.required'),
-            'checkout_qty.regex' => trans('admin/component/message.numeric'),
+            'checkout_qty.gt' =>  trans('admin/components/message.under'),
+            'checkout_qty.required' => trans('admin/components/message.required'),
+            'checkout_qty.regex' => trans('admin/components/message.numeric'),
           ]);
 
         $this->authorize('update', $component);
