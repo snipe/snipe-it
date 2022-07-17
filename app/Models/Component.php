@@ -229,4 +229,28 @@ class Component extends SnipeModel
     {
         return $query->leftJoin('companies', 'components.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
     }
+    
+    /**
+     * Establishes the component -> replenish assignments relationship
+     *
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @since [v6.0.7]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function componentReplenishAssignments()
+    {
+        return $this->hasMany(\App\Models\ComponentReplenishAssignment::class);
+    }
+
+    /**
+     * Establishes the consumables_stock -> users relationship
+     *
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @since [v6.0.7]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function replenishusers()
+    {
+        return $this->belongsToMany(\App\Models\User::class, 'components_stock', 'component_id', 'total_replenish')->withPivot('id', 'user_id','order_number','file')->withTrashed()->withTimestamps();
+    }
 }

@@ -25,9 +25,25 @@ Route::group(['prefix' => 'components', 'middleware' => ['auth']], function () {
         [Components\ComponentCheckinController::class, 'store']
     )->name('component.checkin.save');
 
+    Route::get(
+        '{componentID}/replenish',
+        [Components\ComponentReplenishController::class, 'create']
+    )->name('replenish/component');
+    
+    Route::post(
+        '{componentID}/replenish',
+        [Components\ComponentReplenishController::class, 'store']
+    )->name('replenish/component');
+    
+    Route::get(
+        '{componentID}/showfile/{file}',
+        [Components\ComponentReplenishController::class, 'show']
+    )->name('replenish/component');
+
 });
 
 Route::resource('components', Components\ComponentsController::class, [
     'middleware' => ['auth'],
     'parameters' => ['component' => 'component_id'],
 ]);
+

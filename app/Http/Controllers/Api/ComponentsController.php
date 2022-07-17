@@ -12,7 +12,7 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Events\CheckoutableCheckedIn;
 use App\Events\ComponentCheckedIn;
 use App\Models\Asset;
-
+use Illuminate\Support\Facades\Log;
 class ComponentsController extends Controller
 {
     /**
@@ -322,6 +322,58 @@ class ComponentsController extends Controller
         return response()->json(Helper::formatStandardApiResponse('error', null, 'No matching checkouts for that component join record'));
 
     
+    }
+
+    
+    /**
+    * Returns a JSON response containing details on the users associated with this consumable replenishment.
+    *
+    * @author [A. Rahardianto] [<veenone@veenone.com>]
+    * @see \App\Http\Controllers\Components\ComponentController::getView() method that returns the form.
+    * @since [v6.0.7]
+    * @param int $componentId
+    * @return array
+     */
+    public function getReplenishDataView($componentId)
+    {
+        $component = Component::with(['componentReplenishAssignments'=> function ($query) {
+            $query->orderBy($query->getModel()->getTable().'.created_at', 'DESC');
+        },
+        'componentReplenishAssignments.admin'=> function ($query) {
+        },
+        ])->find($componentId);
+
+        if (! Company::isCurrentUserHasAccess($component)) {
+            return ['total' => 0, 'rows' => []];
+        }
+        $this->authorize('view', Component::class);
+
+        $rows = [];
+        $component->componentReplenishAssignments;
+        $upload_path = public_path('private_uploads/components/replenish_doc/');
+        // Log::debug($component->componentReplenishAssignments );
+        foreach ($component->componentReplenishAssignments as $component_replenish_assignment) {
+            Log::debug('item : ' . $component_replenish_assignment);
+            // Log::debug(public_path('private_uploads/components/replenish_doc/'));
+            $rows[] = [
+                // 'name' => ($consumable_replenish_assignment->user) ? $consumable_replenish_assignment->user->present()->nameUrl() : 'Deleted User',
+                'created_at' => Helper::getFormattedDateObject($component_replenish_assignment->created_at, 'datetime'),
+                'initial_qty' => ($component_replenish_assignment->initial_qty),
+                'total_replenish' => ($component_replenish_assignment->total_replenish),
+                'order_number' => $component_replenish_assignment->order_number ? ($component_replenish_assignment->order_number) : 'N/A',
+                'replenish_note' => $component_replenish_assignment->replenish_note ?  ($component_replenish_assignment->replenish_note) : '-',
+                'admin' => ($component_replenish_assignment->admin) ? $component_replenish_assignment->admin->present()->nameUrl() : '',
+                'file'=> ($component_replenish_assignment->file) ? '<a href="'.route('replenish/showdocument',[$component_replenish_assignment->id, $component_replenish_assignment->file]).'" class="btn"><i class="fas fa-download" aria-hidden="true"></i></a>' : '-',
+            ];
+            // Log::debug($rows);
+            // Log::debug('item : ' . $component_replenish_assignment->file);
+        }
+        Log::debug('component' . $component);
+        // Log::debug($component->user->count());
+        // $componentCount = $component->user->count();
+        $data = ['rows' => $rows];
+        
+        return $data;
     }
 
 }

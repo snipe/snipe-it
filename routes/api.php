@@ -255,6 +255,13 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
     ); // end components API routes
 
 
+    Route::get('view/{id}/components',
+    [
+        Api\ComponentsController::class, 
+        'getReplenishDataView'
+    ]
+    )->name('api.components.showReplenishedUsers');
+
       /**
       * Consumables API routes
       */

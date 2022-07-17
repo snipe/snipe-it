@@ -194,8 +194,8 @@
 @else
 
 <!-- recent activity -->
-<div class="row">
-  <div class="col-md-8">
+<div class="row" style="display:flex;">
+  <div class="col-md-8" style="flex:3;">
     <div class="box">
       <div class="box-header with-border">
         <h2 class="box-title">{{ trans('general.recent_activity') }}</h2>
@@ -207,13 +207,13 @@
         </div>
       </div><!-- /.box-header -->
       <div class="box-body">
-        <div class="row">
+        <div class="row"  style="height:100;">
           <div class="col-md-12">
-            <div class="table-responsive">
+            <div class="table-responsive"> 
 
                 <table
                     data-cookie-id-table="dashActivityReport"
-                    data-height="350"
+                    data-height="450"
                     data-pagination="false"
                     data-id-table="dashActivityReport"
                     data-side-pagination="server"
@@ -245,7 +245,7 @@
       </div><!-- ./box-body -->
     </div><!-- /.box -->
   </div>
-  <div class="col-md-4">
+  <div class="col-md-4" style="flex:1;"> 
         <div class="box box-default">
             <div class="box-header with-border">
                 <h2 class="box-title">{{ trans('general.assets') }} {{ trans('general.bystatus') }}</h2>

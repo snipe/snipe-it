@@ -731,4 +731,18 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
         return $this->locale;
     }
+
+    /**
+     * Establishes the user -> component replenish relationship
+     *
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @since [v6.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function replenishcomponents()
+    {
+        return $this->belongsToMany(\App\Models\Component::class, 'components_stock', 'user_id', 'component_id')->withPivot('id','created_at','initial_qty','total_replenish','order_number','replenish_note')->withTrashed();
+    }
+
+
 }
