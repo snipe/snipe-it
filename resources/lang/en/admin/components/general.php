@@ -12,4 +12,11 @@ return array(
     'remaining' 			             => 'Remaining',
     'total' 			                 => 'Total',
     'update'                            => 'Update Component',
+    'replenish' => "Component Quantity Replenish",
+    'initial_qty'   => "Initial Quantity",
+    'totalreplenish' => "Replenish Quantity",
+    'replenish_note' => "Replenish Note",
+    'remaining'     => "Remaining",
+    'document_archive'  => "Reference Document",
+
 );

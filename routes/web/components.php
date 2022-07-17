@@ -38,7 +38,7 @@ Route::group(['prefix' => 'components', 'middleware' => ['auth']], function () {
     Route::get(
         '{componentID}/showfile/{file}',
         [Components\ComponentReplenishController::class, 'show']
-    )->name('replenish/component');
+    )->name('replenish/showdocument');
 
 });
 

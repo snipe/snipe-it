@@ -142,13 +142,13 @@
                           data-cookie-id-table="componentsReplenishmentTable"
                           data-pagination="true"
                           data-id-table="componentsReplenishmentTable"
-                          data-search="false"
+                          data-search="true"
                           data-side-pagination="server"
                           data-show-columns="true"
                           data-show-export="true"
                           data-show-footer="true"
                           data-show-refresh="false"
-                          data-sort-order="desc"
+                          data-sort-order="asc"
                           data-sort-name="name"
                           id="componentsReplenishmentTable"
                           class="table table-striped snipe-table"
@@ -164,37 +164,28 @@
                         <th data-searchable="false" data-sortable="false" data-field="total_replenish">{{ trans('admin/components/general.totalreplenish') }}</th>
                         <th data-searchable="false" data-sortable="false" data-field="order_number">{{ trans('general.order_number') }}</th>   
                         <th data-searchable="false" data-sortable="false" data-field="replenish_note">{{ trans('admin/components/general.replenish_note') }}</th>                    
-                        <th data-searchable="false" data-sortable="false" data-field="admin">{{ trans('general.admin') }}</th>
-                        <th data-searchable="false" data-sortable="false" data-field="file">{{ trans('general.documents') }}</th>
+                        <th data-searchable="true" data-sortable="false" data-field="admin">{{ trans('general.admin') }}</th>
+                        <th data-searchable="false" data-sortable="false" data-field="file" class="text-center">{{ trans('general.documents') }}</th>
                       </tr>
                     </thead>
                   </table>
                 </div>
               </div> <!-- /.col-md-12-->
 
-      </div> <!-- tab content -->
-  </div> <!-- nav tabs custom -->
+            </div> <!-- tab content -->
+          </div> <!-- nav tabs custom -->
           </div>
-
-          
-
         </div>
-        
       </div> <!-- tab pane -->
     </div>
-                
-
-
-
-
+             
     <div class="tab-pane"  id="replenishhistory">            
-          
-  </div>
-
-</div> <!-- .row-->
-
-<!-- side address column -->
-<!-- <div class="col-md-3">
+     <!-- side address column -->
+    <div class="col-md-3">
+      <div class="box box-default">
+          <div class="box-body">
+            <div class="row">
+              <div class="col-md-12">
           @if ($component->image!='')
             <div class="col-md-12 text-center" style="padding-bottom: 15px;">
               <a href="{{ Storage::disk('public')->url('components/'.e($component->image)) }}" data-toggle="lightbox">
@@ -236,8 +227,17 @@
               {!! nl2br(e($component->notes)) !!}
             </div>
           </div>
-          @endif -->
+          @endif
+            </div>
+          </div>
+      </div>
+    </div>     
+  </div>
 
+</div> <!-- .row-->
+
+
+</div>
 @stop
 
 @section('moar_scripts')

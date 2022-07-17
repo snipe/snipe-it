@@ -55,7 +55,8 @@ class ComponentReplenishController extends Controller
      *
      * @author [A. Rahardianto] [<veenone@gmail.com>]
      * @see ComponentReplenishCheckoutController::create() method that returns the form.
-     * @since [v6.0]
+     * @since [v6.0.7]
+     * @param Request $request
      * @param int $componentId
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
@@ -145,28 +146,27 @@ class ComponentReplenishController extends Controller
     }
 
 
-
     /**
-     * Return a view to display component information.
+     * Check for permissions and display the file.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @see ComponentsController::getDataView() method that generates the JSON response
-     * @since [v3.0]
-     * @param int $componentId
-     * @return \Illuminate\Contracts\View\View
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @param  int $componentId
+     * @param  string $file
+     * @since [v6.0.7]
+     * @return View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function show($componentId = null)
+    public function show($componentId,$file)
     {
-        $component = Component::find($componentId);
+        $docfile = ('private_uploads/components/docs/'.$file);
+        Log::debug('file : ' . $docfile);
 
-        if (isset($component->id)) {
-            $this->authorize('view', $component);
-
-            return view('components/view', compact('component'));
+        if (! Storage::exists($docfile)) {
+            return response('File '.$docfile.' not found on server' , 404)
+                ->header('Content-Type', 'text/plain');
         }
-        // Redirect to the user management page
-        return redirect()->route('components.index')
-            ->with('error', trans('admin/components/message.does_not_exist'));
+
+        return StorageHelper::downloader($docfile);
+
     }
 }

@@ -337,7 +337,7 @@ class ComponentsController extends Controller
     public function getReplenishDataView($componentId)
     {
         $component = Component::with(['componentReplenishAssignments'=> function ($query) {
-            $query->orderBy($query->getModel()->getTable().'.created_at', 'DESC');
+            $query->orderBy($query->getModel()->getTable().'.created_at', 'ASC');
         },
         'componentReplenishAssignments.admin'=> function ($query) {
         },
