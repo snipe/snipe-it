@@ -86,7 +86,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             ]
         )->name('api.accessories.checkedout');
 
-        Route::get('{accessory}/checkout',
+        Route::post('{accessory}/checkout',
             [
                 Api\AccessoriesController::class, 
                 'checkout'
@@ -94,7 +94,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         )->name('api.accessories.checkout');
 
 
-        Route::get('{accessory}/checkin',
+        Route::post('{accessory}/checkin',
             [
                 Api\AccessoriesController::class, 
                 'checkin'
