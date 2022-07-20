@@ -22,7 +22,8 @@ class AssetCheckinRequest extends Request
     public function rules()
     {
         return [
-
+            'status_id'             => 'exists:status_labels,id',
+            'checkin_at'             => 'required|date',
         ];
     }
 
