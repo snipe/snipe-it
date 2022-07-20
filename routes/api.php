@@ -236,7 +236,20 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         ]
         )->name('api.components.assets');
 
-      }); 
+      });
+    Route::post('components/{id}/checkin',
+        [
+            Api\ComponentsController::class,
+            'checkin'
+        ]
+    )->name('api.components.checkin');
+
+    Route::post('components/{id}/checkout',
+        [
+            Api\ComponentsController::class,
+            'checkout'
+        ]
+    )->name('api.components.checkout');
 
 
       Route::resource('components', 
@@ -274,7 +287,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             ]
         )->name('api.consumables.showUsers');
 
-        Route::get('{consumable}/checkout',
+        Route::post('{consumable}/checkout',
             [
                 Api\ConsumablesController::class, 
                 'checkout'
