@@ -278,8 +278,11 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
     Route::get('accept/{id}', [Account\AcceptanceController::class, 'create'])
         ->name('account.accept.item');
 
-    Route::get('accept/resign/{id}', [Account\AcceptanceController::class, 'resignAcceptance'])
+    Route::post('accept/resign/{id}', [Account\AcceptanceController::class, 'resignAcceptance'])
         ->name('account.accept.resign');
+
+    Route::post('accept/remind/{id}', [Account\AcceptanceController::class, 'remindToSignEula'])
+        ->name('account.accept.remind');
 
     Route::post('accept/{id}', [Account\AcceptanceController::class, 'store']);
 });

@@ -993,7 +993,7 @@ class ReportsController extends Controller
     }
 
     /**
-     * sentAssetAcceptanceReminder
+     * deleteAssetAcceptanceReminder
      *
      * @param integer|null $acceptanceId
      * @return \Illuminate\Http\RedirectResponse

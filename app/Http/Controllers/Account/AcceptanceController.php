@@ -28,6 +28,7 @@ use App\Http\Controllers\SettingsController;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use phpDocumentor\Reflection\Types\Compound;
+use App\Http\Controllers\ReportsController;
 
 class AcceptanceController extends Controller
 {
@@ -251,7 +252,7 @@ class AcceptanceController extends Controller
                                         ->latest('created_at')
                                         ->get()
                                         ->first();
-        dd($acceptance);
+
 
             $acceptance->accepted_at = null;
             $acceptance->declined_at = null;
@@ -260,14 +261,22 @@ class AcceptanceController extends Controller
 
             return redirect()->to('/hardware')->with('success', trans('admin/users/general.resend_eula'));
     }
-    public function resendEula($id){
+    public function remindToSignEula($id){
         $acceptance = CheckoutAcceptance::where('checkoutable_id', $id)
             ->where('checkoutable_type','App\Models\Asset')
             ->latest('created_at')
+            ->whereNull('accepted_at')
+            ->whereNull('declined_at')
             ->get()
             ->first();
 
-        Notification::send(getCheckoutNotification('Asset', $acceptance));
+        if( ($acceptance->isEmpty($acceptance))){
+            return redirect()->to('/hardware')->with('error', trans('admin/users/general.eula_acceptance_status'));
+        }
+        $reminder= new ReportsController();
+        $reminder->sentAssetAcceptanceReminder($acceptance->id);
+
+        return redirect()->to('/hardware')->with('success', trans('admin/users/general.remind_eula'));
     }
 
 }

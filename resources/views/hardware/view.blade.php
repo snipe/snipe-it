@@ -1325,10 +1325,38 @@
             </div> <!-- /.nav-tabs-custom -->
         </div> <!-- /. col-md-12 -->
     </div> <!-- /. row -->
+    <!-- Modal -->
+    <div class="modal fade" id="redoEula" tabindex="-1" role="dialog" aria-labelledby="redoEulaLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">Send...</div>
 
+                <div class="modal-body">
+                    <h5>Remind User to Sign</h5>
+                    <p>Sends an email reminding user Eula remains unsigned.</p>
+                    <form action="{{route('account.accept.remind',[$asset->id] )}}" method="POST">
+                        {{csrf_field()}}
+                        <button type="submit" style="width:100%;"> Send Reminder </button>
+                    </form>
+                    <hr>
+                    <h5 class>Reset and Resign EULA agreement</h5>
+                    <p>Bad Signature was captured. Resets and Resends Original EULA </p>
+                    <form action="{{route('account.accept.resign',[$asset->id] )}}" method="POST">
+                        {{csrf_field()}}
+                        <button type="submit" style="width:100%;"> Resign Eula </button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
     @can('update', \App\Models\Asset::class)
         @include ('modals.upload-file', ['item_type' => 'asset', 'item_id' => $asset->id])
-        @include ('modals.redo-eula', ['asset_id'=> $asset->id])
+{{--        @include ('modals.redo-eula', ['asset_id' => $asset->id])--}}
     @endcan
 
 @stop
