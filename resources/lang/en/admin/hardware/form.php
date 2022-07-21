@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'acceptance_form_opt' => 'Acceptance Form Options',
     'bulk_delete'		=> 'Confirm Bulk Delete Assets',
   'bulk_delete_help'	=> 'Review the assets for bulk deletion below. Once deleted, these assets can be restored, but they will no longer be associated with any users they are currently assigned to.',
   'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
@@ -19,6 +20,11 @@ return [
     'default_location'	=> 'Default Location',
     'eol_date'			=> 'EOL Date',
     'eol_rate'			=> 'EOL Rate',
+    'eula_remind_label' => 'Remind User to Sign',
+    'eula_remind_desc'  => 'Resend email reminding user to sign EULA.',
+    'eula_resign_label' => 'Reset and Resign EULA agreement',
+    'eula_resign_desc'  => 'Bad signature was captured. Resets and resends original EULA.',
+    'resign_eula'       => 'Resign EULA',
     'expected_checkin'  => 'Expected Checkin Date',
     'expires'			=> 'Expires',
     'fully_depreciated'	=> 'Fully Depreciated',

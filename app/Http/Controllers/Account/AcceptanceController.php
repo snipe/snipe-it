@@ -261,16 +261,21 @@ class AcceptanceController extends Controller
 
             return redirect()->to('/hardware')->with('success', trans('admin/users/general.resend_eula'));
     }
+    /**
+     * Finds the latest checkout of the asset and emails the user again to sign the EULA.
+     *
+     * @param  int  $id
+     * @return redirect
+     */
     public function remindToSignEula($id){
         $acceptance = CheckoutAcceptance::where('checkoutable_id', $id)
             ->where('checkoutable_type','App\Models\Asset')
             ->latest('created_at')
-            ->whereNull('accepted_at')
-            ->whereNull('declined_at')
             ->get()
             ->first();
 
-        if( ($acceptance->isEmpty($acceptance))){
+
+        if( ( !$acceptance->accepted_at== null || !$acceptance->declined_at==null)){
             return redirect()->to('/hardware')->with('error', trans('admin/users/general.eula_acceptance_status'));
         }
         $reminder= new ReportsController();

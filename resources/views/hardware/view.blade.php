@@ -870,7 +870,7 @@
                                             @can('superadmin')
                                                 @if($asset->checkedOutToUser())
                                                     <div class="col-md-12" style="padding-top: 5px;">
-                                                        <a href="#" data-toggle="modal" data-target="#redoEula" style="width: 100%; font-size: 14px;" class="btn btn-sm btn-primary"><i class="fas fa-fw fa-repeat"></i>{{trans('admin/users/general.resend_eula_label')}}</a>
+                                                        <a href="#" data-toggle="modal" data-target="#redoEula" style="width: 100%; font-size: 14px;" class="btn btn-sm btn-primary"><i></i>{{trans('admin/users/general.resend_eula_label')}}</a>
                                                     </div>
                                                 @endif
                                             @endcan
@@ -1327,33 +1327,33 @@
     </div> <!-- /. row -->
     <!-- Modal -->
     <div class="modal fade" id="redoEula" tabindex="-1" role="dialog" aria-labelledby="redoEulaLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">Send...</div>
-
+                <div class="modal-header">
+                    <button type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">{{trans('admin/hardware/form.acceptance_form_opt')}}</h4>
+                </div>
                 <div class="modal-body">
-                    <h5>Remind User to Sign</h5>
-                    <p>Sends an email reminding user Eula remains unsigned.</p>
+                    <h5>{{trans('admin/hardware/form.eula_remind_label')}}</h5>
+                    <p>{{trans('admin/hardware/form.eula_remind_desc')}}</p>
                     <form action="{{route('account.accept.remind',[$asset->id] )}}" method="POST">
                         {{csrf_field()}}
-                        <button type="submit" style="width:100%;"> Send Reminder </button>
+                        <button type="submit" class="btn btn-primary" style="width:100%;"> {{trans('admin/reports/general.send_reminder')}} </button>
                     </form>
                     <hr>
-                    <h5 class>Reset and Resign EULA agreement</h5>
-                    <p>Bad Signature was captured. Resets and Resends Original EULA </p>
+                    <h5 class>{{trans('admin/hardware/form.eula_resign_label')}}</h5>
+                    <p> {{trans('admin/hardware/form.eula_resign_desc')}}</p>
                     <form action="{{route('account.accept.resign',[$asset->id] )}}" method="POST">
                         {{csrf_field()}}
-                        <button type="submit" style="width:100%;"> Resign Eula </button>
+                        <button type="submit" class="btn btn-primary" style="width:100%;"> {{trans('admin/hardware/form.resign_eula')}} </button>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('general.cancel')}}</button>
                 </div>
-
-            </div>
-        </div>
-
-    </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
     @can('update', \App\Models\Asset::class)
         @include ('modals.upload-file', ['item_type' => 'asset', 'item_id' => $asset->id])
 {{--        @include ('modals.redo-eula', ['asset_id' => $asset->id])--}}

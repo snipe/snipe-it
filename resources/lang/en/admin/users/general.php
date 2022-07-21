@@ -22,7 +22,7 @@ return [
     'user_notified'     => 'User has been emailed a list of their currently assigned items.',
     'remind_eula'       => 'Reminder to sign EULA has been sent',
     'resend_eula'       => 'User has been resent acceptance agreement',
-    'resend_eula_label' => 'Resend acceptance form',
+    'resend_eula_label' => 'Acceptance Form Options',
     'software_user'     => 'Software Checked out to :name',
     'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'View User :name',
