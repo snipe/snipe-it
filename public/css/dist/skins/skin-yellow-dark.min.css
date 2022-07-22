@@ -129,6 +129,12 @@
   background-color: var(--hover-link);
   color: #545454;
 }
+/**
+The dropdown is white, so use a darker color
+ */
+li.dropdown-item-marker {
+  color: var(--button-primary);
+}
 a:link {
   color: var(--link);
 }
