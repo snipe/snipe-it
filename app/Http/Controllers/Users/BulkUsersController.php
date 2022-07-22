@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Users;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Accessory;
+use App\Models\License;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Group;
 use App\Models\LicenseSeat;
+use App\Models\ConsumableAssignment;
+use App\Models\Consumable;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -162,13 +165,11 @@ class BulkUsersController extends Controller
         if ((! $request->filled('ids')) || (count($request->input('ids')) == 0)) {
             return redirect()->back()->with('error', 'No users selected');
         }
-        if ((! $request->filled('status_id')) || ($request->input('status_id') == '')) {
-            return redirect()->route('users.index')->with('error', 'No status selected');
-        }
 
         if (config('app.lock_passwords')) {
             return redirect()->route('users.index')->with('error', 'Bulk delete is not enabled in this installation');
         }
+
         $user_raw_array = request('ids');
 
         if (($key = array_search(Auth::id(), $user_raw_array)) !== false) {
@@ -179,11 +180,18 @@ class BulkUsersController extends Controller
         $assets = Asset::whereIn('assigned_to', $user_raw_array)->where('assigned_type', \App\Models\User::class)->get();
         $accessories = DB::table('accessories_users')->whereIn('assigned_to', $user_raw_array)->get();
         $licenses = DB::table('license_seats')->whereIn('assigned_to', $user_raw_array)->get();
+        $consumables = DB::table('consumables_users')->whereIn('assigned_to', $user_raw_array)->get();
+
+        if ((($assets->count() > 0) && ((!$request->filled('status_id')) || ($request->input('status_id') == '')))) {
+            return redirect()->route('users.index')->with('error', 'No status selected');
+        }
 
 
         $this->logItemCheckinAndDelete($assets, Asset::class);
         $this->logItemCheckinAndDelete($accessories, Accessory::class);
-        $this->logItemCheckinAndDelete($licenses, LicenseSeat::class);
+        $this->logItemCheckinAndDelete($licenses, License::class);
+        $this->logItemCheckinAndDelete($consumables, Consumable::class);
+
 
         Asset::whereIn('id', $assets->pluck('id'))->update([
             'status_id'     => e(request('status_id')),
@@ -193,13 +201,26 @@ class BulkUsersController extends Controller
 
 
         LicenseSeat::whereIn('id', $licenses->pluck('id'))->update(['assigned_to' => null]);
+        ConsumableAssignment::whereIn('id', $consumables->pluck('id'))->delete();
+
 
         foreach ($users as $user) {
+
+            $user->consumables()->sync([]);
             $user->accessories()->sync([]);
-            $user->delete();
+            if ($request->input('delete_user')=='1') {
+                $user->delete();
+            }
+
         }
 
-        return redirect()->route('users.index')->with('success', 'Your selected users have been deleted and their assets have been updated.');
+        $msg = trans('general.bulk_checkin_success');
+        if ($request->input('delete_user')=='1') {
+            $msg = trans('general.bulk_checkin_delete_success');
+        }
+
+
+        return redirect()->route('users.index')->with('success', $msg);
     }
 
     /**
@@ -217,7 +238,7 @@ class BulkUsersController extends Controller
             $logAction->target_id = $item->assigned_to;
             $logAction->target_type = User::class;
             $logAction->user_id = Auth::id();
-            $logAction->note = 'Bulk checkin items and delete user';
+            $logAction->note = 'Bulk checkin items';
             $logAction->logaction('checkin from');
         }
     }

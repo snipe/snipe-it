@@ -37,7 +37,7 @@ return [
     'bulk_edit'             => 'Bulk Edit',
     'bulk_delete'           => 'Bulk Delete',
     'bulk_actions'          => 'Bulk Actions',
-    'bulk_checkin_delete'   => 'Bulk Checkin &amp; Delete',
+    'bulk_checkin_delete'   => 'Bulk Checkin Items from Users',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'Cancel',
     'categories'			=> 'Categories',
@@ -365,6 +365,11 @@ return [
     'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
     'additional_files'           => 'Additional Files',
     'shitty_browser'        => 'No signature detected. If you are using an older browser, please use a more modern browser to complete your asset acceptance.',
+    'bulk_soft_delete'      =>'Also soft-delete these users. Their asset history will remain intact unless/until you purge deleted records in the Admin Settings.',
+    'bulk_checkin_delete_success' => 'Your selected users have been deleted and their items have been checked in.',
+    'bulk_checkin_success' => 'The items for the selected users have been checked in.',
     'replenish_history'     => 'Replenish History',   
-    'documents'     => "Documents",        
+    'documents'     => "Documents",       
+
+
 ];

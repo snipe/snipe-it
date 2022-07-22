@@ -26,7 +26,7 @@
           @if (config('app.lock_passwords'))
             <div class="col-md-12">
               <div class="callout callout-warning">
-                <p>{{ trans('feature_disabled') }}</p>
+                <p>{{ trans('general.feature_disabled') }}</p>
               </div>
             </div>
           @endif
@@ -42,6 +42,7 @@
                     <th class="col-md-5">{{ trans('general.assets') }}</th>
                     <th class="col-md-5">{{ trans('general.accessories') }}</th>
                     <th class="col-md-5">{{ trans('general.licenses') }}</th>
+                    <th class="col-md-5">{{ trans('general.consumables') }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -49,14 +50,14 @@
                   <tr {!! ($user->isSuperUser() ? ' class="danger"':'') !!}>
                     <td>
                       @if (Auth::id()!=$user->id)
-                      <input type="checkbox" name="ids[]" value="{{ $user->id }}" checked="checked">
+                      <input type="checkbox" name="ids[]" value="{{ $user->id }}" class="minimal" checked="checked">
                       @else
-                      <input type="checkbox" name="ids[]" value="{{ $user->id }}" disabled>
+                      <input type="checkbox" name="ids[]" value="{{ $user->id }}" class="minimal" disabled>
                       @endif
                     </td>
 
                     <td>
-                      <span {{ (Auth::user()->id==$user->id ? ' style="text-decoration: line-through"' : '') }}>
+                      <span {!! (Auth::user()->id==$user->id ? ' style="text-decoration: line-through"' : '') !!}>
                         {{ $user->present()->fullName() }} ({{ $user->username }})
                       </span>
                       {{ (Auth::id()==$user->id ? ' (cannot delete yourself)' : '') }}
@@ -77,19 +78,26 @@
                     <td>
                       {{ number_format($user->licenses()->count())  }}
                     </td>
+                    <td>
+                      {{ number_format($user->consumables()->count())  }}
+                    </td>
                   </tr>
                   @endforeach
                 </tbody>
                 <tfoot>
+
                   <tr>
-                    <td colspan="6" class="warning">
+                    <td colspan="7">
                       {{ Form::select('status_id', $statuslabel_list , Request::old('status_id'), array('class'=>'select2', 'style'=>'width:250px')) }}
-                      <label>{{ trans('admin/users/general.update_user_assets_status') }}</label></label>
+                      <label>{{ trans('admin/users/general.update_user_assets_status') }}</label>
                     </td>
                   </tr>
                   <tr>
-                    <td colspan="6" class="warning">
-                      <label><input type="checkbox" name="ids['.e($user->id).']" checked>{{ trans('admin/users/general.checkin_user_properties') }}</label>
+                    <td colspan="7" class="text-danger">
+                      <label>
+                        <input type="checkbox" name="delete_user" value="1" class="minimal">
+                        <i class="fa fa-warning text-danger"></i> {{ trans('general.bulk_soft_delete') }}
+                      </label>
                     </td>
                   </tr>
                 </tfoot>
