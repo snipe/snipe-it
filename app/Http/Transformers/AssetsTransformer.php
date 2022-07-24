@@ -141,6 +141,7 @@ class AssetsTransformer
             'restore'       => ($asset->deleted_at!='' && Gate::allows('create', Asset::class)) ? true : false,
             'update'        => ($asset->deleted_at=='' && Gate::allows('update', Asset::class)) ? true : false,
             'delete'        => ($asset->deleted_at=='' && $asset->assigned_to =='' && Gate::allows('delete', Asset::class)) ? true : false,
+            'audit'         => Gate::allows('audit', Asset::class) ? true : false,
         ];      
 
 

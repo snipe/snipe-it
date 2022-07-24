@@ -285,6 +285,11 @@
                 actions += '<button class="btn btn-sm btn-warning" data-toggle="tooltip" title="{{ trans('general.restore') }}"><i class="far fa-retweet"></i></button>&nbsp;';
             }
 
+            if ((row.available_actions.audit == true) && (dest == 'hardware'))
+            {
+                actions += '&nbsp;&nbsp;<a href="{{ url('/') }}/' + dest + '/audit/' + row.id + '" class="btn btn-sm bg-blue" data-tooltip="true" title="{{ trans('general.audit') }}"><i class="fas fa-check-circle" aria-hidden="true"></i><span class="sr-only">{{ trans('general.audit') }}</span></a>&nbsp;';      
+                
+            }
             actions +='</nobr>';
             return actions;
 
