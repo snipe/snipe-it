@@ -6,6 +6,7 @@ use App\Models\Actionlog;
 use App\Helpers\Helper;
 use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AssetCheckoutRequest;
 use App\Models\Asset;
 use App\Models\Setting;
 use Illuminate\Http\Request;
@@ -239,7 +240,7 @@ class BulkAssetsController extends Controller
      * Process Multiple Checkout Request
      * @return View
      */
-    public function storeCheckout(Request $request)
+    public function storeCheckout(AssetCheckoutRequest $request)
     {
 
         $this->authorize('checkout', Asset::class);
