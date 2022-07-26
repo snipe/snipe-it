@@ -131,35 +131,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Logging Configuration
-    |--------------------------------------------------------------------------
-    |
-    | Here you may configure the log settings for your application. Out of
-    | the box, Laravel uses the Monolog PHP logging library. This gives
-    | you a variety of powerful log handlers / formatters to utilize.
-    |
-    | Available Settings: "single", "daily", "syslog", "errorlog"
-    |
-    */
-
-    'log' => env('APP_LOG', 'single'),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Logging Max Files
-    |--------------------------------------------------------------------------
-    |
-    | When using the daily log mode, Laravel will only retain 5
-    | days of log files by default.
-    |
-    | To change this, set the APP_LOG_MAX_FILES option in your .env.
-    |
-    */
-
-    'log_max_files' => env('APP_LOG_MAX_FILES', 5),
-
-    /*
-    |--------------------------------------------------------------------------
     | Default Storage path for private uploads
     |--------------------------------------------------------------------------
     | This is the path for any uploaded files that have to be run through the

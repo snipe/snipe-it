@@ -51,7 +51,7 @@ return [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'warning'),
-            'days' => 14,
+            'days' => env('LOG_MAX_DAYS', 14),
         ],
 
         'slack' => [
