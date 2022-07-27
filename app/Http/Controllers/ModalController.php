@@ -56,7 +56,6 @@ class ModalController extends Controller
                 $this->authorize('audit', Asset::class);
                 $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
                 $asset = Asset::findOrFail($itemId);
-                // $view->with('id', $itemId);
                 $view-> with('asset', $asset)->with('next_audit_date', $dt)->with('locations_list');
             }
             return $view;
