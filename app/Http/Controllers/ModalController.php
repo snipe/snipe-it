@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Models\Setting;
+use Carbon\Carbon;
+use App\Models\Asset;
 
 class ModalController extends Controller
 {
@@ -32,7 +35,9 @@ class ModalController extends Controller
             'statuslabel',
             'supplier',
             'upload-file',
-            'user',         
+            'user',   
+            'id',     
+            'audit', 
         ];
 
 
@@ -44,6 +49,15 @@ class ModalController extends Controller
         }
         if (in_array($type, ['kit-model', 'kit-license', 'kit-consumable', 'kit-accessory'])) {
             $view->with('kitId', $itemId);
+            }
+
+            if ($type == "audit") {
+                $settings = Setting::getSettings();
+                $this->authorize('audit', Asset::class);
+                $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
+                $asset = Asset::findOrFail($itemId);
+                // $view->with('id', $itemId);
+                $view-> with('asset', $asset)->with('next_audit_date', $dt)->with('locations_list');
             }
             return $view;
         }

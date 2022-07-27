@@ -909,4 +909,24 @@ class AssetsController extends Controller
 
         return view('hardware/requested', compact('requestedItems'));
     }
+
+    /**
+     * Displaying modal for audit
+     *
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @param int $id
+     * @since [v6.0.8]
+     * @return View
+     */
+    public function show_modal($id)
+    {
+        $settings = Setting::getSettings();
+        $this->authorize('audit', Asset::class);
+        $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
+        $asset = Asset::findOrFail($id);
+
+
+        return view('modals/quickaudit')->with('asset', $asset)->with('next_audit_date', $dt)->with('locations_list');
+       
+    }
 }
