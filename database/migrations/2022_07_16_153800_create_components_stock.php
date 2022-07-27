@@ -18,6 +18,7 @@ class CreateComponentsStock extends Migration
             $table->integer('user_id');                        
             $table->integer('component_id')->nullable()->default(null);
             $table->integer('initial_qty');       
+            $table->integer('replenish_qty');       
             $table->integer('total_replenish');                                         
             $table->string('replenish_note')->nullable()->default(null);
             $table->string('order_number')->nullable()->default(null);
