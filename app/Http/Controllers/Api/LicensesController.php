@@ -73,9 +73,6 @@ class LicensesController extends Controller
             $licenses->where('depreciation_id', '=', $request->input('depreciation_id'));
         }
 
-        if ($request->filled('supplier_id')) {
-            $licenses->where('supplier_id', '=', $request->input('supplier_id'));
-        }
 
         if (($request->filled('maintained')) && ($request->input('maintained')=='true')) {
             $licenses->where('maintained','=',1);

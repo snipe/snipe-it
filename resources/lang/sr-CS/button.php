@@ -10,7 +10,7 @@ return [
     'restore' 	                => 'Vratiti',
     'remove'                    => 'Ukloni',
     'request'                   => 'Zahtev',
-    'submit'  	                => 'Pošalji',
+    'submit'  	                => 'Podnesi',
     'upload'                    => 'Upload',
     'select_file'				=> 'Odaberite datoteku...',
     'select_files'				=> 'Odaberite datoteke...',

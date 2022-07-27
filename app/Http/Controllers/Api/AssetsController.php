@@ -885,11 +885,9 @@ class AssetsController extends Controller
         if ($request->has('status_id')) {
             $asset->status_id = $request->input('status_id');
         }
+        
+        $checkin_at = $request->filled('checkin_at') ? $request->input('checkin_at').' '. date('H:i:s') : date('Y-m-d H:i:s');
 
-        $checkin_at = null;
-        if ($request->filled('checkin_at')) {
-            $checkin_at = $request->input('checkin_at');
-        }
 
         if ($asset->save()) {
             event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at));
@@ -912,7 +910,7 @@ class AssetsController extends Controller
         $this->authorize('checkin', Asset::class);
         $asset = Asset::where('asset_tag', $request->input('asset_tag'))->first();
 
-        if($asset) {
+        if ($asset) {
             return $this->checkin($request, $asset->id);
         }
 

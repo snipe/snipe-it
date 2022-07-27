@@ -329,7 +329,7 @@ return [
     'invalid_category'      => 'Categoria inválida',
     'dashboard_info'        => 'Este é o seu painel. Há muitos como este, mas este é o seu.',
     '60_percent_warning'    => '60% Completo (aviso)',
-    'dashboard_empty'       => 'It looks like you haven not added anything yet, so we do not have anything awesome to display. Get started by adding some assets, accessories, consumables, or licenses now!',
+    'dashboard_empty'       => 'It looks like you have not added anything yet, so we do not have anything awesome to display. Get started by adding some assets, accessories, consumables, or licenses now!',
     'new_asset'             => 'Novo Artigo',
     'new_license'           => 'Nova Licença',
     'new_accessory'         => 'Novo Acessório',
@@ -363,5 +363,6 @@ return [
     'purge_not_allowed'     => 'Purging deleted data has been disabled in the .env file. Contact support or your systems administrator.',
     'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
     'additional_files'           => 'Additional Files',
+    'shitty_browser'        => 'No signature detected. If you are using an older browser, please use a more modern browser to complete your asset acceptance.',
 
 ];

@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'sent'	        => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
-    'user'			=> 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
-    'token'         => 'This password reset token is invalid or expired, or does not match the username provided.',
-    'reset'         => 'Your password has been reset!',
+    'sent'	        => '如果在系统中存在一个与有效的电子邮件地址匹配的用户，恢复密码的电子邮件便已发送。',
+    'user'			=> '如果在系统中存在一个与有效的电子邮件地址匹配的用户，恢复密码的电子邮件便已发送。',
+    'token'         => '此密码重置令牌无效或已过期，或与提供的用户名不匹配。',
+    'reset'         => '密码重置成功！',
 ];

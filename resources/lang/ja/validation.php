@@ -91,11 +91,11 @@ return [
     'url'                  => ':attribute フォーマットが不正です。',
     'unique_undeleted'     => ':attribute は 一意の値である必要があります。',
     'non_circular'         => ':attribute は、循環参照を作成してはいけません。',
-    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
-    'letters'              => 'Password must contain at least one letter.',
-    'numbers'              => 'Password must contain at least one number.',
-    'case_diff'            => 'Password must use mixed case.',
-    'symbols'              => 'Password must contain symbols.',
+    'disallow_same_pwd_as_user_fields' => 'パスワードはユーザー名と同じにすることはできません。',
+    'letters'              => 'パスワードには英字が1文字以上必要です。',
+    'numbers'              => 'パスワードには数字が1つ以上必要です。',
+    'case_diff'            => 'パスワードは英字と数字を混在させる必要があります。',
+    'symbols'              => 'パスワードには記号を含める必要があります',
     'gte'                  => [
         'numeric'          => '負の値にすることはできません'
     ],

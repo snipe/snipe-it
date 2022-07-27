@@ -1278,34 +1278,30 @@ class SettingsController extends Controller
                 // If it's greater than 300, it probably worked
                 $output = Artisan::output();
 
-                if (strlen($output) > 300) {
-                    $find_user = DB::table('users')->where('first_name', $user->first_name)->where('last_name', $user->last_name)->exists();
+                /* Run migrations */
+                \Log::debug('Migrating database...');
+                Artisan::call('migrate', ['--force' => true]);
+                $migrate_output = Artisan::output();
+                \Log::debug($migrate_output);
 
-                    if (!$find_user){
-                        \Log::warning('Attempting to restore user: ' . $user->first_name . ' ' . $user->last_name);
-                        $new_user = $user->replicate();
-                        $new_user->push();
-                    }
-
-
-                    \Log::debug('Logging all users out..');
-                    Artisan::call('snipeit:global-logout', ['--force' => true]);
-                    
-                    /* run migrations */
-                    \Log::debug('Migrating database...');
-                    Artisan::call('migrate', ['--force' => true]);
-                    $migrate_output = Artisan::output();
-                    \Log::debug($migrate_output);
-
-                    DB::table('users')->update(['remember_token' => null]);
-                    \Auth::logout();
-
-                    return redirect()->route('login')->with('success', 'Your system has been restored. Please login again.');
+                $find_user = DB::table('users')->where('username', $user->username)->exists();
+                
+                if (!$find_user){
+                    \Log::warning('Attempting to restore user: ' . $user->username);
+                    $new_user = $user->replicate();
+                    $new_user->push();
                 } else {
-                    return redirect()->route('settings.backups.index')->with('error', $output);
-
+                    \Log::debug('User: ' . $user->username .' already exists.');
                 }
 
+                \Log::debug('Logging all users out..');
+                Artisan::call('snipeit:global-logout', ['--force' => true]);
+
+                DB::table('users')->update(['remember_token' => null]);
+                \Auth::logout();
+
+                return redirect()->route('login')->with('success', 'Your system has been restored. Please login again.');
+                
             } else {
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
             }

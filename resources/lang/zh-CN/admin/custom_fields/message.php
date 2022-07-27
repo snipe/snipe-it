@@ -51,7 +51,7 @@ return array(
 
     'fieldset_default_value' => array(
 
-        'error' => 'Error validating default fieldset values.',
+        'error' => '验证默认字段集时出错。',
 
     ),
 

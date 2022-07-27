@@ -34,7 +34,7 @@ return [
     'backups_path'              => '服务器上的备份存储在 <code>:path</code>',
     'backups_restore_warning'   => '使用还原按钮 <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> 从上次备份还原。 (目前无法使用 S3 文件存储或 Docker容器。)<br><br>您的 <strong>完整的 :app_name 数据库和任何上传的文件将被备份文件中的内容完全替换</strong>  ',
     'backups_logged_out'         => '恢复完成后，包括您在内的所有现有用户都将被注销。',
-    'backups_large'             => '非常大的备份可能会超时恢复尝试，可能仍然需要通过命令行运行。 ',
+    'backups_large'             => '非常大的备份在恢复尝试时可能会超时，可能仍然需要通过命令行运行。 ',
     'barcode_settings'			=> '条码设置',
     'confirm_purge'			    => '确认清除',
     'confirm_purge_help'		=> '在下面的框中输入文本“DELETE”以清除已删除的记录。此操作无法撤消，将永久删除所有软删除的项目和用户。（为了安全起见，你应该先做个备份。）',
