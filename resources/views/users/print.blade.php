@@ -86,7 +86,7 @@
                     <td>
                         {{ $asset->last_checkout }}</td>
                     <td>
-                        @if ($asset->assetlog->first())
+                        @if (($asset->assetlog->first()) && ($asset->assetlog->first()->accept_signature!=''))
                             <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $asset->assetlog->first()->accept_signature }}">
                         @endif
                     </td>

@@ -396,6 +396,12 @@ a.skip-main:active {
 h2 {
   font-size: 22px;
 }
+h2.task_menu {
+  font-size: 14px;
+}
+h2 small {
+  font-size: 85%;
+}
 h3 {
   font-size: 20px;
 }
