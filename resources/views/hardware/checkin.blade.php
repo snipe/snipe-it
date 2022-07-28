@@ -103,7 +103,9 @@
                     </div>
                     <div class="box-footer">
                       <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
-                      <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkin') }}</button>
+                      <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i>
+                        @if($snipeSettings->require_return_signature==1)<a href={{App\Http\Controllers\Account\AcceptanceController::returnView()}}>
+                          @endif{{ trans('general.checkin') }}</button>
                     </div>
                   </form>
           </div> <!--/.col-md-12-->

@@ -279,6 +279,8 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
         ->name('account.accept.item');
 
     Route::post('accept/{id}', [Account\AcceptanceController::class, 'store']);
+
+    Route::get('return/{id}', );
 });
 
 Route::group(['middleware' => ['auth']], function () {

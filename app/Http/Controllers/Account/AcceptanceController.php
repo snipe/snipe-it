@@ -20,6 +20,7 @@ use App\Models\License;
 use App\Models\Component;
 use App\Models\Consumable;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Action;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -250,4 +251,27 @@ class AcceptanceController extends Controller
         return redirect()->to('account/accept')->with('success', $return_msg);
 
     }
+    public static function returnView(){
+        return view('account.accept.return');
+    }
+
+    public function returnAssetAcceptance(Request $request, $id ) {
+
+        if ($request->filled('signature_output')) {
+            $sig_filename = 'siglog-' . Str::uuid() . '-' . date('Y-m-d-his') . '.png';
+            $data_uri = $request->input('signature_output');
+            $encoded_image = explode(',', $data_uri);
+            $decoded_image = base64_decode($encoded_image[1]);
+            Storage::put('private_uploads/signatures/' . $sig_filename, (string)$decoded_image);
+
+            // No image data is present, kick them back.
+            // This mostly only applies to users on super-duper crapola browsers *cough* IE *cough*
+        } else {
+            return redirect()->back()->with('error', trans('general.shitty_browser'));
+        }
+        $action_log= new Actionlog();
+        $action_log->created_at = date("Y-m-d H:i:s");
+
+    }
+
 }
