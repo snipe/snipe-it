@@ -65,3 +65,9 @@ _ide_helper_models.php
 /.phplint-cache
 storage/ldap_client_tls.cert
 storage/ldap_client_tls.key
+composer.lock
+es-VE
+en-GB
+en-ID
+es-ES
+es-MX
