@@ -576,7 +576,8 @@
             <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.replenish_history') }}
-              {!! ($user->assets->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->assets->count().'</badge>' : '' !!}
+             {!! ($user->replenishconsumables->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->replenishconsumables->count().'</badge>' : '' !!}  
+            
             </span>
           </a>
         </li>
@@ -591,16 +592,14 @@
                   @if ($consumable->id)
                   <div class="box-header with-border">
                     <div class="box-heading">
-                      <h2 class="box-title"> {{ $consumable->name }}   ({{ $consumable->numRemaining()  }} out of {{ $consumable->qty}}  {{ trans('admin/consumables/general.remaining') }})</h2>
+                      <h2 class="box-title">({{ $consumable->numRemaining()  }} out of {{ $consumable->qty}}  {{ trans('admin/consumables/general.remaining') }})</h2>
                     </div>
                   </div><!-- /.box-header -->
                   @endif
 
-                  
-      
                   <div class="box-body">
                     <div class="row">          
-                      <div class="col-md-18">
+                      <div class="col-md-12">
                         <div class="table table-responsive table-striped">
                           <h2 class="box-title"> Check Out History</h2>
                           <table
@@ -612,8 +611,8 @@
                                   data-show-columns="true"
                                   data-show-export="true"
                                   data-show-footer="true"
-                                  data-show-refresh="false"
-                                  data-sort-order="asc"
+                                  data-show-refresh="true"
+                                  data-sort-order="desc"
                                   data-sort-name="name"
                                   id="consumablesCheckedoutTable"
                                   class="table table-striped snipe-table"
@@ -643,11 +642,23 @@
         </div>
         <div class="tab-pane"  id="replenishhistory">            
           <!-- Replenishment list -->
-          <div class="box-body">
+          <!-- <div class="box-body"> -->
             <div class="row">
               <div class="col-md-12">
-                <div class="table table-responsive">
-                  <h2 class="box-title">{{ trans('general.replenish_history') }}</h2>
+              <div class="box box-default">
+              @if ($consumable->id)
+                  <div class="box-header with-border">
+                    <div class="box-heading">
+                      <h2 class="box-title">({{ $consumable->numRemaining()  }} out of {{ $consumable->qty}}  {{ trans('admin/consumables/general.remaining') }})</h2>
+                    </div>
+                  </div><!-- /.box-header -->
+                  @endif
+
+                  <div class="box-body">
+                    <div class="row">          
+                      <div class="col-md-12">
+                <div class="table table-responsive  table-striped">
+                       <h2 class="box-title">{{ trans('general.replenish_history') }}</h2>
                   <table
                           data-cookie-id-table="consumablesReplenishmentTable"
                           data-pagination="true"
@@ -657,7 +668,7 @@
                           data-show-columns="true"
                           data-show-export="true"
                           data-show-footer="true"
-                          data-show-refresh="false"
+                          data-show-refresh="true"
                           data-sort-order="desc"
                           data-sort-name="name"
                           id="consumablesReplenishmentTable"
@@ -681,19 +692,22 @@
                   </table>
                 </div>
               </div> <!-- /.col-md-12-->
-            </div>
+            <!-- </div> -->
           </div>
         </div>
+              </div>
+              </div>
+            </div>
       </div>
     </div>
+    </div>
     </div> <!-- /.box.box-default-->
+    <div>
     <div class="col-md-3">
         <div class="box box-default">
           <div class="box-body">
             <div class="row">
-              <div class="col-md-12">
-
-          
+              <div class="col-md-12">          
                 @if ($consumable->image!='')
                 <div class="col-md-12 text-center" style="padding-bottom: 15px;">
                   <a href="{{ Storage::disk('public')->url('consumables/'.e($consumable->image)) }}" data-toggle="lightbox">
@@ -765,6 +779,7 @@
 
                 </div>
             </div> <!-- /.row-->
+        </div>
   </div> <!-- /.col-md-8-->
   @stop
 
