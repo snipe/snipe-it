@@ -404,7 +404,25 @@
 
     }
 
+    /**
+     * Manage action commands for asset reservation
+     *
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @since [v6.0.9]
+     * @param int $row
+     * @param int $value
+     * @return href form action
+     */
+    function assetReserveActionsFormatter (row, value) {
+        if (value.assigned_to_self == true){
+            return '<button class="btn btn-danger btn-sm disabled" data-toggle="tooltip" title="Cancel this item reservation">{{ trans('button.cancel') }}</button>';
+        } else if (value.available_actions.cancel == true)  {
+            return '<form action="{{ url('/') }}/account/reserve-asset/'+ value.id + '" method="POST">@csrf<button class="btn btn-danger btn-sm" data-toggle="tooltip" title="Cancel this item reservation">{{ trans('button.cancel') }}</button></form>';
+        } else if (value.available_actions.request == true)  {
+            return '<form action="{{ url('/') }}/account/reserve-asset/'+ value.id + '" method="POST">@csrf<button class="btn btn-primary btn-sm" data-toggle="tooltip" title="Reserve this item">{{ trans('button.reserve') }}</button></form>';
+        }
 
+    }
 
     var formatters = [
         'hardware',

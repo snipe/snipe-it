@@ -42,4 +42,9 @@ trait Requestable
     {
         $this->requests()->where('user_id', Auth::id())->update(['canceled_at' => \Carbon\Carbon::now()]);
     }
+
+    public function isReservedBy(User $user)
+    {
+        return $this->requests->where('canceled_at', null)->where('user_id', $user->id)->first();
+    }
 }

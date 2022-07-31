@@ -87,6 +87,7 @@
   @else
       <body class="sidebar-mini skin-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} {{ (session('menu_state')!='open') ? 'sidebar-mini sidebar-collapse' : ''  }}">
   @endif
+  
 
   <a class="skip-main" href="#main">Skip to main content</a>
     <div class="wrapper">
@@ -747,7 +748,20 @@
                             <span>{{ trans('admin/hardware/general.reservation') }}</span>
                         </a>
                     </li>
+                    <li{!! (Request::is('account/index') ? ' class="active"' : '') !!}>
+                        <a href="{{ route('tasks.index') }}">
+                            <i class="fa fa-calendar-day fa-fw"></i>
+                            <span>{{ trans('admin/hardware/general.tasks') }}</span>
+                        </a>
+                    </li>
+                    <li{!! (Request::is('account/create') ? ' class="active"' : '') !!}>
+                        <a href="{{ route('tasks.create') }}">
+                            <i class="fa fa-calendar-day fa-fw"></i>
+                            <span>{{ trans('admin/hardware/general.createtasks') }}</span>
+                        </a>
+                    </li>
                 </ul>
+                
             </li>
             @endcan
 

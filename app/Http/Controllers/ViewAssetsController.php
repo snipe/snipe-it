@@ -8,10 +8,12 @@ use App\Models\AssetModel;
 use App\Models\Company;
 use App\Models\Setting;
 use App\Models\User;
+use App\Models\ReserveTask;
 use App\Notifications\RequestAssetCancelation;
 use App\Notifications\RequestAssetNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 
 /**
  * This controller handles all actions related to the ability for users
@@ -190,7 +192,67 @@ class ViewAssetsController extends Controller
     {
         $assets = Asset::with('model', 'defaultLoc', 'location', 'assignedTo', 'requests')->Hardware()->RequestableAssets();
         $models = AssetModel::with('category', 'requests', 'assets')->RequestableModels()->get();
+        $tasks = ReserveTask::all();
+        return view('account/reserve-assets', compact('assets', 'models','tasks'));
 
-        return view('account/reserve-assets', compact('assets', 'models'));
+
+    }
+    //TODO : attach reservation to modal
+    public function getReserveItem(Request $request, $itemType, $itemId = null)
+    {
+        $item = null;
+        $fullItemType = 'App\\Models\\'.studly_case($itemType);
+
+        if ($itemType == 'asset_model') {
+            $itemType = 'model';
+        }
+        $item = call_user_func([$fullItemType, 'find'], $itemId);
+
+        $user = Auth::user();
+
+        $logaction = new Actionlog();
+        $logaction->item_id = $data['asset_id'] = $item->id;
+        $logaction->item_type = $fullItemType;
+        $logaction->created_at = $data['requested_date'] = date('Y-m-d H:i:s');
+
+        if ($user->location_id) {
+            $logaction->location_id = $user->location_id;
+        }
+        $logaction->target_id = $data['user_id'] = Auth::user()->id;
+        $logaction->target_type = User::class;
+
+        $data['item_quantity'] = $request->has('request-quantity') ? e($request->input('request-quantity')) : 1;
+        $data['requested_by'] = $user->present()->fullName();
+        $data['item'] = $item;
+        $data['item_type'] = $itemType;
+        $data['target'] = Auth::user();
+
+        if ($fullItemType == Asset::class) {
+            $data['item_url'] = route('hardware.show', $item->id);
+        } else {
+            $data['item_url'] = route("view/${itemType}", $item->id);
+        }
+
+        $settings = Setting::getSettings();
+
+        if ($item_request = $item->isRequestedBy($user)) {
+            $item->cancelRequest();
+            $data['item_quantity'] = $item_request->qty;
+            $logaction->logaction('request_canceled');
+
+            if (($settings->alert_email != '') && ($settings->alerts_enabled == '1') && (! config('app.lock_passwords'))) {
+                $settings->notify(new RequestAssetCancelation($data));
+            }
+
+            return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
+        } else {
+            $item->request();
+            if (($settings->alert_email != '') && ($settings->alerts_enabled == '1') && (! config('app.lock_passwords'))) {
+                $logaction->logaction('requested');
+                $settings->notify(new RequestAssetNotification($data));
+            }
+
+            return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
+        }
     }
 }
