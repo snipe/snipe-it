@@ -269,6 +269,11 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
         [ViewAssetsController::class, 'getRequestItem']
     )->name('account/request-item');
 
+    Route::get(
+        'reserve-assets',
+        [ViewAssetsController::class, 'getReservableIndex']
+    )->name('reserve-assets');
+
     // Account Dashboard
     Route::get('/', [ViewAssetsController::class, 'getIndex'])->name('account');
 

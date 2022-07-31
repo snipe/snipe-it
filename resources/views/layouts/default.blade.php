@@ -728,11 +728,26 @@
             @endcan
 
             @can('viewRequestable', \App\Models\Asset::class)
-            <li{!! (Request::is('account/requestable-assets') ? ' class="active"' : '') !!}>
-            <a href="{{ route('requestable-assets') }}">
-            <i class="fa fa-laptop fa-fw"></i>
-            <span>{{ trans('admin/hardware/general.requestable') }}</span>
-            </a>
+            <li class="treeview{{ (Request::is('requests*') ? ' active' : '') }}">
+                <a href="#"  class="dropdown-toggle">
+                    <i class="fa fa-circle-question"></i>
+                    <span>{{ trans('general.requests') }}</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul  class="treeview-menu">
+                    <li{!! (Request::is('account/requestable-assets') ? ' class="active"' : '') !!}>
+                        <a href="{{ route('requestable-assets') }}">
+                            <i class="fa fa-laptop fa-fw"></i>
+                            <span>{{ trans('admin/hardware/general.requestable') }}</span>  
+                        </a>
+                    </li>
+                    <li{!! (Request::is('account/reserve-assets') ? ' class="active"' : '') !!}>
+                        <a href="{{ route('reserve-assets') }}">
+                            <i class="fa fa-calendar-day fa-fw"></i>
+                            <span>{{ trans('admin/hardware/general.reservation') }}</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
             @endcan
 

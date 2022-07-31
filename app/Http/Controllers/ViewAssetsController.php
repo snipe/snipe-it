@@ -180,4 +180,17 @@ class ViewAssetsController extends Controller
     {
         return view('account/requested');
     }
+
+    
+    /**
+     * Returns view of reservable items for a user.
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getReservableIndex()
+    {
+        $assets = Asset::with('model', 'defaultLoc', 'location', 'assignedTo', 'requests')->Hardware()->RequestableAssets();
+        $models = AssetModel::with('category', 'requests', 'assets')->RequestableModels()->get();
+
+        return view('account/reserve-assets', compact('assets', 'models'));
+    }
 }
