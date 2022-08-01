@@ -486,7 +486,7 @@
 
                     @can('checkout', \App\Models\Asset::class)
                     <li{!! (Request::is('hardware/bulkcheckout') ? ' class="active"' : '') !!}>
-                        <a href="{{ route('hardware/bulkcheckout') }}">
+                        <a href="{{ route('hardware.bulkcheckout.show') }}">
                             {{ trans('general.bulk_checkout') }}
                         </a>
                     </li>
