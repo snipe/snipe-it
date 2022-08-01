@@ -467,12 +467,12 @@ Route::group(['middleware' => 'web'], function () {
     Route::get(
         'logout',
         [LoginController::class, 'logout']
-    )->name('logout');
+    )->name('logout.get');
 
     Route::post(
         'logout',
         [LoginController::class, 'logout']
-    )->name('logout');
+    )->name('logout.post');
 });
 
 //Auth::routes();

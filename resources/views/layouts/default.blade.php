@@ -354,11 +354,11 @@
                      <li class="divider"></li>
                      <li>
 
-                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <a href="{{ route('logout.get') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="fa fa-sign-out fa-fw"></i> {{ trans('general.logout') }}
                         </a>
                         
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        <form id="logout-form" action="{{ route('logout.post') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
                         </form>
 
