@@ -351,6 +351,18 @@
                 {{ trans('general.bom_remark') }}
               </label>
             </div>
+              <div class="col-md-9 col-md-offset-3">
+                <label>
+                  {{ Form::checkbox('include_deleted', '1', old('include_deleted'), ['class' => 'minimal']) }}
+                  {{ trans('general.include_deleted') }}
+                </label>
+              </div>
+              <div class="col-md-9 col-md-offset-3">
+                <label>
+                  {{ Form::checkbox('only_deleted', '1', old('only_deleted'), ['class' => 'minimal']) }}
+                  {{ trans('general.only_deleted') }}
+                </label>
+              </div>
 
           </div>
 
