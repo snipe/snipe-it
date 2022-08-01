@@ -113,7 +113,7 @@
             </a>
             <ul class="dropdown-menu">
               <li><a href="{{ route('users.edit', $user->id) }}">{{ trans('admin/users/general.edit') }}</a></li>
-              <li><a href="{{ route('clone/user', $user->id) }}">{{ trans('admin/users/general.clone') }}</a></li>
+              <li><a href="{{ route('users.clone.show', $user->id) }}">{{ trans('admin/users/general.clone') }}</a></li>
               @if ((Auth::user()->id !== $user->id) && (!config('app.lock_passwords')) && ($user->deleted_at==''))
                 <li><a href="{{ route('users.destroy', $user->id) }}">{{ trans('button.delete') }}</a></li>
               @endif
@@ -173,7 +173,7 @@
 
               @can('create', $user)
                 <div class="col-md-12" style="padding-top: 5px;">
-                  <a href="{{ route('clone/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/users/general.clone') }}</a>
+                  <a href="{{ route('users.clone.show', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/users/general.clone') }}</a>
                 </div>
                @endcan
 
@@ -228,7 +228,7 @@
                     </div>
                   @else
                     <div class="col-md-12" style="padding-top: 5px;">
-                        <form method="POST" action="{{ route('restore/user', $user->id) }}">
+                        <form method="POST" action="{{ route('users.restore.store', $user->id) }}">
                             @csrf
                             <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.restore') }}</button>
                         </form>
