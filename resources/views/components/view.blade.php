@@ -29,7 +29,7 @@
         @else
           @can('checkout', $component)
           <li role="menuitem">
-            <a href="{{ route('checkout/component', $component->id)  }}">
+            <a href="{{ route('component.checkout.show', $component->id)  }}">
               {{ trans('admin/components/general.checkout') }}
             </a>
           </li>
