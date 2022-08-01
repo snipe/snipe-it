@@ -86,7 +86,9 @@
 
                     <div class="tab-pane fade in active" id="asset_tab">
                         <!-- checked out assets table -->
-                        <div class="table-responsive">
+                        <div class="table table-responsive">
+                            @include('partials.asset-bulk-actions')
+
                             <table
                                     data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
                                     data-cookie-id-table="assetsListingTable"
@@ -98,6 +100,10 @@
                                     data-show-export="true"
                                     data-show-refresh="true"
                                     data-sort-order="asc"
+                                    data-toolbar="#assetsBulkEditToolbar"
+                                    data-bulk-button-id="#bulkAssetEditButton"
+                                    data-bulk-form-id="#assetsBulkForm"
+                                    data-click-to-select="true"
                                     id="assetsListingTable"
                                     class="table table-striped snipe-table"
                                     data-url="{{route('api.assets.index',['company_id' => $company->id]) }}"
