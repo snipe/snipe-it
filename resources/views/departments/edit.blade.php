@@ -8,7 +8,7 @@
 @section('inputFields')
 
     @include ('partials.forms.edit.name', ['translated_name' => trans('admin/departments/table.name')])
-    {{Helper::UniqueDepartments($item, 'name')}}
+
     <!-- Company -->
     @if (\App\Models\Company::canManageUsersCompanies())
         @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])

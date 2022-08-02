@@ -1125,8 +1125,18 @@ class Helper
 
         return $settings;
         }
-    public static function UniqueDepartments($item){
-        $department_names=Department::find($item->name)->where('location_id')
 
+    public static function isUniqueDepartment($department){
+        $department_exists= Department::where('name', $department->name)
+                                     ->where('location_id',  $department->location_id)
+                                     ->where('company_id', $department->company_id)
+                                     ->exists();
+//        dd($department_exists);
+
+        if($department_exists == true){
+
+            return redirect()->back()->withErrors('error', "This company location already has a department with this name.");
+        }
+            return $department;
     }
 }

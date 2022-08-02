@@ -51,6 +51,7 @@
                                 <i class="fas fa-check icon-white" aria-hidden="true"></i>
                                 {{ trans('general.save') }}
                             </button>
+
                         </div>
                     </div>
                 </div>

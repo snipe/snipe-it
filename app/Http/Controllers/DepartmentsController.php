@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ImageUploadRequest;
+use App\Helpers\Helper;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -170,7 +171,9 @@ class DepartmentsController extends Controller
 
         $department = $request->handleImages($department);
 
+        Helper::isUniqueDepartment($department);
         if ($department->save()) {
+
             return redirect()->route('departments.index')->with('success', trans('admin/departments/message.update.success'));
         }
 
