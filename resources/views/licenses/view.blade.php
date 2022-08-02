@@ -78,8 +78,8 @@
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="{{ route('licenses.edit', $user->id) }}">{{ trans('admin/users/general.edit') }}</a></li>
-              <li><a href="{{ route('clone/license', $user->id) }}">{{ trans('admin/users/general.clone') }}</a></li>
+              <li><a href="{{ route('licenses.edit', $user->id) }}">{{ trans('admin/licenses/general.edit') }}</a></li>
+              <li><a href="{{ route('clone/license', $user->id) }}">{{ trans('admin/licenses/general.clone') }}</a></li>
             </ul>
           </li>
         @endcan
