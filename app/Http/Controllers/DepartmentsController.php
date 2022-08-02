@@ -58,6 +58,10 @@ class DepartmentsController extends Controller
 
         $department = $request->handleImages($department);
 
+        if(!Helper::isUniqueDepartment($department)){
+            return redirect()->route('departments.index')->with('error', trans('admin/departments/message.department_already_exists'));
+        }
+
         if ($department->save()) {
             return redirect()->route('departments.index')->with('success', trans('admin/departments/message.create.success'));
         }
@@ -171,7 +175,10 @@ class DepartmentsController extends Controller
 
         $department = $request->handleImages($department);
 
-        Helper::isUniqueDepartment($department);
+        if(!Helper::isUniqueDepartment($department)){
+            return redirect()->route('departments.index')->with('error', trans('admin/departments/message.department_already_exists'));
+        }
+
         if ($department->save()) {
 
             return redirect()->route('departments.index')->with('success', trans('admin/departments/message.update.success'));

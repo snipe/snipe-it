@@ -1125,18 +1125,20 @@ class Helper
 
         return $settings;
         }
-
-    public static function isUniqueDepartment($department){
+    /**
+     * Enforces Unique Department names for Company Locations. Does not enforce uniqueness for duplicate department names for a location.
+     *
+     * @param obj $department
+     * @return bool There is a duplicate department or not.
+     */
+    public static function isUniqueDepartment($department):bool {
         $department_exists= Department::where('name', $department->name)
                                      ->where('location_id',  $department->location_id)
                                      ->where('company_id', $department->company_id)
+                                     ->whereNotNull('company_id')
+                                     ->where('id', '!=', $department->id)
                                      ->exists();
-//        dd($department_exists);
 
-        if($department_exists == true){
-
-            return redirect()->back()->withErrors('error', "This company location already has a department with this name.");
-        }
-            return $department;
+            return !$department_exists;
     }
 }
