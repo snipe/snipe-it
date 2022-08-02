@@ -645,10 +645,10 @@ class ReportsController extends Controller
             if($request->filled('exclude_archived')){
                 $assets->notArchived();
             }
-            if($request->filled('include_deleted')){
+            if($request->input('deleted_assets') == '1'){
                 $assets->withTrashed();
             }
-            if($request->filled('only_deleted')){
+            if($request->input('deleted_assets') == '0'){
                 $assets->onlyTrashed();
             }
 

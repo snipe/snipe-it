@@ -351,15 +351,17 @@
                 {{ trans('general.bom_remark') }}
               </label>
             </div>
+
               <div class="col-md-9 col-md-offset-3">
-                <label>
-                  {{ Form::checkbox('include_deleted', '1', old('include_deleted'), ['class' => 'minimal']) }}
+                <br>
+                <label for= "deleted_assets">
+                  {{ Form::radio('deleted_assets', '', true, ['aria-label'=>'deleted_assets', 'class'=>'minimal'])}}
+                  {{ trans('general.exclude_deleted') }}
+                  <br>
+                  {{ Form::radio('deleted_assets', '1', old('deleted_assets'), ['aria-label'=>'deleted_assets','class' => 'minimal']) }}
                   {{ trans('general.include_deleted') }}
-                </label>
-              </div>
-              <div class="col-md-9 col-md-offset-3">
-                <label>
-                  {{ Form::checkbox('only_deleted', '1', old('only_deleted'), ['class' => 'minimal']) }}
+                  <br>
+                  {{ Form::radio('deleted_assets', '0', old('deleted_assets'), ['aria-label'=>'deleted_assets','class' => 'minimal']) }}
                   {{ trans('general.only_deleted') }}
                 </label>
               </div>
