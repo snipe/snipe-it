@@ -58,7 +58,7 @@
 @if ($manager)
     <b>{{ trans('admin/locations/general.manager') }}</b> {{ $manager->present()->fullName() }}<br>
 @endif
-<b>{{ trans('admin/locations/general.date') }}</b> {{ date("d/m/Y h:i:s A") }}<br><br>
+<b>{{ trans('admin/locations/general.date') }}</b>  {{ \App\Helpers\Helper::getFormattedDateObject(now(), 'datetime', false) }}<br><br>
 
 @if ($users->count() > 0)
     @php
