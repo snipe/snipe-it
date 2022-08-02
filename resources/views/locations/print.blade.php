@@ -140,8 +140,8 @@
         <td>{{ ($asset->model) ? $asset->model->name : '' }}</td>
         <td>{{ $asset->serial }}</td>
         <td>{{ $asset->location->name }}</td>
-        <td>{{ $asset->last_checkout }}</td>
-        <td>{{ $asset->expected_checkin }}</td>
+        <td>{{ \App\Helpers\Helper::getFormattedDateObject( $asset->last_checkout, 'datetime', false) }}</td>
+        <td>{{ \App\Helpers\Helper::getFormattedDateObject( $asset->expected_checkin, 'datetime', false) }}</td>
         </tr>
             @php
                 $counter++
