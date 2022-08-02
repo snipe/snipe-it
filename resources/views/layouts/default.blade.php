@@ -316,11 +316,14 @@
                              {{ trans('general.viewassets') }}
                        </a></li>
 
+                     @can('viewRequestable', \App\Models\Asset::class)
                      <li {!! (Request::is('account/requested') ? ' class="active"' : '') !!}>
                          <a href="{{ route('account.requested') }}">
                              <i class="fas fa-check fa-disk fa-fw" aria-hidden="true"></i>
                              {{ trans('general.requested_assets_menu') }}
                          </a></li>
+                     @endcan
+                     
                      <li {!! (Request::is('account/accept') ? ' class="active"' : '') !!}>
                          <a href="{{ route('account.accept') }}">
                              <i class="fas fa-check fa-disk fa-fw"></i>
