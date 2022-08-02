@@ -63,7 +63,7 @@ class AccessoryCheckoutController extends Controller
         $this->authorize('checkout', $accessory);
 
         if (! $user = User::find($request->input('assigned_to'))) {
-            return redirect()->route('checkout/accessory', $accessory->id)->with('error', trans('admin/accessories/message.checkout.user_does_not_exist'));
+            return redirect()->route('accessories.checkout.show', $accessory->id)->with('error', trans('admin/accessories/message.checkout.user_does_not_exist'));
         }
 
         // Update the accessory data

@@ -28,7 +28,7 @@ Route::group(['prefix' => 'models', 'middleware' => ['auth']], function () {
             AssetModelsController::class, 
             'getClone'
         ]
-    )->name('clone/model');
+    )->name('models.clone.create');
 
     Route::post(
         '{modelId}/clone',
@@ -36,7 +36,7 @@ Route::group(['prefix' => 'models', 'middleware' => ['auth']], function () {
             AssetModelsController::class, 
             'postCreate'
         ]
-    )->name('clone/model');
+    )->name('models.clone.store');
 
     Route::get(
         '{modelId}/view',
@@ -52,7 +52,7 @@ Route::group(['prefix' => 'models', 'middleware' => ['auth']], function () {
             AssetModelsController::class, 
             'getRestore'
         ]
-    )->name('restore/model');
+    )->name('models.restore.store');
 
     Route::get(
         '{modelId}/custom_fields',

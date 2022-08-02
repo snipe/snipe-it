@@ -38,7 +38,7 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
             Users\UsersController::class, 
             'getClone'
         ]
-    )->name('clone/user');
+    )->name('users.clone.show');
 
     Route::post(
         '{userId}/clone',
@@ -46,7 +46,7 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
             Users\UsersController::class, 
             'postCreate'
         ]
-    )->name('clone/user');
+    )->name('users.clone.store');
 
     Route::post(
         '{userId}/restore',
@@ -54,7 +54,7 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
             Users\UsersController::class, 
             'getRestore'
         ]
-    )->name('restore/user');
+    )->name('users.restore.store');
 
     Route::get(
         '{userId}/unsuspend',
