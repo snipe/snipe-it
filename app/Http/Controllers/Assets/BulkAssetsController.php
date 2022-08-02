@@ -250,7 +250,7 @@ class BulkAssetsController extends Controller
             $target = $this->determineCheckoutTarget();
 
             if (! is_array($request->get('selected_assets'))) {
-                return redirect()->route('hardware/bulkcheckout')->withInput()->with('error', trans('admin/hardware/message.checkout.no_assets_selected'));
+                return redirect()->route('hardware.bulkcheckout.show')->withInput()->with('error', trans('admin/hardware/message.checkout.no_assets_selected'));
             }
 
             $asset_ids = array_filter($request->get('selected_assets'));
@@ -297,9 +297,9 @@ class BulkAssetsController extends Controller
                 return redirect()->to('hardware')->with('success', trans('admin/hardware/message.checkout.success'));
             }
             // Redirect to the asset management page with error
-            return redirect()->to('hardware/bulk-checkout')->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($errors);
+            return redirect()->route('hardware.bulkcheckout.show')->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($errors);
         } catch (ModelNotFoundException $e) {
-            return redirect()->to('hardware/bulk-checkout')->with('error', $e->getErrors());
+            return redirect()->route('hardware.bulkcheckout.show')->with('error', $e->getErrors());
         }
     }
 }

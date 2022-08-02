@@ -127,7 +127,7 @@
 
     @can('checkout', \App\Models\Consumable::class)
     <div class="col-md-12">
-                    <a href="{{ route('checkout/consumable', $consumable->id) }}" style="padding-bottom:5px;" class="btn btn-primary btn-sm" {{ (($consumable->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
+                    <a href="{{ route('consumables.checkout.show', $consumable->id) }}" style="padding-bottom:5px;" class="btn btn-primary btn-sm" {{ (($consumable->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
                 </div>
                 @endcan
 

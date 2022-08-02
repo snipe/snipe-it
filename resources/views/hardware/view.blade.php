@@ -22,7 +22,7 @@
                     @if (($asset->assigned_to != '') && ($asset->deleted_at==''))
                         @can('checkin', \App\Models\Asset::class)
                             <li role="menuitem">
-                                <a href="{{ route('checkin/hardware', $asset->id) }}">
+                                <a href="{{ route('hardware.checkin.create', $asset->id) }}">
                                     {{ trans('admin/hardware/general.checkin') }}
                                 </a>
                             </li>
@@ -30,7 +30,7 @@
                     @elseif (($asset->assigned_to == '') && ($asset->deleted_at==''))
                         @can('checkout', \App\Models\Asset::class)
                             <li role="menuitem">
-                                <a href="{{ route('checkout/hardware', $asset->id)  }}">
+                                <a href="{{ route('hardware.checkout.create', $asset->id)  }}">
                                     {{ trans('admin/hardware/general.checkout') }}
                                 </a>
                             </li>
