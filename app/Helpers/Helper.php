@@ -6,6 +6,7 @@ use App\Models\Component;
 use App\Models\Consumable;
 use App\Models\CustomField;
 use App\Models\CustomFieldset;
+use App\Models\Department;
 use App\Models\Depreciation;
 use App\Models\Setting;
 use App\Models\Statuslabel;
@@ -1124,5 +1125,8 @@ class Helper
 
         return $settings;
         }
+    public static function UniqueDepartments($item){
+        $department_names=Department::find($item->name)->where('location_id')
 
+    }
 }
