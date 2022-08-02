@@ -645,6 +645,12 @@ class ReportsController extends Controller
             if($request->filled('exclude_archived')){
                 $assets->notArchived();
             }
+            if($request->input('deleted_assets') == '1'){
+                $assets->withTrashed();
+            }
+            if($request->input('deleted_assets') == '0'){
+                $assets->onlyTrashed();
+            }
 
             $assets->orderBy('assets.id', 'ASC')->chunk(20, function ($assets) use ($handle, $customfields, $request) {
             
