@@ -1136,6 +1136,7 @@ class Helper
                                      ->where('location_id',  $department->location_id)
                                      ->where('company_id', $department->company_id)
                                      ->whereNotNull('company_id')
+                                     ->whereNotNull('location_id')
                                      ->where('id', '!=', $department->id)
                                      ->exists();
 
