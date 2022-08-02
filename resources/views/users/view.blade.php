@@ -730,7 +730,7 @@
                     </td>
                     <td class="hidden-print">
                       @can('checkin', $accessory)
-                        <a href="{{ route('checkin/accessory', array('accessoryID'=> $accessory->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
+                        <a href="{{ route('accessories.checkin.show', array('accessoryID'=> $accessory->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
                       @endcan
                     </td>
                   </tr>
