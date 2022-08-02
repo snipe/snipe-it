@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\AssetCheckoutRequest;
 
 class BulkAssetsController extends Controller
 {
@@ -239,7 +240,7 @@ class BulkAssetsController extends Controller
      * Process Multiple Checkout Request
      * @return View
      */
-    public function storeCheckout(Request $request)
+    public function storeCheckout(AssetCheckoutRequest $request)
     {
 
         $this->authorize('checkout', Asset::class);
