@@ -32,7 +32,8 @@ class ModalController extends Controller
             'statuslabel',
             'supplier',
             'upload-file',
-            'user',         
+            'user',  
+            'reserve',       
         ];
 
 
@@ -45,6 +46,7 @@ class ModalController extends Controller
         if (in_array($type, ['kit-model', 'kit-license', 'kit-consumable', 'kit-accessory'])) {
             $view->with('kitId', $itemId);
             }
+  
             return $view;
         }
 
