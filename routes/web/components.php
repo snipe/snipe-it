@@ -8,22 +8,22 @@ Route::group(['prefix' => 'components', 'middleware' => ['auth']], function () {
     Route::get(
         '{componentID}/checkout',
         [Components\ComponentCheckoutController::class, 'create']
-    )->name('checkout/component');
+    )->name('components.checkout.show');
 
     Route::post(
         '{componentID}/checkout',
         [Components\ComponentCheckoutController::class, 'store']
-    )->name('checkout/component');
+    )->name('components.checkout.store');
 
     Route::get(
         '{componentID}/checkin/{backto?}',
         [Components\ComponentCheckinController::class, 'create']
-    )->name('checkin/component');
+    )->name('components.checkin.show');
 
     Route::post(
         '{componentID}/checkin/{backto?}',
         [Components\ComponentCheckinController::class, 'store']
-    )->name('component.checkin.save');
+    )->name('components.checkin.store');
 
 });
 

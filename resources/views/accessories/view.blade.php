@@ -24,13 +24,13 @@
             @if ($accessory->assigned_to != '')
               @can('checkin', \App\Models\Accessory::class)
               <li role="menuitem">
-                <a href="{{ route('checkin/accessory', $accessory->id) }}">{{ trans('admin/accessories/general.checkin') }}</a>
+                <a href="{{ route('accessories.checkin.show', $accessory->id) }}">{{ trans('admin/accessories/general.checkin') }}</a>
               </li>
               @endcan
             @else
               @can('checkout', \App\Models\Accessory::class)
               <li role="menuitem">
-                <a href="{{ route('checkout/accessory', $accessory->id)  }}">{{ trans('admin/accessories/general.checkout') }}</a>
+                <a href="{{ route('accessories.checkout.show', $accessory->id)  }}">{{ trans('admin/accessories/general.checkout') }}</a>
               </li>
               @endcan
             @endif
@@ -171,7 +171,7 @@
           @can('checkout', \App\Models\Accessory::class)
               <div class="row">
                   <div class="col-md-12 text-center">
-                      <a href="{{ route('checkout/accessory', $accessory->id) }}" style="margin-right:5px;" class="btn btn-primary btn-sm" {{ (($accessory->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
+                      <a href="{{ route('accessories.checkout.show', $accessory->id) }}" style="margin-right:5px;" class="btn btn-primary btn-sm" {{ (($accessory->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
                   </div>
               </div>
           @endcan

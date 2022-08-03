@@ -21,7 +21,7 @@
         @if ($component->assigned_to != '')
           @can('checkin', $component)
           <li role="menuitem">
-            <a href="{{ route('checkin/component', $component->id) }}">
+            <a href="{{ route('components.checkin.show', $component->id) }}">
               {{ trans('admin/components/general.checkin') }}
             </a>
           </li>
@@ -29,7 +29,7 @@
         @else
           @can('checkout', $component)
           <li role="menuitem">
-            <a href="{{ route('checkout/component', $component->id)  }}">
+            <a href="{{ route('components.checkout.show', $component->id)  }}">
               {{ trans('admin/components/general.checkout') }}
             </a>
           </li>

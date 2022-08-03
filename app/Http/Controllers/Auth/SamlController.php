@@ -142,6 +142,6 @@ class SamlController extends Controller
             return view('errors.403');
         }
 
-        return redirect()->route('logout')->with(['saml_logout' => true,'saml_slo_redirect_url' => $sloUrl]);
+        return redirect()->route('logout.get')->with(['saml_logout' => true,'saml_slo_redirect_url' => $sloUrl]);
     }
 }

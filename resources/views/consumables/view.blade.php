@@ -126,10 +126,21 @@
                 @endif
 
     @can('checkout', \App\Models\Consumable::class)
-    <div class="col-md-12">
-                    <a href="{{ route('checkout/consumable', $consumable->id) }}" style="padding-bottom:5px;" class="btn btn-primary btn-sm" {{ (($consumable->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
-                </div>
-                @endcan
+
+      <div class="col-md-12">
+        
+        @if ($consumable->numRemaining() > 0)
+          <a href="{{ route('consumables.checkout.show', $consumable->id) }}" style="padding-bottom:5px;" class="btn btn-primary btn-sm">
+            {{ trans('general.checkout') }}
+          </a>
+        @else
+          <button style="padding-bottom:5px;" class="btn btn-primary btn-sm disabled">
+            {{ trans('general.checkout') }}
+          </button>
+        @endif
+      </div>
+
+    @endcan
 
     @if ($consumable->notes)
        
