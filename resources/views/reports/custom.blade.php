@@ -180,6 +180,13 @@
             </div>
             <div class="checkbox col-md-12">
               <label>
+                {{ Form::checkbox('deleted_at', '1', '1', ['class' => 'minimal']) }}
+                {{ trans('general.deleted') }}
+              </label>
+            </div>
+
+            <div class="checkbox col-md-12">
+              <label>
                 {{ Form::checkbox('last_audit_date', '1', '1', ['class' => 'minimal']) }}
                 {{ trans('general.last_audit') }}
               </label>

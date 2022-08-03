@@ -552,6 +552,10 @@ class ReportsController extends Controller
                 $header[] = trans('general.updated_at');
             }
 
+            if ($request->filled('deleted_at')) {
+                $header[] = trans('general.deleted');
+            }
+
             if ($request->filled('last_audit_date')) {
                 $header[] = trans('general.last_audit');
             }
