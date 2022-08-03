@@ -55,6 +55,11 @@ class AssetImporter extends ItemImporter
     {
         $editingAsset = false;
         $asset_tag = $this->findCsvMatch($row, 'asset_tag');
+
+        if(empty($asset_tag)){
+            $asset_tag = Asset::autoincrement_asset();
+        }
+
         $asset = Asset::where(['asset_tag'=> $asset_tag])->first();
         if ($asset) {
             if (! $this->updating) {
