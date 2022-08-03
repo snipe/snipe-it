@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ConsumableCheckedOut
+class ConsumableCheckedOut extends CheckoutableCheckedOut
 {
     use Dispatchable, SerializesModels;
 

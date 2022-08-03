@@ -277,7 +277,7 @@ class ConsumablesController extends Controller
         $this->authorize('view', Consumable::class);
         
         $rows = [];
-        $consumable->consumableReplenishAssignments;
+        
         $upload_path = public_path('private_uploads/consumables/replenish_doc/');
         
         foreach ($consumable->consumableReplenishAssignments as $consumable_replenish_assignment) {
