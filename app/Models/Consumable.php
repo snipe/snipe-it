@@ -242,7 +242,7 @@ class Consumable extends SnipeModel
 
     
     /**
-     * Establishes the consumables_stock -> users relationship
+     * Establishes the consumables_replenishments -> users relationship
      *
      * @author [A. Rahardianto] [<veenone@gmail.com>]
      * @since [v6.0]
@@ -250,7 +250,7 @@ class Consumable extends SnipeModel
      */
     public function replenishusers()
     {
-        return $this->belongsToMany(\App\Models\User::class, 'consumables_stock', 'consumable_id', 'total_replenish')->withPivot('id', 'user_id','order_number','file')->withTrashed()->withTimestamps();
+        return $this->belongsToMany(\App\Models\User::class, 'consumables_replenishments', 'consumable_id', 'total_replenish')->withPivot('id', 'user_id','order_number','file')->withTrashed()->withTimestamps();
     }
 
     /**

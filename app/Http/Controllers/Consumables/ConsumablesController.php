@@ -202,7 +202,7 @@ class ConsumablesController extends Controller
     }
 
     /**
-     * Return a view to display component information.
+     * Return a view to display consumable information.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @see ConsumablesController::getDataView() method that generates the JSON response
@@ -224,11 +224,11 @@ class ConsumablesController extends Controller
     }
 
      /**
-     * Return a view to display component information.
+     * Return a view to display consumable information.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
      * @see ConsumablesController::getDataView() method that generates the JSON response
-     * @since [v1.0]
+     * @since [v6.0]
      * @param int $consumableId
      * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException

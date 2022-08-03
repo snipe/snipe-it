@@ -104,7 +104,6 @@ class ConsumableReplenishController extends Controller
         isset($file_name) ? $file_name : $file_name = ''; 
 
         $consumable->replenishusers()->attach($consumable->id, [
-            'consumable_id' => $consumable->id,            
             'user_id' => $admin_user->id,
             'initial_qty' => $consumable->qty,            
             'total_replenish' => e($request->input('checkout_qty')),
@@ -119,9 +118,7 @@ class ConsumableReplenishController extends Controller
         event(new ConsumableCheckedOut($consumable, Auth::user(), $consumable->qty, $request->input('note'), $request->input('checkout_qty')));
 
         // Updating quantity to consumable
-        DB::table('consumables')
-        ->where('id',$consumable->id)
-        ->update(['qty'=> $addedquantity]);
+        $consumable->where('id',$consumable->id)->update(['qty' => $addedquantity]);
         
         // Updating activity 
         $logAction = new Actionlog();
