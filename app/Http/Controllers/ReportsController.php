@@ -644,13 +644,13 @@ class ReportsController extends Controller
             if (($request->filled('next_audit_start')) && ($request->filled('next_audit_end'))) {
                 $assets->whereBetween('assets.next_audit_date', [$request->input('next_audit_start'), $request->input('next_audit_end')]);
             }
-            if($request->filled('exclude_archived')){
+            if ($request->filled('exclude_archived')) {
                 $assets->notArchived();
             }
-            if($request->input('deleted_assets') == '1'){
+            if ($request->input('deleted_assets') == '1') {
                 $assets->withTrashed();
             }
-            if($request->input('deleted_assets') == '0'){
+            if ($request->input('deleted_assets') == '0') {
                 $assets->onlyTrashed();
             }
 
@@ -816,6 +816,10 @@ class ReportsController extends Controller
 
                     if ($request->filled('updated_at')) {
                         $row[] = ($asset->updated_at) ? $asset->updated_at : '';
+                    }
+
+                    if ($request->filled('deleted_at')) {
+                        $row[] = ($asset->deleted_at) ? $asset->deleted_at : '';
                     }
 
                     if ($request->filled('last_audit_date')) {
