@@ -7,9 +7,15 @@ return array(
     'assets'                => 'Equipos',
     'city'                  => 'Ciudad',
     'contact'               => 'Nombre Contacto',
+<<<<<<< HEAD
     'country'               => 'País',
     'create'                => 'Crear Proveedor',
     'email'                 => 'Correo electrónico',
+=======
+    'country'               => 'Pais',
+    'create'                => 'Crear Proveedor',
+    'email'                 => 'Email',
+>>>>>>> 64747d0fb (updates based on review)
     'fax'                   => 'Fax',
     'id'                    => 'ID',
     'licenses'              => 'Licencias',
@@ -19,8 +25,15 @@ return array(
     'state'                 => 'Provincia',
     'suppliers'             => 'Proveedores',
     'update'                => 'Actualizar Proveedor',
+<<<<<<< HEAD
     'view'                  => 'Ver Proveedor',
     'view_assets_for'       => 'Ver activos para',
     'zip'                   => 'Código postal',
+=======
+    'url'                   => 'URL',
+    'view'                  => 'Ver Proveedor',
+    'view_assets_for'       => 'Ver Equipos para',
+    'zip'                   => 'Código Postal',
+>>>>>>> 64747d0fb (updates based on review)
 
 );

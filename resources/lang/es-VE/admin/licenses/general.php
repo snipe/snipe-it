@@ -1,17 +1,26 @@
 <?php
 
 return array(
+<<<<<<< HEAD
     'about_licenses_title'      => 'Acerca de las Licencias',
     'about_licenses'            => 'Las licencias se utilizan para hacer un seguimiento del software.  Tienen una cantidad determinada que puede ser asignada a individuos',
     'checkin'  					=> 'Ingresar licencia',
     'checkout_history'  		=> 'Historial de asignaciones',
     'checkout'  				=> 'Asignar licencia',
+=======
+    'about_licenses_title'            => 'Acerca de las Licencias',
+    'about_licenses'                  => 'Las licencias son usadas para rastrear el software. Tienen un número específico de puestos que pueden ser asignados a individuos',
+    'checkin'  					=> 'Registrar Puestos de Licencia',
+    'checkout_history'  		=> 'Historial de Asignaciones',
+    'checkout'  				=> 'Registrar Puesto de Licencia',
+>>>>>>> 64747d0fb (updates based on review)
     'edit'  					=> 'Editar Licencia',
     'filetype_info'				=> 'Los tipos de archivo permitidos son png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, y rar.',
     'clone'  					=> 'Clonar Licencia',
     'history_for'  				=> 'Historial de ',
     'in_out'  					=> 'Registrado / Asignado',
     'info'  					=> 'Información de licencia',
+<<<<<<< HEAD
     'license_seats'  			=> 'Total de licencias',
     'seat'  					=> 'Licencia',
     'seat_count'  				=> 'Licencia :count',
@@ -49,4 +58,12 @@ return array(
 
     'below_threshold' => 'Solo quedan :remaining_count licencias y su cantidad mínima es de :min_amt. Puede considerar la compra de más licencias.',
     'below_threshold_short' => 'Este artículo está por debajo de la cantidad mínima requerida.',
+=======
+    'license_seats'  			=> 'Puestos de Licencia',
+    'seat'  					=> 'Puesto',
+    'seats'  					=> 'Puestos',
+    'software_licenses'  		=> 'Licencias de Software',
+    'user'  					=> 'Usuario',
+    'view'  					=> 'Ver Licencia',
+>>>>>>> 64747d0fb (updates based on review)
 );

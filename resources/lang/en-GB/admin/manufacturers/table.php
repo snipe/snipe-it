@@ -10,7 +10,12 @@ return array(
     'support_email'   		=> 'Support Email',
     'support_phone'   		=> 'Support Phone',
     'support_url'   		=> 'Support URL',
+<<<<<<< HEAD
     'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Update Manufacturer',
+=======
+    'update'				=> 'Update Manufacturer',
+    'url'   				=> 'URL',
+>>>>>>> 64747d0fb (updates based on review)
 
 );

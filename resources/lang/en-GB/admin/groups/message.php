@@ -3,7 +3,11 @@
 return array(
 
     'group_exists'        => 'Group already exists!',
+<<<<<<< HEAD
     'group_not_found'     => 'Group ID :id does not exist.',
+=======
+    'group_not_found'     => 'Group [:id] does not exist.',
+>>>>>>> 64747d0fb (updates based on review)
     'group_name_required' => 'The name field is required',
 
     'success' => array(

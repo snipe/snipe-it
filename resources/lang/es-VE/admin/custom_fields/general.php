@@ -1,6 +1,7 @@
 <?php
 
 return [
+<<<<<<< HEAD
     'custom_fields'		        => 'Campos personalizados',
     'manage'                    => 'Gestionar',
     'field'		                => 'Campo',
@@ -14,6 +15,21 @@ return [
     'qty_fields'      	      => 'Campos de cantidad',
     'fieldsets'      	        => 'Grupo de campos',
     'fieldset_name'           => 'Nombre del grupo de campos',
+=======
+    'custom_fields'		        => 'Campos Personalizados',
+    'manage'                    => 'Manage',
+    'field'		                => 'Campo',
+    'about_fieldsets_title'		=> 'Acerca de Fieldsets',
+    'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used for specific asset model types.',
+    'custom_format'             => 'Custom Regex format...',
+    'encrypt_field'      	        => 'Encriptar el valor de este campo en la base de datos',
+    'encrypt_field_help'      => 'ADVERTENCIA: Encriptar un campo hace que no pueda ser buscado.',
+    'encrypted'      	        => 'Encriptado',
+    'fieldset'      	        => 'Grupo de Campos',
+    'qty_fields'      	      => 'Campos de Cantidad',
+    'fieldsets'      	        => 'Grupo de Campos',
+    'fieldset_name'           => 'Nombre del Grupo de Campos',
+>>>>>>> 64747d0fb (updates based on review)
     'field_name'              => 'Nombre del Campo',
     'field_values'            => 'Valores del Campo',
     'field_values_help'       => 'Añadir opciones seleccionables, una por línea. Líneas en blanco además de la primera serán ignoradas.',
@@ -24,6 +40,7 @@ return [
     'field_custom_format_help'     => 'Este campo te permite usar una expresión regex para la validación. Debería empezar como "regex:" - por ejemplo, para validar que un campo personalizado contiene un IMEI válido (15 dígitos numéricos), tú usarías <code>regex:/^[0-9]{15}$/</code>.',
     'required'   		          => 'Obligatorio',
     'req'   		              => 'Obl.',
+<<<<<<< HEAD
     'used_by_models'   		    => 'Usado por los modelos',
     'order'   		            => 'Orden',
     'create_fieldset'         => 'Nuevo grupo de campos',
@@ -58,4 +75,24 @@ return [
     'show_in_requestable_list' => 'Mostrar el valor en la lista de activos que se pueden solicitar. Los campos cifrados no se mostrarán',
     'encrypted_options' => 'Este campo está cifrado, por lo que algunas opciones de visualización no estarán disponibles.',
 
+=======
+    'used_by_models'   		    => 'Usado por Modelos',
+    'order'   		            => 'Orden',
+    'create_fieldset'         => 'Nuevo Fieldset',
+    'create_fieldset_title' => 'Create a new fieldset',
+    'create_field'            => 'Nuevo Campo Personalizado',
+    'create_field_title' => 'Create a new custom field',
+    'value_encrypted'      	        => 'El valor de este campo está encriptado en la base de datos. Sólo los administradores podrán ver el valor desencriptado',
+    'show_in_email'     => '¿Incluirá el valor de este campo en las notificaciones por correo de asignaciones de activos? Ten en cuenta que los campos cifrados no se pueden incluir en los correos electrónicos.',
+    'help_text' => 'Help Text',
+    'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
+    'about_custom_fields_title' => 'About Custom Fields',
+    'about_custom_fields_text' => 'Custom fields allow you to add arbitrary attributes to assets.',
+    'add_field_to_fieldset' => 'Add Field to Fieldset',
+    'make_optional' => 'Required - click to make optional',
+    'make_required' => 'Optional - click to make required',
+    'reorder' => 'Reorder',
+    'db_field' => 'DB Field',
+    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.'
+>>>>>>> 64747d0fb (updates based on review)
 ];

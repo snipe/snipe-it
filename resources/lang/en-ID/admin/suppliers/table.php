@@ -19,6 +19,10 @@ return array(
     'state'                 => 'Negara',
     'suppliers'             => 'Pemasok',
     'update'                => 'Perbarui pemasok',
+<<<<<<< HEAD
+=======
+    'url'                   => 'URL',
+>>>>>>> 64747d0fb (updates based on review)
     'view'                  => 'Lihat pemasok',
     'view_assets_for'       => 'Lihat Aset untuk',
     'zip'                   => 'Kode pos',

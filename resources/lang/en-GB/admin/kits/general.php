@@ -2,7 +2,11 @@
 
 return [
     'about_kits_title'                  => 'About Predefined Kits',
+<<<<<<< HEAD
     'about_kits_text'                   => 'Predefined Kits let you quickly check out a collection of items (assets, licences, etc) to a user. This can be helpful when your onboarding process is consistent across many users and all users receive the same items.',
+=======
+    'about_kits_text'                   => 'Predefined Kits let you quickly check out a collection of items (assets, licenses, etc) to a user. This can be helpful when your onboarding process is consistent across many users and all users receive the same items.',
+>>>>>>> 64747d0fb (updates based on review)
     'checkout'                          => 'Checkout Kit ',
     'create_success'                    => 'Kit was successfully created.',
     'create'                            => 'Create Predefined Kit',
@@ -17,6 +21,7 @@ return [
     'update_appended_accessory'         => 'Update appended Accessory',
     'append_consumable'                 => 'Append Consumable',
     'update_appended_consumable'        => 'Update appended Consumable',
+<<<<<<< HEAD
     'append_license'                    => 'Append licence',
     'update_appended_license'           => 'Update appended licence',
     'append_model'                      => 'Append model',
@@ -26,6 +31,17 @@ return [
     'license_updated'                   => 'Licence was successfully updated',
     'license_none'                      => 'Licence does not exist',
     'license_detached'                  => 'Licence was successfully detached',
+=======
+    'append_license'                    => 'Append license',
+    'update_appended_license'           => 'Update appended license',
+    'append_model'                      => 'Append model',
+    'update_appended_model'             => 'Update appended model',
+    'license_error'                     => 'License already attached to kit',
+    'license_added_success'             => 'License added successfully',
+    'license_updated'                   => 'License was successfully updated',
+    'license_none'                      => 'License does not exist',
+    'license_detached'                  => 'License was successfully detached',
+>>>>>>> 64747d0fb (updates based on review)
     'consumable_added_success'          => 'Consumable added successfully',
     'consumable_updated'                => 'Consumable was successfully updated',
     'consumable_error'                  => 'Consumable already attached to kit',
@@ -37,7 +53,11 @@ return [
     'accessory_detached'                => 'Accessory was successfully detached',
     'accessory_error'                   => 'Accessory already attached to kit',
     'accessory_deleted'                 => 'Delete was successful',
+<<<<<<< HEAD
     'accessory_none'                    => 'The accessory does not exist',
+=======
+    'accessory_none'                    => 'Accessory does not exist',
+>>>>>>> 64747d0fb (updates based on review)
     'checkout_success'                  => 'Checkout was successful',
     'checkout_error'                    => 'Checkout error',
     'kit_none'                          => 'Kit does not exist',

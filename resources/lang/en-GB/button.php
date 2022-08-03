@@ -4,10 +4,16 @@ return [
     'actions' 	                => 'Actions',
     'add'    	                => 'Add New',
     'cancel'                    => 'Cancel',
+<<<<<<< HEAD
     'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => 'Delete',
     'edit'    	                => 'Edit',
     'clone'    	                => 'Clone',
+=======
+    'checkin_and_delete'  	    => 'Checkin & Delete User',
+    'delete'  	                => 'Delete',
+    'edit'    	                => 'Edit',
+>>>>>>> 64747d0fb (updates based on review)
     'restore' 	                => 'Restore',
     'remove'                    => 'Remove',
     'request'                   => 'Request',
@@ -22,6 +28,7 @@ return [
     'add_maintenance'           => 'Add Maintenance',
     'append'                    => 'Append',
     'new'                       => 'New',
+<<<<<<< HEAD
     'var' => [
         'clone'     => 'Clone :item_type',
         'edit'      => 'Edit :item_type',
@@ -31,4 +38,6 @@ return [
         'checkout'  => 'Checkout :item_type',
         'checkin'   => 'Checkin :item_type',
     ]
+=======
+>>>>>>> 64747d0fb (updates based on review)
 ];

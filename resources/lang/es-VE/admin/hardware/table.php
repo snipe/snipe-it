@@ -2,6 +2,7 @@
 
 return [
 
+<<<<<<< HEAD
     'asset_tag'   	=> 'Placa del activo',
     'asset_model'       => 'Modelo',
     'assigned_to'   => 'Asignado a',
@@ -30,4 +31,31 @@ return [
     'requested_date' => 'Fecha solicitada',
     'changed'       => 'Cambios',
     'icon' => 'Icono',
+=======
+    'asset_tag'   	=> 'Etiqueta de Activo',
+    'asset_model'       => 'Modelo',
+    'book_value'  	=> 'Current Value',
+    'change' 		=> 'Registrado / Asignado',
+    'checkout_date' => 'Fecha de Asignación',
+    'checkoutto' 	=> 'Asignado',
+    'current_value' => 'Current Value',
+    'diff' 			=> 'Diferencia',
+    'dl_csv' 		=> 'Descargar CSV',
+    'eol' 			=> 'Fin de Vida',
+    'id'      		=> 'Identificación',
+    'location' 		=> 'Localización',
+    'purchase_cost'	=> 'Costo',
+    'purchase_date'	=> 'Comprado',
+    'serial'   		=> 'Serial',
+    'status'   		=> 'Estado',
+    'title'      	=> 'Activo ',
+    'image'		    => 'Imagen de dispositivo',
+    'days_without_acceptance' => 'Días sin Aceptación',
+    'monthly_depreciation' => 'Depreciación mensual',
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+>>>>>>> 64747d0fb (updates based on review)
 ];

@@ -2,7 +2,10 @@
 
 return array(
 
+<<<<<<< HEAD
     'support_url_help' => 'Variables <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, and <code>{MODEL_NAME}</code> may be used in your URL to have those values auto-populate when viewing assets - for example https://checkcoverage.apple.com/{LOCALE}/{SERIAL}.',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'does_not_exist' => 'Manufacturer does not exist.',
     'assoc_users'	 => 'This manufacturer is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this manufacturer and try again. ',
 

@@ -14,8 +14,11 @@ return array(
         'success'               => 'You have successfully logged in.',
         'code_required'         => 'Two-factor code is required.',
         'invalid_code'          => 'Two-factor code is invalid.',
+<<<<<<< HEAD
         'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
         'please_enroll'         => 'Please enroll a device in two-factor authentication.',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     ),
 
     'signin' => array(

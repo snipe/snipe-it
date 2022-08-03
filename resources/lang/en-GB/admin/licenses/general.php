@@ -1,8 +1,13 @@
 <?php
 
 return array(
+<<<<<<< HEAD
     'about_licenses_title'      => 'About Licenses',
     'about_licenses'            => 'Licenses are used to track software.  They have a specified number of seats that can be checked out to individuals',
+=======
+    'about_licenses_title'            => 'About Licenses',
+    'about_licenses'                  => 'Licenses are used to track software.  They have a specified number of seats that can be checked out to individuals',
+>>>>>>> 64747d0fb (updates based on review)
     'checkin'  					=> 'Checkin License Seat',
     'checkout_history'  		=> 'Checkout History',
     'checkout'  				=> 'Checkout License Seat',
@@ -14,11 +19,15 @@ return array(
     'info'  					=> 'License Info',
     'license_seats'  			=> 'License Seats',
     'seat'  					=> 'Seat',
+<<<<<<< HEAD
     'seat_count'  				=> 'Seat :count',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'seats'  					=> 'Seats',
     'software_licenses'  		=> 'Software Licenses',
     'user'  					=> 'User',
     'view'  					=> 'View License',
+<<<<<<< HEAD
     'delete_disabled'           => 'This licence cannot be deleted yet because some seats are still checked out.',
     'bulk'                      =>
         [
@@ -49,4 +58,6 @@ return array(
 
     'below_threshold' => 'There are only :remaining_count seats left for this licence with a minimum quantity of :min_amt. You may want to consider purchasing more seats.',
     'below_threshold_short' => 'This item is below the minimum required quantity.',
+=======
+>>>>>>> 64747d0fb (updates based on review)
 );

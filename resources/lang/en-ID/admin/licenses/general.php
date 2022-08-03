@@ -1,8 +1,13 @@
 <?php
 
 return array(
+<<<<<<< HEAD
     'about_licenses_title'      => 'Tentang Lisensi',
     'about_licenses'            => 'Lisensi digunakan untuk melacak perangkat lunak. Mereka memiliki sejumlah seat tertentu yang bisa diperiksa ke individu',
+=======
+    'about_licenses_title'            => 'Tentang Lisensi',
+    'about_licenses'                  => 'Lisensi digunakan untuk melacak perangkat lunak. Mereka memiliki sejumlah seat tertentu yang bisa diperiksa ke individu',
+>>>>>>> 64747d0fb (updates based on review)
     'checkin'  					=> 'Daftar lisensi seat',
     'checkout_history'  		=> 'Periksa riwayat',
     'checkout'  				=> 'Periksa lisensi seat',
@@ -14,11 +19,15 @@ return array(
     'info'  					=> 'Informasi lisensi',
     'license_seats'  			=> 'Lisensi seat',
     'seat'  					=> 'Seat',
+<<<<<<< HEAD
     'seat_count'  				=> 'Seat :count',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'seats'  					=> 'Seat',
     'software_licenses'  		=> 'Lisensi perangkat lunak',
     'user'  					=> 'Pengguna',
     'view'  					=> 'Lihat lisensi',
+<<<<<<< HEAD
     'delete_disabled'           => 'This license cannot be deleted yet because some seats are still checked out.',
     'bulk'                      =>
         [
@@ -49,4 +58,6 @@ return array(
 
     'below_threshold' => 'There are only :remaining_count seats left for this license with a minimum quantity of :min_amt. You may want to consider purchasing more seats.',
     'below_threshold_short' => 'This item is below the minimum required quantity.',
+=======
+>>>>>>> 64747d0fb (updates based on review)
 );

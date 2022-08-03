@@ -1,22 +1,33 @@
 <?php
 
+<<<<<<< HEAD
 return [
     '2FA_reset'             => '2FA reset',
     'accessories'			=> 'Accessories',
     'activated'			    => 'Activated',
     'accepted_date'         => 'Date Accepted',
+=======
+    return [
+    'accessories'			=> 'Accessories',
+    'activated'			    => 'Activated',
+>>>>>>> 64747d0fb (updates based on review)
     'accessory'				=> 'Accessory',
     'accessory_report'		=> 'Accessory Report',
     'action'                => 'Action',
     'activity_report'		=> 'Activity Report',
     'address'				=> 'Address',
     'admin'					=> 'Admin',
+<<<<<<< HEAD
     'admin_tooltip'			=> 'This user has admin privileges',
     'superuser'				=> 'Superuser',
     'superuser_tooltip'		=> 'This user has superuser privileges',
     'administrator'			=> 'Administrator',
     'add_seats'             => 'Added seats',
     'age'                   => "Age",
+=======
+    'administrator'			=> 'Administrator',
+    'add_seats'             => 'Added seats',
+>>>>>>> 64747d0fb (updates based on review)
     'all_assets'			=> 'All Assets',
     'all'       			=> 'All',
     'archived'              => 'Archived',
@@ -32,6 +43,7 @@ return [
     'audit'				    => 'Audit',
     'audit_report'			=> 'Audit Log',
     'assets'				=> 'Assets',
+<<<<<<< HEAD
     'assets_audited'        => 'assets audited',
     'assets_checked_in_count'     => 'assets checked in',
     'assets_checked_out_count'     => 'assets checked out',
@@ -39,6 +51,8 @@ return [
     'assigned_date'         => 'Date Assigned',
     'assigned_to'           => 'Assigned to :name',
     'assignee'              => 'Assigned to',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'avatar_delete'         => 'Delete Avatar',
     'avatar_upload'         => 'Upload Avatar',
     'back'      			=> 'Back',
@@ -49,9 +63,13 @@ return [
     'bulk_edit'             => 'Bulk Edit',
     'bulk_delete'           => 'Bulk Delete',
     'bulk_actions'          => 'Bulk Actions',
+<<<<<<< HEAD
     'bulk_checkin_delete'   => 'Bulk Check In / Delete Users',
     'byod'                  => 'BYOD',
     'byod_help'             => 'This device is owned by the user',
+=======
+    'bulk_checkin_delete'   => 'Bulk Checkin &amp; Delete',
+>>>>>>> 64747d0fb (updates based on review)
     'bystatus'              => 'by Status',
     'cancel'  				=> 'Cancel',
     'categories'			=> 'Categories',
@@ -76,6 +94,7 @@ return [
     'consumable'			=> 'Consumable',
     'consumables'			=> 'Consumables',
     'country'  				=> 'Country',
+<<<<<<< HEAD
     'could_not_restore'     => 'Error restoring :item_type: :error',
     'not_deleted'           => 'The :item_type is not deleted, so it cannot be restored',
     'create'				=> 'Create New',
@@ -83,12 +102,22 @@ return [
     'created_asset'			=> 'created asset',
     'created_at' 			=> 'Created At',
     'created_by'            => 'Created By',
+=======
+    'create'				=> 'Create New',
+    'created'               => 'Item Created',
+    'created_asset'			=> 'created asset',
+    'created_at' 			=> 'Created at',
+>>>>>>> 64747d0fb (updates based on review)
     'record_created' 		=> 'Record Created',
     'updated_at' 			=> 'Updated at',
     'currency'  			=> '£', // this is deprecated
     'current'  				=> 'Current',
     'current_password'      => 'Current Password',
+<<<<<<< HEAD
     'customize_report'      => 'Customise Report',
+=======
+    'customize_report'      => 'Customize Report',
+>>>>>>> 64747d0fb (updates based on review)
     'custom_report'         => 'Custom Asset Report',
     'dashboard'				=> 'Dashboard',
     'days'      			=> 'days',
@@ -98,7 +127,10 @@ return [
     'debug_warning_text'    => 'This application is running in production mode with debugging enabled. This can expose sensitive data if your application is accessible to the outside world. Disable debug mode by setting the <code>APP_DEBUG</code> value in your <code>.env</code> file to <code>false</code>.',
     'delete'  				=> 'Delete',
     'delete_confirm'  		=> 'Are you sure you wish to delete :item?',
+<<<<<<< HEAD
     'delete_confirm_no_undo' => 'Are you sure you wish to delete :item? This can not be undone.',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'deleted'  				=> 'Deleted',
     'delete_seats'  		=> 'Deleted Seats',
     'deletion_failed'       => 'Deletion failed',
@@ -115,32 +147,46 @@ return [
     'eol'					=> 'EOL',
     'email_domain'			=> 'Email Domain',
     'email_format'			=> 'Email Format',
+<<<<<<< HEAD
     'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'This is used to generate email addresses when importing',
     'error'				    => 'Error',
     'exclude_archived'      => 'Exclude Archived Assets',
     'exclude_deleted'       => 'Exclude Deleted Assets',
     'example'				=> 'Example: ',
+=======
+    'email_domain_help'		=> 'This is used to generate email addresses when importing',
+    'error'				    => 'Error',
+>>>>>>> 64747d0fb (updates based on review)
     'filastname_format'			=> 'First Initial Last Name (jsmith@example.com)',
     'firstname_lastname_format'	=> 'First Name Last Name (jane.smith@example.com)',
     'firstname_lastname_underscore_format' => 'First Name Last Name (jane_smith@example.com)',
     'lastnamefirstinitial_format' =>  'Last Name First Initial (smithj@example.com)',
     'firstintial_dot_lastname_format' => 'First Initial Last Name (j.smith@example.com)',
+<<<<<<< HEAD
     'firstname_lastname_display'	=> 'First Name Last Name (Jane Smith)',
     'lastname_firstname_display'	=> 'Last Name First Name (Smith Jane)',
     'name_display_format'	=> 'Name Display Format',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'first'					=> 'First',
     'firstnamelastname'     => 'First Name Last Name (janesmith@example.com)',
     'lastname_firstinitial' => 'Last Name First Initial (smith_j@example.com)',
     'firstinitial.lastname' => 'First Initial Last Name (j.smith@example.com)',
     'firstnamelastinitial'  => 'First Name Last Initial (janes@example.com)',
+<<<<<<< HEAD
     'lastnamefirstname'      => 'Last Name First Name (smith.jane@example.com)',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'first_name'			=> 'First Name',
     'first_name_format'		=> 'First Name (jane@example.com)',
     'files'                 => 'Files',
     'file_name'				=> 'File',
     'file_type'             => 'File Type',
+<<<<<<< HEAD
     'filesize'              => 'File Size',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'file_uploads'			=> 'File Uploads',
     'file_upload'           => 'File Upload',
     'generate'				=> 'Generate',
@@ -154,6 +200,7 @@ return [
     'id'  					=> 'ID',
     'image'                 => 'Image',
     'image_delete'         	=> 'Delete Image',
+<<<<<<< HEAD
     'include_deleted'       => 'Include Deleted Assets',
     'image_upload'         	=> 'Upload Image',
     'filetypes_accepted_help'    => 'Accepted filetype is :types. Max upload size allowed is :size.|Accepted filetypes are :types. Max upload size allowed is :size.',
@@ -162,6 +209,13 @@ return [
     'unaccepted_image_type'  => 'This image file was not readable. Accepted filetypes are jpg, webp, png, gif, and svg. The mimetype of this file is: :mimetype.',
     'import'         	    => 'Import',
     'import_this_file'      => 'Map fields and process this file',
+=======
+    'image_upload'         	=> 'Upload Image',
+    'filetypes_accepted_help'    => 'Accepted filetype is :types. Max upload size allowed is :size.|Accepted filetypes are :types. Max upload size allowed is :size.',
+    'filetypes_size_help'   => 'Max upload size allowed is :size.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, and svg. Max upload size allowed is :size.',
+    'import'         	    => 'Import',
+>>>>>>> 64747d0fb (updates based on review)
     'importing'         	=> 'Importing',
     'importing_help'        => 'You can import assets, accessories, licenses, components, consumables, and users via CSV file. <br><br>The CSV should be comma-delimited and formatted with headers that match the ones in the <a href="https://snipe-it.readme.io/docs/importing" target="_new">sample CSVs in the documentation</a>.',
     'import-history'        => 'Import History',
@@ -170,8 +224,11 @@ return [
     'asset_maintenances'       => 'Asset Maintenances',
     'item'  				=> 'Item',
     'item_name'             => 'Item Name',
+<<<<<<< HEAD
     'import_file'  			=> 'import CSV file',
     'import_type'  			=> 'CSV import type',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'insufficient_permissions' => 'Insufficient permissions!',
     'kits'       			=> 'Predefined Kits',
     'language'				=> 'Language',
@@ -180,14 +237,21 @@ return [
     'last_name'             => 'Last Name',
     'license'				=> 'License',
     'license_report'        => 'License Report',
+<<<<<<< HEAD
     'licenses_available'	=> 'Licences available',
+=======
+    'licenses_available'	=> 'licenses available',
+>>>>>>> 64747d0fb (updates based on review)
     'licenses'				=> 'Licenses',
     'list_all'				=> 'List All',
     'loading'				=> 'Loading... please wait....',
     'lock_passwords'        => 'This field value will not be saved in a demo installation.',
     'feature_disabled'      => 'This feature has been disabled for the demo installation.',
     'location'              => 'Location',
+<<<<<<< HEAD
     'location_plural'        => 'Location|Locations',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'locations'				=> 'Locations',
     'logo_size'				=> 'Square logos look best with Logo + Text. Logo maximum display size is 50px high x 500px wide.  ',
     'logout'				=> 'Logout',
@@ -206,9 +270,12 @@ return [
     'new_password'          => 'New Password',
     'next'					=> 'Next',
     'next_audit_date'		=> 'Next Audit Date',
+<<<<<<< HEAD
     'next_audit_date_help'  => 'If you use auditing in your organisation, this is usually automatically calculated based on the asset&apos;s last audit date and audit frequency (in <code>Admin Settings &gt; Alerts</code>) and you can leave this blank. You can manually set this date here if you need to, but it must be later than the last audit date. ',
     'audit_images_help'     => 'You can find audit images in the asset\'s history tab.',
     'no_email'              => 'No email address associated with this user',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'last_audit'		    => 'Last Audit',
     'new'					=> 'new!',
     'no_depreciation'		=> 'No Depreciation',
@@ -216,7 +283,10 @@ return [
     'no'  					=> 'No',
     'notes'  				=> 'Notes',
     'order_number'          => 'Order Number',
+<<<<<<< HEAD
     'only_deleted'          => 'Only Deleted Assets',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'page_menu'				=> 'Showing _MENU_ items',
     'pagination_info'		=> 'Showing _START_ to _END_ of _TOTAL_ items',
     'pending'				=> 'Pending',
@@ -230,8 +300,11 @@ return [
     'qty'		            => 'QTY',
     'quantity'		        => 'Quantity',
     'quantity_minimum'      => 'You have :count items below or almost below minimum quantity levels',
+<<<<<<< HEAD
     'quickscan_checkin'  	=> 'Quick Scan Checkin',
     'quickscan_checkin_status'  	=> 'Checkin Status',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'ready_to_deploy'		=> 'Ready to Deploy',
     'recent_activity'		=> 'Recent Activity',
     'remaining'             => 'Remaining',
@@ -240,21 +313,31 @@ return [
     'restored'				=> 'restored',
     'restore'				=> 'Restore',
     'requestable_models'    => 'Requestable Models',
+<<<<<<< HEAD
     'requestable_items'     => 'Requestable Items',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'requested'				=> 'Requested',
     'requested_date'        => 'Requested Date',
     'requested_assets'      => 'Requested Assets',
     'requested_assets_menu' => 'Requested Assets',
     'request_canceled'      => 'Request Canceled',
+<<<<<<< HEAD
     'request_item'          => 'Request this item',
     'external_link_tooltip' => 'External link to',
     'save'  				=> 'Save',
     'select_var'            => 'Select :thing... ', // this will eventually replace all of our other selects
+=======
+    'save'  				=> 'Save',
+>>>>>>> 64747d0fb (updates based on review)
     'select'				=> 'Select',
     'select_all'            => 'Select All',
     'search'				=> 'Search',
     'select_category'       => 'Select a Category',
+<<<<<<< HEAD
     'select_datasource' => 'Select a Datasource',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'select_department'     => 'Select a Department',
     'select_depreciation'	=> 'Select a Depreciation Type',
     'select_location'		=> 'Select a Location',
@@ -271,15 +354,22 @@ return [
     'show_current'  		=> 'Show Current',
     'sign_in'				=> 'Sign in',
     'signature'             => 'Signature',
+<<<<<<< HEAD
     'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Skin',
     'webhook_msg_note'        => 'A notification will be sent via webhook',
     'webhook_test_msg'        => 'Oh hello! Looks like your :app integration with Snipe-IT is working!',
+=======
+    'skin'       			=> 'Skin',
+    'slack_msg_note'        => 'A slack message will be sent',
+    'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',
+>>>>>>> 64747d0fb (updates based on review)
     'some_features_disabled' => 'DEMO MODE: Some features are disabled for this installation.',
     'site_name'				=> 'Site Name',
     'state'  				=> 'State',
     'status_labels'			=> 'Status Labels',
     'status'    			=> 'Status',
+<<<<<<< HEAD
     'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Suppliers',
@@ -288,6 +378,14 @@ return [
     'delete_what'           => 'Delete :item',
     'submit'				=> 'Submit',
     'target'                => 'Target',
+=======
+    'supplier'              => 'Supplier',
+    'suppliers'  			=> 'Suppliers',
+    'sure_to_delete'    => 'Are you sure you wish to delete',
+    'submit'				=> 'Submit',
+    'target'                => 'Target',
+    'toggle_navigation'     => 'Toogle Navigation',
+>>>>>>> 64747d0fb (updates based on review)
     'time_and_date_display' => 'Time and Date Display',
     'total_assets'			=> 'total assets',
     'total_licenses'		=> 'total licenses',
@@ -297,15 +395,21 @@ return [
     'undeployable'			=> 'Un-deployable',
     'unknown_admin'			=> 'Unknown Admin',
     'username_format'		=> 'Username Format',
+<<<<<<< HEAD
     'username'              => 'Username',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'update'                => 'Update',
     'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf and rar. Max upload size allowed is :size.',
     'uploaded'              => 'Uploaded',
     'user'					=> 'User',
     'accepted'			    => 'accepted',
     'declined'			    => 'declined',
+<<<<<<< HEAD
     'declined_note'         => 'Declined Notes',
     'unassigned'            => 'Unassigned',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'unaccepted_asset_report' => 'Unaccepted Assets',
     'users'                 => 'Users',
     'viewall'				=> 'View All',
@@ -315,6 +419,7 @@ return [
     'welcome'				=> 'Welcome, :name',
     'years'					=> 'years',
     'yes' 					=> 'Yes',
+<<<<<<< HEAD
     'zip'  					=> 'Postal Code',
     'noimage'				=> 'No image uploaded or image not found.',
     'file_does_not_exist'   => 'The requested file does not exist on the server.',
@@ -327,6 +432,13 @@ return [
     'checkin_due'           => 'Due for Checkin',
     'checkin_overdue'       => 'Overdue for Checkin',
     'checkin_due_days'      => 'Assets Due for Checkin Within :days Day|Assets Due for Checkin Within :days Days',
+=======
+    'zip'  					=> 'Zip',
+    'noimage'				=> 'No image uploaded or image not found.',
+    'token_expired'         => 'Your form session has expired. Please try again.',
+    'login_enabled'         => 'Login Enabled',
+    'audit_due'             => 'Due for Audit',
+>>>>>>> 64747d0fb (updates based on review)
     'audit_overdue'         => 'Overdue for Audit',
     'accept'                => 'Accept :asset',
     'i_accept'              => 'I accept',
@@ -371,6 +483,7 @@ return [
     'export'                => 'Export',
     'ldap_sync'             => 'LDAP Sync',
     'ldap_user_sync'        => 'LDAP User Sync',
+<<<<<<< HEAD
     'synchronize'           => 'Synchronise',
     'sync_results'          => 'Synchronisation Results',
     'license_serial'        => 'Serial/Product Key',
@@ -379,6 +492,15 @@ return [
     'dashboard_info'        => 'This is your dashboard. There are many like it, but this one is yours.',
     '60_percent_warning'    => '60% Complete (warning)',
     'dashboard_empty'       => 'It looks like you have not added anything yet, so we do not have anything awesome to display. Get started by adding some assets, accessories, consumables, or licences now!',
+=======
+    'synchronize'           => 'Synchronize',
+    'sync_results'          => 'Synchronization Results',
+    'license_serial'        => 'Serial/Product Key',
+    'invalid_category'      => 'Invalid category',
+    'dashboard_info'        => 'This is your dashboard. There are many like it, but this one is yours.',
+    '60_percent_warning'    => '60% Complete (warning)',
+    'dashboard_empty'       => 'It looks like you haven not added anything yet, so we do not have anything awesome to display. Get started by adding some assets, accessories, consumables, or licenses now!',
+>>>>>>> 64747d0fb (updates based on review)
     'new_asset'             => 'New Asset',
     'new_license'           => 'New License',
     'new_accessory'         => 'New Accessory',
@@ -390,6 +512,7 @@ return [
     'consumables_count'     => 'Consumables Count',
     'components_count'      => 'Components Count',
     'licenses_count'        => 'Licenses Count',
+<<<<<<< HEAD
     'notification_error'    => 'Error',
     'notification_error_hint' => 'Please check the form below for errors',
     'notification_bulk_error_hint' => 'The following fields had validation errors and were not edited:',
@@ -399,12 +522,23 @@ return [
     'asset_information'     => 'Asset Information',
     'model_name'            => 'Model Name',
     'asset_name'            => 'Asset Name',
+=======
+    'notification_error'    => 'Error:',
+    'notification_error_hint' => 'Please check the form below for errors',
+    'notification_success'  => 'Success:',
+    'notification_warning'   => 'Warning:',
+    'notification_info'      => 'Info:',
+    'asset_information'     => 'Asset Information',
+    'model_name'            => 'Model Name:',
+    'asset_name'            => 'Asset Name:',
+>>>>>>> 64747d0fb (updates based on review)
     'consumable_information' => 'Consumable Information:',
     'consumable_name'       => 'Consumable Name:',
     'accessory_information' => 'Accessory Information:',
     'accessory_name'       => 'Accessory Name:',
     'clone_item'            => 'Clone Item',
     'checkout_tooltip' => 'Check this item out',
+<<<<<<< HEAD
     'checkin_tooltip' => 'Check this item in so that it is available for re-issue, re-imaging, etc',
     'checkout_user_tooltip' => 'Check this item out to a user',
     'checkin_to_diff_location' => 'You can choose to check this asset in to a location other than this asset\'s default location of :default_location if one is set',
@@ -559,6 +693,10 @@ return [
     'map_fields'=> 'Map :item_type Field',
     'remaining_var' => ':count Remaining',
 
+=======
+    'checkin_tooltip' => 'Check this item in',
+    'checkout_user_tooltip' => 'Check this item out to a user',
+>>>>>>> 64747d0fb (updates based on review)
     'replenish_history'     => 'Item Replenish History',
     'replenish'             => 'Replenish Stock',
     'checkout_history'      => 'Item Chekcout History',

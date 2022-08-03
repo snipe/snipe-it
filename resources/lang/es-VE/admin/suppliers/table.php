@@ -19,8 +19,15 @@ return array(
     'state'                 => 'Estado',
     'suppliers'             => 'Proveedores',
     'update'                => 'Actualizar Proveedor',
+<<<<<<< HEAD
     'view'                  => 'Ver Proveedor',
     'view_assets_for'       => 'Ver activos para',
     'zip'                   => 'Código postal',
+=======
+    'url'                   => 'URL',
+    'view'                  => 'Ver Proveedor',
+    'view_assets_for'       => 'Ver Activos para',
+    'zip'                   => 'Código Postal',
+>>>>>>> 64747d0fb (updates based on review)
 
 );

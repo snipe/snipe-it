@@ -13,7 +13,7 @@ class CreateConsumablesStock extends Migration
      */
     public function up()
     {
-        Schema::create('consumables_stock', function (Blueprint $table) {
+        Schema::create('consumables_replenishments', function (Blueprint $table) {
             $table->increments('id');            
             $table->integer('user_id');                        
             $table->integer('consumable_id')->nullable()->default(null);
@@ -33,6 +33,6 @@ class CreateConsumablesStock extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('consumables_stock');
+        Schema::dropIfExists('consumables_replenishments');
     }
 }

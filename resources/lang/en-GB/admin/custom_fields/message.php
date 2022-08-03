@@ -5,7 +5,10 @@ return array(
     'field' => array(
         'invalid'   => 'That field does not exist.',
         'already_added'   => 'Field already added',
+<<<<<<< HEAD
         'none_selected'   => 'No field selected',
+=======
+>>>>>>> 64747d0fb (updates based on review)
 
         'create' => array(
             'error'   => 'Field was not created, please try again.',
@@ -50,12 +53,15 @@ return array(
 
     ),
 
+<<<<<<< HEAD
     'fieldset_default_value' => array(
 
         'error' => 'Error validating default fieldset values.',
 
     ),
 
+=======
+>>>>>>> 64747d0fb (updates based on review)
 
 
 

@@ -10,5 +10,9 @@
         'asset_maintenance_time' => 'Waktu Maintenance aset (dalam hari)',
         'notes'                  => 'Catatan',
         'update'                 => 'Update Maintenance Aset',
+<<<<<<< HEAD
         'create'                 => 'Buat Maintenance Aset'
+=======
+        'create'                 => 'Erstellen'
+>>>>>>> 64747d0fb (updates based on review)
     ];

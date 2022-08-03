@@ -14,8 +14,17 @@ return array(
     */
 
     "password" => "Passwords must be six characters and match the confirmation.",
+<<<<<<< HEAD
     "user"     => "Username or email address is incorrect",
     "token"    => 'This password reset token is invalid, expired, or does not match the username provided.',
     'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
+=======
+
+    "user"     => "Username or email address is incorrect",
+
+    "token"    => "This password reset token is invalid.",
+
+    "sent" => "If a matching email address was found, a password reminder has been sent!",
+>>>>>>> 64747d0fb (updates based on review)
 
 );

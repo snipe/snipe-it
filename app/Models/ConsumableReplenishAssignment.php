@@ -8,7 +8,7 @@ class ConsumableReplenishAssignment extends Model
 {
     use CompanyableTrait;
 
-    protected $table = 'consumables_stock';
+    protected $table = 'consumables_replenishments';
 
     public function consumable()
     {

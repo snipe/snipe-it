@@ -10,7 +10,11 @@ return array(
     'email'      			=> 'Email',
     'employee_num'      	=> 'Employee No.',
     'first_name' 			=> 'First Name',
+<<<<<<< HEAD
     'groupnotes'			=> 'Select a group to assign to the user. Remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
+=======
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned.',
+>>>>>>> 64747d0fb (updates based on review)
     'id'         			=> 'Id',
     'inherit'  				=> 'Inherit',
     'job' 					=> 'Job Title',
@@ -20,9 +24,13 @@ return array(
     'lock_passwords'		=> 'Login details cannot be changed on this installation.',
     'manager' 				=> 'Manager',
     'managed_locations'     => 'Managed Locations',
+<<<<<<< HEAD
     'managed_users'         => 'Managed Users',
     'name' 					=> 'Name',
     'nogroup'               => 'No groups have been created yet. To add one, visit: ',
+=======
+    'name' 					=> 'Name',
+>>>>>>> 64747d0fb (updates based on review)
     'notes'                 => 'Notes',
     'password_confirm' 		=> 'Confirm Password',
     'password' 				=> 'Password',
@@ -31,7 +39,10 @@ return array(
     'show_deleted'          => 'Show Deleted Users',
     'title' 				=> 'Title',
 	'to_restore_them'		=> 'to restore them.',
+<<<<<<< HEAD
     'total_assets_cost'     => "Total Assets Cost",
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'updateuser' 			=> 'Update User',
     'username' 				=> 'Username',
 	'user_deleted_text' 	=> 'This user has been marked as deleted.',

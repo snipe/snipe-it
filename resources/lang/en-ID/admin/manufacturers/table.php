@@ -10,7 +10,12 @@ return array(
     'support_email'   		=> 'Email pendukung',
     'support_phone'   		=> 'Telepon pendukung',
     'support_url'   		=> 'URL pendukung',
+<<<<<<< HEAD
     'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Perbarui produsen',
+=======
+    'update'				=> 'Perbarui produsen',
+    'url'   				=> 'URL',
+>>>>>>> 64747d0fb (updates based on review)
 
 );

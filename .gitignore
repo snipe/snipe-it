@@ -67,4 +67,8 @@ _ide_helper_models.php
 /.phplint-cache
 storage/ldap_client_tls.cert
 storage/ldap_client_tls.key
+<<<<<<< HEAD
 /storage/framework/testing
+=======
+
+>>>>>>> 64747d0fb (updates based on review)

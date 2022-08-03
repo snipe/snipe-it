@@ -19,6 +19,10 @@ return array(
     'state'                 => 'State',
     'suppliers'             => 'Suppliers',
     'update'                => 'Update Supplier',
+<<<<<<< HEAD
+=======
+    'url'                   => 'URL',
+>>>>>>> 64747d0fb (updates based on review)
     'view'                  => 'View Supplier',
     'view_assets_for'       => 'View Assets for',
     'zip'                   => 'Postal Code',

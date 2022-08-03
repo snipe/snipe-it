@@ -13,8 +13,12 @@ return array(
 
     'update' => array(
         'error'   => 'Category was not updated, please try again',
+<<<<<<< HEAD
         'success' => 'Category updated successfully.',
         'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
+=======
+        'success' => 'Category updated successfully.'
+>>>>>>> 64747d0fb (updates based on review)
     ),
 
     'delete' => array(

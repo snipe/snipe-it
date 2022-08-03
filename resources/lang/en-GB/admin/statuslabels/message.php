@@ -3,7 +3,10 @@
 return [
 
     'does_not_exist' => 'Status Label does not exist.',
+<<<<<<< HEAD
     'deleted_label' => 'Deleted Status Label',
+=======
+>>>>>>> 64747d0fb (updates based on review)
     'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
 
     'create' => [
