@@ -371,7 +371,7 @@ class DepreciationReportPresenter extends Presenter
      * Date the warantee expires.
      * @return false|string
      */
-    public function warrantee_expires()
+    public function warranty_expires()
     {
         if (($this->purchase_date) && ($this->warranty_months)) {
             $date = date_create($this->purchase_date);
