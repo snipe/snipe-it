@@ -2662,8 +2662,17 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/7991086?v=4",
       "profile": "https://github.com/reederda",
       "contributions": [
-        "translations",
         "translation",
+        "translation",
+        "code"
+      ]
+    },
+    {
+      "login": "vickyjaura183",
+      "name": "vickyjaura183",
+      "avatar_url": "https://avatars.githubusercontent.com/u/109422491?v=4",
+      "profile": "https://github.com/vickyjaura183",
+      "contributions": [
         "code"
       ]
     }
