@@ -590,7 +590,6 @@ class ReportsController extends Controller
             }
 
             if ($request->filled('by_rtd_location_id')) {
-                \Log::debug('RTD location should match: '.$request->input('by_rtd_location_id'));
                 $assets->where('assets.rtd_location_id', $request->input('by_rtd_location_id'));
             }
 
@@ -611,7 +610,6 @@ class ReportsController extends Controller
             }
 
             if ($request->filled('by_dept_id')) {
-                \Log::debug('Only users in dept '.$request->input('by_dept_id'));
                 $assets->CheckedOutToTargetInDepartment($request->input('by_dept_id'));
             }
 
