@@ -100,6 +100,7 @@ return [
     'ldap_country'              => 'LDAP Country',
     'ldap_pword'                => 'LDAP Bind Password',
     'ldap_basedn'               => 'Base Bind DN',
+    'ldap_append_basedn_to_username' => 'Append "," and Base DN to username',
     'ldap_filter'               => 'LDAP Filter',
     'ldap_pw_sync'              => 'LDAP Password Sync',
     'ldap_pw_sync_help'         => 'Uncheck this box if you do not wish to keep LDAP passwords synced with local passwords. Disabling this means that your users may not be able to login if your LDAP server is unreachable for some reason.',
