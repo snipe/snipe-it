@@ -789,7 +789,7 @@ class ReportsController extends Controller
 
                     if ($request->filled('warranty')) {
                         $row[] = ($asset->warranty_months) ? $asset->warranty_months : '';
-                        $row[] = $asset->present()->warrantee_expires();
+                        $row[] = $asset->present()->warranty_expires();
                     }
 
                     if ($request->filled('depreciation')) {
