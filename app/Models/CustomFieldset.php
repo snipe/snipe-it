@@ -87,7 +87,7 @@ class CustomFieldset extends Model
             }
 
             if ($field->is_unique == '1') {
-                    $rule[] = 'unique';
+                    $rule[] = 'unique_undeleted';
             }
 
             array_push($rule, $field->attributes['format']);
