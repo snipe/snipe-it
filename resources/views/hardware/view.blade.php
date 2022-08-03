@@ -574,7 +574,7 @@
 
 
                                     @if ($asset->warranty_months)
-                                        <div class="row{!! $asset->present()->warrantee_expires() < date("Y-m-d") ? ' warning' : '' !!}">
+                                        <div class="row{!! $asset->present()->warranty_expires() < date("Y-m-d") ? ' warning' : '' !!}">
                                             <div class="col-md-2">
                                                 <strong>
                                                     {{ trans('admin/hardware/form.warranty') }}
@@ -584,10 +584,24 @@
                                                 {{ $asset->warranty_months }}
                                                 {{ trans('admin/hardware/form.months') }}
 
-                                                ({{ trans('admin/hardware/form.expires') }}
-                                                {{ $asset->present()->warrantee_expires() }})
+
                                             </div>
                                         </div>
+
+                                            <div class="row{!! $asset->present()->warranty_expires() < date("Y-m-d") ? ' warning' : '' !!}">
+                                                <div class="col-md-2">
+                                                    <strong>
+                                                        {{ trans('admin/hardware/form.warranty_expires') }}
+                                                    </strong>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    {{ Helper::getFormattedDateObject($asset->present()->warranty_expires(), 'date', false) }}
+                                                    -
+                                                    {{ Carbon::parse($asset->present()->warranty_expires())->diffForHumans() }}
+
+                                                </div>
+                                            </div>
+
                                     @endif
 
                                     @if (($asset->model) && ($asset->depreciation))
@@ -600,8 +614,7 @@
                                             <div class="col-md-6">
                                                 {{ $asset->depreciation->name }}
                                                 ({{ $asset->depreciation->months }}
-                                                {{ trans('admin/hardware/form.months') }}
-                                                )
+                                                {{ trans('admin/hardware/form.months') }})
                                             </div>
                                         </div>
                                         <div class="row">
@@ -611,13 +624,10 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                @if ($asset->time_until_depreciated()->y > 0)
-                                                    {{ $asset->time_until_depreciated()->y }}
-                                                    {{ trans('admin/hardware/form.years') }},
-                                                @endif
-                                                {{ $asset->time_until_depreciated()->m }}
-                                                {{ trans('admin/hardware/form.months') }}
-                                                ({{ $asset->depreciated_date()->format('Y-m-d') }})
+                                                {{ Helper::getFormattedDateObject($asset->depreciated_date()->format('Y-m-d'), 'date', false) }}
+                                                -
+                                                {{ Carbon::parse($asset->depreciated_date())->diffForHumans() }}
+
                                             </div>
                                         </div>
                                     @endif
@@ -644,20 +654,9 @@
                                             </div>
                                             <div class="col-md-6">
                                                 {{ Helper::getFormattedDateObject($asset->present()->eol_date(), 'date', false) }}
-
-
-                                                @if ($asset->present()->months_until_eol())
-                                                    -
-                                                    @if ($asset->present()->months_until_eol()->y > 0)
-                                                        {{ $asset->present()->months_until_eol()->y }}
-                                                        {{ trans('general.years') }},
-                                                    @endif
-
-                                                    {{ $asset->present()->months_until_eol()->m }}
-                                                    {{ trans('general.months') }}
-
-                                                @endif
-
+                                                -
+                                                {{ Carbon::parse($asset->present()->eol_date())->diffForHumans() }}
+                                                
                                             </div>
                                         </div>
                                     @endif
