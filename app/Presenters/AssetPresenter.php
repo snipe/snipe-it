@@ -498,7 +498,7 @@ class AssetPresenter extends Presenter
     }
 
     /**
-     * Date the warantee expires.
+     * Date the warranty expires.
      * @return false|string
      */
     public function warranty_expires()
