@@ -43,7 +43,9 @@ class Actionlog extends SnipeModel
      */
     protected $searchableRelations = [
         'company' => ['name'],
-        'user' => ['first_name','last_name','username'],
+        'admin' => ['first_name','last_name','username', 'email'],
+        'user'  => ['first_name','last_name','username', 'email'],
+        'assets'  => ['asset_tag','name'],
     ];
 
     /**
@@ -93,6 +95,19 @@ class Actionlog extends SnipeModel
     public function company()
     {
         return $this->hasMany(\App\Models\Company::class, 'id', 'company_id');
+    }
+
+
+    /**
+     * Establishes the actionlog -> asset relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function assets()
+    {
+        return $this->hasMany(\App\Models\Asset::class, 'id', 'item_id');
     }
 
     /**
@@ -155,6 +170,19 @@ class Actionlog extends SnipeModel
     }
 
     /**
+     * Establishes the actionlog -> admin user relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function admin()
+    {
+        return $this->belongsTo(User::class, 'user_id')
+                    ->withTrashed();
+    }
+
+    /**
      * Establishes the actionlog -> user relationship
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -163,8 +191,8 @@ class Actionlog extends SnipeModel
      */
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id')
-                    ->withTrashed();
+        return $this->belongsTo(User::class, 'target_id')
+            ->withTrashed();
     }
 
     /**
