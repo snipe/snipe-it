@@ -574,7 +574,7 @@
 
 
                                     @if ($asset->warranty_months)
-                                        <div class="row{!! $asset->present()->warranty_expires() < date("Y-m-d") ? ' warning' : '' !!}">
+                                        <div class="row">
                                             <div class="col-md-2">
                                                 <strong>
                                                     {{ trans('admin/hardware/form.warranty') }}
@@ -588,13 +588,15 @@
                                             </div>
                                         </div>
 
-                                            <div class="row{!! $asset->present()->warranty_expires() < date("Y-m-d") ? ' warning' : '' !!}">
+                                            <div class="row">
                                                 <div class="col-md-2">
                                                     <strong>
                                                         {{ trans('admin/hardware/form.warranty_expires') }}
+                                                        {!! $asset->present()->warranty_expires() < date("Y-m-d") ? '<i class="fas fa-exclamation-triangle text-orange" aria-hidden="true"></i>' : '' !!}
                                                     </strong>
                                                 </div>
                                                 <div class="col-md-6">
+
                                                     {{ Helper::getFormattedDateObject($asset->present()->warranty_expires(), 'date', false) }}
                                                     -
                                                     {{ Carbon::parse($asset->present()->warranty_expires())->diffForHumans() }}
