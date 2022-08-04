@@ -668,9 +668,7 @@ class Helper
         }
 
         foreach ($components as $component) {
-            $assets_count = \DB::table('components_assets')->where('component_id', $component->id)->sum('assigned_qty');
-
-            $avail = $component->qty - $assets_count;
+            $avail = $component->numRemaining();
             if ($avail < ($component->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
                 if ($component->qty > 0) {
                     $percent = number_format((($avail / $component->qty) * 100), 0);
