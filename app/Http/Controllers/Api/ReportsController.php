@@ -20,7 +20,7 @@ class ReportsController extends Controller
     {
         $this->authorize('reports.view');
 
-        $actionlogs = Actionlog::with('item', 'user', 'target', 'location');
+        $actionlogs = Actionlog::with('item', 'user', 'admin', 'target', 'location');
 
         if ($request->filled('search')) {
             $actionlogs = $actionlogs->TextSearch(e($request->input('search')));
