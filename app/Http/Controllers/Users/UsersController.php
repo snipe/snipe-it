@@ -414,7 +414,16 @@ class UsersController extends Controller
 
         $this->authorize('view', $user);
 
-        return view('users/view', compact('user', 'userlog'))
+        $components = $user->assets
+            ->flatMap(function ($asset) {
+                return $asset->components
+                    ->each(function ($component) use ($asset) {
+                        $component->setAttribute('asset_tag', $asset->asset_tag)
+                            ->setAttribute('asset_model', $asset->model);
+                    });
+            });
+
+        return view('users/view', compact('user', 'userlog', 'components'))
             ->with('settings', Setting::getSettings());
     }
 

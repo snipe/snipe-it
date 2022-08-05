@@ -72,11 +72,32 @@ class ComponentsTransformer
                 'name' =>  e($asset->model->present()->name).' '.e($asset->present()->name),
                 'qty' => $asset->pivot->assigned_qty,
                 'type' => 'asset',
+                'assigned' => $this->transformAssignedTo($asset),
                 'created_at' => Helper::getFormattedDateObject($asset->pivot->created_at, 'datetime'),
                 'available_actions' => ['checkin' => true],
             ];
         }
 
         return (new DatatablesTransformer)->transformDatatables($array, $total);
+    }
+
+    public function transformAssignedTo($asset)
+    {
+        if ($asset->checkedOutToUser()) {
+            return $asset->assigned ? [
+                'id' => (int) $asset->assigned->id,
+                'username' => e($asset->assigned->username),
+                'name' => e($asset->assigned->getFullNameAttribute()),
+                'first_name'=> e($asset->assigned->first_name),
+                'last_name'=> ($asset->assigned->last_name) ? e($asset->assigned->last_name) : null,
+                'employee_number' =>  ($asset->assigned->employee_num) ? e($asset->assigned->employee_num) : null,
+                'type' => 'user'
+            ] : null;
+        }
+        return $asset->assigned ? [
+            'id' => $asset->assigned->id,
+            'name' => $asset->assigned->display_name,
+            'type' => $asset->assignedType()
+        ] : null;
     }
 }

@@ -16,7 +16,7 @@
         {{ trans('button.actions') }}
           <span class="caret"></span>
       </button>
-      
+
       <ul class="dropdown-menu pull-right" role="menu22">
         @if ($component->assigned_to != '')
           @can('checkin', $component)
@@ -83,6 +83,9 @@
                 <tr>
                   <th data-searchable="false" data-sortable="false" data-field="name" data-formatter="hardwareLinkFormatter">
                     {{ trans('general.asset') }}
+                  </th>
+                  <th data-searchable="false" data-sortable="false" data-field="assigned.name">
+                    {{ trans('general.checked_out_to') }}
                   </th>
                   <th data-searchable="false" data-sortable="false" data-field="qty">
                     {{ trans('general.qty') }}

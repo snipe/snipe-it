@@ -200,7 +200,7 @@ class ComponentsController extends Controller
         $this->authorize('view', \App\Models\Asset::class);
         
         $component = Component::findOrFail($id);
-        $assets = $component->assets();
+        $assets = $component->assets()->with('assignedTo');
 
         $offset = request('offset', 0);
         $limit = $request->input('limit', 50);
