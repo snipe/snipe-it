@@ -623,7 +623,7 @@ class Helper
     {
         $consumables = Consumable::withCount('consumableAssignments as consumable_assignments_count')->whereNotNull('min_amt')->get();
         $accessories = Accessory::withCount('users as users_count')->whereNotNull('min_amt')->get();
-        $components = Component::withCount('assets as assets_count')->whereNotNull('min_amt')->get();
+        $components = Component::whereNotNull('min_amt')->get();
 
         $avail_consumables = 0;
         $items_array = [];
@@ -668,7 +668,7 @@ class Helper
         }
 
         foreach ($components as $component) {
-            $avail = $component->qty - $component->assets_count;
+            $avail = $component->numRemaining();
             if ($avail < ($component->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
                 if ($component->qty > 0) {
                     $percent = number_format((($avail / $component->qty) * 100), 0);
