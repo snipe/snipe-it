@@ -91,13 +91,13 @@ return [
     'url'                  => ':attribute formato incorrecto.',
     'unique_undeleted'     => 'El :atrribute debe ser único.',
     'non_circular'         => ':attribute no debe crear una referencia circular.',
-    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
-    'letters'              => 'Password must contain at least one letter.',
-    'numbers'              => 'Password must contain at least one number.',
-    'case_diff'            => 'Password must use mixed case.',
-    'symbols'              => 'Password must contain symbols.',
+    'disallow_same_pwd_as_user_fields' => 'La contraseña no puede ser la misma que el usuario.',
+    'letters'              => 'La contraseña debe contener al menos una letra.',
+    'numbers'              => 'La contraseña debe contener al menos un número.',
+    'case_diff'            => 'La contraseña debe usar mayúsculas y minúsculas.',
+    'symbols'              => 'La contraseña debe contener símbolos.',
     'gte'                  => [
-        'numeric'          => 'Value cannot be negative'
+        'numeric'          => 'El valor no puede ser negativo'
     ],
 
 

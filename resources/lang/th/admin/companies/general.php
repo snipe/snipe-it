@@ -2,6 +2,6 @@
 
 return [
     'select_company' => 'เลือก บริษัท',
-    'about_companies' => 'About Companies',
-    'about_companies_description' => '        You can use companies as a simple informative field, or you can use them to restrict asset visibility and availability to users with a specific company by enabling Full Company Support in your Admin Settings.',
+    'about_companies' => 'เกี่ยวกับ บริษัท',
+    'about_companies_description' => '        คุณสามารถใช้บริษัทเป็นฟิลด์ข้อมูลอย่างง่าย หรือคุณสามารถใช้เพื่อจำกัดการมองเห็นสินทรัพย์และความพร้อมใช้งานสำหรับผู้ใช้กับบริษัทใดบริษัทหนึ่งโดยเปิดใช้งานการสนับสนุนบริษัทเต็มรูปแบบในการตั้งค่าผู้ดูแลระบบของคุณ',
 ];

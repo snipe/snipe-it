@@ -6,7 +6,7 @@ return [
     'archived'  				=> 'Arhiveeritud',
     'asset'  					=> 'Vahend',
     'bulk_checkout'             => 'Vara kasutusele võtt',
-    'bulk_checkin'              => 'Checkin Assets',
+    'bulk_checkin'              => 'Vahendite tagastus',
     'checkin'  					=> 'Checkin Asset',
     'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Klooni vahend',
@@ -14,15 +14,15 @@ return [
     'deleted'  					=> 'See vara on kustutatud.',
     'edit'  					=> 'Muuda vahendit',
     'model_deleted'  			=> 'See vara mudel on kustutatud. Enne vara taastamist peab taastama mudeli.',
-    'requestable'               => 'Taodeldav',
+    'requestable'               => 'Taotletav',
     'requested'				    => 'Taotletud',
-    'not_requestable'           => 'Not Requestable',
+    'not_requestable'           => 'Mittetaotletav',
     'requestable_status_warning' => 'Do not change  requestable status',
     'restore'  					=> 'Taasta vara',
     'pending'  					=> 'Ootel',
-    'undeployable'  			=> 'Unustamatu',
+    'undeployable'  			=> 'Kasutuselevõtmatu',
     'view'  					=> 'Vaata vahendit',
-    'csv_error' => 'You have an error in your CSV file:',
+    'csv_error' => 'Sul on viga CSV failis:',
     'import_text' => '
     <p>
     Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
@@ -37,8 +37,8 @@ return [
     'csv_import_match_first' => 'Try to match users by first name (jane) format',
     'csv_import_match_email' => 'Try to match users by email as username',
     'csv_import_match_username' => 'Try to match users by username',
-    'error_messages' => 'Error messages:',
-    'success_messages' => 'Success messages:',
-    'alert_details' => 'Please see below for details.',
+    'error_messages' => 'Tõrked:',
+    'success_messages' => 'Õnnestumised:',
+    'alert_details' => 'Palun vaata allolevaid üksikasju.',
     'custom_export' => 'Custom Export'
 ];

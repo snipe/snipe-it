@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Cảnh báo: </strong> Tài sản này hiện tại đang được đánh dấu là không cho phép cấp phát.
                         Nếu tình trạng này đã được thay đổi, xin vui lòng cập nhật tình trạng tài sản.',
     'does_not_exist' 	=> 'Tài sản không tồn tại.',
-    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
+    'does_not_exist_or_not_requestable' => 'Tài sản không tồn tại hoặc không cho phép đề xuất.',
     'assoc_users'	 	=> 'Tài sản này hiện tại đã được checkout đến một người dùng và không thể xóa. Đầu tiên xin vui lòng kiểm tra lại tài sản, và cố gắng thử lần nữa. ',
 
     'create' => [
@@ -17,7 +17,7 @@ return [
         'error'   			=> 'Tài sản chưa được cập nhật. Bạn hãy thử lại',
         'success' 			=> 'Tài sản được cập nhật thành công.',
         'nothing_updated'	=>  'Bạn đã không chọn trường nào vì thế đã không có gì được cập nhật.',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'no_assets_selected'  =>  'Không có tài sản nào được chọn, vì vậy không có gì cập nhật.',
     ],
 
     'restore' => [

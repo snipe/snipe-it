@@ -11,4 +11,6 @@
         'calibration'        => 'Калібрування',
         'software_support'   => 'Підтримка програмного забезпечення',
         'hardware_support'   => 'Підтримка апаратного забезпечення',
+        'configuration_change'   => 'Configuration Change',
+        'pat_test'           => 'PAT Test',
     ];

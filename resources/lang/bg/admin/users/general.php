@@ -34,7 +34,7 @@ return [
     'admin_permission_warning' => 'Само потребители с административни права може да дадат админ достъп.',
     'remove_group_memberships' => 'Премахни членовете на групата',
     'warning_deletion' => 'ВНИМАНИЕ:',
-    'warning_deletion_information' => 'Ще изтриете всичките :count потребител(и) посочени в списъка. Супер админ имената са оцветени в червено.',
+    'warning_deletion_information' => 'You are about to checkin ALL items from the :count user(s) listed below. Super admin names are highlighted in red.',
     'update_user_assets_status' => 'Update all assets for these users to this status',
     'checkin_user_properties' => 'Впиши всички асоцирани настройки към тези потребители',
     'remote_label'   => 'This is a remote user',

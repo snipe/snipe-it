@@ -37,7 +37,7 @@ return [
     'bulk_edit'             => 'Bulk Edit',
     'bulk_delete'           => 'Bulk Delete',
     'bulk_actions'          => 'Bulk Actions',
-    'bulk_checkin_delete'   => 'Bulk Checkin &amp; Delete',
+    'bulk_checkin_delete'   => 'Bulk Checkin Items from Users',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'Otkazati',
     'categories'			=> 'Kategorije',
@@ -101,6 +101,8 @@ return [
     'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'Ovo se koristi za generiranje e-adresa prilikom uvoza',
     'error'				    => 'Error',
+    'exclude_archived'      => 'Exclude Archived Assets',
+    'exclude_deleted'       => 'Exclude Deleted Assets',
     'example'				=> 'Example: ',
     'filastname_format'			=> 'Prvo početno prezime (jsmith@example.com)',
     'firstname_lastname_format'	=> 'Prezime prezime (jane.smith@example.com)',
@@ -131,6 +133,7 @@ return [
     'id'  					=> 'iskaznica',
     'image'                 => 'Slika',
     'image_delete'         	=> 'Izbriši sliku',
+    'include_deleted'       => 'Include Deleted Assets',
     'image_upload'         	=> 'Prenesite sliku',
     'filetypes_accepted_help'    => 'Accepted filetype is :types. Max upload size allowed is :size.|Accepted filetypes are :types. Max upload size allowed is :size.',
     'filetypes_size_help'   => 'Max upload size allowed is :size.',
@@ -184,6 +187,7 @@ return [
     'no'  					=> 'Ne',
     'notes'  				=> 'Bilješke',
     'order_number'          => 'Broj narudžbe',
+    'only_deleted'          => 'Only Deleted Assets',
     'page_menu'				=> 'Prikazuje se _MENU_ stavki',
     'pagination_info'		=> 'Prikazuje se _START_ do _END_ od _TOTAL_ stavki',
     'pending'				=> 'U tijeku',
@@ -364,5 +368,9 @@ return [
     'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
     'additional_files'           => 'Additional Files',
     'shitty_browser'        => 'No signature detected. If you are using an older browser, please use a more modern browser to complete your asset acceptance.',
+    'bulk_soft_delete'      =>'Also soft-delete these users. Their asset history will remain intact unless/until you purge deleted records in the Admin Settings.',
+    'bulk_checkin_delete_success' => 'Your selected users have been deleted and their items have been checked in.',
+    'bulk_checkin_success' => 'The items for the selected users have been checked in.',
+
 
 ];

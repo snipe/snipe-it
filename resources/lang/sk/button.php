@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'Akcie',
     'add'    	                => 'Pridať nové',
     'cancel'                    => 'Zrušiť',
-    'checkin_and_delete'  	    => 'Odobrať a odstrániť používateľa',
+    'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => 'Odstrániť',
     'edit'    	                => 'Upraviť',
     'restore' 	                => 'Obnoviť',

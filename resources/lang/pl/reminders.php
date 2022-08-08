@@ -15,7 +15,7 @@ return array(
 
     "password" => "Hasło musi mieć minimum 6 znaków i musi być potwierdzone.",
     "user"     => "Login lub e-mail jest niepoprawny",
-    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
-    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
+    "token"    => 'Token resetowania hasła jest nieprawidłowy lub wygasł, lub nie pasuje do podanej nazwy użytkownika.',
+    'sent'	   => 'Jeśli w systemie istnieje podany użytkownik z prawidłowym adresem e-mail, hasło odzyskiwania zostało wysłane na e-mail.',
 
 );

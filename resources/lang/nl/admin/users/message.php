@@ -14,6 +14,7 @@ return array(
     'ldap_not_configured'        => 'LDAP integratie is niet geconfigureerd voor deze installatie.',
     'password_resets_sent'      => 'De geselecteerde gebruikers die zijn geactiveerd en die een geldig e-mailadres hebben, hebben een wachtwoord reset link ontvangen.',
     'password_reset_sent'       => 'Een link om het wachtwoord te resetten is verstuurd naar :email!',
+    'user_has_no_email'         => 'This user does not have an email address in their profile.',
 
 
     'success' => array(

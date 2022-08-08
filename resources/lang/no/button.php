@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'Handlinger',
     'add'    	                => 'Opprett ny',
     'cancel'                    => 'Avbryt',
-    'checkin_and_delete'  	    => 'Sjekk inn & slett bruker',
+    'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => 'Slett',
     'edit'    	                => 'Rediger',
     'restore' 	                => 'Gjenopprett',

@@ -14,6 +14,7 @@ return array(
     'ldap_not_configured'        => 'Integrace LDAP nebyla pro tuto instalaci nakonfigurována.',
     'password_resets_sent'      => 'Vybraným uživatelům, kteří jsou aktivováni a mají platné e-mailové adresy, byl zaslán odkaz pro obnovení hesla.',
     'password_reset_sent'       => 'Odkaz pro obnovení hesla byl odeslán na :email!',
+    'user_has_no_email'         => 'This user does not have an email address in their profile.',
 
 
     'success' => array(

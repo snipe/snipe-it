@@ -2,7 +2,7 @@
 
 return [
     'send_password_link'	        => 'Saada parooli taastamise link',
-    'email_reset_password'			=> 'E-posti parool lähtesta',
+    'email_reset_password'			=> 'Saada parooli lähtestamise link',
     'reset_password'			    => 'Taasta parool',
     'saml_login'                    => 'Logi sisse SAML-i kaudu',
     'login'                         => 'Logi sisse',

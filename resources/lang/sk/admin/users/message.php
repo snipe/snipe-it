@@ -14,6 +14,7 @@ return array(
     'ldap_not_configured'        => 'LDAP prepojenie nebolo nastavené pre túto inštaláciu.',
     'password_resets_sent'      => 'Vybraní používatelia sú aktivovaný. Na ich adresu bola zaslaný okaz na resetovanie hesla.',
     'password_reset_sent'       => 'A password reset link has been sent to :email!',
+    'user_has_no_email'         => 'This user does not have an email address in their profile.',
 
 
     'success' => array(

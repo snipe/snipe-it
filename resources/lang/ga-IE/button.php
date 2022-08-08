@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'Gníomhartha',
     'add'    	                => 'Cuir Nua',
     'cancel'                    => 'Cealaigh',
-    'checkin_and_delete'  	    => 'Checkin & Scrios Úsáideoir',
+    'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => 'Scrios',
     'edit'    	                => 'Athraigh',
     'restore' 	                => 'Athchóirigh',

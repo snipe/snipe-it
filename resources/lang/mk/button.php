@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'Акции',
     'add'    	                => 'Додади ново',
     'cancel'                    => 'Откажи',
-    'checkin_and_delete'  	    => 'Раздолжи и избриши го корисникот',
+    'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => 'Избриши',
     'edit'    	                => 'Ажурирај',
     'restore' 	                => 'Врати',

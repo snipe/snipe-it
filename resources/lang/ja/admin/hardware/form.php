@@ -46,6 +46,6 @@ return [
     'asset_not_deployable' => 'その資産ステータスは配備可能ではありません。この資産はチェックアウトできません。',
     'asset_deployable' => 'その資産ステータスは配備可能です。この資産はチェックアウトできます。',
     'processing_spinner' => '処理中…',
-    'optional_infos'  => 'Optional Information',
-    'order_details'   => 'Order Related Information'
+    'optional_infos'  => 'オプション情報',
+    'order_details'   => 'オーダー関連情報'
 ];

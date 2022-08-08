@@ -41,7 +41,7 @@ return [
     'make_required' => 'Választható - kattintással kötelezővé tehető',
     'reorder' => 'Újrarendezés',
     'db_field' => 'Adatbázis mező',
-    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code>:db_column</code> but should be <code>:expected</code>.',
+    'db_convert_warning' => 'FIGYELMEZTETÉS. Ez a mező az egyéni mezők táblában <code>:db_column</code> néven szerepel, de <code>:expected</code>-nek kellene lennie.',
     'is_unique' => 'Ennek az értéknek minden eszköz esetében egyedinek kell lennie',
     'unique' => 'Egyedi',
 ];

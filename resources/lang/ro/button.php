@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'Actiuni',
     'add'    	                => 'Adauga',
     'cancel'                    => 'Anuleaza',
-    'checkin_and_delete'  	    => 'Verificați & Ștergeți Utilizatorul',
+    'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => 'Sterge',
     'edit'    	                => 'Editeaza',
     'restore' 	                => 'Restaureaza',

@@ -14,6 +14,7 @@ return array(
     'ldap_not_configured'        => 'Integracija LDAP za to namestitev ni bila konfigurirana.',
     'password_resets_sent'      => 'Izbranim aktiviranim uporabnikom z veljavnim e-poštnim računom je bila poslana povezava za ponastavitev gesla.',
     'password_reset_sent'       => 'Povezava za ponastavitev gesla je bila poslana na :email!',
+    'user_has_no_email'         => 'This user does not have an email address in their profile.',
 
 
     'success' => array(

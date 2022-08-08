@@ -14,6 +14,7 @@ return array(
     'ldap_not_configured'        => 'LDAP-integration er ikke konfigureret til denne installation.',
     'password_resets_sent'      => 'De valgte brugere, der er aktiveret og har en gyldig e-mail-adresser, har fået tilsendt et link til nulstilling af adgangskode.',
     'password_reset_sent'       => 'A password reset link has been sent to :email!',
+    'user_has_no_email'         => 'This user does not have an email address in their profile.',
 
 
     'success' => array(

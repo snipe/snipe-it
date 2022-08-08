@@ -2,9 +2,9 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Teenindus: </strong> See vara on märgitud kui praegu kasutatav. Kui see olek on muutunud, palun värskendage vara olekut.',
+    'undeployable' 		=> '<strong>Hoiatus: </strong> See vahend on märgitud kui kasutuselevõtmatu. Kui see olek on muutunud, palun värskendage vahendi olekut.',
     'does_not_exist' 	=> 'Vahend puudub.',
-    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
+    'does_not_exist_or_not_requestable' => 'Seda vahendit ei eksisteeri või see ei ole taotletav.',
     'assoc_users'	 	=> 'Seda vara kontrollitakse kasutajale praegu ja seda ei saa kustutada. Esmalt kontrollige varast ja proovige seejärel uuesti kustutada.',
 
     'create' => [
@@ -16,7 +16,7 @@ return [
         'error'   			=> 'Vara ei värskendatud, proovige uuesti',
         'success' 			=> 'Vara värskendati edukalt',
         'nothing_updated'	=>  'Pole ühtegi välju valitud, nii et midagi ei uuendatud.',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'no_assets_selected'  =>  'Ühtegi vahendit ei valitud, muudatusi ei tehtud.',
     ],
 
     'restore' => [

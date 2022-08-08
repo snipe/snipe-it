@@ -6,11 +6,11 @@ return [
     'asset_depreciations'  					=> 'Износ активов',
     'create'  					            => 'Создать амортизацию',
     'depreciation_name'  					=> 'Название амортизации',
-    'depreciation_min'                      => 'Floor Value of Depreciation',
+    'depreciation_min'                      => 'Минимальная стоимость амортизации',
     'number_of_months'  					=> 'Количество месяцев',
     'update'  					            => 'Обновить амортизацию',
     'depreciation_min'                      => 'Минимальное значение после амортизации',
-    'no_depreciations_warning'               => '<strong>Warning: </strong>
-                      You do not currently have any depreciations set up.
-                      Please set up at least one depreciation to view the depreciation report.',
+    'no_depreciations_warning'               => '<strong>Предупреждение: </strong>
+                      В настоящее время у вас нет настроенных амортизаций.
+                      Пожалуйста, установите хотя бы одну амортизацию для просмотра отчета об амортизации.',
 ];

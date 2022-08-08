@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'Műveletek',
     'add'    	                => 'Új hozzáadása',
     'cancel'                    => 'Vissza',
-    'checkin_and_delete'  	    => 'Bejelentkezés és Felhasználó törlése',
+    'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => 'Törlés',
     'edit'    	                => 'Szerkesztés',
     'restore' 	                => 'Visszaállítás',

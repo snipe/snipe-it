@@ -11,4 +11,6 @@
         'calibration'        => 'Hiệu chỉnh',
         'software_support'   => 'Hỗ trợ phần mềm',
         'hardware_support'   => 'Hỗ trợ phần cứng',
+        'configuration_change'   => 'Configuration Change',
+        'pat_test'           => 'PAT Test',
     ];

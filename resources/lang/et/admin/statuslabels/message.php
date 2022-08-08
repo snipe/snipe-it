@@ -22,8 +22,8 @@ return [
     ],
 
     'help' => [
-        'undeployable'   => 'Neid varasid ei saa kellelegi anda.',
-        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
+        'undeployable'   => 'Neid vahendeid ei saa kellelegi anda.',
+        'deployable'   => 'Neid vahendeid saab väljastada. Väljastamisel omastavad vastavad vahendid metastaatuse <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
         'archived'   => 'Neid varasid ei saa kontrollida ja need kuvatakse ainult arhiivitud vaates. See on kasulik, kui säilitada teavet varade kohta eelarve koostamiseks / ajalooliste eesmärkide saavutamiseks, kuid hoida neid igapäevase varade loendist välja.',
         'pending'   => 'Neid varasid ei saa veel kellelegi määrata, neid kasutatakse sageli esemete puhul, mis remonti vajavad, kuid eeldatavalt ringlusse.',
     ],

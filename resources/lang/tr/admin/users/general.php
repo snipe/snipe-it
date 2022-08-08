@@ -34,7 +34,7 @@ return [
     'admin_permission_warning' => 'Yalnızca yönetici haklarına veya daha fazlasına sahip kullanıcılar, bir kullanıcıya yönetici erişimi verebilir.',
     'remove_group_memberships' => 'Grup Üyeliklerini Kaldır',
     'warning_deletion' => 'UYARILAR:',
-    'warning_deletion_information' => 'Aşağıda listelenmiş :count sayıda kullanıcıyı silmek üzeresiniz. Süper yönetici isimleri kırmızı ile yazılmıştır.',
+    'warning_deletion_information' => 'You are about to checkin ALL items from the :count user(s) listed below. Super admin names are highlighted in red.',
     'update_user_assets_status' => 'Bu kullanıcılar için tüm varlıkları bu duruma güncelleyin',
     'checkin_user_properties' => 'Bu kullanıcılarla ilişkili tüm mülkleri kontrol edin',
     'remote_label'   => 'Bu uzak bir kullanıcı',

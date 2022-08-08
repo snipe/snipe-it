@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'செயல்கள்',
     'add'    	                => 'புதிதாக சேர்க்கவும்',
     'cancel'                    => 'ரத்து',
-    'checkin_and_delete'  	    => 'சரிபார்க்கவும் & நீக்கு பயனர்',
+    'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => 'அழி',
     'edit'    	                => 'தொகு',
     'restore' 	                => 'மீட்டமை',

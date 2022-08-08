@@ -34,7 +34,7 @@ return [
     'admin_permission_warning' => 'Endast användare med administratörsrättigheter eller högre kan ge administratörsbehörighet.',
     'remove_group_memberships' => 'Ta bort gruppmedlemskap',
     'warning_deletion' => 'VARNING:',
-    'warning_deletion_information' => 'Du håller på att ta bort :count användare som anges nedan. Super admin namn markeras med rött.',
+    'warning_deletion_information' => 'You are about to checkin ALL items from the :count user(s) listed below. Super admin names are highlighted in red.',
     'update_user_assets_status' => 'Update all assets for these users to this status',
     'checkin_user_properties' => 'Kolla in alla egenskaper som är associerade med dessa användare',
     'remote_label'   => 'This is a remote user',

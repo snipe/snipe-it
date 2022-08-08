@@ -11,4 +11,6 @@
         'calibration'        => 'Kalibrasi',
         'software_support'   => 'Sokongan Perisian',
         'hardware_support'   => 'Sokongan Perkakasan',
+        'configuration_change'   => 'Configuration Change',
+        'pat_test'           => 'PAT Test',
     ];

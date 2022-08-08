@@ -14,6 +14,7 @@ return array(
     'ldap_not_configured'        => 'L\'intégration LDAP n\'a pas été configuré pour cette installation .',
     'password_resets_sent'      => 'Les utilisateurs sélectionnés qui sont activés et ont une adresse e-mail valide ont reçu un lien de réinitialisation du mot de passe.',
     'password_reset_sent'       => 'Un lien de réinitialisation du mot de passe a été envoyé à :email!',
+    'user_has_no_email'         => 'This user does not have an email address in their profile.',
 
 
     'success' => array(

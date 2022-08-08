@@ -11,6 +11,6 @@ return [
     'allow' 	 			=> 'Caniatau',
     'deny' 	 				=> 'Gwrthod',
     'permission'            => 'Permission',
-    'grant'                 => 'Grant',
+    'grant'                 => 'Caniatau',
     'no_permissions'        => 'This group has no permissions.'
 ];

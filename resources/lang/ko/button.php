@@ -4,7 +4,7 @@ return [
     'actions' 	                => '기능',
     'add'    	                => '추가',
     'cancel'                    => '취소',
-    'checkin_and_delete'  	    => '반입 & 삭제 사용자',
+    'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => '삭제',
     'edit'    	                => '편집',
     'restore' 	                => '복원',

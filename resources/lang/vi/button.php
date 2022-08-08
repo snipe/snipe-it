@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'Thao tác',
     'add'    	                => 'Thêm mới',
     'cancel'                    => 'Hủy',
-    'checkin_and_delete'  	    => 'Kiểm tra & Xóa Người dùng',
+    'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => 'Xóa',
     'edit'    	                => 'Sửa',
     'restore' 	                => 'Khôi phục',

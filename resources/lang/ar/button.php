@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'الإجراءات',
     'add'    	                => 'إضافة جديد',
     'cancel'                    => 'إلغاء',
-    'checkin_and_delete'  	    => 'فحص وحذف المستخدم',
+    'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => 'حذف',
     'edit'    	                => 'تعديل',
     'restore' 	                => 'إستعادة',

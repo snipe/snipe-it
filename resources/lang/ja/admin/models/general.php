@@ -9,7 +9,7 @@ return array(
     'bulk_delete_warn'          => ':model_count 件の資産モデルを削除しようとしています。',
     'restore'                   => '型番を復元',
     'requestable'               => 'ユーザーはこのモデルをリクエスト出来ます',
-	'show_mac_address'			      => 'この型番の資産にMACアドレスフィールドを表示',
+	'show_mac_address'			      => 'このモデルの資産にMACアドレスフィールドを表示する',
     'view_deleted'              => '削除したものを表示',
     'view_models'               => '型番を表示',
     'fieldset'                  => 'フィールドセット',

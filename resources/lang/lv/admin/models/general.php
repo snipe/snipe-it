@@ -3,7 +3,7 @@
 return array(
     'about_models_title'     => 'Par īpašuma modeļiem',
     'about_models_text'           => 'Aktīvu modeļi ir veids, kā grupēt identiskus aktīvus. "MBP 2013", "IPhone 6s" uc',
-    'deleted'  					        => 'This model has been deleted.',
+    'deleted'  					        => 'Šis modelis ir izdzēsts.',
     'bulk_delete'               => 'Līdzekļu modeļu lielapjoma dzēšana',
     'bulk_delete_help'               => 'Lai apstiprinātu izvēlēto līdzekļu modeļu dzēšanu, ir jāatzīmē zemāk esošās izvēles rūtiņas. Līdzekļu modeļi, kuriem ir piesaistīti aktīvi, nevar tikt dzēsti, kamēr līdzekļi nav piesaistīti citam modelim.',
     'bulk_delete_warn'          => 'Tiks dzēsti :model_count līdzekļu modeļi.',

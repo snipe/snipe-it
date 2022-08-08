@@ -91,11 +91,11 @@ return [
     'url'                  => 'Format pola :attribute jest niewłaściwy.',
     'unique_undeleted'     => 'Wartość :attribute musi być unikalna.',
     'non_circular'         => ':attribute nie może tworzyć odwołań cyklicznych.',
-    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
-    'letters'              => 'Password must contain at least one letter.',
-    'numbers'              => 'Password must contain at least one number.',
+    'disallow_same_pwd_as_user_fields' => 'Hasło nie może być takie samo jak nazwa użytkownika.',
+    'letters'              => 'Hasło musi zawierać co najmniej jedną literę.',
+    'numbers'              => 'Hasło musi zawierać co najmniej jedną cyfrę.',
     'case_diff'            => 'Password must use mixed case.',
-    'symbols'              => 'Password must contain symbols.',
+    'symbols'              => 'Hasło musi zawierać znaki specjalne.',
     'gte'                  => [
         'numeric'          => 'Wartość nie może być ujemna'
     ],

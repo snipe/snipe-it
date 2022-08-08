@@ -10,7 +10,7 @@ return [
     'admin_cc_email'            => 'CC Email',
     'admin_cc_email_help'       => 'If you would like to send a copy of checkin/checkout emails that are sent to users to an additional email account, enter it here. Otherwise leave this field blank.',
     'is_ad'				        => 'Este es un servidor de Directorio Activo',
-    'alerts'                	=> 'Alerts',
+    'alerts'                	=> 'Alertas',
     'alert_title'               => 'Update Alert Settings',
     'alert_email'				=> 'Enviar alertas a',
     'alert_email_help'    => 'Email addresses or distribution lists you want alerts to be sent to, comma separated',

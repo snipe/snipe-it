@@ -7,13 +7,13 @@ return array(
     'account_not_activated'  => 'See kasutajakonto pole aktiveeritud.',
     'account_suspended'      => 'See kasutajakonto on peatatud.',
     'account_banned'         => 'See kasutajakonto on keelatud.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'throttle'               => 'Liiga palju ebaõnnestunud sisselogimiskatseid. Palun proovi uuesti :minutes minuti pärast.',
 
     'two_factor' => array(
-        'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
+        'already_enrolled'      => 'Sinu seade on juba registreeritud.',
+        'success'               => 'Oled edukalt sisse logitud.',
+        'code_required'         => 'Kahe-astmeline autentimiskood on vajalik.',
+        'invalid_code'          => 'Kahe-astmeline autentimiskood on vale.',
     ),
 
     'signin' => array(
@@ -22,8 +22,8 @@ return array(
     ),
 
     'logout' => array(
-        'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
+        'error'   => 'Väljalogimisel ilmnes probleem, proovi uuesti.',
+        'success' => 'Oled edukalt välja logitud.',
     ),
 
     'signup' => array(
@@ -33,7 +33,7 @@ return array(
 
     'forgot-password' => array(
         'error'   => 'Uuesti parooli koodi proovimisel proovige uuesti proovida.',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
+        'success' => 'Kui sisestatud e-posti aadress on õige, saadetakse sellele parooli taastamise juhised.',
     ),
 
     'forgot-password-confirm' => array(

@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'Darbības',
     'add'    	                => 'Pievieno jaunu',
     'cancel'                    => 'Atcelt',
-    'checkin_and_delete'  	    => 'Reģistrēties un dzēst lietotāju',
+    'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => 'Dzēst',
     'edit'    	                => 'Rediģēt',
     'restore' 	                => 'Atjaunot',
