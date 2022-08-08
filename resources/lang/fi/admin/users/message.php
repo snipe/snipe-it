@@ -14,6 +14,7 @@ return array(
     'ldap_not_configured'        => 'LDAP-integraatiota ei ole määritetty tähän asennukseen.',
     'password_resets_sent'      => 'Salasanan resetointilinkki on lähetetty niille käyttäjille, joille on määritetty voimassa oleva sähköpostiosoite.',
     'password_reset_sent'       => 'Salasanan palautuslinkki on lähetetty osoitteeseen :email!',
+    'user_has_no_email'         => 'This user does not have an email address in their profile.',
 
 
     'success' => array(

@@ -15,7 +15,7 @@ return array(
 
     "password" => "Mật khẩu phải có tối thiểu 6 ký tự và trùng với thông tin xác nhận.",
     "user"     => "Tên đăng nhập và địa chỉ email không đúng",
-    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
-    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
+    "token"    => 'Mã đặt lại mật khẩu này không hợp lệ hoặc đã hết hạn, hoặc không khớp với tên người dùng vừa cung cấp.',
+    'sent'	   => 'Nếu email của bạn vừa cung cấp có tồn tại trên hệ thống, một email khôi phục mật khẩu sẽ được gửi.',
 
 );

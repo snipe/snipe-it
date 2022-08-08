@@ -14,6 +14,7 @@ return array(
     'ldap_not_configured'        => 'Tích hợp LDAP thì chưa được cấu hình cho cài đặt này.',
     'password_resets_sent'      => 'Những người dùng với trạng thái kích hoạt đã chọn và có địa chỉ email hợp lệ sẽ nhận được liên kết đặt lại mật khẩu.',
     'password_reset_sent'       => 'Đường đẫn khôi phục mật khẩu được gửi đến :email!',
+    'user_has_no_email'         => 'This user does not have an email address in their profile.',
 
 
     'success' => array(

@@ -43,9 +43,9 @@ return [
     'asset_location' => 'Izmeni lokaciju imovine',
     'asset_location_update_default_current' => 'Izmeni predefinisanu i stvarnu lokaciju',
     'asset_location_update_default' => 'Izmeni samo predefinisanu lokaciju',
-    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
-    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'asset_not_deployable' => 'Status imovine je nezaduživo. Ova imovina se ne može zadužiti.',
+    'asset_deployable' => 'Status imovine je zaduživo. Ova imovina se može zadužiti.',
     'processing_spinner' => 'Obrada...',
     'optional_infos'  => 'Opcione informacije',
-    'order_details'   => 'Redosledne informacije'
+    'order_details'   => 'Informacije o nabavci'
 ];

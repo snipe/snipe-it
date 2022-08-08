@@ -34,11 +34,11 @@ return [
     'admin_permission_warning' => 'Solo los usuarios con derechos administrativos o superiores pueden conceder acceso administrativo a un usuario.',
     'remove_group_memberships' => 'Remover membresías de grupo',
     'warning_deletion' => 'ADVERTENCIA:',
-    'warning_deletion_information' => 'Estás a punto de eliminar los :count usuario(s) listados abajo. Los nombres de Super admins están resaltados en rojo.',
+    'warning_deletion_information' => 'You are about to checkin ALL items from the :count user(s) listed below. Super admin names are highlighted in red.',
     'update_user_assets_status' => 'Update all assets for these users to this status',
     'checkin_user_properties' => 'Recibir todas las propiedades asociadas con estos usuarios',
     'remote_label'   => 'Este es un usuario remoto',
     'remote'   => 'Remoto',
     'remote_help' => 'This can be useful if you need to filter by remote users who never or rarely come into your physical locations.',
-    'not_remote_label' => 'This is not a remote user',
+    'not_remote_label' => 'Este no es un usuario remoto',
 ];

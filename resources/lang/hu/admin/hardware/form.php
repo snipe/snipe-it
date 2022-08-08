@@ -46,6 +46,6 @@ return [
     'asset_not_deployable' => 'Az eszköz még nem kiadásra kész, még nem kiadható.',
     'asset_deployable' => 'Az eszköz kiadásra kész, kiadható.',
     'processing_spinner' => 'Feldolgozás...',
-    'optional_infos'  => 'Optional Information',
-    'order_details'   => 'Order Related Information'
+    'optional_infos'  => 'Nem kötelező információk',
+    'order_details'   => 'Megrendeléssel kapcsolatos információk'
 ];

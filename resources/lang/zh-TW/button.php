@@ -4,7 +4,7 @@ return [
     'actions' 	                => '操作',
     'add'    	                => '新增',
     'cancel'                    => '取消',
-    'checkin_and_delete'  	    => '繳回並刪除使用者',
+    'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => '刪除',
     'edit'    	                => '編輯',
     'restore' 	                => '還原',

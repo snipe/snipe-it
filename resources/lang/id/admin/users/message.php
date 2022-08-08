@@ -14,6 +14,7 @@ return array(
     'ldap_not_configured'        => 'Integrasi LDAP belum dikonfigurasi untuk instalasi ini.',
     'password_resets_sent'      => 'Pengguna terpilih yang diaktifkan dan memiliki alamat email yang valid telah dikirimi tautan pengaturan ulang kata sandi.',
     'password_reset_sent'       => 'Tautan reset kata sandi telah dikirim ke :email!',
+    'user_has_no_email'         => 'This user does not have an email address in their profile.',
 
 
     'success' => array(

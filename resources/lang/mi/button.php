@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'Nga mahi',
     'add'    	                => 'Tāpiri Hou',
     'cancel'                    => 'Whakakore',
-    'checkin_and_delete'  	    => 'Tirohia & Mukua te Kaiwhakamahi',
+    'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => 'Mukua',
     'edit'    	                => 'Whakatika',
     'restore' 	                => 'Whakaora',

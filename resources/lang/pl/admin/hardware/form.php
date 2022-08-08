@@ -46,6 +46,6 @@ return [
     'asset_not_deployable' => 'Ten status oznacza brak możliwości wdrożenia. Ten zasób nie może zostać przypisany.',
     'asset_deployable' => 'Ten status oznacza możliwość wdrożenia. Ten zasób może zostać przypisany.',
     'processing_spinner' => 'Przetwarzanie...',
-    'optional_infos'  => 'Optional Information',
-    'order_details'   => 'Order Related Information'
+    'optional_infos'  => 'Informacje opcjonalne',
+    'order_details'   => 'Informacje związane z zamówieniem'
 ];

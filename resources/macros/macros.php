@@ -27,6 +27,7 @@ Form::macro('locales', function ($name = 'locale', $selected = null, $class = nu
       'fi'=> 'Finnish',
       'fr'=> 'French',
       'de'=> 'German',
+      'de-i'=> 'German (Informal)',
       'el'=> 'Greek',
       'he'=> 'Hebrew',
       'hu'=> 'Hungarian',

@@ -37,7 +37,7 @@ return [
     'bulk_edit'             => 'Bulk Edit',
     'bulk_delete'           => 'Bulk Delete',
     'bulk_actions'          => 'Bulk Actions',
-    'bulk_checkin_delete'   => 'Bulk Checkin &amp; Delete',
+    'bulk_checkin_delete'   => 'Bulk Checkin Items from Users',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'ரத்து',
     'categories'			=> 'வகைகள்',
@@ -101,6 +101,8 @@ return [
     'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'இறக்குமதி செய்யும் போது மின்னஞ்சல் முகவரிகள் உருவாக்க இது பயன்படுகிறது',
     'error'				    => 'Error',
+    'exclude_archived'      => 'Exclude Archived Assets',
+    'exclude_deleted'       => 'Exclude Deleted Assets',
     'example'				=> 'Example: ',
     'filastname_format'			=> 'முதல் தொடக்க கடைசி பெயர் (jsmith@example.com)',
     'firstname_lastname_format'	=> 'முதல் பெயர் கடைசி பெயர் (jane.smith@example.com)',
@@ -131,6 +133,7 @@ return [
     'id'  					=> 'ஐடி',
     'image'                 => 'Image',
     'image_delete'         	=> 'படத்தை நீக்கு',
+    'include_deleted'       => 'Include Deleted Assets',
     'image_upload'         	=> 'படத்தை பதிவேற்றம் செய்யவும்',
     'filetypes_accepted_help'    => 'Accepted filetype is :types. Max upload size allowed is :size.|Accepted filetypes are :types. Max upload size allowed is :size.',
     'filetypes_size_help'   => 'Max upload size allowed is :size.',
@@ -184,6 +187,7 @@ return [
     'no'  					=> 'இல்லை',
     'notes'  				=> 'குறிப்புக்கள்',
     'order_number'          => 'ஆர்டர் எண்',
+    'only_deleted'          => 'Only Deleted Assets',
     'page_menu'				=> '_MENU_ உருப்படிகளைக் காண்பிக்கிறது',
     'pagination_info'		=> '_TOTAL_ உருப்படிகளின் ____END_ காண்பிக்கிறது',
     'pending'				=> 'நிலுவையில்',
@@ -364,5 +368,9 @@ return [
     'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
     'additional_files'           => 'Additional Files',
     'shitty_browser'        => 'No signature detected. If you are using an older browser, please use a more modern browser to complete your asset acceptance.',
+    'bulk_soft_delete'      =>'Also soft-delete these users. Their asset history will remain intact unless/until you purge deleted records in the Admin Settings.',
+    'bulk_checkin_delete_success' => 'Your selected users have been deleted and their items have been checked in.',
+    'bulk_checkin_success' => 'The items for the selected users have been checked in.',
+
 
 ];

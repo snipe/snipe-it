@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'การกระทำ',
     'add'    	                => 'เพิ่มใหม่',
     'cancel'                    => 'ยกเลิก',
-    'checkin_and_delete'  	    => 'เช็คอินและลบผู้ใช้',
+    'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => 'ลบ',
     'edit'    	                => 'แก้ไข',
     'restore' 	                => 'นำกลับ',

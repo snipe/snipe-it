@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'Дії',
     'add'    	                => 'Додати новий',
     'cancel'                    => 'Скасувати',
-    'checkin_and_delete'  	    => 'Прийняти та видалити користувача',
+    'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => 'Видалити',
     'edit'    	                => 'Редагувати',
     'restore' 	                => 'Відновити',

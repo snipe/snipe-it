@@ -29,7 +29,7 @@ return array(
     ),
 
     'bulkedit' => array(
-        'error'   		=> 'Pole ühtegi välju muudetud, mistõttu ei uuendatud midagi.',
+        'error'   		=> 'Ühtegi välja ei muudetud, uuendusi ei tehtud',
         'success' 		=> 'Mudelid on uuendatud.'
     ),
 

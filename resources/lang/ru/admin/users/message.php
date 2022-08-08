@@ -14,6 +14,7 @@ return array(
     'ldap_not_configured'        => 'Интеграция с LDAP не настроена для этой инсталляции.',
     'password_resets_sent'      => 'Ссылка для сброса пароля была отправлена выбранным пользователям которые имеют действительный адрес электронной почты а активированы.',
     'password_reset_sent'       => 'Ссылка для сброса пароля была отправлена на адрес :email!',
+    'user_has_no_email'         => 'This user does not have an email address in their profile.',
 
 
     'success' => array(

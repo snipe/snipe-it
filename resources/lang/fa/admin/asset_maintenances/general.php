@@ -11,4 +11,6 @@
         'calibration'        => 'کالیبره کردن',
         'software_support'   => 'پشتیبانی نرم‌افزار',
         'hardware_support'   => 'پشتیبانی سخت‌افزار',
+        'configuration_change'   => 'Configuration Change',
+        'pat_test'           => 'PAT Test',
     ];

@@ -12,7 +12,7 @@ return array(
 	'show_mac_address'			      => 'Mostra MAC Address dei beni in questo modello',
     'view_deleted'              => 'Visualizza Eliminati',
     'view_models'               => 'Visualizza i modelli',
-    'fieldset'                  => 'Fieldset',
+    'fieldset'                  => 'Campo',
     'no_custom_field'           => 'Nessun campo personalizzato',
     'add_default_values'        => 'Aggiungi valori predefiniti',
 );

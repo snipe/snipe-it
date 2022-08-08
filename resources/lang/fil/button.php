@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'Ang mga aksyon',
     'add'    	                => 'Magdagdag ng bago',
     'cancel'                    => 'I-kansela',
-    'checkin_and_delete'  	    => 'Mag-chekin at I-delete ang User',
+    'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => 'I-delete',
     'edit'    	                => 'I-edit',
     'restore' 	                => 'Ibalik sa dati',

@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'Toiminnot',
     'add'    	                => 'Lisää uusi',
     'cancel'                    => 'Peruuta',
-    'checkin_and_delete'  	    => 'Palauta & poista käyttäjä',
+    'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => 'Poista',
     'edit'    	                => 'Muokkaa',
     'restore' 	                => 'Palauta',

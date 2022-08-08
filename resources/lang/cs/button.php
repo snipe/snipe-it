@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'Akce',
     'add'    	                => 'Přidej nový',
     'cancel'                    => 'Zrušit',
-    'checkin_and_delete'  	    => 'Zkontrolovat a odstranit uživatele',
+    'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => 'Smazat',
     'edit'    	                => 'Upravit',
     'restore' 	                => 'Obnovit',

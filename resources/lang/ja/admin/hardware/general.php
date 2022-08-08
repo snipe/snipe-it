@@ -32,9 +32,9 @@ return [
 
     <p>チェックイン日: 空白または将来のチェックイン日は、関連するユーザーのアイテムをチェックアウトします。  チェックイン日の列を除外すると、今日の日付でチェックイン日が作成されます。</p>
     ',
-    'csv_import_match_f-l' => 'firstname.lastname (jane.smith) 形式でユーザーを一致させてみてください',
-    'csv_import_match_initial_last' => 'first initial last name (jsmith) 形式でユーザーを一致させてみてください',
-    'csv_import_match_first' => 'first name (jane) 形式でユーザーを一致させてみてください',
+    'csv_import_match_f-l' => '名前.苗字 (jane.smith) 形式でユーザーを一致させてみてください',
+    'csv_import_match_initial_last' => '名前のイニシャルと苗字 (jsmith) 形式でユーザーを一致させてみてください',
+    'csv_import_match_first' => '名前（jane）形式でユーザーを一致させてみてください',
     'csv_import_match_email' => 'ユーザー名をメールで一致させてみてください',
     'csv_import_match_username' => 'ユーザー名を一致させてみてください',
     'error_messages' => 'エラーメッセージ:',

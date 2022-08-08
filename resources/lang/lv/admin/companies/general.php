@@ -2,6 +2,6 @@
 
 return [
     'select_company' => 'Izvēlieties uzņēmumu',
-    'about_companies' => 'About Companies',
-    'about_companies_description' => '        You can use companies as a simple informative field, or you can use them to restrict asset visibility and availability to users with a specific company by enabling Full Company Support in your Admin Settings.',
+    'about_companies' => 'Par kompānijām',
+    'about_companies_description' => '        Jūs variet izmantot uzņēmumus kā vienkāršu informatīvo lauku vai arī izmantot tos, lai ierobežotu pamatlīdzekļu redzamību un to pieejamību lietotājiem caur specifisku uzņēmumu, iespējojot Pilno Uzņēmumu Atbalstu Jūsu administratīvajos iestatījumos.',
 ];

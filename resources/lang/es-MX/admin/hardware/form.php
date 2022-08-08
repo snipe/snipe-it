@@ -46,6 +46,6 @@ return [
     'asset_not_deployable' => 'El activo no está listo para desplegar. Por lo que por el momento no puede ser asignado.',
     'asset_deployable' => 'El activo no está listo para desplegar. Por lo que, por el momento, no puede ser asignado.',
     'processing_spinner' => 'Procesando...',
-    'optional_infos'  => 'Optional Information',
+    'optional_infos'  => 'Información opcional',
     'order_details'   => 'Order Related Information'
 ];

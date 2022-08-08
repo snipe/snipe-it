@@ -16,7 +16,7 @@ return [
     'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
     'requestable'               => 'Ar gael',
     'requested'				    => 'Gofynnwyd amdano',
-    'not_requestable'           => 'Not Requestable',
+    'not_requestable'           => 'Ddim ar gael',
     'requestable_status_warning' => 'Do not change  requestable status',
     'restore'  					=> 'Adfer Ased',
     'pending'  					=> 'Yn disgwl',

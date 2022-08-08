@@ -40,12 +40,12 @@ return [
     'warranty'			=> 'Garantija',
         'warranty_expires'		=> 'Garantija beidzās',
     'years'				=> 'gadiem',
-    'asset_location' => 'Update Asset Location',
-    'asset_location_update_default_current' => 'Update default location AND actual location',
-    'asset_location_update_default' => 'Update only default location',
-    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
-    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
-    'processing_spinner' => 'Processing...',
-    'optional_infos'  => 'Optional Information',
-    'order_details'   => 'Order Related Information'
+    'asset_location' => 'Atjaunināt pamatlīdzekļa atrašanās vietu',
+    'asset_location_update_default_current' => 'Atjaunināt noklusējuma KĀ ARĪ tekošo atrašanās vietu',
+    'asset_location_update_default' => 'Atjaunināt tikai noklusēja atrašanās vietu',
+    'asset_not_deployable' => 'Šis statuss nav izmantojams. Pamatlīdzeklis nevar tikt izrakstīts.',
+    'asset_deployable' => 'Šis statuss ir izmantojams. Pamatlīdzeklis ir pieejams izrakstīšanai.',
+    'processing_spinner' => 'Apstrādā...',
+    'optional_infos'  => 'Neobligātā informācija',
+    'order_details'   => 'Pasūtījuma informācija'
 ];

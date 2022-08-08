@@ -37,7 +37,7 @@ return [
     'bulk_edit'             => 'Lielapjoma rediģēšana',
     'bulk_delete'           => 'Lielapjoma dzēšana',
     'bulk_actions'          => 'Lielapjoma darbības',
-    'bulk_checkin_delete'   => 'Lielapjoma atgriešana &amp; dzēst',
+    'bulk_checkin_delete'   => 'Bulk Checkin Items from Users',
     'bystatus'              => 'pēc statusa',
     'cancel'  				=> 'Atcelt',
     'categories'			=> 'Kategorijas',
@@ -101,6 +101,8 @@ return [
     'employee_number'       => 'Darbinieka numurs',
     'email_domain_help'		=> 'To izmanto, lai importētu e-pasta adreses',
     'error'				    => 'Kļūda',
+    'exclude_archived'      => 'Exclude Archived Assets',
+    'exclude_deleted'       => 'Exclude Deleted Assets',
     'example'				=> 'Example: ',
     'filastname_format'			=> 'Pirmais sākotnējais uzvārds (jsmith@example.com)',
     'firstname_lastname_format'	=> 'Vārds un uzvārds (jane.smith@example.com)',
@@ -131,6 +133,7 @@ return [
     'id'  					=> 'ID',
     'image'                 => 'Attēls',
     'image_delete'         	=> 'Dzēst attēlu',
+    'include_deleted'       => 'Include Deleted Assets',
     'image_upload'         	=> 'Augšupielādēt attēlu',
     'filetypes_accepted_help'    => 'Atļautie failu tipi :types. Maksimālais atļautais failu izmērs :size.|Atļautie failu tipi :types. Maksimālais atļautais failu izmārs :size.',
     'filetypes_size_help'   => 'Maksimālais atļautais failu izmērs :size.',
@@ -184,6 +187,7 @@ return [
     'no'  					=> 'Nē',
     'notes'  				=> 'Piezīmes',
     'order_number'          => 'Pasūtījuma numurs',
+    'only_deleted'          => 'Only Deleted Assets',
     'page_menu'				=> 'Rāda _MENU_ vienumus',
     'pagination_info'		=> 'Rāda _START_ līdz _END_ no _TOTAL_ vienumiem',
     'pending'				=> 'Gaida',
@@ -364,5 +368,9 @@ return [
     'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
     'additional_files'           => 'Additional Files',
     'shitty_browser'        => 'No signature detected. If you are using an older browser, please use a more modern browser to complete your asset acceptance.',
+    'bulk_soft_delete'      =>'Also soft-delete these users. Their asset history will remain intact unless/until you purge deleted records in the Admin Settings.',
+    'bulk_checkin_delete_success' => 'Your selected users have been deleted and their items have been checked in.',
+    'bulk_checkin_success' => 'The items for the selected users have been checked in.',
+
 
 ];

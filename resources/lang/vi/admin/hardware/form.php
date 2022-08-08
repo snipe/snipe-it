@@ -40,12 +40,12 @@ return [
     'warranty'			=> 'Bảo hành',
         'warranty_expires'		=> 'Hết hạn bảo hành',
     'years'				=> 'năm',
-    'asset_location' => 'Update Asset Location',
-    'asset_location_update_default_current' => 'Update default location AND actual location',
-    'asset_location_update_default' => 'Update only default location',
-    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
-    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
-    'processing_spinner' => 'Processing...',
-    'optional_infos'  => 'Optional Information',
-    'order_details'   => 'Order Related Information'
+    'asset_location' => 'Cập nhật vị trí tài sản',
+    'asset_location_update_default_current' => 'Cập nhật vị trí tài sản mặc định VÀ vị trí thực tế',
+    'asset_location_update_default' => 'Chỉ cập nhật vị trí tài sản mặc định',
+    'asset_not_deployable' => 'Trạng thái tài sản là không cho phép cấp phát. Tài sản này không thể bàn giao.',
+    'asset_deployable' => 'Trạng thái tài sản là được phép cấp phát. Tài sản này có thể bàn giao.',
+    'processing_spinner' => 'Đang xử lý...',
+    'optional_infos'  => 'Thông tin bổ sung',
+    'order_details'   => 'Thông tin đơn hàng'
 ];

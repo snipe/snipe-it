@@ -4,11 +4,11 @@ return [
 
     'asset_tag'   	=> 'Eignamerking',
     'asset_model'       => 'Model',
-    'book_value'  	=> 'Current Value',
+    'book_value'  	=> 'Núvirði',
     'change' 		=> 'In/Out',
     'checkout_date' => 'Ráðstöfunardagsetning',
     'checkoutto' 	=> 'Ráðstafað',
-    'current_value' => 'Current Value',
+    'current_value' => 'Núvirði',
     'diff' 			=> 'Diff',
     'dl_csv' 		=> 'Download CSV',
     'eol' 			=> 'EOL',
@@ -25,6 +25,6 @@ return [
     'assigned_to'    => 'Úthlutað til',
     'requesting_user' => 'Requesting User',
     'requested_date' => 'Requested Date',
-    'changed'       => 'Changed',
+    'changed'       => 'Breytt',
     'icon' => 'Icon',
 ];

@@ -34,7 +34,7 @@ return [
     'admin_permission_warning' => 'Seuls les utilisateurs possédant des droits d\'administrateur ou mieux peuvent accorder un accès d\'administrateur à un utilisateur.',
     'remove_group_memberships' => 'Supprimer les appartenances de groupe',
     'warning_deletion' => 'AVERTISSEMENT :',
-    'warning_deletion_information' => 'Vous êtes sur le point de supprimer les :count utilisateur(s) listé(s) ci-dessous. Les super-administrateurs sont surlignés en rouge.',
+    'warning_deletion_information' => 'You are about to checkin ALL items from the :count user(s) listed below. Super admin names are highlighted in red.',
     'update_user_assets_status' => 'Update all assets for these users to this status',
     'checkin_user_properties' => 'Soumettre toutes les propriétés associées à ces utilisateurs',
     'remote_label'   => 'Il s\'agit d\'un utilisateur distant',

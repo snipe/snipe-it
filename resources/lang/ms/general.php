@@ -37,7 +37,7 @@ return [
     'bulk_edit'             => 'Bulk Edit',
     'bulk_delete'           => 'Bulk Delete',
     'bulk_actions'          => 'Bulk Actions',
-    'bulk_checkin_delete'   => 'Bulk Checkin &amp; Delete',
+    'bulk_checkin_delete'   => 'Bulk Checkin Items from Users',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'Batalkan',
     'categories'			=> 'Kategori',
@@ -101,6 +101,8 @@ return [
     'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'Ini digunakan untuk menjana alamat e-mel semasa mengimport',
     'error'				    => 'Error',
+    'exclude_archived'      => 'Exclude Archived Assets',
+    'exclude_deleted'       => 'Exclude Deleted Assets',
     'example'				=> 'Example: ',
     'filastname_format'			=> 'Nama Akhir Permulaan Pertama (jsmith@example.com)',
     'firstname_lastname_format'	=> 'Nama Akhir Nama Pertama (jane.smith@example.com)',
@@ -131,6 +133,7 @@ return [
     'id'  					=> 'ID',
     'image'                 => 'Gambar',
     'image_delete'         	=> 'Hapuskan imej',
+    'include_deleted'       => 'Include Deleted Assets',
     'image_upload'         	=> 'Muat naik imej',
     'filetypes_accepted_help'    => 'Accepted filetype is :types. Max upload size allowed is :size.|Accepted filetypes are :types. Max upload size allowed is :size.',
     'filetypes_size_help'   => 'Max upload size allowed is :size.',
@@ -184,6 +187,7 @@ return [
     'no'  					=> 'Tidak',
     'notes'  				=> 'Nota',
     'order_number'          => 'Nombor Pesanan',
+    'only_deleted'          => 'Only Deleted Assets',
     'page_menu'				=> 'Menunjukkan _MENU_ item',
     'pagination_info'		=> 'Menunjukkan _START_ ke _END_ dari _TOTAL_ item',
     'pending'				=> 'Belum selesai',
@@ -364,5 +368,9 @@ return [
     'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
     'additional_files'           => 'Additional Files',
     'shitty_browser'        => 'No signature detected. If you are using an older browser, please use a more modern browser to complete your asset acceptance.',
+    'bulk_soft_delete'      =>'Also soft-delete these users. Their asset history will remain intact unless/until you purge deleted records in the Admin Settings.',
+    'bulk_checkin_delete_success' => 'Your selected users have been deleted and their items have been checked in.',
+    'bulk_checkin_success' => 'The items for the selected users have been checked in.',
+
 
 ];

@@ -40,12 +40,12 @@ return [
     'warranty'			=> 'Гарантия',
         'warranty_expires'		=> 'Срок действия гарантии',
     'years'				=> 'Лет',
-    'asset_location' => 'Update Asset Location',
-    'asset_location_update_default_current' => 'Update default location AND actual location',
-    'asset_location_update_default' => 'Update only default location',
+    'asset_location' => 'Обновить местоположение актива',
+    'asset_location_update_default_current' => 'Обновить местоположение по умолчанию и фактическое местоположение',
+    'asset_location_update_default' => 'Обновить только местоположение по умолчанию',
     'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
     'asset_deployable' => 'That status is deployable. This asset can be checked out.',
-    'processing_spinner' => 'Processing...',
-    'optional_infos'  => 'Optional Information',
+    'processing_spinner' => 'Обработка...',
+    'optional_infos'  => 'Дополнительная информация',
     'order_details'   => 'Order Related Information'
 ];

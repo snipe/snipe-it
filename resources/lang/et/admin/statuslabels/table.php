@@ -6,7 +6,7 @@ return array(
     'create'      	=> 'Uus staatuse silt',
     'color'      	=> 'Joonise värv',
     'default_label' => 'Vaikimisi silt',
-    'default_label_help' => 'This is used to ensure your most commonly used status labels appear at the top of the select box when creating/editing assets.',
+    'default_label_help' => 'Seda kasutatakse tagamaks, et seadmete loomisel või redigeerimisel on ülaosas valida kõige sagedamini kasutatavad olekusildid.',
     'deployable'      	=> 'Käivitatav',
     'info'      	=> 'Olekuteemeid kasutatakse erinevate seisundite kirjeldamiseks, millised on teie varad. Need võivad olla remondi-, kaotatud / varastatud jne jaoks. Saate luua uusi olekuteid, mida saab kasutada käimasolevatel, ootel ja arhiveeritud varadel.',
     'name'      	=> 'Saatuse nimi',
@@ -14,6 +14,6 @@ return array(
     'status_type'   => 'Saatuse tüüp',
     'show_in_nav'   => 'Näita külgmenüüs',
     'title'      	=> 'Staatuse sildid',
-    'undeployable'  => 'Unustamatu',
+    'undeployable'  => 'Kasutuselevõtmatu',
     'update'      	=> 'Uuenda staatuse silti',
 );

@@ -5,8 +5,8 @@ return [
     'manage'                    => 'Manage',
     'field'		                => 'Cánh đồng',
     'about_fieldsets_title'		=> 'Giới thiệu về các trường',
-    'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used for specific asset model types.',
-    'custom_format'             => 'Custom Regex format...',
+    'about_fieldsets_text'		=> 'Các trường cho phép bạn tạo các nhóm trường tuỳ chỉnh thường xuyên được sử dụng lại cho các mô hình tài sản cụ thể.',
+    'custom_format'             => 'Định dạng tuỳ chỉnh...',
     'encrypt_field'      	        => 'Mã hóa giá trị của trường này trong cơ sở dữ liệu',
     'encrypt_field_help'      => 'CẢNH BÁO: Mã hóa một trường làm cho nó không thể tìm kiếm được.',
     'encrypted'      	        => 'Mã hóa',
@@ -43,5 +43,5 @@ return [
     'db_field' => 'DB Field',
     'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code>:db_column</code> but should be <code>:expected</code>.',
     'is_unique' => 'This value must be unique across all assets',
-    'unique' => 'Unique',
+    'unique' => 'Duy nhất',
 ];

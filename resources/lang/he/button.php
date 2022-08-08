@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'פעולות',
     'add'    	                => 'הוסף חדש',
     'cancel'                    => 'לְבַטֵל',
-    'checkin_and_delete'  	    => 'מחק & מחק משתמש',
+    'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => 'לִמְחוֹק',
     'edit'    	                => 'לַעֲרוֹך',
     'restore' 	                => 'לשחזר',

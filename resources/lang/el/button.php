@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'Ενέργειες',
     'add'    	                => 'Προσθήκη Νέου',
     'cancel'                    => 'Ακύρωση',
-    'checkin_and_delete'  	    => 'Checkin & Διαγραφή χρήστη',
+    'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => 'Διαγραφή',
     'edit'    	                => 'Επεξεργασία',
     'restore' 	                => 'Επαναφορά',

@@ -14,6 +14,7 @@ return array(
     'ldap_not_configured'        => 'LDAP entegrasyonu bu yükleme için yapılandırılmamış.',
     'password_resets_sent'      => 'Etkinleştirilmiş ve geçerli bir e-posta adresine sahip seçilen kullanıcılara şifre sıfırlama bağlantısı gönderildi.',
     'password_reset_sent'       => ':email! adresine bir şifre sıfırlama bağlantısı gönderildi!',
+    'user_has_no_email'         => 'This user does not have an email address in their profile.',
 
 
     'success' => array(

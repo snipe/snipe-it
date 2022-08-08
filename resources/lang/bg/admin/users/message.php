@@ -14,6 +14,7 @@ return array(
     'ldap_not_configured'        => 'Интеграцията с LDAP не е конфигурирана за тази инсталация.',
     'password_resets_sent'      => 'Избраните потребители, които са активирани и имат валиден е-майл адрес им беше изпратен линк за смяна на парола.',
     'password_reset_sent'       => 'A password reset link has been sent to :email!',
+    'user_has_no_email'         => 'This user does not have an email address in their profile.',
 
 
     'success' => array(

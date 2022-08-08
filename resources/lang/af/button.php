@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'aksies',
     'add'    	                => 'Voeg nuwe',
     'cancel'                    => 'kanselleer',
-    'checkin_and_delete'  	    => 'Kontroleer en verwyder gebruiker',
+    'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => 'verwyder',
     'edit'    	                => 'wysig',
     'restore' 	                => 'herstel',

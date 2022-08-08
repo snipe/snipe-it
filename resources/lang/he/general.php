@@ -37,7 +37,7 @@ return [
     'bulk_edit'             => 'עריכה גורפת',
     'bulk_delete'           => 'מחיקה גורפת',
     'bulk_actions'          => 'פעולות גורפות',
-    'bulk_checkin_delete'   => 'העבר הכול &amp; Delete',
+    'bulk_checkin_delete'   => 'Bulk Checkin Items from Users',
     'bystatus'              => 'לפי סטאטוס',
     'cancel'  				=> 'לְבַטֵל',
     'categories'			=> 'קטגוריות',
@@ -101,6 +101,8 @@ return [
     'employee_number'       => 'מספר עובד',
     'email_domain_help'		=> 'זה משמש ליצירת כתובות דוא"ל בעת ייבוא',
     'error'				    => 'שגיאה',
+    'exclude_archived'      => 'Exclude Archived Assets',
+    'exclude_deleted'       => 'Exclude Deleted Assets',
     'example'				=> 'Example: ',
     'filastname_format'			=> 'שם משפחה ראשוני ראשון (jsmith@example.com)',
     'firstname_lastname_format'	=> 'שם משפחה של שם פרטי (jane.smith@example.com)',
@@ -131,6 +133,7 @@ return [
     'id'  					=> 'תְעוּדַת זֶהוּת',
     'image'                 => 'תמונה',
     'image_delete'         	=> 'מחק תמונה',
+    'include_deleted'       => 'Include Deleted Assets',
     'image_upload'         	=> 'העלאת תמונה',
     'filetypes_accepted_help'    => 'סוגי קובץ אפשריים הם :types. גודל קובץ אפשרי מקסימלי:size.',
     'filetypes_size_help'   => 'גודל קובץ מותר הוא :size.',
@@ -184,6 +187,7 @@ return [
     'no'  					=> 'לא',
     'notes'  				=> 'הערות',
     'order_number'          => 'מספר הזמנה',
+    'only_deleted'          => 'Only Deleted Assets',
     'page_menu'				=> 'מציג _MENU_ פריטים',
     'pagination_info'		=> 'מציג _START_ אל _END_ מתוך _TOTAL_ פריטים',
     'pending'				=> 'ממתין ל',
@@ -364,5 +368,9 @@ return [
     'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
     'additional_files'           => 'Additional Files',
     'shitty_browser'        => 'No signature detected. If you are using an older browser, please use a more modern browser to complete your asset acceptance.',
+    'bulk_soft_delete'      =>'Also soft-delete these users. Their asset history will remain intact unless/until you purge deleted records in the Admin Settings.',
+    'bulk_checkin_delete_success' => 'Your selected users have been deleted and their items have been checked in.',
+    'bulk_checkin_success' => 'The items for the selected users have been checked in.',
+
 
 ];

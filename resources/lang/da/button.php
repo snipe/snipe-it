@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'Handlinger',
     'add'    	                => 'Tilføj Ny',
     'cancel'                    => 'Annuller',
-    'checkin_and_delete'  	    => 'Tjek ind og slet bruger',
+    'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => 'Slet',
     'edit'    	                => 'Rediger',
     'restore' 	                => 'Gendan',

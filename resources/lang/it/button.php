@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'Azioni',
     'add'    	                => 'Aggiungi Nuovo',
     'cancel'                    => 'Annulla',
-    'checkin_and_delete'  	    => 'Seleziona e cancella utente',
+    'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => 'Cancella',
     'edit'    	                => 'Modifica',
     'restore' 	                => 'Ripristina',

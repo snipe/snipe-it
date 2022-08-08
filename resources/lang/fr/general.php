@@ -37,7 +37,7 @@ return [
     'bulk_edit'             => 'Modifier en masse',
     'bulk_delete'           => 'Supprimer en masse',
     'bulk_actions'          => 'Actions de masse',
-    'bulk_checkin_delete'   => 'Enregistrement en bloc &amp; Supprimer',
+    'bulk_checkin_delete'   => 'Bulk Checkin Items from Users',
     'bystatus'              => 'par statut',
     'cancel'  				=> 'Annuler',
     'categories'			=> 'Catégories',
@@ -101,6 +101,8 @@ return [
     'employee_number'       => 'Numéro d’employé',
     'email_domain_help'		=> 'C\'est utilisé pour générer des adresses e-mail lors de l\'importation',
     'error'				    => 'Erreur',
+    'exclude_archived'      => 'Exclude Archived Assets',
+    'exclude_deleted'       => 'Exclude Deleted Assets',
     'example'				=> 'Example: ',
     'filastname_format'			=> 'Première lettre du prénom Nom de famille (jsmith@example.com)',
     'firstname_lastname_format'	=> 'Prénom Nom de famille (jane.smith@example.com)',
@@ -131,6 +133,7 @@ return [
     'id'  					=> 'ID',
     'image'                 => 'Image',
     'image_delete'         	=> 'Supprimer l\'image',
+    'include_deleted'       => 'Include Deleted Assets',
     'image_upload'         	=> 'Charger une image',
     'filetypes_accepted_help'    => 'Le type de fichier accepté est :types. La taille maximale autorisée est :size.|Les types de fichiers acceptés sont :types. La taille maximale autorisée est :size.',
     'filetypes_size_help'   => 'La taille maximale autorisée des téléversements est :size.',
@@ -184,6 +187,7 @@ return [
     'no'  					=> 'Non',
     'notes'  				=> 'Notes',
     'order_number'          => 'Numéro de commande',
+    'only_deleted'          => 'Only Deleted Assets',
     'page_menu'				=> 'Afficher_MENU_items',
     'pagination_info'		=> 'Afficher_DEBUT_à_FIN_de_TOUS_items',
     'pending'				=> 'En Attente',
@@ -364,5 +368,9 @@ return [
     'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
     'additional_files'           => 'Additional Files',
     'shitty_browser'        => 'No signature detected. If you are using an older browser, please use a more modern browser to complete your asset acceptance.',
+    'bulk_soft_delete'      =>'Also soft-delete these users. Their asset history will remain intact unless/until you purge deleted records in the Admin Settings.',
+    'bulk_checkin_delete_success' => 'Your selected users have been deleted and their items have been checked in.',
+    'bulk_checkin_success' => 'The items for the selected users have been checked in.',
+
 
 ];
