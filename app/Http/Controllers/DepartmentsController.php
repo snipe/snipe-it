@@ -8,6 +8,7 @@ use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class DepartmentsController extends Controller
 {
@@ -58,9 +59,7 @@ class DepartmentsController extends Controller
 
         $department = $request->handleImages($department);
 
-        if(!Helper::isUniqueDepartment($department)){
-            return redirect()->route('departments.index')->with('error', trans('admin/departments/message.department_already_exists'));
-        }
+
 
         if ($department->save()) {
             return redirect()->route('departments.index')->with('success', trans('admin/departments/message.create.success'));
@@ -186,4 +185,29 @@ class DepartmentsController extends Controller
 
         return redirect()->back()->withInput()->withErrors($department->getErrors());
     }
+
+    public function passwordSave(Request $request)
+    {
+        if (config('app.lock_passwords')) {
+            return redirect()->route('account.password.index')->with('error', trans('admin/users/table.lock_passwords'));
+        }
+
+        $user = Auth::user();
+        if ($user->ldap_import == '1') {
+            return redirect()->route('account.password.index')->with('error', trans('admin/users/message.error.password_ldap'));
+        }
+
+        $rules = [
+            'current_password'     => 'required',
+            'password'         => Setting::passwordComplexityRulesSaving('store').'|confirmed',
+        ];
+
+        $validator = \Validator::make($request->all(), $rules);
+        $validator->after(function ($validator) use ($request, $user) {
+            if (! Hash::check($request->input('current_password'), $user->password)) {
+                $validator->errors()->add('current_password', trans('validation.hashed_pass'));
+            }
+
+        });
+        }
 }

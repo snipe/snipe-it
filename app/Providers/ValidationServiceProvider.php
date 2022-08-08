@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Department;
 use DB;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Validation\Rule;
 use Validator;
 
 /**
@@ -33,9 +35,9 @@ class ValidationServiceProvider extends ServiceProvider
                 $email_to_validate['alert_email'][] = $email;
             }
 
-            $rules = ['alert_email.*'=>'email'];
+            $rules = ['alert_email.*' => 'email'];
             $messages = [
-                'alert_email.*'=>trans('validation.email_array'),
+                'alert_email.*' => trans('validation.email_array'),
             ];
 
             $validator = Validator::make($email_to_validate, $rules, $messages);
@@ -55,18 +57,18 @@ class ValidationServiceProvider extends ServiceProvider
         });
 
         // Unique if undeleted for two columns
-            // Same as unique_undeleted but taking the combination of two columns as unique constrain.
-            Validator::extend('two_column_unique_undeleted', function ($attribute, $value, $parameters, $validator) {
-                if (count($parameters)) {
-                    $count = DB::table($parameters[0])
-                             ->select('id')->where($attribute, '=', $value)
-                             ->whereNull('deleted_at')
-                             ->where('id', '!=', $parameters[1])
-                             ->where($parameters[2], $parameters[3])->count();
+        // Same as unique_undeleted but taking the combination of two columns as unique constrain.
+        Validator::extend('two_column_unique_undeleted', function ($attribute, $value, $parameters, $validator) {
+            if (count($parameters)) {
+                $count = DB::table($parameters[0])
+                    ->select('id')->where($attribute, '=', $value)
+                    ->whereNull('deleted_at')
+                    ->where('id', '!=', $parameters[1])
+                    ->where($parameters[2], $parameters[3])->count();
 
-                    return $count < 1;
-                }
-            });
+                return $count < 1;
+            }
+        });
 
         // Prevent circular references
         //
@@ -84,7 +86,7 @@ class ValidationServiceProvider extends ServiceProvider
             // Parameters from the rule implementation ($pk will likely be 'id')
             $table = array_get($parameters, 0);
             $pk = array_get($parameters, 1);
-            $depth = (int) array_get($parameters, 2, 50);
+            $depth = (int)array_get($parameters, 2, 50);
 
             // Data from the edited model
             $data = $validator->getData();
@@ -213,7 +215,30 @@ class ValidationServiceProvider extends ServiceProvider
                 return true;
             }
         });
+//WIP
+        Validator::extend('is_unique_department', function ($attribute, $value, $parameters, $validator):bool {
+            $data = $validator->getData();
+
+            $is_unique = Department::where('name', $data['name'])
+                ->where('location_id',  $data['location_id'])
+                ->where('company_id', $data['company_id'])
+                ->whereNotNull('company_id')
+                ->whereNotNull('location_id')
+                ->exists();
+
+//                Rule::unique('department', $attribute)->where('company_id', $data['company_id'])
+//                    ->where('location_id', $data['location_id'])
+//                    ->whereNotNull('company_id')
+//                    ->whereNotNull('location_id')
+//                    ->ignore($data['id']);
+
+
+
+            return !$is_unique;
+
+        });
     }
+
 
     /**
      * Register any application services.
