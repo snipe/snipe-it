@@ -216,6 +216,12 @@ class ValidationServiceProvider extends ServiceProvider
             }
         });
 //WIP
+        /**
+         * Enforces Unique Department names for Company Locations. Does not enforce uniqueness for duplicate department names for a location or duplicate department names for a company w/o location.
+         *
+         * @param obj $department
+         * @return bool There is a duplicate department or not.
+         */
         Validator::extend('is_unique_department', function ($attribute, $value, $parameters, $validator):bool {
             $data = $validator->getData();
 
