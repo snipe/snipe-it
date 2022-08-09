@@ -215,7 +215,9 @@
                                <div id="mailteststatus-error" class="text-danger"></div>
                            </div>
                            <div class="col-md-9 col-md-offset-3">
-                               <div class="help-block"> {{ trans('admin/settings/general.mail_test_help', array('replyto' => config('mail.reply_to.address'))) }}</p>
+                               <div class="help-block">
+                                   <p>{{ trans('admin/settings/general.mail_test_help', array('replyto' => config('mail.reply_to.address'))) }}</p>
+                               </div>
                            </div>
 
                        </div>
