@@ -63,9 +63,15 @@ class DepreciationReportTransformer
          */
         if (($asset->model) && ($asset->model->depreciation)) {
             $depreciated_value = Helper::formatCurrencyOutput($asset->getDepreciatedValue());
-            $monthly_depreciation = Helper::formatCurrencyOutput(($asset->model->eol > 0 ? ($asset->purchase_cost / $asset->model->eol) : 0));
+            if($asset->model->eol==0 || $asset->model->eol==null ){
+                $monthly_depreciation = Helper::formatCurrencyOutput($asset->purchase_cost / $asset->model->depreciation->months);
+            }
+            else {
+                $monthly_depreciation = Helper::formatCurrencyOutput(($asset->model->eol > 0 ? ($asset->purchase_cost / $asset->model->eol) : 0));
+            }
             $diff = Helper::formatCurrencyOutput(($asset->purchase_cost - $asset->getDepreciatedValue()));
         }
+
 
         if ($asset->assigned) {
             $checkout_target = $asset->assigned->name;
