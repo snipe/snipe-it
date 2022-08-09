@@ -61434,6 +61434,9 @@ $(function () {
       });
     });
   });
+  $('#createModal').on('shown.bs.modal', function () {
+    $('modal-name').focus();
+  });
   $('#createModal').on('click', '#modal-save', function () {
     $.ajax({
       type: 'POST',

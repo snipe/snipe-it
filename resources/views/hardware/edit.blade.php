@@ -22,7 +22,7 @@
       <!-- we are editing an existing asset -->
       @if  ($item->id)
           <div class="col-md-7 col-sm-12{{  (Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
-          <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ Request::old('asset_tag', $item->asset_tag) }}" data-validation="required">
+          <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ Request::old('asset_tag', $item->asset_tag) }}" data-validation="required" autofocus>
               {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
               {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
           </div>
@@ -371,9 +371,16 @@
             }
         }
 
+
     });
-
-
+    // function clickEvent(first,last){
+    //     if(first.value.length) {
+    //         document.getElementById(last).focus();
+    //     }
+    // }
+    window.onload = function() {
+        document.getElementById('asset_tag').focus();
+    }
 
 
 </script>

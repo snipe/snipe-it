@@ -39,6 +39,7 @@ $(function () {
       model = link.data("dependency");
       select = link.data("select");
       refreshSelector = link.data("refresh");
+
       
       $('#createModal').load(link.attr('href'),function () {
         //do we need to re-select2 this, after load? Probably.
@@ -93,7 +94,9 @@ $(function () {
 
   });
 
- 
+    $('#createModal').on('shown.bs.modal', function () {
+        $('modal-name').focus();
+    })
 
   $('#createModal').on('click','#modal-save', function () {
     $.ajax({
@@ -236,3 +239,5 @@ function formatDataSelection (datalist) {
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
 }
+
+
