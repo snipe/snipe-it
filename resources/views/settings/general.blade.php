@@ -216,7 +216,7 @@
                            </div>
                            <div class="col-md-9 col-md-offset-3">
                                <div class="help-block">
-                                   {{ trans('admin/settings/general.mail_test_help', array('replyto' => config('mail.reply_to.address'))) }}</p>
+                                   <p>{{ trans('admin/settings/general.mail_test_help', array('replyto' => config('mail.reply_to.address'))) }}</p>
                                </div>
                            </div>
 
