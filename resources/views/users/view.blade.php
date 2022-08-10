@@ -763,9 +763,10 @@
                     }'>
               <thead>
                 <tr>
-                  <th class="col-md-6">{{ trans('general.name') }}</th>
+                  <th class="col-md-3">{{ trans('general.name') }}</th>
                   <th class="col-md-2" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
-                  <th class="col-md-4">{{ trans('general.date') }}</th>
+                  <th class="col-md-2">{{ trans('general.date') }}</th>
+                    <th class="col-md-5">{{ trans('general.notes') }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -775,7 +776,8 @@
                   <td>
                     {!! Helper::formatCurrencyOutput($consumable->purchase_cost) !!}
                   </td>
-                  <td>{{ $consumable->pivot->created_at }}</td>                      
+                  <td>{{ Helper::getFormattedDateObject($consumable->pivot->created_at, 'datetime',  false) }}</td>
+                  <td>{{ $consumable->pivot->note }}</td>
                 </tr>
                 @endforeach
               </tbody>
