@@ -246,7 +246,8 @@ class ComponentsController extends Controller
                 'created_at' => \Carbon::now(),
                 'assigned_qty' => $request->get('assigned_qty', 1),
                 'user_id' => \Auth::id(),
-                'asset_id' => $request->get('assigned_to')
+                'asset_id' => $request->get('assigned_to'),
+                'note' => $request->get('note'),
             ]);
 
             $component->logCheckout($request->input('note'), $asset);

@@ -66,6 +66,7 @@ class ConsumableCheckoutController extends Controller
             'consumable_id' => $consumable->id,
             'user_id' => $admin_user->id,
             'assigned_to' => e($request->input('assigned_to')),
+            'note' => $request->input('note'),
         ]);
 
         event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note')));
