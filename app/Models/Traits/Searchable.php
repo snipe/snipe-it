@@ -2,6 +2,7 @@
 
 namespace App\Models\Traits;
 
+use DB;
 use App\Models\Asset;
 use App\Models\CustomField;
 use Illuminate\Database\Eloquent\Builder;
@@ -160,6 +161,9 @@ trait Searchable
                         }
 
                         $query->orWhere($table.'.'.$column, 'LIKE', '%'.$term.'%');
+                        if($table == 'users'){
+                            $query->orWhereRaw('CONCAT(users.first_name ," ", users.last_name) LIKE ?', ["%$term%"]);
+                        }
                     }
                 }
             });
