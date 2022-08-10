@@ -422,6 +422,9 @@ class ReportsController extends Controller
 
             $header = [];
 
+            if ($request->filled('id')) {
+                $header[] = trans('general.id');
+            }
 
             if ($request->filled('company')) {
                 $header[] = trans('general.company');
@@ -568,6 +571,10 @@ class ReportsController extends Controller
                 $header[] = trans('general.notes');
             }
 
+            if ($request->filled('url')) {
+                $header[] = trans('admin/manufacturers/table.url');
+            }
+
 
             foreach ($customfields as $customfield) {
                 if ($request->input($customfield->db_column_name()) == '1') {
@@ -662,7 +669,11 @@ class ReportsController extends Controller
                 foreach ($assets as $asset) {
                     $count++;
                     $row = [];
-                    
+
+                    if ($request->filled('id')) {
+                        $row[] = ($asset->id) ? $asset->id : '';
+                    }
+
                     if ($request->filled('company')) {
                         $row[] = ($asset->company) ? $asset->company->name : '';
                     }
@@ -832,6 +843,10 @@ class ReportsController extends Controller
 
                     if ($request->filled('notes')) {
                         $row[] = ($asset->notes) ? $asset->notes : '';
+                    }
+
+                    if ($request->filled('url')) {
+                        $row[] = config('app.url').'/hardware/'.$asset->id ;
                     }
 
                     foreach ($customfields as $customfield) {

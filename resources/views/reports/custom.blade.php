@@ -39,6 +39,12 @@
             </div>
             <div class="checkbox col-md-12">
               <label>
+                {{ Form::checkbox('id', '1', '1', ['class' => 'minimal']) }}
+                {{ trans('general.id') }}
+              </label>
+            </div>
+            <div class="checkbox col-md-12">
+              <label>
                 {{ Form::checkbox('company', '1', '1', ['class' => 'minimal']) }}
                 {{ trans('general.company') }}
               </label>
@@ -135,7 +141,6 @@
               </label>
             </div>
 
-
             <div class="checkbox col-md-12">
               <label>
                 {{ Form::checkbox('status', '1', '1', ['class' => 'minimal']) }}
@@ -201,6 +206,12 @@
               <label>
                 {{ Form::checkbox('notes', '1', '1', ['class' => 'minimal']) }}
                 {{ trans('general.notes') }}
+              </label>
+            </div>
+            <div class="checkbox col-md-12">
+              <label>
+                {{ Form::checkbox('url', '1', '1', ['class' => 'minimal']) }}
+                - {{ trans('admin/manufacturers/table.url') }}
               </label>
             </div>
 
