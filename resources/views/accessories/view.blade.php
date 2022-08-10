@@ -171,7 +171,7 @@
           @can('checkout', \App\Models\Accessory::class)
               <div class="row">
                   <div class="col-md-12 text-center">
-                      <a href="{{ route('accessories.checkout.show', $accessory->id) }}" style="margin-right:5px;" class="btn btn-primary btn-sm" {{ (($accessory->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
+                      <a href="{{ route('accessories.checkout.show', $accessory->id) }}" style="margin-right:5px; width:100%" class="btn btn-primary btn-sm" {{ (($accessory->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
                   </div>
               </div>
           @endcan

@@ -26,6 +26,7 @@ class ComponentsAssetsTransformer
             'created_at' => $asset->created_at->format('Y-m-d'),
             'qty' => $asset->components()->count(),
             'user_can_checkout' => $asset->availableForCheckout(),
+            'note' => e($asset->note),
         ];
 
         $permissions_array['available_actions'] = [

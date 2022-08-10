@@ -87,6 +87,9 @@
                   <th data-searchable="false" data-sortable="false" data-field="qty">
                     {{ trans('general.qty') }}
                   </th>
+                  <th data-searchable="false" data-sortable="false" data-field="note">
+                    {{ trans('general.notes') }}
+                  </th>
                   <th data-searchable="false" data-sortable="false" data-field="created_at" data-formatter="dateDisplayFormatter">
                     {{ trans('general.date') }}
                   </th>

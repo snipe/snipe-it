@@ -230,7 +230,8 @@ class ConsumablesController extends Controller
             $rows[] = [
                 'name' => ($consumable_assignment->user) ? $consumable_assignment->user->present()->nameUrl() : 'Deleted User',
                 'created_at' => Helper::getFormattedDateObject($consumable_assignment->created_at, 'datetime'),
-                'admin' => ($consumable_assignment->admin) ? $consumable_assignment->admin->present()->nameUrl() : '',
+                'note' => ($consumable_assignment->note) ? e($consumable_assignment->note) : null,
+                'admin' => ($consumable_assignment->admin) ? $consumable_assignment->admin->present()->nameUrl() : null,
             ];
         }
 
@@ -273,6 +274,7 @@ class ConsumablesController extends Controller
                 'consumable_id' => $consumable->id,
                 'user_id' => $user->id,
                 'assigned_to' => $assigned_to,
+                'note' => $request->input('note'),
             ]);
 
             // Log checkout event
