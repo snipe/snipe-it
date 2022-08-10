@@ -55,6 +55,7 @@
                   <tr>
                     <th data-searchable="false" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
                     <th data-searchable="false" data-sortable="false" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
+                    <th data-searchable="false" data-sortable="false" data-field="note">{{ trans('general.notes') }}</th>
                     <th data-searchable="false" data-sortable="false" data-field="admin">{{ trans('general.admin') }}</th>
                   </tr>
                 </thead>
@@ -76,21 +77,21 @@
 
           
                 @if ($consumable->image!='')
-                <div class="col-md-12 text-center" style="padding-bottom: 15px;">
+                <div class="col-md-12 text-center">
                   <a href="{{ Storage::disk('public')->url('consumables/'.e($consumable->image)) }}" data-toggle="lightbox">
                       <img src="{{ Storage::disk('public')->url('consumables/'.e($consumable->image)) }}" class="img-responsive img-thumbnail" alt="{{ $consumable->name }}"></a>
                 </div>
                 @endif
 
                 @if ($consumable->purchase_date)
-                  <div class="col-md-12" style="padding-bottom: 15px;">
+                  <div class="col-md-12">
                     <strong>{{ trans('general.purchase_date') }}: </strong>
                     {{ Helper::getFormattedDateObject($consumable->purchase_date, 'date', false) }}
                   </div>
                 @endif
 
                 @if ($consumable->purchase_cost)
-                  <div class="col-md-12" style="padding-bottom: 15px;">
+                  <div class="col-md-12">
                     <strong>{{ trans('general.purchase_cost') }}:</strong>
                     {{ $snipeSettings->default_currency }}
                     {{ Helper::formatCurrencyOutput($consumable->purchase_cost) }}
@@ -98,28 +99,28 @@
                 @endif
 
                 @if ($consumable->item_no)
-                  <div class="col-md-12" style="padding-bottom: 15px;">
+                  <div class="col-md-12">
                     <strong>{{ trans('admin/consumables/general.item_no') }}:</strong>
                     {{ $consumable->item_no }}
                   </div>
                 @endif
 
                 @if ($consumable->model_number)
-                  <div class="col-md-12" style="padding-bottom: 15px;">
+                  <div class="col-md-12">
                     <strong>{{ trans('general.model_no') }}:</strong>
                     {{ $consumable->model_number }}
                   </div>
                 @endif
 
                 @if ($consumable->manufacturer)
-                  <div class="col-md-12" style="padding-bottom: 15px;">
+                  <div class="col-md-12">
                     <strong>{{ trans('general.manufacturer') }}:</strong>
                     <a href="{{ route('manufacturers.show', $consumable->manufacturer->id) }}">{{ $consumable->manufacturer->name }}</a>
                   </div>
                 @endif
 
                 @if ($consumable->order_number)
-                  <div class="col-md-12" style="padding-bottom: 15px;">
+                  <div class="col-md-12">
                     <strong>{{ trans('general.order_number') }}:</strong>
                     {{ $consumable->order_number }}
                   </div>
@@ -128,13 +129,13 @@
     @can('checkout', \App\Models\Consumable::class)
 
       <div class="col-md-12">
-        
+        <br><br>
         @if ($consumable->numRemaining() > 0)
-          <a href="{{ route('consumables.checkout.show', $consumable->id) }}" style="padding-bottom:5px;" class="btn btn-primary btn-sm">
+          <a href="{{ route('consumables.checkout.show', $consumable->id) }}" style="margin-bottom:10px; width:100%" class="btn btn-primary btn-sm">
             {{ trans('general.checkout') }}
           </a>
         @else
-          <button style="padding-bottom:5px;" class="btn btn-primary btn-sm disabled">
+          <button style="margin-bottom:10px; width:100%"" class="btn btn-primary btn-sm disabled">
             {{ trans('general.checkout') }}
           </button>
         @endif
@@ -146,7 +147,7 @@
        
     <div class="col-md-12">
       <strong>
-        {{ trans('general.notes') }}
+        {{ trans('general.notes') }}:
       </strong>
               </div>
     <div class="col-md-12">
