@@ -571,7 +571,7 @@ class ReportsController extends Controller
                 $header[] = trans('general.notes');
             }
 
-            if ($request->filled('notes')) {
+            if ($request->filled('url')) {
                 $header[] = trans('admin/manufacturers/table.url');
             }
 
