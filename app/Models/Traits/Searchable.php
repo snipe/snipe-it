@@ -2,7 +2,6 @@
 
 namespace App\Models\Traits;
 
-use DB;
 use App\Models\Asset;
 use App\Models\CustomField;
 use Illuminate\Database\Eloquent\Builder;
