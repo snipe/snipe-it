@@ -24,7 +24,7 @@ class AcceptanceAssetAcceptedNotification extends Notification
         $this->item_tag = $params['item_tag'];
         $this->item_model = $params['item_model'];
         $this->item_serial = $params['item_serial'];
-        $this->accepted_date = Helper::getFormattedDateObject($params['accepted_date'], 'datetime', false);
+        $this->accepted_date = Helper::getFormattedDateObject($params['accepted_date'], 'date', false);
         $this->assigned_to = $params['assigned_to'];
         $this->company_name = $params['company_name'];
         $this->settings = Setting::getSettings();

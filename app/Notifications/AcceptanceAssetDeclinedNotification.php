@@ -24,7 +24,7 @@ class AcceptanceAssetDeclinedNotification extends Notification
         $this->item_tag = $params['item_tag'];
         $this->item_model = $params['item_model'];
         $this->item_serial = $params['item_serial'];
-        $this->accepted_date = Helper::getFormattedDateObject($params['accepted_date'], 'datetime', false);
+        $this->declined_date = Helper::getFormattedDateObject($params['declined_date'], 'date', false);
         $this->assigned_to = $params['assigned_to'];
         $this->company_name = $params['company_name'];
         $this->settings = Setting::getSettings();
@@ -52,19 +52,12 @@ class AcceptanceAssetDeclinedNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $fields = [];
-
-        // Check if the item has custom fields associated with it
-        if (($this->item->model) && ($this->item->model->fieldset)) {
-            $fields = $this->item->model->fieldset->fields;
-        }
-
-        $message = (new MailMessage)->markdown('notifications.markdown.asset-requested',
+        $message = (new MailMessage)->markdown('notifications.markdown.asset-acceptance',
             [
                 'item_tag'      => $this->item_tag,
                 'item_model'    => $this->item_model,
                 'item_serial'   => $this->item_serial,
-                'accepted_date' => $this->accepted_date,
+                'declined_date' => $this->declined_date,
                 'assigned_to'   => $this->assigned_to,
                 'company_name'  => $this->company_name,
                 'intro_text'    => trans('mail.acceptance_asset_declined'),

@@ -3,15 +3,16 @@
 
 {{ $intro_text }}.
 
-@if (($snipeSettings->show_images_in_email =='1') && $item->getImageUrl())
-<center><img src="{{ $item->getImageUrl() }}" alt="Asset" style="max-width: 570px;"></center>
-@endif
-
 @component('mail::table')
 |        |          |
 | ------------- | ------------- |
-| **{{ trans('mail.user') }}** | [{{ $assigned_to->present()->fullName() }}]({{ route('users.show', $assigned_to->id) }}) |
-| **{{ trans('general.requested') }}** | {{ $accepted_date }} |
+| **{{ trans('mail.user') }}** | {{ $assigned_to }} |
+@if (isset($accepted_date))
+| **{{ ucfirst(trans('general.accepted')) }}** | {{ $accepted_date }} |
+@endif
+@if (isset($declined_date))
+| **{{ trans('general.declined') }}** | {{ $declined_date }} |
+@endif
 @if ((isset($item_tag)) && ($item_tag!=''))
 | **{{ trans('mail.asset_tag') }}** | {{ $item_tag }} |
 @endif

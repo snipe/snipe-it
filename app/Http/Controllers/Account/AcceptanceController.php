@@ -20,6 +20,7 @@ use App\Models\License;
 use App\Models\Component;
 use App\Models\Consumable;
 use App\Notifications\AcceptanceAssetAcceptedNotification;
+use App\Notifications\AcceptanceAssetDeclinedNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -243,7 +244,43 @@ class AcceptanceController extends Controller
             $return_msg = trans('admin/users/message.accepted');
 
         } else {
+            // Format the data to send the declined notification
+            $branding_settings = SettingsController::getPDFBranding();
+
+            // This is the most horriblest
+            switch($acceptance->checkoutable_type){
+                case 'App\Models\Asset':
+                    $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
+                    break;
+
+                case 'App\Models\Accessory':
+                    $assigned_to = User::find($item->assignedTo);
+                    break;
+
+                case 'App\Models\LicenseSeat':
+                    $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
+                    break;
+
+                case 'App\Models\Component':
+                    $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
+                    break;
+
+                case 'App\Models\Consumable':
+                    $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
+                    break;
+            }
+            $data = [
+                'item_tag' => $item->asset_tag,
+                'item_model' => $display_model,
+                'item_serial' => $item->serial,
+                'declined_date' => Carbon::parse($acceptance->accepted_at)->format($branding_settings->date_display_format),
+                'assigned_to' => $assigned_to,
+                'company_name' => $branding_settings->site_name,
+                'date_settings' => $branding_settings->date_display_format,
+            ];
+
             $acceptance->decline($sig_filename);
+            $acceptance->notify(new AcceptanceAssetDeclinedNotification($data));
             event(new CheckoutDeclined($acceptance));
             $return_msg = trans('admin/users/message.declined');
         }
