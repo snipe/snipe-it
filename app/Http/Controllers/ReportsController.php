@@ -1179,4 +1179,35 @@ class ReportsController extends Controller
             $this->getModelsInCategoriesThatRequireAcceptance($this->getCategoriesThatRequireAcceptance())
         );
     }
+
+    /**
+     * getAssetsNotAcceptedYet
+     *
+     * @return array
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @version v1.0
+     */
+    protected function getAssetsNotAcceptedYet()
+    {
+        $this->authorize('reports.view');
+
+        return Asset::unaccepted();
+    }
+
+    
+    /**
+    * Displays EOL report.
+    *
+    * @author [A. Rahardianto] [<veenone@gmail.com>]
+    * @since [v6.0.3]
+    * @return View
+    */
+    public function getEOLReport()    
+    {
+        $this->authorize('reports.view');
+        $eol_assets = Asset::orderBy('created_at', 'DESC')->whereNotNull('purchase_date')->get();
+
+        return view('reports/eol_assets', compact('eol_assets'));
+    }
+
 }

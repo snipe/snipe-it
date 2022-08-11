@@ -371,6 +371,10 @@ return [
     'bulk_soft_delete'      =>'Also soft-delete these users. Their asset history will remain intact unless/until you purge deleted records in the Admin Settings.',
     'bulk_checkin_delete_success' => 'Your selected users have been deleted and their items have been checked in.',
     'bulk_checkin_success' => 'The items for the selected users have been checked in.',
-
+    'eol_assets_report'      => 'EOL Assets Report',
+    'obsolete'              => 'Obsolete',
+    'years'                 => 'Years',
+    'months'                => 'Months',
+    'days'                  => 'Days',
 
 ];

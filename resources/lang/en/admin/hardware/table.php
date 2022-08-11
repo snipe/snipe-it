@@ -27,4 +27,7 @@ return [
     'requested_date' => 'Requested Date',
     'changed'       => 'Changed',
     'icon' => 'Icon',
+    'eol_date'      => 'EOL Date',
+    'eol_status'  => 'Asset Status',
+    'eol_duration'  => 'Time to EOL',
 ];

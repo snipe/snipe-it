@@ -526,4 +526,62 @@ class AssetPresenter extends Presenter
     {
         return '<i class="fas fa-barcode" aria-hidden="true"></i>';
     }
+
+    /**
+     * Returns the EOL date basen on purchase date.
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @since [v6.0.3]
+     * @return null|DateTime
+     */
+    public function get_expiry_days()
+    {
+        $date = null;
+        if (($this->purchase_date) && ($this->model->model) && ($this->model->model->eol)) {
+            $date = date_create($this->purchase_date);
+            date_add($date, date_interval_create_from_date_string($this->model->model->eol . " " . trans('general.months')));
+        }
+        return $date;
+    }
+    
+    /**
+     * Returns the days this item until hits EOL.
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @since [v6.0.3]
+     * @return false|string
+     */
+    public function days_until_eol_date()
+    {
+        $from = date_create(date("Y-m-d"));
+        $diff = date_diff($from,$this->get_expiry_days());
+
+        if ($this->get_expiry_status($diff))
+        {                
+            $past_prefix = trans('general.obsolete') . ' (';
+            $past_suffix = ')';
+        } else
+        {                
+            $past_prefix = '';
+            $past_suffix = '';
+        }
+
+        return($diff->format($past_prefix  . "%y " . trans('general.years') . " %m " . trans('general.months') . " %d " .trans('general.days') . $past_suffix));
+     
+    }
+
+    /**
+     * get EOL status whether obsolete (in the past already) / not
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @since [v6.0.3]
+     * @return true|false
+     */
+    public function get_expiry_status($datediff)
+    {
+        $expiry_status = false;
+        if ($datediff->invert == 1)
+        {
+            $expiry_status = true;    
+        }
+        return $expiry_status;
+    }
+
 }
