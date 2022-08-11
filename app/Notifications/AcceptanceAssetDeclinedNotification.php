@@ -21,30 +21,13 @@ class AcceptanceAssetDeclinedNotification extends Notification
      */
     public function __construct($params)
     {
-        $this->target = $params['target'];
-        $this->item = $params['item'];
-        $this->item_type = $params['item_type'];
-        $this->item_quantity = $params['item_quantity'];
-        $this->note = '';
-        $this->last_checkout = '';
-        $this->expected_checkin = '';
-        $this->requested_date = Helper::getFormattedDateObject($params['requested_date'], 'datetime',
-            false);
+        $this->item_tag = $params['item_tag'];
+        $this->item_model = $params['item_model'];
+        $this->item_serial = $params['item_serial'];
+        $this->accepted_date = Helper::getFormattedDateObject($params['accepted_date'], 'datetime', false);
+        $this->assigned_to = $params['assigned_to'];
+        $this->company_name = $params['company_name'];
         $this->settings = Setting::getSettings();
-
-        if (array_key_exists('note', $params)) {
-            $this->note = $params['note'];
-        }
-
-        if ($this->item->last_checkout) {
-            $this->last_checkout = Helper::getFormattedDateObject($this->item->last_checkout, 'date',
-                false);
-        }
-
-        if ($this->item->expected_checkin) {
-            $this->expected_checkin = Helper::getFormattedDateObject($this->item->expected_checkin, 'date',
-                false);
-        }
     }
 
     /**
@@ -55,12 +38,6 @@ class AcceptanceAssetDeclinedNotification extends Notification
      */
     public function via($notifiable)
     {
-        $notifyBy = [];
-
-        if (Setting::getSettings()->slack_endpoint != '') {
-            $notifyBy[] = 'slack';
-        }
-
         $notifyBy[] = 'mail';
 
         return $notifyBy;
@@ -84,15 +61,13 @@ class AcceptanceAssetDeclinedNotification extends Notification
 
         $message = (new MailMessage)->markdown('notifications.markdown.asset-requested',
             [
-                'item'          => $this->item,
-                'note'          => $this->note,
-                'requested_by'  => $this->target,
-                'requested_date' => $this->requested_date,
-                'fields'        => $fields,
-                'last_checkout' => $this->last_checkout,
-                'expected_checkin'  => $this->expected_checkin,
-                'intro_text'        => trans('mail.acceptance_asset_declined'),
-                'qty'           => $this->item_quantity,
+                'item_tag'      => $this->item_tag,
+                'item_model'    => $this->item_model,
+                'item_serial'   => $this->item_serial,
+                'accepted_date' => $this->accepted_date,
+                'assigned_to'   => $this->assigned_to,
+                'company_name'  => $this->company_name,
+                'intro_text'    => trans('mail.acceptance_asset_declined'),
             ])
             ->subject(trans('mail.acceptance_asset_declined'));
 

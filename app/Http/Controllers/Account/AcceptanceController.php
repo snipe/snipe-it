@@ -19,6 +19,7 @@ use App\Models\Accessory;
 use App\Models\License;
 use App\Models\Component;
 use App\Models\Consumable;
+use App\Notifications\AcceptanceAssetAcceptedNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -236,6 +237,7 @@ class AcceptanceController extends Controller
             }
 
             $acceptance->accept($sig_filename, $item->getEula(), $pdf_filename);
+            $acceptance->notify(new AcceptanceAssetAcceptedNotification($data));
             event(new CheckoutAccepted($acceptance));
 
             $return_msg = trans('admin/users/message.accepted');
