@@ -215,13 +215,7 @@ class ValidationServiceProvider extends ServiceProvider
                 return true;
             }
         });
-//WIP
-        /**
-         * Enforces Unique Department names for Company Locations. Does not enforce uniqueness for duplicate department names for a location or duplicate department names for a company w/o location.
-         *
-         * @param obj $department
-         * @return bool There is a duplicate department or not.
-         */
+
         Validator::extend('is_unique_department', function ($attribute, $value, $parameters, $validator) {
             $data = $validator->getData();
             if ($data['location_id'] != null && $data['company_id'] != null) {
@@ -232,25 +226,12 @@ class ValidationServiceProvider extends ServiceProvider
                     ->whereNotNull('location_id')
                     ->where('id', '!=', $data['id'])
                     ->count('name');
-//            dd($data);
+
                 return $count < 1;
             }
             else {
                 return true;
             }
-//
-
-//
-//
-//                ->exists();
-
-//                Rule::unique('department', $attribute)->where('company_id', $data['company_id'])
-//                    ->where('location_id', $data['location_id'])
-//                    ->whereNotNull('company_id')
-//                    ->whereNotNull('location_id')
-//                    ->ignore($data['id']);
-
-
         });
     }
 
