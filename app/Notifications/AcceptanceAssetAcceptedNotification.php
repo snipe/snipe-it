@@ -54,7 +54,7 @@ class AcceptanceAssetAcceptedNotification extends Notification
      */
     public function toMail()
     {
-        $message = (new MailMessage)->markdown('notifications.markdown.asset-requested',
+        $message = (new MailMessage)->markdown('notifications.markdown.asset-acceptance',
             [
                 'item_tag'      => $this->item_tag,
                 'item_model'    => $this->item_model,
