@@ -161,10 +161,11 @@ trait Searchable
                         }
 
                         $query->orWhere($table.'.'.$column, 'LIKE', '%'.$term.'%');
-                        if($table == 'users'){
-                            $query->orWhereRaw('CONCAT(users.first_name ," ", users.last_name) LIKE ?', ["%$term%"]);
-                        }
                     }
+                }
+                // I put this here because I only want to add the concat one time in the end of the user relation search
+                if($relation == 'user') {
+                    $query->orWhereRaw('CONCAT (users.first_name, " ", users.last_name) LIKE ?', ["%$term%"]);
                 }
             });
         }
