@@ -54,7 +54,8 @@ class DepartmentsController extends Controller
         $department->fill($request->all());
         $department->user_id = Auth::user()->id;
         $department->manager_id = ($request->filled('manager_id') ? $request->input('manager_id') : null);
-
+        $department->location_id = ($request->filled('location_id') ? $request->input('location_id') : null);
+        $department->company_id = ($request->filled('company_id') ? $request->input('company_id') : null);
         $department = $request->handleImages($department);
 
         if ($department->save()) {
@@ -167,6 +168,8 @@ class DepartmentsController extends Controller
 
         $department->fill($request->all());
         $department->manager_id = ($request->filled('manager_id') ? $request->input('manager_id') : null);
+        $department->location_id = ($request->filled('location_id') ? $request->input('location_id') : null);
+        $department->company_id = ($request->filled('company_id') ? $request->input('company_id') : null);
 
         $department = $request->handleImages($department);
 
