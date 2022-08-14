@@ -348,12 +348,6 @@ class UsersController extends Controller
                     ->with('error', 'This user still has '.$accessoriesCount.' accessories associated with them.');
             }
 
-            if (($user->consumables()) && (($consumablesCount = $user->consumables()->count())) > 0) {
-                // Redirect to the user management page
-                return redirect()->route('users.index')
-                    ->with('error', 'This user still has '.$consumablesCount.' consumables associated with them.');
-            }
-
             if (($user->managedLocations()) && (($managedLocationsCount = $user->managedLocations()->count())) > 0) {
                 // Redirect to the user management page
                 return redirect()->route('users.index')

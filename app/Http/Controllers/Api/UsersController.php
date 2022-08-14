@@ -441,10 +441,6 @@ class UsersController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has '.$user->accessories->count().' accessories associated with them.'));
         }
 
-        if (($user->consumables) && ($user->consumables->count() > 0)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has '.$user->consumables->count().' consumables associated with them.'));
-        }
-
         if (($user->managedLocations()) && ($user->managedLocations()->count() > 0)) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'This user still has '.$user->managedLocations()->count().' locations that they manage.'));
         }
