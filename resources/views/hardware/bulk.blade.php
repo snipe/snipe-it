@@ -20,7 +20,7 @@
     <p>{{ trans('admin/hardware/form.bulk_update_help') }}</p>
 
     <div class="callout callout-warning">
-      <i class="fas fa-exclamation-triangle"></i> {{ trans('admin/hardware/form.bulk_update_warn', ['asset_count' => count($assets)]) }}
+      <i class="fas fa-exclamation-triangle"></i> {{ trans_choice('admin/hardware/form.bulk_update_warn', count($assets), ['asset_count' => count($assets)]) }}
     </div>
 
     <form class="form-horizontal" method="post" action="{{ route('hardware/bulksave') }}" autocomplete="off" role="form">
@@ -31,24 +31,38 @@
           <!-- Purchase Date -->
           <div class="form-group {{ $errors->has('purchase_date') ? ' has-error' : '' }}">
             <label for="purchase_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.date') }}</label>
-            <div class="input-group col-md-3">
+            <div class="col-md-3">
               <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
                 <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="purchase_date" id="purchase_date" value="{{ old('purchase_date') }}">
                 <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
               </div>
               {!! $errors->first('purchase_date', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
             </div>
+            <div class="col-md-3">
+              <label>
+                {{ Form::checkbox('null_purchase_date', '1', false, ['class' => 'minimal']) }}
+                {{ trans_choice('general.set_to_null', count($assets),['asset_count' => count($assets)]) }}
+              </label>
+            </div>
+
           </div>
           <!-- Expected Checkin Date -->
           <div class="form-group {{ $errors->has('expected_checkin') ? ' has-error' : '' }}">
              <label for="expected_checkin" class="col-md-3 control-label">{{ trans('admin/hardware/form.expected_checkin') }}</label>
-             <div class="input-group col-md-3">
+             <div class="col-md-3">
                   <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
                       <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="expected_checkin" id="expected_checkin" value="{{ old('expected_checkin') }}">
                       <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
                  </div>
+
                  {!! $errors->first('expected_checkin', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
              </div>
+              <div class="col-md-3">
+                <label>
+                  {{ Form::checkbox('null_expected_checkin_date', '1', false, ['class' => 'minimal']) }}
+                  {{ trans_choice('general.set_to_null', count($assets), ['asset_count' => count($assets)]) }}
+                </label>
+              </div>
           </div>
 
 
