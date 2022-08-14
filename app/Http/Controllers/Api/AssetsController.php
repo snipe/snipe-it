@@ -20,6 +20,7 @@ use App\Models\License;
 use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
+use App\Models\ReserveTask;
 use Auth;
 use Carbon\Carbon;
 use DB;
@@ -1026,5 +1027,18 @@ class AssetsController extends Controller
         $assets = $assets->skip($offset)->take($limit)->get();
 
         return (new AssetsTransformer)->transformRequestedAssets($assets, $total);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function set_reservation(Request $request)
+    {
+  
+        ReserveTask::create($request->all());
+        return redirect()->route('tasks.index');
     }
 }

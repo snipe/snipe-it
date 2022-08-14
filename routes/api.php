@@ -48,6 +48,13 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             ]
         )->name('api.assets.requestable');
 
+        Route::post('store', 
+            [
+                Api\AssetsController::class, 
+                'set_reservation'
+            ]
+        )->name('api.assets.reserve');
+
         Route::post('personal-access-tokens',
             [
                 Api\ProfileController::class,

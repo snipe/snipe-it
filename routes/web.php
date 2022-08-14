@@ -288,10 +288,12 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
         'index', 
         [TasksController::class, 'index']
     )->name('tasks.index');
+
     Route::get(
         'create', 
         [TasksController::class, 'create']
     )->name('tasks.create');
+    
     Route::post(
         'store', 
         [TasksController::class, 'store']
