@@ -221,6 +221,12 @@
 
 
                 <ul class="list-unstyled" style="line-height: 25px;">
+                    @if ($model->category)
+                        <li>{{ trans('general.category') }}:
+                            <a href="{{ route('categories.show', $model->category->id) }}">{{ $model->category->name }}</a>
+                        </li>
+                    @endif
+
                     @if ($model->manufacturer)
                         <li>
                             {{ trans('general.manufacturer') }}:
