@@ -280,7 +280,8 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
 
     Route::post('accept/{id}', [Account\AcceptanceController::class, 'store']);
 
-    Route::get('return/{id}', );
+    Route::get('return/{id}',  [Account\AcceptanceController::class, 'returnAssetAcceptance'])
+        ->name('account.accept.return');
 });
 
 Route::group(['middleware' => ['auth']], function () {

@@ -264,13 +264,14 @@ class AcceptanceController extends Controller
             $decoded_image = base64_decode($encoded_image[1]);
             Storage::put('private_uploads/signatures/' . $sig_filename, (string)$decoded_image);
 
+            $action_log= new Actionlog();
+            $action_log->created_at = date("Y-m-d H:i:s");
             // No image data is present, kick them back.
             // This mostly only applies to users on super-duper crapola browsers *cough* IE *cough*
         } else {
             return redirect()->back()->with('error', trans('general.shitty_browser'));
         }
-        $action_log= new Actionlog();
-        $action_log->created_at = date("Y-m-d H:i:s");
+
 
     }
 
