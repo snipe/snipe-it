@@ -445,7 +445,17 @@ class AssetsController extends Controller
     {
         $topsearch = ($request->get('topsearch') == 'true');
 
-        if (! $asset = Asset::where('asset_tag', '=', $request->get('assetTag'))->first()) {
+		$settings = Setting::getSettings();
+		$assetTag = $request->get('assetTag');
+		if(str_starts_with($assetTag, $settings->auto_increment_prefix)) {
+			$assetTag = substr($assetTag, strlen($settings->auto_increment_prefix));
+			$assetTag = Asset::zerofill($assetTag, $settings->zerofill_count);
+			$assetTag = $settings->auto_increment_prefix . $assetTag;
+		} else {
+			$assetTag = Asset::zerofill($assetTag, $settings->zerofill_count);
+		}
+
+        if (! $asset = Asset::where('asset_tag', '=', $assetTag)->first()) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
         $this->authorize('view', $asset);
