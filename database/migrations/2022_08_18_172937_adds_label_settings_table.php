@@ -13,11 +13,11 @@ class AddsLabelSettingsTable extends Migration
      */
     public function up()
     {
-        Schema:create('label_settings', function ( Blueprint $table)
+        Schema::create('label_settings', function ( Blueprint $table)
         {
             $table->increments('id');
-            $table->string('name');
-            $table->integer('user_id');
+            $table->string('setting_name')->default('Default Settings');
+            $table->integer('user_id')->nullable();
             $table->tinyInteger('labels_per_page')->default(30);
             $table->decimal('labels_width', 6, 5)->default(2.625);
             $table->decimal('labels_height', 6, 5)->default(1);
@@ -44,6 +44,6 @@ class AddsLabelSettingsTable extends Migration
      */
     public function down()
     {
-        Schema:drop('custom_label_settings');
+        Schema::dropifExists('custom_label_settings');
     }
 }

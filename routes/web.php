@@ -169,7 +169,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
     Route::post('barcodes', [SettingsController::class, 'postBarcodes'])->name('settings.barcodes.save');
 
     Route::get('labels', [SettingsController::class, 'getLabels'])->name('settings.labels.index');
-    Route::post('labels', [SettingsController::class, 'postLabels'])->name('settings.labels.save');
+
+
+    Route::get('labels', [LabelSettingsController::class, 'getLabels'])->name('labelsettings.labels.index');
+    Route::post('labels', [LabelSettingsController::class, 'postLabels'])->name('labelsettings.labels.save');
+    Route::post('labels', [LabelSettingsController::class, 'update'])->name('labelsettings.labels.update');
 
     Route::get('ldap', [SettingsController::class, 'getLdapSettings'])->name('settings.ldap.index');
     Route::post('ldap', [SettingsController::class, 'postLdapSettings'])->name('settings.ldap.save');
@@ -290,7 +294,7 @@ Route::group(['middleware' => ['auth']], function () {
         'reports/depreciation',
         [ReportsController::class, 'getDeprecationReport']
     )->name('reports/depreciation');
-    Route::get(
+    Route::get(ttin
         'reports/export/depreciation',
         [ReportsController::class, 'exportDeprecationReport']
     )->name('reports/export/depreciation');

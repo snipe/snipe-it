@@ -21,23 +21,27 @@
     </style>
 
 
-    {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+    {{ Form::open([
+    'method' => 'POST',
+    'files' => false,
+    'autocomplete' => 'off',
+    'class' => 'form-horizontal',
+    'role' => 'form',
+    'formAction' => ($item->id) ? route('labelsettings.update', ['admin' => $item->id]) : route('labelsettings.labels.save') ]) }}
     <!-- CSRF Token -->
     {{csrf_field()}}
 
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-
-
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
                         <i class="fas fa-tags"></i> {{ trans('admin/settings/general.labels') }}
-                    </h4>
+                    </h2>
                 </div>
                 <div class="box-body">
 
-
+                        @include ('partials.forms.edit.label-settings-select', ['translated_name' => trans('general.label_settings'), 'fieldname' => 'company_id'])
                     <div class="col-md-11 col-md-offset-1">
 
                         <div class="form-group {{ $errors->has('labels_per_page') ? 'error' : '' }}">
