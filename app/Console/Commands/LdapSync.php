@@ -217,15 +217,22 @@ class LdapSync extends Command
                 $user->department_id = $department->id;
 
                 if($item['manager'] != null) {
-                    //Captures only the Canonical Name
-                    $item['manager'] = ltrim($item['manager'], "CN=");
-                    $item['manager'] = substr($item['manager'],0, strpos($item['manager'], ','));
-                    $ldap_manager = User::where('username', $item['manager'])->first();
-                    if ( $ldap_manager && isset($ldap_manager->id) ) {
-                        $user->manager_id = $ldap_manager->id;
+                    // Get the LDAP Manager
+                    $ldap_manager = Ldap::findLdapUsers($item['manager'], -1, $this->option('filter'));
+
+                    if($ldap_manager["count"] > 0) { 
+                        // Get the Managers username
+                        $ldapManagerUsername = $ldap_manager[0][$ldap_result_username][0];
+
+                        // Get User from Manager username.
+                        $ldap_manager = User::where('username', $ldapManagerUsername)->first();
+
+                        if ( $ldap_manager && isset($ldap_manager->id) ) {
+                            // Link user to manager id.
+                            $user->manager_id = $ldap_manager->id;
+                        }
                     }
                 }
-
 
                 // Sync activated state for Active Directory.
                 if ( !empty($ldap_result_active_flag)) { // IF we have an 'active' flag set....
