@@ -56,7 +56,7 @@
 
 
     <!-- search filter list -->
-    <div class="list">
+    <div class="list clearfix">
 
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
           <div class="box box-default">
