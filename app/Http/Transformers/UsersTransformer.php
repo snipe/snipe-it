@@ -33,7 +33,7 @@ class UsersTransformer
                 'employee_num' => e($user->employee_num),
                 'manager' => ($user->manager) ? [
                     'id' => (int) $user->manager->id,
-                    'name'=> e($user->manager->username),
+                    'name'=> e($user->manager->first_name).' '.e($user->manager->last_name),
                 ] : null,
                 'jobtitle' => ($user->jobtitle) ? e($user->jobtitle) : null,
                 'phone' => ($user->phone) ? e($user->phone) : null,
