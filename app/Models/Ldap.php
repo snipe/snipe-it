@@ -126,7 +126,7 @@ class Ldap extends Model
 		$userresults = ldap_search($connection, $baseDn, $filterQuery);
 		$userentries = ldap_get_entries($connection, $userresults);
 		// Can be empty if user does not exist
-		if ( $userentries["count"] > 0 ) {
+		if ( $userentries["count"] == 1 ) {
 			$dn = $userentries[0]['dn'];
 			if ( $dn ) {
 				\Log::debug('User dn is: ' .$dn);
@@ -135,7 +135,7 @@ class Ldap extends Model
 				\Log::debug('User dn is empty.');
 			}
 		} else {
-			\Log::debug('Status of LDAP entries for user ' .$username. ': no result.');
+			\Log::debug('Status of LDAP entries for user ' .$username. ': ' .$userentries["count"]. ' result(s).');
 		}
 	}
 
