@@ -6,6 +6,7 @@ use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\Component;
 use App\Models\Consumable;
+use App\Models\LabelSettings;
 use App\Models\License;
 use App\Models\Setting;
 use App\Models\SnipeSCIMConfig;
@@ -13,11 +14,13 @@ use App\Observers\AccessoryObserver;
 use App\Observers\AssetObserver;
 use App\Observers\ComponentObserver;
 use App\Observers\ConsumableObserver;
+use App\Observers\LabelSettingObserver;
 use App\Observers\LicenseObserver;
 use App\Observers\SettingObserver;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use PhpParser\Node\Stmt\Label;
 
 /**
  * This service provider handles setting the observers on models
@@ -63,6 +66,7 @@ class AppServiceProvider extends ServiceProvider
         Consumable::observe(ConsumableObserver::class);
         License::observe(LicenseObserver::class);
         Setting::observe(SettingObserver::class);
+        LabelSettings::observe(LabelSettingObserver::class);
     }
 
     /**

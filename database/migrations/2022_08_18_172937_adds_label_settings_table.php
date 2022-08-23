@@ -35,6 +35,24 @@ class AddsLabelSettingsTable extends Migration
             $table->tinyInteger('labels_display_tag')->default(1);
             $table->timestamps();
         });
+        Schema::table('settings', function ( Blueprint $table) {
+            $table->renameColumn('labels_per_page', 'deprecated_labels_per_page');
+            $table->renameColumn('labels_width', 'deprecated_labels_width');
+            $table->renameColumn('labels_width', 'deprecated_labels_width');
+            $table->renameColumn('labels_height', 'deprecated_labels_height');
+            $table->renameColumn('labels_pmargin_left', 'deprecated_labels_pmargin_left');
+            $table->renameColumn('labels_pmargin_right', 'deprecated_labels_pmargin_right');
+            $table->renameColumn('labels_pmargin_top', 'deprecated_labels_pmargin_top');
+            $table->renameColumn('labels_pmargin_bottom', 'deprecated_labels_pmargin_bottom');
+            $table->renameColumn('labels_display_bgutter', 'deprecated_labels_display_bgutter');
+            $table->renameColumn('labels_display_sgutter', 'deprecated_labels_display_sgutter');
+            $table->renameColumn('labels_fontsize', 'deprecated_labels_fontsize');
+            $table->renameColumn('labels_pagewidth', 'deprecated_labels_pagewidth');
+            $table->renameColumn('labels_pageheight', 'deprecated_labels_pageheight');
+            $table->renameColumn('labels_display_name', 'deprecated_labels_display_name');
+            $table->renameColumn('labels_display_serial', 'deprecated_labels_display_serial');
+            $table->renameColumn('labels_display_tag', 'deprecated_labels_display_tag');
+        });
     }
 
     /**
@@ -45,5 +63,24 @@ class AddsLabelSettingsTable extends Migration
     public function down()
     {
         Schema::dropifExists('custom_label_settings');
+
+        Schema::table('settings', function (Blueprint $table) {
+            $table->renameColumn('deprecated_labels_per_page', 'labels_per_page');
+            $table->renameColumn('deprecated_labels_width', 'labels_width');
+            $table->renameColumn('deprecated_labels_width', 'labels_width');
+            $table->renameColumn('deprecated_labels_height', 'labels_height');
+            $table->renameColumn('deprecated_labels_pmargin_left', 'labels_pmargin_left');
+            $table->renameColumn('deprecated_labels_pmargin_right', 'labels_pmargin_right');
+            $table->renameColumn('deprecated_labels_pmargin_top', 'labels_pmargin_top');
+            $table->renameColumn('deprecated_labels_pmargin_bottom', 'labels_pmargin_bottom');
+            $table->renameColumn('deprecated_labels_display_bgutter', 'labels_display_bgutter');
+            $table->renameColumn('deprecated_labels_display_sgutter', 'labels_display_sgutter');
+            $table->renameColumn('deprecated_labels_fontsize', 'labels_fontsize');
+            $table->renameColumn('deprecated_labels_pagewidth', 'labels_pagewidth');
+            $table->renameColumn('deprecated_labels_pageheight', 'labels_pageheight');
+            $table->renameColumn('deprecated_labels_display_name', 'labels_display_name');
+            $table->renameColumn('deprecated_labels_display_serial', 'labels_display_serial');
+            $table->renameColumn('deprecated_labels_display_tag', 'labels_display_tag');
+        });
     }
 }

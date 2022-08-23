@@ -4,10 +4,13 @@
     <div class="form-group">
         {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
         <div class="col-md-6">
-            <select class="js-data-ajax"  disabled="true" data-endpoint="companies" data-placeholder="{{ trans('general.select_setting') }}" name="{{ $fieldname }}" style="width: 100%" id="company_select" aria-label="{{ $fieldname }}">
-                @if ($company_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
-                    <option value="{{ $company_id }}" selected="selected" role="option" aria-selected="true"  role="option">
-                        {{ (\App\Models\Company::find($company_id)) ? \App\Models\Company::find($company_id)->name : '' }}
+            <select class="js-data-ajax" disabled="true" data-endpoint="label_settings"
+                    data-placeholder="{{ trans('general.select_setting') }}" name="{{ $fieldname }}" style="width: 100%"
+                    id="company_select" aria-label="{{ $fieldname }}">
+                @if ($label_settings_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
+                    <option value="{{ $label_settings_id }}" selected="selected" role="option" aria-selected="true"
+                            role="option">
+                        {{ (\App\Models\LabelSettings::find($label_settings_id)) ? \App\Models\LabelSettings::find($label_settings_id)->name : '' }}
                     </option>
                 @else
                     <option value="" role="option">{{ trans('general.select_company') }}</option>
@@ -21,10 +24,12 @@
     <div id="{{ $fieldname }}" class="form-group{{ $errors->has($fieldname) ? ' has-error' : '' }}">
         {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
         <div class="col-md-6">
-            <select class="js-data-ajax" data-endpoint="companies" data-placeholder="{{ trans('general.select_setting') }}" name="{{ $fieldname }}" style="width: 100%" id="company_select">
-                @if ($company_id = Request::old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
-                    <option value="{{ $company_id }}" selected="selected">
-                        {{ (\App\Models\Company::find($company_id)) ? \App\Models\Company::find($company_id)->name : '' }}
+            <select class="js-data-ajax" data-endpoint="companies"
+                    data-placeholder="{{ trans('general.select_setting') }}" name="{{ $fieldname }}" style="width: 100%"
+                    id="company_select">
+                @if ($label_settings_id = Request::old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
+                    <option value="{{ $label_settings_id }}" selected="selected">
+                        {{ (\App\Models\LabelSettings::find($label_settings_id)) ? \App\Models\LabelSettings::find($label_settings_id)->name : '' }}
                     </option>
                 @else
                     <option value="">{{ trans('general.select_company') }}</option>

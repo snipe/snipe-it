@@ -11,6 +11,7 @@ use App\Http\Controllers\GroupsController;
 use App\Http\Controllers\HealthController;
 use App\Http\Controllers\ImportsController;
 use App\Http\Controllers\LocationsController;
+use App\Http\Controllers\LabelSettingsController;
 use App\Http\Controllers\ManufacturersController;
 use App\Http\Controllers\ModalController;
 use App\Http\Controllers\ProfileController;
@@ -168,12 +169,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
     Route::get('barcodes', [SettingsController::class, 'getBarcodes'])->name('settings.barcodes.index');
     Route::post('barcodes', [SettingsController::class, 'postBarcodes'])->name('settings.barcodes.save');
 
-    Route::get('labels', [SettingsController::class, 'getLabels'])->name('settings.labels.index');
-
-
-    Route::get('labels', [LabelSettingsController::class, 'getLabels'])->name('labelsettings.labels.index');
-    Route::post('labels', [LabelSettingsController::class, 'postLabels'])->name('labelsettings.labels.save');
-    Route::post('labels', [LabelSettingsController::class, 'update'])->name('labelsettings.labels.update');
+    Route::get('labels', [LabelSettingsController::class, 'getLabels'])->name('labelsettings.index');
+    Route::post('labels', [LabelSettingsController::class, 'postLabels'])->name('labelsettings.save');
+    Route::post('labels', [LabelSettingsController::class, 'update'])->name('labelsettings.update');
 
     Route::get('ldap', [SettingsController::class, 'getLdapSettings'])->name('settings.ldap.index');
     Route::post('ldap', [SettingsController::class, 'postLdapSettings'])->name('settings.ldap.save');
@@ -294,7 +292,7 @@ Route::group(['middleware' => ['auth']], function () {
         'reports/depreciation',
         [ReportsController::class, 'getDeprecationReport']
     )->name('reports/depreciation');
-    Route::get(ttin
+    Route::get(
         'reports/export/depreciation',
         [ReportsController::class, 'exportDeprecationReport']
     )->name('reports/export/depreciation');

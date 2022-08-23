@@ -4,11 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Watson\Validating\ValidatingTrait;
 
 class LabelSettings extends Model
 {
     use ValidatingTrait;
+
+    /**
+     * The app settings cache key name.
+     *
+     * @var string
+     */
+    const APP_LABEL_SETTINGS_KEY = 'snipeit_app_settings';
 
     /**
      * Model rules.
@@ -31,7 +39,7 @@ class LabelSettings extends Model
         'labels_pagewidth'                    => 'numeric|nullable',
         'labels_pageheight'                   => 'numeric|nullable',
     ];
-
+    protected $table= 'label_settings';
     protected $dates = [
         'created_at',
         'updated_at',
@@ -52,4 +60,16 @@ class LabelSettings extends Model
         'labels_pagewidth',
         'labels_pageheight',
         ];
+
+    public static function getLabelSettings(): ?self
+    {
+        return Cache::rememberForever(self::APP_LABEL_SETTINGS_KEY, function () {
+            // Need for setup as no tables exist
+            try {
+                return self::first();
+            } catch (\Throwable $th) {
+                return null;
+            }
+        });
+    }
 }

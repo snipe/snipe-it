@@ -208,7 +208,7 @@
           <div class="box box-default">
             <div class="box-body text-center">
               <h5>
-                <a href="{{ route('settings.labels.index') }}" class="settings_button">
+                <a href="{{ route('labelsettings.index') }}" class="settings_button">
                   <i class="fas fa-tags fa-4x" aria-hidden="true"></i>
                   <br><br>
                   <span class="name">{{ trans('admin/settings/general.labels') }}</span>
