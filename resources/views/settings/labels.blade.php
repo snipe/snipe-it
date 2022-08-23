@@ -41,7 +41,7 @@
                 </div>
                 <div class="box-body">
 
-                    @include ('partials.forms.edit.label-settings-select', ['translated_name' => trans('general.label_settings'), 'fieldname' => 'company_id'])
+                    @include ('partials.forms.edit.label-settings-select', ['translated_name' => trans('general.label_settings'), 'fieldname' => '$label_settings_id'])
                     <div class="col-md-11 col-md-offset-1">
 
                         <div class="form-group {{ $errors->has('labels_per_page') ? 'error' : '' }}">

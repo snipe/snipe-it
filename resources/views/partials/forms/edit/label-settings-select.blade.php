@@ -1,6 +1,6 @@
-<!-- Company -->
+<!-- Label Settings -->
 @if (($snipeSettings->full_multiple_companies_support=='1') && (!Auth::user()->isSuperUser()))
-    <!-- full company support is enabled and this user isn't a superadmin -->
+    <!-- full company support is enabled or this user is a superadmin -->
     <div class="form-group">
         {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
         <div class="col-md-6">
@@ -13,7 +13,7 @@
                         {{ (\App\Models\LabelSettings::find($label_settings_id)) ? \App\Models\LabelSettings::find($label_settings_id)->name : '' }}
                     </option>
                 @else
-                    <option value="" role="option">{{ trans('general.select_company') }}</option>
+                    <option value="" role="option">{{ trans('general.select_setting') }}</option>
                 @endif
             </select>
         </div>
@@ -24,15 +24,15 @@
     <div id="{{ $fieldname }}" class="form-group{{ $errors->has($fieldname) ? ' has-error' : '' }}">
         {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
         <div class="col-md-6">
-            <select class="js-data-ajax" data-endpoint="companies"
+            <select class="js-data-ajax" data-endpoint="label_settings"
                     data-placeholder="{{ trans('general.select_setting') }}" name="{{ $fieldname }}" style="width: 100%"
-                    id="company_select">
+                    id="label_setting_select">
                 @if ($label_settings_id = Request::old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                     <option value="{{ $label_settings_id }}" selected="selected">
                         {{ (\App\Models\LabelSettings::find($label_settings_id)) ? \App\Models\LabelSettings::find($label_settings_id)->name : '' }}
                     </option>
                 @else
-                    <option value="">{{ trans('general.select_company') }}</option>
+                    <option value="">{{ trans('general.select_setting') }}</option>
                 @endif
             </select>
         </div>
