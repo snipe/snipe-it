@@ -13,7 +13,6 @@ use Redirect;
 use Request;
 use Storage;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use function JmesPath\search;
 
 /**
  * This class controls all actions related to asset models for
