@@ -463,7 +463,18 @@ class AssetModelsController extends Controller
             $data[$customField->db_column] = $defaultValue;
         }
 
-        $rules = $model->fieldset->validation_rules();
+        $fieldsets = $model->fieldset->validation_rules();
+        $rules = array();
+
+        foreach ($fieldsets as $fieldset => $validation){
+            // If the field is marked as required, eliminate the rule so it doesn't interfere with the default values
+            // (we are at model level, the rule still applies when creating a new asset using this model)
+            $index = array_search('required', $validation);
+            if ($index !== false){
+                unset($validation[$index]);
+            }
+            $rules[$fieldset] = $validation;
+        }
 
         $validator = Validator::make($data, $rules);
 
