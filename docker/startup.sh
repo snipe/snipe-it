@@ -19,6 +19,13 @@ fi
 # create data directories
 for dir in \
   'data/private_uploads' \
+  'data/private_uploads/assets' \
+  'data/private_uploads/audits' \
+  'data/private_uploads/imports' \
+  'data/private_uploads/assetmodels' \
+  'data/private_uploads/users' \
+  'data/private_uploads/licenses' \
+  'data/private_uploads/signatures' \
   'data/uploads/accessories' \
   'data/uploads/avatars' \
   'data/uploads/barcodes' \
