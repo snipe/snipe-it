@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Setting;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -133,7 +133,7 @@ class ProfileController extends Controller
     public function password()
     {
         $user = Auth::user();
-
+        
         return view('account/change-password', compact('user'));
     }
 
@@ -186,6 +186,9 @@ class ProfileController extends Controller
         if (! $validator->fails()) {
             $user->password = Hash::make($request->input('password'));
             $user->save();
+
+            // Log the user out of other devices
+            Auth::logoutOtherDevices($request->input('password'));
             return redirect()->route('account.password.index')->with('success', 'Password updated!');
 
         }
