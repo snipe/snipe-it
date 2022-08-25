@@ -90,7 +90,7 @@ class ItemImporter extends Importer
         $this->item['qty'] = $this->findCsvMatch($row, 'quantity');
         $this->item['requestable'] = $this->findCsvMatch($row, 'requestable');
         $this->item['user_id'] = $this->user_id;
-        $this->item['serial'] = $this->findCsvMatch($row, 'serial');
+        $this->item['serial'] = $this->findCsvMatch($row, 'serial number');
         // NO need to call this method if we're running the user import.
         // TODO: Merge these methods.
         $this->item['checkout_class'] = $this->findCsvMatch($row, 'checkout_class');
