@@ -1006,7 +1006,11 @@ class ReportsController extends Controller
         }
         $assetItem = $acceptance->checkoutable;
 
-        $logItem = $assetItem->checkouts()->where('created_at', '=', $acceptance->created_at)->get()[0];
+        if (is_null($acceptance->created_at)){
+            return redirect()->route('reports/unaccepted_assets')->with('error', trans('general.bad_data'));
+        } else {
+            $logItem = $assetItem->checkouts()->where('created_at', '=', $acceptance->created_at)->get()[0];
+        }
 
         if(!$assetItem->assignedTo->locale){
             Notification::locale(Setting::getSettings()->locale)->send(
