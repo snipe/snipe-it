@@ -61,6 +61,16 @@ class LabelSettings extends Model
         'labels_pageheight',
         ];
 
+    /**
+     * Get the app settings.
+     *  Cache is expired on Setting model saved in EventServiceProvider.
+     *
+     * @author Wes Hulette <jwhulette@gmail.com>
+     *
+     * @since 5.0.0
+     *
+     * @return \App\Models\LabelSetting|null
+     */
     public static function getLabelSettings(): ?self
     {
         return Cache::rememberForever(self::APP_LABEL_SETTINGS_KEY, function () {

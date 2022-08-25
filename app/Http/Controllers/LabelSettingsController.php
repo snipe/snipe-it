@@ -95,62 +95,62 @@ class LabelSettingsController extends Controller
      */
     public function postLabels(Request $request)
     {
-        if (is_null($label_setting = LabelSettings::getLabelSettings())) {
+        if (is_null($label_settings = LabelSettings::getLabelSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
-        $label_setting->labels_per_page = $request->input('labels_per_page');
-        $label_setting->labels_width = $request->input('labels_width');
-        $label_setting->labels_height = $request->input('labels_height');
-        $label_setting->labels_pmargin_left = $request->input('labels_pmargin_left');
-        $label_setting->labels_pmargin_right = $request->input('labels_pmargin_right');
-        $label_setting->labels_pmargin_top = $request->input('labels_pmargin_top');
-        $label_setting->labels_pmargin_bottom = $request->input('labels_pmargin_bottom');
-        $label_setting->labels_display_bgutter = $request->input('labels_display_bgutter');
-        $label_setting->labels_display_sgutter = $request->input('labels_display_sgutter');
-        $label_setting->labels_fontsize = $request->input('labels_fontsize');
-        $label_setting->labels_pagewidth = $request->input('labels_pagewidth');
-        $label_setting->labels_pageheight = $request->input('labels_pageheight');
-        $label_setting->labels_display_company_name = $request->input('labels_display_company_name', '0');
-        $label_setting->labels_display_company_name = $request->input('labels_display_company_name', '0');
+        $label_settings->labels_per_page = $request->input('labels_per_page');
+        $label_settings->labels_width = $request->input('labels_width');
+        $label_settings->labels_height = $request->input('labels_height');
+        $label_settings->labels_pmargin_left = $request->input('labels_pmargin_left');
+        $label_settings->labels_pmargin_right = $request->input('labels_pmargin_right');
+        $label_settings->labels_pmargin_top = $request->input('labels_pmargin_top');
+        $label_settings->labels_pmargin_bottom = $request->input('labels_pmargin_bottom');
+        $label_settings->labels_display_bgutter = $request->input('labels_display_bgutter');
+        $label_settings->labels_display_sgutter = $request->input('labels_display_sgutter');
+        $label_settings->labels_fontsize = $request->input('labels_fontsize');
+        $label_settings->labels_pagewidth = $request->input('labels_pagewidth');
+        $label_settings->labels_pageheight = $request->input('labels_pageheight');
+        $label_settings->labels_display_company_name = $request->input('labels_display_company_name', '0');
+        $label_settings->labels_display_company_name = $request->input('labels_display_company_name', '0');
 
 
 
         if ($request->filled('labels_display_name')) {
-            $label_setting->labels_display_name = 1;
+            $label_settings->labels_display_name = 1;
         } else {
-            $label_setting->labels_display_name = 0;
+            $label_settings->labels_display_name = 0;
         }
 
         if ($request->filled('labels_display_serial')) {
-            $label_setting->labels_display_serial = 1;
+            $label_settings->labels_display_serial = 1;
         } else {
-            $label_setting->labels_display_serial = 0;
+            $label_settings->labels_display_serial = 0;
         }
 
         if ($request->filled('labels_display_tag')) {
-            $label_setting->labels_display_tag = 1;
+            $label_settings->labels_display_tag = 1;
         } else {
-            $label_setting->labels_display_tag = 0;
+            $label_settings->labels_display_tag = 0;
         }
 
         if ($request->filled('labels_display_tag')) {
-            $label_setting->labels_display_tag = 1;
+            $label_settings->labels_display_tag = 1;
         } else {
-            $label_setting->labels_display_tag = 0;
+            $label_settings->labels_display_tag = 0;
         }
 
         if ($request->filled('labels_display_model')) {
-            $label_setting->labels_display_model = 1;
+            $label_settings->labels_display_model = 1;
         } else {
-            $label_setting->labels_display_model = 0;
+            $label_settings->labels_display_model = 0;
         }
 
-        if ($label_setting->save()) {
+        if ($label_settings->save()) {
             return redirect()->route('settings.index')
                 ->with('success', trans('admin/settings/message.update.success'));
         }
 
-        return redirect()->back()->withInput()->withErrors($label_setting->getErrors());
+        return redirect()->back()->withInput()->withErrors($label_settings->getErrors());
     }
 
     /**
