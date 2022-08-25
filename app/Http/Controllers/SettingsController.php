@@ -955,6 +955,8 @@ class SettingsController extends Controller
                 $setting->ldap_pword = Crypt::encrypt($request->input('ldap_pword'));
             }
             $setting->ldap_basedn = $request->input('ldap_basedn');
+            $setting->ldap_default_group_check = $request->input('ldap_default_group_check');
+            $setting->ldap_default_group = $request->input('ldap_default_group');
             $setting->ldap_filter = $request->input('ldap_filter');
             $setting->ldap_username_field = $request->input('ldap_username_field');
             $setting->ldap_lname_field = $request->input('ldap_lname_field');

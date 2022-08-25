@@ -75,6 +75,8 @@ return [
     'label_logo_size'           => 'Square logos look best - will be displayed in the top right of each asset label. ',
     'laravel'                   => 'Laravel Version',
     'ldap'                      => 'LDAP',
+    'ldap_default_group'        => 'Default Permissions Group',
+    'ldap_default_group_info'   => 'Check this box if you would like to apply a permissions group to new LDAP users.',
     'ldap_help'                 => 'LDAP/Active Directory',
     'ldap_client_tls_key'       => 'LDAP Client TLS Key',
     'ldap_client_tls_cert'      => 'LDAP Client-Side TLS Certificate',

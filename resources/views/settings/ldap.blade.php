@@ -90,7 +90,64 @@
 
                             </div>
                         </div>
+                        <!-- Default LDAP Permissions Group Check-->
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                {{ Form::label('ldap_default_group', trans('admin/settings/general.ldap_default_group')) }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ Form::checkbox('ldap_default_group', '1', Request::old('ldap_default_group', $setting->ldap_default_group), [((config('app.lock_passwords')===true)) ? 'disabled ': '', 'class' => 'minimal '. $setting->demoMode, $setting->demoMode]) }}
+                                {{ trans('admin/settings/general.ldap_default_group_info') }}
+                                @if (config('app.lock_passwords')===true)
+                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                @endif
+                            </div>
+                        </div>
+                        <!--  Default LDAP Permissions Group Select -->
+                        <div class="form-group{{ $errors->has('groups') ? ' has-error' : '' }}">
+                            <label class="col-md-3 control-label" for="groups[]"> {{ trans('general.groups') }}</label>
+                            <div class="col-md-6">
 
+                                @if ($groups->count())
+                                    @if ((Config::get('app.lock_passwords') || (!Auth::user()->isSuperUser())))
+
+                                        @if (count($userGroups->keys()) > 0)
+                                            <ul>
+                                                @foreach ($groups as $id => $group)
+                                                    {!! ($userGroups->keys()->contains($id) ? '<li>'.e($group).'</li>' : '') !!}
+                                                @endforeach
+                                            </ul>
+                                        @endif
+
+                                        <span class="help-block">{{ trans('admin/users/general.group_memberships_helpblock') }}</p>
+                                  @else
+                                                <div class="controls">
+                                    <select
+                                            name="groups[]"
+                                            aria-label="groups[]"
+                                            id="groups[]"
+                                            multiple="multiple"
+                                            class="form-control">
+
+                                        @foreach ($groups as $id => $group)
+                                            <option value="{{ $id }}"
+                                                    {{ ($userGroups->keys()->contains($id) ? ' selected="selected"' : '') }}>
+                                                {{ $group }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                    <span class="help-block">
+                                      {{ trans('admin/users/table.groupnotes') }}
+                                    </span>
+                            </div>
+                                            @endif
+                                            @else
+                                                <p>No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.</p>
+                                    @endif
+
+                            </div>
+                        </div>
                         <!-- AD Flag -->
                         <div class="form-group">
                             <div class="col-md-3">

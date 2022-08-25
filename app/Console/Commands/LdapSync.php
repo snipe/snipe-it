@@ -216,6 +216,14 @@ class LdapSync extends Command
                 $user->country = $item['country'];
                 $user->department_id = $department->id;
 
+                if($item->ldap_default_group_check == 1){
+
+                    $permissions_array = $item['ldap_default_group'];
+                    $user->permissions= json_encode($permissions_array);
+
+
+                }
+
                 if($item['manager'] != null) {
                     // Get the LDAP Manager
                     $ldap_manager = Ldap::findLdapUsers($item['manager'], -1, $this->option('filter'));
