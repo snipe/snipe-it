@@ -47,7 +47,16 @@ The browser tests use [Dusk](https://laravel.com/docs/8.x/dusk) to run them.
 When troubleshooting any problems, make sure that your `.env` file is configured
 correctly to run the existing application.
 
-To run the test suite use the following command from your terminal:
+### Test Setup
+
+Your application needs to be configued and up and running in order for the browser
+tests to actually run. When running the tests locally, you can start the application
+using the following command:
+
+`php artisan serve`
+
+
+To run the test suite use the following command from another terminal tab or window:
 
 `php artisan dusk`
 
