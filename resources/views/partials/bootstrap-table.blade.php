@@ -562,6 +562,13 @@
 
     }
 
+    function assetSerialLinkFormatter(value, row) {
+        if ((row.asset) && (row.asset.serial)) {
+            return '<a href="{{ url('/') }}/hardware/' + row.asset.id + '">' + row.asset.serial + '</a>';
+        }
+
+    }
+
     function trueFalseFormatter(value) {
         if ((value) && ((value == 'true') || (value == '1'))) {
             return '<i class="fas fa-check text-success"></i>';

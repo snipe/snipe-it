@@ -230,7 +230,17 @@ class LicensePresenter extends Presenter
                 'title' => trans('admin/licenses/form.asset'),
                 'visible' => true,
                 'formatter' => 'hardwareLinkObjFormatter',
-            ], [
+            ],
+            [
+                "field" => "assigned_asset",
+                "searchable" => false,
+                "sortable" => false,
+                "switchable" => true,
+                "title" => trans('admin/hardware/table.serial'),
+                "visible" => true,
+                "formatter" => 'assetSerialLinkFormatter',
+            ],
+            [
                 'field' => 'location',
                 'searchable' => false,
                 'sortable' => false,

@@ -39,6 +39,7 @@ class LicenseSeatsTransformer
             'assigned_asset' => ($seat->asset) ? [
                 'id' => (int) $seat->asset->id,
                 'name'=> e($seat->asset->present()->fullName),
+                'serial'=> e($seat->asset->present()->serial),
             ] : null,
             'location' => ($seat->location()) ? [
                 'id' => (int) $seat->location()->id,
