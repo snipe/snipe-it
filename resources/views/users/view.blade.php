@@ -842,7 +842,7 @@
                                 {{ $file->filename }}
                             </td>
                             <td>
-                                {{ Helper::formatFilesizeUnits(filesize(storage_path('private_uploads/users/').$file->filename)) }}
+                                {{ Helper::formatFilesizeUnits(Storage::size('private_uploads/users/'.$file->filename)) }}
                             </td>
 
                             <td>

@@ -469,8 +469,8 @@
                 <td>
                   {{ $file->filename }}
                 </td>
-                <td data-value="{{ filesize(storage_path('private_uploads/licenses/').$file->filename) }}">
-                  {{ Helper::formatFilesizeUnits(filesize(storage_path('private_uploads/licenses/').$file->filename)) }}
+                <td data-value="{{ Storage::size('private_uploads/licenses/'.$file->filename) }}">
+                  {{ Helper::formatFilesizeUnits(Storage::size('private_uploads/licenses/'.$file->filename)) }}
                 </td>
 
                 <td>
