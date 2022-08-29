@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Gate;
 use Watson\Validating\ValidatingTrait;
+use App\Helpers\Helper;
 
 /**
  * Model for Categories. Categories are a higher-level group
@@ -207,12 +208,11 @@ class Category extends SnipeModel
      */
     public function getEula()
     {
-        $Parsedown = new \Parsedown();
 
         if ($this->eula_text) {
-            return $Parsedown->text(e($this->eula_text));
+            return Helper::parseEscapedMarkedown($this->eula_text);
         } elseif ((Setting::getSettings()->default_eula_text) && ($this->use_default_eula == '1')) {
-            return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
+            return Helper::parseEscapedMarkedown(Setting::getSettings()->default_eula_text);
         } else {
             return null;
         }

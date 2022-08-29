@@ -22,12 +22,13 @@ class Helper
      * @since [v2.0]
      * @return string
      */
-    public static function parseEscapedMarkedown($str)
+    public static function parseEscapedMarkedown($str = null)
     {
         $Parsedown = new \Parsedown();
+        $Parsedown->setSafeMode(true);
 
         if ($str) {
-            return $Parsedown->text(e($str));
+            return $Parsedown->text($str);
         }
     }
 
