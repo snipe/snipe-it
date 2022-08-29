@@ -126,7 +126,7 @@ class AuthServiceProvider extends ServiceProvider
         // Reports
         // -----------------------------------------
         Gate::define('reports.view', function ($user) {
-            if ($user->hasAccess('reports.view')) {
+            if ($user->hasAccess('reports.view') || $user->hasAccess('admin') ) {
                 return true;
             }
         });
