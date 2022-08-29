@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Events\AssetCheckedOut;
 use App\Events\CheckoutableCheckedOut;
 use App\Exceptions\CheckoutNotAllowed;
+use App\Helpers\Helper;
 use App\Http\Traits\UniqueSerialTrait;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Acceptable;
@@ -875,13 +876,12 @@ class Asset extends Depreciable
      */
     public function getEula()
     {
-        $Parsedown = new \Parsedown();
-        
+
         if (($this->model) && ($this->model->category)) {
             if ($this->model->category->eula_text) {
-                return $Parsedown->text(e($this->model->category->eula_text));
+                return Helper::parseEscapedMarkedown($this->model->category->eula_text);
             } elseif ($this->model->category->use_default_eula == '1') {
-                return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
+                return Helper::parseEscapedMarkedown(Setting::getSettings()->default_eula_text);
             } else {
                 return false;
             }
