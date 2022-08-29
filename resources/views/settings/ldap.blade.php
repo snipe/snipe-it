@@ -90,19 +90,7 @@
 
                             </div>
                         </div>
-                        <!-- Default LDAP Permissions Group Check-->
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                {{ Form::label('ldap_default_group', trans('admin/settings/general.ldap_default_group')) }}
-                            </div>
-                            <div class="col-md-9">
-                                {{ Form::checkbox('ldap_default_group', '1', Request::old('ldap_default_group', $setting->ldap_default_group), [((config('app.lock_passwords')===true)) ? 'disabled ': '', 'class' => 'minimal '. $setting->demoMode, $setting->demoMode]) }}
-                                {{ trans('admin/settings/general.ldap_default_group_info') }}
-                                @if (config('app.lock_passwords')===true)
-                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
-                                @endif
-                            </div>
-                        </div>
+
                         <!--  Default LDAP Permissions Group Select -->
                         <div class="form-group{{ $errors->has('groups') ? ' has-error' : '' }}">
                             <label class="col-md-3 control-label" for="groups[]"> {{ trans('general.groups') }}</label>
@@ -110,16 +98,14 @@
 
                                 @if ($groups->count())
                                     @if ((Config::get('app.lock_passwords') || (!Auth::user()->isSuperUser())))
+                                        <ul>
+                                            @foreach ($groups as $id => $group)
+                                                {!! '<li>'.e($group).'</li>' !!}
+                                            @endforeach
+                                        </ul>
 
-                                        @if (count($userGroups->keys()) > 0)
-                                            <ul>
-                                                @foreach ($groups as $id => $group)
-                                                    {!! ($userGroups->keys()->contains($id) ? '<li>'.e($group).'</li>' : '') !!}
-                                                @endforeach
-                                            </ul>
-                                        @endif
 
-                                        <span class="help-block">{{ trans('admin/users/general.group_memberships_helpblock') }}</p>
+                                        <span class="help-block">{{ trans('admin/users/general.group_memberships_helpblock') }}</span>
                                   @else
                                                 <div class="controls">
                                     <select
@@ -131,7 +117,6 @@
 
                                         @foreach ($groups as $id => $group)
                                             <option value="{{ $id }}"
-                                                    {{ ($userGroups->keys()->contains($id) ? ' selected="selected"' : '') }}>
                                                 {{ $group }}
                                             </option>
                                         @endforeach
@@ -148,6 +133,7 @@
 
                             </div>
                         </div>
+
                         <!-- AD Flag -->
                         <div class="form-group">
                             <div class="col-md-3">

@@ -7,6 +7,7 @@ use App\Helpers\StorageHelper;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SettingsSamlRequest;
 use App\Http\Requests\SetupUserRequest;
+use App\Models\Group;
 use App\Models\Setting;
 use App\Models\Asset;
 use App\Models\User;
@@ -910,6 +911,8 @@ class SettingsController extends Controller
     public function getLdapSettings()
     {
         $setting = Setting::getSettings();
+        $groups = Group::pluck('name', 'id');
+
 
         /**
          * This validator is only temporary (famous last words.) - @snipe
@@ -928,7 +931,7 @@ class SettingsController extends Controller
 
 
 
-        return view('settings.ldap', compact('setting'))->withErrors($validator);
+        return view('settings.ldap', compact('setting', 'groups'))->withErrors($validator);
     }
 
     /**

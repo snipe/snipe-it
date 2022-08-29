@@ -14,10 +14,8 @@ class AddsLdapDefaultGroupToSettingsTable extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->boolean('ldap_default_group_check')
-                    ->after('ldap_base_dn');
-            $table->boolean('ldap_default_group')
-                ->after('ldap_default_group_check');
+            $table->string('ldap_default_group')
+                ->after('ldap_base_dn');
         });
     }
 
@@ -29,7 +27,6 @@ class AddsLdapDefaultGroupToSettingsTable extends Migration
     public function down()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->dropColumn('ldap_default_group_check');
             $table->dropColumn('ldap_default_group');
         });
     }

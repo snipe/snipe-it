@@ -216,7 +216,7 @@ class LdapSync extends Command
                 $user->country = $item['country'];
                 $user->department_id = $department->id;
 
-                if($item->ldap_default_group_check == 1){
+                if($item->ldap_default_group != null){
 
                     $permissions_array = $item['ldap_default_group'];
                     $user->permissions= json_encode($permissions_array);
