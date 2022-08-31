@@ -92,9 +92,13 @@
                         </div>
 
                         <!--  Default LDAP Permissions Group Select -->
+
                         <div class="form-group{{ $errors->has('group') ? ' has-error' : '' }}">
-                            <label class="col-md-3 control-label" for="group"> {{ trans('general.groups') }}</label>
-                            <div class="col-md-6">
+                            <div class="col-md-3">
+                                {{ Form::label('ldap_default_group', trans('admin/settings/general.ldap_default_group')) }}
+                            </div>
+
+                            <div class="col-md-9">
 
                                 @if ($groups->count())
                                     @if ((Config::get('app.lock_passwords') || (!Auth::user()->isSuperUser())))
@@ -106,30 +110,30 @@
 
 
                                         <span class="help-block">{{ trans('admin/users/general.group_memberships_helpblock') }}</span>
-                                  @else
-                                                <div class="controls">
-                                    <select
-                                            name="group"
-                                            aria-label="group"
-                                            id="group"
-                                            multiple="multiple"
-                                            class="form-control">
+                                    @else
+                                        <div class="controls">
+                                            <select
+                                                    name="ldap_default_group"
+                                                    aria-label="ldap_default_group"
+                                                    id="ldap_default_group"
+                                                    class="form-control"
+                                            >
 
-                                        @foreach ($groups as $id => $group)
-                                            <option value="{{ $id }}"
-                                                {{ $group }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                                @foreach ($groups as $id => $group)
+                                                    <option value="{{ $id }}">
+                                                        {{ $group }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
 
                                     <span class="help-block">
-                                      {{ trans('admin/users/table.groupnotes') }}
+                                      {{ trans('admin/settings/general.ldap_default_group_info') }}
                                     </span>
                             </div>
-                                            @endif
+                                    @endif
                                             @else
                                                 <p>No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.</p>
-                                    @endif
+                                @endif
 
                             </div>
                         </div>

@@ -184,6 +184,7 @@ class AssetMaintenancesController extends Controller
                    ->with('selectedAsset', null)
                    ->with('assetMaintenanceType', $assetMaintenanceType)
                    ->with('item', $assetMaintenance);
+        dd($item);
     }
 
     /**
