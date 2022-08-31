@@ -218,8 +218,7 @@ class LdapSync extends Command
 
                 if($item->ldap_default_group != null){
 
-                    $permissions_array = $item['ldap_default_group'];
-                    $user->permissions= json_encode($permissions_array);
+                    $user->permissions= $item['ldap_default_group'];
 
 
                 }

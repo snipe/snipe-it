@@ -92,8 +92,8 @@
                         </div>
 
                         <!--  Default LDAP Permissions Group Select -->
-                        <div class="form-group{{ $errors->has('groups') ? ' has-error' : '' }}">
-                            <label class="col-md-3 control-label" for="groups[]"> {{ trans('general.groups') }}</label>
+                        <div class="form-group{{ $errors->has('group') ? ' has-error' : '' }}">
+                            <label class="col-md-3 control-label" for="group"> {{ trans('general.groups') }}</label>
                             <div class="col-md-6">
 
                                 @if ($groups->count())
@@ -109,9 +109,9 @@
                                   @else
                                                 <div class="controls">
                                     <select
-                                            name="groups[]"
-                                            aria-label="groups[]"
-                                            id="groups[]"
+                                            name="group"
+                                            aria-label="group"
+                                            id="group"
                                             multiple="multiple"
                                             class="form-control">
 
