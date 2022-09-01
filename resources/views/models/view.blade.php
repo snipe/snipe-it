@@ -154,8 +154,8 @@
                                             <td>
                                                 {{ $file->filename }}
                                             </td>
-                                            <td data-value="{{ filesize(storage_path('private_uploads/assetmodels/').$file->filename) }}">
-                                                {{ Helper::formatFilesizeUnits(filesize(storage_path('private_uploads/assetmodels/').$file->filename)) }}
+                                            <td data-value="{{ Storage::size('private_uploads/assetmodels/'.$file->filename) }}">
+                                                {{ Helper::formatFilesizeUnits(Storage::size('private_uploads/assetmodels/'.$file->filename)) }}
                                             </td>
                                             <td>
                                                 @if ($file->note)

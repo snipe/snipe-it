@@ -8,8 +8,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
-use Parsedown;
+use App\Helpers\Helper;
 use Watson\Validating\ValidatingTrait;
+
 
 /**
  * Settings model.
@@ -135,7 +136,6 @@ class Setting extends Model
     public function lar_ver(): string
     {
         $app = App::getFacadeApplication();
-
         return $app::VERSION;
     }
 
@@ -147,9 +147,7 @@ class Setting extends Model
     public static function getDefaultEula(): ?string
     {
         if (self::getSettings()->default_eula_text) {
-            $parsedown = new Parsedown();
-
-            return $parsedown->text(e(self::getSettings()->default_eula_text));
+            return Helper::parseEscapedMarkedown(self::getSettings()->default_eula_text);
         }
 
         return null;

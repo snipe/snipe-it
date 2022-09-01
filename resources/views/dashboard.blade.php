@@ -17,7 +17,7 @@
             <div class="box-body">
                 <div class="row">
                     <div class="col-md-12">
-                        {!!  Parsedown::instance()->text(e($snipeSettings->dashboard_message))  !!}
+                        {!!  Helper::parseEscapedMarkedown($snipeSettings->dashboard_message)  !!}
                     </div>
                 </div>
             </div>
