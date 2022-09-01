@@ -237,7 +237,7 @@ class LicensePresenter extends Presenter
                 "sortable" => false,
                 "switchable" => true,
                 "title" => trans('admin/hardware/form.serial'),
-                "visible" => true,
+                "visible" => false,
                 "formatter" => 'hardwareLinkFormatter',
             ],
             [
