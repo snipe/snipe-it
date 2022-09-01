@@ -232,13 +232,13 @@ class LicensePresenter extends Presenter
                 'formatter' => 'hardwareLinkObjFormatter',
             ],
             [
-                "field" => "assigned_asset",
+                "field" => "assigned_asset.serial",
                 "searchable" => false,
                 "sortable" => false,
                 "switchable" => true,
-                "title" => trans('admin/hardware/table.serial'),
+                "title" => trans('admin/hardware/form.serial'),
                 "visible" => true,
-                "formatter" => 'assetSerialLinkFormatter',
+                "formatter" => 'hardwareLinkFormatter',
             ],
             [
                 'field' => 'location',
