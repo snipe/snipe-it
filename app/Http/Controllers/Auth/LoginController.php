@@ -473,6 +473,11 @@ class LoginController extends Controller
         }
 
         $request->session()->regenerate(true);
+
+        if ($request->session()->has('password_hash_'.Auth::getDefaultDriver())){
+            $request->session()->remove('password_hash_'.Auth::getDefaultDriver());
+        }
+
         Auth::logout();
 
         if (! empty($sloRedirectUrl)) {
