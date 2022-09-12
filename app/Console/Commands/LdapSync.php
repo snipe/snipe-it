@@ -57,6 +57,7 @@ class LdapSync extends Command
         $ldap_result_country = Setting::getSettings()->ldap_country;
         $ldap_result_dept = Setting::getSettings()->ldap_dept;
         $ldap_result_manager = Setting::getSettings()->ldap_manager;
+        $ldap_default_group = Setting::getSettings()->ldap_default_group;
 
         try {
             $ldapconn = Ldap::connectToLdap();
@@ -190,6 +191,7 @@ class LdapSync extends Command
                 $item['department'] = isset($results[$i][$ldap_result_dept][0]) ? $results[$i][$ldap_result_dept][0] : '';
                 $item['manager'] = isset($results[$i][$ldap_result_manager][0]) ? $results[$i][$ldap_result_manager][0] : '';
 
+
                 $department = Department::firstOrCreate([
                     'name' => $item['department'],
                 ]);
@@ -215,13 +217,11 @@ class LdapSync extends Command
                 $user->jobtitle = $item['jobtitle'];
                 $user->country = $item['country'];
                 $user->department_id = $department->id;
-
-                if($item->ldap_default_group != null){
-
-                    $user->permissions= $item['ldap_default_group'];
+                $user->groups()->sync($ldap_default_group, $user->id);
 
 
-                }
+
+
 
                 if($item['manager'] != null) {
                     // Get the LDAP Manager
