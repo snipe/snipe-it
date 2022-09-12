@@ -639,6 +639,28 @@ class UsersController extends Controller
         $user->notify((new CurrentInventory($user)));
         return redirect()->back()->with('success', trans('admin/users/general.user_notified'));
     }
+    /**
+     * Emails All users a list of assigned assets
+     *
+     * @author [G. Martinez] [<godmartinz@gmail.com>]
+     * @since [v6.0.5]
+     * @param  \App\Http\Controllers\Users\UsersController  $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function emailEveryoneAssetList()
+    {
+        $this->authorize('view', User::class);
+
+        $users= User::all();
+
+        foreach($users as $user) {
+
+            if (!empty($user->email)) {
+                $user->notify((new CurrentInventory($user)));
+            }
+        }
+        return redirect()->back()->with('success', trans('admin/users/general.user_notified'));
+    }
 
     /**
      * Send individual password reset email

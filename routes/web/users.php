@@ -113,6 +113,14 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
     )->name('users.email');
 
     Route::post(
+        '/email',
+        [
+            Users\UsersController::class,
+            'emailEveryoneAssetList'
+        ]
+    )->name('users.emailEveryone');
+
+    Route::post(
         'bulkedit',
         [
             Users\BulkUsersController::class, 
