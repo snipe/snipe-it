@@ -11,7 +11,7 @@ class CheckoutLicenseToAllUsers extends Command
      *
      * @var string
      */
-    protected $signature = 'logs:clear {--license_id=} {--notify}';
+    protected $signature = 'logs:clear';
 
     /**
      * The console command description.
