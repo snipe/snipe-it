@@ -217,11 +217,6 @@ class LdapSync extends Command
                 $user->jobtitle = $item['jobtitle'];
                 $user->country = $item['country'];
                 $user->department_id = $department->id;
-                $user->groups()->sync($ldap_default_group, $user->id);
-
-
-
-
 
                 if($item['manager'] != null) {
                     // Get the LDAP Manager
@@ -309,6 +304,11 @@ class LdapSync extends Command
                 if ($user->save()) {
                     $item['note'] = $item['createorupdate'];
                     $item['status'] = 'success';
+
+                    if($ldap_default_group != null) {
+
+                        $user->groups()->sync($ldap_default_group);
+                    }
                 } else {
                     foreach ($user->getErrors()->getMessages() as $key => $err) {
                         $errors .= $err[0];

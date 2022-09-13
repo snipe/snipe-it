@@ -126,13 +126,13 @@
                                                 @endforeach
                                             </select>
 
-                                    <span class="help-block">
+                                            <span class="help-block">
                                       {{ trans('admin/settings/general.ldap_default_group_info') }}
                                     </span>
-                            </div>
+                                        </div>
                                     @endif
-                                            @else
-                                                <p>No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.</p>
+                                @else
+                                    <p>No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.</p>
                                 @endif
 
                             </div>
