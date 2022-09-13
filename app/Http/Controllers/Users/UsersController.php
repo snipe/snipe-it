@@ -643,8 +643,7 @@ class UsersController extends Controller
      * Emails All users a list of assigned assets
      *
      * @author [G. Martinez] [<godmartinz@gmail.com>]
-     * @since [v6.0.5]
-     * @param  \App\Http\Controllers\Users\UsersController  $id
+     * @since [v6.0.9]
      * @return \Illuminate\Http\RedirectResponse
      */
     public function emailEveryoneAssetList()
