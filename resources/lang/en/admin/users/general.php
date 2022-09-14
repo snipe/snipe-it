@@ -20,6 +20,7 @@ return [
     'email_assigned'    => 'Email List of All Assigned Assets',
     'email_everyone_assigned'    => 'Email All Users List of All Assigned Assets',
     'user_notified'     => 'User has been emailed a list of their currently assigned items.',
+    'users_notified'     => 'Users have been emailed a list of their currently assigned items.',
     'software_user'     => 'Software Checked out to :name',
     'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'View User :name',

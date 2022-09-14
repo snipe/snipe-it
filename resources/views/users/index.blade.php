@@ -26,12 +26,16 @@
     @else
         <a class="btn btn-default pull-right" href="{{ route('users.index', ['status' => 'deleted']) }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_deleted') }}</a>
     @endif
+    @can('superuser')
+        <form action="{{ route('users.emailEveryone')}}" method="POST">
+            {{ csrf_field() }}
+            <button class="btn btn-default pull-right" rel="noopener">{{ trans('admin/users/general.email_everyone_assigned') }}</button>
+        </form>
+    @endcan
     @can('view', \App\Models\User::class)
         <a class="btn btn-default pull-right" href="{{ route('users.export') }}" style="margin-right: 5px;">{{ trans('general.export') }}</a>
     @endcan
-    @can('superuser')
-    <a class="btn btn-default pull-right" href="{{ route('users.emailEveryone') }}" style="margin-right: 5px;">{{ trans('admin/users/general.email_everyone_assigned') }}</a>
-    @endcan
+
 @stop
 
 {{-- Page content --}}
