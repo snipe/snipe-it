@@ -68,9 +68,10 @@ class Depreciable extends SnipeModel
      */
     public function getLinearDepreciatedValue() // TODO - for testing it might be nice to have an optional $relative_to param here, defaulted to 'now'
     {
-        $months_remaining = $this->time_until_depreciated()->m + 12 * $this->time_until_depreciated()->y; //UGlY
+        $months_passed = $this->purchase_date->diff(now())->m;
 
-        $current_value = round(($months_remaining / $this->get_depreciation()->months) * $this->purchase_cost, 2);
+        // The equation here is (Purchase_Cost-Floor_min)*(Months_passed/Months_til_depreciated)
+        $current_value= round((($this->purchase_cost-$this->get_depreciation()->depreciation_min)*($months_passed/$this->get_depreciation()->months)),2);
 
         if($this->get_depreciation()->depreciation_min > $current_value) {
 
