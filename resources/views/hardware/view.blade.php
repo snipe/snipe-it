@@ -584,7 +584,11 @@
                                                 {{ $asset->warranty_months }}
                                                 {{ trans('admin/hardware/form.months') }}
 
-
+                                                @if (($asset->serial && $asset->model->manufacturer) && $asset->model->manufacturer->name == 'Apple')
+                                                    <a href="https://checkcoverage.apple.com/us/{{ \App\Models\Setting::getSettings()->locale  }}/?sn={{ $asset->serial }}" target="_blank">
+                                                        <i class="fa-brands fa-apple" aria-hidden="true"><span class="sr-only">Applecare Statys Lookup</span></i>
+                                                    </a>
+                                                @endif
                                             </div>
                                         </div>
 
