@@ -235,6 +235,10 @@ class CustomFieldsController extends Controller
             $field->format = e($request->get('format'));
         }
 
+        if($field->element == 'checkbox' || $field->element == 'radio'){
+            $field->format = 'ANY';
+        }
+
         if ($field->save()) {
             return redirect()->route('fields.index')->with('success', trans('admin/custom_fields/message.field.update.success'));
         }
