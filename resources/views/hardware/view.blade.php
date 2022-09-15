@@ -596,7 +596,9 @@
                                                 <div class="col-md-2">
                                                     <strong>
                                                         {{ trans('admin/hardware/form.warranty_expires') }}
+                                                        @if ($asset->purchase_date)
                                                         {!! $asset->present()->warranty_expires() < date("Y-m-d") ? '<i class="fas fa-exclamation-triangle text-orange" aria-hidden="true"></i>' : '' !!}
+                                                        @endif
 
                                                     </strong>
                                                 </div>
