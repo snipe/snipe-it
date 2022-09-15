@@ -20,6 +20,8 @@ use App\Notifications\CheckoutConsumableNotification;
 use App\Notifications\CheckoutLicenseNotification;
 use App\Notifications\CheckoutLicenseSeatNotification;
 use Illuminate\Support\Facades\Notification;
+use Exception;
+use Log;
 
 class CheckoutableListener
 {
@@ -43,16 +45,20 @@ class CheckoutableListener
          */
         $acceptance = $this->getCheckoutAcceptance($event);       
 
-        if (! $event->checkedOutTo->locale) {
-            Notification::locale(Setting::getSettings()->locale)->send(
-                $this->getNotifiables($event), 
-                $this->getCheckoutNotification($event, $acceptance)
-            );
-        } else {
-            Notification::send(
-                $this->getNotifiables($event), 
-                $this->getCheckoutNotification($event, $acceptance)
-            );
+        try {
+            if (! $event->checkedOutTo->locale) {
+                Notification::locale(Setting::getSettings()->locale)->send(
+                    $this->getNotifiables($event),
+                    $this->getCheckoutNotification($event, $acceptance)
+                );
+            } else {
+                Notification::send(
+                    $this->getNotifiables($event),
+                    $this->getCheckoutNotification($event, $acceptance)
+                );
+            }
+        } catch (Exception $e) {
+            Log::error("Exception caught during checkout notification: ".$e->getMessage());
         }
     }
 
@@ -83,17 +89,21 @@ class CheckoutableListener
             }
         }
 
-        // Use default locale
-        if (! $event->checkedOutTo->locale) {
-            Notification::locale(Setting::getSettings()->locale)->send(
-                $this->getNotifiables($event),
-                $this->getCheckinNotification($event)
-            );
-        } else {
-            Notification::send(
-                $this->getNotifiables($event),
-                $this->getCheckinNotification($event)
-            );
+        try {
+            // Use default locale
+            if (! $event->checkedOutTo->locale) {
+                Notification::locale(Setting::getSettings()->locale)->send(
+                    $this->getNotifiables($event),
+                    $this->getCheckinNotification($event)
+                );
+            } else {
+                Notification::send(
+                    $this->getNotifiables($event),
+                    $this->getCheckinNotification($event)
+                );
+            }
+        } catch (Exception $e) {
+            Log::error("Exception caught during checkin notification: ".$e->getMessage());
         }
     }      
 
