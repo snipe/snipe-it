@@ -70,18 +70,29 @@ class Depreciable extends SnipeModel
     {
         $months_passed = $this->purchase_date->diff(now())->m;
 
-        // The equation here is (Purchase_Cost-Floor_min)*(Months_passed/Months_til_depreciated)
-        $current_value= round((($this->purchase_cost-$this->get_depreciation()->depreciation_min)*($months_passed/$this->get_depreciation()->months)),2);
+        if($months_passed >= $this->get_depreciation()->months){
+            //if there is a floor use it
+            if($this->get_depreciation()->deprecation_min->isNotEmpty()) {
 
-        if($this->get_depreciation()->depreciation_min > $current_value) {
+                $current_value = $this->get_depreciation()->depreciation_min;
 
-            $current_value=round($this->get_depreciation()->depreciation_min,2);
+            }else{
+                $current_value = 0;
+            }
         }
-        if ($current_value < 0) {
-            $current_value = 0;
+        else {
+            // The equation here is (Purchase_Cost-Floor_min)*(Months_passed/Months_til_depreciated)
+            $current_value = round(($this->purchase_cost-($this->purchase_cost - ($this->get_depreciation()->depreciation_min)) * ($months_passed / $this->get_depreciation()->months)), 2);
+
         }
 
         return $current_value;
+    }
+
+    public function getMonthlyDepreciation(){
+
+        return ($this->purchase_cost-$this->get_depreciation()->depreciation_min)/$this->get_depreciation()->months;
+
     }
 
     /**
