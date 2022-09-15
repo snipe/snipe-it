@@ -1198,10 +1198,14 @@
                                                     @endif
                                                 </td>
                                                 <td>
+                                                    @if (Storage::exists('private_uploads/assets/'.$file->filename))
                                                     {{ $file->filename }}
+                                                    @else
+                                                    <del>{{ $file->filename }}</del>
+                                                    @endif
                                                 </td>
-                                                <td data-value="{{ @Storage::size('private_uploads/assets/'.$file->filename) }}">
-                                                    {{ @Helper::formatFilesizeUnits(Storage::size('private_uploads/assets/'.$file->filename)) }}
+                                                <td data-value="{{ (Storage::exists('private_uploads/assets/'.$file->filename) ? Storage::size('private_uploads/assets/'.$file->filename) : '') }}">
+                                                    {{ @Helper::formatFilesizeUnits(Storage::exists('private_uploads/assets/'.$file->filename) ? Storage::size('private_uploads/assets/'.$file->filename) : '') }}
                                                 </td>
                                                 <td>
                                                     @if ($file->note)
@@ -1291,10 +1295,14 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    {{ $file->filename }}
+                                                    @if (Storage::exists('private_uploads/assetmodels/'.$file->filename))
+                                                        {{ $file->filename }}
+                                                    @else
+                                                        <del>{{ $file->filename }}</del>
+                                                    @endif
                                                 </td>
-                                                <td data-value="{{ Storage::size('private_uploads/assetmodels/'.$file->filename) }}">
-                                                    {{ Helper::formatFilesizeUnits(Storage::size('private_uploads/assetmodels/'.$file->filename)) }}
+                                                <td data-value="{{ (Storage::exists('private_uploads/assetmodels/'.$file->filename) ? Storage::size('private_uploads/assetmodels/'.$file->filename) : '') }}">
+                                                    {{ Helper::formatFilesizeUnits(@Storage::size('private_uploads/assetmodels/'.$file->filename)) }}
                                                 </td>
                                                 <td>
                                                     @if ($file->note)
