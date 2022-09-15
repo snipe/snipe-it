@@ -519,7 +519,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                    @if (($asset->model) && ($asset->depreciation))
+                                    @if (($asset->model) && ($asset->depreciation) && ($asset->purchase_date))
                                         <div class="row">
                                             <div class="col-md-2">
                                                 <strong>
@@ -597,14 +597,17 @@
                                                     <strong>
                                                         {{ trans('admin/hardware/form.warranty_expires') }}
                                                         {!! $asset->present()->warranty_expires() < date("Y-m-d") ? '<i class="fas fa-exclamation-triangle text-orange" aria-hidden="true"></i>' : '' !!}
+
                                                     </strong>
                                                 </div>
                                                 <div class="col-md-6">
-
+                                                    @if ($asset->purchase_date)
                                                     {{ Helper::getFormattedDateObject($asset->present()->warranty_expires(), 'date', false) }}
                                                     -
                                                     {{ Carbon::parse($asset->present()->warranty_expires())->diffForHumans() }}
-
+                                                    @else
+                                                        {{ trans('general.na_no_purchase_date') }}
+                                                    @endif
                                                 </div>
                                             </div>
 
@@ -630,9 +633,13 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
+                                                @if ($asset->purchase_date)
                                                 {{ Helper::getFormattedDateObject($asset->depreciated_date()->format('Y-m-d'), 'date', false) }}
                                                 -
                                                 {{ Carbon::parse($asset->depreciated_date())->diffForHumans() }}
+                                                @else
+                                                    {{ trans('general.na_no_purchase_date') }}
+                                                @endif
 
                                             </div>
                                         </div>
@@ -659,10 +666,13 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
+                                                @if ($asset->purchase_date)
                                                 {{ Helper::getFormattedDateObject($asset->present()->eol_date(), 'date', false) }}
                                                 -
                                                 {{ Carbon::parse($asset->present()->eol_date())->diffForHumans() }}
-                                                
+                                                @else
+                                                    {{ trans('general.na_no_purchase_date') }}
+                                                @endif
                                             </div>
                                         </div>
                                     @endif

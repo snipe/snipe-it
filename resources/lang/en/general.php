@@ -372,6 +372,7 @@ return [
     'bulk_checkin_delete_success' => 'Your selected users have been deleted and their items have been checked in.',
     'bulk_checkin_success' => 'The items for the selected users have been checked in.',
     'set_to_null' => 'Delete values for this asset|Delete values for all :asset_count assets ',
+    'na_no_purchase_date'   => 'N/A - No purchase date provided',
 
 
 ];
