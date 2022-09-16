@@ -42,7 +42,7 @@ class LicensePolicy extends CheckoutablePermissionsPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function viewFiles(User $user)
+    public function files(User $user, $license = null)
     {
         if ($user->hasAccess('licenses.files'))  {
             return true;
