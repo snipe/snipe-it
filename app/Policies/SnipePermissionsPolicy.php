@@ -61,6 +61,11 @@ abstract class SnipePermissionsPolicy
         return $user->hasAccess($this->columnName().'.view');
     }
 
+    public function files(User $user, $item = null)
+    {
+        return $user->hasAccess($this->columnName().'.files');
+    }
+
     /**
      * Determine whether the user can create accessories.
      *
