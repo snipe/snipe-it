@@ -36,7 +36,8 @@
 
             </a>
         </li>
-        
+
+        @can('licenses.files', $license)
         <li>
           <a href="#files" data-toggle="tab">
             <span class="hidden-lg hidden-md">
@@ -46,6 +47,7 @@
             </span>
           </a>
         </li>
+        @endcan
 
         <li>
           <a href="#history" data-toggle="tab">
@@ -416,7 +418,7 @@
           </div> <!--/.row-->
         </div> <!-- /.tab-pane -->
 
-        @can('files', $license)
+        @can('licenses.files', $license)
         <div class="tab-pane" id="files">
           <div class="table-responsive">
             <table

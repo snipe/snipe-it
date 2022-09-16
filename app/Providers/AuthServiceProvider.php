@@ -122,6 +122,13 @@ class AuthServiceProvider extends ServiceProvider
         });
 
 
+        Gate::define('licenses.files', function ($user) {
+            if ($user->hasAccess('licenses.files')) {
+                return true;
+            }
+        });
+
+
         // -----------------------------------------
         // Reports
         // -----------------------------------------
