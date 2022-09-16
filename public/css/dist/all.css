@@ -23808,6 +23808,9 @@ th.css-accessory > .th-inner::before {
 .select2-container--default .select2-selection--multiple {
   border-radius: 0px;
 }
+.bs-checkbox input {
+  zoom: 1.5;
+}
 
 
 .select2-container {
@@ -24876,5 +24879,8 @@ th.css-accessory > .th-inner::before {
 }
 .select2-container--default .select2-selection--multiple {
   border-radius: 0px;
+}
+.bs-checkbox input {
+  zoom: 1.5;
 }
 
