@@ -60,7 +60,6 @@ class LicenseCheckoutController extends Controller
         $this->authorize('checkout', $license);
 
         $licenseSeat = $this->findLicenseSeatToCheckout($license, $seatId);
-        dd($licenseSeat);
         $licenseSeat->user_id = Auth::id();
         
 
