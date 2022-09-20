@@ -12,7 +12,7 @@ APP_ENV=production
 APP_DEBUG=false
 # please regenerate the APP_KEY value by calling `docker-compose run --rm snipeit bash` and then `php artisan key:generate --show` and then copy paste the value here
 APP_KEY=base64:Ieo/l5H/ek6EzMDv9qPVbOigqHEoQh4FJHAUWejm5Qg=
-APP_URL=http://localhost:8080
+APP_URL=http://localhost
 APP_TIMEZONE='UTC'
 APP_LOCALE=it
 MAX_RESULTS=500

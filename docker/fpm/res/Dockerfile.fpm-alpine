@@ -1,5 +1,6 @@
 ARG ENVIRONMENT=production
 ARG SNIPEIT_RELEASE
+ARG GITHUB_TOKEN_ENABLE=true
 ARG GITHUB_TOKEN=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
 ARG PHP_VERSION=8.1
 ARG PHP_ALPINE_VERSION=3.16
@@ -24,6 +25,8 @@ ARG SNIPEIT_RELEASE
 ENV SNIPEIT_RELEASE ${SNIPEIT_RELEASE}
 ARG GITHUB_TOKEN
 ENV GITHUB_TOKEN ${GITHUB_TOKEN}
+ARG GITHUB_TOKEN_ENABLE
+ENV GITHUB_TOKEN_ENABLE ${GITHUB_TOKEN_ENABLE}
 
 # Cribbed from wordpress-fpm-alpine image
 # set recommended PHP.ini settings
@@ -82,11 +85,13 @@ RUN set -eux; \
     tar -xzf snipeit.tar.gz --strip-components=1 -C /var/www/html/; \
     rm snipeit.tar.gz; \
     # Install composer php dependencies
+    if [ "$GITHUB_TOKEN_ENABLE" = "true" ]; then \
+    # Check the github's key for the access (https://github.com/settings/tokens)
+    composer config \
+    --global github-oauth.github.com ${GITHUB_TOKEN}; \
+    fi; \
     if [ "$ENVIRONMENT" = "production" ]; then \
     echo "production enviroment detected!"; \
-    # Check the github's key for the access (https://github.com/settings/tokens)
-    #composer config \
-    #--global github-oauth.github.com ${GITHUB_TOKEN}; \
     composer update \ 
     --no-cache \
     --no-dev \
