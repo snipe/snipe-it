@@ -32,16 +32,18 @@
 </template>
 
 {{-- alert --}}
-<template>
-        <div class="col-md-12" :class="alertType">
-            <div class="alert" :class="alertClassName">
-                <button type="button" class="close" @click="hideEvent">&times;</button>
-                <i class="fas fa-check faa-pulse animated" aria-hidden="true" v-show="alertType == 'success'"></i>
-                <strong>{{-- title --}} </strong>
-                <slot></slot>
-            </div>
+@if($message != '')
+    <div class="col-md-12" class="{{ $message_type }}">
+        <div class="alert alert-{{ $this->message_type }} ">
+            <button type="button" class="close" wire:click="hideMessages">&times;</button>
+            @if($message_type == 'success')
+                <i class="fas fa-check faa-pulse animated" aria-hidden="true"></i>
+            @endif
+            <strong>{{-- title --}} </strong>
+            {{ $message }}
         </div>
-</template>
+    </div>
+@endif
 
 <script>
     fixme = {
@@ -73,14 +75,15 @@
                         <div class="row">
 
                             <div class="col-md-12">
-
-                                <div class="col-md-9" style="padding-bottom:20px; display:none" id='progress-container'>
-                                    <div class="progress progress-striped-active" style="margin-top: 8px"> {{-- so someof these values are in importer.vue! --}}
-                                        <div id='progress-bar' class="progress-bar" class="progress-bar-warning" role="progressbar" style="width: 0%">
-                                            <span id='progress-text'></span>
+                                @if($progress != -1)
+                                    <div class="col-md-9" style="padding-bottom:20px" id='progress-container'>
+                                        <div class="progress progress-striped-active" style="margin-top: 8px"> {{-- so someof these values are in importer.vue! --}}
+                                            <div id='progress-bar' class="progress-bar {{ $progress_bar_class }}" role="progressbar" style="width: {{ $progress }}%">
+                                                <span id='progress-text'>{{ $progress_message }}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
 
                                 <div class="col-md-3 text-right pull-right">
 
@@ -103,7 +106,6 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12 table-responsive" style="padding-top: 30px;">
-                                <button wire:click="test">Test!</button><br />
                                 <table data-pagination="true"
                                         data-id-table="upload-table"
                                         data-search="true"
@@ -134,7 +136,7 @@
                                                     </button>
                                                 </td>
                                                 <td class="col-md-1 text-right">
-                                                    <button class="btn btn-sm btn-danger" @click="deleteFile(currentFile)">
+                                                    <button class="btn btn-sm btn-danger" wire:click="destroy({{ $currentFile->id }})">
                                                         <i class="fas fa-trash icon-white" aria-hidden="true"></i><span class="sr-only"></span></button>
                                     			</td>
                                     		</tr>
@@ -167,23 +169,30 @@
     <script>
         document.addEventListener('livewire:load', function () {
             console.log("OKAY - we are gonna dump us out some files here!")
-             console.dir(Livewire.first().files)
+            console.dir(@this.files)
+            console.log("after livewire load, we're going to try the this thing")
+            console.dir(@this)
         })
 
         $('#fileupload').fileupload({
             dataType: 'json',
             done: function(e, data) {
-                $('#progress-bar').attr("class", "progress-bar-success");
-                $('#progress-text').text("Success!"); // same here? TODO - internationalize!
-                $('#progress-bar').attr('style', 'width: 100%'); // weird, wasn't needed before....
+                //$('#progress-bar').attr("class", "progress-bar-success");
+                @this.progress_bar_class = 'progress-bar-success';
+                //$('#progress-text').text("Success!"); // same here? TODO - internationalize!
+                @this.progress_message = 'Success!'; // FIXME - we're already round-tripping to the server here - I'd love it if we could get internationalized text here
+                //$('#progress-bar').attr('style', 'width: 100%'); // weird, wasn't needed before....
+                @this.progress = 100;
                 console.log("Dumping livewire files!!!!!!!!!")
-                console.dir(Livewire.first().files)
+                console.dir(@this.files)
                 console.log("And now dumping data.result.files!!!!!")
                 console.dir(data.result.files)
-                //Livewire.first().files = data.result.files.concat(Livewire.first().files); // FIXME - how to get in and out of the Livewire.first().something.... (this doesn't work either)
-                // Livewire.first().files = Livewire.first().files.concat(data.result.files) //I don't quite see why this should be like this, but, well, whatever.
+                //@this.files = data.result.files.concat(@this.files); // FIXME - how to get in and out of the @this.something.... (this doesn't work either)
+                // @this.files = @this.files.concat(data.result.files) //I don't quite see why this should be like this, but, well, whatever.
                 //fuckit, let's just force a refresh?
-                Livewire.first().forcerefresh = Livewire.first().forcerefresh+1 // this is a horrible hack; please forgive me :(
+                // NB - even if that *did* work, I suspect it would re-flash the progressbar, which we would not like.
+                // perhaps a better angle would be to  have a 'progress' PHP attribute, and update that dynamically, and let Livewire re-render it as appropriate?
+                @this.forcerefresh = @this.forcerefresh+1 // this is a horrible hack; please forgive me :(
                 console.log(data.result.header_row);
                 console.dir()
             },
@@ -193,20 +202,29 @@
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
                 };
                 data.process().done( function () {data.submit();});
-                $('#progress-container').show();
+                // $('#progress-container').show();
+                @this.progress = 0;
             },
             progress: function(e, data) {
-                var progress = parseInt((data.loaded / data.total * 100, 10));
-                $('#progress-bar').attr('style', 'width: '+progress+'%');
-                $('#progress-text').text(progress+'% Complete');
+                @this.progress = parseInt((data.loaded / data.total * 100, 10));
+                //$('#progress-bar').attr('style', 'width: '+progress+'%');
+                @this.progress_message = @this.progress+'% Complete'; // FIXME - this should come from server (so it can be internationalized)
+                //$('#progress-text').text(progress+'% Complete');
             },
             fail: function(e, data) {
-                $('#progress-bar').attr("class", "progress-bar-danger");
+                @this.progress_bar_class = "progress-bar-danger";
                 // Display any errors returned from the $.ajax()
                 console.dir(data.jqXHR.responseJSON.messages) // FIXME don't dupm to console
-                $('#progress-bar').attr('style', 'width: 100%');
-                $('#progress-text').text(data.jqXHR.responseJSON.messages);
+                //$('#progress-bar').attr('style', 'width: 100%');
+                @this.progress = 100;
+                //$('#progress-text').text(data.jqXHR.responseJSON.messages);
+                @this.progress_message = data.jqXHR.responseJSON.messages;
             }
         })
+
+        setTimeout(function () {
+            console.log("Test @"+"this:")
+            console.dir(@this)
+        },5000)
     </script>
 @endpush

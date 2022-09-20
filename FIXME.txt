@@ -1,11 +1,15 @@
-remove Ziggy
-and ziggy-js too
-And what is /public/js/snipeit.js ? That looks like a generated file
+X - remove Ziggy
+X - and ziggy-js too
+X - And what is /public/js/snipeit.js ? That looks like a generated file
 
 The 'flash' (forced refresh/fake refresh) on uploads is dumb
-I'm not sure if the order on the uploaded files is right?
-The Livewire.first() thing is still dumb (but Id o'nt know that we can fix it).
+X - the order on the uploaded files is wrong (backwards)
+X - (fixed somehow?!) The Livewire.first() thing is still dumb (but Id o'nt know that we can fix it).
 
-Deletes need to work (I got this working before using $.ajax; it's not even hard)
+X - Deletes need to work (I got this working before using $.ajax; it's not even hard)
 
 Then mapping and so on.
+
+Can we potentially delete whatever that this.$http thing? Or is that some side-effect of Vue.js that we don't get for free? (yes, it was that)
+
+I suspect the Alert section is not yet wired up - but should be. Doesn't seem too hard?
