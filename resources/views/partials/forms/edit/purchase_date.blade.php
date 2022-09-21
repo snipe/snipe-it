@@ -6,7 +6,7 @@
             <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="purchase_date" id="purchase_date" readonly value="{{ old('purchase_date', ($item->purchase_date) ? $item->purchase_date->format('Y-m-d') : '') }}" style="background-color:inherit">
             <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
        </div>
-       <a onclick="document.getElementById('purchase_date').value = ''"> Clear </a>
+       <a style="cursor:pointer" onclick="document.getElementById('purchase_date').value = ''"> Clear </a>
        {!! $errors->first('purchase_date', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
    </div>
 </div>
