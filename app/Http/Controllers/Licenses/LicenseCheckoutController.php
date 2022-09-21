@@ -75,11 +75,6 @@ class LicenseCheckoutController extends Controller
     {
         $licenseSeat = LicenseSeat::find($seatId) ?? $license->freeSeat();
 
-        if(is_null($licenseSeat)){
-            throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', 'This Seat is not available for checkout.'));
-
-        }
-
         if (! $licenseSeat) {
             if ($seatId) {
                 throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', 'This Seat is not available for checkout.'));
