@@ -6,108 +6,108 @@ LABEL maintainer="Brady Wetherington <bwetherington@grokability.com>"
 # - https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#apt-get
 
 RUN export DEBIAN_FRONTEND=noninteractive; \
-                           export DEBCONF_NONINTERACTIVE_SEEN=true; \
-                           echo 'tzdata tzdata/Areas select Etc' | debconf-set-selections; \
-                           echo 'tzdata tzdata/Zones/Etc select UTC' | debconf-set-selections; \
-                           apt-get update -qqy \
-                           && apt-get install -qqy --no-install-recommends \
-                           apt-utils \
-                           apache2 \
-                           apache2-bin \
-                           libapache2-mod-php7.4 \
-                           php7.4-curl \
-                           php7.4-ldap \
-                           php7.4-mysql \
-                           php7.4-pgsql \
-                           php7.4-gd \
-                           php7.4-xml \
-                           php7.4-mbstring \
-                           php7.4-zip \
-                           php7.4-bcmath \
-                           php7.4-redis \
-                           patch \
-                           curl \
-                           wget  \
-                           vim \
-                           git \
-                           cron \
-                           mysql-client \
-                           postgresql \
-                           supervisor \
-                           cron \
-                           gcc \
-                           make \
-                           autoconf \
-                           libc-dev \
-                           pkg-config \
-                           libmcrypt-dev \
-                           php7.4-dev \
-                           ca-certificates \
-                           unzip \
-                           dnsutils \
-                           && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    export DEBCONF_NONINTERACTIVE_SEEN=true; \
+    echo 'tzdata tzdata/Areas select Etc' | debconf-set-selections; \
+    echo 'tzdata tzdata/Zones/Etc select UTC' | debconf-set-selections; \
+    apt-get update -qqy \
+ && apt-get install -qqy --no-install-recommends \
+apt-utils \
+apache2 \
+apache2-bin \
+libapache2-mod-php7.4 \
+php7.4-curl \
+php7.4-ldap \
+php7.4-mysql \
+php7.4-pgsql \
+php7.4-gd \
+php7.4-xml \
+php7.4-mbstring \
+php7.4-zip \
+php7.4-bcmath \
+php7.4-redis \
+patch \
+curl \
+wget  \
+vim \
+git \
+cron \
+mysql-client \
+postgresql \
+supervisor \
+cron \
+gcc \
+make \
+autoconf \
+libc-dev \
+pkg-config \
+libmcrypt-dev \
+php7.4-dev \
+ca-certificates \
+unzip \
+dnsutils \
+&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
-                                                          RUN curl -L -O https://github.com/pear/pearweb_phars/raw/master/go-pear.phar
-                                                          RUN php go-pear.phar
+RUN curl -L -O https://github.com/pear/pearweb_phars/raw/master/go-pear.phar
+RUN php go-pear.phar
 
-                                                          RUN pecl install mcrypt-1.0.3
+RUN pecl install mcrypt-1.0.3
 
-                                                          RUN bash -c "echo extension=/usr/lib/php/20190902/mcrypt.so > /etc/php/7.4/mods-available/mcrypt.ini"
+RUN bash -c "echo extension=/usr/lib/php/20190902/mcrypt.so > /etc/php/7.4/mods-available/mcrypt.ini"
 
-                                                          RUN phpenmod mcrypt
-                                                          RUN phpenmod gd
-                                                          RUN phpenmod bcmath
+RUN phpenmod mcrypt
+RUN phpenmod gd
+RUN phpenmod bcmath
 
-                                                          RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.4/apache2/php.ini
-                           RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.4/cli/php.ini
+RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.4/apache2/php.ini
+RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.4/cli/php.ini
 
-                           RUN useradd -m --uid 1000 --gid 50 docker
+RUN useradd -m --uid 1000 --gid 50 docker
 
-                           RUN echo export APACHE_RUN_USER=docker >> /etc/apache2/envvars
-                           RUN echo export APACHE_RUN_GROUP=staff >> /etc/apache2/envvars
+RUN echo export APACHE_RUN_USER=docker >> /etc/apache2/envvars
+RUN echo export APACHE_RUN_GROUP=staff >> /etc/apache2/envvars
 
-                           COPY docker/000-default.conf /etc/apache2/sites-enabled/000-default.conf
+COPY docker/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 
 #SSL
-                           RUN mkdir -p /var/lib/snipeit/ssl
+RUN mkdir -p /var/lib/snipeit/ssl
 #COPY docker/001-default-ssl.conf /etc/apache2/sites-enabled/001-default-ssl.conf
-                           COPY docker/001-default-ssl.conf /etc/apache2/sites-available/001-default-ssl.conf
+COPY docker/001-default-ssl.conf /etc/apache2/sites-available/001-default-ssl.conf
 
-                           RUN a2enmod ssl
-                           RUN a2ensite 001-default-ssl.conf
+RUN a2enmod ssl
+RUN a2ensite 001-default-ssl.conf
 
-                           COPY . /var/www/html
+COPY . /var/www/html
 
-                           RUN a2enmod rewrite
+RUN a2enmod rewrite
 
-                           COPY docker/column-statistics.cnf /etc/mysql/conf.d/column-statistics.cnf
+COPY docker/column-statistics.cnf /etc/mysql/conf.d/column-statistics.cnf
 
 ############ INITIAL APPLICATION SETUP #####################
 
-                           WORKDIR /var/www/html
+WORKDIR /var/www/html
 
 #Append to bootstrap file (less brittle than 'patch')
 # RUN sed -i 's/return $app;/$env="production";\nreturn $app;/' bootstrap/start.php
 
 #copy all configuration files
 # COPY docker/*.php /var/www/html/app/config/production/
-               COPY docker/docker.env /var/www/html/.env
+COPY docker/docker.env /var/www/html/.env
 
-               RUN chown -R docker /var/www/html
+RUN chown -R docker /var/www/html
 
-               RUN \
-               rm -r "/var/www/html/storage/private_uploads" && ln -fs "/var/lib/snipeit/data/private_uploads" "/var/www/html/storage/private_uploads" \
-               && rm -rf "/var/www/html/public/uploads" && ln -fs "/var/lib/snipeit/data/uploads" "/var/www/html/public/uploads" \
-               && rm -r "/var/www/html/storage/app/backups" && ln -fs "/var/lib/snipeit/dumps" "/var/www/html/storage/app/backups" \
-               && mkdir -p "/var/lib/snipeit/keys" && ln -fs "/var/lib/snipeit/keys/oauth-private.key" "/var/www/html/storage/oauth-private.key" \
-               && ln -fs "/var/lib/snipeit/keys/oauth-public.key" "/var/www/html/storage/oauth-public.key" \
-               && ln -fs "/var/lib/snipeit/keys/ldap_client_tls.cert" "/var/www/html/storage/ldap_client_tls.cert" \
-               && ln -fs "/var/lib/snipeit/keys/ldap_client_tls.key" "/var/www/html/storage/ldap_client_tls.key" \
-               && chown docker "/var/lib/snipeit/keys/" \
-               && chown -h docker "/var/www/html/storage/" \
-               && chmod +x /var/www/html/artisan \
-               && echo "Finished setting up application in /var/www/html"
+RUN \
+	rm -r "/var/www/html/storage/private_uploads" && ln -fs "/var/lib/snipeit/data/private_uploads" "/var/www/html/storage/private_uploads" \
+      && rm -rf "/var/www/html/public/uploads" && ln -fs "/var/lib/snipeit/data/uploads" "/var/www/html/public/uploads" \
+      && rm -r "/var/www/html/storage/app/backups" && ln -fs "/var/lib/snipeit/dumps" "/var/www/html/storage/app/backups" \
+      && mkdir -p "/var/lib/snipeit/keys" && ln -fs "/var/lib/snipeit/keys/oauth-private.key" "/var/www/html/storage/oauth-private.key" \
+      && ln -fs "/var/lib/snipeit/keys/oauth-public.key" "/var/www/html/storage/oauth-public.key" \
+      && ln -fs "/var/lib/snipeit/keys/ldap_client_tls.cert" "/var/www/html/storage/ldap_client_tls.cert" \
+      && ln -fs "/var/lib/snipeit/keys/ldap_client_tls.key" "/var/www/html/storage/ldap_client_tls.key" \
+      && chown docker "/var/lib/snipeit/keys/" \
+      && chown -h docker "/var/www/html/storage/" \
+      && chmod +x /var/www/html/artisan \
+      && echo "Finished setting up application in /var/www/html"
 
 ############## DEPENDENCIES via COMPOSER ###################
 
