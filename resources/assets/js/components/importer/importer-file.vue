@@ -189,7 +189,6 @@
                         {id: 'manager_first_name', text: 'Manager First Name' },
                         {id: 'notes', text: 'Notes' },
                         {id: 'manager_last_name', text: 'Manager Last Name' },
-                        {id: 'notes', text: 'Notes' },
                         {id: 'activated', text: 'Activated' },
                         {id: 'address', text: 'Address' },
                         {id: 'city', text: 'City' },
