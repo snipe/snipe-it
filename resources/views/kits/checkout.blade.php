@@ -29,7 +29,7 @@
               <div class="form-group {{ $errors->has('checkout_at') ? 'error' : '' }}">
                   {{ Form::label('name', trans('admin/hardware/form.checkout_date'), array('class' => 'col-md-3 control-label')) }}
                   <div class="col-md-8">
-                      <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-end-date="0d">
+                      <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-end-date="0d" data-date-clear-btn="true">
                           <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="checkout_at" id="checkout_at" value="{{ Request::old('checkout_at') }}">
                           <span class="input-group-addon"><i class="fas fa-calendar"></i></span>
                       </div>

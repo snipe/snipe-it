@@ -61,7 +61,7 @@
                         <div class="form-group {{ $errors->has('next_audit_date') ? 'error' : '' }}">
                             {{ Form::label('next_audit_date', trans('general.next_audit_date'), array('class' => 'col-md-3 control-label')) }}
                             <div class="col-md-9">
-                                <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                                <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-clear-btn="true">
                                     <input type="text" class="form-control" placeholder="{{ trans('general.next_audit_date') }}" name="next_audit_date" id="next_audit_date" value="{{ old('next_audit_date', $next_audit_date) }}">
                                     <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
                                 </div>
