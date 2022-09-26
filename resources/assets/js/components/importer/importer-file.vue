@@ -172,7 +172,6 @@
                         {id: 'asset_tag', text: 'Assigned To Asset'},
                         {id: 'expiration_date', text: 'Expiration Date' },
                         {id: 'full_name', text: 'Full Name' },
-                        {id: 'notes', text: 'Notes' },
                         {id: 'license_email', text: 'Licensed To Email' },
                         {id: 'license_name', text: 'Licensed To Name' },
                         {id: 'notes', text: 'Notes' },
