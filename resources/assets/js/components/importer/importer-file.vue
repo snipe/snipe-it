@@ -150,8 +150,6 @@
                     assets: [
                         {id: 'asset_tag', text: 'Asset Tag' },
                         {id: 'asset_model', text: 'Model Name' },
-                        {id: 'asset_notes', text: 'Asset Notes' },
-                        {id: 'model_notes', text: 'Model Notes' },
                         {id: 'checkout_class', text: 'Checkout Type' },
                         {id: 'checkout_location', text: 'Checkout Location' },
                         {id: 'image', text: 'Image Filename' },
@@ -196,7 +194,6 @@
                         {id: 'address', text: 'Address' },
                         {id: 'city', text: 'City' },
                         {id: 'state', text: 'State' },
-                        {id: 'zip', text: 'ZIP' },
                         {id: 'country', text: 'Country' },
                         {id: 'zip', text: 'ZIP' },
 
