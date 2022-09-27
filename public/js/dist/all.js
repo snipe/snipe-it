@@ -59439,12 +59439,6 @@ var baseUrl = $('meta[name="baseUrl"]').attr('content');
           id: 'asset_model',
           text: 'Model Name'
         }, {
-          id: 'asset_notes',
-          text: 'Asset Notes'
-        }, {
-          id: 'model_notes',
-          text: 'Model Notes'
-        }, {
           id: 'checkout_class',
           text: 'Checkout Type'
         }, {
@@ -59501,9 +59495,6 @@ var baseUrl = $('meta[name="baseUrl"]').attr('content');
           id: 'full_name',
           text: 'Full Name'
         }, {
-          id: 'notes',
-          text: 'Notes'
-        }, {
           id: 'license_email',
           text: 'Licensed To Email'
         }, {
@@ -59547,9 +59538,6 @@ var baseUrl = $('meta[name="baseUrl"]').attr('content');
           id: 'manager_last_name',
           text: 'Manager Last Name'
         }, {
-          id: 'notes',
-          text: 'Notes'
-        }, {
           id: 'activated',
           text: 'Activated'
         }, {
@@ -59561,9 +59549,6 @@ var baseUrl = $('meta[name="baseUrl"]').attr('content');
         }, {
           id: 'state',
           text: 'State'
-        }, {
-          id: 'zip',
-          text: 'ZIP'
         }, {
           id: 'country',
           text: 'Country'
