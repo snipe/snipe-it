@@ -10,7 +10,9 @@
                     </div>
 
                     <div class="col-md-7 col-xs-12">
-                        {{ Form::select('importType', $importTypes, 0 /* FIXME whats' the old value? */, ['placeholder' => '', 'wire:model' => 'importType', 'wire:change' => 'changeTypes']) }}
+                        <span wire:ignore>
+                            {{ Form::select('importType', $importTypes, 0 /* FIXME whats' the old value? */, ['class' => 'livewire-select2', 'placeholder' => '', 'data-livewire-model' => 'importType']) }}
+                        </span>
                         {{-- <select2 :options="options.importTypes" v-model="options.importType" required> --}}
                             {{-- <option disabled value="0"></option> --}}
                         {{-- </select2> --}}
@@ -205,3 +207,15 @@
 
   </tr>
 {{-- </template> --}}
+<script>
+console.warn("Doodie doodie butt farts")
+$('.livewire-select2').select2();
+console.warn("Select2 has been activated within the livewire context (maybe?)")
+$('.livewire-select2').on('select2:select', function (event) {
+    console.log("select2 selected!!!!!!!!!!!")
+})
+$('.livewire-select2').on('change',function (event) {
+    console.warn("Original target is: "+event.target)
+    // find the data-livewire-model thing?
+})
+</script>

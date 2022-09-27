@@ -2,7 +2,7 @@
     {{-- <importer inline-template v-cloak> --}} {{-- like, this, here, that's a literal Vue directive --}}
         <div class="row">
         {{-- <alert v-show="alert.visible" :alert-type="alert.type" v-on:hide="alert.visible = false">@{{ alert.message }}</alert> --}}
-<template>
+<template> {{-- this is going to take some porting :/ --}}
     <div class="box" v-if="errors">
   <div class="box-body">
     <div class="alert alert-warning">
@@ -45,27 +45,6 @@
     </div>
 @endif
 
-<script>
-    fixme = {
-        /*
-         * The component's data.
-         */
-        props: ['alertType', 'title'],
-
-        computed: {
-            alertClassName() {
-                return 'alert-' + this.alertType;
-            }
-        },
-
-        methods: {
-            hideEvent() {
-                this.$emit('hide');
-            }
-        }
-    }
-
-</script>
             {{-- errors thing that's built-in maybe? --}}
             {{-- <errors :errors="importErrors"></errors> --}}
 
