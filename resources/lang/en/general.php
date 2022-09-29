@@ -375,6 +375,7 @@ return [
     'na_no_purchase_date'   => 'N/A - No purchase date provided',
     'assets_by_status'      => 'Assets by Status',
     'assets_by_status_type'      => 'Assets by Status Type',
+    'pie_chart_type'        => 'Dashboard Pie Chart Type',
 
 
 ];

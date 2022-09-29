@@ -248,7 +248,9 @@
   <div class="col-md-4">
         <div class="box box-default">
             <div class="box-header with-border">
-                <h2 class="box-title">{{ trans('general.assets_by_status_type') }}</h2>
+                <h2 class="box-title">
+                    {{ (\App\Models\Setting::getSettings()->dash_chart_type == 'name') ? trans('general.assets_by_status') : trans('general.assets_by_status_type') }}
+                </h2>
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" aria-hidden="true">
                         <i class="fas fa-minus" aria-hidden="true"></i>
@@ -430,7 +432,7 @@
 
       $.ajax({
           type: 'GET',
-          url: '{{  route('api.statuslabels.assets.bytype') }}',
+          url: '{{ (\App\Models\Setting::getSettings()->dash_chart_type == 'name') ? route('api.statuslabels.assets.byname') : route('api.statuslabels.assets.bytype') }}',
           headers: {
               "X-Requested-With": 'XMLHttpRequest',
               "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')

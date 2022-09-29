@@ -349,6 +349,7 @@ class SettingsController extends Controller
         $setting->privacy_policy_link = $request->input('privacy_policy_link');
 
         $setting->depreciation_method = $request->input('depreciation_method');
+        $setting->dash_chart_type = $request->input('dash_chart_type');
 
         if ($request->input('per_page') != '') {
             $setting->per_page = $request->input('per_page');
