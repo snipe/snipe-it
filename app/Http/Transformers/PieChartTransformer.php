@@ -3,14 +3,15 @@
 namespace App\Http\Transformers;
 
 
-use App\Helpers\Helper;/**
+use App\Helpers\Helper;
+/**
  * Class PieChartTransformer
  *
  * This handles the standardized formatting of the API response we need to provide for
  * the pie charts
  *
  * @return \Illuminate\Http\Response
- *@since [v6.0.11]
+ * @since [v6.0.11]
  * @author [A. Gianotto] [<snipe@snipe.net>]
  */
 class PieChartTransformer
@@ -27,7 +28,7 @@ class PieChartTransformer
 
             if ($total['count'] > 0) {
 
-                $labels[] = $total['label'];
+                $labels[] = $total['label']." (".$total['count'].")";
                 $counts[] = $total['count'];
 
                 if (isset($total['color'])) {
