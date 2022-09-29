@@ -866,7 +866,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                 ]
             )->name('api.statuslabels.assets.bytype');
 
-            Route::get('assetlist',
+            Route::get('{id}/assetlist',
                 [
                     Api\StatuslabelsController::class, 
                     'assets'
