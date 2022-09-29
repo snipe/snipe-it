@@ -248,7 +248,7 @@
   <div class="col-md-4">
         <div class="box box-default">
             <div class="box-header with-border">
-                <h2 class="box-title">{{ trans('general.assets') }} {{ trans('general.bystatus') }}</h2>
+                <h2 class="box-title">{{ trans('general.assets_by_status_type') }}</h2>
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" aria-hidden="true">
                         <i class="fas fa-minus" aria-hidden="true"></i>
@@ -261,7 +261,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="chart-responsive">
-                            <canvas id="statusPieChart" height="290"></canvas>
+                            <canvas id="statusPieChart" height="260"></canvas>
                         </div> <!-- ./chart-responsive -->
                     </div> <!-- /.col -->
                 </div> <!-- /.row -->
@@ -438,7 +438,7 @@
           dataType: 'json',
           success: function (data) {
               var myPieChart = new Chart(ctx,{
-                  type   : 'doughnut',
+                  type   : 'pie',
                   data   : data,
                   options: pieOptions
               });
