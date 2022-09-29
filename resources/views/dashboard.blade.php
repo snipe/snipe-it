@@ -431,7 +431,13 @@
               tooltips: {
                 callbacks: {
                     label: function(tooltipItem, data) {
-                        return data.labels[tooltipItem.datasetIndex] || '';
+                        counts = data.datasets[0].data;
+                        total = 0;
+                        for(var i in counts) {
+                            total += counts[i];
+                        }
+                        prefix = data.labels[tooltipItem.index] || '';
+                        return prefix+" "+Math.round(counts[tooltipItem.index]/total*100)+"%";
                     }
                 }
               }
