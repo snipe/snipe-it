@@ -427,6 +427,13 @@
                   position: 'top',
                   responsive: true,
                   maintainAspectRatio: true,
+              },
+              tooltips: {
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        return data.labels[tooltipItem.datasetIndex] || '';
+                    }
+                }
               }
           };
 
