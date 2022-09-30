@@ -411,6 +411,7 @@ class ReportsController extends Controller
         $customfields = CustomField::get();
         $response = new StreamedResponse(function () use ($customfields, $request) {
             \Log::debug('Starting streamed response');
+            \Log::debug('CSV escaping is set to: '.config('app.escape_formulas'));
 
             // Open output stream
             $handle = fopen('php://output', 'w');
@@ -858,7 +859,17 @@ class ReportsController extends Controller
                             $row[] = $asset->$column_name;
                         }
                     }
-                    fputcsv($handle, $formatter->escapeRecord($row));
+
+                    
+                    // CSV_ESCAPE_FORMULAS is set to false in the .env
+                    if (config('app.escape_formulas') === false) {
+                        fputcsv($handle, $row);
+
+                   // CSV_ESCAPE_FORMULAS is set to true or is not set in the .env
+                    } else {
+                        fputcsv($handle, $formatter->escapeRecord($row));
+                    }
+
                     $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
                     \Log::debug('-- Record '.$count.' Asset ID:'.$asset->id.' in '.$executionTime);
                 }
