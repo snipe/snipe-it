@@ -394,7 +394,7 @@ return [
     'allow_purge' => env('ALLOW_DATA_PURGE', false),
 
 
-    /*
+   /*
    |--------------------------------------------------------------------------
    | Allow Backup Deletion
    |--------------------------------------------------------------------------
@@ -404,5 +404,21 @@ return [
    */
 
     'allow_backup_delete' => env('ALLOW_BACKUP_DELETE', false),
+
+
+  /*
+  |--------------------------------------------------------------------------
+  | Escape Excel formulas in CSV exports
+  |--------------------------------------------------------------------------
+  |
+  | This determins whether or not we should escape Excel formulas in CSV exports.
+  | This can be UNSAFE in untrusted environments, and therefore defaults to true
+  | so that Excel forumals WILL be escaped in CSV exports, however if your workflow
+  | is designed around using formulas in your fields, you
+  | you can set CSV_ESCAPE_FORMULAS to 'false' in your .env.
+  |
+  */
+
+    'escape_formulas' => env('CSV_ESCAPE_FORMULAS', true),
 
 ];

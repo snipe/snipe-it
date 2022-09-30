@@ -2729,6 +2729,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Vautia",
+      "name": "Vautia",
+      "avatar_url": "https://avatars.githubusercontent.com/u/111710123?v=4",
+      "profile": "https://github.com/Vautia",
+      "contributions": [
+        "security"
+      ]
     }
   ]
 }
