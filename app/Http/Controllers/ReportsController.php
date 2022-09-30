@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\View;
 use Input;
 use League\Csv\Reader;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-
+use League\Csv\EscapeFormula;
 /**
  * This controller handles all actions related to Reports for
  * the Snipe-IT Asset Management application.
@@ -666,6 +666,9 @@ class ReportsController extends Controller
                 $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
                 \Log::debug('Walking results: '.$executionTime);
                 $count = 0;
+
+                $formatter = new EscapeFormula("`");
+
                 foreach ($assets as $asset) {
                     $count++;
                     $row = [];
@@ -855,7 +858,7 @@ class ReportsController extends Controller
                             $row[] = $asset->$column_name;
                         }
                     }
-                    fputcsv($handle, $row);
+                    fputcsv($handle, $formatter->escapeRecord($row));
                     $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
                     \Log::debug('-- Record '.$count.' Asset ID:'.$asset->id.' in '.$executionTime);
                 }
