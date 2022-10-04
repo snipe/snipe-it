@@ -226,19 +226,17 @@ class ProfileController extends Controller
      *
      * @author A. Gianotto
      * @since [v6.0.12]
-     * @return \Illuminate\Http\RedirectResponse
+     * @return Illuminate\View\View
      */
     public function printInventory()
     {
-        $show_user = User::where('id', Auth::user()->id)->withTrashed()->first();
-        $assets = Asset::where('assigned_to',  Auth::user()->id)->where('assigned_type', User::class)->with('model', 'model.category')->get();
-        $accessories = $show_user->accessories()->get();
-        $consumables = $show_user->consumables()->get();
+        $show_user = Auth::user();
 
-        return view('users/print')->with('assets', $assets)
+        return view('users/print')
+            ->with('assets', Auth::user()->assets)
             ->with('licenses', $show_user->licenses()->get())
-            ->with('accessories', $accessories)
-            ->with('consumables', $consumables)
+            ->with('accessories', $show_user->accessories()->get())
+            ->with('consumables', $show_user->consumables()->get())
             ->with('show_user', $show_user)
             ->with('settings', Setting::getSettings());
     }
