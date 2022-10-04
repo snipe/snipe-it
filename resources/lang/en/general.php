@@ -376,6 +376,8 @@ return [
     'assets_by_status'      => 'Assets by Status',
     'assets_by_status_type'      => 'Assets by Status Type',
     'pie_chart_type'        => 'Dashboard Pie Chart Type',
+    'hello_name'            => 'Hello, :name!',
+    'unaccepted_profile_warning'   => 'You have :count items requiring acceptance. Click here to accept or decline them',
 
 
 ];

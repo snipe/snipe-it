@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ImageUploadRequest;
+use App\Models\Asset;
 use App\Models\Setting;
+use App\Models\User;
+use App\Notifications\CurrentInventory;
 use Illuminate\Support\Facades\Auth;
 use Gate;
 use Illuminate\Http\Request;
@@ -215,5 +218,48 @@ class ProfileController extends Controller
         } else {
             $request->session()->put('menu_state', 'closed');
         }
+    }
+
+
+    /**
+     * Print inventory
+     *
+     * @author A. Gianotto
+     * @since [v6.0.12]
+     * @return Illuminate\View\View
+     */
+    public function printInventory()
+    {
+        $show_user = Auth::user();
+
+        return view('users/print')
+            ->with('assets', Auth::user()->assets)
+            ->with('licenses', $show_user->licenses()->get())
+            ->with('accessories', $show_user->accessories()->get())
+            ->with('consumables', $show_user->consumables()->get())
+            ->with('show_user', $show_user)
+            ->with('settings', Setting::getSettings());
+    }
+
+    /**
+     * Emails user a list of assigned assets
+     *
+     * @author A. Gianotto
+     * @since [v6.0.12]
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function emailAssetList()
+    {
+
+        if (!$user = User::find(Auth::user()->id)) {
+            return redirect()->back()
+                ->with('error', trans('admin/users/message.user_not_found', ['id' => $id]));
+        }
+        if (empty($user->email)) {
+            return redirect()->back()->with('error', trans('admin/users/message.user_has_no_email'));
+        }
+
+        $user->notify((new CurrentInventory($user)));
+        return redirect()->back()->with('success', trans('admin/users/general.user_notified'));
     }
 }
