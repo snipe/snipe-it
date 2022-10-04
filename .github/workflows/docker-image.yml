@@ -15,6 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag makeimageusinggithub:$(date +%s)
+      run: docker build . --file Dockerfile --tag snipe-rohan:$(date +%s)
     - name: check docker images
       run: docker images
