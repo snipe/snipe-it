@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-{{ trans('general.viewassetsfor', array('name' => $user->present()->fullName())) }}
+{{ trans('general.hello_name', array('name' => $user->present()->fullName())) }}
 @parent
 @stop
 
@@ -83,36 +83,42 @@
 
                 <div class="col-md-12 text-center">
 
-                  @if (($user->isSuperUser()) || ($user->hasAccess('admin')))
-                    <i class="fas fa-crown fa-2x{{  ($user->isSuperUser()) ? ' text-danger' : ' text-orange'}}"></i>
-                    <div class="{{  ($user->isSuperUser()) ? 'text-danger' : 'text-orange'}}" style="font-weight: bold">{{  ($user->isSuperUser()) ? 'superadmin' : 'admin'}}</div>
-                  @endif
-
-
                 </div>
                 <div class="col-md-12 text-center">
                   <img src="{{ $user->present()->gravatar() }}"  class=" img-thumbnail hidden-print" style="margin-bottom: 20px;" alt="{{ $user->present()->fullName() }}">
                 </div>
 
-
-
-                @can('update', $user)
                   <div class="col-md-12">
-                    <a href="{{ route('users.edit', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/users/general.edit') }}</a>
+                    <a href="{{ route('profile') }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">
+                      {{ trans('general.editprofile') }}
+                    </a>
                   </div>
+
+                <div class="col-md-12" style="padding-top: 5px;">
+                  <a href="{{ route('account.password.index') }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print" target="_blank" rel="noopener">
+                    {{ trans('general.changepassword') }}
+                  </a>
+                </div>
+
+                @can('self.api')
+                <div class="col-md-12" style="padding-top: 5px;">
+                  <a href="{{ route('user.api') }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print" target="_blank" rel="noopener">
+                    {{ trans('general.manage_api_keys') }}
+                  </a>
+                </div>
                 @endcan
 
 
-                @can('view', $user)
                   <div class="col-md-12" style="padding-top: 5px;">
-                    <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print" target="_blank" rel="noopener">{{ trans('admin/users/general.print_assigned') }}</a>
+                    <a href="{{ route('profile.print') }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print" target="_blank" rel="noopener">
+                      {{ trans('admin/users/general.print_assigned') }}
+                    </a>
                   </div>
-                @endcan
 
-                @can('view', $user)
+
                   <div class="col-md-12" style="padding-top: 5px;">
                     @if(!empty($user->email))
-                      <form action="{{ route('users.email',['userId'=> $user->id]) }}" method="POST">
+                      <form action="{{ route('profile.email_assets') }}" method="POST">
                         {{ csrf_field() }}
                         <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener">{{ trans('admin/users/general.email_assigned') }}</button>
                       </form>
@@ -120,8 +126,6 @@
                       <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_email') }}">{{ trans('admin/users/general.email_assigned') }}</button>
                     @endif
                   </div>
-                @endcan
-
 
                 <br><br>
               </div>

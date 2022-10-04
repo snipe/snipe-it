@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ImageUploadRequest;
+use App\Models\Asset;
 use App\Models\Setting;
+use App\Models\User;
+use App\Notifications\CurrentInventory;
 use Illuminate\Support\Facades\Auth;
 use Gate;
 use Illuminate\Http\Request;
@@ -215,5 +218,50 @@ class ProfileController extends Controller
         } else {
             $request->session()->put('menu_state', 'closed');
         }
+    }
+
+
+    /**
+     * Print inventory
+     *
+     * @author A. Gianotto
+     * @since [v6.0.12]
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function printInventory()
+    {
+        $show_user = User::where('id', Auth::user()->id)->withTrashed()->first();
+        $assets = Asset::where('assigned_to',  Auth::user()->id)->where('assigned_type', User::class)->with('model', 'model.category')->get();
+        $accessories = $show_user->accessories()->get();
+        $consumables = $show_user->consumables()->get();
+
+        return view('users/print')->with('assets', $assets)
+            ->with('licenses', $show_user->licenses()->get())
+            ->with('accessories', $accessories)
+            ->with('consumables', $consumables)
+            ->with('show_user', $show_user)
+            ->with('settings', Setting::getSettings());
+    }
+
+    /**
+     * Emails user a list of assigned assets
+     *
+     * @author A. Gianotto
+     * @since [v6.0.12]
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function emailAssetList()
+    {
+
+        if (!$user = User::find(Auth::user()->id)) {
+            return redirect()->back()
+                ->with('error', trans('admin/users/message.user_not_found', ['id' => $id]));
+        }
+        if (empty($user->email)) {
+            return redirect()->back()->with('error', trans('admin/users/message.user_has_no_email'));
+        }
+
+        $user->notify((new CurrentInventory($user)));
+        return redirect()->back()->with('success', trans('admin/users/general.user_notified'));
     }
 }

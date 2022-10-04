@@ -376,6 +376,7 @@ return [
     'assets_by_status'      => 'Assets by Status',
     'assets_by_status_type'      => 'Assets by Status Type',
     'pie_chart_type'        => 'Dashboard Pie Chart Type',
+    'hello_name'            => 'Hello, :name!',
 
 
 ];

@@ -594,7 +594,7 @@ class UsersController extends Controller
     }
 
     /**
-     * LDAP form processing.
+     * Print inventory
      *
      * @author Aladin Alaily
      * @since [v1.8]
