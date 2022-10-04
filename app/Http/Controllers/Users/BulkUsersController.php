@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Users;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Accessory;
+use App\Models\Component;
 use App\Models\License;
 use App\Models\Actionlog;
 use App\Models\Asset;
@@ -13,6 +14,7 @@ use App\Models\LicenseSeat;
 use App\Models\ConsumableAssignment;
 use App\Models\Consumable;
 use App\Models\User;
+use App\Notifications\CurrentInventory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -247,5 +249,41 @@ class BulkUsersController extends Controller
             $logAction->note = 'Bulk checkin items';
             $logAction->logaction('checkin from');
         }
+    }
+    protected function findAssetOwners()
+    {
+        $asset_owners= Asset::all()->where('assigned_to', '!=', null)->pluck('assigned_to')->toArray();
+        $license_owners = LicenseSeat::all()->where('assigned_to', '!=', null)->pluck('assigned_to')->toArray();
+
+//        *** Im targeting the wrong model here. there is a different table for both of these. *****
+        $accessory_owners = new Accessory();
+
+//        $component_owners =Component::assets()->where('user_id', '!=', null)->pluck('user_id')->toArray();
+
+        $all_assets_checked= array_merge($asset_owners, $license_owners);
+        $user_list= array_unique($all_assets_checked, SORT_NUMERIC);
+
+        return $accessory_owners->Userlist();
+    }
+    /**
+     * Emails All users a list of assigned assets
+     *
+     * @author [G. Martinez] [<godmartinz@gmail.com>]
+     * @since [v6.0.10]
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function emailEveryoneAssetList()
+    {
+        $this->authorize('view', User::class);
+        $users= $this->findAssetOwners();
+        dd($users);
+
+        foreach($users as $user) {
+            $user_list= User::all()->where('id', '==', $user);
+            if (!empty($user->email)) {
+                $user->notify((new CurrentInventory($user)));
+            }
+        }
+        return redirect()->back()->with('success', trans('admin/users/general.users_notified'));
     }
 }

@@ -27,7 +27,7 @@
         <a class="btn btn-default pull-right" href="{{ route('users.index', ['status' => 'deleted']) }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_deleted') }}</a>
     @endif
     @can('superuser')
-        <form action="{{ route('users.emailEveryone')}}" method="POST">
+        <form action="{{ route('users/bulkemailEveryone')}}" method="POST">
             {{ csrf_field() }}
             <button class="btn btn-default pull-right" rel="noopener">{{ trans('admin/users/general.email_everyone_assigned') }}</button>
         </form>
