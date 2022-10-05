@@ -1,15 +1,15 @@
 name: Docker Image CI
 
-on: workflow_dispatch
-#   push:
-#     branches: [ "master" ]
+on: 
+  push:
+    branches: [ "master" ]
 #   pull_request:
 #     branches: [ "master" ]
 
 jobs:
 
   build:
-    name: Build image
+    name: Build images
     runs-on: ubuntu-latest
 
     steps:
