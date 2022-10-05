@@ -2738,6 +2738,24 @@
       "contributions": [
         "security"
       ]
+    },
+    {
+      "login": "chartjes",
+      "name": "Chris Hartjes",
+      "avatar_url": "https://avatars.githubusercontent.com/u/28321?v=4",
+      "profile": "http://www.littlehart.net/atthekeyboard",
+      "contributions": [
+        "tests"
+      ]
+    },
+    {
+      "login": "geo-chen",
+      "name": "geo-chen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2404584?v=4",
+      "profile": "https://github.com/geo-chen",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
