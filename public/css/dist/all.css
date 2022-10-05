@@ -23815,6 +23815,24 @@ th.css-accessory > .th-inner::before {
 .bs-checkbox input {
   zoom: 1.5;
 }
+@media screen and (max-width: 511px) {
+  .sidebar-menu {
+    margin-top: 64px;
+  }
+}
+@media screen and (max-width: 771px) and (min-width: 512px) {
+  .sidebar-menu {
+    margin-top: 14px;
+  }
+}
+@media screen and (max-width: 1098px) and (min-width: 772px) {
+  .sidebar-menu {
+    margin-top: 51px;
+  }
+}
+.main-sidebar {
+  margin-top: 50px;
+}
 
 
 .select2-container {
@@ -24886,5 +24904,23 @@ th.css-accessory > .th-inner::before {
 }
 .bs-checkbox input {
   zoom: 1.5;
+}
+@media screen and (max-width: 511px) {
+  .sidebar-menu {
+    margin-top: 64px;
+  }
+}
+@media screen and (max-width: 771px) and (min-width: 512px) {
+  .sidebar-menu {
+    margin-top: 14px;
+  }
+}
+@media screen and (max-width: 1098px) and (min-width: 772px) {
+  .sidebar-menu {
+    margin-top: 51px;
+  }
+}
+.main-sidebar {
+  margin-top: 50px;
 }
 
