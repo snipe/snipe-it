@@ -59,7 +59,7 @@ Since the release of the JSON REST API, several third-party developers have been
 - [SnipeSharp - .NET module in C#](https://github.com/barrycarey/SnipeSharp) by [@barrycarey](https://github.com/barrycarey)
 - [InQRy -unmaintained-](https://github.com/Microsoft/InQRy) by [@Microsoft](https://github.com/Microsoft)
 - [SnipeitPS](https://github.com/snazy2000/SnipeitPS) by [@snazy2000](https://github.com/snazy2000) - Powershell API Wrapper for Snipe-it
-- [jamf2snipe](https://github.com/ParadoxGuitarist/jamf2snipe) by [@ParadoxGuitarist](https://github.com/ParadoxGuitarist) - Python script to sync assets between a JAMFPro instance and a Snipe-IT instance
+- [jamf2snipe](https://github.com/grokability/jamf2snipe) - Python script to sync assets between a JAMFPro instance and a Snipe-IT instance
 - [Marksman](https://github.com/Scope-IT/marksman) - A Windows agent for Snipe-IT
 - [Snipe-IT plugin for Jira Service Desk](https://marketplace.atlassian.com/apps/1220964/snipe-it-for-jira)
 - [Python 3 CSV importer](https://github.com/gastamper/snipeit-csvimporter) - allows importing assets into Snipe-IT based on Item Name rather than Asset Tag.
