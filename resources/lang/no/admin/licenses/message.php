@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Lisens eksisterer ikke.',
+    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
     'user_does_not_exist' => 'Bruker eksisterer ikke.',
     'asset_does_not_exist' 	=> 'Eiendelen du prøver å koble til denne lisensen eksisterer ikke.',
     'owner_doesnt_match_asset' => 'Eiendelen du prøver å koble til denne lisensen er eid av noen andre enn personen du har valgt i tildelt til-nedtrekkslista.',

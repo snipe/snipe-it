@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'Хэрэглэгч вэбсайт дээрх зүйл хүсэлтийг цуцалсан байна',
     'a_user_requested' => 'Хэрэглэгч вэбсайт дээрх зүйлийг хүссэн байна',
     'accessory_name' => 'Дагалдах хэрэгслийн нэр:',

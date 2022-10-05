@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Sa hakkad kustsutama :asset_count vahendit.',
     'bulk_update'		=> 'Uuenduste hulgihaldus',
     'bulk_update_help'	=> 'See vorm võimaldab teil korraga mitme vara värskendada. Täitke ainult väljad, mida tuleb muuta. Kõik tühjad tühikud jäävad muutmata.',
-    'bulk_update_warn'	=> 'Olete muutma vara omaduste omadust: asset_count.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Väljastatud kasutajale',
     'checkout_date'		=> 'Väljastamise kuupäev',
     'checkin_date'		=> 'Tagastamise kuupäev',

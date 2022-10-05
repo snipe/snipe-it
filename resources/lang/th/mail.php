@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'ผู้ใช้ยกเลิกคำร้องขอสินค้าในเว็บไซต์แล้ว',
     'a_user_requested' => 'ผู้ใช้ร้องขอรายการบนเว็บไซต์',
     'accessory_name' => 'ชื่ออุปกรณ์เสริม:',

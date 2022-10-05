@@ -10,10 +10,10 @@ return array(
     'throttle'               => 'Previše neuspelih pokušaja. Pokušajte ponovo za :seconds sekundi.',
 
     'two_factor' => array(
-        'already_enrolled'      => 'Your device is already enrolled.',
+        'already_enrolled'      => 'Vaš uređaj je već registrovan.',
         'success'               => 'Uspešno ste se prijavili.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
+        'code_required'         => 'Potreban je dvofaktorski kod.',
+        'invalid_code'          => 'Dvofaktorski kod je nevažeći.',
     ),
 
     'signin' => array(
@@ -23,7 +23,7 @@ return array(
 
     'logout' => array(
         'error'   => 'Došlo je do problema prilikom pokušaja prijavljivanja, pokušajte ponovo.',
-        'success' => 'You have successfully logged out.',
+        'success' => 'Uspešno ste se odjavili.',
     ),
 
     'signup' => array(

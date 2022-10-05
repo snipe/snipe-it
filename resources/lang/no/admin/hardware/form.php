@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Du er i ferd med å slette :asset_count enheter.',
     'bulk_update'		=> 'Masseoppdater eiendeler',
     'bulk_update_help'	=> 'Dette skjemaet lar deg oppdatere flere eiendeler på en gang. Fyll kun ut feltene du ønsker å endre. Tomme felter forblir uendret. ',
-    'bulk_update_warn'	=> 'Du er på vei til å endre egenskapene til :asset_count eiendeler.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Utsjekket til',
     'checkout_date'		=> 'Utsjekkdato',
     'checkin_date'		=> 'Innsjekkdato',

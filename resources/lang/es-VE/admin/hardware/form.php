@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Vas a eliminar :asset_count activos.',
     'bulk_update'		=> 'Actualización Masiva de Activos',
     'bulk_update_help'	=> 'Este formulario te permite actualizar múltiples activos de una vez. Sólo llena los campos que necesites cambiar. Cualquier campo dejado en blanco permanecerá sin cambios. ',
-    'bulk_update_warn'	=> 'Estás a punto de editar las propiedades de :asset_count activos.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Asignado A',
     'checkout_date'		=> 'Fecha de Salida',
     'checkin_date'		=> 'Fecha de Ingreso',

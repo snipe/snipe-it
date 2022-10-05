@@ -13,15 +13,15 @@ return [
     |
     */
 
-    'more_info_title' => 'More Info',
+    'more_info_title' => 'Детальніше',
 
     'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
     'assets' => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
 
-    'categories' => 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'categories' => 'Категорії допоможуть вам розподілити обладнання по групах. Такими категоріями можуть бути: &quot;Настільні комп\'ютери&quot;, &quot;Ноутбуки&quot;, &quot;Мобільні телефони&quot;, &quot;Планшети&quot; й так далі, але ви також можете використовувати їх на свій розсуд.',
 
-    'accessories' => 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
+    'accessories' => 'Аксесуари - це периферійне обладнання, яке видається користувачам, але не має серійного номера (або вам не потрібно враховувати його індивідуально). Наприклад, комп\'ютерна миша чи клавіатура.',
 
     'companies'     => 'Companies can be used as a simple identifier field, or can be used to limit visibility of assets, users, etc if full company support is enabled in your Admin settings.',
 

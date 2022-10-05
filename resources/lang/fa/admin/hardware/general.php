@@ -6,40 +6,52 @@ return [
     'archived'  				=> 'بایگانی شد',
     'asset'  					=> 'دارایی',
     'bulk_checkout'             => 'خروج دارایی ها',
-    'bulk_checkin'              => 'Checkin Assets',
+    'bulk_checkin'              => 'دارایی های ثبت نام
+',
     'checkin'  					=> 'دارایی checkin',
     'checkout'  				=> 'دارایی پرداخت',
     'clone'  					=> 'دارایی شگرف',
     'deployable'  				=> 'گسترش',
-    'deleted'  					=> 'This asset has been deleted.',
+    'deleted'  					=> 'این دارایی حذف شده است.
+',
     'edit'  					=> 'ویرایش دارایی',
-    'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
+    'model_deleted'  			=> 'این مدل دارایی حذف شده است. قبل از اینکه بتوانید Asset را بازیابی کنید، باید مدل را بازیابی کنید.
+',
     'requestable'               => 'در خواست شد',
     'requested'				    => 'درخواست شده',
-    'not_requestable'           => 'Not Requestable',
-    'requestable_status_warning' => 'Do not change  requestable status',
+    'not_requestable'           => 'غیر قابل درخواست
+',
+    'requestable_status_warning' => 'وضعیت درخواستی را تغییر ندهید
+',
     'restore'  					=> 'بازیابی دارایی',
     'pending'  					=> 'در انتظار',
     'undeployable'  			=> 'غیرقابل گسترش',
     'view'  					=> 'نمایش دارایی ها
 ',
-    'csv_error' => 'You have an error in your CSV file:',
-    'import_text' => '
-    <p>
-    Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
+    'csv_error' => 'شما یک خطا در فایل CSV خود دارید:
+',
+    'import_text' => '<p>
+    یک CSV حاوی سابقه دارایی آپلود کنید. دارایی ها و کاربران باید از قبل در سیستم وجود داشته باشند، در غیر این صورت از آنها صرفنظر می شود. تطبیق دارایی‌ها برای واردات سابقه در برابر برچسب دارایی اتفاق می‌افتد. ما سعی خواهیم کرد یک کاربر منطبق بر اساس نام کاربری که ارائه می‌کنید و معیارهایی که در زیر انتخاب می‌کنید پیدا کنیم. اگر هیچ معیاری را در زیر انتخاب نکنید، به سادگی سعی می کند با قالب نام کاربری که در Admin پیکربندی کرده اید مطابقت داشته باشد &gt; تنظیمات عمومی.
     </p>
 
-    <p>Fields included in the CSV must match the headers: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Any additional fields will be ignored. </p>
+    <p>فیلدهای موجود در CSV باید با سرصفحه‌ها مطابقت داشته باشند: <strong>برچسب دارایی، نام، تاریخ پرداخت، تاریخ ورود</strong>. هر فیلد اضافی نادیده گرفته خواهد شد. </p>
 
-    <p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
-    ',
-    'csv_import_match_f-l' => 'Try to match users by firstname.lastname (jane.smith) format',
-    'csv_import_match_initial_last' => 'Try to match users by first initial last name (jsmith) format',
-    'csv_import_match_first' => 'Try to match users by first name (jane) format',
-    'csv_import_match_email' => 'Try to match users by email as username',
-    'csv_import_match_username' => 'Try to match users by username',
-    'error_messages' => 'Error messages:',
-    'success_messages' => 'Success messages:',
-    'alert_details' => 'Please see below for details.',
-    'custom_export' => 'Custom Export'
+    <p>تاریخ اعلام حضور: تاریخ‌های خالی یا آتی اعلام حضور، موارد را به کاربر مرتبط پرداخت می‌کنند. با کنار گذاشتن ستون تاریخ ورود، تاریخ ورود با تاریخ امروز ایجاد می‌شود.</p>',
+    'csv_import_match_f-l' => 'سعی کنید کاربران را با قالب firstname.lastname (jane.smith) مطابقت دهید
+',
+    'csv_import_match_initial_last' => 'سعی کنید کاربران را با فرمت نام خانوادگی اولیه (jsmith) مطابقت دهید
+',
+    'csv_import_match_first' => 'سعی کنید کاربران را با فرمت نام کوچک (جین) مطابقت دهید
+',
+    'csv_import_match_email' => 'سعی کنید کاربران را از طریق ایمیل به عنوان نام کاربری مطابقت دهید
+',
+    'csv_import_match_username' => 'سعی کنید کاربران را با نام کاربری مطابقت دهید
+',
+    'error_messages' => 'پیام خطا',
+    'success_messages' => 'پیام  موفقیت:
+',
+    'alert_details' => 'لطفا برای جزئیات زیر را ببینید.
+',
+    'custom_export' => 'صادرات سفارشی
+'
 ];

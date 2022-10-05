@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'ไม่มีสัญญาอนุญาต',
+    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
     'user_does_not_exist' => 'ไม่มีผู้ใช้',
     'asset_does_not_exist' 	=> 'เนื้อหาที่คุณกำลังพยายามเชื่อมโยงกับใบอนุญาตนี้ไม่มีอยู่',
     'owner_doesnt_match_asset' => 'เนื้อหาที่คุณกำลังพยายามเชื่อมโยงกับใบอนุญาตนี้เป็นของ somene ไม่ใช่บุคคลที่เลือกในรายการที่กำหนดให้กับ dropdown',

@@ -1,6 +1,6 @@
 <?php
 
 return array(
-    'created'   => 'Created',
+    'created'   => '已新增',
     'size' => '尺寸',
 );

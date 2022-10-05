@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Та устгах гэж байна: asset_count хөрөнгө.',
     'bulk_update'		=> 'Бөөнөөр шинэчлэх актив',
     'bulk_update_help'	=> 'Энэ маягтыг олон дахин нэг зэрэг олон актив шинэчлэх боломжтой. Зөвхөн өөрчлөх шаардлагатай талбаруудыг бөглөөрэй. Хоосон үлдсэн талбарууд өөрчлөгдөхгүй хэвээр үлдэнэ.',
-    'bulk_update_warn'	=> 'Та asset_count активын шинж чанарыг засах гэж байна.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Үүнийг шалгах',
     'checkout_date'		=> 'Тооцоо хийх өдөр',
     'checkin_date'		=> 'Checkin Огноо',

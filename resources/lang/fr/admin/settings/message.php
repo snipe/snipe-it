@@ -23,7 +23,7 @@ return [
         'sending' => 'Envoi du message électronique de test...',
         'success' => 'Courrier électronique envoyé !',
         'error' => 'Le courrier électronique n\'a pas pu être envoyé.',
-        'additional' => 'No additional error message provided. Check your mail settings and your app log.'
+        'additional' => 'Aucun message d\'erreur supplémentaire disponible. Veuillez vérifier vos paramètres de messagerie et le journal d\'erreur de l\'application.'
     ],
     'ldap' => [
         'testing' => 'Test de la connexion, de la liaison et de la requête LDAP ...',

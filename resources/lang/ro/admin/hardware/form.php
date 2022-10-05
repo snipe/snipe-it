@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Sunteți pe cale să ștergeți: active_count assets.',
     'bulk_update'		=> 'Actualizarea activelor în bloc',
     'bulk_update_help'	=> 'Acest formular vă permite să actualizați simultan mai multe elemente. Completați câmpurile pe care trebuie să le schimbați. Toate câmpurile rămase necompletate vor rămâne neschimbate.',
-    'bulk_update_warn'	=> 'Sunteți pe punctul de a edita proprietățile: active_count assets.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Alocat la',
     'checkout_date'		=> 'Verifica data',
     'checkin_date'		=> 'Verificați data',

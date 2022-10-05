@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Vai apagar :asset_count ativos.',
     'bulk_update'		=> 'Atualização de ativos em massa',
     'bulk_update_help'	=> 'Este formulário permite a atualização em massa de ativos. Preencha apenas os atributos que precisam de alteração. Qualquer atributo deixado em branco permanecerá inalterado. ',
-    'bulk_update_warn'	=> 'Está prestes a editar as propriedades :asset_count dos ativos.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Alocado a',
     'checkout_date'		=> 'Data de alocação',
     'checkin_date'		=> 'Data de devolução',

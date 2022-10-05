@@ -7,19 +7,19 @@ return array(
     'assoc_items'	 => 'Deze categorie is momenteel gekoppeld aan ten minste één: asset_type en kan niet worden verwijderd. Zorg dat uw: asset_type niet langer verwijst naar deze categorie en probeer het opnieuw. ',
 
     'create' => array(
-        'error'   => 'Categorie werd  niet aangemaakt. Probeer opnieuw, aub.',
-        'success' => 'Categorie correct aangemaakt.'
+        'error'   => 'Categorie is niet aangemaakt. Probeer het opnieuw.',
+        'success' => 'Categorie is aangemaakt.'
     ),
 
     'update' => array(
-        'error'   => 'Categorie werd niet aangepast. Probeer opnieuw, aub.',
-        'success' => 'Categorie correct aangepast.'
+        'error'   => 'Categorie is niet aangepast. Probeer het opnieuw.',
+        'success' => 'Categorie is aangepast.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Bent u zeker dat u deze categorie wilt wissen?',
-        'error'   => 'Er is een probleem opgetreden bij het verwijderen van deze categorie. Probeer opnieuw, aub.',
-        'success' => 'De categorie werd succesvol verwijderd.'
+        'confirm'   => 'Weet u zeker dat u deze categorie wilt verwijderen?',
+        'error'   => 'Er is een probleem opgetreden bij het verwijderen van deze categorie. Probeer het opnieuw.',
+        'success' => 'Categorie is verwijderd.'
     )
 
 );

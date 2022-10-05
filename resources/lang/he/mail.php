@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'משתמש ביטל בקשת פריט באתר',
     'a_user_requested' => 'משתמש ביקש פריט באתר',
     'accessory_name' => 'שם אביזר:',

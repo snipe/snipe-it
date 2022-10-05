@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Diese Kategorie existiert nicht.',
-    'assoc_models'	 => 'Diese Kategorie kann nicht gelöscht werden da sie bereits einem Modell zugewiesen ist. Bitte entfernen Sie diese Kategorie von Ihren Modellen und versuchen Sie es erneut. ',
-    'assoc_items'	 => 'Diese Kategorie kann nicht gelöscht werden da sie bereits mit einem :asset_type verbunden ist. Bitte trennen Sie diese Kategorie von Ihrem :asset_type und versuchen Sie es erneut. ',
+    'does_not_exist' => 'Die Kategorie existiert nicht.',
+    'assoc_models'	 => 'Diese Kategorie kann nicht gelöscht werden, da sie bereits einem Modell zugewiesen ist. Bitte entferne diese Kategorie von Deinen Modellen und versuche es erneut. ',
+    'assoc_items'	 => 'Diese Kategorie kann nicht gelöscht werden, da sie bereits mit einem :asset_type verbunden ist. Bitte trenne diese Kategorie von Deinem :asset_type und versuche es erneut. ',
 
     'create' => array(
-        'error'   => 'Die Kategorie konnte nicht erstellt werden, bitte versuchen sie es erneut.',
+        'error'   => 'Die Kategorie konnte nicht erstellt werden, bitte versuche es erneut.',
         'success' => 'Die Kategorie wurde erfolgreich erstellt.'
     ),
 
     'update' => array(
-        'error'   => 'Die Kategorie konnte nicht aktualisiert werden, bitte versuchen Sie es erneut',
+        'error'   => 'Die Kategorie konnte nicht aktualisiert werden, bitte versuche es erneut',
         'success' => 'Die Kategorie wurde erfolgreich aktualisiert.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Sind Sie sicher, dass Sie diese Kategorie löschen wollen?',
-        'error'   => 'Beim Löschen der Kategorie ist ein Problem aufgetreten. Bitte versuchen Sie es erneut.',
+        'confirm'   => 'Bist Du sicher, dass Du diese Kategorie löschen willst?',
+        'error'   => 'Beim löschen der Kategorie ist ein Problem aufgetreten. Bitte versuche es erneut.',
         'success' => 'Die Kategorie wurde erfolgreich gelöscht.'
     )
 

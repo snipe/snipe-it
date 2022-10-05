@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Stai per cancellare :asset_count assets.',
     'bulk_update'		=> 'Aggiornamento quantità beni',
     'bulk_update_help'	=> 'Questo modulo consente di aggiornare più risorse in una sola volta. Riempire solo i campi che è necessario cambiare. Tutti i campi lasciati vuoti rimarranno invariati. ',
-    'bulk_update_warn'	=> 'Stai per modificare le proprietà di :asset_count beni.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Assegnato a',
     'checkout_date'		=> 'Data del check-out',
     'checkin_date'		=> 'Data di entrata',

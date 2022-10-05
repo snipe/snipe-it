@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Anda akan hapus: asset_count aset.',
     'bulk_update'		=> 'Aset Kemas Kini Pukal',
     'bulk_update_help'	=> 'Borang ini membolehkan anda mengemas kini berbilang aset sekaligus. Hanya isikan medan yang perlu anda ubah. Mana-mana medan yang dibiarkan kosong akan kekal tidak berubah.',
-    'bulk_update_warn'	=> 'Anda akan menyunting sifat aset aset_count.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Agihkan Kepada',
     'checkout_date'		=> 'Tarikh Checkout',
     'checkin_date'		=> 'Tarikh daftar masuk',

@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Jūs gatavojaties dzēst: asset_count aktīvi.',
     'bulk_update'		=> 'Lielapjoma atjaunināšanas līdzekļi',
     'bulk_update_help'	=> 'Šī veidlapa ļauj vienlaikus atjaunināt vairākus aktīvus. Aizpildiet tikai nepieciešamos laukus. Jebkurš tukšs laukums paliek nemainīgs.',
-    'bulk_update_warn'	=> 'Jūs gatavojaties rediģēt: asset_count īpašumus.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Izrakstīts uz',
     'checkout_date'		=> 'Izrakstīšanās datums',
     'checkin_date'		=> 'Reģistrēšanās datums',

@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'ألغى المستخدم طلب عنصر على الموقع',
     'a_user_requested' => 'طلب مستخدم عنصر على الموقع',
     'accessory_name' => 'اسم الملحق:',

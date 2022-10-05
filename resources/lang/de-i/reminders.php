@@ -14,7 +14,7 @@ return array(
     */
 
     "password" => "Das Passwort muss Sechs Zeichen haben und übereinstimmen.",
-    "user"     => "Benutzername oder Email-Adresse sind falsch",
+    "user"     => "Benutzername oder Email-Adresse sind inkorrekt",
     "token"    => 'Dieser Token zum Zurücksetzen des Passworts ist ungültig oder abgelaufen oder entspricht nicht dem angegebenen Benutzernamen.',
     'sent'	   => 'Wenn ein passender Benutzer mit einer gültigen E-Mail-Adresse in unserem System existiert, wurde eine E-Mail zur Wiederherstellung des Passworts gesendet.',
 

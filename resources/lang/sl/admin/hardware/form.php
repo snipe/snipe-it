@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Brisali boste: asset_count sredstev.',
     'bulk_update'		=> 'Množično posodabljanje sredstev',
     'bulk_update_help'	=> 'Ta obrazec vam omogoča, da posodobite več sredstev hkrati. Izpolnite le polja, ki jih morate spremeniti. Vsa polja, ki ostanejo prazna, bodo ostala nespremenjena. ',
-    'bulk_update_warn'	=> 'Uredili boste lastnosti asset_count sredstev.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Izdano osebi',
     'checkout_date'		=> 'Datum izdaje',
     'checkin_date'		=> 'Datum sprejema',

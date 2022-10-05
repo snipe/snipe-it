@@ -2,7 +2,7 @@
 
 return [
     'about_kits_title'                  => 'Über vordefinierte Kits',
-    'about_kits_text'                   => 'Mit vordefinierten Kits können Sie schnell eine Sammlung von Elementen (Assets, Lizenzen, etc.) an einen Benutzer ausgeben. Dies kann hilfreich sein, wenn Ihr Onboarding-Prozess über viele Nutzer hinweg einheitlich ist und alle Nutzer die gleichen Artikel erhalten.',
+    'about_kits_text'                   => 'Mit vordefinierten Kits kannst Du schnell eine Sammlung von Elementen (Assets, Lizenzen, etc.) an einen Benutzer ausgeben. Dies kann hilfreich sein, wenn Ihr Onboarding-Prozess über viele Nutzer hinweg einheitlich ist und alle Nutzer die gleichen Artikel erhalten.',
     'checkout'                          => 'Kit herausgeben ',
     'create_success'                    => 'Kit wurde erfolgreich erstellt.',
     'create'                            => 'Vordefiniertes Kit erstellen',
@@ -20,7 +20,7 @@ return [
     'append_license'                    => 'Lizenz anhängen',
     'update_appended_license'           => 'Angefügte Lizenz aktualisieren',
     'append_model'                      => 'Modell anhängen',
-    'update_appended_model'             => 'Angefügte Lizenz aktualisieren',
+    'update_appended_model'             => 'Angehängtes Modell aktualisieren',
     'license_error'                     => 'Lizenz bereits mit Kit verbunden',
     'license_added_success'             => 'Die Lizenz wurde erfolgreich hinzugefügt',
     'license_updated'                   => 'Die Lizenz wurde erfolgreich aktualisiert',
@@ -28,8 +28,8 @@ return [
     'license_detached'                  => 'Die Lizenz wurde erfolgreich gelöst',
     'consumable_added_success'          => 'Verbrauchsmaterial erfolgreich hinzugefügt',
     'consumable_updated'                => 'Verbrauchsmaterial wurde erfolgreich aktualisiert',
-    'consumable_error'                  => 'Verbrauchsmaterial bereits an Kit angehängt',
-    'consumable_deleted'                => 'Erfolgreich gelöscht',
+    'consumable_error'                  => 'Verbrauchsmaterial bereits mit Kit verbunden',
+    'consumable_deleted'                => 'Löschen war erfolgreich',
     'consumable_none'                   => 'Verbrauchsmaterial existiert nicht',
     'consumable_detached'               => 'Verbrauchsmaterial wurde erfolgreich gelöst',
     'accessory_added_success'           => 'Zubehör erfolgreich hinzugefügt',

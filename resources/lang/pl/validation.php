@@ -94,7 +94,7 @@ return [
     'disallow_same_pwd_as_user_fields' => 'Hasło nie może być takie samo jak nazwa użytkownika.',
     'letters'              => 'Hasło musi zawierać co najmniej jedną literę.',
     'numbers'              => 'Hasło musi zawierać co najmniej jedną cyfrę.',
-    'case_diff'            => 'Password must use mixed case.',
+    'case_diff'            => 'Hasło musi zawierać małe i wielkie litery.',
     'symbols'              => 'Hasło musi zawierać znaki specjalne.',
     'gte'                  => [
         'numeric'          => 'Wartość nie może być ujemna'

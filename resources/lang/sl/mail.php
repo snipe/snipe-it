@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'Uporabnik je preklical zahtevo za sredstev na spletnem mestu',
     'a_user_requested' => 'Uporabnik je zahteval sredstev na spletnem mestu',
     'accessory_name' => 'Ime Dodatka:',

@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'Pengguna sudah membatalkan permintaan item di situs web',
     'a_user_requested' => 'Pengguna sudah meminta sebuah item di situs web',
     'accessory_name' => 'Nama Aksesoris:',

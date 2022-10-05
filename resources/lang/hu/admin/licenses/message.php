@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Engedély nem létezik.',
+    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
     'user_does_not_exist' => 'Felhasználó nem létezik.',
     'asset_does_not_exist' 	=> 'A licencel társítani kívánt eszköz nem létezik.',
     'owner_doesnt_match_asset' => 'Az ehhez a licenchez társítani kívánt eszköz tulajdonosa nem más, mint a kiválasztott legördülő menüben kiválasztott személy.',

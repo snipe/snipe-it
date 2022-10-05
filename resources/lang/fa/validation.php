@@ -64,11 +64,11 @@ return [
         'string'  => 'ویژگی باید حداقل: حداقل کاراکتر باشد.',
         'array'   => 'ویژگی: باید دارای حداقل موارد: min باشد.',
     ],
-    'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'starts_with'          => 'ویژگی : باید با یکی از موارد زیر شروع شود: :values.',
     'not_in'               => 'ویژگی انتخاب شده نامعتبر است.',
     'numeric'              => 'ویژگی باید عدد باشد.',
     'present'              => 'فیلد attribute باید باشد.',
-    'valid_regex'          => 'That is not a valid regex. ',
+    'valid_regex'          => 'این یک سفارش معتبر نیست.',
     'regex'                => 'شکل ویژگی نامعتبر است.',
     'required'             => 'فیلد ویژگی ضروری است.',
     'required_if'          => 'فیلد ویژگی ضروری است، وقتی که دیگری ارزش است.',
@@ -89,15 +89,15 @@ return [
     'unique'               => 'ویژگی در حال حاضر گرفته شده است.',
     'uploaded'             => 'ویژگی: attribute failed to upload.',
     'url'                  => 'شکل ویژگی نامعتبر است.',
-    'unique_undeleted'     => 'The :attribute must be unique.',
-    'non_circular'         => 'The :attribute must not create a circular reference.',
-    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
-    'letters'              => 'Password must contain at least one letter.',
-    'numbers'              => 'Password must contain at least one number.',
-    'case_diff'            => 'Password must use mixed case.',
-    'symbols'              => 'Password must contain symbols.',
+    'unique_undeleted'     => ': attribute باید منحصر به فرد باشد.',
+    'non_circular'         => 'ویژگی : نباید یک مرجع دایره ای ایجاد کند',
+    'disallow_same_pwd_as_user_fields' => 'رمز عبور نمی تواند همان آدرس ایمیل باشد.',
+    'letters'              => 'گذرواژه باید دارای حداقل یک رقم باشد.',
+    'numbers'              => 'گذرواژه باید دارای حداقل یک رقم باشد.',
+    'case_diff'            => 'رمز عبور باید از حروف مختلط استفاده کند.',
+    'symbols'              => 'رمز عبور نباید حاوی فضای خالی باشد.',
     'gte'                  => [
-        'numeric'          => 'Value cannot be negative'
+        'numeric'          => 'مقدار نباید منفی باشد.'
     ],
 
 

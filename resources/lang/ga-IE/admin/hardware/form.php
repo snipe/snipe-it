@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Tá tú ar tí a scriosadh: sócmhainní asset_count.',
     'bulk_update'		=> 'Sócmhainní Nuashonraithe Bulc',
     'bulk_update_help'	=> 'Ceadaíonn an fhoirm seo duit il-sócmhainní a thabhairt cothrom le dáta ag an am céanna. Líon isteach na réimsí is gá duit a athrú ach amháin. Ní dhéanfar aon réimsí fágtha gan athrú.',
-    'bulk_update_warn'	=> 'Tá tú ar tí na hairíonna a bhaineann le: sócmhainní asset_count a chur in eagar.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Seiceáil Amach Chun',
     'checkout_date'		=> 'Dáta Seiceáil',
     'checkin_date'		=> 'Dáta Checkin',

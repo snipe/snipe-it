@@ -4,46 +4,68 @@ return [
     'ad'				        => 'دایرکتوری فعال',
     'ad_domain'				    => 'دامنه فعال دایرکتوری',
     'ad_domain_help'			=> 'این گاهی اوقات دامنه ایمیل شماست اما همیشه اینطور نیست.',
-    'ad_append_domain_label'    => 'Append domain name',
-    'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
-    'admin_cc_email'            => 'CC Email',
-    'admin_cc_email_help'       => 'If you would like to send a copy of checkin/checkout emails that are sent to users to an additional email account, enter it here. Otherwise leave this field blank.',
+    'ad_append_domain_label'    => 'نام دامنه را اضافه کنید
+',
+    'ad_append_domain'          => 'نام دامنه را به قسمت نام کاربری اضافه کنید
+',
+    'ad_append_domain_help'     => 'کاربر نیازی به نوشتن "username@domain.local" ندارد، آنها فقط می توانند "username" را تایپ کنند.
+',
+    'admin_cc_email'            => 'ایمیل CC
+',
+    'admin_cc_email_help'       => 'اگر می‌خواهید یک کپی از ایمیل‌های ورود/تسویه حساب که برای کاربران ارسال می‌شود را به یک حساب ایمیل اضافی ارسال کنید، آن را در اینجا وارد کنید. در غیر این صورت، این قسمت را خالی بگذارید.
+',
     'is_ad'				        => 'این سرور Active Directory است',
-    'alerts'                	=> 'Alerts',
-    'alert_title'               => 'Update Alert Settings',
+    'alerts'                	=> 'هشدار',
+    'alert_title'               => 'تنظیمات هشدار را به روز کنید
+',
     'alert_email'				=> 'ارسال هشدار به',
-    'alert_email_help'    => 'Email addresses or distribution lists you want alerts to be sent to, comma separated',
+    'alert_email_help'    => 'آدرس‌های ایمیل یا لیست‌های توزیعی که می‌خواهید هشدارها به آنها ارسال شود، با کاما از هم جدا شده‌اند
+',
     'alerts_enabled'			=> 'هشدارها فعال شد',
     'alert_interval'			=> 'آستانه ی انقضای هشدارها( به روز)',
     'alert_inv_threshold'		=> 'فهرست آستانه ی هشدار',
-    'allow_user_skin'           => 'Allow User Skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
+    'allow_user_skin'           => 'اجازه کاربر پوسته',
+    'allow_user_skin_help_text' => 'علامت زدن این کادر به کاربر این امکان را می دهد که پوسته رابط کاربری را با پوسته دیگری لغو کند.
+',
     'asset_ids'					=> 'ID حساب',
     'audit_interval'            => 'فاصله حسابرسی',
-    'audit_interval_help'       => 'If you are required to regularly physically audit your assets, enter the interval in months that you use. If you update this value, all of the "next audit dates" for assets with an upcoming audit date.',
+    'audit_interval_help'       => 'اگر از شما خواسته می شود که به طور منظم دارایی های خود را به صورت فیزیکی ممیزی کنید، فاصله زمانی را به ماه هایی که استفاده می کنید وارد کنید. اگر این مقدار را به‌روزرسانی کنید، همه «تاریخ‌های حسابرسی بعدی» برای دارایی‌ها با تاریخ حسابرسی آینده.
+',
     'audit_warning_days'        => 'آستانه هشدار حسابرسی',
     'audit_warning_days_help'   => 'چند روز پیش باید به شما هشدار می دهیم هنگامی که دارایی ها برای حسابرسی مورد نیاز است؟',
-    'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
+    'auto_increment_assets'		=> 'برچسب‌های دارایی با افزایش خودکار را ایجاد کنید
+',
     'auto_increment_prefix'		=> 'پیشوند (اختیاری)',
-    'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
+    'auto_incrementing_help'    => 'برای تنظیم، ابتدا برچسب‌های دارایی افزایش خودکار را فعال کنید
+',
     'backups'					=> 'پشتیبان گیری',
-    'backups_help'              => 'Create, download, and restore backups ',
-    'backups_restoring'         => 'Restoring from Backup',
-    'backups_upload'            => 'Upload Backup',
-    'backups_path'              => 'Backups on the server are stored in <code>:path</code>',
-    'backups_restore_warning'   => 'Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to restore from a previous backup. (This does not currently work with S3 file storage or Docker.<br><br>Your <strong>entire :app_name database and any uploaded files will be completely replaced</strong> by what\'s in the backup file.  ',
-    'backups_logged_out'         => 'All existing users, including you, will be logged out once your restore is complete.',
-    'backups_large'             => 'Very large backups may time out on the restore attempt and may still need to be run via command line. ',
+    'backups_help'              => 'ایجاد، دانلود و بازیابی نسخه پشتیبان
+',
+    'backups_restoring'         => 'بازیابی از پشتیبان گیری
+',
+    'backups_upload'            => 'نسخه پشتیبان را دانلود کنید',
+    'backups_path'              => 'نسخه‌های پشتیبان روی سرور در <code>:path</code> ذخیره می‌شوند
+',
+    'backups_restore_warning'   => 'از دکمه بازیابی استفاده کنید <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span> </small> برای بازیابی از نسخه پشتیبان قبلی. (این در حال حاضر با ذخیره‌سازی فایل S3 یا Docker کار نمی‌کند.<br><br><strong>کل پایگاه داده :app_name شما و هر فایل آپلود شده به طور کامل با آنچه در فایل پشتیبان است جایگزین می‌شود</strong>.
+',
+    'backups_logged_out'         => 'همه کاربران موجود، از جمله شما، پس از تکمیل بازیابی شما از سیستم خارج می شوند.
+',
+    'backups_large'             => 'پشتیبان‌گیری‌های بسیار بزرگ ممکن است در تلاش بازیابی به پایان برسد و ممکن است همچنان نیاز باشد از طریق خط فرمان اجرا شوند.
+',
     'barcode_settings'			=> 'تنظیمات بارکد',
     'confirm_purge'			    => 'تایید پاکسازی',
-    'confirm_purge_help'		=> 'Enter the text "DELETE" in the box below to purge your deleted records. This action cannot be undone and will PERMANENTLY delete all soft-deleted items and users. (You should make a backup first, just to be safe.)',
+    'confirm_purge_help'		=> 'متن "DELETE" را در کادر زیر وارد کنید تا رکوردهای حذف شده خود را پاک کنید. این عمل قابل واگرد نیست و همه موارد و کاربران حذف شده را برای همیشه حذف می کند. (برای حفظ امنیت، ابتدا باید یک نسخه پشتیبان تهیه کنید.)
+',
     'custom_css'				=> 'سفارشی CSS',
     'custom_css_help'			=> 'هر ابطال CSS سفارشی می خواهید استفاده کنید را وارد کنید.از  برچسب های &lt;style&gt;&lt;/style&gt; استفاده نکنید.',
-    'custom_forgot_pass_url'	=> 'Custom Password Reset URL',
-    'custom_forgot_pass_url_help'	=> 'This replaces the built-in forgotten password URL on the login screen, useful to direct people to internal or hosted LDAP password reset functionality. It will effectively disable local user forgotten password functionality.',
-    'dashboard_message'			=> 'Dashboard Message',
-    'dashboard_message_help'	=> 'This text will appear on the dashboard for anyone with permission to view the dashboard.',
+    'custom_forgot_pass_url'	=> 'URL تنظیم مجدد رمز عبور سفارشی
+',
+    'custom_forgot_pass_url_help'	=> 'این جایگزین URL داخلی رمز عبور فراموش شده در صفحه ورود می شود، که برای هدایت افراد به عملکرد بازنشانی رمز عبور LDAP داخلی یا میزبانی شده مفید است. این به طور موثر عملکرد رمز عبور فراموش شده توسط کاربر محلی را غیرفعال می کند.
+',
+    'dashboard_message'			=> 'پیام داشبورد
+',
+    'dashboard_message_help'	=> 'این متن برای هر کسی که اجازه مشاهده داشبورد را دارد در داشبورد ظاهر می شود.
+',
     'default_currency'  		=> 'ارز پیش فرض',
     'default_eula_text'			=> 'EULA پیش فرض',
     'default_language'			=> 'زبان پیش فرض',
@@ -53,39 +75,57 @@ return [
     'display_eol'               => 'نمایش EOL در جدول',
     'display_qr'                => 'نمایش کدهای مربعی',
     'display_alt_barcode'		=> 'نمایش بارکد 1D',
-    'email_logo'                => 'Email Logo',
+    'email_logo'                => 'آرم ایمیل
+',
     'barcode_type'				=> 'نوع بارکد 2D',
     'alt_barcode_type'			=> 'نوع بارکد 1D',
-    'email_logo_size'       => 'Square logos in email look best. ',
-    'enabled'                   => 'Enabled',
+    'email_logo_size'       => 'لوگوهای مربعی شکل در ایمیل بهترین به نظر می رسند.
+',
+    'enabled'                   => 'فعال شد
+',
     'eula_settings'				=> 'EULA تنظیمات',
     'eula_markdown'				=> 'این EULA اجازه می دهد تا <a href="https://help.github.com/articles/github-flavored-markdown/">Github با طعم markdown</a>.',
-    'favicon'                   => 'Favicon',
-    'favicon_format'            => 'Accepted filetypes are ico, png, and gif. Other image formats may not work in all browsers.',
-    'favicon_size'          => 'Favicons should be square images, 16x16 pixels.',
-    'footer_text'               => 'Additional Footer Text ',
-    'footer_text_help'          => 'This text will appear in the right-side footer. Links are allowed using <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>. Line breaks, headers, images, etc may result in unpredictable results.',
+    'favicon'                   => 'فاویکون',
+    'favicon_format'            => 'انواع فایل های پذیرفته شده عبارتند از ico، png و gif. سایر فرمت های تصویر ممکن است در همه مرورگرها کار نکنند.
+',
+    'favicon_size'          => 'فاویکون ها باید تصاویر مربعی، 16x16 پیکسل باشند.
+',
+    'footer_text'               => 'متن پاورقی اضافی
+',
+    'footer_text_help'          => 'این متن در فوتر سمت راست ظاهر می شود. پیوندها با استفاده از <a href="https://help.github.com/articles/github-flavored-markdown/">نشان‌گذاری طعم‌دار Github</a> مجاز هستند. شکستگی خطوط، هدرها، تصاویر و غیره ممکن است منجر به نتایج غیر قابل پیش بینی شود.
+',
     'general_settings'			=> 'تنظیمات عمومی',
-    'general_settings_keywords' => 'company support, signature, acceptance, email format, username format, images, per page, thumbnail, eula,  tos, dashboard, privacy',
-    'general_settings_help'     => 'Default EULA and more',
+    'general_settings_keywords' => 'پشتیبانی شرکت، امضا، پذیرش، قالب ایمیل، فرمت نام کاربری، تصاویر، در هر صفحه، تصویر کوچک، eula، tos، داشبورد، حریم خصوصی
+',
+    'general_settings_help'     => 'EULA پیش فرض و موارد دیگر
+',
     'generate_backup'			=> 'تولید پشتیبان گیری',
     'header_color'              => 'رنگ هدر',
     'info'                      => 'این تنظیمات به شما اجازه سفارشی کردن جنبه های خاصی از نصب و راه اندازی خود را می دهد.',
-    'label_logo'                => 'Label Logo',
-    'label_logo_size'           => 'Square logos look best - will be displayed in the top right of each asset label. ',
+    'label_logo'                => 'لوگوی برچسب
+',
+    'label_logo_size'           => 'آرم های مربعی بهترین ظاهر را دارند - در سمت راست بالای هر برچسب دارایی نمایش داده می شوند.
+',
     'laravel'                   => 'نسخه Laravel',
     'ldap'                      => 'LDAP',
-    'ldap_help'                 => 'LDAP/Active Directory',
-    'ldap_client_tls_key'       => 'LDAP Client TLS Key',
-    'ldap_client_tls_cert'      => 'LDAP Client-Side TLS Certificate',
+    'ldap_help'                 => 'دایرکتوری فعال',
+    'ldap_client_tls_key'       => 'کلید TLS مشتری LDAP
+',
+    'ldap_client_tls_cert'      => 'گواهی TLS سمت مشتری LDAP
+',
     'ldap_enabled'              => 'LDAP فعال شد.',
     'ldap_integration'          => 'ادغام LDAP',
     'ldap_settings'             => 'تنظیمات LDAP',
-    'ldap_client_tls_cert_help' => 'Client-Side TLS Certificate and Key for LDAP connections are usually only useful in Google Workspace configurations with "Secure LDAP." Both are required.',
-     'ldap_client_tls_key'       => 'LDAP Client-Side TLS key',
-    'ldap_login_test_help'      => 'Enter a valid LDAP username and password from the base DN you specified above to test whether your LDAP login is configured correctly. YOU MUST SAVE YOUR UPDATED LDAP SETTINGS FIRST.',
-    'ldap_login_sync_help'      => 'This only tests that LDAP can sync correctly. If your LDAP Authentication query is not correct, users may still not be able to login. YOU MUST SAVE YOUR UPDATED LDAP SETTINGS FIRST.',
-    'ldap_manager'              => 'LDAP Manager',
+    'ldap_client_tls_cert_help' => 'گواهی TLS سمت کلاینت و کلید برای اتصالات LDAP معمولاً فقط در پیکربندی‌های Google Workspace با « LDAP ایمن» مفید هستند. هر دو مورد نیاز است.
+',
+     'ldap_client_tls_key'       => 'کلید TLS سمت مشتری LDAP
+',
+    'ldap_login_test_help'      => 'یک نام کاربری و رمز عبور LDAP معتبر از DN پایه ای که در بالا مشخص کرده اید وارد کنید تا بررسی کنید که آیا ورود به سیستم LDAP شما به درستی پیکربندی شده است یا خیر. ابتدا باید تنظیمات LDAP به روز شده خود را ذخیره کنید.
+',
+    'ldap_login_sync_help'      => 'این فقط آزمایش می کند که LDAP می تواند به درستی همگام شود. اگر درخواست احراز هویت LDAP شما صحیح نباشد، کاربران ممکن است هنوز نتوانند وارد سیستم شوند. ابتدا باید تنظیمات LDAP به روز شده خود را ذخیره کنید.
+',
+    'ldap_manager'              => 'مدیر LDAP
+',
     'ldap_server'               => 'سرویس دهنده LDAP',
     'ldap_server_help'          => 'این باید با ldap: // (برای رمزگذاری نشده یا TLS) یا ldaps: ((برای SSL)',
     'ldap_server_cert'			=> 'اعتبار گواهی نامه LDAP SSL',
@@ -94,10 +134,14 @@ return [
     'ldap_tls'                  => 'از TLS استفاده کنید',
     'ldap_tls_help'             => 'این باید فقط در صورتی که STARTTLS را در سرور LDAP خود اجرا می کنید، بررسی شود.',
     'ldap_uname'                => 'حالت نام کاربری نامرئی LDAP',
-    'ldap_dept'                 => 'LDAP Department',
-    'ldap_phone'                => 'LDAP Telephone Number',
-    'ldap_jobtitle'             => 'LDAP Job Title',
-    'ldap_country'              => 'LDAP Country',
+    'ldap_dept'                 => 'بخش LDAP
+',
+    'ldap_phone'                => 'شماره تلفن LDAP
+',
+    'ldap_jobtitle'             => 'عنوان شغلی LDAP
+',
+    'ldap_country'              => 'کشور LDAP
+',
     'ldap_pword'                => 'LDAP اتصال رمز عبور',
     'ldap_basedn'               => 'اتصال پایگاه DN',
     'ldap_filter'               => 'LDAP فیلتر',
@@ -109,126 +153,195 @@ return [
     'ldap_auth_filter_query'    => 'تأیید اعتبار  پرس و جوLDAP',
     'ldap_version'              => 'نسخهٔ LDAP',
     'ldap_active_flag'          => ' پرچم فعالLDAP',
-    'ldap_activated_flag_help'  => 'This flag is used to determine whether a user can login to Snipe-IT and does not affect the ability to check items in or out to them.',
+    'ldap_activated_flag_help'  => 'این پرچم برای تعیین اینکه آیا کاربر می‌تواند به Snipe-IT وارد شود یا خیر استفاده می‌شود و بر توانایی بررسی آیتم‌ها در داخل یا خارج از آنها تأثیری نمی‌گذارد.
+',
     'ldap_emp_num'              => 'LDAP تعداد کارکنان',
     'ldap_email'                => 'ایمیل LDAP',
-    'ldap_test'                 => 'Test LDAP',
-    'ldap_test_sync'            => 'Test LDAP Synchronization',
-    'license'                   => 'Software License',
+    'ldap_test'                 => 'تست LDAP
+',
+    'ldap_test_sync'            => 'تست همگام سازی LDAP
+',
+    'license'                   => 'مجوز نرم افزار
+',
     'load_remote_text'          => 'اسکریپت از راه دور',
     'load_remote_help_text'		=> 'این برنامه نصب می تواند اسکریپت ها را از دنیای خارج بارگذاری کند.
 ',
-    'login'                     => 'Login Attempts',
-    'login_attempt'             => 'Login Attempt',
-    'login_ip'                  => 'IP Address',
-    'login_success'             => 'Success?',
-    'login_user_agent'          => 'User Agent',
-    'login_help'                => 'List of attempted logins',
+    'login'                     => 'تلاش برای ورود
+',
+    'login_attempt'             => 'تلاش برای ورود
+',
+    'login_ip'                  => 'آدرس IP',
+    'login_success'             => 'موفقیت',
+    'login_user_agent'          => 'عامل کاربر
+',
+    'login_help'                => 'لیست تلاش برای ورود به سیستم
+',
     'login_note'                => 'توجه داشته باشید ورود',
     'login_note_help'           => 'به صورت دلخواه شامل چند جمله در صفحه ورود به سیستم خود، به عنوان مثال برای کمک به افرادی که یک دستگاه گم شده یا دزدیده شده را پیدا کرده اند. این فیلد <a href="https://help.github.com/articles/github-flavored-markdown/"> مارجین طعم Github</a> را می پذیرد',
-    'login_remote_user_text'    => 'Remote User login options',
-    'login_remote_user_enabled_text' => 'Enable Login with Remote User Header',
-    'login_remote_user_enabled_help' => 'This option enables Authentication via the REMOTE_USER header according to the "Common Gateway Interface (rfc3875)"',
-    'login_common_disabled_text' => 'Disable other authentication mechanisms',
-    'login_common_disabled_help' => 'This option disables other authentication mechanisms. Just enable this option if you are sure that your REMOTE_USER login is already working',
-    'login_remote_user_custom_logout_url_text' => 'Custom logout URL',
-    'login_remote_user_custom_logout_url_help' => 'If a url is provided here, users will get redirected to this URL after the user logs out of Snipe-IT. This is useful to close the user sessions of your Authentication provider correctly.',
-    'login_remote_user_header_name_text' => 'Custom user name header',
-    'login_remote_user_header_name_help' => 'Use the specified header instead of REMOTE_USER',
+    'login_remote_user_text'    => 'گزینه های ورود کاربر از راه دور
+',
+    'login_remote_user_enabled_text' => 'ورود با سربرگ کاربر راه دور را فعال کنید
+',
+    'login_remote_user_enabled_help' => 'این گزینه احراز هویت را از طریق هدر REMOTE_USER مطابق "واسط دروازه مشترک (rfc3875)" فعال می کند.
+',
+    'login_common_disabled_text' => 'سایر مکانیسم های احراز هویت را غیرفعال کنید
+',
+    'login_common_disabled_help' => 'این گزینه مکانیسم های دیگر احراز هویت را غیرفعال می کند. اگر مطمئن هستید که ورود به سیستم REMOTE_USER شما از قبل کار می کند، فقط این گزینه را فعال کنید
+',
+    'login_remote_user_custom_logout_url_text' => 'URL خروج سفارشی
+',
+    'login_remote_user_custom_logout_url_help' => 'اگر یک URL در اینجا ارائه شود، پس از خروج کاربر از Snipe-IT، کاربران به این URL هدایت می شوند. این برای بستن صحیح جلسات کاربر ارائه دهنده احراز هویت شما مفید است.
+',
+    'login_remote_user_header_name_text' => 'هدر نام کاربری سفارشی
+',
+    'login_remote_user_header_name_help' => 'به جای REMOTE_USER از هدر مشخص شده استفاده کنید
+',
     'logo'                    	=> 'لوگو',
-    'logo_print_assets'         => 'Use in Print',
-    'logo_print_assets_help'    => 'Use branding on printable asset lists ',
+    'logo_print_assets'         => 'استفاده در چاپ
+',
+    'logo_print_assets_help'    => 'از نام تجاری در لیست دارایی های قابل چاپ استفاده کنید
+',
     'full_multiple_companies_support_help_text' => 'محدود کردن کاربران (از جمله مدیران) اختصاص داده شده به شرکت ها برای دارایی های شرکت خود را.',
     'full_multiple_companies_support_text' => 'شرکت های متعدد پشتیبانی کامل',
-    'show_in_model_list'   => 'Show in Model Dropdowns',
+    'show_in_model_list'   => 'نمایش در مدل کشویی 
+',
     'optional'					=> 'اختیاری',
     'per_page'                  => 'نتایج در هر صفحه',
     'php'                       => 'نسخه php',
-    'php_info'                  => 'PHP Info',
-    'php_overview'              => 'PHP',
+    'php_info'                  => 'اطلاعات پی اچ پی
+',
+    'php_overview'              => 'PHP
+',
     'php_overview_keywords'     => 'phpinfo, system, info',
-    'php_overview_help'         => 'PHP System info',
+    'php_overview_help'         => 'PHP System info
+',
     'php_gd_info'               => 'شما باید  php-gd را نصب کنید تا QR کد ها را ببنید، به دستورالعمل های نصب نگاه کنید.',
     'php_gd_warning'            => 'php پردازش تصویر و تفاضل پلاگین نصب نشده است.',
     'pwd_secure_complexity'     => 'پیچیدگی گذرواژه',
     'pwd_secure_complexity_help' => 'هرکدام از پیچیدگیهای رمز عبور را که میخواهید اجرا کنید، انتخاب کنید.',
-    'pwd_secure_complexity_disallow_same_pwd_as_user_fields' => 'Password cannot be the same as first name, last name, email, or username',
-    'pwd_secure_complexity_letters' => 'Require at least one letter',
-    'pwd_secure_complexity_numbers' => 'Require at least one number',
-    'pwd_secure_complexity_symbols' => 'Require at least one symbol',
-    'pwd_secure_complexity_case_diff' => 'Require at least one uppercase and one lowercase',
+    'pwd_secure_complexity_disallow_same_pwd_as_user_fields' => 'رمز عبور نمی تواند با نام، نام خانوادگی، ایمیل یا نام کاربری یکی باشد
+',
+    'pwd_secure_complexity_letters' => 'حداقل یک حرف لازم است
+',
+    'pwd_secure_complexity_numbers' => 'حداقل به یک عدد نیاز دارید
+',
+    'pwd_secure_complexity_symbols' => 'حداقل به یک نماد نیاز دارید
+',
+    'pwd_secure_complexity_case_diff' => 'حداقل یک حروف بزرگ و یک حروف کوچک لازم است
+',
     'pwd_secure_min'            => 'رمز عبور حداقل کاراکتر',
-    'pwd_secure_min_help'       => 'Minimum permitted value is 8',
+    'pwd_secure_min_help'       => 'حداقل مقدار مجاز 8 است
+',
     'pwd_secure_uncommon'       => 'جلوگیری از کلمه عبور رایج',
     'pwd_secure_uncommon_help'  => 'این امر کاربران را از استفاده از گذرواژههای رایج از 10 هزار کلمه عبور که در نقض گزارش شده است، ممنوع می کند.',
     'qr_help'                   => 'کدهای QR اول به این مجموعه را فعال کنید',
     'qr_text'                   => 'متن QR کد',
     'saml'                      => 'SAML',
-    'saml_title'                => 'Update SAML settings',
-    'saml_help'                 => 'SAML settings',
-    'saml_enabled'              => 'SAML enabled',
-    'saml_integration'          => 'SAML Integration',
-    'saml_sp_entityid'          => 'Entity ID',
-    'saml_sp_acs_url'           => 'Assertion Consumer Service (ACS) URL',
-    'saml_sp_sls_url'           => 'Single Logout Service (SLS) URL',
-    'saml_sp_x509cert'          => 'Public Certificate',
-    'saml_sp_metadata_url'      => 'Metadata URL',
-    'saml_idp_metadata'         => 'SAML IdP Metadata',
-    'saml_idp_metadata_help'    => 'You can specify the IdP metadata using a URL or XML file.',
-    'saml_attr_mapping_username' => 'Attribute Mapping - Username',
-    'saml_attr_mapping_username_help' => 'NameID will be used if attribute mapping is unspecified or invalid.',
-    'saml_forcelogin_label'     => 'SAML Default Login',
-    'saml_forcelogin'           => 'Make SAML the primary login',
-    'saml_forcelogin_help'      => 'You can use \'/login?nosaml\' to get to the normal login page.',
-    'saml_slo_label'            => 'SAML Single Log Out',
-    'saml_slo'                  => 'Send a LogoutRequest to IdP on Logout',
-    'saml_slo_help'             => 'This will cause the user to be first redirected to the IdP on logout. Leave unchecked if the IdP doesn\'t correctly support SP-initiated SAML SLO.',
-    'saml_custom_settings'      => 'SAML Custom Settings',
-    'saml_custom_settings_help' => 'You can specify additional settings to the onelogin/php-saml library. Use at your own risk.',
-    'saml_download'             => 'Download Metadata',
+    'saml_title'                => 'تنظیمات SAML را به روز کنید
+',
+    'saml_help'                 => 'تنظیمات SAML
+',
+    'saml_enabled'              => 'SAML فعال است
+',
+    'saml_integration'          => 'یکپارچه سازی SAML
+',
+    'saml_sp_entityid'          => 'شناسه نهاد
+',
+    'saml_sp_acs_url'           => 'نشانی اینترنتی خدمات مصرف کننده ادعایی (ACS).
+',
+    'saml_sp_sls_url'           => 'URL سرویس خروج واحد (SLS).
+',
+    'saml_sp_x509cert'          => 'گواهی عمومی
+',
+    'saml_sp_metadata_url'      => 'URL فراداده
+',
+    'saml_idp_metadata'         => 'SAML IdP Metadata
+',
+    'saml_idp_metadata_help'    => 'می توانید با استفاده از یک URL یا فایل XML، فراداده IdP را مشخص کنید.
+',
+    'saml_attr_mapping_username' => 'نگاشت ویژگی - نام کاربری
+',
+    'saml_attr_mapping_username_help' => 'اگر نگاشت ویژگی مشخص نشده یا نامعتبر باشد از NameID استفاده خواهد شد.
+',
+    'saml_forcelogin_label'     => 'SAML ورود پیش فرض
+',
+    'saml_forcelogin'           => 'SAML را به عنوان ورود اولیه انتخاب کنید
+',
+    'saml_forcelogin_help'      => 'شما می توانید از \'/login?nosaml\' برای رفتن به صفحه ورود به سیستم معمولی استفاده کنید.
+',
+    'saml_slo_label'            => 'SAML خروج یکباره
+',
+    'saml_slo'                  => 'هنگام خروج، یک درخواست خروج به IdP ارسال کنید
+',
+    'saml_slo_help'             => 'این باعث می شود که کاربر در هنگام خروج ابتدا به IdP هدایت شود. اگر IdP به درستی SAML SLO آغاز شده با SP را پشتیبانی نمی کند، علامت را بردارید.
+',
+    'saml_custom_settings'      => 'تنظیمات سفارشی SAML
+',
+    'saml_custom_settings_help' => 'می توانید تنظیمات اضافی را برای کتابخانه onelogin/php-saml تعیین کنید. با مسئولیت خود استفاده کنید.
+',
+    'saml_download'             => 'دانلود متادیتا
+',
     'setting'                   => 'تنظیمات',
     'settings'                  => 'تنظيمات',
-    'show_alerts_in_menu'       => 'Show alerts in top menu',
-    'show_archived_in_list'     => 'Archived Assets',
-    'show_archived_in_list_text'     => 'Show archived assets in the "all assets" listing',
-    'show_assigned_assets'      => 'Show assets assigned to assets',
-    'show_assigned_assets_help' => 'Display assets which were assigned to the other assets in View User -> Assets, View User -> Info -> Print All Assigned and in Account -> View Assigned Assets.',
-    'show_images_in_email'     => 'Show images in emails',
-    'show_images_in_email_help'   => 'Uncheck this box if your Snipe-IT installation is behind a VPN or closed network and users outside the network will not be able to load images served from this installation in their emails.',
+    'show_alerts_in_menu'       => 'نمایش هشدارها در منوی بالا
+',
+    'show_archived_in_list'     => 'موارد بایگانی شده',
+    'show_archived_in_list_text'     => 'دارایی‌های بایگانی‌شده را در فهرست «همه دارایی‌ها» نشان دهید
+',
+    'show_assigned_assets'      => 'نمایش دارایی های اختصاص داده شده به دارایی ها
+',
+    'show_assigned_assets_help' => 'دارایی هایی را که به سایر دارایی ها اختصاص داده شده اند در View User -> Assets، View User -> Info -> Print All Assigned و در Account -> View Assigned Assets نمایش دهید.
+',
+    'show_images_in_email'     => 'استفاده از عکس در ایمیل ها',
+    'show_images_in_email_help'   => 'اگر نصب Snipe-IT شما پشت VPN یا شبکه بسته است و کاربران خارج از شبکه نمی توانند تصاویر ارائه شده از این نصب را در ایمیل های خود بارگیری کنند، علامت این کادر را بردارید.
+',
     'site_name'                 => 'نام سایت',
     'slack'                     => 'Slack',
-    'slack_title'               => 'Update Slack Settings',
-    'slack_help'                => 'Slack settings',
+    'slack_title'               => 'تنظیمات هشدار را به روز کنید
+',
+    'slack_help'                => 'تنظیمات Slack',
     'slack_botname'             => 'پشت گوش فراخ Botname',
     'slack_channel'             => 'اسلک کانال',
     'slack_endpoint'            => 'نقطه پایان اسلک',
     'slack_integration'         => 'تنظیمات اسلک',
-    'slack_integration_help'    => 'Slack integration is optional, however the endpoint and channel are required if you wish to use it. To configure Slack integration, you must first <a href=":slack_link" target="_new" rel="noopener">create an incoming webhook</a> on your Slack account. Click on the <strong>Test Slack Integration</strong> button to confirm your settings are correct before saving. ',
-    'slack_integration_help_button'    => 'Once you have saved your Slack information, a test button will appear.',
-    'slack_test_help'           => 'Test whether your Slack integration is configured correctly. YOU MUST SAVE YOUR UPDATED SLACK SETTINGS FIRST.',
+    'slack_integration_help'    => 'ادغام Slack اختیاری است، اما اگر می‌خواهید از آن استفاده کنید، نقطه پایانی و کانال مورد نیاز است. برای پیکربندی ادغام Slack، ابتدا باید <a href=":slack_link" target="_new" rel="noopener">یک وب هوک ورودی</a> در حساب Slack خود ایجاد کنید. روی دکمه <strong>Test Slack Integration</strong> کلیک کنید تا قبل از ذخیره کردن، صحت تنظیمات خود را تأیید کنید.
+',
+    'slack_integration_help_button'    => 'هنگامی که اطلاعات Slack خود را ذخیره کردید، یک دکمه تست ظاهر می شود.
+',
+    'slack_test_help'           => 'تست کنید که آیا ادغام Slack شما به درستی پیکربندی شده است یا خیر. ابتدا باید تنظیمات SLACK به روز شده خود را ذخیره کنید.
+',
     'snipe_version'  			=> 'نسخه Snipe_IT',
-    'support_footer'            => 'Support Footer Links ',
-    'support_footer_help'       => 'Specify who sees the links to the Snipe-IT Support info and Users Manual',
-    'version_footer'            => 'Version in Footer ',
-    'version_footer_help'       => 'Specify who sees the Snipe-IT version and build number.',
+    'support_footer'            => 'پشتیبانی از پیوندهای پاورقی
+',
+    'support_footer_help'       => 'مشخص کنید چه کسی پیوندهای اطلاعات پشتیبانی Snipe-IT و راهنمای کاربران را ببیند
+',
+    'version_footer'            => 'نسخه در پاورقی
+',
+    'version_footer_help'       => 'مشخص کنید چه کسی نسخه و شماره ساخت Snipe-IT را ببیند.
+',
     'system'                    => 'اطلاعات سیستم',
     'update'                    => 'به‌ روزرسانی تنظیمات',
     'value'                     => 'عنوان آیتم',
     'brand'                     => 'نام تجاری',
-    'brand_keywords'            => 'footer, logo, print, theme, skin, header, colors, color, css',
-    'brand_help'                => 'Logo, Site Name',
-    'web_brand'                 => 'Web Branding Type',
+    'brand_keywords'            => 'پاورقی، لوگو، چاپ، تم، پوسته، هدر، رنگ ها، رنگ، css
+',
+    'brand_help'                => 'لوگو، نام سایت
+',
+    'web_brand'                 => 'نوع برندینگ وب
+',
     'about_settings_title'      => 'درباره تنظیمات',
     'about_settings_text'       => 'این تنظیمات به شما اجازه سفارشی کردن جنبه های خاصی از نصب و راه اندازی خود را می دهد.',
     'labels_per_page'           => 'برچسب ها در صفحه',
     'label_dimensions'          => 'ابعاد برچسب (اینچ)',
     'next_auto_tag_base'        => 'افزایش خودکار بعدی',
     'page_padding'              => 'صفحه حاشیه (اینچ)',
-    'privacy_policy_link'       => 'Link to Privacy Policy',
-    'privacy_policy'            => 'Privacy Policy',
-    'privacy_policy_link_help'  => 'If a url is included here, a link to your privacy policy will be included in the app footer and in any emails that the system sends out, in compliance with GDPR. ',
+    'privacy_policy_link'       => 'ویرایش خط مشی حریم خصوصی',
+    'privacy_policy'            => 'سیاست حفظ حریم خصوصی',
+    'privacy_policy_link_help'  => 'اگر نشانی اینترنتی در اینجا گنجانده شده باشد، پیوندی به خط مشی رازداری شما در پاورقی برنامه و در هر ایمیلی که سیستم ارسال می‌کند، مطابق با GDPR قرار می‌گیرد.
+',
     'purge'                     => 'پاکسازی حذف رکوردها',
-    'purge_deleted'             => 'Purge Deleted ',
+    'purge_deleted'             => 'پاکسازی حذف شد
+',
     'labels_display_bgutter'    => 'برچسب قطره قطره پایین',
     'labels_display_sgutter'    => 'برچسب سمت قطره قطره ',
     'labels_fontsize'           => 'اندازه نوع خط برچسب',
@@ -270,55 +383,100 @@ return [
     'bottom'        => 'پایین',
     'vertical'        => 'عمودی',
     'horizontal'        => 'افقی',
-    'unique_serial'                => 'Unique serial numbers',
-    'unique_serial_help_text'                => 'Checking this box will enforce a uniqueness constraint on asset serials',
+    'unique_serial'                => 'شماره سریال منحصر به فرد
+',
+    'unique_serial_help_text'                => 'علامت زدن این کادر یک محدودیت منحصر به فرد را در سریال های دارایی اعمال می کند
+',
     'zerofill_count'        => 'طول برچسب دارایی، از جمله zerofill',
-    'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-    'oauth_title' => 'OAuth API Settings',
-    'oauth' => 'OAuth',
-    'oauth_help' => 'Oauth Endpoint Settings',
-    'asset_tag_title' => 'Update Asset Tag Settings',
-    'barcode_title' => 'Update Barcode Settings',
-    'barcodes' => 'Barcodes',
-    'barcodes_help_overview' => 'Barcode &amp; QR settings',
-    'barcodes_help' => 'This will attempt to delete cached barcodes. This would typically only be used if your barcode settings have changed, or if your Snipe-IT URL has changed. Barcodes will be re-generated when accessed next.',
-    'barcodes_spinner' => 'Attempting to delete files...',
-    'barcode_delete_cache' => 'Delete Barcode Cache',
-    'branding_title' => 'Update Branding Settings',
-    'general_title' => 'Update General Settings',
-    'mail_test' => 'Send Test',
-    'mail_test_help' => 'This will attempt to send a test mail to :replyto.',
-    'filter_by_keyword' => 'Filter by setting keyword',
-    'security' => 'Security',
-    'security_title' => 'Update Security Settings',
-    'security_keywords' => 'password, passwords, requirements, two factor, two-factor, common passwords, remote login, logout, authentication',
-    'security_help' => 'Two-factor, Password Restrictions',
-    'groups_keywords' => 'permissions, permission groups, authorization',
-    'groups_help' => 'Account permission groups',
-    'localization' => 'Localization',
-    'localization_title' => 'Update Localization Settings',
-    'localization_keywords' => 'localization, currency, local, locale, time zone, timezone, international, internatinalization, language, languages, translation',
-    'localization_help' => 'Language, date display',
-    'notifications' => 'Notifications',
-    'notifications_help' => 'Email alerts, audit settings',
-    'asset_tags_help' => 'Incrementing and prefixes',
-    'labels' => 'Labels',
-    'labels_title' => 'Update Label Settings',
-    'labels_help' => 'Label sizes &amp; settings',
-    'purge' => 'Purge',
-    'purge_keywords' => 'permanently delete',
-    'purge_help' => 'Purge Deleted Records',
-    'ldap_extension_warning' => 'It does not look like the LDAP extension is installed or enabled on this server. You can still save your settings, but you will need to enable the LDAP extension for PHP before LDAP syncing or login will work.',
-    'ldap_ad' => 'LDAP/AD',
-    'employee_number' => 'Employee Number',
-    'create_admin_user' => 'Create a User ::',
-    'create_admin_success' => 'Success! Your admin user has been added!',
-    'create_admin_redirect' => 'Click here to go to your app login!',
-    'setup_migrations' => 'Database Migrations ::',
-    'setup_no_migrations' => 'There was nothing to migrate. Your database tables were already set up!',
-    'setup_successful_migrations' => 'Your database tables have been created',
-    'setup_migration_output' => 'Migration output:',
-    'setup_migration_create_user' => 'Next: Create User',
-    'ldap_settings_link' => 'LDAP Settings Page',
-    'slack_test' => 'Test <i class="fab fa-slack"></i> Integration',
+    'username_format_help'   => 'این تنظیم تنها در صورتی در فرآیند وارد کردن استفاده می‌شود که نام کاربری ارائه نشده باشد و ما مجبور باشیم یک نام کاربری برای شما ایجاد کنیم.
+',
+    'oauth_title' => 'تنظیمات API OAuth
+',
+    'oauth' => 'OAuth
+',
+    'oauth_help' => 'تنظیمات نقطه پایانی Oauth
+',
+    'asset_tag_title' => 'تنظیمات برچسب دارایی را به روز کنید
+',
+    'barcode_title' => 'تنظیمات بارکد را به روز کنید
+',
+    'barcodes' => 'بارکدها
+',
+    'barcodes_help_overview' => 'بارکد &amp; تنظیمات QR
+',
+    'barcodes_help' => 'با این کار سعی می شود بارکدهای کش شده را حذف کنید. این معمولاً فقط در صورتی استفاده می شود که تنظیمات بارکد شما تغییر کرده باشد، یا اگر URL Snipe-IT شما تغییر کرده باشد. در صورت دسترسی بعدی، بارکدها دوباره تولید خواهند شد.
+',
+    'barcodes_spinner' => 'تلاش برای حذف فایل ها...
+',
+    'barcode_delete_cache' => 'کش بارکد را حذف کنید
+',
+    'branding_title' => 'تنظیمات برندینگ را به روز کنید
+',
+    'general_title' => 'تنظیمات عمومی را به روز کنید
+',
+    'mail_test' => 'ارسال تست
+',
+    'mail_test_help' => 'با این کار یک ایمیل آزمایشی به :replyto ارسال می شود.
+',
+    'filter_by_keyword' => 'با این کار یک ایمیل آزمایشی به :replyto ارسال می شود.
+',
+    'security' => 'امنیت',
+    'security_title' => 'تنظیمات امنیتی را به روز کنید
+',
+    'security_keywords' => 'رمز عبور، رمزهای عبور، الزامات، دو عاملی، دو عاملی، رمزهای عبور رایج، ورود از راه دور، خروج از سیستم، احراز هویت
+',
+    'security_help' => 'دو عامل، محدودیت رمز عبور
+',
+    'groups_keywords' => 'مجوزها، گروه‌های مجوز، مجوزها
+',
+    'groups_help' => 'گروه های مجوز حساب
+',
+    'localization' => 'بومی سازی
+',
+    'localization_title' => 'تنظیمات محلی سازی را به روز کنید
+',
+    'localization_keywords' => 'محلی سازی، واحد پول، محلی، منطقه، منطقه زمانی، منطقه زمانی، بین المللی، بین المللی، زبان، زبان ها، ترجمه
+',
+    'localization_help' => 'زبان، نمایش تاریخ
+',
+    'notifications' => 'اعلان‌ ها',
+    'notifications_help' => 'هشدارهای ایمیل، تنظیمات ممیزی
+',
+    'asset_tags_help' => 'افزایش و پیشوندها
+',
+    'labels' => 'برچسب ها',
+    'labels_title' => 'تنظیمات برچسب را به روز کنید
+',
+    'labels_help' => 'اندازه برچسب &amp; تنظیمات
+',
+    'purge' => 'پاکسازی',
+    'purge_keywords' => 'برای همیشه حذف کنید
+',
+    'purge_help' => 'پاک کردن رکوردهای حذف شده
+',
+    'ldap_extension_warning' => 'به نظر نمی رسد که برنامه افزودنی LDAP روی این سرور نصب یا فعال باشد. همچنان می‌توانید تنظیمات خود را ذخیره کنید، اما قبل از اینکه همگام‌سازی یا ورود به سیستم LDAP کار کند، باید افزونه LDAP را برای PHP فعال کنید.
+',
+    'ldap_ad' => 'LDAP/AD
+',
+    'employee_number' => 'تعداد کارکنان
+',
+    'create_admin_user' => 'ایجاد کاربر جدید ::',
+    'create_admin_success' => 'موفقیت! کاربر ادمین شما اضافه شد!
+',
+    'create_admin_redirect' => 'برای رفتن به ورود به برنامه خود اینجا را کلیک کنید!
+',
+    'setup_migrations' => 'مهاجرت های پایگاه داده ::
+',
+    'setup_no_migrations' => 'چیزی برای مهاجرت وجود نداشت. جداول پایگاه داده شما قبلاً تنظیم شده بود!
+',
+    'setup_successful_migrations' => 'جداول پایگاه داده شما ایجاد شده است
+',
+    'setup_migration_output' => 'خروجی مهاجرت:
+',
+    'setup_migration_create_user' => 'بعدی: ایجاد کاربر
+',
+    'ldap_settings_link' => 'صفحه تنظیمات LDAP
+',
+    'slack_test' => 'تست <i class="fab fa-slack"></i> یکپارچه سازی
+',
 ];
