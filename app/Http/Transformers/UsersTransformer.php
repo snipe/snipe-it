@@ -69,6 +69,8 @@ class UsersTransformer
                 ] : null,
                 'created_at' => Helper::getFormattedDateObject($user->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($user->updated_at, 'datetime'),
+                'start_date' => Helper::getFormattedDateObject($user->start_date, 'date'),
+                'end_date' => Helper::getFormattedDateObject($user->end_date, 'date'),
                 'last_login' => Helper::getFormattedDateObject($user->last_login, 'datetime'),
                 'deleted_at' => ($user->deleted_at) ? Helper::getFormattedDateObject($user->deleted_at, 'datetime') : null,
             ];
