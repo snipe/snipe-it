@@ -2,8 +2,8 @@
 
     return [
         'asset_maintenances' => 'Asset Wartungen',
-        'edit'               => 'Wartung bearbeiten',
-        'delete'             => 'Wartung löschen',
+        'edit'               => 'Asset Wartung bearbeiten',
+        'delete'             => 'Asset Wartung löschen',
         'view'               => 'Wartungsdetails anzeigen',
         'repair'             => 'Reparatur',
         'maintenance'        => 'Wartung',
@@ -11,6 +11,6 @@
         'calibration'        => 'Kalibrierung',
         'software_support'   => 'Software Support',
         'hardware_support'   => 'Hardware Support',
-        'configuration_change'   => 'Configuration Change',
-        'pat_test'           => 'PAT Test',
+        'configuration_change'   => 'Änderungen an der Konfiguration',
+        'pat_test'           => 'PAT-Test',
     ];

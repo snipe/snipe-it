@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Ще бъдат изтрити :asset_count актива.',
     'bulk_update'		=> 'Масово обновяване на активи',
     'bulk_update_help'	=> 'Тук можете да обновите множество активи едновременно. Попълнете единствено полетата, които желаете да промените. Всички празни полета няма да бъдат променени.',
-    'bulk_update_warn'	=> 'Ще бъдат променени записите за :asset_count актива.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Изписано на',
     'checkout_date'		=> 'Дата на изписване',
     'checkin_date'		=> 'Дата на вписване',

@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'உரிமம் இல்லை.',
+    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
     'user_does_not_exist' => 'பயனர் இல்லை.',
     'asset_does_not_exist' 	=> 'நீங்கள் இந்த உரிமத்துடன் தொடர்பு கொள்ள முயற்சிக்கும் சொத்து இல்லை.',
     'owner_doesnt_match_asset' => 'நீங்கள் இந்த உரிமத்துடன் தொடர்பு கொள்ள முயற்சிக்கும் சொத்தை சொடுக்கும் ஒதுக்கீட்டில் தேர்ந்தெடுக்கப்பட்ட நபரை விட வேறு ஏதேனும் சொந்தமானது.',

@@ -10,7 +10,8 @@ return array(
     'email'      			=> 'ایمیل',
     'employee_num'      	=> 'کد کارمند',
     'first_name' 			=> 'نام',
-    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
+    'groupnotes'			=> 'گروهی را برای تخصیص به کاربر انتخاب کنید، به یاد داشته باشید که کاربر مجوزهای گروهی را که به او اختصاص داده شده است، می گیرد. از ctrl+click (یا cmd+click در MacOS) برای لغو انتخاب گروه ها استفاده کنید.
+',
     'id'         			=> 'شناسه',
     'inherit'  				=> 'ارث بری',
     'job' 					=> 'عنوان شغلی',

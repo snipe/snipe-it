@@ -13,8 +13,8 @@ return array(
     |
     */
 
-    'failed' => 'Diese Anmeldeinformationen entsprechen nicht unseren Angaben.',
+    'failed' => 'Diese Zugangsdaten stimmen nicht mit unseren Datensätzen überein.',
     'password' => 'Das angegebene Passwort ist ungültig.',
-    'throttle' => 'Zu viele fehlgeschlagene Anmeldeversuche. Bitte versuchen Sie es erneut in :seconds Sekunden.',
+    'throttle' => 'Zu viele fehlgeschlagene Anmeldeversuche. Bitte versuche es erneut in :seconds Sekunden.',
 
 );

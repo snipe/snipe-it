@@ -34,7 +34,7 @@ return [
     'admin_permission_warning' => 'Csak admin vagy annál nagyobb jogokkal rendelkező felhasználók adhatnak admin hozzáférést egy felhasználónak.',
     'remove_group_memberships' => 'Csoporttagságok eltávolítása',
     'warning_deletion' => 'FIGYELMEZTETÉS:',
-    'warning_deletion_information' => 'You are about to checkin ALL items from the :count user(s) listed below. Super admin names are highlighted in red.',
+    'warning_deletion_information' => 'Ön az alábbiakban felsorolt :count felhasználó(k) MINDEN tételét be fogja jelenteni. A szuper admin nevek pirossal vannak kiemelve.',
     'update_user_assets_status' => 'Frissítse ezen felhasználók összes eszközét erre az állapotra',
     'checkin_user_properties' => 'Ellenőrizze a felhasználókhoz kapcsolódó összes tulajdonságot',
     'remote_label'   => 'Ez egy távoli felhasználó',

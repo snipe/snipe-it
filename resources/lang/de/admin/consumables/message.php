@@ -23,7 +23,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Das Verbrauchsmaterial wurde nicht herausgegeben. Bitte versuchen Sie es erneut',
         'success' 		=> 'Verbrauchsmaterial wurde erfolgreich herausgegeben.',
-        'user_does_not_exist' => 'Der angegebene Benutzer ist ungültig. Bitte versuchen Sie es erneut.'
+        'user_does_not_exist' => 'Dieser Benutzer ist ungültig. Bitte versuchen Sie es noch einmal.'
     ),
 
     'checkin' => array(

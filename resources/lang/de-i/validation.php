@@ -76,7 +76,7 @@ return [
     'required_with'        => ':attribute wird benötigt wenn :value ausgewählt ist.',
     'required_with_all'    => ':attribute field ist erforderlich, wenn :values vorhanden sind.',
     'required_without'     => ':attribute wird benötigt wenn :value nicht ausgewählt ist.',
-    'required_without_all' => 'Das: Attributfeld ist erforderlich, wenn keine der folgenden Werte vorhanden sind:',
+    'required_without_all' => 'Das: Attributfeld ist erforderlich, wenn keine der folgenden Werte vorhanden sind.',
     'same'                 => ':attribute und :other müssen übereinstimmen.',
     'size'                 => [
         'numeric' => ':attribute muss :size groß sein.',
@@ -85,10 +85,10 @@ return [
         'array'   => 'Das Attribut muss Folgendes enthalten: Größenelemente.',
     ],
     'string'               => 'Das Attribut muss eine Zeichenfolge sein.',
-    'timezone'             => ':attribute muss eine gültige Zeitzone sein.',
-    'unique'               => ':attribute schon benutzt.',
+    'timezone'             => ':attribute muss eine gültige Zone sein.',
+    'unique'               => ':attribute ist bereits vergeben.',
     'uploaded'             => ':attribute konnte nicht hochgeladen werden.',
-    'url'                  => ':attribute Format ist ungültig.',
+    'url'                  => ':attribute Format ungültig.',
     'unique_undeleted'     => 'Die Variable :attribute muss eindeutig sein.',
     'non_circular'         => 'Das :attribute darf keinen Zirkelbezug ergeben.',
     'disallow_same_pwd_as_user_fields' => 'Das Passwort muss sich vom Nutzernamen unterscheiden.',
@@ -128,7 +128,7 @@ return [
         'email_array'      => 'Eine oder mehrere Email Adressen sind ungültig.',
         'hashed_pass'      => 'Ihr derzeitiges Passwort ist nicht korrekt',
         'dumbpwd'          => 'Das Passwort ist zu gebräuchlich.',
-        'statuslabel_type' => 'Sie müssen einen gültigen Statuslabel-Typ auswählen',
+        'statuslabel_type' => 'Du musst einen gültigen Statuslabel-Typ auswählen',
     ],
 
     /*

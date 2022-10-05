@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Δεν υπάρχει άδεια χρήσης.',
+    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
     'user_does_not_exist' => 'Ο χρήστης δεν υπάρχει.',
     'asset_does_not_exist' 	=> 'Το πάγιο που προσπαθείτε να συσχετίσετε με αυτήν την άδεια δεν υπάρχει.',
     'owner_doesnt_match_asset' => 'Το περιουσιακό στοιχείο που προσπαθείτε να συσχετίσετε με αυτήν την άδεια ανήκει σε κάποιον άλλον εκτός από το άτομο που επιλέχθηκε στο αναπτυσσόμενο μενού.',

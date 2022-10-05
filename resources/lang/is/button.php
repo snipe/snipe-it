@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'Aðgerðir',
     'add'    	                => 'Bæta við nýjum',
     'cancel'                    => 'Hætta við',
-    'checkin_and_delete'  	    => 'Checkin All / Delete User',
+    'checkin_and_delete'  	    => 'Skrá inn allt / Eyða notenda',
     'delete'  	                => 'Eyða',
     'edit'    	                => 'Breyta',
     'restore' 	                => 'Endurheimta',

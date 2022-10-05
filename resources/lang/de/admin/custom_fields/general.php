@@ -39,9 +39,9 @@ return [
     'add_field_to_fieldset' => 'Feld zum Feldsatz hinzufügen',
     'make_optional' => 'Benötigt - klicken, um optional zu machen',
     'make_required' => 'Optional - Klicken, um erforderlich zu machen',
-    'reorder' => 'Sortieren',
+    'reorder' => 'Erneut bestellen',
     'db_field' => 'Datenbankfeld',
     'db_convert_warning' => 'WARNUNG. Dieses Feld befindet sich in der Tabelle mit benutzerdefinierten Feldern als <code>:db_column</code> sollte aber <code>:expected</code> sein.',
-    'is_unique' => 'Dieser Wert muss für jedes Asset eindeutig sein',
+    'is_unique' => 'Dieser Wert muss für jedes Asset einzigartig sein',
     'unique' => 'Einzigartig',
 ];

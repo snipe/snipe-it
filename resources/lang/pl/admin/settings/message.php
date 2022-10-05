@@ -35,7 +35,7 @@ return [
     ],
     'slack' => [
         'sending' => 'Wysyłanie wiadomości testowej Slack...',
-        'success_pt1' => 'Success! Check the ',
+        'success_pt1' => 'Sukces! Sprawdź ',
         'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
         '500' => 'Błąd 500 serwera.',
         'error' => 'Coś poszło nie tak.',

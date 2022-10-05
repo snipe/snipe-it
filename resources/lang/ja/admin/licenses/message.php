@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'ライセンスが存在しません。',
+    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
     'user_does_not_exist' => '利用者が存在しません。',
     'asset_does_not_exist' 	=> 'このライセンスに関連付けられている資産が存在しません。',
     'owner_doesnt_match_asset' => 'ドロップダウンで割り当てられた以上の利用者にライセンスを関連付けようとしています。',

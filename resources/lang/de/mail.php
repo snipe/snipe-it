@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'Eine Geräte-Anfrage auf der Webseite wurde vom Benutzer abgebrochen',
     'a_user_requested' => 'Ein Benutzer hat ein Gerät auf der Webseite angefordert',
     'accessory_name' => 'Zubehör Name:',

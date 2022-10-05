@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => '授權不存在。',
+    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
     'user_does_not_exist' => '使用者不存在',
     'asset_does_not_exist' 	=> '您正在授權的資產不存在。',
     'owner_doesnt_match_asset' => '您正在授權的資產已被其他人佔用，請重新選擇。',

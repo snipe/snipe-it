@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Ikaw ay mag-delete ng :asset_count na mga asset.',
     'bulk_update'		=> 'Ang Maramihang Asset na Nai-update',
     'bulk_update_help'	=> 'Ang form na ito ay nagbibigay sa iyo ng pahintulot para mag-update ng maramihang asset nang sabay-sabay. Lagyan lamang ang mga field na gusto mong baguhin. Anumang mga field na blangko ay mananatiling walang pagbabago. ',
-    'bulk_update_warn'	=> 'Ikaw ay mag-delete ng :asset_count assets.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'I-check Out Sa',
     'checkout_date'		=> 'Ang Petsa ng Pagcheck-out',
     'checkin_date'		=> 'Ang Petsa ng Pag-checkin',

@@ -6,11 +6,11 @@ return [
     'asset_depreciations'  					=> '資產折舊',
     'create'  					            => '新建折舊',
     'depreciation_name'  					=> '折舊名稱',
-    'depreciation_min'                      => 'Floor Value of Depreciation',
+    'depreciation_min'                      => '折舊的下限價值',
     'number_of_months'  					=> '月數',
     'update'  					            => '更新折舊',
-    'depreciation_min'                      => 'Minimum Value after Depreciation',
-    'no_depreciations_warning'               => '<strong>Warning: </strong>
-                      You do not currently have any depreciations set up.
-                      Please set up at least one depreciation to view the depreciation report.',
+    'depreciation_min'                      => '折舊後的最低價值',
+    'no_depreciations_warning'               => '<strong>警告:</strong>
+                      你目前沒有設定任何折舊。
+                      請至少設定一次折舊，以查看折舊報告。',
 ];

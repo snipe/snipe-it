@@ -13,8 +13,8 @@ return [
     |
     */
 
-    'accepted'             => 'The :attribute must be accepted.',
-    'active_url'           => 'The :attribute is not a valid URL.',
+    'accepted'             => 'Ви повинні прийняти :attribute.',
+    'active_url'           => 'Поле :attribute не є правильним URL.',
     'after'                => 'The :attribute must be a date after :date.',
     'after_or_equal'       => 'The :attribute must be a date after or equal to :date.',
     'alpha'                => 'The :attribute may only contain letters.',
@@ -68,7 +68,7 @@ return [
     'not_in'               => 'The selected :attribute is invalid.',
     'numeric'              => 'The :attribute must be a number.',
     'present'              => 'The :attribute field must be present.',
-    'valid_regex'          => 'That is not a valid regex. ',
+    'valid_regex'          => 'Це не коректний регулярний вираз. ',
     'regex'                => 'The :attribute format is invalid.',
     'required'             => 'The :attribute field is required.',
     'required_if'          => 'The :attribute field is required when :other is :value.',
@@ -124,11 +124,11 @@ return [
     */
 
     'custom' => [
-        'alpha_space' => 'The :attribute field contains a character that is not allowed.',
-        'email_array'      => 'One or more email addresses is invalid.',
-        'hashed_pass'      => 'Your current password is incorrect',
-        'dumbpwd'          => 'That password is too common.',
-        'statuslabel_type' => 'You must select a valid status label type',
+        'alpha_space' => 'Поле :attribute містить символ, який не допускається.',
+        'email_array'      => 'Одна або кілька адрес електронної пошти не правильні.',
+        'hashed_pass'      => 'Поточний пароль неправильний',
+        'dumbpwd'          => 'Цей пароль занадто вживаний.',
+        'statuslabel_type' => 'Ви повинні вибрати правильний тип статуса',
     ],
 
     /*

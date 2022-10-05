@@ -4,13 +4,16 @@ return [
     'send_password_link'	        => 'ارسال لینک بازنشانی کلمه عبور',
     'email_reset_password'			=> 'پست الکترونیکی کلمه عبور بازنشانی',
     'reset_password'			    => 'بازنشانی گذرواژه',
-    'saml_login'                    => 'Login via SAML',
+    'saml_login'                    => 'از طریق SAML وارد شوید
+',
     'login'                         => 'ورود',
     'login_prompt'                  => 'لطفا وارد شوید',
     'forgot_password'               => 'گذرواژه خود را فراموش کرده ام',
-    'ldap_reset_password'           => 'Please click here to reset your LDAP password',
+    'ldap_reset_password'           => 'برای تغییر رمز عبور اینجا کلیک کنید',
     'remember_me'                   => 'مرا به خاطر بسپار',
-    'username_help_top'                 => 'Enter your <strong>username</strong> to be emailed a password reset link.',
-    'username_help_bottom'          => 'Your username and email address <em>may</em> be the same, but may not be, depending on your configuration. If you cannot remember your username, contact your administrator. <br><br><strong>Usernames without an associated email address will not be emailed a password reset link.</strong> ',
+    'username_help_top'                 => '<strong>نام کاربری</strong> خود را وارد کنید تا پیوند بازنشانی رمز عبور برای شما ایمیل شود.
+',
+    'username_help_bottom'          => 'نام کاربری و آدرس ایمیل شما <em>ممکن است</em> یکسان باشد، اما ممکن است نباشد، بسته به پیکربندی شما. اگر نمی توانید نام کاربری خود را به خاطر بسپارید، با سرپرست خود تماس بگیرید. <br><br><strong>برای نام‌های کاربری بدون آدرس ایمیل مرتبط، پیوند بازنشانی رمز عبور ایمیل ارسال نمی‌شود.</strong>
+',
     ];
 

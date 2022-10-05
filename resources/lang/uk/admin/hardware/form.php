@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
     'bulk_update'		=> 'Bulk Update Assets',
     'bulk_update_help'	=> 'This form allows you to update multiple assets at once. Only fill in the fields you need to change. Any fields left blank will remain unchanged. ',
-    'bulk_update_warn'	=> 'You are about to edit the properties of :asset_count assets.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Видано',
     'checkout_date'		=> 'Дата видачі',
     'checkin_date'		=> 'Дата повернення',
@@ -45,7 +45,7 @@ return [
     'asset_location_update_default' => 'Update only default location',
     'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
     'asset_deployable' => 'That status is deployable. This asset can be checked out.',
-    'processing_spinner' => 'Processing...',
+    'processing_spinner' => 'Обробка...',
     'optional_infos'  => 'Optional Information',
     'order_details'   => 'Order Related Information'
 ];

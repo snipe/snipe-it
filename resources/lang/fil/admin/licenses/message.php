@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Ang lisensya ay hindi umiiral.',
+    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
     'user_does_not_exist' => 'Ang gumagamit ay hindi umiiral.',
     'asset_does_not_exist' 	=> 'Ang asset na sinusubukang mong iugnay sa lisensyang ito ay hindi umiiral.',
     'owner_doesnt_match_asset' => 'Ang asset na sinusubukan nong iugnay sa lisensyang ito ay pag-aari ng isang tao maliban sa taong piniling maitalaga sa dropdown.',

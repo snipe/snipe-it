@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'Користувач скасував запит на об\'єкт на веб-сайті',
     'a_user_requested' => 'Користувач надіслав запит на об\'єкт на веб-сайті',
     'accessory_name' => 'Назва аксесуара:',

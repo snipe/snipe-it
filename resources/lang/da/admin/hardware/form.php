@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Du er i gang med at slette :asset_count aktiver.',
     'bulk_update'		=> 'Masseopdater Aktiver',
     'bulk_update_help'	=> 'Denne form tillader dig at opdatere flere aktiver på en gang. Udfyld kun de felter der skal ændres. Ikke udfyldte feltet forbilver uændret.',
-    'bulk_update_warn'	=> 'Du er i færd med at redigere egenskaber på :asset_count aktiver.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Tjekket Ud Til',
     'checkout_date'		=> 'Tjekket Ud Dato',
     'checkin_date'		=> 'Tjekket Ind Dato',

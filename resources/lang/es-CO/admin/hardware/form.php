@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Estás a punto de eliminar :asset_count equipos.',
     'bulk_update'		=> 'Actualización masiva de Equipos',
     'bulk_update_help'	=> 'Este formulario te permite actualizar múltiples equipos simultáneamente. Solo debes completar los campos que quieres modificar. Todo campo en blanco permanecerá sin cambios. ',
-    'bulk_update_warn'	=> 'Estás a punto de editar las propiedades de :asset_count equipos.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Asignado a',
     'checkout_date'		=> 'Fecha de asignación',
     'checkin_date'		=> 'Fecha de devolución',

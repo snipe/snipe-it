@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Cette catégorie n\'existe pas.',
+    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
     'user_does_not_exist' => 'L\'utilisateur n\'existe pas.',
     'asset_does_not_exist' 	=> 'L\'actif que vous essayez d\'associer avec cette licence n\'existe pas.',
     'owner_doesnt_match_asset' => 'L\'actif que vous essayez d\'associer avec cette licence est détenu par une autre personne que celle sélectionnée dans la liste déroulante.',

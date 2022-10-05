@@ -34,7 +34,7 @@ return [
     'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
     'remove_group_memberships' => 'Remove Group Memberships',
     'warning_deletion' => 'WARNING:',
-    'warning_deletion_information' => 'You are about to checkin ALL items from the :count user(s) listed below. Super admin names are highlighted in red.',
+    'warning_deletion_information' => 'Þú ert að fara skrá ALLA hluti inn frá :count user(s) hér að neðan. Nöfn kerfisstjórar eru uppljómuð með rauðu.',
     'update_user_assets_status' => 'Update all assets for these users to this status',
     'checkin_user_properties' => 'Check in all properties associated with these users',
     'remote_label'   => 'This is a remote user',

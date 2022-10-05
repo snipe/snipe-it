@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => '사용자가 웹사이트에서 품목 요청을 취소했습니다',
     'a_user_requested' => '사용자가 웹사이트에서 품목을 요청했습니다',
     'accessory_name' => '액세서리 이름',

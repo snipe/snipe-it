@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'Потребител е отменил заявка за елемент в уебсайта',
     'a_user_requested' => 'Потребител е направил заявка за елемент в уебсайта',
     'accessory_name' => 'Име на аксесоар:',
@@ -59,7 +61,7 @@ return [
     'test_mail_text' => 'Това е тест от Snipe-IT система за управление на активи. Ако сте получили това, email-а работи :)',
     'the_following_item' => 'Следният артикул беше вписан:',
     'low_inventory_alert' => 'Има :count артикул, който е под минималния праг за наличност или скоро ще се изчерпа.| Има :count артикула, които са под минималния праг за наличност или скоро ще се изчерпат.',
-    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'Има :count актив(а) с гаранция, която ще изтече в следващите :threshold дни.|Има :count активa с гаранции, която ще изтече в следващите :threshold дни.',
     'license_expiring_alert' => 'Има :count лиценз, който изтича в следващите :threshold дни.|Има :count лиценза, които изтичат в следващите :threshold дни.',
     'to_reset' => 'За да нулирате вашата :web password, попълнете този формуляр:',
     'type' => 'Вид',

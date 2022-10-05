@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Anda akan menghapus :asset_count aset.',
     'bulk_update'		=> 'Perbarui aset jumlah besar',
     'bulk_update_help'	=> 'Formulir ini mengizinkan anda untuk memperbarui kelipatan aset dalam sekali proses. Cukup isi di field yang hendak di rubah. Jika ada yang kosong tidak akan dirubah. ',
-    'bulk_update_warn'	=> 'Anda akan menyunting :asset_count aset.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Diberikan kepada',
     'checkout_date'		=> 'Tanggal Pemberian',
     'checkin_date'		=> 'Tanggal Pengembalian',

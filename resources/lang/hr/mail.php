@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'Korisnik je otkazao zahtjev za stavkom na web mjestu',
     'a_user_requested' => 'Korisnik je zatražio stavku na web mjestu',
     'accessory_name' => 'Naziv dodatne opreme:',

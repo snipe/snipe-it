@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Rydych am dileu :asset_count assets.',
     'bulk_update'		=> 'Diweddaru Nifer o Asedau',
     'bulk_update_help'	=> 'Mae\'r ffurflen hon yn caniatáu ichi ddiweddaru nifer o asedau ar unwaith. Llenwch y meysydd sydd angen i chi eu newid yn unig. Bydd unrhyw bwlch a adewir yn wag yn aros yr un fath. ',
-    'bulk_update_warn'	=> 'Rydych am newid manylder am :asset_count o asedau.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Wedi aseinio i',
     'checkout_date'		=> 'Dyddiad allan',
     'checkin_date'		=> 'Dyddian i mewn',

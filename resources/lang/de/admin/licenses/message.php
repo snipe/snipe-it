@@ -2,9 +2,9 @@
 
 return array(
 
-    'does_not_exist' => 'Die Lizenz existiert nicht.',
+    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
     'user_does_not_exist' => 'Benutzer existiert nicht.',
-    'asset_does_not_exist' 	=> 'Der Gegenstand, mit dem Sie diese Lizenz verknüpfen möchten, existiert nicht.',
+    'asset_does_not_exist' 	=> 'Das Asset, das Sie mit dieser Lizenz verknüpfen möchten, existiert nicht.',
     'owner_doesnt_match_asset' => 'Der Gegenstand, den Sie mit dieser Lizenz verknüpfen möchten, gehört jemand anderem als der im Dropdown-Feld ausgewählten Person.',
     'assoc_users'	 => 'Diese Lizenz ist derzeit mindestens einem Benutzer zugeordnet und kann nicht gelöscht werden. Bitte nehmen Sie die Lizenz zurück und versuchen Sie anschließend erneut diese zu löschen. ',
     'select_asset_or_person' => 'Sie müssen ein Asset oder einen Benutzer auswählen, aber nicht beides.',

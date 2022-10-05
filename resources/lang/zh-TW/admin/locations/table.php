@@ -30,7 +30,7 @@ return [
     'asset_model'               => '型號',
     'asset_serial'              => '序號',
     'asset_location'            => '位置',
-    'asset_checked_out'         => 'Checked Out',
+    'asset_checked_out'         => '已借出',
     'asset_expected_checkin'    => '預計歸還',
     'date'                      => '日期:',
     'signed_by_asset_auditor'   => 'Signed By (Asset Auditor):',

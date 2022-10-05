@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Вы собираетесь удалить :asset_count активов.',
     'bulk_update'		=> 'Редактировать выбранное',
     'bulk_update_help'	=> 'Эта форма позволяет Вам обновить несколько объектов за раз. Заполняйте только те поля, которые нужно изменить. Пустые поля останутся без изменений. ',
-    'bulk_update_warn'	=> 'Редактирование свойств :asset_count assets.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Привязан к',
     'checkout_date'		=> 'Дата выдачи',
     'checkin_date'		=> 'Дата возврата',

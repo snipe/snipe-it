@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'Käyttäjä on peruuttanut nimikkeen pyynnön sivustolla',
     'a_user_requested' => 'Käyttäjä on pyytänyt nimikettä sivustolla',
     'accessory_name' => 'Oheistarvikkeen nimi:',
