@@ -100,6 +100,11 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'scimtrace' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/scim.log')
+        ]
     ],
 
 ];
