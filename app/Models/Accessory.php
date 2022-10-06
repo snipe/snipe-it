@@ -237,7 +237,7 @@ class Accessory extends SnipeModel
      */
     public function users()
     {
-        return $this->belongsToMany(\App\Models\User::class, 'accessories_users', 'accessory_id', 'assigned_to')->withPivot('id', 'created_at', 'note')->withTrashed();
+        return $this->belongsToMany(\App\Models\User::class, 'accessories_users', 'accessory_id', 'assigned_to')->withPivot('id', 'created_at', 'assigned_to', 'note')->withTrashed();
     }
 
     /**
