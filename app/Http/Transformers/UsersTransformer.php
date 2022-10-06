@@ -30,7 +30,7 @@ class UsersTransformer
                 'username' => e($user->username),
                 'remote' => ($user->remote == '1') ? true : false,
                 'locale' => ($user->locale) ? e($user->locale) : null,
-                'employee_num' => e($user->employee_num),
+                'employee_num' => ($user->employee_num) ? e($user->employee_num) : null,
                 'manager' => ($user->manager) ? [
                     'id' => (int) $user->manager->id,
                     'name'=> e($user->manager->first_name).' '.e($user->manager->last_name),
@@ -43,7 +43,7 @@ class UsersTransformer
                 'state' => ($user->state) ? e($user->state) : null,
                 'country' => ($user->country) ? e($user->country) : null,
                 'zip' => ($user->zip) ? e($user->zip) : null,
-                'email' => e($user->email),
+                'email' => ($user->email) ? e($user->email) : null,
                 'department' => ($user->department) ? [
                     'id' => (int) $user->department->id,
                     'name'=> e($user->department->name),
@@ -69,6 +69,8 @@ class UsersTransformer
                 ] : null,
                 'created_at' => Helper::getFormattedDateObject($user->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($user->updated_at, 'datetime'),
+                'start_date' => Helper::getFormattedDateObject($user->start_date, 'date'),
+                'end_date' => Helper::getFormattedDateObject($user->end_date, 'date'),
                 'last_login' => Helper::getFormattedDateObject($user->last_login, 'datetime'),
                 'deleted_at' => ($user->deleted_at) ? Helper::getFormattedDateObject($user->deleted_at, 'datetime') : null,
             ];
