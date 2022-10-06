@@ -345,14 +345,14 @@
 
                    <!-- start date -->
                    @if ($user->start_date)
-                   <div class="row">
-                       <div class="col-md-3">
-                           {{ trans('general.start_date') }}
+                       <div class="row">
+                           <div class="col-md-3">
+                               {{ trans('general.start_date') }}
+                           </div>
+                           <div class="col-md-9">
+                               {{ \App\Helpers\Helper::getFormattedDateObject($user->start_date, 'date', false) }}
+                           </div>
                        </div>
-                       <div class="col-md-9">
-                           {{ \App\Helpers\Helper::getFormattedDateObject($user->start_date, 'date', false) }}
-                       </div>
-                   </div>
                    @endif
 
                    <!-- end date -->
