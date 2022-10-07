@@ -503,3 +503,7 @@ Route::middleware(['auth'])->get(
     '/',
     [DashboardController::class, 'index']
 )->name('home');
+
+// Socialite Google login
+Route::get('google', 'App\Http\Controllers\GoogleAuthController@redirectToGoogle');
+Route::get('google/callback', 'App\Http\Controllers\GoogleAuthController@handleGoogleCallback');

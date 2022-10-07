@@ -5,6 +5,7 @@ return [
     'email_reset_password'			=> 'Email Password Reset',
     'reset_password'			    => 'Reset Password',
     'saml_login'                    => 'Login via SAML',
+    'google_login'                  => 'Login via Google',
     'login'                         => 'Login',
     'login_prompt'                  => 'Please Login',
     'forgot_password'               => 'I forgot my password',
