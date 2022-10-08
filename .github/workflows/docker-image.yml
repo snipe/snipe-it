@@ -51,4 +51,8 @@ jobs:
         run: |
           cd terraform_with_ALB
           terraform init
+      - name: Terraform Plan
+        run: |
+          cd terraform
+          terraform plan -input=false
 
