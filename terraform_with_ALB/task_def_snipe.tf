@@ -196,9 +196,7 @@ data "aws_ecr_repository" "example" {
 # output "ecr_image" {
 #   value = data.aws_ecr_image.service_image.image_tag
 # }
-output "ecr_repo" {
-  value = data.aws_ecr_repository.example.encryption_configuration
-}
+
 
 data "external" "current_image" {
   program = ["bash", "./ecs-task-definition.sh"]
