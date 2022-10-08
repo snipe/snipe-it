@@ -1,0 +1,143 @@
+[
+    {
+      "dnsSearchDomains": null,
+      "environmentFiles": null,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "secretOptions": null,
+        "options": {
+          "awslogs-group": "/ecs/snipe",
+          "awslogs-region": "ap-south-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "entryPoint": null,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "protocol": "tcp",
+          "containerPort": 80
+        }
+      ],
+      "command": null,
+      "linuxParameters": null,
+      "cpu": 0,
+      "environment": [
+        {
+          "name": "APP_DEBUG",
+          "value": "false"
+        },
+        {
+          "name": "APP_ENV",
+          "value": "production"
+        },
+        {
+          "name": "APP_KEY",
+          "value": "base64:3y5owDouQCf/FH8wWz0Akn8Cwou8RB3P6CCxwButDv4="
+        },
+        {
+          "name": "APP_LOCALE",
+          "value": "en"
+        },
+        {
+          "name": "APP_TIMEZONE",
+          "value": "US/Pacific"
+        },
+        {
+          "name": "APP_URL",
+          "value": "${dns_name}"
+        },
+        {
+          "name": "MAIL_ENV_ENCRYPTION",
+          "value": "tcp"
+        },
+        {
+          "name": "MAIL_ENV_FROM_ADDR",
+          "value": "youremail@yourdomain.com"
+        },
+        {
+          "name": "MAIL_ENV_FROM_NAME",
+          "value": "Your Full Email Name"
+        },
+        {
+          "name": "MAIL_ENV_PASSWORD",
+          "value": "your_email_password"
+        },
+        {
+          "name": "MAIL_ENV_USERNAME",
+          "value": "your_email_username"
+        },
+        {
+          "name": "MAIL_PORT_587_TCP_ADDR",
+          "value": "smtp.whatever.com"
+        },
+        {
+          "name": "MAIL_PORT_587_TCP_PORT",
+          "value": "587"
+        },
+        {
+          "name": "MYSQL_DATABASE",
+          "value": "snipeit"
+        },
+        {
+          "name": "MYSQL_PASSWORD",
+          "value": "YOUR_snipeit_USER_PASSWORD"
+        },
+        {
+          "name": "MYSQL_PORT_3306_TCP_ADDR",
+          "value": "abc.abd"
+        },
+        {
+          "name": "MYSQL_PORT_3306_TCP_PORT",
+          "value": "3306"
+        },
+        {
+          "name": "MYSQL_ROOT_PASSWORD",
+          "value": "YOUR_SUPER_SECRET_PASSWORD"
+        },
+        {
+          "name": "MYSQL_USER",
+          "value": "snipeit"
+        },
+        {
+          "name": "PHP_UPLOAD_LIMIT",
+          "value": "100"
+        }
+      ],
+      "resourceRequirements": null,
+      "ulimits": null,
+      "dnsServers": null,
+      "mountPoints": [
+        {
+          "readOnly": null,
+          "containerPath": "/var/lib/snipeit",
+          "sourceVolume": "snipe-vol"
+        }
+      ],
+      "workingDirectory": null,
+      "secrets": null,
+      "dockerSecurityOptions": null,
+      "memory": null,
+      "memoryReservation": null,
+      "volumesFrom": [],
+      "stopTimeout": null,
+      "image": "snipe/snipe-it",
+      "startTimeout": null,
+      "firelensConfiguration": null,
+      "dependsOn": null,
+      "disableNetworking": null,
+      "interactive": null,
+      "healthCheck": null,
+      "essential": true,
+      "links": [],
+      "hostname": null,
+      "extraHosts": null,
+      "pseudoTerminal": null,
+      "user": null,
+      "readonlyRootFilesystem": null,
+      "dockerLabels": null,
+      "systemControls": null,
+      "privileged": null,
+      "name": "testapp"
+    }
+  ]
