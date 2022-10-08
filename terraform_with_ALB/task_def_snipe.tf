@@ -208,6 +208,6 @@ data "external" "current_image" {
   #   # path_root = "${jsonencode(path.root)}"
   # }
 }
-output "get_new_tag" {
-  value = data.external.current_image.result["image_tag"]
-}
+# output "get_new_tag" {
+#   value = data.external.current_image.result["image_tag"]
+# }
