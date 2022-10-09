@@ -43,7 +43,7 @@ resource "aws_ecs_task_definition" "snipe-main" {
         },
         {
           "name": "APP_KEY",
-          "value": "base64:3y5owDouQCf/FH8wWz0Akn8Cwou8RB3P6CCxwButDv4="
+          "value": "base64:Ep2LPUfshRkhf2NEJuvEcpFcHnyL3HbHIRKCHwbsLNc="
         },
         {
           "name": "APP_LOCALE",
@@ -169,7 +169,7 @@ resource "aws_ecs_service" "test-service-snipe-main" {
   name            = "testapp-service-snipe-main"
   cluster         = aws_ecs_cluster.foo.id
   task_definition = aws_ecs_task_definition.snipe-main.arn
-  desired_count   = 1
+  desired_count   = 2
   launch_type     = "FARGATE"
 
   network_configuration {
