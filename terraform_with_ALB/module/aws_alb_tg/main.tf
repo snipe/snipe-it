@@ -29,6 +29,10 @@ resource "aws_lb_target_group" "hello_world" {
   protocol    = "HTTP"
   vpc_id      = aws_default_vpc.default.id
   target_type = "ip"
+  stickiness {
+    enabled = true
+    type    = "app_cookie"
+  }
    health_check {
     path = "/"
     healthy_threshold = 6
