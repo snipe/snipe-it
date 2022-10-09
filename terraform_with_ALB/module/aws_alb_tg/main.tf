@@ -31,7 +31,7 @@ resource "aws_lb_target_group" "hello_world" {
   target_type = "ip"
   stickiness {
     enabled = true
-    type    = "app_cookie"
+    type    = "lb_cookie"
   }
    health_check {
     path = "/"
