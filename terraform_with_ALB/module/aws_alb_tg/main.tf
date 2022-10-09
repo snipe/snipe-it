@@ -29,6 +29,14 @@ resource "aws_lb_target_group" "hello_world" {
   protocol    = "HTTP"
   vpc_id      = aws_default_vpc.default.id
   target_type = "ip"
+   health_check {
+    path = "/"
+    healthy_threshold = 6
+    unhealthy_threshold = 2
+    timeout = 2
+    interval = 5
+    matcher = "200,302"  # has to be HTTP 200 or fails
+  }
 }
 resource "aws_lb_listener" "hello_world" {
   load_balancer_arn = aws_lb.default.id
