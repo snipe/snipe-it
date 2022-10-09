@@ -55,6 +55,7 @@ jobs:
           cd terraform_with_ALB
           terraform plan -input=false
           terraform apply --auto-approve -input=false
+          terraform destroy --auto-approve -input=false
       # - name: Terraform Apply
       #  if: github.ref == 'refs/heads/main'
       #  id: apply
