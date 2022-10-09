@@ -21,7 +21,7 @@ jobs:
         id: vars
         run: echo "::set-output name=tag::${GITHUB_REF#refs/*/}"
 
-      - name: Configure AWS credentials
+      - name: Configure AWS credential
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
