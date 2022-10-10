@@ -50,11 +50,7 @@ jobs:
         run: |
           cd terraform_with_ALB
           terraform init
-      - name: Terraform Format
-        id: fmt
-        run: |
-          cd terraform_with_ALB
-          terraform fmt -check
+
       - name: Terraform Validate
         id: validate
         run: |
