@@ -39,6 +39,6 @@ jobs:
           ECR_REPOSITORY: snipe
           IMAGE_TAG: ${{ github.event.head_commit.message }}
         run: |
-          docker build --tag "${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}" .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
