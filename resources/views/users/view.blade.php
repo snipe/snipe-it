@@ -37,6 +37,18 @@
         </li>
 
         <li>
+          <a href="#components" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+              <i class="fa fa-hdd" aria-hidden="true"></i>
+            </span>
+            <span class="hidden-xs hidden-sm">{{ trans('general.components') }}</span>
+            @if($components->count() > 0)
+              <badge class="badge badge-secondary">{{ number_format($components->count()) }}</badge>
+            @endif
+          </a>
+        </li>
+
+        <li>
           <a href="#licenses" data-toggle="tab">
             <span class="hidden-lg hidden-md">
             <i class="far fa-save fa-2x"></i>
@@ -650,6 +662,10 @@
             </table>
           </div>
         </div><!-- /asset -->
+
+        <div class="tab-pane" id="components">
+          @include('users._components', compact('components'))
+        </div> <!-- /.tab-pane components -->
 
         <div class="tab-pane" id="licenses">
           <div class="table-responsive">
