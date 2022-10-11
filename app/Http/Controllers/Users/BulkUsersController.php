@@ -256,14 +256,14 @@ class BulkUsersController extends Controller
         $license_owners = LicenseSeat::all()->where('assigned_to', '!=', null)->pluck('assigned_to')->toArray();
 
 //        *** Im targeting the wrong model here. there is a different table for both of these. *****
-        $accessory_owners = new Accessory;
+        $accessory_owners = Accessory::users()->whereHas('assigned_to');
 
 //        $component_owners =Component::assets()->where('user_id', '!=', null)->pluck('user_id')->toArray();
 
         $all_assets_checked= array_merge($asset_owners, $license_owners);
         $user_list= array_unique($all_assets_checked, SORT_NUMERIC);
 
-        return $accessory_owners->users;
+        return $accessory_owners;
 //            ->with('assigned_to')->where('assigned_to', '!=', null)->first()->pluck('assigned_to');
 //            ->wherePivot('assigned_to')->pluck('assigned_to')->toArray();
 //
