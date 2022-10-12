@@ -923,8 +923,8 @@ class SettingsController extends Controller
 
         $validator = Validator::make($setting->toArray(), [
             'ldap_username_field' => 'not_in:sAMAccountName',
-            'ldap_auth_filter_query' => 'not_in:uid=samaccountname',
-            'ldap_filter' => 'regex:"^[^(]"',
+            'ldap_auth_filter_query' => 'not_in:uid=samaccountname|required_if:ldap_enabled,1',
+            'ldap_filter' => 'nullable|regex:"^[^(]"|required_if:ldap_enabled,1',
         ],  $messages);
 
 
