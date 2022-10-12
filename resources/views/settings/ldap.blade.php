@@ -348,7 +348,7 @@
                             <div class="col-md-9">
                                 {{ Form::text('ldap_active_flag', Request::old('ldap_active_flag', $setting->ldap_active_flag), ['class' => 'form-control', $setting->demoMode]) }}
 
-                                <p class="help-block">{{ trans('admin/settings/general.ldap_activated_flag_help') }}</p>
+                                <p class="help-block">{!! trans('admin/settings/general.ldap_activated_flag_help') !!}</p>
 
                                 {!! $errors->first('ldap_active_flag', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @if (config('app.lock_passwords')===true)
