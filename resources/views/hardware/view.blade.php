@@ -606,7 +606,7 @@
                                                     @if ($asset->purchase_date)
                                                     {{ Helper::getFormattedDateObject($asset->present()->warranty_expires(), 'date', false) }}
                                                     -
-                                                    {{ Carbon::parse($asset->present()->warranty_expires())->diffForHumans() }}
+                                                    {{ Carbon::parse($asset->present()->warranty_expires())->diffForHumans(['parts' => 2]) }}
                                                     @else
                                                         {{ trans('general.na_no_purchase_date') }}
                                                     @endif
@@ -638,7 +638,7 @@
                                                 @if ($asset->purchase_date)
                                                 {{ Helper::getFormattedDateObject($asset->depreciated_date()->format('Y-m-d'), 'date', false) }}
                                                 -
-                                                {{ Carbon::parse($asset->depreciated_date())->diffForHumans() }}
+                                                {{ Carbon::parse($asset->depreciated_date())->diffForHumans(['parts' => 2]) }}
                                                 @else
                                                     {{ trans('general.na_no_purchase_date') }}
                                                 @endif
@@ -671,7 +671,7 @@
                                                 @if ($asset->purchase_date)
                                                 {{ Helper::getFormattedDateObject($asset->present()->eol_date(), 'date', false) }}
                                                 -
-                                                {{ Carbon::parse($asset->present()->eol_date())->diffForHumans() }}
+                                                {{ Carbon::parse($asset->present()->eol_date())->diffForHumans(['parts' => 2]) }}
                                                 @else
                                                     {{ trans('general.na_no_purchase_date') }}
                                                 @endif
