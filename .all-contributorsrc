@@ -2736,7 +2736,7 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/111710123?v=4",
       "profile": "https://github.com/Vautia",
       "contributions": [
-        "security"
+        "code"
       ]
     },
     {
@@ -2753,6 +2753,15 @@
       "name": "geo-chen",
       "avatar_url": "https://avatars.githubusercontent.com/u/2404584?v=4",
       "profile": "https://github.com/geo-chen",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "nh314",
+      "name": "Phan Nguyen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6006620?v=4",
+      "profile": "https://github.com/nh314",
       "contributions": [
         "code"
       ]
