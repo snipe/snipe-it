@@ -39,7 +39,7 @@ class LicenseSeatsController extends Controller
             }
 
             $total = $seats->count();
-            $offset = (($seats) && (request('offset') > $total)) ? 0 : request('offset', 0);
+            $offset = (($seats) && (request('offset') >= $total)) ? 0 : request('offset', 0);
             $limit = request('limit', 50);
 
             $seats = $seats->skip($offset)->take($limit)->get();
