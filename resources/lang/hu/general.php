@@ -371,13 +371,18 @@ return [
     'bulk_soft_delete'      =>'Gyengéden törölje ezeket a felhasználókat is. Az eszköztörténetük érintetlen marad, kivéve, ha/amíg nem törli a törölt rekordokat a Rendszergazdai beállításokban.',
     'bulk_checkin_delete_success' => 'A kiválasztott felhasználók törlésre, és a náluk levő eszközök visszavételre kerültek.',
     'bulk_checkin_success' => 'A kiválasztott felhasználókhoz tartozó eszközök visszavételre kerültek.',
-    'set_to_null' => 'Delete values for this asset|Delete values for all :asset_count assets ',
-    'na_no_purchase_date'   => 'N/A - No purchase date provided',
-    'assets_by_status'      => 'Assets by Status',
-    'assets_by_status_type'      => 'Assets by Status Type',
-    'pie_chart_type'        => 'Dashboard Pie Chart Type',
-    'hello_name'            => 'Hello, :name!',
-    'unaccepted_profile_warning'   => 'You have :count items requiring acceptance. Click here to accept or decline them',
+    'set_to_null' => 'Az eszköz értékeinek törlése|Az összes :asset_count eszköz értékeinek törlése ',
+    'na_no_purchase_date'   => 'N/A - Nincs megadva a vásárlás dátuma',
+    'assets_by_status'      => 'Eszközök státusz szerint',
+    'assets_by_status_type'      => 'Eszközök státustípus szerint',
+    'pie_chart_type'        => 'Műszerfal tortadiagram típusa',
+    'hello_name'            => 'Üdvözöllek, :name!',
+    'unaccepted_profile_warning'   => ':count darab tételed van, amelyek elfogadást igényelnek. Kattints ide az elfogadáshoz vagy az elutasításhoz',
+    'start_date'            => 'Start Date',
+    'end_date'            => 'End Date',
+    'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
+    'placeholder_kit'       => 'Select a kit'
+
 
 
 ];

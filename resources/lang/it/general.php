@@ -371,13 +371,18 @@ return [
     'bulk_soft_delete'      =>'Includi soft-delete di questi utenti. La cronologia dei loro Beni rimarrà intatta finché non elimini i record nelle Impostazioni di Amministrazione.',
     'bulk_checkin_delete_success' => 'Gli utenti che hai selezionato sono stati eliminati ed è stato effettuato il check-in degli oggetti loro assegnati.',
     'bulk_checkin_success' => 'Il check-in degli oggetti per gli utenti selezionati è stato completato.',
-    'set_to_null' => 'Delete values for this asset|Delete values for all :asset_count assets ',
-    'na_no_purchase_date'   => 'N/A - No purchase date provided',
-    'assets_by_status'      => 'Assets by Status',
-    'assets_by_status_type'      => 'Assets by Status Type',
-    'pie_chart_type'        => 'Dashboard Pie Chart Type',
-    'hello_name'            => 'Hello, :name!',
-    'unaccepted_profile_warning'   => 'You have :count items requiring acceptance. Click here to accept or decline them',
+    'set_to_null' => 'Elimina i valori per questo asset|Elimina i valori per :asset_count asset ',
+    'na_no_purchase_date'   => 'N/A - Nessuna data di acquisto',
+    'assets_by_status'      => 'Asset per Stato',
+    'assets_by_status_type'      => 'Asset per Tipo di Stato',
+    'pie_chart_type'        => 'Tipo di Grafico a Torta nella Dashboard',
+    'hello_name'            => 'Ciao, :name!',
+    'unaccepted_profile_warning'   => 'Hai :count elementi da accettare. Clicca qui per accettarli o rifiutarli',
+    'start_date'            => 'Start Date',
+    'end_date'            => 'End Date',
+    'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
+    'placeholder_kit'       => 'Select a kit'
+
 
 
 ];

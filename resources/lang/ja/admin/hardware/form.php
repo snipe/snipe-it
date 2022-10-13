@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> ':asset_cont 件の資産を削除しました',
     'bulk_update'		=> '資産を一括更新',
     'bulk_update_help'	=> 'このフォームは一度に複数の資産を更新することが可能です。変更が必要なフィールドにのみ入力をして下さい。ブランクのフィールドは変更されません。 ',
-    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
+    'bulk_update_warn'	=> '単一資産のプロパティを編集しようとしています。|:asset_count 件のプロパティを編集しようとしています。',
     'checkedout_to'		=> 'チェックアウト先',
     'checkout_date'		=> 'チェックアウト日',
     'checkin_date'		=> 'チェックイン日',
