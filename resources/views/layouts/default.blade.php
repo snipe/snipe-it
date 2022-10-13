@@ -580,7 +580,7 @@
             @can('import')
                 <li{!! (Request::is('import/*') ? ' class="active"' : '') !!}>
                     <a href="{{ route('imports.index') }}">
-                        <i class="fas fa-cloud-download-alt fa-fw"></i>
+                        <i class="fas fa-cloud-download-alt fa-fw" aria-hidden="true"></i>
                         <span>{{ trans('general.import') }}</span>
                     </a>
                 </li>
