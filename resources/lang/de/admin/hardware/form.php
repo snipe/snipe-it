@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Sie sind im Begriff :asset_count Assets zu löschen.',
     'bulk_update'		=> 'Massenaktualisierung von Assets',
     'bulk_update_help'	=> 'Diese Eingabemaske erlaubt Ihnen die Aktualisierung von mehreren Assets zugleich. Füllen Sie die Felder aus welche Sie ändern möchten. Alle leeren Felder bleiben unverändert. ',
-    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
+    'bulk_update_warn'	=> 'Sie sind dabei, die Eigenschaften eines einzelnen Assets zu bearbeiten. |Sie sind dabei, die Eigenschaften von :asset_count Assets zu bearbeiten.',
     'checkedout_to'		=> 'Herausgegeben an',
     'checkout_date'		=> 'Herausgabedatum',
     'checkin_date'		=> 'Rücknahmedatum',

@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'acceptance_asset_accepted' => 'A user has accepted an item',
-    'acceptance_asset_declined' => 'A user has declined an item',
+    'acceptance_asset_accepted' => 'ユーザーがアイテムを承認しました',
+    'acceptance_asset_declined' => 'ユーザーがアイテムを拒否しました',
     'a_user_canceled' => 'ユーザーがアイテムリクエストをキャンセルしました。',
     'a_user_requested' => 'ユーザーがアイテムをリクエストしています',
     'accessory_name' => '付属品名:',

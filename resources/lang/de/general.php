@@ -371,13 +371,18 @@ return [
     'bulk_soft_delete'      =>'Die Benutzer auch "soft-löschen". Die Historie der Gegenstände bleibt erhalten, solange die markierten Datensätze nicht in den Admin-Einstellungen endgültig gelöscht werden.',
     'bulk_checkin_delete_success' => 'Die ausgewählten Benutzer wurden gelöscht und ihre Gegenstände wurden eingecheckt.',
     'bulk_checkin_success' => 'Die Gegenstände für die ausgewählten Benutzer wurden eingecheckt.',
-    'set_to_null' => 'Delete values for this asset|Delete values for all :asset_count assets ',
-    'na_no_purchase_date'   => 'N/A - No purchase date provided',
-    'assets_by_status'      => 'Assets by Status',
-    'assets_by_status_type'      => 'Assets by Status Type',
-    'pie_chart_type'        => 'Dashboard Pie Chart Type',
-    'hello_name'            => 'Hello, :name!',
-    'unaccepted_profile_warning'   => 'You have :count items requiring acceptance. Click here to accept or decline them',
+    'set_to_null' => 'Werte für dieses Asset|Werte für alle :asset_count Assets löschen ',
+    'na_no_purchase_date'   => 'N/A - Kein Kaufdatum angegeben',
+    'assets_by_status'      => 'Assets sortiert nach Status',
+    'assets_by_status_type'      => 'Assets sortiert nach Statustyp',
+    'pie_chart_type'        => 'Dashboard Kreisdiagramm Typ',
+    'hello_name'            => 'Hallo, :name!',
+    'unaccepted_profile_warning'   => 'Du hast :count Gegenstände, die akzeptiert werden müssen. Klicke hier, um sie anzunehmen oder abzulehnen',
+    'start_date'            => 'Start Date',
+    'end_date'            => 'End Date',
+    'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
+    'placeholder_kit'       => 'Select a kit'
+
 
 
 ];
