@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> '即将删除 :asset_count 项资产',
     'bulk_update'		=> '批量更新',
     'bulk_update_help'	=> '该表格允许你同时修改多项资产。请仅填写需要修改的字段，留空的字段不会做任何修改。 ',
-    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
+    'bulk_update_warn'	=> '您将要编辑单个资产的属性。 |您将要编辑:asset_count个资产的属性。',
     'checkedout_to'		=> '借出至',
     'checkout_date'		=> '借出日期',
     'checkin_date'		=> '登记日期',

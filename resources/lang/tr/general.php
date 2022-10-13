@@ -381,6 +381,11 @@ Context | Request Context
     'pie_chart_type'        => 'Dashboard Pie Chart Type',
     'hello_name'            => 'Hello, :name!',
     'unaccepted_profile_warning'   => 'You have :count items requiring acceptance. Click here to accept or decline them',
+    'start_date'            => 'Başlangıç Tarihi',
+    'end_date'            => 'Bitiş Tarihi',
+    'alt_uploaded_image_thumbnail' => 'Yüklenen küçük resim',
+    'placeholder_kit'       => 'Bir kit seçin'
+
 
 
 ];

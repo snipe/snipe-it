@@ -109,7 +109,7 @@ return [
     'ldap_auth_filter_query'    => 'Permintaan Otentikasi LDAP',
     'ldap_version'              => 'Versi LDAP',
     'ldap_active_flag'          => 'LDAP Active Flag',
-    'ldap_activated_flag_help'  => 'Tanda ini digunakan untuk menentukan apakah pengguna dapat masuk ke Snipe-IT dan tidak memengaruhi kemampuan untuk memeriksa item masuk atau keluar kepada mereka.',
+    'ldap_activated_flag_help'  => 'This value is used to determine whether a synced user can login to Snipe-IT. <strong>It does not affect the ability to check items in or out to them</strong>, and should be the <strong>attribute name</strong> within your AD/LDAP, <strong>not the value</strong>. <br><br>If this field is set to a field name that does not exist in your AD/LDAP, or the value in the AD/LDAP field is set to <code>0</code> or <code>false</code>, <strong>user login will be disabled</strong>. If the value in the AD/LDAP field is set to <code>1</code> or <code>true</code> or <em>any other text</em> means the user can log in. When the field is blank in your AD, we respect the <code>userAccountControl</code> attribute, which usually allows non-suspended users to log in.',
     'ldap_emp_num'              => 'Nomor karyawan LDAP',
     'ldap_email'                => 'LDAP Email',
     'ldap_test'                 => 'Test LDAP',

@@ -91,11 +91,11 @@ return [
     'url'                  => 'Le format de cet-te :attribute est invalide.',
     'unique_undeleted'     => ':attribute doit être unique.',
     'non_circular'         => 'Le champ :attribute ne doit pas créer de référence circulaire.',
-    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
-    'letters'              => 'Password must contain at least one letter.',
-    'numbers'              => 'Password must contain at least one number.',
-    'case_diff'            => 'Password must use mixed case.',
-    'symbols'              => 'Password must contain symbols.',
+    'disallow_same_pwd_as_user_fields' => 'Le mot de passe ne peut être le nom d\'utilisateur.',
+    'letters'              => 'Le mot de passe doit contenir au moins une lettre.',
+    'numbers'              => 'Le mot de passe doit contenir au moins un chiffre.',
+    'case_diff'            => 'Le mot de passe doit contenir au moins une minuscule et une majuscule.',
+    'symbols'              => 'Le mot de passe doit contenir au moins un caractère spécial.',
     'gte'                  => [
         'numeric'          => 'La valeur ne peut pas être négative'
     ],

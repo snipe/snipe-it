@@ -371,13 +371,18 @@ return [
     'bulk_soft_delete'      =>'也可以“软删除”这些用户。他们的资产历史将保持不变，除非直到您清理管理设置中删除的记录。',
     'bulk_checkin_delete_success' => '您所选的用户已被删除，其名下资产已归还。',
     'bulk_checkin_success' => '选中用户的物品已归还。',
-    'set_to_null' => 'Delete values for this asset|Delete values for all :asset_count assets ',
-    'na_no_purchase_date'   => 'N/A - No purchase date provided',
-    'assets_by_status'      => 'Assets by Status',
-    'assets_by_status_type'      => 'Assets by Status Type',
-    'pie_chart_type'        => 'Dashboard Pie Chart Type',
-    'hello_name'            => 'Hello, :name!',
-    'unaccepted_profile_warning'   => 'You have :count items requiring acceptance. Click here to accept or decline them',
+    'set_to_null' => '删除此资产的值|删除所有:asset_count个资产的值 ',
+    'na_no_purchase_date'   => 'N/A-未提供购买日期',
+    'assets_by_status'      => '按状态显示的资产',
+    'assets_by_status_type'      => '按状态类型显示的资产',
+    'pie_chart_type'        => '仪表盘饼图类型',
+    'hello_name'            => '您好，:name！',
+    'unaccepted_profile_warning'   => '您需要接受:count 件物品。点击这里接受或拒绝。',
+    'start_date'            => 'Start Date',
+    'end_date'            => 'End Date',
+    'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
+    'placeholder_kit'       => 'Select a kit'
+
 
 
 ];
