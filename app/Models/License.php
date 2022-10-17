@@ -357,7 +357,7 @@ class License extends Depreciable
      */
     public function assignedusers()
     {
-        return $this->belongsToMany(\App\Models\User::class, 'license_seats', 'assigned_to', 'license_id');
+        return $this->belongsToMany(\App\Models\User::class, 'license_seats', 'license_id', 'assigned_to');
     }
 
     /**
