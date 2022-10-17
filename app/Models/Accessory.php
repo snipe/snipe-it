@@ -247,6 +247,12 @@ class Accessory extends SnipeModel
      * @since [v3.0]
      * @return int
      */
+
+    public function assignedTo()
+    {
+        return $this->belongsToMany('App\Models\User', 'accessories_users')
+            ->withPivot('assigned_to');
+    }
     public function hasUsers()
     {
         return $this->belongsToMany(\App\Models\User::class, 'accessories_users', 'accessory_id', 'assigned_to')->count();
