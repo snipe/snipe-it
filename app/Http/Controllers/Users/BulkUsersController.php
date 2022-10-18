@@ -280,10 +280,11 @@ class BulkUsersController extends Controller
         $this->authorize('view', User::class);
         $users= $this->findAssetOwners();
 
-dd($users);
+
         foreach($users as $user) {
 
-            $recipient= User::all()->where('id', '==', $user);
+            $recipient= User::select()->where('id', $user)->first();
+
             if (!empty($recipient->email)) {
                 $recipient->notify((new CurrentInventory($recipient)));
             }
