@@ -135,7 +135,6 @@ class UsersController extends Controller
 
         if ($user->save()) {
             if ($request->filled('groups')) {
-
                 $user->groups()->sync($request->input('groups'));
             } else {
                 $user->groups()->sync([]);
