@@ -21,7 +21,7 @@
               <li class="active">
                   <a href="#users" data-toggle="tab">
                         <span class="hidden-lg hidden-md">
-                            <i class="fas fa-info-circle fa-2x"></i>
+                            <i class="fas fa-users fa-2x"></i>
                         </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('general.users') }}
@@ -46,7 +46,7 @@
               <li>
                   <a href="#accessories" data-toggle="tab">
                     <span class="hidden-lg hidden-md">
-                        <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
+                        <i class="fas fa-keyboard fa-2x" aria-hidden="true"></i>
                     </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('general.accessories') }}
@@ -58,7 +58,7 @@
               <li>
                   <a href="#consumables" data-toggle="tab">
                     <span class="hidden-lg hidden-md">
-                        <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
+                        <i class="fas fa-tint fa-2x" aria-hidden="true"></i>
                     </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('general.consumables') }}
@@ -70,7 +70,7 @@
               <li>
                   <a href="#components" data-toggle="tab">
                     <span class="hidden-lg hidden-md">
-                        <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
+                        <i class="fas fa-hdd fa-2x" aria-hidden="true"></i>
                     </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('general.components') }}
@@ -144,7 +144,7 @@
 
                       </div><!-- /.table-responsive -->
               </div><!-- /.tab-pane -->
-
+              
 
 
               <div class="tab-pane" id="accessories">
