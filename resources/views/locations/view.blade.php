@@ -21,7 +21,7 @@
               <li class="active">
                   <a href="#users" data-toggle="tab">
                         <span class="hidden-lg hidden-md">
-                            <i class="fas fa-info-circle fa-2x"></i>
+                            <i class="fas fa-users fa-2x"></i>
                         </span>
                       <span class="hidden-xs hidden-sm">
                           {{ trans('general.users') }}
