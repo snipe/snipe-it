@@ -255,18 +255,12 @@ class BulkUsersController extends Controller
         $asset_owners= Asset::all()->where('assigned_to', '!=', null)->pluck('assigned_to')->toArray();
         $license_owners = LicenseSeat::all()->where('assigned_to', '!=', null)->pluck('assigned_to')->toArray();
         $accessory_owners = User::has('Accessories')->get()->pluck('id')->toArray();
-//
-
-//        $component_owners =Component::assets()->where('user_id', '!=', null)->pluck('user_id')->toArray();
 
         $all_assets_checked= array_merge($asset_owners, $license_owners, $accessory_owners);
         $user_list= array_unique($all_assets_checked, SORT_NUMERIC);
 
         return $user_list;
-//            ->with('assigned_to')->where('assigned_to', '!=', null)->first()->pluck('assigned_to');
-//            ->wherePivot('assigned_to')->pluck('assigned_to')->toArray();
-//
-//
+
     }
     /**
      * Emails All users a list of assigned assets
@@ -279,7 +273,6 @@ class BulkUsersController extends Controller
     {
         $this->authorize('view', User::class);
         $users= $this->findAssetOwners();
-
 
         foreach($users as $user) {
 
