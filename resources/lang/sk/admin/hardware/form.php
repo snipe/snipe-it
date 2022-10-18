@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Chystáte sa odstrániť :asset_count majetky.',
     'bulk_update'		=> 'Hromadná úprava majetku',
     'bulk_update_help'	=> 'Tento formulár umožňuje hromadnú úpravu majetku. Vyplňte iba položky, ktoré chcete zmeniť. Akékoľvek prázdne položky zostanú nezmenené. ',
-    'bulk_update_warn'	=> 'Chystáte sa upraviť vlastnosti :asset_count majetkov.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Odovzdané',
     'checkout_date'		=> 'Dátum odovzdania',
     'checkin_date'		=> 'Dátum prijatia',
@@ -46,6 +46,6 @@ return [
     'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
     'asset_deployable' => 'That status is deployable. This asset can be checked out.',
     'processing_spinner' => 'Processing...',
-    'optional_infos'  => 'Optional Information',
-    'order_details'   => 'Order Related Information'
+    'optional_infos'  => 'Nepovinné informácie',
+    'order_details'   => 'Informácie súvisiace s objednávkou'
 ];

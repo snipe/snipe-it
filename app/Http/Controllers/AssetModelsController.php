@@ -471,7 +471,7 @@ class AssetModelsController extends Controller
             // (we are at model level, the rule still applies when creating a new asset using this model)
             $index = array_search('required', $validation);
             if ($index !== false){
-                unset($validation[$index]);
+                $validation[$index] = 'nullable';
             }
             $rules[$fieldset] = $validation;
         }

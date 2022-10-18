@@ -10,7 +10,7 @@ return [
     'checkoutto' 	=> 'Видано',
     'current_value' => 'Current Value',
     'diff' 			=> 'Різниця',
-    'dl_csv' 		=> 'Download CSV',
+    'dl_csv' 		=> 'Завантажити CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
     'location' 		=> 'Розташування',
@@ -25,6 +25,6 @@ return [
     'assigned_to'    => 'Assigned To',
     'requesting_user' => 'Requesting User',
     'requested_date' => 'Requested Date',
-    'changed'       => 'Changed',
+    'changed'       => 'Змінено',
     'icon' => 'Icon',
 ];

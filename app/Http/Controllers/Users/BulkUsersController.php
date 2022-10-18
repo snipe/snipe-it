@@ -231,8 +231,14 @@ class BulkUsersController extends Controller
     protected function logItemCheckinAndDelete($items, $itemType)
     {
         foreach ($items as $item) {
+            $item_id = $item->id;
             $logAction = new Actionlog();
-            $logAction->item_id = $item->id;
+
+            if($itemType == License::class){
+                $item_id = $item->license_id;
+            }
+
+            $logAction->item_id = $item_id;
             // We can't rely on get_class here because the licenses/accessories fetched above are not eloquent models, but simply arrays.
             $logAction->item_type = $itemType;
             $logAction->target_id = $item->assigned_to;

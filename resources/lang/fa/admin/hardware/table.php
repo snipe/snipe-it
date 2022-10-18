@@ -4,11 +4,13 @@ return [
 
     'asset_tag'   	=> 'برچسب دارایی',
     'asset_model'       => 'مدل',
-    'book_value'  	=> 'Current Value',
+    'book_value'  	=> 'ارزش فعلی
+',
     'change' 		=> '/ خارج',
     'checkout_date' => 'چک کردن تاریخ',
     'checkoutto' 	=> 'قفل شده',
-    'current_value' => 'Current Value',
+    'current_value' => 'ارزش فعلی
+',
     'diff' 			=> 'دیف',
     'dl_csv' 		=> 'دانلود CSV',
     'eol' 			=> 'EOL',
@@ -22,10 +24,13 @@ return [
     'image'		    => 'دستگاه تصویر
 ',
     'days_without_acceptance' => 'روز بدون پذیرش',
-    'monthly_depreciation' => 'Monthly Depreciation',
-    'assigned_to'    => 'Assigned To',
-    'requesting_user' => 'Requesting User',
-    'requested_date' => 'Requested Date',
-    'changed'       => 'Changed',
-    'icon' => 'Icon',
+    'monthly_depreciation' => 'استهلاک ماهانه
+',
+    'assigned_to'    => 'اختصاص یافته به
+',
+    'requesting_user' => 'کاربر درخواست کننده
+',
+    'requested_date' => 'تاریخ درخواست',
+    'changed'       => 'تغییر انجام شد',
+    'icon' => 'آیکون',
 ];

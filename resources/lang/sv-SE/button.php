@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'Åtgärder',
     'add'    	                => 'Lägg till ny',
     'cancel'                    => 'Avbryt',
-    'checkin_and_delete'  	    => 'Checkin All / Delete User',
+    'checkin_and_delete'  	    => 'Checka in alla / ta bort användare',
     'delete'  	                => 'Radera',
     'edit'    	                => 'Ändra',
     'restore' 	                => 'Återställ',

@@ -13,8 +13,8 @@ return array(
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed' => 'این مدارک با سوابق ما مطابقت ندارد.',
+    'password' => 'رمز ورود ارائه شده نادرست است.',
+    'throttle' => 'دفعات تلاش شما برای ورود بیش از حد مجاز است. لطفا پس از :seconds ثانیه مجددا تلاش فرمایید.',
 
 );

@@ -46,7 +46,9 @@
                                         <input type='radio' name="default_values[{{ $field->id }}]" value="{{$field_value}}" {{ $field->defaultValue($model_id) == $field_value ? 'checked="checked"': '' }} />{{ $field_value }}<br />
                                     @endforeach
                                 @elseif($field->element == "checkbox")
-                                    <input type='checkbox' name="default_values[{{ $field->id }}]" {{ $field->defaultValue($model_id) ? 'checked="checked"': '' }}/>
+                                    @foreach(explode("\r\n", $field->field_values) as $field_value)
+                                        <input type='checkbox' name="default_values[{{ $field->id }}][]" value="{{$field_value}}" {{ in_array($field_value, explode(', ',$field->defaultValue($model_id))) ? 'checked="checked"': '' }} /> {{ $field_value }}<br />
+                                    @endforeach
                                 @else
                                     <span class="help-block form-error">
                                         Unknown field element: {{ $field->element }}

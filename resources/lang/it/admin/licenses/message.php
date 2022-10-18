@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'La Licenza non esiste.',
+    'does_not_exist' => 'Il database non esiste o non si dispone delle autorizzazioni per la connessione.',
     'user_does_not_exist' => 'L\'utente non esiste.',
     'asset_does_not_exist' 	=> 'Il bene che si sta cercando di associare a questa licenza non esiste.',
     'owner_doesnt_match_asset' => 'Il bene che si sta cercando di associare a questa licenza è di proprietà di una persona diversa dal soggetto selezionato nel menù a discesa.',

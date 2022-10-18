@@ -34,7 +34,7 @@ return [
     'admin_permission_warning' => '只有拥有管理员权限或更大权限的用户才能授予用户管理员权限。',
     'remove_group_memberships' => '删除群组成员',
     'warning_deletion' => '警告：',
-    'warning_deletion_information' => 'You are about to checkin ALL items from the :count user(s) listed below. Super admin names are highlighted in red.',
+    'warning_deletion_information' => '下列 :count 个用户的所有物品将要归还。超级管理员名称高亮为红色。',
     'update_user_assets_status' => '将这些用户的所有资产更新到此状态',
     'checkin_user_properties' => '归还与这些用户相关的所有资产',
     'remote_label'   => '这是一个远程用户',

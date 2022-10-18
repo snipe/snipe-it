@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'Korisnik je otkazao zahtev za stavke na Web lokaciji',
     'a_user_requested' => 'Korisnik je zatražio stavke na Web lokaciji',
     'accessory_name' => 'Naziv dodatne opreme, pribora:',
@@ -23,7 +25,7 @@ return [
     'Confirm_accessory_delivery' => 'Potvrda dostave opreme',
     'Confirm_license_delivery' => 'Potvrda dostave licence',
     'Confirm_asset_delivery' => 'Potvrda dostave imovine',
-    'Confirm_consumable_delivery' => 'Consumable delivery confirmation',
+    'Confirm_consumable_delivery' => 'Potvrda isporuke potrošnog materijala',
     'current_QTY' => 'Trenutna QTY',
     'Days' => 'Dani',
     'days' => 'Dana',
@@ -60,7 +62,7 @@ return [
     'test_mail_text' => 'This is a test from the Snipe-IT Asset Management System. If you got this, mail is working :)',
     'the_following_item' => 'The following item has been checked in: ',
     'low_inventory_alert' => 'Postoji :count artikla ispod minimalne zalihe ili će uskoro biti nizak. |Postoje :count artikla koji su ispod minimalne zalihe ili će uskoro biti.',
-    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'Postoji :stanje licenci koja/e ističe u narednih :treshold dana.|Postoje :count licenci koje ističu u narednih :treshold dana.',
     'license_expiring_alert' => 'Postoji :count licenci koja/e ističe u narednih treshold dana.|Postoje :count licencei koje ističu u narednih :treshold dana.',
     'to_reset' => 'Da biste resetovali svoju :web lozinku, ispunite ovaj obrazac:',
     'type' => 'Tip',
@@ -73,8 +75,8 @@ return [
     'Accessory_Checkin_Notification' => 'Oprema razdužena',
     'Asset_Checkin_Notification' => 'Imovina razdužena',
     'License_Checkin_Notification' => 'Licenca razdužena',
-    'Expected_Checkin_Report' => 'Expected asset checkin report',
-    'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
-    'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
+    'Expected_Checkin_Report' => 'Izveštaj o očekivanoj proveri imovine',
+    'Expected_Checkin_Notification' => 'Izveštaj o očekivanoj proveri imovine',
+    'Expected_Checkin_Date' => 'Imovina koja vam je odjavljena treba da bude ponovo prijavljena :date',
     'your_assets' => 'Pregledaj svoju imovinu',
 ];

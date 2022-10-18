@@ -8,7 +8,7 @@ return array(
 
     'success' => array(
         'create' => 'Die Gruppe wurde erfolgreich erstellt.',
-        'update' => 'Die Gruppe wurde erfolgreich geändert.',
+        'update' => 'Die Gruppe wurde erfolgreich aktualisiert.',
         'delete' => 'Die Gruppe wurde erfolgreich gelöscht.',
     ),
 

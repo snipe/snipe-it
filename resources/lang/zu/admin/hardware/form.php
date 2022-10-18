@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Uzosusa: impahla ye-asethi_diza.',
     'bulk_update'		=> 'Ukuvuselela amafa we-Bulk',
     'bulk_update_help'	=> 'Leli fomu likuvumela ukuthi ubuyekeze amafa amaningi ngesikhathi esisodwa. Gcwalisa kuphela amasimu okudingayo ukuguqula. Noma yiziphi izinkambu ezishiywe zingenakushintshwa.',
-    'bulk_update_warn'	=> 'Usuzohlela izakhiwo ze-asethi_impahla yamanani.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Ikhiyiwe Kuzo',
     'checkout_date'		=> 'Usuku lokuhlola',
     'checkin_date'		=> 'Usuku lokuhlola',

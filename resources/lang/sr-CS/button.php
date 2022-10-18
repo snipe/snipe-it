@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'Akcije',
     'add'    	                => 'Dodaj Novo',
     'cancel'                    => 'Otkaži',
-    'checkin_and_delete'  	    => 'Checkin All / Delete User',
+    'checkin_and_delete'  	    => 'Prijava i brisanje korisnika',
     'delete'  	                => 'Izbrisati',
     'edit'    	                => 'Uredi',
     'restore' 	                => 'Vratiti',

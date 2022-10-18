@@ -3,7 +3,7 @@
 return array(
 
     'assigned_to'   	=> 'Zugewiesen an',
-    'checkout'   		=> 'Zurücknehmen/Herausgeben',
+    'checkout'   		=> 'Eingang/Ausgang',
     'id'      			=> 'ID',
     'license_email'   	=> 'Lizenziert für Email',
     'license_name'   	=> 'Lizenziert für',

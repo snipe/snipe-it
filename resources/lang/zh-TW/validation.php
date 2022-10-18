@@ -90,14 +90,14 @@ return [
     'uploaded'             => ':attribute 上傳失敗',
     'url'                  => ':attribute 格式不正確',
     'unique_undeleted'     => ':attribute 必須是唯一值',
-    'non_circular'         => 'The :attribute must not create a circular reference.',
-    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
-    'letters'              => 'Password must contain at least one letter.',
-    'numbers'              => 'Password must contain at least one number.',
-    'case_diff'            => 'Password must use mixed case.',
-    'symbols'              => 'Password must contain symbols.',
+    'non_circular'         => ':attribule 屬性不能建立一個循環參考',
+    'disallow_same_pwd_as_user_fields' => '密碼不可以和使用者名稱相同',
+    'letters'              => '密碼至少必須包含 1 個字母。',
+    'numbers'              => '密碼至少必須包含 1 個數字。',
+    'case_diff'            => '密碼必須使用大小寫混合',
+    'symbols'              => '密碼必須包含符號',
     'gte'                  => [
-        'numeric'          => 'Value cannot be negative'
+        'numeric'          => '值不能為負'
     ],
 
 

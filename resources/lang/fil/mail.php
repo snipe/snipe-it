@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'Ang gumagamit o user ay nag-kansela ng rekwest na aytem sa website',
     'a_user_requested' => 'Ang gumagamit ay nag-rekwest ng aytem sa website',
     'accessory_name' => 'Ang Pangalan ng Aksesorya:',

@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'Lietotājs vietnē ir atcēlis objekta pieprasījumu',
     'a_user_requested' => 'Lietotājs ir pieprasījis vienumu vietnē',
     'accessory_name' => 'Piederumu nosaukums:',

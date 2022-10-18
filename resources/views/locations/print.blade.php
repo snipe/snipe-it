@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>{{ trans('admin/locations/general.assigned_location', array('location' => $location->present()->fullName())) }} </title>
+    <title>{{ trans('general.assigned_to', array('name' => $location->present()->fullName())) }} </title>
     <style>
         body {
             font-family: "Arial, Helvetica", sans-serif;
@@ -49,16 +49,15 @@
     @endif
 @endif
 
-<h2>{{ trans('admin/locations/general.asset_management_system') }}</h2>
-<b>{{ trans('admin/locations/general.assigned_to') }}</b> {{ $location->present()->fullName() }}
+<h2>{{ trans('general.assigned_to', array('name' => $location->present()->fullName())) }}</h2>
     @if ($parent)
         {{ $parent->present()->fullName() }}
     @endif
-<br>
+
 @if ($manager)
-    <b>{{ trans('admin/locations/general.manager') }}</b> {{ $manager->present()->fullName() }}<br>
+    <b>{{ trans('general.manager') }}</b> {{ $manager->present()->fullName() }}<br>
 @endif
-<b>{{ trans('admin/locations/general.date') }}</b>  {{ \App\Helpers\Helper::getFormattedDateObject(now(), 'datetime', false) }}<br><br>
+<b>{{ trans('general.date') }}</b>  {{ \App\Helpers\Helper::getFormattedDateObject(now(), 'datetime', false) }}<br><br>
 
 @if ($users->count() > 0)
     @php

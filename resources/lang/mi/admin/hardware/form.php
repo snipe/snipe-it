@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Kei te tata koe ki te muku: te hua moni rawa.',
     'bulk_update'		=> 'Kaupapa Whakatairanga Nui',
     'bulk_update_help'	=> 'Ko tenei puka ka taea e koe te whakahou i nga hua maha i te wa kotahi. Whakakiia nga mara e hiahia ana koe ki te huri. Ko nga mara katoa e mahue ana ka noho tonu.',
-    'bulk_update_warn'	=> 'Kei te tata koe ki te whakatika i nga taonga o: rawa hua.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Kua aroahia ki te',
     'checkout_date'		=> 'Rā Rārangi',
     'checkin_date'		=> 'Rangi Titiro',

@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'Tá úsáideoir tar éis iarratas ar mhír a chealú ar an láithreán gréasáin',
     'a_user_requested' => 'D\'iarr úsáideoir mír ar an láithreán gréasáin',
     'accessory_name' => 'Ainm Cúlpháirtí:',

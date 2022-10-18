@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => '라이선스가 존재하지 않습니다.',
+    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
     'user_does_not_exist' => '사용자가 존재하지 않습니다.',
     'asset_does_not_exist' 	=> '이 라이선스와 연결하려는 자산이 존재하지 않습니다.',
     'owner_doesnt_match_asset' => '이 라이센스와 연결하려고하는 자산은 드롭 다운 목록에서 선택한 사람이 아닌 다른 누군가가 소유하고 있습니다.',

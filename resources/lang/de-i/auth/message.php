@@ -7,38 +7,38 @@ return array(
     'account_not_activated'  => 'Das Benutzerkonto ist nicht aktiviert.',
     'account_suspended'      => 'Dieses Benutzerkonto ist gesperrt.',
     'account_banned'         => 'Dieses Benutzerkonto wurde ausgeschlossen.',
-    'throttle'               => 'Zu viele fehlgeschlagene Anmeldeversuche. Bitte versuchen Sie es in :minutes Minuten erneut.',
+    'throttle'               => 'Zu viele fehlgeschlagene Anmeldeversuche. Bitte versuche es in :minutes Minuten erneut.',
 
     'two_factor' => array(
-        'already_enrolled'      => 'Ihr Gerät ist bereits eingeschrieben.',
-        'success'               => 'Sie haben sich erfolgreich eingeloggt.',
+        'already_enrolled'      => 'Dein Gerät ist bereits eingeschrieben.',
+        'success'               => 'Du hast Dich erfolgreich angemeldet.',
         'code_required'         => 'Zwei-Faktor-Code ist erforderlich.',
         'invalid_code'          => 'Zwei-Faktor-Code ist ungültig.',
     ),
 
     'signin' => array(
-        'error'   => 'Bei der Anmeldung ist ein Problem aufgetreten, bitte versuchen Sie es erneut.',
-        'success' => 'Sie haben sich erfolgreich eingeloggt.',
+        'error'   => 'Bei der Anmeldung ist ein Problem aufgetreten, bitte versuche es erneut.',
+        'success' => 'Du hast Dich erfolgreich angemeldet.',
     ),
 
     'logout' => array(
-        'error'   => 'Beim Ausloggen ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
-        'success' => 'Sie haben sich erfolgreich abgemeldet.',
+        'error'   => 'Beim Abmelden ist ein Fehler aufgetreten. Bitte versuche es erneut.',
+        'success' => 'Du hast Dich erfolgreich abgemeldet.',
     ),
 
     'signup' => array(
-        'error'   => 'Bei der Erstellung Ihres Kontos ist ein Problem aufgetreten, bitte versuchen Sie es erneut.',
+        'error'   => 'Bei der Erstellung Deines Kontos ist ein Problem aufgetreten, bitte versuche es erneut.',
         'success' => 'Die Erstellung des Kontos war erfolgreich.',
     ),
 
     'forgot-password' => array(
-        'error'   => 'Beim abrufen des Codes zur Passwortzurücksetzung ist ein Fehler aufgetreten, bitte versuchen sie es erneut.',
-        'success' => 'Wenn diese E-Mail-Adresse in unserem System existiert, wurde eine E-Mail zum Wiederherstellen des Passworts gesendet.',
+        'error'   => 'Beim abrufen des Codes zur Passwortzurücksetzung ist ein Fehler aufgetreten, bitte versuche es erneut.',
+        'success' => 'Falls diese E-Mail-Adresse in unserem System existiert, wurde eine E-Mail zum Wiederherstellen des Passworts gesendet.',
     ),
 
     'forgot-password-confirm' => array(
-        'error'   => 'Beim zurücksetzen Ihres Passworts ist ein Fehler aufgetreten, bitte versuchen sie es erneut.',
-        'success' => 'Ihr Passwort wurde erfolgreich zurückgesetzt.',
+        'error'   => 'Beim zurücksetzen Deines Passworts ist ein Fehler aufgetreten, bitte versuche es erneut.',
+        'success' => 'Dein Passwort wurde erfolgreich zurückgesetzt.',
     ),
 
 

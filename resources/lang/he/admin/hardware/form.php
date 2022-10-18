@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'אתה עומד למחוק את הנכסים: asset_count.',
     'bulk_update'		=> 'עדכון גורפת נכסים',
     'bulk_update_help'	=> 'טופס זה מאפשר לך לעדכן מספר נכסים בבת אחת. מלא רק את השדות שאתה צריך לשנות. כל השדות שנותרו ריקים יישארו ללא שינוי.',
-    'bulk_update_warn'	=> 'אתה עומד לערוך את המאפיינים של: asset_count נכסים.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'הוצא אל',
     'checkout_date'		=> 'תבדוק את התאריך',
     'checkin_date'		=> 'תאריך הגעה',

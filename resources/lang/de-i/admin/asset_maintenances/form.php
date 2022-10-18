@@ -6,9 +6,9 @@
         'start_date'             => 'Startdatum',
         'completion_date'        => 'Fertigstellungstermin',
         'cost'                   => 'Kosten',
-        'is_warranty'            => 'Nachbesserungsarbeiten',
+        'is_warranty'            => 'Garantie Verbesserung',
         'asset_maintenance_time' => 'Tage',
-        'notes'                  => 'Anmerkungen',
+        'notes'                  => 'Notizen',
         'update'                 => 'Aktualisieren',
         'create'                 => 'Erstellen'
     ];

@@ -372,6 +372,18 @@ Resultados da Sincronização',
     'bulk_soft_delete'      =>'Also soft-delete these users. Their asset history will remain intact unless/until you purge deleted records in the Admin Settings.',
     'bulk_checkin_delete_success' => 'Your selected users have been deleted and their items have been checked in.',
     'bulk_checkin_success' => 'The items for the selected users have been checked in.',
+    'set_to_null' => 'Excluir valores para este ativo,Excluir valores para todos os :asset_count ativos ',
+    'na_no_purchase_date'   => 'N/A - Nenhuma data de compra fornecida',
+    'assets_by_status'      => 'Ativos por Status',
+    'assets_by_status_type'      => 'Ativos por Tipo de Status',
+    'pie_chart_type'        => 'Painel tipo Gráfico de Pizza',
+    'hello_name'            => 'Olá, %name%!',
+    'unaccepted_profile_warning'   => 'Você tem :count itens que requerem aceitação. Clique aqui para aceitar ou recusá-los',
+    'start_date'            => 'Start Date',
+    'end_date'            => 'End Date',
+    'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
+    'placeholder_kit'       => 'Select a kit'
+
 
 
 ];

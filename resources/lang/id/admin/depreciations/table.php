@@ -6,6 +6,6 @@ return [
     'months'   => 'Bulan',
     'term'   => 'Syarat',
     'title'      => 'Nama ',
-    'depreciation_min' => 'Floor Value',
+    'depreciation_min' => 'Nilai Penyusutan',
 
 ];

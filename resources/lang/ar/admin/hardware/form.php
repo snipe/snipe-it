@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'أنت على وشك حذف :asset_count من الأصول.',
     'bulk_update'		=> 'تحديث للأصول المحددة',
     'bulk_update_help'	=> 'يتيح لك هذا النموذج تحديث عدة أصول دفعة واحدة. قم بملء الحقول التي تحتاج إلى تغييرها. ستظل أية حقول فارغة بدون تغيير. ',
-    'bulk_update_warn'	=> 'أنت على وشك تعديل خصائص :asset_count من الأصول.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'تم الاخراج إلى',
     'checkout_date'		=> 'تاريخ الاخراج',
     'checkin_date'		=> 'تاريخ الادخال',

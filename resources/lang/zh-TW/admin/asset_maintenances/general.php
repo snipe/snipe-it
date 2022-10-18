@@ -11,6 +11,6 @@
         'calibration'        => '校準',
         'software_support'   => '軟體支援',
         'hardware_support'   => '硬體支援',
-        'configuration_change'   => 'Configuration Change',
-        'pat_test'           => 'PAT Test',
+        'configuration_change'   => '設定改變',
+        'pat_test'           => 'PAT 測試',
     ];

@@ -5,7 +5,7 @@ return array(
 	'eula_text'      			=> 'Gebruikersovereenkomst',
     'id'      					=> 'ID',
     'require_acceptance'      	=> 'Acceptatie',
-    'title'      				=> 'Accessoire Naam',
+    'title'      				=> 'Accessoirenaam',
 
 
 );

@@ -3,6 +3,7 @@
 namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
+use App\Models\Depreciable;
 use App\Models\Depreciation;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;

@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Licens eksistere ikke.',
+    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
     'user_does_not_exist' => 'Bruger eksisterer ikke.',
     'asset_does_not_exist' 	=> 'Aktivet, du forsøger at associere med denne licens, findes ikke.',
     'owner_doesnt_match_asset' => 'Aktivet, du forsøger at associere med denne licens, ejes af en anden end den person, der er valgt i Tildelt-rullemenuen.',

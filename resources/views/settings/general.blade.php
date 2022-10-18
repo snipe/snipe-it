@@ -287,6 +287,21 @@
                                {{ Form::checkbox('show_in_model_list[]', 'model_number', old('show_in_model_list', $snipeSettings->modellistCheckedValue('model_number')),array('class' => 'minimal', 'aria-label'=>'show_in_model_list' )) }} {{ trans('general.model_no') }}<br>
                            </div>
                        </div>
+
+
+                       <!-- dash chart -->
+                       <div class="form-group {{ $errors->has('dash_chart_type') ? 'error' : '' }}">
+                           <div class="col-md-3">
+                               {{ Form::label('show_in_model_list',
+                                              trans('general.pie_chart_type')) }}
+                           </div>
+                           <div class="col-md-9">
+                               {{ Form::select('dash_chart_type', array(
+                                   'name' => 'Status Label Name',
+                                   'type' => 'Status Label Type'), Request::old('dash_chart_type', $setting->dash_chart_type), ['class' =>'select2', 'style' => 'width: 80%']) }}
+                           </div>
+                       </div>
+
                        
                        <!-- Depreciation method -->
                        <div class="form-group {{ $errors->has('depreciation_method') ? 'error' : '' }}">

@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Lisensi tidak ada.',
+    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
     'user_does_not_exist' => 'Pengguna tidak ada.',
     'asset_does_not_exist' 	=> 'Aset yang ingin Anda kaitkan dengan lisensi ini tidak ada.',
     'owner_doesnt_match_asset' => 'Aset yang ingin Anda kaitkan dengan lisensi ini dimiliki oleh orang lain selain orang yang dipilih di dropdown yang ditugaskan.',

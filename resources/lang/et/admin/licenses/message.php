@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Luba pole olemas.',
+    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
     'user_does_not_exist' => 'Kasutajat ei eksisteeri.',
     'asset_does_not_exist' 	=> 'Vara, mida proovite selle litsentsiga siduda, ei ole olemas.',
     'owner_doesnt_match_asset' => 'Vara, mida proovite selle litsentsiga siduda, kuulub somene-le, välja arvatud rippmenüüs määratud isik.',

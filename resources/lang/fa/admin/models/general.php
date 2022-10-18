@@ -3,10 +3,12 @@
 return array(
     'about_models_title'     => 'درباره مدل های دارایی',
     'about_models_text'           => 'مدل های دارایی یک راه برای گروه بندی دارایی های یکسان هستند. "MBP 2013"، "IPhone 6s" و غیره',
-    'deleted'  					        => 'This model has been deleted.',
-    'bulk_delete'               => 'Bulk Delete Asset Models',
-    'bulk_delete_help'               => 'Use the checkboxes below to confirm the deletion of the selected asset models. Asset models that have assets associated with them cannot be deleted until the assets are associated with a different model.',
-    'bulk_delete_warn'          => 'You are about to delete :model_count asset models.',
+    'deleted'  					        => 'این نمودار حذف شده است.',
+    'bulk_delete'               => 'حذف دسته جمعی مدل های دارایی',
+    'bulk_delete_help'               => 'برای تأیید حذف مدل‌های دارایی انتخاب شده از کادرهای تأیید زیر استفاده کنید. مدل‌های دارایی‌هایی که دارایی‌های مرتبط با آن‌ها هستند، تا زمانی که دارایی‌ها با مدل دیگری مرتبط نشوند، قابل حذف نیستند.
+',
+    'bulk_delete_warn'          => 'شما در حال حذف مدل های دارایی :model_count هستید.
+',
     'restore'                   => 'بازیابی مدل',
     'requestable'               => 'کاربران ممکن است از این مدل درخواست کنند',
 	'show_mac_address'			      => 'نمایش قسمت آدرس MAC در دارایی در این مدل',
@@ -15,5 +17,5 @@ return array(
     'fieldset'                  => 'تنظیمات فیلد',
     'no_custom_field'           => 'بدون زمینه های سفارشی
 ',
-    'add_default_values'        => 'Add default values',
+    'add_default_values'        => 'مقادیر پیش فرض',
 );

@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'הרישיון אינו קיים.',
+    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
     'user_does_not_exist' => 'משתמש לא קיים.',
     'asset_does_not_exist' 	=> 'הנכס שאתה מנסה לשייך לרישיון זה אינו קיים.',
     'owner_doesnt_match_asset' => 'הנכס שאתה מנסה לשייך לרישיון זה נמצא בבעלות somene אחר מאשר האדם שנבחר שהוקצה לתפריט הנפתח.',

@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Olet poistamassa :asset_count laitetta.',
     'bulk_update'		=> 'Massapäivitä laitteita',
     'bulk_update_help'	=> 'Tämän lomakkeen avulla voit päivittää useita laitteita kerralla. Täytä vain ne kentät joita haluat muuttaa. Tyhjäksi jätettyjä kenttiä ei päivitetä. ',
-    'bulk_update_warn'	=> 'Olet päivittämässä :asset_count laitteen ominaisuuksia.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Luovutettuna',
     'checkout_date'		=> 'Luovutuspäivä',
     'checkin_date'		=> 'Palautuspäivä',

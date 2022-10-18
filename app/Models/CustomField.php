@@ -338,7 +338,7 @@ class CustomField extends Model
         $id = $this->id ? $this->id : 'xx';
 
         if (! function_exists('transliterator_transliterate')) {
-            $long_slug = '_snipeit_'.str_slug(\Patchwork\Utf8::utf8_encode(trim($name)), '_');
+            $long_slug = '_snipeit_'.str_slug(mb_convert_encoding(trim($name),"UTF-8"), '_');
         } else {
             $long_slug = '_snipeit_'.Utf8Slugger::slugify($name, '_');
         }

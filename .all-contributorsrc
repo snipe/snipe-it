@@ -2702,6 +2702,69 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "dsferruzza",
+      "name": "David Sferruzza",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1931963?v=4",
+      "profile": "https://david.sferruzza.fr/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "rnelsonee",
+      "name": "Rick Nelson",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19511639?v=4",
+      "profile": "https://github.com/rnelsonee",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "BasO12",
+      "name": "BasO12",
+      "avatar_url": "https://avatars.githubusercontent.com/u/94169344?v=4",
+      "profile": "https://github.com/BasO12",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Vautia",
+      "name": "Vautia",
+      "avatar_url": "https://avatars.githubusercontent.com/u/111710123?v=4",
+      "profile": "https://github.com/Vautia",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "chartjes",
+      "name": "Chris Hartjes",
+      "avatar_url": "https://avatars.githubusercontent.com/u/28321?v=4",
+      "profile": "http://www.littlehart.net/atthekeyboard",
+      "contributions": [
+        "tests"
+      ]
+    },
+    {
+      "login": "geo-chen",
+      "name": "geo-chen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2404584?v=4",
+      "profile": "https://github.com/geo-chen",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "nh314",
+      "name": "Phan Nguyen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6006620?v=4",
+      "profile": "https://github.com/nh314",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }

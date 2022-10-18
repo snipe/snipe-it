@@ -343,6 +343,30 @@
                         </div>
                       </div>
 
+                   <!-- start date -->
+                   @if ($user->start_date)
+                       <div class="row">
+                           <div class="col-md-3">
+                               {{ trans('general.start_date') }}
+                           </div>
+                           <div class="col-md-9">
+                               {{ \App\Helpers\Helper::getFormattedDateObject($user->start_date, 'date', false) }}
+                           </div>
+                       </div>
+                   @endif
+
+                   <!-- end date -->
+                   @if ($user->end_date)
+                       <div class="row">
+                           <div class="col-md-3">
+                               {{ trans('general.end_date') }}
+                           </div>
+                           <div class="col-md-9">
+                               {{ \App\Helpers\Helper::getFormattedDateObject($user->end_date, 'date', false) }}
+                           </div>
+                       </div>
+                   @endif
+
                     @if ($user->jobtitle)
                      <!-- jobtitle -->
                      <div class="row">
@@ -842,7 +866,7 @@
                                 {{ $file->filename }}
                             </td>
                             <td>
-                                {{ Helper::formatFilesizeUnits(filesize(storage_path('private_uploads/users/').$file->filename)) }}
+                                {{ Helper::formatFilesizeUnits(Storage::size('private_uploads/users/'.$file->filename)) }}
                             </td>
 
                             <td>

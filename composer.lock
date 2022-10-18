@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9ddc3034bff0b7422031de3ea9809b2a",
+    "content-hash": "0c1f3848f8c9ede2b5f1513e4feaa7d7",
     "packages": [
         {
             "name": "alek13/slack",
@@ -78,19 +78,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/grokability/laravel-scim-server.git",
-                "reference": "d0e3d7c0b5da2ec76283b8a2fa2e672a91596509"
+                "reference": "9e7a8fd51a7380bc18ca1f01256574d75a2c6b49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/grokability/laravel-scim-server/zipball/d0e3d7c0b5da2ec76283b8a2fa2e672a91596509",
-                "reference": "d0e3d7c0b5da2ec76283b8a2fa2e672a91596509",
+                "url": "https://api.github.com/repos/grokability/laravel-scim-server/zipball/9e7a8fd51a7380bc18ca1f01256574d75a2c6b49",
+                "reference": "9e7a8fd51a7380bc18ca1f01256574d75a2c6b49",
                 "shasum": ""
             },
             "require": {
                 "illuminate/console": "^6.0|^7.0|^8.0",
                 "illuminate/database": "^6.0|^7.0|^8.0",
                 "illuminate/support": "^6.0|^7.0|^8.0",
-                "php": "^7.0|^8.0",
+                "php": "^7.4|^8.0",
                 "tmilos/scim-filter-parser": "^1.3",
                 "tmilos/scim-schema": "^0.1.0"
             },
@@ -133,7 +133,7 @@
             "support": {
                 "source": "https://github.com/grokability/laravel-scim-server/tree/master"
             },
-            "time": "2022-07-18T22:15:42+00:00"
+            "time": "2022-10-06T00:42:37+00:00"
         },
         {
             "name": "asm89/stack-cors",
@@ -6304,83 +6304,6 @@
             "time": "2020-10-15T08:29:30+00:00"
         },
         {
-            "name": "patchwork/utf8",
-            "version": "v1.3.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tchwork/utf8.git",
-                "reference": "e1fa4d4a57896d074c9a8d01742b688d5db4e9d5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tchwork/utf8/zipball/e1fa4d4a57896d074c9a8d01742b688d5db4e9d5",
-                "reference": "e1fa4d4a57896d074c9a8d01742b688d5db4e9d5",
-                "shasum": ""
-            },
-            "require": {
-                "lib-pcre": ">=7.3",
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "symfony/phpunit-bridge": "^3.4|^4.4"
-            },
-            "suggest": {
-                "ext-iconv": "Use iconv for best performance",
-                "ext-intl": "Use Intl for best performance",
-                "ext-mbstring": "Use Mbstring for best performance",
-                "ext-wfio": "Use WFIO for UTF-8 filesystem access on Windows"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Patchwork\\": "src/Patchwork/"
-                },
-                "classmap": [
-                    "src/Normalizer.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "(Apache-2.0 or GPL-2.0)"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                }
-            ],
-            "description": "Portable and performant UTF-8, Unicode and Grapheme Clusters for PHP",
-            "homepage": "https://github.com/tchwork/utf8",
-            "keywords": [
-                "grapheme",
-                "i18n",
-                "unicode",
-                "utf-8",
-                "utf8"
-            ],
-            "support": {
-                "issues": "https://github.com/tchwork/utf8/issues",
-                "source": "https://github.com/tchwork/utf8/tree/v1.3.3"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/nicolas-grekas",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/patchwork/utf8",
-                    "type": "tidelift"
-                }
-            ],
-            "abandoned": "symfony/polyfill-mbstring or symfony/string",
-            "time": "2021-01-07T16:38:58+00:00"
-        },
-        {
             "name": "phenx/php-font-lib",
             "version": "0.5.4",
             "source": {
@@ -12132,6 +12055,7 @@
             "time": "2022-03-03T13:19:32+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "n98/junit-xml",
             "version": "1.1.0",
             "source": {
@@ -12248,6 +12172,8 @@
             "time": "2022-06-21T05:52:47+00:00"
         },
         {
+=======
+>>>>>>> develop
             "name": "phar-io/manifest",
             "version": "2.0.3",
             "source": {
@@ -13658,6 +13584,7 @@
             "time": "2022-08-03T12:57:57+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "symfony/yaml",
             "version": "v5.4.12",
             "source": {
@@ -13733,6 +13660,8 @@
             "time": "2022-08-02T15:52:22+00:00"
         },
         {
+=======
+>>>>>>> develop
             "name": "theseer/tokenizer",
             "version": "1.2.1",
             "source": {

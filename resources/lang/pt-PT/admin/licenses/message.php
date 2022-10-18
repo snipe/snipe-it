@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'A Licença não existe.',
+    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
     'user_does_not_exist' => 'Utilizador não existe.',
     'asset_does_not_exist' 	=> 'O artigo que está a tentar associar com esta licença não existe.',
     'owner_doesnt_match_asset' => 'O proprietário do artigo que está a tentar associar com esta licença não é pessoa selecionada na dropdown.',

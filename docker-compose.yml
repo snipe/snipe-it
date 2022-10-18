@@ -26,6 +26,8 @@ services:
     - .env.docker
     networks:
     - snipeit-backend
+    ports:
+      - "3306:3306"
 
   redis:
     image: redis:6.2.5-buster

@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Licenzijos nėra.',
+    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
     'user_does_not_exist' => 'Naudotojo nėra.',
     'asset_does_not_exist' 	=> 'Įrangą, kurią ketinate susieti su šia licenzija neegzistuoja.',
     'owner_doesnt_match_asset' => 'Įrangą, kurią ketinate susieti su šia licenzija yra naudojama kažkieno kito nei asmens, kurį pasirinkote meniu.',

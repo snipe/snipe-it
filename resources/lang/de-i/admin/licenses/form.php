@@ -12,7 +12,7 @@ return array(
     'no_depreciation'   => 'Nicht abschreiben',
     'purchase_order'    => 'Auftragsnummer',
     'reassignable'      => 'Zuweisbar',
-    'remaining_seats'   => 'Verbleibende Aktivierungen',
+    'remaining_seats'   => 'Verbleibende Lizenzen',
     'seats'             => 'Lizenzen',
     'termination_date'  => 'Kündigungsdatum',
     'to_email'          => 'E-Mail des Lizenzerwerbers',

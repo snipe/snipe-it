@@ -11,6 +11,6 @@
         'calibration'        => 'Kalibrierung',
         'software_support'   => 'Software Support',
         'hardware_support'   => 'Hardware Support',
-        'configuration_change'   => 'Configuration Change',
-        'pat_test'           => 'PAT Test',
+        'configuration_change'   => 'Änderungen an der Konfiguration',
+        'pat_test'           => 'DGUV-Prüfung',
     ];

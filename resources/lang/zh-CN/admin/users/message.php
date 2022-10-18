@@ -14,7 +14,7 @@ return array(
     'ldap_not_configured'        => '安装过程中未启用LDAP集成的功能。',
     'password_resets_sent'      => '被选中的已激活并拥有有效电子邮件地址的用户已经收到了一个密码重置链接。',
     'password_reset_sent'       => '密码重置链接已发送至 :email!',
-    'user_has_no_email'         => 'This user does not have an email address in their profile.',
+    'user_has_no_email'         => '此用户的个人资料中没有电子邮件地址。',
 
 
     'success' => array(

@@ -43,6 +43,7 @@ class AccessoryImporter extends ItemImporter
         $this->log('No Matching Accessory, Creating a new one');
         $accessory = new Accessory();
         $this->item['model_number'] = $this->findCsvMatch($row, "model_number");
+        $this->item['min_amt'] = $this->findCsvMatch($row, "min_amt");
         $accessory->fill($this->sanitizeItemForStoring($accessory));
 
         //FIXME: this disables model validation.  Need to find a way to avoid double-logs without breaking everything.

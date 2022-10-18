@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'Ένας χρήστης έχει ακυρώσει μια αίτηση στοιχείο στην ιστοσελίδα',
     'a_user_requested' => 'Ο χρήστης έχει ζητήσει ένα στοιχείο στην ιστοσελίδα',
     'accessory_name' => 'Όνομα ανταλλακτικού:',

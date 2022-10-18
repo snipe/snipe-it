@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'Kua whakakorea e tetahi kaiwhakamahi tetahi tonoemi i runga i te paetukutuku',
     'a_user_requested' => 'Kua tono tetahi kaiwhakamahi i tetahi mea i runga i te paetukutuku',
     'accessory_name' => 'Ingoa Whakauru:',

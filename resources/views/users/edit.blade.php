@@ -358,6 +358,10 @@
                           <!--  Department -->
                           @include ('partials.forms.edit.department-select', ['translated_name' => trans('general.department'), 'fieldname' => 'department_id'])
 
+                          @include ('partials.forms.edit.datepicker', ['translated_name' => trans('general.start_date'), 'fieldname' => 'start_date', 'item' => $user])
+
+                          @include ('partials.forms.edit.datepicker', ['translated_name' => trans('general.end_date'), 'fieldname' => 'end_date', 'item' => $user])
+
 
                           <!-- remote checkbox -->
                           <div class="form-group">

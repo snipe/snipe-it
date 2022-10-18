@@ -112,7 +112,7 @@ class ItemImporter extends Importer
             return $this->createOrFetchUser($row);
         }
 
-        if (strtolower($this->item['checkout_class']) === 'location') {
+        if (strtolower($this->item['checkout_class']) === 'location' && $this->findCsvMatch($row, 'checkout_location') != null ) {
             return Location::findOrFail($this->createOrFetchLocation($this->findCsvMatch($row, 'checkout_location')));
         }
 

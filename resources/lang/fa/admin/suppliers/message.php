@@ -19,9 +19,12 @@ return array(
         'confirm'   => 'آیا شما مطمئن هستید که می خواهید این کارپرداز را حذف کنید؟',
         'error'   => 'در حذف کردن این کارپرداز مشکلی وجود داشت. لطفا دوباره تلاش کنید.',
         'success' => 'کارپرداز با موفقیت حذف شد.',
-        'assoc_assets'	 => 'This supplier is currently associated with :asset_count asset(s) and cannot be deleted. Please update your assets to no longer reference this supplier and try again. ',
-        'assoc_licenses'	 => 'This supplier is currently associated with :licenses_count licences(s) and cannot be deleted. Please update your licenses to no longer reference this supplier and try again. ',
-        'assoc_maintenances'	 => 'This supplier is currently associated with :asset_maintenances_count asset maintenances(s) and cannot be deleted. Please update your asset maintenances to no longer reference this supplier and try again. ',
+        'assoc_assets'	 => 'این تامین کننده در حال حاضر با دارایی(های) :asset_count مرتبط است و نمی توان آن را حذف کرد. لطفاً دارایی‌های خود را به‌روزرسانی کنید تا دیگر به این تأمین‌کننده اشاره نکنید و دوباره امتحان کنید.
+',
+        'assoc_licenses'	 => 'این تامین کننده در حال حاضر با مجوز(های) :licenses_count مرتبط است و قابل حذف نیست. لطفاً مجوزهای خود را به‌روزرسانی کنید تا دیگر به این تأمین‌کننده اشاره نکنید و دوباره امتحان کنید.
+',
+        'assoc_maintenances'	 => 'این تامین کننده در حال حاضر با مجوز(های) :licenses_count مرتبط است و قابل حذف نیست. لطفاً مجوزهای خود را به‌روزرسانی کنید تا به این گزینه اشاره نکنید و دوباره امتحان کنید.
+',
     )
 
 );

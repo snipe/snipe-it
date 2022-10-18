@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'sent'	        => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
-    'user'			=> 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
-    'token'         => 'This password reset token is invalid or expired, or does not match the username provided.',
-    'reset'         => 'Your password has been reset!',
+    'sent'	        => 'Jeśli w systemie istnieje podany użytkownik z prawidłowym adresem e-mail, hasło odzyskiwania zostało wysłane na e-mail.',
+    'user'			=> 'Jeśli w systemie istnieje podany użytkownik z podanym adresem e-mail, hasło odzyskiwania zostanie wysłane na e-mail.',
+    'token'         => 'Ten token resetowania hasła jest nieprawidłowy lub wygasł, lub nie pasuje do podanej nazwy użytkownika.',
+    'reset'         => 'Twoje hasło zostało zresetowane!',
 ];

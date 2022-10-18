@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Department;
+use App\Models\Group;
 use Illuminate\Console\Command;
 use App\Models\Setting;
 use App\Models\Ldap;
@@ -218,6 +219,13 @@ class LdapSync extends Command
                 $user->country = $item['country'];
                 $user->department_id = $department->id;
 
+                if($ldap_default_group != null) {
+
+                    $default = Group::select()->where('id', $ldap_default_group)->first();
+                    $user->permissions = $default->permissions;
+
+                }
+
                 if($item['manager'] != null) {
                     // Get the LDAP Manager
                     $ldap_manager = Ldap::findLdapUsers($item['manager'], -1, $this->option('filter'));
@@ -305,10 +313,6 @@ class LdapSync extends Command
                     $item['note'] = $item['createorupdate'];
                     $item['status'] = 'success';
 
-                    if($ldap_default_group != null) {
-
-                        $user->groups()->sync($ldap_default_group);
-                    }
                 } else {
                     foreach ($user->getErrors()->getMessages() as $key => $err) {
                         $errors .= $err[0];

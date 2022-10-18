@@ -3,7 +3,7 @@ return array(
     'companies' => 'Firmen',
     'create'    => 'Firma erstellen',
     'title'     => 'Firma',
-    'update'    => 'Firma bearbeiten',
+    'update'    => 'Firma aktualisieren',
     'name'      => 'Firmenname',
     'id'        => 'ID',
 );

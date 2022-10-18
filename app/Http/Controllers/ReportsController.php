@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\View;
 use Input;
 use League\Csv\Reader;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use League\Csv\EscapeFormula;
+
 
 /**
  * This controller handles all actions related to Reports for
@@ -411,6 +413,7 @@ class ReportsController extends Controller
         $customfields = CustomField::get();
         $response = new StreamedResponse(function () use ($customfields, $request) {
             \Log::debug('Starting streamed response');
+            \Log::debug('CSV escaping is set to: '.config('app.escape_formulas'));
 
             // Open output stream
             $handle = fopen('php://output', 'w');
@@ -589,7 +592,7 @@ class ReportsController extends Controller
             \Log::debug('Added headers: '.$executionTime);
 
             $assets = \App\Models\Company::scopeCompanyables(Asset::select('assets.*'))->with(
-                'location', 'assetstatus', 'assetlog', 'company', 'defaultLoc', 'assignedTo',
+                'location', 'assetstatus', 'company', 'defaultLoc', 'assignedTo',
                 'model.category', 'model.manufacturer', 'supplier');
             
             if ($request->filled('by_location_id')) {
@@ -666,6 +669,9 @@ class ReportsController extends Controller
                 $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
                 \Log::debug('Walking results: '.$executionTime);
                 $count = 0;
+
+                $formatter = new EscapeFormula("`");
+
                 foreach ($assets as $asset) {
                     $count++;
                     $row = [];
@@ -855,7 +861,17 @@ class ReportsController extends Controller
                             $row[] = $asset->$column_name;
                         }
                     }
-                    fputcsv($handle, $row);
+
+                    
+                    // CSV_ESCAPE_FORMULAS is set to false in the .env
+                    if (config('app.escape_formulas') === false) {
+                        fputcsv($handle, $row);
+
+                   // CSV_ESCAPE_FORMULAS is set to true or is not set in the .env
+                    } else {
+                        fputcsv($handle, $formatter->escapeRecord($row));
+                    }
+
                     $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
                     \Log::debug('-- Record '.$count.' Asset ID:'.$asset->id.' in '.$executionTime);
                 }
@@ -1067,9 +1083,9 @@ class ReportsController extends Controller
          * Get all assets with pending checkout acceptances
          */
         if($showDeleted) {
-            $acceptances = CheckoutAcceptance::pending()->withTrashed()->with(['assignedTo', 'checkoutable.assignedTo', 'checkoutable.model'])->get();
+            $acceptances = CheckoutAcceptance::pending()->where('checkoutable_type', 'App\Models\Asset')->withTrashed()->with(['assignedTo', 'checkoutable.assignedTo', 'checkoutable.model'])->get();
         } else {
-            $acceptances = CheckoutAcceptance::pending()->with(['assignedTo', 'checkoutable.assignedTo', 'checkoutable.model'])->get();
+            $acceptances = CheckoutAcceptance::pending()->where('checkoutable_type', 'App\Models\Asset')->with(['assignedTo', 'checkoutable.assignedTo', 'checkoutable.model'])->get();
         }
 
         $assetsForReport = $acceptances

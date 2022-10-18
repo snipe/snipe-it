@@ -13,19 +13,19 @@ return [
     'deployable'  				=> 'Einsetzbar',
     'deleted'  					=> 'Dieses Asset wurde gelöscht.',
     'edit'  					=> 'Asset bearbeiten',
-    'model_deleted'  			=> 'Dieses Modell für Assets wurde gelöscht. Sie müssen das Modell wiederherstellen, bevor Sie das Asset wiederherstellen können.',
+    'model_deleted'  			=> 'Dieses Modell für Assets wurde gelöscht. Du musst das Modell wiederherstellen, bevor Du das Asset wiederherstellen kannst.',
     'requestable'               => 'Anforderbar',
     'requested'				    => 'Angefordert',
     'not_requestable'           => 'Kann nicht angefordert werden',
     'requestable_status_warning' => 'Anforderbaren Status nicht ändern',
     'restore'  					=> 'Asset wiederherstellen',
-    'pending'  					=> 'Ausstehend',
+    'pending'  					=> 'Ausstehende',
     'undeployable'  			=> 'Nicht einsetzbar',
     'view'  					=> 'Asset ansehen',
     'csv_error' => 'Es gibt einen Fehler in der CSV-Datei:',
     'import_text' => '
     <p>
-    Laden Sie eine CSV-Datei hoch, die den Asset-Verlauf enthält. Die Assets und Benutzer MÜSSEN bereits im System vorhanden oder sie werden übersprungen. Übereinstimmende Assets für den Import der Historie geschieht mit dem Tag des Asset-Tags. Wir werden versuchen, einen passenden Benutzer zu finden, basierend auf dem von Ihnen angegebenen Benutzernamen und den Kriterien, die Sie unten auswählen. Wenn Sie keine Kriterien unten auswählen, wird einfach das Benutzernamen-Format, welches Sie in den Admin &gt; Allgemeinen Einstellungen konfiguriert haben zum Abgleich genutzt.
+    Lade eine CSV-Datei hoch, die den Asset-Verlauf enthält. Die Assets und Benutzer MÜSSEN bereits im System vorhanden oder sie werden übersprungen. Übereinstimmende Assets für den Import der Historie geschieht mit dem Tag des Asset-Tags. Wir werden versuchen, einen passenden Benutzer zu finden, basierend auf dem von Dir angegebenen Benutzernamen und den Kriterien, die Du unten auswählst. Wenn Du keine Kriterien unten auswählst, wird einfach das Benutzernamen-Format, welches Du in den Admin &gt; Allgemeinen Einstellungen konfiguriert hast, zum Abgleich genutzt.
     </p>
 
     <p>Die im CSV enthaltenen Felder müssen mit den Kopfzeilen übereinstimmen: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Zusätzliche Felder werden ignoriert. </p>
@@ -34,9 +34,9 @@ return [
     ',
     'csv_import_match_f-l' => 'Versucht den Benutzer nach dem vorname.nachname (jane.smith) Format abzugleichen',
     'csv_import_match_initial_last' => 'Versucht den Benutzer nach dem ersten Buchstaben des Vornamen und dem Nachnamen (jsmith) Format abzugleichen',
-    'csv_import_match_first' => 'Versuchen Sie, Benutzer nach dem Vornamenformat (Jane) abzugleichen',
-    'csv_import_match_email' => 'Versuchen Sie, Benutzer per E-Mail als Benutzername zu vergleichen',
-    'csv_import_match_username' => 'Versuche Benutzer mit Benutzername zu vergleichen',
+    'csv_import_match_first' => 'Versucht den Benutzer nach dem vorname(jane) Format abzugleichen',
+    'csv_import_match_email' => 'Versuche, Benutzer per E-Mail als Benutzername zu vergleichen',
+    'csv_import_match_username' => 'Versuche, Benutzer mit Benutzername zu vergleichen',
     'error_messages' => 'Fehlermeldungen:',
     'success_messages' => 'Erfolgsmeldungen:',
     'alert_details' => 'Siehe unten für Details.',

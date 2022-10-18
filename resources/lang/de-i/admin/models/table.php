@@ -5,7 +5,7 @@ return array(
     'create'				=> 'Asset-Modell erstellen',
     'created_at' 			=> 'Erstellt am',
     'eol'	 				=> 'EOL',
-    'modelnumber'   		=> 'Modellnummer',
+    'modelnumber'   		=> 'Modellnr.',
     'name'      			=> 'Asset Modellname',
     'numassets' 			=> 'Assets',
     'title'					=> 'Asset Modelle',

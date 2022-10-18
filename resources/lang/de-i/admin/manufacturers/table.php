@@ -2,7 +2,7 @@
 
 return array(
     'about_manufacturers_title'    => 'Über Hersteller',
-    'about_manufacturers_text'  => 'Hersteller sind Firmen, die ihre Assets herstellen. Hier können Sie wichtige Supportkontakte eintragen, welche in den Assetdetails angezeigt werden.',
+    'about_manufacturers_text'  => 'Hersteller sind die Firmen, die Deine Assets herstellen. Hier kannst Du wichtige Supportkontakte eintragen, die in den Assetdetails angezeigt werden.',
     'asset_manufacturers'	=> 'Asset Hersteller',
     'create'				=> 'Hersteller anlegen',
     'id'   					=> 'ID',

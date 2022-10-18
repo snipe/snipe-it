@@ -16,7 +16,7 @@ return array(
     "password" => "کلمه عبور باید شش کاراکتر باشد و مطابقت با تایید آن.
 ",
     "user"     => "نام کاربری یا آدرس ایمیل اشتباه است",
-    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
-    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
+    "token"    => 'این رمز بازنشانی رمز عبور نامعتبر یا منقضی شده است یا با نام کاربری ارائه شده مطابقت ندارد.',
+    'sent'	   => 'با موفقیت: اگر ایمیل در سامانه موجود باشد، ایمیل بازیابی کلمه عبور ارسال شده است.',
 
 );

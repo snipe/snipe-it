@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Lesen tidak wujud.',
+    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
     'user_does_not_exist' => 'Pengguna tidak wujud.',
     'asset_does_not_exist' 	=> 'Harta yang anda ingin sekutukan dengan lesen tidak wujud.',
     'owner_doesnt_match_asset' => 'Harta yang anda ingin sekutukan dengan lesen ini dimiliki oleh orang lain selain dari orang yang dipilih dalam pilihan yang disekutukan.',

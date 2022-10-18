@@ -2,11 +2,13 @@
 
 return [
     'custom_fields'		        => 'فیلدهای سفارشی',
-    'manage'                    => 'Manage',
+    'manage'                    => 'مدیریت',
     'field'		                => 'فیلد',
     'about_fieldsets_title'		=> 'درباره ی تنظیمات فیلد',
-    'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used for specific asset model types.',
-    'custom_format'             => 'Custom Regex format...',
+    'about_fieldsets_text'		=> 'مجموعه‌های فیلد به شما امکان می‌دهند گروه‌هایی از فیلدهای سفارشی ایجاد کنید که اغلب برای انواع مدل دارایی خاص دوباره استفاده می‌شوند.
+',
+    'custom_format'             => 'فرمت Regex سفارشی...
+',
     'encrypt_field'      	        => 'مقدار این فیلد را در پایگاه داده رمزگذاری کنید',
     'encrypt_field_help'      => 'هشدار: رمزگذاری یک فیلد باعث می شود آن را جستجو نکنید.',
     'encrypted'      	        => 'رمزگذاری شده',
@@ -27,21 +29,33 @@ return [
     'used_by_models'   		    => 'استفاده شده توسط مدل ها',
     'order'   		            => 'سفارش',
     'create_fieldset'         => 'تنظیمات فیلد جدید',
-    'create_fieldset_title' => 'Create a new fieldset',
+    'create_fieldset_title' => 'ایجاد یک عنصر جدید',
     'create_field'            => 'فیلد سفارشی جدید',
-    'create_field_title' => 'Create a new custom field',
+    'create_field_title' => 'یک فیلد سفارشی جدید ایجاد کنید
+',
     'value_encrypted'      	        => 'ارزش این فیلد در پایگاه داده رمزگذاری شده است. فقط کاربران مدیریت قادر به مشاهده مقدار رمزگشایی خواهند شد',
-    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
-    'help_text' => 'Help Text',
-    'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
-    'about_custom_fields_title' => 'About Custom Fields',
-    'about_custom_fields_text' => 'Custom fields allow you to add arbitrary attributes to assets.',
-    'add_field_to_fieldset' => 'Add Field to Fieldset',
-    'make_optional' => 'Required - click to make optional',
-    'make_required' => 'Optional - click to make required',
-    'reorder' => 'Reorder',
-    'db_field' => 'DB Field',
-    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code>:db_column</code> but should be <code>:expected</code>.',
-    'is_unique' => 'This value must be unique across all assets',
-    'unique' => 'Unique',
+    'show_in_email'     => 'ارزش این فیلد را در ایمیل‌های تسویه‌حساب ارسالی به کاربر لحاظ کنید؟ فیلدهای رمزگذاری شده را نمی توان در ایمیل ها گنجاند.
+',
+    'help_text' => 'متن راهنما',
+    'help_text_description' => 'این متن اختیاری است که هنگام ویرایش یک دارایی برای ارائه زمینه در فیلد در زیر عناصر فرم ظاهر می شود.
+',
+    'about_custom_fields_title' => 'درباره فیلدهای سفارشی
+',
+    'about_custom_fields_text' => 'فیلدهای سفارشی به شما این امکان را می دهند که ویژگی های دلخواه را به دارایی ها اضافه کنید.
+',
+    'add_field_to_fieldset' => 'فیلد را به مجموعه فیلد اضافه کنید
+',
+    'make_optional' => 'مورد نیاز - کلیک کنید تا اختیاری شود
+',
+    'make_required' => 'اختیاری - کلیک کنید تا مورد نیاز است
+',
+    'reorder' => 'سفارش مجدد',
+    'db_field' => 'فیلد DB
+',
+    'db_convert_warning' => 'هشدار. این فیلد در جدول فیلدهای سفارشی به عنوان <code>:db_column</code> است اما باید <code>: انتظار می رود</code> باشد.
+',
+    'is_unique' => 'این مقدار باید در همه دارایی ها منحصر به فرد باشد
+',
+    'unique' => 'منحصر بفرد
+',
 ];

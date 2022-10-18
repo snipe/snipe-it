@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Níl an ceadúnas ann.',
+    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
     'user_does_not_exist' => 'Níl an t-úsáideoir ann.',
     'asset_does_not_exist' 	=> 'Níl an tsócmhainn atá tú ag iarraidh a chomhcheangal leis an gceadúnas seo ann.',
     'owner_doesnt_match_asset' => 'Tá somet faoi úinéireacht an tsócmhainn atá tú ag iarraidh a chomhcheangal leis an gceadúnas seo seachas an duine a roghnaíodh sa sannadh chuig an mionsonraithe.',
