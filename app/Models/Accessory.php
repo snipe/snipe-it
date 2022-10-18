@@ -252,19 +252,6 @@ class Accessory extends SnipeModel
         return $this->belongsToMany(\App\Models\User::class, 'accessories_users', 'accessory_id', 'assigned_to')->count();
     }
     /**
-     * Checks whether or not the accessory has users
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v3.0]
-     * @return int
-     */
-    public function Userlist()
-    {
-            return $this->belongsToMany(\App\Models\User::class, 'accessories_users', 'accessory_id', 'assigned_to')->withPivot('assigned_to')->pluck('assigned_to')->toArray();;
-
-    }
-
-    /**
      * Establishes the accessory -> manufacturer relationship
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
