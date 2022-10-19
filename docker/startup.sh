@@ -72,4 +72,7 @@ php artisan migrate --force
 php artisan config:clear
 php artisan config:cache
 
+# clear cache directory
+php artisan cache:clear
+
 exec supervisord -c /supervisord.conf
