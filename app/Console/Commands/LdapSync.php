@@ -219,7 +219,7 @@ class LdapSync extends Command
                 if($item['manager'] != null) {
                     // Get the LDAP Manager
                     try {
-                        $ldap_manager = Ldap::findLdapUsers($item['manager'], -1, $this->option('filter')); // *THIS* call might be messing us up, somehow? Like, maybe breaking pagination or something?
+                        $ldap_manager = Ldap::findLdapUsers($item['manager'], -1, $this->option('filter'));
                     } catch (\Exception $e) {
                         \Log::warn("Manager lookup caused an exception: ".$e->getMessage().". Falling back to direct username lookup");
                         // Hail-mary for Okta manager 'shortnames' - will only work if
