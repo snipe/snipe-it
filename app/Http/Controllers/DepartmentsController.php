@@ -181,29 +181,4 @@ class DepartmentsController extends Controller
 
         return redirect()->back()->withInput()->withErrors($department->getErrors());
     }
-
-    public function passwordSave(Request $request)
-    {
-        if (config('app.lock_passwords')) {
-            return redirect()->route('account.password.index')->with('error', trans('admin/users/table.lock_passwords'));
-        }
-
-        $user = Auth::user();
-        if ($user->ldap_import == '1') {
-            return redirect()->route('account.password.index')->with('error', trans('admin/users/message.error.password_ldap'));
-        }
-
-        $rules = [
-            'current_password'     => 'required',
-            'password'         => Setting::passwordComplexityRulesSaving('store').'|confirmed',
-        ];
-
-        $validator = \Validator::make($request->all(), $rules);
-        $validator->after(function ($validator) use ($request, $user) {
-            if (! Hash::check($request->input('current_password'), $user->password)) {
-                $validator->errors()->add('current_password', trans('validation.hashed_pass'));
-            }
-
-        });
-        }
 }
