@@ -218,10 +218,24 @@ class LdapSync extends Command
 
                 if($item['manager'] != null) {
                     // Get the LDAP Manager
-                    $ldap_manager = Ldap::findLdapUsers($item['manager'], -1, $this->option('filter'));
+                    try {
+                        $ldap_manager = Ldap::findLdapUsers($item['manager'], -1, $this->option('filter'));
+                    } catch (\Exception $e) {
+                        \Log::warn("Manager lookup caused an exception: ".$e->getMessage().". Falling back to direct username lookup");
+                        // Hail-mary for Okta manager 'shortnames' - will only work if
+                        // Okta configuration is using full email-address-style usernames
+                        $ldap_manager = [
+                            "count" => 1,
+                            0 => [
+                                $ldap_result_username => [$item['manager']]
+                            ]
+                        ];
+                    }
 
-                    if($ldap_manager["count"] > 0) { 
-                        // Get the Managers username
+                    if ($ldap_manager["count"] > 0) {
+
+                        // Get the Manager's username
+                        // PHP LDAP returns every LDAP attribute as an array, and 90% of the time it's an array of just one item. But, hey, it's an array.
                         $ldapManagerUsername = $ldap_manager[0][$ldap_result_username][0];
 
                         // Get User from Manager username.
