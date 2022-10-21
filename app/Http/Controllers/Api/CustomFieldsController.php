@@ -65,8 +65,7 @@ class CustomFieldsController extends Controller
          * @var array
          */
         $data = $request->except(['field_encrypted']);
-
-        $validator = Validator::make($data, $field->validationRules());
+        $validator = Validator::make($data, ['name' => 'required', 'element' => 'required']);
         if ($validator->fails()) {
             return response()->json(Helper::formatStandardApiResponse('error', null, $validator->errors()));
         }
