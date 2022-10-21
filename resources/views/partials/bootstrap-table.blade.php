@@ -120,7 +120,7 @@
         var tableId =  $(this).data('id-table');
 
         $(buttonName).removeAttr('disabled');
-        $(formName).prepend('<input id="' + tableId + '_checkbox_' + $element.id + '" type="hidden" name="ids[]" value="' + $element.id + '">');
+        $(formName).append('<input id="' + tableId + '_checkbox_' + $element.id + '" type="hidden" name="ids[]" value="' + $element.id + '">');
     });
 
     $('.snipe-table').on('uncheck.bs.table .btSelectItem', function (row, $element) {
@@ -129,7 +129,7 @@
     });
 
 
-    $('.snipe-table').on('check-all.bs.table', function (event, rowsAfter, rowsBefore) {
+    $('.snipe-table').on('check-all.bs.table', function (event, rowsAfter) {
 
         var buttonName =  $(this).data('bulk-button-id');
         $(buttonName).removeAttr('disabled');
@@ -137,7 +137,7 @@
         var tableId =  $(this).data('id-table');
 
         for (var i in rowsAfter) {
-            $(formName).prepend('<input id="' + tableId + '_checkbox_' + rowsAfter[i].id + '" type="hidden" name="ids[]" value="' + rowsAfter[i].id + '">');
+            $(formName).append('<input id="' + tableId + '_checkbox_' + rowsAfter[i].id + '" type="hidden" name="ids[]" value="' + rowsAfter[i].id + '">');
         }
     });
 

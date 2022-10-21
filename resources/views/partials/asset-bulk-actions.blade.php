@@ -1,9 +1,10 @@
-<div id="assetsBulkEditToolbar" style="min-width:400px">
-    {{ Form::open([
+<div id="{{ (isset($id_divname)) ? $id_divname : 'assetsBulkEditToolbar' }}" style="min-width:400px">
+{{ Form::open([
       'method' => 'POST',
       'route' => ['hardware/bulkedit'],
       'class' => 'form-inline',
-      'id' => 'assetsBulkForm']) }}
+      'id' => (isset($id_formname)) ? $id_formname : 'assetsBulkForm',
+ ]) }}
 
 
     <label for="bulk_actions">
@@ -21,6 +22,6 @@
         <option value="labels">{{ trans_choice('button.generate_labels', 2) }}</option>
     </select>
 
-    <button class="btn btn-primary" id="bulkAssetEditButton" disabled>{{ trans('button.go') }}</button>
+    <button class="btn btn-primary" id="{{ (isset($id_button)) ? $id_button : 'bulkAssetEditButton' }}" disabled>{{ trans('button.go') }}</button>
     {{ Form::close() }}
 </div>

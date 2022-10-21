@@ -33,7 +33,6 @@ class BulkAssetsController extends Controller
 
         if (! $request->filled('ids')) {
             return redirect()->back()->with('error', trans('admin/hardware/message.update.no_assets_selected'));
-
         }
 
         // Figure out where we need to send the user after the update is complete, and store that in the session
