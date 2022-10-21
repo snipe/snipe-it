@@ -116,29 +116,27 @@
     // These methods dynamically add/remove hidden input values in the bulk actions form
     $('.snipe-table').on('check.bs.table .btSelectItem', function (row, $element) {
         var buttonName =  $(this).data('bulk-button-id');
-        var formName =  $(this).data('bulk-form-id');
         var tableId =  $(this).data('id-table');
 
         $(buttonName).removeAttr('disabled');
-        $(formName).append('<input id="' + tableId + '_checkbox_' + $element.id + '" type="hidden" name="ids[]" value="' + $element.id + '">');
+        $(buttonName).after('<input id="' + tableId + '_checkbox_' + $element.id + '" type="hidden" name="ids[]" value="' + $element.id + '">');
     });
-
-    $('.snipe-table').on('uncheck.bs.table .btSelectItem', function (row, $element) {
-        var tableId =  $(this).data('id-table');
-        $( "#" + tableId + "_checkbox_" + $element.id).remove();
-    });
-
 
     $('.snipe-table').on('check-all.bs.table', function (event, rowsAfter) {
 
         var buttonName =  $(this).data('bulk-button-id');
         $(buttonName).removeAttr('disabled');
-        var formName =  $(this).data('bulk-form-id');
         var tableId =  $(this).data('id-table');
 
         for (var i in rowsAfter) {
-            $(formName).append('<input id="' + tableId + '_checkbox_' + rowsAfter[i].id + '" type="hidden" name="ids[]" value="' + rowsAfter[i].id + '">');
+            $(buttonName).after('<input id="' + tableId + '_checkbox_' + rowsAfter[i].id + '" type="hidden" name="ids[]" value="' + rowsAfter[i].id + '">');
         }
+    });
+
+
+    $('.snipe-table').on('uncheck.bs.table .btSelectItem', function (row, $element) {
+        var tableId =  $(this).data('id-table');
+        $( "#" + tableId + "_checkbox_" + $element.id).remove();
     });
 
 
