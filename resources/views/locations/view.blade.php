@@ -44,6 +44,19 @@
               </li>
 
               <li>
+                  <a href="#rtd_assets" data-toggle="tab">
+                    <span class="hidden-lg hidden-md">
+                        <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
+                    </span>
+                      <span class="hidden-xs hidden-sm">
+                          {{ trans('admin/hardware/form.default_location') }}
+                          {!! (($location->rtd_assets) && ($location->rtd_assets()->AssetsForShow()->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($location->rtd_assets()->AssetsForShow()->count()).'</badge>' : '' !!}
+                    </span>
+                  </a>
+              </li>
+
+
+              <li>
                   <a href="#accessories" data-toggle="tab">
                     <span class="hidden-lg hidden-md">
                         <i class="fas fa-keyboard fa-2x" aria-hidden="true"></i>
@@ -143,6 +156,38 @@
                           </table>
 
                       </div><!-- /.table-responsive -->
+              </div><!-- /.tab-pane -->
+
+              <div class="tab-pane" id="rtd_assets">
+                  <h2 class="box-title">{{ trans('admin/hardware/form.default_location') }}</h2>
+
+                  <div class="table table-responsive">
+                      @include('partials.asset-bulk-actions', ['id_divname' => 'RTDassetsBulkEditToolbar', 'id_formname' => 'RTDassets', 'id_button' => 'RTDbulkAssetEditButton'])
+                      <table
+                              data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
+                              data-cookie-id-table="RTDassetsListingTable"
+                              data-pagination="true"
+                              data-id-table="RTDassetsListingTable"
+                              data-search="true"
+                              data-side-pagination="server"
+                              data-show-columns="true"
+                              data-show-export="true"
+                              data-show-refresh="true"
+                              data-sort-order="asc"
+                              data-toolbar="#RTDassetsBulkEditToolbar"
+                              data-bulk-button-id="#RTDbulkAssetEditButton"
+                              data-bulk-form-id="#RTDassetsBulkEditToolbar"
+                              data-click-to-select="true"
+                              id="RTDassetsListingTable"
+                              class="table table-striped snipe-table"
+                              data-url="{{route('api.assets.index', ['rtd_location_id' => $location->id]) }}"
+                              data-export-options='{
+                              "fileName": "export-rtd-locations-{{ str_slug($location->name) }}-assets-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
+                      </table>
+
+                  </div><!-- /.table-responsive -->
               </div><!-- /.tab-pane -->
               
 
