@@ -1,4 +1,6 @@
 #!/bin/sh
+# Install dependencies
+COMPOSER_CACHE_DIR=/dev/null composer install --no-dev --working-dir=/var/www/html
 
 # fix key if needed
 if [ -z "$APP_KEY" ]
