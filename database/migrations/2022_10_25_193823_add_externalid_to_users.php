@@ -14,7 +14,7 @@ class AddExternalidToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('scim_externalid');
+            $table->string('scim_externalid')->nullable()->default(null);
         });
     }
 
