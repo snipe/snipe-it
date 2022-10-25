@@ -24,6 +24,7 @@ php7.4-mbstring \
 php7.4-zip \
 php7.4-bcmath \
 php7.4-redis \
+php-memcached \
 patch \
 curl \
 wget  \
