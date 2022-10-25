@@ -2745,7 +2745,7 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/28321?v=4",
       "profile": "http://www.littlehart.net/atthekeyboard",
       "contributions": [
-        "tests"
+        "code"
       ]
     },
     {
@@ -2762,6 +2762,15 @@
       "name": "Phan Nguyen",
       "avatar_url": "https://avatars.githubusercontent.com/u/6006620?v=4",
       "profile": "https://github.com/nh314",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "StarlessNights",
+      "name": "Iisakki Jaakkola",
+      "avatar_url": "https://avatars.githubusercontent.com/u/115993812?v=4",
+      "profile": "https://github.com/StarlessNights",
       "contributions": [
         "code"
       ]
