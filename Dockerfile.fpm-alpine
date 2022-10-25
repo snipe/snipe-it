@@ -75,14 +75,14 @@ RUN set -eux; \
 	rm snipeit.tar.gz; \
 # Install composer php dependencies
     if [ "$ENVIRONMENT" = "production" ]; then \
-        echo "production enviroment detected!"; \
+        echo "production environment detected!"; \
         composer update \
             --no-cache \
             --no-dev \
             --optimize-autoloader \
             --working-dir=/var/www/html; \
     else \
-        echo "development enviroment detected!"; \
+        echo "development environment detected!"; \
         apk add --no-cache \
             ${DEV_PACKAGES}; \
         composer update \
