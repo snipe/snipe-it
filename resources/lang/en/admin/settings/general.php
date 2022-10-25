@@ -114,6 +114,8 @@ return [
     'ldap_email'                => 'LDAP Email',
     'ldap_test'                 => 'Test LDAP',
     'ldap_test_sync'            => 'Test LDAP Synchronization',
+    'ldap_start_date'           => 'Start Date',
+    'ldap_end_date'             => 'End Date',
     'license'                   => 'Software License',
     'load_remote_text'          => 'Remote Scripts',
     'load_remote_help_text'		=> 'This Snipe-IT install can load scripts from the outside world.',

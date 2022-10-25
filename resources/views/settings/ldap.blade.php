@@ -452,6 +452,32 @@
                                 @endif
                             </div>
                         </div>
+                        <!-- LDAP Start Date -->
+                        <div class="form-group {{ $errors->has('ldap_start_date') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('ldap_start_date', trans('admin/settings/general.ldap_start_date')) }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ Form::text('ldap_start_date', Request::old('ldap_start_date', $setting->start_date), ['class' => 'form-control','placeholder' => trans('general.example') .'whenCreated', $setting->demoMode]) }}
+                                {!! $errors->first('ldap_start_date', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                @if (config('app.lock_passwords')===true)
+                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                @endif
+                            </div>
+                        </div>
+                        <!-- LDAP End Date -->
+                        <div class="form-group {{ $errors->has('ldap_end_date') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('ldap_end_date', trans('admin/settings/general.ldap_end_date')) }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ Form::text('ldap_end_date', Request::old('ldap_end_date', $setting->ldap_end_date), ['class' => 'form-control','placeholder' => trans('general.example') .'accountExpires', $setting->demoMode]) }}
+                                {!! $errors->first('ldap_country', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                @if (config('app.lock_passwords')===true)
+                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                @endif
+                            </div>
+                        </div>
                         @if ($setting->ldap_enabled)
 
                             <!-- LDAP test -->

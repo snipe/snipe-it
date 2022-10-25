@@ -215,6 +215,8 @@ class Ldap extends Model
         $ldap_result_country = Setting::getSettings()->ldap_country;
         $ldap_result_dept = Setting::getSettings()->ldap_dept;
         $ldap_result_manager = Setting::getSettings()->ldap_manager;
+        $ldap_result_start_date = Setting::getSettings()->ldap_start_date;
+        $ldap_result_end_date = Setting::getSettings()->ldap_end_date;
         // Get LDAP user data
         $item = [];
         $item['username'] = isset($ldapattributes[$ldap_result_username][0]) ? $ldapattributes[$ldap_result_username][0] : '';
@@ -227,6 +229,8 @@ class Ldap extends Model
         $item['country'] = isset($ldapattributes[$ldap_result_country][0]) ? $ldapattributes[$ldap_result_country][0] : '';
         $item['department'] = isset($ldapattributes[$ldap_result_dept][0]) ? $ldapattributes[$ldap_result_dept][0] : '';
         $item['manager'] = isset($ldapattributes[$ldap_result_manager][0]) ? $ldapattributes[$ldap_result_manager][0] : '';
+        $item['start_date'] = isset($results[$i][$ldap_result_start_date][0]) ? $results[$i][$ldap_result_start_date][0] : '';
+        $item['end_date'] = isset($results[$i][$ldap_result_end_date][0]) ? $results[$i][$ldap_result_end_date][0] : '';
 
         return $item;
     }

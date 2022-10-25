@@ -978,7 +978,8 @@ class SettingsController extends Controller
             $setting->ldap_dept = $request->input('ldap_dept');
             $setting->ldap_client_tls_cert   = $request->input('ldap_client_tls_cert');
             $setting->ldap_client_tls_key    = $request->input('ldap_client_tls_key');
-
+            $setting->ldap_start_date   = $request->input('ldap_start_date');
+            $setting->ldap_end_date   = $request->input('ldap_end_date');
 
         }
 
