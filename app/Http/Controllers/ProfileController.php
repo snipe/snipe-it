@@ -164,7 +164,7 @@ class ProfileController extends Controller
         $validator = \Validator::make($request->all(), $rules);
         $validator->after(function ($validator) use ($request, $user) {
             if (! Hash::check($request->input('current_password'), $user->password)) {
-                $validator->errors()->add('current_password', trans('validation.hashed_pass'));
+                $validator->errors()->add('current_password', trans('validation.custom.hashed_pass'));
             }
 
             // This checks to make sure that the user's password isn't the same as their username,
