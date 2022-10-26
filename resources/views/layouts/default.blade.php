@@ -420,7 +420,9 @@
                     @if (count($status_navs) > 0)
                         @foreach ($status_navs as $status_nav)
                             <li><a href="{{ route('statuslabels.show', ['statuslabel' => $status_nav->id]) }}">
-                                <i class="fas fa-circle text-grey fa-fw" aria-hidden="true"></i>
+                                <i class="fas fa-circle text-grey fa-fw" aria-hidden="true"{!!  ($status_nav->color!='' ? ' style="color: '.e($status_nav->color).'"' : '') !!}>
+
+                                </i>
                                  {{ $status_nav->name }} ({{ $status_nav->asset_count }})</a></li>
                         @endforeach
                     @endif
