@@ -229,7 +229,7 @@ class Ldap extends Model
         $item['country'] = isset($ldapattributes[$ldap_result_country][0]) ? $ldapattributes[$ldap_result_country][0] : '';
         $item['department'] = isset($ldapattributes[$ldap_result_dept][0]) ? $ldapattributes[$ldap_result_dept][0] : '';
         $item['manager'] = isset($ldapattributes[$ldap_result_manager][0]) ? $ldapattributes[$ldap_result_manager][0] : '';
-        $item['start_date'] = isset($results[$i][$ldap_result_start_date][0]) ? $results[$i][$ldap_result_start_date][0] : '';
+//        $item['start_date'] = isset($results[$i][$ldap_result_start_date][0]) ? $results[$i][$ldap_result_start_date][0] : '';
         $item['end_date'] = isset($results[$i][$ldap_result_end_date][0]) ? $results[$i][$ldap_result_end_date][0] : '';
 
         return $item;

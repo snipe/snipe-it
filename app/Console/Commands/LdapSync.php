@@ -9,6 +9,7 @@ use App\Models\Ldap;
 use App\Models\User;
 use App\Models\Location;
 use Log;
+use Illuminate\Support\Carbon;
 
 class LdapSync extends Command
 {
@@ -57,7 +58,7 @@ class LdapSync extends Command
         $ldap_result_country = Setting::getSettings()->ldap_country;
         $ldap_result_dept = Setting::getSettings()->ldap_dept;
         $ldap_result_manager = Setting::getSettings()->ldap_manager;
-        $ldap_start_date = Setting::getSettings()->ldap_start_date;
+//        $ldap_start_date = Setting::getSettings()->ldap_start_date;
         $ldap_end_date = Setting::getSettings()->ldap_end_date;
 
         try {
@@ -193,7 +194,7 @@ class LdapSync extends Command
                 $item['country'] = isset($results[$i][$ldap_result_country][0]) ? $results[$i][$ldap_result_country][0] : '';
                 $item['department'] = isset($results[$i][$ldap_result_dept][0]) ? $results[$i][$ldap_result_dept][0] : '';
                 $item['manager'] = isset($results[$i][$ldap_result_manager][0]) ? $results[$i][$ldap_result_manager][0] : '';
-                $item['start_date'] = isset($results[$i][$ldap_start_date][0]) ? $results[$i][$ldap_start_date][0] : '';
+//                $item['start_date'] = isset($results[$i][$ldap_start_date][0]) ? $results[$i][$ldap_start_date][0] : '';
                 $item['end_date'] = isset($results[$i][$ldap_end_date][0]) ? $results[$i][$ldap_end_date][0] : '';
 
                 $department = Department::firstOrCreate([
@@ -221,8 +222,8 @@ class LdapSync extends Command
                 $user->jobtitle = $item['jobtitle'];
                 $user->country = $item['country'];
                 $user->department_id = $department->id;
-                $user->start_date = $item['start_date'];
-                $user->end_date = $item['end_date'];
+//                $user->start_date = $item['start_date'];
+                $user->end_date = Carbon::createFromFormat('Y-m-d',$item['end_date']) ;
 
                 if($item['manager'] != null) {
                     // Check Cache first
