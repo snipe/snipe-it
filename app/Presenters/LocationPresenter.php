@@ -51,7 +51,7 @@ class LocationPresenter extends Presenter
             ],
 
             [
-                'field' => 'assets_location_count',
+                'field' => 'assets_count',
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
