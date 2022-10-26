@@ -90,6 +90,14 @@ class Location extends SnipeModel
       'parent' => ['name'],
     ];
 
+
+    /**
+     * Determine whether or not this location can be deleted
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return bool
+     */
     public function isDeletable()
     {
         return Gate::allows('delete', $this)
@@ -98,12 +106,25 @@ class Location extends SnipeModel
                 && ($this->users()->count() === 0);
     }
 
+    /**
+     * Establishes the user -> location relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function users()
     {
         return $this->hasMany(\App\Models\User::class, 'location_id');
     }
 
-
+    /**
+     * Find assets with this location as their location_id
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function assets()
     {
         return $this->hasMany(\App\Models\Asset::class, 'location_id')
@@ -114,6 +135,14 @@ class Location extends SnipeModel
             });
     }
 
+
+    /**
+     * Establishes the  asset -> rtd_location relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function rtd_assets()
     {
         /* This used to have an ...->orHas() clause that referred to
@@ -123,48 +152,93 @@ class Location extends SnipeModel
            It is arguable that we should have a '...->whereNull('assigned_to')
            bit in there, but that isn't always correct either (in the case
            where a user has no location, for example).
-
-           In all likelyhood, we need to denorm an "effective_location" column
-           into Assets to make this slightly less miserable.
         */
         return $this->hasMany(\App\Models\Asset::class, 'rtd_location_id');
     }
 
+    /**
+     * Establishes the consumable -> location relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function consumables()
     {
         return $this->hasMany(\App\Models\Consumable::class, 'location_id');
     }
 
+    /**
+     * Establishes the component -> location relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function components()
     {
         return $this->hasMany(\App\Models\Component::class, 'location_id');
     }
 
+    /**
+     * Establishes the component -> accessory relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function accessories()
     {
         return $this->hasMany(\App\Models\Accessory::class, 'location_id');
     }
 
-
-
+    /**
+     * Find the parent of a location
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function parent()
     {
         return $this->belongsTo(self::class, 'parent_id', 'id')
             ->with('parent');
     }
 
+
+    /**
+     * Find the manager of a location
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function manager()
     {
         return $this->belongsTo(\App\Models\User::class, 'manager_id');
     }
 
+
+    /**
+     * Find children of a location
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function children()
     {
         return $this->hasMany(self::class, 'parent_id')
             ->with('children');
     }
 
-    // I don't think we need this anymore since we de-normed location_id in assets?
+    /**
+     * Establishes the asset -> location assignment relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function assignedAssets()
     {
         return $this->morphMany(\App\Models\Asset::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
