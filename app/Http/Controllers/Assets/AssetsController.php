@@ -543,7 +543,7 @@ class AssetsController extends Controller
             $this->authorize('view', $asset);
 
             return view('hardware/labels')
-                ->with('assets', Asset::find($asset))
+                ->with('assets', collect([ $asset ]))
                 ->with('settings', Setting::getSettings())
                 ->with('bulkedit', false)
                 ->with('count', 0);
