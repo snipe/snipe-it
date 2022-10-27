@@ -763,7 +763,7 @@ class ReportsController extends Controller
                     if ($request->filled('username')) {
                         // Only works if we're checked out to a user, not anything else.
                         if ($asset->checkedOutToUser()) {
-                            $row[] = ($asset->assignedto) ? $asset->assignedto->username : '';
+                            $row[] = ($asset->assignedTo) ? $asset->assignedTo->username : '';
                         } else {
                             $row[] = ''; // Empty string if unassigned
                         }
@@ -772,7 +772,7 @@ class ReportsController extends Controller
                     if ($request->filled('employee_num')) {
                         // Only works if we're checked out to a user, not anything else.
                         if ($asset->checkedOutToUser()) {
-                            $row[] = ($asset->assignedto) ? $asset->assignedto->employee_num : '';
+                            $row[] = ($asset->assignedTo) ? $asset->assignedTo->employee_num : '';
                         } else {
                             $row[] = ''; // Empty string if unassigned
                         }
@@ -780,7 +780,7 @@ class ReportsController extends Controller
 
                     if ($request->filled('manager')) {
                         if ($asset->checkedOutToUser()) {
-                            $row[] = (($asset->assignedto) && ($asset->assignedto->manager)) ? $asset->assignedto->manager->present()->fullName : '';
+                            $row[] = (($asset->assignedTo) && ($asset->assignedTo->manager)) ? $asset->assignedTo->manager->present()->fullName : '';
                         } else {
                             $row[] = ''; // Empty string if unassigned
                         }
@@ -788,7 +788,7 @@ class ReportsController extends Controller
 
                     if ($request->filled('department')) {
                         if ($asset->checkedOutToUser()) {
-                            $row[] = (($asset->assignedto) && ($asset->assignedto->department)) ? $asset->assignedto->department->name : '';
+                            $row[] = (($asset->assignedTo) && ($asset->assignedTo->department)) ? $asset->assignedTo->department->name : '';
                         } else {
                             $row[] = ''; // Empty string if unassigned
                         }
@@ -796,7 +796,7 @@ class ReportsController extends Controller
 
                     if ($request->filled('title')) {
                         if ($asset->checkedOutToUser()) {
-                            $row[] = ($asset->assignedto) ? $asset->assignedto->jobtitle : '';
+                            $row[] = ($asset->assignedTo) ? $asset->assignedTo->jobtitle : '';
                         } else {
                             $row[] = ''; // Empty string if unassigned
                         }
