@@ -49,7 +49,7 @@ class GoogleAuthController extends Controller
                 ->withErrors(
                     [
                         'email' => [
-                            'User not found.',
+                    trans('admin/users/message.user_not_found'),
                         ],
                     ]
                 ); 
