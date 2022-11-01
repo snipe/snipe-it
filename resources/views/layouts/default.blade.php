@@ -131,7 +131,7 @@
               <ul class="nav navbar-nav">
                   @can('index', \App\Models\Asset::class)
                   <li aria-hidden="true"{!! (Request::is('hardware*') ? ' class="active"' : '') !!} tabindex="-1">
-                      <a href="{{ url('hardware') }}" tabindex="-1">
+                      <a href="{{ url('hardware') }}" accesskey="1" tabindex="-1">
                           <i class="fas fa-barcode fa-fw" aria-hidden="true"></i>
                           <span class="sr-only">{{ trans('general.assets') }}</span>
                       </a>
@@ -139,7 +139,7 @@
                   @endcan
                   @can('view', \App\Models\License::class)
                   <li aria-hidden="true"{!! (Request::is('licenses*') ? ' class="active"' : '') !!} tabindex="-1">
-                      <a href="{{ route('licenses.index') }}" tabindex="-1">
+                      <a href="{{ route('licenses.index') }}" accesskey="2" tabindex="-1">
                           <i class="far fa-save fa-fw"></i>
                           <span class="sr-only">{{ trans('general.licenses') }}</span>
                       </a>
@@ -147,7 +147,7 @@
                   @endcan
                   @can('index', \App\Models\Accessory::class)
                   <li aria-hidden="true"{!! (Request::is('accessories*') ? ' class="active"' : '') !!} tabindex="-1">
-                      <a href="{{ route('accessories.index') }}" tabindex="-1">
+                      <a href="{{ route('accessories.index') }}" accesskey="3" tabindex="-1">
                           <i class="far fa-keyboard fa-fw"></i>
                           <span class="sr-only">{{ trans('general.accessories') }}</span>
                       </a>
@@ -155,7 +155,7 @@
                   @endcan
                   @can('index', \App\Models\Consumable::class)
                   <li aria-hidden="true"{!! (Request::is('consumables*') ? ' class="active"' : '') !!}>
-                      <a href="{{ url('consumables') }}" tabindex="-1">
+                      <a href="{{ url('consumables') }}" accesskey="4" tabindex="-1">
                           <i class="fas fa-tint fa-fw"></i>
                           <span class="sr-only">{{ trans('general.consumables') }}</span>
                       </a>
@@ -163,7 +163,7 @@
                   @endcan
                   @can('view', \App\Models\Component::class)
                   <li aria-hidden="true"{!! (Request::is('components*') ? ' class="active"' : '') !!}>
-                      <a href="{{ route('components.index') }}" tabindex="-1">
+                      <a href="{{ route('components.index') }}" accesskey="5" tabindex="-1">
                           <i class="far fa-hdd fa-fw"></i>
                           <span class="sr-only">{{ trans('general.components') }}</span>
                       </a>
@@ -420,7 +420,7 @@
                     @if (count($status_navs) > 0)
                         @foreach ($status_navs as $status_nav)
                             <li><a href="{{ route('statuslabels.show', ['statuslabel' => $status_nav->id]) }}">
-                                <i class="fas fa-circle text-grey fa-fw" aria-hidden="true"></i>
+                                <i class="fas fa-circle text-grey fa-fw" aria-hidden="true"{!!  ($status_nav->color!='' ? ' style="color: '.e($status_nav->color).'"' : '') !!}></i>
                                  {{ $status_nav->name }} ({{ $status_nav->asset_count }})</a></li>
                         @endforeach
                     @endif
@@ -571,7 +571,7 @@
 
             @can('view', \App\Models\User::class)
             <li{!! (Request::is('users*') ? ' class="active"' : '') !!}>
-                  <a href="{{ route('users.index') }}">
+                  <a href="{{ route('users.index') }}" accesskey="6">
                       <i class="fas fa-users fa-fw"></i>
                       <span>{{ trans('general.people') }}</span>
                   </a>

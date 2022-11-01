@@ -37,11 +37,12 @@
                         <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
                     </span>
                     <span class="hidden-xs hidden-sm">
-                          {{ trans('general.assets') }}
+                          {{ trans('admin/locations/message.current_location') }}
                           {!! (($location->assets) && ($location->assets()->AssetsForShow()->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($location->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
                     </span>
                   </a>
               </li>
+
 
               <li>
                   <a href="#rtd_assets" data-toggle="tab">
@@ -51,6 +52,18 @@
                       <span class="hidden-xs hidden-sm">
                           {{ trans('admin/hardware/form.default_location') }}
                           {!! (($location->rtd_assets) && ($location->rtd_assets()->AssetsForShow()->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($location->rtd_assets()->AssetsForShow()->count()).'</badge>' : '' !!}
+                    </span>
+                  </a>
+              </li>
+
+              <li>
+                  <a href="#assets_assigned" data-toggle="tab">
+                    <span class="hidden-lg hidden-md">
+                        <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
+                    </span>
+                      <span class="hidden-xs hidden-sm">
+                          {{ trans('admin/locations/message.assigned_assets') }}
+                          {!! (($location->rtd_assets) && ($location->assignedAssets()->AssetsForShow()->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($location->assignedAssets()->AssetsForShow()->count()).'</badge>' : '' !!}
                     </span>
                   </a>
               </li>
@@ -127,7 +140,7 @@
               </div><!-- /.tab-pane -->
 
               <div class="tab-pane" id="assets">
-                      <h2 class="box-title">{{ trans('general.assets') }}</h2>
+                      <h2 class="box-title">{{ trans('admin/locations/message.current_location') }}</h2>
 
                       <div class="table table-responsive">
                           @include('partials.asset-bulk-actions')
@@ -156,6 +169,40 @@
                           </table>
 
                       </div><!-- /.table-responsive -->
+              </div><!-- /.tab-pane -->
+
+              <div class="tab-pane" id="assets_assigned">
+                  <h2 class="box-title">
+                      {{ trans('admin/locations/message.assigned_assets') }}
+                  </h2>
+
+                  <div class="table table-responsive">
+                      @include('partials.asset-bulk-actions', ['id_divname' => 'AssignedAssetsBulkEditToolbar', 'id_formname' => 'assignedAssetsBulkForm', 'id_button' => 'AssignedbulkAssetEditButton'])
+                      <table
+                              data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
+                              data-cookie-id-table="assetsAssignedListingTable"
+                              data-pagination="true"
+                              data-id-table="assetsAssignedListingTable"
+                              data-search="true"
+                              data-side-pagination="server"
+                              data-show-columns="true"
+                              data-show-export="true"
+                              data-show-refresh="true"
+                              data-sort-order="asc"
+                              data-toolbar="#AssignedAssetsBulkEditToolbar"
+                              data-bulk-button-id="#AssignedbulkAssetEditButton"
+                              data-bulk-form-id="#assignedAssetsBulkForm"
+                              data-click-to-select="true"
+                              id="assetsListingTable"
+                              class="table table-striped snipe-table"
+                              data-url="{{route('api.assets.index', ['assigned_to' => $location->id, 'assigned_type' => \App\Models\Location::class]) }}"
+                              data-export-options='{
+                              "fileName": "export-locations-{{ str_slug($location->name) }}-assets-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
+                      </table>
+
+                  </div><!-- /.table-responsive -->
               </div><!-- /.tab-pane -->
 
               <div class="tab-pane" id="rtd_assets">

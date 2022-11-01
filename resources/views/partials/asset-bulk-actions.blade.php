@@ -19,7 +19,7 @@
         @can('delete', \App\Models\Asset::class)
             <option value="delete">{{ trans('button.delete') }}</option>
         @endcan
-        <option value="labels">{{ trans_choice('button.generate_labels', 2) }}</option>
+        <option value="labels" accesskey="l">{{ trans_choice('button.generate_labels', 2) }}</option>
     </select>
 
     <button class="btn btn-primary" id="{{ (isset($id_button)) ? $id_button : 'bulkAssetEditButton' }}" disabled>{{ trans('button.go') }}</button>

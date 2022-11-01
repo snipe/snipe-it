@@ -421,7 +421,11 @@
                             <img src="{{ Storage::disk('public')->url(app('models_upload_path').e($asset->model->image)) }}" style="max-height: 30px; width: auto" class="img-responsive">
                           @endif
                         </td>
-                        <td>{{ $asset->model->category->name }}</td>
+                        <td>
+                          @if (($asset->model) && ($asset->model->category))
+                          {{ $asset->model->category->name }}
+                          @endif
+                        </td>
                         <td>{{ $asset->asset_tag }}</td>
                         <td>{{ $asset->name }}</td>
                         <td>
