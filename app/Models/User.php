@@ -61,6 +61,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'remote',
         'start_date',
         'end_date',
+        'scim_externalid'
     ];
 
     protected $casts = [
