@@ -21,12 +21,10 @@
 
     <!-- Custom Tabs -->
     <div class="nav-tabs-custom">
-
       <ul class="nav nav-tabs hidden-print">
 
-
         <li class="active">
-          <a href="#details" data-toggle="tab">
+          <a href="#checkedout" data-toggle="tab">
             <span class="hidden-lg hidden-md">
             <i class="fas fa-info-circle fa-2x" aria-hidden="true"></i>
             </span>
@@ -47,9 +45,12 @@
           </li>
         @endcan
 
-        @can('update', \App\Models\Consumble::class)
-          <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal">
-              <i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}</a>
+        @can('update', Consumable::class)
+
+          <li class="pull-right">
+            <a href="#" data-toggle="modal" data-target="#uploadFileModal">
+              <i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}
+            </a>
           </li>
         @endcan
 
@@ -57,9 +58,7 @@
 
       <div class="tab-content">
 
-        <div class="tab-pane active" id="details">
-
-
+        <div class="tab-pane active" id="checkedout">
               <div class="table-responsive">
 
                 <table
@@ -83,16 +82,18 @@
                 }'>
                   <thead>
                   <tr>
-                    <th data-searchable="false" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
-                    <th data-searchable="false" data-sortable="false" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
+                    <th data-searchable="false" data-sortable="false" data-field="avatar" data-formatter="imageFormatter">{{ trans('general.image') }}</th>
+                    <th data-searchable="false" data-sortable="false" data-field="name" formatter="usersLinkFormatter">{{ trans('general.user') }}</th>
+                    <th data-searchable="false" data-sortable="false" data-field="created_at" data-formatter="dateDisplayFormatter">
+                      {{ trans('general.date') }}
+                    </th>
                     <th data-searchable="false" data-sortable="false" data-field="note">{{ trans('general.notes') }}</th>
                     <th data-searchable="false" data-sortable="false" data-field="admin">{{ trans('general.admin') }}</th>
                   </tr>
                   </thead>
                 </table>
-              </div>
-
-        </div>
+          </div>
+        </div> <!-- close tab-pane div -->
 
 
         @can('consumables.files', $consumable)
@@ -194,7 +195,6 @@
 
   <div class="col-md-3">
 
-
         <div class="box box-default">
           <div class="box-body">
             <div class="row">
@@ -286,12 +286,12 @@
   </div> <!-- /.col-md-3-->
 </div> <!-- /.row-->
 
-@stop
+
 
 @can('update', \App\Models\Consumable::class)
   @include ('modals.upload-file', ['item_type' => 'consumable', 'item_id' => $consumable->id])
 @endcan
-
+@stop
 
 @section('moar_scripts')
 @include ('partials.bootstrap-table', ['exportFile' => 'consumable' . $consumable->name . '-export', 'search' => false])
