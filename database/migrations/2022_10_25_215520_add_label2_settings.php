@@ -22,7 +22,6 @@ class AddLabel2Settings extends Migration
             $table->string('label2_2d_type')->default('default');
             $table->string('label2_2d_target')->default('hardware_id');
             $table->string('label2_fields')->default(
-                trans('admin/hardware/form.tag').'=asset_tag;'.
                 trans('admin/hardware/form.name').'=name;'.
                 trans('admin/hardware/form.serial').'=serial;'.
                 trans('admin/hardware/form.model').'=model.name;'
