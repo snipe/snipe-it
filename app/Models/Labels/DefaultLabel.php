@@ -3,7 +3,6 @@
 namespace App\Models\Labels;
 
 use App\Helpers\Helper;
-use App\Models\Asset;
 use App\Models\Setting;
 
 class DefaultLabel extends RectangleSheet
@@ -101,7 +100,7 @@ class DefaultLabel extends RectangleSheet
 
     public function write($pdf, $record) {
 
-        $asset = Asset::find($record->get('id'));
+        $asset = $record->get('asset');
         $settings = Setting::getSettings();
 
         $textY = 0;

@@ -108,6 +108,7 @@ class Label implements View
 
                 $assetData = new Collection();
 
+                $assetData->put('asset', $asset);
                 $assetData->put('id', $asset->id);
                 $assetData->put('tag', $asset->asset_tag);
 
