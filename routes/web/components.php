@@ -27,17 +27,17 @@ Route::group(['prefix' => 'components', 'middleware' => ['auth']], function () {
 
     Route::post(
         '{componentId}/upload',
-        [Components\ComponentFilesController::class, 'store']
+        [Components\ComponentsFilesController::class, 'store']
     )->name('upload/component');
 
     Route::delete(
         '{componentId}/deletefile/{fileId}',
-        [Components\ComponentFilesController::class, 'destroy']
+        [Components\ComponentsFilesController::class, 'destroy']
     )->name('delete/componentfile');
 
     Route::get(
         '{componentId}/showfile/{fileId}/{download?}',
-        [Components\ComponentFilesController::class, 'show']
+        [Components\ComponentsFilesController::class, 'show']
     )->name('show.componentfile');
 
 });
