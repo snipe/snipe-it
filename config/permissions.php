@@ -145,6 +145,13 @@ return [
             'note'       => '',
             'display'    => true,
         ],
+        [
+            'permission' => 'accessories.files',
+            'label'      => 'View and Modify Accessory Files',
+            'note'       => '',
+            'display'    => true,
+        ],
+
     ],
 
     'Consumables' => [
