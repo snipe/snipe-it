@@ -112,14 +112,14 @@ class Label implements View
                 $assetData->put('tag', $asset->asset_tag);
 
                 if ($template->getSupportTitle()) {
-                    $assetData->put('title', !empty($settings->label2_title) ?
+                    $title = !empty($settings->label2_title) ?
                         str_ireplace(':company', $asset->company->name, $settings->label2_title) :
-                        $settings->qr_text
-                    );
+                        $settings->qr_text;
+                    if (!empty($title)) $assetData->put('title', $title);
                 }
 
                 if ($template->getSupportLogo()) {
-                    $assetData->put('logo', $settings->label2_asset_logo ?
+                    $logo = $settings->label2_asset_logo ?
                         (
                             !empty($asset->company->image) ? 
                                 Storage::disk('public')->path('companies/'.e($asset->company->image)) :
@@ -129,8 +129,8 @@ class Label implements View
                             !empty($settings->label_logo) ?
                                 Storage::disk('public')->path(''.e($settings->label_logo)) :
                                 null
-                        )
-                    );
+                        );
+                    if (!empty($logo)) $assetData->put('logo', $logo);
                 }
 
                 if ($template->getSupport1DBarcode()) {
@@ -138,7 +138,7 @@ class Label implements View
                     $barcode1DType = ($barcode1DType == 'default') ? 
                         (($settings->alt_barcode_enabled) ? $settings->alt_barcode : null) :
                         $barcode1DType;
-                    if ($barcode1DType) {
+                    if ($barcode1DType != 'none') {
                         $assetData->put('barcode1d', (object)[
                             'type' => $barcode1DType,
                             'content' => $asset->asset_tag,
@@ -151,7 +151,7 @@ class Label implements View
                     $barcode2DType = ($barcode2DType == 'default') ? 
                         (($settings->qr_code) ? $settings->barcode_type : null) :
                         $barcode2DType;
-                    if ($barcode2DType) {
+                    if ($barcode2DType != 'none') {
                         switch ($settings->label2_2d_target) {
                             case 'ht_tag': $barcode2DTarget = route('ht/assetTag', $asset->asset_tag); break;
                             case 'hardware_id':
