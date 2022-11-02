@@ -665,7 +665,7 @@
 
     function labelPerPageFormatter(value, row, index, field) {
         if (row) {
-            if (row.sheet_labels) { return 1; }
+            if (!row.hasOwnProperty('sheet_info')) { return 1; }
             else { return row.sheet_info.labels_per_page; }
         }
     }
