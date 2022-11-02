@@ -68,15 +68,15 @@ class ConsumablesFilesController extends Controller
                 }
 
 
-                return redirect()->route('consumables.show', $consumable->id)->with('success', trans('admin/consumables/message.upload.success'));
+                return redirect()->route('consumables.show', $consumable->id)->with('success', trans('general.file_upload_success'));
 
             }
 
-            return redirect()->route('consumables.show', $consumable->id)->with('error', trans('admin/consumables/message.upload.nofiles'));
+            return redirect()->route('consumables.show', $consumable->id)->with('error', trans('general.no_files_uploaded'));
         }
         // Prepare the error message
         return redirect()->route('consumables.index')
-            ->with('error', trans('admin/consumables/message.does_not_exist'));
+            ->with('error', trans('general.file_does_not_exist'));
     }
 
     /**
@@ -114,7 +114,7 @@ class ConsumablesFilesController extends Controller
         }
 
         // Redirect to the licence management page
-        return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
+        return redirect()->route('consumables.index')->with('error', trans('general.file_does_not_exist'));
     }
 
     /**
@@ -171,6 +171,6 @@ class ConsumablesFilesController extends Controller
             }
         }
 
-        return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist', ['id' => $fileId]));
+        return redirect()->route('consumables.index')->with('error', trans('general.file_does_not_exist', ['id' => $fileId]));
     }
 }
