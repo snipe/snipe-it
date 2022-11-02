@@ -27,7 +27,6 @@ class Label implements View
         $this->data = new Collection();
     }
 
-    
     /**
      * Render the PDF label.
      *
@@ -38,9 +37,10 @@ class Label implements View
         $settings = $this->data->get('settings');
         $assets = $this->data->get('assets');
         $offset = $this->data->get('offset');
+        $template = $this->data->get('template');
         
         // If disabled, pass to legacy view
-        if (!$settings->label2_enable) {
+        if ((!$settings->label2_enable) && (!$template)) {
             return view('hardware/labels')
                 ->with('assets', $assets)
                 ->with('settings', $settings)
@@ -48,8 +48,9 @@ class Label implements View
                 ->with('count', $this->data->get('count'));
         }
 
+        if (empty($template)) $template = LabelModel::find($settings->label2_template);
+        elseif (is_string($template)) $template = LabelModel::find($template);
 
-        $template = LabelModel::find($settings->label2_template);
         $template->validate();
 
         $pdf = new TCPDF(

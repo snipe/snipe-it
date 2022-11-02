@@ -547,6 +547,7 @@ class AssetsController extends Controller
             return (new Label())
                 ->with('assets', collect([ $asset ]))
                 ->with('settings', Setting::getSettings())
+                ->with('template', request()->get('template'))
                 ->with('offset', request()->get('offset'))
                 ->with('bulkedit', false)
                 ->with('count', 0);
