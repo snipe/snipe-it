@@ -68,15 +68,15 @@ class ComponentsFilesController extends Controller
                 }
 
 
-                return redirect()->route('components.show', $component->id)->with('success', trans('admin/components/message.upload.success'));
+                return redirect()->route('components.show', $component->id)->with('success', trans('general.file_upload_success'));
 
             }
 
-            return redirect()->route('components.show', $component->id)->with('error', trans('admin/components/message.upload.nofiles'));
+            return redirect()->route('components.show', $component->id)->with('error', trans('general.no_files_uploaded'));
         }
         // Prepare the error message
         return redirect()->route('components.index')
-            ->with('error', trans('admin/components/message.does_not_exist'));
+            ->with('error', trans('general.file_does_not_exist'));
     }
 
     /**
@@ -114,7 +114,7 @@ class ComponentsFilesController extends Controller
         }
 
         // Redirect to the licence management page
-        return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));
+        return redirect()->route('components.index')->with('error', trans('general.file_does_not_exist'));
     }
 
     /**
@@ -152,8 +152,6 @@ class ComponentsFilesController extends Controller
                     ->header('Content-Type', 'text/plain');
             } else {
 
-                // We have to override the URL stuff here, since local defaults in Laravel's Flysystem
-                // won't work, as they're not accessible via the web
                 if (config('filesystems.default') == 'local') { // TODO - is there any way to fix this at the StorageHelper layer?
                     return StorageHelper::downloader($file);
                 } else {
@@ -172,6 +170,6 @@ class ComponentsFilesController extends Controller
             }
         }
 
-        return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist', ['id' => $fileId]));
+        return redirect()->route('components.index')->with('error', trans('general.file_does_not_exist', ['id' => $fileId]));
     }
 }
