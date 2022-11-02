@@ -61,9 +61,17 @@ class LabelsController extends Controller
         $testAsset->model->category->id = 999999;
         $testAsset->model->category->name = 'Test Category';
 
+        $settings = Setting::getSettings();
+        if (request()->has('settings')) {
+            $overrides = request()->get('settings');
+            foreach ($overrides as $key => $value) {
+                $settings->$key = $value;
+            }
+        }
+
         return (new LabelView())
             ->with('assets', collect([$testAsset]))
-            ->with('settings', Setting::getSettings())
+            ->with('settings', $settings)
             ->with('template', $template)
             ->with('bulkedit', false)
             ->with('count', 0);
