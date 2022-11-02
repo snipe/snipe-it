@@ -66,6 +66,13 @@ abstract class Label
     public abstract function getMarginRight();
     
     /**
+     * Returns whether the template supports an asset tag.
+     * 
+     * @return bool
+     */
+    public abstract function getSupportAssetTag();
+    
+    /**
      * Returns whether the template supports a 1D barcode.
      * 
      * @return bool

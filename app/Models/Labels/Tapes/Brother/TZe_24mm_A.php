@@ -14,6 +14,7 @@ class TZe_24mm_A extends TZe_24mm
 
     public function getUnit()  { return 'mm'; }
     public function getWidth() { return 65.0; }
+    public function getSupportAssetTag()  { return false; }
     public function getSupport1DBarcode() { return false; }
     public function getSupport2DBarcode() { return true; }
     public function getSupportFields()    { return 3; }

@@ -49,6 +49,14 @@ class LabelPresenter extends Presenter
                 'title' => trans('admin/labels/table.support_fields'),
                 'visible' => true
             ], [
+                'field' => 'support_asset_tag',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('admin/labels/table.support_asset_tag'),
+                'visible' => true,
+                'formatter' => 'trueFalseFormatter'
+            ], [
                 'field' => 'support_1d_barcode',
                 'searchable' => false,
                 'sortable' => true,

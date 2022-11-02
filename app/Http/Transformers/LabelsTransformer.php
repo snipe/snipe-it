@@ -34,6 +34,7 @@ class LabelsTransformer
             'margin_left'   => $label->getMarginLeft(),
             'margin_right'  => $label->getMarginRight(),
 
+            'support_asset_tag'  => $label->getSupportAssetTag(),
             'support_1d_barcode' => $label->getSupport1DBarcode(),
             'support_2d_barcode' => $label->getSupport2DBarcode(),
             'support_fields'     => $label->getSupportFields(),

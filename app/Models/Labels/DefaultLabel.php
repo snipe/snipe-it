@@ -90,6 +90,7 @@ class DefaultLabel extends RectangleSheet
     public function getLabelColumnSpacing() { return $this->labelSpacingH; }
     public function getLabelRowSpacing()    { return $this->labelSpacingV; }
 
+    public function getSupportAssetTag()  { return false; }
     public function getSupport1DBarcode() { return true; }
     public function getSupport2DBarcode() { return true; }
     public function getSupportFields()    { return 4; }

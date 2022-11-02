@@ -10,6 +10,7 @@ class TZe_12mm_A extends TZe_12mm
 
     public function getUnit()  { return 'mm'; }
     public function getWidth() { return 50.0; }
+    public function getSupportAssetTag()  { return false; }
     public function getSupport1DBarcode() { return true; }
     public function getSupport2DBarcode() { return false; }
     public function getSupportFields()    { return 2; }
