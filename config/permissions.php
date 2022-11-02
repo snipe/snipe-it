@@ -270,6 +270,12 @@ return [
             'note'       => '',
             'display'    => true,
         ],
+        [
+            'permission' => 'components.files',
+            'label'      => 'View and Modify Component Files',
+            'note'       => '',
+            'display'    => true,
+        ],
 
     ],
 
