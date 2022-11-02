@@ -25,6 +25,21 @@ Route::group(['prefix' => 'components', 'middleware' => ['auth']], function () {
         [Components\ComponentCheckinController::class, 'store']
     )->name('components.checkin.store');
 
+    Route::post(
+        '{componentId}/upload',
+        [Components\ComponentFilesController::class, 'store']
+    )->name('upload/component');
+
+    Route::delete(
+        '{componentId}/deletefile/{fileId}',
+        [Components\ComponentFilesController::class, 'destroy']
+    )->name('delete/componentfile');
+
+    Route::get(
+        '{componentId}/showfile/{fileId}/{download?}',
+        [Components\ComponentFilesController::class, 'show']
+    )->name('show.componentfile');
+
 });
 
 Route::resource('components', Components\ComponentsController::class, [
