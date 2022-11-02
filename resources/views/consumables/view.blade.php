@@ -149,8 +149,8 @@
                       <td>
                         {{ $file->filename }}
                       </td>
-                      <td data-value="{{ Storage::size('private_uploads/consumables/'.$file->filename) }}">
-                        {{ Helper::formatFilesizeUnits(Storage::size('private_uploads/consumables/'.$file->filename)) }}
+                      <td data-value="{{ (Storage::exists('private_uploads/consumables/'.$file->filename) ? Storage::size('private_uploads/consumables/'.$file->filename) : '') }}">
+                        {{ @Helper::formatFilesizeUnits(Storage::exists('private_uploads/consumables/'.$file->filename) ? Storage::size('private_uploads/consumables/'.$file->filename) : '') }}
                       </td>
 
                       <td>
