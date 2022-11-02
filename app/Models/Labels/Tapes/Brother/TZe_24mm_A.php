@@ -5,16 +5,17 @@ namespace App\Models\Labels\Tapes\Brother;
 class TZe_24mm_A extends TZe_24mm
 {
     private const BARCODE_MARGIN =   1.40;
+    private const TAG_SIZE       =   2.80;
     private const TITLE_SIZE     =   2.80;
-    private const TITLE_MARGIN   =   0.60;
-    private const LABEL_SIZE     =   1.90;
-    private const LABEL_MARGIN   = - 0.30;
+    private const TITLE_MARGIN   =   0.50;
+    private const LABEL_SIZE     =   2.00;
+    private const LABEL_MARGIN   = - 0.35;
     private const FIELD_SIZE     =   3.20;
-    private const FIELD_MARGIN   =   0.30;
+    private const FIELD_MARGIN   =   0.15;
 
     public function getUnit()  { return 'mm'; }
     public function getWidth() { return 65.0; }
-    public function getSupportAssetTag()  { return false; }
+    public function getSupportAssetTag()  { return true; }
     public function getSupport1DBarcode() { return false; }
     public function getSupport2DBarcode() { return true; }
     public function getSupportFields()    { return 3; }
@@ -26,45 +27,61 @@ class TZe_24mm_A extends TZe_24mm
     public function write($pdf, $record) {
         $pa = $this->getPrintableArea();
 
-        $x = $pa->x1;
-        $y = $pa->y1;
-        $w = $pa->w;
+        $currentX = $pa->x1;
+        $currentY = $pa->y1;
+        $usableWidth = $pa->w;
+
+        $barcodeSize = $pa->h - self::TAG_SIZE;
 
         if ($record->has('barcode2d')) {
+            static::writeText(
+                $pdf, $record->get('tag'),
+                $pa->x1, $pa->y2 - self::TAG_SIZE,
+                'freemono', 'b', self::TAG_SIZE, 'C',
+                $barcodeSize, self::TAG_SIZE, true, 0
+            );
             static::write2DBarcode(
                 $pdf, $record->get('barcode2d')->content, $record->get('barcode2d')->type,
-                $x, $y, $pa->h, $pa->h
+                $currentX, $currentY,
+                $barcodeSize, $barcodeSize
             );
-            $x += $pa->h + self::BARCODE_MARGIN;
-            $w -= $pa->h + self::BARCODE_MARGIN;
+            $currentX += $barcodeSize + self::BARCODE_MARGIN;
+            $usableWidth -= $barcodeSize + self::BARCODE_MARGIN;
+        } else {
+            static::writeText(
+                $pdf, $record->get('tag'),
+                $pa->x1, $pa->y2 - self::TAG_SIZE,
+                'freemono', 'b', self::TAG_SIZE, 'R',
+                $usableWidth, self::TAG_SIZE, true, 0
+            );
         }
 
         if ($record->has('title')) {
             static::writeText(
                 $pdf, $record->get('title'),
-                $x, $y,
+                $currentX, $currentY,
                 'freesans', '', self::TITLE_SIZE, 'L',
-                $w, self::TITLE_SIZE, true, 0
+                $usableWidth, self::TITLE_SIZE, true, 0
             );
-            $y += self::TITLE_SIZE + self::TITLE_MARGIN;
+            $currentY += self::TITLE_SIZE + self::TITLE_MARGIN;
         }
 
         foreach ($record->get('fields') as $label => $value) {
             static::writeText(
                 $pdf, $label,
-                $x, $y,
+                $currentX, $currentY,
                 'freesans', '', self::LABEL_SIZE, 'L',
-                $w, self::LABEL_SIZE, true, 0
+                $usableWidth, self::LABEL_SIZE, true, 0, 0
             );
-            $y += self::LABEL_SIZE + self::LABEL_MARGIN;
+            $currentY += self::LABEL_SIZE + self::LABEL_MARGIN;
 
             static::writeText(
                 $pdf, $value,
-                $x, $y,
+                $currentX, $currentY,
                 'freemono', 'B', self::FIELD_SIZE, 'L',
-                $w, self::FIELD_SIZE, true, 0, 0.3
+                $usableWidth, self::FIELD_SIZE, true, 0, 0.3
             );
-            $y += self::FIELD_SIZE + self::FIELD_MARGIN;
+            $currentY += self::FIELD_SIZE + self::FIELD_MARGIN;
         }
     }
 }

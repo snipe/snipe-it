@@ -4,16 +4,16 @@ namespace App\Models\Labels\Tapes\Brother;
 
 class TZe_12mm_A extends TZe_12mm
 {
-    private const BARCODE_SIZE   = 2.50;
+    private const BARCODE_SIZE   = 3.20;
     private const BARCODE_MARGIN = 0.30;
-    private const FIELD_SIZE_MOD = 1.00;
+    private const TEXT_SIZE_MOD  = 1.00;
 
     public function getUnit()  { return 'mm'; }
     public function getWidth() { return 50.0; }
-    public function getSupportAssetTag()  { return false; }
+    public function getSupportAssetTag()  { return true; }
     public function getSupport1DBarcode() { return true; }
     public function getSupport2DBarcode() { return false; }
-    public function getSupportFields()    { return 2; }
+    public function getSupportFields()    { return 1; }
     public function getSupportLogo()      { return false; }
     public function getSupportTitle()     { return false; }
 
@@ -28,26 +28,27 @@ class TZe_12mm_A extends TZe_12mm
                 $pa->x1, $pa->y1, $pa->w, self::BARCODE_SIZE
             );
         }
+        
+        $currentY = $pa->y1 + self::BARCODE_SIZE + self::BARCODE_MARGIN;
+        $usableHeight = $pa->h - self::BARCODE_SIZE - self::BARCODE_MARGIN;
+        $fontSize = $usableHeight + self::TEXT_SIZE_MOD;
 
-        $fields = $record->get('fields');
-        $y = $pa->y1 + self::BARCODE_SIZE + self::BARCODE_MARGIN;
-        $realSize = $pa->h - self::BARCODE_SIZE - self::BARCODE_MARGIN;
-        $fontSize = $realSize + self::FIELD_SIZE_MOD;
+        $tagWidth = $pa->w / 3;
+        $fieldWidth = $pa->w / 3 * 2;
 
-        if ($fields->count() >= 1) {
+        static::writeText(
+            $pdf, $record->get('tag'),
+            $pa->x1, $currentY,
+            'freemono', 'b', $fontSize, 'L',
+            $tagWidth, $usableHeight, true, 0, 0
+        );
+        
+        if ($record->get('fields')->count() >= 1) {
             static::writeText(
-                $pdf, $fields->values()->get(0),
-                $pa->x1, $y,
-                'freemono', 'B', $fontSize, 'L',
-                $pa->w, $realSize, true, 0, 0.1
-            );
-        }
-        if ($fields->count() >= 2) {
-            static::writeText(
-                $pdf, $fields->values()->get(1),
-                $pa->x1, $y,
-                'freemono', 'B', $fontSize, 'R',
-                $pa->w, $realSize, true, 0, 0.1
+                $pdf, $record->get('fields')->values()->get(0),
+                $pa->x1 + ($tagWidth), $currentY,
+                'freemono', 'b', $fontSize, 'R',
+                $fieldWidth, $usableHeight, true, 0, 0
             );
         }
         
