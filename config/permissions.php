@@ -178,6 +178,12 @@ return [
             'note'       => '',
             'display'    => true,
         ],
+        [
+            'permission' => 'consumables.files',
+            'label'      => 'View and Modify Consumable Files',
+            'note'       => '',
+            'display'    => true,
+        ],
     ],
 
 
