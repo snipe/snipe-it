@@ -27,6 +27,10 @@ class ConsumablesFilesController extends Controller
      */
     public function store(AssetFileRequest $request, $consumableId = null)
     {
+        if (config('app.lock_passwords')) {
+            return redirect()->route('consumables.show', ['consumable'=>$consumableId])->with('error', trans('general.feature_disabled'));
+        }
+
         $consumable = Consumable::find($consumableId);
 
         if (isset($consumable->id)) {

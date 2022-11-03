@@ -27,10 +27,16 @@ class AccessoriesFilesController extends Controller
      */
     public function store(AssetFileRequest $request, $accessoryId = null)
     {
+
+        if (config('app.lock_passwords')) {
+            return redirect()->route('accessories.show', ['accessory'=>$accessoryId])->with('error', trans('general.feature_disabled'));
+        }
+
+
         $accessory = Accessory::find($accessoryId);
 
         if (isset($accessory->id)) {
-            $this->authorize('update', $accessory);
+            $this->authorize('accessories.files', $accessory);
 
             if ($request->hasFile('file')) {
                 if (! Storage::exists('private_uploads/accessories')) {
@@ -129,8 +135,11 @@ class AccessoriesFilesController extends Controller
      */
     public function show($accessoryId = null, $fileId = null, $download = true)
     {
+
         \Log::debug('Private filesystem is: '.config('filesystems.default'));
         $accessory = Accessory::find($accessoryId);
+
+
 
         // the accessory is valid
         if (isset($accessory->id)) {

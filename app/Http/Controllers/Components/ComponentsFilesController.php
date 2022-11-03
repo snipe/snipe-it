@@ -27,6 +27,11 @@ class ComponentsFilesController extends Controller
      */
     public function store(AssetFileRequest $request, $componentId = null)
     {
+
+        if (config('app.lock_passwords')) {
+            return redirect()->route('components.show', ['component'=>$componentId])->with('error', trans('general.feature_disabled'));
+        }
+
         $component = Component::find($componentId);
 
         if (isset($component->id)) {
