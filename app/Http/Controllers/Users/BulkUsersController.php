@@ -45,7 +45,11 @@ class BulkUsersController extends Controller
                     ->with('groups', Group::pluck('name', 'id'));
             } elseif ($request->input('bulk_actions') == 'delete') {
                 return view('users/confirm-bulk-delete')->with('users', $users)->with('statuslabel_list', Helper::statusLabelList());
-            } elseif ($request->input('bulk_actions') == 'bulkpasswordreset') {
+            }
+            elseif ($request->input('bulk_actions') =='bulk_checkin'){
+                return view('users/bulk-checkin')->with('users/bulkcheckin');
+            }
+            elseif ($request->input('bulk_actions') == 'bulkpasswordreset') {
                 foreach ($users as $user) {
                     if (($user->activated == '1') && ($user->email != '')) {
                         $credentials = ['email' => $user->email];
