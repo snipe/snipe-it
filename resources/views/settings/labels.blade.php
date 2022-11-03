@@ -29,9 +29,18 @@
                     .map((value, index, all) => ({[value.name]: value.value})))
             };
             var params = $.param(settingsOverride);
-            var url = "{{ route('labels.show', ['labelName' => ':label']) }}".replace(':label', settingsOverride.settings.label2_template) + "?" + params;
+            var template = settingsOverride.settings.label2_template;
+            if (template === undefined) return;
+            
+            var url = "{{ route('labels.show', ['labelName' => ':label']) }}".replace(':label', template) + "?" + params + "#toolbar=0";
             $('iframe#framePreview').attr('src', url);
         }
+
+        window.addEventListener('load', () => {
+            $('#settingsForm').on('change', refreshPreview);
+            $('#settingsForm').on('load-success.bs.table', refreshPreview);
+        });
+
     </script>
 
     {{ Form::open(['id' => 'settingsForm', 'method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
