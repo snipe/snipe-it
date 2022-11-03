@@ -72,7 +72,7 @@
                     </li>
 
 
-                    @can('accessorys.files', $accessory)
+                    @can('accessories.files', $accessory)
                         <li>
                             <a href="#files" data-toggle="tab">
             <span class="hidden-lg hidden-md">
@@ -176,7 +176,7 @@
 
 
 
-                    @can('accessorys.files', $accessory)
+                    @can('accessories.files', $accessory)
                         <div class="tab-pane" id="files">
 
                             <div class="table table-responsive">
@@ -198,7 +198,7 @@
                                         data-sort-name="name"
                                         class="table table-striped snipe-table"
                                         data-export-options='{
-            "fileName": "export-accessorys-uploads-{{ str_slug($accessory->name) }}-{{ date('Y-m-d') }}",
+            "fileName": "export-accessories-uploads-{{ str_slug($accessory->name) }}-{{ date('Y-m-d') }}",
             "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","delete","download","icon"]
             }'>
                                     <thead>
@@ -224,7 +224,7 @@
                                                 </td>
                                                 <td>
                                                     @if ($file->filename)
-                                                        @if ( Helper::checkUploadIsImage($file->get_src('accessorys')))
+                                                        @if ( Helper::checkUploadIsImage($file->get_src('accessories')))
                                                             <a href="{{ route('show.accessoryfile', ['accessoryId' => $accessory->id, 'fileId' => $file->id, 'download' => 'false']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show.accessoryfile', ['accessoryId' => $accessory->id, 'fileId' => $file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
                                                         @endif
                                                     @endif
@@ -232,8 +232,8 @@
                                                 <td>
                                                     {{ $file->filename }}
                                                 </td>
-                                                <td data-value="{{ (Storage::exists('private_uploads/accessorys/'.$file->filename) ? Storage::size('private_uploads/accessorys/'.$file->filename) : '') }}">
-                                                    {{ @Helper::formatFilesizeUnits(Storage::exists('private_uploads/accessorys/'.$file->filename) ? Storage::size('private_uploads/accessorys/'.$file->filename) : '') }}
+                                                <td data-value="{{ (Storage::exists('private_uploads/accessories/'.$file->filename) ? Storage::size('private_uploads/accessories/'.$file->filename) : '') }}">
+                                                    {{ @Helper::formatFilesizeUnits(Storage::exists('private_uploads/accessories/'.$file->filename) ? Storage::size('private_uploads/accessories/'.$file->filename) : '') }}
                                                 </td>
 
                                                 <td>
@@ -392,7 +392,7 @@
 
 
 
-@can('update', Accessory::class)
+@can('accessories.files', Accessory::class)
     @include ('modals.upload-file', ['item_type' => 'accessory', 'item_id' => $accessory->id])
 @endcan
 @stop
