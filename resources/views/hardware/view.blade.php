@@ -1288,9 +1288,9 @@
                                             <tr>
                                                 <td><i class="{{ Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i></td>
                                                 <td>
-                                                    @if ( Helper::checkUploadIsImage($file->get_src('assets')))
-                                                        <a href="{{ route('show/modelfile', ['assetId' => $asset->model->id, 'fileId' =>$file->id]) }}" data-toggle="lightbox" data-type="image" data-title="{{ $file->filename }}" data-footer="{{ Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}">
-                                                            <img src="{{ route('show/modelfile', ['assetId' => $asset->model->id, 'fileId' =>$file->id]) }}" style="max-width: 50px;">
+                                                    @if ( Helper::checkUploadIsImage($file->get_src('assetmodels')))
+                                                        <a href="{{ route('show/modelfile', ['modelID' => $asset->model->id, 'fileId' =>$file->id]) }}" data-toggle="lightbox" data-type="image" data-title="{{ $file->filename }}" data-footer="{{ Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}">
+                                                            <img src="{{ route('show/modelfile', ['modelID' => $asset->model->id, 'fileId' =>$file->id]) }}" style="max-width: 50px;">
                                                         </a>
                                                     @endif
                                                 </td>
