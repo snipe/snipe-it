@@ -7,8 +7,10 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Models\Company;
 use App\Models\Component;
 use App\Helpers\Helper;
+use App\Models\Serial;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -58,12 +60,12 @@ class ComponentsController extends Controller
     /**
      * Validate and store data for new component.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @see ComponentsController::getCreate() method that generates the view
-     * @since [v3.0]
      * @param ImageUploadRequest $request
      * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws \Illuminate\Auth\Access\AuthorizationException*@throws \Throwable
+     * @see ComponentsController::getCreate() method that generates the view
+     * @since [v3.0]
+     * @author [A. Gianotto] [<snipe@snipe.net>]
      */
     public function store(ImageUploadRequest $request)
     {
@@ -85,10 +87,69 @@ class ComponentsController extends Controller
         $component = $request->handleImages($component);
 
         if ($component->save()) {
+
+            // If serial is not empty, explode it into an array and save each serial to the serials table.
+            // Check if the serials do not already exist in the database using the Serial model.
+            if (!empty($component->serial)) {
+                // Break the serials into an array and remove empty values.
+                $serials = preg_split('/[\s,]+/', $component->serial);
+                $this->saveSerials($serials, $component);
+
+                // If the serials are saved, set the component serial to null.
+                if ($this->verifySerialsSavedToDb($serials)) {
+                    $component->serial = null;
+                    $component->save();
+                }
+            }
+
             return redirect()->route('components.index')->with('success', trans('admin/components/message.create.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($component->getErrors());
+    }
+
+    /**
+     * This method checks if the serials already exist in the database.
+     *
+     * @param $serials
+     * @return bool
+     */
+    private function verifySerialsSavedToDb($serials): bool
+    {
+        $serialsSavedCount = Serial::whereIn('serial_number', $serials)->count();
+        $serialsCount = count($serials);
+
+        return $serialsSavedCount === $serialsCount;
+    }
+
+    /**
+     * @param $serials
+     * @param $component
+     * @return void
+     * @throws \Throwable
+     */
+    private function saveSerials($serials, $component)
+    {
+        // Remove empty values from the array.
+        $serials = array_filter($serials);
+
+        foreach ($serials as $serial) {
+            try {
+                $serial = trim($serial);
+                $serial_exists = Serial::where('serial_number', '=', $serial)->exists();
+
+                if ($serial_exists !== true) {
+                    // Add the serial to the serials table
+                    $record = new Serial();
+                    $record->serial_number = $serial;
+                    $record->component_id = $component->id;
+                    $record->notes = null;
+                    $record->saveOrFail();
+                }
+            } catch (\Exception $e) {
+                Log::error($e->getMessage());
+            }
+        }
     }
 
     /**
@@ -158,6 +219,20 @@ class ComponentsController extends Controller
         $component = $request->handleImages($component);
 
         if ($component->save()) {
+            // If serial is not empty, explode it into an array and save each serial to the serials table.
+            // Check if the serials do not already exist in the database using the Serial model.
+            if (!empty($component->serial)) {
+                // Separate the serials by comma or new line.
+                $serials = preg_split('/[\s,]+/', $component->serial);
+                $this->saveSerials($serials, $component);
+
+                // If the serials are saved, set the component serial to null.
+                if ($this->verifySerialsSavedToDb($serials)) {
+                    $component->serial = null;
+                    $component->save();
+                }
+            }
+
             return redirect()->route('components.index')->with('success', trans('admin/components/message.update.success'));
         }
 
@@ -207,7 +282,7 @@ class ComponentsController extends Controller
      */
     public function show($componentId = null)
     {
-        $component = Component::find($componentId);
+        $component = Component::with('serials.asset')->find($componentId);
 
         if (isset($component->id)) {
             $this->authorize('view', $component);

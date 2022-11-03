@@ -56,6 +56,33 @@
               </div>
             </div>
 
+            <!-- Serials -->
+            <div class="form-group {{ $errors->has('serials') ? 'error' : '' }}">
+              <label for="serials" class="col-md-3 control-label">Serials</label>
+              <div class="col-md-7">
+                <textarea class="col-md-6 form-control" id="serials" name="serials" rows="4"
+                          placeholder="Enter serials that are to be checked out seperated by a comma or new line.">{{ old('serials') }}</textarea>
+                {!! $errors->first('serials', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+              </div>
+            </div>
+
+            <!-- Serials Checkboxes -->
+            <div class="form-group">
+              <label for="serials" class="col-md-2 control-label">&nbsp;</label>
+              <div class="col-md-7">
+                @foreach($component->serials as $serial)
+                  @if($serial->status == 0)
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="serials_list[]" value="{{ $serial->serial_number }}" />
+                      {{ $serial->serial_number }}
+                    </label>
+                  </div>
+                  @endif
+                @endforeach
+              </div>
+            </div>
+
 
         </div> <!-- .BOX-BODY-->
         <div class="box-footer">
@@ -67,4 +94,21 @@
   </div> <!-- .col-md-9-->
 </div> <!-- .row -->
 
+@stop
+
+@section('moar_scripts')
+  <script type="application/javascript">
+    $(document).ready(function() {
+      // If the user has selected serials from the list "serials_list", then clear the serials textarea field
+      // and add the serials to the textarea field.
+      $('input[name="serials_list[]"]').on('change', function() {
+        var serials = $('textarea[name="serials"]').val();
+        var serials_list = $('input[name="serials_list[]"]:checked').map(function() {
+          return this.value;
+        }).get();
+
+        $('textarea[name="serials"]').val(serials_list.join("\n"));
+      });
+    });
+  </script>
 @stop

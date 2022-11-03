@@ -25,6 +25,18 @@ Route::group(['prefix' => 'components', 'middleware' => ['auth']], function () {
         [Components\ComponentCheckinController::class, 'store']
     )->name('components.checkin.store');
 
+    Route::group(['prefix' => 'serials'], function () {
+        Route::get(
+            '{serialID}/edit',
+            [Components\Serials\SerialsController::class, 'edit']
+        )->name('components.serials.edit');
+
+        Route::put(
+            '{serialID}',
+            [Components\Serials\SerialsController::class, 'update']
+        )->name('components.serials.update');
+    });
+
 });
 
 Route::resource('components', Components\ComponentsController::class, [

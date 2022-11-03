@@ -56,14 +56,60 @@
                                 {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
                         </div>
+
+                        <!-- Serials -->
+                        <div class="form-group {{ $errors->has('serials') ? 'error' : '' }}">
+                            <label for="serials" class="col-md-2 control-label">Serials</label>
+                            <div class="col-md-7">
+                                <textarea class="col-md-6 form-control" id="serials" name="serials" rows="4"
+                                          placeholder="Enter serials that are to be checked in seperated by a comma or new line.">{{ old('serials') }}</textarea>
+                                {!! $errors->first('serials', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                            </div>
+                        </div>
+
+                        <!-- Serials Checkboxes -->
+                        <div class="form-group">
+                            <label for="serials" class="col-md-2 control-label">&nbsp;</label>
+                            <div class="col-md-7">
+                                @foreach($component->serials as $serial)
+                                    @if(($serial->status == 1 || $serial->status == 2) && $serial->asset_id == $asset->id)
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="serials_list[]" value="{{ $serial->serial_number }}" />
+                                                {{ $serial->serial_number }} (<a href="{{ route('hardware.show', $serial->asset->id) }}" class="badge badge-info">{{ $serial->asset->asset_tag }}</a>)
+                                            </label>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+
                         <div class="box-footer">
                             <a class="btn btn-link" href="{{ route('components.index') }}">{{ trans('button.cancel') }}</a>
                             <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkin') }}</button>
                         </div>
                     </div> <!-- /.box-->
+                </div>
             </form>
         </div> <!-- /.col-md-7-->
     </div>
 
 
+@stop
+
+@section('moar_scripts')
+    <script type="application/javascript">
+        $(document).ready(function() {
+            // If the user has selected serials from the list "serials_list", then clear the serials textarea field
+            // and add the serials to the textarea field.
+            $('input[name="serials_list[]"]').on('change', function() {
+                var serials = $('textarea[name="serials"]').val();
+                var serials_list = $('input[name="serials_list[]"]:checked').map(function() {
+                    return this.value;
+                }).get();
+
+                $('textarea[name="serials"]').val(serials_list.join("\n"));
+            });
+        });
+    </script>
 @stop

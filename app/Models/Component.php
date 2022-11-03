@@ -151,6 +151,17 @@ class Component extends SnipeModel
     }
 
     /**
+     * Establishes the component -> serials relationship
+     *
+     * @author [Andrew Murray] [<andrew.murray@knownhost.com>]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function serials()
+    {
+        return $this->hasMany(\App\Models\Serial::class, 'component_id');
+    }
+
+    /**
      * Establishes the component -> action logs relationship
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]

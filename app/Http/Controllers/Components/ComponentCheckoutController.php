@@ -7,22 +7,25 @@ use App\Events\ComponentCheckedOut;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
 use App\Models\Component;
+use App\Models\Serial;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class ComponentCheckoutController extends Controller
 {
     /**
      * Returns a view that allows the checkout of a component to an asset.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @see ComponentCheckoutController::store() method that stores the data.
-     * @since [v3.0]
      * @param int $componentId
      * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see ComponentCheckoutController::store() method that stores the data.
+     * @since [v3.0]
      */
     public function create($componentId)
     {
@@ -33,19 +36,21 @@ class ComponentCheckoutController extends Controller
         }
         $this->authorize('checkout', $component);
 
+        $component->load('serials');
+
         return view('components/checkout', compact('component'));
     }
 
     /**
      * Validate and store checkout data.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @see ComponentCheckoutController::create() method that returns the form.
-     * @since [v3.0]
      * @param Request $request
      * @param int $componentId
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @see ComponentCheckoutController::create() method that returns the form.
+     * @since [v3.0]
+     * @author [A. Gianotto] [<snipe@snipe.net>]
      */
     public function store(Request $request, $componentId)
     {
@@ -58,9 +63,23 @@ class ComponentCheckoutController extends Controller
         $this->authorize('checkout', $component);
 
         $max_to_checkout = $component->numRemaining();
-        $validator = Validator::make($request->all(), [
-            'asset_id'          => 'required',
-            'assigned_qty'      => "required|numeric|between:1,$max_to_checkout",
+
+        $formData = $request->all();
+
+        if (!empty($formData['serials'])) {
+            $formData['serials'] = preg_split('/[\s,]+/', $request->input('serials'));
+        }
+
+        $validator = Validator::make($formData, [
+            'asset_id' => 'required',
+            'assigned_qty' => "required|numeric|between:1,$max_to_checkout",
+            'serials.*' => [
+                'string',
+                Rule::exists('serials', 'serial_number')->where(function ($query) use ($componentId) {
+                    // Only check for unassigned serials. If the serial is assigned to another asset, it's not available.
+                    return $query->where('status', '=', 0);
+                }),
+            ],
         ]);
 
         if ($validator->fails()) {
@@ -89,6 +108,13 @@ class ComponentCheckoutController extends Controller
             'asset_id' => $asset_id,
             'note' => $request->input('note'),
         ]);
+
+        // If we have serials, we need to update them to reflect the new status
+        if ($request->filled('serials')) {
+            // Break each serial into an array
+            $serials = array_filter(preg_split('/[\s,]+/', $request->input('serials')));
+            Serial::whereIn('serial_number', $serials)->update(['status' => 1, 'asset_id' => $asset_id, 'updated_at' => Carbon::now()]);
+        }
 
         event(new CheckoutableCheckedOut($component, $asset, Auth::user(), $request->input('note')));
 

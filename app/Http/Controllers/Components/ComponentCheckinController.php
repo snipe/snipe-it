@@ -7,23 +7,25 @@ use App\Events\ComponentCheckedIn;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
 use App\Models\Component;
+use App\Models\Serial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class ComponentCheckinController extends Controller
 {
     /**
      * Returns a view that allows the checkin of a component from an asset.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @see ComponentCheckinController::store() method that stores the data.
-     * @since [v4.1.4]
      * @param $component_asset_id
      * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see ComponentCheckinController::store() method that stores the data.
+     * @since [v4.1.4]
      */
     public function create($component_asset_id)
     {
@@ -39,6 +41,8 @@ class ComponentCheckinController extends Controller
             }
             $this->authorize('checkin', $component);
 
+            $component->load('serials');
+
             return view('components/checkin', compact('component_assets', 'component', 'asset'));
         }
 
@@ -48,13 +52,13 @@ class ComponentCheckinController extends Controller
     /**
      * Validate and store checkin data.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @see ComponentCheckinController::create() method that returns the form.
-     * @since [v4.1.4]
      * @param Request $request
      * @param $component_asset_id
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @see ComponentCheckinController::create() method that returns the form.
+     * @since [v4.1.4]
+     * @author [A. Gianotto] [<snipe@snipe.net>]
      */
     public function store(Request $request, $component_asset_id)
     {
@@ -67,8 +71,22 @@ class ComponentCheckinController extends Controller
             $this->authorize('checkin', $component);
 
             $max_to_checkin = $component_assets->assigned_qty;
-            $validator = Validator::make($request->all(), [
+
+            $formData = $request->all();
+
+            if (!empty($formData['serials'])) {
+                $formData['serials'] = preg_split('/[\s,]+/', $request->input('serials'));
+            }
+
+            $validator = Validator::make($formData, [
                 'checkin_qty' => "required|numeric|between:1,$max_to_checkin",
+                'serials.*' => [
+                    'string',
+                    Rule::exists('serials', 'serial_number')->where(function ($query) use ($component_assets) {
+                        // Only check for assigned serials for this component.
+                        return $query->where('status', '=', 1)->where('asset_id', '=', $component_assets->asset_id);
+                    }),
+                ]
             ]);
 
             if ($validator->fails()) {
@@ -78,7 +96,7 @@ class ComponentCheckinController extends Controller
             }
 
             // Validation passed, so let's figure out what we have to do here.
-            $qty_remaining_in_checkout = ($component_assets->assigned_qty - (int) $request->input('checkin_qty'));
+            $qty_remaining_in_checkout = ($component_assets->assigned_qty - (int)$request->input('checkin_qty'));
 
             // We have to modify the record to reflect the new qty that's
             // actually checked out.
@@ -90,6 +108,13 @@ class ComponentCheckinController extends Controller
             // we can simply delete the associated components_assets record
             if ($qty_remaining_in_checkout == 0) {
                 DB::table('components_assets')->where('id', '=', $component_asset_id)->delete();
+            }
+
+            // If we have serials, we need to update them to reflect the new status
+            if ($request->filled('serials')) {
+                // Break each serial into an array
+                $serials = array_filter(preg_split('/[\s,]+/', $request->input('serials')));
+                Serial::whereIn('serial_number', $serials)->update(['status' => 0, 'asset_id' => null, 'updated_at' => Carbon::now()]);
             }
 
             $asset = Asset::find($component_assets->asset_id);
