@@ -62,7 +62,7 @@ class AssetModelsFilesController extends Controller
                 $model->logUpload($file_name, e($request->get('notes')));
             }
 
-            return redirect()->back()->with('success', trans('admin/hardware/message.upload.success'));
+            return redirect()->back()->with('success', trans('general.file_upload_success'));
         }
 
         return redirect()->back()->with('error', trans('admin/hardware/message.upload.nofiles'));
