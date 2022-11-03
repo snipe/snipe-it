@@ -283,7 +283,7 @@
   </div>
 </div> <!-- .row-->
 
-@can('update', Component::class)
+@can('components.files', Component::class)
   @include ('modals.upload-file', ['item_type' => 'component', 'item_id' => $component->id])
 @endcan
 @stop

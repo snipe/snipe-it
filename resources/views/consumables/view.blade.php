@@ -288,7 +288,7 @@
 
 
 
-@can('update', \App\Models\Consumable::class)
+@can('consumables.files', \App\Models\Consumable::class)
   @include ('modals.upload-file', ['item_type' => 'consumable', 'item_id' => $consumable->id])
 @endcan
 @stop
