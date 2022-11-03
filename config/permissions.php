@@ -145,6 +145,13 @@ return [
             'note'       => '',
             'display'    => true,
         ],
+        [
+            'permission' => 'accessories.files',
+            'label'      => 'View and Modify Accessory Files',
+            'note'       => '',
+            'display'    => true,
+        ],
+
     ],
 
     'Consumables' => [
@@ -175,6 +182,12 @@ return [
         [
             'permission' => 'consumables.checkout',
             'label'      => 'Checkout ',
+            'note'       => '',
+            'display'    => true,
+        ],
+        [
+            'permission' => 'consumables.files',
+            'label'      => 'View and Modify Consumable Files',
             'note'       => '',
             'display'    => true,
         ],
@@ -261,6 +274,12 @@ return [
         [
             'permission' => 'components.checkin',
             'label'      => 'Checkin ',
+            'note'       => '',
+            'display'    => true,
+        ],
+        [
+            'permission' => 'components.files',
+            'label'      => 'View and Modify Component Files',
             'note'       => '',
             'display'    => true,
         ],

@@ -102,6 +102,23 @@ class Accessory extends SnipeModel
 
 
     /**
+     * Establishes the accessories -> action logs -> uploads relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v6.1.13]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function uploads()
+    {
+        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')
+            ->where('item_type', '=', self::class)
+            ->where('action_type', '=', 'uploaded')
+            ->whereNotNull('filename')
+            ->orderBy('created_at', 'desc');
+    }
+
+
+    /**
      * Establishes the accessory -> supplier relationship
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]

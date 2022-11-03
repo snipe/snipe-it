@@ -41,8 +41,10 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
             } 
         );
 
-        $config['validations'][$core.'externalId'] = 'string'; // not required, but supported mostly just for Okta
-        $mappings['externalId'] = AttributeMapping::eloquent('scim_externalid');
+        // externalId support
+        $config['validations'][$core.'externalId'] = 'string|nullable'; // not required, but supported mostly just for Okta
+        // note that the mapping is *not* namespaced like the other $mappings
+        $config['mapping']['externalId'] = AttributeMapping::eloquent('scim_externalid');
 
         $config['validations'][$core.'emails'] = 'nullable|array';         // emails are not required in Snipe-IT...
         $config['validations'][$core.'emails.*.value'] = 'email'; // ...(had to remove the recommended 'required' here)
