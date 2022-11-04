@@ -27,8 +27,6 @@
 
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-
-
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
@@ -36,10 +34,7 @@
                     </h2>
                 </div>
                 <div class="box-body">
-
-
                     <div class="col-md-12">
-
                         <!-- Site name -->
                         <div class="form-group {{ $errors->has('site_name') ? 'error' : '' }}">
 
@@ -57,9 +52,6 @@
                                 {!! $errors->first('site_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
-
-
-
                         <!-- Branding -->
                         <div class="form-group {{ $errors->has('brand') ? 'error' : '' }}">
                             <div class="col-md-3">
@@ -70,7 +62,6 @@
                                 {!! $errors->first('brand', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
-
                         <!-- Logo -->
                     @include('partials/forms/edit/uploadLogo', [
                         "logoVariable" => "logo",
@@ -120,8 +111,6 @@
 
                             </div>
                         </div>
-
-
                         <!-- show urls in emails-->
                         <div class="form-group">
                             <div class="col-md-3">
@@ -133,7 +122,6 @@
                                 <p class="help-block">{{ trans('admin/settings/general.show_url_in_emails_help_text') }}</p>
                             </div>
                         </div>
-
                         <!-- Header color -->
                         <div class="form-group {{ $errors->has('header_color') ? 'error' : '' }}">
                             <div class="col-md-3">
@@ -149,7 +137,6 @@
                                 {!! $errors->first('header_color', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
-
                         <!-- Skin -->
                         <div class="form-group {{ $errors->has('skin') ? 'error' : '' }}">
                             <div class="col-md-3">
@@ -160,7 +147,6 @@
                                 {!! $errors->first('skin', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
-
                         <!-- Allow User Skin -->
                         <div class="form-group">
                             <div class="col-md-3">
@@ -172,7 +158,6 @@
                                 <p class="help-block">{{ trans('admin/settings/general.allow_user_skin_help_text') }}</p>
                             </div>
                         </div>
-
                         <!-- Custom css -->
                         <div class="form-group {{ $errors->has('custom_css') ? 'error' : '' }}">
                             <div class="col-md-3">
@@ -190,8 +175,6 @@
                                 <p class="help-block">{!! trans('admin/settings/general.custom_css_help') !!}</p>
                             </div>
                         </div>
-
-
                         <!-- Support Footer -->
                         <div class="form-group {{ $errors->has('support_footer') ? 'error' : '' }}">
                             <div class="col-md-3">
@@ -209,8 +192,6 @@
                                 {!! $errors->first('support_footer', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
-
-
                         <!-- Version Footer -->
                         <div class="form-group {{ $errors->has('version_footer') ? 'error' : '' }}">
                             <div class="col-md-3">
@@ -228,7 +209,6 @@
                                 {!! $errors->first('version_footer', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
-
                         <!-- Additional footer -->
                         <div class="form-group {{ $errors->has('footer_text') ? 'error' : '' }}">
                             <div class="col-md-3">
@@ -246,12 +226,24 @@
 
                             </div>
                         </div>
+                        <!-- Additional print -->
+                        <div class="form-group {{ $errors->has('print_additional_text') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('print_additional_text', trans('admin/settings/general.print_additional_text')) }}
+                            </div>
+                            <div class="col-md-9">
+                                @if (config('app.lock_passwords')===true)
+                                    {{ Form::textarea('footer_text', Request::old('print_additional_text', $setting->print_additional_text), array('class' => 'form-control', 'rows' => '4', 'placeholder' => 'Optional additional print text','disabled'=>'disabled')) }}
+                                    <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                                @else
+                                    {{ Form::textarea('print_additional_text', Request::old('print_additional_text', $setting->print_additional_text), array('class' => 'form-control','rows' => '4','placeholder' => 'Optional additional print text')) }}
+                                @endif
+                                <p class="help-block">{{ trans('admin/settings/general.print_additional_text_help') }}</p>
+                                {!! $errors->first('footer_text', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
 
-
-
-
+                            </div>
+                        </div>
                     </div>
-
                 </div> <!--/.box-body-->
                 <div class="box-footer">
                     <div class="text-left col-md-6">
@@ -260,7 +252,6 @@
                     <div class="text-right col-md-6">
                         <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                     </div>
-
                 </div>
             </div> <!-- /box -->
         </div> <!-- /.col-md-8-->

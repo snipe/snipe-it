@@ -54,6 +54,8 @@ return [
     'favicon_size'          => 'Favicons should be square images, 16x16 pixels.',
     'footer_text'               => 'Additional Footer Text ',
     'footer_text_help'          => 'This text will appear in the right-side footer. Links are allowed using <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>. Line breaks, headers, images, etc may result in unpredictable results.',
+    'print_additional_text'     => 'Additional Print Text ',
+    'print_additional_text_help'=> 'This text will appear above the Signed Off by / Date in the Print all assigned document. Add </br> to use a new line.',
     'general_settings'			=> 'General Settings',
     'generate_backup'			=> 'Generate Backup',
     'header_color'              => 'Header Color',

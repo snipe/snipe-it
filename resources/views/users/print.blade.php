@@ -244,6 +244,18 @@
 
 <br>
 <br>
+<br
+@if($settings->print_additional_text)
+    <table>
+        <tr>
+            <td>
+                {!! $settings->print_additional_text !!}
+            </td>
+        </tr>
+    </table>
+@endif
+<br>
+<br>
 <br>
 <table>
     <tr>
