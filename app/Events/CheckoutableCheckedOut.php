@@ -22,7 +22,7 @@ class CheckoutableCheckedOut
      *
      * @return void
      */
-    public function __construct($checkoutable, $checkedOutTo, User $checkedOutBy, $note, $checkout_qty=null, $checkout_note=null)
+    public function __construct($checkoutable, $checkedOutTo, User $checkedOutBy, $note, $checkout_qty=1, $checkout_note=null)
     {
         $this->checkoutable = $checkoutable;
         $this->checkedOutTo = $checkedOutTo;
