@@ -72,12 +72,10 @@
                         </div>
                         <div class="box-footer">
                             <button class="btn btn-lg btn-primary btn-block">{{ trans('auth/general.login')  }}</button>
-
                             <div class="text-center" style="margin:20px 0; padding: 10px 0;">
-                                <label>Sign in with</label>
-
+                                <label>{{ trans('auth/general.sign_in_with')  }}</label>
                                 <div class="py-6 d-flex justify-contet">
-                                    <a href="{{ route('login.google') }}" class="btn btn-danger">Login with Google</a>
+                                    <a href="{{ route('login.google') }}" class="btn btn-danger">Google</a>
                                 </div>
                             </div>
                         </div>
@@ -87,16 +85,10 @@
                             @else
                                 <a href="{{ route('password.request')  }}">{{ trans('auth/general.forgot_password')  }}</a>
                             @endif
-
-
                         </div>
-
                     </div> <!-- end login box -->
-
                 </div> <!-- col-md-4 -->
-
             </div> <!-- end row -->
         </div> <!-- end container -->
     </form>
-
 @stop
