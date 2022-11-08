@@ -347,6 +347,7 @@ return [
         App\Providers\MacroServiceProvider::class,
         App\Providers\LdapServiceProvider::class,
         App\Providers\SamlServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
     ],
 
@@ -402,7 +403,7 @@ return [
         'Image'     => Intervention\Image\ImageServiceProvider::class,
         'Carbon' => Carbon\Carbon::class,
         'Helper' => App\Helpers\Helper::class, // makes it much easier to use 'Helper::blah' in blades (which is where we usually use this)
-
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
     ],
 

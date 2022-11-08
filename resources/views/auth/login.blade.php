@@ -72,6 +72,14 @@
                         </div>
                         <div class="box-footer">
                             <button class="btn btn-lg btn-primary btn-block">{{ trans('auth/general.login')  }}</button>
+
+                            <div class="text-center" style="margin:20px 0; padding: 10px 0;">
+                                <label>Sign in with</label>
+
+                                <div class="py-6 d-flex justify-contet">
+                                    <a href="{{ route('login.google') }}" class="btn btn-danger">Login with Google</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12 text-right" style="padding-top: 10px;">
                             @if ($snipeSettings->custom_forgot_pass_url)
@@ -82,6 +90,7 @@
 
 
                         </div>
+
                     </div> <!-- end login box -->
 
                 </div> <!-- col-md-4 -->
