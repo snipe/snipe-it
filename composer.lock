@@ -78,12 +78,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/grokability/laravel-scim-server.git",
-                "reference": "9e7a8fd51a7380bc18ca1f01256574d75a2c6b49"
+                "reference": "8eba81d36a32077ab45ef60290cad817d07b6224"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/grokability/laravel-scim-server/zipball/9e7a8fd51a7380bc18ca1f01256574d75a2c6b49",
-                "reference": "9e7a8fd51a7380bc18ca1f01256574d75a2c6b49",
+                "url": "https://api.github.com/repos/grokability/laravel-scim-server/zipball/8eba81d36a32077ab45ef60290cad817d07b6224",
+                "reference": "8eba81d36a32077ab45ef60290cad817d07b6224",
                 "shasum": ""
             },
             "require": {
@@ -133,7 +133,7 @@
             "support": {
                 "source": "https://github.com/grokability/laravel-scim-server/tree/master"
             },
-            "time": "2022-10-06T00:42:37+00:00"
+            "time": "2022-11-09T17:01:45+00:00"
         },
         {
             "name": "asm89/stack-cors",
