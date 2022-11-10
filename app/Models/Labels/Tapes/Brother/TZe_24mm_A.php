@@ -66,9 +66,9 @@ class TZe_24mm_A extends TZe_24mm
             $currentY += self::TITLE_SIZE + self::TITLE_MARGIN;
         }
 
-        foreach ($record->get('fields') as $label => $value) {
+        foreach ($record->get('fields') as $field) {
             static::writeText(
-                $pdf, $label,
+                $pdf, $field['label'],
                 $currentX, $currentY,
                 'freesans', '', self::LABEL_SIZE, 'L',
                 $usableWidth, self::LABEL_SIZE, true, 0, 0
@@ -76,7 +76,7 @@ class TZe_24mm_A extends TZe_24mm
             $currentY += self::LABEL_SIZE + self::LABEL_MARGIN;
 
             static::writeText(
-                $pdf, $value,
+                $pdf, $field['value'],
                 $currentX, $currentY,
                 'freemono', 'B', self::FIELD_SIZE, 'L',
                 $usableWidth, self::FIELD_SIZE, true, 0, 0.3

@@ -45,7 +45,7 @@ class TZe_12mm_A extends TZe_12mm
         
         if ($record->get('fields')->count() >= 1) {
             static::writeText(
-                $pdf, $record->get('fields')->values()->get(0),
+                $pdf, $record->get('fields')->values()->get(0)['value'],
                 $pa->x1 + ($tagWidth), $currentY,
                 'freemono', 'b', $fontSize, 'R',
                 $fieldWidth, $usableHeight, true, 0, 0

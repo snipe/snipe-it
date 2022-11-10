@@ -2,6 +2,7 @@
 
 namespace App\View;
 
+use App\Models\Labels\Field;
 use App\Models\Labels\Label as LabelModel;
 use App\Models\Labels\Sheet;
 use Illuminate\Contracts\View\View;
@@ -70,37 +71,10 @@ class Label implements View
         $pdf->SetSubject('Asset Labels');
         $template->preparePDF($pdf);
 
-        // 'Label1=field1|Alt1=altfield1;Label2=field2;Alt1=altfield1|Label3=field3'
-        $fieldDefinitions = (new Collection())
-            ->merge(explode(';', $settings->label2_fields))
-            ->filter(function ($defString) {
-                return strpos($defString, '=') !== false;
-            })
-            ->map(function ($defString) {
-                return (new Collection())
-                    ->merge(explode('|', $defString)) // ['Label1=field1', 'Alt1=altfield1']
-                    ->mapWithKeys(function ($altString) {
-                        $parts = explode('=', $altString);
-                        if (count($parts) != 2) throw new \Exception(var_export($parts, true));
-                        return [ $parts[0] => $parts[1] ];
-                    });
-            });
-            /*
-            $fieldDefinitions should now look like:
-                [
-                    [
-                        'Label1'=>'field1',
-                        'Alt1'=>'altfield1'
-                    ],
-                    [
-                        'Label2'=>'field2'
-                    ],
-                    [
-                        'Alt1'=>'altfield1',
-                        'Label3'=>'field3'
-                    ]
-                ]
-            */
+        // Get fields from settings
+        $fieldDefinitions = collect(explode(';', $settings->label2_fields))
+            ->filter(fn($fieldString) => !empty($fieldString))
+            ->map(fn($fieldString) => Field::fromString($fieldString));
 
         // Prepare data
         $data = $assets
@@ -166,25 +140,17 @@ class Label implements View
                 }
 
                 $fields = $fieldDefinitions
-                    ->map(function ($group, $index) use ($asset) {
-                        return $group->mapWithKeys(function ($definition, $label) use ($asset) {
-                            $value = collect(explode('.', $definition))
-                                ->reduce(function ($carry, $chunk) {
-                                    return $carry ? $carry->{$chunk} : ${$carry};
-                                }, $asset);
-                            return [ $label => $value ];
-                        });
-                    })
-                    ->reduce(function ($carry, $group, $index) {
-                        $values = $group
-                            ->filter(function ($value, $label) use ($carry) {
-                                if (empty($value)) return false;
-                                if ($carry->has($label)) return false;
-                                return true;
-                            })
-                            ->take(1);
-                        return $carry->merge($values);
+                    ->map(fn($field) => $field->toArray($asset))
+                    ->filter(fn($field) => $field != null)
+                    ->reduce(function($myFields, $field) {
+                        // Remove Duplicates
+                        $toAdd = $field
+                            ->filter(fn($o) => !$myFields->contains('dataSource', $o['dataSource']))
+                            ->first();
+
+                        return $toAdd ? $myFields->push($toAdd) : $myFields;
                     }, new Collection());
+                    
                 $assetData->put('fields', $fields->take($template->getSupportFields()));
 
                 return $assetData;
