@@ -38,13 +38,17 @@ class ViewAssetsController extends Controller
             'licenses',
         )->find(Auth::user()->id);
 
-
+        // Loop through all the custom fields that are applied to any model the user has assigned
         foreach ($user->assets as $asset) {
             foreach ($asset->model->fieldset->fields as $field) {
-                $field_array[$field->db_column] = $field->name;
+                // check and make sure they're allowed to see the value of the custom field
+                if ($field->display_in_user_view == '1') {
+                    $field_array[$field->db_column] = $field->name;
+                }
             }
         }
 
+        // Since some models may re-use the same fieldsets/fields, let's make the array unique so we don't repeat columns
         array_unique($field_array);
 
         if (isset($user->id)) {
