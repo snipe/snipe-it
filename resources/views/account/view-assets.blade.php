@@ -129,7 +129,7 @@
 
 
                   <div class="col-md-12" style="padding-top: 5px;">
-                    @if(!empty($user->email))
+                    @if (!empty($user->email))
                       <form action="{{ route('profile.email_assets') }}" method="POST">
                         {{ csrf_field() }}
                         <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener">{{ trans('admin/users/general.email_assigned') }}</button>
@@ -404,6 +404,11 @@
                       <th class="col-md-2" data-switchable="true" data-visible="true">{{ trans('general.name') }}</th>
                       <th class="col-md-2" data-switchable="true" data-visible="true">{{ trans('admin/hardware/table.asset_model') }}</th>
                       <th class="col-md-3" data-switchable="true" data-visible="true">{{ trans('admin/hardware/table.serial') }}</th>
+
+                      @foreach ($field_array as $db_column => $field_name)
+                        <th class="col-md-1" data-switchable="true" data-visible="true">{{ $field_name }}</th>
+                      @endforeach
+
                     </tr>
 
                     </thead>
@@ -459,6 +464,11 @@
                                 <img src="{{ Storage::disk('public')->url(app('models_upload_path').e($asset->model->image)) }}" height="50" width="50">
                               @endif
                             </td>
+
+                            @foreach ($field_array as $db_column => $field_value)
+                              <td>{{ $asset->{$db_column} }} skjgh</td>
+                            @endforeach
+                            
                           </tr>
                           @php
                             $assignedCounter++
@@ -551,7 +561,7 @@
                 <tbody>
                 @foreach ($user->accessories as $accessory)
                   <tr>
-                    <td>{!! $accessory->name !!}</td>
+                    <td>{{ $accessory->name }}</td>
                     <td>
                       {!! Helper::formatCurrencyOutput($accessory->purchase_cost) !!}
                     </td>
@@ -599,7 +609,7 @@
                 <tbody>
                 @foreach ($user->consumables as $consumable)
                   <tr>
-                    <td>{!! $consumable->name !!}</td>
+                    <td>{{ $consumable->name }}</td>
                     <td>
                       {!! Helper::formatCurrencyOutput($consumable->purchase_cost) !!}
                     </td>
