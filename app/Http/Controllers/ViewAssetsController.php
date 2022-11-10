@@ -8,6 +8,7 @@ use App\Models\AssetModel;
 use App\Models\Company;
 use App\Models\Setting;
 use App\Models\User;
+use App\Models\CustomField;
 use App\Notifications\RequestAssetCancelation;
 use App\Notifications\RequestAssetNotification;
 use Illuminate\Http\Request;
@@ -29,23 +30,28 @@ class ViewAssetsController extends Controller
     public function getIndex()
     {
         $user = User::with(
+            'assets',
             'assets.model',
+            'assets.model.fieldset.fields',
             'consumables',
             'accessories',
             'licenses',
-            'userloc',
-            'userlog'
-        )->withTrashed()->find(Auth::user()->id);
+        )->find(Auth::user()->id);
 
-        $userlog = $user->userlog->load('item', 'user', 'target');
+
+        foreach ($user->assets as $asset) {
+            foreach ($asset->model->fieldset->fields as $field) {
+                $field_array[$field->db_column] = $field->name;
+            }
+        }
+
+        array_unique($field_array);
 
         if (isset($user->id)) {
-            return view('account/view-assets', compact('user', 'userlog'))
+            return view('account/view-assets', compact('user', 'field_array' ))
                 ->with('settings', Setting::getSettings());
-        } else {
-            // Redirect to the user management page
-            return redirect()->route('users.index')->with('error', trans('admin/users/message.user_not_found', compact('id')));
         }
+
         // Redirect to the user management page
         return redirect()->route('users.index')
             ->with('error', trans('admin/users/message.user_not_found', $user->id));
