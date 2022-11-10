@@ -336,11 +336,8 @@ return [
     'label2_2d_type_help'     => 'Format for 2D barcodes',
     'label2_2d_target'        => '2D Barcode Target',
     'label2_2d_target_help'   => 'The URL the 2D barcode points to when scanned',
-    'label2_fields'           => 'Fields Definition',
-    'label2_fields_help'      => 'Fields to show on the label in the format <code>Label=asset_field</code>',
-    'label2_fields_help_semi' => 'Use <code>&semi;</code> to separate fields',
-    'label2_fields_help_pipe' => 'Use <code>|</code> to allow multiple options in each field. For example <code>Name=name|Nickname=_snipeit_my_custom_field_2</code> will use <code>name</code> if a value is set, otherwise it will use <code>_snipeit_my_custom_field_2</code>. This is useful to ensure field order',
-    'label2_fields_help_once' => 'Each field will only be selected once per label',
+    'label2_fields'           => 'Field Definitions',
+    'label2_fields_help'      => 'Fields can be added, removed, and reordered in the left column. For each field, multiple options for Label and DataSource can be added, removed, and reordered in the right column.',
 
     'help_asterisk_bold'    => 'Text entered as <code>**text**</code> will be displayed as bold',
     'help_blank_to_use'     => 'Leave blank to use the value from <code>:setting_name</code>',

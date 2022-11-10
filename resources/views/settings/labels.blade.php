@@ -21,6 +21,7 @@
     </style>
 
     <script>
+
         function refreshPreview() {
             var settingsOverride = {
                 'settings': Object.assign({}, ...$('#settingsForm')
@@ -212,7 +213,7 @@
                                 <div class="col-md-9">
                                     {{ Form::select('label2_2d_target', ['hardware_id'=>'/hardware/{id} ('.trans('admin/settings/general.default').')', 'ht_tag'=>'/ht/{asset_tag}'], old('label2_2d_target', $setting->label2_2d_target), [ 'class'=>'select2 col-md-4', 'aria-label'=>'label2_2d_target' ]) }}
                                     {!! $errors->first('label2_2d_target', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-                                    <p class="help-block">{!! trans('admin/settings/general.label2_2d_target_help') !!}</p>
+                                    <p class="help-block">{{ trans('admin/settings/general.label2_2d_target_help') }}</p>
                                 </div>
                             </div>
 
@@ -222,14 +223,9 @@
                                     {{ Form::label('label2_fields', trans('admin/settings/general.label2_fields')) }}
                                 </div>
                                 <div class="col-md-9">
-                                    {{ Form::text('label2_fields', old('label2_fields', $setting->label2_fields), [ 'class'=>'form-control', 'aria-label'=>'label2_fields' ]) }}
+                                    @include('partials.label2-field-definitions', [ 'name' => 'label2_fields', 'value' => old('label2_fields', $setting->label2_fields) ])
                                     {!! $errors->first('label2_fields', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                                    <p class="help-block">{!! trans('admin/settings/general.label2_fields_help') !!}</p>
-                                    <p class="help-block">
-                                        {!! trans('admin/settings/general.label2_fields_help_semi') !!}.<br />
-                                        {!! trans('admin/settings/general.label2_fields_help_pipe') !!}.<br />
-                                        {!! trans('admin/settings/general.label2_fields_help_once') !!}.
-                                    </p>
+                                    <p class="help-block">{{ trans('admin/settings/general.label2_fields_help') }}</p>
                                 </div>
                             </div>
 
