@@ -439,42 +439,15 @@
                           @endif
                         </td>
                         <td>{{ $asset->serial }}</td>
-                      </tr>
-                      @if($settings->show_assigned_assets)
-                        @php
-                          $assignedCounter = 1
-                        @endphp
-                        @foreach ($asset->assignedAssets as $asset)
-                          <tr>
-                            <td>{{ $counter }}.{{ $assignedCounter }}</td>
-                            <td>{{ $asset->model->category->name }}</td>
-                            <td>{{ $asset->asset_tag }}</td>
-                            <td>{{ $asset->name }}</td>
-                            <td>
-                              @if ($asset->physical=='1')
-                                {{ $asset->model->name }}
-                              @endif
-                            </td>
-                            <td>{{ $asset->serial }}</td>
-                            <td>
-                              @if (($asset->image) && ($asset->image!=''))
-                                <img src="{{ Storage::disk('public')->url(app('assets_upload_path').e($asset->image)) }}" height="50" width="50">
 
-                              @elseif (($asset->model) && ($asset->model->image!=''))
-                                <img src="{{ Storage::disk('public')->url(app('models_upload_path').e($asset->model->image)) }}" height="50" width="50">
-                              @endif
-                            </td>
-
-                            @foreach ($field_array as $db_column => $field_value)
-                              <td>{{ $asset->{$db_column} }} skjgh</td>
-                            @endforeach
-                            
-                          </tr>
-                          @php
-                            $assignedCounter++
-                          @endphp
+                        @foreach ($field_array as $db_column => $field_value)
+                          <td>
+                            {{ $asset->{$db_column} }}
+                          </td>
                         @endforeach
-                      @endif
+
+                      </tr>
+
                       @php
                         $counter++
                       @endphp
