@@ -217,11 +217,13 @@
     $('#field_encrypted').on('ifChecked', function(event){
         $("#encrypt_warning").show();
         $("#show_in_email").hide();
+        $("#display_in_user_view").hide();
     });
 
     $('#field_encrypted').on('ifUnchecked', function(event){
         $("#encrypt_warning").hide();
         $("#show_in_email").show();
+        $("#display_in_user_view").show();
     });
 
 </script>
