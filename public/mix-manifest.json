@@ -35,6 +35,7 @@
     "/js/build/vendor.js": "/js/build/vendor.js?id=47ecbb4bb3b0e02315f391caadbdf971",
     "/js/dist/bootstrap-table.js": "/js/dist/bootstrap-table.js?id=14d9a2affec7b066d20fcba2e6e67ad2",
     "/js/dist/all.js": "/js/dist/all.js?id=c281e69bed1a5a386e8cbc611b9bf781",
+    "/js/dist/all-defer.js": "/js/dist/all-defer.js?id=7d1b362ddda912bce36f333cd492191b",
     "/css/dist/skins/skin-green.min.css": "/css/dist/skins/skin-green.min.css?id=407f83d58689706f303a83e195f6c041",
     "/css/dist/skins/skin-green-dark.min.css": "/css/dist/skins/skin-green-dark.min.css?id=c4c9c4304a3473e473774a45deee0a46",
     "/css/dist/skins/skin-black.min.css": "/css/dist/skins/skin-black.min.css?id=924fd5e1d5d41ffc483841a628eb9c58",

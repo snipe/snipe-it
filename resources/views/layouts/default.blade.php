@@ -887,6 +887,7 @@
 
     {{-- Javascript files --}}
     <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
+    <script defer src="{{ url(mix('js/dist/all-defer.js')) }}" nonce="{{ csrf_token() }}"></script>
 
     <!-- v5-beta: This pGenerator call must remain here for v5 - until fixed - so that the JS password generator works for the user create modal. -->
     <script src="{{ url('js/pGenerator.jquery.js') }}"></script>
@@ -957,8 +958,7 @@
     </script>
     @endif
 
-
-
     @livewireScripts
+    
   </body>
 </html>
