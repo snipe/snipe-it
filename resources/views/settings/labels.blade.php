@@ -82,6 +82,14 @@
                                         id="label2TemplateTable"
                                         class="table table-striped snipe-table"
                                     ></table>
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', () => {
+                                            $('#label2TemplateTable').on('load-success.bs.table', (e) => {
+                                                let form = document.getElementById('settingsForm');
+                                                form.dispatchEvent(new Event('change'));
+                                            });
+                                        });
+                                    </script>
                                 </div>
                             </div>
 
