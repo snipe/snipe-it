@@ -20,30 +20,6 @@
         }
     </style>
 
-    <script>
-
-        function refreshPreview() {
-            var settingsOverride = {
-                'settings': Object.assign({}, ...$('#settingsForm')
-                    .serializeArray()
-                    .filter((value, index, all) => value.name.includes('label2_'))
-                    .map((value, index, all) => ({[value.name]: value.value})))
-            };
-            var params = $.param(settingsOverride);
-            var template = settingsOverride.settings.label2_template;
-            if (template === undefined) return;
-            
-            var url = "{{ route('labels.show', ['labelName' => ':label']) }}".replace(':label', template) + "?" + params + "#toolbar=0";
-            $('iframe#framePreview').attr('src', url);
-        }
-
-        window.addEventListener('load', () => {
-            $('#settingsForm').on('change', refreshPreview);
-            $('#settingsForm').on('load-success.bs.table', refreshPreview);
-        });
-
-    </script>
-
     {{ Form::open(['id' => 'settingsForm', 'method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
     <!-- CSRF Token -->
     {{csrf_field()}}
@@ -83,8 +59,7 @@
                             <div class="form-group {{ $errors->has('label2_template') ? 'error' : '' }}">
                                 <div class="col-md-3">
                                     {{ Form::label('label2_template', trans('admin/settings/general.label2_template')) }}
-                                    <div>{{ Form::button('Refresh Preview', ['class'=>'btn btn-default btn-sm', 'style'=>'width:100%', 'onClick'=>'refreshPreview()']) }}</div>
-                                    <div><iframe id="framePreview" style="width:100%; height:400px;">Preview Here</iframe></div>
+                                    @include('partials.label2-preview')
                                 </div>
                                 <div class="col-md-9">
                                     <table
