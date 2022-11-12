@@ -534,7 +534,7 @@ abstract class Label
      * @return object  (object)[ 'width' => (float)123.4, 'height' => (float)123.4 ]
      */
     public static function fromFormat($format, $orientation='L', $unit='mm', $round=false) {
-        $size = collect(TCPDF_STATIC::getPageSizeFromFormat($format))
+        $size = collect(TCPDF_STATIC::getPageSizeFromFormat(strtoupper($format)))
             ->sort()
             ->map(function ($value) use ($unit) {
                 return Helper::convertUnit($value, 'pt', $unit);
