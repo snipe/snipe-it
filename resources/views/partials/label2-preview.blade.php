@@ -18,10 +18,21 @@
                 flex-direction: column;
             }
 
-            .l2p-root > label {
+            .l2p-root > .l2p-top {
+                display: flex;
+                flex-direction: row;
+                align-items: end;
+            }
+
+            .l2p-root > .l2p-top > label {
+                flex: 1;
                 font-size: 0.9em;
                 padding: 0;
                 margin: 0;
+            }
+
+            .l2p-root > .l2p-top > .l2p-pop-button {
+                padding: 3px 6px;
             }
 
             .l2p-root > iframe {
@@ -63,7 +74,15 @@
                         .concat('?', $.param(params), '#toolbar=0');
                 },
 
-                previewURL: ''
+                _previewURL: '',
+                get previewURL() { return this._previewURL; },
+                set previewURL(url) {
+                    this._previewURL = url;
+                    if (this._popped) this._popped.location = this.previewURL;
+                },
+
+                _popped: null,
+                popout: function() { this._popped = window.open(this.previewURL); }
             }));
 
         });
@@ -71,6 +90,9 @@
 @endpush
 
 <div x-data="label2_preview" x-init="_init" class="l2p-root">
-    <label for="label2-preview">Preview</label>
+    <div class="l2p-top">
+        <label for="label2-preview">Preview</label>
+        <button class="l2p-pop-button btn btn-default" x-on:click.prevent="popout" title="Pop Out"><i class="fa-solid fa-maximize"></i></button>
+    </div>
     <iframe id="label2-preview" x-bind:src="previewURL"></iframe>
 </div>
