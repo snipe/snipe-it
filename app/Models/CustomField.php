@@ -64,6 +64,7 @@ class CustomField extends Model
         'help_text',
         'show_in_email',
         'is_unique',
+        'display_in_user_view',
     ];
 
     /**
