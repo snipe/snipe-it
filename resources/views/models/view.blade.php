@@ -145,17 +145,21 @@
                                         <tr>
                                             <td><i class="{{ Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i></td>
                                             <td>
-                                                @if ( Helper::checkUploadIsImage($file->get_src('assetmodels')))
+                                                @if ((Storage::exists('private_uploads/assetmodels/'.$file->filename)) && ( Helper::checkUploadIsImage($file->get_src('assetmodels'))))
                                                     <a href="{{ route('show/modelfile', ['modelID' => $model->id, 'fileId' => $file->id]) }}" data-toggle="lightbox" data-type="image" data-title="{{ $file->filename }}">
                                                         <img src="{{ route('show/modelfile', ['modelID' => $model->id, 'fileId' =>$file->id]) }}" style="max-width: 50px;">
                                                     </a>
                                                 @endif
                                             </td>
                                             <td>
-                                                {{ $file->filename }}
+                                                @if (Storage::exists('private_uploads/assetmodels/'.$file->filename))
+                                                    {{ $file->filename }}
+                                                @else
+                                                    <del>{{ $file->filename }}</del>
+                                                @endif
                                             </td>
-                                            <td data-value="{{ Storage::size('private_uploads/assetmodels/'.$file->filename) }}">
-                                                {{ Helper::formatFilesizeUnits(Storage::size('private_uploads/assetmodels/'.$file->filename)) }}
+                                            <td data-value="{{ (Storage::exists('private_uploads/assetmodels/'.$file->filename)) ? Storage::size('private_uploads/assetmodels/'.$file->filename) : '' }}">
+                                                {{ (Storage::exists('private_uploads/assetmodels/'.$file->filename)) ? Helper::formatFilesizeUnits(Storage::size('private_uploads/assetmodels/'.$file->filename)) : '' }}
                                             </td>
                                             <td>
                                                 @if ($file->note)
