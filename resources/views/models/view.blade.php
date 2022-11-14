@@ -167,7 +167,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                @if ($file->filename)
+                                                @if (($file->filename) && (Storage::exists('private_uploads/assetmodels/'.$file->filename)))
                                                     <a href="{{ route('show/modelfile', [$model->id, $file->id]) }}" class="btn btn-default">
                                                         <i class="fas fa-download" aria-hidden="true"></i>
                                                     </a>
