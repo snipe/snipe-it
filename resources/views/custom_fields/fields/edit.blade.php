@@ -116,6 +116,17 @@
 
           </div>
 
+          <!-- Show in View All Assets profile view  -->
+          <div class="form-group {{ $errors->has('display_in_user_view') ? ' has-error' : '' }}"  id="display_in_user_view">
+              <div class="col-md-8 col-md-offset-4">
+                  <label for="display_in_user_view">
+                      <input type="checkbox" name="display_in_user_view" aria-label="display_in_user_view" value="1" class="minimal"{{ (old('display_in_user_view') || $field->display_in_user_view) ? ' checked="checked"' : '' }}>
+                      {{ trans('admin/custom_fields/general.display_in_user_view') }}
+                  </label>
+              </div>
+
+          </div>
+
           <!-- Value Must be Unique -->
           <div class="form-group {{ $errors->has('is_unique') ? ' has-error' : '' }}"  id="is_unique">
             <div class="col-md-8 col-md-offset-4">
@@ -206,11 +217,13 @@
     $('#field_encrypted').on('ifChecked', function(event){
         $("#encrypt_warning").show();
         $("#show_in_email").hide();
+        $("#display_in_user_view").hide();
     });
 
     $('#field_encrypted').on('ifUnchecked', function(event){
         $("#encrypt_warning").hide();
         $("#show_in_email").show();
+        $("#display_in_user_view").show();
     });
 
 </script>
