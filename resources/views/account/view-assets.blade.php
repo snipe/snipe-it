@@ -397,7 +397,7 @@
                   }'>
                     <thead>
                     <tr>
-                      <th class="col-md-1">#</t>
+                      <th class="col-md-1">#</th>
                       <th class="col-md-1">{{ trans('general.image') }}</th>
                       <th class="col-md-2" data-switchable="true" data-visible="true">{{ trans('general.category') }}</th>
                       <th class="col-md-2" data-switchable="true" data-visible="true">{{ trans('admin/hardware/table.asset_tag') }}</th>
