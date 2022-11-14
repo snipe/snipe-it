@@ -422,12 +422,12 @@ $(document).ready(function () {
         var safe_html = root_div.get(0).outerHTML;
         var old_html = formatDatalist(datalist);
         if(safe_html != old_html) {
-            console.log("HTML MISMATCH: ");
-            console.log("FormatDatalistSafe: ");
+            //console.log("HTML MISMATCH: ");
+            //console.log("FormatDatalistSafe: ");
             // console.dir(root_div.get(0));
-            console.log(safe_html);
-            console.log("FormatDataList: ");
-            console.log(old_html);
+            //console.log(safe_html);
+            //console.log("FormatDataList: ");
+            //console.log(old_html);
         }
         return root_div;
 

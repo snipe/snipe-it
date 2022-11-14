@@ -41,10 +41,20 @@ class MergeUsersByUsername extends Command
     {
         // Get the list of users who have an email address as their username
         $users = User::where('username', 'LIKE', '%@%')->whereNull('deleted_at')->get();
+        $this->info($users->count().' total non-deleted users whose usernames contain a @ symbol.');
+
 
         foreach ($users as $user) {
-            $parts = explode('@', $user->username);
-            $bad_users = User::where('username', '=', $parts[0])->whereNull('deleted_at')->with('assets', 'manager', 'userlog', 'licenses', 'consumables', 'accessories', 'managedLocations')->get();
+            $parts = explode('@', trim($user->username));
+            $this->info('Checking against username '.trim($parts[0]).'.');
+
+
+            $bad_users = User::where('username', '=', trim($parts[0]))
+                ->whereNull('deleted_at')
+                ->with('assets', 'manager', 'userlog', 'licenses', 'consumables', 'accessories', 'managedLocations')
+                ->get();
+
+
 
             foreach ($bad_users as $bad_user) {
                 $this->info($bad_user->username.' ('.$bad_user->id.')  will be merged into '.$user->username.'  ('.$user->id.') ');

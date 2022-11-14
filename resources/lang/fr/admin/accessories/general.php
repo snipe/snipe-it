@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'accessory_category' 				=> 'Catégorie d\'accessoire',
     'accessory_name'  					=> 'Nom de l\'accessoire',
     'checkout'  							=> 'Attribuer l\'accessoire',
@@ -17,4 +17,4 @@ return [
     'use_default_eula'					=> 'Utiliser la <a href="#" data-toggle="modal" data-target="#eulaModal">license primaire par défaut </a> à la place.',
     'use_default_eula_disabled'			=> '<del>Utilisez la license par défaut à la place.</del> Aucune licence d\'utilisation par défaut trouvée. Ajoutez-en une dans la section "Préférences".',
 
-];
+);

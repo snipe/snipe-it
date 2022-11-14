@@ -9,6 +9,6 @@ class AdminRecipient extends Recipient
     public function __construct()
     {
         $settings = Setting::getSettings();
-        $this->email = $settings->admin_cc_email;
+        $this->email = trim($settings->admin_cc_email);
     }
 }

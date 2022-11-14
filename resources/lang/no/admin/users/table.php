@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Aktiv',
     'allow'  				=> 'Tillatt',
     'checkedout'  			=> 'Eiendeler',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'E-post',
     'employee_num'      	=> 'Ansattnummer',
     'first_name' 			=> 'Fornavn',
-    'groupnotes'			=> 'Velg en gruppe for brukeren. Husk at brukeren får samme rettigheter som gruppen han tildeles.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Arv',
     'job' 					=> 'Jobbtittel',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Vis nåværende brukere',
     'show_deleted'          => 'Vis slettede brukere',
     'title' 				=> 'Tittel',
-    'to_restore_them'		=> 'for å gjenopprette de.',
+	'to_restore_them'		=> 'for å gjenopprette de.',
     'updateuser' 			=> 'Oppdater bruker',
     'username' 				=> 'Brukernavn',
-    'user_deleted_text' 	=> 'Denne brukeren er merket som slettet.',
+	'user_deleted_text' 	=> 'Denne brukeren er merket som slettet.',
     'username_note' 		=> '(Dette brukes til binding i Active Directory, ikke for innlogging)',
     'cloneuser'             => 'Klon bruker',
     'viewusers' 			=> 'Vis brukere',
-];
+);

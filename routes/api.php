@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
+Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], function () {
+
 
     Route::get('/', function () {
         return response()->json(
@@ -47,6 +48,27 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
             ]
         )->name('api.assets.requestable');
 
+        Route::post('personal-access-tokens',
+            [
+                Api\ProfileController::class,
+                'createApiToken'
+            ]
+        )->name('api.personal-access-token.create');
+
+        Route::get('personal-access-tokens',
+            [
+                Api\ProfileController::class,
+                'showApiTokens'
+            ]
+        )->name('api.personal-access-token.index');
+
+        Route::delete('personal-access-tokens/{tokenId}',
+            [
+                Api\ProfileController::class,
+                'deleteApiToken'
+            ]
+        )->name('api.personal-access-token.delete');
+
 
 
      }); // end account group
@@ -64,7 +86,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
             ]
         )->name('api.accessories.checkedout');
 
-        Route::get('{accessory}/checkout',
+        Route::post('{accessory}/checkout',
             [
                 Api\AccessoriesController::class, 
                 'checkout'
@@ -72,7 +94,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
         )->name('api.accessories.checkout');
 
 
-        Route::get('{accessory}/checkin',
+        Route::post('{accessory}/checkin',
             [
                 Api\AccessoriesController::class, 
                 'checkin'
@@ -86,22 +108,24 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
             ]
         )->name('api.accessories.selectlist');
 
-        Route::resource('accessories', 
-            Api\AccessoriesController::class,
-            ['names' => 
-                [
-                    'index' => 'api.accessories.index',
-                    'show' => 'api.accessories.show',
-                    'update' => 'api.accessories.update',
-                    'store' => 'api.accessories.store',
-                    'destroy' => 'api.accessories.destroy',
-                    ],
-            'except' => ['create', 'edit'],
-            'parameters' => ['accessory' => 'accessory_id'],
-            ]
-        );
+
 
      }); // end accessories group
+
+    Route::resource('accessories',
+        Api\AccessoriesController::class,
+        ['names' =>
+            [
+                'index' => 'api.accessories.index',
+                'show' => 'api.accessories.show',
+                'update' => 'api.accessories.update',
+                'store' => 'api.accessories.store',
+                'destroy' => 'api.accessories.destroy',
+            ],
+            'except' => ['create', 'edit'],
+            'parameters' => ['accessory' => 'accessory_id'],
+        ]
+    );
 
      
      /**
@@ -212,7 +236,20 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
         ]
         )->name('api.components.assets');
 
-      }); 
+      });
+    Route::post('components/{id}/checkin',
+        [
+            Api\ComponentsController::class,
+            'checkin'
+        ]
+    )->name('api.components.checkin');
+
+    Route::post('components/{id}/checkout',
+        [
+            Api\ComponentsController::class,
+            'checkout'
+        ]
+    )->name('api.components.checkout');
 
 
       Route::resource('components', 
@@ -243,14 +280,23 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
             ]
         )->name('api.consumables.selectlist');
 
-        Route::get('view/{id}/users',
+        Route::get('{id}/users',
             [
                 Api\ConsumablesController::class, 
                 'getDataView'
             ]
         )->name('api.consumables.showUsers');
 
-        Route::get('{consumable}/checkout',
+
+        // This is LEGACY endpoint URL and should be removed in the next major release
+        Route::get('view/{id}/users',
+              [
+                  Api\ConsumablesController::class,
+                  'getDataView'
+              ]
+        )->name('api.consumables.showUsers');
+
+        Route::post('{consumable}/checkout',
             [
                 Api\ConsumablesController::class, 
                 'checkout'
@@ -296,7 +342,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
         ); // end depreciations API routes
 
 
-        Route::post('reports/depreciation',
+        Route::get('reports/depreciation',
         [
             Api\AssetsController::class, 
             'index'
@@ -368,18 +414,18 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
     
         });
 
-        Route::resource('fields', 
+        Route::resource('fieldsets', 
         Api\CustomFieldsetsController::class,
             ['names' => 
                 [
-                    'index' => 'api.customfields.index',
-                    'show' => 'api.customfields.show',
-                    'update' => 'api.customfields.update',
-                    'store' => 'api.customfields.store',
-                    'destroy' => 'api.customfields.destroy',
+                    'index' => 'api.fieldsets.index',
+                    'show' => 'api.fieldsets.show',
+                    'update' => 'api.fieldsets.update',
+                    'store' => 'api.fieldsets.store',
+                    'destroy' => 'api.fieldsets.destroy',
                 ],
             'except' => ['create', 'edit'],
-            'parameters' => ['field' => 'field_id'],
+            'parameters' => ['fieldset' => 'fieldset_id'],
             ]
         ); // end custom fieldsets API routes
 
@@ -389,7 +435,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
          * Groups API routes
         */
         Route::resource('groups', 
-        Api\GroupsCOntroller::class,
+        Api\GroupsController::class,
             ['names' => 
                 [
                     'index' => 'api.groups.index',
@@ -438,6 +484,13 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
         )->name('api.assets.show.bytag')
         ->where('any', '.*');
 
+        Route::post('bytag/{any}/checkout',
+            [
+                Api\AssetsController::class, 
+                'checkoutByTag'
+            ]
+        )->name('api.assets.checkout.bytag');
+
         Route::get('byserial/{any}',
             [
                 Api\AssetsController::class, 
@@ -460,20 +513,38 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
         ]
         )->name('api.asset.audit');
 
-        Route::post('checkin',
+        Route::post('{id}/checkin',
         [
             Api\AssetsController::class, 
             'checkin'
         ]
         )->name('api.asset.checkin');
 
-        Route::post('checkout',
+        Route::post('checkinbytag',
+            [
+                Api\AssetsController::class,
+                'checkinbytag'
+            ]
+        )->name('api.asset.checkinbytag');
+
+        Route::post('{id}/checkout',
         [
             Api\AssetsController::class, 
             'checkout'
         ]
         )->name('api.asset.checkout');
-      }); 
+
+      Route::post('{asset_id}/restore',
+          [
+              Api\AssetsController::class,
+              'restore'
+          ]
+      )->name('api.assets.restore');
+
+      });
+
+
+
 
 
         Route::resource('hardware', 
@@ -702,10 +773,10 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
         */
         Route::group(['middleware'=> ['auth', 'authorize:superuser'], 'prefix' => 'settings'], function () {
 
-            Route::post('ldaptest',
+            Route::get('ldaptest',
                 [
                     Api\SettingsController::class, 
-                    'ldapAdSettingsTest'
+                    'ldaptest'
                 ]
             )->name('api.settings.ldaptest');
 
@@ -744,6 +815,20 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
             ]
             )->name('api.settings.mailtest');
 
+            Route::get('backups',
+                [
+                    Api\SettingsController::class,
+                    'listBackups'
+                ]
+            )->name('api.settings.backups.index');
+
+            Route::get('backups/download/{file}',
+                [
+                    Api\SettingsController::class,
+                    'downloadBackup'
+                ]
+            )->name('api.settings.backups.download');
+
         }); 
         
         Route::resource('settings', 
@@ -774,14 +859,21 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
                 ]
             )->name('api.statuslabels.selectlist');
 
-            Route::get('assets',
+            Route::get('assets/name',
                 [
                     Api\StatuslabelsController::class, 
                     'getAssetCountByStatuslabel'
                 ]
+            )->name('api.statuslabels.assets.byname');
+
+            Route::get('assets/type',
+                [
+                    Api\StatuslabelsController::class,
+                    'getAssetCountByMetaStatus'
+                ]
             )->name('api.statuslabels.assets.bytype');
 
-            Route::get('assetlist',
+            Route::get('{id}/assetlist',
                 [
                     Api\StatuslabelsController::class, 
                     'assets'
@@ -992,7 +1084,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
             Route::post('models',
                 [
                     Api\PredefinedKitsController::class, 
-                    'storeModels'
+                    'storeModel'
                 ]
             )->name('api.kits.models.store');
 

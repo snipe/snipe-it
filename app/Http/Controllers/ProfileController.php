@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ImageUploadRequest;
+use App\Models\Asset;
 use App\Models\Setting;
-use Auth;
+use App\Models\User;
+use App\Notifications\CurrentInventory;
+use Illuminate\Support\Facades\Auth;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -64,9 +67,11 @@ class ProfileController extends Controller
             $user->location_id = $request->input('location_id');
         }
 
+
         if ($request->input('avatar_delete') == 1) {
             $user->avatar = null;
         }
+
 
         if ($request->hasFile('avatar')) {
             $path = 'avatars';
@@ -101,6 +106,7 @@ class ProfileController extends Controller
         return redirect()->back()->withInput()->withErrors($user->getErrors());
     }
 
+
     /**
      * Returns a page with the API token generation interface.
      *
@@ -113,6 +119,12 @@ class ProfileController extends Controller
      */
     public function api()
     {
+
+        // Make sure the self.api permission has been granted
+        if (!Gate::allows('self.api')) {
+            abort(403);
+        }
+
         return view('account/api');
     }
 
@@ -124,7 +136,7 @@ class ProfileController extends Controller
     public function password()
     {
         $user = Auth::user();
-
+        
         return view('account/change-password', compact('user'));
     }
 
@@ -152,7 +164,7 @@ class ProfileController extends Controller
         $validator = \Validator::make($request->all(), $rules);
         $validator->after(function ($validator) use ($request, $user) {
             if (! Hash::check($request->input('current_password'), $user->password)) {
-                $validator->errors()->add('current_password', trans('validation.hashed_pass'));
+                $validator->errors()->add('current_password', trans('validation.custom.hashed_pass'));
             }
 
             // This checks to make sure that the user's password isn't the same as their username,
@@ -178,10 +190,14 @@ class ProfileController extends Controller
             $user->password = Hash::make($request->input('password'));
             $user->save();
 
+            // Log the user out of other devices
+            Auth::logoutOtherDevices($request->input('password'));
             return redirect()->route('account.password.index')->with('success', 'Password updated!');
-        }
 
+        }
         return redirect()->back()->withInput()->withErrors($validator);
+
+
     }
 
     /**
@@ -202,5 +218,48 @@ class ProfileController extends Controller
         } else {
             $request->session()->put('menu_state', 'closed');
         }
+    }
+
+
+    /**
+     * Print inventory
+     *
+     * @author A. Gianotto
+     * @since [v6.0.12]
+     * @return Illuminate\View\View
+     */
+    public function printInventory()
+    {
+        $show_user = Auth::user();
+
+        return view('users/print')
+            ->with('assets', Auth::user()->assets)
+            ->with('licenses', $show_user->licenses()->get())
+            ->with('accessories', $show_user->accessories()->get())
+            ->with('consumables', $show_user->consumables()->get())
+            ->with('show_user', $show_user)
+            ->with('settings', Setting::getSettings());
+    }
+
+    /**
+     * Emails user a list of assigned assets
+     *
+     * @author A. Gianotto
+     * @since [v6.0.12]
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function emailAssetList()
+    {
+
+        if (!$user = User::find(Auth::user()->id)) {
+            return redirect()->back()
+                ->with('error', trans('admin/users/message.user_not_found', ['id' => $id]));
+        }
+        if (empty($user->email)) {
+            return redirect()->back()->with('error', trans('admin/users/message.user_has_no_email'));
+        }
+
+        $user->notify((new CurrentInventory($user)));
+        return redirect()->back()->with('success', trans('admin/users/general.user_notified'));
     }
 }

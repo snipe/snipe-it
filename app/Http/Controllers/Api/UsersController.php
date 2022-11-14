@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SaveUserRequest;
 use App\Http\Transformers\AccessoriesTransformer;
 use App\Http\Transformers\AssetsTransformer;
+use App\Http\Transformers\ConsumablesTransformer;
 use App\Http\Transformers\LicensesTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use App\Http\Transformers\UsersTransformer;
@@ -35,6 +36,7 @@ class UsersController extends Controller
 
         $users = User::select([
             'users.activated',
+            'users.created_by',
             'users.address',
             'users.avatar',
             'users.city',
@@ -62,9 +64,12 @@ class UsersController extends Controller
             'users.updated_at',
             'users.username',
             'users.zip',
+            'users.remote',
             'users.ldap_import',
+            'users.start_date',
+            'users.end_date',
 
-        ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables')
+        ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy',)
             ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count');
         $users = Company::scopeCompanyables($users);
 
@@ -85,6 +90,10 @@ class UsersController extends Controller
 
         if ($request->filled('location_id')) {
             $users = $users->where('users.location_id', '=', $request->input('location_id'));
+        }
+
+        if ($request->filled('created_by')) {
+            $users = $users->where('users.created_by', '=', $request->input('created_by'));
         }
 
         if ($request->filled('email')) {
@@ -131,6 +140,39 @@ class UsersController extends Controller
             $users = $users->where('users.manager_id','=',$request->input('manager_id'));
         }
 
+        if ($request->filled('ldap_import')) {
+            $users = $users->where('ldap_import', '=', $request->input('ldap_import'));
+        }
+
+        if ($request->filled('remote')) {
+            $users = $users->where('remote', '=', $request->input('remote'));
+        }
+
+        if ($request->filled('start_date')) {
+            $users = $users->where('users.start_date', '=', $request->input('start_date'));
+        }
+
+        if ($request->filled('end_date')) {
+            $users = $users->where('users.end_date', '=', $request->input('end_date'));
+        }
+
+
+        if ($request->filled('assets_count')) {
+           $users->has('assets', '=', $request->input('assets_count'));
+        }
+
+        if ($request->filled('consumables_count')) {
+            $users->has('consumables', '=', $request->input('consumables_count'));
+        }
+
+        if ($request->filled('licenses_count')) {
+            $users->has('licenses', '=', $request->input('licenses_count'));
+        }
+
+        if ($request->filled('accessories_count')) {
+            $users->has('accessories', '=', $request->input('accessories_count'));
+        }
+
         if ($request->filled('search')) {
             $users = $users->TextSearch($request->input('search'));
         }
@@ -156,6 +198,9 @@ class UsersController extends Controller
             case 'department':
                 $users = $users->OrderDepartment($order);
                 break;
+            case 'created_by':
+                $users = $users->OrderByCreatedBy($order);
+                break;
             case 'company':
                 $users = $users->OrderCompany($order);
                 break;
@@ -166,7 +211,7 @@ class UsersController extends Controller
                         'assets', 'accessories', 'consumables', 'licenses', 'groups', 'activated', 'created_at',
                         'two_factor_enrolled', 'two_factor_optin', 'last_login', 'assets_count', 'licenses_count',
                         'consumables_count', 'accessories_count', 'phone', 'address', 'city', 'state',
-                        'country', 'zip', 'id', 'ldap_import',
+                        'country', 'zip', 'id', 'ldap_import', 'remote', 'start_date', 'end_date',
                     ];
 
                 $sort = in_array($request->get('sort'), $allowed_columns) ? $request->get('sort') : 'first_name';
@@ -445,6 +490,24 @@ class UsersController extends Controller
         return (new AssetsTransformer)->transformAssets($assets, $assets->count(), $request);
     }
 
+
+    /**
+     * Return JSON containing a list of consumables assigned to a user.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @param $userId
+     * @return string JSON
+     */
+    public function consumables(Request $request, $id)
+    {
+        $this->authorize('view', User::class);
+        $this->authorize('view', Consumable::class);
+        $user = User::findOrFail($id);
+        $consumables = $user->consumables;
+        return (new ConsumablesTransformer)->transformConsumables($consumables, $consumables->count(), $request);
+    }
+
     /**
      * Return JSON containing a list of accessories assigned to a user.
      *
@@ -475,10 +538,14 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
         $this->authorize('view', License::class);
-        $user = User::where('id', $id)->withTrashed()->first();
-        $licenses = $user->licenses()->get();
+        
+        if ($user = User::where('id', $id)->withTrashed()->first()) {
+            $licenses = $user->licenses()->get();
+            return (new LicensesTransformer())->transformLicenses($licenses, $licenses->count());
+        }
 
-        return (new LicensesTransformer())->transformLicenses($licenses, $licenses->count());
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found', compact('id'))));
+
     }
 
     /**

@@ -4,10 +4,11 @@ return [
 
     'asset_tag'   	=> 'Oznaka imovine',
     'asset_model'       => 'Model',
-    'book_value'  	=> 'Vrednost',
+    'book_value'  	=> 'Trenutna vrednost',
     'change' 		=> 'U/I',
     'checkout_date' => 'Datum odjave',
     'checkoutto' 	=> 'Odjavljen',
+    'current_value' => 'Trenutna vrednost',
     'diff' 			=> 'Diff',
     'dl_csv' 		=> 'Download CSV',
     'eol' 			=> 'EOL',
@@ -18,8 +19,12 @@ return [
     'serial'   		=> 'Serial',
     'status'   		=> 'Status',
     'title'      	=> 'Imovina ',
-    'image'		=> 'Slika uređaja',
+    'image'		    => 'Slika uređaja',
     'days_without_acceptance' => 'Days Without Acceptance',
-    'monthly_depreciation' => 'Monthly Depreciation',
-
+    'monthly_depreciation' => 'Mesečna amortizacija',
+    'assigned_to'    => 'Zadužen',
+    'requesting_user' => 'Zahtevalac',
+    'requested_date' => 'Datum zahteva',
+    'changed'       => 'Izmenjeno',
+    'icon' => 'Ikonica',
 ];

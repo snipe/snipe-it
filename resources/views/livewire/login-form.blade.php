@@ -41,7 +41,7 @@
                                             <i class="fas fa-user" aria-hidden="true"></i> 
                                             {{ trans('admin/users/table.username')  }}
                                         </label>
-                                        <input class="form-control" placeholder="{{ trans('admin/users/table.username')  }}" name="username" type="text" autocomplete="off" wire:model="username" wire:model.defer="username" wire:model.lazy="username">
+                                        <input class="form-control" placeholder="{{ trans('admin/users/table.username')  }}" name="username" type="text" autocomplete="off" wire:model="username">
                                         @error('username') 
                                             <span class="alert-msg">
                                                 {{ $message }}
@@ -53,7 +53,7 @@
                                             <i class="fas fa-key" aria-hidden="true"></i> 
                                             {{ trans('admin/users/table.password')  }}
                                         </label>
-                                        <input class="form-control" placeholder="{{ trans('admin/users/table.password')  }}" name="password" type="password" wire:model="password" wire:model.lazy="password" wire:model.defer="password" autocomplete="off">
+                                        <input class="form-control" placeholder="{{ trans('admin/users/table.password')  }}" name="password" type="password" wire:model="password" autocomplete="off">
                                         @error('password') 
                                             <span class="alert-msg">
                                                 {{ $message }}

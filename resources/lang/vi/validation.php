@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => ':attribute phải ít nhất :min ký tự.',
         'array'   => 'Thuộc tính: phải có ít nhất: min items.',
     ],
+    'starts_with'          => 'Trường :attribute phải kết thúc bằng một trong những giá trị sau: :values',
     'not_in'               => ':attribute đã chọn không hợp lý.',
     'numeric'              => ':attribute phải là một số.',
     'present'              => 'Trường thuộc tính: phải có mặt.',
@@ -88,8 +89,17 @@ return array(
     'unique'               => ':attribute đã sẵn sàng.',
     'uploaded'             => 'Thuộc tính: không thể tải lên.',
     'url'                  => 'Định dạng :attribute thì không hợp lý.',
-    "unique_undeleted"     => "Thuộc tính: phải là duy nhất.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => 'Thuộc tính: phải là duy nhất.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +111,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +124,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Trường: attribute chứa một ký tự không được phép.",
-        "email_array"      => "Một hoặc nhiều địa chỉ email không hợp lệ.",
-        "hashed_pass"      => "Mật khẩu hiện tại của bạn không chính xác",
+        'alpha_space' => 'Trường: attribute chứa một ký tự không được phép.',
+        'email_array'      => 'Một hoặc nhiều địa chỉ email không hợp lệ.',
+        'hashed_pass'      => 'Mật khẩu hiện tại của bạn không chính xác',
         'dumbpwd'          => 'Mật khẩu đó quá phổ biến.',
-        "statuslabel_type" => "Bạn phải chọn một loại nhãn tình trạng hợp lệ",
+        'statuslabel_type' => 'Bạn phải chọn một loại nhãn tình trạng hợp lệ',
     ],
 
     /*
@@ -135,4 +144,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

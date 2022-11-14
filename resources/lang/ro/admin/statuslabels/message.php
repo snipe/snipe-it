@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'Aceste active nu pot fi atribuite nimănui.',
-        'deployable'   => 'Aceste active pot fi verificate. Odată ce sunt atribuite, vor avea un status meta de <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
+        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
         'archived'   => 'Aceste active nu pot fi verificate și vor apărea numai în vizualizarea Arhivat. Acest lucru este util pentru păstrarea informațiilor despre active în scopuri bugetare / istorice, dar păstrându-le din lista activelor zilnice.',
         'pending'   => 'Aceste bunuri nu pot fi încă alocate nimănui, adesea folosite pentru articole care urmează să fie reparate, dar se așteaptă ca acestea să revină în circulație.',
     ],

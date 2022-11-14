@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Bạn sắp xóa: asset_count tài sản.',
     'bulk_update'		=> 'Cập nhật tài sản số lượng lớn',
     'bulk_update_help'	=> 'Form này cho phép bạn cập nhật nhiều tài sản cùng lúc. Chỉ điền vào ô bạn cần thay đổi. Bất kỳ ô nào để trống sẽ thông báo là chưa thay đổi. ',
-    'bulk_update_warn'	=> 'Bạn muốn chỉnh sửa các thuộc tính của :asset_count assets.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Checkout đến',
     'checkout_date'		=> 'Ngày Checkout',
     'checkin_date'		=> 'Ngày Checkin',
@@ -40,4 +40,12 @@ return [
     'warranty'			=> 'Bảo hành',
         'warranty_expires'		=> 'Hết hạn bảo hành',
     'years'				=> 'năm',
+    'asset_location' => 'Cập nhật vị trí tài sản',
+    'asset_location_update_default_current' => 'Cập nhật vị trí tài sản mặc định VÀ vị trí thực tế',
+    'asset_location_update_default' => 'Chỉ cập nhật vị trí tài sản mặc định',
+    'asset_not_deployable' => 'Trạng thái tài sản là không cho phép cấp phát. Tài sản này không thể bàn giao.',
+    'asset_deployable' => 'Trạng thái tài sản là được phép cấp phát. Tài sản này có thể bàn giao.',
+    'processing_spinner' => 'Đang xử lý...',
+    'optional_infos'  => 'Thông tin bổ sung',
+    'order_details'   => 'Thông tin đơn hàng'
 ];

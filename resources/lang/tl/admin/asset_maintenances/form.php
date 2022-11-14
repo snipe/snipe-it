@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Ang mga araw',
         'notes'                  => 'Ang mga Palatandaan',
         'update'                 => 'I-update',
-        'create'                 => 'Lumikha',
+        'create'                 => 'Lumikha'
     ];

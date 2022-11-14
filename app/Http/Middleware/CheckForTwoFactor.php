@@ -24,7 +24,13 @@ class CheckForTwoFactor
     public function handle($request, Closure $next)
     {
         // Skip the logic if the user is on the two factor pages or the setup pages
-        if (in_array($request->route()->getName(), self::IGNORE_ROUTES)) {
+
+        // TODO - what we have below only works because our ROUTE uri's look _exactly_ like the route *names*.
+        // The problem is that, in the new(-ish) Laravel routing system, the route-name doesn't match if the route _verb_ is wrong.
+        // so we can have a blade that POST's to a route('two-factor') - but that route *name* is only matched when the method is GET
+        // because we attached the name to the GET, not to the POST (as route names *SHOULD* be unique in Laravel)
+        // there has got to be a better way to do this, but this is the best I could come up with for now.
+        if (in_array($request->route()->getName(), self::IGNORE_ROUTES) || in_array($request->route()->uri(), self::IGNORE_ROUTES)) {
             return $next($request);
         }
 
@@ -32,7 +38,7 @@ class CheckForTwoFactor
         if ($settings = Setting::getSettings()) {
             if (Auth::check() && ($settings->two_factor_enabled != '')) {
                 // This user is already 2fa-authed
-                if ($request->session()->get('2fa_authed')) {
+                if ($request->session()->get('2fa_authed')==Auth::user()->id) {
                     return $next($request);
                 }
 

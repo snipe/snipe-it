@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,10 +64,11 @@ return array(
         'string'  => 'התכונה: חייבת להיות לפחות: דקות תווים.',
         'array'   => 'התכונה: חייבת לכלול לפחות פריטים מינימליים.',
     ],
+    'starts_with'          => 'השדה חייב להכיל לפחות אחד מהערכים הבאים.',
     'not_in'               => 'התכונה שנבחרה: אינה חוקית.',
     'numeric'              => 'התכונה: חייבת להיות מספר.',
     'present'              => 'שדה התכונה: חייב להיות נוכח.',
-    'valid_regex'          => 'That is not a valid regex. ',
+    'valid_regex'          => 'הקלט לא חוקי. ',
     'regex'                => 'תבנית התכונה: אינה חוקית.',
     'required'             => 'שדה התכונה: נדרש.',
     'required_if'          => 'שדה התכונה: נדרש כאשר: other is: value.',
@@ -88,8 +89,17 @@ return array(
     'unique'               => 'התכונה: כבר נלקחה.',
     'uploaded'             => 'התכונה: נכשלה.',
     'url'                  => 'תבנית התכונה: אינה חוקית.',
-    "unique_undeleted"     => "The :attribute must be unique.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => 'השדה חייב מזהה יחודי.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'הערך לא יכול להיות שלילי'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +111,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +124,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "השדה: מאפיין מכיל תו שאינו מותר.",
-        "email_array"      => "כתובת אימייל אחת או יותר אינה חוקית.",
-        "hashed_pass"      => "הסיסמה הנוכחית שלך שגויה",
+        'alpha_space' => 'השדה: מאפיין מכיל תו שאינו מותר.',
+        'email_array'      => 'כתובת אימייל אחת או יותר אינה חוקית.',
+        'hashed_pass'      => 'הסיסמה הנוכחית שלך שגויה',
         'dumbpwd'          => 'סיסמה זו נפוצה מדי.',
-        "statuslabel_type" => "עליך לבחור סוג תווית סטטוס חוקי",
+        'statuslabel_type' => 'עליך לבחור סוג תווית סטטוס חוקי',
     ],
 
     /*
@@ -135,4 +144,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

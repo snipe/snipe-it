@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'Hierdie bates kan nie aan enigiemand toegewys word nie.',
-        'deployable'   => 'Hierdie bates kan nagegaan word. Sodra hulle toegewys is, sal hulle \'n meta-status van <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong> aanvaar.',
+        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
         'archived'   => 'Hierdie bates kan nie nagegaan word nie en sal eers in die Argief-aansig verskyn. Dit is nuttig vir die behoud van inligting oor bates vir begrotings / historiese doeleindes, maar om hulle uit die dag-tot-dag-bate lys te hou.',
         'pending'   => 'Hierdie bates kan nog nie aan iemand toegewys word nie, wat dikwels gebruik word vir items wat buite herstel is, maar sal na verwagting terugkeer.',
     ],

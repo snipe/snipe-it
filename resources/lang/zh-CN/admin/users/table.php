@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> '激活',
     'allow'  				=> '允许',
     'checkedout'  			=> '资产',
@@ -10,7 +10,7 @@ return [
     'email'      			=> '邮箱',
     'employee_num'      	=> '员工号',
     'first_name' 			=> '名',
-    'groupnotes'			=> '请选择一个组给用户，注意，用户将拥有该组的所有权限。',
+    'groupnotes'			=> '选择要分配给用户的组。请注意，用户将拥有分配给他们的组的权限。使用ctrl+单击(MacOS为cmd+单击) 取消选择组。',
     'id'         			=> '编号',
     'inherit'  				=> '继承',
     'job' 					=> '职位名称',
@@ -28,11 +28,11 @@ return [
     'show_current'          => '已当前用户',
     'show_deleted'          => '已删除用户',
     'title' 				=> '职位',
-    'to_restore_them'		=> '恢复它们。',
+	'to_restore_them'		=> '恢复它们。',
     'updateuser' 			=> '更新用户',
     'username' 				=> '用户名',
-    'user_deleted_text' 	=> '此用户已被标记为已删除。',
+	'user_deleted_text' 	=> '此用户已被标记为已删除。',
     'username_note' 		=> '（这个是用来活动目录「Active Directory」的绑定，非用来登录）',
     'cloneuser'             => '克隆用户',
     'viewusers' 			=> '查看用户',
-];
+);

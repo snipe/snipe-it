@@ -97,7 +97,7 @@
             {!! $errors->first('gravatar', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             <p>
               <img src="//secure.gravatar.com/avatar/{{ md5(strtolower(trim($user->gravatar))) }}" width="30" height="30" alt="{{ $user->present()->fullName() }} avatar image">
-              <a href="http://gravatar.com"><small>Change your avatar at Gravatar.com</small></a>.
+              {!! trans('general.gravatar_url') !!}
             </p>
           </div>
         </div>

@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Та устгах гэж байна: asset_count хөрөнгө.',
     'bulk_update'		=> 'Бөөнөөр шинэчлэх актив',
     'bulk_update_help'	=> 'Энэ маягтыг олон дахин нэг зэрэг олон актив шинэчлэх боломжтой. Зөвхөн өөрчлөх шаардлагатай талбаруудыг бөглөөрэй. Хоосон үлдсэн талбарууд өөрчлөгдөхгүй хэвээр үлдэнэ.',
-    'bulk_update_warn'	=> 'Та asset_count активын шинж чанарыг засах гэж байна.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Үүнийг шалгах',
     'checkout_date'		=> 'Тооцоо хийх өдөр',
     'checkin_date'		=> 'Checkin Огноо',
@@ -40,4 +40,12 @@ return [
     'warranty'			=> 'Баталгаат',
         'warranty_expires'		=> 'Баталгаат хугацаа дуусах',
     'years'				=> 'жил',
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information'
 ];

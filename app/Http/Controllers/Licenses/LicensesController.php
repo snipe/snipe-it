@@ -134,6 +134,7 @@ class LicensesController extends Controller
             ->with('maintained_list', $maintained_list);
     }
 
+
     /**
      * Validates and stores the license form data submitted from the edit
      * license form.
@@ -230,7 +231,7 @@ class LicensesController extends Controller
      */
     public function show($licenseId = null)
     {
-        $license = License::with('assignedusers', 'licenseSeats.user', 'licenseSeats.asset')->find($licenseId);
+        $license = License::with('assignedusers')->find($licenseId);
 
         if ($license) {
             $this->authorize('view', $license);

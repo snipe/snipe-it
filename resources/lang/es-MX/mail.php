@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'El usuario ha cancelado el item solicitado en la pagina Web',
     'a_user_requested' => 'Un usuario a solicitado un item en la pagina Web',
     'accessory_name' => 'Nombre de accesorio:',
@@ -59,7 +61,7 @@ return [
     'test_mail_text' => 'Esto es una prueba desde el sistema de gestión de activos de Snipe-IT. Si tienes esto, correo está funcionando :)',
     'the_following_item' => 'El siguiente artículo ha sido devuelto: ',
     'low_inventory_alert' => 'Hay :count item por debajo del inventario mínimo o próximo a bajar.|Hay are :count elementos por debajo del inventario mínimo o próximos a bajar.',
-    'assets_warrantee_alert' => 'Hay :count asiento de licencia que expira en los próximos :threshold días. | Hay :count asientos de licencias que expiran en los próximos :threshold días.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'Hay :count licencia que expira en los próximos :threshold días. | Hay :count licencias que expiran en los próximos :threshold días.',
     'to_reset' => 'Para restaurar tu contraseña de :web, rellena este formulario:',
     'type' => 'Tipo',

@@ -43,6 +43,11 @@ class CompaniesController extends Controller
             $companies->TextSearch($request->input('search'));
         }
 
+        if ($request->filled('name')) {
+            $companies->where('name', '=', $request->input('name'));
+        }
+
+
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.
         $offset = (($companies) && ($request->get('offset') > $companies->count())) ? $companies->count() : $request->get('offset', 0);
@@ -56,9 +61,10 @@ class CompaniesController extends Controller
 
         $total = $companies->count();
         $companies = $companies->skip($offset)->take($limit)->get();
-
         return (new CompaniesTransformer)->transformCompanies($companies, $total);
+
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -95,9 +101,10 @@ class CompaniesController extends Controller
     {
         $this->authorize('view', Company::class);
         $company = Company::findOrFail($id);
-
         return (new CompaniesTransformer)->transformCompany($company);
+
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -157,6 +164,7 @@ class CompaniesController extends Controller
      */
     public function selectlist(Request $request)
     {
+        $this->authorize('view.selectlists');
         $companies = Company::select([
             'companies.id',
             'companies.name',

@@ -20,7 +20,10 @@
                             <span class="hidden-lg hidden-md">
                             <i class="fas fa-barcode" aria-hidden="true"></i>
                             </span>
-                            <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}</span>
+                            <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}
+                                {!! (($company->assets) && ($company->assets()->AssetsForShow()->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($company->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
+
+                            </span>
                         </a>
                     </li>
 
@@ -29,7 +32,9 @@
                             <span class="hidden-lg hidden-md">
                             <i class="far fa-save"></i>
                             </span>
-                            <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}</span>
+                            <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}
+                                {!! (($company->licenses) && ($company->licenses->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($company->licenses->count()).'</badge>' : '' !!}
+                            </span>
                         </a>
                     </li>
 
@@ -37,7 +42,9 @@
                         <a href="#accessories_tab" data-toggle="tab">
                             <span class="hidden-lg hidden-md">
                             <i class="far fa-keyboard"></i>
-                            </span> <span class="hidden-xs hidden-sm">{{ trans('general.accessories') }}</span>
+                            </span> <span class="hidden-xs hidden-sm">{{ trans('general.accessories') }}
+                                {!! (($company->accessories) && ($company->accessories->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($company->accessories->count()).'</badge>' : '' !!}
+                            </span>
                         </a>
                     </li>
 
@@ -45,7 +52,9 @@
                         <a href="#consumables_tab" data-toggle="tab">
                             <span class="hidden-lg hidden-md">
                             <i class="fas fa-tint"></i></span>
-                            <span class="hidden-xs hidden-sm">{{ trans('general.consumables') }}</span>
+                            <span class="hidden-xs hidden-sm">{{ trans('general.consumables') }}
+                                {!! (($company->consumables) && ($company->consumables->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($company->consumables->count()).'</badge>' : '' !!}
+                            </span>
                         </a>
                     </li>
 
@@ -53,7 +62,9 @@
                         <a href="#components_tab" data-toggle="tab">
                             <span class="hidden-lg hidden-md">
                             <i class="far fa-hdd"></i></span>
-                            <span class="hidden-xs hidden-sm">{{ trans('general.components') }}</span>
+                            <span class="hidden-xs hidden-sm">{{ trans('general.components') }}
+                                {!! (($company->components) && ($company->components->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($company->components->count()).'</badge>' : '' !!}
+                            </span>
                         </a>
                     </li>
 
@@ -61,7 +72,9 @@
                         <a href="#users_tab" data-toggle="tab">
                             <span class="hidden-lg hidden-md">
                             <i class="fas fa-users"></i></span>
-                            <span class="hidden-xs hidden-sm">{{ trans('general.people') }}</span>
+                            <span class="hidden-xs hidden-sm">{{ trans('general.people') }}
+                                {!! (($company->users) && ($company->users->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($company->users->count()).'</badge>' : '' !!}
+                            </span>
                         </a>
                     </li>
 
@@ -73,7 +86,9 @@
 
                     <div class="tab-pane fade in active" id="asset_tab">
                         <!-- checked out assets table -->
-                        <div class="table-responsive">
+                        <div class="table table-responsive">
+                            @include('partials.asset-bulk-actions')
+
                             <table
                                     data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
                                     data-cookie-id-table="assetsListingTable"
@@ -85,6 +100,10 @@
                                     data-show-export="true"
                                     data-show-refresh="true"
                                     data-sort-order="asc"
+                                    data-toolbar="#assetsBulkEditToolbar"
+                                    data-bulk-button-id="#bulkAssetEditButton"
+                                    data-bulk-form-id="#assetsBulkForm"
+                                    data-click-to-select="true"
                                     id="assetsListingTable"
                                     class="table table-striped snipe-table"
                                     data-url="{{route('api.assets.index',['company_id' => $company->id]) }}"

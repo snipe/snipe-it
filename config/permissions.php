@@ -6,6 +6,7 @@
  |--------------------------------------------------------------------------
 */
 
+
 return [
 
     'Global' => [
@@ -97,6 +98,7 @@ return [
             'display'    => true,
         ],
 
+
         [
             'permission' => 'assets.view.requestable',
             'label'      => 'View Requestable Assets',
@@ -143,6 +145,13 @@ return [
             'note'       => '',
             'display'    => true,
         ],
+        [
+            'permission' => 'accessories.files',
+            'label'      => 'View and Modify Accessory Files',
+            'note'       => '',
+            'display'    => true,
+        ],
+
     ],
 
     'Consumables' => [
@@ -176,7 +185,14 @@ return [
             'note'       => '',
             'display'    => true,
         ],
+        [
+            'permission' => 'consumables.files',
+            'label'      => 'View and Modify Consumable Files',
+            'note'       => '',
+            'display'    => true,
+        ],
     ],
+
 
     'Licenses' => [
         [
@@ -223,6 +239,7 @@ return [
         ],
     ],
 
+
     'Components' => [
         [
             'permission' => 'components.view',
@@ -260,6 +277,12 @@ return [
             'note'       => '',
             'display'    => true,
         ],
+        [
+            'permission' => 'components.files',
+            'label'      => 'View and Modify Component Files',
+            'note'       => '',
+            'display'    => true,
+        ],
 
     ],
 
@@ -285,13 +308,6 @@ return [
         [
             'permission' => 'kits.delete',
             'label'      => 'Delete ',
-            'note'       => '',
-            'display'    => true,
-        ],
-
-        [
-            'permission' => 'kits.checkout',
-            'label'      => 'Checkout ',
             'note'       => '',
             'display'    => true,
         ],
@@ -488,6 +504,7 @@ return [
         ],
     ],
 
+
     'Manufacturers' => [
         [
             'permission' => 'manufacturers.view',
@@ -595,6 +612,9 @@ return [
             'display'    => true,
         ],
     ],
+
+
+
 
     'Self' => [
         [

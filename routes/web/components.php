@@ -8,22 +8,37 @@ Route::group(['prefix' => 'components', 'middleware' => ['auth']], function () {
     Route::get(
         '{componentID}/checkout',
         [Components\ComponentCheckoutController::class, 'create']
-    )->name('checkout/component');
+    )->name('components.checkout.show');
 
     Route::post(
         '{componentID}/checkout',
         [Components\ComponentCheckoutController::class, 'store']
-    )->name('checkout/component');
+    )->name('components.checkout.store');
 
     Route::get(
         '{componentID}/checkin/{backto?}',
         [Components\ComponentCheckinController::class, 'create']
-    )->name('checkout/component');
+    )->name('components.checkin.show');
 
     Route::post(
         '{componentID}/checkin/{backto?}',
         [Components\ComponentCheckinController::class, 'store']
-    )->name('component.checkin.save');
+    )->name('components.checkin.store');
+
+    Route::post(
+        '{componentId}/upload',
+        [Components\ComponentsFilesController::class, 'store']
+    )->name('upload/component');
+
+    Route::delete(
+        '{componentId}/deletefile/{fileId}',
+        [Components\ComponentsFilesController::class, 'destroy']
+    )->name('delete/componentfile');
+
+    Route::get(
+        '{componentId}/showfile/{fileId}/{download?}',
+        [Components\ComponentsFilesController::class, 'show']
+    )->name('show.componentfile');
 
 });
 

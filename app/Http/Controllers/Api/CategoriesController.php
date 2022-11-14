@@ -32,6 +32,28 @@ class CategoriesController extends Controller
             $categories = $categories->TextSearch($request->input('search'));
         }
 
+        if ($request->filled('name')) {
+            $categories->where('name', '=', $request->input('name'));
+        }
+
+        if ($request->filled('category_type')) {
+            $categories->where('category_type', '=', $request->input('category_type'));
+        }
+
+        if ($request->filled('use_default_eula')) {
+            $categories->where('use_default_eula', '=', $request->input('use_default_eula'));
+        }
+
+        if ($request->filled('require_acceptance')) {
+            $categories->where('require_acceptance', '=', $request->input('require_acceptance'));
+        }
+
+        if ($request->filled('checkin_email')) {
+            $categories->where('checkin_email', '=', $request->input('checkin_email'));
+        }
+
+
+
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.
         $offset = (($categories) && ($request->get('offset') > $categories->count())) ? $categories->count() : $request->get('offset', 0);
@@ -49,6 +71,7 @@ class CategoriesController extends Controller
         return (new CategoriesTransformer)->transformCategories($categories, $total);
 
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -69,8 +92,8 @@ class CategoriesController extends Controller
         if ($category->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $category, trans('admin/categories/message.create.success')));
         }
-
         return response()->json(Helper::formatStandardApiResponse('error', null, $category->getErrors()));
+
     }
 
     /**
@@ -85,9 +108,10 @@ class CategoriesController extends Controller
     {
         $this->authorize('view', Category::class);
         $category = Category::findOrFail($id);
-
         return (new CategoriesTransformer)->transformCategory($category);
+
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -136,6 +160,7 @@ class CategoriesController extends Controller
         return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/categories/message.delete.success')));
     }
 
+
     /**
      * Gets a paginated collection for the select2 menus
      *
@@ -145,6 +170,7 @@ class CategoriesController extends Controller
      */
     public function selectlist(Request $request, $category_type = 'asset')
     {
+        $this->authorize('view.selectlists');
         $categories = Category::select([
             'id',
             'name',

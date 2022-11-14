@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Aktyvus',
     'allow'  				=> 'Leisti',
     'checkedout'  			=> 'Įranga',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'El. paštas',
     'employee_num'      	=> 'Darbuotojo nr.',
     'first_name' 			=> 'Vardas',
-    'groupnotes'			=> 'Pasirinkite grupę, kuriai priskirti naudotoją. Prisiminkite, kad naudotojas gauna visas teises, kurioms turi grupė.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Paveldėjo/gavo iš',
     'job' 					=> 'Pozicija',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Rodyti esamus naudotojus',
     'show_deleted'          => 'Rodyti ištrintus naudotojus',
     'title' 				=> 'Antraštė',
-    'to_restore_them'		=> 'juos atkurti.',
+	'to_restore_them'		=> 'juos atkurti.',
     'updateuser' 			=> 'Atnaujinti naudotoją',
     'username' 				=> 'Vartotojo vardas',
-    'user_deleted_text' 	=> 'Šis naudotojas pažymėtas kaip ištrintas.',
+	'user_deleted_text' 	=> 'Šis naudotojas pažymėtas kaip ištrintas.',
     'username_note' 		=> '(Tai naudojamą tik aktyviam direktorijos binding ne prisijungimui.)',
     'cloneuser'             => 'Kopijuoti naudotoją',
     'viewusers' 			=> 'Peržiūrėti naudotojus',
-];
+);

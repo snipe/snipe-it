@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => 'I: imfanelo kufanele ibe okungenani: izinhlamvu ezincane.',
         'array'   => 'I: i-attribut kumele ibe okungenani: min min.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'Okukhethiwe: imfanelo ayivumelekile.',
     'numeric'              => 'I: imfanelo kufanele ibe inombolo.',
     'present'              => 'I: insimu yemfanelo kufanele ibe khona.',
@@ -88,8 +89,17 @@ return array(
     'unique'               => 'I: imfanelo isivele ithathwe.',
     'uploaded'             => 'I: imfanelo ayihlulekile ukulayisha.',
     'url'                  => 'I: ifomethi yokwaziswa ayivumelekile.',
-    "unique_undeleted"     => "The :attribute must be unique.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => 'The :attribute must be unique.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +111,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +124,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "I: Insimu yemfanelo iqukethe umlingiswa ongavunyelwe.",
-        "email_array"      => "Ikheli elilodwa noma ngaphezulu le-imeyili alivumelekile.",
-        "hashed_pass"      => "Iphasiwedi yakho yamanje ayilungile",
+        'alpha_space' => 'I: Insimu yemfanelo iqukethe umlingiswa ongavunyelwe.',
+        'email_array'      => 'Ikheli elilodwa noma ngaphezulu le-imeyili alivumelekile.',
+        'hashed_pass'      => 'Iphasiwedi yakho yamanje ayilungile',
         'dumbpwd'          => 'Lelo phasiwedi livame kakhulu.',
-        "statuslabel_type" => "Kumele ukhethe uhlobo lwelebula lesimo esivumelekile",
+        'statuslabel_type' => 'Kumele ukhethe uhlobo lwelebula lesimo esivumelekile',
     ],
 
     /*
@@ -135,4 +144,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

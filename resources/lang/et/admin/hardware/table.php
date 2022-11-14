@@ -2,12 +2,13 @@
 
 return [
 
-    'asset_tag'   	=> 'Varade silt',
+    'asset_tag'   	=> 'Vahendi silt',
     'asset_model'       => 'Mudel',
-    'book_value'  	=> 'Väärtus',
+    'book_value'  	=> 'Arvestuslik väärtus',
     'change' 		=> 'Sees väljas',
-    'checkout_date' => 'Checkout Date',
-    'checkoutto' 	=> 'Väljaostetud',
+    'checkout_date' => 'Väljastamise kuupäev',
+    'checkoutto' 	=> 'Väljastatud',
+    'current_value' => 'Hetkeväärtus',
     'diff' 			=> 'Diferentseeritud',
     'dl_csv' 		=> 'Laadige alla CSV',
     'eol' 			=> 'EOL',
@@ -17,9 +18,13 @@ return [
     'purchase_date'	=> 'Ostetud',
     'serial'   		=> 'Seerianumber',
     'status'   		=> 'Olek',
-    'title'      	=> 'Vara',
-    'image'		=> 'Seadme pilt',
+    'title'      	=> 'Vahend',
+    'image'		    => 'Seadme pilt',
     'days_without_acceptance' => 'Päeva ilma vastuvõtmiseta',
-    'monthly_depreciation' => 'Monthly Depreciation',
-
+    'monthly_depreciation' => 'Igakuine amortatsioon',
+    'assigned_to'    => 'Väljastatud kasutajale',
+    'requesting_user' => 'Taotlev kasutaja',
+    'requested_date' => 'Taotletav kuupäev',
+    'changed'       => 'Changed',
+    'icon' => 'Ikoon',
 ];

@@ -1,7 +1,7 @@
 <?php
 
-return [
-    'component_name'                  => 'Component Naam',
+return array(
+    'component_name'                  => 'Componentnaam',
     'checkin'                             => 'Component inchecken',
     'checkout'                             => 'Component uitchecken',
     'cost'				=> 'Aankoop prijs',
@@ -12,4 +12,4 @@ return [
     'remaining' 			             => 'Resterend',
     'total' 			                 => 'Totaal',
     'update'                            => 'Component bijwerken',
-];
+);

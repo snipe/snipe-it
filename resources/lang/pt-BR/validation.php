@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => 'O :attribute deve ter pelo menos :min caracteres.',
         'array'   => 'O :attribute deve ter pelo menos :min items.',
     ],
+    'starts_with'          => 'O atributo deve começar com um dos seguintes valores.',
     'not_in'               => 'O :attribute selecionado é inválido.',
     'numeric'              => 'O :attribute deve ser um número.',
     'present'              => 'O campo:attribute deve estar presente.',
@@ -88,8 +89,17 @@ return array(
     'unique'               => 'O :attribute já foi tomado.',
     'uploaded'             => 'O :attribute falhou no upload.',
     'url'                  => 'O formato de :attribute é inválido.',
-    "unique_undeleted"     => "O :attribute deve ser único.",
-    "non_circular"         => "O :attribute não pode criar uma referência circular.",
+    'unique_undeleted'     => 'O :attribute deve ser único.',
+    'non_circular'         => 'O :attribute não pode criar uma referência circular.',
+    'disallow_same_pwd_as_user_fields' => 'A senha não pode ser igual ao nome de usuário.',
+    'letters'              => 'A senha deve conter pelo menos uma letra.',
+    'numbers'              => 'A senha deve conter pelo menos um número.',
+    'case_diff'            => 'A senha deve conter letras maiúsculas e minusculas.',
+    'symbols'              => 'A senha deve conter símbolos.',
+    'gte'                  => [
+        'numeric'          => 'Valor não pode ser negativo'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +111,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +124,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "O campo :attribute contém um caractere que não é permitido.",
-        "email_array"      => "Um ou mais e-mails sõ invalidos.",
-        "hashed_pass"      => "Sua senha atual está incorreta",
+        'alpha_space' => 'O campo :attribute contém um caractere que não é permitido.',
+        'email_array'      => 'Um ou mais e-mails sõ invalidos.',
+        'hashed_pass'      => 'Sua senha atual está incorreta',
         'dumbpwd'          => 'Essa senha é muito comum.',
-        "statuslabel_type" => "Você deve selecionar um tipo de etiqueta de status válido",
+        'statuslabel_type' => 'Você deve selecionar um tipo de etiqueta de status válido',
     ],
 
     /*
@@ -135,4 +144,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

@@ -8,7 +8,9 @@
         'repair'             => 'Perbaikan',
         'maintenance'        => 'Pemeliharaan',
         'upgrade'            => 'Peningkatan',
-        'calibration'        => 'Calibration',
-        'software_support'   => 'Software Support',
-        'hardware_support'   => 'Hardware Support',
+        'calibration'        => 'Kalibrasi',
+        'software_support'   => 'Dukungan Perangkat Lunak',
+        'hardware_support'   => 'Dukungan Perangkat Keras',
+        'configuration_change'   => 'Perubahan Konfigurasi',
+        'pat_test'           => 'Ujicoba PAT',
     ];

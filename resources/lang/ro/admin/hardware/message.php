@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Warning: </strong> Acest activ a fost marcat ca fiind în prezent nedelimitat. Dacă această stare sa modificat, actualizați starea activelor.',
     'does_not_exist' 	=> 'Activul nu exista.',
-    'does_not_exist_or_not_requestable' => 'Bună încercare. Acest bun nu există sau nu este solicitat.',
+    'does_not_exist_or_not_requestable' => 'Acest activ nu există sau nu poate fi solicitat.',
     'assoc_users'	 	=> 'Acest activ este predat catre un utilizator si nu se poate sterge. Va rugam verificati activul, dupa care incercati sa-l stergeti iar. ',
 
     'create' => [
@@ -16,6 +16,7 @@ return [
         'error'   			=> 'Activul nu a fost actualizat, va rugam incercati iar',
         'success' 			=> 'Activul a fost actualizat.',
         'nothing_updated'	=>  'Nu au fost selectate câmpuri, deci nimic nu a fost actualizat.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [
@@ -27,6 +28,7 @@ return [
         'error'   		=> 'Analiza activelor nu a avut succes. Vă rugăm să încercați din nou.',
         'success' 		=> 'Analiza activelor a fost înregistrată cu succes.',
     ],
+
 
     'deletefile' => [
         'error'   => 'Fișierul nu a fost șters. Vă rugăm să încercați din nou.',
@@ -47,6 +49,7 @@ return [
         'file_delete_success'   => 'Fișierul dvs. a fost șters cu succes',
         'file_delete_error'      => 'Fișierul nu a putut fi șters',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Sunteti sigur ca vreti sa stergeti acest activ?',

@@ -6,8 +6,11 @@ return [
     'asset_depreciations'  					=> 'Avskrivninger',
     'create'  					            => 'Opprett avskrivning',
     'depreciation_name'  					=> 'Avskrivningsnavn',
+    'depreciation_min'                      => 'Nedre verdi for avskrivning',
     'number_of_months'  					=> 'Antall måneder',
     'update'  					            => 'Oppdater avskrivninger',
-    'depreciation_min'                      => 'Minimum Value after Depreciation'
-
+    'depreciation_min'                      => 'Minimumsverdi etter avskrivning',
+    'no_depreciations_warning'               => '<strong>Advarsel:</strong>
+                      Du har for øyeblikket ingen avskrivninger satt opp.
+                      Vennligst sett opp minst én avskrivning for å se avskrivningsrapporten.',
 ];

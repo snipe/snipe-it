@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Attenzione: </strong> Questo asset è stato marcato come non distribuibile.
                        Se lo stato è cambiato,aggiorna lo stato dell\'asset.',
     'does_not_exist' 	=> 'Questo Asset non esiste.',
-    'does_not_exist_or_not_requestable' => 'Ci hai provato. Questo prodotto non esiste o non è disponibile.',
+    'does_not_exist_or_not_requestable' => 'Questo bene non esiste o non è disponibile.',
     'assoc_users'	 	=> 'Questo asset è stato assegnato ad un Utente e non può essere cancellato. Per favore Riassegnalo in magazzino,e dopo riprova a cancellarlo.',
 
     'create' => [
@@ -17,6 +17,7 @@ return [
         'error'   			=> 'Il bene non è stato aggiornato, si prega di riprovare',
         'success' 			=> 'Bene aggiornato con successo.',
         'nothing_updated'	=>  'Non è stato selezionato nessun campo, nulla è stato aggiornato.',
+        'no_assets_selected'  =>  'Nessun asset è stato selezionato, quindi niente è stato eliminato.',
     ],
 
     'restore' => [
@@ -28,6 +29,7 @@ return [
         'error'   		=> 'L\'audit del patrimonio non è riuscito. Riprova.',
         'success' 		=> 'L\'audit di risorse si è registrato con successo.',
     ],
+
 
     'deletefile' => [
         'error'   => 'File non cancellato. Riprova.',
@@ -43,11 +45,12 @@ return [
 
     'import' => [
         'error'                 => 'Alcuni elementi non sono stati importati correttamente.',
-        'errorDetail'           => 'Gli elementi seguenti non sono stati importati correttamente a causa di errori.',
+        'errorDetail'           => 'Gli articoli seguenti non sono stati importati correttamente a causa di errori.',
         'success'               => 'Il file è stato importato con successo',
         'file_delete_success'   => 'Il file è stato cancellato con successo',
         'file_delete_error'      => 'Impossibile eliminare il file',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Sei sicuro di voler eliminare questo bene?',

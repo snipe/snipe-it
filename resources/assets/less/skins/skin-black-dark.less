@@ -26,7 +26,7 @@
               color: #fff;
             }
             a {
-              color: #fff;
+              color: #333;
               &:hover {
                 background: darken(@black, 5%);
                 color: #fff;
@@ -34,6 +34,11 @@
             }
           }
         }
+      }
+    }
+    @media (max-width: 991px) {
+      .navbar-custom-menu > .navbar-nav > li > .dropdown-menu {
+        background-color: var(--back-sub);
       }
     }
     //Logo
@@ -87,6 +92,12 @@
   }
 }
 
+/**
+The dropdown is white, so use a darker color
+ */
+li.dropdown-item-marker {
+  color: var(--button-primary);
+}
 
 a {
   &:hover {
@@ -121,6 +132,9 @@ a {
   --nav-link: #FFF; /* Use same as Header picker */
   --light-link: #fff; /* Use same as Header picker */
 }
+#ldapad_test_results.well.well-sm{
+  color: var(--back-main);
+}
 
 .main-header .navbar, .main-header .logo {
   background-color: var(--header);
@@ -132,7 +146,9 @@ a {
 .bootstrap-table .fixed-table-container .table thead th .sortable {
   color: var(--nav-link);
 }
-
+.bootstrap-table .fixed-table-toolbar .columns label {
+  color:#000;
+}
 .thead, .navbar-nav>li>a:link {
   color: var(--nav-link);
 }
@@ -245,10 +261,6 @@ body {
 #details>div>div>div>table {
   background-color: transparent;
 }
-.dropdown-menu, .dropdown-menu>li>a {
-  background-color: var(--back-sub);
-  color: var(--text-main) !important;
-}
 .dropdown-menu>li>a:hover {
   background-color: var(--back-main);
   color: var(--nav-link);
@@ -354,6 +366,14 @@ input[type=text], input[type=search] {
   background-color: var(--back-sub-alt);
   color: var(--text-main);
 }
+.row-new-striped > .row:nth-of-type(odd){
+  background-color: var(--back-sub);
+  color: var(--text-main);
+}
+.row-new-striped > .row:nth-of-type(even){
+  background-color: var(--back-sub-alt);
+  color: var(--text-main);
+}
 #webui>div>div>div>div>div>table>tbody>tr>td>a>i.fa, .box-body, .box-footer, .box-header {
   color: var(--text-main);
 }
@@ -405,4 +425,7 @@ a {
 
 .search-highlight, .search-highlight:hover {
   background-color: #e9d15b;
+}
+div.container.row-new-striped{
+  background-color:  var(--back-sub);
 }

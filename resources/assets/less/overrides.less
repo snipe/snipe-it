@@ -197,8 +197,8 @@ a.accordion-header {
   color: #f0ad4e;
 }
 
-.btn-danger.btn-outline {
-  color: #d9534f;
+.btn-danger.btn-outline, a.link-danger:link, a.link-danger:visited, a.link-danger:hover {
+  color: #dd4b39;
 }
 
 .btn-primary.btn-outline:hover, .btn-success.btn-outline:hover, .btn-info.btn-outline:hover, .btn-warning.btn-outline:hover, .btn-danger.btn-outline:hover {
@@ -434,6 +434,14 @@ h2 {
   font-size: 22px;
 }
 
+h2.task_menu {
+  font-size: 14px;
+}
+
+h2 small {
+  font-size: 85%;
+}
+
 h3 {
   font-size: 20px;
 }
@@ -571,7 +579,7 @@ th.css-envelope > .th-inner,
 th.css-accessory > .th-inner
 {
   font-size: 0px;
-  line-height: 4!important;
+  line-height: .75!important;
   text-align: left;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
@@ -588,41 +596,49 @@ th.css-accessory > .th-inner::before
 
 {
   display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
   font-size: 20px;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
 }
 
 th.css-padlock > .th-inner::before
 {
   content: "\f023";
-  padding-right: 2px;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  padding-right: 4px;
+  font-size: 12px;
 }
 
+/**
+Set the font-weight css property as 900 (For Solid), 400 (Regular or Brands), 300 (Light for pro icons).
+**/
 th.css-barcode > .th-inner::before
 {
-  content: "\f02a";
+  content: "\f02a"; font-family: "Font Awesome 5 Free"; font-weight: 900;
 }
 
 th.css-license > .th-inner::before
 {
-  content: "\f0c7";
+  content: "\f0c7"; font-family: "Font Awesome 5 Free"; font-weight: 400;
 }
 
 th.css-consumable > .th-inner::before
 {
-  content: "\f043";
+  content: "\f043"; font-family: "Font Awesome 5 Free"; font-weight: 900;
 }
 
 th.css-envelope > .th-inner::before
 {
-  content: "\f003";
+  content: "\f0e0"; font-family: "Font Awesome 5 Free"; font-weight: 400;
 }
 
 
 th.css-accessory > .th-inner::before
 {
-  content: "\f11c";
+  content: "\f11c"; font-family: "Font Awesome 5 Free"; font-weight: 400;
 }
+
 .small-box .inner {
   padding-left: 15px;
   padding-right: 15px;
@@ -648,4 +664,24 @@ th.css-accessory > .th-inner::before
 
 .select2-container--default .select2-selection--multiple {
   border-radius: 0px;
+}
+
+.bs-checkbox input {
+  zoom: 1.5;
+}
+@media screen and (max-width: 511px){
+  .sidebar-menu{
+    margin-top:64px;
+  }
+}
+@media screen and (max-width: 771px) and (min-width: 512px){
+  .sidebar-menu {
+    margin-top:14px
+  }
+}
+
+@media screen and (max-width: 1098px) and (min-width: 772px){
+  .sidebar-menu {
+    margin-top:51px
+  }
 }

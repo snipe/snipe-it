@@ -25,7 +25,7 @@
               background-color: rgba(255, 255, 255, 0.1);
             }
             a {
-              color: #fff;
+              color: #333;
               &:hover {
                 background: darken(@purple, 5%);
               }
@@ -87,17 +87,38 @@
 
 
 a {
-  color: @purple;
+  color: var(--link);
   &:hover {
-    color: darken(@purple, 20%);
+    color: var(--hover-link);
   }
   &:visited {
-    color: @purple;
+    color: var(--visited-link);
   }
 }
 
 .text-primary {
   color: darken(@purple, 20%);
+}
+
+:root {
+  --button-default: darken(@purple, 15%);
+  --button-primary: darken(@purple, 25%);
+  --button-hover: darken(@purple, 30%);
+  --header: @purple; /* Use same as Header picker */
+  --text-main: #BBB;
+  --text-sub: #9b9b9b;
+  --link: @purple; /* Use same as Header picker, lighten by 70% */
+  --visited-link: lighten(@purple, 15%); /* Use same as Header picker, lighten by 70% */
+  --hover-link: lighten(@purple, 30%); /* Use same as Header picker, lighten by 70% */
+  --nav-link: #FFF; /* Use same as Header picker */
+  --light-link: #fff; /* Use same as Header picker */
+}
+
+a.btn-info:link, a.btn-warning:link, a.btn-danger:link{
+  color: #FFF;
+}
+&a.btn-info:visited, a.btn-warning:visited, a.btn-danger:visited{
+  color: #FFF;
 }
 
 .fixed-table-container tbody .selected td {

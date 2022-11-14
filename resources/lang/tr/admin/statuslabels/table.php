@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about'      	=> 'Durum Etiketi Hakkında',
     'archived'      	=> 'Arşivlenmiş',
     'create'      	=> 'Durum Etiketi Oluştur',
@@ -16,4 +16,4 @@ return [
     'title'      	=> 'Durum Etiketleri',
     'undeployable'  => 'Dağtılamaz',
     'update'      	=> 'Durum Etiketi Güncelle',
-];
+);

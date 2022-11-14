@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,9 @@ return [
     |
     */
 
-    'password' => 'Parolele trebuie sa fie de cel putin 6 caractere si sa fie la fel ca si confirmarea.',
+    "password" => "Parolele trebuie sa fie de cel putin 6 caractere si sa fie la fel ca si confirmarea.",
+    "user"     => "Utilizator sau e-mail gresit",
+    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
+    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
 
-    'user'     => 'Utilizator sau e-mail gresit',
-
-    'token'    => 'Acest token este invalid.',
-
-    'sent' => 'Daca s-a gasit adresa de e-mail, atunci veti primi un reminder la parola!',
-
-];
+);

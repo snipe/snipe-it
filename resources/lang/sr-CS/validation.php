@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => ':attribute mora biti najmanje :min znakova.',
         'array'   => ':attribute mora imati barem :min stavke.',
     ],
+    'starts_with'          => ':attribute mora da počne sa jednom od sledećih vrednosti: :values.',
     'not_in'               => 'Odabrani :attribute nije ispravan.',
     'numeric'              => ':attribute mora biti broj.',
     'present'              => ':attribute polje mora biti prisutno.',
@@ -88,8 +89,17 @@ return array(
     'unique'               => ':attribute je već zauzet.',
     'uploaded'             => ':attribute nije prenet.',
     'url'                  => ':attribute format je neispravan.',
-    "unique_undeleted"     => ":attribute mora biti jedinstven.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => ':attribute mora biti jedinstven.',
+    'non_circular'         => ':attribute ne sme da kreira cirkularnu referencu.',
+    'disallow_same_pwd_as_user_fields' => 'Lozinka ne može biti ista kao korisničko ime.',
+    'letters'              => 'Lozinka mora da sadrži barem jedno slovo.',
+    'numbers'              => 'Lozinka mora da sadrži barem jednu cifru.',
+    'case_diff'            => 'Lozinka mora da sadrži malo i veliko slovo.',
+    'symbols'              => 'Lozinka mora da sadrži simbole.',
+    'gte'                  => [
+        'numeric'          => 'Vrednost ne može biti negativna'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +111,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +124,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => ":attribute polje sadrži znak koji nije dozvoljen.",
-        "email_array"      => "Jedna ili više email adresa nisu ispravne.",
-        "hashed_pass"      => "Vaša lozinka je neispravna",
+        'alpha_space' => ':attribute polje sadrži znak koji nije dozvoljen.',
+        'email_array'      => 'Jedna ili više email adresa nisu ispravne.',
+        'hashed_pass'      => 'Vaša lozinka je neispravna',
         'dumbpwd'          => 'Lozinka nije sigurna.',
-        "statuslabel_type" => "Morate odabrati ispravnu vrstu oznake statusa",
+        'statuslabel_type' => 'Morate odabrati ispravnu vrstu oznake statusa',
     ],
 
     /*
@@ -135,4 +144,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'assigned_to'   	=> 'Nakatalaga Sa',
     'checkout'   		=> 'Papasok/Palabas',
@@ -14,4 +14,4 @@ return [
     'serial'   			=> 'Ang Seryal',
     'title'      		=> 'Ang Lisensya',
 
-];
+);

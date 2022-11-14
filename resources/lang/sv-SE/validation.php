@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => ':attribute måste vara minst :min tecken.',
         'array'   => ':attribute måste innehålla minst :min saker.',
     ],
+    'starts_with'          => ':attribute måste börja med något av följande: :values.',
     'not_in'               => 'Det valda :attribute är ogiltigt.',
     'numeric'              => ':attribute måste vara ett nummer.',
     'present'              => ':attribute fältet måste finnas.',
@@ -88,8 +89,17 @@ return array(
     'unique'               => ':attribute är upptaget.',
     'uploaded'             => 'Uppladdningen av :attribute misslyckades.',
     'url'                  => ':attribute Formatet är ogiltigt.',
-    "unique_undeleted"     => ":attribute måste vara unikt.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => ':attribute måste vara unikt.',
+    'non_circular'         => ':attribute får inte skapa en cirkulär referens.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +111,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +124,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Fältet :attribute innehåller ett tecken som inte är tillåtet.",
-        "email_array"      => "En eller flera e-postadresser är ogiltiga.",
-        "hashed_pass"      => "Ditt nuvarande lösenord är felaktigt",
+        'alpha_space' => 'Fältet :attribute innehåller ett tecken som inte är tillåtet.',
+        'email_array'      => 'En eller flera e-postadresser är ogiltiga.',
+        'hashed_pass'      => 'Ditt nuvarande lösenord är felaktigt',
         'dumbpwd'          => 'Det angivna lösenordet är för vanligt.',
-        "statuslabel_type" => "Du måste ange en giltig typ av statusetikett",
+        'statuslabel_type' => 'Du måste ange en giltig typ av statusetikett',
     ],
 
     /*
@@ -135,4 +144,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

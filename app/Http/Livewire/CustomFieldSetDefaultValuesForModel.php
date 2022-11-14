@@ -17,6 +17,10 @@ class CustomFieldSetDefaultValuesForModel extends Component
 
     public function mount()
     {
+        if(is_null($this->model_id)){
+            return;
+        }
+            
         $this->model = AssetModel::find($this->model_id); // It's possible to do some clever route-model binding here, but let's keep it simple, shall we?
         $this->fieldset_id = $this->model->fieldset_id;
 

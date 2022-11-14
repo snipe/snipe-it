@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => 'Atribut mora biti vsaj: min znakov.',
         'array'   => 'Atribut mora imeti vsaj: min elementov.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'Izbrani atribut je neveljaven.',
     'numeric'              => 'Atribut mora biti število.',
     'present'              => 'Polje atribut mora biti prisotno.',
@@ -88,8 +89,17 @@ return array(
     'unique'               => 'Atribut je bil že sprejet.',
     'uploaded'             => 'Atribut se ni uspel naložiti.',
     'url'                  => 'Oblika atributa je neveljavna.',
-    "unique_undeleted"     => "Atribut mora biti edinstven.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => 'Atribut mora biti edinstven.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +111,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +124,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Polje atributa vsebuje znak, ki ni dovoljen.",
-        "email_array"      => "En ali več e-poštnih naslovov je napačnih.",
-        "hashed_pass"      => "Vaše trenutno geslo je napačno",
+        'alpha_space' => 'Polje atributa vsebuje znak, ki ni dovoljen.',
+        'email_array'      => 'En ali več e-poštnih naslovov je napačnih.',
+        'hashed_pass'      => 'Vaše trenutno geslo je napačno',
         'dumbpwd'          => 'To geslo je preveč pogosto.',
-        "statuslabel_type" => "Izbrati morate veljavn status oznake",
+        'statuslabel_type' => 'Izbrati morate veljavn status oznake',
     ],
 
     /*
@@ -135,4 +144,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\Helper;
 use App\Models\Traits\Acceptable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
@@ -27,7 +28,8 @@ class Consumable extends SnipeModel
         'category_id'    => 'integer',
         'company_id'     => 'integer',
         'qty'            => 'integer',
-        'min_amt'        => 'integer',    ];
+        'min_amt'        => 'integer',    
+     ];
 
     /**
      * Category validation rules
@@ -38,7 +40,7 @@ class Consumable extends SnipeModel
         'category_id' => 'required|integer',
         'company_id'  => 'integer|nullable',
         'min_amt'     => 'integer|min:0|nullable',
-        'purchase_cost'   => 'numeric|nullable',
+        'purchase_cost'   => 'numeric|nullable|gte:0',
     ];
 
     /**
@@ -70,6 +72,7 @@ class Consumable extends SnipeModel
         'qty',
         'min_amt',
         'requestable',
+        'notes',
     ];
 
     use Searchable;
@@ -79,7 +82,7 @@ class Consumable extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['name', 'order_number', 'purchase_cost', 'purchase_date', 'item_no', 'model_number'];
+    protected $searchableAttributes = ['name', 'order_number', 'purchase_cost', 'purchase_date', 'item_no', 'model_number', 'notes'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -92,6 +95,24 @@ class Consumable extends SnipeModel
         'location'     => ['name'],
         'manufacturer' => ['name'],
     ];
+
+
+    /**
+     * Establishes the components -> action logs -> uploads relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v6.1.13]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function uploads()
+    {
+        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')
+            ->where('item_type', '=', self::class)
+            ->where('action_type', '=', 'uploaded')
+            ->whereNotNull('filename')
+            ->orderBy('created_at', 'desc');
+    }
+
 
     /**
      * Sets the attribute of whether or not the consumable is requestable
@@ -263,15 +284,28 @@ class Consumable extends SnipeModel
      */
     public function getEula()
     {
-        $Parsedown = new \Parsedown();
-
         if ($this->category->eula_text) {
-            return $Parsedown->text(e($this->category->eula_text));
+            return  Helper::parseEscapedMarkedown($this->category->eula_text);
         } elseif ((Setting::getSettings()->default_eula_text) && ($this->category->use_default_eula == '1')) {
-            return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
+            return  Helper::parseEscapedMarkedown(Setting::getSettings()->default_eula_text);
         } else {
             return null;
         }
+    }
+
+    /**
+     * Check how many items within a consumable are checked out
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.0]
+     * @return int
+     */
+    public function numCheckedOut()
+    {
+        $checkedout = 0;
+        $checkedout = $this->users->count();
+
+        return $checkedout;
     }
 
     /**

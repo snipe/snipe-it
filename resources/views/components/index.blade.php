@@ -8,7 +8,7 @@
 
 @section('header_right')
   @can('create', \App\Models\Component::class)
-    <a href="{{ route('components.create') }}" class="btn btn-primary pull-right"> {{ trans('general.create') }}</a>
+    <a href="{{ route('components.create') }}" accesskey="n" class="btn btn-primary pull-right"> {{ trans('general.create') }}</a>
   @endcan
 @stop
 
@@ -21,12 +21,12 @@
         <table
                 data-columns="{{ \App\Presenters\ComponentPresenter::dataTableLayout() }}"
                 data-cookie-id-table="componentsTable"
-                data-toolbar="#toolbar"
                 data-pagination="true"
                 data-id-table="componentsTable"
                 data-search="true"
                 data-side-pagination="server"
                 data-show-columns="true"
+                data-show-fullscreen="true"
                 data-show-export="true"
                 data-show-footer="true"
                 data-show-refresh="true"

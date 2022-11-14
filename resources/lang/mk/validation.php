@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => ':attribute мора да биде поголем од :min знаци.',
         'array'   => ':attribute мора да содржи најмалку :min ставки.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'Избраниот :attribute не е валиден.',
     'numeric'              => ':attribute мора да биде број.',
     'present'              => 'Полето :attribute е задолжително.',
@@ -88,8 +89,17 @@ return array(
     'unique'               => ':attribute е веќе зафатен.',
     'uploaded'             => ':attribute не е прикачен.',
     'url'                  => 'Форматот на :attribute не е валиден.',
-    "unique_undeleted"     => ":attribute мора да биде уникатен.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => ':attribute мора да биде уникатен.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +111,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +124,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Полето :attribute содржи знак што не е дозволен.",
-        "email_array"      => "Една или повеќе е-пошти не се валидни.",
-        "hashed_pass"      => "Вашата тековна лозинка е неточна",
+        'alpha_space' => 'Полето :attribute содржи знак што не е дозволен.',
+        'email_array'      => 'Една или повеќе е-пошти не се валидни.',
+        'hashed_pass'      => 'Вашата тековна лозинка е неточна',
         'dumbpwd'          => 'Таа лозинка е премногу честа.',
-        "statuslabel_type" => "Мора да изберете валидна етикета за статус",
+        'statuslabel_type' => 'Мора да изберете валидна етикета за статус',
     ],
 
     /*
@@ -135,4 +144,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => ':attribute tulee olla vähintään :min merkkiä.',
         'array'   => ':attribute on oltava vähintään :min nimikettä.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'Valittu :attribute on virheellinen.',
     'numeric'              => ':attribute tulee olla numero.',
     'present'              => ':attribute kentän on oltava määritettynä.',
@@ -88,8 +89,17 @@ return array(
     'unique'               => ':attribute on jo käytössä.',
     'uploaded'             => ':attribute -kenttää ei onnistuttu lähettämään.',
     'url'                  => ':attribute muotoilu on virheellinen.',
-    "unique_undeleted"     => ":attribute on oltava ainutlaatuinen.",
-    "non_circular"         => ":attribute ei saa luoda kehäviittausta.",
+    'unique_undeleted'     => ':attribute on oltava ainutlaatuinen.',
+    'non_circular'         => ':attribute ei saa luoda kehäviittausta.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +111,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +124,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => ":attribute -kenttä sisältää merkin, jota ei sallita.",
-        "email_array"      => "Yksi tai useampi sähköpostiosoite on virheellinen.",
-        "hashed_pass"      => "Nykyinen salasanasi on virheellinen",
+        'alpha_space' => ':attribute -kenttä sisältää merkin, jota ei sallita.',
+        'email_array'      => 'Yksi tai useampi sähköpostiosoite on virheellinen.',
+        'hashed_pass'      => 'Nykyinen salasanasi on virheellinen',
         'dumbpwd'          => 'Salasana on liian yleinen.',
-        "statuslabel_type" => "Sinun on valittava kelvollinen tilamerkintätyyppi",
+        'statuslabel_type' => 'Sinun on valittava kelvollinen tilamerkintätyyppi',
     ],
 
     /*
@@ -135,4 +144,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

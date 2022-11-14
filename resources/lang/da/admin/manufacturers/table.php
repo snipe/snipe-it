@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_manufacturers_title'    => 'Om producenterne',
     'about_manufacturers_text'  => 'Producenter er de virksomheder, der skaber dine aktiver. Du kan gemme vigtige supportkontaktoplysninger om dem her, som vil blive vist på dine detaljerede sider.',
     'asset_manufacturers'	=> 'Asset Manufacturers',
@@ -13,4 +13,4 @@ return [
     'update'				=> 'Opdater Fabrikant',
     'url'   				=> 'URL',
 
-];
+);

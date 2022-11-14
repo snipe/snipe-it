@@ -1,35 +1,36 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => '消耗品は存在しません。',
 
-    'create' => [
+    'create' => array(
         'error'   => '消耗品は作成できませんでした。もう一度試して下さい。',
-        'success' => '消耗品の作成に成功しました。',
-    ],
+        'success' => '消耗品の作成に成功しました。'
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => '消耗品の更新に失敗しました。もう一度試して下さい。',
-        'success' => '消耗品の更新に成功しました。',
-    ],
+        'success' => '消耗品の更新に成功しました。'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'この消耗品を削除しますか？',
         'error'   => '消耗品の削除に失敗しました。もう一度試して下さい。',
-        'success' => '消耗品は削除されました。',
-    ],
+        'success' => '消耗品は削除されました。'
+    ),
 
-     'checkout' => [
+     'checkout' => array(
         'error'   		=> '消耗品はチェックアウトできませんでした。もう一度試して下さい。',
         'success' 		=> '消耗品はチェックアウトに成功しました。',
-        'user_does_not_exist' => '利用者が正しくありません。もう一度試して下さい。',
-    ],
+        'user_does_not_exist' => '利用者が正しくありません。もう一度試して下さい。'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   		=> '消耗品はチェックインされませんでした。もう一度試して下さい。',
         'success' 		=> '消耗品はチェックインされました。',
-        'user_does_not_exist' => '利用者が正しくありません。もう一度試して下さい。',
-    ],
+        'user_does_not_exist' => '利用者が正しくありません。もう一度試して下さい。'
+    )
 
-];
+
+);

@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Update Branding Settings
+    {{ trans('admin/settings/general.branding_title') }}
     @parent
 @stop
 
@@ -30,7 +30,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fas fa-copyright"></i> Branding
+                        <i class="fas fa-copyright"></i> {{ trans('admin/settings/general.brand') }}
                     </h2>
                 </div>
                 <div class="box-body">

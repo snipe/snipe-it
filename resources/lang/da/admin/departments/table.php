@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'id'                        => 'ID',
     'name'                      => 'Afdelingsnavn',
@@ -8,4 +8,4 @@ return [
     'location'                  => 'Placering',
     'create'                    => 'Oprette afdeling',
     'update'                    => 'Opdater afdeling',
-    ];
+    );

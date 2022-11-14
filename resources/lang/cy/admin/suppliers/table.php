@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_suppliers_title' => 'Amdan cyflenwyr',
     'about_suppliers_text'  => 'Defnyddir cyflenwyr i olrhain ffynhonnell eitemau',
     'address'               => 'Cyfeiriad Cyflenwr',
@@ -24,4 +24,4 @@ return [
     'view_assets_for'       => 'Gweld asedau ar gyfer',
     'zip'                   => 'Côd Post',
 
-];
+);

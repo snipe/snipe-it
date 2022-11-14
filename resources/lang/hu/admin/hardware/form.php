@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Le akarod törölni a :asset_count eszközt.',
     'bulk_update'		=> 'Tömeges eszköz frissítés',
     'bulk_update_help'	=> 'Ez az űrlap segít frissíteni több eszközt egyszerre. Csak töltsd ki a változtatni kívánt mezőket. Mindent amit üresen hagysz az változatlan marad. ',
-    'bulk_update_warn'	=> 'Meg akarod módosítani a(z) :asset_count eszköz tulajdonságait.',
+    'bulk_update_warn'	=> 'Egyetlen eszköz tulajdonságait kívánja szerkeszteni.|:asset_count eszköz tulajdonságait kívánja szerkeszteni.',
     'checkedout_to'		=> 'Kiadva',
     'checkout_date'		=> 'Kiadási dátum',
     'checkin_date'		=> 'Visszavétel dátuma',
@@ -40,4 +40,12 @@ return [
     'warranty'			=> 'Garancia',
         'warranty_expires'		=> 'Jótállás érvényessége',
     'years'				=> 'évek',
+    'asset_location' => 'Eszköz helyszín frissítése',
+    'asset_location_update_default_current' => 'Alapértelmezett helyszín és aktuális helyszín frissítése',
+    'asset_location_update_default' => 'Csak az alapértelmezett helyszín frissítése',
+    'asset_not_deployable' => 'Az eszköz még nem kiadásra kész, még nem kiadható.',
+    'asset_deployable' => 'Az eszköz kiadásra kész, kiadható.',
+    'processing_spinner' => 'Feldolgozás...',
+    'optional_infos'  => 'Nem kötelező információk',
+    'order_details'   => 'Megrendeléssel kapcsolatos információk'
 ];

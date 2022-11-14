@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Achtung:</strong>Dieses Asset wurde kürzlich als nicht verteilbar markiert.
                         Falls sich dieser Status verändert hat, aktualisieren Sie bitte den Asset Status.',
     'does_not_exist' 	=> 'Asset existiert nicht.',
-    'does_not_exist_or_not_requestable' => 'Netter Versuch. Dieses Asset existiert nicht oder ist nicht anforderbar.',
+    'does_not_exist_or_not_requestable' => 'Dieses Asset existiert nicht oder kann nicht angefordert werden.',
     'assoc_users'	 	=> 'Dieses Asset ist im Moment an einen Benutzer herausgegeben und kann nicht entfernt werden. Bitte buchen sie das Asset wieder ein und versuchen Sie dann erneut es zu entfernen. ',
 
     'create' => [
@@ -17,6 +17,7 @@ return [
         'error'   			=> 'Asset wurde nicht aktualisiert. Bitte versuchen Sie es erneut',
         'success' 			=> 'Asset wurde erfolgreich aktualisiert.',
         'nothing_updated'	=>  'Es wurden keine Felder ausgewählt, somit wurde auch nichts aktualisiert.',
+        'no_assets_selected'  =>  'Es wurden keine Assets ausgewählt, somit wurde auch nichts aktualisiert.',
     ],
 
     'restore' => [
@@ -28,6 +29,7 @@ return [
         'error'   		=> 'Asset Audit war nicht erfolgreich. Bitte versuche es erneut.',
         'success' 		=> 'Asset-Audit erfolgreich protokolliert.',
     ],
+
 
     'deletefile' => [
         'error'   => 'Datei wurde nicht gelöscht. Bitte versuchen Sie es erneut.',
@@ -49,6 +51,7 @@ return [
         'file_delete_error'      => 'Die Datei konnte nicht gelöscht werden',
     ],
 
+
     'delete' => [
         'confirm'   	=> 'Sind Sie sicher, dass Sie dieses Asset entfernen möchten?',
         'error'   		=> 'Beim Entfernen dieses Assets ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
@@ -61,7 +64,7 @@ return [
         'success' 		=> 'Asset wurde erfolgreich herausgegeben.',
         'user_does_not_exist' => 'Dieser Benutzer existiert nicht. Bitte versuchen Sie es erneut.',
         'not_available' => 'Dieses Asset kann nicht herausgegeben werden!',
-        'no_assets_selected' => 'Mind. 1 Eintrag muss ausgewählt werden',
+        'no_assets_selected' => 'Sie müssen mindestens ein Asset aus der Liste auswählen',
     ],
 
     'checkin' => [
@@ -74,8 +77,8 @@ return [
 
     'requests' => [
         'error'   		=> 'Das Asset wurde nicht angefordert, bitte versuchen Sie es erneut',
-        'success' 		=> 'Asset erfolgreich angefordert.',
-        'canceled'      => 'Herausgabe erfolgreich abgebrochen',
+        'success' 		=> 'Gegenstand erfolgreich angefordert.',
+        'canceled'      => 'Herausgeben erfolgreich abgebrochen',
     ],
 
 ];

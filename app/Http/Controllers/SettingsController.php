@@ -8,6 +8,7 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SettingsSamlRequest;
 use App\Http\Requests\SetupUserRequest;
 use App\Models\Setting;
+use App\Models\Asset;
 use App\Models\User;
 use App\Notifications\FirstAdminNotification;
 use App\Notifications\MailTest;
@@ -21,8 +22,10 @@ use Image;
 use Input;
 use Redirect;
 use Response;
+use App\Http\Requests\SlackSettingsRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Artisan;
+use Validator;
 
 /**
  * This controller handles all actions related to Settings for
@@ -346,6 +349,7 @@ class SettingsController extends Controller
         $setting->privacy_policy_link = $request->input('privacy_policy_link');
 
         $setting->depreciation_method = $request->input('depreciation_method');
+        $setting->dash_chart_type = $request->input('dash_chart_type');
 
         if ($request->input('per_page') != '') {
             $setting->per_page = $request->input('per_page');
@@ -419,6 +423,7 @@ class SettingsController extends Controller
                 $setting->brand = 1;
         }
 
+
         $setting = $request->handleImages($setting, 600, 'email_logo', '', 'email_logo');
 
 
@@ -428,7 +433,9 @@ class SettingsController extends Controller
             // If they are uploading an image, validate it and upload it
         }
 
+
         $setting = $request->handleImages($setting, 600, 'label_logo', '', 'label_logo');
+
 
         if ('1' == $request->input('clear_label_logo')) {
             Storage::disk('public')->delete($setting->label_logo);
@@ -473,6 +480,7 @@ class SettingsController extends Controller
 
         return redirect()->back()->withInput()->withErrors($setting->getErrors());
     }
+
 
     /**
      * Return a form to allow a super admin to update settings.
@@ -613,6 +621,26 @@ class SettingsController extends Controller
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
+        // Check if the audit interval has changed - if it has, we want to update ALL of the assets audit dates
+        if ($request->input('audit_interval') != $setting->audit_interval) {
+
+            // Be careful - this could be a negative number
+            $audit_diff_months = ((int)$request->input('audit_interval') - (int)($setting->audit_interval));
+            
+            // Grab all of the assets that have an existing next_audit_date
+            $assets = Asset::whereNotNull('next_audit_date')->get();
+
+            // Update all of the assets' next_audit_date values
+            foreach ($assets as $asset) {
+
+                if ($asset->next_audit_date != '') {
+                    $old_next_audit = new \DateTime($asset->next_audit_date);
+                    $asset->next_audit_date = $old_next_audit->modify($audit_diff_months.' month')->format('Y-m-d');
+                    $asset->forceSave();
+                }
+            }
+        }
+
         $alert_email = rtrim($request->input('alert_email'), ',');
         $alert_email = trim($alert_email);
         $admin_cc_email = rtrim($request->input('admin_cc_email'), ',');
@@ -660,21 +688,15 @@ class SettingsController extends Controller
      *
      * @return View
      */
-    public function postSlack(Request $request)
+    public function postSlack(SlackSettingsRequest $request)
     {
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
-        $validatedData = $request->validate([
-            'slack_channel'   => 'regex:/(?<!\w)#\w+/|required_with:slack_endpoint|nullable',
-        ]);
-
-        if ($validatedData) {
-            $setting->slack_endpoint = $request->input('slack_endpoint');
-            $setting->slack_channel = $request->input('slack_channel');
-            $setting->slack_botname = $request->input('slack_botname');
-        }
+        $setting->slack_endpoint = $request->input('slack_endpoint');
+        $setting->slack_channel = $request->input('slack_channel');
+        $setting->slack_botname = $request->input('slack_botname');
 
         if ($setting->save()) {
             return redirect()->route('settings.index')
@@ -838,6 +860,8 @@ class SettingsController extends Controller
         $setting->labels_display_company_name = $request->input('labels_display_company_name', '0');
         $setting->labels_display_company_name = $request->input('labels_display_company_name', '0');
 
+
+
         if ($request->filled('labels_display_name')) {
             $setting->labels_display_name = 1;
         } else {
@@ -889,7 +913,24 @@ class SettingsController extends Controller
     {
         $setting = Setting::getSettings();
 
-        return view('settings.ldap', compact('setting'));
+        /**
+         * This validator is only temporary (famous last words.) - @snipe
+         */
+        $messages = [
+            'ldap_username_field.not_in' => '<code>sAMAccountName</code> (mixed case) will likely not work. You should use <code>samaccountname</code> (lowercase) instead. ',
+            'ldap_auth_filter_query.not_in' => '<code>uid=samaccountname</code> is probably not a valid auth filter. You probably want <code>uid=</code> ',
+            'ldap_filter.regex' => 'This value should probably not be wrapped in parentheses.',
+        ];
+
+        $validator = Validator::make($setting->toArray(), [
+            'ldap_username_field' => 'not_in:sAMAccountName',
+            'ldap_auth_filter_query' => 'not_in:uid=samaccountname|required_if:ldap_enabled,1',
+            'ldap_filter' => 'nullable|regex:"^[^(]"|required_if:ldap_enabled,1',
+        ],  $messages);
+
+
+
+        return view('settings.ldap', compact('setting'))->withErrors($validator);
     }
 
     /**
@@ -921,10 +962,11 @@ class SettingsController extends Controller
             $setting->ldap_lname_field = $request->input('ldap_lname_field');
             $setting->ldap_fname_field = $request->input('ldap_fname_field');
             $setting->ldap_auth_filter_query = $request->input('ldap_auth_filter_query');
-            $setting->ldap_version = $request->input('ldap_version');
+            $setting->ldap_version = $request->input('ldap_version', 3);
             $setting->ldap_active_flag = $request->input('ldap_active_flag');
             $setting->ldap_emp_num = $request->input('ldap_emp_num');
             $setting->ldap_email = $request->input('ldap_email');
+            $setting->ldap_manager = $request->input('ldap_manager');
             $setting->ad_domain = $request->input('ad_domain');
             $setting->is_ad = $request->input('is_ad', '0');
             $setting->ad_append_domain = $request->input('ad_append_domain', '0');
@@ -1004,6 +1046,12 @@ class SettingsController extends Controller
 
         return redirect()->back()->withInput()->withErrors($setting->getErrors());
     }
+    public static function getPDFBranding()
+    {
+        $pdf_branding= Setting::getSettings();
+
+        return $pdf_branding;
+    }
 
     /**
      * Show the listing of backups.
@@ -1016,10 +1064,10 @@ class SettingsController extends Controller
      */
     public function getBackups()
     {
+        $settings = Setting::getSettings();
         $path = 'app/backups';
         $backup_files = Storage::files($path);
         $files_raw = [];
-
 
         if (count($backup_files) > 0) {
             for ($f = 0; $f < count($backup_files); $f++) {
@@ -1029,15 +1077,15 @@ class SettingsController extends Controller
                     //$lastmodified = Carbon::parse(Storage::lastModified($backup_files[$f]))->toDatetimeString();
                     $file_timestamp = Storage::lastModified($backup_files[$f]);
 
-
                     $files_raw[] = [
                         'filename' => basename($backup_files[$f]),
                         'filesize' => Setting::fileSizeConvert(Storage::size($backup_files[$f])),
                         'modified_value' => $file_timestamp,
-                        'modified_display' => Helper::getFormattedDateObject($file_timestamp, $type = 'datetime', false),
+                        'modified_display' => date($settings->date_display_format.' '.$settings->time_display_format, $file_timestamp),
                         
                     ];
                 }
+
                
             }
         }
@@ -1119,23 +1167,31 @@ class SettingsController extends Controller
      */
     public function deleteFile($filename = null)
     {
-        if (! config('app.lock_passwords')) {
-            $path = 'app/backups';
+        if (config('app.allow_backup_delete')=='true') {
 
-            if (Storage::exists($path.'/'.$filename)) {
-                try {
-                    Storage::delete($path.'/'.$filename);
+            if (!config('app.lock_passwords')) {
+                $path = 'app/backups';
 
-                    return redirect()->route('settings.backups.index')->with('success', trans('admin/settings/message.backup.file_deleted'));
-                } catch (\Exception $e) {
-                    \Log::debug($e);
+                if (Storage::exists($path . '/' . $filename)) {
+
+                    try {
+                        Storage::delete($path . '/' . $filename);
+                        return redirect()->route('settings.backups.index')->with('success', trans('admin/settings/message.backup.file_deleted'));
+                    } catch (\Exception $e) {
+                        \Log::debug($e);
+                    }
+
+                } else {
+                    return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
                 }
-            } else {
-                return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
             }
-        } else {
+
             return redirect()->route('settings.backups.index')->with('error', trans('general.feature_disabled'));
         }
+
+        // Hell to the no
+        \Log::warning('User ID '.Auth::user()->id.' is attempting to delete backup file '.$filename.' and is not authorized to.');
+        return redirect()->route('settings.backups.index')->with('error', trans('general.backup_delete_not_allowed'));
     }
 
 
@@ -1170,9 +1226,10 @@ class SettingsController extends Controller
                         Storage::putFileAs('app/backups', $request->file('file'), $upload_filename);
             
                         return redirect()->route('settings.backups.index')->with('success', 'File uploaded');
-                } else {
-                    return redirect()->route('settings.backups.index')->withErrors($request->getErrors());
                 }
+
+                return redirect()->route('settings.backups.index')->withErrors($request->getErrors());
+
             }
 
         } else {
@@ -1203,11 +1260,14 @@ class SettingsController extends Controller
                 // grab the user's info so we can make sure they exist in the system
                 $user = User::find(Auth::user()->id);
 
+                // TODO: run a backup
 
-                // TODO: run a backup 
 
-                // TODO: add db:wipe 
+                Artisan::call('db:wipe', [
+                    '--force' => true,
+                ]);
 
+                \Log::debug('Attempting to restore from: '. storage_path($path).'/'.$filename);
 
                 // run the restore command
                 Artisan::call('snipeit:restore', 
@@ -1217,28 +1277,33 @@ class SettingsController extends Controller
                     'filename' => storage_path($path).'/'.$filename
                 ]);
 
-                $output = Artisan::output();
-                    
-            
                 // If it's greater than 300, it probably worked
-                if (strlen($output) > 300) {
-                    \Auth::logout();
-                    return redirect()->route('login')->with('success', 'Your system has been restored. Please login again.');
+                $output = Artisan::output();
+
+                /* Run migrations */
+                \Log::debug('Migrating database...');
+                Artisan::call('migrate', ['--force' => true]);
+                $migrate_output = Artisan::output();
+                \Log::debug($migrate_output);
+
+                $find_user = DB::table('users')->where('username', $user->username)->exists();
+                
+                if (!$find_user){
+                    \Log::warning('Attempting to restore user: ' . $user->username);
+                    $new_user = $user->replicate();
+                    $new_user->push();
                 } else {
-                    return redirect()->route('settings.backups.index')->with('error', $output);
-
+                    \Log::debug('User: ' . $user->username .' already exists.');
                 }
-                //dd($output);
 
-                // TODO: insert the user if they are not there in the old one
+                \Log::debug('Logging all users out..');
+                Artisan::call('snipeit:global-logout', ['--force' => true]);
+
+                DB::table('users')->update(['remember_token' => null]);
+                \Auth::logout();
+
+                return redirect()->route('login')->with('success', 'Your system has been restored. Please login again.');
                 
-
-
-
-                // log the user out
-                
-
-
             } else {
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
             }
@@ -1258,9 +1323,15 @@ class SettingsController extends Controller
      */
     public function getPurge()
     {
-        \Log::warning('User ID '.Auth::user()->id.' is attempting a PURGE');
 
-        return view('settings.purge-form');
+        \Log::warning('User '.Auth::user()->username.' (ID'.Auth::user()->id.') is attempting a PURGE');
+
+        if (config('app.allow_purge')=='true') {
+            return view('settings.purge-form');
+        }
+
+        return redirect()->route('settings.index')->with('error', trans('general.purge_not_allowed'));
+
     }
 
     /**
@@ -1274,22 +1345,40 @@ class SettingsController extends Controller
      */
     public function postPurge(Request $request)
     {
-        if (! config('app.lock_passwords')) {
-            if ('DELETE' == $request->input('confirm_purge')) {
-                \Log::warning('User ID '.Auth::user()->id.' initiated a PURGE!');
-                // Run a backup immediately before processing
-                Artisan::call('backup:run');
-                Artisan::call('snipeit:purge', ['--force' => 'true', '--no-interaction' => true]);
-                $output = Artisan::output();
+        \Log::warning('User '.Auth::user()->username.' (ID'.Auth::user()->id.') is attempting a PURGE');
 
-                return view('settings/purge')
-                    ->with('output', $output)->with('success', trans('admin/settings/message.purge.success'));
+        if (config('app.allow_purge')=='true') {
+            \Log::debug('Purging is not allowed via the .env');
+
+            if (!config('app.lock_passwords')) {
+
+                if ($request->input('confirm_purge')=='DELETE') {
+
+                    \Log::warning('User ID ' . Auth::user()->id . ' initiated a PURGE!');
+                    // Run a backup immediately before processing
+                    Artisan::call('backup:run');
+                    Artisan::call('snipeit:purge', ['--force' => 'true', '--no-interaction' => true]);
+                    $output = Artisan::output();
+
+                    return redirect()->route('settings.index')
+                        ->with('output', $output)->with('success', trans('admin/settings/message.purge.success'));
+
+                } else {
+                    return redirect()->route('settings.purge.index')
+                        ->with('error', trans('admin/settings/message.purge.validation_failed'));
+                }
             } else {
-                return redirect()->back()->with('error', trans('admin/settings/message.purge.validation_failed'));
+                return redirect()->route('settings.index')
+                    ->with('error', trans('general.feature_disabled'));
             }
-        } else {
-            return redirect()->back()->with('error', trans('general.feature_disabled'));
         }
+
+        \Log::error('User '.Auth::user()->username.' (ID'.Auth::user()->id.') is attempting to purge deleted data and is not authorized to.');
+
+
+        // Nope.
+        return redirect()->route('settings.index')
+            ->with('error', trans('general.purge_not_allowed'));
     }
 
     /**

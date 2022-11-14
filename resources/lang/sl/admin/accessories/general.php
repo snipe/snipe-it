@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'accessory_category' 				=> 'Kategorija Dodatki',
     'accessory_name'  					=> 'Ime Dodatka',
     'checkout'  							=> 'Izdaj Dodatek',
@@ -17,4 +17,4 @@ return [
     'use_default_eula'					=> 'Uporabite <a href="#" data-toggle="modal" data-target="#eulaModal">privzeto EULA</a> namesto tega.',
     'use_default_eula_disabled'			=> '<del>Namesto tega uporabite privzeto EULA.</del> Ni privzetega EULA. Dodajte ga v Nastavitvah.',
 
-];
+);

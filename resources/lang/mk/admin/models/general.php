@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_models_title'     => 'За моделите на основни средства',
     'about_models_text'           => 'Моделите на основни средства служат да се групираат идентични средства. Пр. "IPhone 6s", "ThinkPad T470" итн.',
     'deleted'  					        => 'This model has been deleted.',
@@ -9,10 +9,10 @@ return [
     'bulk_delete_warn'          => 'Ќе избришете :model_count модели.',
     'restore'                   => 'Врати модел',
     'requestable'               => 'Корисниците може да го побараат овој модел',
-    'show_mac_address'			      => 'Покажи поле за MAC адреса во основните средства од овој модел',
+	'show_mac_address'			      => 'Покажи поле за MAC адреса во основните средства од овој модел',
     'view_deleted'              => 'Преглед на избришани',
     'view_models'               => 'Преглед на модели',
     'fieldset'                  => 'Група на полиња',
     'no_custom_field'           => 'Без полиња по желба',
     'add_default_values'        => 'Додајте default вредности',
-];
+);

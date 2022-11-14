@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'checkout'                          => 'Seiceáil Inbhuanaithe don Úsáideoir',
     'consumable_name'                   => 'Ainm Inchaite',
     'create'                            => 'Cruthaigh Tomhaltach',
@@ -8,4 +8,4 @@ return [
     'remaining' 			            => 'Ag fágáil',
     'total' 			                => 'Iomlán',
     'update'                            => 'Nuashonrú Inchaite',
-];
+);

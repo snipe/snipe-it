@@ -2,19 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use \Auth;
 
 class UserFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
-    protected $model = \App\Models\User::class;
-
     /**
      * Define the model's default state.
      *
@@ -22,23 +14,21 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $password = bcrypt('password');
         return [
             'activated' => 1,
-            'address' => $this->faker->address,
-            'city' => $this->faker->city,
+            'address' => $this->faker->address(),
+            'city' => $this->faker->city(),
             'company_id' => rand(1, 4),
-            'country' => $this->faker->country,
+            'country' => $this->faker->country(),
             'department_id' => rand(1, 6),
             'email' => $this->faker->safeEmail,
             'employee_num' => $this->faker->numberBetween(3500, 35050),
-            'first_name' => $this->faker->firstName,
-            'jobtitle' => $this->faker->jobTitle,
-            'last_name' => $this->faker->lastName,
-            'locale' => $this->faker->locale,
-            'location_id' => rand(1, 5),
+            'first_name' => $this->faker->firstName(),
+            'jobtitle' => $this->faker->jobTitle(),
+            'last_name' => $this->faker->lastName(),
+            'locale' => 'en',
             'notes' => 'Created by DB seeder',
-            'password' => $password,
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'permissions' => '{"user":"0"}',
             'phone' => $this->faker->phoneNumber,
             'state' => $this->faker->stateAbbr,
@@ -46,7 +36,7 @@ class UserFactory extends Factory
             'zip' => $this->faker->postcode,
         ];
     }
-
+    
     public function firstAdmin()
     {
         return $this->state(function () {
@@ -407,4 +397,5 @@ class UserFactory extends Factory
             ];
         });
     }
+
 }

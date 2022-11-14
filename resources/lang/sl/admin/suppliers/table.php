@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_suppliers_title' => 'O dobaviteljih',
     'about_suppliers_text'  => 'Dobavitelji se uporabljajo za sledenje vira dobavljivosti',
     'address'               => 'Naslov dobavitelja',
@@ -24,4 +24,4 @@ return [
     'view_assets_for'       => 'Ogled sredstev za',
     'zip'                   => 'Poštna številka',
 
-];
+);

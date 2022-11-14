@@ -26,7 +26,8 @@ class LicensesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', License::class);
-        $licenses = Company::scopeCompanyables(License::with('company', 'manufacturer', 'freeSeats', 'supplier', 'category')->withCount('freeSeats as free_seats_count'));
+        $licenses = Company::scopeCompanyables(License::with('company', 'manufacturer', 'supplier','category')->withCount('freeSeats as free_seats_count'));
+
 
         if ($request->filled('company_id')) {
             $licenses->where('company_id', '=', $request->input('company_id'));
@@ -72,9 +73,6 @@ class LicensesController extends Controller
             $licenses->where('depreciation_id', '=', $request->input('depreciation_id'));
         }
 
-        if ($request->filled('supplier_id')) {
-            $licenses->where('supplier_id', '=', $request->input('supplier_id'));
-        }
 
         if (($request->filled('maintained')) && ($request->input('maintained')=='true')) {
             $licenses->where('maintained','=',1);
@@ -90,6 +88,10 @@ class LicensesController extends Controller
 
         if ($request->filled('search')) {
             $licenses = $licenses->TextSearch($request->input('search'));
+        }
+
+        if ($request->input('deleted')=='true') {
+            $licenses->onlyTrashed();
         }
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
@@ -146,8 +148,8 @@ class LicensesController extends Controller
         $total = $licenses->count();
 
         $licenses = $licenses->skip($offset)->take($limit)->get();
-
         return (new LicensesTransformer)->transformLicenses($licenses, $total);
+
     }
 
     /**

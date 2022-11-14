@@ -11,11 +11,11 @@
   //Navbar
   .main-header {
     .navbar {
-      .navbar-variant(@yellow; #fff);
+      .navbar-variant(#FBCC34);
       .sidebar-toggle {
-        color: #fff;
+        color: #000;
         &:hover {
-          background-color: darken(@yellow, 5%);
+          background-color: darken(#FBCC34, 5%);
         }
       }
       @media (max-width: @screen-header-collapse) {
@@ -25,9 +25,9 @@
               background-color: rgba(255, 255, 255, 0.1);
             }
             a {
-              color: #fff;
+              color: #333;
               &:hover {
-                background: darken(@yellow, 5%);
+                background: darken(#FBCC34, 5%);
               }
             }
           }
@@ -37,7 +37,7 @@
     //Logo
 
     li.user-header {
-      background-color: @yellow;
+      background-color: #FBCC34;
     }
   }
 
@@ -47,11 +47,12 @@
   }
 
   //Create the sidebar skin
-  .skin-dark-sidebar(@yellow);
+  .skin-dark-sidebar(#FBCC34);
 }
 
 .skin-yellow.layout-top-nav .main-header > .logo {
   .logo-variant {
+    color: #413F42;
     background-color: none;
   }
 }
@@ -62,51 +63,82 @@
 
 
   &.btn-primary, .btn-primary:link {
-    background-color: darken(@yellow, 10%);
-    border-color: darken(@yellow, 20%);
-    color: #fff;
+    background-color: darken(#FBCC34, 10%);
+    border-color: darken(#FBCC34, 20%);
+    color: var(--nav-link);
   }
 
 
   &a.btn-primary:hover {
-    background-color: darken(@yellow, 20%);
-    border-color: darken(@yellow, 20%);
-    color: #fff;
+    background-color: darken(#FBCC34, 20%);
+    border-color: darken(#FBCC34, 20%);
+    color: var(--nav-link);
   }
 
   &.btn-white:link {
-    background-color: darken(@yellow, 10%);
-    color: #fff;
+    background-color: darken(#FBCC34, 10%);
+    color: var(--nav-link);
   }
 
   &.btn-white:hover {
-    background-color: darken(@yellow, 30%);
-    color: #fff;
+    background-color: darken(#FBCC34, 30%);
+    color: var(--nav-link);
   }
 }
-
+a.btn-info:link, a.btn-warning:link, a.btn-danger:link{
+  color: #FFF;
+}
+&a.btn-info:visited, a.btn-warning:visited, a.btn-danger:visited{
+  color: #FFF;
+}
 
 a {
-  color: @yellow;
+  color: var(--link);
   &:hover {
-    color: darken(@yellow, 20%);
+    color: var(--hover-link);
   }
   &:visited {
-    color: @yellow;
+    color: var(--visited-link);
   }
 }
 
 .text-primary {
-  color: darken(@yellow, 20%);
+  color: darken(#FBCC34, 20%);
+}
+
+:root {
+  --button-default: darken(#FBCC34, 15%);
+  --button-primary: darken(#FBCC34, 25%);
+  --button-hover: darken(#FBCC34, 30%);
+  --header: #FBCC34; /* Use same as Header picker */
+  --text-main: #BBB;
+  --text-sub: #9b9b9b;
+  --link: lighten( #413F42, 10%); /* Use same as Header picker, lighten by 70% */
+  --visited-link: lighten(#413F42, 20%); /* Use same as Header picker, lighten by 70% */
+  --hover-link: lighten(#413F42, 45%); /* Use same as Header picker, lighten by 70% */
+  --nav-link: #222; /* Use same as Header picker */
+  --light-link: #fff; /* Use same as Header picker */
 }
 
 .fixed-table-container tbody .selected td {
   background-color: #fff8af;
 }
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
-  background-color: @yellow;
+  background-color: #FBCC34;
 }
 
 .search-highlight, .search-highlight:hover {
   background-color: #e9d15b;
+}
+.thead, .navbar-nav>li>a:link {
+  color: var(--nav-link);
+}
+.navbar-nav>li>a:visited {
+  color: var(--nav-link);
+}
+&:hover{
+  color: var(--nav-link);
+}
+.skin-yellow .main-header .navbar .nav > li > a {
+  color: #413F42;
 }

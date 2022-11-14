@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'aktiewe',
     'allow'  				=> 'laat',
     'checkedout'  			=> 'bates',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'e-pos',
     'employee_num'      	=> 'Werknemer No.',
     'first_name' 			=> 'Eerste naam',
-    'groupnotes'			=> 'Kies \'n groep om aan die gebruiker toe te ken, onthou dat \'n gebruiker die regte van die groep wat hulle toegewys is, aanvaar.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'id',
     'inherit'  				=> 'erf',
     'job' 					=> 'Werkstitel',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Wys huidige gebruikers',
     'show_deleted'          => 'Wys verwyderde gebruikers',
     'title' 				=> 'Titel',
-    'to_restore_them'		=> 'om hulle te herstel.',
+	'to_restore_them'		=> 'om hulle te herstel.',
     'updateuser' 			=> 'Update gebruiker',
     'username' 				=> 'Gebruikersnaam',
-    'user_deleted_text' 	=> 'Hierdie gebruiker is gemerk as verwyder.',
+	'user_deleted_text' 	=> 'Hierdie gebruiker is gemerk as verwyder.',
     'username_note' 		=> '(Dit word slegs vir Active Directory-binding gebruik, nie vir inskrywing nie.)',
     'cloneuser'             => 'Klone gebruiker',
     'viewusers' 			=> 'Bekyk gebruikers',
-];
+);

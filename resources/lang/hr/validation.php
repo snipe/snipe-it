@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => 'Atribut mora biti najmanje: min znakova.',
         'array'   => 'Atribut mora imati barem: min stavke.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'Odabrani: atribut nije važeći.',
     'numeric'              => 'Atribut mora biti broj.',
     'present'              => 'Polje atributa mora biti prisutno.',
@@ -88,8 +89,17 @@ return array(
     'unique'               => 'The: atribut je već snimljen.',
     'uploaded'             => 'Atribut nije prenesen.',
     'url'                  => 'Format atributa nije važeći.',
-    "unique_undeleted"     => ":attribute mora biti jedinstven.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => ':attribute mora biti jedinstven.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +111,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +124,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Polje atributa sadrži znak koji nije dopušten.",
-        "email_array"      => "Jedna ili više adresa e-pošte nije važeća.",
-        "hashed_pass"      => "Vaša trenutačna zaporka nije točna",
+        'alpha_space' => 'Polje atributa sadrži znak koji nije dopušten.',
+        'email_array'      => 'Jedna ili više adresa e-pošte nije važeća.',
+        'hashed_pass'      => 'Vaša trenutačna zaporka nije točna',
         'dumbpwd'          => 'Ta je lozinka prečestna.',
-        "statuslabel_type" => "Morate odabrati valjanu vrstu oznake statusa",
+        'statuslabel_type' => 'Morate odabrati valjanu vrstu oznake statusa',
     ],
 
     /*
@@ -135,4 +144,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

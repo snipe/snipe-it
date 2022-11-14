@@ -25,7 +25,7 @@
               background-color: rgba(255, 255, 255, 0.1);
             }
             a {
-              color: #fff;
+              color: #333;
               &:hover {
                 background: darken(@black, 5%);
               }
@@ -59,12 +59,12 @@
 
 
 .btn, .btn:hover {
+  color: #000 ;
 
-  text-decoration: none;
   &.btn-primary, .btn-primary:link {
     background-color: @dark-gray;
-    border-color: darken(@gray, 10%);
-    color: #fff;
+    border-color: #FFF;
+    color: #FFF;
   }
 
 
@@ -89,18 +89,44 @@
 
 
 a {
-  color: @black;
-  text-decoration: underline;
+  color: var(--link);
+
   &:hover {
-    color: darken(@black, 20%);
+    color: var(--hover-link);
   }
   &:visited {
-    color: @black;
+    color: var(--visited-link);
   }
 }
 
 .text-primary {
   color: darken(@black, 20%);
+}
+:root {
+  --button-default: darken(@black, 15%);
+  --button-primary: darken(@black, 25%);
+  --button-hover: darken(@black, 30%);
+  --header: @black; /* Use same as Header picker */
+  --text-main: #BBB;
+  --text-sub: #9b9b9b;
+  --link: #black; /* Use same as Header picker, lighten by 70% */
+  --visited-link: @black; /* Use same as Header picker, lighten by 70% */
+  --hover-link: lighten(#000, 60%); /* Use same as Header picker, lighten by 70% */
+  --nav-link: #FFF; /* Use same as Header picker */
+  --light-link: #fff; /* Use same as Header picker */
+}
+a.btn-info:link, a.btn-warning:link, a.btn-danger:link{
+  color: #FFF;
+}
+&a.btn-info:visited, a.btn-warning:visited, a.btn-danger:visited{
+  color: #FFF;
+}
+.btn-danger.btn-sm.disabled{
+  color: #FFF;
+}
+
+.sidebar-toggle-mobile {
+  color: #FFF !important;
 }
 
 .skin-black .main-header .navbar .nav>li>a, .skin-black .main-header .navbar .nav>li>a {

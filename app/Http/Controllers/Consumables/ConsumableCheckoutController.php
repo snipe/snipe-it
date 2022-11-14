@@ -56,7 +56,7 @@ class ConsumableCheckoutController extends Controller
         // Check if the user exists
         if (is_null($user = User::find($assigned_to))) {
             // Redirect to the consumable management page with error
-            return redirect()->route('checkout/consumable', $consumable)->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'));
+            return redirect()->route('consumables.checkout.show', $consumable)->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'))->withInput();
         }
 
         // Update the consumable data
@@ -66,6 +66,7 @@ class ConsumableCheckoutController extends Controller
             'consumable_id' => $consumable->id,
             'user_id' => $admin_user->id,
             'assigned_to' => e($request->input('assigned_to')),
+            'note' => $request->input('note'),
         ]);
 
         event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note')));

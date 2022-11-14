@@ -1,44 +1,49 @@
 <?php
 
-return [
+return array(
 
     'account_already_exists' => 'یک حساب با این ایمیل در حال حاضر وجود دارد.',
     'account_not_found'      => 'نام کاربری یا رمز عبور اشتباه است.',
     'account_not_activated'  => 'این حساب کاربری فعال نشده است.',
     'account_suspended'      => 'این حساب کاربری بسته است.',
     'account_banned'         => 'این حساب کاربری ممنوع است.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'throttle'               => 'دفعات تلاش شما برای ورود بیش از حد مجاز است. لطفا پس از :seconds ثانیه مجددا تلاش فرمایید.',
 
-    'two_factor' => [
-        'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
-    ],
+    'two_factor' => array(
+        'already_enrolled'      => 'دستگاه شما قبلاً ثبت نام کرده است.
+',
+        'success'               => 'شما با موفقیت وارد شدید.',
+        'code_required'         => 'کد دو حرفی  مورد نیاز است',
+        'invalid_code'          => 'کد دو حرفی نامعتبر است.
+',
+    ),
 
-    'signin' => [
+    'signin' => array(
         'error'   => 'مشکلی در حین تلاش به شما در ورود به سیستم وجود دارد، لطفا دوباره امتحان کنید.',
         'success' => 'شما با موفقیت وارد شدید.',
-    ],
+    ),
 
-    'logout' => [
-        'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
-    ],
+    'logout' => array(
+        'error'   => 'مشکلی در حین تلاش به شما در ورود به سیستم وجود دارد، لطفا دوباره امتحان کنید.',
+        'success' => 'شما با موفقیت از سیستم خارج شدید.
+',
+    ),
 
-    'signup' => [
+    'signup' => array(
         'error'   => 'هنگام تلاش برای ایجاد حساب مشکلی روی داد، لطفا دوباره امتحان کنید.',
         'success' => 'حساب با موفقیت ایجاد شد.',
-    ],
+    ),
 
-    'forgot-password' => [
+    'forgot-password' => array(
         'error'   => 'یک مشکل هنگام دریافت کد تنظیم مجدد رمز عبور وجود دارد، لطفا دوباره امتحان کنید.',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
-    ],
+        'success' => 'اگر آن آدرس ایمیل در سیستم ما وجود داشته باشد، یک ایمیل بازیابی رمز عبور ارسال شده است.
+',
+    ),
 
-    'forgot-password-confirm' => [
+    'forgot-password-confirm' => array(
         'error'   => 'مشکلی برای تنظیم مجدد رمز عبور خود وجود دارد، لطفا دوباره امتحان کنید.',
         'success' => 'رمز عبور خود را با موفقیت بازنشانی شد.',
-    ],
+    ),
 
-];
+
+);

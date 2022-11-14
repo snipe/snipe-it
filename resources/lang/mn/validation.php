@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => 'Үүнд: атрибут дор хаяж байх ёстой: min тэмдэгтүүд.',
         'array'   => 'Үүнд: атрибут дор хаяж дараах зүйлсийг агуулсан байх ёстой.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'Сонгосон: шинж чанар буруу байна.',
     'numeric'              => 'Үүнд: атрибут нь тоо байх ёстой.',
     'present'              => 'Үүнд: атрибутын талбар байх ёстой.',
@@ -88,8 +89,17 @@ return array(
     'unique'               => 'Үүнд: атрибут аль хэдийн авсан байна.',
     'uploaded'             => 'Үүнд: атрибут байршуулах боломжгүй байна.',
     'url'                  => 'Агуулга формат буруу байна.',
-    "unique_undeleted"     => ":attribute дахин давтагдашгүй байх ёстой.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => ':attribute дахин давтагдашгүй байх ёстой.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +111,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +124,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Үүнд: аттрибут талбар нь зөвшөөрөгдөөгүй тэмдэгт агуулна.",
-        "email_array"      => "Нэг буюу хэд хэдэн имэйл хаяг буруу байна.",
-        "hashed_pass"      => "Таны одоогийн нууц үг буруу байна",
+        'alpha_space' => 'Үүнд: аттрибут талбар нь зөвшөөрөгдөөгүй тэмдэгт агуулна.',
+        'email_array'      => 'Нэг буюу хэд хэдэн имэйл хаяг буруу байна.',
+        'hashed_pass'      => 'Таны одоогийн нууц үг буруу байна',
         'dumbpwd'          => 'Энэ нууц үг хэтэрхий нийтлэг байна.',
-        "statuslabel_type" => "Та зөв статустай шошгын төрлийг сонгох ёстой",
+        'statuslabel_type' => 'Та зөв статустай шошгын төрлийг сонгох ёстой',
     ],
 
     /*
@@ -135,4 +144,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

@@ -6,5 +6,6 @@ return [
     'months'   => 'Izinyanga',
     'term'   => 'Ithemu',
     'title'      => 'Igama',
+    'depreciation_min' => 'Floor Value',
 
 ];

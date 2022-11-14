@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => ':attribute privalo būti bent :min ženklai.',
         'array'   => 'Atributui turi būti bent: min elementai.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'Pasirinktas :attribute neteisingas.',
     'numeric'              => ':attribute privalo būti skaičius.',
     'present'              => 'Atributo laukas turi būti.',
@@ -88,8 +89,17 @@ return array(
     'unique'               => ':attribute jau užimtas.',
     'uploaded'             => 'Nepavyko įkelti atributo.',
     'url'                  => ':attribute formatas neteisingas.',
-    "unique_undeleted"     => ":attribute turi būti unikalus.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => ':attribute turi būti unikalus.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +111,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +124,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Lauke: atributo lauke yra simbolis, kuris nėra leidžiamas.",
-        "email_array"      => "Vienas ar keli el. Pašto adresai yra netinkami.",
-        "hashed_pass"      => "Jūsų dabartinis slaptažodis yra neteisingas",
+        'alpha_space' => 'Lauke: atributo lauke yra simbolis, kuris nėra leidžiamas.',
+        'email_array'      => 'Vienas ar keli el. Pašto adresai yra netinkami.',
+        'hashed_pass'      => 'Jūsų dabartinis slaptažodis yra neteisingas',
         'dumbpwd'          => 'Šis slaptažodis yra per dažnas.',
-        "statuslabel_type" => "Turite pasirinkti tinkamą statuso etiketės tipą",
+        'statuslabel_type' => 'Turite pasirinkti tinkamą statuso etiketės tipą',
     ],
 
     /*
@@ -135,4 +144,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

@@ -1,6 +1,8 @@
 <?php
 
 return [
-    'sent'	        => 'O link com a senha de acesso foi enviado com sucesso!',
-    'user'			=> 'Nenhum usuário ativo encontrado com este e-mail.',
+    'sent'	        => 'Se existir um usuário correspondente com um endereço de e-mail válido em nosso sistema, um e-mail de recuperação de senha foi enviado.',
+    'user'			=> 'Se existir um usuário correspondente com um endereço de e-mail válido em nosso sistema, um e-mail de recuperação de senha foi enviado.',
+    'token'         => 'Este token de redefinição de senha é inválido ou expirou, ou não corresponde ao nome de usuário fornecido.',
+    'reset'         => 'Sua senha foi redefinida!',
 ];

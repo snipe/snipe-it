@@ -1,35 +1,36 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Patērējamais nav.',
 
-    'create' => [
+    'create' => array(
         'error'   => 'Patērējamais nav izveidots, lūdzu, mēģiniet vēlreiz.',
-        'success' => 'Izlietojamie tika veiksmīgi izveidoti.',
-    ],
+        'success' => 'Izlietojamie tika veiksmīgi izveidoti.'
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Patērējamais nav atjaunināts, lūdzu, mēģiniet vēlreiz',
-        'success' => 'Izlietojamie tiek veiksmīgi atjaunināti.',
-    ],
+        'success' => 'Izlietojamie tiek veiksmīgi atjaunināti.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Vai tiešām vēlaties izdzēst šo patērējamo?',
         'error'   => 'Radās problēma, izdzēšot patērējamo. Lūdzu mēģiniet vēlreiz.',
-        'success' => 'Palīgmateriāls tika veiksmīgi dzēsts.',
-    ],
+        'success' => 'Palīgmateriāls tika veiksmīgi dzēsts.'
+    ),
 
-     'checkout' => [
+     'checkout' => array(
         'error'   		=> 'Neizdevās izņemt patēriņu, lūdzu, mēģiniet vēlreiz',
         'success' 		=> 'Izlietojamie izrakstīti veiksmīgi.',
-        'user_does_not_exist' => 'Šis lietotājs ir nederīgs. Lūdzu mēģiniet vēlreiz.',
-    ],
+        'user_does_not_exist' => 'Šis lietotājs ir nederīgs. Lūdzu mēģiniet vēlreiz.'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   		=> 'Paredzētais patēriņš netika reģistrēts, lūdzu, mēģiniet vēlreiz',
         'success' 		=> 'Izlietojamie tiek veiksmīgi reģistrēti.',
-        'user_does_not_exist' => 'Šis lietotājs ir nederīgs. Lūdzu mēģiniet vēlreiz.',
-    ],
+        'user_does_not_exist' => 'Šis lietotājs ir nederīgs. Lūdzu mēģiniet vēlreiz.'
+    )
 
-];
+
+);

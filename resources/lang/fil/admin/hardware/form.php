@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Ikaw ay mag-delete ng :asset_count na mga asset.',
     'bulk_update'		=> 'Ang Maramihang Asset na Nai-update',
     'bulk_update_help'	=> 'Ang form na ito ay nagbibigay sa iyo ng pahintulot para mag-update ng maramihang asset nang sabay-sabay. Lagyan lamang ang mga field na gusto mong baguhin. Anumang mga field na blangko ay mananatiling walang pagbabago. ',
-    'bulk_update_warn'	=> 'Ikaw ay mag-delete ng :asset_count assets.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'I-check Out Sa',
     'checkout_date'		=> 'Ang Petsa ng Pagcheck-out',
     'checkin_date'		=> 'Ang Petsa ng Pag-checkin',
@@ -40,4 +40,12 @@ return [
     'warranty'			=> 'Ang Warantiya',
         'warranty_expires'		=> 'Nag-expire na ang Warantiya',
     'years'				=> 'mga taon',
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information'
 ];

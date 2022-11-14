@@ -1,41 +1,42 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'மாதிரி இல்லை.',
     'assoc_users'	 => 'தற்போது இந்த மாதிரி ஒன்று ஒன்று அல்லது அதற்கு மேற்பட்ட சொத்துக்களுடன் தொடர்புடையது மற்றும் நீக்கப்பட முடியாது. சொத்துக்களை நீக்கிவிட்டு மீண்டும் நீக்குவதற்கு முயற்சிக்கவும்.',
 
-    'create' => [
+
+    'create' => array(
         'error'   => 'மாதிரி உருவாக்கப்பட்டது இல்லை, மீண்டும் முயற்சிக்கவும்.',
         'success' => 'மாதிரி வெற்றிகரமாக உருவாக்கப்பட்டது.',
         'duplicate_set' => 'அந்த பெயர், உற்பத்தியாளர் மற்றும் மாதிரி எண்ணுடன் ஏற்கனவே ஒரு சொத்து மாதிரி உள்ளது.',
-    ],
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'மாதிரி புதுப்பிக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்',
-        'success' => 'மாடல் வெற்றிகரமாக புதுப்பிக்கப்பட்டது.',
-    ],
+        'success' => 'மாடல் வெற்றிகரமாக புதுப்பிக்கப்பட்டது.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'இந்த சொத்து மாடலை நிச்சயமாக நீக்க விரும்புகிறீர்களா?',
         'error'   => 'மாதிரியை நீக்குவதில் ஒரு சிக்கல் இருந்தது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.',
-        'success' => 'மாதிரி வெற்றிகரமாக நீக்கப்பட்டது.',
-    ],
+        'success' => 'மாதிரி வெற்றிகரமாக நீக்கப்பட்டது.'
+    ),
 
-    'restore' => [
+    'restore' => array(
         'error'   		=> 'மாடல் மீட்டமைக்கப்படவில்லை, தயவு செய்து மீண்டும் முயற்சிக்கவும்',
-        'success' 		=> 'மாடல் வெற்றிகரமாக மீட்கப்பட்டது.',
-    ],
+        'success' 		=> 'மாடல் வெற்றிகரமாக மீட்கப்பட்டது.'
+    ),
 
-    'bulkedit' => [
+    'bulkedit' => array(
         'error'   		=> 'எந்த துறைகளும் மாற்றப்படவில்லை, அதனால் எதுவும் புதுப்பிக்கப்படவில்லை.',
-        'success' 		=> 'மாதிரிகள் புதுப்பிக்கப்பட்டன.',
-    ],
+        'success' 		=> 'மாதிரிகள் புதுப்பிக்கப்பட்டன.'
+    ),
 
-    'bulkdelete' => [
+    'bulkdelete' => array(
         'error'   		    => 'No models were selected, so nothing was deleted.',
         'success' 		    => ':success_count model(s) deleted!',
-        'success_partial' 	=> ':success_count model(s) were deleted, however :fail_count were unable to be deleted because they still have assets associated with them.',
-    ],
+        'success_partial' 	=> ':success_count model(s) were deleted, however :fail_count were unable to be deleted because they still have assets associated with them.'
+    ),
 
-];
+);

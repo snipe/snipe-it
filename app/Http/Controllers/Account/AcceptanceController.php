@@ -7,13 +7,29 @@ use App\Events\CheckoutDeclined;
 use App\Events\ItemAccepted;
 use App\Events\ItemDeclined;
 use App\Http\Controllers\Controller;
+use App\Models\Actionlog;
+use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
 use App\Models\Company;
 use App\Models\Contracts\Acceptable;
+use App\Models\Setting;
+use App\Models\User;
+use App\Models\AssetModel;
+use App\Models\Accessory;
+use App\Models\License;
+use App\Models\Component;
+use App\Models\Consumable;
+use App\Notifications\AcceptanceAssetAcceptedNotification;
+use App\Notifications\AcceptanceAssetDeclinedNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Http\Controllers\SettingsController;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
+use phpDocumentor\Reflection\Types\Compound;
 
 class AcceptanceController extends Controller
 {
@@ -38,6 +54,7 @@ class AcceptanceController extends Controller
     public function create($id)
     {
         $acceptance = CheckoutAcceptance::find($id);
+
 
         if (is_null($acceptance)) {
             return redirect()->route('account.accept')->with('error', trans('admin/hardware/message.does_not_exist'));
@@ -96,29 +113,180 @@ class AcceptanceController extends Controller
             Storage::makeDirectory('private_uploads/signatures', 775);
         }
 
-        $sig_filename = '';
-        if ($request->filled('signature_output')) {
-            $sig_filename = 'siglog-'.Str::uuid().'-'.date('Y-m-d-his').'.png';
-            $data_uri = e($request->input('signature_output'));
-            $encoded_image = explode(',', $data_uri);
-            $decoded_image = base64_decode($encoded_image[1]);
-            Storage::put('private_uploads/signatures/'.$sig_filename, (string) $decoded_image);
-        }
+
+
+        $item = $acceptance->checkoutable_type::find($acceptance->checkoutable_id);
+        $display_model = '';
+        $pdf_view_route = '';
+        $pdf_filename = 'accepted-eula-'.date('Y-m-d-h-i-s').'.pdf';
+        $sig_filename='';
+
 
         if ($request->input('asset_acceptance') == 'accepted') {
-            $acceptance->accept($sig_filename);
 
+            /**
+             * Check for the eula-pdfs directory
+             */
+            if (! Storage::exists('private_uploads/eula-pdfs')) {
+                Storage::makeDirectory('private_uploads/eula-pdfs', 775);
+            }
+
+            if (Setting::getSettings()->require_accept_signature == '1') {
+                
+                // Check if the signature directory exists, if not create it
+                if (!Storage::exists('private_uploads/signatures')) {
+                    Storage::makeDirectory('private_uploads/signatures', 775);
+                }
+
+                // The item was accepted, check for a signature
+                if ($request->filled('signature_output')) {
+                    $sig_filename = 'siglog-' . Str::uuid() . '-' . date('Y-m-d-his') . '.png';
+                    $data_uri = $request->input('signature_output');
+                    $encoded_image = explode(',', $data_uri);
+                    $decoded_image = base64_decode($encoded_image[1]);
+                    Storage::put('private_uploads/signatures/' . $sig_filename, (string)$decoded_image);
+
+                    // No image data is present, kick them back.
+                    // This mostly only applies to users on super-duper crapola browsers *cough* IE *cough*
+                } else {
+                    return redirect()->back()->with('error', trans('general.shitty_browser'));
+                }
+            }
+
+
+            // this is horrible
+            switch($acceptance->checkoutable_type){
+                case 'App\Models\Asset':
+                        $pdf_view_route ='account.accept.accept-asset-eula';
+                        $asset_model = AssetModel::find($item->model_id);
+                        $display_model = $asset_model->name;
+                        $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
+                break;
+
+                case 'App\Models\Accessory':
+                        $pdf_view_route ='account.accept.accept-accessory-eula';
+                        $accessory = Accessory::find($item->id);
+                        $display_model = $accessory->name;
+                        $assigned_to = User::find($item->assignedTo);
+                break;
+
+                case 'App\Models\LicenseSeat':
+                        $pdf_view_route ='account.accept.accept-license-eula';
+                        $license = License::find($item->license_id);
+                        $display_model = $license->name;
+                        $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
+                break;
+
+                case 'App\Models\Component':
+                        $pdf_view_route ='account.accept.accept-component-eula';
+                        $component = Component::find($item->id);
+                        $display_model = $component->name;
+                        $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
+                break;
+
+                case 'App\Models\Consumable':
+                        $pdf_view_route ='account.accept.accept-consumable-eula';
+                        $consumable = Consumable::find($item->id);
+                        $display_model = $consumable->name;
+                        $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
+                break;
+            }
+//            if ($acceptance->checkoutable_type == 'App\Models\Asset') {
+//                $pdf_view_route ='account.accept.accept-asset-eula';
+//                $asset_model = AssetModel::find($item->model_id);
+//                $display_model = $asset_model->name;
+//                $assigned_to = User::find($item->assigned_to)->present()->fullName;
+//
+//            } elseif ($acceptance->checkoutable_type== 'App\Models\Accessory') {
+//                $pdf_view_route ='account.accept.accept-accessory-eula';
+//                $accessory = Accessory::find($item->id);
+//                $display_model = $accessory->name;
+//                $assigned_to = User::find($item->assignedTo);
+//
+//            }
+
+            /**
+             * Gather the data for the PDF. We fire this whether there is a signature required or not,
+             * since we want the moment-in-time proof of what the EULA was when they accepted it.
+             */
+            $branding_settings = SettingsController::getPDFBranding();
+
+            if (is_null($branding_settings->logo)){
+                $path_logo = "";
+            } else {
+                $path_logo = public_path() . '/uploads/' . $branding_settings->logo;
+            }
+            
+            $data = [
+                'item_tag' => $item->asset_tag,
+                'item_model' => $display_model,
+                'item_serial' => $item->serial,
+                'eula' => $item->getEula(),
+                'check_out_date' => Carbon::parse($acceptance->created_at)->format($branding_settings->date_display_format),
+                'accepted_date' => Carbon::parse($acceptance->accepted_at)->format($branding_settings->date_display_format),
+                'assigned_to' => $assigned_to,
+                'company_name' => $branding_settings->site_name,
+                'signature' => ($sig_filename) ? storage_path() . '/private_uploads/signatures/' . $sig_filename : null,
+                'logo' => $path_logo,
+                'date_settings' => $branding_settings->date_display_format,
+            ];
+
+            if ($pdf_view_route!='') {
+                \Log::debug($pdf_filename.' is the filename, and the route was specified.');
+                $pdf = Pdf::loadView($pdf_view_route, $data);
+                Storage::put('private_uploads/eula-pdfs/' .$pdf_filename, $pdf->output());
+            }
+
+            $acceptance->accept($sig_filename, $item->getEula(), $pdf_filename);
+            $acceptance->notify(new AcceptanceAssetAcceptedNotification($data));
             event(new CheckoutAccepted($acceptance));
 
             $return_msg = trans('admin/users/message.accepted');
+
         } else {
+            // Format the data to send the declined notification
+            $branding_settings = SettingsController::getPDFBranding();
+
+            // This is the most horriblest
+            switch($acceptance->checkoutable_type){
+                case 'App\Models\Asset':
+                    $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
+                    break;
+
+                case 'App\Models\Accessory':
+                    $assigned_to = User::find($item->assignedTo);
+                    break;
+
+                case 'App\Models\LicenseSeat':
+                    $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
+                    break;
+
+                case 'App\Models\Component':
+                    $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
+                    break;
+
+                case 'App\Models\Consumable':
+                    $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
+                    break;
+            }
+            $data = [
+                'item_tag' => $item->asset_tag,
+                'item_model' => $display_model,
+                'item_serial' => $item->serial,
+                'declined_date' => Carbon::parse($acceptance->accepted_at)->format($branding_settings->date_display_format),
+                'assigned_to' => $assigned_to,
+                'company_name' => $branding_settings->site_name,
+                'date_settings' => $branding_settings->date_display_format,
+            ];
+
             $acceptance->decline($sig_filename);
-
+            $acceptance->notify(new AcceptanceAssetDeclinedNotification($data));
             event(new CheckoutDeclined($acceptance));
-
             $return_msg = trans('admin/users/message.declined');
         }
 
+
         return redirect()->to('account/accept')->with('success', $return_msg);
+
     }
 }

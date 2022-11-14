@@ -59,7 +59,9 @@ class AccessoryPresenter extends Presenter
                 'field' => 'manufacturer',
                 'searchable' => true,
                 'sortable' => true,
+                'switchable' => true,
                 'title' => trans('general.manufacturer'),
+                'visible' => false,
                 'formatter' => 'manufacturersLinkObjFormatter',
             ], [
                 'field' => 'supplier',
@@ -89,6 +91,7 @@ class AccessoryPresenter extends Presenter
                 'field' => 'remaining_qty',
                 'searchable' => false,
                 'sortable' => false,
+                'visible' => false,
                 'title' => trans('admin/accessories/general.remaining'),
             ], [
                 'field' => 'purchase_date',
@@ -102,7 +105,7 @@ class AccessoryPresenter extends Presenter
                 'searchable' => true,
                 'sortable' => true,
                 'title' => trans('general.purchase_cost'),
-                'footerFormatter' => 'sumFormatter',
+                'footerFormatter' => 'sumFormatterQuantity',
                 'class' => 'text-right',
             ], [
                 'field' => 'order_number',
@@ -110,6 +113,13 @@ class AccessoryPresenter extends Presenter
                 'sortable' => true,
                 'visible' => false,
                 'title' => trans('general.order_number'),
+            ],[
+                'field' => 'notes',
+                'searchable' => true,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('general.notes'),
+                'formatter' => 'notesFormatter'
             ], [
                 'field' => 'change',
                 'searchable' => false,

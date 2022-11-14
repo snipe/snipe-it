@@ -6,7 +6,21 @@
 @import "../bootstrap-less/variables.less";
 @import "../variables.less";
 @import "../mixins.less";
-
+:root{
+  --background: #222;
+  --back-main: #333;
+  --back-sub: #3d4144;
+  --back-sub-alt: rgba(0, 0, 0, 0.36);
+  --button-default: darken(@green, 15%);
+  --button-primary: darken(@green, 25%);
+  --button-hover: darken(@green, 30%);
+  --header: @green; /* Use same as Header picker */
+  --text-main: #BBB;
+  --text-sub: #9b9b9b;
+  --link: @green; /* Use same as Header picker, lighten by 70% */
+  --visited-link: lighten(@green, 15%); /* Use same as Header picker, lighten by 70% */
+  --hover-link: lighten(@green, 20%);
+}
 .skin-green {
   //Navbar
   .main-header {
@@ -25,7 +39,7 @@
               background-color: rgba(255, 255, 255, 0.1);
             }
             a {
-              color: #fff;
+              color: #333;
               &:hover {
                 background: darken(@green, 5%);
               }
@@ -84,7 +98,19 @@
     color: #fff;
   }
 }
+a.btn-info:link, a.btn-warning:link, a.btn-danger:link{
+  color: #FFF;
+}
+&a.btn-info:visited, a.btn-warning:visited, a.btn-danger:visited{
+  color: #FFF;
+}
+a:link {
+  color: var(--link);
+}
 
+a:visited {
+  color: var(--visited-link);
+}
 
 a {
   color: @green;

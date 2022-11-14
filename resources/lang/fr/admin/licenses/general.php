@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'A propos des licences',
     'about_licenses'                  => 'Les licences sont utilisées pour suivre les logiciels. Ils ont un certain nombre d\'attribution pouvant être associés individuellement',
     'checkin'  					=> 'Libérer la licence multiposte',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'Licences de logiciel',
     'user'  					=> 'Utilisateur',
     'view'  					=> 'Voir la licence',
-];
+);

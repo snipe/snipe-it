@@ -3,20 +3,21 @@
 namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
+use App\Models\Depreciable;
 use App\Models\Depreciation;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
 
 class DepreciationsTransformer
 {
-    public function transformDepreciations(Collection $depreciations)
+    public function transformDepreciations(Collection $depreciations, $total)
     {
         $array = [];
         foreach ($depreciations as $depreciation) {
             $array[] = self::transformDepreciation($depreciation);
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array);
+        return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
     public function transformDepreciation(Depreciation $depreciation)
@@ -27,8 +28,7 @@ class DepreciationsTransformer
             'months' => $depreciation->months.' '.trans('general.months'),
             'depreciation_min' => $depreciation->depreciation_min,
             'created_at' => Helper::getFormattedDateObject($depreciation->created_at, 'datetime'),
-            'updated_at' => Helper::getFormattedDateObject($depreciation->updated_at, 'datetime'),
-            'depreciation_min' =>($depreciation->depreciation_min),
+            'updated_at' => Helper::getFormattedDateObject($depreciation->updated_at, 'datetime')
         ];
 
         $permissions_array['available_actions'] = [

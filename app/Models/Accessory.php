@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\Helper;
 use App\Models\Traits\Acceptable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
@@ -37,7 +38,7 @@ class Accessory extends SnipeModel
      * 
      * @var array
      */
-    protected $searchableAttributes = ['name', 'model_number', 'order_number', 'purchase_date'];
+    protected $searchableAttributes = ['name', 'model_number', 'order_number', 'purchase_date', 'notes'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -61,8 +62,9 @@ class Accessory extends SnipeModel
         'category_id'       => 'required|integer|exists:categories,id',
         'company_id'        => 'integer|nullable',
         'min_amt'           => 'integer|min:0|nullable',
-        'purchase_cost'     => 'numeric|nullable',
+        'purchase_cost'     => 'numeric|nullable|gte:0',
     ];
+
 
     /**
     * Whether the model should inject it's identifier to the unique
@@ -94,8 +96,26 @@ class Accessory extends SnipeModel
         'qty',
         'min_amt',
         'requestable',
+        'notes',
     ];
 
+
+
+    /**
+     * Establishes the accessories -> action logs -> uploads relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v6.1.13]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function uploads()
+    {
+        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')
+            ->where('item_type', '=', self::class)
+            ->where('action_type', '=', 'uploaded')
+            ->whereNotNull('filename')
+            ->orderBy('created_at', 'desc');
+    }
 
 
     /**
@@ -109,6 +129,7 @@ class Accessory extends SnipeModel
     {
         return $this->belongsTo(\App\Models\Supplier::class, 'supplier_id');
     }
+
 
     /**
      * Sets the requestable attribute on the accessory
@@ -220,8 +241,8 @@ class Accessory extends SnipeModel
         if ($this->image) {
             return Storage::disk('public')->url(app('accessories_upload_path').$this->image);
         }
-
         return false;
+
     }
 
     /**
@@ -296,15 +317,29 @@ class Accessory extends SnipeModel
      */
     public function getEula()
     {
-        $Parsedown = new \Parsedown();
 
         if ($this->category->eula_text) {
-            return $Parsedown->text(e($this->category->eula_text));
+            return Helper::parseEscapedMarkedown($this->category->eula_text);
         } elseif ((Setting::getSettings()->default_eula_text) && ($this->category->use_default_eula == '1')) {
-            return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
+            return Helper::parseEscapedMarkedown(Setting::getSettings()->default_eula_text);
         }
 
-            return null;
+        return null;
+    }
+
+     /**
+     * Check how many items within an accessory are checked out
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.0]
+     * @return int
+     */
+    public function numCheckedOut()
+    {
+        $checkedout = 0;
+        $checkedout = $this->users->count();
+
+        return $checkedout;
     }
 
     /**

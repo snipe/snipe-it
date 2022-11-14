@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_models_title'     => 'Giới thiệu về Mô hình Tài sản',
     'about_models_text'           => 'Mô hình Tài sản là một cách để nhóm các tài sản giống nhau. "MBP 2013", "IPhone 6", v.v ...',
     'deleted'  					        => 'This model has been deleted.',
@@ -9,10 +9,10 @@ return [
     'bulk_delete_warn'          => 'Bạn sắp xóa :model_count asset models.',
     'restore'                   => 'Khôi phục Model',
     'requestable'               => 'Người dùng có thể yêu cầu mô hình này',
-    'show_mac_address'			      => 'Hiển thị trường địa chỉ MAC trong tài sản của model này',
+	'show_mac_address'			      => 'Hiển thị trường địa chỉ MAC trong tài sản của model này',
     'view_deleted'              => 'Xem Model đã xoá',
     'view_models'               => 'Xem model',
     'fieldset'                  => 'Fieldset',
     'no_custom_field'           => 'Không có trường tùy chỉnh',
     'add_default_values'        => 'Thêm giá trị mặc định',
-];
+);

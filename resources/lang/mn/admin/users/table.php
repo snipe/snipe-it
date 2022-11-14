@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Идэвхтэй байна',
     'allow'  				=> 'Зөвшөөрнө үү',
     'checkedout'  			=> 'Актив',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'И-мэйл хаяг',
     'employee_num'      	=> 'Ажилчдын тоо',
     'first_name' 			=> 'Нэр',
-    'groupnotes'			=> 'Хэрэглэгч рүү томилсон бүлэг сонгох, хэрэглэгч өөрсдийн өгсөн бүлгүүдийн зөвшөөрлийг авдаг гэдгийг санаарай.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Өв залгамжлах',
     'job' 					=> 'Албан тушаал',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Одоогийн хэрэглэгчдийг харуулах',
     'show_deleted'          => 'Хасагдсан хэрэглэгчдийг харуулах',
     'title' 				=> 'Гарчиг',
-    'to_restore_them'		=> 'тэднийг сэргээх.',
+	'to_restore_them'		=> 'тэднийг сэргээх.',
     'updateuser' 			=> 'Хэрэглэгчийг шинэчлэх',
     'username' 				=> 'Хэрэглэгчийн нэр',
-    'user_deleted_text' 	=> 'Энэ хэрэглэгчийг устгасан гэж тэмдэглэсэн.',
+	'user_deleted_text' 	=> 'Энэ хэрэглэгчийг устгасан гэж тэмдэглэсэн.',
     'username_note' 		=> '(Энэ нь нэвтрэхэд биш зөвхөн Active Directory-д зориулж ашиглагддаг.)',
     'cloneuser'             => 'Clone Хэрэглэгч',
     'viewusers' 			=> 'Хэрэглэгчдийг харах',
-];
+);

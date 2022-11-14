@@ -28,11 +28,11 @@
           <div class="col-md-12">
             @if ($backto=='user')
               <form class="form-horizontal" method="post"
-                    action="{{ route('checkin/hardware', array('assetId'=> $asset->id, 'backto'=>'user')) }}"
+                    action="{{ route('hardware.checkin.store', array('assetId'=> $asset->id, 'backto'=>'user')) }}"
                     autocomplete="off">
                 @else
                   <form class="form-horizontal" method="post"
-                        action="{{ route('checkin/hardware', $asset->id) }}" autocomplete="off">
+                        action="{{ route('hardware.checkin.store', array('assetId'=> $asset->id)) }}" autocomplete="off">
                   @endif
                   {{csrf_field()}}
 

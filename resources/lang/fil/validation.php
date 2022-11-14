@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => 'Ang :katangian ay dapat na hindi bumaba sa :min na mga karakter.',
         'array'   => 'Ang :katangian ay dapat na magkaroon ng hindi bumaba sa :min na mga aytem.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'Ang napili na :katangian ay hindi balido.',
     'numeric'              => 'Ang :katangian ay dapat na isang numero.',
     'present'              => 'Ang :field ng katangian ay dapat na naroroon.',
@@ -88,8 +89,17 @@ return array(
     'unique'               => 'Ang :katangian ay nakuha na.',
     'uploaded'             => 'Ang :katangian ay hindi nagtagumpay sa pag-upload.',
     'url'                  => 'Ang :pormat ng katangian ng pormat ay hindi balido.',
-    "unique_undeleted"     => "Ang :katangian ay dapat na natatangi.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => 'Ang :katangian ay dapat na natatangi.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +111,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +124,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Ang :field ng katangian ay naglalaman ng karakter na hindi pinapayagan.",
-        "email_array"      => "Imbalido ang isa o higit pang mga email address.",
-        "hashed_pass"      => "Ang iyong kasalukuyang password ay hindi wasto",
+        'alpha_space' => 'Ang :field ng katangian ay naglalaman ng karakter na hindi pinapayagan.',
+        'email_array'      => 'Imbalido ang isa o higit pang mga email address.',
+        'hashed_pass'      => 'Ang iyong kasalukuyang password ay hindi wasto',
         'dumbpwd'          => 'Ang password ay sobrang pangkaraniwan.',
-        "statuslabel_type" => "Kinakailangang pumili ng balidong uri ng label ng estado",
+        'statuslabel_type' => 'Kinakailangang pumili ng balidong uri ng label ng estado',
     ],
 
     /*
@@ -135,4 +144,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => '用户已接受一件物品',
+    'acceptance_asset_declined' => '用户拒绝了一件物品',
     'a_user_canceled' => '用户已取消物品申请',
     'a_user_requested' => '用户已申请物品',
     'accessory_name' => '配件名称：',
@@ -59,7 +61,7 @@ return [
     'test_mail_text' => '这是一封 Snipe-IT 资产管理系统的测试电子邮件，如果您收到，表示邮件通知正常运作 :)',
     'the_following_item' => '以下项目已交回：',
     'low_inventory_alert' => '有：种物品已经低于或者接近最小库存。|有：种物品已经低于或者接近最小库存。',
-    'assets_warrantee_alert' => '有：项资产的维保将在：天后到期。|有：项资产的维保将在：天后到期。',
+    'assets_warrantee_alert' => '有 :count 个资产保修期将于 :threshold 天到期。|有 :count 个资产 保修期将于 :threshold 天到期。',
     'license_expiring_alert' => '有：个许可将在：天后到期。|有：个许可将在：天后到期。',
     'to_reset' => '要重置 :web 的密码，请完成此表格：',
     'type' => '类型',

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'asset_categories' 					=> 'Κατηγορίες στοιχείων παγίων',
     'category_name'  					=> 'Όνομα κατηγορίας',
     'checkin_email'                     => 'Αποστολή email στον χρήστη κατά την χρέωση/αποδέσμευση.',
@@ -18,5 +18,6 @@ return [
     'update'  							=> 'Ενημέρωση Κατηγορίας',
     'use_default_eula'					=> 'Χρησιμοποιήστε την προεπιλεγμένη <a href="#" data-toggle="modal" data-target="#eulaModal">primary EULA</a>.',
     'use_default_eula_disabled'			=> '<del>Χρησιμοποιήστε την αρχική προεπιλεγμένη άδεια EULA αντί.</del> Δεν έχει οριστεί αρχική προεπιλεγμένη ευχέρεια EULA. Προσθέστε μία από τις Ρυθμίσεις.',
+    'use_default_eula_column'			=> 'Use default EULA',
 
-];
+);

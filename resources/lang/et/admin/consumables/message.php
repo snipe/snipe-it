@@ -1,35 +1,36 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Kuluvahendit pole olemas.',
 
-    'create' => [
+    'create' => array(
         'error'   => 'Kuluvahendit ei loodud, proovi uuesti.',
-        'success' => 'Kuluvahendi loomine õnnestus.',
-    ],
+        'success' => 'Kuluvahendi loomine õnnestus.'
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Kuluvahendit ei muudetud, proovi uuesti',
-        'success' => 'Kuluvahendi muutmine õnnestus.',
-    ],
+        'success' => 'Kuluvahendi muutmine õnnestus.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Kas oled kindel, et soovid selle kuluvahendi kustutada?',
         'error'   => 'Kuluvahendi kustutamisel tekkis probleem. Palun proovi uuesti.',
-        'success' => 'Kuluvahendi kustutamine õnnestus.',
-    ],
+        'success' => 'Kuluvahendi kustutamine õnnestus.'
+    ),
 
-     'checkout' => [
+     'checkout' => array(
         'error'   		=> 'Tarbitavat ei kontrollitud, proovige uuesti',
         'success' 		=> 'Tarbitav kontrollitud edukalt.',
-        'user_does_not_exist' => 'See kasutaja ei sobi. Palun proovi uuesti.',
-    ],
+        'user_does_not_exist' => 'See kasutaja ei sobi. Palun proovi uuesti.'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   		=> 'Tarbitavat ei märgitud, proovige uuesti',
         'success' 		=> 'Tarbitav kontrollitud edukalt.',
-        'user_does_not_exist' => 'See kasutaja ei sobi. Palun proovi uuesti.',
-    ],
+        'user_does_not_exist' => 'See kasutaja ei sobi. Palun proovi uuesti.'
+    )
 
-];
+
+);

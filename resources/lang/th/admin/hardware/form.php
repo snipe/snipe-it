@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'คุณกำลังจะลบ: asset_count',
     'bulk_update'		=> 'ปรับปรุงสินทรัพย์แบบหลายรายการ',
     'bulk_update_help'	=> 'ฟอร์มนี้อนุญาตให้คุณปรับปรุงสินทรัพย์แบบหลายรายการในครั้งเดียว เพียงกรอกข้อมูลที่ต้องการเปลี่ยนแปลงลงในช่อง ช่องใดที่ไม่ได้กรอกข้อมูลจะไม่มีการเปลี่ยนแปลงใดๆ ',
-    'bulk_update_warn'	=> 'คุณกำลังแก้ไขคุณสมบัติของสินทรัพย์ :asset_count',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'เช็คเอ้าท์ให้กับ',
     'checkout_date'		=> 'วันที่เช็คเอ้าท์',
     'checkin_date'		=> 'วันที่เช็คอิน',
@@ -40,4 +40,12 @@ return [
     'warranty'			=> 'การรับประกัน',
         'warranty_expires'		=> 'การรับประกันหมดอายุ',
     'years'				=> 'ปี',
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information'
 ];

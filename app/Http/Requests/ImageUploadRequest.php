@@ -161,7 +161,6 @@ class ImageUploadRequest extends Request
 
         // If the user isn't uploading anything new but wants to delete their old image, do so
         } else {
-            \Log::debug('No file passed for '.$form_fieldname);
             if ($this->input('image_delete') == '1') {
                 \Log::debug('Deleting image');
                 try {

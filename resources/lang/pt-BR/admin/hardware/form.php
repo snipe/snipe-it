@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Você está prestes a excluir.',
     'bulk_update'		=> 'Ativos da Atualização em Massa',
     'bulk_update_help'	=> 'Este formulário lhe permite atualizar múltiplos ativos de uma vez só. Apenas preencha os campos que você precisa alterar. Qualquer campo deixado em branco permanecerá inalterado. ',
-    'bulk_update_warn'	=> 'Você está prestes a editar as propriedades de :asset_count ativos.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Alocado para',
     'checkout_date'		=> 'Data de alocação',
     'checkin_date'		=> 'Data de devolução',
@@ -40,4 +40,12 @@ return [
     'warranty'			=> 'Garantia',
         'warranty_expires'		=> 'A garantia expira',
     'years'				=> 'anos',
+    'asset_location' => 'Atualizar Local do Ativo',
+    'asset_location_update_default_current' => 'Atualizar a localização padrão e local real',
+    'asset_location_update_default' => 'Atualizar somente local padrão',
+    'asset_not_deployable' => 'Este status de ativo não é implantado. Este ativo não pode ser verificado.',
+    'asset_deployable' => 'Este status pode ser implementado. Este ativo pode ser verificado.',
+    'processing_spinner' => 'Processando...',
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information'
 ];

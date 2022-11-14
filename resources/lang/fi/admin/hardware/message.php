@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Varoitus: </strong> Tämä laite  ei ole käytettävävissä.
                         Jos laitteen tila on muuttunut, päivitä laitteen tila sen asetuksista.',
     'does_not_exist' 	=> 'Laitetta ei löydy.',
-    'does_not_exist_or_not_requestable' => 'Hyvä yritys. Tätä laitetta ei ole tai se ei ole pyydettävissä.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Tämä laite on luovutettu käyttäjälle joten sitä ei voida poistaa. Palauta laite ensin käyttäjältä ja yritä uudelleen. ',
 
     'create' => [
@@ -17,6 +17,7 @@ return [
         'error'   			=> 'Laitetta ei päivitetty, yritä uudelleen',
         'success' 			=> 'Laite päivitetty onnistuneesti.',
         'nothing_updated'	=>  'Mitään kenttiä ei valittu, joten mitään ei päivitetty.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [
@@ -28,6 +29,7 @@ return [
         'error'   		=> 'Laitteen tarkastus epäonnistui. Yritä uudelleen.',
         'success' 		=> 'Laitteen tarkastus kirjattu.',
     ],
+
 
     'deletefile' => [
         'error'   => 'Tiedostoa ei poistettu. Ole hyvä ja yritä uudelleen.',
@@ -48,6 +50,7 @@ return [
         'file_delete_success'   => 'Tiedosto on poistettu onnistuneesti',
         'file_delete_error'      => 'Tiedostoa ei voitu poistaa',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Oletko varma että haluat poistaa tämän laitteen?',

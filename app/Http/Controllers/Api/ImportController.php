@@ -134,7 +134,14 @@ class ImportController extends Controller
             \Log::debug('NO BACKUP requested via importer');
         }
 
-        $errors = $request->import(Import::find($import_id));
+        $import = Import::find($import_id);
+
+        if(is_null($import)){
+            $error[0][0] = trans("validation.exists", ["attribute" => "file"]);
+            return response()->json(Helper::formatStandardApiResponse('import-errors', null, $error), 500);
+        }
+
+        $errors = $request->import($import);
         $redirectTo = 'hardware.index';
         switch ($request->get('import-type')) {
             case 'asset':

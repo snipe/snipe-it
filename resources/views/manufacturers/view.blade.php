@@ -9,6 +9,10 @@
 @stop
 
 @section('header_right')
+
+  <a href="{{ route('manufacturers.index') }}" class="btn btn-primary text-right" style="margin-right: 10px;">{{ trans('general.back') }}</a>
+
+
   <div class="btn-group pull-right">
      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
      <span class="caret"></span>
@@ -29,29 +33,76 @@
 
       <ul class="nav nav-tabs">
         <li class="active">
-          <a href="#assets" data-toggle="tab">Assets</a>
+
+          <a href="#assets" data-toggle="tab">
+
+            <span class="hidden-lg hidden-md">
+              <i class="fas fa-barcode fa-2x"></i>
+            </span>
+            <span class="hidden-xs hidden-sm">
+                {{ trans('general.assets') }}
+                {!! (($manufacturer->assets) && ($manufacturer->assets()->AssetsForShow()->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($manufacturer->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
+            </span>
+
+          </a>
+
         </li>
         <li>
-          <a href="#licenses" data-toggle="tab">Licenses</a>
+          <a href="#licenses" data-toggle="tab">
+
+            <span class="hidden-lg hidden-md">
+              <i class="far fa-save fa-2x"></i>
+            </span>
+            <span class="hidden-xs hidden-sm">
+              {{ trans('general.licenses') }}
+              {!! (($manufacturer->licenses) && ($manufacturer->licenses->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($manufacturer->licenses->count()).'</badge>' : '' !!}
+            </span>
+
+          </a>
         </li>
         <li>
-          <a href="#accessories" data-toggle="tab">Accessories</a>
+          <a href="#accessories" data-toggle="tab">
+
+             <span class="hidden-lg hidden-md">
+              <i class="far fa-keyboard fa-2x"></i>
+            </span>
+            <span class="hidden-xs hidden-sm">
+              {{ trans('general.accessories') }}
+              {!! (($manufacturer->accessories) && ($manufacturer->accessories->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($manufacturer->accessories->count()).'</badge>' : '' !!}
+            </span>
+
+          </a>
         </li>
         <li>
-          <a href="#consumables" data-toggle="tab">Consumables</a>
+          <a href="#consumables" data-toggle="tab">
+
+             <span class="hidden-lg hidden-md">
+              <i class="fas fa-tint fa-2x"></i>
+            </span>
+            <span class="hidden-xs hidden-sm">
+              {{ trans('general.consumables') }}
+              {!! (($manufacturer->consumables) && ($manufacturer->consumables->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($manufacturer->consumables->count()).'</badge>' : '' !!}
+            </span>
+
+          </a>
         </li>
       </ul>
 
       <div class="tab-content">
         <div class="tab-pane fade in active" id="assets">
 
+          @include('partials.asset-bulk-actions')
+          <div class="table table-responsive">
           <table
                   data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
                   data-cookie-id-table="assetsListingTable"
                   data-pagination="true"
                   data-id-table="assetsListingTable"
+                  data-toolbar="#assetsBulkEditToolbar"
+                  data-bulk-button-id="#bulkAssetEditButton"
+                  data-bulk-form-id="#assetsBulkForm"
                   data-search="true"
-                  data-show-footer="true"
+                  data-show-fullscreen="true"
                   data-side-pagination="server"
                   data-show-columns="true"
                   data-show-export="true"
@@ -65,6 +116,7 @@
               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
               }'>
           </table>
+          </div>
 
         </div> <!-- /.tab-pane assets -->
 

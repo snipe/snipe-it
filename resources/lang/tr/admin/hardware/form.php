@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> ':asset_count adet varlığı düzenlemek üzeresiniz.',
     'bulk_update'		=> 'Demirbaşları Toplu Güncelle',
     'bulk_update_help'	=> 'Bu form birden çok demirbaşı tek seferde güncellemenizi sağlar. Lütfen sadece değiştirmek istediğiniz alanları doldurunuz. Değiştirilmesini istemediğiniz alanları boş bırakınız. ',
-    'bulk_update_warn'	=> ':asset_count adet demirbaşı düzenlemek üzeresiniz.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Çıkış Yapılmış Olan Kişi',
     'checkout_date'		=> 'Çıkış Tarihi',
     'checkin_date'		=> 'Giriş Tarihi',
@@ -40,4 +40,12 @@ return [
     'warranty'			=> 'Garanti',
         'warranty_expires'		=> 'Garanti Süresi Sona Erdi',
     'years'				=> 'yıl',
+    'asset_location' => 'Varlık konumunu güncelle',
+    'asset_location_update_default_current' => 'Varsayılan konumu ve gerçek konumu güncelle',
+    'asset_location_update_default' => 'Sadece varsayılan konumu güncelle',
+    'asset_not_deployable' => 'Bu demirbaş dağıtılabilir durumda değil. Çıkışı yapılamaz.',
+    'asset_deployable' => 'Bu demirbaş dağıtılabilir durumda. Çıkışı yapılabilir.',
+    'processing_spinner' => 'İşleniyor...',
+    'optional_infos'  => 'Opsiyonel Bilgi',
+    'order_details'   => 'Sipariş Bilgileri'
 ];

@@ -17,18 +17,26 @@ on:
   schedule:
     - cron: '36 23 * * 3'
 
+permissions:
+  contents: read
+
 jobs:
   codacy-security-scan:
+    # Ensure schedule job never runs on forked repos. It's only executed for 'snipe/snipe-it'
+    permissions:
+      contents: read  # for actions/checkout to fetch code
+      security-events: write  # for github/codeql-action/upload-sarif to upload SARIF results
+    if: (github.repository == 'snipe/snipe-it') || ((github.repository != 'snipe/snipe-it') && (github.event_name != 'schedule'))
     name: Codacy Security Scan
     runs-on: ubuntu-latest
     steps:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3.1.0
 
       # Execute Codacy Analysis CLI and generate a SARIF output with the security issues identified during the analysis
       - name: Run Codacy Analysis CLI
-        uses: codacy/codacy-analysis-cli-action@1.1.0
+        uses: codacy/codacy-analysis-cli-action@v4.2.0
         with:
           # Check https://github.com/codacy/codacy-analysis-cli#project-token to get your project token from your Codacy repository
           # You can also omit the token and run the tools that support default configurations
@@ -44,6 +52,6 @@ jobs:
 
       # Upload the SARIF file generated in the previous step
       - name: Upload SARIF results file
-        uses: github/codeql-action/upload-sarif@v1
+        uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: results.sarif

@@ -25,7 +25,7 @@
               background-color: rgba(255, 255, 255, 0.1);
             }
             a {
-              color: #fff;
+              color: #333;
               &:hover {
                 background: darken(@light-blue, 5%);
               }
@@ -64,7 +64,7 @@
   &.btn-primary, .btn-primary:link {
     background-color: darken(@light-blue, 10%);
     border-color: darken(@light-blue, 20%);
-    color: #fff;
+    color: #fff !important;
   }
 
 
@@ -98,16 +98,41 @@
     color: #fff;
 }
 
+.btn-default:link, a.btn-default:hover, .btn-default:visited,
+{
+  color: @dark-gray;
+}
 
 
-a {
-  color: @light-blue;
-  &:hover {
-    color: darken(@light-blue, 20%);
-  }
-  &:visited {
-    color: @light-blue;
-  }
+:root {
+  --button-default: @dark-gray;
+  --button-primary: darken(@blue, 25%);
+  --button-hover: darken(@blue, 30%);
+  --header: @blue; /* Use same as Header picker */
+  --text-main: #BBB;
+  --text-sub: #9b9b9b;
+  --link:darken(@blue, 15%); /* Use same as Header picker, lighten by 70% */
+  --visited-link: lighten(@blue,10%); /* Use same as Header picker, lighten by 70% */
+  --hover-link: lighten(@blue,20%); /* Use same as Header picker, lighten by 70% */
+  --nav-link: #FFF; /* Use same as Header picker */
+  --light-link: #fff; /* Use same as Header picker */
+}
+a.btn-info:link, a.btn-warning:link, a.btn-danger:link{
+  color: #FFF;
+}
+&a.btn-info:visited, a.btn-warning:visited, a.btn-danger:visited{
+  color: #FFF;
+}
+a:link {
+  color: var(--link);
+}
+
+a:visited {
+  color: var(--visited-link);
+}
+
+a:hover {
+  color: var(--hover-link);
 }
 
 .text-primary {
@@ -124,4 +149,9 @@ a {
 
 .search-highlight, .search-highlight:hover {
   background-color: #e9d15b;
+}
+
+// Link colors for the settings page
+a.settings_button:link, a.settings_button:visited, a.settings_button:hover {
+  color: @light-blue;
 }

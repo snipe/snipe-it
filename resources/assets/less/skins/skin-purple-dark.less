@@ -61,11 +61,11 @@
 
 
 .btn, .btn:hover {
-  color: #fff;
+  color: #fff !important;
 
   &.btn-primary, .btn-primary:link {
     background-color: darken(@purple, 10%);
-    border-color: darken(@purple, 20%);
+    border-color: #FFF;
     color: #fff;
   }
 
@@ -88,12 +88,19 @@
 }
 
 
+/**
+The dropdown is white, so use a darker color
+ */
+li.dropdown-item-marker {
+  color: var(--button-primary);
+}
+
 a {
   &:hover {
-    color: #fff;
+    color: var(--hover-link);
   }
   &:visited {
-    color: #fff;
+    color: var(--visited-link);
   }
 }
 
@@ -107,7 +114,7 @@ a {
 :root {
   --background: #222;
   --back-main: #333;
-  --back-sub: #3d4144;
+  --back-sub: #080808;
   --back-sub-alt: rgba(0, 0, 0, 0.36);
   --button-default: darken(@purple, 15%);
   --button-primary: darken(@purple, 25%);
@@ -115,11 +122,15 @@ a {
   --header: @purple; /* Use same as Header picker */
   --text-main: #BBB;
   --text-sub: #9b9b9b;
-  --link: #9370DB; /* Use same as Header picker, lighten by 70% */
-  --visited-link: #B93CF6; /* Use same as Header picker, lighten by 70% */
-  --hover-link: #BF55EC; /* Use same as Header picker, lighten by 70% */
+  --link: #AC83FF; /* Use same as Header picker, lighten by 70% */
+  --visited-link: lighten(#AC83FF, 15%); /* Use same as Header picker, lighten by 70% */
+  --hover-link: lighten(#AC83FF, 30%); /* Use same as Header picker, lighten by 70% */
   --nav-link: #FFF; /* Use same as Header picker */
   --light-link: #fff; /* Use same as Header picker */
+}
+
+#ldapad_test_results.well.well-sm{
+  color: var(--back-main);
 }
 
 .main-header .navbar, .main-header .logo {
@@ -132,9 +143,15 @@ a {
 .bootstrap-table .fixed-table-container .table thead th .sortable {
   color: var(--nav-link);
 }
-
+.bootstrap-table .fixed-table-toolbar .columns label {
+  color:#000;
+}
 .thead, .navbar-nav>li>a:link {
   color: var(--nav-link);
+}
+.label-default{
+  background-color:var(--back-sub);
+  color:#fff;
 }
 
 .modal-content {
@@ -144,14 +161,6 @@ a {
 
 a:link {
   color: var(--link);
-}
-
-a:visited {
-  color: var(--nav-link);
-}
-
-a:hover {
-  color: var(--hover-link);
 }
 
 .btn-primary.hover {
@@ -233,10 +242,6 @@ body {
 }
 #details>div>div>div>table {
   background-color: transparent;
-}
-.dropdown-menu, .dropdown-menu>li>a {
-  background-color: var(--back-sub);
-  color: var(--text-main) !important;
 }
 .dropdown-menu>li>a:hover {
   background-color: var(--back-main);
@@ -391,6 +396,14 @@ a {
   color: var(--text-main);
   border-top: 1px solid #dddddd;
   display: table-cell;
+}
+.row-new-striped > .row:nth-of-type(odd){
+  background-color: var(--back-sub);
+  color: var(--text-main);
+}
+.row-new-striped > .row:nth-of-type(even){
+  background-color: var(--back-sub-alt);
+  color: var(--text-main);
 }
 
 .search-highlight, .search-highlight:hover {

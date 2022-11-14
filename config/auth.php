@@ -98,13 +98,26 @@ return [
             'email' => 'auth.emails.password',
             'table' => 'password_resets',
             'expire' => env('RESET_PASSWORD_LINK_EXPIRES', 900),
-            'throttle' => 60,
+            'throttle' => [
                 'max_attempts' => env('LOGIN_MAX_ATTEMPTS', 5),
-
                 'lockout_duration' => env('LOGIN_LOCKOUT_DURATION', 60),
+            ]
 
         ],
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Resetting Password Requests
+    |--------------------------------------------------------------------------
+    | This sets the throttle for forgotten password requests
+    |
+    */
+    'password_reset' => [
+       'max_attempts_per_min' => env('PASSWORD_RESET_MAX_ATTEMPTS_PER_MIN', 50),
+    ],
+
+
 
     /*
     |--------------------------------------------------------------------------
@@ -117,6 +130,6 @@ return [
     |
     */
 
-    'password_timeout' => 10800,
+    'password_timeout' =>  env('PASSWORD_CONFIRM_TIMEOUT', 10800),
 
 ];

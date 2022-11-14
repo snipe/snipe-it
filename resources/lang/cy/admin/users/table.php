@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Gweithredol',
     'allow'  				=> 'Caniatau',
     'checkedout'  			=> 'Asedau',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'E-bost',
     'employee_num'      	=> 'Rhif Cyflogai.',
     'first_name' 			=> 'Enw cyntaf',
-    'groupnotes'			=> 'Dewiswch grwp i asseinio i\'r defnyddiwr, cofiwch bod y defnyddiwr yn etifeddu hawliau\'r grwp.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Rhif Unigryw',
     'inherit'  				=> 'Etifeddu',
     'job' 					=> 'Teitl Swydd',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Dangos Defnyddwyr Presennol',
     'show_deleted'          => 'Dangos Defnyddwyr sydd wedi\'i dileu',
     'title' 				=> 'Teitl',
-    'to_restore_them'		=> 'i adfer nhw.',
+	'to_restore_them'		=> 'i adfer nhw.',
     'updateuser' 			=> 'Diweddaru Defnyddiwr',
     'username' 				=> 'Enw defnyddiwr',
-    'user_deleted_text' 	=> 'Mae\'r defnyddiwr hwn wedi\'i farcio fel un sydd wedi\'i ddileu.',
+	'user_deleted_text' 	=> 'Mae\'r defnyddiwr hwn wedi\'i farcio fel un sydd wedi\'i ddileu.',
     'username_note' 		=> '(Wedi defnyddio ar gyfer clymu i Active Directory yn unig, nid ar gyfer mewngofnodi.)',
     'cloneuser'             => 'Dyblygu Defnyddiwr',
     'viewusers' 			=> 'Gweld Defnyddwyr',
-];
+);

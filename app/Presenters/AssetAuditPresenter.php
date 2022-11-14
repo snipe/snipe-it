@@ -18,6 +18,10 @@ class AssetAuditPresenter extends Presenter
     {
         $layout = [
              [
+                'field' => 'checkbox',
+                'checkbox' => true,
+             ],
+             [
                 'field' => 'id',
                 'searchable' => false,
                 'sortable' => true,
@@ -244,7 +248,7 @@ class AssetAuditPresenter extends Presenter
 
         foreach ($fields as $field) {
             $layout[] = [
-                'field' => 'custom_fields.'.$field->convertUnicodeDbSlug(),
+                'field' => 'custom_fields.'.$field->db_column,
                 'searchable' => true,
                 'sortable' => true,
                 'visible' => false,

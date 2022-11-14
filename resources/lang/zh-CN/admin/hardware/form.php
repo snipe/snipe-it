@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> '即将删除 :asset_count 项资产',
     'bulk_update'		=> '批量更新',
     'bulk_update_help'	=> '该表格允许你同时修改多项资产。请仅填写需要修改的字段，留空的字段不会做任何修改。 ',
-    'bulk_update_warn'	=> '你即将同时修改 :asset_count 项资产的属性。',
+    'bulk_update_warn'	=> '您将要编辑单个资产的属性。 |您将要编辑:asset_count个资产的属性。',
     'checkedout_to'		=> '借出至',
     'checkout_date'		=> '借出日期',
     'checkin_date'		=> '登记日期',
@@ -40,4 +40,12 @@ return [
     'warranty'			=> '质保',
         'warranty_expires'		=> '保修期已过',
     'years'				=> '年',
+    'asset_location' => '更新资产位置',
+    'asset_location_update_default_current' => '更新默认位置与实际位置',
+    'asset_location_update_default' => '仅更新默认位置',
+    'asset_not_deployable' => '该资产状态为不可部署。无法借出此资产。',
+    'asset_deployable' => '该状态为可部署。可以借出此资产。',
+    'processing_spinner' => '处理中……',
+    'optional_infos'  => '可选信息',
+    'order_details'   => '订单相关信息'
 ];

@@ -26,7 +26,7 @@
 
 $(function () {
 
-
+  var baseUrl = $('meta[name="baseUrl"]').attr('content');
   //handle modal-add-interstitial calls
   var model, select, refreshSelector;
 
@@ -199,13 +199,13 @@ function formatDatalistSafe(datalist) {
     root_div.append(name_div)
     var safe_html = root_div.get(0).outerHTML;
     var old_html = formatDatalist(datalist);
-    if(safe_html != old_html) {
-        console.log("HTML MISMATCH: ");
-        console.log("FormatDatalistSafe: ");
+    if (safe_html != old_html) {
+        // console.log("HTML MISMATCH: ");
+        // console.log("FormatDatalistSafe: ");
         // console.dir(root_div.get(0));
-        console.log(safe_html);
-        console.log("FormatDataList: ");
-        console.log(old_html);
+        // console.log(safe_html);
+        // console.log("FormatDataList: ");
+        // console.log(old_html);
     }
     return root_div;
 

@@ -28,6 +28,10 @@ Route::group(
             [AssetsController::class, 'quickScan']
         )->name('assets.bulkaudit');
 
+        Route::get('quickscancheckin',
+            [AssetsController::class, 'quickScanCheckin']
+        )->name('hardware/quickscancheckin');
+
         // Asset Maintenances
         Route::resource('maintenances', 
             AssetMaintenancesController::class, [
@@ -104,19 +108,19 @@ Route::group(
 
         Route::get('{assetId}/checkout',
             [AssetCheckoutController::class, 'create']
-        )->name('checkout/hardware');
+        )->name('hardware.checkout.create');
 
         Route::post('{assetId}/checkout',
             [AssetCheckoutController::class, 'store']
-        )->name('checkout/hardware');
+        )->name('hardware.checkout.store');
 
         Route::get('{assetId}/checkin/{backto?}',
             [AssetCheckinController::class, 'create']
-        )->name('checkin/hardware');
+        )->name('hardware.checkin.create');
 
         Route::post('{assetId}/checkin/{backto?}',
             [AssetCheckinController::class, 'store']
-        )->name('checkin/hardware');
+        )->name('hardware.checkin.store');
 
         Route::get('{assetId}/view',
             [AssetsController::class, 'show']
@@ -130,7 +134,7 @@ Route::group(
             [AssetsController::class, 'getBarCode']
         )->name('barcode/hardware');
 
-        Route::get('{assetId}/restore',
+        Route::post('{assetId}/restore',
             [AssetsController::class, 'getRestore']
         )->name('restore/hardware');
 
@@ -164,11 +168,11 @@ Route::group(
         // Bulk checkout / checkin
         Route::get('bulkcheckout',
             [BulkAssetsController::class, 'showCheckout']
-        )->name('hardware/bulkcheckout');
+        )->name('hardware.bulkcheckout.show');
 
         Route::post('bulkcheckout',
             [BulkAssetsController::class, 'storeCheckout']
-        )->name('hardware/bulkcheckout');
+        )->name('hardware.bulkcheckout.store');
     });
 
 Route::resource('hardware', 

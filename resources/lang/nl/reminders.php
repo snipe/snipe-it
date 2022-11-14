@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,9 @@ return [
     |
     */
 
-    'password' => 'Paswoorden moeten 6 karakters lang zijn en gelijk zijn in beide paswoordvelden.',
+    "password" => "Paswoorden moeten 6 karakters lang zijn en gelijk zijn in beide paswoordvelden.",
+    "user"     => "Gebruikersnaam of e-mailadres is niet correct",
+    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
+    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
 
-    'user'     => 'Gebruikersnaam of e-mailadres is niet correct',
-
-    'token'    => 'De token voor paswoordherstel is niet correct.',
-
-    'sent' => 'Indien het e-mailadres bestaat, werd een paswoordhint verstuurd',
-
-];
+);

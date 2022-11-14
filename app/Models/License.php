@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\Helper;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Carbon\Carbon;
@@ -42,12 +43,13 @@ class License extends Depreciable
 
     protected $rules = [
         'name'   => 'required|string|min:3|max:255',
-        'seats'   => 'required|min:1|max:999|integer',
+        'seats'   => 'required|min:1|integer',
         'license_email'   => 'email|nullable|max:120',
         'license_name'   => 'string|nullable|max:100',
         'notes'   => 'string|nullable',
         'category_id' => 'required|exists:categories,id',
         'company_id' => 'integer|nullable',
+        'purchase_cost'=> 'numeric|nullable|gte:0',
     ];
 
     /**
@@ -175,12 +177,25 @@ class License extends Depreciable
             return true;
         }
         // Else we're adding seats.
-        DB::transaction(function () use ($license, $oldSeats, $newSeats) {
-            for ($i = $oldSeats; $i < $newSeats; $i++) {
-                $license->licenseSeatsRelation()->save(new LicenseSeat, ['user_id' => Auth::id()]);
-            }
+        //Create enough seats for the change.
+        $licenseInsert = [];
+        for ($i = $oldSeats; $i < $newSeats; $i++) {
+            $licenseInsert[] = [
+                'user_id' => Auth::id(),
+                'license_id' => $license->id,
+                'created_at' => now(),
+                'updated_at' => now()
+            ];
+        }
+        //Chunk and use DB transactions to prevent timeouts.
+
+        collect($licenseInsert)->chunk(1000)->each(function ($chunk) {
+            DB::transaction(function () use ($chunk) {
+                LicenseSeat::insert($chunk->toArray());
+            });
         });
-        // On initail create, we shouldn't log the addition of seats.
+
+        // On initial create, we shouldn't log the addition of seats.
         if ($license->id) {
             //Log the addition of license to the log.
             $logAction = new Actionlog();
@@ -323,12 +338,11 @@ class License extends Depreciable
      */
     public function getEula()
     {
-        $Parsedown = new \Parsedown();
 
         if ($this->category->eula_text) {
-            return $Parsedown->text(e($this->category->eula_text));
+            return Helper::parseEscapedMarkedown($this->category->eula_text);
         } elseif ($this->category->use_default_eula == '1') {
-            return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
+            return Helper::parseEscapedMarkedown(Setting::getSettings()->default_eula_text);
         } else {
             return false;
         }
@@ -376,6 +390,7 @@ class License extends Depreciable
             ->orderBy('created_at', 'desc');
     }
 
+
     /**
      * Establishes the license -> admin user relationship
      *
@@ -402,6 +417,7 @@ class License extends Depreciable
         return LicenseSeat::whereNull('deleted_at')
                    ->count();
     }
+
 
     /**
      * Return the number of seats for this asset
@@ -583,6 +599,7 @@ class License extends Depreciable
         return $this->belongsTo(\App\Models\Supplier::class, 'supplier_id');
     }
 
+
     /**
      * Gets the next available free seat - used by
      * the API to populate next_seat
@@ -602,6 +619,7 @@ class License extends Depreciable
                     ->orderBy('id', 'asc')
                     ->first();
     }
+
 
     /**
      * Establishes the license -> free seats relationship
@@ -626,6 +644,8 @@ class License extends Depreciable
      */
     public static function getExpiringLicenses($days = 60)
     {
+        $days = (is_null($days)) ? 60 : $days;
+
         return self::whereNotNull('expiration_date')
         ->whereNull('deleted_at')
         ->whereRaw(DB::raw('DATE_SUB(`expiration_date`,INTERVAL '.$days.' DAY) <= DATE(NOW()) '))

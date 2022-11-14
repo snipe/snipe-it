@@ -118,7 +118,7 @@
         "description": "The duration (in seconds) that the user should be blocked from attempting to authenticate again.",
         "value": "60"
       },
-      "APP_LOG": {
+      "LOG_CHANNEL": {
         "description": "Driver to send logs to. (errorlog for stderr)",
         "value": "errorlog"
       },

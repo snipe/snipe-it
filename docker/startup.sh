@@ -19,6 +19,13 @@ fi
 # create data directories
 for dir in \
   'data/private_uploads' \
+  'data/private_uploads/assets' \
+  'data/private_uploads/audits' \
+  'data/private_uploads/imports' \
+  'data/private_uploads/assetmodels' \
+  'data/private_uploads/users' \
+  'data/private_uploads/licenses' \
+  'data/private_uploads/signatures' \
   'data/uploads/accessories' \
   'data/uploads/avatars' \
   'data/uploads/barcodes' \
@@ -47,6 +54,7 @@ if [ -v "PHP_UPLOAD_LIMIT" ]
 then
     echo "Changing upload limit to ${PHP_UPLOAD_LIMIT}"
     sed -i "s/^upload_max_filesize.*/upload_max_filesize = ${PHP_UPLOAD_LIMIT}M/" /etc/php/*/apache2/php.ini
+    sed -i "s/^post_max_size.*/post_max_size = ${PHP_UPLOAD_LIMIT}M/" /etc/php/*/apache2/php.ini
 fi
 
 # If the Oauth DB files are not present copy the vendor files over to the db migrations

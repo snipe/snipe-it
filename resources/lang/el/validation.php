@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => 'Το χαρακτηριστικό: πρέπει να είναι τουλάχιστον: min χαρακτήρες.',
         'array'   => 'Το χαρακτηριστικό: πρέπει να έχει τουλάχιστον: λεπτά στοιχεία.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'Το επιλεγμένο: χαρακτηριστικό δεν είναι έγκυρο.',
     'numeric'              => 'Το χαρακτηριστικό πρέπει να είναι ένας αριθμός.',
     'present'              => 'Πρέπει να υπάρχει το πεδίο ιδιοτήτων: attribute.',
@@ -88,8 +89,17 @@ return array(
     'unique'               => 'Το χαρακτηριστικό: έχει ήδη ληφθεί.',
     'uploaded'             => 'Το χαρακτηριστικό:: απέτυχε να μεταφορτωθεί.',
     'url'                  => 'Η μορφή του χαρακτηριστικού είναι μη έγκυρη.',
-    "unique_undeleted"     => "Το :χαρακτηριστικό πρέπει να είναι μοναδικό.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => 'Το :χαρακτηριστικό πρέπει να είναι μοναδικό.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +111,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +124,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Το πεδίο ιδιοτήτων: περιέχει ένα χαρακτήρα που δεν επιτρέπεται.",
-        "email_array"      => "Μία ή περισσότερες διευθύνσεις ηλεκτρονικού ταχυδρομείου δεν είναι έγκυρες.",
-        "hashed_pass"      => "Ο τρέχων κωδικός πρόσβασης είναι εσφαλμένος",
+        'alpha_space' => 'Το πεδίο ιδιοτήτων: περιέχει ένα χαρακτήρα που δεν επιτρέπεται.',
+        'email_array'      => 'Μία ή περισσότερες διευθύνσεις ηλεκτρονικού ταχυδρομείου δεν είναι έγκυρες.',
+        'hashed_pass'      => 'Ο τρέχων κωδικός πρόσβασης είναι εσφαλμένος',
         'dumbpwd'          => 'Αυτός ο κωδικός πρόσβασης είναι πολύ συνηθισμένος.',
-        "statuslabel_type" => "Πρέπει να επιλέξετε έναν έγκυρο τύπο ετικέτας κατάστασης",
+        'statuslabel_type' => 'Πρέπει να επιλέξετε έναν έγκυρο τύπο ετικέτας κατάστασης',
     ],
 
     /*
@@ -135,4 +144,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

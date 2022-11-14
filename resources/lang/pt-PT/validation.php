@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => 'O :attribute deve conter pelos menos :min caracteres.',
         'array'   => 'O atributo deve ter pelo menos: itens mínimos.',
     ],
+    'starts_with'          => 'O :attribute deve começar com um dos seguintes: :values.',
     'not_in'               => 'O :attribute selecionado é inválido.',
     'numeric'              => ':attribute tem que ser um número.',
     'present'              => 'O campo: atributo deve estar presente.',
@@ -88,8 +89,17 @@ return array(
     'unique'               => 'Este :attribute já existe.',
     'uploaded'             => 'O atributo: não foi possível carregar.',
     'url'                  => 'O formato do :attribute é inválido.',
-    "unique_undeleted"     => "O :atribute deve ser único.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => 'O :atribute deve ser único.',
+    'non_circular'         => 'O :attribute não deve criar uma referência circular.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +111,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +124,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "O campo: atributo contém um caractere que não é permitido.",
-        "email_array"      => "Um ou mais endereços de e-mail são inválidos.",
-        "hashed_pass"      => "Sua senha atual está incorreta",
+        'alpha_space' => 'O campo: atributo contém um caractere que não é permitido.',
+        'email_array'      => 'Um ou mais endereços de e-mail são inválidos.',
+        'hashed_pass'      => 'Sua senha atual está incorreta',
         'dumbpwd'          => 'Essa senha é muito comum.',
-        "statuslabel_type" => "Você deve selecionar um tipo de etiqueta de status válido",
+        'statuslabel_type' => 'Você deve selecionar um tipo de etiqueta de status válido',
     ],
 
     /*
@@ -135,4 +144,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

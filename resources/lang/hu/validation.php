@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => 'A :attribute legalább :min karakter kell lenni.',
         'array'   => 'A: attribútumnak rendelkeznie kell legalább: min elemekkel.',
     ],
+    'starts_with'          => 'A(z) :attribute a következővel kell kezdődnie: :values.',
     'not_in'               => 'A kiválasztott :attribute étvénytelen.',
     'numeric'              => 'A :attribute csak szám lehet.',
     'present'              => 'A: attribútum mezőnek jelen kell lennie.',
@@ -88,8 +89,17 @@ return array(
     'unique'               => 'A :attribute már foglalt.',
     'uploaded'             => 'A: attribútum nem sikerült feltölteni.',
     'url'                  => 'Az :attribute formátuma érvénytelen.',
-    "unique_undeleted"     => "A(z) :attribute egyedinek kell lennie.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => 'A(z) :attribute egyedinek kell lennie.',
+    'non_circular'         => 'A(z) :attribute nem hozhat létre körkörös hivatkozást.',
+    'disallow_same_pwd_as_user_fields' => 'A jelszó nem lehet azonos a felhasználónévvel.',
+    'letters'              => 'A jelszónak tartalmaznia kell legalább egy betűt.',
+    'numbers'              => 'A jelszónak tartalmaznia kell legalább egy számot.',
+    'case_diff'            => 'A jelszónak tartalmaznia kell kis- és nagybetűket.',
+    'symbols'              => 'A jelszónak tartalmaznia kell legalább egy szimbólumot.',
+    'gte'                  => [
+        'numeric'          => 'Az érték nem lehet negatív'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +111,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +124,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "A: attribútum mező olyan karaktert tartalmaz, amely nem megengedett.",
-        "email_array"      => "Egy vagy több e-mail cím érvénytelen.",
-        "hashed_pass"      => "A jelenlegi jelszava helytelen",
+        'alpha_space' => 'A: attribútum mező olyan karaktert tartalmaz, amely nem megengedett.',
+        'email_array'      => 'Egy vagy több e-mail cím érvénytelen.',
+        'hashed_pass'      => 'A jelenlegi jelszava helytelen',
         'dumbpwd'          => 'Ez a jelszó túl gyakori.',
-        "statuslabel_type" => "Meg kell határoznia egy érvényes állapotcímke típust",
+        'statuslabel_type' => 'Meg kell határoznia egy érvényes állapotcímke típust',
     ],
 
     /*
@@ -135,4 +144,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

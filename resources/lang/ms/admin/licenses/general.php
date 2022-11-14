@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'Mengenai Lesen',
     'about_licenses'                  => 'Lesen digunakan untuk mengesan perisian. Mereka mempunyai bilangan tempat duduk tertentu yang boleh diperiksa kepada individu',
     'checkin'  					=> 'Terima Kekosongan Lesen',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'Lesen Perisian',
     'user'  					=> 'Pengguna',
     'view'  					=> 'Papar Lesen',
-];
+);

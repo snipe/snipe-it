@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'செயலில்',
     'allow'  				=> 'அனுமதி',
     'checkedout'  			=> 'சொத்துக்கள்',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'மின்னஞ்சல்',
     'employee_num'      	=> 'பணியாளர் எண்',
     'first_name' 			=> 'முதல் பெயர்',
-    'groupnotes'			=> 'பயனர் ஒதுக்க ஒரு குழுவை தேர்ந்தெடுத்து, பயனர் அவர்கள் ஒதுக்கப்பட்டுள்ள குழுவின் அனுமதியை எடுத்துக்கொள்வதை நினைவில் கொள்க.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'ஐடி',
     'inherit'  				=> 'மரபுரிமையாக',
     'job' 					=> 'வேலை தலைப்பு',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'தற்போதைய பயனர்களைக் காட்டு',
     'show_deleted'          => 'நீக்கப்பட்ட பயனர்களைக் காண்பி',
     'title' 				=> 'தலைப்பு',
-    'to_restore_them'		=> 'அவற்றை மீட்டெடுக்க',
+	'to_restore_them'		=> 'அவற்றை மீட்டெடுக்க',
     'updateuser' 			=> 'பயனர் புதுப்பிக்கவும்',
     'username' 				=> 'பயனர்பெயர்',
-    'user_deleted_text' 	=> 'இந்த பயனர் நீக்கப்பட்டதாக குறிக்கப்பட்டுள்ளது.',
+	'user_deleted_text' 	=> 'இந்த பயனர் நீக்கப்பட்டதாக குறிக்கப்பட்டுள்ளது.',
     'username_note' 		=> '(இது உள்நுழைவுக்காக அல்ல, செயலில் உள்ள டைரக்டரிக்கு மட்டுமே பயன்படுத்தப்படுகிறது.)',
     'cloneuser'             => 'குளோன் பயனர்',
     'viewusers' 			=> 'பயனர்களைக் காண்க',
-];
+);

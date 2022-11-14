@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about'      	=> 'Amdan Labeli Statws',
     'archived'      	=> 'Archifwyd',
     'create'      	=> 'Creu Label Statws',
@@ -16,4 +16,4 @@ return [
     'title'      	=> 'Labeli Statws',
     'undeployable'  => 'Dim ar gael',
     'update'      	=> 'Diweddaru Label Statws',
-];
+);

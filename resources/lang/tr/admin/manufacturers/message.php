@@ -1,29 +1,29 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Üretici mevcut değil.',
     'assoc_users'	 => 'Üretici en az 1 model ile ilişkili durumda ve silinemez. Lütfen önce modelleri güncelleyerek üreticiyi boşa çıkarın ve tekrar deneyin. ',
 
-    'create' => [
+    'create' => array(
         'error'   => 'Üretici oluşturulamadı, lütfen tekrar deneyin.',
-        'success' => 'Üretici oluşturuldu.',
-    ],
+        'success' => 'Üretici oluşturuldu.'
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Üretici güncellenemedi, lütfen tekrar deneyin',
-        'success' => 'Üretici güncellendi.',
-    ],
+        'success' => 'Üretici güncellendi.'
+    ),
 
-    'restore' => [
+    'restore' => array(
         'error'   => 'Üretici geri yüklenmedi, lütfen tekrar deneyin',
-        'success' => 'Üretici başarıyla geri yüklendi.',
-    ],
+        'success' => 'Üretici başarıyla geri yüklendi.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Üreticiyi silmek istediğinize emin misiniz?',
         'error'   => 'Üretici silinirken bir hata oluştu. Lütfen tekrar deneyin.',
-        'success' => 'Üretici silindi.',
-    ],
+        'success' => 'Üretici silindi.'
+    )
 
-];
+);

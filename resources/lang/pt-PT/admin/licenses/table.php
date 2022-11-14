@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'assigned_to'   	=> 'Atribuído a',
     'checkout'   		=> 'Entrada/Saída',
@@ -14,4 +14,4 @@ return [
     'serial'   			=> 'Nº de Série',
     'title'      		=> 'Licença',
 
-];
+);

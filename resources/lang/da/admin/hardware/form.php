@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Du er i gang med at slette :asset_count aktiver.',
     'bulk_update'		=> 'Masseopdater Aktiver',
     'bulk_update_help'	=> 'Denne form tillader dig at opdatere flere aktiver på en gang. Udfyld kun de felter der skal ændres. Ikke udfyldte feltet forbilver uændret.',
-    'bulk_update_warn'	=> 'Du er i færd med at redigere egenskaber på :asset_count aktiver.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Tjekket Ud Til',
     'checkout_date'		=> 'Tjekket Ud Dato',
     'checkin_date'		=> 'Tjekket Ind Dato',
@@ -40,4 +40,12 @@ return [
     'warranty'			=> 'Garanti',
         'warranty_expires'		=> 'Garantiudløb',
     'years'				=> 'år',
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information'
 ];

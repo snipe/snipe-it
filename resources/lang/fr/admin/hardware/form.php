@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Vous allez supprimer :asset_count objets.',
     'bulk_update'		=> 'Mise à jour en bloc d\'actifs',
     'bulk_update_help'	=> 'Ce formulaire vous permet de mettre à jour plusieurs actifs à la fois. Seulement remplir les champs que vous devez modifier. Tous les champs laissés vides resteront inchangés. ',
-    'bulk_update_warn'	=> 'Vous êtes sur le point de modifier les propriétés de l\'actif :asset_count .',
+    'bulk_update_warn'	=> 'Vous êtes sur le point de modifier les propriétés d\'un seul matériel.|Vous êtes sur le point de modifier les propriétés de :asset_count matériels.',
     'checkedout_to'		=> 'Extrait vers',
     'checkout_date'		=> 'Date d\'attribution',
     'checkin_date'		=> 'Date de dissociation',
@@ -40,4 +40,12 @@ return [
     'warranty'			=> 'Garantie',
         'warranty_expires'		=> 'Expiration de garantie',
     'years'				=> 'années',
+    'asset_location' => 'Mettre à jour l\'emplacement de l\'actif',
+    'asset_location_update_default_current' => 'Mettre à jour l\'emplacement par défaut ET l\'emplacement réel',
+    'asset_location_update_default' => 'Mettre à jour uniquement l\'emplacement par défaut',
+    'asset_not_deployable' => 'L\'actif n\'est pas déployable. L\'actif ne peut pas être affecté.',
+    'asset_deployable' => 'L\'actif est déployable. L\'actif peut être affecté.',
+    'processing_spinner' => 'Traitement en cours...',
+    'optional_infos'  => 'Information facultative',
+    'order_details'   => 'Information liée à l\'achat'
 ];

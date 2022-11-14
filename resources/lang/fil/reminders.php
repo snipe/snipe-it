@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,9 @@ return [
     |
     */
 
-    'password' => 'Dapat na may 6 na mga karakter ang password at tumugma sa kumpirmasyon.',
+    "password" => "Dapat na may 6 na mga karakter ang password at tumugma sa kumpirmasyon.",
+    "user"     => "Ang username o ang email address ay hindi tama",
+    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
+    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
 
-    'user'     => 'Ang username o ang email address ay hindi tama',
-
-    'token'    => 'Hindi balido ang password rest token na ito.',
-
-    'sent' => 'Kapag mayroong nakita na tumugmanang email address, ang paalala sa password ay nai-send na!',
-
-];
+);

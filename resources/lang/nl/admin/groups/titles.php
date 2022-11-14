@@ -10,5 +10,7 @@ return [
     'group_admin' 	 		=> 'Groepsbeheerder',
     'allow' 	 			=> 'Toestaan',
     'deny' 	 				=> 'Weigeren',
-
+    'permission'            => 'Bevoegdheden',
+    'grant'                 => 'Toestaan',
+    'no_permissions'        => 'Deze groep heeft geen rechten.'
 ];

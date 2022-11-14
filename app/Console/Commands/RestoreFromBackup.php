@@ -13,8 +13,8 @@ class RestoreFromBackup extends Command
      * @var string
      */
     protected $signature = 'snipeit:restore 
-                                            {--force : Skip the danger prompt; assuming you hit "y"} 
-                                            {filename : The full path of the .zip file to be migrated}
+                                            {--force : Skip the danger prompt; assuming you enter "y"} 
+                                            {filename : The zip file to be migrated}
                                             {--no-progress : Don\'t show a progress bar}';
 
     /**
@@ -81,6 +81,7 @@ class RestoreFromBackup extends Command
 
             return $this->error('Could not access file: '.$filename.' - '.array_key_exists($errcode, $errors) ? $errors[$errcode] : " Unknown reason: $errcode");
         }
+
 
         $private_dirs = [
             'storage/private_uploads/assets', // these are asset _files_, not the pictures.
@@ -226,6 +227,9 @@ class RestoreFromBackup extends Command
             return $this->error('Unable to invoke mysql via CLI');
         }
 
+        stream_set_blocking($pipes[1], false); // use non-blocking reads for stdout
+        stream_set_blocking($pipes[2], false); // use non-blocking reads for stderr
+
         // $this->info("Stdout says? ".fgets($pipes[1])); //FIXME: I think we might need to set non-blocking mode to use this properly?
         // $this->info("Stderr says? ".fgets($pipes[2])); //FIXME: ditto, same.
         // should we read stdout?
@@ -245,19 +249,28 @@ class RestoreFromBackup extends Command
             return false;
         }
         $bytes_read = 0;
-        while (($buffer = fgets($sql_contents, self::$buffer_size)) !== false) {
-            $bytes_read += strlen($buffer);
-            // \Log::debug("Buffer is: '$buffer'");
-            $bytes_written = fwrite($pipes[0], $buffer);
-            if ($bytes_written === false) {
-                $stdout = fgets($pipes[1]);
-                $this->info($stdout);
-                $stderr = fgets($pipes[2]);
-                $this->info($stderr);
 
-                return false;
+        try {
+            while (($buffer = fgets($sql_contents, self::$buffer_size)) !== false) {
+                $bytes_read += strlen($buffer);
+                // \Log::debug("Buffer is: '$buffer'");
+                    $bytes_written = fwrite($pipes[0], $buffer);
+
+                if ($bytes_written === false) {
+                    throw new Exception("Unable to write to pipe");
+                }
             }
+        } catch (\Exception $e) {
+            \Log::error("Error during restore!!!! ".$e->getMessage());
+            $err_out = fgets($pipes[1]);
+            $err_err = fgets($pipes[2]);
+            \Log::error("Error OUTPUT: ".$err_out);
+            $this->info($err_out);
+            \Log::error("Error ERROR : ".$err_err);
+            $this->error($err_err);
+            throw $e;
         }
+        
         if (!feof($sql_contents) || $bytes_read == 0) {
             return $this->error("Not at end of file for sql file, or zero bytes read. aborting!");
         }

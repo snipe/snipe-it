@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-   Requested Assets
+   {{ trans('general.requested_assets')}}
 @stop
 
 {{-- Account page content --}}
@@ -32,13 +32,13 @@
                 }'>
                         <thead>
                         <tr>
-                            <th class="col-md-1" data-field="image" data-formatter="imageFormatter">Image</th>
-                            <th class="col-md-2" data-field="name">Item Name</th>
-                            <th class="col-md-2" data-field="type">Type</th>
+                            <th class="col-md-1" data-field="image" data-formatter="imageFormatter">{{ trans('general.image') }}</th>
+                            <th class="col-md-2" data-field="name">{{ trans('general.item_name') }}</th>
+                            <th class="col-md-2" data-field="type">{{ trans('general.type') }}</th>
                             <th class="col-md-2" data-field="qty">{{ trans('general.qty') }}</th>
                             <th class="col-md-2" data-field="location">{{ trans('admin/hardware/table.location') }}</th>
                             <th class="col-md-2" data-field="expected_checkin" data-formatter="dateDisplayFormatter"> {{ trans('admin/hardware/form.expected_checkin') }}</th>
-                            <th class="col-md-2" data-field="request_date" data-formatter="dateDisplayFormatter">Requested Date</th>
+                            <th class="col-md-2" data-field="request_date" data-formatter="dateDisplayFormatter"> {{ trans('general.requested_date') }}</th>
                         </tr>
                         </thead>
                     </table>

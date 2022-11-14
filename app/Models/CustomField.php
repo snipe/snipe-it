@@ -63,6 +63,7 @@ class CustomField extends Model
         'field_encrypted',
         'help_text',
         'show_in_email',
+        'is_unique',
     ];
 
     /**
@@ -110,7 +111,7 @@ class CustomField extends Model
 
             // Column already exists on the assets table - nothing to do here.
             // This *shouldn't* happen in the wild.
-            if (Schema::hasColumn(self::$table_name, $custom_field->convertUnicodeDbSlug())) {
+            if (Schema::hasColumn(self::$table_name, $custom_field->db_column)) {
                 return false;
             }
 
@@ -155,7 +156,7 @@ class CustomField extends Model
         // Drop the assets column if we've deleted it from custom fields
         self::deleting(function ($custom_field) {
             return Schema::table(self::$table_name, function ($table) use ($custom_field) {
-                $table->dropColumn($custom_field->convertUnicodeDbSlug());
+                $table->dropColumn($custom_field->db_column);
             });
         });
     }
@@ -337,7 +338,7 @@ class CustomField extends Model
         $id = $this->id ? $this->id : 'xx';
 
         if (! function_exists('transliterator_transliterate')) {
-            $long_slug = '_snipeit_'.str_slug(\Patchwork\Utf8::utf8_encode(trim($name)), '_');
+            $long_slug = '_snipeit_'.str_slug(mb_convert_encoding(trim($name),"UTF-8"), '_');
         } else {
             $long_slug = '_snipeit_'.Utf8Slugger::slugify($name, '_');
         }

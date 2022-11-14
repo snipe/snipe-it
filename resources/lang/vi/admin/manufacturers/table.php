@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_manufacturers_title'    => 'Giới thiệu về nhà sản xuất',
     'about_manufacturers_text'  => 'Các nhà sản xuất là những công ty tạo ra tài sản của bạn. Bạn có thể lưu trữ thông tin liên hệ hỗ trợ quan trọng về họ tại đây, sẽ được hiển thị trên trang chi tiết tài sản của bạn.',
     'asset_manufacturers'	=> 'Hãng sản xuất',
@@ -13,4 +13,4 @@ return [
     'update'				=> 'Cập nhật hãng sản xuất',
     'url'   				=> 'URL',
 
-];
+);

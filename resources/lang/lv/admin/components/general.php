@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'component_name'                  => 'Sastāvdaļas nosaukums',
     'checkin'                             => 'Reģistrēšanās sastāvdaļa',
     'checkout'                             => 'Checkout komponentu',
@@ -12,4 +12,4 @@ return [
     'remaining' 			             => 'Atlikušais',
     'total' 			                 => 'Kopā',
     'update'                            => 'Atjaunināt komponents',
-];
+);

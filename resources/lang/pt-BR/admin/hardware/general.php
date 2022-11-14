@@ -6,17 +6,39 @@ return [
     'archived'  				=> 'Arquivado',
     'asset'  					=> 'Ativo',
     'bulk_checkout'             => 'Alocação de Ativos',
+    'bulk_checkin'              => 'Check-in de Ativo',
     'checkin'  					=> 'Retornar Ativo',
     'checkout'  				=> 'Checkout de Ativo',
     'clone'  					=> 'Clonar Ativo',
     'deployable'  				=> 'Implementável',
-    'deleted'  					=> 'This asset has been deleted.',
+    'deleted'  					=> 'Este modelo foi excluído.',
     'edit'  					=> 'Editar Ativo',
-    'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
+    'model_deleted'  			=> 'Este modelo de Ativos foi excluído. Você deve restaurar o modelo antes de restaurar o Ativo.',
     'requestable'               => 'Solicitável',
     'requested'				    => 'Solicitado',
+    'not_requestable'           => 'Não solicitável',
+    'requestable_status_warning' => 'Não altere o status solicitável',
     'restore'  					=> 'Restaurar Ativo',
     'pending'  					=> 'Pendente',
     'undeployable'  			=> 'Não implementável',
     'view'  					=> 'Ver Ativo',
+    'csv_error' => 'Você tem um erro no seu arquivo CSV:',
+    'import_text' => '
+    <p>
+    Envie um CSV que contém o histórico de ativos. Os ativos e usuários DEVEM já existir no sistema, ou eles serão ignorados. Correspondendo mídias para a importação de histórico acontece com a tag de conteúdo. Tentaremos encontrar um usuário correspondente com base no nome de usuário que você fornece, e nos critérios que você selecionar abaixo. Se você não selecionar nenhum critério abaixo, ele vai simplesmente tentar combinar com o formato de nome de usuário configurado nas configurações de Administrador &gt; Geral.
+    </p>
+
+    <p>Campos incluídos no CSV devem corresponder os cabeçalhos: <strong>Marcador de Ativo, Nome, data de check-out, data</strong>. check-in. Quaisquer campos adicionais serão ignorados. </p>
+
+    <p>Data de Checkin: em branco ou em datas futuras de check-in fará check-in dos itens para o usuário associado. Excluindo a coluna Data de check-in criará uma data de check-in com a data de hoje.</p>
+    ',
+    'csv_import_match_f-l' => 'Tente corresponder aos usuários pelo formato firstname.lastname (jane.smith)',
+    'csv_import_match_initial_last' => 'Tente combinar os usuários pelo primeiro formato de sobrenome (jsmith)',
+    'csv_import_match_first' => 'Tente combinar os usuários pelo formato do primeiro nome (jane)',
+    'csv_import_match_email' => 'Tentar corresponder aos usuários por e-mail como nome de usuário',
+    'csv_import_match_username' => 'Tente corresponder aos usuários pelo nome de usuário',
+    'error_messages' => 'Mensagens de erro:',
+    'success_messages' => 'Mensagens de sucesso:',
+    'alert_details' => 'Por favor, veja abaixo para detalhes.',
+    'custom_export' => 'Exportação Personalizada'
 ];

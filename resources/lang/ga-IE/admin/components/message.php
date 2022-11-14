@@ -1,35 +1,36 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Níl an comhpháirt ann.',
 
-    'create' => [
+    'create' => array(
         'error'   => 'Níor cruthaíodh an comhpháirt, déan iarracht arís.',
-        'success' => 'Comhpháirt cruthaithe go rathúil.',
-    ],
+        'success' => 'Comhpháirt cruthaithe go rathúil.'
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Níor nuashonraíodh an comhpháirt, déan iarracht arís',
-        'success' => 'Comhpháirt nuashonraithe go rathúil.',
-    ],
+        'success' => 'Comhpháirt nuashonraithe go rathúil.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'An bhfuil tú cinnte gur mian leat an comhábhar seo a scriosadh?',
         'error'   => 'Bhí ceist ann a scriosadh an chomhpháirt. Arís, le d\'thoil.',
-        'success' => 'Scriosadh an comhpháirt go rathúil.',
-    ],
+        'success' => 'Scriosadh an comhpháirt go rathúil.'
+    ),
 
-     'checkout' => [
+     'checkout' => array(
         'error'   		=> 'Níor sheiceáil amach an comhpháirt, déan iarracht arís',
         'success' 		=> 'Seiceáil amach an comhpháirt go rathúil.',
-        'user_does_not_exist' => 'Tá an úsáideoir neamhbhailí. Arís, le d\'thoil.',
-    ],
+        'user_does_not_exist' => 'Tá an úsáideoir neamhbhailí. Arís, le d\'thoil.'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   		=> 'Níor sheiceáil an comhpháirt isteach, déan iarracht arís',
         'success' 		=> 'Seiceáil ar an gcomhpháirt go rathúil.',
-        'user_does_not_exist' => 'Tá an úsáideoir neamhbhailí. Arís, le d\'thoil.',
-    ],
+        'user_does_not_exist' => 'Tá an úsáideoir neamhbhailí. Arís, le d\'thoil.'
+    )
 
-];
+
+);

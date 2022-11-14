@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => ':attribute 最少要有 :min 個字元',
         'array'   => ':attribute 最少要有 :min 個項目',
     ],
+    'starts_with'          => ':attribute 必須以下列之一做為開頭: :values.',
     'not_in'               => '選擇的 :attribute 無效',
     'numeric'              => ':attribute 必須是數字',
     'present'              => '：屬性字段必須存在。',
@@ -88,8 +89,17 @@ return array(
     'unique'               => ':attribute 已被採用',
     'uploaded'             => ':attribute 上傳失敗',
     'url'                  => ':attribute 格式不正確',
-    "unique_undeleted"     => ":attribute 必須是唯一值",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => ':attribute 必須是唯一值',
+    'non_circular'         => ':attribule 屬性不能建立一個循環參考',
+    'disallow_same_pwd_as_user_fields' => '密碼不可以和使用者名稱相同',
+    'letters'              => '密碼至少必須包含 1 個字母。',
+    'numbers'              => '密碼至少必須包含 1 個數字。',
+    'case_diff'            => '密碼必須使用大小寫混合',
+    'symbols'              => '密碼必須包含符號',
+    'gte'                  => [
+        'numeric'          => '值不能為負'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +111,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +124,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => ":attribute 含有無效字元",
-        "email_array"      => "一個或多個郵件地址不正確",
-        "hashed_pass"      => "當前密碼不正確！",
+        'alpha_space' => ':attribute 含有無效字元',
+        'email_array'      => '一個或多個郵件地址不正確',
+        'hashed_pass'      => '當前密碼不正確！',
         'dumbpwd'          => '該密碼太常見。',
-        "statuslabel_type" => "您必須選擇一個有效的狀態標籤",
+        'statuslabel_type' => '您必須選擇一個有效的狀態標籤',
     ],
 
     /*
@@ -135,4 +144,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => ': பண்புக்கூறு குறைந்தது: குறைந்த எழுத்துகள்.',
         'array'   => ': பண்புக்கூறு குறைந்தபட்சம்: நிமிடம் உருப்படிகள் வேண்டும்.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'தேர்ந்தெடுக்கப்பட்ட: பண்பு தவறானது.',
     'numeric'              => 'பண்புக்கூறு: ஒரு எண் இருக்க வேண்டும்.',
     'present'              => ': பண்புக்கூறு களஞ்சியம் இருக்க வேண்டும்.',
@@ -88,8 +89,17 @@ return array(
     'unique'               => ': பண்பு ஏற்கனவே ஏற்கப்பட்டுள்ளது.',
     'uploaded'             => ': பண்புக்கூறு பதிவேற்றத் தவறியது.',
     'url'                  => 'பண்புக்கூறு வடிவமைப்பு தவறானது.',
-    "unique_undeleted"     => "The :attribute must be unique.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => 'The :attribute must be unique.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +111,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +124,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "பண்புக்கூறு துறையில் அனுமதிக்கப்படாத ஒரு பாத்திரம் உள்ளது.",
-        "email_array"      => "ஒன்று அல்லது அதற்கு மேற்பட்ட மின்னஞ்சல் முகவரிகள் தவறானவை.",
-        "hashed_pass"      => "உங்கள் தற்போதைய கடவுச்சொல் தவறானது",
+        'alpha_space' => 'பண்புக்கூறு துறையில் அனுமதிக்கப்படாத ஒரு பாத்திரம் உள்ளது.',
+        'email_array'      => 'ஒன்று அல்லது அதற்கு மேற்பட்ட மின்னஞ்சல் முகவரிகள் தவறானவை.',
+        'hashed_pass'      => 'உங்கள் தற்போதைய கடவுச்சொல் தவறானது',
         'dumbpwd'          => 'அந்த கடவுச்சொல் மிகவும் பொதுவானது.',
-        "statuslabel_type" => "செல்லுபடியாகும் நிலை லேபிள் வகை தேர்ந்தெடுக்க வேண்டும்",
+        'statuslabel_type' => 'செல்லுபடியாகும் நிலை லேபிள் வகை தேர்ந்தெடுக்க வேண்டும்',
     ],
 
     /*
@@ -135,4 +144,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

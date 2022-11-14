@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => ':attribute 는 최소 :min 자 이어야 합니다.',
         'array'   => ':attribute는 최소 :min 항목이어야 합니다.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => '선택한 :attribute 가 부정확 합니다.',
     'numeric'              => ':attribute 는 숫자만 가능합니다.',
     'present'              => ':attribute 항목이 있어야 합니다.',
@@ -88,8 +89,17 @@ return array(
     'unique'               => ':attribute 는 이미 획득하였습니다.',
     'uploaded'             => ':attribute는 업로드 하지 못했습니다.',
     'url'                  => ':attribute 형식이 부정확 합니다.',
-    "unique_undeleted"     => ":attribute 는 고유의 값만 가져야 합니다.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => ':attribute 는 고유의 값만 가져야 합니다.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +111,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +124,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => ":attribute 항목에는 문자를 입력할 수 없습니다.",
-        "email_array"      => "하나 이상의 이메일 주소가 유효하지 않습니다.",
-        "hashed_pass"      => "현재 비밀번호가 잘못되었습니다.",
+        'alpha_space' => ':attribute 항목에는 문자를 입력할 수 없습니다.',
+        'email_array'      => '하나 이상의 이메일 주소가 유효하지 않습니다.',
+        'hashed_pass'      => '현재 비밀번호가 잘못되었습니다.',
         'dumbpwd'          => '그 비밀번호는 너무 일반적입니다.',
-        "statuslabel_type" => "유효한 상태 라벨 형식을 선택해 주셔야 합니다",
+        'statuslabel_type' => '유효한 상태 라벨 형식을 선택해 주셔야 합니다',
     ],
 
     /*
@@ -135,4 +144,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

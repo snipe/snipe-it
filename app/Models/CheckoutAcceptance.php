@@ -5,15 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
 
 class CheckoutAcceptance extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, Notifiable;
 
     protected $casts = [
         'accepted_at' => 'datetime',
         'declined_at' => 'datetime',
     ];
+
+    // Get the mail recipient from the config
+    public function routeNotificationForMail(): string
+    {
+        // At this point the endpoint is the same for everything.
+        //  In the future this may want to be adapted for individual notifications.
+        return config('mail.reply_to.address');
+    }
 
     /**
      * The resource that was is out
@@ -57,20 +66,24 @@ class CheckoutAcceptance extends Model
     }
 
     /**
-     * Accept the checkout acceptance
+     * Add a record to the checkout_acceptance table ONLY.
+     * Do not add stuff here that doesn't have a corresponding column in the
+     * checkout_acceptances table or you'll get an error.
      *
      * @param  string $signature_filename
      */
-    public function accept($signature_filename)
+    public function accept($signature_filename, $eula = null, $filename = null)
     {
         $this->accepted_at = now();
         $this->signature_filename = $signature_filename;
+        $this->stored_eula = $eula;
+        $this->stored_eula_file = $filename;
         $this->save();
 
         /**
          * Update state for the checked out item
          */
-        $this->checkoutable->acceptedCheckout($this->assignedTo, $signature_filename);
+        $this->checkoutable->acceptedCheckout($this->assignedTo, $signature_filename, $filename);
     }
 
     /**

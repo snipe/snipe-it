@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about'      	=> 'Acerca de las Etiquetas de Estado',
     'archived'      	=> 'Archivado',
     'create'      	=> 'Crear Etiqueta de Estado',
@@ -16,4 +16,4 @@ return [
     'title'      	=> 'Etiquetas de Estado',
     'undeployable'  => 'No desplegable',
     'update'      	=> 'Actualizar Etiqueta de Estado',
-];
+);

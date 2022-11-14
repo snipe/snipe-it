@@ -9,6 +9,7 @@ use App\Models\Company;
 use App\Models\Consumable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * This controller handles all actions related to Consumables for
@@ -78,6 +79,8 @@ class ConsumablesController extends Controller
         $consumable->purchase_cost          = Helper::ParseCurrency($request->input('purchase_cost'));
         $consumable->qty                    = $request->input('qty');
         $consumable->user_id                = Auth::id();
+        $consumable->notes                  = $request->input('notes');
+
 
         $consumable = $request->handleImages($consumable);
 
@@ -126,6 +129,17 @@ class ConsumablesController extends Controller
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
         }
 
+        $min = $consumable->numCheckedOut();
+        $validator = Validator::make($request->all(), [
+            "qty" => "required|numeric|min:$min"
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $this->authorize($consumable);
 
         $consumable->name                   = $request->input('name');
@@ -140,6 +154,7 @@ class ConsumablesController extends Controller
         $consumable->purchase_date          = $request->input('purchase_date');
         $consumable->purchase_cost          = Helper::ParseCurrency($request->input('purchase_cost'));
         $consumable->qty                    = Helper::ParseFloat($request->input('qty'));
+        $consumable->notes                  = $request->input('notes');
 
         $consumable = $request->handleImages($consumable);
 

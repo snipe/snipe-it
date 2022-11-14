@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'accessory_category' 				=> 'Categorie Accesorii',
     'accessory_name'  					=> 'Nume Accesoriu',
     'checkout'  							=> 'Predare accesoriu',
@@ -17,4 +17,4 @@ return [
     'use_default_eula'					=> 'Foloseste <a href="#" data-toggle="modal" data-target="#eulaModal">EULA general implicita</a> in loc.',
     'use_default_eula_disabled'			=> '<del>Foloseste EULA general implicita.</del> EULA implicita nu a fost gasita. A se crea una in Setari.',
 
-];
+);

@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
                         If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Asset does not exist.',
-    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
 
     'create' => [
@@ -17,6 +17,7 @@ return [
         'error'   			=> 'Asset was not updated, please try again',
         'success' 			=> 'Asset updated successfully.',
         'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [
@@ -28,6 +29,7 @@ return [
         'error'   		=> 'Asset audit was unsuccessful. Please try again.',
         'success' 		=> 'Asset audit successfully logged.',
     ],
+
 
     'deletefile' => [
         'error'   => 'File not deleted. Please try again.',
@@ -48,6 +50,7 @@ return [
         'file_delete_success'   => 'Your file has been been successfully deleted',
         'file_delete_error'      => 'The file was unable to be deleted',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Are you sure you wish to delete this asset?',
