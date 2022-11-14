@@ -240,7 +240,7 @@ return [
     'signed_off_by'         => 'Unterschrieben von',
     'skin'       			=> 'Skin',
     'slack_msg_note'        => 'Eine Slack Nachricht wird gesendet',
-    'slack_test_msg'        => 'Oh hai! Sieht so aus, als ob deine Slack Integration mit Snipe-IT funktioniert!',
+    'slack_test_msg'        => 'Oh hai! Sieht so aus, als ob ihre Slack Integration mit Snipe-IT funktioniert!',
     'some_features_disabled' => 'Einige Funktionen sind für den DEMO-Modus deaktiviert.',
     'site_name'				=> 'Seitenname',
     'state'  				=> 'Bundesland',
@@ -249,7 +249,7 @@ return [
     'accept_eula'           => 'Annahmeerklärung',
     'supplier'              => 'Lieferant',
     'suppliers'  			=> 'Lieferanten',
-    'sure_to_delete'    => 'Sind Sie sich sicher, dass Sie löschen möchten',
+    'sure_to_delete'    => 'Sind Sie sich sicher, dass Sie folgendes löschen möchten',
     'submit'				=> 'Abschicken',
     'target'                => 'Ziel',
     'toggle_navigation'     => 'Navigation umschalten',
@@ -331,7 +331,7 @@ return [
     'sync_results'          => 'Status der Synchronisierung',
     'license_serial'        => 'Seriennummer/Produktschlüssel',
     'invalid_category'      => 'Ungültige Kategorie',
-    'dashboard_info'        => 'Dies ist Ihr Dashboard. Es gibt viele ähnlich, aber dieses ist Ihnen.',
+    'dashboard_info'        => 'Dies ist Ihr Dashboard. Es gibt viele ähnliche, aber dieses ist Ihnen.',
     '60_percent_warning'    => '60% abgeschlossen (Warnung)',
     'dashboard_empty'       => 'Es sieht so aus, als hätten Sie noch nichts hinzugefügt, so dass wir nichts großartiges zum Anzeigen haben. Beginnen Sie jetzt mit dem Hinzufügen einiger Gegenstände, Zubehör, Verbrauchsmaterialien oder Lizenzen!',
     'new_asset'             => 'Neues Asset',
@@ -367,7 +367,7 @@ return [
     'purge_not_allowed'     => 'Löschen von "gelöschten Daten" wurde in der .env-Datei verboten. Kontaktieren Sie den Support oder Ihren Systemadministrator.',
     'backup_delete_not_allowed'     => 'Das Löschen von Sicherungen wurde in der .env-Datei verboten. Kontaktieren Sie den Support oder Ihren Systemadministrator.',
     'additional_files'           => 'Zusätzliche Dateien',
-    'shitty_browser'        => 'Keine Signatur erkannt. Wenn Sie einen älteren Browser einsetzten, verwenden Sie bitte einen moderneren Browser, um den Erhalt zu bestätigen.',
+    'shitty_browser'        => 'Keine Signatur erkannt. Wenn Sie einen älteren Browser einsetzen, verwenden Sie bitte einen moderneren Browser, um den Erhalt zu bestätigen.',
     'bulk_soft_delete'      =>'Die Benutzer auch "soft-löschen". Die Historie der Gegenstände bleibt erhalten, solange die markierten Datensätze nicht in den Admin-Einstellungen endgültig gelöscht werden.',
     'bulk_checkin_delete_success' => 'Die ausgewählten Benutzer wurden gelöscht und ihre Gegenstände wurden eingecheckt.',
     'bulk_checkin_success' => 'Die Gegenstände für die ausgewählten Benutzer wurden eingecheckt.',
@@ -377,11 +377,11 @@ return [
     'assets_by_status_type'      => 'Assets sortiert nach Statustyp',
     'pie_chart_type'        => 'Dashboard Kreisdiagramm Typ',
     'hello_name'            => 'Hallo, :name!',
-    'unaccepted_profile_warning'   => 'Du hast :count Gegenstände, die akzeptiert werden müssen. Klicke hier, um sie anzunehmen oder abzulehnen',
-    'start_date'            => 'Start Date',
-    'end_date'            => 'End Date',
-    'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
-    'placeholder_kit'       => 'Select a kit'
+    'unaccepted_profile_warning'   => 'Sie haben :count Gegenstände, die akzeptiert werden müssen. Klicken Sie hier, um sie anzunehmen oder abzulehnen',
+    'start_date'            => 'Anfangsdatum',
+    'end_date'            => 'Enddatum',
+    'alt_uploaded_image_thumbnail' => 'Thumbnail hochgeladen',
+    'placeholder_kit'       => 'Kit auswählen'
 
 
 
