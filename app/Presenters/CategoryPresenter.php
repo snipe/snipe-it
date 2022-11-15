@@ -83,14 +83,6 @@ class CategoryPresenter extends Presenter
                 'visible' => true,
                 "formatter" => 'trueFalseFormatter',
             ],[
-                "field" => "checkin_email",
-                "searchable" => false,
-                "sortable" => true,
-                "class" => 'css-envelope',
-                "title" => 'Send Email',
-                "visible" => true,
-                "formatter" => 'trueFalseFormatter',
-            ],[
                 "field" => "require_acceptance",
                 "searchable" => false,
                 "sortable" => true,
