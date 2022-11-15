@@ -131,7 +131,7 @@ class AssetsTransformer
                 $array['custom_fields'] = $fields_array;
             }
         } else {
-            $array['custom_fields'] = new stdClass; // HACK to force generation of empty object instead of empty list
+            $array['custom_fields'] = new \stdClass; // HACK to force generation of empty object instead of empty list
         }
 
         $permissions_array['available_actions'] = [
