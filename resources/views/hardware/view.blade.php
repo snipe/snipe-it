@@ -1301,8 +1301,8 @@
                                                         <del>{{ $file->filename }}</del>
                                                     @endif
                                                 </td>
-                                                <td data-value="{{ (Storage::exists('private_uploads/assetmodels/'.$file->filename) ? Storage::size('private_uploads/assetmodels/'.$file->filename) : '') }}">
-                                                    {{ Helper::formatFilesizeUnits(@Storage::size('private_uploads/assetmodels/'.$file->filename)) }}
+                                                <td data-value="{{ (Storage::exists('private_uploads/assetmodels/'.$file->filename)) ? Storage::size('private_uploads/assetmodels/'.$file->filename) : '' }}">
+                                                    {{ (Storage::exists('private_uploads/assetmodels/'.$file->filename)) ? Helper::formatFilesizeUnits(Storage::size('private_uploads/assetmodels/'.$file->filename)) : '' }}
                                                 </td>
                                                 <td>
                                                     @if ($file->note)

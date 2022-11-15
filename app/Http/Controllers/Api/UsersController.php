@@ -15,6 +15,7 @@ use App\Models\Asset;
 use App\Models\Company;
 use App\Models\License;
 use App\Models\User;
+use App\Notifications\CurrentInventory;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
@@ -490,6 +491,37 @@ class UsersController extends Controller
         return (new AssetsTransformer)->transformAssets($assets, $assets->count(), $request);
     }
 
+    /**
+     * Notify a specific user via email with all of his assigned assets.
+     *
+     * @author [Lukas Fehling] [<lukas.fehling@adabay.rocks>]
+     * @since [v6.0.13]
+     * @param Request $request
+     * @param $id
+     * @return string JSON
+     */
+    public function emailAssetList(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        if (empty($user->email)) {
+            return response()->json(
+                [
+                    'status' => 'error',
+                    'message' => 'This user has no email set.',
+                    'payload' => null,
+                ], 404);
+        }
+
+        $user->notify((new CurrentInventory($user)));
+
+        return response()->json(
+            [
+                'status' => 'success',
+                'message' => 'The user was notified about his current inventory.',
+                'payload' => null,
+            ], 200);
+    }
 
     /**
      * Return JSON containing a list of consumables assigned to a user.
