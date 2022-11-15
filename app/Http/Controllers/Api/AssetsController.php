@@ -371,12 +371,26 @@ class AssetsController extends Controller
      */
     public function showByTag(Request $request, $tag)
     {
-        if ($asset = Asset::with('assetstatus')->with('assignedTo')->where('asset_tag', $tag)->first()) {
-            $this->authorize('view', $asset);
-
-            return (new AssetsTransformer)->transformAsset($asset, $request);
+        $this->authorize('index', Asset::class);
+        if ($assets = Asset::with('assetstatus')->with('assignedTo')
+            ->withTrashed()->where('asset_tag', $tag)->get()) {
+            return (new AssetsTransformer)->transformAssets($assets, $assets->count());
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 200);
+
+        $assets = Asset::with('assetstatus')->with('assignedTo');
+
+        if ($request->input('deleted', 'false') === 'true') {
+            $assets = $assets->withTrashed();
+        }
+
+        $assets = $assets->where('asset_tag', $tag)->get();
+
+        if ($assets) {
+            return (new AssetsTransformer)->transformAssets($assets, $assets->count());
+        } else {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 200);
+        }
 
     }
 
@@ -401,7 +415,7 @@ class AssetsController extends Controller
 
         if ($request->input('deleted', 'false') === 'true') {
             $assets = $assets->withTrashed();
-    }
+        }
 
         $assets = $assets->where('serial', $serial)->get();
         if ($assets) {
