@@ -120,7 +120,6 @@ class AssetsController extends Controller
 
         if ($filter_non_deprecable_assets) {
             $non_deprecable_models = AssetModel::select('id')->whereNotNull('depreciation_id')->get();
-
             $assets->InModelList($non_deprecable_models->toArray());
         }
 
@@ -139,6 +138,14 @@ class AssetsController extends Controller
 
         if ($request->filled('status_id')) {
             $assets->where('assets.status_id', '=', $request->input('status_id'));
+        }
+
+        if ($request->filled('asset_tag')) {
+            $assets->where('assets.asset_tag', '=', $request->input('asset_tag'));
+        }
+
+        if ($request->filled('serial')) {
+            $assets->where('assets.serial', '=', $request->input('serial'));
         }
 
         if ($request->input('requestable') == 'true') {
