@@ -380,7 +380,7 @@
                           <div class="form-group">
                               <div class="col-md-7 col-md-offset-3">
                                   <label for="should_autoassign">
-                                      <input type="checkbox" value="1" name="should_autoassign" class="minimal" {{ (old('should_autoassign', $user->should_autoassign)) }} aria-label="should_autoassign">
+                                      <input type="checkbox" value="1" name="should_autoassign" class="minimal" {{ (old('should_autoassign', $user->should_autoassign)) == '1' ? ' checked="checked"' : '' }} aria-label="should_autoassign">
                                       {{ trans('admin/users/general.auto_assign_label') }}
 
                                   </label>
