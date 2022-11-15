@@ -976,6 +976,13 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             ]
             )->name('api.users.assetlist');
 
+            Route::post('{user}/email',
+                [
+                    Api\UsersController::class,
+                    'emailAssetList'
+                ]
+            )->name('api.users.email_assets');
+
             Route::get('{user}/accessories',
             [
                 Api\UsersController::class, 
