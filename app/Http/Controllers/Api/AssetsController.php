@@ -365,7 +365,6 @@ class AssetsController extends Controller
      * Returns JSON with information about an asset (by tag) for detail view.
      *
      * @param string $tag
-     * @param string $deleted
      * @since [v4.2.1]
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @return \Illuminate\Http\JsonResponse
@@ -395,9 +394,8 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param string $serial
-     * @param string $deleted
      * @since [v4.2.1]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function showBySerial(Request $request, $serial)
     {
