@@ -31,7 +31,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use phpDocumentor\Reflection\Types\Compound;
 
-class AcceptanceController extends Controller
+class  AcceptanceController extends Controller
 {
     /**
      * Show a listing of pending checkout acceptances for the current user
@@ -167,7 +167,8 @@ class AcceptanceController extends Controller
                         $pdf_view_route ='account.accept.accept-accessory-eula';
                         $accessory = Accessory::find($item->id);
                         $display_model = $accessory->name;
-                        $assigned_to = User::find($item->assignedTo);
+                        $assigned_to = User::find($item->user_id);
+
                 break;
 
                 case 'App\Models\LicenseSeat':
@@ -238,6 +239,7 @@ class AcceptanceController extends Controller
             }
 
             $acceptance->accept($sig_filename, $item->getEula(), $pdf_filename);
+//            dd($data);
             $acceptance->notify(new AcceptanceAssetAcceptedNotification($data));
             event(new CheckoutAccepted($acceptance));
 
@@ -254,7 +256,7 @@ class AcceptanceController extends Controller
                     break;
 
                 case 'App\Models\Accessory':
-                    $assigned_to = User::find($item->assignedTo);
+                    $assigned_to = User::find($item->user_id);
                     break;
 
                 case 'App\Models\LicenseSeat':
