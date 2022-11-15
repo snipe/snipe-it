@@ -376,6 +376,19 @@
                               </div>
                           </div>
 
+                          <!-- Auto Assign checkbox -->
+                          <div class="form-group">
+                              <div class="col-md-7 col-md-offset-3">
+                                  <label for="should_autoassign">
+                                      <input type="checkbox" value="0" name="should_autoassign" class="minimal" {{ (old('remote', $user->should_autoassign)) }} aria-label="should_autoassign">
+                                      {{ trans('admin/users/general.auto_assign_label') }}
+
+                                  </label>
+                                  <p class="help-block">{{ trans('admin/users/general.auto_assign_help') }}
+                                  </p>
+                              </div>
+                          </div>
+
                           <!-- Location -->
                           @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
 
