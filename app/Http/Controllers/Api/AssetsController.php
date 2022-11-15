@@ -364,32 +364,28 @@ class AssetsController extends Controller
     /**
      * Returns JSON with information about an asset (by tag) for detail view.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param string $tag
+     * @param string $deleted
      * @since [v4.2.1]
-     * @return JsonResponse
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @return \Illuminate\Http\JsonResponse
      */
     public function showByTag(Request $request, $tag)
     {
         $this->authorize('index', Asset::class);
-        if ($assets = Asset::with('assetstatus')->with('assignedTo')
-            ->withTrashed()->where('asset_tag', $tag)->get()) {
-            return (new AssetsTransformer)->transformAssets($assets, $assets->count());
-        }
-        return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 200);
+        $assets = Asset::where('asset_tag', $tag)->with('assetstatus')->with('assignedTo');
 
-        $assets = Asset::with('assetstatus')->with('assignedTo');
-
-        if ($request->input('deleted', 'false') === 'true') {
+        // Check if they've passed ?deleted=true
+        if ($request->input('deleted', 'false') == 'true') {
             $assets = $assets->withTrashed();
         }
 
-        $assets = $assets->where('asset_tag', $tag)->get();
+        $assets = $assets->get();
 
-        if ($assets) {
+        if (($assets) && ($assets->count() > 0)) {
             return (new AssetsTransformer)->transformAssets($assets, $assets->count());
         } else {
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 200);
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
         }
 
     }
@@ -399,29 +395,26 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param string $serial
+     * @param string $deleted
      * @since [v4.2.1]
      * @return JsonResponse
      */
     public function showBySerial(Request $request, $serial)
     {
         $this->authorize('index', Asset::class);
-        if ($assets = Asset::with('assetstatus')->with('assignedTo')
-            ->withTrashed()->where('serial', $serial)->get()) {
-                return (new AssetsTransformer)->transformAssets($assets, $assets->count());
-        }
-        return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 200);
+        $assets = Asset::where('serial', $serial)->with('assetstatus')->with('assignedTo');
 
-        $assets = Asset::with('assetstatus')->with('assignedTo');
-
-        if ($request->input('deleted', 'false') === 'true') {
+        // Check if they've passed ?deleted=true
+        if ($request->input('deleted', 'false') == 'true') {
             $assets = $assets->withTrashed();
         }
 
-        $assets = $assets->where('serial', $serial)->get();
-        if ($assets) {
+        $assets = $assets->get();
+
+        if (($assets) && ($assets->count() > 0)) {
             return (new AssetsTransformer)->transformAssets($assets, $assets->count());
         } else {
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 200);
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
         }
     }
 
