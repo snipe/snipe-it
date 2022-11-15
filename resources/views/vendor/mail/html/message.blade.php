@@ -7,7 +7,7 @@
 
 @if (isset($snipeSettings) && ($snipeSettings::setupCompleted()))
 
-    @if ($snipeSettings->show_url_in_email=='1' )
+    @if ($snipeSettings->show_url_in_emails=='1' )
         @component('mail::header', ['url' => config('app.url')])
     @else
         @component('mail::header', ['url' => ''])
