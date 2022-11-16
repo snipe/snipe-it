@@ -42,12 +42,16 @@ class ViewAssetsController extends Controller
 
         // Loop through all the custom fields that are applied to any model the user has assigned
         foreach ($user->assets as $asset) {
+
+            // Make sure the model has a custom fieldset before trying to loop through the associated fields
             if ($asset->model->fieldset) {
+
                 foreach ($asset->model->fieldset->fields as $field) {
                     // check and make sure they're allowed to see the value of the custom field
                     if ($field->display_in_user_view == '1') {
                         $field_array[$field->db_column] = $field->name;
                     }
+                    
                 }
             }
 
