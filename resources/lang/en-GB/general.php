@@ -37,7 +37,7 @@ return [
     'bulk_edit'             => 'Bulk Edit',
     'bulk_delete'           => 'Bulk Delete',
     'bulk_actions'          => 'Bulk Actions',
-    'bulk_checkin_delete'   => 'Bulk Checkin Items from Users',
+    'bulk_checkin_delete'   => 'Bulk Checkin &amp; Delete',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'Cancel',
     'categories'			=> 'Categories',
@@ -101,8 +101,6 @@ return [
     'employee_number'       => 'Employee Number',
     'email_domain_help'		=> 'This is used to generate email addresses when importing',
     'error'				    => 'Error',
-    'exclude_archived'      => 'Exclude Archived Assets',
-    'exclude_deleted'       => 'Exclude Deleted Assets',
     'example'				=> 'Example: ',
     'filastname_format'			=> 'First Initial Last Name (jsmith@example.com)',
     'firstname_lastname_format'	=> 'First Name Last Name (jane.smith@example.com)',
@@ -133,7 +131,6 @@ return [
     'id'  					=> 'ID',
     'image'                 => 'Image',
     'image_delete'         	=> 'Delete Image',
-    'include_deleted'       => 'Include Deleted Assets',
     'image_upload'         	=> 'Upload Image',
     'filetypes_accepted_help'    => 'Accepted filetype is :types. Max upload size allowed is :size.|Accepted filetypes are :types. Max upload size allowed is :size.',
     'filetypes_size_help'   => 'Max upload size allowed is :size.',
@@ -187,7 +184,6 @@ return [
     'no'  					=> 'No',
     'notes'  				=> 'Notes',
     'order_number'          => 'Order Number',
-    'only_deleted'          => 'Only Deleted Assets',
     'page_menu'				=> 'Showing _MENU_ items',
     'pagination_info'		=> 'Showing _START_ to _END_ of _TOTAL_ items',
     'pending'				=> 'Pending',
@@ -368,21 +364,7 @@ return [
     'backup_delete_not_allowed'     => 'Deleting backups has been disabled in the .env file. Contact support or your systems administrator.',
     'additional_files'           => 'Additional Files',
     'shitty_browser'        => 'No signature detected. If you are using an older browser, please use a more modern browser to complete your asset acceptance.',
-    'bulk_soft_delete'      =>'Also soft-delete these users. Their asset history will remain intact unless/until you purge deleted records in the Admin Settings.',
-    'bulk_checkin_delete_success' => 'Your selected users have been deleted and their items have been checked in.',
-    'bulk_checkin_success' => 'The items for the selected users have been checked in.',
-    'set_to_null' => 'Delete values for this asset|Delete values for all :asset_count assets ',
-    'na_no_purchase_date'   => 'N/A - No purchase date provided',
-    'assets_by_status'      => 'Assets by Status',
-    'assets_by_status_type'      => 'Assets by Status Type',
-    'pie_chart_type'        => 'Dashboard Pie Chart Type',
-    'hello_name'            => 'Hello, :name!',
-    'unaccepted_profile_warning'   => 'You have :count items requiring acceptance. Click here to accept or decline them',
-    'start_date'            => 'Start Date',
-    'end_date'            => 'End Date',
-    'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
-    'placeholder_kit'       => 'Select a kit'
-
-
+    'total'                 => 'Total Items',
 
 ];
+

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Helpers\Helper;
 use App\Models\Traits\Acceptable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
@@ -10,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
-
+use Illuminate\Support\Facades\Log;
 class Consumable extends SnipeModel
 {
     use HasFactory;
@@ -41,6 +40,7 @@ class Consumable extends SnipeModel
         'company_id'  => 'integer|nullable',
         'min_amt'     => 'integer|min:0|nullable',
         'purchase_cost'   => 'numeric|nullable|gte:0',
+        'total'       => 'integer|min:1',
     ];
 
     /**
@@ -95,24 +95,6 @@ class Consumable extends SnipeModel
         'location'     => ['name'],
         'manufacturer' => ['name'],
     ];
-
-
-    /**
-     * Establishes the components -> action logs -> uploads relationship
-     *
-     * @author A. Gianotto <snipe@snipe.net>
-     * @since [v6.1.13]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
-     */
-    public function uploads()
-    {
-        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')
-            ->where('item_type', '=', self::class)
-            ->where('action_type', '=', 'uploaded')
-            ->whereNotNull('filename')
-            ->orderBy('created_at', 'desc');
-    }
-
 
     /**
      * Sets the attribute of whether or not the consumable is requestable
@@ -245,7 +227,7 @@ class Consumable extends SnipeModel
      */
     public function users()
     {
-        return $this->belongsToMany(\App\Models\User::class, 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('user_id')->withTrashed()->withTimestamps();
+        return $this->belongsToMany(\App\Models\User::class, 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('id', 'checkout_qty','checkout_note')->withTrashed()->withTimestamps();
     }
 
 
@@ -284,10 +266,12 @@ class Consumable extends SnipeModel
      */
     public function getEula()
     {
+        $Parsedown = new \Parsedown();
+
         if ($this->category->eula_text) {
-            return  Helper::parseEscapedMarkedown($this->category->eula_text);
+            return $Parsedown->text(e($this->category->eula_text));
         } elseif ((Setting::getSettings()->default_eula_text) && ($this->category->use_default_eula == '1')) {
-            return  Helper::parseEscapedMarkedown(Setting::getSettings()->default_eula_text);
+            return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
         } else {
             return null;
         }
@@ -317,11 +301,79 @@ class Consumable extends SnipeModel
      */
     public function numRemaining()
     {
-        $checkedout = $this->users->count();
+        $checkedouttotal = $this->numConsumed();   
         $total = $this->qty;
-        $remaining = $total - $checkedout;
+        $remaining = $total - $checkedouttotal;
 
         return $remaining;
+    }
+
+    
+    /**
+     * Gets the number of consumed consumables
+     *
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @since [v.6]
+     * @return int
+     */
+    public function numConsumed()
+    {
+        $checkedouttotal = null;        
+        foreach($this->users as $data){
+                $checkout_qty = $data['pivot']['checkout_qty'];
+                $checkedouttotal += $checkout_qty;            
+        }        
+        
+        return $checkedouttotal;
+    }
+
+
+    /**
+     * Gets the number of last checked out consumables
+     *
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @since [v.6]
+     * @return int
+     */
+    public function lastConsumed()
+    {
+        $checkedouttotal = null;      
+        $checkout_note = $this->users()->orderBy('created_at','desc')->get();
+        $last = $checkout_note->last()['pivot']['checkout_qty'];  
+        return $last; 
+    }
+
+        
+    /**
+     * Gets the number of checked out consumables
+     *
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @since [v.6]
+     * @return int
+     */
+    public function checkoutTotal()
+    {
+        $checkedout = $this->users->count();
+        
+        return $checkedout;
+    }
+
+        
+    /**
+     * Gets the latest checkout note
+     *
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @since [v.6]
+     * @return string
+     */
+    public function checkout_note()
+    {        
+        $checkout_note=null;   
+        $first=null;             
+        $checkout_note = $this->users()->orderBy('created_at','desc')->get();
+        $last = $checkout_note->last()['pivot']['checkout_note'];  
+        return $last;              
+        
     }
 
     /**

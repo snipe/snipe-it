@@ -59,9 +59,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'username',
         'zip',
         'remote',
-        'start_date',
-        'end_date',
-        'scim_externalid'
     ];
 
     protected $casts = [
@@ -70,16 +67,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'location_id'  => 'integer',
         'company_id'   => 'integer',
     ];
-
-
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
-        'start_date',
-        'end_date',
-    ];
-
 
     /**
      * Model validation rules
@@ -96,8 +83,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'website'                 => 'url|nullable|max:191',
         'manager_id'              => 'nullable|exists:users,id|cant_manage_self',
         'location_id'             => 'exists:locations,id|nullable',
-        'start_date'              => 'nullable|date',
-        'end_date'                => 'nullable|date|after_or_equal:start_date',
     ];
 
     /**
@@ -323,7 +308,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function consumables()
     {
-        return $this->belongsToMany(\App\Models\Consumable::class, 'consumables_users', 'assigned_to', 'consumable_id')->withPivot('id','created_at','note')->withTrashed();
+        return $this->belongsToMany(\App\Models\Consumable::class, 'consumables_users', 'assigned_to', 'consumable_id')->withPivot('id', 'created_at', 'checkout_qty', 'created_at','checkout_note')->withTrashed();
     }
 
     /**

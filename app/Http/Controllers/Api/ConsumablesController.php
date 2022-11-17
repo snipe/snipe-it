@@ -55,10 +55,6 @@ class ConsumablesController extends Controller
             $consumables = $consumables->TextSearch(e($request->input('search')));
         }
 
-        if ($request->filled('name')) {
-            $consumables->where('name', '=', $request->input('name'));
-        }
-
         if ($request->filled('company_id')) {
             $consumables->where('company_id', '=', $request->input('company_id'));
         }
@@ -228,11 +224,11 @@ class ConsumablesController extends Controller
 
         foreach ($consumable->consumableAssignments as $consumable_assignment) {
             $rows[] = [
-                'avatar' => ($consumable_assignment->user) ? e($consumable_assignment->user->present()->gravatar) : '',
                 'name' => ($consumable_assignment->user) ? $consumable_assignment->user->present()->nameUrl() : 'Deleted User',
+                'checkout_qty' => ($consumable_assignment->checkout_qty),
                 'created_at' => Helper::getFormattedDateObject($consumable_assignment->created_at, 'datetime'),
-                'note' => ($consumable_assignment->note) ? e($consumable_assignment->note) : null,
-                'admin' => ($consumable_assignment->admin) ? $consumable_assignment->admin->present()->nameUrl() : null,
+                'admin' => ($consumable_assignment->admin) ? $consumable_assignment->admin->present()->nameUrl() : '',
+                'checkout_note' => ($consumable_assignment->checkout_note)
             ];
         }
 
@@ -275,7 +271,8 @@ class ConsumablesController extends Controller
                 'consumable_id' => $consumable->id,
                 'user_id' => $user->id,
                 'assigned_to' => $assigned_to,
-                'note' => $request->input('note'),
+                'checkout_qty' => $checkout_qty,
+                'checkout_note' => $checkout_note
             ]);
 
             // Log checkout event

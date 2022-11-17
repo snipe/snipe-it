@@ -21,7 +21,7 @@
         @if ($consumable->id)
           <div class="box-header with-border">
             <div class="box-heading">
-              <h2 class="box-title">{{ $consumable->name }} </h2>
+              <h2 class="box-title">{{ $consumable->name }}   ({{ $consumable->numRemaining()  }} out of {{ $consumable->qty}}  {{ trans('admin/consumables/general.remaining') }}) </h2>
             </div>
           </div><!-- /.box-header -->
         @endif
@@ -37,6 +37,29 @@
           </div>
           @endif
 
+          <!-- Notes -->         	  
+	    <div class="form-group {{ $errors->has('notes') ? 'error' : '' }}">
+            <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
+            <div class="col-md-7">
+              <textarea class="col-md-6 form-control" id="notes" name="notes" disabled>{{ old('notes', $consumable->notes) }}</textarea>
+              {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+            </div>
+          </div>
+
+          <!-- number of consumables -->         
+            <div class="form-group {{ $errors->has('total') ? ' has-error' : '' }}">
+              <label for="total" class="col-md-3 control-label">{{ trans('admin/consumables/general.total') }}
+                <i class='icon-asterisk'></i></label>
+              <div class="col-md-5" >
+                    <input class="form-control" type="text" name="checkout_qty" id="checkout_qty" style="width: 70px; float:left;" value="{{ old('checkout_qty') ?? 1 }}" > &nbsp;&nbsp;
+                    <label class="control-label"> / {{ $consumable->numRemaining()  }}</label>
+                    <div style="float:right;" class="col-ld-1">
+                       {!! $errors->first('checkout_qty', '<span class="alert-msg" aria-hidden="true" width=100% position=absolute><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}    
+                    </div>
+                    </input>               
+                             
+              </div>
+            </div>
           <!-- User -->
             @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'assigned_to', 'required'=> 'true'])
 
@@ -47,36 +70,36 @@
                   <div class="callout callout-info">
 
                     @if ($consumable->category->require_acceptance=='1')
-                      <i class="far fa-envelope"></i>
+                      <i class="fa fa-envelope"></i>
                       {{ trans('admin/categories/general.required_acceptance') }}
                       <br>
                     @endif
 
                     @if ($consumable->getEula())
-                      <i class="far fa-envelope"></i>
+                      <i class="fa fa-envelope"></i>
                       {{ trans('admin/categories/general.required_eula') }}
                         <br>
                     @endif
 
                     @if ($snipeSettings->slack_endpoint!='')
-                        <i class="fab fa-slack"></i>
+                        <i class="fa fa-slack"></i>
                         A slack message will be sent
                     @endif
                   </div>
                 </div>
               </div>
             @endif
-          <!-- Note -->
-          <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
-            <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
+          <!-- Checout Note -->
+          <div class="form-group {{ $errors->has('checkout_note') ? 'error' : '' }}">
+            <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.checkout_notes') }}</label>
             <div class="col-md-7">
-              <textarea class="col-md-6 form-control" name="note">{{ old('note') }}</textarea>
-              {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+              <textarea class="col-md-6 form-control" id="checkout_note" name="checkout_note"></textarea>	      
+              {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
         </div> <!-- .box-body -->
         <div class="box-footer">
-          <a class="btn btn-link" href="{{ route('consumables.show', ['consumable'=> $consumable->id]) }}">{{ trans('button.cancel') }}</a>
+          <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
           <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
        </div>
       </div>

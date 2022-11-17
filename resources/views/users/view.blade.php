@@ -113,7 +113,7 @@
             </a>
             <ul class="dropdown-menu">
               <li><a href="{{ route('users.edit', $user->id) }}">{{ trans('admin/users/general.edit') }}</a></li>
-              <li><a href="{{ route('users.clone.show', $user->id) }}">{{ trans('admin/users/general.clone') }}</a></li>
+              <li><a href="{{ route('clone/user', $user->id) }}">{{ trans('admin/users/general.clone') }}</a></li>
               @if ((Auth::user()->id !== $user->id) && (!config('app.lock_passwords')) && ($user->deleted_at==''))
                 <li><a href="{{ route('users.destroy', $user->id) }}">{{ trans('button.delete') }}</a></li>
               @endif
@@ -173,7 +173,7 @@
 
               @can('create', $user)
                 <div class="col-md-12" style="padding-top: 5px;">
-                  <a href="{{ route('users.clone.show', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/users/general.clone') }}</a>
+                  <a href="{{ route('clone/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/users/general.clone') }}</a>
                 </div>
                @endcan
 
@@ -184,16 +184,12 @@
                 @endcan
 
                 @can('view', $user)
-                  <div class="col-md-12" style="padding-top: 5px;">
-                  @if(!empty($user->email))
-                    <form action="{{ route('users.email',['userId'=> $user->id]) }}" method="POST">
-                      {{ csrf_field() }}
-                      <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener">{{ trans('admin/users/general.email_assigned') }}</button>
-                    </form>
-                  @else
-                      <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_email') }}">{{ trans('admin/users/general.email_assigned') }}</button>
-                  @endif
-                  </div>
+                    <div class="col-md-12" style="padding-top: 5px;">
+                        <form action="{{ route('users.email',['userId'=> $user->id]) }}" method="POST">
+                            {{ csrf_field() }}
+                            <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener">{{ trans('admin/users/general.email_assigned') }}</button>
+                        </form>
+                    </div>
                 @endcan
 
                 @can('update', $user)
@@ -228,7 +224,7 @@
                     </div>
                   @else
                     <div class="col-md-12" style="padding-top: 5px;">
-                        <form method="POST" action="{{ route('users.restore.store', $user->id) }}">
+                        <form method="POST" action="{{ route('restore/user', $user->id) }}">
                             @csrf
                             <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.restore') }}</button>
                         </form>
@@ -342,30 +338,6 @@
                           @endif
                         </div>
                       </div>
-
-                   <!-- start date -->
-                   @if ($user->start_date)
-                       <div class="row">
-                           <div class="col-md-3">
-                               {{ trans('general.start_date') }}
-                           </div>
-                           <div class="col-md-9">
-                               {{ \App\Helpers\Helper::getFormattedDateObject($user->start_date, 'date', false) }}
-                           </div>
-                       </div>
-                   @endif
-
-                   <!-- end date -->
-                   @if ($user->end_date)
-                       <div class="row">
-                           <div class="col-md-3">
-                               {{ trans('general.end_date') }}
-                           </div>
-                           <div class="col-md-9">
-                               {{ \App\Helpers\Helper::getFormattedDateObject($user->end_date, 'date', false) }}
-                           </div>
-                       </div>
-                   @endif
 
                     @if ($user->jobtitle)
                      <!-- jobtitle -->
@@ -754,7 +726,7 @@
                     </td>
                     <td class="hidden-print">
                       @can('checkin', $accessory)
-                        <a href="{{ route('accessories.checkin.show', array('accessoryID'=> $accessory->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
+                        <a href="{{ route('checkin/accessory', array('accessoryID'=> $accessory->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
                       @endcan
                     </td>
                   </tr>
@@ -765,6 +737,7 @@
         </div><!-- /accessories-tab -->
 
         <div class="tab-pane" id="consumables">
+          <h2>{{ trans('general.consumable_checkout_history_title')}}</h2>
           <div class="table-responsive">
             <table
                     data-cookie-id-table="userConsumableTable"
@@ -787,10 +760,11 @@
                     }'>
               <thead>
                 <tr>
-                  <th class="col-md-3">{{ trans('general.name') }}</th>
-                  <th class="col-md-2" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
-                  <th class="col-md-2">{{ trans('general.date') }}</th>
-                    <th class="col-md-5">{{ trans('general.notes') }}</th>
+                  <th class="col-md-3" data-footer-formatter="totalFormatter" >{{ trans('general.name') }}</th>
+                  <th class="col-md-1" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
+		  <th class="col-md-1" data-fieldname="purchase_cost">{{ trans('general.quantity') }}</th>
+                  <th class="col-md-1">{{ trans('general.requested_date') }}</th>
+                  <th class="col-ld-8">{{ trans('general.notes') }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -798,10 +772,14 @@
                 <tr>
                   <td>{!! $consumable->present()->nameUrl() !!}</td>
                   <td>
-                    {!! Helper::formatCurrencyOutput($consumable->purchase_cost) !!}
+		    {!! Helper::formatCurrencyOutput($consumable->purchase_cost) !!}                  
                   </td>
-                  <td>{{ Helper::getFormattedDateObject($consumable->pivot->created_at, 'datetime',  false) }}</td>
-                  <td>{{ $consumable->pivot->note }}</td>
+
+		  <td>
+	      	    {!! $consumable->pivot->checkout_qty !!}
+		  </td>
+                  <td>{{ $consumable->pivot->created_at }}</td>
+                  <td>{{ $consumable->pivot->checkout_note }}</td>
                 </tr>
                 @endforeach
               </tbody>
@@ -866,7 +844,7 @@
                                 {{ $file->filename }}
                             </td>
                             <td>
-                                {{ Helper::formatFilesizeUnits(Storage::size('private_uploads/users/'.$file->filename)) }}
+                                {{ Helper::formatFilesizeUnits(filesize(storage_path('private_uploads/users/').$file->filename)) }}
                             </td>
 
                             <td>
@@ -932,9 +910,6 @@
                 <th class="col-sm-3" data-field="created_at" data-formatter="dateDisplayFormatter" data-sortable="true">{{ trans('general.date') }}</th>
                 <th class="col-sm-2" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
                 <th class="col-sm-2" data-field="action_type">{{ trans('general.action') }}</th>
-                  @if  ($snipeSettings->require_accept_signature=='1')
-                      <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
-                  @endif
                 <th class="col-sm-3" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
                 <th class="col-sm-2" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
               </tr>
