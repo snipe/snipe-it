@@ -3,8 +3,8 @@
 
 {{ trans('mail.the_following_item') }}
 
-@if ($item->getImageUrl())
-<center><img src="{{ app\Models\Setting::getSettings()->show_images_in_email =='1' && $item->getImageUrl() }}" alt="Asset" style="max-width: 570px;"></center>
+@if (($snipeSettings->show_images_in_email =='1') && $item->getImageUrl())
+<center><img src="{{ $item->getImageUrl() }}" alt="Asset" style="max-width: 570px;"></center>
 @endif
 
 @component('mail::table')
