@@ -62,7 +62,7 @@ return [
     'consumable'			=> 'Consumible',
     'consumables'			=> 'Consumibles',
     'country'  				=> 'Pais',
-    'create'				=> 'Crear Localización',
+    'create'				=> 'Crear',
     'created'               => 'Artículo creado',
     'created_asset'			=> 'equipo creado',
     'created_at' 			=> 'Created At',
@@ -292,7 +292,6 @@ return [
     'clear_signature'       => 'Borrar firma',
     'show_help'             => 'Mostrar ayuda',
     'hide_help'             => 'Ocultar ayuda',
-    'view_all'              => 'view all',
     'hide_deleted'          => 'Hide Deleted',
     'email'                 => 'Email',
     'do_not_change'         => 'Do Not Change',
@@ -381,8 +380,14 @@ return [
     'start_date'            => 'Start Date',
     'end_date'            => 'End Date',
     'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
-    'placeholder_kit'       => 'Select a kit'
-
-
+    'placeholder_kit'       => 'Select a kit',
+    'dashboard_info' => "Este tablero es tuyo. Hay muchos como este, pero este es solo tuyo.",
+    'new_asset'             => 'Nuevo Activo',
+    'new_license'           => 'Nueva Licencia',
+    'new_accessory'         => 'Nuevo Accesorio',
+    'new_consumable'        => 'Nuevo Consumible',
+    'viewall'				=> 'Ver todo',
+    'view_all'				=> 'Ver todo',
+    'dashboard_empty'       => 'Parece que aún no ha agregado nada, por lo que no tenemos nada increíble para mostrar. ¡Comience agregando algunos activos, accesorios, consumibles o licencias ahora!',
 
 ];
