@@ -47,5 +47,5 @@ return [
     'asset_deployable' => 'Ese estado de activos no es desplegable. Este activo no puede ser verificado.',
     'processing_spinner' => 'Procesando...',
     'optional_infos'  => 'Optional Information',
-    'order_details'   => 'Order Related Information'
+    'order_details'   => 'Información relacionada con el pedido'
 ];

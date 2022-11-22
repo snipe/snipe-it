@@ -46,7 +46,7 @@ class ConsumablesController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', Consumable::class);
+        $this->authorize('create', Consumable::class);        
 
         return view('consumables/edit')->with('category_type', 'consumable')
             ->with('item', new Consumable);
@@ -80,6 +80,7 @@ class ConsumablesController extends Controller
         $consumable->qty                    = $request->input('qty');
         $consumable->user_id                = Auth::id();
         $consumable->notes                  = $request->input('notes');
+        $consumable->money                  = $request->inpunt('money','ARG');
 
 
         $consumable = $request->handleImages($consumable);
@@ -128,20 +129,20 @@ class ConsumablesController extends Controller
         if (is_null($consumable = Consumable::find($consumableId))) {
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
         }
-
+        
         $min = $consumable->numCheckedOut();
         $validator = Validator::make($request->all(), [
             "qty" => "required|numeric|min:$min"
         ]);
-
+        
         if ($validator->fails()) {
             return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
+            ->withErrors($validator)
+            ->withInput();
         }
-
+        
         $this->authorize($consumable);
-
+       
         $consumable->name                   = $request->input('name');
         $consumable->category_id            = $request->input('category_id');
         $consumable->location_id            = $request->input('location_id');
@@ -154,7 +155,8 @@ class ConsumablesController extends Controller
         $consumable->purchase_date          = $request->input('purchase_date');
         $consumable->purchase_cost          = Helper::ParseCurrency($request->input('purchase_cost'));
         $consumable->qty                    = Helper::ParseFloat($request->input('qty'));
-        $consumable->notes                  = $request->input('notes');
+        $consumable->notes                  = $request->input('notes');       
+        $consumable->money                  = $request->input('money','ARG');
 
         $consumable = $request->handleImages($consumable);
 

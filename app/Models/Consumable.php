@@ -41,6 +41,7 @@ class Consumable extends SnipeModel
         'company_id'  => 'integer|nullable',
         'min_amt'     => 'integer|min:0|nullable',
         'purchase_cost'   => 'numeric|nullable|gte:0',
+        'money'           => 'max:3|nullable'
     ];
 
     /**
@@ -73,6 +74,7 @@ class Consumable extends SnipeModel
         'min_amt',
         'requestable',
         'notes',
+        'money'
     ];
 
     use Searchable;

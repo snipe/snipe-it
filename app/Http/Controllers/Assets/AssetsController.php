@@ -80,7 +80,7 @@ class AssetsController extends Controller
      * @internal param int $model_id
      */
     public function create(Request $request)
-    {
+    {        
         $this->authorize('create', Asset::class);
         $view = View::make('hardware/edit')
             ->with('statuslabel_list', Helper::statusLabelList())
@@ -140,6 +140,7 @@ class AssetsController extends Controller
             $asset->depreciate              = '0';
             $asset->status_id               = request('status_id');
             $asset->warranty_months         = request('warranty_months', null);
+            $asset->money                   = $request->get('money','ARG');
             $asset->purchase_cost           = Helper::ParseCurrency($request->get('purchase_cost'));
             $asset->purchase_date           = request('purchase_date', null);
             $asset->assigned_to             = request('assigned_to', null);
@@ -311,6 +312,10 @@ class AssetsController extends Controller
         $asset->status_id = $request->input('status_id', null);
         $asset->warranty_months = $request->input('warranty_months', null);
         $asset->purchase_cost = Helper::ParseCurrency($request->input('purchase_cost', null));
+
+
+        $asset->money = $request->input('money','ARG');
+        
         $asset->purchase_date = $request->input('purchase_date', null);
         $asset->supplier_id = $request->input('supplier_id', null);
         $asset->expected_checkin = $request->input('expected_checkin', null);

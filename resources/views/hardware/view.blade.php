@@ -507,13 +507,7 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                @if (($asset->id) && ($asset->location))
-                                                    {{ $asset->location->currency }}
-                                                @elseif (($asset->id) && ($asset->location))
-                                                    {{ $asset->location->currency }}
-                                                @else
-                                                    {{ $snipeSettings->default_currency }}
-                                                @endif
+                                                <b>{{ $asset->money }}</b>                                                
                                                 {{ Helper::formatCurrencyOutput($asset->purchase_cost)}}
 
                                             </div>
