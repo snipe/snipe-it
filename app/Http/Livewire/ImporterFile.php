@@ -80,15 +80,27 @@ $users = [
 
 class ImporterFile extends Component
 {
-    public $activeFile; //should this get auto-filled?
+    public $activeFile; //this gets automatically populated on instantiation
     public $customFields;
     public $importTypes;
     public $columnOptions;
-    public $importType; // too similar to 'TypeS'?
+    public $increment; // just used to force refreshes
+    public $statusType;
+    public $statusText;
+    public $update;
+    public $send_welcome;
+    public $run_backup;
+
+    protected $rules = [
+        'activeFile.import_type' => 'string',
+        'activeFile.field_map' => 'array', //this doesn't work because I think we would have to list all the keys?
+    ];
+
+//    protected $listeners = ['refreshComponent' => '$refresh'];
 
     private function getColumns($type)
     {
-        global $general, $accessories, $assets, $consumables, $licenses, $users;
+        global $general, $accessories, $assets, $consumables, $licenses, $users; // TODO - why is this global?
 
         $customFields = [];
         foreach($this->customFields AS $field) {
@@ -130,22 +142,36 @@ class ImporterFile extends Component
             'license' =>    'Licenses',
             'user' =>       'Users'
         ];
-        Log::error("import types: ".print_r($this->importTypes,true));
+//        Log::error("import types: ".print_r($this->importTypes,true));
 
-        $columnOptions = [];
+        $columnOptions = []; // FIXME - should this be $this->>columnOptions?
         $this->columnOptions[''] = $this->getColumns(''); //blank mode? I don't know what this is supposed to mean
         foreach($this->importTypes AS $type => $name) {
             $this->columnOptions[$type] = $this->getColumns($type);
         }
+        $this->increment = 0;
     }
 
-    public function changeTypes()
+    public function postSave()
+    {
+        Log::error("Saving import!");
+        if (!$this->activeFile->import_type) {
+            $this->statusType='error';
+            $this->statusText= "An import type is required... "; // TODO - translate me!
+            return false;
+        }
+        $this->statusType = 'pending';
+        $this->statusText = "Processing...";
+    }
+
+    public function changeTypes() // UNUSED?
     {
         Log::error("type changed!");
     }
 
     public function render()
     {
+        //\Log::error("Rendering! And here's the value for mappings: ".print_r($this->mappings,true));
         return view('livewire.importer-file');
     }
 }

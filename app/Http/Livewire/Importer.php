@@ -28,6 +28,8 @@ class Importer extends Component
         'files.*.filesize' => 'required|integer'
     ];
 
+    protected $listeners = ['hideDetails' => 'hideDetails'];
+
     public function mount()
     {
         //$this->files = Import::all(); // this *SHOULD* be how it works, but...it doesn't? (note orderBy/get, below)
@@ -45,6 +47,12 @@ class Importer extends Component
     {
         Log::error("toggled on: ".$id);
         $this->processDetails = Import::find($id);
+    }
+
+    public function hideDetails()
+    {
+        Log::error("hiding details!");
+        $this->processDetails = null;
     }
 
     public function destroy($id)

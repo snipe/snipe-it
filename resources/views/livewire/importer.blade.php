@@ -147,10 +147,10 @@
 @push('js')
     <script>
         document.addEventListener('livewire:load', function () {
-            console.log("OKAY - we are gonna dump us out some files here!")
-            console.dir(@this.files)
-            console.log("after livewire load, we're going to try the this thing")
-            console.dir(@this)
+            // console.log("OKAY - we are gonna dump us out some files here!")
+            // console.dir(@this.files)
+            // console.log("after livewire load, we're going to try the this thing")
+            // console.dir(@this)
         })
 
         $('#fileupload').fileupload({
@@ -201,9 +201,9 @@
             }
         })
 
-        setTimeout(function () {
-            console.log("Test @"+"this:")
-            console.dir(@this)
-        },5000)
+        // setTimeout(function () {
+        //     console.log("Test @"+"this:")
+        //     console.dir(@this)
+        // },5000)
     </script>
 @endpush
