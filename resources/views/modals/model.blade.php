@@ -22,7 +22,7 @@
                         <select class="js-data-ajax" data-endpoint="manufacturers" name="manufacturer_id" style="width: 100%" id="modal-manufactuer_id"></select>
                     </div>
                     <div class="col-md-2 col-xs-12">
-                        <a href='{{ route('manufacturers.create') }}' class="btn btn-sm btn-primary">Agregar</a>
+                        <a href='{{ route('manufacturers.create') }}' class="btn btn-sm btn-primary">{{ trans('button.add') }}</a>
                     </div>
                 </div>
 

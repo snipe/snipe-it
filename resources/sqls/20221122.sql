@@ -3,3 +3,4 @@ ALTER TABLE snipeit.assets MODIFY COLUMN money varchar(3) CHARACTER SET utf8mb4 
 
 alter table snipeit.components  add money varchar(3) DEFAULT 'ARG' after purchase_cost;
 alter table snipeit.consumables  add money varchar(3) DEFAULT 'ARG' after purchase_cost;
+alter table snipeit.accessories add money varchar(3) DEFAULT 'ARG' after purchase_cost;
