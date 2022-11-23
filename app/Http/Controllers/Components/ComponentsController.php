@@ -81,7 +81,7 @@ class ComponentsController extends Controller
         $component->qty                    = $request->input('qty');
         $component->user_id                = Auth::id();
         $component->notes                  = $request->input('notes');
-
+        $component->money_format           = $request->input('money','ARG');
         $component = $request->handleImages($component);
 
         if ($component->save()) {
@@ -154,7 +154,7 @@ class ComponentsController extends Controller
         $component->purchase_cost          = Helper::ParseCurrency(request('purchase_cost'));
         $component->qty                    = $request->input('qty');
         $component->notes                  = $request->input('notes');
-
+        $component->money                  = $request->input('money','ARG');
         $component = $request->handleImages($component);
 
         if ($component->save()) {
