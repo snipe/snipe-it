@@ -18,8 +18,11 @@
                 <div class="dynamic-form-row">
                     <div class="col-md-4 col-xs-12"><label for="modal-manufacturer_id">{{ trans('general.manufacturer') }}:
                         </label></div>
-                    <div class="col-md-8 col-xs-12 required">
+                    <div class="col-md-6 col-xs-12 required">
                         <select class="js-data-ajax" data-endpoint="manufacturers" name="manufacturer_id" style="width: 100%" id="modal-manufactuer_id"></select>
+                    </div>
+                    <div class="col-md-2 col-xs-12">
+                        <a href='{{ route('manufacturers.create') }}' class="btn btn-sm btn-primary">Agregar</a>
                     </div>
                 </div>
 
@@ -34,7 +37,6 @@
                     <div class="col-md-4 col-xs-12"><label for="modal-modelno">{{ trans('general.model_no') }}:</label></div>
                     <div class="col-md-8 col-xs-12"><input type='text' name="model_number" id='modal-model_number' class="form-control"></div>
                 </div>
-
                 <div class="dynamic-form-row">
                     <div class="col-md-4 col-xs-12"><label for="modal-fieldset_id">{{ trans('admin/models/general.fieldset') }}:</label></div>
                     <div class="col-md-8 col-xs-12">{{ Form::select('fieldset_id', Helper::customFieldsetList(),Request::old('fieldset_id'), array('class'=>'select2', 'id'=>'modal-fieldset_id', 'style'=>'width:350px')) }}</div>

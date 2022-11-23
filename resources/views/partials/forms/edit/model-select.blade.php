@@ -11,9 +11,8 @@
                 </option>
             @else
                 <option value=""  role="option">{{ trans('general.select_model') }}</option>
-            @endif
-
-        </select>
+            @endif                
+        </select>       
     </div>
     <div class="col-md-1 col-sm-1 text-left">
         @can('create', \App\Models\AssetModel::class)
