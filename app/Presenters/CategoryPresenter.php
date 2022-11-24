@@ -63,6 +63,13 @@ class CategoryPresenter extends Presenter
                 'visible' => true,
                 'formatter' => 'trueFalseFormatter',
             ], [
+                "field" => "use_default_eula",
+                "searchable" => false,
+                "sortable" => true,
+                "title" => trans('admin/categories/general.use_default_eula_column'),
+                'visible' => true,
+                "formatter" => 'trueFalseFormatter',
+            ], [
                 'field' => 'require_acceptance',
                 'searchable' => false,
                 'sortable' => true,
@@ -75,36 +82,16 @@ class CategoryPresenter extends Presenter
                 'sortable' => false,
                 'switchable' => false,
                 'title' => trans('table.actions'),
-            ],[
-                "field" => "use_default_eula",
-                "searchable" => false,
-                "sortable" => true,
-                "title" => trans('admin/categories/general.use_default_eula_column'),
                 'visible' => true,
-                "formatter" => 'trueFalseFormatter',
-            ],[
-                "field" => "checkin_email",
-                "searchable" => false,
-                "sortable" => true,
-                "class" => 'css-envelope',
-                "title" => 'Send Email',
-                "visible" => true,
-                "formatter" => 'trueFalseFormatter',
-            ],[
-                "field" => "require_acceptance",
-                "searchable" => false,
-                "sortable" => true,
-                'formatter' => 'categoriesActionsFormatter',
-            ],
-            [
+                'formatter' => "categoriesActionsFormatter",
+            ], [
                 'field' => 'created_at',
                 'searchable' => true,
                 'sortable' => true,
                 'visible' => false,
                 'title' => trans('general.created_at'),
                 'formatter' => 'dateDisplayFormatter',
-            ],
-            [
+            ], [
                 'field' => 'updated_at',
                 'searchable' => true,
                 'sortable' => true,
@@ -123,7 +110,7 @@ class CategoryPresenter extends Presenter
      */
     public function nameUrl()
     {
-        return (string) link_to_route('categories.show', $this->name, $this->id);
+        return (string)link_to_route('categories.show', $this->name, $this->id);
     }
 
     /**
