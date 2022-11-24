@@ -21,7 +21,7 @@ class CheckoutAcceptance extends Model
     {
         // At this point the endpoint is the same for everything.
         //  In the future this may want to be adapted for individual notifications.
-        return config('mail.reply_to.address');
+        return (config('mail.reply_to.address')) ? config('mail.reply_to.address') : '' ;
     }
 
     /**
