@@ -5,5 +5,6 @@ return array(
     'title'     => 'Company',
     'update'    => 'Update Company',
     'name'      => 'Company Name',
+    'ldap_ou'   => 'LDAP Search OU',
     'id'        => 'ID',
 );

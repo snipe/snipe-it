@@ -35,6 +35,7 @@ class CompaniesController extends Controller
             'accessories_count',
             'consumables_count',
             'components_count',
+	    'ldap_ou',
         ];
 
         $companies = Company::withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'users as users_count');

@@ -45,7 +45,7 @@ final class Company extends SnipeModel
      * 
      * @var array
      */
-    protected $searchableAttributes = ['name', 'created_at', 'updated_at'];
+    protected $searchableAttributes = ['name', 'created_at', 'updated_at', 'ldap_ou'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -59,7 +59,7 @@ final class Company extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name','ldap_ou'];
 
     private static function isFullMultipleCompanySupportEnabled()
     {
@@ -206,6 +206,12 @@ final class Company extends SnipeModel
             return $q;
         }
     }
+
+    public function setLdapOuAttribute($ldap_ou)
+    {
+        return $this->attributes['ldap_ou'] = empty($ldap_ou) ? null : $ldap_ou;
+    }
+
 
     public function users()
     {

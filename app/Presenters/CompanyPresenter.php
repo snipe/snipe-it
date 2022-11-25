@@ -76,6 +76,13 @@ class CompanyPresenter extends Presenter
                 'visible' => true,
                 'title' => ' <span class="hidden-xs"><i class="far fa-hdd"></i></span><span class="hidden-md hidden-lg">'.trans('general.components').'</span>',
             ], [
+                'field' => 'ldap_ou',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' =>  trans('admin/locations/table.ldap_ou'),
+                'visible' => false,
+            ], [
                 'field' => 'updated_at',
                 'searchable' => false,
                 'sortable' => true,

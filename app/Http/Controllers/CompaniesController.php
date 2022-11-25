@@ -60,6 +60,7 @@ final class CompaniesController extends Controller
 
         $company = new Company;
         $company->name = $request->input('name');
+	$company->ldap_ou = $request->input('ldap_ou');
 
         $company = $request->handleImages($company);
 
@@ -111,6 +112,7 @@ final class CompaniesController extends Controller
         $this->authorize('update', $company);
 
         $company->name = $request->input('name');
+	$company->ldap_ou = $request->input('ldap_ou');
 
         $company = $request->handleImages($company);
 

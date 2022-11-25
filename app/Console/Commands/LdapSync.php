@@ -8,6 +8,8 @@ use App\Models\Setting;
 use App\Models\Ldap;
 use App\Models\User;
 use App\Models\Location;
+use App\Models\Company;
+
 use Log;
 
 class LdapSync extends Command
@@ -169,6 +171,69 @@ class LdapSync extends Command
                 $results = array_merge($location_users, $results);
                 $results['count'] = $global_count;
             }
+
+/* Code is copied from Location-Sync to Sync the Companies */
+
+			// Retrieve companies with a mapped OU, and sort them from the shallowest to deepest OU (see #3993)
+            $ldap_ou_companies = Company::where('ldap_ou', '!=', '')->get()->toArray();
+            $ldap_ou_lengths = [];
+
+            foreach ($ldap_ou_companies as $ou_companies) {
+                $ldap_ou_lengths[] = strlen($ou_companies['ldap_ou']);
+            }
+
+            array_multisort($ldap_ou_lengths, SORT_ASC, $ldap_ou_companies);
+
+            if (count($ldap_ou_companies) > 0) {
+                LOG::debug('Some companies have special OUs set. Companies will be automatically set for users in those OUs.');
+            }
+
+            // Inject company information fields
+            for ($i = 0; $i < $results['count']; $i++) {
+                $results[$i]['ldap_company_override'] = false;
+                $results[$i]['company_id'] = 0;
+            }
+
+            // Grab subsets based on company-specific DNs, and overwrite company for these users.
+
+
+
+		foreach ($ldap_ou_companies as $ldap_company) {
+                try {
+                    $company_users = Ldap::findLdapUsers($ldap_company['ldap_ou']);
+                } catch (\Exception $e) { // TODO: this is stolen from line 77 or so above
+                    if ($this->option('json_summary')) {
+                        $json_summary = ['error' => true, 'error_message' => trans('admin/users/message.error.ldap_could_not_search').' Company: '.$ldap_company['name'].' (ID: '.$ldap_company['id'].') cannot connect to "'.$ldap_company['ldap_ou'].'" - '.$e->getMessage(), 'summary' => []];
+                        $this->info(json_encode($json_summary));
+                    }
+                    LOG::info($e);
+
+                    return [];
+                }
+                $usernames = [];
+                for ($i = 0; $i < $company_users['count']; $i++) {
+                    if (array_key_exists($ldap_result_username, $company_users[$i])) {
+                        $company_users[$i]['ldap_company_override'] = true;
+                        $company_users[$i]['company_id'] = $ldap_company['id'];
+                        $usernames[] = $company_users[$i][$ldap_result_username][0];
+                    }
+                }
+
+                // Delete located users from the general group.
+                foreach ($results as $key => $generic_entry) {
+                    if ((is_array($generic_entry)) && (array_key_exists($ldap_result_username, $generic_entry))) {
+                        if (in_array($generic_entry[$ldap_result_username][0], $usernames)) {
+                            unset($results[$key]);
+                        }
+                    }
+                }
+
+                $global_count = $results['count'];
+                $results = array_merge($company_users, $results);
+                $results['count'] = $global_count;
+        }
+ 
+
         }
 
         /* Create user account entries in Snipe-IT */
@@ -185,7 +250,9 @@ class LdapSync extends Command
                 $item['firstname'] = isset($results[$i][$ldap_result_first_name][0]) ? $results[$i][$ldap_result_first_name][0] : '';
                 $item['email'] = isset($results[$i][$ldap_result_email][0]) ? $results[$i][$ldap_result_email][0] : '';
                 $item['ldap_location_override'] = isset($results[$i]['ldap_location_override']) ? $results[$i]['ldap_location_override'] : '';
+                $item['ldap_company_override'] = isset($results[$i]['ldap_company_override']) ? $results[$i]['ldap_company_override'] : '';
                 $item['location_id'] = isset($results[$i]['location_id']) ? $results[$i]['location_id'] : '';
+                $item['company_id'] = isset($results[$i]['company_id']) ? $results[$i]['company_id'] : '';
                 $item['telephone'] = isset($results[$i][$ldap_result_phone][0]) ? $results[$i][$ldap_result_phone][0] : '';
                 $item['jobtitle'] = isset($results[$i][$ldap_result_jobtitle][0]) ? $results[$i][$ldap_result_jobtitle][0] : '';
                 $item['country'] = isset($results[$i][$ldap_result_country][0]) ? $results[$i][$ldap_result_country][0] : '';
@@ -318,6 +385,18 @@ class LdapSync extends Command
                         $user->location_id = $location->id;
                     }
                 }
+
+		//AJ Start
+		if ($item['ldap_company_override'] == true) {
+                    $user->company_id = $item['company_id'];
+                } elseif ((isset($company)) && (! empty($company))) {
+                    if ((is_array($company)) && (array_key_exists('id', $company))) {
+                        $user->company_id = $company['id'];
+                    } elseif (is_object($company)) {
+                        $user->company_id = $company->id;
+                    }
+                }
+		// AJ End
 
                 $user->ldap_import = 1;
 
