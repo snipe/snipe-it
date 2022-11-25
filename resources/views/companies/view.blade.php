@@ -253,14 +253,6 @@
         </div>
     </div>
 
- <div class="col-md-12">
-        <ul class="list-unstyled" style="line-height: 25px; padding-bottom: 20px;">
-		 @if ($location->ldap_ou)
-                  <li>{{ trans('admin/locations/table.ldap_ou') }}: {{ $location->ldap_ou }}</li>
-              	@endif
-	 </ul>
-</div>
-
 
 @stop
 @section('moar_scripts')
