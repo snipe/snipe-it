@@ -505,22 +505,11 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
 
         if (empty($user->email)) {
-            return response()->json(
-                [
-                    'status' => 'error',
-                    'message' => 'This user has no email set.',
-                    'payload' => null,
-                ], 404);
+            return response()->json(Helper::formatStandardApiResponse(‘error’, $accessory, trans('admin/accessories/message.inventorynotification.error')));
         }
-
-        $user->notify((new CurrentInventory($user)));
-
-        return response()->json(
-            [
-                'status' => 'success',
-                'message' => 'The user was notified about his current inventory.',
-                'payload' => null,
-            ], 200);
+ 
+        return response()->Helper::formatStandardApiResponse('success', $accessory, trans('admin/accessories/message.inventorynotification.success'));
+ 
     }
 
     /**

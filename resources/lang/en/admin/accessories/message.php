@@ -31,6 +31,11 @@ return array(
         'error'   		=> 'Accessory was not checked in, please try again',
         'success' 		=> 'Accessory checked in successfully.',
         'user_does_not_exist' => 'That user is invalid. Please try again.'
+    ),
+
+    'inventorynotification' => array(
+        'error'   => 'This user has no email set.',
+        'success' => 'The user has been notified about their current inventory.'
     )
 
 
