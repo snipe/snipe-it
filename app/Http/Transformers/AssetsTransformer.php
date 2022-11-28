@@ -7,6 +7,7 @@ use App\Models\Asset;
 use App\Models\Setting;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
+use Carbon\Carbon;
 
 class AssetsTransformer
 {
@@ -80,6 +81,7 @@ class AssetsTransformer
             'next_audit_date' => Helper::getFormattedDateObject($asset->next_audit_date, 'date'),
             'deleted_at' => Helper::getFormattedDateObject($asset->deleted_at, 'datetime'),
             'purchase_date' => Helper::getFormattedDateObject($asset->purchase_date, 'date'),
+            'age' => Carbon::parse($asset->purchase_date)->diff(Carbon::now())->format('%y years, %m months and %d days'),
             'last_checkout' => Helper::getFormattedDateObject($asset->last_checkout, 'datetime'),
             'expected_checkin' => Helper::getFormattedDateObject($asset->expected_checkin, 'date'),
             'purchase_cost' => Helper::formatCurrencyOutput($asset->purchase_cost),

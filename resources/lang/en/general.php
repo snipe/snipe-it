@@ -11,6 +11,7 @@ return [
     'admin'					=> 'Admin',
     'administrator'			=> 'Administrator',
     'add_seats'             => 'Added seats',
+    'age'                   => "Age",
     'all_assets'			=> 'All Assets',
     'all'       			=> 'All',
     'archived'              => 'Archived',
