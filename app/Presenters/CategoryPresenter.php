@@ -70,39 +70,33 @@ class CategoryPresenter extends Presenter
                 'visible' => true,
                 'formatter' => 'trueFalseFormatter',
             ], [
-                'field' => 'actions',
-                'searchable' => false,
-                'sortable' => false,
-                'switchable' => false,
-                'title' => trans('table.actions'),
-            ],[
                 "field" => "use_default_eula",
                 "searchable" => false,
                 "sortable" => true,
                 "title" => trans('admin/categories/general.use_default_eula_column'),
                 'visible' => true,
                 "formatter" => 'trueFalseFormatter',
-            ],[
-                "field" => "require_acceptance",
-                "searchable" => false,
-                "sortable" => true,
-                'formatter' => 'categoriesActionsFormatter',
-            ],
-            [
+            ], [
                 'field' => 'created_at',
                 'searchable' => true,
                 'sortable' => true,
                 'visible' => false,
                 'title' => trans('general.created_at'),
                 'formatter' => 'dateDisplayFormatter',
-            ],
-            [
+            ], [
                 'field' => 'updated_at',
                 'searchable' => true,
                 'sortable' => true,
                 'visible' => false,
                 'title' => trans('general.updated_at'),
                 'formatter' => 'dateDisplayFormatter',
+            ], [
+                'field' => 'actions',
+                'searchable' => false,
+                'sortable' => false,
+                'switchable' => false,
+                'title' => trans('table.actions'),
+		'formatter' => 'categoriesActionsFormatter',
             ],
         ];
 
