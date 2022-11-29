@@ -31,8 +31,7 @@ class AccessoriesController extends Controller
      */
     public function index()
     {
-        $this->authorize('index', Accessory::class);
-
+        $this->authorize('index', Accessory::class);        
         return view('accessories/index');
     }
 

@@ -85,6 +85,24 @@
 
   <div class="col-lg-2 col-xs-6">
     <!-- small box -->
+    <a href="{{ route('purchases.index') }}">
+        <div class="small-box bg-green">
+        <div class="inner">
+            <h3> {{ number_format($counts['purchaseOrder']) }}</h3>
+            <p>{{ strtolower(trans('general.purchase_orders')) }}</p>
+        </div>
+        <div class="icon" aria-hidden="true">
+            <i class="fa fa-cash-register"></i>
+        </div>
+        @can('index', \App\Models\PurchaseOrder::class)
+            <a href="{{ route('purchases.index') }}" class="small-box-footer">{{ trans('general.view_all') }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+        @endcan
+        </div>
+    </a>
+  </div><!-- ./col -->
+
+  <div class="col-lg-2 col-xs-6">
+    <!-- small box -->
 
       <a href="{{ route('consumables.index') }}">
     <div class="small-box bg-purple">

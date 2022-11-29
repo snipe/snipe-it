@@ -31,6 +31,7 @@ class DashboardController extends Controller
 
             $counts['asset'] = \App\Models\Asset::count();
             $counts['accessory'] = \App\Models\Accessory::count();
+            $counts['purchaseOrder'] = \App\Models\PurchaseOrder::count();
             $counts['license'] = \App\Models\License::assetcount();
             $counts['consumable'] = \App\Models\Consumable::count();
             $counts['component'] = \App\Models\Component::count();

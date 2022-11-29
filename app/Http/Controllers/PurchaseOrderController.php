@@ -15,7 +15,8 @@ class PurchaseOrderController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('index', PurchaseOrder::class);
+        return view('purchases/index');
     }
 
     /**

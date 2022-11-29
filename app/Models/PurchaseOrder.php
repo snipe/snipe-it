@@ -14,7 +14,7 @@ class PurchaseOrder extends SnipeModel
      *
      * @var string
      */
-    protected $table = 'purchase_order';
+    protected $table = 'purchase_orders';
 
         /**
      * Indicates if the model's ID is auto-incrementing.
@@ -34,10 +34,30 @@ class PurchaseOrder extends SnipeModel
     /**
      * Category validation rules
      */
-    public $rules = [
-        'user_id'   => 'numeric|nullable',
-        'name'      => 'required|min:1|max:255',
-        'state'     => 'required'
+    public $rules = [        
+        'suplier_id'    => 'required|integer|exists:suppliers,id',
+        'name'          => 'required|min:1|max:255',
+        'state'         => 'required'
     ];
+
+
+     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'company_id',
+        'location_id'          
+    ];
+
+
+        /**
+     * Get the post that owns the comment.
+     */
+    public function suppiler()
+    {
+        return $this->belongsTo(Supplier::class);
+    }
 
 }

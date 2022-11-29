@@ -186,7 +186,7 @@ return [
     'no_results'			=> 'Sin Resultados.',
     'no'  					=> 'No',
     'notes'  				=> 'Notas',
-    'order_number'          => 'Nùmero de orden',
+    'order_number'          => 'Número de orden',
     'only_deleted'          => 'Only Deleted Assets',
     'page_menu'				=> 'Mostrando elementos de _MENU_',
     'pagination_info'		=> 'Mostrando _START_ de _END_ de elementos _TOTAL_',
