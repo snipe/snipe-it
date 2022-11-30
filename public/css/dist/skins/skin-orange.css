@@ -190,6 +190,9 @@ a.btn-warning:visited,
 a.btn-danger:visited {
   color: #FFF;
 }
+.far fa-life-ring {
+  color: var(--link);
+}
 .fixed-table-container tbody .selected td {
   background-color: #fff8af;
 }
