@@ -200,7 +200,7 @@ class LicensePresenter extends Presenter
            [
                 'field' => 'name',
                 'searchable' => false,
-                'sortable' => false,
+                'sortable' => true,
                 'sorter'   => 'numericOnly',
                 'switchable' => true,
                 'title' => trans('admin/licenses/general.seat'),
@@ -208,7 +208,7 @@ class LicensePresenter extends Presenter
             ], [
                 'field' => 'assigned_user',
                 'searchable' => false,
-                'sortable' => false,
+                'sortable' => true,
                 'switchable' => true,
                 'title' => trans('admin/licenses/general.user'),
                 'visible' => true,
@@ -225,7 +225,7 @@ class LicensePresenter extends Presenter
             [
                 'field' => 'assigned_asset',
                 'searchable' => false,
-                'sortable' => false,
+                'sortable' => true,
                 'switchable' => true,
                 'title' => trans('admin/licenses/form.asset'),
                 'visible' => true,
@@ -233,7 +233,7 @@ class LicensePresenter extends Presenter
             ], [
                 'field' => 'location',
                 'searchable' => false,
-                'sortable' => false,
+                'sortable' => true,
                 'switchable' => true,
                 'title' => trans('general.location'),
                 'visible' => true,
@@ -242,7 +242,7 @@ class LicensePresenter extends Presenter
             [
                 'field' => 'checkincheckout',
                 'searchable' => false,
-                'sortable' => false,
+                'sortable' => true,
                 'switchable' => true,
                 'title' => trans('general.checkin').'/'.trans('general.checkout'),
                 'visible' => true,
