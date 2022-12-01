@@ -217,6 +217,9 @@ a:link.btn-default {
   text-decoration: none;
   color: var(--nav-link) !important;
 }
+.far fa-life-ring {
+  color: var(--link);
+}
 #accessoriesTable > tbody > tr > td > nobr > a > i.fa {
   color: var(--text-main);
 }

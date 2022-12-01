@@ -199,6 +199,9 @@ a.btn-danger:visited {
 .btn-danger.btn-sm.disabled {
   color: #FFF;
 }
+.far fa-life-ring {
+  color: var(--link);
+}
 .sidebar-toggle-mobile {
   color: #FFF !important;
 }

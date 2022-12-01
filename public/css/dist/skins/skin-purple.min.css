@@ -196,6 +196,9 @@ a.btn-danger:visited {
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
   background-color: #605ca8;
 }
+.far fa-life-ring {
+  color: var(--link);
+}
 .search-highlight,
 .search-highlight:hover {
   background-color: #e9d15b;
