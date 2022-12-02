@@ -672,7 +672,7 @@ class Asset extends Depreciable
      * @since [v2.0]
      * @return mixed
      */
-    public static function getExpiringWarrantee($days = 30)
+    public static function getExpiringWarranty($days = 30)
     {
         $days = (is_null($days)) ? 30 : $days;
 

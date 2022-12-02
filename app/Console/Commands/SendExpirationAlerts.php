@@ -52,7 +52,7 @@ class SendExpirationAlerts extends Command
             });
 
             // Expiring Assets
-            $assets = Asset::getExpiringWarrantee($threshold);
+            $assets = Asset::getExpiringWarranty($threshold);
             if ($assets->count() > 0) {
                 $this->info(trans_choice('mail.assets_warrantee_alert', $assets->count(), ['count' => $assets->count(), 'threshold' => $threshold]));
                 \Notification::send($recipients, new ExpiringAssetsNotification($assets, $threshold));
