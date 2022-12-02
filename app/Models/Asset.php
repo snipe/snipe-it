@@ -224,26 +224,6 @@ class Asset extends Depreciable
         return $this->present()->name();
     }
 
-    /**
-     * Returns the warranty expiration date as Carbon object
-     * @return \Carbon|null
-     */
-    public function getWarrantyExpiresAttribute()
-    {
-        if (isset($this->attributes['warranty_months']) && isset($this->attributes['purchase_date'])) {
-            if (is_string($this->attributes['purchase_date']) || is_string($this->attributes['purchase_date'])) {
-                $purchase_date = \Carbon\Carbon::parse($this->attributes['purchase_date']);
-            } else {
-                $purchase_date = \Carbon\Carbon::instance($this->attributes['purchase_date']);
-            }
-            $purchase_date->setTime(0, 0, 0);
-
-            return $purchase_date->addMonths((int) $this->attributes['warranty_months']);
-        }
-
-        return null;
-    }
-
 
     /**
      * Establishes the asset -> company relationship
