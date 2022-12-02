@@ -680,10 +680,10 @@ class Asset extends Depreciable
             ->whereNotNull('warranty_months')
             ->whereNotNull('purchase_date')
             ->whereNull('deleted_at')
-            ->whereRaw('DATE_ADD(`purchase_date`,INTERVAL `warranty_months` MONTH) <= DATE(NOW() + INTERVAL '
+            ->whereRaw('`warranty_expires` <= DATE(NOW() + INTERVAL '
                                  . $days
-                                 . ' DAY) AND DATE_ADD(`purchase_date`, INTERVAL `warranty_months` MONTH) > NOW()')
-            ->orderByRaw('DATE_ADD(`purchase_date`,INTERVAL `warranty_months` MONTH)')
+                                 . ' DAY) AND `warranty_expires` > NOW()')
+            ->orderBy('warranty_expires')
             ->get();
     }
 
