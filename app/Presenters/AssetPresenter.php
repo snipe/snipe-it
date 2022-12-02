@@ -170,7 +170,7 @@ class AssetPresenter extends Presenter
             ], [
                 'field' => 'warranty_expires',
                 'searchable' => false,
-                'sortable' => false,
+                'sortable' => true,
                 'visible' => false,
                 'title' => trans('admin/hardware/form.warranty_expires'),
                 'formatter' => 'dateDisplayFormatter',

@@ -97,6 +97,7 @@ class AssetsController extends Controller
             'last_audit_date',
             'next_audit_date',
             'warranty_months',
+            'warranty_expires',
             'checkout_counter',
             'checkin_counter',
             'requests_counter',
