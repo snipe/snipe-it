@@ -12,7 +12,6 @@ class AssetSeeder extends Seeder
 {
     public function run()
     {
-        Asset::truncate();
         Asset::factory()->count(1000)->laptopMbp()->create();
         Asset::factory()->count(50)->laptopMbpPending()->create();
         Asset::factory()->count(50)->laptopMbpArchived()->create();

@@ -1,0 +1,13 @@
+{
+    "name": "RentOrders",
+    "alias": "rentorders",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\RentOrders\\Providers\\RentOrdersServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

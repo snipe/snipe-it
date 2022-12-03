@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< Updated upstream
     "content-hash": "5642c5b669c6792c5fe6e4dc88427fe1",
+=======
+    "content-hash": "e87019bea64d1fb78189d99d294ceaf0",
+>>>>>>> Stashed changes
     "packages": [
         {
             "name": "alek13/slack",
@@ -5341,6 +5345,65 @@
             "time": "2021-08-09T20:37:55+00:00"
         },
         {
+            "name": "mhmiton/laravel-modules-livewire",
+            "version": "v1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mhmiton/laravel-modules-livewire.git",
+                "reference": "b53c5ee078b7e4653afec549d1d7134e0fa015d6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mhmiton/laravel-modules-livewire/zipball/b53c5ee078b7e4653afec549d1d7134e0fa015d6",
+                "reference": "b53c5ee078b7e4653afec549d1d7134e0fa015d6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "laravel/framework": "^7.0|^8.0|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Mhmiton\\LaravelModulesLivewire\\LaravelModulesLivewireServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mhmiton\\LaravelModulesLivewire\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mehediul Hassan Miton",
+                    "email": "mhmiton.dev@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Using Laravel Livewire in Laravel Modules package with automatically registered livewire components for every modules.",
+            "keywords": [
+                "laravel",
+                "livewire",
+                "mhmiton",
+                "module",
+                "modules",
+                "nwidart"
+            ],
+            "support": {
+                "issues": "https://github.com/mhmiton/laravel-modules-livewire/issues",
+                "source": "https://github.com/mhmiton/laravel-modules-livewire/tree/v1.5.0"
+            },
+            "time": "2022-02-12T04:29:31+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "2.8.0",
             "source": {
@@ -5998,6 +6061,87 @@
                 }
             ],
             "time": "2022-01-10T16:22:52+00:00"
+        },
+        {
+            "name": "nwidart/laravel-modules",
+            "version": "v8.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nWidart/laravel-modules.git",
+                "reference": "ee06dc0ac019cc392bd66a1c3e6cec0412fcc52d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nWidart/laravel-modules/zipball/ee06dc0ac019cc392bd66a1c3e6cec0412fcc52d",
+                "reference": "ee06dc0ac019cc392bd66a1c3e6cec0412fcc52d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "laravel/framework": "^8.0",
+                "mockery/mockery": "~1.0",
+                "orchestra/testbench": "^6.2",
+                "phpstan/phpstan": "^0.12.14",
+                "phpunit/phpunit": "^8.5",
+                "spatie/phpunit-snapshot-assertions": "^2.1.0|^4.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Nwidart\\Modules\\LaravelModulesServiceProvider"
+                    ],
+                    "aliases": {
+                        "Module": "Nwidart\\Modules\\Facades\\Module"
+                    }
+                },
+                "branch-alias": {
+                    "dev-master": "8.0-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Nwidart\\Modules\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Widart",
+                    "email": "n.widart@gmail.com",
+                    "homepage": "https://nicolaswidart.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel Module management",
+            "keywords": [
+                "laravel",
+                "module",
+                "modules",
+                "nwidart",
+                "rad"
+            ],
+            "support": {
+                "issues": "https://github.com/nWidart/laravel-modules/issues",
+                "source": "https://github.com/nWidart/laravel-modules/tree/v8.3.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/nwidart",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-02-10T20:30:19+00:00"
         },
         {
             "name": "nyholm/psr7",

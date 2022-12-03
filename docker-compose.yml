@@ -20,8 +20,8 @@ services:
 
   mariadb:
     image: mariadb:10.6.4-focal
-    volumes:
-    - db:/var/lib/mysql
+    #    volumes:
+      #    - db:/var/lib/mysql
     env_file:
     - .env.docker
     networks:

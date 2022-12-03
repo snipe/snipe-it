@@ -569,6 +569,15 @@
                 </li>
             @endcan
 
+              <!-- RENT ORDERS-->
+
+              <li{!! (Request::is('rentorders*') ? ' class="active"' : '') !!}>
+              <a href="{{ route('rentorders.index') }}" accesskey="6">
+                  <i class="fas fa-table fa-fw"></i>
+                  <span>{{ trans('Rent Orders') }}</span>
+              </a>
+              </li>
+
             @can('view', \App\Models\User::class)
             <li{!! (Request::is('users*') ? ' class="active"' : '') !!}>
                   <a href="{{ route('users.index') }}" accesskey="6">
