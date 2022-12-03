@@ -377,4 +377,10 @@ class Consumable extends SnipeModel
     {
         return $query->leftJoin('companies', 'consumables.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
     }
+
+        
+    public function itemOrders()
+    {
+        return $this->morphMany(ItemOrder::class, 'item');
+    }
 }

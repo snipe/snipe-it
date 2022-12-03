@@ -427,4 +427,9 @@ class Accessory extends SnipeModel
     {
         return $query->leftJoin('suppliers', 'accessories.supplier_id', '=', 'suppliers.id')->orderBy('suppliers.name', $order);
     }
+
+    public function itemOrders()
+    {
+        return $this->morphMany(ItemOrder::class, 'item');
+    }
 }

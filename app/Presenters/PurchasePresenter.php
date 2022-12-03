@@ -13,31 +13,29 @@ class PurchasePresenter extends Presenter
      */
     public static function dataTableLayout()
     {
+
         $layout = [
             [
                 'field' => 'id',
                 'searchable' => true,
                 'sortable' => true,
-                'switchable' => true,
+                'switchable' => false,
                 'title' => trans('general.order_number'),
                 'visible' => true,
             ], [
                 'field' => 'name',
                 'searchable' => true,
                 'sortable' => true,
-                'switchable' => true,
+                'switchable' => false,
                 'title' => trans('general.title'),
                 'visible' => true,
-                'formatter' => 'accessoriesLinkFormatter'
             ], [
-                'field' => 'supplier_id',
+                'field' => 'state',
                 'searchable' => true,
                 'sortable' => true,
-                'title' => trans('general.supplier'),
-                'formatter' => 'supliersLinkObjFormatter',
+                'title' => trans('general.state'),
             ]
         ];
-
         return json_encode($layout);
     }
 

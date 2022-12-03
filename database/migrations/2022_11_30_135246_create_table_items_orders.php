@@ -19,7 +19,7 @@ class CreateTableItemsOrders extends Migration
             $table->unsignedInteger('item_id');
             $table->string('item_type');
             $table->integer('supplier_id');
-            $table->integer('total')->default(0); // Lo que entra
+            $table->integer('total')->default(0); // Lo que necesita
             $table->integer('total_final')->default(0); // Lo que llega
             $table->timestamps();
             $table->index('supplier_id');

@@ -136,7 +136,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
 
     Route::resource(
         'purchases',
-        Api\PurchaseOrderController::class,
+        Api\PurchaseOrderController::class,            
         [
             'names' =>
             [

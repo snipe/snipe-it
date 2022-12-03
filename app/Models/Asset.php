@@ -1714,5 +1714,9 @@ class Asset extends Depreciable
 
     }
 
+    public function itemOrders()
+    {
+        return $this->morphMany(ItemOrder::class, 'item');
+    }
 
 }

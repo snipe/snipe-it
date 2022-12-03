@@ -18,8 +18,11 @@ class PurchaseOrderSeeder extends Seeder
     {
         PurchaseOrder::truncate();
         DB::table('items_orders')->truncate();
-        PurchaseOrder::factory()->has(ItemOrder::factory()->count(10))
-        // ->addConsumable()
-        ->create();
+        for ($i = 0; $i < 500; $i++) {
+            PurchaseOrder::factory()->has(ItemOrder::factory()->count(3)->consumables())
+                ->has(ItemOrder::factory()->count(1)->components())
+                ->has(ItemOrder::factory()->count(1)->accesorys())
+                ->create();
+        }
     }
 }

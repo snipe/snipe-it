@@ -25,7 +25,7 @@ class AccessoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
+    {        
         $this->authorize('view', Accessory::class);
 
         // This array is what determines which fields should be allowed to be sorted on ON the table itself, no relations

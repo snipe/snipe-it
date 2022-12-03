@@ -9,6 +9,11 @@ class ItemOrder extends SnipeModel
 {
     use HasFactory;
 
+    // 0 Abierta, 1 Cerrado, 2 Cancelado
+
+    const STATE_EMPTY = 0;
+    const STATE_LOAD_OK = 1;
+    const STATE_ABORTED = 1;
     /**
      * The table associated with the model.
      *
@@ -31,9 +36,9 @@ class ItemOrder extends SnipeModel
     protected $primaryKey = 'id';
 
 
-
     public function item()
     {
         return $this->morphTo();
     }
+   
 }

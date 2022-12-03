@@ -142,7 +142,7 @@ return [
     |
     */
 
-    'private_uploads' => storage_path().'/private_uploads',
+    'private_uploads' => storage_path() . '/private_uploads',
 
     /*
    |--------------------------------------------------------------------------
@@ -216,7 +216,7 @@ return [
     */
 
     'require_saml' => env('REQUIRE_SAML', false),
-    
+
     /*
     |--------------------------------------------------------------------------
     | Demo Mode Lockdown
@@ -311,6 +311,12 @@ return [
         App\Providers\MacroServiceProvider::class,
         App\Providers\SamlServiceProvider::class,
 
+
+        /*
+        * Personales
+        */
+        Barryvdh\Debugbar\ServiceProvider::class
+
     ],
 
     /*
@@ -366,7 +372,7 @@ return [
         'Image'     => Intervention\Image\ImageServiceProvider::class,
         'Carbon' => Carbon\Carbon::class,
         'Helper' => App\Helpers\Helper::class, // makes it much easier to use 'Helper::blah' in blades (which is where we usually use this)
-
+        'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
 
     ],
 
@@ -394,7 +400,7 @@ return [
     'allow_purge' => env('ALLOW_DATA_PURGE', false),
 
 
-   /*
+    /*
    |--------------------------------------------------------------------------
    | Allow Backup Deletion
    |--------------------------------------------------------------------------
@@ -406,7 +412,7 @@ return [
     'allow_backup_delete' => env('ALLOW_BACKUP_DELETE', false),
 
 
-  /*
+    /*
   |--------------------------------------------------------------------------
   | Escape Excel formulas in CSV exports
   |--------------------------------------------------------------------------

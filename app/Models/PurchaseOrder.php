@@ -8,14 +8,6 @@ use App\Models\ItemOrder;
 
 class PurchaseOrder extends SnipeModel
 {
-
-    const ASSET         = 'App\Models\Asset';
-    const ACCESSORY     = 'App\Models\Accessory';
-    const COMPONENT     = 'App\Models\Component';
-    const CONSUMABLE    = 'App\Models\Consumable';
-
-
-
     const STATES = [
         'INITIAL' => 0,
         'SEND' => 1,
@@ -56,46 +48,37 @@ class PurchaseOrder extends SnipeModel
         'state'         => 'required'
     ];
 
-    public function existItemAsset(int $id): bool
-    {
-        return ItemOrder::where(['item_id' => $id, 'item' => PurchaseOrder::ASSET])->count() > 0;
-    }
+    // public function existItemAsset(int $id): bool
+    // {
+    //     return ItemOrder::where(['item_id' => $id, 'item' => Asset::class])->count() > 0;
+    // }   
 
-    public function assets()
-    {
-        return $this->morphMany(PurchaseOrder::ASSET, 'item');
-    }
+    // public function assets()
+    // {
+    //     return $this->morphMany(Asset::class, 'item');
+    // }
 
-    public function consumables()
-    {
-        return $this->morphMany(PurchaseOrder::CONSUMABLE, 'item');
-    }
+    // public function consumables()
+    // {
+    //     return $this->morphMany(Consumable::class, 'consumables');
+    // }
+    
 
-    public function itemOrders()
-    {
-        return $this->morphMany(PurchaseOrder::CONSUMABLE, 'item');
-    }
-
-    public function components()
-    {
-        return $this->morphMany(PurchaseOrder::COMPONENT, 'item');
-    }
+    // public function components()
+    // {
+    //     return $this->morphMany(Component::class, 'item');
+    // }
 
     
 
-    public function accesories()
-    {
-        return $this->morphMany(PurchaseOrder::ACCESSORY, 'item');
-    }
+    // public function accesories()
+    // {
+    //     return $this->morphMany(Accessory::class, 'item');
+    // }
 
-    public function items(): array
+    public function itemOrders()
     {
-        $results = [];
-        $results[] = $this->assets();
-        $results[] = $this->consumables();
-        $results[] = $this->components();
-        $results[] = $this->accesories();
-        return $results;
+        return $this->hasMany(ItemOrder::class);
     }
 
 }
