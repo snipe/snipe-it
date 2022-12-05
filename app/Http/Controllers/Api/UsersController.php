@@ -505,7 +505,7 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
 
         if (empty($user->email)) {
-            return response()->json(Helper::formatStandardApiResponse(‘error’, null, trans('admin/users/message.inventorynotification.error')));
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.inventorynotification.error')));
         }
  
         return response()->Helper::formatStandardApiResponse('success', null, trans('admin/users/message.inventorynotification.success'));
