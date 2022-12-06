@@ -492,7 +492,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Notify a specific user via email with all of his assigned assets.
+     * Notify a specific user via email with all of their assigned assets.
      *
      * @author [Lukas Fehling] [<lukas.fehling@adabay.rocks>]
      * @since [v6.0.13]
@@ -505,22 +505,11 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
 
         if (empty($user->email)) {
-            return response()->json(
-                [
-                    'status' => 'error',
-                    'message' => 'This user has no email set.',
-                    'payload' => null,
-                ], 404);
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.inventorynotification.error')));
         }
-
-        $user->notify((new CurrentInventory($user)));
-
-        return response()->json(
-            [
-                'status' => 'success',
-                'message' => 'The user was notified about his current inventory.',
-                'payload' => null,
-            ], 200);
+ 
+        return response()->Helper::formatStandardApiResponse('success', null, trans('admin/users/message.inventorynotification.success'));
+ 
     }
 
     /**

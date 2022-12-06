@@ -74,8 +74,14 @@
             <label for="format" class="col-md-4 control-label">
               {{ trans('admin/custom_fields/general.field_format') }}
             </label>
+              @php
+              $field_format = '';
+              if (stripos($field->format, 'regex') === 0){
+                $field_format = 'CUSTOM REGEX';
+              }
+              @endphp
             <div class="col-md-6 required">
-              {{ Form::select("format",Helper::predefined_formats(), $field->format, array('class'=>'format select2 form-control', 'aria-label'=>'format')) }}
+              {{ Form::select("format",Helper::predefined_formats(), ($field_format == '') ? $field->format : $field_format, array('class'=>'format select2 form-control', 'aria-label'=>'format')) }}
               {!! $errors->first('format', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
