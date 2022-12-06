@@ -57,6 +57,7 @@ class UserImporter extends ItemImporter
         $this->item['employee_num'] = $this->findCsvMatch($row, 'employee_num');
         $this->item['department_id'] = $this->createOrFetchDepartment($this->findCsvMatch($row, 'department'));
         $this->item['manager_id'] = $this->fetchManager($this->findCsvMatch($row, 'manager_first_name'), $this->findCsvMatch($row, 'manager_last_name'));
+        $this->item['remote'] = $this->findCsvMatch($row, 'remote');
 
         $user_department = $this->findCsvMatch($row, 'department');
         if ($this->shouldUpdateField($user_department)) {
