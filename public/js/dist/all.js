@@ -59555,9 +59555,6 @@ var baseUrl = $('meta[name="baseUrl"]').attr('content');
         }, {
           id: 'zip',
           text: 'ZIP'
-        }, {
-          id: 'remote',
-          text: 'Remote'
         }],
         customFields: this.customFields
       },
