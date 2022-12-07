@@ -61201,13 +61201,13 @@ $(document).ready(function () {
         $('#assigned_asset').show();
         $('#assigned_user').hide();
         $('#assigned_location').hide();
-        $('.notification-callout').fadeOut();
+        $('.notification-callout').fadeOut('fast');
       } else if (assignto_type == 'location') {
         $('#current_assets_box').fadeOut();
         $('#assigned_asset').hide();
         $('#assigned_user').hide();
         $('#assigned_location').show();
-        $('.notification-callout').fadeOut();
+        $('.notification-callout').fadeOut('fast');
       } else {
         $('#assigned_asset').hide();
         $('#assigned_user').show();
@@ -61217,7 +61217,7 @@ $(document).ready(function () {
           $('#current_assets_box').fadeIn();
         }
 
-        $('.notification-callout').fadeIn();
+        $('.notification-callout').fadeIn('fast');
       }
     });
   }); // ------------------------------------------------

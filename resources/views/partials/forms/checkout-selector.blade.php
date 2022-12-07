@@ -4,17 +4,20 @@
         <div class="btn-group" data-toggle="buttons">
             @if ((isset($user_select)) && ($user_select!='false'))
             <label class="btn btn-default active">
-                <input name="checkout_to_type" value="user" aria-label="checkout_to_type" type="radio" checked="checked"><i class="fas fa-user" aria-hidden="true"></i> {{ trans('general.user') }}
+                <input name="checkout_to_type" value="user" aria-label="checkout_to_type" type="radio" checked="checked">
+                <i class="fas fa-user" aria-hidden="true"></i> {{ trans('general.user') }}
             </label>
             @endif
             @if ((isset($asset_select)) && ($asset_select!='false'))
             <label class="btn btn-default">
-                <input name="checkout_to_type" value="asset" aria-label="checkout_to_type" type="radio"><i class="fas fa-barcode" aria-hidden="true"></i> {{ trans('general.asset') }}
+                <input name="checkout_to_type" value="asset" aria-label="checkout_to_type" type="radio">
+                <i class="fas fa-barcode" aria-hidden="true"></i> {{ trans('general.asset') }}
             </label>
             @endif
             @if ((isset($location_select)) && ($location_select!='false'))
             <label class="btn btn-default">
-                <input name="checkout_to_type" value="location" aria-label="checkout_to_type" class="active" type="radio"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{ trans('general.location') }}
+                <input name="checkout_to_type" value="location" aria-label="checkout_to_type" class="active" type="radio">
+                <i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{ trans('general.location') }}
             </label>
             @endif
 

@@ -63,7 +63,7 @@
 
                     @include ('partials.forms.checkout-selector', ['user_select' => 'true','asset_select' => 'true', 'location_select' => 'true'])
 
-                    @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.user'), 'fieldname' => 'assigned_user', 'required'=>'true'])
+                    @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.user'), 'id'=> 'assigned_user', 'fieldname' => 'assigned_user', 'required'=>'true'])
 
                     <!-- We have to pass unselect here so that we don't default to the asset that's being checked out. We want that asset to be pre-selected everywhere else. -->
                     @include ('partials.forms.edit.asset-select', ['translated_name' => trans('general.asset'), 'fieldname' => 'assigned_asset', 'unselect' => 'true', 'style' => 'display:none;', 'required'=>'true'])
@@ -97,7 +97,7 @@
                         </div>
 
                         <!-- Note -->
-                        <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
+                        <div class="form-group{{ $errors->has('note') ? ' error' : '' }}">
                             {{ Form::label('note', trans('admin/hardware/form.notes'), array('class' => 'col-md-3 control-label')) }}
                             <div class="col-md-8">
                                 <textarea class="col-md-6 form-control" id="note" name="note">{{ old('note', $asset->note) }}</textarea>
@@ -105,26 +105,44 @@
                             </div>
                         </div>
 
+
                         @if ($asset->requireAcceptance() || $asset->getEula() || ($snipeSettings->slack_endpoint!=''))
-                            <div class="form-group notification-callout">
+
+                            <div class="form-group{{ $errors->has('accept_in_person') ? ' has-error' : '' }}" id="acceptable">
+                                <div class="col-md-8 col-md-offset-3">
+                                    <label class="control-label text-left" style="text-align:left !important" for="accept_in_person">
+                                        <input type="checkbox" value="1" name="accept_in_person" id="accept_in_person" class="minimal" {{ old('accept_in_person') == '1' ? ' checked="checked"' : '' }}>
+                                        {!! $errors->first('accept_in_person', '<span class="alert-msg">:message</span>') !!}
+                                        This user should be presented with an acceptance signature form on the next screen
+                                    </label>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group" id="notification-callout">
                                 <div class="col-md-8 col-md-offset-3">
                                     <div class="callout callout-info">
 
                                         @if ($asset->requireAcceptance())
-                                            <i class="far fa-envelope" aria-hidden="true"></i>
-                                            {{ trans('admin/categories/general.required_acceptance') }}
-                                            <br>
+                                            <div class="notification-callout notification-acceptance">
+                                                <i class="far fa-envelope fa-fw" aria-hidden="true"></i>
+                                                {{ trans('admin/categories/general.required_acceptance') }}
+                                            </div>
                                         @endif
 
                                         @if ($asset->getEula())
-                                            <i class="far fa-envelope" aria-hidden="true"></i>
-                                            {{ trans('admin/categories/general.required_eula') }}
-                                            <br>
+                                            <div class="notification-callout">
+                                                <i class="far fa-envelope fa-fw" aria-hidden="true"></i>
+                                                {{ trans('admin/categories/general.required_eula') }}
+                                            </div>
+
                                         @endif
 
                                         @if ($snipeSettings->slack_endpoint!='')
-                                            <i class="fab fa-slack" aria-hidden="true"></i>
-                                            {{ trans('general.slack_msg_note')}}
+                                            <div>
+                                                <i class="fab fa-slack fa-fw" aria-hidden="true"></i>
+                                                {{ trans('general.slack_msg_note')}}
+                                            </div>
                                         @endif
                                     </div>
                                 </div>
@@ -133,8 +151,30 @@
 
                     </div> <!--/.box-body-->
                     <div class="box-footer">
-                        <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
-                        <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a class="btn btn-link pull-left" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
+                            </div>
+                            <div class="col-md-8 text-right">
+                                <span id="return-to">
+                                    <span class="form-inline">Return to:</span>
+                                    <select name="next_action" class="select2 select2-hide-search text-left" style="min-width: 150px;">
+                                        <option class="text-left" value="listings" role="option">Listings</option>
+                                        <option value="item"  role="option">Asset</option>
+                                    </select>
+                                </span>
+
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
                     </div>
                 </form>
             </div>
@@ -159,12 +199,36 @@
     @include('partials/assets-assigned')
 
     <script>
-        //        $('#checkout_at').datepicker({
-        //            clearBtn: true,
-        //            todayHighlight: true,
-        //            endDate: '0d',
-        //            format: 'yyyy-mm-dd'
-        //        });
+        // We don't need a search here since the options are limited
+        $(".select2-hide-search").select2({
+            minimumResultsForSearch: Infinity,
+        });
+
+
+        // See if the cloaked radio buttons from the checkout selector is set to 'user'
+        $('input[name="checkout_to_type"]').change(function() {
+
+            // if it's not set to user, hide the accept_in_person and checkox (since only users get notified)
+            if ($('input[name="checkout_to_type"]:checked').val()!='user') {
+                $("#acceptable").hide('fast');
+                $('#accept_in_person').iCheck('uncheck');
+            } else {
+                $("#acceptable").show();
+                $('#accept_in_person').iCheck('uncheck');
+            }
+
+        });
+
+        $('#accept_in_person').on('ifUnchecked', function(event){
+            $(".notification-acceptance").show();
+        });
+
+        $('#accept_in_person').on('ifChecked', function(event) {
+            $(".notification-acceptance").hide('fast');
+        });
+
+
+
 
 
     </script>

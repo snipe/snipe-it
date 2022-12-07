@@ -52,11 +52,19 @@ class AssetCheckoutController extends Controller
      */
     public function store(AssetCheckoutRequest $request, $assetId)
     {
+
+        $bulk_back_url = request()->headers->get('referer');
+        session(['return_to' => $request->input('return-to')]);
+
+        $asset = Asset::find($assetId);
+        $this->authorize('checkout', $asset);
+
+
         try {
             // Check if the asset exists
-            if (! $asset = Asset::find($assetId)) {
+            if (!$asset) {
                 return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-            } elseif (! $asset->availableForCheckout()) {
+            } elseif (!$asset->availableForCheckout()) {
                 return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkout.not_available'));
             }
             $this->authorize('checkout', $asset);
