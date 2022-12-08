@@ -12,6 +12,10 @@ class RentOrderForm extends Component
 {
     public $assignedTo = null;
     public $selected = [];
+    public $error = [
+        'user' => false,
+        'assets' => false
+    ];
 
     public $listeners = [
         'addAssetToList' => "addAssetToList",
@@ -20,17 +24,21 @@ class RentOrderForm extends Component
 
     public function render()
     {
-        return view('rentorders::livewire.rent-order-form');
+        return view('rentorders::livewire.rent-order-form', [
+            'error' => $this->error
+        ]);
     }
 
     public function addAssetToList($id)
     {
+        $this->error['assets'] = false;
         $this->selected[] = $this->assetToArray(Asset::find($id));
     }
 
     public function setUser($id)
     {
         $this->assignedTo = User::find($id);
+        $this->error['user'] = false;
     }
 
 
@@ -54,8 +62,10 @@ class RentOrderForm extends Component
 
     public function createRentOrder()
     {
-        if (!$this->assignedTo || count($this->selected) == 0)
+        if (!$this->assignedTo || count($this->selected) == 0) {
+            $this->setErrors();
             return;
+        }
 
         if (auth()->check()) {
             $operator = auth()->user();
@@ -71,6 +81,17 @@ class RentOrderForm extends Component
         }
 
         abort(Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * @return void
+     */
+    public function setErrors(): void
+    {
+        $this->error = [
+            'user' => ($this->assignedTo == null),
+            'assets' => (count($this->selected) == 0)
+        ];
     }
 
 }

@@ -8,6 +8,7 @@ use Livewire\Component;
 class SelectUser extends Component
 {
     public $assignedTo;
+
     public function render()
     {
         return view('rentorders::livewire.select-user', [

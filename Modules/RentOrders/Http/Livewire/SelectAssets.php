@@ -62,4 +62,8 @@ class SelectAssets extends Component
             "img" => $asset->getImageUrl()
         ];
     }
+
+    public function clearSearch(){
+        $this->search = '';
+    }
 }

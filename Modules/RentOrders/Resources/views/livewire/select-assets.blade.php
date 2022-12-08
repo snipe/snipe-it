@@ -2,6 +2,9 @@
     <div class="form-group ">
         <label for="name" class="col-md-3 control-label">Busqueda de equipo</label>
         <div class="col-md-6 col-sm-12">
+            @if($search)
+            <span wire:click.prevent="clearSearch()" class="btn" style="position: absolute; margin-left: 86%">×</span>
+            @endIf
             <input class="form-control" type="text" wire:model="search">
         </div>
     </div>
@@ -32,7 +35,7 @@
             </table>
         </div>  
         @else
-        <span>No found</span>
+        <span>No se a encontrado ningún registro</span>
         @endIf      
     @endIf
 
