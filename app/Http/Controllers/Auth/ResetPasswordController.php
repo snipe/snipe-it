@@ -41,6 +41,7 @@ class ResetPasswordController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->middleware('throttle:10,1');
     }
 
     protected function rules()
@@ -116,7 +117,7 @@ class ResetPasswordController extends Controller
             }
 
             \Log::debug('Password reset for '.$user->username.' FAILED - this user exists but the token is not valid');
-            return redirect()->back()->withInput($request->only('email'))->with('error', trans('passwords.token'));
+            return redirect()->back()->withInput($request->only('email'))->with('success', trans('passwords.reset'));
 
         }
 
