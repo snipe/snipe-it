@@ -2,14 +2,14 @@
 
 {{-- Page title --}}
 @section('title')
-{{ trans('Rent Orders') }}
+{{ trans('Orden de alquiler') }}
 @parent
 @stop
 
 @section('header_right')
 @section('header_right')
 <a href="{{ route('rentorders.create') }}" class="btn btn-primary pull-right">
-    {{ trans('general.create') }}</a>
+    {{ trans('Crear') }}</a>
 @stop
 @stop
 

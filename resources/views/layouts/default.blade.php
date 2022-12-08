@@ -574,7 +574,7 @@
               <li{!! (Request::is('rentorders*') ? ' class="active"' : '') !!}>
               <a href="{{ route('rentorders.index') }}" accesskey="6">
                   <i class="fas fa-table fa-fw"></i>
-                  <span>{{ trans('Rent Orders') }}</span>
+                  <span>{{ trans('Orden de alquiler') }}</span>
               </a>
               </li>
 
