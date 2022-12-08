@@ -20,21 +20,34 @@
         @endif
         <a href="{{ route('users.create') }}" class="btn btn-primary pull-right" style="margin-right: 5px;">  {{ trans('general.create') }}</a>
     @endcan
+    <!-- Split button -->
+    <div class="btn-group">
+        <button type="button" class="btn btn-danger">Action</button>
+        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu">
+            <li>@if (request('status')=='deleted')
+                    <a class="btn btn-default" style="width:100%;" href="{{ route('users.index') }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_current') }}</a>
+                @else
+                    <a class="btn btn-default" style="width:100%;" href="{{ route('users.index', ['status' => 'deleted']) }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_deleted') }}</a>
+                @endif</li>
+            <li>@can('superuser')
+                    <form  action="{{ route('users/bulkemailEveryone')}}" method="POST">
+                        {{ csrf_field() }}
+                        <a href="#" class="btn btn-default" style="width:100%;">{{ trans('admin/users/general.email_everyone_assigned') }}</a>
+                    </form>
+                @endcan</li>
+            <li>@can('view', \App\Models\User::class)
+                    <a class="btn btn-default" style="width:100%;" href="{{ route('users.export') }}" style="margin-right: 5px;">{{ trans('general.export') }}</a>
+                @endcan
+            </li>
+        </ul>
+    </div>
 
-    @if (request('status')=='deleted')
-        <a class="btn btn-default pull-right" href="{{ route('users.index') }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_current') }}</a>
-    @else
-        <a class="btn btn-default pull-right" href="{{ route('users.index', ['status' => 'deleted']) }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_deleted') }}</a>
-    @endif
-    @can('superuser')
-        <form action="{{ route('users/bulkemailEveryone')}}" method="POST">
-            {{ csrf_field() }}
-            <button class="btn btn-default pull-right" rel="noopener">{{ trans('admin/users/general.email_everyone_assigned') }}</button>
-        </form>
-    @endcan
-    @can('view', \App\Models\User::class)
-        <a class="btn btn-default pull-right" href="{{ route('users.export') }}" style="margin-right: 5px;">{{ trans('general.export') }}</a>
-    @endcan
+
+
 
 @stop
 
