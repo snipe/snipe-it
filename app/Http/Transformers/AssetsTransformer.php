@@ -185,6 +185,7 @@ class AssetsTransformer
                     'name' => e($asset->assigned->getFullNameAttribute()),
                     'first_name'=> e($asset->assigned->first_name),
                     'last_name'=> ($asset->assigned->last_name) ? e($asset->assigned->last_name) : null,
+                    'email'=> ($asset->assigned->email) ? e($asset->assigned->email) : null,
                     'employee_number' =>  ($asset->assigned->employee_num) ? e($asset->assigned->employee_num) : null,
                     'type' => 'user',
                 ] : null;
