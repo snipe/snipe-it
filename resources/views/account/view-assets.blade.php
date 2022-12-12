@@ -387,6 +387,7 @@
                           data-side-pagination="client"
                           data-show-columns="true"
                           data-show-export="true"
+                          data-show-footer="true"
                           data-show-refresh="true"
                           data-sort-order="asc"
                           id="userAssets"
@@ -404,6 +405,7 @@
                       <th class="col-md-2" data-switchable="true" data-visible="true">{{ trans('general.name') }}</th>
                       <th class="col-md-2" data-switchable="true" data-visible="true">{{ trans('admin/hardware/table.asset_model') }}</th>
                       <th class="col-md-3" data-switchable="true" data-visible="true">{{ trans('admin/hardware/table.serial') }}</th>
+                      <th class="col-md-6" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
 
                       @foreach ($field_array as $db_column => $field_name)
                         <th class="col-md-1" data-switchable="true" data-visible="true">{{ $field_name }}</th>
@@ -439,6 +441,9 @@
                           @endif
                         </td>
                         <td>{{ $asset->serial }}</td>
+                        <td>
+                          {!! Helper::formatCurrencyOutput($asset->purchase_cost) !!}
+                        </td>
 
                         @foreach ($field_array as $db_column => $field_value)
                           <td>
