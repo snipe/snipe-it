@@ -154,6 +154,12 @@ class AssetPresenter extends Presenter
                 'footerFormatter' => 'sumFormatter',
                 'class' => 'text-right',
             ], [
+                'field' => 'upgrades_current_cost',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => trans('general.upgrades'),
+                'class' => 'text-right',
+            ], [
                 'field' => 'order_number',
                 'searchable' => true,
                 'sortable' => true,

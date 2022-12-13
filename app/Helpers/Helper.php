@@ -1147,4 +1147,11 @@ class Helper
         return $age;
 
     }
+    public static function AssetValue($cost, $components){
+        //This does not work. I think I need to do a asset has() or something here to
+        // get the purchase_cost of the component :thinking:
+        $total_cost= $cost + ($components->purchase_cost * $components->assigned_qty);
+
+        return $total_cost;
+    }
 }

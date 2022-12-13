@@ -85,6 +85,7 @@ class AssetsTransformer
             'last_checkout' => Helper::getFormattedDateObject($asset->last_checkout, 'datetime'),
             'expected_checkin' => Helper::getFormattedDateObject($asset->expected_checkin, 'date'),
             'purchase_cost' => Helper::formatCurrencyOutput($asset->purchase_cost),
+            'upgrades_current_cost' => Helper::AssetValue($asset->purchase_cost, $asset->components()),
             'checkin_counter' => (int) $asset->checkin_counter,
             'checkout_counter' => (int) $asset->checkout_counter,
             'requests_counter' => (int) $asset->requests_counter,

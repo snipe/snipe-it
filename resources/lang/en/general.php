@@ -261,6 +261,7 @@ return [
     'total_consumables'		=> 'total consumables',
     'type'  				=> 'Type',
     'undeployable'			=> 'Un-deployable',
+    'upgrades'              => 'Upgrades/Current Cost',
     'unknown_admin'			=> 'Unknown Admin',
     'username_format'		=> 'Username Format',
     'username'              => 'Username',
