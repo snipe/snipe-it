@@ -14,14 +14,20 @@ class RentOrder extends Model
 
     protected $table = "rent_orders";
 
-    protected $fillable = ['created_by', 'assigned_to', 'status'];
+    protected $fillable = ['created_by', 'assigned_to', 'status', 'return_date'];
 
-    public static function createWith($operator, $assinedTo, $assets)
-    {
+    protected $casts = [
+        'renturn_date' => 'datetime:Y-m-d'
+    ];
+
+    public static function createWith($operator, $assinedTo, $assets, $returnDate)
+    {       
+
         $rentOrder = RentOrder::create([
             'created_by' => $operator->id,
             'assigned_to' => $assinedTo->id,
-            "status" => RentOrderStatus::find(2)->id
+            "status" => RentOrderStatus::find(2)->id,
+            'return_date' => $returnDate
         ]);
 
         $rentOrder->assets()->saveMany($assets);

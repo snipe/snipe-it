@@ -12,14 +12,18 @@ class RentOrderForm extends Component
 {
     public $assignedTo = null;
     public $selected = [];
+    public $returnDate; 
+    
     public $error = [
         'user' => false,
-        'assets' => false
+        'assets' => false,
+        'returnDate' => false
     ];
 
     public $listeners = [
         'addAssetToList' => "addAssetToList",
-        "setSelectedUser" => "setUser"
+        "setSelectedUser" => "setUser",
+        "setReturnDate"=>"setReturnDate"
     ];
 
     public function render()
@@ -27,6 +31,12 @@ class RentOrderForm extends Component
         return view('rentorders::livewire.rent-order-form', [
             'error' => $this->error
         ]);
+    }
+
+    public function setReturnDate($date)
+    {
+        $this->error['returnDate'] = false;
+        $this->returnDate = $date;
     }
 
     public function addAssetToList($id)
@@ -62,7 +72,7 @@ class RentOrderForm extends Component
 
     public function createRentOrder()
     {
-        if (!$this->assignedTo || count($this->selected) == 0) {
+        if (!$this->assignedTo || count($this->selected) == 0 || !$this->returnDate) {
             $this->setErrors();
             return;
         }
@@ -74,7 +84,7 @@ class RentOrderForm extends Component
             foreach ($this->selected as $asset) {
                 $assets[] = $asset['id'];
             }
-            $system->send($operator->id, $this->assignedTo['id'], $assets);
+            $system->send($operator->id, $this->assignedTo['id'], $assets, $this->returnDate);
             session()->flash('success_message', 'RentOrder was added successfully!');
             $this->reset();
             return redirect()->route('rentorders.index');
@@ -90,7 +100,8 @@ class RentOrderForm extends Component
     {
         $this->error = [
             'user' => ($this->assignedTo == null),
-            'assets' => (count($this->selected) == 0)
+            'assets' => (count($this->selected) == 0),
+            'returnDate' => ($this->assignedTo == null)
         ];
     }
 

@@ -17,7 +17,7 @@ class ApiRentOrdersController extends Controller
      */
     public function index()
     {
-        $rentOrders = RentOrder::all();
+        $rentOrders = RentOrder::orderBy('id','desc')->get();
 
         return (new RentOrdersTransformer())->transformRentOrders($rentOrders, $rentOrders->count());
     }

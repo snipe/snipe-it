@@ -49,6 +49,16 @@
 
                             <livewire:rentorders::select-assets />
 
+                            <livewire:rentorders::select-date />
+                           
+                            <div class="col-sm-12">
+                               <div style="margin-left: 25%; margin-bottom: 20px">
+                                   @if($error['returnDate'])
+                                   <span style="color: darkred">Es necesario que seleccione una fecha estimada de devolución. </span>
+                                   @endIf
+                               </div>
+                            </div>
+
                         </div> <!-- ./box-body -->
                     </div> <!-- box -->
                 </form>

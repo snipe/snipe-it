@@ -35,13 +35,17 @@ class PersistNewRentOrdersTest extends BaseTest
         $asset = $this->createValidAsset(['model_id' => $model->id, 'status_id' => 2, 'assigned_to' => null]);
         $asset2 = $this->createValidAsset(['model_id' => $model->id, 'status_id' => 2, 'assigned_to' => null]);
 
+        $returnDate = (new Datetime())->modify('+1 day');
+
         $this->system->send($operatorUser->id, $aUser->id, [
             $asset->id,
             $asset2->id,
+            $returnDate->format("Y-m-d")
         ]);
 
         $this->assertTrue(RentOrder::all()->count() == 1);
         $this->assertTrue(RentOrder::all()->first()->assigned_to == $aUser->id);
+        $this->assertTrue(RentOrder::all()->first()->return_date == $returnDate->format("Y-m-d"));
         $this->assertTrue(Asset::find($asset->id)->assigned_to == $aUser->id);
         $this->assertTrue(Asset::find($asset2->id)->assigned_to == $aUser->id);
     }

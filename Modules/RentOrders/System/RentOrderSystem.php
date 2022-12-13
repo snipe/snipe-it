@@ -9,7 +9,7 @@ use Modules\RentOrders\Entities\RentOrder;
 
 class RentOrderSystem
 {
-    public function send($operatorUserId, $assignedToId, $assetsIds){
+    public function send($operatorUserId, $assignedToId, $assetsIds, $returnDate){
 
         $operator = User::find($operatorUserId);
         $assinedTo = User::find($assignedToId);
@@ -20,7 +20,7 @@ class RentOrderSystem
             $asset->save();
         }
 
-        return RentOrder::createWith($operator, $assinedTo, $assets);
+        return RentOrder::createWith($operator, $assinedTo, $assets, $returnDate);
     }
 
     public function deleteOrderWithId($id, $user){

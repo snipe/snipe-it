@@ -17,6 +17,7 @@ class CreateRentOrdersTable extends Migration
             $table->id();
             $table->integer("created_by");
             $table->integer("assigned_to");
+            $table->string('return_date')->format('Y-m-d');
             $table->timestamps();
         });
     }
