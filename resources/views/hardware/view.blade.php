@@ -495,6 +495,9 @@
                                             </div>
                                             <div class="col-md-6">
                                                 {{ Helper::getFormattedDateObject($asset->purchase_date, 'date', false) }}
+                                                -
+                                                {{ Carbon::parse($asset->purchase_date)->diff(Carbon::now())->format('%y years, %m months and %d days')}}
+
                                             </div>
                                         </div>
                                     @endif
