@@ -967,6 +967,7 @@
                                         <th>{{ trans('general.name') }}</th>
                                         <th>{{ trans('general.qty') }}</th>
                                         <th>{{ trans('general.purchase_cost') }}</th>
+                                        <th>{{trans('admin/hardware/form.serial')}}</th>
                                         </thead>
                                         <tbody>
                                         <?php $totalCost = 0; ?>
@@ -980,6 +981,7 @@
                                                     </td>
                                                     <td>{{ $component->pivot->assigned_qty }}</td>
                                                     <td>{{ Helper::formatCurrencyOutput($component->purchase_cost) }} each</td>
+                                                    <td>{{ $component->serial }}</td>
 
                                                     <?php $totalCost = $totalCost + ($component->purchase_cost *$component->pivot->assigned_qty) ?>
                                                 </tr>
