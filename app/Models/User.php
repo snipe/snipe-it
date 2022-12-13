@@ -339,6 +339,24 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     }
 
     /**
+     * Establishes a count of all items assigned
+     *
+     * @author J. Vinsmoke
+     * @since [v6.1]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    Public function allAssignedCount() {
+        $assetsCount = $this->assets()->count();
+        $licensesCount = $this->licenses()->count();
+        $accessoriesCount = $this->accessories()->count();
+        $consumablesCount = $this->consumables()->count();
+        
+        $totalCount = $assetsCount + $licensesCount + $accessoriesCount + $consumablesCount;
+    
+        return (int) $totalCount;
+        }
+
+    /**
      * Establishes the user -> actionlogs relationship
      *
      * @author A. Gianotto <snipe@snipe.net>

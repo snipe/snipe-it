@@ -179,17 +179,23 @@
 
                 @can('view', $user)
                 <div class="col-md-12" style="padding-top: 5px;">
+                @if($user->allAssignedCount() != '0') 
                   <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print" target="_blank" rel="noopener">{{ trans('admin/users/general.print_assigned') }}</a>
+                  @else
+                  <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_assets_assigned') }}">{{ trans('admin/users/general.print_assigned') }}</button>
+                @endif
                 </div>
                 @endcan
 
                 @can('view', $user)
                   <div class="col-md-12" style="padding-top: 5px;">
-                  @if(!empty($user->email))
+                  @if(!empty($user->email) && ($user->allAssignedCount() != '0'))
                     <form action="{{ route('users.email',['userId'=> $user->id]) }}" method="POST">
                       {{ csrf_field() }}
                       <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener">{{ trans('admin/users/general.email_assigned') }}</button>
                     </form>
+                  @elseif(!empty($user->email) && ($user->allAssignedCount() == '0'))
+                      <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_assets_assigned') }}">{{ trans('admin/users/general.email_assigned') }}</button>
                   @else
                       <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_email') }}">{{ trans('admin/users/general.email_assigned') }}</button>
                   @endif
