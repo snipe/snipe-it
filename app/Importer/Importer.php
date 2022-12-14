@@ -77,6 +77,7 @@ abstract class Importer
         'manager_first_name' => 'manager first name',
         'manager_last_name' => 'manager last name',
         'min_amt' => 'minimum quantity',
+        'remote' => 'remote',
     ];
     /**
      * Map of item fields->csv names
@@ -288,6 +289,7 @@ abstract class Importer
             'department_id' =>  '',
             'username'  => $this->findCsvMatch($row, 'username'),
             'activated'  => $this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')),
+            'remote'    => $this->fetchHumanBoolean(($this->findCsvMatch($row, 'remote'))),
         ];
 
         // Maybe we're lucky and the user already exists.
