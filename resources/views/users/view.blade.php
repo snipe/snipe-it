@@ -203,14 +203,16 @@
                 @endcan
 
                 @can('update', $user)
+                <div class="col-md-12" style="padding-top: 5px;">
                   @if (($user->activated == '1') && ($user->email != '') && ($user->ldap_import == '0'))
-                      <div class="col-md-12" style="padding-top: 5px;">
-                        <form action="{{ route('users.password',['userId'=> $user->id]) }}" method="POST">
+                      <form action="{{ route('users.password',['userId'=> $user->id]) }}" method="POST">
                           {{ csrf_field() }}
-                          <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('button.send_password_link') }}</button>
-                        </form>
-                      </div>
+                      <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('button.send_password_link') }}</button>
+                      </form>
+                  @elseif(($user->activated == '1') && ($user->ldap_import == '0'))
+                      <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_email') }}">{{ trans('button.send_password_link') }}</button> 
                   @endif
+                  </div>
                 @endcan
 
                 @can('delete', $user)
