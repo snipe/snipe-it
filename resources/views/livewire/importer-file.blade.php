@@ -1,4 +1,5 @@
 {{-- <template> --}}
+
   <tr v-show="processDetail">
     <td colspan="5">
     <div class="col-md-12">
@@ -68,17 +69,27 @@
                 <div class="row" wire:key="fake_key-{{ base64_encode($header) }}-{{ $increment }}">
                     <div class="col-md-12">
                         <div class="col-md-4 text-right">
-                            <!-- FIXME - no :for -->
-                            <label :for="header" class="control-label">{{ $header }}</label>
+                            <label for="field_map.{{ $index }}" class="control-label">{{ $header }}</label>
                         </div>
                         <div class="col-md-4 form-group">
                             <div required data-force-refresh="{{ $increment }}">
                                 {{-- <select2 :options="columns" v-model="columnMappings[header]">
                                     <option value="0">Do Not Import</option>
                                 </select2> --}}
-                                <span wire:ignore>
-                                    {{ Form::select('mapping[]', $columnOptions[$activeFile->import_type], @$activeFile->field_map[$header], [/*'class' => 'livewire-select2 mappings', */'data-livewire-mapping' => $header, 'placeholder' => 'Do Not Import']) }}
-                                </span>
+{{--                                <span wire:ignore>--}}
+                                    {{ Form::select('field_map.'.$index, $columnOptions[$activeFile->import_type], @$activeFile->field_map[$header],
+                                        [
+                                        'class' => 'mappings livewire-select2',
+                                        'wire:model' => 'field_map.'.$index, // I think it just can't read this :/
+                                        'data-livewire-mapping' => $header, // do we still need this?
+                                        'data-livewire-model' => 'field_map.'.$index, // start of a 'universal' way to do this?
+                                        'placeholder' => 'Do Not Import'
+                                        ])
+
+                                    }}
+                                {{-- /* 'wire:model' => 'activeFile.field_map.'.$header, doesn't work */
+                                        /*'class' => 'livewire-select2 mappings', */' --}}
+{{--                                </span>--}}
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -95,7 +106,7 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-2 text-right" style="padding-top: 20px;">
                 <button type="button" class="btn btn-sm btn-default" wire:click="$emit('hideDetails')">Cancel</button>
-                <button type="submit" class="btn btn-sm btn-primary" wire:click="postSave">Import</button>
+                <button type="submit" class="btn btn-sm btn-primary" id="import">Import</button>
                 <br><br>
             </div>
         </div><!-- /div row -->
@@ -112,69 +123,78 @@
     </div><!-- /div v-show -->
 
     </td>
-
     <script>
-        var unused_var_thing = {
-            created() {
-                this.populateSelect2ActiveItems();
-            },
-            watch: {
-                columns() {
-                    this.populateSelect2ActiveItems();
+          function postSave() {
+              // FIXME - this is just awful.
+                console.warn("Saving import!");
+                if (!@this['activeFile'].import_type) {
+                    console.warn("didn't find an import type :(");
+                    @this.set('statusType','error');
+                    @this.set('statusText', "An import type is required... "); // TODO - translate me!
+                    return false;
                 }
-            },
-            methods: {
-                postSave() {
-                    /* started cutting here ... */
-                    this.$http.post(route('api.imports.importFile', this.file.id), {
-                        'import-update': this.options.update,
-                        'send-welcome': this.options.send_welcome,
-                        'import-type': this.options.importType,
-                        'run-backup': this.options.run_backup,
-                        'column-mappings': this.columnMappings
-                    }).then( ({body}) => {
-                        // Success
-                        this.statusType="success";
-                        this.statusText = "Success... Redirecting.";
-                        window.location.href = body.messages.redirect_url;
-                    }, ({body}) => {
-                        // Failure
-                        if(body.status == 'import-errors') {
-                            window.eventHub.$emit('importErrors', body.messages);
-                            this.statusType='error';
-                            this.statusText = "Error";
-                        } else {
-                            this.$emit('alert', {
-                                message: body.messages,
-                                type: "danger",
-                                visible: true,
-                            })
-                        }
-                        this.displayImportModal=false;
-                    });
-                },
-                populateSelect2ActiveItems() {
-                    if(this.file.field_map == null) {
-                        // Begin by populating the active selection in dropdowns with blank values.
-                        for (var i=0; i < this.file.header_row.length; i++) {
-                            this.$set(this.columnMappings, this.file.header_row[i], null);
-                        }
-                        // Then, for any values that have a likely match, we make that active.
-                        for(var j=0; j < this.columns.length; j++) {
-                            let column = this.columns[j];
-                            let lower = this.file.header_row.map((value) => value.toLowerCase());
-                            let index = lower.indexOf(column.text.toLowerCase())
-                            if(index != -1) {
-                                this.$set(this.columnMappings, this.file.header_row[index], column.id)
-                            }
-                        }
+                @this.set('statusType','pending');
+                @this.set('statusText',"Processing...");
+                // FIXME - switch this to a boring regular jquery post, or figure out how to use the baked-in copy of axios?
+
+              var mappings = {};
+
+              for(var i in @this.field_map) {
+                  console.warn("I is: "+i)
+                  console.warn("Field map for i is: "+@this.field_map[i])
+                  console.dir(@this.activeFile)
+                  console.dir(@this.activeFile.header_row)
+                  console.warn("field value for is is: "+@this.activeFile.header_row[i])
+                  mappings[@this.activeFile.header_row[i]] = @this.field_map[i]
+              }
+
+              axios.defaults.headers.common["X-CSRF-TOKEN"] = $('meta[name="csrf-token"]').attr('content')
+                axios.post('{{ route('api.imports.importFile', $activeFile->id) }}', {
+                    'import-update': !!@this.update,
+                    'send-welcome': !!@this.send_welcome,
+                    'import-type': @this.activeFile.import_type,
+                    'run-backup': !!@this.run_backup,
+                    'column-mappings': mappings // FIXME - terrible name
+                }).then( (body) => {
+                    console.warn("success!!!")
+                    // Success
+                    @this.set('statusType',"success");
+                    @this.set('statusText', "Success... Redirecting.");
+                    console.warn("Here is the body object: ")
+                    console.dir(body);
+                    // FIXME - can we 'flash' an update here?
+                    window.location.href = body.data.messages.redirect_url;
+                }, (body) => {
+                    // Failure
+                    console.warn("failure!!!!")
+                    if(body.response.data.status == 'import-errors') {
+                        //window.eventHub.$emit('importErrors', body.messages);
+                        console.warn("import error")
+                        console.dir(body)
+                        @this.set('statusType','error');
+                        @this.emit('importError', body.response.data.messages)
+                        //@this.set('statusText', "Error: "+body.response.data.messages.join("<br>"));
+                    } else {
+                        console.warn("not import-errors, just regular errors")
+                        console.dir(body)
+                        @this.set('statusType','error');
+                        @this.emit('importError',body.response.data.messages ? body.response.data.messages :  {'import-type': ['Unknown error']})
+                        @this.set('statusText',body.response.data.messages ? body.response.data.messages : 'Unknown error');
                     }
-                },
-                updateModel(header, value) {
-                    this.columnMappings[header] = value;
-                }
-            },
-        }
+                    // @this.emit('hideDetails');
+                });
+            }
+          $(function () {
+              $('#import').on('click',function () {
+                  console.warn("okay, click handler firing!!!")
+                  postSave()
+              })
+              console.warn("JS click handler loaded!")
+          })
+          window.setTimeout(function() {
+              var what = @this.dinglefarts
+              console.warn("What is this: ",what)
+          },1000)
     </script>
 
   </tr>
@@ -204,32 +224,83 @@ $('#import_type').on('select2:select', function (event) {
     console.warn("new increment is: "+@this.increment)
     //@this.mappings = 'dingus';
 })
-$('.mappings').on('select2:select', function (event) {
+$('.mappings').on('change', function (event) { // or 'select2:select'
+    @this.set($(event.target).data('livewire-model'), this.options[this.selectedIndex].value)
+    return; // FIXME - or delete.
+
+
+
+
+
+
+
+    // I mean, it's kinda crazy, but I think we don't even *have* to do this?
+    // we can just get the state in the javascript that does the POST (Axios, but soon to be plain-ole' jquery)
+    // so I think we can just not do this at all and do it there instead?
     console.warn("Mapping-type select2 selected")
+    // console.dir(event);
+    console.dir(this); // hrm?
+    console.warn("Selected Index is: "+this.selectedIndex);
     var mapping = $(event.target).data('livewire-mapping')
-    @this.field_map[mapping] = event.params.data.id
+    var field_map = @this.activeFile.field_map
+    console.log("Field map before: ")
+    console.dir(field_map)
+    field_map[mapping] = this.options[this.selectedIndex].value
+    console.log("field map after: ")
+    console.dir(field_map)
+    @this.set('activeFile.field_map',field_map)
+    //@this.set('activeFile.field_map.'+mapping, this.options[this.selectedIndex].value) // doesn't work?
+    // @this.field_map[mapping] = event.params.data.id // seems to be a select2-ism?
     @this.emit('refreshComponent')
 })
-console.warn("Doing the livewire:load callback...")
-/* on livewire load, set a callback that, right before re-render, re-runs livewire2? */
-$(function () {
-    document.addEventListener('component.initialized', function () {
+//console.warn("Doing the livewire:load callback...")
+/* on livewire load, set a callback that, right before re-render, re-runs select2? */
+    /* $(function () {
+//     document.addEventListener("DOMContentLoaded", function () {
+        // THIS DOESN'T EVER FIRE!
         console.warn("Livewire has loaded; adding element.updated hook!")
-        return false; // FIXME
-        Livewire.hook('element.updated', function (element, component) {
+        // return false; // FIXME
+        Livewire.hook('element.updated', function (element, component) { //weird. doesn't seem to be firing?
             console.warn("Re-select-2'ing all select2's!")
-            $('.livewire-select2').select2('destroy').select2(); // TODO - this repeats in the script block above.
+            //$('.livewire-select2').select2('destroy').select2(); // TODO - this repeats in the script block above.
 
         })
     })
-})
-window.setTimeout(  function () {
-    console.warn("Livewire has loaded; adding element.updated hook! (via DELAY!)")
-    return false; // FIXME TOO
-    Livewire.hook('element.updated', function (element, component) {
-        console.warn("Re-select-2'ing all select2's!")
-        $('.livewire-select2').select2('destroy').select2(); // TODO - this repeats in the script block above.
+*/
+//I don't think this fires either
+document.addEventListener("livewire:load", () => {
+    console.warn("livewire loaded!!!")
+    Livewire.hook('message.processed', (message, component) => {
+        console.warn("livewire message processed!")
+       // $('.form-select').select2()
 
-    })
-},3000) // FIXME - this is stupid.
+    }); });
+
+
+//document.addEventListener("livewire:load", function (event) {
+// OMG THIS ACTUALLY WORKS! (Kinda?)
+    window.livewire.hook('message.processed', /*'element.updated',*/ (el,component) => {
+        console.warn("hook fired!!!!!!!!!!!! on: "+el)
+        $('.livewire-select2').select2();
+    });
+//});
+
+
+// console.dir(Livewire)
+// Livewire().hook('element.updated', function (element, component) { //weird. doesn't seem to be firing?
+//     console.warn("Re-select-2'ing all select2's! (native embeded version?")
+//     //$('.livewire-select2').select2('destroy').select2(); // TODO - this repeats in the script block above.
+//
+// })
+
+// })
+// window.setTimeout(  function () {
+//     console.warn("Livewire has loaded; adding element.updated hook! (via DELAY!)")
+//     return false; // FIXME TOO
+//     Livewire.hook('element.updated', function (element, component) {
+//         console.warn("Re-select-2'ing all select2's!")
+//         $('.livewire-select2').select2('destroy').select2(); // TODO - this repeats in the script block above.
+//
+//     })
+// },3000) // FIXME - this is stupid.
 </script>

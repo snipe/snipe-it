@@ -22,13 +22,15 @@ class Importer extends Component
     public $message; //status/error message?
     public $message_type; //success/error?
 
+    public $import_errors; //
+
     protected $rules = [
         'files.*.file_path' => 'required|string',
         'files.*.created_at' => 'required|string',
         'files.*.filesize' => 'required|integer'
     ];
 
-    protected $listeners = ['hideDetails' => 'hideDetails'];
+    protected $listeners = ['hideDetails' => 'hideDetails', 'importError' => 'importError'];
 
     public function mount()
     {
@@ -41,6 +43,13 @@ class Importer extends Component
     public function hideMessages()
     {
         $this->message='';
+    }
+
+    public function importError($errors)
+    {
+        \Log::info("Errors fired!!!!");
+        \Log::info(" Here they are...".print_r($errors,true));
+        $this->import_errors = $errors;
     }
 
     public function toggleEvent($id)

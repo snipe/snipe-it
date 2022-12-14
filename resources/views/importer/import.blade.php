@@ -16,13 +16,19 @@
 
 THIS IS VUE STUFF ISNT IT?
     </style> --}}
-@livewire('importer') {{-- Yes, this is stupid - we should be able to route straight over and not have this, but Livewire doesn't work in this app that way :/ --}}
+
+    {{-- YET ANOTHER FIXME! argh. This file shouldn't exist. --}}
+
+    @livewire('importer') {{-- Yes, this is stupid - we should be able to route straight over and not have this, but Livewire doesn't work in this app that way :/ --}}
 @stop
 
 @section('moar_scripts')
-{{-- <script nonce="{{ csrf_token() }}">
-    new Vue({
-        el: '#app'
-    });
-</script> --}}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+    {{-- <script nonce="{{ csrf_token() }}">
+        new Vue({
+            el: '#app'
+        });
+    </script> --}}
 @endsection

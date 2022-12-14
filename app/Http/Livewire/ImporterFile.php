@@ -84,21 +84,32 @@ class ImporterFile extends Component
     public $customFields;
     public $importTypes;
     public $columnOptions;
-    public $increment; // just used to force refreshes
+    public $increment; // just used to force refreshes - and doesn't really work anyways
     public $statusType;
     public $statusText;
     public $update;
     public $send_welcome;
     public $run_backup;
+    public $field_map; // we need a separate variable for the field-mapping, because the keys in the normal array are too complicated for Livewire to understand
 
     protected $rules = [
         'activeFile.import_type' => 'string',
         'activeFile.field_map' => 'array', //this doesn't work because I think we would have to list all the keys?
+        // 'activeFile.field_map.*' => 'string', // FIXME - can we do this?
+        'activeFile.header_row' => 'array',
+        'field_map' => 'array'
     ];
 
 //    protected $listeners = ['refreshComponent' => '$refresh'];
 
-    private function getColumns($type)
+    public function getDinglefartsProperty() // FIXME (and probably not even used at this point :(((
+    {
+        $tmp = array_combine($this->activeFile->header_row, $this->field_map);
+        \Log::error("tmp is: ".print_r($tmp,true));
+        return json_encode($tmp);
+    }
+
+    private function getColumns($type) //maybe static?
     {
         global $general, $accessories, $assets, $consumables, $licenses, $users; // TODO - why is this global?
 
@@ -150,18 +161,11 @@ class ImporterFile extends Component
             $this->columnOptions[$type] = $this->getColumns($type);
         }
         $this->increment = 0;
+        $this->field_map = array_values($this->activeFile->field_map);
     }
 
     public function postSave()
     {
-        Log::error("Saving import!");
-        if (!$this->activeFile->import_type) {
-            $this->statusType='error';
-            $this->statusText= "An import type is required... "; // TODO - translate me!
-            return false;
-        }
-        $this->statusType = 'pending';
-        $this->statusText = "Processing...";
     }
 
     public function changeTypes() // UNUSED?

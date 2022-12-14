@@ -2,34 +2,6 @@
     {{-- <importer inline-template v-cloak> --}} {{-- like, this, here, that's a literal Vue directive --}}
         <div class="row">
         {{-- <alert v-show="alert.visible" :alert-type="alert.type" v-on:hide="alert.visible = false">@{{ alert.message }}</alert> --}}
-<template> {{-- this is going to take some porting :/ --}}
-    <div class="box" v-if="errors">
-  <div class="box-body">
-    <div class="alert alert-warning">
-      <strong>Warning</strong> Some Errors occured while importing
-    </div>
-
-    <div class="errors-table">
-      <table class="table table-striped table-bordered" id="errors-table">
-        <thead>
-          <th>Item</th>
-          <th>Errors</th>
-        </thead>
-        <tbody>
-          <tr v-for="(error, item) in errors">
-            <td>{{-- item --}}</td>
-            <td v-for="(value, field) in error">
-                <b>{{-- field --}}:</b>
-                <span v-for="errorString in value">{{-- errorString[0] --}}</span>
-              <br />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
-</template>
 
 {{-- alert --}}
 @if($message != '')
@@ -45,8 +17,37 @@
     </div>
 @endif
 
-            {{-- errors thing that's built-in maybe? --}}
-            {{-- <errors :errors="importErrors"></errors> --}}
+            {{-- errors thing that's built-in maybe? No. It's importer-error.vue --}}
+@if($import_errors)
+            <div class="box">
+                <div class="box-body">
+                    <div class="alert alert-warning">
+                        <strong>Warning</strong> Some Errors occured while importing
+                    </div>
+
+                    <div class="errors-table">
+                        <table class="table table-striped table-bordered" id="errors-table">
+                            <thead>
+                            <th>Item</th>
+                            <th>Errors</th>
+                            </thead>
+                            <tbody>
+                            @foreach($import_errors as $field => $error_list)
+                            <tr>
+                                <td>{{ $processDetails->file_path }}</td>
+                                <td>
+                                    <b>{{ $field }}:</b>
+                                    <span>{{ implode(", ",$error_list) }}</span>
+                                    <br />
+                                </td>
+                            </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+@endif
 
             <div class="col-md-9">
                 <div class="box">
@@ -102,9 +103,6 @@
 
                                     {{-- <template v-for="currentFile in files"> --}}
                                     @foreach($files as $currentFile)
-                                            <?php 
-                                            \Log::error(print_r($currentFile,true))
-                                            ?>
                                     		<tr>
                                     			<td class="col-md-6">{{ $currentFile->file_path }}</td>
                                     			<td class="col-md-3">{{ $currentFile->created_at }} </td>
@@ -153,6 +151,7 @@
             // console.dir(@this)
         })
 
+        {{-- FIXME: Maybe change this to the file upload thing that's baked-in to Livewire? --}}
         $('#fileupload').fileupload({
             dataType: 'json',
             done: function(e, data) {
@@ -197,13 +196,13 @@
                 //$('#progress-bar').attr('style', 'width: 100%');
                 @this.progress = 100;
                 //$('#progress-text').text(data.jqXHR.responseJSON.messages);
-                @this.progress_message = data.jqXHR.responseJSON.messages;
+                console.dir(data.jqXHR.responseJSON.messages);
+                var error_message = ''
+                for(var i in data.jqXHR.responseJSON.messages) {
+                    error_message += i+": "+data.jqXHR.responseJSON.messages[i].join(", ")
+                }
+                @this.progress_message = error_message;
             }
         })
-
-        // setTimeout(function () {
-        //     console.log("Test @"+"this:")
-        //     console.dir(@this)
-        // },5000)
     </script>
 @endpush
