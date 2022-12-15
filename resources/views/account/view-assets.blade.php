@@ -536,7 +536,9 @@
                 <thead>
                 <tr>
                   <th class="col-md-5">{{ trans('general.name') }}</th>
-                  <th class="col-md-6" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
+                  @can('self.view_purchase_cost')
+                    <th class="col-md-6" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
+                  @endcan
                   <th class="col-md-1 hidden-print">{{ trans('general.action') }}</th>
                 </tr>
                 </thead>
@@ -544,9 +546,11 @@
                 @foreach ($user->accessories as $accessory)
                   <tr>
                     <td>{{ $accessory->name }}</td>
-                    <td>
-                      {!! Helper::formatCurrencyOutput($accessory->purchase_cost) !!}
-                    </td>
+                    @can('self.view_purchase_cost')
+                      <td>
+                        {!! Helper::formatCurrencyOutput($accessory->purchase_cost) !!}
+                      </td>
+                    @endcan
                     <td class="hidden-print">
                       @can('checkin', $accessory)
                         <a href="{{ route('accessories.checkin.show', array('accessoryID'=> $accessory->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
@@ -583,7 +587,9 @@
                 <thead>
                 <tr>
                   <th class="col-md-3">{{ trans('general.name') }}</th>
-                  <th class="col-md-2" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
+                  @can('self.view_purchase_cost')
+                    <th class="col-md-2" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
+                  @endcan
                   <th class="col-md-2">{{ trans('general.date') }}</th>
                   <th class="col-md-5">{{ trans('general.notes') }}</th>
                 </tr>
@@ -592,9 +598,11 @@
                 @foreach ($user->consumables as $consumable)
                   <tr>
                     <td>{{ $consumable->name }}</td>
-                    <td>
-                      {!! Helper::formatCurrencyOutput($consumable->purchase_cost) !!}
-                    </td>
+                    @can('self.view_purchase_cost')
+                      <td>
+                        {!! Helper::formatCurrencyOutput($consumable->purchase_cost) !!}
+                      </td>
+                    @endcan
                     <td>{{ Helper::getFormattedDateObject($consumable->pivot->created_at, 'datetime',  false) }}</td>
                     <td>{{ $consumable->pivot->note }}</td>
                   </tr>

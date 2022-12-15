@@ -648,7 +648,7 @@ return [
         [
             'permission' => 'self.view_purchase_cost',
             'label'      => 'View Purchase-Cost Column',
-            'note'       => 'This user can see the purchase cost column of assets assigned to them.',
+            'note'       => 'This user can see the purchase cost column of items assigned to them.',
             'display'    => true,
         ],
 
