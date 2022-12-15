@@ -118,7 +118,7 @@
                                                     id="ldap_default_group"
                                                     class="form-control"
                                             >
-
+                                                <option></option>
                                                 @foreach ($groups as $id => $group)
                                                     <option value="{{ $id }}">
                                                         {{ $group }}

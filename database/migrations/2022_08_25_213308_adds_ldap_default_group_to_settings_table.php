@@ -15,7 +15,7 @@ class AddsLdapDefaultGroupToSettingsTable extends Migration
     {
         Schema::table('settings', function (Blueprint $table) {
             $table->integer('ldap_default_group')
-                ->after('ldap_basedn');
+                ->after('ldap_basedn')->default(null);
         });
     }
 
