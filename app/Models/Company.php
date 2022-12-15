@@ -127,6 +127,11 @@ final class Company extends SnipeModel
             return false;
         } elseif (! static::isFullMultipleCompanySupportEnabled()) {
             return true;
+        } elseif (!$companyable instanceof Company && !\Schema::hasColumn($companyable->getModel()->getTable(), 'company_id')) {
+            // This is primary for the gate:allows-check in location->isDeletable()
+            // Locations don't have a company_id so without this it isn't possible to delete locations with FullMultipleCompanySupport enabled
+            // because this function is called by SnipePermissionsPolicy->before()
+            return true;
         } else {
             if (Auth::user()) {
                 $current_user_company_id = Auth::user()->company_id;

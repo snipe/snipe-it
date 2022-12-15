@@ -12,6 +12,7 @@ use App\Models\Statuslabel;
 use Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Image;
+use Carbon\Carbon;
 
 class Helper
 {
@@ -1125,5 +1126,25 @@ class Helper
 
         return $settings;
         }
+    public static function AgeFormat($date) {
+        $year = Carbon::parse($date)
+            ->diff(now())->y;
+        $month = Carbon::parse($date)
+            ->diff(now())->m;
+        $days = Carbon::parse($date)
+            ->diff(now())->d;
+        $age='';
+        if ($year) {
+            $age .= $year.'y ';
+        }
+        if ($month) {
+            $age .= $month.'m ';
+        }
+        if ($days) {
+            $age .= $days.'d';
+        }
 
+        return $age;
+
+    }
 }

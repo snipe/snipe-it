@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Department;
+use App\Models\Group;
 use Illuminate\Console\Command;
 use App\Models\Setting;
 use App\Models\Ldap;
@@ -57,6 +58,7 @@ class LdapSync extends Command
         $ldap_result_country = Setting::getSettings()->ldap_country;
         $ldap_result_dept = Setting::getSettings()->ldap_dept;
         $ldap_result_manager = Setting::getSettings()->ldap_manager;
+        $ldap_default_group = Setting::getSettings()->ldap_default_group;
 
         try {
             $ldapconn = Ldap::connectToLdap();
@@ -192,6 +194,7 @@ class LdapSync extends Command
                 $item['department'] = isset($results[$i][$ldap_result_dept][0]) ? $results[$i][$ldap_result_dept][0] : '';
                 $item['manager'] = isset($results[$i][$ldap_result_manager][0]) ? $results[$i][$ldap_result_manager][0] : '';
 
+
                 $department = Department::firstOrCreate([
                     'name' => $item['department'],
                 ]);
@@ -217,6 +220,13 @@ class LdapSync extends Command
                 $user->jobtitle = $item['jobtitle'];
                 $user->country = $item['country'];
                 $user->department_id = $department->id;
+
+                if($ldap_default_group != null) {
+
+                    $default = Group::select()->where('id', $ldap_default_group)->first();
+                    $user->permissions = $default->permissions;
+
+                }
 
                 if($item['manager'] != null) {
                     // Check Cache first
@@ -326,6 +336,7 @@ class LdapSync extends Command
                 if ($user->save()) {
                     $item['note'] = $item['createorupdate'];
                     $item['status'] = 'success';
+
                 } else {
                     foreach ($user->getErrors()->getMessages() as $key => $err) {
                         $errors .= $err[0];

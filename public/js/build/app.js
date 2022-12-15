@@ -426,6 +426,9 @@ var baseUrl = $('meta[name="baseUrl"]').attr('content');
         }, {
           id: 'zip',
           text: 'ZIP'
+        }, {
+          id: 'remote',
+          text: 'Remote'
         }],
         customFields: this.customFields
       },
@@ -2072,13 +2075,13 @@ $(document).ready(function () {
         $('#assigned_asset').show();
         $('#assigned_user').hide();
         $('#assigned_location').hide();
-        $('.notification-callout').fadeOut('fast');
+        $('.notification-callout').fadeOut();
       } else if (assignto_type == 'location') {
         $('#current_assets_box').fadeOut();
         $('#assigned_asset').hide();
         $('#assigned_user').hide();
         $('#assigned_location').show();
-        $('.notification-callout').fadeOut('fast');
+        $('.notification-callout').fadeOut();
       } else {
         $('#assigned_asset').hide();
         $('#assigned_user').show();
@@ -2088,7 +2091,7 @@ $(document).ready(function () {
           $('#current_assets_box').fadeIn();
         }
 
-        $('.notification-callout').fadeIn('fast');
+        $('.notification-callout').fadeIn();
       }
     });
   }); // ------------------------------------------------
