@@ -2825,7 +2825,9 @@
       "name": "Scooter Crawford",
       "avatar_url": "https://avatars.githubusercontent.com/u/9262438?v=4",
       "profile": "https://github.com/scoo73r",
-      "contributions": []
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
