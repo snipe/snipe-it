@@ -159,6 +159,10 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasAccess('self.checkout_assets');
         });
 
+        Gate::define('self.view_purchase_cost', function ($user) {
+            return $user->hasAccess('self.view_purchase_cost');
+        });
+
         // This is largely used to determine whether to display the gear icon sidenav 
         // in the left-side navigation
         Gate::define('backend.interact', function ($user) {
