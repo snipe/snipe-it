@@ -194,6 +194,7 @@
                         {id: 'state', text: 'State' },
                         {id: 'country', text: 'Country' },
                         {id: 'zip', text: 'ZIP' },
+                        {id: 'remote', text: 'Remote'},
 
                     ],
                     customFields: this.customFields,
