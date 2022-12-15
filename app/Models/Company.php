@@ -73,6 +73,10 @@ final class Company extends SnipeModel
         }
     }
 
+    /**
+     * Adding scope to table queires, where only authorized users will be able to see a company's ID value
+     *
+     */
     private static function scopeCompanyablesDirectly($query, $column = 'company_id', $table_name = null)
     {
         if (Auth::user()) {
