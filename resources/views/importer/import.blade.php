@@ -80,7 +80,7 @@
                                     			<td class="col-md-1">@{{ currentFile.filesize }}</td>
                                                 <td class="col-md-1 text-right">
                                                     <button class="btn btn-sm btn-info" @click="toggleEvent(currentFile.id)">
-                                                        <i class="fa-regular fa-retweet fa-fw" aria-hidden="true"></i>
+                                                        <i class="fas fa-retweet fa-fw" aria-hidden="true"></i>
                                                         <span class="sr-only">{{ trans('general.import') }}</span>
                                                     </button>
 
