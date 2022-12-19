@@ -73,6 +73,10 @@ final class Company extends SnipeModel
         }
     }
 
+    /**
+     * Scoping table queries, determining if a logged in user is part of a company, and only allows
+     * that user to see items associated with that company
+     */
     private static function scopeCompanyablesDirectly($query, $column = 'company_id', $table_name = null)
     {
         if (Auth::user()) {
