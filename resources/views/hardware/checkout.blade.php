@@ -154,18 +154,23 @@
 
                         <div class="row">
                             <div class="col-md-4">
-                                <a class="btn btn-link pull-left" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
+                                <a class="btn btn-link pull-left" href="{{ URL::previous() }}">
+                                    {{ trans('button.cancel') }}
+                                </a>
                             </div>
                             <div class="col-md-8 text-right">
                                 <span id="return-to">
                                     <span class="form-inline">Return to:</span>
                                     <select name="next_action" class="select2 select2-hide-search text-left" style="min-width: 150px;">
                                         <option class="text-left" value="listings" role="option">Listings</option>
-                                        <option value="item"  role="option">Asset</option>
+                                        <option value="item" role="option">Asset</option>
                                     </select>
                                 </span>
 
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i>
+                                    {{ trans('general.checkout') }}
+                                </button>
+
                             </div>
                         </div>
 
