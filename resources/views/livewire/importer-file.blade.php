@@ -1,6 +1,6 @@
 {{-- <template> --}}
 
-  <tr v-show="processDetail">
+  <tr>
     <td colspan="5">
     <div class="col-md-12">
 
@@ -14,9 +14,6 @@
                         <span wire:ignore>
                             {{ Form::select('import_type', $importTypes, $activeFile->import_type, ['id' => 'import_type', 'class' => 'livewire-select2', 'placeholder' => '', 'data-livewire-model' => 'activeFile.import_type']) }}
                         </span>
-                        {{-- <select2 :options="options.importTypes" v-model="options.importType" required> --}}
-                            {{-- <option disabled value="0"></option> --}}
-                        {{-- </select2> --}}
                     </div>
 
                 </div><!-- /dynamic-form-row -->
@@ -48,8 +45,7 @@
                 </div><!-- /dynamic-form-row -->
 
                 @if($statusText)
-                <div class="alert col-md-8 col-md-offset-2 {{ $statusType == 'success' ? 'alert-success' : ($statusType == 'error' ? 'alert-danger' : 'alert-info') }}" style="text-align:left"
-                     >
+                <div class="alert col-md-8 col-md-offset-2 {{ $statusType == 'success' ? 'alert-success' : ($statusType == 'error' ? 'alert-danger' : 'alert-info') }}" style="text-align:left">
                     {{ $statusText }}
                 </div><!-- /alert -->
                 @endif
@@ -66,30 +62,22 @@
         {{-- <template v-for="(header, index) in file.header_row"> --}}
         @if($activeFile->header_row)
             @foreach($activeFile->header_row AS $index => $header)
-                <div class="row" wire:key="fake_key-{{ base64_encode($header) }}-{{ $increment }}">
+                <div class="row" wire:key="header-row-{{ $increment }}">
                     <div class="col-md-12">
                         <div class="col-md-4 text-right">
                             <label for="field_map.{{ $index }}" class="control-label">{{ $header }}</label>
                         </div>
                         <div class="col-md-4 form-group">
                             <div required data-force-refresh="{{ $increment }}">
-                                {{-- <select2 :options="columns" v-model="columnMappings[header]">
-                                    <option value="0">Do Not Import</option>
-                                </select2> --}}
-{{--                                <span wire:ignore>--}}
-                                    {{ Form::select('field_map.'.$index, $columnOptions[$activeFile->import_type], @$activeFile->field_map[$header],
-                                        [
+                                {{-- this, along with the JS glue below, is quite possibly near to the new Universal LW2 stuff? --}}
+                                {{ Form::select('field_map.'.$index, $columnOptions[$activeFile->import_type], @$activeFile->field_map[$header],
+                                    [
                                         'class' => 'mappings livewire-select2',
-                                        'wire:model' => 'field_map.'.$index, // I think it just can't read this :/
-                                        'data-livewire-mapping' => $header, // do we still need this?
                                         'data-livewire-model' => 'field_map.'.$index, // start of a 'universal' way to do this?
                                         'placeholder' => 'Do Not Import'
-                                        ])
+                                    ])
 
-                                    }}
-                                {{-- /* 'wire:model' => 'activeFile.field_map.'.$header, doesn't work */
-                                        /*'class' => 'livewire-select2 mappings', */' --}}
-{{--                                </span>--}}
+                                }}
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -106,7 +94,7 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-2 text-right" style="padding-top: 20px;">
                 <button type="button" class="btn btn-sm btn-default" wire:click="$emit('hideDetails')">Cancel</button>
-                <button type="submit" class="btn btn-sm btn-primary" id="import">Import</button>
+                <button type="submit" class="btn btn-sm btn-primary" id="import" wire:click="postSave">Import</button>
                 <br><br>
             </div>
         </div><!-- /div row -->
@@ -123,80 +111,6 @@
     </div><!-- /div v-show -->
 
     </td>
-    <script>
-          function postSave() {
-              // FIXME - this is just awful.
-                console.warn("Saving import!");
-                if (!@this['activeFile'].import_type) {
-                    console.warn("didn't find an import type :(");
-                    @this.set('statusType','error');
-                    @this.set('statusText', "An import type is required... "); // TODO - translate me!
-                    return false;
-                }
-                @this.set('statusType','pending');
-                @this.set('statusText',"Processing...");
-                // FIXME - switch this to a boring regular jquery post, or figure out how to use the baked-in copy of axios?
-
-              var mappings = {};
-
-              for(var i in @this.field_map) {
-                  console.warn("I is: "+i)
-                  console.warn("Field map for i is: "+@this.field_map[i])
-                  console.dir(@this.activeFile)
-                  console.dir(@this.activeFile.header_row)
-                  console.warn("field value for is is: "+@this.activeFile.header_row[i])
-                  mappings[@this.activeFile.header_row[i]] = @this.field_map[i]
-              }
-
-              axios.defaults.headers.common["X-CSRF-TOKEN"] = $('meta[name="csrf-token"]').attr('content')
-                axios.post('{{ route('api.imports.importFile', $activeFile->id) }}', {
-                    'import-update': !!@this.update,
-                    'send-welcome': !!@this.send_welcome,
-                    'import-type': @this.activeFile.import_type,
-                    'run-backup': !!@this.run_backup,
-                    'column-mappings': mappings // FIXME - terrible name
-                }).then( (body) => {
-                    console.warn("success!!!")
-                    // Success
-                    @this.set('statusType',"success");
-                    @this.set('statusText', "Success... Redirecting.");
-                    console.warn("Here is the body object: ")
-                    console.dir(body);
-                    // FIXME - can we 'flash' an update here?
-                    window.location.href = body.data.messages.redirect_url;
-                }, (body) => {
-                    // Failure
-                    console.warn("failure!!!!")
-                    if(body.response.data.status == 'import-errors') {
-                        //window.eventHub.$emit('importErrors', body.messages);
-                        console.warn("import error")
-                        console.dir(body)
-                        @this.set('statusType','error');
-                        @this.emit('importError', body.response.data.messages)
-                        //@this.set('statusText', "Error: "+body.response.data.messages.join("<br>"));
-                    } else {
-                        console.warn("not import-errors, just regular errors")
-                        console.dir(body)
-                        @this.set('statusType','error');
-                        @this.emit('importError',body.response.data.messages ? body.response.data.messages :  {'import-type': ['Unknown error']})
-                        @this.set('statusText',body.response.data.messages ? body.response.data.messages : 'Unknown error');
-                    }
-                    // @this.emit('hideDetails');
-                });
-            }
-          $(function () {
-              $('#import').on('click',function () {
-                  console.warn("okay, click handler firing!!!")
-                  postSave()
-              })
-              console.warn("JS click handler loaded!")
-          })
-          window.setTimeout(function() {
-              var what = @this.dinglefarts
-              console.warn("What is this: ",what)
-          },1000)
-    </script>
-
   </tr>
 {{-- </template> --}}
 <script>
@@ -209,7 +123,8 @@ $(function () {
     })
 })
 
-    $('.livewire-select2').select2();
+$('.livewire-select2').select2(); // TODO/FIXME (pick one) possibly embedded into the Universal Livewire Implementation
+
 $('#import_type').on('select2:select', function (event) {
     console.log("import_type select2 selected!!!!!!!!!!!")
     //console.dir(event.params.data)
