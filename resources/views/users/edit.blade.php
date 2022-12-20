@@ -503,7 +503,7 @@
                                               </ul>
                                           @endif
 
-                                          <span class="help-block">{{ trans('admin/users/general.group_memberships_helpblock') }}</p>
+                                          <span class="help-block">{{ trans('admin/users/general.group_memberships_helpblock') }}</span>
                                   @else
                                    <div class="controls">
                                     <select
