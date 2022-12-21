@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 use App\Models\Accessory;
+use App\Models\Asset;
 use App\Models\Component;
 use App\Models\Consumable;
 use App\Models\CustomField;
@@ -1148,10 +1149,16 @@ class Helper
 
     }
     public static function AssetValue($cost, $components){
-        //This does not work. I think I need to do a asset has() or something here to
-        // get the purchase_cost of the component :thinking:
-        $total_cost= $cost + ($components->purchase_cost * $components->assigned_qty);
+        //This does not work still
 
-        return $total_cost;
+        $components_total= '';
+       foreach ($components as $component){
+           $array['components'][] = [
+               'purchase_total' => $component->purchase_cost * $component->pivot->assigned_qty,
+           ];
+           $components_total= $array->purchase_total;
+        }
+
+        return array_sum($components_total) + $cost;
     }
 }
