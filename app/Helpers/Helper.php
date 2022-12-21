@@ -1156,7 +1156,7 @@ class Helper
            $array['components'][] = [
                'purchase_total' => $component->purchase_cost * $component->pivot->assigned_qty,
            ];
-           $components_total= $array->purchase_total;
+           $components_total += $array->purchase_total;
         }
 
         return array_sum($components_total) + $cost;
