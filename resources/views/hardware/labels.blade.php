@@ -7,78 +7,91 @@
 </head>
 <body>
 
-<?php
-$settings->labels_width = $settings->labels_width - $settings->labels_display_sgutter;
-$settings->labels_height = $settings->labels_height - $settings->labels_display_bgutter;
-// Leave space on bottom for 1D barcode if necessary
-$qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='') ? $settings->labels_height - .3 : $settings->labels_height - 0.1;
-?>
+
+<!-- now use grid or table to layout mulitples -->
 
 <style>
+    html {
+		--measurement-unit: 1in;
+		--page-width: calc( {{ $settings->labels_pagewidth }} * var(--measurement-unit));
+		--page-height: calc( {{ $settings->labels_pageheight }} * var(--measurement-unit));
+		--page-margin-top: calc( {{ $settings->labels_pmargin_top }} * var(--measurement-unit));
+		--page-margin-right: calc( {{ $settings->labels_pmargin_right }} * var(--measurement-unit));
+		--page-margin-bottom: calc( {{ $settings->labels_pmargin_bottom }} * var(--measurement-unit));
+		--page-margin-left: calc( {{ $settings->labels_pmargin_left }} * var(--measurement-unit));
+		--label-width: calc( {{ $settings->labels_width }} * var(--measurement-unit));
+		--label-height: calc( {{ $settings->labels_height }} * var(--measurement-unit));
+		--label-padding-top: calc(0.02 * var(--measurement-unit));
+		--label-padding-right: calc( 0.02 * var(--measurement-unit));
+		--label-padding-bottom: calc( 0.02 * var(--measurement-unit));
+		--label-padding-left: calc( 0.02 * var(--measurement-unit));
+		--barcode-width: min(80%, 250px);
+		--barcode-height: 18px;
+        --label-logo-height: 0.5in;
+	}
     body {
         font-family: arial, helvetica, sans-serif;
-        width: {{ $settings->labels_pagewidth }}in;
-        height: {{ $settings->labels_pageheight }}in;
-        margin: {{ $settings->labels_pmargin_top }}in {{ $settings->labels_pmargin_right }}in {{ $settings->labels_pmargin_bottom }}in {{ $settings->labels_pmargin_left }}in;
-        font-size: {{ $settings->labels_fontsize }}pt;
+        width: var(--page-width);
+        height: var(--page-height);
+        margin: var(--page-margin-top) var(--page-margin-right) var(--page-margin-bottom) var(--page-margin-left);
+		font-size: {{ $settings->labels_fontsize }}pt;
+		display: grid;
     }
     .label {
-        width: {{ $settings->labels_width }}in;
-        height: {{ $settings->labels_height }}in;
-        padding: 0in;
-        margin-right: {{ $settings->labels_display_sgutter }}in; /* the gutter */
-        margin-bottom: {{ $settings->labels_display_bgutter }}in;
-        display: inline-block;
+        width: var(--label-width);
+        height: var(--label-height);
+		box-sizing: border-box;
+		padding: var(--label-padding-top) var(--label-padding-right) var(--label-padding-bottom) var(--label-padding-left);
         overflow: hidden;
+
+
     }
+	.label-container {
+		width: 100%;
+		height: 100%;
+		overflow: hidden !important;
+	}
+	.row {
+		display: flex;
+		flex-wrap: nowrap;
+		height: calc(var(--label-height) - var(--label-padding-top) - var(--label-padding-bottom) - var(--barcode-height));
+		overflow: hidden;
+	}
     .page-break  {
         page-break-after:always;
     }
     div.qr_img {
-        width: {{ $qr_size }}in;
-        height: {{ $qr_size }}in;
+		height: 100%;
 
-        float: left;
-        display: inline-flex;
-        padding-right: .15in;
     }
     img.qr_img {
+		height: 100%;
 
-        width: 120.79%;
-        height: 120.79%;
-        margin-top: -6.9%;
-        margin-left: -6.9%;
-        padding-bottom: .04in;
     }
     img.barcode {
         display:block;
-        margin-top:-7px;
-        width: 100%;
+        margin: 0 auto;
+        width: var(--barcode-width);
     }
     div.label-logo {
         float: right;
         display: inline-block;
     }
     img.label-logo {
-        height: 0.5in;
+        height: var(--label-logo-height);
     }
     .qr_text {
-        width: {{ $settings->labels_width }}in;
-        height: {{ $settings->labels_height }}in;
-        padding-top: {{$settings->labels_display_bgutter}}in;
         font-family: arial, helvetica, sans-serif;
-        font-size: {{$settings->labels_fontsize}}pt;
-        padding-right: .0001in;
+        font-size: {{$settings->labels_fontsize}}pt; 
         overflow: hidden !important;
-        display: inline;
         word-wrap: break-word;
         word-break: break-all;
+		flex-grow: 1;
     }
     div.barcode_container {
-
         width: 100%;
+		height: var(--barcode-height);
         display: inline;
-        overflow: hidden;
     }
     .next-padding {
         margin: {{ $settings->labels_pmargin_top }}in {{ $settings->labels_pmargin_right }}in {{ $settings->labels_pmargin_bottom }}in {{ $settings->labels_pmargin_left }}in;
@@ -109,64 +122,67 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
 @foreach ($assets as $asset)
     <?php $count++; ?>
     <div class="label">
+		<div class="label-container">
+			<div class="row">
+				@if ($settings->qr_code=='1')
+					<div class="qr_img">
+						<img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/qr_code" class="qr_img">
+					</div>
+				@endif
 
-        @if ($settings->qr_code=='1')
-            <div class="qr_img">
-                <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/qr_code" class="qr_img">
-            </div>
-        @endif
+				<div class="qr_text">
+					@if ($settings->qr_text!='')
+						<div class="pull-left">
+							<strong>{{ $settings->qr_text }}</strong>
+							<br>
+						</div>
+					@endif
+					@if (($settings->labels_display_company_name=='1') && ($asset->company))
+						<div class="pull-left">
+							C: {{ $asset->company->name }}
+						</div>
+					@endif
+					@if (($settings->labels_display_name=='1') && ($asset->name!=''))
+						<div class="pull-left">
+							N: {{ $asset->name }}
+						</div>
+					@endif
+					@if (($settings->labels_display_tag=='1') && ($asset->asset_tag!=''))
+						<div class="pull-left">
+							T: {{ $asset->asset_tag }}
+						</div>
+					@endif
+					@if (($settings->labels_display_serial=='1') && ($asset->serial!=''))
+						<div class="pull-left">
+							S: {{ $asset->serial }}
+						</div>
+					@endif
+					@if (($settings->labels_display_model=='1') && ($asset->model->name!=''))
+						<div class="pull-left">
+							M: {{ $asset->model->name }} {{ $asset->model->model_number }}
+						</div>
+					@endif
 
-        <div class="qr_text">
-            @if ($settings->label_logo)
-                <div class="label-logo">
-                    <img class="label-logo" src="{{ Storage::disk('public')->url('').e($snipeSettings->label_logo) }}">
-                </div>
-            @endif
-            @if ($settings->qr_text!='')
-                <div class="pull-left">
-                    <strong>{{ $settings->qr_text }}</strong>
-                    <br>
-                </div>
-            @endif
-            @if (($settings->labels_display_company_name=='1') && ($asset->company))
-                <div class="pull-left">
-                    C: {{ $asset->company->name }}
-                </div>
-            @endif
-            @if (($settings->labels_display_name=='1') && ($asset->name!=''))
-                <div class="pull-left">
-                    N: {{ $asset->name }}
-                </div>
-            @endif
-            @if (($settings->labels_display_tag=='1') && ($asset->asset_tag!=''))
-                <div class="pull-left">
-                    T: {{ $asset->asset_tag }}
-                </div>
-            @endif
-            @if (($settings->labels_display_serial=='1') && ($asset->serial!=''))
-                <div class="pull-left">
-                    S: {{ $asset->serial }}
-                </div>
-            @endif
-            @if (($settings->labels_display_model=='1') && ($asset->model->name!=''))
-                <div class="pull-left">
-                    M: {{ $asset->model->name }} {{ $asset->model->model_number }}
-                </div>
-            @endif
+				</div> <!-- end qr_text -->
+				
+				@if ($settings->label_logo)
+					<div class="label-logo">
+						<img class="label-logo" src="{{ Storage::disk('public')->url('').e($snipeSettings->label_logo) }}">
+					</div>
+				@endif
+			</div> <!-- end row -->
+			
+			@if ((($settings->alt_barcode_enabled=='1') && $settings->alt_barcode!=''))
+				<div class="barcode_container">
+					<img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/barcode" class="barcode">
+				</div>
+			@endif
+		
+		</div> <!-- end container -->
 
-        </div>
+    </div> <!-- end label -->
 
-        @if ((($settings->alt_barcode_enabled=='1') && $settings->alt_barcode!=''))
-            <div class="barcode_container">
-                <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/barcode" class="barcode">
-            </div>
-        @endif
-
-
-
-    </div>
-
-    @if ($count % $settings->labels_per_page == 0)
+    @if (($count % $settings->labels_per_page == 0) && $count!=count($assets))
         <div class="page-break"></div>
         <div class="next-padding">&nbsp;</div>
     @endif
