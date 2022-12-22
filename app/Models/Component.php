@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 
@@ -154,9 +155,9 @@ class Component extends SnipeModel
      * Establishes the component -> serials relationship
      *
      * @author [Andrew Murray] [<andrew.murray@knownhost.com>]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     * @return HasMany
      */
-    public function serials()
+    public function serials(): HasMany
     {
         return $this->hasMany(\App\Models\Serial::class, 'component_id');
     }
