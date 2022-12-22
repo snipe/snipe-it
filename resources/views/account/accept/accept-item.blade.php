@@ -23,10 +23,15 @@
 
 <p>
    {{ ($date_settings)  ? trans('general.date') .': '. date($date_settings) .'<br>' : '' }}
-    {{ ($date_settings)  ? trans('general.date') .': '. date($date_settings) .'<br>' : '' }}
+@if ($item_tag)
     {{ trans('general.asset_tag') }}: {{ $item_tag }}<br>
+@endif
+@if ($item_model)
     {{ trans('general.asset_model') }}: {{ $item_model }}<br>
-    {{ trans('admin/hardware/form.serial') }}: {{ $item_serial }}
+@endif
+@if ($item_model)
+    {{ trans('admin/hardware/form.serial') }}: {{ $item_serial }}<br>
+@endif
 </p>
 
 
