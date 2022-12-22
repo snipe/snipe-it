@@ -35,6 +35,11 @@ Route::group(['prefix' => 'components', 'middleware' => ['auth']], function () {
             '{serialID}',
             [Components\Serials\SerialsController::class, 'update']
         )->name('components.serials.update');
+
+        Route::delete(
+            '{serialID}',
+            [Components\Serials\SerialsController::class, 'destroy']
+        )->name('components.serials.destroy');
     });
 
 });

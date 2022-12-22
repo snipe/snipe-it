@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Components;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageUploadRequest;
+use App\Jobs\Components\UpdateQty;
 use App\Models\Company;
 use App\Models\Component;
 use App\Helpers\Helper;
@@ -102,6 +103,9 @@ class ComponentsController extends Controller
                 }
             }
 
+            // Dispatch the job to update the component's quanity count.
+            UpdateQty::dispatch($component);
+
             return redirect()->route('components.index')->with('success', trans('admin/components/message.create.success'));
         }
 
@@ -125,28 +129,22 @@ class ComponentsController extends Controller
     /**
      * @param $serials
      * @param $component
+     *
      * @return void
      * @throws \Throwable
      */
-    private function saveSerials($serials, $component)
+    private function saveSerials($serials, $component): void
     {
-        // Remove empty values from the array.
-        $serials = array_filter($serials);
+        // Remove empty values from the array and trim any whitespace.
+        $serials = array_map('trim', array_filter($serials));
 
         foreach ($serials as $serial) {
             try {
-                $serial = trim($serial);
-                $serial_exists = Serial::where('serial_number', '=', $serial)->exists();
-
-                if ($serial_exists !== true) {
-                    // Add the serial to the serials table
-                    $record = new Serial();
-                    $record->serial_number = $serial;
-                    $record->component_id = $component->id;
-                    $record->notes = null;
-                    $record->saveOrFail();
-                }
-            } catch (\Exception $e) {
+                Serial::updateOrCreate(['serial_number' => $serial], [
+                    'component_id' => $component->id,
+                    'notes' => null,
+                ]);
+            } catch (\Throwable $e) {
                 Log::error($e->getMessage());
             }
         }
@@ -232,6 +230,9 @@ class ComponentsController extends Controller
                     $component->save();
                 }
             }
+
+            // Dispatch the job to update the component's quantity count.
+            UpdateQty::dispatch($component);
 
             return redirect()->route('components.index')->with('success', trans('admin/components/message.update.success'));
         }

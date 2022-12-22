@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Components\Serials;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\Components\UpdateQty;
 use App\Models\Serial;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -88,12 +89,15 @@ class SerialsController extends Controller
             $serial = Serial::findOrFail($id);
             $serial_num = $serial->serial_number;
 
+            $component = $serial->component;
+
             if ($serial->status == 0 || $serial->status == 2) {
                 $serial->delete();
-                return redirect()->route('components.index')->with('success', 'Serial ' . $serial_num . ' deleted successfully');
+                UpdateQty::dispatch($component);
+                return redirect()->route('components.show', [$component->id])->with('success', 'Serial ' . $serial_num . ' deleted successfully');
             }
 
-            return redirect()->route('components.index', $serial->component_id)->withErrors('Serial ' . $serial_num . ' cannot be deleted because it is in use');
+            return redirect()->route('components.show', [$component->id])->withErrors('Serial ' . $serial_num . ' cannot be deleted because it is in use');
         } catch (\Exception $e) {
             return redirect()->route('components.index')->withErrors($e->getMessage());
         }

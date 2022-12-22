@@ -179,6 +179,7 @@
                                         <th>Notes</th>
                                         <th>Added</th>
                                         <th>Last Updated</th>
+                                        <th>Actions</th>
                                     </tr>
                                     </thead>
 
@@ -186,11 +187,7 @@
                                     @foreach($component->serials as $serial)
                                         <tr>
                                             <td>
-                                                <a href="{{ route('components.serials.edit', $serial->id) }}"
-                                                   class="btn btn-default btn-sm pull-right">
-                                                    <i class="fa fa-pencil icon-white"></i>
-                                                    {{ $serial->serial_number }}
-                                                </a>
+                                                <span class="label label-info">{{ $serial->serial_number }}</span>
                                             </td>
                                             <td>
                                                 @if($serial->asset)
@@ -213,6 +210,25 @@
                                             <td>
                                                 {{-- Convert the updated at field to a javascript timestamp using momentjs --}}
                                                 <span timestamp="{{ $serial->updated_at->toISOString() }}" name="__timestamp"></span>
+                                            </td>
+                                            <td>
+                                                <div class="btn-group" role="group">
+                                                    <form action="{{ route('components.serials.destroy', $serial->id) }}"
+                                                          method="POST">
+                                                        {{ csrf_field() }}
+                                                        {{ method_field('DELETE') }}
+
+                                                        <a href="{{ route('components.serials.edit', $serial->id) }}"
+                                                           class="btn btn-default">
+                                                            <i class="fa fa-pencil icon-white"></i>
+                                                        </a>
+
+                                                        <button type="submit" class="btn btn-danger">
+                                                            <i class="fa fa-trash icon-white"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+
                                             </td>
                                         </tr>
                                     @endforeach
