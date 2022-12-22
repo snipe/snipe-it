@@ -113,8 +113,6 @@ class AcceptanceController extends Controller
             Storage::makeDirectory('private_uploads/signatures', 775);
         }
 
-
-
         $item = $acceptance->checkoutable_type::find($acceptance->checkoutable_id);
         $display_model = '';
         $pdf_view_route = '';
