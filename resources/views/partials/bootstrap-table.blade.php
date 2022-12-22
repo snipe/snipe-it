@@ -129,7 +129,10 @@
         var tableId =  $(this).data('id-table');
 
         for (var i in rowsAfter) {
-            $(buttonName).after('<input id="' + tableId + '_checkbox_' + rowsAfter[i].id + '" type="hidden" name="ids[]" value="' + rowsAfter[i].id + '">');
+            // Do not select things that were already selected
+            if($('#'+ tableId + '_checkbox_' + rowsAfter[i].id).length == 0) {
+                $(buttonName).after('<input id="' + tableId + '_checkbox_' + rowsAfter[i].id + '" type="hidden" name="ids[]" value="' + rowsAfter[i].id + '">');
+            }
         }
     });
 
