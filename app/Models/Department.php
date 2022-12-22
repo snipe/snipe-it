@@ -29,7 +29,7 @@ class Department extends SnipeModel
     ];
 
     protected $rules = [
-        'name'                  => 'required|max:255',
+        'name'                  => 'required|max:255|is_unique_department',
         'location_id'           => 'numeric|nullable',
         'company_id'            => 'numeric|nullable',
         'manager_id'            => 'numeric|nullable',
