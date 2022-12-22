@@ -140,6 +140,7 @@ class AcceptanceController extends Controller
 
                 // The item was accepted, check for a signature
                 if ($request->filled('signature_output')) {
+
                     $sig_filename = 'siglog-' . Str::uuid() . '-' . date('Y-m-d-his') . '.png';
                     $data_uri = $request->input('signature_output');
                     $encoded_image = explode(',', $data_uri);
@@ -151,59 +152,42 @@ class AcceptanceController extends Controller
                 } else {
                     return redirect()->back()->with('error', trans('general.shitty_browser'));
                 }
+
             }
 
 
-            // this is horrible
-            switch($acceptance->checkoutable_type){
+            // this is now slightly less horrible
+            $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
+
+            switch ($acceptance->checkoutable_type) {
+
                 case 'App\Models\Asset':
-                        $pdf_view_route ='account.accept.accept-asset-eula';
                         $asset_model = AssetModel::find($item->model_id);
                         $display_model = $asset_model->name;
-                        $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
                 break;
 
                 case 'App\Models\Accessory':
-                        $pdf_view_route ='account.accept.accept-accessory-eula';
                         $accessory = Accessory::find($item->id);
                         $display_model = $accessory->name;
-                        $assigned_to = User::find($item->assignedTo);
                 break;
 
                 case 'App\Models\LicenseSeat':
-                        $pdf_view_route ='account.accept.accept-license-eula';
                         $license = License::find($item->license_id);
                         $display_model = $license->name;
-                        $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
                 break;
 
                 case 'App\Models\Component':
-                        $pdf_view_route ='account.accept.accept-component-eula';
                         $component = Component::find($item->id);
                         $display_model = $component->name;
-                        $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
                 break;
 
                 case 'App\Models\Consumable':
-                        $pdf_view_route ='account.accept.accept-consumable-eula';
                         $consumable = Consumable::find($item->id);
                         $display_model = $consumable->name;
-                        $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
                 break;
+
             }
-//            if ($acceptance->checkoutable_type == 'App\Models\Asset') {
-//                $pdf_view_route ='account.accept.accept-asset-eula';
-//                $asset_model = AssetModel::find($item->model_id);
-//                $display_model = $asset_model->name;
-//                $assigned_to = User::find($item->assigned_to)->present()->fullName;
-//
-//            } elseif ($acceptance->checkoutable_type== 'App\Models\Accessory') {
-//                $pdf_view_route ='account.accept.accept-accessory-eula';
-//                $accessory = Accessory::find($item->id);
-//                $display_model = $accessory->name;
-//                $assigned_to = User::find($item->assignedTo);
-//
-//            }
+
 
             /**
              * Gather the data for the PDF. We fire this whether there is a signature required or not,
@@ -233,7 +217,7 @@ class AcceptanceController extends Controller
 
             if ($pdf_view_route!='') {
                 \Log::debug($pdf_filename.' is the filename, and the route was specified.');
-                $pdf = Pdf::loadView($pdf_view_route, $data);
+                $pdf = Pdf::loadView('account.accept.accept-item', $data);
                 Storage::put('private_uploads/eula-pdfs/' .$pdf_filename, $pdf->output());
             }
 
