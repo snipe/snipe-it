@@ -722,6 +722,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ url('reports/stockreport') }}" {{ (Request::is('reports/stock_report') ? ' class="active"' : '') }}>
+                            {{ trans('general.stock_report') }}
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ url('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }}>
                             {{ trans('general.custom_report') }}
                         </a>

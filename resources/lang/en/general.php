@@ -247,6 +247,7 @@ return [
     'state'  				=> 'State',
     'status_labels'			=> 'Status Labels',
     'status'    			=> 'Status',
+    'stock_report'          => 'Stock Report',
     'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Suppliers',
