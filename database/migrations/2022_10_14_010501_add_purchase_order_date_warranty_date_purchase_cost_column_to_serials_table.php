@@ -18,7 +18,7 @@ class AddPurchaseOrderDateWarrantyDatePurchaseCostColumnToSerialsTable extends M
             $table->date('purchase_date')->nullable();
             $table->date('warranty_date')->nullable();
             $table->decimal('purchase_cost', 10, 2)->nullable();
-            $table->bigInteger('supplier_id')->unsigned()->nullable();
+            $table->unsignedInteger('supplier_id')->unsigned()->nullable();
 
             $table->foreign('supplier_id')->references('id')->on('suppliers');
         });
