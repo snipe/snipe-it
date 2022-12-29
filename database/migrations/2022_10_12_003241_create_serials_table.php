@@ -18,9 +18,9 @@ class CreateSerialsTable extends Migration
             Schema::create('serials', function (Blueprint $table) {
                 $table->id();
                 // Associated component ID
-                $table->unsignedBigInteger('component_id');
+                $table->unsignedInteger('component_id');
                 // Serial number assigned to asset ID
-                $table->unsignedBigInteger('asset_id')->nullable();
+                $table->unsignedInteger('asset_id')->nullable();
                 // Serial number (unique)
                 $table->string('serial_number')->unique();
                 // Serial number notes
