@@ -161,9 +161,11 @@
                             <div class="col-md-8 text-right">
                                 <span id="return-to">
                                     <span class="form-inline">Return to:</span>
-                                    <select name="next_action" class="select2 select2-hide-search text-left" style="min-width: 150px;">
-                                        <option class="text-left" value="listings" role="option">Listings</option>
-                                        <option value="item" role="option">Asset</option>
+                                    <select name="return_to" class="select2 select2-hide-search text-left" style="min-width: 150px;">
+
+                                        <option class="text-left" value="" role="option">Assets</option>
+                                        <option value="" role="option" {{ request()->session()->get('backto_item_type') == '\App\Models\Asset' ? ' selected=selected' : '' }}>Asset</option>
+
                                     </select>
                                 </span>
 
@@ -173,11 +175,6 @@
 
                             </div>
                         </div>
-
-
-
-
-
 
 
                     </div>
