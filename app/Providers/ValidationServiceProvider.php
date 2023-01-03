@@ -218,7 +218,7 @@ class ValidationServiceProvider extends ServiceProvider
 
         Validator::extend('is_unique_department', function ($attribute, $value, $parameters, $validator) {
             $data = $validator->getData();
-            if ($data['location_id'] != null && $data['company_id'] != null) {
+            if ((array_key_exists('location_id', $data) && $data['location_id'] != null) && (array_key_exists('company_id', $data) && $data['company_id'] != null)) {
                 $count = Department::where('name', $data['name'])
                     ->where('location_id', $data['location_id'])
                     ->where('company_id', $data['company_id'])
