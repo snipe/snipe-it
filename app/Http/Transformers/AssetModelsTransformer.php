@@ -32,6 +32,7 @@ class AssetModelsTransformer
                     'name' => e($field->name),
                     'db_column_name' => e($field->db_column_name()),
                     'default_value' => ($field->defaultValue($assetmodel->id)) ? e($field->defaultValue($assetmodel->id)) : null,
+                    'format' =>  e($field->format),
                     'required' => ($field->pivot->required == '1') ? true : false,
                 ];
             }
