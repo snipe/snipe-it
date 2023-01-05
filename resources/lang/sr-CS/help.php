@@ -29,6 +29,6 @@ return [
 
     'consumables'   => 'Potrošni materijal je sve što će se vremenom istrošiti. Na primer, toner za štampač ili papir za štampanje.',
 
-    'depreciations' => 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
+    'depreciations' => 'Možete postaviti amortizaciju imovine na osnovu linearne amortizacije.',
 
 ];

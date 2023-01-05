@@ -42,9 +42,9 @@
                                     <!-- The fileinput-button span is used to style the file input field as button -->
                                     @if (!config('app.lock_passwords'))
                                         <span class="btn btn-primary fileinput-button">
-                                        <span>{{ trans('admin/importer/general.select_import_file') }}</span>
+                                        <span>{{ trans('button.select_file') }}</span>
                                          <!-- The file input field used as target for the file upload widget -->
-                                        <label for="files[]"><span class="sr-only">{{ trans('admin/importer/general.select_file') }}</span></label>
+                                        <label for="files[]"><span class="sr-only">{{ trans('button.select_file') }}</span></label>
                                         <input id="fileupload" type="file" name="files[]" data-url="{{ route('api.imports.index') }}" accept="text/csv" aria-label="files[]">
                                         </span>
                                     @endif
@@ -67,11 +67,10 @@
                                         class="col-md-12 table table-striped snipe-table">
 
                                     <tr>
-                                        <th class="col-md-6">{{ trans('admin/importer/table.file') }}</th>
-                                        <th class="col-md-3">{{ trans('admin/importer/table.created') }}</th>
-                                        <th class="col-md-1">{{ trans('admin/importer/table.size') }}</th>
-                                        <th class="col-md-1 text-right"><span class="sr-only">{{ trans('admin/importer/table.process') }}</span></th>
-                                        <th class="col-md-1 text-right"><span class="sr-only">{{ trans('admin/importer/table.delete') }}</span></th>
+                                        <th class="col-md-6">{{ trans('general.file_name') }}</th>
+                                        <th class="col-md-3">{{ trans('general.created_at') }}</th>
+                                        <th class="col-md-1">{{ trans('general.filesize') }}</th>
+                                        <th class="col-md-1 text-right"><span class="sr-only">{{ trans('general.actions') }}</span></th>
                                     </tr>
 
                                     <template v-for="currentFile in files">
@@ -81,10 +80,10 @@
                                     			<td class="col-md-1">@{{ currentFile.filesize }}</td>
                                                 <td class="col-md-1 text-right">
                                                     <button class="btn btn-sm btn-info" @click="toggleEvent(currentFile.id)">
-                                                        {{ trans('admin/importer/button.process') }}
+                                                        <i class="fas fa-retweet fa-fw" aria-hidden="true"></i>
+                                                        <span class="sr-only">{{ trans('general.import') }}</span>
                                                     </button>
-                                                </td>
-                                                <td class="col-md-1 text-right">
+
                                                     <button class="btn btn-sm btn-danger" @click="deleteFile(currentFile)">
                                                         <i class="fas fa-trash icon-white" aria-hidden="true"></i><span class="sr-only"></span></button>
                                     			</td>

@@ -122,6 +122,13 @@ class AuthServiceProvider extends ServiceProvider
         });
 
 
+        Gate::define('licenses.files', function ($user) {
+            if ($user->hasAccess('licenses.files')) {
+                return true;
+            }
+        });
+
+
         // -----------------------------------------
         // Reports
         // -----------------------------------------
@@ -150,6 +157,10 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('self.checkout_assets', function ($user) {
             return $user->hasAccess('self.checkout_assets');
+        });
+
+        Gate::define('self.view_purchase_cost', function ($user) {
+            return $user->hasAccess('self.view_purchase_cost');
         });
 
         // This is largely used to determine whether to display the gear icon sidenav 

@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Jūs norite ištrinti :asset_count įranga.',
     'bulk_update'		=> 'Visa atnaujinama įranga',
     'bulk_update_help'	=> 'Ši forma leidžia jums atnaujinti kelias įrangas vienu metu. Prašome užpildykite laukelius, kuriuos reikia keisti. Visi laukeliai, kuriuos paliksite tuščius liks nepakeisti. ',
-    'bulk_update_warn'	=> 'Jūs ruošiatės keisti sekančius nustatymus :asset_count assets.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Išduota',
     'checkout_date'		=> 'Išdavimo data',
     'checkin_date'		=> 'Priėmimo data',

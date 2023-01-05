@@ -7,6 +7,7 @@ use App\Helpers\StorageHelper;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SettingsSamlRequest;
 use App\Http\Requests\SetupUserRequest;
+use App\Models\Group;
 use App\Models\Setting;
 use App\Models\Asset;
 use App\Models\User;
@@ -349,6 +350,7 @@ class SettingsController extends Controller
         $setting->privacy_policy_link = $request->input('privacy_policy_link');
 
         $setting->depreciation_method = $request->input('depreciation_method');
+        $setting->dash_chart_type = $request->input('dash_chart_type');
 
         if ($request->input('per_page') != '') {
             $setting->per_page = $request->input('per_page');
@@ -910,6 +912,8 @@ class SettingsController extends Controller
     public function getLdapSettings()
     {
         $setting = Setting::getSettings();
+        $groups = Group::pluck('name', 'id');
+
 
         /**
          * This validator is only temporary (famous last words.) - @snipe
@@ -922,13 +926,13 @@ class SettingsController extends Controller
 
         $validator = Validator::make($setting->toArray(), [
             'ldap_username_field' => 'not_in:sAMAccountName',
-            'ldap_auth_filter_query' => 'not_in:uid=samaccountname',
-            'ldap_filter' => 'regex:"^[^(]"',
+            'ldap_auth_filter_query' => 'not_in:uid=samaccountname|required_if:ldap_enabled,1',
+            'ldap_filter' => 'nullable|regex:"^[^(]"|required_if:ldap_enabled,1',
         ],  $messages);
 
 
 
-        return view('settings.ldap', compact('setting'))->withErrors($validator);
+        return view('settings.ldap', compact('setting', 'groups'))->withErrors($validator);
     }
 
     /**
@@ -955,6 +959,7 @@ class SettingsController extends Controller
                 $setting->ldap_pword = Crypt::encrypt($request->input('ldap_pword'));
             }
             $setting->ldap_basedn = $request->input('ldap_basedn');
+            $setting->ldap_default_group = $request->input('ldap_default_group');
             $setting->ldap_filter = $request->input('ldap_filter');
             $setting->ldap_username_field = $request->input('ldap_username_field');
             $setting->ldap_lname_field = $request->input('ldap_lname_field');

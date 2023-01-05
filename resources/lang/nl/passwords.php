@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'sent'	        => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
-    'user'			=> 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
-    'token'         => 'This password reset token is invalid or expired, or does not match the username provided.',
-    'reset'         => 'Your password has been reset!',
+    'sent'	        => 'Als er een gebruiker met een geldig e-mailadres in ons systeem bestaat, dan is er een wachtwoordherstel-e-mail verzonden.',
+    'user'			=> 'Als er een gebruiker met een geldig e-mailadres in ons systeem bestaat, dan is er een wachtwoordherstel-e-mail verzonden.',
+    'token'         => 'Dit wachtwoord-hersteltoken is ongeldig of verlopen, of komt niet overeen met de opgegeven gebruikersnaam.',
+    'reset'         => 'Het wachtwoord is opnieuw ingesteld!',
 ];

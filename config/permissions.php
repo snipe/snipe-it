@@ -145,6 +145,13 @@ return [
             'note'       => '',
             'display'    => true,
         ],
+        [
+            'permission' => 'accessories.files',
+            'label'      => 'View and Modify Accessory Files',
+            'note'       => '',
+            'display'    => true,
+        ],
+
     ],
 
     'Consumables' => [
@@ -175,6 +182,12 @@ return [
         [
             'permission' => 'consumables.checkout',
             'label'      => 'Checkout ',
+            'note'       => '',
+            'display'    => true,
+        ],
+        [
+            'permission' => 'consumables.files',
+            'label'      => 'View and Modify Consumable Files',
             'note'       => '',
             'display'    => true,
         ],
@@ -261,6 +274,12 @@ return [
         [
             'permission' => 'components.checkin',
             'label'      => 'Checkin ',
+            'note'       => '',
+            'display'    => true,
+        ],
+        [
+            'permission' => 'components.files',
+            'label'      => 'View and Modify Component Files',
             'note'       => '',
             'display'    => true,
         ],
@@ -623,6 +642,13 @@ return [
             'permission' => 'self.checkout_assets',
             'label'      => 'Self-Checkout',
             'note'       => 'This user may check out assets that are marked for self-checkout.',
+            'display'    => true,
+        ],
+
+        [
+            'permission' => 'self.view_purchase_cost',
+            'label'      => 'View Purchase-Cost Column',
+            'note'       => 'This user can see the purchase cost column of items assigned to them.',
             'display'    => true,
         ],
 

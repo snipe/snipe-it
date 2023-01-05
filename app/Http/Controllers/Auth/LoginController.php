@@ -135,9 +135,7 @@ class LoginController extends Controller
         } else {
 
             // Better logging
-            if (!$saml->isEnabled()) {
-                \Log::debug("SAML page requested, but SAML does not seem to enabled.");
-            } else {
+            if (empty($samlData)) {
                 \Log::debug("SAML page requested, but samlData seems empty.");
             }
         }

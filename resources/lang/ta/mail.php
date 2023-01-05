@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'வலைத்தளத்தில் பயனர் ஒரு உருப்படி கோரிக்கையை ரத்து செய்துள்ளார்',
     'a_user_requested' => 'வலைத்தளத்தில் பயனர் ஒரு உருப்படியைக் கோரியுள்ளார்',
     'accessory_name' => 'துணை பெயர்:',

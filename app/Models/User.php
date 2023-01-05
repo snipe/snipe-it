@@ -59,6 +59,9 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'username',
         'zip',
         'remote',
+        'start_date',
+        'end_date',
+        'scim_externalid'
     ];
 
     protected $casts = [
@@ -67,6 +70,16 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'location_id'  => 'integer',
         'company_id'   => 'integer',
     ];
+
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'start_date',
+        'end_date',
+    ];
+
 
     /**
      * Model validation rules
@@ -83,6 +96,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'website'                 => 'url|nullable|max:191',
         'manager_id'              => 'nullable|exists:users,id|cant_manage_self',
         'location_id'             => 'exists:locations,id|nullable',
+        'start_date'              => 'nullable|date',
+        'end_date'                => 'nullable|date|after_or_equal:start_date',
     ];
 
     /**
@@ -322,6 +337,24 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
         return $this->belongsToMany(\App\Models\License::class, 'license_seats', 'assigned_to', 'license_id')->withPivot('id');
     }
+
+    /**
+     * Establishes a count of all items assigned
+     *
+     * @author J. Vinsmoke
+     * @since [v6.1]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    Public function allAssignedCount() {
+        $assetsCount = $this->assets()->count();
+        $licensesCount = $this->licenses()->count();
+        $accessoriesCount = $this->accessories()->count();
+        $consumablesCount = $this->consumables()->count();
+        
+        $totalCount = $assetsCount + $licensesCount + $accessoriesCount + $consumablesCount;
+    
+        return (int) $totalCount;
+        }
 
     /**
      * Establishes the user -> actionlogs relationship

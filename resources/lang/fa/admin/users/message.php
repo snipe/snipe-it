@@ -12,9 +12,12 @@ return array(
     'insufficient_permissions'  => 'دسترسی محدود',
     'user_deleted_warning'      => 'این کاربر حذف شده است.شما باید این کاربر را بازگردانی و آنها را ویرایش و دارایی به آنها اختصاص دهید.',
     'ldap_not_configured'        => 'LDAPبرای این نصب و راه اندازی پیکربندی نشده است.',
-    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
-    'password_reset_sent'       => 'A password reset link has been sent to :email!',
-    'user_has_no_email'         => 'This user does not have an email address in their profile.',
+    'password_resets_sent'      => 'برای کاربران منتخبی که فعال شده اند و آدرس ایمیل معتبری دارند، پیوند بازنشانی رمز عبور ارسال شده است.
+',
+    'password_reset_sent'       => 'پیوند بازنشانی رمز عبور به :email ارسال شده است!
+',
+    'user_has_no_email'         => 'این کاربر آدرس ایمیلی در نمایه خود ندارد.
+',
 
 
     'success' => array(

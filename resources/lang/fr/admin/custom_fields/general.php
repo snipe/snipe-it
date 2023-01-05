@@ -41,7 +41,7 @@ return [
     'make_required' => 'Facultatif - cliquez pour rendre requis',
     'reorder' => 'Réordonner',
     'db_field' => 'Champ BDD',
-    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code>:db_column</code> but should be <code>:expected</code>.',
+    'db_convert_warning' => 'ATTENTION. Ce champ est dans la table personnalisée en tant que <code>:db_column</code> mais devrait être <code>:expected</code>.',
     'is_unique' => 'Cette valeur doit être unique parmi tous les actifs',
     'unique' => 'Unique',
 ];

@@ -8,6 +8,7 @@ use App\Models\Setting;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
 
+
 class AssetsTransformer
 {
     public function transformAssets(Collection $assets, $total)
@@ -80,6 +81,7 @@ class AssetsTransformer
             'next_audit_date' => Helper::getFormattedDateObject($asset->next_audit_date, 'date'),
             'deleted_at' => Helper::getFormattedDateObject($asset->deleted_at, 'datetime'),
             'purchase_date' => Helper::getFormattedDateObject($asset->purchase_date, 'date'),
+            'age' => $asset->purchase_date ? Helper::AgeFormat($asset->purchase_date) : '',
             'last_checkout' => Helper::getFormattedDateObject($asset->last_checkout, 'datetime'),
             'expected_checkin' => Helper::getFormattedDateObject($asset->expected_checkin, 'date'),
             'purchase_cost' => Helper::formatCurrencyOutput($asset->purchase_cost),
@@ -131,7 +133,7 @@ class AssetsTransformer
                 $array['custom_fields'] = $fields_array;
             }
         } else {
-            $array['custom_fields'] = [];
+            $array['custom_fields'] = new \stdClass; // HACK to force generation of empty object instead of empty list
         }
 
         $permissions_array['available_actions'] = [
@@ -185,6 +187,7 @@ class AssetsTransformer
                     'name' => e($asset->assigned->getFullNameAttribute()),
                     'first_name'=> e($asset->assigned->first_name),
                     'last_name'=> ($asset->assigned->last_name) ? e($asset->assigned->last_name) : null,
+                    'email'=> ($asset->assigned->email) ? e($asset->assigned->email) : null,
                     'employee_number' =>  ($asset->assigned->employee_num) ? e($asset->assigned->employee_num) : null,
                     'type' => 'user',
                 ] : null;

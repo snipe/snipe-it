@@ -2,7 +2,7 @@
 
 return [
     'about_asset_depreciations'  			=> 'Über Asset-Abschreibungen',
-    'about_depreciations'  					=> 'Sie können Asset-Abschreibungen einrichten, um Assets linear abzuschreiben.',
+    'about_depreciations'  					=> 'Du kannst Asset-Abschreibungen einrichten, um Assets linear abzuschreiben.',
     'asset_depreciations'  					=> 'Asset-Abschreibungen',
     'create'  					            => 'Abschreibung erstellen',
     'depreciation_name'  					=> 'Abschreibungs Name',
@@ -11,6 +11,6 @@ return [
     'update'  					            => 'Abschreibung aktualisieren',
     'depreciation_min'                      => 'Minimaler Wert nach Abschreibung',
     'no_depreciations_warning'               => '<strong>Warnung: </strong>
-                      Sie haben derzeit keine Abschreibungen eingerichtet.
-                      Bitte richten Sie mindestens eine Abschreibung ein, um den Abschreibungsbericht anzuzeigen.',
+                      Du hast derzeit keine Abschreibungen eingerichtet.
+                      Bitte richte mindestens eine Abschreibung ein, um den Abschreibungsbericht anzuzeigen.',
 ];

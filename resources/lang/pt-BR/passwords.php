@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'sent'	        => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
-    'user'			=> 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
-    'token'         => 'This password reset token is invalid or expired, or does not match the username provided.',
-    'reset'         => 'Your password has been reset!',
+    'sent'	        => 'Se existir um usuário correspondente com um endereço de e-mail válido em nosso sistema, um e-mail de recuperação de senha foi enviado.',
+    'user'			=> 'Se existir um usuário correspondente com um endereço de e-mail válido em nosso sistema, um e-mail de recuperação de senha foi enviado.',
+    'token'         => 'Este token de redefinição de senha é inválido ou expirou, ou não corresponde ao nome de usuário fornecido.',
+    'reset'         => 'Sua senha foi redefinida!',
 ];

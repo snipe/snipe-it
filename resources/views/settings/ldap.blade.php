@@ -91,6 +91,53 @@
                             </div>
                         </div>
 
+                        <!--  Default LDAP Permissions Group Select -->
+
+                        <div class="form-group{{ $errors->has('group') ? ' has-error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('ldap_default_group', trans('admin/settings/general.ldap_default_group')) }}
+                            </div>
+
+                            <div class="col-md-9">
+
+                                @if ($groups->count())
+                                    @if ((Config::get('app.lock_passwords') || (!Auth::user()->isSuperUser())))
+                                        <ul>
+                                            @foreach ($groups as $id => $group)
+                                                {!! '<li>'.e($group).'</li>' !!}
+                                            @endforeach
+                                        </ul>
+
+
+                                        <span class="help-block">{{ trans('admin/users/general.group_memberships_helpblock') }}</span>
+                                    @else
+                                        <div class="controls">
+                                            <select
+                                                    name="ldap_default_group"
+                                                    aria-label="ldap_default_group"
+                                                    id="ldap_default_group"
+                                                    class="form-control"
+                                            >
+                                                <option></option>
+                                                @foreach ($groups as $id => $group)
+                                                    <option value="{{ $id }}">
+                                                        {{ $group }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+
+                                            <span class="help-block">
+                                      {{ trans('admin/settings/general.ldap_default_group_info') }}
+                                    </span>
+                                        </div>
+                                    @endif
+                                @else
+                                    <p>No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.</p>
+                                @endif
+
+                            </div>
+                        </div>
+
                         <!-- AD Flag -->
                         <div class="form-group">
                             <div class="col-md-3">
@@ -348,7 +395,7 @@
                             <div class="col-md-9">
                                 {{ Form::text('ldap_active_flag', Request::old('ldap_active_flag', $setting->ldap_active_flag), ['class' => 'form-control', $setting->demoMode]) }}
 
-                                <p class="help-block">{{ trans('admin/settings/general.ldap_activated_flag_help') }}</p>
+                                <p class="help-block">{!! trans('admin/settings/general.ldap_activated_flag_help') !!}</p>
 
                                 {!! $errors->first('ldap_active_flag', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @if (config('app.lock_passwords')===true)

@@ -16,8 +16,10 @@ return array(
     ),
 
     'restore' => array(
-        'error'   => 'Manufacturer was not restored, please try again',
-        'success' => 'Manufacturer restored successfully.'
+        'error'   => 'سازنده بازیابی نشد، لطفاً دوباره امتحان کنید
+',
+        'success' => 'سازنده بازیابی نشد، لطفاً دوباره امتحان کنید
+'
     ),
 
     'delete' => array(

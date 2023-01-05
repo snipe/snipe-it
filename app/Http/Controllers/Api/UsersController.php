@@ -15,6 +15,7 @@ use App\Models\Asset;
 use App\Models\Company;
 use App\Models\License;
 use App\Models\User;
+use App\Notifications\CurrentInventory;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
@@ -66,6 +67,8 @@ class UsersController extends Controller
             'users.zip',
             'users.remote',
             'users.ldap_import',
+            'users.start_date',
+            'users.end_date',
 
         ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy',)
             ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count');
@@ -146,6 +149,15 @@ class UsersController extends Controller
             $users = $users->where('remote', '=', $request->input('remote'));
         }
 
+        if ($request->filled('start_date')) {
+            $users = $users->where('users.start_date', '=', $request->input('start_date'));
+        }
+
+        if ($request->filled('end_date')) {
+            $users = $users->where('users.end_date', '=', $request->input('end_date'));
+        }
+
+
         if ($request->filled('assets_count')) {
            $users->has('assets', '=', $request->input('assets_count'));
         }
@@ -200,7 +212,7 @@ class UsersController extends Controller
                         'assets', 'accessories', 'consumables', 'licenses', 'groups', 'activated', 'created_at',
                         'two_factor_enrolled', 'two_factor_optin', 'last_login', 'assets_count', 'licenses_count',
                         'consumables_count', 'accessories_count', 'phone', 'address', 'city', 'state',
-                        'country', 'zip', 'id', 'ldap_import', 'remote',
+                        'country', 'zip', 'id', 'ldap_import', 'remote', 'start_date', 'end_date',
                     ];
 
                 $sort = in_array($request->get('sort'), $allowed_columns) ? $request->get('sort') : 'first_name';
@@ -479,6 +491,26 @@ class UsersController extends Controller
         return (new AssetsTransformer)->transformAssets($assets, $assets->count(), $request);
     }
 
+    /**
+     * Notify a specific user via email with all of their assigned assets.
+     *
+     * @author [Lukas Fehling] [<lukas.fehling@adabay.rocks>]
+     * @since [v6.0.13]
+     * @param Request $request
+     * @param $id
+     * @return string JSON
+     */
+    public function emailAssetList(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        if (empty($user->email)) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.inventorynotification.error')));
+        }
+ 
+        return response()->Helper::formatStandardApiResponse('success', null, trans('admin/users/message.inventorynotification.success'));
+ 
+    }
 
     /**
      * Return JSON containing a list of consumables assigned to a user.

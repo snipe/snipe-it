@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A felhasználó elfogadott egy tételt',
+    'acceptance_asset_declined' => 'A felhasználó visszautasított egy tételt',
     'a_user_canceled' => 'A felhasználó törölte az elemkérést a webhelyen',
     'a_user_requested' => 'A felhasználó egy elemet kért a webhelyen',
     'accessory_name' => 'Tartozéknév:',

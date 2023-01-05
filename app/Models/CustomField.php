@@ -48,7 +48,11 @@ class CustomField extends Model
      *
      * @var array
      */
-    protected $rules = [];
+    protected $rules = [
+        'name' => 'required|unique:custom_fields',
+        'element' => 'required|in:text,listbox,textarea,checkbox,radio',
+        'field_encrypted' => 'nullable|boolean',
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -64,6 +68,7 @@ class CustomField extends Model
         'help_text',
         'show_in_email',
         'is_unique',
+        'display_in_user_view',
     ];
 
     /**
@@ -338,7 +343,7 @@ class CustomField extends Model
         $id = $this->id ? $this->id : 'xx';
 
         if (! function_exists('transliterator_transliterate')) {
-            $long_slug = '_snipeit_'.str_slug(\Patchwork\Utf8::utf8_encode(trim($name)), '_');
+            $long_slug = '_snipeit_'.str_slug(mb_convert_encoding(trim($name),"UTF-8"), '_');
         } else {
             $long_slug = '_snipeit_'.Utf8Slugger::slugify($name, '_');
         }
@@ -356,15 +361,9 @@ class CustomField extends Model
     public function validationRules($regex_format = null)
     {
         return [
-            'name' => 'required|unique:custom_fields',
-            'element' => [
-                'required',
-                Rule::in(['text', 'listbox',  'textarea', 'checkbox', 'radio']),
-            ],
             'format' => [
                 Rule::in(array_merge(array_keys(self::PREDEFINED_FORMATS), self::PREDEFINED_FORMATS, [$regex_format])),
-            ],
-            'field_encrypted' => 'nullable|boolean',
+            ]
         ];
     }
 

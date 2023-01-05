@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Jy is op die punt om te verwyder: bate_count bates.',
     'bulk_update'		=> 'Grootskaalse opdateringsbates',
     'bulk_update_help'	=> 'Met hierdie vorm kan u verskeie bates gelyktydig bywerk. Vul slegs die velde in wat u moet verander. Enige velde wat leeg is, bly onveranderd.',
-    'bulk_update_warn'	=> 'Jy is op die punt om die eienskappe van: bate_count bates te wysig.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Gekontroleer na',
     'checkout_date'		=> 'Checkout Datum',
     'checkin_date'		=> 'Incheckdatum',

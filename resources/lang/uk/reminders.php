@@ -15,7 +15,7 @@ return array(
 
     "password" => "Паролі повинні складатися з шести символів і відповідати вимогам безпеки.",
     "user"     => "Ім'я користувача або електронна адреса невірна",
-    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
-    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
+    "token"    => 'Токен для скидання пароля недійсний або застарілий, або не відповідає наданому ім\'ю користувача.',
+    'sent'	   => 'Якщо відповідний користувач з дійсною адресою електронної пошти існує в нашій системі, йому вже надіслано лист для відновлення паролю.',
 
 );

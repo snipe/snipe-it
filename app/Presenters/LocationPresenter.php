@@ -55,17 +55,28 @@ class LocationPresenter extends Presenter
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
-                'title' =>  trans('admin/locations/table.assets_rtd'),
+                'title' =>  trans('admin/locations/message.current_location'),
                 'visible' => true,
             ],
+
+            [
+                'field' => 'rtd_assets_count',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'title' =>  trans('admin/hardware/form.default_location'),
+                'visible' => false,
+            ],
+
             [
                 'field' => 'assigned_assets_count',
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
-                'title' =>  trans('admin/locations/table.assets_checkedout'),
+                'title' =>  trans('admin/locations/message.assigned_assets'),
                 'visible' => true,
             ],
+
             [
                 'field' => 'users_count',
                 'searchable' => false,

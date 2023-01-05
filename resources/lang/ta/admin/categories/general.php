@@ -3,8 +3,8 @@
 return array(
     'asset_categories' 					=> 'சொத்து வகைகள்',
     'category_name'  					=> 'வகை பெயர்',
-    'checkin_email'                     => 'Send email to user on checkin/checkout.',
-    'checkin_email_notification'        => 'This user will be sent an email on checkin/checkout.',
+    'checkin_email'                     => 'ஒப்படைக்கும்/பெற்றுக்கொள்ளும் போது பயனருக்கு மின்னஞ்சல் அனுப்பவும்.',
+    'checkin_email_notification'        => 'இந்த பயனருக்கு ஒப்படைக்கும்/பெற்றுக்கொள்ளும் போது மின்னஞ்சல் அனுப்பப்படும்.',
     'clone'                             => 'குளோன் வகை',
     'create'  							=> 'பகுப்பு உருவாக்கவும்',
     'edit'                              => 'திருத்து பகுப்பு',
@@ -18,6 +18,6 @@ return array(
     'update'  							=> 'பகுப்பு புதுப்பிக்கவும்',
     'use_default_eula'					=> 'பதிலாக <a href="#" data-toggle="modal" data-target="#eulaModal">primary இயல்புநிலை EULA</a> ஐப் பயன்படுத்துக.',
     'use_default_eula_disabled'			=> '<del> முதன்மை இயல்புநிலை EULA ஐப் பயன்படுத்தவும் .</del> முதன்மை இயல்புநிலை EULA அமைக்கப்படவில்லை. அமைப்புகளில் ஒன்றைச் சேர்க்கவும்.',
-    'use_default_eula_column'			=> 'Use default EULA',
+    'use_default_eula_column'			=> 'இயல்புநிலை EULAஐப் பயன்படுத்தவும்',
 
 );

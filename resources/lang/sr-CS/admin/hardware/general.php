@@ -13,32 +13,25 @@ return [
     'deployable'  				=> 'Može se razmestiti',
     'deleted'  					=> 'Imovina je obrisana.',
     'edit'  					=> 'Uređivanje imovine',
-    'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
+    'model_deleted'  			=> 'Ovaj Model osnovnog sredstva je izbrisan. Morate da vratite model da bi ste mogli da vratite sredstvo.',
     'requestable'               => 'Može da se potražuje',
     'requested'				    => 'Zatraženo',
-    'not_requestable'           => 'Not Requestable',
-    'requestable_status_warning' => 'Do not change  requestable status',
+    'not_requestable'           => 'Ne može da se potražuje',
+    'requestable_status_warning' => 'Ne manjajte status potražuje se',
     'restore'  					=> 'Restore Asset',
     'pending'  					=> 'U čekanju',
     'undeployable'  			=> 'Ne može da se razmesti',
     'view'  					=> 'Prikaz imovine',
     'csv_error' => 'Postoji greška u tvojoj CSV datoteci:',
     'import_text' => '
-    <p>
-    Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
-    </p>
-
-    <p>Fields included in the CSV must match the headers: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Any additional fields will be ignored. </p>
-
-    <p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
-    ',
-    'csv_import_match_f-l' => 'Try to match users by firstname.lastname (jane.smith) format',
-    'csv_import_match_initial_last' => 'Try to match users by first initial last name (jsmith) format',
-    'csv_import_match_first' => 'Try to match users by first name (jane) format',
-    'csv_import_match_email' => 'Try to match users by email as username',
-    'csv_import_match_username' => 'Try to match users by username',
-    'error_messages' => 'Error messages:',
-    'success_messages' => 'Success messages:',
-    'alert_details' => 'Please see below for details.',
-    'custom_export' => 'Custom Export'
+Otpremite CSV koji sadrži istoriju osnovnog sredstva. Sredstva i korisnici MORAJU već postojati u sistemu ili će biti preskočeni. Podudaranje sredstava za uvoz istorije se dešava u odnosu na oznaku sredstva. Pokušaćemo da pronađemo odgovarajućeg korisnika na osnovu korisničkog imena koje navedete i kriterijuma koje izaberete ispod. Ako ne izaberete nijedan kriterijum ispod, on će jednostavno pokušati da se podudara sa formatom korisničkog imena koji ste konfigurisali u Admin &gt; Opšta podešavanja    ',
+    'csv_import_match_f-l' => 'Pokušajte da uskladite korisnike po formatu ime.prezime (petar.petrovic)',
+    'csv_import_match_initial_last' => 'Pokušajte da uparite korisnike prema formatu prvog prezimena (ppetrovic)',
+    'csv_import_match_first' => 'Pokušajte da uporedite korisnike po formatu imena (petar)',
+    'csv_import_match_email' => 'Pokušajte da povežete korisnike putem e-pošte kao korisničkog imena',
+    'csv_import_match_username' => 'Pokušajte da povežete korisnike po korisničkom imenu',
+    'error_messages' => 'Poruka o grešci:',
+    'success_messages' => 'Poruke o uspehu:',
+    'alert_details' => 'Za detalje pogledajte ispod.',
+    'custom_export' => 'Uobičajen izvoz'
 ];

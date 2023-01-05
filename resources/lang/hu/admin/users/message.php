@@ -14,7 +14,7 @@ return array(
     'ldap_not_configured'        => 'Az LDAP integráció nem lett konfigurálva ehhez a telepítéshez.',
     'password_resets_sent'      => 'A kiválasztott felhasználók számára, akik aktívak és van nekik érvényes email cím, elküldésre került egy jelszó visszaállítási link.',
     'password_reset_sent'       => 'A jelszó visszaállítási link elküldésre került a :email címre!',
-    'user_has_no_email'         => 'This user does not have an email address in their profile.',
+    'user_has_no_email'         => 'Ez a felhasználó nem rendelkezik e-mail címmel a profiljában.',
 
 
     'success' => array(

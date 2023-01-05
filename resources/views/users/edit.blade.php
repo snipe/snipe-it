@@ -358,6 +358,10 @@
                           <!--  Department -->
                           @include ('partials.forms.edit.department-select', ['translated_name' => trans('general.department'), 'fieldname' => 'department_id'])
 
+                          @include ('partials.forms.edit.datepicker', ['translated_name' => trans('general.start_date'), 'fieldname' => 'start_date', 'item' => $user])
+
+                          @include ('partials.forms.edit.datepicker', ['translated_name' => trans('general.end_date'), 'fieldname' => 'end_date', 'item' => $user])
+
 
                           <!-- remote checkbox -->
                           <div class="form-group">
@@ -499,7 +503,7 @@
                                               </ul>
                                           @endif
 
-                                          <span class="help-block">{{ trans('admin/users/general.group_memberships_helpblock') }}</p>
+                                          <span class="help-block">{{ trans('admin/users/general.group_memberships_helpblock') }}</span>
                                   @else
                                    <div class="controls">
                                     <select
@@ -564,7 +568,7 @@
           </div><!-- /.tab-pane -->
         </div><!-- /.tab-content -->
         <div class="box-footer text-right">
-          <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+          <button type="submit" accesskey="s" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
         </div>
       </div><!-- nav-tabs-custom -->
     </form>

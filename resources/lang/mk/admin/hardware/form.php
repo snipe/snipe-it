@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Ќе избришете :assets_count основни средства.',
     'bulk_update'		=> 'Масовно ажурирање на основни средства',
     'bulk_update_help'	=> 'Оваа форма ви овозможува да ажурирате повеќе основни средства одеднаш. Пополнете ги полињата што треба да ги промените. Сите полиња што остануваат празни ќе останат непроменети. ',
-    'bulk_update_warn'	=> 'Ќе ажурирате :assets_count основни средства.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Задолжен на',
     'checkout_date'		=> 'Датум на задолжување',
     'checkin_date'		=> 'Датум на раздолжување',

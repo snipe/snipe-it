@@ -16,7 +16,7 @@ return [
         'error'   			=> '更新資產失敗，請重試。',
         'success' 			=> '更新資產成功。',
         'nothing_updated'	=>  '沒有欄位被選擇，因此沒有更新任何內容。',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'no_assets_selected'  =>  '沒有資產被選取，因此沒有更新任何內容。',
     ],
 
     'restore' => [

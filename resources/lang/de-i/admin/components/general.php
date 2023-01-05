@@ -8,7 +8,7 @@ return array(
     'create'                             => 'Komponente erstellen',
     'edit'                             => 'Komponente bearbeiten',
     'date'					=> 'Kaufdatum',
-    'order'					=> 'Artikelnummer',
+    'order'					=> 'Auftragsnummer',
     'remaining' 			             => 'Verbleibend',
     'total' 			                 => 'Gesamt',
     'update'                            => 'Komponente aktualisieren',

@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'Mae defnyddiwr wedi canslo cais am eitem ar y wefan',
     'a_user_requested' => 'Mae defnyddiwr wedi gwneud cais am eitem ar y wefan',
     'accessory_name' => 'Enw Ategolyn:',

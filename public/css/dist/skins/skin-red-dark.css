@@ -194,6 +194,9 @@ a:visited {
   --light-link: #fff;
   /* Use same as Header picker */
 }
+#ldapad_test_results.well.well-sm {
+  color: var(--back-main);
+}
 .main-header .navbar,
 .main-header .logo {
   background-color: var(--header);
@@ -222,6 +225,9 @@ a:visited {
 }
 a:hover {
   color: var(--hover-link);
+}
+.far fa-life-ring {
+  color: var(--link);
 }
 .btn-primary.hover {
   color: var(--nav-link);

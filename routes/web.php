@@ -279,6 +279,23 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
         ->name('account.accept.item');
 
     Route::post('accept/{id}', [Account\AcceptanceController::class, 'store']);
+
+    Route::get(
+        'print',
+        [
+            ProfileController::class,
+            'printInventory'
+        ]
+    )->name('profile.print');
+
+    Route::post(
+        'email',
+        [
+            ProfileController::class,
+            'emailAssetList'
+        ]
+    )->name('profile.email_assets');
+
 });
 
 Route::group(['middleware' => ['auth']], function () {

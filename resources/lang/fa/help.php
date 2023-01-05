@@ -15,20 +15,21 @@ return [
 
     'more_info_title' => 'اطلاعات بیشتر',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'با علامت زدن این کادر، سابقه دارایی برای منعکس کردن این مکان جدید ویرایش می شود. بدون علامت گذاشتن آن، به سادگی مکان در گزارش حسابرسی یادداشت می شود.<br><br>توجه داشته باشید که این دارایی بررسی شده است، مکان شخص، دارایی یا مکانی که در آن بررسی شده است را تغییر نمی دهد.
+',
 
-    'assets' => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'assets' => 'دارایی ها مواردی هستند که توسط شماره سریال یا برچسب دارایی دنبال می شوند. آنها تمایل دارند که مقادیر ارزش بیشتری داشته باشند که در آن شناسایی یک مورد خاص موردنیاز باشد.',
 
-    'categories' => 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'categories' => 'دسته بندی دارایی ها به شما کمک میکند دارایی های خود را سازماندهی کنید.برخی مثال های دسته بندی ممکن است "کامپیوتر رومیزی"،"لپ تاپ ها"،"تلفن های همراه"،"تبلت ها" و ... باشند،ولی شما میتوانید از دسته بندی های دارایی به هر شکلی که برای شما مناسب است استفاده کنید.',
 
-    'accessories' => 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
+    'accessories' => 'لوازم جانبی هر چیزی است که شما به کاربر صادر میکنید ولی شماره سریال ندارد(یا برای شما ردیابی منحصر به فرد آنها اهمیتی ندارد).برای مثال موس یا کیبورد.',
 
-    'companies'     => 'Companies can be used as a simple identifier field, or can be used to limit visibility of assets, users, etc if full company support is enabled in your Admin settings.',
+    'companies'     => 'شرکت ها را می توان به عنوان یک فیلد شناسه ساده استفاده کرد یا می تواند برای محدود کردن دیدگاه دارایی ها، کاربران و غیره مورد استفاده قرار گیرد اگر پشتیبانی کامل شرکت در تنظیمات مدیریت شما فعال باشد.',
 
-    'components'    => 'Components are items that are part of an asset, for example HDD, RAM, etc.',
+    'components'    => 'قطعات آیتم هایی هستند که بخشی از یک دارایی، به عنوان مثال HDD، RAM، و غیره',
 
-    'consumables'   => 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
+    'consumables'   => 'مواد مصرفی هر چیزی خریداری خواهد شد که تا در طول زمان استفاده می شود. به عنوان مثال، جوهر چاپگر کاغذ دستگاه کپی.',
 
-    'depreciations' => 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
+    'depreciations' => 'شما می توانید استهلاک دارایی را فعال کنید تا دارایی ها را بر اساس استهلاک خطی مستقیم، کم بهاء کنید.',
 
 ];

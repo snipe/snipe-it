@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> '삭제 대상: asset_count 개',
     'bulk_update'		=> '대량 자산 갱신',
     'bulk_update_help'	=> '이 양식은 한번에 여러개의 자산들을 갱신하게 해줍니다. 변경하고 싶은 항목만 채워 넣으세요. 빈란으로 남겨둔 항목들은 변경되지 않을 것입니다. ',
-    'bulk_update_warn'	=> '당신은 asset_count 자산들의 속성들을 편집하려 합니다.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> '반출 대상',
     'checkout_date'		=> '반출 일자',
     'checkin_date'		=> '반입 일자',

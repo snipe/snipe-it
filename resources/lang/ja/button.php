@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'アクション',
     'add'    	                => '新規追加',
     'cancel'                    => 'キャンセル',
-    'checkin_and_delete'  	    => 'Checkin All / Delete User',
+    'checkin_and_delete'  	    => 'すべてチェックイン/ユーザー削除',
     'delete'  	                => '削除',
     'edit'    	                => '編集',
     'restore' 	                => '復元',

@@ -495,6 +495,9 @@
                                             </div>
                                             <div class="col-md-6">
                                                 {{ Helper::getFormattedDateObject($asset->purchase_date, 'date', false) }}
+                                                -
+                                                {{ Carbon::parse($asset->purchase_date)->diff(Carbon::now())->format('%y years, %m months and %d days')}}
+
                                             </div>
                                         </div>
                                     @endif
@@ -519,7 +522,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                    @if (($asset->model) && ($asset->depreciation))
+                                    @if (($asset->model) && ($asset->depreciation) && ($asset->purchase_date))
                                         <div class="row">
                                             <div class="col-md-2">
                                                 <strong>
@@ -584,7 +587,11 @@
                                                 {{ $asset->warranty_months }}
                                                 {{ trans('admin/hardware/form.months') }}
 
-
+                                                @if (($asset->serial && $asset->model->manufacturer) && $asset->model->manufacturer->name == 'Apple')
+                                                    <a href="https://checkcoverage.apple.com/us/{{ \App\Models\Setting::getSettings()->locale  }}/?sn={{ $asset->serial }}" target="_blank">
+                                                        <i class="fa-brands fa-apple" aria-hidden="true"><span class="sr-only">Applecare Status Lookup</span></i>
+                                                    </a>
+                                                @endif
                                             </div>
                                         </div>
 
@@ -592,15 +599,20 @@
                                                 <div class="col-md-2">
                                                     <strong>
                                                         {{ trans('admin/hardware/form.warranty_expires') }}
+                                                        @if ($asset->purchase_date)
                                                         {!! $asset->present()->warranty_expires() < date("Y-m-d") ? '<i class="fas fa-exclamation-triangle text-orange" aria-hidden="true"></i>' : '' !!}
+                                                        @endif
+
                                                     </strong>
                                                 </div>
                                                 <div class="col-md-6">
-
+                                                    @if ($asset->purchase_date)
                                                     {{ Helper::getFormattedDateObject($asset->present()->warranty_expires(), 'date', false) }}
                                                     -
-                                                    {{ Carbon::parse($asset->present()->warranty_expires())->diffForHumans() }}
-
+                                                    {{ Carbon::parse($asset->present()->warranty_expires())->diffForHumans(['parts' => 2]) }}
+                                                    @else
+                                                        {{ trans('general.na_no_purchase_date') }}
+                                                    @endif
                                                 </div>
                                             </div>
 
@@ -626,9 +638,13 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
+                                                @if ($asset->purchase_date)
                                                 {{ Helper::getFormattedDateObject($asset->depreciated_date()->format('Y-m-d'), 'date', false) }}
                                                 -
-                                                {{ Carbon::parse($asset->depreciated_date())->diffForHumans() }}
+                                                {{ Carbon::parse($asset->depreciated_date())->diffForHumans(['parts' => 2]) }}
+                                                @else
+                                                    {{ trans('general.na_no_purchase_date') }}
+                                                @endif
 
                                             </div>
                                         </div>
@@ -655,10 +671,13 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
+                                                @if ($asset->purchase_date)
                                                 {{ Helper::getFormattedDateObject($asset->present()->eol_date(), 'date', false) }}
                                                 -
-                                                {{ Carbon::parse($asset->present()->eol_date())->diffForHumans() }}
-                                                
+                                                {{ Carbon::parse($asset->present()->eol_date())->diffForHumans(['parts' => 2]) }}
+                                                @else
+                                                    {{ trans('general.na_no_purchase_date') }}
+                                                @endif
                                             </div>
                                         </div>
                                     @endif
@@ -948,6 +967,7 @@
                                         <th>{{ trans('general.name') }}</th>
                                         <th>{{ trans('general.qty') }}</th>
                                         <th>{{ trans('general.purchase_cost') }}</th>
+                                        <th>{{trans('admin/hardware/form.serial')}}</th>
                                         </thead>
                                         <tbody>
                                         <?php $totalCost = 0; ?>
@@ -961,6 +981,7 @@
                                                     </td>
                                                     <td>{{ $component->pivot->assigned_qty }}</td>
                                                     <td>{{ Helper::formatCurrencyOutput($component->purchase_cost) }} each</td>
+                                                    <td>{{ $component->serial }}</td>
 
                                                     <?php $totalCost = $totalCost + ($component->purchase_cost *$component->pivot->assigned_qty) ?>
                                                 </tr>
@@ -1182,10 +1203,14 @@
                                                     @endif
                                                 </td>
                                                 <td>
+                                                    @if (Storage::exists('private_uploads/assets/'.$file->filename))
                                                     {{ $file->filename }}
+                                                    @else
+                                                    <del>{{ $file->filename }}</del>
+                                                    @endif
                                                 </td>
-                                                <td data-value="{{ @Storage::size('private_uploads/assets/'.$file->filename) }}">
-                                                    {{ @Helper::formatFilesizeUnits(Storage::size('private_uploads/assets/'.$file->filename)) }}
+                                                <td data-value="{{ (Storage::exists('private_uploads/assets/'.$file->filename) ? Storage::size('private_uploads/assets/'.$file->filename) : '') }}">
+                                                    {{ @Helper::formatFilesizeUnits(Storage::exists('private_uploads/assets/'.$file->filename) ? Storage::size('private_uploads/assets/'.$file->filename) : '') }}
                                                 </td>
                                                 <td>
                                                     @if ($file->note)
@@ -1193,7 +1218,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if ($file->filename)
+                                                    @if (($file->filename) && (Storage::exists('private_uploads/assets/'.$file->filename)))
                                                         <a href="{{ route('show/assetfile', [$asset->id, $file->id]) }}" class="btn btn-default">
                                                             <i class="fas fa-download" aria-hidden="true"></i>
                                                         </a>
@@ -1268,17 +1293,21 @@
                                             <tr>
                                                 <td><i class="{{ Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i></td>
                                                 <td>
-                                                    @if ( Helper::checkUploadIsImage($file->get_src('assets')))
-                                                        <a href="{{ route('show/modelfile', ['assetId' => $asset->model->id, 'fileId' =>$file->id]) }}" data-toggle="lightbox" data-type="image" data-title="{{ $file->filename }}" data-footer="{{ Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}">
-                                                            <img src="{{ route('show/modelfile', ['assetId' => $asset->model->id, 'fileId' =>$file->id]) }}" style="max-width: 50px;">
+                                                    @if ( Helper::checkUploadIsImage($file->get_src('assetmodels')))
+                                                        <a href="{{ route('show/modelfile', ['modelID' => $asset->model->id, 'fileId' =>$file->id]) }}" data-toggle="lightbox" data-type="image" data-title="{{ $file->filename }}" data-footer="{{ Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}">
+                                                            <img src="{{ route('show/modelfile', ['modelID' => $asset->model->id, 'fileId' =>$file->id]) }}" style="max-width: 50px;">
                                                         </a>
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    {{ $file->filename }}
+                                                    @if (Storage::exists('private_uploads/assetmodels/'.$file->filename))
+                                                        {{ $file->filename }}
+                                                    @else
+                                                        <del>{{ $file->filename }}</del>
+                                                    @endif
                                                 </td>
-                                                <td data-value="{{ Storage::size('private_uploads/assetmodels/'.$file->filename) }}">
-                                                    {{ Helper::formatFilesizeUnits(Storage::size('private_uploads/assetmodels/'.$file->filename)) }}
+                                                <td data-value="{{ (Storage::exists('private_uploads/assetmodels/'.$file->filename)) ? Storage::size('private_uploads/assetmodels/'.$file->filename) : '' }}">
+                                                    {{ (Storage::exists('private_uploads/assetmodels/'.$file->filename)) ? Helper::formatFilesizeUnits(Storage::size('private_uploads/assetmodels/'.$file->filename)) : '' }}
                                                 </td>
                                                 <td>
                                                     @if ($file->note)
@@ -1286,7 +1315,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if ($file->filename)
+                                                    @if (($file->filename) && (Storage::exists('private_uploads/assetmodels/'.$file->filename)))
                                                         <a href="{{ route('show/modelfile', [$asset->model->id, $file->id]) }}" class="btn btn-default">
                                                             <i class="fas fa-download" aria-hidden="true"></i>
                                                         </a>

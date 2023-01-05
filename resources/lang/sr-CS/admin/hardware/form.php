@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Izbrisaćete: asset_count assets.',
     'bulk_update'		=> 'Grupno ažuriranje imovine',
     'bulk_update_help'	=> 'Ova forma vam omogućava da ažururate više stavki odjednom. Popunite samo polja koja želite da izmenite. Nepopunjena polja ostaće nepromenjena. ',
-    'bulk_update_warn'	=> 'Nameravate da manjate svojstva: imovine asset_count.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Checked Out To',
     'checkout_date'		=> 'Checkout Date',
     'checkin_date'		=> 'Checkin Date',

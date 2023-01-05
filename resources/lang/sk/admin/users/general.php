@@ -35,7 +35,7 @@ return [
     'remove_group_memberships' => 'Odstrániť členstvo v skupine',
     'warning_deletion' => 'VAROVANIE:',
     'warning_deletion_information' => 'You are about to checkin ALL items from the :count user(s) listed below. Super admin names are highlighted in red.',
-    'update_user_assets_status' => 'Update all assets for these users to this status',
+    'update_user_assets_status' => 'Aktualizovať všetky asety pre týchto užívateľov na tento status',
     'checkin_user_properties' => 'Check in all properties associated with these users',
     'remote_label'   => 'This is a remote user',
     'remote'   => 'Remote',

@@ -4,7 +4,8 @@ return [
 
     'undeployable' 		=> '<strong> اخطار: </ strong> این دارایی به برانگیز گزارش شده است که در حال حاضر undeployable. اگر این وضعیت تغییر کرده است، لطفا به روز رسانی وضعیت دارایی.',
     'does_not_exist' 	=> 'دارایی وجود ندارد.',
-    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
+    'does_not_exist_or_not_requestable' => 'آن دارایی وجود ندارد یا قابل درخواست نیست.
+',
     'assoc_users'	 	=> 'این دارایی در حال حاضر به یک کاربر چک کردن و پاک نمی شود. لطفا دارایی در اولین بار چک کنید، و سپس سعی کنید دوباره حذف کنید.',
 
     'create' => [
@@ -16,7 +17,8 @@ return [
         'error'   			=> 'دارایی به روز نیست، لطفا دوباره امتحان کنید',
         'success' 			=> 'دارایی ها با موفقیت به روز رسانی.',
         'nothing_updated'	=>  'هیچ زمینه، انتخاب شدند تا هیچ چیز به روز شد.',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'no_assets_selected'  =>  'هیچ دارایی انتخاب نشد، بنابراین چیزی به‌روزرسانی نشد.
+',
     ],
 
     'restore' => [

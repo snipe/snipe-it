@@ -170,6 +170,9 @@ a:visited {
   --light-link: #545454;
   /* Use same as Header picker */
 }
+#ldapad_test_results.well.well-sm {
+  color: var(--back-main);
+}
 .main-header .navbar,
 .main-header .logo {
   background-color: var(--header);
@@ -213,6 +216,9 @@ a:link.btn-default {
 .small-box p a:hover {
   text-decoration: none;
   color: var(--nav-link) !important;
+}
+.far fa-life-ring {
+  color: var(--link);
 }
 #accessoriesTable > tbody > tr > td > nobr > a > i.fa {
   color: var(--text-main);

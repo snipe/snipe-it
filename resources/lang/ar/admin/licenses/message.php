@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'الترخيص غير موجود.',
+    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
     'user_does_not_exist' => 'المستخدم غير موجود.',
     'asset_does_not_exist' 	=> 'الأصل اللذي تحاول ربطه مع هذا الترخيص غير موجود.',
     'owner_doesnt_match_asset' => 'الأصل اللذي تحاول ربطه مع هذا الترخيص حاليا مملوك لشخص اخر غير اللذي تم اختياره من القائمة المنسدلة.',

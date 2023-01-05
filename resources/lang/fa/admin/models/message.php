@@ -35,8 +35,10 @@ return array(
 
     'bulkdelete' => array(
         'error'   		    => 'هیچ مدلی انتخاب نشده بود، بنابراین هیچ چیز حذف نشد.',
-        'success' 		    => ':success_count model(s) deleted!',
-        'success_partial' 	=> ':success_count model(s) were deleted, however :fail_count were unable to be deleted because they still have assets associated with them.'
+        'success' 		    => ':success_count مدل(های) حذف شد!
+',
+        'success_partial' 	=> 'مدل(های) :success_count حذف شدند، اما :fail_count حذف نشدند زیرا هنوز دارایی های مرتبط با آنها هستند.
+'
     ),
 
 );

@@ -9,6 +9,8 @@ use App\Http\Transformers\StatuslabelsTransformer;
 use App\Models\Asset;
 use App\Models\Statuslabel;
 use Illuminate\Http\Request;
+use App\Http\Transformers\PieChartTransformer;
+use Illuminate\Support\Arr;
 
 class StatuslabelsController extends Controller
 {
@@ -188,43 +190,54 @@ class StatuslabelsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function getAssetCountByStatuslabel()
     {
         $this->authorize('view', Statuslabel::class);
-
         $statuslabels = Statuslabel::withCount('assets')->get();
 
-        $labels = [];
-        $points = [];
-        $default_color_count = 0;
-        $colors_array = [];
-
         foreach ($statuslabels as $statuslabel) {
-            if ($statuslabel->assets_count > 0) {
-                $labels[] = $statuslabel->name.' ('.number_format($statuslabel->assets_count).')';
-                $points[] = $statuslabel->assets_count;
 
-                if ($statuslabel->color != '') {
-                    $colors_array[] = $statuslabel->color;
-                } else {
-                    $colors_array[] = Helper::defaultChartColors($default_color_count);
-                }
-                $default_color_count++;
+            $total[$statuslabel->name]['label'] = $statuslabel->name;
+            $total[$statuslabel->name]['count'] = $statuslabel->assets_count;
+
+            if ($statuslabel->color != '') {
+                $total[$statuslabel->name]['color'] = $statuslabel->color;
             }
         }
 
-        $result = [
-            'labels' => $labels,
-            'datasets' => [[
-                'data' => $points,
-                'backgroundColor' => $colors_array,
-                'hoverBackgroundColor' =>  $colors_array,
-            ]],
-        ];
+        return (new PieChartTransformer())->transformPieChartDate($total);
 
-        return $result;
+    }
+
+    /**
+     * Show a count of assets by meta status type for pie chart
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v6.0.11]
+     * @return array
+     */
+    public function getAssetCountByMetaStatus()
+    {
+        $this->authorize('view', Statuslabel::class);
+
+        $total['rtd']['label'] = trans('general.ready_to_deploy');
+        $total['rtd']['count'] = Asset::RTD()->count();
+
+        $total['deployed']['label'] = trans('general.deployed');
+        $total['deployed']['count'] = Asset::Deployed()->count();
+
+        $total['archived']['label'] = trans('general.archived');
+        $total['archived']['count'] = Asset::Archived()->count();
+
+        $total['pending']['label'] = trans('general.pending');
+        $total['pending']['count'] = Asset::Pending()->count();
+
+        $total['undeployable']['label'] = trans('general.undeployable');
+        $total['undeployable']['count'] = Asset::Undeployable()->count();
+
+        return (new PieChartTransformer())->transformPieChartDate($total);
     }
 
     /**

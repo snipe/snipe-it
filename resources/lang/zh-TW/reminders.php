@@ -15,7 +15,7 @@ return array(
 
     "password" => "密碼至少需要六個字符，並且與確認欄位相符",
     "user"     => "使用者名稱或電子郵件地址不正確",
-    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
-    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
+    "token"    => '這個密碼重置安全權杖無效或過期，或與提供的用戶名稱不相符',
+    'sent'	   => '如果該電子郵件已存在我們的系統中，一封含有恢復密碼的郵件將被傳送',
 
 );

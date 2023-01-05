@@ -11,8 +11,8 @@ return [
         'file_deleted'          => 'Sigurnosna kopija datoteke je uspešno izbrisana. ',
         'generated'             => 'Nova sigurnosna kopija datoteke uspešno je kreirana.',
         'file_not_found'        => 'Sigurnosna kopija datoteke nije na serveru.',
-        'restore_warning'       => 'Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This will also log out all of your existing users (including you).',
-        'restore_confirm'       => 'Are you sure you wish to restore your database from :filename?'
+        'restore_warning'       => 'Da, vrati. Potvrđujem da će ovo zameniti sve postojeće podatke koji se trenutno nalaze u bazi podataka. Ovo će takođe odjaviti sve vaše postojeće korisnike (uključujući i Vas).',
+        'restore_confirm'       => 'Da li ste sigurni da želite da vratite svoju bazu podataka sa :filename?'
     ],
     'purge' => [
         'error'     => 'Došlo je do pogreške prilikom brisanja. ',
@@ -20,24 +20,24 @@ return [
         'success'               => 'Zapisi su uspešno i trajno obrisani.',
     ],
     'mail' => [
-        'sending' => 'Sending Test Email...',
-        'success' => 'Mail sent!',
-        'error' => 'Mail could not be sent.',
-        'additional' => 'No additional error message provided. Check your mail settings and your app log.'
+        'sending' => 'Slanje test e-pošte...',
+        'success' => 'Pošta poslata!',
+        'error' => 'Pošta ne može biti poslata.',
+        'additional' => 'Nije navedena dodatna poruka o grešci. Proverite podešavanja pošte i dnevnik aplikacije.'
     ],
     'ldap' => [
-        'testing' => 'Testing LDAP Connection, Binding & Query ...',
-        '500' => '500 Server Error. Please check your server logs for more information.',
-        'error' => 'Something went wrong :(',
-        'sync_success' => 'A sample of 10 users returned from the LDAP server based on your settings:',
-        'testing_authentication' => 'Testing LDAP Authentication...',
-        'authentication_success' => 'User authenticated against LDAP successfully!'
+        'testing' => 'Testiranje LDAP veze, vezivanja i upita...',
+        '500' => '500 Greška servera. Molimo proverite evidenciju vašeg servera za više informacija.',
+        'error' => 'Nešto nije u redu :(',
+        'sync_success' => 'Uzorak od 10 korisnika vraćenih sa LDAP servera na osnovu vaših podešavanja:',
+        'testing_authentication' => 'Testiranje LDAP autentifikacije...',
+        'authentication_success' => 'Autentifikacija korisnika na LDAP-u je uspešna!'
     ],
     'slack' => [
-        'sending' => 'Sending Slack test message...',
-        'success_pt1' => 'Success! Check the ',
-        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
-        '500' => '500 Server Error.',
+        'sending' => 'Slack test poruke...',
+        'success_pt1' => 'Uspešno! Proverite ',
+        'success_pt2' => ' kanal za vašu test poruku i obavezno kliknite na SAČUVAJ ispod da biste sačuvali svoja podešavanja.',
+        '500' => '500 Greška servera.',
         'error' => 'Nešto nije u redu.',
     ]
 ];

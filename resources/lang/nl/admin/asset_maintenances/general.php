@@ -1,16 +1,16 @@
 <?php
 
     return [
-        'asset_maintenances' => 'Asset onderhoud',
-        'edit'               => 'Asset onderhoud bewerken',
-        'delete'             => 'Verwijder asset onderhoud',
-        'view'               => 'Details asset onderhoud weergeven',
+        'asset_maintenances' => 'Activaonderhoud',
+        'edit'               => 'Activaonderhoud bewerken',
+        'delete'             => 'Activaonderhoud verwijderen',
+        'view'               => 'Details activaonderhoud tonen',
         'repair'             => 'Reparatie',
         'maintenance'        => 'Onderhoud',
         'upgrade'            => 'Upgrade',
-        'calibration'        => 'Calibratie',
+        'calibration'        => 'Kalibratie',
         'software_support'   => 'Software-ondersteuning',
         'hardware_support'   => 'Hardware-ondersteuning',
-        'configuration_change'   => 'Configuration Change',
-        'pat_test'           => 'PAT Test',
+        'configuration_change'   => 'Configuratiewijziging:',
+        'pat_test'           => 'Veiligheidstest',
     ];

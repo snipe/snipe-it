@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'یک کاربر یک درخواست اقساط در وب سایت را لغو کرده است',
     'a_user_requested' => 'یک کاربر یک مورد را در وبسایت درخواست کرده است',
     'accessory_name' => 'نام لوازم جانبی:',
@@ -9,7 +11,7 @@ return [
     'asset' => 'دارایی:',
     'asset_name' => 'نام دارایی',
     'asset_requested' => 'دارایی درخواست شد',
-    'asset_tag' => 'Asset Tag',
+    'asset_tag' => 'نام دارایی',
     'assigned_to' => 'اختصاص یافته به',
     'best_regards' => 'با احترام،',
     'canceled' => 'لغو شد:',
@@ -18,12 +20,16 @@ return [
     'click_to_confirm' => 'لطفا برای پیوستن به این لینک کلیک کنید تا حساب خود را تایید کنید:',
     'click_on_the_link_accessory' => 'لطفا روی لینک زیر کلیک کنید تا تأیید کنید که لوازم جانبی را دریافت کرده اید.',
     'click_on_the_link_asset' => 'لطفا روی لینک زیر کلیک کنید تا تأیید کنید که دارایی را دریافت کرده اید.',
-    'Confirm_Asset_Checkin' => 'Asset checkin confirmation',
-    'Confirm_Accessory_Checkin' => 'Accessory checkin confirmation',
-    'Confirm_accessory_delivery' => 'Accessory delivery confirmation',
-    'Confirm_license_delivery' => 'License delivery confirmation',
-    'Confirm_asset_delivery' => 'Asset delivery confirmation',
-    'Confirm_consumable_delivery' => 'Consumable delivery confirmation',
+    'Confirm_Asset_Checkin' => 'تأیید ورود دارایی
+',
+    'Confirm_Accessory_Checkin' => 'تأیید ورود لوازم جانبی',
+    'Confirm_accessory_delivery' => 'تاییدیه تحویل لوازم جانبی',
+    'Confirm_license_delivery' => 'تاییدیه تحویل مجوز
+',
+    'Confirm_asset_delivery' => 'تاییدیه تحویل دارایی
+',
+    'Confirm_consumable_delivery' => 'تاییدیه تحویل مصرفی
+',
     'current_QTY' => 'QTY فعلی',
     'Days' => 'روزها',
     'days' => 'روزها',
@@ -58,22 +64,27 @@ return [
     'test_email' => 'ایمیل تست از Snipe-IT',
     'test_mail_text' => 'این آزمون از سیستم مدیریت دارایی Snipe-IT است. اگر شما این کار را کردید، ایمیل کار می کند :)',
     'the_following_item' => 'مورد زیر مورد بررسی قرار گرفته است:',
-    'low_inventory_alert' => 'There is :count item that is below minimum inventory or will soon be low.|There are :count items that are below minimum inventory or will soon be low.',
-    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
-    'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
+    'low_inventory_alert' => 'آیتم :count وجود دارد که زیر حداقل موجودی است یا به زودی کم می شود.',
+    'assets_warrantee_alert' => 'دارایی :count با گارانتی منقضی در روزهای بعدی: آستانه وجود دارد.',
+    'license_expiring_alert' => 'مجوز :count در روزهای بعدی :threshold منقضی می شود.|مجوزهای :count در روزهای بعدی :threshold منقضی می شوند.',
     'to_reset' => 'برای بازنشانی: رمز عبور وب، این فرم را تکمیل کنید:',
     'type' => 'تایپ کنید',
-    'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
+    'upcoming-audits' => 'دارایی :count وجود دارد که در روزهای :threshold برای حسابرسی ارائه می شود.',
     'user' => 'کاربر',
     'username' => 'نام کاربری',
     'welcome' => 'خوش آمدید نام',
     'welcome_to' => 'به وب سایت خوش آمدید',
     'your_credentials' => 'مدارک Snipe-IT شما',
-    'Accessory_Checkin_Notification' => 'Accessory checked in',
-    'Asset_Checkin_Notification' => 'Asset checked in',
-    'License_Checkin_Notification' => 'License checked in',
-    'Expected_Checkin_Report' => 'Expected asset checkin report',
-    'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
-    'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets',
+    'Accessory_Checkin_Notification' => 'لوازم جانبی بررسی شد',
+    'Asset_Checkin_Notification' => 'دارایی ثبت شد
+',
+    'License_Checkin_Notification' => 'مجوز بررسی شد
+',
+    'Expected_Checkin_Report' => 'گزارش بررسی دارایی مورد انتظار
+',
+    'Expected_Checkin_Notification' => 'یادآوری: :نام مهلت اعلام حضور نزدیک است
+',
+    'Expected_Checkin_Date' => 'دارایی‌ای که برای شما بررسی شده است باید دوباره در تاریخ :date بررسی شود',
+    'your_assets' => 'دارایی های خود را مشاهده کنید
+',
 ];

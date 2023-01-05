@@ -859,14 +859,21 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                 ]
             )->name('api.statuslabels.selectlist');
 
-            Route::get('assets',
+            Route::get('assets/name',
                 [
                     Api\StatuslabelsController::class, 
                     'getAssetCountByStatuslabel'
                 ]
+            )->name('api.statuslabels.assets.byname');
+
+            Route::get('assets/type',
+                [
+                    Api\StatuslabelsController::class,
+                    'getAssetCountByMetaStatus'
+                ]
             )->name('api.statuslabels.assets.bytype');
 
-            Route::get('assetlist',
+            Route::get('{id}/assetlist',
                 [
                     Api\StatuslabelsController::class, 
                     'assets'
@@ -968,6 +975,13 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                 'assets'
             ]
             )->name('api.users.assetlist');
+
+            Route::post('{user}/email',
+                [
+                    Api\UsersController::class,
+                    'emailAssetList'
+                ]
+            )->name('api.users.email_assets');
 
             Route::get('{user}/accessories',
             [

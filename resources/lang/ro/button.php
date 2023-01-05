@@ -15,10 +15,10 @@ return [
     'select_file'				=> 'Selectați Fișier ...',
     'select_files'				=> 'Selectați Fișier...',
     'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
-    'send_password_link'        => 'Send Password Reset Link',
-    'go'                        => 'Go',
+    'send_password_link'        => 'Trimite link-ul de resetare a parolei',
+    'go'                        => 'Accesaţi',
     'bulk_actions'              => 'Bulk Actions',
     'add_maintenance'           => 'Add Maintenance',
     'append'                    => 'Append',
-    'new'                       => 'New',
+    'new'                       => 'Nou',
 ];

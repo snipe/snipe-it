@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'Umsebenzisi ukhanse isicelo sezinto kuwebhusayithi',
     'a_user_requested' => 'Umsebenzisi ucele into ku-website',
     'accessory_name' => 'Igama lokufinyelela:',
