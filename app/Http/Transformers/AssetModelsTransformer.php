@@ -22,6 +22,22 @@ class AssetModelsTransformer
 
     public function transformAssetModel(AssetModel $assetmodel)
     {
+
+        $default_field_values = array();
+
+        // Reach into the custom fields and models_custom_fields pivot table to find the default values for this model
+        if ($assetmodel->fieldset) {
+            foreach($assetmodel->fieldset->fields AS $field) {
+                $default_field_values[] = [
+                    'name' => e($field->name),
+                    'db_column_name' => e($field->db_column_name()),
+                    'default_value' => ($field->defaultValue($assetmodel->id)) ? e($field->defaultValue($assetmodel->id)) : null,
+                    'format' =>  e($field->format),
+                    'required' => ($field->pivot->required == '1') ? true : false,
+                ];
+            }
+        }
+
         $array = [
             'id' => (int) $assetmodel->id,
             'name' => e($assetmodel->name),
@@ -44,6 +60,7 @@ class AssetModelsTransformer
                 'id' => (int) $assetmodel->fieldset->id,
                 'name'=> e($assetmodel->fieldset->name),
             ] : null,
+            'default_fieldset_values' => $default_field_values,
             'eol' => ($assetmodel->eol > 0) ? $assetmodel->eol.' months' : 'None',
             'requestable' => ($assetmodel->requestable == '1') ? true : false,
             'notes' => e($assetmodel->notes),

@@ -750,18 +750,20 @@
                     }'>
               <thead>
                 <tr>
-                  <th class="col-md-5">{{ trans('general.name') }}</th>
-                  <th class="col-md-6" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
-                  <th class="col-md-1 hidden-print">{{ trans('general.action') }}</th>
+                    <th class="col-md-5">{{ trans('general.name') }}</th>
+                    <th class-="col-md-5" data-fieldname="note">{{ trans('general.notes') }}</th>
+                    <th class="col-md-1" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
+                    <th class="col-md-1 hidden-print">{{ trans('general.action') }}</th>
                 </tr>
               </thead>
               <tbody>
                   @foreach ($user->accessories as $accessory)
                   <tr>
                     <td>{!!$accessory->present()->nameUrl()!!}</td>
-                    <td>
+                      <td>{!! $accessory->pivot->note !!}</td>
+                      <td>
                       {!! Helper::formatCurrencyOutput($accessory->purchase_cost) !!}
-                    </td>
+                      </td>
                     <td class="hidden-print">
                       @can('checkin', $accessory)
                         <a href="{{ route('accessories.checkin.show', array('accessoryID'=> $accessory->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
