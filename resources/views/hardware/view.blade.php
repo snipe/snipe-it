@@ -9,7 +9,7 @@
 {{-- Right header --}}
 @section('header_right')
 
-    
+
     @can('manage', \App\Models\Asset::class)
         @if ($asset->deleted_at=='')
         <div class="dropdown pull-right">
@@ -446,7 +446,7 @@
                                                         {{ $field->name }}
                                                     </strong>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-6{{ (($field->format=='URL') && ($asset->{$field->db_column_name()}!='')) ? ' ellipsis': '' }}">
                                                     @if ($field->field_encrypted=='1')
                                                         <i class="fas fa-lock" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}"></i>
                                                     @endif
