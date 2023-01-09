@@ -31,8 +31,7 @@ return array(
         'error'   		=> 'Accessory was not checked in, please try again',
         'success' 		=> 'Accessory checked in successfully.',
         'user_does_not_exist' => 'That user is invalid. Please try again.'
-    ),
-
+    )
 
 
 );

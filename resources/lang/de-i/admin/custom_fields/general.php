@@ -44,4 +44,6 @@ return [
     'db_convert_warning' => 'WARNUNG. Dieses Feld befindet sich in der Tabelle mit benutzerdefinierten Feldern als <code>:db_column</code> sollte aber <code>:expected</code> sein.',
     'is_unique' => 'Dieser Wert muss für jedes Asset einzigartig sein',
     'unique' => 'Einzigartig',
+    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
+    'display_in_user_view_table' => 'Visible to User',
 ];

@@ -25,12 +25,12 @@ return [
     'csv_error' => 'Vous avez une erreur dans votre fichier CSV :',
     'import_text' => '
     <p>
-    Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
+    Téléchargez un fichier CSV qui contient l\'historique des ressources. Les assets et les utilisateurs DOIVENT déjà exister dans le système, ou ils seront ignorés. La correspondance des assets pour l’importation de l’historique se produit avec le tag de l’actif. Nous allons essayer de trouver un utilisateur correspondant en fonction du nom d\'utilisateur que vous fournissez, et des critères que vous sélectionnez ci-dessous. Si vous ne sélectionnez aucun critère ci-dessous, il essaiera simplement de correspondre au format d\'utilisateur que vous avez configuré dans les paramètres généraux de l\'Admin &gt; .
     </p>
 
-    <p>Fields included in the CSV must match the headers: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Any additional fields will be ignored. </p>
+    <p>Les champs inclus dans le CSV doivent correspondre aux en-têtes : <strong>Étiquette d\'actif, Nom, date de paiement, date d\'enregistrement</strong>. Tous les champs supplémentaires seront ignorés. </p>
 
-    <p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
+    <p>Date de check-in : les dates de check-in vides ou futures seront utilisées par l\'utilisateur associé. En excluant la colonne Date d\'enregistrement, vous créerez une date de check-in avec la date d\'aujourd\'hui.</p>
     ',
     'csv_import_match_f-l' => 'Essayez de faire correspondre les utilisateurs par prénom.nom (julie.tremblay)',
     'csv_import_match_initial_last' => 'Essayez de faire correspondre les utilisateurs par initial nom de famille (jtremblay)',

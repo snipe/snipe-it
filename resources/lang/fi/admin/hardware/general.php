@@ -16,29 +16,29 @@ return [
     'model_deleted'  			=> 'Laitemalli on poistettu. Voit palauttaa laitteen kun olet ensin palauttanut poistetun laitemallin.',
     'requestable'               => 'Pyydettävissä',
     'requested'				    => 'Pyydetty',
-    'not_requestable'           => 'Not Requestable',
-    'requestable_status_warning' => 'Do not change  requestable status',
+    'not_requestable'           => 'Ei pyydettävissä',
+    'requestable_status_warning' => 'Älä muuta pyydettävyyden tilaa',
     'restore'  					=> 'Palauta laite',
     'pending'  					=> 'Odottaa',
     'undeployable'  			=> 'Ei käytettävissä',
     'view'  					=> 'Näytä laite',
-    'csv_error' => 'You have an error in your CSV file:',
+    'csv_error' => 'Sinulla on virhe CSV tiedostossasi:',
     'import_text' => '
     <p>
-    Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
+    Lataa laitehistoria csv-tiedostona. Laitteiden ja käyttäjien TÄYTYY olla jo järjestelmässä, tai ne ohitetaan. Laitteden tiedot yhdistetään laitetunnisteen avulla. Käyttäjät yhdestetään käyttäjänimen perusteella käyttäen kriteerejä  jotka voit antaa alla. Oletuksena tiedot yhistetään käyttäjännimeen k muodossa jonka asetit Admin &gt; Yleiset asetukset.
     </p>
 
-    <p>Fields included in the CSV must match the headers: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Any additional fields will be ignored. </p>
+    <p>CSV tiedoston tulee sisältää seuraavat sarakkeet: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong> eli laitetunniste, käytäjänimi, luovutus pvm ja palautus pvm. Kaikki muut kentät jätetään huomiotta. </p>
 
-    <p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
+    <p>Palautuspvm : tyhjä tai tulevat palautuspäivämäärät kuittaavat laiteen ulos kyseiselle käyttäjälle.</p>
     ',
-    'csv_import_match_f-l' => 'Try to match users by firstname.lastname (jane.smith) format',
-    'csv_import_match_initial_last' => 'Try to match users by first initial last name (jsmith) format',
-    'csv_import_match_first' => 'Try to match users by first name (jane) format',
-    'csv_import_match_email' => 'Try to match users by email as username',
-    'csv_import_match_username' => 'Try to match users by username',
-    'error_messages' => 'Error messages:',
-    'success_messages' => 'Success messages:',
-    'alert_details' => 'Please see below for details.',
-    'custom_export' => 'Custom Export'
+    'csv_import_match_f-l' => 'Yritä sovittaa käyttäjät etunimi.sukunimi (jane.smith) muodossa',
+    'csv_import_match_initial_last' => 'Yritä sovittaa käyttäjät ensimmäinen etunimestä sukunimi (jsmith) muodossa',
+    'csv_import_match_first' => 'Yritä sovittaa käyttäjät etunimi (jane) muodossa',
+    'csv_import_match_email' => 'Yritä sovittaa käyttäjiä sähköposti käyttäjätunnuksena',
+    'csv_import_match_username' => 'Yritä sovittaa käyttäjiä käyttäjänimen mukaan',
+    'error_messages' => 'Virheilmoitukset:',
+    'success_messages' => 'Onnistuneet:',
+    'alert_details' => 'Tarkempia tietoja on alla.',
+    'custom_export' => 'Mukautettu vienti'
 ];

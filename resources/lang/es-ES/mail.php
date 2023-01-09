@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_accepted' => 'Un usuario ha aceptado un artículo',
     'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'El usuario ha cancelado el item solicitado en la pagina Web',
     'a_user_requested' => 'Un usuario a solicitado un item en la pagina Web',

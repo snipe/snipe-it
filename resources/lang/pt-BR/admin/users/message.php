@@ -14,7 +14,8 @@ return array(
     'ldap_not_configured'        => 'Integração LDAP não foi configurada para esta instalação.',
     'password_resets_sent'      => 'Os usuários selecionados que são ativados e têm um endereço de e-mail válido receberam um link de redefinição de senha.',
     'password_reset_sent'       => 'Um link de redefinição de senha foi enviado para :email!',
-    'user_has_no_email'         => 'This user does not have an email address in their profile.',
+    'user_has_no_email'         => 'Esse usuário não tem um endereço de e-mail no seu perfil.',
+    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
 
 
     'success' => array(
@@ -59,4 +60,8 @@ return array(
         'invalidfiles' => 'Um ou mais de seus arquivos são muito grande ou o tipo de arquivo não é permitido. Tipos permitidos são png, gif, jpg, doc, docx, pdf e txt.',
     ),
 
+    'inventorynotification' => array(
+        'error'   => 'This user has no email set.',
+        'success' => 'The user has been notified about their current inventory.'
+    )
 );

@@ -2,7 +2,7 @@
 
 return [
     'acceptance_asset_accepted' => 'A user has accepted an item',
-    'acceptance_asset_declined' => 'A user has declined an item',
+    'acceptance_asset_declined' => 'Użytkownik odrzucił zasób',
     'a_user_canceled' => 'Użytkownik anulował zapotrzebowanie na sprzęt na stronie www',
     'a_user_requested' => 'Użytkownik zamówił pozycję na stronie internetowej',
     'accessory_name' => 'Nazwa sprzętu:',

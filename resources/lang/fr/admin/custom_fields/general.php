@@ -44,4 +44,6 @@ return [
     'db_convert_warning' => 'ATTENTION. Ce champ est dans la table personnalisée en tant que <code>:db_column</code> mais devrait être <code>:expected</code>.',
     'is_unique' => 'Cette valeur doit être unique parmi tous les actifs',
     'unique' => 'Unique',
+    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
+    'display_in_user_view_table' => 'Visible to User',
 ];

@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'acceptance_asset_accepted' => 'A user has accepted an item',
-    'acceptance_asset_declined' => 'A user has declined an item',
+    'acceptance_asset_accepted' => 'En användare har accepterat ett objekt',
+    'acceptance_asset_declined' => 'En användare har avböjt ett objekt',
     'a_user_canceled' => 'En användare har avbrutit en artikelförfrågan på webbplatsen',
     'a_user_requested' => 'En användare har efterfrågat en artikel webbplatsen',
     'accessory_name' => 'Tillbehörsnamn:',
@@ -61,7 +61,7 @@ return [
     'test_mail_text' => 'Detta är ett test från Snipe-IT Asset Management System. Om du får detta, så fungerar mailen :)',
     'the_following_item' => 'Följande artikel har blivit incheckad: ',
     'low_inventory_alert' => ':count artikel understiger det lägsta tillåtna lagersaldot eller håller på att ta slut.|:count artiklar understiger det lägsta tillåtna lagersaldot eller håller på att ta slut.',
-    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'Det finns :count tillgång med en garanti som löper ut under de kommande :threshold dagar.|Det finns :count tillgångar med garantier som löper ut under de kommande :threshold dagar.',
     'license_expiring_alert' => ':count licens löper ut inom :threshold dagar.|:count licenser löper ut inom :threshold days.',
     'to_reset' => 'För att återställa ditt :web lösenord, fyll i det här formuläret:',
     'type' => 'Typ',
@@ -74,8 +74,8 @@ return [
     'Accessory_Checkin_Notification' => 'Tillbehöret har checkats in',
     'Asset_Checkin_Notification' => 'Tillgången har checkats in',
     'License_Checkin_Notification' => 'Licensen har checkats in',
-    'Expected_Checkin_Report' => 'Expected asset checkin report',
-    'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
+    'Expected_Checkin_Report' => 'Förväntad incheckningsrapport för tillgång',
+    'Expected_Checkin_Notification' => 'Påminnelse: :name sluttiden för incheckning närmar sig',
     'Expected_Checkin_Date' => 'En tillgång som checkas ut till dig kommer att checkas in igen :date',
     'your_assets' => 'Visa dina tillgångar',
 ];

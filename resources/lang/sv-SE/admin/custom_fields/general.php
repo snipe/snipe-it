@@ -44,4 +44,6 @@ return [
     'db_convert_warning' => 'VARNING. Detta fält finns i tabellen för anpassade fält som <code>:db_column</code> men borde vara <code>:expected</code>.',
     'is_unique' => 'Detta värde måste vara unikt för alla tillgångar',
     'unique' => 'Unik',
+    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
+    'display_in_user_view_table' => 'Visible to User',
 ];
