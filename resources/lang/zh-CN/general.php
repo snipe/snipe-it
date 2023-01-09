@@ -11,6 +11,7 @@ return [
     'admin'					=> '管理员',
     'administrator'			=> '管理员',
     'add_seats'             => '已增加空位',
+    'age'                   => "Age",
     'all_assets'			=> '所有资产',
     'all'       			=> '所有',
     'archived'              => '已存档',
@@ -280,6 +281,9 @@ return [
     'yes' 					=> '是',
     'zip'  					=> 'Zip',
     'noimage'				=> '图片未上传或图片无法找到。',
+    'file_does_not_exist'   => 'The requested file does not exist on the server.',
+    'file_upload_success'   => 'File upload success!',
+    'no_files_uploaded'     => 'File upload success!',
     'token_expired'         => '表单会话已过期，请重新提交',
     'login_enabled'         => '登录已启用',
     'audit_due'             => '到期审计',
@@ -378,10 +382,10 @@ return [
     'pie_chart_type'        => '仪表盘饼图类型',
     'hello_name'            => '您好，:name！',
     'unaccepted_profile_warning'   => '您需要接受:count 件物品。点击这里接受或拒绝。',
-    'start_date'            => 'Start Date',
-    'end_date'            => 'End Date',
-    'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
-    'placeholder_kit'       => 'Select a kit'
+    'start_date'            => '开始日期',
+    'end_date'            => '结束日期',
+    'alt_uploaded_image_thumbnail' => '已上传缩略图',
+    'placeholder_kit'       => '选择一个套件'
 
 
 

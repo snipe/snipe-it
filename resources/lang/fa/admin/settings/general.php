@@ -29,8 +29,7 @@ return [
 ',
     'asset_ids'					=> 'ID حساب',
     'audit_interval'            => 'فاصله حسابرسی',
-    'audit_interval_help'       => 'اگر از شما خواسته می شود که به طور منظم دارایی های خود را به صورت فیزیکی ممیزی کنید، فاصله زمانی را به ماه هایی که استفاده می کنید وارد کنید. اگر این مقدار را به‌روزرسانی کنید، همه «تاریخ‌های حسابرسی بعدی» برای دارایی‌ها با تاریخ حسابرسی آینده.
-',
+    'audit_interval_help'       => 'If you are required to regularly physically audit your assets, enter the interval in months that you use. If you update this value, all of the "next audit dates" for assets with an upcoming audit date will be updated.',
     'audit_warning_days'        => 'آستانه هشدار حسابرسی',
     'audit_warning_days_help'   => 'چند روز پیش باید به شما هشدار می دهیم هنگامی که دارایی ها برای حسابرسی مورد نیاز است؟',
     'auto_increment_assets'		=> 'برچسب‌های دارایی با افزایش خودکار را ایجاد کنید
@@ -108,6 +107,8 @@ return [
 ',
     'laravel'                   => 'نسخه Laravel',
     'ldap'                      => 'LDAP',
+    'ldap_default_group'        => 'Default Permissions Group',
+    'ldap_default_group_info'   => 'Select a group to assign to newly synced users. Remember that a user takes on the permissions of the group they are assigned.',
     'ldap_help'                 => 'دایرکتوری فعال',
     'ldap_client_tls_key'       => 'کلید TLS مشتری LDAP
 ',

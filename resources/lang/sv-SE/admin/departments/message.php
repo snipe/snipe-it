@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'Avdelningen existerar inte.',
+    'department_already_exists' => 'A department already exists with that name at this company location. Or choose a more specific name for this department. ',
     'assoc_users'	 => 'Den här avdelningen är för närvarande associerad med minst en användare och kan inte raderas. Uppdatera dina användare för att inte längre referera till den här avdelningen och försök igen.',
     'create' => array(
         'error'   => 'Avdelningen skapades inte, var god försök igen.',

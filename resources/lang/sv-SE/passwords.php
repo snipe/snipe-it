@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'sent'	        => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
-    'user'			=> 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
-    'token'         => 'This password reset token is invalid or expired, or does not match the username provided.',
-    'reset'         => 'Your password has been reset!',
+    'sent'	        => 'Om en matchande användare med en giltig e-postadress finns i vårt system, har ett e-postmeddelande om lösenordsåterställning skickats.',
+    'user'			=> 'Om en matchande användare med en giltig e-postadress finns i vårt system, har ett e-postmeddelande om lösenordsåterställning skickats.',
+    'token'         => 'Denna återställningstoken för lösenord är ogiltig eller har löpt ut, eller matchar inte det angivna användarnamnet.',
+    'reset'         => 'Ditt lösenord har återställts!',
 ];

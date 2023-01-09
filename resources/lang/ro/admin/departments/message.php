@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'Departamentul nu există.',
+    'department_already_exists' => 'A department already exists with that name at this company location. Or choose a more specific name for this department. ',
     'assoc_users'	 => 'Acest departament este în prezent asociat cu cel puțin un utilizator și nu poate fi șters. Actualizați-vă utilizatorii astfel încât să nu mai faceți referire la acest departament și încercați din nou.',
     'create' => array(
         'error'   => 'Departamentul nu a fost creat, încercați din nou.',

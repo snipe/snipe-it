@@ -44,4 +44,6 @@ return [
     'db_convert_warning' => 'UPOZORENJE. Ovo polje je u tabeli prilagođenih polja kao <code>:db_column</code>, ali bi trebalo da bude <code>:expected</code>.',
     'is_unique' => 'Ova vrednost mora biti jedinstvena za sva sredstva',
     'unique' => 'Jedinstven',
+    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
+    'display_in_user_view_table' => 'Visible to User',
 ];

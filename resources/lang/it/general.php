@@ -11,6 +11,7 @@ return [
     'admin'					=> 'Amministratore',
     'administrator'			=> 'Amministratore',
     'add_seats'             => 'Aggiunti posti',
+    'age'                   => "Age",
     'all_assets'			=> 'tutti i beni',
     'all'       			=> 'Tutti i',
     'archived'              => 'Archiviato',
@@ -280,6 +281,9 @@ return [
     'yes' 					=> 'SÌ',
     'zip'  					=> 'Zip',
     'noimage'				=> 'Nessuna immagine caricata o immagine non trovata.',
+    'file_does_not_exist'   => 'The requested file does not exist on the server.',
+    'file_upload_success'   => 'File upload success!',
+    'no_files_uploaded'     => 'File upload success!',
     'token_expired'         => 'La sessione di modulo è scaduta. Riprova.',
     'login_enabled'         => 'Login Abilitato',
     'audit_due'             => 'In scadenza per l\'audit',
@@ -378,10 +382,10 @@ return [
     'pie_chart_type'        => 'Tipo di Grafico a Torta nella Dashboard',
     'hello_name'            => 'Ciao, :name!',
     'unaccepted_profile_warning'   => 'Hai :count elementi da accettare. Clicca qui per accettarli o rifiutarli',
-    'start_date'            => 'Start Date',
-    'end_date'            => 'End Date',
-    'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
-    'placeholder_kit'       => 'Select a kit'
+    'start_date'            => 'Data Inizio',
+    'end_date'            => 'Data Fine',
+    'alt_uploaded_image_thumbnail' => 'Miniatura caricata',
+    'placeholder_kit'       => 'Seleziona un kit'
 
 
 

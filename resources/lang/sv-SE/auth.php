@@ -13,8 +13,8 @@ return array(
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed' => 'Dessa uppgifter stämmer inte överens med vårt register.',
+    'password' => 'Det angivna lösenordet är felaktigt.',
+    'throttle' => 'För många inloggningsförsök. Vänligen försök igen om :seconds sekunder.',
 
 );

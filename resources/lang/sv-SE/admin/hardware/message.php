@@ -16,7 +16,7 @@ return [
         'error'   			=> 'Tillgången var inte uppdaterad, försök igen',
         'success' 			=> 'Asset uppdaterad framgångsrikt.',
         'nothing_updated'	=>  'Inga fält valdes, så ingenting uppdaterades.',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'no_assets_selected'  =>  'Inga tillgångar valdes, så ingenting uppdaterades.',
     ],
 
     'restore' => [

@@ -2,6 +2,6 @@
 
 return [
     'select_company' => 'Valitse yritys',
-    'about_companies' => 'About Companies',
-    'about_companies_description' => '        You can use companies as a simple informative field, or you can use them to restrict asset visibility and availability to users with a specific company by enabling Full Company Support in your Admin Settings.',
+    'about_companies' => 'Tietoja Yrityksistä',
+    'about_companies_description' => '        Voit käyttää yrityksiä yksinkertaisena informatiivisena kenttänä, tai käyttää niitä rajoittaaksesi laitteiden näkyvyyttä ja saatavuutta tietyn yrityksen käyttäjille sallimalla "Täysi Yritysten Tuki" järjestelmänvalvojan asetuksissa.',
 ];

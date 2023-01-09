@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Zamierzasz usunąć :asset_count aktywów.',
     'bulk_update'		=> 'Zbiorcza aktualizacja aktywów',
     'bulk_update_help'	=> 'Ten formularz umożliwia zbiorczą aktualizację wielu aktywów na raz. Wypełnij tylko te pola, które chcesz zmienić. Puste pola pozostaną niezmienione. ',
-    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
+    'bulk_update_warn'	=> 'Zamierzasz edytować właściwości pojedynczego zasobu.|Zamierzasz edytować właściwości :asset_count zasobów.',
     'checkedout_to'		=> 'Wypożyczony do',
     'checkout_date'		=> 'Data przypisania',
     'checkin_date'		=> 'Data przypisania',

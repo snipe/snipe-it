@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => '部门不存在',
+    'department_already_exists' => 'A department already exists with that name at this company location. Or choose a more specific name for this department. ',
     'assoc_users'	 => '该位置下关联的还有其他用户，目前不能删除，请更新该用户的信息之后，再尝试删除。 ',
     'create' => array(
         'error'   => '部门没有创建，请重试。',

@@ -15,6 +15,7 @@ return array(
     'password_resets_sent'      => 'Den ausgewählten Benutzern, die aktiviert sind und eine gültige E-Mail-Adresse haben, wurde ein Link zum Zurücksetzen des Passworts gesendet.',
     'password_reset_sent'       => 'Der Link zum Zurücksetzen des Passworts wurde an :email gesendet!',
     'user_has_no_email'         => 'Dieser Benutzer hat keine E-Mail-Adresse in seinem Profil.',
+    'user_has_no_assets_assigned'   => 'Dieser Benutzer hat keine zugewiesenen Assets',
 
 
     'success' => array(
@@ -59,4 +60,8 @@ return array(
         'invalidfiles' => 'Eine oder mehrere Ihrer Dateien ist zu groß oder deren Dateityp ist nicht zugelassen. Zugelassene Dateitypen sind png, gif, jpg, doc, docx, pdf, und txt.',
     ),
 
+    'inventorynotification' => array(
+        'error'   => 'Für diesen Benutzer ist keine E-Mail-Adresse hinterlegt.',
+        'success' => 'The user has been notified about their current inventory.'
+    )
 );

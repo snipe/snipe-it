@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'Departement bestaan ​​nie.',
+    'department_already_exists' => 'A department already exists with that name at this company location. Or choose a more specific name for this department. ',
     'assoc_users'	 => 'Hierdie afdeling word tans geassosieer met minstens een gebruiker en kan nie verwyder word nie. Dateer asseblief u gebruikers op om nie meer hierdie departement te verwys nie en probeer weer.',
     'create' => array(
         'error'   => 'Departement is nie geskep nie, probeer asseblief weer.',

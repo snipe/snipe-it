@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Du håller på att ta bort: asset_count-tillgångar.',
     'bulk_update'		=> 'Bulk Update Assets',
     'bulk_update_help'	=> 'I det här formuläret kan du uppdatera flera tillgångar på en gång. Fyll bara i de fält du behöver ändra. Alla fält som lämnas tomma kommer att förbli oförändrade.',
-    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
+    'bulk_update_warn'	=> 'Du håller på att redigera egenskaperna för en enda tillgång.|Du håller på att redigera egenskaperna för :asset_count tillgångar.',
     'checkedout_to'		=> 'Utcheckad till',
     'checkout_date'		=> 'Utcheckningsdatum',
     'checkin_date'		=> 'Incheckningsdatum',
