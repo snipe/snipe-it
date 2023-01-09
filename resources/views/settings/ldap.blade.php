@@ -116,11 +116,11 @@
                                                     name="ldap_default_group"
                                                     aria-label="ldap_default_group"
                                                     id="ldap_default_group"
-                                                    class="form-control"
+                                                    class="form-control select2"
                                             >
-                                                <option></option>
+                                                <option value="">{{ trans('admin/settings/general.no_default_group') }}</option>
                                                 @foreach ($groups as $id => $group)
-                                                    <option value="{{ $id }}">
+                                                    <option value="{{ $id }}" {{ $setting->ldap_default_group == $id ? 'selected' : '' }}>
                                                         {{ $group }}
                                                     </option>
                                                 @endforeach
