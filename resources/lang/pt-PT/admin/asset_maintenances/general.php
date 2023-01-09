@@ -12,5 +12,5 @@
         'software_support'   => 'Apoio ao Software',
         'hardware_support'   => 'Apoio para Hardware',
         'configuration_change'   => 'Configuration Change',
-        'pat_test'           => 'PAT Test',
+        'pat_test'           => 'Teste PAT',
     ];

@@ -15,6 +15,7 @@ return array(
     'password_resets_sent'      => 'Les utilisateurs sélectionnés qui sont activés et ont une adresse e-mail valide ont reçu un lien de réinitialisation du mot de passe.',
     'password_reset_sent'       => 'Un lien de réinitialisation du mot de passe a été envoyé à :email!',
     'user_has_no_email'         => 'Cet utilisateur n\'a pas renseigné d\'adresse e-mail dans son profil.',
+    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
 
 
     'success' => array(
@@ -59,4 +60,8 @@ return array(
         'invalidfiles' => 'Un ou plusieurs de vos fichiers sont trop gros, ou sont d\'un type non autorisé. Les types de fichiers autorisés sont png, gif, jpg, doc, docx, pdf et txt.',
     ),
 
+    'inventorynotification' => array(
+        'error'   => 'This user has no email set.',
+        'success' => 'The user has been notified about their current inventory.'
+    )
 );

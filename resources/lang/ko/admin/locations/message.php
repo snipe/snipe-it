@@ -6,6 +6,8 @@ return array(
     'assoc_users'	 => '이 장소는 현재 적어도 한명의 사용자와 연결되어 있어서 삭제할 수 없습니다. 사용자가 더 이상 이 장소를 참조하지 않게 갱신하고 다시 시도해주세요. ',
     'assoc_assets'	 => '이 장소는 현재 적어도 한명의 사용자와 연결되어 있어서 삭제할 수 없습니다. 사용자가 더 이상 이 장소를 참조하지 않게 갱신하고 다시 시도해주세요. ',
     'assoc_child_loc'	 => '이 장소는 현재 하나 이상의 하위 장소를 가지고 있기에 삭제 할 수 없습니다. 이 장소의 참조를 수정하고 다시 시도해 주세요. ',
+    'assigned_assets' => 'Assigned Assets',
+    'current_location' => 'Current Location',
 
 
     'create' => array(

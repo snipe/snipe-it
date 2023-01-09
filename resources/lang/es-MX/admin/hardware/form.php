@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Está a punto de borrar :asset_count.',
     'bulk_update'		=> 'Actualización masiva de Equipos',
     'bulk_update_help'	=> 'Este formulario le permite actualizar múltiples Equipos simultáneamente. Solo complete los campos que quiere modificar. Todo campo en blanco permanecerá sin cambios. ',
-    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
+    'bulk_update_warn'	=> 'Está a punto de editar las propiedades de un solo activo.|Está a punto de editar las propiedades de :asset_count activos.',
     'checkedout_to'		=> 'Asignado a',
     'checkout_date'		=> 'Fecha de asignación',
     'checkin_date'		=> 'Fecha de devolución',
@@ -47,5 +47,5 @@ return [
     'asset_deployable' => 'El activo no está listo para desplegar. Por lo que, por el momento, no puede ser asignado.',
     'processing_spinner' => 'Procesando...',
     'optional_infos'  => 'Información opcional',
-    'order_details'   => 'Order Related Information'
+    'order_details'   => 'Información relacionada con el pedido'
 ];

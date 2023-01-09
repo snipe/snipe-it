@@ -6,6 +6,8 @@ return array(
     'assoc_users'	 => 'Esta ubicación está actualmente asociada con al menos un usuario y no puede ser borrada. Por favor actualiza tus usuarios para no referenciar más esta ubicación e inténtalo de nuevo. ',
     'assoc_assets'	 => 'Esta ubicación está actualmente asociada con al menos un activo y no puede ser borrada. Por favor actualiza tus activos para no referenciar más esta ubicación e inténtalo de nuevo. ',
     'assoc_child_loc'	 => 'Esta ubicación es actualmente padre al menos una ubicación hija y no puede ser borrada. Por favor actualiza tus ubicaciones para no referenciar más esta ubicación e inténtalo de nuevo. ',
+    'assigned_assets' => 'Assigned Assets',
+    'current_location' => 'Current Location',
 
 
     'create' => array(

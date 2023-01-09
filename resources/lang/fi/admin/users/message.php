@@ -14,7 +14,8 @@ return array(
     'ldap_not_configured'        => 'LDAP-integraatiota ei ole määritetty tähän asennukseen.',
     'password_resets_sent'      => 'Salasanan resetointilinkki on lähetetty niille käyttäjille, joille on määritetty voimassa oleva sähköpostiosoite.',
     'password_reset_sent'       => 'Salasanan palautuslinkki on lähetetty osoitteeseen :email!',
-    'user_has_no_email'         => 'This user does not have an email address in their profile.',
+    'user_has_no_email'         => 'Tällä käyttäjällä ei ole sähköpostiosoitetta heidän profiilissaan.',
+    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
 
 
     'success' => array(
@@ -59,4 +60,8 @@ return array(
         'invalidfiles' => 'Yksi tai useampi tiedosto on liian suuri tai on tiedostotyyppi, jota ei sallita. Sallitut tiedostotyypit ovat png, gif, jpg, doc, docx, pdf ja txt.',
     ),
 
+    'inventorynotification' => array(
+        'error'   => 'This user has no email set.',
+        'success' => 'The user has been notified about their current inventory.'
+    )
 );

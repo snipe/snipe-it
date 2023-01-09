@@ -6,6 +6,8 @@ return array(
     'assoc_users'	 => 'Questa posizione è associata ad almeno un utente e non può essere cancellata. Si prega di aggiornare i vostri utenti di riferimento e riprovare. ',
     'assoc_assets'	 => 'Questa posizione è associata ad almeno un prodotto e non può essere cancellata. Si prega di aggiornare i vostri prodotti di riferimento e riprovare. ',
     'assoc_child_loc'	 => 'Questa posizione è parente di almeno un\'altra posizione e non può essere cancellata. Si prega di aggiornare le vostre posizioni di riferimento e riprovare. ',
+    'assigned_assets' => 'Assigned Assets',
+    'current_location' => 'Current Location',
 
 
     'create' => array(

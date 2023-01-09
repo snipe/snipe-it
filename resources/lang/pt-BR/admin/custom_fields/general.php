@@ -41,7 +41,9 @@ return [
     'make_required' => 'Opcional - clique para tornar obrigatório',
     'reorder' => 'Reordenar',
     'db_field' => 'Campo DB',
-    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code>:db_column</code> but should be <code>:expected</code>.',
+    'db_convert_warning' => 'AVISO. Este campo está na tabela de campos personalizados como <code>:db_column</code> mas deve ser <code>:expected</code>.',
     'is_unique' => 'Este valor deve ser único em todos os arquivos',
     'unique' => 'Único',
+    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
+    'display_in_user_view_table' => 'Visible to User',
 ];

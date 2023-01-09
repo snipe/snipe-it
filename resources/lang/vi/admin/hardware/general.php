@@ -40,5 +40,5 @@ return [
     'error_messages' => 'Thông báo lỗi:',
     'success_messages' => 'Thông báo thành công:',
     'alert_details' => 'Xem bên dưới để biết thêm chi tiết.',
-    'custom_export' => 'Custom Export'
+    'custom_export' => 'Lựa chọn xuất'
 ];
