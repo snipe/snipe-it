@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Varoitus: </strong> Tämä laite  ei ole käytettävävissä.
                         Jos laitteen tila on muuttunut, päivitä laitteen tila sen asetuksista.',
     'does_not_exist' 	=> 'Laitetta ei löydy.',
-    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
+    'does_not_exist_or_not_requestable' => 'Tätä laitetta ei ole tai se ei ole pyydettävissä.',
     'assoc_users'	 	=> 'Tämä laite on luovutettu käyttäjälle joten sitä ei voida poistaa. Palauta laite ensin käyttäjältä ja yritä uudelleen. ',
 
     'create' => [
@@ -17,7 +17,7 @@ return [
         'error'   			=> 'Laitetta ei päivitetty, yritä uudelleen',
         'success' 			=> 'Laite päivitetty onnistuneesti.',
         'nothing_updated'	=>  'Mitään kenttiä ei valittu, joten mitään ei päivitetty.',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'no_assets_selected'  =>  'Laitetta ei ollut valittuna, joten mitään ei muutettu.',
     ],
 
     'restore' => [

@@ -6,6 +6,8 @@ return array(
     'assoc_users'	 => 'ロケーションは少なくとも一つの利用者に関連付けされているため、削除できません。ローケーションの関連付けを削除し、もう一度試して下さい。 ',
     'assoc_assets'	 => 'この設置場所は1人以上の利用者に関連付けされているため、削除できません。設置場所の関連付けを削除し、もう一度試して下さい。 ',
     'assoc_child_loc'	 => 'この設置場所は、少なくとも一つの配下の設置場所があります。この設置場所を参照しないよう更新して下さい。 ',
+    'assigned_assets' => 'Assigned Assets',
+    'current_location' => 'Current Location',
 
 
     'create' => array(

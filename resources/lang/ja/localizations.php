@@ -29,7 +29,7 @@ return [
         'id'=> 'Indonesian',
         'ga-IE'=> 'Irish',
         'it'=> 'Italian',
-        'ja'=> 'Japanese',
+        'ja'=> '日本語',
         'ko'=> 'Korean',
         'lv'=>'Latvian',
         'lt'=> 'Lithuanian',

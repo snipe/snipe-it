@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Vas a eliminar :asset_count activos.',
     'bulk_update'		=> 'Actualización Masiva de Activos',
     'bulk_update_help'	=> 'Este formulario te permite actualizar múltiples activos de una vez. Sólo llena los campos que necesites cambiar. Cualquier campo dejado en blanco permanecerá sin cambios. ',
-    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
+    'bulk_update_warn'	=> 'Está a punto de editar las propiedades de un solo activo.|Está a punto de editar las propiedades de :asset_count activos.',
     'checkedout_to'		=> 'Asignado A',
     'checkout_date'		=> 'Fecha de Salida',
     'checkin_date'		=> 'Fecha de Ingreso',
@@ -46,6 +46,6 @@ return [
     'asset_not_deployable' => 'Ese estado de activos no es desplegable. Este activo no puede ser verificado.',
     'asset_deployable' => 'Ese estado es desplegable. Este activo puede ser revisado.',
     'processing_spinner' => 'Procesando...',
-    'optional_infos'  => 'Optional Information',
-    'order_details'   => 'Order Related Information'
+    'optional_infos'  => 'Información opcional',
+    'order_details'   => 'Información relacionada con el pedido'
 ];

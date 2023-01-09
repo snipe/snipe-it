@@ -179,6 +179,16 @@ class LdapSync extends Command
 
         $manager_cache = [];
 
+        if($ldap_default_group != null) {
+
+            $default = Group::find($ldap_default_group);
+            if (!$default) {
+                $ldap_default_group = null; // un-set the default group if that group doesn't exist
+            }
+
+        }
+
+
         for ($i = 0; $i < $results['count']; $i++) {
                 $item = [];
                 $item['username'] = isset($results[$i][$ldap_result_username][0]) ? $results[$i][$ldap_result_username][0] : '';
@@ -220,13 +230,6 @@ class LdapSync extends Command
                 $user->jobtitle = $item['jobtitle'];
                 $user->country = $item['country'];
                 $user->department_id = $department->id;
-
-                if($ldap_default_group != null) {
-
-                    $default = Group::select()->where('id', $ldap_default_group)->first();
-                    $user->permissions = $default->permissions;
-
-                }
 
                 if($item['manager'] != null) {
                     // Check Cache first
@@ -336,6 +339,9 @@ class LdapSync extends Command
                 if ($user->save()) {
                     $item['note'] = $item['createorupdate'];
                     $item['status'] = 'success';
+                    if ( $item['createorupdate'] === 'created' && $ldap_default_group) {
+                         $user->groups()->attach($ldap_default_group);
+                    }
 
                 } else {
                     foreach ($user->getErrors()->getMessages() as $key => $err) {

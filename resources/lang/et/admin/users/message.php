@@ -15,6 +15,7 @@ return array(
     'password_resets_sent'      => 'Parooli taastamise link on saadetud valitud aktiivsetele kasutajatele kellel on õige emaili aadress.',
     'password_reset_sent'       => 'Parooli taastamise aadress on saadetud :email!',
     'user_has_no_email'         => 'This user does not have an email address in their profile.',
+    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
 
 
     'success' => array(
@@ -59,4 +60,8 @@ return array(
         'invalidfiles' => 'Üks või mitu sinu failidest on kas liiga suured või ei ole lubatud tüüpi. Lubatud tüübid on png, gif, jpg, doc, docx, pdf ja txt.',
     ),
 
+    'inventorynotification' => array(
+        'error'   => 'This user has no email set.',
+        'success' => 'The user has been notified about their current inventory.'
+    )
 );
