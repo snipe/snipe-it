@@ -588,6 +588,24 @@ class Asset extends Depreciable
     }
 
     /**
+     * Get the log info for acceptances on this asset.
+     * To use this as a single record, invoke it using ->last(), for
+     * example, $asset->lastAcceptedLog->last().
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v6.0.14]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function lastAcceptedLog()
+    {
+        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')
+            ->where('item_type', '=', self::class)
+            ->where('action_type', '=', 'accepted')
+            ->orderBy('created_at', 'desc')
+            ->withTrashed();
+    }
+
+    /**
      * Get the list of checkouts for this asset
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
