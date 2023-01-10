@@ -381,11 +381,20 @@ class AssetsController extends Controller
 
         $assets = $assets->get();
 
-        if (($assets) && ($assets->count() > 0)) {
+        // If there is only one result, we should pull the first (and only) asset from the returned collection, since
+        // transformAsset() expects an Asset object, NOT a collection
+        if (($assets) && ($assets->count() == 1)) {
+            return (new AssetsTransformer)->transformAsset($assets->first());
+
+        // If there is more than one result - which would probably never show up in the UI, since it would only happen if
+        //  there are multiple deleted assets with the same tag, pass the collection normally
+        } elseif (($assets) && ($assets->count() > 1)) {
             return (new AssetsTransformer)->transformAssets($assets, $assets->count());
-        } else {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
         }
+
+        // If there are 0 results, return the "no such asset" response
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
+
 
     }
 
