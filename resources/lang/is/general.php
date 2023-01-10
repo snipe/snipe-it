@@ -11,6 +11,7 @@ return [
     'admin'					=> 'Kerfisstjóri',
     'administrator'			=> 'Kerfisstjóri',
     'add_seats'             => 'Viðbætt leyfi',
+    'age'                   => "Age",
     'all_assets'			=> 'Allar eignir',
     'all'       			=> 'Allt',
     'archived'              => 'Geymt',
@@ -280,6 +281,9 @@ return [
     'yes' 					=> 'Já',
     'zip'  					=> 'Póstnúmer',
     'noimage'				=> 'No image uploaded or image not found.',
+    'file_does_not_exist'   => 'The requested file does not exist on the server.',
+    'file_upload_success'   => 'File upload success!',
+    'no_files_uploaded'     => 'File upload success!',
     'token_expired'         => 'Your form session has expired. Please try again.',
     'login_enabled'         => 'Innskráning virkjuð',
     'audit_due'             => 'Komið að úttekt',
@@ -378,10 +382,10 @@ return [
     'pie_chart_type'        => 'Dashboard Pie Chart Type',
     'hello_name'            => 'Halló, :name!',
     'unaccepted_profile_warning'   => 'You have :count items requiring acceptance. Click here to accept or decline them',
-    'start_date'            => 'Start Date',
-    'end_date'            => 'End Date',
-    'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
-    'placeholder_kit'       => 'Select a kit'
+    'start_date'            => 'Upphafsdagsetning',
+    'end_date'            => 'Lokadagsetning',
+    'alt_uploaded_image_thumbnail' => 'Hlaða upp smámynd',
+    'placeholder_kit'       => 'Velja sett'
 
 
 

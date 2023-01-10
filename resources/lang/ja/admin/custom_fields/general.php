@@ -44,4 +44,6 @@ return [
     'db_convert_warning' => '警告。このフィールドは <code>:db_column</code> としてカスタムフィールドテーブルにありますが、 <code>:expected</code> でなければなりません。',
     'is_unique' => 'この値はすべての資産で一意である必要があります',
     'unique' => '一意',
+    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
+    'display_in_user_view_table' => 'Visible to User',
 ];

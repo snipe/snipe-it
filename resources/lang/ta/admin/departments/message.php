@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'துறை இல்லை.',
+    'department_already_exists' => 'A department already exists with that name at this company location. Or choose a more specific name for this department. ',
     'assoc_users'	 => 'இந்தத் துறை தற்போது குறைந்தது ஒரு பயனருடன் தொடர்புடையது மற்றும் நீக்கப்பட முடியாது. தயவுசெய்து உங்கள் துறையை இனி இந்த துறையை குறிப்பிடாமல் புதுப்பிக்கவும் மற்றும் மீண்டும் முயற்சிக்கவும்.',
     'create' => array(
         'error'   => 'துறை உருவாக்கப்பட்டது இல்லை, மீண்டும் முயற்சிக்கவும்.',

@@ -11,6 +11,7 @@ return [
     'admin'					=> 'مدیر',
     'administrator'			=> 'مدیر',
     'add_seats'             => 'اضافه شدن صندلی',
+    'age'                   => "Age",
     'all_assets'			=> 'تمام دارایی ها',
     'all'       			=> 'همه',
     'archived'              => 'بایگانی شد',
@@ -313,6 +314,9 @@ return [
     'yes' 					=> 'بله',
     'zip'  					=> 'زیپ',
     'noimage'				=> 'هیچ تصویری بارگزاری نشد یا تصویری یافت نشد.',
+    'file_does_not_exist'   => 'The requested file does not exist on the server.',
+    'file_upload_success'   => 'File upload success!',
+    'no_files_uploaded'     => 'File upload success!',
     'token_expired'         => 'اعتبار فرم شما تمام شده است. لطفا دوباره تلاش کنید.',
     'login_enabled'         => 'ورود فعال شد
 ',

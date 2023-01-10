@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'Oddelek ne obstaja.',
+    'department_already_exists' => 'A department already exists with that name at this company location. Or choose a more specific name for this department. ',
     'assoc_users'	 => 'Ta oddelek je trenutno povezan z vsaj enim uporabnikom in ga ni mogoče izbrisati. Prosimo, posodobite svoje uporabnike, da ne bodo več vsebovali tega oddelka in poskusili znova. ',
     'create' => array(
         'error'   => 'Oddelek ni bil ustvarjen, poskusite znova.',

@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => '部署が見つかりません',
+    'department_already_exists' => 'A department already exists with that name at this company location. Or choose a more specific name for this department. ',
     'assoc_users'	 => 'この部署は1人以上の利用者に関連付けされているため、削除できません。部署の関連付けを削除してから、もう一度試して下さい。 ',
     'create' => array(
         'error'   => '部署が作成できませんでした。もう一度やり直して下さい。',

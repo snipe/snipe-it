@@ -43,12 +43,14 @@ return [
     'file'                 => ':attribute måste vara en fil.',
     'filled'               => ':attribute fältet måste ha ett värde.',
     'image'                => ':attribute måste vara en bild.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'Det valda :attribute är ogiltigt.',
     'in_array'             => ':attribute fältet existerar inte i :other.',
     'integer'              => ':attribute måste vara ett heltal.',
     'ip'                   => ':attribute måste vara en giltig IP-adress.',
     'ipv4'                 => ':attribute måste vara en giltig IPv4-adress.',
     'ipv6'                 => ':attribute måste vara en giltig IPv6-adress.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => ':attribute måste vara en giltig JSON-sträng.',
     'max'                  => [
         'numeric' => ':attribute får inte vara större än :max.',
@@ -91,13 +93,13 @@ return [
     'url'                  => ':attribute Formatet är ogiltigt.',
     'unique_undeleted'     => ':attribute måste vara unikt.',
     'non_circular'         => ':attribute får inte skapa en cirkulär referens.',
-    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
-    'letters'              => 'Password must contain at least one letter.',
-    'numbers'              => 'Password must contain at least one number.',
-    'case_diff'            => 'Password must use mixed case.',
-    'symbols'              => 'Password must contain symbols.',
+    'disallow_same_pwd_as_user_fields' => 'Lösenordet kan inte vara samma som användarnamnet.',
+    'letters'              => 'Lösenord måste innehålla minst en bokstav.',
+    'numbers'              => 'Lösenord måste innehålla minst en siffra.',
+    'case_diff'            => 'Lösenordet måste innehålla både versaler och gemener.',
+    'symbols'              => 'Lösenordet måste innehålla symboler.',
     'gte'                  => [
-        'numeric'          => 'Value cannot be negative'
+        'numeric'          => 'Värdet kan inte vara negativ'
     ],
 
 

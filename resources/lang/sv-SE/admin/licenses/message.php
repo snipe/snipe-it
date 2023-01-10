@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
+    'does_not_exist' => 'Licensen finns inte eller så har du inte behörighet att se den.',
     'user_does_not_exist' => 'Användare finns inte.',
     'asset_does_not_exist' 	=> 'Den tillgång du försöker associera med denna licens existerar inte.',
     'owner_doesnt_match_asset' => 'Den tillgång du försöker associera med denna licens ägs av någon annan än den person som valts i den tilldelade till rullgardinsmenyn.',

@@ -6,6 +6,8 @@ return array(
     'assoc_users'	 => 'Ce lieu est actuellement associé avec au moins un utilisateur et ne peut pas être supprimé. Veuillez mettre à jour vos utilisateurs pour ne plus faire référence à ce lieu et essayez à nouveau. ',
     'assoc_assets'	 => 'Cet emplacement est actuellement associé à au moins un utilisateur et ne peut pas être supprimé. Veuillez mettre à jour vos utilisateurs pour ne plus faire référence à cet emplacement et réessayez. ',
     'assoc_child_loc'	 => 'Cet emplacement est actuellement le parent d\'au moins un sous emplacement et ne peut pas être supprimé . S\'il vous plaît mettre à jour vos emplacement pour ne plus le référencer et réessayez. ',
+    'assigned_assets' => 'Assigned Assets',
+    'current_location' => 'Current Location',
 
 
     'create' => array(

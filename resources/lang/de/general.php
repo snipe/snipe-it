@@ -11,6 +11,7 @@ return [
     'admin'					=> 'Administrator',
     'administrator'			=> 'Administrator',
     'add_seats'             => 'Lizenzen hinzugefügt',
+    'age'                   => "Age",
     'all_assets'			=> 'Alle Assets',
     'all'       			=> 'Alle',
     'archived'              => 'Archiviert',
@@ -280,6 +281,9 @@ return [
     'yes' 					=> 'Ja',
     'zip'  					=> 'Postleitzahl',
     'noimage'				=> 'Kein Bild hochgeladen oder kein Bild gefunden.',
+    'file_does_not_exist'   => 'The requested file does not exist on the server.',
+    'file_upload_success'   => 'File upload success!',
+    'no_files_uploaded'     => 'File upload success!',
     'token_expired'         => 'Ihre Sitzung ist abgelaufen. Bitte versuchen Sie es erneut.',
     'login_enabled'         => 'Login aktiviert',
     'audit_due'             => 'Audit fällig',
@@ -378,10 +382,10 @@ return [
     'pie_chart_type'        => 'Dashboard Kreisdiagramm Typ',
     'hello_name'            => 'Hallo, :name!',
     'unaccepted_profile_warning'   => 'Du hast :count Gegenstände, die akzeptiert werden müssen. Klicke hier, um sie anzunehmen oder abzulehnen',
-    'start_date'            => 'Start Date',
-    'end_date'            => 'End Date',
-    'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
-    'placeholder_kit'       => 'Select a kit'
+    'start_date'            => 'Startdatum',
+    'end_date'            => 'Enddatum',
+    'alt_uploaded_image_thumbnail' => 'Hochgeladene Miniaturansicht',
+    'placeholder_kit'       => 'Kit auswählen'
 
 
 

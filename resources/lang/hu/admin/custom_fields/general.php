@@ -44,4 +44,6 @@ return [
     'db_convert_warning' => 'FIGYELMEZTETÉS. Ez a mező az egyéni mezők táblában <code>:db_column</code> néven szerepel, de <code>:expected</code>-nek kellene lennie.',
     'is_unique' => 'Ennek az értéknek minden eszköz esetében egyedinek kell lennie',
     'unique' => 'Egyedi',
+    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
+    'display_in_user_view_table' => 'Visible to User',
 ];

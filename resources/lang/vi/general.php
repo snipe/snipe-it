@@ -11,6 +11,7 @@ return [
     'admin'					=> 'Quản lý',
     'administrator'			=> 'Quản trị viên',
     'add_seats'             => 'Thêm chỗ ngồi',
+    'age'                   => "Age",
     'all_assets'			=> 'Tất cả tài sản',
     'all'       			=> 'Tất cả',
     'archived'              => 'Đã lưu trữ',
@@ -280,6 +281,9 @@ return [
     'yes' 					=> 'Yes',
     'zip'  					=> 'Zip',
     'noimage'				=> 'Không tìm thấy hình ảnh hoặc hình ảnh nào được tìm thấy.',
+    'file_does_not_exist'   => 'The requested file does not exist on the server.',
+    'file_upload_success'   => 'File upload success!',
+    'no_files_uploaded'     => 'File upload success!',
     'token_expired'         => 'Phiên họp mẫu của bạn đã hết hạn. Vui lòng thử lại.',
     'login_enabled'         => 'Cho phép đăng nhập',
     'audit_due'             => 'Due for Audit',
@@ -378,10 +382,10 @@ return [
     'pie_chart_type'        => 'Dashboard Pie Chart Type',
     'hello_name'            => 'Hello, :name!',
     'unaccepted_profile_warning'   => 'You have :count items requiring acceptance. Click here to accept or decline them',
-    'start_date'            => 'Start Date',
-    'end_date'            => 'End Date',
-    'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
-    'placeholder_kit'       => 'Select a kit'
+    'start_date'            => 'Ngày Bắt Đầu',
+    'end_date'            => 'Ngày Kết Thúc',
+    'alt_uploaded_image_thumbnail' => 'Tải ảnh nhỏ lên',
+    'placeholder_kit'       => 'Chọn công cụ'
 
 
 

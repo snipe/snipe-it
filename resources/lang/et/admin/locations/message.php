@@ -6,6 +6,8 @@ return array(
     'assoc_users'	 => 'Selle asukohaga on seotud vähemalt üks kasutaja ja seda ei saa kustutada. Palun uuenda oma kasutajaid nii, et need ei kasutaks seda asukohta ning seejärel proovi uuesti. ',
     'assoc_assets'	 => 'Selle asukohaga on seotud vähemalt üks vahend ja seda ei saa kustutada. Palun uuenda oma vahendeid, et need ei kasutaks seda asukohta ning seejärel proovi uuesti. ',
     'assoc_child_loc'	 => 'Sel asukohal on hetkel all-asukohti ja seda ei saa kustutada. Palun uuenda oma asukohti nii, et need ei kasutaks seda asukohta ning seejärel proovi uuesti. ',
+    'assigned_assets' => 'Assigned Assets',
+    'current_location' => 'Current Location',
 
 
     'create' => array(

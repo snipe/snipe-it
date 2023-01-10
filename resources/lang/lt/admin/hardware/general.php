@@ -6,7 +6,7 @@ return [
     'archived'  				=> 'Archyvuota',
     'asset'  					=> 'Įranga',
     'bulk_checkout'             => 'Išduota įranga',
-    'bulk_checkin'              => 'Checkin Assets',
+    'bulk_checkin'              => 'Priimti įrangą',
     'checkin'  					=> 'Išduota įranga',
     'checkout'  				=> 'Patikros turtas',
     'clone'  					=> 'Kopijuoti įrangą',
