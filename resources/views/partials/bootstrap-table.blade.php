@@ -327,6 +327,11 @@
                 item_icon = '';
             }
 
+            // display the username if it's checked out to a user
+            if (value.username) {
+                value.name = value.name + ' (' + value.username + ')';
+            }
+
             return '<nobr><a href="{{ url('/') }}/' + item_destination +'/' + value.id + '" data-tooltip="true" title="' + value.type + '"><i class="' + item_icon + ' text-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} "></i> ' + value.name + '</a></nobr>';
 
         } else {
