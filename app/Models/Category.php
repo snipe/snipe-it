@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Gate;
 use Watson\Validating\ValidatingTrait;
 use App\Helpers\Helper;
+use Illuminate\Support\Str;
 
 /**
  * Model for Categories. Categories are a higher-level group
@@ -97,8 +98,11 @@ class Category extends SnipeModel
      */
     public function isDeletable()
     {
-        return Gate::allows('delete', $this)
-                && ($this->itemCount() == 0);
+        if (Gate::allows('delete', $this)) {
+            $category_type_var = Str::plural($this->category_type).'_count';
+            return  $this->{$category_type_var};
+        }
+
     }
 
     /**
@@ -148,31 +152,7 @@ class Category extends SnipeModel
     {
         return $this->hasMany(\App\Models\Component::class);
     }
-
-    /**
-     * Get the number of items in the category
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.0]
-     * @return int
-     */
-    public function itemCount()
-    {
-        switch ($this->category_type) {
-            case 'asset':
-                return $this->assets()->count();
-            case 'accessory':
-                return $this->accessories()->count();
-            case 'component':
-                return $this->components()->count();
-            case 'consumable':
-                return $this->consumables()->count();
-            case 'license':
-                return $this->licenses()->count();
-        }
-
-        return '0';
-    }
+    
 
     /**
      * Establishes the category -> assets relationship
