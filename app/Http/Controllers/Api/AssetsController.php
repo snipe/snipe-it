@@ -381,22 +381,18 @@ class AssetsController extends Controller
 
         if (($assets = $assets->get()) && ($assets->count()) > 0) {
 
-            // If there is only one result, we should pull the first (and only) asset from the returned collection, since
-            // transformAsset() expects an Asset object, NOT a collection
-            if ($assets->count() == 1) {
+            // If there is exactly one result and the deleted parameter is not passed, we should pull the first (and only)
+            // asset from the returned collection, since transformAsset() expects an Asset object, NOT a collection
+            if (($assets->count() == 1) && ($request->input('deleted') != 'true')) {
                 return (new AssetsTransformer)->transformAsset($assets->first());
 
-            // If there is more than one result OR if the endpoint is requesting deleted items (even if there is only one
-            // match, return the normal collection transformed.
-            } elseif (($assets->count() > 1) || ($request->input('deleted') == 'true')) {
+                // If there is more than one result OR if the endpoint is requesting deleted items (even if there is only one
+                // match, return the normal collection transformed.
+            } else {
                 return (new AssetsTransformer)->transformAssets($assets, $assets->count());
             }
 
         }
-
-        // If there are 0 results, return the "no such asset" response
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
-
 
     }
 
@@ -422,14 +418,14 @@ class AssetsController extends Controller
 
         if (($assets = $assets->get()) && ($assets->count()) > 0) {
 
-            // If there is exactly one result, we should pull the first (and only) asset from the returned collection, since
-            // transformAsset() expects an Asset object, NOT a collection
-            if ($assets->count() == 1) {
+            // If there is exactly one result and the deleted parameter is not passed, we should pull the first (and only)
+            // asset from the returned collection, since transformAsset() expects an Asset object, NOT a collection
+            if (($assets->count() == 1) && ($request->input('deleted') != 'true')) {
                 return (new AssetsTransformer)->transformAsset($assets->first());
 
-                // If there is more than one result OR if the endpoint is requesting deleted items (even if there is only one
-                // match, return the normal collection transformed.
-            } elseif (($assets->count() > 1) || ($request->input('deleted') == 'true')) {
+            // If there is more than one result OR if the endpoint is requesting deleted items (even if there is only one
+            // match, return the normal collection transformed.
+            } else {
                 return (new AssetsTransformer)->transformAssets($assets, $assets->count());
             }
 
