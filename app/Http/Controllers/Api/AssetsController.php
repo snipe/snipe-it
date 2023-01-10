@@ -379,17 +379,19 @@ class AssetsController extends Controller
             $assets = $assets->withTrashed();
         }
 
-        $assets = $assets->get();
+        if (($assets = $assets->get()) && ($assets->count()) > 0) {
 
-        // If there is only one result, we should pull the first (and only) asset from the returned collection, since
-        // transformAsset() expects an Asset object, NOT a collection
-        if (($assets) && ($assets->count() == 1)) {
-            return (new AssetsTransformer)->transformAsset($assets->first());
+            // If there is only one result, we should pull the first (and only) asset from the returned collection, since
+            // transformAsset() expects an Asset object, NOT a collection
+            if ($assets->count() == 1) {
+                return (new AssetsTransformer)->transformAsset($assets->first());
 
-        // If there is more than one result - which would probably never show up in the UI, since it would only happen if
-        //  there are multiple deleted assets with the same tag, pass the collection normally
-        } elseif (($assets) && ($assets->count() > 1)) {
-            return (new AssetsTransformer)->transformAssets($assets, $assets->count());
+            // If there is more than one result OR if the endpoint is requesting deleted items (even if there is only one
+            // match, return the normal collection transformed.
+            } elseif (($assets->count() > 1) || ($request->input('deleted') == 'true')) {
+                return (new AssetsTransformer)->transformAssets($assets, $assets->count());
+            }
+
         }
 
         // If there are 0 results, return the "no such asset" response
@@ -418,15 +420,19 @@ class AssetsController extends Controller
 
         $assets = $assets->get();
 
-        // If there is only one result, we should pull the first (and only) asset from the returned collection, since
-        // transformAsset() expects an Asset object, NOT a collection
-        if (($assets) && ($assets->count() == 1)) {
-            return (new AssetsTransformer)->transformAsset($assets->first());
+        if (($assets = $assets->get()) && ($assets->count()) > 0) {
 
-            // If there is more than one result - which would probably never show up in the UI, since it would only happen if
-            //  there are multiple deleted assets with the same tag, pass the collection normally
-        } elseif (($assets) && ($assets->count() > 1)) {
-            return (new AssetsTransformer)->transformAssets($assets, $assets->count());
+            // If there is exactly one result, we should pull the first (and only) asset from the returned collection, since
+            // transformAsset() expects an Asset object, NOT a collection
+            if ($assets->count() == 1) {
+                return (new AssetsTransformer)->transformAsset($assets->first());
+
+                // If there is more than one result OR if the endpoint is requesting deleted items (even if there is only one
+                // match, return the normal collection transformed.
+            } elseif (($assets->count() > 1) || ($request->input('deleted') == 'true')) {
+                return (new AssetsTransformer)->transformAssets($assets, $assets->count());
+            }
+
         }
 
         // If there are 0 results, return the "no such asset" response
