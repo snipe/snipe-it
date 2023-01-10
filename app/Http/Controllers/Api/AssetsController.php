@@ -394,6 +394,9 @@ class AssetsController extends Controller
 
         }
 
+        // If there are 0 results, return the "no such asset" response
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
+
     }
 
     /**
