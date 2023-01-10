@@ -98,11 +98,8 @@ class Category extends SnipeModel
      */
     public function isDeletable()
     {
-        if (Gate::allows('delete', $this)) {
-            $category_type_var = Str::plural($this->category_type).'_count';
-            return  $this->{$category_type_var};
-        }
-
+        return Gate::allows('delete', $this)
+            && ($this->{Str::plural($this->category_type).'_count'} == 0);
     }
 
     /**
@@ -152,7 +149,34 @@ class Category extends SnipeModel
     {
         return $this->hasMany(\App\Models\Component::class);
     }
-    
+
+    /**
+     * Get the number of items in the category. This should NEVER be used in
+     * a collection of cartegories, as you'll end up with an n+1 query problem.
+     *
+     * It should only be used in a single categoiry context.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.0]
+     * @return int
+     */
+    public function itemCount()
+    {
+        switch ($this->category_type) {
+            case 'asset':
+                return $this->assets()->count();
+            case 'accessory':
+                return $this->accessories()->count();
+            case 'component':
+                return $this->components()->count();
+            case 'consumable':
+                return $this->consumables()->count();
+            case 'license':
+                return $this->licenses()->count();
+        }
+
+        return '0';
+    }
 
     /**
      * Establishes the category -> assets relationship
