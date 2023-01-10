@@ -596,7 +596,7 @@ class Asset extends Depreciable
      * @since [v6.0.14]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function lastAcceptedLog()
+    public function acceptanceLog()
     {
         return $this->hasMany(\App\Models\Actionlog::class, 'item_id')
             ->where('item_type', '=', self::class)

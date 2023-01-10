@@ -190,8 +190,8 @@ class AssetsTransformer
                     'email'=> ($asset->assigned->email) ? e($asset->assigned->email) : null,
                     'employee_number' =>  ($asset->assigned->employee_num) ? e($asset->assigned->employee_num) : null,
                     'type' => 'user',
-                    'eula_pdf' => e($asset->lastAcceptedLog->last()->filename),
-                    'signature_file' => e($asset->lastAcceptedLog->last()->accept_signature),
+                    'eula_pdf' => e($asset->acceptanceLog->last()->filename),
+                    'signature_file' => e($asset->acceptanceLog->last()->accept_signature),
                 ] : null;
         }
 
