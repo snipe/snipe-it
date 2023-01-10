@@ -13,5 +13,6 @@ class DepreciationSeeder extends Seeder
         Depreciation::factory()->count(1)->computer()->create(); // 1
         Depreciation::factory()->count(1)->display()->create(); // 2
         Depreciation::factory()->count(1)->mobilePhones()->create(); // 3
+        Depreciation::factory()->count(1)->mobilePhonesv2()->create(); // 3
     }
 }
