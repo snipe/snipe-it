@@ -23,6 +23,8 @@ class CategoriesTransformer
     public function transformCategory(Category $category = null)
     {
 
+        // We only ever use item_count for categories in this transformer, so it makes sense to keep it
+        // simple and do this switch here.
         switch ($category->category_type) {
             case 'asset':
                 $category->item_count = $category->assets_count;
