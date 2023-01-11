@@ -65,3 +65,9 @@ Now you are ready to run the test suite. Use the following command from another 
 To run individual test files, you can pass the path to the test that you want to run:
 
 `php artisan dusk tests/Browser/LoginTest.php`
+
+If you get an error when attempting to run Dusk tests that says `Couldn't connect to server` run:
+
+`php artisan dusk:chrome-driver --detect`
+
+This command will install the specific ChromeDriver Dusk needs for your operating system and Chrome version.
