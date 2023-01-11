@@ -2,6 +2,7 @@
 .DS_Store
 .env
 .env.dusk.*
+!.env.dusk.example
 .idea
 /bin/
 /bootstrap/compiled.php
