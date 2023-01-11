@@ -179,7 +179,8 @@ class Category extends SnipeModel
                 return $this->consumables()->count();
             case 'license':
                 return $this->licenses()->count();
-            default: 0;
+            default:
+                return 0;
         }
 
     }
