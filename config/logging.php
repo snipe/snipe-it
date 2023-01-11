@@ -4,7 +4,7 @@ use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
 
-return [
+$config = [
 
     /*
     |--------------------------------------------------------------------------
@@ -35,6 +35,8 @@ return [
     */
 
     'channels' => [
+        // This will get overwritten to 'single' AND 'rollbar' in the code at the bottom of this file
+        // if a ROLLBAR_TOKEN is given in the .env file
         'stack' => [
             'driver' => 'stack',
             'channels' => ['single'],
@@ -104,7 +106,23 @@ return [
         'scimtrace' => [
             'driver' => 'single',
             'path' => storage_path('logs/scim.log')
-        ]
+        ],
+
+        'rollbar' => [
+            'driver' => 'monolog',
+            'handler' => \Rollbar\Laravel\MonologHandler::class,
+            'access_token' => env('ROLLBAR_TOKEN'),
+            'level' => env('ROLLBAR_LEVEL', 'error'),
+        ],
     ],
 
 ];
+
+
+// Only add rollbar if the .env has a rollbar token
+if (env('ROLLBAR_TOKEN')) {
+    $config['channels']['stack']['channels'] = ['single', 'rollbar'];
+}
+
+
+return $config;
