@@ -128,16 +128,14 @@ class CategoriesController extends Controller
         $this->authorize('update', Category::class);
         $category = Category::findOrFail($id);
 
-        if ($category->category_type !== $request->input('category_type')) {
+        // Don't allow the user to change the category_type once it's been created
+        if (($request->filled('category_type')) && ($category->category_type != $request->input('category_type'))) {
             return response()->json(
                 Helper::formatStandardApiResponse('error', null,  trans('admin/categories/message.update.cannot_change_category_type'))
             );
         }
         $category->fill($request->all());
-
         $category = $request->handleImages($category);
-
-
 
         if ($category->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $category, trans('admin/categories/message.update.success')));
