@@ -55,6 +55,6 @@ class MigrateMacAddress extends Migration
         Schema::table('models', function (Blueprint $table) {
             $table->renameColumn('deprecated_mac_address', 'show_mac_address');
         });
-        DB::statement('ALTER TABLE assets CHANGE _snipeit_mac_address mac_address varchar(255)');
+        DB::statement('ALTER TABLE assets CHANGE _snipeit_mac_address_1 mac_address varchar(255)');
     }
 }
