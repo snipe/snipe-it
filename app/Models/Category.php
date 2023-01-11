@@ -100,7 +100,7 @@ class Category extends SnipeModel
     {
 
         return Gate::allows('delete', $this)
-            && ($this->itemCount() == 0);
+                && ($this->itemCount() == 0);
     }
 
     /**
@@ -155,7 +155,7 @@ class Category extends SnipeModel
      * Get the number of items in the category. This should NEVER be used in
      * a collection of categories, as you'll end up with an n+1 query problem.
      *
-     * It should only be used in a single categoiry context.
+     * It should only be used in a single category context.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v2.0]
