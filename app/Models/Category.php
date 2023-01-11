@@ -98,8 +98,9 @@ class Category extends SnipeModel
      */
     public function isDeletable()
     {
+
         return Gate::allows('delete', $this)
-            && ($this->{Str::plural($this->category_type).'_count'} == 0);
+            && ($this->itemCount() == 0);
     }
 
     /**
@@ -152,7 +153,7 @@ class Category extends SnipeModel
 
     /**
      * Get the number of items in the category. This should NEVER be used in
-     * a collection of cartegories, as you'll end up with an n+1 query problem.
+     * a collection of categories, as you'll end up with an n+1 query problem.
      *
      * It should only be used in a single categoiry context.
      *
@@ -162,6 +163,11 @@ class Category extends SnipeModel
      */
     public function itemCount()
     {
+
+        if (isset($this->{Str::plural($this->category_type).'_count'})) {
+            return $this->{Str::plural($this->category_type).'_count'};
+        }
+
         switch ($this->category_type) {
             case 'asset':
                 return $this->assets()->count();
@@ -173,9 +179,9 @@ class Category extends SnipeModel
                 return $this->consumables()->count();
             case 'license':
                 return $this->licenses()->count();
+            default: 0;
         }
 
-        return '0';
     }
 
     /**
