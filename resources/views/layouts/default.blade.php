@@ -403,7 +403,7 @@
             </li>
             @endcan
             @can('index', \App\Models\Asset::class)
-            <li class="treeview{{ (Request::is('hardware*') ? ' active' : '') }}">
+            <li class="treeview{{ ((Request::is('statuslabels/*') || Request::is('hardware*')) ? ' active' : '') }}">
                 <a href="#"><i class="fas fa-barcode fa-fw" aria-hidden="true"></i>
                   <span>{{ trans('general.assets') }}</span>
                   <i class="fa fa-angle-left pull-right"></i>
@@ -419,7 +419,7 @@
                     <?php $status_navs = \App\Models\Statuslabel::where('show_in_nav', '=', 1)->withCount('assets as asset_count')->get(); ?>
                     @if (count($status_navs) > 0)
                         @foreach ($status_navs as $status_nav)
-                            <li><a href="{{ route('statuslabels.show', ['statuslabel' => $status_nav->id]) }}">
+                            <li{!! (Request::is('statuslabels/'.$status_nav->id) ? ' class="active"' : '') !!}><a href="{{ route('statuslabels.show', ['statuslabel' => $status_nav->id]) }}">
                                 <i class="fas fa-circle text-grey fa-fw" aria-hidden="true"{!!  ($status_nav->color!='' ? ' style="color: '.e($status_nav->color).'"' : '') !!}></i>
                                  {{ $status_nav->name }} ({{ $status_nav->asset_count }})</a></li>
                         @endforeach
