@@ -50,6 +50,8 @@ Before attempting to run Dusk tests copy the example environment file for Dusk a
 `cp .env.dusk.example .env.dusk.local`
 > `local` refers to the value of `APP_ENV` in your `.env` so if you have it set to `dev` then the file should be named `.env.dusk.dev`.
 
+**Important**: Dusk tests cannot be run using an in-memory SQLite database. Additionally, the Dusk test suite uses the `DatabaseMigrations` trait which will leave the database in a fresh state after running. Therefore, it is recommended that you create a test database and point `DB_DATABASE` in `.env.dusk.local` to it.  
+
 ### Test Setup
 
 Your application needs to be configured and up and running in order for the browser
