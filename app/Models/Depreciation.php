@@ -17,7 +17,7 @@ class Depreciation extends SnipeModel
     protected $rules = [
         'name' => 'required|min:3|max:255|unique:depreciations,name',
         'term_length' => 'required|max:3600|integer',
-        'term_type' => 'required|string',
+        'term_type' => 'required|max:255',
     ];
 
     /**

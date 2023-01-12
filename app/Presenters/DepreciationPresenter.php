@@ -38,6 +38,7 @@ class DepreciationPresenter extends Presenter
                 'visible' => true,
             ],
 
+
             [
                 'field' => 'term_type',
                 'searchable' => true,
