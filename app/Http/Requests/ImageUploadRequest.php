@@ -146,7 +146,7 @@ class ImageUploadRequest extends Request
                 }
 
                  // Remove Current image if exists
-                if (Storage::disk('public')->exists($path.'/'.$item->{$use_db_field})) {
+                if (($item->{$use_db_field}!='') && (Storage::disk('public')->exists($path.'/'.$item->{$use_db_field}))) {
                     \Log::debug('A file already exists that we are replacing - we should delete the old one.');
                     try {
                          Storage::disk('public')->delete($path.'/'.$item->{$use_db_field});
