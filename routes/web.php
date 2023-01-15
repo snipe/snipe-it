@@ -359,6 +359,7 @@ Route::group(['middleware' => ['auth']], function () {
         'reports/unaccepted_assets/{deleted?}',
         [ReportsController::class, 'postAssetAcceptanceReport']
     )->name('reports/export/unaccepted_assets');
+    Route::get('reports/stockreport', [ReportsController::class, 'getStockReport'])->name('reports/stock_report');
 });
 
 Route::get(

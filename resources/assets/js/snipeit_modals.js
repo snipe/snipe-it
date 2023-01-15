@@ -96,6 +96,7 @@ $(function () {
  
 
   $('#createModal').on('click','#modal-save', function () {
+    alert("testing")
     $.ajax({
         type: 'POST',
         url: $('.modal-body form').attr('action'),
