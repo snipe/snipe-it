@@ -120,7 +120,7 @@ $config = [
 
 
 // Only add rollbar if the .env has a rollbar token
-if (env('ROLLBAR_TOKEN')) {
+if ((env('APP_ENV')=='production') && (env('ROLLBAR_TOKEN'))) {
     $config['channels']['stack']['channels'] = ['single', 'rollbar'];
 }
 
