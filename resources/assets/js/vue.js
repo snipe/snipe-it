@@ -4,7 +4,7 @@
  * include Vue and Vue Resource. This gives a great starting point for
  * building robust, powerful web applications using Vue and Laravel.
  */
-require('./bootstrap');
+import './bootstrap';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -13,22 +13,22 @@ require('./bootstrap');
  */
 Vue.component(
     'passport-clients',
-    require('./components/passport/Clients.vue').default
+    import './components/passport/Clients.vue' // ? .default
 );
 
 Vue.component(
     'passport-authorized-clients',
-    require('./components/passport/AuthorizedClients.vue').default
+    import './components/passport/AuthorizedClients.vue' // ?).default
 );
 
 Vue.component(
     'passport-personal-access-tokens',
-    require('./components/passport/PersonalAccessTokens.vue').default
+    import './components/passport/PersonalAccessTokens.vue' // ).default
 );
 
 Vue.component(
     'importer',
-    require('./components/importer/importer.vue').default
+    import './components/importer/importer.vue' //).default
 );
 
 // This component has been removed and replaced with a Livewire implementation

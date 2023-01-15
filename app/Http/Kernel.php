@@ -18,7 +18,6 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \Fideloper\Proxy\TrustProxies::class,
         \App\Http\Middleware\CheckForSetup::class,
         \App\Http\Middleware\CheckForDebug::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,

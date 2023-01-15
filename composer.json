@@ -29,20 +29,17 @@
     "barryvdh/laravel-debugbar": "^3.6",
     "barryvdh/laravel-dompdf": "^2.0",
     "doctrine/cache": "^1.10",
-    "doctrine/common": "^2.12",
     "doctrine/dbal": "^3.1",
-    "doctrine/inflector": "^1.3",
     "doctrine/instantiator": "^1.3",
-    "eduardokum/laravel-mail-auto-embed": "^1.0",
+    "eduardokum/laravel-mail-auto-embed": "^2.0",
     "enshrined/svg-sanitize": "^0.15.0",
     "erusev/parsedown": "^1.7",
-    "facade/ignition": "^2.10",
-    "fideloper/proxy": "^4.3",
+    "spatie/laravel-ignition": "^1.0",
     "fruitcake/laravel-cors": "^2.2",
     "guzzlehttp/guzzle": "^7.0.1",
     "intervention/image": "^2.5",
     "javiereguiluz/easyslugger": "^1.0",
-    "laravel/framework": "^8.46",
+    "laravel/framework": "^9.0",
     "laravel/helpers": "^1.4",
     "laravel/passport": "^10.1",
     "laravel/slack-notification-channel": "^2.3",
@@ -52,13 +49,11 @@
     "lcobucci/clock": "1.2.0|2.0.0",
     "lcobucci/jwt": "^3.4.5|^4.0.4",
     "league/csv": "^9.7",
-    "league/flysystem-aws-s3-v3": "^1.0",
-    "league/flysystem-cached-adapter": "^1.1",
+    "league/flysystem-aws-s3-v3": "^3.0",
     "livewire/livewire": "^2.4",
-    "mediconesystems/livewire-datatables": "^0.5.0",
     "neitanod/forceutf8": "^2.0",
     "nesbot/carbon": "^2.32",
-    "nunomaduro/collision": "^5.4",
+    "nunomaduro/collision": "^6.1",
     "onelogin/php-saml": "^3.4",
     "paragonie/constant_time_encoding": "^2.3",
     "symfony/polyfill-mbstring": "^1.22",
@@ -66,10 +61,10 @@
     "phpspec/prophecy": "^1.10",
     "pragmarx/google2fa-laravel": "^1.3",
     "rollbar/rollbar-laravel": "^7.0",
-    "spatie/laravel-backup": "^6.16",
+    "spatie/laravel-backup": "^8.0",
     "tecnickcom/tc-lib-barcode": "^1.15",
     "unicodeveloper/laravel-password": "^1.0",
-    "watson/validating": "^6.1"
+    "watson/validating": "^7.0"
   },
   "require-dev": {
     "fakerphp/faker": "^1.16",
@@ -126,6 +121,9 @@
     "sort-packages": true,
     "optimize-autoloader": true,
     "discard-changes": true,
-    "process-timeout": 3000
+    "process-timeout": 3000,
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   }
 }

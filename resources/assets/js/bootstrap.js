@@ -1,4 +1,5 @@
-window._ = require('lodash');
+import lodash from 'lodash';
+window._ = lodash;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -6,18 +7,20 @@ window._ = require('lodash');
  * code may be modified to fit the specific needs of your application.
  */
 //window.$ = window.jQuery = require('jquery');
+import jQuery from 'jquery';
+window.$ = jQuery;
 
 /**
  * jQuery UI is loaded here and then the tooltip is assigned another funtion name
  * This resolves the issue of jquery-ui & bootstrap tooltip conflict
  */
-require('jquery-ui');
+import jquery_ui from 'jquery-ui';
 jQuery.fn.uitooltip = jQuery.fn.tooltip; 
 
 /**
  * Load boostrap
  */
-require('bootstrap-less');
+import 'bootstrap-less';
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
@@ -25,9 +28,10 @@ require('bootstrap-less');
  * and simple, leaving you to focus on building your next great project.
  */
 
-window.Vue = require('vue').default;
+import Vue from 'vue';
+window.Vue = Vue.default;
 window.eventHub = new Vue();
-require('vue-resource');
+import vue_resource from 'vue-resource';
 
 /**
  * We'll register a HTTP interceptor to attach the "CSRF" header to each of

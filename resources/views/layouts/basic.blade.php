@@ -10,7 +10,8 @@
 
     <link rel="shortcut icon" type="image/ico" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url('').e($snipeSettings->favicon) : 'favicon.ico' }} ">
     {{-- stylesheets --}}
-    <link rel="stylesheet" href="{{ url(mix('css/dist/all.css')) }}">
+    @vite(['css/dist/all.css','js/dist/all.js'])
+{{--    <link rel="stylesheet" href="{{ url(mix('css/dist/all.css')) }}">--}}
     <link rel="shortcut icon" type="image/ico" href="{{ url(asset('favicon.ico')) }}">
 
     <script nonce="{{ csrf_token() }}">
@@ -71,7 +72,7 @@
     </div>
 
     {{-- Javascript files --}}
-    <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
+{{--    <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>--}}
 
 
     @stack('js')
