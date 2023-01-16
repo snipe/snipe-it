@@ -88,7 +88,7 @@ class AssetModelPresenter extends Presenter
                 'sortable' => true,
                 'switchable' => true,
                 'title' => trans('general.category'),
-                'visible' => false,
+                'visible' => true,
                 'formatter' => 'categoriesLinkObjFormatter',
             ],
             [
