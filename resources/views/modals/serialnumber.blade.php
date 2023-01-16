@@ -7,7 +7,7 @@
             <h2 class="modal-title">Serial Number Required for: {{ request('result') }}</h2>
         </div>
         <div class="modal-body">
-            <form method="post" action="{{ route('productflow.receiving.store') }}" >
+            <form action="{{ route('productflow.receiving.store') }}" >
                 {{ csrf_field() }}
                 <div class="alert alert-danger" id="modal_error_msg" style="display:none">
                 </div>
@@ -16,7 +16,7 @@
                     <div class="col-md-4 col-xs-12"><label for="modal-serial_number">Serial Number</label></div>
                     <div class="col-md-8 col-xs-12"><input type='text' name="serialnumber" id='modal-serial_number' class="form-control"></div>
                 </div>
-                {{-- <input type="text" value="{{ request('result') }}" id="modal-model" name="model" hidden="true"> --}}
+                <input type="text" value="{{ request('result') }}" id="modal-model" name="model" hidden="true">
             </form>
 
         </div>

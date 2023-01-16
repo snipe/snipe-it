@@ -61427,7 +61427,6 @@ $(function () {
     });
   });
   $('#createModal').on('click', '#modal-save', function () {
-    alert("testing");
     $.ajax({
       type: 'POST',
       url: $('.modal-body form').attr('action'),
@@ -61437,6 +61436,8 @@ $(function () {
       },
       data: $('.modal-body form').serialize(),
       success: function success(result) {
+        console.dir(result);
+
         if (result.status == "error") {
           var error_message = "";
 

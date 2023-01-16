@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Accessory;
 use App\Models\AssetModel;
-
+use App\Helpers\Helper;
 use Illuminate\Http\Request;
 
 class ProductFlowController extends Controller
@@ -31,17 +31,18 @@ class ProductFlowController extends Controller
         // $accessory = Accessory::where('model_number', '=', $request->receiveParts)->get();
         if($model->count() > 0) {
             $result = $model[0]->model_number;
-            return redirect()->route('productflow.receiving')->with('model', $result);
+            return response()->json(Helper::formatStandardApiResponse('success', $result, null));
         }
         /* if($accessory->count() > 0) {
             $result = $accessory;
             return $result;
         } */
-        return redirect()->route('productflow.receiving')->with('result', false)->with('warning', 'Model not found. Please click "New" to add the model.');
+        return response()->json(Helper::formatStandardApiResponse('error', null, "Model not found. Please click 'New' to add the model."));
     }
 
     public function store(Request $request) {
-        return 'hello world';
-        // return redirect()->route('productflow.receiving')->with('success', "Added model: $request->model with Serial Number: $request->serialnumber to inventory");
+        // return 'hello world';
+        $payload = ['name' => 'test', 'id' => '1'];
+        return response()->json(Helper::formatStandardApiResponse('success', $payload, 'testing'));
     }
 }
