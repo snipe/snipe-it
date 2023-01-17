@@ -7,13 +7,16 @@ use App\Models\AssetModel;
 use App\Helpers\Helper;
 use Illuminate\Http\Request;
 
+
 class ProductFlowController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         return view('productflow/receiving');
     }
-
-    public function show(Request $request) {
+        
+    public function show(Request $request)
+    {
         $model = AssetModel::where('model_number', '=', $request->receiveParts)->get();
         /* 
         This will be added in later. Main focus is receiving Asset Models.
@@ -29,7 +32,7 @@ class ProductFlowController extends Controller
         
         */
         // $accessory = Accessory::where('model_number', '=', $request->receiveParts)->get();
-        if($model->count() > 0) {
+        if ($model->count() > 0) {
             $result = $model[0]->model_number;
             return response()->json(Helper::formatStandardApiResponse('success', $result, null));
         }
@@ -37,12 +40,18 @@ class ProductFlowController extends Controller
             $result = $accessory;
             return $result;
         } */
-        return response()->json(Helper::formatStandardApiResponse('error', null, "Model not found. Please click 'New' to add the model."));
+            
+        return redirect()->route('productflow.receiving')->with('warning', "Model not found. Please click 'New' to add the model.");
+        // return response()->json(Helper::formatStandardApiResponse('error', null, "Model not found. Please click 'New' to add the model."));
     }
+    
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         // return 'hello world';
         $payload = ['name' => 'test', 'id' => '1'];
         return response()->json(Helper::formatStandardApiResponse('success', $payload, 'testing'));
     }
+
+    
 }

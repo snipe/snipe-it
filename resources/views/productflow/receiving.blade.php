@@ -4,10 +4,12 @@
     @parent
 @stop
 
+
 @section('content')
     <div class="row">
         <!-- col-md-8 -->
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0">
+            @include('modals.serialnumber')
 
             <form id="create-form" class="form-horizontal" autocomplete="off" role="form" enctype="multipart/form-data">
 
@@ -55,10 +57,6 @@
                                 <a href='{{ route('modal.show', 'model') }}' data-toggle="modal" data-target="#createModal"
                                     data-select='model_select_id'
                                     class="btn btn-sm btn-primary">{{ trans('button.new') }}</a>
-                                <a href='{{ route('modal.show', ['type' => 'serialnumber', 'result' => Session::get('model')]) }}'
-                                    data-toggle="modal" data-target="#createModal" class="btn btn-sm btn-primary"
-                                    id="test" hidden="true">{{ trans('button.new') }}</a>
-
                             </div>
                         </div>
                         <!-- CSRF Token -->
@@ -72,17 +70,24 @@
     </div> <!-- col-md-8 -->
 
     </div><!-- ./row -->
-
 @stop
 
 @section('moar_scripts')
     <script>
         $("#create-form").submit((e) => {
+
             $.ajax({
                 url: "/productflow/show",
                 method: "get",
-                data: { receiveParts: $("#receiveParts").val() },
+                data: {
+                    receiveParts: $("#receiveParts").val()
+                },
                 success: (res) => {
+                    if (res.status == "success" && (res.payload != undefined || res.payload != null)) {
+                        $("#model-Title span").remove();
+                        $("#model-Title").append(`<span>${res.payload}</span>`)
+                        $("#getSerial").modal('show');
+                    }
                     console.dir(res)
                 },
                 error: (err) => {
