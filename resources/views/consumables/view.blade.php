@@ -45,8 +45,7 @@
           </li>
         @endcan
 
-        @can('update', Consumable::class)
-
+        @can('update', \App\Models\Consumable::class)
           <li class="pull-right">
             <a href="#" data-toggle="modal" data-target="#uploadFileModal">
               <i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}
@@ -200,7 +199,7 @@
             <div class="row">
               <div class="col-md-12">
 
-          
+
                 @if ($consumable->image!='')
                 <div class="col-md-12 text-center">
                   <a href="{{ Storage::disk('public')->url('consumables/'.e($consumable->image)) }}" data-toggle="lightbox">
@@ -269,7 +268,7 @@
     @endcan
 
     @if ($consumable->notes)
-       
+
     <div class="col-md-12">
       <strong>
         {{ trans('general.notes') }}:
@@ -282,7 +281,7 @@
   @endif
 
     </div>
-    
+
   </div> <!-- /.col-md-3-->
 </div> <!-- /.row-->
 
