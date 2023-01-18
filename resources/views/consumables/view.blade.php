@@ -45,7 +45,7 @@
           </li>
         @endcan
 
-        @can('update', \App\Models\Consumable::class)
+        @can('update', $consumable)
           <li class="pull-right">
             <a href="#" data-toggle="modal" data-target="#uploadFileModal">
               <i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}
