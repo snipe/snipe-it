@@ -289,7 +289,6 @@
                                         </div>
                                     @endif
 
-
                                     @if ((isset($audit_log)) && ($audit_log->created_at))
                                         <div class="row">
                                             <div class="col-md-2">
@@ -435,6 +434,16 @@
                                         </div>
                                         <div class="col-md-6">
                                             {{ ($asset->model) ? $asset->model->model_number : ''}}
+                                        </div>
+                                    </div>
+
+                                    <!-- byod -->
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <strong>{{ trans('general.byod') }}</strong>
+                                        </div>
+                                        <div class="col-md-9">
+                                            {!! ($asset->byod=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
                                         </div>
                                     </div>
 
