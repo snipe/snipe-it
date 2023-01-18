@@ -265,14 +265,14 @@
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
+                        </div>
                         </div> <!-- /.tab-pane -->
                     @endcan
 
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
 
 <!-- side address column -->
