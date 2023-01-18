@@ -149,6 +149,14 @@ class UsersController extends Controller
             $users = $users->where('remote', '=', $request->input('remote'));
         }
 
+        if ($request->filled('two_factor_enrolled')) {
+            $users = $users->where('two_factor_enrolled', '=', $request->input('two_factor_enrolled'));
+        }
+
+        if ($request->filled('two_factor_optin')) {
+            $users = $users->where('two_factor_optin', '=', $request->input('two_factor_optin'));
+        }
+
         if ($request->filled('start_date')) {
             $users = $users->where('users.start_date', '=', $request->input('start_date'));
         }
@@ -156,7 +164,6 @@ class UsersController extends Controller
         if ($request->filled('end_date')) {
             $users = $users->where('users.end_date', '=', $request->input('end_date'));
         }
-
 
         if ($request->filled('assets_count')) {
            $users->has('assets', '=', $request->input('assets_count'));
