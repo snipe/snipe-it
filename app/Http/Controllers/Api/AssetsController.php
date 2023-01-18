@@ -191,7 +191,7 @@ class AssetsController extends Controller
         }
 
         if ($request->filled('byod')) {
-            $assets->ByDepreciationId($request->input('byod'));
+            $assets->where('assets.byod', '=', $request->input('byod'));
         }
 
         $request->filled('order_number') ? $assets = $assets->where('assets.order_number', '=', e($request->get('order_number'))) : '';
