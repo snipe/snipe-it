@@ -67,10 +67,10 @@ class DepreciationReportPresenter extends Presenter
                 "title" => trans('general.depreciation'),
                 "visible" => true,
             ], [
-                "field" => "number_of_months",
+                "field" => "term_length",
                 "searchable" => true,
                 "sortable" => true,
-                "title" => trans('admin/depreciations/general.number_of_months'),
+                "title" => trans('admin/depreciations/general.term_length'),
                 "visible" => true,
             ],  [
                 "field" => "status",

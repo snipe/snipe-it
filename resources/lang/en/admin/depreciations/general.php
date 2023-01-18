@@ -8,9 +8,8 @@ return [
     'depreciation_name'  					=> 'Depreciation Name',
     'depreciation_min'                      => 'Floor Value of Depreciation',
     'number_of_months'  					=> 'Number of Months',
-    'term_length'                                  => 'Length of Term',
+    'term_length'                           => 'Length of Term',
     'update'  					            => 'Update Depreciation',
-    'depreciation_min'                      => 'Minimum Value after Depreciation',
     'no_depreciations_warning'               => '<strong>Warning: </strong>
                       You do not currently have any depreciations set up.
                       Please set up at least one depreciation to view the depreciation report.',

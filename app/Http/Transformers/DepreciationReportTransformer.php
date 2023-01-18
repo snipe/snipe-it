@@ -106,7 +106,7 @@ class DepreciationReportTransformer
             'monthly_depreciation' => $monthly_depreciation,
             'checked_out_to' => ($checkout_target) ? e($checkout_target) : null,
             'diff' =>  Helper::formatCurrencyOutput($diff),
-            'number_of_months' =>  ($asset->model && $asset->model->depreciation) ? e($asset->model->depreciation->term_length) : null,
+            'term_length' =>  ($asset->model && $asset->model->depreciation) ? e($asset->model->depreciation->term_length).' '.($asset->model->depreciation->term_type) : null,
             'depreciation' => (($asset->model) && ($asset->model->depreciation)) ?  e($asset->model->depreciation->name) : null,
             
 
