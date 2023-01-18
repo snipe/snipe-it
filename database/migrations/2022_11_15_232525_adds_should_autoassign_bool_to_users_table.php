@@ -14,7 +14,7 @@ class AddsShouldAutoassignBoolToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('should_autoassign')->nullable(false)->default(0);
+            $table->boolean('autoassign_licenses')->nullable(false)->default(1);
         });
     }
 

@@ -19,7 +19,7 @@ return [
     'print_assigned'    => 'Print All Assigned',
     'email_assigned'    => 'Email List of All Assigned',
     'user_notified'     => 'User has been emailed a list of their currently assigned items.',
-    'auto_assign_label' => 'User should be skipped during auto assignment commands',
+    'auto_assign_label' => 'Include this user when auto-assigning eligible licenses',
     'auto_assign_help'  => 'Skip this user in auto assignment of licenses',
     'software_user'     => 'Software Checked out to :name',
     'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
