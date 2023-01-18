@@ -344,9 +344,6 @@
               </div>
           @endcan
 
-                    </div><!--col-md-3-->
-                </div><!--row-->
-            </div><!--tab-pane details-->
 
         <div class="tab-pane fade" id="history">
             <div class="row">
@@ -386,8 +383,8 @@
                 </div> <!-- /.col-md-12-->
             </div> <!-- /.row-->
         </div><!--tab history-->
-    </div><!--tab-content-->
-</div><!--/.nav-tabs-custom-->
+    </div><!--col-md-3-->
+</div><!--row-->
 
 
 
