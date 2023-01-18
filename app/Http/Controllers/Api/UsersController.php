@@ -149,6 +149,14 @@ class UsersController extends Controller
             $users = $users->where('remote', '=', $request->input('remote'));
         }
 
+        if ($request->filled('two_factor_enrolled')) {
+            $users = $users->where('two_factor_enrolled', '=', $request->input('two_factor_enrolled'));
+        }
+
+        if ($request->filled('two_factor_optin')) {
+            $users = $users->where('two_factor_optin', '=', $request->input('two_factor_optin'));
+        }
+
         if ($request->filled('start_date')) {
             $users = $users->where('users.start_date', '=', $request->input('start_date'));
         }
@@ -156,7 +164,6 @@ class UsersController extends Controller
         if ($request->filled('end_date')) {
             $users = $users->where('users.end_date', '=', $request->input('end_date'));
         }
-
 
         if ($request->filled('assets_count')) {
            $users->has('assets', '=', $request->input('assets_count'));
@@ -208,11 +215,39 @@ class UsersController extends Controller
             default:
                 $allowed_columns =
                     [
-                        'last_name', 'first_name', 'email', 'jobtitle', 'username', 'employee_num',
-                        'assets', 'accessories', 'consumables', 'licenses', 'groups', 'activated', 'created_at',
-                        'two_factor_enrolled', 'two_factor_optin', 'last_login', 'assets_count', 'licenses_count',
-                        'consumables_count', 'accessories_count', 'phone', 'address', 'city', 'state',
-                        'country', 'zip', 'id', 'ldap_import', 'remote', 'start_date', 'end_date',
+                        'last_name',
+                        'first_name',
+                        'email',
+                        'jobtitle',
+                        'username',
+                        'employee_num',
+                        'assets',
+                        'accessories',
+                        'consumables',
+                        'licenses',
+                        'groups',
+                        'activated',
+                        'created_at',
+                        'two_factor_enrolled',
+                        'two_factor_optin',
+                        'last_login',
+                        'assets_count',
+                        'licenses_count',
+                        'consumables_count',
+                        'accessories_count',
+                        'phone',
+                        'address',
+                        'city',
+                        'state',
+                        'country',
+                        'zip',
+                        'id',
+                        'ldap_import',
+                        'two_factor_optin',
+                        'two_factor_enrolled',
+                        'remote',
+                        'start_date',
+                        'end_date',
                     ];
 
                 $sort = in_array($request->get('sort'), $allowed_columns) ? $request->get('sort') : 'first_name';
