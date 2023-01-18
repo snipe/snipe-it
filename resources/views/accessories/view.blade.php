@@ -98,7 +98,7 @@
                     <div class="tab-pane active" id="checkedout">
                         <div class="table table-responsive">
                           <div class="row">
-                              <div class="col-md-9">
+                              <div class="col-md-12">
                                 <table
                                     data-cookie-id-table="usersTable"
                                     data-pagination="true"
@@ -135,7 +135,7 @@
                      <div class="tab-pane fade" id="history">
                          <div class="table table-responsive">
                              <div class="row">
-                                 <div class="col-md-9">
+                                 <div class="col-md-12">
                                 <table
                                         class="table table-striped snipe-table"
                                         data-cookie-id-table="AccessoryHistoryTable"
