@@ -26,7 +26,7 @@ class AddsShouldAutoassignBoolToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('should_autoassign');
+            $table->dropColumn('autoassign_licenses');
         });
     }
 }

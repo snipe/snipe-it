@@ -379,8 +379,8 @@
                           <!-- Auto Assign checkbox -->
                           <div class="form-group">
                               <div class="col-md-7 col-md-offset-3">
-                                  <label for="should_autoassign">
-                                      <input type="checkbox" value="1" name="should_autoassign" class="minimal" {{ (old('should_autoassign', $user->should_autoassign)) == '1' ? ' checked="checked"' : '' }} aria-label="should_autoassign">
+                                  <label for="autoassign_licenses">
+                                      <input type="checkbox" value="1" name="autoassign_licenses" class="minimal" {{ (old('autoassign_licenses', $user->autoassign_licenses)) == '1' ? ' checked="checked"' : '' }} aria-label="autoassign_licenses">
                                       {{ trans('admin/users/general.auto_assign_label') }}
 
                                   </label>
