@@ -100,6 +100,7 @@ class AssetsController extends Controller
             'checkout_counter',
             'checkin_counter',
             'requests_counter',
+            'byod',
         ];
 
         $filter = [];
@@ -187,6 +188,10 @@ class AssetsController extends Controller
 
         if ($request->filled('depreciation_id')) {
             $assets->ByDepreciationId($request->input('depreciation_id'));
+        }
+
+        if ($request->filled('byod')) {
+            $assets->ByDepreciationId($request->input('byod'));
         }
 
         $request->filled('order_number') ? $assets = $assets->where('assets.order_number', '=', e($request->get('order_number'))) : '';
