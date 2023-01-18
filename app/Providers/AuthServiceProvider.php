@@ -126,6 +126,12 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
+        Gate::define('consumables.files', function ($user) {
+            if ($user->hasAccess('consumables.files')) {
+                return true;
+            }
+        });
+
         // Can the user import CSVs?
         Gate::define('import', function ($user) {
             if ($user->hasAccess('import')) {
