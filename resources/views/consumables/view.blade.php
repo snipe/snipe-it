@@ -259,7 +259,7 @@
             {{ trans('general.checkout') }}
           </a>
         @else
-          <button style="margin-bottom:10px; width:100%"" class="btn btn-primary btn-sm disabled">
+          <button style="margin-bottom:10px; width:100%" class="btn btn-primary btn-sm disabled">
             {{ trans('general.checkout') }}
           </button>
         @endif
