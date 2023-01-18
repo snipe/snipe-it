@@ -114,6 +114,12 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
+        Gate::define('accessories.files', function ($user) {
+            if ($user->hasAccess('accessories.files')) {
+                return true;
+            }
+        });
+
         Gate::define('components.files', function ($user) {
             if ($user->hasAccess('components.files')) {
                 return true;
