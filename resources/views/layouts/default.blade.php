@@ -808,20 +808,9 @@
         <div class="pull-right hidden-xs">
           @if ($snipeSettings->version_footer!='off')
               @if (($snipeSettings->version_footer=='on') || (($snipeSettings->version_footer=='admin') && (Auth::user()->isSuperUser()=='1')))
-                &nbsp; <strong>Version</strong> {{ config('version.app_version') }} - build {{ config('version.build_version') }} ({{ config('version.branch') }})
+                &nbsp; <strong>Version</strong> {{ config('version.app_version') }}
               @endif
           @endif
-
-          @if ($snipeSettings->support_footer!='off')
-              @if (($snipeSettings->support_footer=='on') || (($snipeSettings->support_footer=='admin') && (Auth::user()->isSuperUser()=='1')))
-                <a target="_blank" class="btn btn-default btn-xs" href="https://snipe-it.readme.io/docs/overview" rel="noopener">{{ trans('general.user_manual') }}</a>
-                <a target="_blank" class="btn btn-default btn-xs" href="https://snipeitapp.com/support/" rel="noopener">{{ trans('general.bug_report') }}</a>
-                 @endif
-          @endif
-
-        @if ($snipeSettings->privacy_policy_link!='')
-            <a target="_blank" class="btn btn-default btn-xs" rel="noopener" href="{{  $snipeSettings->privacy_policy_link }}" target="_new">{{ trans('admin/settings/general.privacy_policy') }}</a>
-        @endif
 
 
         </div>
@@ -832,7 +821,7 @@
           @endif
           
 
-          <a target="_blank" href="https://snipeitapp.com" rel="noopener">Snipe-IT</a> is open source software, made with <i class="fas fa-heart" style="color: #a94442; font-size: 10px" aria-hidden="true"></i><span class="sr-only">love</span> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a>.
+          <a target="_blank" href="https://snipeitapp.com" rel="noopener">Cani-Asset</a> is asset management software, made with <i class="fas fa-heart" style="color: #a94442; font-size: 10px" aria-hidden="true"></i><span class="sr-only">love</span> by <a href="https://www.canaris.in/" rel="noopener">@canaris</a>.
       </footer>
 
 
