@@ -100,6 +100,7 @@ class AssetsController extends Controller
             'checkout_counter',
             'checkin_counter',
             'requests_counter',
+            'byod',
         ];
 
         $filter = [];
@@ -189,6 +190,10 @@ class AssetsController extends Controller
             $assets->ByDepreciationId($request->input('depreciation_id'));
         }
 
+        if ($request->filled('byod')) {
+            $assets->where('assets.byod', '=', $request->input('byod'));
+        }
+
         $request->filled('order_number') ? $assets = $assets->where('assets.order_number', '=', e($request->get('order_number'))) : '';
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
@@ -265,6 +270,11 @@ class AssetsController extends Controller
             case 'Deployed':
                 // more sad, horrible workarounds for laravel bugs when doing full text searches
                 $assets->where('assets.assigned_to', '>', '0');
+                break;
+            case 'byod':
+                // This is kind of redundant, since we already check for byod=1 above, but this keeps the
+                // sidebar nav links a little less chaotic
+                $assets->where('assets.byod', '=', '1');
                 break;
             default:
 

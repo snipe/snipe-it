@@ -39,6 +39,8 @@ return [
     'bulk_delete'           => 'Bulk Delete',
     'bulk_actions'          => 'Bulk Actions',
     'bulk_checkin_delete'   => 'Bulk Checkin Items from Users',
+    'byod'                  => 'BYOD',
+    'byod_help'             => 'This device is owned by the user',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'Cancel',
     'categories'			=> 'Categories',

@@ -120,6 +120,19 @@
         <br>
             @include ('partials.forms.edit.name', ['translated_name' => trans('admin/hardware/form.name')])
             @include ('partials.forms.edit.warranty')
+
+            <!-- byod checkbox -->
+            <div class="form-group">
+                <div class="col-md-7 col-md-offset-3">
+                    <label for="byod">
+                        <input type="checkbox" value="1" name="byod" class="minimal" {{ (old('remote', $item->byod)) == '1' ? ' checked="checked"' : '' }} aria-label="byod">
+                        {{ trans('general.byod') }}
+
+                    </label>
+                    <p class="help-block">{{ trans('general.byod_help') }}
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 
