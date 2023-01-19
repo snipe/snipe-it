@@ -7,6 +7,7 @@ use App\Models\AssetModel;
 use App\Helpers\Helper;
 use Illuminate\Http\Request;
 
+use function PHPUnit\Framework\isEmpty;
 
 class ProductFlowController extends Controller
 {
@@ -32,25 +33,30 @@ class ProductFlowController extends Controller
         
         */
         // $accessory = Accessory::where('model_number', '=', $request->receiveParts)->get();
-        if ($model->count() > 0) {
-            $result = $model[0]->model_number;
-            return response()->json(Helper::formatStandardApiResponse('success', $result, null));
-        }
+
         /* if($accessory->count() > 0) {
             $result = $accessory;
             return $result;
         } */
+
+
+        if ($model->count() > 0) {
+            $result = $model[0];
+            return response()->json(Helper::formatStandardApiResponse('success', $result, null));
+        }
+        
+        // Redirect if model is not found
+        if ($request->receiveParts == "0") {
+            return redirect()->route('productflow.receiving')->with('warning', "Model not found. Please click 'New' to add the model.")->with('model', $model);
+        }
             
-        return redirect()->route('productflow.receiving')->with('warning', "Model not found. Please click 'New' to add the model.");
-        // return response()->json(Helper::formatStandardApiResponse('error', null, "Model not found. Please click 'New' to add the model."));
     }
     
 
     public function store(Request $request)
     {
-        // return 'hello world';
-        $payload = ['name' => 'test', 'id' => '1'];
-        return response()->json(Helper::formatStandardApiResponse('success', $payload, 'testing'));
+        return redirect()->route('productflow.receiving')->with('success', "Successfully added $request->model_number to stock!");
+        // return response()->json(Helper::formatStandardApiResponse('success', $request->model_number, 'testing'));
     }
 
     

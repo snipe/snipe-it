@@ -4,12 +4,19 @@
     @parent
 @stop
 
-
 @section('content')
     <div class="row">
         <!-- col-md-8 -->
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0">
-            @include('modals.serialnumber')
+
+            {{-- 
+                
+                 I had to deviate from the modal framework a little bit as I was not able to pass data to it through AJAX or other mean.
+                 There might be some backend magic that I could work out later.    
+                
+            --}}
+
+            @include('modals.serialnumber') {{-- This injects the serial number modal directly to the view instead of it being called through the modal framework 'api' --}}
 
             <form id="create-form" class="form-horizontal" autocomplete="off" role="form" enctype="multipart/form-data">
 
@@ -74,27 +81,52 @@
 
 @section('moar_scripts')
     <script>
+        /* 
+            Send request via AJAX.
+            This is to improve speed. Unfortunately, I haven't found a pretty way to handle warnings with the current notifaction framework without a lot of copy/pasta
+            Copy/pasta would just be ugly. May revist this later to make it a little less chatty with the server. The idea is to keep calls to the server down and minimize redirects.
+        */
+
+        let model_number;
+
         $("#create-form").submit((e) => {
 
             $.ajax({
+                type: "get",
                 url: "/productflow/show",
-                method: "get",
                 data: {
                     receiveParts: $("#receiveParts").val()
                 },
                 success: (res) => {
                     if (res.status == "success" && (res.payload != undefined || res.payload != null)) {
-                        $("#model-Title span").remove();
-                        $("#model-Title").append(`<span>${res.payload}</span>`)
+                        model_number = res.payload.model_number
+                        // $("#model-Title span").remove();
+                        // $("#model-Title").append(`<span>${model_number}</span>`)
+                        $("#model-info span").remove();
+                        $("#model-info").append(`<span>${res.payload.name} ${model_number}</span>`)
                         $("#getSerial").modal('show');
+                        $("#modelID").val(res.payload.id);
+                        $("#model_number").val(model_number)
+                        console.dir(res)
+                    } else {
+                        window.location.href = "/productflow/show?receiveParts=0" // Redirect with a known false value that will prompt the server to load our warning for us (ugly I know)
                     }
-                    console.dir(res)
                 },
                 error: (err) => {
                     console.dir(err)
                 }
             });
             e.preventDefault();
+        });
+
+        $("#serial-number-form").submit((e) => {
+            let error_message = "Serial Number cannot be empty!";
+
+            if ($("#modal-serial_number").val() == "") {
+                $('#modal_error_msg').html(error_message).show();
+                e.preventDefault();
+            } 
+
         })
     </script>
     @include ('partials.bootstrap-table')
