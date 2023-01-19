@@ -316,13 +316,9 @@ class Asset extends Depreciable
         }
 
         $this->last_checkout = $checkout_at;
+        $this->name = $name;
 
         $this->assignedTo()->associate($target);
-
-
-        if ($name != null) {
-            $this->name = $name;
-        }
 
         if ($location != null) {
             $this->location_id = $location;
