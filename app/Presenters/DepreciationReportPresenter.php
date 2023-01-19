@@ -145,11 +145,11 @@ class DepreciationReportPresenter extends Presenter
                 "footerFormatter" => 'sumFormatter',
                 "class" => "text-right",
             ], [
-                "field" => "monthly_depreciation",
+                "field" => "depreciation_per_unit ",
                 "searchable" => true,
                 "sortable" => true,
                 "visible" => true,
-                "title" => trans('admin/hardware/table.monthly_depreciation')
+                "title" => trans('admin/hardware/table.depreciation_per_unit')
             ],[
                 "field" => "diff",
                 "searchable" => false,
