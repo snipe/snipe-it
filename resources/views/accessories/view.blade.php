@@ -327,10 +327,19 @@
 
       <div class="row">
           <div class="col-md-4" style="padding-bottom: 15px;">
-              Number remaining
+              <strong>{{ trans('admin/accessories/general.remaining') }}</strong>
           </div>
           <div class="col-md-8">
               {{ $accessory->numRemaining() }}
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="col-md-4" style="padding-bottom: 15px;">
+              <strong>{{ trans('general.checked_out') }}</strong>
+          </div>
+          <div class="col-md-8">
+              {{ $accessory->users_count }}
           </div>
       </div>
 
