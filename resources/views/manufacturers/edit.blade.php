@@ -56,7 +56,7 @@
         <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
         <div class="col-md-5">
             <label for="image_delete">
-                {{ Form::checkbox('image_delete', '1', old('image_delete'), array('class' => 'minimal', 'aria-label'=>'required')) }}
+                {{ Form::checkbox('image_delete', '1', old('image_delete'), array('class' => 'minimal', 'aria-label'=>'image_delete')) }}
             </label>
             <br>
             <img src="{{ url('/') }}/uploads/manufacturers/{{ $item->image }}" alt="Image for {{ $item->name }}" class="img-responsive">
