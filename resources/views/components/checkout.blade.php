@@ -108,6 +108,9 @@
         }).get();
 
         $('textarea[name="serials"]').val(serials_list.join("\n"));
+
+        // Update the assigned_qty field to match the number of serials selected
+        $('input[name="assigned_qty"]').val(serials_list.length);
       });
     });
   </script>
