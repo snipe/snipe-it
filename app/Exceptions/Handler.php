@@ -4,9 +4,9 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\AuthenticationException;
-use Log;
 use Throwable;
 use JsonException;
 
@@ -41,14 +41,14 @@ class Handler extends ExceptionHandler
     public function report(Throwable $exception)
     {
         if ($this->shouldReport($exception)) {
-            \Log::error($exception);
+            Log::error($exception);
             return parent::report($exception);
         }
     }
 
     /**
      * Render an exception into an HTTP response.
-     * 
+     *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $e
      * @return \Illuminate\Http\Response
@@ -123,7 +123,7 @@ class Handler extends ExceptionHandler
     }
 
 
-    /** 
+    /**
      * A list of the inputs that are never flashed for validation exceptions.
      *
      * @var array
