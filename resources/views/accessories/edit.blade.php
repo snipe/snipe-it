@@ -21,21 +21,23 @@
 @include ('partials.forms.edit.purchase_cost')
 @include ('partials.forms.edit.quantity')
 @include ('partials.forms.edit.minimum_quantity')
-
+@include ('partials.forms.edit.notes')
 
 <!-- Image -->
 @if ($item->image)
     <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
         <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
         <div class="col-md-5">
-            {{ Form::checkbox('image_delete') }}
-            <img src="{{  Storage::disk('public')->url('accessories/'.e($item->image)) }}" class="img-responsive" />
-            {!! $errors->first('image_delete', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+            <label class="control-label" for="image_delete">
+                <input type="checkbox" value="1" name="image_delete" id="image_delete" class="minimal" {{ Request::old('image_delete') == '1' ? ' checked="checked"' : '' }}>
+                {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
+            </label>
+            <div style="margin-top: 0.5em">
+                <img src="{{ Storage::disk('public')->url(app('accessories_upload_path').e($item->image)) }}" class="img-responsive" />
+            </div>
         </div>
     </div>
 @endif
-
-@include ('partials.forms.edit.notes')
 
 @include ('partials.forms.edit.image-upload')
 
