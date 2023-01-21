@@ -15,11 +15,14 @@
                     <div class="dynamic-form-row">
                         <div class="col-md-4 col-xs-12"><label for="modal-serial_number">Serial Number</label></div>
                         <div class="col-md-7 required">
-                            <input type='text' name="serialNumber" id='modal-serial_number' class="form-control"
+                            <input type="text" name="asset_tag" id="asset_tag"
+                                value="{{ \App\Models\Asset::autoincrement_asset() }}" hidden="true">
+
+                            <input type='text' name="serial_number" id='modal-serial_number' class="form-control"
                                 data-validation="required">
                         </div>
                     </div>
-                    <input type="text" id="modelID" name="modelID" hidden="true">
+                    <input type="text" id="modelID" name="model_id" hidden="true">
                     <input type="text" id="model_number" name="model_number" hidden="true">
                 </div>
                 <div class="modal-footer">
@@ -31,3 +34,9 @@
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
 </div>
+
+<script>
+    $("#getSerial").on('show.bs.modal', (e) => {
+        alert("testing");
+    })
+</script>

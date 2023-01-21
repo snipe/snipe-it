@@ -53,7 +53,7 @@
                             <div class="col-md-7 required">
 
                                 <input class="form-control" type="text" name="receiveParts" data-validation="required"
-                                    id="receiveParts" />
+                                    id="receiveParts" autofocus/>
 
                             </div>
                             @php
@@ -72,8 +72,8 @@
                     </div>
 
                 </div> <!-- ./box-body -->
+            </form>
         </div> <!-- box -->
-        </form>
     </div> <!-- col-md-8 -->
 
     </div><!-- ./row -->
@@ -82,10 +82,10 @@
 @section('moar_scripts')
     <script>
         /* 
-            Send request via AJAX.
-            This is to improve speed. Unfortunately, I haven't found a pretty way to handle warnings with the current notifaction framework without a lot of copy/pasta
-            Copy/pasta would just be ugly. May revist this later to make it a little less chatty with the server. The idea is to keep calls to the server down and minimize redirects.
-        */
+                    Send request via AJAX.
+                    This is to improve speed. Unfortunately, I haven't found a pretty way to handle warnings with the current notifaction framework without a lot of copy/pasta
+                    Copy/pasta would just be ugly. May revist this later to make it a little less chatty with the server. The idea is to keep calls to the server down and minimize redirects.
+                */
 
         let model_number;
 
@@ -100,16 +100,15 @@
                 success: (res) => {
                     if (res.status == "success" && (res.payload != undefined || res.payload != null)) {
                         model_number = res.payload.model_number
-                        // $("#model-Title span").remove();
-                        // $("#model-Title").append(`<span>${model_number}</span>`)
                         $("#model-info span").remove();
                         $("#model-info").append(`<span>${res.payload.name} ${model_number}</span>`)
                         $("#getSerial").modal('show');
                         $("#modelID").val(res.payload.id);
                         $("#model_number").val(model_number)
-                        console.dir(res)
+                        // console.dir(res)
                     } else {
-                        window.location.href = "/productflow/show?receiveParts=0" // Redirect with a known false value that will prompt the server to load our warning for us (ugly I know)
+                        window.location.href =
+                            "/productflow/show?receiveParts=0" // Redirect with a known false value that will prompt the server to load our warning for us (ugly I know)
                     }
                 },
                 error: (err) => {
@@ -125,9 +124,15 @@
             if ($("#modal-serial_number").val() == "") {
                 $('#modal_error_msg').html(error_message).show();
                 e.preventDefault();
-            } 
+            }
 
-        })
+        });
+        // Autofocus to the modal serial number field (less clicking = happier users)
+        $("#getSerial").on('show.bs.modal', (e) => {
+            setTimeout(() => {
+                $("#modal-serial_number").focus()
+            }, 300);
+        });
     </script>
     @include ('partials.bootstrap-table')
 @stop

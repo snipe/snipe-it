@@ -6,7 +6,7 @@
             <h2 class="modal-title">{{ trans('admin/models/table.create') }}</h2>
         </div>
         <div class="modal-body">
-            <form action="{{ route('api.models.store') }}" onsubmit="return false">
+            <form id="test" action="{{ route('api.models.store') }}" onsubmit="return false">
                 <div class="alert alert-danger" id="modal_error_msg" style="display:none">
                 </div>
                 <div class="dynamic-form-row">

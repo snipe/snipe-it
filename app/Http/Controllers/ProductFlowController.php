@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use App\Models\Asset;
+use App\Models\Company;
+use App\Models\Statuslabel;
 use App\Models\Accessory;
 use App\Models\AssetModel;
 use App\Helpers\Helper;
@@ -15,7 +19,7 @@ class ProductFlowController extends Controller
     {
         return view('productflow/receiving');
     }
-        
+
     public function show(Request $request)
     {
         $model = AssetModel::where('model_number', '=', $request->receiveParts)->get();
@@ -44,20 +48,35 @@ class ProductFlowController extends Controller
             $result = $model[0];
             return response()->json(Helper::formatStandardApiResponse('success', $result, null));
         }
-        
+
         // Redirect if model is not found
         if ($request->receiveParts == "0") {
             return redirect()->route('productflow.receiving')->with('warning', "Model not found. Please click 'New' to add the model.")->with('model', $model);
         }
-            
     }
-    
+
 
     public function store(Request $request)
     {
-        return redirect()->route('productflow.receiving')->with('success', "Successfully added $request->model_number to stock!");
-        // return response()->json(Helper::formatStandardApiResponse('success', $request->model_number, 'testing'));
-    }
+        $this->authorize(Asset::class);
+        $model_number = $request->input('model_number');
 
-    
+        $asset = new Asset();
+
+        $asset->asset_tag               = $request->input('asset_tag');
+        $asset->company_id              = Company::select('id')->where('name', '=', 'ETI')->get()[0]->id; // Hardcoded to ETI
+        $asset->model_id                = AssetModel::select('id')->where('model_number', '=', $request->input('model_number'))->get()[0]->id;
+        $asset->serial                  = $request->input('serial_number');
+        $asset->user_id                 = Auth::id();
+        $asset->archived                = '0';
+        $asset->physical                = '1';
+        $asset->depreciate              = '0';
+        $asset->status_id               = Statuslabel::select('id')->where('name', '=', 'stock')->get()[0]->id;
+        $asset->requestable             = 0;
+
+        if ($asset->save()) {
+            return redirect()->route('productflow.receiving')->with('success', "Successfully added $model_number to stock!");
+        }
+        return redirect()->back()->withInput()->withErrors($asset->getErrors());
+    }
 }
