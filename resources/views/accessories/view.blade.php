@@ -290,7 +290,7 @@
       @if ($accessory->company)
           <div class="row">
               <div class="col-md-4" style="padding-bottom: 15px;">
-                  {{ trans('general.company')}}
+                  <strong> {{ trans('general.company')}}</strong>
               </div>
               <div class="col-md-8">
                   <a href="{{ route('companies.show', $accessory->company->id) }}">{{ $accessory->company->name }} </a>
@@ -302,7 +302,7 @@
       @if ($accessory->category)
           <div class="row">
               <div class="col-md-4" style="padding-bottom: 15px;">
-                  {{ trans('general.category')}}
+                  <strong>{{ trans('general.category')}}</strong>
               </div>
               <div class="col-md-8">
                   <a href="{{ route('categories.show', $accessory->category->id) }}">{{ $accessory->category->name }} </a>
