@@ -163,8 +163,8 @@ class AssetPresenter extends Presenter
             ], [
                 'field' => 'eol',
                 'searchable' => false,
-                'sortable' => false,
-                'visible' => false,
+                'sortable' => true,
+                'visible' => true,
                 'title' => trans('general.eol'),
                 'formatter' => 'dateDisplayFormatter',
             ], [
