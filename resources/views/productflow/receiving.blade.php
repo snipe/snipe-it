@@ -16,7 +16,10 @@
                 
             --}}
 
-            @include('modals.serialnumber') {{-- This injects the serial number modal directly to the view instead of it being called through the modal framework 'api' --}}
+            {{-- This injects the serial number & accessory modals directly to the view instead of it being called through the modal framework 'api' --}}
+            @include('modals.serialnumber') 
+            @include('modals.accessory')
+
 
             <form id="create-form" class="form-horizontal" autocomplete="off" role="form" enctype="multipart/form-data">
 
@@ -53,7 +56,7 @@
                             <div class="col-md-7 required">
 
                                 <input class="form-control" type="text" name="receiveParts" data-validation="required"
-                                    id="receiveParts" autofocus/>
+                                    id="receiveParts" autofocus />
 
                             </div>
                             @php
@@ -82,14 +85,30 @@
 @section('moar_scripts')
     <script>
         /* 
-                    Send request via AJAX.
-                    This is to improve speed. Unfortunately, I haven't found a pretty way to handle warnings with the current notifaction framework without a lot of copy/pasta
-                    Copy/pasta would just be ugly. May revist this later to make it a little less chatty with the server. The idea is to keep calls to the server down and minimize redirects.
-                */
+            Send request via AJAX.
+            This is to improve speed. Unfortunately, I haven't found a pretty way to handle warnings with the current notifaction framework without a lot of copy/pasta
+            May revist this later to make it a little less chatty with the server. The idea is to keep calls to the server down and minimize redirects.
+        */
 
-        let model_number;
 
         $("#create-form").submit((e) => {
+            let asset = (data) => {
+                let model_number = data.payload.model_number;
+                $("#model-info span").remove();
+                $("#model-info").append(`<span>${data.payload.name} ${model_number}</span>`)
+                $("#getSerial").modal('show');
+                $("#modelID").val(data.payload.id);
+                $("#model_number").val(model_number)
+            }
+
+            let accessory = (data) => {
+                let model_number = data.payload.model_number;
+                $("#accessory-info span").remove();
+                $("#accessory-info").append(`<span>${data.payload.name} ${model_number}</span>`)
+                $("#accessoryQTY").modal('show');
+                $("#accessory-modelID").val(data.payload.id);
+                $("#accessory-model_number").val(model_number);
+            }
 
             $.ajax({
                 type: "get",
@@ -98,17 +117,14 @@
                     receiveParts: $("#receiveParts").val()
                 },
                 success: (res) => {
+
                     if (res.status == "success" && (res.payload != undefined || res.payload != null)) {
-                        model_number = res.payload.model_number
-                        $("#model-info span").remove();
-                        $("#model-info").append(`<span>${res.payload.name} ${model_number}</span>`)
-                        $("#getSerial").modal('show');
-                        $("#modelID").val(res.payload.id);
-                        $("#model_number").val(model_number)
-                        // console.dir(res)
+                        (res.messages == "asset") ? asset(res) : accessory(res);
+
+                        console.dir(res)
                     } else {
-                        window.location.href =
-                            "/productflow/show?receiveParts=0" // Redirect with a known false value that will prompt the server to load our warning for us (ugly I know)
+                        // Redirect with a known false value that will prompt the server to load our warning for us (ugly I know)
+                        window.location.href = "/productflow/show?receiveParts=0"
                     }
                 },
                 error: (err) => {
@@ -122,17 +138,42 @@
             let error_message = "Serial Number cannot be empty!";
 
             if ($("#modal-serial_number").val() == "") {
-                $('#modal_error_msg').html(error_message).show();
+                $('#modal_error_msg').html(error_message).slideDown("fast");
                 e.preventDefault();
             }
 
         });
-        // Autofocus to the modal serial number field (less clicking = happier users)
+
+        $("#accessory-form").submit((e) => {
+            let error_message = "QTY cannot be empty!";
+
+            if ($("#modal-accessory_qty").val() == "") {
+                $('#accessory_modal_error_msg').html(error_message).slideDown("fast");
+                e.preventDefault();
+            }
+
+        });
+        // Autofocus to the modal field (less clicking = happier users)
         $("#getSerial").on('show.bs.modal', (e) => {
             setTimeout(() => {
                 $("#modal-serial_number").focus()
             }, 300);
         });
+        $("#accessoryQTY").on('show.bs.modal', (e) => {
+            setTimeout(() => {
+                $("#modal-accessory_qty").focus()
+            }, 300);
+        });
+
+        $("#getSerial").on('hide.bs.modal', (e) => {
+            $("#receiveParts").focus();
+            $("#modal_error_msg").slideUp("fast");
+        });
+        $("#accessoryQTY").on('hide.bs.modal', (e) => {
+            $("#receiveParts").focus();
+            $("#accessory_modal_error_msg").slideUp("fast");
+        });
+
     </script>
     @include ('partials.bootstrap-table')
 @stop
