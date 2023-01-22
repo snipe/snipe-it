@@ -131,7 +131,7 @@ class UsersController extends Controller
         $user->permissions = json_encode($permissions_array);
 
         // we have to invoke the
-        app(\App\Http\Requests\ImageUploadRequest::class)->handleImages($user, 600, 'image', 'avatars', 'avatar');
+        app(\App\Http\Requests\ImageUploadRequest::class)->handleImages($user, 600, 'avatar', 'avatars', 'avatar');
 
         if ($user->save()) {
             if ($request->filled('groups')) {
