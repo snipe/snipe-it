@@ -1,8 +1,8 @@
 <div class="form-group {{ $errors->has((isset($fieldname) ? $fieldname : 'image')) ? 'has-error' : '' }}">
-    <label class="col-md-3 control-label" for="image">{{ trans('general.image_upload') }}</label>
+    <label class="col-md-3 control-label" for="{{ (isset($fieldname) ? $fieldname : 'image') }}">{{ trans('general.image_upload') }}</label>
     <div class="col-md-9">
 
-        <input type="file" id="image" name="{{ (isset($fieldname) ? $fieldname : 'image') }}" aria-label="{{ (isset($fieldname) ? $fieldname : 'image') }}" class="sr-only">
+        <input type="file" id="{{ (isset($fieldname) ? $fieldname : 'image') }}" name="{{ (isset($fieldname) ? $fieldname : 'image') }}" aria-label="{{ (isset($fieldname) ? $fieldname : 'image') }}" class="sr-only">
 
         <label class="btn btn-default" aria-hidden="true">
             {{ trans('button.select_file')  }}
@@ -14,7 +14,7 @@
         {!! $errors->first('image', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
     </div>
     <div class="col-md-4 col-md-offset-3" aria-hidden="true">
-        <img id="uploadFile-imagePreview" style="max-width: 200px; display: none;" alt="{{ trans('partials/forms/general.alt_uploaded_image_thumbnail') }}">
+        <img id="uploadFile-imagePreview" style="max-width: 300px; display: none;" alt="{{ trans('partials/forms/general.alt_uploaded_image_thumbnail') }}">
     </div>
 </div>
 
