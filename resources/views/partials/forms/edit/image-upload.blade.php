@@ -2,11 +2,11 @@
     <label class="col-md-3 control-label" for="image">{{ trans('general.image_upload') }}</label>
     <div class="col-md-9">
 
-        <input type="file" id="image" name="{{ (isset($fieldname) ? $fieldname : 'image') }}" aria-label="image" class="sr-only">
+        <input type="file" id="image" name="{{ (isset($fieldname) ? $fieldname : 'image') }}" aria-label="{{ (isset($fieldname) ? $fieldname : 'image') }}" class="sr-only">
 
         <label class="btn btn-default" aria-hidden="true">
             {{ trans('button.select_file')  }}
-            <input type="file" name="{{ (isset($fieldname) ? $fieldname : 'image') }}" class="js-uploadFile" id="uploadFile" data-maxsize="{{ Helper::file_upload_max_size() }}" accept="image/gif,image/jpeg,image/webp,image/png,image/svg,image/svg+xml" style="display:none; max-width: 90%" aria-label="image" aria-hidden="true">
+            <input type="file" name="{{ (isset($fieldname) ? $fieldname : 'image') }}" class="js-uploadFile" id="uploadFile" data-maxsize="{{ Helper::file_upload_max_size() }}" accept="image/gif,image/jpeg,image/webp,image/png,image/svg,image/svg+xml" style="display:none; max-width: 90%" aria-label="{{ (isset($fieldname) ? $fieldname : 'image') }}" aria-hidden="true">
         </label>
         <span class='label label-default' id="uploadFile-info"></span>
 
