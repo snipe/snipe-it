@@ -46,5 +46,6 @@ class MigrationCartalystSentryInstallGroups extends Migration
     {
         // See 2014_11_04_231416_update_group_field_for_reporting.php and 2019_06_12_184327_rename_groups_table.php
         Schema::dropIfExists('permission_groups');
+        Schema::dropIfExists('groups');
     }
 }
