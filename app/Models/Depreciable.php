@@ -68,59 +68,30 @@ class Depreciable extends SnipeModel
      */
     public function getLinearDepreciatedValue() // TODO - for testing it might be nice to have an optional $relative_to param here, defaulted to 'now'
 
-    {
-        if ($this->purchase_date) {
-            $days_passed = ($this->purchase_date->diffinDays(now()));
+    { if ($this->purchase_date) {
+        $months_passed = ($this->purchase_date->diff(now())->m)+($this->purchase_date->diff(now())->y*12);
+    } else {
+        return null;
+    }
 
-        } else {
-            return null;
-        }
+        if ($months_passed >= $this->get_depreciation()->months){
+            //if there is a floor use it
+            if(!$this->get_depreciation()->depreciation_min == null) {
 
-        if ($this->get_depreciation()->term_type == "days") {
+                $current_value = $this->get_depreciation()->depreciation_min;
 
-            if ($days_passed >= $this->get_depreciation()->term_length) {
-                //if there is a floor use it
-                if (!$this->get_depreciation()->depreciation_min == null) {
-
-                    $current_value = $this->get_depreciation()->depreciation_min;
-
-                } else {
-                    $current_value = 0;
-                }
-            } else {
-
-                $current_value = round(($this->purchase_cost - ($this->purchase_cost - ($this->get_depreciation()->depreciation_min)) * ($days_passed / $this->get_depreciation()->term_length)), 2);
-
+            }else{
+                $current_value = 0;
             }
+        }
+        else {
+            // The equation here is (Purchase_Cost-Floor_min)*(Months_passed/Months_til_depreciated)
+            $current_value = round(($this->purchase_cost-($this->purchase_cost - ($this->get_depreciation()->depreciation_min)) * ($months_passed / $this->get_depreciation()->months)), 2);
 
-            return $current_value;
         }
 
-//        else {
-//                if ($this->purchase_date) {
-//                    $months_passed = ($this->purchase_date->diff(now())->m) + ($this->purchase_date->diff(now())->y * 12);
-//                } else {
-//                    return null;
-//                }
-//
-//                if ($months_passed >= $this->get_depreciation()->term_length) {
-//                    //if there is a floor use it
-//                    if (!$this->get_depreciation()->depreciation_min == null) {
-//
-//                        $current_value = $this->get_depreciation()->depreciation_min;
-//
-//                    } else {
-//                        $current_value = 0;
-//                    }
-//                } else {
-//                    // The equation here is (Purchase_Cost-Floor_min)*(Months_passed/Months_til_depreciated)
-//                    $current_value = round(($this->purchase_cost - ($this->purchase_cost - ($this->get_depreciation()->depreciation_min)) * ($months_passed / $this->get_depreciation()->term_length)), 2);
-//
-//                }
-//
-//                return $current_value;
-//            }
-        }
+        return $current_value;
+    }
 
     public function getMonthlyDepreciation(){
 
