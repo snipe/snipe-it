@@ -106,7 +106,7 @@
                 $("#accessory-info span").remove();
                 $("#accessory-info").append(`<span>${data.payload.name} ${model_number}</span>`)
                 $("#accessoryQTY").modal('show');
-                $("#accessory-modelID").val(data.payload.id);
+                $("#accessory-id").val(data.payload.id);
                 $("#accessory-model_number").val(model_number);
             }
 

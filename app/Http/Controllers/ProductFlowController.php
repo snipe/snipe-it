@@ -11,8 +11,6 @@ use App\Models\AssetModel;
 use App\Helpers\Helper;
 use Illuminate\Http\Request;
 
-use function PHPUnit\Framework\isEmpty;
-
 class ProductFlowController extends Controller
 {
     public function index()
@@ -24,9 +22,11 @@ class ProductFlowController extends Controller
     {
         $accessory = Accessory::where('model_number', '=', $request->receiveParts)->get();
 
-        $model = AssetModel::where('model_number', '=', $request->receiveParts)->get();     
+        // $upc = Accessory::where('upc', '=', $request->receiveParts)->get();
 
-        if($accessory->count() > 0) {
+        $model = AssetModel::where('model_number', '=', $request->receiveParts)->get();
+
+        if ($accessory->count() > 0) {
             $result = $accessory[0];
             return response()->json(Helper::formatStandardApiResponse('success', $result, "accessory"));
         }
@@ -45,49 +45,42 @@ class ProductFlowController extends Controller
 
     public function store(Request $request)
     {
-        if ($request->input('serial_number')) {
-            $this->authorize(Asset::class);
-            $model_number = $request->input('model_number');
+        $this->authorize(Asset::class);
+        $model_number = $request->input('model_number');
 
-            $asset = new Asset();
+        $asset = new Asset();
 
-            $asset->asset_tag               = $request->input('asset_tag');
-            $asset->company_id              = Company::select('id')->where('name', '=', 'ETI')->get()[0]->id; // Hardcoded to ETI
-            $asset->model_id                = AssetModel::select('id')->where('model_number', '=', $request->input('model_number'))->get()[0]->id;
-            $asset->serial                  = $request->input('serial_number');
-            $asset->user_id                 = Auth::id();
-            $asset->archived                = '0';
-            $asset->physical                = '1';
-            $asset->depreciate              = '0';
-            $asset->status_id               = Statuslabel::select('id')->where('name', '=', 'stock')->get()[0]->id;
-            $asset->requestable             = 0;
+        $asset->asset_tag               = $request->input('asset_tag');
+        $asset->company_id              = Company::select('id')->where('name', '=', 'ETI')->get()[0]->id; // Hardcoded to ETI
+        $asset->model_id                = AssetModel::select('id')->where('model_number', '=', $request->input('model_number'))->get()[0]->id;
+        $asset->serial                  = $request->input('serial_number');
+        $asset->user_id                 = Auth::id();
+        $asset->archived                = '0';
+        $asset->physical                = '1';
+        $asset->depreciate              = '0';
+        $asset->status_id               = Statuslabel::select('id')->where('name', '=', 'stock')->get()[0]->id;
+        $asset->requestable             = 0;
 
-            if ($asset->save()) {
-                return redirect()->route('productflow.receiving')->with('success', "Successfully added $model_number to stock!");
-            }
-            return redirect()->back()->withInput()->withErrors($asset->getErrors());
+        if ($asset->save()) {
+            return redirect()->route('productflow.receiving')->with('success', "Successfully added $model_number to stock!");
+        }
+        return redirect()->back()->withInput()->withErrors($asset->getErrors());
+    }
+
+    public function update(Request $request) {
+        $accessory = Accessory::find($request->input('accessory_id'));
+        $accessory_name = $accessory->name;
+
+        $qty = $accessory->qty + intval($request->input('accessory_qty'));
+        
+        if (is_null($accessory)) {
+            return redirect()->route('productflow.receiving')->with('warning', "Accessory not found. Please click 'New' to add the accessory.");
         }
 
-        // Need to finish the DB logic. Going to need to do a complete rework compared to the above code as this section needs to just update the accessory. This should have it's own public function actually....
-       /*  if ($request->input('accessory_qty')) {
-            $this->authorize(Accessory::class);
-            $model_number = $request->input('model_number');
-
-            $accessory = new Accessory();
-
-            $accessory->asset_tag               = $request->input('asset_tag');
-            $accessory->model_id                = AssetModel::select('id')->where('model_number', '=', $request->input('model_number'))->get()[0]->id;
-            $accessory->user_id                 = Auth::id();
-            $accessory->archived                = '0';
-            $accessory->physical                = '1';
-            $accessory->depreciate              = '0';
-            $accessory->status_id               = Statuslabel::select('id')->where('name', '=', 'stock')->get()[0]->id;
-            $accessory->requestable             = 0;
-
-            if ($asset->save()) {
-                return redirect()->route('productflow.receiving')->with('success', "Successfully added $model_number to stock!");
-            }
-            return redirect()->back()->withInput()->withErrors($accessory->getErrors());
-        } */
+        $accessory->qty = $qty;
+        if ($accessory->save()) {
+            return redirect()->route('productflow.receiving')->with('success', "Successfully updated $accessory_name to $qty!");
+        }
+        return redirect()->back()->withInput()->withErrors($accessory->getErrors());
     }
 }

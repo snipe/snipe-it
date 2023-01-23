@@ -1,6 +1,6 @@
 <div id="accessoryQTY" class="modal fade">
     <div class="modal-dialog">
-        <form id="accessory-form" method="post" action="{{ route('productflow.receiving.store') }}">
+        <form id="accessory-form" method="post" action="{{ route('productflow.receiving.update') }}">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -19,7 +19,7 @@
                                 data-validation="required">
                         </div>
                     </div>
-                    <input type="text" id="accessory-modelID" name="accessory_model_id" hidden="true">
+                    <input type="text" id="accessory-id" name="accessory_id" hidden="true">
                     <input type="text" id="accessory-model_number" name="accessory_model_number" hidden="true">
                 </div>
                 <div class="modal-footer">
