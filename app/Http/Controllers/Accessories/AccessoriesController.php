@@ -63,6 +63,7 @@ class AccessoriesController extends Controller
     public function store(ImageUploadRequest $request)
     {
         $this->authorize(Accessory::class);
+        
         // create a new model instance
         $accessory = new Accessory();
 
@@ -81,7 +82,6 @@ class AccessoriesController extends Controller
         $accessory->user_id                 = Auth::user()->id;
         $accessory->supplier_id             = request('supplier_id');
         $accessory->notes                   = request('notes');
-
 
         $accessory = $request->handleImages($accessory);
 
@@ -129,6 +129,8 @@ class AccessoriesController extends Controller
     {
         if ($accessory = Accessory::withCount('users as users_count')->find($accessoryId)) {
 
+            $this->authorize($accessory);
+
             $validator = Validator::make($request->all(), [
                 "qty" => "required|numeric|min:$accessory->users_count"
             ]);
@@ -139,7 +141,7 @@ class AccessoriesController extends Controller
                     ->withInput();
             }
 
-            $this->authorize($accessory);
+
 
             // Update the accessory data
             $accessory->name = request('name');
