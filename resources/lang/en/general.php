@@ -3,6 +3,7 @@
 return [
     'accessories'			=> 'Accessories',
     'activated'			    => 'Activated',
+    'accepted_date'         => 'Date Accepted',
     'accessory'				=> 'Accessory',
     'accessory_report'		=> 'Accessory Report',
     'action'                => 'Action',
@@ -27,7 +28,9 @@ return [
     'audit'				    => 'Audit',
     'audit_report'			=> 'Audit Log',
     'assets'				=> 'Assets',
+    'assigned_date'         => 'Date Assigned',
     'assigned_to'           => 'Assigned to :name',
+    'assignee'              => 'Assigned to',
     'avatar_delete'         => 'Delete Avatar',
     'avatar_upload'         => 'Upload Avatar',
     'back'      			=> 'Back',
