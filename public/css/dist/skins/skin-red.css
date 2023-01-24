@@ -207,4 +207,7 @@ a.btn-danger:visited {
 .search-highlight:hover {
   background-color: #e9d15b;
 }
+.far fa-life-ring {
+  color: var(--link);
+}
 

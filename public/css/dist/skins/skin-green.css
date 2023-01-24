@@ -195,6 +195,9 @@ a:visited {
 .text-primary {
   color: #004023;
 }
+.far fa-life-ring {
+  color: var(--link);
+}
 .fixed-table-container tbody .selected td {
   background-color: #fff8af;
 }

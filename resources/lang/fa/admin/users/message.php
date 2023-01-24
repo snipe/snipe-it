@@ -18,6 +18,7 @@ return array(
 ',
     'user_has_no_email'         => 'این کاربر آدرس ایمیلی در نمایه خود ندارد.
 ',
+    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
 
 
     'success' => array(
@@ -62,4 +63,8 @@ return array(
         'invalidfiles' => 'یک یا چندی از فایل های شما با پسوند غیرمجاز هستند.پسوند های مجاز شامل:png, gif, jpg, doc, docx, pdf و text می باشند.',
     ),
 
+    'inventorynotification' => array(
+        'error'   => 'This user has no email set.',
+        'success' => 'The user has been notified about their current inventory.'
+    )
 );

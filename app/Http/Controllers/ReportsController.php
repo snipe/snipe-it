@@ -763,7 +763,7 @@ class ReportsController extends Controller
                     if ($request->filled('username')) {
                         // Only works if we're checked out to a user, not anything else.
                         if ($asset->checkedOutToUser()) {
-                            $row[] = ($asset->assignedTo) ? $asset->assignedTo->username : '';
+                            $row[] = ($asset->assignedto) ? $asset->assignedto->username : '';
                         } else {
                             $row[] = ''; // Empty string if unassigned
                         }
@@ -772,7 +772,7 @@ class ReportsController extends Controller
                     if ($request->filled('employee_num')) {
                         // Only works if we're checked out to a user, not anything else.
                         if ($asset->checkedOutToUser()) {
-                            $row[] = ($asset->assignedTo) ? $asset->assignedTo->employee_num : '';
+                            $row[] = ($asset->assignedto) ? $asset->assignedto->employee_num : '';
                         } else {
                             $row[] = ''; // Empty string if unassigned
                         }
@@ -780,7 +780,7 @@ class ReportsController extends Controller
 
                     if ($request->filled('manager')) {
                         if ($asset->checkedOutToUser()) {
-                            $row[] = (($asset->assignedTo) && ($asset->assignedTo->manager)) ? $asset->assignedTo->manager->present()->fullName : '';
+                            $row[] = (($asset->assignedto) && ($asset->assignedto->manager)) ? $asset->assignedto->manager->present()->fullName : '';
                         } else {
                             $row[] = ''; // Empty string if unassigned
                         }
@@ -788,7 +788,7 @@ class ReportsController extends Controller
 
                     if ($request->filled('department')) {
                         if ($asset->checkedOutToUser()) {
-                            $row[] = (($asset->assignedTo) && ($asset->assignedTo->department)) ? $asset->assignedTo->department->name : '';
+                            $row[] = (($asset->assignedto) && ($asset->assignedto->department)) ? $asset->assignedto->department->name : '';
                         } else {
                             $row[] = ''; // Empty string if unassigned
                         }
@@ -796,7 +796,7 @@ class ReportsController extends Controller
 
                     if ($request->filled('title')) {
                         if ($asset->checkedOutToUser()) {
-                            $row[] = ($asset->assignedTo) ? $asset->assignedTo->jobtitle : '';
+                            $row[] = ($asset->assignedto) ? $asset->assignedto->jobtitle : '';
                         } else {
                             $row[] = ''; // Empty string if unassigned
                         }
@@ -1110,13 +1110,19 @@ class ReportsController extends Controller
         $rows[] = implode(',', $header);
 
         foreach ($assetsForReport as $item) {
-            $row    = [ ];
-            $row[]  = str_replace(',', '', e($item['assetItem']->model->category->name));
-            $row[]  = str_replace(',', '', e($item['assetItem']->model->name));
-            $row[]  = str_replace(',', '', e($item['assetItem']->name));
-            $row[]  = str_replace(',', '', e($item['assetItem']->asset_tag));
-            $row[]  = str_replace(',', '', e(($item['acceptance']->assignedTo) ? $item['acceptance']->assignedTo->present()->name() : trans('admin/reports/general.deleted_user')));
-            $rows[] = implode(',', $row);
+
+            if ($item['assetItem'] != null){
+            
+                $row    = [ ];
+                $row[]  = str_replace(',', '', e($item['assetItem']->model->category->name));
+                $row[]  = str_replace(',', '', e($item['assetItem']->model->name));
+                $row[]  = str_replace(',', '', e($item['assetItem']->name));
+                $row[]  = str_replace(',', '', e($item['assetItem']->asset_tag));
+                $row[]  = str_replace(',', '', e(($item['acceptance']->assignedTo) ? $item['acceptance']->assignedTo->present()->name() : trans('admin/reports/general.deleted_user')));
+                $rows[] = implode(',', $row);
+            } else {
+                // Log the error maybe?
+            }
         }
 
         // spit out a csv

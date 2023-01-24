@@ -52,6 +52,13 @@ class AssetCountForSidebar
             \Log::debug($e);
         }
 
+        try {
+            $total_byod_sidebar = Asset::where('byod', '=', '1')->count();
+            view()->share('total_byod_sidebar', $total_byod_sidebar);
+        } catch (\Exception $e) {
+            \Log::debug($e);
+        }
+
         return $next($request);
     }
 }

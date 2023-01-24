@@ -463,16 +463,20 @@
                 </td>
                 <td>
                   @if ($file->filename)
-                    @if ( Helper::checkUploadIsImage($file->get_src('licenses')))
+                    @if ((Storage::exists('private_uploads/licenses/'.$file->filename)) && ( Helper::checkUploadIsImage($file->get_src('licenses'))))
                       <a href="{{ route('show.licensefile', ['licenseId' => $license->id, 'fileId' => $file->id, 'download' => 'false']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show.licensefile', ['licenseId' => $license->id, 'fileId' => $file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
                     @endif
                   @endif
                 </td>
                 <td>
-                  {{ $file->filename }}
+                  @if (Storage::exists('private_uploads/licenses/'.$file->filename))
+                    {{ $file->filename }}
+                  @else
+                    <del>{{ $file->filename }}</del>
+                  @endif
                 </td>
-                <td data-value="{{ Storage::size('private_uploads/licenses/'.$file->filename) }}">
-                  {{ Helper::formatFilesizeUnits(Storage::size('private_uploads/licenses/'.$file->filename)) }}
+                <td data-value="{{ (Storage::exists('private_uploads/licenses/'.$file->filename)) ? Storage::size('private_uploads/licenses/'.$file->filename) : '' }}">
+                  {{ (Storage::exists('private_uploads/licenses/'.$file->filename)) ? Helper::formatFilesizeUnits(Storage::size('private_uploads/licenses/'.$file->filename)) : '' }}
                 </td>
 
                 <td>

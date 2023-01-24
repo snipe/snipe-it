@@ -44,4 +44,6 @@ return [
     'db_convert_warning' => '警告。此字段作为 <code>:db_column</code> 的自定义字段表，但应该是 <code>:expected</code>。',
     'is_unique' => '此值在所有资产中必须是唯一的',
     'unique' => '唯一的',
+    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
+    'display_in_user_view_table' => 'Visible to User',
 ];

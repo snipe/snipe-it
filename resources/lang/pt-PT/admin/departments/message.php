@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'Departamento não existe.',
+    'department_already_exists' => 'A department already exists with that name at this company location. Or choose a more specific name for this department. ',
     'assoc_users'	 => 'Este departamento está atualmente associado a pelo menos um usuário e não pode ser excluído. Atualize seus usuários para não mais fazer referência a este departamento e tente novamente.',
     'create' => array(
         'error'   => 'O departamento não foi criado, tente novamente.',

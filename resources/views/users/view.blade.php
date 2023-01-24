@@ -179,17 +179,23 @@
 
                 @can('view', $user)
                 <div class="col-md-12" style="padding-top: 5px;">
+                @if($user->allAssignedCount() != '0') 
                   <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print" target="_blank" rel="noopener">{{ trans('admin/users/general.print_assigned') }}</a>
+                  @else
+                  <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_assets_assigned') }}">{{ trans('admin/users/general.print_assigned') }}</button>
+                @endif
                 </div>
                 @endcan
 
                 @can('view', $user)
                   <div class="col-md-12" style="padding-top: 5px;">
-                  @if(!empty($user->email))
+                  @if(!empty($user->email) && ($user->allAssignedCount() != '0'))
                     <form action="{{ route('users.email',['userId'=> $user->id]) }}" method="POST">
                       {{ csrf_field() }}
                       <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener">{{ trans('admin/users/general.email_assigned') }}</button>
                     </form>
+                  @elseif(!empty($user->email) && ($user->allAssignedCount() == '0'))
+                      <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_assets_assigned') }}">{{ trans('admin/users/general.email_assigned') }}</button>
                   @else
                       <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_email') }}">{{ trans('admin/users/general.email_assigned') }}</button>
                   @endif
@@ -197,13 +203,17 @@
                 @endcan
 
                 @can('update', $user)
-                  @if (($user->activated == '1') && ($user->email != '') && ($user->ldap_import == '0'))
-                      <div class="col-md-12" style="padding-top: 5px;">
-                        <form action="{{ route('users.password',['userId'=> $user->id]) }}" method="POST">
+                  @if (($user->activated == '1') && ($user->ldap_import == '0'))
+                  <div class="col-md-12" style="padding-top: 5px;">
+                    @if($user->email != '')
+                      <form action="{{ route('users.password',['userId'=> $user->id]) }}" method="POST">
                           {{ csrf_field() }}
-                          <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('button.send_password_link') }}</button>
-                        </form>
-                      </div>
+                      <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('button.send_password_link') }}</button>
+                      </form>
+                    @else
+                      <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_email') }}">{{ trans('button.send_password_link') }}</button> 
+                    @endif
+                  </div>
                   @endif
                 @endcan
 
@@ -740,18 +750,20 @@
                     }'>
               <thead>
                 <tr>
-                  <th class="col-md-5">{{ trans('general.name') }}</th>
-                  <th class="col-md-6" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
-                  <th class="col-md-1 hidden-print">{{ trans('general.action') }}</th>
+                    <th class="col-md-5">{{ trans('general.name') }}</th>
+                    <th class-="col-md-5" data-fieldname="note">{{ trans('general.notes') }}</th>
+                    <th class="col-md-1" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
+                    <th class="col-md-1 hidden-print">{{ trans('general.action') }}</th>
                 </tr>
               </thead>
               <tbody>
                   @foreach ($user->accessories as $accessory)
                   <tr>
                     <td>{!!$accessory->present()->nameUrl()!!}</td>
-                    <td>
+                      <td>{!! $accessory->pivot->note !!}</td>
+                      <td>
                       {!! Helper::formatCurrencyOutput($accessory->purchase_cost) !!}
-                    </td>
+                      </td>
                     <td class="hidden-print">
                       @can('checkin', $accessory)
                         <a href="{{ route('accessories.checkin.show', array('accessoryID'=> $accessory->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
@@ -935,7 +947,8 @@
                   @if  ($snipeSettings->require_accept_signature=='1')
                       <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
                   @endif
-                <th class="col-sm-3" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
+                  <th class="col-sm-3" data-field="item.serial" data-visible="false">{{ trans('admin/hardware/table.serial') }}</th>
+                  <th class="col-sm-3" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
                 <th class="col-sm-2" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
               </tr>
               </thead>

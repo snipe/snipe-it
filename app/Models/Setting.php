@@ -21,11 +21,10 @@ class Setting extends Model
     use Notifiable, ValidatingTrait;
 
     /**
-     * The app settings cache key name.
-     *
-     * @var string
+     * The cache property so that multiple invocations of this will only load the Settings record from disk only once
+     * @var self
      */
-    const APP_SETTINGS_KEY = 'snipeit_app_settings';
+    public static ?self $_cache = null;
 
     /**
      * The setup check cache key name.
@@ -98,14 +97,15 @@ class Setting extends Model
      */
     public static function getSettings(): ?self
     {
-        return Cache::rememberForever(self::APP_SETTINGS_KEY, function () {
+        if (!self::$_cache) {
             // Need for setup as no tables exist
             try {
-                return self::first();
+                self::$_cache = self::first();
             } catch (\Throwable $th) {
                 return null;
             }
-        });
+        }
+        return self::$_cache;
     }
 
     /**

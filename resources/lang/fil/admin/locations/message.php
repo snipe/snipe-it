@@ -6,6 +6,8 @@ return array(
     'assoc_users'	 => 'Ang lokasyong ito ay kasalukuyang naiugnay sa hindi bumaba sa isang user at hindi maaaring mai-delete. Mangyaring i-update ang iyong mga user upang hindi na magreperens sa lokasyong ito at paki-subok muli. ',
     'assoc_assets'	 => 'Ang lokasyong ito ay kasalukuyang naiugnay sa hindi bumaba sa isang asset at hindi maaaring mai-delete. Mangyaring i-update ang iyong mga asset upang hindi na magreperens sa lokasyong ito at paki-subok muli. ',
     'assoc_child_loc'	 => 'Ang lokasyong ito ay kasalukuyang pinagmumulan sa hindi bumaba sa lokasyon isang bata at hindi maaaring mai-delete. Mangyaring i-update ang iyong mga lokasyon upang hindi na magreperens sa lokasyong ito at paki-subok muli. ',
+    'assigned_assets' => 'Assigned Assets',
+    'current_location' => 'Current Location',
 
 
     'create' => array(

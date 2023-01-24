@@ -78,19 +78,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/grokability/laravel-scim-server.git",
-                "reference": "9e7a8fd51a7380bc18ca1f01256574d75a2c6b49"
+                "reference": "2c7ecc450eee59234e059ec2e7724b2d8f3a8369"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/grokability/laravel-scim-server/zipball/9e7a8fd51a7380bc18ca1f01256574d75a2c6b49",
-                "reference": "9e7a8fd51a7380bc18ca1f01256574d75a2c6b49",
+                "url": "https://api.github.com/repos/grokability/laravel-scim-server/zipball/2c7ecc450eee59234e059ec2e7724b2d8f3a8369",
+                "reference": "2c7ecc450eee59234e059ec2e7724b2d8f3a8369",
                 "shasum": ""
             },
             "require": {
-                "illuminate/console": "^6.0|^7.0|^8.0",
-                "illuminate/database": "^6.0|^7.0|^8.0",
-                "illuminate/support": "^6.0|^7.0|^8.0",
-                "php": "^7.4|^8.0",
+                "illuminate/console": "^6.0|^7.0|^8.0|^9.0",
+                "illuminate/database": "^6.0|^7.0|^8.0|^9.0",
+                "illuminate/support": "^6.0|^7.0|^8.0|^9.0",
+                "php": "^7.0|^8.0",
                 "tmilos/scim-filter-parser": "^1.3",
                 "tmilos/scim-schema": "^0.1.0"
             },
@@ -133,7 +133,7 @@
             "support": {
                 "source": "https://github.com/grokability/laravel-scim-server/tree/master"
             },
-            "time": "2022-10-06T00:42:37+00:00"
+            "time": "2022-11-22T20:26:54+00:00"
         },
         {
             "name": "asm89/stack-cors",

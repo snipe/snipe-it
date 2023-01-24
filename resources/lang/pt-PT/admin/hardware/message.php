@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Aviso: </strong> Este artigo foi assinalado como "não implementável".
                         Se este estado mudou, por favor atualize o estado do artigo.',
     'does_not_exist' 	=> 'Artigo não existente.',
-    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
+    'does_not_exist_or_not_requestable' => 'Esse artigo não existe ou não é solicitável.',
     'assoc_users'	 	=> 'Este artigo está correntemente alocado a um utilizador e não pode ser removido. Por favor devolva o artigo e de seguida tente remover novamente. ',
 
     'create' => [
@@ -17,7 +17,7 @@ return [
         'error'   			=> 'Artigo não foi atualizado. Por favor, tente novamente',
         'success' 			=> 'Artigo atualizado com sucesso.',
         'nothing_updated'	=>  'Nenhum atributo foi selecionado, portanto nada foi atualizado.',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'no_assets_selected'  =>  'Nenhum ativo foi selecionado, por isso nada foi atualizado.',
     ],
 
     'restore' => [

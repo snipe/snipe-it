@@ -95,6 +95,7 @@ class Asset extends Depreciable
         'location_id'    => 'integer',
         'rtd_company_id' => 'integer',
         'supplier_id'    => 'integer',
+        'byod'           => 'boolean',
     ];
 
     protected $rules = [
@@ -106,7 +107,6 @@ class Asset extends Depreciable
         'physical'        => 'numeric|max:1|nullable',
         'checkout_date'   => 'date|max:10|min:10|nullable',
         'checkin_date'    => 'date|max:10|min:10|nullable',
-        'supplier_id'     => 'exists:suppliers,id|numeric|nullable',
         'location_id'     => 'exists:locations,id|nullable',
         'rtd_location_id' => 'exists:locations,id|nullable',
         'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
@@ -144,6 +144,7 @@ class Asset extends Depreciable
         'requestable',
         'last_checkout',
         'expected_checkin',
+        'byod',
     ];
 
     use Searchable;
@@ -315,13 +316,9 @@ class Asset extends Depreciable
         }
 
         $this->last_checkout = $checkout_at;
+        $this->name = $name;
 
         $this->assignedTo()->associate($target);
-
-
-        if ($name != null) {
-            $this->name = $name;
-        }
 
         if ($location != null) {
             $this->location_id = $location;

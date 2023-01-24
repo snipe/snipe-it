@@ -49,6 +49,7 @@
                             <th class="col-sm-2" data-field="action_type">{{ trans('general.action') }}</th>
                             <th class="col-sm-2" data-field="file" data-visible="false" data-formatter="fileUploadNameFormatter">{{ trans('general.file_name') }}</th>
                             <th class="col-sm-1" data-field="type" data-formatter="itemTypeFormatter">{{ trans('general.type') }}</th>
+                            <th class="col-sm-3" data-field="item.serial" data-visible="false">{{ trans('admin/hardware/table.serial') }}</th>
                             <th class="col-sm-3" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
                             <th class="col-sm-2" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.to') }}</th>
                             <th class="col-sm-1" data-field="note">{{ trans('general.notes') }}</th>

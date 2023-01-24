@@ -214,7 +214,7 @@ class RestoreFromBackup extends Command
         $env_vars['MYSQL_PWD'] = config('database.connections.mysql.password');
         // TODO notes: we are stealing the dump_binary_path (which *probably* also has your copy of the mysql binary in it. But it might not, so we might need to extend this)
         //             we unilaterally prepend a slash to the `mysql` command. This might mean your path could look like /blah/blah/blah//mysql - which should be fine. But maybe in some environments it isn't?
-        $mysql_binary = config('database.connections.mysql.dump.dump_binary_path').'/mysql';
+        $mysql_binary = config('database.connections.mysql.dump.dump_binary_path').\DIRECTORY_SEPARATOR.'mysql'.(\DIRECTORY_SEPARATOR == '\\' ? ".exe" : "");
         if( ! file_exists($mysql_binary) ) {
             return $this->error("mysql tool at: '$mysql_binary' does not exist, cannot restore. Please edit DB_DUMP_PATH in your .env to point to a directory that contains the mysqldump and mysql binary");
         }

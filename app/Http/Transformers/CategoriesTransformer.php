@@ -22,6 +22,26 @@ class CategoriesTransformer
 
     public function transformCategory(Category $category = null)
     {
+
+        // We only ever use item_count for categories in this transformer, so it makes sense to keep it
+        // simple and do this switch here.
+        switch ($category->category_type) {
+            case 'asset':
+                $category->item_count = $category->assets_count;
+                break;
+            case 'accessory':
+                $category->item_count = $category->accessories_count;
+                break;
+            case 'consumable':
+                $category->item_count = $category->consumables_count;
+                break;
+            case 'component':
+                $category->item_count = $category->components_count;
+                break;
+            default:
+                $category->item_count = 0;
+        }
+
         if ($category) {
             $array = [
                 'id' => (int) $category->id,
@@ -33,7 +53,7 @@ class CategoriesTransformer
                 'eula' => ($category->getEula()),
                 'checkin_email' => ($category->checkin_email == '1'),
                 'require_acceptance' => ($category->require_acceptance == '1'),
-                'item_count' => (int) $category->itemCount(),
+                'item_count' => (int) $category->item_count,
                 'assets_count' => (int) $category->assets_count,
                 'accessories_count' => (int) $category->accessories_count,
                 'consumables_count' => (int) $category->consumables_count,

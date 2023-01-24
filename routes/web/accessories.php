@@ -27,6 +27,21 @@ Route::group(['prefix' => 'accessories', 'middleware' => ['auth']], function () 
         [Accessories\AccessoryCheckinController::class, 'store']
     )->name('accessories.checkin.store');
 
+    Route::post(
+        '{accessoryId}/upload',
+        [Accessories\AccessoriesFilesController::class, 'store']
+    )->name('upload/accessory');
+
+    Route::delete(
+        '{accessoryId}/deletefile/{fileId}',
+        [Accessories\AccessoriesFilesController::class, 'destroy']
+    )->name('delete/accessoryfile');
+
+    Route::get(
+        '{accessoryId}/showfile/{fileId}/{download?}',
+        [Accessories\AccessoriesFilesController::class, 'show']
+    )->name('show.accessoryfile');
+
 });
 
 Route::resource('accessories', Accessories\AccessoriesController::class, [

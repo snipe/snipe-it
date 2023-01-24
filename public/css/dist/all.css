@@ -23830,6 +23830,11 @@ th.css-accessory > .th-inner::before {
     margin-top: 51px;
   }
 }
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
 
 .select2-container {
@@ -24916,5 +24921,10 @@ th.css-accessory > .th-inner::before {
   .sidebar-menu {
     margin-top: 51px;
   }
+}
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
