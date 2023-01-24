@@ -246,6 +246,7 @@ class UsersController extends Controller
                         'two_factor_optin',
                         'two_factor_enrolled',
                         'remote',
+                        'vipuser',
                         'start_date',
                         'end_date',
                     ];
