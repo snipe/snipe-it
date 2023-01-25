@@ -149,7 +149,7 @@ class RestoreFromBackup extends Command
                 $boring_files[] = $raw_path;
                 continue;
             }
-            if (@pathinfo($raw_path)['extension'] == 'sql') {
+            if (@pathinfo($raw_path, PATHINFO_EXTENSION) == 'sql') {
                 \Log::debug("Found a sql file!");
                 $sqlfiles[] = $raw_path;
                 $sqlfile_indices[] = $i;
