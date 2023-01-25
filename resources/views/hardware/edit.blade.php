@@ -68,19 +68,22 @@
     @include ('partials.forms.edit.requestable', ['requestable_text' => trans('admin/hardware/general.requestable')])
 
     <!-- Image -->
-    @if ($item->image)
-    <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
-        <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
-        <div class="col-md-5">
-            <label class="control-label" for="image_delete">
-            <input type="checkbox" value="1" name="image_delete" id="image_delete" class="minimal" {{ Request::old('image_delete') == '1' ? ' checked="checked"' : '' }}>
-            {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
-            </label>
-            <div style="margin-top: 0.5em">
-                <img src="{{ Storage::disk('public')->url(app('assets_upload_path').e($item->image)) }}" class="img-responsive" />
+    @if (($item->image) && ($item->image!=''))
+        <div class="form-group{{ $errors->has('image_delete') ? ' has-error' : '' }}">
+            <div class="col-md-9 col-md-offset-3">
+                <label for="image_delete">
+                    {{ Form::checkbox('image_delete', '1', old('image_delete'), ['class'=>'minimal','aria-label'=>'image_delete']) }}
+                    {{ trans('general.image_delete') }}
+                    {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
+                </label>
             </div>
         </div>
-    </div>
+        <div class="form-group">
+            <div class="col-md-9 col-md-offset-3">
+                <img src="{{ Storage::disk('public')->url(app('assets_upload_path').e($item->image)) }}" class="img-responsive">
+                {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
+            </div>
+        </div>
     @endif
 
     @include ('partials.forms.edit.image-upload')
@@ -120,6 +123,19 @@
         <br>
             @include ('partials.forms.edit.name', ['translated_name' => trans('admin/hardware/form.name')])
             @include ('partials.forms.edit.warranty')
+
+            <!-- byod checkbox -->
+            <div class="form-group">
+                <div class="col-md-7 col-md-offset-3">
+                    <label for="byod">
+                        <input type="checkbox" value="1" name="byod" class="minimal" {{ (old('remote', $item->byod)) == '1' ? ' checked="checked"' : '' }} aria-label="byod">
+                        {{ trans('general.byod') }}
+
+                    </label>
+                    <p class="help-block">{{ trans('general.byod_help') }}
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 
