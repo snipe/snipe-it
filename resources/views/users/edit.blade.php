@@ -365,8 +365,8 @@
                           <!-- VIP checkbox -->
                           <div class="form-group">
                               <div class="col-md-7 col-md-offset-3">
-                                  <label for="vipuser">
-                                      <input type="checkbox" value="1" name="vipuser" class="minimal" {{ (old('vipuser', $user->vipuser)) == '1' ? ' checked="checked"' : '' }} aria-label="vipuser">
+                                  <label for="vip">
+                                      <input type="checkbox" value="1" name="vip" class="minimal" {{ (old('vip', $user->vip)) == '1' ? ' checked="checked"' : '' }} aria-label="vip">
                                       {{ trans('admin/users/general.vip_label') }}
 
                                   </label>

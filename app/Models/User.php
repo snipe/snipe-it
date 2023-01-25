@@ -62,7 +62,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'start_date',
         'end_date',
         'scim_externalid',
-        'vipuser',
+        'vip',
     ];
 
     protected $casts = [
@@ -70,7 +70,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'manager_id'   => 'integer',
         'location_id'  => 'integer',
         'company_id'   => 'integer',
-        'vipuser'      => 'boolean',
+        'vip'      => 'boolean',
     ];
 
 

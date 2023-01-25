@@ -14,7 +14,7 @@ class AddVipToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('vipuser')->nullable()->default(0);
+            $table->boolean('vip')->nullable()->default(0);
         });
     }
 
@@ -26,8 +26,8 @@ class AddVipToUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            if (Schema::hasColumn('users', 'vipuser')) {
-                $table->dropColumn('vipuser');
+            if (Schema::hasColumn('users', 'vip')) {
+                $table->dropColumn('vip');
             }
         });
     }

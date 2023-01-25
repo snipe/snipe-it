@@ -86,7 +86,7 @@ class UserPresenter extends Presenter
                 'formatter' => 'usersLinkFormatter',
             ],
             [
-                'field' => 'vipuser',
+                'field' => 'vip',
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,

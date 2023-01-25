@@ -271,7 +271,7 @@ class UsersController extends Controller
         $user->activated = $request->input('activated', 0);
         $user->zip = $request->input('zip', null);
         $user->remote = $request->input('remote', 0);
-        $user->vipuser = $request->input('vipuser', 0);
+        $user->vipuser = $request->input('vip', 0);
         $user->website = $request->input('website', null);
         $user->start_date = $request->input('start_date', null);
         $user->end_date = $request->input('end_date', null);
