@@ -146,6 +146,9 @@ class Asset extends Depreciable
         'last_checkout',
         'expected_checkin',
         'byod',
+        'last_audit_date',
+        'next_audit_date',
+
     ];
 
     use Searchable;
