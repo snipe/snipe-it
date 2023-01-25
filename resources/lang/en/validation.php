@@ -114,17 +114,6 @@ return [
     |
     */
 
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
-
     'custom' => [
         'alpha_space' => 'The :attribute field contains a character that is not allowed.',
         'email_array'      => 'One or more email addresses is invalid.',
