@@ -127,7 +127,7 @@ class ImportController extends Controller
         $this->authorize('import');
 
         // Run a backup immediately before processing
-        if ($request->has('run-backup')) {
+        if ($request->get('run-backup')) {
             \Log::debug('Backup manually requested via importer');
             Artisan::call('backup:run');
         } else {
