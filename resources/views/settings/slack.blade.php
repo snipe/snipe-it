@@ -50,41 +50,9 @@
                     <div class="col-md-12" style="border-top: 0px;">
 
 
-                        @livewire('slack-settings-form',  ['setting' => $setting])
+                        @livewire('slack-settings-form')
 
-                        <!-- slack channel -->
-                        <div class="form-group required {{ $errors->has('slack_channel') ? 'error' : '' }}">
-                            <div class="col-md-2">
-                                {{ Form::label('slack_channel', trans('admin/settings/general.slack_channel')) }}
-                            </div>
-                            <div class="col-md-10">
-                                @if (config('app.lock_passwords')===true)
-                                    {{ Form::text('slack_channel', old('slack_channel', $setting->slack_channel), array('class' => 'form-control','disabled'=>'disabled','placeholder' => '#IT-Ops')) }}
-                                    <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
 
-                                @else
-                                    {{ Form::text('slack_channel', old('slack_channel', $setting->slack_channel), array('class' => 'form-control','placeholder' => '#IT-Ops')) }}
-                                @endif
-                                {!! $errors->first('slack_channel', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                            </div>
-                        </div>
-
-                        <!-- slack botname -->
-                        <div class="form-group required {{ $errors->has('slack_botname') ? 'error' : '' }}">
-                            <div class="col-md-2">
-                                {{ Form::label('slack_botname', trans('admin/settings/general.slack_botname')) }}
-                            </div>
-                            <div class="col-md-10">
-                                @if (config('app.lock_passwords')===true)
-                                    {{ Form::text('slack_botname', old('slack_botname', $setting->slack_botname), array('class' => 'form-control','disabled'=>'disabled','placeholder' => 'Snipe-Bot')) }}
-                                    <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
-
-                                @else
-                                    {{ Form::text('slack_botname', old('slack_botname', $setting->slack_botname), array('class' => 'form-control','placeholder' => 'Snipe-Bot')) }}
-                                @endif
-                                {!! $errors->first('slack_botname', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                            </div>
-                        </div>
 
                         <div class="form-group" id="slacktestcontainer" style="display: none">
                             <div class="col-md-2">
