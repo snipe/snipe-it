@@ -44,6 +44,11 @@ class AcceptanceAssetDeclinedNotification extends Notification
 
     }
 
+    public function shouldSend($notifiable, $channel)
+    {
+        return $this->settings->alerts_enabled && ! empty($this->settings->alert_email);
+    }
+
     /**
      * Get the mail representation of the notification.
      *
