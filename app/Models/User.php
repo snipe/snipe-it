@@ -64,7 +64,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'scim_externalid',
         'avatar',
         'gravatar',
-        'vip`,
+        'vip',
     ];
 
     protected $casts = [
