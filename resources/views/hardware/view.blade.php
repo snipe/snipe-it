@@ -75,8 +75,8 @@
         @if (!$asset->model)
             <div class="col-md-12">
                 <div class="callout callout-danger">
-                    <h2>NO MODEL ASSOCIATED</h2>
-                        <p>This will break things in weird and horrible ways. Edit this asset now to assign it a model. </p>
+                    <h2>{{ trans('admin/models/message.no_association') }}</h2>
+                        <p>{{ trans('admin/models/message.no_association_fix') }}</p>
                 </div>
             </div>
         @endif
@@ -85,9 +85,8 @@
             <div class="col-md-12">
                 <div class="alert alert-danger">
                     <i class="fas fa-exclamation-triangle faa-pulse animated" aria-hidden="true"></i>
-                    <strong>WARNING: </strong>
-                    This asset has been deleted.
-                    You must restore it before you can assign it to someone.
+                    <strong>{{ trans('general.'notification_warning') }} </strong>
+                    {{ trans('general.asset_deleted_warning') }}
                 </div>
             </div>
         @endif
