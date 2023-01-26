@@ -41,6 +41,7 @@ class SlackSettingsForm extends Component
 
     public function submit()
     {
+        dd("we here now");
 
         $this->validate();
 

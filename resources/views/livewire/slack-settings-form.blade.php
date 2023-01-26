@@ -1,5 +1,5 @@
 <div>
-    <form wire:submit.prevent="save">
+    <form wire:submit.prevent ="save">
         <div class="form-group required {{ $errors->has('slack_endpoint') ? 'error' : '' }}">
             <div class="col-md-2">
                 {{ Form::label('slack_endpoint', trans('admin/settings/general.slack_endpoint')) }}
@@ -51,6 +51,15 @@
                 @endif
                 {!! $errors->first('slack_botname', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
             </div>
+        </div>
+        <div class="box-footer">
+            <div class="text-left col-md-6">
+                <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
+            </div>
+            <div class="text-right col-md-6">
+                <button type="submit" id="save_slack" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+            </div>
+
         </div>
     </form>
 </div>
