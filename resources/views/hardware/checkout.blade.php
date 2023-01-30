@@ -37,7 +37,7 @@
                                     @else
                                         <span class="text-danger text-bold">
                   <i class="fas fa-exclamation-triangle"></i>{{ trans('admin/hardware/general.model_invalid')}}
-                  <a href="{{ route('hardware.edit', $asset->id) }}"></a> {{ trans(admin/hardware/general.model_invalid_fix')}}</span>
+                  <a href="{{ route('hardware.edit', $asset->id) }}"></a> {{ trans('admin/hardware/general.model_invalid_fix')}}</span>
                                     @endif
                                 </p>
                             </div>

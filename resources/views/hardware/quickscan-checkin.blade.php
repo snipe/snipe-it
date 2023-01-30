@@ -86,7 +86,7 @@
                         </tr>
                         <tr id="checkin-loader" style="display: none;">
                             <td colspan="3">
-                                <i class="fas fa-spinner spin" aria-hidden="true"></i> {{ trans(general.processing') }}...
+                                <i class="fas fa-spinner spin" aria-hidden="true"></i> {{ trans('general.processing') }}...
                             </td>
                         </tr>
                         </thead>
