@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Department;
+use App\Models\Group;
 use Illuminate\Console\Command;
 use App\Models\Setting;
 use App\Models\Ldap;
@@ -57,6 +58,7 @@ class LdapSync extends Command
         $ldap_result_country = Setting::getSettings()->ldap_country;
         $ldap_result_dept = Setting::getSettings()->ldap_dept;
         $ldap_result_manager = Setting::getSettings()->ldap_manager;
+        $ldap_default_group = Setting::getSettings()->ldap_default_group;
 
         try {
             $ldapconn = Ldap::connectToLdap();
@@ -177,6 +179,16 @@ class LdapSync extends Command
 
         $manager_cache = [];
 
+        if($ldap_default_group != null) {
+
+            $default = Group::find($ldap_default_group);
+            if (!$default) {
+                $ldap_default_group = null; // un-set the default group if that group doesn't exist
+            }
+
+        }
+
+
         for ($i = 0; $i < $results['count']; $i++) {
                 $item = [];
                 $item['username'] = isset($results[$i][$ldap_result_username][0]) ? $results[$i][$ldap_result_username][0] : '';
@@ -191,6 +203,7 @@ class LdapSync extends Command
                 $item['country'] = isset($results[$i][$ldap_result_country][0]) ? $results[$i][$ldap_result_country][0] : '';
                 $item['department'] = isset($results[$i][$ldap_result_dept][0]) ? $results[$i][$ldap_result_dept][0] : '';
                 $item['manager'] = isset($results[$i][$ldap_result_manager][0]) ? $results[$i][$ldap_result_manager][0] : '';
+
 
                 $department = Department::firstOrCreate([
                     'name' => $item['department'],
@@ -326,6 +339,10 @@ class LdapSync extends Command
                 if ($user->save()) {
                     $item['note'] = $item['createorupdate'];
                     $item['status'] = 'success';
+                    if ( $item['createorupdate'] === 'created' && $ldap_default_group) {
+                         $user->groups()->attach($ldap_default_group);
+                    }
+
                 } else {
                     foreach ($user->getErrors()->getMessages() as $key => $err) {
                         $errors .= $err[0];

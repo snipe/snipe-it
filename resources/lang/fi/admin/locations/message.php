@@ -6,6 +6,8 @@ return array(
     'assoc_users'	 => 'Sijainti on määritetty käyttöön yhdelle tai useammalle käyttäjälle joten sitä ei voida poistaa. Poista sijainti käytöstä kaikilta käyttäjiltä ja yritä uudelleen. ',
     'assoc_assets'	 => 'Sijaintiin on tällä hetkellä liitettynä vähintään yksi laite, eikä sitä voi poistaa. Poista viittaus sijantiin ja yritä uudelleen. ',
     'assoc_child_loc'	 => 'Tämä sijainti on ylempi toiselle sijainnille eikä sitä voi poistaa. Päivitä sijainnit, jotta et enää viitata tähän sijaintiin ja yritä uudelleen. ',
+    'assigned_assets' => 'Assigned Assets',
+    'current_location' => 'Current Location',
 
 
     'create' => array(

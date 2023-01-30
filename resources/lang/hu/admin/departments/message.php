@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'A tanszék nem létezik.',
+    'department_already_exists' => 'A department already exists with that name at this company location. Or choose a more specific name for this department. ',
     'assoc_users'	 => 'Ez a részleg jelenleg társított legalább egy felhasználót, és nem lehet törölni. Kérjük, frissítse a felhasználókat, hogy ne hivatkozzanak az osztályon, és próbálja újra.',
     'create' => array(
         'error'   => 'Osztály nem jött létre, próbálkozzon újra.',

@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'Ang departamento ay hindi umiiral.',
+    'department_already_exists' => 'A department already exists with that name at this company location. Or choose a more specific name for this department. ',
     'assoc_users'	 => 'Ang departamentong ito ay kasalukuyang naiugnay sa hindi bumaba sa isang user at hindi maaaring mai-delete. Mangyaring i-update ang iyong mga user upang hindi na magreperens sa departamentong ito at paki-subok muli. ',
     'create' => array(
         'error'   => 'Ang departamento ay hindi naisagawa, mangyaring subukang muli.',

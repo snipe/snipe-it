@@ -49,7 +49,7 @@
     @endif
 @endif
 
-<h2>{{ trans('general.assigned_to', ['name' => $show_user->present()->fullName()]) }}</h4>
+<h3>{{ trans('general.assigned_to', ['name' => $show_user->present()->fullName()]) }} {{ ($show_user->jobtitle!='' ? ' - '.$show_user->jobtitle : '') }}</h3>
 
     @if ($assets->count() > 0)
         @php

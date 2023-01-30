@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'Afdeling bestaat niet.',
+    'department_already_exists' => 'A department already exists with that name at this company location. Or choose a more specific name for this department. ',
     'assoc_users'	 => 'Deze afdeling is op dit moment gekoppeld aan minstens één gebruiker en kan daardoor niet verwijderd worden. Zorg ervoor dat er geen gebruikers meer aan deze afdeling gekoppeld zijn en probeer het opnieuw. ',
     'create' => array(
         'error'   => 'Afdeling is niet aangemaakt, probeer het nogmaals.',

@@ -15,6 +15,7 @@ return array(
     'password_resets_sent'      => 'Những người dùng với trạng thái kích hoạt đã chọn và có địa chỉ email hợp lệ sẽ nhận được liên kết đặt lại mật khẩu.',
     'password_reset_sent'       => 'Đường đẫn khôi phục mật khẩu được gửi đến :email!',
     'user_has_no_email'         => 'This user does not have an email address in their profile.',
+    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
 
 
     'success' => array(
@@ -59,4 +60,8 @@ return array(
         'invalidfiles' => 'Một hoặc nhiều tập tin của bạn có dung lượng quá lớn hoặc loại tập tin không cho phép tải lên. Chỉ cho phép những loại tập tin png, gif, jpg, doc, docx, pdf, and txt.',
     ),
 
+    'inventorynotification' => array(
+        'error'   => 'This user has no email set.',
+        'success' => 'The user has been notified about their current inventory.'
+    )
 );

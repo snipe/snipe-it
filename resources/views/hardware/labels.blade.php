@@ -52,8 +52,7 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
     }
     img.barcode {
         display:block;
-
-        padding-top: .11in;
+        margin-top:-7px;
         width: 100%;
     }
     div.label-logo {
@@ -167,9 +166,9 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
 
     </div>
 
-    @if ($count % $settings->labels_per_page == 0)
-        <div class="page-break"></div>
-        <div class="next-padding">&nbsp;</div>
+    @if (($count % $settings->labels_per_page == 0) && $count!=count($assets))
+    <div class="page-break"></div>
+    <div class="next-padding">&nbsp;</div>
     @endif
 
 @endforeach

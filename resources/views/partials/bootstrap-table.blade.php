@@ -129,7 +129,10 @@
         var tableId =  $(this).data('id-table');
 
         for (var i in rowsAfter) {
-            $(buttonName).after('<input id="' + tableId + '_checkbox_' + rowsAfter[i].id + '" type="hidden" name="ids[]" value="' + rowsAfter[i].id + '">');
+            // Do not select things that were already selected
+            if($('#'+ tableId + '_checkbox_' + rowsAfter[i].id).length == 0) {
+                $(buttonName).after('<input id="' + tableId + '_checkbox_' + rowsAfter[i].id + '" type="hidden" name="ids[]" value="' + rowsAfter[i].id + '">');
+            }
         }
     });
 
@@ -280,7 +283,7 @@
             if ((row.available_actions) && (row.available_actions.restore === true)) {
                 actions += '<form style="display: inline;" method="POST" action="{{ url('/') }}/' + dest + '/' + row.id + '/restore"> ';
                 actions += '@csrf';
-                actions += '<button class="btn btn-sm btn-warning" data-toggle="tooltip" title="{{ trans('general.restore') }}"><i class="far fa-retweet"></i></button>&nbsp;';
+                actions += '<button class="btn btn-sm btn-warning" data-toggle="tooltip" title="{{ trans('general.restore') }}"><i class="fas fa-retweet"></i></button>&nbsp;';
             }
 
             actions +='</nobr>';
@@ -322,6 +325,11 @@
             } else if (value.type == 'model') {
                 item_destination = 'models'
                 item_icon = '';
+            }
+
+            // display the username if it's checked out to a user
+            if (value.username) {
+                value.name = value.name + ' (' + value.username + ')';
             }
 
             return '<nobr><a href="{{ url('/') }}/' + item_destination +'/' + value.id + '" data-tooltip="true" title="' + value.type + '"><i class="' + item_icon + ' text-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} "></i> ' + value.name + '</a></nobr>';

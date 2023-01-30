@@ -44,4 +44,6 @@ return [
     'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code>:db_column</code> but should be <code>:expected</code>.',
     'is_unique' => 'Šai vērtībai ir jābūt unikālai starp visiem pamatlīdzekļiem',
     'unique' => 'Unikāls',
+    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
+    'display_in_user_view_table' => 'Visible to User',
 ];

@@ -44,4 +44,6 @@ return [
     'db_convert_warning' => 'AVVERTIMENTO. Questo campo è nella tabella dei campi personalizzati come <code>:db_column</code> ma dovrebbe essere <code>:expected</code>.',
     'is_unique' => 'Questo valore deve essere univoco per tutti i beni',
     'unique' => 'Univoco',
+    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
+    'display_in_user_view_table' => 'Visible to User',
 ];

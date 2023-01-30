@@ -63,11 +63,13 @@ class ImageUploadRequest extends Request
      * @param string $path  location for uploaded images, defaults to uploads/plural of item type.
      * @return SnipeModel        Target asset is being checked out to.
      */
-    public function handleImages($item, $w = 600, $form_fieldname = null, $path = null, $db_fieldname = 'image')
+    public function handleImages($item, $w = 600, $form_fieldname = 'image', $path = null, $db_fieldname = 'image')
     {
+
         $type = strtolower(class_basename(get_class($item)));
 
         if (is_null($path)) {
+
             $path = str_plural($type);
 
             if ($type == 'assetmodel') {
@@ -79,42 +81,31 @@ class ImageUploadRequest extends Request
             }
         }
 
-        if (is_null($form_fieldname)) {
-            $form_fieldname = 'image';
-        }
-
-        // This is dumb, but we need it for overriding field names for exceptions like avatars and logo uploads
-        if (is_null($db_fieldname)) {
-            $use_db_field = $form_fieldname;
-        } else {
-            $use_db_field = $db_fieldname;
-        }
-
-        
-        // ConvertBase64ToFiles just changes object type, 
-        // as it cannot currently insert files to $this->files
         if ($this->offsetGet($form_fieldname) instanceof UploadedFile) {
-           $image=$this->offsetGet($form_fieldname);
+           $image = $this->offsetGet($form_fieldname);
+           \Log::debug('Image is an instance of UploadedFile');
+        } elseif ($this->hasFile($form_fieldname)) {
+            $image = $this->file($form_fieldname);
+            \Log::debug('Just use regular upload for '.$form_fieldname);
         } else {
-            if ($this->hasFile($form_fieldname)) {
-                $image = $this->file($form_fieldname);
-            }
+            \Log::debug('No image found for form fieldname: '.$form_fieldname);
         }
 
         if (isset($image)) {
-            \Log::debug($image);
 
             if (!config('app.lock_passwords')) {
 
                 $ext = $image->getClientOriginalExtension();
-                $file_name = $type.'-'.$form_fieldname.'-'.str_random(10).'.'.$ext;
+                $file_name = $type.'-'.$form_fieldname.'-'.$item->id.'-'.str_random(10).'.'.$ext;
 
                 \Log::info('File name will be: '.$file_name);
                 \Log::debug('File extension is: '.$ext);
 
                 if (($image->getClientOriginalExtension() !== 'webp') && ($image->getClientOriginalExtension() !== 'svg')) {
+
                     \Log::debug('Not an SVG or webp - resize');
                     \Log::debug('Trying to upload to: '.$path.'/'.$file_name);
+
                     $upload = Image::make($image->getRealPath())->resize(null, $w, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
@@ -122,6 +113,7 @@ class ImageUploadRequest extends Request
 
                     // This requires a string instead of an object, so we use ($string)
                     Storage::disk('public')->put($path.'/'.$file_name, (string) $upload->encode());
+
                 } else {
                     // If the file is a webp, we need to just move it since webp support
                     // needs to be compiled into gd for resizing to be available
@@ -146,30 +138,30 @@ class ImageUploadRequest extends Request
                 }
 
                  // Remove Current image if exists
-                if (Storage::disk('public')->exists($path.'/'.$item->{$use_db_field})) {
+                if (($item->{$form_fieldname}!='') && (Storage::disk('public')->exists($path.'/'.$item->{$db_fieldname}))) {
                     \Log::debug('A file already exists that we are replacing - we should delete the old one.');
                     try {
-                         Storage::disk('public')->delete($path.'/'.$item->{$use_db_field});
+                         Storage::disk('public')->delete($path.'/'.$item->{$form_fieldname});
                          \Log::debug('Old file '.$path.'/'.$file_name.' has been deleted.');
                     } catch (\Exception $e) {
                         \Log::debug('Could not delete old file. '.$path.'/'.$file_name.' does not exist?');
                     }
                 }
 
-                $item->{$use_db_field} = $file_name;
+                $item->{$db_fieldname} = $file_name;
             }
 
+
         // If the user isn't uploading anything new but wants to delete their old image, do so
-        } else {
-            if ($this->input('image_delete') == '1') {
-                \Log::debug('Deleting image');
-                try {
-                    Storage::disk('public')->delete($path.'/'.$item->{$use_db_field});
-                        $item->{$use_db_field} = null;
-                } catch (\Exception $e) {
-                    \Log::debug($e);
-                }
+        } elseif ($this->input('image_delete') == '1') {
+            \Log::debug('Deleting image');
+            try {
+                Storage::disk('public')->delete($path.'/'.$item->{$db_fieldname});
+                    $item->{$db_fieldname} = null;
+            } catch (\Exception $e) {
+                \Log::debug($e);
             }
+
         }
 
         return $item;

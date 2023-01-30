@@ -268,9 +268,9 @@ class UserPresenter extends Presenter
                 'formatter' => 'trueFalseFormatter',
             ],
             [
-                'field' => 'two_factor_activated',
+                'field' => 'two_factor_optin',
                 'searchable' => false,
-                'sortable' => false,
+                'sortable' => true,
                 'switchable' => true,
                 'title' => trans('admin/users/general.two_factor_active'),
                 'visible' => false,

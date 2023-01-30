@@ -10,6 +10,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class CategoriesController extends Controller
 {
@@ -107,7 +108,7 @@ class CategoriesController extends Controller
     public function show($id)
     {
         $this->authorize('view', Category::class);
-        $category = Category::findOrFail($id);
+        $category = Category::withCount('assets as assets_count', 'accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'licenses as licenses_count')->findOrFail($id);
         return (new CategoriesTransformer)->transformCategory($category);
 
     }
@@ -126,8 +127,14 @@ class CategoriesController extends Controller
     {
         $this->authorize('update', Category::class);
         $category = Category::findOrFail($id);
+
+        // Don't allow the user to change the category_type once it's been created
+        if (($request->filled('category_type')) && ($category->category_type != $request->input('category_type'))) {
+            return response()->json(
+                Helper::formatStandardApiResponse('error', null,  trans('admin/categories/message.update.cannot_change_category_type'))
+            );
+        }
         $category->fill($request->all());
-        $category->category_type = strtolower($request->input('category_type'));
         $category = $request->handleImages($category);
 
         if ($category->save()) {
@@ -148,7 +155,7 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         $this->authorize('delete', Category::class);
-        $category = Category::findOrFail($id);
+        $category = Category::withCount('assets as assets_count', 'accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'licenses as licenses_count')->findOrFail($id);
 
         if (! $category->isDeletable()) {
             return response()->json(

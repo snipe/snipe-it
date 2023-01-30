@@ -52,7 +52,7 @@
 
 .skin-blue.layout-top-nav .main-header > .logo {
   .logo-variant {
-    background-color: none;
+    background-color: unset;
   }
 }
 
@@ -98,7 +98,7 @@
     color: #fff;
 }
 
-.btn-default:link, a.btn-default:hover, .btn-default:visited,
+.btn-default:link, a.btn-default:hover, .btn-default:visited
 {
   color: @dark-gray;
 }
@@ -138,7 +138,9 @@ a:hover {
 .text-primary {
   color: darken(@light-blue, 20%);
 }
-
+.far fa-life-ring{
+  color:var(--link);
+}
 
 .fixed-table-container tbody .selected td {
   background-color: #fff8af;

@@ -6,6 +6,8 @@ return array(
     'assoc_users'	 => 'Lokasi saat ini dikaitkan dengan setidaknya oleh satu pengguna dan tidak dapat dihapus. Perbarui pengguna Anda yang tidak ada referensi dari lokasi ini dan coba lagi. ',
     'assoc_assets'	 => 'Lokasi saat ini dikaitkan dengan setidaknya oleh satu aset dan tidak dapat dihapus. Perbarui aset Anda yang tidak ada referensi dari lokasi ini dan coba lagi. ',
     'assoc_child_loc'	 => 'Lokasi saat ini digunakan oleh induk salah satu dari turunan lokasi dan tidak dapat di hapus. Mohon perbarui lokasi Anda ke yang tidak ada referensi dengan lokasi ini dan coba kembali. ',
+    'assigned_assets' => 'Assigned Assets',
+    'current_location' => 'Current Location',
 
 
     'create' => array(

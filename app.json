@@ -148,7 +148,7 @@
     "image": "heroku/php",
     "addons": [
       "cleardb:ignite",
-      "heroku-redis:hobby-dev",
+      "heroku-redis:mini",
       "papertrail:choklad"
     ]
   }

@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Department;
 use DB;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Validation\Rule;
 use Validator;
 
 /**
@@ -210,6 +212,23 @@ class ValidationServiceProvider extends ServiceProvider
             } else {
                 // no 'id' key to compare against (probably because this is a new user)
                 // so it automatically passes this validation
+                return true;
+            }
+        });
+
+        Validator::extend('is_unique_department', function ($attribute, $value, $parameters, $validator) {
+            $data = $validator->getData();
+            if ((array_key_exists('location_id', $data) && $data['location_id'] != null) && (array_key_exists('company_id', $data) && $data['company_id'] != null)) {
+                $count = Department::where('name', $data['name'])
+                    ->where('location_id', $data['location_id'])
+                    ->where('company_id', $data['company_id'])
+                    ->whereNotNull('company_id')
+                    ->whereNotNull('location_id')
+                    ->count('name');
+
+                return $count < 1;
+            }
+            else {
                 return true;
             }
         });

@@ -6,6 +6,7 @@ return [
     'months'   => 'Meses',
     'term'   => 'Termina',
     'title'      => 'Nombre ',
-    'depreciation_min' => 'Floor Value',
+    'depreciation_min' => 'Key: array[\'depreciacion_min\']
+array[\'depreciacion_min\']',
 
 ];

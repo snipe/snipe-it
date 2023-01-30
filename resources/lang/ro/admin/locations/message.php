@@ -6,6 +6,8 @@ return array(
     'assoc_users'	 => 'Aceasta locatie este momentan asociata cu cel putin inca un alt utilizator si nu poate fi stearsa. Va rugam actualizati utilizatorii care nu mai apartin de aceasta locatie si incercati iar. ',
     'assoc_assets'	 => 'Această locație este în prezent asociată cu cel puțin un material și nu poate fi ștearsă. Actualizați-vă activele astfel încât acestea să nu mai fie menționate și să încercați din nou.',
     'assoc_child_loc'	 => 'Această locație este în prezent părinte pentru cel puțin o locație copil și nu poate fi ștearsă. Actualizați locațiile dvs. pentru a nu mai referi această locație și încercați din nou.',
+    'assigned_assets' => 'Assigned Assets',
+    'current_location' => 'Current Location',
 
 
     'create' => array(

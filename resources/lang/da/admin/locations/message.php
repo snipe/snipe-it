@@ -6,6 +6,8 @@ return array(
     'assoc_users'	 => 'Denne placering er i øjeblikket forbundet med mindst en bruger og kan ikke slettes. Opdater dine brugere for ikke længere at henvise til denne placering, og prøv igen.',
     'assoc_assets'	 => 'Denne placering er i øjeblikket forbundet med mindst ét ​​aktiv og kan ikke slettes. Opdater dine aktiver for ikke længere at henvise til denne placering, og prøv igen.',
     'assoc_child_loc'	 => 'Denne placering er for øjeblikket forælder på mindst et barns placering og kan ikke slettes. Opdater dine placeringer for ikke længere at henvise til denne placering, og prøv igen.',
+    'assigned_assets' => 'Assigned Assets',
+    'current_location' => 'Current Location',
 
 
     'create' => array(

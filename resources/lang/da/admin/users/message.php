@@ -15,6 +15,7 @@ return array(
     'password_resets_sent'      => 'De valgte brugere, der er aktiveret og har en gyldig e-mail-adresser, har fået tilsendt et link til nulstilling af adgangskode.',
     'password_reset_sent'       => 'A password reset link has been sent to :email!',
     'user_has_no_email'         => 'This user does not have an email address in their profile.',
+    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
 
 
     'success' => array(
@@ -59,4 +60,8 @@ return array(
         'invalidfiles' => 'En eller flere af dine filer er for store eller er en filtype, der ikke er tilladt. Tilladte filtyper er png, gif, jpg, doc, docx, pdf og txt.',
     ),
 
+    'inventorynotification' => array(
+        'error'   => 'This user has no email set.',
+        'success' => 'The user has been notified about their current inventory.'
+    )
 );

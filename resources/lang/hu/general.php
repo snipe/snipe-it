@@ -11,6 +11,7 @@ return [
     'admin'					=> 'Admin',
     'administrator'			=> 'Adminisztrátor',
     'add_seats'             => 'Hozzáadott ülések',
+    'age'                   => "Age",
     'all_assets'			=> 'Összes eszköz',
     'all'       			=> 'Mind',
     'archived'              => 'Archivált',
@@ -280,6 +281,9 @@ return [
     'yes' 					=> 'Igen',
     'zip'  					=> 'Irányítószám',
     'noimage'				=> 'Nincs kép feltöltve vagy a kép nem található.',
+    'file_does_not_exist'   => 'The requested file does not exist on the server.',
+    'file_upload_success'   => 'File upload success!',
+    'no_files_uploaded'     => 'File upload success!',
     'token_expired'         => 'Az ürlap session lejárt. próbálkozz újra.',
     'login_enabled'         => 'Belépés engedélyezése',
     'audit_due'             => 'Esedékes ellenőrzés',
@@ -378,10 +382,10 @@ return [
     'pie_chart_type'        => 'Műszerfal tortadiagram típusa',
     'hello_name'            => 'Üdvözöllek, :name!',
     'unaccepted_profile_warning'   => ':count darab tételed van, amelyek elfogadást igényelnek. Kattints ide az elfogadáshoz vagy az elutasításhoz',
-    'start_date'            => 'Start Date',
-    'end_date'            => 'End Date',
-    'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
-    'placeholder_kit'       => 'Select a kit'
+    'start_date'            => 'Kezdés dátuma',
+    'end_date'            => 'Befejezés dátuma',
+    'alt_uploaded_image_thumbnail' => 'Feltöltött indexkép',
+    'placeholder_kit'       => 'Készlet kiválasztása'
 
 
 

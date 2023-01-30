@@ -61,7 +61,9 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'remote',
         'start_date',
         'end_date',
-        'scim_externalid'
+        'scim_externalid',
+        'avatar',
+        'gravatar',
     ];
 
     protected $casts = [
@@ -339,6 +341,24 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     }
 
     /**
+     * Establishes a count of all items assigned
+     *
+     * @author J. Vinsmoke
+     * @since [v6.1]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    Public function allAssignedCount() {
+        $assetsCount = $this->assets()->count();
+        $licensesCount = $this->licenses()->count();
+        $accessoriesCount = $this->accessories()->count();
+        $consumablesCount = $this->consumables()->count();
+        
+        $totalCount = $assetsCount + $licensesCount + $accessoriesCount + $consumablesCount;
+    
+        return (int) $totalCount;
+        }
+
+    /**
      * Establishes the user -> actionlogs relationship
      *
      * @author A. Gianotto <snipe@snipe.net>
@@ -568,24 +588,13 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         if ((Setting::getSettings()->two_factor_enabled == '1') && ($this->two_factor_optin == '1')) {
             return true;
         }
+
         // If the 2FA is required for everyone so is implicitly active
         elseif (Setting::getSettings()->two_factor_enabled == '2') {
             return true;
         }
 
         return false;
-    }
-
-    /**
-     * Get the admin user who created this user
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v6.0.5]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
-     */
-    public function createdBy()
-    {
-        return $this->belongsTo(\App\Models\User::class, 'created_by')->withTrashed();
     }
 
     /**
@@ -615,6 +624,19 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         return false;
 
     }
+
+    /**
+     * Get the admin user who created this user
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v6.0.5]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function createdBy()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'created_by')->withTrashed();
+    }
+
 
 
     public function decodePermissions()

@@ -44,4 +44,6 @@ return [
     'db_convert_warning' => 'UYARI. Bu alan, özel alanlar tablosunda <code>:db_column</code> olarak bulunur, ancak <code>:expected</code> olmalıdır.',
     'is_unique' => 'Bu değer tüm varlıklarda benzersiz olmalıdır',
     'unique' => 'Benzersiz',
+    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
+    'display_in_user_view_table' => 'Visible to User',
 ];

@@ -44,4 +44,6 @@ return [
     'db_convert_warning' => 'VÝSTRAHA. Toto pole je v tabuľke vlastných polí ako <code>:db_column</code>, ale malo by byť <code>:expected</code>.',
     'is_unique' => 'This value must be unique across all assets',
     'unique' => 'Unique',
+    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
+    'display_in_user_view_table' => 'Visible to User',
 ];

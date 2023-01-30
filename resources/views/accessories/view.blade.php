@@ -84,8 +84,7 @@
                         </li>
                     @endcan
 
-                    @can('update', Component::class)
-
+                    @can('update', $accessory)
                         <li class="pull-right">
                             <a href="#" data-toggle="modal" data-target="#uploadFileModal">
                                 <i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}
@@ -99,7 +98,7 @@
                     <div class="tab-pane active" id="checkedout">
                         <div class="table table-responsive">
                           <div class="row">
-                              <div class="col-md-9">
+                              <div class="col-md-12">
                                 <table
                                     data-cookie-id-table="usersTable"
                                     data-pagination="true"
@@ -136,7 +135,7 @@
                      <div class="tab-pane fade" id="history">
                          <div class="table table-responsive">
                              <div class="row">
-                                 <div class="col-md-9">
+                                 <div class="col-md-12">
                                 <table
                                         class="table table-striped snipe-table"
                                         data-cookie-id-table="AccessoryHistoryTable"
@@ -266,14 +265,14 @@
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
+                        </div>
                         </div> <!-- /.tab-pane -->
                     @endcan
 
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
 
 <!-- side address column -->
@@ -345,9 +344,6 @@
               </div>
           @endcan
 
-                    </div><!--col-md-3-->
-                </div><!--row-->
-            </div><!--tab-pane details-->
 
         <div class="tab-pane fade" id="history">
             <div class="row">
@@ -387,8 +383,8 @@
                 </div> <!-- /.col-md-12-->
             </div> <!-- /.row-->
         </div><!--tab history-->
-    </div><!--tab-content-->
-</div><!--/.nav-tabs-custom-->
+    </div><!--col-md-3-->
+</div><!--row-->
 
 
 

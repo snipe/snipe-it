@@ -15,6 +15,7 @@ return array(
     'password_resets_sent'      => 'De geselecteerde gebruikers die zijn geactiveerd en die een geldig e-mailadres hebben, hebben een wachtwoord reset link ontvangen.',
     'password_reset_sent'       => 'Een link om het wachtwoord te resetten is verstuurd naar :email!',
     'user_has_no_email'         => 'This user does not have an email address in their profile.',
+    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
 
 
     'success' => array(
@@ -59,4 +60,8 @@ return array(
         'invalidfiles' => 'Een of meer van uw bestanden is te groot of is een bestandstype dat niet is toegestaan. Toegestaande bestandstypen png, gif, jpg, doc, docx, pdf en txt.',
     ),
 
+    'inventorynotification' => array(
+        'error'   => 'This user has no email set.',
+        'success' => 'The user has been notified about their current inventory.'
+    )
 );
