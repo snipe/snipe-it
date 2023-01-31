@@ -241,10 +241,10 @@
         </table>
     @endif
 
-    <br>
-    <br>
-    <br>
     @if($settings->print_additional_text)
+        <br>
+        <br>
+        <br>
         <table>
             <tr>
                 <td>
