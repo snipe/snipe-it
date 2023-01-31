@@ -80,8 +80,7 @@
           </li>
         @endcan
 
-        @can('update', Component::class)
-
+        @can('components.files', $component)
           <li class="pull-right">
             <a href="#" data-toggle="modal" data-target="#uploadFileModal">
               <i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}
