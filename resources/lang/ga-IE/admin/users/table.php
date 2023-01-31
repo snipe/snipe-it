@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Gníomhach',
     'allow'  				=> 'Ceadaigh',
     'checkedout'  			=> 'Sócmhainní',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'Ríomhphost',
     'employee_num'      	=> 'Uimhir an Fhostaí',
     'first_name' 			=> 'Ainm',
-    'groupnotes'			=> 'Roghnaigh grúpa chun an t-úsáideoir a shannadh, cuimhnigh go nglacann úsáideoir ceadanna an ghrúpa a sannfar iad.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Inherit',
     'job' 					=> 'Teideal an phoist',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Taispeáin Úsáideoirí Reatha',
     'show_deleted'          => 'Taispeáin Úsáideoirí Scriosta',
     'title' 				=> 'Teideal',
-    'to_restore_them'		=> 'iad a chur ar ais.',
+	'to_restore_them'		=> 'iad a chur ar ais.',
     'updateuser' 			=> 'Nuashonraigh Úsáideoir',
     'username' 				=> 'Ainm Úsáideora',
-    'user_deleted_text' 	=> 'Marcáladh an t-úsáideoir seo mar a scriosadh é.',
+	'user_deleted_text' 	=> 'Marcáladh an t-úsáideoir seo mar a scriosadh é.',
     'username_note' 		=> '(Úsáidtear é seo le haghaidh Eolaire Gníomhach a cheanglaíonn ach amháin, gan logáil isteach.)',
     'cloneuser'             => 'Úsáideoir Clón',
     'viewusers' 			=> 'Féach ar Úsáideoirí',
-];
+);

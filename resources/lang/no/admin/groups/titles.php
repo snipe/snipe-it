@@ -10,5 +10,7 @@ return [
     'group_admin' 	 		=> 'Gruppeadministrator',
     'allow' 	 			=> 'Tillat',
     'deny' 	 				=> 'Avslå',
-
+    'permission'            => 'Rettigheter',
+    'grant'                 => 'Gi tilgang',
+    'no_permissions'        => 'Denne gruppen har ingen rettigheter.'
 ];

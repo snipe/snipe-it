@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => 'The :attribute must be a file.',
     'filled'               => 'The :attribute field must have a value.',
     'image'                => 'The :attribute must be an image.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'The selected :attribute is invalid.',
     'in_array'             => 'The :attribute field does not exist in :other.',
     'integer'              => 'The :attribute must be an integer.',
     'ip'                   => 'The :attribute must be a valid IP address.',
     'ipv4'                 => 'The :attribute must be a valid IPv4 address.',
     'ipv6'                 => 'The :attribute must be a valid IPv6 address.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'The :attribute must be a valid JSON string.',
     'max'                  => [
         'numeric' => 'The :attribute may not be greater than :max.',
@@ -64,6 +66,7 @@ return array(
         'string'  => 'The :attribute must be at least :min characters.',
         'array'   => 'The :attribute must have at least :min items.',
     ],
+    'starts_with'          => ':attribute musí začínať jedným z nasledujúcich výrazov: :values.',
     'not_in'               => 'The selected :attribute is invalid.',
     'numeric'              => 'The :attribute must be a number.',
     'present'              => 'The :attribute field must be present.',
@@ -88,8 +91,17 @@ return array(
     'unique'               => 'The :attribute has already been taken.',
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
-    "unique_undeleted"     => "The :attribute must be unique.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => 'The :attribute must be unique.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Heslo nemôže byť rovnaké ako užívateľské meno.',
+    'letters'              => 'Heslo musí obsahovať najmenej jedno písmeno.',
+    'numbers'              => 'Heslo musí obsahovať najmenej jednu číslicu.',
+    'case_diff'            => 'Heslo musí obsahovať veľké aj malé písmena.',
+    'symbols'              => 'Heslo musí obsahovať symboly.',
+    'gte'                  => [
+        'numeric'          => '´Hodnota nemôže byť záporná'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +113,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +126,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "The :attribute field contains a character that is not allowed.",
-        "email_array"      => "One or more email addresses is invalid.",
-        "hashed_pass"      => "Your current password is incorrect",
+        'alpha_space' => 'The :attribute field contains a character that is not allowed.',
+        'email_array'      => 'One or more email addresses is invalid.',
+        'hashed_pass'      => 'Your current password is incorrect',
         'dumbpwd'          => 'That password is too common.',
-        "statuslabel_type" => "You must select a valid status label type",
+        'statuslabel_type' => 'You must select a valid status label type',
     ],
 
     /*
@@ -135,4 +146,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

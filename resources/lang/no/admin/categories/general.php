@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'asset_categories' 					=> 'Kategorier',
     'category_name'  					=> 'Navn',
     'checkin_email'                     => 'Send epost til bruker ved innsjekking/utsjekking.',
@@ -18,5 +18,6 @@ return [
     'update'  							=> 'Oppdatere kategori',
     'use_default_eula'					=> 'Bruk <a href="#" data-toggle="modal" data-target="#eulaModal">standard EULA</a> i stedet.',
     'use_default_eula_disabled'			=> '<del>Bruk standard EULA i stedet.</del> Ingen standard EULA er satt. Legg til en i Innstillinger.',
+    'use_default_eula_column'			=> 'Bruk standard EULA',
 
-];
+);

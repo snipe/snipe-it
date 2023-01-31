@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Gate;
 use Watson\Validating\ValidatingTrait;
+use App\Helpers\Helper;
+use Illuminate\Support\Str;
 
 /**
  * Model for Categories. Categories are a higher-level group
@@ -96,6 +98,7 @@ class Category extends SnipeModel
      */
     public function isDeletable()
     {
+
         return Gate::allows('delete', $this)
                 && ($this->itemCount() == 0);
     }
@@ -149,7 +152,10 @@ class Category extends SnipeModel
     }
 
     /**
-     * Get the number of items in the category
+     * Get the number of items in the category. This should NEVER be used in
+     * a collection of categories, as you'll end up with an n+1 query problem.
+     *
+     * It should only be used in a single category context.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v2.0]
@@ -157,6 +163,11 @@ class Category extends SnipeModel
      */
     public function itemCount()
     {
+
+        if (isset($this->{Str::plural($this->category_type).'_count'})) {
+            return $this->{Str::plural($this->category_type).'_count'};
+        }
+
         switch ($this->category_type) {
             case 'asset':
                 return $this->assets()->count();
@@ -168,9 +179,10 @@ class Category extends SnipeModel
                 return $this->consumables()->count();
             case 'license':
                 return $this->licenses()->count();
+            default:
+                return 0;
         }
 
-        return '0';
     }
 
     /**
@@ -207,12 +219,11 @@ class Category extends SnipeModel
      */
     public function getEula()
     {
-        $Parsedown = new \Parsedown();
 
         if ($this->eula_text) {
-            return $Parsedown->text(e($this->eula_text));
+            return Helper::parseEscapedMarkedown($this->eula_text);
         } elseif ((Setting::getSettings()->default_eula_text) && ($this->use_default_eula == '1')) {
-            return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
+            return Helper::parseEscapedMarkedown(Setting::getSettings()->default_eula_text);
         } else {
             return null;
         }

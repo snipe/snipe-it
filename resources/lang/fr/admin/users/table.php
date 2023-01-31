@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Actif',
     'allow'  				=> 'Autoriser',
     'checkedout'  			=> 'Actifs',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'E-mail',
     'employee_num'      	=> 'Employé n°.',
     'first_name' 			=> 'Prénom',
-    'groupnotes'			=> 'Sélectionner un groupe à assigner à l\'utilisateur, qui prendra les droits de ce groupe.',
+    'groupnotes'			=> 'Sélectionnez un groupe dans lequel inclure l\'utilisateur. Attention, l\'utilisateur aura accès aux droits du groupe dans lequel il est inclus. Utilisez ctrl+clic (ou cmd+clic sous MacOS) pour déselectionner des groupes.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Hériter',
     'job' 					=> 'intitulé du poste',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Afficher les utilisateurs actifs',
     'show_deleted'          => 'Afficher les utilisateurs supprimés',
     'title' 				=> 'Titre',
-    'to_restore_them'		=> 'pour les restaurer.',
+	'to_restore_them'		=> 'pour les restaurer.',
     'updateuser' 			=> 'Mettre à jour l\'utilisateur',
     'username' 				=> 'Nom d\'utilisateur',
-    'user_deleted_text' 	=> 'Cet utilisateur a été marqué comme supprimé.',
+	'user_deleted_text' 	=> 'Cet utilisateur a été marqué comme supprimé.',
     'username_note' 		=> '( Ceci est utilisé pour la liaison ne Active Directory , pas pour la connexion. )',
     'cloneuser'             => 'Cloner l\'utilisateur',
     'viewusers' 			=> 'Voir les utilisateurs',
-];
+);

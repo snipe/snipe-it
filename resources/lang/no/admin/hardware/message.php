@@ -17,6 +17,7 @@ return [
         'error'   			=> 'Eiendelen ble ikke oppdatert, prøv igjen',
         'success' 			=> 'Oppdatering av eiendel vellykket.',
         'nothing_updated'	=>  'Ingen felter er valgt, så ingenting ble endret.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [
@@ -28,6 +29,7 @@ return [
         'error'   		=> 'Asset audit var mislykket. Prøv på nytt.',
         'success' 		=> 'Asset audit ble logget.',
     ],
+
 
     'deletefile' => [
         'error'   => 'Fil ble ikke slettet. Prøv igjen.',
@@ -48,6 +50,7 @@ return [
         'file_delete_success'   => 'Filen har blitt slettet',
         'file_delete_error'      => 'Filen kunne ikke bli slettet',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Er du sikker på at du vil slette eiendelen?',

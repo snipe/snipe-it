@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => ':attribute はファイルにして下さい。',
     'filled'               => ':attribute フィールドは空に出来ません。',
     'image'                => ':attribute は画像にして下さい。',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => '選択された :attribute は不正です。',
     'in_array'             => ':attribute フィールドが :other に存在しません。',
     'integer'              => ':attribute は整数にして下さい。',
     'ip'                   => ':attribute は有効なIPアドレスにして下さい。',
     'ipv4'                 => ':attribute は有効なIPアドレスにして下さい。',
     'ipv6'                 => ':attribute は有効なIPv6アドレスにして下さい。',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => ':attribute は有効なJSON文字列にして下さい。',
     'max'                  => [
         'numeric' => ':attribute は :max 以上にして下さい。',
@@ -64,6 +66,7 @@ return array(
         'string'  => ':attribute は、少なくとも :min 文字以上にして下さい。',
         'array'   => ':attribute は少なくとも :min 以上にして下さい。',
     ],
+    'starts_with'          => ':attribute は、いずれかの値で始まる必要があります: :values.',
     'not_in'               => '選択された :attribute は不正です。',
     'numeric'              => ':attribute は数字にして下さい。',
     'present'              => ':attribute フィールドは必須です。',
@@ -88,8 +91,17 @@ return array(
     'unique'               => ':attribute は、取得済みです。',
     'uploaded'             => ':attribute のアップロードに失敗しました。',
     'url'                  => ':attribute フォーマットが不正です。',
-    "unique_undeleted"     => ":attribute は 一意の値である必要があります。",
-    "non_circular"         => ":attribute は、循環参照を作成してはいけません。",
+    'unique_undeleted'     => ':attribute は 一意の値である必要があります。',
+    'non_circular'         => ':attribute は、循環参照を作成してはいけません。',
+    'disallow_same_pwd_as_user_fields' => 'パスワードはユーザー名と同じにすることはできません。',
+    'letters'              => 'パスワードには英字が1文字以上必要です。',
+    'numbers'              => 'パスワードには数字が1つ以上必要です。',
+    'case_diff'            => 'パスワードは英字と数字を混在させる必要があります。',
+    'symbols'              => 'パスワードには記号を含める必要があります',
+    'gte'                  => [
+        'numeric'          => '負の値にすることはできません'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +113,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +126,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => ":attribute フィールドに、禁止文字列が含まれています。",
-        "email_array"      => "1 つまたは複数の電子メール アドレスが無効です。",
-        "hashed_pass"      => "現在のパスワードが正しくありません。",
+        'alpha_space' => ':attribute フィールドに、禁止文字列が含まれています。',
+        'email_array'      => '1 つまたは複数の電子メール アドレスが無効です。',
+        'hashed_pass'      => '現在のパスワードが正しくありません。',
         'dumbpwd'          => 'そのパスワードはあまりにも脆弱です。',
-        "statuslabel_type" => "有効なステータスラベルの種類を選択する必要があります。",
+        'statuslabel_type' => '有効なステータスラベルの種類を選択する必要があります。',
     ],
 
     /*
@@ -135,4 +146,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

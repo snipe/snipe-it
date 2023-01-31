@@ -64,7 +64,7 @@ class PredefinedKitsController extends Controller
             return redirect()->back()->withInput()->withErrors($kit->getErrors());
         }
 
-        return redirect()->route('kits.index')->with('success', 'Kit was successfully created.'); // TODO: trans()
+        return redirect()->route('kits.index')->with('success', trans('admin/kits/general.kit_created'));
     }
 
     /**
@@ -85,7 +85,7 @@ class PredefinedKitsController extends Controller
                 ->with('licenses', $kit->licenses);
         }
 
-        return redirect()->route('kits.index')->with('error', 'Kit does not exist');        // TODO: trans
+        return redirect()->route('kits.index')->with('error', trans('admin/kits/general.kit_none'));
     }
 
     /**
@@ -103,13 +103,13 @@ class PredefinedKitsController extends Controller
         // Check if the kit exists
         if (is_null($kit = PredefinedKit::find($kit_id))) {
             // Redirect to the kits management page
-            return redirect()->route('kits.index')->with('error', 'Kit does not exist');      // TODO: trans
+            return redirect()->route('kits.index')->with('error', trans('admin/kits/general.kit_none'));
         }
 
         $kit->name = $request->input('name');
 
         if ($kit->save()) {
-            return redirect()->route('kits.index')->with('success', 'Kit was successfully updated');        // TODO: trans
+            return redirect()->route('kits.index')->with('success', trans('admin/kits/general.kit_updated'));
         }
 
         return redirect()->back()->withInput()->withErrors($kit->getErrors());
@@ -129,7 +129,7 @@ class PredefinedKitsController extends Controller
         $this->authorize('delete', PredefinedKit::class);
         // Check if the kit exists
         if (is_null($kit = PredefinedKit::find($kit_id))) {
-            return redirect()->route('kits.index')->with('error', 'Kit not found');     // TODO: trans
+            return redirect()->route('kits.index')->with('error', trans('admin/kits/general.kit_not_found'));
         }
 
         // Delete childs
@@ -141,7 +141,7 @@ class PredefinedKitsController extends Controller
         $kit->delete();
 
         // Redirect to the kit management page
-        return redirect()->route('kits.index')->with('success', 'Kit was successfully deleted'); // TODO: trans
+        return redirect()->route('kits.index')->with('success', trans('admin/kits/general.kit_deleted'));
     }
 
     /**
@@ -176,7 +176,7 @@ class PredefinedKitsController extends Controller
             ]);
         }
 
-        return redirect()->route('kits.index')->with('error', 'Kit does not exist');        // TODO: trans
+        return redirect()->route('kits.index')->with('error', trans('admin/kits/general.kit_none'));
     }
 
     /**
@@ -191,7 +191,7 @@ class PredefinedKitsController extends Controller
         $this->authorize('update', PredefinedKit::class);
         if (is_null($kit = PredefinedKit::find($kit_id))) {
             // Redirect to the kits management page
-            return redirect()->route('kits.index')->with('error', 'Kit does not exist');      // TODO: trans
+            return redirect()->route('kits.index')->with('error', trans('admin/kits/general.kit_none'));
         }
 
         $validator = \Validator::make($request->all(), $kit->makeModelRules($model_id));
@@ -206,7 +206,7 @@ class PredefinedKitsController extends Controller
         $pivot->quantity = $request->input('quantity');
         $pivot->save();
 
-        return redirect()->route('kits.edit', $kit_id)->with('success', 'Model updated successfully.');     // TODO: trans
+        return redirect()->route('kits.edit', $kit_id)->with('success', trans('admin/kits/general.kit_model_updated'));
     }
 
     /**
@@ -221,14 +221,14 @@ class PredefinedKitsController extends Controller
         $this->authorize('update', PredefinedKit::class);
         if (is_null($kit = PredefinedKit::find($kit_id))) {
             // Redirect to the kits management page
-            return redirect()->route('kits.index')->with('error', 'Kit does not exist');      // TODO: trans
+            return redirect()->route('kits.index')->with('error', trans('admin/kits/general.kit_none'));
         }
 
         // Delete childs
         $kit->models()->detach($model_id);
 
         // Redirect to the kit management page
-        return redirect()->route('kits.edit', $kit_id)->with('success', 'Model was successfully detached'); // TODO: trans
+        return redirect()->route('kits.edit', $kit_id)->with('success', trans('admin/kits/general.kit_model_detached'));
     }
 
     /**
@@ -243,10 +243,10 @@ class PredefinedKitsController extends Controller
     {
         $this->authorize('update', PredefinedKit::class);
         if (! ($kit = PredefinedKit::find($kit_id))) {
-            return redirect()->route('kits.index')->with('error', 'Kit does not exist');        // TODO: trans
+            return redirect()->route('kits.index')->with('error', trans('admin/kits/general.kit_none'));
         }
         if (! ($license = $kit->licenses()->find($license_id))) {
-            return redirect()->route('kits.index')->with('error', 'License does not exist');        // TODO: trans
+            return redirect()->route('kits.index')->with('error', trans('admin/kits/general.license_none'));
         }
 
         return view('kits/license-edit', [
@@ -269,7 +269,7 @@ class PredefinedKitsController extends Controller
         $this->authorize('update', PredefinedKit::class);
         if (is_null($kit = PredefinedKit::find($kit_id))) {
             // Redirect to the kits management page
-            return redirect()->route('kits.index')->with('error', 'Kit does not exist');      // TODO: trans
+            return redirect()->route('kits.index')->with('error', trans('admin/kits/general.kit_none'));
         }
 
         $validator = \Validator::make($request->all(), $kit->makeLicenseRules($license_id));
@@ -284,7 +284,7 @@ class PredefinedKitsController extends Controller
         $pivot->quantity = $request->input('quantity');
         $pivot->save();
 
-        return redirect()->route('kits.edit', $kit_id)->with('success', 'License updated successfully.');     // TODO: trans
+        return redirect()->route('kits.edit', $kit_id)->with('success', trans('admin/kits/general.license_updated'));
     }
 
     /**
@@ -300,14 +300,14 @@ class PredefinedKitsController extends Controller
         $this->authorize('update', PredefinedKit::class);
         if (is_null($kit = PredefinedKit::find($kit_id))) {
             // Redirect to the kits management page
-            return redirect()->route('kits.index')->with('error', 'Kit does not exist');      // TODO: trans
+            return redirect()->route('kits.index')->with('error', trans('admin/kits/general.kit_none'));
         }
 
         // Delete childs
         $kit->licenses()->detach($license_id);
 
         // Redirect to the kit management page
-        return redirect()->route('kits.edit', $kit_id)->with('success', 'License was successfully detached'); // TODO: trans
+        return redirect()->route('kits.edit', $kit_id)->with('success', trans('admin/kits/general.license_detached'));
     }
 
     /**
@@ -322,10 +322,10 @@ class PredefinedKitsController extends Controller
     {
         $this->authorize('update', PredefinedKit::class);
         if (! ($kit = PredefinedKit::find($kit_id))) {
-            return redirect()->route('kits.index')->with('error', 'Kit does not exist');        // TODO: trans
+            return redirect()->route('kits.index')->with('error', trans('admin/kits/general.kit_none'));
         }
         if (! ($accessory = $kit->accessories()->find($accessory_id))) {
-            return redirect()->route('kits.index')->with('error', 'Accessory does not exist');        // TODO: trans
+            return redirect()->route('kits.index')->with('error', trans('admin/kits/general.accessory_none'));
         }
 
         return view('kits/accessory-edit', [
@@ -348,7 +348,7 @@ class PredefinedKitsController extends Controller
         $this->authorize('update', PredefinedKit::class);
         if (is_null($kit = PredefinedKit::find($kit_id))) {
             // Redirect to the kits management page
-            return redirect()->route('kits.index')->with('error', 'Kit does not exist');      // TODO: trans
+            return redirect()->route('kits.index')->with('error', trans('admin/kits/general.kit_none'));
         }
 
         $validator = \Validator::make($request->all(), $kit->makeAccessoryRules($accessory_id));
@@ -363,7 +363,7 @@ class PredefinedKitsController extends Controller
         $pivot->quantity = $request->input('quantity');
         $pivot->save();
 
-        return redirect()->route('kits.edit', $kit_id)->with('success', 'Accessory updated successfully.');     // TODO: trans
+        return redirect()->route('kits.edit', $kit_id)->with('success', trans('admin/kits/general.accessory_updated'));
     }
 
     /**
@@ -378,14 +378,14 @@ class PredefinedKitsController extends Controller
         $this->authorize('update', PredefinedKit::class);
         if (is_null($kit = PredefinedKit::find($kit_id))) {
             // Redirect to the kits management page
-            return redirect()->route('kits.index')->with('error', 'Kit does not exist');      // TODO: trans
+            return redirect()->route('kits.index')->with('error', trans('admin/kits/general.kit_none'));
         }
 
         // Delete childs
         $kit->accessories()->detach($accessory_id);
 
         // Redirect to the kit management page
-        return redirect()->route('kits.edit', $kit_id)->with('success', 'Accessory was successfully detached'); // TODO: trans
+        return redirect()->route('kits.edit', $kit_id)->with('success', trans('admin/kits/general.accessory_detached'));
     }
 
     /**
@@ -400,10 +400,10 @@ class PredefinedKitsController extends Controller
     {
         $this->authorize('update', PredefinedKit::class);
         if (! ($kit = PredefinedKit::find($kit_id))) {
-            return redirect()->route('kits.index')->with('error', 'Kit does not exist');        // TODO: trans
+            return redirect()->route('kits.index')->with('error', trans('admin/kits/general.kit_none'));
         }
         if (! ($consumable = $kit->consumables()->find($consumable_id))) {
-            return redirect()->route('kits.index')->with('error', 'Consumable does not exist');        // TODO: trans
+            return redirect()->route('kits.index')->with('error', trans('admin/kits/general.consumable_none'));
         }
 
         return view('kits/consumable-edit', [
@@ -426,7 +426,7 @@ class PredefinedKitsController extends Controller
         $this->authorize('update', PredefinedKit::class);
         if (is_null($kit = PredefinedKit::find($kit_id))) {
             // Redirect to the kits management page
-            return redirect()->route('kits.index')->with('error', 'Kit does not exist');      // TODO: trans
+            return redirect()->route('kits.index')->with('error', trans('admin/kits/general.kit_none'));
         }
 
         $validator = \Validator::make($request->all(), $kit->makeConsumableRules($consumable_id));
@@ -441,7 +441,7 @@ class PredefinedKitsController extends Controller
         $pivot->quantity = $request->input('quantity');
         $pivot->save();
 
-        return redirect()->route('kits.edit', $kit_id)->with('success', 'Consumable updated successfully.');     // TODO: trans
+        return redirect()->route('kits.edit', $kit_id)->with('success', trans('admin/kits/general.consumable_updated'));
     }
 
     /**
@@ -456,13 +456,13 @@ class PredefinedKitsController extends Controller
         $this->authorize('update', PredefinedKit::class);
         if (is_null($kit = PredefinedKit::find($kit_id))) {
             // Redirect to the kits management page
-            return redirect()->route('kits.index')->with('error', 'Kit does not exist');      // TODO: trans
+            return redirect()->route('kits.index')->with('error', trans('admin/kits/general.kit_none'));
         }
 
         // Delete childs
         $kit->consumables()->detach($consumable_id);
 
         // Redirect to the kit management page
-        return redirect()->route('kits.edit', $kit_id)->with('success', 'Consumable was successfully detached'); // TODO: trans
+        return redirect()->route('kits.edit', $kit_id)->with('success', trans('admin/kits/general.consumable_detached'));
     }
 }

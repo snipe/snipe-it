@@ -23,6 +23,8 @@ php7.4-xml \
 php7.4-mbstring \
 php7.4-zip \
 php7.4-bcmath \
+php7.4-redis \
+php-memcached \
 patch \
 curl \
 wget  \
@@ -41,6 +43,7 @@ libmcrypt-dev \
 php7.4-dev \
 ca-certificates \
 unzip \
+dnsutils \
 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
@@ -76,6 +79,8 @@ RUN a2ensite 001-default-ssl.conf
 COPY . /var/www/html
 
 RUN a2enmod rewrite
+
+COPY docker/column-statistics.cnf /etc/mysql/conf.d/column-statistics.cnf
 
 ############ INITIAL APPLICATION SETUP #####################
 

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_manufacturers_title'    => 'Üreticiler hakkında',
     'about_manufacturers_text'  => 'Üreticiler varlıkları oluşturan şirketledir. Önemli servis sağlayıcı bilgilerinizi burada saklayabilirsiniz. Varlıkların detay kısmında bu bilgilere ulaşabilirsiniz.',
     'asset_manufacturers'	=> 'Demirbaş Üreticileri',
@@ -13,4 +13,4 @@ return [
     'update'				=> 'Üretici Güncelle',
     'url'   				=> 'URL',
 
-];
+);

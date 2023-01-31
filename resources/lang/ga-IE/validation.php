@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => 'An: Ní mór tréith a bheith ina chomhad.',
     'filled'               => 'Ní mór go mbeadh luach ag an réimse tréith.',
     'image'                => 'An: Ní mór tréith a bheith ina íomhá.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'An roghnaithe: tá tréith neamhbhailí.',
     'in_array'             => 'Níl an: réimse tréith i: eile.',
     'integer'              => 'An: Ní mór tréith a bheith ina slánuimhir.',
     'ip'                   => 'Ní mór an tréith: seoladh IP bailí a bheith ann.',
     'ipv4'                 => 'Ní mór don ghné seo: seoladh IPv4 bailí.',
     'ipv6'                 => 'Ní mór don ghné seo: seoladh IPv6 bailí.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'An: ní mór gur tréith JSON bailí í an tréith.',
     'max'                  => [
         'numeric' => 'An: ní fhéadfar tréith a bheith níos mó ná: max.',
@@ -64,6 +66,7 @@ return array(
         'string'  => 'Ní mór: tréith a bheith ar a laghad: carachtair min.',
         'array'   => 'Ní mór go mbeadh míreanna min ar a laghad ag an tréith.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'An roghnaithe: tá tréith neamhbhailí.',
     'numeric'              => 'An: Ní mór tréith a bheith ina líon.',
     'present'              => 'Ní mór an réimse tréith a bheith i láthair.',
@@ -88,8 +91,17 @@ return array(
     'unique'               => 'An: tá tréith déanta cheana féin.',
     'uploaded'             => 'The: theip ar an tréith a uaslódáil.',
     'url'                  => 'Tá an fhormáid tréithbhail neamhbhailí.',
-    "unique_undeleted"     => "The :attribute must be unique.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => 'The :attribute must be unique.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +113,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +126,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "An: sa réimse tréith tá carachtar nach bhfuil ceadaithe.",
-        "email_array"      => "Tá seoltaí ríomhphoist amháin nó níos mó neamhbhailí.",
-        "hashed_pass"      => "Tá do phasfhocal reatha mícheart",
+        'alpha_space' => 'An: sa réimse tréith tá carachtar nach bhfuil ceadaithe.',
+        'email_array'      => 'Tá seoltaí ríomhphoist amháin nó níos mó neamhbhailí.',
+        'hashed_pass'      => 'Tá do phasfhocal reatha mícheart',
         'dumbpwd'          => 'Tá an focal faire sin ró-choitianta.',
-        "statuslabel_type" => "Ní mór duit cineál lipéad stádas bailí a roghnú",
+        'statuslabel_type' => 'Ní mór duit cineál lipéad stádas bailí a roghnú',
     ],
 
     /*
@@ -135,4 +146,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

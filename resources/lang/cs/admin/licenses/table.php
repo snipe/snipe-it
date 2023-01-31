@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'assigned_to'   	=> 'Přiděleno',
     'checkout'   		=> 'Stav',
@@ -14,4 +14,4 @@ return [
     'serial'   			=> 'Sériové číslo',
     'title'      		=> 'Licence',
 
-];
+);

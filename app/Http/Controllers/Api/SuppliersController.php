@@ -34,6 +34,46 @@ class SuppliersController extends Controller
             $suppliers = $suppliers->TextSearch($request->input('search'));
         }
 
+        if ($request->filled('name')) {
+            $suppliers->where('name', '=', $request->input('name'));
+        }
+
+        if ($request->filled('address')) {
+            $suppliers->where('address', '=', $request->input('address'));
+        }
+
+        if ($request->filled('address2')) {
+            $suppliers->where('address2', '=', $request->input('address2'));
+        }
+
+        if ($request->filled('city')) {
+            $suppliers->where('city', '=', $request->input('city'));
+        }
+
+        if ($request->filled('zip')) {
+            $suppliers->where('zip', '=', $request->input('zip'));
+        }
+
+        if ($request->filled('country')) {
+            $suppliers->where('country', '=', $request->input('country'));
+        }
+
+        if ($request->filled('fax')) {
+            $suppliers->where('fax', '=', $request->input('fax'));
+        }
+
+        if ($request->filled('email')) {
+            $suppliers->where('email', '=', $request->input('email'));
+        }
+
+        if ($request->filled('url')) {
+            $suppliers->where('url', '=', $request->input('url'));
+        }
+
+        if ($request->filled('notes')) {
+            $suppliers->where('notes', '=', $request->input('notes'));
+        }
+
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.
         $offset = (($suppliers) && ($request->get('offset') > $suppliers->count())) ? $suppliers->count() : $request->get('offset', 0);
@@ -70,8 +110,8 @@ class SuppliersController extends Controller
         if ($supplier->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $supplier, trans('admin/suppliers/message.create.success')));
         }
-
         return response()->json(Helper::formatStandardApiResponse('error', null, $supplier->getErrors()));
+
     }
 
     /**
@@ -89,6 +129,7 @@ class SuppliersController extends Controller
 
         return (new SuppliersTransformer)->transformSupplier($supplier);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -127,6 +168,7 @@ class SuppliersController extends Controller
         $supplier = Supplier::with('asset_maintenances', 'assets', 'licenses')->withCount('asset_maintenances as asset_maintenances_count', 'assets as assets_count', 'licenses as licenses_count')->findOrFail($id);
         $this->authorize('delete', $supplier);
 
+
         if ($supplier->assets_count > 0) {
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/suppliers/message.delete.assoc_assets', ['asset_count' => (int) $supplier->assets_count])));
         }
@@ -153,6 +195,9 @@ class SuppliersController extends Controller
      */
     public function selectlist(Request $request)
     {
+
+        $this->authorize('view.selectlists');
+
         $suppliers = Supplier::select([
             'id',
             'name',

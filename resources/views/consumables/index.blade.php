@@ -8,7 +8,7 @@
 
 @section('header_right')
   @can('create', \App\Models\Consumable::class)
-  <a href="{{ route('consumables.create') }}" class="btn btn-primary pull-right"> {{ trans('general.create') }}</a>
+  <a href="{{ route('consumables.create') }}" accesskey="n" class="btn btn-primary pull-right"> {{ trans('general.create') }}</a>
   @endcan
 @stop
 
@@ -29,6 +29,7 @@
                 data-side-pagination="server"
                 data-show-columns="true"
                 data-show-export="true"
+                data-show-fullscreen="true"
                 data-show-footer="true"
                 data-show-refresh="true"
                 data-sort-order="asc"

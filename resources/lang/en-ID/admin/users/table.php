@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Aktif',
     'allow'  				=> 'Izinkan',
     'checkedout'  			=> 'Aset',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'Surel',
     'employee_num'      	=> 'Nomor karyawan.',
     'first_name' 			=> 'Nama depan',
-    'groupnotes'			=> 'Pilih grup yang akan ditetapkan ke pengguna, ingat bahwa pengguna mengambil hak akses grup yang ditetapkan.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Mewarisi',
     'job' 					=> 'Judul pekerjaan',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Tampilkan pengguna saat ini',
     'show_deleted'          => 'Tampilkan pengguna yang dihapus',
     'title' 				=> 'Judul',
-    'to_restore_them'		=> 'untuk mengembalikan mereka.',
+	'to_restore_them'		=> 'untuk mengembalikan mereka.',
     'updateuser' 			=> 'Perbarui pengguna',
     'username' 				=> 'Nama pengguna',
-    'user_deleted_text' 	=> 'Pengguna ini sudah ditandai sebagai sudah terhapus.',
+	'user_deleted_text' 	=> 'Pengguna ini sudah ditandai sebagai sudah terhapus.',
     'username_note' 		=> '(Ini hanya digunakan untuk mengikat Direktori Aktif saja, bukan untuk login.)',
     'cloneuser'             => 'Gandakan pengguna',
     'viewusers' 			=> 'Tampilkan pengguna',
-];
+);

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => ':attribute moet een bestand zijn.',
     'filled'               => ':attribute veld moet een waarde hebben.',
     'image'                => ':attribute moet een afbeelding zijn.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'Het geselecteerde kenmerk :attribute is ongeldig.',
     'in_array'             => ':attribute veld bestaat niet in :other.',
     'integer'              => ':attribute moet van het type integer zijn.',
     'ip'                   => ':attribute moet een geldig IP-adres zijn.',
     'ipv4'                 => ':attribute moet een geldig IP-adres zijn.',
     'ipv6'                 => ':attribute moet een geldig IPv6-adres zijn.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => ':attribute moet valide JSON code zijn.',
     'max'                  => [
         'numeric' => ':attribute moet groter zijn dan :max.',
@@ -64,6 +66,7 @@ return array(
         'string'  => ':attribute moet tenminste :min karakters bevatten.',
         'array'   => ':attribute moet minimaal :min items bevatten.',
     ],
+    'starts_with'          => ':attribute moet met één van de volgende waarden eindigen: :values.',
     'not_in'               => 'Het geselecteerde kenmerk :attribute is ongeldig.',
     'numeric'              => ':attribute moet een getal zijn.',
     'present'              => ':attribute veld moet aanwezig zijn.',
@@ -88,8 +91,17 @@ return array(
     'unique'               => 'Het veld :attribute is reeds in gebruik.',
     'uploaded'             => 'Uploaden van :attribute is mislukt.',
     'url'                  => 'Het formaat van :attribute is ongeldig.',
-    "unique_undeleted"     => "De :attribute moet uniek zijn. ",
-    "non_circular"         => ":attribute mag geen circulaire referentie aanmaken.",
+    'unique_undeleted'     => 'De :attribute moet uniek zijn. ',
+    'non_circular'         => ':attribute mag geen circulaire referentie aanmaken.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Waarde mag niet negatief zijn'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +113,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +126,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => ":attribute veld bevat een karakter wat niet is toegestaan.",
-        "email_array"      => "één of meer e-mail adressen kloppen niet.",
-        "hashed_pass"      => "Je huidige wachtwoord is incorrect",
+        'alpha_space' => ':attribute veld bevat een karakter wat niet is toegestaan.',
+        'email_array'      => 'één of meer e-mail adressen kloppen niet.',
+        'hashed_pass'      => 'Je huidige wachtwoord is incorrect',
         'dumbpwd'          => 'Dat wachtwoord is te veelvoorkomend.',
-        "statuslabel_type" => "Selecteer een valide status label",
+        'statuslabel_type' => 'Selecteer een valide status label',
     ],
 
     /*
@@ -135,4 +146,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

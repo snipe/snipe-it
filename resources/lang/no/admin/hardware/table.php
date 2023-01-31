@@ -4,10 +4,11 @@ return [
 
     'asset_tag'   	=> 'Eiendelsmerke',
     'asset_model'       => 'Modell',
-    'book_value'  	=> 'Verdi',
+    'book_value'  	=> 'Gjeldende verdi',
     'change' 		=> 'Inne/ute',
     'checkout_date' => 'Utsjekkdato',
     'checkoutto' 	=> 'Utsjekket',
+    'current_value' => 'Gjeldende verdi',
     'diff' 			=> 'Forskjell',
     'dl_csv' 		=> 'Last ned CSV',
     'eol' 			=> 'EOL',
@@ -18,8 +19,12 @@ return [
     'serial'   		=> 'Serienummer',
     'status'   		=> 'Status',
     'title'      	=> 'Eiendel ',
-    'image'		=> 'Enhet bilde',
+    'image'		    => 'Enhet bilde',
     'days_without_acceptance' => 'Dager uten aksept',
-    'monthly_depreciation' => 'Monthly Depreciation',
-
+    'monthly_depreciation' => 'Månedlig avskrivning',
+    'assigned_to'    => 'Tilordnet til',
+    'requesting_user' => 'Forespurt av',
+    'requested_date' => 'Dato forespurt',
+    'changed'       => 'Endret',
+    'icon' => 'Symbol',
 ];

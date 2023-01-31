@@ -6,17 +6,38 @@ return [
     'archived'  				=> 'Arşivlenmiş',
     'asset'  					=> 'Demirbaş',
     'bulk_checkout'             => 'Varlıkları Kullanıma Alma',
+    'bulk_checkin'              => 'Demirbaş Girişi Yap',
     'checkin'  					=> 'Demirbaş Girişi Yap',
     'checkout'  				=> 'Ödenme Öğe',
     'clone'  					=> 'Demirbaşı Kopyala',
     'deployable'  				=> 'Dağıtılabilir',
-    'deleted'  					=> 'This asset has been deleted.',
+    'deleted'  					=> 'Bu varlık silindi.',
     'edit'  					=> 'Demirbaşı Düzenle',
-    'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
+    'model_deleted'  			=> 'Bu varlık modeli silindi. Varlığı geri almak için modelini geri almalısınız.',
     'requestable'               => 'Talep edilebilir',
     'requested'				    => 'Talep edildi',
+    'not_requestable'           => 'Talep Edilemez',
+    'requestable_status_warning' => 'Talep edilebilirlik durumunu değiştirmeyin',
     'restore'  					=> 'Demirbaşı Geri Getir',
     'pending'  					=> 'Bekliyor',
     'undeployable'  			=> 'Dağtılamaz',
     'view'  					=> 'Demirbaşı Görüntüle',
+    'csv_error' => 'CSV dosyanızda bir hata var:',
+    'import_text' => '
+<p>
+     Varlık geçmişini içeren bir CSV yükleyin. Varlıklar ve kullanıcılar sistemde zaten mevcut OLMALIDIR, aksi takdirde atlanırlar. Varlıkları geçmişteki içe aktarmalarla eşleştirmek, varlık etiketlerine rağmen gerçekleşir. Sağladığınız kullanıcı adına ve aşağıda seçtiğiniz kriterlere göre eşleşen bir kullanıcı bulmaya çalışacağız. Aşağıda herhangi bir ölçüt seçmezseniz, Yönetici &gt; Genel Ayarlar.
+     </p>
+
+     <p>CSV\'ye dahil edilen alanlar şu başlıklarla eşleşmelidir: <strong>Varlık Etiketi, İsim, Çıkış Tarihi, Giriş Tarihi</strong>. Bunların dışındaki alanlar yoksayılacaktır. </p>
+
+     <p>Giriş Tarihi: boş bırakılan veya gelecek tarihli giriş tarihleri, o öğelerin ilgili kullanıcıya çıkışını yapacaktır. Giriş Tarihi sütununun bulunmaması halinde, bugünün tarihiyle bir giriş tarihi oluşturulacaktır.</p>    ',
+    'csv_import_match_f-l' => 'Kullanıcıları ad.soyad (jane.smith) biçimiyle eşleştirmeye çalışın',
+    'csv_import_match_initial_last' => 'Kullanıcıları adın ilk harfi ve soyad (jsmith) biçimiyle eşleştirmeye çalışın',
+    'csv_import_match_first' => 'Kullanıcıları ad (jane) biçimiyle eşleştirmeye çalışın',
+    'csv_import_match_email' => 'Kullanıcıları kullanıcı adı olarak e-postalarıyla eşleştirmeye çalışın',
+    'csv_import_match_username' => 'Kullanıcıları kullanıcı adlarıyla eşleştirmeye çalışın',
+    'error_messages' => 'Hata mesajı:',
+    'success_messages' => 'Başarı mesajı:',
+    'alert_details' => 'Detaylar için aşağıyı okuyun.',
+    'custom_export' => 'Özel Dışarı Aktar'
 ];

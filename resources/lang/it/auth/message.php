@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'account_already_exists' => 'Un account con questa email già esiste.',
     'account_not_found'      => 'Nome utente o password non corretto.',
@@ -9,36 +9,37 @@ return [
     'account_banned'         => 'Questo account è bannato.',
     'throttle'               => 'Troppi tentativi di login falliti. Per favore riprova entro :minutes minuti.',
 
-    'two_factor' => [
+    'two_factor' => array(
         'already_enrolled'      => 'Il tuo dispositivo è già registrato.',
         'success'               => 'Accesso eseguito correttamente.',
         'code_required'         => 'Codice a due fattori richiesto.',
         'invalid_code'          => 'Codice a due fattori non valido.',
-    ],
+    ),
 
-    'signin' => [
+    'signin' => array(
         'error'   => 'C\'è stato un problema durante il tentativo di accesso, riprova.',
         'success' => 'Accesso eseguito correttamente.',
-    ],
+    ),
 
-    'logout' => [
+    'logout' => array(
         'error'   => 'C\'è stato un problema durante il tentativo di logout, riprova per favore.',
         'success' => 'Ti sei disconnesso con successo.',
-    ],
+    ),
 
-    'signup' => [
+    'signup' => array(
         'error'   => 'C\'è stato un problema durante la creazione del tuo account, per favore riprova.',
         'success' => 'Account creato con successo.',
-    ],
+    ),
 
-    'forgot-password' => [
+    'forgot-password' => array(
         'error'   => 'C\'è stato un problema durante il tentativo di reset password, per favore riprova.',
         'success' => 'Se l\'indirizzo email esiste nel nostro sistema, è stata inviata una email di recupero password.',
-    ],
+    ),
 
-    'forgot-password-confirm' => [
+    'forgot-password-confirm' => array(
         'error'   => 'C\'è stato un problema durante il tentativo di reset password, per favore riprova.',
         'success' => 'La tua password è stata resettata con successo.',
-    ],
+    ),
 
-];
+
+);

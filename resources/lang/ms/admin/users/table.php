@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Aktif',
     'allow'  				=> 'Benarkan',
     'checkedout'  			=> 'Harta',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'E-mel',
     'employee_num'      	=> 'No. Pekerja',
     'first_name' 			=> 'Nama pertama',
-    'groupnotes'			=> 'Pilih kumpulan untuk pengguna ini, kuasa kumpulan akan diberikan kepada pengguna mengikut pemilihan kumpulan.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Warisi',
     'job' 					=> 'Jawatan',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Tunjukkan Pengguna Semasa',
     'show_deleted'          => 'Tunjukkan Pengguna Dipadamkan',
     'title' 				=> 'Tajuk',
-    'to_restore_them'		=> 'untuk memulihkannya.',
+	'to_restore_them'		=> 'untuk memulihkannya.',
     'updateuser' 			=> 'Kemaskini Pengguna',
     'username' 				=> 'Nama pengguna',
-    'user_deleted_text' 	=> 'Pengguna ini telah ditandakan sebagai dipadamkan.',
+	'user_deleted_text' 	=> 'Pengguna ini telah ditandakan sebagai dipadamkan.',
     'username_note' 		=> '(Ini digunakan untuk \'Active Directory\' sahaja, bukan untuk log masuk.)',
     'cloneuser'             => 'Pendua Pengguna',
     'viewusers' 			=> 'Papar Pengguna',
-];
+);

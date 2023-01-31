@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,9 @@ return [
     |
     */
 
-    'password' => 'Amaphasiwedi kufanele abe izinhlamvu eziyisithupha futhi afane nokuqinisekiswa.',
+    "password" => "Amaphasiwedi kufanele abe izinhlamvu eziyisithupha futhi afane nokuqinisekiswa.",
+    "user"     => "Igama lomsebenzisi noma ikheli le-imeyili alilungile",
+    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
+    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
 
-    'user'     => 'Igama lomsebenzisi noma ikheli le-imeyili alilungile',
-
-    'token'    => 'Le ithokheni yokusetha kabusha iphasiwedi ayivumelekile.',
-
-    'sent' => 'Uma ikheli le-imeyili elifanayo litholakala, isikhumbuzi sephasiwedi sithunyelwe!',
-
-];
+);

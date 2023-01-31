@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'create'				=> 'Maak asset model aan',
     'created_at' 			=> 'Aangemaakt op',
@@ -14,4 +14,4 @@ return [
     'update'				=> 'Wijzig asset model',
     'clone'				=> 'Kopieer model',
     'edit'				=> 'Bewerk model',
-];
+);

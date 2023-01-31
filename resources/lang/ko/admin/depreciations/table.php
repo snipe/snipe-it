@@ -6,5 +6,6 @@ return [
     'months'   => '개월',
     'term'   => '기간',
     'title'      => '이름 ',
+    'depreciation_min' => 'Floor Value',
 
 ];

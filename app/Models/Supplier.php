@@ -17,8 +17,8 @@ class Supplier extends SnipeModel
 
     protected $rules = [
         'name'              => 'required|min:1|max:255|unique_undeleted',
-        'address'           => 'max:50|nullable',
-        'address2'          => 'max:50|nullable',
+        'address'           => 'max:250|nullable',
+        'address2'          => 'max:250|nullable',
         'city'              => 'max:255|nullable',
         'state'             => 'max:32|nullable',
         'country'           => 'max:3|nullable',
@@ -184,7 +184,7 @@ class Supplier extends SnipeModel
      */
     public function addhttp($url)
     {
-        if (! preg_match('~^(?:f|ht)tps?://~i', $url)) {
+        if (($url!='') && (! preg_match('~^(?:f|ht)tps?://~i', $url))) {
             $url = 'http://'.$url;
         }
 

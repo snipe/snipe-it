@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AssetModelsController;
+use App\Http\Controllers\AssetModelsFilesController;
 use App\Http\Controllers\BulkAssetModelsController;
 use Illuminate\Support\Facades\Route;
 
@@ -9,13 +10,25 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'models', 'middleware' => ['auth']], function () {
 
+    Route::post('{modelID}/upload',
+        [AssetModelsFilesController::class, 'store']
+    )->name('upload/models');
+
+    Route::get('{modelID}/showfile/{fileId}/{download?}',
+        [AssetModelsFilesController::class, 'show']
+    )->name('show/modelfile');
+
+    Route::delete('{modelID}/showfile/{fileId}/delete',
+        [AssetModelsFilesController::class, 'destroy']
+    )->name('delete/modelfile');
+
     Route::get(
         '{modelId}/clone',
         [
             AssetModelsController::class, 
             'getClone'
         ]
-    )->name('clone/model');
+    )->name('models.clone.create');
 
     Route::post(
         '{modelId}/clone',
@@ -23,7 +36,7 @@ Route::group(['prefix' => 'models', 'middleware' => ['auth']], function () {
             AssetModelsController::class, 
             'postCreate'
         ]
-    )->name('clone/model');
+    )->name('models.clone.store');
 
     Route::get(
         '{modelId}/view',
@@ -39,7 +52,7 @@ Route::group(['prefix' => 'models', 'middleware' => ['auth']], function () {
             AssetModelsController::class, 
             'getRestore'
         ]
-    )->name('restore/model');
+    )->name('models.restore.store');
 
     Route::get(
         '{modelId}/custom_fields',
@@ -72,6 +85,7 @@ Route::group(['prefix' => 'models', 'middleware' => ['auth']], function () {
             'destroy'
         ]
     )->name('models.bulkdelete.store');
+
 
 
 });

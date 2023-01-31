@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Aktivan',
     'allow'  				=> 'dopustiti',
     'checkedout'  			=> 'Imovina',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'E-mail',
     'employee_num'      	=> 'Broj zaposlenika',
     'first_name' 			=> 'Ime',
-    'groupnotes'			=> 'Odaberite grupu koju ćete dodijeliti korisniku, ne zaboravite da korisnik preuzima dozvole skupine kojoj su dodijeljeni.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Iskaznica',
     'inherit'  				=> 'nasljediti',
     'job' 					=> 'Naziv posla',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Prikaži trenutne korisnike',
     'show_deleted'          => 'Prikaži izbrisane korisnike',
     'title' 				=> 'Titula',
-    'to_restore_them'		=> 'vratiti ih.',
+	'to_restore_them'		=> 'vratiti ih.',
     'updateuser' 			=> 'Ažuriranje korisnika',
     'username' 				=> 'Korisničko ime',
-    'user_deleted_text' 	=> 'Ovaj je korisnik označen kao izbrisan.',
+	'user_deleted_text' 	=> 'Ovaj je korisnik označen kao izbrisan.',
     'username_note' 		=> '(Ovo se upotrebljava samo za veze u sustavu Active Directory, a ne za prijavu.)',
     'cloneuser'             => 'Korisnik klona',
     'viewusers' 			=> 'Prikaži korisnike',
-];
+);

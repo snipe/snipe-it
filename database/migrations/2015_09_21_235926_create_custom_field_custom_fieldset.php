@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateCustomFieldCustomFieldset extends Migration
 {
@@ -13,13 +13,14 @@ class CreateCustomFieldCustomFieldset extends Migration
     public function up()
     {
         Schema::create('custom_field_custom_fieldset', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->integer('custom_field_id');
             $table->integer('custom_fieldset_id');
-
             $table->integer('order');
             $table->boolean('required');
             $table->engine = 'InnoDB';
         });
+
     }
 
     /**

@@ -28,6 +28,7 @@
               data-show-columns="true"
               data-show-export="true"
               data-show-refresh="true"
+              data-show-fullscreen="true"
               data-sort-order="asc"
               id="companiesTable"
               class="table table-striped snipe-table"
@@ -44,10 +45,8 @@
     </div>
     <!-- side address column -->
     <div class="col-md-3">
-      <h2>About Companies</h2>
-      <p>
-        You can use companies as a simple informative field, or you can use them to restrict asset visibility and availability to users with a specific company by enabling Full Company Support in your Admin Settings.
-      </p>
+      <h2>{{ trans('admin/companies/general.about_companies') }}</h2>
+      <p>{{ trans('admin/companies/general.about_companies_description') }}</p>
   </div>
 
 @stop

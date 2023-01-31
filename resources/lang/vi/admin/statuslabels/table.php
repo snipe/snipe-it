@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about'      	=> 'Về tình trạng nhãn',
     'archived'      	=> 'Đã lưu trữ',
     'create'      	=> 'Tạo tình trạng nhãn',
@@ -16,4 +16,4 @@ return [
     'title'      	=> 'Nhãn tình trạng',
     'undeployable'  => 'Không cho phép cấp phát',
     'update'      	=> 'Cập nhật tình trạng nhãn',
-];
+);

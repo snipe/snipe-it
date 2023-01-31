@@ -13,3 +13,4 @@ return [
     'username_help_top'                 => 'Voer je <strong>gebruikersnaam</strong> in om een wachtwoord reset link te mailen.',
     'username_help_bottom'          => 'Je gebruikersnaam en e-mailadres <em>kunnen</em> hetzelfde zijn, maar kan ook niet zo zijn, afhankelijk van je configuratie. Als je je gebruikersnaam niet meer weet, neem dan contact op met je beheerder. <br><br><strong>Gebruikersnamen zonder een bijbehorende e-mailadres zullen geen wachtwoord reset link toegestuurd krijgen.</strong> ',
     ];
+

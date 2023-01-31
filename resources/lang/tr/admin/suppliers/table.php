@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_suppliers_title' => 'Tedarikçiler Hakkında',
     'about_suppliers_text'  => 'Tedarikçiler, varlıkların kaynağını izlemek için kullanılır',
     'address'               => 'Tedarikçi Adresi',
@@ -24,4 +24,4 @@ return [
     'view_assets_for'       => 'Demirbaşları görüntüle',
     'zip'                   => 'Posta kodu',
 
-];
+);

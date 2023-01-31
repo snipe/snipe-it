@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => 'The: atribut harus berupa file.',
     'filled'               => 'Bidang atribut harus memiliki nilai.',
     'image'                => 'Atribut: harus berupa gambar.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'Yang dipilih :atribut tidak valid.',
     'in_array'             => 'Bidang atribut :tidak ada di :lainnya.',
     'integer'              => 'Atribut harus integer.',
     'ip'                   => 'Atribut :harus alamat IP yang valid.',
     'ipv4'                 => 'Atribut :harus alamat IPv4 yang valid.',
     'ipv6'                 => 'Atribut :harus alamat IPv6 yang valid.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'Atribut: harus string JSON yang valid.',
     'max'                  => [
         'numeric' => 'Atribut: mungkin tidak lebih besar dari: maks.',
@@ -64,6 +66,7 @@ return array(
         'string'  => 'Atribut :minimal harus :min karakter.',
         'array'   => 'Atribut :setidaknya harus memiliki :item min.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'Yang dipilih: atribut tidak valid.',
     'numeric'              => 'The: atribut harus berupa angka.',
     'present'              => 'Bidang atribut harus ada.',
@@ -88,8 +91,17 @@ return array(
     'unique'               => ':attribute sudah pernah digunakan.',
     'uploaded'             => ':attribute gagal di-upload.',
     'url'                  => 'Format :attribute tidaklah benar.',
-    "unique_undeleted"     => ":attribute haruslah unik.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => ':attribute haruslah unik.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +113,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +126,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Kolom :attribute mengandung karakter yang dilarang.",
-        "email_array"      => "Satu atau lebih alamat surel tidak valid.",
-        "hashed_pass"      => "Kata sandi anda saat ini salah",
+        'alpha_space' => 'Kolom :attribute mengandung karakter yang dilarang.',
+        'email_array'      => 'Satu atau lebih alamat surel tidak valid.',
+        'hashed_pass'      => 'Kata sandi anda saat ini salah',
         'dumbpwd'          => 'Kata sandi itu terlalu umum.',
-        "statuslabel_type" => "Anda harus pilih jenis label status yang valid",
+        'statuslabel_type' => 'Anda harus pilih jenis label status yang valid',
     ],
 
     /*
@@ -135,4 +146,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

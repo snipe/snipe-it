@@ -1,35 +1,36 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Verbruiksgoedere bestaan ​​nie.',
 
-    'create' => [
+    'create' => array(
         'error'   => 'Verbruiksgoedere is nie geskep nie, probeer asseblief weer.',
-        'success' => 'Verbruiker geskep suksesvol.',
-    ],
+        'success' => 'Verbruiker geskep suksesvol.'
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Verbruiksgoedere is nie opgedateer nie, probeer asseblief weer',
-        'success' => 'Verbruiksgoedere suksesvol opgedateer.',
-    ],
+        'success' => 'Verbruiksgoedere suksesvol opgedateer.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Is jy seker jy wil hierdie verbruiksgoed uitvee?',
         'error'   => 'Daar was \'n probleem met die verwydering van die verbruik. Probeer asseblief weer.',
-        'success' => 'Die verbruiksgoed is suksesvol verwyder.',
-    ],
+        'success' => 'Die verbruiksgoed is suksesvol verwyder.'
+    ),
 
-     'checkout' => [
+     'checkout' => array(
         'error'   		=> 'Verbruiksgoedere is nie nagegaan nie, probeer asseblief weer',
         'success' 		=> 'Verbruiksgoedere is suksesvol nagegaan.',
-        'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer asseblief weer.',
-    ],
+        'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer asseblief weer.'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   		=> 'Verbruiksgoedere is nie nagegaan nie, probeer asseblief weer',
         'success' 		=> 'Verbruiker word suksesvol nagegaan.',
-        'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer asseblief weer.',
-    ],
+        'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer asseblief weer.'
+    )
 
-];
+
+);

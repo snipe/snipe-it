@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => 'O atributo: deve ser um arquivo.',
     'filled'               => 'O campo: atributo deve ter um valor.',
     'image'                => 'O :attribute tem que ser uma imagem.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'O :attribute selecionado é inválido.',
     'in_array'             => 'O campo: atributo não existe em: outro.',
     'integer'              => 'O :attribute tem que ser um inteiro.',
     'ip'                   => 'O :attribute tem que ser um IP válido.',
     'ipv4'                 => 'O atributo: deve ser um endereço IPv4 válido.',
     'ipv6'                 => 'O atributo deve ser um endereço IPv6 válido.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'O atributo: deve ser uma string JSON válida.',
     'max'                  => [
         'numeric' => 'O :attribute não pode ser maior do que :max.',
@@ -64,6 +66,7 @@ return array(
         'string'  => 'O :attribute deve conter pelos menos :min caracteres.',
         'array'   => 'O atributo deve ter pelo menos: itens mínimos.',
     ],
+    'starts_with'          => 'O :attribute deve começar com um dos seguintes: :values.',
     'not_in'               => 'O :attribute selecionado é inválido.',
     'numeric'              => ':attribute tem que ser um número.',
     'present'              => 'O campo: atributo deve estar presente.',
@@ -88,8 +91,17 @@ return array(
     'unique'               => 'Este :attribute já existe.',
     'uploaded'             => 'O atributo: não foi possível carregar.',
     'url'                  => 'O formato do :attribute é inválido.',
-    "unique_undeleted"     => "O :atribute deve ser único.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => 'O :atribute deve ser único.',
+    'non_circular'         => 'O :attribute não deve criar uma referência circular.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +113,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +126,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "O campo: atributo contém um caractere que não é permitido.",
-        "email_array"      => "Um ou mais endereços de e-mail são inválidos.",
-        "hashed_pass"      => "Sua senha atual está incorreta",
+        'alpha_space' => 'O campo: atributo contém um caractere que não é permitido.',
+        'email_array'      => 'Um ou mais endereços de e-mail são inválidos.',
+        'hashed_pass'      => 'Sua senha atual está incorreta',
         'dumbpwd'          => 'Essa senha é muito comum.',
-        "statuslabel_type" => "Você deve selecionar um tipo de etiqueta de status válido",
+        'statuslabel_type' => 'Você deve selecionar um tipo de etiqueta de status válido',
     ],
 
     /*
@@ -135,4 +146,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

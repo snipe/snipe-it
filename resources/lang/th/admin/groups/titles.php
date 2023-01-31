@@ -10,5 +10,7 @@ return [
     'group_admin' 	 		=> 'กลุ่มผู้ดูแล',
     'allow' 	 			=> 'อนุญาต',
     'deny' 	 				=> 'ไม่อนุญาต',
-
+    'permission'            => 'Permission',
+    'grant'                 => 'Grant',
+    'no_permissions'        => 'This group has no permissions.'
 ];

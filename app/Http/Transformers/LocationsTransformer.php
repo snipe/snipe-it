@@ -45,6 +45,7 @@ class LocationsTransformer
                 'zip' => ($location->zip) ? e($location->zip) : null,
                 'assigned_assets_count' => (int) $location->assigned_assets_count,
                 'assets_count'    => (int) $location->assets_count,
+                'rtd_assets_count'    => (int) $location->rtd_assets_count,
                 'users_count'    => (int) $location->users_count,
                 'currency' =>  ($location->currency) ? e($location->currency) : null,
                 'ldap_ou' =>  ($location->ldap_ou) ? e($location->ldap_ou) : null,

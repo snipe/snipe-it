@@ -75,14 +75,14 @@ RUN set -eux; \
 	rm snipeit.tar.gz; \
 # Install composer php dependencies
     if [ "$ENVIRONMENT" = "production" ]; then \
-        echo "production enviroment detected!"; \
+        echo "production environment detected!"; \
         composer update \
             --no-cache \
             --no-dev \
             --optimize-autoloader \
             --working-dir=/var/www/html; \
     else \
-        echo "development enviroment detected!"; \
+        echo "development environment detected!"; \
         apk add --no-cache \
             ${DEV_PACKAGES}; \
         composer update \
@@ -98,5 +98,6 @@ VOLUME [ "/var/lib/snipeit" ]
 
 COPY --chown=www-data:www-data docker/docker-secrets.env /var/www/html/.env
 COPY --chmod=655 docker/docker-entrypoint.sh /usr/local/bin/docker-snipeit-entrypoint
+COPY docker/column-statistics.cnf /etc/mysql/conf.d/column-statistics.cnf
 ENTRYPOINT [ "/usr/local/bin/docker-snipeit-entrypoint" ]
 CMD [ "/usr/local/bin/docker-php-entrypoint", "php-fpm" ]

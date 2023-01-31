@@ -46,7 +46,8 @@ class CustomFieldsTransformer
             'field_values'   => ($field->field_values) ? e($field->field_values) : null,
             'field_values_array'   => ($field->field_values) ? explode("\r\n", e($field->field_values)) : null,
             'type'   =>  e($field->element),
-            'required'   =>  $field->pivot ? $field->pivot->required : false,
+            'required'   =>  (($field->pivot) && ($field->pivot->required=='1')) ? true : false,
+            'display_in_user_view' =>  ($field->display_in_user_view =='1') ? true : false,
             'created_at' => Helper::getFormattedDateObject($field->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($field->updated_at, 'datetime'),
         ];

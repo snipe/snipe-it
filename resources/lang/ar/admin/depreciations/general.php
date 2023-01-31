@@ -6,8 +6,11 @@ return [
     'asset_depreciations'  					=> 'استهلاك الأصول',
     'create'  					            => 'إنشاء الاستهلاك',
     'depreciation_name'  					=> 'اسم الاستهلاك',
+    'depreciation_min'                      => 'Floor Value of Depreciation',
     'number_of_months'  					=> 'عدد الأشهر',
     'update'  					            => 'تحديث الاستهلاك',
-    'depreciation_min'                      => 'Minimum Value after Depreciation'
-
+    'depreciation_min'                      => 'الحد الأدنى للقيمة بعد الاستهلاك',
+    'no_depreciations_warning'               => '<strong>Warning: </strong>
+                      You do not currently have any depreciations set up.
+                      Please set up at least one depreciation to view the depreciation report.',
 ];

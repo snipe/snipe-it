@@ -28,7 +28,7 @@
                                 @if ($snipeSettings->login_note)
                                     <div class="col-md-12">
                                         <div class="alert alert-info">
-                                            {!!  Parsedown::instance()->text(e($snipeSettings->login_note))  !!}
+                                            {!!  Helper::parseEscapedMarkedown($snipeSettings->login_note)  !!}
                                         </div>
                                     </div>
                                 @endif
@@ -36,6 +36,7 @@
                                 <!-- Notifications -->
                                 @include('notifications')
 
+                                @if (!config('app.require_saml'))
                                 <div class="col-md-12">
                                     <!-- CSRF Token -->
 
@@ -59,19 +60,23 @@
                                         </div>
                                     </fieldset>
                                 </div> <!-- end col-md-12 -->
-
+                                @endif
                             </div> <!-- end row -->
 
-                            @if ($snipeSettings->saml_enabled)
+                            @if (!config('app.require_saml') && $snipeSettings->saml_enabled)
                             <div class="row ">
-                                <div class="col-md-12 text-right">
+                                <div class="text-right col-md-12">
                                     <a href="{{ route('saml.login')  }}">{{ trans('auth/general.saml_login')  }}</a>
                                 </div>
                             </div>
                             @endif
                         </div>
                         <div class="box-footer">
+                            @if (config('app.require_saml'))
+                            <a class="btn btn-lg btn-primary btn-block" href="{{ route('saml.login')  }}">{{ trans('auth/general.saml_login')  }}</a>
+                            @else
                             <button class="btn btn-lg btn-primary btn-block">{{ trans('auth/general.login')  }}</button>
+                            @endif
                             <div class="text-center" style="margin:20px 0; padding: 10px 0;">
                                 <label>{{ trans('auth/general.sign_in_with')  }}</label>
                                 <div class="py-6 d-flex justify-contet">
@@ -79,10 +84,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12 col-sm-12 col-xs-12 text-right" style="padding-top: 10px;">
+                        <div class="text-right col-md-12 col-sm-12 col-xs-12" style="padding-top: 10px;">
                             @if ($snipeSettings->custom_forgot_pass_url)
                                 <a href="{{ $snipeSettings->custom_forgot_pass_url  }}" rel="noopener">{{ trans('auth/general.forgot_password')  }}</a>
-                            @else
+                            @elseif (!config('app.require_saml'))
                                 <a href="{{ route('password.request')  }}">{{ trans('auth/general.forgot_password')  }}</a>
                             @endif
                         </div>

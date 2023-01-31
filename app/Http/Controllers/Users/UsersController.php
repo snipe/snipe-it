@@ -23,6 +23,7 @@ use Redirect;
 use Str;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use View;
+use App\Notifications\CurrentInventory;
 
 /**
  * This controller handles all actions related to Users for
@@ -93,8 +94,8 @@ class UsersController extends Controller
         $this->authorize('create', User::class);
         $user = new User;
         //Username, email, and password need to be handled specially because the need to respect config values on an edit.
-        $user->email = e($request->input('email'));
-        $user->username = e($request->input('username'));
+        $user->email = trim($request->input('email'));
+        $user->username = trim($request->input('username'));
         if ($request->filled('password')) {
             $user->password = bcrypt($request->input('password'));
         }
@@ -115,6 +116,11 @@ class UsersController extends Controller
         $user->state = $request->input('state', null);
         $user->country = $request->input('country', null);
         $user->zip = $request->input('zip', null);
+        $user->remote = $request->input('remote', 0);
+        $user->website = $request->input('website', null);
+        $user->created_by = Auth::user()->id;
+        $user->start_date = $request->input('start_date', null);
+        $user->end_date = $request->input('end_date', null);
 
         // Strip out the superuser permission if the user isn't a superadmin
         $permissions_array = $request->input('permission');
@@ -125,7 +131,7 @@ class UsersController extends Controller
         $user->permissions = json_encode($permissions_array);
 
         // we have to invoke the
-        app(\App\Http\Requests\ImageUploadRequest::class)->handleImages($user, 600, 'image', 'avatars', 'avatar');
+        app(ImageUploadRequest::class)->handleImages($user, 600, 'avatar', 'avatars', 'avatar');
 
         if ($user->save()) {
             if ($request->filled('groups')) {
@@ -179,7 +185,6 @@ class UsersController extends Controller
         if ($user = User::find($id)) {
             $this->authorize('update', $user);
             $permissions = config('permissions');
-
             $groups = Group::pluck('name', 'id');
 
             $userGroups = $user->groups()->pluck('name', 'id');
@@ -190,9 +195,7 @@ class UsersController extends Controller
             return view('users/edit', compact('user', 'groups', 'userGroups', 'permissions', 'userPermissions'))->with('item', $user);
         }
 
-        $error = trans('admin/users/message.user_not_found', compact('id'));
-
-        return redirect()->route('users.index')->with('error', $error);
+        return redirect()->route('users.index')->with('error', trans('admin/users/message.user_not_found', compact('id')));
     }
 
     /**
@@ -245,9 +248,9 @@ class UsersController extends Controller
 
         // Update the user
         if ($request->filled('username')) {
-            $user->username = $request->input('username');
+            $user->username = trim($request->input('username'));
         }
-        $user->email = $request->input('email');
+        $user->email = trim($request->input('email'));
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
         $user->two_factor_optin = $request->input('two_factor_optin') ?: 0;
@@ -267,6 +270,10 @@ class UsersController extends Controller
         $user->country = $request->input('country', null);
         $user->activated = $request->input('activated', 0);
         $user->zip = $request->input('zip', null);
+        $user->remote = $request->input('remote', 0);
+        $user->website = $request->input('website', null);
+        $user->start_date = $request->input('start_date', null);
+        $user->end_date = $request->input('end_date', null);
 
         // Update the location of any assets checked out to this user
         Asset::where('assigned_type', User::class)
@@ -289,7 +296,7 @@ class UsersController extends Controller
         $user->permissions = json_encode($permissions_array);
 
         // Handle uploaded avatar
-        app(\App\Http\Requests\ImageUploadRequest::class)->handleImages($user, 600, 'avatar', 'avatars', 'avatar');
+        app(ImageUploadRequest::class)->handleImages($user, 600, 'avatar', 'avatars', 'avatar');
 
         //\Log::debug(print_r($user, true));
 
@@ -479,7 +486,6 @@ class UsersController extends Controller
             $user->first_name = '';
             $user->last_name = '';
             $user->email = substr($user->email, ($pos = strpos($user->email, '@')) !== false ? $pos : 0);
-
             $user->id = null;
 
             // Get this user groups
@@ -529,7 +535,7 @@ class UsersController extends Controller
                         strtolower(trans('general.id')),
                         trans('admin/companies/table.title'),
                         trans('admin/users/table.title'),
-                        trans('admin/users/table.employee_num'),
+                        trans('general.employee_number'),
                         trans('admin/users/table.name'),
                         trans('admin/users/table.username'),
                         trans('admin/users/table.email'),
@@ -592,7 +598,7 @@ class UsersController extends Controller
     }
 
     /**
-     * LDAP form processing.
+     * Print inventory
      *
      * @author Aladin Alaily
      * @since [v1.8]
@@ -615,6 +621,30 @@ class UsersController extends Controller
     }
 
     /**
+     * Emails user a list of assigned assets
+     *
+     * @author [G. Martinez] [<godmartinz@gmail.com>]
+     * @since [v6.0.5]
+     * @param  \App\Http\Controllers\Users\UsersController  $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function emailAssetList($id)
+    {
+        $this->authorize('view', User::class);
+
+        if (!$user = User::find($id)) {
+            return redirect()->back()
+                ->with('error', trans('admin/users/message.user_not_found', ['id' => $id]));
+        }
+        if (empty($user->email)) {
+            return redirect()->back()->with('error', trans('admin/users/message.user_has_no_email'));
+        }
+
+        $user->notify((new CurrentInventory($user)));
+        return redirect()->back()->with('success', trans('admin/users/general.user_notified'));
+    }
+
+    /**
      * Send individual password reset email
      *
      * @author A. Gianotto
@@ -624,12 +654,11 @@ class UsersController extends Controller
     public function sendPasswordReset($id)
     {
         if (($user = User::find($id)) && ($user->activated == '1') && ($user->email != '') && ($user->ldap_import == '0')) {
-            $credentials = ['email' => $user->email];
+            $credentials = ['email' => trim($user->email)];
 
             try {
-                \Password::sendResetLink($credentials, function (Message $message) use ($user) {
-                    $message->subject($this->getEmailSubject());
-                });
+
+                Password::sendResetLink($credentials);
 
                 return redirect()->back()->with('success', trans('admin/users/message.password_reset_sent', ['email' => $user->email]));
             } catch (\Exception $e) {

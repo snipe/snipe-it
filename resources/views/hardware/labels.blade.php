@@ -52,8 +52,7 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
     }
     img.barcode {
         display:block;
-
-        padding-top: .11in;
+        margin-top:-7px;
         width: 100%;
     }
     div.label-logo {
@@ -103,7 +102,7 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
         }
     }
     @if ($snipeSettings->custom_css)
-        {{ $snipeSettings->show_custom_css() }}
+        {!! $snipeSettings->show_custom_css() !!}
     @endif
 </style>
 
@@ -113,7 +112,7 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
 
         @if ($settings->qr_code=='1')
             <div class="qr_img">
-                <img src="./{{ $asset->id }}/qr_code" class="qr_img">
+                <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/qr_code" class="qr_img">
             </div>
         @endif
 
@@ -159,7 +158,7 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
 
         @if ((($settings->alt_barcode_enabled=='1') && $settings->alt_barcode!=''))
             <div class="barcode_container">
-                <img src="./{{ $asset->id }}/barcode" class="barcode">
+                <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/barcode" class="barcode">
             </div>
         @endif
 
@@ -167,9 +166,9 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
 
     </div>
 
-    @if ($count % $settings->labels_per_page == 0)
-        <div class="page-break"></div>
-        <div class="next-padding">&nbsp;</div>
+    @if (($count % $settings->labels_per_page == 0) && $count!=count($assets))
+    <div class="page-break"></div>
+    <div class="next-padding">&nbsp;</div>
     @endif
 
 @endforeach

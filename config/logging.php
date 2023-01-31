@@ -4,7 +4,7 @@ use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
 
-return [
+$config = [
 
     /*
     |--------------------------------------------------------------------------
@@ -35,6 +35,8 @@ return [
     */
 
     'channels' => [
+        // This will get overwritten to 'single' AND 'rollbar' in the code at the bottom of this file
+        // if a ROLLBAR_TOKEN is given in the .env file
         'stack' => [
             'driver' => 'stack',
             'channels' => ['single'],
@@ -44,14 +46,14 @@ return [
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
-            'level' => env('LOG_LEVEL', 'debug'),
+            'level' => env('LOG_LEVEL', 'warning'),
         ],
 
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
-            'level' => env('LOG_LEVEL', 'debug'),
-            'days' => 14,
+            'level' => env('LOG_LEVEL', 'warning'),
+            'days' => env('LOG_MAX_DAYS', 14),
         ],
 
         'slack' => [
@@ -64,7 +66,7 @@ return [
 
         'papertrail' => [
             'driver' => 'monolog',
-            'level' => env('LOG_LEVEL', 'debug'),
+            'level' => env('LOG_LEVEL', 'warning'),
             'handler' => SyslogUdpHandler::class,
             'handler_with' => [
                 'host' => env('PAPERTRAIL_URL'),
@@ -74,7 +76,7 @@ return [
 
         'stderr' => [
             'driver' => 'monolog',
-            'level' => env('LOG_LEVEL', 'debug'),
+            'level' => env('LOG_LEVEL', 'warning'),
             'handler' => StreamHandler::class,
             'formatter' => env('LOG_STDERR_FORMATTER'),
             'with' => [
@@ -84,12 +86,12 @@ return [
 
         'syslog' => [
             'driver' => 'syslog',
-            'level' => env('LOG_LEVEL', 'debug'),
+            'level' => env('LOG_LEVEL', 'warning'),
         ],
 
         'errorlog' => [
             'driver' => 'errorlog',
-            'level' => env('LOG_LEVEL', 'debug'),
+            'level' => env('LOG_LEVEL', 'warning'),
         ],
 
         'null' => [
@@ -100,6 +102,27 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'scimtrace' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/scim.log')
+        ],
+
+        'rollbar' => [
+            'driver' => 'monolog',
+            'handler' => \Rollbar\Laravel\MonologHandler::class,
+            'access_token' => env('ROLLBAR_TOKEN'),
+            'level' => env('ROLLBAR_LEVEL', 'error'),
+        ],
     ],
 
 ];
+
+
+// Only add rollbar if the .env has a rollbar token
+if ((env('APP_ENV')=='production') && (env('ROLLBAR_TOKEN'))) {
+    $config['channels']['stack']['channels'] = ['single', 'rollbar'];
+}
+
+
+return $config;

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'asset_categories' 					=> 'หมวดหมู่ทรัพย์สิน',
     'category_name'  					=> 'ชื่อหมวดหมู่',
     'checkin_email'                     => 'ส่งอีเมลไปยังผู้ใช้เมื่อเช็คอิน / เช็คเอาต์',
@@ -18,5 +18,6 @@ return [
     'update'  							=> 'ปรับปรุงแก้ไขหมวดหมู่',
     'use_default_eula'					=> 'ใช้<a href="#" data-toggle="modal" data-target="#eulaModal">เป็นข้อกำหนดการใช้งานหลัก</a>แทน.',
     'use_default_eula_disabled'			=> '<del>ใช้ค่าเริ่มต้นข้อกำหนดการใช้งานหลักแทน</del> ค่าเริ่มต้นหลักของข้อกำหนดการใช้งานไม่ได้ถูกตั้งค่าไว้ กรุณาเพิ่มในการตั้งค่า',
+    'use_default_eula_column'			=> 'ใช้ค่าเริ่มต้น EULA',
 
-];
+);

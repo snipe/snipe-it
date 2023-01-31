@@ -22,6 +22,13 @@ use Redirect;
  */
 class CustomFieldsetsController extends Controller
 {
+
+    public function index() 
+    {
+        return redirect()->route("fields.index")
+        ->with("error", trans('admin/custom_fields/message.fieldset.does_not_exist'));
+    }
+
     /**
      * Validates and stores a new custom field.
      *
@@ -179,7 +186,7 @@ class CustomFieldsetsController extends Controller
                 }
             }
 
-            $results = $set->fields()->attach($request->input('field_id'), ['required' => ($request->input('required') == 'on'), 'order' => $request->input('order', 1)]);
+            $results = $set->fields()->attach($request->input('field_id'), ['required' => ($request->input('required') == 'on'), 'order' => (int)$request->input('order', 1)]);
 
             return redirect()->route('fieldsets.show', [$id])->with('success', trans('admin/custom_fields/message.field.create.assoc_success'));
         }

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => ':attribute måste vara en fil.',
     'filled'               => ':attribute fältet måste ha ett värde.',
     'image'                => ':attribute måste vara en bild.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'Det valda :attribute är ogiltigt.',
     'in_array'             => ':attribute fältet existerar inte i :other.',
     'integer'              => ':attribute måste vara ett heltal.',
     'ip'                   => ':attribute måste vara en giltig IP-adress.',
     'ipv4'                 => ':attribute måste vara en giltig IPv4-adress.',
     'ipv6'                 => ':attribute måste vara en giltig IPv6-adress.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => ':attribute måste vara en giltig JSON-sträng.',
     'max'                  => [
         'numeric' => ':attribute får inte vara större än :max.',
@@ -64,6 +66,7 @@ return array(
         'string'  => ':attribute måste vara minst :min tecken.',
         'array'   => ':attribute måste innehålla minst :min saker.',
     ],
+    'starts_with'          => ':attribute måste börja med något av följande: :values.',
     'not_in'               => 'Det valda :attribute är ogiltigt.',
     'numeric'              => ':attribute måste vara ett nummer.',
     'present'              => ':attribute fältet måste finnas.',
@@ -88,8 +91,17 @@ return array(
     'unique'               => ':attribute är upptaget.',
     'uploaded'             => 'Uppladdningen av :attribute misslyckades.',
     'url'                  => ':attribute Formatet är ogiltigt.',
-    "unique_undeleted"     => ":attribute måste vara unikt.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => ':attribute måste vara unikt.',
+    'non_circular'         => ':attribute får inte skapa en cirkulär referens.',
+    'disallow_same_pwd_as_user_fields' => 'Lösenordet kan inte vara samma som användarnamnet.',
+    'letters'              => 'Lösenord måste innehålla minst en bokstav.',
+    'numbers'              => 'Lösenord måste innehålla minst en siffra.',
+    'case_diff'            => 'Lösenordet måste innehålla både versaler och gemener.',
+    'symbols'              => 'Lösenordet måste innehålla symboler.',
+    'gte'                  => [
+        'numeric'          => 'Värdet kan inte vara negativ'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +113,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +126,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Fältet :attribute innehåller ett tecken som inte är tillåtet.",
-        "email_array"      => "En eller flera e-postadresser är ogiltiga.",
-        "hashed_pass"      => "Ditt nuvarande lösenord är felaktigt",
+        'alpha_space' => 'Fältet :attribute innehåller ett tecken som inte är tillåtet.',
+        'email_array'      => 'En eller flera e-postadresser är ogiltiga.',
+        'hashed_pass'      => 'Ditt nuvarande lösenord är felaktigt',
         'dumbpwd'          => 'Det angivna lösenordet är för vanligt.',
-        "statuslabel_type" => "Du måste ange en giltig typ av statusetikett",
+        'statuslabel_type' => 'Du måste ange en giltig typ av statusetikett',
     ],
 
     /*
@@ -135,4 +146,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

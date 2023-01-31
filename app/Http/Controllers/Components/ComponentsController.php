@@ -80,6 +80,7 @@ class ComponentsController extends Controller
         $component->purchase_cost          = Helper::ParseCurrency($request->input('purchase_cost', null));
         $component->qty                    = $request->input('qty');
         $component->user_id                = Auth::id();
+        $component->notes                  = $request->input('notes');
 
         $component = $request->handleImages($component);
 
@@ -128,7 +129,7 @@ class ComponentsController extends Controller
         if (is_null($component = Component::find($componentId))) {
             return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));
         }
-        $min = $component->numCHeckedOut();
+        $min = $component->numCheckedOut();
         $validator = Validator::make($request->all(), [
             'qty' => "required|numeric|min:$min",
         ]);
@@ -152,6 +153,7 @@ class ComponentsController extends Controller
         $component->purchase_date          = $request->input('purchase_date');
         $component->purchase_cost          = Helper::ParseCurrency(request('purchase_cost'));
         $component->qty                    = $request->input('qty');
+        $component->notes                  = $request->input('notes');
 
         $component = $request->handleImages($component);
 

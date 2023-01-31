@@ -2,6 +2,8 @@
 
 namespace App\Presenters;
 
+use App\Helpers\Helper;
+
 /**
  * Class AssetModelPresenter
  */
@@ -86,7 +88,7 @@ class AssetModelPresenter extends Presenter
                 'sortable' => true,
                 'switchable' => true,
                 'title' => trans('general.category'),
-                'visible' => false,
+                'visible' => true,
                 'formatter' => 'categoriesLinkObjFormatter',
             ],
             [
@@ -159,10 +161,8 @@ class AssetModelPresenter extends Presenter
      */
     public function note()
     {
-        $Parsedown = new \Parsedown();
-
         if ($this->model->note) {
-            return $Parsedown->text($this->model->note);
+            return Helper::parseEscapedMarkedown($this->model->note);
         }
     }
 

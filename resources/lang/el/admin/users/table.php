@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Ενεργό',
     'allow'  				=> 'Να επιτραπεί',
     'checkedout'  			=> 'Πάγια',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'Ηλεκτρονικό ταχυδρομείο',
     'employee_num'      	=> 'Αριθμός Υπαλλήλου.',
     'first_name' 			=> 'Όνομα',
-    'groupnotes'			=> 'Επιλέξτε μια ομάδα για να εκχωρήσετε στο χρήστη, να θυμάστε ότι ο χρήστης παίρνει τα δικαιώματα της ομάδας που του έχουν ανατεθεί.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Inherit',
     'job' 					=> 'Τίτλος εργασίας',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Προβολή τρέχωντων χρηστών',
     'show_deleted'          => 'Εμφάνιση διαγραμμένων χρηστών',
     'title' 				=> 'Τίτλος',
-    'to_restore_them'		=> 'για την αποκατάστασή τους.',
+	'to_restore_them'		=> 'για την αποκατάστασή τους.',
     'updateuser' 			=> 'Ενημέρωση χρήστη',
     'username' 				=> 'Όνομα χρήστη',
-    'user_deleted_text' 	=> 'Αυτός ο χρήστης έχει επισημανθεί ως διαγραμμένος.',
+	'user_deleted_text' 	=> 'Αυτός ο χρήστης έχει επισημανθεί ως διαγραμμένος.',
     'username_note' 		=> '(Αυτό χρησιμοποιείται για τη σύνδεση της υπηρεσίας καταλόγου Active Directory μόνο, όχι για σύνδεση.)',
     'cloneuser'             => 'Κλώνος χρήστη',
     'viewusers' 			=> 'Εμφάνιση χρηστών',
-];
+);

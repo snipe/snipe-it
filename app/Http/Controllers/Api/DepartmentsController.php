@@ -42,6 +42,22 @@ class DepartmentsController extends Controller
             $departments = $departments->TextSearch($request->input('search'));
         }
 
+        if ($request->filled('name')) {
+            $departments->where('name', '=', $request->input('name'));
+        }
+
+        if ($request->filled('company_id')) {
+            $departments->where('company_id', '=', $request->input('company_id'));
+        }
+
+        if ($request->filled('manager_id')) {
+            $departments->where('manager_id', '=', $request->input('manager_id'));
+        }
+
+        if ($request->filled('location_id')) {
+            $departments->where('location_id', '=', $request->input('location_id'));
+        }
+
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.
         $offset = (($departments) && ($request->get('offset') > $departments->count())) ? $departments->count() : $request->get('offset', 0);
@@ -66,8 +82,8 @@ class DepartmentsController extends Controller
 
         $total = $departments->count();
         $departments = $departments->skip($offset)->take($limit)->get();
-
         return (new DepartmentsTransformer)->transformDepartments($departments, $total);
+
     }
 
     /**
@@ -91,8 +107,8 @@ class DepartmentsController extends Controller
         if ($department->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $department, trans('admin/departments/message.create.success')));
         }
-
         return response()->json(Helper::formatStandardApiResponse('error', null, $department->getErrors()));
+
     }
 
     /**
@@ -134,6 +150,7 @@ class DepartmentsController extends Controller
         return response()->json(Helper::formatStandardApiResponse('error', null, $department->getErrors()));
     }
 
+
     /**
      * Validates and deletes selected department.
      *
@@ -153,8 +170,8 @@ class DepartmentsController extends Controller
         }
 
         $department->delete();
-
         return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/departments/message.delete.success')));
+
     }
 
     /**
@@ -166,6 +183,8 @@ class DepartmentsController extends Controller
      */
     public function selectlist(Request $request)
     {
+
+        $this->authorize('view.selectlists');
         $departments = Department::select([
             'id',
             'name',

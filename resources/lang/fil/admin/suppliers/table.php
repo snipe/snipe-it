@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_suppliers_title' => 'Ang Tungkol sa Tagapagsuplay',
     'about_suppliers_text'  => 'Ang mga tagapagsuplay ay may kakayahang magsubabay sa pinagmulan ng mga aytem',
     'address'               => 'Ang Address ng Tagapagsuplay',
@@ -24,4 +24,4 @@ return [
     'view_assets_for'       => 'Tingnan ang mga Asset para sa',
     'zip'                   => 'Ang Postal Code',
 
-];
+);

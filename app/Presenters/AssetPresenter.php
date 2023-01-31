@@ -102,7 +102,7 @@ class AssetPresenter extends Presenter
                 'field' => 'employee_number',
                 'searchable' => false,
                 'sortable' => false,
-                'title' => trans('admin/users/table.employee_num'),
+                'title' => trans('general.employee_number'),
                 'visible' => false,
                 'formatter' => 'employeeNumFormatter',
             ], [
@@ -140,6 +140,12 @@ class AssetPresenter extends Presenter
                 'visible' => false,
                 'title' => trans('general.purchase_date'),
                 'formatter' => 'dateDisplayFormatter',
+            ], [
+                'field' => 'age',
+                'searchable' => true,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('general.age'),
             ], [
                 'field' => 'purchase_cost',
                 'searchable' => true,
@@ -244,6 +250,14 @@ class AssetPresenter extends Presenter
                 'visible' => false,
                 'title' => trans('general.next_audit_date'),
                 'formatter' => 'dateDisplayFormatter',
+            ], [
+                'field' => 'byod',
+                'searchable' => false,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('general.byod'),
+                'formatter' => 'trueFalseFormatter',
+
             ],
         ];
 
@@ -263,7 +277,7 @@ class AssetPresenter extends Presenter
         // name can break the listings page. - snipe
         foreach ($fields as $field) {
             $layout[] = [
-                'field' => 'custom_fields.'.$field->convertUnicodeDbSlug(),
+                'field' => 'custom_fields.'.$field->db_column,
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
@@ -498,10 +512,10 @@ class AssetPresenter extends Presenter
     }
 
     /**
-     * Date the warantee expires.
+     * Date the warranty expires.
      * @return false|string
      */
-    public function warrantee_expires()
+    public function warranty_expires()
     {
         if (($this->purchase_date) && ($this->warranty_months)) {
             $date = date_create($this->purchase_date);

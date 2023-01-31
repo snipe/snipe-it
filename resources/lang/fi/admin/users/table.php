@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Aktiivinen',
     'allow'  				=> 'Salli',
     'checkedout'  			=> 'Laitteet',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'Sähköposti',
     'employee_num'      	=> 'Työntekijän nro.',
     'first_name' 			=> 'Etunimi',
-    'groupnotes'			=> 'Valitse käyttäjälle ryhmä, mutta muista että käyttäjä saa kaikki samat oikeudet kuin mitä ryhmälle on määritetty.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Tunnus',
     'inherit'  				=> 'Periytyy',
     'job' 					=> 'Osasto',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Näytä nykyiset käyttäjät',
     'show_deleted'          => 'Näytä poistetut käyttäjät',
     'title' 				=> 'Titteli',
-    'to_restore_them'		=> 'palauttaa ne.',
+	'to_restore_them'		=> 'palauttaa ne.',
     'updateuser' 			=> 'Päivitä käyttäjä',
     'username' 				=> 'Käyttäjätunnus',
-    'user_deleted_text' 	=> 'Tämä käyttäjä on merkitty poistetuksi.',
+	'user_deleted_text' 	=> 'Tämä käyttäjä on merkitty poistetuksi.',
     'username_note' 		=> '(Tätä käytetään vain Active Directory synkronointiin, ei kirjautumista varten.)',
     'cloneuser'             => 'Monista käyttäjä',
     'viewusers' 			=> 'Näytä käyttäjät',
-];
+);

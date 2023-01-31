@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Olet poistamassa :asset_count laitetta.',
     'bulk_update'		=> 'Massapäivitä laitteita',
     'bulk_update_help'	=> 'Tämän lomakkeen avulla voit päivittää useita laitteita kerralla. Täytä vain ne kentät joita haluat muuttaa. Tyhjäksi jätettyjä kenttiä ei päivitetä. ',
-    'bulk_update_warn'	=> 'Olet päivittämässä :asset_count laitteen ominaisuuksia.',
+    'bulk_update_warn'	=> 'Olet muokkaamassa yhden laitteen ominaisuuksia.- Olet muokkaamassa :asset_count laitteen ominaisuuksia.',
     'checkedout_to'		=> 'Luovutettuna',
     'checkout_date'		=> 'Luovutuspäivä',
     'checkin_date'		=> 'Palautuspäivä',
@@ -40,4 +40,12 @@ return [
     'warranty'			=> 'Takuu',
         'warranty_expires'		=> 'Takuu päättyy',
     'years'				=> 'vuotta',
+    'asset_location' => 'Päivitä sijainti',
+    'asset_location_update_default_current' => 'Päivitä oletussijainti ja todellinen sijainti',
+    'asset_location_update_default' => 'Päivitä vain oletussijainti',
+    'asset_not_deployable' => 'Laite ei ole käyttöönotettavissa. Laitetta ei voida luovuttaa.',
+    'asset_deployable' => 'Laite on käyttöönotettavissa. Laite voidaan luovuttaa.',
+    'processing_spinner' => 'Käsitellään...',
+    'optional_infos'  => 'Valinnaiset tiedot',
+    'order_details'   => 'Tilaukseen liityvät tiedot'
 ];

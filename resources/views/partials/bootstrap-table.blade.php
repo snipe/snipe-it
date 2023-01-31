@@ -4,11 +4,11 @@
 @endpush
 
 @push('js')
+
 <script src="{{ url(mix('js/dist/bootstrap-table.js')) }}"></script>
 <script nonce="{{ csrf_token() }}">
-
     $(function () {
-
+        var locale = '{{ config('app.locale') }}';
 
         var stickyHeaderOffsetY = 0;
 
@@ -30,7 +30,20 @@
             return false;
         }
 
-        $('.snipe-table').bootstrapTable('destroy').bootstrapTable({
+        $('.snipe-table').bootstrapTable('destroy').each(function () {
+            data_export_options = $(this).attr('data-export-options');
+            export_options = data_export_options ? JSON.parse(data_export_options) : {};
+            export_options['htmlContent'] = false; // this is already the default; but let's be explicit about it
+            export_options['jspdf']= {"orientation": "l"};
+            // the following callback method is necessary to prevent XSS vulnerabilities
+            // (this is taken from Bootstrap Tables's default wrapper around jQuery Table Export)
+            export_options['onCellHtmlData'] = function (cell, rowIndex, colIndex, htmlData) {
+                if (cell.is('th')) {
+                    return cell.find('.th-inner').text()
+                }
+                return htmlData
+            }
+            $(this).bootstrapTable({
             classes: 'table table-responsive table-no-bordered',
             ajaxOptions: {
                 headers: {
@@ -38,6 +51,7 @@
                 }
             },
             stickyHeader: true,
+            locale: locale,
             stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
             undefinedText: '',
             iconsPrefix: 'fa',
@@ -51,7 +65,7 @@
             paginationLastText: "{{ trans('general.last') }}",
             paginationPreText: "{{ trans('general.previous') }}",
             paginationNextText: "{{ trans('general.next') }}",
-            pageList: ['10','20', '30','50','100','150','200', '500', '1000'],
+            pageList: ['10','20', '30','50','100','150','200'{!! ((config('app.max_results') > 200) ? ",'500'" : '') !!}{!! ((config('app.max_results') > 500) ? ",'".config('app.max_results')."'" : '') !!}],
             pageSize: {{  (($snipeSettings->per_page!='') && ($snipeSettings->per_page > 0)) ? $snipeSettings->per_page : 20 }},
             paginationVAlign: 'both',
             queryParams: function (params) {
@@ -64,28 +78,27 @@
                 return newParams;
             },
             formatLoadingMessage: function () {
-                return '<h2><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
+                return '<h2><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> {{ trans('general.loading') }} </h4>';
             },
             icons: {
                 advancedSearchIcon: 'fas fa-search-plus',
                 paginationSwitchDown: 'fa-caret-square-o-down',
                 paginationSwitchUp: 'fa-caret-square-o-up',
+                fullscreen: 'fa-expand',
                 columns: 'fa-columns',
                 refresh: 'fas fa-sync-alt',
                 export: 'fa-download',
                 clearSearch: 'fa-times'
             },
-            exportOptions: {
-                htmlContent: true,
-            },
+                exportOptions: export_options,
 
-            exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
+            exportTypes: ['xlsx', 'excel', 'csv', 'pdf','json', 'xml', 'txt', 'sql', 'doc' ],
             onLoadSuccess: function () {
                 $('[data-toggle="tooltip"]').tooltip(); // Needed to attach tooltips after ajax call
             }
 
+            });
         });
-
     });
 
 
@@ -102,42 +115,57 @@
 
     // These methods dynamically add/remove hidden input values in the bulk actions form
     $('.snipe-table').on('check.bs.table .btSelectItem', function (row, $element) {
-        $('#bulkEdit').removeAttr('disabled');
-        $('#bulkEdit').prepend('<input id="checkbox_' + $element.id + '" type="hidden" name="ids[]" value="' + $element.id + '">');
+        var buttonName =  $(this).data('bulk-button-id');
+        var tableId =  $(this).data('id-table');
+
+        $(buttonName).removeAttr('disabled');
+        $(buttonName).after('<input id="' + tableId + '_checkbox_' + $element.id + '" type="hidden" name="ids[]" value="' + $element.id + '">');
     });
 
+    $('.snipe-table').on('check-all.bs.table', function (event, rowsAfter) {
+
+        var buttonName =  $(this).data('bulk-button-id');
+        $(buttonName).removeAttr('disabled');
+        var tableId =  $(this).data('id-table');
+
+        for (var i in rowsAfter) {
+            // Do not select things that were already selected
+            if($('#'+ tableId + '_checkbox_' + rowsAfter[i].id).length == 0) {
+                $(buttonName).after('<input id="' + tableId + '_checkbox_' + rowsAfter[i].id + '" type="hidden" name="ids[]" value="' + rowsAfter[i].id + '">');
+            }
+        }
+    });
+
+
     $('.snipe-table').on('uncheck.bs.table .btSelectItem', function (row, $element) {
-        $( "#checkbox_" + $element.id).remove();
+        var tableId =  $(this).data('id-table');
+        $( "#" + tableId + "_checkbox_" + $element.id).remove();
     });
 
 
     // Handle whether or not the edit button should be disabled
     $('.snipe-table').on('uncheck.bs.table', function () {
-        if ($('.snipe-table').bootstrapTable('getSelections').length == 0) {
-            $('#bulkEdit').attr('disabled', 'disabled');
+
+        var buttonName =  $(this).data('bulk-button-id');
+
+        if ($(this).bootstrapTable('getSelections').length == 0) {
+            $(buttonName).attr('disabled', 'disabled');
         }
     });
 
     $('.snipe-table').on('uncheck-all.bs.table', function (event, rowsAfter, rowsBefore) {
-        $('#bulkEdit').attr('disabled', 'disabled');
-        //console.dir(rowsBefore);
+
+        var buttonName =  $(this).data('bulk-button-id');
+        $(buttonName).attr('disabled', 'disabled');
+        var tableId =  $(this).data('id-table');
 
         for (var i in rowsBefore) {
-            $( "#checkbox_" + rowsBefore[i].id).remove();
+            $('#' + tableId + "_checkbox_" + rowsBefore[i].id).remove();
         }
 
     });
 
-    $('.snipe-table').on('check-all.bs.table', function (event, rowsAfter, rowsBefore) {
-        
-        $('#bulkEdit').removeAttr('disabled');
-        //console.dir(rowsAfter);
-        
-        for (var i in rowsAfter) {
-            // console.log(rowsAfter[i].id);
-            $('#bulkEdit').prepend('<input id="checkbox_' + rowsAfter[i].id + '" type="hidden" name="ids[]" value="' + rowsAfter[i].id + '">');
-        }
-    });
+
 
     
 
@@ -145,7 +173,7 @@
     function genericRowLinkFormatter(destination) {
         return function (value,row) {
             if (value) {
-                return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '"> ' + value + '</a>';
+                return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '">' + value + '</a>';
             }
         };
     }
@@ -161,6 +189,7 @@
                 var status_meta = {
                   'deployed': '{{ strtolower(trans('general.deployed')) }}',
                   'deployable': '{{ strtolower(trans('admin/hardware/general.deployable')) }}',
+                  'archived': '{{ strtolower(trans('general.archived')) }}',
                   'pending': '{{ strtolower(trans('general.pending')) }}'
                 }
 
@@ -196,7 +225,7 @@
                     var dpolymorphicItemFormatterest = 'fields/';
                 }
 
-                return '<nobr><a href="{{ url('/') }}/' + dpolymorphicItemFormatterest + dest + '/' + value.id + '"> ' + value.name + '</a></span>';
+                return '<nobr><a href="{{ url('/') }}/' + dpolymorphicItemFormatterest + dest + '/' + value.id + '">' + value.name + '</a></span>';
             }
         };
     }
@@ -232,7 +261,7 @@
             }
 
             if ((row.available_actions) && (row.available_actions.clone === true)) {
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/clone" class="btn btn-sm btn-info" data-tooltip="true" title="Clone Item"><i class="far fa-clone" aria-hidden="true"></i><span class="sr-only">Clone</span></a>&nbsp;';
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/clone" class="btn btn-sm btn-info" data-tooltip="true" title="{{ trans('general.clone_item') }}"><i class="far fa-clone" aria-hidden="true"></i><span class="sr-only">Clone</span></a>&nbsp;';
             }
 
             if ((row.available_actions) && (row.available_actions.update === true)) {
@@ -250,11 +279,11 @@
                 actions += '<a class="btn btn-danger btn-sm delete-asset disabled" onClick="return false;"><i class="fas fa-trash"></i></a>&nbsp;';
             }
 
+
             if ((row.available_actions) && (row.available_actions.restore === true)) {
                 actions += '<form style="display: inline;" method="POST" action="{{ url('/') }}/' + dest + '/' + row.id + '/restore"> ';
                 actions += '@csrf';
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/restore" class="btn btn-sm btn-warning" data-toggle="tooltip" title="{{ trans('general.restore') }}"><i class="far fa-clone"></i></a>&nbsp;';
-                actions += '<i class="fa fa-retweet" aria-hidden="true"></i><span class="sr-only">{{ trans('general.restore') }}</span></button></form>&nbsp;';
+                actions += '<button class="btn btn-sm btn-warning" data-toggle="tooltip" title="{{ trans('general.restore') }}"><i class="fas fa-retweet"></i></button>&nbsp;';
             }
 
             actions +='</nobr>';
@@ -292,7 +321,15 @@
                 item_icon = 'fas fa-user';
             } else if (value.type == 'location') {
                 item_destination = 'locations'
-                item_icon = 'far fa-map-marker-alt';
+                item_icon = 'fas fa-map-marker-alt';
+            } else if (value.type == 'model') {
+                item_destination = 'models'
+                item_icon = '';
+            }
+
+            // display the username if it's checked out to a user
+            if (value.username) {
+                value.name = value.name + ' (' + value.username + ')';
             }
 
             return '<nobr><a href="{{ url('/') }}/' + item_destination +'/' + value.id + '" data-tooltip="true" title="' + value.type + '"><i class="' + item_icon + ' text-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} "></i> ' + value.name + '</a></nobr>';
@@ -327,7 +364,7 @@
     function licenseSeatInOutFormatter(value, row) {
         // The user is allowed to check the license seat out and it's available
         if ((row.available_actions.checkout == true) && (row.user_can_checkout == true) && ((!row.asset_id) && (!row.assigned_to))) {
-            return '<a href="{{ url('/') }}/licenses/' + row.license_id + '/checkout/'+row.id+'" class="btn btn-sm bg-maroon" data-toggle="tooltip" title="Check this item out">{{ trans('general.checkout') }}</a>';
+            return '<a href="{{ url('/') }}/licenses/' + row.license_id + '/checkout/'+row.id+'" class="btn btn-sm bg-maroon" data-toggle="tooltip" title="{{ trans('general.checkout_tooltip') }}">{{ trans('general.checkout') }}</a>';
         } else {
             return '<a href="{{ url('/') }}/licenses/' + row.id + '/checkin" class="btn btn-sm bg-purple" data-toggle="tooltip" title="Check in this license seat.">{{ trans('general.checkin') }}</a>';
         }
@@ -339,7 +376,7 @@
 
             // The user is allowed to check items out, AND the item is deployable
             if ((row.available_actions.checkout == true) && (row.user_can_checkout == true) && ((!row.asset_id) && (!row.assigned_to))) {
-                    return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkout" class="btn btn-sm bg-maroon" data-toggle="tooltip" title="Check this item out">{{ trans('general.checkout') }}</a>';
+                    return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkout" class="btn btn-sm bg-maroon" data-toggle="tooltip" title="{{ trans('general.checkout_tooltip') }}">{{ trans('general.checkout') }}</a>';
 
             // The user is allowed to check items out, but the item is not deployable
             } else if (((row.user_can_checkout == false)) && (row.available_actions.checkout == true) && (!row.assigned_to)) {
@@ -366,9 +403,9 @@
         if (value.assigned_to_self == true){
             return '<button class="btn btn-danger btn-sm disabled" data-toggle="tooltip" title="Cancel this item request">{{ trans('button.cancel') }}</button>';
         } else if (value.available_actions.cancel == true)  {
-            return '<form action="{{ url('/') }}/account/request-asset/'+ value.id + '" method="GET"><button class="btn btn-danger btn-sm" data-toggle="tooltip" title="Cancel this item request">{{ trans('button.cancel') }}</button></form>';
+            return '<form action="{{ url('/') }}/account/request-asset/'+ value.id + '" method="POST">@csrf<button class="btn btn-danger btn-sm" data-toggle="tooltip" title="Cancel this item request">{{ trans('button.cancel') }}</button></form>';
         } else if (value.available_actions.request == true)  {
-            return '<form action="{{ url('/') }}/account/request-asset/'+ value.id + '" method="GET"><button class="btn btn-primary btn-sm" data-toggle="tooltip" title="Request this item">{{ trans('button.request') }}</button></form>';
+            return '<form action="{{ url('/') }}/account/request-asset/'+ value.id + '" method="POST">@csrf<button class="btn btn-primary btn-sm" data-toggle="tooltip" title="Request this item">{{ trans('button.request') }}</button></form>';
         }
 
     }
@@ -439,6 +476,8 @@
                 if ((row.custom_fields[field_column_plain].field_format) && (row.custom_fields[field_column_plain].value)) {
                     if (row.custom_fields[field_column_plain].field_format=='URL') {
                         return '<a href="' + row.custom_fields[field_column_plain].value + '" target="_blank" rel="noopener">' + row.custom_fields[field_column_plain].value + '</a>';
+                    } else if (row.custom_fields[field_column_plain].field_format=='BOOLEAN') {
+                        return (row.custom_fields[field_column_plain].value == 1) ? "<span class='fas fa-check-circle' style='color:green' />" : "<span class='fas fa-times-circle' style='color:red' />";
                     } else if (row.custom_fields[field_column_plain].field_format=='EMAIL') {
                         return '<a href="mailto:' + row.custom_fields[field_column_plain].value + '">' + row.custom_fields[field_column_plain].value + '</a>';
                     }
@@ -467,7 +506,7 @@
         if (value) {
             var groups = '';
             for (var index in value.rows) {
-                groups += '<a href="{{ url('/') }}/admin/groups/' + value.rows[index].id + '" class="label label-default"> ' + value.rows[index].name + '</a> ';
+                groups += '<a href="{{ url('/') }}/admin/groups/' + value.rows[index].id + '" class="label label-default">' + value.rows[index].name + '</a> ';
             }
             return groups;
         }
@@ -496,20 +535,20 @@
 
     function deployedLocationFormatter(row, value) {
         if ((row) && (row!=undefined)) {
-            return '<a href="{{ url('/') }}/locations/' + row.id + '"> ' + row.name + '</a>';
+            return '<a href="{{ url('/') }}/locations/' + row.id + '">' + row.name + '</a>';
         } else if (value.rtd_location) {
-            return '<a href="{{ url('/') }}/locations/' + value.rtd_location.id + '" data-toggle="tooltip" title="Default Location"> ' + value.rtd_location.name + '</a>';
+            return '<a href="{{ url('/') }}/locations/' + value.rtd_location.id + '" data-toggle="tooltip" title="Default Location">' + value.rtd_location.name + '</a>';
         }
 
     }
 
     function groupsAdminLinkFormatter(value, row) {
-        return '<a href="{{ url('/') }}/admin/groups/' + row.id + '"> ' + value + '</a>';
+        return '<a href="{{ url('/') }}/admin/groups/' + row.id + '">' + value + '</a>';
     }
 
     function assetTagLinkFormatter(value, row) {
         if ((row.asset) && (row.asset.id)) {
-            return '<a href="{{ url('/') }}/hardware/' + row.asset.id + '"> ' + row.asset.asset_tag + '</a>';
+            return '<a href="{{ url('/') }}/hardware/' + row.asset.id + '">' + row.asset.asset_tag + '</a>';
         }
         return '';
 
@@ -517,14 +556,14 @@
 
     function departmentNameLinkFormatter(value, row) {
         if ((row.assigned_user) && (row.assigned_user.department) && (row.assigned_user.department.name)) {
-            return '<a href="{{ url('/') }}/department/' + row.assigned_user.department.id + '"> ' + row.assigned_user.department.name + '</a>';
+            return '<a href="{{ url('/') }}/department/' + row.assigned_user.department.id + '">' + row.assigned_user.department.name + '</a>';
         }
 
     }
 
     function assetNameLinkFormatter(value, row) {
         if ((row.asset) && (row.asset.name)) {
-            return '<a href="{{ url('/') }}/hardware/' + row.asset.id + '"> ' + row.asset.name + '</a>';
+            return '<a href="{{ url('/') }}/hardware/' + row.asset.id + '">' + row.asset.name + '</a>';
         }
 
     }
@@ -551,31 +590,31 @@
 
     function emailFormatter(value) {
         if (value) {
-            return '<a href="mailto:' + value + '"> ' + value + '</a>';
+            return '<a href="mailto:' + value + '">' + value + '</a>';
         }
     }
 
     function linkFormatter(value) {
         if (value) {
-            return '<a href="' + value + '"> ' + value + '</a>';
+            return '<a href="' + value + '">' + value + '</a>';
         }
     }
 
     function assetCompanyFilterFormatter(value, row) {
         if (value) {
-            return '<a href="{{ url('/') }}/hardware/?company_id=' + row.id + '"> ' + value + '</a>';
+            return '<a href="{{ url('/') }}/hardware/?company_id=' + row.id + '">' + value + '</a>';
         }
     }
 
     function assetCompanyObjFilterFormatter(value, row) {
         if ((row) && (row.company)) {
-            return '<a href="{{ url('/') }}/hardware/?company_id=' + row.company.id + '"> ' + row.company.name + '</a>';
+            return '<a href="{{ url('/') }}/hardware/?company_id=' + row.company.id + '">' + row.company.name + '</a>';
         }
     }
 
     function usersCompanyObjFilterFormatter(value, row) {
         if (value) {
-            return '<a href="{{ url('/') }}/users/?company_id=' + row.id + '"> ' + value + '</a>';
+            return '<a href="{{ url('/') }}/users/?company_id=' + row.id + '">' + value + '</a>';
         } else {
             return value;
         }
@@ -584,13 +623,13 @@
     function employeeNumFormatter(value, row) {
 
         if ((row) && (row.assigned_to) && ((row.assigned_to.employee_number))) {
-            return '<a href="{{ url('/') }}/users/' + row.assigned_to.id + '"> ' + row.assigned_to.employee_number + '</a>';
+            return '<a href="{{ url('/') }}/users/' + row.assigned_to.id + '">' + row.assigned_to.employee_number + '</a>';
         }
     }
 
     function orderNumberObjFilterFormatter(value, row) {
         if (value) {
-            return '<a href="{{ url('/') }}/hardware/?order_number=' + row.order_number + '"> ' + row.order_number + '</a>';
+            return '<a href="{{ url('/') }}/hardware/?order_number=' + row.order_number + '">' + row.order_number + '</a>';
         }
     }
 
@@ -601,13 +640,22 @@
 
         if (value) {
 
-            if (row.name) {
+            // This is a clunky override to handle unusual API responses where we're presenting a link instead of an array
+            if (row.avatar) {
+                var altName = '';
+            }
+            else if (row.name) {
                 var altName = row.name;
             }
-                else if ((row) && (row.model)) {
+            else if ((row) && (row.model)) {
                 var altName = row.model.name;
            }
             return '<a href="' + value + '" data-toggle="lightbox" data-type="image"><img src="' + value + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive" alt="' + altName + '"></a>';
+        }
+    }
+    function downloadFormatter(value) {
+        if (value) {
+            return '<a href="' + value + '" target="_blank"><i class="fas fa-download"></i></a>';
         }
     }
 
@@ -637,7 +685,7 @@
             decimalfixed = periodless.replace(/,/g,".");
         } else {
             // yank commas, that's it.
-            decimalfixed = number.toString().replace(",","");
+            decimalfixed = number.toString().replace(/\,/g,"");
         }
         return parseFloat(decimalfixed);
     }
@@ -646,7 +694,34 @@
         if (Array.isArray(data)) {
             var field = this.field;
             var total_sum = data.reduce(function(sum, row) {
+                
                 return (sum) + (cleanFloat(row[field]) || 0);
+            }, 0);
+            
+            return numberWithCommas(total_sum.toFixed(2));
+        }
+        return 'not an array';
+    }
+
+    function sumFormatterQuantity(data){
+        if(Array.isArray(data)) {
+            
+            // Prevents issues on page load where data is an empty array
+            if(data[0] == undefined){
+                return 0.00
+            }
+            // Check that we are actually trying to sum cost from a table
+            // that has a quantity column. We must perform this check to
+            // support licences which use seats instead of qty
+            if('qty' in data[0]) {
+                var multiplier = 'qty';
+            } else if('seats' in data[0]) {
+                var multiplier = 'seats';
+            } else {
+                return 'no quantity';
+            }
+            var total_sum = data.reduce(function(sum, row) {
+                return (sum) + (cleanFloat(row["purchase_cost"])*row[multiplier] || 0);
             }, 0);
             return numberWithCommas(total_sum.toFixed(2));
         }
@@ -654,6 +729,7 @@
     }
 
     function numberWithCommas(value) {
+        
         if ((value) && ("{{$snipeSettings->digit_separator}}" == "1.234,56")){
             var parts = value.toString().split(".");
              parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");

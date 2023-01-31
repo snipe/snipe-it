@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => 'يجب أن تكون :attribute ملف.',
     'filled'               => 'يجب أن يحتوي :attribute على قيمة.',
     'image'                => 'يجب أن تكون :attribute صورة.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => ':attribute المحدد غير صالح.',
     'in_array'             => ':attribute غير موجود في :other.',
     'integer'              => 'يجب أن تكون :attribute عدد صحيح.',
     'ip'                   => 'يجب أن تكون :attribute عنوان IP صالحا.',
     'ipv4'                 => 'يجب أن تكون :attribute عنوان IPv4 صالحا.',
     'ipv6'                 => 'يجب أن تكون :attribute عنوان IPv6 صالح.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'يجب أن يكون :attribute نص جسون JSON صالح.',
     'max'                  => [
         'numeric' => 'يجب ان يكون :attribute أكبر من :max.',
@@ -64,6 +66,7 @@ return array(
         'string'  => 'يجب أن يكون :attribute على الأقل :min من الاحرف.',
         'array'   => 'يجب أن تحتوي :attribute على الأقل :min من العناصر.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => ':attribute المحدد غير صالح.',
     'numeric'              => 'يجب أن يكون :attribute رقما.',
     'present'              => 'يجب أن يكون :attribute موجود.',
@@ -88,8 +91,17 @@ return array(
     'unique'               => 'لقد تم أخذ :attribute مسبقا.',
     'uploaded'             => 'لقد فشل تحميل :attribute.',
     'url'                  => 'ان تنسيق :attribute غير صالح.',
-    "unique_undeleted"     => ":attribute يجب ان تكون فريدة.",
-    "non_circular"         => "يجب ألا تنشئ السمة مرجعًا دائريًا.",
+    'unique_undeleted'     => ':attribute يجب ان تكون فريدة.',
+    'non_circular'         => 'يجب ألا تنشئ السمة مرجعًا دائريًا.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +113,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +126,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "يحتوي الحقل :attribute على حرف غير مسموح به.",
-        "email_array"      => "عنوان بريد إلكتروني واحد أو أكثر غير صالح.",
-        "hashed_pass"      => "كلمة المرور الحالية غير صحيحة",
+        'alpha_space' => 'يحتوي الحقل :attribute على حرف غير مسموح به.',
+        'email_array'      => 'عنوان بريد إلكتروني واحد أو أكثر غير صالح.',
+        'hashed_pass'      => 'كلمة المرور الحالية غير صحيحة',
         'dumbpwd'          => 'كلمة المرور هذه شائعة جدا.',
-        "statuslabel_type" => "يجب تحديد نوع تسمية حالة صالح",
+        'statuslabel_type' => 'يجب تحديد نوع تسمية حالة صالح',
     ],
 
     /*
@@ -135,4 +146,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

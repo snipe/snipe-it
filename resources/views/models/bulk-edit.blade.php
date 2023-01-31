@@ -22,7 +22,7 @@
 
                 <div class="box box-default">
                     <div class="box-header with-border">
-                        <div class="box-title"><i class="fas fa-exclamation-triangle"></i> You are about to edit the following: </div>
+                        <div class="box-title"><i class="fas fa-exclamation-triangle"></i>{{ trans('general.bulk_edit_about_to') }}</div>
                     </div>
                     <div class="box-body">
 
@@ -75,14 +75,14 @@
                             <!-- requestable -->
                                 <div class="form-group {{ $errors->has('requestable') ? 'has-error' : '' }}">
                                 <div class="col-md-7 col-md-offset-3">
-                            
+
 
                                     <div class="checkbox">
                                         <label for="requestable">
-                                            {{ Form::radio('requestable', '', true, ['aria-label'=>'requestable']) }} Do not change  requestable status<br>
-                                            {{ Form::radio('requestable', '1', old('requestable'), ['aria-label'=>'requestable']) }}  {{  trans('admin/hardware/general.requestable')}} <br>
-                                            {{ Form::radio('requestable', '0', old('requestable'), ['aria-label'=>'requestable']) }}  Not requestable
-    
+                                            {{ Form::radio('requestable', '', true, ['aria-label'=>'requestable', 'class'=>'minimal']) }} {{  trans('admin/hardware/general.requestable_status_warning')}}<br>
+                                            {{ Form::radio('requestable', '1', old('requestable'), ['aria-label'=>'requestable', 'class'=>'minimal']) }}  {{  trans('admin/hardware/general.requestable')}} <br>
+                                            {{ Form::radio('requestable', '0', old('requestable'), ['aria-label'=>'requestable', 'class'=>'minimal']) }}  {{  trans('admin/hardware/general.not_requestable')}}
+
                                         </label>
                                     </div>
 

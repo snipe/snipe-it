@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'Umsebenzisi ukhanse isicelo sezinto kuwebhusayithi',
     'a_user_requested' => 'Umsebenzisi ucele into ku-website',
     'accessory_name' => 'Igama lokufinyelela:',
@@ -59,7 +61,7 @@ return [
     'test_mail_text' => 'Lokhu kuhlolwa kusuka ohlelweni lwezokuphathwa kwe-Asset ye-Snipe-IT. Uma unalokhu, i-imeyili isebenza :)',
     'the_following_item' => 'Into elandelayo ihloliwe ku:',
     'low_inventory_alert' => 'There is :count item that is below minimum inventory or will soon be low.|There are :count items that are below minimum inventory or will soon be low.',
-    'assets_warrantee_alert' => 'There is :count asset with a warrantee expiring in the next :threshold days.|There are :count assets with warrantees expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'to_reset' => 'Ukuze usethe kabusha: iphasiwedi yewebhu, ugcwalise leli fomu:',
     'type' => 'Thayipha',

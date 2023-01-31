@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'نشط',
     'allow'  				=> 'السماح',
     'checkedout'  			=> 'الأصول',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'البريد الالكتروني',
     'employee_num'      	=> 'رقم الموظف',
     'first_name' 			=> 'الإسم الأول',
-    'groupnotes'			=> 'حدد مجموعة ليتم تعيينها للمستخدم، تذكر أن المستخدم يأخذ صلاحيات المجموعة التي ينتمي اليها.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'رقم التعريف',
     'inherit'  				=> 'يرث',
     'job' 					=> 'العنوان الوظيفي',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'عرض المستخدمين الحاليين',
     'show_deleted'          => 'عرض المستخدمين المحذوفين',
     'title' 				=> 'المسمى الوظيفي',
-    'to_restore_them'		=> 'لاستعادتها.',
+	'to_restore_them'		=> 'لاستعادتها.',
     'updateuser' 			=> 'تحديث المستخدم',
     'username' 				=> 'اسم المستخدم',
-    'user_deleted_text' 	=> 'تم وضع علامة على هذا المستخدم على أنه محذوف.',
+	'user_deleted_text' 	=> 'تم وضع علامة على هذا المستخدم على أنه محذوف.',
     'username_note' 		=> '(يستخدم فقط للربط مع الـ Active Directory وليس لغرض تسجيل الدخول.)',
     'cloneuser'             => 'نسخ المستخدم',
     'viewusers' 			=> 'عرض المستخدمين',
-];
+);

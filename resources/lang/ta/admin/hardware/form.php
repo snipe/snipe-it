@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'நீங்கள் நீக்குவது: asset_count சொத்துகள்.',
     'bulk_update'		=> 'மொத்த புதுப்பித்தல் சொத்துகள்',
     'bulk_update_help'	=> 'இந்த படிவம் ஒரே நேரத்தில் பல சொத்துக்களை புதுப்பிக்க உதவுகிறது. நீங்கள் மாற்ற வேண்டிய துறைகள் மட்டுமே நிரப்பவும். காலியாக உள்ள எந்த புலமும் மாறாமல் இருக்கும்.',
-    'bulk_update_warn'	=> 'சொத்துக்களின் திருத்தங்களை நீங்கள் திருத்திக் கொள்ள உள்ளீர்கள்: asset_count assets.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'அவுட் சரிபார்க்கப்பட்டது',
     'checkout_date'		=> 'புதுப்பிப்பு தேதி',
     'checkin_date'		=> 'சரி தேதி',
@@ -40,4 +40,12 @@ return [
     'warranty'			=> 'உத்தரவாதத்தை',
         'warranty_expires'		=> 'Warranty Expires',
     'years'				=> 'ஆண்டுகள்',
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information'
 ];

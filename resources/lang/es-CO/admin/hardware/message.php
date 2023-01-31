@@ -17,6 +17,7 @@ return [
         'error'   			=> 'Equipo no actualizado, intentalo de nuevo',
         'success' 			=> 'Equipo actualizado.',
         'nothing_updated'	=>  'Ningún campo fue seleccionado, por lo que nada ha sido actualizado.',
+        'no_assets_selected'  =>  'Ningún recurso fue seleccionado, por lo que no se actualizó nada.',
     ],
 
     'restore' => [
@@ -28,6 +29,7 @@ return [
         'error'   		=> 'La auditoría de activos no tuvo éxito. Vuelve a intentarlo.',
         'success' 		=> 'Auditoría de activos registrada correctamente.',
     ],
+
 
     'deletefile' => [
         'error'   => 'Archivo no eliminado. Por favor, vuelva a intentarlo.',
@@ -48,6 +50,7 @@ return [
         'file_delete_success'   => 'Tu archivo ha sido eliminado con éxito',
         'file_delete_error'      => 'No pudimos eliminar tu archivo',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Estás seguro que quieres eliminar el equipo?',

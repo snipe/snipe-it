@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => 'Attributtet :attribute må være en fil.',
     'filled'               => 'Den :attribute må ha en verdi.',
     'image'                => 'Attributtet :attribute må være et bilde.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'Det valgte attributtet :attribute er ugyldig.',
     'in_array'             => 'Attributtfeltet finnes ikke i: andre.',
     'integer'              => 'Attributtet :attribute må være et heltall.',
     'ip'                   => 'Attributtet :attribute må være en gyldig IP-adresse.',
     'ipv4'                 => 'Attributtet :attribute må være en gyldig IPv4-adresse.',
     'ipv6'                 => 'Attributtet :attribute må være en gyldig IPv6-adresse.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'Attributtet: må være en gyldig JSON-streng.',
     'max'                  => [
         'numeric' => 'Attributtet :attribute må ikke være større enn :max.',
@@ -64,6 +66,7 @@ return array(
         'string'  => 'Attributtet :attribute må være minst :min tegn.',
         'array'   => 'Attributtet må ha minst: min elementer.',
     ],
+    'starts_with'          => ':attribute må starte med en av følgende: :values.',
     'not_in'               => 'Attributtet :attribute er ugyldig.',
     'numeric'              => 'Attributtet :attribute må være et nummer.',
     'present'              => 'Atributtfeltet :attribute må ha en verdi.',
@@ -88,8 +91,17 @@ return array(
     'unique'               => 'Attributtet :attribute er allerede tatt.',
     'uploaded'             => 'Atribbutet :attribute kunne ikke lastes opp.',
     'url'                  => 'Attributt-formatet :attribute er ugyldig.',
-    "unique_undeleted"     => ":attribute må være unikt.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => ':attribute må være unikt.',
+    'non_circular'         => 'Attributtet :attribute kan ikke opprette en sirkulær referanse.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +113,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +126,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Attributtfeltet inneholder et tegn som ikke er tillatt.",
-        "email_array"      => "En eller flere e-postadresser er ugyldige.",
-        "hashed_pass"      => "Gjeldende passord er feil",
+        'alpha_space' => 'Attributtfeltet inneholder et tegn som ikke er tillatt.',
+        'email_array'      => 'En eller flere e-postadresser er ugyldige.',
+        'hashed_pass'      => 'Gjeldende passord er feil',
         'dumbpwd'          => 'Passordet er for vanlig.',
-        "statuslabel_type" => "Du må velge en gyldig statusetikett-type",
+        'statuslabel_type' => 'Du må velge en gyldig statusetikett-type',
     ],
 
     /*
@@ -135,4 +146,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

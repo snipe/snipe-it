@@ -8,6 +8,7 @@ use App\Models\AssetModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Validator;
 use Redirect;
 use Request;
 use Storage;
@@ -90,7 +91,9 @@ class AssetModelsController extends Controller
         // Was it created?
         if ($model->save()) {
             if ($this->shouldAddDefaultValues($request->input())) {
-                $this->assignCustomFieldsDefaultValues($model, $request->input('default_values'));
+                if (!$this->assignCustomFieldsDefaultValues($model, $request->input('default_values'))){
+                    return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.fieldset_default_value.error'));
+                }
             }
 
             // Redirect to the new model  page
@@ -122,6 +125,7 @@ class AssetModelsController extends Controller
 
         return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
     }
+
 
     /**
      * Validates and processes form data from the edit
@@ -162,7 +166,9 @@ class AssetModelsController extends Controller
             $model->fieldset_id = $request->input('custom_fieldset');
 
             if ($this->shouldAddDefaultValues($request->input())) {
-                $this->assignCustomFieldsDefaultValues($model, $request->input('default_values'));
+                if (!$this->assignCustomFieldsDefaultValues($model, $request->input('default_values'))){
+                    return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.fieldset_default_value.error'));
+                }
             }
         }
 
@@ -231,9 +237,10 @@ class AssetModelsController extends Controller
 
             return redirect()->route('models.index')->with('success', trans('admin/models/message.restore.success'));
         }
-
         return redirect()->back()->with('error', trans('admin/models/message.not_found'));
+
     }
+
 
     /**
      * Get the model information to present to the model view page
@@ -266,6 +273,7 @@ class AssetModelsController extends Controller
      */
     public function getClone($modelId = null)
     {
+        $this->authorize('create', AssetModel::class);
         // Check if the model exists
         if (is_null($model_to_clone = AssetModel::find($modelId))) {
             return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
@@ -281,6 +289,7 @@ class AssetModelsController extends Controller
             ->with('clone_model', $model_to_clone);
     }
 
+
     /**
      * Get the custom fields form
      *
@@ -293,6 +302,8 @@ class AssetModelsController extends Controller
     {
         return view('models.custom_fields_form')->with('model', AssetModel::find($modelId));
     }
+
+
 
     /**
      * Returns a view that allows the user to bulk edit model attrbutes
@@ -336,6 +347,8 @@ class AssetModelsController extends Controller
             ->with('error', 'You must select at least one model to edit.');
     }
 
+
+
     /**
      * Returns a view that allows the user to bulk edit model attrbutes
      *
@@ -347,6 +360,7 @@ class AssetModelsController extends Controller
     {
         $models_raw_array = $request->input('ids');
         $update_array = [];
+
 
         if (($request->filled('manufacturer_id') && ($request->input('manufacturer_id') != 'NC'))) {
             $update_array['manufacturer_id'] = $request->input('manufacturer_id');
@@ -361,6 +375,7 @@ class AssetModelsController extends Controller
             $update_array['depreciation_id'] = $request->input('depreciation_id');
         }
 
+        
         if (count($update_array) > 0) {
             AssetModel::whereIn('id', $models_raw_array)->update($update_array);
 
@@ -441,11 +456,40 @@ class AssetModelsController extends Controller
      */
     private function assignCustomFieldsDefaultValues(AssetModel $model, array $defaultValues)
     {
+        $data = array();
         foreach ($defaultValues as $customFieldId => $defaultValue) {
-            if ($defaultValue) {
+            $customField = \App\Models\CustomField::find($customFieldId);
+
+            $data[$customField->db_column] = $defaultValue;
+        }
+
+        $fieldsets = $model->fieldset->validation_rules();
+        $rules = array();
+
+        foreach ($fieldsets as $fieldset => $validation){
+            // If the field is marked as required, eliminate the rule so it doesn't interfere with the default values
+            // (we are at model level, the rule still applies when creating a new asset using this model)
+            $index = array_search('required', $validation);
+            if ($index !== false){
+                $validation[$index] = 'nullable';
+            }
+            $rules[$fieldset] = $validation;
+        }
+
+        $validator = Validator::make($data, $rules);
+
+        if($validator->fails()){
+            return false;
+        }
+
+        foreach ($defaultValues as $customFieldId => $defaultValue) {
+            if(is_array($defaultValue)){
+                $model->defaultValues()->attach($customFieldId, ['default_value' => implode(', ', $defaultValue)]);
+            }elseif ($defaultValue) {
                 $model->defaultValues()->attach($customFieldId, ['default_value' => $defaultValue]);
             }
         }
+        return true;
     }
 
     /**

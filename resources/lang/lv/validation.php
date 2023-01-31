@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => 'Atribūts ir jābūt failam.',
     'filled'               => 'Atribūta laukam jābūt vērtībai.',
     'image'                => 'Atribūts ir jābūt attēlam.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'Atlasītais: atribūts nav derīgs.',
     'in_array'             => 'Atribūta lauks neeksistē: citā.',
     'integer'              => 'Atribūts ir jābūt veselam skaitlim.',
     'ip'                   => 'Atribūtam jābūt derīgai IP adresei.',
     'ipv4'                 => 'Atribūtam jābūt derīgai IPv4 adresei.',
     'ipv6'                 => 'Atribūtam jābūt derīgai IPv6 adresei.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'Atribūtam jābūt derīgai JSON virknei.',
     'max'                  => [
         'numeric' => 'Atribūts: nedrīkst būt lielāks par: max.',
@@ -64,6 +66,7 @@ return array(
         'string'  => 'Atribūts: jābūt vismaz: min rakstzīmēm.',
         'array'   => 'Atribūtam jābūt vismaz: min vienumiem.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'Atlasītais: atribūts nav derīgs.',
     'numeric'              => 'Atribūts ir jābūt skaitlim.',
     'present'              => 'Atribūta laukam jābūt klāt.',
@@ -88,8 +91,17 @@ return array(
     'unique'               => 'Atribūts jau ir pieņemts.',
     'uploaded'             => 'Atribūts neizdevās augšupielādēt.',
     'url'                  => 'Atribūta formāts nav derīgs.',
-    "unique_undeleted"     => ":attribute jābūt unikālam.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => ':attribute jābūt unikālam.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +113,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +126,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Laukā: atribūta lauks ir rakstzīme, kas nav atļauta.",
-        "email_array"      => "Viena vai vairākas e-pasta adreses nav derīgas.",
-        "hashed_pass"      => "Jūsu pašreizējā parole nav pareiza",
+        'alpha_space' => 'Laukā: atribūta lauks ir rakstzīme, kas nav atļauta.',
+        'email_array'      => 'Viena vai vairākas e-pasta adreses nav derīgas.',
+        'hashed_pass'      => 'Jūsu pašreizējā parole nav pareiza',
         'dumbpwd'          => 'Šī parole ir pārāk izplatīta.',
-        "statuslabel_type" => "Jums ir jāizvēlas derīgs statusa etiķetes veids",
+        'statuslabel_type' => 'Jums ir jāizvēlas derīgs statusa etiķetes veids',
     ],
 
     /*
@@ -135,4 +146,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

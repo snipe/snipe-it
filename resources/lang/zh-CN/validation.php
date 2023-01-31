@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => '：属性必须是一个文件。',
     'filled'               => '：属性字段必须有一个值。',
     'image'                => ':attribute 必须是图片格式',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => '选择的 :attribute 无效',
     'in_array'             => '：属性字段不存在于：其他。',
     'integer'              => ':attribute 必须是整数',
     'ip'                   => ':attribute 必须是有效IP',
     'ipv4'                 => '：属性必须是有效的IPv4地址。',
     'ipv6'                 => '：属性必须是有效的IPv6地址。',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => '：属性必须是有效的JSON字符串。',
     'max'                  => [
         'numeric' => ':attribute 不大于 :max',
@@ -64,6 +66,7 @@ return array(
         'string'  => ':attribute 最少 :min个字符',
         'array'   => '：属性必须至少有：最小项。',
     ],
+    'starts_with'          => ':attribute 必须以以下一个开始：:values',
     'not_in'               => '选择的 :attribute 无效',
     'numeric'              => ':attribute 必须是数字',
     'present'              => '：属性字段必须存在。',
@@ -88,8 +91,17 @@ return array(
     'unique'               => ':attribute 已经被采用',
     'uploaded'             => '：属性无法上传。',
     'url'                  => ':attribute 格式无效',
-    "unique_undeleted"     => ":attribute 属性必须唯一。",
-    "non_circular"         => ":attribute 不能创建循环引用。",
+    'unique_undeleted'     => ':attribute 属性必须唯一。',
+    'non_circular'         => ':attribute 不能创建循环引用。',
+    'disallow_same_pwd_as_user_fields' => '密码不能和用户名相同。',
+    'letters'              => '密码必须包含至少一个字母。',
+    'numbers'              => '密码必须包含至少一个数字。',
+    'case_diff'            => '密码必须使用混合大小写。',
+    'symbols'              => '密码必须包含符号。',
+    'gte'                  => [
+        'numeric'          => '数值不能为负数'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +113,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +126,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "：属性字段包含不允许的字符。",
-        "email_array"      => "一个或多个电子邮件地址无效。",
-        "hashed_pass"      => "您当前的密码不正确",
+        'alpha_space' => '：属性字段包含不允许的字符。',
+        'email_array'      => '一个或多个电子邮件地址无效。',
+        'hashed_pass'      => '您当前的密码不正确',
         'dumbpwd'          => '那个密码太常见了。',
-        "statuslabel_type" => "您必须选择有效的状态标签类型",
+        'statuslabel_type' => '您必须选择有效的状态标签类型',
     ],
 
     /*
@@ -135,4 +146,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

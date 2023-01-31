@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_models_title'     => 'Ang Tungkol sa mga Modelo ng Asset',
     'about_models_text'           => 'Ang mga Modelo ng Asset ay isang paraan para i-grupo ang magkakaparehong mga asset. "MBP 2013", "IPhone 6s", atbp.',
     'deleted'  					        => 'This model has been deleted.',
@@ -9,10 +9,10 @@ return [
     'bulk_delete_warn'          => 'Ikaw ay mag-delete ng :model_count mga modelo ng asset.',
     'restore'                   => 'Ibalik sa dati ang Modelo',
     'requestable'               => 'Ang mga gumagamit ay pwedeng mag-rekwest ng modelong ito',
-    'show_mac_address'			      => 'Ipakita ang field MAC address sa mga asset ng modelong ito',
+	'show_mac_address'			      => 'Ipakita ang field MAC address sa mga asset ng modelong ito',
     'view_deleted'              => 'Tingnan ang mga Nai-delete na',
     'view_models'               => 'Tingnan ang mga Modelo',
     'fieldset'                  => 'Ang Fieldset',
     'no_custom_field'           => 'Walang nai-kustom na mga field',
     'add_default_values'        => 'Add default values',
-];
+);

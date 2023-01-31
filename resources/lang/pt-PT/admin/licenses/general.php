@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'Sobre as Licenças',
     'about_licenses'                  => 'As licenças são usadas para controlar o software.  Eles têm um número especificado de lugares disponíveis para atribuir',
     'checkin'  					=> 'Devolver instalação da Licença',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'Licenças de Software',
     'user'  					=> 'Utilizador',
     'view'  					=> 'Ver Licença',
-];
+);

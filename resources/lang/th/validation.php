@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => 'แอตทริบิวต์: ต้องเป็นไฟล์',
     'filled'               => 'ฟิลด์แอ็ตทริบิวต์ต้องมีค่า',
     'image'                => ':attribute ต้องเป็นรูปภาพเท่านั้น',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => ':attribute ที่เลือกไม่ถูกต้อง',
     'in_array'             => 'ฟิลด์แอ็ตทริบิวต์: ไม่มีใน: other',
     'integer'              => ':attribute ต้องเป็นจำนวนเต็มเท่านั้น',
     'ip'                   => ':attribute ต้องเป็นรูปแบบไอพีแอดเดรสเท่านั้น',
     'ipv4'                 => 'แอตทริบิวต์: ต้องเป็นที่อยู่ IPv4 ที่ถูกต้อง',
     'ipv6'                 => 'แอตทริบิวต์: ต้องเป็นที่อยู่ IPv6 ที่ถูกต้อง',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'แอตทริบิวต์: ต้องเป็นสตริง JSON ที่ถูกต้อง',
     'max'                  => [
         'numeric' => ':attribute ต้องไม่มากกว่า :max',
@@ -64,6 +66,7 @@ return array(
         'string'  => ':attribute ต้องมีจำนวนอย่างน้อย :min ตัวอักษร',
         'array'   => 'แอตทริบิวต์: ต้องมีอย่างน้อย: รายการต่ำสุด',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => ':attribute ที่เลือกไม่ถูกต้อง',
     'numeric'              => ':attribute ต้องเป็นตัวเลขเท่านั้น',
     'present'              => 'ฟิลด์แอ็ตทริบิวต์: ต้องมีอยู่',
@@ -88,8 +91,17 @@ return array(
     'unique'               => ':attribute กำลังใช้งานอยู่',
     'uploaded'             => 'แอตทริบิวต์: ล้มเหลวในการอัปโหลด',
     'url'                  => 'รูปแบบของ :attribute ไม่ถูกต้อง',
-    "unique_undeleted"     => "แอตทริบิวต์ต้องไม่ซ้ำกัน",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => 'แอตทริบิวต์ต้องไม่ซ้ำกัน',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +113,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +126,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "ฟิลด์แอ็ตทริบิวต์: มีอักขระที่ไม่ได้รับอนุญาต",
-        "email_array"      => "ที่อยู่อีเมลไม่ถูกต้อง",
-        "hashed_pass"      => "รหัสผ่านปัจจุบันของคุณไม่ถูกต้อง",
+        'alpha_space' => 'ฟิลด์แอ็ตทริบิวต์: มีอักขระที่ไม่ได้รับอนุญาต',
+        'email_array'      => 'ที่อยู่อีเมลไม่ถูกต้อง',
+        'hashed_pass'      => 'รหัสผ่านปัจจุบันของคุณไม่ถูกต้อง',
         'dumbpwd'          => 'รหัสผ่านที่ใช้กันอยู่ทั่วไป',
-        "statuslabel_type" => "คุณต้องเลือกประเภทป้ายสถานะที่ถูกต้อง",
+        'statuslabel_type' => 'คุณต้องเลือกประเภทป้ายสถานะที่ถูกต้อง',
     ],
 
     /*
@@ -135,4 +146,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

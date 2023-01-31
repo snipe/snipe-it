@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Vas a eliminar :asset_count activos.',
     'bulk_update'		=> 'Actualización Masiva de Activos',
     'bulk_update_help'	=> 'Este formulario te permite actualizar múltiples activos de una vez. Sólo llena los campos que necesites cambiar. Cualquier campo dejado en blanco permanecerá sin cambios. ',
-    'bulk_update_warn'	=> 'Estás a punto de editar las propiedades de :asset_count activos.',
+    'bulk_update_warn'	=> 'Está a punto de editar las propiedades de un solo activo.|Está a punto de editar las propiedades de :asset_count activos.',
     'checkedout_to'		=> 'Asignado A',
     'checkout_date'		=> 'Fecha de Salida',
     'checkin_date'		=> 'Fecha de Ingreso',
@@ -40,4 +40,12 @@ return [
     'warranty'			=> 'Garantía',
         'warranty_expires'		=> 'La garantía vence',
     'years'				=> 'años',
+    'asset_location' => 'Actualizar ubicación del activo',
+    'asset_location_update_default_current' => 'Actualizar ubicación predeterminada y ubicación actual',
+    'asset_location_update_default' => 'Actualizar sólo la ubicación predeterminada',
+    'asset_not_deployable' => 'Ese estado de activos no es desplegable. Este activo no puede ser verificado.',
+    'asset_deployable' => 'Ese estado es desplegable. Este activo puede ser revisado.',
+    'processing_spinner' => 'Procesando...',
+    'optional_infos'  => 'Información opcional',
+    'order_details'   => 'Información relacionada con el pedido'
 ];

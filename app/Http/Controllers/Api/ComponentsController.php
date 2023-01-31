@@ -40,6 +40,7 @@ class ComponentsController extends Controller
                 'purchase_cost',
                 'qty',
                 'image',
+                'notes',
             ];
 
 
@@ -48,6 +49,10 @@ class ComponentsController extends Controller
 
         if ($request->filled('search')) {
             $components = $components->TextSearch($request->input('search'));
+        }
+
+        if ($request->filled('name')) {
+            $components->where('name', '=', $request->input('name'));
         }
 
         if ($request->filled('company_id')) {
@@ -60,6 +65,10 @@ class ComponentsController extends Controller
 
         if ($request->filled('location_id')) {
             $components->where('location_id', '=', $request->input('location_id'));
+        }
+
+        if ($request->filled('notes')) {
+            $components->where('notes','=',$request->input('notes'));
         }
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
@@ -237,7 +246,8 @@ class ComponentsController extends Controller
                 'created_at' => \Carbon::now(),
                 'assigned_qty' => $request->get('assigned_qty', 1),
                 'user_id' => \Auth::id(),
-                'asset_id' => $request->get('assigned_to')
+                'asset_id' => $request->get('assigned_to'),
+                'note' => $request->get('note'),
             ]);
 
             $component->logCheckout($request->input('note'), $asset);

@@ -8,7 +8,7 @@
 
 @section('header_right')
     @can('create', \App\Models\Accessory::class)
-        <a href="{{ route('accessories.create') }}" class="btn btn-primary pull-right"> {{ trans('general.create') }}</a>
+        <a href="{{ route('accessories.create') }}" accesskey="n" class="btn btn-primary pull-right"> {{ trans('general.create') }}</a>
     @endcan
 @stop
 
@@ -30,6 +30,7 @@
                 data-search="true"
                 data-side-pagination="server"
                 data-show-columns="true"
+                data-show-fullscreen="true"
                 data-show-export="true"
                 data-show-refresh="true"
                 data-show-footer="true"

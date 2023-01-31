@@ -4,10 +4,11 @@ return [
 
     'asset_tag'   	=> 'Thẻ tài sản',
     'asset_model'       => 'Loại',
-    'book_value'  	=> 'Giá trị',
+    'book_value'  	=> 'Giá trị hiện tại',
     'change' 		=> 'Vào/Ra',
     'checkout_date' => 'Ngày checkout',
     'checkoutto' 	=> 'Đã checkout',
+    'current_value' => 'Giá trị hiện tại',
     'diff' 			=> 'Khác nhau',
     'dl_csv' 		=> 'Tải tập tin CSV xuống',
     'eol' 			=> 'EOL',
@@ -18,8 +19,12 @@ return [
     'serial'   		=> 'Sê-ri',
     'status'   		=> 'Tình trạng',
     'title'      	=> 'Tài sản ',
-    'image'		=> 'Hình ảnh Thiết bị',
+    'image'		    => 'Hình ảnh Thiết bị',
     'days_without_acceptance' => 'Những ngày không chấp nhận',
     'monthly_depreciation' => 'Khấu hao tháng',
-
+    'assigned_to'    => 'Bàn giao cho',
+    'requesting_user' => 'Người dùng đang yêu cầu',
+    'requested_date' => 'Ngày yêu cầu',
+    'changed'       => 'Đã thay đổi',
+    'icon' => 'Icon',
 ];

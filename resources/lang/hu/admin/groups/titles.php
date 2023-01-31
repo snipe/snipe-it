@@ -10,5 +10,7 @@ return [
     'group_admin' 	 		=> 'Csoport Admin-ok',
     'allow' 	 			=> 'Engedélyezés',
     'deny' 	 				=> 'Elutasítás',
-
+    'permission'            => 'Jogosultság',
+    'grant'                 => 'Engedélyezés',
+    'no_permissions'        => 'Ez a csoport nem rendelkezik jogosultságokkal.'
 ];

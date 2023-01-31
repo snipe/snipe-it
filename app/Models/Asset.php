@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Events\AssetCheckedOut;
 use App\Events\CheckoutableCheckedOut;
 use App\Exceptions\CheckoutNotAllowed;
+use App\Helpers\Helper;
 use App\Http\Traits\UniqueSerialTrait;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Acceptable;
@@ -94,6 +95,7 @@ class Asset extends Depreciable
         'location_id'    => 'integer',
         'rtd_company_id' => 'integer',
         'supplier_id'    => 'integer',
+        'byod'           => 'boolean',
     ];
 
     protected $rules = [
@@ -105,15 +107,15 @@ class Asset extends Depreciable
         'physical'        => 'numeric|max:1|nullable',
         'checkout_date'   => 'date|max:10|min:10|nullable',
         'checkin_date'    => 'date|max:10|min:10|nullable',
-        'supplier_id'     => 'exists:suppliers,id|numeric|nullable',
         'location_id'     => 'exists:locations,id|nullable',
         'rtd_location_id' => 'exists:locations,id|nullable',
         'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
         'status'          => 'integer',
         'serial'          => 'unique_serial|nullable',
-        'purchase_cost'   => 'numeric|nullable',
+        'purchase_cost'   => 'numeric|nullable|gte:0',
         'next_audit_date' => 'date|nullable',
         'last_audit_date' => 'date|nullable',
+        'supplier_id'     => 'exists:suppliers,id|nullable',
     ];
 
   /**
@@ -142,6 +144,7 @@ class Asset extends Depreciable
         'requestable',
         'last_checkout',
         'expected_checkin',
+        'byod',
     ];
 
     use Searchable;
@@ -194,9 +197,24 @@ class Asset extends Depreciable
             $model = AssetModel::find($this->model_id);
 
             if (($model) && ($model->fieldset)) {
+
+                foreach ($model->fieldset->fields as $field){
+                    if($field->format == 'BOOLEAN'){
+                        $this->{$field->db_column} = filter_var($this->{$field->db_column}, FILTER_VALIDATE_BOOLEAN);
+                    }
+                }
+
                 $this->rules += $model->fieldset->validation_rules();
+
+                foreach ($this->model->fieldset->fields as $field){
+                    if($field->format == 'BOOLEAN'){
+                        $this->{$field->db_column} = filter_var($this->{$field->db_column}, FILTER_VALIDATE_BOOLEAN);
+                    }
+                }
             }
         }
+
+
 
         return parent::save($params);
     }
@@ -261,11 +279,12 @@ class Asset extends Depreciable
                 && ($this->assetstatus->deployable == '1')) 
             {
                 return true;
+
             }
         }
-
         return false;
     }
+
 
     /**
      * Checks the asset out to the target
@@ -297,12 +316,9 @@ class Asset extends Depreciable
         }
 
         $this->last_checkout = $checkout_at;
+        $this->name = $name;
 
         $this->assignedTo()->associate($target);
-
-        if ($name != null) {
-            $this->name = $name;
-        }
 
         if ($location != null) {
             $this->location_id = $location;
@@ -501,9 +517,10 @@ class Asset extends Depreciable
                 }
                 //this makes no sense
                 return $this->defaultLoc;
-            }
+
             }
 
+        }
         return $this->defaultLoc;
     }
 
@@ -674,14 +691,16 @@ class Asset extends Depreciable
      */
     public static function getExpiringWarrantee($days = 30)
     {
+        $days = (is_null($days)) ? 30 : $days;
+
         return self::where('archived', '=', '0')
             ->whereNotNull('warranty_months')
             ->whereNotNull('purchase_date')
             ->whereNull('deleted_at')
-            ->whereRaw(\DB::raw('DATE_ADD(`purchase_date`,INTERVAL `warranty_months` MONTH) <= DATE(NOW() + INTERVAL '
-                                 .$days
-                                 .' DAY) AND DATE_ADD(`purchase_date`,INTERVAL `warranty_months` MONTH) > NOW()'))
-            ->orderBy('purchase_date', 'ASC')
+            ->whereRaw('DATE_ADD(`purchase_date`,INTERVAL `warranty_months` MONTH) <= DATE(NOW() + INTERVAL '
+                                 . $days
+                                 . ' DAY) AND DATE_ADD(`purchase_date`, INTERVAL `warranty_months` MONTH) > NOW()')
+            ->orderByRaw('DATE_ADD(`purchase_date`,INTERVAL `warranty_months` MONTH)')
             ->get();
     }
 
@@ -824,7 +843,9 @@ class Asset extends Depreciable
      */
     public function checkin_email()
     {
-        return $this->model->category->checkin_email;
+        if (($this->model) && ($this->model->category)) {
+            return $this->model->category->checkin_email;
+        }
     }
 
     /**
@@ -852,13 +873,12 @@ class Asset extends Depreciable
      */
     public function getEula()
     {
-        $Parsedown = new \Parsedown();
-        
+
         if (($this->model) && ($this->model->category)) {
             if ($this->model->category->eula_text) {
-                return $Parsedown->text(e($this->model->category->eula_text));
+                return Helper::parseEscapedMarkedown($this->model->category->eula_text);
             } elseif ($this->model->category->use_default_eula == '1') {
-                return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
+                return Helper::parseEscapedMarkedown(Setting::getSettings()->default_eula_text);
             } else {
                 return false;
             }
@@ -1124,6 +1144,31 @@ class Asset extends Depreciable
     }
 
 
+    /**
+     * Query builder scope for Archived assets counting
+     *
+     * This is primarily used for the tab counters so that IF the admin
+     * has chosen to not display archived assets in their regular lists
+     * and views, it will return the correct number.
+     *
+     * @param  \Illuminate\Database\Query\Builder $query Query builder instance
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+
+    public function scopeAssetsForShow($query)
+    {
+
+        if (Setting::getSettings()->show_archived_in_list!=1) {
+            return $query->whereHas('assetstatus', function ($query) {
+                $query->where('archived', '=', 0);
+            });
+        } else {
+            return $query;
+        }
+
+    }
+
   /**
    * Query builder scope for Archived assets
    *
@@ -1164,11 +1209,14 @@ class Asset extends Depreciable
 
     public function scopeRequestableAssets($query)
     {
-        return Company::scopeCompanyables($query->where('requestable', '=', 1))
+        $table = $query->getModel()->getTable();
+
+        return Company::scopeCompanyables($query->where($table.'.requestable', '=', 1))
         ->whereHas('assetstatus', function ($query) {
-            $query->where('deployable', '=', 1)
-                 ->where('pending', '=', 0)
-                 ->where('archived', '=', 0);
+            $query->where(function ($query) {
+                $query->where('deployable', '=', 1)
+                      ->where('archived', '=', 0); // you definitely can't request something that's archived
+            })->orWhere('pending', '=', 1); // we've decided that even though an asset may be 'pending', you can still request it
         });
     }
 
@@ -1314,6 +1362,7 @@ class Asset extends Depreciable
     {
         return $query->where(function ($query) use ($filter) {
             foreach ($filter as $key => $search_val) {
+
                 $fieldname = str_replace('custom_fields.', '', $key);
 
                 if ($fieldname == 'asset_tag') {
@@ -1450,6 +1499,7 @@ class Asset extends Depreciable
                 && ($fieldname!='status_label') && ($fieldname!='assigned_to') && ($fieldname!='model') && ($fieldname!='company') && ($fieldname!='manufacturer')) {
                     $query->where('assets.'.$fieldname, 'LIKE', '%' . $search_val . '%');
             }
+
 
             }
 

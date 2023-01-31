@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Active',
     'allow'  				=> 'Erlauben',
     'checkedout'  			=> 'Assets',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'Email',
     'employee_num'      	=> 'Mitarbeiternr.',
     'first_name' 			=> 'Vorname',
-    'groupnotes'			=> 'Wähle eine Gruppe um sie dem Benutzer zuzuweisen, denke daran, dass ein Benutzer die Berechtigungen der zugewiesenen Gruppe übernimmt.',
+    'groupnotes'			=> 'Wählen Sie eine Gruppe aus, die dem Benutzer zugewiesen werden soll. Denken Sie daran, dass ein Benutzer die Berechtigungen der zugewiesenen Gruppe erhält. Benutzen Sie Strg+Klick (oder cmd+Klick bei MacOS), um Gruppen aus der Auswahl zu entfernen.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Vererben',
     'job' 					=> 'Berufsbezeichnung',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Zeige aktuelle Benutzer',
     'show_deleted'          => 'Zeige gelöschte Benutzer',
     'title' 				=> 'Titel',
-    'to_restore_them'		=> 'zum Wiederherstellen.',
+	'to_restore_them'		=> 'zum Wiederherstellen.',
     'updateuser' 			=> 'Benutzer aktualisieren',
     'username' 				=> 'Benutzername',
-    'user_deleted_text' 	=> 'Dieser Benutzer wurde als gelöscht markiert.',
+	'user_deleted_text' 	=> 'Dieser Benutzer wurde als gelöscht markiert.',
     'username_note' 		=> '(Dies wird für den Bind an das Active Directory benutzt, nicht für die Anmeldung.)',
     'cloneuser'             => 'Benutzer kopieren',
     'viewusers' 			=> 'Benutzer anzeigen',
-];
+);

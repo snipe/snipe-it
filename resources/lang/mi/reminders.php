@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,9 @@ return [
     |
     */
 
-    'password' => 'Ko nga kupuhipa he ono nga kupuhipa me te whakarite i te haamau.',
+    "password" => "Ko nga kupuhipa he ono nga kupuhipa me te whakarite i te haamau.",
+    "user"     => "He hē te ingoa kaiwhakamahi me te wāhitau īmēra",
+    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
+    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
 
-    'user'     => 'He hē te ingoa kaiwhakamahi me te wāhitau īmēra',
-
-    'token'    => 'He muhu tenei kupuhipa tautuhinga tautuhi.',
-
-    'sent' => 'Mena kua kitea he wahitau īmēra rite, kua tukuna he whakamahara kupuhipa!',
-
-];
+);

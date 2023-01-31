@@ -20,6 +20,8 @@ use App\Http\Controllers\StatuslabelsController;
 use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\ViewAssetsController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -60,7 +62,7 @@ Route::group(['middleware' => 'auth'], function () {
     */
 
     Route::group(['prefix' => 'manufacturers', 'middleware' => ['auth']], function () {
-        Route::get('{manufacturers_id}/restore', [ManufacturersController::class, 'restore'] )->name('restore/manufacturer');
+        Route::post('{manufacturers_id}/restore', [ManufacturersController::class, 'restore'] )->name('restore/manufacturer');
     });
 
     Route::resource('manufacturers', ManufacturersController::class, [
@@ -124,6 +126,10 @@ Route::group(['middleware' => 'auth'], function () {
         'display-sig/{filename}',
         [ActionlogController::class, 'displaySig']
     )->name('log.signature.view');
+    Route::get(
+        'stored-eula-file/{filename}',
+        [ActionlogController::class, 'getStoredEula']
+    )->name('log.storedeula.download');
 });
 
 /*
@@ -248,18 +254,12 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
 
     Route::get('requested', [ViewAssetsController::class, 'getRequestedAssets'])->name('account.requested');
 
-    // Accept Asset
-    Route::get(
-        'accept-asset/{logID}',
-        [ViewAssetsController::class, 'getAcceptAsset']
-    )->name('account/accept-assets');
-
     // Profile
     Route::get(
         'requestable-assets',
         [ViewAssetsController::class, 'getRequestableIndex']
     )->name('requestable-assets');
-    Route::get(
+    Route::post(
         'request-asset/{assetId}',
         [ViewAssetsController::class, 'getRequestAsset']
     )->name('account/request-asset');
@@ -279,6 +279,23 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
         ->name('account.accept.item');
 
     Route::post('accept/{id}', [Account\AcceptanceController::class, 'store']);
+
+    Route::get(
+        'print',
+        [
+            ProfileController::class,
+            'printInventory'
+        ]
+    )->name('profile.print');
+
+    Route::post(
+        'email',
+        [
+            ProfileController::class,
+            'emailAssetList'
+        ]
+    )->name('profile.email_assets');
+
 });
 
 Route::group(['middleware' => ['auth']], function () {
@@ -391,26 +408,12 @@ Route::group(['prefix' => 'setup', 'middleware' => 'web'], function () {
     )->name('setup');
 });
 
-Route::middleware(['web'], function () {
-    Route::get(
-        'two-factor-enroll',
-        [LoginController::class, 'getTwoFactorEnroll']
-    )->name('two-factor-enroll');
-    
-    Route::get(
-        'two-factor',
-        [LoginController::class, 'getTwoFactorAuth']
-    )->name('two-factor');
-    
-    Route::post(
-        'two-factor',
-        [LoginController::class, 'postTwoFactorAuth']
-    );    
-});
+
 
 
 
 Route::group(['middleware' => 'web'], function () {
+
     Route::get(
         'login',
         [LoginController::class, 'showLoginForm']
@@ -422,12 +425,74 @@ Route::group(['middleware' => 'web'], function () {
     );
 
     Route::get(
+        'two-factor-enroll',
+        [LoginController::class, 'getTwoFactorEnroll']
+    )->name('two-factor-enroll');
+
+    Route::get(
+        'two-factor',
+        [LoginController::class, 'getTwoFactorAuth']
+    )->name('two-factor');
+
+    Route::post(
+        'two-factor',
+        [LoginController::class, 'postTwoFactorAuth']
+    );
+
+
+
+    Route::post(
+        'password/email',
+        [ForgotPasswordController::class, 'sendResetLinkEmail']
+    )->name('password.email')->middleware('throttle:forgotten_password');
+
+    Route::get(
+        'password/reset',
+        [ForgotPasswordController::class, 'showLinkRequestForm']
+    )->name('password.request')->middleware('throttle:forgotten_password');
+
+
+    Route::post(
+        'password/reset',
+        [ResetPasswordController::class, 'reset']
+    )->name('password.update')->middleware('throttle:forgotten_password');
+
+    Route::get(
+        'password/reset/{token}',
+        [ResetPasswordController::class, 'showResetForm']
+    )->name('password.reset');
+
+
+    Route::post(
+        'password/email',
+        [ForgotPasswordController::class, 'sendResetLinkEmail']
+    )->name('password.email')->middleware('throttle:forgotten_password');
+
+
+
+
+
+    Route::get(
+        '/',
+        [
+            'as' => 'home',
+            'middleware' => ['auth'],
+            'uses' => 'DashboardController@getIndex' ]
+    );
+
+    // need to keep GET /logout for SAML SLO
+    Route::get(
         'logout',
         [LoginController::class, 'logout']
-    )->name('logout');
+    )->name('logout.get');
+
+    Route::post(
+        'logout',
+        [LoginController::class, 'logout']
+    )->name('logout.post');
 });
 
-Auth::routes();
+//Auth::routes();
 
 Route::get(
     '/health', 

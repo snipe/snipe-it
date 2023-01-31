@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong> Rhybudd: </strong> Mae\'r ased hwn wedi\'i nodi fel un na ellir ei ddefnyddio ar hyn o bryd.
                         Os yw\'r statws hwn wedi newid, diweddarwch statws yr ased.',
     'does_not_exist' 	=> 'Nid yw\'r ased yn bodoli.',
-    'does_not_exist_or_not_requestable' => 'Ymdrech da. Nid yw\'r ased yma yn bodoli neu ar gael.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Ar hyn o bryd mae\'r ased yma allan gan ddefnyddiwr ac ni ellir ei ddileu. Cofnodwch yr ased yn ol i fewn yn gyntaf, ac yna ceisiwch ei ddileu eto. ',
 
     'create' => [
@@ -17,6 +17,7 @@ return [
         'error'   			=> 'Ni diweddarwyd yr assed, ceisiwch eto o. g. y. dd',
         'success' 			=> 'Ased wedi diweddaru\'n llwyddiannus.',
         'nothing_updated'	=>  'Dim newid mewn manylder, felly dim byd wedi\'i diweddaru.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [
@@ -28,6 +29,7 @@ return [
         'error'   		=> 'Roedd archwiliad asedau yn aflwyddiannus. Ceisiwch eto o. g. y. dd.',
         'success' 		=> 'Cofnodwyd archwiliad asedau yn llwyddiannus.',
     ],
+
 
     'deletefile' => [
         'error'   => 'Ffeil heb ei ddileu. Ceisiwch eto o.g.y.dd.',
@@ -44,10 +46,11 @@ return [
     'import' => [
         'error'                 => 'Rhai eitemau heb ei mewnforio\'n gywir.',
         'errorDetail'           => 'Ni fewnforiwyd yr eitemau canlynol oherwydd gwallau.',
-        'success'               => "Mae'ch ffeil wedi'i mewnforio",
-        'file_delete_success'   => "Mae eich ffeil wedi'i dileu yn llwyddiannus",
-        'file_delete_error'      => "Nid oedd yn bosib dileu'r ffeil",
+        'success'               => 'Mae\'ch ffeil wedi\'i mewnforio',
+        'file_delete_success'   => 'Mae eich ffeil wedi\'i dileu yn llwyddiannus',
+        'file_delete_error'      => 'Nid oedd yn bosib dileu\'r ffeil',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Ydych chi\'n sicr eich bod eisiau dileu\'r ased yma?',

@@ -42,6 +42,7 @@ class ConsumablesController extends Controller
                 'item_no', 
                 'qty',
                 'image',
+                'notes',
                 ];
 
 
@@ -52,6 +53,10 @@ class ConsumablesController extends Controller
 
         if ($request->filled('search')) {
             $consumables = $consumables->TextSearch(e($request->input('search')));
+        }
+
+        if ($request->filled('name')) {
+            $consumables->where('name', '=', $request->input('name'));
         }
 
         if ($request->filled('company_id')) {
@@ -72,6 +77,10 @@ class ConsumablesController extends Controller
 
         if ($request->filled('location_id')) {
             $consumables->where('location_id','=',$request->input('location_id'));
+        }
+
+        if ($request->filled('notes')) {
+            $consumables->where('notes','=',$request->input('notes'));
         }
 
 
@@ -219,9 +228,11 @@ class ConsumablesController extends Controller
 
         foreach ($consumable->consumableAssignments as $consumable_assignment) {
             $rows[] = [
+                'avatar' => ($consumable_assignment->user) ? e($consumable_assignment->user->present()->gravatar) : '',
                 'name' => ($consumable_assignment->user) ? $consumable_assignment->user->present()->nameUrl() : 'Deleted User',
                 'created_at' => Helper::getFormattedDateObject($consumable_assignment->created_at, 'datetime'),
-                'admin' => ($consumable_assignment->admin) ? $consumable_assignment->admin->present()->nameUrl() : '',
+                'note' => ($consumable_assignment->note) ? e($consumable_assignment->note) : null,
+                'admin' => ($consumable_assignment->admin) ? $consumable_assignment->admin->present()->nameUrl() : null,
             ];
         }
 
@@ -264,6 +275,7 @@ class ConsumablesController extends Controller
                 'consumable_id' => $consumable->id,
                 'user_id' => $user->id,
                 'assigned_to' => $assigned_to,
+                'note' => $request->input('note'),
             ]);
 
             // Log checkout event

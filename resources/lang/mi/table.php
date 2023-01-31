@@ -1,10 +1,10 @@
 <?php
 
-return [
+return array(
 
     'actions'	 	=> 'Nga mahi',
     'action' 		=> 'Mahi',
     'by'      		=> 'Na',
     'item' 			=> 'Tuhinga',
 
-];
+);

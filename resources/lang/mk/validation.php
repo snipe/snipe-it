@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => ':attribute мора да биде датотека.',
     'filled'               => 'Полето :attribute мора да има дупликат.',
     'image'                => ':attribute мора да биде слика.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'Избраниот :attribute не е валиден.',
     'in_array'             => 'Полето :attribute не постои во :other.',
     'integer'              => ':attribute мора да биде цел број.',
     'ip'                   => ':attribute мора да биде валидна IP адреса.',
     'ipv4'                 => ':attribute мора да биде валидна IPv4 адреса.',
     'ipv6'                 => ':attribute мора да биде валидна IPv6 адреса.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => ':attribute мора да биде валиден JSON стринг.',
     'max'                  => [
         'numeric' => ':attribute не може да биде поголем од :max.',
@@ -64,6 +66,7 @@ return array(
         'string'  => ':attribute мора да биде поголем од :min знаци.',
         'array'   => ':attribute мора да содржи најмалку :min ставки.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'Избраниот :attribute не е валиден.',
     'numeric'              => ':attribute мора да биде број.',
     'present'              => 'Полето :attribute е задолжително.',
@@ -88,8 +91,17 @@ return array(
     'unique'               => ':attribute е веќе зафатен.',
     'uploaded'             => ':attribute не е прикачен.',
     'url'                  => 'Форматот на :attribute не е валиден.',
-    "unique_undeleted"     => ":attribute мора да биде уникатен.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => ':attribute мора да биде уникатен.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +113,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +126,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Полето :attribute содржи знак што не е дозволен.",
-        "email_array"      => "Една или повеќе е-пошти не се валидни.",
-        "hashed_pass"      => "Вашата тековна лозинка е неточна",
+        'alpha_space' => 'Полето :attribute содржи знак што не е дозволен.',
+        'email_array'      => 'Една или повеќе е-пошти не се валидни.',
+        'hashed_pass'      => 'Вашата тековна лозинка е неточна',
         'dumbpwd'          => 'Таа лозинка е премногу честа.',
-        "statuslabel_type" => "Мора да изберете валидна етикета за статус",
+        'statuslabel_type' => 'Мора да изберете валидна етикета за статус',
     ],
 
     /*
@@ -135,4 +146,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

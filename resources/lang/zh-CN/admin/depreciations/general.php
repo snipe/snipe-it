@@ -6,8 +6,11 @@ return [
     'asset_depreciations'  					=> '资产折旧',
     'create'  					            => '新建折旧',
     'depreciation_name'  					=> '折旧名称',
+    'depreciation_min'                      => '折旧底值',
     'number_of_months'  					=> '月数',
     'update'  					            => '更新折旧',
-    'depreciation_min'                      => '最底折旧值'
-
+    'depreciation_min'                      => '最底折旧值',
+    'no_depreciations_warning'               => '<strong>警告： </strong>
+                      您目前没有设置任何折旧。
+                      请设置至少一个折旧来查看折旧报告。',
 ];

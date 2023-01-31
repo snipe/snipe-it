@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => '\'N Gebruiker het \'n itemversoek op die webwerf gekanselleer',
     'a_user_requested' => '\'N Gebruiker het \'n item op die webwerf versoek',
     'accessory_name' => 'Toebehore Naam:',
@@ -59,7 +61,7 @@ return [
     'test_mail_text' => 'Dit is \'n toets van die Snipe-IT Batebestuurstelsel. As jy dit het, werk die pos :)',
     'the_following_item' => 'Die volgende item is nagegaan:',
     'low_inventory_alert' => 'There is :count item that is below minimum inventory or will soon be low.|There are :count items that are below minimum inventory or will soon be low.',
-    'assets_warrantee_alert' => 'There is :count asset with a warrantee expiring in the next :threshold days.|There are :count assets with warrantees expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'to_reset' => 'Om jou webadres te herstel, voltooi hierdie vorm:',
     'type' => 'tipe',

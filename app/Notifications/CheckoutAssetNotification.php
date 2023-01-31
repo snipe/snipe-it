@@ -53,7 +53,7 @@ class CheckoutAssetNotification extends Notification
     {
         $notifyBy = [];
 
-        if (Setting::getSettings()->slack_endpoint != '') {
+        if ((Setting::getSettings()) && (Setting::getSettings()->slack_endpoint != '')) {
             \Log::debug('use slack');
             $notifyBy[] = 'slack';
         }

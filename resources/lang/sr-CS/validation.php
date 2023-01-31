@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => ':attribute mora biti datoteka.',
     'filled'               => ':attribute mora imati vrednost.',
     'image'                => ':attribute mora biti slika.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'Odabrani :attribute nije korektan.',
     'in_array'             => ':attribute polje ne postoji u :other.',
     'integer'              => ':attribute mora biti ceo broj.',
     'ip'                   => ':attribute mora biti važeća IP adresa.',
     'ipv4'                 => ':attribute mora biti važeća IPv4 adresa.',
     'ipv6'                 => ':attribute mora biti važeća IPv6 adresa.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => ':attribute mora biti ispravan JSON niz.',
     'max'                  => [
         'numeric' => ':attribute ne sme biti veći od :max.',
@@ -64,6 +66,7 @@ return array(
         'string'  => ':attribute mora biti najmanje :min znakova.',
         'array'   => ':attribute mora imati barem :min stavke.',
     ],
+    'starts_with'          => ':attribute mora da počne sa jednom od sledećih vrednosti: :values.',
     'not_in'               => 'Odabrani :attribute nije ispravan.',
     'numeric'              => ':attribute mora biti broj.',
     'present'              => ':attribute polje mora biti prisutno.',
@@ -88,8 +91,17 @@ return array(
     'unique'               => ':attribute je već zauzet.',
     'uploaded'             => ':attribute nije prenet.',
     'url'                  => ':attribute format je neispravan.',
-    "unique_undeleted"     => ":attribute mora biti jedinstven.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => ':attribute mora biti jedinstven.',
+    'non_circular'         => ':attribute ne sme da kreira cirkularnu referencu.',
+    'disallow_same_pwd_as_user_fields' => 'Lozinka ne može biti ista kao korisničko ime.',
+    'letters'              => 'Lozinka mora da sadrži barem jedno slovo.',
+    'numbers'              => 'Lozinka mora da sadrži barem jednu cifru.',
+    'case_diff'            => 'Lozinka mora da sadrži malo i veliko slovo.',
+    'symbols'              => 'Lozinka mora da sadrži simbole.',
+    'gte'                  => [
+        'numeric'          => 'Vrednost ne može biti negativna'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +113,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +126,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => ":attribute polje sadrži znak koji nije dozvoljen.",
-        "email_array"      => "Jedna ili više email adresa nisu ispravne.",
-        "hashed_pass"      => "Vaša lozinka je neispravna",
+        'alpha_space' => ':attribute polje sadrži znak koji nije dozvoljen.',
+        'email_array'      => 'Jedna ili više email adresa nisu ispravne.',
+        'hashed_pass'      => 'Vaša lozinka je neispravna',
         'dumbpwd'          => 'Lozinka nije sigurna.',
-        "statuslabel_type" => "Morate odabrati ispravnu vrstu oznake statusa",
+        'statuslabel_type' => 'Morate odabrati ispravnu vrstu oznake statusa',
     ],
 
     /*
@@ -135,4 +146,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

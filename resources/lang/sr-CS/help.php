@@ -13,22 +13,22 @@ return [
     |
     */
 
-    'more_info_title' => 'More Info',
+    'more_info_title' => 'Više informacija',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'Markiranjem ovog kvadratića će izmeniti zapis imovine kako bi preslikao novu lokaciju. Ukoliko ostane ne markirano samo će se ubeležiti lokacija u zapisniku popisa.<br><br>Bitno je znati da ukoliko je imovina zadužena, neće promeniti lokaciju korisnika, imovine ili lokacije kojoj je zadužena.',
 
-    'assets' => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'assets' => 'Imovina su stavke koje se prate po serijskom ili inventarnom broju. To su obično predmeti veće vrednosti gde je važna identifikacija konkretnog predmeta.',
 
-    'categories' => 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'categories' => 'Kategorije pomažu u organizaciji vaših stavki. Primeri kategorija mogu biti &quot;Radne stanice&quot;, &quot;Laptopovi&quot;, &quot;Mobilni telefoni&quot;, &quot;Tableti&quot;, i tako dalje, ali možete koristiti kategorije kako god vama odgovara.',
 
-    'accessories' => 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
+    'accessories' => 'Dodatna oprema je sve ono čime zadužujete korisnike ali koja ne poseduje serijske brojeve (ili vas ne zanima da ih jedinstveno pratite). Primer su računarski miševi ili tastature.',
 
-    'companies'     => 'Companies can be used as a simple identifier field, or can be used to limit visibility of assets, users, etc if full company support is enabled in your Admin settings.',
+    'companies'     => 'Kompanije se mogu koristiti kao jednostavno informativno polje, ili se mogu koristiti za ograničavanje vidljivosti imovine, korisnika i sl. ako je omogućena puna kompanijska podrška u administratorskim podešavanjima.',
 
-    'components'    => 'Components are items that are part of an asset, for example HDD, RAM, etc.',
+    'components'    => 'Komponente su stavke koje su deo imovine, kao na primer hard diskovi, memorija itd.',
 
-    'consumables'   => 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
+    'consumables'   => 'Potrošni materijal je sve što će se vremenom istrošiti. Na primer, toner za štampač ili papir za štampanje.',
 
-    'depreciations' => 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
+    'depreciations' => 'Možete postaviti amortizaciju imovine na osnovu linearne amortizacije.',
 
 ];

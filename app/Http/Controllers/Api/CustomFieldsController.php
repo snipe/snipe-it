@@ -96,7 +96,7 @@ class CustomFieldsController extends Controller
         $data = $request->all();
         $regex_format = null;
 
-        if (str_contains($data['format'], 'regex:')) {
+        if ((array_key_exists('format', $data)) && (str_contains($data['format'], 'regex:'))) {
             $regex_format = $data['format'];
         }
 

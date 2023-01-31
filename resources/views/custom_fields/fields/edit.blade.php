@@ -74,8 +74,14 @@
             <label for="format" class="col-md-4 control-label">
               {{ trans('admin/custom_fields/general.field_format') }}
             </label>
+              @php
+              $field_format = '';
+              if (stripos($field->format, 'regex') === 0){
+                $field_format = 'CUSTOM REGEX';
+              }
+              @endphp
             <div class="col-md-6 required">
-              {{ Form::select("format",Helper::predefined_formats(), $field->format, array('class'=>'format select2 form-control', 'aria-label'=>'format')) }}
+              {{ Form::select("format",Helper::predefined_formats(), ($field_format == '') ? $field->format : $field_format, array('class'=>'format select2 form-control', 'aria-label'=>'format')) }}
               {!! $errors->first('format', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
@@ -96,11 +102,11 @@
           <!-- Help Text -->
           <div class="form-group {{ $errors->has('help_text') ? ' has-error' : '' }}">
               <label for="help_text" class="col-md-4 control-label">
-                  Help Text
+                  {{ trans('admin/custom_fields/general.help_text') }}
               </label>
               <div class="col-md-6">
                   {{ Form::text('help_text', old('help_text', $field->help_text), array('class' => 'form-control', 'aria-label'=>'help_text')) }}
-                  <p class="help-block">This is optional text that will appear below the form elements while editing an asset to provide context on the field.</p>
+                  <p class="help-block">{{ trans('admin/custom_fields/general.help_text_description') }}</p>
                   {!! $errors->first('help_text', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
               </div>
           </div>
@@ -115,6 +121,28 @@
               </div>
 
           </div>
+
+          <!-- Show in View All Assets profile view  -->
+          <div class="form-group {{ $errors->has('display_in_user_view') ? ' has-error' : '' }}"  id="display_in_user_view">
+              <div class="col-md-8 col-md-offset-4">
+                  <label for="display_in_user_view">
+                      <input type="checkbox" name="display_in_user_view" aria-label="display_in_user_view" value="1" class="minimal"{{ (old('display_in_user_view') || $field->display_in_user_view) ? ' checked="checked"' : '' }}>
+                      {{ trans('admin/custom_fields/general.display_in_user_view') }}
+                  </label>
+              </div>
+
+          </div>
+
+          <!-- Value Must be Unique -->
+          <div class="form-group {{ $errors->has('is_unique') ? ' has-error' : '' }}"  id="is_unique">
+            <div class="col-md-8 col-md-offset-4">
+                <label for="is_unique">
+                    <input type="checkbox" name="is_unique" aria-label="is_unique" value="1" class="minimal"{{ (old('is_unique') || $field->is_unique) ? ' checked="checked"' : '' }}>
+                    {{ trans('admin/custom_fields/general.is_unique') }}
+                </label>
+            </div>
+
+        </div>
 
 
       @if (!$field->id)
@@ -147,8 +175,8 @@
   </div> <!--/.col-md-9-->
 
   <div class="col-md-3">
-    <h2>About Custom Fields</h2>
-    <p>Custom fields allow you to add arbitrary attributes to assets.</p>
+    <h2>{{ trans('admin/custom_fields/general.about_custom_fields_title') }}</h2>
+    <p>{{ trans('admin/custom_fields/general.about_custom_fields_text') }}</p>
   </div>
   
 </div>
@@ -195,11 +223,13 @@
     $('#field_encrypted').on('ifChecked', function(event){
         $("#encrypt_warning").show();
         $("#show_in_email").hide();
+        $("#display_in_user_view").hide();
     });
 
     $('#field_encrypted').on('ifUnchecked', function(event){
         $("#encrypt_warning").hide();
         $("#show_in_email").show();
+        $("#display_in_user_view").show();
     });
 
 </script>

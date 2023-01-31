@@ -4,10 +4,11 @@ return [
 
     'asset_tag'   	=> 'Asset Tag',
     'asset_model'       => 'Model',
-    'book_value'  	=> 'Værdi',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'Ind ud',
     'checkout_date' => 'Checkout dato',
     'checkoutto' 	=> 'Tjekket ud',
+    'current_value' => 'Current Value',
     'diff' 			=> 'Diff',
     'dl_csv' 		=> 'Download CSV',
     'eol' 			=> 'EOL',
@@ -18,8 +19,12 @@ return [
     'serial'   		=> 'Seriel',
     'status'   		=> 'status',
     'title'      	=> 'Asset',
-    'image'		=> 'Enhedsbillede',
+    'image'		    => 'Enhedsbillede',
     'days_without_acceptance' => 'Dage uden accept',
     'monthly_depreciation' => 'Månedlig afskrivning',
-
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
 ];

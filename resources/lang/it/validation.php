@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => 'L\'attributo: deve essere un file.',
     'filled'               => 'Il campo: attributo deve avere un valore.',
     'image'                => 'il :attribute deve essere un immagine.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'Il selezionato :attribute è invalido.',
     'in_array'             => 'Il campo attributo non esiste in: altro.',
     'integer'              => 'L\' :attribute deve essere un numero intero.',
     'ip'                   => 'L\' :attribute deve essere un indirizzo IP valido.',
     'ipv4'                 => 'L\'attributo: deve essere un indirizzo IPv4 valido.',
     'ipv6'                 => 'L\'attributo: deve essere un indirizzo IPv6 valido.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'L\'attributo: deve essere una stringa JSON valida.',
     'max'                  => [
         'numeric' => 'L\' :attribute non può essere superiore di :max.',
@@ -64,6 +66,7 @@ return array(
         'string'  => 'L\' :attribute deve essere almeno :min caratteri.',
         'array'   => 'L\'attributo deve avere almeno: elementi min.',
     ],
+    'starts_with'          => 'Attributo :attribute deve iniziare con uno dei seguenti: :values.',
     'not_in'               => 'L\' :attribute selezionato è invalido.',
     'numeric'              => 'L\' :attribute deve essere un numero.',
     'present'              => 'Il campo attributo deve essere presente.',
@@ -88,8 +91,17 @@ return array(
     'unique'               => 'L\' :attribute è già stato preso.',
     'uploaded'             => 'L\'attributo: non è riuscito a caricare.',
     'url'                  => 'Il formato dell\' :attribute è invalido.',
-    "unique_undeleted"     => "L'attributo deve essere univoco.",
-    "non_circular"         => ":attribute non deve creare un riferimento circolare.",
+    'unique_undeleted'     => 'L\'attributo deve essere univoco.',
+    'non_circular'         => ':attribute non deve creare un riferimento circolare.',
+    'disallow_same_pwd_as_user_fields' => 'La password non può essere uguale al nome utente.',
+    'letters'              => 'La password deve contenere almeno una lettera.',
+    'numbers'              => 'La password deve contenere almeno un numero.',
+    'case_diff'            => 'La password deve utilizzare maiuscole e minuscole.',
+    'symbols'              => 'La password deve contenere simboli.',
+    'gte'                  => [
+        'numeric'          => 'Il valore non può essere negativo'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +113,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +126,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Il campo attributo contiene un carattere non consentito.",
-        "email_array"      => "Uno o più indirizzi email non sono validi.",
-        "hashed_pass"      => "La tua password corrente non è corretta",
+        'alpha_space' => 'Il campo attributo contiene un carattere non consentito.',
+        'email_array'      => 'Uno o più indirizzi email non sono validi.',
+        'hashed_pass'      => 'La tua password corrente non è corretta',
         'dumbpwd'          => 'Quella password è troppo comune.',
-        "statuslabel_type" => "È necessario selezionare un tipo di etichetta di stato valido",
+        'statuslabel_type' => 'È necessario selezionare un tipo di etichetta di stato valido',
     ],
 
     /*
@@ -135,4 +146,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => 'Атрибутът: трябва да е файл.',
     'filled'               => 'Полето на атрибута: трябва да има стойност.',
     'image'                => ':attribute трябва да бъде изображение.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'Избраният :attribute е невалиден.',
     'in_array'             => 'Полето: atribut не съществува в: други.',
     'integer'              => ':attribute трябва да бъде целочислен.',
     'ip'                   => ':attribute трябва да бъде валиден IP адрес.',
     'ipv4'                 => 'Атрибутът: трябва да е валиден IPv4 адрес.',
     'ipv6'                 => 'Атрибутът: трябва да е валиден IPv6 адрес.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'Атрибутът: трябва да е валиден низ на JSON.',
     'max'                  => [
         'numeric' => ':attribute не може да бъде по-дълъг от :max.',
@@ -64,6 +66,7 @@ return array(
         'string'  => ':attribute трябва да бъде минимум :min символа.',
         'array'   => 'Атрибутът: трябва да има поне: min елементи.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'Избраният :attribute е невалиден.',
     'numeric'              => ':attribute трябва да бъде число.',
     'present'              => 'Полето на атрибута трябва да е налице.',
@@ -88,8 +91,17 @@ return array(
     'unique'               => ':attribute вече е вписан.',
     'uploaded'             => 'Атрибутът: не успя да качи.',
     'url'                  => 'Форматът на :attribute е невалиден.',
-    "unique_undeleted"     => ":attribute трябва да бъде уникален.",
-    "non_circular"         => ":attribute не трябва да създава препрадка към себе си.",
+    'unique_undeleted'     => ':attribute трябва да бъде уникален.',
+    'non_circular'         => ':attribute не трябва да създава препрадка към себе си.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +113,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +126,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Полето атрибут: съдържа знак, който не е разрешен.",
-        "email_array"      => "Един или повече имейл адреси са невалидни.",
-        "hashed_pass"      => "Текущата ви парола е неправилна",
+        'alpha_space' => 'Полето атрибут: съдържа знак, който не е разрешен.',
+        'email_array'      => 'Един или повече имейл адреси са невалидни.',
+        'hashed_pass'      => 'Текущата ви парола е неправилна',
         'dumbpwd'          => 'Тази парола е твърде често срещана.',
-        "statuslabel_type" => "Трябва да изберете валиден тип етикет на състоянието",
+        'statuslabel_type' => 'Трябва да изберете валиден тип етикет на състоянието',
     ],
 
     /*
@@ -135,4 +146,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

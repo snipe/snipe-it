@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'accessory_category' 				=> '配件类别',
     'accessory_name'  					=> '配件名称',
     'checkout'  							=> '借出配件',
@@ -17,4 +17,4 @@ return [
     'use_default_eula'					=> '用<a href="#" data-toggle="modal" data-target="#eulaModal">默认EULA（最终用户许可协议）</a>进行替换',
     'use_default_eula_disabled'			=> '<del>使用默认EULA（最终用户许可协议）.</del>没有设置默认EULA（最终用户许可协议），请在设置中增加一个。',
 
-];
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'Despre Licențe',
     'about_licenses'                  => 'Licențele sunt utilizate pentru a urmări software-ul. Ei au un număr specific de locuri care pot fi verificate pentru persoane fizice',
     'checkin'  					=> 'Primire locuri licenta',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'Licente software',
     'user'  					=> 'Utilizator',
     'view'  					=> 'Vizualizeaza licenta',
-];
+);

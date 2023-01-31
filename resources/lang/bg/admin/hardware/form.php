@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Ще бъдат изтрити :asset_count актива.',
     'bulk_update'		=> 'Масово обновяване на активи',
     'bulk_update_help'	=> 'Тук можете да обновите множество активи едновременно. Попълнете единствено полетата, които желаете да промените. Всички празни полета няма да бъдат променени.',
-    'bulk_update_warn'	=> 'Ще бъдат променени записите за :asset_count актива.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Изписано на',
     'checkout_date'		=> 'Дата на изписване',
     'checkin_date'		=> 'Дата на вписване',
@@ -40,4 +40,12 @@ return [
     'warranty'			=> 'Гаранция',
         'warranty_expires'		=> 'Гаранцията изтича',
     'years'				=> 'години',
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information'
 ];

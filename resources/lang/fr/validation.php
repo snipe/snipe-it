@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => 'L\'attribut: doit être un fichier.',
     'filled'               => 'Le champ d\'attribut: doit avoir une valeur.',
     'image'                => 'L\'attribut ":attribute" doit être une image.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'Le :attribute selectionné est invalide.',
     'in_array'             => 'Le champ d\'attribut: n\'existe pas dans autre.',
     'integer'              => 'L\'attribut ":attribute" doit être un nombre entier.',
     'ip'                   => 'L\'attribut ":attribute" doit être une adresse IP valide.',
     'ipv4'                 => 'L\'attribut: doit être une adresse IPv4 valide.',
     'ipv6'                 => 'L\'attribut: doit être une adresse IPv6 valide.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'L\'attribut: doit être une chaîne JSON valide.',
     'max'                  => [
         'numeric' => 'L\'attribut ":attribute" ne peut pas être plus grand que :max.',
@@ -64,6 +66,7 @@ return array(
         'string'  => 'L\'attribut ":attribute" doit faire au moins :min caractères.',
         'array'   => 'L\'attribut: doit avoir au moins: éléments min.',
     ],
+    'starts_with'          => 'L\'attribut :attribute doit commencer par l\'une des valeurs suivantes : :values.',
     'not_in'               => 'L\'attribut ":attribute" est invalide.',
     'numeric'              => 'L\'attribut ":attribute" doit être un nombre.',
     'present'              => 'Le champ d\'attribut: doit être présent.',
@@ -88,8 +91,17 @@ return array(
     'unique'               => 'Cet-te :attribute a déjà été pris-e.',
     'uploaded'             => 'L\'attribut: n\'a pas pu télécharger.',
     'url'                  => 'Le format de cet-te :attribute est invalide.',
-    "unique_undeleted"     => ":attribute doit être unique.",
-    "non_circular"         => "Le champ :attribute ne doit pas créer de référence circulaire.",
+    'unique_undeleted'     => ':attribute doit être unique.',
+    'non_circular'         => 'Le champ :attribute ne doit pas créer de référence circulaire.',
+    'disallow_same_pwd_as_user_fields' => 'Le mot de passe ne peut être le nom d\'utilisateur.',
+    'letters'              => 'Le mot de passe doit contenir au moins une lettre.',
+    'numbers'              => 'Le mot de passe doit contenir au moins un chiffre.',
+    'case_diff'            => 'Le mot de passe doit contenir au moins une minuscule et une majuscule.',
+    'symbols'              => 'Le mot de passe doit contenir au moins un caractère spécial.',
+    'gte'                  => [
+        'numeric'          => 'La valeur ne peut pas être négative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +113,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +126,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Le champ d'attribut: contient un caractère qui n'est pas autorisé.",
-        "email_array"      => "Une ou plusieurs adresses électroniques sont invalides.",
-        "hashed_pass"      => "Votre mot de passe actuel est incorrect",
+        'alpha_space' => 'Le champ d\'attribut: contient un caractère qui n\'est pas autorisé.',
+        'email_array'      => 'Une ou plusieurs adresses électroniques sont invalides.',
+        'hashed_pass'      => 'Votre mot de passe actuel est incorrect',
         'dumbpwd'          => 'Ce mot de passe est trop commun.',
-        "statuslabel_type" => "Vous devez sélectionner un type d'étiquette de statut valide",
+        'statuslabel_type' => 'Vous devez sélectionner un type d\'étiquette de statut valide',
     ],
 
     /*
@@ -135,4 +146,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

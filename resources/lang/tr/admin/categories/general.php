@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'asset_categories' 					=> 'Demirbaş Kategorileri',
     'category_name'  					=> 'Kategori Adı',
     'checkin_email'                     => 'Kullanıcıyı e-posta ile bilgilendir (iade etme / kullanıma alma).',
@@ -18,5 +18,6 @@ return [
     'update'  							=> 'Kategori güncelle',
     'use_default_eula'					=> '<a href="#" data-toggle="modal" data-target="#eulaModal">\'yı Varsayılan Sözleşme</a> yerine kullan.',
     'use_default_eula_disabled'			=> '<del>Varsayılan sözleşmeyi kullan</del> Varsayılan sözleşme tanımlı değil. Lütfen Ayarlar\'dan ekleyiniz.',
+    'use_default_eula_column'			=> 'Varsayılan sözleşmeyi kullan',
 
-];
+);

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => 'Rhaid i\'r :attribute bod yn ffeil.',
     'filled'               => 'Rhaid i\'r maes :attribute cael gwerth.',
     'image'                => 'Rhaid i\'r :attribute bod yn delwedd.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'Mae\'r :attribute a dewisir yn annilys.',
     'in_array'             => 'Nid yw\'r maes :attribute yn bodoli yn :other.',
     'integer'              => 'Rhaid i\'r :attribute bod yn cyfanrif.',
     'ip'                   => 'Rhaid i\'r :attribute bod yn cyfeiriad IP dilys.',
     'ipv4'                 => 'Rhaid i\'r :attribute bod yn cyfeiriad IPv4 dilys.',
     'ipv6'                 => 'Rhaid i\'r :attribute bod yn cyfeiriad IPv6 dilys.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'Rhaid i\'r :attribute bod yn llinyn JSON dilys.',
     'max'                  => [
         'numeric' => 'Ni ellir :attribute bod yn fwy na :max.',
@@ -64,6 +66,7 @@ return array(
         'string'  => 'Rhaid i\'r :attribute bod o leiaf :min characters.',
         'array'   => 'Rhaid i\'r :attribute cael o leiaf :min o eitemau.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'Mae\'r :attribute a dewisir yn annilys.',
     'numeric'              => 'Rhaid i\'r :attribute bod yn rhif.',
     'present'              => 'Rhaid i\'r maes :attribute bod yn presennol.',
@@ -88,8 +91,17 @@ return array(
     'unique'               => 'Mae\'r :attribute wedi cymeryd yn barod.',
     'uploaded'             => 'Mae\'r :attribute wedi fethu uwchlwytho.',
     'url'                  => 'Mae fformat :attribute yn annilys.',
-    "unique_undeleted"     => "Rhaid i'r :attribute bod yn unigryw.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => 'Rhaid i\'r :attribute bod yn unigryw.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +113,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +126,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Mae'r maes :attribute yn cynnwys cymeriad na chaniateir.",
-        "email_array"      => "Mae un neu fwy o gyfeiriadau e-bost yn annilys.",
-        "hashed_pass"      => "Mae eich cyfrinair cyfredol yn anghywir",
+        'alpha_space' => 'Mae\'r maes :attribute yn cynnwys cymeriad na chaniateir.',
+        'email_array'      => 'Mae un neu fwy o gyfeiriadau e-bost yn annilys.',
+        'hashed_pass'      => 'Mae eich cyfrinair cyfredol yn anghywir',
         'dumbpwd'          => 'Mae\'r cyfrinair hwnnw\'n rhy gyffredin.',
-        "statuslabel_type" => "Rhaid i chi ddewis math label statws dilys",
+        'statuslabel_type' => 'Rhaid i chi ddewis math label statws dilys',
     ],
 
     /*
@@ -135,4 +146,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

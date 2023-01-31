@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_models_title'     => 'על מודלים הנכסים',
     'about_models_text'           => 'מודלים של נכסים הם דרך לקבץ נכסים זהים. "MBP 2013", "iPhone 6s", וכו \'',
     'deleted'  					        => 'This model has been deleted.',
@@ -9,10 +9,10 @@ return [
     'bulk_delete_warn'          => 'You are about to delete :model_count asset models.',
     'restore'                   => 'שחזור מודל',
     'requestable'               => 'משתמשים רשאים לבקש מודל זה',
-    'show_mac_address'			      => 'הצג שדה כתובת MAC בנכסים במודל זה',
+	'show_mac_address'			      => 'הצג שדה כתובת MAC בנכסים במודל זה',
     'view_deleted'              => 'הצג נמחק',
     'view_models'               => 'הצג דגמים',
     'fieldset'                  => 'קבוצת שדות',
     'no_custom_field'           => 'אין שדות מותאמים אישית',
     'add_default_values'        => 'הוספת ערכי בררת מחדל',
-];
+);

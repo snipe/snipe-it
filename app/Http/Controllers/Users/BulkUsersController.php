@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Users;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Accessory;
+use App\Models\License;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Group;
 use App\Models\LicenseSeat;
+use App\Models\ConsumableAssignment;
+use App\Models\Consumable;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,13 +49,13 @@ class BulkUsersController extends Controller
                 foreach ($users as $user) {
                     if (($user->activated == '1') && ($user->email != '')) {
                         $credentials = ['email' => $user->email];
-                        Password::sendResetLink($credentials, function (Message $message) {
-                            $message->subject($this->getEmailSubject());
-                        });
+                        Password::sendResetLink($credentials/* , function (Message $message) {
+                        $message->subject($this->getEmailSubject()); // TODO - I'm not sure if we still need this, but this second parameter is no longer accepted in later Laravel versions.
+                        } */ );                                      // TODO - so hopefully this doesn't give us generic password reset messages? But it at least _works_
                     }
                 }
-
                 return redirect()->back()->with('success', trans('admin/users/message.password_resets_sent'));
+
             }
         }
 
@@ -90,7 +93,11 @@ class BulkUsersController extends Controller
             ->conditionallyAddItem('department_id')
             ->conditionallyAddItem('company_id')
             ->conditionallyAddItem('locale')
+            ->conditionallyAddItem('remote')
+            ->conditionallyAddItem('ldap_import')
             ->conditionallyAddItem('activated');
+
+
         // If the manager_id is one of the users being updated, generate a warning.
         if (array_search($request->input('manager_id'), $user_raw_array)) {
             $manager_conflict = true;
@@ -101,10 +108,15 @@ class BulkUsersController extends Controller
         if (! $manager_conflict) {
             $this->conditionallyAddItem('manager_id');
         }
-
         // Save the updated info
         User::whereIn('id', $user_raw_array)
             ->where('id', '!=', Auth::id())->update($this->update_array);
+
+        if (array_key_exists('location_id', $this->update_array)){
+            Asset::where('assigned_type', User::class)
+                ->whereIn('assigned_to', $user_raw_array)
+                ->update(['location_id' => $this->update_array['location_id']]);
+        }
 
         // Only sync groups if groups were selected
         if ($request->filled('groups')) {
@@ -153,13 +165,11 @@ class BulkUsersController extends Controller
         if ((! $request->filled('ids')) || (count($request->input('ids')) == 0)) {
             return redirect()->back()->with('error', 'No users selected');
         }
-        if ((! $request->filled('status_id')) || ($request->input('status_id') == '')) {
-            return redirect()->route('users.index')->with('error', 'No status selected');
-        }
 
         if (config('app.lock_passwords')) {
             return redirect()->route('users.index')->with('error', 'Bulk delete is not enabled in this installation');
         }
+
         $user_raw_array = request('ids');
 
         if (($key = array_search(Auth::id(), $user_raw_array)) !== false) {
@@ -170,25 +180,48 @@ class BulkUsersController extends Controller
         $assets = Asset::whereIn('assigned_to', $user_raw_array)->where('assigned_type', \App\Models\User::class)->get();
         $accessories = DB::table('accessories_users')->whereIn('assigned_to', $user_raw_array)->get();
         $licenses = DB::table('license_seats')->whereIn('assigned_to', $user_raw_array)->get();
+        $consumables = DB::table('consumables_users')->whereIn('assigned_to', $user_raw_array)->get();
+
+        if ((($assets->count() > 0) && ((!$request->filled('status_id')) || ($request->input('status_id') == '')))) {
+            return redirect()->route('users.index')->with('error', 'No status selected');
+        }
+
 
         $this->logItemCheckinAndDelete($assets, Asset::class);
         $this->logItemCheckinAndDelete($accessories, Accessory::class);
-        $this->logItemCheckinAndDelete($licenses, LicenseSeat::class);
+        $this->logItemCheckinAndDelete($licenses, License::class);
+        $this->logItemCheckinAndDelete($consumables, Consumable::class);
+
 
         Asset::whereIn('id', $assets->pluck('id'))->update([
             'status_id'     => e(request('status_id')),
             'assigned_to'   => null,
             'assigned_type' => null,
+            'expected_checkin' => null,
         ]);
 
+
         LicenseSeat::whereIn('id', $licenses->pluck('id'))->update(['assigned_to' => null]);
+        ConsumableAssignment::whereIn('id', $consumables->pluck('id'))->delete();
+
 
         foreach ($users as $user) {
+
+            $user->consumables()->sync([]);
             $user->accessories()->sync([]);
-            $user->delete();
+            if ($request->input('delete_user')=='1') {
+                $user->delete();
+            }
+
         }
 
-        return redirect()->route('users.index')->with('success', 'Your selected users have been deleted and their assets have been updated.');
+        $msg = trans('general.bulk_checkin_success');
+        if ($request->input('delete_user')=='1') {
+            $msg = trans('general.bulk_checkin_delete_success');
+        }
+
+
+        return redirect()->route('users.index')->with('success', $msg);
     }
 
     /**
@@ -199,14 +232,20 @@ class BulkUsersController extends Controller
     protected function logItemCheckinAndDelete($items, $itemType)
     {
         foreach ($items as $item) {
+            $item_id = $item->id;
             $logAction = new Actionlog();
-            $logAction->item_id = $item->id;
+
+            if ($itemType == License::class){
+                $item_id = $item->license_id;
+            }
+            
+            $logAction->item_id = $item_id;
             // We can't rely on get_class here because the licenses/accessories fetched above are not eloquent models, but simply arrays.
             $logAction->item_type = $itemType;
             $logAction->target_id = $item->assigned_to;
             $logAction->target_type = User::class;
             $logAction->user_id = Auth::id();
-            $logAction->note = 'Bulk checkin items and delete user';
+            $logAction->note = 'Bulk checkin items';
             $logAction->logaction('checkin from');
         }
     }

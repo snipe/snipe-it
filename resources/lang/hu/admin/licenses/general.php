@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'A licencekről',
     'about_licenses'                  => 'Az engedélyeket a szoftverek nyomon követésére használják. Meghatározott számú ülőhellyel rendelkeznek, melyeket az egyéneknek lehet ellenőrizni',
     'checkin'  					=> 'Bevét engedély Seat',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'Szoftverlicencek',
     'user'  					=> 'használó',
     'view'  					=> 'Licenc megtekintése',
-];
+);

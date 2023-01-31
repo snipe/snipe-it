@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong> אזהרה: </strong> הנכס הזה סומן כבלתי ניתן לפריסה כעת. אם סטטוס זה השתנה, עדכן את סטטוס הנכס.',
     'does_not_exist' 	=> 'הנכס אינו קיים.',
-    'does_not_exist_or_not_requestable' => 'ניסיון יפה. נכס זה אינו קיים או שאינו ניתן לביצוע.',
+    'does_not_exist_or_not_requestable' => 'הנכס אינו קיים או לא זמין.',
     'assoc_users'	 	=> 'הנכס הזה מסומן כרגע למשתמש ולא ניתן למחוק אותו. בדוק תחילה את הנכס ולאחר מכן נסה למחוק שוב.',
 
     'create' => [
@@ -16,6 +16,7 @@ return [
         'error'   			=> 'הנכס לא עודכן, נסה שוב',
         'success' 			=> 'הנכס עודכן בהצלחה.',
         'nothing_updated'	=>  'לא נבחרו שדות, ולכן דבר לא עודכן.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [
@@ -27,6 +28,7 @@ return [
         'error'   		=> 'ביקורת הנכסים נכשלה. בבקשה נסה שוב.',
         'success' 		=> 'ביקורת נכסים נרשמה בהצלחה.',
     ],
+
 
     'deletefile' => [
         'error'   => 'הקובץ לא נמחק. בבקשה נסה שוב.',
@@ -47,6 +49,7 @@ return [
         'file_delete_success'   => 'הקובץ שלך נמחק בהצלחה',
         'file_delete_error'      => 'לא ניתן היה למחוק את הקובץ',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'האם אתה בטוח שברצונך למחוק את הנכס הזה?',

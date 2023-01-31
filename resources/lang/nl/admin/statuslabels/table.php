@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about'      	=> 'Over status labels',
     'archived'      	=> 'Gearchiveerd',
     'create'      	=> 'Maak een Status Label',
@@ -16,4 +16,4 @@ return [
     'title'      	=> 'Statuslabels',
     'undeployable'  => 'Niet inzetbaar',
     'update'      	=> 'Update Status Label',
-];
+);

@@ -24,6 +24,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\SecurityHeaders::class,
         \App\Http\Middleware\PreventBackHistory::class,
+        \Fruitcake\Cors\HandleCors::class,
 
     ];
 
@@ -38,14 +39,14 @@ class Kernel extends HttpKernel
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \App\Http\Middleware\CheckLocale::class,
+            \App\Http\Middleware\CheckUserIsActivated::class,
             \App\Http\Middleware\CheckForTwoFactor::class,
             \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
             \App\Http\Middleware\AssetCountForSidebar::class,
+            \Illuminate\Session\Middleware\AuthenticateSession::class,
         ],
 
         'api' => [
-            \Fruitcake\Cors\HandleCors::class,
-            'throttle:120,1',
             'auth:api',
         ],
     ];

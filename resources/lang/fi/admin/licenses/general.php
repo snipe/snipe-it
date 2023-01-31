@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'Tietoja lisensseistä',
     'about_licenses'                  => 'Ohjelmistojen seurantaan käytetään lisenssejä. Lisenssejä on rajattu määrä asennettavaksi',
     'checkin'  					=> 'Palauta lisenssi',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'Ohjelmistolisenssit',
     'user'  					=> 'Käyttäjä',
     'view'  					=> 'Näytä lisenssi',
-];
+);

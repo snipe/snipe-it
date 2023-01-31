@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,9 @@ return [
     |
     */
 
-    'password' => 'Le passwords devono essere almeno di 6 caratteri e uguali alla conferma.',
+    "password" => "Le passwords devono essere almeno di 6 caratteri e uguali alla conferma.",
+    "user"     => "Nome utente o indirizzo email non corretto",
+    "token"    => 'Questo token di reimpostazione della password non è valido o è scaduto oppure non corrisponde al nome utente fornito.',
+    'sent'	   => 'Se nel nostro sistema esiste un utente corrispondente con un indirizzo e-mail valido, è stata inviata un\'e-mail di recupero password.',
 
-    'user'     => 'Nome utente o indirizzo email non corretto',
-
-    'token'    => 'Il token di reset password è invalido.',
-
-    'sent' => 'Se email è presente nel nostro database, la email di verifica sarà inviata!',
-
-];
+);

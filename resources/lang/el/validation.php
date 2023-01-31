@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => 'Το χαρακτηριστικό πρέπει να είναι ένα αρχείο.',
     'filled'               => 'Το πεδίο ιδιοτήτων πρέπει να έχει τιμή.',
     'image'                => 'Το: χαρακτηριστικό πρέπει να είναι μια εικόνα.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'Το χαρακτηριστικό επιλεγμένο: δεν είναι έγκυρο.',
     'in_array'             => 'Το πεδίο ιδιοτήτων: δεν υπάρχει σε: άλλο.',
     'integer'              => 'Το χαρακτηριστικό: πρέπει να είναι ένας ακέραιος αριθμός.',
     'ip'                   => 'Το χαρακτηριστικό: πρέπει να είναι μια έγκυρη διεύθυνση IP.',
     'ipv4'                 => 'Το χαρακτηριστικό: πρέπει να είναι μια έγκυρη διεύθυνση IPv4.',
     'ipv6'                 => 'Το χαρακτηριστικό: πρέπει να είναι μια έγκυρη διεύθυνση IPv6.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'Το χαρακτηριστικό: πρέπει να είναι μια έγκυρη συμβολοσειρά JSON.',
     'max'                  => [
         'numeric' => 'Η ιδιότητα: δεν μπορεί να είναι μεγαλύτερη από: max.',
@@ -64,6 +66,7 @@ return array(
         'string'  => 'Το χαρακτηριστικό: πρέπει να είναι τουλάχιστον: min χαρακτήρες.',
         'array'   => 'Το χαρακτηριστικό: πρέπει να έχει τουλάχιστον: λεπτά στοιχεία.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'Το επιλεγμένο: χαρακτηριστικό δεν είναι έγκυρο.',
     'numeric'              => 'Το χαρακτηριστικό πρέπει να είναι ένας αριθμός.',
     'present'              => 'Πρέπει να υπάρχει το πεδίο ιδιοτήτων: attribute.',
@@ -88,8 +91,17 @@ return array(
     'unique'               => 'Το χαρακτηριστικό: έχει ήδη ληφθεί.',
     'uploaded'             => 'Το χαρακτηριστικό:: απέτυχε να μεταφορτωθεί.',
     'url'                  => 'Η μορφή του χαρακτηριστικού είναι μη έγκυρη.',
-    "unique_undeleted"     => "Το :χαρακτηριστικό πρέπει να είναι μοναδικό.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => 'Το :χαρακτηριστικό πρέπει να είναι μοναδικό.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +113,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +126,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Το πεδίο ιδιοτήτων: περιέχει ένα χαρακτήρα που δεν επιτρέπεται.",
-        "email_array"      => "Μία ή περισσότερες διευθύνσεις ηλεκτρονικού ταχυδρομείου δεν είναι έγκυρες.",
-        "hashed_pass"      => "Ο τρέχων κωδικός πρόσβασης είναι εσφαλμένος",
+        'alpha_space' => 'Το πεδίο ιδιοτήτων: περιέχει ένα χαρακτήρα που δεν επιτρέπεται.',
+        'email_array'      => 'Μία ή περισσότερες διευθύνσεις ηλεκτρονικού ταχυδρομείου δεν είναι έγκυρες.',
+        'hashed_pass'      => 'Ο τρέχων κωδικός πρόσβασης είναι εσφαλμένος',
         'dumbpwd'          => 'Αυτός ο κωδικός πρόσβασης είναι πολύ συνηθισμένος.',
-        "statuslabel_type" => "Πρέπει να επιλέξετε έναν έγκυρο τύπο ετικέτας κατάστασης",
+        'statuslabel_type' => 'Πρέπει να επιλέξετε έναν έγκυρο τύπο ετικέτας κατάστασης',
     ],
 
     /*
@@ -135,4 +146,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

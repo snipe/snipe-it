@@ -22,7 +22,7 @@ class CheckoutLicenseToAllUsers extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Checks out licenses to all users';
 
     /**
      * Create a new command instance.

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => 'Thuộc tính: phải là một tệp.',
     'filled'               => 'Trường: attribute phải có giá trị.',
     'image'                => ':attribute phải là một hình.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => ':attribute đã lựa chọn không hợp lý.',
     'in_array'             => 'Trường thuộc tính: không tồn tại trong: other.',
     'integer'              => ':attribute phải là một số nguyên.',
     'ip'                   => ':attribute phải là một địa chỉ IP.',
     'ipv4'                 => 'Thuộc tính: phải là địa chỉ IPv4 hợp lệ',
     'ipv6'                 => 'Thuộc tính: phải là địa chỉ IPv6 hợp lệ',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'Thuộc tính: phải là một chuỗi JSON hợp lệ',
     'max'                  => [
         'numeric' => ':attribute có thể không lớn hơn :max.',
@@ -64,6 +66,7 @@ return array(
         'string'  => ':attribute phải ít nhất :min ký tự.',
         'array'   => 'Thuộc tính: phải có ít nhất: min items.',
     ],
+    'starts_with'          => 'Trường :attribute phải kết thúc bằng một trong những giá trị sau: :values',
     'not_in'               => ':attribute đã chọn không hợp lý.',
     'numeric'              => ':attribute phải là một số.',
     'present'              => 'Trường thuộc tính: phải có mặt.',
@@ -88,8 +91,17 @@ return array(
     'unique'               => ':attribute đã sẵn sàng.',
     'uploaded'             => 'Thuộc tính: không thể tải lên.',
     'url'                  => 'Định dạng :attribute thì không hợp lý.',
-    "unique_undeleted"     => "Thuộc tính: phải là duy nhất.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => 'Thuộc tính: phải là duy nhất.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +113,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +126,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Trường: attribute chứa một ký tự không được phép.",
-        "email_array"      => "Một hoặc nhiều địa chỉ email không hợp lệ.",
-        "hashed_pass"      => "Mật khẩu hiện tại của bạn không chính xác",
+        'alpha_space' => 'Trường: attribute chứa một ký tự không được phép.',
+        'email_array'      => 'Một hoặc nhiều địa chỉ email không hợp lệ.',
+        'hashed_pass'      => 'Mật khẩu hiện tại của bạn không chính xác',
         'dumbpwd'          => 'Mật khẩu đó quá phổ biến.',
-        "statuslabel_type" => "Bạn phải chọn một loại nhãn tình trạng hợp lệ",
+        'statuslabel_type' => 'Bạn phải chọn một loại nhãn tình trạng hợp lệ',
     ],
 
     /*
@@ -135,4 +146,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

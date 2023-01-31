@@ -111,12 +111,12 @@
                                       ) }}
                             <div class="col-md-12">
                                 <div id="toolbar">
-                                    <label for="bulk_actions" class="sr-only">Bulk Actions</label>
+                                    <label for="bulk_actions" class="sr-only">{{ trans('general.bulk_actions') }}</label>
                                     <select name="bulk_actions" class="form-control select2" aria-label="bulk_actions" style="width: 300px;">
-                                        <option value="edit">Bulk Edit</option>
-                                        <option value="delete">Bulk Delete</option>
+                                        <option value="edit">{{ trans('general.bulk_edit') }}</option>
+                                        <option value="delete">{{ trans('general.bulk_delete') }}</option>
                                     </select>
-                                    <button class="btn btn-primary" id="bulkEdit" disabled>Go</button>
+                                    <button class="btn btn-primary" id="bulkEdit" disabled>{{ trans('button.go') }}</button>
                                 </div>
 
                                 <div class="table-responsive">

@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Anda akan menghapus :asset_count aset.',
     'bulk_update'		=> 'Perbarui aset jumlah besar',
     'bulk_update_help'	=> 'Formulir ini mengizinkan anda untuk memperbarui kelipatan aset dalam sekali proses. Cukup isi di field yang hendak di rubah. Jika ada yang kosong tidak akan dirubah. ',
-    'bulk_update_warn'	=> 'Anda akan menyunting :asset_count aset.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Diberikan kepada',
     'checkout_date'		=> 'Tanggal Pemberian',
     'checkin_date'		=> 'Tanggal Pengembalian',
@@ -40,4 +40,12 @@ return [
     'warranty'			=> 'Garansi',
         'warranty_expires'		=> 'Garansi Berakhir',
     'years'				=> 'tahun',
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information'
 ];

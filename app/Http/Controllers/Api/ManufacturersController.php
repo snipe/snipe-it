@@ -37,6 +37,26 @@ class ManufacturersController extends Controller
             $manufacturers = $manufacturers->TextSearch($request->input('search'));
         }
 
+        if ($request->filled('name')) {
+            $manufacturers->where('name', '=', $request->input('name'));
+        }
+
+        if ($request->filled('url')) {
+            $manufacturers->where('url', '=', $request->input('url'));
+        }
+
+        if ($request->filled('support_url')) {
+            $manufacturers->where('support_url', '=', $request->input('support_url'));
+        }
+
+        if ($request->filled('support_phone')) {
+            $manufacturers->where('support_phone', '=', $request->input('support_phone'));
+        }
+
+        if ($request->filled('support_email')) {
+            $manufacturers->where('support_email', '=', $request->input('support_email'));
+        }
+
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.
         $offset = (($manufacturers) && ($request->get('offset') > $manufacturers->count())) ? $manufacturers->count() : $request->get('offset', 0);
@@ -72,8 +92,8 @@ class ManufacturersController extends Controller
         if ($manufacturer->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $manufacturer, trans('admin/manufacturers/message.create.success')));
         }
-
         return response()->json(Helper::formatStandardApiResponse('error', null, $manufacturer->getErrors()));
+
     }
 
     /**
@@ -131,11 +151,11 @@ class ManufacturersController extends Controller
 
         if ($manufacturer->isDeletable()) {
             $manufacturer->delete();
-
-            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/manufacturers/message.delete.success')));
+            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/manufacturers/message.delete.success')));
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/manufacturers/message.assoc_users')));
+        return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/manufacturers/message.assoc_users')));
+
     }
 
     /**
@@ -147,6 +167,8 @@ class ManufacturersController extends Controller
      */
     public function selectlist(Request $request)
     {
+
+        $this->authorize('view.selectlists');
         $manufacturers = Manufacturer::select([
             'id',
             'name',

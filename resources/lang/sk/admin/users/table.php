@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'E-mail',
     'employee_num'      	=> 'Číslo zamestnanca',
     'first_name' 			=> 'Meno',
-    'groupnotes'			=> 'Vyberte skupinu pre pridanie používateľovi. Majte na pamäti že používateľ získa povolenia príslušnej skupiny, ktorá mu bude priradená.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Prevziať',
     'job' 					=> 'Názov pracovnej pozície',

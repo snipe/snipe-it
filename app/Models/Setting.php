@@ -8,8 +8,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
-use Parsedown;
+use App\Helpers\Helper;
 use Watson\Validating\ValidatingTrait;
+
 
 /**
  * Settings model.
@@ -20,11 +21,10 @@ class Setting extends Model
     use Notifiable, ValidatingTrait;
 
     /**
-     * The app settings cache key name.
-     *
-     * @var string
+     * The cache property so that multiple invocations of this will only load the Settings record from disk only once
+     * @var self
      */
-    const APP_SETTINGS_KEY = 'snipeit_app_settings';
+    public static ?self $_cache = null;
 
     /**
      * The setup check cache key name.
@@ -54,10 +54,7 @@ class Setting extends Model
           'admin_cc_email'                      => 'email|nullable',
           'default_currency'                    => 'required',
           'locale'                              => 'required',
-          'slack_endpoint'                      => 'url|required_with:slack_channel|nullable',
           'labels_per_page'                     => 'numeric',
-          'slack_channel'                       => 'regex:/^[\#\@]?\w+/|required_with:slack_endpoint|nullable',
-          'slack_botname'                       => 'string|nullable',
           'labels_width'                        => 'numeric',
           'labels_height'                       => 'numeric',
           'labels_pmargin_left'                 => 'numeric|nullable',
@@ -100,14 +97,15 @@ class Setting extends Model
      */
     public static function getSettings(): ?self
     {
-        return Cache::rememberForever(self::APP_SETTINGS_KEY, function () {
+        if (!self::$_cache) {
             // Need for setup as no tables exist
             try {
-                return self::first();
+                self::$_cache = self::first();
             } catch (\Throwable $th) {
                 return null;
             }
-        });
+        }
+        return self::$_cache;
     }
 
     /**
@@ -138,7 +136,6 @@ class Setting extends Model
     public function lar_ver(): string
     {
         $app = App::getFacadeApplication();
-
         return $app::VERSION;
     }
 
@@ -150,9 +147,7 @@ class Setting extends Model
     public static function getDefaultEula(): ?string
     {
         if (self::getSettings()->default_eula_text) {
-            $parsedown = new Parsedown();
-
-            return $parsedown->text(e(self::getSettings()->default_eula_text));
+            return Helper::parseEscapedMarkedown(self::getSettings()->default_eula_text);
         }
 
         return null;
@@ -221,6 +216,7 @@ class Setting extends Model
      */
     public static function fileSizeConvert($bytes): string
     {
+        $result = 0;
         $bytes = floatval($bytes);
         $arBytes = [
                 0 => [

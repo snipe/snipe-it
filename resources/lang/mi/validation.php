@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => 'Ko: ko te huanga he kōnae.',
     'filled'               => 'Ko: Ko te waahi tohu ka whai hua.',
     'image'                => 'Ko te: me kii he huanga.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'Ko te mea i tīpakohia: he muhu te huanga.',
     'in_array'             => 'Ko te: ko te waahi huanga kaore i roto i: atu.',
     'integer'              => 'Ko te: ko te huanga me he tau.',
     'ip'                   => 'Ko: ko te huanga me waiho he wāhitau IP tika.',
     'ipv4'                 => 'Ko: ko te huanga me waiho he wāhitau IPv4 tika.',
     'ipv6'                 => 'Ko te: me tohu he huanga IPv6 tika.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'Ko: he tohu JSON tika te huanga.',
     'max'                  => [
         'numeric' => 'Ko te: ko te huanga ka nui atu i te: max.',
@@ -64,6 +66,7 @@ return array(
         'string'  => 'Ko te: ko te tohu ko te iti rawa: min.',
         'array'   => 'Ko te: me whai i te huanga: iti rawa nga taonga.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'Ko te mea i tīpakohia: he muhu te huanga.',
     'numeric'              => 'Ko te: me tohu he huanga.',
     'present'              => 'Ko te: ko te waahi tohu kia noho.',
@@ -88,8 +91,17 @@ return array(
     'unique'               => 'Ko te: kua tangohia te huanga.',
     'uploaded'             => 'Ko te: ko te huanga i rahua te tuku.',
     'url'                  => 'Ko te: ko te hōputu huanga he muhu.',
-    "unique_undeleted"     => "The :attribute must be unique.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => 'The :attribute must be unique.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +113,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +126,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Ko te: kei roto i te waahi tohu he momo e kore e whakaaetia.",
-        "email_array"      => "Kotahi, neke atu ranei nga wahitau īmēra he muhu.",
-        "hashed_pass"      => "He hē tō kupuhipa o nāianei",
+        'alpha_space' => 'Ko te: kei roto i te waahi tohu he momo e kore e whakaaetia.',
+        'email_array'      => 'Kotahi, neke atu ranei nga wahitau īmēra he muhu.',
+        'hashed_pass'      => 'He hē tō kupuhipa o nāianei',
         'dumbpwd'          => 'He noa rawa te kupuhipa.',
-        "statuslabel_type" => "Me tīpako i te momo tahua tohu whaimana",
+        'statuslabel_type' => 'Me tīpako i te momo tahua tohu whaimana',
     ],
 
     /*
@@ -135,4 +146,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Peringatan: </strong> Aset ini telah di tandai sebagai aset yang tak dapat digunakan.
                         Jika status ini telah berubah, silahkan perbarui status aset.',
     'does_not_exist' 	=> 'Aset tidak ada.',
-    'does_not_exist_or_not_requestable' => 'Aset tersebut tidak terdaftar atau tidak dapat di minta.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Aset ini sudah diberikan kepada pengguna dan tidak dapat di hapus. Silahkan cek aset terlebih dahulu kemudian coba hapus kembali. ',
 
     'create' => [
@@ -17,6 +17,7 @@ return [
         'error'   			=> 'Gagal perbarui aset, silahkan coba kembali',
         'success' 			=> 'Sukses perbarui aset.',
         'nothing_updated'	=>  'Tidak ada kolom yang dipilih, jadi tidak ada yang diperbaharui.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [
@@ -28,6 +29,7 @@ return [
         'error'   		=> 'Audit aset tidak berhasil. Silahkan coba lagi',
         'success' 		=> 'Audit aset berhasil login.',
     ],
+
 
     'deletefile' => [
         'error'   => 'Berkas tidak terhapus. Silahkan coba kembali.',
@@ -48,6 +50,7 @@ return [
         'file_delete_success'   => 'File anda telah berhasil dihapus',
         'file_delete_error'      => 'File tidak bisa dihapus',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Apakah Anda yakin untuk menghapus aset ini?',

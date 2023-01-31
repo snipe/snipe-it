@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => 'attribute باید یک فایل باشد.',
     'filled'               => 'فیلد attribute باید مقدار داشته باشد.',
     'image'                => 'ویژگی باید یک عکس باشد.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'ویژگی انتخاب شده نامعتبر است.',
     'in_array'             => 'فیلد attribute در هیچ موجودی وجود ندارد: دیگر.',
     'integer'              => 'ویژگی باید یک عدد باشد.',
     'ip'                   => 'ویژگی باید یک آدرس IP معتبر باشد.',
     'ipv4'                 => 'attribute باید یک آدرس IPv4 معتبر باشد.',
     'ipv6'                 => 'attribute باید یک آدرس IPv6 معتبر باشد.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'attribute باید یک رشته معتبر JSON باشد.',
     'max'                  => [
         'numeric' => 'ویژگی نباید بزرگتر از حداکثر باشد.',
@@ -64,10 +66,11 @@ return array(
         'string'  => 'ویژگی باید حداقل: حداقل کاراکتر باشد.',
         'array'   => 'ویژگی: باید دارای حداقل موارد: min باشد.',
     ],
+    'starts_with'          => 'ویژگی : باید با یکی از موارد زیر شروع شود: :values.',
     'not_in'               => 'ویژگی انتخاب شده نامعتبر است.',
     'numeric'              => 'ویژگی باید عدد باشد.',
     'present'              => 'فیلد attribute باید باشد.',
-    'valid_regex'          => 'That is not a valid regex. ',
+    'valid_regex'          => 'این یک سفارش معتبر نیست.',
     'regex'                => 'شکل ویژگی نامعتبر است.',
     'required'             => 'فیلد ویژگی ضروری است.',
     'required_if'          => 'فیلد ویژگی ضروری است، وقتی که دیگری ارزش است.',
@@ -88,8 +91,17 @@ return array(
     'unique'               => 'ویژگی در حال حاضر گرفته شده است.',
     'uploaded'             => 'ویژگی: attribute failed to upload.',
     'url'                  => 'شکل ویژگی نامعتبر است.',
-    "unique_undeleted"     => "The :attribute must be unique.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => ': attribute باید منحصر به فرد باشد.',
+    'non_circular'         => 'ویژگی : نباید یک مرجع دایره ای ایجاد کند',
+    'disallow_same_pwd_as_user_fields' => 'رمز عبور نمی تواند همان آدرس ایمیل باشد.',
+    'letters'              => 'گذرواژه باید دارای حداقل یک رقم باشد.',
+    'numbers'              => 'گذرواژه باید دارای حداقل یک رقم باشد.',
+    'case_diff'            => 'رمز عبور باید از حروف مختلط استفاده کند.',
+    'symbols'              => 'رمز عبور نباید حاوی فضای خالی باشد.',
+    'gte'                  => [
+        'numeric'          => 'مقدار نباید منفی باشد.'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +113,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +126,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "فیلد attribute شامل یک شخصیت است که مجاز نیست.",
-        "email_array"      => "یک یا چند آدرس ایمیل نامعتبر است",
-        "hashed_pass"      => "رمز عبور فعلی شما اشتباه است",
+        'alpha_space' => 'فیلد attribute شامل یک شخصیت است که مجاز نیست.',
+        'email_array'      => 'یک یا چند آدرس ایمیل نامعتبر است',
+        'hashed_pass'      => 'رمز عبور فعلی شما اشتباه است',
         'dumbpwd'          => 'این رمز عبور خیلی رایج است',
-        "statuslabel_type" => "شما باید نوع برچسب معتبر را انتخاب کنید",
+        'statuslabel_type' => 'شما باید نوع برچسب معتبر را انتخاب کنید',
     ],
 
     /*
@@ -135,4 +146,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

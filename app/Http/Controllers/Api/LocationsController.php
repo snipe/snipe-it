@@ -27,7 +27,7 @@ class LocationsController extends Controller
         $allowed_columns = [
             'id', 'name', 'address', 'address2', 'city', 'state', 'country', 'zip', 'created_at',
             'updated_at', 'manager_id', 'image',
-            'assigned_assets_count', 'users_count', 'assets_count', 'currency', 'ldap_ou', ];
+            'assigned_assets_count', 'users_count', 'assets_count','assigned_assets_count', 'assets_count', 'rtd_assets_count', 'currency', 'ldap_ou', ];
 
         $locations = Location::with('parent', 'manager', 'children')->select([
             'locations.id',
@@ -47,10 +47,35 @@ class LocationsController extends Controller
             'locations.currency',
         ])->withCount('assignedAssets as assigned_assets_count')
             ->withCount('assets as assets_count')
+            ->withCount('rtd_assets as rtd_assets_count')
             ->withCount('users as users_count');
 
         if ($request->filled('search')) {
             $locations = $locations->TextSearch($request->input('search'));
+        }
+
+        if ($request->filled('name')) {
+            $locations->where('locations.name', '=', $request->input('name'));
+        }
+
+        if ($request->filled('address')) {
+            $locations->where('locations.address', '=', $request->input('address'));
+        }
+
+        if ($request->filled('address2')) {
+            $locations->where('locations.address2', '=', $request->input('address2'));
+        }
+
+        if ($request->filled('city')) {
+            $locations->where('locations.city', '=', $request->input('city'));
+        }
+
+        if ($request->filled('zip')) {
+            $locations->where('locations.zip', '=', $request->input('zip'));
+        }
+
+        if ($request->filled('country')) {
+            $locations->where('locations.country', '=', $request->input('country'));
         }
 
         $offset = (($locations) && (request('offset') > $locations->count())) ? $locations->count() : request('offset', 0);
@@ -72,6 +97,7 @@ class LocationsController extends Controller
                 $locations->orderBy($sort, $order);
                 break;
         }
+
 
         $total = $locations->count();
         $locations = $locations->skip($offset)->take($limit)->get();
@@ -132,10 +158,13 @@ class LocationsController extends Controller
             ])
             ->withCount('assignedAssets as assigned_assets_count')
             ->withCount('assets as assets_count')
-            ->withCount('users as users_count')->findOrFail($id);
+            ->withCount('rtd_assets as rtd_assets_count')
+            ->withCount('users as users_count')
+            ->findOrFail($id);
 
         return (new LocationsTransformer)->transformLocation($location);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -155,8 +184,8 @@ class LocationsController extends Controller
         $location = $request->handleImages($location);
 
         if ($location->isValid()) {
-            $location->save();
 
+            $location->save();
             return response()->json(
                 Helper::formatStandardApiResponse(
                     'success',
@@ -221,6 +250,9 @@ class LocationsController extends Controller
      */
     public function selectlist(Request $request)
     {
+
+        $this->authorize('view.selectlists');
+
         $locations = Location::select([
             'locations.id',
             'locations.name',

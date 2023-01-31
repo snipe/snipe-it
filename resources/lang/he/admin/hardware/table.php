@@ -4,10 +4,11 @@ return [
 
     'asset_tag'   	=> 'תג נכס',
     'asset_model'       => 'דֶגֶם',
-    'book_value'  	=> 'ערך',
+    'book_value'  	=> 'הערך הנוכחי',
     'change' 		=> 'בפנים בחוץ',
     'checkout_date' => 'תבדוק את התאריך',
     'checkoutto' 	=> 'נבדק',
+    'current_value' => 'הערך הנוכחי',
     'diff' 			=> 'דיף',
     'dl_csv' 		=> 'הורד CSV',
     'eol' 			=> 'EOL',
@@ -18,8 +19,12 @@ return [
     'serial'   		=> 'סידורי',
     'status'   		=> 'סטָטוּס',
     'title'      	=> 'נכס',
-    'image'		=> 'תמונה של מכשיר',
+    'image'		    => 'תמונה של מכשיר',
     'days_without_acceptance' => 'ימים ללא קבלה',
-    'monthly_depreciation' => 'Monthly Depreciation',
-
+    'monthly_depreciation' => 'פחות חודשי',
+    'assigned_to'    => 'שוייך ל',
+    'requesting_user' => 'דרישה של',
+    'requested_date' => 'תאריך דרישה',
+    'changed'       => 'שונה',
+    'icon' => 'סמל',
 ];

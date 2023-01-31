@@ -135,6 +135,7 @@ class LicenseFilesController extends Controller
         // the license is valid
         if (isset($license->id)) {
             $this->authorize('view', $license);
+            $this->authorize('licenses.files', $license);
 
             if (! $log = Actionlog::find($fileId)) {
                 return response('No matching record for that asset/file', 500)
@@ -171,6 +172,6 @@ class LicenseFilesController extends Controller
             }
         }
 
-        return redirect()->route('license.index')->with('error', trans('admin/licenses/message.does_not_exist', ['id' => $fileId]));
+        return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist', ['id' => $fileId]));
     }
 }

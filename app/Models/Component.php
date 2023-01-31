@@ -36,7 +36,7 @@ class Component extends SnipeModel
         'company_id'     => 'integer|nullable',
         'min_amt'        => 'integer|min:0|nullable',
         'purchase_date'  => 'date|nullable',
-        'purchase_cost'  => 'numeric|nullable',
+        'purchase_cost'  => 'numeric|nullable|gte:0',
     ];
 
     /**
@@ -65,6 +65,7 @@ class Component extends SnipeModel
         'order_number',
         'qty',
         'serial',
+        'notes',
     ];
 
     use Searchable;
@@ -74,7 +75,7 @@ class Component extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['name', 'order_number', 'serial', 'purchase_cost', 'purchase_date'];
+    protected $searchableAttributes = ['name', 'order_number', 'serial', 'purchase_cost', 'purchase_date', 'notes'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -86,6 +87,24 @@ class Component extends SnipeModel
         'company'      => ['name'],
         'location'     => ['name'],
     ];
+
+
+    /**
+     * Establishes the components -> action logs -> uploads relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v6.1.13]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function uploads()
+    {
+        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')
+            ->where('item_type', '=', self::class)
+            ->where('action_type', '=', 'uploaded')
+            ->whereNotNull('filename')
+            ->orderBy('created_at', 'desc');
+    }
+
 
     /**
      * Establishes the component -> location relationship
@@ -108,7 +127,7 @@ class Component extends SnipeModel
      */
     public function assets()
     {
-        return $this->belongsToMany(\App\Models\Asset::class, 'components_assets')->withPivot('id', 'assigned_qty', 'created_at', 'user_id');
+        return $this->belongsToMany(\App\Models\Asset::class, 'components_assets')->withPivot('id', 'assigned_qty', 'created_at', 'user_id', 'note');
     }
 
     /**

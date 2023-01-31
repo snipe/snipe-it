@@ -211,23 +211,35 @@ class LocationsController extends Controller
 
     public function print_assigned($id)
     {
-        $location = Location::where('id', $id)->first();
-        $parent = Location::where('id', $location->parent_id)->first();
-        $manager = User::where('id', $location->manager_id)->first();
-        $users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
-        $assets = Asset::where('assigned_to', $id)->where('assigned_type', Location::class)->with('model', 'model.category')->get();
 
-        return view('locations/print')->with('assets', $assets)->with('users', $users)->with('location', $location)->with('parent', $parent)->with('manager', $manager);
+        if ($location = Location::where('id', $id)->first()) {
+            $parent = Location::where('id', $location->parent_id)->first();
+            $manager = User::where('id', $location->manager_id)->first();
+            $users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
+            $assets = Asset::where('assigned_to', $id)->where('assigned_type', Location::class)->with('model', 'model.category')->get();
+            return view('locations/print')->with('assets', $assets)->with('users', $users)->with('location', $location)->with('parent', $parent)->with('manager', $manager);
+
+        }
+
+        return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist'));
+
+
+
     }
 
     public function print_all_assigned($id)
     {
-        $location = Location::where('id', $id)->first();
-        $parent = Location::where('id', $location->parent_id)->first();
-        $manager = User::where('id', $location->manager_id)->first();
-        $users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
-        $assets = Asset::where('location_id', $id)->with('model', 'model.category')->get();
+        if ($location = Location::where('id', $id)->first()) {
+            $parent = Location::where('id', $location->parent_id)->first();
+            $manager = User::where('id', $location->manager_id)->first();
+            $users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
+            $assets = Asset::where('location_id', $id)->with('model', 'model.category')->get();
+            return view('locations/print')->with('assets', $assets)->with('users', $users)->with('location', $location)->with('parent', $parent)->with('manager', $manager);
 
-        return view('locations/print')->with('assets', $assets)->with('users', $users)->with('location', $location)->with('parent', $parent)->with('manager', $manager);
+        }
+        return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist'));
+
+
+
     }
 }

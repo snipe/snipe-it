@@ -9,6 +9,8 @@ use App\Http\Transformers\StatuslabelsTransformer;
 use App\Models\Asset;
 use App\Models\Statuslabel;
 use Illuminate\Http\Request;
+use App\Http\Transformers\PieChartTransformer;
+use Illuminate\Support\Arr;
 
 class StatuslabelsController extends Controller
 {
@@ -28,6 +30,24 @@ class StatuslabelsController extends Controller
 
         if ($request->filled('search')) {
             $statuslabels = $statuslabels->TextSearch($request->input('search'));
+        }
+
+        if ($request->filled('name')) {
+            $statuslabels->where('name', '=', $request->input('name'));
+        }
+
+
+        // if a status_type is passed, filter by that
+        if ($request->filled('status_type')) {
+            if (strtolower($request->input('status_type')) == 'pending') {
+                $statuslabels = $statuslabels->Pending();
+            } elseif (strtolower($request->input('status_type')) == 'archived') {
+                $statuslabels = $statuslabels->Archived();
+            } elseif (strtolower($request->input('status_type')) == 'deployable') {
+                $statuslabels = $statuslabels->Deployable();
+            } elseif (strtolower($request->input('status_type')) == 'undeployable') {
+                $statuslabels = $statuslabels->Undeployable();
+            }
         }
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
@@ -80,8 +100,8 @@ class StatuslabelsController extends Controller
         if ($statuslabel->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $statuslabel, trans('admin/statuslabels/message.create.success')));
         }
-
         return response()->json(Helper::formatStandardApiResponse('error', null, $statuslabel->getErrors()));
+
     }
 
     /**
@@ -100,6 +120,7 @@ class StatuslabelsController extends Controller
         return (new StatuslabelsTransformer)->transformStatuslabel($statuslabel);
     }
 
+
     /**
      * Update the specified resource in storage.
      *
@@ -115,6 +136,7 @@ class StatuslabelsController extends Controller
         $statuslabel = Statuslabel::findOrFail($id);
         
         $request->except('deployable', 'pending', 'archived');
+
 
         if (! $request->filled('type')) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Status label type is required.'));
@@ -161,48 +183,61 @@ class StatuslabelsController extends Controller
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/statuslabels/message.assoc_assets')));
     }
 
+
+
      /**
      * Show a count of assets by status label for pie chart
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function getAssetCountByStatuslabel()
     {
         $this->authorize('view', Statuslabel::class);
-
         $statuslabels = Statuslabel::withCount('assets')->get();
 
-        $labels = [];
-        $points = [];
-        $default_color_count = 0;
-        $colors_array = [];
-
         foreach ($statuslabels as $statuslabel) {
-            if ($statuslabel->assets_count > 0) {
-                $labels[] = $statuslabel->name.' ('.number_format($statuslabel->assets_count).')';
-                $points[] = $statuslabel->assets_count;
 
-                if ($statuslabel->color != '') {
-                    $colors_array[] = $statuslabel->color;
-                } else {
-                    $colors_array[] = Helper::defaultChartColors($default_color_count);
-                }
-                $default_color_count++;
+            $total[$statuslabel->name]['label'] = $statuslabel->name;
+            $total[$statuslabel->name]['count'] = $statuslabel->assets_count;
+
+            if ($statuslabel->color != '') {
+                $total[$statuslabel->name]['color'] = $statuslabel->color;
             }
         }
 
-        $result = [
-            'labels' => $labels,
-            'datasets' => [[
-                'data' => $points,
-                'backgroundColor' => $colors_array,
-                'hoverBackgroundColor' =>  $colors_array,
-            ]],
-        ];
+        return (new PieChartTransformer())->transformPieChartDate($total);
 
-        return $result;
+    }
+
+    /**
+     * Show a count of assets by meta status type for pie chart
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v6.0.11]
+     * @return array
+     */
+    public function getAssetCountByMetaStatus()
+    {
+        $this->authorize('view', Statuslabel::class);
+
+        $total['rtd']['label'] = trans('general.ready_to_deploy');
+        $total['rtd']['count'] = Asset::RTD()->count();
+
+        $total['deployed']['label'] = trans('general.deployed');
+        $total['deployed']['count'] = Asset::Deployed()->count();
+
+        $total['archived']['label'] = trans('general.archived');
+        $total['archived']['count'] = Asset::Archived()->count();
+
+        $total['pending']['label'] = trans('general.pending');
+        $total['pending']['count'] = Asset::Pending()->count();
+
+        $total['undeployable']['label'] = trans('general.undeployable');
+        $total['undeployable']['count'] = Asset::Undeployable()->count();
+
+        return (new PieChartTransformer())->transformPieChartDate($total);
     }
 
     /**

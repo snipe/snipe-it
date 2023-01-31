@@ -27,8 +27,7 @@ class AccessoriesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Accessory::class);
-        $allowed_columns = ['id', 'name', 'model_number', 'eol', 'notes', 'created_at', 'min_amt', 'company_id'];
-        
+
         // This array is what determines which fields should be allowed to be sorted on ON the table itself, no relations
         // Relations will be handled in query scopes a little further down.
         $allowed_columns = 
@@ -40,7 +39,8 @@ class AccessoriesController extends Controller
                 'notes',
                 'created_at',
                 'min_amt',
-                'company_id'
+                'company_id',
+                'notes',
             ];
 
 
@@ -68,6 +68,10 @@ class AccessoriesController extends Controller
 
         if ($request->filled('location_id')) {
             $accessories->where('location_id','=',$request->input('location_id'));
+        }
+
+        if ($request->filled('notes')) {
+            $accessories->where('notes','=',$request->input('notes'));
         }
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which

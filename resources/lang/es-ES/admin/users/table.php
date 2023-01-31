@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Activo',
     'allow'  				=> 'Permitir',
     'checkedout'  			=> 'Equipos',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'Email',
     'employee_num'      	=> 'No. Empleado',
     'first_name' 			=> 'Nombre',
-    'groupnotes'			=> 'Selecciona grupo que se asigna al usuario, recuerda que el usuario tiene los permisos del grupo al que se asigna.',
+    'groupnotes'			=> 'Seleccione un grupo para asignar al usuario, recuerde que un usuario asume los permisos del grupo al que se le asigna. Use ctrl+click (o cmd+click en MacOS) para anular la selección de grupos.',
     'id'         			=> 'ID',
     'inherit'  				=> 'Hereda de',
     'job' 					=> 'Departamento',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Mostrar usuarios actuales',
     'show_deleted'          => 'Mostrar usuarios eliminados',
     'title' 				=> 'Puesto',
-    'to_restore_them'		=> 'para restaurarlos.',
+	'to_restore_them'		=> 'para restaurarlos.',
     'updateuser' 			=> 'Actualizar Usuario',
     'username' 				=> 'Usuario',
-    'user_deleted_text' 	=> 'Este usuario ha sido marcado como eliminado.',
+	'user_deleted_text' 	=> 'Este usuario ha sido marcado como eliminado.',
     'username_note' 		=> '(Esto se usa solo para la conexión con Active Directory, no para el inicio de sesión.)',
     'cloneuser'             => 'Clonar Usuario',
     'viewusers' 			=> 'Ver Usuarios',
-];
+);

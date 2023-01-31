@@ -9,6 +9,7 @@ use App\Models\Accessory;
 use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Redirect;
 
 /** This controller handles all actions related to Accessories for
@@ -79,6 +80,8 @@ class AccessoriesController extends Controller
         $accessory->qty                     = request('qty');
         $accessory->user_id                 = Auth::user()->id;
         $accessory->supplier_id             = request('supplier_id');
+        $accessory->notes                   = request('notes');
+
 
         $accessory = $request->handleImages($accessory);
 
@@ -128,6 +131,17 @@ class AccessoriesController extends Controller
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
         }
 
+        $min = $accessory->numCheckedOut();
+        $validator = Validator::make($request->all(), [
+            "qty" => "required|numeric|min:$min"
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $this->authorize($accessory);
 
         // Update the accessory data
@@ -143,6 +157,7 @@ class AccessoriesController extends Controller
         $accessory->purchase_cost           = Helper::ParseCurrency(request('purchase_cost'));
         $accessory->qty                     = request('qty');
         $accessory->supplier_id             = request('supplier_id');
+        $accessory->notes                   = request('notes');
 
         $accessory = $request->handleImages($accessory);
 

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'Over licenties',
     'about_licenses'                  => 'Licenties worden gebruikt om software te beheren. Deze hebben een maximum aantal wat aan gebruikers uitgeleverd kan worden',
     'checkin'  					=> 'Check werkplek licentie in',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'Applicatie Licenties',
     'user'  					=> 'Gebruiker',
     'view'  					=> 'Bekijk licentie',
-];
+);

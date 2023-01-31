@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Helpers;
-
 use App\Models\Accessory;
 use App\Models\Component;
 use App\Models\Consumable;
@@ -13,6 +12,7 @@ use App\Models\Statuslabel;
 use Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Image;
+use Carbon\Carbon;
 
 class Helper
 {
@@ -23,12 +23,13 @@ class Helper
      * @since [v2.0]
      * @return string
      */
-    public static function parseEscapedMarkedown($str)
+    public static function parseEscapedMarkedown($str = null)
     {
         $Parsedown = new \Parsedown();
+        $Parsedown->setSafeMode(true);
 
         if ($str) {
-            return $Parsedown->text(e($str));
+            return $Parsedown->text($str);
         }
     }
 
@@ -624,7 +625,7 @@ class Helper
     {
         $consumables = Consumable::withCount('consumableAssignments as consumable_assignments_count')->whereNotNull('min_amt')->get();
         $accessories = Accessory::withCount('users as users_count')->whereNotNull('min_amt')->get();
-        $components = Component::withCount('assets as assets_count')->whereNotNull('min_amt')->get();
+        $components = Component::whereNotNull('min_amt')->get();
 
         $avail_consumables = 0;
         $items_array = [];
@@ -669,7 +670,7 @@ class Helper
         }
 
         foreach ($components as $component) {
-            $avail = $component->qty - $component->assets_count;
+            $avail = $component->numRemaining();
             if ($avail < ($component->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
                 if ($component->qty > 0) {
                     $percent = number_format((($avail / $component->qty) * 100), 0);
@@ -842,6 +843,16 @@ class Helper
         return preg_replace('/\s+/u', '_', trim($string));
     }
 
+    /**
+     * Return an array (or null) of the the raw and formatted date object for easy use in
+     * the API and the bootstrap table listings.
+     *
+     * @param $date
+     * @param $type
+     * @param $array
+     * @return array|string|null
+     */
+
     public static function getFormattedDateObject($date, $type = 'datetime', $array = true)
     {
         if ($date == '') {
@@ -849,21 +860,42 @@ class Helper
         }
 
         $settings = Setting::getSettings();
-        $tmp_date = new \Carbon($date);
 
-        if ($type == 'datetime') {
-            $dt['datetime'] = $tmp_date->format('Y-m-d H:i:s');
-            $dt['formatted'] = $tmp_date->format($settings->date_display_format.' '.$settings->time_display_format);
-        } else {
-            $dt['date'] = $tmp_date->format('Y-m-d');
-            $dt['formatted'] = $tmp_date->format($settings->date_display_format);
+        /**
+         * Wrap this in a try/catch so that if Carbon crashes, for example if the $date value
+         * isn't actually valid, we don't crash out completely.
+         *
+         * While this *shouldn't* typically happen since we validate dates before entering them
+         * into the database (and we use date/datetime fields for native fields in the system),
+         * it is a possible scenario that a custom field could be created as an "ANY" field, data gets
+         * added, and then the custom field format gets edited later. If someone put bad data in the
+         * database before then - or if they manually edited the field's value - it will crash.
+         *
+         */
+
+
+        try {
+            $tmp_date = new \Carbon($date);
+
+            if ($type == 'datetime') {
+                $dt['datetime'] = $tmp_date->format('Y-m-d H:i:s');
+                $dt['formatted'] = $tmp_date->format($settings->date_display_format.' '.$settings->time_display_format);
+            } else {
+                $dt['date'] = $tmp_date->format('Y-m-d');
+                $dt['formatted'] = $tmp_date->format($settings->date_display_format);
+            }
+
+            if ($array == 'true') {
+                return $dt;
+            }
+
+            return $dt['formatted'];
+
+        } catch (\Exception $e) {
+            \Log::warning($e);
+            return $date.' (Invalid '.$type.' value.)';
         }
 
-        if ($array == 'true') {
-            return $dt;
-        }
-
-        return $dt['formatted'];
     }
 
     // Nicked from Drupal :)
@@ -1058,5 +1090,61 @@ class Helper
         }
 
         return $file_name;
+    }
+
+    public static function formatFilesizeUnits($bytes)
+    {
+        if ($bytes >= 1073741824)
+        {
+            $bytes = number_format($bytes / 1073741824, 2) . ' GB';
+        }
+        elseif ($bytes >= 1048576)
+        {
+            $bytes = number_format($bytes / 1048576, 2) . ' MB';
+        }
+        elseif ($bytes >= 1024)
+        {
+            $bytes = number_format($bytes / 1024, 2) . ' KB';
+        }
+        elseif ($bytes > 1)
+        {
+            $bytes = $bytes . ' bytes';
+        }
+        elseif ($bytes == 1)
+        {
+            $bytes = $bytes . ' byte';
+        }
+        else
+        {
+            $bytes = '0 bytes';
+        }
+
+        return $bytes;
+    }
+    public static function SettingUrls(){
+        $settings=['#','fields.index', 'statuslabels.index', 'models.index', 'categories.index', 'manufacturers.index', 'suppliers.index', 'departments.index', 'locations.index', 'companies.index', 'depreciations.index'];
+
+        return $settings;
+        }
+    public static function AgeFormat($date) {
+        $year = Carbon::parse($date)
+            ->diff(now())->y;
+        $month = Carbon::parse($date)
+            ->diff(now())->m;
+        $days = Carbon::parse($date)
+            ->diff(now())->d;
+        $age='';
+        if ($year) {
+            $age .= $year.'y ';
+        }
+        if ($month) {
+            $age .= $month.'m ';
+        }
+        if ($days) {
+            $age .= $days.'d';
+        }
+
+        return $age;
+
     }
 }

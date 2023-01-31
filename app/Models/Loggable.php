@@ -110,8 +110,17 @@ trait Loggable
             }
         }
 
+
         $log->location_id = null;
         $log->note = $note;
+        $log->action_date = $action_date;
+        if (! $log->action_date) {
+            $log->action_date = date('Y-m-d H:i:s');
+        }
+
+        if (! $log->action_date) {
+            $log->action_date = date('Y-m-d H:i:s');
+        }
 
         if (Auth::user()) {
             $log->user_id = Auth::user()->id;
@@ -180,7 +189,7 @@ trait Loggable
         $params = [
             'item' => $log->item,
             'filename' => $log->filename,
-            'admin' => $log->user,
+            'admin' => $log->admin,
             'location' => ($location) ? $location->name : '',
             'note' => $note,
         ];

@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'Użytkownik odrzucił zasób',
     'a_user_canceled' => 'Użytkownik anulował zapotrzebowanie na sprzęt na stronie www',
     'a_user_requested' => 'Użytkownik zamówił pozycję na stronie internetowej',
     'accessory_name' => 'Nazwa sprzętu:',
@@ -59,7 +61,7 @@ return [
     'test_mail_text' => 'To jest wiadomość testowa z aplikacji Snipe-IT Asset Management System. Jeśli otrzymałeś ją - poczta działa :)',
     'the_following_item' => 'Następujący sprzęt został otrzymany: ',
     'low_inventory_alert' => 'Istnieje: liczba przedmiot, który jest poniżej minimalnej ilości zapasów lub wkrótce ta wartość będzie niska. | Istnieją: policz przedmioty, które są poniżej minimalnej ilości zapasów lub wkrótce te wartości będą niskie.',
-    'assets_warrantee_alert' => 'Istnieje: liczba aktywo z wygasającą gwarancją w ciągu następnych: dni progowe. | Istnieje: liczba aktyw z wygasającą gwarancją w ciągu następnych: dni progowe.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'Istnieje: liczba licencja wygasająca w ciągu następnych: dni progowe. | Istnieje: liczba licencji wygasających w ciągu następnych: dni progowe.',
     'to_reset' => 'Aby zresetować hasło na :web, wypełnij ten formularz:',
     'type' => 'Typ',

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,9 @@ return [
     |
     */
 
-    'password' => 'Heslo musí mít šest znaků a schodovat se s potvrzujícím heslem.',
+    "password" => "Heslo musí mít šest znaků a schodovat se s potvrzujícím heslem.",
+    "user"     => "Uživatelské jméno nebo email je chybný",
+    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
+    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
 
-    'user'     => 'Uživatelské jméno nebo email je chybný',
-
-    'token'    => 'Tento token pro reset hesla je neplatný.',
-
-    'sent' => 'Pokud byl email nalezen, tak bylo heslo zasláno!',
-
-];
+);

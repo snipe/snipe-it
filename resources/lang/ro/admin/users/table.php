@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Activ',
     'allow'  				=> 'Permite',
     'checkedout'  			=> 'Active',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'E-mail',
     'employee_num'      	=> 'Nr. angajat',
     'first_name' 			=> 'Prenume',
-    'groupnotes'			=> 'Desemneaza un grup pentru utilizator. Va rugam sa luati in calcul ca utilizatorul preia permisiile grupului la care este desemnat.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'ID',
     'inherit'  				=> 'Preia',
     'job' 					=> 'Titlu job',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Afișați utilizatorii curenți',
     'show_deleted'          => 'Afișați utilizatorii șterși',
     'title' 				=> 'Titlu',
-    'to_restore_them'		=> 'pentru a le restabili.',
+	'to_restore_them'		=> 'pentru a le restabili.',
     'updateuser' 			=> 'Actualizeaza utilizator',
     'username' 				=> 'Utilizator',
-    'user_deleted_text' 	=> 'Acest utilizator a fost marcat ca șters.',
+	'user_deleted_text' 	=> 'Acest utilizator a fost marcat ca șters.',
     'username_note' 		=> '(Folosit numai pentru legatura cu Active Directory, nu pentru logare.)',
     'cloneuser'             => 'Cloneaza utilizator',
     'viewusers' 			=> 'Vezi utilizatori',
-];
+);

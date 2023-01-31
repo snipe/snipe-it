@@ -39,6 +39,7 @@ class AssetImporter extends ItemImporter
             }
         }
 
+
         $this->createAssetIfNotExists($row);
     }
 
@@ -54,6 +55,11 @@ class AssetImporter extends ItemImporter
     {
         $editingAsset = false;
         $asset_tag = $this->findCsvMatch($row, 'asset_tag');
+
+        if(empty($asset_tag)){
+            $asset_tag = Asset::autoincrement_asset();
+        }
+
         $asset = Asset::where(['asset_tag'=> $asset_tag])->first();
         if ($asset) {
             if (! $this->updating) {
@@ -68,7 +74,7 @@ class AssetImporter extends ItemImporter
             $this->log('No Matching Asset, Creating a new one');
             $asset = new Asset;
         }
-
+        $this->item['notes'] = $this->findCsvMatch($row, 'asset_notes');
         $this->item['image'] = $this->findCsvMatch($row, 'image');
         $this->item['requestable'] = $this->fetchHumanBoolean($this->findCsvMatch($row, 'requestable'));
         $asset->requestable = $this->fetchHumanBoolean($this->findCsvMatch($row, 'requestable'));
@@ -96,6 +102,16 @@ class AssetImporter extends ItemImporter
             $item['rtd_location_id'] = $this->item['location_id'];
         }
 
+        $item['last_audit_date'] = null;
+        if (isset($this->item['last_audit_date'])) {
+            $item['last_audit_date'] = $this->item['last_audit_date'];
+        }
+
+        $item['next_audit_date'] = null;
+        if (isset($this->item['next_audit_date'])) {
+            $item['next_audit_date'] = $this->item['next_audit_date'];
+        }
+
         if ($editingAsset) {
             $asset->update($item);
         } else {
@@ -119,7 +135,7 @@ class AssetImporter extends ItemImporter
             //-- user_id is a property of the abstract class Importer, which this class inherits from and it's setted by
             //-- the class that needs to use it (command importer or GUI importer inside the project).
             if (isset($target)) {
-                $asset->fresh()->checkOut($target, $this->user_id);
+                $asset->fresh()->checkOut($target, $this->user_id, date('Y-m-d H:i:s'));
             }
 
             return;

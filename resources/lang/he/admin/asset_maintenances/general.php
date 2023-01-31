@@ -11,4 +11,6 @@
         'calibration'        => 'כיול',
         'software_support'   => 'תמיכה בתכנה',
         'hardware_support'   => 'תמיכה בחומרה',
+        'configuration_change'   => 'Configuration Change',
+        'pat_test'           => 'PAT Test',
     ];

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Aktív',
     'allow'  				=> 'Engedélyezés',
     'checkedout'  			=> 'Eszközök',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'E-mail cím',
     'employee_num'      	=> 'Munkavállaló száma',
     'first_name' 			=> 'Keresztnév',
-    'groupnotes'			=> 'Válasszon ki egy csoportot a felhasználó hozzárendeléséhez, ne felejtse el, hogy a felhasználó átveszi a hozzárendelt csoport engedélyeit.',
+    'groupnotes'			=> 'Válassza ki a felhasználóhoz hozzárendelni kívánt csoportot, és ne feledje, hogy a felhasználó a hozzá rendelt csoport jogosultságait veszi át. A csoportok kijelölésének megszüntetéséhez használja a ctrl+kattintást (vagy MacOS esetén a cmd+kattintást).',
     'id'         			=> 'Id',
     'inherit'  				=> 'Örököl',
     'job' 					=> 'Munka megnevezése',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Jelenlegi felhasználók megjelenítése',
     'show_deleted'          => 'A törölt felhasználók megjelenítése',
     'title' 				=> 'Cím',
-    'to_restore_them'		=> 'visszaállítani őket.',
+	'to_restore_them'		=> 'visszaállítani őket.',
     'updateuser' 			=> 'Felhasználó frissítése',
     'username' 				=> 'Felhasználónév',
-    'user_deleted_text' 	=> 'Ezt a felhasználót törölték.',
+	'user_deleted_text' 	=> 'Ezt a felhasználót törölték.',
     'username_note' 		=> '(Ez csak az Active Directory-kötéshez használható, nem pedig a bejelentkezéshez.)',
     'cloneuser'             => 'Klón felhasználó',
     'viewusers' 			=> 'Felhasználók megtekintése',
-];
+);

@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'Pengguna telah membatalkan permintaan item di laman web',
     'a_user_requested' => 'Seorang pengguna telah meminta item di laman web',
     'accessory_name' => 'Nama Aksesori:',
@@ -59,7 +61,7 @@ return [
     'test_mail_text' => 'Ini adalah ujian dari Sistem Pengurusan Asset Snipe-IT. Jika anda mendapat ini, mel sedang berfungsi :)',
     'the_following_item' => 'Item berikut telah diperiksa:',
     'low_inventory_alert' => 'Terdapat :count item yang berada di bawah inventori minimum atau akan menjadi rendah. Terdapat :count item yang berada di bawah inventori minimum atau akan menjadi rendah.',
-    'assets_warrantee_alert' => 'Terdapat :count aset yang akan tamat tempoh waranti dalam :threshold hari.|Terdapat :count aset yang akan tamat dalam tempoh waranti dalam :threshold hari.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'Terdapat :count lesen yang akan tamat dalam tempoh :threshold hari.|Terdapat :count lesen yang akan tamat dalam tempoh :threshold hari.',
     'to_reset' => 'Untuk menetapkan semula kata laluan web anda, lengkapkan borang ini:',
     'type' => 'Taipkan',

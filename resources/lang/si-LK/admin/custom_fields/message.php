@@ -49,6 +49,12 @@ return array(
 
     ),
 
+    'fieldset_default_value' => array(
+
+        'error' => 'Error validating default fieldset values.',
+
+    ),
+
 
 
 

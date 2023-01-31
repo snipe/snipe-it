@@ -1,36 +1,37 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Akcesorium [:id] nie istnieje.',
     'assoc_users'	 => 'Akcesoria z tej kategorii zostały wydane do :count użytkowników. Zbierz akcesoria i spróbuj ponownie. ',
 
-    'create' => [
+    'create' => array(
         'error'   => 'Akcesorium nie utworzono, spróbuj ponownie.',
-        'success' => 'Akcesorium utworzono pomyślnie.',
-    ],
+        'success' => 'Akcesorium utworzono pomyślnie.'
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Nie zaktualizowano Akcesorium, spróbuj ponownie',
-        'success' => 'Akcesorium utworzono pomyślnie.',
-    ],
+        'success' => 'Akcesorium utworzono pomyślnie.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Czy na pewno chcesz usunąć to Akcesorium?',
         'error'   => 'Wystąpił błąd podczas usuwania akcesorium. Proszę spróbować ponownie.',
-        'success' => 'Akcesorium zostało usunięte pomyślnie.',
-    ],
+        'success' => 'Akcesorium zostało usunięte pomyślnie.'
+    ),
 
-     'checkout' => [
+     'checkout' => array(
         'error'   		=> 'Akcesoria nie zostały przypisane, spróbuj ponownie',
         'success' 		=> 'Akcesoria przypisany pomyślnie.',
-        'user_does_not_exist' => 'Użytkownik nie istnieje. Spróbuj ponownie.',
-    ],
+        'user_does_not_exist' => 'Użytkownik nie istnieje. Spróbuj ponownie.'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   		=> 'Akcesoria nie zostały przypisane, spróbuj ponownie',
         'success' 		=> 'Akcesoria przypisane pomyślnie.',
-        'user_does_not_exist' => 'Użytkownik nie istnieje. Spróbuj ponownie.',
-    ],
+        'user_does_not_exist' => 'Użytkownik nie istnieje. Spróbuj ponownie.'
+    )
 
-];
+
+);

@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Está a punto de borrar :asset_count.',
     'bulk_update'		=> 'Actualización masiva de Equipos',
     'bulk_update_help'	=> 'Este formulario le permite actualizar múltiples Equipos simultáneamente. Solo complete los campos que quiere modificar. Todo campo en blanco permanecerá sin cambios. ',
-    'bulk_update_warn'	=> 'Esta a punto de editar las propiedades de :asset_count equipos.',
+    'bulk_update_warn'	=> 'Está a punto de editar las propiedades de un solo activo.|Está a punto de editar las propiedades de :asset_count activos.',
     'checkedout_to'		=> 'Asignado a',
     'checkout_date'		=> 'Fecha de asignación',
     'checkin_date'		=> 'Fecha de devolución',
@@ -40,4 +40,12 @@ return [
     'warranty'			=> 'Garantía',
         'warranty_expires'		=> 'Vencimiento de la Garantía',
     'years'				=> 'años',
+    'asset_location' => 'Actualizar ubicación del recurso',
+    'asset_location_update_default_current' => 'Actualizar ubicación predeterminada y ubicación actual',
+    'asset_location_update_default' => 'Actualizar sólo la ubicación predeterminada',
+    'asset_not_deployable' => 'Ese estado de activos no es desplegable. Este activo no puede ser verificado.',
+    'asset_deployable' => 'Ese estado de activos no es desplegable. Este activo no puede ser verificado.',
+    'processing_spinner' => 'Procesando...',
+    'optional_infos'  => 'Información opcional',
+    'order_details'   => 'Información relacionada con el pedido'
 ];

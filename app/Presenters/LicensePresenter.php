@@ -136,7 +136,7 @@ class LicensePresenter extends Presenter
                 'sortable' => true,
                 'visible' => false,
                 'title' => trans('general.purchase_cost'),
-                'footerFormatter' => 'sumFormatter',
+                'footerFormatter' => 'sumFormatterQuantity',
                 'class' => 'text-right',
             ], [
                 'field' => 'purchase_order',
@@ -189,6 +189,14 @@ class LicensePresenter extends Presenter
     public static function dataTableLayoutSeats()
     {
         $layout = [
+            [
+                'field' => 'id',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.id'),
+                'visible' => false,
+           ],
            [
                 'field' => 'name',
                 'searchable' => false,

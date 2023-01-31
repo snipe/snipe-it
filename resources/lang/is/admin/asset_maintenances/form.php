@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Dagar',
         'notes'                  => 'Athugasemdir',
         'update'                 => 'Uppfæra',
-        'create'                 => 'Búa til',
+        'create'                 => 'Búa til'
     ];

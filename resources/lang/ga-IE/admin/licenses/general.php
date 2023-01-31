@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'Maidir Ceadúnais',
     'about_licenses'                  => 'Úsáidtear ceadúnais chun bogearraí a rianú. Tá líon áirithe suíochán acu ar féidir iad a sheiceáil amach do dhaoine aonair',
     'checkin'  					=> 'Suíochán Ceadúnas Checkin',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'Ceadúnais Bogearraí',
     'user'  					=> 'Úsáideoir',
     'view'  					=> 'Féach ar an gCeadúnas',
-];
+);

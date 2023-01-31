@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,9 @@ return [
     |
     */
 
-    'password' => 'Zaporke moraju imati šest znakova i odgovarati potvrdi.',
+    "password" => "Zaporke moraju imati šest znakova i odgovarati potvrdi.",
+    "user"     => "Korisničko ime ili e-adresa nisu točni",
+    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
+    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
 
-    'user'     => 'Korisničko ime ili e-adresa nisu točni',
-
-    'token'    => 'Token za resetiranje lozinke nije valjan.',
-
-    'sent' => 'Ako je pronađena odgovarajuća adresa e-pošte, podsjetnik za lozinku je poslan!',
-
-];
+);

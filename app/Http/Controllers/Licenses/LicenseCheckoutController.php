@@ -61,6 +61,7 @@ class LicenseCheckoutController extends Controller
 
         $licenseSeat = $this->findLicenseSeatToCheckout($license, $seatId);
         $licenseSeat->user_id = Auth::id();
+        
 
         $checkoutMethod = 'checkoutTo'.ucwords(request('checkout_to_type'));
         if ($this->$checkoutMethod($licenseSeat)) {
@@ -76,14 +77,14 @@ class LicenseCheckoutController extends Controller
 
         if (! $licenseSeat) {
             if ($seatId) {
-                return redirect()->route('licenses.index')->with('error', 'This Seat is not available for checkout.');
+                throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', 'This Seat is not available for checkout.'));
             }
-
-            return redirect()->route('licenses.index')->with('error', 'There are no available seats for this license');
+            
+            throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', 'There are no available seats for this license.'));
         }
 
         if (! $licenseSeat->license->is($license)) {
-            return redirect()->route('licenses.index')->with('error', 'The license seat provided does not match the license.');
+            throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', 'The license seat provided does not match the license.'));
         }
 
         return $licenseSeat;

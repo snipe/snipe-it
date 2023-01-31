@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => 'Atributul: trebuie să fie un fișier.',
     'filled'               => 'Câmpul atributului trebuie să aibă o valoare.',
     'image'                => ':attribute trebuie sa fie o imagine.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => ':attribute selectat nu este valid.',
     'in_array'             => 'Câmpul atributului nu există în: altul.',
     'integer'              => ':attribute trebuie sa fie numar intreg.',
     'ip'                   => ':attribute trebuie sa fie o adresa IP valida.',
     'ipv4'                 => 'Atributul: trebuie să fie o adresă IPv4 validă.',
     'ipv6'                 => 'Atributul: trebuie să fie o adresă IPv6 validă.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'Atributul: trebuie să fie un șir JSON valid.',
     'max'                  => [
         'numeric' => ':attribute nu poate sa fie mai mare de :max.',
@@ -64,6 +66,7 @@ return array(
         'string'  => ':attribute trebuie sa aiba cel putin :min caractere.',
         'array'   => 'Atributul:: trebuie să aibă cel puțin: min.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => ':attribute selectat nu e valid.',
     'numeric'              => ':attribute trebuie sa fie un numar.',
     'present'              => 'Câmpul atributului trebuie să fie prezent.',
@@ -88,8 +91,17 @@ return array(
     'unique'               => ':attribute este deja folosit.',
     'uploaded'             => 'Atributul: nu a reușit să se încarce.',
     'url'                  => 'Formatul :attribute nu este valid.',
-    "unique_undeleted"     => "The :attribute must be unique.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => 'The :attribute must be unique.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +113,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +126,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Câmpul atributului: conține un caracter care nu este permis.",
-        "email_array"      => "Una sau mai multe adrese de e-mail este nevalidă.",
-        "hashed_pass"      => "Parola curentă este incorectă",
+        'alpha_space' => 'Câmpul atributului: conține un caracter care nu este permis.',
+        'email_array'      => 'Una sau mai multe adrese de e-mail este nevalidă.',
+        'hashed_pass'      => 'Parola curentă este incorectă',
         'dumbpwd'          => 'Această parolă este prea obișnuită.',
-        "statuslabel_type" => "Trebuie să selectați un tip de etichetă de stare validă",
+        'statuslabel_type' => 'Trebuie să selectați un tip de etichetă de stare validă',
     ],
 
     /*
@@ -135,4 +146,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

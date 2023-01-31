@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'פָּעִיל',
     'allow'  				=> 'להתיר',
     'checkedout'  			=> 'נכסים',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'אֶלֶקטרוֹנִי',
     'employee_num'      	=> 'מספר עובד',
     'first_name' 			=> 'שם פרטי',
-    'groupnotes'			=> 'בחר קבוצה כדי להקצות למשתמש, זכור כי משתמש לוקח את ההרשאות של הקבוצה הם מוקצים.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'תְעוּדַת זֶהוּת',
     'inherit'  				=> 'לָרֶשֶׁת',
     'job' 					=> 'הגדרת תפקיד',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'הצג משתמשים נוכחיים',
     'show_deleted'          => 'הצג משתמשים שנמחקו',
     'title' 				=> 'כותרת',
-    'to_restore_them'		=> 'כדי לשחזר אותם.',
+	'to_restore_them'		=> 'כדי לשחזר אותם.',
     'updateuser' 			=> 'עדכן משתמש',
     'username' 				=> 'שם משתמש',
-    'user_deleted_text' 	=> 'משתמש זה סומן כממחק.',
+	'user_deleted_text' 	=> 'משתמש זה סומן כממחק.',
     'username_note' 		=> '(זה משמש רק עבור Active Directory מחייב, לא עבור התחברות.)',
     'cloneuser'             => 'משתמש משוכפל',
     'viewusers' 			=> 'הצג משתמשים',
-];
+);

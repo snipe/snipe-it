@@ -34,7 +34,9 @@ class AssetMaintenancesController extends Controller
      */
     public function index(Request $request)
     {
-        $maintenances = AssetMaintenance::with('asset', 'asset.model', 'asset.location', 'supplier', 'asset.company', 'admin');
+        $this->authorize('view', Asset::class);
+
+        $maintenances = AssetMaintenance::select('asset_maintenances.*')->with('asset', 'asset.model', 'asset.location', 'supplier', 'asset.company', 'admin');
 
         if ($request->filled('search')) {
             $maintenances = $maintenances->TextSearch($request->input('search'));
@@ -43,6 +45,15 @@ class AssetMaintenancesController extends Controller
         if ($request->filled('asset_id')) {
             $maintenances->where('asset_id', '=', $request->input('asset_id'));
         }
+
+        if ($request->filled('supplier_id')) {
+            $maintenances->where('supplier_id', '=', $request->input('supplier_id'));
+        }
+
+        if ($request->filled('asset_maintenance_type')) {
+            $maintenances->where('asset_maintenance_type', '=', $request->input('asset_maintenance_type'));
+        }
+
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.
@@ -63,6 +74,7 @@ class AssetMaintenancesController extends Controller
                                 'asset_tag',
                                 'asset_name',
                                 'user_id',
+                                'supplier'
                             ];
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
@@ -70,6 +82,9 @@ class AssetMaintenancesController extends Controller
         switch ($sort) {
             case 'user_id':
                 $maintenances = $maintenances->OrderAdmin($order);
+                break;
+            case 'supplier':
+                $maintenances = $maintenances->OrderBySupplier($order);
                 break;
             case 'asset_tag':
                 $maintenances = $maintenances->OrderByTag($order);
@@ -101,6 +116,7 @@ class AssetMaintenancesController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('update', Asset::class);
         // create a new model instance
         $assetMaintenance = new AssetMaintenance();
         $assetMaintenance->supplier_id = $request->input('supplier_id');
@@ -152,6 +168,7 @@ class AssetMaintenancesController extends Controller
      */
     public function update(Request $request, $assetMaintenanceId = null)
     {
+        $this->authorize('update', Asset::class);
         // Check if the asset maintenance exists
         $assetMaintenance = AssetMaintenance::findOrFail($assetMaintenanceId);
 
@@ -215,6 +232,7 @@ class AssetMaintenancesController extends Controller
      */
     public function destroy($assetMaintenanceId)
     {
+        $this->authorize('update', Asset::class);
         // Check if the asset maintenance exists
         $assetMaintenance = AssetMaintenance::findOrFail($assetMaintenanceId);
 
@@ -240,6 +258,7 @@ class AssetMaintenancesController extends Controller
      */
     public function show($assetMaintenanceId)
     {
+        $this->authorize('view', Asset::class);
         $assetMaintenance = AssetMaintenance::findOrFail($assetMaintenanceId);
         if (! Company::isCurrentUserHasAccess($assetMaintenance->asset)) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'You cannot view a maintenance for that asset'));

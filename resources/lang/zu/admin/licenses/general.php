@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'Mayelana namalayisense',
     'about_licenses'                  => 'Amalayisensi asetshenziselwa ukulandelela isofthiwe. Unenombolo ecacisiwe yezihlalo ezingahlolwa kubantu ngabanye',
     'checkin'  					=> 'Isikhundla selayisensi ye-Checkin',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'Ilayisense Yezinhlelo',
     'user'  					=> 'Umsebenzisi',
     'view'  					=> 'Buka ilayisense',
-];
+);
