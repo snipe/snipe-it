@@ -52,7 +52,10 @@ class SlackSettingsForm extends Component
         $this->setting->slack_channel = $this->slack_channel;
         $this->setting->slack_botname = $this->slack_botname;
 
-        $this->successMessage= trans('admin/settings/message.update.success');
+        $this->setting->save();
+
+        session()->flash('message',trans('admin/settings/message.update.success'));
+
 
     }
 }
