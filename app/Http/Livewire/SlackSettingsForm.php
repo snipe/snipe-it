@@ -10,6 +10,7 @@ class SlackSettingsForm extends Component
     public $slack_endpoint;
     public $slack_channel;
     public $slack_botname;
+    public $successMessage;
 
     public Setting $setting;
 
@@ -41,13 +42,17 @@ class SlackSettingsForm extends Component
 
     public function submit()
     {
-        dd("we here now");
-
-        $this->validate();
+        $this->validate([
+            'slack_endpoint'                      => 'url|required_with:slack_channel|starts_with:https://hooks.slack.com/|nullable',
+            'slack_channel'                       => 'required_with:slack_endpoint|starts_with:#|nullable',
+            'slack_botname'                       => 'string|nullable',
+        ]);
 
         $this->setting->slack_endpoint = $this->slack_endpoint;
         $this->setting->slack_channel = $this->slack_channel;
         $this->setting->slack_botname = $this->slack_botname;
+
+        $this->successMessage= trans('admin/settings/message.update.success');
 
     }
 }
