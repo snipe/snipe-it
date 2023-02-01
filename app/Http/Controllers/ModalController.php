@@ -29,6 +29,7 @@ class ModalController extends Controller
             'location',
             'manufacturer',
             'model',
+            'serialnumber',
             'statuslabel',
             'supplier',
             'upload-file',

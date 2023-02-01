@@ -49,9 +49,18 @@
           </div>
           @endif
 
+          <!-- QTY -->
+          <div class="form-group">
+            <label class="col-sm-3 control-label">QTY</label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" data-validation="required">
+
+            </div>
+          </div>
+
           <!-- User -->
 
-          @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'assigned_to'])
+          {{-- @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'assigned_to'])
 
 
              @if ($accessory->requireAcceptance() || $accessory->getEula() || ($snipeSettings->slack_endpoint!=''))
@@ -78,7 +87,7 @@
                          </div>
                      </div>
                  </div>
-             @endif
+             @endif --}}
           <!-- Note -->
           <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
             <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
