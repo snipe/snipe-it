@@ -21,7 +21,7 @@ class CheckoutAcceptance extends Model
     {
         // At this point the endpoint is the same for everything.
         //  In the future this may want to be adapted for individual notifications.
-        return Setting::getSettings()['alert_email'];
+        return Setting::getSettings()->alert_email;
     }
 
     /**
