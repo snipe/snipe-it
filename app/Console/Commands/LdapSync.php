@@ -303,17 +303,18 @@ class LdapSync extends Command
                         $user->activated = 0;
                     } */
                     $enabled_accounts = [
-                    '512',    // 0x200    NORMAL_ACCOUNT
-                    '544',    // 0x220    NORMAL_ACCOUNT, PASSWD_NOTREQD
-                    '66048',  // 0x10200  NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD
-                    '66080',  // 0x10220  NORMAL_ACCOUNT, PASSWD_NOTREQD, DONT_EXPIRE_PASSWORD
-                    '262656', // 0x40200  NORMAL_ACCOUNT, SMARTCARD_REQUIRED
-                    '262688', // 0x40220  NORMAL_ACCOUNT, PASSWD_NOTREQD, SMARTCARD_REQUIRED
-                    '328192', // 0x50200  NORMAL_ACCOUNT, SMARTCARD_REQUIRED, DONT_EXPIRE_PASSWORD
-                    '328224', // 0x50220  NORMAL_ACCOUNT, PASSWD_NOT_REQD, SMARTCARD_REQUIRED, DONT_EXPIRE_PASSWORD
-                    '4194816',// 0x400200 NORMAL_ACCOUNT, DONT_REQ_PREAUTH
+                    '512',    //     0x200 NORMAL_ACCOUNT
+                    '544',    //     0x220 NORMAL_ACCOUNT, PASSWD_NOTREQD
+                    '66048',  //   0x10200 NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD
+                    '66080',  //   0x10220 NORMAL_ACCOUNT, PASSWD_NOTREQD, DONT_EXPIRE_PASSWORD
+                    '262656', //   0x40200 NORMAL_ACCOUNT, SMARTCARD_REQUIRED
+                    '262688', //   0x40220 NORMAL_ACCOUNT, PASSWD_NOTREQD, SMARTCARD_REQUIRED
+                    '328192', //   0x50200 NORMAL_ACCOUNT, SMARTCARD_REQUIRED, DONT_EXPIRE_PASSWORD
+                    '328224', //   0x50220 NORMAL_ACCOUNT, PASSWD_NOT_REQD, SMARTCARD_REQUIRED, DONT_EXPIRE_PASSWORD
+                    '4194816',//  0x400200 NORMAL_ACCOUNT, DONT_REQ_PREAUTH
                     '4260352', // 0x410200 NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD, DONT_REQ_PREAUTH
                     '1049088', // 0x100200 NORMAL_ACCOUNT, NOT_DELEGATED
+                    '1114624', // 0x110200 NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD, NOT_DELEGATED,
                   ];
                     $user->activated = (in_array($results[$i]['useraccountcontrol'][0], $enabled_accounts)) ? 1 : 0;
 
