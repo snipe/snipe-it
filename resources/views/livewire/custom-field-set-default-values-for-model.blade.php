@@ -13,7 +13,7 @@
             </div>
     </div>
     @if ($this->add_default_values ) {{-- 'if the checkbox is enabled *AND* there are more than 0 fields in the fieldsset' --}}
-    <div>
+    <div style="padding-left: 10px; padding-bottom: 0px; margin-bottom: -15px;">
         <div class="form-group">
             @if ($fields)
                 @foreach ($fields as $field)
