@@ -149,6 +149,13 @@
   background-color: #000000;
   color: #fff;
 }
+a.btn.btn-link.text-left {
+  color: #001F3F;
+  border: 1px solid #000;
+}
+a.btn.btn-link.text-left:hover {
+  color: #001F3F;
+}
 a {
   color: #001F3F;
 }
@@ -162,9 +169,6 @@ a:visited {
 a.btn:hover {
   color: #fff;
   text-decoration: underline;
-}
-a.btn:visited {
-  color: #fff;
 }
 .text-primary {
   color: #000000;
