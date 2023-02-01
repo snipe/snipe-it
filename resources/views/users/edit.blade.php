@@ -272,14 +272,22 @@
                           </div>
                       </div> <!--/form-group-->
                   @endif
+
                   <!-- Image -->
-                  @if ($user->avatar)
-                      <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
-                          <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
-                          <div class="col-md-5">
-                              {{ Form::checkbox('image_delete') }}
-                              <img src="{{ Storage::disk('public')->url(app('users_upload_path').e($user->avatar)) }}" class="img-responsive" />
-                              {!! $errors->first('image_delete', '<span class="alert-msg"><br>:message</span>') !!}
+                  @if (($user->avatar) && ($user->avatar!=''))
+                      <div class="form-group{{ $errors->has('image_delete') ? ' has-error' : '' }}">
+                          <div class="col-md-9 col-md-offset-3">
+                              <label for="image_delete">
+                                  {{ Form::checkbox('image_delete', '1', old('image_delete'), ['class'=>'minimal','aria-label'=>'image_delete']) }}
+                                  {{ trans('general.image_delete') }}
+                                  {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
+                              </label>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <div class="col-md-9 col-md-offset-3">
+                              <img src="{{ Storage::disk('public')->url(app('users_upload_path').$user->avatar) }}" class="img-responsive">
+                              {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
                           </div>
                       </div>
                   @endif
