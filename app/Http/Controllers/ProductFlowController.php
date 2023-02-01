@@ -20,16 +20,17 @@ class ProductFlowController extends Controller
 
     public function show(Request $request)
     {
-        $accessory = Accessory::where('model_number', '=', $request->receiveParts)->get();
+        // Temporarily disabling accessories until UI is completed.
+        // $accessory = Accessory::where('model_number', '=', $request->receiveParts)->get();
 
         // $upc = Accessory::where('upc', '=', $request->receiveParts)->get();
 
         $model = AssetModel::where('model_number', '=', $request->receiveParts)->get();
 
-        if ($accessory->count() > 0) {
-            $result = $accessory[0];
-            return response()->json(Helper::formatStandardApiResponse('success', $result, "accessory"));
-        }
+        // if ($accessory->count() > 0) {
+        //     $result = $accessory[0];
+        //     return response()->json(Helper::formatStandardApiResponse('success', $result, "accessory"));
+        // }
 
         if ($model->count() > 0) {
             $result = $model[0];
