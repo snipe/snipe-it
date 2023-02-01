@@ -69,7 +69,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'manager_id'   => 'integer',
         'location_id'  => 'integer',
         'company_id'   => 'integer',
-        'vipuser'      => 'boolean',
     ];
 
 
