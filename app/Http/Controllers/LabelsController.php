@@ -24,42 +24,38 @@ class LabelsController extends Controller
      */
     public function show(string $labelName)
     {
-        $this->authorize('view', Label::class);
-
         $labelName = str_replace('/', '\\', $labelName);
         $template = Label::find($labelName);
 
-        $this->authorize('view', $template);
+        $exampleAsset = new Asset();
 
-        $testAsset = new Asset();
+        $exampleAsset->id = 999999;
+        $exampleAsset->name = 'AST-AB-CD-1234';
+        $exampleAsset->asset_tag = 'TCA-00001';
+        $exampleAsset->serial = 'SN9876543210';
 
-        $testAsset->id = 999999;
-        $testAsset->name = 'AST-AB-CD-1234';
-        $testAsset->asset_tag = 'TCA-00001';
-        $testAsset->serial = 'SN9876543210';
+        $exampleAsset->company = new Company();
+        $exampleAsset->company->id = 999999;
+        $exampleAsset->company->name = 'Test Company Limited';
+        $exampleAsset->company->image = 'company-image-test.png';
 
-        $testAsset->company = new Company();
-        $testAsset->company->id = 999999;
-        $testAsset->company->name = 'Test Company Limited';
-        $testAsset->company->image = 'company-image-test.png';
+        $exampleAsset->assignedto = new User();
+        $exampleAsset->assignedto->id = 999999;
+        $exampleAsset->assignedto->first_name = 'Test';
+        $exampleAsset->assignedto->last_name = 'Person';
+        $exampleAsset->assignedto->username = 'Test.Person';
+        $exampleAsset->assignedto->employee_num = '0123456789';
 
-        $testAsset->assignedto = new User();
-        $testAsset->assignedto->id = 999999;
-        $testAsset->assignedto->first_name = 'Test';
-        $testAsset->assignedto->last_name = 'Person';
-        $testAsset->assignedto->username = 'Test.Person';
-        $testAsset->assignedto->employee_num = '0123456789';
-
-        $testAsset->model = new AssetModel();
-        $testAsset->model->id = 999999;
-        $testAsset->model->name = 'Test Model';
-        $testAsset->model->model_number = 'MDL5678';
-        $testAsset->model->manufacturer = new Manufacturer();
-        $testAsset->model->manufacturer->id = 999999;
-        $testAsset->model->manufacturer->name = 'Test Manufacturing Inc.';
-        $testAsset->model->category = new Category();
-        $testAsset->model->category->id = 999999;
-        $testAsset->model->category->name = 'Test Category';
+        $exampleAsset->model = new AssetModel();
+        $exampleAsset->model->id = 999999;
+        $exampleAsset->model->name = 'Test Model';
+        $exampleAsset->model->model_number = 'MDL5678';
+        $exampleAsset->model->manufacturer = new Manufacturer();
+        $exampleAsset->model->manufacturer->id = 999999;
+        $exampleAsset->model->manufacturer->name = 'Test Manufacturing Inc.';
+        $exampleAsset->model->category = new Category();
+        $exampleAsset->model->category->id = 999999;
+        $exampleAsset->model->category->name = 'Test Category';
 
         $settings = Setting::getSettings();
         if (request()->has('settings')) {
@@ -70,7 +66,7 @@ class LabelsController extends Controller
         }
 
         return (new LabelView())
-            ->with('assets', collect([$testAsset]))
+            ->with('assets', collect([$exampleAsset]))
             ->with('settings', $settings)
             ->with('template', $template)
             ->with('bulkedit', false)
