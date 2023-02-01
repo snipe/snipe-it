@@ -542,9 +542,10 @@ class UsersController extends Controller
         if (empty($user->email)) {
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.inventorynotification.error')));
         }
+
+        $user->notify((new CurrentInventory($user)));
  
-        return response()->Helper::formatStandardApiResponse('success', null, trans('admin/users/message.inventorynotification.success'));
- 
+        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.inventorynotification.success')));
     }
 
     /**
