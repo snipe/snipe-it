@@ -519,7 +519,7 @@
                     </div>
                     @endif
 
-                    <!-- login enabled -->
+                     <!-- login enabled -->
                      <div class="row">
                       <div class="col-md-3">
                         {{ trans('admin/users/general.remote') }}
