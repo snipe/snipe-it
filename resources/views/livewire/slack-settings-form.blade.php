@@ -8,6 +8,7 @@
         @endif
         <form wire:submit.prevent ="submit">
         {{csrf_field()}}
+
         <!--slack endpoint-->
         <div class="form-group required {{ $errors->has('slack_endpoint') ? 'error' : '' }}">
             <div class="col-md-2">
@@ -17,9 +18,9 @@
                 @if (config('app.lock_passwords')===true)
 {{--                                    {{ Form::text('slack_endpoint', old('slack_endpoint', $setting->slack_endpoint), array('class' => 'form-control','disabled'=>'disabled','placeholder' => 'https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX', 'id' => 'slack_endpoint')) }}--}}
                     <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
-                    <input type="text" wire:model.defer="slack_endpoint" id="slack_endpoint" class= 'form-control' placeholder="'https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX'" {{old('slack_endpoint', $slack_endpoint)}} ><br>
+                    <input type="text" wire:model.lazy="slack_endpoint" id="slack_endpoint" class= 'form-control' placeholder="'https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX'" {{old('slack_endpoint', $slack_endpoint)}} ><br>
                 @else
-                    <input type="text" wire:model.defer="slack_endpoint" id="slack_endpoint" class= 'form-control' placeholder="'https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX'" {{old('slack_endpoint', $slack_endpoint)}} ><br>
+                    <input type="text" wire:model.lazy="slack_endpoint" id="slack_endpoint" class= 'form-control' placeholder="'https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX'" {{old('slack_endpoint', $slack_endpoint)}} ><br>
 {{--                                    {{ Form::text('slack_endpoint', old('slack_endpoint', $setting->slack_endpoint), array('class' => 'form-control','placeholder' => 'https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX', 'id' => 'slack_endpoint')) }}--}}
                 @endif
                 {!! $errors->first('slack_endpoint', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
@@ -33,11 +34,11 @@
             </div>
             <div class="col-md-10">
                 @if (config('app.lock_passwords')===true)
-                    <input type="text" wire:model.defer="slack_channel" id="slack_channel" class= 'form-control' placeholder="'#IT-Ops'" {{old('slack_channel', $slack_channel)}} ><br>
+                    <input type="text" wire:model.lazy="slack_channel" id="slack_channel" class= 'form-control' placeholder="'#IT-Ops'" {{old('slack_channel', $slack_channel)}} ><br>
                     <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
 
                 @else
-                    <input type="text" wire:model.defer="slack_channel" id="slack_channel" class= 'form-control' placeholder="'#IT-Ops'" {{old('slack_channel', $slack_channel)}} ><br>
+                    <input type="text" wire:model.lazy="slack_channel" id="slack_channel" class= 'form-control' placeholder="'#IT-Ops'" {{old('slack_channel', $slack_channel)}} ><br>
                 @endif
                 {!! $errors->first('slack_channel', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
             </div>
@@ -51,15 +52,39 @@
             <div class="col-md-10">
                 @if (config('app.lock_passwords')===true)
 {{--                    {{ Form::text('slack_botname', old('slack_botname', $setting->slack_botname), array('class' => 'form-control','disabled'=>'disabled','placeholder' => 'Snipe-Bot')) }}--}}
-                    <input type="text" wire:model.defer="slack_botname" id="slack_botname" class= 'form-control' placeholder="'Snipe-Bot'" {{old('slack_botname', $slack_botname)}} ><br>
+                    <input type="text" wire:model.lazy="slack_botname" id="slack_botname" class= 'form-control' placeholder="'Snipe-Bot'" {{old('slack_botname', $slack_botname)}} ><br>
                     <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
 
                 @else
-                    <input type="text" wire:model.defer="slack_botname" id="slack_botname" class= 'form-control' placeholder="'Snipe-Bot'" {{old('slack_botname', $slack_botname)}} ><br>
+                    <input type="text" wire:model.lazy="slack_botname" id="slack_botname" class= 'form-control' placeholder="'Snipe-Bot'" {{old('slack_botname', $slack_botname)}} ><br>
                 @endif
                 {!! $errors->first('slack_botname', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
             </div><!--col-md-10-->
         </div>
+
+        <!--Slack Integration Test-->
+            @if($slack_endpoint != null && $slack_channel != null && $slack_botname != null)
+<div class="form-group">
+                <div class="col-md-2">
+                    {{ Form::label('test_slack', 'Test Slack') }}
+                </div>
+                <div class="col-md-10">
+                    <button wire:submit.prevent="testSlack({{$slack_channel,$slack_endpoint,$slack_botname}})" id="test_slack" class="btn btn-default btn-sm pull-left"><span>{!! trans('admin/settings/general.slack_test') !!}</span></button>
+                    <div wire:loading><i class="fas fa-spinner spin"></i></div>
+                    @if($response == 'success')
+                        message here
+                    @endif
+                    @if($response == 'error')
+                        message here
+                    @endif
+                </div>
+</div>
+            @endif
+{{--                <div class="col-md-10 col-md-offset-2">--}}
+{{--                    <span id="slacktesticon"></span>--}}
+{{--                    <span id="slacktestresult"></span>--}}
+{{--                    <span id="slackteststatus"></span>--}}
+{{--                </div>--}}
 
         <div class="box-footer">
             <div class="text-left col-md-6">

@@ -19,11 +19,9 @@
             padding-right: 40px;
         }
     </style>
-    {{csrf_field()}}
 
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-
 
             <div class="panel box box-default">
                 <div class="box-header with-border">
@@ -33,14 +31,11 @@
                 </div>
                 <div class="box-body">
 
-
                     <p style="padding: 20px;">
                         {!! trans('admin/settings/general.slack_integration_help',array('slack_link' => 'https://my.slack.com/services/new/incoming-webhook')) !!}
                     </p>
 
                     @livewire('slack-settings-form')
-
-
 
         </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->

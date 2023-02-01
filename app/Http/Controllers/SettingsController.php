@@ -688,15 +688,15 @@ class SettingsController extends Controller
      *
      * @return View
      */
-    public function postSlack(SlackSettingsRequest $request)
+    public function postSlack($slack_endpoint,$slack_channel,$slack_botname)
     {
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
-        $setting->slack_endpoint = $request->input('slack_endpoint');
-        $setting->slack_channel = $request->input('slack_channel');
-        $setting->slack_botname = $request->input('slack_botname');
+        $setting->slack_endpoint = $slack_endpoint;
+        $setting->slack_channel = $slack_channel;
+        $setting->slack_botname = $slack_botname;
 
         if ($setting->save()) {
             return redirect()->route('settings.index')

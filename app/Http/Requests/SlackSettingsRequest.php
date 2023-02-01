@@ -25,7 +25,6 @@ class SlackSettingsRequest extends Request
             'slack_endpoint'                      => 'url|required_with:slack_channel|starts_with:"https://hooks.slack.com"|nullable',
             'slack_channel'                       => 'required_with:slack_endpoint|starts_with:#|nullable',
             'slack_botname'                       => 'string|nullable',
-
         ];
     }
 

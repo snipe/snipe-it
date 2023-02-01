@@ -4,27 +4,15 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Setting;
+use App\Http\Controllers\Api\SettingsController;
 
 class SlackSettingsForm extends Component
 {
     public $slack_endpoint;
     public $slack_channel;
     public $slack_botname;
-    public $successMessage;
 
     public Setting $setting;
-
-    protected $rules = [
-        'slack_endpoint'                      => 'url|required_with:slack_channel|starts_with:https://hooks.slack.com/|nullable',
-        'slack_channel'                       => 'required_with:slack_endpoint|starts_with:#|nullable',
-        'slack_botname'                       => 'string|nullable',
-        ];
-    protected $messages = [
-        'slack_endpoint.required_with' => 'Slack endpoint is required',
-        'slack_endpoint.starts_with'   => 'Slack endpoint must start with https://hooks.slack.com',
-
-
-    ];
 
     public function mount(){
 
@@ -40,6 +28,11 @@ class SlackSettingsForm extends Component
         return view('livewire.slack-settings-form');
     }
 
+    public function testSlack($slack_endpoint, $slack_channel, $slack_botname){
+        SettingsController::testSlack($slack_endpoint,$slack_channel,$slack_botname);
+
+
+    }
     public function submit()
     {
         $this->validate([
