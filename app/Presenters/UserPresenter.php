@@ -86,15 +86,6 @@ class UserPresenter extends Presenter
                 'formatter' => 'usersLinkFormatter',
             ],
             [
-                'field' => 'vipuser',
-                'searchable' => false,
-                'sortable' => true,
-                'switchable' => true,
-                'title' => trans('admin/users/general.vip_label'),
-                'visible' => false,
-                'formatter' => 'trueFalseFormatter',
-            ],
-            [
                 'field' => 'remote',
                 'searchable' => false,
                 'sortable' => true,

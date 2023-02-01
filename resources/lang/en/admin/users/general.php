@@ -41,6 +41,3 @@ return [
     'remote'   => 'Remote',
     'remote_help' => 'This can be useful if you need to filter by remote users who never or rarely come into your physical locations.',
     'not_remote_label' => 'This is not a remote user',
-    'vip_label' => 'VIP user',
-    'vip_help' => 'This can be helpful to mark important people if you would like',
-];

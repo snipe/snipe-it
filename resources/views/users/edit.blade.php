@@ -362,19 +362,6 @@
 
                           @include ('partials.forms.edit.datepicker', ['translated_name' => trans('general.end_date'), 'fieldname' => 'end_date', 'item' => $user])
 
-                          <!-- VIP checkbox -->
-                          <div class="form-group">
-                              <div class="col-md-7 col-md-offset-3">
-                                  <label for="vipuser">
-                                      <input type="checkbox" value="1" name="vipuser" class="minimal" {{ (old('vipuser', $user->vipuser)) == '1' ? ' checked="checked"' : '' }} aria-label="vipuser">
-                                      {{ trans('admin/users/general.vip_label') }}
-
-                                  </label>
-                                  <p class="help-block">{{ trans('admin/users/general.vip_help') }}
-                                  </p>
-                              </div>
-                          </div>
-
 
                           <!-- remote checkbox -->
                           <div class="form-group">
