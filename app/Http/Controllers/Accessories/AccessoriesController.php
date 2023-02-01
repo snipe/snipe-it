@@ -63,7 +63,6 @@ class AccessoriesController extends Controller
     public function store(ImageUploadRequest $request)
     {
         $this->authorize(Accessory::class);
-        
         // create a new model instance
         $accessory = new Accessory();
 
@@ -82,6 +81,7 @@ class AccessoriesController extends Controller
         $accessory->user_id                 = Auth::user()->id;
         $accessory->supplier_id             = request('supplier_id');
         $accessory->notes                   = request('notes');
+
 
         $accessory = $request->handleImages($accessory);
 
@@ -127,45 +127,43 @@ class AccessoriesController extends Controller
      */
     public function update(ImageUploadRequest $request, $accessoryId = null)
     {
-        if ($accessory = Accessory::withCount('users as users_count')->find($accessoryId)) {
-
-            $this->authorize($accessory);
-
-            $validator = Validator::make($request->all(), [
-                "qty" => "required|numeric|min:$accessory->users_count"
-            ]);
-
-            if ($validator->fails()) {
-                return redirect()->back()
-                    ->withErrors($validator)
-                    ->withInput();
-            }
-
-
-
-            // Update the accessory data
-            $accessory->name = request('name');
-            $accessory->location_id = request('location_id');
-            $accessory->min_amt = request('min_amt');
-            $accessory->category_id = request('category_id');
-            $accessory->company_id = Company::getIdForCurrentUser(request('company_id'));
-            $accessory->manufacturer_id = request('manufacturer_id');
-            $accessory->order_number = request('order_number');
-            $accessory->model_number = request('model_number');
-            $accessory->purchase_date = request('purchase_date');
-            $accessory->purchase_cost = Helper::ParseCurrency(request('purchase_cost'));
-            $accessory->qty = request('qty');
-            $accessory->supplier_id = request('supplier_id');
-            $accessory->notes = request('notes');
-
-            $accessory = $request->handleImages($accessory);
-
-            // Was the accessory updated?
-            if ($accessory->save()) {
-                return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.update.success'));
-            }
-        } else {
+        if (is_null($accessory = Accessory::find($accessoryId))) {
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
+        }
+
+        $min = $accessory->numCheckedOut();
+        $validator = Validator::make($request->all(), [
+            "qty" => "required|numeric|min:$min"
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $this->authorize($accessory);
+
+        // Update the accessory data
+        $accessory->name                    = request('name');
+        $accessory->location_id             = request('location_id');
+        $accessory->min_amt                 = request('min_amt');
+        $accessory->category_id             = request('category_id');
+        $accessory->company_id              = Company::getIdForCurrentUser(request('company_id'));
+        $accessory->manufacturer_id         = request('manufacturer_id');
+        $accessory->order_number            = request('order_number');
+        $accessory->model_number            = request('model_number');
+        $accessory->purchase_date           = request('purchase_date');
+        $accessory->purchase_cost           = Helper::ParseCurrency(request('purchase_cost'));
+        $accessory->qty                     = request('qty');
+        $accessory->supplier_id             = request('supplier_id');
+        $accessory->notes                   = request('notes');
+
+        $accessory = $request->handleImages($accessory);
+
+        // Was the accessory updated?
+        if ($accessory->save()) {
+            return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.update.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($accessory->getErrors());
@@ -219,7 +217,7 @@ class AccessoriesController extends Controller
      */
     public function show($accessoryID = null)
     {
-        $accessory = Accessory::withCount('users as users_count')->find($accessoryID);
+        $accessory = Accessory::find($accessoryID);
         $this->authorize('view', $accessory);
         if (isset($accessory->id)) {
             return view('accessories/view', compact('accessory'));

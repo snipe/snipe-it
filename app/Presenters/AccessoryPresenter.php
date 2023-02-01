@@ -80,25 +80,19 @@ class AccessoryPresenter extends Presenter
             ], [
                 'field' => 'qty',
                 'searchable' => false,
-                'sortable' => true,
+                'sortable' => false,
                 'title' => trans('admin/accessories/general.total'),
+            ],  [
+                'field' => 'min_qty',
+                'searchable' => false,
+                'sortable' => true,
+                'title' => trans('general.min_amt'),
             ], [
                 'field' => 'remaining_qty',
                 'searchable' => false,
                 'sortable' => false,
                 'visible' => false,
                 'title' => trans('admin/accessories/general.remaining'),
-            ],[
-                'field' => 'users_count',
-                'searchable' => false,
-                'sortable' => true,
-                'visible' => true,
-                'title' => trans('general.checked_out'),
-            ], [
-                'field' => 'min_qty',
-                'searchable' => false,
-                'sortable' => true,
-                'title' => trans('general.min_amt'),
             ], [
                 'field' => 'purchase_date',
                 'searchable' => true,

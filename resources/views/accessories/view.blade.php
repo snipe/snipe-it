@@ -290,7 +290,7 @@
       @if ($accessory->company)
           <div class="row">
               <div class="col-md-4" style="padding-bottom: 15px;">
-                  <strong> {{ trans('general.company')}}</strong>
+                  {{ trans('general.company')}}
               </div>
               <div class="col-md-8">
                   <a href="{{ route('companies.show', $accessory->company->id) }}">{{ $accessory->company->name }} </a>
@@ -302,7 +302,7 @@
       @if ($accessory->category)
           <div class="row">
               <div class="col-md-4" style="padding-bottom: 15px;">
-                  <strong>{{ trans('general.category')}}</strong>
+                  {{ trans('general.category')}}
               </div>
               <div class="col-md-8">
                   <a href="{{ route('categories.show', $accessory->category->id) }}">{{ $accessory->category->name }} </a>
@@ -327,19 +327,10 @@
 
       <div class="row">
           <div class="col-md-4" style="padding-bottom: 15px;">
-              <strong>{{ trans('admin/accessories/general.remaining') }}</strong>
+              Number remaining
           </div>
           <div class="col-md-8">
               {{ $accessory->numRemaining() }}
-          </div>
-      </div>
-
-      <div class="row">
-          <div class="col-md-4" style="padding-bottom: 15px;">
-              <strong>{{ trans('general.checked_out') }}</strong>
-          </div>
-          <div class="col-md-8">
-              {{ $accessory->users_count }}
           </div>
       </div>
 
