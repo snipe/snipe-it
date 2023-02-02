@@ -143,37 +143,6 @@ class SettingsController extends Controller
 
     }
 
-    public function slacktest($slack_endpoint,$slack_channel,$slack_botname)
-    {
-        // If validation passes, continue to the curl request
-            $slack = new Client([
-                'base_url' => e($slack_endpoint),
-                'defaults' => [
-                    'exceptions' => false,
-                ],
-            ]);
-
-            $payload = json_encode(
-                [
-                    'channel'    => e($slack_channel),
-                    'text'       => trans('general.slack_test_msg'),
-                    'username'    => e($slack_botname),
-                    'icon_emoji' => ':heart:',
-                ]);
-
-            try {
-                $slack->post($slack_endpoint, ['body' => $payload]);
-                return response()->json(['message' => 'Success'], 200);
-
-            } catch (\Exception $e) {
-                return response()->json(['message' => 'Please check the channel name and webhook endpoint URL ('.e($slack_endpoint).'). Slack responded with: '.$e->getMessage()], 400);
-            }
-
-        //} 
-        return response()->json(['message' => 'Something went wrong :( '], 400);
-    }
-
-
     /**
      * Test the email configuration
      *

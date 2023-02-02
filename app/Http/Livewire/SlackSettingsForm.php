@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use GuzzleHttp\Client;
 use Livewire\Component;
 use App\Models\Setting;
-use App\Http\Controllers\Api\SettingsController;
 
 class SlackSettingsForm extends Component
 {
@@ -28,8 +28,35 @@ class SlackSettingsForm extends Component
         return view('livewire.slack-settings-form');
     }
 
-    public function testSlack($slack_endpoint, $slack_channel, $slack_botname){
-        SettingsController::testSlack($slack_endpoint,$slack_channel,$slack_botname);
+    public function testSlack(){
+
+        // If validation passes, continue to the curl request
+        $slack = new Client([
+            'base_url' => e($this->slack_endpoint),
+            'defaults' => [
+                'exceptions' => false,
+            ],
+        ]);
+
+        $payload = json_encode(
+            [
+                'channel'    => e($this->slack_channel),
+                'text'       => trans('general.slack_test_msg'),
+                'username'    => e($this->slack_botname),
+                'icon_emoji' => ':heart:',
+            ]);
+
+        try {
+            $slack->post($this->slack_endpoint, ['body' => $payload]);
+            return session()->flash('success' , 'Your Slack Integration works!');
+
+        } catch (\Exception $e) {
+            return session()->flash('error' , 'Please check the channel name and webhook endpoint URL ('.e($this->slack_endpoint).'). Slack responded with: '.$e->getMessage());
+        }
+
+        //}
+        return session()->flash('message' , 'Something went wrong :( ');
+
 
 
     }
@@ -47,7 +74,7 @@ class SlackSettingsForm extends Component
 
         $this->setting->save();
 
-        session()->flash('message',trans('admin/settings/message.update.success'));
+        session()->flash('save',trans('admin/settings/message.update.success'));
 
 
     }

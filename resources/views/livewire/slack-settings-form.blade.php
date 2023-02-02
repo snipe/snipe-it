@@ -1,11 +1,26 @@
 
 
     <div class="col-md-12" style="border-top: 0px;">
-        @if (session()->has('message'))
+        @if (session()->has('save'))
         <div class="alert alert-success">
-            {{session('message')}}
+            {{session('save')}}
         </div>
         @endif
+            @if(session()->has('success'))
+                <div class="alert alert-success">
+                    {{session('success')}}
+                </div>
+            @endif
+            @if(session()->has('error'))
+                <div class="alert alert-danger">
+                    {{session('error')}}
+                </div>
+            @endif
+            @if(session()->has('message'))
+                <div class="alert alert-danger">
+                    {{session('message')}}
+                </div>
+            @endif
         <form wire:submit.prevent ="submit">
         {{csrf_field()}}
 
@@ -34,11 +49,11 @@
             </div>
             <div class="col-md-10">
                 @if (config('app.lock_passwords')===true)
-                    <input type="text" wire:model.lazy="slack_channel" id="slack_channel" class= 'form-control' placeholder="'#IT-Ops'" {{old('slack_channel', $slack_channel)}} ><br>
+                    <input type="text" wire:model.lazy="slack_channel" id="slack_channel" class='form-control' placeholder="#IT-Ops" value="{{old('slack_channel', $slack_channel)}}" ><br>
                     <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
 
                 @else
-                    <input type="text" wire:model.lazy="slack_channel" id="slack_channel" class= 'form-control' placeholder="'#IT-Ops'" {{old('slack_channel', $slack_channel)}} ><br>
+                    <input type="text" wire:model.lazy="slack_channel" id="slack_channel" class= 'form-control' placeholder="#IT-Ops" value="{{old('slack_channel', $slack_channel)}}" ><br>
                 @endif
                 {!! $errors->first('slack_channel', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
             </div>
@@ -64,33 +79,21 @@
 
         <!--Slack Integration Test-->
             @if($slack_endpoint != null && $slack_channel != null && $slack_botname != null)
-<div class="form-group">
+        <div class="form-group">
                 <div class="col-md-2">
                     {{ Form::label('test_slack', 'Test Slack') }}
                 </div>
                 <div class="col-md-10">
-                    <button wire:submit.prevent="testSlack({{$slack_channel,$slack_endpoint,$slack_botname}})" id="test_slack" class="btn btn-default btn-sm pull-left"><span>{!! trans('admin/settings/general.slack_test') !!}</span></button>
+                    <a href="#" wire:click.prevent="testSlack" id="test_slack" class="btn btn-default btn-sm pull-left"><span>{!! trans('admin/settings/general.slack_test') !!}</span></a>
                     <div wire:loading><i class="fas fa-spinner spin"></i></div>
-                    @if($response == 'success')
-                        message here
-                    @endif
-                    @if($response == 'error')
-                        message here
-                    @endif
                 </div>
-</div>
+        </div>
             @endif
-{{--                <div class="col-md-10 col-md-offset-2">--}}
-{{--                    <span id="slacktesticon"></span>--}}
-{{--                    <span id="slacktestresult"></span>--}}
-{{--                    <span id="slackteststatus"></span>--}}
-{{--                </div>--}}
 
-        <div class="box-footer">
-            <div class="text-left col-md-6">
+        <div class="box-footer" style="margin-top: 45px;">
+
+            <div class="text-right col-md-12">
                 <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
-            </div>
-            <div class="text-right col-md-6">
                 <button type="submit" id="save_slack" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
             </div>
         </div><!--box-footer-->
