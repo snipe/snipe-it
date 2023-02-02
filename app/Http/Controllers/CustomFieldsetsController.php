@@ -196,7 +196,7 @@ class CustomFieldsetsController extends Controller
      */
     public function associate(Request $request, $id)
     {
-        $set = CustomField::find($id);
+        $set = CustomFieldset::find($id);
 
         $this->authorize('update', $set);
 
