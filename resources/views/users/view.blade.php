@@ -954,7 +954,8 @@
                   @endif
                   <th class="col-sm-3" data-field="item.serial" data-visible="false">{{ trans('admin/hardware/table.serial') }}</th>
                   <th class="col-sm-3" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
-                <th class="col-sm-2" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
+                  <th class="col-sm-3" data-field="note">{{ trans('general.notes') }}</th>
+                  <th class="col-sm-2" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
               </tr>
               </thead>
             </table>
