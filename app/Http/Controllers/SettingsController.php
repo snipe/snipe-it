@@ -688,33 +688,6 @@ class SettingsController extends Controller
      *
      * @return View
      */
-    public function postSlack($slack_endpoint,$slack_channel,$slack_botname)
-    {
-        if (is_null($setting = Setting::getSettings())) {
-            return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
-        }
-
-        $setting->slack_endpoint = $slack_endpoint;
-        $setting->slack_channel = $slack_channel;
-        $setting->slack_botname = $slack_botname;
-
-        if ($setting->save()) {
-            return redirect()->route('settings.index')
-                ->with('success', trans('admin/settings/message.update.success'));
-        }
-
-        return redirect()->back()->withInput()->withErrors($setting->getErrors());
-    }
-
-    /**
-     * Return a form to allow a super admin to update settings.
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
-     * @since [v1.0]
-     *
-     * @return View
-     */
     public function getAssetTags()
     {
         $setting = Setting::getSettings();
