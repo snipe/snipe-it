@@ -85,7 +85,7 @@
             <div class="col-md-12">
                 <div class="alert alert-danger">
                     <i class="fas fa-exclamation-triangle faa-pulse animated" aria-hidden="true"></i>
-                    <strong>{{ trans('general.'notification_warning') }} </strong>
+                    <strong>{{ trans('general.notification_warning') }} </strong>
                     {{ trans('general.asset_deleted_warning') }}
                 </div>
             </div>
