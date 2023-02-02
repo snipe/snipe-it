@@ -113,6 +113,13 @@ $config = [
             'handler' => \Rollbar\Laravel\MonologHandler::class,
             'access_token' => env('ROLLBAR_TOKEN'),
             'level' => env('ROLLBAR_LEVEL', 'error'),
+            'check_ignore' => function($isUncaught, $args, $payload) {
+                if (method_exists($args, 'getMessage') && strstr($args->getMessage(), 'Declaration of')) {
+                    return true;
+                }
+
+                return false;
+            },
         ],
     ],
 
