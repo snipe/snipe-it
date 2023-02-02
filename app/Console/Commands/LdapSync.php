@@ -44,12 +44,17 @@ class LdapSync extends Command
      */
     public function handle()
     {
+
+        // If LDAP enabled isn't set to 1 (ldap_enabled!=1) then we should cut this short immediately without going any further
+        if (Setting::getSettings()->ldap_enabled!='1') {
+            $this->error('LDAP is not enabled. Aborting. See Settings > LDAP to enable it.');
+        }
+
         ini_set('max_execution_time', env('LDAP_TIME_LIM', 600)); //600 seconds = 10 minutes
         ini_set('memory_limit', env('LDAP_MEM_LIM', '500M'));
         $ldap_result_username = Setting::getSettings()->ldap_username_field;
         $ldap_result_last_name = Setting::getSettings()->ldap_lname_field;
         $ldap_result_first_name = Setting::getSettings()->ldap_fname_field;
-
         $ldap_result_active_flag = Setting::getSettings()->ldap_active_flag;
         $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num;
         $ldap_result_email = Setting::getSettings()->ldap_email;
@@ -303,17 +308,18 @@ class LdapSync extends Command
                         $user->activated = 0;
                     } */
                     $enabled_accounts = [
-                    '512',    // 0x200    NORMAL_ACCOUNT
-                    '544',    // 0x220    NORMAL_ACCOUNT, PASSWD_NOTREQD
-                    '66048',  // 0x10200  NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD
-                    '66080',  // 0x10220  NORMAL_ACCOUNT, PASSWD_NOTREQD, DONT_EXPIRE_PASSWORD
-                    '262656', // 0x40200  NORMAL_ACCOUNT, SMARTCARD_REQUIRED
-                    '262688', // 0x40220  NORMAL_ACCOUNT, PASSWD_NOTREQD, SMARTCARD_REQUIRED
-                    '328192', // 0x50200  NORMAL_ACCOUNT, SMARTCARD_REQUIRED, DONT_EXPIRE_PASSWORD
-                    '328224', // 0x50220  NORMAL_ACCOUNT, PASSWD_NOT_REQD, SMARTCARD_REQUIRED, DONT_EXPIRE_PASSWORD
-                    '4194816',// 0x400200 NORMAL_ACCOUNT, DONT_REQ_PREAUTH
+                    '512',    //     0x200 NORMAL_ACCOUNT
+                    '544',    //     0x220 NORMAL_ACCOUNT, PASSWD_NOTREQD
+                    '66048',  //   0x10200 NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD
+                    '66080',  //   0x10220 NORMAL_ACCOUNT, PASSWD_NOTREQD, DONT_EXPIRE_PASSWORD
+                    '262656', //   0x40200 NORMAL_ACCOUNT, SMARTCARD_REQUIRED
+                    '262688', //   0x40220 NORMAL_ACCOUNT, PASSWD_NOTREQD, SMARTCARD_REQUIRED
+                    '328192', //   0x50200 NORMAL_ACCOUNT, SMARTCARD_REQUIRED, DONT_EXPIRE_PASSWORD
+                    '328224', //   0x50220 NORMAL_ACCOUNT, PASSWD_NOT_REQD, SMARTCARD_REQUIRED, DONT_EXPIRE_PASSWORD
+                    '4194816',//  0x400200 NORMAL_ACCOUNT, DONT_REQ_PREAUTH
                     '4260352', // 0x410200 NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD, DONT_REQ_PREAUTH
                     '1049088', // 0x100200 NORMAL_ACCOUNT, NOT_DELEGATED
+                    '1114624', // 0x110200 NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD, NOT_DELEGATED,
                   ];
                     $user->activated = (in_array($results[$i]['useraccountcontrol'][0], $enabled_accounts)) ? 1 : 0;
 
