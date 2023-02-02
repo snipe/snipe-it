@@ -48,6 +48,7 @@ class LdapSync extends Command
         // If LDAP enabled isn't set to 1 (ldap_enabled!=1) then we should cut this short immediately without going any further
         if (Setting::getSettings()->ldap_enabled!='1') {
             $this->error('LDAP is not enabled. Aborting. See Settings > LDAP to enable it.');
+            exit();
         }
 
         ini_set('max_execution_time', env('LDAP_TIME_LIM', 600)); //600 seconds = 10 minutes
