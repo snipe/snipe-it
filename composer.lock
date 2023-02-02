@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0c1f3848f8c9ede2b5f1513e4feaa7d7",
+    "content-hash": "4fed0ab76a34ef85a44568e470abab48",
     "packages": [
         {
             "name": "alek13/slack",
@@ -78,12 +78,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/grokability/laravel-scim-server.git",
-                "reference": "2c7ecc450eee59234e059ec2e7724b2d8f3a8369"
+                "reference": "9e8dd2d3958d3c3c05d0a99fe6475361ad9e9419"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/grokability/laravel-scim-server/zipball/2c7ecc450eee59234e059ec2e7724b2d8f3a8369",
-                "reference": "2c7ecc450eee59234e059ec2e7724b2d8f3a8369",
+                "url": "https://api.github.com/repos/grokability/laravel-scim-server/zipball/9e8dd2d3958d3c3c05d0a99fe6475361ad9e9419",
+                "reference": "9e8dd2d3958d3c3c05d0a99fe6475361ad9e9419",
                 "shasum": ""
             },
             "require": {
@@ -133,7 +133,7 @@
             "support": {
                 "source": "https://github.com/grokability/laravel-scim-server/tree/master"
             },
-            "time": "2022-11-22T20:26:54+00:00"
+            "time": "2023-01-12T00:32:07+00:00"
         },
         {
             "name": "asm89/stack-cors",
@@ -11847,16 +11847,16 @@
         },
         {
             "name": "laravel/dusk",
-            "version": "v6.25.0",
+            "version": "v6.25.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/dusk.git",
-                "reference": "b4632b7493a187d31afc5c9ddec437c81b16421a"
+                "reference": "25a595ac3dc82089a91af10dd23b0d58fd3f6d0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/dusk/zipball/b4632b7493a187d31afc5c9ddec437c81b16421a",
-                "reference": "b4632b7493a187d31afc5c9ddec437c81b16421a",
+                "url": "https://api.github.com/repos/laravel/dusk/zipball/25a595ac3dc82089a91af10dd23b0d58fd3f6d0b",
+                "reference": "25a595ac3dc82089a91af10dd23b0d58fd3f6d0b",
                 "shasum": ""
             },
             "require": {
@@ -11914,9 +11914,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/dusk/issues",
-                "source": "https://github.com/laravel/dusk/tree/v6.25.0"
+                "source": "https://github.com/laravel/dusk/tree/v6.25.2"
             },
-            "time": "2022-07-11T11:38:43+00:00"
+            "time": "2022-09-29T09:37:07+00:00"
         },
         {
             "name": "mockery/mockery",

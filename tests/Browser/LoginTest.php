@@ -2,8 +2,8 @@
 
 namespace Tests\Browser;
 
+use App\Models\Setting;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
@@ -26,6 +26,9 @@ class LoginTest extends DuskTestCase
         $user->permissions = '{"superuser": 1}';
 
         $user->save();
+
+        Setting::factory()->create();
+
         $this->browse(function (Browser $browser) {
             $browser->visitRoute('login')
                 ->assertSee(trans('auth/general.login_prompt'));
@@ -37,10 +40,7 @@ class LoginTest extends DuskTestCase
                     ->type('password', 'password')
                     ->press(trans('auth/general.login'))
                     ->assertPathIs('/');
-            $browser->screenshot('dashboard'); 
+            $browser->screenshot('dashboard');
         });
-
-        // Delete the user afterwards
-        $user->delete();
     }
 }

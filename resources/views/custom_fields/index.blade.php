@@ -69,8 +69,18 @@
                 @endforeach
               </td>
               <td>
+
+                <nobr>
+
+                @can('update', $fieldset)
+                  <a href="{{ route('fieldsets.edit', $fieldset->id) }}" class="btn btn-warning btn-sm">
+                    <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                    <span class="sr-only">{{ trans('button.edit') }}</span>
+                  </a>
+                @endcan
+
                 @can('delete', $fieldset)
-                {{ Form::open(['route' => array('fieldsets.destroy', $fieldset->id), 'method' => 'delete']) }}
+                {{ Form::open(['route' => array('fieldsets.destroy', $fieldset->id), 'method' => 'delete','style' => 'display:inline-block']) }}
                   @if($fieldset->models->count() > 0)
                   <button type="submit" class="btn btn-danger btn-sm disabled" disabled><i class="fas fa-trash"></i></button>
                   @else
@@ -78,6 +88,7 @@
                   @endif
                 {{ Form::close() }}
                 @endcan
+                  </nobr>
               </td>
             </tr>
             @endforeach

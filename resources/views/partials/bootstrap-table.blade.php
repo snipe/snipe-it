@@ -327,8 +327,8 @@
                 item_icon = '';
             }
 
-            // display the username if it's checked out to a user
-            if (value.username) {
+            // display the username if it's checked out to a user, but don't do it if the username's there already
+            if (value.username && !value.name.match('\\(') && !value.name.match('\\)')) {
                 value.name = value.name + ' (' + value.username + ')';
             }
 
