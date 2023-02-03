@@ -22,8 +22,7 @@ class UsersForSelectListTest extends TestCase
         User::factory()->count(3)->create();
 
         Passport::actingAs($actor);
-        $response = $this->getJson(route('api.users.selectlist'));
-        $response->assertOk();
+        $response = $this->getJson(route('api.users.selectlist'))->assertOk();
 
         $response->assertJsonStructure([
             'results',
@@ -57,8 +56,7 @@ class UsersForSelectListTest extends TestCase
             ->create();
 
         Passport::actingAs($jedi->users->first());
-        $response = $this->getJson(route('api.users.selectlist'));
-        $response->assertOk();
+        $response = $this->getJson(route('api.users.selectlist'))->assertOk();
 
         $results = collect($response->json('results'));
 
@@ -75,6 +73,36 @@ class UsersForSelectListTest extends TestCase
 
     public function testUsersScopedToCompanyDuringSearchWhenMultipleFullCompanySupportEnabled()
     {
-        
+        Setting::factory()->withMultipleFullCompanySupport()->create();
+
+        [$jedi, $sith] = Company::factory()->count(2)->create();
+
+        User::factory()
+            ->for($sith)
+            ->create(['first_name' => 'Darth', 'last_name' => 'Vader', 'username' => 'dvader']);
+
+        User::factory()
+            ->for($jedi)
+            ->count(3)
+            ->sequence(
+                ['first_name' => 'Luke', 'last_name' => 'Skywalker', 'username' => 'lskywalker'],
+                ['first_name' => 'Obi-Wan', 'last_name' => 'Kenobi', 'username' => 'okenobi'],
+                ['first_name' => 'Anakin', 'last_name' => 'Skywalker', 'username' => 'askywalker'],
+            )
+            ->create();
+
+        Passport::actingAs($jedi->users->first());
+
+        $response = $this->getJson(route('api.users.selectlist', ['search' => 'a']))->assertOk();
+
+        $results = collect($response->json('results'));
+
+        $this->assertEquals(3, $results->count());
+        $this->assertTrue($results->pluck('text')->contains(fn($text) => str_contains($text, 'Luke')));
+        $this->assertTrue($results->pluck('text')->contains(fn($text) => str_contains($text, 'Anakin')));
+
+        $response = $this->getJson(route('api.users.selectlist', ['search' => 'v']))->assertOk();
+        $results = collect($response->json('results'));
+        $this->assertEquals(0, $results->count());
     }
 }
