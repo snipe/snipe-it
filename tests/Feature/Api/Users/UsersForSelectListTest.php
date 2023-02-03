@@ -18,41 +18,33 @@ class UsersForSelectListTest extends TestCase
     {
         Setting::factory()->create();
 
-        $actor = User::factory()->firstAdmin()->create();
         User::factory()->count(3)->create();
 
-        Passport::actingAs($actor);
-        $response = $this->getJson(route('api.users.selectlist'))->assertOk();
-
-        $response->assertJsonStructure([
-            'results',
-            'pagination',
-            'total_count',
-            'page',
-            'page_count',
-        ]);
-
-        $response->assertJson(fn(AssertableJson $json) => $json->has('results', 4)->etc());
+        Passport::actingAs(User::factory()->firstAdmin()->create());
+        $this->getJson(route('api.users.selectlist'))
+            ->assertOk()
+            ->assertJsonStructure([
+                'results',
+                'pagination',
+                'total_count',
+                'page',
+                'page_count',
+            ])
+            ->assertJson(fn(AssertableJson $json) => $json->has('results', 4)->etc());
     }
 
     public function testUsersScopedToCompanyWhenMultipleFullCompanySupportEnabled()
     {
         Setting::factory()->withMultipleFullCompanySupport()->create();
 
-        [$jedi, $sith] = Company::factory()->count(2)->create();
+        $jedi = Company::factory()->has(User::factory()->count(3)->sequence(
+            ['first_name' => 'Luke', 'last_name' => 'Skywalker', 'username' => 'lskywalker'],
+            ['first_name' => 'Obi-Wan', 'last_name' => 'Kenobi', 'username' => 'okenobi'],
+            ['first_name' => 'Anakin', 'last_name' => 'Skywalker', 'username' => 'askywalker'],
+        ))->create();
 
-        User::factory()
-            ->for($sith)
-            ->create(['first_name' => 'Darth', 'last_name' => 'Vader']);
-
-        User::factory()
-            ->for($jedi)
-            ->count(3)
-            ->sequence(
-                ['first_name' => 'Luke', 'last_name' => 'Skywalker'],
-                ['first_name' => 'Obi-Wan', 'last_name' => 'Kenobi'],
-                ['first_name' => 'Anakin', 'last_name' => 'Skywalker'],
-            )
+        $sith = Company::factory()
+            ->has(User::factory()->state(['first_name' => 'Darth', 'last_name' => 'Vader', 'username' => 'dvader']))
             ->create();
 
         Passport::actingAs($jedi->users->first());
@@ -75,20 +67,14 @@ class UsersForSelectListTest extends TestCase
     {
         Setting::factory()->withMultipleFullCompanySupport()->create();
 
-        [$jedi, $sith] = Company::factory()->count(2)->create();
+        $jedi = Company::factory()->has(User::factory()->count(3)->sequence(
+            ['first_name' => 'Luke', 'last_name' => 'Skywalker', 'username' => 'lskywalker'],
+            ['first_name' => 'Obi-Wan', 'last_name' => 'Kenobi', 'username' => 'okenobi'],
+            ['first_name' => 'Anakin', 'last_name' => 'Skywalker', 'username' => 'askywalker'],
+        ))->create();
 
-        User::factory()
-            ->for($sith)
-            ->create(['first_name' => 'Darth', 'last_name' => 'Vader', 'username' => 'dvader']);
-
-        User::factory()
-            ->for($jedi)
-            ->count(3)
-            ->sequence(
-                ['first_name' => 'Luke', 'last_name' => 'Skywalker', 'username' => 'lskywalker'],
-                ['first_name' => 'Obi-Wan', 'last_name' => 'Kenobi', 'username' => 'okenobi'],
-                ['first_name' => 'Anakin', 'last_name' => 'Skywalker', 'username' => 'askywalker'],
-            )
+        Company::factory()
+            ->has(User::factory()->state(['first_name' => 'Darth', 'last_name' => 'Vader', 'username' => 'dvader']))
             ->create();
 
         Passport::actingAs($jedi->users->first());
@@ -102,7 +88,6 @@ class UsersForSelectListTest extends TestCase
         $this->assertTrue($results->pluck('text')->contains(fn($text) => str_contains($text, 'Anakin')));
 
         $response = $this->getJson(route('api.users.selectlist', ['search' => 'v']))->assertOk();
-        $results = collect($response->json('results'));
-        $this->assertEquals(0, $results->count());
+        $this->assertEquals(0, collect($response->json('results'))->count());
     }
 }
