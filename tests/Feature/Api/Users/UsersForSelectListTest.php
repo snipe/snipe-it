@@ -53,11 +53,9 @@ class UsersForSelectListTest extends TestCase
         $results = collect($response->json('results'));
 
         $this->assertEquals($jedi->users->count(), $results->count());
-
         $this->assertTrue(
             $results->pluck('text')->contains(fn($text) => str_contains($text, $jedi->users->first()->first_name))
         );
-
         $this->assertFalse(
             $results->pluck('text')->contains(fn($text) => str_contains($text, $sith->users->first()->first_name))
         );
@@ -78,7 +76,6 @@ class UsersForSelectListTest extends TestCase
             ->create();
 
         Passport::actingAs($jedi->users->first());
-
         $response = $this->getJson(route('api.users.selectlist', ['search' => 'a']))->assertOk();
 
         $results = collect($response->json('results'));
