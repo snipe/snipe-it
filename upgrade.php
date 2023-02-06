@@ -449,11 +449,11 @@ echo "--------------------------------------------------------\n\n";
 
 
 function str_begins($haystack, $needle) {
-    return 0 === substr_compare($haystack, $needle, 0, strlen($needle));
+    return (substr_compare($haystack, $needle, 0, strlen($needle)) === 0);
 }
 
 function str_ends($haystack,  $needle) {
-    return 0 === substr_compare($haystack, $needle, -strlen($needle));
+    return (substr_compare($haystack, $needle, -strlen($needle)) === 0);
 }
 
 
