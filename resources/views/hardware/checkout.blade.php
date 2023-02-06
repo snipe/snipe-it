@@ -26,13 +26,23 @@
                     </div>
                     <div class="box-body">
                     {{csrf_field()}}
+                        @if ($asset->company && $asset->company->name)
+                            <div class="form-group">
+                                {{ Form::label('model', trans('admin/companies/general.company'), array('class' => 'col-md-3 control-label')) }}
+                                <div class="col-md-8">
+                                    <p class="form-control-static">
+                                        {{ $asset->company->name }}
+                                    </p>
+                                </div>
+                            </div>
+                        @endif
                     <!-- AssetModel name -->
                         <div class="form-group">
                             {{ Form::label('model', trans('admin/hardware/form.model'), array('class' => 'col-md-3 control-label')) }}
                             <div class="col-md-8">
                                 <p class="form-control-static">
                                     @if (($asset->model) && ($asset->model->name))
-                                        {{ $asset->model->name }}@if ($asset->company && $asset->company->name) ({{ $asset->company->name }}) @endif
+                                        {{ $asset->model->name }}
                                     @else
                                         <span class="text-danger text-bold">
                   <i class="fas fa-exclamation-triangle"></i>This asset's model is invalid!
