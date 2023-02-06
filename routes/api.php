@@ -114,8 +114,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
 
     Route::resource('accessories',
         Api\AccessoriesController::class,
-        ['names' =>
-            [
+        ['names' => [
                 'index' => 'api.accessories.index',
                 'show' => 'api.accessories.show',
                 'update' => 'api.accessories.update',
@@ -144,8 +143,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
 
     Route::resource('categories', 
         Api\CategoriesController::class,
-        ['names' => 
-            [
+        ['names' => [
                 'index' => 'api.categories.index',
                 'show' => 'api.categories.show',
                 'update' => 'api.categories.update',
@@ -173,8 +171,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
 
       Route::resource('companies', 
         Api\CompaniesController::class,
-        ['names' => 
-            [
+        ['names' => [
                 'index' => 'api.companies.index',
                 'show' => 'api.companies.show',
                 'update' => 'api.companies.update',
@@ -203,8 +200,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
 
       Route::resource('departments', 
         Api\DepartmentsController::class,
-        ['names' => 
-            [
+        ['names' => [
                 'index' => 'api.departments.index',
                 'show' => 'api.departments.show',
                 'update' => 'api.departments.update',
@@ -254,8 +250,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
 
       Route::resource('components', 
         Api\ComponentsController::class,
-        ['names' => 
-            [
+        ['names' => [
                 'index' => 'api.components.index',
                 'show' => 'api.components.show',
                 'update' => 'api.components.update',
@@ -308,8 +303,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
 
       Route::resource('consumables', 
         Api\ConsumablesController::class,
-        ['names' => 
-            [
+        ['names' => [
                 'index' => 'api.consumables.index',
                 'show' => 'api.consumables.show',
                 'update' => 'api.consumables.update',
@@ -328,8 +322,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         */
         Route::resource('depreciations', 
         Api\DepreciationsController::class,
-        ['names' => 
-            [
+        ['names' => [
                 'index' => 'api.depreciations.index',
                 'show' => 'api.depreciations.show',
                 'update' => 'api.depreciations.update',
@@ -416,8 +409,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
 
         Route::resource('fieldsets', 
         Api\CustomFieldsetsController::class,
-            ['names' => 
-                [
+            ['names' => [
                     'index' => 'api.fieldsets.index',
                     'show' => 'api.fieldsets.show',
                     'update' => 'api.fieldsets.update',
@@ -436,8 +428,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         */
         Route::resource('groups', 
         Api\GroupsController::class,
-            ['names' => 
-                [
+            ['names' => [
                     'index' => 'api.groups.index',
                     'show' => 'api.groups.show',
                     'update' => 'api.groups.update',
@@ -549,8 +540,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
 
         Route::resource('hardware', 
         Api\AssetsController::class,
-        ['names' => 
-            [
+        ['names' => [
                 'index' => 'api.assets.index',
                 'show' => 'api.assets.show',
                 'update' => 'api.assets.update',
@@ -567,8 +557,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
          */
         Route::resource('maintenances', 
         Api\AssetMaintenancesController::class,
-        ['names' => 
-            [
+        ['names' => [
                 'index' => 'api.maintenances.index',
                 'show' => 'api.maintenances.show',
                 'update' => 'api.maintenances.update',
@@ -597,8 +586,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
 
       Route::resource('imports', 
         Api\ImportController::class,
-        ['names' => 
-            [
+        ['names' => [
                 'index' => 'api.imports.index',
                 'show' => 'api.imports.show',
                 'update' => 'api.imports.update',
@@ -628,8 +616,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
 
         Route::resource('licenses', 
         Api\LicensesController::class,
-        ['names' => 
-            [
+        ['names' => [
                 'index' => 'api.licenses.index',
                 'show' => 'api.licenses.show',
                 'update' => 'api.licenses.update',
@@ -644,8 +631,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
 
         Route::resource('licenses.seats', 
         Api\LicenseSeatsController::class,
-        ['names' => 
-            [
+        ['names' => [
                 'index' => 'api.licenses.seats.index',
                 'show' => 'api.licenses.seats.show',
                 'update' => 'api.licenses.seats.update',
@@ -686,8 +672,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
     
         Route::resource('locations', 
         Api\LocationsController::class,
-        ['names' => 
-            [
+        ['names' => [
                 'index' => 'api.locations.index',
                 'show' => 'api.locations.show',
                 'update' => 'api.locations.update',
@@ -716,8 +701,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
     
         Route::resource('manufacturers', 
         Api\ManufacturersController::class,
-        ['names' => 
-            [
+        ['names' => [
                 'index' => 'api.manufacturers.index',
                 'show' => 'api.manufacturers.show',
                 'update' => 'api.manufacturers.update',
@@ -753,8 +737,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
     
         Route::resource('models', 
         Api\AssetModelsController::class,
-        ['names' => 
-            [
+        ['names' => [
                 'index' => 'api.models.index',
                 'show' => 'api.models.show',
                 'update' => 'api.models.update',
@@ -833,8 +816,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         
         Route::resource('settings', 
         Api\SettingsController::class,
-        ['names' => 
-            [
+        ['names' => [
                 'index' => 'api.settings.index',
                 'show' => 'api.settings.show',
                 'update' => 'api.settings.update',
@@ -891,8 +873,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
     
         Route::resource('statuslabels', 
         Api\StatuslabelsController::class,
-        ['names' => 
-            [
+        ['names' => [
                 'index' => 'api.statuslabels.index',
                 'show' => 'api.statuslabels.show',
                 'update' => 'api.statuslabels.update',
@@ -921,8 +902,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
     
         Route::resource('suppliers', 
         Api\SuppliersController::class,
-        ['names' => 
-            [
+        ['names' => [
                 'index' => 'api.suppliers.index',
                 'show' => 'api.suppliers.show',
                 'update' => 'api.suppliers.update',
@@ -1015,8 +995,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
     
         Route::resource('users', 
         Api\UsersController::class,
-        ['names' => 
-            [
+        ['names' => [
                 'index' => 'api.users.index',
                 'show' => 'api.users.show',
                 'update' => 'api.users.update',
@@ -1034,8 +1013,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         */
         Route::resource('kits', 
         Api\PredefinedKitsController::class,
-        ['names' => 
-            [
+        ['names' => [
                 'index' => 'api.kits.index',
                 'show' => 'api.kits.show',
                 'update' => 'api.kits.update',
