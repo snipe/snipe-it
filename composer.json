@@ -75,6 +75,7 @@
     "fakerphp/faker": "^1.16",
     "laravel/dusk": "^6.25",
     "mockery/mockery": "^1.4",
+    "nunomaduro/phpinsights": "^2.7",
     "phpunit/php-token-stream": "^3.1",
     "phpunit/phpunit": "^9.0",
     "squizlabs/php_codesniffer": "^3.5",
