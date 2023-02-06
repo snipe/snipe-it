@@ -395,10 +395,15 @@ return [
     'start_date'            => 'Start Date',
     'end_date'            => 'End Date',
     'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
+<<<<<<< HEAD
     'placeholder_kit'       => 'Select a kit',
-    'stock_report' => 'Stock Report',
+    'stock_report' => 'Stock Report'
+||||||| 6fbd20a11
+    'placeholder_kit'       => 'Select a kit'
+=======
     'placeholder_kit'       => 'Select a kit',
     'file_not_found'        => 'File not found',
+>>>>>>> b37c4553ef2c572265df473813f59c034d6083e2
 
 
 
