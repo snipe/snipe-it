@@ -1120,8 +1120,6 @@ class ReportsController extends Controller
                 $row[]  = str_replace(',', '', e($item['assetItem']->asset_tag));
                 $row[]  = str_replace(',', '', e(($item['acceptance']->assignedTo) ? $item['acceptance']->assignedTo->present()->name() : trans('admin/reports/general.deleted_user')));
                 $rows[] = implode(',', $row);
-            } else {
-                // Log the error maybe?
             }
         }
 
