@@ -217,16 +217,16 @@ class Ldap extends Model
         $ldap_result_manager = Setting::getSettings()->ldap_manager;
         // Get LDAP user data
         $item = [];
-        $item['username'] = isset($ldapattributes[$ldap_result_username][0]) ? $ldapattributes[$ldap_result_username][0] : '';
-        $item['employee_number'] = isset($ldapattributes[$ldap_result_emp_num][0]) ? $ldapattributes[$ldap_result_emp_num][0] : '';
-        $item['lastname'] = isset($ldapattributes[$ldap_result_last_name][0]) ? $ldapattributes[$ldap_result_last_name][0] : '';
-        $item['firstname'] = isset($ldapattributes[$ldap_result_first_name][0]) ? $ldapattributes[$ldap_result_first_name][0] : '';
-        $item['email'] = isset($ldapattributes[$ldap_result_email][0]) ? $ldapattributes[$ldap_result_email][0] : '';
-        $item['telephone'] = isset($ldapattributes[$ldap_result_phone][0]) ? $ldapattributes[$ldap_result_phone][0] : '';
-        $item['jobtitle'] = isset($ldapattributes[$ldap_result_jobtitle][0]) ? $ldapattributes[$ldap_result_jobtitle][0] : '';
-        $item['country'] = isset($ldapattributes[$ldap_result_country][0]) ? $ldapattributes[$ldap_result_country][0] : '';
-        $item['department'] = isset($ldapattributes[$ldap_result_dept][0]) ? $ldapattributes[$ldap_result_dept][0] : '';
-        $item['manager'] = isset($ldapattributes[$ldap_result_manager][0]) ? $ldapattributes[$ldap_result_manager][0] : '';
+        $item['username'] = $ldapattributes[$ldap_result_username][0] ?? '';
+        $item['employee_number'] = $ldapattributes[$ldap_result_emp_num][0] ?? '';
+        $item['lastname'] = $ldapattributes[$ldap_result_last_name][0] ?? '';
+        $item['firstname'] = $ldapattributes[$ldap_result_first_name][0] ?? '';
+        $item['email'] = $ldapattributes[$ldap_result_email][0] ?? '';
+        $item['telephone'] = $ldapattributes[$ldap_result_phone][0] ?? '';
+        $item['jobtitle'] = $ldapattributes[$ldap_result_jobtitle][0] ?? '';
+        $item['country'] = $ldapattributes[$ldap_result_country][0] ?? '';
+        $item['department'] = $ldapattributes[$ldap_result_dept][0] ?? '';
+        $item['manager'] = $ldapattributes[$ldap_result_manager][0] ?? '';
 
         return $item;
     }
