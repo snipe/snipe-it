@@ -84,15 +84,13 @@ foreach ($env as $line_num => $line) {
 
         if ($env_key == 'APP_KEY') {
             if (($env_value=='')  || (strlen($env_value) < 20)) {
-                $env_bad .= "✘ APP_KEY ERROR in your .env on line #'.$show_line_num.': Your APP_KEY should not be blank. Run `php artisan key:generate` to generate one.\n";
+                $env_bad .= "✘ APP_KEY ERROR in your .env on line #'.{$show_line_num}.': Your APP_KEY should not be blank. Run `php artisan key:generate` to generate one.\n";
             } else {
                 $env_good .= "√ Your APP_KEY is not blank. \n";
             }
         }
 
         if ($env_key == 'APP_URL') {
-
-            $app_url_length = strlen($env_value);
 
             if (($env_value!="null") && ($env_value!="")) {
                 $env_good .= '√ Your APP_URL is not null or blank. It is set to '.$env_value."\n";
