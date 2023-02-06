@@ -73,7 +73,7 @@
         <div class="col-md-6">
             <div class="box box-default" id="checkedin-div" style="display: none">
                 <div class="box-header with-border">
-                    <h2 class="box-title"> {{ trans('general.quickscan_checkin_status') }} (<span id="checkin-counter">0</span> assets checked in) </h2>
+                    <h2 class="box-title"> {{ trans('general.quickscan_checkin_status') }} (<span id="checkin-counter">0</span> {{ trans('general.assets_checked_in_count') }}) </h2>
                 </div>
                 <div class="box-body">
     
@@ -86,7 +86,7 @@
                         </tr>
                         <tr id="checkin-loader" style="display: none;">
                             <td colspan="3">
-                                <i class="fas fa-spinner spin" aria-hidden="true"></i> Processing...
+                                <i class="fas fa-spinner spin" aria-hidden="true"></i> {{ trans('general.processing') }}...
                             </td>
                         </tr>
                         </thead>

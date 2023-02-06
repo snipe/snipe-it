@@ -46,13 +46,13 @@
 
                           @else
                             <span class="text-danger text-bold">
-                      <i class="fas fa-exclamation-triangle"></i>This asset's model is invalid!
-                      The asset <a href="{{ route('hardware.edit', $asset->id) }}">should be edited</a> to correct this before attempting to check it in or out.</span>
+                      <i class="fas fa-exclamation-triangle"></i>{{ trans('admin/hardware/general.model_invalid')}}
+                      <a href="{{ route('hardware.edit', $asset->id) }}"></a> {{ trans('admin/hardware/general.model_invalid_fix')}}</span>
                           @endif
                         </p>
                       </div>
                     </div>
-
+ 
 
                     <!-- Asset Name -->
                     <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
