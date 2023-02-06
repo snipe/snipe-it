@@ -14,6 +14,12 @@ class SlackSettingsForm extends Component
 
     public Setting $setting;
 
+    protected $rules = [
+        'slack_endpoint'                      => 'url|required_with:slack_channel|starts_with:https://hooks.slack.com/|nullable',
+        'slack_channel'                       => 'required_with:slack_endpoint|starts_with:#|nullable',
+        'slack_botname'                       => 'string|nullable',
+    ];
+
     public function mount(){
 
         $this->setting = Setting::getSettings();
@@ -21,6 +27,10 @@ class SlackSettingsForm extends Component
         $this->slack_channel = $this->setting->slack_channel;
         $this->slack_botname = $this->setting->slack_botname;
 
+    }
+    public function updated($field){
+
+        $this->validateOnly($field ,$this->rules);
     }
 
     public function render()
@@ -30,7 +40,6 @@ class SlackSettingsForm extends Component
 
     public function testSlack(){
 
-        // If validation passes, continue to the curl request
         $slack = new Client([
             'base_url' => e($this->slack_endpoint),
             'defaults' => [
@@ -62,11 +71,7 @@ class SlackSettingsForm extends Component
     }
     public function submit()
     {
-        $this->validate([
-            'slack_endpoint'                      => 'url|required_with:slack_channel|starts_with:https://hooks.slack.com/|nullable',
-            'slack_channel'                       => 'required_with:slack_endpoint|starts_with:#|nullable',
-            'slack_botname'                       => 'string|nullable',
-        ]);
+        $this->validate($this->rules);
 
         $this->setting->slack_endpoint = $this->slack_endpoint;
         $this->setting->slack_channel = $this->slack_channel;
