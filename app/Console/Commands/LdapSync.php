@@ -197,18 +197,18 @@ class LdapSync extends Command
 
         for ($i = 0; $i < $results['count']; $i++) {
                 $item = [];
-                $item['username'] = isset($results[$i][$ldap_result_username][0]) ? $results[$i][$ldap_result_username][0] : '';
-                $item['employee_number'] = isset($results[$i][$ldap_result_emp_num][0]) ? $results[$i][$ldap_result_emp_num][0] : '';
-                $item['lastname'] = isset($results[$i][$ldap_result_last_name][0]) ? $results[$i][$ldap_result_last_name][0] : '';
-                $item['firstname'] = isset($results[$i][$ldap_result_first_name][0]) ? $results[$i][$ldap_result_first_name][0] : '';
-                $item['email'] = isset($results[$i][$ldap_result_email][0]) ? $results[$i][$ldap_result_email][0] : '';
-                $item['ldap_location_override'] = isset($results[$i]['ldap_location_override']) ? $results[$i]['ldap_location_override'] : '';
-                $item['location_id'] = isset($results[$i]['location_id']) ? $results[$i]['location_id'] : '';
-                $item['telephone'] = isset($results[$i][$ldap_result_phone][0]) ? $results[$i][$ldap_result_phone][0] : '';
-                $item['jobtitle'] = isset($results[$i][$ldap_result_jobtitle][0]) ? $results[$i][$ldap_result_jobtitle][0] : '';
-                $item['country'] = isset($results[$i][$ldap_result_country][0]) ? $results[$i][$ldap_result_country][0] : '';
-                $item['department'] = isset($results[$i][$ldap_result_dept][0]) ? $results[$i][$ldap_result_dept][0] : '';
-                $item['manager'] = isset($results[$i][$ldap_result_manager][0]) ? $results[$i][$ldap_result_manager][0] : '';
+                $item['username'] = $results[$i][$ldap_result_username][0] ?? '';
+                $item['employee_number'] = $results[$i][$ldap_result_emp_num][0] ?? '';
+                $item['lastname'] = $results[$i][$ldap_result_last_name][0] ?? '';
+                $item['firstname'] = $results[$i][$ldap_result_first_name][0] ?? '';
+                $item['email'] = $results[$i][$ldap_result_email][0] ?? '';
+                $item['ldap_location_override'] = $results[$i]['ldap_location_override'] ?? '';
+                $item['location_id'] = $results[$i]['location_id'] ?? '';
+                $item['telephone'] = $results[$i][$ldap_result_phone][0] ?? '';
+                $item['jobtitle'] = $results[$i][$ldap_result_jobtitle][0] ?? '';
+                $item['country'] = $results[$i][$ldap_result_country][0] ?? '';
+                $item['department'] = $results[$i][$ldap_result_dept][0] ?? '';
+                $item['manager'] = $results[$i][$ldap_result_manager][0] ?? '';
 
 
                 $department = Department::firstOrCreate([
