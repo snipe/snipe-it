@@ -43,7 +43,6 @@ echo "--------------------------------------------------------\n\n";
 
 // Check the .env looks ok
 $env = file('.env');
-$env_error_count = 0;
 $env_good = '';
 $env_bad = '';
 
