@@ -32,8 +32,7 @@
                             <div class="col-md-8">
                                 <p class="form-control-static">
                                     @if (($asset->model) && ($asset->model->name))
-                                        {{ $asset->model->name }}
-
+                                        {{ $asset->model->name }}@if ($asset->company && $asset->company->name) ({{ $asset->company->name }}) @endif
                                     @else
                                         <span class="text-danger text-bold">
                   <i class="fas fa-exclamation-triangle"></i>This asset's model is invalid!
