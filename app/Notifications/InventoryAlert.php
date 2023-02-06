@@ -32,7 +32,7 @@ class InventoryAlert extends Notification
      */
     public function via()
     {
-        $notifyBy[] = 'mail';
+        $notifyBy = ['mail'];
 
         return $notifyBy;
     }
