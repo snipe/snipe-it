@@ -28,7 +28,7 @@ class AddFieldsToManufacturer extends Migration
      */
     public function down()
     {
-        Schema::table('settings', function ($table) {
+        Schema::table('manufacturers', function ($table) {
             $table->dropColumn('url');
             $table->dropColumn('support_url');
             $table->dropColumn('support_phone');

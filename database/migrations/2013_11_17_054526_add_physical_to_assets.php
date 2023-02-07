@@ -26,6 +26,6 @@ class AddPhysicalToAssets extends Migration
      */
     public function down()
     {
-        $table->dropColumn('physical');
+        // $table->dropColumn('physical');
     }
 }
