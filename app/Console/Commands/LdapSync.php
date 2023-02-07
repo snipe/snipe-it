@@ -74,7 +74,7 @@ class LdapSync extends Command
                 $json_summary = ['error' => true, 'error_message' => $e->getMessage(), 'summary' => []];
                 $this->info(json_encode($json_summary));
             }
-            LOG::info($e);
+            Log::info($e);
 
             return [];
         }
@@ -84,7 +84,7 @@ class LdapSync extends Command
         try {
             if ($this->option('base_dn') != '') {
                 $search_base = $this->option('base_dn');
-                LOG::debug('Importing users from specified base DN: \"'.$search_base.'\".');
+                Log::debug('Importing users from specified base DN: \"'.$search_base.'\".');
             } else {
                 $search_base = null;
             }
@@ -98,7 +98,7 @@ class LdapSync extends Command
                 $json_summary = ['error' => true, 'error_message' => $e->getMessage(), 'summary' => []];
                 $this->info(json_encode($json_summary));
             }
-            LOG::info($e);
+            Log::info($e);
 
             return [];
         }
@@ -108,16 +108,16 @@ class LdapSync extends Command
 
         if ($this->option('location') != '') {
             $location = Location::where('name', '=', $this->option('location'))->first();
-            LOG::debug('Location name '.$this->option('location').' passed');
-            LOG::debug('Importing to '.$location->name.' ('.$location->id.')');
+            Log::debug('Location name '.$this->option('location').' passed');
+            Log::debug('Importing to '.$location->name.' ('.$location->id.')');
         } elseif ($this->option('location_id') != '') {
             $location = Location::where('id', '=', $this->option('location_id'))->first();
-            LOG::debug('Location ID '.$this->option('location_id').' passed');
-            LOG::debug('Importing to '.$location->name.' ('.$location->id.')');
+            Log::debug('Location ID '.$this->option('location_id').' passed');
+            Log::debug('Importing to '.$location->name.' ('.$location->id.')');
         }
 
         if (! isset($location)) {
-            LOG::debug('That location is invalid or a location was not provided, so no location will be assigned by default.');
+            Log::debug('That location is invalid or a location was not provided, so no location will be assigned by default.');
         }
 
         /* Process locations with explicitly defined OUs, if doing a full import. */
@@ -133,7 +133,7 @@ class LdapSync extends Command
             array_multisort($ldap_ou_lengths, SORT_ASC, $ldap_ou_locations);
 
             if (count($ldap_ou_locations) > 0) {
-                LOG::debug('Some locations have special OUs set. Locations will be automatically set for users in those OUs.');
+                Log::debug('Some locations have special OUs set. Locations will be automatically set for users in those OUs.');
             }
 
             // Inject location information fields
@@ -151,7 +151,7 @@ class LdapSync extends Command
                         $json_summary = ['error' => true, 'error_message' => trans('admin/users/message.error.ldap_could_not_search').' Location: '.$ldap_loc['name'].' (ID: '.$ldap_loc['id'].') cannot connect to "'.$ldap_loc['ldap_ou'].'" - '.$e->getMessage(), 'summary' => []];
                         $this->info(json_encode($json_summary));
                     }
-                    LOG::info($e);
+                    Log::info($e);
 
                     return [];
                 }
