@@ -99,7 +99,7 @@
         <div class="col-md-6">
             <div class="box box-default" id="audited-div" style="display: none">
                 <div class="box-header with-border">
-                    <h2 class="box-title"> {{ trans('general.bulkaudit_status') }} (<span id="audit-counter">0</span> assets audited) </h2>
+                    <h2 class="box-title"> {{ trans('general.bulkaudit_status') }} (<span id="audit-counter">0</span> {{ trans('general.assets_audited') }}) </h2>
                 </div>
                 <div class="box-body">
     

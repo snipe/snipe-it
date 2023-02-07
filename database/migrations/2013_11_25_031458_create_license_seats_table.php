@@ -31,6 +31,6 @@ class CreateLicenseSeatsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('license_seats');
     }
 }
