@@ -3,14 +3,29 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use \App\Models\User;
+
 
 class CreateAdmin extends Command
 {
+
+    /** @mixin User **/
     /**
-     * The name and signature of the console command.
-     *
-     * @var string
+     * App\Console\CreateAdmin
+     * @property mixed $first_name
+     * @property string $last_name
+     * @property string $username
+     * @property string $email
+     * @property string $permissions
+     * @property string $password
+     * @property boolean $activated
+     * @property boolean $show_in_list
+     * @property \Illuminate\Support\Carbon|null $created_at
+     * @property mixed $created_by
      */
+
+
+
     protected $signature = 'snipeit:create-admin {--first_name=} {--last_name=}  {--email=}  {--username=}  {--password=}   {show_in_list?}';
 
     /**
@@ -30,11 +45,7 @@ class CreateAdmin extends Command
         parent::__construct();
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
+
     public function handle()
     {
         $first_name = $this->option('first_name');
@@ -47,7 +58,7 @@ class CreateAdmin extends Command
         if (($first_name == '') || ($last_name == '') || ($username == '') || ($email == '') || ($password == '')) {
             $this->info('ERROR: All fields are required.');
         } else {
-            $user = new \App\Models\User;
+            $user = new User;
             $user->first_name = $first_name;
             $user->last_name = $last_name;
             $user->username = $username;
