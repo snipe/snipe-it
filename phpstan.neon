@@ -9,18 +9,4 @@ parameters:
         - resources/lang
         - resources/views
 
-
     level: 4
-
-    ignoreErrors:
-        - '#Class, interface or enum named #'
-        - '#Call to an undefined static method App\\Models\\.*::where.*\(\)#'
-        - '#Call to an undefined static method App\\Models\\.*::firstOr.*\(\)#'
-        - '#Call to an undefined static method App\\Models\\.*::find.*\(\)#'
-        - '#Call to an undefined static method App\\Models\\.*::get.*\(\)#'
-        - '#Call to an undefined static method App\\Models\\.*::has.*\(\)#'
-        - '#Call to static method info\(\) on an unknown class Log#'
-        - '#Call to static method debug\(\) on an unknown class Log#'
-        - '#Call to static method getSchemaBuilder\(\) on an unknown class DB#'
-        - '#Call to static method call\(\) on an unknown class Artisan.#'
-
