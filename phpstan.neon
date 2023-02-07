@@ -4,10 +4,11 @@ includes:
 parameters:
     paths:
         - app
-        - resources/views
-        - resources/lang
-        - database/migrations
         - config
+        - database/migrations
+        - resources/lang
+        - resources/views
+
 
     level: 4
 
