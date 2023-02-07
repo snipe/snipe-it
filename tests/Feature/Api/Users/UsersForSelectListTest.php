@@ -52,12 +52,12 @@ class UsersForSelectListTest extends TestCase
 
         $results = collect($response->json('results'));
 
-        $this->assertEquals($jedi->users->count(), $results->count());
+        $this->assertEquals(3, $results->count());
         $this->assertTrue(
-            $results->pluck('text')->contains(fn($text) => str_contains($text, $jedi->users->first()->first_name))
+            $results->pluck('text')->contains(fn($text) => str_contains($text, 'Luke'))
         );
         $this->assertFalse(
-            $results->pluck('text')->contains(fn($text) => str_contains($text, $sith->users->first()->first_name))
+            $results->pluck('text')->contains(fn($text) => str_contains($text, 'Darth'))
         );
     }
 
