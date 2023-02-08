@@ -8,6 +8,7 @@
   <testsuites>
     <testsuite name="Application Test Suite">
       <directory>./tests/</directory>
+      <exclude>./tests/Browser</exclude>
     </testsuite>
   </testsuites>
   <php>
