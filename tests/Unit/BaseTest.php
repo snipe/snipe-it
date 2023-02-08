@@ -10,7 +10,7 @@ use Tests\TestCase;
 use Auth;
 use Artisan;
 
-class BaseTest extends TestCase
+abstract class BaseTest extends TestCase
 {
     use DatabaseTransactions;
 
