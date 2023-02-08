@@ -1,13 +1,17 @@
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "/js/build/app.js": "/js/build/app.js?id=f05cc05b9000ba73e1949bcf137d4301",
 =======
     "/js/build/app.js": "/js/build/app.js?id=98813974525b348b0f405e0c167ff2bb",
 >>>>>>> develop-backup
+=======
+    "/js/build/app.js": "/js/build/app.js?id=98813974525b348b0f405e0c167ff2bb",
+>>>>>>> Product-Flow-Develop
     "/css/dist/skins/skin-blue.css": "/css/dist/skins/skin-blue.css?id=f677207c6cf9678eb539abecb408c374",
     "/css/build/overrides.css": "/css/build/overrides.css?id=0465141b9ecb0662ba6790c1460f391f",
     "/css/build/app.css": "/css/build/app.css?id=c3a896cab26e2093f8be24336b7db1b9",
-    "/css/build/AdminLTE.css": "/css/build/AdminLTE.css?id=dc383f8560a8d4adb51d44fb4043e03b",
+    "/css/build/AdminLTE.css": "/css/build/AdminLTE.css?id=b956fff373d1cb556d4ac18829400d91",
     "/css/dist/skins/skin-orange.css": "/css/dist/skins/skin-orange.css?id=6f0563e726c2fe4fab4026daaa5bfdf2",
     "/css/dist/skins/skin-orange-dark.css": "/css/dist/skins/skin-orange-dark.css?id=f343f659ca1d45534d2c2c3cc30fb619",
     "/css/dist/skins/skin-blue-dark.css": "/css/dist/skins/skin-blue-dark.css?id=57e634d63101d3613f4c73aaa2e3f50a",
@@ -21,6 +25,7 @@
     "/css/dist/skins/skin-green-dark.css": "/css/dist/skins/skin-green-dark.css?id=c0d21166315b7c2cdd4819fa4a5e4d1e",
     "/css/dist/skins/skin-green.css": "/css/dist/skins/skin-green.css?id=0a82a6ae6bb4e58fe62d162c4fb50397",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "/css/dist/skins/skin-contrast.css": "/css/dist/skins/skin-contrast.css?id=da6c7997d9de2f8329142399f0ce50da",
     "/css/dist/skins/skin-red.css": "/css/dist/skins/skin-red.css?id=44bf834f2110504a793dadec132a5898",
     "/css/dist/all.css": "/css/dist/all.css?id=ef030b613d45620b907cf0184a14e868",
@@ -29,6 +34,11 @@
     "/css/dist/skins/skin-red.css": "/css/dist/skins/skin-red.css?id=44bf834f2110504a793dadec132a5898",
     "/css/dist/all.css": "/css/dist/all.css?id=6c21caaea09b11503d2d0b6fcebdff08",
 >>>>>>> develop-backup
+=======
+    "/css/dist/skins/skin-contrast.css": "/css/dist/skins/skin-contrast.css?id=da6c7997d9de2f8329142399f0ce50da",
+    "/css/dist/skins/skin-red.css": "/css/dist/skins/skin-red.css?id=44bf834f2110504a793dadec132a5898",
+    "/css/dist/all.css": "/css/dist/all.css?id=4b9c9e08135bc7396b288ad096f5d648",
+>>>>>>> Product-Flow-Develop
     "/css/blue.png": "/css/blue.png?id=e83a6c29e04fe851f2122815b2e4b150",
     "/css/blue@2x.png": "/css/blue@2x.png?id=51135dd4d24f88f5de0b2414bd51dac5",
     "/css/dist/signature-pad.css": "/css/dist/signature-pad.css?id=6e35c74c14f89f55df49c11fb45a9351",
@@ -43,6 +53,7 @@
     "/css/webfonts/fa-v4compatibility.woff2": "/css/webfonts/fa-v4compatibility.woff2?id=3a738148640a3132bddd48fae5bbe0d5",
     "/css/dist/bootstrap-table.css": "/css/dist/bootstrap-table.css?id=ee4896df8b8f008ce73a9a0c2549aefd",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "/js/build/vendor.js": "/js/build/vendor.js?id=47ecbb4bb3b0e02315f391caadbdf971",
     "/js/dist/bootstrap-table.js": "/js/dist/bootstrap-table.js?id=14d9a2affec7b066d20fcba2e6e67ad2",
     "/js/dist/all.js": "/js/dist/all.js?id=4f9355ac85d380301f6f62e55b1a6e5e",
@@ -51,6 +62,11 @@
     "/js/dist/bootstrap-table.js": "/js/dist/bootstrap-table.js?id=efb904c5a2ed6046acf8ce4d71d1706a",
     "/js/dist/all.js": "/js/dist/all.js?id=f66001ab958b1e9bcacc98956f075dc4",
 >>>>>>> develop-backup
+=======
+    "/js/build/vendor.js": "/js/build/vendor.js?id=5deaeca7d57915fe903a20337b204678",
+    "/js/dist/bootstrap-table.js": "/js/dist/bootstrap-table.js?id=efb904c5a2ed6046acf8ce4d71d1706a",
+    "/js/dist/all.js": "/js/dist/all.js?id=f66001ab958b1e9bcacc98956f075dc4",
+>>>>>>> Product-Flow-Develop
     "/css/dist/skins/skin-green.min.css": "/css/dist/skins/skin-green.min.css?id=0a82a6ae6bb4e58fe62d162c4fb50397",
     "/css/dist/skins/skin-green-dark.min.css": "/css/dist/skins/skin-green-dark.min.css?id=c0d21166315b7c2cdd4819fa4a5e4d1e",
     "/css/dist/skins/skin-black.min.css": "/css/dist/skins/skin-black.min.css?id=76482123f6c70e866d6b971ba91de7bb",
@@ -66,8 +82,12 @@
     "/css/dist/skins/skin-orange.min.css": "/css/dist/skins/skin-orange.min.css?id=6f0563e726c2fe4fab4026daaa5bfdf2",
     "/css/dist/skins/skin-orange-dark.min.css": "/css/dist/skins/skin-orange-dark.min.css?id=f343f659ca1d45534d2c2c3cc30fb619",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "/css/dist/skins/skin-contrast.min.css": "/css/dist/skins/skin-contrast.min.css?id=da6c7997d9de2f8329142399f0ce50da"
 =======
     "/css/dist/skins/skin-contrast.min.css": "/css/dist/skins/skin-contrast.min.css?id=8e538625ebd4b8096e150d1aa483547b"
 >>>>>>> develop-backup
+=======
+    "/css/dist/skins/skin-contrast.min.css": "/css/dist/skins/skin-contrast.min.css?id=da6c7997d9de2f8329142399f0ce50da"
+>>>>>>> Product-Flow-Develop
 }

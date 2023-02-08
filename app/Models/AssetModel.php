@@ -284,4 +284,6 @@ class AssetModel extends SnipeModel
     {
         return $query->leftJoin('categories', 'models.category_id', '=', 'categories.id')->orderBy('categories.name', $order);
     }
+
+    
 }
