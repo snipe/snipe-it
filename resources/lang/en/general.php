@@ -396,6 +396,7 @@ return [
     'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
     'placeholder_kit'       => 'Select a kit',
     'file_not_found'        => 'File not found',
+    'preview_not_available' => '(no preview)',
 
 
 
