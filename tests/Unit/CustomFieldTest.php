@@ -15,11 +15,6 @@ class CustomFieldTest extends BaseTest
 {
     protected $tester;
 
-    public function testConstructor()
-    {
-        $customfield = new CustomField();
-    }
-
     public function testFormat()
     {
         $customfield = CustomField::factory()->make(['format' => 'IP']);
