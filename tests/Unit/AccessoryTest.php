@@ -62,7 +62,7 @@ class AccessoryTest extends BaseTest
         $accessory = Accessory::factory()->appleBtKeyboard()->create(
             [
                 'category_id' => Category::factory()->create(),
-                'category_id' => Manufacturer::factory()->apple()->create()
+                'manufacturer_id' => Manufacturer::factory()->apple()->create()
             ]);
         $this->assertInstanceOf(Manufacturer::class, $accessory->manufacturer);
     }
