@@ -3,7 +3,13 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Labels</title>
+    <script>
+        window.onafterprint = () => {
+            window.history.back()
+        }
+        window.print();
 
+    </script>
 </head>
 <body>
 
