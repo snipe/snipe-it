@@ -57,7 +57,7 @@ class ImportController extends Controller
                     'text/tsv', ])) {
                     $results['error'] = 'File type must be CSV. Uploaded file is '.$file->getMimeType();
 
-                    return response()->json(Helper::formatStandardApiResponse('error', null, $results['error']), 500);
+                    return response()->json(Helper::formatStandardApiResponse('error', null, $results['error']), 422);
                 }
 
                 //TODO: is there a lighter way to do this?
@@ -75,7 +75,7 @@ class ImportController extends Controller
                             null,
                             'One or more attributes in the header row contain malformed UTF-8 characters'
                         ),
-                        500
+                        422
                     );
                 }
 
@@ -95,7 +95,7 @@ class ImportController extends Controller
                     }
                 }
                 if (count($duplicate_headers) > 0) {
-                    return response()->json(Helper::formatStandardApiResponse('error', null, implode('; ', $duplicate_headers)), 500); //should this be '4xx'?
+                    return response()->json(Helper::formatStandardApiResponse('error', null, implode('; ', $duplicate_headers)),422);
                 }
 
                 try {
@@ -108,7 +108,7 @@ class ImportController extends Controller
                             null,
                             'One or more attributes in row 2 contain malformed UTF-8 characters'
                         ),
-                        500
+                        422
                     );
                 }
 
@@ -137,7 +137,7 @@ class ImportController extends Controller
             ]);
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.feature_disabled')), 500);
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.feature_disabled')), 422);
     }
 
     /**
