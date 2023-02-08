@@ -6,6 +6,7 @@ use App\Http\Controllers\Assets\BulkAssetsController;
 use App\Http\Controllers\Assets\AssetCheckoutController;
 use App\Http\Controllers\Assets\AssetCheckinController;
 use App\Http\Controllers\Assets\AssetFilesController;
+use App\Http\Controllers\Assets\BulkStatusAdjustController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -173,6 +174,8 @@ Route::group(
         Route::post('bulkcheckout',
             [BulkAssetsController::class, 'storeCheckout']
         )->name('hardware.bulkcheckout.store');
+
+        Route::get('status/adjust', [BulkStatusAdjustController::class, 'show'])->name('hardware.statusadjust.show');
     });
 
 Route::resource('hardware', 

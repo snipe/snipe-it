@@ -155,6 +155,10 @@
         });
         // Autofocus to the modal field (less clicking = happier users)
         $("#getSerial").on('show.bs.modal', (e) => {
+<<<<<<< HEAD
+=======
+            $("#modal-serial_number").val("")
+>>>>>>> develop
             setTimeout(() => {
                 $("#modal-serial_number").focus()
             }, 300);

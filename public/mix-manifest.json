@@ -3,7 +3,7 @@
     "/css/dist/skins/skin-blue.css": "/css/dist/skins/skin-blue.css?id=392cc93cfc0be0349bab9697669dd091",
     "/css/build/overrides.css": "/css/build/overrides.css?id=63aaaefb7d139347dfe0717663bc85ec",
     "/css/build/app.css": "/css/build/app.css?id=c1a860573a0f304db91d6a3d3f387114",
-    "/css/build/AdminLTE.css": "/css/build/AdminLTE.css?id=f25c77ed07053646a42e9c19923d24fa",
+    "/css/build/AdminLTE.css": "/css/build/AdminLTE.css?id=267b99ac2fdf75306c9d33c65c195c55",
     "/css/dist/skins/skin-orange.css": "/css/dist/skins/skin-orange.css?id=268041e902b019730c23ee3875838005",
     "/css/dist/skins/skin-orange-dark.css": "/css/dist/skins/skin-orange-dark.css?id=c3aebf96518113fe22517a67c6ec1dc1",
     "/css/dist/skins/skin-blue-dark.css": "/css/dist/skins/skin-blue-dark.css?id=bf6f6c2270110b3b29f2f3af7e07636d",
@@ -18,7 +18,11 @@
     "/css/dist/skins/skin-green.css": "/css/dist/skins/skin-green.css?id=b48f4d8af0e1ca5621c161e93951109f",
     "/css/dist/skins/skin-contrast.css": "/css/dist/skins/skin-contrast.css?id=f0fbbb0ac729ea092578fb05ca615460",
     "/css/dist/skins/skin-red.css": "/css/dist/skins/skin-red.css?id=b9a74ec0cd68f83e7480d5ae39919beb",
+<<<<<<< HEAD
     "/css/dist/all.css": "/css/dist/all.css?id=d4af81add586616fad37caec7ff5af49",
+=======
+    "/css/dist/all.css": "/css/dist/all.css?id=dd485b2c16c7a79bab30eea1755c17ef",
+>>>>>>> develop
     "/css/blue.png": "/css/blue.png?id=e83a6c29e04fe851f2122815b2e4b150",
     "/css/blue@2x.png": "/css/blue@2x.png?id=51135dd4d24f88f5de0b2414bd51dac5",
     "/css/dist/signature-pad.css": "/css/dist/signature-pad.css?id=6e35c74c14f89f55df49c11fb45a9351",
