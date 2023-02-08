@@ -10,10 +10,7 @@ use App\Models\Accessory;
 use App\Models\AssetModel;
 use App\Helpers\Helper;
 use Illuminate\Http\Request;
-<<<<<<< HEAD
-=======
 use App\Models\Setting;
->>>>>>> develop
 
 class ProductFlowController extends Controller
 {
@@ -67,16 +64,12 @@ class ProductFlowController extends Controller
         $asset->requestable             = 0;
 
         if ($asset->save()) {
-<<<<<<< HEAD
-            return redirect()->route('productflow.receiving')->with('success', "Successfully added $model_number to stock!");
-=======
             return view('hardware/labels')
                 ->with('assets', Asset::where('asset_tag', '=', $request->input('asset_tag'))->get())
                 ->with('settings', Setting::getSettings())
                 ->with('bulkedit', false)
                 ->with('count', 0);
             // return redirect()->route('productflow.receiving')->with('success', "Successfully added $model_number to stock!");
->>>>>>> develop
         }
         return redirect()->back()->withInput()->withErrors($asset->getErrors());
     }
