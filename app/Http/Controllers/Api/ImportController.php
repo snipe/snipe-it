@@ -73,7 +73,8 @@ class ImportController extends Controller
                         Helper::formatStandardApiResponse(
                             'error',
                             null,
-                            'One or more attributes in the header row contain malformed UTF-8 characters'),
+                            'One or more attributes in the header row contain malformed UTF-8 characters'
+                        ),
                         500
                     );
                 }
@@ -105,7 +106,8 @@ class ImportController extends Controller
                         Helper::formatStandardApiResponse(
                             'error',
                             null,
-                            'One or more attributes in row 2 contain malformed UTF-8 characters'),
+                            'One or more attributes in row 2 contain malformed UTF-8 characters'
+                        ),
                         500
                     );
                 }
