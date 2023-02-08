@@ -6833,7 +6833,7 @@ button.close {
 }
 /*# sourceMappingURL=bootstrap.css.map */
 /*!
- * Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  * Copyright 2022 Fonticons, Inc.
  */
@@ -8326,6 +8326,9 @@ readers do not read off random characters that represent icons */
 
 .fa-v::before {
   content: "\56"; }
+
+.fa-bangladeshi-taka-sign::before {
+  content: "\e2e6"; }
 
 .fa-bicycle::before {
   content: "\f206"; }
@@ -10898,9 +10901,6 @@ readers do not read off random characters that represent icons */
 .fa-subtract::before {
   content: "\f068"; }
 
-.fa-child-rifle::before {
-  content: "\e4e0"; }
-
 .fa-chess::before {
   content: "\f439"; }
 
@@ -12008,6 +12008,12 @@ readers do not read off random characters that represent icons */
 .fa-share-square::before {
   content: "\f14d"; }
 
+.fa-child-combatant::before {
+  content: "\e4e0"; }
+
+.fa-child-rifle::before {
+  content: "\e4e0"; }
+
 .fa-gun::before {
   content: "\e19b"; }
 
@@ -12184,6 +12190,9 @@ readers do not read off random characters that represent icons */
 
 .fa-hand-lizard::before {
   content: "\f258"; }
+
+.fa-notdef::before {
+  content: "\e1fe"; }
 
 .fa-disease::before {
   content: "\f7fa"; }
@@ -15947,7 +15956,6 @@ a:focus {
 .open:not(.dropup) > .animated-dropdown-menu {
   -webkit-backface-visibility: visible !important;
           backface-visibility: visible !important;
-  -webkit-animation: flipInX 0.7s both;
   animation: flipInX 0.7s both;
 }
 @keyframes flipInX {
@@ -15969,27 +15977,6 @@ a:focus {
   }
   100% {
     transform: perspective(400px);
-  }
-}
-@-webkit-keyframes flipInX {
-  0% {
-    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-    -webkit-transition-timing-function: ease-in;
-    opacity: 0;
-  }
-  40% {
-    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-    -webkit-transition-timing-function: ease-in;
-  }
-  60% {
-    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-    opacity: 1;
-  }
-  80% {
-    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-  }
-  100% {
-    -webkit-transform: perspective(400px);
   }
 }
 /* Fix dropdown menu in navbars */
