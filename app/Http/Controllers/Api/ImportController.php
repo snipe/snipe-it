@@ -36,7 +36,7 @@ class ImportController extends Controller
      * Process and store a CSV upload file.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store()
     {
@@ -132,9 +132,9 @@ class ImportController extends Controller
             }
             $results = (new ImportsTransformer)->transformImports($results);
 
-            return [
+            return response()->json([
                 'files' => $results,
-            ];
+            ]);
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.feature_disabled')), 500);
