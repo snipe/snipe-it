@@ -169,7 +169,7 @@ class CustomFieldsetsController extends Controller
      */
     public function destroy($id)
     {
-        $fieldset = CustomField::find($id);
+        $fieldset = CustomFieldset::find($id);
 
         $this->authorize('delete', $fieldset);
 
