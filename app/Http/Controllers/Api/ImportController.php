@@ -10,6 +10,7 @@ use App\Models\Asset;
 use App\Models\Company;
 use App\Models\Import;
 use Artisan;
+use Illuminate\Database\Eloquent\JsonEncodingException;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -64,7 +65,18 @@ class ImportController extends Controller
                     ini_set('auto_detect_line_endings', '1');
                 }
                 $reader = Reader::createFromFileObject($file->openFile('r')); //file pointer leak?
-                $import->header_row = $reader->fetchOne(0);
+
+                try {
+                    $import->header_row = $reader->fetchOne(0);
+                } catch (JsonEncodingException $e) {
+                    return response()->json(
+                        Helper::formatStandardApiResponse(
+                            'error',
+                            null,
+                            'One or more attributes in the header row contain malformed UTF-8 characters'),
+                        500
+                    );
+                }
 
                 //duplicate headers check
                 $duplicate_headers = [];
@@ -85,8 +97,18 @@ class ImportController extends Controller
                     return response()->json(Helper::formatStandardApiResponse('error', null, implode('; ', $duplicate_headers)), 500); //should this be '4xx'?
                 }
 
-                // Grab the first row to display via ajax as the user picks fields
-                $import->first_row = $reader->fetchOne(1);
+                try {
+                    // Grab the first row to display via ajax as the user picks fields
+                    $import->first_row = $reader->fetchOne(1);
+                } catch (JsonEncodingException $e) {
+                    return response()->json(
+                        Helper::formatStandardApiResponse(
+                            'error',
+                            null,
+                            'One or more attributes in row 2 contain malformed UTF-8 characters'),
+                        500
+                    );
+                }
 
                 $date = date('Y-m-d-his');
                 $fixed_filename = str_slug($file->getClientOriginalName());
