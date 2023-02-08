@@ -12,10 +12,7 @@ class AssetMaintenanceTest extends BaseTest
      */
     protected $tester;
 
-    /**
-     * @test
-     */
-    public function it_zeros_out_warranty_if_blank()
+    public function testZerosOutWarrantyIfBlank()
     {
         $c = new AssetMaintenance;
         $c->is_warranty = '';
@@ -24,10 +21,7 @@ class AssetMaintenanceTest extends BaseTest
         $this->assertTrue($c->is_warranty == 4);
     }
 
-    /**
-     * @test
-     */
-    public function it_sets_costs_appropriately()
+    public function testSetsCostsAppropriately()
     {
         $c = new AssetMaintenance();
         $c->cost = '0.00';
@@ -38,10 +32,7 @@ class AssetMaintenanceTest extends BaseTest
         $this->assertTrue($c->cost === 9.5);
     }
 
-    /**
-     * @test
-     */
-    public function it_nulls_out_notes_if_blank()
+    public function testNullsOutNotesIfBlank()
     {
         $c = new AssetMaintenance;
         $c->notes = '';
@@ -50,10 +41,7 @@ class AssetMaintenanceTest extends BaseTest
         $this->assertTrue($c->notes === 'This is a long note');
     }
 
-    /**
-     * @test
-     */
-    public function it_nulls_out_completion_date_if_blank_or_invalid()
+    public function testNullsOutCompletionDateIfBlankOrInvalid()
     {
         $c = new AssetMaintenance;
         $c->completion_date = '';

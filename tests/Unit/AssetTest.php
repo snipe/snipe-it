@@ -41,10 +41,6 @@ class AssetTest extends BaseTest
     //     $this->assertEquals($expected, $next);
     // }
 
-
-    /**
-     * @test
-     */
     public function testWarrantyExpiresAttribute()
     {
 
@@ -66,5 +62,4 @@ class AssetTest extends BaseTest
         $this->assertEquals(Carbon::createFromDate(2019, 1, 1)->format('Y-m-d'), $asset->warranty_expires->format('Y-m-d'));
 
     }
-
 }
