@@ -31,9 +31,8 @@
                 </div>
                 <div class="box-body">
 
+                <!-- Enable LDAP -->
                     <div class="col-md-11 col-md-offset-1">
-
-                        <!-- Enable LDAP -->
                         <div class="form-group {{ $errors->has('ldap_enabled') ? 'error' : '' }}">
                             <div class="col-md-3">
                                 {{ Form::label('ldap_enabled', trans('admin/settings/general.ldap_integration')) }}
@@ -47,11 +46,12 @@
                                 {{ trans('admin/settings/general.ldap_enabled') }}
                                 @endif
                             </div>
-                        </div><br>
+                        </div>
                     </div>
-                    <div class="col-md-11 col-md-offset-1">
-                        <!-- LDAP Password Sync -->
+
+                <!-- LDAP Password Sync -->
                 @if($ldap_enabled = true)
+                    <div class="col-md-11 col-md-offset-1">
                         <div class="form-group">
                             <div class="col-md-3">
                                 {{ Form::label('ldap_pw_sync', trans('admin/settings/general.ldap_pw_sync')) }}
@@ -68,11 +68,10 @@
                                 @endif
                             </div>
                         </div>
-
                     </div>
 
 
-                        <!--  Default LDAP Permissions Group Select -->
+                <!--  Default LDAP Permissions Group Select -->
                     <div class="col-md-11 col-md-offset-1">
                         <div class="form-group{{ $errors->has('group') ? ' has-error' : '' }}">
                             <div class="col-md-3">
@@ -120,8 +119,8 @@
                     </div>
                 @endif <!--If ldap is enabled-->
 
+                <!-- AD Flag -->
                     <div class="col-md-11 col-md-offset-1">
-                        <!-- AD Flag -->
                         <div class="form-group">
                             <div class="col-md-3">
                                 {{ Form::label('is_ad', trans('admin/settings/general.ad')) }}
@@ -139,22 +138,27 @@
                         </div>
                     </div>
 
-{{--                        <!-- AD Domain -->--}}
-{{--                        <div class="form-group {{ $errors->has('ad_domain') ? 'error' : '' }}">--}}
-{{--                            <div class="col-md-3">--}}
-{{--                                {{ Form::label('ad_domain', trans('admin/settings/general.ad_domain')) }}--}}
-{{--                            </div>--}}
-{{--                            <div class="col-md-9">--}}
-{{--                                {{ Form::text('ad_domain', Request::old('ad_domain', $setting->ad_domain), ['class' => 'form-control','placeholder' => trans('general.example') .'example.com', $setting->demoMode]) }}--}}
-{{--                                <p class="help-block">{{ trans('admin/settings/general.ad_domain_help') }}</p>--}}
-{{--                                {!! $errors->first('ad_domain', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}--}}
-{{--                                @if (config('app.lock_passwords')===true)--}}
-{{--                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>--}}
-{{--                                @endif--}}
-{{--                            </div>--}}
-{{--                        </div><!-- AD Domain -->--}}
+                <!-- AD Domain -->
+                    <div class="col-md-11 col-md-offset-1">
+                        <div class="form-group {{ $errors->has('ad_domain') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('ad_domain', trans('admin/settings/general.ad_domain')) }}
+                            </div>
+                            <div class="col-md-9">
+                                @if (config('app.lock_passwords')===true)
+                                    <input  wire:model.lazy="ad_domain" type="text" class="form-control" placeholder="{{trans('general.example').'example.com'}} " disabled>
+                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{trans('general.feature_disabled') }}</p>
+                                @else
+                                    <input wire:model.lazy="ad_domain" type="text" class="form-control" placeholder="{{trans('general.example').'example.com'}}" >
+                                    <p class="help-block">{{ trans('admin/settings/general.ad_domain_help') }}</p>
+                                    {!! $errors->first('ad_domain', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                @endif
+                            </div>
+                        </div>
+                    </div><!-- AD Domain -->
 
-{{--                        --}}{{-- NOTICE - this was a feature for AdLdap2-based LDAP syncing, and is already handled in 'classic' LDAP, so we now hide the checkbox (but haven't deleted the field) <!-- AD Append Domain -->--}}
+{{--                         NOTICE - this was a feature for AdLdap2-based LDAP syncing, and is already handled in 'classic' LDAP,--}}
+{{--                        so we now hide the checkbox (but haven't deleted the field) <!-- AD Append Domain -->--}}
 {{--                        <div class="form-group">--}}
 {{--                            <div class="col-md-3">--}}
 {{--                                {{ Form::label('ad_append_domain', trans('admin/settings/general.ad_append_domain_label')) }}--}}
@@ -168,52 +172,66 @@
 {{--                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>--}}
 {{--                                @endif--}}
 {{--                            </div>--}}
-{{--                        </div> --}}
+{{--                        </div>--}}
 
-{{--                        <!-- LDAP Client-Side TLS key -->--}}
-{{--                        <div class="form-group {{ $errors->has('ldap_client_tls_key') ? 'error' : '' }}">--}}
-{{--                            <div class="col-md-3">--}}
-{{--                                {{ Form::label('ldap_client_tls_key', trans('admin/settings/general.ldap_client_tls_key')) }}--}}
-{{--                            </div>--}}
-{{--                            <div class="col-md-9">--}}
-{{--                                {{ Form::textarea('ldap_client_tls_key', Request::old('ldap_client_tls_key', $setting->ldap_client_tls_key), ['class' => 'form-control','placeholder' =>  trans('general.example') .'-----BEGIN RSA PRIVATE KEY-----'."\r\n1234567890\r\n-----END RSA PRIVATE KEY-------}}
-{{--", $setting->demoMode]) }}--}}
-{{--                                {!! $errors->first('ldap_client_tls_key', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}--}}
-{{--                                @if (config('app.lock_passwords')===true)--}}
-{{--                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>--}}
-{{--                                @endif--}}
-{{--                            </div>--}}
-{{--                        </div><!-- LDAP Client-Side TLS key -->--}}
+                <!-- LDAP Client-Side TLS key -->
+                    <div class="col-md-11 col-md-offset-1">
+                        <div class="form-group {{ $errors->has('ldap_client_tls_key') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('ldap_client_tls_key', trans('admin/settings/general.ldap_client_tls_key')) }}
+                            </div>
+                            <div class="col-md-9">
+                                <textarea wire:model.lazy="ldap_client_tls_key" rows="5" class="form-control" placeholder="{{trans('general.example') .'-----BEGIN RSA PRIVATE KEY-----'."\r\n1234567890\r\n-----END RSA PRIVATE KEY-----"}}">
+                                {{old('ldap_client_tls_key', $ldap_client_tls_key)}}</textarea>
+                                {!! $errors->first('ldap_client_tls_key', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                @if (config('app.lock_passwords')===true)
+                                    <textarea wire:model.lazy="ldap_client_tls_key" rows="5" class="form-control" placeholder="{{trans('general.example') .'-----BEGIN RSA PRIVATE KEY-----'."\r\n1234567890\r\n-----END RSA PRIVATE KEY-----"}}" disabled>
+                                    {{old('ldap_client_tls_key', $ldap_client_tls_key)}}</textarea>
+                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                @endif
+                            </div>
+                        </div>
+                    </div><!-- LDAP Client-Side TLS key -->
 
-{{--                        <!-- LDAP Client-Side TLS certificate -->--}}
-{{--                        <div class="form-group {{ $errors->has('ldap_client_tls_cert') ? 'error' : '' }}">--}}
-{{--                            <div class="col-md-3">--}}
-{{--                                {{ Form::label('ldap_client_tls_cert', trans('admin/settings/general.ldap_client_tls_cert')) }}--}}
-{{--                            </div>--}}
-{{--                            <div class="col-md-9">--}}
-{{--                                {{ Form::textarea('ldap_client_tls_cert', Request::old('ldap_client_tls_cert', $setting->ldap_client_tls_cert), ['class' => 'form-control','placeholder' =>  trans('general.example') .'-----BEGIN CERTIFICATE-----'."\r\n1234567890\r\n-----END CERTIFICATE-----", $setting->demoMode]) }}--}}
-{{--                                <p class="help-block">{{ trans('admin/settings/general.ldap_client_tls_cert_help') }}</p>--}}
-{{--                                {!! $errors->first('ldap_client_tls_cert', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}--}}
-{{--                                @if (config('app.lock_passwords')===true)--}}
-{{--                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>--}}
-{{--                                @endif--}}
-{{--                            </div>--}}
-{{--                        </div><!-- LDAP Client-Side TLS certificate -->--}}
+                <!-- LDAP Client-Side TLS certificate -->
+                    <div class="col-md-11 col-md-offset-1">
+                        <div class="form-group {{ $errors->has('ldap_client_tls_cert') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('ldap_client_tls_cert', trans('admin/settings/general.ldap_client_tls_cert')) }}
+                            </div>
+                            <div class="col-md-9">
+                                @if (config('app.lock_passwords')===true)
+                                    <textarea wire:model.lazy="ldap_client_tls_cert" rows="5" class="form-control" placeholder="{{trans('general.example') .'-----BEGIN CERTIFICATE-----'."\r\n1234567890\r\n-----END CERTIFICATE-----"}}">
+                                    {{old('ldap_client_tls_cert', $ldap_client_tls_cert)}}</textarea><p class="text-warning">
+                                    <p><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                @else
+                                    <textarea wire:model.lazy="ldap_client_tls_cert" rows="5" class="form-control" placeholder="{{trans('general.example') .'-----BEGIN CERTIFICATE-----'."\r\n1234567890\r\n-----END CERTIFICATE-----"}}">
+                                    {{old('ldap_client_tls_cert', $ldap_client_tls_cert)}}</textarea><p class="text-warning">
+                                    <p class="help-block">{{ trans('admin/settings/general.ldap_client_tls_cert_help') }}</p>
+                                    {!! $errors->first('ldap_client_tls_cert', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                @endif
+                            </div>
+                        </div>
+                    </div><!-- LDAP Client-Side TLS certificate -->
 
-{{--                        <!-- LDAP Server -->--}}
-{{--                        <div class="form-group {{ $errors->has('ldap_server') ? 'error' : '' }}">--}}
-{{--                            <div class="col-md-3">--}}
-{{--                                {{ Form::label('ldap_server', trans('admin/settings/general.ldap_server')) }}--}}
-{{--                            </div>--}}
-{{--                            <div class="col-md-9">--}}
-{{--                                {{ Form::text('ldap_server', Request::old('ldap_server', $setting->ldap_server), ['class' => 'form-control','placeholder' =>  trans('general.example') .'ldap://ldap.example.com', $setting->demoMode]) }}--}}
-{{--                                <p class="help-block">{{ trans('admin/settings/general.ldap_server_help') }}</p>--}}
-{{--                                {!! $errors->first('ldap_server', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}--}}
-{{--                                @if (config('app.lock_passwords')===true)--}}
-{{--                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>--}}
-{{--                                @endif--}}
-{{--                            </div>--}}
-{{--                        </div><!-- LDAP Server -->--}}
+                <!-- LDAP Server -->
+                    <div class="col-md-11 col-md-offset-1">
+                        <div class="form-group {{ $errors->has('ldap_server') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('ldap_server', trans('admin/settings/general.ldap_server')) }}
+                            </div>
+                            <div class="col-md-9">
+                                @if (config('app.lock_passwords')===true)
+                                    <input  wire:model.lazy="ldap_server" type="text" class="form-control" value={{old('ldap_server', $ldap_server)}} placeholder="{{trans('general.example') .'ldap://ldap.example.com'}} " disabled>
+                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                @else
+                                    <input  wire:model.lazy="ldap_server" type="text" class="form-control" value={{old('ldap_server', $ldap_server)}} placeholder="{{trans('general.example') .'ldap://ldap.example.com'}}">
+                                    <p class="help-block">{{ trans('admin/settings/general.ldap_server_help') }}</p>
+                                    {!! $errors->first('ldap_server', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                @endif
+                            </div>
+                        </div>
+                    </div><!-- LDAP Server -->
 
 {{--                        <!-- Start TLS -->--}}
 {{--                        <div class="form-group">--}}

@@ -9,7 +9,7 @@ use Livewire\Component;
 class LdapSettingsForm extends Component
 {
     public bool $ldap_enabled;
-//    public       $ldap_server,
+      public       $ldap_server;
 //    public       $ldap_server_cert_ignore,
 //    public       $ldap_uname,
 //    public       $ldap_pword,
@@ -24,20 +24,20 @@ class LdapSettingsForm extends Component
 //    public       $ldap_emp_num,
 //    public       $ldap_email,
 //    public       $ldap_manager,
-//    public       $ad_domain,
-//    public       $is_ad,
+      public string $ad_domain;
+      public bool   $is_ad;
 //    public       $ad_append_domain,
 //    public       $ldap_tls,
-      public bool  $ldap_pw_sync;
+      public bool   $ldap_pw_sync;
 //    public       $custom_forgot_pass_url,
 //    public       $ldap_phone_field,
 //    public       $ldap_jobtitle,
 //    public       $ldap_country,
 //    public       $ldap_dept,
-//    public       $ldap_client_tls_cert,
-//    public       $ldap_client_tls_key,
-      public       $ldap_default_group;
-      public       $groups;
+      public        $ldap_client_tls_cert;
+      public        $ldap_client_tls_key;
+      public        $ldap_default_group;
+      public        $groups;
 
     public Setting $setting;
 
