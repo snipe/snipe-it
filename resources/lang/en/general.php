@@ -397,6 +397,12 @@ return [
     'placeholder_kit'       => 'Select a kit',
     'file_not_found'        => 'File not found',
     'preview_not_available' => '(no preview)',
+    'setup'                 => 'Setup',
+    'pre_flight'            => 'Pre-Flight',
+    'skip_to_main_content'  => 'Skip to main content',
+    'toggle_navigation'     => 'Toggle navigation',
+    'alerts'                => 'Alerts',
+    'tasks_view_all'        => 'View all tasks',
 
 
 

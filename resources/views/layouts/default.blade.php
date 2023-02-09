@@ -88,7 +88,7 @@
       <body class="sidebar-mini skin-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} {{ (session('menu_state')!='open') ? 'sidebar-mini sidebar-collapse' : ''  }}">
   @endif
 
-  <a class="skip-main" href="#main">Skip to main content</a>
+  <a class="skip-main" href="#main">{{ trans('general.skip_to_main_content') }}</a>
     <div class="wrapper">
 
       <header class="main-header">
@@ -100,7 +100,7 @@
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button above the compact sidenav -->
           <a href="#" style="color: white" class="sidebar-toggle btn btn-white" data-toggle="push-menu" role="button">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only">{{ trans('general.toggle_navigation') }}</span>
           </a>
           <div class="nav navbar-nav navbar-left">
               <div class="left-navblock">
@@ -256,7 +256,7 @@
                <li class="dropdown tasks-menu">
                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                    <i class="far fa-flag" aria-hidden="true"></i>
-                     <span class="sr-only">Alerts</span>
+                     <span class="sr-only">{{ trans('general.alerts') }}</span>
                    @if (count($alert_items))
                     <span class="label label-danger">{{ count($alert_items) }}</span>
                    @endif
@@ -288,12 +288,13 @@
                      </ul>
                    </li>
                    {{-- <li class="footer">
-                     <a href="#">View all tasks</a>
+                     <a href="#">{{ trans('general.tasks_view_all') }}</a>
                    </li> --}}
                  </ul>
                </li>
                @endcan
                @endif
+
 
 
                <!-- User Account: style can be found in dropdown.less -->
