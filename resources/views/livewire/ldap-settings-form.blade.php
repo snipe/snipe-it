@@ -94,14 +94,14 @@
                                     @else
                                         <div class="controls">
                                             <select
-                                                    name="ldap_default_group"
+                                                    wire:model.lazy="ldap_default_group"
                                                     aria-label="ldap_default_group"
                                                     id="ldap_default_group"
                                                     class="form-control select2"
                                             >
                                                 <option value="">{{ trans('admin/settings/general.no_default_group') }}</option>
                                                 @foreach ($groups as $id => $group)
-                                                    <option value="{{ $id }}" {{ $setting->ldap_default_group == $id ? 'selected' : '' }}>
+                                                    <option value="{{ $id }}" {{ old('$ldap_default_group', $ldap_default_group)}}>
                                                         {{ $group->name }}
                                                     </option>
                                                 @endforeach
@@ -115,27 +115,29 @@
                                 @else
                                     <p>No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.</p>
                                 @endif
-
                             </div>
                         </div>
                     </div>
-                @endif
+                @endif <!--If ldap is enabled-->
 
-{{--                        <!-- AD Flag -->--}}
-{{--                        <div class="form-group">--}}
-{{--                            <div class="col-md-3">--}}
-{{--                                {{ Form::label('is_ad', trans('admin/settings/general.ad')) }}--}}
-{{--                            </div>--}}
-{{--                            <div class="col-md-9">--}}
-{{--                                {{ Form::checkbox('is_ad', '1', Request::old('is_ad', $setting->is_ad), [((config('app.lock_passwords')===true)) ? 'disabled ': '', 'class' => 'minimal '. $setting->demoMode, $setting->demoMode]) }}--}}
-{{--                                {{ trans('admin/settings/general.is_ad') }}--}}
-{{--                                {!! $errors->first('is_ad', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}--}}
-
-{{--                                @if (config('app.lock_passwords')===true)--}}
-{{--                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>--}}
-{{--                                @endif--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                    <div class="col-md-11 col-md-offset-1">
+                        <!-- AD Flag -->
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                {{ Form::label('is_ad', trans('admin/settings/general.ad')) }}
+                            </div>
+                            <div class="col-md-9">
+                                @if(config('app.lock_passwords')===true)
+                                    <input wire:model="is_ad" type="checkbox" value="{{old('is_ad', $is_ad) }}"   disabled>
+                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                @else
+                                    <input wire:model="is_ad" type="checkbox" value="{{old('is_ad', $is_ad)}} "   >
+                                {{ trans('admin/settings/general.is_ad') }}
+                                {!! $errors->first('is_ad', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                @endif
+                            </div>
+                        </div>
+                    </div>
 
 {{--                        <!-- AD Domain -->--}}
 {{--                        <div class="form-group {{ $errors->has('ad_domain') ? 'error' : '' }}">--}}
@@ -556,7 +558,7 @@
 
 
 {{--                    </div>--}}
-{{--                </div> <!--/.box-body-->--}}
+                </div> <!--/.box-body-->
                 <div class="box-footer">
                     <div class="text-left col-md-6">
                         <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>

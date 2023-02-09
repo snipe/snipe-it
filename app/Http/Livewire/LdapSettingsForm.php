@@ -78,9 +78,6 @@ class LdapSettingsForm extends Component
 
     }
 
-
-
-
     public function render()
     {
         return view('livewire.ldap-settings-form');
