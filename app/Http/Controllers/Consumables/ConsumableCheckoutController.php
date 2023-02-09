@@ -69,6 +69,8 @@ class ConsumableCheckoutController extends Controller
             'note' => $request->input('note'),
         ]);
 
+        $consumable->newQuery()->where(['id' => $consumable->id])->update(['qty' => $consumable->qty - 1]);
+
         event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note')));
 
         // Redirect to the new consumable page
