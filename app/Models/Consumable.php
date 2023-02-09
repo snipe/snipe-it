@@ -317,11 +317,9 @@ class Consumable extends SnipeModel
      */
     public function numRemaining()
     {
-        $checkedout = $this->users->count();
         $total = $this->qty;
-        $remaining = $total - $checkedout;
 
-        return $remaining;
+        return $total;
     }
 
     /**
