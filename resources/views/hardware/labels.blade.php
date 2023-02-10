@@ -7,7 +7,7 @@
         window.onafterprint = () => {
             window.history.back()
         }
-        window.print();
+        // window.print();
 
     </script>
 </head>

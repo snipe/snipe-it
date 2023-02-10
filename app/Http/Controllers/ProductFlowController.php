@@ -64,12 +64,12 @@ class ProductFlowController extends Controller
         $asset->requestable             = 0;
 
         if ($asset->save()) {
-            return view('hardware/labels')
+            /* return view('hardware/labels')
                 ->with('assets', Asset::where('asset_tag', '=', $request->input('asset_tag'))->get())
                 ->with('settings', Setting::getSettings())
                 ->with('bulkedit', false)
-                ->with('count', 0);
-            // return redirect()->route('productflow.receiving')->with('success', "Successfully added $model_number to stock!");
+                ->with('count', 0); */
+            return redirect()->route('productflow.receiving')->with('success', "Successfully added $model_number to stock!");
         }
         return redirect()->back()->withInput()->withErrors($asset->getErrors());
     }
