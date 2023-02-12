@@ -29,7 +29,7 @@
 ## {{ $accessories->count() }} {{ trans('general.accessories') }}
 
 <table width="100%">
-<tr><th align="left">{{ trans('mail.name') }} </th></tr>
+    <tr><th align="left">{{ trans('mail.name') }} </th> <th></th> </tr>
 @foreach($accessories as $accessory)
 <tr>
     <td>{{ $accessory->name }}</td>
