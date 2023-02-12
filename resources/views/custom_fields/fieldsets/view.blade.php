@@ -53,7 +53,7 @@
               @endcan
               <td class="index">{{$field->pivot->order}}</td>
               <td>{{$field->name}}</td>
-              <td>{{$field->format}}</td>
+              <td>{!! $field->format !!}</td>
               <td>{{$field->element}}</td>
               <td>{{ $field->field_encrypted=='1' ?  trans('general.yes') : trans('general.no') }}</td>
                 <td>

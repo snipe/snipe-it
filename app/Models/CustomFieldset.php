@@ -90,7 +90,7 @@ class CustomFieldset extends Model
                     $rule[] = 'unique_undeleted';
             }
 
-            array_push($rule, $field->attributes['format']);
+            array_push($rule, html_entity_decode($field->attributes['format']));
             $rules[$field->db_column_name()] = $rule;
         }
 
