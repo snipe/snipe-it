@@ -399,6 +399,7 @@ return [
     'stock_report' => 'Stock Report',
     'placeholder_kit'       => 'Select a kit',
     'file_not_found'        => 'File not found',
+    'preview_not_available' => '(no preview)',
 
 
 
