@@ -73,7 +73,7 @@ class ImportController extends Controller
                         Helper::formatStandardApiResponse(
                             'error',
                             null,
-                            'One or more attributes in the header row contain malformed UTF-8 characters'
+                            trans('admin/hardware/message.import.header_row_has_malformed_characters')
                         ),
                         422
                     );
@@ -106,7 +106,7 @@ class ImportController extends Controller
                         Helper::formatStandardApiResponse(
                             'error',
                             null,
-                            'One or more attributes in row 2 contain malformed UTF-8 characters'
+                            trans('admin/hardware/message.import.content_row_has_malformed_characters')
                         ),
                         422
                     );
