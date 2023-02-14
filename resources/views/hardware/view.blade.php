@@ -243,7 +243,7 @@
                                                         <i class="fas fa-circle text-green"></i>
                                                     @elseif (($asset->assetstatus) && ($asset->assetstatus->pending=='1'))
                                                         <i class="fas fa-circle text-orange"></i>
-                                                    @elseif (($asset->assetstatus) && ($asset->assetstatus->archived=='1'))
+                                                    @else
                                                         <i class="fas fa-times text-red"></i>
                                                     @endif
                                                     <a href="{{ route('statuslabels.show', $asset->assetstatus->id) }}">
