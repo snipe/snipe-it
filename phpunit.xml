@@ -6,18 +6,22 @@
     </include>
   </coverage>
   <testsuites>
-    <testsuite name="Application Test Suite">
-      <directory>./tests/</directory>
-      <exclude>./tests/Browser</exclude>
+    <testsuite name="Unit">
+      <directory suffix="Test.php">./tests/Unit</directory>
+    </testsuite>
+    <testsuite name="Feature">
+      <directory suffix="Test.php">./tests/Feature</directory>
     </testsuite>
   </testsuites>
   <php>
     <env name="APP_ENV" value="testing-ci"/>
+    <env name="BCRYPT_ROUNDS" value="4"/>
     <env name="CACHE_DRIVER" value="array"/>
+    <!-- <env name="DB_CONNECTION" value="sqlite"/> -->
+    <!-- <env name="DB_DATABASE" value=":memory:"/> -->
     <env name="SESSION_DRIVER" value="array"/>
     <env name="QUEUE_DRIVER" value="sync"/>
-    <env name="DB_CONNECTION" value="sqlite"/>
-    <server name="SERVER_NAME" value="http://127.0.0.1:8000"/>
+    <env name="SERVER_NAME" value="http://127.0.0.1:8000"/>
     <ini name="display_errors" value="true"/>
   </php>
 </phpunit>
