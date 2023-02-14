@@ -857,6 +857,7 @@ class AssetsController extends Controller
         $checkout_at = request('checkout_at', date('Y-m-d H:i:s'));
         $expected_checkin = request('expected_checkin', null);
         $note = request('note', null);
+        // Using `->has` preserves the asset name if the name parameter was not included in request.
         $asset_name = request()->has('name') ? request('name') : $asset->name;
 
         // Set the location ID to the RTD location id if there is one
