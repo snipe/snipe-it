@@ -50,7 +50,7 @@
                     </div>
 
                 <!-- LDAP Password Sync -->
-                @if($ldap_enabled = true)
+                @if($ldap_enabled == true)
                     <div class="col-md-11 col-md-offset-1">
                         <div class="form-group">
                             <div class="col-md-3">
@@ -69,6 +69,7 @@
                             </div>
                         </div>
                     </div>
+
 
 
                 <!--  Default LDAP Permissions Group Select -->
@@ -96,11 +97,11 @@
                                                     wire:model.lazy="ldap_default_group"
                                                     aria-label="ldap_default_group"
                                                     id="ldap_default_group"
-                                                    class="form-control select2"
+                                                    class="form-control"
                                             >
                                                 <option value="">{{ trans('admin/settings/general.no_default_group') }}</option>
                                                 @foreach ($groups as $id => $group)
-                                                    <option value="{{ $id }}" {{ old('$ldap_default_group', $ldap_default_group)}}>
+                                                    <option value="{{ $id }}" {{ $setting->ldap_default_group == $id ? 'selected' : '' }}>
                                                         {{ $group->name }}
                                                     </option>
                                                 @endforeach
