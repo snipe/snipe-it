@@ -569,6 +569,36 @@ class Asset extends Depreciable
         return false;
     }
 
+    /**
+     * Get the image URL for the QR Code, creating it beforehand if necessary.
+     *
+     * @author [B. Wetherington] [<bwetherington@grokability.com>]
+     * @since [v6.0.14
+     * @return string | false
+     */
+
+    public function getQrCodeUrl()
+    {
+        $settings = Setting::getSettings();
+
+        if ($settings->qr_code == '1') {
+            $size = Helper::barcodeDimensions($settings->barcode_type);
+            $qr_file = 'barcodes/qr-'.str_slug($this->asset_tag).'-'.str_slug($this->id).'.png';
+
+            if (isset($this->id, $this->asset_tag)) {
+                if (!Storage::disk('public')->exists($qr_file)) { // TODO - if the file is out-of-date relative to the asset, regenerate it?
+                    $barcode = new \Com\Tecnick\Barcode\Barcode();
+                    $barcode_obj = $barcode->getBarcodeObj($settings->barcode_type, route('hardware.show', $this->id), $size['height'], $size['width'], 'black', [-2, -2, -2, -2]);
+                    Storage::disk('public')->put($qr_file, $barcode_obj->getPngData());
+                }
+                return Storage::disk('public')->url($qr_file);
+
+            }
+
+        }
+        return false;
+    }
+
 
     /**
      * Get the asset's logs
