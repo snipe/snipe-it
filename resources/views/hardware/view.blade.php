@@ -245,10 +245,9 @@
                                                         <i class="fas fa-circle text-orange"></i>
                                                     @elseif (($asset->assetstatus) && ($asset->assetstatus->archived=='1'))
                                                         <i class="fas fa-times text-red"></i>
-                                                    @elseif (($asset->assetstatus) && ($asset->assetstatus->name =="Broken - Not Fixable"))
+                                                    @elseif (($asset->assetstatus) && ($asset->assetstatus->deployable=='0'))
                                                         <i class="fas fa-times text-red"></i>
                                                     @endif
-
                                                     <a href="{{ route('statuslabels.show', $asset->assetstatus->id) }}">
                                                         {{ $asset->assetstatus->name }}</a>
                                                     <label class="label label-default">{{ $asset->present()->statusMeta }}</label>
