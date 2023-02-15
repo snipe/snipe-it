@@ -4,6 +4,7 @@ namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
 use App\Models\Accessory;
+use App\Models\Setting;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
@@ -22,6 +23,7 @@ class AccessoriesTransformer
 
     public function transformAccessory(Accessory $accessory)
     {
+
         $array = [
             'id' => $accessory->id,
             'name' => e($accessory->name),
@@ -66,6 +68,8 @@ class AccessoriesTransformer
 
     public function transformCheckedoutAccessory($accessory, $accessory_users, $total)
     {
+        $setting = Setting::getSettings();
+
         $array = [];
 
         foreach ($accessory_users as $user) {
@@ -74,7 +78,7 @@ class AccessoriesTransformer
                 'assigned_pivot_id' => $user->pivot->id,
                 'id' => (int) $user->id,
                 'username' => e($user->username),
-                'name' => e($user->getFullNameAttribute()),
+                'name' => ($setting->display_username == '1') ? e($user->getCompleteNameAttribute()) : e($user->getFullNameAttribute()),
                 'first_name'=> e($user->first_name),
                 'last_name'=> e($user->last_name),
                 'employee_number' =>  e($user->employee_num),
