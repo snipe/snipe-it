@@ -20,23 +20,23 @@ class LdapSettingsForm extends Component
       public        $ldap_fname_field;
       public        $ldap_auth_filter_query;
       public        $ldap_version;
-//    public       $ldap_active_flag,
+      public        $ldap_active_flag;
       public        $ldap_emp_num;
-//    public       $ldap_email,
+      public        $ldap_email;
       public        $ldap_manager;
       public string $ad_domain;
       public bool   $is_ad;
 //    public       $ad_append_domain,
       public bool   $ldap_tls;
       public bool   $ldap_pw_sync;
-//    public       $custom_forgot_pass_url,
-//    public       $ldap_phone_field,
-//    public       $ldap_jobtitle,
-//    public       $ldap_country,
+//    public        $custom_forgot_pass_url,
+      public        $ldap_jobtitle;
+      public        $ldap_country;
       public        $ldap_dept;
       public        $ldap_client_tls_cert;
       public        $ldap_client_tls_key;
       public        $ldap_default_group;
+      public        $ldap_phone_field;
       public        $groups;
 
     public Setting $setting;

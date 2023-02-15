@@ -475,69 +475,73 @@
                             </div>
                         </div>
 
-{{--                        <!-- LDAP email -->--}}
-                            <div class="col-md-11 col-md-offset-1">
-{{--                        <div class="form-group {{ $errors->has('ldap_email') ? 'error' : '' }}">--}}
-{{--                            <div class="col-md-3">--}}
-{{--                                {{ Form::label('ldap_email', trans('admin/settings/general.ldap_email')) }}--}}
-{{--                            </div>--}}
-{{--                            <div class="col-md-9">--}}
-{{--                                {{ Form::text('ldap_email', Request::old('ldap_email', $setting->ldap_email), ['class' => 'form-control','placeholder' => trans('general.example') .'mail', $setting->demoMode]) }}--}}
-{{--                                {!! $errors->first('ldap_email', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}--}}
-{{--                                @if (config('app.lock_passwords')===true)--}}
-{{--                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>--}}
-{{--                                @endif--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                    <!-- LDAP email -->
+                    <div class="col-md-11 col-md-offset-1">
+                        <div class="form-group {{ $errors->has('ldap_email') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('ldap_email', trans('admin/settings/general.ldap_email')) }}
                             </div>
+                            <div class="col-md-9">
+                                <input  wire:model.lazy="ldap_email" type="text" class="form-control" value="{{old('ldap_email', $ldap_email)}}" placeholder="{{trans('general.example') .'mail'}}">
+                                {!! $errors->first('ldap_email', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                @if (config('app.lock_passwords')===true)
+                                    <input  wire:model.lazy="ldap_email" type="text" class="form-control" value="{{old('ldap_email', $ldap_email)}}" placeholder="{{trans('general.example') .'mail'}}" disabled>
+                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
 
-{{--                        <!-- LDAP Phone -->--}}
-                                <div class="col-md-11 col-md-offset-1">
-{{--                        <div class="form-group {{ $errors->has('ldap_phone') ? 'error' : '' }}">--}}
-{{--                            <div class="col-md-3">--}}
-{{--                                {{ Form::label('ldap_phone', trans('admin/settings/general.ldap_phone')) }}--}}
-{{--                            </div>--}}
-{{--                            <div class="col-md-9">--}}
-{{--                                {{ Form::text('ldap_phone', Request::old('ldap_phone', $setting->ldap_phone_field), ['class' => 'form-control','placeholder' => trans('general.example') .'telephonenumber', $setting->demoMode]) }}--}}
-{{--                                {!! $errors->first('ldap_phone', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}--}}
-{{--                                @if (config('app.lock_passwords')===true)--}}
-{{--                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>--}}
-{{--                                @endif--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-                                </div>
+{{--                <!-- LDAP Phone -->--}}
+                    <div class="col-md-11 col-md-offset-1">
+                        <div class="form-group {{ $errors->has('ldap_phone') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('ldap_phone', trans('admin/settings/general.ldap_phone')) }}
+                            </div>
+                            <div class="col-md-9">
+                                <input  wire:model.lazy="$ldap_phone_field" type="text" class="form-control" value="{{old('$ldap_phone_field', $ldap_phone_field)}}" placeholder="{{trans('general.example') .'telephonenumber'}}">
+                                {!! $errors->first('ldap_phone', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                @if (config('app.lock_passwords')===true)
+                                    <input  wire:model.lazy="$ldap_phone_field" type="text" class="form-control" value="{{old('$ldap_phone_field', $ldap_phone_field)}}" placeholder="{{trans('general.example') .'telephonenumber'}}" disabled>
+                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
 
-{{--                        <!-- LDAP Job title -->--}}
-                                    <div class="col-md-11 col-md-offset-1">
-{{--                        <div class="form-group {{ $errors->has('ldap_jobtitle') ? 'error' : '' }}">--}}
-{{--                            <div class="col-md-3">--}}
-{{--                                {{ Form::label('ldap_jobtitle', trans('admin/settings/general.ldap_jobtitle')) }}--}}
-{{--                            </div>--}}
-{{--                            <div class="col-md-9">--}}
-{{--                                {{ Form::text('ldap_jobtitle', Request::old('ldap_jobtitle', $setting->ldap_jobtitle), ['class' => 'form-control','placeholder' => trans('general.example') .'title', $setting->demoMode]) }}--}}
-{{--                                {!! $errors->first('ldap_jobtitle', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}--}}
-{{--                                @if (config('app.lock_passwords')===true)--}}
-{{--                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>--}}
-{{--                                @endif--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-                                    </div>
+                    <!-- LDAP Job title -->
+                    <div class="col-md-11 col-md-offset-1">
+                        <div class="form-group {{ $errors->has('ldap_jobtitle') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('ldap_jobtitle', trans('admin/settings/general.ldap_jobtitle')) }}
+                            </div>
+                            <div class="col-md-9">
+                                <input  wire:model.lazy="ldap_jobtitle" type="text" class="form-control" value="{{old('ldap_jobtitle', $ldap_jobtitle)}}" placeholder="{{trans('general.example') .'title'}}">
+                                {!! $errors->first('ldap_jobtitle', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                @if (config('app.lock_passwords')===true)
+                                    <input  wire:model.lazy="ldap_jobtitle" type="text" class="form-control" value="{{old('ldap_jobtitle', $ldap_jobtitle)}}" placeholder="{{trans('general.example') .'title'}}" disabled>
+                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
 
 {{--                        <!-- LDAP Country -->--}}
-                                        <div class="col-md-11 col-md-offset-1">
-{{--                        <div class="form-group {{ $errors->has('ldap_country') ? 'error' : '' }}">--}}
-{{--                            <div class="col-md-3">--}}
-{{--                                {{ Form::label('ldap_country', trans('admin/settings/general.ldap_country')) }}--}}
-{{--                            </div>--}}
-{{--                            <div class="col-md-9">--}}
-{{--                                {{ Form::text('ldap_country', Request::old('ldap_country', $setting->ldap_country), ['class' => 'form-control','placeholder' => trans('general.example') .'c', $setting->demoMode]) }}--}}
-{{--                                {!! $errors->first('ldap_country', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}--}}
-{{--                                @if (config('app.lock_passwords')===true)--}}
-{{--                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>--}}
-{{--                                @endif--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-                                        </div>
+                        <div class="col-md-11 col-md-offset-1">
+                            <div class="form-group {{ $errors->has('ldap_country') ? 'error' : '' }}">
+                                <div class="col-md-3">
+                                    {{ Form::label('ldap_country', trans('admin/settings/general.ldap_country')) }}
+                                </div>
+                                <div class="col-md-9">
+                                    <input  wire:model.lazy="ldap_country" type="text" class="form-control" value="{{old('ldap_country', $ldap_country)}}" placeholder="{{trans('general.example') .'c'}}">
+                                    {!! $errors->first('ldap_country', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                    @if (config('app.lock_passwords')===true)
+                                        <input  wire:model.lazy="ldap_country" type="text" class="form-control" value="{{old('ldap_country', $ldap_country)}}" placeholder="{{trans('general.example') .'c'}}" disabled>
+                                        <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
 {{--                        @if ($setting->ldap_enabled)--}}
 
 {{--                            <!-- LDAP test -->--}}
