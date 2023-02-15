@@ -397,6 +397,8 @@ return [
     'placeholder_kit'       => 'Select a kit',
     'file_not_found'        => 'File not found',
     'preview_not_available' => '(no preview)',
+    'display_username'      => 'Display Username',
+    'display_username_help_text'    => 'Checking this box will cause listings to display the username in addition to the first and last name for users on listing pages.',
 
 
 
