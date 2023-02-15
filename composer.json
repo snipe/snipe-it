@@ -75,11 +75,14 @@
     "fakerphp/faker": "^1.16",
     "laravel/dusk": "^6.25",
     "mockery/mockery": "^1.4",
+    "nunomaduro/larastan": "^1.0",
+    "nunomaduro/phpinsights": "^2.7",
     "phpunit/php-token-stream": "^3.1",
     "phpunit/phpunit": "^9.0",
     "squizlabs/php_codesniffer": "^3.5",
     "symfony/css-selector": "^4.4",
-    "symfony/dom-crawler": "^4.4"
+    "symfony/dom-crawler": "^4.4",
+    "vimeo/psalm": "^5.6"
   },
   "extra": {
     "laravel": {

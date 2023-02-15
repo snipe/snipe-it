@@ -38,7 +38,7 @@ class AcceptanceAssetDeclinedNotification extends Notification
      */
     public function via($notifiable)
     {
-        $notifyBy[] = 'mail';
+        $notifyBy = ['mail'];
 
         return $notifyBy;
 

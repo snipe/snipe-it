@@ -43,7 +43,6 @@ echo "--------------------------------------------------------\n\n";
 
 // Check the .env looks ok
 $env = file('.env');
-$env_error_count = 0;
 $env_good = '';
 $env_bad = '';
 
@@ -85,15 +84,13 @@ foreach ($env as $line_num => $line) {
 
         if ($env_key == 'APP_KEY') {
             if (($env_value=='')  || (strlen($env_value) < 20)) {
-                $env_bad .= "✘ APP_KEY ERROR in your .env on line #'.$show_line_num.': Your APP_KEY should not be blank. Run `php artisan key:generate` to generate one.\n";
+                $env_bad .= "✘ APP_KEY ERROR in your .env on line #'.{$show_line_num}.': Your APP_KEY should not be blank. Run `php artisan key:generate` to generate one.\n";
             } else {
                 $env_good .= "√ Your APP_KEY is not blank. \n";
             }
         }
 
         if ($env_key == 'APP_URL') {
-
-            $app_url_length = strlen($env_value);
 
             if (($env_value!="null") && ($env_value!="")) {
                 $env_good .= '√ Your APP_URL is not null or blank. It is set to '.$env_value."\n";
@@ -452,11 +449,11 @@ echo "--------------------------------------------------------\n\n";
 
 
 function str_begins($haystack, $needle) {
-    return 0 === substr_compare($haystack, $needle, 0, strlen($needle));
+    return (substr_compare($haystack, $needle, 0, strlen($needle)) === 0);
 }
 
 function str_ends($haystack,  $needle) {
-    return 0 === substr_compare($haystack, $needle, -strlen($needle));
+    return (substr_compare($haystack, $needle, -strlen($needle)) === 0);
 }
 
 

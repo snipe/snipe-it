@@ -164,7 +164,7 @@ trait Searchable
                 }
                 // I put this here because I only want to add the concat one time in the end of the user relation search
                 if($relation == 'user') {
-                    $query->orWhereRaw('CONCAT (users.first_name, " ", users.last_name) LIKE ?', ["%$term%"]);
+                    $query->orWhereRaw('CONCAT (users.first_name, " ", users.last_name) LIKE ?', ["%{$term}%"]);
                 }
             });
         }
@@ -195,7 +195,7 @@ trait Searchable
      */
     private function getSearchableAttributes()
     {
-        return isset($this->searchableAttributes) ? $this->searchableAttributes : [];
+        return $this->searchableAttributes ?? [];
     }
 
     /**
@@ -205,7 +205,7 @@ trait Searchable
      */
     private function getSearchableRelations()
     {
-        return isset($this->searchableRelations) ? $this->searchableRelations : [];
+        return $this->searchableRelations ?? [];
     }
 
     /**

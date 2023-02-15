@@ -807,7 +807,7 @@ class SettingsController extends Controller
      */
     public function getPhpInfo()
     {
-        if (true === config('app.debug')) {
+        if (config('app.debug') === true) {
             return view('settings.phpinfo');
         }
 

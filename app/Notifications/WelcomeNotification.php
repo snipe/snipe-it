@@ -44,7 +44,7 @@ class WelcomeNotification extends Notification
      */
     public function toMail()
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->subject(trans('mail.welcome', ['name' => $this->_data['first_name'].' '.$this->_data['last_name']]))
             ->markdown('notifications.Welcome', $this->_data);
     }
