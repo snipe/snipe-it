@@ -11,6 +11,7 @@ class SlackSettingsForm extends Component
     public $slack_endpoint;
     public $slack_channel;
     public $slack_botname;
+    public $isDisabled ='disabled' ;
 
     public Setting $setting;
 
@@ -35,6 +36,9 @@ class SlackSettingsForm extends Component
 
     public function render()
     {
+        if(empty($this->slack_channel || $this->slack_endpoint)){
+            $this->isDisabled= 'disabled';
+        }
         return view('livewire.slack-settings-form');
     }
 
@@ -57,9 +61,11 @@ class SlackSettingsForm extends Component
 
         try {
             $slack->post($this->slack_endpoint, ['body' => $payload]);
+            $this->isDisabled='';
             return session()->flash('success' , 'Your Slack Integration works!');
 
         } catch (\Exception $e) {
+            $this->isDisabled= 'disabled';
             return session()->flash('error' , trans('admin/settings/message.slack.error', ['error_message' => $e->getMessage()]));
         }
 

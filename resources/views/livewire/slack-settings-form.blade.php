@@ -64,7 +64,7 @@
             <div class="col-md-2">
                 {{ Form::label('slack_botname', trans('admin/settings/general.slack_botname')) }}
             </div>
-            <div class="col-md-8 required">
+            <div class="col-md-8">
                 @if (config('app.lock_passwords')===true)
                     <input type="text" wire:model.lazy="slack_botname" class= 'form-control' placeholder="Snipe-Bot" {{old('slack_botname', $slack_botname)}}>
                     <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
@@ -89,7 +89,7 @@
         <div class="box-footer" style="margin-top: 45px;">
             <div class="text-right col-md-12">
                 <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
-                <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                <button type="submit" {{$isDisabled}} class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
             </div>
         </div><!--box-footer-->
         </form>
