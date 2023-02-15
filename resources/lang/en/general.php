@@ -399,6 +399,12 @@ return [
     'preview_not_available' => '(no preview)',
     'display_username'      => 'Display Username',
     'display_username_help_text'    => 'Checking this box will cause listings to display the username in addition to the first and last name for users on listing pages.',
+    'setup'                 => 'Setup',
+    'pre_flight'            => 'Pre-Flight',
+    'skip_to_main_content'  => 'Skip to main content',
+    'toggle_navigation'     => 'Toggle navigation',
+    'alerts'                => 'Alerts',
+    'tasks_view_all'        => 'View all tasks',
 
 
 

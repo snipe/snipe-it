@@ -109,9 +109,9 @@ class CustomFieldsController extends Controller
 
 
         if ($request->filled('custom_format')) {
-            $field->format = e($request->get('custom_format'));
+            $field->format = $request->get('custom_format');
         } else {
-            $field->format = e($request->get('format'));
+            $field->format = $request->get('format');
         }
 
         if ($field->save()) {
