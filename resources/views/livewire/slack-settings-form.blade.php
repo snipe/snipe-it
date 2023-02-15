@@ -82,7 +82,7 @@
                 </div>
                 <div class="col-md-10">
                     <a href="#" wire:click.prevent="testSlack" id="test_slack" class="btn btn-default btn-sm pull-left"><span>{!! trans('admin/settings/general.slack_test') !!}</span></a>
-                    <div wire:loading><i class="fas fa-spinner spin"></i></div>
+                    <div wire:loading><span style="padding-left: 5px; font-size: 20px"><i class="fas fa-spinner fa-spin"></i></span></div>
                 </div>
         </div>
             @endif
