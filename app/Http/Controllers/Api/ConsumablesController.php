@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Transformers\ComponentsTransformer;
 use App\Http\Transformers\ConsumablesTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Company;
@@ -209,37 +210,23 @@ class ConsumablesController extends Controller
     * @param int $consumableId
     * @return array
      */
-    public function getDataView($consumableId)
+    public function checkedout($consumableId)
     {
-        $consumable = Consumable::with(['consumableAssignments'=> function ($query) {
-            $query->orderBy($query->getModel()->getTable().'.created_at', 'DESC');
-        },
-        'consumableAssignments.admin'=> function ($query) {
-        },
-        'consumableAssignments.user'=> function ($query) {
-        },
-        ])->find($consumableId);
-
+        $consumable = Consumable::with('users')->findOrFail($consumableId);
         if (! Company::isCurrentUserHasAccess($consumable)) {
             return ['total' => 0, 'rows' => []];
         }
-        $this->authorize('view', Consumable::class);
-        $rows = [];
 
-        foreach ($consumable->consumableAssignments as $consumable_assignment) {
-            $rows[] = [
-                'avatar' => ($consumable_assignment->user) ? e($consumable_assignment->user->present()->gravatar) : '',
-                'name' => ($consumable_assignment->user) ? $consumable_assignment->user->present()->nameUrl() : 'Deleted User',
-                'created_at' => Helper::getFormattedDateObject($consumable_assignment->created_at, 'datetime'),
-                'note' => ($consumable_assignment->note) ? e($consumable_assignment->note) : null,
-                'admin' => ($consumable_assignment->admin) ? $consumable_assignment->admin->present()->nameUrl() : null,
-            ];
+        $offset = request('offset', 0);
+        $limit = request('limit', 50);
+
+        $consumables_users = $consumable->users;
+        $total = $consumables_users->count();
+
+        if ($total < $offset) {
+            $offset = 0;
         }
-
-        $consumableCount = $consumable->users->count();
-        $data = ['total' => $consumableCount, 'rows' => $rows];
-
-        return $data;
+        return (new ConsumablesTransformer)->transformCheckedoutConsumables($consumable, $consumables_users, $total);
     }
 
     /**
