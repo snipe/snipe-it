@@ -1,5 +1,4 @@
 <?php
-
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
@@ -114,7 +113,7 @@ $config = [
             'access_token' => env('ROLLBAR_TOKEN'),
             'level' => env('ROLLBAR_LEVEL', 'error'),
             'check_ignore' => function($isUncaught, $args, $payload) {
-                if (App::environment('production') && get_class($args) == Rollbar\ErrorWrapper::class && $args->errorLevel == E_WARNING ) {
+                if (App::environment('production') && is_object($args) && get_class($args) == Rollbar\ErrorWrapper::class && $args->errorLevel == E_WARNING ) {
                     \Log::info("IGNORING E_WARNING in production mode: ".$args->getMessage());
                     return true; // "TRUE - you should ignore it!"
                 }
