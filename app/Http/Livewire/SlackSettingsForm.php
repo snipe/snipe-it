@@ -60,11 +60,11 @@ class SlackSettingsForm extends Component
             return session()->flash('success' , 'Your Slack Integration works!');
 
         } catch (\Exception $e) {
-            return session()->flash('error' , 'Please check the channel name and webhook endpoint URL ('.e($this->slack_endpoint).'). Slack responded with: '.$e->getMessage());
+            return session()->flash('error' , trans('admin/settings/message.slack.error', ['error_message' => $e->getMessage()]));
         }
 
         //}
-        return session()->flash('message' , 'Something went wrong :( ');
+        return session()->flash('message' , trans('admin/settings/message.slack.error_misc'));
 
 
 
