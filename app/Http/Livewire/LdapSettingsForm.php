@@ -8,32 +8,32 @@ use Livewire\Component;
 
 class LdapSettingsForm extends Component
 {
-    public bool $ldap_enabled;
-      public       $ldap_server;
-//    public       $ldap_server_cert_ignore,
-//    public       $ldap_uname,
-//    public       $ldap_pword,
-//    public       $ldap_basedn,
-//    public       $ldap_filter,
-//    public       $ldap_username_field,
-//    public       $ldap_lname_field,
-//    public       $ldap_fname_field,
-//    public       $ldap_auth_filter_query,
-//    public       $ldap_version,
+      public bool   $ldap_enabled;
+      public        $ldap_server;
+      public bool   $ldap_server_cert_ignore;
+      public        $ldap_uname;
+      public        $ldap_pword;
+      public        $ldap_basedn;
+      public        $ldap_filter;
+      public        $ldap_username_field;
+      public        $ldap_lname_field;
+      public        $ldap_fname_field;
+      public        $ldap_auth_filter_query;
+      public        $ldap_version;
 //    public       $ldap_active_flag,
-//    public       $ldap_emp_num,
+      public        $ldap_emp_num;
 //    public       $ldap_email,
-//    public       $ldap_manager,
+      public        $ldap_manager;
       public string $ad_domain;
       public bool   $is_ad;
 //    public       $ad_append_domain,
-//    public       $ldap_tls,
+      public bool   $ldap_tls;
       public bool   $ldap_pw_sync;
 //    public       $custom_forgot_pass_url,
 //    public       $ldap_phone_field,
 //    public       $ldap_jobtitle,
 //    public       $ldap_country,
-//    public       $ldap_dept,
+      public        $ldap_dept;
       public        $ldap_client_tls_cert;
       public        $ldap_client_tls_key;
       public        $ldap_default_group;
