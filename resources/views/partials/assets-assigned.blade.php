@@ -60,7 +60,7 @@
                                 table_html += "</tr>";
                             }
                         } else {
-                            table_html += '<tr><td colspan="4">No assets checked out to '+ $('.js-data-user-ajax').find('option:selected').text() + ' yet!</td></tr>';
+                            table_html += '<tr><td colspan="4">No assets checked out to this user yet!</td></tr>';
                         }
                         $('#current_assets_content').html(table_html + '</tbody></table></div></div>');
 

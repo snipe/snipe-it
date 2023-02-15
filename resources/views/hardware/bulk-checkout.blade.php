@@ -91,7 +91,7 @@
     <div class="box box-primary">
       <div class="box-header with-border">
         <h2 class="box-title">{{ trans('admin/users/general.current_assets') }}</h2>
-      </div>
+          </div>
       <div class="box-body">
         <div id="current_assets_content">
         </div>
