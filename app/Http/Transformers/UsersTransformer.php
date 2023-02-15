@@ -3,6 +3,7 @@
 namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
+use App\Models\Setting;
 use App\Models\User;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
@@ -21,6 +22,7 @@ class UsersTransformer
 
     public function transformUser(User $user)
     {
+
         $array = [
                 'id' => (int) $user->id,
                 'avatar' => e($user->present()->gravatar),
@@ -99,6 +101,34 @@ class UsersTransformer
         }
 
         return $array;
+    }
+
+    public function transformUserCompact(User $user) {
+        $setting = Setting::getSettings();
+        return  [
+            'new' => 'yep', // remove me
+            'id' => (int) $user->id,
+            'avatar' => e($user->present()->gravatar),
+            'username' => e($user->username),
+            'name' => ($setting->display_username == '1') ? e($user->getCompleteNameAttribute()) : e($user->getFullNameAttribute()),
+            'first_name'=> e($user->first_name),
+            'last_name'=> ($user->last_name) ? e($user->last_name) : null,
+            'email'=> ($user->email) ? e($user->email) : null,
+            'employee_num' => ($user->employee_num) ? e($user->employee_num) : null,
+            'manager' => ($user->manager) ? [
+                'id' => (int) $user->manager->id,
+                'name'=> e($user->manager->first_name).' '.e($user->manager->last_name),
+            ] : null,
+            'department' => ($user->department) ? [
+                'id' => (int) $user->department->id,
+                'name'=> e($user->department->name),
+            ] : null,
+            'location' => ($user->userloc) ? [
+                'id' => (int) $user->userloc->id,
+                'name'=> e($user->userloc->name),
+            ] : null,
+            'type' => 'user',
+        ];
     }
 
     public function transformUsersDatatable($users)
