@@ -83,6 +83,9 @@ class Setting extends Model
         'email_domain',
         'email_format',
         'username_format',
+        'slack_endpoint',
+        'slack_channel',
+        'slack_botname',
     ];
 
     /**
