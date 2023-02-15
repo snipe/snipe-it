@@ -4,6 +4,7 @@ namespace App\Http\Transformers;
 
 use App\Models\License;
 use App\Models\LicenseSeat;
+use App\Models\Setting;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -23,19 +24,12 @@ class LicenseSeatsTransformer
 
     public function transformLicenseSeat(LicenseSeat $seat, $seat_count = 0)
     {
+        $setting = Setting::getSettings();
+
         $array = [
             'id' => (int) $seat->id,
             'license_id' => (int) $seat->license->id,
-            'assigned_user' => ($seat->user) ? [
-                'id' => (int) $seat->user->id,
-                'name'=> e($seat->user->present()->fullName),
-                'department'=> ($seat->user->department) ?
-                        [
-                            'id' => (int) $seat->user->department->id,
-                            'name' => e($seat->user->department->name),
-
-                        ] : null,
-            ] : null,
+            'assigned_user' => ($seat->user) ?  (new UsersTransformer)->transformUserCompact($seat->user) : null,
             'assigned_asset' => ($seat->asset) ? [
                 'id' => (int) $seat->asset->id,
                 'name'=> e($seat->asset->present()->fullName),
