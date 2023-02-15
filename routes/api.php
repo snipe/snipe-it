@@ -283,7 +283,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         Route::get('{id}/users',
             [
                 Api\ConsumablesController::class, 
-                'userCheckouts'
+                'checkedout'
             ]
         )->name('api.consumables.showUsers');
 
