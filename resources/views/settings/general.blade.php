@@ -114,6 +114,22 @@
                         </div>
                     </div>
 
+                       <!-- Include username in listings -->
+                       <div class="form-group {{ $errors->has('display_username') ? 'error' : '' }}">
+                           <div class="col-md-3">
+                               {{ Form::label('display_username',
+                                              trans('general.display_username')) }}
+                           </div>
+                           <div class="col-md-9">
+                               {{ Form::checkbox('display_username', '1', Request::old('display_username', $setting->display_username),array('class' => 'minimal')) }}
+                               {{ trans('general.yes') }}
+                               {!! $errors->first('display_username', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                               <p class="help-block">{{ trans('general.display_username_help_text') }}</p>
+                           </div>
+                       </div>
+                       <!-- /.form-group -->
+
+
                        <!-- Load images in emails -->
                        <div class="form-group {{ $errors->has('show_images_in_email') ? 'error' : '' }}">
                            <div class="col-md-3">
