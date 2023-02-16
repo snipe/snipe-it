@@ -567,36 +567,38 @@
                             </div>
                         </div>
 
-{{--                            <!-- LDAP Login test -->--}}
-{{--                            <div class="form-group">--}}
-{{--                                <div class="col-md-3">--}}
-{{--                                    {{ Form::label('test_ldap_login', 'Test LDAP Login') }}--}}
-{{--                                </div>--}}
-{{--                                <div class="col-md-9">--}}
-{{--                                    <div class="row">--}}
-{{--                                        <div class="col-md-4">--}}
-{{--                                            <input type="text" name="ldaptest_user" id="ldaptest_user"  class="form-control" placeholder="LDAP username">--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-md-4">--}}
-{{--                                            <input type="password" name="ldaptest_password" id="ldaptest_password" class="form-control" placeholder="LDAP password">--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-md-3">--}}
-{{--                                            <a class="btn btn-default btn-sm" id="ldaptestlogin" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test') }}</a>--}}
-{{--                                        </div>--}}
+                            <!-- LDAP Login test -->
+                        <div class="col-md-11 col-md-offset-1">
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    {{ Form::label('test_ldap_login', 'Test LDAP Login') }}
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <input type="text" wire:model="ldaptest_user" id="ldaptest_user" class="form-control" placeholder="LDAP username">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="password" wire:model="ldaptest_password" id="ldaptest_password" class="form-control" placeholder="LDAP password">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <a class="btn btn-default btn-sm" id="ldaptestlogin" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test') }}</a>
+                                        </div>
 
 
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-md-9 col-md-offset-3">--}}
-{{--                                    <span id="ldaptestloginicon"></span>--}}
-{{--                                    <span id="ldaptestloginresult"></span>--}}
-{{--                                    <span id="ldaptestloginstatus"></span>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-md-9 col-md-offset-3">--}}
-{{--                                    <p class="help-block">{{ trans('admin/settings/general.ldap_login_test_help') }}</p>--}}
-{{--                                </div>--}}
+                                    </div>
+                                </div>
+                                <div class="col-md-9 col-md-offset-3">
+                                    <span id="ldaptestloginicon"></span>
+                                    <span id="ldaptestloginresult"></span>
+                                    <span id="ldaptestloginstatus"></span>
+                                </div>
+                                <div class="col-md-9 col-md-offset-3">
+                                    <p class="help-block">{{ trans('admin/settings/general.ldap_login_test_help') }}</p>
+                                </div>
 
-{{--                            </div>--}}
+                            </div>
+                        </div>
 
 
                         @endif
