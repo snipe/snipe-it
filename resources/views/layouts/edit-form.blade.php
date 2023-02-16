@@ -31,35 +31,36 @@
         <!-- box -->
         <div class="box box-default">
             <!-- box-header -->
-            <div class="box-header with-border text-right">
+            <div class="box-header with-border">
 
-                <div class="col-md-12 box-title text-right" style="padding: 0px; margin: 0px;">
+                @if ((isset($topSubmit) && ($topSubmit=='true')) || (isset($item->id)))
 
-                    <div class="col-md-12" style="padding: 0px; margin: 0px;">
+                <div class="col-md-12 box-title text-right">
+                    <div class="col-md-12">
                         <div class="col-md-9 text-left">
                             @if ($item->id)
                                 <h2 class="box-title text-left" style="padding-top: 8px;">
                                     {{ $item->display_name }}
-                                </h2>
+                                </h2> ;
                             @endif
                         </div>
+                        @if (isset($topSubmit) && ($topSubmit=='true'))
                         <div class="col-md-3 text-right" style="padding-right: 10px;">
-                            <a class="btn btn-link text-left" href="{{ URL::previous() }}">
-                                {{ trans('button.cancel') }}
-                            </a>
                             <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-check icon-white" aria-hidden="true"></i>
                                 {{ trans('general.save') }}
                             </button>
                         </div>
+                        @endif
                     </div>
                 </div>
-
             </div><!-- /.box-header -->
+            @endif
 
             <!-- box-body -->
             <div class="box-body">
 
+                <div style="padding-top: 30px;">
                     @if ($item->id)
                     {{ method_field('PUT') }}
                     @endif
@@ -68,6 +69,7 @@
                     {{ csrf_field() }}
                     @yield('inputFields')
                     @include('partials.forms.edit.submit')
+                </div>
 
             </div> <!-- ./box-body -->
         </div> <!-- box -->
