@@ -35,24 +35,22 @@
 
                 @if ((isset($topSubmit) && ($topSubmit=='true')) || (isset($item->id)))
 
-                <div class="col-md-12 box-title text-right">
-                    <div class="col-md-12">
+                <div class="col-md-12 box-title text-right" style="padding: 0px; margin: 0px;">
                         <div class="col-md-9 text-left">
                             @if ($item->id)
-                                <h2 class="box-title text-left" style="padding-top: 8px;">
+                                <h2 class="box-title" style="padding-top: 8px; padding-bottom: 7px;">
                                     {{ $item->display_name }}
                                 </h2>
                             @endif
                         </div>
                         @if (isset($topSubmit) && ($topSubmit=='true'))
-                        <div class="col-md-3 text-right" style="padding-right: 10px;">
-                            <button type="submit" class="btn btn-primary">
+                        <div class="col-md-3 text-right" style="padding-right: 0px;">
+                            <button type="submit" class="btn btn-primary pull-right">
                                 <i class="fas fa-check icon-white" aria-hidden="true"></i>
                                 {{ trans('general.save') }}
                             </button>
                         </div>
                         @endif
-                    </div>
                 </div>
             </div><!-- /.box-header -->
             @endif
