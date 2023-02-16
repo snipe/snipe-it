@@ -16,12 +16,16 @@ class CheckoutAcceptance extends Model
         'declined_at' => 'datetime',
     ];
 
-    // Get the mail recipient from the config
-    public function routeNotificationForMail(): string
+    /**
+     * Get the mail recipient from the config
+     *
+     * @return mixed|string|null
+     */
+    public function routeNotificationForMail()
     {
         // At this point the endpoint is the same for everything.
         //  In the future this may want to be adapted for individual notifications.
-        return (config('mail.reply_to.address')) ? config('mail.reply_to.address') : '' ;
+        return Setting::getSettings()->alert_email;
     }
 
     /**

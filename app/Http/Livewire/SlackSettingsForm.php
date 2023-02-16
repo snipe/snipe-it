@@ -39,6 +39,9 @@ class SlackSettingsForm extends Component
         if(empty($this->slack_channel || $this->slack_endpoint)){
             $this->isDisabled= 'disabled';
         }
+        if(empty($this->slack_endpoint && $this->slack_channel)){
+            $this->isDisabled= '';
+        }
         return view('livewire.slack-settings-form');
     }
 
