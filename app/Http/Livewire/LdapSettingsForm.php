@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Ldap;
 use App\Models\Setting;
 use App\Models\Group;
 use Livewire\Component;
@@ -117,5 +118,64 @@ class LdapSettingsForm extends Component
         $this->setting->ldap_client_tls_key       = $this->ldap_client_tls_key;
 
         $this->setting->save();
+    }
+    public function ldaptest()
+    {
+
+
+        if ($this->settings->ldap_enabled!='1') {
+            \Log::debug('LDAP is not enabled cannot test.');
+            return response()->json(['message' => 'LDAP is not enabled, cannot test.'], 400);
+        }
+
+        \Log::debug('Preparing to test LDAP connection');
+
+        $message = []; //where we collect together test messages
+        try {
+            $connection = Ldap::connectToLdap();
+            try {
+                $message['bind'] = ['message' => 'Successfully bound to LDAP server.'];
+                \Log::debug('attempting to bind to LDAP for LDAP test');
+                Ldap::bindAdminToLdap($connection);
+                $message['login'] = [
+                    'message' => 'Successfully connected to LDAP server.',
+                ];
+
+                $users = collect(Ldap::findLdapUsers(null,10))->filter(function ($value, $key) {
+                    return is_int($key);
+                })->slice(0, 10)->map(function ($item) use ($settings) {
+                    return (object) [
+                        'username'        => $item[$settings['ldap_username_field']][0] ?? null,
+                        'employee_number' => $item[$settings['ldap_emp_num']][0] ?? null,
+                        'lastname'        => $item[$settings['ldap_lname_field']][0] ?? null,
+                        'firstname'       => $item[$settings['ldap_fname_field']][0] ?? null,
+                        'email'           => $item[$settings['ldap_email']][0] ?? null,
+                    ];
+                });
+                if ($users->count() > 0) {
+                    $message['user_sync'] = [
+                        'users' => $users,
+                    ];
+                } else {
+                    $message['user_sync'] = [
+                        'message' => 'Connection to LDAP was successful, however there were no users returned from your query. You should confirm the Base Bind DN above.',
+                    ];
+
+                    return response()->json($message, 400);
+                }
+
+                return response()->json($message, 200);
+            } catch (\Exception $e) {
+                \Log::debug('Bind failed');
+                \Log::debug("Exception was: ".$e->getMessage());
+                return response()->json(['message' => $e->getMessage()], 400);
+                //return response()->json(['message' => $e->getMessage()], 500);
+            }
+        } catch (\Exception $e) {
+            \Log::debug('Connection failed but we cannot debug it any further on our end.');
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
+
+
     }
 }

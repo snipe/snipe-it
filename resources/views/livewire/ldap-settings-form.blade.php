@@ -499,10 +499,10 @@
                                 {{ Form::label('ldap_phone', trans('admin/settings/general.ldap_phone')) }}
                             </div>
                             <div class="col-md-9">
-                                <input  wire:model.lazy="$ldap_phone_field" type="text" class="form-control" value="{{old('$ldap_phone_field', $ldap_phone_field)}}" placeholder="{{trans('general.example') .'telephonenumber'}}">
+                                <input  wire:model.lazy="ldap_phone_field" type="text" class="form-control" value="{{old('ldap_phone_field', $ldap_phone_field)}}" placeholder="{{trans('general.example') .'telephonenumber'}}">
                                 {!! $errors->first('ldap_phone', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @if (config('app.lock_passwords')===true)
-                                    <input  wire:model.lazy="$ldap_phone_field" type="text" class="form-control" value="{{old('$ldap_phone_field', $ldap_phone_field)}}" placeholder="{{trans('general.example') .'telephonenumber'}}" disabled>
+                                    <input  wire:model.lazy="ldap_phone_field" type="text" class="form-control" value="{{old('ldap_phone_field', $ldap_phone_field)}}" placeholder="{{trans('general.example') .'telephonenumber'}}" disabled>
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
                                 @endif
                             </div>
@@ -542,29 +542,30 @@
                                 </div>
                             </div>
                         </div>
-{{--                        @if ($setting->ldap_enabled)--}}
+                        @if ($setting->ldap_enabled)
 
-{{--                            <!-- LDAP test -->--}}
+                            <!-- LDAP test -->
+                        <div class="col-md-11 col-md-offset-1">
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    {{ Form::label('test_ldap_sync', 'Test LDAP Sync') }}
+                                </div>
+                                <div class="col-md-9" id="ldaptestrow">
+                                    <a {{ $setting->demoMode }} class="btn btn-default btn-sm pull-left" id="ldaptest" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test_sync') }}</a>
+                                </div>
+                                <div class="col-md-9 col-md-offset-3">
+                                    <br />
+                                    <div id="ldapad_test_results" class="hidden well well-sm"></div>
+                                </div>
+                                <div class="col-md-9 col-md-offset-3">
+                                    <p class="help-block">{{ trans('admin/settings/general.ldap_login_sync_help') }}</p>
+                                    @if (config('app.lock_passwords')===true)
+                                        <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                    @endif
+                                </div>
 
-{{--                            <div class="form-group">--}}
-{{--                                <div class="col-md-3">--}}
-{{--                                    {{ Form::label('test_ldap_sync', 'Test LDAP Sync') }}--}}
-{{--                                </div>--}}
-{{--                                <div class="col-md-9" id="ldaptestrow">--}}
-{{--                                    <a {{ $setting->demoMode }} class="btn btn-default btn-sm pull-left" id="ldaptest" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test_sync') }}</a>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-md-9 col-md-offset-3">--}}
-{{--                                    <br />--}}
-{{--                                    <div id="ldapad_test_results" class="hidden well well-sm"></div>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-md-9 col-md-offset-3">--}}
-{{--                                    <p class="help-block">{{ trans('admin/settings/general.ldap_login_sync_help') }}</p>--}}
-{{--                                    @if (config('app.lock_passwords')===true)--}}
-{{--                                        <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>--}}
-{{--                                    @endif--}}
-{{--                                </div>--}}
-
-{{--                            </div>--}}
+                            </div>
+                        </div>
 
 {{--                            <!-- LDAP Login test -->--}}
 {{--                            <div class="form-group">--}}
@@ -598,7 +599,7 @@
 {{--                            </div>--}}
 
 
-{{--                        @endif--}}
+                        @endif
 
 {{--                        <!-- LDAP Forgotten password -->--}}
 {{--                        <div class="form-group {{ $errors->has('custom_forgot_pass_url') ? 'error' : '' }}">--}}
