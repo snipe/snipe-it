@@ -44,7 +44,7 @@
                             @endif
                         </div>
                         @if (isset($topSubmit) && ($topSubmit=='true'))
-                        <div class="col-md-3 text-right" style="padding-right: 0px;">
+                        <div class="col-md-3 text-right" style="padding-right: 10px;">
                             <button type="submit" class="btn btn-primary pull-right">
                                 <i class="fas fa-check icon-white" aria-hidden="true"></i>
                                 {{ trans('general.save') }}
