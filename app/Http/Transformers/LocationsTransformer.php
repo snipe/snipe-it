@@ -24,12 +24,23 @@ class LocationsTransformer
     {
         if ($location) {
             $children_arr = [];
+            $children_counts = [
+                'assigned_assets_count' => 0,
+                'assets_count' => 0,
+                'rtd_assets_count' => 0,
+                'users_count' => 0,
+            ];
+
             if (! is_null($location->children)) {
                 foreach ($location->children as $child) {
                     $children_arr[] = [
                         'id' => (int) $child->id,
                         'name' => $child->name,
                     ];
+                    $children_counts['assigned_assets_count'] += $child->assignedAssets()->count();
+                    $children_counts['assets_count'] += $child->assets()->count();
+                    $children_counts['rtd_assets_count'] += $child->rtd_assets()->count();
+                    $children_counts['users_count'] += $child->users()->count();
                 }
             }
 
@@ -43,10 +54,10 @@ class LocationsTransformer
                 'state' =>  ($location->state) ? e($location->state) : null,
                 'country' => ($location->country) ? e($location->country) : null,
                 'zip' => ($location->zip) ? e($location->zip) : null,
-                'assigned_assets_count' => (int) $location->assigned_assets_count,
-                'assets_count'    => (int) $location->assets_count,
-                'rtd_assets_count'    => (int) $location->rtd_assets_count,
-                'users_count'    => (int) $location->users_count,
+                'assigned_assets_count' => (int) $location->assigned_assets_count + (int) $children_counts['assigned_assets_count'],
+                'assets_count'    => (int) $location->assets_count + (int) $children_counts['assets_count'],
+                'rtd_assets_count'    => (int) $location->rtd_assets_count + (int) $children_counts['rtd_assets_count'],
+                'users_count'    => (int) $location->users_count + (int) $children_counts['users_count'],
                 'currency' =>  ($location->currency) ? e($location->currency) : null,
                 'ldap_ou' =>  ($location->ldap_ou) ? e($location->ldap_ou) : null,
                 'created_at' => Helper::getFormattedDateObject($location->created_at, 'datetime'),
