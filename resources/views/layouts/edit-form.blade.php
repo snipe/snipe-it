@@ -41,7 +41,7 @@
                             @if ($item->id)
                                 <h2 class="box-title text-left" style="padding-top: 8px;">
                                     {{ $item->display_name }}
-                                </h2> ;
+                                </h2>
                             @endif
                         </div>
                         @if (isset($topSubmit) && ($topSubmit=='true'))
