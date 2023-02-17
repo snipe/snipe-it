@@ -8,7 +8,7 @@
 {{-- Page content --}}
 @section('content')
 
-<p>{{ trans('admin/user/general.create_user_page_explaination') }}</p>
+<p>{{ trans('admin/user/general.create_user_page_explanation') }}</p>
 
 <form action="{{ route('setup.user.save') }}" method="POST">
   {{ csrf_field() }}
