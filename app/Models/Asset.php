@@ -106,7 +106,7 @@ class Asset extends Depreciable
         'warranty_months' => 'numeric|nullable|digits_between:0,240',
         'physical'        => 'numeric|max:1|nullable',
         'last_checkout'    => 'date_format:Y-m-d H:i:s|nullable',
-        'expected_checkin' => 'date_format:Y-m-d|nullable',
+        'expected_checkin' => 'date|nullable',
         'location_id'     => 'exists:locations,id|nullable',
         'rtd_location_id' => 'exists:locations,id|nullable',
         'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
