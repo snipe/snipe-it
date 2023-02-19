@@ -31,7 +31,7 @@ class Setting extends Model
      *
      * @var string
      */
-    const SETUP_CHECK_KEY = 'snipeit_setup_check';
+    public const SETUP_CHECK_KEY = 'snipeit_setup_check';
 
     /**
      * Whether the model should inject it's identifier to the unique
@@ -83,6 +83,9 @@ class Setting extends Model
         'email_domain',
         'email_format',
         'username_format',
+        'slack_endpoint',
+        'slack_channel',
+        'slack_botname',
     ];
 
     /**

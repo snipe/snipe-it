@@ -204,7 +204,7 @@ $style = [
                                         <p style="{{ $style['paragraph-sub'] }}">
                                             &copy; {{ date('Y') }}
                                             <a style="{{ $style['anchor'] }}" href="{{ url('/') }}" target="_blank">{{ $snipeSettings->site_name }}</a>.
-                                            All rights reserved.
+                                            {{ trans('mail.rights_reserved') }}
                                         </p>
 
                                         @if ($snipeSettings->privacy_policy_link!='')

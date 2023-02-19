@@ -98,8 +98,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'website'                 => 'url|nullable|max:191',
         'manager_id'              => 'nullable|exists:users,id|cant_manage_self',
         'location_id'             => 'exists:locations,id|nullable',
-        'start_date'              => 'nullable|date',
-        'end_date'                => 'nullable|date|after_or_equal:start_date',
+        'start_date'              => 'nullable|date_format:Y-m-d',
+        'end_date'                => 'nullable|date_format:Y-m-d|after_or_equal:start_date',
     ];
 
     /**
@@ -657,7 +657,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
            $query = $query->where('first_name', 'LIKE', '%'.$search.'%')
                ->orWhere('last_name', 'LIKE', '%'.$search.'%')
-               ->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%$search%"]);
+               ->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%{$search}%"]);
 
         return $query;
     }
@@ -673,7 +673,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     public function advancedTextSearch(Builder $query, array $terms) {
 
         foreach($terms as $term) {
-            $query = $query->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%$term%"]);
+            $query = $query->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%{$term}%"]);
         }
 
         return $query;

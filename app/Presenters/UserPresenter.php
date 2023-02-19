@@ -346,8 +346,7 @@ class UserPresenter extends Presenter
     public function emailLink()
     {
         if ($this->email) {
-            return '<a href="mailto:'.$this->email.'">'.$this->email.'</a>'
-                .'<a href="mailto:'.$this->email.'" class="hidden-xs hidden-sm"><i class="far fa-envelope"></i></a>';
+            return '<a href="mailto:'.$this->email.'">'.$this->email.'</a><a href="mailto:'.$this->email.'" class="hidden-xs hidden-sm"><i class="far fa-envelope"></i></a>';
         }
 
         return '';

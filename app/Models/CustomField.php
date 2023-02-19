@@ -21,7 +21,7 @@ class CustomField extends Model
      *
      * @var array
      */
-    const PREDEFINED_FORMATS = [
+    public const PREDEFINED_FORMATS = [
             'ANY'           => '',
             'CUSTOM REGEX'  => '',
             'ALPHA'         => 'alpha',

@@ -41,6 +41,7 @@ class Consumable extends SnipeModel
         'company_id'  => 'integer|nullable',
         'min_amt'     => 'integer|min:0|nullable',
         'purchase_cost'   => 'numeric|nullable|gte:0',
+        'purchase_date'   => 'date_format:Y-m-d|nullable',
     ];
 
     /**
