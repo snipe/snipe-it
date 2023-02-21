@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => 'Моделът не съществува.',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Този модел е асоцииран с един или повече активи и не може да бъде изтрит. Моля изтрийте активите и опитайте отново.',
 
 

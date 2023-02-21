@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Imovina je obrisana.',
     'edit'  					=> 'Uređivanje imovine',
     'model_deleted'  			=> 'Ovaj Model osnovnog sredstva je izbrisan. Morate da vratite model da bi ste mogli da vratite sredstvo.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Može da se potražuje',
     'requested'				    => 'Zatraženo',
     'not_requestable'           => 'Ne može da se potražuje',

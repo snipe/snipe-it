@@ -14,6 +14,8 @@ return [
     'deleted'  					=> '자산이 삭제되었습니다.',
     'edit'  					=> '자산 수정',
     'model_deleted'  			=> '모델이 삭제되었습니다. 자산을 복원하기 전에 모델을 복원해야 합니다.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => '요청가능',
     'requested'				    => '요청됨',
     'not_requestable'           => 'Not Requestable',

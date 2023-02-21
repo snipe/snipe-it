@@ -12,4 +12,5 @@ return array(
     'remaining' 			             => 'Te noho',
     'total' 			                 => 'Te tapeke',
     'update'                            => 'Whakahōuhia te Wae',
+    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
 );

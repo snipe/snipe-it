@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Cet actif a été supprimé.',
     'edit'  					=> 'Editer le Bien',
     'model_deleted'  			=> 'Ce modèle d\'actifs a été supprimé. Vous devez restaurer le modèle avant de pouvoir restaurer l\'actif.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Réquisitionnable',
     'requested'				    => 'Demandé',
     'not_requestable'           => 'Non-réquisitionnable',

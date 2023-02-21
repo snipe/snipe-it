@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => 'O modelo não existe.',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Este modelo está no momento associado com um ou mais ativos e não pode ser excluído. Exclua os ativos e então tente excluir novamente. ',
 
 

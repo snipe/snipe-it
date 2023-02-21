@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'The accessory [:id] does not exist.',
+    'does_not_exist' => 'Aksesori itu tidak ada.',
     'assoc_users'	 => 'Aksesori saat ini memiliki :count item untuk pengguna. Silahkan cek di aksesoris dan dan coba lagi. ',
 
     'create' => array(

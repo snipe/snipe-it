@@ -47,6 +47,7 @@ return [
     'login_first_admin' => 'با نصب مجدد Snipe-IT جدید خود به سیستم وارد شوید',
     'login' => 'ورود:',
     'Low_Inventory_Report' => 'گزارش موجودی کم',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'حداقل QTY',
     'name' => 'نام',
     'new_item_checked' => 'یک آیتم جدید تحت نام شما چک شده است، جزئیات زیر است.',
@@ -87,4 +88,5 @@ return [
     'Expected_Checkin_Date' => 'دارایی‌ای که برای شما بررسی شده است باید دوباره در تاریخ :date بررسی شود',
     'your_assets' => 'دارایی های خود را مشاهده کنید
 ',
+    'rights_reserved' => 'All rights reserved.',
 ];

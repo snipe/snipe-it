@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Whakauru ki to taahiranga hou Snipe-IT ma te whakamahi i nga taipitopito kei raro nei:',
     'login' => 'Whakauru:',
     'Low_Inventory_Report' => 'Pūrongo Inventory Low',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Min QTY',
     'name' => 'Ingoa',
     'new_item_checked' => 'Kua tohua tetahi mea hou i raro i to ingoa, kei raro iho nga korero.',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'your_assets' => 'View Your Assets',
+    'rights_reserved' => 'All rights reserved.',
 ];

@@ -13,7 +13,8 @@ return array(
 
     'update' => array(
         'error'   => 'Категоријата не беше ажурирана, обидете се повторно',
-        'success' => 'Категоријата е успешно ажурирана.'
+        'success' => 'Категоријата е успешно ажурирана.',
+        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
     ),
 
     'delete' => array(

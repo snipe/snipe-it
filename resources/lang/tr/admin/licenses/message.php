@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
+    'does_not_exist' => 'Lisans mevcut değil veya görüntüleme izniniz yok.',
     'user_does_not_exist' => 'Kullanıcı mevcut değil.',
     'asset_does_not_exist' 	=> 'Lisans ile ilişkilendirmek istediğiniz demirbaş mevcut değil.',
     'owner_doesnt_match_asset' => 'Lisans ile ilişkilendirmek istediğiniz demirbaş ilişkilendirmek istediğiniz kişiden başkasına atanmış durumda.',

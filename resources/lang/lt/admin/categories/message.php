@@ -13,7 +13,8 @@ return array(
 
     'update' => array(
         'error'   => 'Kategorija neatnaujinta, prašome pabandykite dar kartą',
-        'success' => 'Kategorijos atnaujinimas sėkmingas.'
+        'success' => 'Kategorijos atnaujinimas sėkmingas.',
+        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
     ),
 
     'delete' => array(

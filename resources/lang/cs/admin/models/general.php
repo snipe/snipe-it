@@ -3,7 +3,7 @@
 return array(
     'about_models_title'     => 'O modelech majetku',
     'about_models_text'           => 'Modely majetku jsou způsoby seskupení shodných majetků. "MBP 2013", "iPhone 6s" atd.',
-    'deleted'  					        => 'This model has been deleted.',
+    'deleted'  					        => 'Tento model byl odstraněn.',
     'bulk_delete'               => 'Hromadné mazání modelů majetku',
     'bulk_delete_help'               => 'Pomocí zaškrtávacích kolonek potvrďte smazání označených modelů majetku. Modely majetku, ke kterým je přiřazen majetek nemohou být smazány dokud jim přiřazený majetek nebude přeřazen k jinému modulu.',
     'bulk_delete_warn'          => 'Chystáte se smazat :model_count asset models.',

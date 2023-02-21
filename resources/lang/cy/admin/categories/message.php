@@ -13,7 +13,8 @@ return array(
 
     'update' => array(
         'error'   => 'Ni diweddarwyd y categori, ceisiwch eto o. g. y. dd',
-        'success' => 'Categori wedi diweddaru\'n llwyddiannus.'
+        'success' => 'Categori wedi diweddaru\'n llwyddiannus.',
+        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
     ),
 
     'delete' => array(

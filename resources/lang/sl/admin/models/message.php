@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => 'Model ne obstaja.',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Ta model je trenutno povezan z enim ali več sredstvi in ​​ga ni mogoče izbrisati. Prosimo, izbrišite sredstva in poskusite zbrisati znova. ',
 
 

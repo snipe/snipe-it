@@ -62,6 +62,6 @@ return array(
 
     'inventorynotification' => array(
         'error'   => 'Für diesen Benutzer ist keine E-Mail-Adresse hinterlegt.',
-        'success' => 'The user has been notified about their current inventory.'
+        'success' => 'Der Benutzer wurde über sein aktuelles Inventar informiert.'
     )
 );

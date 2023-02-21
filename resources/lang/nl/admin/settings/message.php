@@ -38,6 +38,7 @@ return [
         'success_pt1' => 'Gelukt! Controleer de ',
         'success_pt2' => ' kanaal voor je testbericht, klik op OPSLAAN om je instellingen op te slaan.',
         '500' => '500 serverfout.',
-        'error' => 'Er ging iets mis.',
+        'error' => 'Something went wrong. Slack responded with: :error_message',
+        'error_misc' => 'Something went wrong. :( ',
     ]
 ];
