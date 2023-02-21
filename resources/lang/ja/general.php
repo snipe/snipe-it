@@ -3,6 +3,7 @@
 return [
     'accessories'			=> '付属品',
     'activated'			    => 'アクティベート',
+    'accepted_date'         => 'Date Accepted',
     'accessory'				=> '付属品',
     'accessory_report'		=> '付属品レポート',
     'action'                => '操作',
@@ -27,7 +28,13 @@ return [
     'audit'				    => '監査',
     'audit_report'			=> '監査ログ',
     'assets'				=> '資産数',
+    'assets_audited'        => 'assets audited',
+    'assets_checked_in_count'     => 'assets checked in',
+    'assets_checked_out_count'     => 'assets checked out',
+    'asset_deleted_warning'     => 'This asset has been deleted. You must restore it before you can assign it to someone.',
+    'assigned_date'         => 'Date Assigned',
     'assigned_to'           => ':name に割り当て',
+    'assignee'              => 'Assigned to',
     'avatar_delete'         => 'アバターを削除',
     'avatar_upload'         => 'アバターをアップロード',
     'back'      			=> '戻る',
@@ -39,6 +46,8 @@ return [
     'bulk_delete'           => '一括削除',
     'bulk_actions'          => '一括操作',
     'bulk_checkin_delete'   => 'ユーザーからの一括チェックイン',
+    'byod'                  => 'BYOD',
+    'byod_help'             => 'This device is owned by the user',
     'bystatus'              => 'ステータス別',
     'cancel'  				=> 'キャンセル',
     'categories'			=> 'カテゴリー',
@@ -385,7 +394,15 @@ return [
     'start_date'            => '開始日',
     'end_date'            => '終了日',
     'alt_uploaded_image_thumbnail' => 'サムネイルのアップロード',
-    'placeholder_kit'       => 'キットを選択'
+    'placeholder_kit'       => 'キットを選択',
+    'file_not_found'        => 'File not found',
+    'preview_not_available' => '(no preview)',
+    'setup'                 => 'Setup',
+    'pre_flight'            => 'Pre-Flight',
+    'skip_to_main_content'  => 'Skip to main content',
+    'toggle_navigation'     => 'Toggle navigation',
+    'alerts'                => 'Alerts',
+    'tasks_view_all'        => 'View all tasks',
 
 
 

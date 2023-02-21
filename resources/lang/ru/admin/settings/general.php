@@ -11,7 +11,7 @@ return [
     'admin_cc_email_help'       => 'Если вы хотите отправлять копии писем, что приходят пользователям при выдаче/возврате, на какой-то дополнительный адрес электронной почты, то введите его здесь. В противном случае оставьте это поле пустым.',
     'is_ad'				        => 'У вас сервер Active Directory',
     'alerts'                	=> 'Уведомления',
-    'alert_title'               => 'Update Alert Settings',
+    'alert_title'               => 'Обновить настройки оповещений',
     'alert_email'				=> 'Посылать уведомления на',
     'alert_email_help'    => 'Email addresses or distribution lists you want alerts to be sent to, comma separated',
     'alerts_enabled'			=> 'Уведомления включены',

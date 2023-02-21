@@ -39,6 +39,6 @@ return [
         'success_pt2' => ' csatornát a tesztüzenethez, és ne felejtsen el a MENTÉS gombra kattintani a beállítások tárolásához.',
         '500' => '500 Szerverhiba.',
         'error' => 'Something went wrong. Slack responded with: :error_message',
-        'error_misc' => 'Something went wrong. :( ',
+        'error_misc' => 'Valami hiba történt :( ',
     ]
 ];

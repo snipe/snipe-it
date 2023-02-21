@@ -3,6 +3,7 @@
 return [
     'accessories'			=> '부속품들',
     'activated'			    => '활성화',
+    'accepted_date'         => 'Date Accepted',
     'accessory'				=> '부속품',
     'accessory_report'		=> '부속품 보고서',
     'action'                => '작업',
@@ -27,7 +28,13 @@ return [
     'audit'				    => '감사',
     'audit_report'			=> '감사 기록',
     'assets'				=> '자산',
+    'assets_audited'        => 'assets audited',
+    'assets_checked_in_count'     => 'assets checked in',
+    'assets_checked_out_count'     => 'assets checked out',
+    'asset_deleted_warning'     => 'This asset has been deleted. You must restore it before you can assign it to someone.',
+    'assigned_date'         => 'Date Assigned',
     'assigned_to'           => 'Assigned to :name',
+    'assignee'              => 'Assigned to',
     'avatar_delete'         => '아바타 삭제',
     'avatar_upload'         => '아바타 올리기',
     'back'      			=> '이전',
@@ -39,6 +46,8 @@ return [
     'bulk_delete'           => 'Bulk Delete',
     'bulk_actions'          => 'Bulk Actions',
     'bulk_checkin_delete'   => 'Bulk Checkin Items from Users',
+    'byod'                  => 'BYOD',
+    'byod_help'             => 'This device is owned by the user',
     'bystatus'              => '상태별',
     'cancel'  				=> '취소',
     'categories'			=> '분류',
@@ -385,7 +394,15 @@ return [
     'start_date'            => 'Start Date',
     'end_date'            => 'End Date',
     'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
-    'placeholder_kit'       => 'Select a kit'
+    'placeholder_kit'       => 'Select a kit',
+    'file_not_found'        => 'File not found',
+    'preview_not_available' => '(no preview)',
+    'setup'                 => 'Setup',
+    'pre_flight'            => 'Pre-Flight',
+    'skip_to_main_content'  => 'Skip to main content',
+    'toggle_navigation'     => 'Toggle navigation',
+    'alerts'                => 'Alerts',
+    'tasks_view_all'        => 'View all tasks',
 
 
 
