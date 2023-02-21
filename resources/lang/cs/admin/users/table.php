@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'Email',
     'employee_num'      	=> 'Osobní číslo',
     'first_name' 			=> 'Jméno',
-    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
+    'groupnotes'			=> 'Vyberte skupinu pro přiřazení k uživateli. Nezapomeňte, že uživatel přebírá oprávnění skupiny, která je jim přidělena. Použitím ctrl + kliknutí (nebo cmd+kliknutí na MacOS) zrušíte výběr.',
     'id'         			=> 'ID',
     'inherit'  				=> 'Převzít',
     'job' 					=> 'Pracovní pozice',

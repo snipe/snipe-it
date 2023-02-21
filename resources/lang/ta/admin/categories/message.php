@@ -13,7 +13,8 @@ return array(
 
     'update' => array(
         'error'   => 'வகை புதுப்பிக்கப்படவில்லை, தயவுசெய்து மீண்டும் முயற்சிக்கவும்',
-        'success' => 'வகை வெற்றிகரமாக புதுப்பிக்கப்பட்டது.'
+        'success' => 'வகை வெற்றிகரமாக புதுப்பிக்கப்பட்டது.',
+        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
     ),
 
     'delete' => array(

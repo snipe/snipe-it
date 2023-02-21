@@ -48,6 +48,8 @@ return [
         'success'               => '您的文件已被导入',
         'file_delete_success'   => '您的文件已成功删除',
         'file_delete_error'      => '该文件无法被删除',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
 
 

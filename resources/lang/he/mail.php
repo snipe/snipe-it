@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'היכנס למערכת ההתקנה החדשה של Snipe-IT באמצעות פרטי הכניסה הבאים:',
     'login' => 'התחברות:',
     'Low_Inventory_Report' => 'דו"ח מלאי נמוך',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'מינימום QTY',
     'name' => 'שֵׁם',
     'new_item_checked' => 'פריט חדש נבדק תחת שמך, הפרטים להלן.',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'your_assets' => 'View Your Assets',
+    'rights_reserved' => 'All rights reserved.',
 ];

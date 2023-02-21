@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => 'Model mevcut değil.',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Model bir ya da daha çok demirbaş ile ilişkili ve silinemez. Lütfen demirbaşları silin ve tekrar deneyin. ',
 
 

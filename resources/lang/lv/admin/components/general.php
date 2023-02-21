@@ -12,4 +12,5 @@ return array(
     'remaining' 			             => 'Atlikušais',
     'total' 			                 => 'Kopā',
     'update'                            => 'Atjaunināt komponents',
+    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
 );

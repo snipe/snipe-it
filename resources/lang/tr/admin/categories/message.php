@@ -13,7 +13,8 @@ return array(
 
     'update' => array(
         'error'   => 'Kategori güncellenemedi, Lütfen tekrar deneyin',
-        'success' => 'Kategori güncellendi.'
+        'success' => 'Kategori güncellendi.',
+        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
     ),
 
     'delete' => array(

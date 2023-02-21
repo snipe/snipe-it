@@ -14,8 +14,8 @@ return array(
     'ldap_not_configured'        => 'LDAP entegrasyonu bu yükleme için yapılandırılmamış.',
     'password_resets_sent'      => 'Etkinleştirilmiş ve geçerli bir e-posta adresine sahip seçilen kullanıcılara şifre sıfırlama bağlantısı gönderildi.',
     'password_reset_sent'       => ':email! adresine bir şifre sıfırlama bağlantısı gönderildi!',
-    'user_has_no_email'         => 'This user does not have an email address in their profile.',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'user_has_no_email'         => 'Bu kullanıcının profilinde bir e-posta adresi yok.',
+    'user_has_no_assets_assigned'   => 'Bu kullanıcının atanmış herhangi bir varlığı yok',
 
 
     'success' => array(
@@ -61,7 +61,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => 'Bu kullanıcının e-posta grubu yok.',
+        'success' => 'Kullanıcı, mevcut envanteri hakkında bilgilendirildi.'
     )
 );

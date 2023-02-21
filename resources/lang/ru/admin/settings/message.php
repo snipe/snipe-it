@@ -21,7 +21,7 @@ return [
     ],
     'mail' => [
         'sending' => 'Sending Test Email...',
-        'success' => 'Mail sent!',
+        'success' => 'Письмо отправлено!',
         'error' => 'Mail could not be sent.',
         'additional' => 'No additional error message provided. Check your mail settings and your app log.'
     ],
@@ -37,7 +37,8 @@ return [
         'sending' => 'Sending Slack test message...',
         'success_pt1' => 'Success! Check the ',
         'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
-        '500' => '500 Server Error.',
-        'error' => 'Something went wrong.',
+        '500' => 'Ошибка сервера 500.',
+        'error' => 'Something went wrong. Slack responded with: :error_message',
+        'error_misc' => 'Something went wrong. :( ',
     ]
 ];

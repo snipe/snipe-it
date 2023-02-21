@@ -13,7 +13,8 @@ return array(
 
     'update' => array(
         'error'   => 'Kategorija nav atjaunināta, lūdzu, mēģiniet vēlreiz',
-        'success' => 'Kategorija ir veiksmīgi atjaunināta.'
+        'success' => 'Kategorija ir veiksmīgi atjaunināta.',
+        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
     ),
 
     'delete' => array(
