@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'Te aktywa nie mogą być przypisane do nikogo.',
-        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
+        'deployable'   => 'Te aktywa można sprawdzić. Gdy zostaną przypisane, przyjmą stan meta w postaci <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
         'archived'   => 'Te zasoby nie mogą zostać sprawdzone i będą wyświetlane tylko w Archiwizowanym widoku. Jest to użyteczne przy przechowywaniu informacji o zasobach w celach budżetowych / historycznych, ale nie na bieżąco z listy aktywów.',
         'pending'   => 'Te aktywa nie mogą być jeszcze przydzielone nikomu, często używane do przedmiotów przeznaczonych do naprawy, ale oczekują, że powrócą do obiegu.',
     ],

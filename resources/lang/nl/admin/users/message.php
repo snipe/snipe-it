@@ -14,8 +14,8 @@ return array(
     'ldap_not_configured'        => 'LDAP integratie is niet geconfigureerd voor deze installatie.',
     'password_resets_sent'      => 'De geselecteerde gebruikers die zijn geactiveerd en die een geldig e-mailadres hebben, hebben een wachtwoord reset link ontvangen.',
     'password_reset_sent'       => 'Een link om het wachtwoord te resetten is verstuurd naar :email!',
-    'user_has_no_email'         => 'This user does not have an email address in their profile.',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'user_has_no_email'         => 'Deze gebruiker heeft geen e-mailadres in zijn profiel.',
+    'user_has_no_assets_assigned'   => 'Deze gebruiker heeft geen bezittingen toegewezen',
 
 
     'success' => array(
@@ -61,7 +61,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => 'Deze gebruiker heeft geen e-mailadres ingesteld.',
+        'success' => 'De gebruiker is op de hoogte gebracht van zijn huidige voorraad.'
     )
 );

@@ -15,7 +15,7 @@ return array(
 
     "password" => "Paswoorden moeten 6 karakters lang zijn en gelijk zijn in beide paswoordvelden.",
     "user"     => "Gebruikersnaam of e-mailadres is niet correct",
-    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
-    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
+    "token"    => 'Dit wachtwoord-hersteltoken is ongeldig of verlopen, of komt niet overeen met de opgegeven gebruikersnaam.',
+    'sent'	   => 'Als er een gebruiker met een geldig e-mailadres in ons systeem bestaat, dan is er een wachtwoordherstel-e-mail verzonden.',
 
 );

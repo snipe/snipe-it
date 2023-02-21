@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Aset ini telah dipadamkan.',
     'edit'  					=> 'Kemaskini Harta',
     'model_deleted'  			=> 'Model Aset ini telah dipadamkan. Anda mesti kembalikan model sebelum anda boleh kembalikan Aset.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Diminta',
     'requested'				    => 'Diminta',
     'not_requestable'           => 'Not Requestable',

@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => 'Ang modelo ay hindi umiiral.',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Ang modelong ito ay kasalukuyang nai-ugnay sa isa o higit pang mga asset at hindi maaaring mai-delete. Paki-delete ng mga model na ito, at pagkatapos subukang i-delete muli. ',
 
 

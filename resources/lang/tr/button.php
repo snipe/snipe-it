@@ -4,7 +4,7 @@ return [
     'actions' 	                => 'Hareketler',
     'add'    	                => 'Yeni ekle',
     'cancel'                    => 'İptal',
-    'checkin_and_delete'  	    => 'Checkin All / Delete User',
+    'checkin_and_delete'  	    => 'Tümünü Kontrol Et / Kullanıcıyı Sil',
     'delete'  	                => 'Sil',
     'edit'    	                => 'Düzenle',
     'restore' 	                => 'Geri yükle',

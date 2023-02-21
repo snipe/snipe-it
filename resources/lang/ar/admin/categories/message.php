@@ -13,7 +13,8 @@ return array(
 
     'update' => array(
         'error'   => 'لقد فشل تحديث التصنيف، الرجاء المحاولة مرة أخرى',
-        'success' => 'تم تحديث التصنيف بنجاح.'
+        'success' => 'تم تحديث التصنيف بنجاح.',
+        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
     ),
 
     'delete' => array(

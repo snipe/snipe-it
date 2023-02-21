@@ -6,8 +6,8 @@ return array(
     'assoc_users'	 => '至少還有一位使用者與此位置關聯，目前不能被删除，請檢查後重試。 ',
     'assoc_assets'	 => '至少還有一個資產與此位置關聯，目前不能被删除，請檢查後重試。 ',
     'assoc_child_loc'	 => '至少還有一個子項目與此位置關聯，目前不能被删除，請檢查後重試。 ',
-    'assigned_assets' => 'Assigned Assets',
-    'current_location' => 'Current Location',
+    'assigned_assets' => '已分配資產',
+    'current_location' => '目前位置',
 
 
     'create' => array(

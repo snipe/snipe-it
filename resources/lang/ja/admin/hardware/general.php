@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'この資産は削除されました。',
     'edit'  					=> '資産を編集',
     'model_deleted'  			=> 'この資産モデルは削除されました。資産を復元する前に、モデルを復元する必要があります。',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => '要求可能',
     'requested'				    => '要求済',
     'not_requestable'           => '要求可能ではありません',

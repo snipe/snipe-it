@@ -43,6 +43,7 @@ return [
     'login_first_admin' => '请使用以下凭据登录新安装的 Snipe-IT：',
     'login' => '登录：',
     'Low_Inventory_Report' => '低库存报告',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => '最小数量',
     'name' => '名字',
     'new_item_checked' => '一项新物品已分配至您的名下，详细信息如下。',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => '提醒：:name 签入截止日期已接近。',
     'Expected_Checkin_Date' => '借出的资产将在 :date 重新签入',
     'your_assets' => '查看您的资产',
+    'rights_reserved' => 'All rights reserved.',
 ];

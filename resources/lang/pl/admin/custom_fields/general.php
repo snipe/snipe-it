@@ -27,6 +27,9 @@ return [
     'used_by_models'   		    => 'Używane przez modele',
     'order'   		            => 'Kolejność',
     'create_fieldset'         => 'Nowy zestaw pól',
+    'update_fieldset'         => 'Update Fieldset',
+    'fieldset_does_not_exist'   => 'Fieldset :id does not exist',
+    'fieldset_updated'         => 'Fieldset updated',
     'create_fieldset_title' => 'Utwórz nową listę',
     'create_field'            => 'Nowe pole niestandardowe',
     'create_field_title' => 'Utwórz pole niestandardowe',
@@ -44,6 +47,6 @@ return [
     'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code>:db_column</code> but should be <code>:expected</code>.',
     'is_unique' => 'Ta wartość musi być unikalna dla wszystkich aktywów',
     'unique' => 'Unikalny',
-    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
-    'display_in_user_view_table' => 'Visible to User',
+    'display_in_user_view' => 'Zezwalaj zaznaczonemu użytkownikowi na wyświetlanie tych wartości na stronie Widok Przypisanych Zasobów',
+    'display_in_user_view_table' => 'Widoczne dla użytkownika',
 ];

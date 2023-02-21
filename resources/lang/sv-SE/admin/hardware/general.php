@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Denna tillgång har tagits bort.',
     'edit'  					=> 'Redigera tillgång',
     'model_deleted'  			=> 'Denna tillgångsmodell har tagits bort. Du måste återställa modellen innan du kan återställa tillgången.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Tillgängliga',
     'requested'				    => 'Begärda',
     'not_requestable'           => 'Inte begärbar',

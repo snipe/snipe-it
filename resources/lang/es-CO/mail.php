@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Inicie sesión en su nueva instalación de Snipe-IT con las credenciales siguientes:',
     'login' => 'Entrar:',
     'Low_Inventory_Report' => 'Reporte de inventario bajo',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Cantidad mínima',
     'name' => 'Nombre',
     'new_item_checked' => 'Un nuevo artículo se ha extraído bajo su nombre, los detalles están a continuación.',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Recordatorio: :name se acerca la fecha de devolución',
     'Expected_Checkin_Date' => 'Un activo asignado a ti debe ser devuelto en :date',
     'your_assets' => 'Ver tus activos',
+    'rights_reserved' => 'All rights reserved.',
 ];

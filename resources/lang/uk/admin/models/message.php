@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => 'Модель не існує.',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
 
 
@@ -25,7 +27,7 @@ return array(
 
     'restore' => array(
         'error'   		=> 'Model was not restored, please try again',
-        'success' 		=> 'Model restored successfully.'
+        'success' 		=> 'Модель успішно відновлена.'
     ),
 
     'bulkedit' => array(

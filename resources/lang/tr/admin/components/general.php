@@ -12,4 +12,5 @@ return array(
     'remaining' 			             => 'Kalan',
     'total' 			                 => 'Toplam',
     'update'                            => 'Bileşeni düzenle',
+    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
 );

@@ -38,6 +38,7 @@ return [
         'success_pt1' => 'Succès ! Vérifiez le ',
         'success_pt2' => ' canal pour votre message de test, soyez sûr de cliquer sur Enregistrer ci-dessous afin de sauvegarder vos réglages.',
         '500' => '500 Erreur du serveur.',
-        'error' => 'Une erreur est survenue.',
+        'error' => 'Something went wrong. Slack responded with: :error_message',
+        'error_misc' => 'Something went wrong. :( ',
     ]
 ];

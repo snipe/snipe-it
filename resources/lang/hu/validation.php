@@ -43,14 +43,14 @@ return [
     'file'                 => 'A: attribútumnak fájlnak kell lennie.',
     'filled'               => 'A: attribútum mezőnek értéket kell tartalmaznia.',
     'image'                => 'A :attribute képnek kell lenni.',
-    'import_field_empty'    => 'The value for :fieldname cannot be null.',
+    'import_field_empty'    => 'A :fieldname mező értéke nem lehet üres.',
     'in'                   => 'A kiválasztott :attribute étvénytelen.',
     'in_array'             => 'A: attribútum mező nem létezik: más.',
     'integer'              => 'A :attribute számnak kell lennie.',
     'ip'                   => 'A :attribute érvényes IP címnek kell lenni.',
     'ipv4'                 => 'A: attribútumnak érvényes IPv4-címnek kell lennie.',
     'ipv6'                 => 'A: attribútumnak érvényes IPv6-címnek kell lennie.',
-    'is_unique_department' => 'The :attribute must be unique to this Company Location',
+    'is_unique_department' => ':attribute egyedi kell, hogy legyen ehhez a helyhez',
     'json'                 => 'A: attribútumnak érvényes JSON-karakterláncnak kell lennie.',
     'max'                  => [
         'numeric' => 'A :attribute nem lehet nagyobb, mint :max.',
@@ -114,23 +114,24 @@ return [
     |
     */
 
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
-
     'custom' => [
         'alpha_space' => 'A: attribútum mező olyan karaktert tartalmaz, amely nem megengedett.',
         'email_array'      => 'Egy vagy több e-mail cím érvénytelen.',
         'hashed_pass'      => 'A jelenlegi jelszava helytelen',
         'dumbpwd'          => 'Ez a jelszó túl gyakori.',
         'statuslabel_type' => 'Meg kell határoznia egy érvényes állapotcímke típust',
+
+        // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
+        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // people won't know how to format. 
+        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
+        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
+        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+
     ],
 
     /*
