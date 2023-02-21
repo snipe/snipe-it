@@ -41,6 +41,17 @@ class LdapSettingsForm extends Component
       public        $ldaptest_user;
       public        $ldaptest_password;
 
+      protected $rules = [
+          'ldap_username_field' => 'not_in:sAMAccountName',
+          'ldap_auth_filter_query' => 'not_in:uid=samaccountname|required_if:ldap_enabled,1',
+          'ldap_filter' => 'nullable|regex:"^[^(]"|required_if:ldap_enabled,1',
+      ];
+      protected  array $messages = [
+              'ldap_username_field.not_in' => '<code>sAMAccountName</code> (mixed case) will likely not work. You should use <code>samaccountname</code> (lowercase) instead. ',
+              'ldap_auth_filter_query.not_in' => '<code>uid=samaccountname</code> is probably not a valid auth filter. You probably want <code>uid=</code> ',
+              'ldap_filter.regex' => 'This value should probably not be wrapped in parentheses.',
+          ];
+
 
 
     public Setting $setting;
@@ -88,7 +99,9 @@ class LdapSettingsForm extends Component
     }
 
 
-    public function submit(){
+    public function submit($field){
+
+        $this->validate($this->rules,$this->messages, $field );
 
         $this->setting->ldap_enabled              = $this->ldap_enabled;
         $this->setting->ldap_server               = $this->ldap_server;

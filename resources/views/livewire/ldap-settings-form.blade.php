@@ -1,4 +1,5 @@
 <div>
+
     @if ((!function_exists('ldap_connect')) || (!function_exists('ldap_set_option')) || (!function_exists('ldap_bind')))
         <div class="row">
             <div class="col-md-12">
