@@ -49,8 +49,8 @@ return [
         'success'               => 'Ваш файл был импортирован',
         'file_delete_success'   => 'Ваш файл был успешно удален',
         'file_delete_error'      => 'Невозможно удалить файл',
-        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
-        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'header_row_has_malformed_characters' => 'Один или несколько атрибутов в строке заголовка содержат неправильно сформированные символы UTF-8',
+        'content_row_has_malformed_characters' => 'Один или несколько атрибутов в первой строке содержимого содержат неправильно сформированные символы UTF-8',
     ],
 
 

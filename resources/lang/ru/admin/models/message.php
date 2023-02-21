@@ -3,8 +3,8 @@
 return array(
 
     'does_not_exist' => 'Модель не существует.',
-    'no_association' => 'NO MODEL ASSOCIATED.',
-    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
+    'no_association' => 'НЕТ СВЯЗАННОЙ МОДЕЛИ.',
+    'no_association_fix' => 'Это странно и ужасно сломает вещи. Отредактируйте этот актив сейчас, чтобы назначить ему модель.',
     'assoc_users'	 => 'Данная модель связана с одним или несколькими активами, и не может быть удалена. Удалите либо измените связанные активы. ',
 
 

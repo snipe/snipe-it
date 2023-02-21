@@ -3,6 +3,7 @@
 return [
     'accessories'			=> 'Aukahlutir',
     'activated'			    => 'Virkjað',
+    'accepted_date'         => 'Date Accepted',
     'accessory'				=> 'Aukahlutur',
     'accessory_report'		=> 'Aukahlutaskýrsla',
     'action'                => 'Aðgerð',
@@ -27,7 +28,13 @@ return [
     'audit'				    => 'Úttekt',
     'audit_report'			=> 'Úttektarsaga',
     'assets'				=> 'Eignir',
+    'assets_audited'        => 'assets audited',
+    'assets_checked_in_count'     => 'assets checked in',
+    'assets_checked_out_count'     => 'assets checked out',
+    'asset_deleted_warning'     => 'This asset has been deleted. You must restore it before you can assign it to someone.',
+    'assigned_date'         => 'Date Assigned',
     'assigned_to'           => 'Skráð á',
+    'assignee'              => 'Assigned to',
     'avatar_delete'         => 'Delete Avatar',
     'avatar_upload'         => 'Upload Avatar',
     'back'      			=> 'Til baka',
@@ -39,6 +46,8 @@ return [
     'bulk_delete'           => 'Bulk Delete',
     'bulk_actions'          => 'Bulk Actions',
     'bulk_checkin_delete'   => 'Fjölda innskráing á hlutum frá notendum',
+    'byod'                  => 'BYOD',
+    'byod_help'             => 'This device is owned by the user',
     'bystatus'              => 'eftir stöðu',
     'cancel'  				=> 'Hætta við',
     'categories'			=> 'Vöruflokkar',
@@ -385,7 +394,15 @@ return [
     'start_date'            => 'Upphafsdagsetning',
     'end_date'            => 'Lokadagsetning',
     'alt_uploaded_image_thumbnail' => 'Hlaða upp smámynd',
-    'placeholder_kit'       => 'Velja sett'
+    'placeholder_kit'       => 'Velja sett',
+    'file_not_found'        => 'File not found',
+    'preview_not_available' => '(no preview)',
+    'setup'                 => 'Setup',
+    'pre_flight'            => 'Pre-Flight',
+    'skip_to_main_content'  => 'Skip to main content',
+    'toggle_navigation'     => 'Toggle navigation',
+    'alerts'                => 'Alerts',
+    'tasks_view_all'        => 'View all tasks',
 
 
 

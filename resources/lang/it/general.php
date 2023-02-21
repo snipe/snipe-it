@@ -3,6 +3,7 @@
 return [
     'accessories'			=> 'Accessori',
     'activated'			    => 'Attivato',
+    'accepted_date'         => 'Date Accepted',
     'accessory'				=> 'Accessorio',
     'accessory_report'		=> 'Rapporto sugli Accessori',
     'action'                => 'Azione',
@@ -27,7 +28,13 @@ return [
     'audit'				    => 'revisione',
     'audit_report'			=> 'Registro di controllo',
     'assets'				=> 'Beni',
+    'assets_audited'        => 'assets audited',
+    'assets_checked_in_count'     => 'assets checked in',
+    'assets_checked_out_count'     => 'assets checked out',
+    'asset_deleted_warning'     => 'This asset has been deleted. You must restore it before you can assign it to someone.',
+    'assigned_date'         => 'Date Assigned',
     'assigned_to'           => 'Assegnato a :name',
+    'assignee'              => 'Assigned to',
     'avatar_delete'         => 'Cancella Avatar',
     'avatar_upload'         => 'Carica Avatar',
     'back'      			=> 'Indietro',
@@ -39,6 +46,8 @@ return [
     'bulk_delete'           => 'Elimina quantità',
     'bulk_actions'          => 'Gruppo di azioni',
     'bulk_checkin_delete'   => 'Check-in massivo di oggetti dagli Utenti',
+    'byod'                  => 'BYOD',
+    'byod_help'             => 'This device is owned by the user',
     'bystatus'              => 'in base allo stato',
     'cancel'  				=> 'annulla',
     'categories'			=> 'Categorie',
@@ -385,7 +394,15 @@ return [
     'start_date'            => 'Data Inizio',
     'end_date'            => 'Data Fine',
     'alt_uploaded_image_thumbnail' => 'Miniatura caricata',
-    'placeholder_kit'       => 'Seleziona un kit'
+    'placeholder_kit'       => 'Seleziona un kit',
+    'file_not_found'        => 'File not found',
+    'preview_not_available' => '(no preview)',
+    'setup'                 => 'Setup',
+    'pre_flight'            => 'Pre-Flight',
+    'skip_to_main_content'  => 'Skip to main content',
+    'toggle_navigation'     => 'Toggle navigation',
+    'alerts'                => 'Alerts',
+    'tasks_view_all'        => 'View all tasks',
 
 
 

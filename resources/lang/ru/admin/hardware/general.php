@@ -14,7 +14,7 @@ return [
     'deleted'  					=> 'Этот актив был удален.',
     'edit'  					=> 'Редактировать актив',
     'model_deleted'  			=> 'Эта модель была удалена. Вы должны восстановить модель прежде, чем сможете восстановить актив.',
-    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid'             => 'Модель этого актива недействительна.',
     'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Готов к выдаче',
     'requested'				    => 'Запрошенное',

@@ -3,6 +3,7 @@
 return [
     'accessories'			=> 'Aksesuarlar',
     'activated'			    => 'Aktif edildi',
+    'accepted_date'         => 'Date Accepted',
     'accessory'				=> 'Aksesuar',
     'accessory_report'		=> 'Aksesuar Raporu',
     'action'                => 'Hareket',
@@ -27,7 +28,13 @@ return [
     'audit'				    => 'Denetim',
     'audit_report'			=> 'Denetim Günlüğü',
     'assets'				=> 'Demirbaşlar',
+    'assets_audited'        => 'assets audited',
+    'assets_checked_in_count'     => 'assets checked in',
+    'assets_checked_out_count'     => 'assets checked out',
+    'asset_deleted_warning'     => 'This asset has been deleted. You must restore it before you can assign it to someone.',
+    'assigned_date'         => 'Date Assigned',
     'assigned_to'           => 'Bana Atanmış',
+    'assignee'              => 'Assigned to',
     'avatar_delete'         => 'Profil Resmini Sil',
     'avatar_upload'         => 'Profil Resmi Yükle',
     'back'      			=> 'Geri',
@@ -39,6 +46,8 @@ return [
     'bulk_delete'           => 'Toplu Sil',
     'bulk_actions'          => 'Toplu Eylemler',
     'bulk_checkin_delete'   => 'Kullanıcılardan gelen toplu kontrol öğeleri',
+    'byod'                  => 'BYOD',
+    'byod_help'             => 'This device is owned by the user',
     'bystatus'              => 'Duruma göre',
     'cancel'  				=> 'İptal',
     'categories'			=> 'Kategoriler',
@@ -388,7 +397,15 @@ Context | Request Context
     'start_date'            => 'Başlangıç Tarihi',
     'end_date'            => 'Bitiş Tarihi',
     'alt_uploaded_image_thumbnail' => 'Yüklenen küçük resim',
-    'placeholder_kit'       => 'Bir kit seçin'
+    'placeholder_kit'       => 'Bir kit seçin',
+    'file_not_found'        => 'File not found',
+    'preview_not_available' => '(no preview)',
+    'setup'                 => 'Setup',
+    'pre_flight'            => 'Pre-Flight',
+    'skip_to_main_content'  => 'Skip to main content',
+    'toggle_navigation'     => 'Toggle navigation',
+    'alerts'                => 'Alerts',
+    'tasks_view_all'        => 'View all tasks',
 
 
 
