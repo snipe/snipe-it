@@ -79,5 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Напоминание: приближается крайний срок проверки :name',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'your_assets' => 'Посмотреть активы',
-    'rights_reserved' => 'All rights reserved.',
+    'rights_reserved' => 'Все права защищены.',
 ];

@@ -3,6 +3,7 @@
 return [
     'accessories'			=> '附属品',
     'activated'			    => '已激活',
+    'accepted_date'         => 'Date Accepted',
     'accessory'				=> '附属品',
     'accessory_report'		=> '配件报告',
     'action'                => '操作',
@@ -27,7 +28,13 @@ return [
     'audit'				    => '审计',
     'audit_report'			=> '审核日志',
     'assets'				=> '资产',
+    'assets_audited'        => 'assets audited',
+    'assets_checked_in_count'     => 'assets checked in',
+    'assets_checked_out_count'     => 'assets checked out',
+    'asset_deleted_warning'     => 'This asset has been deleted. You must restore it before you can assign it to someone.',
+    'assigned_date'         => 'Date Assigned',
     'assigned_to'           => '借出给:name的资产',
+    'assignee'              => 'Assigned to',
     'avatar_delete'         => '删除头像',
     'avatar_upload'         => '上传头像',
     'back'      			=> '后退',
@@ -39,6 +46,8 @@ return [
     'bulk_delete'           => '批量删除',
     'bulk_actions'          => '批量操作',
     'bulk_checkin_delete'   => '从用户批量归还物品',
+    'byod'                  => 'BYOD',
+    'byod_help'             => 'This device is owned by the user',
     'bystatus'              => '按状态',
     'cancel'  				=> '取消',
     'categories'			=> '目录',
@@ -385,7 +394,15 @@ return [
     'start_date'            => '开始日期',
     'end_date'            => '结束日期',
     'alt_uploaded_image_thumbnail' => '已上传缩略图',
-    'placeholder_kit'       => '选择一个套件'
+    'placeholder_kit'       => '选择一个套件',
+    'file_not_found'        => 'File not found',
+    'preview_not_available' => '(no preview)',
+    'setup'                 => 'Setup',
+    'pre_flight'            => 'Pre-Flight',
+    'skip_to_main_content'  => 'Skip to main content',
+    'toggle_navigation'     => 'Toggle navigation',
+    'alerts'                => 'Alerts',
+    'tasks_view_all'        => 'View all tasks',
 
 
 

@@ -79,5 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Przypomnienie: :name sprawdza termin zbliżający się',
     'Expected_Checkin_Date' => 'Zasób przypisany Tobie ma być zwrócony w dniu :date',
     'your_assets' => 'Zobacz swój sprzęt',
-    'rights_reserved' => 'All rights reserved.',
+    'rights_reserved' => 'Wszystkie prawa zastrzeżone.',
 ];

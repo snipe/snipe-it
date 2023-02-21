@@ -3,6 +3,7 @@
 return [
     'accessories'			=> 'Akcesoria',
     'activated'			    => 'Aktywowana',
+    'accepted_date'         => 'Date Accepted',
     'accessory'				=> 'Akcesorium',
     'accessory_report'		=> 'Raporty Akcesoriów',
     'action'                => 'Edycja',
@@ -27,7 +28,13 @@ return [
     'audit'				    => 'Audyt',
     'audit_report'			=> 'Dziennik zdarzeń',
     'assets'				=> 'Aktywa',
+    'assets_audited'        => 'assets audited',
+    'assets_checked_in_count'     => 'assets checked in',
+    'assets_checked_out_count'     => 'assets checked out',
+    'asset_deleted_warning'     => 'This asset has been deleted. You must restore it before you can assign it to someone.',
+    'assigned_date'         => 'Date Assigned',
     'assigned_to'           => 'Przypisany do :name',
+    'assignee'              => 'Assigned to',
     'avatar_delete'         => 'Skasuj Avatara',
     'avatar_upload'         => 'Wgraj Avatara',
     'back'      			=> 'Powrót',
@@ -39,6 +46,8 @@ return [
     'bulk_delete'           => 'Zbiorcze Usuwanie',
     'bulk_actions'          => 'Masowe przetwarzanie',
     'bulk_checkin_delete'   => 'Zbiorowo odbierz zasoby od użytkowników',
+    'byod'                  => 'BYOD',
+    'byod_help'             => 'This device is owned by the user',
     'bystatus'              => 'wg statusu',
     'cancel'  				=> 'Anuluj',
     'categories'			=> 'Kategorie',
@@ -385,7 +394,15 @@ return [
     'start_date'            => 'Data rozpoczęcia',
     'end_date'            => 'Data zakończenia',
     'alt_uploaded_image_thumbnail' => 'Przesłano miniaturę',
-    'placeholder_kit'       => 'Wybierz zestaw'
+    'placeholder_kit'       => 'Wybierz zestaw',
+    'file_not_found'        => 'File not found',
+    'preview_not_available' => '(no preview)',
+    'setup'                 => 'Setup',
+    'pre_flight'            => 'Pre-Flight',
+    'skip_to_main_content'  => 'Skip to main content',
+    'toggle_navigation'     => 'Toggle navigation',
+    'alerts'                => 'Alerts',
+    'tasks_view_all'        => 'View all tasks',
 
 
 

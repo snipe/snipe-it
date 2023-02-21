@@ -39,6 +39,6 @@ return [
         'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
         '500' => 'Błąd 500 serwera.',
         'error' => 'Something went wrong. Slack responded with: :error_message',
-        'error_misc' => 'Something went wrong. :( ',
+        'error_misc' => 'Coś poszło nie tak. :( ',
     ]
 ];

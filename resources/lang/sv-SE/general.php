@@ -3,6 +3,7 @@
 return [
     'accessories'			=> 'Tillbehör',
     'activated'			    => 'Aktiverad',
+    'accepted_date'         => 'Date Accepted',
     'accessory'				=> 'Tillbehör',
     'accessory_report'		=> 'Tillbehörsrapport',
     'action'                => 'Åtgärd',
@@ -27,7 +28,13 @@ return [
     'audit'				    => 'Inventera',
     'audit_report'			=> 'Inventeringsloggar',
     'assets'				=> 'Tillgångar',
+    'assets_audited'        => 'assets audited',
+    'assets_checked_in_count'     => 'assets checked in',
+    'assets_checked_out_count'     => 'assets checked out',
+    'asset_deleted_warning'     => 'This asset has been deleted. You must restore it before you can assign it to someone.',
+    'assigned_date'         => 'Date Assigned',
     'assigned_to'           => 'Tillgångar tilldelade: namn',
+    'assignee'              => 'Assigned to',
     'avatar_delete'         => 'Ta bort Avatar',
     'avatar_upload'         => 'Ladda upp Avatar',
     'back'      			=> 'Bakåt',
@@ -39,6 +46,8 @@ return [
     'bulk_delete'           => 'Massradering',
     'bulk_actions'          => 'Massåtgärder',
     'bulk_checkin_delete'   => 'Bulk incheckning av Objekt från användare',
+    'byod'                  => 'BYOD',
+    'byod_help'             => 'This device is owned by the user',
     'bystatus'              => 'efter status',
     'cancel'  				=> 'Avbryt',
     'categories'			=> 'Kategorier',
@@ -385,7 +394,15 @@ return [
     'start_date'            => 'Startdatum',
     'end_date'            => 'Slutdatum',
     'alt_uploaded_image_thumbnail' => 'Uppladdad miniatyrbild',
-    'placeholder_kit'       => 'Välj ett kit'
+    'placeholder_kit'       => 'Välj ett kit',
+    'file_not_found'        => 'File not found',
+    'preview_not_available' => '(no preview)',
+    'setup'                 => 'Setup',
+    'pre_flight'            => 'Pre-Flight',
+    'skip_to_main_content'  => 'Skip to main content',
+    'toggle_navigation'     => 'Toggle navigation',
+    'alerts'                => 'Alerts',
+    'tasks_view_all'        => 'View all tasks',
 
 
 

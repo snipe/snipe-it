@@ -3,6 +3,7 @@
 return [
     'accessories'			=> 'கருவிகள்',
     'activated'			    => 'இயக்கப்பட்டது',
+    'accepted_date'         => 'Date Accepted',
     'accessory'				=> 'துணை',
     'accessory_report'		=> 'துணை குறிப்பு',
     'action'                => 'அதிரடி',
@@ -27,7 +28,13 @@ return [
     'audit'				    => 'தணிக்கை',
     'audit_report'			=> 'தணிக்கைப் பதிவு',
     'assets'				=> 'சொத்துக்கள்',
+    'assets_audited'        => 'assets audited',
+    'assets_checked_in_count'     => 'assets checked in',
+    'assets_checked_out_count'     => 'assets checked out',
+    'asset_deleted_warning'     => 'This asset has been deleted. You must restore it before you can assign it to someone.',
+    'assigned_date'         => 'Date Assigned',
     'assigned_to'           => ':nameக்கு ஒதுக்கப்பட்டது',
+    'assignee'              => 'Assigned to',
     'avatar_delete'         => 'Avatar நீக்கு',
     'avatar_upload'         => 'Avatar பதிவேற்றவும்',
     'back'      			=> 'மீண்டும்',
@@ -39,6 +46,8 @@ return [
     'bulk_delete'           => 'மொத்த நீக்கம்',
     'bulk_actions'          => 'மொத்த செயல்கள்',
     'bulk_checkin_delete'   => 'Bulk Checkin Items from Users',
+    'byod'                  => 'BYOD',
+    'byod_help'             => 'This device is owned by the user',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'ரத்து',
     'categories'			=> 'வகைகள்',
@@ -385,7 +394,15 @@ return [
     'start_date'            => 'Start Date',
     'end_date'            => 'End Date',
     'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
-    'placeholder_kit'       => 'Select a kit'
+    'placeholder_kit'       => 'Select a kit',
+    'file_not_found'        => 'File not found',
+    'preview_not_available' => '(no preview)',
+    'setup'                 => 'Setup',
+    'pre_flight'            => 'Pre-Flight',
+    'skip_to_main_content'  => 'Skip to main content',
+    'toggle_navigation'     => 'Toggle navigation',
+    'alerts'                => 'Alerts',
+    'tasks_view_all'        => 'View all tasks',
 
 
 

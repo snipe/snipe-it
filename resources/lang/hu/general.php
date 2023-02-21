@@ -3,6 +3,7 @@
 return [
     'accessories'			=> 'Tartozékok',
     'activated'			    => 'Aktivált',
+    'accepted_date'         => 'Date Accepted',
     'accessory'				=> 'Tartozék',
     'accessory_report'		=> 'Tartozék riport',
     'action'                => 'Művelet',
@@ -27,7 +28,13 @@ return [
     'audit'				    => 'Könyvvizsgálat',
     'audit_report'			=> 'Audit napló',
     'assets'				=> 'Eszközök',
+    'assets_audited'        => 'assets audited',
+    'assets_checked_in_count'     => 'assets checked in',
+    'assets_checked_out_count'     => 'assets checked out',
+    'asset_deleted_warning'     => 'This asset has been deleted. You must restore it before you can assign it to someone.',
+    'assigned_date'         => 'Date Assigned',
     'assigned_to'           => 'Hozzárendelve a következőhöz: :name',
+    'assignee'              => 'Assigned to',
     'avatar_delete'         => 'Avatar törlése',
     'avatar_upload'         => 'Avatar frissítése',
     'back'      			=> 'Vissza',
@@ -39,6 +46,8 @@ return [
     'bulk_delete'           => 'Tömeges törlés',
     'bulk_actions'          => 'Tömeges műveletek',
     'bulk_checkin_delete'   => 'Tömeges visszavétel felhasználóktól',
+    'byod'                  => 'BYOD',
+    'byod_help'             => 'This device is owned by the user',
     'bystatus'              => 'státusz szerint',
     'cancel'  				=> 'Mégse',
     'categories'			=> 'Kategóriák',
@@ -385,7 +394,15 @@ return [
     'start_date'            => 'Kezdés dátuma',
     'end_date'            => 'Befejezés dátuma',
     'alt_uploaded_image_thumbnail' => 'Feltöltött indexkép',
-    'placeholder_kit'       => 'Készlet kiválasztása'
+    'placeholder_kit'       => 'Készlet kiválasztása',
+    'file_not_found'        => 'File not found',
+    'preview_not_available' => '(no preview)',
+    'setup'                 => 'Setup',
+    'pre_flight'            => 'Pre-Flight',
+    'skip_to_main_content'  => 'Skip to main content',
+    'toggle_navigation'     => 'Toggle navigation',
+    'alerts'                => 'Alerts',
+    'tasks_view_all'        => 'View all tasks',
 
 
 
