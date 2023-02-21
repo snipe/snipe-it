@@ -245,7 +245,7 @@ return [
     'some_features_disabled' => 'РЕЖИМ ДЕМО: Деякі функції відключені.',
     'site_name'				=> 'Назва сайту',
     'state'  				=> 'Статус',
-    'status_labels'			=> 'Status Labels',
+    'status_labels'			=> 'Статуси активів',
     'status'    			=> 'Статус',
     'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Постачальник',

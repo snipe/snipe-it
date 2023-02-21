@@ -168,7 +168,7 @@ return [
     'logout'				=> 'להתנתק',
     'lookup_by_tag'     => 'בדיקה על ידי תג הנכס',
     'maintenances'          => 'אירועי תחזוקה',
-    'manage_api_keys'       => 'Manage API Keys',
+    'manage_api_keys'       => 'נהל מפתחות API',
     'manufacturer'			=> 'יַצרָן',
     'manufacturers'			=> 'היצרנים',
     'markdown'				=> 'שדה זה מאפשר <a href="https://help.github.com/articles/github-flavored-markdown/">Github בטעם מרקדון </a>.',

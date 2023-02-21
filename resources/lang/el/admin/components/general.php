@@ -12,4 +12,5 @@ return array(
     'remaining' 			             => 'Απομένουν',
     'total' 			                 => 'Σύνολο',
     'update'                            => 'Αναβάθμιση εξαρτήματος',
+    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
 );

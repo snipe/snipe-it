@@ -77,6 +77,7 @@ return [
     'ldap'                      => 'LDAP',
     'ldap_default_group'        => 'Default Permissions Group',
     'ldap_default_group_info'   => 'Select a group to assign to newly synced users. Remember that a user takes on the permissions of the group they are assigned.',
+    'no_default_group'          => 'No Default Group',
     'ldap_help'                 => 'LDAP/Active Directory',
     'ldap_client_tls_key'       => 'LDAP 사용자 키',
     'ldap_client_tls_cert'      => 'LDAP 사용자 인증서',

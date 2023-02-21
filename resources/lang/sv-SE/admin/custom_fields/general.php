@@ -27,6 +27,9 @@ return [
     'used_by_models'   		    => 'Används av modeller',
     'order'   		            => 'Sortering',
     'create_fieldset'         => 'Ny fältsamling',
+    'update_fieldset'         => 'Update Fieldset',
+    'fieldset_does_not_exist'   => 'Fieldset :id does not exist',
+    'fieldset_updated'         => 'Fieldset updated',
     'create_fieldset_title' => 'Skapa en ny fältsamling',
     'create_field'            => 'Nytt anpassat fält',
     'create_field_title' => 'Skapa ett nytt anpassat fält',
@@ -44,6 +47,6 @@ return [
     'db_convert_warning' => 'VARNING. Detta fält finns i tabellen för anpassade fält som <code>:db_column</code> men borde vara <code>:expected</code>.',
     'is_unique' => 'Detta värde måste vara unikt för alla tillgångar',
     'unique' => 'Unik',
-    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
-    'display_in_user_view_table' => 'Visible to User',
+    'display_in_user_view' => 'Tillåt den utcheckade användaren att visa dessa värden i sin vy tilldelad tillgångssida',
+    'display_in_user_view_table' => 'Synlig för användare',
 ];

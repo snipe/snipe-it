@@ -38,6 +38,7 @@ return [
         'success_pt1' => 'Başarılı! Kontrol edin ',
         'success_pt2' => ' test mesajınız için kanal seçin ve ayarlarınızı kaydetmek için aşağıdaki KAYDET\'i tıkladığınızdan emin olun.',
         '500' => '500 Sunucu Hatası.',
-        'error' => 'Bir şeyler yanlış gitti.',
+        'error' => 'Something went wrong. Slack responded with: :error_message',
+        'error_misc' => 'Something went wrong. :( ',
     ]
 ];

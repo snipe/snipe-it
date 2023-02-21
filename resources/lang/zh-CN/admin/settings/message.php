@@ -38,6 +38,7 @@ return [
         'success_pt1' => '成功！请检查 ',
         'success_pt2' => ' 您的测试消息频道，并且一定要点击下面的“保存”来存储您的设置。',
         '500' => '500 服务器错误。',
-        'error' => '出了错。',
+        'error' => 'Something went wrong. Slack responded with: :error_message',
+        'error_misc' => 'Something went wrong. :( ',
     ]
 ];

@@ -12,4 +12,5 @@ return array(
     'remaining' 			             => '剩余',
     'total' 			                 => '总计',
     'update'                            => '更新组件',
+    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
 );

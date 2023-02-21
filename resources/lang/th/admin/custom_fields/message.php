@@ -51,7 +51,7 @@ return array(
 
     'fieldset_default_value' => array(
 
-        'error' => 'Error validating default fieldset values.',
+        'error' => 'เกิดข้อผิดพลาดในการตรวจสอบค่าชุดฟิลด์เริ่มต้น',
 
     ),
 

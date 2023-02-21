@@ -43,14 +43,14 @@ return [
     'file'                 => ':attribute moet een bestand zijn.',
     'filled'               => ':attribute veld moet een waarde hebben.',
     'image'                => ':attribute moet een afbeelding zijn.',
-    'import_field_empty'    => 'The value for :fieldname cannot be null.',
+    'import_field_empty'    => 'De waarde voor :fieldname kan niet leeg zijn.',
     'in'                   => 'Het geselecteerde kenmerk :attribute is ongeldig.',
     'in_array'             => ':attribute veld bestaat niet in :other.',
     'integer'              => ':attribute moet van het type integer zijn.',
     'ip'                   => ':attribute moet een geldig IP-adres zijn.',
     'ipv4'                 => ':attribute moet een geldig IP-adres zijn.',
     'ipv6'                 => ':attribute moet een geldig IPv6-adres zijn.',
-    'is_unique_department' => 'The :attribute must be unique to this Company Location',
+    'is_unique_department' => ':attribute moet uniek zijn voor deze bedrijfslocatie',
     'json'                 => ':attribute moet valide JSON code zijn.',
     'max'                  => [
         'numeric' => ':attribute moet groter zijn dan :max.',
@@ -93,26 +93,15 @@ return [
     'url'                  => 'Het formaat van :attribute is ongeldig.',
     'unique_undeleted'     => 'De :attribute moet uniek zijn. ',
     'non_circular'         => ':attribute mag geen circulaire referentie aanmaken.',
-    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
-    'letters'              => 'Password must contain at least one letter.',
-    'numbers'              => 'Password must contain at least one number.',
-    'case_diff'            => 'Password must use mixed case.',
-    'symbols'              => 'Password must contain symbols.',
+    'disallow_same_pwd_as_user_fields' => 'Wachtwoord kan niet hetzelfde zijn als de gebruikersnaam.',
+    'letters'              => 'Wachtwoord moet ten minste één letter bevatten.',
+    'numbers'              => 'Wachtwoord moet ten minste één cijfer bevatten.',
+    'case_diff'            => 'Wachtwoord moet kleine letters en hoofdletters bevatten.',
+    'symbols'              => 'Wachtwoord moet symbolen bevatten.',
     'gte'                  => [
         'numeric'          => 'Waarde mag niet negatief zijn'
     ],
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
 
     /*
     |--------------------------------------------------------------------------
@@ -131,6 +120,18 @@ return [
         'hashed_pass'      => 'Je huidige wachtwoord is incorrect',
         'dumbpwd'          => 'Dat wachtwoord is te veelvoorkomend.',
         'statuslabel_type' => 'Selecteer een valide status label',
+
+        // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
+        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // people won't know how to format. 
+        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
+        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
+        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+
     ],
 
     /*

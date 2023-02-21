@@ -11,7 +11,7 @@ return [
     'admin'					=> '管理',
     'administrator'			=> '管理者',
     'add_seats'             => 'シートを追加',
-    'age'                   => "Age",
+    'age'                   => "経過",
     'all_assets'			=> '全ての資産',
     'all'       			=> 'All',
     'archived'              => 'アーカイブ',
@@ -281,9 +281,9 @@ return [
     'yes' 					=> 'はい',
     'zip'  					=> '郵便番号',
     'noimage'				=> 'イメージはアップロードされていません または イメージは見つかりませんでした',
-    'file_does_not_exist'   => 'The requested file does not exist on the server.',
-    'file_upload_success'   => 'File upload success!',
-    'no_files_uploaded'     => 'File upload success!',
+    'file_does_not_exist'   => '要求されたファイルはサーバーに存在しません。',
+    'file_upload_success'   => 'ファイルのアップロードに成功しました！',
+    'no_files_uploaded'     => 'ファイルのアップロードに成功しました！',
     'token_expired'         => 'セッションが失効しました。再度ログインしてください。',
     'login_enabled'         => 'ログイン可能',
     'audit_due'             => '監査期日',
@@ -382,10 +382,10 @@ return [
     'pie_chart_type'        => '円グラフタイプのダッシュボード',
     'hello_name'            => ':name さん、こんにちは！',
     'unaccepted_profile_warning'   => '受け入れが必要な:count個のアイテムがあります。受け入れるか拒否するにはここをクリックしてください',
-    'start_date'            => 'Start Date',
-    'end_date'            => 'End Date',
-    'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
-    'placeholder_kit'       => 'Select a kit'
+    'start_date'            => '開始日',
+    'end_date'            => '終了日',
+    'alt_uploaded_image_thumbnail' => 'サムネイルのアップロード',
+    'placeholder_kit'       => 'キットを選択'
 
 
 

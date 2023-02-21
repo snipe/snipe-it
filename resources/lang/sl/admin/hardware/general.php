@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'To sredstvo je bilo izbrisano.',
     'edit'  					=> 'Urejanje sredstva',
     'model_deleted'  			=> 'Model tega sredstva je bil izbrisan. Pred obnovitvijo sredstva je potrebno obnoviti model.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Zahtevano',
     'requested'				    => 'Zahtevano',
     'not_requestable'           => 'Not Requestable',

@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Conectați-vă la noua dvs. instalare Snipe-IT utilizând următoarele acreditări:',
     'login' => 'Logare:',
     'Low_Inventory_Report' => 'Raport privind inventarul redus',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Cantitate min',
     'name' => 'Nume',
     'new_item_checked' => 'Un element nou a fost verificat sub numele dvs., detaliile sunt de mai jos.',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'your_assets' => 'View Your Assets',
+    'rights_reserved' => 'All rights reserved.',
 ];

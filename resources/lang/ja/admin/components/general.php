@@ -12,4 +12,5 @@ return array(
     'remaining' 			             => '残数',
     'total' 			                 => '合計',
     'update'                            => '構成部品の更新',
+    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
 );

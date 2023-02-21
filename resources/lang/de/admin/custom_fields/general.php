@@ -27,6 +27,9 @@ return [
     'used_by_models'   		    => 'Von Modellen benutzt',
     'order'   		            => 'Reihenfolge',
     'create_fieldset'         => 'Neuer Feldsatz',
+    'update_fieldset'         => 'Update Fieldset',
+    'fieldset_does_not_exist'   => 'Fieldset :id does not exist',
+    'fieldset_updated'         => 'Fieldset updated',
     'create_fieldset_title' => 'Neuen Feldsatz erstellen',
     'create_field'            => 'Neues benutzerdefiniertes Feld',
     'create_field_title' => 'Neues benutzerdefiniertes Feld erstellen',
@@ -44,6 +47,6 @@ return [
     'db_convert_warning' => 'WARNUNG. Dieses Feld befindet sich in der Tabelle mit benutzerdefinierten Feldern als <code>:db_column</code> sollte aber <code>:expected</code> sein.',
     'is_unique' => 'Dieser Wert muss für jedes Asset einzigartig sein',
     'unique' => 'Einzigartig',
-    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
-    'display_in_user_view_table' => 'Visible to User',
+    'display_in_user_view' => 'Erlaube dem Benutzer, an den das Asset herausgegeben wurde, diese Werte auf der Seite "Zugeordnete Assets anzeigen" anzeigen zu lassen',
+    'display_in_user_view_table' => 'Für Benutzer sichtbar',
 ];

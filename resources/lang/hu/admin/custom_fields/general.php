@@ -27,6 +27,9 @@ return [
     'used_by_models'   		    => 'Modellek szerint ',
     'order'   		            => 'Rendelés',
     'create_fieldset'         => 'Új mezőcsoportok',
+    'update_fieldset'         => 'Update Fieldset',
+    'fieldset_does_not_exist'   => 'Fieldset :id does not exist',
+    'fieldset_updated'         => 'Fieldset updated',
     'create_fieldset_title' => 'Új mezőkészlet létrehozása',
     'create_field'            => 'Új egyéni mező',
     'create_field_title' => 'Új egyéni mező létrehozása',
@@ -45,5 +48,5 @@ return [
     'is_unique' => 'Ennek az értéknek minden eszköz esetében egyedinek kell lennie',
     'unique' => 'Egyedi',
     'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
-    'display_in_user_view_table' => 'Visible to User',
+    'display_in_user_view_table' => 'Látható a felhasználó számára',
 ];

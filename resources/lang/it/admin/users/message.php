@@ -15,7 +15,7 @@ return array(
     'password_resets_sent'      => 'È stato inviato un link agli utenti selezionati che sono attivati e hanno un indirizzo email valido, per reimpostare la password.',
     'password_reset_sent'       => 'Un link per reimpostare la password è stato inviato a :email!',
     'user_has_no_email'         => 'Questo utente non ha un indirizzo email nel suo profilo.',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'user_has_no_assets_assigned'   => 'Questo utente non ha nessun bene assegnato',
 
 
     'success' => array(
@@ -61,7 +61,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => 'Questo utente non ha una email.',
+        'success' => 'L\'utente è stato informato del suo inventario corrente.'
     )
 );
