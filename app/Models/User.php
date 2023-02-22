@@ -285,7 +285,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function assets()
     {
-        return $this->morphMany(\App\Models\Asset::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
+        return $this->morphMany(\App\Models\Asset::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed()->orderBy('id');
     }
 
     /**
@@ -313,7 +313,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     public function accessories()
     {
         return $this->belongsToMany(\App\Models\Accessory::class, 'accessories_users', 'assigned_to', 'accessory_id')
-            ->withPivot('id', 'created_at', 'note')->withTrashed();
+            ->withPivot('id', 'created_at', 'note')->withTrashed()->orderBy('accessory_id');
     }
 
     /**
