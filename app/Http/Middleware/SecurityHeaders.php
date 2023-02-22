@@ -23,9 +23,6 @@ class SecurityHeaders
 
     public function handle($request, Closure $next)
     {
-        if (App::environment(['testing', 'testing-ci'])) {
-            return $next($request);
-        }
 
         $this->removeUnwantedHeaders($this->unwantedHeaderList);
         $response = $next($request);
