@@ -23,7 +23,6 @@ class SecurityHeaders
 
     public function handle($request, Closure $next)
     {
-
         $this->removeUnwantedHeaders($this->unwantedHeaderList);
         $response = $next($request);
 
