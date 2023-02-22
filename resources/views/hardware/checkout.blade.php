@@ -28,7 +28,7 @@
                     {{csrf_field()}}
                         @if ($asset->company && $asset->company->name)
                             <div class="form-group">
-                                {{ Form::label('model', trans('admin/companies/general.company'), array('class' => 'col-md-3 control-label')) }}
+                                {{ Form::label('model', trans('general.company'), array('class' => 'col-md-3 control-label')) }}
                                 <div class="col-md-8">
                                     <p class="form-control-static">
                                         {{ $asset->company->name }}
