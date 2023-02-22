@@ -44,12 +44,18 @@ class LdapSync extends Command
      */
     public function handle()
     {
+
+        // If LDAP enabled isn't set to 1 (ldap_enabled!=1) then we should cut this short immediately without going any further
+        if (Setting::getSettings()->ldap_enabled!='1') {
+            $this->error('LDAP is not enabled. Aborting. See Settings > LDAP to enable it.');
+            exit();
+        }
+
         ini_set('max_execution_time', env('LDAP_TIME_LIM', 600)); //600 seconds = 10 minutes
         ini_set('memory_limit', env('LDAP_MEM_LIM', '500M'));
         $ldap_result_username = Setting::getSettings()->ldap_username_field;
         $ldap_result_last_name = Setting::getSettings()->ldap_lname_field;
         $ldap_result_first_name = Setting::getSettings()->ldap_fname_field;
-
         $ldap_result_active_flag = Setting::getSettings()->ldap_active_flag;
         $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num;
         $ldap_result_email = Setting::getSettings()->ldap_email;
@@ -68,7 +74,7 @@ class LdapSync extends Command
                 $json_summary = ['error' => true, 'error_message' => $e->getMessage(), 'summary' => []];
                 $this->info(json_encode($json_summary));
             }
-            LOG::info($e);
+            Log::info($e);
 
             return [];
         }
@@ -78,7 +84,7 @@ class LdapSync extends Command
         try {
             if ($this->option('base_dn') != '') {
                 $search_base = $this->option('base_dn');
-                LOG::debug('Importing users from specified base DN: \"'.$search_base.'\".');
+                Log::debug('Importing users from specified base DN: \"'.$search_base.'\".');
             } else {
                 $search_base = null;
             }
@@ -92,7 +98,7 @@ class LdapSync extends Command
                 $json_summary = ['error' => true, 'error_message' => $e->getMessage(), 'summary' => []];
                 $this->info(json_encode($json_summary));
             }
-            LOG::info($e);
+            Log::info($e);
 
             return [];
         }
@@ -102,16 +108,16 @@ class LdapSync extends Command
 
         if ($this->option('location') != '') {
             $location = Location::where('name', '=', $this->option('location'))->first();
-            LOG::debug('Location name '.$this->option('location').' passed');
-            LOG::debug('Importing to '.$location->name.' ('.$location->id.')');
+            Log::debug('Location name '.$this->option('location').' passed');
+            Log::debug('Importing to '.$location->name.' ('.$location->id.')');
         } elseif ($this->option('location_id') != '') {
             $location = Location::where('id', '=', $this->option('location_id'))->first();
-            LOG::debug('Location ID '.$this->option('location_id').' passed');
-            LOG::debug('Importing to '.$location->name.' ('.$location->id.')');
+            Log::debug('Location ID '.$this->option('location_id').' passed');
+            Log::debug('Importing to '.$location->name.' ('.$location->id.')');
         }
 
         if (! isset($location)) {
-            LOG::debug('That location is invalid or a location was not provided, so no location will be assigned by default.');
+            Log::debug('That location is invalid or a location was not provided, so no location will be assigned by default.');
         }
 
         /* Process locations with explicitly defined OUs, if doing a full import. */
@@ -127,7 +133,7 @@ class LdapSync extends Command
             array_multisort($ldap_ou_lengths, SORT_ASC, $ldap_ou_locations);
 
             if (count($ldap_ou_locations) > 0) {
-                LOG::debug('Some locations have special OUs set. Locations will be automatically set for users in those OUs.');
+                Log::debug('Some locations have special OUs set. Locations will be automatically set for users in those OUs.');
             }
 
             // Inject location information fields
@@ -145,7 +151,7 @@ class LdapSync extends Command
                         $json_summary = ['error' => true, 'error_message' => trans('admin/users/message.error.ldap_could_not_search').' Location: '.$ldap_loc['name'].' (ID: '.$ldap_loc['id'].') cannot connect to "'.$ldap_loc['ldap_ou'].'" - '.$e->getMessage(), 'summary' => []];
                         $this->info(json_encode($json_summary));
                     }
-                    LOG::info($e);
+                    Log::info($e);
 
                     return [];
                 }
@@ -191,18 +197,18 @@ class LdapSync extends Command
 
         for ($i = 0; $i < $results['count']; $i++) {
                 $item = [];
-                $item['username'] = isset($results[$i][$ldap_result_username][0]) ? $results[$i][$ldap_result_username][0] : '';
-                $item['employee_number'] = isset($results[$i][$ldap_result_emp_num][0]) ? $results[$i][$ldap_result_emp_num][0] : '';
-                $item['lastname'] = isset($results[$i][$ldap_result_last_name][0]) ? $results[$i][$ldap_result_last_name][0] : '';
-                $item['firstname'] = isset($results[$i][$ldap_result_first_name][0]) ? $results[$i][$ldap_result_first_name][0] : '';
-                $item['email'] = isset($results[$i][$ldap_result_email][0]) ? $results[$i][$ldap_result_email][0] : '';
-                $item['ldap_location_override'] = isset($results[$i]['ldap_location_override']) ? $results[$i]['ldap_location_override'] : '';
-                $item['location_id'] = isset($results[$i]['location_id']) ? $results[$i]['location_id'] : '';
-                $item['telephone'] = isset($results[$i][$ldap_result_phone][0]) ? $results[$i][$ldap_result_phone][0] : '';
-                $item['jobtitle'] = isset($results[$i][$ldap_result_jobtitle][0]) ? $results[$i][$ldap_result_jobtitle][0] : '';
-                $item['country'] = isset($results[$i][$ldap_result_country][0]) ? $results[$i][$ldap_result_country][0] : '';
-                $item['department'] = isset($results[$i][$ldap_result_dept][0]) ? $results[$i][$ldap_result_dept][0] : '';
-                $item['manager'] = isset($results[$i][$ldap_result_manager][0]) ? $results[$i][$ldap_result_manager][0] : '';
+                $item['username'] = $results[$i][$ldap_result_username][0] ?? '';
+                $item['employee_number'] = $results[$i][$ldap_result_emp_num][0] ?? '';
+                $item['lastname'] = $results[$i][$ldap_result_last_name][0] ?? '';
+                $item['firstname'] = $results[$i][$ldap_result_first_name][0] ?? '';
+                $item['email'] = $results[$i][$ldap_result_email][0] ?? '';
+                $item['ldap_location_override'] = $results[$i]['ldap_location_override'] ?? '';
+                $item['location_id'] = $results[$i]['location_id'] ?? '';
+                $item['telephone'] = $results[$i][$ldap_result_phone][0] ?? '';
+                $item['jobtitle'] = $results[$i][$ldap_result_jobtitle][0] ?? '';
+                $item['country'] = $results[$i][$ldap_result_country][0] ?? '';
+                $item['department'] = $results[$i][$ldap_result_dept][0] ?? '';
+                $item['manager'] = $results[$i][$ldap_result_manager][0] ?? '';
 
 
                 $department = Department::firstOrCreate([

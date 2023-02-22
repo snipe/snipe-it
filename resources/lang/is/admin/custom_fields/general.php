@@ -27,6 +27,9 @@ return [
     'used_by_models'   		    => 'Notað af Tegundum (Models)',
     'order'   		            => 'Röð',
     'create_fieldset'         => 'Nýtt Reitasett',
+    'update_fieldset'         => 'Update Fieldset',
+    'fieldset_does_not_exist'   => 'Fieldset :id does not exist',
+    'fieldset_updated'         => 'Fieldset updated',
     'create_fieldset_title' => 'Útbúa nýtt Reitasett (Nafn)',
     'create_field'            => 'Nýr sérsniðinn reitur',
     'create_field_title' => 'Útbúa nýtt sérsniðinn reit',
@@ -44,6 +47,6 @@ return [
     'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code>:db_column</code> but should be <code>:expected</code>.',
     'is_unique' => 'This value must be unique across all assets',
     'unique' => 'Einstakt',
-    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
-    'display_in_user_view_table' => 'Visible to User',
+    'display_in_user_view' => 'Leyfa útskráðum notanda að skoða þessi gildi á síðunni Skoða úthlutaðar eignir',
+    'display_in_user_view_table' => 'Sýnileg notenda',
 ];

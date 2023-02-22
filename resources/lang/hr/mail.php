@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Prijavite se na svoju novu Snipe-IT instalaciju pomoću vjerodajnica u nastavku:',
     'login' => 'Prijaviti se:',
     'Low_Inventory_Report' => 'Izvješće o niskom oglasnom prostoru',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Min QTY',
     'name' => 'Ime',
     'new_item_checked' => 'Nova stavka je provjerena pod vašim imenom, detalji su u nastavku.',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'your_assets' => 'View Your Assets',
+    'rights_reserved' => 'All rights reserved.',
 ];

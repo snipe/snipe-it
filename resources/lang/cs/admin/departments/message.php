@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Oddělení neexistuje.',
-    'department_already_exists' => 'A department already exists with that name at this company location. Or choose a more specific name for this department. ',
+    'department_already_exists' => 'Oddělení s tímto názvem již existuje. ',
     'assoc_users'	 => 'Toto oddělení je momentálně přiřazeno alespoň jednomu uživateli a nelze jej smazat. Aktualizujte své uživatele tak, aby již neodkázali na toto oddělení a zkuste to znovu.',
     'create' => array(
         'error'   => 'Oddělení nebylo vytvořeno, zkuste to prosím znovu.',

@@ -1,6 +1,9 @@
 .couscous
 .DS_Store
 .env
+.env.dusk.*
+!.env.dusk.example
+phpstan.neon
 .idea
 /bin/
 /bootstrap/compiled.php

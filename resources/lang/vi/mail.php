@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Đăng nhập vào hệ thống Snipe-IT mới bằng các thông tin dưới đây:',
     'login' => 'Đăng nhập:',
     'Low_Inventory_Report' => 'Báo cáo tồn kho thấp',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Min QTY',
     'name' => 'Tên',
     'new_item_checked' => 'Một mục mới đã được kiểm tra dưới tên của bạn, chi tiết dưới đây.',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Nhắn nhở: hạn chót cấp phát cho :name gần đến',
     'Expected_Checkin_Date' => 'Một tài sản đã thu hồi về cho bạn vì đã hoàn lại vào ngày :date',
     'your_assets' => 'Xen qua tài sản của bạn',
+    'rights_reserved' => 'All rights reserved.',
 ];

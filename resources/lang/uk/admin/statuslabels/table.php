@@ -13,7 +13,7 @@ return array(
     'pending'      	=> 'Pending',
     'status_type'   => 'Status Type',
     'show_in_nav'   => 'Show in side nav',
-    'title'      	=> 'Status Labels',
+    'title'      	=> 'Статуси активів',
     'undeployable'  => 'Undeployable',
-    'update'      	=> 'Update Status Label',
+    'update'      	=> 'Оновити статуси активів',
 );

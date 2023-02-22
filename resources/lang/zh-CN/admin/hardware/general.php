@@ -14,6 +14,8 @@ return [
     'deleted'  					=> '此资产已被删除。',
     'edit'  					=> '编辑资产',
     'model_deleted'  			=> '这个资源模型已被删除。您必须先还原模型才能还原素材。',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => '可申领',
     'requested'				    => '已申请',
     'not_requestable'           => '不可申领',

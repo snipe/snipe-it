@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => 'Загвар байхгүй байна.',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Энэ загвар одоогоор нэг буюу хэд хэдэн хөрөнгөтэй холбоотой бөгөөд устгаж болохгүй. Хөрөнгө устгаж, дараа нь устгахыг оролдоно уу.',
 
 

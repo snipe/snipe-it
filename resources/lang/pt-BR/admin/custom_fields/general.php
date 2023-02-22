@@ -27,6 +27,9 @@ return [
     'used_by_models'   		    => 'Usado por modelos',
     'order'   		            => 'Ordem',
     'create_fieldset'         => 'Novo conjunto de campos',
+    'update_fieldset'         => 'Update Fieldset',
+    'fieldset_does_not_exist'   => 'Fieldset :id does not exist',
+    'fieldset_updated'         => 'Fieldset updated',
     'create_fieldset_title' => 'Criar um novo conjunto de campos',
     'create_field'            => 'Novo conjunto de campos personalizado',
     'create_field_title' => 'Criar um novo campo personalizado',
@@ -44,6 +47,6 @@ return [
     'db_convert_warning' => 'AVISO. Este campo está na tabela de campos personalizados como <code>:db_column</code> mas deve ser <code>:expected</code>.',
     'is_unique' => 'Este valor deve ser único em todos os arquivos',
     'unique' => 'Único',
-    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
-    'display_in_user_view_table' => 'Visible to User',
+    'display_in_user_view' => 'Permitir que o usuário selecionado veja estes valores em sua página de Ativos Atribuídos',
+    'display_in_user_view_table' => 'Visível para o Usuário',
 ];

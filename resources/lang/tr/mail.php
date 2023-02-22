@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Yeni Snipe-IT Kurulumu oturum açma kimlik bilgilerini aşağıdaki gibidir. ',
     'login' => 'Giriş:',
     'Low_Inventory_Report' => 'Düşük Stok Raporu',
+    'inventory_report' => 'Envanter Raporu',
     'min_QTY' => 'Min. Miktar',
     'name' => 'Ad',
     'new_item_checked' => 'Yeni varlık altında kullanıma alındı, ayrıntıları aşağıdadır.',
@@ -79,4 +80,5 @@ return [
     'Expected_Checkin_Notification' => 'Hatırlatma ::name Son seçim zamanı yaklaşıyor',
     'Expected_Checkin_Date' => 'Size teslim edilen bir varlık :date tarihinde tekrar teslim edilecektir',
     'your_assets' => 'Varlıkları Görüntüleme',
+    'rights_reserved' => 'Her türlü hakkı saklıdır.',
 ];

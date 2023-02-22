@@ -38,6 +38,7 @@ return [
         'success_pt1' => 'Suksess! Se etter meldingen i kanalen ',
         'success_pt2' => ' , og sørg for å klikke på LAGRE nedenfor for å lagre innstillingene.',
         '500' => '500 Tjenerfeil.',
-        'error' => 'Noe gikk galt.',
+        'error' => 'Something went wrong. Slack responded with: :error_message',
+        'error_misc' => 'Something went wrong. :( ',
     ]
 ];

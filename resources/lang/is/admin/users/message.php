@@ -15,7 +15,7 @@ return array(
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
     'password_reset_sent'       => 'A password reset link has been sent to :email!',
     'user_has_no_email'         => 'Þessi notandi er ekki með skráð netfang á prófílnum sínum.',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'user_has_no_assets_assigned'   => 'Þessi notandi er ekki með búnað skráðan á sig',
 
 
     'success' => array(
@@ -61,7 +61,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => 'Þessi notandi er ekki með netfang skilgreint.',
+        'success' => 'Búið að tilkynna notenda um núverandi birgðastöðu.'
     )
 );

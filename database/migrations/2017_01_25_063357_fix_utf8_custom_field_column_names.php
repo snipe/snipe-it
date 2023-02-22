@@ -4,6 +4,7 @@ use App\Models\CustomField;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 /**
  * Fixes issue #2551 where columns got donked if the field name in non-ascii
@@ -71,6 +72,25 @@ class FixUtf8CustomFieldColumnNames extends Migration
      */
     public function down()
     {
+        // In the up method above, updateLegacyColumnName is called and custom fields in the assets table are prefixed
+        // with "_snipe_it_", suffixed with "_{id of the CustomField}", and stored in custom_fields.db_column.
+        // The following reverses those changes.
+        foreach (CustomField::all() as $field) {
+            $currentColumnName = $field->db_column;
+
+            // "_snipeit_imei_1" becomes "_snipeit_imei"
+            $legacyColumnName = (string) Str::of($currentColumnName)->replaceMatches('/_(\d)+$/', '');
+
+            if (Schema::hasColumn(CustomField::$table_name, $currentColumnName)) {
+                Schema::table(CustomField::$table_name, function (Blueprint $table) use ($currentColumnName, $legacyColumnName) {
+                    $table->renameColumn(
+                        $currentColumnName,
+                        $legacyColumnName
+                    );
+                });
+            }
+        }
+
         Schema::table('custom_fields', function ($table) {
             $table->dropColumn('db_column');
             $table->dropColumn('help_text');

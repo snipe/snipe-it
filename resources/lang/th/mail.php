@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'เข้าสู่ระบบการติดตั้ง Snipe-IT ใหม่ของคุณโดยใช้ข้อมูลรับรองด้านล่าง:',
     'login' => 'เข้าสู่ระบบ:',
     'Low_Inventory_Report' => 'รายงานพื้นที่โฆษณาต่ำ',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Min QTY',
     'name' => 'ชื่อ',
     'new_item_checked' => 'รายการใหม่ได้รับการตรวจสอบภายใต้ชื่อของคุณแล้วรายละเอียดมีดังนี้',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'เตือนความจำ :: ใกล้หมดเวลาเช็คอิน',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'your_assets' => 'ดูสินทรัพย์ที่มี',
+    'rights_reserved' => 'All rights reserved.',
 ];

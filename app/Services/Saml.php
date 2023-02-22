@@ -22,7 +22,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  */
 class Saml
 {
-    const DATA_SESSION_KEY = '_samlData';
+    public const DATA_SESSION_KEY = '_samlData';
 
     /**
      * OneLogin_Saml2_Auth instance.
@@ -308,12 +308,9 @@ class Saml
      */
     public function samlLogin($data)
     {
-        $setting = Setting::getSettings();
         $this->saveDataToSession($data);
         $this->loadDataFromSession();
-
         $username = $this->getUsername();
-
         return User::where('username', '=', $username)->whereNull('deleted_at')->where('activated', '=', '1')->first();
     }
 

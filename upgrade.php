@@ -43,7 +43,6 @@ echo "--------------------------------------------------------\n\n";
 
 // Check the .env looks ok
 $env = file('.env');
-$env_error_count = 0;
 $env_good = '';
 $env_bad = '';
 
@@ -85,15 +84,13 @@ foreach ($env as $line_num => $line) {
 
         if ($env_key == 'APP_KEY') {
             if (($env_value=='')  || (strlen($env_value) < 20)) {
-                $env_bad .= "✘ APP_KEY ERROR in your .env on line #'.$show_line_num.': Your APP_KEY should not be blank. Run `php artisan key:generate` to generate one.\n";
+                $env_bad .= "✘ APP_KEY ERROR in your .env on line #'.{$show_line_num}.': Your APP_KEY should not be blank. Run `php artisan key:generate` to generate one.\n";
             } else {
                 $env_good .= "√ Your APP_KEY is not blank. \n";
             }
         }
 
         if ($env_key == 'APP_URL') {
-
-            $app_url_length = strlen($env_value);
 
             if (($env_value!="null") && ($env_value!="")) {
                 $env_good .= '√ Your APP_URL is not null or blank. It is set to '.$env_value."\n";
@@ -179,6 +176,10 @@ $required_exts_array =
         'zip',
     ];
 
+$recommended_exts_array =
+    [
+        'sodium', //note that extensions need to be in BOTH the $required_exts_array and this one to be 'optional'
+    ];
 $ext_missing = '';
 $ext_installed = '';
 
@@ -208,8 +209,10 @@ foreach ($required_exts_array as $required_ext) {
             }
 
         // If this isn't an either/or option, just add it to the string of errors conventionally
-        } else {
+        } elseif (!in_array($required_ext, $recommended_exts_array)){
             $ext_missing .=  '✘ MISSING PHP EXTENSION: '.$required_ext."\n";
+        } else {
+            $ext_installed .= '- '.$required_ext." is *NOT* installed, but is recommended...\n";
         }
 
     // The required extension string was found in the array of installed extensions - yay!
@@ -452,11 +455,11 @@ echo "--------------------------------------------------------\n\n";
 
 
 function str_begins($haystack, $needle) {
-    return 0 === substr_compare($haystack, $needle, 0, strlen($needle));
+    return (substr_compare($haystack, $needle, 0, strlen($needle)) === 0);
 }
 
 function str_ends($haystack,  $needle) {
-    return 0 === substr_compare($haystack, $needle, -strlen($needle));
+    return (substr_compare($haystack, $needle, -strlen($needle)) === 0);
 }
 
 

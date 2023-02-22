@@ -13,7 +13,8 @@ return array(
 
     'update' => array(
         'error'   => '分类更新失败，请重试',
-        'success' => '分类更新成功'
+        'success' => '分类更新成功',
+        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
     ),
 
     'delete' => array(

@@ -13,7 +13,8 @@ return array(
 
     'update' => array(
         'error'   => 'Kāhore i whakahoutia te kāwai, tēnā whakamātau anō',
-        'success' => 'Kua pai te whakahoutanga o te momo.'
+        'success' => 'Kua pai te whakahoutanga o te momo.',
+        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
     ),
 
     'delete' => array(

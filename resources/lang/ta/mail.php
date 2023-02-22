@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'கீழே உள்ள சான்றுகளை பயன்படுத்தி உங்கள் புதிய Snipe-IT நிறுவலுக்கு உள்நுழையவும்:',
     'login' => 'உள் நுழை:',
     'Low_Inventory_Report' => 'குறைவான சரக்கு அறிக்கை',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'குறைந்தது QTY',
     'name' => 'பெயர்',
     'new_item_checked' => 'உங்கள் பெயரில் ஒரு புதிய உருப்படி சோதிக்கப்பட்டது, விவரங்கள் கீழே உள்ளன.',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'your_assets' => 'View Your Assets',
+    'rights_reserved' => 'All rights reserved.',
 ];

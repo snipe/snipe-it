@@ -11,8 +11,8 @@ return [
         'file_deleted'          => 'Záložní soubor byl úspěšně smazán. ',
         'generated'             => 'Byla úspěšně vytvořena nová záloha.',
         'file_not_found'        => 'Tento záložní soubor nebyl na serveru nalezen.',
-        'restore_warning'       => 'Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This will also log out all of your existing users (including you).',
-        'restore_confirm'       => 'Are you sure you wish to restore your database from :filename?'
+        'restore_warning'       => 'Ano, obnovit. Potvrzuji, že toto přepíše existující data v databázi. Tato akce taky odhlásí všechny uživatele (včetně vás).',
+        'restore_confirm'       => 'Jste si jisti, že chcete obnovit databázi z :filename?'
     ],
     'purge' => [
         'error'     => 'Během čištění došlo k chybě. ',
@@ -20,24 +20,25 @@ return [
         'success'               => 'Vymazané záznamy byly úspěšně vyčištěny.',
     ],
     'mail' => [
-        'sending' => 'Sending Test Email...',
-        'success' => 'Mail sent!',
-        'error' => 'Mail could not be sent.',
-        'additional' => 'No additional error message provided. Check your mail settings and your app log.'
+        'sending' => 'Odesílání testovacího e-mailu...',
+        'success' => 'E-mail odeslán!',
+        'error' => 'E-mail se nepodařilo odeslat.',
+        'additional' => 'Porobná zpárva o chybě není dostupná. Zkontrolujte nastavení pošty a log.'
     ],
     'ldap' => [
-        'testing' => 'Testing LDAP Connection, Binding & Query ...',
-        '500' => '500 Server Error. Please check your server logs for more information.',
-        'error' => 'Something went wrong :(',
-        'sync_success' => 'A sample of 10 users returned from the LDAP server based on your settings:',
-        'testing_authentication' => 'Testing LDAP Authentication...',
-        'authentication_success' => 'User authenticated against LDAP successfully!'
+        'testing' => 'Testování LDAP připojení, vazby a dotazu ...',
+        '500' => '500 Server error. Zkontrolujte serverové logy pro více informací.',
+        'error' => 'Něco se pokazilo :(',
+        'sync_success' => '10 příkladových uživatelů z LDAP serveru podle vašeho nastavení:',
+        'testing_authentication' => 'Testování LDAP ověření...',
+        'authentication_success' => 'Uživatel byl úspěšně ověřen přes LDAP!'
     ],
     'slack' => [
-        'sending' => 'Sending Slack test message...',
-        'success_pt1' => 'Success! Check the ',
-        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
+        'sending' => 'Odesílám testovací zprávu na Slack...',
+        'success_pt1' => 'Úspěšně! Zkontrolujte ',
+        'success_pt2' => ' kanál pro vaši testovací zprávu a ujistěte se, že klepněte na tlačítko ULOŽIT pro uložení nastavení.',
         '500' => '500 Server Error.',
-        'error' => 'Something went wrong.',
+        'error' => 'Something went wrong. Slack responded with: :error_message',
+        'error_misc' => 'Something went wrong. :( ',
     ]
 ];

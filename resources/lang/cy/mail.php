@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Mewngofnodi i\'ch gosodiad Snipe-IT newydd gan ddefnyddio\'r manylion isod:',
     'login' => 'Mewngofnodi:',
     'Low_Inventory_Report' => 'Adroddiad Inventory Isel',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Nifer Lleiaf',
     'name' => 'Enw',
     'new_item_checked' => 'Mae eitem newydd wedi\'i gwirio o dan eich enw, mae\'r manylion isod.',
@@ -79,4 +80,5 @@ return [
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'your_assets' => 'View Your Assets',
+    'rights_reserved' => 'All rights reserved.',
 ];

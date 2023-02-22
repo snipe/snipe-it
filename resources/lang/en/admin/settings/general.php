@@ -302,7 +302,7 @@ return [
     'localization_keywords' => 'localization, currency, local, locale, time zone, timezone, international, internatinalization, language, languages, translation',
     'localization_help' => 'Language, date display',
     'notifications' => 'Notifications',
-    'notifications_help' => 'Email alerts, audit settings',
+    'notifications_help' => 'Email Alerts & Audit Settings',
     'asset_tags_help' => 'Incrementing and prefixes',
     'labels' => 'Labels',
     'labels_title' => 'Update Label Settings',
