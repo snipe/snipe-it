@@ -16,6 +16,7 @@
 @include ('partials.forms.edit.manufacturer-select', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'manufacturer_id'])
 {{-- @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id']) --}}
 @include ('partials.forms.edit.model_number')
+@include ('partials.forms.edit.upc')
 {{-- @include ('partials.forms.edit.order_number') --}}
 {{-- @include ('partials.forms.edit.purchase_date') --}}
 {{-- @include ('partials.forms.edit.purchase_cost') --}}

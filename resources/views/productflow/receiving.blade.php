@@ -19,7 +19,7 @@
             {{-- This injects the serial number & accessory modals directly to the view instead of it being called through the modal framework 'api' --}}
             @include('modals.serialnumber') 
             @include('modals.accessory')
-
+            @include('modals.button-dropdown');
 
             <form id="create-form" class="form-horizontal" autocomplete="off" role="form" enctype="multipart/form-data">
 
@@ -64,9 +64,7 @@
                             @endphp
 
                             <div class="col-md-1 col-sm-1 text-left">
-                                <a href='{{ route('modal.show', 'model') }}' data-toggle="modal" data-target="#createModal"
-                                    data-select='model_select_id'
-                                    class="btn btn-sm btn-primary">{{ trans('button.new') }}</a>
+                                <a data-toggle="modal" class="btn btn-sm btn-primary" id="newInventoryBtn">New</a>
                             </div>
                         </div>
                         <!-- CSRF Token -->
@@ -90,6 +88,13 @@
             May revist this later to make it a little less chatty with the server. The idea is to keep calls to the server down and minimize redirects.
         */
 
+        $("#newInventoryBtn").on('click', () => {
+            $("#buttonDropdown").modal('show');
+        });
+
+        $("#newAsset").on('click', () => {
+            $("#buttonDropdown").modal('hide');
+        });
 
         $("#create-form").submit((e) => {
             let asset = (data) => {

@@ -52,16 +52,17 @@
           <!-- QTY -->
           <div class="form-group">
             <label class="col-sm-3 control-label">QTY</label>
-            <div class="col-md-2">
-              <input type="text" class="form-control" data-validation="required">
+            <div class="col-md-2 required">
+              <input type="text" class="form-control" data-validation="required" name="qty" autofocus value="1" required>
 
             </div>
           </div>
 
           <!-- User -->
 
-          @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'assigned_to'])
-
+          {{-- @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'assigned_to']) --}}
+          {{-- Hardcoded value to dummy user. --}}
+          <input type="text" hidden=true name="assigned_to" id="assigned_to" value="{{\App\Models\User::where('username', '=', 'Accessories Checkout')->first()->id}}">
 
              @if ($accessory->requireAcceptance() || $accessory->getEula() || ($snipeSettings->slack_endpoint!=''))
                  <div class="form-group notification-callout">
@@ -91,8 +92,8 @@
           <!-- Note -->
           <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
             <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
-            <div class="col-md-7">
-              <textarea class="col-md-6 form-control" id="note" name="note">{{ old('note', $accessory->note) }}</textarea>
+            <div class="col-md-7 required">
+              <textarea class="col-md-6 form-control" id="note" name="note" data-validation="required" required>{{ old('note', $accessory->note) }}</textarea>
               {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>

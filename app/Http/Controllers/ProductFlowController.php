@@ -21,22 +21,27 @@ class ProductFlowController extends Controller
 
     public function show(Request $request)
     {
-        // Temporarily disabling accessories until UI is completed.
-        // $accessory = Accessory::where('model_number', '=', $request->receiveParts)->get();
+        $accessory = Accessory::where('model_number', '=', $request->receiveParts)->get();
 
-        // $upc = Accessory::where('upc', '=', $request->receiveParts)->get();
+        $upc = Accessory::where('upc', '=', $request->receiveParts)->get();
 
         $model = AssetModel::where('model_number', '=', $request->receiveParts)->get();
 
-        // if ($accessory->count() > 0) {
-        //     $result = $accessory[0];
-        //     return response()->json(Helper::formatStandardApiResponse('success', $result, "accessory"));
-        // }
+        if ($accessory->count() > 0) {
+            $result = $accessory[0];
+            return response()->json(Helper::formatStandardApiResponse('success', $result, "accessory"));
+        }
+
+        if ($upc->count() > 0) {
+            $result = $upc[0];
+            return response()->json(Helper::formatStandardApiResponse('success', $result, "accessory"));
+        }
 
         if ($model->count() > 0) {
             $result = $model[0];
             return response()->json(Helper::formatStandardApiResponse('success', $result, "asset"));
         }
+
 
         // Redirect if model is not found
         if ($request->receiveParts == "0") {
@@ -81,7 +86,7 @@ class ProductFlowController extends Controller
         $qty = $accessory->qty + intval($request->input('accessory_qty'));
         
         if (is_null($accessory)) {
-            return redirect()->route('productflow.receiving')->with('warning', "Accessory not found. Please click 'New' to add the accessory.");
+            return redirect()->route('productflow.receiving')->with('warning', "Accessory not found. Please click 'New Accessory' to add the accessory.");
         }
 
         $accessory->qty = $qty;
