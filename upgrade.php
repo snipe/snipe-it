@@ -176,6 +176,10 @@ $required_exts_array =
         'zip',
     ];
 
+$recommended_exts_array =
+    [
+        'sodium', //note that extensions need to be in BOTH the $required_exts_array and this one to be 'optional'
+    ];
 $ext_missing = '';
 $ext_installed = '';
 
@@ -205,8 +209,10 @@ foreach ($required_exts_array as $required_ext) {
             }
 
         // If this isn't an either/or option, just add it to the string of errors conventionally
-        } else {
+        } elseif (!in_array($required_ext, $recommended_exts_array)){
             $ext_missing .=  '✘ MISSING PHP EXTENSION: '.$required_ext."\n";
+        } else {
+            $ext_installed .= '- '.$required_ext." is *NOT* installed, but is recommended...\n";
         }
 
     // The required extension string was found in the array of installed extensions - yay!
