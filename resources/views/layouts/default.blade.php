@@ -821,7 +821,7 @@
           @endif
           
 
-          <a target="_blank" href="https://snipeitapp.com" rel="noopener">Cani-Asset</a> is asset management software, made with <i class="fas fa-heart" style="color: #a94442; font-size: 10px" aria-hidden="true"></i><span class="sr-only">love</span> by <a href="https://www.canaris.in/" rel="noopener">@canaris</a>.
+          <a target="_blank" href="https://caniasset.canaris.in/" rel="noopener">Cani-Asset</a> is asset management software, made with <i class="fas fa-heart" style="color: #a94442; font-size: 10px" aria-hidden="true"></i><span class="sr-only">love</span> by <a href="https://www.canaris.in/" rel="noopener">@canaris</a>.
       </footer>
 
 
