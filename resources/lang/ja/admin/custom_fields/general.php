@@ -27,6 +27,9 @@ return [
     'used_by_models'   		    => '型番で使用',
     'order'   		            => '順番',
     'create_fieldset'         => '新しいフィールドセット',
+    'update_fieldset'         => 'Update Fieldset',
+    'fieldset_does_not_exist'   => 'Fieldset :id does not exist',
+    'fieldset_updated'         => 'Fieldset updated',
     'create_fieldset_title' => '新しいフィールドセットを作成',
     'create_field'            => '新しいユーザー設定フィールド',
     'create_field_title' => '新しいカスタムフィールドを作成',
@@ -44,6 +47,6 @@ return [
     'db_convert_warning' => '警告。このフィールドは <code>:db_column</code> としてカスタムフィールドテーブルにありますが、 <code>:expected</code> でなければなりません。',
     'is_unique' => 'この値はすべての資産で一意である必要があります',
     'unique' => '一意',
-    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
-    'display_in_user_view_table' => 'Visible to User',
+    'display_in_user_view' => 'チェックアウトされたユーザーが割り当てられたアセットを表示ページでこれらの値を表示できるようにします',
+    'display_in_user_view_table' => 'ユーザーに表示',
 ];

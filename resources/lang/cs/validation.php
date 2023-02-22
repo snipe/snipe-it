@@ -43,14 +43,14 @@ return [
     'file'                 => 'Atribut: musí být soubor.',
     'filled'               => 'Pole atributu: musí mít hodnotu.',
     'image'                => ':attribute musí být obrázek.',
-    'import_field_empty'    => 'The value for :fieldname cannot be null.',
+    'import_field_empty'    => 'Hodnota pro :fieldname nemůže být null.',
     'in'                   => 'Zvolený :attribute je neplatný.',
     'in_array'             => 'Pole atributu neexistuje v: jiné.',
     'integer'              => ':attribute musí být celočíselný.',
     'ip'                   => ':attribute musí být platná IP adresa.',
     'ipv4'                 => 'Atribut: musí mít platnou adresu IPv4.',
     'ipv6'                 => 'Atribut: musí být platná adresa IPv6.',
-    'is_unique_department' => 'The :attribute must be unique to this Company Location',
+    'is_unique_department' => ':attribute musí být unikátní pro tuto lokalitu společnosti',
     'json'                 => 'Atribut: musí být platný řetězec JSON.',
     'max'                  => [
         'numeric' => ':attribute nesmí být větší než :max.',
@@ -93,26 +93,15 @@ return [
     'url'                  => 'Formát :attribute je neplatný.',
     'unique_undeleted'     => 'Je třeba, aby se :attribute neopakoval.',
     'non_circular'         => ':attribute nesmí vytvořit kruhový odkaz.',
-    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
-    'letters'              => 'Password must contain at least one letter.',
-    'numbers'              => 'Password must contain at least one number.',
-    'case_diff'            => 'Password must use mixed case.',
-    'symbols'              => 'Password must contain symbols.',
+    'disallow_same_pwd_as_user_fields' => 'Heslo nemůže být stejné jako uživatelské jméno.',
+    'letters'              => 'Heslo musí obsahovat nejméně jedno písmeno.',
+    'numbers'              => 'Heslo musí obsahovat alespoň jednu číslici.',
+    'case_diff'            => 'Heslo musí použít smíšené znaky.',
+    'symbols'              => 'Heslo musí obsahovat symboly.',
     'gte'                  => [
-        'numeric'          => 'Value cannot be negative'
+        'numeric'          => 'Hodnota nemůže být záporná'
     ],
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
 
     /*
     |--------------------------------------------------------------------------
@@ -131,6 +120,18 @@ return [
         'hashed_pass'      => 'Vaše současné heslo je nesprávné',
         'dumbpwd'          => 'Toto heslo je příliš běžné.',
         'statuslabel_type' => 'Musíte vybrat platný typ štítku stavu',
+
+        // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
+        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // people won't know how to format. 
+        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
+        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
+        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+
     ],
 
     /*

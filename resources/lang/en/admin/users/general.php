@@ -43,4 +43,9 @@ return [
     'not_remote_label' => 'This is not a remote user',
     'vip_label' => 'VIP user',
     'vip_help' => 'This can be helpful to mark important people if you would like',
+    'create_user' => 'Create a user',
+    'create_user_page_explanation' => 'This is the account information you will use to access the site for the first time.',
+    'email_credentials' => 'Email credentials',
+    'email_credentials_text' => 'Email my credentials to the email address above',
+    'next_save_user' => 'Next: Save User',
 ];

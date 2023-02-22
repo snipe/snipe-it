@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'This asset has been deleted.',
     'edit'  					=> 'சொத்து திருத்து',
     'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Requestable',
     'requested'				    => 'கோரப்பட்டது',
     'not_requestable'           => 'Not Requestable',

@@ -27,6 +27,9 @@ return [
     'used_by_models'   		    => 'Использован в моделях',
     'order'   		            => 'Порядок',
     'create_fieldset'         => 'Новый набор полей',
+    'update_fieldset'         => 'Обновить набор полей',
+    'fieldset_does_not_exist'   => 'Набор полей :id не существует',
+    'fieldset_updated'         => 'Набор полей обновлен',
     'create_fieldset_title' => 'Создайте новый набор полей',
     'create_field'            => 'Новое настраиваемое поле',
     'create_field_title' => 'Создайте новое настраиваемое поле',
@@ -44,6 +47,6 @@ return [
     'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code>:db_column</code> but should be <code>:expected</code>.',
     'is_unique' => 'Это значение должно быть уникальным для всех активов',
     'unique' => 'Уникальный',
-    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
-    'display_in_user_view_table' => 'Visible to User',
+    'display_in_user_view' => 'Разрешить владельцу актива просматривать эти значения на странице Просмотр Назначенных Активов',
+    'display_in_user_view_table' => 'Видимый для пользователя',
 ];

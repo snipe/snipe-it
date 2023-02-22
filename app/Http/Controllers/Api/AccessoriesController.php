@@ -41,10 +41,13 @@ class AccessoriesController extends Controller
                 'min_amt',
                 'company_id',
                 'notes',
+                'users_count',
+                'qty',
             ];
 
 
-        $accessories = Accessory::select('accessories.*')->with('category', 'company', 'manufacturer', 'users', 'location', 'supplier');
+        $accessories = Accessory::select('accessories.*')->with('category', 'company', 'manufacturer', 'users', 'location', 'supplier')
+                                ->withCount('users as users_count');
 
         if ($request->filled('search')) {
             $accessories = $accessories->TextSearch($request->input('search'));

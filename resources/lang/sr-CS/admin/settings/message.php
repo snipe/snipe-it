@@ -38,6 +38,7 @@ return [
         'success_pt1' => 'Uspešno! Proverite ',
         'success_pt2' => ' kanal za vašu test poruku i obavezno kliknite na SAČUVAJ ispod da biste sačuvali svoja podešavanja.',
         '500' => '500 Greška servera.',
-        'error' => 'Nešto nije u redu.',
+        'error' => 'Something went wrong. Slack responded with: :error_message',
+        'error_misc' => 'Something went wrong. :( ',
     ]
 ];

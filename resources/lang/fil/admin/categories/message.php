@@ -13,7 +13,8 @@ return array(
 
     'update' => array(
         'error'   => 'Hindi na-update ang kategorya, mangyaring subukang muli',
-        'success' => 'Matagumpay na nai-update ang kategorya.'
+        'success' => 'Matagumpay na nai-update ang kategorya.',
+        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
     ),
 
     'delete' => array(

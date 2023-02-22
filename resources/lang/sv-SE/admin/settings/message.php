@@ -38,6 +38,7 @@ return [
         'success_pt1' => 'Klart! Kontrollera ',
         'success_pt2' => ' kanal för ditt testmeddelande, och se till att klicka på SPARA nedan för att lagra dina inställningar.',
         '500' => '500 Server fel.',
-        'error' => 'Någonting gick fel.',
+        'error' => 'Something went wrong. Slack responded with: :error_message',
+        'error_misc' => 'Something went wrong. :( ',
     ]
 ];

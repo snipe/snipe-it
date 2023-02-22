@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Prisijunkite prie savo naujojo "Snipe-IT" diegimo naudodami toliau nurodytus įgaliojimus:',
     'login' => 'Prisijungti:',
     'Low_Inventory_Report' => 'Mažos inventorizacijos ataskaita',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Min Kiekis',
     'name' => 'Pavadinimas',
     'new_item_checked' => 'Naujas objektas buvo patikrintas pagal jūsų vardą, išsami informacija pateikiama žemiau.',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'your_assets' => 'View Your Assets',
+    'rights_reserved' => 'All rights reserved.',
 ];

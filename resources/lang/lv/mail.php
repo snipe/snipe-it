@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Piesakieties savā jaunajā Snipe-IT instalācijā, izmantojot tālāk minētos akreditācijas datus.',
     'login' => 'Pieslēgties:',
     'Low_Inventory_Report' => 'Zema inventarizācijas atskaite',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Min QTY',
     'name' => 'Nosaukums',
     'new_item_checked' => 'Jauns objekts ir atzīmēts zem sava vārda, sīkāk ir sniegta zemāk.',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'your_assets' => 'View Your Assets',
+    'rights_reserved' => 'All rights reserved.',
 ];

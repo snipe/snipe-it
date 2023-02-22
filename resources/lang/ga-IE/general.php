@@ -3,6 +3,7 @@
 return [
     'accessories'			=> 'Accessories',
     'activated'			    => 'Gníomhachtaithe',
+    'accepted_date'         => 'Date Accepted',
     'accessory'				=> 'Cúlpháirtí',
     'accessory_report'		=> 'Tuarascáil Cúlpháirtí',
     'action'                => 'Gníomh',
@@ -27,7 +28,13 @@ return [
     'audit'				    => 'Iniúchadh',
     'audit_report'			=> 'Logáil Iniúchta',
     'assets'				=> 'Sócmhainní',
+    'assets_audited'        => 'assets audited',
+    'assets_checked_in_count'     => 'assets checked in',
+    'assets_checked_out_count'     => 'assets checked out',
+    'asset_deleted_warning'     => 'This asset has been deleted. You must restore it before you can assign it to someone.',
+    'assigned_date'         => 'Date Assigned',
     'assigned_to'           => 'Assigned to :name',
+    'assignee'              => 'Assigned to',
     'avatar_delete'         => 'Scrios Avatar',
     'avatar_upload'         => 'Upload Upload',
     'back'      			=> 'Ar ais',
@@ -39,6 +46,8 @@ return [
     'bulk_delete'           => 'Bulk Delete',
     'bulk_actions'          => 'Bulk Actions',
     'bulk_checkin_delete'   => 'Bulk Checkin Items from Users',
+    'byod'                  => 'BYOD',
+    'byod_help'             => 'This device is owned by the user',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'Cealaigh',
     'categories'			=> 'Catagóirí',
@@ -385,7 +394,15 @@ return [
     'start_date'            => 'Start Date',
     'end_date'            => 'End Date',
     'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
-    'placeholder_kit'       => 'Select a kit'
+    'placeholder_kit'       => 'Select a kit',
+    'file_not_found'        => 'File not found',
+    'preview_not_available' => '(no preview)',
+    'setup'                 => 'Setup',
+    'pre_flight'            => 'Pre-Flight',
+    'skip_to_main_content'  => 'Skip to main content',
+    'toggle_navigation'     => 'Toggle navigation',
+    'alerts'                => 'Alerts',
+    'tasks_view_all'        => 'View all tasks',
 
 
 

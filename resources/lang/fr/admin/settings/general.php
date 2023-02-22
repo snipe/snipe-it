@@ -77,6 +77,7 @@ return [
     'ldap'                      => 'LDAP',
     'ldap_default_group'        => 'Default Permissions Group',
     'ldap_default_group_info'   => 'Select a group to assign to newly synced users. Remember that a user takes on the permissions of the group they are assigned.',
+    'no_default_group'          => 'No Default Group',
     'ldap_help'                 => 'Service d\'annuaire',
     'ldap_client_tls_key'       => 'Clé TLS du client LDAP',
     'ldap_client_tls_cert'      => 'Certificat TLS côté client pour LDAP',

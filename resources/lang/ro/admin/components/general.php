@@ -12,4 +12,5 @@ return array(
     'remaining' 			             => 'Rămas',
     'total' 			                 => 'Total',
     'update'                            => 'Actualizați componenta',
+    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
 );

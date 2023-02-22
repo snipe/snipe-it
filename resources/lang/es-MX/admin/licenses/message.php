@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
+    'does_not_exist' => 'La licencia no existe o usted no tiene permiso para verla.',
     'user_does_not_exist' => 'Usuario inexistente.',
     'asset_does_not_exist' 	=> 'El equipo que intentas asignar a esta licencia no existe.',
     'owner_doesnt_match_asset' => 'El equipo al que estas intentando asignar esta licenciam, está asignado a un usuario diferente que el de la licencia.',

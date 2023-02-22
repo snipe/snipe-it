@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Denne eiendelen har blitt slettet.',
     'edit'  					=> 'Rediger eiendel',
     'model_deleted'  			=> 'Denne eiendelsmodellen er slettet. Du må gjenopprette modellen før du kan gjenopprette eiendelen.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Forespørrbar',
     'requested'				    => 'Forespurt',
     'not_requestable'           => 'Ikke mulig å spørre etter',

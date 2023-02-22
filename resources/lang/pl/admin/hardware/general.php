@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Ten zasób został usunięty.',
     'edit'  					=> 'Edytuj zasób',
     'model_deleted'  			=> 'Ten model zasobów został usunięty. Musisz przywrócić model zanim będziesz mógł przywrócić zasób.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Żądane',
     'requested'				    => 'Zamówione',
     'not_requestable'           => 'Not Requestable',
@@ -32,8 +34,8 @@ return [
 
     <p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
     ',
-    'csv_import_match_f-l' => 'Try to match users by firstname.lastname (jane.smith) format',
-    'csv_import_match_initial_last' => 'Try to match users by first initial last name (jsmith) format',
+    'csv_import_match_f-l' => 'Spróbuj dopasować użytkowników przez imię.nazwisko (jan.kowalski)',
+    'csv_import_match_initial_last' => 'Spróbuj dopasować użytkowników przez pierwszą literę imienia i nazwisko (jkowalski)',
     'csv_import_match_first' => 'Try to match users by first name (jane) format',
     'csv_import_match_email' => 'Spróbuj dopasować użytkowników po adresie e-mail',
     'csv_import_match_username' => 'Spróbuj dopasować użytkowników po nazwie użytkownika',
