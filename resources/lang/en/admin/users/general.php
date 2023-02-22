@@ -41,4 +41,9 @@ return [
     'remote'   => 'Remote',
     'remote_help' => 'This can be useful if you need to filter by remote users who never or rarely come into your physical locations.',
     'not_remote_label' => 'This is not a remote user',
+    'create_user' => 'Create a user',
+    'create_user_page_explanation' => 'This is the account information you will use to access the site for the first time.',
+    'email_credentials' => 'Email credentials',
+    'email_credentials_text' => 'Email my credentials to the email address above',
+    'next_save_user' => 'Next: Save User',
 ];
