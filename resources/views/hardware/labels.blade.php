@@ -105,9 +105,10 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
         {!! $snipeSettings->show_custom_css() !!}
     @endif
 </style>
-
+<?php  //echo json_encode($settings); ?>
 @foreach ($assets as $asset)
     <?php $count++; ?>
+
     <div class="label">
 
         @if ($settings->qr_code=='1')
@@ -133,9 +134,9 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
                     C: {{ $asset->company->name }}
                 </div>
             @endif
-            @if (($settings->labels_display_name=='1') && ($asset->name!=''))
+            @if (($settings->labels_display_name=='1') && ($asset->_snipeit_broj_osnovnog_sredstva_3!=''))
                 <div class="pull-left">
-                    N: {{ $asset->name }}
+                    OS: {{ $asset->_snipeit_broj_osnovnog_sredstva_3 }}
                 </div>
             @endif
             @if (($settings->labels_display_tag=='1') && ($asset->asset_tag!=''))
@@ -145,7 +146,7 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
             @endif
             @if (($settings->labels_display_serial=='1') && ($asset->serial!=''))
                 <div class="pull-left">
-                    S: {{ $asset->serial }}
+                    S/N: {{ $asset->serial }}
                 </div>
             @endif
             @if (($settings->labels_display_model=='1') && ($asset->model->name!=''))
@@ -153,7 +154,11 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
                     M: {{ $asset->model->name }} {{ $asset->model->model_number }}
                 </div>
             @endif
-
+            @if (($asset->_snipeit_zopu_2== 'ZOPU'))
+                <div class="pull-left">
+                    ZOPU
+                </div>
+            @endif
         </div>
 
         @if ((($settings->alt_barcode_enabled=='1') && $settings->alt_barcode!=''))
@@ -166,9 +171,12 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
 
     </div>
 
-    @if (($count % $settings->labels_per_page == 0) && $count!=count($assets))
-    <div class="page-break"></div>
-    <div class="next-padding">&nbsp;</div>
+
+    @if ($count % $settings->labels_per_page == 0)
+        <!--  Moguce rjesavanje prazne stranice nakon naljepnice
+        <div class="page-break"></div>
+        -->
+        <div class="next-padding">&nbsp;</div>
     @endif
 
 @endforeach
