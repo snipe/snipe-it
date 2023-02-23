@@ -186,6 +186,14 @@ class Asset extends Depreciable
         'model.manufacturer' => ['name'],
     ];
 
+    // To properly set the expected checkin as Y-m-d
+    public function setExpectedCheckinAttribute($value)
+    {
+        if ($value == '') {
+            $value = null;
+        }
+        $this->attributes['expected_checkin'] = $value;
+    }
 
     /**
      * This handles the custom field validation for assets
