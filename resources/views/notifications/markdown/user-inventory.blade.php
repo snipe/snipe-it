@@ -47,7 +47,7 @@
 ## {{ $licenses->count() }} {{ trans('general.licenses') }}
 
 <table width="100%">
-<tr><th align="left"{{ trans('mail.name') }} </th></tr>
+<tr><th align="left">{{ trans('mail.name') }} </th></tr>
 @foreach($licenses as $license)
 <tr>
     <td>{{ $license->name }}</td>
