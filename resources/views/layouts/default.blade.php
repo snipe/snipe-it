@@ -15,8 +15,8 @@
 
 
 
-      <link rel="apple-touch-icon" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url(e($snipeSettings->logo)) :  config('app.url').'/img/logo.png' }}">
-      <link rel="apple-touch-startup-image" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url(e($snipeSettings->logo)) :  config('app.url').'/img/logo.png' }}">
+      <link rel="apple-touch-icon" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url(e($snipeSettings->logo)) :  config('app.url').'/img/snipe-logo-bug.png' }}">
+      <link rel="apple-touch-startup-image" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url(e($snipeSettings->logo)) :  config('app.url').'/img/snipe-logo-bug.png' }}">
       <link rel="shortcut icon" type="image/ico" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url(e($snipeSettings->favicon)) : config('app.url').'/favicon.ico' }} ">
 
 
@@ -88,7 +88,7 @@
       <body class="sidebar-mini skin-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} {{ (session('menu_state')!='open') ? 'sidebar-mini sidebar-collapse' : ''  }}">
   @endif
 
-  <a class="skip-main" href="#main">Skip to main content</a>
+  <a class="skip-main" href="#main">{{ trans('general.skip_to_main_content') }}</a>
     <div class="wrapper">
 
       <header class="main-header">
@@ -100,7 +100,7 @@
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button above the compact sidenav -->
           <a href="#" style="color: white" class="sidebar-toggle btn btn-white" data-toggle="push-menu" role="button">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only">{{ trans('general.toggle_navigation') }}</span>
           </a>
           <div class="nav navbar-nav navbar-left">
               <div class="left-navblock">
@@ -131,7 +131,7 @@
               <ul class="nav navbar-nav">
                   @can('index', \App\Models\Asset::class)
                   <li aria-hidden="true"{!! (Request::is('hardware*') ? ' class="active"' : '') !!} tabindex="-1">
-                      <a href="{{ url('hardware') }}" tabindex="-1">
+                      <a href="{{ url('hardware') }}" accesskey="1" tabindex="-1">
                           <i class="fas fa-barcode fa-fw" aria-hidden="true"></i>
                           <span class="sr-only">{{ trans('general.assets') }}</span>
                       </a>
@@ -139,7 +139,7 @@
                   @endcan
                   @can('view', \App\Models\License::class)
                   <li aria-hidden="true"{!! (Request::is('licenses*') ? ' class="active"' : '') !!} tabindex="-1">
-                      <a href="{{ route('licenses.index') }}" tabindex="-1">
+                      <a href="{{ route('licenses.index') }}" accesskey="2" tabindex="-1">
                           <i class="far fa-save fa-fw"></i>
                           <span class="sr-only">{{ trans('general.licenses') }}</span>
                       </a>
@@ -147,7 +147,7 @@
                   @endcan
                   @can('index', \App\Models\Accessory::class)
                   <li aria-hidden="true"{!! (Request::is('accessories*') ? ' class="active"' : '') !!} tabindex="-1">
-                      <a href="{{ route('accessories.index') }}" tabindex="-1">
+                      <a href="{{ route('accessories.index') }}" accesskey="3" tabindex="-1">
                           <i class="far fa-keyboard fa-fw"></i>
                           <span class="sr-only">{{ trans('general.accessories') }}</span>
                       </a>
@@ -155,7 +155,7 @@
                   @endcan
                   @can('index', \App\Models\Consumable::class)
                   <li aria-hidden="true"{!! (Request::is('consumables*') ? ' class="active"' : '') !!}>
-                      <a href="{{ url('consumables') }}" tabindex="-1">
+                      <a href="{{ url('consumables') }}" accesskey="4" tabindex="-1">
                           <i class="fas fa-tint fa-fw"></i>
                           <span class="sr-only">{{ trans('general.consumables') }}</span>
                       </a>
@@ -163,7 +163,7 @@
                   @endcan
                   @can('view', \App\Models\Component::class)
                   <li aria-hidden="true"{!! (Request::is('components*') ? ' class="active"' : '') !!}>
-                      <a href="{{ route('components.index') }}" tabindex="-1">
+                      <a href="{{ route('components.index') }}" accesskey="5" tabindex="-1">
                           <i class="far fa-hdd fa-fw"></i>
                           <span class="sr-only">{{ trans('general.components') }}</span>
                       </a>
@@ -256,7 +256,7 @@
                <li class="dropdown tasks-menu">
                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                    <i class="far fa-flag" aria-hidden="true"></i>
-                     <span class="sr-only">Alerts</span>
+                     <span class="sr-only">{{ trans('general.alerts') }}</span>
                    @if (count($alert_items))
                     <span class="label label-danger">{{ count($alert_items) }}</span>
                    @endif
@@ -288,12 +288,13 @@
                      </ul>
                    </li>
                    {{-- <li class="footer">
-                     <a href="#">View all tasks</a>
+                     <a href="#">{{ trans('general.tasks_view_all') }}</a>
                    </li> --}}
                  </ul>
                </li>
                @endcan
                @endif
+
 
 
                <!-- User Account: style can be found in dropdown.less -->
@@ -403,7 +404,7 @@
             </li>
             @endcan
             @can('index', \App\Models\Asset::class)
-            <li class="treeview{{ (Request::is('hardware*') ? ' active' : '') }}">
+            <li class="treeview{{ ((Request::is('statuslabels/*') || Request::is('hardware*')) ? ' active' : '') }}">
                 <a href="#"><i class="fas fa-barcode fa-fw" aria-hidden="true"></i>
                   <span>{{ trans('general.assets') }}</span>
                   <i class="fa fa-angle-left pull-right"></i>
@@ -419,8 +420,8 @@
                     <?php $status_navs = \App\Models\Statuslabel::where('show_in_nav', '=', 1)->withCount('assets as asset_count')->get(); ?>
                     @if (count($status_navs) > 0)
                         @foreach ($status_navs as $status_nav)
-                            <li><a href="{{ route('statuslabels.show', ['statuslabel' => $status_nav->id]) }}">
-                                <i class="fas fa-circle text-grey fa-fw" aria-hidden="true"></i>
+                            <li{!! (Request::is('statuslabels/'.$status_nav->id) ? ' class="active"' : '') !!}><a href="{{ route('statuslabels.show', ['statuslabel' => $status_nav->id]) }}">
+                                <i class="fas fa-circle text-grey fa-fw" aria-hidden="true"{!!  ($status_nav->color!='' ? ' style="color: '.e($status_nav->color).'"' : '') !!}></i>
                                  {{ $status_nav->name }} ({{ $status_nav->asset_count }})</a></li>
                         @endforeach
                     @endif
@@ -454,6 +455,12 @@
                           ({{ (isset($total_undeployable_sidebar)) ? $total_undeployable_sidebar : '' }})
                       </a>
                   </li>
+                    <li{!! (Request::query('status') == 'byod' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=byod') }}"><i class="fas fa-times text-red fa-fw"></i>
+                            {{ trans('general.all') }}
+                            {{ trans('general.byod') }}
+                            ({{ (isset($total_byod_sidebar)) ? $total_byod_sidebar : '' }})
+                        </a>
+                    </li>
                   <li{!! (Request::query('status') == 'Archived' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Archived') }}"><i class="fas fa-times text-red fa-fw"></i>
                           {{ trans('general.all') }}
                           {{ trans('admin/hardware/general.archived') }}
@@ -571,7 +578,7 @@
 
             @can('view', \App\Models\User::class)
             <li{!! (Request::is('users*') ? ' class="active"' : '') !!}>
-                  <a href="{{ route('users.index') }}">
+                  <a href="{{ route('users.index') }}" accesskey="6">
                       <i class="fas fa-users fa-fw"></i>
                       <span>{{ trans('general.people') }}</span>
                   </a>

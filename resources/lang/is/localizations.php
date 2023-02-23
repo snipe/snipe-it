@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Select a language',
+    'select_language' => 'Veldu tungumál',
     'languages' => [
         'en'=> 'English, US',
         'en-GB'=> 'English, UK',
@@ -253,9 +253,10 @@ return [
         'RU'=>'Russian Federation',
         'RW'=>'Rwanda',
         'SA'=>'Saudi Arabia',
-        'UK'=>'Scotland',
+        'UK'=>'United Kingdom',
         'SB'=>'Solomon Islands',
         'SC'=>'Seychelles',
+        'SS'=>'South Sudan',
         'SD'=>'Sudan',
         'SE'=>'Sweden',
         'SG'=>'Singapore',

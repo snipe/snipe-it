@@ -15,6 +15,7 @@ return array(
     'password_resets_sent'      => 'De valda användare som är aktiverade och har en giltig e-postadress har skickats en länk för att återställa lösenordet.',
     'password_reset_sent'       => 'En återställningslänk för lösenord har skickats till :email!',
     'user_has_no_email'         => 'Den här användaren har ingen e-postadress i sin profil.',
+    'user_has_no_assets_assigned'   => 'Den här användaren har inga tilldelade tillgångar',
 
 
     'success' => array(
@@ -59,4 +60,8 @@ return array(
         'invalidfiles' => 'En eller flera av dina filer är för stora eller är en filtyp som inte är tillåten. Tillåtna filtyper är png, gif, jpg, doc, docx, pdf och txt.',
     ),
 
+    'inventorynotification' => array(
+        'error'   => 'Den här användaren har ingen e-postadress.',
+        'success' => 'Användaren har meddelats om sitt nuvarande inventarie.'
+    )
 );

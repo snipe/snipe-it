@@ -27,6 +27,9 @@ return [
     'used_by_models'   		    => '引用型號',
     'order'   		            => '排序',
     'create_fieldset'         => '新增欄位集',
+    'update_fieldset'         => 'Update Fieldset',
+    'fieldset_does_not_exist'   => 'Fieldset :id does not exist',
+    'fieldset_updated'         => 'Fieldset updated',
     'create_fieldset_title' => '建立新的欄位集',
     'create_field'            => '新增欄位',
     'create_field_title' => '建立新的客製化欄位',
@@ -44,4 +47,6 @@ return [
     'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code>:db_column</code> but should be <code>:expected</code>.',
     'is_unique' => '此值在所有資產之中必須是唯一的',
     'unique' => 'Unique',
+    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
+    'display_in_user_view_table' => 'Visible to User',
 ];

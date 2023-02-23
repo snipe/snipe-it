@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Dieses Asset wurde gelöscht.',
     'edit'  					=> 'Asset bearbeiten',
     'model_deleted'  			=> 'Dieses Modell für Assets wurde gelöscht. Sie müssen das Modell wiederherstellen, bevor Sie das Asset wiederherstellen können.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Anforderbar',
     'requested'				    => 'Angefordert',
     'not_requestable'           => 'Kann nicht angefordert werden',

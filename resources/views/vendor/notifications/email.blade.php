@@ -73,16 +73,26 @@ $style = [
                         <td style="{{ $style['email-masthead'] }}">
 
                             @if (($snipeSettings->show_images_in_email=='1' ) && ($snipeSettings::setupCompleted()))
+                                @php
+                                    $logo = '';
+                                    if ($snipeSettings->logo != ''){
+                                        $logo = $snipeSettings->logo;
+                                    }
+
+                                    if ($snipeSettings->email_logo != ''){
+                                        $logo = $snipeSettings->email_logo;
+                                    }
+                                @endphp
 
                                 @if ($snipeSettings->brand == '3')
-                                    @if ($snipeSettings->logo!='')
-                                        <img class="navbar-brand-img logo" style="max-width: 50px;" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+                                    @if ($logo!='')
+                                        <img class="navbar-brand-img logo" style="max-width: 50px;" src="{{ url('/') }}/uploads/{{ $logo }}">
                                     @endif
                                     {{ $snipeSettings->site_name }}
 
                                 @elseif ($snipeSettings->brand == '2')
-                                    @if ($snipeSettings->logo!='')
-                                        <img class="navbar-brand-img logo" style="max-width: 50px;" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+                                    @if ($logo!='')
+                                        <img class="navbar-brand-img logo" style="max-width: 50px;" src="{{ url('/') }}/uploads/{{ $logo }}">
                                     @endif
                                 @else
                                     {{ $snipeSettings->site_name }}
@@ -194,7 +204,7 @@ $style = [
                                         <p style="{{ $style['paragraph-sub'] }}">
                                             &copy; {{ date('Y') }}
                                             <a style="{{ $style['anchor'] }}" href="{{ url('/') }}" target="_blank">{{ $snipeSettings->site_name }}</a>.
-                                            All rights reserved.
+                                            {{ trans('mail.rights_reserved') }}
                                         </p>
 
                                         @if ($snipeSettings->privacy_policy_link!='')

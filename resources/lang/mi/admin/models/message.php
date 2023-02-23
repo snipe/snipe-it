@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => 'Kāore te tauira i te tīariari.',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Kei te hono tenei tauira ki te kotahi, neke atu ranei nga rawa, kaore e taea te muku. Nganahia nga rawa, ka ngana ki te muku ano.',
 
 

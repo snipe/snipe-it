@@ -43,12 +43,14 @@ return [
     'file'                 => ':attribute는 파일이어야 합니다.',
     'filled'               => ':attribute 항목은 값이 있어야 합니다.',
     'image'                => ':attribute 는 이미지 형식만 가능합니다.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => '선택한 :attribute 가 부정확 합니다.',
     'in_array'             => ':attribute항목이 :other에 없습니다.',
     'integer'              => ':attribute 는 정수이어야 합니다.',
     'ip'                   => ':attribute 는 유효한 IP 주소이어야 합니다.',
     'ipv4'                 => ':attribute는 유효한 IPv4 주소여야 합니다.',
     'ipv6'                 => ':attribute는 유효한 IPv6 주소여야 합니다.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => ':attribute는 유효한 JSON 문자값이어야 합니다.',
     'max'                  => [
         'numeric' => ':attribute 는 :max 보다 작아야 합니다.',
@@ -112,23 +114,24 @@ return [
     |
     */
 
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
-
     'custom' => [
         'alpha_space' => ':attribute 항목에는 문자를 입력할 수 없습니다.',
         'email_array'      => '하나 이상의 이메일 주소가 유효하지 않습니다.',
         'hashed_pass'      => '현재 비밀번호가 잘못되었습니다.',
         'dumbpwd'          => '그 비밀번호는 너무 일반적입니다.',
         'statuslabel_type' => '유효한 상태 라벨 형식을 선택해 주셔야 합니다',
+
+        // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
+        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // people won't know how to format. 
+        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
+        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
+        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+
     ],
 
     /*

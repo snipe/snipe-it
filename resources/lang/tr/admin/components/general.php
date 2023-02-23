@@ -12,4 +12,5 @@ return array(
     'remaining' 			             => 'Kalan',
     'total' 			                 => 'Toplam',
     'update'                            => 'Bileşeni düzenle',
+    'checkin_limit'            => 'Giren toplam tutar :assigned_qty miktarına eşit ya da daha az olmalıdır'
 );

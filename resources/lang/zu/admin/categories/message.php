@@ -13,7 +13,8 @@ return array(
 
     'update' => array(
         'error'   => 'Isigaba asibuyekezwanga, sicela uzame futhi',
-        'success' => 'Isigaba sibuyekezwe ngempumelelo.'
+        'success' => 'Isigaba sibuyekezwe ngempumelelo.',
+        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
     ),
 
     'delete' => array(

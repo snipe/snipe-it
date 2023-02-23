@@ -1,10 +1,9 @@
 <?php
-
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
 
-return [
+$config = [
 
     /*
     |--------------------------------------------------------------------------
@@ -35,6 +34,8 @@ return [
     */
 
     'channels' => [
+        // This will get overwritten to 'single' AND 'rollbar' in the code at the bottom of this file
+        // if a ROLLBAR_TOKEN is given in the .env file
         'stack' => [
             'driver' => 'stack',
             'channels' => ['single'],
@@ -104,7 +105,30 @@ return [
         'scimtrace' => [
             'driver' => 'single',
             'path' => storage_path('logs/scim.log')
-        ]
+        ],
+
+        'rollbar' => [
+            'driver' => 'monolog',
+            'handler' => \Rollbar\Laravel\MonologHandler::class,
+            'access_token' => env('ROLLBAR_TOKEN'),
+            'level' => env('ROLLBAR_LEVEL', 'error'),
+            'check_ignore' => function($isUncaught, $args, $payload) {
+                if (App::environment('production') && is_object($args) && get_class($args) == Rollbar\ErrorWrapper::class && $args->errorLevel == E_WARNING ) {
+                    \Log::info("IGNORING E_WARNING in production mode: ".$args->getMessage());
+                    return true; // "TRUE - you should ignore it!"
+                }
+                return false;
+            },
+        ],
     ],
 
 ];
+
+
+// Only add rollbar if the .env has a rollbar token
+if ((env('APP_ENV')=='production') && (env('ROLLBAR_TOKEN'))) {
+    $config['channels']['stack']['channels'] = ['single', 'rollbar'];
+}
+
+
+return $config;

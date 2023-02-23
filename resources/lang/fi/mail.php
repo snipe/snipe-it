@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Kirjaudu sisään uuteen Snipe-IT asennukseen käyttäen alla olevia tunnistetietoja:',
     'login' => 'Kirjaudu sisään:',
     'Low_Inventory_Report' => 'Alhainen määrä raportti',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Minimi määrä',
     'name' => 'Nimi',
     'new_item_checked' => 'Uusi nimike on luovutettu sinulle, yksityiskohdat ovat alla.',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Muistutus: :name palautuspäivä lähestyy',
     'Expected_Checkin_Date' => 'Sinulle luovutettu laite on määrä palauttaa takaisin :date',
     'your_assets' => 'Omat laitteesi',
+    'rights_reserved' => 'All rights reserved.',
 ];

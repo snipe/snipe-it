@@ -73,18 +73,18 @@
                                         <th class="col-md-1 text-right"><span class="sr-only">{{ trans('general.actions') }}</span></th>
                                     </tr>
 
-                                    <template v-for="currentFile in files">
+                                    <template v-for="(currentFile, index) in files">
                                     		<tr>
                                     			<td class="col-md-6">@{{ currentFile.file_path }}</td>
                                     			<td class="col-md-3">@{{ currentFile.created_at }} </td>
                                     			<td class="col-md-1">@{{ currentFile.filesize }}</td>
                                                 <td class="col-md-1 text-right">
                                                     <button class="btn btn-sm btn-info" @click="toggleEvent(currentFile.id)">
-                                                        <i class="fas fa-cloud-download-alt fa-fw" aria-hidden="true"></i>
+                                                        <i class="fas fa-retweet fa-fw" aria-hidden="true"></i>
                                                         <span class="sr-only">{{ trans('general.import') }}</span>
                                                     </button>
 
-                                                    <button class="btn btn-sm btn-danger" @click="deleteFile(currentFile)">
+                                                    <button class="btn btn-sm btn-danger" @click="deleteFile(currentFile, index)">
                                                         <i class="fas fa-trash icon-white" aria-hidden="true"></i><span class="sr-only"></span></button>
                                     			</td>
                                     		</tr>

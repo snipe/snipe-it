@@ -43,12 +43,14 @@ return [
     'file'                 => 'Atribuut peab olema fail.',
     'filled'               => 'Atribuudiväljal peab olema väärtus.',
     'image'                => 'Atribuut peab olema pilt.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'Valitud atribuut on kehtetu.',
     'in_array'             => 'Atribuudiväljal pole olemas: muud.',
     'integer'              => 'Atribuut peab olema täisarv.',
     'ip'                   => 'Atribuut peab olema kehtiv IP-aadress.',
     'ipv4'                 => 'Atribuut peab olema kehtiv IPv4 aadress.',
     'ipv6'                 => 'Atribuut peab olema kehtiv IPv6 aadress.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'Atribuut peab olema kehtiv JSON-string.',
     'max'                  => [
         'numeric' => 'Atribuut: ei tohi olla suurem kui: maks.',
@@ -112,23 +114,24 @@ return [
     |
     */
 
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
-
     'custom' => [
         'alpha_space' => 'Atribuudi väli sisaldab märk, mis pole lubatud.',
         'email_array'      => 'Üks või mitu e-posti aadressi on kehtetu.',
         'hashed_pass'      => 'Teie praegune parool on vale',
         'dumbpwd'          => 'See parool on liiga levinud.',
         'statuslabel_type' => 'Peate valima kehtiva olekutüübi tüübi',
+
+        // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
+        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // people won't know how to format. 
+        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
+        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
+        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+
     ],
 
     /*

@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Department;
+use App\Models\Group;
 use Illuminate\Console\Command;
 use App\Models\Setting;
 use App\Models\Ldap;
@@ -43,12 +44,18 @@ class LdapSync extends Command
      */
     public function handle()
     {
+
+        // If LDAP enabled isn't set to 1 (ldap_enabled!=1) then we should cut this short immediately without going any further
+        if (Setting::getSettings()->ldap_enabled!='1') {
+            $this->error('LDAP is not enabled. Aborting. See Settings > LDAP to enable it.');
+            exit();
+        }
+
         ini_set('max_execution_time', env('LDAP_TIME_LIM', 600)); //600 seconds = 10 minutes
         ini_set('memory_limit', env('LDAP_MEM_LIM', '500M'));
         $ldap_result_username = Setting::getSettings()->ldap_username_field;
         $ldap_result_last_name = Setting::getSettings()->ldap_lname_field;
         $ldap_result_first_name = Setting::getSettings()->ldap_fname_field;
-
         $ldap_result_active_flag = Setting::getSettings()->ldap_active_flag;
         $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num;
         $ldap_result_email = Setting::getSettings()->ldap_email;
@@ -57,6 +64,7 @@ class LdapSync extends Command
         $ldap_result_country = Setting::getSettings()->ldap_country;
         $ldap_result_dept = Setting::getSettings()->ldap_dept;
         $ldap_result_manager = Setting::getSettings()->ldap_manager;
+        $ldap_default_group = Setting::getSettings()->ldap_default_group;
 
         try {
             $ldapconn = Ldap::connectToLdap();
@@ -66,7 +74,7 @@ class LdapSync extends Command
                 $json_summary = ['error' => true, 'error_message' => $e->getMessage(), 'summary' => []];
                 $this->info(json_encode($json_summary));
             }
-            LOG::info($e);
+            Log::info($e);
 
             return [];
         }
@@ -76,7 +84,7 @@ class LdapSync extends Command
         try {
             if ($this->option('base_dn') != '') {
                 $search_base = $this->option('base_dn');
-                LOG::debug('Importing users from specified base DN: \"'.$search_base.'\".');
+                Log::debug('Importing users from specified base DN: \"'.$search_base.'\".');
             } else {
                 $search_base = null;
             }
@@ -90,7 +98,7 @@ class LdapSync extends Command
                 $json_summary = ['error' => true, 'error_message' => $e->getMessage(), 'summary' => []];
                 $this->info(json_encode($json_summary));
             }
-            LOG::info($e);
+            Log::info($e);
 
             return [];
         }
@@ -100,16 +108,16 @@ class LdapSync extends Command
 
         if ($this->option('location') != '') {
             $location = Location::where('name', '=', $this->option('location'))->first();
-            LOG::debug('Location name '.$this->option('location').' passed');
-            LOG::debug('Importing to '.$location->name.' ('.$location->id.')');
+            Log::debug('Location name '.$this->option('location').' passed');
+            Log::debug('Importing to '.$location->name.' ('.$location->id.')');
         } elseif ($this->option('location_id') != '') {
             $location = Location::where('id', '=', $this->option('location_id'))->first();
-            LOG::debug('Location ID '.$this->option('location_id').' passed');
-            LOG::debug('Importing to '.$location->name.' ('.$location->id.')');
+            Log::debug('Location ID '.$this->option('location_id').' passed');
+            Log::debug('Importing to '.$location->name.' ('.$location->id.')');
         }
 
         if (! isset($location)) {
-            LOG::debug('That location is invalid or a location was not provided, so no location will be assigned by default.');
+            Log::debug('That location is invalid or a location was not provided, so no location will be assigned by default.');
         }
 
         /* Process locations with explicitly defined OUs, if doing a full import. */
@@ -125,7 +133,7 @@ class LdapSync extends Command
             array_multisort($ldap_ou_lengths, SORT_ASC, $ldap_ou_locations);
 
             if (count($ldap_ou_locations) > 0) {
-                LOG::debug('Some locations have special OUs set. Locations will be automatically set for users in those OUs.');
+                Log::debug('Some locations have special OUs set. Locations will be automatically set for users in those OUs.');
             }
 
             // Inject location information fields
@@ -143,7 +151,7 @@ class LdapSync extends Command
                         $json_summary = ['error' => true, 'error_message' => trans('admin/users/message.error.ldap_could_not_search').' Location: '.$ldap_loc['name'].' (ID: '.$ldap_loc['id'].') cannot connect to "'.$ldap_loc['ldap_ou'].'" - '.$e->getMessage(), 'summary' => []];
                         $this->info(json_encode($json_summary));
                     }
-                    LOG::info($e);
+                    Log::info($e);
 
                     return [];
                 }
@@ -175,20 +183,33 @@ class LdapSync extends Command
         $tmp_pass = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 20);
         $pass = bcrypt($tmp_pass);
 
+        $manager_cache = [];
+
+        if($ldap_default_group != null) {
+
+            $default = Group::find($ldap_default_group);
+            if (!$default) {
+                $ldap_default_group = null; // un-set the default group if that group doesn't exist
+            }
+
+        }
+
+
         for ($i = 0; $i < $results['count']; $i++) {
                 $item = [];
-                $item['username'] = isset($results[$i][$ldap_result_username][0]) ? $results[$i][$ldap_result_username][0] : '';
-                $item['employee_number'] = isset($results[$i][$ldap_result_emp_num][0]) ? $results[$i][$ldap_result_emp_num][0] : '';
-                $item['lastname'] = isset($results[$i][$ldap_result_last_name][0]) ? $results[$i][$ldap_result_last_name][0] : '';
-                $item['firstname'] = isset($results[$i][$ldap_result_first_name][0]) ? $results[$i][$ldap_result_first_name][0] : '';
-                $item['email'] = isset($results[$i][$ldap_result_email][0]) ? $results[$i][$ldap_result_email][0] : '';
-                $item['ldap_location_override'] = isset($results[$i]['ldap_location_override']) ? $results[$i]['ldap_location_override'] : '';
-                $item['location_id'] = isset($results[$i]['location_id']) ? $results[$i]['location_id'] : '';
-                $item['telephone'] = isset($results[$i][$ldap_result_phone][0]) ? $results[$i][$ldap_result_phone][0] : '';
-                $item['jobtitle'] = isset($results[$i][$ldap_result_jobtitle][0]) ? $results[$i][$ldap_result_jobtitle][0] : '';
-                $item['country'] = isset($results[$i][$ldap_result_country][0]) ? $results[$i][$ldap_result_country][0] : '';
-                $item['department'] = isset($results[$i][$ldap_result_dept][0]) ? $results[$i][$ldap_result_dept][0] : '';
-                $item['manager'] = isset($results[$i][$ldap_result_manager][0]) ? $results[$i][$ldap_result_manager][0] : '';
+                $item['username'] = $results[$i][$ldap_result_username][0] ?? '';
+                $item['employee_number'] = $results[$i][$ldap_result_emp_num][0] ?? '';
+                $item['lastname'] = $results[$i][$ldap_result_last_name][0] ?? '';
+                $item['firstname'] = $results[$i][$ldap_result_first_name][0] ?? '';
+                $item['email'] = $results[$i][$ldap_result_email][0] ?? '';
+                $item['ldap_location_override'] = $results[$i]['ldap_location_override'] ?? '';
+                $item['location_id'] = $results[$i]['location_id'] ?? '';
+                $item['telephone'] = $results[$i][$ldap_result_phone][0] ?? '';
+                $item['jobtitle'] = $results[$i][$ldap_result_jobtitle][0] ?? '';
+                $item['country'] = $results[$i][$ldap_result_country][0] ?? '';
+                $item['department'] = $results[$i][$ldap_result_dept][0] ?? '';
+                $item['manager'] = $results[$i][$ldap_result_manager][0] ?? '';
+
 
                 $department = Department::firstOrCreate([
                     'name' => $item['department'],
@@ -217,20 +238,42 @@ class LdapSync extends Command
                 $user->department_id = $department->id;
 
                 if($item['manager'] != null) {
-                    // Get the LDAP Manager
-                    $ldap_manager = Ldap::findLdapUsers($item['manager'], -1, $this->option('filter'));
-
-                    if($ldap_manager["count"] > 0) { 
-                        // Get the Managers username
-                        $ldapManagerUsername = $ldap_manager[0][$ldap_result_username][0];
-
-                        // Get User from Manager username.
-                        $ldap_manager = User::where('username', $ldapManagerUsername)->first();
-
-                        if ( $ldap_manager && isset($ldap_manager->id) ) {
-                            // Link user to manager id.
-                            $user->manager_id = $ldap_manager->id;
+                    // Check Cache first
+                    if (isset($manager_cache[$item['manager']])) {
+                        // found in cache; use that and avoid extra lookups
+                        $user->manager_id = $manager_cache[$item['manager']];
+                    } else {
+                        // Get the LDAP Manager
+                        try {
+                            $ldap_manager = Ldap::findLdapUsers($item['manager'], -1, $this->option('filter'));
+                        } catch (\Exception $e) {
+                            \Log::warning("Manager lookup caused an exception: " . $e->getMessage() . ". Falling back to direct username lookup");
+                            // Hail-mary for Okta manager 'shortnames' - will only work if
+                            // Okta configuration is using full email-address-style usernames
+                            $ldap_manager = [
+                                "count" => 1,
+                                0 => [
+                                    $ldap_result_username => [$item['manager']]
+                                ]
+                            ];
                         }
+
+                        if ($ldap_manager["count"] > 0) {
+
+                            // Get the Manager's username
+                            // PHP LDAP returns every LDAP attribute as an array, and 90% of the time it's an array of just one item. But, hey, it's an array.
+                            $ldapManagerUsername = $ldap_manager[0][$ldap_result_username][0];
+
+                            // Get User from Manager username.
+                            $ldap_manager = User::where('username', $ldapManagerUsername)->first();
+
+                            if ($ldap_manager && isset($ldap_manager->id)) {
+                                // Link user to manager id.
+                                $user->manager_id = $ldap_manager->id;
+                            }
+                        }
+                        $manager_cache[$item['manager']] = $ldap_manager && isset($ldap_manager->id)  ? $ldap_manager->id : null; // Store results in cache, even if 'failed'
+
                     }
                 }
 
@@ -266,17 +309,18 @@ class LdapSync extends Command
                         $user->activated = 0;
                     } */
                     $enabled_accounts = [
-                    '512',    // 0x200    NORMAL_ACCOUNT
-                    '544',    // 0x220    NORMAL_ACCOUNT, PASSWD_NOTREQD
-                    '66048',  // 0x10200  NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD
-                    '66080',  // 0x10220  NORMAL_ACCOUNT, PASSWD_NOTREQD, DONT_EXPIRE_PASSWORD
-                    '262656', // 0x40200  NORMAL_ACCOUNT, SMARTCARD_REQUIRED
-                    '262688', // 0x40220  NORMAL_ACCOUNT, PASSWD_NOTREQD, SMARTCARD_REQUIRED
-                    '328192', // 0x50200  NORMAL_ACCOUNT, SMARTCARD_REQUIRED, DONT_EXPIRE_PASSWORD
-                    '328224', // 0x50220  NORMAL_ACCOUNT, PASSWD_NOT_REQD, SMARTCARD_REQUIRED, DONT_EXPIRE_PASSWORD
-                    '4194816',// 0x400200 NORMAL_ACCOUNT, DONT_REQ_PREAUTH
+                    '512',    //     0x200 NORMAL_ACCOUNT
+                    '544',    //     0x220 NORMAL_ACCOUNT, PASSWD_NOTREQD
+                    '66048',  //   0x10200 NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD
+                    '66080',  //   0x10220 NORMAL_ACCOUNT, PASSWD_NOTREQD, DONT_EXPIRE_PASSWORD
+                    '262656', //   0x40200 NORMAL_ACCOUNT, SMARTCARD_REQUIRED
+                    '262688', //   0x40220 NORMAL_ACCOUNT, PASSWD_NOTREQD, SMARTCARD_REQUIRED
+                    '328192', //   0x50200 NORMAL_ACCOUNT, SMARTCARD_REQUIRED, DONT_EXPIRE_PASSWORD
+                    '328224', //   0x50220 NORMAL_ACCOUNT, PASSWD_NOT_REQD, SMARTCARD_REQUIRED, DONT_EXPIRE_PASSWORD
+                    '4194816',//  0x400200 NORMAL_ACCOUNT, DONT_REQ_PREAUTH
                     '4260352', // 0x410200 NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD, DONT_REQ_PREAUTH
                     '1049088', // 0x100200 NORMAL_ACCOUNT, NOT_DELEGATED
+                    '1114624', // 0x110200 NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD, NOT_DELEGATED,
                   ];
                     $user->activated = (in_array($results[$i]['useraccountcontrol'][0], $enabled_accounts)) ? 1 : 0;
 
@@ -302,6 +346,10 @@ class LdapSync extends Command
                 if ($user->save()) {
                     $item['note'] = $item['createorupdate'];
                     $item['status'] = 'success';
+                    if ( $item['createorupdate'] === 'created' && $ldap_default_group) {
+                         $user->groups()->attach($ldap_default_group);
+                    }
+
                 } else {
                     foreach ($user->getErrors()->getMessages() as $key => $err) {
                         $errors .= $err[0];

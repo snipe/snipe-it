@@ -51,19 +51,16 @@
     </div>
 
 <!-- Image -->
-    @if (($item->image) && ($item->image!=''))
+@if ($item->image)
     <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
         <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
         <div class="col-md-5">
-            <label for="image_delete">
-                {{ Form::checkbox('image_delete', '1', old('image_delete'), array('class' => 'minimal', 'aria-label'=>'required')) }}
-            </label>
-            <br>
-            <img src="{{ url('/') }}/uploads/manufacturers/{{ $item->image }}" alt="Image for {{ $item->name }}" class="img-responsive">
-            {!! $errors->first('image_delete', '<span class="alert-msg" aria-hidden="true"><br>:message</span>') !!}
+            {{ Form::checkbox('image_delete', '1', old('image_delete'), array('class' => 'minimal', 'aria-label'=>'image_delete')) }}
+            <img src="{{ Storage::disk('public')->url(app('manufacturers_upload_path').e($item->image)) }}"  class="img-responsive" />
+            {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
         </div>
     </div>
-    @endif
+@endif
 
 
     @include ('partials.forms.edit.image-upload')

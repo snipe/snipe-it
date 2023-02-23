@@ -15,6 +15,7 @@ return array(
     'password_resets_sent'      => 'Wybrani użytkownicy, którzy są aktywni i mają prawidłowe adresy e-mail, otrzymali link do resetowania hasła.',
     'password_reset_sent'       => 'Link umożliwiający zresetowanie hasła został wysłany na :email!',
     'user_has_no_email'         => 'Ten użytkownik nie ma adresu e-mail w swoim profilu.',
+    'user_has_no_assets_assigned'   => 'Ten użytkownik nie ma żadnych przypisanych aktywów',
 
 
     'success' => array(
@@ -59,4 +60,8 @@ return array(
         'invalidfiles' => 'Jeden lub więcej z wybranych przez ciebie plików jest za duży lub jego typ nie jest dopuszczony. Dopuszczalne typy plików: png, gif, jpg, doc, docx, pdf, and txt.',
     ),
 
+    'inventorynotification' => array(
+        'error'   => 'Ten użytkownik nie ma ustawionego adresu e-mail.',
+        'success' => 'Użytkownik został powiadomiony o swoich aktualnych zasobach.'
+    )
 );

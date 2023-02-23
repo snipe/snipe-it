@@ -61,6 +61,9 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'remote',
         'start_date',
         'end_date',
+        'scim_externalid',
+        'avatar',
+        'gravatar',
     ];
 
     protected $casts = [
@@ -95,8 +98,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'website'                 => 'url|nullable|max:191',
         'manager_id'              => 'nullable|exists:users,id|cant_manage_self',
         'location_id'             => 'exists:locations,id|nullable',
-        'start_date'              => 'nullable|date',
-        'end_date'                => 'nullable|date|after_or_equal:start_date',
+        'start_date'              => 'nullable|date_format:Y-m-d',
+        'end_date'                => 'nullable|date_format:Y-m-d|after_or_equal:start_date',
     ];
 
     /**
@@ -282,7 +285,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function assets()
     {
-        return $this->morphMany(\App\Models\Asset::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
+        return $this->morphMany(\App\Models\Asset::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed()->orderBy('id');
     }
 
     /**
@@ -310,7 +313,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     public function accessories()
     {
         return $this->belongsToMany(\App\Models\Accessory::class, 'accessories_users', 'assigned_to', 'accessory_id')
-            ->withPivot('id', 'created_at', 'note')->withTrashed();
+            ->withPivot('id', 'created_at', 'note')->withTrashed()->orderBy('accessory_id');
     }
 
     /**
@@ -336,6 +339,24 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
         return $this->belongsToMany(\App\Models\License::class, 'license_seats', 'assigned_to', 'license_id')->withPivot('id');
     }
+
+    /**
+     * Establishes a count of all items assigned
+     *
+     * @author J. Vinsmoke
+     * @since [v6.1]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    Public function allAssignedCount() {
+        $assetsCount = $this->assets()->count();
+        $licensesCount = $this->licenses()->count();
+        $accessoriesCount = $this->accessories()->count();
+        $consumablesCount = $this->consumables()->count();
+        
+        $totalCount = $assetsCount + $licensesCount + $accessoriesCount + $consumablesCount;
+    
+        return (int) $totalCount;
+        }
 
     /**
      * Establishes the user -> actionlogs relationship
@@ -567,24 +588,13 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         if ((Setting::getSettings()->two_factor_enabled == '1') && ($this->two_factor_optin == '1')) {
             return true;
         }
+
         // If the 2FA is required for everyone so is implicitly active
         elseif (Setting::getSettings()->two_factor_enabled == '2') {
             return true;
         }
 
         return false;
-    }
-
-    /**
-     * Get the admin user who created this user
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v6.0.5]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
-     */
-    public function createdBy()
-    {
-        return $this->belongsTo(\App\Models\User::class, 'created_by')->withTrashed();
     }
 
     /**
@@ -615,6 +625,19 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
 
     }
 
+    /**
+     * Get the admin user who created this user
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v6.0.5]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function createdBy()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'created_by')->withTrashed();
+    }
+
+
 
     public function decodePermissions()
     {
@@ -634,7 +657,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
            $query = $query->where('first_name', 'LIKE', '%'.$search.'%')
                ->orWhere('last_name', 'LIKE', '%'.$search.'%')
-               ->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%$search%"]);
+               ->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%{$search}%"]);
 
         return $query;
     }
@@ -650,7 +673,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     public function advancedTextSearch(Builder $query, array $terms) {
 
         foreach($terms as $term) {
-            $query = $query->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%$term%"]);
+            $query = $query->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%{$term}%"]);
         }
 
         return $query;

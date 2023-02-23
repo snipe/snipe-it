@@ -14,7 +14,8 @@ return array(
     'ldap_not_configured'        => 'LDAP integratie is niet geconfigureerd voor deze installatie.',
     'password_resets_sent'      => 'De geselecteerde gebruikers die zijn geactiveerd en die een geldig e-mailadres hebben, hebben een wachtwoord reset link ontvangen.',
     'password_reset_sent'       => 'Een link om het wachtwoord te resetten is verstuurd naar :email!',
-    'user_has_no_email'         => 'This user does not have an email address in their profile.',
+    'user_has_no_email'         => 'Deze gebruiker heeft geen e-mailadres in zijn profiel.',
+    'user_has_no_assets_assigned'   => 'Deze gebruiker heeft geen bezittingen toegewezen',
 
 
     'success' => array(
@@ -59,4 +60,8 @@ return array(
         'invalidfiles' => 'Een of meer van uw bestanden is te groot of is een bestandstype dat niet is toegestaan. Toegestaande bestandstypen png, gif, jpg, doc, docx, pdf en txt.',
     ),
 
+    'inventorynotification' => array(
+        'error'   => 'Deze gebruiker heeft geen e-mailadres ingesteld.',
+        'success' => 'De gebruiker is op de hoogte gebracht van zijn huidige voorraad.'
+    )
 );

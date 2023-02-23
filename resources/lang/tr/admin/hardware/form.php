@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> ':asset_count adet varlığı düzenlemek üzeresiniz.',
     'bulk_update'		=> 'Demirbaşları Toplu Güncelle',
     'bulk_update_help'	=> 'Bu form birden çok demirbaşı tek seferde güncellemenizi sağlar. Lütfen sadece değiştirmek istediğiniz alanları doldurunuz. Değiştirilmesini istemediğiniz alanları boş bırakınız. ',
-    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
+    'bulk_update_warn'	=> 'Tek bir varlığın özelliklerini düzenlemek üzeresiniz.| :asset_count varlıkların özelliklerini düzenlemek üzeresiniz.',
     'checkedout_to'		=> 'Çıkış Yapılmış Olan Kişi',
     'checkout_date'		=> 'Çıkış Tarihi',
     'checkin_date'		=> 'Giriş Tarihi',

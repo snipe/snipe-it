@@ -21,7 +21,7 @@ class CustomField extends Model
      *
      * @var array
      */
-    const PREDEFINED_FORMATS = [
+    public const PREDEFINED_FORMATS = [
             'ANY'           => '',
             'CUSTOM REGEX'  => '',
             'ALPHA'         => 'alpha',
@@ -48,7 +48,11 @@ class CustomField extends Model
      *
      * @var array
      */
-    protected $rules = [];
+    protected $rules = [
+        'name' => 'required|unique:custom_fields',
+        'element' => 'required|in:text,listbox,textarea,checkbox,radio',
+        'field_encrypted' => 'nullable|boolean',
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -64,6 +68,7 @@ class CustomField extends Model
         'help_text',
         'show_in_email',
         'is_unique',
+        'display_in_user_view',
     ];
 
     /**
@@ -356,15 +361,9 @@ class CustomField extends Model
     public function validationRules($regex_format = null)
     {
         return [
-            'name' => 'required|unique:custom_fields',
-            'element' => [
-                'required',
-                Rule::in(['text', 'listbox',  'textarea', 'checkbox', 'radio']),
-            ],
             'format' => [
                 Rule::in(array_merge(array_keys(self::PREDEFINED_FORMATS), self::PREDEFINED_FORMATS, [$regex_format])),
-            ],
-            'field_encrypted' => 'nullable|boolean',
+            ]
         ];
     }
 

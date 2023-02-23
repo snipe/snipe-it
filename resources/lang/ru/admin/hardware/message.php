@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Внимание: </strong> Этот актив был помечен как выданный.
                         Если этот статус изменился, необходимо его обновить.',
     'does_not_exist' 	=> 'Актив не существует.',
-    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
+    'does_not_exist_or_not_requestable' => 'Этот актив не существует или не подлежит запросу.',
     'assoc_users'	 	=> 'Этот актив в настоящее время привязан к пользователю и не может быть удален. Пожалуйста сначала снимите привязку, и затем попробуйте удалить снова. ',
 
     'create' => [
@@ -17,7 +17,7 @@ return [
         'error'   			=> 'Актив не был изменен, пожалуйста попробуйте снова',
         'success' 			=> 'Актив успешно изменен.',
         'nothing_updated'	=>  'Поля не выбраны, нечего обновлять.',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'no_assets_selected'  =>  'Никакие ресурсы не были выбраны, поэтому ничего не обновлялось.',
     ],
 
     'restore' => [
@@ -49,6 +49,8 @@ return [
         'success'               => 'Ваш файл был импортирован',
         'file_delete_success'   => 'Ваш файл был успешно удален',
         'file_delete_error'      => 'Невозможно удалить файл',
+        'header_row_has_malformed_characters' => 'Один или несколько атрибутов в строке заголовка содержат неправильно сформированные символы UTF-8',
+        'content_row_has_malformed_characters' => 'Один или несколько атрибутов в первой строке содержимого содержат неправильно сформированные символы UTF-8',
     ],
 
 

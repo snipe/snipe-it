@@ -6,6 +6,8 @@ return array(
     'assoc_users'	 => 'Hierdie ligging is tans gekoppel aan ten minste een gebruiker en kan nie uitgevee word nie. Dateer asseblief u gebruikers op om nie meer hierdie ligging te verwys nie en probeer weer.',
     'assoc_assets'	 => 'Hierdie ligging is tans geassosieer met ten minste een bate en kan nie uitgevee word nie. Dateer asseblief jou bates op om nie meer hierdie ligging te verwys nie en probeer weer.',
     'assoc_child_loc'	 => 'Hierdie ligging is tans die ouer van ten minste een kind se plek en kan nie uitgevee word nie. Werk asseblief jou liggings by om nie meer hierdie ligging te verwys nie en probeer weer.',
+    'assigned_assets' => 'Assigned Assets',
+    'current_location' => 'Current Location',
 
 
     'create' => array(

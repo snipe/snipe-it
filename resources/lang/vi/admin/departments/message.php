@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'Bộ không tồn tại.',
+    'department_already_exists' => 'A department already exists with that name at this company location. Or choose a more specific name for this department. ',
     'assoc_users'	 => 'Bộ phận này hiện đang kết hợp với ít nhất một người dùng và không thể bị xóa. Hãy cập nhật người dùng của bạn để không tham khảo bộ phận này nữa và thử lại.',
     'create' => array(
         'error'   => 'Phòng không được tạo, vui lòng thử lại.',

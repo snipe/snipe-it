@@ -13,7 +13,8 @@ return array(
 
     'update' => array(
         'error'   => 'Kategóriu sa nepodarilo aktualizovať, skúste prosím znovu',
-        'success' => 'Kategória bola úspešne aktualizovaná.'
+        'success' => 'Kategória bola úspešne aktualizovaná.',
+        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
     ),
 
     'delete' => array(

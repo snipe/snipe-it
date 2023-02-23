@@ -7,6 +7,7 @@ use App\Helpers\StorageHelper;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SettingsSamlRequest;
 use App\Http\Requests\SetupUserRequest;
+use App\Models\Group;
 use App\Models\Setting;
 use App\Models\Asset;
 use App\Models\User;
@@ -687,33 +688,6 @@ class SettingsController extends Controller
      *
      * @return View
      */
-    public function postSlack(SlackSettingsRequest $request)
-    {
-        if (is_null($setting = Setting::getSettings())) {
-            return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
-        }
-
-        $setting->slack_endpoint = $request->input('slack_endpoint');
-        $setting->slack_channel = $request->input('slack_channel');
-        $setting->slack_botname = $request->input('slack_botname');
-
-        if ($setting->save()) {
-            return redirect()->route('settings.index')
-                ->with('success', trans('admin/settings/message.update.success'));
-        }
-
-        return redirect()->back()->withInput()->withErrors($setting->getErrors());
-    }
-
-    /**
-     * Return a form to allow a super admin to update settings.
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
-     * @since [v1.0]
-     *
-     * @return View
-     */
     public function getAssetTags()
     {
         $setting = Setting::getSettings();
@@ -806,7 +780,7 @@ class SettingsController extends Controller
      */
     public function getPhpInfo()
     {
-        if (true === config('app.debug')) {
+        if (config('app.debug') === true) {
             return view('settings.phpinfo');
         }
 
@@ -911,6 +885,8 @@ class SettingsController extends Controller
     public function getLdapSettings()
     {
         $setting = Setting::getSettings();
+        $groups = Group::pluck('name', 'id');
+
 
         /**
          * This validator is only temporary (famous last words.) - @snipe
@@ -929,7 +905,7 @@ class SettingsController extends Controller
 
 
 
-        return view('settings.ldap', compact('setting'))->withErrors($validator);
+        return view('settings.ldap', compact('setting', 'groups'))->withErrors($validator);
     }
 
     /**
@@ -956,6 +932,7 @@ class SettingsController extends Controller
                 $setting->ldap_pword = Crypt::encrypt($request->input('ldap_pword'));
             }
             $setting->ldap_basedn = $request->input('ldap_basedn');
+            $setting->ldap_default_group = $request->input('ldap_default_group');
             $setting->ldap_filter = $request->input('ldap_filter');
             $setting->ldap_username_field = $request->input('ldap_username_field');
             $setting->ldap_lname_field = $request->input('ldap_lname_field');

@@ -43,12 +43,14 @@ return [
     'file'                 => 'attribute باید یک فایل باشد.',
     'filled'               => 'فیلد attribute باید مقدار داشته باشد.',
     'image'                => 'ویژگی باید یک عکس باشد.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'ویژگی انتخاب شده نامعتبر است.',
     'in_array'             => 'فیلد attribute در هیچ موجودی وجود ندارد: دیگر.',
     'integer'              => 'ویژگی باید یک عدد باشد.',
     'ip'                   => 'ویژگی باید یک آدرس IP معتبر باشد.',
     'ipv4'                 => 'attribute باید یک آدرس IPv4 معتبر باشد.',
     'ipv6'                 => 'attribute باید یک آدرس IPv6 معتبر باشد.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'attribute باید یک رشته معتبر JSON باشد.',
     'max'                  => [
         'numeric' => 'ویژگی نباید بزرگتر از حداکثر باشد.',
@@ -112,23 +114,24 @@ return [
     |
     */
 
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
-
     'custom' => [
         'alpha_space' => 'فیلد attribute شامل یک شخصیت است که مجاز نیست.',
         'email_array'      => 'یک یا چند آدرس ایمیل نامعتبر است',
         'hashed_pass'      => 'رمز عبور فعلی شما اشتباه است',
         'dumbpwd'          => 'این رمز عبور خیلی رایج است',
         'statuslabel_type' => 'شما باید نوع برچسب معتبر را انتخاب کنید',
+
+        // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
+        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // people won't know how to format. 
+        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
+        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
+        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+
     ],
 
     /*

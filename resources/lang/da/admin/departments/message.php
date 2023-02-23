@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'Afdeling findes ikke.',
+    'department_already_exists' => 'A department already exists with that name at this company location. Or choose a more specific name for this department. ',
     'assoc_users'	 => 'Denne afdeling er i øjeblikket knyttet til mindst én bruger og kan ikke slettes. Opdater venligst dine brugere for at ikke længere referere til denne afdeling, og prøv igen. ',
     'create' => array(
         'error'   => 'Afdelingen blev ikke oprettet, prøve igen.',

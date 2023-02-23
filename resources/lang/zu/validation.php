@@ -43,12 +43,14 @@ return [
     'file'                 => 'I: imfanelo kufanele ibe ifayela.',
     'filled'               => 'I: insimu yemfanelo kufanele ibe nenani.',
     'image'                => 'I: imfanelo kufanele ibe isithombe.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'Okukhethiwe: imfanelo ayivumelekile.',
     'in_array'             => 'I: inkambu yokwazisa ayikho: enye.',
     'integer'              => 'I: imfanelo kufanele ibe inamba.',
     'ip'                   => 'I: imfanelo kufanele ibe ikheli le-IP elivumelekile.',
     'ipv4'                 => 'I: imfanelo kufanele ibe ikheli le-IPv4 elivumelekile.',
     'ipv6'                 => 'I: imfanelo kufanele ibe ikheli le-IPv6 elivumelekile.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'I: imfanelo kufanele ibe yocingo oluvumelekile le-JSON.',
     'max'                  => [
         'numeric' => 'I: umqondo kungenzeka ukuthi awukhulu kun: max.',
@@ -112,23 +114,24 @@ return [
     |
     */
 
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
-
     'custom' => [
         'alpha_space' => 'I: Insimu yemfanelo iqukethe umlingiswa ongavunyelwe.',
         'email_array'      => 'Ikheli elilodwa noma ngaphezulu le-imeyili alivumelekile.',
         'hashed_pass'      => 'Iphasiwedi yakho yamanje ayilungile',
         'dumbpwd'          => 'Lelo phasiwedi livame kakhulu.',
         'statuslabel_type' => 'Kumele ukhethe uhlobo lwelebula lesimo esivumelekile',
+
+        // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
+        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // people won't know how to format. 
+        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
+        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
+        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+
     ],
 
     /*

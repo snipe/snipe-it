@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'acceptance_asset_accepted' => 'A user has accepted an item',
-    'acceptance_asset_declined' => 'A user has declined an item',
+    'acceptance_asset_accepted' => 'Een gebruiker heeft een artikel geaccepteerd',
+    'acceptance_asset_declined' => 'Een gebruiker heeft een artikel geweigerd',
     'a_user_canceled' => 'Een gebruiker heeft een verzoek om een item op de website geannuleerd',
     'a_user_requested' => 'Een gebruiker heeft een item op de website aangevraagd',
     'accessory_name' => 'Accessoire Naam:',
@@ -31,7 +31,7 @@ return [
     'days' => 'Dagen',
     'expecting_checkin_date' => 'Verwachte incheck datum:',
     'expires' => 'Verloopt',
-    'Expiring_Assets_Report' => 'Rapportage verlopende assets.',
+    'Expiring_Assets_Report' => 'Rapport van verlopen activa',
     'Expiring_Licenses_Report' => 'Rapportage verlopende licenties.',
     'hello' => 'Hallo',
     'hi' => 'Hoi',
@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Meld u aan op uw nieuwe Snipe-IT installatie met onderstaande inloggegevens:',
     'login' => 'Login:',
     'Low_Inventory_Report' => 'Lage inventarisrapport',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Minimale hoeveelheid',
     'name' => 'Naam',
     'new_item_checked' => 'Een nieuw item is onder uw naam uitgecheckt, details staan hieronder.',
@@ -78,5 +79,6 @@ return [
     'Expected_Checkin_Report' => 'Verwachte asset check in rapport',
     'Expected_Checkin_Notification' => 'Herinnering: :name check in deadline nadert',
     'Expected_Checkin_Date' => 'Een asset uitgecheckt aan jou moet worden ingecheckt op :date',
-    'your_assets' => 'Bekijk je assets',
+    'your_assets' => 'Bekijk je activa',
+    'rights_reserved' => 'All rights reserved.',
 ];

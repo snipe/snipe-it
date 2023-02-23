@@ -129,7 +129,7 @@
 
 
                   <div class="col-md-12" style="padding-top: 5px;">
-                    @if(!empty($user->email))
+                    @if (!empty($user->email))
                       <form action="{{ route('profile.email_assets') }}" method="POST">
                         {{ csrf_field() }}
                         <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener">{{ trans('admin/users/general.email_assigned') }}</button>
@@ -387,6 +387,7 @@
                           data-side-pagination="client"
                           data-show-columns="true"
                           data-show-export="true"
+                          data-show-footer="true"
                           data-show-refresh="true"
                           data-sort-order="asc"
                           id="userAssets"
@@ -397,13 +398,20 @@
                   }'>
                     <thead>
                     <tr>
-                      <th>#</th>
+                      <th class="col-md-1">#</th>
                       <th class="col-md-1">{{ trans('general.image') }}</th>
                       <th class="col-md-2" data-switchable="true" data-visible="true">{{ trans('general.category') }}</th>
                       <th class="col-md-2" data-switchable="true" data-visible="true">{{ trans('admin/hardware/table.asset_tag') }}</th>
                       <th class="col-md-2" data-switchable="true" data-visible="true">{{ trans('general.name') }}</th>
                       <th class="col-md-2" data-switchable="true" data-visible="true">{{ trans('admin/hardware/table.asset_model') }}</th>
                       <th class="col-md-3" data-switchable="true" data-visible="true">{{ trans('admin/hardware/table.serial') }}</th>
+                      @can('self.view_purchase_cost')
+                        <th class="col-md-6" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
+                      @endcan
+                      @foreach ($field_array as $db_column => $field_name)
+                        <th class="col-md-1" data-switchable="true" data-visible="true">{{ $field_name }}</th>
+                      @endforeach
+
                     </tr>
 
                     </thead>
@@ -421,7 +429,11 @@
                             <img src="{{ Storage::disk('public')->url(app('models_upload_path').e($asset->model->image)) }}" style="max-height: 30px; width: auto" class="img-responsive">
                           @endif
                         </td>
-                        <td>{{ $asset->model->category->name }}</td>
+                        <td>
+                          @if (($asset->model) && ($asset->model->category))
+                          {{ $asset->model->category->name }}
+                          @endif
+                        </td>
                         <td>{{ $asset->asset_tag }}</td>
                         <td>{{ $asset->name }}</td>
                         <td>
@@ -430,37 +442,21 @@
                           @endif
                         </td>
                         <td>{{ $asset->serial }}</td>
-                      </tr>
-                      @if($settings->show_assigned_assets)
-                        @php
-                          $assignedCounter = 1
-                        @endphp
-                        @foreach ($asset->assignedAssets as $asset)
-                          <tr>
-                            <td>{{ $counter }}.{{ $assignedCounter }}</td>
-                            <td>{{ $asset->model->category->name }}</td>
-                            <td>{{ $asset->asset_tag }}</td>
-                            <td>{{ $asset->name }}</td>
-                            <td>
-                              @if ($asset->physical=='1')
-                                {{ $asset->model->name }}
-                              @endif
-                            </td>
-                            <td>{{ $asset->serial }}</td>
-                            <td>
-                              @if (($asset->image) && ($asset->image!=''))
-                                <img src="{{ Storage::disk('public')->url(app('assets_upload_path').e($asset->image)) }}" height="50" width="50">
 
-                              @elseif (($asset->model) && ($asset->model->image!=''))
-                                <img src="{{ Storage::disk('public')->url(app('models_upload_path').e($asset->model->image)) }}" height="50" width="50">
-                              @endif
-                            </td>
-                          </tr>
-                          @php
-                            $assignedCounter++
-                          @endphp
+                        @can('self.view_purchase_cost')
+                        <td>
+                          {!! Helper::formatCurrencyOutput($asset->purchase_cost) !!}
+                        </td>
+                        @endcan
+
+                        @foreach ($field_array as $db_column => $field_value)
+                          <td>
+                            {{ $asset->{$db_column} }}
+                          </td>
                         @endforeach
-                      @endif
+
+                      </tr>
+
                       @php
                         $counter++
                       @endphp
@@ -540,17 +536,21 @@
                 <thead>
                 <tr>
                   <th class="col-md-5">{{ trans('general.name') }}</th>
-                  <th class="col-md-6" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
+                  @can('self.view_purchase_cost')
+                    <th class="col-md-6" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
+                  @endcan
                   <th class="col-md-1 hidden-print">{{ trans('general.action') }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach ($user->accessories as $accessory)
                   <tr>
-                    <td>{!! $accessory->name !!}</td>
-                    <td>
-                      {!! Helper::formatCurrencyOutput($accessory->purchase_cost) !!}
-                    </td>
+                    <td>{{ $accessory->name }}</td>
+                    @can('self.view_purchase_cost')
+                      <td>
+                        {!! Helper::formatCurrencyOutput($accessory->purchase_cost) !!}
+                      </td>
+                    @endcan
                     <td class="hidden-print">
                       @can('checkin', $accessory)
                         <a href="{{ route('accessories.checkin.show', array('accessoryID'=> $accessory->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
@@ -587,7 +587,9 @@
                 <thead>
                 <tr>
                   <th class="col-md-3">{{ trans('general.name') }}</th>
-                  <th class="col-md-2" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
+                  @can('self.view_purchase_cost')
+                    <th class="col-md-2" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
+                  @endcan
                   <th class="col-md-2">{{ trans('general.date') }}</th>
                   <th class="col-md-5">{{ trans('general.notes') }}</th>
                 </tr>
@@ -595,10 +597,12 @@
                 <tbody>
                 @foreach ($user->consumables as $consumable)
                   <tr>
-                    <td>{!! $consumable->name !!}</td>
-                    <td>
-                      {!! Helper::formatCurrencyOutput($consumable->purchase_cost) !!}
-                    </td>
+                    <td>{{ $consumable->name }}</td>
+                    @can('self.view_purchase_cost')
+                      <td>
+                        {!! Helper::formatCurrencyOutput($consumable->purchase_cost) !!}
+                      </td>
+                    @endcan
                     <td>{{ Helper::getFormattedDateObject($consumable->pivot->created_at, 'datetime',  false) }}</td>
                     <td>{{ $consumable->pivot->note }}</td>
                   </tr>

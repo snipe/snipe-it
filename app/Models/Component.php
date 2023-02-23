@@ -35,7 +35,7 @@ class Component extends SnipeModel
         'category_id'    => 'required|integer|exists:categories,id',
         'company_id'     => 'integer|nullable',
         'min_amt'        => 'integer|min:0|nullable',
-        'purchase_date'  => 'date|nullable',
+        'purchase_date'   => 'date_format:Y-m-d|nullable',
         'purchase_cost'  => 'numeric|nullable|gte:0',
     ];
 
@@ -87,6 +87,24 @@ class Component extends SnipeModel
         'company'      => ['name'],
         'location'     => ['name'],
     ];
+
+
+    /**
+     * Establishes the components -> action logs -> uploads relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v6.1.13]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function uploads()
+    {
+        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')
+            ->where('item_type', '=', self::class)
+            ->where('action_type', '=', 'uploaded')
+            ->whereNotNull('filename')
+            ->orderBy('created_at', 'desc');
+    }
+
 
     /**
      * Establishes the component -> location relationship

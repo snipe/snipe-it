@@ -15,7 +15,7 @@ return array(
 
     "password" => "Heslo musí mít šest znaků a schodovat se s potvrzujícím heslem.",
     "user"     => "Uživatelské jméno nebo email je chybný",
-    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
-    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
+    "token"    => 'Tento token pro obnovení hesla je neplatný, vypršel, nebo se neshoduje s zadaným uživatelským jménem.',
+    'sent'	   => 'Pokud v našem systému existuje uživatel s touto emailovou adresou, byl odeslán e-mail pro obnovení hesla.',
 
 );

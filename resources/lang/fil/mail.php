@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Mag-login sa iyong bagong pag-install ng Snipe-IT gamit ang mga kredensyal sa ibaba:',
     'login' => 'Mag-login:',
     'Low_Inventory_Report' => 'Ang Mababang Report ng Imbentaryo',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Ang Min QTY',
     'name' => 'Ang Pangalan',
     'new_item_checked' => 'Ang bagong aytem na nai-check out sa ilalim ng iyong pangalan, ang mga detalye ay nasa ibaba.',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'your_assets' => 'View Your Assets',
+    'rights_reserved' => 'All rights reserved.',
 ];

@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Logige oma uude Snipe-IT-seadmesse sisse, kasutades allpool toodud mandaate.',
     'login' => 'Logi sisse:',
     'Low_Inventory_Report' => 'Madal inventuuriaruanne',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Min QTY',
     'name' => 'Nimi',
     'new_item_checked' => 'Uue elemendi on teie nime all kontrollitud, üksikasjad on allpool.',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Meeldetuletus: :name tagastamise tähtaeg läheneb',
     'Expected_Checkin_Date' => 'Sulle väljastatud vahend tuleb tagastada :date',
     'your_assets' => 'Vaata oma varasi',
+    'rights_reserved' => 'All rights reserved.',
 ];

@@ -28,6 +28,7 @@ RUN  apk add --no-cache \
         php7-xmlreader \
         php7-sodium \
         php7-redis \
+        php7-pecl-memcached \
         curl \
         wget \
         vim \

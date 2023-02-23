@@ -43,12 +43,14 @@ return [
     'file'                 => 'Атрибутът: трябва да е файл.',
     'filled'               => 'Полето на атрибута: трябва да има стойност.',
     'image'                => ':attribute трябва да бъде изображение.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'Избраният :attribute е невалиден.',
     'in_array'             => 'Полето: atribut не съществува в: други.',
     'integer'              => ':attribute трябва да бъде целочислен.',
     'ip'                   => ':attribute трябва да бъде валиден IP адрес.',
     'ipv4'                 => 'Атрибутът: трябва да е валиден IPv4 адрес.',
     'ipv6'                 => 'Атрибутът: трябва да е валиден IPv6 адрес.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'Атрибутът: трябва да е валиден низ на JSON.',
     'max'                  => [
         'numeric' => ':attribute не може да бъде по-дълъг от :max.',
@@ -112,23 +114,24 @@ return [
     |
     */
 
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
-
     'custom' => [
         'alpha_space' => 'Полето атрибут: съдържа знак, който не е разрешен.',
         'email_array'      => 'Един или повече имейл адреси са невалидни.',
         'hashed_pass'      => 'Текущата ви парола е неправилна',
         'dumbpwd'          => 'Тази парола е твърде често срещана.',
         'statuslabel_type' => 'Трябва да изберете валиден тип етикет на състоянието',
+
+        // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
+        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // people won't know how to format. 
+        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
+        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
+        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+
     ],
 
     /*

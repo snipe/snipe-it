@@ -63,6 +63,7 @@ class Accessory extends SnipeModel
         'company_id'        => 'integer|nullable',
         'min_amt'           => 'integer|min:0|nullable',
         'purchase_cost'     => 'numeric|nullable|gte:0',
+        'purchase_date'   => 'date_format:Y-m-d|nullable',
     ];
 
 
@@ -99,6 +100,23 @@ class Accessory extends SnipeModel
         'notes',
     ];
 
+
+
+    /**
+     * Establishes the accessories -> action logs -> uploads relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v6.1.13]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function uploads()
+    {
+        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')
+            ->where('item_type', '=', self::class)
+            ->where('action_type', '=', 'uploaded')
+            ->whereNotNull('filename')
+            ->orderBy('created_at', 'desc');
+    }
 
 
     /**
@@ -310,20 +328,6 @@ class Accessory extends SnipeModel
         return null;
     }
 
-     /**
-     * Check how many items within an accessory are checked out
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v5.0]
-     * @return int
-     */
-    public function numCheckedOut()
-    {
-        $checkedout = 0;
-        $checkedout = $this->users->count();
-
-        return $checkedout;
-    }
 
     /**
      * Check how many items of an accessory remain
@@ -334,11 +338,11 @@ class Accessory extends SnipeModel
      */
     public function numRemaining()
     {
-        $checkedout = $this->users->count();
+        $checkedout = $this->users_count;
         $total = $this->qty;
         $remaining = $total - $checkedout;
 
-        return $remaining;
+        return (int) $remaining;
     }
 
     /**

@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Слайд-IT-г суулгахын тулд доорх итгэмжлэлүүдийг ашиглана уу:',
     'login' => 'Нэвтрэх:',
     'Low_Inventory_Report' => 'Бага нөөцийн тайлан',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Min QTY',
     'name' => 'Нэр',
     'new_item_checked' => 'Таны нэрээр шинэ зүйл шалгасан бөгөөд дэлгэрэнгүй мэдээлэл доор байна.',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'your_assets' => 'View Your Assets',
+    'rights_reserved' => 'All rights reserved.',
 ];

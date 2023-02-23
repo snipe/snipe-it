@@ -13,7 +13,8 @@ return array(
 
     'update' => array(
         'error'   => 'Kategooriat ei uuendatud, proovige uuesti',
-        'success' => 'Kategooria uuendamine õnnestus.'
+        'success' => 'Kategooria uuendamine õnnestus.',
+        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
     ),
 
     'delete' => array(

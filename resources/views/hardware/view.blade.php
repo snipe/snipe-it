@@ -9,7 +9,7 @@
 {{-- Right header --}}
 @section('header_right')
 
-    
+
     @can('manage', \App\Models\Asset::class)
         @if ($asset->deleted_at=='')
         <div class="dropdown pull-right">
@@ -75,8 +75,8 @@
         @if (!$asset->model)
             <div class="col-md-12">
                 <div class="callout callout-danger">
-                    <h2>NO MODEL ASSOCIATED</h2>
-                        <p>This will break things in weird and horrible ways. Edit this asset now to assign it a model. </p>
+                    <h2>{{ trans('admin/models/message.no_association') }}</h2>
+                        <p>{{ trans('admin/models/message.no_association_fix') }}</p>
                 </div>
             </div>
         @endif
@@ -85,9 +85,8 @@
             <div class="col-md-12">
                 <div class="alert alert-danger">
                     <i class="fas fa-exclamation-triangle faa-pulse animated" aria-hidden="true"></i>
-                    <strong>WARNING: </strong>
-                    This asset has been deleted.
-                    You must restore it before you can assign it to someone.
+                    <strong>{{ trans('general.notification_warning') }} </strong>
+                    {{ trans('general.asset_deleted_warning') }}
                 </div>
             </div>
         @endif
@@ -244,7 +243,7 @@
                                                         <i class="fas fa-circle text-green"></i>
                                                     @elseif (($asset->assetstatus) && ($asset->assetstatus->pending=='1'))
                                                         <i class="fas fa-circle text-orange"></i>
-                                                    @elseif (($asset->assetstatus) && ($asset->assetstatus->archived=='1'))
+                                                    @else
                                                         <i class="fas fa-times text-red"></i>
                                                     @endif
                                                     <a href="{{ route('statuslabels.show', $asset->assetstatus->id) }}">
@@ -288,7 +287,6 @@
                                             </div>
                                         </div>
                                     @endif
-
 
                                     @if ((isset($audit_log)) && ($audit_log->created_at))
                                         <div class="row">
@@ -438,6 +436,16 @@
                                         </div>
                                     </div>
 
+                                    <!-- byod -->
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <strong>{{ trans('general.byod') }}</strong>
+                                        </div>
+                                        <div class="col-md-6">
+                                            {!! ($asset->byod=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                                        </div>
+                                    </div>
+
                                     @if (($asset->model) && ($asset->model->fieldset))
                                         @foreach($asset->model->fieldset->fields as $field)
                                             <div class="row">
@@ -446,7 +454,7 @@
                                                         {{ $field->name }}
                                                     </strong>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-6{{ (($field->format=='URL') && ($asset->{$field->db_column_name()}!='')) ? ' ellipsis': '' }}">
                                                     @if ($field->field_encrypted=='1')
                                                         <i class="fas fa-lock" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}"></i>
                                                     @endif
@@ -495,6 +503,9 @@
                                             </div>
                                             <div class="col-md-6">
                                                 {{ Helper::getFormattedDateObject($asset->purchase_date, 'date', false) }}
+                                                -
+                                                {{ Carbon::parse($asset->purchase_date)->diff(Carbon::now())->format('%y years, %m months and %d days')}}
+
                                             </div>
                                         </div>
                                     @endif
@@ -584,10 +595,12 @@
                                                 {{ $asset->warranty_months }}
                                                 {{ trans('admin/hardware/form.months') }}
 
-                                                @if (($asset->serial && $asset->model->manufacturer) && $asset->model->manufacturer->name == 'Apple')
+                                                @if ($asset->serial && $asset->model->manufacturer)
+                                                    @if ((strtolower($asset->model->manufacturer->name) == "apple") || (str_starts_with(str_replace(' ','',strtolower($asset->model->manufacturer->name)),"appleinc")))
                                                     <a href="https://checkcoverage.apple.com/us/{{ \App\Models\Setting::getSettings()->locale  }}/?sn={{ $asset->serial }}" target="_blank">
-                                                        <i class="fa-brands fa-apple" aria-hidden="true"><span class="sr-only">Applecare Statys Lookup</span></i>
+                                                        <i class="fa-brands fa-apple" aria-hidden="true"><span class="sr-only">Applecare Status Lookup</span></i>
                                                     </a>
+                                                    @endif
                                                 @endif
                                             </div>
                                         </div>
@@ -964,6 +977,7 @@
                                         <th>{{ trans('general.name') }}</th>
                                         <th>{{ trans('general.qty') }}</th>
                                         <th>{{ trans('general.purchase_cost') }}</th>
+                                        <th>{{trans('admin/hardware/form.serial')}}</th>
                                         </thead>
                                         <tbody>
                                         <?php $totalCost = 0; ?>
@@ -977,6 +991,7 @@
                                                     </td>
                                                     <td>{{ $component->pivot->assigned_qty }}</td>
                                                     <td>{{ Helper::formatCurrencyOutput($component->purchase_cost) }} each</td>
+                                                    <td>{{ $component->serial }}</td>
 
                                                     <?php $totalCost = $totalCost + ($component->purchase_cost *$component->pivot->assigned_qty) ?>
                                                 </tr>
@@ -1288,9 +1303,9 @@
                                             <tr>
                                                 <td><i class="{{ Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i></td>
                                                 <td>
-                                                    @if ( Helper::checkUploadIsImage($file->get_src('assets')))
-                                                        <a href="{{ route('show/modelfile', ['assetId' => $asset->model->id, 'fileId' =>$file->id]) }}" data-toggle="lightbox" data-type="image" data-title="{{ $file->filename }}" data-footer="{{ Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}">
-                                                            <img src="{{ route('show/modelfile', ['assetId' => $asset->model->id, 'fileId' =>$file->id]) }}" style="max-width: 50px;">
+                                                    @if ( Helper::checkUploadIsImage($file->get_src('assetmodels')))
+                                                        <a href="{{ route('show/modelfile', ['modelID' => $asset->model->id, 'fileId' =>$file->id]) }}" data-toggle="lightbox" data-type="image" data-title="{{ $file->filename }}" data-footer="{{ Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}">
+                                                            <img src="{{ route('show/modelfile', ['modelID' => $asset->model->id, 'fileId' =>$file->id]) }}" style="max-width: 50px;">
                                                         </a>
                                                     @endif
                                                 </td>
@@ -1301,8 +1316,8 @@
                                                         <del>{{ $file->filename }}</del>
                                                     @endif
                                                 </td>
-                                                <td data-value="{{ (Storage::exists('private_uploads/assetmodels/'.$file->filename) ? Storage::size('private_uploads/assetmodels/'.$file->filename) : '') }}">
-                                                    {{ Helper::formatFilesizeUnits(@Storage::size('private_uploads/assetmodels/'.$file->filename)) }}
+                                                <td data-value="{{ (Storage::exists('private_uploads/assetmodels/'.$file->filename)) ? Storage::size('private_uploads/assetmodels/'.$file->filename) : '' }}">
+                                                    {{ (Storage::exists('private_uploads/assetmodels/'.$file->filename)) ? Helper::formatFilesizeUnits(Storage::size('private_uploads/assetmodels/'.$file->filename)) : '' }}
                                                 </td>
                                                 <td>
                                                     @if ($file->note)

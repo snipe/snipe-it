@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Die Lizenz existiert nicht oder Sie haben keine Berechtigung, sie anzusehen.',
+    'does_not_exist' => 'Die Lizenz existiert nicht oder Du hast keine Berechtigung, sie anzusehen.',
     'user_does_not_exist' => 'Benutzer existiert nicht.',
     'asset_does_not_exist' 	=> 'Der Gegenstand, mit dem Du diese Lizenz verknüpfen möchtest, existiert nicht.',
     'owner_doesnt_match_asset' => 'Der Gegenstand, den Du mit dieser Lizenz verknüpfen möchtest, gehört jemand anderem als der im Dropdown-Feld ausgewählten Person.',

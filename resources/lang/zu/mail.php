@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Ngena ngemvume ekufakweni kwakho okusha kwe-Snipe-IT usebenzisa iziqinisekiso ezingezansi:',
     'login' => 'Ngena ngemvume:',
     'Low_Inventory_Report' => 'Umbiko Wokungenisa Okuphansi',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'I-Min QTY',
     'name' => 'Igama',
     'new_item_checked' => 'Into entsha ihloliwe ngaphansi kwegama lakho, imininingwane ingezansi.',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'your_assets' => 'View Your Assets',
+    'rights_reserved' => 'All rights reserved.',
 ];

@@ -1,12 +1,17 @@
 @component('mail::layout')
 {{-- Header --}}
 @slot('header')
-@component('mail::header', ['url' => config('app.url')])
 
 {{-- Check that the $snipeSettings variable is set, images are set to be shown, and setup is complete --}}
 
 
 @if (isset($snipeSettings) && ($snipeSettings::setupCompleted()))
+
+    @if ($snipeSettings->show_url_in_emails=='1' )
+        @component('mail::header', ['url' => config('app.url')])
+    @else
+        @component('mail::header', ['url' => ''])
+    @endif
 
     {{-- Show images in email!  --}}
     @if (($snipeSettings->show_images_in_email=='1' ) && (($snipeSettings->brand == '3') || ($snipeSettings->brand == '2')))

@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Login ke instalasi Snipe-IT baru Anda dengan menggunakan kredensial di bawah ini:',
     'login' => 'Login:',
     'Low_Inventory_Report' => 'Laporan Inventaris Rendah',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Min QTY',
     'name' => 'Nama',
     'new_item_checked' => 'Item baru telah diperiksa berdasarkan nama Anda, rinciannya ada di bawah.',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Pengingat: :name mendekati batas waktu check-in [Dikembalikan]',
     'Expected_Checkin_Date' => 'Aset yang check out untuk Anda akan check in kembali pada :date',
     'your_assets' => 'Lihat Aset Anda',
+    'rights_reserved' => 'All rights reserved.',
 ];

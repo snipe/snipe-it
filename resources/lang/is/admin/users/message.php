@@ -15,6 +15,7 @@ return array(
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
     'password_reset_sent'       => 'A password reset link has been sent to :email!',
     'user_has_no_email'         => 'Þessi notandi er ekki með skráð netfang á prófílnum sínum.',
+    'user_has_no_assets_assigned'   => 'Þessi notandi er ekki með búnað skráðan á sig',
 
 
     'success' => array(
@@ -59,4 +60,8 @@ return array(
         'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
     ),
 
+    'inventorynotification' => array(
+        'error'   => 'Þessi notandi er ekki með netfang skilgreint.',
+        'success' => 'Búið að tilkynna notenda um núverandi birgðastöðu.'
+    )
 );

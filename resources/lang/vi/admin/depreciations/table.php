@@ -6,6 +6,6 @@ return [
     'months'   => 'Tháng',
     'term'   => 'Điều khoản',
     'title'      => 'Tên ',
-    'depreciation_min' => 'Floor Value',
+    'depreciation_min' => 'Giá trị sàn',
 
 ];

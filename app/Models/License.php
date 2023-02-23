@@ -50,6 +50,9 @@ class License extends Depreciable
         'category_id' => 'required|exists:categories,id',
         'company_id' => 'integer|nullable',
         'purchase_cost'=> 'numeric|nullable|gte:0',
+        'purchase_date'   => 'date_format:Y-m-d|nullable',
+        'expiration_date'   => 'date_format:Y-m-d|nullable',
+        'termination_date'   => 'date_format:Y-m-d|nullable',
     ];
 
     /**
@@ -123,12 +126,20 @@ class License extends Depreciable
         static::created(function ($license) {
             $newSeatCount = $license->getAttributes()['seats'];
 
-            return static::adjustSeatCount($license, $oldSeatCount = 0, $newSeatCount);
+            return static::adjustSeatCount($license, 0, $newSeatCount);
         });
         // However, we listen for updating to be able to prevent the edit if we cannot delete enough seats.
         static::updating(function ($license) {
             $newSeatCount = $license->getAttributes()['seats'];
-            $oldSeatCount = isset($license->getOriginal()['seats']) ? $license->getOriginal()['seats'] : 0;
+            //$oldSeatCount = isset($license->getOriginal()['seats']) ? $license->getOriginal()['seats'] : 0;
+            /*
+               That previous method *did* mostly work, but if you ever managed to get your $license->seats value out of whack
+               with your actual count of license_seats *records*, you would never manage to get back 'into whack'.
+               The below method actually grabs a count of existing license_seats records, so it will be more accurate.
+               This means that if your license_seats are out of whack, you can change the quantity and hit 'save' and it
+               will manage to 'true up' and make your counts line up correctly.
+            */
+            $oldSeatCount = $license->license_seats_count;
 
             return static::adjustSeatCount($license, $oldSeatCount, $newSeatCount);
         });
@@ -357,7 +368,7 @@ class License extends Depreciable
      */
     public function assignedusers()
     {
-        return $this->belongsToMany(\App\Models\User::class, 'license_seats', 'assigned_to', 'license_id');
+        return $this->belongsToMany(\App\Models\User::class, 'license_seats', 'license_id', 'assigned_to');
     }
 
     /**

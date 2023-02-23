@@ -27,6 +27,9 @@ return [
     'used_by_models'   		    => 'Koriste ga modeli',
     'order'   		            => 'Porudžbina',
     'create_fieldset'         => 'Novo Polje',
+    'update_fieldset'         => 'Update Fieldset',
+    'fieldset_does_not_exist'   => 'Fieldset :id does not exist',
+    'fieldset_updated'         => 'Fieldset updated',
     'create_fieldset_title' => 'Kreirajte novu grupu polja',
     'create_field'            => 'Novo prilagodjeno polje',
     'create_field_title' => 'Kreirajte prilagođeno polje',
@@ -44,4 +47,6 @@ return [
     'db_convert_warning' => 'UPOZORENJE. Ovo polje je u tabeli prilagođenih polja kao <code>:db_column</code>, ali bi trebalo da bude <code>:expected</code>.',
     'is_unique' => 'Ova vrednost mora biti jedinstvena za sva sredstva',
     'unique' => 'Jedinstven',
+    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
+    'display_in_user_view_table' => 'Visible to User',
 ];

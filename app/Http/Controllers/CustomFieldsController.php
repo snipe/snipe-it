@@ -86,22 +86,32 @@ class CustomFieldsController extends Controller
     {
         $this->authorize('create', CustomField::class);
 
+        $show_in_email = $request->get("show_in_email", 0);
+        $display_in_user_view = $request->get("display_in_user_view", 0);
+
+        // Override the display settings if the field is encrypted
+        if ($request->get("field_encrypted") == '1') {
+            $show_in_email = '0';
+            $display_in_user_view = '0';
+        }
+
         $field = new CustomField([
             "name" => trim($request->get("name")),
             "element" => $request->get("element"),
             "help_text" => $request->get("help_text"),
             "field_values" => $request->get("field_values"),
             "field_encrypted" => $request->get("field_encrypted", 0),
-            "show_in_email" => $request->get("show_in_email", 0),
+            "show_in_email" => $show_in_email,
             "is_unique" => $request->get("is_unique", 0),
+            "display_in_user_view" => $display_in_user_view,
             "user_id" => Auth::id()
         ]);
 
 
         if ($request->filled('custom_format')) {
-            $field->format = e($request->get('custom_format'));
+            $field->format = $request->get('custom_format');
         } else {
-            $field->format = e($request->get('format'));
+            $field->format = $request->get('format');
         }
 
         if ($field->save()) {
@@ -221,13 +231,24 @@ class CustomFieldsController extends Controller
 
         $this->authorize('update', $field);
 
+
+        $show_in_email = $request->get("show_in_email", 0);
+        $display_in_user_view = $request->get("display_in_user_view", 0);
+
+        // Override the display settings if the field is encrypted
+        if ($request->get("field_encrypted") == '1') {
+            $show_in_email = '0';
+            $display_in_user_view = '0';
+        }
+        
         $field->name          = trim(e($request->get("name")));
         $field->element       = e($request->get("element"));
         $field->field_values  = e($request->get("field_values"));
         $field->user_id       = Auth::id();
         $field->help_text     = $request->get("help_text");
-        $field->show_in_email = $request->get("show_in_email", 0);
+        $field->show_in_email = $show_in_email;
         $field->is_unique     = $request->get("is_unique", 0);
+        $field->display_in_user_view = $display_in_user_view;
 
         if ($request->get('format') == 'CUSTOM REGEX') {
             $field->format = e($request->get('custom_format'));

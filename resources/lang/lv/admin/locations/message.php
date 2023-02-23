@@ -6,6 +6,8 @@ return array(
     'assoc_users'	 => 'Pašlaik šī atrašanās vieta ir saistīta ar vismaz vienu lietotāju un to nevar izdzēst. Lūdzu, atjauniniet savus lietotājus, lai vairs nerindrinātu šo atrašanās vietu, un mēģiniet vēlreiz.',
     'assoc_assets'	 => 'Pašlaik šī atrašanās vieta ir saistīta ar vismaz vienu īpašumu un to nevar izdzēst. Lūdzu, atjauniniet savus aktīvus, lai vairs nerindotu šo atrašanās vietu, un mēģiniet vēlreiz.',
     'assoc_child_loc'	 => 'Pašlaik šī vieta ir vismaz viena bērna atrašanās vieta un to nevar izdzēst. Lūdzu, atjauniniet savas atrašanās vietas, lai vairs nerindotu šo atrašanās vietu, un mēģiniet vēlreiz.',
+    'assigned_assets' => 'Assigned Assets',
+    'current_location' => 'Current Location',
 
 
     'create' => array(

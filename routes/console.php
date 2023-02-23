@@ -20,7 +20,7 @@ Artisan::command('inspire', function () {
 
 Artisan::command('snipeit:travisci-install', function () {
     if (! Setting::setupCompleted()) {
-        $settings = new Setting;
+        $settings = new Setting();
         $settings->site_name = 'test-ci';
         $settings->alert_email = 'test@example.com';
         $settings->alerts_enabled = 1;

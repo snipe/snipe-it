@@ -43,12 +43,14 @@ return [
     'file'                 => 'Atribūts ir jābūt failam.',
     'filled'               => 'Atribūta laukam jābūt vērtībai.',
     'image'                => 'Atribūts ir jābūt attēlam.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'Atlasītais: atribūts nav derīgs.',
     'in_array'             => 'Atribūta lauks neeksistē: citā.',
     'integer'              => 'Atribūts ir jābūt veselam skaitlim.',
     'ip'                   => 'Atribūtam jābūt derīgai IP adresei.',
     'ipv4'                 => 'Atribūtam jābūt derīgai IPv4 adresei.',
     'ipv6'                 => 'Atribūtam jābūt derīgai IPv6 adresei.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'Atribūtam jābūt derīgai JSON virknei.',
     'max'                  => [
         'numeric' => 'Atribūts: nedrīkst būt lielāks par: max.',
@@ -112,23 +114,24 @@ return [
     |
     */
 
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
-
     'custom' => [
         'alpha_space' => 'Laukā: atribūta lauks ir rakstzīme, kas nav atļauta.',
         'email_array'      => 'Viena vai vairākas e-pasta adreses nav derīgas.',
         'hashed_pass'      => 'Jūsu pašreizējā parole nav pareiza',
         'dumbpwd'          => 'Šī parole ir pārāk izplatīta.',
         'statuslabel_type' => 'Jums ir jāizvēlas derīgs statusa etiķetes veids',
+
+        // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
+        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // people won't know how to format. 
+        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
+        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
+        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+
     ],
 
     /*

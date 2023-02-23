@@ -43,12 +43,14 @@ return [
     'file'                 => 'Ko: ko te huanga he kōnae.',
     'filled'               => 'Ko: Ko te waahi tohu ka whai hua.',
     'image'                => 'Ko te: me kii he huanga.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'Ko te mea i tīpakohia: he muhu te huanga.',
     'in_array'             => 'Ko te: ko te waahi huanga kaore i roto i: atu.',
     'integer'              => 'Ko te: ko te huanga me he tau.',
     'ip'                   => 'Ko: ko te huanga me waiho he wāhitau IP tika.',
     'ipv4'                 => 'Ko: ko te huanga me waiho he wāhitau IPv4 tika.',
     'ipv6'                 => 'Ko te: me tohu he huanga IPv6 tika.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'Ko: he tohu JSON tika te huanga.',
     'max'                  => [
         'numeric' => 'Ko te: ko te huanga ka nui atu i te: max.',
@@ -112,23 +114,24 @@ return [
     |
     */
 
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
-
     'custom' => [
         'alpha_space' => 'Ko te: kei roto i te waahi tohu he momo e kore e whakaaetia.',
         'email_array'      => 'Kotahi, neke atu ranei nga wahitau īmēra he muhu.',
         'hashed_pass'      => 'He hē tō kupuhipa o nāianei',
         'dumbpwd'          => 'He noa rawa te kupuhipa.',
         'statuslabel_type' => 'Me tīpako i te momo tahua tohu whaimana',
+
+        // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
+        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // people won't know how to format. 
+        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
+        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
+        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+
     ],
 
     /*

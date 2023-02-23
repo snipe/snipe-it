@@ -197,6 +197,7 @@ class BulkUsersController extends Controller
             'status_id'     => e(request('status_id')),
             'assigned_to'   => null,
             'assigned_type' => null,
+            'expected_checkin' => null,
         ]);
 
 
@@ -234,10 +235,10 @@ class BulkUsersController extends Controller
             $item_id = $item->id;
             $logAction = new Actionlog();
 
-            if($itemType == License::class){
+            if ($itemType == License::class){
                 $item_id = $item->license_id;
             }
-
+            
             $logAction->item_id = $item_id;
             // We can't rely on get_class here because the licenses/accessories fetched above are not eloquent models, but simply arrays.
             $logAction->item_type = $itemType;

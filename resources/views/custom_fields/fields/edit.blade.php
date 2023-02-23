@@ -74,8 +74,14 @@
             <label for="format" class="col-md-4 control-label">
               {{ trans('admin/custom_fields/general.field_format') }}
             </label>
+              @php
+              $field_format = '';
+              if (stripos($field->format, 'regex') === 0){
+                $field_format = 'CUSTOM REGEX';
+              }
+              @endphp
             <div class="col-md-6 required">
-              {{ Form::select("format",Helper::predefined_formats(), $field->format, array('class'=>'format select2 form-control', 'aria-label'=>'format')) }}
+              {{ Form::select("format",Helper::predefined_formats(), ($field_format == '') ? $field->format : $field_format, array('class'=>'format select2 form-control', 'aria-label'=>'format')) }}
               {!! $errors->first('format', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
@@ -111,6 +117,17 @@
                   <label for="show_in_email">
                       <input type="checkbox" name="show_in_email" aria-label="show_in_email" value="1" class="minimal"{{ (old('show_in_email') || $field->show_in_email) ? ' checked="checked"' : '' }}>
                       {{ trans('admin/custom_fields/general.show_in_email') }}
+                  </label>
+              </div>
+
+          </div>
+
+          <!-- Show in View All Assets profile view  -->
+          <div class="form-group {{ $errors->has('display_in_user_view') ? ' has-error' : '' }}"  id="display_in_user_view">
+              <div class="col-md-8 col-md-offset-4">
+                  <label for="display_in_user_view">
+                      <input type="checkbox" name="display_in_user_view" aria-label="display_in_user_view" value="1" class="minimal"{{ (old('display_in_user_view') || $field->display_in_user_view) ? ' checked="checked"' : '' }}>
+                      {{ trans('admin/custom_fields/general.display_in_user_view') }}
                   </label>
               </div>
 
@@ -206,11 +223,13 @@
     $('#field_encrypted').on('ifChecked', function(event){
         $("#encrypt_warning").show();
         $("#show_in_email").hide();
+        $("#display_in_user_view").hide();
     });
 
     $('#field_encrypted').on('ifUnchecked', function(event){
         $("#encrypt_warning").hide();
         $("#show_in_email").show();
+        $("#display_in_user_view").show();
     });
 
 </script>

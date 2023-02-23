@@ -3,6 +3,7 @@
 return array(
 
     'does_not_exist' => 'القسم الاداري غير موجود.',
+    'department_already_exists' => 'A department already exists with that name at this company location. Or choose a more specific name for this department. ',
     'assoc_users'	 => 'هذا القسم الإداري مرتبط حاليا مع مستخدم واحد على الأقل ولا يمكن حذفه. الرجاء تحديث تفاصيل المستخدمين حيث لا تحتوي هذا القسم وحاول مرة أخرى. ',
     'create' => array(
         'error'   => 'لم يتم إنشاء القسم الإداري، الرجاء المحاولة مرة أخرى.',

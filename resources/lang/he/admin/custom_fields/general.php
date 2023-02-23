@@ -27,6 +27,9 @@ return [
     'used_by_models'   		    => 'דגמים משומשים',
     'order'   		            => 'להזמין',
     'create_fieldset'         => 'שדה חדש',
+    'update_fieldset'         => 'Update Fieldset',
+    'fieldset_does_not_exist'   => 'Fieldset :id does not exist',
+    'fieldset_updated'         => 'Fieldset updated',
     'create_fieldset_title' => 'Create a new fieldset',
     'create_field'            => 'שדה מותאם אישית חדש',
     'create_field_title' => 'Create a new custom field',
@@ -44,4 +47,6 @@ return [
     'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code>:db_column</code> but should be <code>:expected</code>.',
     'is_unique' => 'ערך זה חייב להיות ייחודי בכל הנכסים',
     'unique' => 'ייחודי',
+    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
+    'display_in_user_view_table' => 'Visible to User',
 ];

@@ -52,8 +52,7 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
     }
     img.barcode {
         display:block;
-
-        padding-top: .11in;
+        margin-top:-7px;
         width: 100%;
     }
     div.label-logo {
@@ -171,6 +170,7 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
 
 
     </div>
+
 
     @if ($count % $settings->labels_per_page == 0)
         <!--  Moguce rjesavanje prazne stranice nakon naljepnice
