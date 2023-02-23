@@ -169,7 +169,7 @@ trait Loggable
      * @since [v4.0]
      * @return \App\Models\Actionlog
      */
-    public function logAudit($note, $location_id, $filename = null)
+    public function logAudit($note, $location_id, $filename = null, $audit_type = null)
     {
         $log = new Actionlog;
         $location = Location::find($location_id);
@@ -184,6 +184,7 @@ trait Loggable
         $log->note = $note;
         $log->user_id = Auth::user()->id;
         $log->filename = $filename;
+        $log->audit_type = $audit_type;
         $log->logaction('audit');
 
         $params = [

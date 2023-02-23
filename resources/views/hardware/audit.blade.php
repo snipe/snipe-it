@@ -53,6 +53,19 @@
                         <!-- Locations -->
                     @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
 
+                        <div class="form-group">
+                            <div class="col-md-9 col-md-offset-3">
+
+                                <label for="audit_type">
+                                    {{ Form::checkbox('audit_type', 'physical', true, ['class' => 'minimal']) }}
+                                    {{ trans('admin/hardware/general.audit_type_physical') }}
+                                </label>
+
+                                @include ('partials.more-info', ['helpText' => trans('help.physical_audit_help'), 'helpPosition' => 'right'])
+
+                            </div>
+                        </div> <!--/form-group-->
+
                     <!-- Update location -->
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-md-9">

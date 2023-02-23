@@ -1148,7 +1148,6 @@ class Asset extends Depreciable
 
         return $query->whereNotNull('assets.next_audit_date')
             ->whereRaw('DATE_SUB('.DB::getTablePrefix()."assets.next_audit_date, INTERVAL $interval DAY) <= '".Carbon::now()."'")
-            ->where('assets.archived', '=', 0)
             ->NotArchived();
     }
 
