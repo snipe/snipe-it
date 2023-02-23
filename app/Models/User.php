@@ -64,6 +64,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'scim_externalid',
         'avatar',
         'gravatar',
+        'vip',
     ];
 
     protected $casts = [
@@ -71,6 +72,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'manager_id'   => 'integer',
         'location_id'  => 'integer',
         'company_id'   => 'integer',
+        'vip'      => 'boolean',
     ];
 
 
