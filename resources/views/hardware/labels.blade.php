@@ -173,7 +173,7 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
 
 
     @if ($count % $settings->labels_per_page == 0)
-        <!--  Moguce rjesavanje prazne stranice nakon naljepnice
+        <!--  Moguce rjesavanje prazne stranice nakon naljepniceee
         <div class="page-break"></div>
         -->
         <div class="next-padding">&nbsp;</div>
