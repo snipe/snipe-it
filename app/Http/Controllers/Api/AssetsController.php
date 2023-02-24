@@ -987,10 +987,14 @@ class AssetsController extends Controller
             $asset->unsetEventDispatcher();
             $asset->next_audit_date = $dt;
 
+            if ($request->filled('audit_type')) {
+                $asset->audit_type = $request->input('audit_type');
+            }
+
             if ($request->filled('next_audit_date')) {
                 $asset->next_audit_date = $request->input('next_audit_date');
             }
-
+            
             // Check to see if they checked the box to update the physical location,
             // not just note it in the audit notes
             if ($request->input('update_location') == '1') {

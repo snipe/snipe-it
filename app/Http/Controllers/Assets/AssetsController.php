@@ -851,7 +851,7 @@ class AssetsController extends Controller
 
         $asset->next_audit_date = $request->input('next_audit_date');
         $asset->last_audit_date = date('Y-m-d H:i:s');
-        $asset->audit_type = $request->input('audit_type', 'physical');
+        $asset->audit_type = $request->input('audit_type');
 
         // Check to see if they checked the box to update the physical location,
         // not just note it in the audit notes
