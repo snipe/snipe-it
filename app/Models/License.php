@@ -155,7 +155,7 @@ class License extends Depreciable
     public static function adjustSeatCount($license, $oldSeats, $newSeats)
     {
         if(!is_numeric($newSeats)){
-            Session::flash('error', trans('admin/licenses/message.update.error'));
+            Session::flash('error', trans('admin/licenses/message.seats_format_value'));
 
             return false;
         }
