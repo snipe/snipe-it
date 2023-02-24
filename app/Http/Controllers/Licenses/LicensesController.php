@@ -170,8 +170,8 @@ class LicensesController extends Controller
         $license->reassignable      = $request->input('reassignable', 0);
         $license->serial            = $request->input('serial');
         $license->termination_date  = $request->input('termination_date');
-        $license->seats             = e($request->input('seats'));
-        $license->manufacturer_id   =  $request->input('manufacturer_id');
+        $license->seats             = $request->input('seats');
+        $license->manufacturer_id   = $request->input('manufacturer_id');
         $license->supplier_id       = $request->input('supplier_id');
         $license->category_id       = $request->input('category_id');
 
