@@ -74,7 +74,7 @@ class ItemImporter extends Importer
 
         $this->item['purchase_date'] = null;
         if ($this->findCsvMatch($row, 'purchase_date') != '') {
-            $this->item['purchase_date'] = date('Y-m-d 00:00:01', strtotime($this->findCsvMatch($row, 'purchase_date')));
+            $this->item['purchase_date'] = date('Y-m-d', strtotime($this->findCsvMatch($row, 'purchase_date')));
         }
 
         $this->item['last_audit_date'] = null;
