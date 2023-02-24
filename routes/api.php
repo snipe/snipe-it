@@ -1162,6 +1162,17 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             )->name('api.activity.index');
         }); // end reports api routes
 
+        /**
+         * Version API routes
+         */
+
+        Route::get('/version', function () {
+            return response()->json(
+                [
+                    'version' => config('version.app_version'),
+                ], 200);
+        }); // end version api routes
+
 
         Route::fallback(function () {
             return response()->json(
@@ -1171,6 +1182,5 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                     'payload' => null,
                 ], 404);
         }); // end fallback routes
-
 
 }); // end API routes

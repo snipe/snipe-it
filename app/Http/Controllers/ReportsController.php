@@ -52,9 +52,8 @@ class ReportsController extends Controller
     public function getAccessoryReport()
     {
         $this->authorize('reports.view');
-        $accessories = Accessory::orderBy('created_at', 'DESC')->with('company')->get();
 
-        return view('reports/accessories', compact('accessories'));
+        return view('reports/accessories');
     }
 
     /**
