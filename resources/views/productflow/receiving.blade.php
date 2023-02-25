@@ -19,7 +19,7 @@
             {{-- This injects the serial number & accessory modals directly to the view instead of it being called through the modal framework 'api' --}}
             @include('modals.serialnumber')
             @include('modals.accessory')
-            @include('modals.button-dropdown');
+            @include('modals.button-dropdown')
 
             <form id="create-form" class="form-horizontal" autocomplete="off" role="form" enctype="multipart/form-data">
 
