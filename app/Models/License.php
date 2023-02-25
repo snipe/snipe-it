@@ -36,7 +36,6 @@ class License extends Depreciable
         'purchase_date' => 'datetime',
         'expiration_date' => 'datetime',
         'termination_date' => 'datetime',
-        'seats'   => 'integer',
         'category_id'  => 'integer',
         'company_id'   => 'integer',
     ];
