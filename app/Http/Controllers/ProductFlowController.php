@@ -79,6 +79,7 @@ class ProductFlowController extends Controller
         return redirect()->back()->withInput()->withErrors($asset->getErrors());
     }
 
+    // Update Accessory Data
     public function update(Request $request) {
         $accessory = Accessory::find($request->input('accessory_id'));
         $accessory_name = $accessory->name;

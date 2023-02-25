@@ -78,6 +78,8 @@ class AccessoryCheckoutController extends Controller
 
 
         // Update the accessory data
+        // This allows for QTY support. If more than 1 is needed, it loops. I don't like this method but this works for now. Need to revisit it later to optimize it better.
+        // e.g. Build qty into logs and not have a log generate for a every single individual checkout.
 
         for ($i = 1; $i <= (int) $request->input('qty'); $i++) {
             $accessory->assigned_to = $request->input('assigned_to');

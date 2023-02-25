@@ -17,7 +17,7 @@
             --}}
 
             {{-- This injects the serial number & accessory modals directly to the view instead of it being called through the modal framework 'api' --}}
-            @include('modals.serialnumber') 
+            @include('modals.serialnumber')
             @include('modals.accessory')
             @include('modals.button-dropdown');
 
@@ -38,7 +38,7 @@
                                     <a class="btn btn-link text-left" href="{{ URL::previous() }}">
                                         {{ trans('button.cancel') }}
                                     </a>
-                                    <button type="submit" class="btn btn-primary">
+                                    <button id="receiveBtn" type="submit" class="btn btn-primary" disabled="true">
                                         <i class="fas fa-check icon-white" aria-hidden="true"></i>
                                         Receive
                                     </button>
@@ -95,6 +95,9 @@
         $("#newAsset").on('click', () => {
             $("#buttonDropdown").modal('hide');
         });
+        $("#receiveParts").on('input', () => {
+            $("#receiveParts").val() == "" ? $("#receiveBtn").attr('disabled', true) : $("#receiveBtn").attr('disabled', false);
+        });
 
         $("#create-form").submit((e) => {
             let asset = (data) => {
@@ -115,28 +118,32 @@
                 $("#accessory-model_number").val(model_number);
             }
 
-            $.ajax({
-                type: "get",
-                url: "/productflow/show",
-                data: {
-                    receiveParts: $("#receiveParts").val()
-                },
-                success: (res) => {
+            if ($("#receiveParts").val() != null && $("#receiveParts").val() != "") {
+                $.ajax({
+                    type: "get",
+                    url: "/productflow/show",
+                    data: {
+                        receiveParts: $("#receiveParts").val()
+                    },
+                    success: (res) => {
 
-                    if (res.status == "success" && (res.payload != undefined || res.payload != null)) {
-                        (res.messages == "asset") ? asset(res) : accessory(res);
+                        if (res.status == "success" && (res.payload != undefined || res.payload !=
+                                null)) {
+                            (res.messages == "asset") ? asset(res): accessory(res);
 
-                        console.dir(res)
-                    } else {
-                        // Redirect with a known false value that will prompt the server to load our warning for us (ugly I know)
-                        window.location.href = "/productflow/show?receiveParts=0"
+                            console.dir(res)
+                        } else {
+                            // Redirect with a known false value that will prompt the server to load our warning for us (ugly I know)
+                            window.location.href = "/productflow/show?receiveParts=0"
+                        }
+                    },
+                    error: (err) => {
+                        console.dir(err)
                     }
-                },
-                error: (err) => {
-                    console.dir(err)
-                }
-            });
-            e.preventDefault();
+                });
+                e.preventDefault();
+            }
+
         });
 
         $("#serial-number-form").submit((e) => {
@@ -179,7 +186,6 @@
             $("#receiveParts").focus();
             $("#accessory_modal_error_msg").slideUp("fast");
         });
-
     </script>
     @include ('partials.bootstrap-table')
 @stop
