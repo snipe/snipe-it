@@ -7,6 +7,7 @@ use App\Models\Asset;
 use App\Models\Company;
 use App\Models\Location;
 use App\Models\User;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -79,10 +80,16 @@ class LocationsController extends Controller
         $location->zip = $request->input('zip');
         $location->ldap_ou = $request->input('ldap_ou');
         $location->manager_id = $request->input('manager_id');
-        $location->company_id = Company::getIdForCurrentUser($request->input('company_id'));
         $location->user_id = Auth::id();
         $location->phone = request('phone');
         $location->fax = request('fax');
+
+        // Only scope the location if the setting is enabled
+        if (Setting::getSettings()->scope_locations_fmcs) {
+            $location->company_id = Company::getIdForCurrentUser($request->input('company_id'));
+        } else {
+            $location->company_id = $request->input('company_id');
+        }
 
         $location = $request->handleImages($location);
 
@@ -147,7 +154,13 @@ class LocationsController extends Controller
         $location->fax = request('fax');
         $location->ldap_ou = $request->input('ldap_ou');
         $location->manager_id = $request->input('manager_id');
-        $location->company_id = Company::getIdForCurrentUser($request->input('company_id'));
+
+        // Only scope the location if the setting is enabled
+        if (Setting::getSettings()->scope_locations_fmcs) {
+            $location->company_id = Company::getIdForCurrentUser($request->input('company_id'));
+        } else {
+            $location->company_id = $request->input('company_id');
+        }
 
         $location = $request->handleImages($location);
 

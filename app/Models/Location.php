@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Asset;
+use App\Models\Setting;
 use App\Models\SnipeModel;
 use App\Models\Traits\Searchable;
 use App\Models\User;
@@ -17,12 +18,21 @@ use Watson\Validating\ValidatingTrait;
 
 class Location extends SnipeModel
 {
+    function __construct() {
+        parent::__construct();
+        // This is a workaround for backward compatibility with older versions where locations doesn't get scoped.
+        // Normaly we would only add 'use CompanyableTrait;', but this has to be conditional on the setting.
+        // So instead of using the trait, add the scope directly if no backward compatibility is used
+        if (Setting::getSettings()->scope_locations_fmcs) {
+            static::addGlobalScope(new CompanyableScope);
+        }
+    }
+
     use HasFactory;
 
     protected $presenter = \App\Presenters\LocationPresenter::class;
     use Presentable;
     use SoftDeletes;
-    use CompanyableTrait;
 
     protected $table = 'locations';
     protected $rules = [
