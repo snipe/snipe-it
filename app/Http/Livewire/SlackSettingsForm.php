@@ -12,6 +12,12 @@ class SlackSettingsForm extends Component
     public $slack_channel;
     public $slack_botname;
     public $isDisabled ='disabled' ;
+    public $integration_app= 'WORKING';
+    public $webhook_link;
+    public $webhook_selected;
+    public $webhook_options= ['Slack'=>'fab fa-slack', 'Discord'=>'fab fa-discord', 'Rocket.Chat'=>'fab fa-rocketchat'];
+    public $webhook;
+    public $icon;
 
     public Setting $setting;
 
@@ -24,6 +30,8 @@ class SlackSettingsForm extends Component
     public function mount(){
 
         $this->setting = Setting::getSettings();
+        $this->icon ='';
+        $this->webhook = $this->webhook_selected;
         $this->slack_endpoint = $this->setting->slack_endpoint;
         $this->slack_channel = $this->setting->slack_channel;
         $this->slack_botname = $this->setting->slack_botname;
@@ -31,6 +39,7 @@ class SlackSettingsForm extends Component
     }
     public function updated($field){
 
+        $this->webhook = $this->webhook_selected;
         $this->validateOnly($field ,$this->rules);
     }
 
