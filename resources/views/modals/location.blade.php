@@ -11,8 +11,8 @@
                 </div>
                 @include('modals.partials.name', ['item' => new \App\Models\Location(), 'required' => 'true'])
 
-                <!-- Setup of default company, taken from asset creator -->
-				@if ($user->company)
+                <!-- Setup of default company, taken from asset creator if scoped locations are activated in the settings -->
+				@if (($snipeSettings->scope_locations_fmcs == '1') && ($user->company))
 					<input type="hidden" name="company_id" id='modal-company' value='{{ $user->company->id }}' class="form-control">
 				@endif
 
