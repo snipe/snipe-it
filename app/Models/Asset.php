@@ -1641,9 +1641,9 @@ class Asset extends Depreciable
      */
     public function scopeOrderManufacturer($query, $order)
     {
-        return $query->join('models', 'assets.model_id', '=', 'models.id')
-            ->join('manufacturers', 'models.manufacturer_id', '=', 'manufacturers.id')
-            ->orderBy('manufacturers.name', $order);
+        return $query->join('models as order_asset_model', 'assets.model_id', '=', 'order_asset_model.id')
+            ->join('manufacturers as manufacturer_order', 'order_asset_model.manufacturer_id', '=', 'manufacturer_order.id')
+            ->orderBy('manufacturer_order.name', $order);
     }
 
    /**
