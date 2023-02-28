@@ -13,7 +13,8 @@ return array(
 
     'update' => array(
         'error'   => 'Nem sikerült a kategória módosítása, kérjük, próbálja újra',
-        'success' => 'Sikeresen módosította a kategóriát.'
+        'success' => 'Sikeresen módosította a kategóriát.',
+        'cannot_change_category_type'   => 'Létrehozás után nem tudod megváltoztatni a kategória tipusát',
     ),
 
     'delete' => array(

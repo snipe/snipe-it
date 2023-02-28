@@ -40,12 +40,12 @@ return [
     'warranty'			=> 'Гаранция',
         'warranty_expires'		=> 'Гаранцията изтича',
     'years'				=> 'години',
-    'asset_location' => 'Update Asset Location',
-    'asset_location_update_default_current' => 'Update default location AND actual location',
-    'asset_location_update_default' => 'Update only default location',
-    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
-    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
-    'processing_spinner' => 'Processing...',
-    'optional_infos'  => 'Optional Information',
-    'order_details'   => 'Order Related Information'
+    'asset_location' => 'Обновяване на местоположение',
+    'asset_location_update_default_current' => 'Актуализиране на местоположение по подразбиране и текущото местоположение',
+    'asset_location_update_default' => 'Актуализиране на местоположението по подразбиране',
+    'asset_not_deployable' => 'Актива не може да бъде предоставен. Този активк не може да бъде изписан.',
+    'asset_deployable' => 'Актива може да бъде предоставен. Този активк може да бъде изписан.',
+    'processing_spinner' => 'В процес на изпълнение...',
+    'optional_infos'  => 'Допълнителна информация',
+    'order_details'   => 'Информация за състоянието на поръчка'
 ];

@@ -3,6 +3,7 @@
 return [
     'accessories'			=> 'Ategolion',
     'activated'			    => 'Actifadu',
+    'accepted_date'         => 'Date Accepted',
     'accessory'				=> 'Ategolyn',
     'accessory_report'		=> 'Adroddiad Ategolion',
     'action'                => 'Gweithred',
@@ -27,7 +28,13 @@ return [
     'audit'				    => 'Awdit',
     'audit_report'			=> 'Log Awdit',
     'assets'				=> 'Asedau',
+    'assets_audited'        => 'assets audited',
+    'assets_checked_in_count'     => 'assets checked in',
+    'assets_checked_out_count'     => 'assets checked out',
+    'asset_deleted_warning'     => 'This asset has been deleted. You must restore it before you can assign it to someone.',
+    'assigned_date'         => 'Date Assigned',
     'assigned_to'           => 'Assigned to :name',
+    'assignee'              => 'Assigned to',
     'avatar_delete'         => 'Dileu Avatar',
     'avatar_upload'         => 'Uwchlwytho Avatar',
     'back'      			=> 'Yn ôl',
@@ -39,6 +46,8 @@ return [
     'bulk_delete'           => 'Bulk Delete',
     'bulk_actions'          => 'Bulk Actions',
     'bulk_checkin_delete'   => 'Bulk Checkin Items from Users',
+    'byod'                  => 'BYOD',
+    'byod_help'             => 'This device is owned by the user',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'Canslo',
     'categories'			=> 'Categoriau',
@@ -385,7 +394,15 @@ return [
     'start_date'            => 'Start Date',
     'end_date'            => 'End Date',
     'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
-    'placeholder_kit'       => 'Select a kit'
+    'placeholder_kit'       => 'Select a kit',
+    'file_not_found'        => 'File not found',
+    'preview_not_available' => '(no preview)',
+    'setup'                 => 'Setup',
+    'pre_flight'            => 'Pre-Flight',
+    'skip_to_main_content'  => 'Skip to main content',
+    'toggle_navigation'     => 'Toggle navigation',
+    'alerts'                => 'Alerts',
+    'tasks_view_all'        => 'View all tasks',
 
 
 

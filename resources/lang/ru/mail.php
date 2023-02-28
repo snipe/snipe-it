@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Чтобы войти в Snipe-It используйте следующие логин и пароль:',
     'login' => 'Логин:',
     'Low_Inventory_Report' => 'Отчет о заканчивающихся предметах',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Мин Кол-во',
     'name' => 'Название',
     'new_item_checked' => 'Новый предмет был выдан под вашем именем, подробности ниже.',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Напоминание: приближается крайний срок проверки :name',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'your_assets' => 'Посмотреть активы',
+    'rights_reserved' => 'Все права защищены.',
 ];

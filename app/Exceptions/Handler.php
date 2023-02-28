@@ -41,7 +41,9 @@ class Handler extends ExceptionHandler
     public function report(Throwable $exception)
     {
         if ($this->shouldReport($exception)) {
-            \Log::error($exception);
+            if (class_exists(\Log::class)) {
+                \Log::error($exception);
+            }
             return parent::report($exception);
         }
     }

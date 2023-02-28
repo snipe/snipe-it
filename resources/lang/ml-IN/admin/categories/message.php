@@ -13,7 +13,8 @@ return array(
 
     'update' => array(
         'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'success' => 'Category updated successfully.',
+        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
     ),
 
     'delete' => array(

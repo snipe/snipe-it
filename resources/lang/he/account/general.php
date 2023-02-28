@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'personal_api_keys' => 'Personal API Keys',
+    'personal_api_keys' => 'מפתחות API אישיים',
     'api_key_warning' => 'When generating an API token, be sure to copy it down immediately as they
                     will not be visible to you again.',
     'api_base_url' => 'Your API base url is located at:',

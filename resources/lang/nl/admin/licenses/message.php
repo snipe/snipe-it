@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
+    'does_not_exist' => 'Licentie bestaat niet of je hebt geen toestemming om het te bekijken.',
     'user_does_not_exist' => 'Gebruiker bestaat niet.',
     'asset_does_not_exist' 	=> 'Het asset dat je probeert te koppelen aan deze licentie bestaat niet.',
     'owner_doesnt_match_asset' => 'Het asset dat je probeert te koppelen aan deze licentie is eigendom van iemand anders dan de persoon die is geselecteerd in de toegewezen aan de dropdown.',

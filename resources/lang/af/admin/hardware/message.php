@@ -48,6 +48,8 @@ return [
         'success'               => 'Jou lêer is ingevoer',
         'file_delete_success'   => 'Jou lêer is suksesvol verwyder',
         'file_delete_error'      => 'Die lêer kon nie uitgevee word nie',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
 
 

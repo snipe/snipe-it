@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Acest activ a fost șters.',
     'edit'  					=> 'Editeaza activ',
     'model_deleted'  			=> 'Acest model de active a fost șters. Trebuie să restaurați modelul înainte de a putea restaura activul.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Requestable',
     'requested'				    => 'Solicitat',
     'not_requestable'           => 'Nu poate fi solicitat',

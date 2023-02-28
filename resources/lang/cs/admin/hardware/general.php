@@ -6,39 +6,41 @@ return [
     'archived'  				=> 'Archivováno',
     'asset'  					=> 'Majetek',
     'bulk_checkout'             => 'Vyskladnit majetek',
-    'bulk_checkin'              => 'Checkin Assets',
+    'bulk_checkin'              => 'Převzít majetek',
     'checkin'  					=> 'Převzít majetek',
     'checkout'  				=> 'Pokladní majetek',
     'clone'  					=> 'Klonovat majetek',
     'deployable'  				=> 'Připraveno k nasazení',
-    'deleted'  					=> 'This asset has been deleted.',
+    'deleted'  					=> 'Tento majetek byl odstraněn.',
     'edit'  					=> 'Upravit majetek',
-    'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
+    'model_deleted'  			=> 'Tento model majetku byl odstraněn. Před obnovením majetku musíte model obnovit.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Lze vyžádat',
     'requested'				    => 'Požadováno',
-    'not_requestable'           => 'Not Requestable',
-    'requestable_status_warning' => 'Do not change  requestable status',
+    'not_requestable'           => 'Nelze vyžádat',
+    'requestable_status_warning' => 'Neměnit požadovaný stav',
     'restore'  					=> 'Obnovit zařízení',
     'pending'  					=> 'Čekající',
-    'undeployable'  			=> 'Nepřiřaditelné',
+    'undeployable'  			=> 'Nelze vyskladnit',
     'view'  					=> 'Zobrazit majetek',
-    'csv_error' => 'You have an error in your CSV file:',
+    'csv_error' => 'Máte chybu v souboru CSV:',
     'import_text' => '
     <p>
-    Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
+    Nahrajte CSV obsahující historii aktiv. Majetek a uživatelé MUSÍ již v systému existovat, nebo budou přeskočeni. Odpovídající aktiva se dopárují přes inventární číslo. Pokusíme se najít odpovídající uživatele na základě uživatelského jména a kritérií, která vyberete níže. Pokud nevyberete žádná kritéria níže, pokusíme se data spárovat pomocí uživatelského jména, který jste nakonfigurovali v Admin &gt; Obecná nastavení.
     </p>
 
-    <p>Fields included in the CSV must match the headers: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Any additional fields will be ignored. </p>
+    <p>Pole zahrnutá do CSV musí odpovídat hlavičkám: <strong>Inventární číslo, Jméno, Datum převzetí majetku, Datum vydání majetku</strong>. Všechna další pole budou ignorována. </p>
 
-    <p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
+    <p>Odevzdání majetku: prázdná nebo budoucí data automaticky odhlásí majetek přidruženému uživateli. Vyloučením sloupce odevzdání majetku nastaví datum odevzdání na dnešek.</p>
     ',
-    'csv_import_match_f-l' => 'Try to match users by firstname.lastname (jane.smith) format',
-    'csv_import_match_initial_last' => 'Try to match users by first initial last name (jsmith) format',
-    'csv_import_match_first' => 'Try to match users by first name (jane) format',
-    'csv_import_match_email' => 'Try to match users by email as username',
-    'csv_import_match_username' => 'Try to match users by username',
-    'error_messages' => 'Error messages:',
-    'success_messages' => 'Success messages:',
-    'alert_details' => 'Please see below for details.',
+    'csv_import_match_f-l' => 'Formát jmeno.prijmeni (karel.novak)',
+    'csv_import_match_initial_last' => 'Formát jprijmeni (knovak)',
+    'csv_import_match_first' => 'Formát jmeno (karel)',
+    'csv_import_match_email' => 'Email jako uživatelské jméno',
+    'csv_import_match_username' => 'Uživatelské jméno podle uživatelského jména',
+    'error_messages' => 'Chybové zprávy:',
+    'success_messages' => 'Úspěšné zprávy:',
+    'alert_details' => 'Podrobnosti naleznete níže.',
     'custom_export' => 'Uživatelsky definovaný export'
 ];

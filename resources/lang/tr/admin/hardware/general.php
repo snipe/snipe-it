@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Bu varlık silindi.',
     'edit'  					=> 'Demirbaşı Düzenle',
     'model_deleted'  			=> 'Bu varlık modeli silindi. Varlığı geri almak için modelini geri almalısınız.',
+    'model_invalid'             => 'Bu varlığın model bilgisi hatalı.',
+    'model_invalid_fix'         => 'Varlığı iade alma veya teslim etme işlemi öncesinde bunu düzeltmek için varlık bilgisi düzenlenmelidir.',
     'requestable'               => 'Talep edilebilir',
     'requested'				    => 'Talep edildi',
     'not_requestable'           => 'Talep Edilemez',

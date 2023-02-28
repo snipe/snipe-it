@@ -49,6 +49,8 @@ return [
         'success'               => 'Je bestand is geïmporteerd',
         'file_delete_success'   => 'Je bestand is succesvol verwijderd',
         'file_delete_error'      => 'Het bestand kon niet worden verwijderd',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
 
 

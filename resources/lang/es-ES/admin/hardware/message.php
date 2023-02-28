@@ -49,6 +49,8 @@ return [
         'success'               => 'Tu archivo ha sido importado',
         'file_delete_success'   => 'Tu archivo ha sido eliminado con éxito',
         'file_delete_error'      => 'No pudimos eliminar tu archivo',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
 
 

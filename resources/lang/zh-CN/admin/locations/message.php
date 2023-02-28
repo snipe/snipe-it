@@ -6,8 +6,8 @@ return array(
     'assoc_users'	 => '该位置下管理的还有其他用户，目前不能删除，请更新该用户的信息之后，再尝试删除。',
     'assoc_assets'	 => '删除失败，该位置已与其它资产关联。请先更新资产以取消关联，然后重试。 ',
     'assoc_child_loc'	 => '删除失败，该位置是一个或多个子位置的上层节点。请更新地理位置信息以取消关联，然后重试。 ',
-    'assigned_assets' => 'Assigned Assets',
-    'current_location' => 'Current Location',
+    'assigned_assets' => '已分配的资产',
+    'current_location' => '当前地理位置',
 
 
     'create' => array(

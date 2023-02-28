@@ -12,4 +12,5 @@ return array(
     'remaining' 			             => 'Ukuhlala',
     'total' 			                 => 'Inani',
     'update'                            => 'Buyekeza Ingxenye',
+    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
 );

@@ -48,6 +48,8 @@ return [
         'success'               => 'Teie fail on imporditud',
         'file_delete_success'   => 'Teie fail on edukalt kustutatud',
         'file_delete_error'      => 'Faili ei saanud kustutada',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
 
 

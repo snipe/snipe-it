@@ -34,9 +34,9 @@ class Asset extends Depreciable
     use CompanyableTrait;
     use HasFactory, Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait, UniqueSerialTrait;
 
-    const LOCATION = 'location';
-    const ASSET = 'asset';
-    const USER = 'user';
+    public const LOCATION = 'location';
+    public const ASSET = 'asset';
+    public const USER = 'user';
 
     use Acceptable;
 
@@ -84,11 +84,11 @@ class Asset extends Depreciable
 
 
     protected $casts = [
-        'purchase_date' => 'datetime',
+        'purchase_date' => 'date',
         'last_checkout' => 'datetime',
-        'expected_checkin' => 'datetime',
+        'expected_checkin' => 'date',
         'last_audit_date' => 'datetime',
-        'next_audit_date' => 'datetime',
+        'next_audit_date' => 'date',
         'model_id'       => 'integer',
         'status_id'      => 'integer',
         'company_id'     => 'integer',
@@ -105,16 +105,14 @@ class Asset extends Depreciable
         'company_id'      => 'integer|nullable',
         'warranty_months' => 'numeric|nullable|digits_between:0,240',
         'physical'        => 'numeric|max:1|nullable',
-        'checkout_date'   => 'date|max:10|min:10|nullable',
-        'checkin_date'    => 'date|max:10|min:10|nullable',
+        'last_checkout'    => 'date_format:Y-m-d H:i:s|nullable',
+        'expected_checkin' => 'date|nullable',
         'location_id'     => 'exists:locations,id|nullable',
         'rtd_location_id' => 'exists:locations,id|nullable',
         'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
-        'status'          => 'integer',
+        'purchase_date'   => 'date|date_format:Y-m-d|nullable',
         'serial'          => 'unique_serial|nullable',
         'purchase_cost'   => 'numeric|nullable|gte:0',
-        'next_audit_date' => 'date|nullable',
-        'last_audit_date' => 'date|nullable',
         'supplier_id'     => 'exists:suppliers,id|nullable',
     ];
 
@@ -145,6 +143,9 @@ class Asset extends Depreciable
         'last_checkout',
         'expected_checkin',
         'byod',
+        'last_audit_date',
+        'next_audit_date',
+
     ];
 
     use Searchable;
@@ -185,6 +186,14 @@ class Asset extends Depreciable
         'model.manufacturer' => ['name'],
     ];
 
+    // To properly set the expected checkin as Y-m-d
+    public function setExpectedCheckinAttribute($value)
+    {
+        if ($value == '') {
+            $value = null;
+        }
+        $this->attributes['expected_checkin'] = $value;
+    }
 
     /**
      * This handles the custom field validation for assets
@@ -1632,9 +1641,9 @@ class Asset extends Depreciable
      */
     public function scopeOrderManufacturer($query, $order)
     {
-        return $query->join('models', 'assets.model_id', '=', 'models.id')
-            ->join('manufacturers', 'models.manufacturer_id', '=', 'manufacturers.id')
-            ->orderBy('manufacturers.name', $order);
+        return $query->join('models as order_asset_model', 'assets.model_id', '=', 'order_asset_model.id')
+            ->join('manufacturers as manufacturer_order', 'order_asset_model.manufacturer_id', '=', 'manufacturer_order.id')
+            ->orderBy('manufacturer_order.name', $order);
     }
 
    /**

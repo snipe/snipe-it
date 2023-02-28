@@ -48,6 +48,8 @@ return [
         'success'               => 'A fájlt importálta',
         'file_delete_success'   => 'A fájlt sikeresen törölték',
         'file_delete_error'      => 'A fájlt nem sikerült törölni',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
 
 

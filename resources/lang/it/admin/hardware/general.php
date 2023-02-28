@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Questo bene è stato eliminato.',
     'edit'  					=> 'Modifica Asset',
     'model_deleted'  			=> 'Questo modello di asset è stato eliminato. Devi ripristinare il modello prima di poter ripristinare il bene.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Disponibile',
     'requested'				    => 'richiesto',
     'not_requestable'           => 'Non Richiedibili',

@@ -15,7 +15,7 @@ return array(
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
     'password_reset_sent'       => '密碼重置連結已傳送至 :email',
     'user_has_no_email'         => '該使用者的個人資料尚未填寫電子郵件。',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'user_has_no_assets_assigned'   => '該用戶未擁有已分配資產',
 
 
     'success' => array(
@@ -61,7 +61,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => '該用戶未設定email',
+        'success' => '已就當前資產通知此用戶'
     )
 );

@@ -11,8 +11,8 @@ return [
         'file_deleted'          => 'Резервная копия успешно удалена. ',
         'generated'             => 'Новая резервная копия успешно создана.',
         'file_not_found'        => 'Эта резервная копия не найдена на сервере.',
-        'restore_warning'       => 'Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This will also log out all of your existing users (including you).',
-        'restore_confirm'       => 'Are you sure you wish to restore your database from :filename?'
+        'restore_warning'       => 'Да, восстановить. Я осознаю, что это перезапишет все существующие данные в базе данных. Это также выйдет из учетных записей всех ваших существующих пользователей (включая вас).',
+        'restore_confirm'       => 'Вы уверены, что хотите восстановить базу данных из :filename?'
     ],
     'purge' => [
         'error'     => 'Возникла ошибка при попытке очистки. ',
@@ -20,24 +20,25 @@ return [
         'success'               => 'Удаленные записи успешно очищены.',
     ],
     'mail' => [
-        'sending' => 'Sending Test Email...',
-        'success' => 'Mail sent!',
-        'error' => 'Mail could not be sent.',
-        'additional' => 'No additional error message provided. Check your mail settings and your app log.'
+        'sending' => 'Отправляется тестовое электронное письмо...',
+        'success' => 'Письмо отправлено!',
+        'error' => 'Не удалось отправить электронное письмо.',
+        'additional' => 'Нет дополнительных сообщений об ошибке. Проверьте настройки почты и журнал вашего приложения.'
     ],
     'ldap' => [
-        'testing' => 'Testing LDAP Connection, Binding & Query ...',
-        '500' => '500 Server Error. Please check your server logs for more information.',
-        'error' => 'Something went wrong :(',
+        'testing' => 'Тестирование подключения к LDAP, привязка & запрос ...',
+        '500' => 'Ошибка в 500 сервере. Пожалуйста, проверьте журналы сервера для получения дополнительной информации.',
+        'error' => 'Что-то пошло не так :(',
         'sync_success' => 'A sample of 10 users returned from the LDAP server based on your settings:',
-        'testing_authentication' => 'Testing LDAP Authentication...',
-        'authentication_success' => 'User authenticated against LDAP successfully!'
+        'testing_authentication' => 'Тестирование LDAP аутентификации...',
+        'authentication_success' => 'Пользователь успешно аутентифицирован с LDAP!'
     ],
     'slack' => [
-        'sending' => 'Sending Slack test message...',
-        'success_pt1' => 'Success! Check the ',
-        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
-        '500' => '500 Server Error.',
-        'error' => 'Something went wrong.',
+        'sending' => 'Отправка тестового сообщения Slack...',
+        'success_pt1' => 'Успех! Проверьте ',
+        'success_pt2' => ' канал для вашего тестового сообщения и не забудьте нажать СОХРАНИТЬ ниже, чтобы сохранить ваши настройки.',
+        '500' => 'Ошибка сервера 500.',
+        'error' => 'Что-то пошло не так. Slack ответил: :error_message',
+        'error_misc' => 'Что-то пошло не так. :( ',
     ]
 ];

@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => 'Nid yw\'r model yn bodoli.',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Mae\'r model yma wedi perthnasu hefo un neu mwy o asedau. Fydd rhaid dileu\'r asedau ac yna trio eto. ',
 
 

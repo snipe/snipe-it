@@ -519,7 +519,17 @@
                     </div>
                     @endif
 
-                     <!-- login enabled -->
+                    <!-- login enabled -->
+                    <div class="row">
+                      <div class="col-md-3">
+                        {{ trans('admin/users/general.vip_label') }}
+                      </div>
+                      <div class="col-md-9">
+                        {!! ($user->vip=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                      </div>
+                    </div> 
+                    
+                    <!-- login enabled -->
                      <div class="row">
                       <div class="col-md-3">
                         {{ trans('admin/users/general.remote') }}
@@ -868,13 +878,15 @@
 
                             </td>
                             <td>
-                                @if ($file->filename)
-                                    @if ((Storage::exists('private_uploads/users/'.$file->filename)) && ( Helper::checkUploadIsImage($file->get_src('users'))))
+                                @if (($file->filename) && (Storage::exists('private_uploads/users/'.$file->filename)))
+                                   @if (Helper::checkUploadIsImage($file->get_src('users')))
                                         <a href="{{ route('show/userfile', ['userId' => $user->id, 'fileId' => $file->id, 'download' => 'false']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show/userfile', ['userId' => $user->id, 'fileId' => $file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
                                     @else
-                                        <i class="fa fa-times text-danger" aria-hidden="true"></i>
-                                        {{ trans('general.file_not_found') }}
+                                        {{ trans('general.preview_not_available') }}
                                     @endif
+                                @else
+                                    <i class="fa fa-times text-danger" aria-hidden="true"></i>
+                                        {{ trans('general.file_not_found') }}
                                 @endif
                             </td>
                             <td>
@@ -891,7 +903,7 @@
                             </td>
                             <td>
                                 @if ($file->filename)
-                                    @if ((Storage::exists('private_uploads/users/'.$file->filename)) && ( Helper::checkUploadIsImage($file->get_src('users'))))
+                                    @if (Storage::exists('private_uploads/users/'.$file->filename))
                                         <a href="{{ route('show/userfile', [$user->id, $file->id]) }}" class="btn btn-default">
                                             <i class="fas fa-download" aria-hidden="true"></i>
                                             <span class="sr-only">{{ trans('general.download') }}</span>

@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'قم بتسجيل الدخول إلى التثبيت الجديد من Snipe-IT باستخدام البيانات أدناه:',
     'login' => 'تسجيل الدخول:',
     'Low_Inventory_Report' => 'تقرير المخزون المنخفض',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'دقيقة الكمية',
     'name' => 'اسم',
     'new_item_checked' => 'تم فحص عنصر جديد تحت اسمك، التفاصيل أدناه.',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'تذكير: تاريخ تحقق :name يقترب من الموعد النهائي',
     'Expected_Checkin_Date' => 'من المقرر أن يتم التحقق من الأصول التي تم إخراجها إليك في :date',
     'your_assets' => 'عرض الأصول الخاصة بك',
+    'rights_reserved' => 'All rights reserved.',
 ];

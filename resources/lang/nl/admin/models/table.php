@@ -7,7 +7,7 @@ return array(
     'eol'	 				=> 'EOL',
     'modelnumber'   		=> 'Model Nr.',
     'name'      			=> 'Asset model naam',
-    'numassets' 			=> 'Assets',
+    'numassets' 			=> 'Activa',
     'title'					=> 'Asset modellen',
     'update'				=> 'Wijzig asset model',
     'view'					=> 'Bekijk asset model',
