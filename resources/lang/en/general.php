@@ -403,6 +403,8 @@ return [
     'toggle_navigation'     => 'Toggle navigation',
     'alerts'                => 'Alerts',
     'tasks_view_all'        => 'View all tasks',
+    'true'                  => 'True',
+    'false'                 => 'False',
 
 
 
