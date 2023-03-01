@@ -24,7 +24,7 @@
             <div class="box">
                 <div class="box-body">
                     <div class="alert alert-warning">
-                        <strong>Warning</strong> Some Errors occurred while importing {{-- FIXME: hardcoded string --}}
+                        <strong>Warning</strong> Some Errors occurred while importing {{-- TODO: hardcoded string --}}
                     </div>
 
                     <div class="errors-table">
@@ -153,7 +153,7 @@
             },
             progress: function(e, data) {
                 @this.progress = parseInt((data.loaded / data.total * 100, 10));
-                @this.progress_message = @this.progress+'% Complete'; // FIXME - this should come from server (so it can be internationalized)
+                @this.progress_message = @this.progress+'% Complete'; // TODO - this should come from server (so it can be internationalized)
             },
             fail: function(e, data) {
                 @this.progress_bar_class = "progress-bar-danger";

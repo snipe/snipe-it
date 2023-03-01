@@ -106,7 +106,7 @@ class ImporterFile extends Component
     {
         $customFields = [];
         foreach($this->customFields AS $field) {
-            $customFields[$field->id] = $field->name;
+            $customFields[$field->db_column_name()] = $field->name;
         }
 
         switch($type) {
@@ -128,7 +128,7 @@ class ImporterFile extends Component
             default:
                 $results = self::$general;
         }
-        asort($results); // FIXME - this isn't sorting right yet.
+        asort($results, SORT_FLAG_CASE|SORT_STRING);
         return $results;
     }
 

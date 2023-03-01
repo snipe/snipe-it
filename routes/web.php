@@ -223,12 +223,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
 |
 */
 
-//Route::group(['prefix' => 'import', 'middleware' => ['auth']], function () {
-//    Route::get('/',
-//       [ImportsController::class, 'index']
-//    )->name('imports.index');
-//});
-
 Route::get('/import',
     \App\Http\Livewire\Importer::class
 )->middleware('auth')->name('imports.index');

@@ -62,7 +62,7 @@ class Importer extends Component
     {
         \Log::debug("Alert object received: ".print_r($obj,true));
         $this->message = $obj;
-        $this->message_type = "danger"; // FIXME - when does this get reset? Only when you click the 'x'?
+        $this->message_type = "danger";
     }
 
     public function toggleEvent($id)
@@ -80,12 +80,16 @@ class Importer extends Component
         foreach($this->files as $file) {
             \Log::debug("File id is: ".$file->id);
             if($id == $file->id) {
-                // FIXME - should I do a try/catch on this and use the file_delete_failure or whatever, if needed?
-                Storage::delete('imports/'.$file->file_path); // FIXME - last time I ran this, it *didn't* delete the file?!
-                $file->delete();
+                if(Storage::delete('private_uploads/imports/'.$file->file_path)) {
+                    $file->delete();
 
-                $this->message = trans('admin/hardware/message.import.file_delete_success');
-                $this->message_type = 'success';
+                    $this->message = trans('admin/hardware/message.import.file_delete_success');
+                    $this->message_type = 'success';
+                    return;
+                } else {
+                    $this->message = trans('admin/hardware/message.import.file_delete_error');
+                    $this->message_type = 'danger';
+                }
             }
         }
     }
