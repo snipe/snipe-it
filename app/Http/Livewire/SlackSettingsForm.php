@@ -8,56 +8,74 @@ use App\Models\Setting;
 
 class SlackSettingsForm extends Component
 {
-    public $slack_endpoint;
-    public $slack_channel;
-    public $slack_botname;
+    public $webhook_endpoint;
+    public $webhook_channel;
+    public $webhook_botname;
     public $isDisabled ='disabled' ;
-    public $integration_app= 'WORKING';
     public $webhook_link;
     public $webhook_selected;
-    public $webhook_options= ['Slack'=>'fab fa-slack', 'Discord'=>'fab fa-discord', 'Rocket.Chat'=>'fab fa-rocketchat'];
-    public $webhook;
+    public $webhook_options = array(
+        array(
+            "name" => 'Slack',
+            "icon" => 'fab fa-slack',
+            "placeholder" => "https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX",
+            "link" => 'https://api.slack.com/messaging/webhooks'
+        ),
+        array(
+            "name" => 'Discord',
+            "icon" => 'fab fa-discord',
+            "placeholder" => "https://discord.com/api/webhooks/XXXXXXXXXXXXXXXXXXXXX",
+            "link" => 'https://support.discord.com/hc/en-us/articles/360045093012-Server-Integrations-Page'
+        ),
+        array(
+            "name" => 'Rocket Chat',
+            "icon" => 'fab fa-rocketchat',
+            "placeholder" => "https://discord.com/api/webhooks/XXXXXXXXXXXXXXXXXXXXX",
+            "link" => '',
+        ),
+    );
+    public $keys;
     public $icon;
 
     public Setting $setting;
 
     protected $rules = [
-        'slack_endpoint'                      => 'url|required_with:slack_channel|starts_with:https://hooks.slack.com/|nullable',
-        'slack_channel'                       => 'required_with:slack_endpoint|starts_with:#|nullable',
-        'slack_botname'                       => 'string|nullable',
+        'webhook_endpoint'                      => 'url|required_with:slack_channel|starts_with:https://hooks.slack.com/|nullable',
+        'webhook_channel'                       => 'required_with:slack_endpoint|starts_with:#|nullable',
+        'webhook_botname'                       => 'string|nullable',
     ];
 
     public function mount(){
 
         $this->setting = Setting::getSettings();
-        $this->icon ='';
-        $this->webhook = $this->webhook_selected;
-        $this->slack_endpoint = $this->setting->slack_endpoint;
-        $this->slack_channel = $this->setting->slack_channel;
-        $this->slack_botname = $this->setting->slack_botname;
+        $this->webhook_endpoint = $this->setting->webhook_endpoint;
+        $this->webhook_channel = $this->setting->webhook_channel;
+        $this->webhook_botname = $this->setting->webhook_botname;
+//        $this->webhook_options = $this->setting->webhook_selected;lma
+        $this->keys = array_column($this->webhook_options, 'name');
+
 
     }
     public function updated($field){
-
-        $this->webhook = $this->webhook_selected;
+        $this->webhook_selected = $this->webhook_options;
         $this->validateOnly($field ,$this->rules);
     }
 
     public function render()
     {
-        if(empty($this->slack_channel || $this->slack_endpoint)){
+        if(empty($this->webhook_channel || $this->webhook_endpoint)){
             $this->isDisabled= 'disabled';
         }
-        if(empty($this->slack_endpoint && $this->slack_channel)){
+        if(empty($this->webhook_endpoint && $this->webhook_channel)){
             $this->isDisabled= '';
         }
         return view('livewire.slack-settings-form');
     }
 
-    public function testSlack(){
+    public function testWebhook(){
 
         $slack = new Client([
-            'base_url' => e($this->slack_endpoint),
+            'base_url' => e($this->webhook_endpoint),
             'defaults' => [
                 'exceptions' => false,
             ],
@@ -65,14 +83,14 @@ class SlackSettingsForm extends Component
 
         $payload = json_encode(
             [
-                'channel'    => e($this->slack_channel),
+                'channel'    => e($this->webhook_channel),
                 'text'       => trans('general.slack_test_msg'),
-                'username'    => e($this->slack_botname),
+                'username'    => e($this->webhook_botname),
                 'icon_emoji' => ':heart:',
             ]);
 
         try {
-            $slack->post($this->slack_endpoint, ['body' => $payload]);
+            $slack->post($this->webhook_endpoint, ['body' => $payload]);
             $this->isDisabled='';
             return session()->flash('success' , 'Your Slack Integration works!');
 
@@ -91,9 +109,10 @@ class SlackSettingsForm extends Component
     {
         $this->validate($this->rules);
 
-        $this->setting->slack_endpoint = $this->slack_endpoint;
-        $this->setting->slack_channel = $this->slack_channel;
-        $this->setting->slack_botname = $this->slack_botname;
+        $this->setting->webhook_options = $this->webhook_options;
+        $this->setting->webhook_endpoint = $this->webhook_endpoint;
+        $this->setting->webhook_channel = $this->webhook_channel;
+        $this->setting->webhook_botname = $this->webhook_botname;
 
         $this->setting->save();
 
