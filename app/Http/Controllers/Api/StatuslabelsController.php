@@ -196,6 +196,7 @@ class StatuslabelsController extends Controller
     {
         $this->authorize('view', Statuslabel::class);
         $statuslabels = Statuslabel::withCount('assets')->get();
+        $total = Array();
 
         foreach ($statuslabels as $statuslabel) {
 
