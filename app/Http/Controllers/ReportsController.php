@@ -284,7 +284,7 @@ class ReportsController extends Controller
 
                     $row = [
                         $actionlog->created_at,
-                        ($actionlog->user) ? e($actionlog->user->getFullNameAttribute()) : '',
+                        ($actionlog->admin) ? e($actionlog->admin->getFullNameAttribute()) : '',
                         $actionlog->present()->actionType(),
                         e($actionlog->itemType()),
                         ($actionlog->itemType() == 'user') ? $actionlog->filename : $item_name,
