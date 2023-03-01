@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => 'Model nie istnieje.',
+    'no_association' => 'Żaden nie został przypisany.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Ten model jest przypisany do minim jednego aktywa i nie może być usunięty. Proszę usunąć aktywa, a następnie spróbować ponownie. ',
 
 

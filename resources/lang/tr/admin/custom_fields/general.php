@@ -27,6 +27,9 @@ return [
     'used_by_models'   		    => 'Modellerle Kullanılmıştır',
     'order'   		            => 'Sipariş',
     'create_fieldset'         => 'Yeni alan kümesi',
+    'update_fieldset'         => 'Fieldset\'i güncelle',
+    'fieldset_does_not_exist'   => 'Fieldset :id yok',
+    'fieldset_updated'         => 'Fieldset güncellendi',
     'create_fieldset_title' => 'Yeni bir alan kümesi oluştur',
     'create_field'            => 'Yeni özel alan',
     'create_field_title' => 'Yeni bir özel alan oluştur',
@@ -44,6 +47,6 @@ return [
     'db_convert_warning' => 'UYARI. Bu alan, özel alanlar tablosunda <code>:db_column</code> olarak bulunur, ancak <code>:expected</code> olmalıdır.',
     'is_unique' => 'Bu değer tüm varlıklarda benzersiz olmalıdır',
     'unique' => 'Benzersiz',
-    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
-    'display_in_user_view_table' => 'Visible to User',
+    'display_in_user_view' => 'Teslim alınan kullanıcının bu değerleri Atanan Varlıkları Görüntüle sayfasında görüntülemesine izin ver',
+    'display_in_user_view_table' => 'Kullanıcı tarafından görülebilir',
 ];

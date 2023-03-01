@@ -305,7 +305,7 @@
 
 
                     @if  ($model->deleted_at!='')
-                        <li><br /><a href="{{ route('restore/model', $model->id) }}" class="btn-flat large info ">{{ trans('admin/models/general.restore') }}</a></li>
+                        <li><br /><a href="{{ route('models.restore.store', $model->id) }}" class="btn-flat large info ">{{ trans('admin/models/general.restore') }}</a></li>
                     @endif
                 </ul>
 

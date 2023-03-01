@@ -2,7 +2,7 @@
 
 return [
     'acceptance_asset_accepted' => 'Un usuario ha aceptado un artículo',
-    'acceptance_asset_declined' => 'A user has declined an item',
+    'acceptance_asset_declined' => 'Un usuario ha rechazado un artículo',
     'a_user_canceled' => 'El usuario ha cancelado el item solicitado en la pagina Web',
     'a_user_requested' => 'Un usuario a solicitado un item en la pagina Web',
     'accessory_name' => 'Nombre de accesorio:',
@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Inicie sesión en su nueva instalación de Snipe-IT con las credenciales siguientes:',
     'login' => 'Entrar:',
     'Low_Inventory_Report' => 'Reporte de inventario bajo',
+    'inventory_report' => 'Reporte de Inventario',
     'min_QTY' => 'Cantidad mínima',
     'name' => 'Nombre',
     'new_item_checked' => 'Un nuevo artículo se ha extraído bajo su nombre, los detalles están a continuación.',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Recordatorio: :name se acerca la fecha de devolución',
     'Expected_Checkin_Date' => 'Un activo asignado a ti debe ser devuelto en :date',
     'your_assets' => 'Ver tus activos',
+    'rights_reserved' => 'Todos los derechos reservados.',
 ];

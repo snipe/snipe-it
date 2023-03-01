@@ -43,6 +43,7 @@ return [
     'login_first_admin' => '아래의 자격 증명을 사용하여 새 Snipe-IT 설치본에 로그인 하세요:',
     'login' => '로그인:',
     'Low_Inventory_Report' => '재고 부족 보고서',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => '최소 수량',
     'name' => '이름',
     'new_item_checked' => '당신의 이름으로 새 품목이 반출 되었습니다, 이하는 상세입니다.',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'your_assets' => '자산 확인',
+    'rights_reserved' => 'All rights reserved.',
 ];

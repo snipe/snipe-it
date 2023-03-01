@@ -114,23 +114,24 @@ return [
     |
     */
 
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
-
     'custom' => [
         'alpha_space' => 'The :attribute field contains a character that is not allowed.',
         'email_array'      => 'One or more email addresses is invalid.',
         'hashed_pass'      => 'Your current password is incorrect',
         'dumbpwd'          => 'That password is too common.',
         'statuslabel_type' => 'You must select a valid status label type',
+
+        // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
+        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // people won't know how to format. 
+        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
+        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
+        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+
     ],
 
     /*

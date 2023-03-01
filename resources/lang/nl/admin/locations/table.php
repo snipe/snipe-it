@@ -3,8 +3,8 @@
 return [
     'about_locations_title'     => 'Over locaties',
     'about_locations'           => 'Locaties worden gebruikt om de locatie van gebruikers, materiaal en overige items bij te houden',
-    'assets_rtd'                => 'Assets', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
-    'assets_checkedout'         => 'Toegewezen assets',
+    'assets_rtd'                => 'Activa', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
+    'assets_checkedout'         => 'Toegewezen activa',
     'id'                        => 'ID',
     'city'                      => 'Stad',
     'state'                     => 'Staat/provincie',
@@ -23,7 +23,7 @@ return [
     'user_name'                 => 'Gebruiksnaam',
     'department'                => 'Afdeling',
     'location'                  => 'Locatie',
-    'asset_tag'                 => 'Assets Tag',
+    'asset_tag'                 => 'Activalabel',
     'asset_name'                => 'Naam',
     'asset_category'            => 'Categorie',
     'asset_manufacturer'        => 'Fabrikant',

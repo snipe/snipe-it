@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Šis pamatlīdzeklis ir izdzēsts.',
     'edit'  					=> 'Rediģēt īpašumu',
     'model_deleted'  			=> 'Šis pamatlīdzekļu modelis ir dzēsts. Jums ir jāatjauno modelis pirms drīkstiet atjaunot pamatlīdzekli.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Pieļaujams',
     'requested'				    => 'Pieprasīts',
     'not_requestable'           => 'Nav pieprasāms',

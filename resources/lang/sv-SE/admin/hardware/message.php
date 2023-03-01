@@ -48,6 +48,8 @@ return [
         'success'               => 'Din fil har importerats',
         'file_delete_success'   => 'Din fil har tagits bort',
         'file_delete_error'      => 'Filen kunde inte raderas',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
 
 

@@ -7,7 +7,7 @@ return array(
     'assoc_assets'	 => 'המיקום משויך לפחות לפריט אחד ולכן לא ניתן למחוק אותו. אנא עדכן את הפריטים כך שלא יהיה אף פריט משויך למיקום זה ונסה שנית. ',
     'assoc_child_loc'	 => 'למיקום זה מוגדרים תתי-מיקומים ולכן לא ניתן למחוק אותו. אנא עדכן את המיקומים כך שלא שמיקום זה לא יכיל תתי מיקומים ונסה שנית. ',
     'assigned_assets' => 'Assigned Assets',
-    'current_location' => 'Current Location',
+    'current_location' => 'מיקום נוכחי',
 
 
     'create' => array(

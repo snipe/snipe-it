@@ -38,6 +38,7 @@ return [
         'success_pt1' => 'チェックに成功 ',
         'success_pt2' => ' テストメッセージのチャンネルで、設定を保存するには以下の「保存」をクリックしてください。',
         '500' => '500 Server Error.',
-        'error' => '問題が発生しました。',
+        'error' => 'Something went wrong. Slack responded with: :error_message',
+        'error_misc' => 'Something went wrong. :( ',
     ]
 ];

@@ -33,7 +33,7 @@ class CustomFieldsetsController extends Controller
      */
     public function index()
     {
-        $this->authorize('index', CustomFieldset::class);
+        $this->authorize('index', CustomField::class);
         $fieldsets = CustomFieldset::withCount('fields as fields_count', 'models as models_count')->get();
 
         return (new CustomFieldsetsTransformer)->transformCustomFieldsets($fieldsets, $fieldsets->count());
@@ -49,7 +49,7 @@ class CustomFieldsetsController extends Controller
      */
     public function show($id)
     {
-        $this->authorize('view', CustomFieldset::class);
+        $this->authorize('view', CustomField::class);
         if ($fieldset = CustomFieldset::find($id)) {
             return (new CustomFieldsetsTransformer)->transformCustomFieldset($fieldset);
         }
@@ -68,7 +68,7 @@ class CustomFieldsetsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('update', CustomFieldset::class);
+        $this->authorize('update', CustomField::class);
         $fieldset = CustomFieldset::findOrFail($id);
         $fieldset->fill($request->all());
 
@@ -89,7 +89,7 @@ class CustomFieldsetsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('create', CustomFieldset::class);
+        $this->authorize('create', CustomField::class);
         $fieldset = new CustomFieldset;
         $fieldset->fill($request->all());
 
@@ -109,7 +109,7 @@ class CustomFieldsetsController extends Controller
      */
     public function destroy($id)
     {
-        $this->authorize('delete', CustomFieldset::class);
+        $this->authorize('delete', CustomField::class);
         $fieldset = CustomFieldset::findOrFail($id);
 
         $modelsCount = $fieldset->models->count();
@@ -136,7 +136,7 @@ class CustomFieldsetsController extends Controller
      */
     public function fields($id)
     {
-        $this->authorize('view', CustomFieldset::class);
+        $this->authorize('view', CustomField::class);
         $set = CustomFieldset::findOrFail($id);
         $fields = $set->fields;
 
@@ -153,7 +153,7 @@ class CustomFieldsetsController extends Controller
      */
     public function fieldsWithDefaultValues($fieldsetId, $modelId)
     {
-        $this->authorize('view', CustomFieldset::class);
+        $this->authorize('view', CustomField::class);
 
         $set = CustomFieldset::findOrFail($fieldsetId);
 

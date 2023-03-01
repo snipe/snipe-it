@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => 'Tokio modelio nėra.',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Šis modelis šiuo metu susietas su daugiau nei vienu įrangos vientu ir negali būti ištrintas. Prašome ištrinkite įrangą ir tuomet bandykite trinti iš naujo. ',
 
 

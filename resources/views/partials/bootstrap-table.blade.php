@@ -327,8 +327,8 @@
                 item_icon = '';
             }
 
-            // display the username if it's checked out to a user
-            if (value.username) {
+            // display the username if it's checked out to a user, but don't do it if the username's there already
+            if (value.username && !value.name.match('\\(') && !value.name.match('\\)')) {
                 value.name = value.name + ' (' + value.username + ')';
             }
 
@@ -570,9 +570,9 @@
 
     function trueFalseFormatter(value) {
         if ((value) && ((value == 'true') || (value == '1'))) {
-            return '<i class="fas fa-check text-success"></i>';
+            return '<i class="fas fa-check text-success"></i><span class="sr-only">{{ trans('general.true') }}</span>';
         } else {
-            return '<i class="fas fa-times text-danger"></i>';
+            return '<i class="fas fa-times text-danger"></i><span class="sr-only">{{ trans('general.false') }}</span>';
         }
     }
 

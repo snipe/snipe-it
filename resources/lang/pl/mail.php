@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_accepted' => 'Użytkownik zaakceptował zasób',
     'acceptance_asset_declined' => 'Użytkownik odrzucił zasób',
     'a_user_canceled' => 'Użytkownik anulował zapotrzebowanie na sprzęt na stronie www',
     'a_user_requested' => 'Użytkownik zamówił pozycję na stronie internetowej',
@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Zaloguj się do aplikacji Snipe-IT przy użyciu poniższych poświadczeń:',
     'login' => 'Login:',
     'Low_Inventory_Report' => 'Raport niskiego stanu zasobów',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Min. ilość',
     'name' => 'Nazwa',
     'new_item_checked' => 'Nowy przedmiot przypisany do Ciebie został zwrócony, szczegóły poniżej.',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Przypomnienie: :name sprawdza termin zbliżający się',
     'Expected_Checkin_Date' => 'Zasób przypisany Tobie ma być zwrócony w dniu :date',
     'your_assets' => 'Zobacz swój sprzęt',
+    'rights_reserved' => 'Wszystkie prawa zastrzeżone.',
 ];

@@ -29,6 +29,9 @@ return [
     'used_by_models'   		    => 'استفاده شده توسط مدل ها',
     'order'   		            => 'سفارش',
     'create_fieldset'         => 'تنظیمات فیلد جدید',
+    'update_fieldset'         => 'Update Fieldset',
+    'fieldset_does_not_exist'   => 'Fieldset :id does not exist',
+    'fieldset_updated'         => 'Fieldset updated',
     'create_fieldset_title' => 'ایجاد یک عنصر جدید',
     'create_field'            => 'فیلد سفارشی جدید',
     'create_field_title' => 'یک فیلد سفارشی جدید ایجاد کنید

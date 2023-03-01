@@ -9,9 +9,18 @@
 ## {{ $assets->count() }} {{ trans('general.assets') }}
 
 <table width="100%">
-<tr><th align="left">{{ trans('mail.name') }} </th><th align="left">{{ trans('mail.asset_tag') }}</th><th align="left">{{ trans('admin/hardware/table.serial') }}</th></tr>
+    <tr><th align="left">{{ trans('mail.name') }} </th><th align="left">{{ trans('mail.asset_tag') }}</th><th align="left">{{ trans('admin/hardware/table.serial') }}</th> <th></th> </tr>
 @foreach($assets as $asset)
-<tr><td>{{ $asset->present()->name }}</td><td> {{ $asset->asset_tag }} </td><td> {{ $asset->serial }} </td></tr>
+<tr>
+    <td>{{ $asset->present()->name }}</td>
+    <td> {{ $asset->asset_tag }} </td>
+    <td> {{ $asset->serial }} </td>
+    @if (($snipeSettings->show_images_in_email =='1') && $asset->getImageUrl())
+    <td>
+        <img src="{{ asset($asset->getImageUrl()) }}" alt="Asset" style="max-width: 64px;">
+    </td>
+    @endif
+</tr>
 @endforeach
 </table>
 @endif
@@ -20,9 +29,16 @@
 ## {{ $accessories->count() }} {{ trans('general.accessories') }}
 
 <table width="100%">
-<tr><th align="left">{{ trans('mail.name') }} </th></tr>
+    <tr><th align="left">{{ trans('mail.name') }} </th> <th></th> </tr>
 @foreach($accessories as $accessory)
-<tr><td>{{ $accessory->name }}</td></tr>
+<tr>
+    <td>{{ $accessory->name }}</td>
+    @if (($snipeSettings->show_images_in_email =='1') && $accessory->getImageUrl())
+    <td>
+        <img src="{{ asset($accessory->getImageUrl()) }}" alt="Accessory" style="max-width: 64px;">
+    </td>
+    @endif
+</tr>
 @endforeach
 </table>
 @endif
@@ -31,9 +47,11 @@
 ## {{ $licenses->count() }} {{ trans('general.licenses') }}
 
 <table width="100%">
-<tr><th align="left"{{ trans('mail.name') }} </th></tr>
+<tr><th align="left">{{ trans('mail.name') }} </th></tr>
 @foreach($licenses as $license)
-<tr><td>{{ $license->name }}</td></tr>
+<tr>
+    <td>{{ $license->name }}</td>
+</tr>
 @endforeach
 </table>
 @endif

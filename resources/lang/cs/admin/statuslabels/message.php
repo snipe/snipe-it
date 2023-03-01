@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'Tyto prostředky nelze nikomu přiřadit.',
-        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
+        'deployable'   => 'Tento majetek může být vydán. Jakmile je přiřazen, změní se jeho status na <i class="fas fa-circle text-blue"></i> <strong>Vydáno</strong>.',
         'archived'   => 'Tyto prostředky nelze odhlásit a zobrazí se pouze v zobrazení Archivováno. To je užitečné pro uchovávání informací o prostředcích pro účely rozpočtování / historických účelů, ale jejich uchování mimo denní seznam aktiv.',
         'pending'   => 'Tento majetek zatím nemůže být přiřazen nikomu, často používanému pro položky, které jsou určeny k opravě, ale očekává se, že se vrátí do oběhu.',
     ],

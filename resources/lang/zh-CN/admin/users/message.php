@@ -15,7 +15,7 @@ return array(
     'password_resets_sent'      => '被选中的已激活并拥有有效电子邮件地址的用户已经收到了一个密码重置链接。',
     'password_reset_sent'       => '密码重置链接已发送至 :email!',
     'user_has_no_email'         => '此用户的个人资料中没有电子邮件地址。',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'user_has_no_assets_assigned'   => '此用户没有分配任何资产',
 
 
     'success' => array(
@@ -61,7 +61,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => '此用户没有设置电子邮件。',
+        'success' => '已通知用户其当前库存。'
     )
 );

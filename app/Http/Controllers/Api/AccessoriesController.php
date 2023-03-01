@@ -26,7 +26,10 @@ class AccessoriesController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('view', Accessory::class);
+        if ($request->user()->cannot('reports.view')) {
+            $this->authorize('view', Accessory::class);
+        }
+
 
         // This array is what determines which fields should be allowed to be sorted on ON the table itself, no relations
         // Relations will be handled in query scopes a little further down.
@@ -41,10 +44,13 @@ class AccessoriesController extends Controller
                 'min_amt',
                 'company_id',
                 'notes',
+                'users_count',
+                'qty',
             ];
 
 
-        $accessories = Accessory::select('accessories.*')->with('category', 'company', 'manufacturer', 'users', 'location', 'supplier');
+        $accessories = Accessory::select('accessories.*')->with('category', 'company', 'manufacturer', 'users', 'location', 'supplier')
+                                ->withCount('users as users_count');
 
         if ($request->filled('search')) {
             $accessories = $accessories->TextSearch($request->input('search'));

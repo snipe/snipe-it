@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => 'Model bestaan ​​nie.',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Hierdie model word tans geassosieer met een of meer bates en kan nie verwyder word nie. Verwyder asseblief die bates en probeer dan weer uitvee.',
 
 

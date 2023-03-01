@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Login to your new Snipe-IT installation using the credentials below:',
     'login' => 'Login:',
     'Low_Inventory_Report' => 'Low Inventory Report',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Min QTY',
     'name' => 'Name',
     'new_item_checked' => 'A new item has been checked out under your name, details are below.',
@@ -79,4 +80,5 @@ return [
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'your_assets' => 'View Your Assets',
+    'rights_reserved' => 'All rights reserved.',
 ];

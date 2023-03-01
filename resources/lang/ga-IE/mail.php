@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Logáil isteach i do shuiteáil Snipe-IT nua ag baint úsáide as na dintiúir thíos:',
     'login' => 'Logáil isteach:',
     'Low_Inventory_Report' => 'Tuarascáil Fardal Íseal',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Min QTY',
     'name' => 'Ainm',
     'new_item_checked' => 'Rinneadh mír nua a sheiceáil faoi d\'ainm, tá na sonraí thíos.',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'your_assets' => 'View Your Assets',
+    'rights_reserved' => 'All rights reserved.',
 ];

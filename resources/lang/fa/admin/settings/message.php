@@ -50,6 +50,7 @@ return [
         'success_pt2' => 'برای پیام آزمایشی خود کانال را ارسال کنید و حتماً برای ذخیره تنظیمات خود روی ذخیره در زیر کلیک کنید.
 ',
         '500' => 'خطای سرور',
-        'error' => 'مشکلی پیش آمده.',
+        'error' => 'Something went wrong. Slack responded with: :error_message',
+        'error_misc' => 'Something went wrong. :( ',
     ]
 ];

@@ -49,6 +49,8 @@ return [
         'success'               => 'Το αρχείο σας έχει εισαχθεί',
         'file_delete_success'   => 'Το αρχείο σας έχει διαγραφεί με επιτυχία',
         'file_delete_error'      => 'Το αρχείο δεν μπόρεσε να διαγραφεί',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
 
 

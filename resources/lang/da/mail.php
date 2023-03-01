@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Log ind på din nye Snipe-IT-installation ved hjælp af nedenstående referencer:',
     'login' => 'Log på:',
     'Low_Inventory_Report' => 'Lav lagerrapport',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Min QTY',
     'name' => 'Navn',
     'new_item_checked' => 'En ny vare er blevet tjekket ud under dit navn, detaljerne er nedenfor.',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Påmindelse: :name checkin deadline nærmer sig',
     'Expected_Checkin_Date' => 'Et asset tjekket ud til dig skal tjekkes tilbage den :date',
     'your_assets' => 'Se dine assets',
+    'rights_reserved' => 'All rights reserved.',
 ];

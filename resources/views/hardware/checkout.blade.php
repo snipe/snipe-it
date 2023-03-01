@@ -26,6 +26,16 @@
                     </div>
                     <div class="box-body">
                     {{csrf_field()}}
+                        @if ($asset->company && $asset->company->name)
+                            <div class="form-group">
+                                {{ Form::label('model', trans('general.company'), array('class' => 'col-md-3 control-label')) }}
+                                <div class="col-md-8">
+                                    <p class="form-control-static">
+                                        {{ $asset->company->name }}
+                                    </p>
+                                </div>
+                            </div>
+                        @endif
                     <!-- AssetModel name -->
                         <div class="form-group">
                             {{ Form::label('model', trans('admin/hardware/form.model'), array('class' => 'col-md-3 control-label')) }}
@@ -33,11 +43,10 @@
                                 <p class="form-control-static">
                                     @if (($asset->model) && ($asset->model->name))
                                         {{ $asset->model->name }}
-
                                     @else
                                         <span class="text-danger text-bold">
-                  <i class="fas fa-exclamation-triangle"></i>This asset's model is invalid!
-                  The asset <a href="{{ route('hardware.edit', $asset->id) }}">should be edited</a> to correct this before attempting to check it in or out.</span>
+                  <i class="fas fa-exclamation-triangle"></i>{{ trans('admin/hardware/general.model_invalid')}}
+                  <a href="{{ route('hardware.edit', $asset->id) }}"></a> {{ trans('admin/hardware/general.model_invalid_fix')}}</span>
                                     @endif
                                 </p>
                             </div>
