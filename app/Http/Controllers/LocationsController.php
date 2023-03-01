@@ -250,7 +250,6 @@ class LocationsController extends Controller
 
         // unset these values
         $location->id = null;
-        $location->name = null;
         $location->image = null;
 
         return view('locations/edit')
