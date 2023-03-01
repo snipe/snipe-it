@@ -127,9 +127,6 @@
     "sort-packages": true,
     "optimize-autoloader": true,
     "discard-changes": true,
-    "process-timeout": 3000,
-    "allow-plugins": {
-      "dealerdirect/phpcodesniffer-composer-installer": true
-    }
+    "process-timeout": 3000
   }
 }
