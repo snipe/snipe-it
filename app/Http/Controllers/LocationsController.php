@@ -232,7 +232,7 @@ class LocationsController extends Controller
      * Returns a view that presents a form to clone a location.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param int $licenseId
+     * @param int $locationId
      * @since [v6.0.14]
      * @return View
      */
@@ -247,6 +247,8 @@ class LocationsController extends Controller
         }
 
         $location = clone $location_to_clone;
+
+        // unset these values
         $location->id = null;
         $location->name = null;
         $location->image = null;
