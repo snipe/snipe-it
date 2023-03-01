@@ -227,6 +227,35 @@ class LocationsController extends Controller
 
     }
 
+
+    /**
+     * Returns a view that presents a form to clone a location.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $licenseId
+     * @since [v6.0.14]
+     * @return View
+     */
+    public function getClone($licenseId = null)
+    {
+        // Check if the asset exists
+        if (is_null($location_to_clone = Location::find($licenseId))) {
+            // Redirect to the asset management page
+            return redirect()->route('licenses.index')->with('error', trans('admin/locations/message.does_not_exist'));
+        }
+
+        $this->authorize('create', $location_to_clone);
+
+        $location = clone $location_to_clone;
+        $location->id = null;
+        $location->name = null;
+        $location->image = null;
+
+        return view('locations/edit')
+            ->with('item', $location);
+    }
+
+
     public function print_all_assigned($id)
     {
         if ($location = Location::where('id', $id)->first()) {

@@ -40,12 +40,9 @@ Route::group(['middleware' => 'auth'], function () {
         'parameters' => ['category' => 'category_id'],
     ]);
 
-    /*
-    * Locations
-    */
-    Route::resource('locations', LocationsController::class, [
-        'parameters' => ['location' => 'location_id'],
-    ]);
+    Route::get('locations/{locationId}/clone',
+        [LocationsController::class, 'getClone']
+    )->name('clone/license');
 
     Route::get(
         'locations/{locationId}/printassigned',
@@ -56,6 +53,17 @@ Route::group(['middleware' => 'auth'], function () {
         'locations/{locationId}/printallassigned',
         [LocationsController::class, 'print_all_assigned']
     )->name('locations.print_all_assigned');
+
+    /*
+    * Locations
+    */
+    Route::resource('locations', LocationsController::class, [
+        'parameters' => ['location' => 'location_id'],
+    ]);
+
+
+
+
 
     /*
     * Manufacturers
