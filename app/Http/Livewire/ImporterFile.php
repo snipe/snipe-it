@@ -11,10 +11,8 @@ use Log;
 class ImporterFile extends Component
 {
     public $activeFile; //this gets automatically populated on instantiation
-    public $customFields;
     public $importTypes;
     public $columnOptions;
-    public $increment; // just used to force refreshes - and doesn't really work anyways
     public $statusType;
     public $statusText;
     public $update;
@@ -24,18 +22,15 @@ class ImporterFile extends Component
 
     protected $rules = [
         'activeFile.import_type' => 'string',
-        'activeFile.field_map' => 'array', //this doesn't work because I think we would have to list all the keys?
-        // 'activeFile.field_map.*' => 'string', // FIXME - can we do this?
+        'activeFile.field_map' => 'array',
         'activeFile.header_row' => 'array',
         'field_map' => 'array'
     ];
 
-//    protected $listeners = ['refreshComponent' => '$refresh'];
 
-    public function getDinglefartsProperty() // FIXME (and probably not even used at this point :(((
+    public function generate_field_map()
     {
         $tmp = array_combine($this->activeFile->header_row, $this->field_map);
-        \Log::error("tmp is: ".print_r($tmp,true));
         return json_encode($tmp);
     }
 
@@ -107,7 +102,7 @@ class ImporterFile extends Component
         'country' => 'Country',
     ];
 
-    private function getColumns($type) //maybe static?
+    private function getColumns($type)
     {
         $customFields = [];
         foreach($this->customFields AS $field) {
@@ -149,21 +144,19 @@ class ImporterFile extends Component
             'license' =>    'Licenses',
             'user' =>       'Users'
         ];
-//        Log::error("import types: ".print_r($this->importTypes,true));
 
-        $columnOptions = []; // FIXME - should this be $this->>columnOptions?
         $this->columnOptions[''] = $this->getColumns(''); //blank mode? I don't know what this is supposed to mean
         foreach($this->importTypes AS $type => $name) {
             $this->columnOptions[$type] = $this->getColumns($type);
         }
         $this->increment = 0;
-        $this->field_map = array_values($this->activeFile->field_map);
+        $this->field_map = $this->activeFile->field_map ? array_values($this->activeFile->field_map): [];
     }
 
     public function postSave()
     {
         if (!$this->activeFile->import_type) {
-            Log::info("didn't find an import type :(");
+            Log::error("didn't find an import type :(");
             $this->statusType ='error';
             $this->statusText = "An import type is required... "; // TODO - translate me!
             return false;
@@ -173,14 +166,8 @@ class ImporterFile extends Component
 
     }
 
-    public function changeTypes() // UNUSED?
-    {
-        Log::error("type changed!");
-    }
-
     public function render()
     {
-        //\Log::error("Rendering! And here's the value for mappings: ".print_r($this->mappings,true));
         return view('livewire.importer-file');
     }
 }
