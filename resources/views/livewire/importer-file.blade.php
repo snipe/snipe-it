@@ -94,7 +94,7 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-2 text-right" style="padding-top: 20px;">
                 <button type="button" class="btn btn-sm btn-default" wire:click="$emit('hideDetails')">Cancel</button>
-                <button type="submit" class="btn btn-sm btn-primary" id="import" wire:click="postSave">Import</button>
+                <button type="submit" class="btn btn-sm btn-primary" id="import">Import</button>
                 <br><br>
             </div>
         </div><!-- /div row -->
@@ -114,7 +114,57 @@
   </tr>
 {{-- </template> --}}
 <script>
-$(function () {
+    $('#import').on('click', function () {
+        console.log('saving');
+        console.log(@this.activeFile.import_type);
+        if(!@this.activeFile.import_type) {
+            @this.statusType='error';
+            @this.statusText= "An import type is required... ";
+            return;
+        }
+        @this.statusType='pending';
+        @this.statusText = "Processing...";
+        @this.getDinglefartsProperty().then(function (mappings_raw) {
+            var mappings = JSON.parse(mappings_raw)
+            console.warn("Here is the mappings:")
+            console.dir(mappings)
+            $.post({
+                url: "{{ route('api.imports.importFile', $activeFile->id) }}",
+                data: {
+                    'import-update': !!@this.update,
+                    'send-welcome': !!@this.send_welcome,
+                    'import-type': @this.activeFile.import_type,
+                    'run-backup': !!@this.run_backup,
+                    'column-mappings': mappings // THE HARD PART.
+                },
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                }
+            }).done( function (body) {
+                // Success
+                @this.statusType="success";
+                @this.statusText = "Success... Redirecting.";
+                console.dir(body)
+                window.location.href = body.messages.redirect_url;
+            }).fail( function (jqXHR, textStatus, error) {
+                // Failure
+                var body = jqXHR.responseJSON
+                if(body.status == 'import-errors') {
+                    @this.emit('importError', body.messages);
+                    @this.statusType='error';
+                    @this.statusText = "Error";
+                } else {
+                    console.warn("Not import-errors, just regular errors")
+                    console.dir(body)
+                    @this.emit('alert', body.error)
+                }
+                @this.emit('hideDetails') // emit something ?
+            });
+        })
+        return false;
+    });
+
+    $(function () {
     console.warn("Setting iCheck callbacks!")
     $('.iCheck').on('ifToggled', function (event) {
         console.warn("iCheck checked!")

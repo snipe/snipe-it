@@ -30,10 +30,11 @@ class Importer extends Component
         'files.*.filesize' => 'required|integer'
     ];
 
-    protected $listeners = ['hideDetails' => 'hideDetails', 'importError' => 'importError'];
+    protected $listeners = ['hideDetails' => 'hideDetails', 'importError' => 'importError', 'alert' => 'alert'];
 
     public function mount()
     {
+        //$this->authorize('import'); // FIXME - gotta do this somewhere!!!!!
         //$this->files = Import::all(); // this *SHOULD* be how it works, but...it doesn't? (note orderBy/get, below)
         //$this->forcerefresh = 0;
         $this->progress = -1; // '-1' means 'don't show the progressbar'
@@ -50,6 +51,13 @@ class Importer extends Component
         \Log::info("Errors fired!!!!");
         \Log::info(" Here they are...".print_r($errors,true));
         $this->import_errors = $errors;
+    }
+
+    public function alert($obj)
+    {
+        \Log::info("Alert object received: ".print_r($obj,true));
+        $this->message = $obj;
+        $this->message_type = "danger"; // FIXME - when does this get reset? Only when you click the 'x'?
     }
 
     public function toggleEvent($id)
@@ -84,6 +92,12 @@ class Importer extends Component
     public function render()
     {
         $this->files = Import::orderBy('id','desc')->get(); //HACK - slows down renders.
-        return view('livewire.importer');
+        return view('livewire.importer')
+                ->extends('layouts.default')
+                ->section('content')
+                ->layoutData(['title', trans('general.import')]); /*     return view('livewire.show-posts')
+4        ->layout('layouts.base', ['title' => 'Show Posts'])
+            ->section('body') // or whatever?
+5        */
     }
 }

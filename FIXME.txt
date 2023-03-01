@@ -8,8 +8,10 @@ X - (fixed somehow?!) The Livewire.first() thing is still dumb (but Id o'nt know
 
 X - Deletes need to work (I got this working before using $.ajax; it's not even hard)
 
-Then mapping and so on.
+X - Then mapping and so on.
 
-Can we potentially delete whatever that this.$http thing? Or is that some side-effect of Vue.js that we don't get for free? (yes, it was that)
+X - Can we potentially delete whatever that this.$http thing? Or is that some side-effect of Vue.js that we don't get for free? (yes, it was that)
 
-I suspect the Alert section is not yet wired up - but should be. Doesn't seem too hard?
+X - I suspect the Alert section is not yet wired up - but should be. Doesn't seem too hard?
+
+???? translations on the main import screen seem donked for some inexplicable reason? PRobably we newly-tranlsated them?

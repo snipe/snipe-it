@@ -1,3 +1,7 @@
+@section('title')
+    {{ trans('general.import') }}
+    @parent
+@stop
 <div id="not-app">
     {{-- <importer inline-template v-cloak> --}} {{-- like, this, here, that's a literal Vue directive --}}
         <div class="row">
@@ -22,7 +26,7 @@
             <div class="box">
                 <div class="box-body">
                     <div class="alert alert-warning">
-                        <strong>Warning</strong> Some Errors occured while importing
+                        <strong>Warning</strong> Some Errors occurred while importing {{-- FIXME: hardcoded string --}}
                     </div>
 
                     <div class="errors-table">
