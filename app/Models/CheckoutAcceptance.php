@@ -25,7 +25,10 @@ class CheckoutAcceptance extends Model
     {
         // At this point the endpoint is the same for everything.
         //  In the future this may want to be adapted for individual notifications.
-        return Setting::getSettings()->alert_email;
+        $recipients_string = explode(',', Setting::getSettings()->alert_email);
+        $recipients = array_map('trim', $recipients_string);
+
+        return array_filter($recipients);
     }
 
     /**
