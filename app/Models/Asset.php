@@ -114,6 +114,7 @@ class Asset extends Depreciable
         'serial'          => 'unique_serial|nullable',
         'purchase_cost'   => 'numeric|nullable|gte:0',
         'supplier_id'     => 'exists:suppliers,id|nullable',
+        'asset_eol_date'  => 'date|max:10|min:10|nullable',
     ];
 
   /**
@@ -143,9 +144,9 @@ class Asset extends Depreciable
         'last_checkout',
         'expected_checkin',
         'byod',
+        'asset_eol_date',
         'last_audit_date',
         'next_audit_date',
-
     ];
 
     use Searchable;
@@ -168,6 +169,7 @@ class Asset extends Depreciable
       'expected_checkin', 
       'next_audit_date', 
       'last_audit_date',
+      'asset_eol_date',
     ];
 
     /**
@@ -181,7 +183,7 @@ class Asset extends Depreciable
         'company'            => ['name'],
         'defaultLoc'         => ['name'],
         'location'           => ['name'],
-        'model'              => ['name', 'model_number'],
+        'model'              => ['name', 'model_number', 'eol'],
         'model.category'     => ['name'],
         'model.manufacturer' => ['name'],
     ];
