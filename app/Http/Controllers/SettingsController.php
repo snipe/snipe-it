@@ -116,7 +116,7 @@ class SettingsController extends Controller
         if (function_exists('posix_getpwuid')) { // Probably Linux
             $owner = posix_getpwuid(fileowner($_SERVER['SCRIPT_FILENAME']));
             // This *shouldn't* be boolean, but we've seen this in come chrooted environments
-            if (!is_bool($owner)) {
+            if (is_array($owner)) {
                 $start_settings['owner'] = $owner['name'];
             }
         }
