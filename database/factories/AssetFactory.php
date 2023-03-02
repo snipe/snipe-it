@@ -39,7 +39,7 @@ class AssetFactory extends Factory
         return [
             'name' => null,
             'rtd_location_id' => Location::factory(),
-            'serial' => $this->faker->uuid,
+            'serial' => $this->faker->uuid(),
             'status_id' => 1,
             'user_id' => 1,
             'asset_tag' => $this->faker->unixTime('now'),
