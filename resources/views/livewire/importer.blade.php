@@ -109,7 +109,8 @@
                                     			<td class="col-md-1">{{ $currentFile->filesize }}</td>
                                                 <td class="col-md-1 text-right">
                                                     <button class="btn btn-sm btn-info" wire:click="toggleEvent({{ $currentFile->id }})">
-                                                        {{ trans('general.import')  }}
+                                                        <i class="fas fa-retweet fa-fw" aria-hidden="true"></i>
+                                                        <span class="sr-only">{{ trans('general.import') }}</span>
                                                     </button>
                                                     <button class="btn btn-sm btn-danger" wire:click="destroy({{ $currentFile->id }})">
                                                         <i class="fas fa-trash icon-white" aria-hidden="true"></i><span class="sr-only"></span></button>
