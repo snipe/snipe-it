@@ -111,17 +111,17 @@ class SettingsController extends Controller
             $start_settings['prod'] = true;
         }
 
+        $start_settings['owner'] = '';
+
         if (function_exists('posix_getpwuid')) { // Probably Linux
             $owner = posix_getpwuid(fileowner($_SERVER['SCRIPT_FILENAME']));
-            $start_settings['owner'] = $owner['name'];
-        } else { // Windows
-            // TODO: Is there a way of knowing if a windows user has elevated permissions
-            // This just gets the user name, which likely isn't 'root'
-            // $start_settings['owner'] = getenv('USERNAME');
-            $start_settings['owner'] = '';
+            // This *should* be an array, but we've seen this return a bool in some chrooted environments
+            if (is_array($owner)) {
+                $start_settings['owner'] = $owner['name'];
+            }
         }
 
-        if (('root' === $start_settings['owner']) || ('0' === $start_settings['owner'])) {
+        if (($start_settings['owner'] === 'root') || ($start_settings['owner'] === '0')) {
             $start_settings['owner_is_admin'] = true;
         } else {
             $start_settings['owner_is_admin'] = false;
