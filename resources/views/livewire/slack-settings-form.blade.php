@@ -1,32 +1,4 @@
-{{-- Page title --}}
-@section('title')
-    {{ trans('admin/settings/general.webhook_title', ['app' => $webhook_selected->name ]) }}
-    @parent
-@stop
-
-@section('header_right')
-    <a href="{{ route('settings.index') }}" class="btn btn-primary"> {{ trans('general.back') }}</a>
-@stop
-
-
-{{-- Page content --}}
-@section('content')
-
-    <div class="row">
-        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-            <div class="panel box box-default">
-                <div class="box-header with-border">
-                    <h2 class="box-title">
-                        <i class="{{$icon}}"></i> {{ trans('admin/settings/general.webhook',['app' => $webhook_selected->name ]) }}
-                    </h2>
-                </div>
-                <div class="box-body">
-                    <div class="col-md-12">
-                        <p>
-                            {!! trans('admin/settings/general.webhook_integration_help',array('webhook_link' => $webhook_link, 'app' => $webhook_selected )) !!}
-                        </p>
-                        <br>
-                    </div>
+<div>
 
                     <div class="col-md-12" style="border-top: 0px;">
                         @if (session()->has('save'))
@@ -50,23 +22,21 @@
                                 {{session('message')}}
                             </div>
                         @endif
+
                         <div class="form-group col-md-12">
                             <div class="col-md-3">
                                 <label>Integration Option</label>
                             </div>
                             <div class="col-md-6">
-{{--                                <select wire:model="webhook_options"--}}
-{{--                                        aria-label="webhook_options"--}}
-{{--                                        class="form-control "--}}
-{{--                                >--}}
-{{--                                    <option>{{ trans('admin/settings/general.no_default_group') }}</option>--}}
-{{--                                    @foreach ($webhook_options[$keys] as $webhook_options)--}}
-{{--                                        <option value="{{$key}}" {{ $key ? 'selected' : '' }}>--}}
-{{--                                            {{ $key }}--}}
-{{--                                        </option>--}}
-{{--                                    @endforeach--}}
-
-{{--                                </select>--}}
+                                <select wire:model="webhook_selected"
+                                        aria-label="webhook_selected"
+                                        class="form-control "
+                                >
+                                    <option>{{ trans('admin/settings/general.no_default_group') }}</option>
+                                    <option value="Slack">Slack</option>
+                                    <option value="Discord">Discord</option>
+                                    <option value="RocketChat">RocketChat</option>
+                                </select>
                             </div>
                             <br><br><br>
 
@@ -84,10 +54,10 @@
                                         <p class="text-warning"><i
                                                     class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                         <input type="text" wire:model="webhook_endpoint" class='form-control'
-                                               placeholder="https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX" {{old('webhook_endpoint', $webhook_endpoint)}}>
+                                               placeholder={{$webhook_placeholder}} {{old('webhook_endpoint', $webhook_endpoint)}}>
                                     @else
                                         <input type="text" wire:model="webhook_endpoint" class='form-control'
-                                               placeholder="https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX" {{old('webhook_endpoint', $webhook_endpoint)}}>
+                                               placeholder={{$webhook_placeholder}} {{old('webhook_endpoint', $webhook_endpoint)}}>
                                     @endif
                                     {!! $errors->first('webhook_endpoint', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 </div>
@@ -160,9 +130,7 @@
 
                     </div> <!-- /box -->
                 </div> <!-- /.col-md-8-->
-            </div> <!-- /.row-->
 
-            @stop
 
             @push('scripts')
                 <script>

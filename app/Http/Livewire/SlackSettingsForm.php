@@ -13,29 +13,9 @@ class SlackSettingsForm extends Component
     public $webhook_botname;
     public $isDisabled ='disabled' ;
     public $webhook_link;
+    public $webhook_placeholder;
+    public $webhook_icon;
     public $webhook_selected;
-    public $webhook_options = array(
-        array(
-            "name" => 'Slack',
-            "icon" => 'fab fa-slack',
-            "placeholder" => "https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX",
-            "link" => 'https://api.slack.com/messaging/webhooks'
-        ),
-        array(
-            "name" => 'Discord',
-            "icon" => 'fab fa-discord',
-            "placeholder" => "https://discord.com/api/webhooks/XXXXXXXXXXXXXXXXXXXXX",
-            "link" => 'https://support.discord.com/hc/en-us/articles/360045093012-Server-Integrations-Page'
-        ),
-        array(
-            "name" => 'Rocket Chat',
-            "icon" => 'fab fa-rocketchat',
-            "placeholder" => "https://discord.com/api/webhooks/XXXXXXXXXXXXXXXXXXXXX",
-            "link" => '',
-        ),
-    );
-    public $keys;
-    public $icon;
 
     public Setting $setting;
 
@@ -44,6 +24,23 @@ class SlackSettingsForm extends Component
         'webhook_channel'                       => 'required_with:slack_endpoint|starts_with:#|nullable',
         'webhook_botname'                       => 'string|nullable',
     ];
+    static $webhook_text= [
+        "Slack" => array(
+            "icon" => 'fab fa-slack',
+            "placeholder" => "https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX",
+            "link" => 'https://api.slack.com/messaging/webhooks'
+        ),
+        "Discord" => array(
+            "icon" => 'fab fa-discord',
+            "placeholder" => "https://discord.com/api/webhooks/XXXXXXXXXXXXXXXXXXXXX",
+            "link" => 'https://support.discord.com/hc/en-us/articles/360045093012-Server-Integrations-Page'
+        ),
+        "RocketChat"=> array(
+            "icon" => 'fab fa-rocketchat',
+            "placeholder" => "https://discord.com/api/webhooks/XXXXXXXXXXXXXXXXXXXXX",
+            "link" => '',
+        ),
+    ];
 
     public function mount(){
 
@@ -51,14 +48,20 @@ class SlackSettingsForm extends Component
         $this->webhook_endpoint = $this->setting->webhook_endpoint;
         $this->webhook_channel = $this->setting->webhook_channel;
         $this->webhook_botname = $this->setting->webhook_botname;
-//        $this->webhook_options = $this->setting->webhook_selected;lma
-        $this->keys = array_column($this->webhook_options, 'name');
+        $this->webhook_options = $this->setting->webhook_selected;
 
 
     }
     public function updated($field){
-        $this->webhook_selected = $this->webhook_options;
+//        $this->webhook_selected = $this->webhook_options;
         $this->validateOnly($field ,$this->rules);
+    }
+    public function updatedWebhookSelected(){
+
+        $this->webhook_icon = self::$webhook_text[$this->webhook_selected]["icon"]; ;
+        $this->webhook_placeholder = self::$webhook_text[$this->webhook_selected]["placeholder"];
+        $this->webhook_link = self::$webhook_text[$this->webhook_selected]["link"];
+
     }
 
     public function render()
@@ -109,7 +112,7 @@ class SlackSettingsForm extends Component
     {
         $this->validate($this->rules);
 
-        $this->setting->webhook_options = $this->webhook_options;
+        $this->setting->webhook_selected = $this->webhwebhook_selected;
         $this->setting->webhook_endpoint = $this->webhook_endpoint;
         $this->setting->webhook_channel = $this->webhook_channel;
         $this->setting->webhook_botname = $this->webhook_botname;
