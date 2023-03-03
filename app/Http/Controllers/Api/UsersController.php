@@ -459,11 +459,7 @@ class UsersController extends Controller
                 }
             // The groups field has been passed but it is null, so we should blank it out
             } elseif ($request->has('groups')) {
-                try{
-                    $user->groups()->sync([]);
-                } catch (\Exception $exception){
-                    return response()->json(Helper::formatStandardApiResponse('error', null, $exception));
-                }
+                $user->groups()->sync([]);
             }
 
 
