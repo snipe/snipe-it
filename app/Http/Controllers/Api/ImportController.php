@@ -128,9 +128,11 @@ class ImportController extends Controller
                 $import->file_path = $file_name;
                 $import->filesize = null;
 
-                if (file_exists($path.'/'.$file_name)) {
-                    $import->filesize = filesize($path.'/'.$file_name);
+                if (!file_exists($path.'/'.$file_name)) {
+                    return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.file_not_found')), 500);
                 }
+
+                $import->filesize = filesize($path.'/'.$file_name);
                 
                 $import->save();
                 $results[] = $import;
