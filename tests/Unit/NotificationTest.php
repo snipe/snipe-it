@@ -20,6 +20,7 @@ class NotificationTest extends BaseTest
 
     public function testAUserIsEmailedIfTheyCheckoutAnAssetWithEULA()
     {
+        $admin = User::factory()->superuser()->create();
         $user = User::factory()->create();
         $asset = Asset::factory()
         ->create(
@@ -35,7 +36,7 @@ class NotificationTest extends BaseTest
             ]);
 
         Notification::fake();
-        $asset->checkOut($user, $asset->id);
+        $asset->checkOut($user, $admin->id);
         Notification::assertSentTo($user, CheckoutAssetNotification::class);
     }
 }
