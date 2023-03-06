@@ -126,7 +126,12 @@ class ImportController extends Controller
                 }
                 $file_name = date('Y-m-d-his').'-'.$fixed_filename;
                 $import->file_path = $file_name;
-                $import->filesize = filesize($path.'/'.$file_name);
+                $import->filesize = null;
+
+                if (file_exists($path.'/'.$file_name)) {
+                    $import->filesize = filesize($path.'/'.$file_name);
+                }
+                
                 $import->save();
                 $results[] = $import;
             }
