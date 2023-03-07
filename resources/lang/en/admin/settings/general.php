@@ -206,7 +206,7 @@ return [
     'webhook_channel'             => ':app Channel',
     'webhook_endpoint'            => ':app Endpoint',
     'webhook_integration'         => ':app Settings',
-    'webhook_test'                 =>':app test integration',
+    'webhook_test'                 =>'Test :app integration',
     'webhook_integration_help'    => ':app integration is optional, however the endpoint and channel are required if you wish to use it. To configure :app integration, you must first <a href=":webhook_link" target="_new" rel="noopener">create an incoming webhook</a> on your :app account. Click on the <strong>Test :app Integration</strong> button to confirm your settings are correct before saving. ',
     'webhook_integration_help_button'    => 'Once you have saved your :app information, a test button will appear.',
     'webhook_test_help'           => 'Test whether your :app integration is configured correctly. YOU MUST SAVE YOUR UPDATED :app SETTINGS FIRST.',

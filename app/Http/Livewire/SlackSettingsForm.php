@@ -104,7 +104,7 @@ class SlackSettingsForm extends Component
         try {
             $webhook->post($this->webhook_endpoint, ['body' => $payload]);
             $this->isDisabled='';
-            return session()->flash('success' , 'Your'.$this->webhook_name.' Integration works!');
+            return session()->flash('success' , 'Your '.$this->webhook_name.' Integration works!');
 
         } catch (\Exception $e) {
             $this->isDisabled= 'disabled';
