@@ -33,7 +33,7 @@ return [
         'testing_authentication' => 'Testing LDAP Authentication...',
         'authentication_success' => 'User authenticated against LDAP successfully!'
     ],
-    'slack' => [
+    'webhook' => [
         'sending' => 'Sending Slack test message...',
         'success_pt1' => 'Success! Check the ',
         'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',

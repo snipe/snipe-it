@@ -1,4 +1,34 @@
+
+    {{-- Page title --}}
+    @section('title')
+        {{ trans('admin/settings/general.webhook_title') }}
+        @parent
+    @stop
+
+    @section('header_right')
+        <a href="{{ route('settings.index') }}" class="btn btn-primary"> {{ trans('general.back') }}</a>
+    @stop
+
+
+    {{-- Page content --}}
+    @section('content')
+
 <div>
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+    <div class="panel box box-default">
+        <div class="box-header with-border">
+            <h2 class="box-title">
+                <i class="{{$webhook_icon}}"></i> {{ trans('admin/settings/general.webhook', ['app'=>$webhook_name] ) }}
+            </h2>
+        </div>
+        <div class="box-body">
+            <div class="col-md-12">
+                <p>
+                    {!! trans('admin/settings/general.webhook_integration_help',array('webhook_link' => $webhook_link, 'app' => $webhook_name)) !!}
+                </p>
+                <br>
+            </div>
 
                     <div class="col-md-12" style="border-top: 0px;">
                         @if (session()->has('save'))
@@ -32,10 +62,9 @@
                                         aria-label="webhook_selected"
                                         class="form-control "
                                 >
-                                    <option>{{ trans('admin/settings/general.no_default_group') }}</option>
                                     <option value="Slack">Slack</option>
                                     <option value="Discord">Discord</option>
-                                    <option value="RocketChat">RocketChat</option>
+                                    <option value="General">General Webhook</option>
                                 </select>
                             </div>
                             <br><br><br>
@@ -106,15 +135,17 @@
                             </div>
 
                             <!--Webhook Integration Test-->
-                            @if($webhook_endpoint != null && $webhook_channel != null)
-                                <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-8">
-                                        <a href="#" wire:click.prevent="testWebhook"
-                                           class="btn btn-default btn-sm pull-left"><span>{!! trans('admin/settings/general.webhook_test',['app' => $webhook_selected ]) !!}</span></a>
-                                        <div wire:loading><span style="padding-left: 5px; font-size: 20px"><i
-                                                        class="fas fa-spinner fa-spin"></i></span></div>
+                            @if($webhook_selected == 'Slack' || $webhook_selected == 'Discord')
+                                @if($webhook_endpoint != null && $webhook_channel != null)
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-8">
+                                            <a href="#" wire:click.prevent="testWebhook"
+                                               class="btn btn-default btn-sm pull-left"><span><i class="{{$webhook_icon}}"></i>  {!! trans('admin/settings/general.webhook_test',['app' => $webhook_selected ]) !!}</span></a>
+                                            <div wire:loading><span style="padding-left: 5px; font-size: 20px"><i
+                                                            class="fas fa-spinner fa-spin"></i></span></div>
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                             @endif
 
                             <div class="box-footer" style="margin-top: 45px;">
