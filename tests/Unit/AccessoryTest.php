@@ -57,8 +57,6 @@ class AccessoryTest extends BaseTest
 
     public function testAnAccessoryHasAManufacturer()
     {
-        $this->createValidManufacturer('apple');
-        $this->createValidCategory('accessory-keyboard-category');
         $accessory = Accessory::factory()->appleBtKeyboard()->create(
             [
                 'category_id' => Category::factory()->create(),

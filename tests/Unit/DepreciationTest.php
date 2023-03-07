@@ -18,7 +18,6 @@ class DepreciationTest extends BaseTest
 
     public function testADepreciationHasModels()
     {
-        $this->createValidAssetModel();
         $depreciation = Depreciation::factory()->create();
 
         AssetModel::factory()
