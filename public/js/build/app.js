@@ -342,6 +342,9 @@ var baseUrl = $('meta[name="baseUrl"]').attr('content');
         }, {
           id: 'next_audit_date',
           text: 'Audit Date'
+        }, {
+          id: 'byod',
+          text: 'BYOD'
         }],
         consumables: [{
           id: 'item_no',
@@ -429,6 +432,9 @@ var baseUrl = $('meta[name="baseUrl"]').attr('content');
         }, {
           id: 'remote',
           text: 'Remote'
+        }, {
+          id: 'vip',
+          text: 'VIP'
         }],
         customFields: this.customFields
       },
