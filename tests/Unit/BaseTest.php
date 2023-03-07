@@ -15,12 +15,6 @@ abstract class BaseTest extends TestCase
 {
     use LazilyRefreshDatabase;
 
-    protected function _before()
-    {
-        Artisan::call('migrate');
-        Setting::factory()->create();
-    }
-
     protected function signIn($user = null)
     {
         if (! $user) {
