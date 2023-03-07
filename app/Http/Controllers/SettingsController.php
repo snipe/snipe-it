@@ -65,18 +65,27 @@ class SettingsController extends Controller
             $start_settings['db_error'] = $e->getMessage();
         }
 
-        $protocol = array_key_exists('HTTPS', $_SERVER) && ('on' == $_SERVER['HTTPS']) ? 'https://' : 'http://';
+        if (array_key_exists("HTTP_X_FORWARDED_PROTO", $_SERVER)) {
+            $protocol = $_SERVER["HTTP_X_FORWARDED_PROTO"] . "://";
+        } elseif (array_key_exists('HTTPS', $_SERVER) && ('on' == $_SERVER['HTTPS'])) {
+            $protocol = "https://";
+        } else {
+            $protocol = "http://";
+        }
 
-        $host = array_key_exists('SERVER_NAME', $_SERVER) ? $_SERVER['SERVER_NAME'] : null;
-        $port = array_key_exists('SERVER_PORT', $_SERVER) ? $_SERVER['SERVER_PORT'] : null;
-        if (('http://' === $protocol && '80' != $port) || ('https://' === $protocol && '443' != $port)) {
-            $host .= ':'.$port;
+        if (array_key_exists("HTTP_X_FORWARDED_HOST", $_SERVER)) {
+            $host = $_SERVER["HTTP_X_FORWARDED_HOST"];
+        } else {
+            $host = array_key_exists('SERVER_NAME', $_SERVER) ? $_SERVER['SERVER_NAME'] : null;
+            $port = array_key_exists('SERVER_PORT', $_SERVER) ? $_SERVER['SERVER_PORT'] : null;
+            if (('http://' === $protocol && '80' != $port) || ('https://' === $protocol && '443' != $port)) {
+                $host .= ':'.$port;
+            }
         }
         $pageURL = $protocol.$host.$_SERVER['REQUEST_URI'];
 
-        $start_settings['url_valid'] = (url('/').'/setup' === $pageURL);
-
-        $start_settings['url_config'] = url('/');
+        $start_settings['url_config'] = url('/').'/setup';
+        $start_settings['url_valid'] = ($start_settings['url_config'] === $pageURL);
         $start_settings['real_url'] = $pageURL;
         $start_settings['php_version_min'] = true;
 
