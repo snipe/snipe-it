@@ -3,7 +3,7 @@
 .env
 .env.dusk.*
 !.env.dusk.example
-!.env.testing
+.env.testing
 phpstan.neon
 .idea
 /bin/
