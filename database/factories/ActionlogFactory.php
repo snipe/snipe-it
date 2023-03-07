@@ -55,7 +55,7 @@ class ActionlogFactory extends Factory
                     [
                         'assigned_to' => $target->id,
                         'assigned_type' => \App\Models\User::class,
-                        'assigned_to' => $target->location_id,
+                        'location_id' => $target->location_id,
                     ]
                 );
     
@@ -84,7 +84,7 @@ class ActionlogFactory extends Factory
                     [
                         'assigned_to' => $target->id,
                         'assigned_type' => \App\Models\Location::class,
-                        'assigned_to' => $target->id,
+                        'location_id' => $target->id,
                     ]
                 );
 
