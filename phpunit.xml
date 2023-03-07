@@ -9,7 +9,7 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
 >
   <coverage>
     <include>
@@ -30,7 +30,6 @@
     <env name="CACHE_DRIVER" value="array"/>
     <env name="MAIL_DRIVER" value="array"/>
     <env name="QUEUE_DRIVER" value="sync"/>
-    <env name="SERVER_NAME" value="http://127.0.0.1:8000"/>
     <env name="SESSION_DRIVER" value="array"/>
     <ini name="display_errors" value="true"/>
   </php>
