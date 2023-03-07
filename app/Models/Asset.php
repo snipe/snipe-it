@@ -547,6 +547,28 @@ class Asset extends Depreciable
         return strtolower(class_basename($this->assigned_type));
     }
 
+
+
+    /**
+     * This is annoying, but because we don't say "assets" in our route names, we have to make an exception here
+     * @todo - normalize the route names - API endpoint URLS can stay the same
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v6.1.0]
+     * @return string
+     */
+    public function targetShowRoute()
+    {
+        $route = str_plural($this->assignedType());
+        if ($route=='assets') {
+            return 'hardware';
+        }
+
+        return $route;
+
+    }
+
+
     /**
      * Get the asset's location based on default RTD location
      *
