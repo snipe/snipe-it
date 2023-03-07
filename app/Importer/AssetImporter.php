@@ -76,10 +76,12 @@ class AssetImporter extends ItemImporter
         }
         $this->item['notes'] = $this->findCsvMatch($row, 'asset_notes');
         $this->item['image'] = $this->findCsvMatch($row, 'image');
-        $this->item['requestable'] = $this->fetchHumanBoolean($this->findCsvMatch($row, 'requestable'));
-        $asset->requestable = $this->fetchHumanBoolean($this->findCsvMatch($row, 'requestable'));
+        $this->item['requestable'] = ($this->fetchHumanBoolean($this->findCsvMatch($row, 'requestable')) == 1) ? '1' : 0;
+        $asset->requestable = $this->item['requestable'];
         $this->item['warranty_months'] = intval($this->findCsvMatch($row, 'warranty_months'));
         $this->item['model_id'] = $this->createOrFetchAssetModel($row);
+        $this->item['byod'] = ($this->fetchHumanBoolean($this->findCsvMatch($row, 'byod')) == 1) ? '1' : 0;
+
 
         // If no status ID is found
         if (! array_key_exists('status_id', $this->item) && ! $editingAsset) {
