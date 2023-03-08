@@ -152,7 +152,7 @@ class ImporterFile extends Component
                 if (array_key_exists($i, $this->field_map)) {
                     // yes, we do. Is it valid for this type of import?
                     // (e.g. the import type might have been changed...?)
-                    if (array_key_exists($this->field_map[$i], $this->columnOptions[$value])) {
+                    if (array_key_exists($this->field_map[$i], $this->columnOptions[$new_import_type])) {
                         //yes, this key *is* valid. Continue on to the next field.
                         continue;
                     } else {
