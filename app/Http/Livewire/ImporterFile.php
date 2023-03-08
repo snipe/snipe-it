@@ -61,6 +61,7 @@ class ImporterFile extends Component
     static $assets = [
         'asset_tag' => 'Asset Tag',
         'asset_model' => 'Model Name',
+        'byod' => 'BYOD',
         'checkout_class' => 'Checkout Type',
         'checkout_location' => 'Checkout Location',
         'image' => 'Image Filename',
@@ -100,6 +101,7 @@ class ImporterFile extends Component
         'city' => 'City',
         'state' => 'State',
         'country' => 'Country',
+        'vip' => 'VIP'
     ];
 
     //array of "real fieldnames" to a list of aliases for that field
