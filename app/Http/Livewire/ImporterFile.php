@@ -106,8 +106,36 @@ class ImporterFile extends Component
 
     //array of "real fieldnames" to a list of aliases for that field
     static $aliases = [
-        'model_number' => ['model', 'model no','model no.','model number', 'model num', 'model num.'],
-        'warranty_months' => ['Warranty', 'Warranty Months']
+        'model_number' =>
+            [
+                'model',
+                'model no',
+                'model no.',
+                'model number',
+                'model num',
+                'model num.'
+            ],
+        'warranty_months' =>
+            [
+                'Warranty',
+                'Warranty Months'
+            ],
+        'qty' =>
+            [
+                'QTY',
+                'Quantity'
+            ],
+        'min_amt' =>
+            [
+                'Min Amount',
+                'Min QTY'
+            ],
+        'next_audit_date' =>
+            [
+                'Next Audit',
+            ],
+        
+
     ];
 
     private function getColumns($type)
@@ -191,12 +219,12 @@ class ImporterFile extends Component
     public function mount()
     {
         $this->importTypes = [
-            'asset' =>      'Assets',      // TODO - translate!
-            'accessory' =>  'Accessories',
-            'consumable' => 'Consumables',
-            'component' =>  'Components',
-            'license' =>    'Licenses',
-            'user' =>       'Users'
+            'asset' =>      trans('general.assets'),
+            'accessory' =>  trans('general.accessories'),
+            'consumable' => trans('general.consumables'),
+            'component' =>  trans('general.components'),
+            'license' =>    trans('general.licenses'),
+            'user' =>       trans('general.users'),
         ];
 
         $this->columnOptions[''] = $this->getColumns(''); //blank mode? I don't know what this is supposed to mean
@@ -215,7 +243,7 @@ class ImporterFile extends Component
             return false;
         }
         $this->statusType = 'pending';
-        $this->statusText = "Processing...";
+        $this->statusText = trans('admin/hardware/form.processing_spinner');
 
     }
 
