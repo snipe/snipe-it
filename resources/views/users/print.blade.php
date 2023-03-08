@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>{{ trans('general.assigned_to', ['name' => $show_user->present()->fullName()]) }}</title>
+    <title>{{ trans('general.assigned_to', ['name' => $show_user->present()->fullName()]) }} - {{ date('Y-m-d', time()) }}</title>
     <style>
         body {
             font-family: "Arial, Helvetica", sans-serif;
