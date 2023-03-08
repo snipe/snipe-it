@@ -101,7 +101,7 @@ class LdapSettingsForm extends Component
 
     public function submit($field){
 
-        $this->validate($this->rules,$this->messages, $field );
+//        $this->validate($this->rules,$this->messages, $field );
 
         $this->setting->ldap_enabled              = $this->ldap_enabled;
         $this->setting->ldap_server               = $this->ldap_server;
