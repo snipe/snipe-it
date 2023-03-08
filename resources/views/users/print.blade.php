@@ -49,8 +49,9 @@
     @endif
 @endif
 
-<h3>{{ trans('general.assigned_to', ['name' => $show_user->present()->fullName()]) }} {{ ($show_user->jobtitle!='' ? ' - '.$show_user->jobtitle : '') }}</h3>
-
+<h3>{{ trans('general.assigned_to', ['name' => $show_user->present()->fullName()]) }} {{ ($show_user->jobtitle!='' ? ' - '.$show_user->jobtitle : '') }}<div style='text-align:right'><div style='color:red'>{{ trans('admin/users/general.all_assigned_list_generation')}} {{ date('d-M-Y', time()) }}
+</div></div>
+</h3>
     @if ($assets->count() > 0)
         @php
             $counter = 1;
