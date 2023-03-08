@@ -51,7 +51,7 @@ class CategoriesController extends Controller
             'require_acceptance',
             'checkin_email',
             'image'
-            ])->withCount('showableAssets as assets_count', 'accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'licenses as licenses_count');
+            ])->withCount('accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'licenses as licenses_count');
 
 
         /*
