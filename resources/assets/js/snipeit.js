@@ -540,10 +540,16 @@ $(document).ready(function () {
         var id = '#' + $this.attr('id');
         var status = id + '-status';
         var $status = $(status);
+        var delete_id = $(id + '-deleteCheckbox');
+        var preview_container = $(id + '-previewContainer');
+
+
+
         $status.removeClass('text-success').removeClass('text-danger');
         $(status + ' .goodfile').remove();
         $(status + ' .badfile').remove();
         $(status + ' .previewSize').hide();
+        preview_container.hide();
         $(id + '-info').html('');
 
         var max_size = $this.data('maxsize');
@@ -554,17 +560,15 @@ $(document).ready(function () {
             $(id + '-info').append('<span class="label label-default">' + htmlEntities(this.files[i].name) + ' (' + formatBytes(this.files[i].size) + ')</span> ');
         }
 
-        console.log('Max size is: ' + max_size);
-        console.log('Real size is: ' + total_size);
-
         if (total_size > max_size) {
             $status.addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fas fa-times"></i> ').append('<span class="previewSize"> Upload is ' + formatBytes(total_size) + '.</span>');
         } else {
-
             $status.addClass('text-success').removeClass('help-block').prepend('<i class="goodfile fas fa-check"></i> ');
             var $preview =  $(id + '-imagePreview');
             readURL(this, $preview);
             $preview.fadeIn();
+            preview_container.fadeIn();
+            delete_id.hide();
         }
 
 
