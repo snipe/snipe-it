@@ -9,13 +9,6 @@ use Tests\TestCase;
 
 class DepreciationTest extends TestCase
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
-
-
-
     public function testADepreciationHasModels()
     {
         $depreciation = Depreciation::factory()->create();

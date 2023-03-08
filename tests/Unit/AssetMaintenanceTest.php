@@ -7,11 +7,6 @@ use Tests\TestCase;
 
 class AssetMaintenanceTest extends TestCase
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
-
     public function testZerosOutWarrantyIfBlank()
     {
         $c = new AssetMaintenance;

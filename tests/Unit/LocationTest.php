@@ -4,14 +4,8 @@ namespace Tests\Unit;
 use App\Models\Location;
 use Tests\TestCase;
 
-
 class LocationTest extends TestCase
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
-
     public function testPassesIfNotSelfParent()
     {
         $a = Location::factory()->make([

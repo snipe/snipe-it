@@ -6,11 +6,6 @@ use Tests\TestCase;
 
 class SnipeModelTest extends TestCase
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
-
     public function testSetsPurchaseDatesAppropriately()
     {
         $c = new SnipeModel;

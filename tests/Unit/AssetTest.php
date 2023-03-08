@@ -1,28 +1,14 @@
 <?php
 namespace Tests\Unit;
 
-use App\Exceptions\CheckoutNotAllowed;
 use App\Models\Asset;
 use App\Models\AssetModel;
-use App\Models\Company;
-use App\Models\Location;
-use App\Models\User;
 use App\Models\Category;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use App\Models\Component;
-use App\Models\ActionLog;
 use Tests\TestCase;
-
 
 class AssetTest extends TestCase
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
-
     // public function testAutoIncrementMixed()
     // {
     //     $expected = '123411';

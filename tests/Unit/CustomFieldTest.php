@@ -2,9 +2,6 @@
 namespace Tests\Unit;
 
 use App\Models\CustomField;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 
 /*
@@ -13,8 +10,6 @@ use Tests\TestCase;
  */
 class CustomFieldTest extends TestCase
 {
-    protected $tester;
-
     public function testFormat()
     {
         $customfield = CustomField::factory()->make(['format' => 'IP']);

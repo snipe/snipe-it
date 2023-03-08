@@ -6,20 +6,10 @@ use App\Models\Manufacturer;
 use App\Models\Location;
 use App\Models\Category;
 use App\Models\Company;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 
 class AccessoryTest extends TestCase
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
-
-    
-
     public function testAnAccessoryBelongsToACompany()
     {
         $accessory = Accessory::factory()

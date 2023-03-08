@@ -10,14 +10,8 @@ use App\Notifications\CheckoutAssetNotification;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
-
 class NotificationTest extends TestCase
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
-
     public function testAUserIsEmailedIfTheyCheckoutAnAssetWithEULA()
     {
         $admin = User::factory()->superuser()->create();
