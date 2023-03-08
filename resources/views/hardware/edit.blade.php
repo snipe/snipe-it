@@ -152,6 +152,7 @@
             <br>
             @include ('partials.forms.edit.order_number')
             @include ('partials.forms.edit.purchase_date')
+            @include ('partials.forms.edit.eol_date')
             @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
 
                 @php

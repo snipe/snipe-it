@@ -41,7 +41,7 @@
 
             <thead>
               <tr>
-               <th data-switchable="true" data-sortable="false" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
+               <th data-switchable="true" data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
                <th data-switchable="true" data-sortable="true" data-field="name" data-formatter="groupsAdminLinkFormatter" data-visible="true">{{ trans('admin/groups/table.name') }}</th>
                <th data-switchable="true" data-sortable="true" data-field="users_count" data-visible="true">{{ trans('admin/groups/table.users') }}</th>
                <th data-switchable="true" data-sortable="true" data-field="created_at" data-visible="true" data-formatter="dateDisplayFormatter">{{ trans('general.created_at') }}</th>
