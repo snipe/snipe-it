@@ -9,9 +9,9 @@ use App\Models\Company;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Tests\Unit\BaseTest;
+use Tests\TestCase;
 
-class AccessoryTest extends BaseTest
+class AccessoryTest extends TestCase
 {
     /**
      * @var \UnitTester

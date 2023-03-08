@@ -2,10 +2,10 @@
 namespace Tests\Unit;
 
 use App\Models\Location;
-use Tests\Unit\BaseTest;
+use Tests\TestCase;
 
 
-class LocationTest extends BaseTest
+class LocationTest extends TestCase
 {
     /**
      * @var \UnitTester

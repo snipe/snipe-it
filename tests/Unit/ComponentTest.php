@@ -8,9 +8,9 @@ use App\Models\Location;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Tests\Unit\BaseTest;
+use Tests\TestCase;
 
-class ComponentTest extends BaseTest
+class ComponentTest extends TestCase
 {
     /**
      * @var \UnitTester

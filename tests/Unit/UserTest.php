@@ -5,9 +5,9 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Tests\Unit\BaseTest;
+use Tests\TestCase;
 
-class UserTest extends BaseTest
+class UserTest extends TestCase
 {
     /**
      * @var \UnitTester

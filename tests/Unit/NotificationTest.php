@@ -8,10 +8,10 @@ use App\Models\Category;
 use Carbon\Carbon;
 use App\Notifications\CheckoutAssetNotification;
 use Illuminate\Support\Facades\Notification;
-use Tests\Unit\BaseTest;
+use Tests\TestCase;
 
 
-class NotificationTest extends BaseTest
+class NotificationTest extends TestCase
 {
     /**
      * @var \UnitTester

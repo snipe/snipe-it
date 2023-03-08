@@ -2,10 +2,10 @@
 namespace Tests\Unit;
 
 use App\Models\AssetMaintenance;
-use Tests\Unit\BaseTest;
 use Carbon\Carbon;
+use Tests\TestCase;
 
-class AssetMaintenanceTest extends BaseTest
+class AssetMaintenanceTest extends TestCase
 {
     /**
      * @var \UnitTester

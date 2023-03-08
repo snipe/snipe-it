@@ -5,13 +5,13 @@ use App\Models\Company;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Tests\Unit\BaseTest;
 use App\Models\Component;
 use App\Models\Asset;
 use App\Models\Consumable;
 use App\Models\User;
+use Tests\TestCase;
 
-class CompanyTest extends BaseTest
+class CompanyTest extends TestCase
 {
     /**
      * @var \UnitTester

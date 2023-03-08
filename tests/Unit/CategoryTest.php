@@ -5,12 +5,12 @@ use App\Models\Category;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Tests\Unit\BaseTest;
 use App\Models\AssetModel;
 use App\Models\Asset;
 use App\Models\Accessory;
+use Tests\TestCase;
 
-class CategoryTest extends BaseTest
+class CategoryTest extends TestCase
 {
     /**
      * @var \UnitTester

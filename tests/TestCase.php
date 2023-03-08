@@ -4,11 +4,13 @@ namespace Tests;
 
 use App\Http\Middleware\SecurityHeaders;
 use App\Models\Setting;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
+    use LazilyRefreshDatabase;
 
     private array $globallyDisabledMiddleware = [
         SecurityHeaders::class,

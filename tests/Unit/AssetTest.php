@@ -11,12 +11,12 @@ use App\Models\Category;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Tests\Unit\BaseTest;
 use App\Models\Component;
 use App\Models\ActionLog;
+use Tests\TestCase;
 
 
-class AssetTest extends BaseTest
+class AssetTest extends TestCase
 {
     /**
      * @var \UnitTester

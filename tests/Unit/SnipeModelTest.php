@@ -2,9 +2,9 @@
 namespace Tests\Unit;
 
 use App\Models\SnipeModel;
-use Tests\Unit\BaseTest;
+use Tests\TestCase;
 
-class SnipeModelTest extends BaseTest
+class SnipeModelTest extends TestCase
 {
     /**
      * @var \UnitTester
