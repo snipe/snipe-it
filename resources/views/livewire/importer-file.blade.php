@@ -14,6 +14,7 @@
                             'class' => 'livewire-select2',
                             'style' => 'min-width: 350px',
                             'data-placeholder' => 'Select an import type...', /* TODO: translate me */
+                            'placeholder' => '', //needed so that the form-helper will put an empty option first
                             'data-livewire-component' => $_instance->id
                         ]) }}
                     </div>
