@@ -172,8 +172,13 @@ class ImporterFile extends Component
                 foreach(self::$aliases as $key => $alias_values) {
                     foreach($alias_values as $alias_value) {
                         if (strcasecmp($alias_value,$header) === 0) { // aLsO CaSe-INSENSitiVE!
-                            $this->field_map[$i] = $key;
-                            continue 3; // bust out of both of these loops; as well as the surrounding one - e.g. move on to the next header
+                            // Make *absolutely* sure that this key actually _exists_ in this import type -
+                            // you can trigger this by importing accessories with a 'Warranty' column (which don't exist
+                            // in "Accessories"!)
+                            if (array_key_exists($key, $this->columnOptions[$new_import_type])) {
+                                $this->field_map[$i] = $key;
+                                continue 3; // bust out of both of these loops; as well as the surrounding one - e.g. move on to the next header
+                            }
                         }
                     }
                 }
