@@ -63,7 +63,7 @@
                                         class="form-control "
                                 >
                                     <option value="Slack">Slack</option>
-                                    <option value="Discord">Discord</option>
+{{--                                    <option value="Discord">Discord</option>--}}
                                     <option value="General">General Webhook</option>
                                 </select>
                             </div>
@@ -83,10 +83,12 @@
                                         <p class="text-warning"><i
                                                     class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                         <input type="text" wire:model="webhook_endpoint" class='form-control'
-                                               placeholder={{$webhook_placeholder}} {{old('webhook_endpoint', $webhook_endpoint)}}>
+                                               placeholder="{{$webhook_placeholder}}"
+                                                value="{{old('webhook_endpoint', $webhook_endpoint)}}">
                                     @else
                                         <input type="text" wire:model="webhook_endpoint" class='form-control'
-                                               placeholder={{$webhook_placeholder}} {{old('webhook_endpoint', $webhook_endpoint)}}>
+                                               placeholder="{{$webhook_placeholder}}"
+                                                value="{{old('webhook_endpoint', $webhook_endpoint)}}">
                                     @endif
                                     {!! $errors->first('webhook_endpoint', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 </div>

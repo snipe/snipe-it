@@ -14,7 +14,7 @@ class AddsWebhookOptionToSettingsTable extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-                $table->string('webhook_selected')->after('slack_botname')->default('Slack');nullable();
+                $table->string('webhook_selected')->after('slack_botname')->default('Slack')->nullable();
                 $table->renameColumn('slack_botname', 'webhook_botname');
                 $table->renameColumn('slack_endpoint', 'webhook_endpoint');
                 $table->renameColumn('slack_channel', 'webhook_channel');

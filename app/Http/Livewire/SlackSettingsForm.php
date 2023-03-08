@@ -32,12 +32,12 @@ class SlackSettingsForm extends Component
             "placeholder" => "https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX",
             "link" => 'https://api.slack.com/messaging/webhooks',
         ),
-        "Discord" => array(
-            "name" => "Discord",
-            "icon" => 'fab fa-discord',
-            "placeholder" => "https://discord.com/api/webhooks/XXXXXXXXXXXXXXXXXXXXX",
-            "link" => 'https://support.discord.com/hc/en-us/articles/360045093012-Server-Integrations-Page',
-        ),
+//        "Discord" => array(
+//            "name" => "Discord",
+//            "icon" => 'fab fa-discord',
+//            "placeholder" => "https://discord.com/api/webhooks/XXXXXXXXXXXXXXXXXXXXX",
+//            "link" => 'https://support.discord.com/hc/en-us/articles/360045093012-Server-Integrations-Page',
+//        ),
         "General"=> array(
             "name" => "General",
             "icon" => "fab fa-hashtag",
@@ -108,7 +108,7 @@ class SlackSettingsForm extends Component
 
         } catch (\Exception $e) {
             $this->isDisabled= 'disabled';
-            return session()->flash('error' , trans('admin/settings/message.webhook.error', ['error_message' => $e->getMessage()]));
+            return session()->flash('error' , trans('admin/settings/message.webhook.error', ['error_message' => $e->getMessage(), 'app' => $this->webhook_name]));
         }
 
         //}
