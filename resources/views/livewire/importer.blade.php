@@ -36,7 +36,7 @@
                             <tbody>
                             @foreach($import_errors as $field => $error_list)
                             <tr>
-                                <td>{{ $processDetails->file_path }}</td>
+                                <td>{{ $processDetails->file_path ?? "Unknown File" }}</td>
                                 <td>
                                     <b>{{ $field }}:</b>
                                     <span>{{ implode(", ",$error_list) }}</span>

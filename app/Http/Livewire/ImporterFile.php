@@ -31,7 +31,7 @@ class ImporterFile extends Component
     public function generate_field_map()
     {
         $tmp = array_combine($this->activeFile->header_row, $this->field_map);
-        return json_encode($tmp);
+        return json_encode(array_filter($tmp));
     }
 
     static $general = [
@@ -102,16 +102,17 @@ class ImporterFile extends Component
         'country' => 'Country',
     ];
 
+    //array of "real fieldnames" to a list of aliases for that field
+    static $aliases = [
+        'model_number' => ['model', 'model no','model no.','model number', 'model num', 'model num.'],
+        'warranty_months' => ['Warranty', 'Warranty Months']
+    ];
+
     private function getColumns($type)
     {
-        $customFields = [];
-        foreach($this->customFields AS $field) {
-            $customFields[$field->db_column_name()] = $field->name;
-        }
-
         switch($type) {
             case 'asset':
-                $results = self::$general + self::$assets + $customFields;
+                $results = self::$general + self::$assets;
                 break;
             case 'accessory':
                 $results = self::$general + self::$accessories;
@@ -129,13 +130,59 @@ class ImporterFile extends Component
                 $results = self::$general;
         }
         asort($results, SORT_FLAG_CASE|SORT_STRING);
+        if($type == "asset") {
+            // add Custom Fields after a horizontal line
+            $results['-'] = "———".trans('admin/custom_fields/general.custom_fields')."———’";
+            foreach(CustomField::orderBy('name')->get() AS $field) {
+                $results[$field->db_column_name()] = $field->name;
+            }
+        }
         return $results;
+    }
+
+    public function updating($name, $new_import_type)
+    {
+        if ($name == "activeFile.import_type") {
+            \Log::info("WE ARE CHANGING THE import_type!!!!! TO: ".$new_import_type);
+            // go through each header, find a matching field to try and map it to.
+            foreach($this->activeFile->header_row as $i => $header) {
+                // do we have something mapped already?
+                if (array_key_exists($i, $this->field_map)) {
+                    // yes, we do. Is it valid for this type of import?
+                    // (e.g. the import type might have been changed...?)
+                    if (array_key_exists($this->field_map[$i], $this->columnOptions[$value])) {
+                        //yes, this key *is* valid. Continue on to the next field.
+                        continue;
+                    } else {
+                        //no, this key is *INVALID* for this import type. Better set it to null
+                        // and we'll hope that the aliases or something else picks it up.
+                        $this->field_map[$i] = null; // fingers crossed! But it's not likely, tbh.
+                    } // TODO - strictly speaking, this isn't necessary here I don't think.
+                }
+                // first, check for exact matches
+                foreach ($this->columnOptions[$new_import_type] AS $value => $text) {
+                    if (strcasecmp($text, $header) === 0) { // case-INSENSITIVe on purpose!
+                        $this->field_map[$i] = $value;
+                        continue 2; //don't bother with the alias check, go to the next header
+                    }
+                }
+                // if you got here, we didn't find a match. Try the aliases
+                foreach(self::$aliases as $key => $alias_values) {
+                    foreach($alias_values as $alias_value) {
+                        if (strcasecmp($alias_value,$header) === 0) { // aLsO CaSe-INSENSitiVE!
+                            $this->field_map[$i] = $key;
+                            continue 3; // bust out of both of these loops; as well as the surrounding one - e.g. move on to the next header
+                        }
+                    }
+                }
+                // and if you got here, we got nothing. Let's recommend 'null'
+                $this->field_map[$i] = null; // Booooo :(
+            }
+        }
     }
 
     public function mount()
     {
-        $this->customFields = CustomField::all();
-
         $this->importTypes = [
             'asset' =>      'Assets',      // TODO - translate!
             'accessory' =>  'Accessories',
@@ -149,7 +196,6 @@ class ImporterFile extends Component
         foreach($this->importTypes AS $type => $name) {
             $this->columnOptions[$type] = $this->getColumns($type);
         }
-        $this->increment = 0;
         $this->field_map = $this->activeFile->field_map ? array_values($this->activeFile->field_map): [];
     }
 

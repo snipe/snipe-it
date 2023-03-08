@@ -1,4 +1,4 @@
-  <tr>
+  <tr id="importer-file">
     <td colspan="5">
     <div class="col-md-12">
 
@@ -9,7 +9,13 @@
                     </div>
 
                     <div class="col-md-7 col-xs-12">
-                        {{ Form::select('activeFile.import_type', $importTypes, $activeFile->import_type, ['id' => 'import_type', 'class' => 'livewire-select2', 'style' => 'min-width: 350px', 'data-placeholder' => 'Select an import type...', /* TODO: translate me */ 'placeholder' => '', 'data-livewire-component' => $_instance->id]) }}
+                        {{ Form::select('activeFile.import_type', $importTypes, $activeFile->import_type, [
+                            'id' => 'import_type',
+                            'class' => 'livewire-select2',
+                            'style' => 'min-width: 350px',
+                            'data-placeholder' => 'Select an import type...', /* TODO: translate me */
+                            'data-livewire-component' => $_instance->id
+                        ]) }}
                     </div>
 
                 </div><!-- /dynamic-form-row -->
@@ -70,8 +76,9 @@
                                             'class' => 'mappings livewire-select2',
                                             'placeholder' => 'Do Not Import',
                                             'data-livewire-component' => $_instance->id
+                                        ],[
+                                            '-' => ['disabled' => true] // this makes the "-----" line unclickable
                                         ])
-
                                     }}
                                 </div>
                             </div>
@@ -113,52 +120,57 @@ $(function () {
     $('.minimal.livewire-icheck').iCheck({
         checkboxClass: 'icheckbox_minimal-blue',
     })
-})
-$('#import').on('click', function () {
-    if(!@this.activeFile.import_type) {
-        @this.statusType='error';
-        @this.statusText= "An import type is required... "; //TODO: translate?
-        return;
-    }
-    @this.statusType='pending';
-    @this.statusText = "Processing...";
-    @this.generate_field_map().then(function (mappings_raw) {
-        var mappings = JSON.parse(mappings_raw)
-        console.warn("Here is the mappings:")
-        console.dir(mappings)
-        $.post({
-            url: "{{ route('api.imports.importFile', $activeFile->id) }}",
-            data: {
-                'import-update': !!@this.update,
-                'send-welcome': !!@this.send_welcome,
-                'import-type': @this.activeFile.import_type,
-                'run-backup': !!@this.run_backup,
-                'column-mappings': mappings
-            },
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-            }
-        }).done( function (body) {
-            // Success
-            @this.statusType="success";
-            @this.statusText = "Success... Redirecting.";
-            console.dir(body)
-            window.location.href = body.messages.redirect_url;
-        }).fail( function (jqXHR, textStatus, error) {
-            // Failure
-            var body = jqXHR.responseJSON
-            if(body.status == 'import-errors') {
-                @this.emit('importError', body.messages);
-                @this.statusType='error';
-                @this.statusText = "Error";
-            } else {
-                console.warn("Not import-errors, just regular errors")
+
+    // we have to hook up to the `<tr id='importer-file'>` at the root of this display,
+    // because the #import button isn't visible until you click an import_type
+    $('#importer-file').on('click', '#import', function () {
+        console.warn("You clicked it!!!!")
+        if(!@this.activeFile.import_type) {
+            @this.statusType='error';
+            @this.statusText= "An import type is required... "; //TODO: translate?
+            return;
+        }
+        @this.statusType='pending';
+        @this.statusText = "Processing...";
+        @this.generate_field_map().then(function (mappings_raw) {
+            var mappings = JSON.parse(mappings_raw)
+            // console.warn("Here is the mappings:")
+            // console.dir(mappings)
+            $.post({
+                url: "{{ route('api.imports.importFile', $activeFile->id) }}",
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    'import-update': !!@this.update,
+                    'send-welcome': !!@this.send_welcome,
+                    'import-type': @this.activeFile.import_type,
+                    'run-backup': !!@this.run_backup,
+                    'column-mappings': mappings
+                }),
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                }
+            }).done( function (body) {
+                // Success
+                @this.statusType="success";
+                @this.statusText = "Success... Redirecting.";
                 console.dir(body)
-                @this.emit('alert', body.error)
-            }
-            @this.emit('hideDetails')
-        });
-    })
-    return false;
-});
+                window.location.href = body.messages.redirect_url;
+            }).fail( function (jqXHR, textStatus, error) {
+                // Failure
+                var body = jqXHR.responseJSON
+                if(body.status == 'import-errors') {
+                    @this.emit('importError', body.messages);
+                    @this.statusType='error';
+                    @this.statusText = "Error";
+                } else {
+                    console.warn("Not import-errors, just regular errors")
+                    console.dir(body)
+                    @this.emit('alert', body.error)
+                }
+                @this.emit('hideDetails')
+            });
+        })
+        return false;
+    });})
+
 </script>
