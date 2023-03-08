@@ -69,6 +69,7 @@ class UsersController extends Controller
             'users.ldap_import',
             'users.start_date',
             'users.end_date',
+            'users.vip',
 
         ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy',)
             ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count');
@@ -147,6 +148,10 @@ class UsersController extends Controller
 
         if ($request->filled('remote')) {
             $users = $users->where('remote', '=', $request->input('remote'));
+        }
+
+        if ($request->filled('vip')) {
+            $users = $users->where('vip', '=', $request->input('vip'));
         }
 
         if ($request->filled('two_factor_enrolled')) {
