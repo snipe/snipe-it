@@ -11,19 +11,6 @@ Before attempting to run the test suite copy the example environment file for te
 `cp .env.testing.example .env.testing`
 > Since the data in the database is flushed after each test it is recommended you create a separate mysql database for specifically for tests
 
-Here is an example of what your `.env.testing` file might look like:
-
-```dotenv
-# --------------------------------------------
-# REQUIRED: DATABASE SETTINGS
-# --------------------------------------------
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_DATABASE=snipeit_testing
-DB_USERNAME=root
-DB_PASSWORD=changeme1234
-```
-
 Now you are ready to run the entire test suite from your terminal:
 
 `php artisan test`
