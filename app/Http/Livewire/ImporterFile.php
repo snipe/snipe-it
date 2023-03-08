@@ -106,8 +106,36 @@ class ImporterFile extends Component
 
     //array of "real fieldnames" to a list of aliases for that field
     static $aliases = [
-        'model_number' => ['model', 'model no','model no.','model number', 'model num', 'model num.'],
-        'warranty_months' => ['Warranty', 'Warranty Months']
+        'model_number' =>
+            [
+                'model',
+                'model no',
+                'model no.',
+                'model number',
+                'model num',
+                'model num.'
+            ],
+        'warranty_months' =>
+            [
+                'Warranty',
+                'Warranty Months'
+            ],
+        'qty' =>
+            [
+                'QTY',
+                'Quantity'
+            ],
+        'min_amt' =>
+            [
+                'Min Amount',
+                'Min QTY'
+            ],
+        'next_audit_date' =>
+            [
+                'Next Audit',
+            ],
+        
+
     ];
 
     private function getColumns($type)
