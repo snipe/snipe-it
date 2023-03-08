@@ -103,7 +103,8 @@
                                     </tr>
 
                                     @foreach($files as $currentFile)
-                                    		<tr>
+
+                                    		<tr style="{{ ($processDetails && ($currentFile->id == $processDetails->id)) ? 'font-weight: bold' : '' }} " class="{{ ($processDetails && ($currentFile->id == $processDetails->id)) ? 'warning' : '' }}">
                                     			<td class="col-md-6">{{ $currentFile->file_path }}</td>
                                     			<td class="col-md-3">{{ $currentFile->created_at }} </td>
                                     			<td class="col-md-1">{{ $currentFile->filesize }}</td>
@@ -116,9 +117,15 @@
                                                         <i class="fas fa-trash icon-white" aria-hidden="true"></i><span class="sr-only"></span></button>
                                     			</td>
                                     		</tr>
-                                                @if( $currentFile && $processDetails && ($currentFile->id == $processDetails->id))
-                                                    @livewire('importer-file', ['activeFile' => $currentFile])
-                                                @endif
+
+                                            @if( $currentFile && $processDetails && ($currentFile->id == $processDetails->id))
+                                                <tr class="warning">
+                                                    <td colspan="4">
+                                                        @livewire('importer-file', ['activeFile' => $currentFile])
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                            </tr>
                                     @endforeach
                                 </table>
                             </div>
