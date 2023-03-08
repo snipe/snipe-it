@@ -214,12 +214,12 @@ class ImporterFile extends Component
     public function mount()
     {
         $this->importTypes = [
-            'asset' =>      'Assets',      // TODO - translate!
-            'accessory' =>  'Accessories',
-            'consumable' => 'Consumables',
-            'component' =>  'Components',
-            'license' =>    'Licenses',
-            'user' =>       'Users'
+            'asset' =>      trans('general.assets'),
+            'accessory' =>  trans('general.accessories'),
+            'consumable' => trans('general.consumables'),
+            'component' =>  trans('general.components'),
+            'license' =>    trans('general.licenses'),
+            'user' =>       trans('general.users'),
         ];
 
         $this->columnOptions[''] = $this->getColumns(''); //blank mode? I don't know what this is supposed to mean
@@ -238,7 +238,7 @@ class ImporterFile extends Component
             return false;
         }
         $this->statusType = 'pending';
-        $this->statusText = "Processing...";
+        $this->statusText = trans('admin/hardware/form.processing_spinner');
 
     }
 
