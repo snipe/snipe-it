@@ -21,10 +21,11 @@
 @endif
 
 @if($import_errors)
+
             <div class="box">
                 <div class="box-body">
                     <div class="alert alert-warning">
-                        <strong>Warning</strong> Some Errors occurred while importing {{-- TODO: hardcoded string --}}
+                        {{ trans('general.notification_error') }}
                     </div>
 
                     <div class="errors-table">
@@ -34,16 +35,18 @@
                             <th>{{ trans('general.error') }}</th>
                             </thead>
                             <tbody>
+
                             @foreach($import_errors as $field => $error_list)
                             <tr>
-                                <td>{{ $processDetails->file_path ?? "Unknown File" }}</td>
+                                <td>{{ $processDetails->file_path ?? trans('general.unknown_file') }}</td>
                                 <td>
                                     <b>{{ $field }}:</b>
                                     <span>{{ implode(", ",$error_list) }}</span>
-                                    <br />
+                                    <br>
                                 </td>
                             </tr>
                             @endforeach
+
                             </tbody>
                         </table>
                     </div>
@@ -57,7 +60,8 @@
                         <div class="row">
 
                             <div class="col-md-12">
-                                @if($progress != -1)
+
+                                @if ($progress != -1)
                                     <div class="col-md-9" style="padding-bottom:20px" id='progress-container'>
                                         <div class="progress progress-striped-active" style="margin-top: 8px"> {{-- so someof these values are in importer.vue! --}}
                                             <div id='progress-bar' class="progress-bar {{ $progress_bar_class }}" role="progressbar" style="width: {{ $progress }}%">
@@ -80,20 +84,12 @@
                                     @endif
 
                                 </div>
-
                             </div>
-
-
-
                         </div>
+
                         <div class="row">
                             <div class="col-md-12 table-responsive" style="padding-top: 30px;">
-                                <table data-pagination="true"
-                                        data-id-table="upload-table"
-                                        data-search="true"
-                                        data-side-pagination="client"
-                                        id="upload-table"
-                                        class="col-md-12 table table-striped snipe-table">
+                                <table class="col-md-12 table table-striped snipe-table">
 
                                     <tr>
                                         <th class="col-md-6">
@@ -112,7 +108,7 @@
 
                                     @foreach($files as $currentFile)
 
-                                    		<tr style="{{ ($processDetails && ($currentFile->id == $processDetails->id)) ? 'font-weight: bold' : '' }}" class="{{ ($processDetails && ($currentFile->id == $processDetails->id)) ? 'warning' : '' }}">
+                                    		<tr{!! ($processDetails && ($currentFile->id == $processDetails->id)) ? ' style="font-weight: bold"' : '' !!}"{{ ($processDetails && ($currentFile->id == $processDetails->id)) ? 'warning' : '' }}">
                                     			<td class="col-md-6">{{ $currentFile->file_path }}</td>
                                     			<td class="col-md-3">{{ Helper::getFormattedDateObject($currentFile->created_at, 'datetime', false) }}</td>
                                     			<td class="col-md-1">{{ Helper::formatFilesizeUnits($currentFile->filesize) }}</td>
@@ -169,7 +165,7 @@
             },
             progress: function(e, data) {
                 @this.progress = parseInt((data.loaded / data.total * 100, 10));
-                @this.progress_message = @this.progress+'% Complete'; // TODO - this should come from server (so it can be internationalized)
+                @this.progress_message = @this.progress+'{{ trans('general.percent_complete') }}'; // TODO - this should come from server (so it can be internationalized)
             },
             fail: function(e, data) {
                 @this.progress_bar_class = "progress-bar-danger";

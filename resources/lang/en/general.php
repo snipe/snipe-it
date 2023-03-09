@@ -230,7 +230,7 @@ return [
     'requested_assets_menu' => 'Requested Assets',
     'request_canceled'      => 'Request Canceled',
     'save'  				=> 'Save',
-    'select_var'            => 'Select :thing... ', // this will eventually replace all of our other selects
+    'select_what'            => 'Select :what... ', // this will eventually replace all of our other selects
     'select'				=> 'Select',
     'select_all'            => 'Select All',
     'search'				=> 'Search',
@@ -409,7 +409,12 @@ return [
     'tasks_view_all'        => 'View all tasks',
     'true'                  => 'True',
     'false'                 => 'False',
-
-
-
+    'update_values'         => 'Update Existing Values?',
+    'send_welcome_new_users' => 'Send Welcome Email for new Users?',
+    'backup_before_import'      => 'Backup before importing?',
+    'import_header'         => 'CSV Header Field',
+    'import_sample_value'   => 'Sample Value',
+    'import_no_columns_found'   => 'No columns found in your import file.',
+    'unknown_file'            => 'Unknown File',
+    'percent_complete'       => '% Complete',
 ];

@@ -4,15 +4,14 @@
                 <div class="form-group col-md-12">
 
                     <label for="activeFile.import_type" class="col-md-3 col-xs-12 text-right">
-                        Import Type
+                        {{ trans('general.import_type') }}
                     </label>
-
                     <div class="col-md-9 col-xs-12">
                         {{ Form::select('activeFile.import_type', $importTypes, $activeFile->import_type, [
                             'id' => 'import_type',
                             'class' => 'livewire-select2',
                             'style' => 'min-width: 350px',
-                            'data-placeholder' => trans('general.select_var', ['thing' => trans('general.import_type')]), /* TODO: translate me */
+                            'data-placeholder' => trans('general.select_what', ['what' => trans('general.import_type')]), /* TODO: translate me */
                             'placeholder' => '', //needed so that the form-helper will put an empty option first
                             'data-minimum-results-for-search' => '-1', // Remove this if the list gets long enough that we need to search
                             'data-livewire-component' => $_instance->id
@@ -23,21 +22,21 @@
                 <div class="form-group col-md-12">
                     <label for="update" class="col-md-9 col-md-offset-3 col-xs-12" wire:ignore>
                         <input type="checkbox" class="minimal livewire-icheck" name="update" data-livewire-component="{{ $_instance->id }}">
-                            Update Existing Values?
+                            {{ trans('general.update_values') }}
                     </label>
                 </div>
 
                 <div class="form-group col-md-12">
                     <label for="send_welcome" class="col-md-9 col-md-offset-3 col-xs-12" wire:ignore>
                             <input type="checkbox" class="minimal livewire-icheck" name="send_welcome" data-livewire-component="{{ $_instance->id }}">
-                         Send Welcome Email for new Users?
+                            {{ trans('general.send_welcome_new_users') }}
                     </label>
                 </div>
 
                 <div class="form-group col-md-12">
                     <label for="run_backup" class="col-md-9 col-md-offset-3 col-xs-12" wire:ignore>
                         <input type="checkbox" class="minimal livewire-icheck" name="run_backup" data-livewire-component="{{ $_instance->id }}">
-                        Backup before importing?
+                        {{ trans('general.backup_before_import') }}
                     </label>
                 </div>
 
@@ -59,13 +58,13 @@
             </div>
             <div class="form-group col-md-12">
                 <div class="col-md-3 text-right">
-                    <strong>CSV Header Field</strong>
+                    <strong>{{ trans('general.import_header') }}</strong>
                 </div>
                 <div class="col-md-4">
-                    <strong>Import Field</strong>
+                    <strong>{{ trans('general.import_field') }}</strong>
                 </div>
                 <div class="col-md-5">
-                    <strong>Sample Value</strong>
+                    <strong>{{ trans('general.import_sample_value') }}</strong>
                 </div>
             </div><!-- /div row -->
 
@@ -95,7 +94,7 @@
                     </div><!-- /div row -->
                 @endforeach
             @else
-                No Columns Found!
+                {{ trans('general.import_no_columns_found') }}
             @endif
 
                 <div class="form-group col-md-12">
@@ -103,7 +102,7 @@
                         <a href="#" wire:click="$emit('hideDetails')">{{ trans('general.cancel') }}</a>
                     </div>
                      <div class="col-md-9">
-                        <button type="submit" class="btn btn-primary col-md-5" id="import">Import</button>
+                        <button type="submit" class="btn btn-primary col-md-5" id="import">{{ general('trans.import') }}</button>
                         <br><br>
                     </div>
                 </div>
@@ -128,9 +127,9 @@ $(function () {
     // because the #import button isn't visible until you click an import_type
     $('#importer-file').on('click', '#import', function () {
         console.warn("You clicked it!!!!")
-        if(!@this.activeFile.import_type) {
+        if ß(!@this.activeFile.import_type) {
             @this.statusType='error';
-            @this.statusText= "An import type is required... "; //TODO: translate?
+            @this.statusText= "{{ trans('validation.required', ['attribute' => trans('general.import')]) }}"; //TODO: translate?
             return;
         }
         @this.statusType ='pending';
