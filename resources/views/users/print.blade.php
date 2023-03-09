@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>{{ trans('general.assigned_to', ['name' => $show_user->present()->fullName()]) }} - {{ date('Y-m-d', time()) }}</title>
+    <title>{{ trans('general.assigned_to', ['name' => $show_user->present()->fullName()]) }} - {{ date('Y-m-d H:i', time()) }}</title>
     <style>
         body {
             font-family: "Arial, Helvetica", sans-serif;
@@ -49,7 +49,7 @@
     @endif
 @endif
 
-<h3>{{ trans('general.assigned_to', ['name' => $show_user->present()->fullName()]) }} {{ ($show_user->jobtitle!='' ? ' - '.$show_user->jobtitle : '') }}<div style='text-align:right'><div style='color:red'>{{ trans('admin/users/general.all_assigned_list_generation')}} {{ date('d-M-Y', time()) }}
+<h3>{{ trans('general.assigned_to', ['name' => $show_user->present()->fullName()]) }} {{ ($show_user->jobtitle!='' ? ' - '.$show_user->jobtitle : '') }}<div style='text-align:right'><div style='color:red'>{{ trans('admin/users/general.all_assigned_list_generation')}} {{ date('d-M-Y H:i', time()) }}
 </div></div>
 </h3>
     @if ($assets->count() > 0)
