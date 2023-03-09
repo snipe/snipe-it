@@ -1148,6 +1148,16 @@ class Helper
 
     }
 
+
+    /**
+     * Generic helper (largely used by livewire right now) that returns the font-awesome icon
+     * for the object type.
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since 6.1.0
+     *
+     * @return string
+     */
     public static function iconTypeByItem($item) {
 
         switch ($item) {
