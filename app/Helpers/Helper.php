@@ -1130,32 +1130,20 @@ class Helper
 
         return $bytes;
     }
+
+    /**
+     * This is weird but used by the side nav to determine which URL to point the user to
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since 5.0
+     *
+     * @return string[]
+     */
     public static function SettingUrls(){
         $settings=['#','fields.index', 'statuslabels.index', 'models.index', 'categories.index', 'manufacturers.index', 'suppliers.index', 'departments.index', 'locations.index', 'companies.index', 'depreciations.index'];
 
         return $settings;
         }
-    public static function AgeFormat($date) {
-        $year = Carbon::parse($date)
-            ->diff(now())->y;
-        $month = Carbon::parse($date)
-            ->diff(now())->m;
-        $days = Carbon::parse($date)
-            ->diff(now())->d;
-        $age='';
-        if ($year) {
-            $age .= $year.'y ';
-        }
-        if ($month) {
-            $age .= $month.'m ';
-        }
-        if ($days) {
-            $age .= $days.'d';
-        }
-
-        return $age;
-
-    }
 
 
     /**
