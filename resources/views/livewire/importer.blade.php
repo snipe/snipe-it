@@ -96,18 +96,26 @@
                                         class="col-md-12 table table-striped snipe-table">
 
                                     <tr>
-                                        <th class="col-md-6">{{ trans('general.file_name') }}</th>
-                                        <th class="col-md-3">{{ trans('general.created_at') }}</th>
-                                        <th class="col-md-1">{{ trans('general.filesize') }}</th>
-                                        <th class="col-md-1 text-right"><span class="sr-only">{{ trans('general.actions') }}</span></th>
+                                        <th class="col-md-6">
+                                            {{ trans('general.file_name') }}
+                                        </th>
+                                        <th class="col-md-3">
+                                            {{ trans('general.created_at') }}
+                                        </th>
+                                        <th class="col-md-1">
+                                            {{ trans('general.filesize') }}
+                                        </th>
+                                        <th class="col-md-1 text-right">
+                                            <span class="sr-only">{{ trans('general.actions') }}</span>
+                                        </th>
                                     </tr>
 
                                     @foreach($files as $currentFile)
 
-                                    		<tr style="{{ ($processDetails && ($currentFile->id == $processDetails->id)) ? 'font-weight: bold' : '' }} " class="{{ ($processDetails && ($currentFile->id == $processDetails->id)) ? 'warning' : '' }}">
+                                    		<tr style="{{ ($processDetails && ($currentFile->id == $processDetails->id)) ? 'font-weight: bold' : '' }}" class="{{ ($processDetails && ($currentFile->id == $processDetails->id)) ? 'warning' : '' }}">
                                     			<td class="col-md-6">{{ $currentFile->file_path }}</td>
-                                    			<td class="col-md-3">{{ $currentFile->created_at }} </td>
-                                    			<td class="col-md-1">{{ $currentFile->filesize }}</td>
+                                    			<td class="col-md-3">{{ Helper::getFormattedDateObject($currentFile->created_at, 'datetime', false) }}</td>
+                                    			<td class="col-md-1">{{ Helper::formatFilesizeUnits($currentFile->filesize) }}</td>
                                                 <td class="col-md-1 text-right">
                                                     <button class="btn btn-sm btn-info" wire:click="toggleEvent({{ $currentFile->id }})">
                                                         <i class="fas fa-retweet fa-fw" aria-hidden="true"></i>
@@ -148,7 +156,7 @@
             dataType: 'json',
             done: function(e, data) {
                 @this.progress_bar_class = 'progress-bar-success';
-                @this.progress_message = 'Success!'; // TODO - we're already round-tripping to the server here - I'd love it if we could get internationalized text here
+                @this.progress_message = '{{ trans('general.notification_success') }}'; // TODO - we're already round-tripping to the server here - I'd love it if we could get internationalized text here
                 @this.progress = 100;
             },
             add: function(e, data) {
