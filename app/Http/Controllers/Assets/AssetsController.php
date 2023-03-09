@@ -468,18 +468,48 @@ class AssetsController extends Controller
 
         if ($settings->qr_code == '1') {
             $asset = Asset::withTrashed()->find($assetId);
+            
             if ($asset) {
                 $size = Helper::barcodeDimensions($settings->barcode_type);
-                $qr_file = public_path().'/uploads/barcodes/qr-'.str_slug($asset->asset_tag).'-'.str_slug($asset->id).'.png';
+                $qr_file= public_path().'/uploads/barcodes/qr-'.str_slug($asset->asset_tag).'-'.str_slug($asset->id).'-'.str_slug($asset->model_id).'.png';
 
                 if (isset($asset->id, $asset->asset_tag)) {
-                    if (file_exists($qr_file)) {
+                    if (false) {
+                    // if (file_exists($qr_file)) {
                         $header = ['Content-type' => 'image/png'];
 
                         return response()->file($qr_file, $header);
                     } else {
+                        // 1. Get Asset data
+                        
+                        // 2. Format
+                         $printText = "";
+                         $removed_data ="";
+                         $result="";
+                         
+                         foreach ($asset->toArray() as $key => $value) {
+                            $excludeKeys = ["id", "order_number", "assigned_to", "image", "user_id", "created_at", "updated_at", "deleted_at", "status_id", "archive", "depreciate", "supplier_id"];
+                            if (!in_array($key, $excludeKeys)){
+                               if (str_starts_with($key, '_snipeit')) {
+                                $removed_first = substr($key, 9);
+                                $removed_last = substr($removed_first, 0, -2);
+                                $removed_data .=$removed_last .":". $value ."\n";
+                               }
+                               if(!str_starts_with($key, '_snipeit')){
+                                $printText .= $key . " : " . $value . "\n";
+                            }
+                            // $printText .= $key . " : " . $value . "\n";
+                            // $result = $printText. '' .$removed_last;
+                            // echo $result;
+                            }
+                        }
+                        $result .=$printText .'' .$removed_data;
+                        // dd($result);
+                        // 3. Generate QR Code
+                        // dd($printText);
+                        
                         $barcode = new \Com\Tecnick\Barcode\Barcode();
-                        $barcode_obj = $barcode->getBarcodeObj($settings->barcode_type, route('hardware.show', $asset->id), $size['height'], $size['width'], 'black', [-2, -2, -2, -2]);
+                        $barcode_obj = $barcode->getBarcodeObj($settings->barcode_type, $result, $size['height'], $size['width'], 'black', [-2, -2, -2, -2]);
                         file_put_contents($qr_file, $barcode_obj->getPngData());
 
                         return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
@@ -490,6 +520,8 @@ class AssetsController extends Controller
             return 'That asset is invalid';
         }
     }
+
+    
 
     /**
      * Return a 2D barcode for the asset

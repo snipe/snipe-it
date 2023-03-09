@@ -23,8 +23,10 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
         font-size: {{ $settings->labels_fontsize }}pt;
     }
     .label {
-        width: {{ $settings->labels_width }}in;
-        height: {{ $settings->labels_height }}in;
+        /* width: {{ $settings->labels_width }}in;
+        height: {{ $settings->labels_height }}in; */
+        width: 350px;
+        height: 350px;
         padding: 0in;
         margin-right: {{ $settings->labels_display_sgutter }}in; /* the gutter */
         margin-bottom: {{ $settings->labels_display_bgutter }}in;
@@ -35,19 +37,24 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
         page-break-after:always;
     }
     div.qr_img {
-        width: {{ $qr_size }}in;
-        height: {{ $qr_size }}in;
+        /* width: {{ $qr_size }}in;
+        height: {{ $qr_size }}in; */
+        width: 40%;
+        height: 40%;
 
-        float: left;
-        display: inline-flex;
+        /* float: left; */
+        /* display: inline-flex; */
         padding-right: .15in;
     }
     img.qr_img {
 
         width: 120.79%;
         height: 120.79%;
-        margin-top: -6.9%;
-        margin-left: -6.9%;
+        /* margin-top: -6.9%;
+        margin-left: -6.9%; */
+        margin-top: 110%;
+        margin-left: 60%;
+
         padding-bottom: .04in;
     }
     img.barcode {
@@ -110,60 +117,19 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
     <?php $count++; ?>
     <div class="label">
 
-        @if ($settings->qr_code=='1')
-            <div class="qr_img">
-                <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/qr_code" class="qr_img">
-            </div>
-        @endif
-
         <div class="qr_text">
             @if ($settings->label_logo)
                 <div class="label-logo">
                     <img class="label-logo" src="{{ Storage::disk('public')->url('').e($snipeSettings->label_logo) }}">
                 </div>
             @endif
-            @if ($settings->qr_text!='')
-                <div class="pull-left">
-                    <strong>{{ $settings->qr_text }}</strong>
-                    <br>
-                </div>
-            @endif
-            @if (($settings->labels_display_company_name=='1') && ($asset->company))
-                <div class="pull-left">
-                    C: {{ $asset->company->name }}
-                </div>
-            @endif
-            @if (($settings->labels_display_name=='1') && ($asset->name!=''))
-                <div class="pull-left">
-                    N: {{ $asset->name }}
-                </div>
-            @endif
-            @if (($settings->labels_display_tag=='1') && ($asset->asset_tag!=''))
-                <div class="pull-left">
-                    T: {{ $asset->asset_tag }}
-                </div>
-            @endif
-            @if (($settings->labels_display_serial=='1') && ($asset->serial!=''))
-                <div class="pull-left">
-                    S: {{ $asset->serial }}
-                </div>
-            @endif
-            @if (($settings->labels_display_model=='1') && ($asset->model->name!=''))
-                <div class="pull-left">
-                    M: {{ $asset->model->name }} {{ $asset->model->model_number }}
-                </div>
-            @endif
-
         </div>
 
-        @if ((($settings->alt_barcode_enabled=='1') && $settings->alt_barcode!=''))
-            <div class="barcode_container">
-                <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/barcode" class="barcode">
+        @if ($settings->qr_code=='1')
+            <div class="qr_img">
+                <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/qr_code" class="qr_img">
             </div>
         @endif
-
-
-
     </div>
 
     @if (($count % $settings->labels_per_page == 0) && $count!=count($assets))
