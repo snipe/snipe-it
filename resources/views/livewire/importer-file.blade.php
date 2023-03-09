@@ -12,7 +12,7 @@
                             'id' => 'import_type',
                             'class' => 'livewire-select2',
                             'style' => 'min-width: 350px',
-                            'data-placeholder' => 'Select an import type...', /* TODO: translate me */
+                            'data-placeholder' => trans('general.select_var', ['thing' => trans('general.import_type')]), /* TODO: translate me */
                             'placeholder' => '', //needed so that the form-helper will put an empty option first
                             'data-minimum-results-for-search' => '-1', // Remove this if the list gets long enough that we need to search
                             'data-livewire-component' => $_instance->id
@@ -54,12 +54,12 @@
         @if ($activeFile->import_type)
             <div class="form-group col-md-12">
                 <hr style="border-top: 1px solid lightgray">
-                <h3>Map Import Fields</h3>
+                <h3><i class="{{ Helper::iconTypeByItem($activeFile->import_type) }}"></i> Map {{ ucwords($activeFile->import_type) }} Import Fields</h3>
                 <hr style="border-top: 1px solid lightgray">
             </div>
             <div class="form-group col-md-12">
                 <div class="col-md-3 text-right">
-                    <strong>Header Field</strong>
+                    <strong>CSV Header Field</strong>
                 </div>
                 <div class="col-md-4">
                     <strong>Import Field</strong>
@@ -133,8 +133,8 @@ $(function () {
             @this.statusText= "An import type is required... "; //TODO: translate?
             return;
         }
-        @this.statusType='pending';
-        @this.statusText = "Processing...";
+        @this.statusType ='pending';
+        @this.statusText = "{{ trans('admin/hardware/form.processing_spinner') }}";
         @this.generate_field_map().then(function (mappings_raw) {
             var mappings = JSON.parse(mappings_raw)
             // console.warn("Here is the mappings:")
