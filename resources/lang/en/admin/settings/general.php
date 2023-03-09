@@ -81,7 +81,7 @@ return [
     'ldap_help'                 => 'LDAP/Active Directory',
     'ldap_client_tls_key'       => 'LDAP Client TLS Key',
     'ldap_client_tls_cert'      => 'LDAP Client-Side TLS Certificate',
-    'ldap_enabled'              => 'LDAP enabled',
+    'ldap_enabled'              => 'LDAP/AD enabled',
     'ldap_integration'          => 'LDAP Integration',
     'ldap_settings'             => 'LDAP Settings',
     'ldap_client_tls_cert_help' => 'Client-Side TLS Certificate and Key for LDAP connections are usually only useful in Google Workspace configurations with "Secure LDAP." Both are required.',

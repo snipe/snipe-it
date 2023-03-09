@@ -43,7 +43,7 @@
                                 <input wire:model.debounce="ldap_enabled" type="checkbox" value="{{old('$ldap_enabled', $ldap_enabled) }}"  disabled>
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
-                                <input wire:model.lazy="ldap_enabled" type="checkbox" value="{{old('$ldap_enabled', $ldap_enabled)}} "  >
+                                <input wire:model.lazy="ldap_enabled" type="checkbox" value="{{old('$ldap_enabled', $ldap_enabled)}}"  >
                                 {{ trans('admin/settings/general.ldap_enabled') }}
                                 @endif
                             </div>
@@ -51,7 +51,7 @@
                     </div>
 
                 <!-- LDAP Password Sync -->
-                @if($ldap_enabled == true)
+
                     <div class="col-md-11 col-md-offset-1">
                         <div class="form-group">
                             <div class="col-md-3">
@@ -62,7 +62,7 @@
                                     <input wire:model="ldap_pw_sync" type="checkbox" value="{{old('$ldap_pw_sync', $ldap_pw_sync) }}"   disabled>
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
-                                    <input wire:model="ldap_pw_sync" type="checkbox" value="{{old('$ldap_pw_sync', $ldap_pw_sync)}} "   >
+                                    <input wire:model="ldap_pw_sync" type="checkbox" value="{{old('$ldap_pw_sync', $ldap_pw_sync)}}"   >
                                     {{ trans('general.yes') }}
                                     <p class="help-block">{{ trans('admin/settings/general.ldap_pw_sync_help') }}</p>
                                 {!! $errors->first('ldap_pw_sync_help', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
@@ -119,7 +119,6 @@
                             </div>
                         </div>
                     </div>
-                @endif <!--If ldap is enabled-->
 
                 <!-- AD Flag -->
                     <div class="col-md-11 col-md-offset-1">
@@ -132,7 +131,7 @@
                                     <input wire:model="is_ad" type="checkbox" value="{{old('is_ad', $is_ad) }}"   disabled>
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
-                                    <input wire:model="is_ad" type="checkbox" value="{{old('is_ad', $is_ad)}} "   >
+                                    <input wire:model="is_ad" type="checkbox" value="{{old('is_ad', $is_ad)}}"   >
                                 {{ trans('admin/settings/general.is_ad') }}
                                 {!! $errors->first('is_ad', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @endif
@@ -158,7 +157,7 @@
                             </div>
                         </div>
                     </div><!-- AD Domain -->
-
+            @if($ldap_enabled == true)
                 <!-- LDAP Client-Side TLS key -->
                     <div class="col-md-11 col-md-offset-1">
                         <div class="form-group {{ $errors->has('ldap_client_tls_key') ? 'error' : '' }}">
@@ -198,7 +197,7 @@
                             </div>
                         </div>
                     </div><!-- LDAP Client-Side TLS certificate -->
-
+                @endif
                 <!-- LDAP Server -->
                     <div class="col-md-11 col-md-offset-1">
                         <div class="form-group {{ $errors->has('ldap_server') ? 'error' : '' }}">
@@ -207,10 +206,10 @@
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
-                                    <input  wire:model.lazy="ldap_server" type="text" class="form-control" value={{old('ldap_server', $ldap_server)}} placeholder="{{trans('general.example') .'ldap://ldap.example.com'}} " disabled>
+                                    <input  wire:model.lazy="ldap_server" type="text" class="form-control" value="{{old('ldap_server', $ldap_server)}}" placeholder="{{trans('general.example') .'ldap://ldap.example.com'}} " disabled>
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
-                                    <input  wire:model.lazy="ldap_server" type="text" class="form-control" value={{old('ldap_server', $ldap_server)}} placeholder="{{trans('general.example') .'ldap://ldap.example.com'}}">
+                                    <input  wire:model.lazy="ldap_server" type="text" class="form-control" value="{{old('ldap_server', $ldap_server)}}" placeholder="{{trans('general.example') .'ldap://ldap.example.com'}}">
                                     <p class="help-block">{{ trans('admin/settings/general.ldap_server_help') }}</p>
                                     {!! $errors->first('ldap_server', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @endif
@@ -261,10 +260,10 @@
                                 {{ Form::label('ldap_uname', trans('admin/settings/general.ldap_uname')) }}
                             </div>
                             <div class="col-md-9">
-                                <input  wire:model.lazy="ldap_uname" type="text" class="form-control" value={{old('ldap_uname', $ldap_uname)}} placeholder="{{trans('general.example') .'ldap://ldap.example.com'}} " >
+                                <input  wire:model.lazy="ldap_uname" type="text" class="form-control" value="{{old('ldap_uname', $ldap_uname)}}" placeholder="{{trans('general.example') .'ldap://ldap.example.com'}} " >
                                 {!! $errors->first('ldap_uname', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @if (config('app.lock_passwords')===true)
-                                    <input  wire:model.lazy="ldap_uname" type="text" class="form-control" value={{old('ldap_uname', $ldap_uname)}} placeholder="{{trans('general.example') .'ldap://ldap.example.com'}} " disabled>
+                                    <input  wire:model.lazy="ldap_uname" type="text" class="form-control" value="{{old('ldap_uname', $ldap_uname)}}" placeholder="{{trans('general.example') .'ldap://ldap.example.com'}} " disabled>
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
                                 @endif
                             </div>
@@ -295,10 +294,10 @@
                                 {{ Form::label('ldap_basedn', trans('admin/settings/general.ldap_basedn')) }}
                             </div>
                             <div class="col-md-9">
-                                <input  wire:model.lazy="ldap_basedn" type="text" class="form-control" value={{old('ldap_basedn', $ldap_basedn)}} placeholder="{{trans('general.example') .'cn=users/authorized,dc=example,dc=com'}} " >
+                                <input  wire:model.lazy="ldap_basedn" type="text" class="form-control" value="{{old('ldap_basedn', $ldap_basedn)}}" placeholder="{{trans('general.example') .'cn=users/authorized,dc=example,dc=com'}} " >
                                 {!! $errors->first('ldap_basedn', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @if (config('app.lock_passwords')===true)
-                                    <input  wire:model.lazy="ldap_basedn" type="text" class="form-control" value={{old('ldap_basedn', $ldap_basedn)}} placeholder="{{trans('general.example') .'cn=users/authorized,dc=example,dc=com'}} " disabled>
+                                    <input  wire:model.lazy="ldap_basedn" type="text" class="form-control" value="{{old('ldap_basedn', $ldap_basedn)}}" placeholder="{{trans('general.example') .'cn=users/authorized,dc=example,dc=com'}} " disabled>
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
                                 @endif
                             </div>
@@ -312,10 +311,10 @@
                                 {{ Form::label('ldap_filter', trans('admin/settings/general.ldap_filter')) }}
                             </div>
                             <div class="col-md-9">
-                                <input  wire:model.lazy="ldap_filter" type="text" class="form-control" value={{old('ldap_filter', $ldap_filter)}} placeholder="{{trans('general.example') .'&(cn=*)'}} ">
+                                <input  wire:model.lazy="ldap_filter" type="text" class="form-control" value="{{old('ldap_filter', $ldap_filter)}}" placeholder="{{trans('general.example') .'&(cn=*)'}} ">
                                 {!! $errors->first('ldap_filter', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @if (config('app.lock_passwords')===true)
-                                    <input  wire:model.lazy="ldap_filter" type="text" class="form-control" value={{old('ldap_filter', $ldap_filter)}} placeholder="{{trans('general.example') .'&(cn=*)'}}" disabled>
+                                    <input  wire:model.lazy="ldap_filter" type="text" class="form-control" value="{{old('ldap_filter', $ldap_filter)}}" placeholder="{{trans('general.example') .'&(cn=*)'}}" disabled>
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
                                 @endif
                             </div>
@@ -329,10 +328,10 @@
                                 {{ Form::label('ldap_username_field', trans('admin/settings/general.ldap_username_field')) }}
                             </div>
                             <div class="col-md-9">
-                                <input  wire:model.lazy="ldap_username_field" type="text" class="form-control" value={{old('ldap_filter',$ldap_username_field)}} placeholder="{{trans('general.example') .'samaccountname'}} ">
+                                <input  wire:model.lazy="ldap_username_field" type="text" class="form-control" value="{{old('ldap_filter',$ldap_username_field)}}" placeholder="{{trans('general.example') .'samaccountname'}} ">
                                 {!! $errors->first('ldap_username_field', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @if (config('app.lock_passwords')===true)
-                                    <input  wire:model.lazy="ldap_username_field" type="text" class="form-control" value={{old('ldap_filter',$ldap_username_field)}} placeholder="{{trans('general.example') .'samaccountname'}} " disabled>
+                                    <input  wire:model.lazy="ldap_username_field" type="text" class="form-control" value="{{old('ldap_filter',$ldap_username_field)}}" placeholder="{{trans('general.example') .'samaccountname'}} " disabled>
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
                                 @endif
                             </div>
@@ -346,11 +345,11 @@
                                 {{ Form::label('ldap_lname_field', trans('admin/settings/general.ldap_lname_field')) }}
                             </div>
                             <div class="col-md-9">
-                                <input  wire:model.lazy="ldap_lname_field" type="text" class="form-control" value={{old('ldap_filter',$ldap_lname_field)}} placeholder="{{trans('general.example') .'sn'}} ">
+                                <input  wire:model.lazy="ldap_lname_field" type="text" class="form-control" value="{{old('ldap_filter',$ldap_lname_field)}}" placeholder="{{trans('general.example') .'sn'}} ">
 
                                 {!! $errors->first('ldap_lname_field', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @if (config('app.lock_passwords')===true)
-                                    <input  wire:model.lazy="ldap_lname_field" type="text" class="form-control" value={{old('ldap_filter',$ldap_lname_field)}} placeholder="{{trans('general.example') .'sn'}} " disabled>
+                                    <input  wire:model.lazy="ldap_lname_field" type="text" class="form-control" value="{{old('ldap_filter',$ldap_lname_field)}}" placeholder="{{trans('general.example') .'sn'}} " disabled>
 
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
                                 @endif
@@ -365,10 +364,10 @@
                                 {{ Form::label('ldap_fname_field', trans('admin/settings/general.ldap_fname_field')) }}
                             </div>
                             <div class="col-md-9">
-                                <input  wire:model.lazy="ldap_fname_field" type="text" class="form-control" value={{old('ldap_filter',$ldap_fname_field)}} placeholder="{{trans('general.example') .'givenname'}}">
+                                <input  wire:model.lazy="ldap_fname_field" type="text" class="form-control" value="{{old('ldap_filter',$ldap_fname_field)}}" placeholder="{{trans('general.example') .'givenname'}}">
                                 {!! $errors->first('ldap_fname_field', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @if (config('app.lock_passwords')===true)
-                                    <input  wire:model.lazy="ldap_fname_field" type="text" class="form-control" value={{old('ldap_filter',$ldap_fname_field)}} placeholder="{{trans('general.example') .'givenname'}}" disabled>
+                                    <input  wire:model.lazy="ldap_fname_field" type="text" class="form-control" value="{{old('ldap_filter',$ldap_fname_field)}}" placeholder="{{trans('general.example') .'givenname'}}" disabled>
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
                                 @endif
                             </div>
@@ -382,10 +381,10 @@
                                 {{ Form::label('ldap_auth_filter_query', trans('admin/settings/general.ldap_auth_filter_query')) }}
                             </div>
                             <div class="col-md-9">
-                                <input  wire:model.lazy="ldap_auth_filter_query" type="text" class="form-control" value={{old('ldap_filter',$ldap_auth_filter_query)}} placeholder="{{trans('general.example') .'uid='}}">
+                                <input  wire:model.lazy="ldap_auth_filter_query" type="text" class="form-control" value="{{old('ldap_filter',$ldap_auth_filter_query)}}" placeholder="{{trans('general.example') .'uid='}}">
                                 {!! $errors->first('ldap_auth_filter_query', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @if (config('app.lock_passwords')===true)
-                                    <input  wire:model.lazy="ldap_auth_filter_query" type="text" class="form-control" value={{old('ldap_filter',$ldap_auth_filter_query)}} placeholder="{{trans('general.example') .'uid='}}" disabled>
+                                    <input  wire:model.lazy="ldap_auth_filter_query" type="text" class="form-control" value="{{old('ldap_filter',$ldap_auth_filter_query)}}" placeholder="{{trans('general.example') .'uid='}}" disabled>
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
                                 @endif
                             </div>
@@ -399,10 +398,10 @@
                                 {{ Form::label('ldap_version', trans('admin/settings/general.ldap_version')) }}
                             </div>
                             <div class="col-md-9">
-                                <input  wire:model.lazy="ldap_version" type="text" class="form-control" value={{old('ldap_filter',$ldap_version)}} placeholder="{{trans('general.example') .'3'}}">
+                                <input  wire:model.lazy="ldap_version" type="text" class="form-control" value="{{old('ldap_filter',$ldap_version)}}" placeholder="{{trans('general.example') .'3'}}">
                                 {!! $errors->first('ldap_version', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @if (config('app.lock_passwords')===true)
-                                    <input  wire:model.lazy="ldap_version" type="text" class="form-control" value={{old('ldap_filter',$ldap_version)}} placeholder="{{trans('general.example') .'3'}}" disabled>
+                                    <input  wire:model.lazy="ldap_version" type="text" class="form-control" value="{{old('ldap_filter',$ldap_version)}}" placeholder="{{trans('general.example') .'3'}}" disabled>
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
                                 @endif
                             </div>
@@ -635,7 +634,101 @@
 
         </div> <!-- /.col-md-8-->
         </div> <!-- /.row-->
-    </div>
-
 </form>
-</div>
+    </div>
+@push('moar_scripts')
+    <script>
+         // * Test the LDAP connection settings
+         // */
+        $("#ldaptest").click(function () {
+            $("#ldapad_test_results").removeClass('hidden text-success text-danger');
+            $("#ldapad_test_results").html('');
+            $("#ldapad_test_results").html('<i class="fas fa-spinner spin"></i> {{ trans('admin/settings/message.ldap.testing') }}');
+            $.ajax({
+                url: '{{ route('api.settings.ldaptest') }}',
+                type: 'GET',
+                headers: {
+                    "X-Requested-With": 'XMLHttpRequest',
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {},
+                dataType: 'json',
+
+                success: function (data) {
+                    $("#ldapad_test_results").html('');
+                    let html = buildLdapTestResults(data)
+                    $("#ldapad_test_results").html(
+                        html
+                    );
+                },
+
+                error: function (data) {
+                    $("#ldapad_test_results").html('');
+                    $("#ldapad_test_results").addClass('text-danger');
+                    let errorIcon = '<i class="fas fa-exclamation-triangle text-danger"></i>' + ' ';
+                    if (data.status == 500) {
+                        $('#ldapad_test_results').html(errorIcon + '{{ trans('admin/settings/message.ldap.500') }}');
+                    } else if (data.status == 400) {
+                        let errorMessage = '';
+                        if( typeof data.responseJSON.user_sync !== 'undefined') {
+                            errorMessage =  data.responseJSON.user_sync.message;
+                        }
+                        if( typeof data.responseJSON.message !== 'undefined') {
+                            errorMessage =  data.responseJSON.message;
+                        }
+                        $('#ldapad_test_results').html(errorIcon + errorMessage);
+                    } else {
+                        $('#ldapad_test_results').html('{{ trans('admin/settings/message.ldap.error') }}');
+                       // $('#ldapad_test_results').html(errorIcon + data.responseText.message);
+                    }
+                }
+
+
+            });
+        });
+
+        /**
+         * Build the results html table
+         */
+        function buildLdapTestResults(results) {
+            let html = '<ul style="list-style: none;padding-left: 5px;">'
+            html += '<li class="text-success"><i class="fas fa-check" aria-hidden="true"></i> ' + results.login.message + ' </li>'
+            html += '<li class="text-success"><i class="fas fa-check" aria-hidden="true"></i> ' + results.bind.message + ' </li>'
+            html += '</ul>'
+            html += '<div>{{ trans('admin/settings/message.ldap.sync_success') }}</div>'
+            html += '<table class="table table-bordered table-condensed" style="background-color: #fff">'
+            html += buildLdapResultsTableHeader()
+            html += buildLdapResultsTableBody(results.user_sync.users)
+            html += '<table>'
+            return html;
+        }
+
+        function buildLdapResultsTableHeader(user)
+        {
+            var keys = [
+                '{{ trans('admin/settings/general.employee_number') }}',
+                '{{ trans('mail.username') }}',
+                '{{ trans('general.first_name') }}',
+                '{{ trans('general.last_name') }}',
+                '{{ trans('general.email') }}'
+            ]
+            let header = '<thead><tr>'
+            for (var i in keys) {
+                header += '<th>' + keys[i] + '</th>'
+            }
+            header += "</tr></thead>"
+            return header;
+        }
+
+        function buildLdapResultsTableBody(users)
+        {
+            let body = '<tbody>'
+            for (var i in users) {
+                body += '<tr><td>' + users[i].employee_number + '</td><td>' + users[i].username + '</td><td>' + users[i].firstname + '</td><td>' + users[i].lastname + '</td><td>' + users[i].email + '</td></tr>'
+            }
+            body += "</tbody>"
+            return body;
+        }
+
+    </script>
+@endpush

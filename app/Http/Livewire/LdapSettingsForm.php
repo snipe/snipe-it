@@ -99,7 +99,7 @@ class LdapSettingsForm extends Component
     }
 
 
-    public function submit($field){
+    public function submit(){
 
 //        $this->validate($this->rules,$this->messages, $field );
 
