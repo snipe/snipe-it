@@ -1,28 +1,14 @@
 <?php
 namespace Tests\Unit;
 
-use App\Exceptions\CheckoutNotAllowed;
 use App\Models\Asset;
 use App\Models\AssetModel;
-use App\Models\Company;
-use App\Models\Location;
-use App\Models\User;
 use App\Models\Category;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Tests\Unit\BaseTest;
-use App\Models\Component;
-use App\Models\ActionLog;
+use Tests\TestCase;
 
-
-class AssetTest extends BaseTest
+class AssetTest extends TestCase
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
-
     // public function testAutoIncrementMixed()
     // {
     //     $expected = '123411';
@@ -41,10 +27,6 @@ class AssetTest extends BaseTest
     //     $this->assertEquals($expected, $next);
     // }
 
-
-    /**
-     * @test
-     */
     public function testWarrantyExpiresAttribute()
     {
 
@@ -66,5 +48,4 @@ class AssetTest extends BaseTest
         $this->assertEquals(Carbon::createFromDate(2019, 1, 1)->format('Y-m-d'), $asset->warranty_expires->format('Y-m-d'));
 
     }
-
 }

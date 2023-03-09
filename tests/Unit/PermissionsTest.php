@@ -7,12 +7,9 @@ use App\Models\Component;
 use App\Models\Consumable;
 use App\Models\License;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Tests\Unit\BaseTest;
+use Tests\TestCase;
 
-class PermissionsTest extends BaseTest
+class PermissionsTest extends TestCase
 {
     // public function _before()
     // {

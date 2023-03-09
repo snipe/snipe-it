@@ -5,15 +5,12 @@ namespace Tests\Feature\Api\Users;
 use App\Models\Company;
 use App\Models\Setting;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 
 class UsersForSelectListTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function testUsersAreReturned()
     {
         Setting::factory()->create();
