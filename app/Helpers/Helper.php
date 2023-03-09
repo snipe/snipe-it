@@ -1092,6 +1092,15 @@ class Helper
         return $file_name;
     }
 
+
+    /**
+     * Universal helper to show file size in human-readable formats
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since 5.0
+     *
+     * @return string[]
+     */
     public static function formatFilesizeUnits($bytes)
     {
         if ($bytes >= 1073741824)
