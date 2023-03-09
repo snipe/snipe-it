@@ -30,8 +30,8 @@
                     <div class="errors-table">
                         <table class="table table-striped table-bordered" id="errors-table">
                             <thead>
-                            <th>Item</th>
-                            <th>Errors</th>
+                            <th>{{ trans('general.item') }}</th>
+                            <th>{{ trans('general.error') }}</th>
                             </thead>
                             <tbody>
                             @foreach($import_errors as $field => $error_list)
