@@ -276,7 +276,7 @@
                         {{ trans('general.company') }}
                       </div>
                       <div class="col-md-9">
-                        {{ $user->company->name }}
+                        <a href="{{ url('/companies/' . $user->company->id) }}">{{ $user->company->name }}</a>
                       </div>
 
                     </div>
