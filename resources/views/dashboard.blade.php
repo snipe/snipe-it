@@ -274,7 +274,7 @@
 </div> <!--/row-->
 <div class="row">
     <div class="col-md-6">
-         <!-- Categories -->
+         <!-- Locations -->
          <div class="box box-default">
             <div class="box-header with-border">
                 <h2 class="box-title">{{ trans('general.asset') }} {{ trans('general.locations') }}</h2>
