@@ -55,11 +55,11 @@
                             </div>
                         @endif
 
-                        <div class="form-group col-md-12">
-                            <div class="col-md-3">
+                        <div class="form-group" style="margin-left:-14px;">
+                            <div class="col-md-2">
                                 <label>Integration Option</label>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-8"style="margin-left: 2px;">
                                 <select wire:model="webhook_selected"
                                         aria-label="webhook_selected"
                                         class="form-control "
