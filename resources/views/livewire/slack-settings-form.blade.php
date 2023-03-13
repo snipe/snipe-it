@@ -24,7 +24,7 @@
         </div>
         <div class="box-body">
             <div class="col-md-12">
-                @if($webhook_selected != 'General')
+                @if($webhook_selected != 'general')
                 <p>
                     {!! trans('admin/settings/general.webhook_integration_help',array('webhook_link' => $webhook_link, 'app' => $webhook_name)) !!}
                 </p>
@@ -64,9 +64,9 @@
                                         aria-label="webhook_selected"
                                         class="form-control "
                                 >
-                                    <option value="Slack">Slack</option>
+                                    <option value="slack">{{trans('admin/settings/general.slack')}}</option>
 {{--                                    <option value="Discord">Discord</option>--}}
-                                    <option value="General">General Webhook</option>
+                                    <option value="general">{{trans('admin/settings/general.general_webhook')}}</option>
                                 </select>
                             </div>
                             <br><br><br>

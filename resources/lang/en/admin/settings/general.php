@@ -199,6 +199,8 @@ return [
     'show_images_in_email_help'   => 'Uncheck this box if your Snipe-IT installation is behind a VPN or closed network and users outside the network will not be able to load images served from this installation in their emails.',
     'site_name'                 => 'Site Name',
     'integrations'               => 'Integrations',
+    'slack'                     => 'Slack',
+    'general_webhook'           => 'General Webhook',
     'webhook'                   => ':app',
     'webhook_title'               => 'Update Webhook Settings',
     'webhook_help'                => 'Integration settings',
