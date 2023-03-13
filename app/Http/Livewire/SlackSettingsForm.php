@@ -21,7 +21,7 @@ class SlackSettingsForm extends Component
     public Setting $setting;
 
     protected $rules = [
-        'webhook_endpoint'                      => 'url|required_with:webhook_channel|starts_with:https://hooks.slack.com/services,https://discord.com/api/webhooks|nullable',
+        'webhook_endpoint'                      => 'url|required_with:webhook_channel|starts_with:https://hooks.slack.com/services|nullable',
         'webhook_channel'                       => 'required_with:webhook_endpoint|starts_with:#|nullable',
         'webhook_botname'                       => 'string|nullable',
     ];
