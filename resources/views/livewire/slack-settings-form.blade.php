@@ -24,9 +24,11 @@
         </div>
         <div class="box-body">
             <div class="col-md-12">
+                @if($webhook_selected != 'General')
                 <p>
                     {!! trans('admin/settings/general.webhook_integration_help',array('webhook_link' => $webhook_link, 'app' => $webhook_name)) !!}
                 </p>
+                @endif
                 <br>
             </div>
 
@@ -164,26 +166,3 @@
                     </div> <!-- /box -->
                 </div> <!-- /.col-md-8-->
 
-
-            @push('scripts')
-                <script>
-                    // function formatText (icon) {
-                    //     return $('<span><i class="fab ' + $(icon.element).data('icon') + '"></i> ' + icon.text + '</span>');
-                    // };
-                    //
-                    // $('.hook_options').select2({
-                    //     width: "50%",
-                    //     templateSelection: formatText,
-                    //     templateResult: formatText
-                    // });
-                    // $(document).ready(function () {
-                    //     $('.webhook_options').select2();
-                    //     $('.webhook_options').on('change', function (e) {
-                    //         let data = $('#select2').select2("val");
-                    //         @this.set('webhook_option', data);
-                    //     });
-                    // });
-
-
-                </script>
-    @endpush

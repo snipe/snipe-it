@@ -164,7 +164,7 @@
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.slack.index') }}" class="settings_button">
-                  <i class="fa-regular fa-hashtag fa-4x" aria-hidden="true"></i>
+                  <i class="fa-solid fa-hashtag fa-4x" aria-hidden="true"></i>
                   <br><br>
                   <span class="name">{{ trans('admin/settings/general.integrations') }}</span>
                 </a>
