@@ -454,7 +454,6 @@ class UsersController extends Controller
             // Check if the request has groups passed and has a value
             if ($request->filled('groups')) {
                 $validator = Validator::make($request->all(), [
-                    'groups' => 'integer|exists:permission_groups,id',
                     'groups.*' => 'integer|exists:permission_groups,id',
                 ]);
                 
