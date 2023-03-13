@@ -64,9 +64,9 @@
                                         aria-label="webhook_selected"
                                         class="form-control "
                                 >
-                                    <option value="slack">Slack</option>
+                                    <option value="slack">{{trans('admin/settings/general.slack')}}</option>
 {{--                                    <option value="Discord">Discord</option>--}}
-                                    <option value="general">General Webhook</option>
+                                    <option value="general">{{trans('admin/settings/general.general_webhook')}}</option>
                                 </select>
                             </div>
                             <br><br><br>
