@@ -11,7 +11,7 @@ return [
     'admin_cc_email_help'       => 'If you would like to send a copy of checkin/checkout emails that are sent to users to an additional email account, enter it here. Otherwise leave this field blank.',
     'is_ad'				        => 'This is an Active Directory server',
     'alerts'                	=> 'Alerts',
-    'alert_title'               => 'Update Alert Settings',
+    'alert_title'               => 'Update Notification Settings',
     'alert_email'				=> 'Send alerts to',
     'alert_email_help'    => 'Email addresses or distribution lists you want alerts to be sent to, comma separated',
     'alerts_enabled'			=> 'Email Alerts Enabled',
