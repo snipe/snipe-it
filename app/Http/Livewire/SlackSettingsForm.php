@@ -26,8 +26,8 @@ class SlackSettingsForm extends Component
         'webhook_botname'                       => 'string|nullable',
     ];
     static $webhook_text= [
-        "Slack" => array(
-            "name" => "Slack",
+        "slack" => array(
+            "name" => "slack",
             "icon" => 'fab fa-slack',
             "placeholder" => "https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX",
             "link" => 'https://api.slack.com/messaging/webhooks',
@@ -38,8 +38,8 @@ class SlackSettingsForm extends Component
 //            "placeholder" => "https://discord.com/api/webhooks/XXXXXXXXXXXXXXXXXXXXX",
 //            "link" => 'https://support.discord.com/hc/en-us/articles/360045093012-Server-Integrations-Page',
 //        ),
-        "General"=> array(
-            "name" => "General",
+        "general"=> array(
+            "name" => "general",
             "icon" => "fab fa-hashtag",
             "placeholder" => "",
             "link" => "",
@@ -61,7 +61,7 @@ class SlackSettingsForm extends Component
 
     }
     public function updated($field){
-        if($this->webhook_selected != 'General') {
+        if($this->webhook_selected != 'general') {
             $this->validateOnly($field, $this->rules);
         }
     }
@@ -119,7 +119,7 @@ class SlackSettingsForm extends Component
     }
     public function submit()
     {
-        if($this->webhook_selected != 'General') {
+        if($this->webhook_selected != 'general') {
             $this->validate($this->rules);
         }
 
