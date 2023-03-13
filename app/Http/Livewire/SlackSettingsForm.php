@@ -27,7 +27,7 @@ class SlackSettingsForm extends Component
     ];
     static $webhook_text= [
         "slack" => array(
-            "name" => "slack",
+            "name" => "Slack",
             "icon" => 'fab fa-slack',
             "placeholder" => "https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX",
             "link" => 'https://api.slack.com/messaging/webhooks',
@@ -39,7 +39,7 @@ class SlackSettingsForm extends Component
 //            "link" => 'https://support.discord.com/hc/en-us/articles/360045093012-Server-Integrations-Page',
 //        ),
         "general"=> array(
-            "name" => "general",
+            "name" => "General",
             "icon" => "fab fa-hashtag",
             "placeholder" => "",
             "link" => "",
