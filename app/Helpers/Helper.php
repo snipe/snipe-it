@@ -532,14 +532,32 @@ class Helper
     {
         $category_types = [
             '' => '',
-            'accessory' => 'Accessory',
-            'asset' => 'Asset',
-            'consumable' => 'Consumable',
-            'component' => 'Component',
-            'license' => 'License',
+            'accessory' => trans('general.accessories'),
+            'asset' => trans('general.asset'),
+            'consumable' => trans('general.consumable'),
+            'component' => trans('general.component'),
+            'license' => trans('general.license'),
         ];
 
         return $category_types;
+    }
+    public static function categoryType($category_type){
+
+        switch ($category_type) {
+            case ('accessory'):
+                return trans('general.accessory');
+                break;
+            case ('consumable'):
+                return trans('general.consumable');
+                break;
+            case ('component'):
+                return trans('general.component');
+                break;
+            case ('asset'):
+                return trans('general.asset');
+            case ('license'):
+                return trans('general.license');
+        }
     }
 
     /**
