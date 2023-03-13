@@ -69,6 +69,7 @@ class UsersController extends Controller
             'users.ldap_import',
             'users.start_date',
             'users.end_date',
+            'users.vip',
 
         ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy',)
             ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count');
@@ -147,6 +148,10 @@ class UsersController extends Controller
 
         if ($request->filled('remote')) {
             $users = $users->where('remote', '=', $request->input('remote'));
+        }
+
+        if ($request->filled('vip')) {
+            $users = $users->where('vip', '=', $request->input('vip'));
         }
 
         if ($request->filled('two_factor_enrolled')) {
@@ -246,6 +251,7 @@ class UsersController extends Controller
                         'two_factor_optin',
                         'two_factor_enrolled',
                         'remote',
+                        'vip',
                         'start_date',
                         'end_date',
                     ];
@@ -286,9 +292,11 @@ class UsersController extends Controller
         $users = Company::scopeCompanyables($users);
 
         if ($request->filled('search')) {
-            $users = $users->SimpleNameSearch($request->get('search'))
-                ->orWhere('username', 'LIKE', '%'.$request->get('search').'%')
-                ->orWhere('employee_num', 'LIKE', '%'.$request->get('search').'%');
+            $users = $users->where(function ($query) use ($request) {
+                $query->SimpleNameSearch($request->get('search'))
+                    ->orWhere('username', 'LIKE', '%'.$request->get('search').'%')
+                    ->orWhere('employee_num', 'LIKE', '%'.$request->get('search').'%');
+            });
         }
 
         $users = $users->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');

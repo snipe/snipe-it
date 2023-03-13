@@ -51,9 +51,8 @@ class ReportsController extends Controller
     public function getAccessoryReport()
     {
         $this->authorize('reports.view');
-        $accessories = Accessory::orderBy('created_at', 'DESC')->with('company')->get();
 
-        return view('reports/accessories', compact('accessories'));
+        return view('reports/accessories');
     }
 
     /**
@@ -285,7 +284,7 @@ class ReportsController extends Controller
 
                     $row = [
                         $actionlog->created_at,
-                        ($actionlog->user) ? e($actionlog->user->getFullNameAttribute()) : '',
+                        ($actionlog->admin) ? e($actionlog->admin->getFullNameAttribute()) : '',
                         $actionlog->present()->actionType(),
                         e($actionlog->itemType()),
                         ($actionlog->itemType() == 'user') ? $actionlog->filename : $item_name,

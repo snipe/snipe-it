@@ -101,6 +101,7 @@ class AssetsController extends Controller
             'checkin_counter',
             'requests_counter',
             'byod',
+            'asset_eol_date',
         ];
 
         $filter = [];
@@ -128,14 +129,12 @@ class AssetsController extends Controller
         // They are also used by the individual searches on detail pages like
         // locations, etc.
 
-
         // Search custom fields by column name
         foreach ($all_custom_fields as $field) {
             if ($request->filled($field->db_column_name())) {
                 $assets->where($field->db_column_name(), '=', $request->input($field->db_column_name()));
             }
         }
-
 
         if ($request->filled('status_id')) {
             $assets->where('assets.status_id', '=', $request->input('status_id'));
@@ -171,6 +170,10 @@ class AssetsController extends Controller
 
         if ($request->filled('supplier_id')) {
             $assets->where('assets.supplier_id', '=', $request->input('supplier_id'));
+        }
+
+        if ($request->filled('asset_eol_date')) {
+            $assets->where('assets.asset_eol_date', '=', $request->input('asset_eol_date'));
         }
 
         if (($request->filled('assigned_to')) && ($request->filled('assigned_type'))) {

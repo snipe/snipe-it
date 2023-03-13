@@ -64,6 +64,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'scim_externalid',
         'avatar',
         'gravatar',
+        'vip',
     ];
 
     protected $casts = [
@@ -71,6 +72,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'manager_id'   => 'integer',
         'location_id'  => 'integer',
         'company_id'   => 'integer',
+        'vip'      => 'boolean',
     ];
 
 
@@ -78,8 +80,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'created_at',
         'updated_at',
         'deleted_at',
-        'start_date',
-        'end_date',
+        'start_date' => 'date_format:Y-m-d',
+        'end_date' => 'date_format:Y-m-d',
     ];
 
 
@@ -285,7 +287,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function assets()
     {
-        return $this->morphMany(\App\Models\Asset::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
+        return $this->morphMany(\App\Models\Asset::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed()->orderBy('id');
     }
 
     /**
@@ -313,7 +315,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     public function accessories()
     {
         return $this->belongsToMany(\App\Models\Accessory::class, 'accessories_users', 'assigned_to', 'accessory_id')
-            ->withPivot('id', 'created_at', 'note')->withTrashed();
+            ->withPivot('id', 'created_at', 'note')->withTrashed()->orderBy('accessory_id');
     }
 
     /**

@@ -36,7 +36,6 @@ class License extends Depreciable
         'purchase_date' => 'datetime',
         'expiration_date' => 'datetime',
         'termination_date' => 'datetime',
-        'seats'   => 'integer',
         'category_id'  => 'integer',
         'company_id'   => 'integer',
     ];
@@ -368,7 +367,7 @@ class License extends Depreciable
      */
     public function assignedusers()
     {
-        return $this->belongsToMany(\App\Models\User::class, 'license_seats', 'assigned_to', 'license_id');
+        return $this->belongsToMany(\App\Models\User::class, 'license_seats', 'license_id', 'assigned_to');
     }
 
     /**

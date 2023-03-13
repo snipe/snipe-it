@@ -7,7 +7,9 @@ use enshrined\svgSanitize\Sanitizer;
 use Intervention\Image\Facades\Image;
 use App\Http\Traits\ConvertsBase64ToFiles;
 use Illuminate\Http\UploadedFile;
-use Storage;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Exception\NotReadableException;
+
 
 class ImageUploadRequest extends Request
 {
@@ -106,10 +108,18 @@ class ImageUploadRequest extends Request
                     \Log::debug('Not an SVG or webp - resize');
                     \Log::debug('Trying to upload to: '.$path.'/'.$file_name);
 
-                    $upload = Image::make($image->getRealPath())->resize(null, $w, function ($constraint) {
-                        $constraint->aspectRatio();
-                        $constraint->upsize();
-                     });
+                    try {
+                        $upload = Image::make($image->getRealPath())->resize(null, $w, function ($constraint) {
+                            $constraint->aspectRatio();
+                            $constraint->upsize();
+                        });
+                    } catch(NotReadableException $e) {
+                        \Log::debug($e);
+                        $validator = \Validator::make([], []);
+                        $validator->errors()->add($form_fieldname, trans('general.unaccepted_image_type', ['mimetype' => $image->getClientMimeType()]));
+
+                        throw new \Illuminate\Validation\ValidationException($validator);
+                    }
 
                     // This requires a string instead of an object, so we use ($string)
                     Storage::disk('public')->put($path.'/'.$file_name, (string) $upload->encode());

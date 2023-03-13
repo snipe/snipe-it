@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9bd2bbbd4b08d23336364da3d3a4561a",
+    "content-hash": "590171872e4a6a29c78efde99fbbf00e",
     "packages": [
         {
             "name": "alek13/slack",
@@ -1810,24 +1810,24 @@
         },
         {
             "name": "dompdf/dompdf",
-            "version": "v2.0.0",
+            "version": "v2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dompdf/dompdf.git",
-                "reference": "79573d8b8a141ec8a17312515de8740eed014fa9"
+                "reference": "e8d2d5e37e8b0b30f0732a011295ab80680d7e85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/79573d8b8a141ec8a17312515de8740eed014fa9",
-                "reference": "79573d8b8a141ec8a17312515de8740eed014fa9",
+                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/e8d2d5e37e8b0b30f0732a011295ab80680d7e85",
+                "reference": "e8d2d5e37e8b0b30f0732a011295ab80680d7e85",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "ext-mbstring": "*",
                 "masterminds/html5": "^2.0",
-                "phenx/php-font-lib": "^0.5.4",
-                "phenx/php-svg-lib": "^0.3.3 || ^0.4.0",
+                "phenx/php-font-lib": ">=0.5.4 <1.0.0",
+                "phenx/php-svg-lib": ">=0.3.3 <1.0.0",
                 "php": "^7.1 || ^8.0"
             },
             "require-dev": {
@@ -1858,25 +1858,17 @@
             ],
             "authors": [
                 {
-                    "name": "Fabien Ménager",
-                    "email": "fabien.menager@gmail.com"
-                },
-                {
-                    "name": "Brian Sweeney",
-                    "email": "eclecticgeek@gmail.com"
-                },
-                {
-                    "name": "Gabriel Bull",
-                    "email": "me@gabrielbull.com"
+                    "name": "The Dompdf Community",
+                    "homepage": "https://github.com/dompdf/dompdf/blob/master/AUTHORS.md"
                 }
             ],
             "description": "DOMPDF is a CSS 2.1 compliant HTML to PDF converter",
             "homepage": "https://github.com/dompdf/dompdf",
             "support": {
                 "issues": "https://github.com/dompdf/dompdf/issues",
-                "source": "https://github.com/dompdf/dompdf/tree/v2.0.0"
+                "source": "https://github.com/dompdf/dompdf/tree/v2.0.3"
             },
-            "time": "2022-06-21T21:14:57+00:00"
+            "time": "2023-02-07T12:51:48+00:00"
         },
         {
             "name": "dragonmantank/cron-expression",
@@ -5131,16 +5123,16 @@
         },
         {
             "name": "masterminds/html5",
-            "version": "2.7.5",
+            "version": "2.7.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Masterminds/html5-php.git",
-                "reference": "f640ac1bdddff06ea333a920c95bbad8872429ab"
+                "reference": "897eb517a343a2281f11bc5556d6548db7d93947"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/f640ac1bdddff06ea333a920c95bbad8872429ab",
-                "reference": "f640ac1bdddff06ea333a920c95bbad8872429ab",
+                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/897eb517a343a2281f11bc5556d6548db7d93947",
+                "reference": "897eb517a343a2281f11bc5556d6548db7d93947",
                 "shasum": ""
             },
             "require": {
@@ -5194,9 +5186,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Masterminds/html5-php/issues",
-                "source": "https://github.com/Masterminds/html5-php/tree/2.7.5"
+                "source": "https://github.com/Masterminds/html5-php/tree/2.7.6"
             },
-            "time": "2021-07-01T14:25:37+00:00"
+            "time": "2022-08-18T16:18:26+00:00"
         },
         {
             "name": "maximebf/debugbar",
@@ -6300,6 +6292,92 @@
             "time": "2020-10-15T08:29:30+00:00"
         },
         {
+            "name": "paragonie/sodium_compat",
+            "version": "v1.19.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/sodium_compat.git",
+                "reference": "cb15e403ecbe6a6cc515f855c310eb6b1872a933"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paragonie/sodium_compat/zipball/cb15e403ecbe6a6cc515f855c310eb6b1872a933",
+                "reference": "cb15e403ecbe6a6cc515f855c310eb6b1872a933",
+                "shasum": ""
+            },
+            "require": {
+                "paragonie/random_compat": ">=1",
+                "php": "^5.2.4|^5.3|^5.4|^5.5|^5.6|^7|^8"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^3|^4|^5|^6|^7|^8|^9"
+            },
+            "suggest": {
+                "ext-libsodium": "PHP < 7.0: Better performance, password hashing (Argon2i), secure memory management (memzero), and better security.",
+                "ext-sodium": "PHP >= 7.0: Better performance, password hashing (Argon2i), secure memory management (memzero), and better security."
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "autoload.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "ISC"
+            ],
+            "authors": [
+                {
+                    "name": "Paragon Initiative Enterprises",
+                    "email": "security@paragonie.com"
+                },
+                {
+                    "name": "Frank Denis",
+                    "email": "jedisct1@pureftpd.org"
+                }
+            ],
+            "description": "Pure PHP implementation of libsodium; uses the PHP extension if it exists",
+            "keywords": [
+                "Authentication",
+                "BLAKE2b",
+                "ChaCha20",
+                "ChaCha20-Poly1305",
+                "Chapoly",
+                "Curve25519",
+                "Ed25519",
+                "EdDSA",
+                "Edwards-curve Digital Signature Algorithm",
+                "Elliptic Curve Diffie-Hellman",
+                "Poly1305",
+                "Pure-PHP cryptography",
+                "RFC 7748",
+                "RFC 8032",
+                "Salpoly",
+                "Salsa20",
+                "X25519",
+                "XChaCha20-Poly1305",
+                "XSalsa20-Poly1305",
+                "Xchacha20",
+                "Xsalsa20",
+                "aead",
+                "cryptography",
+                "ecdh",
+                "elliptic curve",
+                "elliptic curve cryptography",
+                "encryption",
+                "libsodium",
+                "php",
+                "public-key cryptography",
+                "secret-key cryptography",
+                "side-channel resistant"
+            ],
+            "support": {
+                "issues": "https://github.com/paragonie/sodium_compat/issues",
+                "source": "https://github.com/paragonie/sodium_compat/tree/v1.19.0"
+            },
+            "time": "2022-09-26T03:40:35+00:00"
+        },
+        {
             "name": "phenx/php-font-lib",
             "version": "0.5.4",
             "source": {
@@ -6345,21 +6423,21 @@
         },
         {
             "name": "phenx/php-svg-lib",
-            "version": "0.4.1",
+            "version": "0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dompdf/php-svg-lib.git",
-                "reference": "4498b5df7b08e8469f0f8279651ea5de9626ed02"
+                "reference": "76876c6cf3080bcb6f249d7d59705108166a6685"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dompdf/php-svg-lib/zipball/4498b5df7b08e8469f0f8279651ea5de9626ed02",
-                "reference": "4498b5df7b08e8469f0f8279651ea5de9626ed02",
+                "url": "https://api.github.com/repos/dompdf/php-svg-lib/zipball/76876c6cf3080bcb6f249d7d59705108166a6685",
+                "reference": "76876c6cf3080bcb6f249d7d59705108166a6685",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
-                "php": "^7.1 || ^7.2 || ^7.3 || ^7.4 || ^8.0",
+                "php": "^7.1 || ^8.0",
                 "sabberworm/php-css-parser": "^8.4"
             },
             "require-dev": {
@@ -6385,9 +6463,9 @@
             "homepage": "https://github.com/PhenX/php-svg-lib",
             "support": {
                 "issues": "https://github.com/dompdf/php-svg-lib/issues",
-                "source": "https://github.com/dompdf/php-svg-lib/tree/0.4.1"
+                "source": "https://github.com/dompdf/php-svg-lib/tree/0.5.0"
             },
-            "time": "2022-03-07T12:52:04+00:00"
+            "time": "2022-09-06T12:16:56+00:00"
         },
         {
             "name": "php-http/message-factory",
