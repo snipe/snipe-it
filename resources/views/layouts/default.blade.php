@@ -809,9 +809,11 @@
         </section>
 
       </div><!-- /.content-wrapper -->
-
-      <footer class="main-footer hidden-print">
-
+     @if($snipeSettings->footer_text!='')
+         <footer class="main-footer hidden-print" style="height:100px;">
+     @else
+         <footer class="main-footer hidden-print">
+     @endif
         <div class="pull-right hidden-xs">
           @if ($snipeSettings->version_footer!='off')
               @if (($snipeSettings->version_footer=='on') || (($snipeSettings->version_footer=='admin') && (Auth::user()->isSuperUser()=='1')))
