@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Category;
+use App\Models\Supplier;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /*
@@ -33,12 +34,8 @@ class AssetMaintenanceFactory extends Factory
     public function definition()
     {
         return [
-            'asset_id' => function () {
-                return \App\Models\Asset::factory()->create()->id;
-            },
-            'supplier_id' => function () {
-                return \App\Models\Supplier::factory()->create()->id;
-            },
+            'asset_id' => Asset::factory(),
+            'supplier_id' => Supplier::factory(),
             'asset_maintenance_type' => $this->faker->randomElement(['maintenance', 'repair', 'upgrade']),
             'title' => $this->faker->sentence,
             'start_date' => $this->faker->date(),
