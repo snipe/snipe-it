@@ -49,8 +49,7 @@
     @endif
 @endif
 
-<h3>{{ trans('general.assigned_to', ['name' => $show_user->present()->fullName()]) }} {{ ($show_user->jobtitle!='' ? ' - '.$show_user->jobtitle : '') }}<div style='text-align:right'><div style='color:red'>{{ trans('admin/users/general.all_assigned_list_generation')}} {{ date('d-M-Y H:i', time()) }}
-</div></div>
+<h3>{{ trans('general.assigned_to', ['name' => $show_user->present()->fullName()]) }} {{ ($show_user->jobtitle!='' ? ' - '.$show_user->jobtitle : '') }}
 </h3>
     @if ($assets->count() > 0)
         @php
@@ -242,7 +241,15 @@
         </table>
     @endif
 
+    @php
+    $currenttime = Helper::getFormattedDateObject(now(), 'date', false);
+    @endphp
+
     <br>
+    <br>
+    //needs to fix string/int error
+    <div style='text-align:left'><div style='color:black'>{{ trans('admin/users/general.all_assigned_list_generation')}} {{ date('d-M-Y H:i', $currenttime) }}
+</div></div>
     <br>
     <br>
     <table>
