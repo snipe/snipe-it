@@ -6,6 +6,7 @@ use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Category;
 use App\Models\Location;
+use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -41,7 +42,9 @@ class AssetFactory extends Factory
             'name' => null,
             'rtd_location_id' => Location::factory(),
             'serial' => $this->faker->uuid(),
-            'status_id' => 1,
+            'status_id' => function () {
+                return Statuslabel::where('name', 'Ready to Deploy')->first() ?? Statuslabel::factory()->rtd()->create(['name' => 'Ready to Deploy']);
+            },
             'user_id' => function () {
                 return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
             },
@@ -73,7 +76,9 @@ class AssetFactory extends Factory
         return $this->state(function () {
             return [
                 'model_id' => 1,
-                'status_id' => 2,
+                'status_id' => function () {
+                    return Statuslabel::where('name', 'Pending')->first() ?? Statuslabel::factory()->pending()->make(['name' => 'Pending']);
+                },
             ];
         });
     }
@@ -83,7 +88,9 @@ class AssetFactory extends Factory
         return $this->state(function () {
             return [
                 'model_id' => 1,
-                'status_id' => 3,
+                'status_id' => function () {
+                    return Statuslabel::where('name', 'Archived')->first() ?? Statuslabel::factory()->archived()->make(['name' => 'Archived']);
+                },
             ];
         });
     }
