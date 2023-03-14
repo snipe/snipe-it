@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
+use App\Models\Company;
 use App\Models\Location;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -32,9 +34,7 @@ class ComponentFactory extends Factory
     {
         return [
             'name' => $this->faker->text(20),
-            'category_id' => function () {
-                return \App\Models\Category::factory()->create()->id;
-            },
+            'category_id' => Category::factory(),
             'location_id' => function () {
                 return Location::first() ?? Location::factory();
             },
@@ -44,9 +44,7 @@ class ComponentFactory extends Factory
             'purchase_date' => $this->faker->dateTime(),
             'purchase_cost' => $this->faker->randomFloat(2),
             'min_amt' => $this->faker->numberBetween($min = 1, $max = 2),
-            'company_id' => function () {
-                return \App\Models\Company::factory()->create()->id;
-            },
+            'company_id' => Company::factory(),
         ];
     }
 
@@ -55,7 +53,9 @@ class ComponentFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'Crucial 4GB DDR3L-1600 SODIMM',
-                'category_id' => 13,
+                'category_id' => function () {
+                    return Category::where('name', 'RAM')->first() ?? Category::factory()->componentRamCategory();
+                },
                 'qty' => 10,
                 'min_amt' => 2,
                 'location_id' => 3,
@@ -69,7 +69,9 @@ class ComponentFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'Crucial 8GB DDR3L-1600 SODIMM Memory for Mac',
-                'category_id' => 13,
+                'category_id' => function () {
+                    return Category::where('name', 'RAM')->first() ?? Category::factory()->componentRamCategory();
+                },
                 'qty' => 10,
                 'min_amt' => 2,
             ];
@@ -81,7 +83,9 @@ class ComponentFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'Crucial BX300 120GB SATA Internal SSD',
-                'category_id' => 12,
+                'category_id' => function () {
+                    return Category::where('name', 'HDD/SSD')->first() ?? Category::factory()->componentHddCategory();
+                },
                 'qty' => 10,
                 'min_amt' => 2,
             ];
@@ -93,7 +97,9 @@ class ComponentFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'Crucial BX300 240GB SATA Internal SSD',
-                'category_id' => 12,
+                'category_id' => function () {
+                    return Category::where('name', 'HDD/SSD')->first() ?? Category::factory()->componentHddCategory();
+                },
                 'qty' => 10,
                 'min_amt' => 2,
             ];

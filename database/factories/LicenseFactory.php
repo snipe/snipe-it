@@ -72,7 +72,9 @@ class LicenseFactory extends Factory
                 'seats' => 10,
                 'purchase_order' => '13503Q',
                 'maintained' => true,
-                'category_id' => 14,
+                'category_id' => function () {
+                    return Category::where('name', 'Graphics Software')->first() ?? Category::factory()->licenseGraphicsCategory();
+                },
             ];
 
             return $data;
@@ -89,7 +91,9 @@ class LicenseFactory extends Factory
                 },
                 'purchase_cost' => '29.99',
                 'seats' => 10,
-                'category_id' => 14,
+                'category_id' => function () {
+                    return Category::where('name', 'Graphics Software')->first() ?? Category::factory()->licenseGraphicsCategory();
+                },
             ];
 
             return $data;
@@ -106,7 +110,9 @@ class LicenseFactory extends Factory
                 },
                 'purchase_cost' => '199.99',
                 'seats' => 10,
-                'category_id' => 14,
+                'category_id' => function () {
+                    return Category::where('name', 'Graphics Software')->first() ?? Category::factory()->licenseGraphicsCategory();
+                },
             ];
     
 
@@ -124,7 +130,9 @@ class LicenseFactory extends Factory
                 },
                 'purchase_cost' => '49.99',
                 'seats' => 20,
-                'category_id' => 15,
+                'category_id' => function () {
+                    return Category::where('name', 'Office Software')->first() ?? Category::factory()->licenseOfficeCategory();
+                },
             ];
 
             return $data;

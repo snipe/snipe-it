@@ -99,7 +99,7 @@ class AssetModelFactory extends Factory
             return [
                 'name' => 'Macbook Pro 13"',
                 'category_id' => function () {
-                    return Category::find(1) ?? Category::factory()->assetLaptopCategory();
+                    return Category::where('name', 'Laptops')->first() ?? Category::factory()->assetLaptopCategory();
                 },
                 'eol' => '36',
                 'depreciation_id' => 1,
@@ -115,7 +115,7 @@ class AssetModelFactory extends Factory
             return [
                 'name' => 'Macbook Air',
                 'category_id' => function () {
-                    return Category::find(1) ?? Category::factory()->assetLaptopCategory();
+                    return Category::where('name', 'Laptops')->first() ?? Category::factory()->assetLaptopCategory();
                 },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'Apple')->first() ?? Manufacturer::factory()->apple();
@@ -134,7 +134,7 @@ class AssetModelFactory extends Factory
             return [
                 'name' => 'Surface',
                 'category_id' => function () {
-                    return Category::find(1) ?? Category::factory()->assetLaptopCategory();
+                    return Category::where('name', 'Laptops')->first() ?? Category::factory()->assetLaptopCategory();
                 },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'Microsoft')->first() ?? Manufacturer::factory()->microsoft();
@@ -153,7 +153,7 @@ class AssetModelFactory extends Factory
             return [
                 'name' => 'XPS 13',
                 'category_id' => function () {
-                    return Category::find(1) ?? Category::factory()->assetLaptopCategory();
+                    return Category::where('name', 'Laptops')->first() ?? Category::factory()->assetLaptopCategory();
                 },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'Dell')->first() ?? Manufacturer::factory()->dell();
@@ -172,7 +172,7 @@ class AssetModelFactory extends Factory
             return [
                 'name' => 'ZenBook UX310',
                 'category_id' => function () {
-                    return Category::find(1) ?? Category::factory()->assetLaptopCategory();
+                    return Category::where('name', 'Laptops')->first() ?? Category::factory()->assetLaptopCategory();
                 },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'Asus')->first() ?? Manufacturer::factory()->asus();
@@ -191,7 +191,7 @@ class AssetModelFactory extends Factory
             return [
                 'name' => 'Spectre',
                 'category_id' => function () {
-                    return Category::find(1) ?? Category::factory()->assetLaptopCategory();
+                    return Category::where('name', 'Laptops')->first() ?? Category::factory()->assetLaptopCategory();
                 },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'HP')->first() ?? Manufacturer::factory()->hp();
@@ -210,7 +210,7 @@ class AssetModelFactory extends Factory
             return [
                 'name' => 'Yoga 910',
                 'category_id' => function () {
-                    return Category::find(1) ?? Category::factory()->assetLaptopCategory();
+                    return Category::where('name', 'Laptops')->first() ?? Category::factory()->assetLaptopCategory();
                 },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'Lenovo')->first() ?? Manufacturer::factory()->lenovo();
@@ -229,7 +229,7 @@ class AssetModelFactory extends Factory
             return [
                 'name' => 'iMac Pro',
                 'category_id' => function (){
-                    return Category::find(2) ?? Category::factory()->assetDesktopCategory();
+                    return Category::where('name', 'Desktops')->first() ?? Category::factory()->assetDesktopCategory();
                 },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'Apple')->first() ?? Manufacturer::factory()->apple();
@@ -248,7 +248,7 @@ class AssetModelFactory extends Factory
             return [
                 'name' => 'Lenovo Intel Core i5',
                 'category_id' => function () {
-                    return Category::find(2) ?? Category::factory()->assetDesktopCategory();
+                    return Category::where('name', 'Desktops')->first() ?? Category::factory()->assetDesktopCategory();
                 },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'Lenovo')->first() ?? Manufacturer::factory()->lenovo();
@@ -267,7 +267,7 @@ class AssetModelFactory extends Factory
             return [
                 'name' => 'OptiPlex',
                 'category_id' => function (){
-                    return Category::find(2) ?? Category::factory()->assetDesktopCategory();
+                    return Category::where('name', 'Desktops')->first() ?? Category::factory()->assetDesktopCategory();
                 },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'Dell')->first() ?? Manufacturer::factory()->dell();
@@ -287,7 +287,7 @@ class AssetModelFactory extends Factory
             return [
                 'name' => 'SoundStation 2',
                 'category_id' => function () {
-                    return Category::find(6) ?? Category::factory()->assetVoipCategory();
+                    return Category::where('name', 'VOIP Phones')->first() ?? Category::factory()->assetVoipCategory();
                 },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'Polycom')->first() ?? Manufacturer::factory()->polycom();
@@ -305,7 +305,7 @@ class AssetModelFactory extends Factory
             return [
                 'name' => 'Polycom CX3000 IP Conference Phone',
                 'category_id' => function () {
-                    return Category::find(6) ?? Category::factory()->assetVoipCategory();
+                    return Category::where('name', 'VOIP Phones')->first() ?? Category::factory()->assetVoipCategory();
                 },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'Polycom')->first() ?? Manufacturer::factory()->polycom();
@@ -323,7 +323,7 @@ class AssetModelFactory extends Factory
             return [
                 'name' => 'iPad Pro',
                 'category_id' => function () {
-                    return Category::find(3) ?? Category::factory()->assetTabletCategory();
+                    return Category::where('name', 'Tablets')->first() ?? Category::factory()->assetTabletCategory();
                 },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'Apple')->first() ?? Manufacturer::factory()->apple();
@@ -341,7 +341,7 @@ class AssetModelFactory extends Factory
             return [
                 'name' => 'Tab3',
                 'category_id' => function () {
-                    return Category::find(3) ?? Category::factory()->assetTabletCategory();
+                    return Category::where('name', 'Tablets')->first() ?? Category::factory()->assetTabletCategory();
                 },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'Lenovo')->first() ?? Manufacturer::factory()->lenovo();
@@ -359,7 +359,7 @@ class AssetModelFactory extends Factory
             return [
                 'name' => 'iPhone 11',
                 'category_id' => function () {
-                    return Category::find(4) ?? Category::factory()->assetMobileCategory();
+                    return Category::where('name', 'Mobile Phones')->first() ?? Category::factory()->assetMobileCategory();
                 },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'Apple')->first() ?? Manufacturer::factory()->apple();
@@ -378,7 +378,7 @@ class AssetModelFactory extends Factory
             return [
                 'name' => 'iPhone 12',
                 'category_id' => function () {
-                    return Category::find(4) ?? Category::factory()->assetMobileCategory();
+                    return Category::where('name', 'Mobile Phones')->first() ?? Category::factory()->assetMobileCategory();
                 },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'Apple')->first() ?? Manufacturer::factory()->apple();
@@ -397,7 +397,7 @@ class AssetModelFactory extends Factory
             return [
                 'name' => 'Ultrafine 4k',
                 'category_id' => function () {
-                    return Category::find(5) ?? Category::factory()->assetDisplayCategory();
+                    return Category::where('name', 'Displays')->first() ?? Category::factory()->assetDisplayCategory();
                 },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'LG')->first() ?? Manufacturer::factory()->lg();
@@ -415,7 +415,7 @@ class AssetModelFactory extends Factory
             return [
                 'name' => 'Ultrasharp U2415',
                 'category_id' => function () {
-                    return Category::find(5) ?? Category::factory()->assetDisplayCategory();
+                    return Category::where('name', 'Displays')->first() ?? Category::factory()->assetDisplayCategory();
                 },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'Dell')->first() ?? Manufacturer::factory()->dell();

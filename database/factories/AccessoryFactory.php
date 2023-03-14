@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use App\Models\Manufacturer;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -46,7 +47,9 @@ class AccessoryFactory extends Factory
             return [
                 'name' => 'Bluetooth Keyboard',
                 'image' => 'bluetooth.jpg',
-                'category_id' => 8,
+                'category_id' => function () {
+                    return Category::where('name', 'Keyboardss')->first() ?? Category::factory()->accessoryKeyboardCategory();
+                },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'Apple')->first() ?? Manufacturer::factory()->apple();
                 },
@@ -63,7 +66,9 @@ class AccessoryFactory extends Factory
             return [
                 'name' => 'USB Keyboard',
                 'image' => 'usb-keyboard.jpg',
-                'category_id' => 8,
+                'category_id' => function () {
+                    return Category::where('name', 'Keyboardss')->first() ?? Category::factory()->accessoryKeyboardCategory();
+                },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'Apple')->first() ?? Manufacturer::factory()->apple();
                 },
@@ -80,7 +85,9 @@ class AccessoryFactory extends Factory
             return [
                 'name' => 'Magic Mouse',
                 'image' => 'magic-mouse.jpg',
-                'category_id' => 9,
+                'category_id' => function () {
+                    return Category::where('name', 'Mouse')->first() ?? Category::factory()->accessoryMouseCategory();
+                },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'Apple')->first() ?? Manufacturer::factory()->apple();
                 },
@@ -97,7 +104,9 @@ class AccessoryFactory extends Factory
             return [
                 'name' => 'Sculpt Comfort Mouse',
                 'image' => 'comfort-mouse.jpg',
-                'category_id' => 9,
+                'category_id' => function () {
+                    return Category::where('name', 'Mouse')->first() ?? Category::factory()->accessoryMouseCategory();
+                },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'Microsoft')->first() ?? Manufacturer::factory()->microsoft();
                 },

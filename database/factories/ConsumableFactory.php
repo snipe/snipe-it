@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use App\Models\Manufacturer;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -49,7 +50,9 @@ class ConsumableFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'Cardstock (White)',
-                'category_id' => 10,
+                'category_id' => function () {
+                    return Category::where('name', 'Printer Paper')->first() ?? Category::factory()->consumablePaperCategory();
+                },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'Avery')->first() ?? Manufacturer::factory()->avery();
                 },
@@ -65,7 +68,9 @@ class ConsumableFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'Laserjet Paper (Ream)',
-                'category_id' => 10,
+                'category_id' => function () {
+                    return Category::where('name', 'Printer Paper')->first() ?? Category::factory()->consumablePaperCategory();
+                },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'Avery')->first() ?? Manufacturer::factory()->avery();
                 },
@@ -80,7 +85,9 @@ class ConsumableFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'Laserjet Toner (black)',
-                'category_id' => 11,
+                'category_id' => function () {
+                    return Category::where('name', 'Printer Ink')->first() ?? Category::factory()->consumableInkCategory();
+                },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'HP')->first() ?? Manufacturer::factory()->hp();
                 },
