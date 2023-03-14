@@ -1,11 +1,5 @@
 @extends('layouts/default')
-
-
-                    @livewire('slack-settings-form')
-        </div> <!-- /.col-md-8-->
-    </div> <!-- /.row-->
-
-
+    @livewire('slack-settings-form')
 @stop
 
 
