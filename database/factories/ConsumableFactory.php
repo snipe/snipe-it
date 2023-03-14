@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Manufacturer;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -49,7 +50,9 @@ class ConsumableFactory extends Factory
             return [
                 'name' => 'Cardstock (White)',
                 'category_id' => 10,
-                'manufacturer_id' => 10,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'Avery')->first() ?? Manufacturer::factory()->avery();
+                },
                 'qty' => 10,
                 'min_amt' => 2,
                 'company_id' => 3,
@@ -63,7 +66,9 @@ class ConsumableFactory extends Factory
             return [
                 'name' => 'Laserjet Paper (Ream)',
                 'category_id' => 10,
-                'manufacturer_id' => 10,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'Avery')->first() ?? Manufacturer::factory()->avery();
+                },
                 'qty' => 20,
                 'min_amt' => 2,
             ];
@@ -76,7 +81,9 @@ class ConsumableFactory extends Factory
             return [
                 'name' => 'Laserjet Toner (black)',
                 'category_id' => 11,
-                'manufacturer_id' => 5,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'HP')->first() ?? Manufacturer::factory()->hp();
+                },
                 'qty' => 20,
                 'min_amt' => 2,
             ];

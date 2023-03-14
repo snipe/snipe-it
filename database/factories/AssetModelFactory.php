@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Manufacturer;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Category;
@@ -116,7 +117,9 @@ class AssetModelFactory extends Factory
                 'category_id' => function () {
                     return Category::find(1) ?? Category::factory()->assetLaptopCategory();
                 },
-                'manufacturer_id' => 1,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'Apple')->first() ?? Manufacturer::factory()->apple();
+                },
                 'eol' => '36',
                 'depreciation_id' => 1,
                 'image' => 'macbookair.jpg',
@@ -133,7 +136,9 @@ class AssetModelFactory extends Factory
                 'category_id' => function () {
                     return Category::find(1) ?? Category::factory()->assetLaptopCategory();
                 },
-                'manufacturer_id' => 2,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'Microsoft')->first() ?? Manufacturer::factory()->microsoft();
+                },
                 'eol' => '36',
                 'depreciation_id' => 1,
                 'image' => 'surface.jpg',
@@ -150,7 +155,9 @@ class AssetModelFactory extends Factory
                 'category_id' => function () {
                     return Category::find(1) ?? Category::factory()->assetLaptopCategory();
                 },
-                'manufacturer_id' => 3,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'Dell')->first() ?? Manufacturer::factory()->dell();
+                },
                 'eol' => '36',
                 'depreciation_id' => 1,
                 'image' => 'xps.jpg',
@@ -167,7 +174,9 @@ class AssetModelFactory extends Factory
                 'category_id' => function () {
                     return Category::find(1) ?? Category::factory()->assetLaptopCategory();
                 },
-                'manufacturer_id' => 4,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('Asus', 'Asus')->first() ?? Manufacturer::factory()->asus();
+                },
                 'eol' => '36',
                 'depreciation_id' => 1,
                 'image' => 'zenbook.jpg',
@@ -184,7 +193,9 @@ class AssetModelFactory extends Factory
                 'category_id' => function () {
                     return Category::find(1) ?? Category::factory()->assetLaptopCategory();
                 },
-                'manufacturer_id' => 5,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'HP')->first() ?? Manufacturer::factory()->hp();
+                },
                 'eol' => '36',
                 'depreciation_id' => 1,
                 'image' => 'spectre.jpg',
@@ -201,7 +212,9 @@ class AssetModelFactory extends Factory
                 'category_id' => function () {
                     return Category::find(1) ?? Category::factory()->assetLaptopCategory();
                 },
-                'manufacturer_id' => 6,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'Lenovo')->first() ?? Manufacturer::factory()->lenovo();
+                },
                 'eol' => '36',
                 'depreciation_id' => 1,
                 'image' => 'yoga.png',
@@ -218,7 +231,9 @@ class AssetModelFactory extends Factory
                 'category_id' => function (){
                     return Category::find(2) ?? Category::factory()->assetDesktopCategory();
                 },
-                'manufacturer_id' => 1,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'Apple')->first() ?? Manufacturer::factory()->apple();
+                },
                 'eol' => '24',
                 'depreciation_id' => 1,
                 'image' => 'imacpro.jpg',
@@ -235,7 +250,9 @@ class AssetModelFactory extends Factory
                 'category_id' => function () {
                     return Category::find(2) ?? Category::factory()->assetDesktopCategory();
                 },
-                'manufacturer_id' => 6,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'Lenovo')->first() ?? Manufacturer::factory()->lenovo();
+                },
                 'eol' => '24',
                 'depreciation_id' => 1,
                 'image' => 'lenovoi5.png',
@@ -252,7 +269,9 @@ class AssetModelFactory extends Factory
                 'category_id' => function (){
                     return Category::find(2) ?? Category::factory()->assetDesktopCategory();
                 },
-                'manufacturer_id' => 3,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'Dell')->first() ?? Manufacturer::factory()->dell();
+                },
                 'model_number' => '5040 (MRR81)',
                 'eol' => '24',
                 'depreciation_id' => 1,
@@ -270,7 +289,9 @@ class AssetModelFactory extends Factory
                 'category_id' => function () {
                     return Category::find(6) ?? Category::factory()->assetVoipCategory();
                 },
-                'manufacturer_id' => 8,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'Polycom')->first() ?? Manufacturer::factory()->polycom();
+                },
                 'eol' => '12',
                 'depreciation_id' => 1,
                 'image' => 'soundstation.jpg',
@@ -286,7 +307,9 @@ class AssetModelFactory extends Factory
                 'category_id' => function () {
                     return Category::find(6) ?? Category::factory()->assetVoipCategory();
                 },
-                'manufacturer_id' => 8,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'Polycom')->first() ?? Manufacturer::factory()->polycom();
+                },
                 'eol' => '12',
                 'depreciation_id' => 1,
                 'image' => 'cx3000.png',
@@ -302,7 +325,9 @@ class AssetModelFactory extends Factory
                 'category_id' => function () {
                     return Category::find(3) ?? Category::factory()->assetTabletCategory();
                 },
-                'manufacturer_id' => 1,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'Apple')->first() ?? Manufacturer::factory()->apple();
+                },
                 'eol' => '12',
                 'depreciation_id' => 1,
                 'image' => 'ipad.jpg',
@@ -318,7 +343,9 @@ class AssetModelFactory extends Factory
                 'category_id' => function () {
                     return Category::find(3) ?? Category::factory()->assetTabletCategory();
                 },
-                'manufacturer_id' => 6,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'Lenovo')->first() ?? Manufacturer::factory()->lenovo();
+                },
                 'eol' => '12',
                 'depreciation_id' => 1,
                 'image' => 'tab3.png',
@@ -334,7 +361,9 @@ class AssetModelFactory extends Factory
                 'category_id' => function () {
                     return Category::find(4) ?? Category::factory()->assetMobileCategory();
                 },
-                'manufacturer_id' => 1,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'Apple')->first() ?? Manufacturer::factory()->apple();
+                },
                 'eol' => '12',
                 'depreciation_id' => 3,
                 'image' => 'iphone11.jpeg',
@@ -351,7 +380,9 @@ class AssetModelFactory extends Factory
                 'category_id' => function () {
                     return Category::find(4) ?? Category::factory()->assetMobileCategory();
                 },
-                'manufacturer_id' => 1,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'Apple')->first() ?? Manufacturer::factory()->apple();
+                },
                 'eol' => '12',
                 'depreciation_id' => 1,
                 'image' => 'iphone12.jpeg',
@@ -368,7 +399,9 @@ class AssetModelFactory extends Factory
                 'category_id' => function () {
                     return Category::find(5) ?? Category::factory()->assetDisplayCategory();
                 },
-                'manufacturer_id' => 7,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'LG')->first() ?? Manufacturer::factory()->lg();
+                },
                 'eol' => '12',
                 'depreciation_id' => 2,
                 'image' => 'ultrafine.jpg',
@@ -384,7 +417,9 @@ class AssetModelFactory extends Factory
                 'category_id' => function () {
                     return Category::find(5) ?? Category::factory()->assetDisplayCategory();
                 },
-                'manufacturer_id' => 3,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'Dell')->first() ?? Manufacturer::factory()->dell();
+                },
                 'eol' => '12',
                 'depreciation_id' => 2,
                 'image' => 'ultrasharp.jpg',

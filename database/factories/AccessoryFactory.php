@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Manufacturer;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -46,7 +47,9 @@ class AccessoryFactory extends Factory
                 'name' => 'Bluetooth Keyboard',
                 'image' => 'bluetooth.jpg',
                 'category_id' => 8,
-                'manufacturer_id' => 1,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'Apple')->first() ?? Manufacturer::factory()->apple();
+                },
                 'qty' => 10,
                 'min_amt' => 2,
                 'supplier_id' => rand(1, 5),
@@ -61,7 +64,9 @@ class AccessoryFactory extends Factory
                 'name' => 'USB Keyboard',
                 'image' => 'usb-keyboard.jpg',
                 'category_id' => 8,
-                'manufacturer_id' => 1,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'Apple')->first() ?? Manufacturer::factory()->apple();
+                },
                 'qty' => 15,
                 'min_amt' => 2,
                 'supplier_id' => rand(1, 5),
@@ -76,7 +81,9 @@ class AccessoryFactory extends Factory
                 'name' => 'Magic Mouse',
                 'image' => 'magic-mouse.jpg',
                 'category_id' => 9,
-                'manufacturer_id' => 1,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'Apple')->first() ?? Manufacturer::factory()->apple();
+                },
                 'qty' => 13,
                 'min_amt' => 2,
                 'supplier_id' => rand(1, 5),
@@ -91,7 +98,9 @@ class AccessoryFactory extends Factory
                 'name' => 'Sculpt Comfort Mouse',
                 'image' => 'comfort-mouse.jpg',
                 'category_id' => 9,
-                'manufacturer_id' => 2,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'Microsoft')->first() ?? Manufacturer::factory()->microsoft();
+                },
                 'qty' => 13,
                 'min_amt' => 2,
             ];

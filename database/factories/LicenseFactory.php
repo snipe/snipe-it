@@ -2,6 +2,7 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\Manufacturer;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -64,7 +65,9 @@ class LicenseFactory extends Factory
         return $this->state(function () {
             $data = [
                 'name' => 'Photoshop',
-                'manufacturer_id' => 9,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'Adobe')->first() ?? Manufacturer::factory()->adobe();
+                },
                 'purchase_cost' => '299.99',
                 'seats' => 10,
                 'purchase_order' => '13503Q',
@@ -81,7 +84,9 @@ class LicenseFactory extends Factory
         return $this->state(function () {
             $data = [
                 'name' => 'Acrobat',
-                'manufacturer_id' => 9,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'Adobe')->first() ?? Manufacturer::factory()->adobe();
+                },
                 'purchase_cost' => '29.99',
                 'seats' => 10,
                 'category_id' => 14,
@@ -96,7 +101,9 @@ class LicenseFactory extends Factory
         return $this->state(function () {
             $data = [
                 'name' => 'InDesign',
-                'manufacturer_id' => 9,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'Adobe')->first() ?? Manufacturer::factory()->adobe();
+                },
                 'purchase_cost' => '199.99',
                 'seats' => 10,
                 'category_id' => 14,
@@ -112,7 +119,9 @@ class LicenseFactory extends Factory
         return $this->state(function () {
             $data = [
                 'name' => 'Office',
-                'manufacturer_id' => 2,
+                'manufacturer_id' => function () {
+                    return Manufacturer::where('name', 'Microsoft')->first() ?? Manufacturer::factory()->microsoft();
+                },
                 'purchase_cost' => '49.99',
                 'seats' => 20,
                 'category_id' => 15,
