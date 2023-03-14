@@ -23,7 +23,7 @@ class AddEolDateOnAssetsTable extends Migration
         });
 
         // Chunk the model query to get the models that do have an EOL date
-        AssetModel::whereNotNull('eol')->with('assets')->chunk(200, function ($models) {
+        AssetModel::whereNotNull('eol')->chunk(10, function ($models) {
             foreach ($models as $model) {
                 foreach ($model->assets as $asset) {
 
