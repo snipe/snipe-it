@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Statuslabel;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class StatuslabelFactory extends Factory
@@ -25,7 +26,9 @@ class StatuslabelFactory extends Factory
             'name'      => $this->faker->sentence,
             'created_at' => $this->faker->dateTime(),
             'updated_at' => $this->faker->dateTime(),
-            'user_id' => 1,
+            'user_id' => function () {
+                return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
+            },
             'deleted_at' => null,
             'deployable' => 0,
             'pending' => 0,

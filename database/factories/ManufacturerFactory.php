@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /*
@@ -52,7 +53,9 @@ class ManufacturerFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => 1,
+            'user_id' => function () {
+                return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
+            },
             'support_phone' => $this->faker->phoneNumber(),
             'url' => $this->faker->url(),
             'support_email' => $this->faker->safeEmail(),

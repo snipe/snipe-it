@@ -20,6 +20,7 @@ use App\Models\Location;
 use App\Models\Manufacturer;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SettingFactory extends Factory
@@ -39,7 +40,9 @@ class SettingFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => 1,
+            'user_id' => function () {
+                return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
+            },
             'per_page' => 20,
             'site_name' => $this->faker->sentence,
             'auto_increment_assets' => false,

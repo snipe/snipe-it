@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /*
@@ -30,7 +31,9 @@ class DepartmentFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => 1,
+            'user_id' => function () {
+                return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
+            },
             'location_id' => rand(1, 5),
         ];
     }

@@ -38,7 +38,9 @@ class ActionlogFactory extends Factory
         return [
             'item_type' => get_class($asset),
             'item_id' => 1,
-            'user_id' => 1,
+            'user_id' => function () {
+                return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
+            },
             'action_type' => 'uploaded',
         ];
     }

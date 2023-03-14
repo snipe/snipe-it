@@ -7,6 +7,7 @@ use App\Models\AssetModel;
 use App\Models\Category;
 use App\Models\Location;
 use App\Models\Supplier;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /*
@@ -41,7 +42,9 @@ class AssetFactory extends Factory
             'rtd_location_id' => Location::factory(),
             'serial' => $this->faker->uuid(),
             'status_id' => 1,
-            'user_id' => 1,
+            'user_id' => function () {
+                return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
+            },
             'asset_tag' => $this->faker->unixTime('now'),
             'notes'   => 'Created by DB seeder',
             'purchase_date' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get())->format('Y-m-d'),

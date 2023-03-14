@@ -2,6 +2,7 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /*
@@ -40,7 +41,9 @@ class LicenseFactory extends Factory
 
 
         return [
-            'user_id' => 1,
+            'user_id' => function () {
+                return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
+            },
             'name' => $this->faker->name,
             'license_email' => $this->faker->safeEmail,
             'serial' => $this->faker->uuid,

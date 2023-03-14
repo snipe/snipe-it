@@ -38,7 +38,7 @@ class CategoryFactory extends Factory
             'require_acceptance' => false,
             'use_default_eula' => $this->faker->boolean(),
             'user_id' => function () {
-                return User::first() ?? User::factory()->firstAdmin();
+                return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
             },
         ];
     }

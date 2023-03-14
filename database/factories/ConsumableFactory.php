@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /*
@@ -30,7 +31,9 @@ class ConsumableFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => 1,
+            'user_id' => function () {
+                return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
+            },
             'item_no' => $this->faker->numberBetween(1000000, 50000000),
             'order_number' => $this->faker->numberBetween(1000000, 50000000),
             'purchase_date' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),

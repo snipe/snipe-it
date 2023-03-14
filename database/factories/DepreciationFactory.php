@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /*
@@ -31,7 +32,9 @@ class DepreciationFactory extends Factory
     {
         return [
             'name' => $this->faker->catchPhrase(),
-            'user_id' => 1,
+            'user_id' => function () {
+                return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
+            },
             'months' => 36,
         ];
     }
