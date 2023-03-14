@@ -627,7 +627,11 @@ class AssetsController extends Controller
         $csv->setHeaderOffset(0);
         $header = $csv->getHeader();
         $isCheckinHeaderExplicit = in_array('checkin date', (array_map('strtolower', $header)));
-        $results = $csv->getRecords();
+        try {
+            $results = $csv->getRecords();
+        } catch (\Exception $e) {
+            return back()->with('error', 'There was an error reading the CSV file: '.$e->getMessage());
+        } 
         $item = [];
         $status = [];
         $status['error'] = [];
