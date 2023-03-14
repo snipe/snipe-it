@@ -20,6 +20,7 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
@@ -457,6 +458,13 @@ class UsersController extends Controller
 
             // Check if the request has groups passed and has a value
             if ($request->filled('groups')) {
+                $validator = Validator::make($request->all(), [
+                    'groups.*' => 'integer|exists:permission_groups,id',
+                ]);
+                
+                if ($validator->fails()){
+                    return response()->json(Helper::formatStandardApiResponse('error', null, $user->getErrors()));
+                }
                 $user->groups()->sync($request->input('groups'));
             // The groups field has been passed but it is null, so we should blank it out
             } elseif ($request->has('groups')) {
