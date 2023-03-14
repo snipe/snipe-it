@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Category;
 
@@ -36,7 +37,9 @@ class CategoryFactory extends Factory
             'eula_text' => $this->faker->paragraph(),
             'require_acceptance' => false,
             'use_default_eula' => $this->faker->boolean(),
-            'user_id' => 1,
+            'user_id' => function () {
+                return User::first() ?? User::factory()->firstAdmin();
+            },
         ];
     }
 

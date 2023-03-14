@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Location;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /*
@@ -34,7 +35,9 @@ class ComponentFactory extends Factory
             'category_id' => function () {
                 return \App\Models\Category::factory()->create()->id;
             },
-            'location_id' => 1,
+            'location_id' => function () {
+                return Location::first() ?? Location::factory();
+            },
             'serial'   => $this->faker->uuid,
             'qty' => $this->faker->numberBetween(3, 10),
             'order_number' => $this->faker->numberBetween(1000000, 50000000),

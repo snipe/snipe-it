@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Category;
 
@@ -81,7 +82,9 @@ class AssetModelFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => 1,
+            'user_id' => function () {
+                return User::first() ?? User::factory()->firstAdmin();
+            },
             'name' => $this->faker->catchPhrase(),
             'model_number' => $this->faker->creditCardNumber(),
             'notes' => 'Created by demo seeder',
@@ -94,7 +97,9 @@ class AssetModelFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'Macbook Pro 13"',
-                'category_id' => 1,
+                'category_id' => function () {
+                    return Category::find(1) ?? Category::factory()->assetLaptopCategory();
+                },
                 'eol' => '36',
                 'depreciation_id' => 1,
                 'image' => 'mbp.jpg',
@@ -108,7 +113,9 @@ class AssetModelFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'Macbook Air',
-                'category_id' => 1,
+                'category_id' => function () {
+                    return Category::find(1) ?? Category::factory()->assetLaptopCategory();
+                },
                 'manufacturer_id' => 1,
                 'eol' => '36',
                 'depreciation_id' => 1,
@@ -123,7 +130,9 @@ class AssetModelFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'Surface',
-                'category_id' => 1,
+                'category_id' => function () {
+                    return Category::find(1) ?? Category::factory()->assetLaptopCategory();
+                },
                 'manufacturer_id' => 2,
                 'eol' => '36',
                 'depreciation_id' => 1,
@@ -138,7 +147,9 @@ class AssetModelFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'XPS 13',
-                'category_id' => 1,
+                'category_id' => function () {
+                    return Category::find(1) ?? Category::factory()->assetLaptopCategory();
+                },
                 'manufacturer_id' => 3,
                 'eol' => '36',
                 'depreciation_id' => 1,
@@ -153,7 +164,9 @@ class AssetModelFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'ZenBook UX310',
-                'category_id' => 1,
+                'category_id' => function () {
+                    return Category::find(1) ?? Category::factory()->assetLaptopCategory();
+                },
                 'manufacturer_id' => 4,
                 'eol' => '36',
                 'depreciation_id' => 1,
@@ -168,7 +181,9 @@ class AssetModelFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'Spectre',
-                'category_id' => 1,
+                'category_id' => function () {
+                    return Category::find(1) ?? Category::factory()->assetLaptopCategory();
+                },
                 'manufacturer_id' => 5,
                 'eol' => '36',
                 'depreciation_id' => 1,
@@ -183,7 +198,9 @@ class AssetModelFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'Yoga 910',
-                'category_id' => 1,
+                'category_id' => function () {
+                    return Category::find(1) ?? Category::factory()->assetLaptopCategory();
+                },
                 'manufacturer_id' => 6,
                 'eol' => '36',
                 'depreciation_id' => 1,
@@ -198,7 +215,9 @@ class AssetModelFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'iMac Pro',
-                'category_id' => 2,
+                'category_id' => function (){
+                    return Category::find(2) ?? Category::factory()->assetDesktopCategory();
+                },
                 'manufacturer_id' => 1,
                 'eol' => '24',
                 'depreciation_id' => 1,
@@ -213,7 +232,9 @@ class AssetModelFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'Lenovo Intel Core i5',
-                'category_id' => 2,
+                'category_id' => function () {
+                    return Category::find(2) ?? Category::factory()->assetDesktopCategory();
+                },
                 'manufacturer_id' => 6,
                 'eol' => '24',
                 'depreciation_id' => 1,
@@ -228,7 +249,9 @@ class AssetModelFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'OptiPlex',
-                'category_id' => 2,
+                'category_id' => function (){
+                    return Category::find(2) ?? Category::factory()->assetDesktopCategory();
+                },
                 'manufacturer_id' => 3,
                 'model_number' => '5040 (MRR81)',
                 'eol' => '24',
@@ -244,7 +267,9 @@ class AssetModelFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'SoundStation 2',
-                'category_id' => 6,
+                'category_id' => function () {
+                    return Category::find(6) ?? Category::factory()->assetVoipCategory();
+                },
                 'manufacturer_id' => 8,
                 'eol' => '12',
                 'depreciation_id' => 1,
@@ -258,7 +283,9 @@ class AssetModelFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'Polycom CX3000 IP Conference Phone',
-                'category_id' => 6,
+                'category_id' => function () {
+                    return Category::find(6) ?? Category::factory()->assetVoipCategory();
+                },
                 'manufacturer_id' => 8,
                 'eol' => '12',
                 'depreciation_id' => 1,
@@ -272,7 +299,9 @@ class AssetModelFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'iPad Pro',
-                'category_id' => 3,
+                'category_id' => function () {
+                    return Category::find(3) ?? Category::factory()->assetTabletCategory();
+                },
                 'manufacturer_id' => 1,
                 'eol' => '12',
                 'depreciation_id' => 1,
@@ -286,7 +315,9 @@ class AssetModelFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'Tab3',
-                'category_id' => 3,
+                'category_id' => function () {
+                    return Category::find(3) ?? Category::factory()->assetTabletCategory();
+                },
                 'manufacturer_id' => 6,
                 'eol' => '12',
                 'depreciation_id' => 1,
@@ -300,7 +331,9 @@ class AssetModelFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'iPhone 11',
-                'category_id' => 4,
+                'category_id' => function () {
+                    return Category::find(4) ?? Category::factory()->assetMobileCategory();
+                },
                 'manufacturer_id' => 1,
                 'eol' => '12',
                 'depreciation_id' => 3,
@@ -315,7 +348,9 @@ class AssetModelFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'iPhone 12',
-                'category_id' => 4,
+                'category_id' => function () {
+                    return Category::find(4) ?? Category::factory()->assetMobileCategory();
+                },
                 'manufacturer_id' => 1,
                 'eol' => '12',
                 'depreciation_id' => 1,
@@ -330,7 +365,9 @@ class AssetModelFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'Ultrafine 4k',
-                'category_id' => 5,
+                'category_id' => function () {
+                    return Category::find(5) ?? Category::factory()->assetDisplayCategory();
+                },
                 'manufacturer_id' => 7,
                 'eol' => '12',
                 'depreciation_id' => 2,
@@ -344,7 +381,9 @@ class AssetModelFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'Ultrasharp U2415',
-                'category_id' => 5,
+                'category_id' => function () {
+                    return Category::find(5) ?? Category::factory()->assetDisplayCategory();
+                },
                 'manufacturer_id' => 3,
                 'eol' => '12',
                 'depreciation_id' => 2,
