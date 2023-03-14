@@ -175,7 +175,7 @@ class AssetModelFactory extends Factory
                     return Category::find(1) ?? Category::factory()->assetLaptopCategory();
                 },
                 'manufacturer_id' => function () {
-                    return Manufacturer::where('Asus', 'Asus')->first() ?? Manufacturer::factory()->asus();
+                    return Manufacturer::where('name', 'Asus')->first() ?? Manufacturer::factory()->asus();
                 },
                 'eol' => '36',
                 'depreciation_id' => 1,
