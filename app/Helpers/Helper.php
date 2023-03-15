@@ -528,7 +528,7 @@ class Helper
      * @since [v2.5]
      * @return array
      */
-    public static function categoryTypeList()
+    public static function categoryTypeList($selection=null)
     {
         $category_types = [
             '' => '',
@@ -539,27 +539,12 @@ class Helper
             'license' => trans('general.license'),
         ];
 
+        if($selection != null){
+            return $category_types[$selection];
+        }
+        else
         return $category_types;
     }
-    public static function categoryType($category_type){
-
-        switch ($category_type) {
-            case ('accessory'):
-                return trans('general.accessory');
-                break;
-            case ('consumable'):
-                return trans('general.consumable');
-                break;
-            case ('component'):
-                return trans('general.component');
-                break;
-            case ('asset'):
-                return trans('general.asset');
-            case ('license'):
-                return trans('general.license');
-        }
-    }
-
     /**
      * Get the list of custom fields in an array to make a dropdown menu
      *
