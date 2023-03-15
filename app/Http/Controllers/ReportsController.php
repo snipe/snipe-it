@@ -1024,7 +1024,11 @@ class ReportsController extends Controller
         if (is_null($acceptance->created_at)){
             return redirect()->route('reports/unaccepted_assets')->with('error', trans('general.bad_data'));
         } else {
-            $logItem = $assetItem->checkouts()->where('created_at', '=', $acceptance->created_at)->get()[0];
+            $logItem_res = $assetItem->checkouts()->where('created_at', '=', $acceptance->created_at)->get();
+            if ($logItem_res->isEmpty()){
+                return redirect()->route('reports/unaccepted_assets')->with('error', trans('general.bad_data'));
+            }
+            $logItem = $logItem_res[0];
         }
 
         if(!$assetItem->assignedTo->locale){
