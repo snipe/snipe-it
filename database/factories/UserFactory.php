@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use \Auth;
 
@@ -18,7 +19,7 @@ class UserFactory extends Factory
             'activated' => 1,
             'address' => $this->faker->address(),
             'city' => $this->faker->city(),
-            'company_id' => rand(1, 4),
+            'company_id' => Company::factory(),
             'country' => $this->faker->country(),
             'department_id' => rand(1, 6),
             'email' => $this->faker->safeEmail,

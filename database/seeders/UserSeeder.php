@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Company;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
@@ -17,11 +18,18 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::truncate();
-        User::factory()->count(1)->firstAdmin()->create();
-        User::factory()->count(1)->snipeAdmin()->create();
-        User::factory()->count(3)->superuser()->create();
-        User::factory()->count(3)->admin()->create();
-        User::factory()->count(50)->viewAssets()->create();
+
+        if (! Company::count()) {
+            $this->call(CompanySeeder::class);
+        }
+
+        $companyIds = Company::all()->pluck('id');
+
+        User::factory()->count(1)->firstAdmin()->create(['company_id' => $companyIds->random()]);
+        User::factory()->count(1)->snipeAdmin()->create(['company_id' => $companyIds->random()]);
+        User::factory()->count(3)->superuser()->create(['company_id' => $companyIds->random()]);
+        User::factory()->count(3)->admin()->create(['company_id' => $companyIds->random()]);
+        User::factory()->count(50)->viewAssets()->create(['company_id' => $companyIds->random()]);
 
         $src = public_path('/img/demo/avatars/');
         $dst = 'avatars'.'/';

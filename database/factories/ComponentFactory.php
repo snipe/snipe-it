@@ -59,7 +59,6 @@ class ComponentFactory extends Factory
                 'qty' => 10,
                 'min_amt' => 2,
                 'location_id' => 3,
-                'company_id' => 2,
             ];
         });
     }

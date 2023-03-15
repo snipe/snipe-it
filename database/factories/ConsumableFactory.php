@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\Company;
 use App\Models\Manufacturer;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -42,6 +43,7 @@ class ConsumableFactory extends Factory
             'purchase_cost' => $this->faker->randomFloat(2, 1, 50),
             'qty' => $this->faker->numberBetween(5, 10),
             'min_amt' => $this->faker->numberBetween($min = 1, $max = 2),
+            'company_id' => Company::factory(),
         ];
     }
 
@@ -58,7 +60,6 @@ class ConsumableFactory extends Factory
                 },
                 'qty' => 10,
                 'min_amt' => 2,
-                'company_id' => 3,
             ];
         });
     }
