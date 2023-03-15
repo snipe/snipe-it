@@ -602,11 +602,11 @@
                                                     </a>
                                                     @elseif ((strtolower($asset->model->manufacturer->name) == "dell") || (str_starts_with(str_replace(' ','',strtolower($asset->model->manufacturer->name)),"dellinc")))
                                                     <a href="https://www.dell.com/support/home/en-us?app=warranty" target="_blank">
-                                                        <img src="https://www.dell.com/favicon.ico" style="width:25px;height:25px;"><span class="sr-only">Dell Warranty Status Lookup</span></i>
+                                                        <img src="/img/demo/manufacturers/dellicon.png" style="width:25px;height:25px;"><span class="sr-only">Dell Warranty Status Lookup</span></i>
                                                     </a>
                                                     @elseif ((strtolower($asset->model->manufacturer->name) == "lenovo") || (str_starts_with(str_replace(' ','',strtolower($asset->model->manufacturer->name)),"lenovoinc")))
                                                     <a href="https://pcsupport.lenovo.com/us/en/warrantylookup#/" target="_blank">
-                                                        <img src="https://www.lenovo.com/favicon.ico" style="width:25px;height:25px;"><span class="sr-only">Lenovo Warranty Status Lookup</span></i>
+                                                        <img src="/img/demo/manufacturers/lenovoicon.png" style="width:25px;height:25px;"><span class="sr-only">Lenovo Warranty Status Lookup</span></i>
                                                     </a>
                                                     @endif
                                                 @endif
