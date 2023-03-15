@@ -2855,6 +2855,33 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "floschoepfer",
+      "name": "Florian",
+      "avatar_url": "https://avatars.githubusercontent.com/u/112496896?v=4",
+      "profile": "https://github.com/floschoepfer",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "spencerrlongg",
+      "name": "Spencer Long",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7305753?v=4",
+      "profile": "http://spencerlong.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "marcusmoore",
+      "name": "Marcus Moore",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1141514?v=4",
+      "profile": "https://github.com/marcusmoore",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }

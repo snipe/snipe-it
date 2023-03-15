@@ -250,8 +250,8 @@ return [
     'signature'             => 'Signature',
     'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Skin',
-    'slack_msg_note'        => 'A slack message will be sent',
-    'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',
+    'webhook_msg_note'        => 'A :app message will be sent',
+    'webhook_test_msg'        => 'Oh hai! Looks like your :app integration with Snipe-IT is working!',
     'some_features_disabled' => 'DEMO MODE: Some features are disabled for this installation.',
     'site_name'				=> 'Site Name',
     'state'  				=> 'State',
@@ -406,6 +406,7 @@ return [
     'tasks_view_all'        => 'View all tasks',
     'true'                  => 'True',
     'false'                 => 'False',
+    'integration_option'    => 'Integration Option',
 
 
 
