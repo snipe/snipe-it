@@ -18,7 +18,12 @@ class AdjustConsumablesQuantities extends Migration
 
         foreach ($consumables_checkedout as $consumable){
             $consumable_qty = Consumable::select('qty')->where(['id' => $consumable->consumable_id])->value('qty');
-            $total = $consumable_qty - $consumable->total_checkedout;
+            $total = (int) $consumable_qty - (int) $consumable->total_checkedout;
+
+            // Control that the $total is never negative 
+            if ($total < 0){
+                $total = 0;
+            }
 
             Consumable::where('id', $consumable->consumable_id)->update(['qty' => $total]);
         }
