@@ -52,6 +52,7 @@ class AccessoriesTransformer
             'update' => Gate::allows('update', Accessory::class),
             'delete' => Gate::allows('delete', Accessory::class),
             'clone' => (Gate::allows('create', Accessory::class) && ($accessory->created_at == 'datetime')),
+            
         ];
 
         $permissions_array['user_can_checkout'] = false;

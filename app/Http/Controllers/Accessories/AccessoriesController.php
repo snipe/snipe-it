@@ -138,12 +138,13 @@ class AccessoriesController extends Controller
         $accessory->id = null;
         $accessory->location_id = null;
 
-        //duplicate the image for the cloned accessory
-        copy('uploads/accessories/usb-keyboard.jpg','uploads/accessories/testimage.jpg');
-
         return view('accessories/edit')
             ->with('item', $accessory);
 
+    copy('uploads/accessories/usb-keyboard.jpg','uploads/accessories/testimage.jpg');
+
+    
+        
     }
 
     /**
