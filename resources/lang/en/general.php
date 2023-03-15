@@ -407,7 +407,7 @@ return [
     'true'                  => 'True',
     'false'                 => 'False',
     'integration_option'    => 'Integration Option',
-
+    'log_does_not_exist'    => 'No matching log record exists.',
 
 
 ];
