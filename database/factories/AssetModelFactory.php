@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Depreciation;
 use App\Models\Manufacturer;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -102,7 +103,9 @@ class AssetModelFactory extends Factory
                     return Category::where('name', 'Laptops')->first() ?? Category::factory()->assetLaptopCategory();
                 },
                 'eol' => '36',
-                'depreciation_id' => 1,
+                'depreciation_id' => function () {
+                    return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
+                },
                 'image' => 'mbp.jpg',
                 'fieldset_id' => 2,
             ];
@@ -121,7 +124,9 @@ class AssetModelFactory extends Factory
                     return Manufacturer::where('name', 'Apple')->first() ?? Manufacturer::factory()->apple();
                 },
                 'eol' => '36',
-                'depreciation_id' => 1,
+                'depreciation_id' => function () {
+                    return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
+                },
                 'image' => 'macbookair.jpg',
                 'fieldset_id' => 2,
             ];
@@ -140,7 +145,9 @@ class AssetModelFactory extends Factory
                     return Manufacturer::where('name', 'Microsoft')->first() ?? Manufacturer::factory()->microsoft();
                 },
                 'eol' => '36',
-                'depreciation_id' => 1,
+                'depreciation_id' => function () {
+                    return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
+                },
                 'image' => 'surface.jpg',
                 'fieldset_id' => 2,
             ];
@@ -159,7 +166,9 @@ class AssetModelFactory extends Factory
                     return Manufacturer::where('name', 'Dell')->first() ?? Manufacturer::factory()->dell();
                 },
                 'eol' => '36',
-                'depreciation_id' => 1,
+                'depreciation_id' => function () {
+                    return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
+                },
                 'image' => 'xps.jpg',
                 'fieldset_id' => 2,
             ];
@@ -178,7 +187,9 @@ class AssetModelFactory extends Factory
                     return Manufacturer::where('name', 'Asus')->first() ?? Manufacturer::factory()->asus();
                 },
                 'eol' => '36',
-                'depreciation_id' => 1,
+                'depreciation_id' => function () {
+                    return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
+                },
                 'image' => 'zenbook.jpg',
                 'fieldset_id' => 2,
             ];
@@ -197,7 +208,9 @@ class AssetModelFactory extends Factory
                     return Manufacturer::where('name', 'HP')->first() ?? Manufacturer::factory()->hp();
                 },
                 'eol' => '36',
-                'depreciation_id' => 1,
+                'depreciation_id' => function () {
+                    return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
+                },
                 'image' => 'spectre.jpg',
                 'fieldset_id' => 2,
             ];
@@ -216,7 +229,9 @@ class AssetModelFactory extends Factory
                     return Manufacturer::where('name', 'Lenovo')->first() ?? Manufacturer::factory()->lenovo();
                 },
                 'eol' => '36',
-                'depreciation_id' => 1,
+                'depreciation_id' => function () {
+                    return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
+                },
                 'image' => 'yoga.png',
                 'fieldset_id' => 2,
             ];
@@ -235,7 +250,9 @@ class AssetModelFactory extends Factory
                     return Manufacturer::where('name', 'Apple')->first() ?? Manufacturer::factory()->apple();
                 },
                 'eol' => '24',
-                'depreciation_id' => 1,
+                'depreciation_id' => function () {
+                    return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
+                },
                 'image' => 'imacpro.jpg',
                 'fieldset_id' => 2,
             ];
@@ -254,7 +271,9 @@ class AssetModelFactory extends Factory
                     return Manufacturer::where('name', 'Lenovo')->first() ?? Manufacturer::factory()->lenovo();
                 },
                 'eol' => '24',
-                'depreciation_id' => 1,
+                'depreciation_id' => function () {
+                    return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
+                },
                 'image' => 'lenovoi5.png',
                 'fieldset_id' => 2,
             ];
@@ -274,7 +293,9 @@ class AssetModelFactory extends Factory
                 },
                 'model_number' => '5040 (MRR81)',
                 'eol' => '24',
-                'depreciation_id' => 1,
+                'depreciation_id' => function () {
+                    return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
+                },
                 'image' => 'optiplex.jpg',
                 'fieldset_id' => 2,
             ];
@@ -293,7 +314,9 @@ class AssetModelFactory extends Factory
                     return Manufacturer::where('name', 'Polycom')->first() ?? Manufacturer::factory()->polycom();
                 },
                 'eol' => '12',
-                'depreciation_id' => 1,
+                'depreciation_id' => function () {
+                    return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
+                },
                 'image' => 'soundstation.jpg',
             ];
         });
@@ -311,7 +334,9 @@ class AssetModelFactory extends Factory
                     return Manufacturer::where('name', 'Polycom')->first() ?? Manufacturer::factory()->polycom();
                 },
                 'eol' => '12',
-                'depreciation_id' => 1,
+                'depreciation_id' => function () {
+                    return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
+                },
                 'image' => 'cx3000.png',
             ];
         });
@@ -329,7 +354,9 @@ class AssetModelFactory extends Factory
                     return Manufacturer::where('name', 'Apple')->first() ?? Manufacturer::factory()->apple();
                 },
                 'eol' => '12',
-                'depreciation_id' => 1,
+                'depreciation_id' => function () {
+                    return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
+                },
                 'image' => 'ipad.jpg',
             ];
         });
@@ -347,7 +374,9 @@ class AssetModelFactory extends Factory
                     return Manufacturer::where('name', 'Lenovo')->first() ?? Manufacturer::factory()->lenovo();
                 },
                 'eol' => '12',
-                'depreciation_id' => 1,
+                'depreciation_id' => function () {
+                    return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
+                },
                 'image' => 'tab3.png',
             ];
         });
@@ -365,7 +394,9 @@ class AssetModelFactory extends Factory
                     return Manufacturer::where('name', 'Apple')->first() ?? Manufacturer::factory()->apple();
                 },
                 'eol' => '12',
-                'depreciation_id' => 3,
+                'depreciation_id' => function () {
+                    return Depreciation::where('name', 'Mobile Phone Depreciation')->first() ?? Depreciation::factory()->mobilePhones();
+                },
                 'image' => 'iphone11.jpeg',
                 'fieldset_id' => 1,
             ];
@@ -384,7 +415,9 @@ class AssetModelFactory extends Factory
                     return Manufacturer::where('name', 'Apple')->first() ?? Manufacturer::factory()->apple();
                 },
                 'eol' => '12',
-                'depreciation_id' => 1,
+                'depreciation_id' => function () {
+                    return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
+                },
                 'image' => 'iphone12.jpeg',
                 'fieldset_id' => 1,
             ];
@@ -403,7 +436,9 @@ class AssetModelFactory extends Factory
                     return Manufacturer::where('name', 'LG')->first() ?? Manufacturer::factory()->lg();
                 },
                 'eol' => '12',
-                'depreciation_id' => 2,
+                'depreciation_id' => function () {
+                    return Depreciation::where('name', 'Display Depreciation')->first() ?? Depreciation::factory()->display();
+                },
                 'image' => 'ultrafine.jpg',
             ];
         });
@@ -421,7 +456,9 @@ class AssetModelFactory extends Factory
                     return Manufacturer::where('name', 'Dell')->first() ?? Manufacturer::factory()->dell();
                 },
                 'eol' => '12',
-                'depreciation_id' => 2,
+                'depreciation_id' => function () {
+                    return Depreciation::where('name', 'Display Depreciation')->first() ?? Depreciation::factory()->display();
+                },
                 'image' => 'ultrasharp.jpg',
             ];
         });
