@@ -140,10 +140,6 @@ class AccessoriesController extends Controller
 
         return view('accessories/edit')
             ->with('item', $accessory);
-
-    copy('uploads/accessories/usb-keyboard.jpg','uploads/accessories/testimage.jpg');
-
-    
         
     }
 
