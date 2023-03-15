@@ -92,7 +92,7 @@ class SlackSettingsForm extends Component
         $payload = json_encode(
             [
                 'channel'    => e($this->webhook_channel),
-                'text'       => trans('general.webhook_test_msg'),
+                'text'       => trans('general.webhook_test_msg', ['app' => $this->webhook_name]),
                 'username'    => e($this->webhook_botname),
                 'icon_emoji' => ':heart:',
             ]);
