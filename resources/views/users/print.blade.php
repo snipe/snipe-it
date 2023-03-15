@@ -241,15 +241,9 @@
         </table>
     @endif
 
-    @php
-    $currenttime = Helper::getFormattedDateObject(now(), 'date', false);
-    @endphp
-
     <br>
     <br>
-    //needs to fix string/int error
-    <div style='text-align:left'><div style='color:black'>{{ trans('admin/users/general.all_assigned_list_generation')}} {{ date('d-M-Y H:i', $currenttime) }}
-</div></div>
+    {{ trans('admin/users/general.all_assigned_list_generation')}} {{ Helper::getFormattedDateObject(now(), 'datetime', false) }}
     <br>
     <br>
     <table>
