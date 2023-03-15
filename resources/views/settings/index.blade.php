@@ -164,12 +164,12 @@
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.slack.index') }}" class="settings_button">
-                  <i class="fab fa-slack fa-4x" aria-hidden="true"></i>
+                  <i class="fa-solid fa-hashtag fa-4x" aria-hidden="true"></i>
                   <br><br>
-                  <span class="name">{{ trans('admin/settings/general.slack') }}</span>
+                  <span class="name">{{ trans('admin/settings/general.integrations') }}</span>
                 </a>
               </h5>
-              <p class="help-block">{{ trans('admin/settings/general.slack_help') }}</p>
+              <p class="help-block">{{ trans('admin/settings/general.webhook_help') }}</p>
             </div>
           </div>
         </div>
