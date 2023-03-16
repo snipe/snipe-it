@@ -8,19 +8,13 @@ use App\Models\Category;
 use Carbon\Carbon;
 use App\Notifications\CheckoutAssetNotification;
 use Illuminate\Support\Facades\Notification;
-use Tests\Unit\BaseTest;
+use Tests\TestCase;
 
-
-class NotificationTest extends BaseTest
+class NotificationTest extends TestCase
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
-
     public function testAUserIsEmailedIfTheyCheckoutAnAssetWithEULA()
     {
-
+        $admin = User::factory()->superuser()->create();
         $user = User::factory()->create();
         $asset = Asset::factory()
         ->create(
@@ -30,14 +24,13 @@ class NotificationTest extends BaseTest
                         [
                             'category_id' => Category::factory()->assetLaptopCategory()->id
                         ]
-                )->id,   
+                )->id,
                 'warranty_months' => 24,
-                'purchase_date' =>   Carbon::createFromDate(2017, 1, 1)->hour(0)->minute(0)->second(0)                  
+                'purchase_date' =>   Carbon::createFromDate(2017, 1, 1)->hour(0)->minute(0)->second(0)->format('Y-m-d')
             ]);
 
-        //dd($asset);
         Notification::fake();
-        $asset->checkOut($user, $asset->id);
+        $asset->checkOut($user, $admin->id);
         Notification::assertSentTo($user, CheckoutAssetNotification::class);
     }
 }

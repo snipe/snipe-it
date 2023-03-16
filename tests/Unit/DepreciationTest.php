@@ -2,23 +2,15 @@
 namespace Tests\Unit;
 
 use App\Models\Depreciation;
-use Tests\Unit\BaseTest;
 use App\Models\Category;
 use App\Models\License;
 use App\Models\AssetModel;
+use Tests\TestCase;
 
-class DepreciationTest extends BaseTest
+class DepreciationTest extends TestCase
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
-
-
-
     public function testADepreciationHasModels()
     {
-        $this->createValidAssetModel();
         $depreciation = Depreciation::factory()->create();
 
         AssetModel::factory()

@@ -358,7 +358,7 @@
                       </strong>
                     </div>
                     <div class="col-md-9">
-                      {{ $license->reassignable ? 'Yes' : 'No' }}
+                      {!! $license->reassignable ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no') !!}
                     </div>
                   </div>
 

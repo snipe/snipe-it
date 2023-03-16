@@ -395,7 +395,7 @@ return [
     'end_date'            => 'Enddatum',
     'alt_uploaded_image_thumbnail' => 'Hochgeladene Miniaturansicht',
     'placeholder_kit'       => 'Kit auswählen',
-    'file_not_found'        => 'File not found',
+    'file_not_found'        => 'File not found on server',
     'preview_not_available' => '(no preview)',
     'setup'                 => 'Setup',
     'pre_flight'            => 'Pre-Flight',

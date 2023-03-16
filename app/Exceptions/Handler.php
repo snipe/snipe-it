@@ -6,6 +6,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use App\Helpers\Helper;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\AuthenticationException;
+use ArieTimmerman\Laravel\SCIMServer\Exceptions\SCIMException;
 use Log;
 use Throwable;
 use JsonException;
@@ -28,6 +29,7 @@ class Handler extends ExceptionHandler
         \Intervention\Image\Exception\NotSupportedException::class,
         \League\OAuth2\Server\Exception\OAuthServerException::class,
         JsonException::class,
+        SCIMException::class, //these generally don't need to be reported
     ];
 
     /**
@@ -53,7 +55,7 @@ class Handler extends ExceptionHandler
      * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $e
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function render($request, Throwable $e)
     {
@@ -70,6 +72,9 @@ class Handler extends ExceptionHandler
             return response()->json(Helper::formatStandardApiResponse('error', null, 'invalid JSON'), 422);
         }
 
+        if ($e instanceof SCIMException) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'invalid SCIM Request'), 400);
+        }
 
         // Handle Ajax requests that fail because the model doesn't exist
         if ($request->ajax() || $request->wantsJson()) {
@@ -113,8 +118,8 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Illuminate\Auth\AuthenticationException  $exception
-     * @return \Illuminate\Http\Response
-     */
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+  */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         if ($request->expectsJson()) {

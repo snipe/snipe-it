@@ -271,7 +271,7 @@ class SettingsController extends Controller
             $headers = ['ContentType' => 'application/zip'];
             return Storage::download($path.'/'.$file, $file, $headers);
         } else {
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'File not found'));
+            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('general.file_not_found')));
         }
 
     }

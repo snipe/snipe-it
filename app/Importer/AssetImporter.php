@@ -76,10 +76,12 @@ class AssetImporter extends ItemImporter
         }
         $this->item['notes'] = $this->findCsvMatch($row, 'asset_notes');
         $this->item['image'] = $this->findCsvMatch($row, 'image');
-        $this->item['requestable'] = $this->fetchHumanBoolean($this->findCsvMatch($row, 'requestable'));
-        $asset->requestable = $this->fetchHumanBoolean($this->findCsvMatch($row, 'requestable'));
+        $this->item['requestable'] = ($this->fetchHumanBoolean($this->findCsvMatch($row, 'requestable')) == 1) ? '1' : 0;
+        $asset->requestable = $this->item['requestable'];
         $this->item['warranty_months'] = intval($this->findCsvMatch($row, 'warranty_months'));
         $this->item['model_id'] = $this->createOrFetchAssetModel($row);
+        $this->item['byod'] = ($this->fetchHumanBoolean($this->findCsvMatch($row, 'byod')) == 1) ? '1' : 0;
+
 
         // If no status ID is found
         if (! array_key_exists('status_id', $this->item) && ! $editingAsset) {
@@ -135,7 +137,7 @@ class AssetImporter extends ItemImporter
             //-- user_id is a property of the abstract class Importer, which this class inherits from and it's setted by
             //-- the class that needs to use it (command importer or GUI importer inside the project).
             if (isset($target)) {
-                $asset->fresh()->checkOut($target, $this->user_id, date('Y-m-d H:i:s'));
+                $asset->fresh()->checkOut($target, $this->user_id, date('Y-m-d H:i:s'), null, $asset->notes, $asset->name);
             }
 
             return;

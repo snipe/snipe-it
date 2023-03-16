@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>{{ trans('general.assigned_to', ['name' => $show_user->present()->fullName()]) }}</title>
+    <title>{{ trans('general.assigned_to', ['name' => $show_user->present()->fullName()]) }} - {{ date('Y-m-d H:i', time()) }}</title>
     <style>
         body {
             font-family: "Arial, Helvetica", sans-serif;
@@ -49,8 +49,8 @@
     @endif
 @endif
 
-<h3>{{ trans('general.assigned_to', ['name' => $show_user->present()->fullName()]) }} {{ ($show_user->jobtitle!='' ? ' - '.$show_user->jobtitle : '') }}</h3>
-
+<h3>{{ trans('general.assigned_to', ['name' => $show_user->present()->fullName()]) }} {{ ($show_user->jobtitle!='' ? ' - '.$show_user->jobtitle : '') }}
+</h3>
     @if ($assets->count() > 0)
         @php
             $counter = 1;
@@ -242,6 +242,8 @@
     @endif
 
     <br>
+    <br>
+    {{ trans('admin/users/general.all_assigned_list_generation')}} {{ Helper::getFormattedDateObject(now(), 'datetime', false) }}
     <br>
     <br>
     <table>

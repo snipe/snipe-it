@@ -39,7 +39,7 @@
                     <li class="active">
                         <a href="#items" data-toggle="tab" title="{{ trans('general.items') }}"> {{ ucwords($category_type_route) }}
                             @if ($category->category_type=='asset')
-                            <badge class="badge badge-secondary"> {{ $category->assets()->AssetsForShow()->count() }}</badge>
+                            <badge class="badge badge-secondary"> {{ $category->showableAssets()->count() }}</badge>
                             @endif
                         </a>
                     </li>

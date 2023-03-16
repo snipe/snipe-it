@@ -148,6 +148,7 @@ return [
     'filetypes_accepted_help'    => 'Accepted filetype is :types. Max upload size allowed is :size.|Accepted filetypes are :types. Max upload size allowed is :size.',
     'filetypes_size_help'   => 'Max upload size allowed is :size.',
     'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, and svg. Max upload size allowed is :size.',
+    'unaccepted_image_type'  => 'This image file was not readable. Accepted filetypes are jpg, webp, png, gif, and svg. The mimetype of this file is: :mimetype.',
     'import'         	    => 'Import',
     'importing'         	=> 'Importing',
     'importing_help'        => 'You can import assets, accessories, licenses, components, consumables, and users via CSV file. <br><br>The CSV should be comma-delimited and formatted with headers that match the ones in the <a href="https://snipe-it.readme.io/docs/importing" target="_new">sample CSVs in the documentation</a>.',
@@ -249,8 +250,8 @@ return [
     'signature'             => 'Signature',
     'signed_off_by'         => 'Signed Off By',
     'skin'       			=> 'Skin',
-    'slack_msg_note'        => 'A slack message will be sent',
-    'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',
+    'webhook_msg_note'        => 'A :app message will be sent',
+    'webhook_test_msg'        => 'Oh hai! Looks like your :app integration with Snipe-IT is working!',
     'some_features_disabled' => 'DEMO MODE: Some features are disabled for this installation.',
     'site_name'				=> 'Site Name',
     'state'  				=> 'State',
@@ -406,6 +407,9 @@ return [
     'toggle_navigation'     => 'Toggle navigation',
     'alerts'                => 'Alerts',
     'tasks_view_all'        => 'View all tasks',
+    'true'                  => 'True',
+    'false'                 => 'False',
+    'integration_option'    => 'Integration Option',
 
 
 

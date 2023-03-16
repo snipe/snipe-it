@@ -673,7 +673,8 @@
 
                                             </div>
                                         </div>
-
+                                    @endif
+                                    @if ($asset->asset_eol_date)
                                         <div class="row">
                                             <div class="col-md-2">
                                                 <strong>
@@ -681,10 +682,10 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                @if ($asset->purchase_date)
-                                                {{ Helper::getFormattedDateObject($asset->present()->eol_date(), 'date', false) }}
+                                                @if ($asset->asset_eol_date)
+                                                {{ Helper::getFormattedDateObject($asset->asset_eol_date, 'date', false) }}
                                                 -
-                                                {{ Carbon::parse($asset->present()->eol_date())->diffForHumans(['parts' => 2]) }}
+                                                {{ Carbon::parse($asset->asset_eol_date)->diffForHumans(['parts' => 2]) }}
                                                 @else
                                                     {{ trans('general.na_no_purchase_date') }}
                                                 @endif

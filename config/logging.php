@@ -117,6 +117,11 @@ $config = [
                     \Log::info("IGNORING E_WARNING in production mode: ".$args->getMessage());
                     return true; // "TRUE - you should ignore it!"
                 }
+                $needle = "ArieTimmerman\\Laravel\\SCIMServer\\Exceptions\\SCIMException";
+                if (App::environment('production') && is_string($args) && strncmp($args, $needle, strlen($needle) ) === 0 ) {
+                    \Log::info("String: '$args' looks like a SCIM Exception; ignoring error");
+                    return true; //yes, *do* ignore it
+                }
                 return false;
             },
         ],

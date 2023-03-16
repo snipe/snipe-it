@@ -114,6 +114,7 @@ class Asset extends Depreciable
         'serial'          => 'unique_serial|nullable',
         'purchase_cost'   => 'numeric|nullable|gte:0',
         'supplier_id'     => 'exists:suppliers,id|nullable',
+        'asset_eol_date'  => 'date|max:10|min:10|nullable',
     ];
 
   /**
@@ -143,9 +144,9 @@ class Asset extends Depreciable
         'last_checkout',
         'expected_checkin',
         'byod',
+        'asset_eol_date',
         'last_audit_date',
         'next_audit_date',
-
     ];
 
     use Searchable;
@@ -168,6 +169,7 @@ class Asset extends Depreciable
       'expected_checkin', 
       'next_audit_date', 
       'last_audit_date',
+      'asset_eol_date',
     ];
 
     /**
@@ -181,7 +183,7 @@ class Asset extends Depreciable
         'company'            => ['name'],
         'defaultLoc'         => ['name'],
         'location'           => ['name'],
-        'model'              => ['name', 'model_number'],
+        'model'              => ['name', 'model_number', 'eol'],
         'model.category'     => ['name'],
         'model.manufacturer' => ['name'],
     ];
@@ -544,6 +546,28 @@ class Asset extends Depreciable
     {
         return strtolower(class_basename($this->assigned_type));
     }
+
+
+
+    /**
+     * This is annoying, but because we don't say "assets" in our route names, we have to make an exception here
+     * @todo - normalize the route names - API endpoint URLS can stay the same
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v6.1.0]
+     * @return string
+     */
+    public function targetShowRoute()
+    {
+        $route = str_plural($this->assignedType());
+        if ($route=='assets') {
+            return 'hardware';
+        }
+
+        return $route;
+
+    }
+
 
     /**
      * Get the asset's location based on default RTD location
@@ -1641,9 +1665,9 @@ class Asset extends Depreciable
      */
     public function scopeOrderManufacturer($query, $order)
     {
-        return $query->join('models', 'assets.model_id', '=', 'models.id')
-            ->join('manufacturers', 'models.manufacturer_id', '=', 'manufacturers.id')
-            ->orderBy('manufacturers.name', $order);
+        return $query->join('models as order_asset_model', 'assets.model_id', '=', 'order_asset_model.id')
+            ->join('manufacturers as manufacturer_order', 'order_asset_model.manufacturer_id', '=', 'manufacturer_order.id')
+            ->orderBy('manufacturer_order.name', $order);
     }
 
    /**
