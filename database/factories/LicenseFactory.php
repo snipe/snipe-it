@@ -3,6 +3,7 @@ namespace Database\Factories;
 
 use App\Models\Category;
 use App\Models\Manufacturer;
+use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -55,7 +56,7 @@ class LicenseFactory extends Factory
             'expiration_date' => $this->faker->dateTimeBetween('now', '+3 years', date_default_timezone_get())->format('Y-m-d H:i:s'),
             'reassignable' => $this->faker->boolean(),
             'termination_date' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get())->format('Y-m-d H:i:s'),
-            'supplier_id' => $this->faker->numberBetween(1, 5),
+            'supplier_id' => Supplier::factory(),
             'category_id' => Category::where('category_type', '=', 'license')->inRandomOrder()->first()->id
         ];
     }

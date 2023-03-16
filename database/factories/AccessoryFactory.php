@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Category;
 use App\Models\Location;
 use App\Models\Manufacturer;
+use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -56,7 +57,7 @@ class AccessoryFactory extends Factory
                 },
                 'qty' => 10,
                 'min_amt' => 2,
-                'supplier_id' => rand(1, 5),
+                'supplier_id' => Supplier::factory(),
             ];
         });
     }
@@ -75,7 +76,7 @@ class AccessoryFactory extends Factory
                 },
                 'qty' => 15,
                 'min_amt' => 2,
-                'supplier_id' => rand(1, 5),
+                'supplier_id' => Supplier::factory(),
             ];
         });
     }
@@ -94,7 +95,7 @@ class AccessoryFactory extends Factory
                 },
                 'qty' => 13,
                 'min_amt' => 2,
-                'supplier_id' => rand(1, 5),
+                'supplier_id' => Supplier::factory(),
             ];
         });
     }
