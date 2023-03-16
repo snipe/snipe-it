@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\Location;
 use App\Models\Manufacturer;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -37,7 +38,7 @@ class AccessoryFactory extends Factory
                 return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
             },
             'model_number' => $this->faker->numberBetween(1000000, 50000000),
-            'location_id' => rand(1, 5),
+            'location_id' => Location::factory(),
         ];
     }
 

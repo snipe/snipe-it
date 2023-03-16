@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Accessory;
+use App\Models\Location;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -14,10 +15,17 @@ class AccessorySeeder extends Seeder
     {
         Accessory::truncate();
         DB::table('accessories_users')->truncate();
-        Accessory::factory()->count(1)->appleUsbKeyboard()->create();
-        Accessory::factory()->count(1)->appleBtKeyboard()->create();
-        Accessory::factory()->count(1)->appleMouse()->create();
-        Accessory::factory()->count(1)->microsoftMouse()->create();
+
+        if (! Location::count()) {
+            $this->call(LocationSeeder::class);
+        }
+
+        $locationIds = Location::all()->pluck('id');
+
+        Accessory::factory()->count(1)->appleUsbKeyboard()->create(['location_id' => $locationIds->random()]);
+        Accessory::factory()->count(1)->appleBtKeyboard()->create(['location_id' => $locationIds->random()]);
+        Accessory::factory()->count(1)->appleMouse()->create(['location_id' => $locationIds->random()]);
+        Accessory::factory()->count(1)->microsoftMouse()->create(['location_id' => $locationIds->random()]);
 
         $src = public_path('/img/demo/accessories/');
         $dst = 'accessories'.'/';

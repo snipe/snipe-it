@@ -35,9 +35,7 @@ class ComponentFactory extends Factory
         return [
             'name' => $this->faker->text(20),
             'category_id' => Category::factory(),
-            'location_id' => function () {
-                return Location::first() ?? Location::factory();
-            },
+            'location_id' => Location::factory(),
             'serial'   => $this->faker->uuid,
             'qty' => $this->faker->numberBetween(3, 10),
             'order_number' => $this->faker->numberBetween(1000000, 50000000),
@@ -58,7 +56,7 @@ class ComponentFactory extends Factory
                 },
                 'qty' => 10,
                 'min_amt' => 2,
-                'location_id' => 3,
+                'location_id' => Location::factory(),
             ];
         });
     }

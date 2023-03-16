@@ -12,7 +12,5 @@ class ActionlogSeeder extends Seeder
         Actionlog::truncate();
         Actionlog::factory()->count(300)->assetCheckoutToUser()->create();
         Actionlog::factory()->count(100)->assetCheckoutToLocation()->create();
-
-        
     }
 }

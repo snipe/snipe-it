@@ -308,8 +308,8 @@ class AssetFactory extends Factory
                 'model_id' => function () {
                     return AssetModel::where('name', 'Macbook Pro 13')->first() ?? AssetModel::factory()->mbp13Model();
                 },
-                'assigned_to' => \App\Models\Location::factory()->create()->id,
-                'assigned_type' => \App\Models\Location::class,
+                'assigned_to' => Location::factory(),
+                'assigned_type' => Location::class,
             ];
         });
     }
