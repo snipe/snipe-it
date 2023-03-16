@@ -217,6 +217,14 @@ class UsersController extends Controller
             case 'company':
                 $users = $users->OrderCompany($order);
                 break;
+            case 'first_name':
+                $users->orderBy('first_name', $order);
+                $users->orderBy('last_name', $order);
+                break;
+            case 'last_name':
+                $users->orderBy('last_name', $order);
+                $users->orderBy('first_name', $order);
+                break;
             default:
                 $allowed_columns =
                     [
