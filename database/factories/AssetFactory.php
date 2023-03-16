@@ -288,36 +288,6 @@ class AssetFactory extends Factory
         });
     }
 
-    // public function assignedToUser()
-    // {
-    //     return $this->state(function () {
-    //         return [
-    //             'assigned_to' => User::factory(),
-    //             'assigned_type' => User::class,
-    //         ];
-    //     });
-    // }
-    //
-    // public function assignedToLocation()
-    // {
-    //     return $this->state(function () {
-    //         return [
-    //             'assigned_to' => Location::factory(),
-    //             'assigned_type' => Location::class,
-    //         ];
-    //     });
-    // }
-    //
-    // public function assignedToAsset()
-    // {
-    //     return $this->state(function () {
-    //         return [
-    //             'assigned_to' => Asset::factory(),
-    //             'assigned_type' => Asset::class,
-    //         ];
-    //     });
-    // }
-
     public function requiresAcceptance()
     {
         return $this->state(function () {
