@@ -192,7 +192,6 @@ class UsersController extends Controller
         }
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $offset = (($users) && (request('offset') > $users->count())) ? 0 : request('offset', 0);
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.
@@ -217,6 +216,14 @@ class UsersController extends Controller
                 break;
             case 'company':
                 $users = $users->OrderCompany($order);
+                break;
+            case 'first_name':
+                $users->orderBy('first_name', $order);
+                $users->orderBy('last_name', $order);
+                break;
+            case 'last_name':
+                $users->orderBy('last_name', $order);
+                $users->orderBy('first_name', $order);
                 break;
             default:
                 $allowed_columns =
