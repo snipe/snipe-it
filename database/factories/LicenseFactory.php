@@ -57,7 +57,6 @@ class LicenseFactory extends Factory
             'reassignable' => $this->faker->boolean(),
             'termination_date' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get())->format('Y-m-d H:i:s'),
             'supplier_id' => Supplier::factory(),
-            'category_id' => Category::where('category_type', '=', 'license')->inRandomOrder()->first()->id
         ];
     }
 
