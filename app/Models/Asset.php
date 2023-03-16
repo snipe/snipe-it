@@ -224,7 +224,6 @@ class Asset extends Depreciable
                     // Encrypted Fields are validated in the controller, we remove the validation rule here
                     if ($field->field_encrypted == 1){
                         unset($this->rules[$field->db_column]);
-                        dd($this->rules);
                     }
                 }
             }
