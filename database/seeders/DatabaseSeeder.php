@@ -38,9 +38,9 @@ class DatabaseSeeder extends Seeder
         $this->call(CompanySeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(LocationSeeder::class);
+        $this->call(DepartmentSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(DepreciationSeeder::class);
-        $this->call(DepartmentSeeder::class);
         $this->call(ManufacturerSeeder::class);
         $this->call(SupplierSeeder::class);
         $this->call(AssetModelSeeder::class);
