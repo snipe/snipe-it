@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Company;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use \Auth;
 
@@ -79,7 +80,9 @@ class UserFactory extends Factory
         return $this->state(function () {
             return [
                 'permissions' => '{"admin":"1"}',
-                'manager_id' => rand(1, 2),
+                'manager_id' => function () {
+                    return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
+                },
             ];
         });
     }
