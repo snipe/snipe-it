@@ -2,7 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\AssetMaintenance;
+use App\Models\CustomFieldset;
 use App\Models\Depreciation;
+use App\Models\Import;
 use App\Models\Manufacturer;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -107,7 +110,9 @@ class AssetModelFactory extends Factory
                     return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
                 },
                 'image' => 'mbp.jpg',
-                'fieldset_id' => 2,
+                'fieldset_id' => function () {
+                    return CustomFieldset::where('name', 'Laptops and Desktops')->first() ?? CustomFieldset::factory()->computer();
+                },
             ];
         });
     }
@@ -128,7 +133,9 @@ class AssetModelFactory extends Factory
                     return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
                 },
                 'image' => 'macbookair.jpg',
-                'fieldset_id' => 2,
+                'fieldset_id' => function () {
+                    return CustomFieldset::where('name', 'Laptops and Desktops')->first() ?? CustomFieldset::factory()->computer();
+                },
             ];
         });
     }
@@ -149,7 +156,9 @@ class AssetModelFactory extends Factory
                     return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
                 },
                 'image' => 'surface.jpg',
-                'fieldset_id' => 2,
+                'fieldset_id' => function () {
+                    return CustomFieldset::where('name', 'Laptops and Desktops')->first() ?? CustomFieldset::factory()->computer();
+                },
             ];
         });
     }
@@ -170,7 +179,9 @@ class AssetModelFactory extends Factory
                     return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
                 },
                 'image' => 'xps.jpg',
-                'fieldset_id' => 2,
+                'fieldset_id' => function () {
+                    return CustomFieldset::where('name', 'Laptops and Desktops')->first() ?? CustomFieldset::factory()->computer();
+                },
             ];
         });
     }
@@ -191,7 +202,9 @@ class AssetModelFactory extends Factory
                     return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
                 },
                 'image' => 'zenbook.jpg',
-                'fieldset_id' => 2,
+                'fieldset_id' => function () {
+                    return CustomFieldset::where('name', 'Laptops and Desktops')->first() ?? CustomFieldset::factory()->computer();
+                },
             ];
         });
     }
@@ -212,7 +225,9 @@ class AssetModelFactory extends Factory
                     return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
                 },
                 'image' => 'spectre.jpg',
-                'fieldset_id' => 2,
+                'fieldset_id' => function () {
+                    return CustomFieldset::where('name', 'Laptops and Desktops')->first() ?? CustomFieldset::factory()->computer();
+                },
             ];
         });
     }
@@ -233,7 +248,9 @@ class AssetModelFactory extends Factory
                     return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
                 },
                 'image' => 'yoga.png',
-                'fieldset_id' => 2,
+                'fieldset_id' => function () {
+                    return CustomFieldset::where('name', 'Laptops and Desktops')->first() ?? CustomFieldset::factory()->computer();
+                },
             ];
         });
     }
@@ -254,7 +271,9 @@ class AssetModelFactory extends Factory
                     return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
                 },
                 'image' => 'imacpro.jpg',
-                'fieldset_id' => 2,
+                'fieldset_id' => function () {
+                    return CustomFieldset::where('name', 'Laptops and Desktops')->first() ?? CustomFieldset::factory()->computer();
+                },
             ];
         });
     }
@@ -275,7 +294,9 @@ class AssetModelFactory extends Factory
                     return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
                 },
                 'image' => 'lenovoi5.png',
-                'fieldset_id' => 2,
+                'fieldset_id' => function () {
+                    return CustomFieldset::where('name', 'Laptops and Desktops')->first() ?? CustomFieldset::factory()->computer();
+                },
             ];
         });
     }
@@ -297,7 +318,9 @@ class AssetModelFactory extends Factory
                     return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
                 },
                 'image' => 'optiplex.jpg',
-                'fieldset_id' => 2,
+                'fieldset_id' => function () {
+                    return CustomFieldset::where('name', 'Laptops and Desktops')->first() ?? CustomFieldset::factory()->computer();
+                },
             ];
         });
     }
@@ -398,7 +421,9 @@ class AssetModelFactory extends Factory
                     return Depreciation::where('name', 'Mobile Phone Depreciation')->first() ?? Depreciation::factory()->mobilePhones();
                 },
                 'image' => 'iphone11.jpeg',
-                'fieldset_id' => 1,
+                'fieldset_id' => function () {
+                    return CustomFieldset::where('name', 'Mobile Devices')->first() ?? CustomFieldset::factory()->mobile();
+                },
             ];
         });
     }
@@ -419,7 +444,9 @@ class AssetModelFactory extends Factory
                     return Depreciation::where('name', 'Computer Depreciation')->first() ?? Depreciation::factory()->computer();
                 },
                 'image' => 'iphone12.jpeg',
-                'fieldset_id' => 1,
+                'fieldset_id' => function () {
+                    return CustomFieldset::where('name', 'Mobile Devices')->first() ?? CustomFieldset::factory()->mobile();
+                },
             ];
         });
     }
