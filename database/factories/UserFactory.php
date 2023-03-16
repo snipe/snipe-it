@@ -22,7 +22,6 @@ class UserFactory extends Factory
             'city' => $this->faker->city(),
             'company_id' => Company::factory(),
             'country' => $this->faker->country(),
-            'department_id' => rand(1, 6),
             'email' => $this->faker->safeEmail,
             'employee_num' => $this->faker->numberBetween(3500, 35050),
             'first_name' => $this->faker->firstName(),
