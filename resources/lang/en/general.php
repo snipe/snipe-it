@@ -415,8 +415,8 @@ return [
     'not_enough_users_selected'     => 'At least :count users must be selected',
     'merge_success'         => ':count users merged successfully into :into_username!',
     'merged'                => 'merged',
-    'merged_users_log_merged_from' => 'Merged this user (ID :to_id - :to_username) into user ID :from_id (:from_username) ',
-    'merged_users_log_merged_into' => 'Merged user ID :from_id (:from_username) into this user (ID :to_id - :to_username)',
+    'merged_log_this_user_into' => 'Merged this user (ID :to_id - :to_username) into user ID :from_id (:from_username) ',
+    'merged_log_this_user_from' => 'Merged user ID :from_id (:from_username) into this user (ID :to_id - :to_username)',
 
 
 ];
