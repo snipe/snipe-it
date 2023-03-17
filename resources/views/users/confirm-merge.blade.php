@@ -9,7 +9,7 @@
 @section('content')
 
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             <div class="box box-default">
                 <form class="form-horizontal" role="form" method="post" action="{{ route('users.merge.save') }}">
                     <div class="box-body">
@@ -37,15 +37,27 @@
                                 <table class="display table table-hover">
                                     <thead>
                                     <tr>
-                                        <th class="col-md-1"></th>
-                                        <th class="col-md-6">{{ trans('general.name') }}</th>
-                                        <th class="col-md-6">{{ trans('general.email') }}</th>
-                                        <th class="col-md-6">{{ trans('general.username') }}</th>
-                                        <th class="col-md-5">{{ trans('general.groups') }}</th>
-                                        <th class="col-md-5">{{ trans('general.assets') }}</th>
-                                        <th class="col-md-5">{{ trans('general.accessories') }}</th>
-                                        <th class="col-md-5">{{ trans('general.licenses') }}</th>
-                                        <th class="col-md-5">{{ trans('general.consumables') }}</th>
+                                        <th></th>
+                                        <th class="col-md-3">{{ trans('general.name') }}</th>
+                                        <th class="col-md-3">{{ trans('general.email') }}</th>
+                                        <th class="col-md-3">{{ trans('general.username') }}</th>
+                                        <th class="col-md-3">{{ trans('general.groups') }}</th>
+                                        <th class="col-md-1 text-right">
+                                            <i class="fas fa-barcode fa-fw" aria-hidden="true" style="font-size: 17px;"></i>
+                                            <span class="sr-only">{{ trans('general.assets') }}</span>
+                                        </th>
+                                        <th class="col-md-1 text-right">
+                                            <i class="far fa-keyboard fa-fw" aria-hidden="true" style="font-size: 17px;"></i>
+                                            <span class="sr-only">{{ trans('general.accessories') }}</span>
+                                        </th>
+                                        <th class="col-md-1 text-right">
+                                            <i class="far fa-save fa-fw" aria-hidden="true" style="font-size: 17px;"></i>
+                                            <span class="sr-only">{{ trans('general.licenses') }}</span>
+                                        </th>
+                                        <th class="col-md-1 text-right">
+                                            <i class="fas fa-tint fa-fw" aria-hidden="true" style="font-size: 17px;"></i>
+                                            <span class="sr-only">{{ trans('general.consumables') }}</span>
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -76,16 +88,16 @@
                                                     </a>&nbsp;
                                                 @endforeach
                                             </td>
-                                            <td>
+                                            <td class="text-right">
                                                 {{ number_format($user->assets()->count())  }}
                                             </td>
-                                            <td>
+                                            <td class="text-right">
                                                 {{ number_format($user->accessories()->count())  }}
                                             </td>
-                                            <td>
+                                            <td class="text-right">
                                                 {{ number_format($user->licenses()->count())  }}
                                             </td>
-                                            <td>
+                                            <td class="text-right">
                                                 {{ number_format($user->consumables()->count())  }}
                                             </td>
                                         </tr>
