@@ -39,6 +39,8 @@
                                     <tr>
                                         <th class="col-md-1"></th>
                                         <th class="col-md-6">{{ trans('general.name') }}</th>
+                                        <th class="col-md-6">{{ trans('general.email') }}</th>
+                                        <th class="col-md-6">{{ trans('general.username') }}</th>
                                         <th class="col-md-5">{{ trans('general.groups') }}</th>
                                         <th class="col-md-5">{{ trans('general.assets') }}</th>
                                         <th class="col-md-5">{{ trans('general.accessories') }}</th>
@@ -55,10 +57,18 @@
 
                                             <td>
                                               <span {!! (Auth::user()->id==$user->id ? ' style="text-decoration: line-through"' : '') !!}>
-                                                {{ $user->present()->fullName() }} ({{ $user->username }}) (#{{ $user->id }})
+                                                {{ $user->present()->fullName() }}
                                               </span>
                                                 {{ (Auth::id()==$user->id ? ' (cannot delete yourself)' : '') }}
                                             </td>
+                                            <td>
+                                                {{ $user->email }}
+
+                                            </td>
+                                            <td>
+                                                {{ $user->username }}
+                                            </td>
+
                                             <td>
                                                 @foreach ($user->groups as $group)
                                                     <a href=" {{ route('groups.update', $group->id) }}" class="label  label-default">
