@@ -12,6 +12,7 @@
             <select name="bulk_actions" class="form-control select2" style="width: 200px;" aria-label="bulk_actions">
                 <option value="edit">{{ trans('general.bulk_edit') }}</option>
                 <option value="delete">{!! trans('general.bulk_checkin_delete') !!}</option>
+                <option value="merge">{!! trans('general.merge_users') !!}</option>
                 <option value="bulkpasswordreset">{{ trans('button.send_password_link') }}</option>
             </select>
             <button class="btn btn-primary" id="bulkUserEditButton" disabled>{{ trans('button.go') }}</button>
