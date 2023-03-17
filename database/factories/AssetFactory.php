@@ -46,9 +46,7 @@ class AssetFactory extends Factory
             'status_id' => function () {
                 return Statuslabel::where('name', 'Ready to Deploy')->first() ?? Statuslabel::factory()->rtd()->create(['name' => 'Ready to Deploy']);
             },
-            'user_id' => function () {
-                return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
-            },
+            'user_id' => User::factory()->firstAdmin(),
             'asset_tag' => $this->faker->unixTime('now'),
             'notes'   => 'Created by DB seeder',
             'purchase_date' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get())->format('Y-m-d'),

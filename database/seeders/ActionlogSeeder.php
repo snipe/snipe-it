@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Location;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class ActionlogSeeder extends Seeder
@@ -21,14 +22,16 @@ class ActionlogSeeder extends Seeder
             $this->call(LocationSeeder::class);
         }
 
+        $admin = User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin()->create();
+
         Actionlog::factory()
             ->count(300)
             ->assetCheckoutToUser()
-            ->create();
+            ->create(['user_id' => $admin->id]);
 
         Actionlog::factory()
             ->count(100)
             ->assetCheckoutToLocation()
-            ->create();
+            ->create(['user_id' => $admin->id]);
     }
 }

@@ -40,9 +40,7 @@ class AccessoryFactory extends Factory
                 $this->faker->randomElement(['Bluetooth', 'Wired']),
                 $this->faker->randomElement(['Keyboard', 'Wired'])
             ),
-            'user_id' => function () {
-                return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
-            },
+            'user_id' => User::factory()->firstAdmin(),
             'category_id' => Category::factory(),
             'model_number' => $this->faker->numberBetween(1000000, 50000000),
             'location_id' => Location::factory(),

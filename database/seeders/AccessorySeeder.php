@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Accessory;
 use App\Models\Location;
 use App\Models\Supplier;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -29,22 +30,32 @@ class AccessorySeeder extends Seeder
 
         $supplierIds = Supplier::all()->pluck('id');
 
-        Accessory::factory()->count(1)->appleUsbKeyboard()->create([
+        $admin = User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin()->create();
+
+        Accessory::factory()->appleUsbKeyboard()->create([
             'location_id' => $locationIds->random(),
             'supplier_id' => $supplierIds->random(),
+            'user_id' => $admin->id,
         ]);
-        Accessory::factory()->count(1)->appleBtKeyboard()->create([
+
+        Accessory::factory()->appleBtKeyboard()->create([
             'location_id' => $locationIds->random(),
             'supplier_id' => $supplierIds->random(),
+            'user_id' => $admin->id,
         ]);
-        Accessory::factory()->count(1)->appleMouse()->create([
+
+        Accessory::factory()->appleMouse()->create([
             'location_id' => $locationIds->random(),
             'supplier_id' => $supplierIds->random(),
+            'user_id' => $admin->id,
         ]);
-        Accessory::factory()->count(1)->microsoftMouse()->create([
+
+        Accessory::factory()->microsoftMouse()->create([
             'location_id' => $locationIds->random(),
             'supplier_id' => $supplierIds->random(),
+            'user_id' => $admin->id,
         ]);
+
 
         $src = public_path('/img/demo/accessories/');
         $dst = 'accessories'.'/';
