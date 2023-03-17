@@ -25,9 +25,11 @@
                         </div>
 
                         @if (config('app.lock_passwords'))
-                            <div class="col-md-12">
-                                <div class="callout callout-warning">
-                                    <p>{{ trans('general.feature_disabled') }}</p>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="callout callout-info">
+                                        <p>{{ trans('general.feature_disabled') }}</p>
+                                    </div>
                                 </div>
                             </div>
                         @endif
