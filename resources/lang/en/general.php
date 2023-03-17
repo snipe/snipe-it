@@ -408,6 +408,10 @@ return [
     'false'                 => 'False',
     'integration_option'    => 'Integration Option',
     'log_does_not_exist'    => 'No matching log record exists.',
+    'merge_users'           => 'Merge Users',
+    'warning_merge_information' => 'This will merge the selected :count users into a single user. Select the user you wish to merge the others into into below. THIS ACTION CANNOT BE UNDONE and should ONLY be used when you need to merge users because of a bad import or sync.',
+    'no_users_selected'     => 'No users selected',
+    'merge_success'         => 'Users merged successfully',
 
 
 ];
