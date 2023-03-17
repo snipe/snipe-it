@@ -34,6 +34,8 @@ class ConsumableFactory extends Factory
     public function definition()
     {
         return [
+            'name' => $this->faker->word(),
+            'category_id' => Category::factory(),
             'user_id' => function () {
                 return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
             },

@@ -40,6 +40,7 @@ class AssetFactory extends Factory
     {
         return [
             'name' => null,
+            'model_id' => AssetModel::factory(),
             'rtd_location_id' => Location::factory(),
             'serial' => $this->faker->uuid(),
             'status_id' => function () {

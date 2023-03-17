@@ -33,6 +33,7 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => $this->faker->catchPhrase(),
+            'category_type' => 'asset',
             'checkin_email' => $this->faker->boolean(),
             'eula_text' => $this->faker->paragraph(),
             'require_acceptance' => false,

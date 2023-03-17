@@ -91,6 +91,7 @@ class AssetModelFactory extends Factory
                 return User::first() ?? User::factory()->firstAdmin();
             },
             'name' => $this->faker->catchPhrase(),
+            'category_id' => Category::factory(),
             'model_number' => $this->faker->creditCardNumber(),
             'notes' => 'Created by demo seeder',
 
