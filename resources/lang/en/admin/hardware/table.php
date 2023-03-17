@@ -27,4 +27,6 @@ return [
     'requested_date' => 'Requested Date',
     'changed'       => 'Changed',
     'icon' => 'Icon',
+    'requested_qty' => 'Quantity',
+    'available_qty' => 'Available Quantity',
 ];

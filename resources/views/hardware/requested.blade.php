@@ -51,6 +51,7 @@
                         <th class="col-md-2" data-sortable="true">{{ trans('admin/hardware/form.expected_checkin') }}</th>
                         <th class="col-md-3" data-sortable="true">{{ trans('admin/hardware/table.requesting_user') }}</th>
                         <th class="col-md-2">{{ trans('admin/hardware/table.requested_date') }}</th>
+                        <th class="col-md-2">{{ trans('admin/hardware/table.requested_qty') }}</th>
                         <th class="col-md-1">{{ trans('general.checkin').'/'.trans('general.checkout') }}</th>
                     </tr>
                 </thead>
@@ -103,6 +104,7 @@
                                 @endif
                             </td>
                             <td>{{ App\Helpers\Helper::getFormattedDateObject($request->created_at, 'datetime', false) }}</td>
+                            <td>{{ $request->quantity }}</td>
                             <td>
                                 @if ($request->itemType() == "asset")
                                     @if ($request->requestable->assigned_to=='')

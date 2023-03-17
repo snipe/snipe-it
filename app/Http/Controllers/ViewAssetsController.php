@@ -105,7 +105,7 @@ class ViewAssetsController extends Controller
         $logaction->target_id = $data['user_id'] = Auth::user()->id;
         $logaction->target_type = User::class;
 
-        $data['item_quantity'] = $request->has('request-quantity') ? e($request->input('request-quantity')) : 1;
+        $data['item_quantity'] = e($request->input('request-quantity'));
         $data['requested_by'] = $user->present()->fullName();
         $data['item'] = $item;
         $data['item_type'] = $itemType;
@@ -118,8 +118,18 @@ class ViewAssetsController extends Controller
         }
 
         $settings = Setting::getSettings();
-
+        
+        $request->validate( [
+            "request-quantity" => 'required|numeric|min:1',            
+        ],[
+            "request-quantity.min" => trans('admin/hardware/form.quantity_minimal'),      
+            "request-quantity.numeric" => trans('admin/hardware/form.quantity_numeric'),
+            'request-quantity.required' => trans('admin/hardware/form.quantity_required'),       
+        ]);
+        
+        
         if ($item_request = $item->isRequestedBy($user)) {
+            
             $item->cancelRequest();
             $data['item_quantity'] = $item_request->qty;
             $logaction->logaction('request_canceled');
@@ -130,7 +140,7 @@ class ViewAssetsController extends Controller
 
             return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
         } else {
-            $item->request();
+            $item->request($data['item_quantity']);
             if (($settings->alert_email != '') && ($settings->alerts_enabled == '1') && (! config('app.lock_passwords'))) {
                 $logaction->logaction('requested');
                 $settings->notify(new RequestAssetNotification($data));
@@ -161,7 +171,7 @@ class ViewAssetsController extends Controller
 
         $data['item'] = $asset;
         $data['target'] = Auth::user();
-        $data['item_quantity'] = 1;
+        // $data['item_quantity'] = 1;
         $settings = Setting::getSettings();
 
         $logaction = new Actionlog();
