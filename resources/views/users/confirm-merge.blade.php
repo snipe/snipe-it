@@ -7,19 +7,25 @@
 
 {{-- Page content --}}
 @section('content')
-
+    
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="box box-default">
                 <form class="form-horizontal" role="form" method="post" action="{{ route('users.merge.save') }}">
                     <div class="box-body">
+
+                        <div class="col-md-12">
+                            <p style="padding:10px">
+                                {{ trans('general.merge_information', array('count' => count($users))) }}
+                            </p>
+                        </div>
                         <!-- CSRF Token -->
                         {{csrf_field()}}
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="callout callout-danger">
                                     <i class="fas fa-exclamation-triangle"></i>
-                                    {{ trans('general.warning_merge_information', array('count' => count($users))) }}
+                                    {{ trans('general.warning_merge_information') }}
                                 </div>
                             </div>
                         </div>
@@ -39,7 +45,6 @@
                                 <table class="display table table-hover">
                                     <thead>
                                     <tr>
-                                        <th></th>
                                         <th class="col-md-3">{{ trans('general.name') }}</th>
                                         <th class="col-md-3">{{ trans('general.email') }}</th>
                                         <th class="col-md-3">{{ trans('general.username') }}</th>
@@ -66,14 +71,8 @@
                                     @foreach ($users as $user)
                                         <tr {!! ($user->isSuperUser() ? ' class="danger"':'') !!}>
                                             <td>
-                                                <input type="radio" name="merge_into_id" value="{{ $user->id }}" class="minimal" checked="checked">
-                                            </td>
-
-                                            <td>
-                                              <span {!! (Auth::user()->id==$user->id ? ' style="text-decoration: line-through"' : '') !!}>
-                                                {{ $user->present()->fullName() }}
-                                              </span>
-                                                {{ (Auth::id()==$user->id ? ' (cannot delete yourself)' : '') }}
+                                              <input type="radio" name="merge_into_id" id="{{ $user->id }}" value="{{ $user->id }}" class="minimal">
+                                                <label for="{{ $user->id }}"> {{ $user->present()->fullName() }}</label>
                                             </td>
                                             <td>
                                                 {{ $user->email }}
@@ -112,7 +111,7 @@
                     </div> <!--/box-body-->
                     <div class="box-footer text-right">
                         <a class="btn btn-link pull-left" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-                        <button type="submit" class="btn btn-success"{{ (config('app.lock_passwords') ? ' disabled' : '') }}><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('button.submit') }}</button>
+                        <button type="submit" class="btn btn-success"{{ (config('app.lock_passwords') ? ' disabled' : '') }} disabled="disabled"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('button.submit') }}</button>
                     </div><!-- /.box-footer -->
 
                     @foreach ($users as $user)
@@ -127,5 +126,18 @@
 @stop
 
 @section('moar_scripts')
+
+    @if (!(config('app.lock_passwords')))
+
+    <script>
+
+        $('button[type="submit"]').prop("disabled", true);
+
+        $('input').on('ifChecked', function(event) {
+            $(' button[type="submit"]').prop("disabled", false);
+        });
+
+    </script>
+    @endif
 
 @stop
