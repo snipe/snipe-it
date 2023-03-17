@@ -62,7 +62,7 @@ class BulkUsersController extends Controller
             }
         }
 
-        return redirect()->back()->with('error', 'No users selected');
+        return redirect()->back()->with('error', trans('general.no_users_selected'));
     }
 
     /**
@@ -79,7 +79,7 @@ class BulkUsersController extends Controller
         $this->authorize('update', User::class);
 
         if ((! $request->filled('ids')) || $request->input('ids') <= 0) {
-            return redirect()->back()->with('error', 'No users selected');
+            return redirect()->back()->with('error', trans('general.no_users_selected'));
         }
         $user_raw_array = $request->input('ids');
 
@@ -166,11 +166,11 @@ class BulkUsersController extends Controller
         $this->authorize('update', User::class);
 
         if ((! $request->filled('ids')) || (count($request->input('ids')) == 0)) {
-            return redirect()->back()->with('error', 'No users selected');
+            return redirect()->back()->with('error', trans('general.no_users_selected'));
         }
 
         if (config('app.lock_passwords')) {
-            return redirect()->route('users.index')->with('error', 'Bulk delete is not enabled in this installation');
+            return redirect()->route('users.index')->with('error', trans('general.feature_disabled'));
         }
 
         $user_raw_array = request('ids');
@@ -265,6 +265,10 @@ class BulkUsersController extends Controller
     public function merge(Request $request)
     {
         $this->authorize('update', User::class);
+
+        if (config('app.lock_passwords')) {
+            return redirect()->route('users.index')->with('error', trans('general.feature_disabled'));
+        }
 
         $user_ids_to_merge = $request->input('ids_to_merge');
         $user_ids_to_merge = array_diff($user_ids_to_merge, array($request->input('merge_into_id')));
