@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Password;
 class BulkUsersController extends Controller
 {
     /**
-     * Returns a view that confirms the user's a bulk delete will be applied to.
+     * Returns a view that confirms the user's a bulk action will be applied to.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.7]
@@ -36,18 +36,32 @@ class BulkUsersController extends Controller
 
         // Make sure there were users selected
         if (($request->filled('ids')) && (count($request->input('ids')) > 0)) {
+
             // Get the list of affected users
             $user_raw_array = request('ids');
             $users = User::whereIn('id', $user_raw_array)
                 ->with('groups', 'assets', 'licenses', 'accessories')->get();
 
+            // bulk edit, display the bulk edit form
             if ($request->input('bulk_actions') == 'edit') {
                 return view('users/bulk-edit', compact('users'))
                     ->with('groups', Group::pluck('name', 'id'));
+
+            // bulk delete, display the bulk delete confirmation form
             } elseif ($request->input('bulk_actions') == 'delete') {
                 return view('users/confirm-bulk-delete')->with('users', $users)->with('statuslabel_list', Helper::statusLabelList());
+
+            // merge, confirm they have at least 2 users selected and display the merge screen
             } elseif ($request->input('bulk_actions') == 'merge') {
+
+                if (($request->filled('ids')) && (count($request->input('ids')) > 1)) {
                 return view('users/confirm-merge')->with('users', $users);
+                // Not enough users selected, send them back
+                } else {
+                    return redirect()->back()->with('error', trans('general.not_enough_users_selected', ['count' => 2]));
+                }
+
+            // bulk password reset, just do the thing
             } elseif ($request->input('bulk_actions') == 'bulkpasswordreset') {
                 foreach ($users as $user) {
                     if (($user->activated == '1') && ($user->email != '')) {
