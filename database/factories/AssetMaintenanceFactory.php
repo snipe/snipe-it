@@ -37,7 +37,7 @@ class AssetMaintenanceFactory extends Factory
             'asset_id' => Asset::factory(),
             'supplier_id' => Supplier::factory(),
             'asset_maintenance_type' => $this->faker->randomElement(['maintenance', 'repair', 'upgrade']),
-            'title' => $this->faker->sentence,
+            'title' => $this->faker->sentence(),
             'start_date' => $this->faker->date(),
             'is_warranty' => $this->faker->boolean(),
             'notes' => $this->faker->paragraph(),

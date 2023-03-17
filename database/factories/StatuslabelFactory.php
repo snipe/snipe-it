@@ -23,7 +23,7 @@ class StatuslabelFactory extends Factory
     public function definition()
     {
         return [
-            'name'      => $this->faker->sentence,
+            'name'      => $this->faker->sentence(),
             'created_at' => $this->faker->dateTime(),
             'updated_at' => $this->faker->dateTime(),
             'user_id' => function () {
@@ -41,7 +41,7 @@ class StatuslabelFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'notes' => $this->faker->sentence,
+                'notes' => $this->faker->sentence(),
                 'deployable' => 1,
                 'default_label' => 1,
             ];
@@ -52,7 +52,7 @@ class StatuslabelFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'notes' => $this->faker->sentence,
+                'notes' => $this->faker->sentence(),
                 'pending' => 1,
                 'default_label' => 1,
             ];

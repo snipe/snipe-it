@@ -44,12 +44,12 @@ class SettingFactory extends Factory
                 return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
             },
             'per_page' => 20,
-            'site_name' => $this->faker->sentence,
+            'site_name' => $this->faker->sentence(),
             'auto_increment_assets' => false,
             'alert_email' => $this->faker->safeEmail(),
             'alerts_enabled' => true,
             'brand' => 1,
-            'default_currency' => $this->faker->currencyCode,
+            'default_currency' => $this->faker->currencyCode(),
             'locale' => 'en',
             'pwd_secure_min' => 10, // Match web setup
             'email_domain' => 'test.com',

@@ -46,9 +46,9 @@ class LicenseFactory extends Factory
             'user_id' => function () {
                 return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
             },
-            'name' => $this->faker->name,
-            'license_email' => $this->faker->safeEmail,
-            'serial' => $this->faker->uuid,
+            'name' => $this->faker->name(),
+            'license_email' => $this->faker->safeEmail(),
+            'serial' => $this->faker->uuid(),
             'notes'   => 'Created by DB seeder',
             'seats' => $this->faker->numberBetween(1, 10),
             'purchase_date' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get())->format('Y-m-d'),
