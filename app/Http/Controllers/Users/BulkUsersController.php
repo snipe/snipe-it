@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Users;
 
+use App\Events\UserMerged;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Accessory;
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\Password;
 class BulkUsersController extends Controller
 {
     /**
-     * Returns a view that confirms the user's a bulk delete will be applied to.
+     * Returns a view that confirms the user's a bulk action will be applied to.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.7]
@@ -36,18 +37,32 @@ class BulkUsersController extends Controller
 
         // Make sure there were users selected
         if (($request->filled('ids')) && (count($request->input('ids')) > 0)) {
+
             // Get the list of affected users
             $user_raw_array = request('ids');
             $users = User::whereIn('id', $user_raw_array)
                 ->with('groups', 'assets', 'licenses', 'accessories')->get();
 
+            // bulk edit, display the bulk edit form
             if ($request->input('bulk_actions') == 'edit') {
                 return view('users/bulk-edit', compact('users'))
                     ->with('groups', Group::pluck('name', 'id'));
+
+            // bulk delete, display the bulk delete confirmation form
             } elseif ($request->input('bulk_actions') == 'delete') {
                 return view('users/confirm-bulk-delete')->with('users', $users)->with('statuslabel_list', Helper::statusLabelList());
+
+            // merge, confirm they have at least 2 users selected and display the merge screen
             } elseif ($request->input('bulk_actions') == 'merge') {
-                return view('users/confirm-merge')->with('users', $users);
+
+                if (($request->filled('ids')) && (count($request->input('ids')) > 1)) {
+                    return view('users/confirm-merge')->with('users', $users);
+                // Not enough users selected, send them back
+                } else {
+                    return redirect()->back()->with('error', trans('general.not_enough_users_selected', ['count' => 2]));
+                }
+
+            // bulk password reset, just do the thing
             } elseif ($request->input('bulk_actions') == 'bulkpasswordreset') {
                 foreach ($users as $user) {
                     if (($user->activated == '1') && ($user->email != '')) {
@@ -273,55 +288,58 @@ class BulkUsersController extends Controller
         $user_ids_to_merge = $request->input('ids_to_merge');
         $user_ids_to_merge = array_diff($user_ids_to_merge, array($request->input('merge_into_id')));
 
-        if ((!$request->filled('merge_into_id')) || (count($user_ids_to_merge) < 0)) {
+        if ((!$request->filled('merge_into_id')) || (count($user_ids_to_merge) < 1)) {
             return redirect()->back()->with('error', trans('general.no_users_selected'));
         }
 
         // Get the users
         $merge_into_user = User::find($request->input('merge_into_id'));
         $users_to_merge = User::whereIn('id', $user_ids_to_merge)->with('assets', 'licenses', 'consumables','accessories')->get();
+        $admin = User::find(Auth::user()->id);
 
         // Walk users
-        foreach ($users_to_merge as $user) {
+        foreach ($users_to_merge as $user_to_merge) {
 
-            foreach ($user->assets as $asset) {
+            foreach ($user_to_merge->assets as $asset) {
                 \Log::debug('Updating asset: '.$asset->asset_tag . ' to '.$merge_into_user->id);
                 $asset->assigned_to = $request->input('merge_into_id');
                 $asset->save();
             }
 
-            foreach ($user->licenses as $license) {
+            foreach ($user_to_merge->licenses as $license) {
                 \Log::debug('Updating license pivot: '.$license->id . ' to '.$merge_into_user->id);
-                $user->licenses()->updateExistingPivot($license->id, ['assigned_to' => $merge_into_user->id]);
+                $user_to_merge->licenses()->updateExistingPivot($license->id, ['assigned_to' => $merge_into_user->id]);
             }
 
-            foreach ($user->consumables as $consumable) {
+            foreach ($user_to_merge->consumables as $consumable) {
                 \Log::debug('Updating consumable pivot: '.$consumable->id . ' to '.$merge_into_user->id);
-                $user->consumables()->updateExistingPivot($consumable->id, ['assigned_to' => $merge_into_user->id]);
+                $user_to_merge->consumables()->updateExistingPivot($consumable->id, ['assigned_to' => $merge_into_user->id]);
             }
 
-            foreach ($user->accessories as $accessory) {
-                $user->accessories()->updateExistingPivot($accessory->id, ['assigned_to' => $merge_into_user->id]);
+            foreach ($user_to_merge->accessories as $accessory) {
+                $user_to_merge->accessories()->updateExistingPivot($accessory->id, ['assigned_to' => $merge_into_user->id]);
             }
 
-            foreach ($user->userlog as $log) {
-                $log->target_id = $user->id;
+            foreach ($user_to_merge->userlog as $log) {
+                $log->target_id = $user_to_merge->id;
                 $log->save();
             }
 
-            User::where('manager_id', '=', $user->id)->update(['manager_id' => $merge_into_user->id]);
+            User::where('manager_id', '=', $user_to_merge->id)->update(['manager_id' => $merge_into_user->id]);
 
-            foreach ($user->managedLocations as $managedLocation) {
+            foreach ($user_to_merge->managedLocations as $managedLocation) {
                 $managedLocation->manager_id = $merge_into_user->id;
                 $managedLocation->save();
             }
 
-            $user->deleted_at = Carbon::now()->timestamp;
-            $user->save();
+            $user_to_merge->delete();
+            //$user_to_merge->save();
+
+            event(new UserMerged($user_to_merge, $merge_into_user, $admin));
 
         }
 
-        return redirect()->route('users.index')->with('success', trans('general.merge_success'));
+        return redirect()->route('users.index')->with('success', trans('general.merge_success', ['count' => $users_to_merge->count(), 'into_username' => $merge_into_user->username]));
 
 
     }
