@@ -33,9 +33,7 @@ class DepartmentFactory extends Factory
     {
         return [
             'name' => $this->faker->word() . ' Department',
-            'user_id' => function () {
-                return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
-            },
+            'user_id' => User::factory()->superuser(),
             'location_id' => Location::factory(),
         ];
     }

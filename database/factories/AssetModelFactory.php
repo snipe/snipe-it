@@ -87,9 +87,7 @@ class AssetModelFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => function () {
-                return User::first() ?? User::factory()->firstAdmin();
-            },
+            'user_id' => User::factory()->superuser(),
             'name' => $this->faker->catchPhrase(),
             'category_id' => Category::factory(),
             'model_number' => $this->faker->creditCardNumber(),

@@ -40,9 +40,7 @@ class SettingFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => function () {
-                return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
-            },
+            'user_id' => User::factory()->superuser(),
             'per_page' => 20,
             'site_name' => $this->faker->sentence(),
             'auto_increment_assets' => false,

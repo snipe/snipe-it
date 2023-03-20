@@ -54,9 +54,7 @@ class ManufacturerFactory extends Factory
     {
         return [
             'name' => $this->faker->company(),
-            'user_id' => function () {
-                return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
-            },
+            'user_id' => User::factory()->superuser(),
             'support_phone' => $this->faker->phoneNumber(),
             'url' => $this->faker->url(),
             'support_email' => $this->faker->safeEmail(),

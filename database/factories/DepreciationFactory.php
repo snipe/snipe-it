@@ -32,9 +32,7 @@ class DepreciationFactory extends Factory
     {
         return [
             'name' => $this->faker->catchPhrase(),
-            'user_id' => function () {
-                return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
-            },
+            'user_id' => User::factory()->superuser(),
             'months' => 36,
         ];
     }

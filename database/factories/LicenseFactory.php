@@ -43,9 +43,7 @@ class LicenseFactory extends Factory
 
 
         return [
-            'user_id' => function () {
-                return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
-            },
+            'user_id' => User::factory()->superuser(),
             'name' => $this->faker->name(),
             'license_email' => $this->faker->safeEmail(),
             'serial' => $this->faker->uuid(),

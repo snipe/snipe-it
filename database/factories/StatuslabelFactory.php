@@ -26,9 +26,7 @@ class StatuslabelFactory extends Factory
             'name'      => $this->faker->sentence(),
             'created_at' => $this->faker->dateTime(),
             'updated_at' => $this->faker->dateTime(),
-            'user_id' => function () {
-                return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
-            },
+            'user_id' => User::factory()->superuser(),
             'deleted_at' => null,
             'deployable' => 0,
             'pending' => 0,
