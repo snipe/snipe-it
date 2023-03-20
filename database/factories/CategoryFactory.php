@@ -6,15 +6,6 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Category;
 
-/*
-|--------------------------------------------------------------------------
-| Category Factories
-|--------------------------------------------------------------------------
-|
-| Factories related exclusively to creating categories and the various states..
-|
-*/
-
 class CategoryFactory extends Factory
 {
     /**
@@ -22,7 +13,7 @@ class CategoryFactory extends Factory
      *
      * @var string
      */
-    protected $model = \App\Models\Category::class;
+    protected $model = Category::class;
 
     /**
      * Define the model's default state.

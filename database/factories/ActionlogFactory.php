@@ -8,15 +8,6 @@ use App\Models\Location;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/*
-|--------------------------------------------------------------------------
-| Action Log Factories
-|--------------------------------------------------------------------------
-|
-| This simulates checkin/checkout/etc activities 
-|
-*/
-
 class ActionlogFactory extends Factory
 {
     /**

@@ -2,27 +2,11 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\License;
 use App\Models\Manufacturer;
 use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
-/*
-|--------------------------------------------------------------------------
-| Asset Model Factories
-|--------------------------------------------------------------------------
-|
-| Factories related exclusively to creating models ..
-|
-*/
-
-// 1
-
-// 2
-
-// 3
-
-// 4
 
 class LicenseFactory extends Factory
 {
@@ -31,7 +15,7 @@ class LicenseFactory extends Factory
      *
      * @var string
      */
-    protected $model = \App\Models\License::class;
+    protected $model = License::class;
 
     /**
      * Define the model's default state.
@@ -40,8 +24,6 @@ class LicenseFactory extends Factory
      */
     public function definition()
     {
-
-
         return [
             'user_id' => User::factory()->superuser(),
             'name' => $this->faker->name(),

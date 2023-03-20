@@ -4,17 +4,9 @@ namespace Database\Factories;
 
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\Component;
 use App\Models\Location;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
-/*
-|--------------------------------------------------------------------------
-| Components Factories
-|--------------------------------------------------------------------------
-|
-| Factories related exclusively to creating components ..
-|
-*/
 
 class ComponentFactory extends Factory
 {
@@ -23,7 +15,7 @@ class ComponentFactory extends Factory
      *
      * @var string
      */
-    protected $model = \App\Models\Component::class;
+    protected $model = Component::class;
 
     /**
      * Define the model's default state.

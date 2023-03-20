@@ -3,19 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\Asset;
-use App\Models\AssetModel;
-use App\Models\Category;
+use App\Models\AssetMaintenance;
 use App\Models\Supplier;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| Factories related exclusively to modelling assets.
-|
-*/
 
 class AssetMaintenanceFactory extends Factory
 {
@@ -24,7 +14,7 @@ class AssetMaintenanceFactory extends Factory
      *
      * @var string
      */
-    protected $model = \App\Models\AssetMaintenance::class;
+    protected $model = AssetMaintenance::class;
 
     /**
      * Define the model's default state.

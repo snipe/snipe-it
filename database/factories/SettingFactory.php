@@ -1,25 +1,8 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| Here you may define all of your model factories. Model factories give
-| you a convenient way to create models for testing and seeding your
-| database. Just tell the factory how a default model should look.
-|
-*/
-
 namespace Database\Factories;
 
-use App\Models\AssetModel;
-use App\Models\Category;
-use App\Models\Company;
-use App\Models\Location;
-use App\Models\Manufacturer;
-use App\Models\Statuslabel;
-use App\Models\Supplier;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -30,7 +13,7 @@ class SettingFactory extends Factory
      *
      * @var string
      */
-    protected $model = \App\Models\Setting::class;
+    protected $model = Setting::class;
 
     /**
      * Define the model's default state.

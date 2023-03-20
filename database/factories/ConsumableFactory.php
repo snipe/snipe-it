@@ -4,18 +4,10 @@ namespace Database\Factories;
 
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\Consumable;
 use App\Models\Manufacturer;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
-/*
-|--------------------------------------------------------------------------
-| Consumables Factories
-|--------------------------------------------------------------------------
-|
-| Factories related exclusively to creating consumables ..
-|
-*/
 
 class ConsumableFactory extends Factory
 {
@@ -24,7 +16,7 @@ class ConsumableFactory extends Factory
      *
      * @var string
      */
-    protected $model = \App\Models\Consumable::class;
+    protected $model = Consumable::class;
 
     /**
      * Define the model's default state.

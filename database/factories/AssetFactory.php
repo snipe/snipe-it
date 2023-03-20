@@ -4,23 +4,11 @@ namespace Database\Factories;
 
 use App\Models\Asset;
 use App\Models\AssetModel;
-use App\Models\Category;
 use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| Factories related exclusively to modelling assets.
-|
-*/
-
-// These are just for unit tests, not to generate data
 
 class AssetFactory extends Factory
 {

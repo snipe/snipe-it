@@ -2,73 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\AssetMaintenance;
+use App\Models\AssetModel;
 use App\Models\CustomFieldset;
 use App\Models\Depreciation;
-use App\Models\Import;
 use App\Models\Manufacturer;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Category;
-
-/*
-|--------------------------------------------------------------------------
-| Asset Model Factories
-|--------------------------------------------------------------------------
-|
-| Factories related exclusively to creating models ..
-|
-*/
-
-/*
-|--------------------------------------------------------------------------
-| Laptops
-|--------------------------------------------------------------------------
-*/
-
-// 1
-
-// 2
-
-// 3
-
-// 4
-
-// 5
-
-// 6
-
-// 7
-
-/*
-|--------------------------------------------------------------------------
-| Desktops
-|--------------------------------------------------------------------------
-*/
-
-/*
-|--------------------------------------------------------------------------
-| Conference Phones
-|--------------------------------------------------------------------------
-*/
-
-/*
-|--------------------------------------------------------------------------
-| Tablets
-|--------------------------------------------------------------------------
-*/
-
-/*
-|--------------------------------------------------------------------------
-| Mobile Phones
-|--------------------------------------------------------------------------
-*/
-
-/*
-|--------------------------------------------------------------------------
-| Displays
-|--------------------------------------------------------------------------
-*/
 
 class AssetModelFactory extends Factory
 {
@@ -77,7 +17,7 @@ class AssetModelFactory extends Factory
      *
      * @var string
      */
-    protected $model = \App\Models\AssetModel::class;
+    protected $model = AssetModel::class;
 
     /**
      * Define the model's default state.

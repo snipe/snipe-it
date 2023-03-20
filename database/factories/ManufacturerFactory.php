@@ -2,39 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Manufacturer;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
-/*
-|--------------------------------------------------------------------------
-| Asset Model Factories
-|--------------------------------------------------------------------------
-|
-| Factories related exclusively to creating models ..
-|
-*/
-
-// 1
-
-// 2
-
-// 3
-
-// 4
-
-// 5
-
-// 6
-
-// 7
-
-// 8
-
-// 9
-
-// 10
-
-// 11
 
 class ManufacturerFactory extends Factory
 {
@@ -43,7 +13,7 @@ class ManufacturerFactory extends Factory
      *
      * @var string
      */
-    protected $model = \App\Models\Manufacturer::class;
+    protected $model = Manufacturer::class;
 
     /**
      * Define the model's default state.
