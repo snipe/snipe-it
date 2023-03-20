@@ -258,19 +258,20 @@ trait Loggable
     public function logAdmin($actionType = null, $note = null) {
        $changed = []; 
        if($this->isDirty()) {
-            $changed['old'] = $this->getRawOriginal();
-            $changed['new'] = $this->getAttributes();
+            $changed = $this->getDirty(); 
+            $user = User::find(1); 
+        
+            $log = new Adminlog();
+            $log->user_id = $user->id;
+            $log->action_type = $actionType ? $actionType : null; 
+            $log->item_type = static::class; 
+            $log->item_id = $this->id; 
+            $log->note = $note ? $note : null; 
+            $log->log_meta = json_encode($changed); 
+        
+            $log->save();
+       } else {
+            return;
        } 
-      $user = User::find(1); 
-       
-        $log = new Adminlog();
-        $log->user_id = $user->id;
-        $log->action_type = $actionType ? $actionType : null; 
-        $log->item_type = static::class; 
-        $log->item_id = $this->id; 
-        $log->note = $note ? $note : null; 
-        $log->log_meta = json_encode($changed); 
-       
-        $log->save();
     }
 }

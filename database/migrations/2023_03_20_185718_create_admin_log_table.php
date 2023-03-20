@@ -14,7 +14,7 @@ class CreateAdminLogTable extends Migration
     public function up()
     {
 
-        Schema::create('admin_log', function (Blueprint $table) {
+        Schema::create('admin_logs', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
