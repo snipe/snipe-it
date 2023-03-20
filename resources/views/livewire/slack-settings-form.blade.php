@@ -134,7 +134,7 @@
                             </div>
 
                             <!--Webhook Integration Test-->
-                            @if($webhook_selected == 'Slack' || $webhook_selected == 'Discord')
+                            @if($webhook_selected == 'slack')
                                 @if($webhook_endpoint != null && $webhook_channel != null)
                                     <div class="form-group col-md-12">
                                         <div class="col-md-offset-3 col-md-9">

@@ -8,6 +8,7 @@ use App\Http\Transformers\GroupsTransformer;
 use App\Models\Group;
 use Illuminate\Http\Request;
 
+
 class GroupsController extends Controller
 {
     /**
@@ -19,6 +20,8 @@ class GroupsController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize('superadmin');
+
         $this->authorize('view', Group::class);
         $allowed_columns = ['id', 'name', 'created_at', 'users_count'];
 
@@ -59,9 +62,11 @@ class GroupsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('create', Group::class);
+        $this->authorize('superadmin');
         $group = new Group;
-        $group->fill($request->all());
+
+        $group->name = $request->input('name');
+        $group->permissions = $request->input('permissions'); // Todo - some JSON validation stuff here
 
         if ($group->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $group, trans('admin/groups/message.create.success')));
@@ -80,7 +85,7 @@ class GroupsController extends Controller
      */
     public function show($id)
     {
-        $this->authorize('view', Group::class);
+        $this->authorize('superadmin');
         $group = Group::findOrFail($id);
 
         return (new GroupsTransformer)->transformGroup($group);
@@ -97,9 +102,11 @@ class GroupsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('update', Group::class);
+        $this->authorize('superadmin');
         $group = Group::findOrFail($id);
-        $group->fill($request->all());
+
+        $group->name = $request->input('name');
+        $group->permissions = $request->input('permissions'); // Todo - some JSON validation stuff here
 
         if ($group->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $group, trans('admin/groups/message.update.success')));
@@ -118,9 +125,8 @@ class GroupsController extends Controller
      */
     public function destroy($id)
     {
-        $this->authorize('delete', Group::class);
+        $this->authorize('superadmin');
         $group = Group::findOrFail($id);
-        $this->authorize('delete', $group);
         $group->delete();
 
         return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/groups/message.delete.success')));

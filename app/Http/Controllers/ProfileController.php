@@ -8,7 +8,7 @@ use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\CurrentInventory;
 use Illuminate\Support\Facades\Auth;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
