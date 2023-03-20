@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Setting;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SettingFactory extends Factory
@@ -23,7 +22,6 @@ class SettingFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::factory()->superuser(),
             'per_page' => 20,
             'site_name' => $this->faker->sentence(),
             'auto_increment_assets' => false,
