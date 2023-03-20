@@ -3,15 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Setting;
-use Database\Seeders\AccessorySeeder;
-use Database\Seeders\ActionlogSeeder;
-use Database\Seeders\AssetModelSeeder;
-use Database\Seeders\AssetSeeder;
-use Database\Seeders\CategorySeeder;
-use Database\Seeders\CompanySeeder;
-use Database\Seeders\ComponentSeeder;
-use Database\Seeders\ConsumableSeeder;
-use Database\Seeders\CustomFieldSeeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
