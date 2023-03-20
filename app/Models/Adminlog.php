@@ -9,4 +9,9 @@ class AdminLog extends SnipeModel
     use HasFactory;
    
     protected $fillable = ['created_at', 'item_type', 'user_id', 'item_id', 'action_type', 'note'];
+   
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
