@@ -256,9 +256,19 @@ trait Loggable
     }
    
     public function logAdmin($actionType = null, $note = null) {
-       $changed = []; 
-       if($this->isDirty()) {
-            $changed = $this->getDirty(); 
+       if($this->isDirty()) { 
+            $changed = []; 
+            $new = $this->getDirty();
+            $old = $this->getRawOriginal();       
+           foreach ($new as $key => $value) {
+                if (array_key_exists($key, $old)) {
+                    $changed['new'][$key] = $new[$key];
+                    $changed['old'][$key] = $old[$key];
+                }  
+
+           } 
+        // $changed1 = array_diff_key($changed['new'], ['updated_at' => '']); 
+
             $user = User::find(1); 
         
             $log = new Adminlog();
