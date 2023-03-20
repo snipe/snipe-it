@@ -103,7 +103,7 @@ class CategoryFactory extends Factory
      public function accessoryKeyboardCategory()
      {
          return $this->state([
-             'name' => 'Keyboardss',
+             'name' => 'Keyboards',
              'category_type' => 'accessory',
          ]);
      }

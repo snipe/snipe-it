@@ -47,7 +47,7 @@ class AccessoryFactory extends Factory
                 'name' => 'Bluetooth Keyboard',
                 'image' => 'bluetooth.jpg',
                 'category_id' => function () {
-                    return Category::where('name', 'Keyboardss')->first() ?? Category::factory()->accessoryKeyboardCategory();
+                    return Category::where('name', 'Keyboards')->first() ?? Category::factory()->accessoryKeyboardCategory();
                 },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'Apple')->first() ?? Manufacturer::factory()->apple();
@@ -66,7 +66,7 @@ class AccessoryFactory extends Factory
                 'name' => 'USB Keyboard',
                 'image' => 'usb-keyboard.jpg',
                 'category_id' => function () {
-                    return Category::where('name', 'Keyboardss')->first() ?? Category::factory()->accessoryKeyboardCategory();
+                    return Category::where('name', 'Keyboards')->first() ?? Category::factory()->accessoryKeyboardCategory();
                 },
                 'manufacturer_id' => function () {
                     return Manufacturer::where('name', 'Apple')->first() ?? Manufacturer::factory()->apple();
