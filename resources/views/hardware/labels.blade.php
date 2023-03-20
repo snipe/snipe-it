@@ -15,6 +15,26 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
 ?>
 
 <style>
+    .container{
+        padding: 0;
+        display: block;
+        overflow: hidden;
+        border: 1px solid black;
+        text-align: center;
+        width: {{ $settings->labels_width }}in;
+        height: {{ $settings->labels_height }}in;
+        margin-right: {{ $settings->labels_display_sgutter }}in; /* the gutter */
+        margin-bottom: {{ $settings->labels_display_bgutter }}in;
+
+    }
+    .text{
+        text-align: center;
+        font-family: arial, helvetica, sans-serif;
+        font-size: {{$settings->labels_fontsize}}pt;
+        overflow: hidden;
+        display: block;
+    }
+
     body {
         font-family: arial, helvetica, sans-serif;
         width: {{ $settings->labels_pagewidth }}in;
@@ -22,29 +42,29 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
         margin: {{ $settings->labels_pmargin_top }}in {{ $settings->labels_pmargin_right }}in {{ $settings->labels_pmargin_bottom }}in {{ $settings->labels_pmargin_left }}in;
         font-size: {{ $settings->labels_fontsize }}pt;
     }
-    .label {
-        /* width: {{ $settings->labels_width }}in;
-        height: {{ $settings->labels_height }}in; */
+    /* .label {
+        width: {{ $settings->labels_width }}in;
+        height: {{ $settings->labels_height }}in;
         width: 350px;
         height: 350px;
         padding: 0in;
-        margin-right: {{ $settings->labels_display_sgutter }}in; /* the gutter */
+        margin-right: {{ $settings->labels_display_sgutter }}in; the gutter
         margin-bottom: {{ $settings->labels_display_bgutter }}in;
         display: inline-block;
         overflow: hidden;
-    }
-    .page-break  {
+    } */
+    /* .page-break  {
         page-break-after:always;
-    }
+    } */
     div.qr_img {
         /* width: {{ $qr_size }}in;
         height: {{ $qr_size }}in; */
         width: 40%;
         height: 40%;
 
-        /* float: left; */
-        /* display: inline-flex; */
-        padding-right: .15in;
+        /* float: left;
+        display: inline-flex; */
+        /* padding-right: .15in; */
     }
     img.qr_img {
 
@@ -52,41 +72,45 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
         height: 120.79%;
         /* margin-top: -6.9%;
         margin-left: -6.9%; */
-        margin-top: 110%;
-        margin-left: 60%;
-
-        padding-bottom: .04in;
+        margin-left: 63%;
+        padding-bottom: 5px;
     }
-    img.barcode {
+    /* img.barcode {
         display:block;
         margin-top:-7px;
-        width: 100%;
-    }
+         width: 100%;
+    } */
     div.label-logo {
-        float: right;
-        display: inline-block;
+       text-align: center;
+       margin-top: 5px;
+       margin-bottom: 10px
     }
     img.label-logo {
-        height: 0.5in;
+        height: 40%;
+        width: 40%;
     }
-    .qr_text {
+    /* .qr_text {
         width: {{ $settings->labels_width }}in;
         height: {{ $settings->labels_height }}in;
         padding-top: {{$settings->labels_display_bgutter}}in;
+        width: 100px;
+        height: 100px;
+        margin-top: 50%;
+        margin-left: 35%;
         font-family: arial, helvetica, sans-serif;
         font-size: {{$settings->labels_fontsize}}pt;
         padding-right: .0001in;
         overflow: hidden !important;
-        display: inline;
+        display: block;
         word-wrap: break-word;
         word-break: break-all;
-    }
-    div.barcode_container {
+    } */
+    /* div.barcode_container {
 
         width: 100%;
         display: inline;
         overflow: hidden;
-    }
+    } */
     .next-padding {
         margin: {{ $settings->labels_pmargin_top }}in {{ $settings->labels_pmargin_right }}in {{ $settings->labels_pmargin_bottom }}in {{ $settings->labels_pmargin_left }}in;
     }
@@ -115,21 +139,62 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
 
 @foreach ($assets as $asset)
     <?php $count++; ?>
-    <div class="label">
-
-        <div class="qr_text">
-            @if ($settings->label_logo)
+    <div class="container">
+       <div class="row">
+            <div class="col-12">
+                @if ($settings->label_logo)
                 <div class="label-logo">
                     <img class="label-logo" src="{{ Storage::disk('public')->url('').e($snipeSettings->label_logo) }}">
                 </div>
             @endif
-        </div>
-
-        @if ($settings->qr_code=='1')
-            <div class="qr_img">
-                <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/qr_code" class="qr_img">
             </div>
-        @endif
+       </div>
+        <div class="row">
+            <div class="col-12">
+                @if ($settings->qr_code=='1')
+                <div class="qr_img">
+                <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/qr_code" class="qr_img">
+                </div>
+                @endif
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="text">
+                    @if ($settings->qr_text!='')
+                <div class="pull-left">
+                    <strong>{{ $settings->qr_text }}</strong>
+                    <br>
+                </div>
+            @endif
+            @if (($settings->labels_display_company_name=='1') && ($asset->company))
+                <div class="pull-left">
+                    C: {{ $asset->company->name }}
+                </div>
+            @endif
+            @if (($settings->labels_display_name=='1') && ($asset->name!=''))
+                <div class="pull-left">
+                    N: {{ $asset->name }}
+                </div>
+            @endif
+            @if (($settings->labels_display_tag=='1') && ($asset->asset_tag!=''))
+                <div class="pull-left">
+                    T: {{ $asset->asset_tag }}
+                </div>
+            @endif
+            @if (($settings->labels_display_serial=='1') && ($asset->serial!=''))
+                <div class="pull-left">
+                    S: {{ $asset->serial }}
+                </div>
+            @endif
+            @if (($settings->labels_display_model=='1') && ($asset->model->name!=''))
+                <div class="pull-left">
+                    M: {{ $asset->model->name }} {{ $asset->model->model_number }}
+                </div>
+            @endif    
+                </div>
+            </div>
+        </div>
     </div>
 
     @if (($count % $settings->labels_per_page == 0) && $count!=count($assets))
