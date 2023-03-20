@@ -22,7 +22,7 @@ class CreateAdminLogTable extends Migration
             $table->string('item_type');
             $table->unsignedBigInteger('item_id')->nullable();
             $table->string('note')->nullable();
-            $table->text('log_meta')->nullable()->default(null); 
+            $table->json('log_meta')->nullable()->default(null); 
             $table->softDeletes(); 
         });
     }
