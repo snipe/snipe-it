@@ -16,8 +16,8 @@ class ConsumableSeeder extends Seeder
 
         $admin = User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin()->create();
 
-        Consumable::factory()->count(1)->cardstock()->create(['user_id' => $admin->id]); // 1
-        Consumable::factory()->count(1)->paper()->create(['user_id' => $admin->id]); // 2
-        Consumable::factory()->count(1)->ink()->create(['user_id' => $admin->id]); // 3
+        Consumable::factory()->count(1)->cardstock()->create(['user_id' => $admin->id]);
+        Consumable::factory()->count(1)->paper()->create(['user_id' => $admin->id]);
+        Consumable::factory()->count(1)->ink()->create(['user_id' => $admin->id]);
     }
 }

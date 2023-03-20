@@ -14,8 +14,8 @@ class DepreciationSeeder extends Seeder
 
         $admin = User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin()->create();
 
-        Depreciation::factory()->count(1)->computer()->create(['user_id' => $admin->id]); // 1
-        Depreciation::factory()->count(1)->display()->create(['user_id' => $admin->id]); // 2
-        Depreciation::factory()->count(1)->mobilePhones()->create(['user_id' => $admin->id]); // 3
+        Depreciation::factory()->count(1)->computer()->create(['user_id' => $admin->id]);
+        Depreciation::factory()->count(1)->display()->create(['user_id' => $admin->id]);
+        Depreciation::factory()->count(1)->mobilePhones()->create(['user_id' => $admin->id]);
     }
 }
