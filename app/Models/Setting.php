@@ -19,6 +19,7 @@ class Setting extends Model
 {
     use HasFactory;
     use Notifiable, ValidatingTrait;
+    use Loggable; 
 
     /**
      * The cache property so that multiple invocations of this will only load the Settings record from disk only once

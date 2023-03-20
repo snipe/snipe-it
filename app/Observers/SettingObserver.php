@@ -16,6 +16,7 @@ class SettingObserver
      */
     public function saved(Setting $setting)
     {
+        $setting->logAdmin(actionType: 'saved', note: 'settings observer'); 
         Cache::forget(Setting::SETUP_CHECK_KEY);
     }
 }
