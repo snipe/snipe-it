@@ -15,9 +15,11 @@ class UsersForSelectListTest extends TestCase
     {
         Setting::factory()->create();
 
-        User::factory()->count(3)->create();
+        $users = User::factory()->superuser()->count(3)->create();
 
-        Passport::actingAs(User::factory()->firstAdmin()->create());
+        $userCount = User::count();
+
+        Passport::actingAs($users->first());
         $this->getJson(route('api.users.selectlist'))
             ->assertOk()
             ->assertJsonStructure([
@@ -27,7 +29,7 @@ class UsersForSelectListTest extends TestCase
                 'page',
                 'page_count',
             ])
-            ->assertJson(fn(AssertableJson $json) => $json->has('results', 4)->etc());
+            ->assertJson(fn(AssertableJson $json) => $json->has('results', $userCount)->etc());
     }
 
     public function testUsersScopedToCompanyWhenMultipleFullCompanySupportEnabled()
