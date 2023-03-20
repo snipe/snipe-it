@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use App\Models\Actionlog;
 use App\Models\Asset;
+use App\Models\License;
+use App\Models\LicenseSeat;
 use App\Models\Location;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -78,6 +80,28 @@ class ActionlogFactory extends Factory
                 'item_type'  => Asset::class,
                 'target_id' => $target->id,
                 'target_type' => Location::class,
+            ];
+        });
+    }
+
+    public function licenseCheckoutToUser()
+    {
+        return $this->state(function () {
+            $target = User::inRandomOrder()->first();
+            $licenseSeat = LicenseSeat::whereNull('assigned_to')->inRandomOrder()->first();
+
+            $licenseSeat->update([
+                'assigned_to' => $target->id,
+                'user_id' => 1, // not ideal but works
+            ]);
+
+            return [
+                'created_at'  => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
+                'action_type' => 'checkout',
+                'item_id' => $licenseSeat->license->id,
+                'item_type'  => License::class,
+                'target_id' => $target->id,
+                'target_type' => User::class,
             ];
         });
     }
