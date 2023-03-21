@@ -266,10 +266,11 @@ trait Loggable
                     $changed['old'][$key] = $old[$key];
                 }  
 
-           } 
-        // $changed1 = array_diff_key($changed['new'], ['updated_at' => '']); 
+           }
+           unset($changed['new']['updated_at'], $changed['old']['updated_at']);
+           
 
-            $user = User::find(1); 
+            $user = Auth::user(); 
         
             $log = new Adminlog();
             $log->user_id = $user->id;
