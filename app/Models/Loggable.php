@@ -255,7 +255,7 @@ trait Loggable
         return $log;
     }
    
-    public function logAdmin($actionType = null, $note = null) {
+    public function logAdmin($actionType = null, $note = null, $value1 = null) {
        if($this->isDirty()) { 
             $changed = []; 
             $new = $this->getDirty();
@@ -265,13 +265,21 @@ trait Loggable
                 $changed['old']['password'] = '********';
             } else {
                 foreach ($new as $key => $value) {
-                    if (array_key_exists($key, $old)) {
+                    if (array_key_exists($key, $old) && is_null($value1)) {
                         $changed['new'][$key] = $new[$key];
                         $changed['old'][$key] = $old[$key];
-                    }  
+                    } else {
+                        $changed['new'][$key] = $value1;
+                        $changed['old'][$key] = $old[$key];
+                    } 
                 }
             }
             unset($changed['new']['updated_at'], $changed['old']['updated_at']);
+           
+            // if (!is_null($value)) {
+            //     $changed['new']['value'] = $value;
+            //     // $changed['old']['value'] = $value;
+            // }
 
             $user = Auth::user(); 
         
