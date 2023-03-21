@@ -20,14 +20,14 @@ class UserObserver
         foreach ($changes as $key => $value) {
            $oldValue = $user->getRawOriginal($key); 
            if($key == 'permissions') {
-               $user->logAdmin(actionType: 'permissions-updated', note: 'user observer', newValue: $value, oldValue: $oldValue); 
+               $user->logAdmin(actionType: 'permissions-updated', note: 'user observer', providedValue: ['new' => [$key => $value], 'old' => [$key => $oldValue]]); 
            } elseif ($key == 'password') {
-               $user->logAdmin(actionType: 'password-updated', note: 'user observer', newValue: $value, oldValue: $oldValue); 
+               $user->logAdmin(actionType: 'password-updated', note: 'user observer', providedValue: ['new' => '********', 'old' => '********']); 
            } elseif ($key == 'last_login') {
                return;
            }
             else {
-               $user->logAdmin(actionType: 'user-updated', note: 'user observer', newValue: $value, oldValue: $oldValue); 
+               $user->logAdmin(actionType: 'user-updated', note: 'user observer', providedValue: ['new' => [$key => $value], 'old' => [$key => $oldValue]]); 
            }
         }
         // if we want to log all changes in one log entry 
