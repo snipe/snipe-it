@@ -26,7 +26,7 @@ class CategoryTest extends TestCase
 
     public function testACategoryCanHaveAssets()
     {
-       $category = Category::factory()->assetDesktopCategory();
+       $category = Category::factory()->assetDesktopCategory()->create();
 
        // Generate 5 models via factory
        $models =  AssetModel::factory()

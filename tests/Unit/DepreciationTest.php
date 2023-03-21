@@ -18,7 +18,7 @@ class DepreciationTest extends TestCase
                     ->count(5)
                     ->create(
                         [
-                            'category_id' => Category::factory()->assetLaptopCategory(),
+                            'category_id' => Category::factory()->assetLaptopCategory()->create(),
                             'depreciation_id' => $depreciation->id               
                         ]);
 
@@ -35,7 +35,7 @@ class DepreciationTest extends TestCase
                     ->photoshop()
                     ->create(
                         [
-                            'category_id' => Category::factory()->licenseGraphicsCategory(),
+                            'category_id' => Category::factory()->licenseGraphicsCategory()->create(),
                             'depreciation_id' => $depreciation->id               
                         ]);
 
