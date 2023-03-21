@@ -18,18 +18,19 @@ class UserObserver
       unset($changes['updated_at']); 
         //for calling out and logging important changes separately
         foreach ($changes as $key => $value) {
-           ray([$key => $value]); 
+           $oldValue = $user->getRawOriginal($key); 
            if($key == 'permissions') {
-               $user->logAdmin(actionType: 'permissions-updated', note: 'user observer', value1: $value); 
+               $user->logAdmin(actionType: 'permissions-updated', note: 'user observer', newValue: $value, oldValue: $oldValue); 
            } elseif ($key == 'password') {
-               $user->logAdmin(actionType: 'password-updated', note: 'user observer', value1: $value); 
+               $user->logAdmin(actionType: 'password-updated', note: 'user observer', newValue: $value, oldValue: $oldValue); 
            } elseif ($key == 'last_login') {
                return;
            }
             else {
-               $user->logAdmin(actionType: 'user-updated', note: 'user observer', value1: $value); 
+               $user->logAdmin(actionType: 'user-updated', note: 'user observer', newValue: $value, oldValue: $oldValue); 
            }
         }
+        // if we want to log all changes in one log entry 
         // if ($user->isDirty('password')) {
         //     $user->logAdmin(actionType: 'password-updated', note: 'user observer'); 
         // } elseif ($user->isDirty('last_login')) {
