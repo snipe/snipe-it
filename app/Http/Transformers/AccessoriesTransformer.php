@@ -51,7 +51,7 @@ class AccessoriesTransformer
             'checkin' =>  false,
             'update' => Gate::allows('update', Accessory::class),
             'delete' => Gate::allows('delete', Accessory::class),
-            'clone' => (Gate::allows('create', Accessory::class) && ($accessory->created_at == 'datetime')),
+            'clone' => Gate::allows('create', Accessory::class),
             
         ];
 
