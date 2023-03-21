@@ -14,6 +14,11 @@ class UserObserver
      */
     public function saved(User $user)
     {
-       $user->logAdmin(actionType: 'updated', note: 'user observer'); 
+        if ($user->isDirty('password')) {
+            $user->logAdmin(actionType: 'password-updated', note: 'user observer'); 
+        } else {
+            $user->logAdmin(actionType: 'saved', note: 'user observer');  
+        } 
+       
     }
 }

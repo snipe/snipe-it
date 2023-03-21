@@ -260,15 +260,18 @@ trait Loggable
             $changed = []; 
             $new = $this->getDirty();
             $old = $this->getRawOriginal();       
-           foreach ($new as $key => $value) {
-                if (array_key_exists($key, $old)) {
-                    $changed['new'][$key] = $new[$key];
-                    $changed['old'][$key] = $old[$key];
-                }  
-
-           }
-           unset($changed['new']['updated_at'], $changed['old']['updated_at']);
-           
+            if ($actionType == 'password-updated') {
+                $changed['new']['password'] = '********';
+                $changed['old']['password'] = '********';
+            } else {
+                foreach ($new as $key => $value) {
+                    if (array_key_exists($key, $old)) {
+                        $changed['new'][$key] = $new[$key];
+                        $changed['old'][$key] = $old[$key];
+                    }  
+                }
+            }
+            unset($changed['new']['updated_at'], $changed['old']['updated_at']);
 
             $user = Auth::user(); 
         
