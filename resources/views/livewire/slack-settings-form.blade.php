@@ -13,6 +13,8 @@
 @section('content')
 
 <div>
+    <form class="form-horizontal" role="form" wire:submit.prevent="submit">
+        {{csrf_field()}}
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
     <div class="panel box box-default">
@@ -107,7 +109,6 @@
                                                value="{{old('webhook_channel', $webhook_channel)}}">
                                         <p class="text-warning"><i
                                                     class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
-
                                     @else
                                         <input type="text" wire:model="webhook_channel" class='form-control'
                                                placeholder="#IT-Ops"
@@ -122,7 +123,7 @@
                                 <div class="col-md-2">
                                     {{ Form::label('webhook_botname', trans('admin/settings/general.webhook_botname',['app' => $webhook_name ])) }}
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-8">
                                     @if (config('app.lock_passwords')===true)
                                         <input type="text" wire:model="webhook_botname" class='form-control'
                                                placeholder="Snipe-Bot" {{old('webhook_botname', $webhook_botname)}}>
@@ -168,11 +169,11 @@
                                                 aria-hidden="true"></i> {{ $save_button }}</button>
                                 </div>
                             </div><!--box-footer-->
-                        </form>
 
                     </div> <!-- /box -->
                 </div> <!-- /.col-md-8-->
     </div>
             </div>
         </div>
+    </form>
 </div>
