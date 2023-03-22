@@ -1147,4 +1147,14 @@ class Helper
         return $age;
 
     }
+
+    /*
+     * I know it's gauche  to return a shitty HTML string, but this is just a helper and since it will be the same every single time,
+     * it seemed pretty safe to do here. Don't you judge me.
+     */
+    public function showDemoModeFieldWarning() {
+        if (app('demo_mode')) {
+            return "<p class=\"text-warning\"><i class=\"fas fa-lock\"></i>" . trans('general.feature_disabled') . "</p>";
+        }
+    }
 }
