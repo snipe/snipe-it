@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use GuzzleHttp\Client;
 use Livewire\Component;
 use App\Models\Setting;
+use App\Helpers\Helper;
 
 class SlackSettingsForm extends Component
 {
@@ -125,7 +126,6 @@ class SlackSettingsForm extends Component
             return session()->flash('error' , trans('admin/settings/message.webhook.error', ['error_message' => $e->getMessage(), 'app' => $this->webhook_name]));
         }
 
-        //}
         return session()->flash('error' , trans('admin/settings/message.webhook.error_misc'));
 
     }

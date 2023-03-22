@@ -57,8 +57,8 @@
                                     {{ trans('general.integration_option') }}
                                 </label>
                             </div>
-                            <div class="col-md-9 required">
-                                <select wire:model="webhook_selected" aria-label="webhook_selected" class="form-control"{{ Helper::isDemoMode() ? ' disabled' : ''}}>
+                            <div class="col-md-9 required" wire:ignore>
+                                <select aria-label="webhook_selected" id="select2" class="select2 form-control"{{ Helper::isDemoMode() ? ' disabled' : ''}}>
                                     <option value="slack">{{ trans('admin/settings/general.slack') }}</option>
                                     <option value="general">{{ trans('admin/settings/general.general_webhook') }}</option>
                                 </select>
@@ -157,5 +157,27 @@
     </div> <!-- /.row -->
 </form>
 </div>  <!-- /livewire div -->
+
+
+
+
+@section('moar_scripts')
+<script>
+    $(document).ready(function () {
+        $('#select2').select2();
+        $('#select2').on('change', function (e) {
+            var data = $('#select2').select2("val");
+        @this.set('webhook_selected', data);
+        });
+
+        // Re-render select2
+        window.livewire.hook('message.processed', function (el, component) {
+            $('.select2').select2();
+        });
+    });
+
+
+</script>
+@endsection
 
 
