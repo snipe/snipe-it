@@ -24,7 +24,7 @@
             <div class="box">
                 <div class="box-body">
                     <div class="alert alert-warning">
-                        <strong>Warning</strong> Some Errors occurred while importing {{-- TODO: hardcoded string --}}
+                        <strong><i class="fa fa-warning info" aria-hidden="true"></i> {{ trans('general.warning', ['warning'=> trans('general.errors_importing')]) }}</strong>
                     </div>
 
                     <div class="errors-table">
@@ -143,7 +143,7 @@
                                                             <div class="form-group col-md-12">
 
                                                                 <label for="activeFile.import_type" class="col-md-3 col-xs-12 text-right">
-                                                                    Import Type
+                                                                    {{ trans('general.import_type') }}
                                                                 </label>
 
                                                                 <div class="col-md-9 col-xs-12">
@@ -162,21 +162,21 @@
                                                             <div class="form-group col-md-12">
                                                                 <label for="update" class="col-md-9 col-md-offset-3 col-xs-12" wire:ignore>
                                                                     <input type="checkbox" class="minimal livewire-icheck" name="update" data-livewire-component="{{ $_instance->id }}">
-                                                                    Update Existing Values?
+                                                                    {{ trans('general.update_existing_values') }}
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-group col-md-12">
                                                                 <label for="send_welcome" class="col-md-9 col-md-offset-3 col-xs-12" wire:ignore>
                                                                     <input type="checkbox" class="minimal livewire-icheck" name="send_welcome" data-livewire-component="{{ $_instance->id }}">
-                                                                    Send Welcome Email for new Users?
+                                                                    {{ trans('general.send_welcome_email_to_users') }}
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-group col-md-12">
                                                                 <label for="run_backup" class="col-md-9 col-md-offset-3 col-xs-12" wire:ignore>
                                                                     <input type="checkbox" class="minimal livewire-icheck" name="run_backup" data-livewire-component="{{ $_instance->id }}">
-                                                                    Backup before importing?
+                                                                    {{ trans('general.back_before_importing') }}
                                                                 </label>
                                                             </div>
 
@@ -198,13 +198,13 @@
                                                                 </div>
                                                                 <div class="form-group col-md-12">
                                                                     <div class="col-md-3 text-right">
-                                                                        <strong>CSV Header Field</strong>
+                                                                        <strong>{{ trans('general.csv_header_field') }}</strong>
                                                                     </div>
                                                                     <div class="col-md-4">
-                                                                        <strong>Import Field</strong>
+                                                                        <strong>{{ trans('general.import_field') }}</strong>
                                                                     </div>
                                                                     <div class="col-md-5">
-                                                                        <strong>Sample Value</strong>
+                                                                        <strong>{{ trans('general.sample_value') }}</strong>
                                                                     </div>
                                                                 </div><!-- /div row -->
 
@@ -234,7 +234,7 @@
                                                                         </div><!-- /div row -->
                                                                     @endforeach
                                                                 @else
-                                                                    No Columns Found!
+                                                                    {{ trans('general.no_headers') }}
                                                                 @endif
 
                                                                 <div class="form-group col-md-12">
@@ -299,7 +299,7 @@
             },
             progress: function(e, data) {
                 @this.progress = parseInt((data.loaded / data.total * 100, 10));
-                @this.progress_message = @this.progress+'% Complete'; // TODO - this should come from server (so it can be internationalized)
+                @this.progress_message = @this.progress+'% Complete'; // TODO - make this use general.percent_complete as a translation, passing :percent as a variable
             },
             fail: function(e, data) {
                 @this.progress_bar_class = "progress-bar-danger";
@@ -353,7 +353,7 @@
                     }).done( function (body) {
                         // Success
                         @this.statusType="success";
-                        @this.statusText = "Success... Redirecting.";
+                        @this.statusText = {{ trans('general.success_redirecting') }};
                         // console.dir(body)
                         window.location.href = body.messages.redirect_url;
                     }).fail( function (jqXHR, textStatus, error) {
