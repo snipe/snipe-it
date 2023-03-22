@@ -120,6 +120,14 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
         ]
     )->name('users/bulkedit');
 
+    Route::post(
+        'merge',
+        [
+            Users\BulkUsersController::class,
+            'merge'
+        ]
+    )->name('users.merge.save');
+
 
     Route::post(
         'bulksave',

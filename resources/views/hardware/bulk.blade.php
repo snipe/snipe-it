@@ -144,6 +144,25 @@
             </div>
           </div>
 
+          <!-- Next audit Date -->
+          <div class="form-group {{ $errors->has('next_audit_date') ? ' has-error' : '' }}">
+            <label for="next_audit_date" class="col-md-3 control-label">{{ trans('general.next_audit_date') }}</label>
+            <div class="col-md-3">
+              <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
+                <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="next_audit_date" id="next_audit_date" value="{{ old('next_audit_date') }}">
+                <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
+              </div>
+
+              {!! $errors->first('next_audit_date', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+            </div>
+            <div class="col-md-6">
+              <label>
+                {{ Form::checkbox('null_next_audit_date', '1', false, ['class' => 'minimal']) }}
+                {{ trans_choice('general.set_to_null', count($assets), ['asset_count' => count($assets)]) }}
+              </label>
+            </div>
+          </div>
+
           <!-- Requestable -->
           <div class="form-group {{ $errors->has('requestable') ? ' has-error' : '' }}">
             <div class="control-label col-md-3">

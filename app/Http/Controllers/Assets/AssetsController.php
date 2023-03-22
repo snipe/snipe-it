@@ -16,7 +16,7 @@ use App\Models\User;
 use Auth;
 use Carbon\Carbon;
 use DB;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
@@ -627,7 +627,11 @@ class AssetsController extends Controller
         $csv->setHeaderOffset(0);
         $header = $csv->getHeader();
         $isCheckinHeaderExplicit = in_array('checkin date', (array_map('strtolower', $header)));
-        $results = $csv->getRecords();
+        try {
+            $results = $csv->getRecords();
+        } catch (\Exception $e) {
+            return back()->with('error', trans('general.error_in_import_file', ['error' => $e->getMessage()]));
+        } 
         $item = [];
         $status = [];
         $status['error'] = [];

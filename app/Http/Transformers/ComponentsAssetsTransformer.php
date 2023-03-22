@@ -3,7 +3,7 @@
 namespace App\Http\Transformers;
 
 use App\Models\Asset;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 
 class ComponentsAssetsTransformer

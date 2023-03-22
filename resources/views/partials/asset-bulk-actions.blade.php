@@ -12,7 +12,7 @@
             {{ trans('button.bulk_actions') }}
         </span>
     </label>
-    <select name="bulk_actions" class="form-control select2" aria-label="bulk_actions">
+    <select name="bulk_actions" class="form-control select2" aria-label="bulk_actions" style="min-width: 350px;">
         @can('update', \App\Models\Asset::class)
             <option value="edit">{{ trans('button.edit') }}</option>
         @endcan
