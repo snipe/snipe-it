@@ -152,30 +152,6 @@ class SettingsServiceProvider extends ServiceProvider
         setlocale(LC_NUMERIC, config('app.locale'));
 
 
-        /*
-         * This is a shorter way to see if the app is in demo mode.
-         *
-         * This makes it cleanly available in blades and in controllers, e.g.
-         *
-         * Blade:
-         * {{ app('demo_mode') ? ' disabled' : ''}} for form blades where we need to disable a form
-         *
-         * Controller:
-         * if (app('demo_mode')) {
-         *      // don't allow the thing
-         * }
-         * @todo - use this everywhere else in the app where we have very long if/else config('app.lock_passwords') stuff
-         */
-        \App::singleton('demo_mode', function () {
-            if (config('app.lock_passwords') === true) {
-                return true;
-            }
-            return false;
-        });
-
-
-
-
     }
 
     /**
