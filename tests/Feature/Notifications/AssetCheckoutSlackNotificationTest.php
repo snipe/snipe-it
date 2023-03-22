@@ -110,7 +110,7 @@ class AssetCheckoutSlackNotificationTest extends TestCase
         );
     }
 
-    public function testtestDoesNotSendNotificationViaSlackIfWebHookEndpointIsNotSetWhenCheckingOutAssetToLocation()
+    public function testDoesNotSendNotificationViaSlackIfWebHookEndpointIsNotSetWhenCheckingOutAssetToLocation()
     {
         Notification::fake();
 
