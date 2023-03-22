@@ -41,8 +41,8 @@ class CheckoutableListener
         if (! $event->checkedOutTo instanceof User) {
 
             // @todo: comment
-            if (Setting::getSettings() && Setting::getSettings()->slack_endpoint) {
-                Notification::route('slack', Setting::getSettings()->slack_endpoint)
+            if (Setting::getSettings() && Setting::getSettings()->webhook_endpoint) {
+                Notification::route('slack', Setting::getSettings()->webhook_endpoint)
                     ->notify(new CheckoutAssetNotification(
                             $event->checkoutable,
                             $event->checkedOutTo,

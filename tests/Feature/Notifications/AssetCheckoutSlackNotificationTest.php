@@ -3,8 +3,6 @@
 namespace Tests\Feature\Notifications;
 
 use App\Models\Asset;
-use App\Models\AssetModel;
-use App\Models\Category;
 use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
@@ -15,23 +13,15 @@ use Tests\TestCase;
 
 class AssetCheckoutSlackNotificationTest extends TestCase
 {
-    private Category $assetLaptopCategory;
     private string $slackWebhookUrl = 'https://hooks.slack.com/services/NZ59O2F54K/Q4465WNLM8/672N8MU5JV15RP436WDHRN58';
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->assetLaptopCategory = Category::factory()->assetLaptopCategory();
-    }
 
     public function testNotificationSentToSlackWhenAssetCheckedOutToUserAndSlackNotificationEnabled()
     {
         Notification::fake();
 
-        Setting::factory()->create(['slack_endpoint' => $this->slackWebhookUrl]);
+        Setting::factory()->create(['webhook_endpoint' => $this->slackWebhookUrl]);
 
-        $asset = $this->createAsset();
+        $asset = Asset::factory()->laptopMbp()->create();
         $user = User::factory()->create();
 
         $asset->checkOut(
@@ -52,11 +42,11 @@ class AssetCheckoutSlackNotificationTest extends TestCase
     {
         Notification::fake();
 
-        Setting::factory()->create(['slack_endpoint' => $this->slackWebhookUrl]);
+        Setting::factory()->create(['webhook_endpoint' => $this->slackWebhookUrl]);
 
-        $assetBeingCheckedOut = $this->createAsset();
+        $assetBeingCheckedOut = Asset::factory()->laptopMbp()->create();
         $assetBeingCheckedOut->checkOut(
-            $this->createAsset(),
+            Asset::factory()->laptopMbp()->create(),
             User::factory()->superuser()->create()->id
         );
 
@@ -75,9 +65,9 @@ class AssetCheckoutSlackNotificationTest extends TestCase
     {
         Notification::fake();
 
-        $assetBeingCheckedOut = $this->createAsset();
+        $assetBeingCheckedOut = Asset::factory()->laptopMbp()->create();
         $assetBeingCheckedOut->checkOut(
-            $this->createAsset(),
+            Asset::factory()->laptopMbp()->create(),
             User::factory()->superuser()->create()->id
         );
 
@@ -91,9 +81,9 @@ class AssetCheckoutSlackNotificationTest extends TestCase
     {
         Notification::fake();
 
-        Setting::factory()->create(['slack_endpoint' => $this->slackWebhookUrl]);
+        Setting::factory()->create(['webhook_endpoint' => $this->slackWebhookUrl]);
 
-        $asset = $this->createAsset();
+        $asset = Asset::factory()->laptopMbp()->create();
         $asset->checkOut(
             Location::factory()->create(),
             User::factory()->superuser()->create()->id
@@ -114,7 +104,7 @@ class AssetCheckoutSlackNotificationTest extends TestCase
     {
         Notification::fake();
 
-        $asset = $this->createAsset();
+        $asset = Asset::factory()->laptopMbp()->create();
         $asset->checkOut(
             Location::factory()->create(),
             User::factory()->superuser()->create()->id
@@ -124,14 +114,5 @@ class AssetCheckoutSlackNotificationTest extends TestCase
             new AnonymousNotifiable,
             CheckoutAssetNotification::class,
         );
-    }
-
-    private function createAsset()
-    {
-        return Asset::factory()->create([
-            'model_id' => AssetModel::factory()->create([
-                'category_id' => $this->assetLaptopCategory->id,
-            ])->id,
-        ]);
     }
 }
