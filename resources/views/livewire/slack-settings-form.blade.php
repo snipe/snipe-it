@@ -55,13 +55,14 @@
                             <div class="col-md-2">
                                 <label for="webhook_selected">
                                     {{ trans('general.integration_option') }}
-                                </label>
+
+								</label>
                             </div>
                             <div class="col-md-9 required" wire:ignore>
-                                <select aria-label="webhook_selected" id="select2" class="select2 form-control"{{ Helper::isDemoMode() ? ' disabled' : ''}}>
-                                    <option value="slack">{{ trans('admin/settings/general.slack') }}</option>
-                                    <option value="general">{{ trans('admin/settings/general.general_webhook') }}</option>
-                                </select>
+
+								{{ Form::select('webhook_selected', array('slack' => trans('admin/settings/general.slack'), 'general' => trans('admin/settings/general.general_webhook')), old('webhook_selected', $webhook_selected), array('class'=>'select2 form-control', 'aria-label' => 'webhook_selected', 'id' => 'select2', 'style'=>'width:90%')) }}
+
+
                             </div>
                         </div>
 
