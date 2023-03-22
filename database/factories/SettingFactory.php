@@ -43,4 +43,13 @@ class SettingFactory extends Factory
             ];
         });
     }
+
+    public function withWebhookEnabled()
+    {
+        return $this->state(fn() => [
+            'webhook_botname' => 'SnipeBot5000',
+            'webhook_endpoint' => 'https://hooks.slack.com/services/NZ59/Q446/672N',
+            'webhook_channel' => '#it',
+        ]);
+    }
 }

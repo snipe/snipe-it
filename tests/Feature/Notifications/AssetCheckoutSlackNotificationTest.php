@@ -13,13 +13,11 @@ use Tests\TestCase;
 
 class AssetCheckoutSlackNotificationTest extends TestCase
 {
-    private string $slackWebhookUrl = 'https://hooks.slack.com/services/NZ59O2F54K/Q4465WNLM8/672N8MU5JV15RP436WDHRN58';
-
     public function testNotificationSentToSlackWhenAssetCheckedOutToUserAndSlackNotificationEnabled()
     {
         Notification::fake();
 
-        Setting::factory()->create(['webhook_endpoint' => $this->slackWebhookUrl]);
+        Setting::factory()->withWebhookEnabled()->create();
 
         $asset = Asset::factory()->laptopMbp()->create();
         $user = User::factory()->create();
@@ -42,7 +40,7 @@ class AssetCheckoutSlackNotificationTest extends TestCase
     {
         Notification::fake();
 
-        Setting::factory()->create(['webhook_endpoint' => $this->slackWebhookUrl]);
+        Setting::factory()->withWebhookEnabled()->create();
 
         $assetBeingCheckedOut = Asset::factory()->laptopMbp()->create();
         $assetBeingCheckedOut->checkOut(
@@ -56,7 +54,7 @@ class AssetCheckoutSlackNotificationTest extends TestCase
             new AnonymousNotifiable,
             CheckoutAssetNotification::class,
             function ($notification, $channels, $notifiable) {
-                return $notifiable->routes['slack'] === $this->slackWebhookUrl;
+                return $notifiable->routes['slack'] === Setting::getSettings()->webhook_endpoint;
             }
         );
     }
@@ -81,7 +79,7 @@ class AssetCheckoutSlackNotificationTest extends TestCase
     {
         Notification::fake();
 
-        Setting::factory()->create(['webhook_endpoint' => $this->slackWebhookUrl]);
+        Setting::factory()->withWebhookEnabled()->create();
 
         $asset = Asset::factory()->laptopMbp()->create();
         $asset->checkOut(
@@ -95,7 +93,7 @@ class AssetCheckoutSlackNotificationTest extends TestCase
             new AnonymousNotifiable,
             CheckoutAssetNotification::class,
             function ($notification, $channels, $notifiable) {
-                return $notifiable->routes['slack'] === $this->slackWebhookUrl;
+                return $notifiable->routes['slack'] === Setting::getSettings()->webhook_endpoint;
             }
         );
     }
