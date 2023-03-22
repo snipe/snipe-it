@@ -598,6 +598,10 @@ class AssetsController extends Controller
                         if (($field_val == null) && ($request->has('model_id') != '')) {
                             $field_val = \Crypt::encrypt($field->defaultValue($request->get('model_id')));
                         } else {
+                            $validated = $request->validate([
+                                $field->db_column => $model->fieldset->validation_rules()[$field->db_column],
+                            ]);
+                            
                             $field_val = \Crypt::encrypt($request->input($field->db_column));
                         }
                     }
@@ -672,6 +676,10 @@ class AssetsController extends Controller
                     if ($request->has($field->db_column)) {
                         if ($field->field_encrypted == '1') {
                             if (Gate::allows('admin')) {
+                                $validated = $request->validate([
+                                    $field->db_column => $model->fieldset->validation_rules()[$field->db_column],
+                                ]);
+                                
                                 $asset->{$field->db_column} = \Crypt::encrypt($request->input($field->db_column));
                             }
                         } else {
