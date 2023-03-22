@@ -168,7 +168,7 @@
         $('#select2').select2();
         $('#select2').on('change', function (e) {
             var data = $('#select2').select2("val");
-        @this.set('webhook_selected', data);
+            @this.set('webhook_selected', data);
         });
 
         // Re-render select2
