@@ -21,7 +21,8 @@ class UpdateSlackSetting extends Migration
         $settings = Setting::where('webhook_selected', '=', 'Slack')->get();
 
         foreach($settings as $setting){
-            $setting->update(['webhook_selected' => 'slack']);
+            $setting->webhook_selected = 'slack';
+            $setting->save();
         }
     }
 
