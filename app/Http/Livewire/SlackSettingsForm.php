@@ -11,7 +11,7 @@ class SlackSettingsForm extends Component
     public $webhook_endpoint;
     public $webhook_channel;
     public $webhook_botname;
-    public $isDisabled ='disabled' ;
+    public $isDisabled ='' ;
     public $webhook_name;
     public $webhook_link;
     public $webhook_placeholder;
@@ -26,7 +26,6 @@ class SlackSettingsForm extends Component
         'webhook_channel'                       => 'required_with:webhook_endpoint|starts_with:#|nullable',
         'webhook_botname'                       => 'string|nullable',
     ];
-
 
     public function mount(){
         $this->webhook_text= [
@@ -45,6 +44,7 @@ class SlackSettingsForm extends Component
         ];
 
         $this->setting = Setting::getSettings();
+        $this->save_button = trans('general.save');
         $this->webhook_selected = $this->setting->webhook_selected;
         $this->webhook_placeholder = $this->webhook_text[$this->setting->webhook_selected]["placeholder"];
         $this->webhook_name = $this->webhook_text[$this->setting->webhook_selected]["name"];
@@ -54,6 +54,12 @@ class SlackSettingsForm extends Component
         $this->webhook_botname = $this->setting->webhook_botname;
         $this->webhook_options = $this->setting->webhook_selected;
 
+        if($this->setting->webhook_selected == 'general'){
+            $this->isDisabled='';
+        }
+        if($this->setting->webhook_endpoint != null && $this->setting->webhook_channel != null){
+            $this->isDisabled= '';
+        }
 
     }
     public function updated($field){
@@ -66,17 +72,28 @@ class SlackSettingsForm extends Component
         $this->webhook_icon = $this->webhook_text[$this->webhook_selected]["icon"]; ;
         $this->webhook_placeholder = $this->webhook_text[$this->webhook_selected]["placeholder"];
         $this->webhook_link = $this->webhook_text[$this->webhook_selected]["link"];
-
+        if($this->webhook_selected != 'slack'){
+            $this->isDisabled= '';
+            $this->save_button = trans('general.save');
+        }
     }
 
+    private function isButtonDisabled(){
+        if($this->webhook_selected == 'slack') {
+            if (empty($this->webhook_endpoint)) {
+                $this->isDisabled = 'disabled';
+                $this->save_button = trans('admin/settings/general.webhook_presave');
+            }
+            if (empty($this->webhook_channel)) {
+                $this->isDisabled = 'disabled';
+                $this->save_button = trans('admin/settings/general.webhook_presave');
+            }
+        }
+
+    }
     public function render()
     {
-        if(empty($this->webhook_channel || $this->webhook_endpoint)){
-            $this->isDisabled= 'disabled';
-        }
-        if(empty($this->webhook_endpoint && $this->webhook_channel)){
-            $this->isDisabled= '';
-        }
+        $this->isButtonDisabled();
         return view('livewire.slack-settings-form');
     }
 
@@ -100,6 +117,7 @@ class SlackSettingsForm extends Component
         try {
             $webhook->post($this->webhook_endpoint, ['body' => $payload]);
             $this->isDisabled='';
+            $this->save_button = trans('general.save');
             return session()->flash('success' , 'Your '.$this->webhook_name.' Integration works!');
 
         } catch (\Exception $e) {
@@ -110,9 +128,21 @@ class SlackSettingsForm extends Component
         //}
         return session()->flash('message' , trans('admin/settings/message.webhook.error_misc'));
 
-
-
     }
+
+    public function clearSettings(){
+        $this->webhook_endpoint = '';
+        $this->webhook_channel = '';
+        $this->webhook_botname = '';
+        $this->setting->webhook_endpoint = '';
+        $this->setting->webhook_channel = '';
+        $this->setting->webhook_botname = '';
+
+        $this->setting->save();
+
+        session()->flash('save',trans('admin/settings/message.update.success'));
+    }
+
     public function submit()
     {
         if($this->webhook_selected != 'general') {
@@ -124,11 +154,9 @@ class SlackSettingsForm extends Component
         $this->setting->webhook_channel = $this->webhook_channel;
         $this->setting->webhook_botname = $this->webhook_botname;
 
-
         $this->setting->save();
 
         session()->flash('save',trans('admin/settings/message.update.success'));
-
 
     }
 }
