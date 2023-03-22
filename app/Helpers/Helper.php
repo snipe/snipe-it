@@ -1163,7 +1163,7 @@ class Helper
      * }
      * @todo - use this everywhere else in the app where we have very long if/else config('app.lock_passwords') stuff
      */
-    public function isDemoMode() {
+    public static function isDemoMode() {
         if (config('app.lock_passwords') === true) {
             return true;
             \Log::debug('app locked!');
@@ -1177,7 +1177,7 @@ class Helper
      * I know it's gauche  to return a shitty HTML string, but this is just a helper and since it will be the same every single time,
      * it seemed pretty safe to do here. Don't you judge me.
      */
-    public function showDemoModeFieldWarning() {
+    public static function showDemoModeFieldWarning() {
         if (Helper::isDemoMode()) {
             return "<p class=\"text-warning\"><i class=\"fas fa-lock\"></i>" . trans('general.feature_disabled') . "</p>";
         }
