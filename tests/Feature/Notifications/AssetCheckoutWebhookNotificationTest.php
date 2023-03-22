@@ -11,9 +11,9 @@ use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
-class AssetCheckoutSlackNotificationTest extends TestCase
+class AssetCheckoutWebhookNotificationTest extends TestCase
 {
-    public function testNotificationSentToSlackWhenAssetCheckedOutToUserAndSlackNotificationEnabled()
+    public function testNotificationSentToWebhookWhenAssetCheckedOutToUserAndWebhookNotificationEnabled()
     {
         Notification::fake();
 
@@ -35,7 +35,7 @@ class AssetCheckoutSlackNotificationTest extends TestCase
         );
     }
 
-    public function testNotificationSentToSlackWhenAssetCheckedOutToAssetAndSlackNotificationEnabled()
+    public function testNotificationSentToWebhookWhenAssetCheckedOutToAssetAndWebhookNotificationEnabled()
     {
         Notification::fake();
 
@@ -57,7 +57,7 @@ class AssetCheckoutSlackNotificationTest extends TestCase
         );
     }
 
-    public function testDoesNotSendNotificationViaSlackIfWebHookEndpointIsNotSetWhenCheckingOutAssetToAsset()
+    public function testDoesNotSendNotificationViaWebhookIfWebHookEndpointIsNotSetWhenCheckingOutAssetToAsset()
     {
         Notification::fake();
 
@@ -72,7 +72,7 @@ class AssetCheckoutSlackNotificationTest extends TestCase
         );
     }
 
-    public function testNotificationSentToSlackWhenAssetCheckedOutToLocationAndSlackNotificationEnabled()
+    public function testNotificationSentToWebhookWhenAssetCheckedOutToLocationAndWebhookNotificationEnabled()
     {
         Notification::fake();
 
@@ -94,7 +94,7 @@ class AssetCheckoutSlackNotificationTest extends TestCase
         );
     }
 
-    public function testDoesNotSendNotificationViaSlackIfWebHookEndpointIsNotSetWhenCheckingOutAssetToLocation()
+    public function testDoesNotSendNotificationViaWebhookIfWebHookEndpointIsNotSetWhenCheckingOutAssetToLocation()
     {
         Notification::fake();
 
