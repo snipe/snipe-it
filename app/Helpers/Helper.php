@@ -1155,10 +1155,10 @@ class Helper
      * This makes it cleanly available in blades and in controllers, e.g.
      *
      * Blade:
-     * {{ app('demo_mode') ? ' disabled' : ''}} for form blades where we need to disable a form
+     * {{ Helper::isDemoMode() ? ' disabled' : ''}} for form blades where we need to disable a form
      *
      * Controller:
-     * if (app('demo_mode')) {
+     * if (Helper::isDemoMode()) {
      *      // don't allow the thing
      * }
      * @todo - use this everywhere else in the app where we have very long if/else config('app.lock_passwords') stuff

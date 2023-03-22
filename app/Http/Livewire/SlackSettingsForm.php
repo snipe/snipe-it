@@ -131,21 +131,25 @@ class SlackSettingsForm extends Component
     }
 
     public function clearSettings(){
-        $this->webhook_endpoint = '';
-        $this->webhook_channel = '';
-        $this->webhook_botname = '';
-        $this->setting->webhook_endpoint = '';
-        $this->setting->webhook_channel = '';
-        $this->setting->webhook_botname = '';
+        if (Helper::isDemoMode()) {
+            session()->flash('error',trans('general.feature_disabled'));
+        } else {
+            $this->webhook_endpoint = '';
+            $this->webhook_channel = '';
+            $this->webhook_botname = '';
+            $this->setting->webhook_endpoint = '';
+            $this->setting->webhook_channel = '';
+            $this->setting->webhook_botname = '';
 
-        $this->setting->save();
+            $this->setting->save();
 
-        session()->flash('success',trans('admin/settings/message.update.success'));
+            session()->flash('success', trans('admin/settings/message.update.success'));
+        }
     }
 
     public function submit()
     {
-        if (app('demo_mode')) {
+        if (Helper::isDemoMode()) {
             session()->flash('error',trans('general.feature_disabled'));
         } else {
             if ($this->webhook_selected != 'general') {

@@ -141,7 +141,7 @@
                 <div class="box-footer">
                     <div class="text-right col-md-12">
 
-                        <button type="reset" wire:click.prevent="clearSettings" class="col-md-2 text-left btn btn-danger pull-left">{{ trans('general.clear_and_save') }}</button>
+                        <button type="reset" wire:click.prevent="clearSettings" class="col-md-2 text-left btn btn-danger pull-left"{{ Helper::isDemoMode() ? ' disabled' : ''}}>{{ trans('general.clear_and_save') }}</button>
 
                         <a class="btn btn-link pull-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
 
