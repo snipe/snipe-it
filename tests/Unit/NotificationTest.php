@@ -22,7 +22,7 @@ class NotificationTest extends TestCase
                 'model_id' => AssetModel::factory()
                     ->create(
                         [
-                            'category_id' => Category::factory()->assetLaptopCategory()->id
+                            'category_id' => Category::factory()->assetLaptopCategory()->create()->id
                         ]
                 )->id,
                 'warranty_months' => 24,

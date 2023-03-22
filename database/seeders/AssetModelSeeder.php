@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\AssetModel;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -13,35 +14,37 @@ class AssetModelSeeder extends Seeder
     {
         AssetModel::truncate();
 
+        $admin = User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin()->create();
+
         // Laptops
-        AssetModel::factory()->count(1)->mbp13Model()->create(); // 1
-        AssetModel::factory()->count(1)->mbpAirModel()->create(); // 2
-        AssetModel::factory()->count(1)->surfaceModel()->create(); // 3
-        AssetModel::factory()->count(1)->xps13Model()->create(); // 4
-        AssetModel::factory()->count(1)->spectreModel()->create(); // 5
-        AssetModel::factory()->count(1)->zenbookModel()->create(); // 6
-        AssetModel::factory()->count(1)->yogaModel()->create(); // 7
+        AssetModel::factory()->count(1)->mbp13Model()->create(['user_id' => $admin->id]);
+        AssetModel::factory()->count(1)->mbpAirModel()->create(['user_id' => $admin->id]);
+        AssetModel::factory()->count(1)->surfaceModel()->create(['user_id' => $admin->id]);
+        AssetModel::factory()->count(1)->xps13Model()->create(['user_id' => $admin->id]);
+        AssetModel::factory()->count(1)->spectreModel()->create(['user_id' => $admin->id]);
+        AssetModel::factory()->count(1)->zenbookModel()->create(['user_id' => $admin->id]);
+        AssetModel::factory()->count(1)->yogaModel()->create(['user_id' => $admin->id]);
 
         // Desktops
-        AssetModel::factory()->count(1)->macproModel()->create(); // 8
-        AssetModel::factory()->count(1)->lenovoI5Model()->create(); // 9
-        AssetModel::factory()->count(1)->optiplexModel()->create(); // 10
+        AssetModel::factory()->count(1)->macproModel()->create(['user_id' => $admin->id]);
+        AssetModel::factory()->count(1)->lenovoI5Model()->create(['user_id' => $admin->id]);
+        AssetModel::factory()->count(1)->optiplexModel()->create(['user_id' => $admin->id]);
 
         // Conference Phones
-        AssetModel::factory()->count(1)->polycomModel()->create(); // 11
-        AssetModel::factory()->count(1)->polycomcxModel()->create(); // 12
+        AssetModel::factory()->count(1)->polycomModel()->create(['user_id' => $admin->id]);
+        AssetModel::factory()->count(1)->polycomcxModel()->create(['user_id' => $admin->id]);
 
         // Tablets
-        AssetModel::factory()->count(1)->ipadModel()->create(); // 13
-        AssetModel::factory()->count(1)->tab3Model()->create(); // 14
+        AssetModel::factory()->count(1)->ipadModel()->create(['user_id' => $admin->id]);
+        AssetModel::factory()->count(1)->tab3Model()->create(['user_id' => $admin->id]);
 
         // Phones
-        AssetModel::factory()->count(1)->iphone11Model()->create(); // 15
-        AssetModel::factory()->count(1)->iphone12Model()->create(); // 16
+        AssetModel::factory()->count(1)->iphone11Model()->create(['user_id' => $admin->id]);
+        AssetModel::factory()->count(1)->iphone12Model()->create(['user_id' => $admin->id]);
 
         // Displays
-        AssetModel::factory()->count(1)->ultrafine()->create(); // 17
-        AssetModel::factory()->count(1)->ultrasharp()->create(); // 18
+        AssetModel::factory()->count(1)->ultrafine()->create(['user_id' => $admin->id]);
+        AssetModel::factory()->count(1)->ultrasharp()->create(['user_id' => $admin->id]);
 
         $src = public_path('/img/demo/models/');
         $dst = 'models'.'/';

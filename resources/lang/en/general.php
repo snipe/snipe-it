@@ -417,6 +417,6 @@ return [
     'merged'                => 'merged',
     'merged_log_this_user_into' => 'Merged this user (ID :to_id - :to_username) into user ID :from_id (:from_username) ',
     'merged_log_this_user_from' => 'Merged user ID :from_id (:from_username) into this user (ID :to_id - :to_username)',
-
+    'clear_and_save'            => 'Clear & Save',
 
 ];
