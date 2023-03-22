@@ -1147,4 +1147,39 @@ class Helper
         return $age;
 
     }
+
+
+     /*
+     * This is a shorter way to see if the app is in demo mode.
+     *
+     * This makes it cleanly available in blades and in controllers, e.g.
+     *
+     * Blade:
+     * {{ Helper::isDemoMode() ? ' disabled' : ''}} for form blades where we need to disable a form
+     *
+     * Controller:
+     * if (Helper::isDemoMode()) {
+     *      // don't allow the thing
+     * }
+     * @todo - use this everywhere else in the app where we have very long if/else config('app.lock_passwords') stuff
+     */
+    public function isDemoMode() {
+        if (config('app.lock_passwords') === true) {
+            return true;
+            \Log::debug('app locked!');
+        }
+
+        return false;
+    }
+
+
+    /*
+     * I know it's gauche  to return a shitty HTML string, but this is just a helper and since it will be the same every single time,
+     * it seemed pretty safe to do here. Don't you judge me.
+     */
+    public function showDemoModeFieldWarning() {
+        if (Helper::isDemoMode()) {
+            return "<p class=\"text-warning\"><i class=\"fas fa-lock\"></i>" . trans('general.feature_disabled') . "</p>";
+        }
+    }
 }
