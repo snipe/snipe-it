@@ -10,7 +10,7 @@
 @if($message != '')
     <div class="col-md-12" class="{{ $message_type }}">
         <div class="alert alert-{{ $this->message_type }} ">
-            <button type="button" class="close" wire:click="hideMessages">&times;</button>
+            <button type="button" class="close" wire:click="$set('message','')">&times;</button>
             @if($message_type == 'success')
                 <i class="fas fa-check faa-pulse animated" aria-hidden="true"></i>
             @endif
@@ -34,15 +34,23 @@
                             <th>{{ trans('general.error') }}</th>
                             </thead>
                             <tbody>
-                            @foreach($import_errors as $field => $error_list)
-                            <tr>
-                                <td>{{ $processDetails->file_path ?? "Unknown File" }}</td>
-                                <td>
-                                    <b>{{ $field }}:</b>
-                                    <span>{{ implode(", ",$error_list) }}</span>
-                                    <br />
-                                </td>
-                            </tr>
+                            @php \Log::error("import errors are: ".print_r($import_errors,true)); @endphp
+                            @foreach($import_errors AS $key => $actual_import_errors)
+                                @php \Log::error("Key is: $key"); @endphp
+                                @foreach($actual_import_errors AS $table => $error_bag)
+                                    @php \Log::error("Table is: $table"); @endphp
+                                    @foreach($error_bag as $field => $error_list)
+                                        @php \Log::error("Field is: $field"); @endphp
+                                        <tr>
+                                            <td>{{ $activeFile->file_path ?? "Unknown File" }}</td>
+                                            <td>
+                                                <b>{{ $field }}:</b>
+                                                <span>{{ implode(", ",$error_list) }}</span>
+                                                <br />
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endforeach
                             @endforeach
                             </tbody>
                         </table>
@@ -112,12 +120,12 @@
 
                                     @foreach($files as $currentFile)
 
-                                    		<tr wire:key="current-file-selection-{{ $currentFile->id }}" style="{{ ($processDetails && ($currentFile->id == $processDetails->id)) ? 'font-weight: bold' : '' }}" class="{{ ($processDetails && ($currentFile->id == $processDetails->id)) ? 'warning' : '' }}">
+                                    		<tr style="{{ ($activeFile && ($currentFile->id == $activeFile->id)) ? 'font-weight: bold' : '' }}" class="{{ ($activeFile && ($currentFile->id == $activeFile->id)) ? 'warning' : '' }}">
                                     			<td class="col-md-6">{{ $currentFile->file_path }}</td>
                                     			<td class="col-md-3">{{ Helper::getFormattedDateObject($currentFile->created_at, 'datetime', false) }}</td>
                                     			<td class="col-md-1">{{ Helper::formatFilesizeUnits($currentFile->filesize) }}</td>
                                                 <td class="col-md-1 text-right">
-                                                    <button class="btn btn-sm btn-info" wire:click="$set('activeFile',{{ $currentFile->id }})">
+                                                    <button class="btn btn-sm btn-info" wire:click="selectFile({{ $currentFile->id }})">
                                                         <i class="fas fa-retweet fa-fw" aria-hidden="true"></i>
                                                         <span class="sr-only">{{ trans('general.import') }}</span>
                                                     </button>
@@ -125,12 +133,10 @@
                                                         <i class="fas fa-trash icon-white" aria-hidden="true"></i><span class="sr-only"></span></button>
                                     			</td>
                                     		</tr>
-                                            <?php
-                                                \Log::error("Current file is: ".$currentFile->id);
-                                            ?>
-                                            @if( $currentFile && $processDetails && ($currentFile->id == $processDetails->id))
+
+                                            @if( $currentFile && $activeFile && ($currentFile->id == $activeFile->id))
                                                 <tr class="warning">
-                                                    <td colspan="4" >
+                                                    <td colspan="4">
 
                                                         <div class="col-md-12">
 
@@ -148,8 +154,7 @@
                                                                         'data-placeholder' => trans('general.select_var', ['thing' => trans('general.import_type')]), /* TODO: translate me */
                                                                         'placeholder' => '', //needed so that the form-helper will put an empty option first
                                                                         'data-minimum-results-for-search' => '-1', // Remove this if the list gets long enough that we need to search
-                                                                        'data-livewire-component' => $_instance->id,
-                                                                        'onchange' => "console.log('FAAAAAAAARTs');return true"
+                                                                        'data-livewire-component' => $_instance->id
                                                                     ]) }}
                                                                 </div>
                                                             </div>
@@ -234,7 +239,7 @@
 
                                                                 <div class="form-group col-md-12">
                                                                     <div class="col-md-3 text-left">
-                                                                        <a href="#" wire:click="$emit('hideDetails')">{{ trans('general.cancel') }}</a>
+                                                                        <a href="#" wire:click="$set('activeFile',null)">{{ trans('general.cancel') }}</a>
                                                                     </div>
                                                                     <div class="col-md-9">
                                                                         <button type="submit" class="btn btn-primary col-md-5" id="import">Import</button>
@@ -247,73 +252,18 @@
                                                                         {{ $statusText }}
                                                                     </div>
                                                                 @endif
+                                                            @else
+                                                                <div class="form-group col-md-12">
+                                                                    <div class="col-md-3 text-left">
+                                                                        <a href="#" wire:click="$set('activeFile',null)"><?php echo e(trans('general.cancel')); ?></a>
+                                                                    </div>
+                                                                </div>
                                                             @endif {{-- end of if ... activeFile->import_type --}}
 
-                                                            <script>
-                                                                $(function () {
-                                                                    // initialize iCheck for use with livewire
-                                                                    $('.minimal.livewire-icheck').iCheck({
-                                                                        checkboxClass: 'icheckbox_minimal-blue',
-                                                                    })
-
-                                                                    // we have to hook up to the `<tr id='importer-file'>` at the root of this display,
-                                                                    // because the #import button isn't visible until you click an import_type
-                                                                    $('#importer-file').on('click', '#import', function () {
-                                                                        console.warn("You clicked it!!!!")
-                                                                        if(!@this.activeFile.import_type) {
-                                                                            @this.statusType='error';
-                                                                            @this.statusText= "An import type is required... "; //TODO: translate?
-                                                                            return;
-                                                                        }
-                                                                        @this.statusType ='pending';
-                                                                        @this.statusText = "{{ trans('admin/hardware/form.processing_spinner') }}";
-                                                                        @this.generate_field_map().then(function (mappings_raw) {
-                                                                            var mappings = JSON.parse(mappings_raw)
-                                                                            // console.warn("Here is the mappings:")
-                                                                            // console.dir(mappings)
-                                                                            $.post({
-                                                                                url: "{{ route('api.imports.importFile', $activeFile->id) }}",
-                                                                                contentType: 'application/json',
-                                                                                data: JSON.stringify({
-                                                                                    'import-update': !!@this.update,
-                                                                                    'send-welcome': !!@this.send_welcome,
-                                                                                    'import-type': @this.activeFile.import_type,
-                                                                                    'run-backup': !!@this.run_backup,
-                                                                                    'column-mappings': mappings
-                                                                                }),
-                                                                                headers: {
-                                                                                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-                                                                                }
-                                                                            }).done( function (body) {
-                                                                                // Success
-                                                                                @this.statusType="success";
-                                                                                @this.statusText = "Success... Redirecting.";
-                                                                                console.dir(body)
-                                                                                window.location.href = body.messages.redirect_url;
-                                                                            }).fail( function (jqXHR, textStatus, error) {
-                                                                                // Failure
-                                                                                var body = jqXHR.responseJSON
-                                                                                if(body.status == 'import-errors') {
-                                                                                    @this.emit('importError', body.messages);
-                                                                                    @this.statusType='error';
-                                                                                    @this.statusText = "Error";
-                                                                                } else {
-                                                                                    console.warn("Not import-errors, just regular errors")
-                                                                                    console.dir(body)
-                                                                                    @this.emit('alert', body.error)
-                                                                                }
-                                                                                @this.emit('hideDetails')
-                                                                            });
-                                                                        })
-                                                                        return false;
-                                                                    });})
-
-                                                            </script>
-                                                        </div><!-- /div v-show -->
-
-                                                    </td>
+                                                        </div><!-- /div v-show -->                                                    </td>
                                                 </tr>
                                             @endif
+                                            </tr>
                                     @endforeach
                                 </table>
                             </div>
@@ -328,7 +278,6 @@
 
         </div>
 </div>
-</div> {{-- DID I HAVE A MISSING CLOSING DIV HERE? PROBABLY!!!!  --}}
 @push('js')
     <script>
 
@@ -363,5 +312,71 @@
                 @this.progress_message = error_message;
             }
         })
+
+        // For the importFile part:
+        $(function () {
+            // initialize iCheck for use with livewire
+            $('.minimal.livewire-icheck').iCheck({
+                checkboxClass: 'icheckbox_minimal-blue',
+            })
+
+            // we have to hook up to the `<tr id='importer-file'>` at the root of this display,
+            // because the #import button isn't visible until you click an import_type
+            $('#upload-table').on('click', '#import', function () {
+                if(!@this.activeFile.import_type) {
+                    @this.statusType='error';
+                    @this.statusText= "An import type is required... "; //TODO: translate?
+                    return;
+                }
+                @this.statusType ='pending';
+                @this.statusText = "{{ trans('admin/hardware/form.processing_spinner') }}";
+                @this.generate_field_map().then(function (mappings_raw) {
+                    var mappings = JSON.parse(mappings_raw)
+                    // console.warn("Here is the mappings:")
+                    // console.dir(mappings)
+                    // console.warn("Uh, active file id is, I guess: "+@this.activeFile.id)
+                    var this_file = @this.file_id; // okay, I actually don't know what I'm doing here.
+                    $.post({
+                        {{-- I want to do something like: route('api.imports.importFile', $activeFile->id) }} --}}
+                        url: "api/v1/imports/process/"+this_file, // maybe? Good a guess as any..FIXME. HARDCODED DUMB FILE
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            'import-update': !!@this.update,
+                            'send-welcome': !!@this.send_welcome,
+                            'import-type': @this.activeFile.import_type,
+                            'run-backup': !!@this.run_backup,
+                            'column-mappings': mappings
+                        }),
+                        headers: {
+                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                        }
+                    }).done( function (body) {
+                        // Success
+                        @this.statusType="success";
+                        @this.statusText = "Success... Redirecting.";
+                        // console.dir(body)
+                        window.location.href = body.messages.redirect_url;
+                    }).fail( function (jqXHR, textStatus, error) {
+                        // Failure
+                        var body = jqXHR.responseJSON
+                        if(body.status == 'import-errors') {
+                            @this.emit('importError', body.messages);
+                            @this.import_errors = body.messages
+
+                            @this.statusType='error';
+                            @this.statusText = "Error";
+                        } else {
+                            console.warn("Not import-errors, just regular errors")
+                            console.dir(body)
+{{--                            @this.emit('alert', body.error)--}}
+                            @this.message_type="danger"
+                            @this.message = body.error
+                        }
+                        @this.activeFile = null; //@this.set('hideDetails')
+                    });
+                })
+                return false;
+            });})
+
     </script>
 @endpush

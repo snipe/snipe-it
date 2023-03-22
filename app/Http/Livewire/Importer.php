@@ -17,10 +17,9 @@ class Importer extends Component
     use AuthorizesRequests;
 
     public $files;
-    public $processDetails;
 
     public $progress; //upload progress - '-1' means don't show
-    public $progress_message; //progress message
+    public $progress_message;
     public $progress_bar_class;
 
     public $message; //status/error message?
@@ -28,7 +27,7 @@ class Importer extends Component
 
     //originally from ImporterFile
     public $import_errors; //
-    public $activeFile; //this gets automatically populated on instantiation (no, it doesn't)
+    public ?Import $activeFile = null;
     public $importTypes;
     public $columnOptions;
     public $statusType;
@@ -37,32 +36,29 @@ class Importer extends Component
     public $send_welcome;
     public $run_backup;
     public $field_map; // we need a separate variable for the field-mapping, because the keys in the normal array are too complicated for Livewire to understand
+    public $file_id; // TODO: I can't figure out *why* we need this, but it really seems like we do. I can't seem to pull the id from the activeFile for some reason?
 
     protected $rules = [
         'files.*.file_path' => 'required|string',
         'files.*.created_at' => 'required|string',
         'files.*.filesize' => 'required|integer',
+        'activeFile' => 'Import',
         'activeFile.import_type' => 'string',
         'activeFile.field_map' => 'array',
         'activeFile.header_row' => 'array',
         'field_map' => 'array'
     ];
 
-    protected $listeners = [
-        'hideDetails' => 'hideDetails',
-        'importError' => 'importError',
-        'alert' => 'alert',
-        'refreshMe' => '$refresh'
-    ]; // TODO - try using the 'short' form of this?
-
-
-
     public function generate_field_map()
     {
+        \Log::debug("header row is: ".print_r($this->activeFile->header_row,true));
+        \Log::debug("Field map is: ".print_r($this->field_map,true));
         $tmp = array_combine($this->activeFile->header_row, $this->field_map);
         return json_encode(array_filter($tmp));
     }
 
+    // all of these 'statics', alas, may have to change to something else to handle translations?
+    // I'm not sure. Maybe I use them to 'populate' the translations? TBH, I don't know yet.
     static $general = [
         'category' => 'Category',
         'company' => 'Company',
@@ -169,7 +165,7 @@ class Importer extends Component
 
     private function getColumns($type)
     {
-        switch($type) {
+        switch ($type) {
             case 'asset':
                 $results = self::$general + self::$assets;
                 break;
@@ -188,11 +184,11 @@ class Importer extends Component
             default:
                 $results = self::$general;
         }
-        asort($results, SORT_FLAG_CASE|SORT_STRING);
-        if($type == "asset") {
+        asort($results, SORT_FLAG_CASE | SORT_STRING);
+        if ($type == "asset") {
             // add Custom Fields after a horizontal line
-            $results['-'] = "———".trans('admin/custom_fields/general.custom_fields')."———’";
-            foreach(CustomField::orderBy('name')->get() AS $field) {
+            $results['-'] = "———" . trans('admin/custom_fields/general.custom_fields') . "———’";
+            foreach (CustomField::orderBy('name')->get() as $field) {
                 $results[$field->db_column_name()] = $field->name;
             }
         }
@@ -202,9 +198,10 @@ class Importer extends Component
     public function updating($name, $new_import_type)
     {
         if ($name == "activeFile.import_type") {
-            \Log::info("WE ARE CHANGING THE import_type!!!!! TO: ".$new_import_type);
+            \Log::info("WE ARE CHANGING THE import_type!!!!! TO: " . $new_import_type);
+            \Log::info("so, what's \$this->>field_map at?: " . print_r($this->field_map, true));
             // go through each header, find a matching field to try and map it to.
-            foreach($this->activeFile->header_row as $i => $header) {
+            foreach ($this->activeFile->header_row as $i => $header) {
                 // do we have something mapped already?
                 if (array_key_exists($i, $this->field_map)) {
                     // yes, we do. Is it valid for this type of import?
@@ -219,16 +216,16 @@ class Importer extends Component
                     } // TODO - strictly speaking, this isn't necessary here I don't think.
                 }
                 // first, check for exact matches
-                foreach ($this->columnOptions[$new_import_type] AS $value => $text) {
+                foreach ($this->columnOptions[$new_import_type] as $value => $text) {
                     if (strcasecmp($text, $header) === 0) { // case-INSENSITIVe on purpose!
                         $this->field_map[$i] = $value;
                         continue 2; //don't bother with the alias check, go to the next header
                     }
                 }
                 // if you got here, we didn't find a match. Try the aliases
-                foreach(self::$aliases as $key => $alias_values) {
-                    foreach($alias_values as $alias_value) {
-                        if (strcasecmp($alias_value,$header) === 0) { // aLsO CaSe-INSENSitiVE!
+                foreach (self::$aliases as $key => $alias_values) {
+                    foreach ($alias_values as $alias_value) {
+                        if (strcasecmp($alias_value, $header) === 0) { // aLsO CaSe-INSENSitiVE!
                             // Make *absolutely* sure that this key actually _exists_ in this import type -
                             // you can trigger this by importing accessories with a 'Warranty' column (which don't exist
                             // in "Accessories"!)
@@ -243,6 +240,10 @@ class Importer extends Component
                 $this->field_map[$i] = null; // Booooo :(
             }
         }
+    }
+
+    public function boot() { // FIXME - delete or undelete.
+        ///////$this->activeFile = null; // I do *not* understand why I have to do this, but, well, whatever.
     }
 
 
@@ -270,56 +271,30 @@ class Importer extends Component
         }
     }
 
-    public function hideMessages()
+    public function selectFile($id)
     {
-        $this->message='';
-    }
-
-    public function importError($errors)
-    {
-        \Log::debug("Errors fired!!!!");
-        \Log::debug(" Here they are...".print_r($errors,true));
-        $this->import_errors = $errors;
-    }
-
-    public function alert($obj)
-    {
-        \Log::debug("Alert object received: ".print_r($obj,true));
-        $this->message = $obj;
-        $this->message_type = "danger";
-    }
-
-    public function boot() // well, fuck.
-    {
-        \Log::error("HEY WE ARE DOING FOR THE BOOOTTS!!!!");
-        $this->processDetails = null;
-    }
-
-    public function toggleEvent($id)
-    {
-        // do something here?
-        // I mean, I kinda don't get it?
-        $gonna_refresh = !!$this->processDetails;
-        if($this->processDetails) {
-            $this->processDetails = null;
-        }
+        \Log::info("TOGGLE EVENT FIRED!");
         \Log::error("The ID we are trying to find is AS FOLLOWS: ".$id);
-        $this->processDetails = Import::find($id);
-//            $this->emit('refreshFile'); ///FUUUUUUUUUUUUUU
-            ///
-//        }
-        /// Just literally none of this fucking shit works.
-        \Log::error("The import type we are about to try and load up is gonna be this: ".$this->processDetails->import_type);
+        $this->activeFile = Import::find($id);
+        $this->field_map = null;
+        foreach($this->activeFile->header_row as $element) {
+            if(isset($this->activeFile->field_map[$element])) {
+                $this->field_map[] = $this->activeFile->field_map[$element];
+            } else {
+                $this->field_map[] = null; // re-inject the 'nulls' if a file was imported with some 'Do Not Import' settings
+            }
+        }
+        //$this->field_map = $this->activeFile->field_map ? array_values($this->activeFile->field_map) : []; // this is wrong
+        $this->file_id = $id;
+        $this->import_errors = null;
+        $this->statusText = null;
+        \Log::error("The import type we are about to try and load up is gonna be this: ".$this->activeFile->import_type);
 
-    }
-
-    public function hideDetails()
-    {
-        $this->processDetails = null;
     }
 
     public function destroy($id)
     {
+        // TODO: why don't we just do File::find($id)? This seems dumb.
         foreach($this->files as $file) {
             \Log::debug("File id is: ".$file->id);
             if($id == $file->id) {
