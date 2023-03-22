@@ -158,6 +158,8 @@ return [
     'asset_maintenances'       => 'Asset Maintenances',
     'item'  				=> 'Item',
     'item_name'             => 'Item Name',
+    'import_file'  			=> 'import CSV file',
+    'import_type'  			=> 'CSV import type',
     'insufficient_permissions' => 'Insufficient permissions!',
     'kits'       			=> 'Predefined Kits',
     'language'				=> 'Language',
@@ -228,6 +230,7 @@ return [
     'requested_assets_menu' => 'Requested Assets',
     'request_canceled'      => 'Request Canceled',
     'save'  				=> 'Save',
+    'select_var'            => 'Select :thing... ', // this will eventually replace all of our other selects
     'select'				=> 'Select',
     'select_all'            => 'Select All',
     'search'				=> 'Search',

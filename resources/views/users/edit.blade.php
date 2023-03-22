@@ -699,7 +699,7 @@ $(document).ready(function() {
             data: {},
             headers: {
                 "X-Requested-With": 'XMLHttpRequest',
-                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content') // TODO` - we should do this in ajaxSetup
             },
             dataType: 'json',
 
