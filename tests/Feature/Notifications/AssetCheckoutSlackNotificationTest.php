@@ -17,14 +17,13 @@ class AssetCheckoutSlackNotificationTest extends TestCase
     {
         Notification::fake();
 
-        Setting::factory()->withWebhookEnabled()->create();
+        $this->enableWebhookSettings();
 
-        $asset = Asset::factory()->laptopMbp()->create();
-        $user = User::factory()->create();
+        $user = $this->createUser();
 
-        $asset->checkOut(
+        $this->createAsset()->checkOut(
             $user,
-            User::factory()->superuser()->create()->id
+            $this->createSuperUser()->id
         );
 
         Notification::assertSentTo(
@@ -40,12 +39,11 @@ class AssetCheckoutSlackNotificationTest extends TestCase
     {
         Notification::fake();
 
-        Setting::factory()->withWebhookEnabled()->create();
+        $this->enableWebhookSettings();
 
-        $assetBeingCheckedOut = Asset::factory()->laptopMbp()->create();
-        $assetBeingCheckedOut->checkOut(
-            Asset::factory()->laptopMbp()->create(),
-            User::factory()->superuser()->create()->id
+        $this->createAsset()->checkOut(
+            $this->createAsset(),
+            $this->createSuperUser()->id
         );
 
         // Since the target is not a user with an email address we have
@@ -63,10 +61,9 @@ class AssetCheckoutSlackNotificationTest extends TestCase
     {
         Notification::fake();
 
-        $assetBeingCheckedOut = Asset::factory()->laptopMbp()->create();
-        $assetBeingCheckedOut->checkOut(
-            Asset::factory()->laptopMbp()->create(),
-            User::factory()->superuser()->create()->id
+        $this->createAsset()->checkOut(
+            $this->createAsset(),
+            $this->createSuperUser()->id
         );
 
         Notification::assertNotSentTo(
@@ -79,12 +76,11 @@ class AssetCheckoutSlackNotificationTest extends TestCase
     {
         Notification::fake();
 
-        Setting::factory()->withWebhookEnabled()->create();
+        $this->enableWebhookSettings();
 
-        $asset = Asset::factory()->laptopMbp()->create();
-        $asset->checkOut(
+        $this->createAsset()->checkOut(
             Location::factory()->create(),
-            User::factory()->superuser()->create()->id
+            $this->createSuperUser()->id
         );
 
         // Since the target is not a user with an email address we have
@@ -102,15 +98,34 @@ class AssetCheckoutSlackNotificationTest extends TestCase
     {
         Notification::fake();
 
-        $asset = Asset::factory()->laptopMbp()->create();
-        $asset->checkOut(
+        $this->createAsset()->checkOut(
             Location::factory()->create(),
-            User::factory()->superuser()->create()->id
+            $this->createSuperUser()->id
         );
 
         Notification::assertNotSentTo(
             new AnonymousNotifiable,
             CheckoutAssetNotification::class,
         );
+    }
+
+    private function enableWebhookSettings()
+    {
+        Setting::factory()->withWebhookEnabled()->create();
+    }
+
+    private function createAsset()
+    {
+        return Asset::factory()->laptopMbp()->create();
+    }
+
+    private function createUser()
+    {
+        return User::factory()->create();
+    }
+
+    private function createSuperUser()
+    {
+        return User::factory()->superuser()->create();
     }
 }
