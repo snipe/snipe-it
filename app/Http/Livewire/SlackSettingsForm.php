@@ -126,7 +126,7 @@ class SlackSettingsForm extends Component
         }
 
         //}
-        return session()->flash('message' , trans('admin/settings/message.webhook.error_misc'));
+        return session()->flash('error' , trans('admin/settings/message.webhook.error_misc'));
 
     }
 
@@ -140,23 +140,28 @@ class SlackSettingsForm extends Component
 
         $this->setting->save();
 
-        session()->flash('save',trans('admin/settings/message.update.success'));
+        session()->flash('success',trans('admin/settings/message.update.success'));
     }
 
     public function submit()
     {
-        if($this->webhook_selected != 'general') {
-            $this->validate($this->rules);
+        if (app('demo_mode')) {
+            session()->flash('error',trans('general.feature_disabled'));
+        } else {
+            if ($this->webhook_selected != 'general') {
+                $this->validate($this->rules);
+            }
+
+            $this->setting->webhook_selected = $this->webhook_selected;
+            $this->setting->webhook_endpoint = $this->webhook_endpoint;
+            $this->setting->webhook_channel = $this->webhook_channel;
+            $this->setting->webhook_botname = $this->webhook_botname;
+
+            $this->setting->save();
+
+            session()->flash('success',trans('admin/settings/message.update.success'));
+
         }
-
-        $this->setting->webhook_selected = $this->webhook_selected;
-        $this->setting->webhook_endpoint = $this->webhook_endpoint;
-        $this->setting->webhook_channel = $this->webhook_channel;
-        $this->setting->webhook_botname = $this->webhook_botname;
-
-        $this->setting->save();
-
-        session()->flash('save',trans('admin/settings/message.update.success'));
 
     }
 }
