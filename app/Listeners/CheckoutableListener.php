@@ -32,11 +32,26 @@ class CheckoutableListener
     public function onCheckedOut($event)
     {
 
+        // @todo: update docblock
 
         /**
          * When the item wasn't checked out to a user, we can't send notifications
          */
+        // @todo: update comment
         if (! $event->checkedOutTo instanceof User) {
+
+            // @todo: comment
+            if (Setting::getSettings() && Setting::getSettings()->slack_endpoint) {
+                Notification::route('slack', Setting::getSettings()->slack_endpoint)
+                    ->notify(new CheckoutAssetNotification(
+                            $event->checkoutable,
+                            $event->checkedOutTo,
+                            $event->checkedOutBy,
+                            null,
+                            $event->note)
+                    );
+            }
+
             return;
         }
 
