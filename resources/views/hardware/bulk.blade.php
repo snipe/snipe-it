@@ -145,7 +145,7 @@
           </div>
 
           <!-- Next audit Date -->
-          <div class="form-group {{ $errors->has('expected_checkin') ? ' has-error' : '' }}">
+          <div class="form-group {{ $errors->has('next_audit_date') ? ' has-error' : '' }}">
             <label for="next_audit_date" class="col-md-3 control-label">{{ trans('general.next_audit_date') }}</label>
             <div class="col-md-3">
               <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">

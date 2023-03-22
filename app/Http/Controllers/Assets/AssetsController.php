@@ -630,7 +630,7 @@ class AssetsController extends Controller
         try {
             $results = $csv->getRecords();
         } catch (\Exception $e) {
-            return back()->with('error', 'There was an error reading the CSV file: '.$e->getMessage());
+            return back()->with('error', trans('general.error_in_import_file', ['error' => $e->getMessage()]));
         } 
         $item = [];
         $status = [];

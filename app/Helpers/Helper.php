@@ -1092,6 +1092,15 @@ class Helper
         return $file_name;
     }
 
+
+    /**
+     * Universal helper to show file size in human-readable formats
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since 5.0
+     *
+     * @return string[]
+     */
     public static function formatFilesizeUnits($bytes)
     {
         if ($bytes >= 1073741824)
@@ -1121,30 +1130,56 @@ class Helper
 
         return $bytes;
     }
+
+    /**
+     * This is weird but used by the side nav to determine which URL to point the user to
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since 5.0
+     *
+     * @return string[]
+     */
     public static function SettingUrls(){
         $settings=['#','fields.index', 'statuslabels.index', 'models.index', 'categories.index', 'manufacturers.index', 'suppliers.index', 'departments.index', 'locations.index', 'companies.index', 'depreciations.index'];
 
         return $settings;
         }
-    public static function AgeFormat($date) {
-        $year = Carbon::parse($date)
-            ->diff(now())->y;
-        $month = Carbon::parse($date)
-            ->diff(now())->m;
-        $days = Carbon::parse($date)
-            ->diff(now())->d;
-        $age='';
-        if ($year) {
-            $age .= $year.'y ';
-        }
-        if ($month) {
-            $age .= $month.'m ';
-        }
-        if ($days) {
-            $age .= $days.'d';
-        }
 
-        return $age;
+
+    /**
+     * Generic helper (largely used by livewire right now) that returns the font-awesome icon
+     * for the object type.
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since 6.1.0
+     *
+     * @return string
+     */
+    public static function iconTypeByItem($item) {
+
+        switch ($item) {
+            case 'asset':
+                return 'fas fa-barcode';
+                break;
+            case 'accessory':
+                return 'fas fa-keyboard';
+                break;
+            case 'component':
+                return 'fas fa-hdd';
+                break;
+            case 'consumable':
+                return 'fas fa-tint';
+                break;
+            case 'license':
+                return 'far fa-save';
+                break;
+            case 'location':
+                return 'fas fa-map-marker-alt';
+                break;
+            case 'user':
+                return 'fas fa-user';
+                break;
+        }
 
     }
 

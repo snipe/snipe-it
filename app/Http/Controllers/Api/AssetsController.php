@@ -941,18 +941,21 @@ class AssetsController extends Controller
      * @since [v6.0]
      * @return JsonResponse
      */
-    public function checkinByTag(Request $request)
+    public function checkinByTag(Request $request, $tag = null)
     {
         $this->authorize('checkin', Asset::class);
-        $asset = Asset::where('asset_tag', $request->input('asset_tag'))->first();
+        if(null == $tag && null !== ($request->input('asset_tag'))) {
+            $tag = $request->input('asset_tag');
+        }
+        $asset = Asset::where('asset_tag', $tag)->first();
 
         if ($asset) {
             return $this->checkin($request, $asset->id);
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', [
-            'asset'=> e($request->input('asset_tag'))
-        ], 'Asset with tag '.e($request->input('asset_tag')).' not found'));
+            'asset'=> e($tag)
+        ], 'Asset with tag '.e($tag).' not found'));
     }
 
 
