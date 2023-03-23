@@ -27,10 +27,10 @@ class AssetCheckoutWebhookNotificationTest extends TestCase
         );
 
         Notification::assertSentTo(
-            $user,
-            function (CheckoutAssetNotification $notification, $channels) {
-                // @todo: is this actually accurate?
-                return in_array('slack', $channels);
+            new AnonymousNotifiable,
+            CheckoutAssetNotification::class,
+            function ($notification, $channels, $notifiable) {
+                return $notifiable->routes['slack'] === Setting::getSettings()->webhook_endpoint;
             }
         );
     }

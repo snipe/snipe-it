@@ -34,25 +34,17 @@ class CheckoutableListener
 
         // @todo: update docblock
 
-        /**
-         * When the item wasn't checked out to a user, we can't send notifications
-         */
-        // @todo: update comment
-        if (! $event->checkedOutTo instanceof User) {
-
-            // @todo: comment
-            if (Setting::getSettings() && Setting::getSettings()->webhook_endpoint) {
-                Notification::route('slack', Setting::getSettings()->webhook_endpoint)
-                    ->notify(new CheckoutAssetNotification(
-                            $event->checkoutable,
-                            $event->checkedOutTo,
-                            $event->checkedOutBy,
-                            null,
-                            $event->note)
-                    );
-            }
-
-            return;
+        // @todo: comment...we send this anonymously so that webhook notification still
+        // @todo: get sent for models that don't have email addresses associated...
+        if (Setting::getSettings() && Setting::getSettings()->webhook_endpoint) {
+            Notification::route('slack', Setting::getSettings()->webhook_endpoint)
+                ->notify(new CheckoutAssetNotification(
+                        $event->checkoutable,
+                        $event->checkedOutTo,
+                        $event->checkedOutBy,
+                        null,
+                        $event->note)
+                );
         }
 
         /**
