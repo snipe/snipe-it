@@ -13,105 +13,48 @@ use Tests\TestCase;
 
 class AssetCheckoutWebhookNotificationTest extends TestCase
 {
-    public function testNotificationSentToWebhookWhenAssetCheckedOutToUserAndWebhookNotificationEnabled()
+
+    public function checkoutTargets()
+    {
+        return [
+            'Asset checked out to user' => [fn() => User::factory()->create()],
+            'Asset checked out to asset' => [fn() => $this->createAsset()],
+            'Asset checked out to location' => [fn() => Location::factory()->create()],
+        ];
+    }
+
+    /** @dataProvider checkoutTargets */
+    public function testWebhookNotificationsAreSentOnAssetCheckoutWhenWebhookSettingEnabled($checkoutTarget)
     {
         Notification::fake();
 
-        $this->enableWebhookSettings();
-
-        $user = $this->createUser();
-
-        $this->createAsset()->checkOut(
-            $user,
-            $this->createSuperUser()->id
-        );
-
-        Notification::assertSentTo(
-            new AnonymousNotifiable,
-            CheckoutAssetNotification::class,
-            function ($notification, $channels, $notifiable) {
-                return $notifiable->routes['slack'] === Setting::getSettings()->webhook_endpoint;
-            }
-        );
-    }
-
-    public function testNotificationSentToWebhookWhenAssetCheckedOutToAssetAndWebhookNotificationEnabled()
-    {
-        Notification::fake();
-
-        $this->enableWebhookSettings();
-
-        $this->createAsset()->checkOut(
-            $this->createAsset(),
-            $this->createSuperUser()->id
-        );
-
-        // Since the target is not a user with an email address we have
-        // to check if an AnonymousNotifiable was sent.
-        Notification::assertSentTo(
-            new AnonymousNotifiable,
-            CheckoutAssetNotification::class,
-            function ($notification, $channels, $notifiable) {
-                return $notifiable->routes['slack'] === Setting::getSettings()->webhook_endpoint;
-            }
-        );
-    }
-
-    public function testDoesNotSendNotificationViaWebhookIfWebHookEndpointIsNotSetWhenCheckingOutAssetToAsset()
-    {
-        Notification::fake();
-
-        $this->createAsset()->checkOut(
-            $this->createAsset(),
-            $this->createSuperUser()->id
-        );
-
-        Notification::assertNotSentTo(
-            new AnonymousNotifiable,
-            CheckoutAssetNotification::class,
-        );
-    }
-
-    public function testNotificationSentToWebhookWhenAssetCheckedOutToLocationAndWebhookNotificationEnabled()
-    {
-        Notification::fake();
-
-        $this->enableWebhookSettings();
-
-        $this->createAsset()->checkOut(
-            Location::factory()->create(),
-            $this->createSuperUser()->id
-        );
-
-        // Since the target is not a user with an email address we have
-        // to check if an AnonymousNotifiable was sent.
-        Notification::assertSentTo(
-            new AnonymousNotifiable,
-            CheckoutAssetNotification::class,
-            function ($notification, $channels, $notifiable) {
-                return $notifiable->routes['slack'] === Setting::getSettings()->webhook_endpoint;
-            }
-        );
-    }
-
-    public function testDoesNotSendNotificationViaWebhookIfWebHookEndpointIsNotSetWhenCheckingOutAssetToLocation()
-    {
-        Notification::fake();
-
-        $this->createAsset()->checkOut(
-            Location::factory()->create(),
-            $this->createSuperUser()->id
-        );
-
-        Notification::assertNotSentTo(
-            new AnonymousNotifiable,
-            CheckoutAssetNotification::class,
-        );
-    }
-
-    private function enableWebhookSettings()
-    {
         Setting::factory()->withWebhookEnabled()->create();
+
+        $this->createAsset()->checkOut(
+            $checkoutTarget(),
+            User::factory()->superuser()->create()->id
+        );
+
+        Notification::assertSentTo(
+            new AnonymousNotifiable,
+            CheckoutAssetNotification::class,
+            function ($notification, $channels, $notifiable) {
+                return $notifiable->routes['slack'] === Setting::getSettings()->webhook_endpoint;
+            }
+        );
+    }
+
+    /** @dataProvider checkoutTargets */
+    public function testWebhookNotificationsAreNotSentOnAssetCheckoutWhenWebhookSettingNotEnabled($checkoutTarget)
+    {
+        Notification::fake();
+
+        $this->createAsset()->checkOut(
+            $checkoutTarget(),
+            User::factory()->superuser()->create()->id
+        );
+
+        Notification::assertNotSentTo(new AnonymousNotifiable, CheckoutAssetNotification::class);
     }
 
     private function createAsset()
@@ -119,13 +62,4 @@ class AssetCheckoutWebhookNotificationTest extends TestCase
         return Asset::factory()->laptopMbp()->create();
     }
 
-    private function createUser()
-    {
-        return User::factory()->create();
-    }
-
-    private function createSuperUser()
-    {
-        return User::factory()->superuser()->create();
-    }
 }
