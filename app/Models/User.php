@@ -272,7 +272,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
         // At this point the endpoint is the same for everything.
         //  In the future this may want to be adapted for individual notifications.
-        $this->endpoint = \App\Models\Setting::getSettings()->slack_endpoint;
+        $this->endpoint = \App\Models\Setting::getSettings()->webhook_endpoint;
 
         return $this->endpoint;
     }
