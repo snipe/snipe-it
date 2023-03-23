@@ -16,7 +16,7 @@ use App\Models\User;
 use Auth;
 use Carbon\Carbon;
 use DB;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;

@@ -45,7 +45,7 @@ return [
     'bulk_edit'             => 'Bulk Edit',
     'bulk_delete'           => 'Bulk Delete',
     'bulk_actions'          => 'Bulk Actions',
-    'bulk_checkin_delete'   => 'Bulk Checkin Items from Users',
+    'bulk_checkin_delete'   => 'Bulk Checkin / Delete Users',
     'byod'                  => 'BYOD',
     'byod_help'             => 'This device is owned by the user',
     'bystatus'              => 'by Status',
@@ -410,7 +410,16 @@ return [
     'true'                  => 'True',
     'false'                 => 'False',
     'integration_option'    => 'Integration Option',
-
+    'log_does_not_exist'    => 'No matching log record exists.',
+    'merge_users'           => 'Merge Users',
+    'merge_information' =>  'This will merge the :count users into a single user. Select the user you wish to merge the others into below, and the associated assets, licences, etc will be moved over to the selected user and the other users will be marked as deleted.',
+    'warning_merge_information' => 'This action CANNOT be undone and should ONLY be used when you need to merge users because of a bad import or sync. Be sure to run a backup first.',
+    'no_users_selected'     => 'No users selected',
+    'not_enough_users_selected'     => 'At least :count users must be selected',
+    'merge_success'         => ':count users merged successfully into :into_username!',
+    'merged'                => 'merged',
+    'merged_log_this_user_into' => 'Merged this user (ID :to_id - :to_username) into user ID :from_id (:from_username) ',
+    'merged_log_this_user_from' => 'Merged user ID :from_id (:from_username) into this user (ID :to_id - :to_username)',
 
 
 ];
