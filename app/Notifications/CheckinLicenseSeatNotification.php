@@ -41,7 +41,7 @@ class CheckinLicenseSeatNotification extends Notification
     {
         $notifyBy = [];
 
-        if (Setting::getSettings()->slack_endpoint != '') {
+        if (Setting::getSettings()->webhook_endpoint != '') {
             $notifyBy[] = 'slack';
         }
 
@@ -62,7 +62,7 @@ class CheckinLicenseSeatNotification extends Notification
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
-        $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot';
+        $botname = ($this->settings->webhook_botname) ? $this->settings->webhook_botname : 'Snipe-Bot';
 
         if ($admin) {
             $fields = [
