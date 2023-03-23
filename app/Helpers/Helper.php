@@ -334,7 +334,11 @@ class Helper
             '#92896B',
         ];
 
+        $total_colors = count($colors);
 
+        if ($index >= $total_colors) {
+            $index = $index - $total_colors;
+        }
 
         return $colors[$index];
     }
