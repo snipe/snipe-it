@@ -200,11 +200,11 @@ abstract class Importer
         $val = $default;
         $key = $this->lookupCustomKey($key);
 
-        $this->log("Custom Key: ${key}");
+        //$this->log("Custom Key: ${key}");
         if (array_key_exists($key, $array)) {
             $val = Encoding::toUTF8(trim($array[$key]));
         }
-        $this->log("${key}: ${val}");
+        //$this->log("${key}: ${val}");
         return $val;
     }
 
@@ -284,63 +284,94 @@ abstract class Importer
      */
     protected function createOrFetchUser($row)
     {
+
+        //dd($row);
+        $full_name = '';
+        $username = '';
+
+        // See if we're dealing with a manager's username or a user's username
+        if  (!empty($this->findCsvMatch($row, 'username'))) {
+            \Log::debug('username was found!');
+            $username = $this->findCsvMatch($row, 'username');
+
+        } elseif (!empty($this->findCsvMatch($row, 'manager_username'))) {
+            \Log::debug('manager username was found!');
+            $username = $this->findCsvMatch($row, 'manager_username');
+        }
+
+        if  (!empty($this->findCsvMatch($row, 'first_name'))) {
+            \Log::debug('first_name was found!');
+            $first_name = $this->findCsvMatch($row, 'first_name');
+
+        } elseif (!empty($this->findCsvMatch($row, 'manager_first_name'))) {
+            \Log::debug('manager first_name was found!');
+            $first_name = $this->findCsvMatch($row, 'manager_first_name');
+        }
+
+        if  (!empty($this->findCsvMatch($row, 'last_name'))) {
+            \Log::debug('first_name was found!');
+            $last_name = $this->findCsvMatch($row, 'last_name');
+
+        } elseif (!empty($this->findCsvMatch($row, 'manager_last_name'))) {
+            \Log::debug('manager first_name was found!');
+            $last_name = $this->findCsvMatch($row, 'manager_last_name');
+        }
+
+        $user_formatted_array = User::generateFormattedNameFromFullName($full_name, Setting::getSettings()->username_format);
+
+
+        // See if we're dealing with a manager's full name or a user's full name
+        if (!empty($this->findCsvMatch($row, 'full_name'))) {
+            \Log::debug('name was found!');
+            $full_name = $this->findCsvMatch($row, 'full_name');
+
+        } elseif (!empty($this->findCsvMatch($row, 'manager_name')!='')) {
+            \Log::debug('manager name was found!');
+            $full_name = $this->findCsvMatch($row, 'manager_name');
+
+        }
+
+        // we don't have enough info to find or create a user
+        if ((empty($username) && empty($full_name))) {
+            \Log::debug('Insufficient user data provided (Full name or username is required)- skipping user creation');
+            \Log::debug('Username: '.$username);
+            \Log::debug('Fullname: '.$full_name);
+            return false;
+        }
+
+
+
+        // Maybe we got lucky and there's a matching username
+        if ($user = User::where('username', $username)->first()) {
+            return $user;
+        // No matching user by username, try on the name
+        } else {
+            $user = User::where('first_name', $user_formatted_array['first_name'])->where('last_name', $user_formatted_array['last_name'])->first();
+        }
+
         $user_array = [
-            'full_name' => $this->findCsvMatch($row, 'full_name'),
+            'full_name' => $full_name,
+            'first_name' => ($first_name) ? $first_name : $user_formatted_array['first_name'],
+            'last_name' => ($last_name) ? $last_name : $user_formatted_array['last_name'],
             'email'     => $this->findCsvMatch($row, 'email'),
-            'username'  => $this->findCsvMatch($row, 'username'),
+            'username' =>  $username,
             'activated'  => $this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')),
-            'remote'    => $this->fetchHumanBoolean(($this->findCsvMatch($row, 'remote'))),
-            'vip'    => $this->fetchHumanBoolean(($this->findCsvMatch($row, 'vip'))),
+            'remote'    => $this->fetchHumanBoolean($this->findCsvMatch($row, 'remote')),
+            'vip'    => $this->fetchHumanBoolean($this->findCsvMatch($row, 'vip')),
         ];
 
         // Maybe we're lucky and the user already exists.
         if ($user = User::where('username', $user_array['username'])->first()) {
             $this->log('User '.$user_array['username'].' already exists');
-
             return $user;
         }
 
-        // If the full name is empty, bail out--we need this to extract first name (at the very least)
-        if (empty($user_array['full_name'])) {
-            $this->log('Insufficient user data provided (Full name is required)- skipping user creation');
-
-            return false;
-        }
-
-        // Is the user actually an ID?
+        // Is the user name actually an ID?
         if ($user = $this->findUserByNumber($user_array['full_name'])) {
             return $user;
         }
+
         $this->log('User does not appear to be an id with number: '.$user_array['full_name'].'.  Continuing through our processes');
-
-        // Populate email if it does not exist.
-        if (empty($user_array['email'])) {
-            $user_array['email'] = User::generateEmailFromFullName($user_array['full_name']);
-        }
-
-        $user_formatted_array = User::generateFormattedNameFromFullName($user_array['full_name'], Setting::getSettings()->username_format);
-        $user_array['first_name'] = $user_formatted_array['first_name'];
-        $user_array['last_name'] = $user_formatted_array['last_name'];
-
-        if (empty($user_array['username'])) {
-            $user_array['username'] = $user_formatted_array['username'];
-            if ($this->usernameFormat == 'email') {
-                $user_array['username'] = $user_array['email'];
-            }
-        }
-
-        // Does this ever actually fire??
-        // Check for a matching user after trying to guess username.
-        if ($user = User::where('username', $user_array['username'])->first()) {
-            $this->log('User '.$user_array['username'].' already exists');
-
-            return $user;
-        }
-
-        // If at this point we have not found a username or first name, bail out in shame.
-        if (empty($user_array['username']) || empty($user_array['first_name'])) {
-            return false;
-        }
 
         // No Luck, let's create one.
         $user = new User;
@@ -351,13 +382,13 @@ abstract class Importer
         $user->manager_id = $user_array['manager_id'] ?? null;
         $user->department_id = $user_array['department_id'] ?? null;
         $user->activated = 1;
+        $user->created_by = \Auth::user()->id;
         $user->password = $this->tempPassword;
 
         \Log::debug('Creating a user with the following attributes: '.print_r($user_array, true));
 
         if ($user->save()) {
             $this->log('User '.$user_array['username'].' created');
-
             return $user;
         }
         $this->logError($user, 'User "'.$user_array['username'].'" was not able to be created.');

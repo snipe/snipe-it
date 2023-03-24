@@ -95,7 +95,6 @@ class ItemImporter extends Importer
         // TODO: Merge these methods.
         $this->item['checkout_class'] = $this->findCsvMatch($row, 'checkout_class');
         if (get_class($this) !== UserImporter::class) {
-            // $this->item["user"] = $this->createOrFetchUser($row);
             $this->item['checkout_target'] = $this->determineCheckout($row);
         }
     }

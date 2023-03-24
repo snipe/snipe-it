@@ -32,8 +32,8 @@ class LocationImporter extends ItemImporter
      * Create a location if a duplicate does not exist.
      * @todo Investigate how this should interact with Importer::createLocationIfNotExists
      *
-     * @author Daniel Melzter
-     * @since 4.0
+     * @author A. Gianotto
+     * @since 6.1.0
      * @param array $row
      */
     public function createLocationIfNotExists(array $row)
@@ -48,12 +48,13 @@ class LocationImporter extends ItemImporter
         $this->item['currency'] = $this->findCsvMatch($row, 'currency');
         $this->item['ldap_ou'] = $this->findCsvMatch($row, 'ldap_ou');
         $this->item['parent_id'] = $this->createOrFetchLocation($this->findCsvMatch($row, 'parent_location'));
-        $this->item['user_id'] = $this->user_id;
-        $this->item['manager_id'] = $this->fetchManager($row);
+        $this->item['user_id'] = \Auth::user()->id;
+        $this->item['manager_id'] = $this->createOrFetchUser($row);
 
         $location = Location::where('name', $this->item['name'])->first();
 
 
+        // Location exists
         if ($location) {
 
             $this->log('A matching Location '.$this->item['name'].' already exists.  ');
@@ -65,25 +66,29 @@ class LocationImporter extends ItemImporter
 
             $this->log('Updating Location from CSV import');
             $location->update($this->sanitizeItemForUpdating($location));
-            $location->save();
+            //$location->save();
             return;
 
+        // Location does not exist
         } else {
 
             $this->log('No matching location, creating one');
             $location = new Location();
+            //dd($location);
             $location->fill($this->sanitizeItemForStoring($location));
-        }
 
+            if ($location->save()) {
+                $this->log('Location '.$location->name.' created from CSV import');
+                return $location;
+            }
 
-        if ($location->save()) {
-            $this->log('Location '.$this->item['name'].' created from CSV import');
-            $location = null;
-            $this->item = null;
+            $this->logError($location, 'Location');
             return;
         }
 
-        $this->logError($location, 'Location');
-        return;
+
+
+
+
     }
 }

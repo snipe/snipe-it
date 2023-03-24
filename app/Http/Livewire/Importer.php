@@ -140,8 +140,10 @@ class Importer extends Component
         'zip' => 'Postal Code',
         'currency' => 'Currency',
         'ldap_ou' => 'LDAP OU',
-        'username' => 'Manager Username',
-        'manager' => 'Manager',
+        'manager_username' => 'Manager Username',
+        'manager_name' => 'Manager',
+        'manager_first_name' => 'Manager First Name',
+        'manager_last_name' => 'Manager Last Name',
         'parent_location' => 'Parent Location',
     ];
 
@@ -190,11 +192,15 @@ class Importer extends Component
                 'Parent',
                 'Parent Location',
             ],
-        'manager' =>
+        'manager_name' =>
             [
                 'Managed By',
                 'Manager Name',
                 'Manager Full Name',
+            ],
+        'manager_username' =>
+            [
+                'Manager Username',
             ],
 
 
