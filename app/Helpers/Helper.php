@@ -532,20 +532,23 @@ class Helper
      * @since [v2.5]
      * @return array
      */
-    public static function categoryTypeList()
+    public static function categoryTypeList($selection=null)
     {
         $category_types = [
             '' => '',
-            'accessory' => 'Accessory',
-            'asset' => 'Asset',
-            'consumable' => 'Consumable',
-            'component' => 'Component',
-            'license' => 'License',
+            'accessory' => trans('general.accessory'),
+            'asset' => trans('general.asset'),
+            'consumable' => trans('general.consumable'),
+            'component' => trans('general.component'),
+            'license' => trans('general.license'),
         ];
 
+        if($selection != null){
+            return $category_types[$selection];
+        }
+        else
         return $category_types;
     }
-
     /**
      * Get the list of custom fields in an array to make a dropdown menu
      *
