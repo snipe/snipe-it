@@ -353,7 +353,7 @@
                     }).done( function (body) {
                         // Success
                         @this.statusType="success";
-                        @this.statusText = {{ trans('general.success_redirecting') }};
+                        @this.statusText = "{{ trans('general.success_redirecting') }}";
                         // console.dir(body)
                         window.location.href = body.messages.redirect_url;
                     }).fail( function (jqXHR, textStatus, error) {
