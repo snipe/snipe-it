@@ -38,13 +38,7 @@ class CheckoutableListener
         // @todo: get sent for models that don't have email addresses associated...
         if (Setting::getSettings() && Setting::getSettings()->webhook_endpoint) {
             Notification::route('slack', Setting::getSettings()->webhook_endpoint)
-                ->notify(new CheckoutAssetNotification(
-                        $event->checkoutable,
-                        $event->checkedOutTo,
-                        $event->checkedOutBy,
-                        null,
-                        $event->note)
-                );
+                ->notify($this->getCheckoutNotification($event));
         }
 
         /**
@@ -53,6 +47,7 @@ class CheckoutableListener
         $acceptance = $this->getCheckoutAcceptance($event);       
 
         try {
+            // @todo: wrap notification above in this try
             if (! $event->checkedOutTo->locale) {
                 Notification::locale(Setting::getSettings()->locale)->send(
                     $this->getNotifiables($event),
@@ -190,10 +185,10 @@ class CheckoutableListener
      * Get the appropriate notification for the event
      * 
      * @param  CheckoutableCheckedIn $event 
-     * @param  CheckoutAcceptance $acceptance 
+     * @param  CheckoutAcceptance $acceptance
      * @return Notification
      */
-    private function getCheckoutNotification($event, $acceptance)
+    private function getCheckoutNotification($event, $acceptance = null)
     {
         $notificationClass = null;
 
