@@ -78,6 +78,8 @@ abstract class Importer
         'manager_last_name' => 'manager last name',
         'min_amt' => 'minimum quantity',
         'remote' => 'remote',
+        'vip' => 'VIP',
+        'address2' => 'address2',
     ];
     /**
      * Map of item fields->csv names
@@ -119,7 +121,7 @@ abstract class Importer
         } else {
             $this->csv = Reader::createFromString($file);
         }
-        $this->tempPassword = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 20);
+        $this->tempPassword = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 40);
     }
 
     // Cached Values for import lookups
@@ -285,11 +287,10 @@ abstract class Importer
         $user_array = [
             'full_name' => $this->findCsvMatch($row, 'full_name'),
             'email'     => $this->findCsvMatch($row, 'email'),
-            'manager_id'=>  '',
-            'department_id' =>  '',
             'username'  => $this->findCsvMatch($row, 'username'),
             'activated'  => $this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')),
             'remote'    => $this->fetchHumanBoolean(($this->findCsvMatch($row, 'remote'))),
+            'vip'    => $this->fetchHumanBoolean(($this->findCsvMatch($row, 'vip'))),
         ];
 
         // Maybe we're lucky and the user already exists.
@@ -301,7 +302,7 @@ abstract class Importer
 
         // If the full name is empty, bail out--we need this to extract first name (at the very least)
         if (empty($user_array['full_name'])) {
-            $this->log('Insufficient user data provided (Full name is required)- skipping user creation, just adding asset');
+            $this->log('Insufficient user data provided (Full name is required)- skipping user creation');
 
             return false;
         }
@@ -516,16 +517,17 @@ abstract class Importer
      * @param $user_manager string
      * @return int id of company created/found
      */
-    public function fetchManager($user_manager_first_name, $user_manager_last_name)
+    public function fetchManager($manager_first_name, $manager_last_name)
     {
-        $manager = User::where('first_name', '=', $user_manager_first_name)
-            ->where('last_name', '=', $user_manager_last_name)->first();
-        if ($manager) {
-            $this->log('A matching Manager '.$user_manager_first_name.' '.$user_manager_last_name.' already exists');
+        $manager = User::where('first_name', '=', $manager_first_name)
+            ->where('last_name', '=', $manager_last_name)->first();
 
+        if ($manager) {
+            $this->log('A matching Manager '.$manager_first_name.' '.$manager_last_name.' already exists');
             return $manager->id;
         }
-        $this->log('No matching Manager '.$user_manager_first_name.' '.$user_manager_last_name.' found. If their user account is being created through this import, you should re-process this file again. ');
+
+        $this->log('No matching Manager '.$manager_first_name.' '.$manager_last_name.' found. If their user account is being created through this import, you should re-process this file again. ');
 
         return null;
     }

@@ -116,8 +116,8 @@ class Importer extends Component
     static $users = [
         'employee_num' => 'Employee Number',
         'first_name' => 'First Name',
-        'jobtitle' => 'Job Title',
         'last_name' => 'Last Name',
+        'jobtitle' => 'Job Title',
         'phone_number' => 'Phone Number',
         'manager_first_name' => 'Manager First Name',
         'manager_last_name' => 'Manager Last Name',
@@ -126,7 +126,23 @@ class Importer extends Component
         'city' => 'City',
         'state' => 'State',
         'country' => 'Country',
+        'zip' => 'Postal Code',
         'vip' => 'VIP'
+    ];
+
+    static $locations = [
+        'name' => 'Name',
+        'address' => 'Address',
+        'address2' => 'Address 2',
+        'city' => 'City',
+        'state' => 'State',
+        'country' => 'Country',
+        'zip' => 'Postal Code',
+        'currency' => 'Currency',
+        'ldap_ou' => 'LDAP OU',
+        'username' => 'Manager Username',
+        'manager' => 'Manager',
+        'parent_location' => 'Parent Location',
     ];
 
     //array of "real fieldnames" to a list of aliases for that field
@@ -159,6 +175,27 @@ class Importer extends Component
             [
                 'Next Audit',
             ],
+        'address2' =>
+            [
+                'Address 2',
+                'Address2',
+            ],
+        'ldap_ou' =>
+            [
+                'LDAP OU',
+                'OU',
+            ],
+        'parent_location' =>
+            [
+                'Parent',
+                'Parent Location',
+            ],
+        'manager' =>
+            [
+                'Managed By',
+                'Manager Name',
+                'Manager Full Name',
+            ],
 
 
     ];
@@ -181,6 +218,9 @@ class Importer extends Component
             case 'user':
                 $results = self::$general + self::$users;
                 break;
+            case 'location':
+                $results = self::$general + self::$locations;
+                break;
             default:
                 $results = self::$general;
         }
@@ -198,8 +238,8 @@ class Importer extends Component
     public function updating($name, $new_import_type)
     {
         if ($name == "activeFile.import_type") {
-            \Log::info("WE ARE CHANGING THE import_type!!!!! TO: " . $new_import_type);
-            \Log::info("so, what's \$this->>field_map at?: " . print_r($this->field_map, true));
+            \Log::debug("CHANGING THE import_type to : " . $new_import_type);
+            \Log::debug("so, what's \$this->>field_map at?: " . print_r($this->field_map, true));
             // go through each header, find a matching field to try and map it to.
             foreach ($this->activeFile->header_row as $i => $header) {
                 // do we have something mapped already?
@@ -260,6 +300,7 @@ class Importer extends Component
             'component' =>  trans('general.components'),
             'license' =>    trans('general.licenses'),
             'user' =>       trans('general.users'),
+            'location' =>    trans('general.locations'),
         ];
 
         $this->columnOptions[''] = $this->getColumns(''); //blank mode? I don't know what this is supposed to mean

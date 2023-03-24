@@ -190,6 +190,9 @@ class ImportController extends Controller
             case 'license':
                 $redirectTo = 'licenses.index';
                 break;
+            case 'location':
+                $redirectTo = 'locations.index';
+                break;
             case 'user':
                 $redirectTo = 'users.index';
                 break;

@@ -29,8 +29,8 @@ class LocationImporter extends ItemImporter
     }
 
     /**
-     * Create a user if a duplicate does not exist.
-     * @todo Investigate how this should interact with Importer::createOrFetchUser
+     * Create a location if a duplicate does not exist.
+     * @todo Investigate how this should interact with Importer::createLocationIfNotExists
      *
      * @author Daniel Melzter
      * @since 4.0
@@ -47,20 +47,32 @@ class LocationImporter extends ItemImporter
         $this->item['zip'] = $this->findCsvMatch($row, 'zip');
         $this->item['currency'] = $this->findCsvMatch($row, 'currency');
         $this->item['ldap_ou'] = $this->findCsvMatch($row, 'ldap_ou');
+        $this->item['parent_id'] = $this->createOrFetchLocation($this->findCsvMatch($row, 'parent_location'));
+        $this->item['user_id'] = $this->user_id;
+        $this->item['manager_id'] = $this->fetchManager($row);
 
         $location = Location::where('name', $this->item['name'])->first();
-        
-        if ($location) {
-            if (! $this->updating) {
-                $this->log('A matching Location '.$this->item['name'].' already exists.  ');
-                \Log::debug('A matching Location '.$this->item['name'].' already exists.  ');
 
+
+        if ($location) {
+
+            $this->log('A matching Location '.$this->item['name'].' already exists.  ');
+            \Log::debug('A matching Location '.$this->item['name'].' already exists.  ');
+
+            if (! $this->updating) {
                 return;
             }
+
             $this->log('Updating Location from CSV import');
             $location->update($this->sanitizeItemForUpdating($location));
             $location->save();
             return;
+
+        } else {
+
+            $this->log('No matching location, creating one');
+            $location = new Location();
+            $location->fill($this->sanitizeItemForStoring($location));
         }
 
 

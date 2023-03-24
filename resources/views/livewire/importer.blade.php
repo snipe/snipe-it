@@ -183,7 +183,7 @@
 
                                                             @if ($statusText)
                                                                 <div class="form-group">
-                                                                    <div class="alert col-md-8 col-md-offset-2 {{ $statusType == 'success' ? 'alert-success' : ($statusType == 'error' ? 'alert-danger' : 'alert-info') }}" style="text-align:left">
+                                                                    <div class="alert col-md-6 col-md-offset-2 {{ $statusType == 'success' ? 'alert-success' : ($statusType == 'error' ? 'alert-danger' : 'alert-info') }}" style="text-align:left">
                                                                         {{ $statusText }}
                                                                     </div><!-- /alert -->
                                                                 </div>
@@ -248,7 +248,7 @@
                                                                 </div>
 
                                                                 @if($statusText)
-                                                                    <div class="alert col-md-12 col-md-offset-2 {{ $statusType == 'success' ? 'alert-success' : ($statusType == 'error' ? 'alert-danger' : 'alert-info') }}" style="padding-top: 20px;">
+                                                                    <div class="alert col-md-8 col-md-offset-2 {{ $statusType == 'success' ? 'alert-success' : ($statusType == 'error' ? 'alert-danger' : 'alert-info') }}" style="padding-top: 20px;">
                                                                         {{ $statusText }}
                                                                     </div>
                                                                 @endif
