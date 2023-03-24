@@ -536,7 +536,7 @@ class Helper
     {
         $category_types = [
             '' => '',
-            'accessory' => trans('general.accessories'),
+            'accessory' => trans('general.accessory'),
             'asset' => trans('general.asset'),
             'consumable' => trans('general.consumable'),
             'component' => trans('general.component'),
