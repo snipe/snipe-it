@@ -61,5 +61,4 @@ class AssetCheckoutWebhookNotificationTest extends TestCase
     {
         return Asset::factory()->laptopMbp()->create();
     }
-
 }
