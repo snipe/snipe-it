@@ -3,8 +3,6 @@
 namespace App\Importer;
 
 use App\Models\Location;
-use App\Models\Setting;
-use App\Models\User;
 
 /**
  * This is ONLY used for the User Import. When we are importing users
@@ -38,56 +36,53 @@ class LocationImporter extends ItemImporter
      */
     public function createLocationIfNotExists(array $row)
     {
+        //print_r($row);
+
         // Pull the records from the CSV to determine their values
         $this->item['name'] = $this->findCsvMatch($row, 'name');
         $this->item['address'] = $this->findCsvMatch($row, 'address');
         $this->item['address2'] = $this->findCsvMatch($row, 'address2');
         $this->item['city'] = $this->findCsvMatch($row, 'city');
         $this->item['state'] = $this->findCsvMatch($row, 'state');
+        $this->item['country'] = $this->findCsvMatch($row, 'country');
         $this->item['zip'] = $this->findCsvMatch($row, 'zip');
         $this->item['currency'] = $this->findCsvMatch($row, 'currency');
         $this->item['ldap_ou'] = $this->findCsvMatch($row, 'ldap_ou');
-        $this->item['parent_id'] = $this->createOrFetchLocation($this->findCsvMatch($row, 'parent_location'));
         $this->item['user_id'] = \Auth::user()->id;
-        $this->item['manager_id'] = $this->createOrFetchUser($row);
 
-        $location = Location::where('name', $this->item['name'])->first();
+        if ($this->findCsvMatch($row, 'parent_location')) {
+            $this->item['parent_id'] = $this->createOrFetchLocation($this->findCsvMatch($row, 'parent_location'));
+        }
+
+        foreach ($this->item as $key => $value) {
+            \Log::debug($key .' => '.$value);
+        }
+
+        $this->item['manager_id'] = $this->createOrFetchUser($row)->id;
+
+        $location = Location::where('name', '=', $this->findCsvMatch($row, 'name'))->first();
 
 
         // Location exists
-        if ($location) {
-
-            $this->log('A matching Location '.$this->item['name'].' already exists.  ');
-            \Log::debug('A matching Location '.$this->item['name'].' already exists.  ');
-
-            if (! $this->updating) {
-                return;
-            }
-
+        if (($location) && ($location->count() > 0)) {
+            \Log::debug('A matching Location '.$this->item['name'].' already exists.');
             $this->log('Updating Location from CSV import');
-            $location->update($this->sanitizeItemForUpdating($location));
-            //$location->save();
-            return;
-
+            $location->update($this->sanitizeItemForStoring($location));
         // Location does not exist
         } else {
-
-            $this->log('No matching location, creating one');
+            $this->log('No matching location ('.$this->item['name'].'), creating one');
             $location = new Location();
-            //dd($location);
             $location->fill($this->sanitizeItemForStoring($location));
-
-            if ($location->save()) {
-                $this->log('Location '.$location->name.' created from CSV import');
-                return $location;
-            }
-
-            $this->logError($location, 'Location');
-            return;
         }
 
+        if ($location->save()) {
+            $this->log('Location '.$location->name.' created from CSV import');
+            return $location;
 
-
+        } else {
+            \Log::debug($location->getErrors());
+            return $location->errors;
+        }
 
 
     }

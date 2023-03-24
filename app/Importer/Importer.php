@@ -291,29 +291,23 @@ abstract class Importer
 
         // See if we're dealing with a manager's username or a user's username
         if  (!empty($this->findCsvMatch($row, 'username'))) {
-            \Log::debug('username was found!');
             $username = $this->findCsvMatch($row, 'username');
 
         } elseif (!empty($this->findCsvMatch($row, 'manager_username'))) {
-            \Log::debug('manager username was found!');
             $username = $this->findCsvMatch($row, 'manager_username');
         }
 
         if  (!empty($this->findCsvMatch($row, 'first_name'))) {
-            \Log::debug('first_name was found!');
             $first_name = $this->findCsvMatch($row, 'first_name');
 
         } elseif (!empty($this->findCsvMatch($row, 'manager_first_name'))) {
-            \Log::debug('manager first_name was found!');
             $first_name = $this->findCsvMatch($row, 'manager_first_name');
         }
 
         if  (!empty($this->findCsvMatch($row, 'last_name'))) {
-            \Log::debug('first_name was found!');
             $last_name = $this->findCsvMatch($row, 'last_name');
 
         } elseif (!empty($this->findCsvMatch($row, 'manager_last_name'))) {
-            \Log::debug('manager first_name was found!');
             $last_name = $this->findCsvMatch($row, 'manager_last_name');
         }
 

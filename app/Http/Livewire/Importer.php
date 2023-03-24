@@ -51,8 +51,6 @@ class Importer extends Component
 
     public function generate_field_map()
     {
-        \Log::debug("header row is: ".print_r($this->activeFile->header_row,true));
-        \Log::debug("Field map is: ".print_r($this->field_map,true));
         $tmp = array_combine($this->activeFile->header_row, $this->field_map);
         return json_encode(array_filter($tmp));
     }
@@ -127,7 +125,8 @@ class Importer extends Component
         'state' => 'State',
         'country' => 'Country',
         'zip' => 'Postal Code',
-        'vip' => 'VIP'
+        'vip' => 'VIP',
+        'remote' => 'Remote'
     ];
 
     static $locations = [
@@ -244,8 +243,7 @@ class Importer extends Component
     public function updating($name, $new_import_type)
     {
         if ($name == "activeFile.import_type") {
-            \Log::debug("CHANGING THE import_type to : " . $new_import_type);
-            \Log::debug("so, what's \$this->>field_map at?: " . print_r($this->field_map, true));
+
             // go through each header, find a matching field to try and map it to.
             foreach ($this->activeFile->header_row as $i => $header) {
                 // do we have something mapped already?
@@ -298,7 +296,6 @@ class Importer extends Component
         $this->authorize('import');
         $this->progress = -1; // '-1' means 'don't show the progressbar'
         $this->progress_bar_class = 'progress-bar-warning';
-        \Log::info("Hey, we are calling MOUNT (in the importer-file) !!!!!!!!"); //fcuk
         $this->importTypes = [
             'asset' =>      trans('general.assets'),
             'accessory' =>  trans('general.accessories'),
@@ -331,7 +328,6 @@ class Importer extends Component
                 $this->field_map[] = null; // re-inject the 'nulls' if a file was imported with some 'Do Not Import' settings
             }
         }
-        //$this->field_map = $this->activeFile->field_map ? array_values($this->activeFile->field_map) : []; // this is wrong
         $this->file_id = $id;
         $this->import_errors = null;
         $this->statusText = null;
