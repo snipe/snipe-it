@@ -13,7 +13,6 @@ use Tests\TestCase;
 
 class AssetCheckoutWebhookNotificationTest extends TestCase
 {
-
     public function checkoutTargets()
     {
         return [

@@ -29,18 +29,12 @@ class LicenseCheckoutWebhookNotificationTest extends TestCase
 
         Setting::factory()->withWebhookEnabled()->create();
 
-        $checkoutTarget = $checkoutTarget();
-        
-        $licenseSeat = LicenseSeat::factory()->create();
-
-        // @todo: this has to go through the LicenseCheckoutController::store() method
-        // @todo: to have the CheckoutableCheckedOut fire...
-        // @todo: either change this to go through controller
-        // @todo: or move that functionality to the model?
-        // $licenseSeat->checkOut(
-        //     $checkoutTarget,
-        //     User::factory()->superuser()->create()->id
-        // );
+        event(new CheckoutableCheckedOut(
+            LicenseSeat::factory()->create(),
+            $checkoutTarget(),
+            User::factory()->superuser()->create(),
+            ''
+        ));
 
         Notification::assertSentTo(
             new AnonymousNotifiable,
