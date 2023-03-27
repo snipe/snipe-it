@@ -366,6 +366,7 @@ return [
         'Image'     => Intervention\Image\ImageServiceProvider::class,
         'Carbon' => Carbon\Carbon::class,
         'Helper' => App\Helpers\Helper::class, // makes it much easier to use 'Helper::blah' in blades (which is where we usually use this)
+        'SnipeLog' => App\Services\SnipeLog\SnipeLogFacade::class, 
 
 
     ],
