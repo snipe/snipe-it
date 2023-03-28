@@ -70,6 +70,7 @@ Since the release of the JSON REST API, several third-party developers have been
 - [WWW::SnipeIT](https://github.com/SEDC/perl-www-snipeit) by [@SEDC](https://github.com/SEDC) - perl module for accessing the API
 - [UniFi to Snipe-IT](https://github.com/RodneyLeeBrands/UnifiSnipeSync) by [@karpadiem](https://github.com/karpadiem) - Python script that synchronizes UniFi devices with Snipe-IT.
 - [Kandji2Snipe](https://github.com/grokability/kandji2snipe) by [@briangoldstein](https://github.com/briangoldstein) - Python script that synchronizes Kandji with Snipe-IT.
+- [SnipeAgent](https://github.com/ReticentRobot/SnipeAgent) by @ReticentRobot - Windows agent for Snipe-IT
                                                      
 As these were created by third-parties, Snipe-IT cannot provide support for these project, and you should contact the developers directly if you need assistance. Additionally, Snipe-IT makes no guarantees as to the reliability, accuracy or maintainability of these libraries. Use at your own risk. :)
 
