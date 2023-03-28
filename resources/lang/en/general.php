@@ -433,4 +433,7 @@ return [
     'errors_importing'          => 'Some Errors occurred while importing: ',
     'warning'                   => 'WARNING: :warning',
     'success_redirecting'       => '"Success... Redirecting.',
+    'setup_successful_migrations' => 'Your database tables have been created',
+    'setup_migration_output' => 'Migration output:',
+    'setup_migration_create_user' => 'Next: Create User',
 ];
