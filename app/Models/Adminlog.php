@@ -30,6 +30,12 @@ class AdminLog extends SnipeModel
         return $this;
     }
    
+    public function actor(User $user)
+    {
+       $this->user_id = $user->id; 
+       return $this;
+    }
+   
     public function __destruct()
     {
        ray()->clearAll(); 

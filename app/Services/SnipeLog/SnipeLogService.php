@@ -16,16 +16,16 @@ class SnipeLogService
         return new Actionlog();
     }
 
-    public function admin(string $type = null)
+    public function admin(string $actionType = null)
     {
         $adminLog = new AdminLog();
-        $adminLog->actionType($type);
+        $adminLog->actionType($actionType);
         return $adminLog;
     }
    
-    public function actionType(string $type)
-    {
-        $this->actionType = $type;
-        return $this;
-    }
+    // public function actionType(string $type)
+    // {
+    //     $this->actionType = $type;
+    //     return $this;
+    // }
 }
