@@ -32,7 +32,7 @@
 
 @section('button')
   <form action="{{ route('setup.user') }}" method="GET">
-    <button class="btn btn-primary">{{ trans('general.setup_migrations_create_user') }}</button>
+    <button class="btn btn-primary">{{ trans('general.setup_migration_create_user') }}</button>
   </form>
 @parent
 @stop
