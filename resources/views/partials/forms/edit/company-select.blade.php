@@ -4,11 +4,7 @@
     <div class="form-group">
     {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
         <div class="col-md-6">
-            @if($multiple== true)
-                 <select class="js-data-ajax"  disabled="true" data-endpoint="companies" data-placeholder="{{ trans('general.select_company') }}" name="{{ $fieldname }}" style="width: 100%" id="company_select" aria-label="{{ $fieldname }}" multiple>
-            @else
-                 <select class="js-data-ajax"  disabled="true" data-endpoint="companies" data-placeholder="{{ trans('general.select_company') }}" name="{{ $fieldname }}" style="width: 100%" id="company_select" aria-label="{{ $fieldname }}">
-             @endif
+                 <select class="js-data-ajax"  disabled="true" data-endpoint="companies" data-placeholder="{{ trans('general.select_company') }}" name="{{ $fieldname }}" style="width: 100%" id="company_select" aria-label="{{ $fieldname }}"  {{$multiple='true' ? 'multiple': ''}}>
                      @if ($company_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                     <option value="{{ $company_id }}" selected="selected" role="option" aria-selected="true"  role="option">
                         {{ (\App\Models\Company::find($company_id)) ? \App\Models\Company::find($company_id)->name : '' }}
@@ -25,11 +21,9 @@
     <div id="{{ $fieldname }}" class="form-group{{ $errors->has($fieldname) ? ' has-error' : '' }}">
         {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
         <div class="col-md-6">
-            @if($multiple== true)
-                <select class="js-data-ajax" data-endpoint="companies" data-placeholder="{{ trans('general.select_company') }}" name="{{ $fieldname }}" style="width: 100%" id="company_select" aria-label="{{ $fieldname }}" multiple>
-            @else
-                <select class="js-data-ajax" data-endpoint="companies" data-placeholder="{{ trans('general.select_company') }}" name="{{ $fieldname }}" style="width: 100%" id="company_select">
-            @endif
+                <select class="js-data-ajax" data-endpoint="companies" data-placeholder="{{ trans('general.select_company') }}" name="{{ $fieldname }}" style="width: 100%" id="company_select" aria-label="{{ $fieldname }}"
+                        {{$multiple='true' ? 'multiple': ''}}>
+
                 @if ($company_id = Request::old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                     <option value="{{ $company_id }}" selected="selected">
                         {{ (\App\Models\Company::find($company_id)) ? \App\Models\Company::find($company_id)->name : '' }}
