@@ -113,7 +113,7 @@
 
                                                 <td>
                                                     @can('view', \App\Models\AssetModel::class)
-                                                        <a href="{{ url('/') }}'/models/'.{{ $requestableModel->id }}) }}">{{ $requestableModel->name }}</a>
+                                                        <a href="{{ route('models.show', ['model' => $requestableModel->id]) }}">{{ $requestableModel->name }}</a>
                                                     @else
                                                         {{ $requestableModel->name }}
                                                     @endcan
