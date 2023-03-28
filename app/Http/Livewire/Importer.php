@@ -198,8 +198,8 @@ class Importer extends Component
     public function updating($name, $new_import_type)
     {
         if ($name == "activeFile.import_type") {
-            \Log::info("WE ARE CHANGING THE import_type!!!!! TO: " . $new_import_type);
-            \Log::info("so, what's \$this->>field_map at?: " . print_r($this->field_map, true));
+            \Log::debug("WE ARE CHANGING THE import_type!!!!! TO: " . $new_import_type);
+            \Log::debug("so, what's \$this->>field_map at?: " . print_r($this->field_map, true));
             // go through each header, find a matching field to try and map it to.
             foreach ($this->activeFile->header_row as $i => $header) {
                 // do we have something mapped already?
@@ -252,7 +252,7 @@ class Importer extends Component
         $this->authorize('import');
         $this->progress = -1; // '-1' means 'don't show the progressbar'
         $this->progress_bar_class = 'progress-bar-warning';
-        \Log::info("Hey, we are calling MOUNT (in the importer-file) !!!!!!!!"); //fcuk
+        \Log::debug("Hey, we are calling MOUNT (in the importer-file) !!!!!!!!"); //fcuk
         $this->importTypes = [
             'asset' =>      trans('general.assets'),
             'accessory' =>  trans('general.accessories'),
@@ -273,8 +273,8 @@ class Importer extends Component
 
     public function selectFile($id)
     {
-        \Log::info("TOGGLE EVENT FIRED!");
-        \Log::error("The ID we are trying to find is AS FOLLOWS: ".$id);
+        \Log::debug("TOGGLE EVENT FIRED!");
+        \Log::debug("The ID we are trying to find is AS FOLLOWS: ".$id);
         $this->activeFile = Import::find($id);
         $this->field_map = null;
         foreach($this->activeFile->header_row as $element) {
@@ -288,7 +288,7 @@ class Importer extends Component
         $this->file_id = $id;
         $this->import_errors = null;
         $this->statusText = null;
-        \Log::error("The import type we are about to try and load up is gonna be this: ".$this->activeFile->import_type);
+        \Log::debug("The import type we are about to try and load up is gonna be this: ".$this->activeFile->import_type);
 
     }
 
