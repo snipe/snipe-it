@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\CustomField;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 use App\Models\Import;
@@ -15,6 +16,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Importer extends Component
 {
     use AuthorizesRequests;
+
+    public bool $userIsSuperUser;
 
     public $files;
 
@@ -250,6 +253,7 @@ class Importer extends Component
     public function mount()
     {
         $this->authorize('import');
+        $this->userIsSuperUser = Auth::user()->isSuperUser();
         $this->progress = -1; // '-1' means 'don't show the progressbar'
         $this->progress_bar_class = 'progress-bar-warning';
         \Log::debug("Hey, we are calling MOUNT (in the importer-file) !!!!!!!!"); //fcuk

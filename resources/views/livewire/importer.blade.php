@@ -156,6 +156,11 @@
                                                                         'data-minimum-results-for-search' => '-1', // Remove this if the list gets long enough that we need to search
                                                                         'data-livewire-component' => $_instance->id
                                                                     ]) }}
+                                                                    @if ($activeFile->import_type === 'asset' && $snipeSettings->auto_increment_assets == 0)
+                                                                        <span class="help-block">
+                                                                            Generating auto-incrementing asset tags is @if ($userIsSuperUser)<a href="{{ route('settings.asset_tags.index') }}">disabled</a> @else disabled @endif so all rows need to have the "Asset Tag" column populated.
+                                                                        </span>
+                                                                    @endif
                                                                 </div>
                                                             </div>
 
@@ -163,6 +168,11 @@
                                                                 <label for="update" class="col-md-9 col-md-offset-3 col-xs-12">
                                                                     <input type="checkbox" class="minimal livewire-icheck" name="update" data-livewire-component="{{ $_instance->id }}" wire:model="update">
                                                                     {{ trans('general.update_existing_values') }}
+                                                                    @if ($activeFile->import_type === 'asset' && $snipeSettings->auto_increment_assets == 1 && $update)
+                                                                        <span class="help-block">
+                                                                            Note: Generating auto-incrementing asset tags is @if ($userIsSuperUser)<a href="{{ route('settings.asset_tags.index') }}">disabled</a> @else enabled @endif so assets will be created for rows that do not have "Asset Tag" populated. Rows that do have "Asset Tag" populated will be updated with the provided information.
+                                                                        </span>
+                                                                    @endif
                                                                 </label>
                                                             </div>
 
@@ -344,7 +354,7 @@
                             'import-update': !!@this.update,
                             'send-welcome': !!@this.send_welcome,
                             'import-type': @this.activeFile.import_type,
-                            'run-backup': !!@this.run_backup,
+                            'A': !!@this.run_backup,
                             'column-mappings': mappings
                         }),
                         headers: {
