@@ -38,6 +38,7 @@ return [
         'success_pt1' => 'הבדיקה עברה בהצלחה! בדוק את ',
         'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
         '500' => '500 שגיאת שרת.',
-        'error' => 'משהו השתבש אופסי פופסי.',
+        'error' => 'Something went wrong. Slack responded with: :error_message',
+        'error_misc' => 'Something went wrong. :( ',
     ]
 ];

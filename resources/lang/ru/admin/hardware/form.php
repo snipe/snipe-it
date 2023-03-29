@@ -6,7 +6,7 @@ return [
   'bulk_delete_warn'	=> 'Вы собираетесь удалить :asset_count активов.',
     'bulk_update'		=> 'Редактировать выбранное',
     'bulk_update_help'	=> 'Эта форма позволяет Вам обновить несколько объектов за раз. Заполняйте только те поля, которые нужно изменить. Пустые поля останутся без изменений. ',
-    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
+    'bulk_update_warn'	=> 'Вы собираетесь отредактировать свойства одного ресурса.|Вы собираетесь отредактировать свойства :asset_count assets.',
     'checkedout_to'		=> 'Привязан к',
     'checkout_date'		=> 'Дата выдачи',
     'checkin_date'		=> 'Дата возврата',
@@ -43,9 +43,9 @@ return [
     'asset_location' => 'Обновить местоположение актива',
     'asset_location_update_default_current' => 'Обновить местоположение по умолчанию и фактическое местоположение',
     'asset_location_update_default' => 'Обновить только местоположение по умолчанию',
-    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
-    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'asset_not_deployable' => 'Этот статус актива не подлежит развертыванию. Этот актив не может быть проверен.',
+    'asset_deployable' => 'Этот статус доступен для развертывания. Этот актив может быть привязан.',
     'processing_spinner' => 'Обработка...',
     'optional_infos'  => 'Дополнительная информация',
-    'order_details'   => 'Order Related Information'
+    'order_details'   => 'Информация, связанная с заказом'
 ];

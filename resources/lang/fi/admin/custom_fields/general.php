@@ -2,7 +2,7 @@
 
 return [
     'custom_fields'		        => 'Mukautetut kentät',
-    'manage'                    => 'Manage',
+    'manage'                    => 'Hallitse',
     'field'		                => 'Kenttä',
     'about_fieldsets_title'		=> 'Tietoja kenttäsarjoista',
     'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used for specific asset model types.',
@@ -27,6 +27,9 @@ return [
     'used_by_models'   		    => 'Käytetään malleissa',
     'order'   		            => 'Tilata',
     'create_fieldset'         => 'Uusi kenttäsarja',
+    'update_fieldset'         => 'Update Fieldset',
+    'fieldset_does_not_exist'   => 'Fieldset :id does not exist',
+    'fieldset_updated'         => 'Fieldset updated',
     'create_fieldset_title' => 'Create a new fieldset',
     'create_field'            => 'Uusi mukautettu kenttä',
     'create_field_title' => 'Create a new custom field',

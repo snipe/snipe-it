@@ -42,6 +42,15 @@
                         <!-- Location -->
                         @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
 
+                        <div class="form-group">
+                            <div class=" col-md-9 col-md-offset-3">
+                                <label>
+                                    {{ Form::checkbox('null_location_id', '1', false, ['class' => 'minimal']) }}
+                                    {{ trans_choice('general.set_users_field_to_null', count($users), ['field' => trans('general.location'), 'user_count' => count($users)]) }}
+                                </label>
+                            </div>
+                        </div>
+
 
                         <!-- Company -->
                         @if (\App\Models\Company::canManageUsersCompanies())

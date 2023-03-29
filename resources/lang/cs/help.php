@@ -15,11 +15,11 @@ return [
 
     'more_info_title' => 'Více informací',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'Zaškrtnutím tohoto políčka upravíte záznam majetku tak, aby se nastavil na novou lokaci. Ponecháním nezaškrtnutého políčka bude lokace zaznamenána v auditním protokolu.<br><br>Pokud je majetek přivlastněn, nezmění se umístění osoby, majetku ani lokace.',
 
-    'assets' => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'assets' => 'Majetky jsou položky sledované sériovým nebo inventárním čísle,. Bývají u položek, které mají vyšší hodnotu a kde je důležitá identifikace.',
 
-    'categories' => 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'categories' => 'Kategorie usnadňují organizovat majetek. Takovou kategorii může být např. &quot;Desktopy&quot;, &quot;Notebooky&quot;, &quot;Mobilní telefony&quot;, &quot;Tablety&quot;, apod. Nicméně můžete použít kategorie jakýmkoli způsobem.',
 
     'accessories' => 'Příslušenství je cokoliv, co předáte uživatelům, ale nemá to sériové číslo (nebo je neevidujete), např. myš, nebo klávesnice.',
 

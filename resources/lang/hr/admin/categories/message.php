@@ -13,7 +13,8 @@ return array(
 
     'update' => array(
         'error'   => 'Kategorija nije ažurirana, pokušajte ponovo',
-        'success' => 'Kategorija je uspješno ažurirana.'
+        'success' => 'Kategorija je uspješno ažurirana.',
+        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
     ),
 
     'delete' => array(

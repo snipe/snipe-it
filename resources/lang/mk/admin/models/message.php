@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => 'Моделот не постои.',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Моделот во моментов е поврзан со едно или повеќе основни средства и не може да се избрише. Ве молиме избришете ги основните средствата, а потоа пробајте повторно да го избришете. ',
 
 

@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Este modelo foi excluído.',
     'edit'  					=> 'Editar Ativo',
     'model_deleted'  			=> 'Este modelo de Ativos foi excluído. Você deve restaurar o modelo antes de restaurar o Ativo.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Solicitável',
     'requested'				    => 'Solicitado',
     'not_requestable'           => 'Não solicitável',

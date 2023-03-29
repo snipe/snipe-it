@@ -27,6 +27,9 @@ return [
     'used_by_models'   		    => 'Usato dai Modelli',
     'order'   		            => 'Ordine',
     'create_fieldset'         => 'Nuovo Campo',
+    'update_fieldset'         => 'Update Fieldset',
+    'fieldset_does_not_exist'   => 'Fieldset :id does not exist',
+    'fieldset_updated'         => 'Fieldset updated',
     'create_fieldset_title' => 'Crea un nuovo campo',
     'create_field'            => 'Nuovo campo personalizzato',
     'create_field_title' => 'Crea un nuovo campo personalizzato',
@@ -44,6 +47,6 @@ return [
     'db_convert_warning' => 'AVVERTIMENTO. Questo campo è nella tabella dei campi personalizzati come <code>:db_column</code> ma dovrebbe essere <code>:expected</code>.',
     'is_unique' => 'Questo valore deve essere univoco per tutti i beni',
     'unique' => 'Univoco',
-    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
-    'display_in_user_view_table' => 'Visible to User',
+    'display_in_user_view' => 'Permetti all\'utente di visualizzare questi valori nella pagina Visualizza Beni Assegnati',
+    'display_in_user_view_table' => 'Visibile all\'utente',
 ];

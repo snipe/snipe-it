@@ -13,7 +13,8 @@ return array(
 
     'update' => array(
         'error'   => 'Ангилал шинэчлэгдсэнгүй, дахин оролдоно уу',
-        'success' => 'Ангилал амжилттай шинэчлэгдсэн.'
+        'success' => 'Ангилал амжилттай шинэчлэгдсэн.',
+        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
     ),
 
     'delete' => array(

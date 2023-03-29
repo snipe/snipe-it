@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => 'மாதிரி இல்லை.',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'தற்போது இந்த மாதிரி ஒன்று ஒன்று அல்லது அதற்கு மேற்பட்ட சொத்துக்களுடன் தொடர்புடையது மற்றும் நீக்கப்பட முடியாது. சொத்துக்களை நீக்கிவிட்டு மீண்டும் நீக்குவதற்கு முயற்சிக்கவும்.',
 
 

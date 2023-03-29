@@ -243,7 +243,7 @@
                                                         <i class="fas fa-circle text-green"></i>
                                                     @elseif (($asset->assetstatus) && ($asset->assetstatus->pending=='1'))
                                                         <i class="fas fa-circle text-orange"></i>
-                                                    @elseif (($asset->assetstatus) && ($asset->assetstatus->archived=='1'))
+                                                    @else
                                                         <i class="fas fa-times text-red"></i>
                                                     @endif
                                                     <a href="{{ route('statuslabels.show', $asset->assetstatus->id) }}">
@@ -595,10 +595,20 @@
                                                 {{ $asset->warranty_months }}
                                                 {{ trans('admin/hardware/form.months') }}
 
-                                                @if (($asset->serial && $asset->model->manufacturer) && $asset->model->manufacturer->name == 'Apple')
+                                                @if ($asset->serial && $asset->model->manufacturer)
+                                                    @if ((strtolower($asset->model->manufacturer->name) == "apple") || (str_starts_with(str_replace(' ','',strtolower($asset->model->manufacturer->name)),"appleinc")))
                                                     <a href="https://checkcoverage.apple.com/us/{{ \App\Models\Setting::getSettings()->locale  }}/?sn={{ $asset->serial }}" target="_blank">
-                                                        <i class="fa-brands fa-apple" aria-hidden="true"><span class="sr-only">Applecare Status Lookup</span></i>
+                                                        <i class="fa-brands fa-apple" aria-hidden="true"><span class="sr-only">{{ trans('hardware/general.mfg_warranty_lookup') }}</span></i>
                                                     </a>
+                                                    @elseif ((strtolower($asset->model->manufacturer->name) == "dell") || (str_starts_with(str_replace(' ','',strtolower($asset->model->manufacturer->name)),"dellinc")))
+                                                    <a href="https://www.dell.com/support/home/en-us?app=warranty" target="_blank">
+                                                        <img src="/img/demo/manufacturers/dellicon.png" style="width:25px;height:25px;"><span class="sr-only">{{ trans('hardware/general.mfg_warranty_lookup') }}</span></i>
+                                                    </a>
+                                                    @elseif ((strtolower($asset->model->manufacturer->name) == "lenovo") || (str_starts_with(str_replace(' ','',strtolower($asset->model->manufacturer->name)),"lenovoinc")))
+                                                    <a href="https://pcsupport.lenovo.com/us/en/warrantylookup#/" target="_blank">
+                                                        <img src="/img/demo/manufacturers/lenovoicon.png" style="width:25px;height:25px;"><span class="sr-only">{{ trans('hardware/general.mfg_warranty_lookup') }}</span></i>
+                                                    </a>
+                                                    @endif
                                                 @endif
                                             </div>
                                         </div>
@@ -671,7 +681,8 @@
 
                                             </div>
                                         </div>
-
+                                    @endif
+                                    @if ($asset->asset_eol_date)
                                         <div class="row">
                                             <div class="col-md-2">
                                                 <strong>
@@ -679,10 +690,10 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                @if ($asset->purchase_date)
-                                                {{ Helper::getFormattedDateObject($asset->present()->eol_date(), 'date', false) }}
+                                                @if ($asset->asset_eol_date)
+                                                {{ Helper::getFormattedDateObject($asset->asset_eol_date, 'date', false) }}
                                                 -
-                                                {{ Carbon::parse($asset->present()->eol_date())->diffForHumans(['parts' => 2]) }}
+                                                {{ Carbon::parse($asset->asset_eol_date)->diffForHumans(['parts' => 2]) }}
                                                 @else
                                                     {{ trans('general.na_no_purchase_date') }}
                                                 @endif

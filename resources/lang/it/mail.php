@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Accedi alla nuova installazione di Snipe-IT utilizzando le seguenti credenziali:',
     'login' => 'Accesso:',
     'Low_Inventory_Report' => 'Rapporto di inventario basso',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Min QTY',
     'name' => 'Nome',
     'new_item_checked' => 'Un nuovo elemento è stato controllato sotto il tuo nome, i dettagli sono sotto.',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Promemoria: scadenza riconsegna :name in avvicinamento',
     'Expected_Checkin_Date' => 'Un asset assegnato a te deve essere ricontrollato il :date',
     'your_assets' => 'Visualizza i tuoi assets',
+    'rights_reserved' => 'All rights reserved.',
 ];

@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Tài sản này đã bị xóa.',
     'edit'  					=> 'Sửa tài sản',
     'model_deleted'  			=> 'Model tài sản này đã bị xóa. Vui lòng khôi phục lại model trước khi khôi phục tài sản.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Cho phép đề xuất',
     'requested'				    => 'Yêu cầu',
     'not_requestable'           => 'Không cho phép đề xuất',

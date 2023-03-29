@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Влезте в своята Snipe-IT инсталация използвайки данните по-долу:',
     'login' => 'Вход:',
     'Low_Inventory_Report' => 'Доклад за нисък запас',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Минимално количество',
     'name' => 'Име',
     'new_item_checked' => 'Нов артикул беше изписан под вашете име, детайлите са отдолу.',
@@ -78,4 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Напомняне: :name крайната дата за вписване наближава',
     'Expected_Checkin_Date' => 'Наближава срока за връщане на актив който е заведен на Вас, трябва да се върна на :date',
     'your_assets' => 'Преглед на вашите активи',
+    'rights_reserved' => 'All rights reserved.',
 ];

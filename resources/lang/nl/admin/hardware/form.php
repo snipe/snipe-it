@@ -4,9 +4,9 @@ return [
     'bulk_delete'		=> 'Bevestig bulk verwijdering van assets',
   'bulk_delete_help'	=> 'Bekijk de assets voor bulkverwijdering hieronder. Eenmaal verwijderd, kunnen deze assets worden hersteld, maar ze zullen niet langer geassocieerd worden met gebruikers waaraan ze momenteel zijn toegewezen.',
   'bulk_delete_warn'	=> 'Je staat op het punt om :asset_count assets te verwijderen.',
-    'bulk_update'		=> 'Assets in bulk bijwerken',
+    'bulk_update'		=> 'Meerdere activa bijwerken',
     'bulk_update_help'	=> 'Met dit formulier kun je meerdere assets tegelijk bijwerken. Vul alleen de velden in die je moet wijzigen. Alle lege velden blijven ongewijzigd. ',
-    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
+    'bulk_update_warn'	=> 'Je staat op het punt om de eigenschappen van één bezitting te bewerken. Je staat op het punt om de eigenschappen van :asset_count bezittingen te bewerken.',
     'checkedout_to'		=> 'Uitgecheckt aan',
     'checkout_date'		=> 'Uitgecheckt datum',
     'checkin_date'		=> 'Ingecheckt datum',
@@ -46,6 +46,6 @@ return [
     'asset_not_deployable' => 'Deze Asset status is niet uitgeefbaar. Dit Asset kan niet uitgegeven worden.',
     'asset_deployable' => 'Deze status is uitgeefbaar. Dit Asset kan uitgegeven worden.',
     'processing_spinner' => 'Verwerken...',
-    'optional_infos'  => 'Optional Information',
-    'order_details'   => 'Order Related Information'
+    'optional_infos'  => 'Optionele informatie',
+    'order_details'   => 'Bestelling Gerelateerde Informatie'
 ];

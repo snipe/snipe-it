@@ -2837,6 +2837,51 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "AndrewSav",
+      "name": "Andrew Savinykh",
+      "avatar_url": "https://avatars.githubusercontent.com/u/658865?v=4",
+      "profile": "https://github.com/AndrewSav",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "kenchan0130",
+      "name": "Tadayuki Onishi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1155067?v=4",
+      "profile": "https://kenchan0130.github.io",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "floschoepfer",
+      "name": "Florian",
+      "avatar_url": "https://avatars.githubusercontent.com/u/112496896?v=4",
+      "profile": "https://github.com/floschoepfer",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "spencerrlongg",
+      "name": "Spencer Long",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7305753?v=4",
+      "profile": "http://spencerlong.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "marcusmoore",
+      "name": "Marcus Moore",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1141514?v=4",
+      "profile": "https://github.com/marcusmoore",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }

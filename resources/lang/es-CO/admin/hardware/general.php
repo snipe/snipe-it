@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Este activo ha sido borrado.',
     'edit'  					=> 'Editar Equipo',
     'model_deleted'  			=> 'El modelo de este activo ha sido borrado. Debe restaurar el modelo antes de restaurar o crear el activo.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Puede Solicitarse',
     'requested'				    => 'Solicitado',
     'not_requestable'           => 'No solicitable',

@@ -36,8 +36,10 @@
 | name                |                  |                                           |
 | email               |                  |                                           |
 | username            |                  |                                           |
-| address             | address          |  User                                     |
-| city                | city             |  User                                     |
-| state               | state            |  User                                     |
-| country             | country          |  User                                     |
+| address             | address          | User                                      |
+| city                | city             | User                                      |
+| state               | state            | User                                      |
+| country             | country          | User                                      |
+| vip                 | vip              | User                                      |
+| byod                | byod             | Asset                                     |
 

@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => '模板不存在',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => '本模板下目前还有相关的资产，不能被删除，请删除资产以后，再重试。',
 
 

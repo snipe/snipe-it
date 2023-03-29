@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Az eszköz törölve lett.',
     'edit'  					=> 'Eszköz módosítása',
     'model_deleted'  			=> 'Ennek az eszköznek a modellje törölve lett. Elösszőr a modellt vissza kell állítani, utánna lehet csak az eszközt visszaállítani.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'lehívási',
     'requested'				    => 'Kérve',
     'not_requestable'           => 'Nem kérhető',

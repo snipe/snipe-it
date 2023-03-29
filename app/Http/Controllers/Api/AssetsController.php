@@ -101,6 +101,7 @@ class AssetsController extends Controller
             'checkin_counter',
             'requests_counter',
             'byod',
+            'asset_eol_date',
         ];
 
         $filter = [];
@@ -128,14 +129,12 @@ class AssetsController extends Controller
         // They are also used by the individual searches on detail pages like
         // locations, etc.
 
-
         // Search custom fields by column name
         foreach ($all_custom_fields as $field) {
             if ($request->filled($field->db_column_name())) {
                 $assets->where($field->db_column_name(), '=', $request->input($field->db_column_name()));
             }
         }
-
 
         if ($request->filled('status_id')) {
             $assets->where('assets.status_id', '=', $request->input('status_id'));
@@ -171,6 +170,10 @@ class AssetsController extends Controller
 
         if ($request->filled('supplier_id')) {
             $assets->where('assets.supplier_id', '=', $request->input('supplier_id'));
+        }
+
+        if ($request->filled('asset_eol_date')) {
+            $assets->where('assets.asset_eol_date', '=', $request->input('asset_eol_date'));
         }
 
         if (($request->filled('assigned_to')) && ($request->filled('assigned_type'))) {
@@ -857,7 +860,8 @@ class AssetsController extends Controller
         $checkout_at = request('checkout_at', date('Y-m-d H:i:s'));
         $expected_checkin = request('expected_checkin', null);
         $note = request('note', null);
-        $asset_name = request('name', null);
+        // Using `->has` preserves the asset name if the name parameter was not included in request.
+        $asset_name = request()->has('name') ? request('name') : $asset->name;
 
         // Set the location ID to the RTD location id if there is one
         // Wait, why are we doing this? This overrides the stuff we set further up, which makes no sense.
@@ -937,18 +941,21 @@ class AssetsController extends Controller
      * @since [v6.0]
      * @return JsonResponse
      */
-    public function checkinByTag(Request $request)
+    public function checkinByTag(Request $request, $tag = null)
     {
         $this->authorize('checkin', Asset::class);
-        $asset = Asset::where('asset_tag', $request->input('asset_tag'))->first();
+        if(null == $tag && null !== ($request->input('asset_tag'))) {
+            $tag = $request->input('asset_tag');
+        }
+        $asset = Asset::where('asset_tag', $tag)->first();
 
         if ($asset) {
             return $this->checkin($request, $asset->id);
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', [
-            'asset'=> e($request->input('asset_tag'))
-        ], 'Asset with tag '.e($request->input('asset_tag')).' not found'));
+            'asset'=> e($tag)
+        ], 'Asset with tag '.e($tag).' not found'));
     }
 
 

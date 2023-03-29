@@ -15,7 +15,7 @@ return array(
     'password_resets_sent'      => '有効なメールアドレスを持っている選択されたユーザーにパスワードリセットのリンクが送信されました。',
     'password_reset_sent'       => 'パスワードリセットのURLが:emailに送信されました。',
     'user_has_no_email'         => 'このユーザーのプロフィールにはメールアドレスがありません。',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'user_has_no_assets_assigned'   => 'このユーザーにはアセットが割り当てられていません',
 
 
     'success' => array(
@@ -61,7 +61,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => 'このユーザーにはメールアドレスが設定されていません。',
+        'success' => 'ユーザーに現在の在庫について通知されました。'
     )
 );

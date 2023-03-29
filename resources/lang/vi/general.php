@@ -3,6 +3,7 @@
 return [
     'accessories'			=> 'Phụ kiện',
     'activated'			    => 'Kích hoạt',
+    'accepted_date'         => 'Date Accepted',
     'accessory'				=> 'Phụ kiện',
     'accessory_report'		=> 'Báo cáo phụ kiện',
     'action'                => 'Tác vụ',
@@ -27,7 +28,13 @@ return [
     'audit'				    => 'Kiểm toán',
     'audit_report'			=> 'Sổ ghi chép đánh giá',
     'assets'				=> 'Tài sản',
+    'assets_audited'        => 'assets audited',
+    'assets_checked_in_count'     => 'assets checked in',
+    'assets_checked_out_count'     => 'assets checked out',
+    'asset_deleted_warning'     => 'This asset has been deleted. You must restore it before you can assign it to someone.',
+    'assigned_date'         => 'Date Assigned',
     'assigned_to'           => 'Được giao cho :name',
+    'assignee'              => 'Assigned to',
     'avatar_delete'         => 'Xóa hình đại diện',
     'avatar_upload'         => 'Tải lên hình đại diện',
     'back'      			=> 'Quay lại',
@@ -39,6 +46,8 @@ return [
     'bulk_delete'           => 'Xoá hàng loạt',
     'bulk_actions'          => 'Hàng loạt hành động',
     'bulk_checkin_delete'   => 'Bulk Checkin Items from Users',
+    'byod'                  => 'BYOD',
+    'byod_help'             => 'This device is owned by the user',
     'bystatus'              => 'Trạng thái',
     'cancel'  				=> 'Hủy',
     'categories'			=> 'Danh mục',
@@ -385,7 +394,15 @@ return [
     'start_date'            => 'Ngày Bắt Đầu',
     'end_date'            => 'Ngày Kết Thúc',
     'alt_uploaded_image_thumbnail' => 'Tải ảnh nhỏ lên',
-    'placeholder_kit'       => 'Chọn công cụ'
+    'placeholder_kit'       => 'Chọn công cụ',
+    'file_not_found'        => 'File not found',
+    'preview_not_available' => '(no preview)',
+    'setup'                 => 'Setup',
+    'pre_flight'            => 'Pre-Flight',
+    'skip_to_main_content'  => 'Skip to main content',
+    'toggle_navigation'     => 'Toggle navigation',
+    'alerts'                => 'Alerts',
+    'tasks_view_all'        => 'View all tasks',
 
 
 

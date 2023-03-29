@@ -80,6 +80,11 @@ class LicenseImporter extends ItemImporter
                 $checkout_target = $this->item['checkout_target'];
                 $asset = Asset::where('asset_tag', $asset_tag)->first();
                 $targetLicense = $license->freeSeat();
+
+                if (is_null($targetLicense)){
+                    return;
+                }
+
                 if ($checkout_target) {
                     $targetLicense->assigned_to = $checkout_target->id;
                     $targetLicense->user_id = Auth::id();

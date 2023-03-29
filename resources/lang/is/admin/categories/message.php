@@ -13,7 +13,8 @@ return array(
 
     'update' => array(
         'error'   => 'Vöruflokkur var ekki uppfærður, vinsamlegast reyndu aftur',
-        'success' => 'Vöruflokkur var uppfærður.'
+        'success' => 'Vöruflokkur var uppfærður.',
+        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
     ),
 
     'delete' => array(

@@ -370,6 +370,19 @@
 
                           @include ('partials.forms.edit.datepicker', ['translated_name' => trans('general.end_date'), 'fieldname' => 'end_date', 'item' => $user])
 
+                          <!-- VIP checkbox -->
+                          <div class="form-group">
+                              <div class="col-md-7 col-md-offset-3">
+                                  <label for="vip">
+                                      <input type="checkbox" value="1" name="vip" class="minimal" {{ (old('vip', $user->vip)) == '1' ? ' checked="checked"' : '' }} aria-label="vip">
+                                      {{ trans('admin/users/general.vip_label') }}
+
+                                  </label>
+                                  <p class="help-block">{{ trans('admin/users/general.vip_help') }}
+                                  </p>
+                              </div>
+                          </div>
+
 
                           <!-- remote checkbox -->
                           <div class="form-group">
@@ -380,6 +393,19 @@
 
                                   </label>
                                   <p class="help-block">{{ trans('admin/users/general.remote_help') }}
+                                  </p>
+                              </div>
+                          </div>
+
+                          <!-- Auto Assign checkbox -->
+                          <div class="form-group">
+                              <div class="col-md-7 col-md-offset-3">
+                                  <label for="autoassign_licenses">
+                                      <input type="checkbox" value="1" name="autoassign_licenses" class="minimal" {{ (old('autoassign_licenses', $user->autoassign_licenses)) == '1' ? ' checked="checked"' : '' }} aria-label="autoassign_licenses">
+                                      {{ trans('admin/users/general.auto_assign_label') }}
+
+                                  </label>
+                                  <p class="help-block">{{ trans('admin/users/general.auto_assign_help') }}
                                   </p>
                               </div>
                           </div>
@@ -673,7 +699,7 @@ $(document).ready(function() {
             data: {},
             headers: {
                 "X-Requested-With": 'XMLHttpRequest',
-                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content') // TODO` - we should do this in ajaxSetup
             },
             dataType: 'json',
 

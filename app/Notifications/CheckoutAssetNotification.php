@@ -53,8 +53,8 @@ class CheckoutAssetNotification extends Notification
     {
         $notifyBy = [];
 
-        if ((Setting::getSettings()) && (Setting::getSettings()->slack_endpoint != '')) {
-            \Log::debug('use slack');
+        if ((Setting::getSettings()) && (Setting::getSettings()->webhook_endpoint != '')) {
+            \Log::debug('use webhook');
             $notifyBy[] = 'slack';
         }
 
@@ -95,7 +95,7 @@ class CheckoutAssetNotification extends Notification
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
-        $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot';
+        $botname = ($this->settings->webhook_botname) ? $this->settings->webhook_botname : 'Snipe-Bot';
 
         $fields = [
             'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',

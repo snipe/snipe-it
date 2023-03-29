@@ -13,7 +13,8 @@ return array(
 
     'update' => array(
         'error'   => 'Níor nuashonraíodh an chatagóir, déan iarracht arís',
-        'success' => 'Catagóir nuashonraithe go rathúil.'
+        'success' => 'Catagóir nuashonraithe go rathúil.',
+        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
     ),
 
     'delete' => array(

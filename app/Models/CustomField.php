@@ -21,7 +21,7 @@ class CustomField extends Model
      *
      * @var array
      */
-    const PREDEFINED_FORMATS = [
+    public const PREDEFINED_FORMATS = [
             'ANY'           => '',
             'CUSTOM REGEX'  => '',
             'ALPHA'         => 'alpha',
@@ -238,7 +238,7 @@ class CustomField extends Model
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     * @return string
      */
     public function db_column_name()
     {

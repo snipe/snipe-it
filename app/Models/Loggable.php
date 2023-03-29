@@ -93,8 +93,12 @@ trait Loggable
     {
         $settings = Setting::getSettings();
         $log = new Actionlog;
-        $log->target_type = get_class($target);
-        $log->target_id = $target->id;
+
+        if($target != null){
+            $log->target_type = get_class($target);
+            $log->target_id = $target->id;
+
+        }
 
         if (static::class == LicenseSeat::class) {
             $log->item_type = License::class;

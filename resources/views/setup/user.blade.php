@@ -1,15 +1,14 @@
 @extends('layouts/setup')
-{{-- TODO: Translate --}}
-{{-- Page title --}}
+{{ trans('admin/users/table.createuser') }}
 @section('title')
-Create a User ::
+{{ trans('admin/users/general.create_user') }} ::
 @parent
 @stop
 
 {{-- Page content --}}
 @section('content')
 
-<p> This is the account information you'll use to access the site for the first time.  </p>
+<p>{{ trans('admin/users/general.create_user_page_explanation') }}</p>
 
 <form action="{{ route('setup.user.save') }}" method="POST">
   {{ csrf_field() }}
@@ -157,10 +156,10 @@ Create a User ::
 
     <!-- Email credentials -->
     <div class="form-group col-lg-12">
-      <label>Email credentials</label>
+      <label>{{ trans('admin/users/general.email_credentials') }}</label>
       <div class="checkbox">
         <label>
-          <input type="checkbox" value="1" name="email_creds">Email my credentials to the email address above
+          <input type="checkbox" value="1" name="email_creds">{{ trans('admin/users/general.email_credentials_text') }}
         </label>
       </div>
     </div>
@@ -168,7 +167,7 @@ Create a User ::
 @stop
 
 @section('button')
-  <button class="btn btn-primary">Next: Save User</button>
+  <button class="btn btn-primary">{{ trans('admin/users/general.next_save_user') }}</button>
 </form>
 @parent
 @stop

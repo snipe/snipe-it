@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'הנכס הזה נמחק.',
     'edit'  					=> 'ערוך נכס',
     'model_deleted'  			=> 'המודל של הנכס נמחק. יש לשחזר את המודל לפני שניתן לשחזר את הנכס.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'ניתן לבקש',
     'requested'				    => 'מבוקש',
     'not_requestable'           => 'Not Requestable',

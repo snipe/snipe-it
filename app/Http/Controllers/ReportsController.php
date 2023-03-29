@@ -51,9 +51,8 @@ class ReportsController extends Controller
     public function getAccessoryReport()
     {
         $this->authorize('reports.view');
-        $accessories = Accessory::orderBy('created_at', 'DESC')->with('company')->get();
 
-        return view('reports/accessories', compact('accessories'));
+        return view('reports/accessories');
     }
 
     /**
@@ -285,7 +284,7 @@ class ReportsController extends Controller
 
                     $row = [
                         $actionlog->created_at,
-                        ($actionlog->user) ? e($actionlog->user->getFullNameAttribute()) : '',
+                        ($actionlog->admin) ? e($actionlog->admin->getFullNameAttribute()) : '',
                         $actionlog->present()->actionType(),
                         e($actionlog->itemType()),
                         ($actionlog->itemType() == 'user') ? $actionlog->filename : $item_name,
@@ -1025,7 +1024,11 @@ class ReportsController extends Controller
         if (is_null($acceptance->created_at)){
             return redirect()->route('reports/unaccepted_assets')->with('error', trans('general.bad_data'));
         } else {
-            $logItem = $assetItem->checkouts()->where('created_at', '=', $acceptance->created_at)->get()[0];
+            $logItem_res = $assetItem->checkouts()->where('created_at', '=', $acceptance->created_at)->get();
+            if ($logItem_res->isEmpty()){
+                return redirect()->route('reports/unaccepted_assets')->with('error', trans('general.bad_data'));
+            }
+            $logItem = $logItem_res[0];
         }
 
         if(!$assetItem->assignedTo->locale){
@@ -1120,8 +1123,6 @@ class ReportsController extends Controller
                 $row[]  = str_replace(',', '', e($item['assetItem']->asset_tag));
                 $row[]  = str_replace(',', '', e(($item['acceptance']->assignedTo) ? $item['acceptance']->assignedTo->present()->name() : trans('admin/reports/general.deleted_user')));
                 $rows[] = implode(',', $row);
-            } else {
-                // Log the error maybe?
             }
         }
 

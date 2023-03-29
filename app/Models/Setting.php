@@ -31,7 +31,7 @@ class Setting extends Model
      *
      * @var string
      */
-    const SETUP_CHECK_KEY = 'snipeit_setup_check';
+    public const SETUP_CHECK_KEY = 'snipeit_setup_check';
 
     /**
      * Whether the model should inject it's identifier to the unique
@@ -83,6 +83,9 @@ class Setting extends Model
         'email_domain',
         'email_format',
         'username_format',
+        'webhook_endpoint',
+        'webhook_channel',
+        'webhook_botname',
     ];
 
     /**
@@ -262,7 +265,7 @@ class Setting extends Model
     {
         // At this point the endpoint is the same for everything.
         //  In the future this may want to be adapted for individual notifications.
-        return self::getSettings()->slack_endpoint;
+        return self::getSettings()->webhook_endpoint;
     }
 
     /**

@@ -519,7 +519,17 @@
                     </div>
                     @endif
 
-                     <!-- login enabled -->
+                    <!-- login enabled -->
+                    <div class="row">
+                      <div class="col-md-3">
+                        {{ trans('admin/users/general.vip_label') }}
+                      </div>
+                      <div class="col-md-9">
+                        {!! ($user->vip=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                      </div>
+                    </div> 
+                    
+                    <!-- login enabled -->
                      <div class="row">
                       <div class="col-md-3">
                         {{ trans('admin/users/general.remote') }}
@@ -868,13 +878,15 @@
 
                             </td>
                             <td>
-                                @if ($file->filename)
-                                    @if ((Storage::exists('private_uploads/users/'.$file->filename)) && ( Helper::checkUploadIsImage($file->get_src('users'))))
+                                @if (($file->filename) && (Storage::exists('private_uploads/users/'.$file->filename)))
+                                   @if (Helper::checkUploadIsImage($file->get_src('users')))
                                         <a href="{{ route('show/userfile', ['userId' => $user->id, 'fileId' => $file->id, 'download' => 'false']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show/userfile', ['userId' => $user->id, 'fileId' => $file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
                                     @else
-                                        <i class="fa fa-times text-danger" aria-hidden="true"></i>
-                                        {{ trans('general.file_not_found') }}
+                                        {{ trans('general.preview_not_available') }}
                                     @endif
+                                @else
+                                    <i class="fa fa-times text-danger" aria-hidden="true"></i>
+                                        {{ trans('general.file_not_found') }}
                                 @endif
                             </td>
                             <td>
@@ -891,7 +903,7 @@
                             </td>
                             <td>
                                 @if ($file->filename)
-                                    @if ((Storage::exists('private_uploads/users/'.$file->filename)) && ( Helper::checkUploadIsImage($file->get_src('users'))))
+                                    @if (Storage::exists('private_uploads/users/'.$file->filename))
                                         <a href="{{ route('show/userfile', [$user->id, $file->id]) }}" class="btn btn-default">
                                             <i class="fas fa-download" aria-hidden="true"></i>
                                             <span class="sr-only">{{ trans('general.download') }}</span>
@@ -946,16 +958,18 @@
               <thead>
               <tr>
                 <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter">Icon</th>
-                <th class="col-sm-3" data-field="created_at" data-formatter="dateDisplayFormatter" data-sortable="true">{{ trans('general.date') }}</th>
-                <th class="col-sm-2" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
-                <th class="col-sm-2" data-field="action_type">{{ trans('general.action') }}</th>
+                <th data-field="created_at" data-formatter="dateDisplayFormatter" data-sortable="true">{{ trans('general.date') }}</th>
+                  <th data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
+                  <th data-field="action_type">{{ trans('general.action') }}</th>
+                  <th data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
+                  <th data-field="note">{{ trans('general.notes') }}</th>
                   @if  ($snipeSettings->require_accept_signature=='1')
-                      <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
+                      <th data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
                   @endif
-                  <th class="col-sm-3" data-field="item.serial" data-visible="false">{{ trans('admin/hardware/table.serial') }}</th>
-                  <th class="col-sm-3" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
-                  <th class="col-sm-3" data-field="note">{{ trans('general.notes') }}</th>
-                  <th class="col-sm-2" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
+                  <th data-field="item.serial" data-visible="false">{{ trans('admin/hardware/table.serial') }}</th>
+                  <th data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
+
+
               </tr>
               </thead>
             </table>

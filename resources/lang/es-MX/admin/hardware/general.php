@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Este activo ha sido eliminado.',
     'edit'  					=> 'Editar Equipo',
     'model_deleted'  			=> 'Este modelo de equipo fue eliminado. Debes restaurar el moldelo antes de restaurar el activo.',
+    'model_invalid'             => 'El Modelo de este Activo no es válido.',
+    'model_invalid_fix'         => 'Es necesario corregir esto antes de realizar movimientos con este Activo.',
     'requestable'               => 'Requerible',
     'requested'				    => 'Solicitado',
     'not_requestable'           => 'No solicitable',

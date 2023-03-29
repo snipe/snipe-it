@@ -3,6 +3,7 @@
 return [
     'accessories'			=> 'تجهیزات جانبی',
     'activated'			    => 'فعال شد',
+    'accepted_date'         => 'Date Accepted',
     'accessory'				=> 'لوازم جانبی',
     'accessory_report'		=> 'گزارش لوازم جانبی',
     'action'                => 'اقدام',
@@ -27,7 +28,13 @@ return [
     'audit'				    => 'حسابرسی',
     'audit_report'			=> 'حسابرسی حسابرسی',
     'assets'				=> 'دارایی ها',
+    'assets_audited'        => 'assets audited',
+    'assets_checked_in_count'     => 'assets checked in',
+    'assets_checked_out_count'     => 'assets checked out',
+    'asset_deleted_warning'     => 'This asset has been deleted. You must restore it before you can assign it to someone.',
+    'assigned_date'         => 'Date Assigned',
     'assigned_to'           => 'اختصاص داده شده به :name',
+    'assignee'              => 'Assigned to',
     'avatar_delete'         => 'حذف آواتار',
     'avatar_upload'         => 'بارگذاری آواتار',
     'back'      			=> 'بازگشت',
@@ -43,6 +50,8 @@ return [
     'bulk_actions'          => 'اقدام دسته جمعی',
     'bulk_checkin_delete'   => 'موارد اعلام حضور دسته جمعی از کاربران
 ',
+    'byod'                  => 'BYOD',
+    'byod_help'             => 'This device is owned by the user',
     'bystatus'              => 'به ترتیب وضعیت',
     'cancel'  				=> 'انصراف',
     'categories'			=> 'دسته‌بندی‌ها',
@@ -477,7 +486,15 @@ return [
     'start_date'            => 'Start Date',
     'end_date'            => 'End Date',
     'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
-    'placeholder_kit'       => 'Select a kit'
+    'placeholder_kit'       => 'Select a kit',
+    'file_not_found'        => 'File not found',
+    'preview_not_available' => '(no preview)',
+    'setup'                 => 'Setup',
+    'pre_flight'            => 'Pre-Flight',
+    'skip_to_main_content'  => 'Skip to main content',
+    'toggle_navigation'     => 'Toggle navigation',
+    'alerts'                => 'Alerts',
+    'tasks_view_all'        => 'View all tasks',
 
 
 

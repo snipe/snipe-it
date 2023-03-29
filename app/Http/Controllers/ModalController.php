@@ -17,7 +17,7 @@ class ModalController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net]
      * @return View
      */
-    function show ($type, $itemId = null) {
+    public function show ($type, $itemId = null) {
 
         // These values should correspond to a file in resources/views/modals/
         $allowed_types = [

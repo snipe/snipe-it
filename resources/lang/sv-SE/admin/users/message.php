@@ -15,7 +15,7 @@ return array(
     'password_resets_sent'      => 'De valda användare som är aktiverade och har en giltig e-postadress har skickats en länk för att återställa lösenordet.',
     'password_reset_sent'       => 'En återställningslänk för lösenord har skickats till :email!',
     'user_has_no_email'         => 'Den här användaren har ingen e-postadress i sin profil.',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'user_has_no_assets_assigned'   => 'Den här användaren har inga tilldelade tillgångar',
 
 
     'success' => array(
@@ -61,7 +61,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => 'Den här användaren har ingen e-postadress.',
+        'success' => 'Användaren har meddelats om sitt nuvarande inventarie.'
     )
 );

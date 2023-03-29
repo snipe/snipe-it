@@ -27,6 +27,9 @@ return [
     'used_by_models'   		    => '引用模板',
     'order'   		            => '排序',
     'create_fieldset'         => '新增字段集',
+    'update_fieldset'         => 'Update Fieldset',
+    'fieldset_does_not_exist'   => 'Fieldset :id does not exist',
+    'fieldset_updated'         => 'Fieldset updated',
     'create_fieldset_title' => '创建一个新的字段集',
     'create_field'            => '新增字段',
     'create_field_title' => '创建一个新自定义字段',
@@ -44,6 +47,6 @@ return [
     'db_convert_warning' => '警告。此字段作为 <code>:db_column</code> 的自定义字段表，但应该是 <code>:expected</code>。',
     'is_unique' => '此值在所有资产中必须是唯一的',
     'unique' => '唯一的',
-    'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
-    'display_in_user_view_table' => 'Visible to User',
+    'display_in_user_view' => '允许借出的用户在他们的“查看已分配的资产”页面中查看这些值',
+    'display_in_user_view_table' => '对用户可见',
 ];
