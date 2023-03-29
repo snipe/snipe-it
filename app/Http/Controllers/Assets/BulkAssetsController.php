@@ -48,6 +48,10 @@ class BulkAssetsController extends Controller
         $asset_custom_field = Asset::whereIn('id', $asset_ids)->whereHas('model', function ($query) {
             return $query->where('fieldset_id', '!=', null);
         })->get();
+
+        $models1 = $asset_custom_field->unique('model_id');  
+        $models = $models1->pluck('model'); 
+
         $custom_fields = new Collection(); 
         foreach ($asset_custom_field as $asset_key => $asset) {
             $custom_fields->push($asset->model->fieldset->fields); 
@@ -87,7 +91,8 @@ class BulkAssetsController extends Controller
                     return view('hardware/bulk')
                         ->with('assets', $asset_ids)
                         ->with('statuslabel_list', Helper::statusLabelList())
-                        ->with('custom_fields', $custom_fields);
+                        ->with('custom_fields', $custom_fields)
+                        ->with('models', $models); 
             }
         }
 

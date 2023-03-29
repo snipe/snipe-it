@@ -184,13 +184,20 @@
             </div>
           </div>
 
-          @foreach ($custom_fields as $key => $value)  
-         <p>
+          {{-- @foreach ($custom_fields as $key => $value)  
+            <p>
                 <label>
                     ({{ $value->id }}) | {{ $value->name}} - {{ $value->format }}
                 </label>
-              </p>
-               @endforeach 
+            </p>
+        @endforeach  --}}
+
+        @foreach ($models as $model) 
+            <label>
+                {{ $model->name }} asset model
+            </label>
+            @include("models/custom_fields_form",["model" => $model])
+        @endforeach  
 
       
 
