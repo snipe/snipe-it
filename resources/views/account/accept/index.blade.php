@@ -1,8 +1,11 @@
 @extends('layouts/default')
+@php
+  !empty($user) ? $full_name = $user->present()->full_name : $full_name = '';
+@endphp 
 
 {{-- Page title --}}
 @section('title')
-{{ trans('general.accept_assets', array('name' => $user->present()->fullName())) }}
+{{ trans('general.accept_assets', array('name' => $full_name)) }}
 @parent
 @stop
 
