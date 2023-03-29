@@ -160,22 +160,22 @@
                                                             </div>
 
                                                             <div class="form-group col-md-12">
-                                                                <label for="update" class="col-md-9 col-md-offset-3 col-xs-12" wire:ignore>
-                                                                    <input type="checkbox" class="minimal livewire-icheck" name="update" data-livewire-component="{{ $_instance->id }}">
+                                                                <label for="update" class="col-md-9 col-md-offset-3 col-xs-12">
+                                                                    <input type="checkbox" class="minimal livewire-icheck" name="update" data-livewire-component="{{ $_instance->id }}" wire:model="update">
                                                                     {{ trans('general.update_existing_values') }}
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-group col-md-12">
-                                                                <label for="send_welcome" class="col-md-9 col-md-offset-3 col-xs-12" wire:ignore>
-                                                                    <input type="checkbox" class="minimal livewire-icheck" name="send_welcome" data-livewire-component="{{ $_instance->id }}">
+                                                                <label for="send_welcome" class="col-md-9 col-md-offset-3 col-xs-12">
+                                                                    <input type="checkbox" class="minimal livewire-icheck" name="send_welcome" data-livewire-component="{{ $_instance->id }}" wire:model="send_welcome">
                                                                     {{ trans('general.send_welcome_email_to_users') }}
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-group col-md-12">
-                                                                <label for="run_backup" class="col-md-9 col-md-offset-3 col-xs-12" wire:ignore>
-                                                                    <input type="checkbox" class="minimal livewire-icheck" name="run_backup" data-livewire-component="{{ $_instance->id }}">
+                                                                <label for="run_backup" class="col-md-9 col-md-offset-3 col-xs-12">
+                                                                    <input type="checkbox" class="minimal livewire-icheck" name="run_backup" data-livewire-component="{{ $_instance->id }}" wire:model="run_backup">
                                                                     {{ trans('general.back_before_importing') }}
                                                                 </label>
                                                             </div>
