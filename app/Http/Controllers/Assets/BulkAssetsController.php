@@ -49,6 +49,7 @@ class BulkAssetsController extends Controller
                         ->with('settings', Setting::getSettings())
                         ->with('bulkedit', true)
                         ->with('count', 0);
+
                 case 'delete':
                     $assets = Asset::with('assignedTo', 'location')->find($asset_ids);
                     $assets->each(function ($asset) {
@@ -58,12 +59,13 @@ class BulkAssetsController extends Controller
                     return view('hardware/bulk-delete')->with('assets', $assets);
                    
                 case 'restore': 
-                    $assets = Asset::with('assignedTo', 'location')->find($asset_ids);
+                    $assets = Asset::withTrashed()->find($asset_ids); 
                     $assets->each(function ($asset) {
-                        $this->authorize('restore', $asset);
+                        $this->authorize('delete', $asset);
                     });
 
                     return view('hardware/bulk-restore')->with('assets', $assets);
+
                 case 'edit':
                     return view('hardware/bulk')
                         ->with('assets', $asset_ids)
@@ -336,5 +338,6 @@ class BulkAssetsController extends Controller
               $asset = Asset::withTrashed()->find($assetId);
               $asset->restore(); 
        } 
+      return redirect()->route('hardware.index')->with('success', 'Assets Restored');
     }
 }
