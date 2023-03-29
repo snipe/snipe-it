@@ -3,7 +3,6 @@
 namespace App\Http\Livewire;
 
 use App\Models\CustomField;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 use App\Models\Import;
