@@ -49,8 +49,7 @@ class BulkAssetsController extends Controller
             return $query->where('fieldset_id', '!=', null);
         })->get();
 
-        $models1 = $asset_custom_field->unique('model_id');  
-        $models = $models1->pluck('model'); 
+        $models = $asset_custom_field->unique('model_id')->pluck('model');  
 
         $custom_fields = new Collection(); 
         foreach ($asset_custom_field as $asset_key => $asset) {
@@ -118,12 +117,19 @@ class BulkAssetsController extends Controller
         }
 
 
+      $custom_field_columns = CustomField::all()->pluck('db_column')->toArray(); 
+        
         if (! $request->filled('ids') || count($request->input('ids')) <= 0) {
             return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.update.no_assets_selected'));
         }
 
         $assets = array_keys($request->input('ids'));
-
+        
+       if ($request->anyFilled($custom_field_columns)) {
+           $custom_fields_present = true;
+         } else {
+           $custom_fields_present = false;
+         }
         if (($request->filled('purchase_date'))
             || ($request->filled('expected_checkin'))
             || ($request->filled('purchase_cost'))
@@ -139,6 +145,7 @@ class BulkAssetsController extends Controller
             || ($request->filled('null_purchase_date'))
             || ($request->filled('null_expected_checkin_date'))
             || ($request->filled('null_next_audit_date'))
+            || ($request->anyFilled($custom_field_columns))
 
         ) {
             foreach ($assets as $assetId) {
@@ -154,6 +161,9 @@ class BulkAssetsController extends Controller
                     ->conditionallyAddItem('supplier_id')
                     ->conditionallyAddItem('warranty_months')
                     ->conditionallyAddItem('next_audit_date');
+                    foreach ($custom_field_columns as $key => $custom_field_column) {
+                        $this->conditionallyAddItem($custom_field_column); 
+                   } 
 
                 if ($request->input('null_purchase_date')=='1') {
                     $this->update_array['purchase_date'] = null;
@@ -202,17 +212,28 @@ class BulkAssetsController extends Controller
                 $logAction->user_id = Auth::id();
                 $logAction->log_meta = json_encode($changed);
                 $logAction->logaction('update');
-
-                DB::table('assets')
-                    ->where('id', $assetId)
-                    ->update($this->update_array);
-            } // endforeach
-
+ 
+                if($custom_fields_present) { 
+                    $asset = Asset::find($assetId); 
+                    $assetCustomFields = $asset->model()->first()->fieldset; 
+                    foreach ($assetCustomFields->fields as $field) { 
+                       if (array_key_exists($field->db_column, $this->update_array)) {
+                            $asset->{$field->db_column} = $this->update_array[$field->db_column]; 
+                            $asset->save();    
+                            continue; 
+                       } else { 
+                            $array = $this->update_array; 
+                            array_except($array, $field->db_column); 
+                            $asset->update($array); 
+                            $asset->save();
+                        }     
+                    } 
+                } else {
+                    Asset::find($assetId)->update($this->update_array);
+                } 
+            } // endforeach ($assets)
             return redirect($bulk_back_url)->with('success', trans('admin/hardware/message.update.success'));
-
-
         }
-
         // no values given, nothing to update
         return redirect($bulk_back_url)->with('warning', trans('admin/hardware/message.update.nothing_updated'));
     }
