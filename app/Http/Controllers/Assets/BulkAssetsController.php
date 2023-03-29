@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\AssetCheckoutRequest;
+use App\Models\CustomField;
+use Illuminate\Support\Collection;
 
 class BulkAssetsController extends Controller
 {
@@ -41,6 +43,16 @@ class BulkAssetsController extends Controller
         session(['bulk_back_url' => $bulk_back_url]);
 
         $asset_ids = array_values(array_unique($request->input('ids')));
+       
+        //custom fields logic for bulk edit
+        $asset_custom_field = Asset::whereIn('id', $asset_ids)->whereHas('model', function ($query) {
+            return $query->where('fieldset_id', '!=', null);
+        })->get();
+        $custom_fields = new Collection(); 
+        foreach ($asset_custom_field as $asset_key => $asset) {
+            $custom_fields->push($asset->model->fieldset->fields); 
+        } 
+        $custom_fields = $custom_fields->flatten()->unique('id'); 
 
         if ($request->filled('bulk_actions')) {
             switch ($request->input('bulk_actions')) {
@@ -74,7 +86,8 @@ class BulkAssetsController extends Controller
                     $this->authorize('update', Asset::class);
                     return view('hardware/bulk')
                         ->with('assets', $asset_ids)
-                        ->with('statuslabel_list', Helper::statusLabelList());
+                        ->with('statuslabel_list', Helper::statusLabelList())
+                        ->with('custom_fields', $custom_fields);
             }
         }
 
