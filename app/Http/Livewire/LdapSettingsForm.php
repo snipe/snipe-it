@@ -25,7 +25,7 @@ class LdapSettingsForm extends Component
       public        $ldap_emp_num;
       public        $ldap_email;
       public        $ldap_manager;
-      public string $ad_domain;
+      public        $ad_domain;
       public bool   $is_ad;
       public bool   $ldap_tls;
       public bool   $ldap_pw_sync;
@@ -137,8 +137,6 @@ class LdapSettingsForm extends Component
     }
     public function ldaptest()
     {
-
-
         if ($this->settings->ldap_enabled!='1') {
             \Log::debug('LDAP is not enabled cannot test.');
             return response()->json(['message' => 'LDAP is not enabled, cannot test.'], 400);
@@ -191,9 +189,8 @@ class LdapSettingsForm extends Component
             \Log::debug('Connection failed but we cannot debug it any further on our end.');
             return response()->json(['message' => $e->getMessage()], 500);
         }
-
-
     }
+
     public function ldaptestlogin()
     {
 

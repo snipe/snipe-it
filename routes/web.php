@@ -516,3 +516,13 @@ Route::middleware(['auth'])->get(
     '/',
     [DashboardController::class, 'index']
 )->name('home');
+/*
+|--------------------------------------------------------------------------
+| Livewire Routes
+|--------------------------------------------------------------------------
+|
+|
+|
+*/
+Route::get('ldap',
+    [\App\Http\Livewire\LdapSettingsForm::class, 'ldaptest'])->name('ldaptest');

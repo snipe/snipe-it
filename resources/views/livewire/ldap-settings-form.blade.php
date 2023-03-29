@@ -157,7 +157,7 @@
                             </div>
                         </div>
                     </div><!-- AD Domain -->
-            @if($ldap_enabled == true)
+
                 <!-- LDAP Client-Side TLS key -->
                     <div class="col-md-11 col-md-offset-1">
                         <div class="form-group {{ $errors->has('ldap_client_tls_key') ? 'error' : '' }}">
@@ -197,7 +197,6 @@
                             </div>
                         </div>
                     </div><!-- LDAP Client-Side TLS certificate -->
-                @endif
                 <!-- LDAP Server -->
                     <div class="col-md-11 col-md-offset-1">
                         <div class="form-group {{ $errors->has('ldap_server') ? 'error' : '' }}">
@@ -551,7 +550,7 @@
                                     {{ Form::label('test_ldap_sync', 'Test LDAP Sync') }}
                                 </div>
                                 <div class="col-md-9" id="ldaptestrow">
-                                    <a {{ $setting->demoMode }} class="btn btn-default btn-sm pull-left" id="ldaptest" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test_sync') }}</a>
+                                    <button wire:model="ldaptest" {{ $setting->demoMode }} class="btn btn-default btn-sm pull-left" id="ldaptest" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test_sync') }}</button>
                                 </div>
                                 <div class="col-md-9 col-md-offset-3">
                                     <br />
@@ -634,8 +633,8 @@
 
         </div> <!-- /.col-md-8-->
         </div> <!-- /.row-->
-</form>
-    </div>
+    </form>
+</div>
 @push('moar_scripts')
     <script>
          // * Test the LDAP connection settings
@@ -645,7 +644,7 @@
             $("#ldapad_test_results").html('');
             $("#ldapad_test_results").html('<i class="fas fa-spinner spin"></i> {{ trans('admin/settings/message.ldap.testing') }}');
             $.ajax({
-                url: '{{ route('api.settings.ldaptest') }}',
+                url: '{{ route('ldaptest') }}',
                 type: 'GET',
                 headers: {
                     "X-Requested-With": 'XMLHttpRequest',
