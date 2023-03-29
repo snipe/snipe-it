@@ -140,7 +140,7 @@ class AssetsController extends Controller
             $asset->depreciate              = '0';
             $asset->status_id               = request('status_id');
             $asset->warranty_months         = request('warranty_months', null);
-            $asset->purchase_cost           = Helper::ParseCurrency($request->get('purchase_cost'));
+            $asset->purchase_cost           = $request->get('purchase_cost');
             $asset->purchase_date           = request('purchase_date', null);
             $asset->asset_eol_date          = request('asset_eol_date', null);
             $asset->assigned_to             = request('assigned_to', null);
@@ -312,7 +312,7 @@ class AssetsController extends Controller
 
         $asset->status_id = $request->input('status_id', null);
         $asset->warranty_months = $request->input('warranty_months', null);
-        $asset->purchase_cost = Helper::ParseCurrency($request->input('purchase_cost', null));
+        $asset->purchase_cost = $request->input('purchase_cost', null);
         $asset->asset_eol_date  = request('asset_eol_date', null);
 
         $asset->purchase_date = $request->input('purchase_date', null);

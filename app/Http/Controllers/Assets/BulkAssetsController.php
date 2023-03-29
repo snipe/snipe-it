@@ -135,7 +135,7 @@ class BulkAssetsController extends Controller
                 }
 
                 if ($request->filled('purchase_cost')) {
-                    $this->update_array['purchase_cost'] =  Helper::ParseCurrency($request->input('purchase_cost'));
+                    $this->update_array['purchase_cost'] =  $request->input('purchase_cost');
                 }
 
                 if ($request->filled('company_id')) {

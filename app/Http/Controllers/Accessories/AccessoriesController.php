@@ -77,7 +77,7 @@ class AccessoriesController extends Controller
         $accessory->manufacturer_id         = request('manufacturer_id');
         $accessory->model_number            = request('model_number');
         $accessory->purchase_date           = request('purchase_date');
-        $accessory->purchase_cost           = Helper::ParseCurrency(request('purchase_cost'));
+        $accessory->purchase_cost           = request('purchase_cost');
         $accessory->qty                     = request('qty');
         $accessory->user_id                 = Auth::user()->id;
         $accessory->supplier_id             = request('supplier_id');
@@ -180,7 +180,7 @@ class AccessoriesController extends Controller
             $accessory->order_number = request('order_number');
             $accessory->model_number = request('model_number');
             $accessory->purchase_date = request('purchase_date');
-            $accessory->purchase_cost = Helper::ParseCurrency(request('purchase_cost'));
+            $accessory->purchase_cost = request('purchase_cost');
             $accessory->qty = request('qty');
             $accessory->supplier_id = request('supplier_id');
             $accessory->notes = request('notes');
