@@ -21,6 +21,9 @@
 
     <div class="callout callout-warning">
       <i class="fas fa-exclamation-triangle"></i> {{ trans_choice('admin/hardware/form.bulk_update_warn', count($assets), ['asset_count' => count($assets)]) }}
+        @if (count($models) > 0)
+            made up of {{count($models)}} models
+        @endif 
     </div>
 
     <form class="form-horizontal" method="post" action="{{ route('hardware/bulksave') }}" autocomplete="off" role="form">
@@ -192,7 +195,7 @@
         @endforeach  --}}
 
         @foreach ($models as $model) 
-            <label>
+            <label class="col-md-12 text-center">
                 {{ $model->name }} asset model
             </label>
             @include("models/custom_fields_form",["model" => $model])
