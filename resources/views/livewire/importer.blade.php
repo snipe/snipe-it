@@ -158,7 +158,7 @@
                                                                     ]) }}
                                                                     @if ($activeFile->import_type === 'asset' && $snipeSettings->auto_increment_assets == 0)
                                                                         <span class="help-block">
-                                                                            Generating auto-incrementing asset tags is @if ($userIsSuperUser)<a href="{{ route('settings.asset_tags.index') }}">disabled</a> @else disabled @endif so all rows need to have the "Asset Tag" column populated.
+                                                                            {{ trans('general.auto_incrementing_asset_tags_disabled_so_tags_required') }}
                                                                         </span>
                                                                     @endif
                                                                 </div>
@@ -170,7 +170,7 @@
                                                                     {{ trans('general.update_existing_values') }}
                                                                     @if ($activeFile->import_type === 'asset' && $snipeSettings->auto_increment_assets == 1 && $update)
                                                                         <span class="help-block">
-                                                                            Note: Generating auto-incrementing asset tags is @if ($userIsSuperUser)<a href="{{ route('settings.asset_tags.index') }}">disabled</a> @else enabled @endif so assets will be created for rows that do not have "Asset Tag" populated. Rows that do have "Asset Tag" populated will be updated with the provided information.
+                                                                            {{ trans('general.auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created') }}
                                                                         </span>
                                                                     @endif
                                                                 </label>
