@@ -62,14 +62,16 @@
        
           <div class="row">
             <div class="col-md-12">
+
+
               
-              @if (Request::get('status')!='Deleted')
+              {{-- @if (Request::get('status')!='Deleted') --}}
 
 
 
-                @include('partials.asset-bulk-actions')
+                @include('partials.asset-bulk-actions', ['status' => Request::get('status')])
                    
-              @endif
+              {{-- @endif --}}
 
               <table
                 data-advanced-search="true"

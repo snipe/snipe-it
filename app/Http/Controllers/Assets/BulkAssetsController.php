@@ -56,6 +56,14 @@ class BulkAssetsController extends Controller
                     });
 
                     return view('hardware/bulk-delete')->with('assets', $assets);
+                   
+                case 'restore': 
+                    $assets = Asset::with('assignedTo', 'location')->find($asset_ids);
+                    $assets->each(function ($asset) {
+                        $this->authorize('restore', $asset);
+                    });
+
+                    return view('hardware/bulk-restore')->with('assets', $assets);
                 case 'edit':
                     return view('hardware/bulk')
                         ->with('assets', $asset_ids)
@@ -320,5 +328,13 @@ class BulkAssetsController extends Controller
         } catch (ModelNotFoundException $e) {
             return redirect()->route('hardware.bulkcheckout.show')->with('error', $e->getErrors());
         }
+        
+    }
+    public function restore(Request $request) {
+       $assetIds = $request->get('ids');
+       foreach ($assetIds as $key => $assetId) {
+              $asset = Asset::withTrashed()->find($assetId);
+              $asset->restore(); 
+       } 
     }
 }
