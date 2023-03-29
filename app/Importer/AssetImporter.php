@@ -60,7 +60,7 @@ class AssetImporter extends ItemImporter
             $asset_tag = Asset::autoincrement_asset();
         }
 
-        $asset = Asset::where(['asset_tag'=> $asset_tag])->first();
+        $asset = Asset::where(['asset_tag'=> (string) $asset_tag])->first();
         if ($asset) {
             if (! $this->updating) {
                 $this->log('A matching Asset '.$asset_tag.' already exists');
