@@ -31,8 +31,6 @@
 
       <div class="box box-default">
         <div class="box-body">
-           
-           
           <!-- Purchase Date -->
           <div class="form-group {{ $errors->has('purchase_date') ? ' has-error' : '' }}">
             <label for="purchase_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.date') }}</label>
@@ -187,23 +185,13 @@
             </div>
           </div>
 
-          {{-- @foreach ($custom_fields as $key => $value)  
-            <p>
-                <label>
-                    ({{ $value->id }}) | {{ $value->name}} - {{ $value->format }}
-                </label>
-            </p>
-        @endforeach  --}}
-
         @foreach ($models as $model) 
             <label class="col-md-12 text-center">
                 {{ $model->name }} asset model
             </label>
             @include("models/custom_fields_form",["model" => $model])
         @endforeach  
-
       
-
           @foreach ($assets as $key => $value)
             <input type="hidden" name="ids[{{ $value }}]" value="1">
           @endforeach
