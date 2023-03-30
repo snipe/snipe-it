@@ -597,7 +597,7 @@
 
                                                 @if ($asset->serial && $asset->model->manufacturer)
                                                     @if ((strtolower($asset->model->manufacturer->name) == "apple") || (str_starts_with(str_replace(' ','',strtolower($asset->model->manufacturer->name)),"appleinc")))
-                                                    <a href="https://checkcoverage.apple.com/us/{{ \App\Models\Setting::getSettings()->locale  }}/?sn={{ $asset->serial }}" target="_blank">
+                                                    <a href="https://checkcoverage.apple.com/?locale={{ (str_replace('-','_',\App\Models\Setting::getSettings()->locale)) }}" target="_blank">
                                                         <i class="fa-brands fa-apple" aria-hidden="true"><span class="sr-only">{{ trans('hardware/general.mfg_warranty_lookup') }}</span></i>
                                                     </a>
                                                     @elseif ((strtolower($asset->model->manufacturer->name) == "dell") || (str_starts_with(str_replace(' ','',strtolower($asset->model->manufacturer->name)),"dellinc")))
