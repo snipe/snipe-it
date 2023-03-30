@@ -50,6 +50,8 @@ class LicenseCheckoutWebhookNotificationTest extends TestCase
     {
         Notification::fake();
 
+        Setting::factory()->withWebhookDisabled()->create();
+
         event(new CheckoutableCheckedOut(
             LicenseSeat::factory()->create(),
             $checkoutTarget(),

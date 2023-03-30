@@ -61,6 +61,8 @@ class AssetCheckoutWebhookNotificationTest extends TestCase
     {
         Notification::fake();
 
+        Setting::factory()->withWebhookDisabled()->create();
+
         event(new CheckoutableCheckedOut(
             $this->createAsset(),
             $checkoutTarget(),

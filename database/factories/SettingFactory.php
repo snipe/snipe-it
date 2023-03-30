@@ -52,4 +52,13 @@ class SettingFactory extends Factory
             'webhook_channel' => '#it',
         ]);
     }
+
+    public function withWebhookDisabled()
+    {
+        return $this->state(fn() => [
+            'webhook_botname' => '',
+            'webhook_endpoint' => '',
+            'webhook_channel' => '',
+        ]);
+    }
 }
