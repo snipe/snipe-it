@@ -44,4 +44,19 @@ class LicenseCheckoutWebhookNotificationTest extends TestCase
             }
         );
     }
+
+    /** @dataProvider checkoutTargets */
+    public function testWebhookNotificationsAreNotSentOnLicenseCheckoutWhenWebhookSettingNotEnabled($checkoutTarget)
+    {
+        Notification::fake();
+
+        event(new CheckoutableCheckedOut(
+            LicenseSeat::factory()->create(),
+            $checkoutTarget(),
+            User::factory()->superuser()->create(),
+            ''
+        ));
+
+        Notification::assertNotSentTo(new AnonymousNotifiable, CheckoutLicenseSeatNotification::class);
+    }
 }
