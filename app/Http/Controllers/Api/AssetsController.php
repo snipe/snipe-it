@@ -463,7 +463,7 @@ class AssetsController extends Controller
     {
         $this->authorize('view', Asset::class);
         $this->authorize('view', License::class);
-        $asset = Asset::where('id', $id)->withTrashed()->first();
+        $asset = Asset::where('id', $id)->withTrashed()->firstorfail();
         $licenses = $asset->licenses()->get();
 
         return (new LicensesTransformer())->transformLicenses($licenses, $licenses->count());
