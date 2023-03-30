@@ -13,11 +13,11 @@
         </span>
     </label>
     <select name="bulk_actions" class="form-control select2" aria-label="bulk_actions" style="min-width: 350px;">
-        @if($status ?? '' == 'Deleted')
+        @if(($status) && ($status == 'Deleted'))
         @can('delete', \App\Models\Asset::class)
             <option value="restore">{{trans('button.restore')}}</option> 
         @endcan
-        @else 
+        @else
         @can('update', \App\Models\Asset::class)
             <option value="edit">{{ trans('button.edit') }}</option>
         @endcan
