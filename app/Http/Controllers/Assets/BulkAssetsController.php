@@ -334,10 +334,14 @@ class BulkAssetsController extends Controller
     }
     public function restore(Request $request) {
        $assetIds = $request->get('ids');
-       foreach ($assetIds as $key => $assetId) {
-              $asset = Asset::withTrashed()->find($assetId);
-              $asset->restore(); 
-       } 
-      return redirect()->route('hardware.index')->with('success', 'Assets Restored');
+      if (empty($assetIds)) {
+          return redirect()->route('hardware.index')->with('error', 'No Assets Selected');
+        } else {
+            foreach ($assetIds as $key => $assetId) {
+                    $asset = Asset::withTrashed()->find($assetId);
+                    $asset->restore(); 
+            } 
+        return redirect()->route('hardware.index')->with('success', 'Assets Restored');
+        }
     }
 }
