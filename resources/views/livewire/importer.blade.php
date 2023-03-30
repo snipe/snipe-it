@@ -354,7 +354,7 @@
                             'import-update': !!@this.update,
                             'send-welcome': !!@this.send_welcome,
                             'import-type': @this.activeFile.import_type,
-                            'A': !!@this.run_backup,
+                            'run-backup': !!@this.run_backup,
                             'column-mappings': mappings
                         }),
                         headers: {
