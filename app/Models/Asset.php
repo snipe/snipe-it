@@ -86,11 +86,6 @@ class Asset extends Depreciable
         'created_at'     => 'datetime',
         'updated_at'   => 'datetime',
         'deleted_at'  => 'datetime',
-        'purchase_date' => 'datetime',
-        'last_checkout' => 'datetime',
-        'expected_checkin'  => 'datetime',
-        'last_audit_date'  => 'datetime',
-        'next_audit_date' => 'datetime',
     ];
 
     protected $rules = [
