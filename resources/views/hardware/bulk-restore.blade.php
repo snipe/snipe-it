@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-{{ trans('admin/hardware/form.bulk_delete') }}
+{{ trans('admin/hardware/form.bulk_restore') }}
 @parent
 @stop
 
@@ -16,7 +16,7 @@
 <div class="row">
   <!-- left column -->
   <div class="col-md-12">
-    <p>{{ trans('admin/hardware/form.bulk_delete_help') }}</p>
+    <p>{{ trans('admin/hardware/form.bulk_restore_help') }}</p>
     <form class="form-horizontal" method="post" action="{{ route('hardware/bulkrestore') }}" autocomplete="off" role="form">
       {{csrf_field()}}
       <div class="box box-default">
@@ -53,7 +53,7 @@
 
         <div class="box-footer text-right">
           <a class="btn btn-link" href="{{ URL::previous() }}" method="post" enctype="multipart/form-data">{{ trans('button.cancel') }}</a>
-          <button type="submit" class="btn btn-success" id="submit-button"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('button.delete') }}</button>
+          <button type="submit" class="btn btn-success" id="submit-button"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('button.restore') }}</button>
         </div><!-- /.box-footer -->
       </div><!-- /.box -->
     </form>
