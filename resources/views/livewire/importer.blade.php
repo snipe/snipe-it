@@ -156,26 +156,36 @@
                                                                         'data-minimum-results-for-search' => '-1', // Remove this if the list gets long enough that we need to search
                                                                         'data-livewire-component' => $_instance->id
                                                                     ]) }}
+                                                                    @if ($activeFile->import_type === 'asset' && $snipeSettings->auto_increment_assets == 0)
+                                                                        <span class="help-block">
+                                                                            {{ trans('general.auto_incrementing_asset_tags_disabled_so_tags_required') }}
+                                                                        </span>
+                                                                    @endif
                                                                 </div>
                                                             </div>
 
                                                             <div class="form-group col-md-12">
-                                                                <label for="update" class="col-md-9 col-md-offset-3 col-xs-12" wire:ignore>
-                                                                    <input type="checkbox" class="minimal livewire-icheck" name="update" data-livewire-component="{{ $_instance->id }}">
+                                                                <label for="update" class="col-md-9 col-md-offset-3 col-xs-12">
+                                                                    <input type="checkbox" class="minimal livewire-icheck" name="update" data-livewire-component="{{ $_instance->id }}" wire:model="update">
                                                                     {{ trans('general.update_existing_values') }}
+                                                                    @if ($activeFile->import_type === 'asset' && $snipeSettings->auto_increment_assets == 1 && $update)
+                                                                        <span class="help-block">
+                                                                            {{ trans('general.auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created') }}
+                                                                        </span>
+                                                                    @endif
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-group col-md-12">
-                                                                <label for="send_welcome" class="col-md-9 col-md-offset-3 col-xs-12" wire:ignore>
-                                                                    <input type="checkbox" class="minimal livewire-icheck" name="send_welcome" data-livewire-component="{{ $_instance->id }}">
+                                                                <label for="send_welcome" class="col-md-9 col-md-offset-3 col-xs-12">
+                                                                    <input type="checkbox" class="minimal livewire-icheck" name="send_welcome" data-livewire-component="{{ $_instance->id }}" wire:model="send_welcome">
                                                                     {{ trans('general.send_welcome_email_to_users') }}
                                                                 </label>
                                                             </div>
 
                                                             <div class="form-group col-md-12">
-                                                                <label for="run_backup" class="col-md-9 col-md-offset-3 col-xs-12" wire:ignore>
-                                                                    <input type="checkbox" class="minimal livewire-icheck" name="run_backup" data-livewire-component="{{ $_instance->id }}">
+                                                                <label for="run_backup" class="col-md-9 col-md-offset-3 col-xs-12">
+                                                                    <input type="checkbox" class="minimal livewire-icheck" name="run_backup" data-livewire-component="{{ $_instance->id }}" wire:model="run_backup">
                                                                     {{ trans('general.back_before_importing') }}
                                                                 </label>
                                                             </div>
