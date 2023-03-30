@@ -2,12 +2,14 @@
 
 namespace Tests\Feature\Notifications;
 
+use App\Events\CheckoutableCheckedOut;
 use App\Models\Asset;
 use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\CheckoutAssetNotification;
 use Illuminate\Notifications\AnonymousNotifiable;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
@@ -22,6 +24,15 @@ class AssetCheckoutWebhookNotificationTest extends TestCase
         ];
     }
 
+    public function testAssetCheckoutFiresCheckoutEvent()
+    {
+        Event::fake([CheckoutableCheckedOut::class]);
+
+        $this->createAsset()->checkOut(User::factory()->create(), User::factory()->create());
+
+        Event::assertDispatched(CheckoutableCheckedOut::class);
+    }
+
     /** @dataProvider checkoutTargets */
     public function testWebhookNotificationsAreSentOnAssetCheckoutWhenWebhookSettingEnabled($checkoutTarget)
     {
@@ -29,10 +40,12 @@ class AssetCheckoutWebhookNotificationTest extends TestCase
 
         Setting::factory()->withWebhookEnabled()->create();
 
-        $this->createAsset()->checkOut(
+        event(new CheckoutableCheckedOut(
+            $this->createAsset(),
             $checkoutTarget(),
-            User::factory()->superuser()->create()->id
-        );
+            User::factory()->superuser()->create(),
+            ''
+        ));
 
         Notification::assertSentTo(
             new AnonymousNotifiable,
@@ -48,10 +61,12 @@ class AssetCheckoutWebhookNotificationTest extends TestCase
     {
         Notification::fake();
 
-        $this->createAsset()->checkOut(
+        event(new CheckoutableCheckedOut(
+            $this->createAsset(),
             $checkoutTarget(),
-            User::factory()->superuser()->create()->id
-        );
+            User::factory()->superuser()->create(),
+            ''
+        ));
 
         Notification::assertNotSentTo(new AnonymousNotifiable, CheckoutAssetNotification::class);
     }
