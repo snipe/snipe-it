@@ -84,8 +84,7 @@
 
         <!-- Update actual location  -->
           <div class="form-group">
-            <div class="col-md-3"></div>
-            <div class="col-md-9">
+            <div class="col-md-9 col-md-offset-3">
                 <label class="form-control">
                   {{ Form::radio('update_real_loc', '1', old('update_real_loc'), ['checked'=> 'checked', 'aria-label'=>'update_real_loc']) }}
                   {{ trans('admin/hardware/form.asset_location_update_default_current') }}
