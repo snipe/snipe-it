@@ -62,6 +62,7 @@ mix
       "./resources/assets/js/vue.js", // require()s vue, and require()s bootstrap.js
       "./resources/assets/js/snipeit.js", //this is the actual Snipe-IT JS
       "./resources/assets/js/snipeit_modals.js",
+      "./node_modules/canvas-confetti/dist/confetti.browser.js",
     ],
     "./public/js/build/app.js" //because of compiling - this does not work very well :(
   )

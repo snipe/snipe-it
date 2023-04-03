@@ -35,6 +35,7 @@
         "bootstrap-datepicker": "^1.9.0",
         "bootstrap-less": "^3.3.8",
         "bootstrap-table": "1.20.2",
+        "canvas-confetti": "^1.6.0",
         "chart.js": "^2.9.4",
         "css-loader": "^4.0.0",
         "ekko-lightbox": "^5.1.1",

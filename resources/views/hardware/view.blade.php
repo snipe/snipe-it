@@ -1378,6 +1378,6 @@
 @stop
 
 @section('moar_scripts')
+    @include ('partials.confetti-js')
     @include ('partials.bootstrap-table')
-
 @stop
