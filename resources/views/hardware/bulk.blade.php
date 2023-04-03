@@ -59,7 +59,7 @@
              </div>
               <div class="col-md-5">
                 <label class="form-control">
-                  {{ Form::checkbox('null_expected_checkin_date', '1', false, ['disabled' => 'true', 'checked' => 'false']) }}
+                  {{ Form::checkbox('null_expected_checkin_date', '1', false, ['checked' => 'false']) }}
                   {{ trans_choice('general.set_to_null', count($assets), ['asset_count' => count($assets)]) }}
                 </label>
               </div>
@@ -86,7 +86,7 @@
           <div class="form-group">
             <div class="col-md-3"></div>
             <div class="col-md-9">
-                <label class="form-control form-control--disabled">
+                <label class="form-control">
                   {{ Form::radio('update_real_loc', '1', old('update_real_loc'), ['checked'=> 'checked', 'aria-label'=>'update_real_loc']) }}
                   {{ trans('admin/hardware/form.asset_location_update_default_current') }}
                 </label>
