@@ -185,14 +185,6 @@ $(document).ready(function () {
         }
      });
 
-     /*
-     * iCheck checkbox plugin
-     */
-
-     $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-         checkboxClass: 'icheckbox_minimal-blue',
-         radioClass: 'iradio_minimal-blue'
-     });
 
 
      /*
@@ -611,22 +603,10 @@ function htmlEntities(str) {
  *
  * How to use:
  *
- * 1. Set the class of your select2 elements to 'livewire-select2' and your icheck elements to 'livewire-icheck' (as appropriate).
- *    (For iCheck, you may still need to apply the other iCheck classes like 'minimal' or 'iCheck')
+ * 1. Set the class of your select2 elements to 'livewire-select2').
  * 2. Name your element to match a property in your Livewire component
  * 3. Add an attribute called 'data-livewire-component' that points to $_instance->id (via `{{ }}` if you're in a blade,
  *    or just $_instance->id if not).
- * 4. For iCheck, you need to wrap the 'checkbox' element with wire:ignore - perhaps in the <label> if it wraps the
- *    <input> element, or just put a <span wire:ignore></span> around just the input element.
- * 5. If you have dynamically shown/hidden checkboxes, you might need to initialize iCheck on them on component page-load.
- *    Just use $('.livewire-icheck').iCheck(), or for the minimal-style, use:
- *
- *    $('input[type="checkbox"].minimal.livewire-icheck, input[type="radio"].minimal.livewire-icheck').iCheck({
- *          checkboxClass: 'icheckbox_minimal-blue',
- *          radioClass: 'iradio_minimal-blue'
- *      });
- *
- *    (which is stolen from above here in this JS file)
  */
 $(function () {
     $('.livewire-select2').select2()
