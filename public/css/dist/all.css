@@ -21545,127 +21545,6 @@ a.ui-button:active,
 	box-shadow: 0px 0px 5px #666666;
 }
 
-/* iCheck plugin Minimal skin, blue
------------------------------------ */
-.icheckbox_minimal-blue,
-.iradio_minimal-blue {
-    display: inline-block;
-    *display: inline;
-    vertical-align: middle;
-    margin: 0;
-    padding: 0;
-    width: 18px;
-    height: 18px;
-    background: url(blue.png) no-repeat;
-    border: none;
-    cursor: pointer;
-}
-
-.icheckbox_minimal-blue {
-    background-position: 0 0;
-}
-    .icheckbox_minimal-blue.hover {
-        background-position: -20px 0;
-    }
-    .icheckbox_minimal-blue.checked {
-        background-position: -40px 0;
-    }
-    .icheckbox_minimal-blue.disabled {
-        background-position: -60px 0;
-        cursor: default;
-    }
-    .icheckbox_minimal-blue.checked.disabled {
-        background-position: -80px 0;
-    }
-
-.iradio_minimal-blue {
-    background-position: -100px 0;
-}
-    .iradio_minimal-blue.hover {
-        background-position: -120px 0;
-    }
-    .iradio_minimal-blue.checked {
-        background-position: -140px 0;
-    }
-    .iradio_minimal-blue.disabled {
-        background-position: -160px 0;
-        cursor: default;
-    }
-    .iradio_minimal-blue.checked.disabled {
-        background-position: -180px 0;
-    }
-
-/* Retina support */
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-       only screen and (-moz-min-device-pixel-ratio: 1.5),
-       only screen and (-o-min-device-pixel-ratio: 3/2),
-       only screen and (min-device-pixel-ratio: 1.5) {
-    .icheckbox_minimal-blue,
-    .iradio_minimal-blue {
-        background-image: url(blue@2x.png);
-        -webkit-background-size: 200px 20px;
-        background-size: 200px 20px;
-    }
-}
-/* iCheck plugin Minimal skin, black
------------------------------------ */
-.icheckbox_minimal,
-.iradio_minimal {
-    display: inline-block;
-    *display: inline;
-    vertical-align: middle;
-    margin: 0;
-    padding: 0;
-    width: 18px;
-    height: 18px;
-    background: url(minimal.png) no-repeat;
-    border: none;
-    cursor: pointer;
-}
-
-.icheckbox_minimal {
-    background-position: 0 0;
-}
-    .icheckbox_minimal.hover {
-        background-position: -20px 0;
-    }
-    .icheckbox_minimal.checked {
-        background-position: -40px 0;
-    }
-    .icheckbox_minimal.disabled {
-        background-position: -60px 0;
-        cursor: default;
-    }
-    .icheckbox_minimal.checked.disabled {
-        background-position: -80px 0;
-    }
-
-.iradio_minimal {
-    background-position: -100px 0;
-}
-    .iradio_minimal.hover {
-        background-position: -120px 0;
-    }
-    .iradio_minimal.checked {
-        background-position: -140px 0;
-    }
-    .iradio_minimal.disabled {
-        background-position: -160px 0;
-        cursor: default;
-    }
-    .iradio_minimal.checked.disabled {
-        background-position: -180px 0;
-    }
-
-/* HiDPI support */
-@media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
-    .icheckbox_minimal,
-    .iradio_minimal {
-        background-image: url(minimal@2x.png);
-        -webkit-background-size: 200px 20px;
-        background-size: 200px 20px;
-    }
-}
 /*!
  * Datepicker for Bootstrap v1.9.0 (https://github.com/uxsolutions/bootstrap-datepicker)
  *
@@ -23946,6 +23825,20 @@ input[type="radio"]::before {
 input[type="radio"]:checked::before {
   transform: scale(1);
 }
+/**
+* This addresses the column selector in bootstrap-table. Without these two lines, the
+* checkbox and the <span></span> with the label text that BS tables generates will
+* end up on two different lines and it looks assy.
+ */
+.dropdown-item-marker input[type=checkbox] {
+  font-size: 10px;
+}
+.bootstrap-table .fixed-table-toolbar li.dropdown-item-marker label {
+  font-weight: normal;
+  display: grid;
+  grid-template-columns: 0.1em auto;
+  gap: 1.5em;
+}
 
 
 .select2-container {
@@ -25130,5 +25023,19 @@ input[type="radio"]::before {
 }
 input[type="radio"]:checked::before {
   transform: scale(1);
+}
+/**
+* This addresses the column selector in bootstrap-table. Without these two lines, the
+* checkbox and the <span></span> with the label text that BS tables generates will
+* end up on two different lines and it looks assy.
+ */
+.dropdown-item-marker input[type=checkbox] {
+  font-size: 10px;
+}
+.bootstrap-table .fixed-table-toolbar li.dropdown-item-marker label {
+  font-weight: normal;
+  display: grid;
+  grid-template-columns: 0.1em auto;
+  gap: 1.5em;
 }
 

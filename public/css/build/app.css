@@ -1066,4 +1066,18 @@ input[type="radio"]::before {
 input[type="radio"]:checked::before {
   transform: scale(1);
 }
+/**
+* This addresses the column selector in bootstrap-table. Without these two lines, the
+* checkbox and the <span></span> with the label text that BS tables generates will
+* end up on two different lines and it looks assy.
+ */
+.dropdown-item-marker input[type=checkbox] {
+  font-size: 10px;
+}
+.bootstrap-table .fixed-table-toolbar li.dropdown-item-marker label {
+  font-weight: normal;
+  display: grid;
+  grid-template-columns: 0.1em auto;
+  gap: 1.5em;
+}
 
