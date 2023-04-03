@@ -950,9 +950,6 @@ th.css-accessory > .th-inner::before {
 .select2-container--default .select2-selection--multiple {
   border-radius: 0px;
 }
-.bs-checkbox input {
-  zoom: 1.5;
-}
 @media screen and (max-width: 511px) {
   .sidebar-menu {
     margin-top: 160px;
@@ -972,5 +969,101 @@ th.css-accessory > .th-inner::before {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+/** form-stuff overrides for checkboxes and stuff **/
+.form-control--disabled {
+  color: #959495;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+label.form-control {
+  font-weight: bold;
+  display: grid;
+  grid-template-columns: 1.8em auto;
+  gap: 0.5em;
+  border: 0px;
+  padding-left: 0px;
+}
+/** Checkbox style to replace iCheck **/
+input[type="checkbox"] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  /* For iOS < 15 to remove gradient background */
+  background-color: #fff;
+  /* Not removed via appearance */
+  margin: 0;
+  font: inherit;
+  color: #959495;
+  width: 1.8em;
+  height: 1.8em;
+  border: 0.05em solid;
+  border-radius: 0em;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+  /*Windows High Contrast Mode*/
+}
+input[type="checkbox"]::before {
+  /** If you want to use the non-checkbox, filled square, use this instead **/
+  content: "";
+  width: 1em;
+  height: 1em;
+  -webkit-clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+          clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transform: scale(0);
+  transform-origin: bottom left;
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #428bca;
+  /* Windows High Contrast Mode */
+  background-color: CanvasText;
+}
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+input[type=checkbox]:disabled::before,
+input[type=radio]:disabled::before {
+  content: "";
+  width: 1em;
+  height: 1em;
+  transform: scale(1);
+  box-shadow: inset 1em 1em #959495;
+}
+input[type=checkbox]:disabled,
+input[type=radio]:disabled {
+  --form-control-color: #959495;
+  color: #959495;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+/** Radio style to replace iCheck **/
+input[type="radio"] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
+  color: #959495;
+  width: 1.8em;
+  height: 1.8em;
+  border: 0.05em solid;
+  border-radius: 50%;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+}
+input[type="radio"]::before {
+  content: "";
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #428bca;
+}
+input[type="radio"]:checked::before {
+  transform: scale(1);
 }
 
