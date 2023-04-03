@@ -185,12 +185,13 @@
             </div>
           </div>
 
-        @foreach ($models as $model) 
+        {{-- @foreach ($models as $model) 
             <label class="col-md-12 text-center">
                 {{ $model->name }} asset model
-            </label>
-            @include("models/custom_fields_form",["model" => $model])
-        @endforeach  
+            </label> --}}
+            {{-- @include("models/custom_fields_form",["model" => $model]) --}}
+            @include("models/custom_fields_form_bulk_edit",["models" => $models])
+        {{-- @endforeach   --}}
       
           @foreach ($assets as $key => $value)
             <input type="hidden" name="ids[{{ $value }}]" value="1">
