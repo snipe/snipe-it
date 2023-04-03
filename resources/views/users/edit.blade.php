@@ -488,17 +488,21 @@
                           @if ($snipeSettings->two_factor_enabled!='')
                               @if ($snipeSettings->two_factor_enabled=='1')
                                   <div class="form-group">
-                                      <div class="col-md-3 control-label">
-                                          {{ Form::label('two_factor_optin', trans('admin/settings/general.two_factor')) }}
-                                      </div>
-                                      <div class="col-md-9">
+                                      <div class="col-md-9 col-md-offset-3">
+
                                           @if (config('app.lock_passwords'))
-                                              <div class="icheckbox disabled">
-                                                  {{ Form::checkbox('two_factor_optin', '1', Request::old('two_factor_optin', $user->two_factor_optin),['class' => 'minimal', 'disabled'=>'disabled']) }} {{ trans('admin/settings/general.two_factor_enabled_text') }}
-                                                  <p class="help-block">{{ trans('general.feature_disabled') }}</p>
-                                              </div>
+
+                                              <label class="form-control form-control--disabled" for="two_factor_optin">
+                                                  <input type="checkbox" value="1" name="two_factor_optin" {{ (old('two_factor_optin', $user->two_factor_optin)) == '1' ? ' checked="checked"' : '' }} aria-label="two_factor_optin" disabled>
+                                                  {{ trans('admin/settings/general.two_factor') }}
+                                              </label>
+
                                           @else
-                                              {{ Form::checkbox('two_factor_optin', '1', Request::old('two_factor_optin', $user->two_factor_optin),['class' => 'minimal']) }} {{ trans('admin/settings/general.two_factor_enabled_text') }}
+
+                                              <label class="form-control" for="two_factor_optin">
+                                                  <input type="checkbox" value="1" name="two_factor_optin" {{ (old('two_factor_optin', $user->two_factor_optin)) == '1' ? ' checked="checked"' : '' }} aria-label="two_factor_optin">
+                                                  {{ trans('admin/settings/general.two_factor') }}
+                                              </label>
                                               <p class="help-block">{{ trans('admin/users/general.two_factor_admin_optin_help') }}</p>
 
                                           @endif
