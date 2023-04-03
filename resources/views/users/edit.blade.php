@@ -104,6 +104,7 @@
                 <!-- Username -->
                 <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
                   <label class="col-md-3 control-label" for="username">{{ trans('admin/users/table.username') }}</label>
+
                   <div class="col-md-6{{  (Helper::checkIfRequired($user, 'username')) ? ' required' : '' }}">
                     @if ($user->ldap_import!='1' || str_contains(Route::currentRouteName(), 'clone'))
                       <input
@@ -118,17 +119,28 @@
                         onfocus="this.removeAttribute('readonly');"
                         {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}
                       >
-                      @if (config('app.lock_passwords') && ($user->id))
-                        <p class="help-block">{{ trans('admin/users/table.lock_passwords') }}</p>
-                      @endif
-                    @else
-                      {{ trans('general.managed_ldap') }}
-                          <input type="hidden" name="username" value="{{ Request::old('username', $user->username) }}">
 
+                    @else
+                        <!-- insert the old username so we don't break validation -->
+                         {{ trans('general.managed_ldap') }}
+                          <input type="hidden" name="username" value="{{ Request::old('username', $user->username) }}">
+                    @endif
+                  </div>
+
+
+                    @if (config('app.lock_passwords') && ($user->id))
+                        <!-- disallow changing existing usernames on the demo -->
+                        <div class="col-md-8 col-md-offset-3">
+                            <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                        </div>
                     @endif
 
-                    {!! $errors->first('username', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                  </div>
+                    @if ($errors->first('username'))
+                        <div class="col-md-8 col-md-offset-3">
+                            {!! $errors->first('username', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                        </div>
+                    @endif
+
                 </div>
 
                 <!-- Password -->
@@ -191,14 +203,15 @@
                 </div>
                 @endif
 
-              <!-- Activation Status -->
+              <!-- Activation Status (Can the user login?) -->
                   <div class="form-group {{ $errors->has('activated') ? 'has-error' : '' }}">
                           <div class="col-md-9 col-md-offset-3">
 
+                              <!-- checkbox($name, $value = 1, $checked = null, $options = array() -->
                               @if (config('app.lock_passwords'))
                                   <!-- demo mode - disallow changes -->
                                   <label class="form-control form-control--disabled">
-                                      {{ Form::checkbox('activated', '1', old('activated'), ['disabled' => true, 'checked'=> 'checked', 'aria-label'=>'update_real_loc']) }}
+                                      <input type="checkbox" value="1" name="activated" class="disabled" {{ (old('activated', $user->activated)) == '1' ? ' checked="checked"' : '' }} disabled="disabled" aria-label="activated">
                                       {{ trans('admin/users/general.activated_help_text') }}
 
                                   </label>
@@ -207,6 +220,7 @@
                               @elseif ($user->id === Auth::user()->id)
                                   <!-- disallow the user from editing their own login status -->
                                   <label class="form-control form-control--disabled">
+                                      <input type="checkbox" value="1" name="activated" class="disabled" {{ (old('activated', $user->activated)) == '1' ? ' checked="checked"' : '' }} disabled="disabled">
                                       {{ Form::checkbox('activated', '1', old('activated'), ['disabled' => true, 'checked'=> 'checked', 'aria-label'=>'update_real_loc']) }}
                                       {{ trans('admin/users/general.activated_help_text') }}
                                   </label>
@@ -602,6 +616,7 @@
 $(document).ready(function() {
 
     $('#email_user_checkbox').prop("disabled", true);
+
     $('#activated').on('ifChecked', function(event){
         console.log('user activated is checked');
         $("#email_user_row").show();
@@ -614,12 +629,14 @@ $(document).ready(function() {
     $('#email').on('keyup',function(){
         event.preventDefault();
 
+        @if (!config('app.lock_passwords'))
         if(this.value.length > 5){
             $('#email_user_checkbox').prop("disabled", false);
             $("#email_user_checkbox").parent().removeClass("form-control--disabled");
         } else {
             $('#email_user_checkbox').prop("disabled", true);
         }
+        @endif
     });
 
 
