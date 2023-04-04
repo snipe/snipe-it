@@ -36,7 +36,7 @@
               <table class="display table table-hover">
                 <thead>
                   <tr>
-                    <th class="col-md-1"></th>
+                    <th class="col-md-1"><input type="checkbox" id="checkAll"></th>
                     <th class="col-md-6">{{ trans('general.name') }}</th>
                     <th class="col-md-5">{{ trans('general.groups') }}</th>
                     <th class="col-md-5">{{ trans('general.assets') }}</th>
@@ -50,9 +50,9 @@
                   <tr {!! ($user->isSuperUser() ? ' class="danger"':'') !!}>
                     <td>
                       @if (Auth::id()!=$user->id)
-                      <input type="checkbox" name="ids[]" value="{{ $user->id }}" class="minimal" checked="checked">
+                      <input type="checkbox" name="ids[]" value="{{ $user->id }}"  checked="checked">
                       @else
-                      <input type="checkbox" name="ids[]" value="{{ $user->id }}" class="minimal" disabled>
+                      <input type="checkbox" name="ids[]" class="cannot_delete" value="{{ $user->id }}" disabled>
                       @endif
                     </td>
 
@@ -120,7 +120,14 @@
 
 @section('moar_scripts')
 <script>
-    $(":submit").attr("disabled", "disabled");
+
+
+  $("#checkAll").change(function () {
+    $("input:checkbox").prop('checked', $(this).prop("checked"));
+  });
+
+
+  $(":submit").attr("disabled", "disabled");
     $("[name='status_id']").on('select2:select', function (e) {
         if (e.params.data.id != ""){
             console.log(e.params.data.id);
