@@ -603,7 +603,7 @@ th.css-accessory > .th-inner::before {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-/** form-stuff overrides for checkboxes and stuff **/
+/** Form-stuff overrides for checkboxes and stuff **/
 .form-control--disabled {
   color: #959495;
   pointer-events: none;
@@ -617,7 +617,9 @@ label.form-control {
   border: 0px;
   padding-left: 0px;
 }
-/** Checkbox style to replace iCheck **/
+/** --------------------------------------- **/
+/** Start checkbox styles to replace iCheck **/
+/** --------------------------------------- **/
 input[type="checkbox"] {
   /* Add if not using autoprefixer */
   -webkit-appearance: none;
@@ -638,6 +640,7 @@ input[type="checkbox"] {
   place-content: center;
   /*Windows High Contrast Mode*/
 }
+/** This sets the display of a checkbox, and what the "fill" checkmark should look like */
 input[type="checkbox"]::before {
   /** If you want to use the non-checkbox, filled square, use this instead **/
   content: "";
@@ -652,9 +655,11 @@ input[type="checkbox"]::before {
   /* Windows High Contrast Mode */
   background-color: CanvasText;
 }
+/** This sets the size of the scale up for the shape we defined above **/
 input[type="checkbox"]:checked::before {
   transform: scale(1);
 }
+/** This sets the scale of the DISABLED but CHECKED checkbox */
 input[type=checkbox]:disabled::before,
 input[type=radio]:disabled::before {
   content: "";
@@ -663,6 +668,14 @@ input[type=radio]:disabled::before {
   transform: scale(1);
   box-shadow: inset 1em 1em #959495;
 }
+/* This sets the scale and style of a DISABLED checkbox that is NOT checked */
+input[type=checkbox]:disabled:not(:checked)::before,
+input[type=radio]:disabled:not(:checked)::before {
+  content: "";
+  transform: scale(0);
+  cursor: not-allowed;
+  pointer-events: none;
+}
 input[type=checkbox]:disabled,
 input[type=radio]:disabled {
   --form-control-color: #959495;
@@ -670,7 +683,7 @@ input[type=radio]:disabled {
   cursor: not-allowed;
   pointer-events: none;
 }
-/** Radio style to replace iCheck **/
+/** Radio styles to replace iCheck **/
 input[type="radio"] {
   -webkit-appearance: none;
      -moz-appearance: none;
@@ -713,4 +726,7 @@ input[type="radio"]:checked::before {
   grid-template-columns: 0.1em auto;
   gap: 1.5em;
 }
+/** --------------------------------------- **/
+/** End checkbox styles to replace iCheck   **/
+/** --------------------------------------- **/
 
