@@ -43,8 +43,8 @@
 @if (($item->image) && ($item->image!=''))
     <div class="form-group{{ $errors->has('image_delete') ? ' has-error' : '' }}">
         <div class="col-md-9 col-md-offset-3">
-            <label for="image_delete">
-                {{ Form::checkbox('image_delete', '1', old('image_delete'), ['class'=>'minimal','aria-label'=>'image_delete']) }}
+            <label for="image_delete" class="form-control">
+                {{ Form::checkbox('image_delete', '1', old('image_delete'), ['aria-label'=>'image_delete']) }}
                 {{ trans('general.image_delete') }}
                 {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
             </label>
