@@ -864,14 +864,73 @@
                             <div class="col-md-4">
 
                                 @if (($asset->image) || (($asset->model) && ($asset->model->image!='')))
-
-
                                     <div class="text-center col-md-12" style="padding-bottom: 15px;">
                                         <a href="{{ ($asset->getImageUrl()) ? $asset->getImageUrl() : null }}" data-toggle="lightbox">
                                             <img src="{{ ($asset->getImageUrl()) ? $asset->getImageUrl() : null }}" class="assetimg img-responsive" alt="{{ $asset->getDisplayNameAttribute() }}">
                                         </a>
                                     </div>
+                                @else
+                                    <!-- generic image goes here -->
                                 @endif
+
+                                    <!-- Start button column -->
+
+                                    @if (($asset->assetstatus) && ($asset->assetstatus->deployable=='1'))
+                                        @if (($asset->assigned_to != '') && ($asset->deleted_at==''))
+                                            @can('checkin', \App\Models\Asset::class)
+                                                <div class="col-md-12">
+                                                    <a href="{{ route('hardware.checkin.create', $asset->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">
+                                                        {{ trans('admin/hardware/general.checkin') }}
+                                                    </a>
+                                                </div>
+                                            @endcan
+                                        @elseif (($asset->assigned_to == '') && ($asset->deleted_at==''))
+                                            @can('checkout', \App\Models\Asset::class)
+                                                <div class="col-md-12" style="padding-top: 5px;">
+                                                    <a href="{{ route('hardware.checkout.create', $asset->id)  }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">
+                                                        {{ trans('admin/hardware/general.checkout') }}
+                                                    </a>
+                                                </div>
+                                            @endcan
+                                        @endif
+                                    @endif
+
+
+                                    @can('update', $asset)
+                                        <div class="col-md-12" style="padding-top: 5px;">
+                                            <a href="{{ route('hardware.edit', $asset->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">
+                                                {{ trans('admin/hardware/general.edit') }}
+                                            </a>
+                                        </div>
+                                    @endcan
+
+                                    @can('create', $asset)
+                                        <div class="col-md-12" style="padding-top: 5px;">
+                                            <a href="{{ route('clone/hardware', $asset->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">
+                                                {{ trans('admin/hardware/general.clone') }}
+                                            </a>
+                                        </div>
+                                    @endcan
+
+                                    @can('audit', \App\Models\Asset::class)
+                                        <div class="col-md-12" style="padding-top: 5px;">
+                                            <a href="{{ route('asset.audit.create', $asset->id)  }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">
+                                                {{ trans('general.audit') }}
+                                            </a>
+                                        </div>
+                                    @endcan
+
+                                    @can('delete', $asset)
+                                        @if ($asset->deleted_at=='')
+                                            <div class="col-md-12" style="padding-top: 30px; padding-bottom: 30px;">
+                                                <form action="{{ route('delete/assetfile', [$asset->id,12]) }}" method="POST">
+                                                    {{csrf_field()}}
+                                                    {{ method_field("DELETE")}}
+                                                    <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.delete')}}</button>
+                                                </form>
+                                            </div>
+                                        @endif
+                                    @endcan
 
                                 @if ($asset->deleted_at!='')
                                     <div class="text-center col-md-12" style="padding-bottom: 15px;">
@@ -887,11 +946,13 @@
                                 @endif
 
                                 @if (($asset->assignedTo) && ($asset->deleted_at==''))
-                                    <h2>{{ trans('admin/hardware/form.checkedout_to') }}</h2>
+                                    <div style="text-align: center">
+                                        <h2>{{ trans('admin/hardware/form.checkedout_to') }}</h2>
                                         <p>
                                         @if($asset->checkedOutToUser()) <!-- Only users have avatars currently-->
-                                            <img src="{{ $asset->assignedTo->present()->gravatar() }}" class="user-image-inline" alt="{{ $asset->assignedTo->present()->fullName() }}">
+                                            <img src="{{ $asset->assignedTo->present()->gravatar() }}" alt="{{ $asset->assignedTo->present()->fullName() }}">
                                             @endif
+                                        </p>
                                             {!! $asset->assignedTo->present()->glyph() . ' ' .$asset->assignedTo->present()->nameUrl() !!}
                                         </p>
 
@@ -926,6 +987,7 @@
                                                 </li>
                                             @endif
                                         </ul>
+                                    </div>
 
                                 @endif
                             </div> <!-- div.col-md-4 -->
