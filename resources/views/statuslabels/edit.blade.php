@@ -23,9 +23,11 @@
 
 <!-- Label type -->
 <div class="form-group{{ $errors->has('statuslabel_types') ? ' has-error' : '' }}">
-    <label for="statuslabel_types" class="col-md-3 control-label">{{ trans('admin/statuslabels/table.status_type') }} </label>
+    <label for="statuslabel_types" class="col-md-3 control-label">
+        {{ trans('admin/statuslabels/table.status_type') }}
+    </label>
     <div class="col-md-7 required">
-        {{ Form::select('statuslabel_types', $statuslabel_types, $item->getStatuslabelType(), array('class'=>'select2', 'style'=>'min-width:400px', 'aria-label'=>'statuslabel_types')) }}
+        {{ Form::select('statuslabel_types', $statuslabel_types, $item->getStatuslabelType(), array('class'=>'select2', 'style'=>'width: 100%; min-width:400px', 'aria-label'=>'statuslabel_types')) }}
         {!! $errors->first('statuslabel_types', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
 </div>
@@ -46,19 +48,23 @@
 
 <!-- Show in Nav -->
 <div class="form-group{{ $errors->has('notes') ? ' has-error' : '' }}">
-
-    <label class="col-md-offset-3" style="padding-left: 15px;">
-        <input type="checkbox" value="1" name="show_in_nav" id="show_in_nav" class="minimal" {{ Request::old('show_in_nav', $item->show_in_nav) == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/statuslabels/table.show_in_nav') }}
-    </label>
+    <div class="col-md-9 col-md-offset-3">
+        <label class="form-control">
+            <input type="checkbox" value="1" name="show_in_nav" id="show_in_nav" {{ Request::old('show_in_nav', $item->show_in_nav) == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/statuslabels/table.show_in_nav') }}
+        </label>
+    </div>
 </div>
 
 <!-- Set as Default -->
 <div class="form-group{{ $errors->has('default_label') ? ' has-error' : '' }}">
 
-    <label class="col-md-offset-3" style="padding-left: 15px;">
-        <input type="checkbox" value="1" name="default_label" id="default_label" class="minimal" {{ Request::old('default_label', $item->default_label) == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/statuslabels/table.default_label') }}
-    </label>
-    <p class="col-md-offset-3 help-block"> {{ trans('admin/statuslabels/table.default_label_help') }}</p>
+    <div class="col-md-9 col-md-offset-3">
+        <label class="form-control">
+            <input type="checkbox" value="1" name="default_label" id="default_label" {{ Request::old('default_label', $item->default_label) == '1' ? ' checked="checked"' : '' }}>
+             {{ trans('admin/statuslabels/table.default_label') }}
+        </label>
+        <p class="help-block"> {{ trans('admin/statuslabels/table.default_label_help') }}</p>
+    </div>
 </div>
 
 @stop

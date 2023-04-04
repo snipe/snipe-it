@@ -56,10 +56,14 @@
 
 <!-- Reassignable -->
 <div class="form-group {{ $errors->has('reassignable') ? ' has-error' : '' }}">
-    <label for="reassignable" class="col-md-3 control-label">{{ trans('admin/licenses/form.reassignable') }}</label>
-    <div class="col-md-7 input-group">
-        {{ Form::Checkbox('reassignable', '1', old('reassignable', $item->id ? $item->reassignable : '1'),array('class' => 'minimal', 'aria-label'=>'reassignable')) }}
+    <div class="col-md-3 control-label">
+        <strong>{{ trans('admin/licenses/form.reassignable') }}</strong>
+    </div>
+    <div class="col-md-7">
+        <label class="form-control">
+        {{ Form::Checkbox('reassignable', '1', old('reassignable', $item->id ? $item->reassignable : '1'),array('aria-label'=>'reassignable')) }}
         {{ trans('general.yes') }}
+        </label>
     </div>
 </div>
 
@@ -110,10 +114,12 @@
 
 <!-- Maintained -->
 <div class="form-group {{ $errors->has('maintained') ? ' has-error' : '' }}">
-    <label for="maintained" class="col-md-3 control-label">{{ trans('admin/licenses/form.maintained') }}</label>
-    <div class="checkbox col-md-7">
-        {{ Form::Checkbox('maintained', '1', old('maintained', $item->maintained),array('class' => 'minimal', 'aria-label'=>'maintained')) }}
+    <div class="col-md-3 control-label"><strong>{{ trans('admin/licenses/form.maintained') }}</strong></div>
+    <div class="col-md-7">
+        <label class="form-control">
+        {{ Form::Checkbox('maintained', '1', old('maintained', $item->maintained),array('aria-label'=>'maintained')) }}
         {{ trans('general.yes') }}
+        </label>
     </div>
 </div>
 

@@ -36,7 +36,9 @@
               <table class="display table table-hover">
                 <thead>
                   <tr>
-                    <th class="col-md-1"><input type="checkbox" id="checkAll"></th>
+                    <th class="col-md-1">
+                      <!-- <input type="checkbox" id="checkAll"> -->
+                      </th>
                     <th class="col-md-6">{{ trans('general.name') }}</th>
                     <th class="col-md-5">{{ trans('general.groups') }}</th>
                     <th class="col-md-5">{{ trans('general.assets') }}</th>
@@ -122,9 +124,10 @@
 <script>
 
 
-  $("#checkAll").change(function () {
-    $("input:checkbox").prop('checked', $(this).prop("checked"));
-  });
+  // TODO: include a class that excludes certain checkboxes by class to not be select-all'd
+  // $("#checkAll").change(function () {
+  //   $("input:checkbox").prop('checked', $(this).prop("checked"));
+  // });
 
 
   $(":submit").attr("disabled", "disabled");
