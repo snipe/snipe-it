@@ -18,8 +18,8 @@
           <div class="col-md-12">
             <div class="callout callout-danger">
               <i class="fas fa-exclamation-triangle"></i>
-              <strong>{{ trans('admin/users/general.warning_deletion') }} </strong>
-              {{ trans('admin/users/general.warning_deletion_information', array('count' => count($users))) }}
+              <strong>{{ trans('admin/users/general.warning_deletion_information', array('count' => count($users))) }} </strong>
+
             </div>
           </div>
 
