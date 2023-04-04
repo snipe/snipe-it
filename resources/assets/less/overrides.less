@@ -692,22 +692,21 @@ th.css-accessory > .th-inner::before
 
 /** Form-stuff overrides for checkboxes and stuff **/
 
-.form-control--disabled {
-  color: #959495;
-  pointer-events:none;
-  cursor: not-allowed;
-
-}
-
 label.form-control {
-  font-weight: bold;
   display: grid;
-  grid-template-columns: 1.8em auto auto;
+  grid-template-columns: 1.8em auto;
   gap: 0.5em;
   border: 0px;
   padding-left: 0px;
   background-color: inherit;
   color: inherit;
+  font-size: inherit;
+}
+
+.form-control--disabled {
+  color: #959495;
+  pointer-events:none;
+  cursor: not-allowed;
 }
 
 /** --------------------------------------- **/
