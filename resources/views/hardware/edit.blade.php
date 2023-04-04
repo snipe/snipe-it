@@ -22,14 +22,14 @@
       <!-- we are editing an existing asset -->
       @if  ($item->id)
           <div class="col-md-7 col-sm-12{{  (Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
-          <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ Request::old('asset_tag', $item->asset_tag) }}" data-validation="required">
+          <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ old('asset_tag', $item->asset_tag) }}" data-validation="required">
               {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
               {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
           </div>
       @else
           <!-- we are creating a new asset - let people use more than one asset tag -->
           <div class="col-md-7 col-sm-12{{  (Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
-              <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ Request::old('asset_tag', \App\Models\Asset::autoincrement_asset()) }}" data-validation="required">
+              <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ old('asset_tag', \App\Models\Asset::autoincrement_asset()) }}" data-validation="required">
               {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
               {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
           </div>
@@ -71,8 +71,8 @@
     @if (($item->image) && ($item->image!=''))
         <div class="form-group{{ $errors->has('image_delete') ? ' has-error' : '' }}">
             <div class="col-md-9 col-md-offset-3">
-                <label for="image_delete">
-                    {{ Form::checkbox('image_delete', '1', old('image_delete'), ['class'=>'minimal','aria-label'=>'image_delete']) }}
+                <label for="image_delete" class="form-control">
+                    {{ Form::checkbox('image_delete', '1', old('image_delete'), ['aria-label'=>'image_delete']) }}
                     {{ trans('general.image_delete') }}
                     {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
                 </label>
@@ -95,7 +95,7 @@
         @endif
         @if (Request::old('model_id'))
             @php
-                $model = \App\Models\AssetModel::find(Request::old('model_id'));
+                $model = \App\Models\AssetModel::find(old('model_id'));
             @endphp
         @elseif (isset($selected_model))
             @php
@@ -127,8 +127,8 @@
             <!-- byod checkbox -->
             <div class="form-group">
                 <div class="col-md-7 col-md-offset-3">
-                    <label for="byod">
-                        <input type="checkbox" value="1" name="byod" class="minimal" {{ (old('remote', $item->byod)) == '1' ? ' checked="checked"' : '' }} aria-label="byod">
+                    <label for="byod" class="form-control">
+                        <input type="checkbox" value="1" name="byod" {{ (old('remote', $item->byod)) == '1' ? ' checked="checked"' : '' }} aria-label="byod">
                         {{ trans('general.byod') }}
 
                     </label>
