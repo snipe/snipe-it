@@ -93,10 +93,10 @@
                     </td>
                   </tr>
                   <tr>
-                    <td colspan="7" class="text-danger">
-                      <label>
-                        <input type="checkbox" name="delete_user" value="1" class="minimal">
-                        <i class="fa fa-warning text-danger"></i> {{ trans('general.bulk_soft_delete') }}
+                    <td colspan="7" class="col-md-12 alert-danger">
+                      <label class="form-control">
+                        <input type="checkbox" name="delete_user" value="1">
+                        <span><i class="fa fa-warning fa-2x"></i> {{ trans('general.bulk_soft_delete') }}</span>
                       </label>
                     </td>
                   </tr>
