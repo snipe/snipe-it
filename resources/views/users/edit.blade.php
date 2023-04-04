@@ -112,7 +112,7 @@
                         type="text"
                         name="username"
                         id="username"
-                        value="{{ Request::old('username', $user->username) }}"
+                        value="{{ old('username', $user->username) }}"
                         autocomplete="off"
                         maxlength="191"
                         readonly
@@ -228,7 +228,7 @@
                               @else
                                   <!-- everything is normal - as you were -->
                                   <label class="form-control">
-                                      {{ Form::checkbox('activated', '1', old('activated'), ['checked'=> 'checked', 'aria-label'=>'update_real_loc']) }}
+                                      {{ Form::checkbox('activated', '1', old('activated'), ['id' => 'activated', 'checked'=> 'checked', 'aria-label'=>'update_real_loc']) }}
                                       {{ trans('admin/users/general.activated_help_text') }}
                                   </label>
                               @endif
@@ -266,8 +266,10 @@
 
                           <div class="col-md-9 col-md-offset-3">
                               <label class="form-control form-control--disabled">
-                                  {{ Form::checkbox('email_user', '1', old('email_user'), ['id' => 'email_user_checkbox', 'disabled' => true, 'checked'=> 'checked', 'aria-label'=>'update_real_loc']) }}
-                                  Email this user their credentials?
+
+                                  {{ Form::checkbox('email_user', '1', old('email_user'), ['id' => "email_user_checkbox", 'aria-label'=>'email_user']) }}
+
+                                  {{ trans('admin/users/general.email_user_creds_on_create') }}
                               </label>
 
                               <p class="help-block"> {{ trans('admin/users/general.send_email_help') }}</p>
@@ -617,35 +619,48 @@
 @section('moar_scripts')
 
 <script nonce="{{ csrf_token() }}">
+
 $(document).ready(function() {
 
-    $('#email_user_checkbox').prop("disabled", true);
 
-    $('#activated').on('ifChecked', function(event){
-        console.log('user activated is checked');
-        $("#email_user_row").show();
-	});
-
-    $('#activated').on('ifUnchecked', function(event){
-        $("#email_user_row").hide();
+    // If the "user can login" check box is checked, show them the ability to email the user credentials
+    $("#activated").change(function() {
+        if (this.checked) {
+            $("#email_user_row").show();
+        } else {
+            $("#email_user_row").hide();
+        }
     });
 
+
+    // Set some defaults
+    $('#email_user_checkbox').prop("disabled", true);
+    $('#email_user_checkbox').prop("checked", false);
+    $("#email_user_checkbox").removeAttr('checked');
+
+    // If the email address is longer than 5 characters, enable the "send email" checkbox
     $('#email').on('keyup',function(){
-        event.preventDefault();
+        //event.preventDefault();
 
         @if (!config('app.lock_passwords'))
-        if(this.value.length > 5){
+
+        if (this.value.length > 5){
+            console.log('email field is ' + this.value.length + ' - enable the checkbox');
             $('#email_user_checkbox').prop("disabled", false);
             $("#email_user_checkbox").parent().removeClass("form-control--disabled");
         } else {
+            console.log('email field is ' + this.value.length + ' - DISABLE the checkbox');
             $('#email_user_checkbox').prop("disabled", true);
+            $('#email_user_checkbox').prop("checked", false);
+            $("#email_user_checkbox").parent().addClass("form-control--disabled");
         }
+
         @endif
     });
 
 
 	// Check/Uncheck all radio buttons in the group
-    $('tr.header-row input:radio').on('ifClicked', function () {
+    $('tr.header-row input:radio').change(function() {
         value = $(this).attr('value');
         area = $(this).data('checker-group');
         $('.radiochecker-'+area+'[value='+value+']').iCheck('check');
