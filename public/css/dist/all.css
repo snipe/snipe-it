@@ -23741,7 +23741,7 @@ label.form-control {
   font-size: inherit;
   font-weight: inherit;
 }
-.form-control--disabled {
+label.form-control--disabled {
   color: #959495;
   pointer-events: none;
   cursor: not-allowed;
@@ -23772,6 +23772,7 @@ input[type="checkbox"] {
 /** This sets the display of a checkbox, and what the "fill" checkmark should look like */
 input[type="checkbox"]::before {
   /** If you want to use the non-checkbox, filled square, use this instead **/
+  box-shadow: inset 1em 1em #d3d3d3;
   content: "";
   width: 1em;
   height: 1em;
@@ -23788,14 +23789,14 @@ input[type="checkbox"]::before {
 input[type="checkbox"]:checked::before {
   transform: scale(1);
 }
-/** This sets the scale of the DISABLED but CHECKED checkbox */
+/** This sets the scale and color of the DISABLED but CHECKED checkbox */
 input[type=checkbox]:disabled::before,
 input[type=radio]:disabled::before {
   content: "";
   width: 1em;
   height: 1em;
   transform: scale(1);
-  box-shadow: inset 1em 1em #959495;
+  box-shadow: inset 1em 1em #d3d3d3;
 }
 /* This sets the scale and style of a DISABLED checkbox that is NOT checked */
 input[type=checkbox]:disabled:not(:checked)::before,
@@ -23805,9 +23806,10 @@ input[type=radio]:disabled:not(:checked)::before {
   cursor: not-allowed;
   pointer-events: none;
 }
+/** this is the color of the checkbox and content on a disabled, checked box **/
 input[type=checkbox]:disabled,
 input[type=radio]:disabled {
-  --form-control-color: #959495;
+  --form-control-color: #d3d3d3;
   color: #959495;
   cursor: not-allowed;
   pointer-events: none;
@@ -24959,7 +24961,7 @@ label.form-control {
   font-size: inherit;
   font-weight: inherit;
 }
-.form-control--disabled {
+label.form-control--disabled {
   color: #959495;
   pointer-events: none;
   cursor: not-allowed;
@@ -24990,6 +24992,7 @@ input[type="checkbox"] {
 /** This sets the display of a checkbox, and what the "fill" checkmark should look like */
 input[type="checkbox"]::before {
   /** If you want to use the non-checkbox, filled square, use this instead **/
+  box-shadow: inset 1em 1em #d3d3d3;
   content: "";
   width: 1em;
   height: 1em;
@@ -25006,14 +25009,14 @@ input[type="checkbox"]::before {
 input[type="checkbox"]:checked::before {
   transform: scale(1);
 }
-/** This sets the scale of the DISABLED but CHECKED checkbox */
+/** This sets the scale and color of the DISABLED but CHECKED checkbox */
 input[type=checkbox]:disabled::before,
 input[type=radio]:disabled::before {
   content: "";
   width: 1em;
   height: 1em;
   transform: scale(1);
-  box-shadow: inset 1em 1em #959495;
+  box-shadow: inset 1em 1em #d3d3d3;
 }
 /* This sets the scale and style of a DISABLED checkbox that is NOT checked */
 input[type=checkbox]:disabled:not(:checked)::before,
@@ -25023,9 +25026,10 @@ input[type=radio]:disabled:not(:checked)::before {
   cursor: not-allowed;
   pointer-events: none;
 }
+/** this is the color of the checkbox and content on a disabled, checked box **/
 input[type=checkbox]:disabled,
 input[type=radio]:disabled {
-  --form-control-color: #959495;
+  --form-control-color: #d3d3d3;
   color: #959495;
   cursor: not-allowed;
   pointer-events: none;

@@ -220,8 +220,7 @@
                               @elseif ($user->id === Auth::user()->id)
                                   <!-- disallow the user from editing their own login status -->
                                   <label class="form-control form-control--disabled">
-                                      <input type="checkbox" value="1" name="activated" class="disabled" {{ (old('activated', $user->activated)) == '1' ? ' checked="checked"' : '' }} disabled="disabled">
-                                      {{ Form::checkbox('activated', '1', old('activated'), ['disabled' => true, 'checked'=> 'checked', 'aria-label'=>'update_real_loc']) }}
+                                      {{ Form::checkbox('activated', '1', old('activated', $user->activated), ['disabled' => true, 'checked'=> 'checked', 'aria-label'=>'update_real_loc']) }}
                                       {{ trans('admin/users/general.activated_help_text') }}
                                   </label>
                                   <p class="text-warning">{{ trans('admin/users/general.activated_disabled_help_text') }}</p>
@@ -264,7 +263,7 @@
                   @if (!$user->id)
                       <div class="form-group" id="email_user_row">
 
-                          <div class="col-md-9 col-md-offset-3">
+                          <div class="col-md-8 col-md-offset-3">
                               <label class="form-control form-control--disabled">
 
                                   {{ Form::checkbox('email_user', '1', old('email_user'), ['id' => "email_user_checkbox", 'aria-label'=>'email_user']) }}
@@ -277,7 +276,7 @@
                           </div>
                       </div> <!--/form-group-->
                   @endif
-                  
+
                   @include ('partials.forms.edit.image-upload', ['fieldname' => 'avatar', 'image_path' => app('users_upload_path')])
 
 

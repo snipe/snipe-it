@@ -704,7 +704,7 @@ label.form-control {
   font-weight: inherit;
 }
 
-.form-control--disabled {
+label.form-control--disabled {
   color: #959495;
   pointer-events:none;
   cursor: not-allowed;
@@ -738,12 +738,12 @@ input[type="checkbox"] {
 input[type="checkbox"]::before {
 
 /** If you want to use the non-checkbox, filled square, use this instead **/
-//  content: "";
-//  width: 1em;
-//  height: 1em;
-//  transform: scale(0);
-//  transition: 120ms transform ease-in-out;
-//  box-shadow: inset 1em 1em #428bca;
+  content: "";
+  width: 1em;
+  height: 1em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em rgb(211, 211, 211);
 
   content: "";
   width: 1em;
@@ -762,13 +762,13 @@ input[type="checkbox"]:checked::before {
   transform: scale(1);
 }
 
-/** This sets the scale of the DISABLED but CHECKED checkbox */
+/** This sets the scale and color of the DISABLED but CHECKED checkbox */
 input[type=checkbox]:disabled::before, input[type=radio]:disabled::before {
   content: "";
   width: 1em;
   height: 1em;
   transform: scale(1);
-  box-shadow: inset 1em 1em #959495;
+  box-shadow: inset 1em 1em rgb(211, 211, 211);
 }
 
 /* This sets the scale and style of a DISABLED checkbox that is NOT checked */
@@ -779,8 +779,9 @@ input[type=checkbox]:disabled:not(:checked)::before, input[type=radio]:disabled:
   pointer-events:none;
 }
 
+/** this is the color of the checkbox and content on a disabled, checked box **/
 input[type=checkbox]:disabled, input[type=radio]:disabled {
-  --form-control-color: #959495;
+  --form-control-color: rgb(211, 211, 211);
   color: #959495;
   cursor: not-allowed;
   pointer-events:none;
