@@ -277,27 +277,9 @@
                           </div>
                       </div> <!--/form-group-->
                   @endif
+                  
+                  @include ('partials.forms.edit.image-upload', ['fieldname' => 'avatar', 'image_path' => app('users_upload_path')])
 
-                  <!-- Image -->
-                  @if (($user->avatar) && ($user->avatar!=''))
-                      <div class="form-group{{ $errors->has('image_delete') ? ' has-error' : '' }}">
-                          <div class="col-md-9 col-md-offset-3">
-                              <label for="image_delete form-control">
-                                  {{ Form::checkbox('image_delete', '1', old('image_delete'), ['aria-label'=>'image_delete']) }}
-                                  {{ trans('general.image_delete') }}
-                                  {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
-                              </label>
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          <div class="col-md-9 col-md-offset-3">
-                              <img src="{{ Storage::disk('public')->url(app('users_upload_path').$user->avatar) }}" class="img-responsive">
-                              {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
-                          </div>
-                      </div>
-                  @endif
-
-                  @include ('partials.forms.edit.image-upload', ['fieldname' => 'avatar'])
 
                   <!-- begin optional disclosure arrow stuff -->
                   <div class="form-group">
@@ -663,7 +645,7 @@ $(document).ready(function() {
     $('tr.header-row input:radio').change(function() {
         value = $(this).attr('value');
         area = $(this).data('checker-group');
-        $('.radiochecker-'+area+'[value='+value+']').iCheck('check');
+        $('.radiochecker-'+area+'[value='+value+']').prop('checked', true);
     });
 
     $('.header-name').click(function() {

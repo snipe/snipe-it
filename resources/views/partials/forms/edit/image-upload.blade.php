@@ -1,3 +1,22 @@
+<!-- Image -->
+@if (($item->image) && ($item->image!=''))
+    <div class="form-group{{ $errors->has('image_delete') ? ' has-error' : '' }}">
+        <div class="col-md-9 col-md-offset-3">
+            <label class="form-control">
+                {{ Form::checkbox('image_delete', '1', old('image_delete'), ['aria-label'=>'image_delete']) }}
+                {{ trans('general.image_delete') }}
+                {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-9 col-md-offset-3">
+            <img src="{{ Storage::disk('public')->url($image_path.e($item->image)) }}" class="img-responsive">
+            {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
+        </div>
+    </div>
+@endif
+
 <div class="form-group {{ $errors->has((isset($fieldname) ? $fieldname : 'image')) ? 'has-error' : '' }}">
     <label class="col-md-3 control-label" for="{{ (isset($fieldname) ? $fieldname : 'image') }}">{{ trans('general.image_upload') }}</label>
     <div class="col-md-9">
