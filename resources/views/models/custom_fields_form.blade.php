@@ -1,3 +1,12 @@
+@php
+    $fields = [];
+    foreach($model->fieldset->fields AS $field) {
+        $fields[] = $field->db_column_name();
+    }
+   ray($fields); 
+    $duplicates = array_diff_assoc($fields, array_unique($fields));
+    ray($duplicates);
+@endphp
 @if (($model) && ($model->fieldset))
   @foreach($model->fieldset->fields AS $field)
     <div class="form-group{{ $errors->has($field->db_column_name()) ? ' has-error' : '' }}">

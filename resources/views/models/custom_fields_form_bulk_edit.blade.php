@@ -1,32 +1,28 @@
 @php
 $fields = [];
+$modelNames = [];
+foreach($models as $model) {
+    $modelNames[] = $model->name;
+}
+
 @endphp
 @foreach($models as $model)
-<div>{{$model->name}}</div>
-
+    
 @if (($model) && ($model->fieldset))
-  @foreach($model->fieldset->fields AS $field)
-    {{-- if field has already been displayed, skip --}}
-    {{-- @php 
+  @foreach($model->customFields AS $field)
+  @php
         if (in_array($field->db_column_name(), $fields)) {
             $duplicate = true;
-            ray($field->db_column_name() . ' is a duplicate');
             continue; 
         } else {
             $duplicate = false;
         }
-        $fields[] = $field->db_column_name();
-        ray($fields); 
-    @endphp  --}}
+       $fields[] = $field->db_column_name(); 
+@endphp
 
-
+    
     <div class="form-group{{ $errors->has($field->db_column_name()) ? ' has-error' : '' }}">
       <label for="{{ $field->db_column_name() }}" class="col-md-3 control-label">{{ $field->name }} </label>
-      {{--hmmm, this doesn't make sense, duh.
-      need to determine duplicates _before_ any rendering --}}
-     {{-- @if($duplicate)  --}}
-      {{-- <p class="">On Models: {{$model->name}}</p> --}}
-    {{-- @endif --}}
       <div class="col-md-7 col-sm-12{{ ($field->pivot->required=='1') ? ' required' : '' }}">
 
 
@@ -87,13 +83,17 @@ $fields = [];
 
           @endif
 
-              @if ($field->help_text!='')
-              <p class="help-block">{{ $field->help_text }}</p>
-              @endif
+        @if ($field->help_text!='')
+            <p class="help-block">{{ $field->help_text }}</p>
+        @endif
 
-              @if($duplicate)
-                <p class="">This custom field is present on multiple models</p>
-                @endif
+
+             @foreach($field->assetModels() as $assetModel) 
+                @if(in_array($assetModel->name, $modelNames)) 
+                    <p>{{$assetModel->name}}</p>
+                @endif 
+            @endforeach 
+
               
               
 

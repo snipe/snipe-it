@@ -188,8 +188,8 @@
         {{-- @foreach ($models as $model) 
             <label class="col-md-12 text-center">
                 {{ $model->name }} asset model
-            </label> --}}
-            {{-- @include("models/custom_fields_form",["model" => $model]) --}}
+            </label>
+            @include("models/custom_fields_form",["model" => $model]) --}}
             @include("models/custom_fields_form_bulk_edit",["models" => $models])
         {{-- @endforeach   --}}
       

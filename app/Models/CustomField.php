@@ -182,6 +182,11 @@ class CustomField extends Model
     {
         return $this->belongsToMany(\App\Models\CustomFieldset::class);
     }
+   
+    public function assetModels()
+    {
+       return $this->fieldset()->with('models')->get()->pluck('models')->flatten()->unique('id'); 
+    }
 
     /**
      * Establishes the customfield -> admin user relationship
