@@ -312,8 +312,7 @@
                           <br>
                           <!-- Company -->
                           @if (\App\Models\Company::canManageUsersCompanies())
-                              @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.select_company'), 'fieldname' => 'company_id'])
-                          @endif
+                              @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'),'multiple' =>'false', 'fieldname' => 'company_id'])                          @endif
 
 
                           <!-- language -->

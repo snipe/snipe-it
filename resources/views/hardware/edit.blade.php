@@ -12,7 +12,7 @@
 {{-- Page content --}}
 @section('inputFields')
     
-    @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
+    @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'),'multiple' =>'false', 'fieldname' => 'company_id'])
 
 
   <!-- Asset Tag -->

@@ -11,8 +11,7 @@
 
     <!-- Company -->
     @if (\App\Models\Company::canManageUsersCompanies())
-        @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
-    @else
+        @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'),'multiple' =>'false', 'fieldname' => 'company_id'])    @else
         <input id="hidden_company_id" type="hidden" name="company_id" value="{{ Auth::user()->company_id }}">
     @endif
 

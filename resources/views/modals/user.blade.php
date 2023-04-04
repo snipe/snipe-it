@@ -37,7 +37,7 @@
 					
 					<!-- Select company, only for users with multicompany access - replace default company -->
 					<div class="dynamic-form-row">
-						@include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
+						@include ('partials.forms.edit.', ['translated_name' => trans('general.company'),'multiple'=> 'false', 'fieldname' => 'company_id'])
 					</div>
                     
                     <div class="dynamic-form-row">

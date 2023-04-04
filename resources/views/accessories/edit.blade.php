@@ -9,8 +9,7 @@
 {{-- Page content --}}
 @section('inputFields')
 
-@include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
-@include ('partials.forms.edit.name', ['translated_name' => trans('admin/accessories/general.accessory_name')])
+    @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'),'multiple' =>'false', 'fieldname' => 'company_id'])@include ('partials.forms.edit.name', ['translated_name' => trans('admin/accessories/general.accessory_name')])
 @include ('partials.forms.edit.category-select', ['translated_name' => trans('general.category'), 'fieldname' => 'category_id', 'required' => 'true','category_type' => 'accessory'])
 @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
 @include ('partials.forms.edit.manufacturer-select', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'manufacturer_id'])
