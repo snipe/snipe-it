@@ -23739,6 +23739,7 @@ label.form-control {
   background-color: inherit;
   color: inherit;
   font-size: inherit;
+  font-weight: inherit;
 }
 .form-control--disabled {
   color: #959495;
@@ -24956,6 +24957,7 @@ label.form-control {
   background-color: inherit;
   color: inherit;
   font-size: inherit;
+  font-weight: inherit;
 }
 .form-control--disabled {
   color: #959495;

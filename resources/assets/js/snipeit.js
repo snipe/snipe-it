@@ -599,7 +599,7 @@ function htmlEntities(str) {
 })(jQuery);
 
 /**
- * Universal Livewire Select2 and iCheck integration
+ * Universal Livewire Select2 integration
  *
  * How to use:
  *
@@ -623,16 +623,6 @@ $(function () {
 
     window.livewire.hook('message.processed', function (el,component) {
         $('.livewire-select2').select2();
-        //$('.livewire-icheck').iCheck(); //this seems to blow up pretty badly.
     });
-
-    $(document).on('ifToggled', '.livewire-icheck', function (event) {
-        if(!event.target.name || !$(event.target).data('livewire-component')) {
-            console.error("You need to set both name (which should match a Livewire property) and data-livewire-component on your iCheck elements!")
-            console.error("For data-livewire-component, you probably want to use $_instance->id or {{ $_instance->id }}, as appropriate")
-            return false
-        }
-        window.livewire.find($(event.target).data('livewire-component')).set(event.target.name, event.target.checked)
-    })
 
 })

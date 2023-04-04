@@ -165,7 +165,6 @@ mix.combine(
     "./node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js",
     "./node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js",
     "./node_modules/ekko-lightbox/dist/ekko-lightbox.js",
-    "./node_modules/icheck/icheck.js", //definite problem here :(
     "./resources/assets/js/extensions/pGenerator.jquery.js",
     "./node_modules/chart.js/dist/Chart.js",
     "./resources/assets/js/signature_pad.js",
