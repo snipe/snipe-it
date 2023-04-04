@@ -488,23 +488,27 @@ class AssetsController extends Controller
                          $result="";
                          
                          foreach ($asset->toArray() as $key => $value) {
-                            $excludeKeys = ["id", "order_number", "assigned_to", "image", "user_id", "created_at", "updated_at", "deleted_at", "status_id", "archive", "depreciate", "supplier_id"];
+                            $excludeKeys = ["id", "order_number", "assigned_to", "image", "user_id", "created_at", "updated_at", "deleted_at", "status_id", "archive", "depreciate", "supplier_id", "assigned_type"];
                             if (!in_array($key, $excludeKeys)){
                                if (str_starts_with($key, '_snipeit')) {
                                 $removed_first = substr($key, 9);
                                 $removed_last = substr($removed_first, 0, -2);
                                 $removed_data .=$removed_last .":". $value ."\n";
                                }
-                               if(!str_starts_with($key, '_snipeit')){
+                               if($key == 'location_id') {
+                                $loc = Location::select('name')->where('id',$value)->first();
+                                $printText .= "Location: " . $loc->name . "\n";
+                               }
+                               if(!str_starts_with($key, '_snipeit') && ($key != 'location_id')){
                                 $printText .= $key . " : " . $value . "\n";
-                            }
+                              }
                             // $printText .= $key . " : " . $value . "\n";
                             // $result = $printText. '' .$removed_last;
                             // echo $result;
                             }
                         }
                         $result .=$printText .'' .$removed_data;
-                        // dd($result);
+                        //  print($result); die();
                         // 3. Generate QR Code
                         // dd($printText);
                         
