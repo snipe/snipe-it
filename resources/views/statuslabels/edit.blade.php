@@ -35,12 +35,12 @@
 <!-- Chart color -->
 <div class="form-group{{ $errors->has('color') ? ' has-error' : '' }}">
     {{ Form::label('color', trans('admin/statuslabels/table.color'), ['class' => 'col-md-3 control-label']) }}
-    <div class="col-md-2">
+    <div class="col-md-9">
         <div class="input-group color">
-            {{ Form::text('color', Request::old('color', $item->color), array('class' => 'form-control', 'style' => 'width: 100px;', 'maxlength'=>'10')) }}
+            {{ Form::text('color', Request::old('color', $item->color), array('class' => 'form-control col-md-10', 'maxlength'=>'20')) }}
             <div class="input-group-addon"><i></i></div>
         </div><!-- /.input group -->
-        {!! $errors->first('header_color', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+        {!! $errors->first('color', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
     </div>
 </div>
 
@@ -72,8 +72,17 @@
 @section('moar_scripts')
     <!-- bootstrap color picker -->
     <script nonce="{{ csrf_token() }}">
-        //color picker with addon
-        $(".color").colorpicker();
+
+
+        $(function() {
+            $('.color').colorpicker({
+                color: '#AA3399',
+                format: 'hex'
+            });
+
+
+        });
+
     </script>
 
 @stop
