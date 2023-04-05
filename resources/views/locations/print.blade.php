@@ -36,13 +36,13 @@
 
         <h3>
         @if ($snipeSettings->logo!='')
-            <img class="print-logo" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+            <img class="print-logo" src="{{ config('app.url') }}/uploads/{{ $snipeSettings->logo }}">
         @endif
         {{ $snipeSettings->site_name }}
         </h3>
     @elseif ($snipeSettings->brand == '2')
         @if ($snipeSettings->logo!='')
-            <img class="print-logo" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+            <img class="print-logo" src="{{ config('app.url') }}/uploads/{{ $snipeSettings->logo }}">
         @endif
     @else
       <h3>{{ $snipeSettings->site_name }}</h3>

@@ -406,7 +406,7 @@ class UserPresenter extends Presenter
         }
 
         // Set a fun, gender-neutral default icon
-        return url('/').'/img/default-sm.png';
+        return config('app.url').'/img/default-sm.png';
     }
 
     /**

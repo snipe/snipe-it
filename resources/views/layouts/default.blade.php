@@ -21,7 +21,7 @@
 
 
       <meta name="csrf-token" content="{{ csrf_token() }}">
-      <meta name="baseUrl" content="{{ url('/') }}/">
+      <meta name="baseUrl" content="{{ config('app.url') }}/">
 
     <script nonce="{{ csrf_token() }}">
       window.Laravel = { csrfToken: '{{ csrf_token() }}' };
@@ -105,21 +105,21 @@
           <div class="nav navbar-nav navbar-left">
               <div class="left-navblock">
                  @if ($snipeSettings->brand == '3')
-                      <a class="logo navbar-brand no-hover" href="{{ url('/') }}">
+                      <a class="logo navbar-brand no-hover" href="{{ config('app.url') }}">
                           @if ($snipeSettings->logo!='')
                           <img class="navbar-brand-img" src="{{ Storage::disk('public')->url($snipeSettings->logo) }}" alt="{{ $snipeSettings->site_name }} logo">
                           @endif
                           {{ $snipeSettings->site_name }}
                       </a>
                   @elseif ($snipeSettings->brand == '2')
-                      <a class="logo navbar-brand no-hover" href="{{ url('/') }}">
+                      <a class="logo navbar-brand no-hover" href="{{ config('app.url') }}">
                           @if ($snipeSettings->logo!='')
                             <img class="navbar-brand-img" src="{{ Storage::disk('public')->url($snipeSettings->logo) }}" alt="{{ $snipeSettings->site_name }} logo">
                           @endif
                           <span class="sr-only">{{ $snipeSettings->site_name }}</span>
                       </a>
                   @else
-                      <a class="logo navbar-brand no-hover" href="{{ url('/') }}">
+                      <a class="logo navbar-brand no-hover" href="{{ config('app.url') }}">
                           {{ $snipeSettings->site_name }}
                       </a>
                   @endif
