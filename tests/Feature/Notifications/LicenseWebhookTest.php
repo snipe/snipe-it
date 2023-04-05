@@ -2,11 +2,13 @@
 
 namespace Tests\Feature\Notifications;
 
+use App\Events\CheckoutableCheckedIn;
 use App\Events\CheckoutableCheckedOut;
 use App\Models\Asset;
 use App\Models\LicenseSeat;
 use App\Models\Setting;
 use App\Models\User;
+use App\Notifications\CheckinLicenseSeatNotification;
 use App\Notifications\CheckoutLicenseSeatNotification;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Notification;
@@ -14,7 +16,7 @@ use Tests\TestCase;
 
 class LicenseWebhookTest extends TestCase
 {
-    public function checkoutTargets()
+    public function checkoutTargets(): array
     {
         return [
             'License checked out to user' => [fn() => User::factory()->create()],
@@ -60,5 +62,45 @@ class LicenseWebhookTest extends TestCase
         ));
 
         Notification::assertNotSentTo(new AnonymousNotifiable, CheckoutLicenseSeatNotification::class);
+    }
+
+    /** @dataProvider checkoutTargets */
+    public function testLicenseCheckinSendsWebhookNotificationWhenSettingEnabled($checkoutTarget)
+    {
+        Notification::fake();
+
+        Setting::factory()->withWebhookEnabled()->create();
+
+        event(new CheckoutableCheckedIn(
+            LicenseSeat::factory()->create(),
+            $checkoutTarget(),
+            User::factory()->superuser()->create(),
+            ''
+        ));
+
+        Notification::assertSentTo(
+            new AnonymousNotifiable,
+            CheckinLicenseSeatNotification::class,
+            function ($notification, $channels, $notifiable) {
+                return $notifiable->routes['slack'] === Setting::getSettings()->webhook_endpoint;
+            }
+        );
+    }
+
+    /** @dataProvider checkoutTargets */
+    public function testLicenseCheckinDoesNotSendWebhookNotificationWhenSettingDisabled($checkoutTarget)
+    {
+        Notification::fake();
+
+        Setting::factory()->withWebhookDisabled()->create();
+
+        event(new CheckoutableCheckedIn(
+            LicenseSeat::factory()->create(),
+            $checkoutTarget(),
+            User::factory()->superuser()->create(),
+            ''
+        ));
+
+        Notification::assertNotSentTo(new AnonymousNotifiable, CheckinLicenseSeatNotification::class);
     }
 }

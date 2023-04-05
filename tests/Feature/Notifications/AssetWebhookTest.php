@@ -2,11 +2,13 @@
 
 namespace Tests\Feature\Notifications;
 
+use App\Events\CheckoutableCheckedIn;
 use App\Events\CheckoutableCheckedOut;
 use App\Models\Asset;
 use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
+use App\Notifications\CheckinAssetNotification;
 use App\Notifications\CheckoutAssetNotification;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Event;
@@ -15,7 +17,7 @@ use Tests\TestCase;
 
 class AssetWebhookTest extends TestCase
 {
-    public function checkoutTargets()
+    public function checkoutTargets(): array
     {
         return [
             'Asset checked out to user' => [fn() => User::factory()->create()],
@@ -71,6 +73,46 @@ class AssetWebhookTest extends TestCase
         ));
 
         Notification::assertNotSentTo(new AnonymousNotifiable, CheckoutAssetNotification::class);
+    }
+
+    /** @dataProvider checkoutTargets */
+    public function testAssetCheckinSendsWebhookNotificationWhenSettingEnabled($checkoutTarget)
+    {
+        Notification::fake();
+
+        Setting::factory()->withWebhookEnabled()->create();
+
+        event(new CheckoutableCheckedIn(
+            $this->createAsset(),
+            $checkoutTarget(),
+            User::factory()->superuser()->create(),
+            ''
+        ));
+
+        Notification::assertSentTo(
+            new AnonymousNotifiable,
+            CheckinAssetNotification::class,
+            function ($notification, $channels, $notifiable) {
+                return $notifiable->routes['slack'] === Setting::getSettings()->webhook_endpoint;
+            }
+        );
+    }
+
+    /** @dataProvider checkoutTargets */
+    public function testAssetCheckinDoesNotSendWebhookNotificationWhenSettingDisabled($checkoutTarget)
+    {
+        Notification::fake();
+
+        Setting::factory()->withWebhookDisabled()->create();
+
+        event(new CheckoutableCheckedIn(
+            $this->createAsset(),
+            $checkoutTarget(),
+            User::factory()->superuser()->create(),
+            ''
+        ));
+
+        Notification::assertNotSentTo(new AnonymousNotifiable, CheckinAssetNotification::class);
     }
 
     private function createAsset()
