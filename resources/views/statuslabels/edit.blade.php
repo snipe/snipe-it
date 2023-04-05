@@ -73,14 +73,11 @@
     <!-- bootstrap color picker -->
     <script nonce="{{ csrf_token() }}">
 
-
         $(function() {
             $('.color').colorpicker({
                 color: '#AA3399',
                 format: 'hex'
             });
-
-
         });
 
     </script>
