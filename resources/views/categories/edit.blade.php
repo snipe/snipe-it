@@ -42,15 +42,14 @@
     <div class="col-md-9 col-md-offset-3">
         @if ($snipeSettings->default_eula_text!='')
             <label class="form-control">
-            {{ Form::checkbox('use_default_eula', '1', old('use_default_eula', $item->use_default_eula), ['aria-label'=>'use_default_eula']) }}
-            {!! trans('admin/categories/general.use_default_eula') !!}
+                {{ Form::checkbox('use_default_eula', '1', old('use_default_eula', $item->use_default_eula), ['aria-label'=>'use_default_eula']) }}
+                {!! trans('admin/categories/general.use_default_eula') !!}
             </label>
         @else
             <label class="form-control form-control--disabled">
                 {{ Form::checkbox('use_default_eula', '0', old('use_default_eula'), ['class'=>'disabled','disabled' => 'disabled', 'aria-label'=>'use_default_eula']) }}
-                {!! trans('admin/categories/general.use_default_eula_disabled') !!}
+                <span>{!! trans('admin/categories/general.use_default_eula_disabled') !!}</span>
             </label>
-            </div>
         @endif
     </div>
 </div>
