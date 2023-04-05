@@ -2,10 +2,12 @@
 
 namespace Tests\Feature\Notifications;
 
+use App\Events\CheckoutableCheckedIn;
 use App\Events\CheckoutableCheckedOut;
 use App\Models\Accessory;
 use App\Models\Setting;
 use App\Models\User;
+use App\Notifications\CheckinAccessoryNotification;
 use App\Notifications\CheckoutAccessoryNotification;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Notification;
@@ -49,5 +51,43 @@ class AccessoryWebhookTest extends TestCase
         ));
 
         Notification::assertNotSentTo(new AnonymousNotifiable, CheckoutAccessoryNotification::class);
+    }
+
+    public function testAccessoryCheckinSendsWebhookNotificationWhenSettingEnabled()
+    {
+        Notification::fake();
+
+        Setting::factory()->withWebhookEnabled()->create();
+
+        event(new CheckoutableCheckedIn(
+            Accessory::factory()->appleBtKeyboard()->create(),
+            User::factory()->create(),
+            User::factory()->superuser()->create(),
+            ''
+        ));
+
+        Notification::assertSentTo(
+            new AnonymousNotifiable,
+            CheckinAccessoryNotification::class,
+            function ($notification, $channels, $notifiable) {
+                return $notifiable->routes['slack'] === Setting::getSettings()->webhook_endpoint;
+            }
+        );
+    }
+
+    public function testAccessoryCheckinDoesNotSendWebhookNotificationWhenSettingDisabled()
+    {
+        Notification::fake();
+
+        Setting::factory()->withWebhookDisabled()->create();
+
+        event(new CheckoutableCheckedIn(
+            Accessory::factory()->appleBtKeyboard()->create(),
+            User::factory()->create(),
+            User::factory()->superuser()->create(),
+            ''
+        ));
+
+        Notification::assertNotSentTo(new AnonymousNotifiable, CheckinAccessoryNotification::class);
     }
 }
