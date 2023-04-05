@@ -54,11 +54,11 @@
     function maintenanceActions(value, row) {
         var actions = '<nobr>';
         if ((row) && (row.available_actions.update === true)) {
-            actions += '<a href="{{ url('/') }}/hardware/maintenances/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="Update"><i class="fas fa-pencil-alt"></i></a>&nbsp;';
+            actions += '<a href="{{ config('app.url') }}/hardware/maintenances/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="Update"><i class="fas fa-pencil-alt"></i></a>&nbsp;';
         }
         actions += '</nobr>'
         if ((row) && (row.available_actions.delete === true)) {
-            actions += '<a href="{{ url('/') }}/hardware/maintenances/' + row.id + '" '
+            actions += '<a href="{{ config('app.url') }}/hardware/maintenances/' + row.id + '" '
                 + ' class="btn btn-danger btn-sm delete-asset"  data-tooltip="true"  '
                 + ' data-toggle="modal" '
                 + ' data-content="{{ trans('general.sure_to_delete') }} ' + row.name + '?" '

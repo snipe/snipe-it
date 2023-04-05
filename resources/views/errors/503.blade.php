@@ -29,7 +29,7 @@
         <div class="col-md-12">
 
           <div class="col-md-2">
-            <img src="{{ url('/') }}/img/sad-panda.png" class="pull-right" style="width: 140px; height: 140px;">
+            <img src="{{ config('app.url') }}/img/sad-panda.png" class="pull-right" style="width: 140px; height: 140px;">
           </div>
           <div class="alert alert-warning fade in">
             <h2> {{ trans('general.maintenance_mode') }}</h2>

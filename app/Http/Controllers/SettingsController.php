@@ -84,7 +84,7 @@ class SettingsController extends Controller
         }
         $pageURL = $protocol.$host.$_SERVER['REQUEST_URI'];
 
-        $start_settings['url_config'] = url('/').'/setup';
+        $start_settings['url_config'] = config('app.url').'/setup';
         $start_settings['url_valid'] = ($start_settings['url_config'] === $pageURL);
         $start_settings['real_url'] = $pageURL;
         $start_settings['php_version_min'] = true;

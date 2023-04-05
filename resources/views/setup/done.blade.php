@@ -14,6 +14,6 @@
             {{ trans('general.create_admin_success') }}
         </div>
     </div>
-    <p>{{ trans('general.create_admin_redirect') }} <a href="{{ url('/') }}">{{ url('/') }}</a></p>
+    <p>{{ trans('general.create_admin_redirect') }} <a href="{{ config('app.url') }}">{{ config('app.url') }}</a></p>
 </div>
 @stop
