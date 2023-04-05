@@ -9,15 +9,12 @@ use App\Models\Consumable;
 use App\Models\LicenseSeat;
 use App\Models\Recipients\AdminRecipient;
 use App\Models\Setting;
-use App\Models\User;
 use App\Notifications\CheckinAccessoryNotification;
 use App\Notifications\CheckinAssetNotification;
-use App\Notifications\CheckinLicenseNotification;
 use App\Notifications\CheckinLicenseSeatNotification;
 use App\Notifications\CheckoutAccessoryNotification;
 use App\Notifications\CheckoutAssetNotification;
 use App\Notifications\CheckoutConsumableNotification;
-use App\Notifications\CheckoutLicenseNotification;
 use App\Notifications\CheckoutLicenseSeatNotification;
 use Illuminate\Support\Facades\Notification;
 use Exception;
@@ -26,16 +23,12 @@ use Log;
 class CheckoutableListener
 {
     /**
-     * Notify the user about the checked out checkoutable and add a record to the
+     * Notify the user and post to webhook about the checked out checkoutable and add a record to the
      * checkout_requests table.
      */
     public function onCheckedOut($event)
     {
-
-        // @todo: update docblock
-
-        // @todo: comment...we send this anonymously so that webhook notification still
-        // @todo: get sent for models that don't have email addresses associated...
+        // Send an anonymous webhook notification if setting enabled
         if ($this->shouldSendWebhookNotification()) {
             Notification::route('slack', Setting::getSettings()->webhook_endpoint)
                 ->notify($this->getCheckoutNotification($event));
@@ -65,16 +58,13 @@ class CheckoutableListener
     }
 
     /**
-     * Notify the user about the checked in checkoutable
+     * Notify the user and post to webhook about the checked in checkoutable
      */    
     public function onCheckedIn($event)
     {
         \Log::debug('onCheckedIn in the Checkoutable listener fired');
 
-        // @todo: update docblock
-
-        // @todo: comment...we send this anonymously so that webhook notification still
-        // @todo: get sent for models that don't have email addresses associated...
+        // Send an anonymous webhook notification if setting enabled
         if ($this->shouldSendWebhookNotification()) {
             Notification::route('slack', Setting::getSettings()->webhook_endpoint)
                 ->notify($this->getCheckinNotification($event));
