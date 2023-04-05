@@ -34,7 +34,7 @@ class AssetWebhookTest extends TestCase
     }
 
     /** @dataProvider checkoutTargets */
-    public function testWebhookNotificationsAreSentOnAssetCheckoutWhenWebhookSettingEnabled($checkoutTarget)
+    public function testAssetCheckoutSendsWebhookNotificationWhenSettingEnabled($checkoutTarget)
     {
         Notification::fake();
 
@@ -57,7 +57,7 @@ class AssetWebhookTest extends TestCase
     }
 
     /** @dataProvider checkoutTargets */
-    public function testWebhookNotificationsAreNotSentOnAssetCheckoutWhenWebhookSettingNotEnabled($checkoutTarget)
+    public function testAssetCheckoutDoesNotSendWebhookNotificationWhenSettingDisabled($checkoutTarget)
     {
         Notification::fake();
 

@@ -23,7 +23,7 @@ class LicenseWebhookTest extends TestCase
     }
 
     /** @dataProvider checkoutTargets */
-    public function testWebhookNotificationsAreSentOnLicenseCheckoutWhenWebhookSettingEnabled($checkoutTarget)
+    public function testLicenseCheckoutSendsWebhookNotificationWhenSettingEnabled($checkoutTarget)
     {
         Notification::fake();
 
@@ -46,7 +46,7 @@ class LicenseWebhookTest extends TestCase
     }
 
     /** @dataProvider checkoutTargets */
-    public function testWebhookNotificationsAreNotSentOnLicenseCheckoutWhenWebhookSettingNotEnabled($checkoutTarget)
+    public function testLicenseCheckoutDoesNotSendWebhookNotificationWhenSettingDisabled($checkoutTarget)
     {
         Notification::fake();
 

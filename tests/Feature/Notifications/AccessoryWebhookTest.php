@@ -13,7 +13,7 @@ use Tests\TestCase;
 
 class AccessoryWebhookTest extends TestCase
 {
-    public function testWebhookNotificationsAreSentOnAccessoryCheckoutWhenWebhookSettingEnabled()
+    public function testAccessoryCheckoutSendsWebhookNotificationWhenSettingEnabled()
     {
         Notification::fake();
 
@@ -35,7 +35,7 @@ class AccessoryWebhookTest extends TestCase
         );
     }
 
-    public function testWebhookNotificationsAreNotSentOnAccessoryCheckoutWhenWebhookSettingNotEnabled()
+    public function testAccessoryCheckoutDoesNotSendWebhookNotificationWhenSettingDisabled()
     {
         Notification::fake();
 

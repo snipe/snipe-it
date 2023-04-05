@@ -13,7 +13,7 @@ use Tests\TestCase;
 
 class ConsumableWebhookTest extends TestCase
 {
-    public function testWebhookNotificationsAreSentOnConsumableCheckoutWhenWebhookSettingEnabled()
+    public function testConsumableCheckoutSendsWebhookNotificationWhenSettingEnabled()
     {
         Notification::fake();
 
@@ -35,7 +35,7 @@ class ConsumableWebhookTest extends TestCase
         );
     }
 
-    public function testWebhookNotificationsAreNotSentOnConsumableCheckoutWhenWebhookSettingNotEnabled()
+    public function testConsumableCheckoutDoesNotSendWebhookNotificationWhenSettingDisabled()
     {
         Notification::fake();
 
