@@ -23,6 +23,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Consumable was not checked out, please try again',
         'success' 		=> 'Consumable checked out successfully.',
+        'unavailable'   => 'Consumable is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'That user is invalid. Please try again.'
     ),
 

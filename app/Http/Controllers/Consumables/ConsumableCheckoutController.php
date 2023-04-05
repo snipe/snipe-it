@@ -8,6 +8,7 @@ use App\Models\Consumable;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
 class ConsumableCheckoutController extends Controller
@@ -69,6 +70,12 @@ class ConsumableCheckoutController extends Controller
             'note' => $request->input('note'),
         ]);
 
+        $checkedout=DB::table('consumables_users')->where('consumable_id', '=', $consumable->id)->count();
+        $available=DB::table('consumables')->where('id', '=', $consumable->id)->first('qty');
+
+        if($checkedout >= $available->qty){
+            return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.checkout.unavailable'));
+        }
         event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note')));
 
         // Redirect to the new consumable page
