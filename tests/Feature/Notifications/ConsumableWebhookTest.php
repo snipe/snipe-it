@@ -11,7 +11,7 @@ use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
-class ConsumableCheckoutWebhookNotificationTest extends TestCase
+class ConsumableWebhookTest extends TestCase
 {
     public function testWebhookNotificationsAreSentOnConsumableCheckoutWhenWebhookSettingEnabled()
     {

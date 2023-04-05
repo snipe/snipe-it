@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
-class AssetCheckoutWebhookNotificationTest extends TestCase
+class AssetWebhookTest extends TestCase
 {
     public function checkoutTargets()
     {

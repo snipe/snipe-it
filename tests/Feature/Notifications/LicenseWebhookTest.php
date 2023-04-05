@@ -12,7 +12,7 @@ use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
-class LicenseCheckoutWebhookNotificationTest extends TestCase
+class LicenseWebhookTest extends TestCase
 {
     public function checkoutTargets()
     {

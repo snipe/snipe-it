@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Notifications;
 
-
 use App\Events\CheckoutableCheckedOut;
 use App\Models\Accessory;
 use App\Models\Setting;
@@ -12,7 +11,7 @@ use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
-class AccessoryCheckoutWebhookNotificationTest extends TestCase
+class AccessoryWebhookTest extends TestCase
 {
     public function testWebhookNotificationsAreSentOnAccessoryCheckoutWhenWebhookSettingEnabled()
     {
