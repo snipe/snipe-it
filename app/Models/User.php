@@ -73,17 +73,12 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'location_id'  => 'integer',
         'company_id'   => 'integer',
         'vip'      => 'boolean',
+        'created_at'   => 'datetime',
+        'updated_at'   => 'datetime',
+        'deleted_at'   => 'datetime',
+        'start_date'   => 'datetime:Y-m-d',
+        'end_date'     => 'datetime:Y-m-d',
     ];
-
-
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
-        'start_date' => 'date_format:Y-m-d',
-        'end_date' => 'date_format:Y-m-d',
-    ];
-
 
     /**
      * Model validation rules
