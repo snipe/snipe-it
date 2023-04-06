@@ -946,7 +946,7 @@
                                 @endif
 
                                 @if (($asset->assignedTo) && ($asset->deleted_at==''))
-                                    <div style="text-align: center">
+                                    <div style="text-align: left">
                                         <h2>{{ trans('admin/hardware/form.checkedout_to') }}</h2>
                                         <p>
                                         @if($asset->checkedOutToUser()) <!-- Only users have avatars currently-->
