@@ -77,12 +77,11 @@ class AccessoryCheckoutController extends Controller
             'note' => $request->input('note'),
         ]);
 
-        $checkedout=DB::table('accessories_users')->where('accessory_id', '=', $accessory->id)->count();
         $available= new Accessory();
 
 
 
-        if($checkedout >= $available->numRemaining()){
+        if($available->numRemaining()<=0){
 
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.checkout.unavailable'));
         }
