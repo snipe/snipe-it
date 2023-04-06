@@ -198,7 +198,7 @@
 
             $.ajax({
                 type: 'GET',
-                url: "{{ url('/') }}/models/" + modelid + "/custom_fields",
+                url: "{{ config('app.url') }}/models/" + modelid + "/custom_fields",
                 headers: {
                     "X-Requested-With": 'XMLHttpRequest',
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
@@ -230,7 +230,7 @@
         if (status_id != '') {
             $(".status_spinner").css("display", "inline");
             $.ajax({
-                url: "{{url('/') }}/api/v1/statuslabels/" + status_id + "/deployable",
+                url: "{{config('app.url') }}/api/v1/statuslabels/" + status_id + "/deployable",
                 headers: {
                     "X-Requested-With": 'XMLHttpRequest',
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')

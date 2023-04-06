@@ -106,7 +106,7 @@
 
       function statuslabelsAssetLinkFormatter(value, row) {
           if ((row) && (row.name)) {
-              return '<a href="{{ url('/') }}/hardware/?status_id=' + row.id + '"> ' + row.name + '</a>';
+              return '<a href="{{ config('app.url') }}/hardware/?status_id=' + row.id + '"> ' + row.name + '</a>';
           }
       }
 

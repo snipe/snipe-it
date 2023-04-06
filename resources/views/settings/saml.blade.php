@@ -67,7 +67,7 @@
                                     <!-- SAML SP Details -->
                                     <!-- SAML SP Entity ID -->
                                     {{ Form::label('saml_sp_entitiyid', trans('admin/settings/general.saml_sp_entityid')) }}
-                                    {{ Form::text('saml_sp_entitiyid', url('/'), ['class' => 'form-control', 'readonly']) }}
+                                    {{ Form::text('saml_sp_entitiyid', config('app.url'), ['class' => 'form-control', 'readonly']) }}
                                     <br>
                                     <!-- SAML SP ACS -->
                                     {{ Form::label('saml_sp_acs_url', trans('admin/settings/general.saml_sp_acs_url')) }}
