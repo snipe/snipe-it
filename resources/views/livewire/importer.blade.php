@@ -124,7 +124,7 @@
                                     			<td class="col-md-6">{{ $currentFile->file_path }}</td>
                                     			<td class="col-md-3">{{ Helper::getFormattedDateObject($currentFile->created_at, 'datetime', false) }}</td>
                                     			<td class="col-md-1">{{ Helper::formatFilesizeUnits($currentFile->filesize) }}</td>
-                                                <td class="col-md-1 text-right">
+                                                <td class="col-md-1 text-right" style="white-space: nowrap;">
                                                     <button class="btn btn-sm btn-info" wire:click="selectFile({{ $currentFile->id }})">
                                                         <i class="fas fa-retweet fa-fw" aria-hidden="true"></i>
                                                         <span class="sr-only">{{ trans('general.import') }}</span>
