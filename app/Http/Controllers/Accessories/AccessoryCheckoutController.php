@@ -78,9 +78,11 @@ class AccessoryCheckoutController extends Controller
         ]);
 
         $checkedout=DB::table('accessories_users')->where('accessory_id', '=', $accessory->id)->count();
-        $available=DB::table('accessories')->where('id', '=', $accessory->id)->first('qty');
+        $available= new Accessory();
 
-        if($checkedout >= $available->qty){
+
+
+        if($checkedout >= $available->numRemaining()){
 
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.checkout.unavailable'));
         }
