@@ -34,13 +34,13 @@
                             <th>{{ trans('general.error') }}</th>
                             </thead>
                             <tbody>
-                            @php \Log::error("import errors are: ".print_r($import_errors,true)); @endphp
+                            @php \Log::debug("import errors are: ".print_r($import_errors,true)); @endphp
                             @foreach($import_errors AS $key => $actual_import_errors)
-                                @php \Log::error("Key is: $key"); @endphp
+                                @php \Log::debug("Key is: $key"); @endphp
                                 @foreach($actual_import_errors AS $table => $error_bag)
-                                    @php \Log::error("Table is: $table"); @endphp
+                                    @php \Log::debug("Table is: $table"); @endphp
                                     @foreach($error_bag as $field => $error_list)
-                                        @php \Log::error("Field is: $field"); @endphp
+                                        @php \Log::debug("Field is: $field"); @endphp
                                         <tr>
                                             <td>{{ $activeFile->file_path ?? "Unknown File" }}</td>
                                             <td>
