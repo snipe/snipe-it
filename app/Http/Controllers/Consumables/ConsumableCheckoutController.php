@@ -70,10 +70,9 @@ class ConsumableCheckoutController extends Controller
             'note' => $request->input('note'),
         ]);
 
-        $checkedout= DB::table('consumables_users')->where('consumable_id', '=', $consumable->id)->count();
         $available= new Consumable();
 
-        if($checkedout >= $available->numRemaining()){
+        if($available->numRemaining()<=0){
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.checkout.unavailable'));
         }
         event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note')));
