@@ -47,6 +47,8 @@ done
 chown -R docker:root /var/lib/snipeit/data/*
 chown -R docker:root /var/lib/snipeit/dumps
 chown -R docker:root /var/lib/snipeit/keys
+chown -R docker:root /var/lib/snipeit/logs
+chown -R docker:root /var/lib/snipeit/database
 chown -R docker:root /var/www/html/storage/framework/cache
 
 # Fix php settings
