@@ -103,7 +103,7 @@ RUN \
       && rm -rf "/var/www/html/public/uploads" && ln -fs "/var/lib/snipeit/data/uploads" "/var/www/html/public/uploads" \
       && rm -r "/var/www/html/storage/app/backups" && ln -fs "/var/lib/snipeit/dumps" "/var/www/html/storage/app/backups" \
       && rm -r "/var/www/html/storage/logs" && ln -fs "/var/lib/snipeit/logs" "/var/www/html/storage/logs" \
-      && rm -r "/var/www/html/database" && mkdir -p "/var/www/html/database" && ln -fs "/var/lib/snipeit/database" "/var/www/html/database" \
+      && rm -r "/var/www/html/database" && mkdir -p "/var/lib/snipeit/database" && ln -fs "/var/lib/snipeit/database" "/var/www/html/database" \
       && mkdir -p "/var/lib/snipeit/keys" && ln -fs "/var/lib/snipeit/keys/oauth-private.key" "/var/www/html/storage/oauth-private.key" \
       && ln -fs "/var/lib/snipeit/keys/oauth-public.key" "/var/www/html/storage/oauth-public.key" \
       && ln -fs "/var/lib/snipeit/keys/ldap_client_tls.cert" "/var/www/html/storage/ldap_client_tls.cert" \

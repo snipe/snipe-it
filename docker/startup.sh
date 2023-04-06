@@ -39,10 +39,16 @@ for dir in \
   'data/uploads/models' \
   'data/uploads/suppliers' \
   'dumps' \
+  'database' \
+  'logs' \
   'keys'
 do
   [ ! -d "/var/lib/snipeit/$dir" ] && mkdir -p "/var/lib/snipeit/$dir"
 done
+
+# Fix sqlite to run properly. It seems that the db framework won't create a new sqlite db file unless
+# it already exists so this creates the files needed.
+sqlite3 /var/lib/snipeit/database/database.sqlite "CREATE TABLE t(x INTEGER PRIMARY KEY ASC, y, z)"
 
 chown -R docker:root /var/lib/snipeit/data/*
 chown -R docker:root /var/lib/snipeit/dumps
