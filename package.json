@@ -38,7 +38,6 @@
         "chart.js": "^2.9.4",
         "css-loader": "^4.0.0",
         "ekko-lightbox": "^5.1.1",
-        "icheck": "^1.0.2",
         "imagemin": "^8.0.1",
         "jquery-form-validator": "^2.3.79",
         "jquery-slimscroll": "^1.3.8",

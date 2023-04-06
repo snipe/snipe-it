@@ -31,16 +31,16 @@
           <!-- Purchase Date -->
           <div class="form-group {{ $errors->has('purchase_date') ? ' has-error' : '' }}">
             <label for="purchase_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.date') }}</label>
-            <div class="col-md-3">
+            <div class="col-md-4">
               <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
                 <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="purchase_date" id="purchase_date" value="{{ old('purchase_date') }}">
                 <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
               </div>
               {!! $errors->first('purchase_date', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
             </div>
-            <div class="col-md-6">
-              <label>
-                {{ Form::checkbox('null_purchase_date', '1', false, ['class' => 'minimal']) }}
+            <div class="col-md-5">
+              <label class="form-control">
+                {{ Form::checkbox('null_purchase_date', '1', false) }}
                 {{ trans_choice('general.set_to_null', count($assets),['asset_count' => count($assets)]) }}
               </label>
             </div>
@@ -49,7 +49,7 @@
           <!-- Expected Checkin Date -->
           <div class="form-group {{ $errors->has('expected_checkin') ? ' has-error' : '' }}">
              <label for="expected_checkin" class="col-md-3 control-label">{{ trans('admin/hardware/form.expected_checkin') }}</label>
-             <div class="col-md-3">
+             <div class="col-md-4">
                   <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
                       <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="expected_checkin" id="expected_checkin" value="{{ old('expected_checkin') }}">
                       <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
@@ -57,9 +57,9 @@
 
                  {!! $errors->first('expected_checkin', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
              </div>
-              <div class="col-md-6">
-                <label>
-                  {{ Form::checkbox('null_expected_checkin_date', '1', false, ['class' => 'minimal']) }}
+              <div class="col-md-5">
+                <label class="form-control">
+                  {{ Form::checkbox('null_expected_checkin_date', '1', false, ['checked' => 'false']) }}
                   {{ trans_choice('general.set_to_null', count($assets), ['asset_count' => count($assets)]) }}
                 </label>
               </div>
@@ -72,7 +72,7 @@
               {{ trans('admin/hardware/form.status') }}
             </label>
             <div class="col-md-7">
-              {{ Form::select('status_id', $statuslabel_list , old('status_id'), array('class'=>'select2', 'style'=>'width:350px', 'aria-label'=>'status_id')) }}
+              {{ Form::select('status_id', $statuslabel_list , old('status_id'), array('class'=>'select2', 'style'=>'width:100%', 'aria-label'=>'status_id')) }}
               {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
@@ -84,16 +84,13 @@
 
         <!-- Update actual location  -->
           <div class="form-group">
-            <div class="col-md-3"></div>
-            <div class="col-md-9">
-
-                <label for="update_real_loc">
-                  {{ Form::radio('update_real_loc', '1', old('update_real_loc'), ['class'=>'minimal', 'aria-label'=>'update_real_loc']) }}
+            <div class="col-md-9 col-md-offset-3">
+                <label class="form-control">
+                  {{ Form::radio('update_real_loc', '1', old('update_real_loc'), ['checked'=> 'checked', 'aria-label'=>'update_real_loc']) }}
                   {{ trans('admin/hardware/form.asset_location_update_default_current') }}
                 </label>
-                <br>
-                <label for="update_default_loc">
-                  {{ Form::radio('update_real_loc', '0', old('update_real_loc'), ['class'=>'minimal', 'aria-label'=>'update_default_loc']) }}
+                <label class="form-control">
+                  {{ Form::radio('update_real_loc', '0', old('update_real_loc'), ['aria-label'=>'update_default_loc']) }}
                   {{ trans('admin/hardware/form.asset_location_update_default') }}
                 </label>
 
@@ -147,17 +144,18 @@
           <!-- Next audit Date -->
           <div class="form-group {{ $errors->has('next_audit_date') ? ' has-error' : '' }}">
             <label for="next_audit_date" class="col-md-3 control-label">{{ trans('general.next_audit_date') }}</label>
-            <div class="col-md-3">
+            <div class="col-md-4">
               <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
                 <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="next_audit_date" id="next_audit_date" value="{{ old('next_audit_date') }}">
                 <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
               </div>
 
-              {!! $errors->first('next_audit_date', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+              {!! $errors->first('next_audit_date', '<span class="alert-msg" aria-hidden="true">
+                <i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
-            <div class="col-md-6">
-              <label>
-                {{ Form::checkbox('null_next_audit_date', '1', false, ['class' => 'minimal']) }}
+            <div class="col-md-5">
+              <label class="form-control">
+                {{ Form::checkbox('null_next_audit_date', '1', false) }}
                 {{ trans_choice('general.set_to_null', count($assets), ['asset_count' => count($assets)]) }}
               </label>
             </div>
@@ -169,14 +167,17 @@
               <strong>{{ trans('admin/hardware/form.requestable') }}</strong>
             </div>
             <div class="col-md-7">
-              <label class="radio">
-                <input type="radio" class="minimal" name="requestable" value="1"> {{ trans('general.yes')}}
+              <label class="form-control">
+                <input type="radio" name="requestable" value="1">
+                {{ trans('general.yes')}}
               </label>
-              <label class="radio">
-                <input type="radio" class="minimal" name="requestable" value="0"> {{ trans('general.no')}}
+              <label class="form-control">
+                <input type="radio" name="requestable" value="0">
+                {{ trans('general.no')}}
               </label>
-              <label class="radio">
-                <input type="radio" class="minimal" name="requestable" value="" checked> {{ trans('general.do_not_change')}}
+              <label class="form-control">
+                <input type="radio" name="requestable" value="" checked>
+                {{ trans('general.do_not_change')}}
               </label>
             </div>
           </div>

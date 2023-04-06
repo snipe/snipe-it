@@ -18,8 +18,8 @@
                     <!-- Checkboxes -->
                   @foreach ($field->formatFieldValuesAsArray() as $key => $value)
                       <div>
-                          <label>
-                              <input type="checkbox" value="{{ $value }}" name="{{ $field->db_column_name() }}[]" class="minimal" {{  isset($item) ? (in_array($value, array_map('trim', explode(',', $item->{$field->db_column_name()}))) ? ' checked="checked"' : '') : (Request::old($field->db_column_name()) != '' ? ' checked="checked"' : (in_array($key, array_map('trim', explode(',', $field->defaultValue($model->id)))) ? ' checked="checked"' : '')) }}>
+                          <label class="form-control">
+                              <input type="checkbox" value="{{ $value }}" name="{{ $field->db_column_name() }}[]" {{  isset($item) ? (in_array($value, array_map('trim', explode(',', $item->{$field->db_column_name()}))) ? ' checked="checked"' : '') : (Request::old($field->db_column_name()) != '' ? ' checked="checked"' : (in_array($key, array_map('trim', explode(',', $field->defaultValue($model->id)))) ? ' checked="checked"' : '')) }}>
                               {{ $value }}
                           </label>
                       </div>
@@ -29,8 +29,8 @@
               @foreach ($field->formatFieldValuesAsArray() as $value)
 
               <div>
-                  <label>
-                      <input type="radio" value="{{ $value }}" name="{{ $field->db_column_name() }}" class="minimal" {{ isset($item) ? ($item->{$field->db_column_name()} == $value ? ' checked="checked"' : '') : (Request::old($field->db_column_name()) != '' ? ' checked="checked"' : (in_array($value, explode(', ', $field->defaultValue($model->id))) ? ' checked="checked"' : '')) }}>
+                  <label class="form-control">
+                      <input type="radio" value="{{ $value }}" name="{{ $field->db_column_name() }}" {{ isset($item) ? ($item->{$field->db_column_name()} == $value ? ' checked="checked"' : '') : (Request::old($field->db_column_name()) != '' ? ' checked="checked"' : (in_array($value, explode(', ', $field->defaultValue($model->id))) ? ' checked="checked"' : '')) }}>
                       {{ $value }}
                   </label>
               </div>

@@ -53,9 +53,9 @@
                                             <input class="form-control" placeholder="{{ trans('admin/users/table.password')  }}" name="password" type="password" id="password" autocomplete="off">
                                             {!! $errors->first('password', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                                         </div>
-                                        <div class="checkbox">
-                                            <label style="margin-left: -20px;">
-                                                <input name="remember" type="checkbox" value="1" class="minimal"> {{ trans('auth/general.remember_me')  }}
+                                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                            <label class="form-control">
+                                                <input name="remember" type="checkbox" value="1"> {{ trans('auth/general.remember_me')  }}
                                             </label>
                                         </div>
                                     </fieldset>

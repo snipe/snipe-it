@@ -111,11 +111,29 @@
               </div>
           </div>
 
+          @if (!$field->id)
+              <!-- Encrypted  -->
+              <div class="form-group {{ $errors->has('encrypted') ? ' has-error' : '' }}">
+                  <div class="col-md-8 col-md-offset-4">
+                      <label class="form-control">
+                          <input type="checkbox" value="1" name="field_encrypted" id="field_encrypted"{{ (Request::old('field_encrypted') || $field->field_encrypted) ? ' checked="checked"' : '' }}>
+                          {{ trans('admin/custom_fields/general.encrypt_field') }}
+                      </label>
+                  </div>
+                  <div class="col-md-6 col-md-offset-4" id="encrypt_warning" style="display:none;">
+
+                      <div class="callout callout-danger">
+                          <p><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> {{ trans('admin/custom_fields/general.encrypt_field_help') }}</p>
+                      </div>
+                  </div>
+              </div>
+          @endif
+
           <!-- Show in Email  -->
           <div class="form-group {{ $errors->has('show_in_email') ? ' has-error' : '' }}"  id="show_in_email">
               <div class="col-md-8 col-md-offset-4">
-                  <label for="show_in_email">
-                      <input type="checkbox" name="show_in_email" aria-label="show_in_email" value="1" class="minimal"{{ (old('show_in_email') || $field->show_in_email) ? ' checked="checked"' : '' }}>
+                  <label class="form-control">
+                      <input type="checkbox" name="show_in_email" aria-label="show_in_email" value="1"{{ (old('show_in_email') || $field->show_in_email) ? ' checked="checked"' : '' }}>
                       {{ trans('admin/custom_fields/general.show_in_email') }}
                   </label>
               </div>
@@ -125,8 +143,8 @@
           <!-- Show in View All Assets profile view  -->
           <div class="form-group {{ $errors->has('display_in_user_view') ? ' has-error' : '' }}"  id="display_in_user_view">
               <div class="col-md-8 col-md-offset-4">
-                  <label for="display_in_user_view">
-                      <input type="checkbox" name="display_in_user_view" aria-label="display_in_user_view" value="1" class="minimal"{{ (old('display_in_user_view') || $field->display_in_user_view) ? ' checked="checked"' : '' }}>
+                  <label class="form-control">
+                      <input type="checkbox" name="display_in_user_view" aria-label="display_in_user_view" value="1" {{ (old('display_in_user_view') || $field->display_in_user_view) ? ' checked="checked"' : '' }}>
                       {{ trans('admin/custom_fields/general.display_in_user_view') }}
                   </label>
               </div>
@@ -136,32 +154,14 @@
           <!-- Value Must be Unique -->
           <div class="form-group {{ $errors->has('is_unique') ? ' has-error' : '' }}"  id="is_unique">
             <div class="col-md-8 col-md-offset-4">
-                <label for="is_unique">
-                    <input type="checkbox" name="is_unique" aria-label="is_unique" value="1" class="minimal"{{ (old('is_unique') || $field->is_unique) ? ' checked="checked"' : '' }}>
+                <label class="form-control">
+                    <input type="checkbox" name="is_unique" aria-label="is_unique" value="1"{{ (old('is_unique') || $field->is_unique) ? ' checked="checked"' : '' }}>
                     {{ trans('admin/custom_fields/general.is_unique') }}
                 </label>
             </div>
 
         </div>
 
-
-      @if (!$field->id)
-        <!-- Encrypted  -->
-        <div class="form-group {{ $errors->has('encrypted') ? ' has-error' : '' }}">
-          <div class="col-md-8 col-md-offset-4">
-            <label for="field_encrypted">
-              <input type="checkbox" value="1" name="field_encrypted" id="field_encrypted" class="minimal"{{ (Request::old('field_encrypted') || $field->field_encrypted) ? ' checked="checked"' : '' }}>
-              {{ trans('admin/custom_fields/general.encrypt_field') }}
-            </label>
-          </div>
-          <div class="col-md-6 col-md-offset-4" id="encrypt_warning" style="display:none;">
-
-              <div class="callout callout-danger">
-                <p><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> {{ trans('admin/custom_fields/general.encrypt_field_help') }}</p>
-            </div>
-          </div>
-        </div>
-      @endif
 
       </div> <!-- /.box-body-->
 
@@ -219,18 +219,22 @@
         }).change();
     });
 
-    // Checkbox handling
-    $('#field_encrypted').on('ifChecked', function(event){
-        $("#encrypt_warning").show();
-        $("#show_in_email").hide();
-        $("#display_in_user_view").hide();
+
+    $("#field_encrypted").change(function() {
+        if (this.checked) {
+            $("#encrypt_warning").show();
+            $("#show_in_email").hide();
+            $("#display_in_user_view").hide();
+            $("#is_unique").hide();
+        } else {
+            $("#encrypt_warning").hide();
+            $("#show_in_email").show();
+            $("#display_in_user_view").show();
+            $("#is_unique").show();
+        }
     });
 
-    $('#field_encrypted').on('ifUnchecked', function(event){
-        $("#encrypt_warning").hide();
-        $("#show_in_email").show();
-        $("#display_in_user_view").show();
-    });
+
 
 </script>
 @stop
