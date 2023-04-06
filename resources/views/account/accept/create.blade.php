@@ -43,35 +43,39 @@
             <div class="col-sm-12 col-sm-offset-1 col-md-10 col-md-offset-1">
                 <div class="panel box box-default">
                     <div class="box-body">
+                        <div class="col-md-12">
                         @if ($acceptance->checkoutable->getEula())
                             <div id="eula_div" style="padding-bottom: 20px">
                                 {!!  $acceptance->checkoutable->getEula() !!}
                             </div>
                         @endif
-
+                        </div>
+                        <div class="col-md-12">
                         <h3>{{$acceptance->checkoutable->present()->name()}}</h3>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" class="minimal" name="asset_acceptance" id="accepted" value="accepted">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-control">
+                                <input type="radio" name="asset_acceptance" id="accepted" value="accepted">
                                 {{trans('general.i_accept')}}
                             </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" class="minimal" name="asset_acceptance" id="declined" value="declined">
+                            <label class="form-control">
+                                <input type="radio" name="asset_acceptance" id="declined" value="declined">
                                 {{trans('general.i_decline')}}
                             </label>
+
                         </div>
 
                         @if ($snipeSettings->require_accept_signature=='1')
-                            <h3 style="padding-top: 20px">{{trans('general.sign_tos')}}</h3>
-                            <div id="signature-pad" class="m-signature-pad">
-                                <div class="m-signature-pad--body col-md-12 col-sm-12 col-lg-12 col-xs-12">
-                                    <canvas></canvas>
-                                    <input type="hidden" name="signature_output" id="signature_output">
-                                </div>
-                                <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 text-center">
-                                    <button type="button" class="btn btn-sm btn-default clear" data-action="clear" id="clear_button">{{trans('general.clear_signature')}}</button>
+                            <div class="col-md-12">
+                                <h3 style="padding-top: 20px">{{trans('general.sign_tos')}}</h3>
+                                <div id="signature-pad" class="m-signature-pad">
+                                    <div class="m-signature-pad--body col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                                        <canvas></canvas>
+                                        <input type="hidden" name="signature_output" id="signature_output">
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 text-center">
+                                        <button type="button" class="btn btn-sm btn-default clear" data-action="clear" id="clear_button">{{trans('general.clear_signature')}}</button>
+                                    </div>
                                 </div>
                             </div>
                         @endif

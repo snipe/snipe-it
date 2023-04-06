@@ -34,13 +34,13 @@
                             <th>{{ trans('general.error') }}</th>
                             </thead>
                             <tbody>
-                            @php \Log::error("import errors are: ".print_r($import_errors,true)); @endphp
+                            @php \Log::debug("import errors are: ".print_r($import_errors,true)); @endphp
                             @foreach($import_errors AS $key => $actual_import_errors)
-                                @php \Log::error("Key is: $key"); @endphp
+                                @php \Log::debug("Key is: $key"); @endphp
                                 @foreach($actual_import_errors AS $table => $error_bag)
-                                    @php \Log::error("Table is: $table"); @endphp
+                                    @php \Log::debug("Table is: $table"); @endphp
                                     @foreach($error_bag as $field => $error_list)
-                                        @php \Log::error("Field is: $field"); @endphp
+                                        @php \Log::debug("Field is: $field"); @endphp
                                         <tr>
                                             <td>{{ $activeFile->file_path ?? "Unknown File" }}</td>
                                             <td>
@@ -124,7 +124,7 @@
                                     			<td class="col-md-6">{{ $currentFile->file_path }}</td>
                                     			<td class="col-md-3">{{ Helper::getFormattedDateObject($currentFile->created_at, 'datetime', false) }}</td>
                                     			<td class="col-md-1">{{ Helper::formatFilesizeUnits($currentFile->filesize) }}</td>
-                                                <td class="col-md-1 text-right">
+                                                <td class="col-md-1 text-right" style="white-space: nowrap;">
                                                     <button class="btn btn-sm btn-info" wire:click="selectFile({{ $currentFile->id }})">
                                                         <i class="fas fa-retweet fa-fw" aria-hidden="true"></i>
                                                         <span class="sr-only">{{ trans('general.import') }}</span>
@@ -138,11 +138,9 @@
                                                 <tr class="warning">
                                                     <td colspan="4">
 
-                                                        <div class="col-md-12">
+                                                        <div class="form-group">
 
-                                                            <div class="form-group col-md-12">
-
-                                                                <label for="activeFile.import_type" class="col-md-3 col-xs-12 text-right">
+                                                                <label for="activeFile.import_type" class="col-md-3 col-xs-12">
                                                                     {{ trans('general.import_type') }}
                                                                 </label>
 
@@ -157,45 +155,40 @@
                                                                         'data-livewire-component' => $_instance->id
                                                                     ]) }}
                                                                     @if ($activeFile->import_type === 'asset' && $snipeSettings->auto_increment_assets == 0)
-                                                                        <span class="help-block">
+                                                                        <p class="help-block">
                                                                             {{ trans('general.auto_incrementing_asset_tags_disabled_so_tags_required') }}
-                                                                        </span>
+                                                                        </p>
                                                                     @endif
                                                                 </div>
                                                             </div>
 
-                                                            <div class="form-group col-md-12">
-                                                                <label for="update" class="col-md-9 col-md-offset-3 col-xs-12">
-                                                                    <input type="checkbox" class="minimal livewire-icheck" name="update" data-livewire-component="{{ $_instance->id }}" wire:model="update">
+                                                            <div class="form-group col-md-9 col-md-offset-3">
+                                                                <label class="form-control">
+                                                                    <input type="checkbox" name="update" data-livewire-component="{{ $_instance->id }}" wire:model="update">
                                                                     {{ trans('general.update_existing_values') }}
-                                                                    @if ($activeFile->import_type === 'asset' && $snipeSettings->auto_increment_assets == 1 && $update)
-                                                                        <span class="help-block">
-                                                                            {{ trans('general.auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created') }}
-                                                                        </span>
-                                                                    @endif
                                                                 </label>
-                                                            </div>
+                                                                @if ($activeFile->import_type === 'asset' && $snipeSettings->auto_increment_assets == 1 && $update)
+                                                                    <p class="help-block">
+                                                                        {{ trans('general.auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created') }}
+                                                                    </p>
+                                                                @endif
 
-                                                            <div class="form-group col-md-12">
-                                                                <label for="send_welcome" class="col-md-9 col-md-offset-3 col-xs-12">
-                                                                    <input type="checkbox" class="minimal livewire-icheck" name="send_welcome" data-livewire-component="{{ $_instance->id }}" wire:model="send_welcome">
+                                                                <label class="form-control">
+                                                                    <input type="checkbox" name="send_welcome" data-livewire-component="{{ $_instance->id }}" wire:model="send_welcome">
                                                                     {{ trans('general.send_welcome_email_to_users') }}
                                                                 </label>
-                                                            </div>
 
-                                                            <div class="form-group col-md-12">
-                                                                <label for="run_backup" class="col-md-9 col-md-offset-3 col-xs-12">
-                                                                    <input type="checkbox" class="minimal livewire-icheck" name="run_backup" data-livewire-component="{{ $_instance->id }}" wire:model="run_backup">
+                                                                <label class="form-control">
+                                                                    <input type="checkbox" name="run_backup" data-livewire-component="{{ $_instance->id }}" wire:model="run_backup">
                                                                     {{ trans('general.back_before_importing') }}
                                                                 </label>
+
                                                             </div>
 
 
-                                                            @if ($statusText)
-                                                                <div class="form-group">
-                                                                    <div class="alert col-md-8 col-md-offset-2 {{ $statusType == 'success' ? 'alert-success' : ($statusType == 'error' ? 'alert-danger' : 'alert-info') }}" style="text-align:left">
-                                                                        {{ $statusText }}
-                                                                    </div><!-- /alert -->
+                                                            @if($statusText)
+                                                                <div class="alert col-md-8 col-md-offset-3{{ $statusType == 'success' ? ' alert-success' : ($statusType == 'error' ? ' alert-danger' : ' alert-info') }}" style="padding-top: 20px;">
+                                                                    {!! $statusText !!}
                                                                 </div>
                                                             @endif
 
@@ -258,14 +251,14 @@
                                                                 </div>
 
                                                                 @if($statusText)
-                                                                    <div class="alert col-md-12 col-md-offset-2 {{ $statusType == 'success' ? 'alert-success' : ($statusType == 'error' ? 'alert-danger' : 'alert-info') }}" style="padding-top: 20px;">
-                                                                        {{ $statusText }}
+                                                                    <div class="alert col-md-8 col-md-offset-3{{ $statusType == 'success' ? ' alert-success' : ($statusType == 'error' ? ' alert-danger' : ' alert-info') }}" style="padding-top: 20px;">
+                                                                        {!! $statusText !!}
                                                                     </div>
                                                                 @endif
                                                             @else
-                                                                <div class="form-group col-md-12">
+                                                                <div class="form-group col-md-10">
                                                                     <div class="col-md-3 text-left">
-                                                                        <a href="#" wire:click="$set('activeFile',null)"><?php echo e(trans('general.cancel')); ?></a>
+                                                                        <a href="#" wire:click="$set('activeFile',null)">{{ trans('general.cancel') }}</a>
                                                                     </div>
                                                                 </div>
                                                             @endif {{-- end of if ... activeFile->import_type --}}
@@ -325,10 +318,7 @@
 
         // For the importFile part:
         $(function () {
-            // initialize iCheck for use with livewire
-            $('.minimal.livewire-icheck').iCheck({
-                checkboxClass: 'icheckbox_minimal-blue',
-            })
+
 
             // we have to hook up to the `<tr id='importer-file'>` at the root of this display,
             // because the #import button isn't visible until you click an import_type
@@ -339,7 +329,7 @@
                     return;
                 }
                 @this.statusType ='pending';
-                @this.statusText = "{{ trans('admin/hardware/form.processing_spinner') }}";
+                @this.statusText = '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> {{ trans('admin/hardware/form.processing_spinner') }}';
                 @this.generate_field_map().then(function (mappings_raw) {
                     var mappings = JSON.parse(mappings_raw)
                     // console.warn("Here is the mappings:")
@@ -369,18 +359,29 @@
                     }).fail( function (jqXHR, textStatus, error) {
                         // Failure
                         var body = jqXHR.responseJSON
-                        if(body.status == 'import-errors') {
+                        if((body) && (body.status) && body.status == 'import-errors') {
                             @this.emit('importError', body.messages);
                             @this.import_errors = body.messages
 
                             @this.statusType='error';
                             @this.statusText = "Error";
+
+                        //  If Slack/notifications hits API thresholds, we *do* 500, but we never
+                        //  actually surface that info.
+                        //
+                        // A 500 on notifications doesn't mean your import failed, so this is a confusing state.
+                        //
+                        //  Ideally we'd have a message like "Your import worked, but not all
+                        // notifications could be sent".
                         } else {
-                            console.warn("Not import-errors, just regular errors")
-                            console.dir(body)
-{{--                            @this.emit('alert', body.error)--}}
-                            @this.message_type="danger"
-                            @this.message = body.error
+                            console.warn("Not import-errors, just regular errors - maybe API limits")
+                            @this.message_type="warning"
+                            if ((body) && (error in body)) {
+                                @this.message = body.error ? body.error:"Unknown error - might just be throttling by notifications."
+                            } else {
+                                @this.message = "{{ trans('general.importer_generic_error') }}"
+                            }
+
                         }
                         @this.activeFile = null; //@this.set('hideDetails')
                     });

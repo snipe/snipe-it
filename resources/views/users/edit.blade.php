@@ -75,12 +75,12 @@
         <!-- Custom Tabs -->
       <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
-          <li class="active"><a href="#tab_1" data-toggle="tab">{{ trans('general.information') }} </a></li>
+          <li class="active"><a href="#info" data-toggle="tab">{{ trans('general.information') }} </a></li>
           <li><a href="#permissions" data-toggle="tab">{{ trans('general.permissions') }} </a></li>
         </ul>
 
         <div class="tab-content">
-          <div class="tab-pane active" id="tab_1">
+          <div class="tab-pane active" id="info">
             <div class="row">
               <div class="col-md-12">
                 <!-- First Name -->
@@ -104,6 +104,7 @@
                 <!-- Username -->
                 <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
                   <label class="col-md-3 control-label" for="username">{{ trans('admin/users/table.username') }}</label>
+
                   <div class="col-md-6{{  (Helper::checkIfRequired($user, 'username')) ? ' required' : '' }}">
                     @if ($user->ldap_import!='1' || str_contains(Route::currentRouteName(), 'clone'))
                       <input
@@ -111,24 +112,35 @@
                         type="text"
                         name="username"
                         id="username"
-                        value="{{ Request::old('username', $user->username) }}"
+                        value="{{ old('username', $user->username) }}"
                         autocomplete="off"
                         maxlength="191"
                         readonly
                         onfocus="this.removeAttribute('readonly');"
                         {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}
                       >
-                      @if (config('app.lock_passwords') && ($user->id))
-                        <p class="help-block">{{ trans('admin/users/table.lock_passwords') }}</p>
-                      @endif
-                    @else
-                      {{ trans('general.managed_ldap') }}
-                          <input type="hidden" name="username" value="{{ Request::old('username', $user->username) }}">
 
+                    @else
+                        <!-- insert the old username so we don't break validation -->
+                         {{ trans('general.managed_ldap') }}
+                          <input type="hidden" name="username" value="{{ Request::old('username', $user->username) }}">
+                    @endif
+                  </div>
+
+
+                    @if (config('app.lock_passwords') && ($user->id))
+                        <!-- disallow changing existing usernames on the demo -->
+                        <div class="col-md-8 col-md-offset-3">
+                            <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                        </div>
                     @endif
 
-                    {!! $errors->first('username', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                  </div>
+                    @if ($errors->first('username'))
+                        <div class="col-md-8 col-md-offset-3">
+                            {!! $errors->first('username', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                        </div>
+                    @endif
+
                 </div>
 
                 <!-- Password -->
@@ -191,42 +203,36 @@
                 </div>
                 @endif
 
-              <!-- Activation Status -->
+              <!-- Activation Status (Can the user login?) -->
                   <div class="form-group {{ $errors->has('activated') ? 'has-error' : '' }}">
+                          <div class="col-md-9 col-md-offset-3">
 
-                      <div class="form-group">
-                          <div class="col-md-3 control-label">
-                              {{ Form::label('activated', trans('general.login_enabled')) }}
-                          </div>
-                          <div class="col-md-9">
+                              <!-- checkbox($name, $value = 1, $checked = null, $options = array() -->
                               @if (config('app.lock_passwords'))
-                                  <div class="icheckbox disabled" style="padding-left: 10px;">
-                                      <input type="checkbox" value="1" name="activated" class="minimal disabled" {{ (old('activated', $user->activated)) == '1' ? ' checked="checked"' : '' }} disabled="disabled" aria-label="activated">
-                                      <!-- this is necessary because the field is disabled and will reset -->
-                                      <input type="hidden" name="activated" value="{{ (int)$user->activated }}">
+                                  <!-- demo mode - disallow changes -->
+                                  <label class="form-control form-control--disabled">
+                                      <input type="checkbox" value="1" name="activated" class="disabled" {{ (old('activated', $user->activated)) == '1' ? ' checked="checked"' : '' }} disabled="disabled" aria-label="activated">
                                       {{ trans('admin/users/general.activated_help_text') }}
-                                      <p class="help-block">{{ trans('general.feature_disabled') }}</p>
 
-                                  </div>
+                                  </label>
+                                  <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+
                               @elseif ($user->id === Auth::user()->id)
-                                  <div class="icheckbox disabled" style="padding-left: 10px;">
-                                      <input type="checkbox" value="1" name="activated" class="minimal disabled" {{ (old('activated', $user->activated)) == '1' ? ' checked="checked"' : '' }} disabled="disabled">
-                                      <!-- this is necessary because the field is disabled and will reset -->
-                                      <input type="hidden" name="activated" value="1" aria-label="activated">
+                                  <!-- disallow the user from editing their own login status -->
+                                  <label class="form-control form-control--disabled">
+                                      {{ Form::checkbox('activated', '1', old('activated', $user->activated), ['disabled' => true, 'checked'=> 'checked', 'aria-label'=>'update_real_loc']) }}
                                       {{ trans('admin/users/general.activated_help_text') }}
-                                      <p class="help-block">{{ trans('admin/users/general.activated_disabled_help_text') }}</p>
-                                  </div>
+                                  </label>
+                                  <p class="text-warning">{{ trans('admin/users/general.activated_disabled_help_text') }}</p>
                               @else
-                                  <div style="padding-left: 10px;">
-                                      <input type="checkbox" value="1" id="activated" name="activated" class="minimal" {{ (old('activated', $user->activated)) == '1' ? ' checked="checked"' : '' }} aria-label="activated">
+                                  <!-- everything is normal - as you were -->
+                                  <label class="form-control">
+                                      {{ Form::checkbox('activated', '1', old('activated'), ['id' => 'activated', 'checked'=> 'checked', 'aria-label'=>'update_real_loc']) }}
                                       {{ trans('admin/users/general.activated_help_text') }}
-                                  </div>
+                                  </label>
                               @endif
 
-                              {!! $errors->first('activated', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-
                           </div>
-                      </div>
                   </div>
 
 
@@ -256,43 +262,23 @@
                   <!-- Email user -->
                   @if (!$user->id)
                       <div class="form-group" id="email_user_row">
-                          <div class="col-sm-3">
-                          </div>
-                          <div class="col-md-9">
-                              <div class="icheckbox disabled" id="email_user_div">
-                                  {{ Form::checkbox('email_user', '1', Request::old('email_user'),['class' => 'minimal', 'disabled'=>true, 'id' => 'email_user_checkbox']) }}
-                                  Email this user their credentials?
 
-                              </div>
-                              <p class="help-block">
-                                  {{ trans('admin/users/general.send_email_help') }}
-                              </p>
+                          <div class="col-md-8 col-md-offset-3">
+                              <label class="form-control form-control--disabled">
 
+                                  {{ Form::checkbox('email_user', '1', old('email_user'), ['id' => "email_user_checkbox", 'aria-label'=>'email_user']) }}
+
+                                  {{ trans('admin/users/general.email_user_creds_on_create') }}
+                              </label>
+
+                              <p class="help-block"> {{ trans('admin/users/general.send_email_help') }}</p>
 
                           </div>
                       </div> <!--/form-group-->
                   @endif
 
-                  <!-- Image -->
-                  @if (($user->avatar) && ($user->avatar!=''))
-                      <div class="form-group{{ $errors->has('image_delete') ? ' has-error' : '' }}">
-                          <div class="col-md-9 col-md-offset-3">
-                              <label for="image_delete">
-                                  {{ Form::checkbox('image_delete', '1', old('image_delete'), ['class'=>'minimal','aria-label'=>'image_delete']) }}
-                                  {{ trans('general.image_delete') }}
-                                  {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
-                              </label>
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          <div class="col-md-9 col-md-offset-3">
-                              <img src="{{ Storage::disk('public')->url(app('users_upload_path').$user->avatar) }}" class="img-responsive">
-                              {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
-                          </div>
-                      </div>
-                  @endif
+                  @include ('partials.forms.edit.image-upload', ['fieldname' => 'avatar', 'image_path' => app('users_upload_path')])
 
-                  @include ('partials.forms.edit.image-upload', ['fieldname' => 'avatar'])
 
                   <!-- begin optional disclosure arrow stuff -->
                   <div class="form-group">
@@ -371,15 +357,16 @@
                           @include ('partials.forms.edit.datepicker', ['translated_name' => trans('general.end_date'), 'fieldname' => 'end_date', 'item' => $user])
 
                           <!-- VIP checkbox -->
+
                           <div class="form-group">
                               <div class="col-md-7 col-md-offset-3">
-                                  <label for="vip">
-                                      <input type="checkbox" value="1" name="vip" class="minimal" {{ (old('vip', $user->vip)) == '1' ? ' checked="checked"' : '' }} aria-label="vip">
-                                      {{ trans('admin/users/general.vip_label') }}
 
+                                  <label class="form-control" for="vip">
+                                      <input type="checkbox" value="1" name="vip" {{ (old('vip', $user->vip)) == '1' ? ' checked="checked"' : '' }} aria-label="vip">
+                                      {{ trans('admin/users/general.vip_label') }}
                                   </label>
-                                  <p class="help-block">{{ trans('admin/users/general.vip_help') }}
-                                  </p>
+
+                                  <p class="help-block">{{ trans('admin/users/general.vip_help') }}</p>
                               </div>
                           </div>
 
@@ -387,10 +374,9 @@
                           <!-- remote checkbox -->
                           <div class="form-group">
                               <div class="col-md-7 col-md-offset-3">
-                                  <label for="remote">
-                                      <input type="checkbox" value="1" name="remote" class="minimal" {{ (old('remote', $user->remote)) == '1' ? ' checked="checked"' : '' }} aria-label="remote">
+                                  <label for="remote" class="form-control">
+                                      <input type="checkbox" value="1" name="remote" {{ (old('remote', $user->remote)) == '1' ? ' checked="checked"' : '' }} aria-label="remote">
                                       {{ trans('admin/users/general.remote_label') }}
-
                                   </label>
                                   <p class="help-block">{{ trans('admin/users/general.remote_help') }}
                                   </p>
@@ -400,13 +386,10 @@
                           <!-- Auto Assign checkbox -->
                           <div class="form-group">
                               <div class="col-md-7 col-md-offset-3">
-                                  <label for="autoassign_licenses">
-                                      <input type="checkbox" value="1" name="autoassign_licenses" class="minimal" {{ (old('autoassign_licenses', $user->autoassign_licenses)) == '1' ? ' checked="checked"' : '' }} aria-label="autoassign_licenses">
+                                  <label for="autoassign_licenses" class="form-control">
+                                      <input type="checkbox" value="1" name="autoassign_licenses" {{ (old('autoassign_licenses', $user->autoassign_licenses)) == '1' ? ' checked="checked"' : '' }} aria-label="autoassign_licenses">
                                       {{ trans('admin/users/general.auto_assign_label') }}
-
                                   </label>
-                                  <p class="help-block">{{ trans('admin/users/general.auto_assign_help') }}
-                                  </p>
                               </div>
                           </div>
 
@@ -488,17 +471,21 @@
                           @if ($snipeSettings->two_factor_enabled!='')
                               @if ($snipeSettings->two_factor_enabled=='1')
                                   <div class="form-group">
-                                      <div class="col-md-3 control-label">
-                                          {{ Form::label('two_factor_optin', trans('admin/settings/general.two_factor')) }}
-                                      </div>
-                                      <div class="col-md-9">
+                                      <div class="col-md-9 col-md-offset-3">
+
                                           @if (config('app.lock_passwords'))
-                                              <div class="icheckbox disabled">
-                                                  {{ Form::checkbox('two_factor_optin', '1', Request::old('two_factor_optin', $user->two_factor_optin),['class' => 'minimal', 'disabled'=>'disabled']) }} {{ trans('admin/settings/general.two_factor_enabled_text') }}
-                                                  <p class="help-block">{{ trans('general.feature_disabled') }}</p>
-                                              </div>
+
+                                              <label class="form-control form-control--disabled" for="two_factor_optin">
+                                                  <input type="checkbox" value="1" name="two_factor_optin" {{ (old('two_factor_optin', $user->two_factor_optin)) == '1' ? ' checked="checked"' : '' }} aria-label="two_factor_optin" disabled>
+                                                  {{ trans('admin/settings/general.two_factor') }}
+                                              </label>
+
                                           @else
-                                              {{ Form::checkbox('two_factor_optin', '1', Request::old('two_factor_optin', $user->two_factor_optin),['class' => 'minimal']) }} {{ trans('admin/settings/general.two_factor_enabled_text') }}
+
+                                              <label class="form-control" for="two_factor_optin">
+                                                  <input type="checkbox" value="1" name="two_factor_optin" {{ (old('two_factor_optin', $user->two_factor_optin)) == '1' ? ' checked="checked"' : '' }} aria-label="two_factor_optin">
+                                                  {{ trans('admin/settings/general.two_factor') }}
+                                              </label>
                                               <p class="help-block">{{ trans('admin/users/general.two_factor_admin_optin_help') }}</p>
 
                                           @endif
@@ -613,33 +600,51 @@
 @section('moar_scripts')
 
 <script nonce="{{ csrf_token() }}">
+
 $(document).ready(function() {
 
-    $('#activated').on('ifChecked', function(event){
-        console.log('user activated is checked');
-        $("#email_user_row").show();
-	});
 
-    $('#activated').on('ifUnchecked', function(event){
-        $("#email_user_row").hide();
-    });
-
-    $('#email').on('keyup',function(){
-        event.preventDefault();
-
-        if(this.value.length > 5){
-            $('#email_user_checkbox').iCheck('enable');
+    // If the "user can login" check box is checked, show them the ability to email the user credentials
+    $("#activated").change(function() {
+        if (this.checked) {
+            $("#email_user_row").show();
         } else {
-            $('#email_user_checkbox').iCheck('disable').iCheck('uncheck');
+            $("#email_user_row").hide();
         }
     });
 
 
+    // Set some defaults
+    $('#email_user_checkbox').prop("disabled", true);
+    $('#email_user_checkbox').prop("checked", false);
+    $("#email_user_checkbox").removeAttr('checked');
+
+    // If the email address is longer than 5 characters, enable the "send email" checkbox
+    $('#email').on('keyup',function(){
+        //event.preventDefault();
+
+        @if (!config('app.lock_passwords'))
+
+        if (this.value.length > 5){
+            console.log('email field is ' + this.value.length + ' - enable the checkbox');
+            $('#email_user_checkbox').prop("disabled", false);
+            $("#email_user_checkbox").parent().removeClass("form-control--disabled");
+        } else {
+            console.log('email field is ' + this.value.length + ' - DISABLE the checkbox');
+            $('#email_user_checkbox').prop("disabled", true);
+            $('#email_user_checkbox').prop("checked", false);
+            $("#email_user_checkbox").parent().addClass("form-control--disabled");
+        }
+
+        @endif
+    });
+
+
 	// Check/Uncheck all radio buttons in the group
-    $('tr.header-row input:radio').on('ifClicked', function () {
+    $('tr.header-row input:radio').change(function() {
         value = $(this).attr('value');
         area = $(this).data('checker-group');
-        $('.radiochecker-'+area+'[value='+value+']').iCheck('check');
+        $('.radiochecker-'+area+'[value='+value+']').prop('checked', true);
     });
 
     $('.header-name').click(function() {

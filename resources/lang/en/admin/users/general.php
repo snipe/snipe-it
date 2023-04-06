@@ -49,5 +49,6 @@ return [
     'email_credentials' => 'Email credentials',
     'email_credentials_text' => 'Email my credentials to the email address above',
     'next_save_user' => 'Next: Save User',
-    'all_assigned_list_generation' => 'Generated on:'
+    'all_assigned_list_generation' => 'Generated on:',
+    'email_user_creds_on_create' => 'Email this user their credentials?',
 ];

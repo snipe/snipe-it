@@ -92,7 +92,7 @@ class BulkAssetModelsController extends Controller
             AssetModel::whereIn('id', $models_raw_array)->update($update_array);
 
             return redirect()->route('models.index')
-                ->with('success', trans('admin/models/message.bulkedit.success'));
+                ->with('success', trans_choice('admin/models/message.bulkedit.success', count($models_raw_array), ['model_count' => count($models_raw_array)]));
         }
 
         return redirect()->route('models.index')
