@@ -2,8 +2,11 @@
 
 return [
     'bulk_delete'		=> 'Vahvista laitteiden massapoisto',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> 'Tarkasta alla olevat massapoistettavat laitteet. Kun nämä laitteet on poistettu, ne voidaan palauttaa, mutta niitä ei enää yhdistetä niihin käyttäjiin, joille ne on tällä hetkellä luovutettuna.',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'Olet poistamassa :asset_count laitetta.',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'Massapäivitä laitteita',
     'bulk_update_help'	=> 'Tämän lomakkeen avulla voit päivittää useita laitteita kerralla. Täytä vain ne kentät joita haluat muuttaa. Tyhjäksi jätettyjä kenttiä ei päivitetä. ',
     'bulk_update_warn'	=> 'Olet muokkaamassa yhden laitteen ominaisuuksia.- Olet muokkaamassa :asset_count laitteen ominaisuuksia.',
@@ -45,7 +48,7 @@ return [
     'asset_location_update_default' => 'Päivitä vain oletussijainti',
     'asset_not_deployable' => 'Laite ei ole käyttöönotettavissa. Laitetta ei voida luovuttaa.',
     'asset_deployable' => 'Laite on käyttöönotettavissa. Laite voidaan luovuttaa.',
-    'processing_spinner' => 'Käsitellään...',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Valinnaiset tiedot',
     'order_details'   => 'Tilaukseen liityvät tiedot'
 ];
