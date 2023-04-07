@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'グループは既に存在しています！',
-    'group_not_found'     => 'グループ [:id] は、存在していません。',
+    'group_not_found'     => 'グループID :id は、存在していません。',
     'group_name_required' => '名前フィールドは必須です。',
 
     'success' => array(
