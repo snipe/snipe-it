@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'Iqembu selivele likhona!',
-    'group_not_found'     => 'Iqembu [: id] alikho.',
+    'group_not_found'     => 'Group ID :id does not exist.',
     'group_name_required' => 'Inkambu yegama iyadingeka',
 
     'success' => array(
