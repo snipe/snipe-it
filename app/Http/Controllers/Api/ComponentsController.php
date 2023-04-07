@@ -245,16 +245,11 @@ class ComponentsController extends Controller
         // Make sure there is at least one available to checkout
         if ($component->numRemaining() <= $request->get('assigned_qty')) {
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/components/message.checkout.unavailable', ['remaining' => $component->numRemaining(), 'requested' => $request->get('assigned_qty')])));
-
         }
 
         if ($component->numRemaining() >= $request->get('assigned_qty')) {
 
-            if (!$asset = Asset::find($request->input('assigned_to'))) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')));
-            }
-
-            // Update the accessory data
+            $asset = Asset::find($request->input('assigned_to'));
             $component->assigned_to = $request->input('assigned_to');
 
             $component->assets()->attach($component->id, [
