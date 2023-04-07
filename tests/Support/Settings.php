@@ -18,22 +18,24 @@ class Settings
         return new self();
     }
 
-    public function enableMultipleFullCompanySupport(): void
+    public function enableMultipleFullCompanySupport(): Settings
     {
-        $this->update(['full_multiple_companies_support' => 1]);
+        return $this->update(['full_multiple_companies_support' => 1]);
     }
 
     /**
      * @param array $attributes Attributes to modify in the application's settings.
      */
-    public function set(array $attributes): void
+    public function set(array $attributes): Settings
     {
-        $this->update($attributes);
+        return $this->update($attributes);
     }
 
-    private function update(array $attributes): void
+    private function update(array $attributes): Settings
     {
         Setting::unguarded(fn() => $this->setting->update($attributes));
         Setting::$_cache = null;
+
+        return $this;
     }
 }
