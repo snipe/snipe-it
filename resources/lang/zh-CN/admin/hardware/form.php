@@ -2,8 +2,11 @@
 
 return [
     'bulk_delete'		=> '批量删除确认',
+    'bulk_restore'      => '确认批量恢复资产', 
   'bulk_delete_help'	=> '请在此确认将批量删除的资产。在删除后，资产可以恢复，但一切当前的用户关联将会丢失。',
+  'bulk_restore_help'	=> '查看下面的资产进行批量恢复。一旦恢复，这些资产将不会与以前分配给的任何用户相关联。',
   'bulk_delete_warn'	=> '即将删除 :asset_count 项资产',
+  'bulk_restore_warn'	=> '您即将恢复 :asset_count 项资产。',
     'bulk_update'		=> '批量更新',
     'bulk_update_help'	=> '该表格允许你同时修改多项资产。请仅填写需要修改的字段，留空的字段不会做任何修改。 ',
     'bulk_update_warn'	=> '您将要编辑单个资产的属性。 |您将要编辑:asset_count个资产的属性。',
@@ -45,7 +48,7 @@ return [
     'asset_location_update_default' => '仅更新默认位置',
     'asset_not_deployable' => '该资产状态为不可部署。无法借出此资产。',
     'asset_deployable' => '该状态为可部署。可以借出此资产。',
-    'processing_spinner' => '处理中……',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => '可选信息',
     'order_details'   => '订单相关信息'
 ];
