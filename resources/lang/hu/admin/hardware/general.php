@@ -14,8 +14,8 @@ return [
     'deleted'  					=> 'Az eszköz törölve lett.',
     'edit'  					=> 'Eszköz módosítása',
     'model_deleted'  			=> 'Ennek az eszköznek a modellje törölve lett. Elösszőr a modellt vissza kell állítani, utánna lehet csak az eszközt visszaállítani.',
-    'model_invalid'             => 'The Model of this Asset is invalid.',
-    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
+    'model_invalid'             => 'Ennek az eszköznek a modellje érvénytelen.',
+    'model_invalid_fix'         => 'Az eszközt módosítani kell a javításához, mielőtt megkísérli a kiadását vagy visszavételét.',
     'requestable'               => 'lehívási',
     'requested'				    => 'Kérve',
     'not_requestable'           => 'Nem kérhető',
@@ -42,5 +42,6 @@ return [
     'error_messages' => 'Hibaüzenetek:',
     'success_messages' => 'Sikeres üzenetek:',
     'alert_details' => 'A részleteket lásd alább.',
-    'custom_export' => 'Egyéni export'
+    'custom_export' => 'Egyéni export',
+    'mfg_warranty_lookup' => ':manufacturer jótállási információk ellenőrzése',
 ];
