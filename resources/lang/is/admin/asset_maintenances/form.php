@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Viðhaldgerð',
+        'asset_maintenance_type' => 'Asset Maintenance Type',
         'title'                  => 'Titill',
-        'start_date'             => 'Hafið',
-        'completion_date'        => 'Lokið',
+        'start_date'             => 'Start Date',
+        'completion_date'        => 'Completion Date',
         'cost'                   => 'Kostnaður',
         'is_warranty'            => 'Warranty Improvement',
-        'asset_maintenance_time' => 'Dagar',
+        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
         'notes'                  => 'Athugasemdir',
-        'update'                 => 'Uppfæra',
-        'create'                 => 'Búa til'
+        'update'                 => 'Update Asset Maintenance',
+        'create'                 => 'Create Asset Maintenance'
     ];
