@@ -17,5 +17,6 @@ class SettingObserver
     public function saved(Setting $setting)
     {
         Cache::forget(Setting::SETUP_CHECK_KEY);
+        Setting::$_cache = null;
     }
 }

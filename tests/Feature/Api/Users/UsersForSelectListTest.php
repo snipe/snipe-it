@@ -3,7 +3,6 @@
 namespace Tests\Feature\Api\Users;
 
 use App\Models\Company;
-use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Laravel\Passport\Passport;
@@ -13,8 +12,6 @@ class UsersForSelectListTest extends TestCase
 {
     public function testUsersAreReturned()
     {
-        Setting::factory()->create();
-
         $users = User::factory()->superuser()->count(3)->create();
 
         Passport::actingAs($users->first());
@@ -32,7 +29,7 @@ class UsersForSelectListTest extends TestCase
 
     public function testUsersScopedToCompanyWhenMultipleFullCompanySupportEnabled()
     {
-        Setting::factory()->withMultipleFullCompanySupport()->create();
+        $this->settings->enableMultipleFullCompanySupport();
 
         $jedi = Company::factory()->has(User::factory()->count(3)->sequence(
             ['first_name' => 'Luke', 'last_name' => 'Skywalker', 'username' => 'lskywalker'],
@@ -60,7 +57,7 @@ class UsersForSelectListTest extends TestCase
 
     public function testUsersScopedToCompanyDuringSearchWhenMultipleFullCompanySupportEnabled()
     {
-        Setting::factory()->withMultipleFullCompanySupport()->create();
+        $this->settings->enableMultipleFullCompanySupport();
 
         $jedi = Company::factory()->has(User::factory()->count(3)->sequence(
             ['first_name' => 'Luke', 'last_name' => 'Skywalker', 'username' => 'lskywalker'],

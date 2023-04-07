@@ -3,7 +3,6 @@
 namespace Tests\Feature\Api\Assets;
 
 use App\Models\Asset;
-use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Laravel\Passport\Passport;
@@ -13,8 +12,6 @@ class AssetIndexTest extends TestCase
 {
     public function testAssetIndexReturnsExpectedAssets()
     {
-        Setting::factory()->create();
-
         Asset::factory()->count(3)->create();
 
         Passport::actingAs(User::factory()->superuser()->create());
