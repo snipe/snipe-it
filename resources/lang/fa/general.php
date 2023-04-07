@@ -48,8 +48,7 @@ return [
 
 ',
     'bulk_actions'          => 'اقدام دسته جمعی',
-    'bulk_checkin_delete'   => 'موارد اعلام حضور دسته جمعی از کاربران
-',
+    'bulk_checkin_delete'   => 'Bulk Checkin / Delete Users',
     'byod'                  => 'BYOD',
     'byod_help'             => 'This device is owned by the user',
     'bystatus'              => 'به ترتیب وضعیت',
@@ -163,6 +162,7 @@ return [
     'filetypes_size_help'   => 'حداکثر اندازه مجاز بارگذاری: اندازه است.
 ',
     'image_filetypes_help'  => 'نوع فایل های قابل قبول: jpg, webp, png, gif, و svg. حداکثر سایز فایل :size.',
+    'unaccepted_image_type'  => 'This image file was not readable. Accepted filetypes are jpg, webp, png, gif, and svg. The mimetype of this file is: :mimetype.',
     'import'         	    => 'واردات',
     'importing'         	=> 'در حال وارد کردن',
     'importing_help'        => 'می‌توانید دارایی‌ها، لوازم جانبی، مجوزها، اجزا، مواد مصرفی و کاربران را از طریق فایل CSV وارد کنید. <br><br>CSV باید با کاما محدود شود و با سرصفحه‌هایی که در <a href="https://snipe-it.readme.io/docs/importing" target="_new"> مطابقت دارند قالب‌بندی شود. نمونه CSV در مستندات</a>.
@@ -173,6 +173,8 @@ return [
     'asset_maintenances'       => 'نگهداشت دارایی',
     'item'  				=> 'مورد',
     'item_name'             => 'نام کالا',
+    'import_file'  			=> 'import CSV file',
+    'import_type'  			=> 'CSV import type',
     'insufficient_permissions' => 'دسترسی محدود!',
     'kits'       			=> 'مقادیر از پیش تعریف شده',
     'language'				=> 'زبان',
@@ -253,6 +255,7 @@ return [
 ',
     'request_canceled'      => 'درخواست لغو شد',
     'save'  				=> 'ذخیره کردن',
+    'select_var'            => 'Select :thing... ', // this will eventually replace all of our other selects
     'select'				=> 'انتخاب',
     'select_all'            => 'انتخاب همه',
     'search'				=> 'جستوجو',
@@ -277,10 +280,8 @@ return [
     'signed_off_by'         => 'امضا شده توسط
 ',
     'skin'       			=> 'پوسته',
-    'slack_msg_note'        => 'یک پیام  ارسال خواهد شد
-',
-    'slack_test_msg'        => 'اوه هی! به نظر می رسد ادغام Slack شما با Snipe-IT کار می کند!
-',
+    'webhook_msg_note'        => 'A notification will be sent via webhook',
+    'webhook_test_msg'        => 'Oh hai! Looks like your :app integration with Snipe-IT is working!',
     'some_features_disabled' => 'MODE DEMO: برخی از ویژگی ها برای این نصب غیر فعال هستند.',
     'site_name'				=> 'نام سایت',
     'state'  				=> 'وضعیت',
@@ -293,7 +294,6 @@ return [
     'sure_to_delete'    => 'مطمئنید که میخواهید حذف شود',
     'submit'				=> 'ارسال',
     'target'                => 'هدف',
-    'toggle_navigation'     => 'تغییر وضعیت ناوبری',
     'time_and_date_display' => 'نمایش زمان و تاریخ',
     'total_assets'			=> 'کل دارایی',
     'total_licenses'		=> 'کل مجوزهای',
@@ -476,7 +476,8 @@ return [
 ',
     'bulk_checkin_success' => 'موارد برای کاربران انتخاب شده بررسی شده است.
 ',
-    'set_to_null' => 'Delete values for this asset|Delete values for all :asset_count assets ',
+    'set_to_null'           => 'Delete values for this asset|Delete values for all :asset_count assets ',
+    'set_users_field_to_null'  => 'Delete :field values for this user|Delete :field values for all :user_count users ',
     'na_no_purchase_date'   => 'N/A - No purchase date provided',
     'assets_by_status'      => 'Assets by Status',
     'assets_by_status_type'      => 'Assets by Status Type',
@@ -495,7 +496,36 @@ return [
     'toggle_navigation'     => 'Toggle navigation',
     'alerts'                => 'Alerts',
     'tasks_view_all'        => 'View all tasks',
-
-
-
+    'true'                  => 'True',
+    'false'                 => 'False',
+    'integration_option'    => 'Integration Option',
+    'log_does_not_exist'    => 'No matching log record exists.',
+    'merge_users'           => 'Merge Users',
+    'merge_information' =>  'This will merge the :count users into a single user. Select the user you wish to merge the others into below, and the associated assets, licences, etc will be moved over to the selected user and the other users will be marked as deleted.',
+    'warning_merge_information' => 'This action CANNOT be undone and should ONLY be used when you need to merge users because of a bad import or sync. Be sure to run a backup first.',
+    'no_users_selected'     => 'No users selected',
+    'not_enough_users_selected'     => 'At least :count users must be selected',
+    'merge_success'         => ':count users merged successfully into :into_username!',
+    'merged'                => 'merged',
+    'merged_log_this_user_into' => 'Merged this user (ID :to_id - :to_username) into user ID :from_id (:from_username) ',
+    'merged_log_this_user_from' => 'Merged user ID :from_id (:from_username) into this user (ID :to_id - :to_username)',
+    'clear_and_save'            => 'Clear & Save',
+    'update_existing_values'    => 'Update Existing Values?',
+    'auto_incrementing_asset_tags_disabled_so_tags_required' => 'Generating auto-incrementing asset tags is disabled so all rows need to have the "Asset Tag" column populated.',
+    'auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created' => 'Note: Generating auto-incrementing asset tags is enabled so assets will be created for rows that do not have "Asset Tag" populated. Rows that do have "Asset Tag" populated will be updated with the provided information.',
+    'send_welcome_email_to_users'   => ' Send Welcome Email for new Users?',
+    'back_before_importing'     => 'Backup before importing?',
+    'csv_header_field'          => 'CSV Header Field',
+    'import_field'              => 'Import Field',
+    'sample_value'              => 'Sample Value',
+    'no_headers'                => 'No Columns Found',
+    'error_in_import_file'      => 'There was an error reading the CSV file: :error',
+    'percent_complete'          => ':percent % Complete',
+    'errors_importing'          => 'Some Errors occurred while importing: ',
+    'warning'                   => 'WARNING: :warning',
+    'success_redirecting'       => '"Success... Redirecting.',
+    'setup_successful_migrations' => 'Your database tables have been created',
+    'setup_migration_output' => 'Migration output:',
+    'setup_migration_create_user' => 'Next: Create User',
+    'importer_generic_error'    => 'Your file import is complete, but we did receive an error. This is usually caused by third-party API throttling from a notification webhook (such as Slack) and would not have interfered with the import itself, but you should confirm this.',
 ];

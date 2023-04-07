@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Zubehör konnte nicht herausgegeben werden. Bitte versuche es erneut',
         'success' 		=> 'Zubehör erfolgreich herausgegeben.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Dieser Benutzer ist ungültig. Bitte versuche es erneut.'
     ),
 

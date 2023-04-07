@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'Ang grupo ay umiiral na!',
-    'group_not_found'     => 'Ang grupo [:id] ay hindi umiiral.',
+    'group_not_found'     => 'Group ID :id does not exist.',
     'group_name_required' => 'Ang pangalan ng field ay kinakailangan',
 
     'success' => array(

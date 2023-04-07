@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Daha Fazla Bilgi',
 
-    'audit_help' => 'Bu kutucuğu işaretlediğinizde varlık kaydı yeni lokasyonu gösterir. İşaretlenmemiş olarak bırakırsanız denetim kayıtlarında basitçe lokasyonu not edecektir. <br><br>Eğer varlığın çıkışı yapılmışsa, çıkışı yapılan kişiyi, varlığı veya lokasyonu değiştirmeyecektir.',
+    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
     'assets' => 'Varlıklar seri numaraları veya varlık etiketleri ile takip edilir. Bunlar bir öğeyi belirlemek için daha yüksek öneme sahip olma eğilimindedir.',
 

@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Mere information',
 
-    'audit_help' => 'Afkrydsning af dette felt vil redigere aktivposten så den afspejler denne nye placering. Ingen markering angiver blot, placeringen i revisionsloggen.<br><br>Bemærk, at hvis dette aktiv er tjekkes ud, det vil ikke ændre placeringen af personen, aktivet eller placeringen, det er tjekket ud til.',
+    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
     'assets' => 'Aktiver er elementer sporet efter serienummer eller aktiv tag. De har tendens til at være elementer af højere værdi, hvor identificering af en bestemt genstand betyder noget.',
 

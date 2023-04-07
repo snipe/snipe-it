@@ -22,6 +22,8 @@ return [
     'restore' => [
         'error'   		=> 'Tillgången återställdes inte, försök igen',
         'success' 		=> 'Tillgången återställs framgångsrikt.',
+        'bulk_success' 		=> 'Återställning av tillgång lyckades.',
+        'nothing_updated'   => 'Inga tillgångar valdes, så ingenting återställdes.', 
     ],
 
     'audit' => [
@@ -48,8 +50,8 @@ return [
         'success'               => 'Din fil har importerats',
         'file_delete_success'   => 'Din fil har tagits bort',
         'file_delete_error'      => 'Filen kunde inte raderas',
-        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
-        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'header_row_has_malformed_characters' => 'Ett eller flera attribut i rubrikraden innehåller felaktigt formatterade UTF-8-tecken',
+        'content_row_has_malformed_characters' => 'Ett eller flera attribut i den första raden av innehållet innehåller felaktigt formatterade UTF-8-tecken',
     ],
 
 

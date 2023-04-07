@@ -23,6 +23,8 @@ return [
     'restore' => [
         'error'   		=> 'Asset wurde nicht wiederhergestellt, bitte versuche es noch einmal',
         'success' 		=> 'Asset erfolgreich wiederhergestellt.',
+        'bulk_success' 		=> 'Asset erfolgreich wiederhergestellt.',
+        'nothing_updated'   => 'Es wurden keine Assets ausgewählt, also wurde nichts wiederhergestellt.', 
     ],
 
     'audit' => [
@@ -49,8 +51,8 @@ return [
         'success'               => 'Deine Datei wurde importiert',
         'file_delete_success'   => 'Deine Datei wurde erfolgreich gelöscht',
         'file_delete_error'      => 'Die Datei konnte nicht gelöscht werden',
-        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
-        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'header_row_has_malformed_characters' => 'Ein oder mehrere Attribute in der Kopfzeile enthalten fehlerhafte UTF-8 Zeichen',
+        'content_row_has_malformed_characters' => 'Ein oder mehrere Attribute in der ersten Zeile des Inhalts enthalten fehlerhafte UTF-8-Zeichen',
     ],
 
 

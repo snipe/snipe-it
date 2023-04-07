@@ -6,7 +6,7 @@ return array(
     'deleted'  					        => 'Šis modelis ir izdzēsts.',
     'bulk_delete'               => 'Līdzekļu modeļu lielapjoma dzēšana',
     'bulk_delete_help'               => 'Lai apstiprinātu izvēlēto līdzekļu modeļu dzēšanu, ir jāatzīmē zemāk esošās izvēles rūtiņas. Līdzekļu modeļi, kuriem ir piesaistīti aktīvi, nevar tikt dzēsti, kamēr līdzekļi nav piesaistīti citam modelim.',
-    'bulk_delete_warn'          => 'Tiks dzēsti :model_count līdzekļu modeļi.',
+    'bulk_delete_warn'          => 'You are about to delete one asset model.|You are about to delete :model_count asset models.',
     'restore'                   => 'Atjaunot modeli',
     'requestable'               => 'Lietotāji var pieprasīt šo modeli',
 	'show_mac_address'			      => 'Parādiet MAC adreses lauku šī modeļa aktīvos',

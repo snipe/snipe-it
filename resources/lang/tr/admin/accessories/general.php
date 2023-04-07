@@ -16,5 +16,6 @@ return array(
     'update'  							=> 'Aksesuar Güncelleştirme',
     'use_default_eula'					=> '<a href="#" data-toggle="modal" data-target="#eulaModal">\'yı Varsayılan Sözleşme</a> yerine kullan.',
     'use_default_eula_disabled'			=> '<del>Varsayılan sözleşmeyi kullan</del> Varsayılan sözleşme tanımlı değil. Lütfen Ayarlar\'dan ekleyiniz.',
+    'clone'                             => 'Aksesuarı çoğalt',
 
 );

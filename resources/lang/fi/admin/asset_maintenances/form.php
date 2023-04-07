@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Huollon tyyppi',
+        'asset_maintenance_type' => 'Asset Maintenance Type',
         'title'                  => 'Otsikko',
-        'start_date'             => 'Aloituspäivä',
-        'completion_date'        => 'Valmis',
+        'start_date'             => 'Start Date',
+        'completion_date'        => 'Completion Date',
         'cost'                   => 'Kustannus',
         'is_warranty'            => 'Takuun parannus',
-        'asset_maintenance_time' => 'Päivää',
+        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
         'notes'                  => 'Muistiinpanot',
-        'update'                 => 'Päivitä',
-        'create'                 => 'Luo'
+        'update'                 => 'Update Asset Maintenance',
+        'create'                 => 'Create Asset Maintenance'
     ];

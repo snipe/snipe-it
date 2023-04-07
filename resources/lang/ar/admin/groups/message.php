@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'المجموعة موجودة مسبقا!',
-    'group_not_found'     => 'المجموعة رقم :id غير موجودة.',
+    'group_not_found'     => 'معرف المجموعة :id غير موجود.',
     'group_name_required' => 'حقل الإسم اجباري',
 
     'success' => array(

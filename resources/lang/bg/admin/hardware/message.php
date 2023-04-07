@@ -22,6 +22,8 @@ return [
     'restore' => [
         'error'   		=> 'Активът не беше възстановен. Моля опитайте отново.',
         'success' 		=> 'Активът възстановен успешно.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [

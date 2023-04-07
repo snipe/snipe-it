@@ -4,7 +4,7 @@ return array(
 
     'does_not_exist' => 'Model nie istnieje.',
     'no_association' => 'Żaden nie został przypisany.',
-    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
+    'no_association_fix' => 'To zepsuje rzeczy w dziwny i straszny sposób. Edytuj teraz ten zasób, aby przypisać mu model.',
     'assoc_users'	 => 'Ten model jest przypisany do minim jednego aktywa i nie może być usunięty. Proszę usunąć aktywa, a następnie spróbować ponownie. ',
 
 
@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Model nie został zaktualizowany, spróbuj ponownie',
-        'success' => 'Model zaktualizowany pomyślnie.'
+        'success' => 'Model zaktualizowany pomyślnie.',
     ),
 
     'delete' => array(
@@ -32,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Żadne pole nie zostało zmodyfikowane, więc nic nie zostało zaktualizowane.',
-        'success' 		=> 'Modele zostały uaktualnione.'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Nie wybrano modeli, więc nic nie zostało usunięte.',
-        'success' 		    => 'Zostało usunięte :success_count model(i)!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ':success_count model(i) zostało usuniętych, jednakże :fail_count nie udało się usunąć, ponieważ wciąż są powiązane z nimi zasoby.'
     ),
 

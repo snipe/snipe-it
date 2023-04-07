@@ -43,7 +43,7 @@ return [
     'login_first_admin' => 'Logga in på din nya Snipe-IT-installation med hjälp av inloggningsuppgifterna nedan:',
     'login' => 'Logga in:',
     'Low_Inventory_Report' => 'Meddelande om lågt lagersaldo',
-    'inventory_report' => 'Inventory Report',
+    'inventory_report' => 'Inventarierapport',
     'min_QTY' => 'Min. antal',
     'name' => 'namn',
     'new_item_checked' => 'En ny artikel har blivit utcheckad i ditt namn, se detaljer nedan.',
@@ -79,5 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Påminnelse: :name sluttiden för incheckning närmar sig',
     'Expected_Checkin_Date' => 'En tillgång som checkas ut till dig kommer att checkas in igen :date',
     'your_assets' => 'Visa dina tillgångar',
-    'rights_reserved' => 'All rights reserved.',
+    'rights_reserved' => 'Med ensamrätt.',
 ];

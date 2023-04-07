@@ -22,6 +22,8 @@ return [
     'restore' => [
         'error'   		=> 'הנכס לא שוחזר, נסה שוב',
         'success' 		=> 'הנכס שוחזר בהצלחה.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [

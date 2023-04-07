@@ -14,8 +14,8 @@ return [
     'deleted'  					=> 'Cet actif a été supprimé.',
     'edit'  					=> 'Editer le Bien',
     'model_deleted'  			=> 'Ce modèle d\'actifs a été supprimé. Vous devez restaurer le modèle avant de pouvoir restaurer l\'actif.',
-    'model_invalid'             => 'The Model of this Asset is invalid.',
-    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
+    'model_invalid'             => 'Le modèle de cette ressource n\'est pas valide.',
+    'model_invalid_fix'         => 'La ressource doit être éditée pour corriger cela avant d\'essayer de l\'enregistrer ou de l\'affecter.',
     'requestable'               => 'Réquisitionnable',
     'requested'				    => 'Demandé',
     'not_requestable'           => 'Non-réquisitionnable',
@@ -42,5 +42,6 @@ return [
     'error_messages' => 'Messages d\'erreur:',
     'success_messages' => 'Messages de succès:',
     'alert_details' => 'Voir ci-dessous pour plus de détails.',
-    'custom_export' => 'Exportation personnalisée'
+    'custom_export' => 'Exportation personnalisée',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];

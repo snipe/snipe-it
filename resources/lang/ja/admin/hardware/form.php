@@ -2,8 +2,11 @@
 
 return [
     'bulk_delete'		=> '資産の一括削除',
+    'bulk_restore'      => '資産一括リストアの確認', 
   'bulk_delete_help'	=> '以下の資産が一括削除されます。削除後のデータは戻すことができませ',
+  'bulk_restore_help'	=> '以下の一括リストアのために資産を確認してください。復元されると、これらの資産は以前に割り当てられたユーザーに関連付けられることはありません。',
   'bulk_delete_warn'	=> ':asset_cont 件の資産を削除しました',
+  'bulk_restore_warn'	=> ':asset_count資産を復元しようとしています。',
     'bulk_update'		=> '資産を一括更新',
     'bulk_update_help'	=> 'このフォームは一度に複数の資産を更新することが可能です。変更が必要なフィールドにのみ入力をして下さい。ブランクのフィールドは変更されません。 ',
     'bulk_update_warn'	=> '単一資産のプロパティを編集しようとしています。|:asset_count 件のプロパティを編集しようとしています。',
@@ -45,7 +48,7 @@ return [
     'asset_location_update_default' => 'デフォルトの場所のみ更新',
     'asset_not_deployable' => 'その資産ステータスは配備可能ではありません。この資産はチェックアウトできません。',
     'asset_deployable' => 'その資産ステータスは配備可能です。この資産はチェックアウトできます。',
-    'processing_spinner' => '処理中…',
+    'processing_spinner' => '処理中です... (これは大きなファイルで少し時間がかかる可能性があります)',
     'optional_infos'  => 'オプション情報',
     'order_details'   => 'オーダー関連情報'
 ];

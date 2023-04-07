@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Ang aksesorya ay hindi na-check out, mangyaring subukang muli',
         'success' 		=> 'Ang aksesorya ay matagumoay na nai-check out.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Ang user na iyon ay hindi tama. Mangyaring subukang muli.'
     ),
 

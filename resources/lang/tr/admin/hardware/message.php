@@ -23,6 +23,8 @@ return [
     'restore' => [
         'error'   		=> 'Demirbaş geri getirilemedi, lütfen tekrar deneyin',
         'success' 		=> 'Demirbaş geri getirildi.',
+        'bulk_success' 		=> 'Varlık başarı ile geri yüklendi.',
+        'nothing_updated'   => 'Herhangi bir varlık seçili olmadığı için hiçbirşey geri yüklenmedi.', 
     ],
 
     'audit' => [

@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'มีกลุ่มอยู่แล้ว',
-    'group_not_found'     => 'ไม่มีกลุ่ม [:id]',
+    'group_not_found'     => 'Group ID :id does not exist.',
     'group_name_required' => 'ต้องกำหนดชื่อฟิลด์',
 
     'success' => array(

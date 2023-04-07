@@ -6,7 +6,7 @@ return array(
     'deleted'  					        => 'This model has been deleted.',
     'bulk_delete'               => 'Масово изтриване на модели на активите',
     'bulk_delete_help'               => 'Използвайте квадратчетата за отметка по-долу, за да потвърдите изтриването на избраните модели на активи. Моделите, за които има асоциирани активи, не могат да бъдат изтрити, докато активите не се асоциират с друг модел.',
-    'bulk_delete_warn'          => 'Ще бъдат изтрити :model_count модели на активи.',
+    'bulk_delete_warn'          => 'You are about to delete one asset model.|You are about to delete :model_count asset models.',
     'restore'                   => 'Възстановяване на модел',
     'requestable'               => 'Потребителите могат да поискат този модел',
 	'show_mac_address'			      => 'Визуализиране на поле за MAC адрес в активите за този модел',
