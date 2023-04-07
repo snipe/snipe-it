@@ -8,9 +8,14 @@ class Settings
 {
     private Setting $setting;
     
-    public function __construct()
+    private function __construct()
     {
         $this->setting = Setting::factory()->create();
+    }
+
+    public static function initialize()
+    {
+        return new self();
     }
 
     public function enableMultipleFullCompanySupport()

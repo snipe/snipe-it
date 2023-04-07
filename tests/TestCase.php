@@ -24,6 +24,6 @@ abstract class TestCase extends BaseTestCase
 
         $this->withoutMiddleware($this->globallyDisabledMiddleware);
 
-        $this->settings = new Settings();
+        $this->settings = Settings::initialize();
     }
 }
