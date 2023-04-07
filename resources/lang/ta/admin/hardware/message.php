@@ -22,6 +22,8 @@ return [
     'restore' => [
         'error'   		=> 'சொத்து மீட்டமைக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்',
         'success' 		=> 'சொத்து வெற்றிகரமாக மீட்டமைக்கப்பட்டது.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
