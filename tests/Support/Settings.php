@@ -23,6 +23,11 @@ class Settings
         $this->update(['full_multiple_companies_support' => 1]);
     }
 
+    public function set(array $attributes)
+    {
+        $this->update($attributes);
+    }
+
     private function update(array $attributes)
     {
         Setting::unguarded(fn() => $this->setting->update($attributes));
