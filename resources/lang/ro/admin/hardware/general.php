@@ -42,5 +42,6 @@ return [
     'error_messages' => 'Mesaje de eroare:',
     'success_messages' => 'Mesaje de succes:',
     'alert_details' => 'Vezi mai jos pentru detalii.',
-    'custom_export' => 'Export date personalizat'
+    'custom_export' => 'Export date personalizat',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];
