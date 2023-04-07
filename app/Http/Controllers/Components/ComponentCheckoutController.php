@@ -80,21 +80,17 @@ class ComponentCheckoutController extends Controller
                 ->withInput();
         }
 
-        $admin_user = Auth::user();
-        $asset_id = $request->input('asset_id');
-
         // Check if the user exists
-        $asset = Asset::find($asset_id);
+        $asset = Asset::find($request->input('asset_id'));
 
         // Update the component data
-        $component->asset_id = $asset_id;
-
+        $component->asset_id = $request->input('asset_id');
         $component->assets()->attach($component->id, [
             'component_id' => $component->id,
-            'user_id' => $admin_user->id,
+            'user_id' => Auth::user(),
             'created_at' => date('Y-m-d H:i:s'),
             'assigned_qty' => $request->input('assigned_qty'),
-            'asset_id' => $asset_id,
+            'asset_id' => $request->input('asset_id'),
             'note' => $request->input('note'),
         ]);
 
