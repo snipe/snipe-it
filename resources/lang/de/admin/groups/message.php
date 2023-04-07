@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'Gruppe existiert bereits!',
-    'group_not_found'     => 'Gruppe [: Id] existiert nicht.',
+    'group_not_found'     => 'Die Gruppe mit der ID :id existiert nicht.',
     'group_name_required' => '"Name" darf nicht leer sein',
 
     'success' => array(

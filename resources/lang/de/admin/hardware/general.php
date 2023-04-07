@@ -14,8 +14,8 @@ return [
     'deleted'  					=> 'Dieses Asset wurde gelöscht.',
     'edit'  					=> 'Asset bearbeiten',
     'model_deleted'  			=> 'Dieses Modell für Assets wurde gelöscht. Sie müssen das Modell wiederherstellen, bevor Sie das Asset wiederherstellen können.',
-    'model_invalid'             => 'The Model of this Asset is invalid.',
-    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
+    'model_invalid'             => 'Das Modell dieses Asset ist ungültig.',
+    'model_invalid_fix'         => 'Das Asset sollte bearbeitet werden, um dies zu korrigieren, bevor versucht wird, es ein- oder auszuchecken.',
     'requestable'               => 'Anforderbar',
     'requested'				    => 'Angefordert',
     'not_requestable'           => 'Kann nicht angefordert werden',
@@ -42,5 +42,6 @@ return [
     'error_messages' => 'Fehlermeldungen:',
     'success_messages' => 'Erfolgsmeldungen:',
     'alert_details' => 'Siehe unten für Details.',
-    'custom_export' => 'Benutzerdefinierter Export'
+    'custom_export' => 'Benutzerdefinierter Export',
+    'mfg_warranty_lookup' => ':manufacturer Garantiestatus Abfrage',
 ];
