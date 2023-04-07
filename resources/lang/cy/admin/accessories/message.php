@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Ategolyn heb ei nodi allan, ceisiwch eto o. g. y. dd',
         'success' 		=> 'Ategolyn wedi nodi allan yn llwyddiannus.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Nid yw\'r defnyddiwr yna yn ddilys. Ceisiwch eto o.g.y.dd.'
     ),
 
