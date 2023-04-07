@@ -33,12 +33,12 @@ return [
         'testing_authentication' => 'Testiranje LDAP autentifikacije...',
         'authentication_success' => 'Autentifikacija korisnika na LDAP-u je uspešna!'
     ],
-    'slack' => [
-        'sending' => 'Slack test poruke...',
+    'webhook' => [
+        'sending' => 'Slanje :app probne poruke...',
         'success_pt1' => 'Uspešno! Proverite ',
-        'success_pt2' => ' kanal za vašu test poruku i obavezno kliknite na SAČUVAJ ispod da biste sačuvali svoja podešavanja.',
+        'success_pt2' => ' kanal za vašu probnu poruku i obavezno kliknite na SAČUVAJ ispod da biste sačuvali svoja podešavanja.',
         '500' => '500 Greška servera.',
-        'error' => 'Something went wrong. Slack responded with: :error_message',
-        'error_misc' => 'Something went wrong. :( ',
+        'error' => 'Nešto nije u redu. :app je adgovorila sa: :error_message',
+        'error_misc' => 'Nešto nije u redu. :( ',
     ]
 ];

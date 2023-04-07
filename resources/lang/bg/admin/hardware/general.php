@@ -42,5 +42,6 @@ return [
     'error_messages' => 'Съобщение за грешка:',
     'success_messages' => 'Success messages:',
     'alert_details' => 'Please see below for details.',
-    'custom_export' => 'Custom Export'
+    'custom_export' => 'Custom Export',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];

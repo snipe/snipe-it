@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Onderhoudstipe',
+        'asset_maintenance_type' => 'Asset Maintenance Type',
         'title'                  => 'Titel',
-        'start_date'             => 'begin',
-        'completion_date'        => 'voltooi',
+        'start_date'             => 'Start Date',
+        'completion_date'        => 'Completion Date',
         'cost'                   => 'koste',
         'is_warranty'            => 'Garantieverbetering',
-        'asset_maintenance_time' => 'dae',
+        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
         'notes'                  => 'notas',
-        'update'                 => 'Opdateer',
-        'create'                 => 'Skep'
+        'update'                 => 'Update Asset Maintenance',
+        'create'                 => 'Create Asset Maintenance'
     ];

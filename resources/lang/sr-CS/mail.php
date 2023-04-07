@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'acceptance_asset_accepted' => 'A user has accepted an item',
-    'acceptance_asset_declined' => 'A user has declined an item',
+    'acceptance_asset_accepted' => 'Korisnik je prihvatio stavku',
+    'acceptance_asset_declined' => 'Korisnik je odbio stavku',
     'a_user_canceled' => 'Korisnik je otkazao zahtev za stavke na Web lokaciji',
     'a_user_requested' => 'Korisnik je zatražio stavke na Web lokaciji',
     'accessory_name' => 'Naziv dodatne opreme, pribora:',
@@ -43,7 +43,7 @@ return [
     'login_first_admin' => 'Prijavite se u vašu novu Snipe-IT instalaciju koristeći kredencijale ispod:',
     'login' => 'Login:',
     'Low_Inventory_Report' => 'Izveštaj o niskim zalihama',
-    'inventory_report' => 'Inventory Report',
+    'inventory_report' => 'Izveštaj o zalihama',
     'min_QTY' => 'Min Kol',
     'name' => 'Naziv',
     'new_item_checked' => 'Nova stavka je proverena pod vašim imenom, detalji su u nastavku.',
@@ -80,5 +80,5 @@ return [
     'Expected_Checkin_Notification' => 'Izveštaj o očekivanoj proveri imovine',
     'Expected_Checkin_Date' => 'Imovina koja vam je odjavljena treba da bude ponovo prijavljena :date',
     'your_assets' => 'Pregledaj svoju imovinu',
-    'rights_reserved' => 'All rights reserved.',
+    'rights_reserved' => 'Sva prava zadržana.',
 ];

@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Model was not updated, please try again',
-        'success' => 'Model updated successfully.'
+        'success' => 'Model updated successfully.',
     ),
 
     'delete' => array(
@@ -32,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'No fields were changed, so nothing was updated.',
-        'success' 		=> 'Моделі оновлено.'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'No models were selected, so nothing was deleted.',
-        'success' 		    => ':success_count model(s) deleted!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ':success_count model(s) were deleted, however :fail_count were unable to be deleted because they still have assets associated with them.'
     ),
 

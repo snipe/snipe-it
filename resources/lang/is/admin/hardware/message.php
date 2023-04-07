@@ -23,6 +23,8 @@ return [
     'restore' => [
         'error'   		=> 'Asset was not restored, please try again',
         'success' 		=> 'Asset restored successfully.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [

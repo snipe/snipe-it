@@ -2,8 +2,11 @@
 
 return [
     'bulk_delete'		=> 'Confirmar Apagar artigos seleccionados',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> 'Reveja os ativos para apagar abaixo. Depois de apagados, estes ativos podem ser restaurados, mas não estarão associados aos utilizadores.',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'Vai apagar :asset_count ativos.',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'Atualização de ativos em massa',
     'bulk_update_help'	=> 'Este formulário permite a atualização em massa de ativos. Preencha apenas os atributos que precisam de alteração. Qualquer atributo deixado em branco permanecerá inalterado. ',
     'bulk_update_warn'	=> 'Está prestes a editar as propriedades de um único ativo.|Está prestes a editar as propriedades de :asset_count ativos.',
@@ -45,7 +48,7 @@ return [
     'asset_location_update_default' => 'Atualizar apenas a localização por defeito',
     'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
     'asset_deployable' => 'That status is deployable. This asset can be checked out.',
-    'processing_spinner' => 'A processar...',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Informação opcional',
     'order_details'   => 'Order Related Information'
 ];

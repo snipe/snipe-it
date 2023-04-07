@@ -6,7 +6,7 @@ return array(
     'deleted'  					        => 'This model has been deleted.',
     'bulk_delete'               => 'Xóa hàng loạt Kiểu tài sản',
     'bulk_delete_help'               => 'Sử dụng hộp kiểm bên dưới để xác nhận việc sẽ xóa kiểu tài sản đã lựa chọn. Kiểu tài sản đó có liên kết với tài sản thì sẽ không thể xóa cho đến khi tài sản đó được chuyển đến kiểu tài sản khác.',
-    'bulk_delete_warn'          => 'Bạn sắp xóa :model_count asset models.',
+    'bulk_delete_warn'          => 'You are about to delete one asset model.|You are about to delete :model_count asset models.',
     'restore'                   => 'Khôi phục Model',
     'requestable'               => 'Người dùng có thể yêu cầu mô hình này',
 	'show_mac_address'			      => 'Hiển thị trường địa chỉ MAC trong tài sản của model này',

@@ -55,5 +55,6 @@ return [
     'alert_details' => 'لطفا برای جزئیات زیر را ببینید.
 ',
     'custom_export' => 'صادرات سفارشی
-'
+',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];

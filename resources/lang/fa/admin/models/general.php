@@ -7,8 +7,7 @@ return array(
     'bulk_delete'               => 'حذف دسته جمعی مدل های دارایی',
     'bulk_delete_help'               => 'برای تأیید حذف مدل‌های دارایی انتخاب شده از کادرهای تأیید زیر استفاده کنید. مدل‌های دارایی‌هایی که دارایی‌های مرتبط با آن‌ها هستند، تا زمانی که دارایی‌ها با مدل دیگری مرتبط نشوند، قابل حذف نیستند.
 ',
-    'bulk_delete_warn'          => 'شما در حال حذف مدل های دارایی :model_count هستید.
-',
+    'bulk_delete_warn'          => 'You are about to delete one asset model.|You are about to delete :model_count asset models.',
     'restore'                   => 'بازیابی مدل',
     'requestable'               => 'کاربران ممکن است از این مدل درخواست کنند',
 	'show_mac_address'			      => 'نمایش قسمت آدرس MAC در دارایی در این مدل',

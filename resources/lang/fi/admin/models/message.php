@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Mallia ei päivitetty, yritä uudelleen',
-        'success' => 'Malli päivitettiin onnistuneesti.'
+        'success' => 'Malli päivitettiin onnistuneesti.',
     ),
 
     'delete' => array(
@@ -32,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Mitään kentistä ei ollut muutettu, joten mitään ei päivitetty.',
-        'success' 		=> 'Mallit päivitetty.'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Ei malleja valittuna, mitään ei poistettu.',
-        'success' 		    => ':success_count malli(a) poistettu!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ':success_count malli(a) poistettiin, mutta :fail_count ei voitu poistaa, koska niillä on vielä niihin liittyviä laitteita.'
     ),
 

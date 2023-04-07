@@ -2,8 +2,11 @@
 
 return [
     'bulk_delete'		=> 'Apstiprināt lielapjoma aktīvu dzēšanu',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> 'Pārskatīt aktīvu lielapjoma dzēšanu zemāk. Dzēstos aktīvus var atjaunot, bet tie vairs nebūs saistīti ar šībrīža lietotāju.',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'Jūs gatavojaties dzēst: asset_count aktīvi.',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'Lielapjoma atjaunināšanas līdzekļi',
     'bulk_update_help'	=> 'Šī veidlapa ļauj vienlaikus atjaunināt vairākus aktīvus. Aizpildiet tikai nepieciešamos laukus. Jebkurš tukšs laukums paliek nemainīgs.',
     'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
@@ -45,7 +48,7 @@ return [
     'asset_location_update_default' => 'Atjaunināt tikai noklusēja atrašanās vietu',
     'asset_not_deployable' => 'Šis statuss nav izmantojams. Pamatlīdzeklis nevar tikt izrakstīts.',
     'asset_deployable' => 'Šis statuss ir izmantojams. Pamatlīdzeklis ir pieejams izrakstīšanai.',
-    'processing_spinner' => 'Apstrādā...',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Neobligātā informācija',
     'order_details'   => 'Pasūtījuma informācija'
 ];

@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'Nhóm đã tồn tại!',
-    'group_not_found'     => 'Nhóm [:id] không tồn tại.',
+    'group_not_found'     => 'Group ID :id does not exist.',
     'group_name_required' => 'Trường tên thì bắt buộc',
 
     'success' => array(

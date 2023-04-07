@@ -2,7 +2,7 @@
 
 return [
     'acceptance_asset_accepted' => 'Un usuario ha aceptado un artículo',
-    'acceptance_asset_declined' => 'A user has declined an item',
+    'acceptance_asset_declined' => 'Un usuario ha rechazado un artículo',
     'a_user_canceled' => 'Un usuario ha cancelado una solicitud de articulo en el sitio web',
     'a_user_requested' => 'Un usuario ha solicitado un artículo en el sitio web',
     'accessory_name' => 'Nombre del Accesorio:',
@@ -43,7 +43,7 @@ return [
     'login_first_admin' => 'Inicia sesión en tu nueva instalación de Snipe-IT usando las credenciales abajo:',
     'login' => 'Iniciar Sesión:',
     'Low_Inventory_Report' => 'Reporte de inventario bajo',
-    'inventory_report' => 'Inventory Report',
+    'inventory_report' => 'Informe de inventario',
     'min_QTY' => 'Cantidad mínima',
     'name' => 'Nombre',
     'new_item_checked' => 'Un nuevo artículo se ha retirado bajo tu nombre, los detalles están a continuación.',
@@ -62,7 +62,7 @@ return [
     'test_mail_text' => 'Esto es una prueba desde el sistema de gestión de activos de Snipe-IT. Si tienes esto, correo está funcionando :)',
     'the_following_item' => 'El siguiente artículo ha sido devuelto: ',
     'low_inventory_alert' => 'Hay :count elemento que está por debajo del inventario mínimo o que pronto estará debajo.|Hay :count elementos que están por debajo del inventario mínimo o que pronto serán bajos.',
-    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'Hay :count activo con una garantía que expira en los próximos :threshold days.|Hay :count activos con garantías que expiran en los siguientes :threshold days.',
     'license_expiring_alert' => 'Hay :count licencia que expira en los próximos :threshold días. | Hay :count licencias que expiran en los próximos :threshold días.',
     'to_reset' => 'Para restaurar tu contraseña de :web, rellena este formulario:',
     'type' => 'Tipo',
@@ -79,5 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Recordatorio: :name se acerca la fecha de devolución',
     'Expected_Checkin_Date' => 'Un activo asignado a ti debe ser devuelto en :date',
     'your_assets' => 'Ver tus activos',
-    'rights_reserved' => 'All rights reserved.',
+    'rights_reserved' => 'Todos los derechos reservados.',
 ];

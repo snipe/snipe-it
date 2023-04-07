@@ -17,5 +17,6 @@ return array(
     'use_default_eula'					=> 'Použít <a href="#" data-toggle="modal" data-target="#eulaModal">primární výchozí EULA</a>.',
     'use_default_eula_disabled'			=> '<del>Použít výchozí EULA.</del>
 Žádná výchozí EULA nenastavena. Zadejte novou v nastevení.',
+    'clone'                             => 'Clone Accessory',
 
 );

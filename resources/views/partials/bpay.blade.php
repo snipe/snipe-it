@@ -11,7 +11,5 @@
             }}();
         </script>
         @else
-            FARTS
-
     @endif
 @endcan

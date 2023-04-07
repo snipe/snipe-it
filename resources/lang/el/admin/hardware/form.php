@@ -2,8 +2,11 @@
 
 return [
     'bulk_delete'		=> 'Επιβεβαιώστε μαζική διαγραφή περιουσιακών στοιχείων',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> 'Εξετάστε τα περιουσιακά στοιχεία για μαζική διαγραφή παρακάτω. Μόλις διαγραφεί, αυτά τα περιουσιακά στοιχεία μπορούν να αποκατασταθούν, αλλά αυτά δεν θα είναι πλέον συσχετιζόμενα με οποιοσδήποτε χρήστη που τους έχει ανατεθεί.',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'Πρόκειται να διαγράψετε: asset_count περιουσιακών στοιχείων.',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'Μαζική ενημέρωση παγίων',
     'bulk_update_help'	=> 'Αυτή η φόρμα επιτρέπει την ενημέρωση πολλαπλών παγίων ταυτόχρονα. Μόνο συμπληρώστε τα πεδία που θέλετε να αλλάξετε. Οποιαδήποτε πεδίο αριστερά μείνει κενό θα παραμείνει ως αμετάβλητο. ',
     'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
@@ -45,7 +48,7 @@ return [
     'asset_location_update_default' => 'Update only default location',
     'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
     'asset_deployable' => 'That status is deployable. This asset can be checked out.',
-    'processing_spinner' => 'Processing...',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Optional Information',
     'order_details'   => 'Order Related Information'
 ];

@@ -23,6 +23,8 @@ return [
     'restore' => [
         'error'   		=> 'Nid oedd yn bosib adfer yr ased, ceisiwch eto o. g. y. dd',
         'success' 		=> 'Ased wedi adfer yn llwyddiannus.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [

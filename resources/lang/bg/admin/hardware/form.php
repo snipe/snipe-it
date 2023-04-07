@@ -2,8 +2,11 @@
 
 return [
     'bulk_delete'		=> 'Потвърдете масовото изтриване на активи',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> 'Прегледайте активите, маркирани за масово изтриване. Веднъж изтрити, активите могат да бъдат възстановени, но те вече няма да бъдат асоциирани с потребителите, на които са изписани в момента.',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'Ще бъдат изтрити :asset_count актива.',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'Масово обновяване на активи',
     'bulk_update_help'	=> 'Тук можете да обновите множество активи едновременно. Попълнете единствено полетата, които желаете да промените. Всички празни полета няма да бъдат променени.',
     'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
@@ -45,7 +48,7 @@ return [
     'asset_location_update_default' => 'Актуализиране на местоположението по подразбиране',
     'asset_not_deployable' => 'Актива не може да бъде предоставен. Този активк не може да бъде изписан.',
     'asset_deployable' => 'Актива може да бъде предоставен. Този активк може да бъде изписан.',
-    'processing_spinner' => 'В процес на изпълнение...',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Допълнителна информация',
     'order_details'   => 'Информация за състоянието на поръчка'
 ];

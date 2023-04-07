@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'sent'	        => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
-    'user'			=> 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
-    'token'         => 'This password reset token is invalid or expired, or does not match the username provided.',
-    'reset'         => 'Your password has been reset!',
+    'sent'	        => 'Hvis brugeren findes med en gyldig email-adresse i vores system, er der blevet sendt en e-mail til gendannelse af adgangskoden.',
+    'user'			=> 'Hvis brugeren findes med en gyldig email-adresse i vores system, er der blevet sendt en e-mail til gendannelse af adgangskoden.',
+    'token'         => 'Denne nøgle til nulstilling af adgangskode er ugyldig, udløbet eller stemmer ikke overens med det angivne brugernavn.',
+    'reset'         => 'Din adgangskode er blevet nulstillet!',
 ];

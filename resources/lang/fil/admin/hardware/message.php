@@ -23,6 +23,8 @@ return [
     'restore' => [
         'error'   		=> 'Ang asset ay hindi naibalik sa dati, mangyaring subukang muli',
         'success' 		=> 'Ang asset ay matagumpay nang naibalik sa dati.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
