@@ -10,7 +10,7 @@
 @section('content')
 
 <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-8">
     <form class="form-horizontal" method="post" action="" autocomplete="off">
       <!-- CSRF Token -->
       {{ csrf_field() }}
@@ -25,30 +25,26 @@
         @endif
 
         <div class="box-body">
-          @if ($component->name)
-          <!-- consumable name -->
-          <div class="form-group">
-            <label class="col-sm-3 control-label">{{ trans('admin/components/general.component_name') }}</label>
-            <div class="col-md-6">
-              <p class="form-control-static">{{ $component->name }}</p>
-            </div>
-          </div>
-          @endif
-
           <!-- Asset -->
             @include ('partials.forms.edit.asset-select', ['translated_name' => trans('general.select_asset'), 'fieldname' => 'asset_id'])
 
             <div class="form-group {{ $errors->has('assigned_qty') ? ' has-error' : '' }}">
-              <label for="assigned_qty" class="col-md-3 control-label">{{ trans('general.qty') }}
-                <i class='icon-asterisk'></i></label>
-              <div class="col-md-9">
-                <input class="form-control" type="text" name="assigned_qty" id="assigned_qty" style="width: 70px;" value="{{ old('assigned_qty') ?? 1 }}" />
-                {!! $errors->first('assigned_qty', '<br><span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+              <label for="assigned_qty" class="col-md-3 control-label">
+                {{ trans('general.qty') }}
+              </label>
+              <div class="col-md-2 col-sm-5 col-xs-5">
+                <input class="form-control required col-md-12" type="text" name="assigned_qty" id="assigned_qty" value="{{ old('assigned_qty') ?? 1 }}" />
               </div>
+              @if ($errors->first('assigned_qty'))
+                <div class="col-md-9 col-md-offset-3">
+                  {!! $errors->first('assigned_qty', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                </div>
+              @endif
             </div>
 
+
             <!-- Note -->
-            <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
+            <div class="form-group{{ $errors->has('note') ? ' error' : '' }}">
               <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
               <div class="col-md-7">
                 <textarea class="col-md-6 form-control" id="note" name="note">{{ old('note', $component->note) }}</textarea>
