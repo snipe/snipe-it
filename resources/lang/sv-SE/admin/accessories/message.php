@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Tillbehöret checkades inte ut. Vänligen försök igen',
         'success' 		=> 'Tillbehöret checkades ut.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Användaren är ogiltig. Försök igen.'
     ),
 
