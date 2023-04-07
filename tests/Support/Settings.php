@@ -31,5 +31,6 @@ class Settings
     private function update(array $attributes)
     {
         Setting::unguarded(fn() => $this->setting->update($attributes));
+        Setting::$_cache = null;
     }
 }
