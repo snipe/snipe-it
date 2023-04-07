@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'Groep bestaan ​​reeds!',
-    'group_not_found'     => 'Groep [: id] bestaan ​​nie.',
+    'group_not_found'     => 'Group ID :id does not exist.',
     'group_name_required' => 'Die naam veld is nodig',
 
     'success' => array(
