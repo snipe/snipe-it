@@ -2,8 +2,11 @@
 
 return [
     'bulk_delete'		=> 'Confirma a exclusão de Ativos em Massa',
+    'bulk_restore'      => 'Confirmar Restauração de Ativos em Massa', 
   'bulk_delete_help'	=> 'Reveja os ativos selecionados para deletar. Depois de deletados, estes ativos podem ser restaurados, mas não estarão associados aos usuários.',
+  'bulk_restore_help'	=> 'Revise os ativos para restauração em massa abaixo. Uma vez restaurados, estes ativos não serão associados a quaisquer usuários aos quais foram atribuídos anteriormente.',
   'bulk_delete_warn'	=> 'Você está prestes a excluir.',
+  'bulk_restore_warn'	=> 'Você está prestes a restaurar :asset_count ativos.',
     'bulk_update'		=> 'Ativos da Atualização em Massa',
     'bulk_update_help'	=> 'Este formulário lhe permite atualizar múltiplos ativos de uma vez só. Apenas preencha os campos que você precisa alterar. Qualquer campo deixado em branco permanecerá inalterado. ',
     'bulk_update_warn'	=> 'Você está prestes a editar as propriedades de um único ativo.Você está prestes a editar as propriedades de :asset_count ativos.',
@@ -45,7 +48,7 @@ return [
     'asset_location_update_default' => 'Atualizar somente local padrão',
     'asset_not_deployable' => 'Este status de ativo não é implantado. Este ativo não pode ser verificado.',
     'asset_deployable' => 'Este status pode ser implementado. Este ativo pode ser verificado.',
-    'processing_spinner' => 'Processando...',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Informação Opcional',
     'order_details'   => 'Informações do pedido relacionado'
 ];
