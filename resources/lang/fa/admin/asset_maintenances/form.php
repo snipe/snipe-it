@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'نوع نگهداری دارایی',
+        'asset_maintenance_type' => 'Asset Maintenance Type',
         'title'                  => 'عنوان',
-        'start_date'             => 'شروع شده',
-        'completion_date'        => 'تکمیل شده',
+        'start_date'             => 'Start Date',
+        'completion_date'        => 'Completion Date',
         'cost'                   => 'هزینه',
         'is_warranty'            => 'بهبود ضمانت',
-        'asset_maintenance_time' => 'روزها',
+        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
         'notes'                  => 'یادداشت ها',
-        'update'                 => 'بروزرسانی',
-        'create'                 => 'ایجاد'
+        'update'                 => 'Update Asset Maintenance',
+        'create'                 => 'Create Asset Maintenance'
     ];
