@@ -18,11 +18,6 @@ class Settings
         $this->update(['full_multiple_companies_support' => 1]);
     }
 
-    public function disableMultipleFullCompanySupport()
-    {
-        $this->update(['full_multiple_companies_support' => 0]);
-    }
-
     private function update(array $attributes)
     {
         Setting::unguarded(fn() => $this->setting->update($attributes));
