@@ -6,7 +6,7 @@ return array(
     'deleted'  					        => 'This model has been deleted.',
     'bulk_delete'               => 'Бөөнөөр хөрөнгийн загварыг устгах',
     'bulk_delete_help'               => 'Сонгосон хөрөнгийн загварыг устгахыг баталгаажуулж доорх хайрцгийг ашиглана уу. Хөрөнгөтэй холбоотой хөрөнгийн загварыг өөр загвартай холбох хүртэл устгах боломжгүй.',
-    'bulk_delete_warn'          => 'Та :asset_count ширхэг хөрөнгийн загвар устгах гэж байна.',
+    'bulk_delete_warn'          => 'You are about to delete one asset model.|You are about to delete :model_count asset models.',
     'restore'                   => 'Загварыг сэргээх',
     'requestable'               => 'Хэрэглэгчид энэ загварыг хүсч болно',
 	'show_mac_address'			      => 'Энэ загварт буй MAC хаягийн талбарыг харуулах',
