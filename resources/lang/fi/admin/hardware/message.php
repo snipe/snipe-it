@@ -23,6 +23,8 @@ return [
     'restore' => [
         'error'   		=> 'Laitetta ei palautettu, ole hyvä ja yritä uudelleen',
         'success' 		=> 'Laite palautettiin onnistuneesti.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [

@@ -14,8 +14,8 @@ return [
     'deleted'  					=> 'Tento majetek byl odstraněn.',
     'edit'  					=> 'Upravit majetek',
     'model_deleted'  			=> 'Tento model majetku byl odstraněn. Před obnovením majetku musíte model obnovit.',
-    'model_invalid'             => 'The Model of this Asset is invalid.',
-    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
+    'model_invalid'             => 'Model tohoto majetku je neplatný.',
+    'model_invalid_fix'         => 'Měli byste tento majetek upravit dříve, než jej vydáte, či přijmete.',
     'requestable'               => 'Lze vyžádat',
     'requested'				    => 'Požadováno',
     'not_requestable'           => 'Nelze vyžádat',
@@ -42,5 +42,6 @@ return [
     'error_messages' => 'Chybové zprávy:',
     'success_messages' => 'Úspěšné zprávy:',
     'alert_details' => 'Podrobnosti naleznete níže.',
-    'custom_export' => 'Uživatelsky definovaný export'
+    'custom_export' => 'Uživatelsky definovaný export',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];

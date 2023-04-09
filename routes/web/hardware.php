@@ -162,6 +162,11 @@ Route::group(
         )->name('hardware/bulkdelete');
 
         Route::post(
+            'bulkrestore',
+            [BulkAssetsController::class, 'restore']
+        )->name('hardware/bulkrestore');
+
+        Route::post(
             'bulksave',
             [BulkAssetsController::class, 'update']
         )->name('hardware/bulksave');

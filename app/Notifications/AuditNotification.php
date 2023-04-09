@@ -34,7 +34,7 @@ class AuditNotification extends Notification
     public function via()
     {
         $notifyBy = [];
-        if (Setting::getSettings()->slack_endpoint) {
+        if (Setting::getSettings()->webhook_endpoint) {
             $notifyBy[] = 'slack';
         }
 

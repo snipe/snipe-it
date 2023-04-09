@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Toebehore is nie nagegaan nie, probeer asseblief weer',
         'success' 		=> 'Toebehore suksesvol nagegaan.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer asseblief weer.'
     ),
 

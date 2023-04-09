@@ -2,8 +2,11 @@
 
 return [
     'bulk_delete'		=> 'I-kumperma ang Maramihang Pagdelete ng mga Assets',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> 'Surrin ang mga asset para sa maramihing pagdelete sa ibaba. Kapag nai-delete na, ang mga asset na ito ay pwedeng maibalik sa dati, pero hindi na ito maiugnay sa kahit sinong user na nakatalaga nito.',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'Ikaw ay mag-delete ng :asset_count na mga asset.',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'Ang Maramihang Asset na Nai-update',
     'bulk_update_help'	=> 'Ang form na ito ay nagbibigay sa iyo ng pahintulot para mag-update ng maramihang asset nang sabay-sabay. Lagyan lamang ang mga field na gusto mong baguhin. Anumang mga field na blangko ay mananatiling walang pagbabago. ',
     'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
@@ -45,7 +48,7 @@ return [
     'asset_location_update_default' => 'Update only default location',
     'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
     'asset_deployable' => 'That status is deployable. This asset can be checked out.',
-    'processing_spinner' => 'Processing...',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Optional Information',
     'order_details'   => 'Order Related Information'
 ];

@@ -43,7 +43,7 @@ return [
     'login_first_admin' => 'Zaloguj się do aplikacji Snipe-IT przy użyciu poniższych poświadczeń:',
     'login' => 'Login:',
     'Low_Inventory_Report' => 'Raport niskiego stanu zasobów',
-    'inventory_report' => 'Inventory Report',
+    'inventory_report' => 'Raport z magazynu',
     'min_QTY' => 'Min. ilość',
     'name' => 'Nazwa',
     'new_item_checked' => 'Nowy przedmiot przypisany do Ciebie został zwrócony, szczegóły poniżej.',

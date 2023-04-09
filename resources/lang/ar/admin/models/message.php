@@ -3,8 +3,8 @@
 return array(
 
     'does_not_exist' => 'الموديل غير موجود.',
-    'no_association' => 'NO MODEL ASSOCIATED.',
-    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
+    'no_association' => 'غير مرتبط بنموذج.',
+    'no_association_fix' => 'سيؤدي هذا إلى كسر الأمور بطرق غريبة وفظيعة. قم بتعديل هذا الأصل الآن لربطه بنموذج.',
     'assoc_users'	 => 'هذا الموديل مرتبط حاليا بواحد أو أكثر من الأصول ولا يمكن حذفه. يرجى حذف الأصول، ثم محاولة الحذف مرة أخرى. ',
 
 
@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'لم يتم تحديث الموديل، يرجى إعادة المحاولة',
-        'success' => 'تم تحديث الموديل بنجاح.'
+        'success' => 'تم تحديث الموديل بنجاح.',
     ),
 
     'delete' => array(
@@ -32,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'لم يتم تغيير أي حقول، لذلك لم يتم تحديث أي شيء.',
-        'success' 		=> 'تم تحديث الموديل.'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'لم يتم اختيار أي موديلات، لذلك لم يتم حذف أي شيء.',
-        'success' 		    => 'تم حذف success_count: من الموديلات!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> 'تم حذف:success_count: من الموديلات، ومع ذلك تعذر حذف fail_count: نظرًا لأنها لا تزال تحتوي على أصول مقترنة بها.'
     ),
 

@@ -2,8 +2,11 @@
 
 return [
     'bulk_delete'		=> 'Confirmez la suppression du lot d\'objets',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> 'Vérifiez les objets ci-dessous pour la suppression du lot. Une fois supprimés, ces objets peuvent être restaurés, mais ils ne seront plus associés avec les utilisateurs auxquels ils sont actuellement assignés.',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'Vous allez supprimer :asset_count objets.',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'Mise à jour en bloc d\'actifs',
     'bulk_update_help'	=> 'Ce formulaire vous permet de mettre à jour plusieurs actifs à la fois. Seulement remplir les champs que vous devez modifier. Tous les champs laissés vides resteront inchangés. ',
     'bulk_update_warn'	=> 'Vous êtes sur le point de modifier les propriétés d\'un seul matériel.|Vous êtes sur le point de modifier les propriétés de :asset_count matériels.',
@@ -45,7 +48,7 @@ return [
     'asset_location_update_default' => 'Mettre à jour uniquement l\'emplacement par défaut',
     'asset_not_deployable' => 'L\'actif n\'est pas déployable. L\'actif ne peut pas être affecté.',
     'asset_deployable' => 'L\'actif est déployable. L\'actif peut être affecté.',
-    'processing_spinner' => 'Traitement en cours...',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Information facultative',
     'order_details'   => 'Information liée à l\'achat'
 ];

@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Įrangos priežiūros tipas',
+        'asset_maintenance_type' => 'Asset Maintenance Type',
         'title'                  => 'Antraštė',
-        'start_date'             => 'Pradžios data',
-        'completion_date'        => 'Pabaigos data',
+        'start_date'             => 'Start Date',
+        'completion_date'        => 'Completion Date',
         'cost'                   => 'Kaina',
         'is_warranty'            => 'Garantinis taisymas',
-        'asset_maintenance_time' => 'Įrangos naudojimas (dienomis)',
+        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
         'notes'                  => 'Pastabos',
-        'update'                 => 'Atnaujint įrangos preižiūrą',
-        'create'                 => 'Sukurti įrangos priežiūrą'
+        'update'                 => 'Update Asset Maintenance',
+        'create'                 => 'Create Asset Maintenance'
     ];

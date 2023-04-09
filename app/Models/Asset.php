@@ -70,19 +70,6 @@ class Asset extends Depreciable
     */
     protected $injectUniqueIdentifier = true;
 
-    // We set these as protected dates so that they will be easily accessible via Carbon
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
-        'purchase_date',
-        'last_checkout',
-        'expected_checkin',
-        'last_audit_date',
-        'next_audit_date'
-    ];
-
-
     protected $casts = [
         'purchase_date' => 'date',
         'last_checkout' => 'datetime',
@@ -96,6 +83,9 @@ class Asset extends Depreciable
         'rtd_company_id' => 'integer',
         'supplier_id'    => 'integer',
         'byod'           => 'boolean',
+        'created_at'     => 'datetime',
+        'updated_at'   => 'datetime',
+        'deleted_at'  => 'datetime',
     ];
 
     protected $rules = [

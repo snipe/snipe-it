@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'பராமரிப்பு வகை',
+        'asset_maintenance_type' => 'Asset Maintenance Type',
         'title'                  => 'தலைப்பு',
-        'start_date'             => 'தொடங்குதல்',
-        'completion_date'        => 'நிறைவு',
+        'start_date'             => 'Start Date',
+        'completion_date'        => 'Completion Date',
         'cost'                   => 'செலவு',
         'is_warranty'            => 'உத்தரவாதத்தை முன்னேற்றம்',
-        'asset_maintenance_time' => 'நாட்களில்',
+        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
         'notes'                  => 'குறிப்புக்கள்',
-        'update'                 => 'புதுப்பிக்கப்பட்டது',
-        'create'                 => 'உருவாக்கவும்'
+        'update'                 => 'Update Asset Maintenance',
+        'create'                 => 'Create Asset Maintenance'
     ];

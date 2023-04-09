@@ -15,7 +15,7 @@ return [
     'edit'  					=> 'Редактировать актив',
     'model_deleted'  			=> 'Эта модель была удалена. Вы должны восстановить модель прежде, чем сможете восстановить актив.',
     'model_invalid'             => 'Модель этого актива недействительна.',
-    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
+    'model_invalid_fix'         => 'Актив должен быть отредактирован для исправления этого перед тем, как отвязать или привязать его.',
     'requestable'               => 'Готов к выдаче',
     'requested'				    => 'Запрошенное',
     'not_requestable'           => 'Не подлежит запросу',
@@ -41,5 +41,6 @@ return [
     'error_messages' => 'Сообщения об ошибках:',
     'success_messages' => 'Сообщения об успехе:',
     'alert_details' => 'Подробности смотрите ниже.',
-    'custom_export' => 'Пользовательский экспорт'
+    'custom_export' => 'Пользовательский экспорт',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];

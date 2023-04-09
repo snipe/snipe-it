@@ -3,8 +3,8 @@
 return array(
 
     'does_not_exist' => '型番が存在しません。',
-    'no_association' => 'NO MODEL ASSOCIATED.',
-    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
+    'no_association' => '関連するモデルはありません。',
+    'no_association_fix' => 'モデルを割り当てるために今すぐこの資産を編集してください。',
     'assoc_users'	 => 'この減価償却は複数のモデルに関係付けられているため削除することができません。モデルを削除してから再度実行してください。 ',
 
 
@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => '型番が更新できませんでした。もう一度やり直して下さい。',
-        'success' => '型番が更新されました。'
+        'success' => '型番が更新されました。',
     ),
 
     'delete' => array(
@@ -32,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'フィールドが選択されていないため、更新されませんでした。',
-        'success' 		=> '型番を更新しました。'
+        'success' 		=> 'モデルが正常に更新されました。|:model_count モデルが正常に更新されました。',
+        'warn'          => '次のモデルのプロパティを更新しようとしています: |次のモデルのプロパティを編集しようとしています :model_count モデル:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'モデルが選択されていないため、何も削除されませんでした。',
-        'success' 		    => ':success_count モデルが削除されました！',
+        'success' 		    => ':success_count モデルを削除しました!',
         'success_partial' 	=> ':success_count モデルが削除されましたが、:fail_count 個はアセットが関連付けられているため、削除できませんでした。'
     ),
 

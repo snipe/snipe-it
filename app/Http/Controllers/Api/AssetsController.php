@@ -463,7 +463,7 @@ class AssetsController extends Controller
     {
         $this->authorize('view', Asset::class);
         $this->authorize('view', License::class);
-        $asset = Asset::where('id', $id)->withTrashed()->first();
+        $asset = Asset::where('id', $id)->withTrashed()->firstorfail();
         $licenses = $asset->licenses()->get();
 
         return (new LicensesTransformer())->transformLicenses($licenses, $licenses->count());
@@ -832,7 +832,6 @@ class AssetsController extends Controller
 
         } elseif (request('checkout_to_type') == 'asset') {
             $target = Asset::where('id', '!=', $asset_id)->find(request('assigned_asset'));
-            $asset->location_id = $target->rtd_location_id;
             // Override with the asset's location_id if it has one
             $asset->location_id = (($target) && (isset($target->location_id))) ? $target->location_id : '';
             $error_payload['target_id'] = $request->input('assigned_asset');
@@ -941,18 +940,21 @@ class AssetsController extends Controller
      * @since [v6.0]
      * @return JsonResponse
      */
-    public function checkinByTag(Request $request)
+    public function checkinByTag(Request $request, $tag = null)
     {
         $this->authorize('checkin', Asset::class);
-        $asset = Asset::where('asset_tag', $request->input('asset_tag'))->first();
+        if(null == $tag && null !== ($request->input('asset_tag'))) {
+            $tag = $request->input('asset_tag');
+        }
+        $asset = Asset::where('asset_tag', $tag)->first();
 
         if ($asset) {
             return $this->checkin($request, $asset->id);
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', [
-            'asset'=> e($request->input('asset_tag'))
-        ], 'Asset with tag '.e($request->input('asset_tag')).' not found'));
+            'asset'=> e($tag)
+        ], 'Asset with tag '.e($tag).' not found'));
     }
 
 

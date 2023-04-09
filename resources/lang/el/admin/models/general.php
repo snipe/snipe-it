@@ -6,7 +6,7 @@ return array(
     'deleted'  					        => 'This model has been deleted.',
     'bulk_delete'               => 'Μαζική διαγραφή μοντέλου Asset',
     'bulk_delete_help'               => 'Χρησιμοποιήστε τα παρακάτω πλαίσια ελέγχου για να επιβεβαιώσετε τη διαγραφή των επιλεγμένων μοντέλων στοιχείων. Τα μοντέλα στοιχείων που έχουν στοιχεία που σχετίζονται με αυτά δεν μπορούν να διαγραφούν έως ότου τα στοιχεία συσχετιστούν με διαφορετικό μοντέλο.',
-    'bulk_delete_warn'          => 'Πρόκειται να διαγράψετε: asset_count περιουσιακών στοιχείων.',
+    'bulk_delete_warn'          => 'You are about to delete one asset model.|You are about to delete :model_count asset models.',
     'restore'                   => 'Επαναφορά μοντέλου',
     'requestable'               => 'Οι χρήστες μπορούν να αιτηθούν το μοντέλο',
 	'show_mac_address'			      => 'Εμφάνιση MAC διευθύνσεων πεδίου σε περιουσιακά στοιχεία σε αυτό το μοντέλο',

@@ -64,7 +64,7 @@
                                 @if (($request->itemType() == "asset") && ($request->requestable))
                                     <a href="{{ $request->requestable->getImageUrl() }}" data-toggle="lightbox" data-type="image"><img src="{{ $request->requestable->getImageUrl() }}" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive" alt="{{ $request->requestable->name }}"></a>
                                 @elseif (($request->itemType() == "asset_model") && ($request->requestable))
-                                        <a href="{{ url('/') }}/uploads/models/{{ $request->requestable->image }}" data-toggle="lightbox" data-type="image"><img src="{{ url('/') }}/uploads/models/{{ $request->requestable->image }}" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive" alt="{{ $request->requestable->name }}"></a>
+                                        <a href="{{ config('app.url') }}/uploads/models/{{ $request->requestable->image }}" data-toggle="lightbox" data-type="image"><img src="{{ config('app.url') }}/uploads/models/{{ $request->requestable->image }}" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive" alt="{{ $request->requestable->name }}"></a>
                                 @endif
 
 
@@ -72,11 +72,11 @@
                             <td>
 
                             @if ($request->itemType() == "asset")
-                            <a href="{{ url('/') }}/hardware/{{ $request->requestable->id }}">
+                            <a href="{{ config('app.url') }}/hardware/{{ $request->requestable->id }}">
                                 {{ $request->name() }}
                             </a>
                             @elseif ($request->itemType() == "asset_model")
-                                <a href="{{ url('/') }}/models/{{ $request->requestable->id }}">
+                                <a href="{{ config('app.url') }}/models/{{ $request->requestable->id }}">
                                     {{ $request->name() }}
                                 </a>
                              @endif
@@ -95,7 +95,7 @@
                             </td>
                             <td>
                                 @if ($request->requestingUser())
-                                <a href="{{ url('/') }}/users/{{ $request->requestingUser()->id }}">
+                                <a href="{{ config('app.url') }}/users/{{ $request->requestingUser()->id }}">
                                     {{ $request->requestingUser()->present()->fullName() }}
                                 </a>
                                @else
@@ -106,9 +106,9 @@
                             <td>
                                 @if ($request->itemType() == "asset")
                                     @if ($request->requestable->assigned_to=='')
-                                        <a href="{{ url('/') }}/hardware/{{ $request->requestable->id }}/checkout" class="btn btn-sm bg-maroon" data-tooltip="true" title="{{ trans('general.checkout_user_tooltip') }}">{{ trans('general.checkout') }}</a>
+                                        <a href="{{ config('app.url') }}/hardware/{{ $request->requestable->id }}/checkout" class="btn btn-sm bg-maroon" data-tooltip="true" title="{{ trans('general.checkout_user_tooltip') }}">{{ trans('general.checkout') }}</a>
                                         @else
-                                        <a href="{{ url('/') }}/hardware/{{ $request->requestable->id }}/checkin" class="btn btn-sm bg-purple" data-tooltip="true" title="{{ trans('general.checkin_toolip') }}">{{ trans('general.checkin') }}</a>
+                                        <a href="{{ config('app.url') }}/hardware/{{ $request->requestable->id }}/checkin" class="btn btn-sm bg-purple" data-tooltip="true" title="{{ trans('general.checkin_toolip') }}">{{ trans('general.checkin') }}</a>
                                     @endif
 
                                 @endif

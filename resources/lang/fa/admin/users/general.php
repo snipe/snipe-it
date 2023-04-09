@@ -23,6 +23,8 @@ return [
 ',
     'user_notified'     => 'لیستی از موارد اختصاص داده شده فعلی به کاربر ایمیل شده است.
 ',
+    'auto_assign_label' => 'Include this user when auto-assigning eligible licenses',
+    'auto_assign_help'  => 'Skip this user in auto assignment of licenses',
     'software_user'     => 'برنامه چک شد برای:',
     'send_email_help'   => 'شما باید یک آدرس ایمیل برای این کاربر ارائه دهید تا اطلاعات کاربری خود را ارسال کند. ارسال اعتبار نامه ایمیل فقط با ایجاد کاربر امکان پذیر است. رمزهای عبور در یک هش یک طرفه ذخیره می شوند و پس از ذخیره نمی توان آنها را بازیابی کرد.
 ',
@@ -45,7 +47,6 @@ return [
 ',
     'remove_group_memberships' => 'حذف عضویت در گروه
 ',
-    'warning_deletion' => 'اخطار!',
     'warning_deletion_information' => 'شما در شرف بررسی همه موارد از کاربر(های) :count فهرست شده در زیر هستید. نام های فوق ادمین با رنگ قرمز مشخص شده اند.
 ',
     'update_user_assets_status' => 'همه دارایی های این کاربران را به این وضعیت به روز کنید
@@ -59,4 +60,13 @@ return [
 ',
     'not_remote_label' => 'این یک کاربر راه دور نیست
 ',
+    'vip_label' => 'VIP user',
+    'vip_help' => 'This can be helpful to mark important people in your org if you would like to handle them in special ways.',
+    'create_user' => 'Create a user',
+    'create_user_page_explanation' => 'This is the account information you will use to access the site for the first time.',
+    'email_credentials' => 'Email credentials',
+    'email_credentials_text' => 'Email my credentials to the email address above',
+    'next_save_user' => 'Next: Save User',
+    'all_assigned_list_generation' => 'Generated on:',
+    'email_user_creds_on_create' => 'Email this user their credentials?',
 ];

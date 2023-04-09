@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Моделот не е ажуриран, обидете се повторно',
-        'success' => 'Моделот е ажуриран.'
+        'success' => 'Моделот е ажуриран.',
     ),
 
     'delete' => array(
@@ -32,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Не беа сменети полиња, затоа ништо не беше ажурирано.',
-        'success' 		=> 'Моделите се ажурирани.'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Не беа избрани модели, затоа ништо не беше избришано.',
-        'success' 		    => ':success_count модел(и) се избришани!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ':success_count модел (и) се избришани, меѓутоа :fail_count не може да се избришат, бидејќи тие сè уште имаат средства поврзани со нив.'
     ),
 

@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Type d\'entretien d\'actif',
+        'asset_maintenance_type' => 'Type de maintenance de la ressource',
         'title'                  => 'Titre',
         'start_date'             => 'Date de début',
         'completion_date'        => 'Date d\'achèvement',
         'cost'                   => 'Coût',
         'is_warranty'            => 'Garantie sur amélioration',
-        'asset_maintenance_time' => 'Durée de l\'entretien (en jours)',
+        'asset_maintenance_time' => 'Durée de la maintenance de la ressource (en jours)',
         'notes'                  => 'Notes',
-        'update'                 => 'Modification des types entretiens d\'actifs',
-        'create'                 => 'Création de type d\'entretien d\'actif'
+        'update'                 => 'Mettre à jour maintenance de la ressource',
+        'create'                 => 'Création de maintenance de la ressource'
     ];

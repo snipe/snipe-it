@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Piederums netika pārbaudīts, lūdzu, mēģiniet vēlreiz',
         'success' 		=> 'Piederums ir veiksmīgi izrakstīts.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Šis lietotājs ir nederīgs. Lūdzu mēģiniet vēlreiz.'
     ),
 

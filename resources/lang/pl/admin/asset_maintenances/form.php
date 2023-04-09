@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Typ',
+        'asset_maintenance_type' => 'Rodzaj konserwacji aktywów',
         'title'                  => 'Tytuł',
         'start_date'             => 'Data rozpoczęcia',
-        'completion_date'        => 'Ukończone',
+        'completion_date'        => 'Data zakończenia',
         'cost'                   => 'Cena',
         'is_warranty'            => 'Wydłużenie gwarancji',
-        'asset_maintenance_time' => 'Dni',
+        'asset_maintenance_time' => 'Czas konserwacji aktywów (w dniach)',
         'notes'                  => 'Notatki',
-        'update'                 => 'Uaktualnij',
-        'create'                 => 'Utwórz'
+        'update'                 => 'Aktualizuj konserwację aktywów',
+        'create'                 => 'Utwórz konserwację aktywów'
     ];

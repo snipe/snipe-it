@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Lisätietoa',
 
-    'audit_help' => 'Tämän valitseminen muuttaa laitetiedot vastaamaan uutta sijaintia. Jos sitä ei ole valittu, sijainti kirjataan vain lokiin.<br><br> Huomaa, että jos laite on jo luovutettuna, tämä ei muuta sen henkilön, tai laitteen sijaintia mihin se on luovutettuna.',
+    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
     'assets' => 'Laitteet ovat nimmeitä joita seurataan sarjanumeron tai laitetunnisteen avulla. Laitteiksi määritellään yleensä arvokkaampaa omaisuutta, joiden tunnistaminen  yksilöllisesti on tärkeää.',
 

@@ -71,8 +71,7 @@
                                     @foreach ($users as $user)
                                         <tr {!! ($user->isSuperUser() ? ' class="danger"':'') !!}>
                                             <td>
-                                              <input type="radio" name="merge_into_id" id="{{ $user->id }}" value="{{ $user->id }}" class="minimal">
-                                                <label for="{{ $user->id }}"> {{ $user->present()->fullName() }}</label>
+                                                <label class="form-control" for="{{ $user->id }}"><input type="radio" name="merge_into_id" id="{{ $user->id }}" value="{{ $user->id }}">  {{ $user->present()->fullName() }}</label>
                                             </td>
                                             <td>
                                                 {{ $user->email }}

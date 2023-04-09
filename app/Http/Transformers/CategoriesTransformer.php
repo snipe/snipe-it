@@ -47,7 +47,7 @@ class CategoriesTransformer
                 'id' => (int) $category->id,
                 'name' => e($category->name),
                 'image' =>   ($category->image) ? Storage::disk('public')->url('categories/'.e($category->image)) : null,
-                'category_type' => ucwords(e($category->category_type)),
+                'category_type' => Helper::categoryTypeList($category->category_type),
                 'has_eula' => ($category->getEula() ? true : false),
                 'use_default_eula' => ($category->use_default_eula=='1' ? true : false),
                 'eula' => ($category->getEula()),

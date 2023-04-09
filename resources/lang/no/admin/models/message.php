@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Modell ble ikke oppdatert. Prøv igjen',
-        'success' => 'Oppdatering av modell vellykket.'
+        'success' => 'Oppdatering av modell vellykket.',
     ),
 
     'delete' => array(
@@ -32,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Ingen felt ble endret, så ingenting ble oppdatert.',
-        'success' 		=> 'Modeller oppdatert.'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Ingen modeller ble valgt, så ingenting ble slettet.',
-        'success' 		    => ': success_count modell(er) slettet!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ':Success_count-modell(ene) ble slettet, men fail_count kunne ikke slettes fordi de fortsatt har eiendeler knyttet til dem.'
     ),
 

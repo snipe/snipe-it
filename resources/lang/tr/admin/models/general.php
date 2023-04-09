@@ -6,7 +6,7 @@ return array(
     'deleted'  					        => 'Bu model silindi.',
     'bulk_delete'               => 'Varlık Modellerini Toplu Silme',
     'bulk_delete_help'               => 'Seçilen varlık modelleri silme işlemini onaylamak için aşağıdaki onay kutularını kullanın. Başka bir varlık modeli ile ilişkilendirilmiş olan varlık modelleri, başka bir varlık modeli ile ilişkilendirilmeden silinemez.',
-    'bulk_delete_warn'          => ':model_count varlık modellerini silmek üzeresiniz.',
+    'bulk_delete_warn'          => 'You are about to delete one asset model.|You are about to delete :model_count asset models.',
     'restore'                   => 'Modeli geri getir',
     'requestable'               => 'Kullanıcılar bu modeli talep edebilir',
 	'show_mac_address'			      => 'Bu model demirbaşta MAC adresi göster',

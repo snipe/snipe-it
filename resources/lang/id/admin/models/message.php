@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Model gagal diperbarui, silahkan coba kembali',
-        'success' => 'Sukses memperbarui Model.'
+        'success' => 'Sukses memperbarui Model.',
     ),
 
     'delete' => array(
@@ -32,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Tidak ada bidang yang berubah, jadi tidak ada yang diperbarui.',
-        'success' 		=> 'Model diperbarui'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Tidak ada model yang dipilih, jadi tidak ada yang dihapus.',
-        'success' 		    => ':success_count model dihapus!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ':success_count model telah dihapus, tetapi :fail_count tidak dapat dihapus karena masih memiliki aset yang terkait dengannya.'
     ),
 

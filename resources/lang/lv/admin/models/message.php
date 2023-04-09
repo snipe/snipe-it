@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Modelis nav atjaunināts, lūdzu, mēģiniet vēlreiz',
-        'success' => 'Modelis tika veiksmīgi atjaunināts.'
+        'success' => 'Modelis tika veiksmīgi atjaunināts.',
     ),
 
     'delete' => array(
@@ -32,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Neviens laukums netika mainīts, tāpēc nekas netika atjaunināts.',
-        'success' 		=> 'Modeļi ir atjaunināti.'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Nav atlasītu modeļu, tāpēc nekas netika izdzēsts.',
-        'success' 		    => '{1} :success_count modelis dzēsts!|[2,*] :success_count modeļi dzēsti!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ':success_count modeļi dzēsti, tomēr :fail_count nevarēja tik dzēsti, jo tiem ir piesaistītas aparatūras.'
     ),
 

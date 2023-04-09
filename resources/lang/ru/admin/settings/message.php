@@ -33,12 +33,12 @@ return [
         'testing_authentication' => 'Тестирование LDAP аутентификации...',
         'authentication_success' => 'Пользователь успешно аутентифицирован с LDAP!'
     ],
-    'slack' => [
-        'sending' => 'Отправка тестового сообщения Slack...',
-        'success_pt1' => 'Успех! Проверьте ',
-        'success_pt2' => ' канал для вашего тестового сообщения и не забудьте нажать СОХРАНИТЬ ниже, чтобы сохранить ваши настройки.',
-        '500' => 'Ошибка сервера 500.',
-        'error' => 'Что-то пошло не так. Slack ответил: :error_message',
-        'error_misc' => 'Что-то пошло не так. :( ',
+    'webhook' => [
+        'sending' => 'Sending :app test message...',
+        'success_pt1' => 'Success! Check the ',
+        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
+        '500' => '500 Server Error.',
+        'error' => 'Something went wrong. :app responded with: :error_message',
+        'error_misc' => 'Something went wrong. :( ',
     ]
 ];

@@ -33,12 +33,12 @@ return [
         'testing_authentication' => 'LDAP-hitelesítés tesztelése...',
         'authentication_success' => 'A felhasználó sikeresen hitelesített az LDAP-nál!'
     ],
-    'slack' => [
-        'sending' => 'Slack tesztüzenet küldése...',
+    'webhook' => [
+        'sending' => ':app tesztüzenet küldése...',
         'success_pt1' => 'Siker! Ellenőrizze a ',
         'success_pt2' => ' csatornát a tesztüzenethez, és ne felejtsen el a MENTÉS gombra kattintani a beállítások tárolásához.',
         '500' => '500 Szerverhiba.',
-        'error' => 'Something went wrong. Slack responded with: :error_message',
+        'error' => 'Valami hiba történt. A Slack a következő üzenettel válaszolt: :error_message',
         'error_misc' => 'Valami hiba történt :( ',
     ]
 ];

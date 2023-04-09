@@ -2,8 +2,11 @@
 
 return [
     'bulk_delete'		=> 'Dearbhaigh Bulk Sócmhainní a Scriosadh',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> 'Athbhreithniú a dhéanamh ar na sócmhainní le haghaidh scriosadh mórchóir thíos. Nuair a bheidh sé scriosta, is féidir na sócmhainní seo a chur ar ais, ach ní bheidh baint acu le haon úsáideoirí a bhfuil siad á sannadh faoi láthair.',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'Tá tú ar tí a scriosadh: sócmhainní asset_count.',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'Sócmhainní Nuashonraithe Bulc',
     'bulk_update_help'	=> 'Ceadaíonn an fhoirm seo duit il-sócmhainní a thabhairt cothrom le dáta ag an am céanna. Líon isteach na réimsí is gá duit a athrú ach amháin. Ní dhéanfar aon réimsí fágtha gan athrú.',
     'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
@@ -45,7 +48,7 @@ return [
     'asset_location_update_default' => 'Update only default location',
     'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
     'asset_deployable' => 'That status is deployable. This asset can be checked out.',
-    'processing_spinner' => 'Processing...',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Optional Information',
     'order_details'   => 'Order Related Information'
 ];

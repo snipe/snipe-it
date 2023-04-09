@@ -42,5 +42,6 @@ return [
     'error_messages' => 'Foutmeldingen:',
     'success_messages' => 'Succesvolle berichten:',
     'alert_details' => 'Zie hieronder voor details.',
-    'custom_export' => 'Aangepaste export'
+    'custom_export' => 'Aangepaste export',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];

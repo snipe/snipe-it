@@ -18,5 +18,6 @@ return array(
  استفاده کنید',
     'use_default_eula_disabled'			=> 'از پیشفرض اولیه EULA استفاده کنید.<del>هیچ پیشفرضی اولیه ای تنظیم نشده است</del>
 در تنظیمات اضافه کنید',
+    'clone'                             => 'Clone Accessory',
 
 );

@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Ang Uri ng Pagpapanatili',
+        'asset_maintenance_type' => 'Asset Maintenance Type',
         'title'                  => 'Ang Pamagat',
-        'start_date'             => 'Nagsimula na',
-        'completion_date'        => 'Nakumpleto na',
+        'start_date'             => 'Start Date',
+        'completion_date'        => 'Completion Date',
         'cost'                   => 'Ang Halaga',
         'is_warranty'            => 'Ang Pagpapabuti ng Warantiya',
-        'asset_maintenance_time' => 'Ang mga araw',
+        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
         'notes'                  => 'Ang mga Palatandaan',
-        'update'                 => 'I-update',
-        'create'                 => 'Lumikha'
+        'update'                 => 'Update Asset Maintenance',
+        'create'                 => 'Create Asset Maintenance'
     ];

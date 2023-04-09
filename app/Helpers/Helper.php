@@ -334,7 +334,11 @@ class Helper
             '#92896B',
         ];
 
+        $total_colors = count($colors);
 
+        if ($index >= $total_colors) {
+            $index = $index - $total_colors;
+        }
 
         return $colors[$index];
     }
@@ -528,20 +532,23 @@ class Helper
      * @since [v2.5]
      * @return array
      */
-    public static function categoryTypeList()
+    public static function categoryTypeList($selection=null)
     {
         $category_types = [
             '' => '',
-            'accessory' => 'Accessory',
-            'asset' => 'Asset',
-            'consumable' => 'Consumable',
-            'component' => 'Component',
-            'license' => 'License',
+            'accessory' => trans('general.accessory'),
+            'asset' => trans('general.asset'),
+            'consumable' => trans('general.consumable'),
+            'component' => trans('general.component'),
+            'license' => trans('general.license'),
         ];
 
+        if($selection != null){
+            return $category_types[$selection];
+        }
+        else
         return $category_types;
     }
-
     /**
      * Get the list of custom fields in an array to make a dropdown menu
      *
@@ -1092,6 +1099,15 @@ class Helper
         return $file_name;
     }
 
+
+    /**
+     * Universal helper to show file size in human-readable formats
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since 5.0
+     *
+     * @return string[]
+     */
     public static function formatFilesizeUnits($bytes)
     {
         if ($bytes >= 1073741824)
@@ -1121,30 +1137,91 @@ class Helper
 
         return $bytes;
     }
+
+    /**
+     * This is weird but used by the side nav to determine which URL to point the user to
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since 5.0
+     *
+     * @return string[]
+     */
     public static function SettingUrls(){
         $settings=['#','fields.index', 'statuslabels.index', 'models.index', 'categories.index', 'manufacturers.index', 'suppliers.index', 'departments.index', 'locations.index', 'companies.index', 'depreciations.index'];
 
         return $settings;
         }
-    public static function AgeFormat($date) {
-        $year = Carbon::parse($date)
-            ->diff(now())->y;
-        $month = Carbon::parse($date)
-            ->diff(now())->m;
-        $days = Carbon::parse($date)
-            ->diff(now())->d;
-        $age='';
-        if ($year) {
-            $age .= $year.'y ';
-        }
-        if ($month) {
-            $age .= $month.'m ';
-        }
-        if ($days) {
-            $age .= $days.'d';
+
+
+    /**
+     * Generic helper (largely used by livewire right now) that returns the font-awesome icon
+     * for the object type.
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since 6.1.0
+     *
+     * @return string
+     */
+    public static function iconTypeByItem($item) {
+
+        switch ($item) {
+            case 'asset':
+                return 'fas fa-barcode';
+                break;
+            case 'accessory':
+                return 'fas fa-keyboard';
+                break;
+            case 'component':
+                return 'fas fa-hdd';
+                break;
+            case 'consumable':
+                return 'fas fa-tint';
+                break;
+            case 'license':
+                return 'far fa-save';
+                break;
+            case 'location':
+                return 'fas fa-map-marker-alt';
+                break;
+            case 'user':
+                return 'fas fa-user';
+                break;
         }
 
-        return $age;
+    }
 
+
+     /*
+     * This is a shorter way to see if the app is in demo mode.
+     *
+     * This makes it cleanly available in blades and in controllers, e.g.
+     *
+     * Blade:
+     * {{ Helper::isDemoMode() ? ' disabled' : ''}} for form blades where we need to disable a form
+     *
+     * Controller:
+     * if (Helper::isDemoMode()) {
+     *      // don't allow the thing
+     * }
+     * @todo - use this everywhere else in the app where we have very long if/else config('app.lock_passwords') stuff
+     */
+    public static function isDemoMode() {
+        if (config('app.lock_passwords') === true) {
+            return true;
+            \Log::debug('app locked!');
+        }
+
+        return false;
+    }
+
+
+    /*
+     * I know it's gauche  to return a shitty HTML string, but this is just a helper and since it will be the same every single time,
+     * it seemed pretty safe to do here. Don't you judge me.
+     */
+    public static function showDemoModeFieldWarning() {
+        if (Helper::isDemoMode()) {
+            return "<p class=\"text-warning\"><i class=\"fas fa-lock\"></i>" . trans('general.feature_disabled') . "</p>";
+        }
     }
 }
