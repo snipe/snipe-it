@@ -596,24 +596,9 @@
                                                 {{ trans('admin/hardware/form.months') }}
 
                                                 @if ($asset->serial && $asset->model->manufacturer)
-                                                    @if ((strtolower($asset->model->manufacturer->name) == "apple") || (str_starts_with(str_replace(' ','',strtolower($asset->model->manufacturer->name)),"appleinc")))
-                                                    <a href="https://checkcoverage.apple.com/?locale={{ (str_replace('-','_',\App\Models\Setting::getSettings()->locale)) }}" target="_blank">
-                                                        <i class="fa-brands fa-apple" aria-hidden="true"><span class="sr-only">{{ trans('hardware/general.mfg_warranty_lookup') }}</span></i>
+                                                    <a href="{{ (str_replace('_testlocale_',\App\Models\Setting::getSettings()->locale,$asset->model->manufacturer->support_url))}}" target="_blank">
+                                                        <img src="{{ Storage::disk('public')->url(app('manufacturers_upload_path').e($asset->model->manufacturer->image)) }}" style="width:25px;height:25px;"><span class="sr-only">{{ trans('hardware/general.mfg_warranty_lookup') }}</span>
                                                     </a>
-                                                    @elseif ((strtolower($asset->model->manufacturer->name) == "dell") || (str_starts_with(str_replace(' ','',strtolower($asset->model->manufacturer->name)),"dellinc")))
-                                                    <a href="https://www.dell.com/support/home/en-us?app=warranty" target="_blank">
-                                                        <img src="/img/demo/manufacturers/dellicon.png" style="width:25px;height:25px;"><span class="sr-only">{{ trans('hardware/general.mfg_warranty_lookup') }}</span></i>
-                                                    </a>
-                                                    @elseif ((strtolower($asset->model->manufacturer->name) == "lenovo") || (str_starts_with(str_replace(' ','',strtolower($asset->model->manufacturer->name)),"lenovoinc")))
-                                                    <a href="https://pcsupport.lenovo.com/us/en/warrantylookup#/" target="_blank">
-                                                        <img src="/img/demo/manufacturers/lenovoicon.png" style="width:25px;height:25px;"><span class="sr-only">{{ trans('hardware/general.mfg_warranty_lookup') }}</span></i>
-                                                    </a>
-                                                    @elseif (strtolower($asset->model->manufacturer->name))
-                                                        <a href="{{ (str_replace('_testlocale_',\App\Models\Setting::getSettings()->locale,$asset->model->manufacturer->support_url))}}" target="_blank">
-                                                            <img src="{{ Storage::disk('public')->url(app('manufacturers_upload_path').e($asset->model->manufacturer->image)) }}" style="width:25px;height:25px;"><span class="sr-only">{{ trans('hardware/general.mfg_warranty_lookup') }}</span></i>
-                                                        </a>
-
-                                                    @endif
                                                 @endif
                                             </div>
                                         </div>
