@@ -873,7 +873,7 @@
                                     <!-- generic image goes here -->
                                 @endif
 
-                                    <!-- Start button column -->
+                                    <!-- Start side button column -->
 
                                     @if (($asset->assetstatus) && ($asset->assetstatus->deployable=='1'))
                                         @if (($asset->assigned_to != '') && ($asset->deleted_at==''))
@@ -923,10 +923,10 @@
                                     @can('delete', $asset)
                                         @if ($asset->deleted_at=='')
                                             <div class="col-md-12" style="padding-top: 30px; padding-bottom: 30px;">
-                                                <form action="{{ route('delete/assetfile', [$asset->id,12]) }}" method="POST">
+                                                <form action="{{ route('delete/assetfile', [$asset->id,$fileId->id]) }}" method="POST">
                                                     {{csrf_field()}}
                                                     {{ method_field("DELETE")}}
-                                                    <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.delete')}}</button>
+                                                    <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print" >{{ trans('button.delete')}}</button>
                                                 </form>
                                             </div>
                                         @endif
