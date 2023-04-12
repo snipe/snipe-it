@@ -6,7 +6,7 @@ return array(
     'deleted'  					        => 'Ce modèle a été supprimé.',
     'bulk_delete'               => 'Suppression en masse des modèles d\'actifs',
     'bulk_delete_help'               => 'Cochez la case ci-dessous pour confirmer la suppression des modèles d\'actifs sélectionnés. Les modèles d\'actifs associés à des actifs ne peuvent pas être supprimés tant que les actifs ne sont pas associés à un modèle différent.',
-    'bulk_delete_warn'          => 'Vous êtes sur le points de suppimer :model_count modèles d\'actifs.',
+    'bulk_delete_warn'          => 'You are about to delete one asset model.|You are about to delete :model_count asset models.',
     'restore'                   => 'Restaurer le modèle',
     'requestable'               => 'Les utilisateurs peuvent demander ce modèle',
 	'show_mac_address'			      => 'Afficher le champ pour l\'adresse MAC pour ce modèle d\'actif',

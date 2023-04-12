@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'Grupp on juba olemas!',
-    'group_not_found'     => 'Rühma [: id] ei ole olemas.',
+    'group_not_found'     => 'Group ID :id does not exist.',
     'group_name_required' => 'Nimi on kohustuslik',
 
     'success' => array(

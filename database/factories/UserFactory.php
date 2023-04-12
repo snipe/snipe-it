@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Company;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use \Auth;
 
@@ -18,10 +20,9 @@ class UserFactory extends Factory
             'activated' => 1,
             'address' => $this->faker->address(),
             'city' => $this->faker->city(),
-            'company_id' => rand(1, 4),
+            'company_id' => Company::factory(),
             'country' => $this->faker->country(),
-            'department_id' => rand(1, 6),
-            'email' => $this->faker->safeEmail,
+            'email' => $this->faker->safeEmail(),
             'employee_num' => $this->faker->numberBetween(3500, 35050),
             'first_name' => $this->faker->firstName(),
             'jobtitle' => $this->faker->jobTitle(),
@@ -30,10 +31,10 @@ class UserFactory extends Factory
             'notes' => 'Created by DB seeder',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'permissions' => '{"user":"0"}',
-            'phone' => $this->faker->phoneNumber,
-            'state' => $this->faker->stateAbbr,
-            'username' => $this->faker->username,
-            'zip' => $this->faker->postcode,
+            'phone' => $this->faker->phoneNumber(),
+            'state' => $this->faker->stateAbbr(),
+            'username' => $this->faker->username(),
+            'zip' => $this->faker->postcode(),
         ];
     }
     
@@ -78,7 +79,9 @@ class UserFactory extends Factory
         return $this->state(function () {
             return [
                 'permissions' => '{"admin":"1"}',
-                'manager_id' => rand(1, 2),
+                'manager_id' => function () {
+                    return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
+                },
             ];
         });
     }

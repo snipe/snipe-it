@@ -22,6 +22,8 @@ return [
     'restore' => [
         'error'   		=> 'ไม่ได้กู้คืนเนื้อหาโปรดลองอีกครั้ง',
         'success' 		=> 'กู้คืนเนื้อหาเรียบร้อยแล้ว',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [

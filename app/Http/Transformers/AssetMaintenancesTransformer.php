@@ -5,7 +5,7 @@ namespace App\Http\Transformers;
 use App\Helpers\Helper;
 use App\Models\Asset;
 use App\Models\AssetMaintenance;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 
 class AssetMaintenancesTransformer
@@ -44,6 +44,10 @@ class AssetMaintenancesTransformer
                 'id' => (int) $assetmaintenance->asset->location->id,
                 'name'=> e($assetmaintenance->asset->location->name),
 
+            ] : null,
+            'rtd_location' => ($assetmaintenance->asset->defaultLoc) ? [
+                'id' => (int) $assetmaintenance->asset->defaultLoc->id,
+                'name'=> e($assetmaintenance->asset->defaultLoc->name),
             ] : null,
             'notes'         => ($assetmaintenance->notes) ? e($assetmaintenance->notes) : null,
             'supplier'      => ($assetmaintenance->supplier) ? ['id' => $assetmaintenance->supplier->id, 'name'=> e($assetmaintenance->supplier->name)] : null,

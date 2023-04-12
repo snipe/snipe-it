@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'گروه در حال حاضر وجود دارد!',
-    'group_not_found'     => 'گروه [: شناسه] وجود ندارد.',
+    'group_not_found'     => 'Group ID :id does not exist.',
     'group_name_required' => 'نام زمینه مورد نیاز است',
 
     'success' => array(

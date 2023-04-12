@@ -39,21 +39,17 @@
 
 <!-- Use default checkbox -->
 <div class="form-group">
-    <div class="col-md-3">
-    </div>
-    <div class="col-md-9">
+    <div class="col-md-9 col-md-offset-3">
         @if ($snipeSettings->default_eula_text!='')
-            <label for="use_default_eula">
-            {{ Form::checkbox('use_default_eula', '1', old('use_default_eula', $item->use_default_eula), ['class'=>'minimal', 'aria-label'=>'use_default_eula']) }}
-            {!! trans('admin/categories/general.use_default_eula') !!}
+            <label class="form-control">
+                {{ Form::checkbox('use_default_eula', '1', old('use_default_eula', $item->use_default_eula), ['aria-label'=>'use_default_eula']) }}
+                {!! trans('admin/categories/general.use_default_eula') !!}
             </label>
         @else
-            <div class="icheckbox disabled">
-                <label for="use_default_eula">
-                {{ Form::checkbox('use_default_eula', '0', old('use_default_eula'), ['class'=>'disabled minimal','disabled' => 'disabled', 'aria-label'=>'use_default_eula']) }}
-                {!! trans('admin/categories/general.use_default_eula_disabled') !!}
-                </label>
-            </div>
+            <label class="form-control form-control--disabled">
+                {{ Form::checkbox('use_default_eula', '0', old('use_default_eula'), ['class'=>'disabled','disabled' => 'disabled', 'aria-label'=>'use_default_eula']) }}
+                <span>{!! trans('admin/categories/general.use_default_eula_disabled') !!}</span>
+            </label>
         @endif
     </div>
 </div>
@@ -61,11 +57,9 @@
 
 <!-- Require Acceptance -->
 <div class="form-group">
-    <div class="col-md-3">
-    </div>
-    <div class="col-md-9">
-        <label for="require_acceptance">
-        {{ Form::checkbox('require_acceptance', '1', old('require_acceptance', $item->require_acceptance), ['class'=>'minimal', 'aria-label'=>'require_acceptance']) }}
+    <div class="col-md-9 col-md-offset-3">
+        <label class="form-control">
+        {{ Form::checkbox('require_acceptance', '1', old('require_acceptance', $item->require_acceptance), ['aria-label'=>'require_acceptance']) }}
         {{ trans('admin/categories/general.require_acceptance') }}
         </label>
     </div>
@@ -75,35 +69,16 @@
 <!-- Email on Checkin -->
 <div class="form-group">
     <div class="col-md-9 col-md-offset-3">
-        <label for="checkin_email">
-        {{ Form::checkbox('checkin_email', '1', old('checkin_email', $item->checkin_email), ['class'=>'minimal','aria-label'=>'checkin_email']) }}
+        <label class="form-control">
+        {{ Form::checkbox('checkin_email', '1', old('checkin_email', $item->checkin_email), ['aria-label'=>'checkin_email']) }}
         {{ trans('admin/categories/general.checkin_email') }}
         </label>
     </div>
 </div>
 
 
+@include ('partials.forms.edit.image-upload', ['image_path' => app('categories_upload_path')])
 
-<!-- Image -->
-@if (($item->image) && ($item->image!=''))
-    <div class="form-group{{ $errors->has('image_delete') ? ' has-error' : '' }}">
-        <div class="col-md-9 col-md-offset-3">
-            <label for="image_delete">
-                {{ Form::checkbox('image_delete', '1', old('image_delete'), ['class'=>'minimal','aria-label'=>'image_delete']) }}
-                {{ trans('general.image_delete') }}
-                {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
-            </label>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-9 col-md-offset-3">
-            <img src="{{ Storage::disk('public')->url(app('companies_upload_path').e($item->image)) }}" class="img-responsive">
-            {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
-        </div>
-    </div>
-@endif
-
-@include ('partials.forms.edit.image-upload')
 
 @stop
 

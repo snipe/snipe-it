@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Lisatarvikut ei kontrollitud, palun proovige uuesti',
         'success' 		=> 'Lisaseade edukalt kontrollitud.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'See kasutaja on kehtetu. Palun proovi uuesti.'
     ),
 

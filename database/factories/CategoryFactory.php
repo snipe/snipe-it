@@ -2,17 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Category;
-
-/*
-|--------------------------------------------------------------------------
-| Category Factories
-|--------------------------------------------------------------------------
-|
-| Factories related exclusively to creating categories and the various states..
-|
-*/
 
 class CategoryFactory extends Factory
 {
@@ -21,7 +13,7 @@ class CategoryFactory extends Factory
      *
      * @var string
      */
-    protected $model = \App\Models\Category::class;
+    protected $model = Category::class;
 
     /**
      * Define the model's default state.
@@ -32,18 +24,19 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => $this->faker->catchPhrase(),
+            'category_type' => 'asset',
             'checkin_email' => $this->faker->boolean(),
             'eula_text' => $this->faker->paragraph(),
             'require_acceptance' => false,
             'use_default_eula' => $this->faker->boolean(),
-            'user_id' => 1,
+            'user_id' => User::factory()->superuser(),
         ];
     }
 
     // usage: Category::factory()->assetLaptopCategory();
     public function assetLaptopCategory()
     {
-        return Category::factory()->create([
+        return $this->state([
             'name' => 'Laptops',
             'category_type' => 'asset',
             'require_acceptance' => true,
@@ -53,7 +46,7 @@ class CategoryFactory extends Factory
     // usage: Category::factory()->assetDesktopCategory();
     public function assetDesktopCategory()
     {
-        return Category::factory()->create([
+        return $this->state([
             'name' => 'Desktops',
             'category_type' => 'asset',
             'require_acceptance' => true,
@@ -63,7 +56,7 @@ class CategoryFactory extends Factory
     // usage: Category::factory()->assetDisplayCategory();
     public function assetDisplayCategory()
     {
-        return Category::factory()->create([
+        return $this->state([
             'name' => 'Displays',
             'category_type' => 'asset',
         ]);
@@ -72,7 +65,7 @@ class CategoryFactory extends Factory
      // usage: Category::factory()->assetTabletCategory();
      public function assetTabletCategory()
      {
-         return Category::factory()->create([
+         return $this->state([
              'name' => 'Tablets',
              'category_type' => 'asset',
          ]);
@@ -81,7 +74,7 @@ class CategoryFactory extends Factory
      // usage: Category::factory()->assetMobileCategory();
      public function assetMobileCategory()
      {
-         return Category::factory()->create([
+         return $this->state([
              'name' => 'Mobile Phones',
              'category_type' => 'asset',
          ]);
@@ -90,7 +83,7 @@ class CategoryFactory extends Factory
      // usage: Category::factory()->assetConferenceCategory();
      public function assetConferenceCategory()
      {
-         return Category::factory()->create([
+         return $this->state([
              'name' => 'Conference Phones',
              'category_type' => 'asset',
          ]);
@@ -100,7 +93,7 @@ class CategoryFactory extends Factory
      // usage: Category::factory()->assetVoipCategory();
      public function assetVoipCategory()
      {
-         return Category::factory()->create([
+         return $this->state([
              'name' => 'VOIP Phones',
              'category_type' => 'asset',
          ]);
@@ -109,8 +102,8 @@ class CategoryFactory extends Factory
      // usage: Category::factory()->accessoryKeyboardCategory();
      public function accessoryKeyboardCategory()
      {
-         return Category::factory()->create([
-             'name' => 'Keyboardss',
+         return $this->state([
+             'name' => 'Keyboards',
              'category_type' => 'accessory',
          ]);
      }
@@ -119,7 +112,7 @@ class CategoryFactory extends Factory
      // usage: Category::factory()->accessoryMouseCategory();
      public function accessoryMouseCategory()
      {
-         return Category::factory()->create([
+         return $this->state([
              'name' => 'Mouse',
              'category_type' => 'accessory',
          ]);
@@ -128,7 +121,7 @@ class CategoryFactory extends Factory
      // usage: Category::factory()->componentHddCategory();
      public function componentHddCategory()
      {
-         return Category::factory()->create([
+         return $this->state([
              'name' => 'HDD/SSD',
              'category_type' => 'component',
          ]);
@@ -137,7 +130,7 @@ class CategoryFactory extends Factory
      // usage: Category::factory()->componentRamCategory();
      public function componentRamCategory()
      {
-         return Category::factory()->create([
+         return $this->state([
              'name' => 'RAM',
              'category_type' => 'component',
          ]);
@@ -146,7 +139,7 @@ class CategoryFactory extends Factory
      // usage: Category::factory()->consumablePaperCategory();
      public function consumablePaperCategory()
      {
-         return Category::factory()->create([
+         return $this->state([
              'name' => 'Printer Paper',
              'category_type' => 'consumable',
          ]);
@@ -155,7 +148,7 @@ class CategoryFactory extends Factory
      // usage: Category::factory()->consumableInkCategory();
      public function consumableInkCategory()
      {
-         return Category::factory()->create([
+         return $this->state([
              'name' => 'Printer Ink',
              'category_type' => 'consumable',
          ]);
@@ -164,7 +157,7 @@ class CategoryFactory extends Factory
      // usage: Category::factory()->licenseGraphicsCategory();
      public function licenseGraphicsCategory()
      {
-         return Category::factory()->create([
+         return $this->state([
              'name' => 'Graphics Software',
              'category_type' => 'license',
          ]);
@@ -173,7 +166,7 @@ class CategoryFactory extends Factory
      // usage: Category::factory()->licenseGraphicsCategory();
      public function licenseOfficeCategory()
      {
-         return Category::factory()->create([
+         return $this->state([
              'name' => 'Office Software',
              'category_type' => 'license',
          ]);

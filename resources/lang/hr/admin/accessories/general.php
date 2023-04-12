@@ -16,5 +16,6 @@ return array(
     'update'  							=> 'Ažuriranje dodatne opreme',
     'use_default_eula'					=> 'Umjesto toga upotrijebite <a href="#" data-toggle="modal" data-target="#eulaModal">primarnu postavku EULA</a>.',
     'use_default_eula_disabled'			=> '<del>Uporedi primarnu zadanu EULA.</del> Nije postavljena primarna zadana EULA. Dodajte jednu u Postavke.',
+    'clone'                             => 'Clone Accessory',
 
 );

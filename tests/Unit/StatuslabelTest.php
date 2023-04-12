@@ -2,18 +2,10 @@
 namespace Tests\Unit;
 
 use App\Models\Statuslabel;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Tests\Unit\BaseTest;
+use Tests\TestCase;
 
-class StatuslabelTest extends BaseTest
+class StatuslabelTest extends TestCase
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
-
     public function testRTDStatuslabelAdd()
     {
         $statuslabel = Statuslabel::factory()->rtd()->create();

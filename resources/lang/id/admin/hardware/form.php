@@ -2,8 +2,11 @@
 
 return [
     'bulk_delete'		=> 'Konfirmasi Penghapusan Aset dalam Jumlah Besar',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> 'Meninjau aset untuk penghapusan massal di bawah ini. Setelah dihapus, aset-aset ini dapat dipulihkan, tetapi mereka tidak lagi akan dikaitkan dengan setiap pengguna yang mereka saat ini digunakan.',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'Anda akan menghapus :asset_count aset.',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'Perbarui aset jumlah besar',
     'bulk_update_help'	=> 'Formulir ini mengizinkan anda untuk memperbarui kelipatan aset dalam sekali proses. Cukup isi di field yang hendak di rubah. Jika ada yang kosong tidak akan dirubah. ',
     'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
@@ -45,7 +48,7 @@ return [
     'asset_location_update_default' => 'Update only default location',
     'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
     'asset_deployable' => 'That status is deployable. This asset can be checked out.',
-    'processing_spinner' => 'Processing...',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Optional Information',
     'order_details'   => 'Order Related Information'
 ];

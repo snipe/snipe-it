@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Mer info',
 
-    'audit_help' => 'Kryss av for å endre eiendelen til å bruke denne nye lokasjonen. Hvis du ikke krysser av vil lokasjonen kun bli notert i revisjonsloggen.<br><br>Merk at hvis denne eiendelen er sjekket ut vil det ikke endre lokasjon for brukeren, eiendelen eller lokasjonen den er sjekket ut til.',
+    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
     'assets' => 'Eiendeler er enheter som spores på serienummer eller annen merking. Typisk er dette kostbare enheter der det gir mening å spore enkeltenheter.',
 

@@ -5,7 +5,7 @@ namespace App\Http\Transformers;
 use App\Helpers\Helper;
 use App\Models\Asset;
 use App\Models\Setting;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 
 
@@ -84,7 +84,7 @@ class AssetsTransformer
             'next_audit_date' => Helper::getFormattedDateObject($asset->next_audit_date, 'date'),
             'deleted_at' => Helper::getFormattedDateObject($asset->deleted_at, 'datetime'),
             'purchase_date' => Helper::getFormattedDateObject($asset->purchase_date, 'date'),
-            'age' => $asset->purchase_date ? Helper::AgeFormat($asset->purchase_date) : '',
+            'age' => $asset->purchase_date ? $asset->purchase_date->diffForHumans() : '',
             'last_checkout' => Helper::getFormattedDateObject($asset->last_checkout, 'datetime'),
             'expected_checkin' => Helper::getFormattedDateObject($asset->expected_checkin, 'date'),
             'purchase_cost' => Helper::formatCurrencyOutput($asset->purchase_cost),

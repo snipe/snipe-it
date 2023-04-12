@@ -58,7 +58,7 @@ class RequestAssetNotification extends Notification
     {
         $notifyBy = [];
 
-        if (Setting::getSettings()->slack_endpoint != '') {
+        if (Setting::getSettings()->webhook_endpoint != '') {
             $notifyBy[] = 'slack';
         }
 
@@ -73,7 +73,7 @@ class RequestAssetNotification extends Notification
         $qty = $this->item_quantity;
         $item = $this->item;
         $note = $this->note;
-        $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot';
+        $botname = ($this->settings->webhook_botname) ? $this->settings->webhook_botname : 'Snipe-Bot';
 
         $fields = [
             'QTY' => $qty,

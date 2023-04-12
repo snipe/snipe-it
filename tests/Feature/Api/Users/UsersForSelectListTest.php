@@ -5,22 +5,19 @@ namespace Tests\Feature\Api\Users;
 use App\Models\Company;
 use App\Models\Setting;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 
 class UsersForSelectListTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function testUsersAreReturned()
     {
         Setting::factory()->create();
 
-        User::factory()->count(3)->create();
+        $users = User::factory()->superuser()->count(3)->create();
 
-        Passport::actingAs(User::factory()->firstAdmin()->create());
+        Passport::actingAs($users->first());
         $this->getJson(route('api.users.selectlist'))
             ->assertOk()
             ->assertJsonStructure([
@@ -30,7 +27,7 @@ class UsersForSelectListTest extends TestCase
                 'page',
                 'page_count',
             ])
-            ->assertJson(fn(AssertableJson $json) => $json->has('results', 4)->etc());
+            ->assertJson(fn(AssertableJson $json) => $json->has('results', 3)->etc());
     }
 
     public function testUsersScopedToCompanyWhenMultipleFullCompanySupportEnabled()

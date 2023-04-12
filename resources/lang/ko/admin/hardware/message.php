@@ -23,6 +23,8 @@ return [
     'restore' => [
         'error'   		=> '자산이 복원되지 않았습니다. 다시 시도해 주세요.',
         'success' 		=> '자산이 복원되었습니다.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [

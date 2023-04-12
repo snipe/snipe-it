@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Uhlobo lokulondoloza',
+        'asset_maintenance_type' => 'Asset Maintenance Type',
         'title'                  => 'Isihloko',
-        'start_date'             => 'Iqalile',
-        'completion_date'        => 'Kuqedile',
+        'start_date'             => 'Start Date',
+        'completion_date'        => 'Completion Date',
         'cost'                   => 'Izindleko',
         'is_warranty'            => 'Ukuthuthukiswa kwewaranti',
-        'asset_maintenance_time' => 'Izinsuku',
+        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
         'notes'                  => 'Amanothi',
-        'update'                 => 'Ukubuyekeza',
-        'create'                 => 'Dala'
+        'update'                 => 'Update Asset Maintenance',
+        'create'                 => 'Create Asset Maintenance'
     ];

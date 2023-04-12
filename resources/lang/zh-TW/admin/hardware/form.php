@@ -2,8 +2,11 @@
 
 return [
     'bulk_delete'		=> '確認批次刪除資產',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> '請再次確認批次刪除的資產。刪除後資產可以恢復，但將會失去當前的用戶關聯資訊。',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> '即將刪除 :asset_count 項資產',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> '批次更新資產',
     'bulk_update_help'	=> '此表格允許您同時修改多項資產。請僅填寫需要修改的欄位，留空的欄位不會做任何修改。',
     'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
@@ -45,7 +48,7 @@ return [
     'asset_location_update_default' => '只更新預設位置',
     'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
     'asset_deployable' => 'That status is deployable. This asset can be checked out.',
-    'processing_spinner' => '處理中...',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Optional Information',
     'order_details'   => 'Order Related Information'
 ];

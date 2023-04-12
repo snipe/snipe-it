@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Дагалдах хэрэгсэл шалгагдаагүй байна, дахин оролдоно уу',
         'success' 		=> 'Дагалдах хэрэгсэл амжилттай шалгасан.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Энэ хэрэглэгч буруу байна. Дахин оролдоно уу.'
     ),
 

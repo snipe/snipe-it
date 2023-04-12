@@ -6,7 +6,7 @@ return [
     'archived'  				=> 'Zarchiwizowane',
     'asset'  					=> 'Nabytek',
     'bulk_checkout'             => 'Przypisz aktywa',
-    'bulk_checkin'              => 'Checkin Assets',
+    'bulk_checkin'              => 'Przyjmij aktywa',
     'checkin'  					=> 'Potwierdzanie zasobu/aktywa',
     'checkout'  				=> 'Przypisz zasób',
     'clone'  					=> 'Klonuj zasób',
@@ -14,33 +14,33 @@ return [
     'deleted'  					=> 'Ten zasób został usunięty.',
     'edit'  					=> 'Edytuj zasób',
     'model_deleted'  			=> 'Ten model zasobów został usunięty. Musisz przywrócić model zanim będziesz mógł przywrócić zasób.',
-    'model_invalid'             => 'The Model of this Asset is invalid.',
-    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
+    'model_invalid'             => 'Model tego zasobu jest nieprawidłowy.',
+    'model_invalid_fix'         => 'Zasób powinien być edytowany w celu poprawienia tego przed próbą przyjęcia go lub wydania.',
     'requestable'               => 'Żądane',
     'requested'				    => 'Zamówione',
-    'not_requestable'           => 'Not Requestable',
-    'requestable_status_warning' => 'Do not change  requestable status',
+    'not_requestable'           => 'Brak możliwości zarządzania',
+    'requestable_status_warning' => 'Nie zmieniaj statusu możliwości zarządzania',
     'restore'  					=> 'Przywróć aktywa',
     'pending'  					=> 'Oczekuje',
     'undeployable'  			=> 'Niemożliwe do wdrożenia',
     'view'  					=> 'Wyświetl nabytki',
     'csv_error' => 'Wystąpił błąd w twoim pliku CSV:',
     'import_text' => '
-    <p>
-    Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
-    </p>
+<p>
+     Prześlij plik CSV zawierający historię zasobów. Zasoby i użytkownicy MUSZĄ już istnieć w systemie, w przeciwnym razie zostaną pominięci. Dopasowanie zasobów do importu historii odbywa się na podstawie tagu zasobu. Spróbujemy znaleźć pasującego użytkownika na podstawie podanej przez Ciebie nazwy użytkownika i kryteriów wybranych poniżej. Jeśli nie wybierzesz żadnych kryteriów poniżej, po prostu spróbuje dopasować format nazwy użytkownika skonfigurowany na stronie Administrator &gt; Ustawienia główne.
+     </p>
 
-    <p>Fields included in the CSV must match the headers: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Any additional fields will be ignored. </p>
+     <p>Pola zawarte w pliku CSV muszą być zgodne z nagłówkami: <strong>Etykieta zasobu, Nazwa, Data wymeldowania, Data zameldowania</strong>. Wszelkie dodatkowe pola będą ignorowane. </p>
 
-    <p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
-    ',
+     <p>Data zaewidencjonowania: puste lub przyszłe daty zaewidencjonowania spowodują wyewidencjonowanie przedmiotów dla powiązanego użytkownika. Wykluczenie kolumny Data zameldowania spowoduje utworzenie daty zameldowania z dzisiejszą datą.</p>    ',
     'csv_import_match_f-l' => 'Spróbuj dopasować użytkowników przez imię.nazwisko (jan.kowalski)',
     'csv_import_match_initial_last' => 'Spróbuj dopasować użytkowników przez pierwszą literę imienia i nazwisko (jkowalski)',
-    'csv_import_match_first' => 'Try to match users by first name (jane) format',
+    'csv_import_match_first' => 'Spróbuj dopasować użytkowników według formatu imienia (jane)',
     'csv_import_match_email' => 'Spróbuj dopasować użytkowników po adresie e-mail',
     'csv_import_match_username' => 'Spróbuj dopasować użytkowników po nazwie użytkownika',
     'error_messages' => 'Komunikat błędu:',
-    'success_messages' => 'Success messages:',
+    'success_messages' => 'Wiadomości o powodzeniu:',
     'alert_details' => 'Więcej szczegółów znajduje się poniżej.',
-    'custom_export' => 'Eksport niestandardowy'
+    'custom_export' => 'Eksport niestandardowy',
+    'mfg_warranty_lookup' => ':Producent Wyszukiwarka Statusu Gwarancji',
 ];

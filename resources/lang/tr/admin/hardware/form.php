@@ -2,8 +2,11 @@
 
 return [
     'bulk_delete'		=> 'Toplu varlık silmeyi onaylıyor musunuz?',
+    'bulk_restore'      => 'Toplu varlık geriyüklemesini onaylayın', 
   'bulk_delete_help'	=> 'Toplu silme için aşağıdaki Varlıkları gözden geçirin. Silindikten sonra bu varlıkların geri yüklenebilir fakat atanmış olan herhangi bir kullanıcı ile ilişkili olmayacaktır.',
+  'bulk_restore_help'	=> 'Aşağıdaki varlık geri yüklemesini gözden geçirin. Geri yüklendiklerinde saha önceden atanmış olan sahiplerine dair aitlikleri kalmayacaktır.',
   'bulk_delete_warn'	=> ':asset_count adet varlığı düzenlemek üzeresiniz.',
+  'bulk_restore_warn'	=> 'Geri yüklüyorsunuz : asset_count assets.',
     'bulk_update'		=> 'Demirbaşları Toplu Güncelle',
     'bulk_update_help'	=> 'Bu form birden çok demirbaşı tek seferde güncellemenizi sağlar. Lütfen sadece değiştirmek istediğiniz alanları doldurunuz. Değiştirilmesini istemediğiniz alanları boş bırakınız. ',
     'bulk_update_warn'	=> 'Tek bir varlığın özelliklerini düzenlemek üzeresiniz.| :asset_count varlıkların özelliklerini düzenlemek üzeresiniz.',
@@ -45,7 +48,7 @@ return [
     'asset_location_update_default' => 'Sadece varsayılan konumu güncelle',
     'asset_not_deployable' => 'Bu demirbaş dağıtılabilir durumda değil. Çıkışı yapılamaz.',
     'asset_deployable' => 'Bu demirbaş dağıtılabilir durumda. Çıkışı yapılabilir.',
-    'processing_spinner' => 'İşleniyor...',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Opsiyonel Bilgi',
     'order_details'   => 'Sipariş Bilgileri'
 ];

@@ -16,5 +16,6 @@ return array(
     'update'  							=> 'புதுப்பித்தல் துணை',
     'use_default_eula'					=> 'பதிலாக <a href="#" data-toggle="modal" data-target="#eulaModal">primary இயல்புநிலை EULA</a> ஐப் பயன்படுத்துக.',
     'use_default_eula_disabled'			=> '<del> முதன்மை இயல்புநிலை EULA ஐப் பயன்படுத்தவும் .</del> முதன்மை இயல்புநிலை EULA அமைக்கப்படவில்லை. அமைப்புகளில் ஒன்றைச் சேர்க்கவும்.',
+    'clone'                             => 'Clone Accessory',
 
 );

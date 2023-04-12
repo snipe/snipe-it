@@ -10,7 +10,7 @@ $expires = Helper::getFormattedDateObject($asset->present()->warranty_expires, '
 $diff = round(abs(strtotime($asset->present()->warranty_expires) - strtotime(date('Y-m-d')))/86400);
 $icon = ($diff <= ($threshold / 2)) ? '🚨' : (($diff <= $threshold) ? '⚠️' : ' ');
 @endphp
-<tr><td>{{ $icon }} </td><td> <a href="{{ route('hardware.show', $asset->id) }}">{{ $asset->present()->name }}</a> </td><td> {{ $diff }} {{ trans('mail.Days') }} </td><td> {{ $expires['formatted'] }} </td><td> {{ ($asset->supplier ? e($asset->supplier->name) : '') }} </td><td> {{ ($asset->assignedTo ? e($asset->assignedTo->present()->name()) : '') }} </td></tr>
+<tr><td>{{ $icon }} </td><td> <a href="{{ route('hardware.show', $asset->id) }}">{{ $asset->present()->name }}</a> </td><td> {{ $diff }} {{ trans('mail.Days') }} </td><td> {{ !is_null($expires) ? $expires['formatted'] : '' }} </td><td> {{ ($asset->supplier ? e($asset->supplier->name) : '') }} </td><td> {{ ($asset->assignedTo ? e($asset->assignedTo->present()->name()) : '') }} </td></tr>
 @endforeach
 </table>
 @endcomponent

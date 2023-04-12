@@ -78,15 +78,15 @@
                         </div>
                     </div>
                     
-					<!-- Space for keep consistance of layout -->
-					<div class="dynamic-form-row"></div>
+
                     
 					<!-- Checkbox for activation new user, by default set for activated -->
 					<div class="dynamic-form-row">
-                        <div class="col-md-3 col-xs-12"><label for="modal-activated">{{ trans('general.login_enabled') }}:</label></div>
-						<div class="col-md-8 col-xs-12">
-						<input type="checkbox" value="1" name="activated" id="modal-activated" class="minimal" {{ (old('activated', $user->activated)) == '1' ? ' checked="checked"' : '' }} aria-label="activated">
-						{{ trans('admin/users/general.activated_help_text') }}
+						<div class="col-md-offset-3 col-md-8 col-xs-12">
+                            <label class="form-control">
+						        <input type="checkbox" value="1" name="activated" id="modal-activated" {{ (old('activated', $user->activated)) == '1' ? ' checked="checked"' : '' }} aria-label="activated">
+                                {{ trans('general.login_enabled') }}
+                            </label>
 						</div>
                     </div>                    
                     

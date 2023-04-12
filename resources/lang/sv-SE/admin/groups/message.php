@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'Gruppen existerar redan!',
-    'group_not_found'     => 'Grupp [:id] existerar inte.',
+    'group_not_found'     => 'Grupp-ID :id finns inte.',
     'group_name_required' => 'Namnfältet är obligatoriskt',
 
     'success' => array(
