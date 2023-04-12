@@ -30,6 +30,7 @@ class Handler extends ExceptionHandler
         \League\OAuth2\Server\Exception\OAuthServerException::class,
         JsonException::class,
         SCIMException::class, //these generally don't need to be reported
+        InvalidFormatException::class,
     ];
 
     /**
@@ -79,7 +80,7 @@ class Handler extends ExceptionHandler
 
         // Handle standard requests that fail because Carbon cannot parse the date on validation (when a submitted date value is definitely not a date)
         if ($e instanceof InvalidFormatException) {
-            return redirect()->back()->with('error', trans('validation.date', ['attribute' => 'date']));
+            return redirect()->back()->withInput()->with('error', trans('validation.date', ['attribute' => 'date']));
         }
 
         // Handle API requests that fail
