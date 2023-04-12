@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
 use Schema;
 use Watson\Validating\ValidatingTrait;
-
+// use App\Models\SnipeModel;
 class CustomField extends Model
 {
     use HasFactory;
@@ -186,6 +186,8 @@ class CustomField extends Model
     public function assetModels()
     {
        return $this->fieldset()->with('models')->get()->pluck('models')->flatten()->unique('id'); 
+       
+        // return $this->models->where(, AssetModel::class);
     }
 
     /**
