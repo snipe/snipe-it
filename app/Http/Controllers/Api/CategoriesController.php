@@ -95,12 +95,9 @@ class CategoriesController extends Controller
 
 
 
-        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
-        // case we override with the actual count, so we should return 0 items.
-        $offset = (($categories) && ($request->get('offset') > $categories->count())) ? $categories->count() : $request->get('offset', 0);
-
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $categories->count()) ? $categories->count() : intval(request('offset'));
+        $limit = ($request->input('limit') > config('app.max_results')) ? config('app.max_results') : max(intval(request('offset')),  config('app.max_results'));
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'assets_count';
