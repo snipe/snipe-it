@@ -137,12 +137,17 @@ a {
 }
 //pagination
 .pagination > li >a{
-  color: var(--link);
+  color: var(--light-link);
   background-color: var(--back-main);
 }
-&.active{
-
+.pagination > .active > a {
+  background-color: var(--visited-link);
+  border-color: var(--light-link);
 }
+.pagination > .active > a:hover{
+  background-color: var(--hover-link);
+}
+
 .main-header .navbar, .main-header .logo {
   background-color: var(--header);
   background: -webkit-linear-gradient(top,  var(--header) 0%,var(--header) 100%);
