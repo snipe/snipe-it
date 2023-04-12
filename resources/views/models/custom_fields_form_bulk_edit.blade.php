@@ -7,17 +7,17 @@
 @endphp
 @foreach($models as $model)
 @if (($model) && ($model->fieldset))
-    @foreach($model->customFields AS $field)
+    @foreach($model->fieldset->fields AS $field)
 
-@php
-    if (in_array($field->db_column_name(), $fields)) {
-        $duplicate = true;
-        continue; 
-    } else {
-        $duplicate = false;
-    }
-    $fields[] = $field->db_column_name(); 
-@endphp
+    @php
+        if (in_array($field->db_column_name(), $fields)) {
+            $duplicate = true;
+            continue; 
+        } else {
+            $duplicate = false;
+        }
+        $fields[] = $field->db_column_name(); 
+    @endphp
 
     <div class="form-group{{ $errors->has($field->db_column_name()) ? ' has-error' : '' }}">
       <label for="{{ $field->db_column_name() }}" class="col-md-3 control-label">{{ $field->name }} </label>

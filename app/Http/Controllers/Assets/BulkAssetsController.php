@@ -44,17 +44,19 @@ class BulkAssetsController extends Controller
         $asset_ids = array_values(array_unique($request->input('ids')));
        
         //custom fields logic for bulk edit
-        $asset_custom_field = Asset::whereIn('id', $asset_ids)->whereHas('model', function ($query) {
+        $asset_custom_field = Asset::with('model.fieldset.fields')->whereIn('id', $asset_ids)->whereHas('model', function ($query) {
             return $query->where('fieldset_id', '!=', null);
         })->get();
 
-        $models = $asset_custom_field->unique('model_id')->pluck('model');  
+        $models = $asset_custom_field->unique('model_id');  
 
-        $custom_fields = new Collection(); 
-        foreach ($asset_custom_field as $asset_key => $asset) {
-            $custom_fields->push($asset->model->fieldset->fields); 
-        } 
-        $custom_fields = $custom_fields->flatten()->unique('id'); 
+       ray($asset_custom_field); 
+        ray($models);
+        // $custom_fields = new Collection(); 
+        // foreach ($models as $asset_key => $asset) {
+        //     $custom_fields->push($asset->model->customFields); 
+        // } 
+        $custom_fields = $asset_custom_field->pluck('model.fieldset.fields')->flatten()->unique('id'); 
 
         if ($request->filled('bulk_actions')) {
             switch ($request->input('bulk_actions')) {
@@ -75,8 +77,8 @@ class BulkAssetsController extends Controller
                     return view('hardware/bulk')
                         ->with('assets', $asset_ids)
                         ->with('statuslabel_list', Helper::statusLabelList())
-                        ->with('custom_fields', $custom_fields)
-                        ->with('models', $models); 
+                        // ->with('custom_fields', $custom_fields)
+                        ->with('models', $models->pluck('model')); 
             }
         }
 
