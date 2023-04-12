@@ -597,7 +597,7 @@
 
                                                 @if ($asset->serial && $asset->model->manufacturer)
                                                     <a href="{{ (str_replace('_testlocale_',\App\Models\Setting::getSettings()->locale,$asset->model->manufacturer->support_url))}}" target="_blank">
-                                                        <img src="{{ Storage::disk('public')->url(app('manufacturers_upload_path').e($asset->model->manufacturer->image)) }}" style="width:25px;height:25px;"><span class="sr-only">{{ trans('hardware/general.mfg_warranty_lookup') }}</span>
+                                                        <i class="fa fa-external-link" style="width:25px;height:25px;"><span class="sr-only">{{ trans('hardware/general.mfg_warranty_lookup') }}</span></i>
                                                     </a>
                                                 @endif
                                             </div>
