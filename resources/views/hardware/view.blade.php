@@ -6,67 +6,6 @@
     @parent
 @stop
 
-{{-- Right header --}}
-@section('header_right')
-
-
-    @can('manage', \App\Models\Asset::class)
-        @if ($asset->deleted_at=='')
-        <div class="dropdown pull-right">
-            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu pull-right" role="menu">
-                
-                @if (($asset->assetstatus) && ($asset->assetstatus->deployable=='1'))
-                    @if (($asset->assigned_to != '') && ($asset->deleted_at==''))
-                        @can('checkin', \App\Models\Asset::class)
-                            <li role="menuitem">
-                                <a href="{{ route('hardware.checkin.create', $asset->id) }}">
-                                    {{ trans('admin/hardware/general.checkin') }}
-                                </a>
-                            </li>
-                        @endcan
-                    @elseif (($asset->assigned_to == '') && ($asset->deleted_at==''))
-                        @can('checkout', \App\Models\Asset::class)
-                            <li role="menuitem">
-                                <a href="{{ route('hardware.checkout.create', $asset->id)  }}">
-                                    {{ trans('admin/hardware/general.checkout') }}
-                                </a>
-                            </li>
-                        @endcan
-                    @endif
-                @endif
-
-                @can('update', \App\Models\Asset::class)
-                    <li role="menuitem">
-                        <a href="{{ route('hardware.edit', $asset->id) }}">
-                            {{ trans('admin/hardware/general.edit') }}
-                        </a>
-                    </li>
-                @endcan
-
-                @can('create', \App\Models\Asset::class)
-                    <li role="menuitem">
-                        <a href="{{ route('clone/hardware', $asset->id) }}">
-                            {{ trans('admin/hardware/general.clone') }}
-                        </a>
-                    </li>
-                @endcan
-
-                @can('audit', \App\Models\Asset::class)
-                    <li role="menuitem">
-                        <a href="{{ route('asset.audit.create', $asset->id)  }}">
-                            {{ trans('general.audit') }}
-                        </a>
-                    </li>
-                @endcan
-            </ul>
-        </div>
-        @endif
-    @endcan
-@stop
-
 {{-- Page content --}}
 @section('content')
 
@@ -923,10 +862,10 @@
                                     @can('delete', $asset)
                                         @if ($asset->deleted_at=='')
                                             <div class="col-md-12" style="padding-top: 30px; padding-bottom: 30px;">
-                                                <form action="{{ route('delete/assetfile', [$asset->id,$fileId->id]) }}" method="POST">
+                                                <form action="{{ route('hardware/delete', ['assetId' => $asset->id]) }}" method="POST" onsubmit="return confirm( {{trans('general/message.delete_confirm')}} )">
                                                     {{csrf_field()}}
                                                     {{ method_field("DELETE")}}
-                                                    <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print" >{{ trans('button.delete')}}</button>
+                                                    <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.delete')}}</button>
                                                 </form>
                                             </div>
                                         @endif
