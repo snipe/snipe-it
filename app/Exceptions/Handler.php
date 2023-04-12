@@ -10,7 +10,7 @@ use ArieTimmerman\Laravel\SCIMServer\Exceptions\SCIMException;
 use Log;
 use Throwable;
 use JsonException;
-
+use Carbon\Exceptions\InvalidFormatException;
 
 class Handler extends ExceptionHandler
 {
@@ -69,15 +69,24 @@ class Handler extends ExceptionHandler
         // Invalid JSON exception
         // TODO: don't understand why we have to do this when we have the invalidJson() method, below, but, well, whatever
         if ($e instanceof JsonException) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'invalid JSON'), 422);
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'Invalid JSON'), 422);
         }
 
         if ($e instanceof SCIMException) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'invalid SCIM Request'), 400);
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'Invalid SCIM Request'), 400);
+        }
+
+        if ($e instanceof InvalidFormatException) {
+            return redirect()->back()->with('error', trans('validation.date', ['attribute' => 'date']));
         }
 
         // Handle Ajax requests that fail because the model doesn't exist
         if ($request->ajax() || $request->wantsJson()) {
+
+            if ($e instanceof InvalidFormatException) {
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans('validation.date')), 200);
+            }
+
 
             if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
                 $className = last(explode('\\', $e->getModel()));
@@ -101,6 +110,8 @@ class Handler extends ExceptionHandler
                 }
             }
         }
+
+
 
 
         if ($this->isHttpException($e) && (isset($statusCode)) && ($statusCode == '404' )) {
