@@ -54,7 +54,7 @@
 
                         <!-- Company -->
                         @if (\App\Models\Company::canManageUsersCompanies())
-                            @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'),'fieldname' => 'company_id'])                        @endif
+                            @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])                        @endif
 
                         <!-- Manager -->
                     @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/users/table.manager'), 'fieldname' => 'manager_id'])
