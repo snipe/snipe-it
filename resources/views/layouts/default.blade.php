@@ -780,9 +780,7 @@
             @yield('header_right')
           </div>
         </section>
-
         <section class="content" id="main" tabindex="-1">
-
           <!-- Notifications -->
           <div class="row">
               @if (config('app.lock_passwords'))
@@ -792,16 +790,12 @@
                       </div>
                   </div>
               @endif
-
           @include('notifications')
           </div>
-
-
           <!-- Content -->
             <div id="{!! (Request::is('*api*') ? 'app' : 'webui') !!}">
           @yield('content')
             </div>
-
         </section>
 
       </div><!-- /.content-wrapper -->
