@@ -779,11 +779,7 @@
           <div class="pull-right">
             @yield('header_right')
           </div>
-
-
-
         </section>
-
 
         <section class="content" id="main" tabindex="-1">
 
@@ -809,11 +805,12 @@
         </section>
 
       </div><!-- /.content-wrapper -->
-     @if($snipeSettings->footer_text!='')
-         <footer class="main-footer hidden-print" style="height:100px;">
-     @else
-         <footer class="main-footer hidden-print">
-     @endif
+        @if($snipeSettings->footer_text!='')
+            <footer class="main-footer hidden-print" style="height:100px;">
+                @else
+                    <footer class="main-footer hidden-print">
+                        @endif
+
         <div class="pull-right hidden-xs">
           @if ($snipeSettings->version_footer!='off')
               @if (($snipeSettings->version_footer=='on') || (($snipeSettings->version_footer=='admin') && (Auth::user()->isSuperUser()=='1')))
