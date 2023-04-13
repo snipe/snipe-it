@@ -5,6 +5,7 @@ namespace Tests;
 use App\Http\Middleware\SecurityHeaders;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Tests\Support\InteractsWithSettings;
 use Tests\Support\Settings;
 
 abstract class TestCase extends BaseTestCase
@@ -24,6 +25,8 @@ abstract class TestCase extends BaseTestCase
 
         $this->withoutMiddleware($this->globallyDisabledMiddleware);
 
-        $this->settings = Settings::initialize();
+        if (in_array(InteractsWithSettings::class, class_uses_recursive($this))) {
+            $this->settings = Settings::initialize();
+        }
     }
 }
