@@ -75,6 +75,10 @@ class ConsumablesController extends Controller
             $consumables->where('manufacturer_id', '=', $request->input('manufacturer_id'));
         }
 
+        if ($request->filled('supplier_id')) {
+            $consumables->where('supplier_id', '=', $request->input('supplier_id'));
+        }
+
         if ($request->filled('location_id')) {
             $consumables->where('location_id','=',$request->input('location_id'));
         }
@@ -110,6 +114,9 @@ class ConsumablesController extends Controller
                 break;
             case 'company':
                 $consumables = $consumables->OrderCompany($order);
+                break;
+            case 'supplier':
+                $components = $consumables->OrderSupplier($order);
                 break;
             default:
                 $consumables = $consumables->orderBy($column_sort, $order);
