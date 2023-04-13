@@ -117,7 +117,7 @@
           <!-- Supplier -->
            @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
           <!-- Company -->
-          @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'),'multiple' =>'false', 'fieldname' => 'company_id'])
+          @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'),'fieldname' => 'company_id'])
           <!-- Order Number -->
           <div class="form-group {{ $errors->has('order_number') ? ' has-error' : '' }}">
             <label for="order_number" class="col-md-3 control-label">
