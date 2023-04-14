@@ -227,7 +227,7 @@
                               @else
                                   <!-- everything is normal - as you were -->
                                   <label class="form-control">
-                                      {{ Form::checkbox('activated', '1', old('activated'), ['id' => 'activated', 'checked'=> 'checked', 'aria-label'=>'update_real_loc']) }}
+                                      <input type="checkbox" value="1" name="activated"{{ ((old('activated') == '1') || ($user->activated) == '1') ? ' checked="checked"' : '' }} aria-label="activated" id="activated">
                                       {{ trans('admin/users/general.activated_help_text') }}
                                   </label>
                               @endif
