@@ -74,7 +74,6 @@ class UsersController extends Controller
         $permissions = $this->filterDisplayable($permissions);
 
         $user = new User;
-        $user->activated = 1;
 
         return view('users/edit', compact('groups', 'userGroups', 'permissions', 'userPermissions'))
             ->with('user', $user);

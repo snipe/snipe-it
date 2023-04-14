@@ -12,6 +12,7 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Events\CheckoutableCheckedIn;
 use App\Events\ComponentCheckedIn;
 use App\Models\Asset;
+use Illuminate\Support\Facades\Validator;
 
 class ComponentsController extends Controller
 {
@@ -225,20 +226,30 @@ class ComponentsController extends Controller
     public function checkout(Request $request, $componentId)
     {
         // Check if the component exists
-        if (is_null($component = Component::find($componentId))) {
+        if (!$component = Component::find($componentId)) {
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/components/message.does_not_exist')));
         }
 
         $this->authorize('checkout', $component);
 
+        $validator = Validator::make($request->all(), [
+            'asset_id'          => 'required|exists:assets,id',
+            'assigned_qty'      => "required|numeric|min:1|digits_between:1,".$component->numRemaining(),
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(Helper::formatStandardApiResponse('error', $validator->errors()));
+
+        }
+
+        // Make sure there is at least one available to checkout
+        if ($component->numRemaining() <= $request->get('assigned_qty')) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/components/message.checkout.unavailable', ['remaining' => $component->numRemaining(), 'requested' => $request->get('assigned_qty')])));
+        }
 
         if ($component->numRemaining() >= $request->get('assigned_qty')) {
 
-            if (!$asset = Asset::find($request->input('assigned_to'))) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')));
-            }
-
-            // Update the accessory data
+            $asset = Asset::find($request->input('assigned_to'));
             $component->assigned_to = $request->input('assigned_to');
 
             $component->assets()->attach($component->id, [
@@ -255,7 +266,7 @@ class ComponentsController extends Controller
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/components/message.checkout.success')));
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null, 'Not enough components remaining: '.$component->numRemaining().' remaining, '.$request->get('assigned_qty').' requested.'));
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/components/message.checkout.unavailable', ['remaining' => $component->numRemaining(), 'requested' => $request->get('assigned_qty')])));
     }
 
     /**

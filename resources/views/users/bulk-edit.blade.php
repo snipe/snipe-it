@@ -178,7 +178,7 @@
 
                         <button type="submit" class="btn btn-success"{{ (config('app.lock_passwords') ? ' disabled' : '') }}>
                             <i class="fas fa-check icon-white" aria-hidden="true"></i>
-                            {{ trans('button.update') }}
+                            {{ trans('general.update') }}
                         </button>
 
                     </div><!-- /.box-footer -->
