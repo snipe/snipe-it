@@ -34,11 +34,11 @@ return [
         'authentication_success' => 'Gebruiker met succes geverifieerd met LDAP!'
     ],
     'webhook' => [
-        'sending' => 'Sending :app test message...',
-        'success_pt1' => 'Success! Check the ',
-        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
+        'sending' => ':app testbericht versutren...',
+        'success_pt1' => 'Succesvol! Bekijk het ',
+        'success_pt2' => ' kanaal voor je testbericht, vergeet niet op OPSLAAN te klikken onderaan om je instellingen op te slaan.',
         '500' => '500 Server Error.',
-        'error' => 'Something went wrong. :app responded with: :error_message',
-        'error_misc' => 'Something went wrong. :( ',
+        'error' => 'Er ging iets fout. :app reageerde met: :error_message',
+        'error_misc' => 'Er ging iets fout. :( ',
     ]
 ];
