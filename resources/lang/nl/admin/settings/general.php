@@ -191,7 +191,7 @@ return [
     'setting'                   => 'Instelling',
     'settings'                  => 'Instellingen',
     'show_alerts_in_menu'       => 'Waarschuwingen weergeven in hoofdmenu',
-    'show_archived_in_list'     => 'Gearchiveerde activa',
+    'show_archived_in_list'     => 'Gearchiveerde assets',
     'show_archived_in_list_text'     => 'Toon gearchiveerde items in de lijst "alle items"',
     'show_assigned_assets'      => 'Toon assets die zijn toegewezen aan assets',
     'show_assigned_assets_help' => 'Geef assets weer die zijn toegewezen aan de andere assets in Bekijk Gebruiker -> Assets, Bekijk Gebruiker -> Info -> Print Alles Toegewezen en in Account -> Bekijk Toegewezen Assets.',

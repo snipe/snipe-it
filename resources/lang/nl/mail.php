@@ -31,7 +31,7 @@ return [
     'days' => 'Dagen',
     'expecting_checkin_date' => 'Verwachte incheck datum:',
     'expires' => 'Verloopt',
-    'Expiring_Assets_Report' => 'Rapport van verlopen activa',
+    'Expiring_Assets_Report' => 'Rapport van verlopen assets',
     'Expiring_Licenses_Report' => 'Rapportage verlopende licenties.',
     'hello' => 'Hallo',
     'hi' => 'Hoi',
@@ -79,6 +79,6 @@ return [
     'Expected_Checkin_Report' => 'Verwachte asset check in rapport',
     'Expected_Checkin_Notification' => 'Herinnering: :name check in deadline nadert',
     'Expected_Checkin_Date' => 'Een asset uitgecheckt aan jou moet worden ingecheckt op :date',
-    'your_assets' => 'Bekijk je activa',
+    'your_assets' => 'Bekijk je assets',
     'rights_reserved' => 'All rights reserved.',
 ];

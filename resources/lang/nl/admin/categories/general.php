@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'asset_categories' 					=> 'Activacategorieën',
+    'asset_categories' 					=> 'Assetcategorieën',
     'category_name'  					=> 'Categorienaam',
     'checkin_email'                     => 'Stuur een e-mail naar de gebruiker bij in- of uitchecken.',
     'checkin_email_notification'        => 'Deze gebruiker ontvangt een e-mail bij het in- of uitchecken.',
@@ -9,9 +9,9 @@ return array(
     'create'  							=> 'Categorie aanmaken',
     'edit'                              => 'Categorie bewerken',
     'eula_text'							=> 'Categorie-gebruikersovereenkomst',
-    'eula_text_help'					=> 'Dit veld geeft je de mogelijkheid om je gebruikersovereenkomsten aan te passen voor specifieke activa. Als je maar één gebruikersovereenkomst hebt voor al je activa, vink dan het vakje hieronder aan om de primaire als standaard in te stellen.',
+    'eula_text_help'					=> 'Dit veld geeft je de mogelijkheid om je gebruikersovereenkomsten aan te passen voor specifieke assets. Als je maar één gebruikersovereenkomst hebt voor al je assets, vink dan het vakje hieronder aan om de primaire als standaard in te stellen.',
     'name'                              => 'Categorienaam',
-    'require_acceptance'				=> 'Verplicht de gebruikers de overeenkomst te accepteren voor de activa in deze catagorie.',
+    'require_acceptance'				=> 'Verplicht de gebruikers de overeenkomst te accepteren voor de assets in deze catagorie.',
     'required_acceptance'				=> 'Deze gebruiker ontvangt een e-mail met een link om de acceptatie van dit item te bevestigen.',
     'required_eula'						=> 'Deze gebruiker ontvangt een e-mail met een kopie van de gebruikersovereenkomst',
     'no_default_eula'					=> 'Standaard gebruikersovereenkomst niet gevonden. Ga naar Instellingen en voeg er één toe.',

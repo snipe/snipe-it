@@ -3,7 +3,7 @@
 return array(
     'activated'  			=> 'Actief',
     'allow'  				=> 'Toestaan',
-    'checkedout'  			=> 'Activa',
+    'checkedout'  			=> 'Assets',
     'created_at' 			=> 'Aangemaakt',
     'createuser' 			=> 'Gebruiker aanmaken',
     'deny'  				=> 'Weigeren',
