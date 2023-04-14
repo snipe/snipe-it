@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Meer Info',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'Door dit vakje aan te vinken wordt de assetregistratie aangepast aan deze nieuwe locatie. Als je het vinkje laat staan, wordt de locatie gewoon in het controlelogboek genoteerd.<br><br>Let op dat als dit goed wordt uitgecheckt, de locatie van de persoon, het goed of de locatie waar het goed is uitgecheckt niet verandert.',
 
     'assets' => 'Assets bestaan uit items die met een serienummer of identificatiesticker geregistreerd zijn. Dit zijn over het algemeen de objecten met een hogere waarde waarbij identificatie belangrijk is.',
 

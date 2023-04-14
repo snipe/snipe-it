@@ -1,19 +1,19 @@
 <?php
 
 return [
-    'about_assets_title'           => 'Over activa',
+    'about_assets_title'           => 'Over assets',
     'about_assets_text'            => 'Assets zijn items die worden bijgehouden op serienummer of een tag van het product. Het zijn meestal items met een hogere waarde waarbij het identificeren van een specifiek item belangrijk is.',
     'archived'  				=> 'Gearchiveerd',
     'asset'  					=> 'Asset',
-    'bulk_checkout'             => 'Activa uitgeven',
-    'bulk_checkin'              => 'Activa innemen',
+    'bulk_checkout'             => 'Assets uitgeven',
+    'bulk_checkin'              => 'Assets innemen',
     'checkin'  					=> 'Asset inchecken',
     'checkout'  				=> 'Asset uitchecken',
     'clone'  					=> 'Dupliceer Asset',
     'deployable'  				=> 'Uitgeefbaar',
     'deleted'  					=> 'Deze asset is verwijderd.',
     'edit'  					=> 'Asset bewerken',
-    'model_deleted'  			=> 'Dit Assets model is verwijderd. U moet het model herstellen voordat u het Asset kunt herstellen.',
+    'model_deleted'  			=> 'Dit assetmodel is verwijderd. U moet het model herstellen voordat u het asset kunt herstellen.',
     'model_invalid'             => 'The Model of this Asset is invalid.',
     'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Aanvraagbaar',

@@ -24,7 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Het accessoire is niet uitgecheckt. Probeer het opnieuw.',
         'success' 		=> 'Het accessoire is uitgecheckt.',
-        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
+        'unavailable'   => 'Accessoire is niet beschikbaar om uit te checken. Controleer beschikbare hoeveelheid',
         'user_does_not_exist' => 'Deze gebruiker is ongeldig. Probeer het opnieuw.'
     ),
 

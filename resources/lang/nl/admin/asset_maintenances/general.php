@@ -1,10 +1,10 @@
 <?php
 
     return [
-        'asset_maintenances' => 'Activaonderhoud',
-        'edit'               => 'Activaonderhoud bewerken',
-        'delete'             => 'Activaonderhoud verwijderen',
-        'view'               => 'Details activaonderhoud tonen',
+        'asset_maintenances' => 'Assetonderhoud',
+        'edit'               => 'Assetonderhoud bewerken',
+        'delete'             => 'Assetonderhoud verwijderen',
+        'view'               => 'Details Assetonderhoud tonen',
         'repair'             => 'Reparatie',
         'maintenance'        => 'Onderhoud',
         'upgrade'            => 'Upgrade',
