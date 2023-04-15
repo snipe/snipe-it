@@ -78,13 +78,13 @@ class LocationsController extends Controller
             $locations->where('locations.country', '=', $request->input('country'));
         }
 
-        $offset = (($locations) && (request('offset') > $locations->count())) ? $locations->count() : request('offset', 0);
-
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $locations->count()) ? $locations->count() : intval(request('offset'));
+        $limit = ($request->input('limit') > config('app.max_results')) ? config('app.max_results') : max(intval(request('offset')),  config('app.max_results'));
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
+
 
         switch ($request->input('sort')) {
             case 'parent':

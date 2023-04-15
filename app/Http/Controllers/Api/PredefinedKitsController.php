@@ -29,8 +29,10 @@ class PredefinedKitsController extends Controller
             $kits = $kits->TextSearch($request->input('search'));
         }
 
-        $offset = $request->input('offset', 0);
-        $limit = $request->input('limit', 50);
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $kits->count()) ? $kits->count() : intval(request('offset'));
+        $limit = ($request->input('limit') > config('app.max_results')) ? config('app.max_results') : max(intval(request('offset')),  config('app.max_results'));
+
         $order = $request->input('order') === 'desc' ? 'desc' : 'asc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'name';
         $kits->orderBy($sort, $order);
