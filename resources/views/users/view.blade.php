@@ -129,6 +129,17 @@
               </a>
           </li>
         @endcan
+
+        
+        <li>
+          <a href="#orgchart" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+                <i class="fas fa-history fa-2x"></i>
+            </span>
+            <span class="hidden-xs hidden-sm">{{ trans('general.orgchart') }}</span>
+          </a>
+        </li>
+
       </ul>
 
       <div class="tab-content">
@@ -997,6 +1008,11 @@
           </table>
           </div>
         </div><!-- /consumables-tab -->
+
+        
+        <div class="tab-pane" id="orgchart">   
+        </div><!-- /orgshart-tab -->
+       
       </div><!-- /.tab-content -->
     </div><!-- nav-tabs-custom -->
   </div>
@@ -1099,6 +1115,44 @@ $(function () {
     });
 });
 </script>
+<script type="text/javascript">
+    $(function() {
+
+    var datasource = {
+      'name': 'Lao Lao',
+      'title': 'general manager',
+      'className': 'top',
+      'children': [
+        { 'name': 'Bo Miao', 'title': 'department manager' , 'className':'bottom'},
+        { 'name': 'Su Miao', 'title': 'department manager' , 'className':'bottom',
+          'children': [
+            { 'name': 'Tie Hua', 'title': 'senior engineer' , 'className':'bottom'},
+            { 'name': 'Hei Hei', 'title': 'senior engineer' , 'className':'bottom',
+              'children': [
+                { 'name': 'Dan Dan', 'title': 'engineer' , 'className':'bottom'}
+              ]
+            },
+            { 'name': 'Pang Pang', 'title': 'senior engineer' , 'className':'bottom'}
+          ]
+        },
+        { 'name': 'Hong Miao', 'title': 'department manager' , 'className':'bottom'}
+      ]
+    };
+
+    $('#orgchart').orgchart({
+      'data' : datasource,
+      'nodeContent': 'title',
+      'visibleLevel' : 3,
+      'exportButton': true,
+      "exportButtonName" : "Export Chart",
+      'direction' : 't2b',
+      'zoom' : true,
+      'pan' : true
+     
+    });
+
+  });
+  </script>
 
 
 @stop

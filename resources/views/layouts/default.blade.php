@@ -31,6 +31,27 @@
 
     {{-- stylesheets --}}
     <link rel="stylesheet" href="{{ url(mix('css/dist/all.css')) }}">
+    <link rel="stylesheet" href="{{ url(('css/jquery.orgchart.css'))}}">
+    <link rel="stylesheet" href="{{ url(('css/style.css'))}}">
+    <style type="text/css">
+    #chart-container { height:  1024px; }
+    .orgchart { background: #fff; padding-bottom:20px;}
+    .orgchart td.left, .orgchart td.right, .orgchart td.top { border-color: #aaa; }
+    .orgchart td>.down { background-color: #aaa; }
+    .orgchart .top .title {background-color: #006699; font-size: 10px; vertical-align: bottom;}
+    .orgchart .top .content {border-color: #006699; min-height: 30px;}
+    .orgchart .bottom .title {background-color:#063970 ;}
+    .orgchart .bottom .content {border-color: #063970; min-height: 30px;}
+        .orgchart .nodes {
+      justify-content: center;
+    }
+    .orgchart .node.top {
+      justify-content: center;
+      align-items: center;
+    }
+ 
+  </style>
+</head>
     @if (($snipeSettings) && ($snipeSettings->allow_user_skin==1) && Auth::check() && Auth::user()->present()->skin != '')
         <link rel="stylesheet" href="{{ url(mix('css/dist/skins/skin-'.Auth::user()->present()->skin.'.min.css')) }}">
     @else
@@ -83,6 +104,8 @@
     <script src="{{ url(asset('js/respond.js')) }}" nonce="{{ csrf_token() }}"></script>
 
     @livewireStyles
+
+
 
 </head>
 
@@ -951,7 +974,12 @@
 
         <!-- v5-beta: This pGenerator call must remain here for v5 - until fixed - so that the JS password generator works for the user create modal. -->
         <script src="{{ url('js/pGenerator.jquery.js') }}"></script>
-
+        
+        <script src="{{ url('js/jquery.min.js')}}"></script>
+        <script src="{{ url('js/jquery.orgchart.js')}}"></script>
+        <script type="text/javascript" src="{{ url('js/es6-promise.auto.min.js')}}"></script>
+        <script type="text/javascript" src="{{ url('js/html2canvas.min.js')}}"></script>
+        <script type="text/javascript" src="{{ url('js/jspdf.umd.min.js')}}"></script>
         {{-- Page level javascript --}}
         @stack('js')
 

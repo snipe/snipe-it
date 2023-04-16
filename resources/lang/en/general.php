@@ -439,4 +439,5 @@ return [
     'setup_migration_output' => 'Migration output:',
     'setup_migration_create_user' => 'Next: Create User',
     'importer_generic_error'    => 'Your file import is complete, but we did receive an error. This is usually caused by third-party API throttling from a notification webhook (such as Slack) and would not have interfered with the import itself, but you should confirm this.',
+    'orgchart'                  => 'Org Chart'
 ];
