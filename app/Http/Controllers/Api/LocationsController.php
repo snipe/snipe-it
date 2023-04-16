@@ -80,20 +80,11 @@ class LocationsController extends Controller
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
         $offset = ($request->input('offset') > $locations->count()) ? $locations->count() : abs($request->input('offset'));
-        $limit = (abs($request->input('limit')) > config('app.max_results')) ? config('app.max_results') : abs($request->input('limit'));
+        $limit = app('api_limit_value');
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
 
-        \Log::debug('Max in env: '.config('app.max_results'));
-        \Log::debug('Original requested offset: '.$request->input('offset'));
-        \Log::debug('Intval offset: '.intval($request->input('offset')));
-        \Log::debug('Modified offset: '.$offset);
-        \Log::debug('Original requested limit: '.$request->input('limit'));
-        \Log::debug('Intval limit: '.intval($request->input('limit')));
-        \Log::debug('Modified limit: '.$limit);
-        \Log::debug('Total results: '.$locations->count());
-        \Log::debug('------------------------------');
 
 
         switch ($request->input('sort')) {
