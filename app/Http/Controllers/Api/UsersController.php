@@ -71,6 +71,7 @@ class UsersController extends Controller
             'users.start_date',
             'users.end_date',
             'users.vip',
+            'users.autoassign_licenses',
 
         ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy',)
             ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count');
@@ -187,6 +188,10 @@ class UsersController extends Controller
             $users->has('accessories', '=', $request->input('accessories_count'));
         }
 
+        if ($request->filled('autoassign_licenses')) {
+            $users->has('autoassign_licenses', '=', $request->input('autoassign_licenses'));
+        }
+
         if ($request->filled('search')) {
             $users = $users->TextSearch($request->input('search'));
         }
@@ -260,6 +265,7 @@ class UsersController extends Controller
                         'vip',
                         'start_date',
                         'end_date',
+                        'autoassign_licenses',
                     ];
 
                 $sort = in_array($request->get('sort'), $allowed_columns) ? $request->get('sort') : 'first_name';
@@ -357,7 +363,7 @@ class UsersController extends Controller
             $user->permissions = $permissions_array;
         }
 
-        $tmp_pass = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 20);
+        $tmp_pass = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 40);
         $user->password = bcrypt($request->get('password', $tmp_pass));
 
         app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
