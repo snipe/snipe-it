@@ -56,8 +56,8 @@ class AssetMaintenancesController extends Controller
 
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $maintenances->count()) ? $maintenances->count() : intval(request('offset'));
-        $limit = ($request->input('limit') > config('app.max_results')) ? config('app.max_results') : max(intval(request('offset')),  config('app.max_results'));
+        $offset = ($request->input('offset') > $maintenances->count()) ? $maintenances->count() : abs($request->input('offset'));
+        $limit = (abs($request->input('limit')) > config('app.max_results')) ? config('app.max_results') : abs($request->input('limit'));
 
         $allowed_columns = [
                                 'id',
