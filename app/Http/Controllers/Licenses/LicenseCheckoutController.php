@@ -150,40 +150,41 @@ class LicenseCheckoutController extends Controller
             \Log::debug('You do not have enough free seats to complete this task, so we will check out as many as we can. ');
         }
 
-        $count = 0;
+        // If the license is valid, check that there is an available seat
+        if ($license->availCount()->count() < 1) {
+            return redirect()->back()->with('error', 'No more available seats');
+        }
+
+        $avail_count = $license->availCount()->count();
+        $assigned_count = 0;
+
         foreach ($users as $user) {
 
-            // Check to make sure this user doesn't already have this license checked out
-            // to them
-
+            // Check to make sure this user doesn't already have this license checked out to them
             if ($user->licenses->where('id', '=', $licenseId)->count()) {
                 \Log::debug($user->username.' already has this license checked out to them. Skipping... ');
                 continue;
             }
 
-            // If the license is valid, check that there is an available seat
-            if ($license->availCount()->count() < 1) {
-                return redirect()->back()->with('error', 'No more available seats');
-            }
-
             $licenseSeat = $license->freeSeat();
 
-            // Update the seat with checkout info,
+            // Update the seat with checkout info
             $licenseSeat->assigned_to = $user->id;
 
             if ($licenseSeat->save()) {
-                $count++;
+                $avail_count--;
+                $assigned_count--;
                 \Log::debug('License seat '.$licenseSeat.' is now assigned to '.$licenseSeat->assigned_to);
                 $licenseSeat->logCheckout('Checked out bulk license checkout in license GUI', $user);
                 \Log::debug('License '.$licenseId.' seat '.$licenseSeat->id.' checked out to '.$user->username);
             }
+
+            if ($avail_count ==  0) {
+                return redirect()->back()->with('warning', $assigned_count.' users were assigned this asset, but we ran out of open seats.');
+            }
         }
 
-        if ($count ==  0) {
-            return redirect()->back()->with('warning', 'No error was encountered, but there were no eligible users to checkout to.');
-        }
-
-        return redirect()->back()->with('success', 'Licenses checked out successfully to '.$count.' users!');
+        return redirect()->back()->with('success', 'Licenses checked out successfully to '.$assigned_count.' users!');
 
     }
 }
