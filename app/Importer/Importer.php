@@ -65,19 +65,22 @@ abstract class Importer
         'email' => 'email',
         'username' => 'username',
         'address' => 'address',
+        'address2' => 'address2',
         'city' => 'city',
         'state' => 'state',
         'country' => 'country',
+        'zip' => 'zip',
         'jobtitle' => 'job title',
         'employee_num' => 'employee number',
         'phone_number' => 'phone number',
         'first_name' => 'first name',
         'last_name' => 'last name',
         'department' => 'department',
-        'manager_first_name' => 'manager first name',
-        'manager_last_name' => 'manager last name',
+        'manager_name' => 'manager full name',
+        'manager_username' => 'manager username',
         'min_amt' => 'minimum quantity',
         'remote' => 'remote',
+        'vip' => 'vip',
     ];
     /**
      * Map of item fields->csv names
@@ -198,11 +201,11 @@ abstract class Importer
         $val = $default;
         $key = $this->lookupCustomKey($key);
 
-        $this->log("Custom Key: ${key}");
+       // $this->log("Custom Key: ${key}");
         if (array_key_exists($key, $array)) {
             $val = Encoding::toUTF8(trim($array[$key]));
         }
-        $this->log("${key}: ${val}");
+        //$this->log("${key}: ${val}");
         return $val;
     }
 
@@ -280,8 +283,9 @@ abstract class Importer
      * @return User Model w/ matching name
      * @internal param array $user_array User details parsed from csv
      */
-    protected function createOrFetchUser($row)
+    protected function createOrFetchUser($row, $type = null)
     {
+
         $user_array = [
             'full_name' => $this->findCsvMatch($row, 'full_name'),
             'email'     => $this->findCsvMatch($row, 'email'),
@@ -292,25 +296,29 @@ abstract class Importer
             'remote'    => $this->fetchHumanBoolean(($this->findCsvMatch($row, 'remote'))),
         ];
 
+
+        if ($type == 'manager') {
+            \Log::debug('Type = manager');
+            $user_array = [
+                'full_name' => $this->findCsvMatch($row, 'manager'),
+                'username'  => $this->findCsvMatch($row, 'manager_username'),
+            ];
+        }
+
         // Maybe we're lucky and the user already exists.
         if ($user = User::where('username', $user_array['username'])->first()) {
             $this->log('User '.$user_array['username'].' already exists');
-
             return $user;
         }
 
         // If the full name is empty, bail out--we need this to extract first name (at the very least)
         if (empty($user_array['full_name'])) {
-            $this->log('Insufficient user data provided (Full name is required)- skipping user creation, just adding asset');
-
+            $this->log('Insufficient user data provided (Full name is required) - skipping user creation.');
+            \Log::debug(print_r($user_array, true));
+            \Log::debug(print_r($row, true));
             return false;
         }
 
-        // Is the user actually an ID?
-        if ($user = $this->findUserByNumber($user_array['full_name'])) {
-            return $user;
-        }
-        $this->log('User does not appear to be an id with number: '.$user_array['full_name'].'.  Continuing through our processes');
 
         // Populate email if it does not exist.
         if (empty($user_array['email'])) {
