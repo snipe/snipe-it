@@ -122,6 +122,30 @@ class Supplier extends SnipeModel
     }
 
     /**
+     * Establishes the supplier -> component relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v6.1.1]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function components()
+    {
+        return $this->hasMany(\App\Models\Component::class, 'supplier_id');
+    }
+
+    /**
+     * Establishes the supplier -> component relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v6.1.1]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function consumables()
+    {
+        return $this->hasMany(\App\Models\Consumable::class, 'supplier_id');
+    }
+
+    /**
      * Establishes the supplier -> asset maintenances relationship
      *
      * @author A. Gianotto <snipe@snipe.net>
