@@ -557,6 +557,11 @@
   </div>  <!-- /.col -->
 </div> <!-- /.row -->
 
+
+@can('update', \App\Models\License::class)
+  @include ('modals.confirm-action', ['item_type' => 'user', 'item_id' => $user->id])
+@endcan
+
 @can('update', \App\Models\License::class)
   @include ('modals.upload-file', ['item_type' => 'license', 'item_id' => $license->id])
 @endcan
