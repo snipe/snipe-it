@@ -56,6 +56,7 @@ class UsersTransformer
                 'notes'=> e($user->notes),
                 'permissions' => $user->decodePermissions(),
                 'activated' => ($user->activated == '1') ? true : false,
+                'autoassign_licenses' => ($user->autoassign_licenses == '1') ? true : false,
                 'ldap_import' => ($user->ldap_import == '1') ? true : false,
                 'two_factor_enrolled' => ($user->two_factor_active_and_enrolled()) ? true : false,
                 'two_factor_optin' => ($user->two_factor_active()) ? true : false,
