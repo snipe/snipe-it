@@ -90,8 +90,7 @@ class ConsumablesController extends Controller
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
         $offset = ($request->input('offset') > $consumables->count()) ? $consumables->count() : abs($request->input('offset'));
-        $limit = (abs($request->input('limit')) > config('app.max_results')) ? config('app.max_results') : abs($request->input('limit'));
-
+        $limit = app('api_limit_value');
 
         $allowed_columns = ['id', 'name', 'order_number', 'min_amt', 'purchase_date', 'purchase_cost', 'company', 'category', 'model_number', 'item_no', 'manufacturer', 'location', 'qty', 'image'];
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
