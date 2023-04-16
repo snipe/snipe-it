@@ -82,7 +82,7 @@
 
         <div class="tab-pane active" id="details">
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-9">
               <div class="container row-new-striped">
 
                 @if (!is_null($license->company))
@@ -378,8 +378,41 @@
 
               </div> <!-- end row-striped -->
             </div>
-            </div>
-          </div> <!-- end tab-pane -->
+
+          <div class="col-md-3">
+
+            @can('update', $license)
+              <a href="{{ route('licenses.edit', $license->id) }}" class="btn btn-block btn-default" style="margin-bottom: 10px;">{{ trans('admin/licenses/general.edit') }}</a>
+              <a href="{{ route('clone/license', $license->id) }}" class="btn btn-block btn-default" style="margin-bottom: 10px;">{{ trans('admin/licenses/general.clone') }}</a>
+            @endcan
+
+              @can('checkout', $license)
+                @if ($license->availCount()->count() > 0)
+                  <a href="{{ route('licenses.checkout', $license->id) }}" class="btn-block btn bg-maroon" style="margin-bottom: 10px;">Checkout</a>
+                  <a href="{{ route('licenses.edit', $license->id) }}" class="btn-block btn bg-maroon" style="margin-bottom: 10px;">Checkout Remaining to All Users</a>
+                @else
+                    <a href="{{ route('licenses.checkout', $license->id) }}" class="btn btn-block bg-maroon disabled" style="margin-bottom: 10px;">Checkout</a>
+                    <a href="{{ route('licenses.edit', $license->id) }}" class="btn btn-block bg-maroon disabled" style="margin-bottom: 10px;">Checkout Remaining to All Users</a>
+                @endif
+              @endcan
+
+              @can('checkin', $license)
+                @if (($license->seats - $license->availCount()->count()) > 0 )
+                  <a href="{{ route('licenses.edit', $license->id) }}" class="btn btn-block bg-purple" style="margin-bottom: 10px;">Checkin All</a>
+                @endif
+              @endcan
+
+            @can('delete', $license)
+
+              @if ($license->availCount()->count() == 0)
+                <a href="{{ route('licenses.destroy', $license->id) }}" class="btn btn-block btn-danger" style="margin-bottom: 10px;">{{ trans('general.delete') }}</a>
+              @else
+                <a href="{{ route('licenses.destroy', $license->id) }}" class="btn btn-block btn-danger disabled" style="margin-bottom: 10px;">{{ trans('general.delete') }}</a>
+              @endif
+            @endcan
+          </div>
+          </div>
+       </div> <!-- end tab-pane -->
 
 
 
@@ -555,6 +588,7 @@
       </div> <!-- /.tab-content -->
     </div> <!-- nav-tabs-custom -->
   </div>  <!-- /.col -->
+
 </div> <!-- /.row -->
 
 
