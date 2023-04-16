@@ -34,7 +34,7 @@ class SettingsServiceProvider extends ServiceProvider
         \App::singleton('api_limit_value', function () {
             $limit = config('app.max_results');
 
-            if ((abs(request('limit')) > 0) && (abs(request('limit')) <= config('app.max_results'))) {
+            if ((abs(intval(request('limit'))) > 0) && (abs(request('limit')) <= config('app.max_results'))) {
                 $limit = abs(request('limit'));
             }
             \Log::debug('Max in env: '.config('app.max_results'));
