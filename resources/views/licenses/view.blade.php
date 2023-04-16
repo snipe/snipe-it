@@ -382,25 +382,37 @@
           <div class="col-md-3">
 
             @can('update', $license)
-              <a href="{{ route('licenses.edit', $license->id) }}" class="btn btn-block btn-default" style="margin-bottom: 10px;">{{ trans('admin/licenses/general.edit') }}</a>
-              <a href="{{ route('clone/license', $license->id) }}" class="btn btn-block btn-default" style="margin-bottom: 10px;">{{ trans('admin/licenses/general.clone') }}</a>
+              <a href="{{ route('licenses.edit', $license->id) }}" class="btn btn-block btn-primary" style="margin-bottom: 10px;">{{ trans('admin/licenses/general.edit') }}</a>
+              <a href="{{ route('clone/license', $license->id) }}" class="btn btn-block btn-primary" style="margin-bottom: 25px;">{{ trans('admin/licenses/general.clone') }}</a>
             @endcan
 
-              @can('checkout', $license)
-                @if ($license->availCount()->count() > 0)
-                  <a href="{{ route('licenses.checkout', $license->id) }}" class="btn-block btn bg-maroon" style="margin-bottom: 10px;">Checkout</a>
-                  <a href="{{ route('licenses.edit', $license->id) }}" class="btn-block btn bg-maroon" style="margin-bottom: 10px;">Checkout Remaining to All Users</a>
-                @else
-                    <a href="{{ route('licenses.checkout', $license->id) }}" class="btn btn-block bg-maroon disabled" style="margin-bottom: 10px;">Checkout</a>
-                    <a href="{{ route('licenses.edit', $license->id) }}" class="btn btn-block bg-maroon disabled" style="margin-bottom: 10px;">Checkout Remaining to All Users</a>
-                @endif
-              @endcan
+            @can('checkout', $license)
+              @if ($license->availCount()->count() > 0)
+                <a href="{{ route('licenses.checkout', $license->id) }}" class="btn-block btn bg-maroon" style="margin-bottom: 10px;" data-toggle="tooltip" title="{{ trans('general.checkout') }}">
+                  Checkout
+                </a>
+                <a href="#" class="btn-block btn bg-maroon" style="margin-bottom: 10px;" style="margin-bottom: 10px;" data-toggle="modal" data-tooltip="true"  data-target="#checkoutFromAllModal">Checkout Remaining to All Users</a>
+              @else
+                  <a href="{{ route('licenses.checkout', $license->id) }}" class="btn btn-block bg-maroon disabled">
+                    Checkout
+                  </a>
+                  <a href="#" class="btn btn-block bg-maroon disabled" style="margin-bottom: 10px;">
+                    Checkout Remaining to All Users
+                  </a>
+              @endif
+            @endcan
 
-              @can('checkin', $license)
-                @if (($license->seats - $license->availCount()->count()) > 0 )
-                  <a href="{{ route('licenses.edit', $license->id) }}" class="btn btn-block bg-purple" style="margin-bottom: 10px;">Checkin All</a>
-                @endif
-              @endcan
+            @can('checkin', $license)
+              @if (($license->seats - $license->availCount()->count()) > 0 )
+                <a href="#" class="btn btn-block bg-purple" style="margin-bottom: 10px;" data-toggle="modal" data-tooltip="true"  data-target="#checkinFromAllModal" data-toggle="tooltip" title="Checkin all checked out seats for this license">
+                  Checkin All
+                </a>
+              @else
+                  <a href="#" class="btn btn-block bg-purple disabled" style="margin-bottom: 10px;" data-tooltip="true" data-toggle="tooltip" title="This is disabled because there is nothing to checkin">
+                    Checkin All
+                  </a>
+              @endif
+            @endcan
 
             @can('delete', $license)
 
@@ -592,8 +604,24 @@
 </div> <!-- /.row -->
 
 
-@can('update', \App\Models\License::class)
-  @include ('modals.confirm-action', ['item_type' => 'user', 'item_id' => $user->id])
+@can('checkin', \App\Models\License::class)
+  @include ('modals.confirm-action',
+        [
+            'modal_name' => 'checkinFromAllModal',
+            'route' => route('licenses.bulkcheckin', $license->id),
+            'title' => trans('general.license_checkin_all_confirm_modal_header'),
+            'body' => trans_choice('general.license_checkin_all_confirm_modal_body', 2, ['count' => ($license->seats - $license->availCount()->count())])
+        ])
+@endcan
+
+@can('checkout', \App\Models\License::class)
+  @include ('modals.confirm-action',
+        [
+            'modal_name' => 'checkoutFromAllModal',
+            'route' => route('licenses.bulkcheckout', $license->id),
+            'title' => trans('general.license_checkout_all_confirm_modal_header'),
+            'body' => trans_choice('general.license_checkout_all_confirm_modal_body', 2, ['count' => $license->availCount()->count()])
+        ])
 @endcan
 
 @can('update', \App\Models\License::class)
