@@ -200,8 +200,8 @@ class AssetsController extends Controller
         $request->filled('order_number') ? $assets = $assets->where('assets.order_number', '=', e($request->get('order_number'))) : '';
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $assets->count()) ? $assets->count() : intval(request('offset'));
-        $limit = ($request->input('limit') > config('app.max_results')) ? config('app.max_results') : max(intval(request('offset')),  config('app.max_results'));
+        $offset = ($request->input('offset') > $assets->count()) ? $assets->count() : abs($request->input('offset'));
+        $limit = (abs($request->input('limit')) > config('app.max_results')) ? config('app.max_results') : abs($request->input('limit'));
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 

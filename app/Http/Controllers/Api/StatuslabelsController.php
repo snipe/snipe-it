@@ -51,8 +51,8 @@ class StatuslabelsController extends Controller
         }
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $statuslabels->count()) ? $statuslabels->count() : intval(request('offset'));
-        $limit = ($request->input('limit') > config('app.max_results')) ? config('app.max_results') : max(intval(request('offset')),  config('app.max_results'));
+        $offset = ($request->input('offset') > $statuslabels->count()) ? $statuslabels->count() : abs($request->input('offset'));
+        $limit = (abs($request->input('limit')) > config('app.max_results')) ? config('app.max_results') : abs($request->input('limit'));
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
