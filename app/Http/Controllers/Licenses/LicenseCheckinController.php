@@ -112,4 +112,19 @@ class LicenseCheckinController extends Controller
         // Redirect to the license page with error
         return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.checkin.error'));
     }
+
+    /**
+     * Bulk checkin all license seats
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see LicenseCheckinController::create() method that provides the form view
+     * @since [v6.1.1]
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+
+    public function bulkCheckin() {
+
+    }
+
 }
