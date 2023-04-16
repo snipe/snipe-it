@@ -122,7 +122,8 @@
         @endcan
 
         @can('update', \App\Models\User::class)
-          <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal">
+          <li class="pull-right">
+              <a href="#" data-toggle="modal" data-target="#uploadFileModal">
               <span class="hidden-xs"><i class="fas fa-paperclip" aria-hidden="true"></i></span>
               <span class="hidden-lg hidden-md hidden-xl"><i class="fas fa-paperclip fa-2x" aria-hidden="true"></i></span>
               <span class="hidden-xs hidden-sm">{{ trans('button.upload') }}</span>
