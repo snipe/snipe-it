@@ -1121,21 +1121,26 @@ $(function () {
     var datasource = {
       'name': 'Lao Lao',
       'title': 'general manager',
-      'className': 'top',
+      'className': 'bottom',
       'children': [
-        { 'name': 'Bo Miao', 'title': 'department manager' , 'className':'bottom'},
-        { 'name': 'Su Miao', 'title': 'department manager' , 'className':'bottom',
+        { 'name': 'Bo Miao', 'title': 'department manager', 'className': 'bottom' },
+        { 'name': 'Su Miao', 'title': 'department manager', 'className': 'bottom',
           'children': [
-            { 'name': 'Tie Hua', 'title': 'senior engineer' , 'className':'bottom'},
-            { 'name': 'Hei Hei', 'title': 'senior engineer' , 'className':'bottom',
+            { 'name': 'Tie Hua', 'title': 'senior engineer' ,'className': 'bottom'},
+            { 'name': 'Hei Hei', 'title': 'senior engineer','className': 'bottom',
               'children': [
-                { 'name': 'Dan Dan', 'title': 'engineer' , 'className':'bottom'}
+                { 'name': 'Pang Pang', 'title': 'engineer','className': 'bottom' },
+                { 'name': 'Xiang Xiang', 'title': 'UE engineer','className': 'bottom' }
               ]
-            },
-            { 'name': 'Pang Pang', 'title': 'senior engineer' , 'className':'bottom'}
+            }
           ]
         },
-        { 'name': 'Hong Miao', 'title': 'department manager' , 'className':'bottom'}
+        { 'name': 'Yu Jie', 'title': 'department manager' ,'className': 'bottom'},
+        { 'name': 'Yu Li', 'title': 'department manager' ,'className': 'bottom'},
+        { 'name': 'Hong Miao', 'title': 'department manager' ,'className': 'bottom'},
+        { 'name': 'Yu Wei', 'title': 'department manager' ,'className': 'bottom'},
+        { 'name': 'Chun Miao', 'title': 'department manager' ,'className': 'bottom'},
+        { 'name': 'Yu Tie', 'title': 'department manager' ,'className': 'bottom'}
       ]
     };
 
