@@ -123,7 +123,25 @@ class LicenseCheckinController extends Controller
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
 
-    public function bulkCheckin() {
+    public function bulkCheckin(Request $request, $licenseId) {
+
+        $license = License::findOrFail($licenseId);
+        $this->authorize('checkin', $license);
+
+        $licenseSeats = LicenseSeat::where('license_id', '=', $licenseId)
+            ->whereNotNull('assigned_to')
+            ->with('user')
+            ->get();
+
+        foreach ($licenseSeats as $seat) {
+            $seat->assigned_to = null;
+
+            if ($seat->save()) {
+                $seat->logCheckin($seat->user, 'Checked in via bulk checkin on license page');
+            }
+        }
+
+        return redirect()->back()->with('success', 'All licenses checked in successfully!');
 
     }
 
