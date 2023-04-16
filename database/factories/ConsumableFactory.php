@@ -8,6 +8,7 @@ use App\Models\Consumable;
 use App\Models\Manufacturer;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Supplier;
 
 class ConsumableFactory extends Factory
 {
@@ -36,6 +37,7 @@ class ConsumableFactory extends Factory
             'qty' => $this->faker->numberBetween(5, 10),
             'min_amt' => $this->faker->numberBetween($min = 1, $max = 2),
             'company_id' => Company::factory(),
+            'supplier_id' => Supplier::factory(),
         ];
     }
 
