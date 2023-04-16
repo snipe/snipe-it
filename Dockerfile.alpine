@@ -1,34 +1,34 @@
-FROM alpine:3.14.2
+FROM alpine:3.17.3
 # Apache + PHP
 RUN  apk add --no-cache \
         apache2 \
-        php7 \
-        php7-common \
-        php7-apache2 \
-        php7-curl \
-        php7-ldap \
-        php7-mysqli \
-        php7-gd \
-        php7-xml \
-        php7-mbstring \
-        php7-zip \
-        php7-ctype \
-        php7-tokenizer \
-        php7-pdo_mysql \
-        php7-openssl \
-        php7-bcmath \
-        php7-phar \
-        php7-json \
-        php7-iconv \
-        php7-fileinfo \
-        php7-simplexml \
-        php7-session \
-        php7-dom \
-        php7-xmlwriter \
-        php7-xmlreader \
-        php7-sodium \
-        php7-redis \
-        php7-pecl-memcached \
+        php81 \
+        php81-common \
+        php81-apache2 \
+        php81-curl \
+        php81-ldap \
+        php81-mysqli \
+        php81-gd \
+        php81-xml \
+        php81-mbstring \
+        php81-zip \
+        php81-ctype \
+        php81-tokenizer \
+        php81-pdo_mysql \
+        php81-openssl \
+        php81-bcmath \
+        php81-phar \
+        php81-json \
+        php81-iconv \
+        php81-fileinfo \
+        php81-simplexml \
+        php81-session \
+        php81-dom \
+        php81-xmlwriter \
+        php81-xmlreader \
+        php81-sodium \
+        php81-redis \
+        php81-pecl-memcached \
         curl \
         wget \
         vim \
@@ -41,7 +41,7 @@ COPY docker/column-statistics.cnf /etc/mysql/conf.d/column-statistics.cnf
 # Where apache's PID lives
 RUN mkdir -p /run/apache2 && chown apache:apache /run/apache2
 
-RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php7/php.ini
+RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php81/php.ini
 COPY  docker/000-default-2.4.conf /etc/apache2/conf.d/default.conf
 
 # Enable mod_rewrite
