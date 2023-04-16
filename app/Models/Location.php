@@ -30,7 +30,7 @@ class Location extends SnipeModel
         'country'       => 'min:2|max:255|nullable',
         'address'       => 'max:80|nullable',
         'address2'      => 'max:80|nullable',
-        'zip'           => 'min:3|max:10|nullable',
+        'zip'           => 'min:3|max:12|nullable',
         'manager_id'    => 'exists:users,id|nullable',
         'parent_id'     => 'non_circular:locations,id',
     ];
