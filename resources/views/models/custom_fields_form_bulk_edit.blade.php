@@ -1,23 +1,21 @@
 @php
+//set array up before loop so it doesn't get wiped at every iteration
     $fields = [];
-    $modelNames = [];
-    foreach($models as $model) {
-        $modelNames[] = $model->name;
-    }
 @endphp
 @foreach($models as $model)
 @if (($model) && ($model->fieldset))
     @foreach($model->fieldset->fields AS $field)
-
-    @php
-        if (in_array($field->db_column_name(), $fields)) {
-            $duplicate = true;
-            continue; 
-        } else {
-            $duplicate = false;
-        }
-        $fields[] = $field->db_column_name(); 
-    @endphp
+        @php
+        //prevents some duplicate queries - open to a better way of skipping dupes in output
+        //its ugly, but if we'd rather deal with duplicate queries we can get rid of this. 
+            if (in_array($field->db_column_name(), $fields)) {
+                $duplicate = true;
+                continue; 
+            } else {
+                $duplicate = false;
+            }
+            $fields[] = $field->db_column_name(); 
+        @endphp
 
     <div class="form-group{{ $errors->has($field->db_column_name()) ? ' has-error' : '' }}">
       <label for="{{ $field->db_column_name() }}" class="col-md-3 control-label">{{ $field->name }} </label>

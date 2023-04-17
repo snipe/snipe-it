@@ -50,6 +50,10 @@ class BulkAssetsController extends Controller
         })->get();
 
         $models = $asset_custom_field->unique('model_id');  
+        $modelNames = [];
+    foreach($models as $model) {
+        $modelNames[] = $model->name;
+    } 
 
        ray($asset_custom_field); 
         ray($models);
@@ -93,7 +97,8 @@ class BulkAssetsController extends Controller
                         ->with('assets', $asset_ids)
                         ->with('statuslabel_list', Helper::statusLabelList())
                         // ->with('custom_fields', $custom_fields)
-                        ->with('models', $models->pluck('model')); 
+                        ->with('models', $models->pluck('model')) 
+                        ->with('modelNames', $modelNames);
             }
         }
 
