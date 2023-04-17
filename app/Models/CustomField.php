@@ -181,8 +181,6 @@ class CustomField extends Model
     public function assetModels()
     {
        return $this->fieldset()->with('models')->get()->pluck('models')->flatten()->unique('id'); 
-       
-        // return $this->models->where(, AssetModel::class);
     }
 
     /**
