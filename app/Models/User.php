@@ -73,12 +73,17 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'location_id'  => 'integer',
         'company_id'   => 'integer',
         'vip'      => 'boolean',
-        'created_at'   => 'datetime',
-        'updated_at'   => 'datetime',
-        'deleted_at'   => 'datetime',
-        'start_date'   => 'datetime:Y-m-d',
-        'end_date'     => 'datetime:Y-m-d',
     ];
+
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'start_date' => 'date_format:Y-m-d',
+        'end_date' => 'date_format:Y-m-d',
+    ];
+
 
     /**
      * Model validation rules
@@ -117,7 +122,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
 
     /**
      * The relations and their attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableRelations = [
@@ -267,7 +272,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
         // At this point the endpoint is the same for everything.
         //  In the future this may want to be adapted for individual notifications.
-        $this->endpoint = \App\Models\Setting::getSettings()->webhook_endpoint;
+        $this->endpoint = \App\Models\Setting::getSettings()->slack_endpoint;
 
         return $this->endpoint;
     }
@@ -349,11 +354,11 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         $licensesCount = $this->licenses()->count();
         $accessoriesCount = $this->accessories()->count();
         $consumablesCount = $this->consumables()->count();
-        
+
         $totalCount = $assetsCount + $licensesCount + $accessoriesCount + $consumablesCount;
-    
+
         return (int) $totalCount;
-        }
+    }
 
     /**
      * Establishes the user -> actionlogs relationship
@@ -507,7 +512,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
 
     /**
      * Generate email from full name
-     * 
+     *
      * @author A. Gianotto <snipe@snipe.net>
      * @since [v2.0]
      *
@@ -555,7 +560,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
                 $username = str_slug($first_name).str_slug($last_name);
             } elseif ($format == 'firstnamelastinitial') {
                 $username = str_slug(($first_name.substr($last_name, 0, 1)));
-              }
+            }
         }
 
         $user['first_name'] = $first_name;
@@ -652,9 +657,9 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function scopeSimpleNameSearch($query, $search)
     {
-           $query = $query->where('first_name', 'LIKE', '%'.$search.'%')
-               ->orWhere('last_name', 'LIKE', '%'.$search.'%')
-               ->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%{$search}%"]);
+        $query = $query->where('first_name', 'LIKE', '%'.$search.'%')
+            ->orWhere('last_name', 'LIKE', '%'.$search.'%')
+            ->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%{$search}%"]);
 
         return $query;
     }

@@ -850,13 +850,11 @@
                 </section>
 
             </div><!-- /.content-wrapper -->
-
-            @if($snipeSettings->footer_text!='')
-                <footer class="main-footer hidden-print" style="height:100px;">
+            @if ($snipeSettings->footer_text!='')
+                <footer class="main-footer hidden-print" style="display:flex;flex-direction:row;" >
             @else
                 <footer class="main-footer hidden-print">
             @endif
-
                 <div class="pull-right hidden-xs">
                     @if ($snipeSettings->version_footer!='off')
                         @if (($snipeSettings->version_footer=='on') || (($snipeSettings->version_footer=='admin') && (Auth::user()->isSuperUser()=='1')))
@@ -884,7 +882,7 @@
 
                 </div>
                 @if ($snipeSettings->footer_text!='')
-                    <div class="pull-right">
+                    <div class="pull-right" style="display: flex;flex-direction: row;">
                         {!!  Helper::parseEscapedMarkedown($snipeSettings->footer_text)  !!}
                     </div>
                 @endif
