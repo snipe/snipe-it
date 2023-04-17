@@ -93,7 +93,7 @@ class CategoriesController extends Controller
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
         $offset = ($request->input('offset') > $categories->count()) ? $categories->count() : abs($request->input('offset'));
-        $limit = (abs($request->input('limit')) > config('app.max_results')) ? config('app.max_results') : abs($request->input('limit'));
+        $limit = app('api_limit_value');
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'assets_count';
