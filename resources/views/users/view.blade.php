@@ -10,7 +10,7 @@
 @section('content')
 
 
-
+{{dd($user);}}
 <div class="row">
   <div class="col-md-12">
     <div class="nav-tabs-custom">
@@ -1119,10 +1119,13 @@ $(function () {
     $(function() {
 
     var datasource = {
-      'name': 'Lao Lao',
-      'title': 'general manager',
+      'name': "{{($user->first_name)}} {{($user->last_name)}}",
+      'title': '{{($user->jobtitle)}}',
       'className': 'bottom',
       'children': [
+        @foreach( $user->orglist as $plaza)
+        {{ $plaza['capmax'] }}<br/>
+        @endforeach
         { 'name': 'Bo Miao', 'title': 'department manager', 'className': 'bottom' },
         { 'name': 'Su Miao', 'title': 'department manager', 'className': 'bottom',
           'children': [

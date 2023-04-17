@@ -18,6 +18,7 @@ use Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\DB;
 use Input;
 use Redirect;
 use Str;
@@ -421,6 +422,17 @@ class UsersController extends Controller
 
         $this->authorize('view', $user);
 
+        $show_user_org =DB::table('users')
+                ->select('first_name', 'last_name')
+                ->where('manager_id', '=', $userId)              
+                ->get();
+       
+        $user_member = collect([]);
+        foreach ($show_user_org as $user_orgs) {
+            $user_member->add('{name:'.' '.$user_orgs->first_name.' '.$user_orgs->last_name.'}');
+        }
+
+        $user->orglist = $user_member;
         return view('users/view', compact('user', 'userlog'))
             ->with('settings', Setting::getSettings());
     }
@@ -670,5 +682,18 @@ class UsersController extends Controller
         }
 
         return redirect()->back()->with('error', 'User is not activated, is LDAP synced, or does not have an email address ');
+    }
+
+    /**
+     * get user org list with input user ID is the manager
+     *
+     * @author A. Rahardianto
+     * @since [v6.1.0]
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getUserOrg($id)
+    {
+
+        return response()->json(Helper::formatStandardApiResponse('error', null, $assetMaintenance->getErrors()));
     }
 }
