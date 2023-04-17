@@ -76,6 +76,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'created_at'   => 'datetime',
         'updated_at'   => 'datetime',
         'deleted_at'   => 'datetime',
+        'start_date'   => 'datetime:Y-m-d',
+        'end_date'     => 'datetime:Y-m-d',
     ];
 
     /**
