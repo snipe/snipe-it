@@ -93,7 +93,7 @@
   top: -11px;
   left: 0;
   width: 100%;
-  border-top: 2px solid #450099;
+  border-top: 2px solid var(--header);
   box-sizing: border-box;
 }
 
@@ -136,7 +136,7 @@
   left: calc(50% - 1px);
   width: 2px;
   height: 9px;
-  background-color: #450099;
+  background-color: var(--header);
 }
 
 .orgchart ul li .node.allowedDrop {
@@ -159,7 +159,7 @@
   left: calc(50% - 1px);
   width: 2px;
   height: var(--height, 9px);
-  background-color: #450099;
+  background-color: var(--header);
 }
 
 .orgchart > ul > li > ul li.isSiblingsCollapsed > .node::before {
@@ -236,7 +236,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  background-color: #450099;
+  background-color: var(--header);
   color: #fff;
   border-radius: 4px 4px 0 0; 
 }
@@ -264,7 +264,7 @@
 
 .orgchart .node .title .symbol::before {
   background-color: #fff;
-  border-color: #450099;
+  border-color: var(--header);
 }
 
 .orgchart .node .title .symbol::after {
@@ -273,12 +273,12 @@
 
 .orgchart .node .content {
   box-sizing: border-box;
-  padding: 5px;
+  padding: 2px;
   padding-bottom: 5px;
   min-height: 30px;
   height: 30px;
   font-size: 12px;
-  border: 1px solid #450099;
+  border: 1px solid var(--header);
   border-radius: 0 0 4px 4px;
   text-align: center;
   background-color: #fff;
@@ -502,7 +502,7 @@
   content: '';
   position: absolute;
   left: -6px;
-  border-color: #450099;
+  border-color: var(--header);
   border-style: solid;
   border-width: 0 0 2px 2px;
 }
