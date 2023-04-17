@@ -37,10 +37,6 @@
     #chart-container { height:  1024px; }
     .orgchart { background: #fff; padding-bottom:20px;}
     .orgchart td.left, .orgchart td.right, .orgchart td.top { border-color: #aaa; }
-    .orgchart .top .title {background-color: #006699; font-size: 10px; vertical-align: bottom;}
-    .orgchart .top .content {border-color: #006699; min-height: 30px;}
-    .orgchart .bottom .title {background-color:#063970 ;}
-    .orgchart .bottom .content {border-color: #063970; min-height: 30px;}
         .orgchart .nodes {
       justify-content: center;
     }

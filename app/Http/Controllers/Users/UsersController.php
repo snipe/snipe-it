@@ -422,7 +422,34 @@ class UsersController extends Controller
 
         $this->authorize('view', $user);
 
-        $show_user_org =DB::table('users')
+        $current_manager_id = DB::table('users')
+                ->select('manager_id')
+                ->where('id', '=', $userId)
+                ->first();
+        // dd($current_manager_id->manager_id);
+        if ($current_manager_id->manager_id !== null){
+            $manager = DB::table('users')
+                    ->select('first_name', 'last_name', 'jobtitle')
+                    ->where('id', '=', $current_manager_id->manager_id)              
+                    ->get();
+            $user_manager = collect([]);
+            $user_manager -> add([
+                'name' => $manager->first_name." ".$manager->last_name,
+                'title' => $manager->jobtitle
+            ]);
+        } else {
+            $cur_user = DB::table('users')
+                ->select('first_name', 'last_name', 'jobtitle')
+                ->where('id', '=', $userId)              
+                ->first();
+            $user_manager = collect([]);
+            $user_manager -> add([
+                'name' => $cur_user->first_name." ".$cur_user->last_name,
+                'title' => $cur_user->jobtitle
+            ]);
+        }
+
+        $show_user_org = DB::table('users')
                 ->select('first_name', 'last_name', 'jobtitle')
                 ->where('manager_id', '=', $userId)              
                 ->get();
@@ -431,11 +458,10 @@ class UsersController extends Controller
         foreach ($show_user_org as $user_orgs) {
             $user_member->add([
             'name' => $user_orgs->first_name." ".$user_orgs->last_name,
-            'title' => $user_orgs->jobtitle,
-            'className' =>'bottom'
+            'title' => $user_orgs->jobtitle
             ]);
         }
-
+        $user->toplist = $user_manager->toJson();
         $user->orglist = $user_member->toJson();
         return view('users/view', compact('user', 'userlog'))
             ->with('settings', Setting::getSettings());

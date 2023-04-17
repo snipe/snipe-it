@@ -1010,7 +1010,7 @@
         </div><!-- /consumables-tab -->
 
         
-        <div class="tab-pane" id="orgchart">   
+        <div class="tab-pane" id="orgchart" style="overflow: hidden;text-align: center;">   
         </div><!-- /orgshart-tab -->
        
       </div><!-- /.tab-content -->
@@ -1119,19 +1119,24 @@ $(function () {
     
     
     $(function() {   
+    var toplist = {!! $user->toplist !!};
+    var topArr = toplist.map(function(top) {
+        return {
+            name: top.name,
+            title: top.title
+        };
+    });
     var orglist = {!! $user->orglist !!};
     var orgsArr = orglist.map(function(org) {
         return {
             name: org.name,
-            title: org.title,
-            className: org.className
+            title: org.title
         };
     });
         
     var datasource = {
-      'name': "{{($user->first_name)}} {{($user->last_name)}}",
-      'title': '{{($user->jobtitle)}}',
-      'className': 'bottom',
+      'name': topArr[0].name,
+      'title': topArr[0].title,
       'children': orgsArr
     };
 

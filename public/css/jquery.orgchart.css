@@ -93,7 +93,7 @@
   top: -11px;
   left: 0;
   width: 100%;
-  border-top: 2px solid #4f63d9cc;
+  border-top: 2px solid #450099;
   box-sizing: border-box;
 }
 
@@ -136,7 +136,7 @@
   left: calc(50% - 1px);
   width: 2px;
   height: 9px;
-  background-color: #4f63d9cc;
+  background-color: #450099;
 }
 
 .orgchart ul li .node.allowedDrop {
@@ -159,7 +159,7 @@
   left: calc(50% - 1px);
   width: 2px;
   height: var(--height, 9px);
-  background-color: #4f63d9cc;
+  background-color: #450099;
 }
 
 .orgchart > ul > li > ul li.isSiblingsCollapsed > .node::before {
@@ -227,16 +227,16 @@
 
 .orgchart .node .title {
   box-sizing: border-box;
-  padding: 2px;
-  width: 130px;
+  padding: 5px;
+  width: 200px;
   text-align: center;
-  font-size: 0.75rem;
+  font-size: 12px;
   font-weight: bold;
-  height: 20px;
+  height: 30px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  background-color: #4f63d9cc;
+  background-color: #450099;
   color: #fff;
   border-radius: 4px 4px 0 0; 
 }
@@ -259,12 +259,12 @@
 .orgchart .node .title .symbol {
   float: left;
   margin-top: 12px;
-  margin-left: 2px;
+  margin-left: 10px;
 }
 
 .orgchart .node .title .symbol::before {
   background-color: #fff;
-  border-color: #4f63d9cc;
+  border-color: #450099;
 }
 
 .orgchart .node .title .symbol::after {
@@ -273,10 +273,12 @@
 
 .orgchart .node .content {
   box-sizing: border-box;
-  padding: 2px;
-  height: 20px;
-  font-size: 0.625rem;
-  border: 1px solid #4f63d9cc;
+  padding: 5px;
+  padding-bottom: 5px;
+  min-height: 30px;
+  height: 30px;
+  font-size: 12px;
+  border: 1px solid #450099;
   border-radius: 0 0 4px 4px;
   text-align: center;
   background-color: #fff;
@@ -500,7 +502,7 @@
   content: '';
   position: absolute;
   left: -6px;
-  border-color: #4f63d9cc;
+  border-color: #450099;
   border-style: solid;
   border-width: 0 0 2px 2px;
 }
