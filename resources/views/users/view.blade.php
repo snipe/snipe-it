@@ -10,7 +10,7 @@
 @section('content')
 
 
-{{dd($user);}}
+
 <div class="row">
   <div class="col-md-12">
     <div class="nav-tabs-custom">
@@ -1116,35 +1116,23 @@ $(function () {
 });
 </script>
 <script type="text/javascript">
-    $(function() {
-
+    
+    
+    $(function() {   
+    var orglist = {!! $user->orglist !!};
+    var orgsArr = orglist.map(function(org) {
+        return {
+            name: org.name,
+            title: org.title,
+            className: org.className
+        };
+    });
+        
     var datasource = {
       'name': "{{($user->first_name)}} {{($user->last_name)}}",
       'title': '{{($user->jobtitle)}}',
       'className': 'bottom',
-      'children': [
-        @foreach( $user->orglist as $plaza)
-        {{ $plaza['capmax'] }}<br/>
-        @endforeach
-        { 'name': 'Bo Miao', 'title': 'department manager', 'className': 'bottom' },
-        { 'name': 'Su Miao', 'title': 'department manager', 'className': 'bottom',
-          'children': [
-            { 'name': 'Tie Hua', 'title': 'senior engineer' ,'className': 'bottom'},
-            { 'name': 'Hei Hei', 'title': 'senior engineer','className': 'bottom',
-              'children': [
-                { 'name': 'Pang Pang', 'title': 'engineer','className': 'bottom' },
-                { 'name': 'Xiang Xiang', 'title': 'UE engineer','className': 'bottom' }
-              ]
-            }
-          ]
-        },
-        { 'name': 'Yu Jie', 'title': 'department manager' ,'className': 'bottom'},
-        { 'name': 'Yu Li', 'title': 'department manager' ,'className': 'bottom'},
-        { 'name': 'Hong Miao', 'title': 'department manager' ,'className': 'bottom'},
-        { 'name': 'Yu Wei', 'title': 'department manager' ,'className': 'bottom'},
-        { 'name': 'Chun Miao', 'title': 'department manager' ,'className': 'bottom'},
-        { 'name': 'Yu Tie', 'title': 'department manager' ,'className': 'bottom'}
-      ]
+      'children': orgsArr
     };
 
     $('#orgchart').orgchart({

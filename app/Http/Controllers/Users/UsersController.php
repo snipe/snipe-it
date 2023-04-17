@@ -423,16 +423,20 @@ class UsersController extends Controller
         $this->authorize('view', $user);
 
         $show_user_org =DB::table('users')
-                ->select('first_name', 'last_name')
+                ->select('first_name', 'last_name', 'jobtitle')
                 ->where('manager_id', '=', $userId)              
                 ->get();
        
         $user_member = collect([]);
         foreach ($show_user_org as $user_orgs) {
-            $user_member->add('{name:'.' '.$user_orgs->first_name.' '.$user_orgs->last_name.'}');
+            $user_member->add([
+            'name' => $user_orgs->first_name." ".$user_orgs->last_name,
+            'title' => $user_orgs->jobtitle,
+            'className' =>'bottom'
+            ]);
         }
 
-        $user->orglist = $user_member;
+        $user->orglist = $user_member->toJson();
         return view('users/view', compact('user', 'userlog'))
             ->with('settings', Setting::getSettings());
     }
