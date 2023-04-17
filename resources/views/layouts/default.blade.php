@@ -851,11 +851,11 @@
 
             </div><!-- /.content-wrapper -->
             @if ($snipeSettings->footer_text!='')
-                <footer class="main-footer hidden-print" style="display:flex;flex-direction:row;" >
+                <footer class="main-footer hidden-print" style="display:grid;flex-direction:row;" >
             @else
                 <footer class="main-footer hidden-print">
             @endif
-                <div class="pull-right hidden-xs">
+                <div class="pull-text-right hidden-xs">
                     @if ($snipeSettings->version_footer!='off')
                         @if (($snipeSettings->version_footer=='on') || (($snipeSettings->version_footer=='admin') && (Auth::user()->isSuperUser()=='1')))
                             &nbsp; <strong>Version</strong> {{ config('version.app_version') }} -
@@ -876,21 +876,20 @@
                     @if ($snipeSettings->privacy_policy_link!='')
                         <a target="_blank" class="btn btn-default btn-xs" rel="noopener"
                            href="{{  $snipeSettings->privacy_policy_link }}"
-                           target="_new">{{ trans('admin/settings/general.privacy_policy') }}</a>
+                           target="_new" >{{ trans('admin/settings/general.privacy_policy') }}</a>
                     @endif
-
-
+                made with <i class="fas fa-heart" style="color: #a94442; font-size: 10px" aria-hidden="true"></i><span
+                        class="sr-only">love</span> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a>.
                 </div>
+                <div class="pull-text-right"><a target="_blank" href="https://snipeitapp.com" rel="noopener">Snipe-IT</a> is open source software,</div>
                 @if ($snipeSettings->footer_text!='')
-                    <div class="pull-right" style="display: flex;flex-direction: row;">
+                    <div  style="flex-direction: row;">
                         {!!  Helper::parseEscapedMarkedown($snipeSettings->footer_text)  !!}
                     </div>
                 @endif
+                    <br>
 
 
-                <a target="_blank" href="https://snipeitapp.com" rel="noopener">Snipe-IT</a> is open source software,
-                made with <i class="fas fa-heart" style="color: #a94442; font-size: 10px" aria-hidden="true"></i><span
-                        class="sr-only">love</span> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a>.
             </footer>
 
 
