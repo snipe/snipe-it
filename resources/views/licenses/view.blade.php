@@ -56,21 +56,7 @@
             <span class="hidden-xs hidden-sm">{{ trans('general.history') }}</span>
           </a>
         </li>
-
-    
-        @can('update', $license)
-          <li class="dropdown pull-right">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="fas fa-cog" aria-hidden="true"></i> {{ trans('button.actions') }}
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="{{ route('licenses.edit', $license->id) }}">{{ trans('admin/licenses/general.edit') }}</a></li>
-              <li><a href="{{ route('clone/license', $license->id) }}">{{ trans('admin/licenses/general.clone') }}</a></li>
-            </ul>
-          </li>
-        @endcan
-
+        
         @can('update', \App\Models\License::class)
           <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal">
               <i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}</a>
@@ -392,7 +378,7 @@
                 <a href="{{ route('licenses.checkout', $license->id) }}" class="btn-block btn bg-maroon" style="margin-bottom: 10px;">
                   {{ trans('general.checkout') }}
                 </a>
-                <a href="#" class="btn-block btn bg-maroon" style="margin-bottom: 25px;" data-toggle="modal" data-tooltip="true" title="{{ trans('admin/licenses/general.bulk.checkout_all.enabled_tooltip') }}" data-target="#checkoutFromAllModal">
+                <a href="#" class="btn-block btn bg-maroon" style="margin-bottom: 10px;" data-toggle="modal" data-tooltip="true" title="{{ trans('admin/licenses/general.bulk.checkout_all.enabled_tooltip') }}" data-target="#checkoutFromAllModal">
                   {{ trans('admin/licenses/general.bulk.checkout_all.button') }}
                 </a>
 
@@ -401,7 +387,7 @@
                     {{ trans('general.checkout') }}
                   </a>
                   <span data-tooltip="true" title=" {{ trans('admin/licenses/general.bulk.checkout_all.disabled_tooltip') }}">
-                    <a href="#" class="btn btn-block bg-maroon disabled" style="margin-bottom: 25px;" data-tooltip="true" title="{{ trans('general.checkout') }}">
+                    <a href="#" class="btn btn-block bg-maroon disabled" style="margin-bottom: 10px;" data-tooltip="true" title="{{ trans('general.checkout') }}">
                       {{ trans('admin/licenses/general.bulk.checkout_all.button') }}
                     </a>
                   </span>
@@ -411,12 +397,12 @@
             @can('checkin', $license)
 
               @if (($license->seats - $license->availCount()->count()) > 0 )
-                <a href="#" class="btn btn-block bg-purple" style="margin-bottom: 10px;" data-toggle="modal" data-tooltip="true"  data-target="#checkinFromAllModal" title="{{ trans('admin/licenses/general.bulk.checkin_all.enabled_tooltip') }}">
+                <a href="#" class="btn btn-block bg-purple" style="margin-bottom: 25px;" data-toggle="modal" data-tooltip="true"  data-target="#checkinFromAllModal" title="{{ trans('admin/licenses/general.bulk.checkin_all.enabled_tooltip') }}">
                   {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
                 </a>
               @else
                   <span data-tooltip="true" title=" {{ trans('admin/licenses/general.bulk.checkin_all.disabled_tooltip') }}">
-                    <a href="#" class="btn btn-block bg-purple disabled" style="margin-bottom: 10px;">
+                    <a href="#" class="btn btn-block bg-purple disabled" style="margin-bottom: 25px;">
                      {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
                     </a>
                   </span>
