@@ -1011,6 +1011,8 @@
 
         
         <div class="tab-pane" id="orgchart" style="overflow: hidden;text-align: center;">   
+        <div class="table-responsive" id="orgchart_content" >
+        </div>
         </div><!-- /orgshart-tab -->
        
       </div><!-- /.tab-content -->
@@ -1115,8 +1117,7 @@ $(function () {
     });
 });
 </script>
-<script type="text/javascript">
-    
+<script type="text/javascript">    
     
     $(function() {   
     var toplist = {!! $user->toplist !!};
@@ -1141,7 +1142,7 @@ $(function () {
       'children': orgsArr
     };
 
-    $('#orgchart').orgchart({
+    $('#orgchart_content').orgchart({
       'data' : datasource,
       'nodeContent': 'title',
       'visibleLevel' : 3,

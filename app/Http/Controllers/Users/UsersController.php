@@ -426,29 +426,28 @@ class UsersController extends Controller
          * check if current user has a manager or not
          * 
          */
-        $current_manager_id = DB::table('users')
-                ->select('manager_id')
-                ->where('id', '=', $userId)
-                ->first();     
+        $current_manager_id = User::select('manager_id')
+                      ->where('id', $userId)
+                      ->first();
+    
         
         /* if user doesn't have assigned manager, 
          * set this user as the top most position.
          * otherwise set the manager as the top most position
          */        
         if ($current_manager_id->manager_id !== null){
-            $manager = DB::table('users')
-                    ->select('first_name', 'last_name', 'jobtitle')
-                    ->where('id', '=', $current_manager_id->manager_id)              
-                    ->first();
+            $manager = User::select('first_name', 'last_name', 'jobtitle')
+                ->where('id', $current_manager_id->manager_id)
+                ->first();
+
             $user_manager = collect([]);
             $user_manager -> add([
                 'name' => $manager->first_name." ".$manager->last_name,
                 'title' => $manager->jobtitle
             ]);
         } else {
-            $cur_user = DB::table('users')
-                ->select('first_name', 'last_name', 'jobtitle')
-                ->where('id', '=', $userId)              
+            $cur_user = User::select('first_name', 'last_name', 'jobtitle')
+                ->where('id', $userId)
                 ->first();
             $user_manager = collect([]);
             $user_manager -> add([
@@ -462,17 +461,14 @@ class UsersController extends Controller
          * otherwise get current user info
          */
         if ($current_manager_id->manager_id !== null){
-            $show_user_org = DB::table('users')
-                ->select('first_name', 'last_name', 'jobtitle')
-                ->where('id', '=', $userId)              
-                ->get();
-                
+            $show_user_org = User::select('first_name', 'last_name', 'jobtitle')
+                 ->where('id', $userId)
+                 ->get();                
         } else {
-            $show_user_org = DB::table('users')
-                ->select('first_name', 'last_name', 'jobtitle')
-                ->where('manager_id', '=', $userId)
-                ->WhereNull('deleted_at')              
-                ->get();   
+            $show_user_org = User::select('first_name', 'last_name', 'jobtitle')
+                 ->where('manager_id', $userId)
+                 ->whereNull('deleted_at')
+                 ->get();  
                 // dd($show_user_org);         
         }
        

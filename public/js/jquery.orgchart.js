@@ -147,7 +147,11 @@
           that.export();
         }
       });
-      this.$chartContainer.after($exportBtn);
+      // this.$chartContainer.after($exportBtn);
+      var $buttonContainer = $('<div>', {
+        'class': 'button-container',
+      }).appendTo(this.$chartContainer);
+      $buttonContainer.append($exportBtn);
     },
     setOptions: function (opts, val) {
       if (typeof opts === 'string') {

@@ -229,6 +229,8 @@
 .orgchart .node .title {
   box-sizing: border-box;
   padding: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
   width: auto;
   text-align: center;
   font-size: 12px;
@@ -261,6 +263,7 @@
   float: left;
   margin-top: 12px;
   margin-left: 10px;
+  padding-right: 15px;
 }
 
 .orgchart .node .title .symbol::before {
@@ -709,6 +712,11 @@
   border-radius: 0.625rem;
   animation: oci-infinite-spinning .75s linear infinite;
 }
+
+.button-container {
+  text-align: right;
+}
+
 
 @keyframes oci-infinite-spinning {
   from {
