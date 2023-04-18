@@ -4,7 +4,7 @@
     <tbody class="permissions-group">
     <tr class="header-row permissions-row">
       <td class="col-md-5 tooltip-base permissions-item"
-        data-toggle="tooltip"
+        data-tooltip="true"
         data-placement="right"
         title="{{ $localPermission['note'] }}"
       >
@@ -76,7 +76,7 @@
         @if ($permission['display'])
           <td
             class="col-md-5 tooltip-base permissions-item"
-            data-toggle="tooltip"
+            data-tooltip="true"
             data-placement="right"
             title="{{ $permission['note'] }}"
           >

@@ -584,10 +584,10 @@
         </a>
       @else
         <span data-tooltip="true" title=" {{ trans('admin/licenses/general.bulk.checkin_all.disabled_tooltip') }}">
-                    <a href="#" class="btn btn-block bg-purple disabled" style="margin-bottom: 25px;">
-                     {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
-                    </a>
-                  </span>
+            <a href="#" class="btn btn-block bg-purple disabled" style="margin-bottom: 25px;">
+             {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
+            </a>
+          </span>
       @endif
     @endcan
 
@@ -596,7 +596,9 @@
       @if ($license->availCount()->count() == $license->seats)
         <a href="{{ route('licenses.destroy', $license->id) }}" class="btn btn-block btn-danger" style="margin-bottom: 10px;">{{ trans('general.delete') }}</a>
       @else
-        <a href="{{ route('licenses.destroy', $license->id) }}" class="btn btn-block btn-danger disabled" style="margin-bottom: 10px;">{{ trans('general.delete') }}</a>
+          <span data-tooltip="true" title=" {{ trans('admin/licenses/general.delete_disabled') }}">
+            <a href="{{ route('licenses.destroy', $license->id) }}" class="btn btn-block btn-danger disabled" style="margin-bottom: 10px;">{{ trans('general.delete') }}</a>
+          </span>
       @endif
     @endcan
   </div>
