@@ -68,7 +68,7 @@
 
         <div class="tab-pane active" id="details">
           <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-12">
               <div class="container row-new-striped">
 
                 @if (!is_null($license->company))
