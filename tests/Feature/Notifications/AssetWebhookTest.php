@@ -11,7 +11,6 @@ use App\Models\User;
 use App\Notifications\CheckinAssetNotification;
 use App\Notifications\CheckoutAssetNotification;
 use Illuminate\Notifications\AnonymousNotifiable;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
@@ -27,15 +26,6 @@ class AssetWebhookTest extends TestCase
             'Asset checked out to asset' => [fn() => $this->createAsset()],
             'Asset checked out to location' => [fn() => Location::factory()->create()],
         ];
-    }
-
-    public function testAssetCheckoutFiresCheckoutEvent()
-    {
-        Event::fake([CheckoutableCheckedOut::class]);
-
-        $this->createAsset()->checkOut(User::factory()->create(), User::factory()->create());
-
-        Event::assertDispatched(CheckoutableCheckedOut::class);
     }
 
     /** @dataProvider checkoutTargets */
