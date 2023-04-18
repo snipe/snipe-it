@@ -13,10 +13,13 @@ use App\Notifications\CheckoutAssetNotification;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
+use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class AssetWebhookTest extends TestCase
 {
+    use InteractsWithSettings;
+
     public function checkoutTargets(): array
     {
         return [
@@ -40,7 +43,7 @@ class AssetWebhookTest extends TestCase
     {
         Notification::fake();
 
-        Setting::factory()->withWebhookEnabled()->create();
+        $this->settings->enableWebhook();
 
         event(new CheckoutableCheckedOut(
             $this->createAsset(),
@@ -63,7 +66,7 @@ class AssetWebhookTest extends TestCase
     {
         Notification::fake();
 
-        Setting::factory()->withWebhookDisabled()->create();
+        $this->settings->disableWebhook();
 
         event(new CheckoutableCheckedOut(
             $this->createAsset(),
@@ -80,7 +83,7 @@ class AssetWebhookTest extends TestCase
     {
         Notification::fake();
 
-        Setting::factory()->withWebhookEnabled()->create();
+        $this->settings->enableWebhook();
 
         event(new CheckoutableCheckedIn(
             $this->createAsset(),
@@ -103,7 +106,7 @@ class AssetWebhookTest extends TestCase
     {
         Notification::fake();
 
-        Setting::factory()->withWebhookDisabled()->create();
+        $this->settings->disableWebhook();
 
         event(new CheckoutableCheckedIn(
             $this->createAsset(),

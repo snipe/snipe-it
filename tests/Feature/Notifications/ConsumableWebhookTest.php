@@ -9,15 +9,18 @@ use App\Models\User;
 use App\Notifications\CheckoutConsumableNotification;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Notification;
+use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class ConsumableWebhookTest extends TestCase
 {
+    use InteractsWithSettings;
+
     public function testConsumableCheckoutSendsWebhookNotificationWhenSettingEnabled()
     {
         Notification::fake();
 
-        Setting::factory()->withWebhookEnabled()->create();
+        $this->settings->enableWebhook();
 
         event(new CheckoutableCheckedOut(
             Consumable::factory()->cardstock()->create(),
@@ -39,7 +42,7 @@ class ConsumableWebhookTest extends TestCase
     {
         Notification::fake();
 
-        Setting::factory()->withWebhookDisabled()->create();
+        $this->settings->disableWebhook();
 
         event(new CheckoutableCheckedOut(
             Consumable::factory()->cardstock()->create(),

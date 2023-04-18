@@ -12,10 +12,13 @@ use App\Notifications\CheckinLicenseSeatNotification;
 use App\Notifications\CheckoutLicenseSeatNotification;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Notification;
+use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class LicenseWebhookTest extends TestCase
 {
+    use InteractsWithSettings;
+
     public function checkoutTargets(): array
     {
         return [
@@ -29,7 +32,7 @@ class LicenseWebhookTest extends TestCase
     {
         Notification::fake();
 
-        Setting::factory()->withWebhookEnabled()->create();
+        $this->settings->enableWebhook();
 
         event(new CheckoutableCheckedOut(
             LicenseSeat::factory()->create(),
@@ -52,7 +55,7 @@ class LicenseWebhookTest extends TestCase
     {
         Notification::fake();
 
-        Setting::factory()->withWebhookDisabled()->create();
+        $this->settings->disableWebhook();
 
         event(new CheckoutableCheckedOut(
             LicenseSeat::factory()->create(),
@@ -69,7 +72,7 @@ class LicenseWebhookTest extends TestCase
     {
         Notification::fake();
 
-        Setting::factory()->withWebhookEnabled()->create();
+        $this->settings->enableWebhook();
 
         event(new CheckoutableCheckedIn(
             LicenseSeat::factory()->create(),
@@ -92,7 +95,7 @@ class LicenseWebhookTest extends TestCase
     {
         Notification::fake();
 
-        Setting::factory()->withWebhookDisabled()->create();
+        $this->settings->disableWebhook();
 
         event(new CheckoutableCheckedIn(
             LicenseSeat::factory()->create(),

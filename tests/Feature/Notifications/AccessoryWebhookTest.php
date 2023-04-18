@@ -11,15 +11,18 @@ use App\Notifications\CheckinAccessoryNotification;
 use App\Notifications\CheckoutAccessoryNotification;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\Notification;
+use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class AccessoryWebhookTest extends TestCase
 {
+    use InteractsWithSettings;
+
     public function testAccessoryCheckoutSendsWebhookNotificationWhenSettingEnabled()
     {
         Notification::fake();
 
-        Setting::factory()->withWebhookEnabled()->create();
+        $this->settings->enableWebhook();
 
         event(new CheckoutableCheckedOut(
             Accessory::factory()->appleBtKeyboard()->create(),
@@ -41,7 +44,7 @@ class AccessoryWebhookTest extends TestCase
     {
         Notification::fake();
 
-        Setting::factory()->withWebhookDisabled()->create();
+        $this->settings->disableWebhook();
 
         event(new CheckoutableCheckedOut(
             Accessory::factory()->appleBtKeyboard()->create(),
@@ -57,7 +60,7 @@ class AccessoryWebhookTest extends TestCase
     {
         Notification::fake();
 
-        Setting::factory()->withWebhookEnabled()->create();
+        $this->settings->enableWebhook();
 
         event(new CheckoutableCheckedIn(
             Accessory::factory()->appleBtKeyboard()->create(),
@@ -79,7 +82,7 @@ class AccessoryWebhookTest extends TestCase
     {
         Notification::fake();
 
-        Setting::factory()->withWebhookDisabled()->create();
+        $this->settings->disableWebhook();
 
         event(new CheckoutableCheckedIn(
             Accessory::factory()->appleBtKeyboard()->create(),
