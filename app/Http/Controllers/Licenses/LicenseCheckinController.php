@@ -128,20 +128,37 @@ class LicenseCheckinController extends Controller
         $license = License::findOrFail($licenseId);
         $this->authorize('checkin', $license);
 
-        $licenseSeats = LicenseSeat::where('license_id', '=', $licenseId)
+        $licenseSeatsByUser = LicenseSeat::where('license_id', '=', $licenseId)
             ->whereNotNull('assigned_to')
             ->with('user')
             ->get();
 
-        foreach ($licenseSeats as $seat) {
-            $seat->assigned_to = null;
+        foreach ($licenseSeatsByUser as $user_seat) {
+            $user_seat->assigned_to = null;
 
-            if ($seat->save()) {
-                $seat->logCheckin($seat->user, 'Checked in via bulk checkin on license page');
+            if ($user_seat->save()) {
+                \Log::debug('Checking in '.$license->name.' from user '.$user_seat->username);
+                $user_seat->logCheckin($user_seat->user, trans('admin/licenses/general.bulk.checkin_all.log_msg'));
             }
         }
 
-        return redirect()->back()->with('success', 'All licenses checked in successfully!');
+        $licenseSeatsByAsset = LicenseSeat::where('license_id', '=', $licenseId)
+            ->whereNotNull('asset_id')
+            ->with('asset')
+            ->get();
+
+        $count = 0;
+        foreach ($licenseSeatsByAsset as $asset_seat) {
+            $asset_seat->asset_id = null;
+
+            if ($asset_seat->save()) {
+                \Log::debug('Checking in '.$license->name.' from asset '.$asset_seat->asset_tag);
+                $asset_seat->logCheckin($asset_seat->asset, trans('admin/licenses/general.bulk.checkin_all.log_msg'));
+                $count++;
+            }
+        }
+
+        return redirect()->back()->with('success', trans_choice('admin/licenses/general.bulk.checkin_all.success', 2, ['count' => $count] ));
 
     }
 
