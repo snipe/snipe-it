@@ -12,5 +12,5 @@ return array(
     'remaining' 			             => 'Pozostało',
     'total' 			                 => 'Suma',
     'update'                            => 'Aktualizacja składnika',
-    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
+    'checkin_limit'            => 'Ilość przyjęta musi być równa lub mniejsza niż :assigned_qty'
 );

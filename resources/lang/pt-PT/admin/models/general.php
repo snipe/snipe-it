@@ -6,7 +6,7 @@ return array(
     'deleted'  					        => 'This model has been deleted.',
     'bulk_delete'               => 'Eliminar modelos de artigos em massa',
     'bulk_delete_help'               => 'Use as caixas de selecção abaixo para confirmar a eliminação dos modelos de artigos selecionados. Modelos de artigos que contenham artigos associados não serão eliminados até que estes artigos sejam associados a um modelo diferente.',
-    'bulk_delete_warn'          => 'Esta prestes a eliminar :model_count modelos de artigos.',
+    'bulk_delete_warn'          => 'You are about to delete one asset model.|You are about to delete :model_count asset models.',
     'restore'                   => 'Restaurar Modelo',
     'requestable'               => 'Este modelo pode ser requisitado pelos utilizadores',
 	'show_mac_address'			      => 'Mostrar endereço MAC dos artigos neste modelo',

@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Phụ kiện chưa được xuất kho. Bạn hãy thử lại',
         'success' 		=> 'Phụ kiện được xuất kho thành công.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Người dùng này không tồn tại. Bạn hãy thử lại.'
     ),
 

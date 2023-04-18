@@ -14,7 +14,7 @@ return array(
     'update' => array(
         'error'   => 'カテゴリーは更新されませんでした。再度実行してください。',
         'success' => 'カテゴリーの更新に成功しました。',
-        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
+        'cannot_change_category_type'   => '一度作成されたカテゴリタイプを変更することはできません',
     ),
 
     'delete' => array(

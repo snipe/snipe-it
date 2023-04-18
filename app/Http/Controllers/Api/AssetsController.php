@@ -199,13 +199,9 @@ class AssetsController extends Controller
 
         $request->filled('order_number') ? $assets = $assets->where('assets.order_number', '=', e($request->get('order_number'))) : '';
 
-        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
-        // case we override with the actual count, so we should return 0 items.
-        $offset = (($assets) && ($request->get('offset') > $assets->count())) ? $assets->count() : $request->get('offset', 0);
-
-
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $assets->count()) ? $assets->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 

@@ -14,7 +14,7 @@ return array(
     'update' => array(
         'error'   => 'הקטגוריה לא עודכנה, נסה שוב',
         'success' => 'קטגוריה עודכנה בהצלחה.',
-        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
+        'cannot_change_category_type'   => 'אי אפשר לשנות את סוג הקטגוריה לאחר יצירתה',
     ),
 
     'delete' => array(

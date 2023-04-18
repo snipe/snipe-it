@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => '모델이 갱신되지 않았습니다. 다시 시도하세요.',
-        'success' => '모델이 갱신되었습니다.'
+        'success' => '모델이 갱신되었습니다.',
     ),
 
     'delete' => array(
@@ -32,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> '변경된 항목이 없어서, 갱신되지 않습니다.',
-        'success' 		=> '모델 갱신됨.'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => '선택된 모델이 없기에, 삭제되지 않습니다.',
-        'success' 		    => ': success_count 모델이 삭제되었습니다!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ': success_count개의 모델이 삭제되었지만, fail_count 개는 관련된 자산이 있기에 삭제할 수 없습니다.'
     ),
 

@@ -68,6 +68,7 @@ class ConsumablesController extends Controller
         $consumable = new Consumable();
         $consumable->name                   = $request->input('name');
         $consumable->category_id            = $request->input('category_id');
+        $consumable->supplier_id            = $request->input('supplier_id');
         $consumable->location_id            = $request->input('location_id');
         $consumable->company_id             = Company::getIdForCurrentUser($request->input('company_id'));
         $consumable->order_number           = $request->input('order_number');
@@ -144,6 +145,7 @@ class ConsumablesController extends Controller
 
         $consumable->name                   = $request->input('name');
         $consumable->category_id            = $request->input('category_id');
+        $consumable->supplier_id            = $request->input('supplier_id');
         $consumable->location_id            = $request->input('location_id');
         $consumable->company_id             = Company::getIdForCurrentUser($request->input('company_id'));
         $consumable->order_number           = $request->input('order_number');

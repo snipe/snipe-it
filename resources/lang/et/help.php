@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Rohkem infot',
 
-    'audit_help' => 'Selle kasti valimine muudab vahendi teavet, et näidata selle uut asukohta. Kui seda ei valita, salvestatakse asukoht ainult logisse. <br><br> Pange tähele, et kui vahend on juba üle antud, siis see ei muuda selle isiku või vahendi asukohta, kellele see on üle antud.',
+    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
     'assets' => 'Vahendeid saab tuvastada ja jälgida seerianumbri või seadme identifikaatori abil. Tavaliselt määratletakse ja registreeritakse seerianumber või identifikaator väärtuslikele vahenditele, mille individuaalne tuvastamine on oluline.',
 

@@ -3,7 +3,7 @@
     return [
         'asset_maintenance_type' => 'Tipo de Mantenimiento de Equipo',
         'title'                  => 'Título',
-        'start_date'             => 'Fecha de Inicio',
+        'start_date'             => 'Fecha de inicio',
         'completion_date'        => 'Fecha de Terminación',
         'cost'                   => 'Costo',
         'is_warranty'            => 'Mejora de la Garantía',

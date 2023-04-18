@@ -33,6 +33,11 @@ class ComponentCheckoutController extends Controller
         }
         $this->authorize('checkout', $component);
 
+        // Make sure there is at least one available to checkout
+        if ($component->numRemaining() <= 0){
+            return redirect()->route('components.index')->with('error', trans('admin/components/message.checkout.unavailable'));
+        }
+
         return view('components/checkout', compact('component'));
     }
 
@@ -50,7 +55,7 @@ class ComponentCheckoutController extends Controller
     public function store(Request $request, $componentId)
     {
         // Check if the component exists
-        if (is_null($component = Component::find($componentId))) {
+        if (!$component = Component::find($componentId)) {
             // Redirect to the component management page with error
             return redirect()->route('components.index')->with('error', trans('admin/components/message.not_found'));
         }
@@ -58,9 +63,15 @@ class ComponentCheckoutController extends Controller
         $this->authorize('checkout', $component);
 
         $max_to_checkout = $component->numRemaining();
+
+        // Make sure there are at least the requested number of components available to checkout
+        if ($max_to_checkout < $request->get('assigned_qty')) {
+            return redirect()->back()->withInput()->with('error', trans('admin/components/message.checkout.unavailable', ['remaining' => $max_to_checkout, 'requested' => $request->get('assigned_qty')]));
+        }
+
         $validator = Validator::make($request->all(), [
-            'asset_id'          => 'required',
-            'assigned_qty'      => "required|numeric|between:1,$max_to_checkout",
+            'asset_id'          => 'required|exists:assets,id',
+            'assigned_qty'      => "required|numeric|min:1|digits_between:1,$max_to_checkout",
         ]);
 
         if ($validator->fails()) {
@@ -69,24 +80,17 @@ class ComponentCheckoutController extends Controller
                 ->withInput();
         }
 
-        $admin_user = Auth::user();
-        $asset_id = e($request->input('asset_id'));
-
         // Check if the user exists
-        if (is_null($asset = Asset::find($asset_id))) {
-            // Redirect to the component management page with error
-            return redirect()->route('components.index')->with('error', trans('admin/components/message.asset_does_not_exist'));
-        }
+        $asset = Asset::find($request->input('asset_id'));
 
         // Update the component data
-        $component->asset_id = $asset_id;
-
+        $component->asset_id = $request->input('asset_id');
         $component->assets()->attach($component->id, [
             'component_id' => $component->id,
-            'user_id' => $admin_user->id,
+            'user_id' => Auth::user(),
             'created_at' => date('Y-m-d H:i:s'),
             'assigned_qty' => $request->input('assigned_qty'),
-            'asset_id' => $asset_id,
+            'asset_id' => $request->input('asset_id'),
             'note' => $request->input('note'),
         ]);
 

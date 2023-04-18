@@ -27,6 +27,7 @@ class Consumable extends SnipeModel
         'requestable'    => 'boolean',
         'category_id'    => 'integer',
         'company_id'     => 'integer',
+        'supplier_id',
         'qty'            => 'integer',
         'min_amt'        => 'integer',    
      ];
@@ -95,6 +96,7 @@ class Consumable extends SnipeModel
         'company'      => ['name'],
         'location'     => ['name'],
         'manufacturer' => ['name'],
+        'supplier'     => ['name'],
     ];
 
 
@@ -249,6 +251,18 @@ class Consumable extends SnipeModel
         return $this->belongsToMany(\App\Models\User::class, 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('user_id')->withTrashed()->withTimestamps();
     }
 
+    /**
+     * Establishes the item -> supplier relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v6.1.1]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function supplier()
+    {
+        return $this->belongsTo(\App\Models\Supplier::class, 'supplier_id');
+    }
+
 
     /**
      * Determine whether to send a checkin/checkout email based on
@@ -375,5 +389,18 @@ class Consumable extends SnipeModel
     public function scopeOrderCompany($query, $order)
     {
         return $query->leftJoin('companies', 'consumables.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
+    }
+
+    /**
+     * Query builder scope to order on supplier
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderSupplier($query, $order)
+    {
+        return $query->leftJoin('suppliers', 'consumables.supplier_id', '=', 'suppliers.id')->orderBy('suppliers.name', $order);
     }
 }

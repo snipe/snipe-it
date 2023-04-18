@@ -43,12 +43,11 @@
                     @if ($is_gd_installed)
                         <!-- qr code -->
                             <div class="form-group">
-                                <div class="col-md-3">
-                                    {{ Form::label('qr_code', trans('admin/settings/general.display_qr')) }}
-                                </div>
-                                <div class="col-md-9">
-                                    {{ Form::checkbox('qr_code', '1', old('qr_code', $setting->qr_code),array('class' => 'minimal', 'aria-label'=>'qr_code')) }}
-                                    {{ trans('general.yes') }}
+                                <div class="col-md-9 col-md-offset-3">
+                                    <label class="form-control">
+                                        {{ Form::checkbox('qr_code', '1', old('qr_code', $setting->qr_code),array('aria-label'=>'qr_code')) }}
+                                        {{ trans('admin/settings/general.display_qr') }}
+                                    </label>
                                 </div>
                             </div>
 
@@ -65,12 +64,12 @@
 
                             <!-- barcode -->
                             <div class="form-group">
-                                <div class="col-md-3">
-                                    {{ Form::label('alt_barcode_enabled', trans('admin/settings/general.display_alt_barcode')) }}
-                                </div>
-                                <div class="col-md-9">
-                                    {{ Form::checkbox('alt_barcode_enabled', '1', old('alt_barcode_enabled', $setting->alt_barcode_enabled),array('class' => 'minimal', 'aria-label'=>'alt_barcode_enabled')) }}
-                                    {{ trans('general.yes') }}
+
+                                <div class="col-md-9 col-md-offset-3">
+                                    <label class="form-control">
+                                        {{ Form::checkbox('alt_barcode_enabled', '1', old('alt_barcode_enabled', $setting->alt_barcode_enabled),array( 'aria-label'=>'alt_barcode_enabled')) }}
+                                        {{ trans('admin/settings/general.display_alt_barcode') }}
+                                    </label>
                                 </div>
                             </div>
 

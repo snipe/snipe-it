@@ -2,8 +2,11 @@
 
 return [
     'bulk_delete'		=> 'אשר מחיקה גורפת של נכסים',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> 'עיין בנכסים למחיקה בכמות גדולה בהמשך. לאחר המחיקה, ניתן לשחזר נכסים אלה, אך הם לא יהיו משויכים עוד עם משתמשים שאליהם הם מוקצים כעת.',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'אתה עומד למחוק את הנכסים: asset_count.',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'עדכון גורפת נכסים',
     'bulk_update_help'	=> 'טופס זה מאפשר לך לעדכן מספר נכסים בבת אחת. מלא רק את השדות שאתה צריך לשנות. כל השדות שנותרו ריקים יישארו ללא שינוי.',
     'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
@@ -45,7 +48,7 @@ return [
     'asset_location_update_default' => 'עדכן מיקום ברירת מחדל',
     'asset_not_deployable' => 'הנכס הזה לא זמין. לא ניתן לספק ללקוח.',
     'asset_deployable' => 'הנכס זמין. ניתן לשייך למיקום.',
-    'processing_spinner' => 'מעבד...',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Optional Information',
     'order_details'   => 'Order Related Information'
 ];

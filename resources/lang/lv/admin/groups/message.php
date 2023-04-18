@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'Grupa jau pastāv!',
-    'group_not_found'     => 'Grupa [: id] nepastāv.',
+    'group_not_found'     => 'Group ID :id does not exist.',
     'group_name_required' => 'Nosaukuma lauks ir nepieciešams',
 
     'success' => array(

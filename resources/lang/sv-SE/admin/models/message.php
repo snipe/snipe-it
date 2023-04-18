@@ -3,8 +3,8 @@
 return array(
 
     'does_not_exist' => 'Modellen finns inte.',
-    'no_association' => 'NO MODEL ASSOCIATED.',
-    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
+    'no_association' => 'INGEN MODEL FÖRBUNDEN.',
+    'no_association_fix' => 'Detta kommer att bryta saker på konstiga och hemska sätt. Redigera denna tillgång nu för att tilldela det en modell.',
     'assoc_users'	 => 'Denna modell är redan associerad med en eller flera tillgångar och kan inte tas bort. Ta bort tillgången och försök sedan igen. ',
 
 
@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Modellen uppdaterades inte, försök igen',
-        'success' => 'Modellen uppdaterad.'
+        'success' => 'Modellen uppdaterad.',
     ),
 
     'delete' => array(
@@ -32,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Inga fält ändrades, så ingenting uppdaterades.',
-        'success' 		=> 'Modeller uppdaterades.'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Inga tillgångar valdes, så ingenting togs bort.',
-        'success' 		    => ': success_count modell (er) borttagen!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ':success_count modell(erna) raderades, men :fail_count kunde inte raderas eftersom de fortfarande har tillgångar kopplade till sig.'
     ),
 

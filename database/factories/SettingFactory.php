@@ -34,31 +34,4 @@ class SettingFactory extends Factory
             'email_domain' => 'test.com',
         ];
     }
-
-    public function withMultipleFullCompanySupport()
-    {
-        return $this->state(function () {
-            return [
-                'full_multiple_companies_support' => 1,
-            ];
-        });
-    }
-
-    public function withWebhookEnabled()
-    {
-        return $this->state(fn() => [
-            'webhook_botname' => 'SnipeBot5000',
-            'webhook_endpoint' => 'https://hooks.slack.com/services/NZ59/Q446/672N',
-            'webhook_channel' => '#it',
-        ]);
-    }
-
-    public function withWebhookDisabled()
-    {
-        return $this->state(fn() => [
-            'webhook_botname' => '',
-            'webhook_endpoint' => '',
-            'webhook_channel' => '',
-        ]);
-    }
 }

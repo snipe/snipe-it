@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Aksesori tidak diperiksa, sila cuba lagi',
         'success' 		=> 'Aksesori diperiksa dengan jayanya.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Pengguna itu tidak sah. Sila cuba lagi.'
     ),
 

@@ -2,8 +2,11 @@
 
 return [
     'bulk_delete'		=> 'Potvrdiť hromadné odstránenie majetku',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> 'Nižšie skontrolujte zoznam majetku na odstránenie. Po odstránení je možné tieto majetky obnoviť, nebudú už ale priradené k žiadnym používateľom, ku ktorým sú momentálne priradení.',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'Chystáte sa odstrániť :asset_count majetky.',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'Hromadná úprava majetku',
     'bulk_update_help'	=> 'Tento formulár umožňuje hromadnú úpravu majetku. Vyplňte iba položky, ktoré chcete zmeniť. Akékoľvek prázdne položky zostanú nezmenené. ',
     'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
@@ -45,7 +48,7 @@ return [
     'asset_location_update_default' => 'Update only default location',
     'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
     'asset_deployable' => 'That status is deployable. This asset can be checked out.',
-    'processing_spinner' => 'Processing...',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Nepovinné informácie',
     'order_details'   => 'Informácie súvisiace s objednávkou'
 ];

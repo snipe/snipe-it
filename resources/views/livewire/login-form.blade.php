@@ -62,8 +62,9 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="checkbox">
-                                            <label style="margin-left: -20px;">
-                                                <input name="remember" type="checkbox" value="1" class="minimal"> {{ trans('auth/general.remember_me')  }}
+                                            <label class="form-control">
+                                                <input name="remember" type="checkbox" value="1">
+                                                {{ trans('auth/general.remember_me')  }}
                                             </label>
                                         </div>
                                 </div>

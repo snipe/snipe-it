@@ -193,12 +193,9 @@ class UsersController extends Controller
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 
-        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
-        // case we override with the actual count, so we should return 0 items.
-        $offset = (($users) && ($request->get('offset') > $users->count())) ? $users->count() : $request->get('offset', 0);
-
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $users->count()) ? $users->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
 
 
         switch ($request->input('sort')) {

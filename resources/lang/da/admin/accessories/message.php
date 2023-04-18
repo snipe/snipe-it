@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Tilbehør blev ikke tjekket ud, prøv igen',
         'success' 		=> 'Tilbehør er tjekket ud.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Den bruger er ikke gyldig. Prøv igen.'
     ),
 

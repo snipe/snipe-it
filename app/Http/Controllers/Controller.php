@@ -9,11 +9,11 @@
  *
  * **THIS DOCUMENTATION DOES NOT COVER INSTALLATION.** If you're here and you're not a
  * developer, you're probably in the wrong place. Please see the
- * [Installation documentation](http://docs.snipeitapp.com) for
+ * [Installation documentation](https://snipe-it.readme.io) for
  * information on how to install Snipe-IT.
  *
  * To learn how to set up a development environment and get started developing for Snipe-IT,
- * please see the [contributing documentation](http://docs.snipeitapp.com/contributing.html).
+ * please see the [contributing documentation](https://snipe-it.readme.io/docs/contributing-overview).
  *
  * Only the Snipe-IT specific controllers, models, helpers, service providers,
  * etc have been included in this documentation (excluding vendors, Laravel core, etc)

@@ -21,7 +21,7 @@
                 {{csrf_field()}}
                 <div class="box box-default">
                     <div class="box-header with-border">
-                        <h2 class="box-title" style="color: red">{{ trans('admin/models/general.bulk_delete_warn', ['model_count' => $valid_count]) }}</h2>
+                        <h2 class="box-title" style="color: red">{{ trans_choice('admin/models/general.bulk_delete_warn', $valid_count, ['model_count' => $valid_count]) }}</h2>
                     </div>
 
                     <div class="box-body">
@@ -30,7 +30,7 @@
                             <tr>
                                 <td class="col-md-1">
                                     <label>
-                                        <input type="checkbox" class="all minimal" checked="checked">
+                                        <input type="checkbox" id="checkAll" checked="checked">
                                     </label>
 
                                 </td>
@@ -42,7 +42,7 @@
                             @foreach ($models as $model)
                                 <tr{!!  (($model->assets_count > 0 ) ? ' class="danger"' : '') !!}>
                                     <td>
-                                        <input type="checkbox" name="ids[]" class="minimal{{  (($model->assets_count == 0) ? '' : ' disabled') }}" value="{{ $model->id }}" {!!  (($model->assets_count == 0) ? ' checked="checked"' : ' disabled') !!}>
+                                        <input type="checkbox" name="ids[]" class="{  (($model->assets_count == 0) ? '' : ' disabled') }}" value="{{ $model->id }}" {!!  (($model->assets_count == 0) ? ' checked="checked"' : ' disabled') !!}>
                                     </td>
                                     <td>{{ $model->assets_count }}</td>
                                     <td>{{ $model->name }}</td>
@@ -65,28 +65,10 @@
 @section('moar_scripts')
     <script>
 
-        // Check-all / Uncheck all
-        $(function () {
-            var checkAll = $('input.all');
-            var checkboxes = $('input.minimal');
 
-
-            checkAll.on('ifChecked ifUnchecked', function(event) {
-                if (event.type == 'ifChecked') {
-                    checkboxes.iCheck('check');
-                } else {
-                    checkboxes.iCheck('uncheck');
-                }
-            });
-
-            checkboxes.on('ifChanged', function(event){
-                if(checkboxes.filter(':checked').length == checkboxes.length) {
-                    checkAll.prop('checked', 'checked');
-                } else {
-                    checkAll.removeProp('checked');
-                }
-                checkAll.iCheck('update');
-            });
+        $("#checkAll").change(function () {
+            $("input:checkbox").prop('checked', $(this).prop("checked"));
         });
+
     </script>
 @stop

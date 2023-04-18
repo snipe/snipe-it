@@ -21,10 +21,13 @@
                 {{ csrf_field() }}
 
                 <div class="box box-default">
-                    <div class="box-header with-border">
-                        <div class="box-title"><i class="fas fa-exclamation-triangle"></i>{{ trans('general.bulk_edit_about_to') }}</div>
-                    </div>
                     <div class="box-body">
+
+                        <div class="callout callout-warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            {{ trans_choice('admin/models/message.bulkedit.warn', count($models), ['model_count' => count($models)]) }}
+                        </div>
+
 
                         <table class="table">
                             <tbody>
@@ -33,7 +36,11 @@
                             <tr{!!  (($model->assets_count > 0 ) ? ' class="warning"' : ' class="success"') !!}>
                                     <td>
                                         <i class="fa {!!  (($model->assets_count > 0 ) ? 'fa-warning info' : 'fa-check success') !!}"></i>
-                                        {{ $model->display_name }}  ({{ $model->model_number }})
+                                        {{ $model->display_name }}
+
+                                            @if ($model->model_number)
+                                                ({{ $model->model_number }})
+                                            @endif
                                         </td>
                                         <td>{{ $model->assets_count }} assets
                                     </td>
@@ -73,20 +80,24 @@
                             </div>
 
                             <!-- requestable -->
-                                <div class="form-group {{ $errors->has('requestable') ? 'has-error' : '' }}">
-                                <div class="col-md-7 col-md-offset-3">
+                                <div class="form-group{{ $errors->has('requestable') ? ' has-error' : '' }}">
+                                    <div class="col-md-7 col-md-offset-3">
 
-
-                                    <div class="checkbox">
-                                        <label for="requestable">
-                                            {{ Form::radio('requestable', '', true, ['aria-label'=>'requestable', 'class'=>'minimal']) }} {{  trans('admin/hardware/general.requestable_status_warning')}}<br>
-                                            {{ Form::radio('requestable', '1', old('requestable'), ['aria-label'=>'requestable', 'class'=>'minimal']) }}  {{  trans('admin/hardware/general.requestable')}} <br>
-                                            {{ Form::radio('requestable', '0', old('requestable'), ['aria-label'=>'requestable', 'class'=>'minimal']) }}  {{  trans('admin/hardware/general.not_requestable')}}
-
+                                        <label for="requestable_nochange" class="form-control">
+                                            {{ Form::radio('requestable', '', true, ['id' => 'requestable_nochange', 'aria-label'=>'requestable_nochange']) }}
+                                            {{  trans('admin/hardware/general.requestable_status_warning')}}
                                         </label>
-                                    </div>
+                                        <label for="requestable" class="form-control">
+                                            {{ Form::radio('requestable', '1', old('requestable'), ['id' => 'requestable', 'aria-label'=>'requestable']) }}
+                                            {{  trans('admin/hardware/general.requestable')}}
+                                        </label>
+                                        <label for="not_requestable" class="form-control">
+                                            {{ Form::radio('requestable', '0', old('requestable'), ['id' => 'not_requestable','aria-label'=>'not_requestable']) }}
+                                            {{  trans('admin/hardware/general.not_requestable')}}
+                                        </label>
 
-                                </div>
+
+                                    </div>
                                 </div>
 
                             @foreach ($models as $model)
@@ -95,9 +106,10 @@
                         </div>
                     </div> <!--/.box-body-->
 
-                    <div class="text-right box-footer">
-                        <button type="submit" class="btn btn-success"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
-                    </div>
+                    <div class="box-footer text-right">
+                        <a class="btn btn-link pull-left" href="{{ URL::previous() }}" method="post" enctype="multipart/form-data">{{ trans('button.cancel') }}</a>
+                        <button type="submit" class="btn btn-success" id="submit-button"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.update') }}</button>
+                    </div><!-- /.box-footer -->
                 </div> <!--/.box.box-default-->
             </form>
         </div> <!--/.col-md-8-->

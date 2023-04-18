@@ -22,6 +22,8 @@ return [
     'restore' => [
         'error'   		=> 'Хөрөнгө сэргээгээгүй байна, дахин оролдоно уу',
         'success' 		=> 'Хөрөнгийн амжилттай сэргээгдэв.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [

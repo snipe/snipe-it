@@ -50,9 +50,12 @@
                     <!-- Update location -->
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-md-9">
-                                <label>
-                                    <input type="checkbox" value="1" name="update_location" class="minimal" {{ Request::old('update_location') == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/hardware/form.asset_location') }}
-                                </label> <a href="#" class="text-dark-gray" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="<i class='far fa-life-ring'></i> More Info" data-html="true" data-content="Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to."><i class="far fa-life-ring"></i></a>
+                                <label class="form-control">
+                                    <input type="checkbox" value="1" name="update_location" {{ old('update_location') == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/hardware/form.asset_location') }}
+                                </label>
+
+                                <a href="#" class="text-dark-gray" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="<i class='far fa-life-ring'></i> More Info" data-html="true" data-content="Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to."><i class="far fa-life-ring"></i></a>
+
                             </div>
                         </div>
 
