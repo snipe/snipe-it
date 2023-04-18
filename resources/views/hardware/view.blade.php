@@ -608,6 +608,10 @@
                                                     <a href="https://pcsupport.lenovo.com/us/en/warrantylookup#/" target="_blank">
                                                         <img src="/img/demo/manufacturers/lenovoicon.png" style="width:25px;height:25px;"><span class="sr-only">{{ trans('hardware/general.mfg_warranty_lookup') }}</span></i>
                                                     </a>
+                                                    @elseif ((strtolower($asset->model->manufacturer->name) == "hp") || (str_starts_with(str_replace(' ','',strtolower($asset->model->manufacturer->name)),"hpinc")))
+                                                    <a href="https://support.hp.com/us-en/check-warranty" target="_blank">
+                                                        <img src="/img/demo/manufacturers/hpicon.png" style="width:25px;height:25px;"><span class="sr-only">{{ trans('hardware/general.mfg_warranty_lookup') }}</span></i>
+                                                    </a>
                                                     @endif
                                                 @endif
                                             </div>
