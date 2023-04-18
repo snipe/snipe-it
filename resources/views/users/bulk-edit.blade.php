@@ -127,7 +127,7 @@
                             <div class="col-sm-9">
 
                                 <label for="no_change_autoassign_licenses" class="form-control">
-                                    {{ Form::radio('autoassign_licenses', '', true, ['id' => 'no_change_autoassign_licenses', 'aria-label'=>'no_change']) }}
+                                    {{ Form::radio('autoassign_licenses', '', true, ['id' => 'no_change_autoassign_licenses', 'aria-label'=>'no_change_autoassign_licenses']) }}
                                     {{  trans('general.do_not_change') }}
                                 </label>
                                 <label for="autoassign_licenses" class="form-control">
