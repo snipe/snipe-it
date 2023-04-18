@@ -6,7 +6,7 @@ use App\Models\Location;
 
 /**
  * When we are importing users via an Asset/etc import, we use createOrFetchUser() in
- * App\Importer.php. [ALG]
+ * Importer\Importer.php. [ALG]
  *
  * Class LocationImporter
  */
@@ -36,6 +36,22 @@ class LocationImporter extends ItemImporter
     public function createLocationIfNotExists(array $row)
     {
 
+        $editingLocation = false;
+        $location = Location::where('name', '=', $this->findCsvMatch($row, 'name'))->first();
+
+        if ($location) {
+            if (! $this->updating) {
+                $this->log('A matching Location '.$this->item['name'].' already exists');
+                return;
+            }
+
+            $this->log('Updating Location');
+            $editingLocation = true;
+        } else {
+            $this->log('No Matching Location, Create a new one');
+            $location = new Location;
+        }
+
         // Pull the records from the CSV to determine their values
         $this->item['name'] = $this->findCsvMatch($row, 'name');
         $this->item['address'] = $this->findCsvMatch($row, 'address');
@@ -54,31 +70,26 @@ class LocationImporter extends ItemImporter
             $this->item['parent_id'] = $this->createOrFetchLocation($this->findCsvMatch($row, 'parent_location'));
         }
 
-
-        if ($manager = $this->createOrFetchUser($row, 'manager')) {
-            $this->item['manager_id'] = $manager->id;
+        if (!empty($this->item['manager'])) {
+            if ($manager = $this->createOrFetchUser($row, 'manager')) {
+                $this->item['manager_id'] = $manager->id;
+            }
         }
 
-
-
+        \Log::debug('Item array is: ');
         \Log::debug(print_r($this->item, true));
-        $location = Location::where('name', '=', $this->findCsvMatch($row, 'name'))->first();
 
 
-        // Location exists
-        if (($location) && ($location->count() > 0)) {
-            \Log::debug('A matching Location '.$this->item['name'].' already exists.');
-            $this->log('Updating Location from CSV import');
-            $location->update($this->sanitizeItemForStoring($location));
-            // Location does not exist
+        if ($editingLocation) {
+            \Log::debug('Updating existing location');
+            $location->update($this->sanitizeItemForUpdating($location));
         } else {
-            $this->log('No matching location ('.$this->item['name'].'), creating one');
-            $location = new Location();
+            \Log::debug('Creating location');
             $location->fill($this->sanitizeItemForStoring($location));
         }
 
         if ($location->save()) {
-            $this->log('Location '.$location->name.' created from CSV import');
+            $this->log('Location '.$location->name.' created or updated from CSV import');
             return $location;
 
         } else {
