@@ -440,13 +440,10 @@ return [
     'setup_migration_create_user' => 'Next: Create User',
     'importer_generic_error'    => 'Your file import is complete, but we did receive an error. This is usually caused by third-party API throttling from a notification webhook (such as Slack) and would not have interfered with the import itself, but you should confirm this.',
     'confirm' => 'Confirm',
-    'license_checkin_all_confirm_modal_header' => 'Are you SURE you wish to checkin all seats for this licence?',
-    'license_checkin_all_confirm_modal_body' => 'This will action checkin one seat. | This action will checkin all :count seats.',
-    'license_checkout_all_confirm_modal_header' => 'Are you SURE you wish to checkout all available seats for this licence?',
-    'license_checkout_all_confirm_modal_body' => 'This will action check in one seat to the first available user. | This action will checkout all :count seats to the first available users.',
     'autoassign_licenses' => 'Auto-Assign Licenses',
     'autoassign_licenses_help' => 'Allow user to be have licenses assigned via the bulk-assign license UI or cli tools.',
     'autoassign_licenses_help_long' => 'This allows a user to be have licenses assigned via the bulk-assign license UI or cli tools. (For example, you might not want contractors to be auto-assigned a license you would provide to only staff members. You can still individually assign licenses to those users, but they will not be included in the Checkout License to All Users functions.)',
     'no_autoassign_licenses_help' => 'Do not include user for bulk-assigning through the license UI or cli tools.',
+    'modal_confirm_generic'      => 'Are you sure?',
 
 ];
