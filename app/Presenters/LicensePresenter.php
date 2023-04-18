@@ -33,7 +33,7 @@ class LicensePresenter extends Presenter
                 'field' => 'name',
                 'searchable' => true,
                 'sortable' => true,
-                'title' => trans('admin/licenses/table.title'),
+                'title' => trans('general.name'),
                 'formatter' => 'licensesLinkFormatter',
             ], [
                 'field' => 'product_key',

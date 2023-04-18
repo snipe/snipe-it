@@ -26,9 +26,20 @@ Route::group(['prefix' => 'licenses', 'middleware' => ['auth']], function () {
     )->name('licenses.checkin.save');
 
     Route::post(
+        '{licenseId}/bulkcheckin',
+        [Licenses\LicenseCheckinController::class, 'bulkCheckin']
+    )->name('licenses.bulkcheckin');
+
+    Route::post(
+        '{licenseId}/bulkcheckout',
+        [Licenses\LicenseCheckoutController::class, 'bulkCheckout']
+    )->name('licenses.bulkcheckout');
+
+    Route::post(
     '{licenseId}/upload',
         [Licenses\LicenseFilesController::class, 'store']
     )->name('upload/license');
+
     Route::delete(
     '{licenseId}/deletefile/{fileId}',
         [Licenses\LicenseFilesController::class, 'destroy']

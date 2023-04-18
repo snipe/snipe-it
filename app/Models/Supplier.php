@@ -78,24 +78,7 @@ class Supplier extends SnipeModel
     {
         return $this->hasMany(Asset::class)->whereNull('deleted_at')->selectRaw('supplier_id, count(*) as count')->groupBy('supplier_id');
     }
-
-    /**
-     * Sets the license seat count attribute
-     *
-     * @todo I don't see the licenseSeatsRelation here?
-     *
-     * @author A. Gianotto <snipe@snipe.net>
-     * @since [v1.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
-     */
-    public function getLicenseSeatsCountAttribute()
-    {
-        if ($this->licenseSeatsRelation->first()) {
-            return $this->licenseSeatsRelation->first()->count;
-        }
-
-        return 0;
-    }
+    
 
     /**
      * Establishes the supplier -> assets relationship
