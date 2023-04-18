@@ -455,40 +455,27 @@ class License extends Depreciable
      * @since [v2.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function licenseSeatsRelation()
+    public function seats()
     {
         return $this->hasMany(LicenseSeat::class)->whereNull('deleted_at')->selectRaw('license_id, count(*) as count')->groupBy('license_id');
     }
 
+
     /**
-     * Sets the license seat count attribute
+     * Returns the number of total available seats for this license
+     * @todo - refactor all of these weird counters for licenses. The relationships are donked, yo.
      *
      * @author A. Gianotto <snipe@snipe.net>
      * @since [v2.0]
      * @return int
      */
-    public function getLicenseSeatsCountAttribute()
-    {
-        if ($this->licenseSeatsRelation->first()) {
-            return $this->licenseSeatsRelation->first()->count;
-        }
-
-        return 0;
-    }
-
-    /**
-     * Returns the number of total available seats across all licenses
-     *
-     * @author A. Gianotto <snipe@snipe.net>
-     * @since [v2.0]
-     * @return int
-     */
-    public static function availassetcount()
+    public function availableSeats()
     {
         return LicenseSeat::whereNull('assigned_to')
-                   ->whereNull('asset_id')
-                   ->whereNull('deleted_at')
-                   ->count();
+            ->where('license_id', '=', $this->id)
+            ->whereNull('asset_id')
+            ->whereNull('deleted_at')
+            ->count();
     }
 
     /**
@@ -500,7 +487,7 @@ class License extends Depreciable
      */
     public function availCount()
     {
-        return $this->licenseSeatsRelation()
+        return $this->seats()
             ->whereNull('asset_id')
             ->whereNull('assigned_to')
             ->whereNull('deleted_at');
@@ -531,7 +518,7 @@ class License extends Depreciable
      */
     public function assignedCount()
     {
-        return $this->licenseSeatsRelation()->where(function ($query) {
+        return $this->seats()->where(function ($query) {
             $query->whereNotNull('assigned_to')
             ->orWhereNotNull('asset_id');
         });
