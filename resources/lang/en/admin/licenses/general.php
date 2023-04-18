@@ -43,8 +43,5 @@ return array(
 
 
             ],
-
-        'checkout'  => 'The :attribute must be between :min - :max characters.',
-        'array'   => 'The :attribute must have between :min and :max items.',
     ],
 );
