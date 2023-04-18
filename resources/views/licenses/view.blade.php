@@ -579,7 +579,7 @@
     @can('checkin', $license)
 
       @if (($license->seats - $license->availCount()->count()) > 0 )
-        <a href="#" class="btn btn-block bg-purple" style="margin-bottom: 25px;" data-toggle="modal" data-tooltip="true"  data-target="#checkinFromAllModal" title="{{ trans('admin/licenses/general.bulk.checkin_all.enabled_tooltip') }}">
+        <a href="#" class="btn btn-block bg-purple" style="margin-bottom: 25px;" data-toggle="modal" data-tooltip="true"  data-target="#checkinFromAllModal" data-content="{{ trans('general.sure_to_delete') }} data-title="{{  trans('general.delete') }}" onClick="return false;">
           {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
         </a>
       @else
@@ -594,10 +594,14 @@
     @can('delete', $license)
 
       @if ($license->availCount()->count() == $license->seats)
-        <a href="{{ route('licenses.destroy', $license->id) }}" class="btn btn-block btn-danger" style="margin-bottom: 10px;">{{ trans('general.delete') }}</a>
+        <button class="btn btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.delete_confirm', ['item' => $license->name]) }}" data-target="#dataConfirmModal">
+          {{ trans('general.delete') }}
+        </button>
       @else
           <span data-tooltip="true" title=" {{ trans('admin/licenses/general.delete_disabled') }}">
-            <a href="{{ route('licenses.destroy', $license->id) }}" class="btn btn-block btn-danger disabled" style="margin-bottom: 10px;">{{ trans('general.delete') }}</a>
+            <a href="#" class="btn btn-block btn-danger disabled">
+              {{ trans('general.delete') }}
+            </a>
           </span>
       @endif
     @endcan
@@ -626,6 +630,8 @@
         ])
 @endcan
 
+
+
 @can('update', \App\Models\License::class)
   @include ('modals.upload-file', ['item_type' => 'license', 'item_id' => $license->id])
 @endcan
@@ -634,5 +640,15 @@
 
 
 @section('moar_scripts')
+  <script>
+
+    $('#dataConfirmModal').on('show.bs.modal', function (event) {
+      var content = $(event.relatedTarget).data('content');
+      var title = $(event.relatedTarget).data('title');
+      $(this).find(".modal-body").text(content);
+      $(this).find(".modal-header").text(title);
+    });
+
+  </script>
   @include ('partials.bootstrap-table')
 @stop
