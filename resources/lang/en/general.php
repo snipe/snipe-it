@@ -446,5 +446,6 @@ return [
     'no_autoassign_licenses_help' => 'Do not include user for bulk-assigning through the license UI or cli tools.',
     'modal_confirm_generic'      => 'Are you sure?',
     'cannot_be_deleted'      => 'This item cannot be deleted',
+    'undeployable_tooltip'      => 'This item cannot be checked out. Check the quantity remaining.',
 
 ];
