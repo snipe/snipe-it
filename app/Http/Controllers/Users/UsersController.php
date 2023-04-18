@@ -780,16 +780,4 @@ class UsersController extends Controller
         return redirect()->back()->with('error', 'User is not activated, is LDAP synced, or does not have an email address ');
     }
 
-    /**
-     * get user org list with input user ID is the manager
-     *
-     * @author A. Rahardianto
-     * @since [v6.1.0]
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function getUserOrg($id)
-    {
-
-        return response()->json(Helper::formatStandardApiResponse('error', null, $assetMaintenance->getErrors()));
-    }
 }
