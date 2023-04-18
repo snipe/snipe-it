@@ -184,6 +184,10 @@ class LicenseCheckoutController extends Controller
             }
         }
 
+        if ($assigned_count ==  0) {
+            return redirect()->back()->with('warning', trans('admin/licenses/general.bulk.checkout_all.warn_no_avail_users', ['count' => $assigned_count]));
+        }
+
         return redirect()->back()->with('success', trans_choice('admin/licenses/general.bulk.checkout_all.success', 2, ['count' => $assigned_count] ));
 
 
