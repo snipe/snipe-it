@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
+use App\Models\Component;
 use App\Models\Consumable;
 use App\Models\LicenseSeat;
 use App\Models\Recipients\AdminRecipient;
@@ -22,12 +23,20 @@ use Log;
 
 class CheckoutableListener
 {
+    private array $skipNotificationsFor = [
+        Component::class,
+    ];
+
     /**
      * Notify the user and post to webhook about the checked out checkoutable and add a record to the
      * checkout_requests table.
      */
     public function onCheckedOut($event)
     {
+        if ($this->shouldNotSendAnyNotifications($event->checkoutable)){
+            return;
+        }
+
         // Send an anonymous webhook notification if setting enabled
         if ($this->shouldSendWebhookNotification()) {
             Notification::route('slack', Setting::getSettings()->webhook_endpoint)
@@ -63,6 +72,10 @@ class CheckoutableListener
     public function onCheckedIn($event)
     {
         \Log::debug('onCheckedIn in the Checkoutable listener fired');
+
+        if ($this->shouldNotSendAnyNotifications($event->checkoutable)) {
+            return;
+        }
 
         // Send an anonymous webhook notification if setting enabled
         if ($this->shouldSendWebhookNotification()) {
@@ -218,6 +231,11 @@ class CheckoutableListener
             \App\Events\CheckoutableCheckedOut::class,
             'App\Listeners\CheckoutableListener@onCheckedOut'
         ); 
+    }
+
+    private function shouldNotSendAnyNotifications($checkoutable): bool
+    {
+        return in_array(get_class($checkoutable), $this->skipNotificationsFor);
     }
 
     private function shouldSendWebhookNotification(): bool
