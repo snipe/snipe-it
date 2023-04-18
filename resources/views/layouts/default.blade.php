@@ -34,8 +34,7 @@
     <link rel="stylesheet" href="{{ url(('css/jquery.orgchart.css'))}}">
     <link rel="stylesheet" href="{{ url(('css/style.css'))}}">
     <style type="text/css">
-    #chart-container { height:  1024px; text-align: center;}
-    .orgchart { background: #fff; padding-bottom:20px;}
+    #chart-container { height:  1024px; text-align: center;}   
     .orgchart td.left, .orgchart td.right, .orgchart td.top { border-color: #aaa; }
        
     .orgchart .node.top {
