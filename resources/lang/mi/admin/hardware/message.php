@@ -22,6 +22,8 @@ return [
     'restore' => [
         'error'   		=> 'Kaore i whakahokia mai te tahua, tena koa ngana ano',
         'success' 		=> 'Kua hokihia te tahua.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [

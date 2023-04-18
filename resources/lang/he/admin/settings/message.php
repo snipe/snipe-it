@@ -33,12 +33,12 @@ return [
         'testing_authentication' => 'בודק אימות מול שרת LDAP...',
         'authentication_success' => 'התחברות לשרת LDAפ עברה בהצלחה!'
     ],
-    'slack' => [
-        'sending' => 'שולח הודעת Slack לבדיקה...',
-        'success_pt1' => 'הבדיקה עברה בהצלחה! בדוק את ',
+    'webhook' => [
+        'sending' => 'Sending :app test message...',
+        'success_pt1' => 'Success! Check the ',
         'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
-        '500' => '500 שגיאת שרת.',
-        'error' => 'Something went wrong. Slack responded with: :error_message',
+        '500' => '500 Server Error.',
+        'error' => 'Something went wrong. :app responded with: :error_message',
         'error_misc' => 'Something went wrong. :( ',
     ]
 ];

@@ -74,7 +74,7 @@ class ItemImporter extends Importer
 
         $this->item['purchase_date'] = null;
         if ($this->findCsvMatch($row, 'purchase_date') != '') {
-            $this->item['purchase_date'] = date('Y-m-d 00:00:01', strtotime($this->findCsvMatch($row, 'purchase_date')));
+            $this->item['purchase_date'] = date('Y-m-d', strtotime($this->findCsvMatch($row, 'purchase_date')));
         }
 
         $this->item['last_audit_date'] = null;
@@ -90,7 +90,7 @@ class ItemImporter extends Importer
         $this->item['qty'] = $this->findCsvMatch($row, 'quantity');
         $this->item['requestable'] = $this->findCsvMatch($row, 'requestable');
         $this->item['user_id'] = $this->user_id;
-        $this->item['serial'] = $this->findCsvMatch($row, 'serial number');
+        $this->item['serial'] = $this->findCsvMatch($row, 'serial');
         // NO need to call this method if we're running the user import.
         // TODO: Merge these methods.
         $this->item['checkout_class'] = $this->findCsvMatch($row, 'checkout_class');
@@ -222,11 +222,11 @@ class ItemImporter extends Importer
             $item = $this->sanitizeItemForStoring($asset_model, $editingModel);
             $item['name'] = $asset_model_name;
             $item['notes'] = $this->findCsvMatch($row, 'model_notes');
-            
+
             if(!empty($asset_modelNumber)){
                 $item['model_number'] = $asset_modelNumber;
             }
-            
+
             $asset_model->update($item);
             $asset_model->save();
             $this->log('Asset Model Updated');

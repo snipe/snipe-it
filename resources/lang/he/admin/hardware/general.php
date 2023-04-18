@@ -42,5 +42,6 @@ return [
     'error_messages' => 'שגיאות:',
     'success_messages' => 'אישור:',
     'alert_details' => 'נא ראה הסבר בהמשך.',
-    'custom_export' => 'יבוא מותאם'
+    'custom_export' => 'יבוא מותאם',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];

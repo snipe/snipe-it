@@ -2,8 +2,11 @@
 
 return [
     'bulk_delete'		=> 'பெரும்பங்கு சொத்துக்களை நீக்குவதை உறுதிப்படுத்தவும்',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> 'கீழே மொத்த நீக்குவதற்கான சொத்துக்களை மதிப்பாய்வு செய்யவும். நீக்கப்பட்டவுடன், இந்த சொத்துகள் மீட்டமைக்கப்படலாம், ஆனால் அவை தற்போது எந்த பயனர்களையும் தற்போது ஒதுக்கப்படும்.',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'நீங்கள் நீக்குவது: asset_count சொத்துகள்.',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'மொத்த புதுப்பித்தல் சொத்துகள்',
     'bulk_update_help'	=> 'இந்த படிவம் ஒரே நேரத்தில் பல சொத்துக்களை புதுப்பிக்க உதவுகிறது. நீங்கள் மாற்ற வேண்டிய துறைகள் மட்டுமே நிரப்பவும். காலியாக உள்ள எந்த புலமும் மாறாமல் இருக்கும்.',
     'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
@@ -45,7 +48,7 @@ return [
     'asset_location_update_default' => 'Update only default location',
     'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
     'asset_deployable' => 'That status is deployable. This asset can be checked out.',
-    'processing_spinner' => 'Processing...',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Optional Information',
     'order_details'   => 'Order Related Information'
 ];

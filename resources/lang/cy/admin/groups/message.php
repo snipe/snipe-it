@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'Grwp yn bodoli yn barod!',
-    'group_not_found'     => 'Nid yw grwp [:id] yn bodoli.',
+    'group_not_found'     => 'Group ID :id does not exist.',
     'group_name_required' => 'Mae angen llenwi\'r maes enw',
 
     'success' => array(

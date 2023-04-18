@@ -25,6 +25,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'האבזר לא הונפק, אנא נסה שנית',
         'success' 		=> 'האבזר הונפק בהצלחה.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'משתמש אינו קיים. אנא נסה/י שנית.'
     ),
 

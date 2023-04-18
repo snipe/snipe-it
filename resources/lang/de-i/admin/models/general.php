@@ -6,7 +6,7 @@ return array(
     'deleted'  					        => 'Dieses Modell wurde gelöscht.',
     'bulk_delete'               => 'Massenlöschen von Asset-Modellen',
     'bulk_delete_help'               => 'Nutze die nachfolgenden Kontrollkästchen, um die Löschung der Asset-Modelle zu bestätigen. Asset-Modelle, die noch zugewiesene Assets haben, können nur dann gelöscht werden, wenn die enthaltenen Assets einem anderen Asset-Modell zugewiesen werden.',
-    'bulk_delete_warn'          => 'Du bist im Begriff :model_count Asset-Modelle zu löschen.',
+    'bulk_delete_warn'          => 'You are about to delete one asset model.|You are about to delete :model_count asset models.',
     'restore'                   => 'Modell wiederherstellen',
     'requestable'               => 'Benutzer können dieses Modell anfordern',
 	'show_mac_address'			      => 'MAC Adressen Feld anzeigen für Assets mit diesem Modell',

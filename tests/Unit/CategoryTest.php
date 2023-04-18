@@ -2,21 +2,12 @@
 namespace Tests\Unit;
 
 use App\Models\Category;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Tests\Unit\BaseTest;
 use App\Models\AssetModel;
 use App\Models\Asset;
-use App\Models\Accessory;
+use Tests\TestCase;
 
-class CategoryTest extends BaseTest
+class CategoryTest extends TestCase
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
-
     public function testFailsEmptyValidation()
     {
         // An Asset requires a name, a qty, and a category_id.
@@ -35,7 +26,7 @@ class CategoryTest extends BaseTest
 
     public function testACategoryCanHaveAssets()
     {
-       $category = Category::factory()->assetDesktopCategory();
+       $category = Category::factory()->assetDesktopCategory()->create();
 
        // Generate 5 models via factory
        $models =  AssetModel::factory()

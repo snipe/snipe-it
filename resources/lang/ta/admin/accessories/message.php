@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'அசெஸரி அவுட் சரிபார்க்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்',
         'success' 		=> 'அசெஸரி வெற்றிகரமாக சோதிக்கப்பட்டது.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'அந்த பயனர் தவறானது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.'
     ),
 

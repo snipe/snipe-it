@@ -23,6 +23,8 @@ return [
     'restore' => [
         'error'   		=> '資産は復元されませんでした。もう一度、やり直して下さい。',
         'success' 		=> '資産は正常に復元されました。',
+        'bulk_success' 		=> '資産は正常に復元されました。',
+        'nothing_updated'   => '資産が選択されていないため、何も復元されませんでした。', 
     ],
 
     'audit' => [
@@ -49,8 +51,8 @@ return [
         'success'               => 'ファイルはインポートされました。',
         'file_delete_success'   => 'ファイルを削除しました。',
         'file_delete_error'      => 'ファイルが削除出来ませんでした。',
-        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
-        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'header_row_has_malformed_characters' => 'ヘッダー行の1つ以上の属性に不正な形式のUTF-8文字が含まれています',
+        'content_row_has_malformed_characters' => 'コンテンツの最初の行の1つまたは複数の属性に不正な形式のUTF-8文字が含まれています',
     ],
 
 

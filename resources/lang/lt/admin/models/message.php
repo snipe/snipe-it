@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Modelis nebuvo atnaujintas, prašome bandykite iš naujo',
-        'success' => 'Modelis sėkmingai atnaujintas.'
+        'success' => 'Modelis sėkmingai atnaujintas.',
     ),
 
     'delete' => array(
@@ -32,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Nebuvo pakeista jokių laukų, todėl niekas nebuvo atnaujintas.',
-        'success' 		=> 'Modeliai atnaujinti.'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Nepasirinktas modelis, nėra ką ištrinti.',
-        'success' 		    => ':success_count model(s) ištrinti!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ':success_count model(s) buvo ištrinti, bet :fail_count negalima ištrinti todėl, kad turtas vis dar susietas.'
     ),
 

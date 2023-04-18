@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'Email',
     'employee_num'      	=> 'Medarbejder nr.',
     'first_name' 			=> 'Fornavn',
-    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
+    'groupnotes'			=> 'Vælg en gruppe at tildele til brugeren, husk at en bruger får rettighederne for den gruppe, de er tildelt. Brug ctrl+klik (eller cmd+klik på MacOS) for at fravælge grupper.',
     'id'         			=> 'ID',
     'inherit'  				=> 'Arve',
     'job' 					=> 'Job Titel',

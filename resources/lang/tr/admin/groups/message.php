@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'Grup zaten mevcut.',
-    'group_not_found'     => 'Grup [:id] mevcut değil.',
+    'group_not_found'     => 'Group ID : ID mevcut değil.',
     'group_name_required' => 'İsim alanı zorunludur',
 
     'success' => array(

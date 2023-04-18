@@ -39,6 +39,11 @@
               <a href="{{ route('accessories.edit', $accessory->id) }}">{{ trans('admin/accessories/general.edit') }}</a>
             </li>
             @endcan
+            @can('update', \App\Models\Accessory::class)
+            <li role="menuitem">
+              <a href="{{ route('clone/accessories', $accessory->id) }}">{{ trans('admin/accessories/general.clone') }}</a>
+            </li>
+            @endcan
           </ul>
         </div>
     @endcan

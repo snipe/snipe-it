@@ -59,6 +59,12 @@ class LicenseCheckinController extends Controller
         }
 
         $license = License::find($licenseSeat->license_id);
+
+        // LicenseSeat is not assigned, it can't be checked in
+        if (is_null($licenseSeat->assigned_to) && is_null($licenseSeat->asset_id)) {
+            return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.checkin.error'));
+        }
+
         $this->authorize('checkout', $license);
 
         if (! $license->reassignable) {

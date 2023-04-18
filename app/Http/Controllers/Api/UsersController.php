@@ -20,6 +20,7 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
@@ -69,6 +70,7 @@ class UsersController extends Controller
             'users.ldap_import',
             'users.start_date',
             'users.end_date',
+            'users.vip',
 
         ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy',)
             ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count');
@@ -149,6 +151,10 @@ class UsersController extends Controller
             $users = $users->where('remote', '=', $request->input('remote'));
         }
 
+        if ($request->filled('vip')) {
+            $users = $users->where('vip', '=', $request->input('vip'));
+        }
+
         if ($request->filled('two_factor_enrolled')) {
             $users = $users->where('two_factor_enrolled', '=', $request->input('two_factor_enrolled'));
         }
@@ -186,14 +192,10 @@ class UsersController extends Controller
         }
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $offset = (($users) && (request('offset') > $users->count())) ? 0 : request('offset', 0);
 
-        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
-        // case we override with the actual count, so we should return 0 items.
-        $offset = (($users) && ($request->get('offset') > $users->count())) ? $users->count() : $request->get('offset', 0);
-
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $users->count()) ? $users->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
 
 
         switch ($request->input('sort')) {
@@ -211,6 +213,14 @@ class UsersController extends Controller
                 break;
             case 'company':
                 $users = $users->OrderCompany($order);
+                break;
+            case 'first_name':
+                $users->orderBy('first_name', $order);
+                $users->orderBy('last_name', $order);
+                break;
+            case 'last_name':
+                $users->orderBy('last_name', $order);
+                $users->orderBy('first_name', $order);
                 break;
             default:
                 $allowed_columns =
@@ -246,6 +256,7 @@ class UsersController extends Controller
                         'two_factor_optin',
                         'two_factor_enrolled',
                         'remote',
+                        'vip',
                         'start_date',
                         'end_date',
                     ];
@@ -286,9 +297,11 @@ class UsersController extends Controller
         $users = Company::scopeCompanyables($users);
 
         if ($request->filled('search')) {
-            $users = $users->SimpleNameSearch($request->get('search'))
-                ->orWhere('username', 'LIKE', '%'.$request->get('search').'%')
-                ->orWhere('employee_num', 'LIKE', '%'.$request->get('search').'%');
+            $users = $users->where(function ($query) use ($request) {
+                $query->SimpleNameSearch($request->get('search'))
+                    ->orWhere('username', 'LIKE', '%'.$request->get('search').'%')
+                    ->orWhere('employee_num', 'LIKE', '%'.$request->get('search').'%');
+            });
         }
 
         $users = $users->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');
@@ -449,6 +462,13 @@ class UsersController extends Controller
 
             // Check if the request has groups passed and has a value
             if ($request->filled('groups')) {
+                $validator = Validator::make($request->all(), [
+                    'groups.*' => 'integer|exists:permission_groups,id',
+                ]);
+                
+                if ($validator->fails()){
+                    return response()->json(Helper::formatStandardApiResponse('error', null, $user->getErrors()));
+                }
                 $user->groups()->sync($request->input('groups'));
             // The groups field has been passed but it is null, so we should blank it out
             } elseif ($request->has('groups')) {

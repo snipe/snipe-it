@@ -163,9 +163,16 @@ class AssetPresenter extends Presenter
             ], [
                 'field' => 'eol',
                 'searchable' => false,
-                'sortable' => false,
+                'sortable' => true,
                 'visible' => false,
                 'title' => trans('general.eol'),
+            ],
+            [
+                'field' => 'asset_eol_date',
+                'searchable' => true,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('admin/hardware/form.eol_date'),
                 'formatter' => 'dateDisplayFormatter',
             ], [
                 'field' => 'warranty_months',

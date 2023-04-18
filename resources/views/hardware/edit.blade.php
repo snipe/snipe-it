@@ -18,18 +18,22 @@
   <!-- Asset Tag -->
   <div class="form-group {{ $errors->has('asset_tag') ? ' has-error' : '' }}">
     <label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }}</label>
-    
-      <!-- we are editing an existing asset -->
+
+
+
       @if  ($item->id)
+          <!-- we are editing an existing asset,  there will be only one asset tag -->
           <div class="col-md-7 col-sm-12{{  (Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
-          <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ Request::old('asset_tag', $item->asset_tag) }}" data-validation="required">
+
+
+          <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ old('asset_tag', $item->asset_tag) }}" data-validation="required">
               {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
               {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
           </div>
       @else
           <!-- we are creating a new asset - let people use more than one asset tag -->
           <div class="col-md-7 col-sm-12{{  (Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
-              <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ Request::old('asset_tag', \App\Models\Asset::autoincrement_asset()) }}" data-validation="required">
+              <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ old('asset_tags.1', \App\Models\Asset::autoincrement_asset()) }}" data-validation="required">
               {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
               {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
           </div>
@@ -40,11 +44,8 @@
           </div>
       @endif
   </div>
-    
 
-
-
-    @include ('partials.forms.edit.serial', ['fieldname'=> 'serials[1]', 'translated_serial' => trans('admin/hardware/form.serial')])
+    @include ('partials.forms.edit.serial', ['fieldname'=> 'serials[1]', 'old_val_name' => 'serials.1', 'translated_serial' => trans('admin/hardware/form.serial')])
 
     <div class="input_fields_wrap">
     </div>
@@ -67,26 +68,10 @@
     @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.default_location'), 'fieldname' => 'rtd_location_id'])
     @include ('partials.forms.edit.requestable', ['requestable_text' => trans('admin/hardware/general.requestable')])
 
-    <!-- Image -->
-    @if (($item->image) && ($item->image!=''))
-        <div class="form-group{{ $errors->has('image_delete') ? ' has-error' : '' }}">
-            <div class="col-md-9 col-md-offset-3">
-                <label for="image_delete">
-                    {{ Form::checkbox('image_delete', '1', old('image_delete'), ['class'=>'minimal','aria-label'=>'image_delete']) }}
-                    {{ trans('general.image_delete') }}
-                    {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
-                </label>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-9 col-md-offset-3">
-                <img src="{{ Storage::disk('public')->url(app('assets_upload_path').e($item->image)) }}" class="img-responsive">
-                {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
-            </div>
-        </div>
-    @endif
 
-    @include ('partials.forms.edit.image-upload')
+
+    @include ('partials.forms.edit.image-upload', ['image_path' => app('assets_upload_path')])
+
 
     <div id='custom_fields_content'>
         <!-- Custom Fields -->
@@ -95,7 +80,7 @@
         @endif
         @if (Request::old('model_id'))
             @php
-                $model = \App\Models\AssetModel::find(Request::old('model_id'));
+                $model = \App\Models\AssetModel::find(old('model_id'));
             @endphp
         @elseif (isset($selected_model))
             @php
@@ -127,8 +112,8 @@
             <!-- byod checkbox -->
             <div class="form-group">
                 <div class="col-md-7 col-md-offset-3">
-                    <label for="byod">
-                        <input type="checkbox" value="1" name="byod" class="minimal" {{ (old('remote', $item->byod)) == '1' ? ' checked="checked"' : '' }} aria-label="byod">
+                    <label for="byod" class="form-control">
+                        <input type="checkbox" value="1" name="byod" {{ (old('remote', $item->byod)) == '1' ? ' checked="checked"' : '' }} aria-label="byod">
                         {{ trans('general.byod') }}
 
                     </label>
@@ -152,6 +137,7 @@
             <br>
             @include ('partials.forms.edit.order_number')
             @include ('partials.forms.edit.purchase_date')
+            @include ('partials.forms.edit.eol_date')
             @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
 
                 @php
@@ -197,7 +183,7 @@
 
             $.ajax({
                 type: 'GET',
-                url: "{{ url('/') }}/models/" + modelid + "/custom_fields",
+                url: "{{ config('app.url') }}/models/" + modelid + "/custom_fields",
                 headers: {
                     "X-Requested-With": 'XMLHttpRequest',
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
@@ -229,7 +215,7 @@
         if (status_id != '') {
             $(".status_spinner").css("display", "inline");
             $.ajax({
-                url: "{{url('/') }}/api/v1/statuslabels/" + status_id + "/deployable",
+                url: "{{config('app.url') }}/api/v1/statuslabels/" + status_id + "/deployable",
                 headers: {
                     "X-Requested-With": 'XMLHttpRequest',
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')

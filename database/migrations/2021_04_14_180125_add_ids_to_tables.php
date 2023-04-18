@@ -22,7 +22,7 @@ class AddIdsToTables extends Migration
 
         Schema::table('password_resets', function (Blueprint $table) {
             // Add the id column to the password_resets table if it doesn't yet have one
-            if (! Schema::hasColumn('password_resets', 'id')) {
+            if (! Schema::hasColumn('password_resets', 'id') && $this->notUsingSqlite()) {
                 $table->increments('id');
             }
         });
@@ -46,5 +46,10 @@ class AddIdsToTables extends Migration
                 $table->dropColumn('id');
             }
         });
+    }
+
+    private function notUsingSqlite()
+    {
+        return Schema::connection($this->getConnection())->getConnection()->getDriverName() !== 'sqlite';
     }
 }

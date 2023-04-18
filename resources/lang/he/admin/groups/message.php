@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'הקבוצה כבר קיימת!',
-    'group_not_found'     => 'קבוצה [: id] לא קיימת.',
+    'group_not_found'     => 'מזהה הקבוצה :id לא קיים.',
     'group_name_required' => 'שדה השדה נדרש',
 
     'success' => array(

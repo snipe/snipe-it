@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Kaore ano kia uruhia te uru, ka ngana ano',
         'success' 		=> 'He pai te tirotiro i te Accessory.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'He muhu te kaiwhakamahi. Tena ngana ano.'
     ),
 

@@ -16,5 +16,6 @@ return array(
     'update'  							=> 'Actualizar Accesorio',
     'use_default_eula'					=> 'En su lugar, use el <a href="#" data-toggle="modal" data-target="#eulaModal">EULA por defecto</a>.',
     'use_default_eula_disabled'			=> '<del>En su lugar, use el EULA por defecto.</del> No esta configurado un EULA por defecto. Por favor agregue uno en Configuración.',
+    'clone'                             => 'Clonar accesorio',
 
 );

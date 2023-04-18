@@ -86,6 +86,15 @@ class UserPresenter extends Presenter
                 'formatter' => 'usersLinkFormatter',
             ],
             [
+                'field' => 'vip',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('admin/users/general.vip_label'),
+                'visible' => false,
+                'formatter' => 'trueFalseFormatter',
+            ],
+            [
                 'field' => 'remote',
                 'searchable' => false,
                 'sortable' => true,
@@ -397,7 +406,7 @@ class UserPresenter extends Presenter
         }
 
         // Set a fun, gender-neutral default icon
-        return url('/').'/img/default-sm.png';
+        return config('app.url').'/img/default-sm.png';
     }
 
     /**

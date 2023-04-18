@@ -101,6 +101,7 @@ class AssetsController extends Controller
             'checkin_counter',
             'requests_counter',
             'byod',
+            'asset_eol_date',
         ];
 
         $filter = [];
@@ -128,14 +129,12 @@ class AssetsController extends Controller
         // They are also used by the individual searches on detail pages like
         // locations, etc.
 
-
         // Search custom fields by column name
         foreach ($all_custom_fields as $field) {
             if ($request->filled($field->db_column_name())) {
                 $assets->where($field->db_column_name(), '=', $request->input($field->db_column_name()));
             }
         }
-
 
         if ($request->filled('status_id')) {
             $assets->where('assets.status_id', '=', $request->input('status_id'));
@@ -173,6 +172,10 @@ class AssetsController extends Controller
             $assets->where('assets.supplier_id', '=', $request->input('supplier_id'));
         }
 
+        if ($request->filled('asset_eol_date')) {
+            $assets->where('assets.asset_eol_date', '=', $request->input('asset_eol_date'));
+        }
+
         if (($request->filled('assigned_to')) && ($request->filled('assigned_type'))) {
             $assets->where('assets.assigned_to', '=', $request->input('assigned_to'))
                 ->where('assets.assigned_type', '=', $request->input('assigned_type'));
@@ -196,13 +199,9 @@ class AssetsController extends Controller
 
         $request->filled('order_number') ? $assets = $assets->where('assets.order_number', '=', e($request->get('order_number'))) : '';
 
-        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
-        // case we override with the actual count, so we should return 0 items.
-        $offset = (($assets) && ($request->get('offset') > $assets->count())) ? $assets->count() : $request->get('offset', 0);
-
-
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $assets->count()) ? $assets->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 
@@ -460,7 +459,7 @@ class AssetsController extends Controller
     {
         $this->authorize('view', Asset::class);
         $this->authorize('view', License::class);
-        $asset = Asset::where('id', $id)->withTrashed()->first();
+        $asset = Asset::where('id', $id)->withTrashed()->firstorfail();
         $licenses = $asset->licenses()->get();
 
         return (new LicensesTransformer())->transformLicenses($licenses, $licenses->count());
@@ -829,7 +828,6 @@ class AssetsController extends Controller
 
         } elseif (request('checkout_to_type') == 'asset') {
             $target = Asset::where('id', '!=', $asset_id)->find(request('assigned_asset'));
-            $asset->location_id = $target->rtd_location_id;
             // Override with the asset's location_id if it has one
             $asset->location_id = (($target) && (isset($target->location_id))) ? $target->location_id : '';
             $error_payload['target_id'] = $request->input('assigned_asset');
@@ -938,18 +936,21 @@ class AssetsController extends Controller
      * @since [v6.0]
      * @return JsonResponse
      */
-    public function checkinByTag(Request $request)
+    public function checkinByTag(Request $request, $tag = null)
     {
         $this->authorize('checkin', Asset::class);
-        $asset = Asset::where('asset_tag', $request->input('asset_tag'))->first();
+        if(null == $tag && null !== ($request->input('asset_tag'))) {
+            $tag = $request->input('asset_tag');
+        }
+        $asset = Asset::where('asset_tag', $tag)->first();
 
         if ($asset) {
             return $this->checkin($request, $asset->id);
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', [
-            'asset'=> e($request->input('asset_tag'))
-        ], 'Asset with tag '.e($request->input('asset_tag')).' not found'));
+            'asset'=> e($tag)
+        ], 'Asset with tag '.e($tag).' not found'));
     }
 
 

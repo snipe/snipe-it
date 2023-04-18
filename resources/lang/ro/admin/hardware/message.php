@@ -22,6 +22,8 @@ return [
     'restore' => [
         'error'   		=> 'Asset nu a fost restaurat, încercați din nou',
         'success' 		=> 'Activul a fost restaurat cu succes.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
