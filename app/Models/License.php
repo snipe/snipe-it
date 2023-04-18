@@ -491,12 +491,6 @@ class License extends Depreciable
             ->count();
     }
 
-    public function availableSeats()
-    {
-        return LicenseSeat::whereNull('assigned_to')
-            ->whereNull('asset_id')
-            ->whereNull('deleted_at');
-    }
 
     /**
      * Returns the number of total available seats for this license
