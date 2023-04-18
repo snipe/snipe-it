@@ -267,7 +267,7 @@
                             @can('admin')
                                 @if ($snipeSettings->show_alerts_in_menu=='1')
                                     <!-- Tasks: style can be found in dropdown.less -->
-                                    <?php $alert_items = Helper::checkLowInventory(); ?>
+                                        <?php $alert_items = Helper::checkLowInventory(); ?>
 
                                     <li class="dropdown tasks-menu">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -442,7 +442,7 @@
                                         </a>
                                     </li>
 
-                                    <?php $status_navs = \App\Models\Statuslabel::where('show_in_nav', '=', 1)->withCount('assets as asset_count')->get(); ?>
+                                        <?php $status_navs = \App\Models\Statuslabel::where('show_in_nav', '=', 1)->withCount('assets as asset_count')->get(); ?>
                                     @if (count($status_navs) > 0)
                                         @foreach ($status_navs as $status_nav)
                                             <li{!! (Request::is('statuslabels/'.$status_nav->id) ? ' class="active"' : '') !!}>
@@ -850,9 +850,8 @@
                 </section>
 
             </div><!-- /.content-wrapper -->
-            <footer class="main-footer hidden-print">
-
-                <div class="pull-right hidden-xs">
+            <footer class="main-footer hidden-print" style="display:grid;flex-direction:column;">
+                <div class="pull-right hidden-xs pull-left">
                     @if ($snipeSettings->version_footer!='off')
                         @if (($snipeSettings->version_footer=='on') || (($snipeSettings->version_footer=='admin') && (Auth::user()->isSuperUser()=='1')))
                             &nbsp; <strong>Version</strong> {{ config('version.app_version') }} -
@@ -875,23 +874,19 @@
                            href="{{  $snipeSettings->privacy_policy_link }}"
                            target="_new">{{ trans('admin/settings/general.privacy_policy') }}</a>
                     @endif
-
-
-                </div>
-                @if ($snipeSettings->footer_text!='')
-                    <div class="pull-right">
-                        {!!  Helper::parseEscapedMarkedown($snipeSettings->footer_text)  !!}
+                    <div class="pull-right" >
+                        <a target="_blank" href="https://snipeitapp.com" rel="noopener">Snipe-IT</a> is open source software,
+                        made with <i class="fas fa-heart" style="color: #a94442; font-size: 10px" aria-hidden="true"></i><span
+                                class="sr-only">love</span> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a>.
                     </div>
-                @endif
-
-
-                <a target="_blank" href="https://snipeitapp.com" rel="noopener">Snipe-IT</a> is open source software,
-                made with <i class="fas fa-heart" style="color: #a94442; font-size: 10px" aria-hidden="true"></i><span
-                        class="sr-only">love</span> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a>.
+                    <br>
+                    @if ($snipeSettings->footer_text!='')
+                        <div class="pull-left" style="margin-left:7px;">
+                            {!!  Helper::parseEscapedMarkedown($snipeSettings->footer_text)  !!}
+                        </div>
+                    @endif
+                </div>
             </footer>
-
-
-
         </div><!-- ./wrapper -->
 
 
