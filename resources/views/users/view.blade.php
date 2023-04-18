@@ -520,23 +520,23 @@
                     </div>
                     @endif
 
-                    <!-- login enabled -->
+                    <!-- vip -->
                     <div class="row">
                       <div class="col-md-3">
                         {{ trans('admin/users/general.vip_label') }}
                       </div>
                       <div class="col-md-9">
-                        {!! ($user->vip=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                        {!! ($user->vip=='1') ? '<i class="fas fa-check fa-fw fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
                       </div>
                     </div> 
                     
-                    <!-- login enabled -->
+                    <!-- remote -->
                      <div class="row">
                       <div class="col-md-3">
                         {{ trans('admin/users/general.remote') }}
                       </div>
                       <div class="col-md-9">
-                        {!! ($user->remote=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                        {!! ($user->remote=='1') ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
                       </div>
                     </div>
 
@@ -546,17 +546,28 @@
                         {{ trans('general.login_enabled') }}
                       </div>
                       <div class="col-md-9">
-                        {!! ($user->activated=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                        {!! ($user->activated=='1') ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
                       </div>
                     </div>
 
-                    <!-- LDAP -->
+                   <!-- auto assign license -->
+                   <div class="row">
+                       <div class="col-md-3">
+                           {{ trans('general.autoassign_licenses') }}
+                       </div>
+                       <div class="col-md-9">
+                           {!! ($user->autoassign_licenses=='1') ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                       </div>
+                   </div>
+
+
+                   <!-- LDAP -->
                     <div class="row">
                       <div class="col-md-3">
                           LDAP
                       </div>
                       <div class="col-md-9">
-                        {!! ($user->ldap_import=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                        {!! ($user->ldap_import=='1') ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
 
                       </div>
                     </div>
@@ -570,7 +581,7 @@
                             </div>
                             <div class="col-md-9">
                           
-                              {!! ($user->two_factor_active()) ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                              {!! ($user->two_factor_active()) ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
                           
                             </div>
                           </div>
@@ -581,7 +592,7 @@
                               {{ trans('admin/users/general.two_factor_enrolled') }}
                             </div>
                             <div class="col-md-9" id="two_factor_reset_toggle">
-                              {!! ($user->two_factor_active_and_enrolled()) ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                              {!! ($user->two_factor_active_and_enrolled()) ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
 
                             </div>
                           </div>
