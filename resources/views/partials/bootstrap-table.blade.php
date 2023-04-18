@@ -384,7 +384,7 @@
 
                 // We use slightly different language for assets versus other things, since they are the only
                 // item that has a status label
-                if (destination =='assets') {
+                if (destination =='hardware') {
                     return '<span  data-tooltip="true" title="{{ trans('admin/hardware/general.undeployable_tooltip') }}"><a class="btn btn-sm bg-maroon disabled">{{ trans('general.checkout') }}</a></span>';
                 } else {
                     return '<span  data-tooltip="true" title="{{ trans('general.undeployable_tooltip') }}"><a class="btn btn-sm bg-maroon disabled">{{ trans('general.checkout') }}</a></span>';
