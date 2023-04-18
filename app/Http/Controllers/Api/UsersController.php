@@ -189,7 +189,7 @@ class UsersController extends Controller
         }
 
         if ($request->filled('autoassign_licenses')) {
-            $users->has('autoassign_licenses', '=', $request->input('autoassign_licenses'));
+            $users->where('autoassign_licenses', '=', $request->input('autoassign_licenses'));
         }
 
         if ($request->filled('search')) {
