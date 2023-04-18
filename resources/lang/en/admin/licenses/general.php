@@ -18,6 +18,7 @@ return array(
     'software_licenses'  		=> 'Software Licenses',
     'user'  					=> 'User',
     'view'  					=> 'View License',
+    'delete_disabled'           => 'This license cannot be deleted yet because some seats are still checked out.',
     'bulk'                      =>
         [
             'checkin_all'           => [
