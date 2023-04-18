@@ -34,16 +34,14 @@
     <link rel="stylesheet" href="{{ url(('css/jquery.orgchart.css'))}}">
     <link rel="stylesheet" href="{{ url(('css/style.css'))}}">
     <style type="text/css">
-    #chart-container { height:  1024px; }
+    #chart-container { height:  1024px; text-align: center;}
     .orgchart { background: #fff; padding-bottom:20px;}
     .orgchart td.left, .orgchart td.right, .orgchart td.top { border-color: #aaa; }
-        .orgchart .nodes {
-      justify-content: center;
-    }
+       
     .orgchart .node.top {
       justify-content: center;
       align-items: center;
-    }
+    }    
  
   </style>
 </head>

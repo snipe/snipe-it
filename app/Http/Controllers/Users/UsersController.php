@@ -422,16 +422,24 @@ class UsersController extends Controller
 
         $this->authorize('view', $user);
 
+        /* - top level -
+         * check if current user has a manager or not
+         * 
+         */
         $current_manager_id = DB::table('users')
                 ->select('manager_id')
                 ->where('id', '=', $userId)
-                ->first();
-        // dd($current_manager_id->manager_id);
+                ->first();     
+        
+        /* if user doesn't have assigned manager, 
+         * set this user as the top most position.
+         * otherwise set the manager as the top most position
+         */        
         if ($current_manager_id->manager_id !== null){
             $manager = DB::table('users')
                     ->select('first_name', 'last_name', 'jobtitle')
                     ->where('id', '=', $current_manager_id->manager_id)              
-                    ->get();
+                    ->first();
             $user_manager = collect([]);
             $user_manager -> add([
                 'name' => $manager->first_name." ".$manager->last_name,
@@ -449,20 +457,82 @@ class UsersController extends Controller
             ]);
         }
 
-        $show_user_org = DB::table('users')
+        /* 
+         * get manager info based on assigned manager_id
+         * otherwise get current user info
+         */
+        if ($current_manager_id->manager_id !== null){
+            $show_user_org = DB::table('users')
+                ->select('first_name', 'last_name', 'jobtitle')
+                ->where('id', '=', $userId)              
+                ->get();
+                
+        } else {
+            $show_user_org = DB::table('users')
+                ->select('first_name', 'last_name', 'jobtitle')
+                ->where('manager_id', '=', $userId)
+                ->WhereNull('deleted_at')              
+                ->get();   
+                // dd($show_user_org);         
+        }
+       
+        /*
+         * gets the list of users who has current user as the manager
+         * 
+         */ 
+        if ($current_manager_id->manager_id !== null){
+            $show_user_member_org = DB::table('users')
                 ->select('first_name', 'last_name', 'jobtitle')
                 ->where('manager_id', '=', $userId)              
                 ->get();
-       
-        $user_member = collect([]);
-        foreach ($show_user_org as $user_orgs) {
-            $user_member->add([
-            'name' => $user_orgs->first_name." ".$user_orgs->last_name,
-            'title' => $user_orgs->jobtitle
+        } else {
+            $show_user_member_org = null;
+        }
+        
+        if ($show_user_member_org !== null){
+        $user_bottom_member = collect([]);
+        foreach ($show_user_member_org as $user_bottom_orgs) {
+            $user_bottom_member->add([
+                'name' => $user_bottom_orgs->first_name." ".$user_bottom_orgs->last_name,
+                'title' => $user_bottom_orgs->jobtitle
             ]);
         }
+        } else {
+            $user_children = null;
+        }
+
+        /*
+         * set list of users who has current use as the manager
+         * as the children of current user
+         */
+        if ($current_manager_id->manager_id !== null){
+            $user_member = collect([]);
+            foreach ($show_user_org as $user_orgs) {
+                $user_children = $user_bottom_member->toArray();
+                $user_member->add([
+                'name' => $user_orgs->first_name." ".$user_orgs->last_name,
+                'title' => $user_orgs->jobtitle,
+                'children' => $user_children
+                ]);
+                
+            }
+        } else {
+            $user_member = collect([]);
+            foreach ($show_user_org as $user_orgs) {
+                $user_member->add([
+                'name' => $user_orgs->first_name." ".$user_orgs->last_name,
+                'title' => $user_orgs->jobtitle
+                ]);
+
+               
+            }   
+        }
+    
+        // dd($user_member);
+
         $user->toplist = $user_manager->toJson();
         $user->orglist = $user_member->toJson();
+        // dd($user->orglist);
         return view('users/view', compact('user', 'userlog'))
             ->with('settings', Setting::getSettings());
     }

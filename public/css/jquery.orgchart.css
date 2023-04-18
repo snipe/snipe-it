@@ -80,6 +80,7 @@
   list-style: none;
   padding-left: 0;
   margin: 0;
+  justify-content: center;
 }
 
 .orgchart .hierarchy {
@@ -228,7 +229,7 @@
 .orgchart .node .title {
   box-sizing: border-box;
   padding: 5px;
-  width: 200px;
+  width: auto;
   text-align: center;
   font-size: 12px;
   font-weight: bold;
@@ -273,7 +274,7 @@
 
 .orgchart .node .content {
   box-sizing: border-box;
-  padding: 2px;
+  padding: 5px;
   padding-bottom: 5px;
   min-height: 30px;
   height: 30px;

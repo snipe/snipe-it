@@ -1130,10 +1130,11 @@ $(function () {
     var orgsArr = orglist.map(function(org) {
         return {
             name: org.name,
-            title: org.title
+            title: org.title,
+            children: org.children
         };
     });
-        
+    
     var datasource = {
       'name': topArr[0].name,
       'title': topArr[0].title,
@@ -1148,7 +1149,8 @@ $(function () {
       "exportButtonName" : "Export Chart",
       'direction' : 't2b',
       'zoom' : true,
-      'pan' : true
+      'pan' : true,      
+      'toggleSiblingsResp': true
      
     });
 
