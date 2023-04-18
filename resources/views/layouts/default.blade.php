@@ -974,7 +974,7 @@
 
             $(function () {
 
-                $('[data-toggle="tooltip"]').tooltip();
+                $('[data-tooltip="true"]').tooltip();
                 $('[data-toggle="popover"]').popover();
                 $('.select2 span').addClass('needsclick');
                 $('.select2 span').removeAttr('title');
