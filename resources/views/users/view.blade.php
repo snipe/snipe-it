@@ -602,11 +602,11 @@
                             <!-- 2FA reset -->
                             <div class="row">
                               <div class="col-md-3">
-                          
+
                               </div>
-                              <div class="col-md-9" style="margin-top: 10px;">
+                              <div class="col-md-9">
                                 
-                                <a class="btn btn-default btn-sm pull-left" id="two_factor_reset" style="margin-right: 10px;"> 
+                                <a class="btn btn-default btn-sm" id="two_factor_reset" style="margin-right: 10px; margin-top: 10px;">
                                   {{ trans('admin/settings/general.two_factor_reset') }}
                                 </a>
                                 <span id="two_factor_reseticon">
@@ -1043,9 +1043,9 @@ $(function () {
       dataType: 'json',
 
       success: function (data) {
-        $("#two_factor_reset_toggle").html('').html('<i class="fas fa-times text-danger" aria-hidden="true"></i> {{ trans('general.no') }}');
+        $("#two_factor_reset_toggle").html('').html('<span class="text-danger"><i class="fas fa-times" aria-hidden="true"></i> {{ trans('general.no') }}</span>');
         $("#two_factor_reseticon").html('');
-        $("#two_factor_resetstatus").html('<i class="fas fa-check text-success"></i>' + data.message);
+        $("#two_factor_resetstatus").html('<span class="text-success"><i class="fas fa-check"></i> ' + data.message + '</span>');
 
       },
 
