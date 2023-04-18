@@ -236,8 +236,13 @@ class LicensesController extends Controller
         $license = License::with('assignedusers')->find($licenseId);
         $users_count = User::where('autoassign_licenses', '1')->count();
         $total_seats_count = $license->totalSeatsByLicenseID();
-        $available_seats_count = $license->availableSeats()->count();
+        $available_seats_count = $license->availCount()->count();
         $checkedout_seats_count = ($total_seats_count - $available_seats_count);
+
+        \Log::debug('Total: '.$total_seats_count);
+        \Log::debug('Users: '.$users_count);
+        \Log::debug('Available: '.$available_seats_count);
+        \Log::debug('Checkedout: '.$checkedout_seats_count);
 
 
         if ($license) {
