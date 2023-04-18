@@ -6,6 +6,8 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\License;
+use App\Models\LicenseSeat;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -232,17 +234,34 @@ class LicensesController extends Controller
     public function show($licenseId = null)
     {
         $license = License::with('assignedusers')->find($licenseId);
+        $users_count = User::where('autoassign_licenses', '1')->count();
+        $total_seats_count = $license->totalSeatsByLicenseID();
+        $available_seats_count = $license->availableSeats();
+        $checkedout_seats_count = ($total_seats_count - $available_seats_count);
+
 
         if ($license) {
             $this->authorize('view', $license);
-
-            return view('licenses/view', compact('license'));
+            return view('licenses.view', compact('license'))
+                ->with('users_count', $users_count)
+                ->with('total_seats_count', $total_seats_count)
+                ->with('available_seats_count', $available_seats_count)
+                ->with('checkedout_seats_count', $checkedout_seats_count);
         }
 
-        return redirect()->route('licenses.index')
+        return redirect()->route('licenses.view')
             ->with('error', trans('admin/licenses/message.does_not_exist'));
     }
 
+
+    /**
+     * Returns a view with prepopulated data for clone
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $licenseId
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function getClone($licenseId = null)
     {
         if (is_null($license_to_clone = License::find($licenseId))) {
