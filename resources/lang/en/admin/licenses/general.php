@@ -32,7 +32,7 @@ return array(
 
             'checkout_all'              => [
                 'button'                => 'Checkout All Seats',
-                'modal'                 => 'This action will checkout one seat to the first available user. | This action will checkout all :available_seats_count seats to the first available users. ',
+                'modal'                 => 'This action will checkout one seat to the first available user. | This action will checkout all :available_seats_count seats to the first available users. A user is considered available for this seat if they do not already have this license checked out to them, and the Auto-Assign License property is enabled on their user account.',
                 'enabled_tooltip'   => 'Checkout ALL seats (or as many as are available) to ALL users',
                 'disabled_tooltip'  => 'This is disabled because there are no seats currently available',
                 'success'           => 'License successfully checked out! | :count licenses were successfully checked out!',
