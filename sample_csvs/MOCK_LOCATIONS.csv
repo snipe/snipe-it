@@ -1,101 +1,20 @@
 name,address,address2,city,state,country,zip,manager,manager username,currency
-Calgary,1 Loomis Lane,,Bijelo Polje,AB,CA,T3S,Mychal Synder,msynder0,CAD
-Barrhead,1 Londonderry Lane,,Pante Raja,AB,CA,T7N,Emili Sackler,esackler1,CAD
-Manning,92006 Mifflin Terrace,,Cigadog Hilir,AB,CA,,,,
-High River,42124 Doe Crossing Hill,,Gourcy,AB,CA,T1V,Alejandrina Cowhig,acowhig3,CAD
-Stony Plain,6227 Hoffman Point,,Japeri,AB,CA,T7Z,Ashlie Capozzi,acapozzi4,CAD
-High River,40530 Arkansas Terrace,,Hrazdan,AB,CA,T1V,Emmanuel Falcus,efalcus5,CAD
-Viking,86706 Stuart Place,,Cabannungan Second,AB,CA,,,,
-Two Hills,062 Chinook Point,,Hortolândia,AB,CA,,,,
-Medicine Hat,01 John Wall Trail,,Cayungnan,AB,CA,,,,
-Leduc,09675 Quincy Plaza,,Zürich,AB,CA,T9E,Robinet Christie,rchristie9,CAD
-Stettler,11 Hoepker Parkway,,Ishimbay,AB,CA,,,,
-Manning,44 Arizona Pass,52 Meadow Ridge Circle,Viana,AB,CA,,,,
-Beaumont,24 Moose Avenue,,Hengshitang,AB,CA,,,,
-Rocky Mountain House,5463 Debra Pass,,Sukaharja,AB,CA,,,,
-Claresholm,273 Longview Crossing,,Rabaul,AB,CA,V2T,Anthony Kirwood,akirwoode,CAD
-Athabasca,4349 Saint Paul Alley,,Cañazas,AB,CA,,,,
-Bassano,2 Fisk Drive,,Mós,AB,CA,,,,
-Millet,196 Ridgeway Street,,Aihua,AB,CA,,,,
-Peace River,51201 Haas Street,7 Lien Park,Lengshui,AB,CA,,,,
-Magrath,54 Namekagon Alley,,Mogwase,AB,CA,,,,
-Taber,0300 Thompson Way,,Xia Zanggor,AB,CA,,,,
-Stettler,44629 Miller Park,,Pedro García,AB,CA,G8J,Tamera Othen,tothenl,CAD
-Vegreville,1 Homewood Pass,,Qingshi,AB,CA,,,,
-Irricana,5510 Portage Plaza,,Yuquan,AB,CA,,,,
-Rocky Mountain House,82696 Artisan Pass,,Krajan Bejagung,AB,CA,T4T,Ollie Cortnay,ocortnayo,CAD
-Sundre,65 Mccormick Lane,,Douz,AB,CA,L9H,Ade Alleburton,aalleburtonp,CAD
-Cochrane,12896 Little Fleur Park,,Seattle,AB,CA,T4C,Emma Arnao,earnaoq,CAD
-Medicine Hat,27 Troy Parkway,,Aqsū,AB,CA,,,,
-Millet,74 Surrey Point,,Kentongan,AB,CA,,,,
-Pincher Creek,17 Hazelcrest Avenue,,Wieczfnia Kościelna,AB,CA,J0J,Tamiko Tillman,ttillmant,CAD
-Calgary,09754 Sutherland Trail,,San Esteban,AB,CA,,,,
-Peace River,6 Oriole Court,,Údlice,AB,CA,T8S,Eugine Jenckes,ejenckesv,CAD
-Sherwood Park,54045 Washington Alley,,San Vicente Centenario,AB,CA,T8A,Malena Gapper,mgapperw,CAD
-Taber,0 Randy Parkway,,Mirriah,AB,CA,,,,
-Canmore,1 7th Street,,Shatou,AB,CA,,,,
-Grande Cache,3 Annamark Trail,7 Stone Corner Drive,Pikalëvo,AB,CA,,,,
-Killam,3470 Tennessee Trail,,Ust’-Kalmanka,AB,CA,,,,
-Cochrane,2 Beilfuss Center,,Kuta,AB,CA,,,,
-Millet,17601 Barby Avenue,045 Morningstar Avenue,Malikisi,AB,CA,,,,
-Calgary,6637 Southridge Center,,Flor da Rosa,AB,CA,T3S,Isa Fogel,ifogel13,CAD
-Smoky Lake,8 Hansons Parkway,0 Fair Oaks Junction,Nzega,AB,CA,,,,
-Fort McMurray,55575 Fair Oaks Drive,,Rio Preto da Eva,AB,CA,,,,
-Coaldale,1 American Ash Hill,,Jalqamūs,AB,CA,,,,
-Hanna,905 Monument Court,,Arani,AB,CA,,,,
-Canmore,990 Pankratz Alley,,Lulindi,AB,CA,T1W,Tally Gostage,tgostage18,CAD
-Fox Creek,61 Continental Street,819 Loftsgordon Court,Cergy-Pontoise,AB,CA,,,,
-Coaldale,0196 Mifflin Park,,Višnjićevo,AB,CA,,,,
-Canmore,8 Hermina Park,,Bothaville,AB,CA,,,,
-Fox Creek,92408 Dakota Avenue,,Nankou,AB,CA,E4B,Nickolai Nassau,nnassau1c,CAD
-Camrose,0297 7th Pass,,Bitica,AB,CA,,,,
-Magrath,2810 Harper Crossing,,Tanshi,AB,CA,,,,
-Ponoka,68 Mallard Point,,Ipirá,AB,CA,,,,
-Athabasca,13283 Monica Circle,,Baytīn,AB,CA,,,,
-Hanna,73051 Hayes Plaza,,Vales,AB,CA,,,,
-Sherwood Park,20603 Drewry Avenue,,Klenčí pod Čerchovem,AB,CA,T8A,Maurice Graal,mgraal1i,CAD
-Airdrie,3883 Dexter Trail,,Courtaboeuf,AB,CA,T4B,Kissiah Parkman,kparkman1j,CAD
-Cochrane,82 Fairview Place,,Kudowa-Zdrój,AB,CA,T4C,Gerti Brunini,gbrunini1k,CAD
-Vulcan,69062 Bunker Hill Parkway,,Millet,AB,CA,V6M,Laurence Goulder,lgoulder1l,CAD
-Drayton Valley,77163 Northwestern Trail,,Nivnice,AB,CA,,,,
-Vulcan,0429 Sunnyside Circle,,Nagarakembang,AB,CA,,,,
-Ponoka,8518 Clarendon Hill,,Iporã,AB,CA,,,,
-High River,1 Cordelia Avenue,,Helsingborg,AB,CA,,,,
-Irricana,91686 Sommers Place,,Xiaruyue,AB,CA,B3T,Liuka McGaugie,lmcgaugie1q,CAD
-Vegreville,32 Fieldstone Road,,Athlone,AB,CA,,,,
-Vegreville,422 Boyd Junction,,Dayapan,AB,CA,,,,
-Beaverlodge,9 Mifflin Place,,Dibba Al-Hisn,AB,CA,G8A,Zea Fishwick,zfishwick1t,CAD
-Vulcan,500 Shelley Way,,Killumney,AB,CA,V6M,Leela Cyphus,lcyphus1u,CAD
-Beaumont,79 Sunnyside Drive,,Mengyin,AB,CA,,,,
-Magrath,04 Dovetail Crossing,,Bandaragung,AB,CA,,,,
-Lacombe,06352 Helena Street,,Taxisco,AB,CA,,,,
-Blackfalds,71023 Gulseth Park,,Springfield,AB,CA,J5K,Mart Eaklee,meaklee1y,CAD
-Nanton,19 Arkansas Crossing,,Guanzhuang,AB,CA,,,,
-Killam,35 Swallow Hill,,Krylovskaya,AB,CA,,,,
-Fort McMurray,801 Oriole Junction,4 Bobwhite Hill,Katav-Ivanovsk,AB,CA,,,,
-Airdrie,975 Goodland Circle,,Sevilla,AB,CA,,,,
-Pincher Creek,315 Kings Avenue,,Saint Ann’s Bay,AB,CA,J0J,Costanza Dormand,cdormand23,CAD
-Edson,1917 Hollow Ridge Trail,,Tarusan,AB,CA,T7E,Amaleta Burnyate,aburnyate24,CAD
-Claresholm,47 Toban Court,,Bélel,AB,CA,V2T,Scotti Crumley,scrumley25,CAD
-Stettler,0860 Huxley Circle,,Zouérat,AB,CA,,,,
-Bassano,4 Bellgrove Street,,Río Bueno,AB,CA,,,,
-Jasper Park Lodge,03596 Bluejay Terrace,65418 Anthes Alley,Berlín,AB,CA,,,,
-Fox Creek,503 Judy Crossing,,Novomykolayivka,AB,CA,,,,
-Grande Prairie,51 Duke Way,,Quintão,AB,CA,,,,
-Bassano,3309 Fuller Junction,,Ballyhaunis,AB,CA,,,,
-Lethbridge,76024 John Wall Court,,Ninomiya,AB,CA,T1K,Beulah Veschambes,bveschambes2c,CAD
-Coaldale,881 Washington Trail,,Xiaochi,AB,CA,,,,
-Vegreville,829 7th Point,,Plaridel,AB,CA,,,,
-Strathmore,6489 Saint Paul Hill,,Naj‘ Ḩammādī,AB,CA,T1P,Libbey Maulden,lmaulden2f,CAD
-Lacombe,797 Valley Edge Park,,Al Farwānīyah,AB,CA,T4L,Joelle Seville,jseville2g,CAD
-Fox Creek,95 1st Crossing,,Al Karmil,AB,CA,,,,
-Fort McMurray,064 Bayside Street,,Liliongan,AB,CA,T9J,Maud Cheesley,mcheesley2i,CAD
-Coaldale,006 Sloan Parkway,,Kosai-shi,AB,CA,,,,
-Killam,67260 Caliangt Junction,,Beibei,AB,CA,,,,
-Crossfield,29426 Jenifer Parkway,,Nové Město pod Smrkem,AB,CA,,,,
-Claresholm,718 Anthes Plaza,3 Lillian Hill,Vallentuna,AB,CA,,,,
-Cochrane,712 Mockingbird Trail,,Cát Bà,AB,CA,,,,
-Coaldale,6416 Badeau Drive,,Suwaru,AB,CA,,,,
-Ponoka,0884 Dayton Circle,,Cikayas,AB,CA,,,,
-Spirit River,1658 Parkside Street,,Sidomakmur,AB,CA,V2G,Gill Shrieve,gshrieve2q,CAD
-Bassano,1 Maple Wood Point,0516 Anzinger Junction,Pécs,AB,CA,M5G,Evvy Wildbore,ewildbore2r,CAD
+Peace River,8 Brentwood Court,,Birendranagar,AB,CA,T8S,Danika Mostyn,dmostyn0,CAD
+Airdrie,14 Summer Ridge Court,306 Buhler Parkway,Poniatowa,AB,CA,T4B,Clementina Van Halen,cvan1,CAD
+Calgary,3 Fieldstone Drive,,Iwanai,AB,CA,,Harwilll Heffernan,hheffernan2,CAD
+High Prairie,1906 Weeping Birch Park,,Lopar,AB,CA,,Christian Pache,cpache3,CAD
+Sundre,20 Summer Ridge Court,,Burujul,AB,CA,,,,
+Athabasca,22 Browning Drive,424 Rieder Court,Itambacuri,AB,CA,,Alphonso Ashbridge,aashbridge5,CAD
+Drayton Valley,56064 Onsgard Center,,Bahía Honda,AB,CA,,,,
+Crossfield,0 Lighthouse Bay Place,,Bengras,AB,CA,,Vania Dufton,vdufton7,CAD
+Beaverlodge,6 Katie Terrace,,Zhajin,AB,CA,,Papageno Baldi,pbaldi8,CAD
+Grande Prairie,0 Ridgeview Parkway,,Yunxi,AB,CA,R3J,Selia Biggadike,sbiggadike9,CAD
+Sherwood Park,263 Aberg Alley,,El Paso,AB,CA,,,,
+Vegreville,9039 Shoshone Parkway,,Huazhou,AB,CA,,Georgy Eversfield,geversfieldb,CAD
+Rocky Mountain House,8617 Arapahoe Parkway,,Paraipaba,AB,CA,,Mara Gilfoyle,mgilfoylec,CAD
+Calmar,14 Green Ridge Circle,,Medveditskiy,AB,CA,S0G,Paulette Rylatt,prylattd,CAD
+Rocky Mountain House,517 Bowman Terrace,,Viana,AB,CA,,Neal Gabitis,ngabitise,CAD
+Pincher Creek,6054 Anzinger Hill,,Chlumec,AB,CA,,Bonnee Fowle,bfowlef,CAD
+Airdrie,8 Lien Drive,,Reims,AB,CA,,Kerry Aherne,kaherneg,CAD
+Camrose,4 Summit Parkway,,Xinqiao,AB,CA,T4V,Sherlock Stobbart,sstobbarth,CAD
+Lamont,12 Ilene Park,,Huangtang,AB,CA,N2E,Karlotta Pinckstone,kpinckstonei,CAD
