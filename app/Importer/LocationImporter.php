@@ -8,7 +8,7 @@ use App\Models\Location;
  * When we are importing users via an Asset/etc import, we use createOrFetchUser() in
  * App\Importer.php. [ALG]
  *
- * Class UserImporter
+ * Class LocationImporter
  */
 class LocationImporter extends ItemImporter
 {
