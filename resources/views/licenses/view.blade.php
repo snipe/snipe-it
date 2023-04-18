@@ -318,7 +318,7 @@
                       </strong>
                     </div>
                     <div class="col-md-9">
-                      {!! $license->maintained ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no') !!}
+                      {!! $license->maintained ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no') !!}
                     </div>
                   </div>
 
@@ -344,7 +344,7 @@
                       </strong>
                     </div>
                     <div class="col-md-9">
-                      {!! $license->reassignable ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no') !!}
+                      {!! $license->reassignable ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no') !!}
                     </div>
                   </div>
 
