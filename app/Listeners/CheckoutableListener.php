@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Events\CheckoutableCheckedOut;
 use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
@@ -188,8 +189,8 @@ class CheckoutableListener
     /**
      * Get the appropriate notification for the event
      * 
-     * @param  CheckoutableCheckedIn $event 
-     * @param  CheckoutAcceptance $acceptance
+     * @param  CheckoutableCheckedOut $event
+     * @param  CheckoutAcceptance|null $acceptance
      * @return Notification
      */
     private function getCheckoutNotification($event, $acceptance = null)
