@@ -483,8 +483,7 @@
                                                     class="fas fa-times text-red fa-fw"></i>
                                             {{ trans('general.all') }}
                                             {{ trans('general.undeployable') }}
-                                            ({{ (isset($total_undeployable_sidebar)) ? $total_undeployable_sidebar : '' }}
-                                            )
+                                            ({{ (isset($total_undeployable_sidebar)) ? $total_undeployable_sidebar : '' }})
                                         </a>
                                     </li>
                                     <li{!! (Request::query('status') == 'byod' ? ' class="active"' : '') !!}><a
