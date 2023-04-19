@@ -120,7 +120,7 @@ class UsersController extends Controller
         $user->created_by = Auth::user()->id;
         $user->start_date = $request->input('start_date', null);
         $user->end_date = $request->input('end_date', null);
-        $user->autoassign_licenses= $request->input('autoassign_licenses', 1);
+        $user->autoassign_licenses = $request->input('autoassign_licenses', 0);
 
         // Strip out the superuser permission if the user isn't a superadmin
         $permissions_array = $request->input('permission');
@@ -275,7 +275,7 @@ class UsersController extends Controller
         $user->website = $request->input('website', null);
         $user->start_date = $request->input('start_date', null);
         $user->end_date = $request->input('end_date', null);
-        $user->autoassign_licenses = $request->input('autoassign_licenses', 1);
+        $user->autoassign_licenses = $request->input('autoassign_licenses', 0);
 
         // Update the location of any assets checked out to this user
         Asset::where('assigned_type', User::class)

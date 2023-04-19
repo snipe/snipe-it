@@ -65,6 +65,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'avatar',
         'gravatar',
         'vip',
+        'autoassign_licenses',
     ];
 
     protected $casts = [
@@ -76,6 +77,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'created_at'   => 'datetime',
         'updated_at'   => 'datetime',
         'deleted_at'   => 'datetime',
+        'autoassign_licenses'    => 'boolean',
     ];
 
     /**
@@ -95,6 +97,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'location_id'             => 'exists:locations,id|nullable',
         'start_date'              => 'nullable|date_format:Y-m-d',
         'end_date'                => 'nullable|date_format:Y-m-d|after_or_equal:start_date',
+        'autoassign_licenses'     => 'boolean',
     ];
 
     /**
