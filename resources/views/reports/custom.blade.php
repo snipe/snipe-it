@@ -284,7 +284,7 @@
             </div>
 
           <!-- Checkout Date -->
-          <div class="form-group purchase-range">
+          <div class="form-group checkout-range">
               <label for="checkout_date" class="col-md-3 control-label">{{ trans('general.checkout') }} {{  trans('general.range') }}</label>
               <div class="input-daterange input-group col-md-6" id="datepicker">
                   <input type="text" class="form-control" name="checkout_date_start" aria-label="checkout_date_start">
@@ -373,6 +373,12 @@
   <script>
 
       $('.purchase-range .input-daterange').datepicker({
+          clearBtn: true,
+          todayHighlight: true,
+          endDate: '0d',
+          format: 'yyyy-mm-dd'
+      });
+      $('.checkout-range .input-daterange').datepicker({
           clearBtn: true,
           todayHighlight: true,
           endDate: '0d',
