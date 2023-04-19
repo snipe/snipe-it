@@ -16,11 +16,14 @@ class AssetPresenter extends Presenter
      */
     public static function dataTableLayout()
     {
-        $layout = [
+        $check_fields = [
             [
                 'field' => 'checkbox',
                 'checkbox' => true,
-            ], [
+            ]
+        ];
+        $layout = [
+             [
                 'field' => 'id',
                 'searchable' => false,
                 'sortable' => true,
@@ -267,8 +270,9 @@ class AssetPresenter extends Presenter
         // Note: We do not need to e() escape the field names here, as they are already escaped when
         // they are presented in the blade view. If we escape them here, custom fields with quotes in their
         // name can break the listings page. - snipe
+        $custom_fields = [];
         foreach ($fields as $field) {
-            $layout[] = [
+            $custom_fields[] = [
                 'field' => 'custom_fields.'.$field->db_column,
                 'searchable' => true,
                 'sortable' => true,
@@ -280,7 +284,7 @@ class AssetPresenter extends Presenter
                 'visible' => true,
             ];
         }
-
+    
         $layout[] = [
             'field' => 'checkincheckout',
             'searchable' => false,
@@ -299,8 +303,8 @@ class AssetPresenter extends Presenter
             'title' => trans('table.actions'),
             'formatter' => 'hardwareActionsFormatter',
         ];
-
-        return json_encode($layout);
+        $finalArray = array_merge($check_fields, $custom_fields, $layout);
+        return json_encode($finalArray);
     }
 
     /**
