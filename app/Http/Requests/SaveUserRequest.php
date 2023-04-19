@@ -20,7 +20,7 @@ class SaveUserRequest extends FormRequest
     }
 
     public function response(array $errors)
-    {
+    { 
         return $this->redirector->back()->withInput()->withErrors($errors, $this->errorBag);
     }
 
@@ -41,6 +41,8 @@ class SaveUserRequest extends FormRequest
             case 'POST':
                 $rules['first_name'] = 'required|string|min:1';
                 $rules['username'] = 'required_unless:ldap_import,1|string|min:1';
+                $rules['start_date'] = 'nullable|date_format:Y-m-d';
+                $rules['end_date'] = 'nullable|date_format:Y-m-d|after_or_equal:start_date';
                 if ($this->request->get('ldap_import') == false) {
                     $rules['password'] = Setting::passwordComplexityRulesSaving('store').'|confirmed';
                 }
@@ -51,6 +53,8 @@ class SaveUserRequest extends FormRequest
                 $rules['first_name'] = 'required|string|min:1';
                 $rules['username'] = 'required_unless:ldap_import,1|string|min:1';
                 $rules['password'] = Setting::passwordComplexityRulesSaving('update').'|confirmed';
+                $rules['start_date'] = 'nullable|date_format:Y-m-d';
+                $rules['end_date'] = 'nullable|date_format:Y-m-d|after_or_equal:start_date'; 
                 break;
 
             // Save only what's passed
