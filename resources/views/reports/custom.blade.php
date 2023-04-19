@@ -283,7 +283,7 @@
               </div>
             </div>
 
-          <!-- Created Date -->
+          <!-- Checkout Date -->
           <div class="form-group purchase-range">
               <label for="checkout_date" class="col-md-3 control-label">{{ trans('general.checkout') }} {{  trans('general.range') }}</label>
               <div class="input-daterange input-group col-md-6" id="datepicker">
