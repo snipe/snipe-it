@@ -21,4 +21,5 @@ return [
     'add_maintenance'           => 'Add Maintenance',
     'append'                    => 'Append',
     'new'                       => 'New',
+    'update'                    => 'Update'
 ];
