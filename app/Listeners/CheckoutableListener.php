@@ -37,19 +37,18 @@ class CheckoutableListener
             return;
         }
 
-        // Send an anonymous webhook notification if setting enabled
-        if ($this->shouldSendWebhookNotification()) {
-            Notification::route('slack', Setting::getSettings()->webhook_endpoint)
-                ->notify($this->getCheckoutNotification($event));
-        }
-
         /**
          * Make a checkout acceptance and attach it in the notification
          */
         $acceptance = $this->getCheckoutAcceptance($event);       
 
         try {
-            // @todo: wrap notification above in this try
+            // Send an anonymous webhook notification if setting enabled
+            if ($this->shouldSendWebhookNotification()) {
+                Notification::route('slack', Setting::getSettings()->webhook_endpoint)
+                    ->notify($this->getCheckoutNotification($event));
+            }
+
             if (! $event->checkedOutTo->locale) {
                 Notification::locale(Setting::getSettings()->locale)->send(
                     $this->getNotifiables($event),
@@ -77,12 +76,6 @@ class CheckoutableListener
             return;
         }
 
-        // Send an anonymous webhook notification if setting enabled
-        if ($this->shouldSendWebhookNotification()) {
-            Notification::route('slack', Setting::getSettings()->webhook_endpoint)
-                ->notify($this->getCheckinNotification($event));
-        }
-
         /**
          * Send the appropriate notification
          */
@@ -97,6 +90,12 @@ class CheckoutableListener
         }
 
         try {
+            // Send an anonymous webhook notification if setting enabled
+            if ($this->shouldSendWebhookNotification()) {
+                Notification::route('slack', Setting::getSettings()->webhook_endpoint)
+                    ->notify($this->getCheckinNotification($event));
+            }
+
             // Use default locale
             if (! $event->checkedOutTo->locale) {
                 Notification::locale(Setting::getSettings()->locale)->send(
