@@ -89,6 +89,9 @@ a.accordion-header {
   width: 50px;
   padding-top: 10px;
 }
+.pull-text-right {
+  text-align: right !important;
+}
 .main-header .sidebar-toggle:before {
   content: "\f0c9";
   font-weight: 900;

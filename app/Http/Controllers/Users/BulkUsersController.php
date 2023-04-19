@@ -113,7 +113,8 @@ class BulkUsersController extends Controller
             ->conditionallyAddItem('locale')
             ->conditionallyAddItem('remote')
             ->conditionallyAddItem('ldap_import')
-            ->conditionallyAddItem('activated');
+            ->conditionallyAddItem('activated')
+            ->conditionallyAddItem('autoassign_licenses');
 
 
         // If the manager_id is one of the users being updated, generate a warning.
