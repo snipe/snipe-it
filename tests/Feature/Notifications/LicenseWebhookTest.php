@@ -19,7 +19,7 @@ class LicenseWebhookTest extends TestCase
 {
     use InteractsWithSettings;
 
-    public function checkoutTargets(): array
+    public function targets(): array
     {
         return [
             'License checked out to user' => [fn() => User::factory()->create()],
@@ -27,7 +27,7 @@ class LicenseWebhookTest extends TestCase
         ];
     }
 
-    /** @dataProvider checkoutTargets */
+    /** @dataProvider targets */
     public function testLicenseCheckoutSendsWebhookNotificationWhenSettingEnabled($checkoutTarget)
     {
         Notification::fake();
@@ -50,7 +50,7 @@ class LicenseWebhookTest extends TestCase
         );
     }
 
-    /** @dataProvider checkoutTargets */
+    /** @dataProvider targets */
     public function testLicenseCheckoutDoesNotSendWebhookNotificationWhenSettingDisabled($checkoutTarget)
     {
         Notification::fake();
@@ -67,7 +67,7 @@ class LicenseWebhookTest extends TestCase
         Notification::assertNotSentTo(new AnonymousNotifiable, CheckoutLicenseSeatNotification::class);
     }
 
-    /** @dataProvider checkoutTargets */
+    /** @dataProvider targets */
     public function testLicenseCheckinSendsWebhookNotificationWhenSettingEnabled($checkoutTarget)
     {
         Notification::fake();
@@ -90,7 +90,7 @@ class LicenseWebhookTest extends TestCase
         );
     }
 
-    /** @dataProvider checkoutTargets */
+    /** @dataProvider targets */
     public function testLicenseCheckinDoesNotSendWebhookNotificationWhenSettingDisabled($checkoutTarget)
     {
         Notification::fake();

@@ -19,7 +19,7 @@ class AssetWebhookTest extends TestCase
 {
     use InteractsWithSettings;
 
-    public function checkoutTargets(): array
+    public function targets(): array
     {
         return [
             'Asset checked out to user' => [fn() => User::factory()->create()],
@@ -28,7 +28,7 @@ class AssetWebhookTest extends TestCase
         ];
     }
 
-    /** @dataProvider checkoutTargets */
+    /** @dataProvider targets */
     public function testAssetCheckoutSendsWebhookNotificationWhenSettingEnabled($checkoutTarget)
     {
         Notification::fake();
@@ -51,7 +51,7 @@ class AssetWebhookTest extends TestCase
         );
     }
 
-    /** @dataProvider checkoutTargets */
+    /** @dataProvider targets */
     public function testAssetCheckoutDoesNotSendWebhookNotificationWhenSettingDisabled($checkoutTarget)
     {
         Notification::fake();
@@ -68,7 +68,7 @@ class AssetWebhookTest extends TestCase
         Notification::assertNotSentTo(new AnonymousNotifiable, CheckoutAssetNotification::class);
     }
 
-    /** @dataProvider checkoutTargets */
+    /** @dataProvider targets */
     public function testAssetCheckinSendsWebhookNotificationWhenSettingEnabled($checkoutTarget)
     {
         Notification::fake();
@@ -91,7 +91,7 @@ class AssetWebhookTest extends TestCase
         );
     }
 
-    /** @dataProvider checkoutTargets */
+    /** @dataProvider targets */
     public function testAssetCheckinDoesNotSendWebhookNotificationWhenSettingDisabled($checkoutTarget)
     {
         Notification::fake();
