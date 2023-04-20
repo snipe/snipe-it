@@ -644,7 +644,7 @@
                            {{ trans('admin/users/table.total_assets_cost') }}
                        </div>
                        <div class="col-md-9">
-                           {{Helper::formatCurrencyOutput(array_sum(array ($user->getUserTotalCost())))}}
+                           {{Helper::formatCurrencyOutput($user->getUserTotalCost()->total_user_cost)}}
                            <a id="optional_info" class="text-primary">
                                <i class="fa fa-caret-right fa-2x" id="optional_info_icon"></i>
                                <strong>{{ trans('admin/hardware/form.optional_infos') }}</strong>
@@ -653,7 +653,9 @@
                        <div id="optional_details" class="col-md-12" style="display:none">
                            <br>
                            <div class="col-md-9">
-
+                               Asset: {{$user->getUserTotalCost()->asset_cost}}
+                              License: {{$user->getUserTotalCost()->license_cost}}
+                               Accessory: {{$user->getUserTotalCost()->accessory_cost}}
                            </div>
 
                        </div>
