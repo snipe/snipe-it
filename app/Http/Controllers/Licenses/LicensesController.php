@@ -234,18 +234,19 @@ class LicensesController extends Controller
     public function show($licenseId = null)
     {
         $license = License::with('assignedusers')->find($licenseId);
-        $users_count = User::where('autoassign_licenses', '1')->count();
-        $total_seats_count = $license->totalSeatsByLicenseID();
-        $available_seats_count = $license->availCount()->count();
-        $checkedout_seats_count = ($total_seats_count - $available_seats_count);
-
-        \Log::debug('Total: '.$total_seats_count);
-        \Log::debug('Users: '.$users_count);
-        \Log::debug('Available: '.$available_seats_count);
-        \Log::debug('Checkedout: '.$checkedout_seats_count);
-
 
         if ($license) {
+            $users_count = User::where('autoassign_licenses', '1')->count();
+            $total_seats_count = $license->totalSeatsByLicenseID();
+            $available_seats_count = $license->availCount()->count();
+            $checkedout_seats_count = ($total_seats_count - $available_seats_count);
+
+            \Log::debug('Total: '.$total_seats_count);
+            \Log::debug('Users: '.$users_count);
+            \Log::debug('Available: '.$available_seats_count);
+            \Log::debug('Checkedout: '.$checkedout_seats_count);
+
+
             $this->authorize('view', $license);
             return view('licenses.view', compact('license'))
                 ->with('users_count', $users_count)
@@ -254,7 +255,7 @@ class LicensesController extends Controller
                 ->with('checkedout_seats_count', $checkedout_seats_count);
         }
 
-        return redirect()->route('licenses.view')
+        return redirect()->route('licenses.index')
             ->with('error', trans('admin/licenses/message.does_not_exist'));
     }
 
