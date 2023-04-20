@@ -596,7 +596,7 @@
                                                 {{ trans('admin/hardware/form.months') }}
 
                                                 @if ($asset->serial && $asset->model->manufacturer)
-                                                    <a href="{{ (str_replace('_testlocale_',\App\Models\Setting::getSettings()->locale,$asset->model->manufacturer->support_url))}}" target="_blank">
+                                                    <a href="{{ $asset->present()->supportUrl() }}" target="_blank">
                                                         <i class="fa fa-external-link" style="width:25px;height:25px;"><span class="sr-only">{{ trans('hardware/general.mfg_warranty_lookup') }}</span></i>
                                                     </a>
                                                 @endif

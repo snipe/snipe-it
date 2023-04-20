@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ImageUploadRequest;
+use App\Http\Requests\SaveManufacturerRequest;
 use App\Models\Manufacturer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -114,7 +115,7 @@ class ManufacturersController extends Controller
      * @since [v1.0]
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(ImageUploadRequest $request, $manufacturerId = null)
+    public function update(SaveManufacturerRequest $request, $manufacturerId = null)
     {
         $this->authorize('update', Manufacturer::class);
         // Check if the manufacturer exists
@@ -123,7 +124,7 @@ class ManufacturersController extends Controller
             return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.does_not_exist'));
         }
 
-        // Save the  data
+        // Save the data
         $manufacturer->name = $request->input('name');
         $manufacturer->url = $request->input('url');
         $manufacturer->support_url = $request->input('support_url');
