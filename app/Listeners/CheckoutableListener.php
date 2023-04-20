@@ -29,8 +29,8 @@ class CheckoutableListener
     ];
 
     /**
-     * Notify the user and post to webhook about the checked out checkoutable and add a record to the
-     * checkout_requests table.
+     * Notify the user and post to webhook about the checked out checkoutable
+     * and add a record to the checkout_requests table.
      */
     public function onCheckedOut($event)
     {
