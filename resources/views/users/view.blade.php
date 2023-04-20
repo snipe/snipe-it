@@ -638,6 +638,26 @@
 
                     </div>
                     @endif
+                   <div class="row">
+
+                       <div class="col-md-3">
+                           {{ trans('admin/users/table.total_assets_cost') }}
+                       </div>
+                       <div class="col-md-9">
+                           {{Helper::formatCurrencyOutput(array_sum(array ($user->getUserTotalCost())))}}
+                           <a id="optional_info" class="text-primary">
+                               <i class="fa fa-caret-right fa-2x" id="optional_info_icon"></i>
+                               <strong>{{ trans('admin/hardware/form.optional_infos') }}</strong>
+                           </a>
+                       </div>
+                       <div id="optional_details" class="col-md-12" style="display:none">
+                           <br>
+                           <div class="col-md-9">
+
+                           </div>
+
+                       </div>
+                   </div>
 
                   </div> <!--/end striped container-->
                 </div> <!-- end col-md-9 -->
@@ -1108,6 +1128,12 @@ $(function () {
 
 
         }
+    });
+    $("#optional_info").on("click",function(){
+        $('#optional_details').fadeToggle(100);
+        $('#optional_info_icon').toggleClass('fa-caret-right fa-caret-down');
+        var optional_info_open = $('#optional_info_icon').hasClass('fa-caret-down');
+        document.cookie = "optional_info_open="+optional_info_open+'; path=/';
     });
 });
 </script>

@@ -766,4 +766,24 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
         return $this->locale;
     }
+    public function getUserTotalCost(){
+        $total_cost= array();
+        $asset_cost= 0;
+        $license_cost= 0;
+        $accessory_cost= 0;
+        foreach ($this->assets as $asset){
+            $asset_cost += $asset->purchase_cost;
+            array_push($total_cost, $asset_cost);
+        }
+        foreach ($this->licenses as $license){
+            $license_cost += $license->purchase_cost;
+            array_push($total_cost, $license_cost);
+        }
+        foreach ($this->accessories as $accessory){
+            $accessory_cost += $accessory->purchase_cost;
+            array_push($total_cost, $accessory_cost);
+        }
+
+        return $total_cost;
+    }
 }
