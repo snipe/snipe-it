@@ -44,7 +44,6 @@ class CheckoutableListener
         $acceptance = $this->getCheckoutAcceptance($event);       
 
         try {
-            // Send an anonymous webhook notification if setting enabled
             if ($this->shouldSendWebhookNotification()) {
                 Notification::route('slack', Setting::getSettings()->webhook_endpoint)
                     ->notify($this->getCheckoutNotification($event));
@@ -91,7 +90,6 @@ class CheckoutableListener
         }
 
         try {
-            // Send an anonymous webhook notification if setting enabled
             if ($this->shouldSendWebhookNotification()) {
                 Notification::route('slack', Setting::getSettings()->webhook_endpoint)
                     ->notify($this->getCheckinNotification($event));
