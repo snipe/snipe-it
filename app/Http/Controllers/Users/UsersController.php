@@ -210,7 +210,6 @@ class UsersController extends Controller
      */
     public function update(SaveUserRequest $request, $id = null)
     {
-
         // We need to reverse the UI specific logic for our
         // permissions here before we update the user.
         $permissions = $request->input('permissions', []);
@@ -268,7 +267,8 @@ class UsersController extends Controller
         $user->city = $request->input('city', null);
         $user->state = $request->input('state', null);
         $user->country = $request->input('country', null);
-        $user->activated = $request->input('activated', 0);
+        // if a user is editing themselves we should always keep activated true
+        $user->activated = $request->input('activated', $request->user()->is($user) ? 1 : 0);
         $user->zip = $request->input('zip', null);
         $user->remote = $request->input('remote', 0);
         $user->vip = $request->input('vip', 0);
