@@ -650,15 +650,14 @@
                                <strong>{{ trans('admin/hardware/form.optional_infos') }}</strong>
                            </a>
                        </div>
-                       <div id="optional_details" class="col-md-12" style="display:none">
-                           <br>
-                           <div class="col-md-9">
-                               Asset: {{$user->getUserTotalCost()->asset_cost}}
-                              License: {{$user->getUserTotalCost()->license_cost}}
-                               Accessory: {{$user->getUserTotalCost()->accessory_cost}}
+                           <div id="optional_details" class="col-md-12" style="display:none">
+                               <div class="col-md-3" style="border-top:none;"></div>
+                               <div class="col-md-9" style="border-top:none;">
+                               {{trans('general.assets').': '. Helper::formatCurrencyOutput($user->getUserTotalCost()->asset_cost)}}<br>
+                               {{trans('general.licenses').': '. Helper::formatCurrencyOutput($user->getUserTotalCost()->license_cost)}}<br>
+                               {{trans('general.accessories').': '.Helper::formatCurrencyOutput($user->getUserTotalCost()->accessory_cost)}}<br>
+                               </div>
                            </div>
-
-                       </div>
                    </div>
 
                   </div> <!--/end striped container-->
