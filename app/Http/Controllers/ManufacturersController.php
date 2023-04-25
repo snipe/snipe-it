@@ -115,7 +115,7 @@ class ManufacturersController extends Controller
      * @since [v1.0]
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(SaveManufacturerRequest $request, $manufacturerId = null)
+    public function update(ImageUploadRequest $request, $manufacturerId = null)
     {
         $this->authorize('update', Manufacturer::class);
         // Check if the manufacturer exists
