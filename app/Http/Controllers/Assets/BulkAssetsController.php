@@ -337,6 +337,7 @@ class BulkAssetsController extends Controller
         
     }
     public function restore(Request $request) {
+        $this->authorize('update', Asset::class);
        $assetIds = $request->get('ids');
       if (empty($assetIds)) {
           return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.restore.nothing_updated'));
