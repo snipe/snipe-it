@@ -211,6 +211,11 @@ class Asset extends Depreciable
                     if($field->format == 'BOOLEAN'){
                         $this->{$field->db_column} = filter_var($this->{$field->db_column}, FILTER_VALIDATE_BOOLEAN);
                     }
+                    
+                    // Encrypted Fields are validated in the controller, we remove the validation rule here
+                    if ($field->field_encrypted == 1){
+                        unset($this->rules[$field->db_column]);
+                    }
                 }
             }
         }

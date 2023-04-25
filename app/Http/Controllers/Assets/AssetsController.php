@@ -173,6 +173,10 @@ class AssetsController extends Controller
                             if (is_array($request->input($field->db_column))) {
                                 $asset->{$field->db_column} = \Crypt::encrypt(implode(', ', $request->input($field->db_column)));
                             } else {
+                                $validated = $request->validate([
+                                    $field->db_column => $model->fieldset->validation_rules()[$field->db_column],
+                                ]);
+
                                 $asset->{$field->db_column} = \Crypt::encrypt($request->input($field->db_column));
                             }
                         }
@@ -364,6 +368,10 @@ class AssetsController extends Controller
                         if (is_array($request->input($field->db_column))) {
                             $asset->{$field->db_column} = \Crypt::encrypt(implode(', ', $request->input($field->db_column)));
                         } else {
+                            $validated = $request->validate([
+                                $field->db_column => $model->fieldset->validation_rules()[$field->db_column],
+                            ]);
+                            
                             $asset->{$field->db_column} = \Crypt::encrypt($request->input($field->db_column));
                         }
                     }

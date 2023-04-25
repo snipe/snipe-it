@@ -4,6 +4,7 @@ namespace App\Importer;
 
 use App\Models\Asset;
 use App\Models\Statuslabel;
+use App\Models\AssetModel;
 
 class AssetImporter extends ItemImporter
 {
@@ -21,11 +22,23 @@ class AssetImporter extends ItemImporter
         parent::handle($row);
 
         if ($this->customFields) {
+            $input = array();
             foreach ($this->customFields as $customField) {
                 $customFieldValue = $this->array_smart_custom_field_fetch($row, $customField);
 
                 if ($customFieldValue) {
                     if ($customField->field_encrypted == 1) {
+                        $model = AssetModel::where('name', $this->findCsvMatch($row, 'asset_model'))->first();
+                        $input[$customField->db_column_name()]  = $customFieldValue;
+
+                        $validator = \Validator::make($input, [
+                            $customField->db_column_name() => $model->fieldset->validation_rules()[$customField->db_column_name()],
+                        ]);
+
+                        if ($validator->fails()){
+                            $error_bag = $validator->messages();
+                        }
+
                         $this->item['custom_fields'][$customField->db_column_name()] = \Crypt::encrypt($customFieldValue);
                         $this->log('Custom Field '.$customField->name.': '.\Crypt::encrypt($customFieldValue));
                     } else {
