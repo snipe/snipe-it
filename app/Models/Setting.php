@@ -341,7 +341,15 @@ class Setting extends Model
             'ad_domain',
             'ad_append_domain',
             'ldap_client_tls_key',
-            'ldap_client_tls_cert'
+            'ldap_client_tls_cert',
+            'ldap_default_group',
+            'ldap_dept',
+            'ldap_emp_num',
+            'ldap_phone_field',
+            'ldap_jobtitle',
+            'ldap_manager',
+            'ldap_country',
+            'ldap_location',
             ])->first()->getAttributes();
 
         return collect($ldapSettings);
