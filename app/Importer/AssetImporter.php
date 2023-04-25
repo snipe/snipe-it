@@ -37,6 +37,7 @@ class AssetImporter extends ItemImporter
 
                         if ($validator->fails()){
                             $error_bag = $validator->messages();
+                            $this->logError($customField, $customFieldValue);
                         }
 
                         $this->item['custom_fields'][$customField->db_column_name()] = \Crypt::encrypt($customFieldValue);
