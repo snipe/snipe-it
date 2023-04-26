@@ -83,7 +83,7 @@
                 data-show-footer="true"
                 data-show-refresh="true"
                 data-sort-order="asc"
-                data-sort-name="name"
+                data-sort-name="id"
                 data-show-fullscreen="true"
                 data-toolbar="#assetsBulkEditToolbar"
                 data-bulk-button-id="#bulkAssetEditButton"
