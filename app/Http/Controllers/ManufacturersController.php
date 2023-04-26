@@ -123,7 +123,7 @@ class ManufacturersController extends Controller
             return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.does_not_exist'));
         }
 
-        // Save the  data
+        // Save the data
         $manufacturer->name = $request->input('name');
         $manufacturer->url = $request->input('url');
         $manufacturer->support_url = $request->input('support_url');
