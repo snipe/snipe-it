@@ -862,17 +862,18 @@
                                     @can('delete', $asset)
                                         @if ($asset->deleted_at=='')
                                             <div class="col-md-12" style="padding-top: 30px; padding-bottom: 30px;">
-                                                <form action="{{ route('hardware/delete', ['assetId' => $asset->id]) }}" method="POST" onsubmit="return confirm( {{trans('general/message.delete_confirm')}} )">
-                                                    {{csrf_field()}}
-                                                    {{ method_field("DELETE")}}
+                                                <form href="{{ route('hardware/delete', ['assetId' => $asset->id]) }}" data-content="{{ trans('general.delete_confirm', ['item' => $asset->id]) }}" method="POST" data-title="{{ trans('general.delete') }}">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field("DELETE") }}
                                                     <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.delete')}}</button>
+                                                    <span class="sr-only">{{ trans('general.delete') }}</span>
                                                 </form>
                                             </div>
                                         @endif
                                     @endcan
 
                                 @if ($asset->deleted_at!='')
-                                    <div class="text-center col-md-12" style="padding-bottom: 15px;">
+                                    <div class="text-center col-md-12" style="padding-top: 30px; padding-bottom: 30px;">
                                         <form method="POST" action="{{ route('restore/hardware', ['assetId' => $asset->id]) }}">
                                         @csrf 
                                         <button class="btn btn-danger col-md-12">{{ trans('general.restore') }}</button>
