@@ -62,6 +62,7 @@ class LdapSync extends Command
         $ldap_result_phone = Setting::getSettings()->ldap_phone_field;
         $ldap_result_jobtitle = Setting::getSettings()->ldap_jobtitle;
         $ldap_result_country = Setting::getSettings()->ldap_country;
+        $ldap_result_location = Setting::getSettings()->ldap_location;
         $ldap_result_dept = Setting::getSettings()->ldap_dept;
         $ldap_result_manager = Setting::getSettings()->ldap_manager;
         $ldap_default_group = Setting::getSettings()->ldap_default_group;
@@ -209,8 +210,11 @@ class LdapSync extends Command
                 $item['country'] = $results[$i][$ldap_result_country][0] ?? '';
                 $item['department'] = $results[$i][$ldap_result_dept][0] ?? '';
                 $item['manager'] = $results[$i][$ldap_result_manager][0] ?? '';
+                $item['location'] = $results[$i][$ldap_result_location][0] ?? '';
 
-
+                $location = Location::firstOrCreate([
+                    'name' => $item['location'],
+                ]);
                 $department = Department::firstOrCreate([
                     'name' => $item['department'],
                 ]);
@@ -236,6 +240,7 @@ class LdapSync extends Command
                 $user->jobtitle = $item['jobtitle'];
                 $user->country = $item['country'];
                 $user->department_id = $department->id;
+                $user->location_id = $location->id;
 
                 if($item['manager'] != null) {
                     // Check Cache first
