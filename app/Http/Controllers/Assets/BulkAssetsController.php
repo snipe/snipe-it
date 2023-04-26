@@ -43,19 +43,17 @@ class BulkAssetsController extends Controller
 
         $asset_ids = array_values(array_unique($request->input('ids')));
        
-        //custom fields logic for bulk edit
-        $asset_custom_field = Asset::with('model.fieldset.fields')->whereIn('id', $asset_ids)->whereHas('model', function ($query) {
+        //custom fields logic
+        $asset_custom_field = Asset::with(['model.fieldset.fields', 'model'])->whereIn('id', $asset_ids)->whereHas('model', function ($query) {
             return $query->where('fieldset_id', '!=', null);
         })->get();
 
         $models = $asset_custom_field->unique('model_id');  
         $modelNames = [];
     foreach($models as $model) {
-        $modelNames[] = $model->name;
+        $modelNames[] = $model->model->name;
     } 
 
-       ray($asset_custom_field); 
-        ray($models);
         // $custom_fields = new Collection(); 
         // foreach ($models as $asset_key => $asset) {
         //     $custom_fields->push($asset->model->customFields); 
@@ -82,7 +80,7 @@ class BulkAssetsController extends Controller
                         ->with('assets', $asset_ids)
                         ->with('statuslabel_list', Helper::statusLabelList())
                         // ->with('custom_fields', $custom_fields)
-                        ->with('models', $models->pluck('model')) 
+                        ->with('models', $models->pluck(['model'])) 
                         ->with('modelNames', $modelNames);
             }
         }
@@ -101,6 +99,7 @@ class BulkAssetsController extends Controller
     public function update(Request $request)
     {
         $this->authorize('update', Asset::class);
+        $error_bag = [];
 
         // Get the back url from the session and then destroy the session
         $bulk_back_url = route('hardware.index');
@@ -219,7 +218,14 @@ class BulkAssetsController extends Controller
                             $asset->update($array); 
                             $asset->save();
                         }     
+                        if (!$asset->save()) {
+                            $error_bag[] = $asset;
+                       } 
                     } 
+                   if (!$asset->save()) {
+                        return redirect()->back()->withInput()->withErrors('One of your custom fields is not valid.'); 
+                   } 
+
                 } else {
                     Asset::find($assetId)->update($this->update_array);
                 } 
