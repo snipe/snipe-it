@@ -26,7 +26,6 @@
         </label>
         <div class="col-md-6">
             <input class="form-control" type="text" name="support_url" id="support_url" value="{{ old('support_url', $item->support_url) }}" />
-            <p class="help-block">{!! trans('admin/manufacturers/message.support_url_help') !!}</p>
             {!! $errors->first('support_url', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
         </div>
     </div>

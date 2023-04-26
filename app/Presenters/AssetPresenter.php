@@ -538,7 +538,7 @@ class AssetPresenter extends Presenter
      * Used to take user created warranty URL and dynamically fill in the needed values per asset
      * @return string
      */
-    public function dynamicVariableUrl()
+    public function dynamicWarrantyUrl()
     {
         $warranty_lookup_url = $this->model->model->manufacturer->warranty_lookup_url;
         $url = (str_replace('{LOCALE}',\App\Models\Setting::getSettings()->locale,$warranty_lookup_url));
