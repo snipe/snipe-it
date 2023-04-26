@@ -48,11 +48,11 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
         height: 120.79%;
         margin-top: -6.9%;
         margin-left: -6.9%;
-        padding-bottom: .04in;
     }
     img.barcode {
         display:block;
         margin-top:-7px;
+	margin-bottom: 10px;
         width: 100%;
     }
     div.label-logo {
@@ -158,7 +158,16 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
                 <div class="pull-left">
                     ZOPU
                 </div>
+            @else
+                <div class="pull-left">
+                    <br>
+                </div>
             @endif
+            @if ($settings->qr_code=='1')
+                <div class="pull-left">
+                    <br>
+                </div>
+            @endif 
         </div>
 
         @if ((($settings->alt_barcode_enabled=='1') && $settings->alt_barcode!=''))
