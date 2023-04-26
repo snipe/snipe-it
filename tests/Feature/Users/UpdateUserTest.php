@@ -12,7 +12,7 @@ class UpdateUserTest extends TestCase
 
     public function testUsersCanBeActivated()
     {
-        $admin = User::factory()->admin()->create();
+        $admin = User::factory()->superuser()->create();
         $user = User::factory()->create(['activated' => false]);
 
         $this->actingAs($admin)
@@ -27,7 +27,7 @@ class UpdateUserTest extends TestCase
 
     public function testUsersCanBeDeactivated()
     {
-        $admin = User::factory()->admin()->create();
+        $admin = User::factory()->superuser()->create();
         $user = User::factory()->create(['activated' => true]);
 
         $this->actingAs($admin)
@@ -44,7 +44,7 @@ class UpdateUserTest extends TestCase
 
     public function testUsersUpdatingThemselvesDoNotDeactivateTheirAccount()
     {
-        $admin = User::factory()->admin()->create(['activated' => true]);
+        $admin = User::factory()->superuser()->create(['activated' => true]);
 
         $this->actingAs($admin)
             ->put(route('users.update', $admin), [
