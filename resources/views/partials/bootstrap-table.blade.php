@@ -269,12 +269,19 @@
             }
 
             if ((row.available_actions) && (row.available_actions.delete === true)) {
+
+                // use the asset tag if no name is provided
+                var name_for_box = row.name
+                if (row.name=='') {
+                    var name_for_box = row.asset_tag
+                }
+                
                 actions += '<a href="{{ config('app.url') }}/' + dest + '/' + row.id + '" '
                     + ' class="btn btn-danger btn-sm delete-asset" data-tooltip="true"  '
                     + ' data-toggle="modal" '
-                    + ' data-content="{{ trans('general.sure_to_delete') }} ' + row.name + '?" '
+                    + ' data-content="{{ trans('general.sure_to_delete') }} ' + name_for_box + '?" '
                     + ' data-title="{{  trans('general.delete') }}" onClick="return false;">'
-                    + '<i class="fas fa-trash" aria-hidden="true"></i><span class="sr-only">Delete</span></a>&nbsp;';
+                    + '<i class="fas fa-trash" aria-hidden="true"></i><span class="sr-only">{{ trans('general.delete') }}</span></a>&nbsp;';
             } else {
                 actions += '<span data-tooltip="true" title="{{ trans('general.cannot_be_deleted') }}"><a class="btn btn-danger btn-sm delete-asset disabled" onClick="return false;"><i class="fas fa-trash"></i></a></span>&nbsp;';
             }
