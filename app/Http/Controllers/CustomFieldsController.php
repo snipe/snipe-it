@@ -121,8 +121,11 @@ class CustomFieldsController extends Controller
         if ($field->save()) {
 
             // Sync fields with fieldsets
-            if ($request->has('associate_fieldsets') && (count($request->get('associate_fieldsets')) > 0)) {
-                $field->fieldset()->sync(array_keys($request->get('associate_fieldsets')));
+            $fieldset_array = $request->input('associate_fieldsets');
+            if ($request->has('associate_fieldsets') && (is_array($fieldset_array))) {
+                $field->fieldset()->sync(array_keys($fieldset_array));
+            } else {
+                $field->fieldset()->sync([]);
             }
 
 
@@ -273,8 +276,16 @@ class CustomFieldsController extends Controller
         }
 
         if ($field->save()) {
+
+
             // Sync fields with fieldsets
-            $field->fieldset()->sync(array_keys($request->get('associate_fieldsets')));
+            $fieldset_array = $request->input('associate_fieldsets');
+            if ($request->has('associate_fieldsets') && (is_array($fieldset_array))) {
+                $field->fieldset()->sync(array_keys($fieldset_array));
+            } else {
+                $field->fieldset()->sync([]);
+            }
+
             return redirect()->route('fields.index')->with('success', trans('admin/custom_fields/message.field.update.success'));
         }
 
