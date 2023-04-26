@@ -303,7 +303,7 @@ class AssetPresenter extends Presenter
             'title' => trans('table.actions'),
             'formatter' => 'hardwareActionsFormatter',
         ];
-        $finalArray = array_merge($check_fields, $custom_fields, $layout);
+        $finalArray = array_merge($check_fields, $custom_fields);// $layout
         return json_encode($finalArray);
     }
 

@@ -28,6 +28,7 @@ class AssetsTransformer
 
         $array = [
             'id' => (int) $asset->id,
+            'custom_fields' => null, // Hardcoded custom_fields key to prevent the position on top
             'name' => e($asset->name),
             'asset_tag' => e($asset->asset_tag),
             'serial' => e($asset->serial),
