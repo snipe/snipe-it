@@ -187,11 +187,11 @@ class BulkAssetsController extends Controller
                 }
 
                 $changed = [];
-                $asset = Asset::where('id' ,$assetId)->get();
+                $assetCollection = Asset::where('id' ,$assetId)->get();
 
                 foreach ($this->update_array as $key => $value) {
-                    if ($this->update_array[$key] != $asset->toArray()[0][$key]) {
-                        $changed[$key]['old'] = $asset->toArray()[0][$key];
+                    if ($this->update_array[$key] != $assetCollection->toArray()[0][$key]) {
+                        $changed[$key]['old'] = $assetCollection->toArray()[0][$key];
                         $changed[$key]['new'] = $this->update_array[$key];
                     }
                 }
@@ -219,17 +219,16 @@ class BulkAssetsController extends Controller
                             $asset->save();
                         }     
                         if (!$asset->save()) {
-                            $error_bag[] = $asset;
+                            $error_bag[] = $asset->getErrors();
                        } 
-                    } 
-                   if (!$asset->save()) {
-                        return redirect()->back()->withInput()->withErrors('One of your custom fields is not valid.'); 
                    } 
-
                 } else {
                     Asset::find($assetId)->update($this->update_array);
                 } 
             } // endforeach ($assets)
+            if(!empty($error_bag)) {
+                return redirect($bulk_back_url)->withErrors($error_bag);
+              }
             return redirect($bulk_back_url)->with('success', trans('admin/hardware/message.update.success'));
         }
         // no values given, nothing to update
