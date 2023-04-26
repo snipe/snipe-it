@@ -23,6 +23,24 @@ class Settings
         return $this->update(['full_multiple_companies_support' => 1]);
     }
 
+    public function enableWebhook(): Settings
+    {
+        return $this->update([
+            'webhook_botname' => 'SnipeBot5000',
+            'webhook_endpoint' => 'https://hooks.slack.com/services/NZ59/Q446/672N',
+            'webhook_channel' => '#it',
+        ]);
+    }
+
+    public function disableWebhook(): Settings
+    {
+        return $this->update([
+            'webhook_botname' => '',
+            'webhook_endpoint' => '',
+            'webhook_channel' => '',
+        ]);
+    }
+
     /**
      * @param array $attributes Attributes to modify in the application's settings.
      */
