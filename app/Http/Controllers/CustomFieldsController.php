@@ -7,6 +7,7 @@ use App\Http\Requests\CustomFieldRequest;
 use App\Models\CustomField;
 use App\Models\CustomFieldset;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Redirect;
 
 /**
@@ -45,7 +46,7 @@ class CustomFieldsController extends Controller
      * @see CustomFieldsController::storeField()
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v5.1.5]
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show()
