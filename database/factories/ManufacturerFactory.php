@@ -38,6 +38,7 @@ class ManufacturerFactory extends Factory
                 'name' => 'Apple',
                 'url' => 'https://apple.com',
                 'support_url' => 'https://support.apple.com',
+                'warranty_lookup_url' => 'https://checkcoverage.apple.com',
                 'image' => 'apple.jpg',
             ];
         });
@@ -50,6 +51,7 @@ class ManufacturerFactory extends Factory
                 'name' => 'Microsoft',
                 'url' => 'https://microsoft.com',
                 'support_url' => 'https://support.microsoft.com',
+                'warranty_lookup_url' => 'https://account.microsoft.com/devices',
                 'image' => 'microsoft.png',
             ];
         });
@@ -62,6 +64,7 @@ class ManufacturerFactory extends Factory
                 'name' => 'Dell',
                 'url' => 'https://dell.com',
                 'support_url' => 'https://support.dell.com',
+                'warranty_lookup_url' => 'https://www.dell.com/support/home/en-us/Products/?app=warranty',
                 'image' => 'dell.png',
             ];
         });
