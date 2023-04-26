@@ -4882,7 +4882,7 @@
     }
   };
 
-  var VERSION = '1.21.3';
+  var VERSION = '1.21.4';
   var bootstrapVersion = Utils.getBootstrapVersion();
   var CONSTANTS = {
     3: {
@@ -5063,6 +5063,7 @@
     paginationUseIntermediate: false,
     // Calculate intermediate pages for quick access
     search: false,
+    searchable: false,
     searchHighlight: false,
     searchOnEnterKey: false,
     strictSearch: false,
@@ -6229,7 +6230,7 @@
           }
         }
         var handleInputEvent = function handleInputEvent($searchInput) {
-          var eventTriggers = 'keyup drop blur mouseup';
+          var eventTriggers = $searchInput.is('select') ? 'change' : 'keyup drop blur mouseup';
           $searchInput.off(eventTriggers).on(eventTriggers, function (event) {
             if (opts.searchOnEnterKey && event.keyCode !== 13) {
               return;
@@ -7126,7 +7127,7 @@
             }
           }
         }
-        if (this.options.search && this.options.sidePagination === 'server' && this.columns.filter(function (column) {
+        if (this.options.search && this.options.sidePagination === 'server' && this.options.searchable && this.columns.filter(function (column) {
           return column.searchable;
         }).length) {
           params.searchable = [];
@@ -7560,14 +7561,14 @@
         !Utils.isEmptyObject(this.filterColumns) || typeof this.options.filterOptions.filterAlgorithm === 'function' || !Utils.isEmptyObject(this.filterColumnsPartial)) && (!params || !params.unfiltered)) {
           data = this.data;
         }
-        if (params && params.useCurrentPage) {
-          data = data.slice(this.pageFrom - 1, this.pageTo);
-        }
         if (params && !params.includeHiddenRows) {
           var hiddenRows = this.getHiddenRows();
           data = data.filter(function (row) {
             return Utils.findIndex(hiddenRows, row) === -1;
           });
+        }
+        if (params && params.useCurrentPage) {
+          data = data.slice(this.pageFrom - 1, this.pageTo);
         }
         if (params && params.formatted) {
           data.forEach(function (row) {
@@ -8516,12 +8517,14 @@
         }
         return;
       }
-      var options = Utils.extend(true, {}, BootstrapTable.DEFAULTS, $$o(el).data(), _typeof(option) === 'object' && option);
-      if (!data) {
-        data = new $$o.BootstrapTable(el, options);
-        $$o(el).data('bootstrap.table', data);
-        data.init();
+      if (data) {
+        console.warn('You cannot initialize the table more than once!');
+        return;
       }
+      var options = Utils.extend(true, {}, BootstrapTable.DEFAULTS, $$o(el).data(), _typeof(option) === 'object' && option);
+      data = new $$o.BootstrapTable(el, options);
+      $$o(el).data('bootstrap.table', data);
+      data.init();
     });
     return typeof value === 'undefined' ? this : value;
   };
