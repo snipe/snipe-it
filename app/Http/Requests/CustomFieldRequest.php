@@ -26,6 +26,8 @@ class CustomFieldRequest extends FormRequest
     {
         $rules = [];
 
+        $rules['associate_fieldsets.*'] = 'nullable|integer|exists:custom_fieldsets,id';
+
         switch ($this->method()) {
 
             // Brand new
@@ -53,5 +55,12 @@ class CustomFieldRequest extends FormRequest
         $rules['custom_format'] = 'valid_regex';
 
         return  $rules;
+    }
+
+    public function messages()
+    {
+        return [
+            'associate_fieldsets.*.exists' => 'Invalid fieldset',
+        ];
     }
 }
