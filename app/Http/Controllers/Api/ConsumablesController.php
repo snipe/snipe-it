@@ -75,6 +75,10 @@ class ConsumablesController extends Controller
             $consumables->where('manufacturer_id', '=', $request->input('manufacturer_id'));
         }
 
+        if ($request->filled('supplier_id')) {
+            $consumables->where('supplier_id', '=', $request->input('supplier_id'));
+        }
+
         if ($request->filled('location_id')) {
             $consumables->where('location_id','=',$request->input('location_id'));
         }
@@ -84,12 +88,9 @@ class ConsumablesController extends Controller
         }
 
 
-        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
-        // case we override with the actual count, so we should return 0 items.
-        $offset = (($consumables) && ($request->get('offset') > $consumables->count())) ? $consumables->count() : $request->get('offset', 0);
-
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $consumables->count()) ? $consumables->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
 
         $allowed_columns = ['id', 'name', 'order_number', 'min_amt', 'purchase_date', 'purchase_cost', 'company', 'category', 'model_number', 'item_no', 'manufacturer', 'location', 'qty', 'image'];
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
@@ -110,6 +111,9 @@ class ConsumablesController extends Controller
                 break;
             case 'company':
                 $consumables = $consumables->OrderCompany($order);
+                break;
+            case 'supplier':
+                $components = $consumables->OrderSupplier($order);
                 break;
             default:
                 $consumables = $consumables->orderBy($column_sort, $order);

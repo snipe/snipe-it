@@ -41,6 +41,8 @@ class SuppliersTransformer
                 'assets_count' => (int) $supplier->assets_count,
                 'accessories_count' => (int) $supplier->accessories_count,
                 'licenses_count' => (int) $supplier->licenses_count,
+                'consumables_count' => (int) $supplier->consumables_count,
+                'components_count' => (int) $supplier->components_count,
                 'notes' => ($supplier->notes) ? e($supplier->notes) : null,
                 'created_at' => Helper::getFormattedDateObject($supplier->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($supplier->updated_at, 'datetime'),

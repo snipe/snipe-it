@@ -34,13 +34,4 @@ class SettingFactory extends Factory
             'email_domain' => 'test.com',
         ];
     }
-
-    public function withMultipleFullCompanySupport()
-    {
-        return $this->state(function () {
-            return [
-                'full_multiple_companies_support' => 1,
-            ];
-        });
-    }
 }

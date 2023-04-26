@@ -483,8 +483,7 @@
                                                     class="fas fa-times text-red fa-fw"></i>
                                             {{ trans('general.all') }}
                                             {{ trans('general.undeployable') }}
-                                            ({{ (isset($total_undeployable_sidebar)) ? $total_undeployable_sidebar : '' }}
-                                            )
+                                            ({{ (isset($total_undeployable_sidebar)) ? $total_undeployable_sidebar : '' }})
                                         </a>
                                     </li>
                                     <li{!! (Request::query('status') == 'byod' ? ' class="active"' : '') !!}><a
@@ -850,7 +849,6 @@
                 </section>
 
             </div><!-- /.content-wrapper -->
-
             <footer class="main-footer hidden-print">
 
                 <div class="pull-right hidden-xs">
@@ -890,6 +888,7 @@
                 made with <i class="fas fa-heart" style="color: #a94442; font-size: 10px" aria-hidden="true"></i><span
                         class="sr-only">love</span> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a>.
             </footer>
+
 
 
         </div><!-- ./wrapper -->
@@ -974,7 +973,7 @@
 
             $(function () {
 
-                $('[data-toggle="tooltip"]').tooltip();
+                $('[data-tooltip="true"]').tooltip();
                 $('[data-toggle="popover"]').popover();
                 $('.select2 span').addClass('needsclick');
                 $('.select2 span').removeAttr('title');

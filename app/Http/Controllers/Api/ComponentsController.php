@@ -46,7 +46,7 @@ class ComponentsController extends Controller
 
 
         $components = Company::scopeCompanyables(Component::select('components.*')
-            ->with('company', 'location', 'category', 'assets'));
+            ->with('company', 'location', 'category', 'assets', 'supplier'));
 
         if ($request->filled('search')) {
             $components = $components->TextSearch($request->input('search'));
@@ -64,6 +64,10 @@ class ComponentsController extends Controller
             $components->where('category_id', '=', $request->input('category_id'));
         }
 
+        if ($request->filled('supplier_id')) {
+            $components->where('supplier_id', '=', $request->input('supplier_id'));
+        }
+
         if ($request->filled('location_id')) {
             $components->where('location_id', '=', $request->input('location_id'));
         }
@@ -72,14 +76,10 @@ class ComponentsController extends Controller
             $components->where('notes','=',$request->input('notes'));
         }
 
-        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
-        // case we override with the actual count, so we should return 0 items.
-        $offset = (($components) && ($request->get('offset') > $components->count())) ? $components->count() : $request->get('offset', 0);
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $components->count()) ? $components->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
 
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
-
-        
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort_override =  $request->input('sort');
         $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'created_at';
@@ -93,6 +93,9 @@ class ComponentsController extends Controller
                 break;
             case 'company':
                 $components = $components->OrderCompany($order);
+                break;
+            case 'supplier':
+                $components = $components->OrderSupplier($order);
                 break;
             default:
                 $components = $components->orderBy($column_sort, $order);

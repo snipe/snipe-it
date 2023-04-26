@@ -64,8 +64,8 @@ class ComponentCheckoutController extends Controller
 
         $max_to_checkout = $component->numRemaining();
 
-        // Make sure there is at least one available to checkout
-        if ($max_to_checkout <= $request->get('assigned_qty')) {
+        // Make sure there are at least the requested number of components available to checkout
+        if ($max_to_checkout < $request->get('assigned_qty')) {
             return redirect()->back()->withInput()->with('error', trans('admin/components/message.checkout.unavailable', ['remaining' => $max_to_checkout, 'requested' => $request->get('assigned_qty')]));
         }
 

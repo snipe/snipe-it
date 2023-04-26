@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Models\Component;
 use App\Models\Location;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Supplier;
 
 class ComponentFactory extends Factory
 {
@@ -35,6 +36,7 @@ class ComponentFactory extends Factory
             'purchase_cost' => $this->faker->randomFloat(2),
             'min_amt' => $this->faker->numberBetween($min = 1, $max = 2),
             'company_id' => Company::factory(),
+            'supplier_id' => Supplier::factory(),
         ];
     }
 

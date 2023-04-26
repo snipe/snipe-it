@@ -199,13 +199,9 @@ class AssetsController extends Controller
 
         $request->filled('order_number') ? $assets = $assets->where('assets.order_number', '=', e($request->get('order_number'))) : '';
 
-        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
-        // case we override with the actual count, so we should return 0 items.
-        $offset = (($assets) && ($request->get('offset') > $assets->count())) ? $assets->count() : $request->get('offset', 0);
-
-
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $assets->count()) ? $assets->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 
@@ -554,13 +550,15 @@ class AssetsController extends Controller
         $asset->depreciate              = '0';
         $asset->status_id               = $request->get('status_id', 0);
         $asset->warranty_months         = $request->get('warranty_months', null);
-        $asset->purchase_cost           = Helper::ParseCurrency($request->get('purchase_cost')); // this is the API's store method, so I don't know that I want to do this? Confusing. FIXME (or not?!)
+        $asset->purchase_cost           = $request->get('purchase_cost');
+        $asset->asset_eol_date          = $request->get('asset_eol_date', $asset->present()->eol_date());
         $asset->purchase_date           = $request->get('purchase_date', null);
         $asset->assigned_to             = $request->get('assigned_to', null);
         $asset->supplier_id             = $request->get('supplier_id');
         $asset->requestable             = $request->get('requestable', 0);
         $asset->rtd_location_id         = $request->get('rtd_location_id', null);
         $asset->location_id             = $request->get('rtd_location_id', null);
+
 
         /**
         * this is here just legacy reasons. Api\AssetController

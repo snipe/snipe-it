@@ -77,7 +77,7 @@
             <tbody class="permissions-group">
                 <tr class="header-row permissions-row">
                     <td class="col-md-5 tooltip-base permissions-item"
-                        data-toggle="tooltip"
+                        data-tooltip="true"
                         data-placement="right"
                         title="{{ $localPermission['note'] }}">
                             @unless (empty($localPermission['label']))
@@ -100,7 +100,7 @@
             <tbody class="permission-group">
                 <tr class="header-row permissions-row">
                     <td class="col-md-5 tooltip-base permissions-item header-name"
-                        data-toggle="tooltip"
+                        data-tooltip="true"
                         data-placement="right"
                         title="{{ $localPermission['note'] }}">
                         <h2>{{ $area }}</h2>
@@ -122,7 +122,7 @@
                     <tr class="permissions-row">
                         <td
                                 class="col-md-5 tooltip-base permissions-item"
-                                data-toggle="tooltip"
+                                data-tooltip="true"
                                 data-placement="right"
                                 title="{{ $this_permission['note'] }}">
                                 {{ $this_permission['label'] }}

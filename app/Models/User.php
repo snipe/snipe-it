@@ -65,6 +65,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'avatar',
         'gravatar',
         'vip',
+        'autoassign_licenses',
     ];
 
     protected $casts = [
@@ -76,8 +77,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'created_at'   => 'datetime',
         'updated_at'   => 'datetime',
         'deleted_at'   => 'datetime',
-        'start_date'   => 'datetime:Y-m-d',
-        'end_date'     => 'datetime:Y-m-d',
+        'autoassign_licenses'    => 'boolean',
     ];
 
     /**
@@ -97,6 +97,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'location_id'             => 'exists:locations,id|nullable',
         'start_date'              => 'nullable|date_format:Y-m-d',
         'end_date'                => 'nullable|date_format:Y-m-d|after_or_equal:start_date',
+        'autoassign_licenses'     => 'boolean',
     ];
 
     /**
@@ -256,20 +257,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     public function getCompleteNameAttribute()
     {
         return $this->last_name.', '.$this->first_name.' ('.$this->username.')';
-    }
-
-    /**
-     * The url for slack notifications.
-     * Used by Notifiable trait.
-     * @return mixed
-     */
-    public function routeNotificationForSlack()
-    {
-        // At this point the endpoint is the same for everything.
-        //  In the future this may want to be adapted for individual notifications.
-        $this->endpoint = \App\Models\Setting::getSettings()->webhook_endpoint;
-
-        return $this->endpoint;
     }
 
 

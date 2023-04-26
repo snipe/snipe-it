@@ -30,6 +30,7 @@ class Handler extends ExceptionHandler
         \League\OAuth2\Server\Exception\OAuthServerException::class,
         JsonException::class,
         SCIMException::class, //these generally don't need to be reported
+        InvalidFormatException::class,
     ];
 
     /**
@@ -72,27 +73,31 @@ class Handler extends ExceptionHandler
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Invalid JSON'), 422);
         }
 
+        // Handle SCIM exceptions
         if ($e instanceof SCIMException) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Invalid SCIM Request'), 400);
         }
 
+        // Handle standard requests that fail because Carbon cannot parse the date on validation (when a submitted date value is definitely not a date)
         if ($e instanceof InvalidFormatException) {
-            return redirect()->back()->with('error', trans('validation.date', ['attribute' => 'date']));
+            return redirect()->back()->withInput()->with('error', trans('validation.date', ['attribute' => 'date']));
         }
 
-        // Handle Ajax requests that fail because the model doesn't exist
+        // Handle API requests that fail
         if ($request->ajax() || $request->wantsJson()) {
 
+            // Handle API requests that fail because Carbon cannot parse the date on validation (when a submitted date value is definitely not a date)
             if ($e instanceof InvalidFormatException) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, trans('validation.date')), 200);
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans('validation.date', ['attribute' => 'date'])), 200);
             }
 
-
+            // Handle API requests that fail because the model doesn't exist
             if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
                 $className = last(explode('\\', $e->getModel()));
                 return response()->json(Helper::formatStandardApiResponse('error', null, $className . ' not found'), 200);
             }
 
+            // Handle API requests that fail because of an HTTP status code and return a useful error message
             if ($this->isHttpException($e)) {
 
                 $statusCode = $e->getStatusCode();
