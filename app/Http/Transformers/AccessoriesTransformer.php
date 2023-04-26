@@ -4,7 +4,7 @@ namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
 use App\Models\Accessory;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
 
@@ -51,6 +51,8 @@ class AccessoriesTransformer
             'checkin' =>  false,
             'update' => Gate::allows('update', Accessory::class),
             'delete' => Gate::allows('delete', Accessory::class),
+            'clone' => Gate::allows('create', Accessory::class),
+            
         ];
 
         $permissions_array['user_can_checkout'] = false;

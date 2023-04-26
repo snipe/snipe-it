@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'O acessório não foi alocado, por favor tente novamente',
         'success' 		=> 'Acessório alocado com sucesso.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Este usuário é inválido. Tente novamente.'
     ),
 

@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'อุปกรณ์เสริมยังไม่ถูกเช็คเอ้าท์ กรุณาลองอีกครั้ง',
         'success' 		=> 'อุปกรณ์เสริมเช็คเอ้าท์เรียบร้อยแล้ว',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'ผู้ใช้งานไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง'
     ),
 

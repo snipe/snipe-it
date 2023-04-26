@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'Групп аль хэдийн байна!',
-    'group_not_found'     => 'Групп [: id] байхгүй байна.',
+    'group_not_found'     => 'Group ID :id does not exist.',
     'group_name_required' => 'Нэрийн талбар шаардлагатай',
 
     'success' => array(

@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Аксесоарът не беше изписан. Моля опитайте отново.',
         'success' 		=> 'Аксесоарът изписан успешно.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Невалиден потребител. Моля опитайте отново.'
     ),
 

@@ -2,14 +2,14 @@
 
     {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
 
-    <div class="col-md-7{{  ((isset($required)) && ($required=='true')) ? ' required' : '' }}">
+    <div class="col-md-7{{ (isset($item) && (Helper::checkIfRequired($item, $fieldname))) ? ' required' : '' }}">
         <select class="js-data-ajax" data-endpoint="suppliers" data-placeholder="{{ trans('general.select_supplier') }}" name="{{ $fieldname }}" style="width: 100%" id="supplier_select" aria-label="{{ $fieldname }}">
             @if ($supplier_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
-                <option value="{{ $supplier_id }}" selected="selected" role="option" aria-selected="true"  role="option">
+                <option value="{{ $supplier_id }}" selected="selected" role="option" aria-selected="true" role="option">
                     {{ (\App\Models\Supplier::find($supplier_id)) ? \App\Models\Supplier::find($supplier_id)->name : '' }}
                 </option>
             @else
-                <option value=""  role="option">{{ trans('general.select_supplier') }}</option>
+                <option value="" role="option">{{ trans('general.select_supplier') }}</option>
             @endif
         </select>
     </div>

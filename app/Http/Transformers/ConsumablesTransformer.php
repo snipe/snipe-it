@@ -4,7 +4,7 @@ namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
 use App\Models\Consumable;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
 
@@ -31,6 +31,7 @@ class ConsumablesTransformer
             'item_no'       => e($consumable->item_no),
             'location'      => ($consumable->location) ? ['id' => (int) $consumable->location->id, 'name' => e($consumable->location->name)] : null,
             'manufacturer'  => ($consumable->manufacturer) ? ['id' => (int) $consumable->manufacturer->id, 'name' => e($consumable->manufacturer->name)] : null,
+            'supplier' => ($consumable->supplier) ? ['id' => $consumable->supplier->id, 'name'=> e($consumable->supplier->name)] : null,
             'min_amt'       => (int) $consumable->min_amt,
             'model_number'  => ($consumable->model_number != '') ? e($consumable->model_number) : null,
             'remaining'  => $consumable->numRemaining(),

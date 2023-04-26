@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Priedo nepavyko išduoti, pabandykite dar kartą',
         'success' 		=> 'Įranga sėkmingai išimta.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Šis vartotojas neteisingas. Prašome bandykite dar kartą.'
     ),
 

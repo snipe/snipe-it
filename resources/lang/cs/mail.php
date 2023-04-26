@@ -43,7 +43,7 @@ return [
     'login_first_admin' => 'Přihlaste se k nové instalaci Snipe-IT pomocí níže uvedených pověření:',
     'login' => 'Uživatelské jméno:',
     'Low_Inventory_Report' => 'Hlášení o nízkých zásobách',
-    'inventory_report' => 'Inventory Report',
+    'inventory_report' => 'Zpráva o majetku',
     'min_QTY' => 'Minimální množství',
     'name' => 'Položka',
     'new_item_checked' => 'Nová položka byla odevzdána pod vaším jménem, podrobnosti jsou uvedeny níže.',
@@ -79,5 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Připomenutí: blížící se lhůta pro :name',
     'Expected_Checkin_Date' => 'Majetek, který vám byl předán, musí být vrácen zpět do :date',
     'your_assets' => 'Zobrazit vaše položky',
-    'rights_reserved' => 'All rights reserved.',
+    'rights_reserved' => 'Všechna práva vyhrazena.',
 ];

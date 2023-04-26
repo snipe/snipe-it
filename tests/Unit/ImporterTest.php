@@ -13,19 +13,11 @@ use App\Models\Category;
 use App\Models\CustomField;
 use App\Models\Location;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Notification;
-use Tests\Unit\BaseTest;
+use Tests\TestCase;
 
-class ImporterTest extends BaseTest
+class ImporterTest extends TestCase
 {
-    /**
-     * @var \UnitTester
-     */
-//     protected $tester;
-
 //     public function testDefaultImportAssetWithCustomFields()
 //     {
 //         $this->signIn();

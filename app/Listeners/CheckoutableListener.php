@@ -2,22 +2,21 @@
 
 namespace App\Listeners;
 
+use App\Events\CheckoutableCheckedOut;
 use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
+use App\Models\Component;
 use App\Models\Consumable;
 use App\Models\LicenseSeat;
 use App\Models\Recipients\AdminRecipient;
 use App\Models\Setting;
-use App\Models\User;
 use App\Notifications\CheckinAccessoryNotification;
 use App\Notifications\CheckinAssetNotification;
-use App\Notifications\CheckinLicenseNotification;
 use App\Notifications\CheckinLicenseSeatNotification;
 use App\Notifications\CheckoutAccessoryNotification;
 use App\Notifications\CheckoutAssetNotification;
 use App\Notifications\CheckoutConsumableNotification;
-use App\Notifications\CheckoutLicenseNotification;
 use App\Notifications\CheckoutLicenseSeatNotification;
 use Illuminate\Support\Facades\Notification;
 use Exception;
@@ -25,18 +24,17 @@ use Log;
 
 class CheckoutableListener
 {
+    private array $skipNotificationsFor = [
+        Component::class,
+    ];
+
     /**
-     * Notify the user about the checked out checkoutable and add a record to the
-     * checkout_requests table.
+     * Notify the user and post to webhook about the checked out checkoutable
+     * and add a record to the checkout_requests table.
      */
     public function onCheckedOut($event)
     {
-
-
-        /**
-         * When the item wasn't checked out to a user, we can't send notifications
-         */
-        if (! $event->checkedOutTo instanceof User) {
+        if ($this->shouldNotSendAnyNotifications($event->checkoutable)){
             return;
         }
 
@@ -46,6 +44,11 @@ class CheckoutableListener
         $acceptance = $this->getCheckoutAcceptance($event);       
 
         try {
+            if ($this->shouldSendWebhookNotification()) {
+                Notification::route('slack', Setting::getSettings()->webhook_endpoint)
+                    ->notify($this->getCheckoutNotification($event));
+            }
+
             if (! $event->checkedOutTo->locale) {
                 Notification::locale(Setting::getSettings()->locale)->send(
                     $this->getNotifiables($event),
@@ -63,16 +66,13 @@ class CheckoutableListener
     }
 
     /**
-     * Notify the user about the checked in checkoutable
+     * Notify the user and post to webhook about the checked in checkoutable
      */    
     public function onCheckedIn($event)
     {
         \Log::debug('onCheckedIn in the Checkoutable listener fired');
 
-        /**
-         * When the item wasn't checked out to a user, we can't send notifications
-         */
-        if (! $event->checkedOutTo instanceof User) {
+        if ($this->shouldNotSendAnyNotifications($event->checkoutable)) {
             return;
         }
 
@@ -90,6 +90,11 @@ class CheckoutableListener
         }
 
         try {
+            if ($this->shouldSendWebhookNotification()) {
+                Notification::route('slack', Setting::getSettings()->webhook_endpoint)
+                    ->notify($this->getCheckinNotification($event));
+            }
+
             // Use default locale
             if (! $event->checkedOutTo->locale) {
                 Notification::locale(Setting::getSettings()->locale)->send(
@@ -182,11 +187,11 @@ class CheckoutableListener
     /**
      * Get the appropriate notification for the event
      * 
-     * @param  CheckoutableCheckedIn $event 
-     * @param  CheckoutAcceptance $acceptance 
+     * @param  CheckoutableCheckedOut $event
+     * @param  CheckoutAcceptance|null $acceptance
      * @return Notification
      */
-    private function getCheckoutNotification($event, $acceptance)
+    private function getCheckoutNotification($event, $acceptance = null)
     {
         $notificationClass = null;
 
@@ -224,5 +229,15 @@ class CheckoutableListener
             \App\Events\CheckoutableCheckedOut::class,
             'App\Listeners\CheckoutableListener@onCheckedOut'
         ); 
+    }
+
+    private function shouldNotSendAnyNotifications($checkoutable): bool
+    {
+        return in_array(get_class($checkoutable), $this->skipNotificationsFor);
+    }
+
+    private function shouldSendWebhookNotification(): bool
+    {
+        return Setting::getSettings() && Setting::getSettings()->webhook_endpoint;
     }
 }

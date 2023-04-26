@@ -14,8 +14,8 @@ return [
     'deleted'  					=> 'この資産は削除されました。',
     'edit'  					=> '資産を編集',
     'model_deleted'  			=> 'この資産モデルは削除されました。資産を復元する前に、モデルを復元する必要があります。',
-    'model_invalid'             => 'The Model of this Asset is invalid.',
-    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
+    'model_invalid'             => 'この資産のモデルは無効です。',
+    'model_invalid_fix'         => 'チェックインまたはチェックアウトを試みる前に、資産を編集して修正する必要があります。',
     'requestable'               => '要求可能',
     'requested'				    => '要求済',
     'not_requestable'           => '要求可能ではありません',
@@ -42,5 +42,6 @@ return [
     'error_messages' => 'エラーメッセージ:',
     'success_messages' => '成功メッセージ:',
     'alert_details' => '詳細は以下を確認してください。',
-    'custom_export' => 'カスタムエクスポート'
+    'custom_export' => 'カスタムエクスポート',
+    'mfg_warranty_lookup' => ':manufacturer 保証書の発行状況を検索',
 ];

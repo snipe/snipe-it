@@ -70,19 +70,6 @@ class Asset extends Depreciable
     */
     protected $injectUniqueIdentifier = true;
 
-    // We set these as protected dates so that they will be easily accessible via Carbon
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
-        'purchase_date',
-        'last_checkout',
-        'expected_checkin',
-        'last_audit_date',
-        'next_audit_date'
-    ];
-
-
     protected $casts = [
         'purchase_date' => 'date',
         'last_checkout' => 'datetime',
@@ -96,6 +83,9 @@ class Asset extends Depreciable
         'rtd_company_id' => 'integer',
         'supplier_id'    => 'integer',
         'byod'           => 'boolean',
+        'created_at'     => 'datetime',
+        'updated_at'   => 'datetime',
+        'deleted_at'  => 'datetime',
     ];
 
     protected $rules = [
@@ -546,6 +536,28 @@ class Asset extends Depreciable
     {
         return strtolower(class_basename($this->assigned_type));
     }
+
+
+
+    /**
+     * This is annoying, but because we don't say "assets" in our route names, we have to make an exception here
+     * @todo - normalize the route names - API endpoint URLS can stay the same
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v6.1.0]
+     * @return string
+     */
+    public function targetShowRoute()
+    {
+        $route = str_plural($this->assignedType());
+        if ($route=='assets') {
+            return 'hardware';
+        }
+
+        return $route;
+
+    }
+
 
     /**
      * Get the asset's location based on default RTD location

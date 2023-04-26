@@ -77,7 +77,7 @@
             <tbody class="permissions-group">
                 <tr class="header-row permissions-row">
                     <td class="col-md-5 tooltip-base permissions-item"
-                        data-toggle="tooltip"
+                        data-tooltip="true"
                         data-placement="right"
                         title="{{ $localPermission['note'] }}">
                             @unless (empty($localPermission['label']))
@@ -87,12 +87,12 @@
                             @endunless
                     </td>
                     <td class="col-md-1 permissions-item">
-                        <label for="{{ 'permission['.$localPermission['permission'].']' }}"><span class="sr-only">{{ trans('admin/groups/titles.allow')}} {{ 'permission['.$localPermission['permission'].']' }}</span></label>
-                        {{ Form::radio('permission['.$localPermission['permission'].']', '1',(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '1' : null),['value'=>"grant", 'class'=>'minimal', 'aria-label'=> 'permission['.$localPermission['permission'].']']) }}
+                        <label for="{{ 'permission['.$localPermission['permission'].']' }}" style="form-control"><span class="sr-only">{{ trans('admin/groups/titles.allow')}} {{ 'permission['.$localPermission['permission'].']' }}</span></label>
+                        {{ Form::radio('permission['.$localPermission['permission'].']', '1',(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '1' : null),['value'=>"grant", 'aria-label'=> 'permission['.$localPermission['permission'].']']) }}
                     </td>
                     <td class="col-md-1 permissions-item">
                         <label for="{{ 'permission['.$localPermission['permission'].']' }}"><span class="sr-only">{{ trans('admin/groups/titles.deny')}} {{ 'permission['.$localPermission['permission'].']' }}</span></label>
-                        {{ Form::radio('permission['.$localPermission['permission'].']', '0',(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '0' : null),['value'=>"grant", 'class'=>'minimal', 'aria-label'=> 'permission['.$localPermission['permission'].']']) }}
+                        {{ Form::radio('permission['.$localPermission['permission'].']', '0',(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '0' : null),['value'=>"grant", 'aria-label'=> 'permission['.$localPermission['permission'].']']) }}
                     </td>
                 </tr>
             </tbody>
@@ -100,7 +100,7 @@
             <tbody class="permission-group">
                 <tr class="header-row permissions-row">
                     <td class="col-md-5 tooltip-base permissions-item header-name"
-                        data-toggle="tooltip"
+                        data-tooltip="true"
                         data-placement="right"
                         title="{{ $localPermission['note'] }}">
                         <h2>{{ $area }}</h2>
@@ -109,11 +109,11 @@
                     </td>
                     <td class="col-md-1 permissions-item" style="vertical-align: bottom">
                         <label for="{{ $area }}"><span class="sr-only">{{ trans('admin/groups/titles.allow')}} {{ $area }}</span></label>
-                        {{ Form::radio("$area", '1',false,['value'=>"grant", 'class'=>'minimal', 'data-checker-group' => str_slug($area), 'aria-label'=> $area]) }}
+                        {{ Form::radio("$area", '1',false,['value'=>"grant",  'data-checker-group' => str_slug($area), 'aria-label'=> $area]) }}
                     </td>
                     <td class="col-md-1 permissions-item">
                         <label for="{{ $area }}"><span class="sr-only">{{ trans('admin/groups/titles.deny')}} {{ $area }}</span></label>
-                        {{ Form::radio("$area", '0',false,['value'=>"deny", 'class'=>'minimal', 'data-checker-group' => str_slug($area), 'aria-label'=> $area]) }}
+                        {{ Form::radio("$area", '0',false,['value'=>"deny", 'data-checker-group' => str_slug($area), 'aria-label'=> $area]) }}
                     </td>
                 </tr>
 
@@ -122,18 +122,18 @@
                     <tr class="permissions-row">
                         <td
                                 class="col-md-5 tooltip-base permissions-item"
-                                data-toggle="tooltip"
+                                data-tooltip="true"
                                 data-placement="right"
                                 title="{{ $this_permission['note'] }}">
                                 {{ $this_permission['label'] }}
                         </td>
                         <td class="col-md-1 permissions-item">
                             <label for="{{ 'permission['.$this_permission['permission'].']' }}"><span class="sr-only">{{ trans('admin/groups/titles.allow')}} {{ 'permission['.$this_permission['permission'].']' }}</span></label>
-                            {{ Form::radio('permission['.$this_permission['permission'].']', '1',(array_key_exists($this_permission['permission'], $groupPermissions) ? $groupPermissions[$this_permission['permission'] ] == '1' : null),['class'=>'minimal radiochecker-'.str_slug($area), 'aria-label'=>'permission['.$this_permission['permission'].']']) }}
+                            {{ Form::radio('permission['.$this_permission['permission'].']', '1',(array_key_exists($this_permission['permission'], $groupPermissions) ? $groupPermissions[$this_permission['permission'] ] == '1' : null),['class'=>'radiochecker-'.str_slug($area), 'aria-label'=>'permission['.$this_permission['permission'].']']) }}
                         </td>
                         <td class="col-md-1 permissions-item">
                             <label for="{{ 'permission['.$this_permission['permission'].']' }}"><span class="sr-only">{{ trans('admin/groups/titles.deny')}} {{ 'permission['.$this_permission['permission'].']' }}</span></label>
-                            {{ Form::radio('permission['.$this_permission['permission'].']', '0',(array_key_exists($this_permission['permission'], $groupPermissions) ? $groupPermissions[$this_permission['permission'] ] == '0' : null),['class'=>'minimal radiochecker-'.str_slug($area), 'aria-label'=>'permission['.$this_permission['permission'].']']) }}
+                            {{ Form::radio('permission['.$this_permission['permission'].']', '0',(array_key_exists($this_permission['permission'], $groupPermissions) ? $groupPermissions[$this_permission['permission'] ] == '0' : null),['class'=>'radiochecker-'.str_slug($area), 'aria-label'=>'permission['.$this_permission['permission'].']']) }}
                         </td>
 
                     </tr>
@@ -165,10 +165,10 @@
             });
 
             // Check/Uncheck all radio buttons in the group
-            $('tr.header-row input:radio').on('ifClicked', function () {
+            $('tr.header-row input:radio').change(function() {
                 value = $(this).attr('value');
                 area = $(this).data('checker-group');
-                $('.radiochecker-'+area+'[value='+value+']').iCheck('check');
+                $('.radiochecker-'+area+'[value='+value+']').prop('checked', true);
             });
 
 

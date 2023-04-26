@@ -56,10 +56,14 @@
 
 <!-- Reassignable -->
 <div class="form-group {{ $errors->has('reassignable') ? ' has-error' : '' }}">
-    <label for="reassignable" class="col-md-3 control-label">{{ trans('admin/licenses/form.reassignable') }}</label>
-    <div class="col-md-7 input-group">
-        {{ Form::Checkbox('reassignable', '1', old('reassignable', $item->id ? $item->reassignable : '1'),array('class' => 'minimal', 'aria-label'=>'reassignable')) }}
+    <div class="col-md-3 control-label">
+        <strong>{{ trans('admin/licenses/form.reassignable') }}</strong>
+    </div>
+    <div class="col-md-7">
+        <label class="form-control">
+        {{ Form::Checkbox('reassignable', '1', old('reassignable', $item->id ? $item->reassignable : '1'),array('aria-label'=>'reassignable')) }}
         {{ trans('general.yes') }}
+        </label>
     </div>
 </div>
 
@@ -73,9 +77,9 @@
 <div class="form-group {{ $errors->has('expiration_date') ? ' has-error' : '' }}">
     <label for="expiration_date" class="col-md-3 control-label">{{ trans('admin/licenses/form.expiration') }}</label>
 
-    <div class="input-group col-md-3">
+    <div class="input-group col-md-4">
         <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true" data-date-clear-btn="true">
-            <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="expiration_date" id="expiration_date" value="{{ old('expiration_date', $item->expiration_date) }}">
+            <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="expiration_date" id="expiration_date" value="{{ old('expiration_date', $item->expiration_date) }}" maxlength="10">
             <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
         </div>
         {!! $errors->first('expiration_date', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
@@ -87,9 +91,9 @@
 <div class="form-group {{ $errors->has('termination_date') ? ' has-error' : '' }}">
     <label for="termination_date" class="col-md-3 control-label">{{ trans('admin/licenses/form.termination_date') }}</label>
 
-    <div class="input-group col-md-3">
+    <div class="input-group col-md-4">
         <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-autoclose="true" data-date-clear-btn="true">
-            <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="termination_date" id="termination_date" value="{{ old('termination_date', $item->termination_date) }}">
+            <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="termination_date" id="termination_date" value="{{ old('termination_date', $item->termination_date) }}" maxlength="10">
             <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
         </div>
         {!! $errors->first('termination_date', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
@@ -110,10 +114,12 @@
 
 <!-- Maintained -->
 <div class="form-group {{ $errors->has('maintained') ? ' has-error' : '' }}">
-    <label for="maintained" class="col-md-3 control-label">{{ trans('admin/licenses/form.maintained') }}</label>
-    <div class="checkbox col-md-7">
-        {{ Form::Checkbox('maintained', '1', old('maintained', $item->maintained),array('class' => 'minimal', 'aria-label'=>'maintained')) }}
+    <div class="col-md-3 control-label"><strong>{{ trans('admin/licenses/form.maintained') }}</strong></div>
+    <div class="col-md-7">
+        <label class="form-control">
+        {{ Form::Checkbox('maintained', '1', old('maintained', $item->maintained),array('aria-label'=>'maintained')) }}
         {{ trans('general.yes') }}
+        </label>
     </div>
 </div>
 

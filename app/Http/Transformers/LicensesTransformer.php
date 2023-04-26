@@ -4,7 +4,7 @@ namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
 use App\Models\License;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 
 class LicensesTransformer
@@ -56,7 +56,7 @@ class LicensesTransformer
             'checkin' => Gate::allows('checkin', License::class),
             'clone' => Gate::allows('create', License::class),
             'update' => Gate::allows('update', License::class),
-            'delete' => Gate::allows('delete', License::class),
+            'delete' => (Gate::allows('delete', License::class) && ($license->seats == $license->availCount()->count())) ? true : false,
         ];
 
         $array += $permissions_array;

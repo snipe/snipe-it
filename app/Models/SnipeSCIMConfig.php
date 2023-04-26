@@ -70,7 +70,11 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
             // Map a SCIM attribute to an attribute of the object.
             'mapping' => [
 
-                'id' => AttributeMapping::eloquent("id")->disableWrite(),
+                'id' => (new AttributeMapping())->setRead(
+                    function (&$object) {
+                        return (string)$object->id;
+                    }
+                )->disableWrite(),
 
                 'externalId' => AttributeMapping::eloquent('scim_externalid'), // FIXME - I have a PR that changes a lot of this.
 
@@ -174,7 +178,6 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
                         '$ref' => null,
                         'display' => null,
                         'type' => null,
-                        'type' => null
                     ]],
 
                     'entitlements' => null,

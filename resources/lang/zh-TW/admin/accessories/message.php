@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> '配件借出失敗。請再試一次。',
         'success' 		=> '借出配件成功。',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => '使用者不正確。請再試一次。'
     ),
 

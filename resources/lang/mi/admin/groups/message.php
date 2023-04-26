@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'Kua oti te roopu!',
-    'group_not_found'     => 'Kāore te rōpū [: id] i te tīariari.',
+    'group_not_found'     => 'Group ID :id does not exist.',
     'group_name_required' => 'Kei te hiahiatia te mara ingoa',
 
     'success' => array(

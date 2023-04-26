@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Apkopes veids',
+        'asset_maintenance_type' => 'Asset Maintenance Type',
         'title'                  => 'Nosaukums',
-        'start_date'             => 'Sākusies',
-        'completion_date'        => 'Pabeigts',
+        'start_date'             => 'Start Date',
+        'completion_date'        => 'Completion Date',
         'cost'                   => 'Izmaksas',
         'is_warranty'            => 'Garantijas uzlabošana',
-        'asset_maintenance_time' => 'Dienas',
+        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
         'notes'                  => 'Piezīmes',
-        'update'                 => 'Atjaunināt',
-        'create'                 => 'Izveidot'
+        'update'                 => 'Update Asset Maintenance',
+        'create'                 => 'Create Asset Maintenance'
     ];

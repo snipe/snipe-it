@@ -43,7 +43,7 @@ return [
     'login_first_admin' => '以下の新しいログイン情報を使用して、Snipe-ITにログインします。',
     'login' => 'ログイン:',
     'Low_Inventory_Report' => '在庫減レポート',
-    'inventory_report' => 'Inventory Report',
+    'inventory_report' => 'インベントリレポート',
     'min_QTY' => '分数',
     'name' => '名前',
     'new_item_checked' => 'あなたの名前で新しいアイテムがチェックアウトされました。詳細は以下の通りです。',

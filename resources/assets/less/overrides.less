@@ -141,6 +141,9 @@ a.accordion-header {
 .dropdown-menu li a {
   //color: inherit;
 }
+.pull-text-right{
+  text-align: right !important;
+}
 
 .main-header .sidebar-toggle:before {
   content: "\f0c9";
@@ -666,9 +669,6 @@ th.css-accessory > .th-inner::before
   border-radius: 0px;
 }
 
-.bs-checkbox input {
-  zoom: 1.5;
-}
 @media screen and (max-width: 511px){
   .sidebar-menu{
     margin-top:160px;
@@ -691,3 +691,154 @@ th.css-accessory > .th-inner::before
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+
+/** Form-stuff overrides for checkboxes and stuff **/
+
+label.form-control {
+  display: grid;
+  grid-template-columns: 1.8em auto;
+  gap: 0.5em;
+  border: 0px;
+  padding-left: 0px;
+  background-color: inherit;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+label.form-control--disabled {
+  color: #959495;
+  pointer-events:none;
+  cursor: not-allowed;
+}
+
+/** --------------------------------------- **/
+/** Start checkbox styles to replace iCheck **/
+/** --------------------------------------- **/
+input[type="checkbox"] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  appearance: none;
+  /* For iOS < 15 to remove gradient background */
+  background-color: #fff;
+  /* Not removed via appearance */
+  margin: 0;
+  font: inherit;
+  color: #959495;
+  width: 1.8em;
+  height: 1.8em;
+  border: 0.05em solid;
+  border-radius: 0em;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+  /*Windows High Contrast Mode*/
+}
+
+/** This sets the display of a checkbox, and what the "fill" checkmark should look like */
+
+input[type="checkbox"]::before {
+
+/** If you want to use the non-checkbox, filled square, use this instead **/
+  content: "";
+  width: 1em;
+  height: 1em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em rgb(211, 211, 211);
+
+  content: "";
+  width: 1em;
+  height: 1em;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transform: scale(0);
+  transform-origin: bottom left;
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #428bca;
+  /* Windows High Contrast Mode */
+  background-color: CanvasText;
+}
+
+/** This sets the size of the scale up for the shape we defined above **/
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+/** This sets the scale and color of the DISABLED but CHECKED checkbox */
+input[type=checkbox]:disabled::before, input[type=radio]:disabled::before {
+  content: "";
+  width: 1em;
+  height: 1em;
+  transform: scale(1);
+  box-shadow: inset 1em 1em rgb(211, 211, 211);
+}
+
+/* This sets the scale and style of a DISABLED checkbox that is NOT checked */
+input[type=checkbox]:disabled:not(:checked)::before, input[type=radio]:disabled:not(:checked)::before {
+  content: "";
+  transform: scale(0);
+  cursor: not-allowed;
+  pointer-events:none;
+}
+
+/** this is the color of the checkbox and content on a disabled, checked box **/
+input[type=checkbox]:disabled, input[type=radio]:disabled {
+  --form-control-color: rgb(211, 211, 211);
+  color: #959495;
+  cursor: not-allowed;
+  pointer-events:none;
+}
+
+
+/** Radio styles to replace iCheck **/
+
+input[type="radio"] {
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
+  color: #959495;
+  width: 1.8em;
+  height: 1.8em;
+  border: 0.05em solid;
+  border-radius: 50%;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+}
+
+input[type="radio"]::before {
+  content: "";
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #428bca;
+}
+
+input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+
+
+/**
+* This addresses the column selector in bootstrap-table. Without these two lines, the
+* checkbox and the <span></span> with the label text that BS tables generates will
+* end up on two different lines and it looks assy.
+ */
+.dropdown-item-marker input[type=checkbox] {
+  font-size: 10px;
+}
+
+.bootstrap-table .fixed-table-toolbar li.dropdown-item-marker label {
+  font-weight: normal;
+  display: grid;
+  grid-template-columns: .1em auto;
+  gap: 1.5em;
+}
+
+/** --------------------------------------- **/
+/** End checkbox styles to replace iCheck   **/
+/** --------------------------------------- **/

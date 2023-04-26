@@ -23,11 +23,30 @@ class SuppliersController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Supplier::class);
-        $allowed_columns = ['id', 'name', 'address', 'phone', 'contact', 'fax', 'email', 'image', 'assets_count', 'licenses_count', 'accessories_count', 'url'];
+        $allowed_columns = ['
+            id',
+            'name',
+            'address',
+            'phone',
+            'contact',
+            'fax',
+            'email',
+            'image',
+            'assets_count',
+            'licenses_count',
+            'accessories_count',
+            'components_count',
+            'consumables_count',
+            'url',
+        ];
         
         $suppliers = Supplier::select(
-                ['id', 'name', 'address', 'address2', 'city', 'state', 'country', 'fax', 'phone', 'email', 'contact', 'created_at', 'updated_at', 'deleted_at', 'image', 'notes']
-            )->withCount('assets as assets_count')->withCount('licenses as licenses_count')->withCount('accessories as accessories_count');
+                ['id', 'name', 'address', 'address2', 'city', 'state', 'country', 'fax', 'phone', 'email', 'contact', 'created_at', 'updated_at', 'deleted_at', 'image', 'notes'])
+                    ->withCount('assets as assets_count')
+                    ->withCount('licenses as licenses_count')
+                    ->withCount('accessories as accessories_count')
+                    ->withCount('components as components_count')
+                    ->withCount('consumables as consumables_count');
 
 
         if ($request->filled('search')) {
@@ -74,12 +93,9 @@ class SuppliersController extends Controller
             $suppliers->where('notes', '=', $request->input('notes'));
         }
 
-        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
-        // case we override with the actual count, so we should return 0 items.
-        $offset = (($suppliers) && ($request->get('offset') > $suppliers->count())) ? $suppliers->count() : $request->get('offset', 0);
-
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $suppliers->count()) ? $suppliers->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';

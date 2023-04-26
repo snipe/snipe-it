@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Aukabúnaður fór ekki í úttekt, vinsamlegast reyndu aftur!',
         'success' 		=> 'Aukabúnaður fór í úttekt.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Notandinn er ónothæfur. Vinsamlegast reyndu aftur.'
     ),
 

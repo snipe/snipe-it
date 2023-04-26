@@ -54,7 +54,7 @@
                             <div class="col-md-3">
                                 {{ Form::label('labels_fontsize', trans('admin/settings/general.labels_fontsize')) }}
                             </div>
-                            <div class="col-md-2 form-group">
+                            <div class="col-md-2">
                                 <div class="input-group">
                                     {{ Form::text('labels_fontsize', old('labels_fontsize', $setting->labels_fontsize), ['class' => 'form-control', 'aria-label'=>'labels_fontsize']) }}
                                     <div class="input-group-addon">{{ trans('admin/settings/general.text_pt') }}</div>
@@ -69,13 +69,13 @@
                             <div class="col-md-3">
                                 {{ Form::label('labels_width', trans('admin/settings/general.label_dimensions')) }}
                             </div>
-                            <div class="col-md-3 form-group">
+                            <div class="col-md-3">
                                 <div class="input-group">
                                     {{ Form::text('labels_width', old('labels_width', $setting->labels_width), ['class' => 'form-control', 'aria-label'=>'labels_width']) }}
                                     <div class="input-group-addon">{{ trans('admin/settings/general.width_w') }}</div>
                                 </div>
                             </div>
-                            <div class="col-md-3 form-group" style="margin-left: 10px">
+                            <div class="col-md-3">
                                 <div class="input-group">
                                     {{ Form::text('labels_height', old('labels_height', $setting->labels_height), ['class' => 'form-control', 'aria-label'=>'labels_height']) }}
                                     <div class="input-group-addon">{{ trans('admin/settings/general.height_h') }}</div>
@@ -91,13 +91,13 @@
                             <div class="col-md-3">
                                 {{ Form::label('labels_display_sgutter', trans('admin/settings/general.label_gutters')) }}
                             </div>
-                            <div class="col-md-3 form-group">
+                            <div class="col-md-3">
                                 <div class="input-group">
                                     {{ Form::text('labels_display_sgutter', old('labels_display_sgutter', $setting->labels_display_sgutter), ['class' => 'form-control', 'aria-label'=>'labels_display_sgutter']) }}
                                     <div class="input-group-addon">{{ trans('admin/settings/general.horizontal') }}</div>
                                 </div>
                             </div>
-                            <div class="col-md-3 form-group" style="margin-left: 10px">
+                            <div class="col-md-3">
                                 <div class="input-group">
                                     {{ Form::text('labels_display_bgutter', old('labels_display_bgutter', $setting->labels_display_bgutter), ['class' => 'form-control', 'aria-label'=>'labels_display_bgutter']) }}
                                     <div class="input-group-addon">{{ trans('admin/settings/general.vertical') }}</div>
@@ -113,7 +113,7 @@
                             <div class="col-md-3">
                                 {{ Form::label('labels_pmargin_top', trans('admin/settings/general.page_padding')) }}
                             </div>
-                            <div class="col-md-3 form-group">
+                            <div class="col-md-3">
                                 <div class="input-group" style="margin-bottom: 15px;">
                                     {{ Form::text('labels_pmargin_top', old('labels_pmargin_top', $setting->labels_pmargin_top), ['class' => 'form-control', 'aria-label'=>'labels_pmargin_top']) }}
                                     <div class="input-group-addon">{{ trans('admin/settings/general.top') }}</div>
@@ -123,7 +123,7 @@
                                     <div class="input-group-addon">{{ trans('admin/settings/general.right') }}</div>
                                 </div>
                             </div>
-                            <div class="col-md-3 form-group" style="margin-left: 10px; ">
+                            <div class="col-md-3" style="margin-left: 10px; ">
                                 <div class="input-group" style="margin-bottom: 15px;">
                                     {{ Form::text('labels_pmargin_bottom', old('labels_pmargin_bottom', $setting->labels_pmargin_bottom), ['class' => 'form-control', 'aria-label'=>'labels_pmargin_bottom']) }}
                                     <div class="input-group-addon">{{ trans('admin/settings/general.bottom') }}</div>
@@ -144,7 +144,7 @@
                             <div class="col-md-3">
                                 {{ Form::label('labels_pagewidth', trans('admin/settings/general.page_dimensions')) }}
                             </div>
-                            <div class="col-md-3 form-group">
+                            <div class="col-md-3">
                                 <div class="input-group">
                                     {{ Form::text('labels_pagewidth', old('labels_pagewidth', $setting->labels_pagewidth), ['class' => 'form-control', 'aria-label'=>'labels_pagewidth']) }}
                                     <div class="input-group-addon">{{ trans('admin/settings/general.width_w') }}</div>
@@ -167,29 +167,27 @@
 			                {{ Form::label('labels_display', trans('admin/settings/general.label_fields')) }}
                             </div>
                             <div class="col-md-9">
-                                <div class="checkbox">
-                                    <label for="labels_display_name">
+                                    <label class="form-control">
                                         {{ Form::checkbox('labels_display_name', '1', old('labels_display_name',   $setting->labels_display_name),['class' => 'minimal', 'aria-label'=>'labels_display_name']) }}
                                         {{ trans('admin/hardware/form.name') }}
                                     </label>
-                                    <label for="labels_display_serial">
+                                    <label class="form-control">
                                         {{ Form::checkbox('labels_display_serial', '1', old('labels_display_serial',   $setting->labels_display_serial),['class' => 'minimal', 'aria-label'=>'labels_display_serial']) }}
                                         {{ trans('admin/hardware/form.serial') }}
                                     </label>
-                                    <label for="labels_display_tag">
+                                    <label class="form-control">
                                         {{ Form::checkbox('labels_display_tag', '1', old('labels_display_tag',   $setting->labels_display_tag),['class' => 'minimal', 'aria-label'=>'labels_display_tag']) }}
                                         {{ trans('admin/hardware/form.tag') }}
                                     </label>
-                                    <label for="labels_display_model">
+                                    <label class="form-control">
                                         {{ Form::checkbox('labels_display_model', '1', old('labels_display_model',   $setting->labels_display_model),['class' => 'minimal', 'aria-label'=>'labels_display_model']) }}
                                         {{ trans('admin/hardware/form.model') }}
                                     </label>
-                                    <label for="labels_display_company_name">
+                                     <label class="form-control">
                                         {{ Form::checkbox('labels_display_company_name', '1', old('labels_display_company_name',   $setting->labels_display_company_name),['class' => 'minimal', 'aria-label'=>'labels_display_company_name']) }}
                                         {{ trans('admin/companies/table.name') }}
-				    </label>
+				                    </label>
 
-                                </div> <!--/.CHECKBOX-->
                             </div> <!--/.col-md-9-->
                         </div> <!--/.form-group-->
 

@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Lebih Lanjut',
 
-    'audit_help' => 'Mencentang kotak ini akan mengedit catatan aset untuk mencerminkan lokasi baru ini. Membiarkannya tidak dicentang hanya akan mencatat lokasi di log audit.<br><br>Perhatikan bahwa aset ini diperiksa, itu tidak akan mengubah lokasi orang, aset, atau lokasi yang diperiksa.',
+    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
     'assets' => 'Aset adalah barang yang dilacak dengan nomor seri atau tanda aset. Cenderung menjadi barang dengan nilai lebih tinggi dimana identifikasi barang secara spesifik berpengaruh.',
 

@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Varlık bakım tipi',
+        'asset_maintenance_type' => 'Asset Maintenance Type',
         'title'                  => 'Başlık',
-        'start_date'             => 'Başladı',
-        'completion_date'        => 'Tamamlandı',
+        'start_date'             => 'Start Date',
+        'completion_date'        => 'Completion Date',
         'cost'                   => 'Ücret',
         'is_warranty'            => 'Garanti İyileştirme',
-        'asset_maintenance_time' => 'Günler',
+        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
         'notes'                  => 'Notlar',
-        'update'                 => 'Güncelle',
-        'create'                 => 'Oluştur'
+        'update'                 => 'Update Asset Maintenance',
+        'create'                 => 'Create Asset Maintenance'
     ];

@@ -24,6 +24,8 @@ return [
     'restore' => [
         'error'   		=> 'دارایی بازیابی نشد، لطفا دوباره تلاش کنید',
         'success' 		=> 'دارایی با موفقیت بازیابی شد.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [

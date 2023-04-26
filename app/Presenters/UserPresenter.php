@@ -295,6 +295,15 @@ class UserPresenter extends Presenter
                 'formatter' => 'trueFalseFormatter',
             ],
             [
+                'field' => 'autoassign_licenses',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.autoassign_licenses'),
+                'visible' => false,
+                'formatter' => 'trueFalseFormatter',
+            ],
+            [
                 'field' => 'created_by',
                 'searchable' => false,
                 'sortable' => true,
@@ -406,7 +415,7 @@ class UserPresenter extends Presenter
         }
 
         // Set a fun, gender-neutral default icon
-        return url('/').'/img/default-sm.png';
+        return config('app.url').'/img/default-sm.png';
     }
 
     /**

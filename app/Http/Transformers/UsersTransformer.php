@@ -4,7 +4,7 @@ namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
 use App\Models\User;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 
 class UsersTransformer
@@ -36,6 +36,7 @@ class UsersTransformer
                     'name'=> e($user->manager->first_name).' '.e($user->manager->last_name),
                 ] : null,
                 'jobtitle' => ($user->jobtitle) ? e($user->jobtitle) : null,
+                'vip' => ($user->vip == '1') ? true : false,
                 'phone' => ($user->phone) ? e($user->phone) : null,
                 'website' => ($user->website) ? e($user->website) : null,
                 'address' => ($user->address) ? e($user->address) : null,
@@ -55,6 +56,7 @@ class UsersTransformer
                 'notes'=> e($user->notes),
                 'permissions' => $user->decodePermissions(),
                 'activated' => ($user->activated == '1') ? true : false,
+                'autoassign_licenses' => ($user->autoassign_licenses == '1') ? true : false,
                 'ldap_import' => ($user->ldap_import == '1') ? true : false,
                 'two_factor_enrolled' => ($user->two_factor_active_and_enrolled()) ? true : false,
                 'two_factor_optin' => ($user->two_factor_active()) ? true : false,

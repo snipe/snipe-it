@@ -194,7 +194,25 @@ class Category extends SnipeModel
      */
     public function assets()
     {
-        return $this->hasManyThrough(\App\Models\Asset::class, \App\Models\AssetModel::class, 'category_id', 'model_id');
+        return $this->hasManyThrough(Asset::class, \App\Models\AssetModel::class, 'category_id', 'model_id');
+    }
+
+    /**
+     * Establishes the category -> assets relationship but also takes into consideration
+     * the setting to show archived in lists.
+     *
+     * We could have complicated the assets() method above, but keeping this separate
+     * should give us more flexibility if we need to return actually archived assets
+     * by their category.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v6.1.0]
+     * @see \App\Models\Asset::scopeAssetsForShow()
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function showableAssets()
+    {
+        return $this->hasManyThrough(Asset::class, \App\Models\AssetModel::class, 'category_id', 'model_id')->AssetsForShow();
     }
 
     /**

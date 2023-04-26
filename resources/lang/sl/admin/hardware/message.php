@@ -22,6 +22,8 @@ return [
     'restore' => [
         'error'   		=> 'Sredstvo ni bilo obnovljeno, poskusite znova',
         'success' 		=> 'Sredstvo je bilo uspešno obnovljeno.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
