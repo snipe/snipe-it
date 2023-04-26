@@ -50,7 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
         
         Route::get('{locationId}/clone',
             [LocationsController::class, 'getClone']
-        )->name('clone/license');
+        )->name('clone/location');
 
         Route::get(
             '{locationId}/printassigned',
