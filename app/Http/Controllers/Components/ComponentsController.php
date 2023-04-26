@@ -78,7 +78,7 @@ class ComponentsController extends Controller
         $component->min_amt                = $request->input('min_amt', null);
         $component->serial                 = $request->input('serial', null);
         $component->purchase_date          = $request->input('purchase_date', null);
-        $component->purchase_cost          = Helper::ParseCurrency($request->input('purchase_cost', null));
+        $component->purchase_cost          = $request->input('purchase_cost', null);
         $component->qty                    = $request->input('qty');
         $component->user_id                = Auth::id();
         $component->notes                  = $request->input('notes');
@@ -153,7 +153,7 @@ class ComponentsController extends Controller
         $component->min_amt                = $request->input('min_amt');
         $component->serial                 = $request->input('serial');
         $component->purchase_date          = $request->input('purchase_date');
-        $component->purchase_cost          = Helper::ParseCurrency(request('purchase_cost'));
+        $component->purchase_cost          = request('purchase_cost');
         $component->qty                    = $request->input('qty');
         $component->notes                  = $request->input('notes');
 

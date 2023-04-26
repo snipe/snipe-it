@@ -550,7 +550,7 @@ class AssetsController extends Controller
         $asset->depreciate              = '0';
         $asset->status_id               = $request->get('status_id', 0);
         $asset->warranty_months         = $request->get('warranty_months', null);
-        $asset->purchase_cost           = Helper::ParseCurrency($request->get('purchase_cost')); // this is the API's store method, so I don't know that I want to do this? Confusing. FIXME (or not?!)
+        $asset->purchase_cost           = $request->get('purchase_cost'); // this is the API's store method, so I don't know that I want to do this? Confusing. FIXME (or not?!)
         $asset->purchase_date           = $request->get('purchase_date', null);
         $asset->assigned_to             = $request->get('assigned_to', null);
         $asset->supplier_id             = $request->get('supplier_id');
