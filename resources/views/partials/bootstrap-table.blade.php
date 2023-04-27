@@ -511,8 +511,12 @@
     }
 
     function externalLinkFormatter(value) {
+
         if (value) {
-            return '<a href="' + value + '" target="_blank">' + value + '</a>';
+            if ((value.indexOf("{") === -1) || (value.indexOf("}") ===-1)) {
+                return '<a href="' + value + '" target="_blank">' + value + ' <i class="fa fa-external-link"></i></a>';
+            }
+            return value;
         }
     }
 
