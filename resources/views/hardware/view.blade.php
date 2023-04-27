@@ -1376,6 +1376,16 @@
 @stop
 
 @section('moar_scripts')
+    <script>
+
+        $('#dataConfirmModal').on('show.bs.modal', function (event) {
+            var content = $(event.relatedTarget).data('content');
+            var title = $(event.relatedTarget).data('title');
+            $(this).find(".modal-body").text(content);
+            $(this).find(".modal-header").text(title);
+        });
+
+    </script>
     @include ('partials.bootstrap-table')
 
 @stop
