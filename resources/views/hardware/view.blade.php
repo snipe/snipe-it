@@ -862,12 +862,8 @@
                                     @can('delete', $asset)
                                         @if ($asset->deleted_at=='')
                                             <div class="col-md-12" style="padding-top: 30px; padding-bottom: 30px;">
-                                                <form href="{{ route('hardware/delete', ['assetId' => $asset->id]) }}" data-content="{{ trans('general.delete_confirm', ['item' => $asset->id]) }}" method="POST" data-title="{{ trans('general.delete') }}">
-                                                    {{ csrf_field() }}
-                                                    {{ method_field("DELETE") }}
-                                                    <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.delete')}}</button>
-                                                    <span class="sr-only">{{ trans('general.delete') }}</span>
-                                                </form>
+                                                <button class="btn btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.delete_confirm', ['item' => $asset->asset_tag]) }}" data-target="#dataConfirmModal">{{ trans('general.delete') }} </button>
+                                                <span class="sr-only">{{ trans('general.delete') }}</span>
                                             </div>
                                         @endif
                                     @endcan
