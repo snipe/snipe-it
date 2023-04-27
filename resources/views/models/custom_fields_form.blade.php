@@ -77,7 +77,7 @@
 
         @if ($field->field_encrypted)
         <div class="col-md-1 col-sm-1 text-left">
-            <i class="fas fa-lock" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}"></i>
+            <i class="fas fa-lock" data-tooltip="true" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}"></i>
         </div>
         @endif
 

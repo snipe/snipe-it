@@ -370,6 +370,20 @@
                               </div>
                           </div>
 
+                          <!-- Auto assign checkbox -->
+
+                          <div class="form-group">
+                              <div class="col-md-7 col-md-offset-3">
+
+                                  <label class="form-control" for="autoassign_licenses">
+                                      <input type="checkbox" value="1" name="autoassign_licenses" {{ (old('autoassign_licenses', $user->autoassign_licenses)) == '1' ? " checked='checked'" : '' }} aria-label="autoassign_licenses">
+                                      {{ trans('general.autoassign_licenses') }}
+                                  </label>
+
+                                  <p class="help-block">{{ trans('general.autoassign_licenses_help_long') }}</p>
+                              </div>
+                          </div>
+
 
                           <!-- remote checkbox -->
                           <div class="form-group">
@@ -383,15 +397,6 @@
                               </div>
                           </div>
 
-                          <!-- Auto Assign checkbox -->
-                          <div class="form-group">
-                              <div class="col-md-7 col-md-offset-3">
-                                  <label for="autoassign_licenses" class="form-control">
-                                      <input type="checkbox" value="1" name="autoassign_licenses" {{ (old('autoassign_licenses', $user->autoassign_licenses)) == '1' ? ' checked="checked"' : '' }} aria-label="autoassign_licenses">
-                                      {{ trans('admin/users/general.auto_assign_label') }}
-                                  </label>
-                              </div>
-                          </div>
 
                           <!-- Location -->
                           @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
@@ -444,8 +449,8 @@
                           <!-- Country -->
                           <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
                               <label class="col-md-3 control-label" for="country">{{ trans('general.country') }}</label>
-                              <div class="col-md-6">
-                                  {!! Form::countries('country', old('country', $user->country), 'col-md-6 select2') !!}
+                              <div class="col-md-9">
+                                  {!! Form::countries('country', old('country', $user->country), 'col-md-12 select2') !!}
                                   {!! $errors->first('country', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                               </div>
                           </div>

@@ -122,6 +122,29 @@
                         <!-- activated -->
                         <div class="form-group">
                             <div class="col-sm-3 control-label">
+                                {{ trans('general.autoassign_licenses') }}
+                            </div>
+                            <div class="col-sm-9">
+
+                                <label for="no_change_autoassign_licenses" class="form-control">
+                                    {{ Form::radio('autoassign_licenses', '', true, ['id' => 'no_change_autoassign_licenses', 'aria-label'=>'no_change_autoassign_licenses']) }}
+                                    {{  trans('general.do_not_change') }}
+                                </label>
+                                <label for="autoassign_licenses" class="form-control">
+                                    {{ Form::radio('autoassign_licenses', '1', old('autoassign_licenses'), ['id' => 'autoassign_licenses', 'aria-label'=>'autoassign_licenses']) }}
+                                    {{  trans('general.autoassign_licenses_help')}}
+                                </label>
+                                <label for="dont_autoassign_licenses" class="form-control">
+                                    {{ Form::radio('autoassign_licenses', '0', old('autoassign_licenses'), ['id' => 'dont_autoassign_licenses', 'aria-label'=>'dont_autoassign_licenses']) }}
+                                    {{  trans('general.no_autoassign_licenses_help')}}
+                                </label>
+
+                            </div>
+                        </div> <!--/form-group-->
+
+                        <!-- activated -->
+                        <div class="form-group">
+                            <div class="col-sm-3 control-label">
                                 {{ trans('general.login_enabled') }}
                             </div>
                             <div class="col-sm-9">

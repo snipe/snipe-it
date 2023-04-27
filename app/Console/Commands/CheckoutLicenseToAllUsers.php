@@ -56,7 +56,7 @@ class CheckoutLicenseToAllUsers extends Command
             return false;
         }
 
-        $users = User::whereNull('deleted_at')->where('autoassign_licenses', '==', 1)->with('licenses')->get();
+        $users = User::whereNull('deleted_at')->where('autoassign_licenses', '=', 1)->with('licenses')->get();
 
         if ($users->count() > $license->getAvailSeatsCountAttribute()) {
             $this->info('You do not have enough free seats to complete this task, so we will check out as many as we can. ');

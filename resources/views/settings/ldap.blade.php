@@ -499,6 +499,20 @@
                                 @endif
                             </div>
                         </div>
+                        <!-- LDAP Location -->
+                        <div class="form-group {{ $errors->has('ldap_location') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('ldap_location', trans('admin/settings/general.ldap_location')) }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ Form::text('ldap_location', Request::old('ldap_location', $setting->ldap_location), ['class' => 'form-control','placeholder' => trans('general.example') .'physicaldeliveryofficename', $setting->demoMode]) }}
+                                <p class="help-block">{!! trans('admin/settings/general.ldap_location_help') !!}</p>
+                                {!! $errors->first('ldap_location', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                @if (config('app.lock_passwords')===true)
+                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                @endif
+                            </div>
+                        </div>
                         @if ($setting->ldap_enabled)
 
                             <!-- LDAP test -->

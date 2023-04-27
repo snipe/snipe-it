@@ -20,13 +20,14 @@ class CreateAdmin extends Command
      * @property string $password
      * @property boolean $activated
      * @property boolean $show_in_list
+     * @property boolean $autoassign_licenses
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property mixed $created_by
      */
 
 
 
-    protected $signature = 'snipeit:create-admin {--first_name=} {--last_name=}  {--email=}  {--username=}  {--password=}   {show_in_list?}';
+    protected $signature = 'snipeit:create-admin {--first_name=} {--last_name=}  {--email=}  {--username=}  {--password=} {show_in_list?} {autoassign_licenses?}';
 
     /**
      * The console command description.
@@ -54,6 +55,9 @@ class CreateAdmin extends Command
         $email = $this->option('email');
         $password = $this->option('password');
         $show_in_list = $this->argument('show_in_list');
+        $autoassign_licenses = $this->argument('autoassign_licenses');
+
+
 
         if (($first_name == '') || ($last_name == '') || ($username == '') || ($email == '') || ($password == '')) {
             $this->info('ERROR: All fields are required.');
@@ -70,6 +74,11 @@ class CreateAdmin extends Command
             if ($show_in_list == 'false') {
                 $user->show_in_list = 0;
             }
+
+            if ($autoassign_licenses == 'false') {
+                $user->autoassign_licenses = 0;
+            }
+
             if ($user->save()) {
                 $this->info('New user created');
                 $user->groups()->attach(1);

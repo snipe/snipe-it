@@ -483,8 +483,7 @@
                                                     class="fas fa-times text-red fa-fw"></i>
                                             {{ trans('general.all') }}
                                             {{ trans('general.undeployable') }}
-                                            ({{ (isset($total_undeployable_sidebar)) ? $total_undeployable_sidebar : '' }}
-                                            )
+                                            ({{ (isset($total_undeployable_sidebar)) ? $total_undeployable_sidebar : '' }})
                                         </a>
                                     </li>
                                     <li{!! (Request::query('status') == 'byod' ? ' class="active"' : '') !!}><a
@@ -974,7 +973,7 @@
 
             $(function () {
 
-                $('[data-toggle="tooltip"]').tooltip();
+                $('[data-tooltip="true"]').tooltip();
                 $('[data-toggle="popover"]').popover();
                 $('.select2 span').addClass('needsclick');
                 $('.select2 span').removeAttr('title');
