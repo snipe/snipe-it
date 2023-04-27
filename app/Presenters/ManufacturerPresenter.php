@@ -47,7 +47,7 @@ class ManufacturerPresenter extends Presenter
                 'switchable' => true,
                 'title' => trans('admin/manufacturers/table.url'),
                 'visible' => true,
-                'formatter' => 'linkFormatter',
+                'formatter' => 'externalLinkFormatter',
             ],
             [
                 'field' => 'support_url',
