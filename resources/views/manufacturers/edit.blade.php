@@ -26,8 +26,18 @@
         </label>
         <div class="col-md-6">
             <input class="form-control" type="text" name="support_url" id="support_url" value="{{ old('support_url', $item->support_url) }}" />
-            <p class="help-block">{!! trans('admin/manufacturers/message.support_url_help') !!}</p>
             {!! $errors->first('support_url', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+        </div>
+    </div>
+
+    <!-- Warranty Lookup URL -->
+    <div class="form-group {{ $errors->has('warranty_lookup_url') ? ' has-error' : '' }}">
+        <label for="support_url" class="col-md-3 control-label">{{ trans('admin/manufacturers/table.warranty_lookup_url') }}
+        </label>
+        <div class="col-md-6">
+            <input class="form-control" type="text" name="warranty_lookup_url" id="warranty_lookup_url" value="{{ old('warranty_lookup_url', $item->warranty_lookup_url) }}" />
+            <p class="help-block">{!! trans('admin/manufacturers/message.support_url_help') !!}</p>
+            {!! $errors->first('warranty_lookup_url', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
         </div>
     </div>
 
