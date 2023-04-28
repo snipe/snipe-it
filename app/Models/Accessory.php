@@ -330,11 +330,7 @@ class Accessory extends SnipeModel
 
 
     /**
-     * Check how many items of an accessory remain.
-     *
-     * In order to use this model method, you MUST call withCount('users as users_count')
-     * on the eloquent query in the controller, otherwise $this->>users_count will be null and
-     * bad things happen.
+     * Check how many items of an accessory remain
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]

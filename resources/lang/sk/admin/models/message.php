@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Model nebol upravený, prosím skúste znovu',
-        'success' => 'Model bol úspešne upravený.',
+        'success' => 'Model bol úspešne upravený.'
     ),
 
     'delete' => array(
@@ -32,14 +32,12 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Neboli zmenené žiadne polia, preto nebolo nič aktualizované.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
-
+        'success' 		=> 'Model bol upravený.'
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Neboli vybrané ziadne modely, preto nebolo nič odmazané.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => ':success_count model(y) vymazaný(é)!',
         'success_partial' 	=> ':success_count model(y) odstránené, avšak :fail_count nebolo možné odstrániť pretože stále majú priradené majetky.'
     ),
 

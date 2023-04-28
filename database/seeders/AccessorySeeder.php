@@ -3,9 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Accessory;
-use App\Models\Location;
-use App\Models\Supplier;
-use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -17,45 +14,10 @@ class AccessorySeeder extends Seeder
     {
         Accessory::truncate();
         DB::table('accessories_users')->truncate();
-
-        if (! Location::count()) {
-            $this->call(LocationSeeder::class);
-        }
-
-        $locationIds = Location::all()->pluck('id');
-
-        if (! Supplier::count()) {
-            $this->call(SupplierSeeder::class);
-        }
-
-        $supplierIds = Supplier::all()->pluck('id');
-
-        $admin = User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin()->create();
-
-        Accessory::factory()->appleUsbKeyboard()->create([
-            'location_id' => $locationIds->random(),
-            'supplier_id' => $supplierIds->random(),
-            'user_id' => $admin->id,
-        ]);
-
-        Accessory::factory()->appleBtKeyboard()->create([
-            'location_id' => $locationIds->random(),
-            'supplier_id' => $supplierIds->random(),
-            'user_id' => $admin->id,
-        ]);
-
-        Accessory::factory()->appleMouse()->create([
-            'location_id' => $locationIds->random(),
-            'supplier_id' => $supplierIds->random(),
-            'user_id' => $admin->id,
-        ]);
-
-        Accessory::factory()->microsoftMouse()->create([
-            'location_id' => $locationIds->random(),
-            'supplier_id' => $supplierIds->random(),
-            'user_id' => $admin->id,
-        ]);
-
+        Accessory::factory()->count(1)->appleUsbKeyboard()->create();
+        Accessory::factory()->count(1)->appleBtKeyboard()->create();
+        Accessory::factory()->count(1)->appleMouse()->create();
+        Accessory::factory()->count(1)->microsoftMouse()->create();
 
         $src = public_path('/img/demo/accessories/');
         $dst = 'accessories'.'/';

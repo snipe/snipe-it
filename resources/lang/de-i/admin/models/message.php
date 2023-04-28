@@ -3,8 +3,8 @@
 return array(
 
     'does_not_exist' => 'Modell existiert nicht.',
-    'no_association' => 'KEIN MODELL ZUGEORDNET.',
-    'no_association_fix' => 'Dies wird Dinge auf seltsame und schreckliche Weise zerstören. Bearbeite dieses Asset jetzt, um ihm ein Modell zuzuordnen.',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Dieses Modell ist zur Zeit mit einem oder mehreren Assets verknüpft und kann nicht gelöscht werden. Bitte lösche die Assets und versuche dann erneut, das Modell zu löschen. ',
 
 
@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Modell wurde nicht aktualisiert. Bitte versuch es noch einmal',
-        'success' => 'Modell wurde erfolgreich aktualisiert.',
+        'success' => 'Modell wurde erfolgreich aktualisiert.'
     ),
 
     'delete' => array(
@@ -32,14 +32,12 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Es wurden keine Felder geändert, somit wurde auch nichts aktualisiert.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
-
+        'success' 		=> 'Modelle aktualisiert.'
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Es wurden keine Modelle ausgewählt. Somit wurde auch nichts gelöscht.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => ':success_count Modell(e) gelöscht!',
         'success_partial' 	=> ':success_count Modell(e) wurden gelöscht. Jedoch konnten :fail_count nicht gelöscht werden, da ihnen noch Assets zugeordnet sind.'
     ),
 

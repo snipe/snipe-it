@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Isibonelo asibuyekezwanga, sicela uzame futhi',
-        'success' => 'Isibonelo sibuyekezwe ngempumelelo.',
+        'success' => 'Isibonelo sibuyekezwe ngempumelelo.'
     ),
 
     'delete' => array(
@@ -32,14 +32,12 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Azikho amasimu ashintshiwe, ngakho akukho lutho olubuyekeziwe.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
-
+        'success' 		=> 'Amamodeli abuyekeziwe.'
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'No models were selected, so nothing was deleted.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => ':success_count model(s) deleted!',
         'success_partial' 	=> ':success_count model(s) were deleted, however :fail_count were unable to be deleted because they still have assets associated with them.'
     ),
 

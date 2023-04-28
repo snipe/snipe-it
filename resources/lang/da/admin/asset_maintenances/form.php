@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Aktiv-vedligeholdelsestype',
+        'asset_maintenance_type' => 'Vedligeholdelsestype',
         'title'                  => 'Titel',
-        'start_date'             => 'Startdato',
-        'completion_date'        => 'Afslutningsdato',
+        'start_date'             => 'Start dato',
+        'completion_date'        => 'Gennemført',
         'cost'                   => 'Omkostninger',
         'is_warranty'            => 'Garantiforbedring',
-        'asset_maintenance_time' => 'Aktiv-vedligeholdelsestid (i dage)',
+        'asset_maintenance_time' => 'Dage',
         'notes'                  => 'Noter',
-        'update'                 => 'Opdater aktiv-vedligeholdelse',
-        'create'                 => 'Opret aktiv-vedligeholdelse'
+        'update'                 => 'Opdatering',
+        'create'                 => 'Opret'
     ];

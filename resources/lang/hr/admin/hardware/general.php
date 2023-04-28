@@ -42,6 +42,5 @@ return [
     'error_messages' => 'Error messages:',
     'success_messages' => 'Success messages:',
     'alert_details' => 'Please see below for details.',
-    'custom_export' => 'Custom Export',
-    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
+    'custom_export' => 'Custom Export'
 ];

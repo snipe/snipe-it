@@ -24,7 +24,6 @@ return array(
      'checkout' => array(
         'error'   		=> 'Dodatek ni bil izdan, poskusite znova',
         'success' 		=> 'Dodatek uspešno izdan.',
-        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Uporabnik je napačen. Prosim poskusite ponovno.'
     ),
 

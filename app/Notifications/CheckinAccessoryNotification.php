@@ -39,7 +39,11 @@ class CheckinAccessoryNotification extends Notification
         \Log::debug('via called');
         $notifyBy = [];
 
-        if (Setting::getSettings()->webhook_endpoint != '') {
+        if (Setting::getSettings()->slack_endpoint) {
+            $notifyBy[] = 'slack';
+        }
+
+        if (Setting::getSettings()->slack_endpoint != '') {
             $notifyBy[] = 'slack';
         }
 
@@ -91,7 +95,7 @@ class CheckinAccessoryNotification extends Notification
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
-        $botname = ($this->settings->webhook_botname) ? $this->settings->webhook_botname : 'Snipe-Bot';
+        $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot';
 
         $fields = [
             'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',

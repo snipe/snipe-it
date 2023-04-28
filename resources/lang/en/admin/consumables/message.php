@@ -23,8 +23,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Consumable was not checked out, please try again',
         'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
+        'user_does_not_exist' => 'That user is invalid. Please try again.'
     ),
 
     'checkin' => array(

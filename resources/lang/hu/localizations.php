@@ -256,7 +256,7 @@ return [
         'UK'=>'Skócia',
         'SB'=>'Salamon-szigetek',
         'SC'=>'Seychelle Köztársaság',
-        'SS'=>'Dél-Szudán',
+        'SS'=>'South Sudan',
         'SD'=>'Szudáni Köztársaság',
         'SE'=>'Svédország',
         'SG'=>'Szingapúr',

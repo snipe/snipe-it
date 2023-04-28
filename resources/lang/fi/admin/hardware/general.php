@@ -42,6 +42,5 @@ return [
     'error_messages' => 'Virheilmoitukset:',
     'success_messages' => 'Onnistuneet:',
     'alert_details' => 'Tarkempia tietoja on alla.',
-    'custom_export' => 'Mukautettu vienti',
-    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
+    'custom_export' => 'Mukautettu vienti'
 ];

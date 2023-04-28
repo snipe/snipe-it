@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Asset Maintenance Type',
+        'asset_maintenance_type' => 'Cineál Cothabhála',
         'title'                  => 'Teideal',
-        'start_date'             => 'Start Date',
-        'completion_date'        => 'Completion Date',
+        'start_date'             => 'Tosaithe',
+        'completion_date'        => 'Críochnaithe',
         'cost'                   => 'Costas',
         'is_warranty'            => 'Feabhas ar bharántas',
-        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
+        'asset_maintenance_time' => 'Laethanta',
         'notes'                  => 'Nótaí',
-        'update'                 => 'Update Asset Maintenance',
-        'create'                 => 'Create Asset Maintenance'
+        'update'                 => 'Nuashonrú',
+        'create'                 => 'Cruthaigh'
     ];

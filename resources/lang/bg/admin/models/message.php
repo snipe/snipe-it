@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Моделът не беше обновен. Моля опитайте отново.',
-        'success' => 'Моделът обновен успешно.',
+        'success' => 'Моделът обновен успешно.'
     ),
 
     'delete' => array(
@@ -32,14 +32,12 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Няма полета, който да са се променили, така че нищо не е осъвременено.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
-
+        'success' 		=> 'Моделите са осъвременени.'
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Няма избрани модели, така че нищо не бе изтрито.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => ':success_count модела бяха изтрити!',
         'success_partial' 	=> ':success_count модела бяха изтрити, но :fail_count не бяха, тъй като към тях има асоциирани активи.'
     ),
 

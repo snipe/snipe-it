@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Asset Maintenance Type',
+        'asset_maintenance_type' => 'نوع الصيانة',
         'title'                  => 'المسمى',
-        'start_date'             => 'Start Date',
-        'completion_date'        => 'Completion Date',
+        'start_date'             => 'بدأت',
+        'completion_date'        => 'أنجزت',
         'cost'                   => 'التكلفة',
         'is_warranty'            => 'تحسين الضمان',
-        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
+        'asset_maintenance_time' => 'أيام',
         'notes'                  => 'مُلاحظات',
-        'update'                 => 'Update Asset Maintenance',
-        'create'                 => 'Create Asset Maintenance'
+        'update'                 => 'تعديل',
+        'create'                 => 'إنشاء'
     ];

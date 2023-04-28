@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Typ av tillgångsunderhåll',
+        'asset_maintenance_type' => 'Underhållstyp',
         'title'                  => 'Titel',
-        'start_date'             => 'Startdatum',
-        'completion_date'        => 'Datum för slutförande',
+        'start_date'             => 'Startad',
+        'completion_date'        => 'Slutförd',
         'cost'                   => 'Kostnad',
         'is_warranty'            => 'Förbättring av garanti',
-        'asset_maintenance_time' => 'Tillgångs underhållstid (i dagar)',
+        'asset_maintenance_time' => 'Dagar',
         'notes'                  => 'Anteckningar',
-        'update'                 => 'Uppdatera tillgångsunderhåll',
-        'create'                 => 'Skapa tillgångsunderhåll'
+        'update'                 => 'Uppdatera',
+        'create'                 => 'Skapa'
     ];

@@ -41,6 +41,5 @@ return [
     'error_messages' => 'Hata mesajı:',
     'success_messages' => 'Başarı mesajı:',
     'alert_details' => 'Detaylar için aşağıyı okuyun.',
-    'custom_export' => 'Özel Dışarı Aktar',
-    'mfg_warranty_lookup' => ':Üretici garantisinin durumuna bakma',
+    'custom_export' => 'Özel Dışarı Aktar'
 ];

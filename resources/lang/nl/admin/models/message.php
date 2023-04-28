@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Model is niet gewijzigd, probeer het opnieuw',
-        'success' => 'Model met succes gewijzigd.',
+        'success' => 'Model met succes gewijzigd.'
     ),
 
     'delete' => array(
@@ -32,14 +32,12 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Er was geen veld geselecteerd dus is er niks gewijzigd.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
-
+        'success' 		=> 'Modellen bijgewerkt.'
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Er waren geen modellen geselecteerd, er is dus niets verwijderd.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => ':success_count model(s) verwijderd!',
         'success_partial' 	=> ':success_count model(len) werden verwijderd, maar : fail_count konden niet worden verwijderd omdat er nog steeds assets aan gekoppeld zijn.'
     ),
 

@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Kāore i te whakahouhia te tauira, na me ngana ano',
-        'success' => 'He pai te whakahoutanga o te tauira.',
+        'success' => 'He pai te whakahoutanga o te tauira.'
     ),
 
     'delete' => array(
@@ -32,14 +32,12 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Kaore i whakarereke nga mara, naore i whakahoutia.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
-
+        'success' 		=> 'Kua whakahoutia nga tauira.'
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'No models were selected, so nothing was deleted.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => ':success_count model(s) deleted!',
         'success_partial' 	=> ':success_count model(s) were deleted, however :fail_count were unable to be deleted because they still have assets associated with them.'
     ),
 

@@ -1,6 +1,6 @@
 <?php
 
 return array(
-    'created'   => 'Создан',
-    'size' => 'Размер',
+    'created'   => 'Created',
+    'size' => 'Size',
 );

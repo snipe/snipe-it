@@ -51,7 +51,7 @@ return array(
 
     'fieldset_default_value' => array(
 
-        'error' => 'Fejl under validering af standard feltsæt-værdier.',
+        'error' => 'Error validating default fieldset values.',
 
     ),
 

@@ -4,11 +4,21 @@ namespace Database\Factories;
 
 use App\Models\Asset;
 use App\Models\AssetModel;
+use App\Models\Category;
 use App\Models\Location;
-use App\Models\Statuslabel;
 use App\Models\Supplier;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+
+/*
+|--------------------------------------------------------------------------
+| Model Factories
+|--------------------------------------------------------------------------
+|
+| Factories related exclusively to modelling assets.
+|
+*/
+
+// These are just for unit tests, not to generate data
 
 class AssetFactory extends Factory
 {
@@ -28,13 +38,10 @@ class AssetFactory extends Factory
     {
         return [
             'name' => null,
-            'model_id' => AssetModel::factory(),
             'rtd_location_id' => Location::factory(),
             'serial' => $this->faker->uuid(),
-            'status_id' => function () {
-                return Statuslabel::where('name', 'Ready to Deploy')->first() ?? Statuslabel::factory()->rtd()->create(['name' => 'Ready to Deploy']);
-            },
-            'user_id' => User::factory()->superuser(),
+            'status_id' => 1,
+            'user_id' => 1,
             'asset_tag' => $this->faker->unixTime('now'),
             'notes'   => 'Created by DB seeder',
             'purchase_date' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get())->format('Y-m-d'),
@@ -53,9 +60,7 @@ class AssetFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'model_id' => function () {
-                    return AssetModel::where('name', 'Macbook Pro 13"')->first() ?? AssetModel::factory()->mbp13Model();
-                },
+                'model_id' => 1,
             ];
         });
     }
@@ -64,12 +69,8 @@ class AssetFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'model_id' => function () {
-                    return AssetModel::where('name', 'Macbook Pro 13"')->first() ?? AssetModel::factory()->mbp13Model();
-                },
-                'status_id' => function () {
-                    return Statuslabel::where('name', 'Pending')->first() ?? Statuslabel::factory()->pending()->make(['name' => 'Pending']);
-                },
+                'model_id' => 1,
+                'status_id' => 2,
             ];
         });
     }
@@ -78,12 +79,8 @@ class AssetFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'model_id' => function () {
-                    return AssetModel::where('name', 'Macbook Pro 13"')->first() ?? AssetModel::factory()->mbp13Model();
-                },
-                'status_id' => function () {
-                    return Statuslabel::where('name', 'Archived')->first() ?? Statuslabel::factory()->archived()->make(['name' => 'Archived']);
-                },
+                'model_id' => 1,
+                'status_id' => 3,
             ];
         });
     }
@@ -92,9 +89,7 @@ class AssetFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'model_id' => function () {
-                    return AssetModel::where('name', 'Macbook Air')->first() ?? AssetModel::factory()->mbpAirModel();
-                },
+                'model_id' => 2,
             ];
         });
     }
@@ -103,9 +98,7 @@ class AssetFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'model_id' => function () {
-                    return AssetModel::where('name', 'Surface')->first() ?? AssetModel::factory()->surfaceModel();
-                },
+                'model_id' => 3,
             ];
         });
     }
@@ -114,9 +107,7 @@ class AssetFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'model_id' => function () {
-                    return AssetModel::where('name', 'XPS 13')->first() ?? AssetModel::factory()->xps13Model();
-                },
+                'model_id' => 4,
             ];
         });
     }
@@ -125,9 +116,7 @@ class AssetFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'model_id' => function () {
-                    return AssetModel::where('name', 'Spectre')->first() ?? AssetModel::factory()->spectreModel();
-                },
+                'model_id' => 5,
             ];
         });
     }
@@ -136,9 +125,7 @@ class AssetFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'model_id' => function () {
-                    return AssetModel::where('name', 'ZenBook UX310')->first() ?? AssetModel::factory()->zenbookModel();
-                },
+                'model_id' => 6,
             ];
         });
     }
@@ -147,9 +134,7 @@ class AssetFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'model_id' => function () {
-                    return AssetModel::where('name', 'Yoga 910')->first() ?? AssetModel::factory()->yogaModel();
-                },
+                'model_id' => 7,
             ];
         });
     }
@@ -158,9 +143,7 @@ class AssetFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'model_id' => function () {
-                    return AssetModel::where('name', 'iMac Pro')->first() ?? AssetModel::factory()->macproModel();
-                },
+                'model_id' => 8,
             ];
         });
     }
@@ -169,9 +152,7 @@ class AssetFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'model_id' => function () {
-                    return AssetModel::where('name', 'Lenovo Intel Core i5')->first() ?? AssetModel::factory()->lenovoI5Model();
-                },
+                'model_id' => 9,
             ];
         });
     }
@@ -180,9 +161,7 @@ class AssetFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'model_id' => function () {
-                    return AssetModel::where('name', 'OptiPlex')->first() ?? AssetModel::factory()->optiplexModel();
-                },
+                'model_id' => 10,
             ];
         });
     }
@@ -191,9 +170,7 @@ class AssetFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'model_id' => function () {
-                    return AssetModel::where('name', 'SoundStation 2')->first() ?? AssetModel::factory()->polycomModel();
-                },
+                'model_id' => 11,
             ];
         });
     }
@@ -202,9 +179,7 @@ class AssetFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'model_id' => function () {
-                    return AssetModel::where('name', 'Polycom CX3000 IP Conference Phone')->first() ?? AssetModel::factory()->polycomcxModel();
-                },
+                'model_id' => 12,
             ];
         });
     }
@@ -213,9 +188,7 @@ class AssetFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'model_id' => function () {
-                    return AssetModel::where('name', 'iPad Pro')->first() ?? AssetModel::factory()->ipadModel();
-                },
+                'model_id' => 13,
             ];
         });
     }
@@ -224,9 +197,7 @@ class AssetFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'model_id' => function () {
-                    return AssetModel::where('name', 'Tab3')->first() ?? AssetModel::factory()->tab3Model();
-                },
+                'model_id' => 14,
             ];
         });
     }
@@ -235,9 +206,7 @@ class AssetFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'model_id' => function () {
-                    return AssetModel::where('name', 'iPhone 11')->first() ?? AssetModel::factory()->iphone11Model();
-                },
+                'model_id' => 15,
             ];
         });
     }
@@ -246,9 +215,7 @@ class AssetFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'model_id' => function () {
-                    return AssetModel::where('name', 'iPhone 12')->first() ?? AssetModel::factory()->iphone12Model();
-                },
+                'model_id' => 16,
             ];
         });
     }
@@ -257,9 +224,7 @@ class AssetFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'model_id' => function () {
-                    return AssetModel::where('name', 'Ultrafine 4k')->first() ?? AssetModel::factory()->ultrafine();
-                },
+                'model_id' => 17,
             ];
         });
     }
@@ -268,9 +233,7 @@ class AssetFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'model_id' => function () {
-                    return AssetModel::where('name', 'Ultrasharp U2415')->first() ?? AssetModel::factory()->ultrasharp();
-                },
+                'model_id' => 18,
             ];
         });
     }
@@ -279,8 +242,9 @@ class AssetFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'assigned_to' => User::factory(),
-                'assigned_type' => User::class,
+                'model_id' => 1,
+                'assigned_to' => \App\Models\User::factory()->create()->id,
+                'assigned_type' => \App\Models\User::class,
             ];
         });
     }
@@ -289,8 +253,9 @@ class AssetFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'assigned_to' => Location::factory(),
-                'assigned_type' => Location::class,
+                'model_id' => 1,
+                'assigned_to' => \App\Models\Location::factory()->create()->id,
+                'assigned_type' => \App\Models\Location::class,
             ];
         });
     }
@@ -300,8 +265,8 @@ class AssetFactory extends Factory
         return $this->state(function () {
             return [
                 'model_id' => 1,
-                'assigned_to' => Asset::factory(),
-                'assigned_type' => Asset::class,
+                'assigned_to' => \App\Models\Asset::factory()->create()->id,
+                'assigned_type' => \App\Models\Asset::class,
             ];
         });
     }
@@ -310,9 +275,7 @@ class AssetFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'model_id' => function () {
-                    return AssetModel::where('name', 'Macbook Pro 13')->first() ?? AssetModel::factory()->mbp13Model();
-                },
+                'model_id' => 1,
             ];
         });
     }
@@ -321,9 +284,7 @@ class AssetFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'model_id' => function () {
-                    return AssetModel::where('name', 'Macbook Pro 13')->first() ?? AssetModel::factory()->mbp13Model();
-                },
+                'model_id' => 1,
                 'deleted_at' => $this->faker->dateTime(),
             ];
         });

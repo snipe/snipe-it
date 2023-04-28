@@ -202,7 +202,6 @@ return [
     'slack'                     => 'Slack',
     'general_webhook'           => 'General Webhook',
     'webhook'                   => ':app',
-    'webhook_presave'           => 'Test to Save',
     'webhook_title'               => 'Update Webhook Settings',
     'webhook_help'                => 'Integration settings',
     'webhook_botname'             => ':app Botname',

@@ -2,10 +2,16 @@
 
 namespace Database\Factories;
 
-use App\Models\Department;
-use App\Models\Location;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+
+/*
+|--------------------------------------------------------------------------
+| Asset Model Factories
+|--------------------------------------------------------------------------
+|
+| Factories related exclusively to creating models ..
+|
+*/
 
 class DepartmentFactory extends Factory
 {
@@ -14,7 +20,7 @@ class DepartmentFactory extends Factory
      *
      * @var string
      */
-    protected $model = Department::class;
+    protected $model = \App\Models\Department::class;
 
     /**
      * Define the model's default state.
@@ -24,9 +30,8 @@ class DepartmentFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word() . ' Department',
-            'user_id' => User::factory()->superuser(),
-            'location_id' => Location::factory(),
+            'user_id' => 1,
+            'location_id' => rand(1, 5),
         ];
     }
 

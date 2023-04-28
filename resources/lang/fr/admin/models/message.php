@@ -3,8 +3,8 @@
 return array(
 
     'does_not_exist' => 'Le modèle n\'existe pas.',
-    'no_association' => 'AUCUN MODELE ASSOCIÉ.',
-    'no_association_fix' => 'Cela va casser les choses de manière bizarre et horrible. Modifiez cette ressource maintenant pour lui assigner un modèle.',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Ce modèle est actuellement associé à au moins un actif et ne peut pas être supprimé. Veuillez supprimer les actifs associés et essayer à nouveau. ',
 
 
@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Le modèle n\'a pas été mis à jour, veuillez essayer à nouveau',
-        'success' => 'Le modèle a été mis à jour avec succès.',
+        'success' => 'Le modèle a été mis à jour avec succès.'
     ),
 
     'delete' => array(
@@ -32,14 +32,12 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Aucun champ n\'a été changé, donc rien n\'a été mis à jour.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
-
+        'success' 		=> 'Modèles mis à jour.'
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Aucun modèle n\'a été sélectionné, donc rien n\'a été supprimé.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => ': modèle(s) succes_count supprimé(s) !',
         'success_partial' 	=> ': les modèles success_count ont été supprimés, cependant : fail_count n\'a pas pu être supprimé car ils ont toujours des ressources associées.'
     ),
 

@@ -42,14 +42,6 @@ Route::group(['prefix' => 'accessories', 'middleware' => ['auth']], function () 
         [Accessories\AccessoriesFilesController::class, 'show']
     )->name('show.accessoryfile');
 
-    Route::get('{accessoryId}/clone',
-            [Accessories\AccessoriesController::class, 'getClone']
-        )->name('clone/accessories');
-
-    Route::post('{accessoryId}/clone', 
-        [Accessories\AccessoriesController::class, 'postCreate']
-    );
-
 });
 
 Route::resource('accessories', Accessories\AccessoriesController::class, [

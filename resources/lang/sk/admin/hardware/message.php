@@ -23,8 +23,6 @@ return [
     'restore' => [
         'error'   		=> 'Majetok nebol obnovený, prosím skúste znovu',
         'success' 		=> 'Majetok bol úspešne obnovený.',
-        'bulk_success' 		=> 'Asset restored successfully.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [

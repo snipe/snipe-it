@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Model güncellenemedi, lütfen tekrar deneyin',
-        'success' => 'Model güncellendi.',
+        'success' => 'Model güncellendi.'
     ),
 
     'delete' => array(
@@ -32,14 +32,12 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Hiçbir alan değiştirilmedi, dolayısıyla hiç bir alan güncellenmedi.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
-
+        'success' 		=> 'Model güncellendi.'
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Hiçbir model seçilmedi, bu nedenle hiçbir şey silinmedi.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => ': success_count model (ler) silindi!',
         'success_partial' 	=> ':success_count adet model(ler) silindi, ancak :fail_count adet için silme işlemini tamamlayamadık, çünkü bunlar halâ varlıklarla ilişkilendirilmiş durumda.'
     ),
 

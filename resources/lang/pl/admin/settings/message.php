@@ -33,12 +33,12 @@ return [
         'testing_authentication' => 'Testowanie uwierzytelniania LDAP...',
         'authentication_success' => 'Użytkownik uwierzytelniony z LDAP pomyślnie!'
     ],
-    'webhook' => [
-        'sending' => 'Wysyłanie wiadomości testowej :app...',
+    'slack' => [
+        'sending' => 'Wysyłanie wiadomości testowej Slack...',
         'success_pt1' => 'Sukces! Sprawdź ',
-        'success_pt2' => ' kanał wiadomości testowej i pamiętaj, aby kliknąć ZAPISZ poniżej, aby zapisać ustawienia.',
+        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
         '500' => 'Błąd 500 serwera.',
-        'error' => 'Coś poszło nie tak. :app odpowiedział: :error_message',
+        'error' => 'Something went wrong. Slack responded with: :error_message',
         'error_misc' => 'Coś poszło nie tak. :( ',
     ]
 ];

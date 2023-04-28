@@ -23,8 +23,6 @@ return [
     'restore' => [
         'error'   		=> 'Tài sản không được khôi phục, bạn hãy thử lại',
         'success' 		=> 'Tài sản được khôi phục thành công.',
-        'bulk_success' 		=> 'Asset restored successfully.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [

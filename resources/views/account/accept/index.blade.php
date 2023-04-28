@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-{{ trans('general.accept_assets', array('name' => empty($user) ? '' : $user->present()->full_name)) }}
+{{ trans('general.accept_assets', array('name' => $user->present()->fullName())) }}
 @parent
 @stop
 

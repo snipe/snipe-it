@@ -42,15 +42,6 @@
                         <!-- Location -->
                         @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
 
-                        <div class="form-group">
-                            <div class=" col-md-9 col-md-offset-3">
-                                <label class="form-control">
-                                    {{ Form::checkbox('null_location_id', '1', false) }}
-                                    {{ trans_choice('general.set_users_field_to_null', count($users), ['field' => trans('general.location'), 'user_count' => count($users)]) }}
-                                </label>
-                            </div>
-                        </div>
-
 
                         <!-- Company -->
                         @if (\App\Models\Company::canManageUsersCompanies())
@@ -84,21 +75,14 @@
                                 {{ trans('admin/users/general.remote') }}
                             </div>
                             <div class="col-sm-9">
+                                <div class="radio">
+                                    <label for="remote">
+                                        {{ Form::radio('remote', '', true, ['aria-label'=>'remote', 'class'=>'minimal']) }} {{  trans('general.do_not_change') }} <br>
+                                        {{ Form::radio('remote', '1', old('remote'), ['aria-label'=>'remote', 'class'=>'minimal']) }}   {{ trans('admin/users/general.remote_label') }}<br>
+                                        {{ Form::radio('remote', '0', old('remote'), ['aria-label'=>'remote', 'class'=>'minimal']) }}   {{ trans('admin/users/general.not_remote_label') }}
 
-                                    <label for="no_change" class="form-control">
-                                        {{ Form::radio('remote', '', true, ['id' => 'no_change', 'aria-label'=>'no_change']) }}
-                                        {{  trans('general.do_not_change') }}
                                     </label>
-                                    <label for="remote" class="form-control">
-                                        {{ Form::radio('remote', '1', old('remote'), ['id' => 'remote', 'aria-label'=>'remote']) }}
-                                        {{ trans('admin/users/general.remote_label') }}
-                                    </label>
-                                    <label for="not_remote" class="form-control">
-                                        {{ Form::radio('remote', '0', old('remote'), ['id' => 'not_remote', 'aria-label'=>'not_remote']) }}
-                                        {{ trans('admin/users/general.not_remote_label') }}
-                                    </label>
-
-
+                                </div>
                             </div>
                         </div> <!--/form-group-->
 
@@ -108,14 +92,12 @@
                                 {{ trans('general.ldap_sync') }}
                             </div>
                             <div class="col-sm-9">
-                                    <label for="no_change" class="form-control">
-                                        {{ Form::radio('ldap_import', '', true, ['id' => 'no_change', 'aria-label'=>'ldap_import']) }}
-                                        {{  trans('general.do_not_change') }}
+                                <div class="radio">
+                                    <label for="ldap_import">
+                                        {{ Form::radio('ldap_import', '', true, ['aria-label'=>'ldap_import', 'class'=>'minimal']) }} {{  trans('general.do_not_change') }} <br>
+                                        {{ Form::radio('ldap_import', '0', old('ldap_import'), ['aria-label'=>'ldap_import', 'class'=>'minimal']) }} {{ trans('general.ldap_import') }}
                                     </label>
-                                    <label for="ldap_import" class="form-control">
-                                        {{ Form::radio('ldap_import', '0', old('ldap_import'), ['id' => 'ldap_import', 'aria-label'=>'ldap_import']) }}
-                                        {{ trans('general.ldap_import') }}
-                                    </label>
+                                </div>
                             </div>
                         </div> <!--/form-group-->
 
@@ -125,20 +107,14 @@
                                 {{ trans('general.login_enabled') }}
                             </div>
                             <div class="col-sm-9">
+                                <div class="radio">
+                                    <label for="activated">
+                                        {{ Form::radio('activated', '', true, ['aria-label'=>'activated', 'class'=>'minimal']) }} {{  trans('general.do_not_change') }} <br>
+                                        {{ Form::radio('activated', '1', old('activated'), ['aria-label'=>'activated', 'class'=>'minimal']) }}  {{  trans('admin/users/general.user_activated')}} <br>
+                                        {{ Form::radio('activated', '0', old('activated'), ['aria-label'=>'activated', 'class'=>'minimal']) }}  {{  trans('admin/users/general.user_deactivated')}}
 
-                                    <label for="no_change" class="form-control">
-                                        {{ Form::radio('activated', '', true, ['id' => 'no_change', 'aria-label'=>'no_change']) }}
-                                        {{  trans('general.do_not_change') }}
                                     </label>
-                                    <label for="activated" class="form-control">
-                                        {{ Form::radio('activated', '1', old('activated'), ['id' => 'activated', 'aria-label'=>'activated']) }}
-                                        {{  trans('admin/users/general.user_activated')}}
-                                    </label>
-                                    <label for="deactivated" class="form-control">
-                                        {{ Form::radio('activated', '0', old('activated'), ['id' => 'deactivated', 'aria-label'=>'deactivated']) }}
-                                        {{  trans('admin/users/general.user_deactivated')}}
-                                    </label>
-
+                                </div>
                             </div>
                         </div> <!--/form-group-->
 
@@ -173,15 +149,9 @@
                         @endforeach
                     </div> <!--/.box-body-->
 
-                    <div class="box-footer text-right">
-                        <a class="btn btn-link pull-left" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-
-                        <button type="submit" class="btn btn-success"{{ (config('app.lock_passwords') ? ' disabled' : '') }}>
-                            <i class="fas fa-check icon-white" aria-hidden="true"></i>
-                            {{ trans('button.update') }}
-                        </button>
-
-                    </div><!-- /.box-footer -->
+                    <div class="text-right box-footer">
+                        <button type="submit" class="btn btn-success"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                    </div>
                 </div> <!--/.box.box-default-->
             </form>
         </div> <!--/.col-md-8-->

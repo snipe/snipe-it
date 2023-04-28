@@ -42,6 +42,5 @@ return [
     'error_messages' => 'Feilmeldinger:',
     'success_messages' => 'Suksessmeldinger:',
     'alert_details' => 'Vennligst se nedenfor for detaljer.',
-    'custom_export' => 'Egendefinert eksport',
-    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
+    'custom_export' => 'Egendefinert eksport'
 ];

@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'המודל לא עודכן, נסה שוב',
-        'success' => 'המודל עודכן בהצלחה.',
+        'success' => 'המודל עודכן בהצלחה.'
     ),
 
     'delete' => array(
@@ -32,14 +32,12 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'לא השתנו שדות, ולכן שום דבר לא עודכן.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
-
+        'success' 		=> 'המודלים עודכנו.'
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'לא נבחרו מודלים, לכן לא נמחק שום דבר.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => ':success_count מודלים נמחקו!',
         'success_partial' 	=> ':success_count model(s) were deleted, however :fail_count were unable to be deleted because they still have assets associated with them.'
     ),
 

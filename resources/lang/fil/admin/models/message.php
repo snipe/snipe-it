@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Ang modelo ay hindi nai-update, mangyaring subukang muli',
-        'success' => 'Ang modelo ay matagumpay na nai-update.',
+        'success' => 'Ang modelo ay matagumpay na nai-update.'
     ),
 
     'delete' => array(
@@ -32,14 +32,12 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Walang nabagong mga field, kaya walang nai-update.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
-
+        'success' 		=> 'Ang mga modelo ay naiupdate na.'
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Walang napiling mga model, kaya walang nai-delete.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => ':success_count model(s) na-delete na!',
         'success_partial' 	=> ':success_count ang mga modelo ay na-delete na, gayunpaman ::success_count ang mga modelo ay hindi mai-delete dahil sa mayron pa silang asset na naiuugnay sa kanila.'
     ),
 

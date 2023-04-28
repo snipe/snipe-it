@@ -49,7 +49,6 @@ class BulkAssetsController extends Controller
                         ->with('settings', Setting::getSettings())
                         ->with('bulkedit', true)
                         ->with('count', 0);
-
                 case 'delete':
                     $assets = Asset::with('assignedTo', 'location')->find($asset_ids);
                     $assets->each(function ($asset) {
@@ -57,15 +56,6 @@ class BulkAssetsController extends Controller
                     });
 
                     return view('hardware/bulk-delete')->with('assets', $assets);
-                   
-                case 'restore': 
-                    $assets = Asset::withTrashed()->find($asset_ids); 
-                    $assets->each(function ($asset) {
-                        $this->authorize('delete', $asset);
-                    });
-
-                    return view('hardware/bulk-restore')->with('assets', $assets);
-
                 case 'edit':
                     return view('hardware/bulk')
                         ->with('assets', $asset_ids)
@@ -112,11 +102,8 @@ class BulkAssetsController extends Controller
             || ($request->filled('company_id'))
             || ($request->filled('status_id'))
             || ($request->filled('model_id'))
-            || ($request->filled('next_audit_date'))
             || ($request->filled('null_purchase_date'))
             || ($request->filled('null_expected_checkin_date'))
-            || ($request->filled('null_next_audit_date'))
-
         ) {
             foreach ($assets as $assetId) {
 
@@ -129,8 +116,7 @@ class BulkAssetsController extends Controller
                     ->conditionallyAddItem('requestable')
                     ->conditionallyAddItem('status_id')
                     ->conditionallyAddItem('supplier_id')
-                    ->conditionallyAddItem('warranty_months')
-                    ->conditionallyAddItem('next_audit_date');
+                    ->conditionallyAddItem('warranty_months');
 
                 if ($request->input('null_purchase_date')=='1') {
                     $this->update_array['purchase_date'] = null;
@@ -138,10 +124,6 @@ class BulkAssetsController extends Controller
 
                 if ($request->input('null_expected_checkin_date')=='1') {
                     $this->update_array['expected_checkin'] = null;
-                }
-
-                if ($request->input('null_next_audit_date')=='1') {
-                    $this->update_array['next_audit_date'] = null;
                 }
 
                 if ($request->filled('purchase_cost')) {
@@ -329,19 +311,6 @@ class BulkAssetsController extends Controller
             return redirect()->route('hardware.bulkcheckout.show')->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($errors);
         } catch (ModelNotFoundException $e) {
             return redirect()->route('hardware.bulkcheckout.show')->with('error', $e->getErrors());
-        }
-        
-    }
-    public function restore(Request $request) {
-       $assetIds = $request->get('ids');
-      if (empty($assetIds)) {
-          return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.restore.nothing_updated'));
-        } else {
-            foreach ($assetIds as $key => $assetId) {
-                    $asset = Asset::withTrashed()->find($assetId);
-                    $asset->restore(); 
-            } 
-        return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.restore.success'));
         }
     }
 }

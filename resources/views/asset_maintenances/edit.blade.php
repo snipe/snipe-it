@@ -87,10 +87,11 @@
         <!-- Warranty -->
         <div class="form-group">
           <div class="col-sm-offset-3 col-sm-9">
-              <label class="form-control">
-                <input type="checkbox" value="1" name="is_warranty" id="is_warranty" {{ old('is_warranty', $item->is_warranty) == '1' ? ' checked="checked"' : '' }}>
-                {{ trans('admin/asset_maintenances/form.is_warranty') }}
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="1" name="is_warranty" id="is_warranty" {{ Request::old('is_warranty', $item->is_warranty) == '1' ? ' checked="checked"' : '' }} class="minimal"> {{ trans('admin/asset_maintenances/form.is_warranty') }}
               </label>
+            </div>
           </div>
         </div>
 

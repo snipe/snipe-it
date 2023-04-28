@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Asset Maintenance Type',
+        'asset_maintenance_type' => 'Засвар үйлчилгээний төрөл',
         'title'                  => 'Гарчиг',
-        'start_date'             => 'Start Date',
-        'completion_date'        => 'Completion Date',
+        'start_date'             => 'Эхэлсэн',
+        'completion_date'        => 'Дууссан',
         'cost'                   => 'Өртөг',
         'is_warranty'            => 'Нэмэлт баталгаа',
-        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
+        'asset_maintenance_time' => 'Хоног',
         'notes'                  => 'Тэмдэглэл',
-        'update'                 => 'Update Asset Maintenance',
-        'create'                 => 'Create Asset Maintenance'
+        'update'                 => 'Шинэчлэх',
+        'create'                 => 'Үүсгэх'
     ];

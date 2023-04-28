@@ -4,11 +4,11 @@
         'asset_maintenance_type' => 'Wartungsart',
         'title'                  => 'Bezeichnung',
         'start_date'             => 'Startdatum',
-        'completion_date'        => 'Abschlussdatum',
+        'completion_date'        => 'Fertigstellungstermin',
         'cost'                   => 'Kosten',
         'is_warranty'            => 'Garantie Verbesserung',
-        'asset_maintenance_time' => 'Wartungszeit (in Tagen)',
+        'asset_maintenance_time' => 'Tage',
         'notes'                  => 'Notizen',
-        'update'                 => 'Wartung bearbeiten',
-        'create'                 => 'Wartung erstellen'
+        'update'                 => 'Aktualisieren',
+        'create'                 => 'Erstellen'
     ];

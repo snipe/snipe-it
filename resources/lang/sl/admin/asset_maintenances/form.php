@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Asset Maintenance Type',
+        'asset_maintenance_type' => 'Vrsta vzdrževanja',
         'title'                  => 'Naslov',
-        'start_date'             => 'Start Date',
-        'completion_date'        => 'Completion Date',
+        'start_date'             => 'Začeto',
+        'completion_date'        => 'Končano',
         'cost'                   => 'Cena',
         'is_warranty'            => 'Izboljšanje garancije',
-        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
+        'asset_maintenance_time' => 'Dnevi',
         'notes'                  => 'Opombe',
-        'update'                 => 'Update Asset Maintenance',
-        'create'                 => 'Create Asset Maintenance'
+        'update'                 => 'Posodobi',
+        'create'                 => 'Ustvari'
     ];

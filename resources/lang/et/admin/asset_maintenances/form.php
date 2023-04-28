@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Asset Maintenance Type',
+        'asset_maintenance_type' => 'Hooldustüüp',
         'title'                  => 'Pealkiri',
-        'start_date'             => 'Start Date',
-        'completion_date'        => 'Completion Date',
+        'start_date'             => 'Alustatud',
+        'completion_date'        => 'Lõpetatud',
         'cost'                   => 'Kulud',
         'is_warranty'            => 'Garantii paranemine',
-        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
+        'asset_maintenance_time' => 'Päevad',
         'notes'                  => 'Märkused',
-        'update'                 => 'Update Asset Maintenance',
-        'create'                 => 'Create Asset Maintenance'
+        'update'                 => 'Uuenda',
+        'create'                 => 'Loo'
     ];

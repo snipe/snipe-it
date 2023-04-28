@@ -26,11 +26,10 @@ Vue.component(
     require('./components/passport/PersonalAccessTokens.vue').default
 );
 
-// This component has been removed and replaced with a Livewire implementation
-// Vue.component(
-//     'importer',
-//     require('./components/importer/importer.vue').default
-// );
+Vue.component(
+    'importer',
+    require('./components/importer/importer.vue').default
+);
 
 // This component has been removed and replaced with a Livewire implementation
 // Vue.component(

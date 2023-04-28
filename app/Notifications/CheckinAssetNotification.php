@@ -43,8 +43,9 @@ class CheckinAssetNotification extends Notification
     public function via()
     {
         $notifyBy = [];
-        if (Setting::getSettings()->webhook_endpoint != '') {
-            \Log::debug('use webhook');
+
+        if (Setting::getSettings()->slack_endpoint != '') {
+            \Log::debug('use slack');
             $notifyBy[] = 'slack';
         }
 
@@ -64,7 +65,7 @@ class CheckinAssetNotification extends Notification
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
-        $botname = ($this->settings->webhook_botname != '') ? $this->settings->webhook_botname : 'Snipe-Bot';
+        $botname = ($this->settings->slack_botname != '') ? $this->settings->slack_botname : 'Snipe-Bot';
 
         $fields = [
             trans('general.administrator') => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',

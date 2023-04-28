@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Asset Maintenance Type',
+        'asset_maintenance_type' => 'Тип обслуговування',
         'title'                  => 'Назва',
-        'start_date'             => 'Start Date',
-        'completion_date'        => 'Completion Date',
+        'start_date'             => 'Розпочато',
+        'completion_date'        => 'Завершено',
         'cost'                   => 'Вартість',
         'is_warranty'            => 'Покращення гарантії',
-        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
+        'asset_maintenance_time' => 'Днів',
         'notes'                  => 'Нотатки',
-        'update'                 => 'Update Asset Maintenance',
-        'create'                 => 'Create Asset Maintenance'
+        'update'                 => 'Оновити',
+        'create'                 => 'Створити'
     ];

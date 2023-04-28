@@ -20,13 +20,13 @@ class CheckForSetup
 
         if (Setting::setupCompleted()) {
             if ($request->is('setup*')) {
-                return redirect(config('app.url'));
+                return redirect(url('/'));
             } else {
                 return $next($request);
             }
         } else {
             if (! ($request->is('setup*')) && ! ($request->is('.env')) && ! ($request->is('health'))) {
-                return redirect(config('app.url').'/setup');
+                return redirect(url('/').'/setup');
             }
 
             return $next($request);

@@ -238,7 +238,7 @@ class CustomField extends Model
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return string
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
     public function db_column_name()
     {

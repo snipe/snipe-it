@@ -24,7 +24,6 @@ return array(
      'checkout' => array(
         'error'   		=> 'Accesoriu nu a fost predat, vă rugăm să încercaţi din nou',
         'success' 		=> 'Accesoriu a fost predat.',
-        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Acest utilizator nu este valid. Vă rugăm să încercaţi din nou.'
     ),
 

@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Eszköz karbantartásának típusa',
+        'asset_maintenance_type' => 'Karbantartás típusa',
         'title'                  => 'Elnevezés',
-        'start_date'             => 'Kezdő dátum',
-        'completion_date'        => 'Befejezés dátuma',
+        'start_date'             => 'Kezdés',
+        'completion_date'        => 'Befejezés',
         'cost'                   => 'Költség',
         'is_warranty'            => 'Garanciális javítás',
-        'asset_maintenance_time' => 'Eszköz karbantartásának ideje (napokban)',
+        'asset_maintenance_time' => 'Napok',
         'notes'                  => 'Megjegyzések',
-        'update'                 => 'Eszköz karbantartás szerkesztése',
-        'create'                 => 'Eszköz karbantartás létrehozása'
+        'update'                 => 'Frissít',
+        'create'                 => 'Létrehoz'
     ];

@@ -42,6 +42,5 @@ return [
     'error_messages' => 'Tõrked:',
     'success_messages' => 'Õnnestumised:',
     'alert_details' => 'Palun vaata allolevaid üksikasju.',
-    'custom_export' => 'Custom Export',
-    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
+    'custom_export' => 'Custom Export'
 ];

@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Druh údržby majetku',
+        'asset_maintenance_type' => 'Druh údržby',
         'title'                  => 'Název',
-        'start_date'             => 'Počáteční datum',
-        'completion_date'        => 'Datum dokončení',
+        'start_date'             => 'Začátek',
+        'completion_date'        => 'Dokončeno',
         'cost'                   => 'Cena',
         'is_warranty'            => 'Rozšíření záruky',
-        'asset_maintenance_time' => 'Doba údržby majetku (ve dnech)',
+        'asset_maintenance_time' => 'Dnů',
         'notes'                  => 'Poznámky',
-        'update'                 => 'Upravit údržbu zařízení',
-        'create'                 => 'Založit údržbu zařízení'
+        'update'                 => 'Aktualizace',
+        'create'                 => 'Vytvořit'
     ];

@@ -57,8 +57,8 @@ class RequestAssetCancelation extends Notification
     {
         $notifyBy = [];
 
-        if (Setting::getSettings()->webhook_endpoint != '') {
-            \Log::debug('use webhook');
+        if (Setting::getSettings()->slack_endpoint != '') {
+            \Log::debug('use slack');
             $notifyBy[] = 'slack';
         }
 
@@ -73,7 +73,7 @@ class RequestAssetCancelation extends Notification
         $item = $this->item;
         $note = $this->note;
         $qty = $this->item_quantity;
-        $botname = ($this->settings->webhook_botname) ? $this->settings->webhook_botname : 'Snipe-Bot';
+        $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot';
 
         $fields = [
             'QTY' => $qty,

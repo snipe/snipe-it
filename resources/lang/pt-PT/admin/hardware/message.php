@@ -23,8 +23,6 @@ return [
     'restore' => [
         'error'   		=> 'O Artigo não foi restaurado, por favor tente novamente',
         'success' 		=> 'Artigo restaurado com sucesso.',
-        'bulk_success' 		=> 'Asset restored successfully.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [

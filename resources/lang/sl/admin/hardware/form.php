@@ -2,11 +2,8 @@
 
 return [
     'bulk_delete'		=> 'Potrdite množičn izbris sredstev',
-    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> 'Pregled sredstev za množično brisanje je v seznamu spodaj. Ko bodo sredstva izbrisana, jih je mogoče obnoviti, vendar ne bodo povezana z nobenimi uporabnikom, kot so jim trenutno dodeljena.',
-  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'Brisali boste: asset_count sredstev.',
-  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'Množično posodabljanje sredstev',
     'bulk_update_help'	=> 'Ta obrazec vam omogoča, da posodobite več sredstev hkrati. Izpolnite le polja, ki jih morate spremeniti. Vsa polja, ki ostanejo prazna, bodo ostala nespremenjena. ',
     'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
@@ -48,7 +45,7 @@ return [
     'asset_location_update_default' => 'Update only default location',
     'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
     'asset_deployable' => 'That status is deployable. This asset can be checked out.',
-    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'processing_spinner' => 'Processing...',
     'optional_infos'  => 'Optional Information',
     'order_details'   => 'Order Related Information'
 ];

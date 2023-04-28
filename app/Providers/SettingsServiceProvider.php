@@ -150,7 +150,6 @@ class SettingsServiceProvider extends ServiceProvider
         // Set the monetary locale to the configured locale to make helper::parseFloat work.
         setlocale(LC_MONETARY, config('app.locale'));
         setlocale(LC_NUMERIC, config('app.locale'));
-        
     }
 
     /**

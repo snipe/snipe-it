@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Загвар шинэчлэгдсэнгүй, дахин оролдоно уу',
-        'success' => 'Загвар амжилттай болсон.',
+        'success' => 'Загвар амжилттай болсон.'
     ),
 
     'delete' => array(
@@ -32,14 +32,12 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Ямар ч талбар өөрчлөгдсөнгүй тул шинэчлэгдээгүй байна.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
-
+        'success' 		=> 'Загвар шинэчилсэн.'
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Ямар ч загвар сонгогдоогүй тул юу ч устаагүй.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => ':success_count ширхэг загвар устсан!',
         'success_partial' 	=> ':success_count ширхэг загвар устсан ба :fail_count ширхэг загвар одоо хүртэл хөрөнгөтэй холбоотой байгаа тул устаагүй.'
     ),
 

@@ -24,7 +24,6 @@ return array(
      'checkout' => array(
         'error'   		=> 'Το αξεσουάρ δεν έχει ελεγχθεί, δοκιμάστε ξανά',
         'success' 		=> 'Το αξεσουάρ ολοκληρώθηκε με επιτυχία.',
-        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Αυτός ο χρήστης δεν είναι έγκυρος. Παρακαλώ δοκιμάστε ξανά.'
     ),
 

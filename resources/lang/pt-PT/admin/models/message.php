@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'O Modelo não foi atualizado. Por favor tente novamente',
-        'success' => 'Modelo atualizado com sucesso.',
+        'success' => 'Modelo atualizado com sucesso.'
     ),
 
     'delete' => array(
@@ -32,14 +32,12 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Nenhum campo foi alterado, portanto, nada foi atualizado.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
-
+        'success' 		=> 'Modelos atualizados.'
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Nenhum modelo selecionado, por isso nenhum modelo foi eliminado.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => ':sucess_count modelo(s) eliminados!',
         'success_partial' 	=> ':sucess_count modelo(s) eliminados, no entanto :fail_count não foram eliminados, porque ainda têm artigos associados.'
     ),
 

@@ -107,11 +107,11 @@
         @if (($user->avatar) && ($user->avatar!=''))
           <div class="form-group{{ $errors->has('image_delete') ? ' has-error' : '' }}">
             <div class="col-md-9 col-md-offset-3">
-              <label for="image_delete" class="form-control">
-                {{ Form::checkbox('image_delete', '1', old('image_delete'), ['id' => 'image_delete', 'aria-label'=>'image_delete']) }}
+              <label for="image_delete">
+                {{ Form::checkbox('image_delete', '1', old('image_delete'), ['class'=>'minimal','aria-label'=>'image_delete']) }}
                 {{ trans('general.image_delete') }}
+                {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
               </label>
-              {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
             </div>
           </div>
           <div class="form-group">
@@ -123,7 +123,8 @@
         @endif
 
 
-        @include ('partials.forms.edit.image-upload', ['fieldname' => 'avatar', 'image_path' => app('users_upload_path')])
+        @include ('partials.forms.edit.image-upload', ['fieldname' => 'avatar'])
+
 
 
         <!-- Two factor opt in -->
@@ -131,9 +132,9 @@
         <div class="form-group {{ $errors->has('two_factor_optin') ? 'has-error' : '' }}">
           <div class="col-md-7 col-md-offset-3">
             @can('self.two_factor')
-              <label class="form-control">{{ Form::checkbox('two_factor_optin', '1', old('two_factor_optin', $user->two_factor_optin)) }}
+              <label for="two_factor_optin">{{ Form::checkbox('two_factor_optin', '1', Request::old('two_factor_optin', $user->two_factor_optin),array('class' => 'minimal')) }}
             @else
-                <label class="form-control form-control--disabled">{{ Form::checkbox('two_factor_optin', '1', old('two_factor_optin', $user->two_factor_optin),['disabled' => 'disabled']) }}
+                <label for="avatar">{{ Form::checkbox('two_factor_optin', '1', Request::old('two_factor_optin', $user->two_factor_optin),['class' => 'disabled minimal', 'disabled' => 'disabled']) }}
             @endcan
 
             {{ trans('admin/settings/general.two_factor_enabled_text') }}</label>
