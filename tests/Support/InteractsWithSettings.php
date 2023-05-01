@@ -8,7 +8,7 @@ trait InteractsWithSettings
 {
     protected Settings $settings;
 
-    public function setUpSettings()
+    public function initializeSettings()
     {
         $this->settings = Settings::initialize();
 
