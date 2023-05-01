@@ -2,6 +2,8 @@
 
 namespace Tests\Support;
 
+use App\Models\Setting;
+
 trait InteractsWithSettings
 {
     protected Settings $settings;
@@ -9,5 +11,7 @@ trait InteractsWithSettings
     public function setUpSettings()
     {
         $this->settings = Settings::initialize();
+
+        $this->beforeApplicationDestroyed(fn() => Setting::$_cache = null);
     }
 }
