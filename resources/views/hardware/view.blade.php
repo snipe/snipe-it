@@ -862,7 +862,7 @@
                                     @can('delete', $asset)
                                         @if ($asset->deleted_at=='')
                                             <div class="col-md-12" style="padding-top: 30px; padding-bottom: 30px;">
-                                                <button class="btn btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.delete_confirm', ['item' => $asset->asset_tag]) }}" data-target="#dataConfirmModal">{{ trans('general.delete') }} </button>
+                                                <button class="btn btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.sure_to_delete', ['item' => $asset->asset_tag]) }}" data-target="#dataConfirmModal">{{ trans('general.delete') }} </button>
                                                 <span class="sr-only">{{ trans('general.delete') }}</span>
                                             </div>
                                         @endif
@@ -886,7 +886,7 @@
                                         <h2>{{ trans('admin/hardware/form.checkedout_to') }}</h2>
                                         <p>
                                         @if($asset->checkedOutToUser()) <!-- Only users have avatars currently-->
-                                            <img src="{{ $asset->assignedTo->present()->gravatar() }}" alt="{{ $asset->assignedTo->present()->fullName() }}">
+                                            <img src="{{ $asset->assignedTo->present()->gravatar() }}" class="user-image-inline" alt="{{ $asset->assignedTo->present()->fullName() }}">
                                             @endif
                                         </p>
                                             {!! $asset->assignedTo->present()->glyph() . ' ' .$asset->assignedTo->present()->nameUrl() !!}
