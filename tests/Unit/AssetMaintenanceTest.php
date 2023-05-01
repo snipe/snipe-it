@@ -3,10 +3,13 @@ namespace Tests\Unit;
 
 use App\Models\AssetMaintenance;
 use Carbon\Carbon;
+use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class AssetMaintenanceTest extends TestCase
 {
+    use InteractsWithSettings;
+
     public function testZerosOutWarrantyIfBlank()
     {
         $c = new AssetMaintenance;

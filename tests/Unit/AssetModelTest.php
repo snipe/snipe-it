@@ -4,10 +4,13 @@ namespace Tests\Unit;
 use App\Models\Asset;
 use App\Models\Category;
 use App\Models\AssetModel;
+use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class AssetModelTest extends TestCase
 {
+    use InteractsWithSettings;
+
     public function testAnAssetModelZerosOutBlankEols()
     {
         $am = new AssetModel;
