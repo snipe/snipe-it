@@ -31,8 +31,10 @@ class BulkAssetsController extends Controller
      */
     public function edit(Request $request)
     {
+        // dd($request->all());
+        
         $this->authorize('update', Asset::class);
-
+        
         if (! $request->filled('ids')) {
             return redirect()->back()->with('error', trans('admin/hardware/message.update.no_assets_selected'));
         }
@@ -98,6 +100,7 @@ class BulkAssetsController extends Controller
      */
     public function update(Request $request)
     {
+    //    dd(request()->headers->get('referer')); 
         $this->authorize('update', Asset::class);
         $error_bag = [];
 
@@ -139,6 +142,7 @@ class BulkAssetsController extends Controller
             || ($request->anyFilled($custom_field_columns))
 
         ) {
+        //    dd($assets); 
             foreach ($assets as $assetId) {
 
                 $this->update_array = [];
@@ -227,7 +231,14 @@ class BulkAssetsController extends Controller
                 } 
             } // endforeach ($assets)
             if(!empty($error_bag)) {
-                return redirect($bulk_back_url)->withErrors($error_bag);
+               $ids = array_values($assets); 
+            //   dd($ids); 
+               return redirect()->back()
+                    ->withInput(["ids" => $ids, "bulk_actions" => "edit"])
+                    ->withErrors($error_bag);
+        //    return $error_bag; 
+
+                // return redirect($bulk_back_url)->withErrors($error_bag);
               }
             return redirect($bulk_back_url)->with('success', trans('admin/hardware/message.update.success'));
         }
