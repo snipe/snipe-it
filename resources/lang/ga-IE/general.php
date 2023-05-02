@@ -131,6 +131,7 @@ return [
     'history'  			    => 'Stair',
     'history_for'  			=> 'Stair do',
     'id'  					=> 'ID',
+    'sno'                   => 'S NO',
     'image'                 => 'Image',
     'image_delete'         	=> 'Scrios Íomhá',
     'include_deleted'       => 'Include Deleted Assets',

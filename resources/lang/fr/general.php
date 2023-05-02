@@ -131,6 +131,7 @@ return [
     'history'  			    => 'Historique',
     'history_for'  			=> 'Historique pour',
     'id'  					=> 'ID',
+    'sno'                   => 'S NO',
     'image'                 => 'Image',
     'image_delete'         	=> 'Supprimer l\'image',
     'include_deleted'       => 'Inclure les matériels supprimés',

@@ -131,6 +131,7 @@ return [
     'history'  			    => '歷史記錄',
     'history_for'  			=> '歷史記錄',
     'id'  					=> 'ID',
+    'sno'                   => 'S NO',
     'image'                 => '影像',
     'image_delete'         	=> '刪除圖片',
     'include_deleted'       => '包含已刪除的資產',

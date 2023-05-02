@@ -131,6 +131,7 @@ return [
     'history'  			    => 'Hītori',
     'history_for'  			=> 'History mo',
     'id'  					=> 'ID',
+    'sno'                   => 'S NO',
     'image'                 => 'Image',
     'image_delete'         	=> 'Mukua te Whakaahua',
     'include_deleted'       => 'Include Deleted Assets',

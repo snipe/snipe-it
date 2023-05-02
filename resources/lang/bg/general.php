@@ -131,6 +131,7 @@ return [
     'history'  			    => 'История',
     'history_for'  			=> 'История за',
     'id'  					=> 'ID',
+    'sno'                   => 'S NO',
     'image'                 => 'Изображение',
     'image_delete'         	=> 'Изтриване на изображението',
     'include_deleted'       => 'Include Deleted Assets',
