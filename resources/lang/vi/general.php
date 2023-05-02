@@ -131,6 +131,7 @@ return [
     'history'  			    => 'Lịch sử',
     'history_for'  			=> 'Lịch cấp phát của',
     'id'  					=> 'ID',
+    'sno'                   => 'S NO',
     'image'                 => 'Hình ảnh',
     'image_delete'         	=> 'Xóa hình',
     'include_deleted'       => 'Include Deleted Assets',

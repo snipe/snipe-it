@@ -131,6 +131,7 @@ return [
     'history'  			    => 'Saga',
     'history_for'  			=> 'Saga fyrir',
     'id'  					=> 'ID',
+    'sno'                   => 'S NO',
     'image'                 => 'Mynd',
     'image_delete'         	=> 'Eyða mynd',
     'include_deleted'       => 'Inniheldur eyddar eignir',

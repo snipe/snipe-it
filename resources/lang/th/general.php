@@ -131,6 +131,7 @@ return [
     'history'  			    => 'ประวัติศาสตร์',
     'history_for'  			=> 'ประวัติของ',
     'id'  					=> 'ID',
+    'sno'                   => 'S NO',
     'image'                 => 'รูป',
     'image_delete'         	=> 'ลบรูปภาพประจำตัว',
     'include_deleted'       => 'Include Deleted Assets',

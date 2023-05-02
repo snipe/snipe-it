@@ -131,6 +131,7 @@ return [
     'history'  			    => '履歴',
     'history_for'  			=> '履歴',
     'id'  					=> 'ID',
+    'sno'                   => 'S NO',
     'image'                 => '画像',
     'image_delete'         	=> '画像を削除',
     'include_deleted'       => '削除された資産を含める',

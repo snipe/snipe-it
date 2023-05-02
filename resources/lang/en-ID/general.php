@@ -131,6 +131,7 @@ return [
     'history'  			    => 'Riwayat',
     'history_for'  			=> 'Riwayat untuk',
     'id'  					=> 'ID',
+    'sno'                   => 'S NO',
     'image'                 => 'Gambar',
     'image_delete'         	=> 'Hapus Gambar',
     'include_deleted'       => 'Include Deleted Assets',

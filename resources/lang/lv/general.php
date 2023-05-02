@@ -131,6 +131,7 @@ return [
     'history'  			    => 'Vēsture',
     'history_for'  			=> 'Vēsture par',
     'id'  					=> 'ID',
+    'sno'                   => 'S NO',
     'image'                 => 'Attēls',
     'image_delete'         	=> 'Dzēst attēlu',
     'include_deleted'       => 'Include Deleted Assets',

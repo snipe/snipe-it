@@ -131,6 +131,7 @@ return [
     'history'  			    => 'Storicità',
     'history_for'  			=> 'Cronologia',
     'id'  					=> 'ID',
+    'sno'                   => 'S NO',
     'image'                 => 'Immagine',
     'image_delete'         	=> 'Cancella l\'Immagine',
     'include_deleted'       => 'Includi i Beni Eliminati',

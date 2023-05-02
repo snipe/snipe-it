@@ -131,6 +131,7 @@ return [
     'history'  			    => 'Istorie',
     'history_for'  			=> 'Istoric pentru',
     'id'  					=> 'ID',
+    'sno'                   => 'S NO',
     'image'                 => 'Image',
     'image_delete'         	=> 'Sterge poza',
     'include_deleted'       => 'Include Deleted Assets',

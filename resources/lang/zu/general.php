@@ -131,6 +131,7 @@ return [
     'history'  			    => 'Umlando',
     'history_for'  			=> 'Umlando we',
     'id'  					=> 'ID',
+    'sno'                   => 'S NO',
     'image'                 => 'Image',
     'image_delete'         	=> 'Susa isithombe',
     'include_deleted'       => 'Include Deleted Assets',

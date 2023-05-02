@@ -131,6 +131,7 @@ return [
     'history'  			    => 'Istorija',
     'history_for'  			=> 'Istorija žmogui: ',
     'id'  					=> 'ID',
+    'sno'                   => 'S NO',
     'image'                 => 'Paveikslėlis',
     'image_delete'         	=> 'Ištrinti nuotrauką',
     'include_deleted'       => 'Include Deleted Assets',

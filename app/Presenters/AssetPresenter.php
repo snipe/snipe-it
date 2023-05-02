@@ -28,7 +28,7 @@ class AssetPresenter extends Presenter
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
-                'title' => trans('S NO'),
+                'title' => trans('general.sno'),
                 'visible' => false,
             ],
             //  [
