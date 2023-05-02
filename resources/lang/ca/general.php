@@ -130,7 +130,7 @@ return [
     'gravatar_url'          => '<a href="http://gravatar.com"><small>Change your avatar at Gravatar.com</small></a>.',
     'history'  			    => 'History',
     'history_for'  			=> 'History for',
-    'id'  					=> 'ID',
+    'id'  					=> 'S.No',
     'image'                 => 'Image',
     'image_delete'         	=> 'Delete Image',
     'include_deleted'       => 'Include Deleted Assets',
