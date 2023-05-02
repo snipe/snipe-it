@@ -132,9 +132,7 @@ a {
 #ldapad_test_results.well.well-sm{
   color: var(--back-main);
 }
-a.actions {
-  color:#fff !important;
-}
+
 //pagination
 .pagination > li >a{
   color: var(--light-link);
@@ -187,13 +185,11 @@ h2.task_menu{
 a:link {
   color: var(--link);
 }
-
-a:visited {
-  color: var(--nav-link);
-}
-
 a:hover {
   color: var(--hover-link);
+}
+a:visited {
+  color: var(--nav-link);
 }
 .far fa-life-ring{
   color:var(--link);
@@ -395,13 +391,14 @@ a {
   color: var(--link);
 
   &:link {
-    color: var(--link)  }
+    color: var(--nav-link);
+  }
   &:hover {
-    color: var(--hover-link);
+    color: var(--nav-link);
     text-decoration: underline;
   }
   &:visited {
-    color: var(--visited-link)
+    color: var(--nav-link);
   }
 }
 #customFieldsTable a[href*='/models'] {
