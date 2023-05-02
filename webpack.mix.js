@@ -61,63 +61,63 @@ mix
 // Convert the skins to CSS
 mix.less(
   "./resources/assets/less/skins/skin-blue.less",
-  "./public/css/dist/skins/skin-blue.css"
+  "css/dist/skins",
 );
 mix.less(
   "./resources/assets/less/skins/skin-red.less",
-  "./public/css/dist/skins/skin-red.css"
+  "css/dist/skins",
 );
 mix.less(
   "./resources/assets/less/skins/skin-contrast.less",
-  "./public/css/dist/skins/skin-contrast.css"
+  "css/dist/skins",
 );
 mix.less(
   "./resources/assets/less/skins/skin-green.less",
-  "./public/css/dist/skins/skin-green.css"
+  "css/dist/skins",
 );
 mix.less(
   "./resources/assets/less/skins/skin-green-dark.less",
-  "./public/css/dist/skins/skin-green-light.css"
+  "css/dist/skins",
 );
 mix.less(
   "./resources/assets/less/skins/skin-black.less",
-  "./public/css/dist/skins/skin-black.css"
+  "css/dist/skins",
 );
 mix.less(
   "./resources/assets/less/skins/skin-black-dark.less",
-  "./public/css/dist/skins/skin-black-light.css"
+  "css/dist/skins",
 );
 mix.less(
   "./resources/assets/less/skins/skin-red-dark.less",
-  "./public/css/dist/skins/skin-red-light.css"
+  "css/dist/skins",
 );
 mix.less(
   "./resources/assets/less/skins/skin-purple.less",
-  "./public/css/dist/skins/skin-purple.css"
+  "css/dist/skins",
 );
 mix.less(
   "./resources/assets/less/skins/skin-purple-dark.less",
-  "./public/css/dist/skins/skin-purple-light.css"
+  "css/dist/skins",
 );
 mix.less(
   "./resources/assets/less/skins/skin-yellow.less",
-  "./public/css/dist/skins/skin-yellow.css"
+  "css/dist/skins",
 );
 mix.less(
   "./resources/assets/less/skins/skin-yellow-dark.less",
-  "./public/css/dist/skins/skin-yellow-light.css"
+  "css/dist/skins",
 );
 mix.less(
   "./resources/assets/less/skins/skin-blue-dark.less",
-  "./public/css/dist/skins/skin-blue-light.css"
+  "css/dist/skins",
 );
 mix.less(
   "./resources/assets/less/skins/skin-orange-dark.less",
-  "./public/css/dist/skins/skin-orange-light.css"
+  "css/dist/skins",
 );
 mix.less(
   "./resources/assets/less/skins/skin-orange.less",
-  "./public/css/dist/skins/skin-orange.css"
+  "css/dist/skins",
 );
 
 /**
