@@ -136,7 +136,7 @@
                         </div>
                     </div>
 
-                    <!-- histor tab pane -->
+                    <!-- history tab pane -->
                      <div class="tab-pane fade" id="history">
                          <div class="table table-responsive">
                              <div class="row">
@@ -347,16 +347,53 @@
               {{ $accessory->users_count }}
           </div>
       </div>
+</div>
 
-
-
-          @can('checkout', \App\Models\Accessory::class)
-              <div class="row">
-                  <div class="col-md-12 text-center">
-                      <a href="{{ route('accessories.checkout.show', $accessory->id) }}" style="margin-right:5px; width:100%" class="btn btn-primary btn-sm" {{ (($accessory->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
-                  </div>
-              </div>
-          @endcan
+    <div class="col-md-3 pull-right">
+        @can('checkout', \App\Models\Accessory::class)
+            <div class="row">
+                <div class="text-center" style="padding-top:5px;">
+                    <a href="{{ route('accessories.checkout.show', $accessory->id) }}" style="margin-right:5px; width:100%" class="btn btn-primary btn-sm" {{ (($accessory->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
+                </div>
+            </div>
+        @endcan
+        @can('update', \App\Models\Accessory::class)
+            <div class="row">
+               <div class="text-center" style="padding-top:5px;">
+                  <a href="{{ route('accessories.edit', $accessory->id) }}" style="margin-right:5px; width:100%" class="btn btn-primary btn-sm">{{ trans('admin/accessories/general.edit') }}</a>
+               </div>
+            </div>
+        @endcan
+        @can('update', \App\Models\Accessory::class)
+            <div class="row">
+                <div class="text-center" style="padding-top:5px;">
+                    <a href="{{ route('clone/accessories', $accessory->id) }}" style="margin-right:5px; width:100%" class="btn btn-primary btn-sm">{{ trans('admin/accessories/general.clone') }}</a>
+                </div>
+            </div>
+        @endcan
+        @can('delete', $accessory)
+            @if ($accessory->users_count == 0)
+                <div class="row">
+                    <div class="text-center" style="padding-top:5px;">
+                        <button class="btn btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.delete_confirm', ['item' => $accessory->name]) }}" data-target="#dataConfirmModal">
+                        {{ trans('general.delete') }}
+                        </button>
+                    </div>
+                </div>
+            @else
+                <div class="row">
+                    <div class="text-center" style="padding-top:5px;">
+                        <span data-tooltip="true" title=" {{ trans('admin/licenses/general.delete_disabled') }}">
+                          <a href="#" class="btn btn-block btn-danger disabled">
+                          {{ trans('general.delete') }}
+                          </a>
+                        </span>
+                    </div>
+                </div>
+            @endif
+        @endcan
+    </div>
+</div>
 
 
         <div class="tab-pane fade" id="history">
