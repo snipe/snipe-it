@@ -23,7 +23,7 @@ abstract class TestCase extends BaseTestCase
         $this->withoutMiddleware($this->globallyDisabledMiddleware);
 
         if (collect(class_uses_recursive($this))->contains(InteractsWithSettings::class)) {
-            $this->setUpSettings();
+            $this->initializeSettings();
         }
     }
 }

@@ -5,10 +5,13 @@ use App\Models\Depreciation;
 use App\Models\Category;
 use App\Models\License;
 use App\Models\AssetModel;
+use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class DepreciationTest extends TestCase
 {
+    use InteractsWithSettings;
+
     public function testADepreciationHasModels()
     {
         $depreciation = Depreciation::factory()->create();

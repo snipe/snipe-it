@@ -94,6 +94,18 @@ class CustomFieldsetsController extends Controller
         $fieldset->fill($request->all());
 
         if ($fieldset->save()) {
+            // Sync fieldset with auto_add_to_fieldsets
+            $fields = CustomField::select('id')->where('auto_add_to_fieldsets', '=', '1')->get();
+
+            if ($fields->count() > 0) {
+
+                foreach ($fields as $field) {
+                    $field_ids[] = $field->id;
+                }
+
+                $fieldset->fields()->sync($field_ids);
+            }
+
             return response()->json(Helper::formatStandardApiResponse('success', $fieldset, trans('admin/custom_fields/message.fieldset.create.success')));
         }
 
