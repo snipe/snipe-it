@@ -71,9 +71,10 @@ class CustomFieldsController extends Controller
 
         return view('custom_fields.fields.edit', [
             'predefinedFormats' => Helper::predefined_formats(),
-            'customFormat' => ''])
-            ->with('fieldsets', $fieldsets)
-            ->with('field', new CustomField());
+            'customFormat' => '',
+            'fieldsets' => $fieldsets,
+            'field' => new CustomField(),
+        ]);
     }
 
     /**
