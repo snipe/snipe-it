@@ -12,43 +12,6 @@
 @parent
 @stop
 
-{{-- Right header --}}
-@section('header_right')
-    @can('manage', \App\Models\Accessory::class)
-        <div class="dropdown pull-right">
-          <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-              {{ trans('button.actions') }}
-              <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu pull-right" role="menu">
-            @if ($accessory->assigned_to != '')
-              @can('checkin', \App\Models\Accessory::class)
-              <li role="menuitem">
-                <a href="{{ route('accessories.checkin.show', $accessory->id) }}">{{ trans('admin/accessories/general.checkin') }}</a>
-              </li>
-              @endcan
-            @else
-              @can('checkout', \App\Models\Accessory::class)
-              <li role="menuitem">
-                <a href="{{ route('accessories.checkout.show', $accessory->id)  }}">{{ trans('admin/accessories/general.checkout') }}</a>
-              </li>
-              @endcan
-            @endif
-            @can('update', \App\Models\Accessory::class)
-            <li role="menuitem">
-              <a href="{{ route('accessories.edit', $accessory->id) }}">{{ trans('admin/accessories/general.edit') }}</a>
-            </li>
-            @endcan
-            @can('update', \App\Models\Accessory::class)
-            <li role="menuitem">
-              <a href="{{ route('clone/accessories', $accessory->id) }}">{{ trans('admin/accessories/general.clone') }}</a>
-            </li>
-            @endcan
-          </ul>
-        </div>
-    @endcan
-@stop
-
 {{-- Page content --}}
 @section('content')
     {{-- Page content --}}
@@ -271,13 +234,13 @@
                                 </table>
                             </div>
                         </div>
-                        </div>
-                        </div> <!-- /.tab-pane -->
-                    @endcan
-
-                        </div>
                     </div>
-                </div>
+                </div> <!-- /.tab-pane -->
+                @endcan
+            </div>
+        </div>
+    </div>
+
 
 
 <!-- side address column -->
@@ -351,91 +314,39 @@
 
     <div class="col-md-3 pull-right">
         @can('checkout', \App\Models\Accessory::class)
-            <div class="row">
                 <div class="text-center" style="padding-top:5px;">
                     <a href="{{ route('accessories.checkout.show', $accessory->id) }}" style="margin-right:5px; width:100%" class="btn btn-primary btn-sm" {{ (($accessory->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
                 </div>
-            </div>
         @endcan
         @can('update', \App\Models\Accessory::class)
-            <div class="row">
                <div class="text-center" style="padding-top:5px;">
                   <a href="{{ route('accessories.edit', $accessory->id) }}" style="margin-right:5px; width:100%" class="btn btn-primary btn-sm">{{ trans('admin/accessories/general.edit') }}</a>
                </div>
-            </div>
         @endcan
         @can('update', \App\Models\Accessory::class)
-            <div class="row">
                 <div class="text-center" style="padding-top:5px;">
                     <a href="{{ route('clone/accessories', $accessory->id) }}" style="margin-right:5px; width:100%" class="btn btn-primary btn-sm">{{ trans('admin/accessories/general.clone') }}</a>
                 </div>
-            </div>
         @endcan
         @can('delete', $accessory)
             @if ($accessory->users_count == 0)
-                <div class="row">
-                    <div class="text-center" style="padding-top:5px;">
-                        <button class="btn btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.delete_confirm', ['item' => $accessory->name]) }}" data-target="#dataConfirmModal">
-                        {{ trans('general.delete') }}
-                        </button>
-                    </div>
+                <div class="text-center" style="padding-top:5px;">
+                    <button class="btn btn-block btn-danger delete-asset" style="padding-top:5px;" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.delete_confirm_no_undo', ['item' => $accessory->name]) }}" data-target="#dataConfirmModal">
+                    {{ trans('general.delete') }}
+                    </button>
                 </div>
             @else
-                <div class="row">
-                    <div class="text-center" style="padding-top:5px;">
-                        <span data-tooltip="true" title=" {{ trans('admin/licenses/general.delete_disabled') }}">
-                          <a href="#" class="btn btn-block btn-danger disabled">
-                          {{ trans('general.delete') }}
-                          </a>
-                        </span>
-                    </div>
+                <div class="text-center" style="padding-top:5px;">
+                    <span data-tooltip="true" title=" {{ trans('admin/accessories/general.delete_disabled') }}">
+                        <a href="#" class="btn btn-block btn-danger disabled">
+                        {{ trans('general.delete') }}
+                        </a>
+                    </span>
                 </div>
             @endif
         @endcan
     </div>
 </div>
-
-
-        <div class="tab-pane fade" id="history">
-            <div class="row">
-                <div class="col-md-12">
-                    <table
-                            class="table table-striped snipe-table"
-                            data-cookie-id-table="AccessoryHistoryTable"
-                            data-id-table="AccessoryHistoryTable"
-                            id="AccessoryHistoryTable"
-                            data-pagination="true"
-                            data-show-columns="true"
-                            data-side-pagination="server"
-                            data-show-refresh="true"
-                            data-show-export="true"
-                            data-sort-order="desc"
-                            data-export-options='{
-                       "fileName": "export-{{ str_slug($accessory->name) }}-history-{{ date('Y-m-d') }}",
-                       "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                     }'
-                            data-url="{{ route('api.activity.index', ['item_id' => $accessory->id, 'item_type' => 'accessory']) }}">
-
-                        <thead>
-                        <tr>
-                            <th class="col-sm-2" data-visible="false" data-sortable="true" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.record_created') }}</th>
-                            <th class="col-sm-2"data-visible="true" data-sortable="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
-                            <th class="col-sm-2" data-sortable="true"  data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
-                            <th class="col-sm-2" data-sortable="true"  data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
-                            <th class="col-sm-2" data-visible="true" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
-                            <th class="col-sm-2" data-sortable="true" data-visible="true" data-field="note">{{ trans('general.notes') }}</th>
-                            <th class="col-sm-2" data-visible="true" data-field="action_date" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
-                            @if  ($snipeSettings->require_accept_signature=='1')
-                                <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
-                            @endif
-                        </tr>
-                        </thead>
-                    </table>
-                </div> <!-- /.col-md-12-->
-            </div> <!-- /.row-->
-        </div><!--tab history-->
-    </div><!--col-md-3-->
-</div><!--row-->
 
 
 
@@ -448,5 +359,13 @@
 
 
 @section('moar_scripts')
+    <script>
+        $('#dataConfirmModal').on('show.bs.modal', function (event) {
+            var content = $(event.relatedTarget).data('content');
+            var title = $(event.relatedTarget).data('title');
+            $(this).find(".modal-body").text(content);
+            $(this).find(".modal-header").text(title);
+        });
+    </script>
 @include ('partials.bootstrap-table')
 @stop
