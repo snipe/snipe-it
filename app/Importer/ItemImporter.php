@@ -60,8 +60,8 @@ class ItemImporter extends Importer
             $this->item['department_id'] = $this->createOrFetchDepartment($item_department);
         }
 
-        $item_manager_first_name = $this->findCsvMatch($row, 'manage_first_name');
-        $item_manager_last_name = $this->findCsvMatch($row, 'manage_last_name');
+        $item_manager_first_name = $this->findCsvMatch($row, 'manager_first_name');
+        $item_manager_last_name = $this->findCsvMatch($row, 'manager_last_name');
 
         if ($this->shouldUpdateField($item_manager_first_name)) {
             $this->item['manager_id'] = $this->fetchManager($item_manager_first_name, $item_manager_last_name);
@@ -110,6 +110,10 @@ class ItemImporter extends Importer
         // We only support checkout-to-location for asset, so short circuit otherwise.
         if (get_class($this) != AssetImporter::class) {
             return $this->createOrFetchUser($row);
+        }
+
+        if (get_class($this) != LocationImporter::class) {
+            return;
         }
 
         if (strtolower($this->item['checkout_class']) === 'location' && $this->findCsvMatch($row, 'checkout_location') != null ) {
