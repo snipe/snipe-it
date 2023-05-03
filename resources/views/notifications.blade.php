@@ -115,6 +115,21 @@
 @endif
 
 
+@if ($messages = Session::get('bulk_errors'))
+<div class="col-md-12">
+    <div class="alert alert alert-danger fade in">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
+        <strong>{{ trans('general.notification_error') }} </strong>
+       The following fields had validation errors and were not edited: 
+            @foreach($messages as $message => $value) 
+                <br> {{ $value. }}
+            @endforeach
+    </div>
+</div>
+@endif
+
+
 @if ($message = Session::get('warning'))
 <div class="col-md-12">
     <div class="alert alert-warning fade in">

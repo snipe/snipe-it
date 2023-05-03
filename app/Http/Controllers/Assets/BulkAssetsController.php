@@ -223,7 +223,7 @@ class BulkAssetsController extends Controller
                             $asset->save();
                         }     
                         if (!$asset->save()) {
-                            $error_bag[] = $asset->getErrors();
+                            $error_bag[] = $asset->getErrors()->toArray();
                        } 
                    } 
                 } else {
@@ -231,14 +231,18 @@ class BulkAssetsController extends Controller
                 } 
             } // endforeach ($assets)
             if(!empty($error_bag)) {
-               $ids = array_values($assets); 
-            //   dd($ids); 
-            //    return redirect()->back()
-            //         ->withInput(["ids" => $ids, "bulk_actions" => "edit"])
-            //         ->with('error_messages', $error_bag);
-        //    return $error_bag; 
-
-                return redirect($bulk_back_url)->with('error_messages', $error_bag);
+            //    $errors = collect($error_bag)->unique(); 
+            //   foreach ($errors as $key => $value) {
+            //    ray($value->message); 
+            //   }
+            $errors = [];
+            foreach ($error_bag as $key => $value) {
+               foreach($value as $key => $value) {
+                     $errors[] = $value; 
+               }
+            } 
+               ray($errors); 
+                return redirect($bulk_back_url)->with('bulk_errors', $errors);
               }
             return redirect($bulk_back_url)->with('success', trans('admin/hardware/message.update.success'));
         }
