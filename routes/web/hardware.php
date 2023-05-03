@@ -146,6 +146,10 @@ Route::group(
             [AssetFilesController::class, 'show']
         )->name('show/assetfile');
 
+        Route::delete('{assetId}/showfile/{fileId}/delete',
+            [AssetFilesController::class, 'destroy']
+        )->name('delete/assetfile');
+
         Route::post(
             'bulkedit',
             [BulkAssetsController::class, 'edit']
