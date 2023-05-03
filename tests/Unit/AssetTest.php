@@ -5,10 +5,13 @@ use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Category;
 use Carbon\Carbon;
+use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class AssetTest extends TestCase
 {
+    use InteractsWithSettings;
+
     // public function testAutoIncrementMixed()
     // {
     //     $expected = '123411';

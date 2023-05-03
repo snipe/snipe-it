@@ -25,7 +25,7 @@ class Manufacturer extends SnipeModel
         'url'   => 'url|nullable',
         'support_email'   => 'email|nullable',
         'support_url'   => 'nullable|url',
-        'warranty_lookup_url' => 'starts_with:http://,https://,afp://,facetime://,file://,irc://','nullable'
+        'warranty_lookup_url' => 'nullable|starts_with:http://,https://,afp://,facetime://,file://,irc://'
     ];
 
     protected $hidden = ['user_id'];

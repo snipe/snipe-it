@@ -514,7 +514,7 @@
 
         if (value) {
             if ((value.indexOf("{") === -1) || (value.indexOf("}") ===-1)) {
-                return '<i class="fa fa-external-link"></i> <a href="' + value + '" target="_blank">' + value + '</a>';
+                return '<nobr><a href="' + value + '" target="_blank" title="External link to ' + value + '" data-tooltip="true" ><i class="fa fa-external-link"></i> ' + value + '</a></nobr>';
             }
             return value;
         }
