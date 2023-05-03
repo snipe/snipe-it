@@ -159,6 +159,9 @@ class AcceptanceController extends Controller
                 case 'App\Models\Asset':
                         $pdf_view_route ='account.accept.accept-asset-eula';
                         $asset_model = AssetModel::find($item->model_id);
+                        if (!$asset_model) {
+                            return redirect()->back()->with('error', trans('admin/models/message.does_not_exist'));
+                        }
                         $display_model = $asset_model->name;
                         $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
                 break;
