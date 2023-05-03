@@ -328,6 +328,7 @@
                     <a href="{{ route('clone/accessories', $accessory->id) }}" style="margin-right:5px; width:100%" class="btn btn-primary btn-sm">{{ trans('admin/accessories/general.clone') }}</a>
                 </div>
         @endcan
+
         @can('delete', $accessory)
             @if ($accessory->users_count == 0)
                 <div class="text-center" style="padding-top:5px;">
