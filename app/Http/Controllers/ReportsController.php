@@ -898,12 +898,8 @@ class ReportsController extends Controller
     public function getAssetMaintenancesReport()
     {
         $this->authorize('reports.view');
-        // Grab all the improvements
-        $assetMaintenances = AssetMaintenance::with('asset', 'supplier', 'asset.company')
-                                              ->orderBy('created_at', 'DESC')
-                                              ->get();
 
-        return view('reports/asset_maintenances', compact('assetMaintenances'));
+        return view('reports.asset_maintenances');
     }
 
     /**
