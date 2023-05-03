@@ -25,6 +25,7 @@ class CustomFieldFactory extends Factory
             'name' => $this->faker->catchPhrase(),
             'format' => '',
             'element' => 'text',
+            'auto_add_to_fieldsets' => '0',
         ];
     }
 

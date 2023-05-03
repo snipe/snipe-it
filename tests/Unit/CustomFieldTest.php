@@ -13,12 +13,6 @@ class CustomFieldTest extends TestCase
     public function testFormat()
     {
         $customfield = CustomField::factory()->make(['format' => 'IP']);
-        $values = [
-            'name' => $customfield->name,
-            'format' => $customfield->format,
-            'element' => $customfield->element,
-        ];
-
         $this->assertEquals($customfield->getAttributes()['format'], CustomField::PREDEFINED_FORMATS['IP']); //this seems undocumented...
         $this->assertEquals($customfield->format, 'IP');
     }
