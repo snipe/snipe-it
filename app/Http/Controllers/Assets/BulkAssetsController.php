@@ -253,12 +253,12 @@ class BulkAssetsController extends Controller
             if(!empty($error_bag)) {
                $ids = array_values($assets); 
             //   dd($ids); 
-               return redirect()->back()
-                    ->withInput(["ids" => $ids, "bulk_actions" => "edit"])
-                    ->withErrors($error_bag);
+            //    return redirect()->back()
+            //         ->withInput(["ids" => $ids, "bulk_actions" => "edit"])
+            //         ->with('error_messages', $error_bag);
         //    return $error_bag; 
 
-                // return redirect($bulk_back_url)->withErrors($error_bag);
+                return redirect($bulk_back_url)->with('error_messages', $error_bag);
               }
             return redirect($bulk_back_url)->with('success', trans('admin/hardware/message.update.success'));
         }
