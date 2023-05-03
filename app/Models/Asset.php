@@ -909,7 +909,13 @@ class Asset extends Depreciable
 
         return false;
     }
-
+    public function getComponentCost(){
+        $cost = 0;
+        foreach($this->components as $component) {
+            $cost += $component->pivot->assigned_qty*$component->purchase_cost;
+        }
+        return $cost;
+    }
 
     /**
     * -----------------------------------------------

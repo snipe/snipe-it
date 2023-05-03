@@ -530,6 +530,25 @@
                                             </div>
                                         </div>
                                     @endif
+                                    @if(($asset->components->count() > 0) && ($asset->purchase_cost))
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <strong>
+                                                    {{ trans('admin/hardware/table.components_cost') }}
+                                                </strong>
+                                            </div>
+                                            <div class="col-md-6">
+                                                @if (($asset->id) && ($asset->location))
+                                                    {{ $asset->location->currency }}
+                                                @elseif (($asset->id) && ($asset->location))
+                                                    {{ $asset->location->currency }}
+                                                @else
+                                                    {{ $snipeSettings->default_currency }}
+                                                @endif
+                                                {{Helper::formatCurrencyOutput($asset->getComponentCost())}}
+                                            </div>
+                                        </div>
+                                    @endif
                                     @if (($asset->model) && ($asset->depreciation) && ($asset->purchase_date))
                                         <div class="row">
                                             <div class="col-md-2">
