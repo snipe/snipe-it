@@ -60,7 +60,7 @@ class CustomFieldRequest extends FormRequest
     public function messages()
     {
         return [
-            'associate_fieldsets.*.exists' => 'Invalid fieldset',
+            'associate_fieldsets.*.exists' => trans('admin/custom_fields/message/does_not_exist'),
         ];
     }
 }
