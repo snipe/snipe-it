@@ -248,10 +248,14 @@ class AcceptanceController extends Controller
             // This is the most horriblest
             switch($acceptance->checkoutable_type){
                 case 'App\Models\Asset':
+                    $asset_model = AssetModel::find($item->model_id);
+                    $display_model = $asset_model->name;
                     $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
                     break;
 
                 case 'App\Models\Accessory':
+                    $accessory = Accessory::find($item->id);
+                    $display_model = $accessory->name;
                     $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
                     break;
 
@@ -264,6 +268,8 @@ class AcceptanceController extends Controller
                     break;
 
                 case 'App\Models\Consumable':
+                    $consumable = Consumable::find($item->id);
+                    $display_model = $consumable->name;
                     $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
                     break;
             }
