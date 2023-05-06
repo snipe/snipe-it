@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Transformers\CustomFieldsetsTransformer;
 use App\Http\Transformers\CustomFieldsTransformer;
 use App\Models\CustomFieldset;
+use App\Models\CustomField;
 use Illuminate\Http\Request;
 use Redirect;
 use View;
