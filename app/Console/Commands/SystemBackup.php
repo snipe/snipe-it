@@ -11,7 +11,7 @@ class SystemBackup extends Command
      *
      * @var string
      */
-    protected $name = 'snipeit:backup';
+    protected $signature = 'snipeit:backup {--filename=}';
 
     /**
      * The console command description.
@@ -37,7 +37,11 @@ class SystemBackup extends Command
      */
     public function handle()
     {
-        //
-        $this->call('backup:run');
+        if ($this->option('filename')) {
+            $this->call('backup:run', ['--filename' => $this->option('filename')]);
+        } else {
+            $this->call('backup:run');
+        }
+
     }
 }
