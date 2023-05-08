@@ -441,7 +441,7 @@
                           <div class="form-group{{ $errors->has('state') ? ' has-error' : '' }}">
                               <label class="col-md-3 control-label" for="state">{{ trans('general.state') }}</label>
                               <div class="col-md-6">
-                                  <input class="form-control" type="text" name="state" id="state" value="{{ old('state', $user->state) }}" maxlength="3" />
+                                  <input class="form-control" type="text" name="state" id="state" value="{{ old('state', $user->state) }}" maxlength="191" />
                                   {!! $errors->first('state', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                               </div>
                           </div>
