@@ -92,9 +92,10 @@
                                     <p class="help-block">
                                         <a href="{{ route('saml.metadata') }}" target="_blank" class="btn btn-default" style="margin-right: 5px;">{{ trans('admin/settings/general.saml_download') }}</a>
                                     </p>
+                                    </div>
                                 @endif
                                 {!! $errors->first('saml_enabled', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                            </div>
+
                         </div>
 
 
