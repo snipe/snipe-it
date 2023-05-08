@@ -573,9 +573,6 @@ class AssetsController extends Controller
         // Update custom fields in the database.
         // Validation for these fields is handled through the AssetRequest form request
         $model = AssetModel::find($request->get('model_id'));
-        if (!$model) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/models/message.does_not_exist')), 200);
-        }
 
         if (($model) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {

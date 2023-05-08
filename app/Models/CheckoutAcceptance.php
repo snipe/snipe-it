@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
 class CheckoutAcceptance extends Model
 {
-    use SoftDeletes, Notifiable;
+    use HasFactory, SoftDeletes, Notifiable;
 
     protected $casts = [
         'accepted_at' => 'datetime',

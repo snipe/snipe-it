@@ -67,7 +67,6 @@ class Importer extends Component
         'location' => 'Location',
         'maintained' => 'Maintained',
         'manufacturer' => 'Manufacturer',
-        'notes' => 'Notes',
         'order_number' => 'Order Number',
         'purchase_cost' => 'Purchase Cost',
         'purchase_date' => 'Purchase Date',
@@ -81,11 +80,14 @@ class Importer extends Component
 
     static $accessories = [
         'model_number' => 'Model Number',
+        'notes' => 'Notes',
     ];
 
     static $assets = [
         'asset_tag' => 'Asset Tag',
         'asset_model' => 'Model Name',
+        'asset_notes' => 'Asset Notes',
+        'model_notes' => 'Model Notes',
         'byod' => 'BYOD',
         'checkout_class' => 'Checkout Type',
         'checkout_location' => 'Checkout Location',
@@ -99,6 +101,7 @@ class Importer extends Component
     static $consumables = [
         'item_no' => "Item Number",
         'model_number' => "Model Number",
+        'notes' => 'Notes',
         'min_amt' => "Minimum Quantity",
     ];
 
@@ -111,12 +114,14 @@ class Importer extends Component
         'purchase_order' => 'Purchase Order',
         'reassignable' => 'Reassignable',
         'seats' => 'Seats',
+        'notes' => 'Notes',
     ];
 
     static $users = [
         'employee_num' => 'Employee Number',
         'first_name' => 'First Name',
         'last_name' => 'Last Name',
+        'notes' => 'Notes',
         'jobtitle' => 'Job Title',
         'phone_number' => 'Phone Number',
         'manager_first_name' => 'Manager First Name',
@@ -144,6 +149,7 @@ class Importer extends Component
         'manager_username' => 'Manager Username',
         'manager' => 'Manager',
         'parent_location' => 'Parent Location',
+        'notes' => 'Notes',
     ];
 
     //array of "real fieldnames" to a list of aliases for that field
