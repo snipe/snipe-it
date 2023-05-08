@@ -38,7 +38,14 @@ class SystemBackup extends Command
     public function handle()
     {
         if ($this->option('filename')) {
-            $this->call('backup:run', ['--filename' => $this->option('filename')]);
+            $filename = $this->option('filename');
+
+            // Make sure the filename ends in .zip
+            if (!ends_with($filename, '.zip')) {
+                $filename = $filename.'.zip';
+            }
+
+            $this->call('backup:run', ['--filename' => $filename]);
         } else {
             $this->call('backup:run');
         }
