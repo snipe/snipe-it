@@ -21,8 +21,10 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
         overflow: hidden;
         border: 1px solid black;
         text-align: center;
-        width: {{ $settings->labels_width }}in;
-        height: {{ $settings->labels_height }}in;
+        /* width: {{ $settings->labels_width }}in;
+        height: {{ $settings->labels_height }}in; */
+        width: 300px;
+        height: 300px;
         margin-right: {{ $settings->labels_display_sgutter }}in; /* the gutter */
         margin-bottom: {{ $settings->labels_display_bgutter }}in;
 
@@ -33,6 +35,7 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
         font-size: {{$settings->labels_fontsize}}pt;
         overflow: hidden;
         display: block;
+        margin-top: 9px;
     }
 
     body {
@@ -59,8 +62,8 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
     div.qr_img {
         /* width: {{ $qr_size }}in;
         height: {{ $qr_size }}in; */
-        width: 40%;
-        height: 40%;
+        width: 120px;
+        height: 120px;
 
         /* float: left;
         display: inline-flex; */
@@ -68,11 +71,11 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
     }
     img.qr_img {
 
-        width: 120.79%;
-        height: 120.79%;
+        width: 120px;
+        height: 120px;
         /* margin-top: -6.9%;
         margin-left: -6.9%; */
-        margin-left: 63%;
+        margin-left: 74%;
         padding-bottom: 5px;
     }
     /* img.barcode {
@@ -83,11 +86,11 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
     div.label-logo {
        text-align: center;
        margin-top: 5px;
-       margin-bottom: 10px
+       margin-bottom: 1px;
     }
     img.label-logo {
         height: 40%;
-        width: 40%;
+        width: 120px;
     }
     /* .qr_text {
         width: {{ $settings->labels_width }}in;
@@ -161,37 +164,11 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
         <div class="row">
             <div class="col-12">
                 <div class="text">
-                    @if ($settings->qr_text!='')
+            @if (($asset->asset_tag!='1'))
                 <div class="pull-left">
-                    <strong>{{ $settings->qr_text }}</strong>
-                    <br>
+                    Host Name: {{ $asset->asset_tag }}
                 </div>
             @endif
-            @if (($settings->labels_display_company_name=='1') && ($asset->company))
-                <div class="pull-left">
-                    C: {{ $asset->company->name }}
-                </div>
-            @endif
-            @if (($settings->labels_display_name=='1') && ($asset->name!=''))
-                <div class="pull-left">
-                    N: {{ $asset->name }}
-                </div>
-            @endif
-            @if (($settings->labels_display_tag=='1') && ($asset->asset_tag!=''))
-                <div class="pull-left">
-                    T: {{ $asset->asset_tag }}
-                </div>
-            @endif
-            @if (($settings->labels_display_serial=='1') && ($asset->serial!=''))
-                <div class="pull-left">
-                    S: {{ $asset->serial }}
-                </div>
-            @endif
-            @if (($settings->labels_display_model=='1') && ($asset->model->name!=''))
-                <div class="pull-left">
-                    M: {{ $asset->model->name }} {{ $asset->model->model_number }}
-                </div>
-            @endif    
                 </div>
             </div>
         </div>
