@@ -131,6 +131,8 @@ return [
     'history'  			    => 'History',
     'history_for'  			=> 'History for',
     'id'  					=> 'ID',
+    'sno'                   => 'S NO',
+    'sno'                   => 'S NO',
     'image'                 => 'Image',
     'image_delete'         	=> 'Delete Image',
     'include_deleted'       => 'Include Deleted Assets',

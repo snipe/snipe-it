@@ -131,6 +131,7 @@ return [
     'history'  			    => 'Ιστορία',
     'history_for'  			=> 'Ιστορικό για',
     'id'  					=> 'ID',
+    'sno'                   => 'S NO',
     'image'                 => 'Image',
     'image_delete'         	=> 'Διαγραφή εικόνας',
     'include_deleted'       => 'Include Deleted Assets',

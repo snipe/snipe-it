@@ -131,6 +131,7 @@ return [
     'history'  			    => 'Histórico',
     'history_for'  			=> 'Histórico de',
     'id'  					=> 'ID',
+    'sno'                   => 'S NO',
     'image'                 => 'Imagem',
     'image_delete'         	=> 'Excluir Imagem',
     'include_deleted'       => 'Include Deleted Assets',

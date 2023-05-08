@@ -131,6 +131,7 @@ return [
     'history'  			    => 'Geskiedenis',
     'history_for'  			=> 'Geskiedenis vir',
     'id'  					=> 'ID',
+    'sno'                   => 'S NO',
     'image'                 => 'Image',
     'image_delete'         	=> 'Vee prent uit',
     'include_deleted'       => 'Include Deleted Assets',

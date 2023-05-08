@@ -131,6 +131,7 @@ return [
     'history'  			    => 'Történelem',
     'history_for'  			=> 'Előzmények:',
     'id'  					=> 'ID',
+    'sno'                   => 'S NO',
     'image'                 => 'Kép',
     'image_delete'         	=> 'Kép törlése',
     'include_deleted'       => 'Törölt eszközök bevonása',

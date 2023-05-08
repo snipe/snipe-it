@@ -131,6 +131,7 @@ return [
     'history'  			    => 'Ajalugu',
     'history_for'  			=> 'Ajalugu jaoks',
     'id'  					=> 'ID',
+    'sno'                   => 'S NO',
     'image'                 => 'Pilt',
     'image_delete'         	=> 'Kustuta pilt',
     'include_deleted'       => 'Include Deleted Assets',

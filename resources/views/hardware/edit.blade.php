@@ -12,8 +12,26 @@
 {{-- Page content --}}
 @section('inputFields')
     
+    @include ('partials.forms.edit.model-select', ['translated_name' => trans('admin/hardware/form.model'), 'fieldname' => 'model_id', 'field_req' => true])
+    <div id='custom_fields_content'>
+        <!-- Custom Fields -->
+        @if ($item->model && $item->model->fieldset)
+        <?php $model = $item->model; ?>
+        @endif
+        @if (Request::old('model_id'))
+            @php
+                $model = \App\Models\AssetModel::find(Request::old('model_id'));
+            @endphp
+        @elseif (isset($selected_model))
+            @php
+                $model = $selected_model;
+            @endphp
+        @endif
+        @if (isset($model) && $model)
+        @include("models/custom_fields_form",["model" => $model])
+        @endif
+    </div>
     @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
-
 
   <!-- Asset Tag -->
   <div class="form-group {{ $errors->has('asset_tag') ? ' has-error' : '' }}">
@@ -49,7 +67,7 @@
     <div class="input_fields_wrap">
     </div>
 
-    @include ('partials.forms.edit.model-select', ['translated_name' => trans('admin/hardware/form.model'), 'fieldname' => 'model_id', 'field_req' => true])
+    
 
 
     @include ('partials.forms.edit.status', [ 'required' => 'true'])
@@ -84,25 +102,6 @@
     @endif
 
     @include ('partials.forms.edit.image-upload')
-
-    <div id='custom_fields_content'>
-        <!-- Custom Fields -->
-        @if ($item->model && $item->model->fieldset)
-        <?php $model = $item->model; ?>
-        @endif
-        @if (Request::old('model_id'))
-            @php
-                $model = \App\Models\AssetModel::find(Request::old('model_id'));
-            @endphp
-        @elseif (isset($selected_model))
-            @php
-                $model = $selected_model;
-            @endphp
-        @endif
-        @if (isset($model) && $model)
-        @include("models/custom_fields_form",["model" => $model])
-        @endif
-    </div>
 
     <div class="form-group">
     <label class="col-md-3 control-label"></label>

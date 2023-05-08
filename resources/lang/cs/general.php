@@ -131,6 +131,7 @@ return [
     'history'  			    => 'Historie',
     'history_for'  			=> 'Historie uživatele',
     'id'  					=> 'ID',
+    'sno'                   => 'S NO',
     'image'                 => 'Obrázek',
     'image_delete'         	=> 'Smazat obrázek',
     'include_deleted'       => 'Include Deleted Assets',
