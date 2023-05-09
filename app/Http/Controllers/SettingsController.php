@@ -1367,6 +1367,81 @@ class SettingsController extends Controller
             ->with('error', trans('general.purge_not_allowed'));
     }
 
+
+    /**
+     * Return a form to allow a superadmin to delete data from selected tables
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
+     * @since [v6.1.1]
+     *
+     * @return View
+     */
+    public function getReset()
+    {
+
+        \Log::warning('User '.Auth::user()->username.' (ID'.Auth::user()->id.') is attempting a TABLE TRUNCATE');
+
+        if (config('app.allow_table_truncate')=='true') {
+
+            // List all the tables in the database so we don't have to worry about missing some as the app grows
+            $tables = \DB::connection()->getDoctrineSchemaManager()->listTableNames();
+
+            // We will ONLY allow these tables to be touched - we cannot give users the ability to clear join tables.
+            // We'll decide what join tables to truncate based on their selections
+            $only_tables = [
+                'accessories',
+                'assets',
+                'users',
+                'kits',
+                'components',
+                'consumables',
+                'categories',
+                'custom_fields',
+                'custom_fieldsets',
+                'licenses',
+                'manufacturers',
+                'models',
+                'locations',
+                'depreciations',
+                'permission_groups',
+                'status_labels',
+                'suppliers',
+                'companies',
+                'checkout_requests',
+                'departments',
+            ];
+
+            return view('settings.reset')
+                ->with('only_tables', $only_tables)
+                ->with('tables', $tables);
+        }
+
+        return redirect()->route('settings.index')->with('error', trans('general.reset_not_allowed'));
+
+    }
+
+
+    /**
+     * Return a form to allow a superadmin to delete data from selected tables
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
+     * @since [v6.1.1]
+     *
+     * @return View
+     */
+    public function postReset()
+    {
+
+        \Log::warning('User '.Auth::user()->username.' (ID'.Auth::user()->id.') is committing a TABLE TRUNCATE');
+
+        if (config('app.allow_table_truncate')=='true') {
+            return view('settings.index');
+        }
+
+        return redirect()->route('settings.index')->with('error', trans('general.reset_not_allowed'));
+
+    }
+
     /**
      * Returns a page with the API token generation interface.
      *
