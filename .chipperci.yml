@@ -8,6 +8,12 @@ services:
   - mysql: 5.7
   - dusk:
 
+on:
+  push:
+    branches:
+      - master
+      - develop
+
 pipeline:
   - name: Setup
     cmd: |
