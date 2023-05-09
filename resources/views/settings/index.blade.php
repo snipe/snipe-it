@@ -316,6 +316,7 @@
 
 
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
+
       <div class="box box-danger">
         <div class="box-body text-center">
           <h5>
@@ -330,6 +331,24 @@
         </div>
       </div>
     </div>
+
+      <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
+
+        <div class="box box-danger">
+          <div class="box-body text-center">
+            <h5>
+              <a href="{{ route('settings.reset.index') }}" class="link-danger">
+                <i class="fa-solid fa-house-fire fa-4x" aria-hidden="true"></i>
+                <br><br>
+                <span class="name">{{ trans('admin/settings/general.reset') }}</span>
+                <span class="keywords" aria-hidden="true" style="display:none">{{ trans('admin/settings/general.reset_keywords') }}</span>
+              </a>
+            </h5>
+            <p class="help-block">{{ trans('admin/settings/general.reset_help') }}</p>
+          </div>
+        </div>
+      </div>
+
   </div>
 
 
