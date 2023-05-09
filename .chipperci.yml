@@ -6,6 +6,7 @@ environment:
 
 services:
   - mysql: 5.7
+  - dusk:
 
 pipeline:
   - name: Setup
@@ -34,7 +35,7 @@ pipeline:
     cmd: |
       # php artisan test --testsuite Feature
 
-  - name: Dusk
+  - name: Browser Tests
     cmd: |
       cp -v .env.dusk.example .env.dusk.ci
       sed -i "s@APP_ENV=.*@APP_ENV=ci@g" .env.dusk.ci
