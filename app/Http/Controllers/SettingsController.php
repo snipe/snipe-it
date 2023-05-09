@@ -1435,6 +1435,7 @@ class SettingsController extends Controller
         \Log::warning('User '.Auth::user()->username.' (ID'.Auth::user()->id.') is committing a TABLE TRUNCATE');
 
         if (config('app.allow_table_truncate')=='true') {
+            Artisan::call('snipeit:backup', ['--filename' => 'reset-backup-'.date('Y-m-d-H:i:s')]);
             return view('settings.index');
         }
 
