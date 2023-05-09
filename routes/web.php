@@ -197,6 +197,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
 
     Route::get('login-attempts', [SettingsController::class, 'getLoginAttempts'])->name('settings.logins.index');
 
+    Route::get('reset', [SettingsController::class, 'getReset'])->name('settings.reset.index');
+    Route::post('reset', [SettingsController::class, 'postReset'])->name('settings.reset.save');
+
     // Backups
     Route::group(['prefix' => 'backups', 'middleware' => 'auth'], function () {
         Route::get('download/{filename}',
