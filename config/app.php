@@ -406,18 +406,30 @@ return [
     'allow_backup_delete' => env('ALLOW_BACKUP_DELETE', false),
 
 
-  /*
-  |--------------------------------------------------------------------------
-  | Escape Excel formulas in CSV exports
-  |--------------------------------------------------------------------------
-  |
-  | This determins whether or not we should escape Excel formulas in CSV exports.
-  | This can be UNSAFE in untrusted environments, and therefore defaults to true
-  | so that Excel forumals WILL be escaped in CSV exports, however if your workflow
-  | is designed around using formulas in your fields, you
-  | you can set CSV_ESCAPE_FORMULAS to 'false' in your .env.
-  |
-  */
+    /*
+    |--------------------------------------------------------------------------
+    | Allow Table Resets
+    |--------------------------------------------------------------------------
+    |
+    | This sets whether or not to allow superadmins to hard-delete table contents
+    |
+    */
+
+    'allow_table_truncate' => env('ALLOW_TABLE_TRUNCATE', false),
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Escape Excel formulas in CSV exports
+    |--------------------------------------------------------------------------
+    |
+    | This determins whether or not we should escape Excel formulas in CSV exports.
+    | This can be UNSAFE in untrusted environments, and therefore defaults to true
+    | so that Excel forumals WILL be escaped in CSV exports, however if your workflow
+    | is designed around using formulas in your fields, you
+    | you can set CSV_ESCAPE_FORMULAS to 'false' in your .env.
+    |
+    */
 
     'escape_formulas' => env('CSV_ESCAPE_FORMULAS', true),
 
