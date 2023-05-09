@@ -330,4 +330,8 @@ return [
     'setup_migration_create_user' => 'Next: Create User',
     'ldap_settings_link' => 'LDAP Settings Page',
     'slack_test' => 'Test <i class="fab fa-slack"></i> Integration',
+    'reset' => 'Reset Data',
+    'reset_keywords' => 'reset, database, clear',
+    'reset_help' => 'Clear delete data from selected tables',
+    'reset_not_allowed' => 'Resetting data is not permitted on t',
 ];
