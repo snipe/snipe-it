@@ -16,6 +16,8 @@ use App\Http\Requests\AssetCheckoutRequest;
 use App\Models\CustomField;
 use Illuminate\Support\Collection;
 
+use function Amp\Promise\wait;
+
 class BulkAssetsController extends Controller
 {
     use CheckInOutRequest;
@@ -32,6 +34,7 @@ class BulkAssetsController extends Controller
     public function edit(Request $request)
     {
         // dd($request->all());
+        // dd(Session::get('ids')); 
         
         $this->authorize('update', Asset::class);
         
@@ -52,9 +55,9 @@ class BulkAssetsController extends Controller
 
         $models = $asset_custom_field->unique('model_id');  
         $modelNames = [];
-    foreach($models as $model) {
-        $modelNames[] = $model->model->name;
-    } 
+        foreach($models as $model) {
+            $modelNames[] = $model->model->name;
+        } 
 
         // $custom_fields = new Collection(); 
         // foreach ($models as $asset_key => $asset) {
@@ -112,11 +115,13 @@ class BulkAssetsController extends Controller
 
 
       $custom_field_columns = CustomField::all()->pluck('db_column')->toArray(); 
-        
-        if (! $request->filled('ids') || count($request->input('ids')) <= 0) {
+     
+        if(Session::exists('ids')) {
+            $assets = Session::get('ids'); 
+        } elseif (! $request->filled('ids') || count($request->input('ids')) <= 0) {
             return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.update.no_assets_selected'));
         }
-
+         
         $assets = array_keys($request->input('ids'));
         
        if ($request->anyFilled($custom_field_columns)) {
@@ -211,38 +216,45 @@ class BulkAssetsController extends Controller
                 if($custom_fields_present) { 
                     $asset = Asset::find($assetId); 
                     $assetCustomFields = $asset->model()->first()->fieldset; 
-                    foreach ($assetCustomFields->fields as $field) { 
-                       if (array_key_exists($field->db_column, $this->update_array)) {
-                            $asset->{$field->db_column} = $this->update_array[$field->db_column]; 
-                            $asset->save();    
-                            continue; 
-                       } else { 
-                            $array = $this->update_array; 
-                            array_except($array, $field->db_column); 
-                            $asset->update($array); 
-                            $asset->save();
-                        }     
-                        if (!$asset->save()) {
-                            $error_bag[] = $asset->getErrors()->toArray();
-                       } 
-                   } 
+                   if($assetCustomFields?->fields) {
+                        foreach ($assetCustomFields?->fields as $field) { 
+                        if (array_key_exists($field->db_column, $this->update_array)) {
+                                $asset->{$field->db_column} = $this->update_array[$field->db_column]; 
+                                $asset->save();    
+                                continue; 
+                        } else { 
+                                $array = $this->update_array; 
+                                array_except($array, $field->db_column); 
+                                $asset->update($array); 
+                                //call update on parent model 
+                                $asset->save();
+                            }     
+                            if (!$asset->save()) {
+                                $error_bag[] = $asset->getErrors();
+                        } 
+                    } 
+                }
                 } else {
                     Asset::find($assetId)->update($this->update_array);
                 } 
             } // endforeach ($assets)
+            ray($error_bag); 
             if(!empty($error_bag)) {
             //    $errors = collect($error_bag)->unique(); 
             //   foreach ($errors as $key => $value) {
             //    ray($value->message); 
             //   }
-            $errors = [];
-            foreach ($error_bag as $key => $value) {
-               foreach($value as $key => $value) {
-                     $errors[] = $value; 
-               }
-            } 
-               ray($errors); 
-                return redirect($bulk_back_url)->with('bulk_errors', $errors);
+                $errors = [];
+                foreach ($error_bag as $key => $value) {
+                    foreach($value as $key => $value) {
+                            $errors[] = $value; 
+                    }
+                } 
+                ray($error_bag); 
+                Session::save('ids', $assets);
+                 
+                // return redirect()->route('hardware/bulkedit'); 
+                return redirect()->back()->with('bulk_errors', $errors);
               }
             return redirect($bulk_back_url)->with('success', trans('admin/hardware/message.update.success'));
         }

@@ -115,7 +115,7 @@
 @endif
 
 
-@if ($messages = Session::get('bulk_errors'))
+{{-- @if ($messages = Session::get('bulk_errors'))
 <div class="col-md-12">
     <div class="alert alert alert-danger fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -127,7 +127,7 @@
             @endforeach
     </div>
 </div>
-@endif
+@endif --}}
 
 
 @if ($message = Session::get('warning'))
