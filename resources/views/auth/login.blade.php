@@ -73,32 +73,29 @@
                         </div>
                         <div class="box-footer">
                             @if (config('app.require_saml'))
-                                <a class="btn btn-lg btn-primary btn-block" href="{{ route('saml.login')  }}">{{ trans('auth/general.saml_login')  }}</a>
+                                <a class="btn btn-primary btn-block" href="{{ route('saml.login')  }}">{{ trans('auth/general.saml_login')  }}</a>
                             @else
-                                <button class="btn btn-lg btn-primary btn-block">{{ trans('auth/general.login')  }}</button>
+                                <button class="btn btn-primary btn-block">{{ trans('auth/general.login')  }}</button>
                             @endif
 
-                            @if (($snipeSettings->google_login=='1') && ($snipeSettings->google_client_id!='') && ($snipeSettings->google_client_secret!=''))
-
-                            <br>
-                            <center>Or</center>
-                            <br>
-                                <a class="btn btn-lg btn-primary btn-block" href="{{ route('google.redirect')  }}">
-                                    <i class="fa-brands fa-google"></i>
-                                    {{ trans('auth/general.google_login') }}
-                                </a>
-                            @endif
                         </div>
-                        <div class="text-right col-md-12 col-sm-12 col-xs-12" style="padding-top: 10px;">
+                        <div class="text-right col-md-12 col-sm-12 col-xs-12" style="padding-top: 10px; padding-bottom: 10px">
                             @if ($snipeSettings->custom_forgot_pass_url)
                                 <a href="{{ $snipeSettings->custom_forgot_pass_url  }}" rel="noopener">{{ trans('auth/general.forgot_password')  }}</a>
                             @elseif (!config('app.require_saml'))
                                 <a href="{{ route('password.request')  }}">{{ trans('auth/general.forgot_password')  }}</a>
                             @endif
 
-
                         </div>
+
                     </div> <!-- end login box -->
+
+                    @if (($snipeSettings->google_login=='1') && ($snipeSettings->google_client_id!='') && ($snipeSettings->google_client_secret!=''))
+
+                        <a href="{{ route('google.redirect')  }}" class="btn btn-block btn-social btn-google">
+                            <i class="fa-brands fa-google"></i> {{ trans('auth/general.google_login') }}
+                        </a>
+                    @endif
 
                 </div> <!-- col-md-4 -->
 
