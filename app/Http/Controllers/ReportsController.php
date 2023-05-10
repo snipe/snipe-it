@@ -595,7 +595,7 @@ class ReportsController extends Controller
                 'model.category', 'model.manufacturer', 'supplier');
             
             if ($request->filled('by_location_id')) {
-                $assets->where('assets.location_id', $request->input('by_location_id'));
+                $assets->whereIn('assets.location_id', $request->input('by_location_id'));
             }
 
             if ($request->filled('by_rtd_location_id')) {
