@@ -78,8 +78,11 @@
                                 <button class="btn btn-lg btn-primary btn-block">{{ trans('auth/general.login')  }}</button>
                             @endif
 
-                            @if ((config('app.google_login')) && (config('services.google.client_id')) && (config('services.google.client_secret')) && (config('services.google.redirect')))
+                            @if (($snipeSettings->google_login=='1') && ($snipeSettings->google_client_id!='') && ($snipeSettings->google_client_secret!='') && ($snipeSettings->google_redirect!='')))
 
+                            <br>
+                            Or
+                            <br>
                                 <a class="btn btn-lg btn-primary btn-block" href="{{ route('google.redirect')  }}">
                                     <i class="fa-brands fa-google"></i>
                                     {{ trans('auth/general.google_login') }}
