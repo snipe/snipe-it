@@ -192,6 +192,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
 
     Route::get('oauth', [SettingsController::class, 'api'])->name('settings.oauth.index');
 
+    Route::get('google', [SettingsController::class, 'getGoogleLoginSettings'])->name('settings.google.index');
+    Route::post('google', [SettingsController::class, 'postGoogleLoginSettings'])->name('settings.google.save');
+
     Route::get('purge', [SettingsController::class, 'getPurge'])->name('settings.purge.index');
     Route::post('purge', [SettingsController::class, 'postPurge'])->name('settings.purge.save');
 
