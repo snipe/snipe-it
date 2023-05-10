@@ -51,10 +51,7 @@ class GoogleAuthController extends Controller
 
 
         if ($user) {
-            $user->update([
-                'avatar'   => $socialUser->avatar,
-            ]);
-
+            
             Auth::login($user, true);
             return redirect()->route('home');
         }
