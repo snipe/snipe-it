@@ -269,7 +269,7 @@
 
       @if ($accessory->category)
           <div class="row">
-              <div class="col-md-3" style="padding-bottom: 15px;">
+              <div class="col-md-3" style="padding-bottom: 10px;">
                   <strong>{{ trans('general.category')}}</strong>
               </div>
               <div class="col-md-9">
@@ -280,8 +280,8 @@
 
 
       @if ($accessory->notes)
-              <div class="row">
-          <div class="col-md-3">
+        <div class="row">
+          <div class="col-md-3" style="padding-bottom: 10px;">
               <strong>
                   {{ trans('general.notes') }}
               </strong>
@@ -289,13 +289,13 @@
           <div class="col-md-9">
               {!! nl2br(e($accessory->notes)) !!}
           </div>
-              </div>
+       </div>
 
      @endif
 
 
       <div class="row">
-          <div class="col-md-3" style="padding-bottom: 15px;">
+          <div class="col-md-3" style="padding-bottom: 10px;">
               <strong>{{ trans('admin/accessories/general.remaining') }}</strong>
           </div>
           <div class="col-md-9">
@@ -304,7 +304,7 @@
       </div>
 
       <div class="row">
-          <div class="col-md-3" style="padding-bottom: 15px;">
+          <div class="col-md-3" style="padding-bottom: 10px;">
               <strong>{{ trans('general.checked_out') }}</strong>
           </div>
           <div class="col-md-9">
