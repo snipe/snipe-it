@@ -13,7 +13,8 @@ use App\Models\Setting;
 class GoogleAuthController extends Controller
 {
     /**
-     * We need this constructor so that we override the socialite expected config variables
+     * We need this constructor so that we override the socialite expected config variables,
+     * since we want to allow this to be changed via database fields
      */
     public function __construct()
     {
