@@ -86,6 +86,9 @@ class Setting extends Model
         'webhook_endpoint',
         'webhook_channel',
         'webhook_botname',
+        'google_login',
+        'google_client_id',
+        'google_client_secret',
     ];
 
     /**
