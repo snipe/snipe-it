@@ -52,7 +52,7 @@ class GoogleAuthController extends Controller
 
 
         if ($user) {
-            
+
             $user->update([
                 'avatar'   => $socialUser->avatar,
             ]);

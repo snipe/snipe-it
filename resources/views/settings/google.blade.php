@@ -70,7 +70,13 @@
                                 {{ Form::label('google_client_secret', 'Client Secret') }}
                             </div>
                             <div class="col-md-8">
-                                {{ Form::text('google_client_secret', old('google_client_secret', $setting->google_client_secret), ['class' => 'form-control','placeholder' => trans('general.example') .'XXXXXXXXXXXX', (config('app.lock_passwords')===true) ? 'disabled': '']) }}
+
+                                @if (config('app.lock_passwords')===true)
+                                    {{ Form::text('google_client_secret', 'XXXXXXXXXXXXXXXXXXXXXXX', ['class' => 'form-control', 'disabled']) }}
+                                @else
+                                    {{ Form::text('google_client_secret', old('google_client_secret', $setting->google_client_secret), ['class' => 'form-control','placeholder' => trans('general.example') .'XXXXXXXXXXXX']) }}
+                                @endif
+
                                 {!! $errors->first('google_client_secret', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @if (config('app.lock_passwords')===true)
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
