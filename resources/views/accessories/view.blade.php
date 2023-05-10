@@ -257,10 +257,10 @@
 
       @if ($accessory->company)
           <div class="row">
-              <div class="col-md-4" style="padding-bottom: 15px;">
+              <div class="col-md-3" style="padding-bottom: 15px;">
                   <strong> {{ trans('general.company')}}</strong>
               </div>
-              <div class="col-md-8">
+              <div class="col-md-9">
                   <a href="{{ route('companies.show', $accessory->company->id) }}">{{ $accessory->company->name }} </a>
               </div>
           </div>
@@ -269,10 +269,10 @@
 
       @if ($accessory->category)
           <div class="row">
-              <div class="col-md-4" style="padding-bottom: 15px;">
+              <div class="col-md-3" style="padding-bottom: 10px;">
                   <strong>{{ trans('general.category')}}</strong>
               </div>
-              <div class="col-md-8">
+              <div class="col-md-9">
                   <a href="{{ route('categories.show', $accessory->category->id) }}">{{ $accessory->category->name }} </a>
               </div>
           </div>
@@ -280,33 +280,34 @@
 
 
       @if ($accessory->notes)
-
-          <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-3" style="padding-bottom: 10px;">
               <strong>
                   {{ trans('general.notes') }}
               </strong>
           </div>
-          <div class="col-md-12">
+          <div class="col-md-9">
               {!! nl2br(e($accessory->notes)) !!}
           </div>
+       </div>
 
      @endif
 
 
       <div class="row">
-          <div class="col-md-4" style="padding-bottom: 15px;">
+          <div class="col-md-3" style="padding-bottom: 10px;">
               <strong>{{ trans('admin/accessories/general.remaining') }}</strong>
           </div>
-          <div class="col-md-8">
+          <div class="col-md-9">
               {{ $accessory->numRemaining() }}
           </div>
       </div>
 
       <div class="row">
-          <div class="col-md-4" style="padding-bottom: 15px;">
+          <div class="col-md-3" style="padding-bottom: 10px;">
               <strong>{{ trans('general.checked_out') }}</strong>
           </div>
-          <div class="col-md-8">
+          <div class="col-md-9">
               {{ $accessory->users_count }}
           </div>
       </div>
