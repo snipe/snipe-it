@@ -53,6 +53,10 @@ class GoogleAuthController extends Controller
 
         if ($user) {
             
+            $user->update([
+                'avatar'   => $socialUser->avatar,
+            ]);
+
             Auth::login($user, true);
             return redirect()->route('home');
         }
@@ -60,7 +64,7 @@ class GoogleAuthController extends Controller
         return redirect()->route('login')
             ->withErrors(
                 [
-                    'email' => [
+                    'username' => [
                         trans('admin/users/message.user_not_found'),
                     ],
                 ]
