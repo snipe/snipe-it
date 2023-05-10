@@ -40,7 +40,7 @@ class GoogleAuthController extends Controller
                 ->withErrors(
                     [
                         'username' => [
-                            __('Google Login failed, please try again.'),
+                           trans('auth/general.google_login_failed')
                         ],
                     ]
                 );
