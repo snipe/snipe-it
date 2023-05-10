@@ -616,7 +616,7 @@
 
                                                 @if (($asset->model->manufacturer) && ($asset->model->manufacturer->warranty_lookup_url!=''))
                                                     <a href="{{ $asset->present()->dynamicWarrantyUrl() }}" target="_blank">
-                                                        <i class="fa fa-external-link"><span class="sr-only">{{ trans('admin/hardware/general.mfg_warranty_lookup', ['manufacturer' => $asset->model->manufacturer->name]) }}</span></i>
+                                                        <i class="fa fa-external-link" aria-hidden="true"><span class="sr-only">{{ trans('admin/hardware/general.mfg_warranty_lookup', ['manufacturer' => $asset->model->manufacturer->name]) }}</span></i>
                                                     </a>
                                                 @endif
                                             </div>

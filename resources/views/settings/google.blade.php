@@ -35,6 +35,18 @@
 
                     <div class="col-md-12">
 
+                        <!-- Google Redirect URL -->
+                        <div class="form-group">
+                            <div class="col-md-3 text-right">
+                                <strong>Redirect URL</strong>
+                            </div>
+                            <div class="col-md-8">
+                                <p class="form-control-static" style="margin-top: -5px"><code>{{ config('app.url') }}/google/callback</code></p>
+                                <p class="help-block">{!! trans('admin/settings/general.google_callback_help') !!}</p>
+                            </div>
+                        </div>
+
+
                         <!-- Google login -->
                         <div class="form-group {{ $errors->has('google') ? 'error' : '' }}">
 
@@ -44,6 +56,7 @@
                                     {{ Form::checkbox('google_login', '1', old('google_login', $setting->google_login),array('aria-label'=>'google_login', (config('app.lock_passwords')===true) ? 'disabled': '')) }}
                                     {{ trans('admin/settings/general.enable_google_login') }}
                                 </label>
+                                <p class="help-block">{{ trans('admin/settings/general.enable_google_login_help') }}</p>
                             </div>
                         </div>
 
@@ -79,17 +92,6 @@
                                 @if (config('app.lock_passwords')===true)
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
                                 @endif
-                            </div>
-                        </div>
-
-                        <!-- Google Client Secret -->
-                        <div class="form-group">
-                            <div class="col-md-3 text-right">
-                                <strong>Redirect URL</strong>
-                            </div>
-                            <div class="col-md-8">
-                                <p class="form-control-static" style="margin-top: -5px"><code>{{ config('app.url') }}/google/callback</code></p>
-                                <p class="help-block">{{ trans('admin/settings/general.google_callback_help') }}</p>
                             </div>
                         </div>
 
