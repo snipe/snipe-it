@@ -607,7 +607,7 @@ class ReportsController extends Controller
             }
 
             if ($request->filled('by_company_id')) {
-                $assets->where('assets.company_id', $request->input('by_company_id'));
+                $assets->whereIn('assets.company_id', $request->input('by_company_id'));
             }
 
             if ($request->filled('by_model_id')) {
