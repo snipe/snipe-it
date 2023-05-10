@@ -23,10 +23,10 @@ class ManufacturersController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Manufacturer::class);
-        $allowed_columns = ['id', 'name', 'url', 'support_url', 'support_email', 'support_phone', 'created_at', 'updated_at', 'image', 'assets_count', 'consumables_count', 'components_count', 'licenses_count'];
+        $allowed_columns = ['id', 'name', 'url', 'support_url', 'support_email', 'warranty_lookup_url', 'support_phone', 'created_at', 'updated_at', 'image', 'assets_count', 'consumables_count', 'components_count', 'licenses_count'];
 
         $manufacturers = Manufacturer::select(
-            ['id', 'name', 'url', 'support_url', 'support_email', 'support_phone', 'created_at', 'updated_at', 'image', 'deleted_at']
+            ['id', 'name', 'url', 'support_url', 'warranty_lookup_url', 'support_email', 'support_phone', 'created_at', 'updated_at', 'image', 'deleted_at']
         )->withCount('assets as assets_count')->withCount('licenses as licenses_count')->withCount('consumables as consumables_count')->withCount('accessories as accessories_count');
 
         if ($request->input('deleted') == 'true') {
@@ -47,6 +47,10 @@ class ManufacturersController extends Controller
 
         if ($request->filled('support_url')) {
             $manufacturers->where('support_url', '=', $request->input('support_url'));
+        }
+
+        if ($request->filled('warranty_lookup_url')) {
+            $manufacturers->where('warranty_lookup_url', '=', $request->input('warranty_lookup_url'));
         }
 
         if ($request->filled('support_phone')) {

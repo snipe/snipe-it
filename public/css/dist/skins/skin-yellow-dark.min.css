@@ -101,10 +101,6 @@
   border-bottom-right-radius: 2px;
   border-bottom-left-radius: 0;
 }
-.btn,
-.btn:hover {
-  color: #000;
-}
 .btn.btn-primary,
 .btn:hover.btn-primary,
 .btn .btn-primary:link,
@@ -128,6 +124,9 @@
 .btn:hover.btn-white:hover {
   background-color: var(--hover-link);
   color: #545454;
+}
+a.actions {
+  color: #fff !important;
 }
 /**
 The dropdown is white, so use a darker color
@@ -211,7 +210,7 @@ a.btn.btn-default {
   color: var(--nav-link);
 }
 .bootstrap-table .fixed-table-container .table thead th .sortable {
-  color: var(--nav-link);
+  color: var(--text-main);
 }
 .bootstrap-table .fixed-table-toolbar .columns label {
   color: #000;
@@ -423,13 +422,8 @@ input[type=search] {
 .skin-yellow-dark .main-header .navbar .dropdown-menu li a {
   color: var(--header);
 }
-div.th-inner {
+tr th div.th-inner {
   color: var(--text-main);
-}
-.fixed-table-body thead th .th-inner,
-.skin-yellow-dark,
-.skin-yellow {
-  background-color: var(--header) !important;
 }
 .tab-content,
 .tab-pane {

@@ -178,26 +178,29 @@
               </td>
               <td>
                 <nobr>
+                  {{ Form::open(array('route' => array('fields.destroy', $field->id), 'method' => 'delete', 'style' => 'display:inline-block')) }}
                   @can('update', $field)
-                <a href="{{ route('fields.edit', $field->id) }}" class="btn btn-warning btn-sm">
-                  <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                  <span class="sr-only">{{ trans('button.edit') }}</span>
-                </a>
+                    <a href="{{ route('fields.edit', $field->id) }}" class="btn btn-warning btn-sm">
+                      <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                      <span class="sr-only">{{ trans('button.edit') }}</span>
+                    </a>
                 @endcan
+
                 @can('delete', $field)
-                {{ Form::open(array('route' => array('fields.destroy', $field->id), 'method' => 'delete', 'style' => 'display:inline-block')) }}
-                @if($field->fieldset->count()>0)
-                <button type="submit" class="btn btn-danger btn-sm disabled" disabled>
-                  <i class="fas fa-trash" aria-hidden="true"></i>
-                  <span class="sr-only">{{ trans('button.delete') }}</span></button>
-                @else
-                <button type="submit" class="btn btn-danger btn-sm">
-                  <i class="fas fa-trash" aria-hidden="true"></i>
-                  <span class="sr-only">{{ trans('button.delete') }}</span>
-                </button>
-                @endif
-                {{ Form::close() }}
+
+                  @if($field->fieldset->count()>0)
+                    <button type="submit" class="btn btn-danger btn-sm disabled" disabled>
+                      <i class="fas fa-trash" aria-hidden="true"></i>
+                      <span class="sr-only">{{ trans('button.delete') }}</span></button>
+                  @else
+                    <button type="submit" class="btn btn-danger btn-sm">
+                      <i class="fas fa-trash" aria-hidden="true"></i>
+                      <span class="sr-only">{{ trans('button.delete') }}</span>
+                    </button>
+                  @endif
+
                 @endcan
+                  {{ Form::close() }}
                 </nobr>
               </td>
             </tr>

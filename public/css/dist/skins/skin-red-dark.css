@@ -244,11 +244,11 @@ h2.task_menu {
 a:link {
   color: var(--link);
 }
-a:visited {
-  color: var(--nav-link);
-}
 a:hover {
   color: var(--hover-link);
+}
+a:visited {
+  color: var(--nav-link);
 }
 .far fa-life-ring {
   color: var(--link);
@@ -462,7 +462,6 @@ input[type=search] {
 }
 .table-striped > tbody > tr:nth-of-type(even) {
   background-color: var(--back-sub-alt);
-  color: var(--text-alt);
 }
 #webui > div > div > div > div > div > table > tbody > tr > td > a > i.fa,
 .box-body,
@@ -477,14 +476,20 @@ a {
   color: var(--link);
 }
 a:link {
-  color: var(--link);
+  color: var(--nav-link);
 }
 a:hover {
-  color: var(--hover-link);
+  color: var(--nav-link);
   text-decoration: underline;
 }
 a:visited {
-  color: var(--visited-link);
+  color: var(--nav-link);
+}
+#customFieldsTable a[href*='/models'] {
+  color: var(--back-sub);
+}
+#customFieldsTable a[href*='/fieldsets'] {
+  background-color: transparent;
 }
 .row-striped {
   vertical-align: top;

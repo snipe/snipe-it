@@ -98,6 +98,11 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'start_date'              => 'nullable|date_format:Y-m-d',
         'end_date'                => 'nullable|date_format:Y-m-d|after_or_equal:start_date',
         'autoassign_licenses'     => 'boolean',
+        'address'                 => 'max:191|nullable',
+        'city'                    => 'max:191|nullable',
+        'state'                   => 'min:2|max:191|nullable',
+        'country'                 => 'min:2|max:191|nullable',
+        'zip'                     => 'max:10|nullable',
     ];
 
     /**

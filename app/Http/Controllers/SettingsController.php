@@ -1039,6 +1039,48 @@ class SettingsController extends Controller
         return $pdf_branding;
     }
 
+
+    /**
+     * Show Google login settings form
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v6.1.1]
+     * @return View
+     */
+    public function getGoogleLoginSettings()
+    {
+        $setting = Setting::getSettings();
+        return view('settings.google', compact('setting'));
+    }
+
+    /**
+     * ShSaveow Google login settings form
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v6.1.1]
+     * @return View
+     */
+    public function postGoogleLoginSettings(Request $request)
+    {
+        if (!config('app.lock_passwords')) {
+            $setting = Setting::getSettings();
+
+            $setting->google_login = $request->input('google_login', 0);
+            $setting->google_client_id = $request->input('google_client_id');
+            $setting->google_client_secret = $request->input('google_client_secret');
+
+            if ($setting->save()) {
+                return redirect()->route('settings.index')
+                    ->with('success', trans('admin/settings/message.update.success'));
+            }
+
+            return redirect()->back()->withInput()->withErrors($setting->getErrors());
+        }
+
+        return redirect()->back()->with('error', trans('general.feature_disabled'));
+    }
+
+
     /**
      * Show the listing of backups.
      *
@@ -1094,7 +1136,7 @@ class SettingsController extends Controller
     public function postBackups()
     {
         if (! config('app.lock_passwords')) {
-            Artisan::call('backup:run');
+            Artisan::call('snipeit:backup', ['--filename' => 'manual-backup-'.date('Y-m-d-H:i:s')]);
             $output = Artisan::output();
 
             // Backup completed

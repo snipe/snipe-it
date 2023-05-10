@@ -16,17 +16,17 @@ class Supplier extends SnipeModel
     protected $table = 'suppliers';
 
     protected $rules = [
-        'name'              => 'required|min:1|max:255|unique_undeleted',
-        'address'           => 'max:250|nullable',
-        'address2'          => 'max:250|nullable',
-        'city'              => 'max:255|nullable',
-        'state'             => 'max:32|nullable',
-        'country'           => 'max:3|nullable',
+        'name'               => 'required|min:1|max:255|unique_undeleted',
         'fax'               => 'min:7|max:35|nullable',
         'phone'             => 'min:7|max:35|nullable',
         'contact'           => 'max:100|nullable',
         'notes'             => 'max:191|nullable', // Default string length is 191 characters..
         'email'             => 'email|max:150|nullable',
+        'address'            => 'max:250|nullable',
+        'address2'           => 'max:250|nullable',
+        'city'               => 'max:191|nullable',
+        'state'              => 'min:2|max:191|nullable',
+        'country'            => 'min:2|max:191|nullable',
         'zip'               => 'max:10|nullable',
         'url'               => 'sometimes|nullable|string|max:250',
     ];
