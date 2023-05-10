@@ -330,4 +330,8 @@ return [
     'setup_migration_create_user' => 'Next: Create User',
     'ldap_settings_link' => 'LDAP Settings Page',
     'slack_test' => 'Test <i class="fab fa-slack"></i> Integration',
+    'google_callback_help' => 'This should be entered as your calback URL in your Google OAuth app settings in your Google admin console.',
+    'google_login'      => 'Google Login Settings',
+    'enable_google_login'  => 'Enable Google login',
+
 ];

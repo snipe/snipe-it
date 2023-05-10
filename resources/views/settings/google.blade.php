@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Google
+    {{ trans('admin/settings/general.google_login') }}
     @parent
 @stop
 
@@ -27,7 +27,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fa-brands fa-google"></i> Google
+                        <i class="fa-brands fa-google"></i> {{ trans('admin/settings/general.google_login') }}
                     </h2>
                 </div>
                 <div class="box-body">
@@ -37,14 +37,12 @@
 
                         <!-- Google login -->
                         <div class="form-group {{ $errors->has('google') ? 'error' : '' }}">
-                            <div class="col-md-3 text-right">
-                                {{ Form::label('google_login', 'Google Login') }}
-                            </div>
-                            <div class="col-md-8">
+
+                            <div class="col-md-8 col-md-offset-3">
                                 <label class="form-control{{ (config('app.lock_passwords')===true) ? ' form-control--disabled': '' }}">
                                     <span class="sr-only">{{ trans('admin/settings/general.pwd_secure_uncommon') }}</span>
                                     {{ Form::checkbox('google_login', '1', old('google_login', $setting->google_login),array('aria-label'=>'google_login', (config('app.lock_passwords')===true) ? 'disabled': '')) }}
-                                    Enable google login
+                                    {{ trans('admin/settings/general.enable_google_login') }}
                                 </label>
                             </div>
                         </div>
@@ -90,8 +88,8 @@
                                 <strong>Redirect URL</strong>
                             </div>
                             <div class="col-md-8">
-                                <p class="form-control-static">{{ config('app.url') }}/google/callback</p>
-                                <p class="help-block">This should be entered as your calback URL in your Google OAuth app settings in your Google admin console.</p>
+                                <p class="form-control-static" style="margin-top: -5px"><code>{{ config('app.url') }}/google/callback</code></p>
+                                <p class="help-block">{{ trans('admin/settings/general.google_callback_help') }}</p>
                             </div>
                         </div>
 
