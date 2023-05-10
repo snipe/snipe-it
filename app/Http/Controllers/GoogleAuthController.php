@@ -42,7 +42,7 @@ class GoogleAuthController extends Controller
             ]);
 
             Auth::login($user, true);
-            return redirect()->route('setup.done');
+            return redirect()->route('home');
         }
 
         return redirect()->route('login')
