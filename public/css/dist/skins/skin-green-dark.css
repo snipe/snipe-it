@@ -196,6 +196,9 @@ a:visited {
 #ldapad_test_results.well.well-sm {
   color: var(--back-main);
 }
+a.actions {
+  color: #fff !important;
+}
 .pagination > li > a {
   color: var(--light-link);
   background-color: var(--back-main);
@@ -239,9 +242,6 @@ h2.task_menu {
 .modal-content {
   background-color: var(--back-main);
   color: var(--text-main);
-}
-a:link {
-  color: var(--link);
 }
 .btn-primary.hover {
   color: var(--nav-link);
@@ -471,6 +471,12 @@ a:hover {
 }
 a:visited {
   color: var(--visited-link);
+}
+#customFieldsTable a[href*='/models'] {
+  color: var(--back-sub);
+}
+#customFieldsTable a[href*='/fieldsets'] {
+  background-color: transparent;
 }
 .row-striped {
   vertical-align: top;

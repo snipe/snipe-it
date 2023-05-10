@@ -190,6 +190,9 @@ li.dropdown-item-marker {
 #ldapad_test_results.well.well-sm {
   color: var(--back-main);
 }
+a.actions {
+  color: #fff !important;
+}
 .pagination > li > a {
   color: var(--light-link);
   background-color: var(--back-main);
@@ -469,6 +472,12 @@ input[type=search] {
 }
 .box-header.with-border {
   border-bottom: #000;
+}
+#customFieldsTable a[href*='/models'] {
+  color: var(--back-sub);
+}
+#customFieldsTable a[href*='/fieldsets'] {
+  background-color: transparent;
 }
 .row-striped {
   vertical-align: top;

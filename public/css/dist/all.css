@@ -23267,6 +23267,9 @@ a.accordion-header {
 .btn-info.btn-outline {
   color: #5bc0de;
 }
+.btn-warning {
+  background-color: #f39c12 !important;
+}
 .btn-warning.btn-outline {
   color: #f0ad4e;
 }
@@ -24489,6 +24492,9 @@ a.accordion-header {
 }
 .btn-info.btn-outline {
   color: #5bc0de;
+}
+.btn-warning {
+  background-color: #f39c12 !important;
 }
 .btn-warning.btn-outline {
   color: #f0ad4e;

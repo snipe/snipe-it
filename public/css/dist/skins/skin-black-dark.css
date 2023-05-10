@@ -201,6 +201,9 @@ a:visited {
 #ldapad_test_results.well.well-sm {
   color: var(--back-main);
 }
+a.actions {
+  color: #fff !important;
+}
 .pagination > li > a {
   color: var(--light-link);
   background-color: var(--back-main);
@@ -211,6 +214,23 @@ a:visited {
 }
 .pagination > .active > a:hover {
   background-color: var(--hover-link);
+}
+.tasks-menu > .dropdown-menu > li .menu > li > a:hover .progress {
+  background-color: var(--background);
+}
+a:hover > h2.task_menu {
+  color: var(--header);
+}
+h2.task_menu {
+  color: var(--link);
+}
+.navbar-custom-menu > .navbar-nav > li > .dropdown-menu {
+  background-color: var(--back-main);
+  color: var(--link);
+}
+.navbar-custom-menu > .navbar-nav > li > .dropdown-menu > li.header {
+  background-color: var(--header);
+  color: var(--link);
 }
 .main-header .navbar,
 .main-header .logo {

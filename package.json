@@ -54,6 +54,6 @@
         "tableexport.jquery.plugin": "1.27.0",
         "tether": "^1.4.0",
         "vue-resource": "^1.5.2",
-        "webpack": "^5.77.0"
+        "webpack": "^5.78.0"
     }
 }

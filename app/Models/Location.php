@@ -26,11 +26,12 @@ class Location extends SnipeModel
     protected $table = 'locations';
     protected $rules = [
         'name'          => 'required|min:2|max:255|unique_undeleted',
-        'city'          => 'min:2|max:255|nullable',
-        'country'       => 'min:2|max:255|nullable',
-        'address'       => 'max:80|nullable',
-        'address2'      => 'max:80|nullable',
-        'zip'           => 'min:3|max:10|nullable',
+        'address'       => 'max:191|nullable',
+        'address2'      => 'max:191|nullable',
+        'city'          => 'max:191|nullable',
+        'state'         => 'min:2|max:191|nullable',
+        'country'       => 'min:2|max:191|nullable',
+        'zip'           => 'max:10|nullable',
         'manager_id'    => 'exists:users,id|nullable',
         'parent_id'     => 'non_circular:locations,id',
     ];

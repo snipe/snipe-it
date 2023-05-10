@@ -283,6 +283,16 @@
               </div>
             </div>
 
+          <!-- Checkout Date -->
+          <div class="form-group checkout-range">
+              <label for="checkout_date" class="col-md-3 control-label">{{ trans('general.checkout') }} {{  trans('general.range') }}</label>
+              <div class="input-daterange input-group col-md-6" id="datepicker">
+                  <input type="text" class="form-control" name="checkout_date_start" aria-label="checkout_date_start">
+                  <span class="input-group-addon">to</span>
+                  <input type="text" class="form-control" name="checkout_date_end" aria-label="checkout_date_end">
+              </div>
+          </div>
+
             <!-- Expected Checkin Date -->
             <div class="form-group expected_checkin-range">
               <label for="expected_checkin_start" class="col-md-3 control-label">{{ trans('admin/hardware/form.expected_checkin') }}</label>
@@ -363,6 +373,12 @@
   <script>
 
       $('.purchase-range .input-daterange').datepicker({
+          clearBtn: true,
+          todayHighlight: true,
+          endDate: '0d',
+          format: 'yyyy-mm-dd'
+      });
+      $('.checkout-range .input-daterange').datepicker({
           clearBtn: true,
           todayHighlight: true,
           endDate: '0d',

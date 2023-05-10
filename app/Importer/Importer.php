@@ -65,19 +65,22 @@ abstract class Importer
         'email' => 'email',
         'username' => 'username',
         'address' => 'address',
+        'address2' => 'address2',
         'city' => 'city',
         'state' => 'state',
         'country' => 'country',
+        'zip' => 'zip',
         'jobtitle' => 'job title',
         'employee_num' => 'employee number',
         'phone_number' => 'phone number',
         'first_name' => 'first name',
         'last_name' => 'last name',
         'department' => 'department',
-        'manager_first_name' => 'manager first name',
-        'manager_last_name' => 'manager last name',
+        'manager_name' => 'manager full name',
+        'manager_username' => 'manager username',
         'min_amt' => 'minimum quantity',
         'remote' => 'remote',
+        'vip' => 'vip',
     ];
     /**
      * Map of item fields->csv names
@@ -119,7 +122,7 @@ abstract class Importer
         } else {
             $this->csv = Reader::createFromString($file);
         }
-        $this->tempPassword = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 20);
+        $this->tempPassword = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 40);
     }
 
     // Cached Values for import lookups
@@ -198,11 +201,11 @@ abstract class Importer
         $val = $default;
         $key = $this->lookupCustomKey($key);
 
-        $this->log("Custom Key: ${key}");
+       // $this->log("Custom Key: ${key}");
         if (array_key_exists($key, $array)) {
             $val = Encoding::toUTF8(trim($array[$key]));
         }
-        $this->log("${key}: ${val}");
+        //$this->log("${key}: ${val}");
         return $val;
     }
 
@@ -280,8 +283,9 @@ abstract class Importer
      * @return User Model w/ matching name
      * @internal param array $user_array User details parsed from csv
      */
-    protected function createOrFetchUser($row)
+    protected function createOrFetchUser($row, $type = 'user')
     {
+
         $user_array = [
             'full_name' => $this->findCsvMatch($row, 'full_name'),
             'email'     => $this->findCsvMatch($row, 'email'),
@@ -292,31 +296,36 @@ abstract class Importer
             'remote'    => $this->fetchHumanBoolean(($this->findCsvMatch($row, 'remote'))),
         ];
 
-        // Maybe we're lucky and the user already exists.
-        if ($user = User::where('username', $user_array['username'])->first()) {
-            $this->log('User '.$user_array['username'].' already exists');
 
-            return $user;
+        if ($type == 'manager') {
+            $user_array['full_name'] = $this->findCsvMatch($row, 'manager');
+            $user_array['username'] = $this->findCsvMatch($row, 'manager_username');
         }
 
-        // If the full name is empty, bail out--we need this to extract first name (at the very least)
-        if (empty($user_array['full_name'])) {
-            $this->log('Insufficient user data provided (Full name is required)- skipping user creation, just adding asset');
+        // Maybe we're lucky and the username was passed and it already exists.
+        if (!empty($user_array['username'])) {
+            if ($user = User::where('username', $user_array['username'])->first()) {
+                $this->log('User '.$user_array['username'].' already exists');
+                return $user;
+            }
+        }
 
+
+        // If the full name and username is empty, bail out--we need this to extract first name (at the very least)
+        if ((empty($user_array['username'])) && (empty($user_array['full_name']))) {
+            $this->log('Insufficient user data provided (Full name or username is required) - skipping user creation.');
+            \Log::debug(print_r($user_array, true));
+            \Log::debug(print_r($row, true));
             return false;
         }
 
-        // Is the user actually an ID?
-        if ($user = $this->findUserByNumber($user_array['full_name'])) {
-            return $user;
-        }
-        $this->log('User does not appear to be an id with number: '.$user_array['full_name'].'.  Continuing through our processes');
 
         // Populate email if it does not exist.
         if (empty($user_array['email'])) {
             $user_array['email'] = User::generateEmailFromFullName($user_array['full_name']);
         }
 
+        // Get some fields for first name and last name based off of full name
         $user_formatted_array = User::generateFormattedNameFromFullName($user_array['full_name'], Setting::getSettings()->username_format);
         $user_array['first_name'] = $user_formatted_array['first_name'];
         $user_array['last_name'] = $user_formatted_array['last_name'];
@@ -326,14 +335,12 @@ abstract class Importer
             if ($this->usernameFormat == 'email') {
                 $user_array['username'] = $user_array['email'];
             }
-        }
 
-        // Does this ever actually fire??
-        // Check for a matching user after trying to guess username.
-        if ($user = User::where('username', $user_array['username'])->first()) {
-            $this->log('User '.$user_array['username'].' already exists');
-
-            return $user;
+            // Check for a matching username one more time after trying to guess username.
+            if ($user = User::where('username', $user_array['username'])->first()) {
+                $this->log('User '.$user_array['username'].' already exists');
+                return $user;
+            }
         }
 
         // If at this point we have not found a username or first name, bail out in shame.
@@ -341,7 +348,7 @@ abstract class Importer
             return false;
         }
 
-        // No Luck, let's create one.
+        // No luck finding a user on username or first name, let's create one.
         $user = new User;
         $user->first_name = $user_array['first_name'];
         $user->last_name = $user_array['last_name'];
@@ -356,9 +363,9 @@ abstract class Importer
 
         if ($user->save()) {
             $this->log('User '.$user_array['username'].' created');
-
             return $user;
         }
+
         $this->logError($user, 'User "'.$user_array['username'].'" was not able to be created.');
 
         return false;

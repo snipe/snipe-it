@@ -36,7 +36,7 @@ class AssetMaintenancesController extends Controller
     {
         $this->authorize('view', Asset::class);
 
-        $maintenances = AssetMaintenance::select('asset_maintenances.*')->with('asset', 'asset.model', 'asset.location', 'supplier', 'asset.company', 'admin');
+        $maintenances = AssetMaintenance::select('asset_maintenances.*')->with('asset', 'asset.model', 'asset.location', 'asset.defaultLoc', 'supplier', 'asset.company', 'admin');
 
         if ($request->filled('search')) {
             $maintenances = $maintenances->TextSearch($request->input('search'));
