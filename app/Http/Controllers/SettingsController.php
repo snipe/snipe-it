@@ -1062,20 +1062,22 @@ class SettingsController extends Controller
      */
     public function postGoogleLoginSettings(Request $request)
     {
-        if (!$setting = Setting::getSettings()) {
-            return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
+        if (!config('app.lock_passwords')) {
+            $setting = Setting::getSettings();
+
+            $setting->google_login = $request->input('google_login', 0);
+            $setting->google_client_id = $request->input('google_client_id');
+            $setting->google_client_secret = $request->input('google_client_secret');
+
+            if ($setting->save()) {
+                return redirect()->route('settings.index')
+                    ->with('success', trans('admin/settings/message.update.success'));
+            }
+
+            return redirect()->back()->withInput()->withErrors($setting->getErrors());
         }
 
-        $setting->google_login = $request->input('google_login', 0);
-        $setting->google_client_id = $request->input('google_client_id');
-        $setting->google_client_secret = $request->input('google_client_secret');
-
-        if ($setting->save()) {
-            return redirect()->route('settings.index')
-                ->with('success', trans('admin/settings/message.update.success'));
-        }
-
-        return redirect()->back()->withInput()->withErrors($setting->getErrors());
+        return redirect()->back()->with('error', trans('general.feature_disabled'));
     }
 
 
