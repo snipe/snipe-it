@@ -81,6 +81,7 @@ class Importer extends Component
     static $accessories = [
         'model_number' => 'Model Number',
         'notes' => 'Notes',
+        'min_amt' => 'Min Qty',
     ];
 
     static $assets = [
