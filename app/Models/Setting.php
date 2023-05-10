@@ -76,7 +76,6 @@ class Setting extends Model
           'audit_interval'                      => 'numeric|nullable',
           'custom_forgot_pass_url'              => 'url|nullable',
           'privacy_policy_link'                 => 'nullable|url',
-          'google_redirect'                 => 'nullable|url',
     ];
 
     protected $fillable = [
