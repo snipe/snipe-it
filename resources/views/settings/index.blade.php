@@ -239,6 +239,21 @@
         <div class="box box-default">
           <div class="box-body text-center">
             <h5>
+              <a href="{{ route('settings.google.index') }}" class="settings_button">
+                <i class="fas fa-sitemap fa-4x" aria-hidden="true"></i>
+                <br><br>
+                <span class="name">Google Auth</span>
+              </a>
+            </h5>
+            <p class="help-block">Blah</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
+        <div class="box box-default">
+          <div class="box-body text-center">
+            <h5>
               <a href="{{ route('settings.saml.index') }}" class="settings_button">
                 <i class="fas fa-sign-in-alt fa-4x" aria-hidden="true"></i>
                 <br><br>
