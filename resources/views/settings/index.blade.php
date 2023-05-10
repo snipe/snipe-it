@@ -240,12 +240,12 @@
           <div class="box-body text-center">
             <h5>
               <a href="{{ route('settings.google.index') }}" class="settings_button">
-                <i class="fas fa-sitemap fa-4x" aria-hidden="true"></i>
+                <i class="fa-brands fa-google fa-4x" aria-hidden="true"></i>
                 <br><br>
                 <span class="name">Google Auth</span>
               </a>
             </h5>
-            <p class="help-block">Blah</p>
+            <p class="help-block">Set up Google Login</p>
           </div>
         </div>
       </div>
