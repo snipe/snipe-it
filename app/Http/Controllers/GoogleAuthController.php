@@ -33,9 +33,9 @@ class GoogleAuthController extends Controller
     {
         try {
             $socialUser = Socialite::driver('google')->user();
-            \Log::debug('Social user found');
+            \Log::debug('Google user found');
         } catch (InvalidStateException $exception) {
-            \Log::debug('Social user found');
+            \Log::debug('Google user NOT found');
             return redirect()->route('login')
                 ->withErrors(
                     [
@@ -47,7 +47,7 @@ class GoogleAuthController extends Controller
         }
 
 
-        $user = User::where('email', $socialUser->getEmail())->first();
+        $user = User::where('username', $socialUser->getEmail())->first();
 
 
         if ($user) {
