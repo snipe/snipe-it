@@ -90,7 +90,6 @@ class Setting extends Model
         'google_login',
         'google_client_id',
         'google_client_secret',
-        'google_redirect',
     ];
 
     /**

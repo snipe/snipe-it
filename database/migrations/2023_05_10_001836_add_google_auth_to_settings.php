@@ -17,7 +17,6 @@ class AddGoogleAuthToSettings extends Migration
             $table->boolean('google_login')->nullable()->default(0);
             $table->string('google_client_id')->nullable()->default(null);
             $table->string('google_client_secret')->nullable()->default(null);
-            $table->string('google_redirect')->nullable()->default(null);
         });
     }
 
@@ -32,7 +31,6 @@ class AddGoogleAuthToSettings extends Migration
             $table->dropColumn('google_login');
             $table->dropColumn('google_client_id');
             $table->dropColumn('google_client_secret');
-            $table->dropColumn('google_redirect');
 
         });
     }
