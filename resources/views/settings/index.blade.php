@@ -242,10 +242,10 @@
               <a href="{{ route('settings.google.index') }}" class="settings_button">
                 <i class="fa-brands fa-google fa-4x" aria-hidden="true"></i>
                 <br><br>
-                <span class="name">Google Auth</span>
+                <span class="name">Google</span>
               </a>
             </h5>
-            <p class="help-block">Set up Google Login</p>
+            <p class="help-block">{{ trans('admin/settings/general.google_login') }}</p>
           </div>
         </div>
       </div>
