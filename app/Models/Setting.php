@@ -76,6 +76,7 @@ class Setting extends Model
           'audit_interval'                      => 'numeric|nullable',
           'custom_forgot_pass_url'              => 'url|nullable',
           'privacy_policy_link'                 => 'nullable|url',
+          'google_client_id'                    => 'nullable|ends_with:apps.googleusercontent.com'
     ];
 
     protected $fillable = [
