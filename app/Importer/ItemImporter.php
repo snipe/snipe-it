@@ -103,17 +103,17 @@ class ItemImporter extends Importer
     /**
      * Parse row to determine what (if anything) we should checkout to.
      * @param  array $row CSV Row being parsed
-     * @return SnipeModel      Model to be checked out to
+     * @return ?SnipeModel      Model to be checked out to
      */
     protected function determineCheckout($row)
     {
+        if (get_class($this) == LocationImporter::class) {
+            return;
+        }
+
         // We only support checkout-to-location for asset, so short circuit otherwise.
         if (get_class($this) != AssetImporter::class) {
             return $this->createOrFetchUser($row);
-        }
-
-        if (get_class($this) != LocationImporter::class) {
-            return;
         }
 
         if (strtolower($this->item['checkout_class']) === 'location' && $this->findCsvMatch($row, 'checkout_location') != null ) {
