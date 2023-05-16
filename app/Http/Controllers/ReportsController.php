@@ -595,15 +595,15 @@ class ReportsController extends Controller
                 'model.category', 'model.manufacturer', 'supplier');
             
             if ($request->filled('by_location_id')) {
-                $assets->where('assets.location_id', $request->input('by_location_id'));
+                $assets->whereIn('assets.location_id', $request->input('by_location_id'));
             }
 
             if ($request->filled('by_rtd_location_id')) {
-                $assets->where('assets.rtd_location_id', $request->input('by_rtd_location_id'));
+                $assets->whereIn('assets.rtd_location_id', $request->input('by_rtd_location_id'));
             }
 
             if ($request->filled('by_supplier_id')) {
-                $assets->where('assets.supplier_id', $request->input('by_supplier_id'));
+                $assets->whereIn('assets.supplier_id', $request->input('by_supplier_id'));
             }
 
             if ($request->filled('by_company_id')) {
@@ -611,7 +611,7 @@ class ReportsController extends Controller
             }
 
             if ($request->filled('by_model_id')) {
-                $assets->where('assets.model_id', $request->input('by_model_id'));
+                $assets->whereIn('assets.model_id', $request->input('by_model_id'));
             }
 
             if ($request->filled('by_category_id')) {
@@ -631,7 +631,7 @@ class ReportsController extends Controller
             }
 
             if ($request->filled('by_status_id')) {
-                $assets->where('assets.status_id', $request->input('by_status_id'));
+                $assets->whereIn('assets.status_id', $request->input('by_status_id'));
             }
 
             if (($request->filled('purchase_start')) && ($request->filled('purchase_end'))) {
@@ -666,6 +666,7 @@ class ReportsController extends Controller
                 $assets->onlyTrashed();
             }
 
+            \Log::debug($assets->toSql());
             $assets->orderBy('assets.id', 'ASC')->chunk(20, function ($assets) use ($handle, $customfields, $request) {
             
                 $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
