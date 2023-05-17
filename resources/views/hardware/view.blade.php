@@ -730,7 +730,7 @@
                                             </strong>
                                         </div>
                                         <div class="col-md-6">
-                                            {!! nl2br(e($asset->notes)) !!}
+                                               {!! nl2br(e($asset->notes)) !!}
                                         </div>
                                     </div>
 
