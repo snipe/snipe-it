@@ -107,7 +107,7 @@ class CheckoutAssetNotification extends Notification
         }
 
         return (new SlackMessage)
-            ->content(':arrow_up: :computer: Asset Checked Out')
+            ->content(':arrow_up: :computer: '.trans('mail.Asset_Checkout_Notification'))
             ->from($botname)
             ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
                 $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
