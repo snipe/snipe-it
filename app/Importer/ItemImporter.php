@@ -87,6 +87,11 @@ class ItemImporter extends Importer
             $this->item['next_audit_date'] = date('Y-m-d', strtotime($this->findCsvMatch($row, 'next_audit_date')));
         }
 
+        $this->item['asset_eol_date'] = null;
+        if ($this->findCsvMatch($row, 'asset_eol_date') != '') {
+            $this->item['asset_eol_date'] = date('Y-m-d', strtotime($this->findCsvMatch($row, 'asset_eol_date')));
+        }
+
         $this->item['qty'] = $this->findCsvMatch($row, 'quantity');
         $this->item['requestable'] = $this->findCsvMatch($row, 'requestable');
         $this->item['user_id'] = $this->user_id;

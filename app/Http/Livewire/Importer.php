@@ -96,6 +96,7 @@ class Importer extends Component
         'full_name' => 'Full Name',
         'status' => 'Status',
         'warranty_months' => 'Warranty Months',
+        'asset_eol_date' => 'EOL Date',
     ];
 
     static $consumables = [
