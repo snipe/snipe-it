@@ -934,6 +934,14 @@
                                                     {{ $asset->location->state }} {{ $asset->location->zip }}
                                                 </li>
                                             @endif
+                                                <li>
+                                                    <i class="fas fa-calendar"></i> {{ trans('admin/hardware/form.checkout_date') }}: {{ Helper::getFormattedDateObject($asset->last_checkout, 'date', false) }}
+                                                </li>
+                                            @if (isset($asset->expected_checkin))
+                                                <li>
+                                                    <i class="fas fa-calendar"></i> {{ trans('admin/hardware/form.expected_checkin') }}: {{ Helper::getFormattedDateObject($asset->expected_checkin, 'date', false) }}
+                                                </li>
+                                            @endif
                                         </ul>
 
                                 @endif
