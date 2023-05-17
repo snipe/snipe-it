@@ -149,7 +149,7 @@
                                                                         'id' => 'import_type',
                                                                         'class' => 'livewire-select2',
                                                                         'style' => 'min-width: 350px',
-                                                                        'data-placeholder' => trans('general.select_var', ['thing' => trans('general.import_type')]), /* TODO: translate me */
+                                                                        'data-placeholder' => trans('general.select_var', ['thing' => trans('general.import_type')]),
                                                                         'placeholder' => '', //needed so that the form-helper will put an empty option first
                                                                         'data-minimum-results-for-search' => '-1', // Remove this if the list gets long enough that we need to search
                                                                         'data-livewire-component' => $_instance->id
