@@ -114,6 +114,11 @@ class AssetImporter extends ItemImporter
             $item['next_audit_date'] = $this->item['next_audit_date'];
         }
 
+        $item['asset_eol_date'] = null;
+        if (isset($this->item['asset_eol_date'])) {
+            $item['asset_eol_date'] = $this->item['asset_eol_date'];
+        }
+
         if ($editingAsset) {
             $asset->update($item);
         } else {
@@ -127,7 +132,7 @@ class AssetImporter extends ItemImporter
             }
         }
 
-        //FIXME: this disables model validation.  Need to find a way to avoid double-logs without breaking everything.
+        // FIXME: this disables model validation.  Need to find a way to avoid double-logs without breaking everything.
         // $asset->unsetEventDispatcher();
         if ($asset->save()) {
             $asset->logCreate('Imported using csv importer');
