@@ -646,11 +646,27 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
            $query = $query->where('first_name', 'LIKE', '%'.$search.'%')
                ->orWhere('last_name', 'LIKE', '%'.$search.'%')
-               ->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%{$search}%"]);
+               ->orWhereRaw(
+                   $this->buildMultipleColumnSearch([
+                       DB::getTablePrefix() . 'users.first_name',
+                       DB::getTablePrefix() . 'users.last_name',
+                   ]),
+                   ["%{$search}%"]
+               );
 
         return $query;
     }
 
+    public function buildMultipleColumnSearch(array $columns): string
+    {
+        $driver = config('database.connections.' . config('database.default') . '.driver');
+
+        if ($driver === 'sqlite') {
+            return implode(" || ' ' || ", $columns) . ' LIKE ?';
+        }
+
+        return 'CONCAT(' . implode('," ",', $columns) . ') LIKE ?';
+    }
 
     /**
      * Run additional, advanced searches.
