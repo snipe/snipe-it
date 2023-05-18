@@ -257,4 +257,15 @@ trait Searchable
 
         return $related->getTable();
     }
+
+    private function buildMultipleColumnSearch(array $columns): string
+    {
+        $driver = config('database.connections.' . config('database.default') . '.driver');
+
+        if ($driver === 'sqlite') {
+            return implode(" || ' ' || ", $columns) . ' LIKE ?';
+        }
+
+        return 'CONCAT(' . implode('," ",', $columns) . ') LIKE ?';
+    }
 }

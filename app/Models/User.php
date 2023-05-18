@@ -657,17 +657,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         return $query;
     }
 
-    public function buildMultipleColumnSearch(array $columns): string
-    {
-        $driver = config('database.connections.' . config('database.default') . '.driver');
-
-        if ($driver === 'sqlite') {
-            return implode(" || ' ' || ", $columns) . ' LIKE ?';
-        }
-
-        return 'CONCAT(' . implode('," ",', $columns) . ') LIKE ?';
-    }
-
     /**
      * Run additional, advanced searches.
      *
