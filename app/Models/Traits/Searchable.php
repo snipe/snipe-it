@@ -263,7 +263,7 @@ trait Searchable
         $driver = config('database.connections.' . config('database.default') . '.driver');
 
         if ($driver === 'sqlite') {
-            return implode(" || ' ' || ", $columns) . ' LIKE ?';
+            return implode("||' '||", $columns) . ' LIKE ?';
         }
 
         return 'CONCAT(' . implode('," ",', $columns) . ') LIKE ?';
