@@ -76,6 +76,7 @@ class Setting extends Model
           'audit_interval'                      => 'numeric|nullable',
           'custom_forgot_pass_url'              => 'url|nullable',
           'privacy_policy_link'                 => 'nullable|url',
+          'google_client_id'                    => 'nullable|ends_with:apps.googleusercontent.com'
     ];
 
     protected $fillable = [
@@ -86,6 +87,9 @@ class Setting extends Model
         'webhook_endpoint',
         'webhook_channel',
         'webhook_botname',
+        'google_login',
+        'google_client_id',
+        'google_client_secret',
     ];
 
     /**

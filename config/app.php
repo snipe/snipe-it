@@ -216,7 +216,8 @@ return [
     */
 
     'require_saml' => env('REQUIRE_SAML', false),
-    
+
+
     /*
     |--------------------------------------------------------------------------
     | Demo Mode Lockdown
@@ -293,6 +294,7 @@ return [
         Laravel\Tinker\TinkerServiceProvider::class,
         Unicodeveloper\DumbPassword\DumbPasswordServiceProvider::class,
         Eduardokum\LaravelMailAutoEmbed\ServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
         /*
         * Application Service Providers...
@@ -365,6 +367,7 @@ return [
         'Image'     => Intervention\Image\ImageServiceProvider::class,
         'Carbon' => Carbon\Carbon::class,
         'Helper' => App\Helpers\Helper::class, // makes it much easier to use 'Helper::blah' in blades (which is where we usually use this)
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
 
     ],

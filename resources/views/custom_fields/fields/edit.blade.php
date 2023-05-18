@@ -1,8 +1,8 @@
-@php
-    use App\Models\CustomField;
-@endphp
+@extends('layouts/default', [
+    'helpText' => trans('admin/custom_fields/general.about_fieldsets_text'),
+    'helpPosition' => 'right',
+])
 
-@extends('layouts/default')
 
 {{-- Page title --}}
 @section('title')
@@ -21,24 +21,31 @@
 {{-- Page content --}}
 @section('content')
 
-<div class="row">
-  <div class="col-md-9">
     <!-- Horizontal Form -->
-        @if ($field->id)
-          {{ Form::open(['route' => ['fields.update', $field->id], 'class'=>'form-horizontal']) }}
-          {{ method_field('PUT') }}
-        @else
-          {{ Form::open(['route' => 'fields.store', 'class'=>'form-horizontal']) }}
-        @endif
+    @if ($field->id)
+        {{ Form::open(['route' => ['fields.update', $field->id], 'class'=>'form-horizontal']) }}
+        {{ method_field('PUT') }}
+    @else
+        {{ Form::open(['route' => 'fields.store', 'class'=>'form-horizontal']) }}
+    @endif
 
+    @csrf
+<div class="row">
+  <div class="col-md-12">
     <div class="box box-default">
+        <div class="box-header with-border text-right">
+            <button type="submit" class="btn btn-primary"> {{ trans('general.save') }}</button>
+        </div>
       <div class="box-body">
+
+          <div class="col-md-8">
+
           <!-- Name -->
           <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-            <label for="name" class="col-md-4 control-label">
+            <label for="name" class="col-md-3 control-label">
               {{ trans('admin/custom_fields/general.field_name') }}
             </label>
-            <div class="col-md-6 required">
+            <div class="col-md-8 required">
                 {{ Form::text('name', old('name', $field->name), array('class' => 'form-control', 'aria-label'=>'name')) }}
                 {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
@@ -46,10 +53,10 @@
 
           <!-- Element Type -->
           <div class="form-group {{ $errors->has('element') ? ' has-error' : '' }}">
-            <label for="element" class="col-md-4 control-label">
+            <label for="element" class="col-md-3 control-label">
               {{ trans('admin/custom_fields/general.field_element') }}
             </label>
-            <div class="col-md-6 required">
+            <div class="col-md-8 required">
 
             {!! Form::customfield_elements('element', old('element', $field->element), 'field_element select2 form-control') !!}
             {!! $errors->first('element', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
@@ -59,10 +66,10 @@
 
           <!-- Element values -->
           <div class="form-group {{ $errors->has('field_values') ? ' has-error' : '' }}" id="field_values_text" style="display:none;">
-            <label for="field_values" class="col-md-4 control-label">
+            <label for="field_values" class="col-md-3 control-label">
               {{ trans('admin/custom_fields/general.field_values') }}
             </label>
-            <div class="col-md-6 required">
+            <div class="col-md-8 required">
               {!! Form::textarea('field_values', old('name', $field->field_values), ['style' => 'width: 100%', 'rows' => 4, 'class' => 'form-control', 'aria-label'=>'field_values']) !!}
               {!! $errors->first('field_values', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
               <p class="help-block">{{ trans('admin/custom_fields/general.field_values_help') }}</p>
@@ -71,7 +78,7 @@
 
           <!-- Format -->
           <div class="form-group {{ $errors->has('format') ? ' has-error' : '' }}" id="format_values">
-            <label for="format" class="col-md-4 control-label">
+            <label for="format" class="col-md-3 control-label">
               {{ trans('admin/custom_fields/general.field_format') }}
             </label>
               @php
@@ -80,17 +87,17 @@
                 $field_format = 'CUSTOM REGEX';
               }
               @endphp
-            <div class="col-md-6 required">
+            <div class="col-md-8 required">
               {{ Form::select("format",Helper::predefined_formats(), ($field_format == '') ? $field->format : $field_format, array('class'=>'format select2 form-control', 'aria-label'=>'format')) }}
               {!! $errors->first('format', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
           <!-- Custom Format -->
           <div class="form-group {{ $errors->has('custom_format') ? ' has-error' : '' }}" id="custom_regex" style="display:none;">
-            <label for="custom_format" class="col-md-4 control-label">
+            <label for="custom_format" class="col-md-3 control-label">
               {{ trans('admin/custom_fields/general.field_custom_format') }}
             </label>
-            <div class="col-md-6 required">
+            <div class="col-md-8 required">
                 {{ Form::text('custom_format', old('custom_format', (($field->format!='') && (stripos($field->format,'regex')===0)) ? $field->format : ''), array('class' => 'form-control', 'id' => 'custom_format','aria-label'=>'custom_format', 'placeholder'=>'regex:/^[0-9]{15}$/')) }}
                 <p class="help-block">{!! trans('admin/custom_fields/general.field_custom_format_help') !!}</p>
 
@@ -101,68 +108,111 @@
 
           <!-- Help Text -->
           <div class="form-group {{ $errors->has('help_text') ? ' has-error' : '' }}">
-              <label for="help_text" class="col-md-4 control-label">
+              <label for="help_text" class="col-md-3 control-label">
                   {{ trans('admin/custom_fields/general.help_text') }}
               </label>
-              <div class="col-md-6">
+              <div class="col-md-8">
                   {{ Form::text('help_text', old('help_text', $field->help_text), array('class' => 'form-control', 'aria-label'=>'help_text')) }}
                   <p class="help-block">{{ trans('admin/custom_fields/general.help_text_description') }}</p>
                   {!! $errors->first('help_text', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
               </div>
           </div>
 
-          @if (!$field->id)
+          <!-- Auto-Add to Future Fieldsets  -->
+          <div class="form-group {{ $errors->has('auto_add_to_fieldsets') ? ' has-error' : '' }}"  id="auto_add_to_fieldsets">
+              <div class="col-md-9 col-md-offset-3">
+                  <label class="form-control">
+                      <input type="checkbox" name="auto_add_to_fieldsets" aria-label="auto_add_to_fieldsets" value="1"{{ (old('auto_add_to_fieldsets') || $field->auto_add_to_fieldsets) ? ' checked="checked"' : '' }}>
+                      {{ trans('admin/custom_fields/general.auto_add_to_fieldsets') }}
+                  </label>
+              </div>
+
+              @if (!$field->id)
               <!-- Encrypted  -->
-              <div class="form-group {{ $errors->has('encrypted') ? ' has-error' : '' }}">
-                  <div class="col-md-8 col-md-offset-4">
+                  <div class="col-md-9 col-md-offset-3">
                       <label class="form-control">
                           <input type="checkbox" value="1" name="field_encrypted" id="field_encrypted"{{ (Request::old('field_encrypted') || $field->field_encrypted) ? ' checked="checked"' : '' }}>
                           {{ trans('admin/custom_fields/general.encrypt_field') }}
                       </label>
                   </div>
-                  <div class="col-md-6 col-md-offset-4" id="encrypt_warning" style="display:none;">
 
+                  <div class="col-md-9 col-md-offset-3" id="encrypt_warning" style="display:none;">
                       <div class="callout callout-danger">
                           <p><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> {{ trans('admin/custom_fields/general.encrypt_field_help') }}</p>
                       </div>
                   </div>
-              </div>
-          @endif
+              @endif
 
-          <!-- Show in Email  -->
-          <div class="form-group {{ $errors->has('show_in_email') ? ' has-error' : '' }}"  id="show_in_email">
-              <div class="col-md-8 col-md-offset-4">
+              <!-- Show in Email  -->
+              <div class="col-md-9 col-md-offset-3">
                   <label class="form-control">
                       <input type="checkbox" name="show_in_email" aria-label="show_in_email" value="1"{{ (old('show_in_email') || $field->show_in_email) ? ' checked="checked"' : '' }}>
                       {{ trans('admin/custom_fields/general.show_in_email') }}
                   </label>
               </div>
 
-          </div>
-
-          <!-- Show in View All Assets profile view  -->
-          <div class="form-group {{ $errors->has('display_in_user_view') ? ' has-error' : '' }}"  id="display_in_user_view">
-              <div class="col-md-8 col-md-offset-4">
+              <!-- Show in View All Assets profile view  -->
+              <div class="col-md-9 col-md-offset-3">
                   <label class="form-control">
                       <input type="checkbox" name="display_in_user_view" aria-label="display_in_user_view" value="1" {{ (old('display_in_user_view') || $field->display_in_user_view) ? ' checked="checked"' : '' }}>
                       {{ trans('admin/custom_fields/general.display_in_user_view') }}
                   </label>
               </div>
 
+              <!-- Value Must be Unique -->
+              <div class="col-md-9 col-md-offset-3">
+                  <label class="form-control">
+                      <input type="checkbox" name="is_unique" aria-label="is_unique" value="1"{{ (old('is_unique') || $field->is_unique) ? ' checked="checked"' : '' }}>
+                      {{ trans('admin/custom_fields/general.is_unique') }}
+                  </label>
+              </div>
+
           </div>
 
-          <!-- Value Must be Unique -->
-          <div class="form-group {{ $errors->has('is_unique') ? ' has-error' : '' }}"  id="is_unique">
-            <div class="col-md-8 col-md-offset-4">
-                <label class="form-control">
-                    <input type="checkbox" name="is_unique" aria-label="is_unique" value="1"{{ (old('is_unique') || $field->is_unique) ? ' checked="checked"' : '' }}>
-                    {{ trans('admin/custom_fields/general.is_unique') }}
-                </label>
-            </div>
+          </div>
 
-        </div>
+          @if ($fieldsets->count() > 0)
+          <!-- begin fieldset columns -->
+          <div class="col-md-4">
 
+              <h4>{{ trans('admin/custom_fields/general.fieldsets') }}</h4>
+              {!! $errors->first('associate_fieldsets', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
 
+              <label class="form-control">
+                  <input type="checkbox" id="checkAll">
+                  {{ trans('general.select_all') }}
+              </label>
+
+                @foreach ($fieldsets as $fieldset)
+                    @php
+                        $array_fieldname = 'associate_fieldsets.'.$fieldset->id;
+
+                        // Consider the form data first
+                        if (old($array_fieldname) == $fieldset->id) {
+                            $checked = 'checked';
+                        // Otherwise check DB
+                        } elseif (isset($field->fieldset) && ($field->fieldset->contains($fieldset->id))) {
+                            $checked = 'checked';
+                        } else {
+                            $checked = '';
+                        }
+                    @endphp
+
+                          <label class="form-control{{ $errors->has('associate_fieldsets.'.$fieldset->id) ? ' has-error' : '' }}">
+                              <input type="checkbox"
+                                     name="associate_fieldsets[{{ $fieldset->id }}]"
+                                     class="fieldset"
+                                     value="{{ $fieldset->id }}"
+                                    {{ $checked }}>
+                              {{ $fieldset->name }}
+                              {!! $errors->first('associate_fieldsets.'.$fieldset->id, '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+
+                          </label>
+
+                @endforeach
+
+          </div>
+          @endif
       </div> <!-- /.box-body-->
 
       <div class="box-footer text-right">
@@ -171,20 +221,22 @@
 
     </div> <!--.box.box-default-->
 
-      {{ Form::close() }}
+
   </div> <!--/.col-md-9-->
 
-  <div class="col-md-3">
-    <h2>{{ trans('admin/custom_fields/general.about_custom_fields_title') }}</h2>
-    <p>{{ trans('admin/custom_fields/general.about_custom_fields_text') }}</p>
-  </div>
-  
+
 </div>
+{{ Form::close() }}
 @stop
 
 @section('moar_scripts')
 <script nonce="{{ csrf_token() }}">
     $(document).ready(function(){
+
+        $("#checkAll").change(function () {
+            $(".fieldset").prop('checked', $(this).prop("checked"));
+        });
+
         // Only display the custom format field if it's a custom format validation type
         $(".format").change(function(){
             $(this).find("option:selected").each(function(){

@@ -18,6 +18,16 @@ class Settings
         return new self();
     }
 
+    public function enableAlertEmail(string $email = 'notifications@afcrichmond.com'): Settings
+    {
+        return $this->update(['alert_email' => $email]);
+    }
+
+    public function disableAlertEmail(): Settings
+    {
+        return $this->update(['alert_email' => null]);
+    }
+
     public function enableMultipleFullCompanySupport(): Settings
     {
         return $this->update(['full_multiple_companies_support' => 1]);

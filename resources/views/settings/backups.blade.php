@@ -49,7 +49,7 @@
               <th data-sortable="true" data-field="modified_display" data-sort-name="modified_value">{{ trans('admin/settings/table.created') }}</th>
               <th data-field="modified_value" data-visible="false"></th>
               <th data-sortable="true">{{ trans('admin/settings/table.size') }}</th>
-              <th><span class="sr-only">{{ trans('general.delete') }}</span></th>
+              <th>{{ trans('table.actions') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -71,7 +71,7 @@
                          class="btn delete-asset btn-danger btn-sm {{ (config('app.lock_passwords')) ? ' disabled': '' }}" 
                          data-toggle="modal" href="{{ route('settings.backups.destroy', $file['filename']) }}" 
                          data-content="{{ trans('admin/settings/message.backup.delete_confirm') }}" 
-                         data-title="{{ trans('general.delete') }}  {{ e($file['filename']) }} ?" 
+                         data-title="{{ trans('general.delete') }}  {{ e($file['filename']) }}?"
                          onClick="return false;">
                           <i class="fas fa-trash icon-white" aria-hidden="true"></i>
                           <span class="sr-only">{{ trans('general.delete') }}</span>

@@ -67,7 +67,6 @@ class Importer extends Component
         'location' => 'Location',
         'maintained' => 'Maintained',
         'manufacturer' => 'Manufacturer',
-        'notes' => 'Notes',
         'order_number' => 'Order Number',
         'purchase_cost' => 'Purchase Cost',
         'purchase_date' => 'Purchase Date',
@@ -81,11 +80,14 @@ class Importer extends Component
 
     static $accessories = [
         'model_number' => 'Model Number',
+        'notes' => 'Notes',
     ];
 
     static $assets = [
         'asset_tag' => 'Asset Tag',
         'asset_model' => 'Model Name',
+        'asset_notes' => 'Asset Notes',
+        'model_notes' => 'Model Notes',
         'byod' => 'BYOD',
         'checkout_class' => 'Checkout Type',
         'checkout_location' => 'Checkout Location',
@@ -94,11 +96,13 @@ class Importer extends Component
         'full_name' => 'Full Name',
         'status' => 'Status',
         'warranty_months' => 'Warranty Months',
+        'asset_eol_date' => 'EOL Date',
     ];
 
     static $consumables = [
         'item_no' => "Item Number",
         'model_number' => "Model Number",
+        'notes' => 'Notes',
         'min_amt' => "Minimum Quantity",
     ];
 
@@ -111,13 +115,15 @@ class Importer extends Component
         'purchase_order' => 'Purchase Order',
         'reassignable' => 'Reassignable',
         'seats' => 'Seats',
+        'notes' => 'Notes',
     ];
 
     static $users = [
         'employee_num' => 'Employee Number',
         'first_name' => 'First Name',
-        'jobtitle' => 'Job Title',
         'last_name' => 'Last Name',
+        'notes' => 'Notes',
+        'jobtitle' => 'Job Title',
         'phone_number' => 'Phone Number',
         'manager_first_name' => 'Manager First Name',
         'manager_last_name' => 'Manager Last Name',
@@ -126,7 +132,25 @@ class Importer extends Component
         'city' => 'City',
         'state' => 'State',
         'country' => 'Country',
-        'vip' => 'VIP'
+        'zip' => 'Zip',
+        'vip' => 'VIP',
+        'remote' => 'Remote',
+    ];
+
+    static $locations = [
+        'name' => 'Name',
+        'address' => 'Address',
+        'address2' => 'Address 2',
+        'city' => 'City',
+        'state' => 'State',
+        'country' => 'Country',
+        'zip' => 'Zip',
+        'currency' => 'Currency',
+        'ldap_ou' => 'LDAP OU',
+        'manager_username' => 'Manager Username',
+        'manager' => 'Manager',
+        'parent_location' => 'Parent Location',
+        'notes' => 'Notes',
     ];
 
     //array of "real fieldnames" to a list of aliases for that field
@@ -150,6 +174,11 @@ class Importer extends Component
                 'QTY',
                 'Quantity'
             ],
+        'zip' =>
+            [
+                'Postal Code',
+                'Post Code'
+            ],
         'min_amt' =>
             [
                 'Min Amount',
@@ -158,6 +187,31 @@ class Importer extends Component
         'next_audit_date' =>
             [
                 'Next Audit',
+            ],
+        'address2' =>
+            [
+                'Address 2',
+                'Address2',
+            ],
+        'ldap_ou' =>
+            [
+                'LDAP OU',
+                'OU',
+            ],
+        'parent_location' =>
+            [
+                'Parent',
+                'Parent Location',
+            ],
+        'manager' =>
+            [
+                'Managed By',
+                'Manager Name',
+                'Manager Full Name',
+            ],
+        'manager_username' =>
+            [
+                'Manager Username',
             ],
 
 
@@ -180,6 +234,9 @@ class Importer extends Component
                 break;
             case 'user':
                 $results = self::$general + self::$users;
+                break;
+            case 'location':
+                $results = self::$general + self::$locations;
                 break;
             default:
                 $results = self::$general;
@@ -252,7 +309,6 @@ class Importer extends Component
         $this->authorize('import');
         $this->progress = -1; // '-1' means 'don't show the progressbar'
         $this->progress_bar_class = 'progress-bar-warning';
-        \Log::debug("Hey, we are calling MOUNT (in the importer-file) !!!!!!!!"); //fcuk
         $this->importTypes = [
             'asset' =>      trans('general.assets'),
             'accessory' =>  trans('general.accessories'),
@@ -260,6 +316,7 @@ class Importer extends Component
             'component' =>  trans('general.components'),
             'license' =>    trans('general.licenses'),
             'user' =>       trans('general.users'),
+            'location' =>    trans('general.locations'),
         ];
 
         $this->columnOptions[''] = $this->getColumns(''); //blank mode? I don't know what this is supposed to mean
@@ -273,8 +330,7 @@ class Importer extends Component
 
     public function selectFile($id)
     {
-        \Log::debug("TOGGLE EVENT FIRED!");
-        \Log::debug("The ID we are trying to find is AS FOLLOWS: ".$id);
+
         $this->activeFile = Import::find($id);
         $this->field_map = null;
         foreach($this->activeFile->header_row as $element) {
@@ -284,11 +340,9 @@ class Importer extends Component
                 $this->field_map[] = null; // re-inject the 'nulls' if a file was imported with some 'Do Not Import' settings
             }
         }
-        //$this->field_map = $this->activeFile->field_map ? array_values($this->activeFile->field_map) : []; // this is wrong
         $this->file_id = $id;
         $this->import_errors = null;
         $this->statusText = null;
-        \Log::debug("The import type we are about to try and load up is gonna be this: ".$this->activeFile->import_type);
 
     }
 

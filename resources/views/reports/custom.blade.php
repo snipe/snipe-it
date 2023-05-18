@@ -235,25 +235,21 @@
 
           <div class="col-md-8">
 
-            {!! trans('general.report_fields_info') !!}
+            <p>
+                {!! trans('general.report_fields_info') !!}
+            </p>
 
-            @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'by_company_id', 'hide_new' => 'true'])
-            @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'by_location_id', 'hide_new' => 'true'])
-            @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.default_location'), 'fieldname' => 'by_rtd_location_id', 'hide_new' => 'true'])
-          @include ('partials.forms.edit.department-select', ['translated_name' => trans('general.department'), 'fieldname' => 'by_dept_id', 'hide_new' => 'true'])
-            @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'by_supplier_id', 'hide_new' => 'true'])
-            @include ('partials.forms.edit.model-select', ['translated_name' => trans('general.asset_model'), 'fieldname' => 'by_model_id', 'hide_new' => 'true'])
+              <br>
+
+            @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'),'multiple' => 'true', 'fieldname' => 'by_company_id[]', 'hide_new' => 'true'])
+            @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'multiple' => 'true', 'fieldname' => 'by_location_id[]', 'hide_new' => 'true'])
+            @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.default_location'), 'multiple' => 'true', 'fieldname' => 'by_rtd_location_id[]', 'hide_new' => 'true'])
+            @include ('partials.forms.edit.department-select', ['translated_name' => trans('general.department'), 'fieldname' => 'by_dept_id', 'hide_new' => 'true'])
+            @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'by_supplier_id[]', 'multiple' => 'true', 'hide_new' => 'true'])
+            @include ('partials.forms.edit.model-select', ['translated_name' => trans('general.asset_model'), 'fieldname' => 'by_model_id[]', 'multiple' => 'true', 'hide_new' => 'true'])
             @include ('partials.forms.edit.manufacturer-select', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'by_manufacturer_id', 'hide_new' => 'true'])
             @include ('partials.forms.edit.category-select', ['translated_name' => trans('general.category'), 'fieldname' => 'by_category_id', 'hide_new' => 'true', 'category_type' => 'asset'])
-
-          <!-- Status -->
-            <div class="form-group">
-              <label for="by_status_id" class="col-md-3 control-label">{{ trans('admin/hardware/form.status') }}</label>
-              <div class="col-md-7 col-sm-11">
-                {{ Form::select('by_status_id', Helper::statusLabelList() , old('by_status_id'), array('class'=>'select2', 'style'=>'width:100%', 'aria-label'=>'by_status_id')) }}
-              </div>
-            </div>
-
+              @include ('partials.forms.edit.status-select', ['translated_name' => trans('admin/hardware/form.status'), 'fieldname' => 'by_status_id[]', 'multiple' => 'true', 'hide_new' => 'true'])
 
             <!-- Order Number -->
             <div class="form-group">
@@ -282,6 +278,16 @@
                 <input type="text" class="form-control" name="created_end" aria-label="created_end">
               </div>
             </div>
+
+          <!-- Checkout Date -->
+          <div class="form-group checkout-range">
+              <label for="checkout_date" class="col-md-3 control-label">{{ trans('general.checkout') }} {{  trans('general.range') }}</label>
+              <div class="input-daterange input-group col-md-6" id="datepicker">
+                  <input type="text" class="form-control" name="checkout_date_start" aria-label="checkout_date_start">
+                  <span class="input-group-addon">to</span>
+                  <input type="text" class="form-control" name="checkout_date_end" aria-label="checkout_date_end">
+              </div>
+          </div>
 
             <!-- Expected Checkin Date -->
             <div class="form-group expected_checkin-range">
@@ -363,6 +369,12 @@
   <script>
 
       $('.purchase-range .input-daterange').datepicker({
+          clearBtn: true,
+          todayHighlight: true,
+          endDate: '0d',
+          format: 'yyyy-mm-dd'
+      });
+      $('.checkout-range .input-daterange').datepicker({
           clearBtn: true,
           todayHighlight: true,
           endDate: '0d',
