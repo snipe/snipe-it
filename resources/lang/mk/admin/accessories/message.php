@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Додатокот не беше задолжен, обидете се повторно',
         'success' 		=> 'Додатокот е задолжен.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Тој корисник е неважечки. Обидете се повторно.'
     ),
 

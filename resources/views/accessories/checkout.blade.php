@@ -64,7 +64,7 @@
           {{-- Hardcoded value to dummy user. --}}
           <input type="text" hidden=true name="assigned_to" id="assigned_to" value="{{\App\Models\User::where('username', '=', 'Accessories Checkout')->first()->id}}">
 
-             @if ($accessory->requireAcceptance() || $accessory->getEula() || ($snipeSettings->slack_endpoint!=''))
+             @if ($accessory->requireAcceptance() || $accessory->getEula() || ($snipeSettings->webhook_endpoint!=''))
                  <div class="form-group notification-callout">
                      <div class="col-md-8 col-md-offset-3">
                          <div class="callout callout-info">
@@ -81,9 +81,9 @@
                                  <br>
                              @endif
 
-                             @if ($snipeSettings->slack_endpoint!='')
+                             @if ($snipeSettings->webhook_endpoint!='')
                                  <i class="fab fa-slack"></i>
-                                 A slack message will be sent
+                                 {{ trans('general.webhook_msg_note') }}
                              @endif
                          </div>
                      </div>

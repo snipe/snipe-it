@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Μοντέλο δεν ενημερώθηκε, παρακαλώ προσπαθήστε ξανά',
-        'success' => 'Το μοντέλο ενημερώθηκε επιτυχώς.'
+        'success' => 'Το μοντέλο ενημερώθηκε επιτυχώς.',
     ),
 
     'delete' => array(
@@ -32,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Δεν άλλαξαν πεδία, επομένως τίποτα δεν ενημερώθηκε.',
-        'success' 		=> 'Τα μοντέλα ενημερώθηκαν.'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Δεν επιλέχθηκαν πεδία, επομένως τίποτα δεν διαγράφηκε.',
-        'success' 		    => ':success_count model(s) Διαγράφηκε!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ':success_count model(s) μοντέλα διαγράφηκαν, ωστόσο το :fail_count δεν μπόρεσε να διαγραφεί επειδή εξακολουθούν να έχουν στοιχεία που σχετίζονται με αυτά.'
     ),
 

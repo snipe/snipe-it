@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'acceptance_asset_accepted' => 'A user has accepted an item',
-    'acceptance_asset_declined' => 'A user has declined an item',
+    'acceptance_asset_accepted' => 'En bruger har accepteret et emne',
+    'acceptance_asset_declined' => 'En bruger har afvist et emne',
     'a_user_canceled' => 'En bruger har annulleret en vareforespørgsel på hjemmesiden',
     'a_user_requested' => 'En bruger har anmodet om et emne på hjemmesiden',
     'accessory_name' => 'Tilbehør Navn:',
@@ -11,7 +11,7 @@ return [
     'asset' => 'aktiv:',
     'asset_name' => 'Aktivnavn:',
     'asset_requested' => 'Aktiver bedt om',
-    'asset_tag' => 'Asset Tag',
+    'asset_tag' => 'Inventarnummer',
     'assigned_to' => 'Tildelt',
     'best_regards' => 'Med venlig hilsen,',
     'canceled' => 'annulleret:',
@@ -43,7 +43,7 @@ return [
     'login_first_admin' => 'Log ind på din nye Snipe-IT-installation ved hjælp af nedenstående referencer:',
     'login' => 'Log på:',
     'Low_Inventory_Report' => 'Lav lagerrapport',
-    'inventory_report' => 'Inventory Report',
+    'inventory_report' => 'Lagerrapport',
     'min_QTY' => 'Min QTY',
     'name' => 'Navn',
     'new_item_checked' => 'En ny vare er blevet tjekket ud under dit navn, detaljerne er nedenfor.',
@@ -62,7 +62,7 @@ return [
     'test_mail_text' => 'Dette er en test fra Snipe-IT Asset Management System. Hvis du fik dette, virker mailen :)',
     'the_following_item' => 'Følgende vare er blevet kontrolleret i:',
     'low_inventory_alert' => 'Der er :count enhed som er under minimum lagertal eller som snart vil være det.|Der er :count enheder som er under minimum lagertal eller som snart vil være det.',
-    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'Der er :count aktiv hvor garantien udløber indenfor de næste :threshold dage.|Der er :count aktiver hvor garantien udløber indenfor de næste :threshold dage.',
     'license_expiring_alert' => 'Der er :count licens(er) der udløber indenfor den/de næste :threshold dag(e).',
     'to_reset' => 'Nulstille din :web-adgangskode, udfylde denne formular:',
     'type' => 'Type',
@@ -79,5 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Påmindelse: :name checkin deadline nærmer sig',
     'Expected_Checkin_Date' => 'Et asset tjekket ud til dig skal tjekkes tilbage den :date',
     'your_assets' => 'Se dine assets',
-    'rights_reserved' => 'All rights reserved.',
+    'rights_reserved' => 'Alle rettigheder forbeholdt.',
 ];

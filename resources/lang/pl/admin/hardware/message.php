@@ -23,6 +23,8 @@ return [
     'restore' => [
         'error'   		=> 'Aktywo nie został przywrócony, spróbuj ponownie.',
         'success' 		=> 'Aktywo zostało przywrócone.',
+        'bulk_success' 		=> 'Aktywo zostało pomyślnie przywrócone.',
+        'nothing_updated'   => 'Żadne aktywa nie zostały wybrane, więc nic nie zostało przywrócone.', 
     ],
 
     'audit' => [
@@ -49,8 +51,8 @@ return [
         'success'               => 'Twój plik został zaimportowany',
         'file_delete_success'   => 'Twój plik został poprawnie usunięty',
         'file_delete_error'      => 'Plik nie może zostać usunięty',
-        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
-        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'header_row_has_malformed_characters' => 'Jeden lub więcej atrybutów w wierszu nagłówka zawiera nieprawidłowe znaki UTF-8',
+        'content_row_has_malformed_characters' => 'Jeden lub więcej atrybutów w pierwszym rzędzie zawartości zawiera nieprawidłowe znaki UTF-8',
     ],
 
 

@@ -112,11 +112,13 @@
                     <!-- Include logo in print assets -->
                         <div class="form-group">
                             <div class="col-md-3">
-                                {{ Form::label('logo_print_assets', trans('admin/settings/general.logo_print_assets')) }}
+                                <strong>{{ trans('admin/settings/general.logo_print_assets') }}</strong>
                             </div>
                             <div class="col-md-9">
-                                {{ Form::checkbox('logo_print_assets', '1', old('logo_print_assets', $setting->logo_print_assets),array('class' => 'minimal', 'aria-label'=>'logo_print_assets')) }}
+                                <label class="form-control">
+                                {{ Form::checkbox('logo_print_assets', '1', old('logo_print_assets', $setting->logo_print_assets),array('aria-label'=>'logo_print_assets')) }}
                                 {{ trans('admin/settings/general.logo_print_assets_help') }}
+                                </label>
 
                             </div>
                         </div>
@@ -125,11 +127,13 @@
                         <!-- show urls in emails-->
                         <div class="form-group">
                             <div class="col-md-3">
-                                {{ Form::label('show_url_in_emails', trans('admin/settings/general.show_url_in_emails')) }}
+                                <strong>{{ trans('admin/settings/general.show_url_in_emails') }}</strong>
                             </div>
                             <div class="col-md-9">
-                                {{ Form::checkbox('show_url_in_emails', '1', old('show_url_in_emails', $setting->show_url_in_emails),array('class' => 'minimal', 'aria-label'=>'show_url_in_emails')) }}
-                                {{ trans('general.yes') }}
+                                <label class="form-control">
+                                    {{ Form::checkbox('show_url_in_emails', '1', old('show_url_in_emails', $setting->show_url_in_emails),array('aria-label'=>'show_url_in_emails')) }}
+                                    {{ trans('general.yes') }}
+                                </label>
                                 <p class="help-block">{{ trans('admin/settings/general.show_url_in_emails_help_text') }}</p>
                             </div>
                         </div>
@@ -164,11 +168,13 @@
                         <!-- Allow User Skin -->
                         <div class="form-group">
                             <div class="col-md-3">
-                                {{ Form::label('allow_user_skin', trans('admin/settings/general.allow_user_skin')) }}
+                                <strong>{{ trans('admin/settings/general.allow_user_skin') }}</strong>
                             </div>
                             <div class="col-md-9">
-                                {{ Form::checkbox('allow_user_skin', '1', old('allow_user_skin', $setting->allow_user_skin),array('class' => 'minimal')) }}
-                                {{ trans('general.yes') }}
+                                <label class="form-control">
+                                    {{ Form::checkbox('allow_user_skin', '1', old('allow_user_skin', $setting->allow_user_skin)) }}
+                                    {{ trans('general.yes') }}
+                                </label>
                                 <p class="help-block">{{ trans('admin/settings/general.allow_user_skin_help_text') }}</p>
                             </div>
                         </div>

@@ -52,6 +52,7 @@ class CustomField extends Model
         'name' => 'required|unique:custom_fields',
         'element' => 'required|in:text,listbox,textarea,checkbox,radio',
         'field_encrypted' => 'nullable|boolean',
+        'auto_add_to_fieldsets' => 'boolean',
     ];
 
     /**
@@ -69,6 +70,8 @@ class CustomField extends Model
         'show_in_email',
         'is_unique',
         'display_in_user_view',
+        'auto_add_to_fieldsets',
+
     ];
 
     /**
@@ -238,7 +241,7 @@ class CustomField extends Model
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     * @return string
      */
     public function db_column_name()
     {

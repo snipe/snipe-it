@@ -33,12 +33,12 @@ return [
         'testing_authentication' => 'Testování LDAP ověření...',
         'authentication_success' => 'Uživatel byl úspěšně ověřen přes LDAP!'
     ],
-    'slack' => [
-        'sending' => 'Odesílám testovací zprávu na Slack...',
-        'success_pt1' => 'Úspěšně! Zkontrolujte ',
-        'success_pt2' => ' kanál pro vaši testovací zprávu a ujistěte se, že klepněte na tlačítko ULOŽIT pro uložení nastavení.',
+    'webhook' => [
+        'sending' => 'Sending :app test message...',
+        'success_pt1' => 'Success! Check the ',
+        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
         '500' => '500 Server Error.',
-        'error' => 'Something went wrong. Slack responded with: :error_message',
+        'error' => 'Something went wrong. :app responded with: :error_message',
         'error_misc' => 'Something went wrong. :( ',
     ]
 ];

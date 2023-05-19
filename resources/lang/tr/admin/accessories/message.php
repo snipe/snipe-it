@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Aksesuar çıkışı yapılamadı, lütfen tekrar deneyin',
         'success' 		=> 'Aksesuar çıkışı yapıldı.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Bu kullanıcı geçersiz. Lütfen tekrar deneyin.'
     ),
 

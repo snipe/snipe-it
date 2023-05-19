@@ -84,7 +84,7 @@ class SettingsController extends Controller
         }
         $pageURL = $protocol.$host.$_SERVER['REQUEST_URI'];
 
-        $start_settings['url_config'] = url('/').'/setup';
+        $start_settings['url_config'] = config('app.url').'/setup';
         $start_settings['url_valid'] = ($start_settings['url_config'] === $pageURL);
         $start_settings['real_url'] = $pageURL;
         $start_settings['php_version_min'] = true;
@@ -961,6 +961,7 @@ class SettingsController extends Controller
             $setting->ldap_phone_field = $request->input('ldap_phone');
             $setting->ldap_jobtitle = $request->input('ldap_jobtitle');
             $setting->ldap_country = $request->input('ldap_country');
+            $setting->ldap_location = $request->input('ldap_location');
             $setting->ldap_dept = $request->input('ldap_dept');
             $setting->ldap_client_tls_cert   = $request->input('ldap_client_tls_cert');
             $setting->ldap_client_tls_key    = $request->input('ldap_client_tls_key');
@@ -1038,6 +1039,48 @@ class SettingsController extends Controller
         return $pdf_branding;
     }
 
+
+    /**
+     * Show Google login settings form
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v6.1.1]
+     * @return View
+     */
+    public function getGoogleLoginSettings()
+    {
+        $setting = Setting::getSettings();
+        return view('settings.google', compact('setting'));
+    }
+
+    /**
+     * ShSaveow Google login settings form
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v6.1.1]
+     * @return View
+     */
+    public function postGoogleLoginSettings(Request $request)
+    {
+        if (!config('app.lock_passwords')) {
+            $setting = Setting::getSettings();
+
+            $setting->google_login = $request->input('google_login', 0);
+            $setting->google_client_id = $request->input('google_client_id');
+            $setting->google_client_secret = $request->input('google_client_secret');
+
+            if ($setting->save()) {
+                return redirect()->route('settings.index')
+                    ->with('success', trans('admin/settings/message.update.success'));
+            }
+
+            return redirect()->back()->withInput()->withErrors($setting->getErrors());
+        }
+
+        return redirect()->back()->with('error', trans('general.feature_disabled'));
+    }
+
+
     /**
      * Show the listing of backups.
      *
@@ -1093,7 +1136,7 @@ class SettingsController extends Controller
     public function postBackups()
     {
         if (! config('app.lock_passwords')) {
-            Artisan::call('backup:run');
+            Artisan::call('snipeit:backup', ['--filename' => 'manual-backup-'.date('Y-m-d-H:i:s')]);
             $output = Artisan::output();
 
             // Backup completed

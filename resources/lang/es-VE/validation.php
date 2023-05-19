@@ -43,14 +43,14 @@ return [
     'file'                 => 'Estte :attribute debe ser un archivo.',
     'filled'               => 'El campo :attribute debe tener un valor.',
     'image'                => 'El :attribute debe ser una imagen.',
-    'import_field_empty'    => 'The value for :fieldname cannot be null.',
+    'import_field_empty'    => 'El valor para :fieldname no puede ser nulo.',
     'in'                   => 'El :attribute seleccionado es inválido.',
     'in_array'             => 'El :attribute no existe en :other.',
     'integer'              => 'El :attribute debe ser un número entero.',
     'ip'                   => 'El :attribute debe ser una dirección IP correcta.',
     'ipv4'                 => 'El :atrribute debe ser una dirección IPv4 válida.',
     'ipv6'                 => 'El :atrribute debe ser una dirección IPv6 válida.',
-    'is_unique_department' => 'The :attribute must be unique to this Company Location',
+    'is_unique_department' => 'El atributo :attribute debe ser único para esta ubicación de la empresa',
     'json'                 => 'El :atrribute debe ser una dirección IPv4 válida.',
     'max'                  => [
         'numeric' => 'El :attribute no debe ser mayor que :max kilobytes.',
@@ -124,13 +124,13 @@ return [
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
         // people won't know how to format. 
-        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
-        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
-        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'purchase_date.date_format'     => 'El :attribute debe ser una fecha válida en formato AAAA-MM-DD',
+        'last_audit_date.date_format'   =>  'El :attribute debe ser una fecha válida en formato AAAA-MM-DD hh:mm:ss',
+        'expiration_date.date_format'   =>  'El :attribute debe ser una fecha válida en formato AAAA-MM-DD',
+        'termination_date.date_format'  =>  'El :attribute debe ser una fecha válida en formato AAAA-MM-DD',
+        'expected_checkin.date_format'  =>  'El :attribute debe ser una fecha válida en formato AAAA-MM-DD',
+        'start_date.date_format'        =>  'El :attribute debe ser una fecha válida en formato AAAA-MM-DD',
+        'end_date.date_format'          =>  'El :attribute debe ser una fecha válida en formato AAAA-MM-DD',
 
     ],
 

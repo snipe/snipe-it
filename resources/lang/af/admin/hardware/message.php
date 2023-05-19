@@ -22,6 +22,8 @@ return [
     'restore' => [
         'error'   		=> 'Bate is nie herstel nie, probeer asseblief weer',
         'success' 		=> 'Bate herstel suksesvol.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [

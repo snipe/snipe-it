@@ -113,7 +113,8 @@ class BulkUsersController extends Controller
             ->conditionallyAddItem('locale')
             ->conditionallyAddItem('remote')
             ->conditionallyAddItem('ldap_import')
-            ->conditionallyAddItem('activated');
+            ->conditionallyAddItem('activated')
+            ->conditionallyAddItem('autoassign_licenses');
 
 
         // If the manager_id is one of the users being updated, generate a warning.
@@ -123,6 +124,11 @@ class BulkUsersController extends Controller
                 'warning' => trans('admin/users/message.bulk_manager_warn'),
             ];
         }
+
+        if ($request->input('null_location_id')=='1') {
+            $this->update_array['location_id'] = null;
+        }
+
         if (! $manager_conflict) {
             $this->conditionallyAddItem('manager_id');
         }

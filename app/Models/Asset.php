@@ -70,19 +70,6 @@ class Asset extends Depreciable
     */
     protected $injectUniqueIdentifier = true;
 
-    // We set these as protected dates so that they will be easily accessible via Carbon
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
-        'purchase_date',
-        'last_checkout',
-        'expected_checkin',
-        'last_audit_date',
-        'next_audit_date'
-    ];
-
-
     protected $casts = [
         'purchase_date' => 'date',
         'last_checkout' => 'datetime',
@@ -96,11 +83,14 @@ class Asset extends Depreciable
         'rtd_company_id' => 'integer',
         'supplier_id'    => 'integer',
         'byod'           => 'boolean',
+        'created_at'     => 'datetime',
+        'updated_at'   => 'datetime',
+        'deleted_at'  => 'datetime',
     ];
 
     protected $rules = [
         'name'            => 'max:255|nullable',
-        'model_id'        => 'required|integer|exists:models,id',
+        'model_id'        => 'required|integer|exists:models,id,deleted_at,NULL',
         'status_id'       => 'required|integer|exists:status_labels,id',
         'company_id'      => 'integer|nullable',
         'warranty_months' => 'numeric|nullable|digits_between:0,240',
@@ -919,7 +909,13 @@ class Asset extends Depreciable
 
         return false;
     }
-
+    public function getComponentCost(){
+        $cost = 0;
+        foreach($this->components as $component) {
+            $cost += $component->pivot->assigned_qty*$component->purchase_cost;
+        }
+        return $cost;
+    }
 
     /**
     * -----------------------------------------------

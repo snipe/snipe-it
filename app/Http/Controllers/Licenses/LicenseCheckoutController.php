@@ -126,4 +126,70 @@ class LicenseCheckoutController extends Controller
 
         return false;
     }
+
+    /**
+     * Bulk checkin all license seats
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see LicenseCheckinController::create() method that provides the form view
+     * @since [v6.1.1]
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+
+    public function bulkCheckout($licenseId) {
+
+        \Log::debug('Checking out '.$licenseId.' via bulk');
+        $license = License::findOrFail($licenseId);
+        $this->authorize('checkin', $license);
+        $avail_count = $license->getAvailSeatsCountAttribute();
+
+        $users = User::whereNull('deleted_at')->where('autoassign_licenses', '=', 1)->with('licenses')->get();
+        \Log::debug($avail_count.' will be assigned');
+
+        if ($users->count() > $avail_count) {
+            \Log::debug('You do not have enough free seats to complete this task, so we will check out as many as we can. ');
+        }
+
+        // If the license is valid, check that there is an available seat
+        if ($license->availCount()->count() < 1) {
+            return redirect()->back()->with('error', trans('admin/licenses/general.bulk.checkout_all.error_no_seats'));
+        }
+
+
+        $assigned_count = 0;
+
+        foreach ($users as $user) {
+
+            // Check to make sure this user doesn't already have this license checked out to them
+            if ($user->licenses->where('id', '=', $licenseId)->count()) {
+                \Log::debug($user->username.' already has this license checked out to them. Skipping... ');
+                continue;
+            }
+
+            $licenseSeat = $license->freeSeat();
+
+            // Update the seat with checkout info
+            $licenseSeat->assigned_to = $user->id;
+
+            if ($licenseSeat->save()) {
+                $avail_count--;
+                $assigned_count++;
+                $licenseSeat->logCheckout(trans('admin/licenses/general.bulk.checkout_all.log_msg'), $user);
+                \Log::debug('License '.$license->name.' seat '.$licenseSeat->id.' checked out to '.$user->username);
+            }
+
+            if ($avail_count ==  0) {
+                return redirect()->back()->with('warning', trans('admin/licenses/general.bulk.checkout_all.warn_not_enough_seats', ['count' => $assigned_count]));
+            }
+        }
+
+        if ($assigned_count ==  0) {
+            return redirect()->back()->with('warning', trans('admin/licenses/general.bulk.checkout_all.warn_no_avail_users', ['count' => $assigned_count]));
+        }
+
+        return redirect()->back()->with('success', trans_choice('admin/licenses/general.bulk.checkout_all.success', 2, ['count' => $assigned_count] ));
+
+
+    }
 }

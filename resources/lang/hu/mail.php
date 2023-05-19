@@ -43,7 +43,7 @@ return [
     'login_first_admin' => 'Jelentkezzen be az új Snipe-IT telepítésébe az alábbi hitelesítő adatok alapján:',
     'login' => 'Belépés:',
     'Low_Inventory_Report' => 'Alacsony készletjelentés',
-    'inventory_report' => 'Inventory Report',
+    'inventory_report' => 'Készlet Jelentés',
     'min_QTY' => 'Min QTY',
     'name' => 'Név',
     'new_item_checked' => 'Egy új elemet az Ön neve alatt ellenőriztek, a részletek lent találhatók.',
@@ -79,5 +79,5 @@ return [
     'Expected_Checkin_Notification' => 'Emlékeztető: :name kiadásának idejéhez közelít',
     'Expected_Checkin_Date' => 'Az eszközt amelyet kiadtak neked, hamarosan visszavételre kerül a :date napon',
     'your_assets' => 'Eszközeidnek megtekíntése',
-    'rights_reserved' => 'All rights reserved.',
+    'rights_reserved' => 'Minden jog fenntartva.',
 ];

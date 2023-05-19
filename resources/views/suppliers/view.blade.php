@@ -65,6 +65,30 @@
             </a>
           </li>
 
+            <li>
+                <a href="#components" data-toggle="tab">
+                    <span class="hidden-lg hidden-md">
+                        <i class="far fa-save fa-2x" aria-hidden="true"></i>
+                    </span>
+                    <span class="hidden-xs hidden-sm">
+                          {{ trans('general.components') }}
+                        {!! (($supplier->components) && ($supplier->components->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($supplier->components->count()).'</badge>' : '' !!}
+                    </span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#consumables" data-toggle="tab">
+                    <span class="hidden-lg hidden-md">
+                        <i class="far fa-save fa-2x" aria-hidden="true"></i>
+                    </span>
+                    <span class="hidden-xs hidden-sm">
+                          {{ trans('general.consumables') }}
+                        {!! (($supplier->consumables) && ($supplier->consumables->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($supplier->consumables->count()).'</badge>' : '' !!}
+                    </span>
+                </a>
+            </li>
+
           <li>
             <a href="#maintenances" data-toggle="tab">
                     <span class="hidden-lg hidden-md">
@@ -172,6 +196,59 @@
 
             </div><!-- /.table-responsive -->
           </div><!-- /.tab-pane -->
+
+            <div class="tab-pane" id="components">
+                <h2 class="box-title">{{ trans('general.components') }}</h2>
+                <div class="table table-responsive">
+                    <table
+                            data-columns="{{ \App\Presenters\ComponentPresenter::dataTableLayout() }}"
+                            data-cookie-id-table="componentsListingTable"
+                            data-pagination="true"
+                            data-id-table="componentsListingTable"
+                            data-search="true"
+                            data-side-pagination="server"
+                            data-show-columns="true"
+                            data-show-fullscreen="true"
+                            data-show-export="true"
+                            data-show-refresh="true"
+                            data-sort-order="asc"
+                            id="accessoriesListingTable"
+                            class="table table-striped snipe-table"
+                            data-url="{{route('api.components.index', ['supplier_id' => $supplier->id]) }}"
+                            data-export-options='{
+                              "fileName": "export-suppliers-{{ str_slug($supplier->name) }}-components-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
+                    </table>
+                </div><!-- /.table-responsive -->
+            </div><!-- /.tab-pane -->
+
+            <div class="tab-pane" id="consumables">
+            <h2 class="box-title">{{ trans('general.consumables') }}</h2>
+            <div class="table table-responsive">
+                <table
+                        data-columns="{{ \App\Presenters\ConsumablePresenter::dataTableLayout() }}"
+                        data-cookie-id-table="consumablesListingTable"
+                        data-pagination="true"
+                        data-id-table="consumablesListingTable"
+                        data-search="true"
+                        data-side-pagination="server"
+                        data-show-columns="true"
+                        data-show-fullscreen="true"
+                        data-show-export="true"
+                        data-show-refresh="true"
+                        data-sort-order="asc"
+                        id="accessoriesListingTable"
+                        class="table table-striped snipe-table"
+                        data-url="{{route('api.consumables.index', ['supplier_id' => $supplier->id]) }}"
+                        data-export-options='{
+                              "fileName": "export-suppliers-{{ str_slug($supplier->name) }}-consumables-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
+                </table>
+            </div><!-- /.table-responsive -->
+        </div><!-- /.tab-pane -->
+
 
           <div class="tab-pane" id="maintenances">
             <h2 class="box-title">{{ trans('admin/asset_maintenances/general.asset_maintenances') }}</h2>

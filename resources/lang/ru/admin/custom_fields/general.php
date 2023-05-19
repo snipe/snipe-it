@@ -44,7 +44,7 @@ return [
     'make_required' => 'Необязательное - нажмите чтобы сделать обязательным',
     'reorder' => 'Изменить порядок',
     'db_field' => 'Поле БД',
-    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code>:db_column</code> but should be <code>:expected</code>.',
+    'db_convert_warning' => 'ВНИМАНИЕ. Настраиваемое поле <code>:db_column</code>, должно быть <code>:expected</code>.',
     'is_unique' => 'Это значение должно быть уникальным для всех активов',
     'unique' => 'Уникальный',
     'display_in_user_view' => 'Разрешить владельцу актива просматривать эти значения на странице Просмотр Назначенных Активов',

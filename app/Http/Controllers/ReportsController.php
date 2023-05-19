@@ -605,23 +605,23 @@ class ReportsController extends Controller
             );
 
             if ($request->filled('by_location_id')) {
-                $assets->where('assets.location_id', $request->input('by_location_id'));
+                $assets->whereIn('assets.location_id', $request->input('by_location_id'));
             }
 
             if ($request->filled('by_rtd_location_id')) {
-                $assets->where('assets.rtd_location_id', $request->input('by_rtd_location_id'));
+                $assets->whereIn('assets.rtd_location_id', $request->input('by_rtd_location_id'));
             }
 
             if ($request->filled('by_supplier_id')) {
-                $assets->where('assets.supplier_id', $request->input('by_supplier_id'));
+                $assets->whereIn('assets.supplier_id', $request->input('by_supplier_id'));
             }
 
             if ($request->filled('by_company_id')) {
-                $assets->where('assets.company_id', $request->input('by_company_id'));
+                $assets->whereIn('assets.company_id', $request->input('by_company_id'));
             }
 
             if ($request->filled('by_model_id')) {
-                $assets->where('assets.model_id', $request->input('by_model_id'));
+                $assets->whereIn('assets.model_id', $request->input('by_model_id'));
             }
 
             if ($request->filled('by_category_id')) {
@@ -641,7 +641,7 @@ class ReportsController extends Controller
             }
 
             if ($request->filled('by_status_id')) {
-                $assets->where('assets.status_id', $request->input('by_status_id'));
+                $assets->whereIn('assets.status_id', $request->input('by_status_id'));
             }
 
             if (($request->filled('purchase_start')) && ($request->filled('purchase_end'))) {
@@ -650,6 +650,9 @@ class ReportsController extends Controller
 
             if (($request->filled('created_start')) && ($request->filled('created_end'))) {
                 $assets->whereBetween('assets.created_at', [$request->input('created_start'), $request->input('created_end')]);
+            }
+            if (($request->filled('checkout_date_start')) && ($request->filled('checkout_date_end'))) {
+                $assets->whereBetween('assets.last_checkout', [$request->input('checkout_date_start'), $request->input('checkout_date_end')]);
             }
 
             if (($request->filled('expected_checkin_start')) && ($request->filled('expected_checkin_end'))) {
@@ -673,13 +676,12 @@ class ReportsController extends Controller
                 $assets->onlyTrashed();
             }
 
-            $assets->orderBy('assets.id', 'ASC')->chunk(
-                20,
-                function ($assets) use ($handle, $customfields, $request) {
-
-                    $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
-                    \Log::debug('Walking results: ' . $executionTime);
-                    $count = 0;
+            \Log::debug($assets->toSql());
+            $assets->orderBy('assets.id', 'ASC')->chunk(20, function ($assets) use ($handle, $customfields, $request) {
+            
+                $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
+                \Log::debug('Walking results: '.$executionTime);
+                $count = 0;
 
                     $formatter = new EscapeFormula("`");
 
@@ -911,12 +913,8 @@ class ReportsController extends Controller
     public function getAssetMaintenancesReport()
     {
         $this->authorize('reports.view');
-        // Grab all the improvements
-        $assetMaintenances = AssetMaintenance::with('asset', 'supplier', 'asset.company')
-            ->orderBy('created_at', 'DESC')
-            ->get();
 
-        return view('reports/asset_maintenances', compact('assetMaintenances'));
+        return view('reports.asset_maintenances');
     }
 
     /**

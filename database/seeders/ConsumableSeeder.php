@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Consumable;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -12,8 +13,11 @@ class ConsumableSeeder extends Seeder
     {
         Consumable::truncate();
         DB::table('consumables_users')->truncate();
-        Consumable::factory()->count(1)->cardstock()->create(); // 1
-        Consumable::factory()->count(1)->paper()->create(); // 2
-        Consumable::factory()->count(1)->ink()->create(); // 3
+
+        $admin = User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin()->create();
+
+        Consumable::factory()->count(1)->cardstock()->create(['user_id' => $admin->id]);
+        Consumable::factory()->count(1)->paper()->create(['user_id' => $admin->id]);
+        Consumable::factory()->count(1)->ink()->create(['user_id' => $admin->id]);
     }
 }

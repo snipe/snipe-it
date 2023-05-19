@@ -39,8 +39,10 @@ class LicenseSeatsController extends Controller
             }
 
             $total = $seats->count();
-            $offset = (($seats) && (request('offset') >= $total)) ? 0 : request('offset', 0);
-            $limit = request('limit', 50);
+
+            // Make sure the offset and limit are actually integers and do not exceed system limits
+            $offset = ($request->input('offset') > $seats->count()) ? $seats->count() : abs($request->input('offset'));
+            $limit = app('api_limit_value');
 
             $seats = $seats->skip($offset)->take($limit)->get();
 

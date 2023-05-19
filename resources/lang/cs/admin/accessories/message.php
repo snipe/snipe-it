@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Příslušenství nebylo převzato, zkuste to znovu',
         'success' 		=> 'Příslušenství úspěšně předáno.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Neplatný uživatel. Zkuste to znovu.'
     ),
 

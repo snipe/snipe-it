@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Невозможно обновить Модель, повторите еще раз',
-        'success' => 'Модель успешно обновлена.'
+        'success' => 'Модель успешно обновлена.',
     ),
 
     'delete' => array(
@@ -32,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Никаких изменений нет, поэтому ничего не обновлено.',
-        'success' 		=> 'Модели обновлены.'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Ни одна модель не выбрана, поэтому нечего удалить.',
-        'success' 		    => 'Удалено :success_count моделей(ль)!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> 'Удалено : success_count моделей(ль), однако: fail_count моделей не удалены, потому что они всё ещё имеют связанные с ними активы.'
     ),
 

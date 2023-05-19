@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Mudelit ei uuendatud, proovige uuesti',
-        'success' => 'Mudeli uuendamine õnnestus.'
+        'success' => 'Mudeli uuendamine õnnestus.',
     ),
 
     'delete' => array(
@@ -32,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Ühtegi välja ei muudetud, uuendusi ei tehtud',
-        'success' 		=> 'Mudelid on uuendatud.'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Mudeleid ei valitud, nii et midagi ei kustutatud.',
-        'success' 		    => ':success_count mudel(it) kustutatud!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ':success_count mudel(it) kustutati, kuid :fail_count ei õnnestunud kustutada kuna nendega on ikka veel vara seotud.'
     ),
 

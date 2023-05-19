@@ -5,10 +5,13 @@ use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Category;
 use Carbon\Carbon;
+use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class AssetTest extends TestCase
 {
+    use InteractsWithSettings;
+
     // public function testAutoIncrementMixed()
     // {
     //     $expected = '123411';
@@ -36,7 +39,7 @@ class AssetTest extends TestCase
                 'model_id' => AssetModel::factory()
                     ->create(
                         [
-                            'category_id' => Category::factory()->assetLaptopCategory()->id
+                            'category_id' => Category::factory()->assetLaptopCategory()->create()->id
                         ]
                 )->id,   
                 'warranty_months' => 24,

@@ -33,12 +33,12 @@ return [
         'testing_authentication' => 'LDAP認証のテスト中...',
         'authentication_success' => 'LDAPによるユーザー認証に成功しました！'
     ],
-    'slack' => [
-        'sending' => 'Slackのテストメッセージを送信しています...',
+    'webhook' => [
+        'sending' => ':app テストメッセージを送信しています...',
         'success_pt1' => 'チェックに成功 ',
-        'success_pt2' => ' テストメッセージのチャンネルで、設定を保存するには以下の「保存」をクリックしてください。',
+        'success_pt2' => ' テストメッセージのチャンネルで、設定を保存するには以下の「SAVE」をクリックしてください。',
         '500' => '500 Server Error.',
-        'error' => 'Something went wrong. Slack responded with: :error_message',
-        'error_misc' => 'Something went wrong. :( ',
+        'error' => '問題が発生しました。:app 応答: :error_message',
+        'error_misc' => '問題が発生しました。:( ',
     ]
 ];

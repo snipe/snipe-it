@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'A csoport már létezik!',
-    'group_not_found'     => '[:id] csoport nem létezik.',
+    'group_not_found'     => 'A :id csoportazonosító nem létezik.',
     'group_name_required' => 'A név mező kötelező',
 
     'success' => array(

@@ -6,7 +6,7 @@ return array(
     'deleted'  					        => 'This model has been deleted.',
     'bulk_delete'               => 'การลบรายการเป็นกลุ่ม',
     'bulk_delete_help'               => 'ใช้ช่องทำเครื่องหมายด้านล่างเพื่อยืนยันการลบโมเดลเนื้อหาที่เลือก โมเดลสินทรัพย์ที่มีเนื้อหาเกี่ยวข้องกับเนื้อหาเหล่านั้นไม่สามารถลบออกได้จนกว่าสินทรัพย์จะเชื่อมโยงกับโมเดลอื่น',
-    'bulk_delete_warn'          => 'คุณกำลังจะลบ: asset_count',
+    'bulk_delete_warn'          => 'You are about to delete one asset model.|You are about to delete :model_count asset models.',
     'restore'                   => 'กู้คืนโมเดล',
     'requestable'               => 'ผู้ใช้สามารถขอรับโมเดลนี้ได้',
 	'show_mac_address'			      => 'แสดง MAC address ในสินทรัพย์ของโมเดลนี้',

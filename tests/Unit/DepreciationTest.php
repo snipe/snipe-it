@@ -5,10 +5,13 @@ use App\Models\Depreciation;
 use App\Models\Category;
 use App\Models\License;
 use App\Models\AssetModel;
+use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class DepreciationTest extends TestCase
 {
+    use InteractsWithSettings;
+
     public function testADepreciationHasModels()
     {
         $depreciation = Depreciation::factory()->create();
@@ -18,7 +21,7 @@ class DepreciationTest extends TestCase
                     ->count(5)
                     ->create(
                         [
-                            'category_id' => Category::factory()->assetLaptopCategory(),
+                            'category_id' => Category::factory()->assetLaptopCategory()->create(),
                             'depreciation_id' => $depreciation->id               
                         ]);
 
@@ -35,7 +38,7 @@ class DepreciationTest extends TestCase
                     ->photoshop()
                     ->create(
                         [
-                            'category_id' => Category::factory()->licenseGraphicsCategory(),
+                            'category_id' => Category::factory()->licenseGraphicsCategory()->create(),
                             'depreciation_id' => $depreciation->id               
                         ]);
 

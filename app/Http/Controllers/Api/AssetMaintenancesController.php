@@ -36,7 +36,7 @@ class AssetMaintenancesController extends Controller
     {
         $this->authorize('view', Asset::class);
 
-        $maintenances = AssetMaintenance::select('asset_maintenances.*')->with('asset', 'asset.model', 'asset.location', 'supplier', 'asset.company', 'admin');
+        $maintenances = AssetMaintenance::select('asset_maintenances.*')->with('asset', 'asset.model', 'asset.location', 'asset.defaultLoc', 'supplier', 'asset.company', 'admin');
 
         if ($request->filled('search')) {
             $maintenances = $maintenances->TextSearch($request->input('search'));
@@ -55,12 +55,9 @@ class AssetMaintenancesController extends Controller
         }
 
 
-        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
-        // case we override with the actual count, so we should return 0 items.
-        $offset = (($maintenances) && ($request->get('offset') > $maintenances->count())) ? $maintenances->count() : $request->get('offset', 0);
-
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $maintenances->count()) ? $maintenances->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
 
         $allowed_columns = [
                                 'id',
@@ -121,7 +118,7 @@ class AssetMaintenancesController extends Controller
         $assetMaintenance = new AssetMaintenance();
         $assetMaintenance->supplier_id = $request->input('supplier_id');
         $assetMaintenance->is_warranty = $request->input('is_warranty');
-        $assetMaintenance->cost =  Helper::ParseCurrency($request->input('cost'));
+        $assetMaintenance->cost =  $request->input('cost');
         $assetMaintenance->notes = e($request->input('notes'));
         $asset = Asset::find(e($request->input('asset_id')));
 
@@ -178,7 +175,7 @@ class AssetMaintenancesController extends Controller
 
         $assetMaintenance->supplier_id = e($request->input('supplier_id'));
         $assetMaintenance->is_warranty = e($request->input('is_warranty'));
-        $assetMaintenance->cost =  Helper::ParseCurrency($request->input('cost'));
+        $assetMaintenance->cost =  $request->input('cost');
         $assetMaintenance->notes = e($request->input('notes'));
 
         $asset = Asset::find(request('asset_id'));

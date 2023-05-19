@@ -62,7 +62,7 @@ return [
     'test_mail_text' => 'Esto es una prueba desde el sistema de gestión de activos de Snipe-IT. Si tienes esto, correo está funcionando :)',
     'the_following_item' => 'El siguiente artículo ha sido devuelto: ',
     'low_inventory_alert' => 'Hay :count item por debajo del inventario mínimo o próximo a bajar.|Hay are :count elementos por debajo del inventario mínimo o próximos a bajar.',
-    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'Hay :count activo con su garantía que expira en los próximos :threshold days.|Hay :count activos con garantías que expiran en los siguientes :threshold days.',
     'license_expiring_alert' => 'Hay :count licencia que expira en los próximos :threshold días. | Hay :count licencias que expiran en los próximos :threshold días.',
     'to_reset' => 'Para restaurar tu contraseña de :web, rellena este formulario:',
     'type' => 'Tipo',

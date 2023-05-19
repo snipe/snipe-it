@@ -160,7 +160,7 @@ class ImportController extends Controller
         // Run a backup immediately before processing
         if ($request->get('run-backup')) {
             \Log::debug('Backup manually requested via importer');
-            Artisan::call('backup:run');
+            Artisan::call('snipeit:backup', ['--filename' => 'pre-import-backup-'.date('Y-m-d-H:i:s')]);
         } else {
             \Log::debug('NO BACKUP requested via importer');
         }
@@ -192,6 +192,9 @@ class ImportController extends Controller
                 break;
             case 'user':
                 $redirectTo = 'users.index';
+                break;
+            case 'location':
+                $redirectTo = 'locations.index';
                 break;
         }
 

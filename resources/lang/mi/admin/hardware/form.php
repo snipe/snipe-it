@@ -2,8 +2,11 @@
 
 return [
     'bulk_delete'		=> 'Whakaaetia te Puku Whakamuri Taonga',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> 'Arotakehia nga rawa mo te whakakore nui i raro. Kia mukua, ka taea te whakahoki mai i enei taonga, engari kaore i te hono atu ki nga kaiwhakamahi e tukuna ana ki a raatau.',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'Kei te tata koe ki te muku: te hua moni rawa.',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'Kaupapa Whakatairanga Nui',
     'bulk_update_help'	=> 'Ko tenei puka ka taea e koe te whakahou i nga hua maha i te wa kotahi. Whakakiia nga mara e hiahia ana koe ki te huri. Ko nga mara katoa e mahue ana ka noho tonu.',
     'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
@@ -45,7 +48,7 @@ return [
     'asset_location_update_default' => 'Update only default location',
     'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
     'asset_deployable' => 'That status is deployable. This asset can be checked out.',
-    'processing_spinner' => 'Processing...',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Optional Information',
     'order_details'   => 'Order Related Information'
 ];

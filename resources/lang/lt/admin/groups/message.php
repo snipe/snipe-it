@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'Gruoė jau sukurta!',
-    'group_not_found'     => 'Tokios [:id] grupės nėra.',
+    'group_not_found'     => 'Group ID :id does not exist.',
     'group_name_required' => 'Laukelio pavadinimas privalomas',
 
     'success' => array(

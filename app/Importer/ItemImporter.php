@@ -60,8 +60,8 @@ class ItemImporter extends Importer
             $this->item['department_id'] = $this->createOrFetchDepartment($item_department);
         }
 
-        $item_manager_first_name = $this->findCsvMatch($row, 'manage_first_name');
-        $item_manager_last_name = $this->findCsvMatch($row, 'manage_last_name');
+        $item_manager_first_name = $this->findCsvMatch($row, 'manager_first_name');
+        $item_manager_last_name = $this->findCsvMatch($row, 'manager_last_name');
 
         if ($this->shouldUpdateField($item_manager_first_name)) {
             $this->item['manager_id'] = $this->fetchManager($item_manager_first_name, $item_manager_last_name);
@@ -87,6 +87,11 @@ class ItemImporter extends Importer
             $this->item['next_audit_date'] = date('Y-m-d', strtotime($this->findCsvMatch($row, 'next_audit_date')));
         }
 
+        $this->item['asset_eol_date'] = null;
+        if ($this->findCsvMatch($row, 'asset_eol_date') != '') {
+            $this->item['asset_eol_date'] = date('Y-m-d', strtotime($this->findCsvMatch($row, 'asset_eol_date')));
+        }
+
         $this->item['qty'] = $this->findCsvMatch($row, 'quantity');
         $this->item['requestable'] = $this->findCsvMatch($row, 'requestable');
         $this->item['user_id'] = $this->user_id;
@@ -103,10 +108,14 @@ class ItemImporter extends Importer
     /**
      * Parse row to determine what (if anything) we should checkout to.
      * @param  array $row CSV Row being parsed
-     * @return SnipeModel      Model to be checked out to
+     * @return ?SnipeModel      Model to be checked out to
      */
     protected function determineCheckout($row)
     {
+        if (get_class($this) == LocationImporter::class) {
+            return;
+        }
+
         // We only support checkout-to-location for asset, so short circuit otherwise.
         if (get_class($this) != AssetImporter::class) {
             return $this->createOrFetchUser($row);

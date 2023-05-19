@@ -42,5 +42,6 @@ return [
     'error_messages' => '錯誤訊息:',
     'success_messages' => '成功訊息:',
     'alert_details' => '請看下面的詳細資料.',
-    'custom_export' => '自定義匯出'
+    'custom_export' => '自定義匯出',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];

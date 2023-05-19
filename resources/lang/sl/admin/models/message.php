@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Model ni bil posodobljen, poskusite znova',
-        'success' => 'Model je bil uspešno posodobljen.'
+        'success' => 'Model je bil uspešno posodobljen.',
     ),
 
     'delete' => array(
@@ -32,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Polja niso bila spremenjena, nič ni posodobljeno.',
-        'success' 		=> 'Modeli so posodobljeni.'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Modeli niso bili izbrani, nič ni izbrisano.',
-        'success' 		    => ': model (i) so izbrisani!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ': modeli so bili izbrisani, vendar: fail_count ni bilo mogoče izbrisati, ker so še vedno sredstva, povezana z njimi.'
     ),
 

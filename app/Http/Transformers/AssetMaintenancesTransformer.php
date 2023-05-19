@@ -45,6 +45,10 @@ class AssetMaintenancesTransformer
                 'name'=> e($assetmaintenance->asset->location->name),
 
             ] : null,
+            'rtd_location' => ($assetmaintenance->asset->defaultLoc) ? [
+                'id' => (int) $assetmaintenance->asset->defaultLoc->id,
+                'name'=> e($assetmaintenance->asset->defaultLoc->name),
+            ] : null,
             'notes'         => ($assetmaintenance->notes) ? e($assetmaintenance->notes) : null,
             'supplier'      => ($assetmaintenance->supplier) ? ['id' => $assetmaintenance->supplier->id, 'name'=> e($assetmaintenance->supplier->name)] : null,
             'cost'          => Helper::formatCurrencyOutput($assetmaintenance->cost),

@@ -22,6 +22,8 @@ return [
     'restore' => [
         'error'   		=> 'Aset tidak dipulihkan, sila cuba lagi',
         'success' 		=> 'Aset dipulihkan dengan jayanya.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [

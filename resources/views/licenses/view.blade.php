@@ -10,7 +10,7 @@
 {{-- Page content --}}
 @section('content')
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-9">
 
     <!-- Custom Tabs -->
     <div class="nav-tabs-custom">
@@ -56,21 +56,7 @@
             <span class="hidden-xs hidden-sm">{{ trans('general.history') }}</span>
           </a>
         </li>
-
-    
-        @can('update', $license)
-          <li class="dropdown pull-right">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="fas fa-cog" aria-hidden="true"></i> {{ trans('button.actions') }}
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="{{ route('licenses.edit', $license->id) }}">{{ trans('admin/licenses/general.edit') }}</a></li>
-              <li><a href="{{ route('clone/license', $license->id) }}">{{ trans('admin/licenses/general.clone') }}</a></li>
-            </ul>
-          </li>
-        @endcan
-
+        
         @can('update', \App\Models\License::class)
           <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal">
               <i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}</a>
@@ -332,7 +318,7 @@
                       </strong>
                     </div>
                     <div class="col-md-9">
-                      {!! $license->maintained ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no') !!}
+                      {!! $license->maintained ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no') !!}
                     </div>
                   </div>
 
@@ -358,7 +344,7 @@
                       </strong>
                     </div>
                     <div class="col-md-9">
-                      {!! $license->reassignable ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no') !!}
+                      {!! $license->reassignable ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no') !!}
                     </div>
                   </div>
 
@@ -378,8 +364,10 @@
 
               </div> <!-- end row-striped -->
             </div>
-            </div>
-          </div> <!-- end tab-pane -->
+
+
+          </div>
+       </div> <!-- end tab-pane -->
 
 
 
@@ -550,12 +538,99 @@
               </table>
               </div>
             </div> <!-- /.col-md-12-->
+
+
           </div> <!-- /.row-->
         </div> <!-- /.tab-pane -->
+
       </div> <!-- /.tab-content -->
+
     </div> <!-- nav-tabs-custom -->
   </div>  <!-- /.col -->
+  <div class="col-md-3">
+
+    @can('update', $license)
+      <a href="{{ route('licenses.edit', $license->id) }}" class="btn btn-block btn-primary" style="margin-bottom: 10px;">{{ trans('admin/licenses/general.edit') }}</a>
+      <a href="{{ route('clone/license', $license->id) }}" class="btn btn-block btn-primary" style="margin-bottom: 10px;">{{ trans('admin/licenses/general.clone') }}</a>
+    @endcan
+
+    @can('checkout', $license)
+
+      @if ($license->availCount()->count() > 0)
+        <a href="{{ route('licenses.checkout', $license->id) }}" class="btn-block btn bg-maroon" style="margin-bottom: 10px;">
+          {{ trans('general.checkout') }}
+        </a>
+        <a href="#" class="btn-block btn bg-maroon" style="margin-bottom: 10px;" data-toggle="modal" data-tooltip="true" title="{{ trans('admin/licenses/general.bulk.checkout_all.enabled_tooltip') }}" data-target="#checkoutFromAllModal">
+          {{ trans('admin/licenses/general.bulk.checkout_all.button') }}
+        </a>
+
+      @else
+        <a href="{{ route('licenses.checkout', $license->id) }}" class="btn btn-block bg-maroon disabled" style="margin-bottom: 10px;">
+          {{ trans('general.checkout') }}
+        </a>
+        <span data-tooltip="true" title=" {{ trans('admin/licenses/general.bulk.checkout_all.disabled_tooltip') }}">
+                    <a href="#" class="btn btn-block bg-maroon disabled" style="margin-bottom: 10px;" data-tooltip="true" title="{{ trans('general.checkout') }}">
+                      {{ trans('admin/licenses/general.bulk.checkout_all.button') }}
+                    </a>
+                  </span>
+      @endif
+    @endcan
+
+    @can('checkin', $license)
+
+      @if (($license->seats - $license->availCount()->count()) > 0 )
+        <a href="#" class="btn btn-block bg-purple" style="margin-bottom: 25px;" data-toggle="modal" data-tooltip="true"  data-target="#checkinFromAllModal" data-content="{{ trans('general.sure_to_delete') }} data-title="{{  trans('general.delete') }}" onClick="return false;">
+          {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
+        </a>
+      @else
+        <span data-tooltip="true" title=" {{ trans('admin/licenses/general.bulk.checkin_all.disabled_tooltip') }}">
+            <a href="#" class="btn btn-block bg-purple disabled" style="margin-bottom: 25px;">
+             {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
+            </a>
+          </span>
+      @endif
+    @endcan
+
+    @can('delete', $license)
+
+      @if ($license->availCount()->count() == $license->seats)
+        <button class="btn btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.delete_confirm', ['item' => $license->name]) }}" data-target="#dataConfirmModal">
+          {{ trans('general.delete') }}
+        </button>
+      @else
+          <span data-tooltip="true" title=" {{ trans('admin/licenses/general.delete_disabled') }}">
+            <a href="#" class="btn btn-block btn-danger disabled">
+              {{ trans('general.delete') }}
+            </a>
+          </span>
+      @endif
+    @endcan
+  </div>
+
 </div> <!-- /.row -->
+
+
+@can('checkin', \App\Models\License::class)
+  @include ('modals.confirm-action',
+        [
+            'modal_name' => 'checkinFromAllModal',
+            'route' => route('licenses.bulkcheckin', $license->id),
+            'title' => trans('general.modal_confirm_generic'),
+            'body' => trans_choice('admin/licenses/general.bulk.checkin_all.modal', 2, ['checkedout_seats_count' => $checkedout_seats_count])
+        ])
+@endcan
+
+@can('checkout', \App\Models\License::class)
+  @include ('modals.confirm-action',
+        [
+            'modal_name' => 'checkoutFromAllModal',
+            'route' => route('licenses.bulkcheckout', $license->id),
+            'title' => trans('general.modal_confirm_generic'),
+            'body' => trans_choice('admin/licenses/general.bulk.checkout_all.modal', 2, ['available_seats_count' => $available_seats_count])
+        ])
+@endcan
+
+
 
 @can('update', \App\Models\License::class)
   @include ('modals.upload-file', ['item_type' => 'license', 'item_id' => $license->id])
@@ -565,5 +640,15 @@
 
 
 @section('moar_scripts')
+  <script>
+
+    $('#dataConfirmModal').on('show.bs.modal', function (event) {
+      var content = $(event.relatedTarget).data('content');
+      var title = $(event.relatedTarget).data('title');
+      $(this).find(".modal-body").text(content);
+      $(this).find(".modal-header").text(title);
+    });
+
+  </script>
   @include ('partials.bootstrap-table')
 @stop

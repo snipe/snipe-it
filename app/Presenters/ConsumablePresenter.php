@@ -54,6 +54,14 @@ class ConsumablePresenter extends Presenter
                 'title' => trans('general.category'),
                 'formatter' => 'categoriesLinkObjFormatter',
             ], [
+                'field' => 'supplier',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.supplier'),
+                'visible' => false,
+                'formatter' => 'suppliersLinkObjFormatter',
+            ], [
                 'field' => 'model_number',
                 'searchable' => true,
                 'sortable' => true,

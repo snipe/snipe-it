@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Type Vedlikehold',
+        'asset_maintenance_type' => 'Asset Maintenance Type',
         'title'                  => 'Tittel',
-        'start_date'             => 'Startdato',
-        'completion_date'        => 'Fullført dato',
+        'start_date'             => 'Start Date',
+        'completion_date'        => 'Completion Date',
         'cost'                   => 'Kostnad',
         'is_warranty'            => 'Uthevet garanti',
-        'asset_maintenance_time' => 'Tid brukt på vedlikehold (i dager)',
+        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
         'notes'                  => 'Notater',
-        'update'                 => 'Oppdater Vedlikehold',
-        'create'                 => 'Legg til Vedlikehold'
+        'update'                 => 'Update Asset Maintenance',
+        'create'                 => 'Create Asset Maintenance'
     ];

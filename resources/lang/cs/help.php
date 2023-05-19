@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Více informací',
 
-    'audit_help' => 'Zaškrtnutím tohoto políčka upravíte záznam majetku tak, aby se nastavil na novou lokaci. Ponecháním nezaškrtnutého políčka bude lokace zaznamenána v auditním protokolu.<br><br>Pokud je majetek přivlastněn, nezmění se umístění osoby, majetku ani lokace.',
+    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
     'assets' => 'Majetky jsou položky sledované sériovým nebo inventárním čísle,. Bývají u položek, které mají vyšší hodnotu a kde je důležitá identifikace.',
 

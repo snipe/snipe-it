@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'Ce groupe existe déjà!',
-    'group_not_found'     => 'Ce groupe [:id] n\'existe pas.',
+    'group_not_found'     => 'Group ID :id does not exist.',
     'group_name_required' => 'Le champ nom est obligatoire.',
 
     'success' => array(
