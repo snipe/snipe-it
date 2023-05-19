@@ -665,7 +665,13 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     public function advancedTextSearch(Builder $query, array $terms) {
 
         foreach($terms as $term) {
-            $query = $query->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%{$term}%"]);
+            $query = $query->orWhereRaw(
+                $this->buildMultipleColumnSearch([
+                    DB::getTablePrefix() . 'users.first_name',
+                    DB::getTablePrefix() . 'users.last_name',
+                ]),
+                ["%{$term}%"]
+            );
         }
 
         return $query;
