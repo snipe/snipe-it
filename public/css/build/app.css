@@ -5,7 +5,7 @@ body {
 @media (max-width: 400px) {
   .navbar-left {
     margin: 2px;
-  
+  }
 }
 .skin-blue .main-header .logo {
   background-color: inherit !important;
