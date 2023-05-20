@@ -183,76 +183,75 @@ class Importer extends Component
         ];
 
         $this->accessories_fields  = [
-            'item_name' => 'Accessory Name',
-            'model_number' => trans('general.model_number'),
+            'item_name' => trans('general.item_name_var', ['item' => trans('general.accessory')]),
+            'model_number' => trans('general.model_no'),
             'notes' => trans('general.notes'),
             'category' => trans('general.category'),
             'supplier' => trans('general.supplier'),
-            'min_amt' => trans('general.min_amt'),
+            'min_amt' => trans('mail.min_QTY'),
             'purchase_cost' => trans('general.purchase_cost'),
             'purchase_date' => trans('general.purchase_date'),
             'manufacturer' => trans('general.manufacturer'),
         ];
 
         $this->assets_fields = [
-            'item_name' => trans('general.name'),
+            'item_name' => trans('general.item_name_var', ['item' => trans('general.asset')]),
             'asset_tag' => trans('general.asset_tag'),
             'asset_model' => trans('general.model_name'),
-            'asset_notes' => trans('general.asset_notes'),
-            'model_notes' => trans('general.model_notes'),
             'byod' => trans('general.byod'),
-            'checkout_class' => trans('general.checkout_type'),
-            'checkout_location' => trans('general.checkout_location'),
-            'image' => trans('general.image_filename'),
-            'model_number' => trans('general.model_number'),
-            'email' => trans('general.checked_out_email'),
-            'full_name' => trans('general.checked_out_fullname'),
+            'checkout_class' => trans('general.importer.checkout_type'),
+            'checkout_location' => trans('general.importer.checkout_location'),
+            'image' => trans('general.importer.image_filename'),
+            'model_name' => trans('general.model_name'),
+            'model_number' => trans('general.model_no'),
+            'full_name' => trans('general.importer.checked_out_to_fullname'),
+            'email' => trans('general.importer.checked_out_email'),
             'status' => trans('general.status'),
-            'warranty_months' => trans('general.warranty_months'),
+            'warranty_months' => trans('admin/hardware/form.warranty'),
             'category' => trans('general.category'),
-            'reassignable' => trans('general.reassignable'),
-            'requestable' => trans('general.requestable'),
-            'serial' => trans('general.serial'),
+            'requestable' => trans('admin/hardware/general.requestable'),
+            'serial' => trans('general.serial_number'),
             'supplier' => trans('general.supplier'),
             'purchase_cost' => trans('general.purchase_cost'),
             'purchase_date' => trans('general.purchase_date'),
-            'purchase_order' => trans('general.purchase_order'),
-            'notes' => trans('general.notes'),
+            'purchase_order' => trans('admin/licenses/form.purchase_order'),
+            'asset_notes' => trans('general.item_notes', ['item' => trans('admin/hardware/general.asset')]),
+            'model_notes' => trans('general.item_notes', ['item' => trans('admin/hardware/form.model')]),
             'manufacturer' => trans('general.manufacturer'),
         ];
 
         $this->consumables_fields = [
-            'item_name' => trans('general.item_name'),
-            'model_number' => trans('general.model_number'),
+            'item_name' => trans('general.item_name_var', ['item' => trans('general.consumable')]),
+            'model_number' => trans('general.model_no'),
             'notes' => trans('general.notes'),
-            'min_amt' => trans('general.min_qty'),
+            'min_amt' => trans('mail.min_QTY'),
             'category' => trans('general.category'),
             'purchase_cost' => trans('general.purchase_cost'),
             'purchase_date' => trans('general.purchase_date'),
-            'checkout_class' => trans('general.checkout_type'),
+            'checkout_class' => trans('general.importer.checkout_type'),
             'supplier' => trans('general.supplier'),
         ];
 
         $this->components_fields = [
-            'item_name' => trans('general.components_name'),
-            'model_number' => trans('general.model_number'),
+            'item_name' => trans('general.item_name_var', ['item' => trans('general.component')]),
+            'model_number' => trans('general.model_no'),
             'notes' => trans('general.notes'),
             'category' => trans('general.category'),
             'supplier' => trans('general.supplier'),
-            'min_amt' => trans('general.min_amt'),
+            'min_amt' => trans('mail.min_QTY'),
             'purchase_cost' => trans('general.purchase_cost'),
             'purchase_date' => trans('general.purchase_date'),
         ];
 
         $this->licenses_fields = [
-            'item_name' => 'License Name',
+            'item_name' => trans('general.item_name_var', ['item' => trans('general.license')]),
             'asset_tag' => trans('general.assigned_to_tag'),
             'expiration_date' => trans('general.expiration_name'),
             'full_name' => trans('general.full_name'),
             'license_email' => trans('general.license_email'),
             'license_name' => trans('general.license_to_name'),
             'purchase_order' => 'Purchase Order',
-            'reassignable' => trans('general.reassignable'),
+            'reassignable' => trans('admin/licenses/form.reassignable'),
             'seats' => trans('general.seats'),
             'notes' => trans('general.notes'),
             'category' => trans('general.category'),
@@ -260,7 +259,8 @@ class Importer extends Component
             'purchase_cost' => trans('general.purchase_cost'),
             'purchase_date' => trans('general.purchase_date'),
             'maintained' => trans('general.maintained'),
-            'checkout_class' => trans('general.checkout_type'),
+            'checkout_class' => trans('general.importer.checkout_type'),
+            'serial' => trans('general.license_serial'),
         ];
 
         $this->users_fields  = [
@@ -270,8 +270,8 @@ class Importer extends Component
             'username' => trans('general.username'),
             'jobtitle' => trans('general.job_title'),
             'phone_number' => trans('general.phone'),
-            'manager_first_name' => trans('general.manager_first_name'),
-            'manager_last_name' => trans('general.manager_last_name'),
+            'manager_first_name' => trans('general.importer.manager_first_name'),
+            'manager_last_name' => trans('general.importer.manager_last_name'),
             'activated' => trans('general.activated'),
             'address' => trans('general.address'),
             'city' => trans('general.city'),
@@ -287,7 +287,7 @@ class Importer extends Component
         ];
 
         $this->locations_fields  = [
-            'name' => trans('general.location_name'),
+            'item_name' => trans('general.item_name_var', ['item' => trans('general.location')]),
             'address' => trans('general.address'),
             'address2' => trans('general.address2'),
             'city' => trans('general.city'),
@@ -303,6 +303,22 @@ class Importer extends Component
 
         // "real fieldnames" to a list of aliases for that field
         $this->aliases_fields = [
+            'item_name' =>
+                [
+                    trans('general.item_name')
+                ],
+            'model_name' =>
+                [
+                    'model name',
+                ],
+            'serial' =>
+                [
+                    'serial number',
+                    'serial no.',
+                    'serial no',
+                    'product key',
+                    'key',
+                ],
             'model_number' =>
                 [
                     'model',
@@ -325,12 +341,12 @@ class Importer extends Component
             'zip' =>
                 [
                     'Postal Code',
-                    'Post Code'
+                    'Post Code',
+                    'Zip Code'
                 ],
             'min_amt' =>
                 [
                     'Min Amount',
-                    'Min QTY'
                 ],
             'next_audit_date' =>
                 [
