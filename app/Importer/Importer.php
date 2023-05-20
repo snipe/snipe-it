@@ -30,7 +30,7 @@ abstract class Importer
      * @var array
      */
     private $defaultFieldMap = [
-        'item_number' => 'item number',
+
     ];
     /**
      * Map of item fields->csv names
