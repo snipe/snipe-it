@@ -81,6 +81,9 @@ class Importer extends Component
             case 'consumable':
                 $results = $this->general_fields + $this->consumables_fields;
                 break;
+            case 'component':
+                $results = $this->general_fields + $this->components_fields;
+                break;
             case 'license':
                 $results = $this->general_fields + $this->licenses_fields;
                 break;
