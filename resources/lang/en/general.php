@@ -457,10 +457,16 @@ return [
         'manager_first_name' => 'Manager First Name',
         'manager_last_name' => 'Manager First Name',
         'manager_full_name' => 'Manager Full Name',
+        'manager_username' => 'Manager Username',
         'checkout_type' => 'Checkout Type',
         'checkout_location' => 'Checkout Location',
         'image_filename' => 'Image Filename',
         'do_not_import'     => 'Do Not Import',
+        'vip' => 'VIP',
+        'avatar'  => 'Avatar',
+        'gravatar' => 'Gravatar Email',
+        'currency' => 'Currency',
+        'address2' => 'Address Line 2',
     ],
 
 ];

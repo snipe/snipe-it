@@ -267,9 +267,9 @@ class Importer extends Component
             'first_name' => trans('general.first_name'),
             'last_name' => trans('general.last_name'),
             'notes' => trans('general.notes'),
-            'username' => trans('general.username'),
-            'jobtitle' => trans('general.job_title'),
-            'phone_number' => trans('general.phone'),
+            'username' => trans('admin/users/table.username'),
+            'jobtitle' => trans('admin/users/table.title'),
+            'phone_number' => trans('admin/users/table.phone'),
             'manager_first_name' => trans('general.importer.manager_first_name'),
             'manager_last_name' => trans('general.importer.manager_last_name'),
             'activated' => trans('general.activated'),
@@ -278,38 +278,68 @@ class Importer extends Component
             'state' => trans('general.state'),
             'country' => trans('general.country'),
             'zip' => trans('general.zip'),
-            'vip' => trans('general.vip'),
-            'remote' => trans('general.remote'),
-            'email' => trans('general.email'),
-            'avatar' => trans('general.avatar'),
+            'vip' => trans('general.importer.vip'),
+            'remote' => trans('admin/users/general.remote'),
+            'email' => trans('admin/users/table.email'),
+            'avatar' => trans('general.image'),
             'gravatar' => trans('general.gravatar'),
             'termination_date' => trans('general.termination_date'),
+            'employee_number'   => trans('general.employee_number'),
         ];
 
         $this->locations_fields  = [
-            'item_name' => trans('general.item_name_var', ['item' => trans('general.location')]),
+            'name' => trans('general.item_name_var', ['item' => trans('general.location')]),
             'address' => trans('general.address'),
-            'address2' => trans('general.address2'),
+            'address2' => trans('general.importer.address2'),
             'city' => trans('general.city'),
             'state' => trans('general.state'),
             'country' => trans('general.country'),
             'zip' => trans('general.zip'),
-            'currency' => trans('general.currency'),
-            'ldap_ou' => trans('general.ldap_ou'),
-            'manager_username' => trans('general.manager_username'),
-            'manager' => trans('general.manager'),
-            'parent_location' => trans('general.parent_location'),
+            'currency' => trans('general.importer.currency'),
+            'ldap_ou' => trans('admin/locations/table.ldap_ou'),
+            'manager_username' => trans('general.importer.manager_username'),
+            'manager' => trans('general.importer.manager_full_name'),
+            'parent_location' => trans('admin/locations/table.parent'),
         ];
 
         // "real fieldnames" to a list of aliases for that field
         $this->aliases_fields = [
             'item_name' =>
                 [
-                    trans('general.item_name')
+                    trans('general.item_name'),
+                ],
+            'name' =>
+                [
+                    'name',
                 ],
             'model_name' =>
                 [
                     'model name',
+                ],
+            'currency' =>
+                [
+                    '$',
+                ],
+            'manager_username' =>
+                [
+                    'Manager',
+                ],
+            'jobtitle' =>
+                [
+                    'job title for user',
+                ],
+            'username' =>
+                [
+                    'user name',
+                ],
+            'phone_number' =>
+                [
+                    'phone',
+                    'phone number',
+                    'phone num',
+                    'telephone number',
+                    'telephone',
+                    'tel.',
                 ],
             'serial' =>
                 [
