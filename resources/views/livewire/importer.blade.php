@@ -223,7 +223,7 @@
                                                                                 {{ Form::select('field_map.'.$index, $columnOptions[$activeFile->import_type], @$field_map[$index],
                                                                                     [
                                                                                         'class' => 'mappings livewire-select2',
-                                                                                        'placeholder' => 'Do Not Import',
+                                                                                        'placeholder' => trans('general.importer.do_not_import'),
                                                                                         'style' => 'min-width: 100%',
                                                                                         'data-livewire-component' => $_instance->id
                                                                                     ],[
