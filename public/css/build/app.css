@@ -6,6 +6,9 @@ body {
   .navbar-left {
     margin: 2px;
   }
+  .nav::after {
+    clear: none;
+  }
 }
 .skin-blue .main-header .logo {
   background-color: inherit !important;
