@@ -281,9 +281,11 @@ class Importer extends Component
             'vip' => trans('general.importer.vip'),
             'remote' => trans('admin/users/general.remote'),
             'email' => trans('admin/users/table.email'),
+            'website' => trans('general.website'),
             'avatar' => trans('general.image'),
-            'gravatar' => trans('general.gravatar'),
-            'termination_date' => trans('general.termination_date'),
+            'gravatar' => trans('general.importer.gravatar'),
+            'start_date'    => trans('general.start_date'),
+            'end_date'   => trans('general.end_date'),
             'employee_number'   => trans('general.employee_number'),
         ];
 
@@ -316,6 +318,10 @@ class Importer extends Component
                 [
                     'model name',
                 ],
+            'gravatar' =>
+                [
+                    'gravatar',
+                ],
             'currency' =>
                 [
                     '$',
@@ -327,6 +333,7 @@ class Importer extends Component
             'jobtitle' =>
                 [
                     'job title for user',
+                    'job title',
                 ],
             'username' =>
                 [
