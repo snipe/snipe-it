@@ -61,6 +61,19 @@
                         </a>
                     </li>
                 @endcan
+                
+                @can('delete', \App\Models\Asset::class)
+                    @if ($asset->deleted_at == '' && $asset->assigned_to == '')
+                        <li role="menuitem">
+                            <a href="{{ route('hardware.destroy', $asset->id) }}" class="delete-asset-single"
+                                data-content="{{ trans('general.sure_to_delete') }}@if ($asset->name) {{ $asset->name }} @else {{ $asset->asset_tag }} @endif?"
+                                data-title="{{ trans('general.delete') }}" onClick="return false;">
+                                {{ trans('general.delete') }}
+                            </a>
+                        </li>
+                    @endif
+                @endcan
+                
             </ul>
         </div>
         @endif

@@ -146,7 +146,38 @@ var baseUrl = $('meta[name="baseUrl"]').attr('content');
         };
     };
 
+    // confirm delete modal single
+    Components.modals.confirmDeleteSingle = function () {
+        var $el = $(document);
 
+        var events = {
+            'click': function (evnt) {
+                var $context = $(this);
+                var $dataConfirmModal = $('#dataConfirmModal');
+                var href = $context.attr('href');
+                var message = $context.attr('data-content');
+                var title = $context.attr('data-title');
+
+                $('#myModalLabel').text(title);
+                $dataConfirmModal.find('.modal-body').text(message);
+                $('#deleteForm').attr('action', href);
+                $dataConfirmModal.modal({
+                    show: true
+                });
+                return false;
+            }
+        };
+
+        var render = function () {
+            $el.on('click', '.delete-asset-single', events['click']);
+        };
+
+        return {
+            render: render
+        };
+    };
+
+    
     /**
      * Application start point
      * Component definition stays out of load event, execution only happens.
@@ -154,6 +185,7 @@ var baseUrl = $('meta[name="baseUrl"]').attr('content');
     $(function() {
         new Components.modals.confirmRestore().render();
         new Components.modals.confirmDelete().render();
+        new Components.modals.confirmDeleteSingle().render();
     });
 }(jQuery, window.snipeit.settings));
 
