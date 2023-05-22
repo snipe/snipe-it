@@ -46,12 +46,16 @@ class UserImporter extends ItemImporter
         $this->item['first_name'] = $this->findCsvMatch($row, 'first_name');
         $this->item['last_name'] = $this->findCsvMatch($row, 'last_name');
         $this->item['email'] = $this->findCsvMatch($row, 'email');
+        $this->item['gravatar'] = $this->findCsvMatch($row, 'gravatar');
         $this->item['phone'] = $this->findCsvMatch($row, 'phone_number');
+        $this->item['website'] = $this->findCsvMatch($row, 'website');
         $this->item['jobtitle'] = $this->findCsvMatch($row, 'jobtitle');
         $this->item['address'] = $this->findCsvMatch($row, 'address');
         $this->item['city'] = $this->findCsvMatch($row, 'city');
         $this->item['state'] = $this->findCsvMatch($row, 'state');
         $this->item['country'] = $this->findCsvMatch($row, 'country');
+        $this->item['start_date'] = $this->findCsvMatch($row, 'start_date');
+        $this->item['end_date'] = $this->findCsvMatch($row, 'end_date');
         $this->item['zip'] = $this->findCsvMatch($row, 'zip');
         $this->item['activated'] = ($this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')) == 1) ? '1' : 0;
         $this->item['employee_num'] = $this->findCsvMatch($row, 'employee_num');
