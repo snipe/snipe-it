@@ -150,7 +150,7 @@ class AccessoriesController extends Controller
     public function show($id)
     {
         $this->authorize('view', Accessory::class);
-        $accessory = Accessory::findOrFail($id);
+        $accessory = Accessory::withCount('users as users_count')->findOrFail($id);
 
         return (new AccessoriesTransformer)->transformAccessory($accessory);
     }
