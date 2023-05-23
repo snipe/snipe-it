@@ -1,101 +1,51 @@
-Item Name,Purchase Date,Purchase Cost,Location,Company,Order Number,Category,Quantity
-eget,2011-01-03,85.91,mauris blandit mattis.,Lycos,T295T06V,Triamterene/Hydrochlorothiazide,322
-Morbi,2016-10-24,87.42,iaculis,Lavasoft,W787T62Q,Ranitidine HCl,374
-arcu.,2007-09-22,48.34,ornare,Google,N961E50A,Amoxicillin,252
-nec,2009-08-16,8.71,lectus,Apple Systems,X624N14C,Lantus Solostar,30
-Nam,2017-03-30,24.07,"a,",Macromedia,N618A20S,Hydrocodone/APAP,551
-Nullam,2003-12-16,73.23,"Donec est mauris,",Yahoo,B386I67L,Fluticasone Propionate,395
-erat,2010-08-03,17.49,Proin,Borland,G606H92I,Amlodipine Besylate,297
-purus,2004-10-12,63.52,tellus justo sit,Chami,R660Z45O,Omeprazole (Rx),557
-dignissim,2010-11-10,77.94,nibh vulputate mauris,Lavasoft,G230Z67X,Risperidone,47
-Nam,2015-01-25,64.33,taciti sociosqu ad,Microsoft,B613L84C,Suboxone,310
-Nunc,2017-04-13,81.02,nec orci.,Borland,O367N55N,Fluoxetine HCl,404
-Phasellus,2005-12-23,70.67,"quis, tristique ac,",Borland,K941C02T,Alendronate Sodium,590
-Nulla,2017-07-21,99.04,augue malesuada malesuada.,Lycos,D663L90H,Allopurinol,48
-at,2007-10-31,58.42,"dolor sit amet,",Lavasoft,Y229E62I,Simvastatin,181
-Sed,2011-04-14,48.86,"lectus convallis est,",Cakewalk,T666E70K,Fluconazole,169
-quis,2014-01-08,55.64,"varius orci,",Lycos,T767G07U,Advair Diskus,264
-viverra.,2013-01-07,93.48,"cursus et, magna.",Sibelius,T276L44H,Loestrin 24 Fe,293
-Sed,2008-03-20,64.75,arcu. Sed,Cakewalk,A933E55V,Pantoprazole Sodium,407
-iaculis,2015-07-17,56.74,nec,Borland,N568F73C,Venlafaxine HCl ER,115
-leo.,2012-12-09,96.88,Aenean,Altavista,H283Z42U,Cephalexin,208
-leo.,2007-04-24,40.87,tincidunt adipiscing. Mauris,Lycos,T054Q83U,Lyrica,486
-pede.,2010-09-29,19.64,nec enim. Nunc,Chami,L842O70A,Simvastatin,214
-massa,2015-05-18,18.43,nisi magna sed,Adobe,V029Q52K,Meloxicam,131
-urna,2014-10-22,7.41,ac,Sibelius,Z708U15X,Flovent HFA,15
-sapien,2017-03-23,50.94,penatibus et,Google,D258T89Z,Zolpidem Tartrate,48
-non,2005-05-14,71.71,dui. Fusce,Borland,C021V01R,Amphetamine Salts,593
-"et,",2014-10-18,94.56,natoque penatibus et,Lavasoft,L351F80J,Gianvi,305
-pede,2004-02-18,10.04,felis,Yahoo,D516U60J,Pravastatin Sodium,302
-lobortis,2011-06-08,31.17,"luctus,",Yahoo,D088E82H,Azithromycin,380
-placerat,2005-06-19,5.38,eget,Adobe,V472U75G,Nexium,-2
-leo,2014-10-03,17,justo,Lycos,F944A58V,Ibuprofen (Rx),294
-dictum,2015-11-24,92.11,tellus faucibus,Apple Systems,U938K61D,Oxycontin,368
-bibendum.,2010-05-01,22.45,elit erat vitae,Lavasoft,Z326Q13R,Tramadol HCl,12
-"facilisis,",2011-01-02,85.42,purus,Finale,Z475L99M,Alprazolam,359
-bibendum,2009-08-20,44.68,et pede. Nunc,Google,N039W21L,Fluticasone Propionate,569
-eleifend,2006-03-17,22.92,velit. Cras,Lavasoft,H339Z61T,Doxycycline Hyclate,219
-rhoncus.,2009-03-17,82.52,"feugiat non, lobortis",Altavista,R524N72A,Atenolol,176
-a,2016-04-03,4.35,nunc,Sibelius,V055S56Y,Simvastatin,326
-enim.,2014-05-15,20.18,lectus justo,Google,I747M47J,Atenolol,101
-molestie,2012-06-19,11.3,sem ut cursus,Apple Systems,F888J26K,Amoxicillin,405
-dui.,2010-05-16,72.42,consectetuer euismod,Cakewalk,U999A42H,Atenolol,253
-tortor.,2017-08-02,38.51,ultrices iaculis odio.,Lavasoft,J465G08H,Tri-Sprintec,577
-natoque,2010-04-15,28.88,magnis,Sibelius,N813P74X,Lipitor,562
-mollis,2011-05-07,89.36,Donec,Yahoo,O113X38K,Lexapro,179
-ultrices.,2013-10-20,73.45,"orci,",Lycos,N587Y98N,Benicar HCT,185
-dui,2011-12-10,0.57,Mauris eu turpis.,Yahoo,S354F65P,Levothyroxine Sodium,78
-sagittis.,2014-04-06,38.55,"elementum sem, vitae",Google,R931X11B,Loestrin 24 Fe,386
-"dui,",2010-10-08,52.52,natoque penatibus,Adobe,J615B52I,Clonazepam,563
-eros,2015-06-25,45.9,"aliquam, enim",Microsoft,S216N79D,Amoxicillin,371
-"et,",2008-05-16,4.42,nulla. In tincidunt,Adobe,Z906A47A,Sulfamethoxazole/Trimethoprim,507
-est,2004-12-14,16.79,amet,Yahoo,P540P32Z,Doxycycline Hyclate,188
-"montes,",2008-02-23,52.98,ante,Lavasoft,C140R27G,Lisinopril,401
-mollis,2004-07-09,83.26,Curabitur dictum. Phasellus,Cakewalk,U620A61Z,Glipizide,278
-dolor.,2004-07-01,50.94,"non, vestibulum",Lavasoft,F625L82E,Singulair,475
-aliquet,2014-03-18,56.23,erat,Altavista,L193Q72S,Clonazepam,3
-nonummy,2004-09-13,89.86,enim.,Apple Systems,U466F15U,Atenolol,218
-natoque,2015-11-09,72.14,ridiculus,Altavista,U295O53M,Cyclobenzaprin HCl,50
-tincidunt,2011-01-05,84.9,Cras,Cakewalk,C373S25Y,Paroxetine HCl,104
-tristique,2010-03-04,64.59,ipsum leo elementum,Macromedia,U140F94P,Atenolol,486
-eleifend.,2010-07-11,45.06,"a, arcu. Sed",Macromedia,G544Z82L,Zyprexa,100
-sem,2008-04-18,44.81,"magna, malesuada vel,",Chami,G143Q64L,Lorazepam,440
-facilisi.,2005-06-13,65.36,"ut, molestie in,",Google,N391E28J,Januvia,536
-arcu.,2012-09-24,21.27,"parturient montes, nascetur",Finale,Z720K67H,Furosemide,308
-hendrerit,2013-01-26,27.11,"eget varius ultrices,",Borland,P865K75O,Metformin HCl,590
-Aliquam,2010-03-18,64.99,ridiculus,Borland,K003G26G,Ibuprofen (Rx),412
-eu,2016-08-27,99.62,Sed eu eros.,Microsoft,H049R07D,Atenolol,498
-Morbi,2008-02-13,30.86,"Sed nulla ante,",Altavista,U852E06G,Fluticasone Propionate,243
-malesuada,2010-08-17,58.5,tellus. Phasellus,Sibelius,T695G73P,Ibuprofen (Rx),591
-"ut,",2006-11-16,46.64,Sed molestie.,Microsoft,T589M93D,Gianvi,-5
-odio.,2011-12-09,51.19,"montes, nascetur ridiculus",Chami,J311Q19L,Gabapentin,517
-tortor.,2017-03-21,7.11,Morbi neque,Finale,W293Z75X,Loestrin 24 Fe,242
-penatibus,2015-12-02,81.51,ipsum ac mi,Borland,U565B49H,Loestrin 24 Fe,220
-"et,",2013-10-11,56.41,ut nisi a,Google,G623M74Q,Triamterene/Hydrochlorothiazide,98
-"ut,",2007-11-17,74.85,consequat purus.,Sibelius,Q247W03U,Tramadol HCl,484
-luctus,2016-09-30,23.87,euismod,Lavasoft,T838L77W,Lisinopril,295
-gravida,2010-12-04,80.12,a neque.,Sibelius,U542S63O,Vytorin,188
-hymenaeos.,2015-01-16,13.19,In scelerisque scelerisque,Sibelius,V375P80B,Zyprexa,255
-mi,2010-06-07,17.75,libero. Proin,Google,I728A71W,APAP/Codeine,435
-"a,",2006-12-19,12.35,"montes,",Lavasoft,X885A67N,Metformin HCl,333
-ornare,2015-09-09,34.13,taciti,Lavasoft,Q602X92G,Lyrica,447
-"tellus,",2007-09-05,92.17,"lorem,",Microsoft,D008R07S,Vyvanse,256
-eget,2008-07-10,5.71,a odio semper,Altavista,L996D22J,Triamcinolone Acetonide,89
-sodales,2017-01-26,67.43,"at,",Microsoft,B922B33B,Glipizide,406
-"amet,",2011-09-19,5.34,Cum sociis natoque,Yahoo,C735B01G,Amoxicillin,85
-tempus,2017-02-14,19.18,felis,Macromedia,P379N42S,Simvastatin,427
-laoreet,2017-06-25,73.61,Sed,Apple Systems,N838F62B,Alendronate Sodium,405
-laoreet,2015-03-28,40.48,fames ac,Cakewalk,A503X28X,Ibuprofen (Rx),430
-sit,2013-09-08,41.23,"aliquet vel,",Sibelius,F381B10B,Nexium,359
-Aenean,2010-06-10,97.61,massa,Altavista,X179G33K,Doxycycline Hyclate,136
-non,2013-10-13,46.02,Duis,Microsoft,F567P51A,Metformin HCl,104
-Curabitur,2016-02-10,49.59,et magnis,Borland,A902B81X,Diovan,270
-risus,2014-06-23,6.22,"eu,",Apple Systems,J458L03X,Crestor,577
-sem,2006-04-29,36.75,orci luctus,Apple Systems,I390X10D,Lisinopril,131
-"eu,",2013-08-06,96.39,diam dictum sapien.,Microsoft,P937M90J,Lisinopril/Hydrochlorothiazide,229
-ultricies,2013-01-13,18.64,auctor,Microsoft,Q793S72Y,Amphetamine Salts,153
-et,2005-09-04,30.87,sagittis placerat. Cras,Microsoft,S427Q43E,Alprazolam,571
-sit,2006-02-26,80.53,non justo.,Finale,Y646A59W,Omeprazole (Rx),193
-eget,2014-01-10,71.57,dolor,Borland,V101B17W,Sertraline HCl,103
-"a,",2016-06-02,44.56,nascetur ridiculus,Lycos,O796A98J,Alprazolam,505
-"ante,",2013-12-20,46.04,eleifend,Lycos,K375B97M,Plavix,296
+Company,Name,Category,Supplier,Manufacturer,QTY,Location,Order Number,Min Amount,Model Number,Item Number,Notes,Purchase Date,Purchase Cost
+Simonis and Sons,Dragline,Soft Flooring and Base,Towne Group,McLaughlin-Wisozk,50,Cherven Bryag,529027385-9,51,3533069599460644,6381392801995066,tortor sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque duis bibendum morbi non quam nec,2022-11-05,35.2
+Bruen-Hagenes,Trencher,Sitework & Site Utilities,Hoeger and Sons,"Davis, Koelpin and Lockman",54,Pampas,009135228-2,92,5602248408566255894,3563525570373877,fusce lacus purus aliquet at feugiat non pretium quis lectus suspendisse potenti in eleifend quam a odio in hac habitasse,2022-09-17,53.1
+Tremblay Inc,Crawler,Drywall & Acoustical (FED),"Cormier, Ryan and Cummerata","Morar, Stracke and Gusikowski",97,Penteado,492530513-1,20,201715355999350,3555797000872238,massa tempor convallis nulla neque libero convallis eget eleifend luctus ultricies eu,2023-02-05,25.08
+Franecki-Mitchell,Crawler,Soft Flooring and Base,"Bahringer, Hessel and Lynch",Mann Inc,11,Junliangcheng,006782510-9,13,201638625742873,3585582428645232,orci luctus et ultrices posuere cubilia curae nulla dapibus dolor vel est donec,2023-01-25,47.44
+Morar Group,Trencher,Masonry,Metz-Runte,Batz and Sons,35,Migori,410276787-8,2,201574561109571,4041593804503,sit amet consectetuer adipiscing elit proin risus praesent lectus vestibulum quam sapien varius,2022-08-24,29.06
+Rau and Sons,Crawler,Exterior Signage,"Metz, Reynolds and Pagac",Roberts-Haley,36,Lužani,251681998-6,37,6389706621209402,67627057199235112,mauris ullamcorper purus sit amet nulla quisque arcu libero rutrum ac lobortis vel dapibus,2022-09-25,70.5
+"Parisian, Feil and Brown",Dragline,Site Furnishings,"Wisozk, Rowe and Runolfsson",Marks-Lindgren,24,Carvalho,783104099-4,96,4132814261323213,5460576255071343,justo sollicitudin ut suscipit a feugiat et eros vestibulum ac,2022-06-06,23.48
+Upton Group,Skid-Steer,Wall Protection,Sawayn-Predovic,Padberg-Schaefer,86,Drumcondra,691167736-X,20,6709802030161855,5100134953726119,luctus et ultrices posuere cubilia curae mauris viverra diam vitae,2022-09-13,24.6
+Olson-Bradtke,Skid-Steer,Structural and Misc Steel (Fabrication),Dietrich Group,"Doyle, Yost and Kerluke",52,Piława Górna,993878516-6,99,6380721061950737,201534062027276,sed sagittis nam congue risus semper porta volutpat quam pede lobortis ligula sit amet eleifend,2023-03-09,64.2
+Pouros-Veum,Backhoe,Elevator,Gulgowski-Bahringer,Legros-Morissette,85,Tawangsari,863628920-3,27,5100136112680129,5602259943208580,aliquet ultrices erat tortor sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque duis bibendum morbi non,2022-09-10,73.65
+Purdy-Rice,Grader,Drywall & Acoustical (MOB),Bernhard-Cummings,Price and Sons,81,Trzebinia,184211928-1,43,5602251551839830,56022542102331797,mauris laoreet ut rhoncus aliquet pulvinar sed nisl nunc rhoncus dui,2022-08-20,12.11
+Kihn and Sons,Trencher,EIFS,"Auer, Kutch and Kutch","Murazik, Crooks and Pollich",73,Duru,843046019-5,32,3570560403003822,3544501358533481,tincidunt in leo maecenas pulvinar lobortis est phasellus sit amet erat nulla tempus,2023-04-03,26.73
+Hessel-Yundt,Bulldozer,Wall Protection,O'Reilly Inc,Volkman LLC,40,Yelizavetino,358328061-X,50,5108759813450674,5602215719381357,nulla dapibus dolor vel est donec odio justo sollicitudin ut suscipit a feugiat et eros,2023-05-14,83.76
+Kunze and Sons,Bulldozer,Drywall & Acoustical (MOB),Pollich-Mertz,Kertzmann-Leffler,91,Hoeryŏng,676937901-5,50,5602259559696912,3536485956609903,eget massa tempor convallis nulla neque libero convallis eget eleifend luctus ultricies eu nibh quisque id justo sit amet sapien,2023-02-06,14.1
+"Satterfield, Kutch and Bartell",Crawler,Construction Clean and Final Clean,Prohaska-Rosenbaum,O'Conner and Sons,8,Verenchanka,822285715-0,59,36675923976242,3555834547028303,nec dui luctus rutrum nulla tellus in sagittis dui vel nisl duis ac nibh fusce lacus purus aliquet,2023-03-22,36.15
+Stanton-Olson,Dump Truck,Marlite Panels (FED),"Stiedemann, Jones and Heathcote",Bartoletti Inc,17,Mórrope,230874108-2,70,3573310923840155,5602252823412497,tellus in sagittis dui vel nisl duis ac nibh fusce lacus purus aliquet at feugiat non pretium,2022-11-03,14.22
+Kshlerin-Hane,Trencher,Curb & Gutter,Goodwin and Sons,Bechtelar-Gleason,45,Shūsh,451367111-4,46,3536005374229934,5438118681407699,eleifend quam a odio in hac habitasse platea dictumst maecenas ut massa quis augue luctus tincidunt nulla mollis molestie lorem,2023-05-03,15.14
+"Mills, Greenfelder and Spinka",Crawler,HVAC,Reichel Inc,"Kuhic, Marquardt and Beier",10,Arcena Pequena,779807440-6,13,3552031889209913,5018365634108542731,pellentesque ultrices mattis odio donec vitae nisi nam ultrices libero non mattis pulvinar nulla pede ullamcorper augue a suscipit,2022-11-09,57.04
+Buckridge Inc,Skid-Steer,Asphalt Paving,Abernathy-Doyle,Hirthe-Gislason,23,Cardal,152277775-X,65,5602239497538228,6304534980889636,et commodo vulputate justo in blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing elit,2023-05-02,48.68
+Boehm Inc,Skid-Steer,Electrical and Fire Alarm,O'Kon Group,Schuster-Kunze,63,Tafraout,072198056-2,67,3536207535355414,5602242007322746026,donec ut mauris eget massa tempor convallis nulla neque libero convallis eget eleifend luctus ultricies eu nibh quisque id,2022-07-20,28.04
+Maggio Inc,Crawler,Curb & Gutter,West-Batz,Homenick-Schamberger,45,Boa Vista,779589028-8,16,3544589458568846,374622740975098,dolor vel est donec odio justo sollicitudin ut suscipit a,2023-05-14,32.86
+Koelpin Inc,Skid-Steer,"Doors, Frames & Hardware",VonRueden Group,Dickinson Group,6,Cachoeirinha,474127645-7,3,633110118810265152,4936757035760145,ante vel ipsum praesent blandit lacinia erat vestibulum sed magna at nunc commodo placerat praesent blandit nam nulla integer,2022-08-13,5.24
+Shields-Mohr,Bulldozer,Overhead Doors,Lesch-Daniel,Kunde-Dickens,11,Požarevac,658756723-1,19,3574428328762235,3582676636622299,semper sapien a libero nam dui proin leo odio porttitor id consequat in consequat ut nulla sed accumsan felis,2023-03-10,73.7
+Bechtelar-Littel,Skid-Steer,RF Shielding,Smitham-Yost,Cormier Inc,44,Cikendi,650173691-9,30,630469977163834077,4917512293781355,condimentum id luctus nec molestie sed justo pellentesque viverra pede ac diam cras,2022-05-23,99.17
+"Botsford, Rogahn and Heathcote",Compactor,Termite Control,Marquardt-Fadel,Klein-Kohler,71,Kučevo,792535885-8,51,4903441380678636477,5602259771893871162,lorem vitae mattis nibh ligula nec sem duis aliquam convallis nunc proin,2023-04-20,70.22
+"Fadel, Abbott and Renner",Grader,Curb & Gutter,Collier-Halvorson,Heidenreich-Wisozk,34,Siparia,344682803-6,19,3558289528892176,5341222466132468,dui luctus rutrum nulla tellus in sagittis dui vel nisl duis ac nibh fusce lacus purus aliquet,2022-12-01,68.35
+"Klein, Stehr and Hansen",Bulldozer,Electrical,Heathcote-Hegmann,"Schoen, Schinner and Bashirian",70,Kobyzhcha,747563100-1,3,67615918374813979,3552267916495436,iaculis justo in hac habitasse platea dictumst etiam faucibus cursus urna ut tellus,2022-11-23,36.02
+Dibbert-Sawayn,Excavator,Epoxy Flooring,Purdy Inc,Jacobs LLC,90,Fukumitsu,684367116-0,89,3575124426928351,675940744647511521,vulputate ut ultrices vel augue vestibulum ante ipsum primis in faucibus orci luctus et ultrices,2022-08-25,11.9
+Smith-Greenholt,Skid-Steer,Roofing (Metal),Leannon-Swaniawski,Brown-O'Connell,48,Nanwai,182125694-8,21,3549394673501796,3534352097481265,vestibulum sed magna at nunc commodo placerat praesent blandit nam nulla integer pede justo lacinia eget,2022-09-29,74.89
+Ratke and Sons,Trencher,Painting & Vinyl Wall Covering,Pfannerstill LLC,Williamson and Sons,62,Shūkat aş Şūfī,894744686-6,63,67627557381842583,3575485459195667,elit ac nulla sed vel enim sit amet nunc viverra dapibus nulla suscipit ligula in,2023-02-09,58.2
+Hammes Group,Compactor,Elevator,Hammes-Ortiz,Gusikowski Group,49,Norton,142503650-3,16,4041373495456,3567365631500028,morbi vel lectus in quam fringilla rhoncus mauris enim leo,2023-02-04,77.95
+Bednar-Tillman,Grader,Structural & Misc Steel Erection,Hackett-Rice,"Roberts, Grimes and Feest",48,Aengceleng,027615376-6,77,5038353282556401349,379827830457023,venenatis lacinia aenean sit amet justo morbi ut odio cras mi pede malesuada in imperdiet,2022-06-14,66.55
+Conn Inc,Backhoe,Elevator,"Satterfield, Dietrich and Dibbert","Gislason, Turner and Weissnat",49,Dajianchang,012542390-X,22,4175009765287943,633422970094073881,eleifend luctus ultricies eu nibh quisque id justo sit amet sapien dignissim vestibulum vestibulum ante ipsum primis,2023-04-24,39.65
+Baumbach-Hayes,Scraper,HVAC,Larkin-Stamm,Romaguera Group,60,Pshada,975951565-2,17,3558709467530792,201740170261422,mattis odio donec vitae nisi nam ultrices libero non mattis pulvinar nulla pede,2023-03-28,2.13
+Johnson-Hamill,Bulldozer,Electrical and Fire Alarm,Brekke-Rau,"Doyle, Crist and Kulas",87,Kwikila,420068378-4,44,3572846952864955,5610350660093584,maecenas pulvinar lobortis est phasellus sit amet erat nulla tempus,2022-11-13,55.16
+Weber-Spencer,Trencher,Structural & Misc Steel Erection,Jenkins-Nienow,Crona Group,17,Shiojiri,607345620-4,88,6387217570136176,6371741739648696,est phasellus sit amet erat nulla tempus vivamus in felis eu sapien cursus,2022-12-05,91.78
+Bartell-Wisozk,Dump Truck,Framing (Steel),Robel LLC,Bartell Inc,60,Bourg-en-Bresse,285063128-0,65,348798971763230,3529839890242313,in congue etiam justo etiam pretium iaculis justo in hac habitasse,2022-09-10,15.19
+"Blick, Wunsch and Kreiger",Backhoe,Electrical,Conn and Sons,Lockman and Sons,14,Falāvarjān,141897809-4,15,3559869406780764,5602254605681417512,adipiscing elit proin interdum mauris non ligula pellentesque ultrices phasellus,2022-06-14,72.14
+Cassin and Sons,Trencher,Curb & Gutter,Weimann Inc,"Schumm, Smith and Ortiz",83,Caramuca,054429347-9,39,3584248684102141,3533548146815194,quis turpis sed ante vivamus tortor duis mattis egestas metus aenean fermentum donec ut mauris eget massa tempor,2022-06-22,34.35
+"Miller, Boehm and Kovacek",Grader,Structural & Misc Steel Erection,Heller-Simonis,"Harvey, Schiller and Schultz",60,Puerto Alto,463560912-X,99,3540539014169112,6304647611299330905,tristique in tempus sit amet sem fusce consequat nulla nisl nunc,2023-04-25,56.23
+Gulgowski Inc,Dump Truck,Prefabricated Aluminum Metal Canopies,Watsica-Bogan,"Toy, Fahey and McKenzie",77,Petrikov,662823771-0,41,3532416020888375,201871804426022,orci luctus et ultrices posuere cubilia curae duis faucibus accumsan,2023-01-07,28.79
+Beahan-Boyer,Bulldozer,Fire Protection,"Mayer, Stark and Blanda","Grant, Huel and O'Connell",40,Los Angeles,388651272-X,7,3540719793054384,3565693812607524,mauris viverra diam vitae quam suspendisse potenti nullam porttitor lacus at turpis donec posuere metus,2023-03-11,94.98
+"Rau, Sanford and Dach",Compactor,Fire Protection,"Ziemann, Hudson and Berge",Rempel Inc,32,Dapdap,257178615-6,100,3567797431604172,36788101946745,vel enim sit amet nunc viverra dapibus nulla suscipit ligula in lacus curabitur at ipsum,2022-10-22,62.54
+"Hettinger, Pollich and Gleason",Dump Truck,Drywall & Acoustical (MOB),Huel Group,Friesen LLC,26,Lodhrān,942559838-X,53,375713644821956,4913216453197543,tristique fusce congue diam id ornare imperdiet sapien urna pretium nisl ut volutpat sapien arcu,2023-01-01,96.74
+Schultz and Sons,Crawler,Masonry & Precast,"Dach, Doyle and Dickens","Skiles, Fisher and Koepp",44,Xinxing,003878835-7,20,676195016446613968,6304826401904593789,nisl ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in hac,2023-02-04,33.83
+McLaughlin-Ratke,Backhoe,Electrical and Fire Alarm,Berge-Wilkinson,Maggio and Sons,36,Bantar,651286142-6,47,5100130235429332,6706505880344645,sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean,2022-11-22,3.68
+Wehner-Kuhlman,Excavator,Construction Clean and Final Clean,"Thiel, Roob and Corwin","McGlynn, Padberg and Bogan",83,Kirgili,561724673-9,31,374288950680370,3580557960145994,amet turpis elementum ligula vehicula consequat morbi a ipsum integer,2023-02-28,7.54
+Koelpin-Dicki,Grader,Ornamental Railings,Herzog LLC,"Marquardt, Berge and Corkery",19,Srubec,758267626-2,12,6396431946998362,4175005352440697,semper rutrum nulla nunc purus phasellus in felis donec semper sapien a libero nam dui proin leo odio porttitor id,2023-03-12,18.2
+Adams and Sons,Backhoe,Roofing (Asphalt),"Will, Paucek and Luettgen",Hane-Heaney,81,Huifeng,925057692-7,51,5350965259826013,5381044667065516,sed lacus morbi sem mauris laoreet ut rhoncus aliquet pulvinar sed nisl,2022-07-24,80.03
+Greenholt and Sons,Crawler,Ornamental Railings,Grant-Stroman,Gottlieb-Lebsack,27,Trondheim,344790479-8,39,5100143050486022,67715312291635427,velit vivamus vel nulla eget eros elementum pellentesque quisque porta,2023-04-18,12.77
