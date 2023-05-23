@@ -279,6 +279,7 @@ trait Searchable
             return implode("||' '||", $columns) . ' LIKE ?';
         }
 
+        // Default to MySQL's concatenation method
         return 'CONCAT(' . implode('," ",', $columns) . ') LIKE ?';
     }
 }
