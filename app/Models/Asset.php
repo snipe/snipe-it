@@ -947,13 +947,10 @@ class Asset extends Depreciable
                 ->orWhere('assets_users.first_name', 'LIKE', '%'.$term.'%')
                 ->orWhere('assets_users.last_name', 'LIKE', '%'.$term.'%')
                 ->orWhere('assets_users.username', 'LIKE', '%'.$term.'%')
-                ->orWhereRaw(
-                    $this->buildMultipleColumnSearch([
-                        DB::getTablePrefix().'assets_users.first_name',
-                        DB::getTablePrefix().'assets_users.last_name',
-                    ]),
-                    ["%{$term}%"]
-                );
+                ->orWhereMultipleColumns([
+                    DB::getTablePrefix() . 'assets_users.first_name',
+                    DB::getTablePrefix() . 'assets_users.last_name',
+                ], $term);
         }
 
         /**
@@ -1348,13 +1345,10 @@ class Asset extends Depreciable
                 })->orWhere(function ($query) use ($search) {
                     $query->where('assets_users.first_name', 'LIKE', '%'.$search.'%')
                         ->orWhere('assets_users.last_name', 'LIKE', '%'.$search.'%')
-                        ->orWhereRaw(
-                            $this->buildMultipleColumnSearch([
-                                DB::getTablePrefix().'assets_users.first_name',
-                                DB::getTablePrefix().'assets_users.last_name',
-                            ]),
-                            ["%{$search}%"]
-                        )
+                        ->orWhereMultipleColumns([
+                            DB::getTablePrefix() . 'assets_users.first_name',
+                            DB::getTablePrefix() . 'assets_users.last_name',
+                        ], $search)
                         ->orWhere('assets_users.username', 'LIKE', '%'.$search.'%')
                         ->orWhere('assets_locations.name', 'LIKE', '%'.$search.'%')
                         ->orWhere('assigned_assets.name', 'LIKE', '%'.$search.'%');
