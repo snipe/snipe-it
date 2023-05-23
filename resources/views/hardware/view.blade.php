@@ -937,6 +937,17 @@
                                         </ul>
 
                                 @endif
+                                @can('delete', $asset)
+                                  <form class="form-horizontal" method="post" action="{{ route('hardware/bulkdelete') }}" autocomplete="off" role="form">
+                                    {{csrf_field()}}
+                                      <div class="box-body">
+                                          <input type="hidden" name="ids[]" value="{{ $asset->id }}">
+                                      </div>
+                                      <div class="box-footer text-right">
+                                        <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.delete')}}</button>
+                                    </div>
+                                  </form>
+                                @endcan
                             </div> <!-- div.col-md-4 -->
                         </div><!-- /row -->
                     </div><!-- /.tab-pane asset details -->
