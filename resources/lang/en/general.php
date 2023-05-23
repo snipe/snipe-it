@@ -452,8 +452,11 @@ return [
     'item_notes' => ':item Notes',
     'item_name_var' => ':item Name',
     'importer' => [
-        'checked_out_to_fullname' => 'Checked Out to (Full Name)',
-        'checked_out_email' => 'Checked Out to (User Email)',
+        'checked_out_to_fullname' => 'Checked Out to: Full Name',
+        'checked_out_to_first_name' => 'Checked Out to: First Name',
+        'checked_out_to_last_name' => 'Checked Out to: Last Name',
+        'checked_out_to_username' => 'Checked Out to: Username',
+        'checked_out_to_email' => 'Checked Out to: Email',
         'manager_first_name' => 'Manager First Name',
         'manager_last_name' => 'Manager First Name',
         'manager_full_name' => 'Manager Full Name',
