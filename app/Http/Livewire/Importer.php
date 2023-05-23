@@ -214,6 +214,7 @@ class Importer extends Component
             'model_notes' => trans('general.item_notes', ['item' => trans('admin/hardware/form.model')]),
             'manufacturer' => trans('general.manufacturer'),
             'order_number' => trans('general.order_number'),
+            'notes' => trans('general.notes'),
             'image' => trans('general.importer.image_filename'),
             // Checkout fields - assets can be checked out to other assets, people, or locations, but we currently
             // only support checkout to people and locations in the importer
@@ -354,6 +355,25 @@ class Importer extends Component
             'username' =>
                 [
                     'user name',
+                    'username',
+                    trans('general.importer.checked_out_to_username'),
+                ],
+            'first_name' =>
+                [
+                    'first name',
+                    trans('general.importer.checked_out_to_first_name'),
+                ],
+            'last_name' =>
+                [
+                    'last name',
+                    'lastname',
+                    trans('general.importer.checked_out_to_last_name'),
+                ],
+            'email' =>
+                [
+                    'email',
+                    'e-mail',
+                    trans('general.importer.checked_out_to_email'),
                 ],
             'phone_number' =>
                 [
