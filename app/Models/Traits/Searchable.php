@@ -282,4 +282,9 @@ trait Searchable
         // Default to MySQL's concatenation method
         return 'CONCAT(' . implode('," ",', $columns) . ') LIKE ?';
     }
+
+    public function scopeOrWhereMultipleColumns($query, array $columns, $term)
+    {
+        return $query->orWhereRaw($this->buildMultipleColumnSearch($columns), ["%{$term}%"]);
+    }
 }
