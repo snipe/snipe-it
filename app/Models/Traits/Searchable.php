@@ -283,6 +283,14 @@ trait Searchable
         return 'CONCAT(' . implode('," ",', $columns) . ') LIKE ?';
     }
 
+    /**
+     * Search a string across multiple columns separated with a space.
+     *
+     * @param Builder $query
+     * @param array $columns - Columns to include in search string.
+     * @param $term
+     * @return Builder
+     */
     public function scopeOrWhereMultipleColumns($query, array $columns, $term)
     {
         return $query->orWhereRaw($this->buildMultipleColumnSearch($columns), ["%{$term}%"]);
