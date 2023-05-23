@@ -192,6 +192,7 @@ class Importer extends Component
             'purchase_cost' => trans('general.purchase_cost'),
             'purchase_date' => trans('general.purchase_date'),
             'manufacturer' => trans('general.manufacturer'),
+            'order_number' => trans('general.order_number'),
         ];
 
         $this->assets_fields = [
@@ -202,7 +203,6 @@ class Importer extends Component
             'checkout_class' => trans('general.importer.checkout_type'),
             'checkout_location' => trans('general.importer.checkout_location'),
             'image' => trans('general.importer.image_filename'),
-            'model_name' => trans('general.model_name'),
             'model_number' => trans('general.model_no'),
             'full_name' => trans('general.importer.checked_out_to_fullname'),
             'email' => trans('general.importer.checked_out_email'),
@@ -218,6 +218,7 @@ class Importer extends Component
             'asset_notes' => trans('general.item_notes', ['item' => trans('admin/hardware/general.asset')]),
             'model_notes' => trans('general.item_notes', ['item' => trans('admin/hardware/form.model')]),
             'manufacturer' => trans('general.manufacturer'),
+            'order_number' => trans('general.order_number'),
         ];
 
         $this->consumables_fields = [
@@ -230,6 +231,9 @@ class Importer extends Component
             'purchase_date' => trans('general.purchase_date'),
             'checkout_class' => trans('general.importer.checkout_type'),
             'supplier' => trans('general.supplier'),
+            'manufacturer' => trans('general.manufacturer'),
+            'order_number' => trans('general.order_number'),
+            'item_no' => trans('admin/consumables/general.item_no'),
         ];
 
         $this->components_fields = [
@@ -241,6 +245,9 @@ class Importer extends Component
             'min_amt' => trans('mail.min_QTY'),
             'purchase_cost' => trans('general.purchase_cost'),
             'purchase_date' => trans('general.purchase_date'),
+            'manufacturer' => trans('general.manufacturer'),
+            'order_number' => trans('general.order_number'),
+            'serial' => trans('general.serial_number'),
         ];
 
         $this->licenses_fields = [
@@ -308,15 +315,23 @@ class Importer extends Component
         $this->aliases_fields = [
             'item_name' =>
                 [
-                    trans('general.item_name'),
-                ],
-            'name' =>
-                [
+                    'item name',
+                    'asset name',
+                    'accessory name',
+                    'user name',
+                    'consumable name',
+                    'component name',
                     'name',
                 ],
-            'model_name' =>
+            'item_no' => [
+                'item number',
+                'item no.',
+                'item #',
+            ],
+            'asset_model' =>
                 [
                     'model name',
+                    'model',
                 ],
             'gravatar' =>
                 [
@@ -325,10 +340,6 @@ class Importer extends Component
             'currency' =>
                 [
                     '$',
-                ],
-            'manager_username' =>
-                [
-                    'Manager',
                 ],
             'jobtitle' =>
                 [
@@ -384,6 +395,9 @@ class Importer extends Component
             'min_amt' =>
                 [
                     'Min Amount',
+                    'Minimum Amount',
+                    'Min Quantity',
+                    'Minimum Quantity',
                 ],
             'next_audit_date' =>
                 [
