@@ -200,12 +200,7 @@ class Importer extends Component
             'asset_tag' => trans('general.asset_tag'),
             'asset_model' => trans('general.model_name'),
             'byod' => trans('general.byod'),
-            'checkout_class' => trans('general.importer.checkout_type'),
-            'checkout_location' => trans('general.importer.checkout_location'),
-            'image' => trans('general.importer.image_filename'),
             'model_number' => trans('general.model_no'),
-            'full_name' => trans('general.importer.checked_out_to_fullname'),
-            'email' => trans('general.importer.checked_out_email'),
             'status' => trans('general.status'),
             'warranty_months' => trans('admin/hardware/form.warranty'),
             'category' => trans('general.category'),
@@ -219,6 +214,16 @@ class Importer extends Component
             'model_notes' => trans('general.item_notes', ['item' => trans('admin/hardware/form.model')]),
             'manufacturer' => trans('general.manufacturer'),
             'order_number' => trans('general.order_number'),
+            'image' => trans('general.importer.image_filename'),
+            // Checkout fields - assets can be checked out to other assets, people, or locations, but we currently
+            // only support checkout to people and locations in the importer
+            'checkout_class' => trans('general.importer.checkout_type'),
+            'first_name' => trans('general.importer.checked_out_to_first_name'),
+            'last_name' => trans('general.importer.checked_out_to_last_name'),
+            'full_name' => trans('general.importer.checked_out_to_fullname'),
+            'email' => trans('general.importer.checked_out_to_email'),
+            'username' => trans('general.importer.checked_out_to_username'),
+            'checkout_location' => trans('general.importer.checkout_location'),
         ];
 
         $this->consumables_fields = [
