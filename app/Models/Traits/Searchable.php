@@ -265,6 +265,12 @@ trait Searchable
         return $related->getTable();
     }
 
+    /**
+     * Builds a search string for either MySQL or sqlite by separating the provided columns with a space.
+     *
+     * @param array $columns Columns to include in search string.
+     * @return string
+     */
     private function buildMultipleColumnSearch(array $columns): string
     {
         $driver = config('database.connections.' . config('database.default') . '.driver');
