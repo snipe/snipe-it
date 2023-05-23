@@ -40,10 +40,12 @@
                             </div>
                             <div class="col-md-9">
                                 @if(config('app.lock_passwords')===true)
-                                <input wire:model.debounce="ldap_enabled" type="checkbox" value="{{old('$ldap_enabled', $ldap_enabled) }}"  disabled>
+                                    <input wire:model="ldap_enabled" type="checkbox" value="{{old('$ldap_enabled', $ldap_enabled) }}"  disabled>
+                                    @error('$ldap_enabled')<span class="error">{{$message}}@enderror
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
-                                <input wire:model.lazy="ldap_enabled" type="checkbox" value="{{old('$ldap_enabled', $ldap_enabled)}}"  >
+                                    <input wire:model="ldap_enabled" type="checkbox" value="{{old('$ldap_enabled', $ldap_enabled)}}"  >
+                                    @error('$ldap_enabled')<span class="error">{{$message}}@enderror
                                 {{ trans('admin/settings/general.ldap_enabled') }}
                                 @endif
                             </div>
