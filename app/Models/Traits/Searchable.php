@@ -5,6 +5,7 @@ namespace App\Models\Traits;
 use App\Models\Asset;
 use App\Models\CustomField;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 /**
  * This trait allows for cleaner searching of models,
@@ -164,7 +165,13 @@ trait Searchable
                 }
                 // I put this here because I only want to add the concat one time in the end of the user relation search
                 if($relation == 'user') {
-                    $query->orWhereRaw('CONCAT (users.first_name, " ", users.last_name) LIKE ?', ["%{$term}%"]);
+                    $query->orWhereRaw(
+                            $this->buildMultipleColumnSearch([
+                                DB::getTablePrefix() . 'users.first_name',
+                                DB::getTablePrefix() . 'users.last_name',
+                            ]),
+                            ["%{$term}%"]
+                        );
                 }
             });
         }
