@@ -647,8 +647,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         return $query->where('first_name', 'LIKE', '%' . $search . '%')
             ->orWhere('last_name', 'LIKE', '%' . $search . '%')
             ->orWhereMultipleColumns([
-                DB::getTablePrefix() . 'users.first_name',
-                DB::getTablePrefix() . 'users.last_name',
+                'users.first_name',
+                'users.last_name',
             ], $search);
     }
 
@@ -660,11 +660,10 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function advancedTextSearch(Builder $query, array $terms) {
-
         foreach($terms as $term) {
             $query->orWhereMultipleColumns([
-                DB::getTablePrefix() . 'users.first_name',
-                DB::getTablePrefix() . 'users.last_name',
+                'users.first_name',
+                'users.last_name',
             ], $term);
         }
 

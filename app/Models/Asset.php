@@ -948,8 +948,8 @@ class Asset extends Depreciable
                 ->orWhere('assets_users.last_name', 'LIKE', '%'.$term.'%')
                 ->orWhere('assets_users.username', 'LIKE', '%'.$term.'%')
                 ->orWhereMultipleColumns([
-                    DB::getTablePrefix() . 'assets_users.first_name',
-                    DB::getTablePrefix() . 'assets_users.last_name',
+                    'assets_users.first_name',
+                    'assets_users.last_name',
                 ], $term);
         }
 
@@ -1346,8 +1346,8 @@ class Asset extends Depreciable
                     $query->where('assets_users.first_name', 'LIKE', '%'.$search.'%')
                         ->orWhere('assets_users.last_name', 'LIKE', '%'.$search.'%')
                         ->orWhereMultipleColumns([
-                            DB::getTablePrefix() . 'assets_users.first_name',
-                            DB::getTablePrefix() . 'assets_users.last_name',
+                            'assets_users.first_name',
+                            'assets_users.last_name',
                         ], $search)
                         ->orWhere('assets_users.username', 'LIKE', '%'.$search.'%')
                         ->orWhere('assets_locations.name', 'LIKE', '%'.$search.'%')

@@ -167,8 +167,8 @@ trait Searchable
                 if($relation == 'user') {
                     $query->orWhereRaw(
                             $this->buildMultipleColumnSearch([
-                                DB::getTablePrefix() . 'users.first_name',
-                                DB::getTablePrefix() . 'users.last_name',
+                                'users.first_name',
+                                'users.last_name',
                             ]),
                             ["%{$term}%"]
                         );
@@ -273,14 +273,16 @@ trait Searchable
      */
     private function buildMultipleColumnSearch(array $columns): string
     {
+        $mappedColumns = collect($columns)->map(fn($column) => DB::getTablePrefix() . $column)->toArray();
+
         $driver = config('database.connections.' . config('database.default') . '.driver');
 
         if ($driver === 'sqlite') {
-            return implode("||' '||", $columns) . ' LIKE ?';
+            return implode("||' '||", $mappedColumns) . ' LIKE ?';
         }
 
         // Default to MySQL's concatenation method
-        return 'CONCAT(' . implode('," ",', $columns) . ') LIKE ?';
+        return 'CONCAT(' . implode('," ",', $mappedColumns) . ') LIKE ?';
     }
 
     /**
