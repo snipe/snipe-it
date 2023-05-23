@@ -27,6 +27,10 @@ abstract class Importer
     protected $updating;
     /**
      * Default Map of item fields->csv names
+     *
+     * This has been moved into Livewire/Importer.php to be more granular.
+     * @todo - remove references to this property since we don't use it anymore.
+     *
      * @var array
      */
     private $defaultFieldMap = [
