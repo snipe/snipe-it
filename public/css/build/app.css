@@ -1107,6 +1107,9 @@ input[type="radio"]:checked::before {
   grid-template-columns: 0.1em auto;
   gap: 1.5em;
 }
+.container.row-striped .col-md-6 {
+  overflow-wrap: anywhere;
+}
 .nav-tabs-custom > .nav-tabs > li {
   z-index: 1;
 }
