@@ -240,7 +240,7 @@
             </p>
 
               <br>
-
+        <div id="custom-report-fields">
             @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'),'multiple' => 'true', 'fieldname' => 'by_company_id[]', 'hide_new' => 'true'])
             @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'multiple' => 'true', 'fieldname' => 'by_location_id[]', 'hide_new' => 'true'])
             @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.default_location'), 'multiple' => 'true', 'fieldname' => 'by_rtd_location_id[]', 'hide_new' => 'true'])
@@ -318,6 +318,7 @@
                       <input type="text" class="form-control" name="next_audit_end" aria-label="next_audit_end">
                   </div>
               </div>
+        </div>
 
             <div class="col-md-9 col-md-offset-3">
             <label class="form-control">
