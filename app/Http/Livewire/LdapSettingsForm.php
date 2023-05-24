@@ -254,11 +254,11 @@ class LdapSettingsForm extends Component
             } catch (\Exception $e) {
                 \Log::debug('Bind failed');
                 \Log::debug("Exception was: ".$e->getMessage());
-//                return response()->json(['message' => $e->getMessage()], 400);//return response()->json(['message' => $e->getMessage()], 500);
+                return response()->json(['message' => $e->getMessage()], 400);//return response()->json(['message' => $e->getMessage()], 500);
             }
         } catch (\Exception $e) {
             \Log::debug('Connection failed but we cannot debug it any further on our end.');
-//            return response()->json(['message' => $e->getMessage()], 500);
+            return response()->json(['message' => $e->getMessage()], 500);
         }
     }}
 
