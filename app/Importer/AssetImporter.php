@@ -134,7 +134,7 @@ class AssetImporter extends ItemImporter
 
 
         if ($asset->save()) {
-            $asset->logCreate('Imported using csv importer');
+            $asset->logCreate(trans('general.importer.import_note'));
             $this->log('Asset '.$this->item['name'].' with serial number '.$this->item['serial'].' was created');
 
             // If we have a target to checkout to, lets do so.

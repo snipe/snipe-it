@@ -462,7 +462,7 @@ return [
         'manager_full_name' => 'Manager Full Name',
         'manager_username' => 'Manager Username',
         'checkout_type' => 'Checkout Type',
-        'checkout_location' => 'Checkout Location',
+        'checkout_location' => 'Checkout to Location',
         'image_filename' => 'Image Filename',
         'do_not_import'     => 'Do Not Import',
         'vip' => 'VIP',
@@ -470,6 +470,7 @@ return [
         'gravatar' => 'Gravatar Email',
         'currency' => 'Currency',
         'address2' => 'Address Line 2',
+        'import_note' => 'Imported using csv importer',
     ],
 
 ];
