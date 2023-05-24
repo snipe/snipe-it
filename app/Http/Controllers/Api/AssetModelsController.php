@@ -63,7 +63,7 @@ class AssetModelsController extends Controller
             'models.deleted_at',
             'models.updated_at',
          ])
-            ->with('category', 'depreciation', 'manufacturer', 'fieldset')
+            ->with('category', 'depreciation', 'manufacturer', 'fieldset.fields.defaultValues')
             ->withCount('assets as assets_count');
 
         if ($request->input('status')=='deleted') {
