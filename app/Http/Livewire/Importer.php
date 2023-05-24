@@ -216,8 +216,11 @@ class Importer extends Component
             'order_number' => trans('general.order_number'),
             'notes' => trans('general.notes'),
             'image' => trans('general.importer.image_filename'),
-            // Checkout fields - assets can be checked out to other assets, people, or locations, but we currently
-            // only support checkout to people and locations in the importer
+            /**
+             * Checkout fields:
+             * Assets can be checked out to other assets, people, or locations, but we currently
+             * only support checkout to people and locations in the importer
+             **/
             'checkout_class' => trans('general.importer.checkout_type'),
             'first_name' => trans('general.importer.checked_out_to_first_name'),
             'last_name' => trans('general.importer.checked_out_to_last_name'),
