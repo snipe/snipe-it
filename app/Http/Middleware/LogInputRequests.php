@@ -18,6 +18,7 @@ class LogInputRequests
     public function handle(Request $request, Closure $next)
     {
         if(isset($request->updates)) {
+
             foreach($request->updates as $update)
                 if(isset($update['payload']['method']) &&
                 $update['payload']['method']=='submit'

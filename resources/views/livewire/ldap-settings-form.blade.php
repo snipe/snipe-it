@@ -543,84 +543,88 @@
                                 </div>
                             </div>
                         </div>
-                        @if ($setting->ldap_enabled)
+                    @if ($setting->ldap_enabled)
 
+                        <form wire:submit.prevent="ldapsynctest">
                             <!-- LDAP test -->
-                        <div class="col-md-11 col-md-offset-1">
-                            <div class="form-group">
-                                <div class="col-md-3">
-                                    {{ Form::label('test_ldap_sync', 'Test LDAP Sync') }}
-                                </div>
-                                <div class="col-md-9" id="ldaptestrow">
-                                    <button wire:model="ldaptest" {{ $setting->demoMode }} class="btn btn-default btn-sm pull-left" id="ldaptest" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test_sync') }}</button>
-                                </div>
-                                <div class="col-md-9 col-md-offset-3">
-                                    <br />
-                                    <div id="ldapad_test_results" class="hidden well well-sm"></div>
-                                </div>
-                                <div class="col-md-9 col-md-offset-3">
-                                    <p class="help-block">{{ trans('admin/settings/general.ldap_login_sync_help') }}</p>
-                                    @if (config('app.lock_passwords')===true)
-                                        <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
-                                    @endif
-                                </div>
-
-                            </div>
-                        </div>
-
-                            <!-- LDAP Login test -->
-                        <div class="col-md-11 col-md-offset-1">
-                            <div class="form-group">
-                                <div class="col-md-3">
-                                    {{ Form::label('test_ldap_login', 'Test LDAP Login') }}
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <input type="text" wire:model="ldaptest_user" id="ldaptest_user" class="form-control" placeholder="LDAP username">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <input type="password" wire:model="ldaptest_password" id="ldaptest_password" class="form-control" placeholder="LDAP password">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <a class="btn btn-default btn-sm" id="ldaptestlogin" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test') }}</a>
-                                        </div>
-
-
+                            <div class="col-md-11 col-md-offset-1">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        {{ Form::label('test_ldap_sync', 'Test LDAP Sync') }}
                                     </div>
-                                </div>
-                                <div class="col-md-9 col-md-offset-3">
-                                    <span id="ldaptestloginicon"></span>
-                                    <span id="ldaptestloginresult"></span>
-                                    <span id="ldaptestloginstatus"></span>
-                                </div>
-                                <div class="col-md-9 col-md-offset-3">
-                                    <p class="help-block">{{ trans('admin/settings/general.ldap_login_test_help') }}</p>
-                                </div>
+                                    <div class="col-md-9" id="ldaptestrow">
+                                        <button type='submit' wire:click.prevent="ldapsynctest" {{ $setting->demoMode }} class="btn btn-default btn-sm pull-left" id="ldapsynctest" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test_sync') }}</button>
+                                    </div>
+                                    <div class="col-md-9 col-md-offset-3">
+                                        <br />
+                                        <div id="ldapad_test_results" class="hidden well well-sm"></div>
+                                    </div>
+                                    <div class="col-md-9 col-md-offset-3">
+                                        <p class="help-block">{{ trans('admin/settings/general.ldap_login_sync_help') }}</p>
+                                        @if (config('app.lock_passwords')===true)
+                                            <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                        @endif
+                                    </div>
 
+                                </div>
                             </div>
-                        </div>
+                        </form>
+                        <form wire:click.prevent="logintest">
+                            <!-- LDAP Login test -->
+                            <div class="col-md-11 col-md-offset-1">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        {{ Form::label('test_ldap_login', 'Test LDAP Login') }}
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <input type="text" wire:model="ldaptest_user" id="ldaptest_user" class="form-control" placeholder="LDAP username">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="password" wire:model="ldaptest_password" id="ldaptest_password" class="form-control" placeholder="LDAP password">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <a class="btn btn-default btn-sm" id="ldaptestlogin" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test') }}</a>
+                                            </div>
 
 
-                        @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9 col-md-offset-3">
+                                        <span id="ldaptestloginicon"></span>
+                                        <span id="ldaptestloginresult"></span>
+                                        <span id="ldaptestloginstatus"></span>
+                                    </div>
+                                    <div class="col-md-9 col-md-offset-3">
+                                        <p class="help-block">{{ trans('admin/settings/general.ldap_login_test_help') }}</p>
+                                    </div>
 
-{{--                        <!-- LDAP Forgotten password -->--}}
-{{--                        <div class="form-group {{ $errors->has('custom_forgot_pass_url') ? 'error' : '' }}">--}}
-{{--                            <div class="col-md-3">--}}
-{{--                                {{ Form::label('custom_forgot_pass_url', trans('admin/settings/general.custom_forgot_pass_url')) }}--}}
-{{--                            </div>--}}
-{{--                            <div class="col-md-9">--}}
-{{--                                {{ Form::text('custom_forgot_pass_url', Request::old('custom_forgot_pass_url', $setting->custom_forgot_pass_url), ['class' => 'form-control','placeholder' => trans('general.example') .'https://my.ldapserver-forgotpass.com', $setting->demoMode]) }}--}}
-{{--                                <p class="help-block">{{ trans('admin/settings/general.custom_forgot_pass_url_help') }}</p>--}}
-{{--                                {!! $errors->first('custom_forgot_pass_url', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}--}}
-{{--                                @if (config('app.lock_passwords')===true)--}}
-{{--                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>--}}
-{{--                                @endif--}}
-{{--                            </div>--}}
-{{--                        </div><!-- LDAP Server -->--}}
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- LDAP Forgotten password -->
+                        <div class="form-group {{ $errors->has('custom_forgot_pass_url') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('custom_forgot_pass_url', trans('admin/settings/general.custom_forgot_pass_url')) }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ Form::text('custom_forgot_pass_url', Request::old('custom_forgot_pass_url', $setting->custom_forgot_pass_url), ['class' => 'form-control','placeholder' => trans('general.example') .'https://my.ldapserver-forgotpass.com', $setting->demoMode]) }}
+                                <p class="help-block">{{ trans('admin/settings/general.custom_forgot_pass_url_help') }}</p>
+                                {!! $errors->first('custom_forgot_pass_url', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                @if (config('app.lock_passwords')===true)
+                                    <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                @endif
+                            </div>
+                        </div><!-- LDAP Server -->
+                    @endif
 
 
-{{--                    </div>--}}
+
+
+                    </div>
+
                 </div> <!--/.box-body-->
                 <div class="box-footer">
                     <div class="text-left col-md-6">
@@ -631,105 +635,26 @@
                     </div>
 
                 </div>
+
             </div> <!-- /box -->
 
         </div> <!-- /.col-md-8-->
-        </div> <!-- /.row-->
     </form>
+
+
+
 </div>
 @push('moar_scripts')
     <script>
-         // * Test the LDAP connection settings
-         // */
-        $("#ldaptest").click(function () {
-            $("#ldapad_test_results").removeClass('hidden text-success text-danger');
-            $("#ldapad_test_results").html('');
-            $("#ldapad_test_results").html('<i class="fas fa-spinner spin"></i> {{ trans('admin/settings/message.ldap.testing') }}');
-            $.ajax({
-                url: '{{ route('ldaptest') }}',
-                type: 'GET',
-                headers: {
-                    "X-Requested-With": 'XMLHttpRequest',
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-                },
-                data: {},
-                dataType: 'json',
+        document.addEventListener('DOMContentLoaded', function () {
+            Livewire.on('closeModal', function () {
+                closeModal();
+            });
 
-                success: function (data) {
-                    $("#ldapad_test_results").html('');
-                    let html = buildLdapTestResults(data)
-                    $("#ldapad_test_results").html(
-                        html
-                    );
-                },
-
-                error: function (data) {
-                    $("#ldapad_test_results").html('');
-                    $("#ldapad_test_results").addClass('text-danger');
-                    let errorIcon = '<i class="fas fa-exclamation-triangle text-danger"></i>' + ' ';
-                    if (data.status == 500) {
-                        $('#ldapad_test_results').html(errorIcon + '{{ trans('admin/settings/message.ldap.500') }}');
-                    } else if (data.status == 400) {
-                        let errorMessage = '';
-                        if( typeof data.responseJSON.user_sync !== 'undefined') {
-                            errorMessage =  data.responseJSON.user_sync.message;
-                        }
-                        if( typeof data.responseJSON.message !== 'undefined') {
-                            errorMessage =  data.responseJSON.message;
-                        }
-                        $('#ldapad_test_results').html(errorIcon + errorMessage);
-                    } else {
-                        $('#ldapad_test_results').html('{{ trans('admin/settings/message.ldap.error') }}');
-                       // $('#ldapad_test_results').html(errorIcon + data.responseText.message);
-                    }
-                }
-
-
+            Livewire.on('showModal', function () {
+                showModal();
             });
         });
-
-        /**
-         * Build the results html table
-         */
-        function buildLdapTestResults(results) {
-            let html = '<ul style="list-style: none;padding-left: 5px;">'
-            html += '<li class="text-success"><i class="fas fa-check" aria-hidden="true"></i> ' + results.login.message + ' </li>'
-            html += '<li class="text-success"><i class="fas fa-check" aria-hidden="true"></i> ' + results.bind.message + ' </li>'
-            html += '</ul>'
-            html += '<div>{{ trans('admin/settings/message.ldap.sync_success') }}</div>'
-            html += '<table class="table table-bordered table-condensed" style="background-color: #fff">'
-            html += buildLdapResultsTableHeader()
-            html += buildLdapResultsTableBody(results.user_sync.users)
-            html += '<table>'
-            return html;
-        }
-
-        function buildLdapResultsTableHeader(user)
-        {
-            var keys = [
-                '{{ trans('admin/settings/general.employee_number') }}',
-                '{{ trans('mail.username') }}',
-                '{{ trans('general.first_name') }}',
-                '{{ trans('general.last_name') }}',
-                '{{ trans('general.email') }}'
-            ]
-            let header = '<thead><tr>'
-            for (var i in keys) {
-                header += '<th>' + keys[i] + '</th>'
-            }
-            header += "</tr></thead>"
-            return header;
-        }
-
-        function buildLdapResultsTableBody(users)
-        {
-            let body = '<tbody>'
-            for (var i in users) {
-                body += '<tr><td>' + users[i].employee_number + '</td><td>' + users[i].username + '</td><td>' + users[i].firstname + '</td><td>' + users[i].lastname + '</td><td>' + users[i].email + '</td></tr>'
-            }
-            body += "</tbody>"
-            return body;
-        }
-
     </script>
+
 @endpush

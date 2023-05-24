@@ -135,12 +135,86 @@ class LdapSettingsForm extends Component
 
         $this->setting->save();
     }
+    public function ldapsynctest()
+    {
+
+        $this->ldapad_test_results = '<i class="fas fa-spinner spin"></i> ' . trans('admin/settings/message.ldap.testing');
+        $response = $this->ldaptest();
+
+
+//        if ($response->successful()) {
+//            $this->ldapad_test_results = $this->buildLdapTestResults($response->json());
+//        } else {
+//            $this->ldapad_test_results = '<i class="fas fa-exclamation-triangle text-danger"></i> ';
+//            if ($response->status() === 500) {
+//                $this->ldapad_test_results .= trans('admin/settings/message.ldap.500');
+//            } elseif ($response->status() === 400) {
+//                $errorMessage = '';
+//                if (isset($response->json()['user_sync'])) {
+//                    $errorMessage = $response->json()['user_sync']['message'];
+//                }
+//                if (isset($response->json()['message'])) {
+//                    $errorMessage = $response->json()['message'];
+//                }
+//                $this->ldapad_test_results .= $errorMessage;
+//            } else {
+//                $this->ldapad_test_results .= trans('admin/settings/message.ldap.error');
+//            }
+//        }
+    }
+    public function buildLdapTestResults($results)
+    {
+        $html = '<ul style="list-style: none;padding-left: 5px;">';
+        $html .= '<li class="text-success"><i class="fas fa-check" aria-hidden="true"></i> ' . $results['login']['message'] . ' </li>';
+        $html .= '<li class="text-success"><i class="fas fa-check" aria-hidden="true"></i> ' . $results['bind']['message'] . ' </li>';
+        $html .= '</ul>';
+        $html .= '<div>{{ trans("admin/settings/message.ldap.sync_success") }}</div>';
+        $html .= '<table class="table table-bordered table-condensed" style="background-color: #fff">';
+        $html .= $this->buildLdapResultsTableHeader();
+        $html .= $this->buildLdapResultsTableBody($results['user_sync']['users']);
+        $html .= '</table>';
+        return $html;
+    }
+
+    public function buildLdapResultsTableHeader()
+    {
+        // Build the HTML table header
+        $this->keys = [
+            trans('admin/settings/general.employee_number'),
+            trans('mail.username'),
+            trans('general.first_name'),
+            trans('general.last_name'),
+            trans('general.email'),
+        ];
+        $header = '<thead><tr>';
+        foreach ( $this->keys as $key) {
+            $header .= '<th>' . $key . '</th>';
+        }
+
+        $header .= "</tr></thead>";
+
+        return $header;
+    }
+
+    public function buildLdapResultsTableBody($users)
+    {
+        // Build the HTML table body
+        $body = '<tbody>';
+        foreach ($users as $user) {
+            $body .= '<tr><td>' . $user->employee_number .
+                '</td><td>' . $user->username .
+                '</td><td>' . $user->firstname .
+                '</td><td>' . $user->lastname .
+                '</td><td>' . $user->email .
+                '</td></tr>';
+        }
+        $body .= "</tbody>";
+        return $body;
+    }
+
     public function ldaptest()
     {
-        if ($this->settings->ldap_enabled!='1') {
-            \Log::debug('LDAP is not enabled cannot test.');
-            return response()->json(['message' => 'LDAP is not enabled, cannot test.'], 400);
-        }
+        $settings = Setting::getSettings();
 
         \Log::debug('Preparing to test LDAP connection');
 
@@ -161,8 +235,8 @@ class LdapSettingsForm extends Component
                     return (object) [
                         'username'        => $item[$settings['ldap_username_field']][0] ?? null,
                         'employee_number' => $item[$settings['ldap_emp_num']][0] ?? null,
-                        'lastname'        => $item[$settings['ldap_lname_field']][0] ?? null,
                         'firstname'       => $item[$settings['ldap_fname_field']][0] ?? null,
+                        'lastname'        => $item[$settings['ldap_lname_field']][0] ?? null,
                         'email'           => $item[$settings['ldap_email']][0] ?? null,
                     ];
                 });
@@ -174,75 +248,72 @@ class LdapSettingsForm extends Component
                     $message['user_sync'] = [
                         'message' => 'Connection to LDAP was successful, however there were no users returned from your query. You should confirm the Base Bind DN above.',
                     ];
-
-                    return response()->json($message, 400);
+//                    return response()->json($message, 400);
                 }
-
-                return response()->json($message, 200);
+//                return response()->json($message, 200);
             } catch (\Exception $e) {
                 \Log::debug('Bind failed');
                 \Log::debug("Exception was: ".$e->getMessage());
-                return response()->json(['message' => $e->getMessage()], 400);
-                //return response()->json(['message' => $e->getMessage()], 500);
+//                return response()->json(['message' => $e->getMessage()], 400);//return response()->json(['message' => $e->getMessage()], 500);
             }
         } catch (\Exception $e) {
             \Log::debug('Connection failed but we cannot debug it any further on our end.');
-            return response()->json(['message' => $e->getMessage()], 500);
+//            return response()->json(['message' => $e->getMessage()], 500);
         }
-    }
+    }}
 
-    public function ldaptestlogin()
-    {
-
-        if ($this->setting->ldap_enabled != '1') {
-            \Log::debug('LDAP is not enabled. Cannot test.');
-            return response()->json(['message' => 'LDAP is not enabled, cannot test.'], 400);
-        }
-
-
-        $rules = array(
-            'ldaptest_user' => 'required',
-            'ldaptest_password' => 'required'
-        );
-
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            \Log::debug('LDAP Validation test failed.');
-            $validation_errors = implode(' ',$validator->errors()->all());
-            return response()->json(['message' => $validator->errors()->all()], 400);
-        }
-
-
-
-        \Log::debug('Preparing to test LDAP login');
-        try {
-            $connection = Ldap::connectToLdap();
-            try {
-                Ldap::bindAdminToLdap($connection);
-                \Log::debug('Attempting to bind to LDAP for LDAP test');
-                try {
-                    $ldap_user = Ldap::findAndBindUserLdap($this->ldaptest_user, $this->ldaptest_password);
-                    if ($ldap_user) {
-                        \Log::debug('It worked! '. $this->ldaptest_user.' successfully binded to LDAP.');
-                        return response()->json(['message' => 'It worked! '. $this->ldaptest_user.' successfully binded to LDAP.'], 200);
-                    }
-                    return response()->json(['message' => 'Login Failed. '. $this->ldaptest_user.' did not successfully bind to LDAP.'], 400);
-
-                } catch (\Exception $e) {
-                    \Log::debug('LDAP login failed');
-                    return response()->json(['message' => $e->getMessage()], 400);
-                }
-
-            } catch (\Exception $e) {
-                \Log::debug('Bind failed');
-                return response()->json(['message' => $e->getMessage()], 400);
-                //return response()->json(['message' => $e->getMessage()], 500);
-            }
-        } catch (\Exception $e) {
-            \Log::debug('Connection failed');
-            return response()->json(['message' => $e->getMessage()], 500);
-        }
-
-
-    }
-}
+//    public function ldaptestlogin()
+//    {
+//
+//        if ($this->setting->ldap_enabled != '1') {
+//            \Log::debug('LDAP is not enabled. Cannot test.');
+//            return response()->json(['message' => 'LDAP is not enabled, cannot test.'], 400);
+//        }
+//
+//
+//        $rules = array(
+//            'ldaptest_user' => 'required',
+//            'ldaptest_password' => 'required'
+//        );
+//
+//        $validator = Validator::make($request->all(), $rules);
+//        if ($validator->fails()) {
+//            \Log::debug('LDAP Validation test failed.');
+//            $validation_errors = implode(' ',$validator->errors()->all());
+//            return response()->json(['message' => $validator->errors()->all()], 400);
+//        }
+//
+//
+//
+//        \Log::debug('Preparing to test LDAP login');
+//        try {
+//            $connection = Ldap::connectToLdap();
+//            try {
+//                Ldap::bindAdminToLdap($connection);
+//                \Log::debug('Attempting to bind to LDAP for LDAP test');
+//                try {
+//                    $ldap_user = Ldap::findAndBindUserLdap($this->ldaptest_user, $this->ldaptest_password);
+//                    if ($ldap_user) {
+//                        \Log::debug('It worked! '. $this->ldaptest_user.' successfully binded to LDAP.');
+//                        return response()->json(['message' => 'It worked! '. $this->ldaptest_user.' successfully binded to LDAP.'], 200);
+//                    }
+//                    return response()->json(['message' => 'Login Failed. '. $this->ldaptest_user.' did not successfully bind to LDAP.'], 400);
+//
+//                } catch (\Exception $e) {
+//                    \Log::debug('LDAP login failed');
+//                    return response()->json(['message' => $e->getMessage()], 400);
+//                }
+//
+//            } catch (\Exception $e) {
+//                \Log::debug('Bind failed');
+//                return response()->json(['message' => $e->getMessage()], 400);
+//                //return response()->json(['message' => $e->getMessage()], 500);
+//            }
+//        } catch (\Exception $e) {
+//            \Log::debug('Connection failed');
+//            return response()->json(['message' => $e->getMessage()], 500);
+//        }
+//
+//
+//    }
+//}
