@@ -1104,6 +1104,9 @@ input[type="radio"]:checked::before {
   grid-template-columns: 0.1em auto;
   gap: 1.5em;
 }
+.select2-container .select2-search--inline .select2-search__field {
+  padding-left: 15px;
+}
 /** --------------------------------------- **/
 /** End checkbox styles to replace iCheck   **/
 /** --------------------------------------- **/
