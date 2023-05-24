@@ -251,7 +251,7 @@ abstract class Importer
             'activated'  => $this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')),
             'remote'    => $this->fetchHumanBoolean(($this->findCsvMatch($row, 'remote'))),
         ];
-        
+
         if ($type == 'manager') {
             $user_array['full_name'] = $this->findCsvMatch($row, 'manager');
             $user_array['username'] = $this->findCsvMatch($row, 'manager_username');
