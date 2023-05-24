@@ -6,6 +6,7 @@ use App\Models\Ldap;
 use App\Models\Setting;
 use App\Models\Group;
 use Livewire\Component;
+use Illuminate\Support\Facades\Crypt;
 
 class LdapSettingsForm extends Component
 {
@@ -107,7 +108,7 @@ class LdapSettingsForm extends Component
         $this->setting->ldap_server               = $this->ldap_server;
         $this->setting->ldap_server_cert_ignore   = $this->ldap_server_cert_ignore;
         $this->setting->ldap_uname                = $this->ldap_uname;
-        $this->setting->ldap_pword                = $this->ldap_pword;
+        $this->setting->ldap_pword                = Crypt::encrypt($this->ldap_pword);
         $this->setting->ldap_basedn               = $this->ldap_basedn;
         $this->setting->ldap_default_group        = $this->ldap_default_group;
         $this->setting->ldap_filter               = $this->ldap_filter;
@@ -248,17 +249,14 @@ class LdapSettingsForm extends Component
                     $message['user_sync'] = [
                         'message' => 'Connection to LDAP was successful, however there were no users returned from your query. You should confirm the Base Bind DN above.',
                     ];
-//                    return response()->json($message, 400);
                 }
-//                return response()->json($message, 200);
             } catch (\Exception $e) {
                 \Log::debug('Bind failed');
                 \Log::debug("Exception was: ".$e->getMessage());
-                return response()->json(['message' => $e->getMessage()], 400);//return response()->json(['message' => $e->getMessage()], 500);
             }
         } catch (\Exception $e) {
             \Log::debug('Connection failed but we cannot debug it any further on our end.');
-            return response()->json(['message' => $e->getMessage()], 500);
+
         }
     }}
 
