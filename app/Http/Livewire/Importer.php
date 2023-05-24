@@ -39,7 +39,6 @@ class Importer extends Component
     public $file_id; // TODO: I can't figure out *why* we need this, but it really seems like we do. I can't seem to pull the id from the activeFile for some reason?
 
     // Make these variables public - we set the properties in the constructor so we can localize them (versus the old static arrays)
-    public $general_fields;
     public $accessories_fields;
     public $users_fields;
     public $licenses_fields;
@@ -73,28 +72,28 @@ class Importer extends Component
     {
         switch ($type) {
             case 'asset':
-                $results = $this->general_fields + $this->assets_fields;
+                $results = $this->assets_fields;
                 break;
             case 'accessory':
-                $results = $this->general_fields + $this->accessories_fields;
+                $results = $this->accessories_fields;
                 break;
             case 'consumable':
-                $results = $this->general_fields + $this->consumables_fields;
+                $results = $this->consumables_fields;
                 break;
             case 'component':
-                $results = $this->general_fields + $this->components_fields;
+                $results = $this->components_fields;
                 break;
             case 'license':
-                $results = $this->general_fields + $this->licenses_fields;
+                $results = $this->licenses_fields;
                 break;
             case 'user':
-                $results = $this->general_fields + $this->users_fields;
+                $results = $this->users_fields;
                 break;
             case 'location':
-                $results = $this->general_fields + $this->locations_fields;
+                $results = $this->locations_fields;
                 break;
             default:
-                $results = $this->general_fields;
+                $results = [];
         }
         asort($results, SORT_FLAG_CASE | SORT_STRING);
         if ($type == "asset") {
@@ -174,15 +173,13 @@ class Importer extends Component
             'location' =>    trans('general.locations'),
         ];
 
-        // set the variables here so we can translate them!
-        $this->general_fields = [
+        /**
+         * These are the item-type specific columns
+         */
+        $this->accessories_fields  = [
             'company' => trans('general.company'),
             'location' => trans('general.location'),
             'quantity' => trans('general.qty'),
-            'department' => trans('general.department'),
-        ];
-
-        $this->accessories_fields  = [
             'item_name' => trans('general.item_name_var', ['item' => trans('general.accessory')]),
             'model_number' => trans('general.model_no'),
             'notes' => trans('general.notes'),
@@ -196,6 +193,8 @@ class Importer extends Component
         ];
 
         $this->assets_fields = [
+            'company' => trans('general.company'),
+            'location' => trans('general.location'),
             'item_name' => trans('general.item_name_var', ['item' => trans('general.asset')]),
             'asset_tag' => trans('general.asset_tag'),
             'asset_model' => trans('general.model_name'),
@@ -231,6 +230,9 @@ class Importer extends Component
         ];
 
         $this->consumables_fields = [
+            'company' => trans('general.company'),
+            'location' => trans('general.location'),
+            'quantity' => trans('general.qty'),
             'item_name' => trans('general.item_name_var', ['item' => trans('general.consumable')]),
             'model_number' => trans('general.model_no'),
             'notes' => trans('general.notes'),
@@ -246,6 +248,9 @@ class Importer extends Component
         ];
 
         $this->components_fields = [
+            'company' => trans('general.company'),
+            'location' => trans('general.location'),
+            'quantity' => trans('general.qty'),
             'item_name' => trans('general.item_name_var', ['item' => trans('general.component')]),
             'model_number' => trans('general.model_no'),
             'notes' => trans('general.notes'),
@@ -260,6 +265,8 @@ class Importer extends Component
         ];
 
         $this->licenses_fields = [
+            'company' => trans('general.company'),
+            'location' => trans('general.location'),
             'item_name' => trans('general.item_name_var', ['item' => trans('general.license')]),
             'asset_tag' => trans('general.assigned_to_tag'),
             'expiration_date' => trans('general.expiration_name'),
@@ -280,6 +287,9 @@ class Importer extends Component
         ];
 
         $this->users_fields  = [
+            'company' => trans('general.company'),
+            'location' => trans('general.location'),
+            'department' => trans('general.department'),
             'first_name' => trans('general.first_name'),
             'last_name' => trans('general.last_name'),
             'notes' => trans('general.notes'),
