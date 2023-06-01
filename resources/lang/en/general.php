@@ -457,6 +457,7 @@ return [
         'checked_out_to_last_name' => 'Checked Out to: Last Name',
         'checked_out_to_username' => 'Checked Out to: Username',
         'checked_out_to_email' => 'Checked Out to: Email',
+        'checked_out_to_tag' => 'Checked Out to: Asset Tag',
         'manager_first_name' => 'Manager First Name',
         'manager_last_name' => 'Manager First Name',
         'manager_full_name' => 'Manager Full Name',
