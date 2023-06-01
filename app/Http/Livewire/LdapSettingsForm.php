@@ -217,6 +217,7 @@ class LdapSettingsForm extends Component
     {
         $settings = Setting::getSettings();
 
+
         \Log::debug('Preparing to test LDAP connection');
 
         $message = []; //where we collect together test messages
