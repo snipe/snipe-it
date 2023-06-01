@@ -71,14 +71,11 @@
 
 @section('moar_scripts')
     <!-- bootstrap color picker -->
-    <?php 
-    $color = request()->old('color', $item->color) ? request()->old('color', $item->color) : '#AA3399';
-    ?>
     <script nonce="{{ csrf_token() }}">
 
         $(function() {
             $('.color').colorpicker({
-                color: '{{ $color }}',
+                color: `{{ old('color', $item->color) ?: '#AA3399' }}`,
                 format: 'hex'
             });
         });
