@@ -33,6 +33,11 @@ class Settings
         return $this->update(['full_multiple_companies_support' => 1]);
     }
 
+    public function disableMultipleFullCompanySupport(): Settings
+    {
+        return $this->update(['full_multiple_companies_support' => 0]);
+    }
+
     public function enableWebhook(): Settings
     {
         return $this->update([
