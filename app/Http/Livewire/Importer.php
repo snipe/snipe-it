@@ -40,6 +40,7 @@ class Importer extends Component
 
     // Make these variables public - we set the properties in the constructor so we can localize them (versus the old static arrays)
     public $accessories_fields;
+    public $assets_fields;
     public $users_fields;
     public $licenses_fields;
     public $locations_fields;
