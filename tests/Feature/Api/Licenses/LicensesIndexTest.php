@@ -5,13 +5,14 @@ namespace Tests\Feature\Api\Licenses;
 use App\Models\Company;
 use App\Models\License;
 use App\Models\User;
-use Illuminate\Testing\TestResponse;
 use Laravel\Passport\Passport;
+use Tests\Support\InteractsWithResponses;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class LicensesIndexTest extends TestCase
 {
+    use InteractsWithResponses;
     use InteractsWithSettings;
 
     public function testLicensesIndexAdheresToCompanyScoping()
@@ -29,44 +30,34 @@ class LicensesIndexTest extends TestCase
 
         Passport::actingAs($superUser);
         $response = $this->getJson(route('api.licenses.index'));
-        $this->assertResponseContains($response, $licenseA);
-        $this->assertResponseContains($response, $licenseB);
+        $this->assertResponseContainsInRows($response, $licenseA);
+        $this->assertResponseContainsInRows($response, $licenseB);
 
         Passport::actingAs($userInCompanyA);
         $response = $this->getJson(route('api.licenses.index'));
-        $this->assertResponseContains($response, $licenseA);
-        $this->assertResponseContains($response, $licenseB);
+        $this->assertResponseContainsInRows($response, $licenseA);
+        $this->assertResponseContainsInRows($response, $licenseB);
 
         Passport::actingAs($userInCompanyB);
         $response = $this->getJson(route('api.licenses.index'));
-        $this->assertResponseContains($response, $licenseA);
-        $this->assertResponseContains($response, $licenseB);
+        $this->assertResponseContainsInRows($response, $licenseA);
+        $this->assertResponseContainsInRows($response, $licenseB);
 
         $this->settings->enableMultipleFullCompanySupport();
 
         Passport::actingAs($superUser);
         $response = $this->getJson(route('api.licenses.index'));
-        $this->assertResponseContains($response, $licenseA);
-        $this->assertResponseContains($response, $licenseB);
+        $this->assertResponseContainsInRows($response, $licenseA);
+        $this->assertResponseContainsInRows($response, $licenseB);
 
         Passport::actingAs($userInCompanyA);
         $response = $this->getJson(route('api.licenses.index'));
-        $this->assertResponseContains($response, $licenseA);
-        $this->assertResponseDoesNotContain($response, $licenseB);
+        $this->assertResponseContainsInRows($response, $licenseA);
+        $this->assertResponseDoesNotContainInRows($response, $licenseB);
 
         Passport::actingAs($userInCompanyB);
         $response = $this->getJson(route('api.licenses.index'));
-        $this->assertResponseDoesNotContain($response, $licenseA);
-        $this->assertResponseContains($response, $licenseB);
-    }
-
-    private function assertResponseContains(TestResponse $response, License $license)
-    {
-        $this->assertTrue(collect($response['rows'])->pluck('name')->contains($license->name));
-    }
-
-    private function assertResponseDoesNotContain(TestResponse $response, License $license)
-    {
-        $this->assertFalse(collect($response['rows'])->pluck('name')->contains($license->name));
+        $this->assertResponseDoesNotContainInRows($response, $licenseA);
+        $this->assertResponseContainsInRows($response, $licenseB);
     }
 }

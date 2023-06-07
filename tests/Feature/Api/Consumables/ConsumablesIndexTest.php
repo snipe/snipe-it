@@ -5,13 +5,14 @@ namespace Tests\Feature\Api\Consumables;
 use App\Models\Company;
 use App\Models\Consumable;
 use App\Models\User;
-use Illuminate\Testing\TestResponse;
 use Laravel\Passport\Passport;
+use Tests\Support\InteractsWithResponses;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class ConsumablesIndexTest extends TestCase
 {
+    use InteractsWithResponses;
     use InteractsWithSettings;
 
     public function testConsumableIndexAdheresToCompanyScoping()
@@ -29,44 +30,34 @@ class ConsumablesIndexTest extends TestCase
 
         Passport::actingAs($superUser);
         $response = $this->getJson(route('api.consumables.index'));
-        $this->assertResponseContains($response, $consumableA);
-        $this->assertResponseContains($response, $consumableB);
+        $this->assertResponseContainsInRows($response, $consumableA);
+        $this->assertResponseContainsInRows($response, $consumableB);
 
         Passport::actingAs($userInCompanyA);
         $response = $this->getJson(route('api.consumables.index'));
-        $this->assertResponseContains($response, $consumableA);
-        $this->assertResponseContains($response, $consumableB);
+        $this->assertResponseContainsInRows($response, $consumableA);
+        $this->assertResponseContainsInRows($response, $consumableB);
 
         Passport::actingAs($userInCompanyB);
         $response = $this->getJson(route('api.consumables.index'));
-        $this->assertResponseContains($response, $consumableA);
-        $this->assertResponseContains($response, $consumableB);
+        $this->assertResponseContainsInRows($response, $consumableA);
+        $this->assertResponseContainsInRows($response, $consumableB);
 
         $this->settings->enableMultipleFullCompanySupport();
 
         Passport::actingAs($superUser);
         $response = $this->getJson(route('api.consumables.index'));
-        $this->assertResponseContains($response, $consumableA);
-        $this->assertResponseContains($response, $consumableB);
+        $this->assertResponseContainsInRows($response, $consumableA);
+        $this->assertResponseContainsInRows($response, $consumableB);
 
         Passport::actingAs($userInCompanyA);
         $response = $this->getJson(route('api.consumables.index'));
-        $this->assertResponseContains($response, $consumableA);
-        $this->assertResponseDoesNotContain($response, $consumableB);
+        $this->assertResponseContainsInRows($response, $consumableA);
+        $this->assertResponseDoesNotContainInRows($response, $consumableB);
 
         Passport::actingAs($userInCompanyB);
         $response = $this->getJson(route('api.consumables.index'));
-        $this->assertResponseDoesNotContain($response, $consumableA);
-        $this->assertResponseContains($response, $consumableB);
-    }
-
-    private function assertResponseContains(TestResponse $response, Consumable $consumable)
-    {
-        $this->assertTrue(collect($response['rows'])->pluck('name')->contains($consumable->name));
-    }
-
-    private function assertResponseDoesNotContain(TestResponse $response, Consumable $consumable)
-    {
-        $this->assertFalse(collect($response['rows'])->pluck('name')->contains($consumable->name));
+        $this->assertResponseDoesNotContainInRows($response, $consumableA);
+        $this->assertResponseContainsInRows($response, $consumableB);
     }
 }

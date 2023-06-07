@@ -7,11 +7,13 @@ use App\Models\Component;
 use App\Models\User;
 use Illuminate\Testing\TestResponse;
 use Laravel\Passport\Passport;
+use Tests\Support\InteractsWithResponses;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class ComponentIndexTest extends TestCase
 {
+    use InteractsWithResponses;
     use InteractsWithSettings;
 
     public function testComponentIndexAdheresToCompanyScoping()
@@ -29,49 +31,39 @@ class ComponentIndexTest extends TestCase
 
         Passport::actingAs($superUser);
         $response = $this->sendRequest();
-        $this->assertResponseContains($response, $componentA);
-        $this->assertResponseContains($response, $componentB);
+        $this->assertResponseContainsInRows($response, $componentA);
+        $this->assertResponseContainsInRows($response, $componentB);
 
         Passport::actingAs($userInCompanyA);
         $response = $this->sendRequest();
-        $this->assertResponseContains($response, $componentA);
-        $this->assertResponseContains($response, $componentB);
+        $this->assertResponseContainsInRows($response, $componentA);
+        $this->assertResponseContainsInRows($response, $componentB);
 
         Passport::actingAs($userInCompanyB);
         $response = $this->sendRequest();
-        $this->assertResponseContains($response, $componentA);
-        $this->assertResponseContains($response, $componentB);
+        $this->assertResponseContainsInRows($response, $componentA);
+        $this->assertResponseContainsInRows($response, $componentB);
 
         $this->settings->enableMultipleFullCompanySupport();
 
         Passport::actingAs($superUser);
         $response = $this->sendRequest();
-        $this->assertResponseContains($response, $componentA);
-        $this->assertResponseContains($response, $componentB);
+        $this->assertResponseContainsInRows($response, $componentA);
+        $this->assertResponseContainsInRows($response, $componentB);
 
         Passport::actingAs($userInCompanyA);
         $response = $this->sendRequest();
-        $this->assertResponseContains($response, $componentA);
-        $this->assertResponseDoesNotContain($response, $componentB);
+        $this->assertResponseContainsInRows($response, $componentA);
+        $this->assertResponseDoesNotContainInRows($response, $componentB);
 
         Passport::actingAs($userInCompanyB);
         $response = $this->sendRequest();
-        $this->assertResponseDoesNotContain($response, $componentA);
-        $this->assertResponseContains($response, $componentB);
+        $this->assertResponseDoesNotContainInRows($response, $componentA);
+        $this->assertResponseContainsInRows($response, $componentB);
     }
 
     private function sendRequest(): TestResponse
     {
         return $this->getJson(route('api.components.index'));
-    }
-
-    private function assertResponseContains(TestResponse $response, Component $component)
-    {
-        $this->assertTrue(collect($response['rows'])->pluck('name')->contains($component->name));
-    }
-
-    private function assertResponseDoesNotContain(TestResponse $response, Component $component)
-    {
-        $this->assertFalse(collect($response['rows'])->pluck('name')->contains($component->name));
     }
 }
