@@ -10,6 +10,7 @@ use App\Http\Requests\AssetCheckoutRequest;
 use App\Models\Asset;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Statuslabel;
 
 class AssetCheckoutController extends Controller
 {
@@ -35,7 +36,7 @@ class AssetCheckoutController extends Controller
 
         if ($asset->availableForCheckout()) {
             return view('hardware/checkout', compact('asset'))
-                ->with('statusLabel_list', Helper::deployableStatusLabelList());
+                ->with('statusLabel_list', Statuslabel::has_deployed_statuses() ? Helper::deployedStatusLabelList() :  Helper::deployableStatusLabelList()); // <- definitely need that helper to be adjusted?
         }
 
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkout.not_available'));

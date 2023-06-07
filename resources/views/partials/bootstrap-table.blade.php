@@ -2,7 +2,9 @@
 <link rel="stylesheet" href="{{ url(mix('css/dist/bootstrap-table.css')) }}">
 
 @endpush
-
+@php
+$has_deployed_statuses = \App\Models\Statuslabel::has_deployed_statuses();
+@endphp
 @push('js')
 
 <script src="{{ url(mix('js/dist/bootstrap-table.js')) }}"></script>
@@ -197,7 +199,11 @@
                     case 'deployed':
                         text_color = 'blue';
                         icon_style = 'fa-circle';
-                        text_help = '<label class="label label-default">{{ trans('general.deployed') }}</label>';
+                        if (!{{ $has_deployed_statuses }}) {
+                            text_help = '<label class="label label-default">{{ trans('general.deployed') }}</label>';
+                        } else {
+                            text_help = '';
+                        }
                     break;
                     case 'deployable':
                         text_color = 'green';

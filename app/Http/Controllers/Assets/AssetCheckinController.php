@@ -35,7 +35,7 @@ class AssetCheckinController extends Controller
 
         $this->authorize('checkin', $asset);
 
-        return view('hardware/checkin', compact('asset'))->with('statusLabel_list', Helper::statusLabelList())->with('backto', $backto);
+        return view('hardware/checkin', compact('asset'))->with('statusLabel_list', Helper::statusLabelList(true))->with('backto', $backto);
     }
 
     /**
@@ -75,7 +75,7 @@ class AssetCheckinController extends Controller
         $asset->name = $request->get('name');
 
         if ($request->filled('status_id')) {
-            $asset->status_id = e($request->get('status_id'));
+            $asset->status_id = e($request->get('status_id')); //need to do a check here?
         }
 
         // This is just meant to correct legacy issues where some user data would have 0

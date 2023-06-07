@@ -233,7 +233,9 @@
                                                 @if (($asset->assignedTo) && ($asset->deleted_at==''))
                                                     <i class="fas fa-circle text-blue"></i>
                                                     {{ $asset->assetstatus->name }}
-                                                    <label class="label label-default">{{ trans('general.deployed') }}</label>
+                                                    @if (!App\Models\Statuslabel::has_deployed_statuses())
+                                                        <label class="label label-default">{{ trans('general.deployed') }}</label>
+                                                    @endif
 
                                                     <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i>
                                                     {!!  $asset->assignedTo->present()->glyph()  !!}
