@@ -78,7 +78,7 @@
                         <div class="col-md-12">
 
                             @if ($models->count() > 0)
-                            <h2>{{ trans('general.requestable_models') }}</h4>
+                            <h2>{{ trans('general.requestable_models') }}</h2>
                                 <table
                                         name="requested-assets"
                                         data-toolbar="#toolbar"

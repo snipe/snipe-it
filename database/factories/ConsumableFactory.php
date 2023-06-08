@@ -27,7 +27,7 @@ class ConsumableFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word(),
+            'name' => $this->faker->words(3, true),
             'category_id' => Category::factory(),
             'user_id' => User::factory()->superuser(),
             'item_no' => $this->faker->numberBetween(1000000, 50000000),
