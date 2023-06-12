@@ -151,6 +151,11 @@ class AssetMaintenance extends Model implements ICompanyableChild
         return $this->belongsTo(\App\Models\User::class, 'user_id')
             ->withTrashed();
     }
+    public function assignedTo()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'assigned_to')
+            ->withTrashed();
+    }
 
     public function supplier()
     {

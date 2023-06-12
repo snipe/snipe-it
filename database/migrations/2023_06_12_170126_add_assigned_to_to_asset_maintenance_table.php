@@ -13,7 +13,7 @@ class AddAssignedToToAssetMaintenanceTable extends Migration
      */
     public function up()
     {
-        Schema::table('asset_maintenance', function (Blueprint $table) {
+        Schema::table('asset_maintenances', function (Blueprint $table) {
             $table->integer('assigned_to')->after('user_id')->default(null)->nullable();
         });
     }
