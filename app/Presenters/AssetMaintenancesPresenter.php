@@ -64,6 +64,7 @@ class AssetMaintenancesPresenter extends Presenter
                 'switchable' => true,
                 'title' => trans('general.checked_out_to'),
                 'visible' => false,
+                'formatter' => 'usersLinkObjFormatter',
             ],
             [
                 'field' => 'location',
