@@ -44,13 +44,13 @@ class AssetAuditPresenter extends Presenter
                 'visible' => true,
                 'formatter' => 'hardwareLinkFormatter',
             ], [
-                'field' => 'image',
+                'field' => 'file',
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
                 'title' => trans('admin/hardware/table.image'),
                 'visible' => false,
-                'formatter' => 'imageFormatter',
+                'formatter' => 'auditImageFormatter',
             ], [
                 'field' => 'asset_tag',
                 'searchable' => true,
