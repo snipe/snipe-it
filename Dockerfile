@@ -38,6 +38,7 @@ gcc \
 make \
 autoconf \
 libc-dev \
+libldap-common \
 pkg-config \
 libmcrypt-dev \
 php8.1-dev \

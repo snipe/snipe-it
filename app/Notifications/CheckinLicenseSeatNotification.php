@@ -63,6 +63,7 @@ class CheckinLicenseSeatNotification extends Notification
         $item = $this->item;
         $note = $this->note;
         $botname = ($this->settings->webhook_botname) ? $this->settings->webhook_botname : 'Snipe-Bot';
+        $channel = ($this->settings->webhook_channel) ? $this->settings->webhook_channel : '';
 
         if ($admin) {
             $fields = [
@@ -79,6 +80,7 @@ class CheckinLicenseSeatNotification extends Notification
         return (new SlackMessage)
             ->content(':arrow_down: :floppy_disk: '.trans('mail.License_Checkin_Notification'))
             ->from($botname)
+            ->to($channel)
             ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
                 $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
                     ->fields($fields)

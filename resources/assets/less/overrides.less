@@ -673,6 +673,9 @@ th.css-accessory > .th-inner::before
 }
 
 @media screen and (max-width: 511px){
+  .tab-content .tab-pane .alert-block {
+    margin-top: 120px
+  }
   .sidebar-menu{
     margin-top:160px;
   }
@@ -840,6 +843,18 @@ input[type="radio"]:checked::before {
   display: grid;
   grid-template-columns: .1em auto;
   gap: 1.5em;
+}
+
+.container.row-striped .col-md-6 {
+  overflow-wrap:anywhere;
+}
+
+.nav-tabs-custom > .nav-tabs > li {
+  z-index: 1;
+}
+
+.select2-container .select2-search--inline .select2-search__field{
+  padding-left:15px;
 }
 
 /** --------------------------------------- **/

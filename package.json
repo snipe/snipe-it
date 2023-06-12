@@ -26,13 +26,13 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.4.0",
         "acorn": "^8.8.2",
-        "acorn-import-assertions": "^1.8.0",
+        "acorn-import-assertions": "^1.9.0",
         "admin-lte": "^2.4.18",
         "ajv": "^6.12.6",
         "blueimp-file-upload": "^9.34.0",
         "bootstrap": "^3.4.1",
         "bootstrap-colorpicker": "^2.5.3",
-        "bootstrap-datepicker": "^1.9.0",
+        "bootstrap-datepicker": "^1.10.0",
         "bootstrap-less": "^3.3.8",
         "bootstrap-table": "1.21.4",
         "chart.js": "^2.9.4",
@@ -54,6 +54,6 @@
         "tableexport.jquery.plugin": "1.27.0",
         "tether": "^1.4.0",
         "vue-resource": "^1.5.2",
-        "webpack": "^5.79.0"
+        "webpack": "^5.83.1"
     }
 }

@@ -306,9 +306,9 @@ class CustomField extends Model
             $arr_parts = explode('|', $arr[$x]);
             if ($arr_parts[0] != '') {
                 if (array_key_exists('1', $arr_parts)) {
-                    $result[$arr_parts[0]] = $arr_parts[1];
+                    $result[$arr_parts[0]] = trim($arr_parts[1]);
                 } else {
-                    $result[$arr_parts[0]] = $arr_parts[0];
+                    $result[$arr_parts[0]] = trim($arr_parts[0]);
                 }
             }
         }
