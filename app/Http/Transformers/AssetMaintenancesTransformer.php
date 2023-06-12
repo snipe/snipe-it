@@ -59,6 +59,8 @@ class AssetMaintenancesTransformer
             'user_id'    => ($assetmaintenance->admin) ? ['id' => $assetmaintenance->admin->id, 'name'=> e($assetmaintenance->admin->getFullNameAttribute())] : null,
             'created_at' => Helper::getFormattedDateObject($assetmaintenance->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($assetmaintenance->updated_at, 'datetime'),
+            'assigned_to' => $assetmaintenance->asset->assigned_to->getFullNameAttribute(),
+
 
         ];
 
