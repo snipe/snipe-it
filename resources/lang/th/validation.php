@@ -67,6 +67,8 @@ return [
         'array'   => 'แอตทริบิวต์: ต้องมีอย่างน้อย: รายการต่ำสุด',
     ],
     'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => ':attribute ที่เลือกไม่ถูกต้อง',
     'numeric'              => ':attribute ต้องเป็นตัวเลขเท่านั้น',
     'present'              => 'ฟิลด์แอ็ตทริบิวต์: ต้องมีอยู่',

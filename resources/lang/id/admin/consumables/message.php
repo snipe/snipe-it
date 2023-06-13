@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Barang Habis Pakai belum tertanda keluar, silahkan mencoba lagi',
         'success' 		=> 'Barang Habis Pakai telah sukses tertanda keluar.',
-        'user_does_not_exist' => 'Pengguna tidak terdaftar. Silahkan coba kembali.'
+        'user_does_not_exist' => 'Pengguna tidak terdaftar. Silahkan coba kembali.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

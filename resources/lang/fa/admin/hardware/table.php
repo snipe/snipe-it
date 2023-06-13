@@ -9,6 +9,7 @@ return [
     'change' 		=> '/ خارج',
     'checkout_date' => 'چک کردن تاریخ',
     'checkoutto' 	=> 'قفل شده',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'ارزش فعلی
 ',
     'diff' 			=> 'دیف',

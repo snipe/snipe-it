@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Verbruiksgoedere is nie nagegaan nie, probeer asseblief weer',
         'success' 		=> 'Verbruiksgoedere is suksesvol nagegaan.',
-        'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer asseblief weer.'
+        'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer asseblief weer.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

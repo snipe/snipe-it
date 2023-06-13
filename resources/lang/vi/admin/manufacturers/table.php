@@ -10,6 +10,7 @@ return array(
     'support_email'   		=> 'Hỗ trợ Email',
     'support_phone'   		=> 'Điện thoại hỗ trợ',
     'support_url'   		=> 'URL Hỗ trợ',
+    'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Cập nhật hãng sản xuất',
     'url'   				=> 'URL',
 

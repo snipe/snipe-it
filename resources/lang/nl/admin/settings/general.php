@@ -32,7 +32,7 @@ return [
     'backups_restoring'         => 'Herstellen vanuit back-up',
     'backups_upload'            => 'Backup uploaden',
     'backups_path'              => 'Back-ups op de server worden opgeslagen in <code>:path</code>',
-    'backups_restore_warning'   => 'Gebruik de herstel knop <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> om een vorige back-up te herstellen. (Dit werkt momenteel niet met S3 bestandsopslag of Docker.<br><br>Je <strong>gehele :app_name database en alle geüploade bestanden zullen</strong> volledig vervangen worden door wat er in het backup bestand staat.  ',
+    'backups_restore_warning'   => 'Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to restore from a previous backup. (This does not currently work with S3 file storage or Docker.)<br><br>Your <strong>entire :app_name database and any uploaded files will be completely replaced</strong> by what\'s in the backup file.  ',
     'backups_logged_out'         => 'Alle bestaande gebruikers, inclusief jijzelf, worden uitgelogd zodra je herstel is voltooid.',
     'backups_large'             => 'Zeer grote back-ups kunnen uitvallen op de herstelpoging en moeten mogelijk nog steeds worden uitgevoerd via de command line. ',
     'barcode_settings'			=> 'Barcode instellingen',
@@ -86,6 +86,8 @@ return [
     'ldap_settings'             => 'LDAP instellingen',
     'ldap_client_tls_cert_help' => 'Client-Side TLS-certificaat en sleutel voor LDAP verbindingen zijn meestal alleen nuttig in Google Workspace configuraties met "Secure LDAP." Beide zijn vereist.',
      'ldap_client_tls_key'       => 'LDAP Client-Side TLS-sleutel',
+    'ldap_location'             => 'LDAP Location',
+'ldap_location_help'             => 'The Ldap Location field should be used if <strong>an OU is not being used in the Base Bind DN.</strong> Leave this blank if an OU search is being used.',
     'ldap_login_test_help'      => 'Voer een geldig LDAP gebruikersnaam en paswoord in van de base DN die u hierboven heeft bepaald. Dit om te testen of uw LDAP login correct is geconfigureerd. U MOET EERST UW BIJGEWERKTE LDAP INSTELLINGEN OPSLAAN.',
     'ldap_login_sync_help'      => 'Dit test enkel of LDAP correct kan synchroniseren. Als uw LDAP authenticatie vraag niet correct is, dan is het mogelijk dat gebruikers niet kunnen inloggen. U MOET EERST UW BIJGEWERKTE LDAP INSTELLINGEN OPSLAAN.',
     'ldap_manager'              => 'LDAP manager',
@@ -328,4 +330,9 @@ return [
     'setup_migration_create_user' => 'Volgende: Gebruiker aanmaken',
     'ldap_settings_link' => 'LDAP instellingen pagina',
     'slack_test' => 'Test <i class="fab fa-slack"></i> integratie',
+    'google_callback_help' => 'This should be entered as the callback URL in your Google OAuth app settings in your organization&apos;s <strong><a href="https://console.cloud.google.com/" target="_blank">Google developer console <i class="fa fa-external-link" aria-hidden="true"></i></a></strong>.',
+    'google_login'      => 'Google Workspace Login Settings',
+    'enable_google_login'  => 'Enable users to login with Google Workspace',
+    'enable_google_login_help'  => 'Users will not be automatically provisioned. They must have an existing account here AND in Google Workspace, and their username here must match their Google Workspace email address. ',
+
 ];

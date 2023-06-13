@@ -8,6 +8,7 @@ return [
     'change' 		=> 'In/Out',
     'checkout_date' => '検査日',
     'checkoutto' 	=> '検査済',
+    'components_cost' => 'Total Components Cost',
     'current_value' => '現在の値',
     'diff' 			=> '差分',
     'dl_csv' 		=> 'CSVダウンロード',

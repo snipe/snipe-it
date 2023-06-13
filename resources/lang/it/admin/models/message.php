@@ -32,14 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Nessun campo è stato modificato, quindi niente è stato aggiornato.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+        'success' 		=> 'Modello aggiornato. |:model_count modelli aggiornati con successo.',
+        'warn'          => 'Stai per aggiornare le proprietà di questo modello: |Stai per modificare le proprietà di questi :model_count modelli:',
 
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Non sono stati selezionati modelli, quindi non è stato eliminato nulla.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => 'Modello cancellato!|:success_count modelli cancellati!',
         'success_partial' 	=> ':success_count modelli sono stati eliminati, tuttavia non è stato possibile eliminare :fail_count modelli perché dispongono ancora di risorse associate.'
     ),
 

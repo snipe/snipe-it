@@ -24,7 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> '配件不能被预订，请重试。',
         'success' 		=> '配件成功预订。',
-        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
+        'unavailable'   => '配件不可被借出。检查可用数量',
         'user_does_not_exist' => '无效用户，请重试。'
     ),
 

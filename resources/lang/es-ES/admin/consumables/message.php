@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Consumible no fue retirado, por favor, inténtelo de nuevo',
         'success' 		=> 'Consumible fue retirado satisfactoriamente.',
-        'user_does_not_exist' => 'Este usuario es inválido . Inténtalo de nuevo.'
+        'user_does_not_exist' => 'Este usuario es inválido . Inténtalo de nuevo.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

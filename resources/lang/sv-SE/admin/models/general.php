@@ -6,7 +6,7 @@ return array(
     'deleted'  					        => 'Denna modell har tagits bort.',
     'bulk_delete'               => 'Bulk Radera modeller',
     'bulk_delete_help'               => 'Använd kryssrutan här under för att bekräfta borttagning av valda modeller. Modeller som har tillgångar kopplade till sig kan inte raderas innan dessa är kopplade till en annan modell.',
-    'bulk_delete_warn'          => 'You are about to delete one asset model.|You are about to delete :model_count asset models.',
+    'bulk_delete_warn'          => 'Du håller på att ta bort en tillgångsmodell.|Du håller på att ta bort :model_count tillgångsmodeller.',
     'restore'                   => 'Återskapa Modell',
     'requestable'               => 'Användare kan begära denna modell',
 	'show_mac_address'			      => 'Visa fältet MAC-adress för tillgångar av denna modell',

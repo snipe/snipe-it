@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Återställ tillgången',
     'pending'  					=> 'Väntande',
     'undeployable'  			=> 'Undeployable',
+    'undeployable_tooltip'  	=> 'Denna tillgång har en statusetikett som inte går att distribuera och som inte kan checkas ut just nu.',
     'view'  					=> 'Visa tillgång',
     'csv_error' => 'Du har ett fel i din CSV-fil:',
     'import_text' => '

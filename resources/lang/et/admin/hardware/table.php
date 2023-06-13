@@ -8,6 +8,7 @@ return [
     'change' 		=> 'Sees väljas',
     'checkout_date' => 'Väljastamise kuupäev',
     'checkoutto' 	=> 'Väljastatud',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Hetkeväärtus',
     'diff' 			=> 'Diferentseeritud',
     'dl_csv' 		=> 'Laadige alla CSV',

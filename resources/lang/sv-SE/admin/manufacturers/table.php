@@ -10,6 +10,7 @@ return array(
     'support_email'   		=> 'Support Email',
     'support_phone'   		=> 'Support Telefon',
     'support_url'   		=> 'Stödadress',
+    'warranty_lookup_url'   => 'Garanti Lookup URL',
     'update'				=> 'Uppdatera Tillverkare',
     'url'   				=> 'URL',
 

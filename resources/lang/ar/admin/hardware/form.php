@@ -48,7 +48,7 @@ return [
     'asset_location_update_default' => 'Update only default location',
     'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
     'asset_deployable' => 'That status is deployable. This asset can be checked out.',
-    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'processing_spinner' => 'معالجة... (قد يستغرق هذا بعض الوقت على ملفات كبيرة)',
     'optional_infos'  => 'Optional Information',
     'order_details'   => 'Order Related Information'
 ];

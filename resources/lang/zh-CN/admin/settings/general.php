@@ -32,7 +32,7 @@ return [
     'backups_restoring'         => '从备份中还原',
     'backups_upload'            => '上传备份',
     'backups_path'              => '服务器上的备份存储在 <code>:path</code>',
-    'backups_restore_warning'   => '使用还原按钮 <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> 从上次备份还原。 (目前无法使用 S3 文件存储或 Docker容器。)<br><br>您的 <strong>完整的 :app_name 数据库和任何上传的文件将被备份文件中的内容完全替换</strong>  ',
+    'backups_restore_warning'   => '使用恢复按钮 <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> 从上次备份恢复。 (目前无法使用 S3 文件存储或 Docker容器。)<br><br>您的 <strong>完整的 :app_name 数据库和任何上传的文件将被备份文件中的内容完全替换</strong>  ',
     'backups_logged_out'         => '恢复完成后，包括您在内的所有现有用户都将被注销。',
     'backups_large'             => '非常大的备份在恢复尝试时可能会超时，可能仍然需要通过命令行运行。 ',
     'barcode_settings'			=> '条码设置',
@@ -86,6 +86,9 @@ return [
     'ldap_settings'             => 'LDAP 设置',
     'ldap_client_tls_cert_help' => 'LDAP 连接的客户端TLS 证书和密钥通常仅用于谷歌工作空间配置，两者都是必需的。',
      'ldap_client_tls_key'       => 'LDAP 客户端TLS 密钥',
+    'ldap_location'             => 'LDAP 位置',
+'ldap_location_help'             => '如果在 Base Bind DN 中没有使用 <strong>则Ldap 位置字段。</strong> 如果正在使用 OU 搜索，请将此留空。
+如果<strong>在 Base Bind DN 中没有使用OU，则应使用Ldap Location字段</strong>如果正在使用OU搜索，请将此项留空。',
     'ldap_login_test_help'      => '根据你指定的base DN，输入有效的LDAP用户名和密码，以测试您的LDAP登录是否配置正确。当然您必须先保存您更改的LDAP设置。',
     'ldap_login_sync_help'      => '这只证明了LDAP同步正确。如果您的LDAP身份验证查询设置不正确，用户可能仍然无法登录。当然您必须先保存您的LDAP设置。',
     'ldap_manager'              => 'LDAP 管理器',
@@ -328,4 +331,9 @@ return [
     'setup_migration_create_user' => '下一步：创建用户',
     'ldap_settings_link' => 'LDAP 设置页面',
     'slack_test' => '测试 <i class="fab fa-slack"></i> 集成',
+    'google_callback_help' => 'This should be entered as the callback URL in your Google OAuth app settings in your organization&apos;s <strong><a href="https://console.cloud.google.com/" target="_blank">Google developer console <i class="fa fa-external-link" aria-hidden="true"></i></a></strong>.',
+    'google_login'      => 'Google Workspace 登录设置',
+    'enable_google_login'  => '允许用户使用 Google Workspace 登录',
+    'enable_google_login_help'  => '这些用户将不会被自动配置。 他们必须拥有一个已存在的账户以及 一个 Google Workspace 账户，并且已存在账户的用户名必须与 Google Workspace 账户的电子邮件地址相匹配。 ',
+
 ];

@@ -1,11 +1,11 @@
 <?php
 
 return array(
-    'checkout'                          => 'Attribuer une fourniture à un utilisateur',
-    'consumable_name'                   => 'Nom de la fourniture',
-    'create'                            => 'Créer une fourniture',
+    'checkout'                          => 'Attribuer un consommable à un·e utilisateur·trice',
+    'consumable_name'                   => 'Nom du consommable ',
+    'create'                            => 'Créer un consommable',
     'item_no'                           => 'Num. d\'élément',
-    'remaining' 			            => 'Quantité restante',
+    'remaining' 			            => 'Restant',
     'total' 			                => 'Total',
-    'update'                            => 'Actualiser la fourniture',
+    'update'                            => 'Mettre à jour le consommable',
 );

@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Restaurar equipo',
     'pending'  					=> 'Pendiente',
     'undeployable'  			=> 'No desplegable',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Ver Equipo',
     'csv_error' => 'Tiene un error en su archivo CSV:',
     'import_text' => '

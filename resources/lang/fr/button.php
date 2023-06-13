@@ -9,7 +9,7 @@ return [
     'edit'    	                => 'Éditer',
     'restore' 	                => 'Restaurer',
     'remove'                    => 'Supprimer',
-    'request'                   => 'Requête ',
+    'request'                   => 'Demander',
     'submit'  	                => 'Soumettre',
     'upload'                    => 'Uploader',
     'select_file'				=> 'Sélectionner un fichier...',

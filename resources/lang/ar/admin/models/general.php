@@ -6,7 +6,7 @@ return array(
     'deleted'  					        => 'تم حذف هذا الموديل.',
     'bulk_delete'               => 'حذف موديلات الاصول بالجملة',
     'bulk_delete_help'               => 'استخدم مربعات الاختيار أدناه لتأكيد حذف موديلات الأصول المحددة. لا يمكن حذف موديلات الأصول التي تحتوي على أصول مرتبطة بها إلى أن يتم ربط الأصول بموديل مختلف.',
-    'bulk_delete_warn'          => 'You are about to delete one asset model.|You are about to delete :model_count asset models.',
+    'bulk_delete_warn'          => 'أنت على وشك حذف نموذج واحد للأصول.|أنت على وشك حذف :model_count من نماذج الأصول.',
     'restore'                   => 'إستعادة الموديل',
     'requestable'               => 'يمكن للمستخدمين طلب هذا الموديل',
 	'show_mac_address'			      => 'عرض حقل عنوان ماك MAC في الأصول لهذا الموديل',

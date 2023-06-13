@@ -8,6 +8,7 @@ return [
     'change' 		=> 'Priimta/Išduota',
     'checkout_date' => 'Išdavimo data',
     'checkoutto' 	=> 'Išduota',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Current Value',
     'diff' 			=> 'Skirtumas',
     'dl_csv' 		=> 'Atsisiųti CSV fromatu',

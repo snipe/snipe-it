@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Mais Informações',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'Marcar esta caixa irá editar o registro de ativos para refletir esse novo local. Deixando-o desmarcado irá simplesmente anotar o local no log de auditoria.<br><br>Note que se este ativo for verificado, não irá alterar a localização da pessoa, ativo ou local para onde for reservado.',
 
     'assets' => 'Ativos são itens que são controlados e rastreáveis pelo número de série ou por uma etiqueta de ativo (patrimônio). Eles tendem a ser de valor elevado onde a identificação de itens específicos é relevante.',
 

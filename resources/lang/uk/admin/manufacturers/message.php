@@ -2,6 +2,7 @@
 
 return array(
 
+    'support_url_help' => 'Use <code>{LOCALE}</code> and <code>{SERIAL}</code> in your URL as variables to have those values auto-populate when viewing assets.',
     'does_not_exist' => 'Виробник не існує.',
     'assoc_users'	 => 'This manufacturer is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this manufacturer and try again. ',
 

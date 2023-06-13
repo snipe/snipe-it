@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Nwydd traul heb ei nodi allan, ceisiwch eto o. g. y. dd',
         'success' 		=> 'Nwydd traul wedi nodi allan yn llwyddiannus.',
-        'user_does_not_exist' => 'Nid yw\'r defnyddiwr yna yn ddilys. Ceisiwch eto o. g. y. dd.'
+        'user_does_not_exist' => 'Nid yw\'r defnyddiwr yna yn ddilys. Ceisiwch eto o. g. y. dd.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

@@ -74,6 +74,7 @@ return [
     'your_credentials' => 'Le tue credenziali Snipe-IT',
     'Accessory_Checkin_Notification' => 'Checkin accessorio avvenuto',
     'Asset_Checkin_Notification' => 'Checkin asset avvenuto',
+    'Asset_Checkout_Notification' => 'Check-out del bene avvenuto',
     'License_Checkin_Notification' => 'Checkin licenza avvenuto',
     'Expected_Checkin_Report' => 'Rapporto restituzione attesa del bene',
     'Expected_Checkin_Notification' => 'Promemoria: scadenza riconsegna :name in avvicinamento',

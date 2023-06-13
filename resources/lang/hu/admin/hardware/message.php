@@ -22,7 +22,7 @@ return [
     'restore' => [
         'error'   		=> 'Az eszköz nem állt helyre, kérjük, próbálkozzon újra',
         'success' 		=> 'Az eszköz sikeresen visszaállítva.',
-        'bulk_success' 		=> 'Asset restored successfully.',
+        'bulk_success' 		=> 'Az eszköz sikeresen visszaállítva.',
         'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 

@@ -1,5 +1,5 @@
 <?php
 
 return array(
-    'title'      				=> 'Nom de la fourniture',
+    'title'      				=> 'Nom du consommable',
 );

@@ -22,8 +22,8 @@ return [
     'restore' => [
         'error'   		=> 'O ativo não foi restaurado, tente novamente',
         'success' 		=> 'Ativo restaurado com sucesso.',
-        'bulk_success' 		=> 'Asset restored successfully.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'bulk_success' 		=> 'Ativo restaurado com sucesso.',
+        'nothing_updated'   => 'Nenhum ativo foi selecionado, então nada foi restaurado.', 
     ],
 
     'audit' => [

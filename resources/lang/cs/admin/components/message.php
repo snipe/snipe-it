@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Díl se nepodařilo předat, zkuste to prosím znovu',
         'success' 		=> 'Díl byl v pořádku předán.',
-        'user_does_not_exist' => 'Neplatný uživatel. Zkuste to prosím znovu.'
+        'user_does_not_exist' => 'Neplatný uživatel. Zkuste to prosím znovu.',
+        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

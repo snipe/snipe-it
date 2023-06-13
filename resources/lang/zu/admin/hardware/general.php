@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Buyisela imali',
     'pending'  					=> 'Kulindile',
     'undeployable'  			=> 'Awuvumelekile',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Buka Impahla',
     'csv_error' => 'You have an error in your CSV file:',
     'import_text' => '

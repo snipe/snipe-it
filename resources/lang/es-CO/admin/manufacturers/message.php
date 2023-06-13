@@ -2,6 +2,7 @@
 
 return array(
 
+    'support_url_help' => 'Use <code>{LOCALE}</code> and <code>{SERIAL}</code> in your URL as variables to have those values auto-populate when viewing assets.',
     'does_not_exist' => 'El fabricante no existe.',
     'assoc_users'	 => 'Este Fabricante está asociado al menos a un modelo y no puede ser eliminado',
 

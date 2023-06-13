@@ -10,6 +10,7 @@ return array(
     'support_email'   		=> 'Е-пошта за поддршка',
     'support_phone'   		=> 'Телефон за поддршка',
     'support_url'   		=> 'Врска за поддршка',
+    'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Ажурирај го производителот',
     'url'   				=> 'URL',
 

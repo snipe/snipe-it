@@ -32,7 +32,7 @@ return [
     'backups_restoring'         => '從備份還原',
     'backups_upload'            => '上傳備份',
     'backups_path'              => 'Backups on the server are stored in <code>:path</code>',
-    'backups_restore_warning'   => 'Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to restore from a previous backup. (This does not currently work with S3 file storage or Docker.<br><br>Your <strong>entire :app_name database and any uploaded files will be completely replaced</strong> by what\'s in the backup file.  ',
+    'backups_restore_warning'   => 'Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to restore from a previous backup. (This does not currently work with S3 file storage or Docker.)<br><br>Your <strong>entire :app_name database and any uploaded files will be completely replaced</strong> by what\'s in the backup file.  ',
     'backups_logged_out'         => 'All existing users, including you, will be logged out once your restore is complete.',
     'backups_large'             => 'Very large backups may time out on the restore attempt and may still need to be run via command line. ',
     'barcode_settings'			=> '條碼設定',
@@ -86,6 +86,8 @@ return [
     'ldap_settings'             => 'LDAP設定',
     'ldap_client_tls_cert_help' => 'Client-Side TLS Certificate and Key for LDAP connections are usually only useful in Google Workspace configurations with "Secure LDAP." Both are required.',
      'ldap_client_tls_key'       => 'LDAP 客戶端 TLS 金鑰',
+    'ldap_location'             => 'LDAP Location',
+'ldap_location_help'             => 'The Ldap Location field should be used if <strong>an OU is not being used in the Base Bind DN.</strong> Leave this blank if an OU search is being used.',
     'ldap_login_test_help'      => '從上方指定的 DN 中輸入有效的 LDAP 使用者名和密碼, 以測試是否正確配置了 LDAP 登錄。您必須先保存更新的 LDAP 設置。',
     'ldap_login_sync_help'      => '這僅測試 LDAP 可以正確同步。如果 LDAP 身份驗證查詢不正確, 使用者可能仍無法登錄。您必須先保存更新的 LDAP 設置。',
     'ldap_manager'              => 'LDAP 管理者',
@@ -329,4 +331,9 @@ return [
     'setup_migration_create_user' => '下一步: 建立使用者',
     'ldap_settings_link' => 'LAD 設定頁面',
     'slack_test' => 'Test <i class="fab fa-slack"></i> Integration',
+    'google_callback_help' => 'This should be entered as the callback URL in your Google OAuth app settings in your organization&apos;s <strong><a href="https://console.cloud.google.com/" target="_blank">Google developer console <i class="fa fa-external-link" aria-hidden="true"></i></a></strong>.',
+    'google_login'      => 'Google Workspace Login Settings',
+    'enable_google_login'  => 'Enable users to login with Google Workspace',
+    'enable_google_login_help'  => 'Users will not be automatically provisioned. They must have an existing account here AND in Google Workspace, and their username here must match their Google Workspace email address. ',
+
 ];

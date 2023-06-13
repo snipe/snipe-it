@@ -32,9 +32,7 @@ return [
     'backups_restoring'         => 'バックアップから復元中',
     'backups_upload'            => 'バックアップをアップロード',
     'backups_path'              => 'サーバー上のバックアップは <code>:path</code> に保存されています',
-    'backups_restore_warning'   => '以前のバックアップから復元する場合は、復元ボタン <i class="text-white fas fa-retweet" aria-hidden="true"> を使用します。(S3ファイルストレージやDockerでは、現在動作しません。)
-
-<strong>:app_name データベース全体とアップロードされたファイルは、バックアップファイルの内容と完全に置き換わります。 </strong>  ',
+    'backups_restore_warning'   => '復元ボタンで <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> 過去のバックアップから復元できます。(S3ファイルサーバーやDockerがサポートされません。)<br><br>ご利用中の <strong> :app_name のデータベース全体と全てのアップロードされたファイルがバックアップの内容で上書きされます。</strong>  ',
     'backups_logged_out'         => 'あなたを含むすべての既存のユーザーは、復元が完了するとログアウトされます。',
     'backups_large'             => '非常に大きなバックアップは、復元時にタイムアウトする可能性があり、コマンドラインを介して実行する必要があります。 ',
     'barcode_settings'			=> 'バーコード設定',
@@ -88,6 +86,8 @@ return [
     'ldap_settings'             => 'LDAP 設定',
     'ldap_client_tls_cert_help' => 'クライアント側のTLS証明書とLDAP接続用のキーは、通常 "Secure LDAP" を搭載したGoogle Workspaceでのみ有効です。',
      'ldap_client_tls_key'       => 'LDAPクライアントTLSキー',
+    'ldap_location'             => 'LDAP Location',
+'ldap_location_help'             => 'The Ldap Location field should be used if <strong>an OU is not being used in the Base Bind DN.</strong> Leave this blank if an OU search is being used.',
     'ldap_login_test_help'      => 'LDAPログインが正しく構成されているかどうかをテストするために、上で指定したベースDNから有効なLDAPユーザー名とパスワードを入力して下さい。その前に必ず更新後のLDAP設定を保存しておいてください。',
     'ldap_login_sync_help'      => 'これは、LDAPが正しく同期できることをテストするだけです。 LDAP認証クエリが正しくない場合、ユーザーはまだログインできない場合があります。その前に必ず更新後のLDAP設定を保存しておいてください。',
     'ldap_manager'              => 'LDAPマネージャー',
@@ -333,4 +333,9 @@ return [
     'setup_migration_create_user' => '次へ: ユーザーの作成',
     'ldap_settings_link' => 'LDAP設定ページ',
     'slack_test' => '<i class="fab fa-slack"></i> 統合テスト',
+    'google_callback_help' => 'This should be entered as the callback URL in your Google OAuth app settings in your organization&apos;s <strong><a href="https://console.cloud.google.com/" target="_blank">Google developer console <i class="fa fa-external-link" aria-hidden="true"></i></a></strong>.',
+    'google_login'      => 'Google Workspace Login Settings',
+    'enable_google_login'  => 'Enable users to login with Google Workspace',
+    'enable_google_login_help'  => 'Users will not be automatically provisioned. They must have an existing account here AND in Google Workspace, and their username here must match their Google Workspace email address. ',
+
 ];

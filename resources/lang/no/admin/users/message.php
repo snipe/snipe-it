@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Du har avvist eiendelen.',
     'bulk_manager_warn'	        => 'Brukerne er oppdatert, men lederen ble ikke lagret fordi lederen du valgte også i brukerlisten for redigering og brukere kan ikke være sin egen leder. Velg brukerne igjen, unntatt lederen.',
     'user_exists'               => 'Bruker finnes allerede!',
-    'user_not_found'            => 'Bruker [:id] finnes ikke.',
+    'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Login-feltet er påkrevd',
     'user_password_required'    => 'Passord er påkrevd.',
     'insufficient_permissions'  => 'Utilstrekkelige rettigheter.',

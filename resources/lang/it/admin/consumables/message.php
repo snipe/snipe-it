@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Il consumabile non è stato controllato, prova di nuovo',
         'success' 		=> 'Il consumabile è stato controllato con successo.',
-        'user_does_not_exist' => 'Questo utente non è valido. Riprova.'
+        'user_does_not_exist' => 'Questo utente non è valido. Riprova.',
+         'unavailable'      => 'Non ci sono abbastanza consumabili per questo check-out. Controlla la quantità rimasta. ',
     ),
 
     'checkin' => array(

@@ -8,6 +8,7 @@ return [
     'change' 		=> 'In/Uit',
     'checkout_date' => 'Uitcheck datum',
     'checkoutto' 	=> 'Uitgecheckt',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Huidige Waarde',
     'diff' 			=> 'Verschil',
     'dl_csv' 		=> 'CSV downloaden',
