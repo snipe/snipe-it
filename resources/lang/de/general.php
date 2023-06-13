@@ -92,6 +92,7 @@ return [
     'debug_warning_text'    => 'Diese Anwendung läuft im Produktionsmodus mit debugging aktiviert. Dies kann sensible Daten verfügbar machen, wenn Ihre Anwendung öffentlich zugänglich ist. Deaktivieren Sie den Debug-Modus, indem Sie den <code>APP_DEBUG</code>-Wert in der <code>.env</code> Datei auf <code>false</code> setzen.',
     'delete'  				=> 'Löschen',
     'delete_confirm'  		=> 'Sind Sie sicher, dass Sie :item löschen möchten?',
+    'delete_confirm_no_undo' => 'Möchtest du :item wirklich löschen? Dies kann nicht rückgängig gemacht werden.',
     'deleted'  				=> 'Gelöscht',
     'delete_seats'  		=> 'Gelöschte Lizenzen',
     'deletion_failed'       => 'Löschen fehlgeschlagen',
@@ -438,5 +439,14 @@ return [
     'setup_successful_migrations' => 'Die Datenbank-Tabellen wurden erstellt',
     'setup_migration_output' => 'Ausgabe der Migration:',
     'setup_migration_create_user' => 'Weiter: Benutzer erstellen',
-    'importer_generic_error'    => 'Your file import is complete, but we did receive an error. This is usually caused by third-party API throttling from a notification webhook (such as Slack) and would not have interfered with the import itself, but you should confirm this.',
+    'importer_generic_error'    => 'Ihr Dateiimport ist abgeschlossen, aber wir haben Fehler erhalten. Es wird in der Regel durch eine API-Drosselung von Drittanbietern von einem Benachrichtigung-Webhooks (wie Slack) verursacht und hat den Import selbst nicht beeinträchtigt, Sie sollten dies allerdings nachprüfen.',
+    'confirm' => 'Bestätigen',
+    'autoassign_licenses' => 'Lizenzen automatisch zuweisen',
+    'autoassign_licenses_help' => 'Erlaube diesem Benutzer die Zuweisung von Lizenzen über die Benutzeroberfläche für die Massenzuweisung von Lizenzen oder über die CLI-Tools.',
+    'autoassign_licenses_help_long' => 'Dies erlaubt es einem Benutzer, Lizenzen über die Massen-Zuweisung GUI oder CLI-Tools zugewiesen zu bekommen. (Zum Beispiel möchten Sie den Auftragnehmern möglicherweise nicht automatisch eine Lizenz zuweisen, die nur Mitarbeitern zur Verfügung stehen würde. Sie können diesen Benutzern weiterhin einzelne Lizenzen zuweisen, aber sie werden nicht in der Lizenzen Massenherausgabe der Benutzer berücksichtigt.)',
+    'no_autoassign_licenses_help' => 'Den Benutzer nicht bei der Lizenzen Massen-Zuweisung GUI oder CLI-Tools berücksichtigen.',
+    'modal_confirm_generic'      => 'Sind Sie sich sicher?',
+    'cannot_be_deleted'      => 'Dieser Gegenstand kann nicht gelöscht werden',
+    'undeployable_tooltip'      => 'Dieser Gegenstand kann nicht herausgegeben werden. Überprüfen Sie die verbleibende Menge.',
+
 ];

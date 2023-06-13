@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Επαναφορά παγίου',
     'pending'  					=> 'Εκκρεμεί',
     'undeployable'  			=> 'Μη διανέμεται',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Προβολή παγίου',
     'csv_error' => 'You have an error in your CSV file:',
     'import_text' => '

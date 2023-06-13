@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Makanan tidak diperiksa, sila cuba lagi',
         'success' 		=> 'Berguna diperiksa dengan jayanya.',
-        'user_does_not_exist' => 'Pengguna itu tidak sah. Sila cuba lagi.'
+        'user_does_not_exist' => 'Pengguna itu tidak sah. Sila cuba lagi.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

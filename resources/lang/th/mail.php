@@ -74,6 +74,7 @@ return [
     'your_credentials' => 'ข้อมูลรับรอง Snipe-IT ของคุณ',
     'Accessory_Checkin_Notification' => 'เช็คอินอุปกรณ์เสริมแล้ว',
     'Asset_Checkin_Notification' => 'เช็คอินสินทรัพย์แล้ว',
+    'Asset_Checkout_Notification' => 'Asset checked out',
     'License_Checkin_Notification' => 'เช็คอินใบอนุญาตแล้ว',
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'เตือนความจำ :: ใกล้หมดเวลาเช็คอิน',

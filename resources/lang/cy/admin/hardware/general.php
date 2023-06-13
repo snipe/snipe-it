@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Adfer Ased',
     'pending'  					=> 'Yn disgwl',
     'undeployable'  			=> 'Dim ar gael',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Gweld Ased',
     'csv_error' => 'You have an error in your CSV file:',
     'import_text' => '

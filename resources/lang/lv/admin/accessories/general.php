@@ -17,5 +17,6 @@ return array(
     'use_default_eula'					=> 'Tā vietā izmantojiet <a href="#" data-toggle="modal" data-target="#eulaModal">pirmo noklusējuma EULA</a>.',
     'use_default_eula_disabled'			=> '<del>Izmantojiet galveno noklusējuma EULA</del>. Netiek iestatīta galvenā noklusējuma EULA. Lūdzu, pievienojiet vienu pakalpojumā Iestatījumi.',
     'clone'                             => 'Clone Accessory',
+    'delete_disabled'                   => 'This accessory cannot be deleted yet because some items are still checked out.',
 
 );

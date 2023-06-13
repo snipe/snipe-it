@@ -8,6 +8,7 @@ return [
     'change' 		=> 'In / Out',
     'checkout_date' => 'Usuku lokuhlola',
     'checkoutto' 	=> 'Ikhishiwe',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Current Value',
     'diff' 			=> 'Ukuhluka',
     'dl_csv' 		=> 'Landa i-CSV',

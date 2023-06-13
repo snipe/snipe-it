@@ -23,6 +23,7 @@ return [
     'restore'  					=> '자산 복원',
     'pending'  					=> '대기중',
     'undeployable'  			=> '사용불가',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> '자산 보기',
     'csv_error' => 'You have an error in your CSV file:',
     'import_text' => '

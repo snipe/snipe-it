@@ -32,7 +32,7 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Никаких изменений нет, поэтому ничего не обновлено.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'success' 		=> 'Модель успешно обновлена. |:model_count моделей успешно обновлено.',
         'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
 
     ),

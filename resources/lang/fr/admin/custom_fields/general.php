@@ -49,4 +49,6 @@ return [
     'unique' => 'Unique',
     'display_in_user_view' => 'Permettre à l\'utilisateur de vérifier ces valeurs dans sa page Voir Ressources Affectées',
     'display_in_user_view_table' => 'Visible par l\'utilisateur',
+    'auto_add_to_fieldsets' => 'Ajouter ceci automatiquement à tous les nouveaux fieldsets',
+    'add_to_preexisting_fieldsets' => 'Ajouter à tous les fieldsets existants',
 ];

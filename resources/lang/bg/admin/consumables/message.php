@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Консумативът не беше изписан. Моля опитайте отново.',
         'success' 		=> 'Консумативът изписан успешно.',
-        'user_does_not_exist' => 'Невалиден потребител. Моля опитайте отново.'
+        'user_does_not_exist' => 'Невалиден потребител. Моля опитайте отново.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

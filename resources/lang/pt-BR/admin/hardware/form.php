@@ -48,7 +48,7 @@ return [
     'asset_location_update_default' => 'Atualizar somente local padrão',
     'asset_not_deployable' => 'Este status de ativo não é implantado. Este ativo não pode ser verificado.',
     'asset_deployable' => 'Este status pode ser implementado. Este ativo pode ser verificado.',
-    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'processing_spinner' => 'Processando... (Isso pode levar algum tempo em arquivos grandes)',
     'optional_infos'  => 'Informação Opcional',
     'order_details'   => 'Informações do pedido relacionado'
 ];

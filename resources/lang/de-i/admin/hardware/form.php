@@ -4,7 +4,7 @@ return [
     'bulk_delete'		=> 'Massenlöschung von Assets bestätigen',
     'bulk_restore'      => 'Massenwiederherstellung von Assets bestätigen', 
   'bulk_delete_help'	=> 'Überprüfe die nachfolgenden Assets für die Massenlöschung. Sobald diese gelöscht sind, können diese zwar wiederhergestellt werden, sind aber dem aktuellen Nutzer nicht mehr zugeordnet.',
-  'bulk_restore_help'	=> 'Überprüfen Sie die Assets für die Massenwiederherstellung. Sobald sie wiederhergestellt sind, werden diese Assets nicht mit Benutzern assoziiert, denen sie zuvor zugewiesen wurden.',
+  'bulk_restore_help'	=> 'Überprüfe die Assets für die Massenwiederherstellung. Sobald sie wiederhergestellt sind, werden diese Assets nicht mit Benutzern assoziiert, denen sie zuvor zugewiesen wurden.',
   'bulk_delete_warn'	=> 'Du bist im Begriff :asset_count Assets zu löschen.',
   'bulk_restore_warn'	=> 'Sie sind dabei, :asset_count Assets wiederherzustellen.',
     'bulk_update'		=> 'Massenaktualisierung von Assets',
@@ -48,7 +48,7 @@ return [
     'asset_location_update_default' => 'Nur den Standardort aktualisieren',
     'asset_not_deployable' => 'Dieses Asset ist nicht verfügbar und kann nicht herausgegeben werden.',
     'asset_deployable' => 'Dieses Asset ist verfügbar und kann herausgegeben werden.',
-    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'processing_spinner' => 'Verarbeitung... (Dies kann bei großen Dateien etwas Zeit in Anspruch nehmen)',
     'optional_infos'  => 'Optionale Informationen',
     'order_details'   => 'Bestellinformationen'
 ];

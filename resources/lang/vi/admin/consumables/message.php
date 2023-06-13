@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Vật tư phụ chưa checkout, xin thử lại',
         'success' 		=> 'Vật tư phụ đã checkout thành công.',
-        'user_does_not_exist' => 'Người dùng này không tồn tại. Xin vui lòng thử lại.'
+        'user_does_not_exist' => 'Người dùng này không tồn tại. Xin vui lòng thử lại.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

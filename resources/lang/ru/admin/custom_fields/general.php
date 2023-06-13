@@ -49,4 +49,6 @@ return [
     'unique' => 'Уникальный',
     'display_in_user_view' => 'Разрешить владельцу актива просматривать эти значения на странице Просмотр Назначенных Активов',
     'display_in_user_view_table' => 'Видимый для пользователя',
+    'auto_add_to_fieldsets' => 'Automatically add this to every new fieldset',
+    'add_to_preexisting_fieldsets' => 'Add to any existing fieldsets',
 ];

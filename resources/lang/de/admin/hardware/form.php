@@ -48,7 +48,7 @@ return [
     'asset_location_update_default' => 'Nur den Standardort aktualisieren',
     'asset_not_deployable' => 'Dieses Asset ist nicht verfügbar und kann nicht herausgegeben werden.',
     'asset_deployable' => 'Dieses Asset ist verfügbar und kann herausgegeben werden.',
-    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'processing_spinner' => 'Verarbeitung... (Dies kann bei großen Dateien etwas Zeit in Anspruch nehmen)',
     'optional_infos'  => 'Optionale Informationen',
     'order_details'   => 'Bestellinformationen'
 ];

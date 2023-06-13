@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Възстановяване на актив',
     'pending'  					=> 'Предстоящ',
     'undeployable'  			=> 'Не може да бъде предоставян',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Преглед на актив',
     'csv_error' => 'Имате грешка във вашият CSV файл:',
     'import_text' => '

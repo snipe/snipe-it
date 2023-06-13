@@ -67,6 +67,8 @@ return [
         'array'   => ':attribute moet minimaal :min items bevatten.',
     ],
     'starts_with'          => ':attribute moet met één van de volgende waarden eindigen: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'Het geselecteerde kenmerk :attribute is ongeldig.',
     'numeric'              => ':attribute moet een getal zijn.',
     'present'              => ':attribute veld moet aanwezig zijn.',

@@ -79,6 +79,7 @@ return [
     'Accessory_Checkin_Notification' => 'لوازم جانبی بررسی شد',
     'Asset_Checkin_Notification' => 'دارایی ثبت شد
 ',
+    'Asset_Checkout_Notification' => 'Asset checked out',
     'License_Checkin_Notification' => 'مجوز بررسی شد
 ',
     'Expected_Checkin_Report' => 'گزارش بررسی دارایی مورد انتظار

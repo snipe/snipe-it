@@ -8,6 +8,7 @@ return [
     'change' 		=> 'Operación',
     'checkout_date' => 'Fecha de devolución',
     'checkoutto' 	=> 'Asignado a',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Valor Actual',
     'diff' 			=> 'Diferencia',
     'dl_csv' 		=> 'Descargar CSV',

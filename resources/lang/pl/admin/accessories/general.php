@@ -17,5 +17,6 @@ return array(
     'use_default_eula'					=> 'Użyj <a href="#" data-toggle="modal" data-target="#eulaModal"> domyślnej EULA</a> zamiast tego.',
     'use_default_eula_disabled'			=> '<del>Użyj zamiast domyślnego EULA.</del> Brak domyślnego EULA. Proszę dodaj jakieś w opcjach.',
     'clone'                             => 'Klonuj Akcesoria',
+    'delete_disabled'                   => 'This accessory cannot be deleted yet because some items are still checked out.',
 
 );

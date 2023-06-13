@@ -49,4 +49,6 @@ return [
     'unique' => 'Unik',
     'display_in_user_view' => 'Tillåt den utcheckade användaren att visa dessa värden i sin vy tilldelad tillgångssida',
     'display_in_user_view_table' => 'Synlig för användare',
+    'auto_add_to_fieldsets' => 'Lägg automatiskt till detta i varje nytt fält',
+    'add_to_preexisting_fieldsets' => 'Lägg till en befintlig lista',
 ];

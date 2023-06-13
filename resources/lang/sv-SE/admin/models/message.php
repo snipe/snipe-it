@@ -32,14 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Inga fält ändrades, så ingenting uppdaterades.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+        'success' 		=> 'Modellen har uppdaterats. |:model_count modeller har uppdaterats.',
+        'warn'          => 'Du håller på att uppdatera egenskaperna för följande modell: | Du håller på att redigera egenskaperna för följande :model_count modeller:',
 
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Inga tillgångar valdes, så ingenting togs bort.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => 'Modell borttagen! |:success_count modeller borttagna!',
         'success_partial' 	=> ':success_count modell(erna) raderades, men :fail_count kunde inte raderas eftersom de fortfarande har tillgångar kopplade till sig.'
     ),
 

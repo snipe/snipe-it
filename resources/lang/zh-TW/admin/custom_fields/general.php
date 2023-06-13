@@ -46,7 +46,9 @@ return [
     'db_field' => '資料庫欄位',
     'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code>:db_column</code> but should be <code>:expected</code>.',
     'is_unique' => '此值在所有資產之中必須是唯一的',
-    'unique' => 'Unique',
+    'unique' => '唯一',
     'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
     'display_in_user_view_table' => 'Visible to User',
+    'auto_add_to_fieldsets' => 'Automatically add this to every new fieldset',
+    'add_to_preexisting_fieldsets' => 'Add to any existing fieldsets',
 ];

@@ -92,6 +92,7 @@ return [
     'debug_warning_text'    => '此應用程式已開啟除錯模式， 如果開放外部存取可能造成敏感資料外洩。您可透過修改<code>.env</code>檔案中的參數<code>APP_DEBUG</code>，將值改為<code>false</code>關閉除錯模式。',
     'delete'  				=> '刪除',
     'delete_confirm'  		=> '您確定要刪除 :item 嗎？',
+    'delete_confirm_no_undo' => 'Are you sure you wish to delete :item? This can not be undone.',
     'deleted'  				=> '刪除',
     'delete_seats'  		=> '刪除授權',
     'deletion_failed'       => '刪除失敗',
@@ -439,4 +440,13 @@ return [
     'setup_migration_output' => 'Migration output:',
     'setup_migration_create_user' => 'Next: Create User',
     'importer_generic_error'    => 'Your file import is complete, but we did receive an error. This is usually caused by third-party API throttling from a notification webhook (such as Slack) and would not have interfered with the import itself, but you should confirm this.',
+    'confirm' => '確認',
+    'autoassign_licenses' => '自動分配執照',
+    'autoassign_licenses_help' => 'Allow this user to have licenses assigned via the bulk-assign license UI or cli tools.',
+    'autoassign_licenses_help_long' => 'This allows a user to be have licenses assigned via the bulk-assign license UI or cli tools. (For example, you might not want contractors to be auto-assigned a license you would provide to only staff members. You can still individually assign licenses to those users, but they will not be included in the Checkout License to All Users functions.)',
+    'no_autoassign_licenses_help' => 'Do not include user for bulk-assigning through the license UI or cli tools.',
+    'modal_confirm_generic'      => '你確定嗎?',
+    'cannot_be_deleted'      => '此項目無法被刪除',
+    'undeployable_tooltip'      => 'This item cannot be checked out. Check the quantity remaining.',
+
 ];

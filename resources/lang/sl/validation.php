@@ -67,6 +67,8 @@ return [
         'array'   => 'Atribut mora imeti vsaj: min elementov.',
     ],
     'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'Izbrani atribut je neveljaven.',
     'numeric'              => 'Atribut mora biti število.',
     'present'              => 'Polje atribut mora biti prisotno.',

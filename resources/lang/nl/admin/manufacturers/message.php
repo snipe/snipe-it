@@ -2,6 +2,7 @@
 
 return array(
 
+    'support_url_help' => 'Use <code>{LOCALE}</code> and <code>{SERIAL}</code> in your URL as variables to have those values auto-populate when viewing assets.',
     'does_not_exist' => 'Fabrikant bestaat niet.',
     'assoc_users'	 => 'Deze fabrikant is verbonden met 1 of meerdere modellen en kan hierdoor niet verwijderd worden. Controleer de modellen zodat er geen verbinding meer is met deze fabrikant en probeer opnieuw. ',
 

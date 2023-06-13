@@ -74,6 +74,7 @@ return [
     'your_credentials' => 'Dine Snipe-IT Legitimationsoplysninger',
     'Accessory_Checkin_Notification' => 'Tilbehør tjekket ind',
     'Asset_Checkin_Notification' => 'Asset tjekket ind',
+    'Asset_Checkout_Notification' => 'Asset checked out',
     'License_Checkin_Notification' => 'Licens tjekket ind',
     'Expected_Checkin_Report' => 'Forventet asset checkin rapport',
     'Expected_Checkin_Notification' => 'Påmindelse: :name checkin deadline nærmer sig',

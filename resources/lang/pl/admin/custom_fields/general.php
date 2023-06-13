@@ -49,4 +49,6 @@ return [
     'unique' => 'Unikalny',
     'display_in_user_view' => 'Zezwalaj zaznaczonemu użytkownikowi na wyświetlanie tych wartości na stronie Widok Przypisanych Zasobów',
     'display_in_user_view_table' => 'Widoczne dla użytkownika',
+    'auto_add_to_fieldsets' => 'Automatically add this to every new fieldset',
+    'add_to_preexisting_fieldsets' => 'Add to any existing fieldsets',
 ];

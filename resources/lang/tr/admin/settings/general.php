@@ -32,7 +32,7 @@ return [
     'backups_restoring'         => 'Yedekten geri dön',
     'backups_upload'            => 'Yedeği yükle',
     'backups_path'              => 'Yedeklerin sunucuda saklanacağı yer <code>:path</code>',
-    'backups_restore_warning'   => 'Geri yükleme butonunu kullanın <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> önceki yedeklemelerden (Şu anda "S3 file storage" yada "Docker" çalışmıyor.<br><br>Sizin<strong>entire :app_name Veritabanı yüklediğiniz dosyalarla değiştirilecektir.</strong>.  ',
+    'backups_restore_warning'   => 'Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to restore from a previous backup. (This does not currently work with S3 file storage or Docker.)<br><br>Your <strong>entire :app_name database and any uploaded files will be completely replaced</strong> by what\'s in the backup file.  ',
     'backups_logged_out'         => 'Geri yüklemeniz tamamlandıktan sonra, siz de dahil olmak üzere, tüm mevcut kullanıcıların oturumu kapatılacaktır.',
     'backups_large'             => 'Çok büyük yedeklemeler, geri yükleme girişiminde zaman aşımına uğrayabilir ve komut satırı üzerinden çalıştırılması gerekebilir. ',
     'barcode_settings'			=> 'Barkod Ayarları',
@@ -86,6 +86,8 @@ return [
     'ldap_settings'             => 'LDAP Ayarları',
     'ldap_client_tls_cert_help' => 'LDAP bağlantıları için İstemci Tarafı TLS Sertifikası ve Anahtarı, genellikle yalnızca "Güvenli LDAP" içeren Google Workspace yapılandırmalarında kullanışlıdır. Her ikisi de gereklidir.',
      'ldap_client_tls_key'       => 'LDAP İstemci tarafı TLS anahtarı',
+    'ldap_location'             => 'LDAP Location',
+'ldap_location_help'             => 'The Ldap Location field should be used if <strong>an OU is not being used in the Base Bind DN.</strong> Leave this blank if an OU search is being used.',
     'ldap_login_test_help'      => 'LDAP ayarlarınızı doğru yapılandırıp yapılandırmadığınızı test etmek yukarıda belirttiğiniz DN için geçerli bir LDAP kullanıcı adı ve parolası giriniz. ÖNCE GÜNCEL LDAP AYARLARINI KAYDETMELİSİN.',
     'ldap_login_sync_help'      => 'Bu sadece LDAP\'ın doğru şekilde senkron edilebildiğini test eder. Eğer LDAP Kimlik Doğrulama sorgunuz doğru değilse, kullanıcılar giriş yapamayabilirler. ÖNCE GÜNCEL LDAP AYARLARINI KAYDETMELİSİN.',
     'ldap_manager'              => 'LDAP Yöneticisi',
@@ -328,4 +330,9 @@ return [
     'setup_migration_create_user' => 'Sıradaki: Kullanıcı oluştur',
     'ldap_settings_link' => 'LDAP Ayarları Sayfası',
     'slack_test' => '<i class="fab fa-slack"> entegrasyonunu dene',
+    'google_callback_help' => 'This should be entered as the callback URL in your Google OAuth app settings in your organization&apos;s <strong><a href="https://console.cloud.google.com/" target="_blank">Google developer console <i class="fa fa-external-link" aria-hidden="true"></i></a></strong>.',
+    'google_login'      => 'Google Workspace Login Settings',
+    'enable_google_login'  => 'Enable users to login with Google Workspace',
+    'enable_google_login_help'  => 'Users will not be automatically provisioned. They must have an existing account here AND in Google Workspace, and their username here must match their Google Workspace email address. ',
+
 ];

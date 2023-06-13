@@ -67,6 +67,8 @@ return [
         'array'   => 'Die: Attribuut moet ten minste: min items hê.',
     ],
     'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'Die gekose: attribuut is ongeldig.',
     'numeric'              => 'Die: Attribuut moet \'n nommer wees.',
     'present'              => 'Die: attribuut veld moet teenwoordig wees.',

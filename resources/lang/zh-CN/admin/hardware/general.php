@@ -23,6 +23,7 @@ return [
     'restore'  					=> '还原资产',
     'pending'  					=> '待处理',
     'undeployable'  			=> '不可部署',
+    'undeployable_tooltip'  	=> '此资产的状态标签为不可部署，此时无法借出。',
     'view'  					=> '查看资产',
     'csv_error' => '您的CSV文件中有一个错误：',
     'import_text' => '

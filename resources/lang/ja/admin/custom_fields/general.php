@@ -49,4 +49,6 @@ return [
     'unique' => '一意',
     'display_in_user_view' => 'チェックアウトされたユーザーが割り当てられたアセットを表示ページでこれらの値を表示できるようにします',
     'display_in_user_view_table' => 'ユーザーに表示',
+    'auto_add_to_fieldsets' => 'Automatically add this to every new fieldset',
+    'add_to_preexisting_fieldsets' => 'Add to any existing fieldsets',
 ];

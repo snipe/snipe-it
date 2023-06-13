@@ -67,6 +67,8 @@ return [
         'array'   => ':attribute는 최소 :min 항목이어야 합니다.',
     ],
     'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => '선택한 :attribute 가 부정확 합니다.',
     'numeric'              => ':attribute 는 숫자만 가능합니다.',
     'present'              => ':attribute 항목이 있어야 합니다.',

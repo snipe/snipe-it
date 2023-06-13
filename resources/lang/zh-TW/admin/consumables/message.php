@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> '耗材領取失敗，請重試。',
         'success' 		=> '耗材領取成功。',
-        'user_does_not_exist' => '使用者不正確。請再試一次。'
+        'user_does_not_exist' => '使用者不正確。請再試一次。',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

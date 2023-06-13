@@ -74,6 +74,7 @@ return [
     'your_credentials' => 'Sinu Snipe-IT rekvisiidid',
     'Accessory_Checkin_Notification' => 'Tarvikud sisse võetud',
     'Asset_Checkin_Notification' => 'Vara sissevõetud',
+    'Asset_Checkout_Notification' => 'Asset checked out',
     'License_Checkin_Notification' => 'Litsents sisse võetud',
     'Expected_Checkin_Report' => 'Eeldatav vahendite tagastamise aruanne',
     'Expected_Checkin_Notification' => 'Meeldetuletus: :name tagastamise tähtaeg läheneb',

@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'שחזור נכס',
     'pending'  					=> 'ממתין ל',
     'undeployable'  			=> 'לא ניתן לפריסה',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'הצג נכס',
     'csv_error' => 'קיימת שגיאה בקובץ ה-CSV שלך:',
     'import_text' => '

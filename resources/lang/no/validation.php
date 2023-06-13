@@ -67,6 +67,8 @@ return [
         'array'   => 'Attributtet må ha minst: min elementer.',
     ],
     'starts_with'          => ':attribute må starte med en av følgende: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'Attributtet :attribute er ugyldig.',
     'numeric'              => 'Attributtet :attribute må være et nummer.',
     'present'              => 'Atributtfeltet :attribute må ha en verdi.',

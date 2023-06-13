@@ -32,7 +32,7 @@ return [
     'backups_restoring'         => 'Obnovit ze zálohy',
     'backups_upload'            => 'Nahrát zálohu',
     'backups_path'              => 'Zálohy jsou uloženy v <code>:path</code>',
-    'backups_restore_warning'   => 'Použijte tlačítko obnovení <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> k obnovení předchozí zálohy. (Toto v současné době nefunguje se S3 souborovým systémem nebo Dockerem.<br><br>Vaše <strong>celá databáze :app_name a všechny nahrané soubory budou zcela nahrazeny</strong> tím, co je v záloze.  ',
+    'backups_restore_warning'   => 'Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to restore from a previous backup. (This does not currently work with S3 file storage or Docker.)<br><br>Your <strong>entire :app_name database and any uploaded files will be completely replaced</strong> by what\'s in the backup file.  ',
     'backups_logged_out'         => 'Všichni stávající uživatelé, včetně vás, budou odhlášeni po dokončení obnovy.',
     'backups_large'             => 'Velmi velké zálohy mohou při obnovování způsobit time out chybu a možná budou muset být spuštěny přes příkazový řádek. ',
     'barcode_settings'			=> 'Nastavení čárového kódu',
@@ -86,6 +86,8 @@ return [
     'ldap_settings'             => 'Nastavení LDAP',
     'ldap_client_tls_cert_help' => 'Client-Side TLS Certificate a klíč pro LDAP jsou obvykle užitečné pouze v konfiguracích Google Workspace společně s "Secure LDAP." Oba jsou vyžadovány.',
      'ldap_client_tls_key'       => 'LDAP Client-Side TLS key',
+    'ldap_location'             => 'LDAP Location',
+'ldap_location_help'             => 'The Ldap Location field should be used if <strong>an OU is not being used in the Base Bind DN.</strong> Leave this blank if an OU search is being used.',
     'ldap_login_test_help'      => 'Zadejte platné LDAP uživatelské jméno a heslo ze základu rozlišeného názvu který jste určili výše a vyzkoušejte zda je LDAP přihlašování správně nastavené. NEJPRVE JE TŘEBA ULOŽIT ZMĚNĚNÉ NASTAVENÍ LDAP.',
     'ldap_login_sync_help'      => 'Otestujte, že LDAP může správně synchronizovat. Pokud ověřovací LDAP dotaz není správný, uživatelé se nemusí být schopni přihlásit. JE NUTNÉ NEJPRVE NEJDŘÍVE ULOŽIT NASTAVENÍ LDAP POKUD BYLO ZMĚNĚNO.',
     'ldap_manager'              => 'LDAP Manager',
@@ -328,4 +330,9 @@ return [
     'setup_migration_create_user' => 'Další: Vytvořit uživatele',
     'ldap_settings_link' => 'Nastavení LDAP',
     'slack_test' => 'Test <i class="fab fa-slack"></i> Integrace',
+    'google_callback_help' => 'This should be entered as the callback URL in your Google OAuth app settings in your organization&apos;s <strong><a href="https://console.cloud.google.com/" target="_blank">Google developer console <i class="fa fa-external-link" aria-hidden="true"></i></a></strong>.',
+    'google_login'      => 'Google Workspace Login Settings',
+    'enable_google_login'  => 'Enable users to login with Google Workspace',
+    'enable_google_login_help'  => 'Users will not be automatically provisioned. They must have an existing account here AND in Google Workspace, and their username here must match their Google Workspace email address. ',
+
 ];

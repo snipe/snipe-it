@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Bu varlığı başarıyla reddettiniz.',
     'bulk_manager_warn'	        => 'Kullanıcılarınızın başarıyla güncelleştirildi, ancak kaydedilmedi Yöneticisi giriş Yöneticisi\'ni seçtiğiniz çünkü aynı zamanda düzenlenecek kullanıcı listesinde oldu ve kullanıcıların kendi yöneticisi olmayabilir. Yine, yönetici hariç olmak üzere, kullanıcılarınızı seçiniz.',
     'user_exists'               => 'Kullanıcı zaten var!',
-    'user_not_found'            => 'Kullanıcı [:id] yok.',
+    'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Oturum açma alanı gerekli',
     'user_password_required'    => 'Şifre Gerekli.',
     'insufficient_permissions'  => 'Yetersiz izinler.',

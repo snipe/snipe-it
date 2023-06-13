@@ -10,6 +10,7 @@ return array(
     'support_email'   		=> 'Sokongan E-mel',
     'support_phone'   		=> 'Sokongan Telefon',
     'support_url'   		=> 'Sokongan URL',
+    'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Kemaskini Pengeluar',
     'url'   				=> 'URL',
 

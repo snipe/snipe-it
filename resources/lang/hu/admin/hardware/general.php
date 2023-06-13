@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Visszaállítás eszköz',
     'pending'  					=> 'Függőben',
     'undeployable'  			=> 'Nem telepíthető',
+    'undeployable_tooltip'  	=> 'Az eszköz jelenleg az állapotcímkéje szerint nem helyezhezhető üzembe és nem adható ki.',
     'view'  					=> 'Eszköz megtekintése',
     'csv_error' => 'Hiba van a CSV fájlban:',
     'import_text' => '

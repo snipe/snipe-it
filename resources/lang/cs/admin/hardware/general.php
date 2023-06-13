@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Obnovit zařízení',
     'pending'  					=> 'Čekající',
     'undeployable'  			=> 'Nelze vyskladnit',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Zobrazit majetek',
     'csv_error' => 'Máte chybu v souboru CSV:',
     'import_text' => '

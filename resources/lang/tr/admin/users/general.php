@@ -43,7 +43,7 @@ return [
     'remote_help' => 'Bu, fiziksel konumlarınıza hiç gelmeyen veya nadiren gelen uzak kullanıcılara göre filtrelemeniz gerektiğinde yararlı olabilir.',
     'not_remote_label' => 'Bu uzak bir kullanıcı değil',
     'vip_label' => 'VIP user',
-    'vip_help' => 'This can be helpful to mark important people in your org if you would like to handle them in special ways.',
+    'vip_help' => 'Organizasyonunuzdaki kişileri özel bir şekilde belirtmek, işaretlemek istiyor iseniz bu yardımcı olabilir.',
     'create_user' => 'Create a user',
     'create_user_page_explanation' => 'This is the account information you will use to access the site for the first time.',
     'email_credentials' => 'Email credentials',

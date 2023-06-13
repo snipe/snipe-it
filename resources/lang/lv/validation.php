@@ -67,6 +67,8 @@ return [
         'array'   => 'Atribūtam jābūt vismaz: min vienumiem.',
     ],
     'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'Atlasītais: atribūts nav derīgs.',
     'numeric'              => 'Atribūts ir jābūt skaitlim.',
     'present'              => 'Atribūta laukam jābūt klāt.',

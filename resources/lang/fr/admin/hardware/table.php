@@ -8,6 +8,7 @@ return [
     'change' 		=> 'Associer/Libérer',
     'checkout_date' => 'Date d\'association',
     'checkoutto' 	=> 'Date de libération',
+    'components_cost' => 'Coût total des composants',
     'current_value' => 'Valeur actuelle',
     'diff' 			=> 'Différence',
     'dl_csv' 		=> 'Télécharger en CSV',
@@ -23,8 +24,8 @@ return [
     'days_without_acceptance' => 'Jours sans acceptation',
     'monthly_depreciation' => 'Dépréciation mensuelle',
     'assigned_to'    => 'Affecté à',
-    'requesting_user' => 'Utilisateur requérant',
-    'requested_date' => 'Date de la requête',
+    'requesting_user' => 'Demandeur·euse',
+    'requested_date' => 'Date de la demande',
     'changed'       => 'Modifié',
     'icon' => 'Icône',
 ];

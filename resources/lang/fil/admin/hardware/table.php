@@ -8,6 +8,7 @@ return [
     'change' 		=> 'Papasok/Palabas',
     'checkout_date' => 'Ang Petsa ng Pagcheck-out',
     'checkoutto' 	=> 'Nai-check Out',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Current Value',
     'diff' 			=> 'Ang Diff',
     'dl_csv' 		=> 'I-download ang CSV',
