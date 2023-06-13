@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Forbruget blev ikke tjekket ud, prøv igen',
         'success' 		=> 'Forbrugsmaterialet tjekket ud med succes.',
-        'user_does_not_exist' => 'Denne bruger er ugyldig. Prøv igen.'
+        'user_does_not_exist' => 'Denne bruger er ugyldig. Prøv igen.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

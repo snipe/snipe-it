@@ -67,6 +67,8 @@ return [
         'array'   => 'Үүнд: атрибут дор хаяж дараах зүйлсийг агуулсан байх ёстой.',
     ],
     'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'Сонгосон: шинж чанар буруу байна.',
     'numeric'              => 'Үүнд: атрибут нь тоо байх ёстой.',
     'present'              => 'Үүнд: атрибутын талбар байх ёстой.',

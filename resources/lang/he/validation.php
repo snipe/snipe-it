@@ -67,6 +67,8 @@ return [
         'array'   => 'התכונה: חייבת לכלול לפחות פריטים מינימליים.',
     ],
     'starts_with'          => 'השדה חייב להכיל לפחות אחד מהערכים הבאים.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'התכונה שנבחרה: אינה חוקית.',
     'numeric'              => 'התכונה: חייבת להיות מספר.',
     'present'              => 'שדה התכונה: חייב להיות נוכח.',

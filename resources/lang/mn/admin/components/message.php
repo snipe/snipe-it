@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Бүрэлдэхүүнийг шалгаагүй байна, дахин оролдоно уу',
         'success' 		=> 'Бүрэлдэхүүн хэсэг амжилттай шалгагдсан.',
-        'user_does_not_exist' => 'Энэ хэрэглэгч буруу байна. Дахин оролдоно уу.'
+        'user_does_not_exist' => 'Энэ хэрэглэгч буруу байна. Дахин оролдоно уу.',
+        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

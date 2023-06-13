@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Kāore i whakamahia te whakamahinga, tēnā whakamātau anō',
         'success' 		=> 'He pai te tirotiro i te whakamahinga.',
-        'user_does_not_exist' => 'He muhu te kaiwhakamahi. Tena ngana ano.'
+        'user_does_not_exist' => 'He muhu te kaiwhakamahi. Tena ngana ano.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

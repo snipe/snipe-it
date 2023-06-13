@@ -32,7 +32,7 @@ return [
     'backups_restoring'         => 'Restoring from Backup',
     'backups_upload'            => 'Upload Backup',
     'backups_path'              => 'Backups on the server are stored in <code>:path</code>',
-    'backups_restore_warning'   => 'Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to restore from a previous backup. (This does not currently work with S3 file storage or Docker.<br><br>Your <strong>entire :app_name database and any uploaded files will be completely replaced</strong> by what\'s in the backup file.  ',
+    'backups_restore_warning'   => 'Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to restore from a previous backup. (This does not currently work with S3 file storage or Docker.)<br><br>Your <strong>entire :app_name database and any uploaded files will be completely replaced</strong> by what\'s in the backup file.  ',
     'backups_logged_out'         => 'All existing users, including you, will be logged out once your restore is complete.',
     'backups_large'             => 'Very large backups may time out on the restore attempt and may still need to be run via command line. ',
     'barcode_settings'			=> '바코드 설정',
@@ -86,6 +86,8 @@ return [
     'ldap_settings'             => 'LDAP 설정',
     'ldap_client_tls_cert_help' => '클라이언트 측 TLS 인증서 및 LDAP 연결용 키는 일반적으로 \'보안 LDAP\'가 포함된 Google Workspace 구성에서만 유용합니다.',
      'ldap_client_tls_key'       => 'LDAP Client-Side TLS key',
+    'ldap_location'             => 'LDAP Location',
+'ldap_location_help'             => 'The Ldap Location field should be used if <strong>an OU is not being used in the Base Bind DN.</strong> Leave this blank if an OU search is being used.',
     'ldap_login_test_help'      => '위에서 지정한 기본 DN의 유효한 LDAP 사용자 이름 및 비밀번호를 입력하여 LDAP 로그인이 올바르게 구성되었는지 테스트하십시오. 반드시 업데이트 된 LDAP 설정을 먼저 저장해야합니다.',
     'ldap_login_sync_help'      => '이것은 LDAP가 올바르게 동기화 될 수 있는지 테스트합니다. LDAP 인증 질의어가 올바르지 않으면 사용자가 여전히 로그인하지 못할 수 있습니다. 반드시 업데이트 된 LDAP 설정을 먼저 저장해야합니다.',
     'ldap_manager'              => 'LDAP Manager',
@@ -328,4 +330,9 @@ return [
     'setup_migration_create_user' => 'Next: Create User',
     'ldap_settings_link' => 'LDAP Settings Page',
     'slack_test' => 'Test <i class="fab fa-slack"></i> Integration',
+    'google_callback_help' => 'This should be entered as the callback URL in your Google OAuth app settings in your organization&apos;s <strong><a href="https://console.cloud.google.com/" target="_blank">Google developer console <i class="fa fa-external-link" aria-hidden="true"></i></a></strong>.',
+    'google_login'      => 'Google Workspace Login Settings',
+    'enable_google_login'  => 'Enable users to login with Google Workspace',
+    'enable_google_login_help'  => 'Users will not be automatically provisioned. They must have an existing account here AND in Google Workspace, and their username here must match their Google Workspace email address. ',
+
 ];

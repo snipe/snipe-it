@@ -8,6 +8,7 @@ return [
     'change' 		=> 'Zurücknehmen/Herausgeben',
     'checkout_date' => 'Herausgabedatum',
     'checkoutto' 	=> 'Herausgegeben',
+    'components_cost' => 'Gesamtkosten der Komponenten',
     'current_value' => 'Aktueller Wert',
     'diff' 			=> 'Differenz',
     'dl_csv' 		=> 'CSV Herunterladen',

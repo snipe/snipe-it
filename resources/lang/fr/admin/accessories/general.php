@@ -16,6 +16,7 @@ return array(
     'update'  							=> 'Mise à jour d\'accessoires',
     'use_default_eula'					=> 'Utiliser la <a href="#" data-toggle="modal" data-target="#eulaModal">license primaire par défaut </a> à la place.',
     'use_default_eula_disabled'			=> '<del>Utilisez la license par défaut à la place.</del> Aucune licence d\'utilisation par défaut trouvée. Ajoutez-en une dans la section "Préférences".',
-    'clone'                             => 'Clone Accessory',
+    'clone'                             => 'Dupliquer l\'accessoire',
+    'delete_disabled'                   => 'Cet accessoire ne peut pas encore être supprimé car certaines pièces sont encore attribuées.',
 
 );

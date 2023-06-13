@@ -2,6 +2,7 @@
 
 return array(
 
+    'support_url_help' => 'Use <code>{LOCALE}</code> and <code>{SERIAL}</code> in your URL as variables to have those values auto-populate when viewing assets.',
     'does_not_exist' => 'Producatorul nu exista.',
     'assoc_users'	 => 'Acest producator este momentan asociat cu cel putin inca un model si nu poate fi sters. Va rugam actualizati modelele care nu mai au legatura cu acest producator si incercati iar. ',
 

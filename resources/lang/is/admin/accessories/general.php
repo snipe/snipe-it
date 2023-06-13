@@ -17,5 +17,6 @@ return array(
     'use_default_eula'					=> 'Notaðu frekar <a href="#" data-toggle="modal" data-target="#eulaModal">',
     'use_default_eula_disabled'			=> '<del>Notaðu frekar sjálfgefna notendaskilmálana.</del>Sjálfgefnu notendaskilmálarnir eru ekki í notkun. Vinsamlegast bættu einhverjum notendaskilmálum við í undir "Stillingar"',
     'clone'                             => 'Clone Accessory',
+    'delete_disabled'                   => 'This accessory cannot be deleted yet because some items are still checked out.',
 
 );

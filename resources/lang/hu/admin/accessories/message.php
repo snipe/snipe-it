@@ -24,7 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'A tartozékot nem sikerült kiadni, kérem, próbálja újra!',
         'success' 		=> 'A tartozék sikeresen kiadva.',
-        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
+        'unavailable'   => 'A tartozékot nem lehet kiadni. Ellenőrizd a kiadható mennyiséget',
         'user_does_not_exist' => 'Érvénytelen felhasználó. Kérem, próbálja újra!'
     ),
 

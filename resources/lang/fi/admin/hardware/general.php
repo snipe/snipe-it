@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Palauta laite',
     'pending'  					=> 'Odottaa',
     'undeployable'  			=> 'Ei käytettävissä',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Näytä laite',
     'csv_error' => 'Sinulla on virhe CSV tiedostossasi:',
     'import_text' => '

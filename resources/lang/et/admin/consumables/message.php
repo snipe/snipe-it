@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Tarbitavat ei kontrollitud, proovige uuesti',
         'success' 		=> 'Tarbitav kontrollitud edukalt.',
-        'user_does_not_exist' => 'See kasutaja ei sobi. Palun proovi uuesti.'
+        'user_does_not_exist' => 'See kasutaja ei sobi. Palun proovi uuesti.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

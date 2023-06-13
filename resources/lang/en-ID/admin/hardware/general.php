@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Kembalikan Aset',
     'pending'  					=> 'Tertunda',
     'undeployable'  			=> 'Tidak dapat disebarkan',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Lihat aset',
     'csv_error' => 'You have an error in your CSV file:',
     'import_text' => '

@@ -23,8 +23,8 @@ return [
     'restore' => [
         'error'   		=> 'Актив не был восстановлен, повторите попытку',
         'success' 		=> 'Актив успешно восстановлен.',
-        'bulk_success' 		=> 'Asset restored successfully.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'bulk_success' 		=> 'Актив успешно восстановлен.',
+        'nothing_updated'   => 'Ни один из активов не выбран, поэтому ничего не восстановлено.', 
     ],
 
     'audit' => [

@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Gjenopprett eiendel',
     'pending'  					=> 'Under arbeid',
     'undeployable'  			=> 'Ikke utleverbar',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Vis eiendel',
     'csv_error' => 'Du har en feil i din CSV-fil:',
     'import_text' => '

@@ -17,5 +17,6 @@ return array(
     'use_default_eula'					=> 'Die <a href="#" data-toggle="modal" data-target="#eulaModal">Standard EULA</a> stattdessen verwenden.',
     'use_default_eula_disabled'			=> '<del>Die Standard EULA stattdessen verwenden.</del> Keine Standard EULA definiert. Bitte fügen Sie eine in den Einstellungen hinzu.',
     'clone'                             => 'Zubehör duplizieren',
+    'delete_disabled'                   => 'Dieses Zubehör kann noch nicht gelöscht werden, da einige Artikel noch herausgegeben sind.',
 
 );

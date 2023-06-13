@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'உபகரணத்தை சோதிக்க முடியவில்லை, மீண்டும் முயற்சிக்கவும்',
         'success' 		=> 'உபகரணமானது வெற்றிகரமாக சரிபார்க்கப்பட்டது.',
-        'user_does_not_exist' => 'அந்த பயனர் தவறானது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.'
+        'user_does_not_exist' => 'அந்த பயனர் தவறானது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.',
+        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

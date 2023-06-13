@@ -10,6 +10,7 @@ return array(
     'support_email'   		=> 'Kasutajatoe E-mail',
     'support_phone'   		=> 'Kasutajatoe telefon',
     'support_url'   		=> 'Kasutajatoe URL',
+    'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Uuenda tootjat',
     'url'   				=> 'URL',
 

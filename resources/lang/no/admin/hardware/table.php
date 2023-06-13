@@ -8,6 +8,7 @@ return [
     'change' 		=> 'Inne/ute',
     'checkout_date' => 'Utsjekkdato',
     'checkoutto' 	=> 'Utsjekket',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Gjeldende verdi',
     'diff' 			=> 'Forskjell',
     'dl_csv' 		=> 'Last ned CSV',

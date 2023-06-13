@@ -75,6 +75,7 @@ return [
     'your_credentials' => 'Vaši Snipe-IT kredencijali',
     'Accessory_Checkin_Notification' => 'Oprema razdužena',
     'Asset_Checkin_Notification' => 'Imovina razdužena',
+    'Asset_Checkout_Notification' => 'Asset checked out',
     'License_Checkin_Notification' => 'Licenca razdužena',
     'Expected_Checkin_Report' => 'Izveštaj o očekivanoj proveri imovine',
     'Expected_Checkin_Notification' => 'Izveštaj o očekivanoj proveri imovine',

@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Ha declinado con éxito este equipo.',
     'bulk_manager_warn'	        => 'Sus usuarios han sido correctamente actualizados, de todos modos la entrada de administrador no fue guardada porque el administrador seleccionado también estaba en la lista de usuarios a ser editada, y los usuarios no pueden ser sus propior administradores. Vuelva a seleccionar los usuarios, excluyendo al administrador.',
     'user_exists'               => 'El Usuario ya existe!',
-    'user_not_found'            => 'Usuario [:id] no existe.',
+    'user_not_found'            => 'El usuario no existe.',
     'user_login_required'       => 'El campo Usuario es obligatorio',
     'user_password_required'    => 'El password es obligatorio.',
     'insufficient_permissions'  => 'No tiene permiso.',

@@ -92,6 +92,7 @@ return [
     'debug_warning_text'    => 'Tato aplikace běží ve výrobním režimu s povoleným laděním. To znamená že citlivá data mohou být přístupná vnějšímu světu. Deaktivujte režim ladění nastavením hodnoty <code>APP_DEBUG</code> v souboru <code>.env</code> na <code>false</code>.',
     'delete'  				=> 'Odstranit',
     'delete_confirm'  		=> 'Opravdu chcete smazat :item?',
+    'delete_confirm_no_undo' => 'Opravdu chcete odstranit :item? Tuto operaci nelze zvrátit.',
     'deleted'  				=> 'Odstraněno',
     'delete_seats'  		=> 'Vymazaná licenční místa',
     'deletion_failed'       => 'Odstranění se nezdařilo',
@@ -439,4 +440,13 @@ return [
     'setup_migration_output' => 'Výstup migrace:',
     'setup_migration_create_user' => 'Další: Založení uživatele',
     'importer_generic_error'    => 'Your file import is complete, but we did receive an error. This is usually caused by third-party API throttling from a notification webhook (such as Slack) and would not have interfered with the import itself, but you should confirm this.',
+    'confirm' => 'Potvrdit',
+    'autoassign_licenses' => 'Automatické přiřazení licencí',
+    'autoassign_licenses_help' => 'Allow this user to have licenses assigned via the bulk-assign license UI or cli tools.',
+    'autoassign_licenses_help_long' => 'Povolí uživateli získávat licence skze hromadnou správu licencí, ať již GUI or CLI. Například pokud si nepřejete, aby externisti nedostávali automaticky licence, náležící pouze zaměstnancům. Licenci jim můžete i nadále přiřazovat ručně, pouze nebudou zahrnuti do hromadného zpracování.',
+    'no_autoassign_licenses_help' => 'Nezahrnovat uživatele do hromadného zpracování licencí.',
+    'modal_confirm_generic'      => 'Jste si jistí?',
+    'cannot_be_deleted'      => 'Položka nemůže být odstraněna',
+    'undeployable_tooltip'      => 'This item cannot be checked out. Check the quantity remaining.',
+
 ];

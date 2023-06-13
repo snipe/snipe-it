@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Olet onnistuneesti hylännyt tämän laitteen.',
     'bulk_manager_warn'	        => 'Käyttäjät on onnistuneesti päivitetty, mutta esimies-merkintää ei tallennettu, koska valitsemasi esimies oli mukana käyttäjäluettelossa, eikä käyttäjä voi olla itsensä esimies. Valitse käyttäjät uudelleen, poislukien esimies.',
     'user_exists'               => 'Käyttäjä on jo luotu!',
-    'user_not_found'            => 'Käyttäjää [:id] ei löydy.',
+    'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Käyttäjätunnus vaaditaan',
     'user_password_required'    => 'Salasana vaaditaan.',
     'insufficient_permissions'  => 'Riittämättömät oikeudet.',

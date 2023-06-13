@@ -49,4 +49,6 @@ return [
     'unique' => 'Uniek',
     'display_in_user_view' => 'Laat de uitgecheckte gebruiker deze waarden zien in de weergave van toegewezen bezittingen pagina',
     'display_in_user_view_table' => 'Zichtbaar voor gebruiker',
+    'auto_add_to_fieldsets' => 'Automatically add this to every new fieldset',
+    'add_to_preexisting_fieldsets' => 'Add to any existing fieldsets',
 ];

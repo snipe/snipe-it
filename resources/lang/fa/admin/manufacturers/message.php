@@ -2,6 +2,7 @@
 
 return array(
 
+    'support_url_help' => 'Use <code>{LOCALE}</code> and <code>{SERIAL}</code> in your URL as variables to have those values auto-populate when viewing assets.',
     'does_not_exist' => 'تولید کننده وجود ندارد.',
     'assoc_users'	 => 'این تولید کننده در حال حاضر با حداقل یک مدل همراه است و نمی تواند حذف شود. لطفا مدل های خود را به دیگر مرجع این تولید کننده به روز رسانی کنید و دوباره امتحان کنید.',
 

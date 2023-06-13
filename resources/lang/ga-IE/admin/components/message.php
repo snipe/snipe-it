@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Níor sheiceáil amach an comhpháirt, déan iarracht arís',
         'success' 		=> 'Seiceáil amach an comhpháirt go rathúil.',
-        'user_does_not_exist' => 'Tá an úsáideoir neamhbhailí. Arís, le d\'thoil.'
+        'user_does_not_exist' => 'Tá an úsáideoir neamhbhailí. Arís, le d\'thoil.',
+        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

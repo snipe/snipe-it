@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'הצריכה לא נבדקה, נסה שוב',
         'success' 		=> 'הצריכה נשללה בהצלחה.',
-        'user_does_not_exist' => 'משתמש זה אינו חוקי. בבקשה נסה שוב.'
+        'user_does_not_exist' => 'משתמש זה אינו חוקי. בבקשה נסה שוב.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

@@ -67,6 +67,8 @@ return [
         'array'   => 'Atribut: setidaknya harus memiliki: item min.',
     ],
     'starts_with'          => ':attribute harus dimulai dengan salah satu dari berikut ini: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => ':attribute yang di pilih tidak benar.',
     'numeric'              => ':attribute harus dalam angka.',
     'present'              => 'Bidang atribut: harus ada.',

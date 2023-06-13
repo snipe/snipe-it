@@ -75,6 +75,7 @@ return [
     'your_credentials' => 'Snipe-IT Bilgileriniz',
     'Accessory_Checkin_Notification' => 'Aksesuar Zimmet Kabul',
     'Asset_Checkin_Notification' => 'Varlık Zimmet Kabul',
+    'Asset_Checkout_Notification' => 'Asset checked out',
     'License_Checkin_Notification' => 'Lisans Zimmet Kabul',
     'Expected_Checkin_Report' => 'Beklenen varlık iade raporu',
     'Expected_Checkin_Notification' => 'Hatırlatma ::name Son seçim zamanı yaklaşıyor',

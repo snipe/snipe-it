@@ -28,6 +28,7 @@ return [
     'restore'  					=> 'بازیابی دارایی',
     'pending'  					=> 'در انتظار',
     'undeployable'  			=> 'غیرقابل گسترش',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'نمایش دارایی ها
 ',
     'csv_error' => 'شما یک خطا در فایل CSV خود دارید:

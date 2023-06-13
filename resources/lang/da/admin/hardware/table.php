@@ -8,6 +8,7 @@ return [
     'change' 		=> 'Ind ud',
     'checkout_date' => 'Checkout dato',
     'checkoutto' 	=> 'Tjekket ud',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Current Value',
     'diff' 			=> 'Diff',
     'dl_csv' 		=> 'Download CSV',

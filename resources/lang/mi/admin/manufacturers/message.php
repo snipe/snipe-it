@@ -2,6 +2,7 @@
 
 return array(
 
+    'support_url_help' => 'Use <code>{LOCALE}</code> and <code>{SERIAL}</code> in your URL as variables to have those values auto-populate when viewing assets.',
     'does_not_exist' => 'Kaore te kaihoko i te tīariari.',
     'assoc_users'	 => 'Ko tenei kaiwhakanao e whai ana ki tetahi tauira kotahi, kaore e taea te muku. Whakaorangia nga tauira kia kore koe e tohu i tenei kaihanga me te ngana ano.',
 

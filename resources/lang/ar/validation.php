@@ -67,6 +67,8 @@ return [
         'array'   => 'يجب أن تحتوي :attribute على الأقل :min من العناصر.',
     ],
     'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => ':attribute المحدد غير صالح.',
     'numeric'              => 'يجب أن يكون :attribute رقما.',
     'present'              => 'يجب أن يكون :attribute موجود.',

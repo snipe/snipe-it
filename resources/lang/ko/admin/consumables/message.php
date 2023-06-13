@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> '소모품이 반출되지 않았습니다. 다시 시도해 주세요.',
         'success' 		=> '소모품이 반출 되었습니다.',
-        'user_does_not_exist' => '잘못된 사용자 입니다. 다시 시도해 주세요.'
+        'user_does_not_exist' => '잘못된 사용자 입니다. 다시 시도해 주세요.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

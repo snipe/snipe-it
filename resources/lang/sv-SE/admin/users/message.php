@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Du har framgångsrikt nekat den här tillgången.',
     'bulk_manager_warn'	        => 'Dina användare har uppdaterats, men chefsfältet sparades inte eftersom den chef du valt även finns i användarlistan, en användare kanske inte ange sig själv som chef. Vänligen välj dina användare igen, med undantag av chefen.',
     'user_exists'               => 'Användaren existerar redan!',
-    'user_not_found'            => 'Användare [: id] existerar inte.',
+    'user_not_found'            => 'Användaren finns inte.',
     'user_login_required'       => 'Inloggningsfältet krävs',
     'user_password_required'    => 'Lösenordet krävs.',
     'insufficient_permissions'  => 'Otillräckliga tillstånd.',

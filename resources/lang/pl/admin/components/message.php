@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Składnik nie został wydany, spróbuj ponownie',
         'success' 		=> 'Składnik został wydany pomyślnie.',
-        'user_does_not_exist' => 'Nieprawidłowy użytkownik. Spróbuj ponownie.'
+        'user_does_not_exist' => 'Nieprawidłowy użytkownik. Spróbuj ponownie.',
+        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

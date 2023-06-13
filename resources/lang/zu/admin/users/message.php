@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Uye wenqaba ngempumelelo le mali.',
     'bulk_manager_warn'	        => 'Abasebenzisi bakho babuyekezwe ngempumelelo, kodwa ukungena kwakho kwemenenja akulondoloziwe ngoba umphathi oyikhethile naye ohlwini lomsebenzisi oluzohlelwa, futhi abasebenzisi bangase bangabi umphathi wabo. Sicela ukhethe abasebenzisi bakho futhi, ngaphandle kwamenenja.',
     'user_exists'               => 'Umsebenzisi usuvele ukhona!',
-    'user_not_found'            => 'Umsebenzisi [: id] akekho.',
+    'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Insimu yokungena ngemvume iyadingeka',
     'user_password_required'    => 'Iphasiwedi iyadingeka.',
     'insufficient_permissions'  => 'Izimvume ezinganele.',

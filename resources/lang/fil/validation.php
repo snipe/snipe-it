@@ -67,6 +67,8 @@ return [
         'array'   => 'Ang :katangian ay dapat na magkaroon ng hindi bumaba sa :min na mga aytem.',
     ],
     'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'Ang napili na :katangian ay hindi balido.',
     'numeric'              => 'Ang :katangian ay dapat na isang numero.',
     'present'              => 'Ang :field ng katangian ay dapat na naroroon.',

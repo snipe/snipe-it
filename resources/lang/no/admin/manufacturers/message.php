@@ -2,6 +2,7 @@
 
 return array(
 
+    'support_url_help' => 'Use <code>{LOCALE}</code> and <code>{SERIAL}</code> in your URL as variables to have those values auto-populate when viewing assets.',
     'does_not_exist' => 'Produsent eksisterer ikke.',
     'assoc_users'	 => 'Denne produsenten er tilknyttet minst en modell og kan ikke slettes. Oppdatèr modellen(e) til ikke å bruke denne produsenten, og prøv igjen. ',
 

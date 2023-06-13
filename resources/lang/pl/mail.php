@@ -74,6 +74,7 @@ return [
     'your_credentials' => 'Twoje poświadczenia :web',
     'Accessory_Checkin_Notification' => 'Akcesorium zwrócono',
     'Asset_Checkin_Notification' => 'Sprzęt zwrócono',
+    'Asset_Checkout_Notification' => 'Zasób wydany',
     'License_Checkin_Notification' => 'Akcesorium zwrócono',
     'Expected_Checkin_Report' => 'Oczekiwano raportu kontroli aktywów',
     'Expected_Checkin_Notification' => 'Przypomnienie: :name sprawdza termin zbliżający się',

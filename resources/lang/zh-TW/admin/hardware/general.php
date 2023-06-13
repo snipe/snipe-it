@@ -23,6 +23,7 @@ return [
     'restore'  					=> '還原資產',
     'pending'  					=> '待處理',
     'undeployable'  			=> '不可部署',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> '檢視資產',
     'csv_error' => '你的 CSV 檔案有錯誤',
     'import_text' => '

@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Az alkatrész nem lett kiadva, próbálkozz újra',
         'success' 		=> 'Az alkatrész sikeresen kiadva.',
-        'user_does_not_exist' => 'Érvénytelen felhasználó. Kérem, próbálja újra.'
+        'user_does_not_exist' => 'Érvénytelen felhasználó. Kérem, próbálja újra.',
+        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

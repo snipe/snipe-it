@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Komponents netika pārbaudīts, lūdzu, mēģiniet vēlreiz',
         'success' 		=> 'Komponents veiksmīgi pārbaudīts.',
-        'user_does_not_exist' => 'Šis lietotājs ir nederīgs. Lūdzu mēģiniet vēlreiz.'
+        'user_does_not_exist' => 'Šis lietotājs ir nederīgs. Lūdzu mēģiniet vēlreiz.',
+        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

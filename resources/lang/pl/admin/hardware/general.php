@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Przywróć aktywa',
     'pending'  					=> 'Oczekuje',
     'undeployable'  			=> 'Niemożliwe do wdrożenia',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Wyświetl nabytki',
     'csv_error' => 'Wystąpił błąd w twoim pliku CSV:',
     'import_text' => '

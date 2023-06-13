@@ -49,4 +49,6 @@ return [
     'unique' => 'Egyedi',
     'display_in_user_view' => 'A hozzárendelt felhasználó megtekintheti ezeket az értékeket a "Hozzárendelt Eszközök Megtekintése" oldalon',
     'display_in_user_view_table' => 'Látható a felhasználó számára',
+    'auto_add_to_fieldsets' => 'Automatically add this to every new fieldset',
+    'add_to_preexisting_fieldsets' => 'Add to any existing fieldsets',
 ];

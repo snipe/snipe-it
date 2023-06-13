@@ -8,6 +8,7 @@ return [
     'change' 		=> 'Masuk/Keluar',
     'checkout_date' => 'Tarikh Agihan',
     'checkoutto' 	=> 'Agihan',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Current Value',
     'diff' 			=> 'Beza',
     'dl_csv' 		=> 'Muat Turun CSV',

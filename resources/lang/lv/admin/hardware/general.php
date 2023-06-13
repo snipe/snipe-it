@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Atjaunot aktīvus',
     'pending'  					=> 'Gaida',
     'undeployable'  			=> 'Nodarbināms',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Skatīt aktīvu',
     'csv_error' => 'Jūsu CSV failā ir kļūda:',
     'import_text' => '

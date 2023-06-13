@@ -2,6 +2,7 @@
 
 return array(
 
+    'support_url_help' => 'Use <code>{LOCALE}</code> and <code>{SERIAL}</code> in your URL as variables to have those values auto-populate when viewing assets.',
     'does_not_exist' => 'ยังไม่มีผู้ผลิต',
     'assoc_users'	 => 'ผู้ผลิตนี้มีความสัมพันธ์ในรายการโมเดลอย่างน้อยหนึ่งรายการในปัจจุบัน และไม่สามารถลบได้ กรุณาอัพเดทโมเดลของคุณออกจากความสัมพันธ์ดังกล่าว และลองอีกครั้ง ',
 

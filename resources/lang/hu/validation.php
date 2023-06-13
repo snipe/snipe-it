@@ -67,6 +67,8 @@ return [
         'array'   => 'A: attribútumnak rendelkeznie kell legalább: min elemekkel.',
     ],
     'starts_with'          => 'A(z) :attribute a következővel kell kezdődnie: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'A kiválasztott :attribute étvénytelen.',
     'numeric'              => 'A :attribute csak szám lehet.',
     'present'              => 'A: attribútum mezőnek jelen kell lennie.',
