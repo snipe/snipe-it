@@ -27,60 +27,14 @@ abstract class Importer
     protected $updating;
     /**
      * Default Map of item fields->csv names
+     *
+     * This has been moved into Livewire/Importer.php to be more granular.
+     * @todo - remove references to this property since we don't use it anymore.
+     *
      * @var array
      */
     private $defaultFieldMap = [
-        'asset_tag' => 'asset tag',
-        'activated' => 'activated',
-        'category' => 'category',
-        'checkout_class' => 'checkout type', // Supports Location or User for assets.  Using checkout_class instead of checkout_type because type exists on asset already.
-        'checkout_location' => 'checkout location',
-        'company' => 'company',
-        'item_name' => 'item name',
-        'item_number' => 'item number',
-        'image' => 'image',
-        'expiration_date' => 'expiration date',
-        'location' => 'location',
-        'notes' => 'notes',
-        'license_email' => 'licensed to email',
-        'license_name' => 'licensed to name',
-        'maintained' => 'maintained',
-        'manufacturer' => 'manufacturer',
-        'asset_model' => 'model name',
-        'model_number' => 'model number',
-        'order_number' => 'order number',
-        'purchase_cost' => 'purchase cost',
-        'purchase_date' => 'purchase date',
-        'purchase_order' => 'purchase order',
-        'qty' => 'quantity',
-        'reassignable' => 'reassignable',
-        'requestable' => 'requestable',
-        'seats' => 'seats',
-        'serial' => 'serial number',
-        'status' => 'status',
-        'supplier' => 'supplier',
-        'termination_date' => 'termination date',
-        'warranty_months' => 'warranty',
-        'full_name' => 'full name',
-        'email' => 'email',
-        'username' => 'username',
-        'address' => 'address',
-        'address2' => 'address2',
-        'city' => 'city',
-        'state' => 'state',
-        'country' => 'country',
-        'zip' => 'zip',
-        'jobtitle' => 'job title',
-        'employee_num' => 'employee number',
-        'phone_number' => 'phone number',
-        'first_name' => 'first name',
-        'last_name' => 'last name',
-        'department' => 'department',
-        'manager_name' => 'manager full name',
-        'manager_username' => 'manager username',
-        'min_amt' => 'minimum quantity',
-        'remote' => 'remote',
-        'vip' => 'vip',
+
     ];
     /**
      * Map of item fields->csv names
@@ -288,6 +242,8 @@ abstract class Importer
 
         $user_array = [
             'full_name' => $this->findCsvMatch($row, 'full_name'),
+            'first_name' => $this->findCsvMatch($row, 'first_name'),
+            'last_name' => $this->findCsvMatch($row, 'last_name'),
             'email'     => $this->findCsvMatch($row, 'email'),
             'manager_id'=>  '',
             'department_id' =>  '',
@@ -295,7 +251,6 @@ abstract class Importer
             'activated'  => $this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')),
             'remote'    => $this->fetchHumanBoolean(($this->findCsvMatch($row, 'remote'))),
         ];
-
 
         if ($type == 'manager') {
             $user_array['full_name'] = $this->findCsvMatch($row, 'manager');
@@ -312,8 +267,9 @@ abstract class Importer
 
 
         // If the full name and username is empty, bail out--we need this to extract first name (at the very least)
-        if ((empty($user_array['username'])) && (empty($user_array['full_name']))) {
-            $this->log('Insufficient user data provided (Full name or username is required) - skipping user creation.');
+        if ((empty($user_array['username'])) && (empty($user_array['full_name'])) && (empty($user_array['first_name']))) {
+            $this->log('Insufficient user data provided (Full name, first name or username is required) - skipping user creation.');
+            \Log::debug('User array: ');
             \Log::debug(print_r($user_array, true));
             \Log::debug(print_r($row, true));
             return false;
@@ -325,10 +281,12 @@ abstract class Importer
             $user_array['email'] = User::generateEmailFromFullName($user_array['full_name']);
         }
 
-        // Get some fields for first name and last name based off of full name
-        $user_formatted_array = User::generateFormattedNameFromFullName($user_array['full_name'], Setting::getSettings()->username_format);
-        $user_array['first_name'] = $user_formatted_array['first_name'];
-        $user_array['last_name'] = $user_formatted_array['last_name'];
+        if (empty($user_array['first_name'])) {
+            // Get some fields for first name and last name based off of full name
+            $user_formatted_array = User::generateFormattedNameFromFullName($user_array['full_name'], Setting::getSettings()->username_format);
+            $user_array['first_name'] = $user_formatted_array['first_name'];
+            $user_array['last_name'] = $user_formatted_array['last_name'];
+        }
 
         if (empty($user_array['username'])) {
             $user_array['username'] = $user_formatted_array['username'];
