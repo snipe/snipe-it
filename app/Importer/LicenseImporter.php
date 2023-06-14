@@ -27,6 +27,9 @@ class LicenseImporter extends ItemImporter
      * @since 4.0
      * @param array $row
      * @return License|mixed|null
+     * updated @author Jes Vinsmoke
+     * @since 6.1
+     *
      */
     public function createLicenseIfNotExists(array $row)
     {
