@@ -557,7 +557,26 @@
                                     </div>
                                     <div class="col-md-9 col-md-offset-3">
                                         <br />
-                                        <div id="ldapad_test_results" class="hidden well well-sm"></div>
+                                        <div id="ldapad_test_results" class="hidden well well-sm">
+                                            <thead>
+                                                @foreach($keys as $key)
+                                                <th>{{$key}}</th>
+                                                @endforeach
+                                            </thead>
+                                            <tbody>
+                                                @foreach($ldap_sync_test_users as $user)
+                                                    <tr>
+                                                        <td>{{$user->employee_number}}</td>
+                                                        <td>{{$user->username}}</td>
+                                                        <td>{{$user->firstname}}</td>
+                                                        <td>{{$user->lastname}}</td>
+                                                        <td>{{$user->email}}</td>
+
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+
+                                        </div>
                                     </div>
                                     <div class="col-md-9 col-md-offset-3">
                                         <p class="help-block">{{ trans('admin/settings/general.ldap_login_sync_help') }}</p>

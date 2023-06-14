@@ -41,8 +41,11 @@ class LdapSettingsForm extends Component
       public        $groups;
       public        $ldaptest_user;
       public        $ldaptest_password;
+      public        $ldap_sync_test_users;
+      public        $keys = [];
 
-      protected $rules = [
+
+    protected $rules = [
           'ldap_username_field' => 'not_in:sAMAccountName',
           'ldap_auth_filter_query' => 'not_in:uid=samaccountname|required_if:ldap_enabled,1',
           'ldap_filter' => 'nullable|regex:"^[^(]"|required_if:ldap_enabled,1',
@@ -91,6 +94,7 @@ class LdapSettingsForm extends Component
         $this->ldap_dept                 = $this->setting->ldap_dept;
         $this->ldap_client_tls_cert      = $this->setting->ldap_client_tls_cert;
         $this->ldap_client_tls_key       = $this->setting->ldap_client_tls_key;
+
 
     }
 
@@ -163,16 +167,15 @@ class LdapSettingsForm extends Component
 //            }
 //        }
     }
-    public function buildLdapTestResults($results)
+    public function buildLdapTestResults($ldap_sync_test_users)
     {
+
         $html = '<ul style="list-style: none;padding-left: 5px;">';
-        $html .= '<li class="text-success"><i class="fas fa-check" aria-hidden="true"></i> ' . $results['login']['message'] . ' </li>';
-        $html .= '<li class="text-success"><i class="fas fa-check" aria-hidden="true"></i> ' . $results['bind']['message'] . ' </li>';
         $html .= '</ul>';
         $html .= '<div>{{ trans("admin/settings/message.ldap.sync_success") }}</div>';
         $html .= '<table class="table table-bordered table-condensed" style="background-color: #fff">';
         $html .= $this->buildLdapResultsTableHeader();
-        $html .= $this->buildLdapResultsTableBody($results['user_sync']['users']);
+        $html .= $this->buildLdapResultsTableBody($ldap_sync_test_users);
         $html .= '</table>';
         return $html;
     }
@@ -180,13 +183,7 @@ class LdapSettingsForm extends Component
     public function buildLdapResultsTableHeader()
     {
         // Build the HTML table header
-        $this->keys = [
-            trans('admin/settings/general.employee_number'),
-            trans('mail.username'),
-            trans('general.first_name'),
-            trans('general.last_name'),
-            trans('general.email'),
-        ];
+
         $header = '<thead><tr>';
         foreach ( $this->keys as $key) {
             $header .= '<th>' . $key . '</th>';
@@ -216,7 +213,12 @@ class LdapSettingsForm extends Component
     public function ldaptest()
     {
         $settings = Setting::getSettings();
-
+        $this->keys= [trans('admin/settings/general.employee_number'),
+                      trans('mail.username'),
+                      trans('general.first_name'),
+                      trans('general.last_name'),
+                      trans('general.email'),
+                     ];
 
         \Log::debug('Preparing to test LDAP connection');
 
@@ -242,11 +244,11 @@ class LdapSettingsForm extends Component
                         'email'           => $item[$settings['ldap_email']][0] ?? null,
                     ];
                 });
-                \Log::debug($users);
                 if ($users->count() > 0) {
-                    $message['user_sync'] = [
-                        'users' => $users,
-                    ];
+
+                        $this->ldap_sync_test_users = $users;
+                        $this->buildLdapTestResults($this->ldap_sync_test_users);
+
                 } else {
                     $message['user_sync'] = [
                         'message' => 'Connection to LDAP was successful, however there were no users returned from your query. You should confirm the Base Bind DN above.',
