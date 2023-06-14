@@ -65,12 +65,26 @@ class AssetMaintenancesPresenter extends Presenter
                 'title' => trans('general.checked_out_to'),
                 'visible' => false,
                 'formatter' => 'usersLinkObjFormatter',
+            ], [
+                'field' => 'repairer',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.repairer'),
+                'visible' => false,
+                'formatter' => 'usersLinkObjFormatter',
             ],
             [
                 'field' => 'location',
                 'searchable' => true,
                 'sortable' => true,
                 'title' => trans('general.location'),
+                'formatter' => 'locationsLinkObjFormatter',
+            ],[
+                'field' => 'asset_maintenance_location',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => trans('general.asset_maintenance_location'),
                 'formatter' => 'locationsLinkObjFormatter',
             ], [
                 'field' => 'asset_maintenance_type',

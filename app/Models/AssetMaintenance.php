@@ -29,6 +29,7 @@ class AssetMaintenance extends Model implements ICompanyableChild
         'asset_id'               => 'required|integer',
         'supplier_id'            => 'required|integer',
         'assigned_to'            => 'integer',
+        'repairer'               => 'integer',
         'asset_maintenance_type' => 'required',
         'title'                  => 'required|max:100',
         'is_warranty'            => 'boolean',
@@ -154,6 +155,11 @@ class AssetMaintenance extends Model implements ICompanyableChild
     public function assignedTo()
     {
         return $this->belongsTo(\App\Models\User::class, 'assigned_to')
+            ->withTrashed();
+    }
+    public function repairer()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'repairer')
             ->withTrashed();
     }
 
