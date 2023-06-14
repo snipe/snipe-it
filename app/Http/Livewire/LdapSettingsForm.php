@@ -246,8 +246,8 @@ class LdapSettingsForm extends Component
                 });
                 if ($users->count() > 0) {
 
-                        $this->ldap_sync_test_users = $users;
-                        $this->buildLdapTestResults($this->ldap_sync_test_users);
+                        $this->ldap_sync_test_users = json_decode($users);
+//                        $this->buildLdapTestResults($this->ldap_sync_test_users);
 
                 } else {
                     $message['user_sync'] = [

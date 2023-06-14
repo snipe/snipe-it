@@ -555,29 +555,34 @@
                                     <div class="col-md-9" id="ldaptestrow">
                                         <button type='submit' wire:click.prevent="ldapsynctest" {{ $setting->demoMode }} class="btn btn-default btn-sm pull-left" id="ldapsynctest" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test_sync') }}</button>
                                     </div>
-                                    <div class="col-md-9 col-md-offset-3">
-                                        <br />
-                                        <div id="ldapad_test_results" class="hidden well well-sm">
-                                            <thead>
-                                                @foreach($keys as $key)
-                                                <th>{{$key}}</th>
-                                                @endforeach
-                                            </thead>
-                                            <tbody>
-                                                @foreach($ldap_sync_test_users as $user)
-                                                    <tr>
-                                                        <td>{{$user->employee_number}}</td>
-                                                        <td>{{$user->username}}</td>
-                                                        <td>{{$user->firstname}}</td>
-                                                        <td>{{$user->lastname}}</td>
-                                                        <td>{{$user->email}}</td>
+                                    @if(isset($ldap_sync_test_users))
+                                        <div class="col-md-9 col-md-offset-3">
+                                            <br />
+                                            <div id="ldapad_test_results" class="hidden well well-sm">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            @foreach($keys as $key)
+                                                            <th>{{$key}}</th>
+                                                            @endforeach
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach($ldap_sync_test_users as $user)
+                                                            <tr>
+                                                                <td>{{$user->employee_number}}</td>
+                                                                <td>{{$user->username}}</td>
+                                                                <td>{{$user->firstname}}</td>
+                                                                <td>{{$user->lastname}}</td>
+                                                                <td>{{$user->email}}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
 
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
                                     <div class="col-md-9 col-md-offset-3">
                                         <p class="help-block">{{ trans('admin/settings/general.ldap_login_sync_help') }}</p>
                                         @if (config('app.lock_passwords')===true)
