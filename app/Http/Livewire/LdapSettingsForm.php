@@ -242,6 +242,7 @@ class LdapSettingsForm extends Component
                         'email'           => $item[$settings['ldap_email']][0] ?? null,
                     ];
                 });
+                \Log::debug($users);
                 if ($users->count() > 0) {
                     $message['user_sync'] = [
                         'users' => $users,
