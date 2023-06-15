@@ -95,6 +95,7 @@ class AssetMaintenancesPresenter extends Presenter
                 'searchable' => true,
                 'sortable' => true,
                 'title' => trans('admin/asset_maintenances/table.is_warranty'),
+                'formatter' => 'trueFalseFormatter'
             ], [
                 'field' => 'cost',
                 'searchable' => true,
