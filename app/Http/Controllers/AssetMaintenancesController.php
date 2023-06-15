@@ -112,10 +112,13 @@ class AssetMaintenancesController extends Controller
         // Save the asset maintenance data
         $assetMaintenance->asset_id = $request->input('asset_id');
         $assetMaintenance->asset_maintenance_type = $request->input('asset_maintenance_type');
+        $assetMaintenance->asset_maintenance_location = $request->input('asset_maintenance_location');
+        $assetMaintenance->repairer = $request->input('repairer');
         $assetMaintenance->title = $request->input('title');
         $assetMaintenance->start_date = $request->input('start_date');
         $assetMaintenance->completion_date = $request->input('completion_date');
         $assetMaintenance->user_id = Auth::id();
+        $assetMaintenance->assigned_to= $asset->assigned_to;
 
         if (($assetMaintenance->completion_date !== null)
             && ($assetMaintenance->start_date !== '')
@@ -223,6 +226,8 @@ class AssetMaintenancesController extends Controller
         // Save the asset maintenance data
         $assetMaintenance->asset_id = $request->input('asset_id');
         $assetMaintenance->asset_maintenance_type = $request->input('asset_maintenance_type');
+        $assetMaintenance->asset_maintenance_location = $request->input('asset_maintenance_location');
+        $assetMaintenance->repairer = $request->input('repairer');
         $assetMaintenance->title = $request->input('title');
         $assetMaintenance->start_date = $request->input('start_date');
         $assetMaintenance->completion_date = $request->input('completion_date');

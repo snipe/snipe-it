@@ -28,6 +28,8 @@ class AssetMaintenance extends Model implements ICompanyableChild
     protected $rules = [
         'asset_id'               => 'required|integer',
         'supplier_id'            => 'required|integer',
+        'assigned_to'            => 'integer',
+        'repairer'               => 'integer',
         'asset_maintenance_type' => 'required',
         'title'                  => 'required|max:100',
         'is_warranty'            => 'boolean',
@@ -44,7 +46,7 @@ class AssetMaintenance extends Model implements ICompanyableChild
      *
      * @var array
      */
-    protected $searchableAttributes = ['title', 'notes', 'asset_maintenance_type', 'cost', 'start_date', 'completion_date'];
+    protected $searchableAttributes = ['title', 'notes', 'asset_maintenance_type', 'cost', 'start_date', 'completion_date', 'assigned_to'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -148,6 +150,16 @@ class AssetMaintenance extends Model implements ICompanyableChild
     public function admin()
     {
         return $this->belongsTo(\App\Models\User::class, 'user_id')
+            ->withTrashed();
+    }
+    public function assignedTo()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'assigned_to')
+            ->withTrashed();
+    }
+    public function repairerAssigned()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'repairer')
             ->withTrashed();
     }
 

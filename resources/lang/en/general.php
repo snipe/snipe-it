@@ -157,6 +157,7 @@ return [
     'asset_maintenance'        => 'Asset Maintenance',
     'asset_maintenance_report' => 'Asset Maintenance Report',
     'asset_maintenances'       => 'Asset Maintenances',
+    'asset_maintenance_location' => 'Maintenance Location',
     'item'  				=> 'Item',
     'item_name'             => 'Item Name',
     'import_file'  			=> 'import CSV file',
@@ -230,6 +231,7 @@ return [
     'requested_assets'      => 'Requested Assets',
     'requested_assets_menu' => 'Requested Assets',
     'request_canceled'      => 'Request Canceled',
+    'repairer'              => 'Repairer',
     'save'  				=> 'Save',
     'select_var'            => 'Select :thing... ', // this will eventually replace all of our other selects
     'select'				=> 'Select',
