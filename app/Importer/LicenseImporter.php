@@ -34,7 +34,7 @@ class LicenseImporter extends ItemImporter
     public function createLicenseIfNotExists(array $row)
     {
         $editingLicense = false;
-        $license = License::where('serial', $this->item['serial'])
+        $license = License::where('serial', $this->item['serial'])->where('name', $this->item['name'])
                     ->first();
         if ($license) {
             if (! $this->updating) {
