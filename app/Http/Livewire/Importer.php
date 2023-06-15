@@ -288,6 +288,7 @@ class Importer extends Component
         ];
 
         $this->users_fields  = [
+            'id' => trans('general.id'),
             'company' => trans('general.company'),
             'location' => trans('general.location'),
             'department' => trans('general.department'),
