@@ -38,7 +38,13 @@ class LicenseImporter extends ItemImporter
                     ->first();
         if ($license) {
             if (! $this->updating) {
-                $this->log('A matching License '.$this->item['name'].' with serial '.$this->item['serial'].' already exists');
+
+                if($this->item['serial'] != "") {
+                    $this->log('A matching License ' . $this->item['name'] . ' with serial ' . $this->item['serial'] . ' already exists');
+                }
+                else {
+                    $this->log('A matching License ' . $this->item['name'] . ' with no serial number already exists');
+                }
 
                 return;
             }
