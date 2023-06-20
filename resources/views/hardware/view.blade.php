@@ -553,7 +553,7 @@
                                         <div class="row">
                                             <div class="col-md-2">
                                                 <strong>
-                                                    {{ trans('admin/hardware/table.current_value') }}
+                                                    {{ trans('admin/hardware/table.git_value') }}
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
@@ -917,6 +917,10 @@
                                                     <i class="fas fa-phone" aria-hidden="true"></i>
                                                     <a href="tel:{{ $asset->assignedTo->phone }}">{{ $asset->assignedTo->phone }}</a>
                                                 </li>
+                                            @endif
+
+                                            @if((isset($asset->assignedTo)) && ($asset->assignedTo->department!=''))
+                                                <li>{{ $asset->assignedTo->department->name}}</li>
                                             @endif
 
                                             @if (isset($asset->location))
