@@ -553,7 +553,7 @@
                                         <div class="row">
                                             <div class="col-md-2">
                                                 <strong>
-                                                    {{ trans('admin/hardware/table.git_value') }}
+                                                    {{ trans('admin/hardware/table.current_value') }}
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
