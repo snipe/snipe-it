@@ -136,66 +136,7 @@ class AssetsController extends Controller
             }
         }
 
-        if ($request->filled('status_id')) {
-            $assets->where('assets.status_id', '=', $request->input('status_id'));
-        }
 
-        if ($request->filled('asset_tag')) {
-            $assets->where('assets.asset_tag', '=', $request->input('asset_tag'));
-        }
-
-        if ($request->filled('serial')) {
-            $assets->where('assets.serial', '=', $request->input('serial'));
-        }
-
-        if ($request->input('requestable') == 'true') {
-            $assets->where('assets.requestable', '=', '1');
-        }
-
-        if ($request->filled('model_id')) {
-            $assets->InModelList([$request->input('model_id')]);
-        }
-
-        if ($request->filled('category_id')) {
-            $assets->InCategory($request->input('category_id'));
-        }
-
-        if ($request->filled('location_id')) {
-            $assets->where('assets.location_id', '=', $request->input('location_id'));
-        }
-
-        if ($request->filled('rtd_location_id')) {
-            $assets->where('assets.rtd_location_id', '=', $request->input('rtd_location_id'));
-        }
-
-        if ($request->filled('supplier_id')) {
-            $assets->where('assets.supplier_id', '=', $request->input('supplier_id'));
-        }
-
-        if ($request->filled('asset_eol_date')) {
-            $assets->where('assets.asset_eol_date', '=', $request->input('asset_eol_date'));
-        }
-
-        if (($request->filled('assigned_to')) && ($request->filled('assigned_type'))) {
-            $assets->where('assets.assigned_to', '=', $request->input('assigned_to'))
-                ->where('assets.assigned_type', '=', $request->input('assigned_type'));
-        }
-
-        if ($request->filled('company_id')) {
-            $assets->where('assets.company_id', '=', $request->input('company_id'));
-        }
-
-        if ($request->filled('manufacturer_id')) {
-            $assets->ByManufacturer($request->input('manufacturer_id'));
-        }
-
-        if ($request->filled('depreciation_id')) {
-            $assets->ByDepreciationId($request->input('depreciation_id'));
-        }
-
-        if ($request->filled('byod')) {
-            $assets->where('assets.byod', '=', $request->input('byod'));
-        }
 
         $request->filled('order_number') ? $assets = $assets->where('assets.order_number', '=', e($request->get('order_number'))) : '';
 
@@ -300,6 +241,66 @@ class AssetsController extends Controller
             $assets->TextSearch($request->input('search'));
         }
 
+        if ($request->filled('status_id')) {
+            $assets->where('assets.status_id', '=', $request->input('status_id'));
+        }
+
+        if ($request->filled('asset_tag')) {
+            $assets->where('assets.asset_tag', '=', $request->input('asset_tag'));
+        }
+
+        if ($request->filled('serial')) {
+            $assets->where('assets.serial', '=', $request->input('serial'));
+        }
+
+        if ($request->input('requestable') == 'true') {
+            $assets->where('assets.requestable', '=', '1');
+        }
+
+        if ($request->filled('model_id')) {
+            $assets->InModelList([$request->input('model_id')]);
+        }
+
+        if ($request->filled('category_id')) {
+            $assets->InCategory($request->input('category_id'));
+        }
+
+        if ($request->filled('location_id')) {
+            $assets->where('assets.location_id', '=', $request->input('location_id'));
+        }
+
+        if ($request->filled('rtd_location_id')) {
+            $assets->where('assets.rtd_location_id', '=', $request->input('rtd_location_id'));
+        }
+
+        if ($request->filled('supplier_id')) {
+            $assets->where('assets.supplier_id', '=', $request->input('supplier_id'));
+        }
+
+        if ($request->filled('asset_eol_date')) {
+            $assets->where('assets.asset_eol_date', '=', $request->input('asset_eol_date'));
+        }
+
+        if (($request->filled('assigned_to')) && ($request->filled('assigned_type'))) {
+            $assets->where('assets.assigned_to', '=', $request->input('assigned_to'))
+                ->where('assets.assigned_type', '=', $request->input('assigned_type'));
+        }
+
+        if ($request->filled('company_id')) {
+            $assets->where('assets.company_id', '=', $request->input('company_id'));
+        }
+
+        if ($request->filled('manufacturer_id')) {
+            $assets->ByManufacturer($request->input('manufacturer_id'));
+        }
+
+        if ($request->filled('depreciation_id')) {
+            $assets->ByDepreciationId($request->input('depreciation_id'));
+        }
+
+        if ($request->filled('byod')) {
+            $assets->where('assets.byod', '=', $request->input('byod'));
+        }
 
         // This is kinda gross, but we need to do this because the Bootstrap Tables
         // API passes custom field ordering as custom_fields.fieldname, and we have to strip
