@@ -16,7 +16,8 @@ class Depreciation extends SnipeModel
     // Declare the rules for the form validation
     protected $rules = [
         'name' => 'required|min:3|max:255|unique:depreciations,name',
-        'months' => 'required|max:3600|integer|gt:0',
+        'term_length' => 'required|max:3600|integer|gt:0',
+        'term_type'   => 'required|string',
     ];
 
     /**
@@ -34,7 +35,7 @@ class Depreciation extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name', 'months'];
+    protected $fillable = ['name', 'term_length', 'term_type'];
 
     use Searchable;
 
@@ -43,7 +44,7 @@ class Depreciation extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['name', 'months'];
+    protected $searchableAttributes = ['name', 'term_type', 'term_length'];
 
     /**
      * The relations and their attributes that should be included when searching the model.

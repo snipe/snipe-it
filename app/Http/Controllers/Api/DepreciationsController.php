@@ -20,9 +20,9 @@ class DepreciationsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Depreciation::class);
-        $allowed_columns = ['id','name','months','depreciation_min','created_at'];
+        $allowed_columns = ['id','name','term_length','term_type','depreciation_min','created_at'];
 
-        $depreciations = Depreciation::select('id','name','months','depreciation_min','user_id','created_at','updated_at');
+        $depreciations = Depreciation::select('id','name','term_length','term_type','depreciation_min','user_id','created_at','updated_at');
 
         if ($request->filled('search')) {
             $depreciations = $depreciations->TextSearch($request->input('search'));
