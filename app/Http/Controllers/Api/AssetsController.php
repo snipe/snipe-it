@@ -241,6 +241,7 @@ class AssetsController extends Controller
             $assets->TextSearch($request->input('search'));
         }
 
+        // Leave these under the TextSearch scope, else the fuzziness will override the specific ID (status ID, etc) requested
         if ($request->filled('status_id')) {
             $assets->where('assets.status_id', '=', $request->input('status_id'));
         }
