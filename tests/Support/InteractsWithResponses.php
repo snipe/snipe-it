@@ -4,16 +4,30 @@ namespace Tests\Support;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Testing\TestResponse;
+use RuntimeException;
 
 trait InteractsWithResponses
 {
-    private function assertResponseContainsInRows(TestResponse $response, Model $model, string $field = 'name')
+    protected function assertResponseContainsInRows(TestResponse $response, Model $model, string $property = 'name')
     {
-        $this->assertTrue(collect($response['rows'])->pluck($field)->contains($model->{$field}));
+        $this->guardAgainstNullProperty($model, $property);
+
+        $this->assertTrue(collect($response['rows'])->pluck($property)->contains($model->{$property}));
     }
 
-    private function assertResponseDoesNotContainInRows(TestResponse $response, Model $model, string $field = 'name')
+    protected function assertResponseDoesNotContainInRows(TestResponse $response, Model $model, string $property = 'name')
     {
-        $this->assertFalse(collect($response['rows'])->pluck($field)->contains($model->{$field}));
+        $this->guardAgainstNullProperty($model, $property);
+
+        $this->assertFalse(collect($response['rows'])->pluck($property)->contains($model->{$property}));
+    }
+
+    private function guardAgainstNullProperty(Model $model, string $property): void
+    {
+        if (is_null($model->{$property})) {
+            throw new RuntimeException(
+                "The property ({$property}) is null on the model which isn't helpful for comparison."
+            );
+        }
     }
 }
