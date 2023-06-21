@@ -62,6 +62,31 @@ class Depreciable extends SnipeModel
 
         return $depreciation;
     }
+    public function getDailyDepreciationValue($days) {
+
+        if ($this->purchase_date) {
+            $purchased = new Carbon($this->purchase_date);
+            $now = Carbon::now();
+            $difference = $purchased->diffForHumans($now);
+        } else {
+            return null;
+        }
+
+        $depreciation_per_day= $this->purchase_cost/$days;
+        if($difference >= $this->get_depreciation()->days) {
+
+            if (!$this->get_depreciation()->depreciation_min == null) {
+                $current_value = $this->get_depreciation()->depreciation_min;
+            }
+            else{
+                $current_value = 0;
+            }
+        }
+        else {
+            $current_value = $this->purchase_cost-($depreciation_per_day * $difference);
+        }
+        return $current_value;
+}
 
     /**
      * @return float|int
