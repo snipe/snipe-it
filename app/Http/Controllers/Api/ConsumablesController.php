@@ -45,7 +45,8 @@ class ConsumablesController extends Controller
                 'notes',
                 ];
 
-        $consumables = Consumable::with('company', 'location', 'category', 'users', 'manufacturer');
+        $consumables = Consumable::select('consumables.*')
+            ->with('company', 'location', 'category', 'users', 'manufacturer');
 
         if ($request->filled('search')) {
             $consumables = $consumables->TextSearch(e($request->input('search')));
