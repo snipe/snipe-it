@@ -33,8 +33,6 @@ class AssetsForSelectListTest extends TestCase
 
     public function testAssetsAreScopedToCompanyWhenMultipleCompanySupportEnabled()
     {
-        $this->markTestIncomplete();
-
         [$companyA, $companyB] = Company::factory()->count(2)->create();
 
         $assetA = Asset::factory()->for($companyA)->create(['asset_tag' => '0001']);
