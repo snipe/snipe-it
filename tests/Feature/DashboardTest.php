@@ -20,7 +20,9 @@ class DashboardTest extends TestCase
 
     public function testUserCountIsScopedByCompany()
     {
-        $this->markTestIncomplete();
+        $this->markTestIncomplete(
+            'Waiting for removal of Company::scopeCompanyables in DashboardController@index'
+        );
 
         $this->settings->enableMultipleFullCompanySupport();
 

@@ -17,7 +17,9 @@ class DepartmentsIndexTest extends TestCase
 
     public function testDepartmentsIndexAdheresToCompanyScoping()
     {
-        $this->markTestIncomplete();
+        $this->markTestIncomplete(
+            'Waiting for removal of Company::scopeCompanyables in DepartmentsController@index'
+        );
 
         [$companyA, $companyB] = Company::factory()->count(2)->create();
 

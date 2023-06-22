@@ -16,7 +16,9 @@ class UsersIndexTest extends TestCase
 
     public function testUsersIndexAdheresToCompanyScoping()
     {
-        $this->markTestIncomplete();
+        $this->markTestIncomplete(
+            'Waiting for removal of Company::scopeCompanyables in UsersController@index'
+        );
 
         [$companyA, $companyB] = Company::factory()->count(2)->create();
 
