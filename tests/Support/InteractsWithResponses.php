@@ -22,6 +22,20 @@ trait InteractsWithResponses
         $this->assertFalse(collect($response['rows'])->pluck($property)->contains($model->{$property}));
     }
 
+    protected function assertResponseContainsInResults(TestResponse $response, Model $model, string $property = 'id')
+    {
+        $this->guardAgainstNullProperty($model, $property);
+
+        $this->assertTrue(collect($response->json('results'))->pluck('id')->contains($model->{$property}));
+    }
+
+    protected function assertResponseDoesNotContainInResults(TestResponse $response, Model $model, string $property = 'id')
+    {
+        $this->guardAgainstNullProperty($model, $property);
+
+        $this->assertFalse(collect($response->json('results'))->pluck('id')->contains($model->{$property}));
+    }
+
     private function guardAgainstNullProperty(Model $model, string $property): void
     {
         if (is_null($model->{$property})) {
