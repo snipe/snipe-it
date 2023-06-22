@@ -328,4 +328,14 @@ class AssetFactory extends Factory
             ];
         });
     }
+
+    public function requestable()
+    {
+        return $this->state(['requestable' => true]);
+    }
+
+    public function nonrequestable()
+    {
+        return $this->state(['requestable' => false]);
+    }
 }

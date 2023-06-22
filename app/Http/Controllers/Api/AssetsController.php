@@ -1030,9 +1030,10 @@ class AssetsController extends Controller
     {
         $this->authorize('viewRequestable', Asset::class);
 
-        $assets = Company::scopeCompanyables(Asset::select('assets.*'), 'company_id', 'assets')
+        $assets = Asset::select('assets.*')
             ->with('location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
-                'model.category', 'model.manufacturer', 'model.fieldset', 'supplier')->requestableAssets();
+                'model.category', 'model.manufacturer', 'model.fieldset', 'supplier')
+            ->requestableAssets();
 
         $offset = request('offset', 0);
         $limit = $request->input('limit', 50);
