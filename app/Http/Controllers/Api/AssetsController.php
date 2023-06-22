@@ -137,9 +137,6 @@ class AssetsController extends Controller
         }
 
 
-
-        $request->filled('order_number') ? $assets = $assets->where('assets.order_number', '=', e($request->get('order_number'))) : '';
-
         // Make sure the offset and limit are actually integers and do not exceed system limits
         $offset = ($request->input('offset') > $assets->count()) ? $assets->count() : abs($request->input('offset'));
         $limit = app('api_limit_value');
@@ -301,6 +298,10 @@ class AssetsController extends Controller
 
         if ($request->filled('byod')) {
             $assets->where('assets.byod', '=', $request->input('byod'));
+        }
+
+        if ($request->filled('order_number')) {
+            $assets->where('assets.order_number', '=', $request->get('order_number'));
         }
 
         // This is kinda gross, but we need to do this because the Bootstrap Tables
