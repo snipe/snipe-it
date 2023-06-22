@@ -1,0 +1,58 @@
+version: 1
+
+environment:
+  php: 8.0
+  node: 12
+
+services:
+  - mysql: 5.7
+  - dusk:
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+
+pipeline:
+  - name: Setup
+    cmd: |
+      cp -v .env.example .env
+      
+      composer install --no-interaction --prefer-dist --optimize-autoloader
+
+  - name: Generate Key
+    cmd: |
+      php artisan key:generate --force
+
+  - name: Passport Keys
+    cmd: |
+      php artisan passport:keys
+
+  - name: Run Migrations
+    cmd: |
+      # php artisan migrate --force
+
+  - name: PHPUnit Unit Tests
+    cmd: |
+      # php artisan test --testsuite Unit
+
+  - name: PHPUnit Feature Tests
+    cmd: |
+      # php artisan test --testsuite Feature
+
+#  - name: Browser Tests
+#    cmd: |
+#      cp -v .env.dusk.example .env.dusk.ci
+#      sed -i "s@APP_ENV=.*@APP_ENV=ci@g" .env.dusk.ci
+#      sed -i "s@APP_URL=.*@APP_URL=http://$BUILD_HOST:8000@g" .env.dusk.ci
+#      #sed -i "s@DB_HOST=.*@DB_HOST=mysql@g" .env.dusk.ci
+#      sed -i "s@DB_HOST=.*@DB_HOST=$DB_HOST@g" .env.dusk.ci
+#      sed -i "s@DB_USERNAME=.*@DB_USERNAME=chipperci@g" .env.dusk.ci
+#      sed -i "s@DB_DATABASE=.*@DB_DATABASE=chipperci@g" .env.dusk.ci
+#      sed -i "s@DB_PASSWORD=.*@DB_PASSWORD=secret@g" .env.dusk.ci
+#
+#      php -S [::0]:8000 -t public 2>server.log &
+#      sleep 2
+#      php artisan dusk:chrome-driver $CHROME_DRIVER
+#      php artisan dusk --env=ci

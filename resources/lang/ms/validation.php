@@ -67,6 +67,8 @@ return [
         'array'   => 'The: atribut mesti mempunyai sekurang-kurangnya: item min.',
     ],
     'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'Piliah :attribute tidak sah.',
     'numeric'              => ':attribute mesti nombor.',
     'present'              => 'Yang: bidang atribut mesti ada.',

@@ -10,7 +10,7 @@ Go To {{$snipeSettings->site_name}}
 
 {{ trans('mail.best_regards') }} <br>
 @if ($snipeSettings->show_url_in_emails=='1')
-    <p><a href="{{ url('/') }}">{{ $snipeSettings->site_name }}</a></p>
+    <p><a href="{{ config('app.url') }}">{{ $snipeSettings->site_name }}</a></p>
 @else
     <p>{{ $snipeSettings->site_name }}</p>
 @endif

@@ -22,6 +22,8 @@ return [
     'restore' => [
         'error'   		=> 'Основното средство не е вратено, обидете се повторно',
         'success' 		=> 'Основното средство е успешно вратено.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [

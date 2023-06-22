@@ -6,7 +6,7 @@ return array(
     'deleted'  					        => '모델이 삭제되었습니다.',
     'bulk_delete'               => '자산 모델 대량 삭제',
     'bulk_delete_help'               => '선택한 자산 모델의 삭제를 확인하려면 아래 체크박스를 사용하십시오. 자산에 연결된 자산 모델은 자산이 다른 모델과 연결될 때까지 삭제할 수 없습니다.',
-    'bulk_delete_warn'          => '다음을 삭제하려 합니다:model_count asset models.',
+    'bulk_delete_warn'          => 'You are about to delete one asset model.|You are about to delete :model_count asset models.',
     'restore'                   => '모델 복원',
     'requestable'               => '사용자가 이 모델을 요청하실 수 있습니다',
 	'show_mac_address'			      => '이 모델의 자산에서 MAC 어드레스 항목 보기',

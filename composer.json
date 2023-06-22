@@ -17,7 +17,7 @@
     }
   ],
   "require": {
-    "php": ">=7.4 <8.3",
+    "php": ">=7.4.3 <8.2",
     "ext-curl": "*",
     "ext-fileinfo": "*",
     "ext-json": "*",
@@ -46,6 +46,7 @@
     "laravel/helpers": "^1.4",
     "laravel/passport": "^10.1",
     "laravel/slack-notification-channel": "^2.3",
+    "laravel/socialite": "^5.6",
     "laravel/tinker": "^2.6",
     "laravel/ui": "^3.3",
     "laravelcollective/html": "^6.2",

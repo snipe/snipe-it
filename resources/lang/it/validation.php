@@ -67,6 +67,8 @@ return [
         'array'   => 'L\'attributo deve avere almeno: elementi min.',
     ],
     'starts_with'          => 'Attributo :attribute deve iniziare con uno dei seguenti: :values.',
+    'ends_with'            => 'Attributo :attribute deve finire con uno dei seguenti: :values.',
+
     'not_in'               => 'L\' :attribute selezionato è invalido.',
     'numeric'              => 'L\' :attribute deve essere un numero.',
     'present'              => 'Il campo attributo deve essere presente.',
@@ -124,13 +126,13 @@ return [
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
         // people won't know how to format. 
-        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
-        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
-        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'purchase_date.date_format'     => 'La :attribute deve essere in formato AAAA-MM-GG',
+        'last_audit_date.date_format'   =>  'La :attribute deve essere in formato AAAA-MM-GG hh:mm:ss',
+        'expiration_date.date_format'   =>  'La :attribute deve essere in formato AAAA-MM-GG',
+        'termination_date.date_format'  =>  'La :attribute deve essere in formato AAAA-MM-GG',
+        'expected_checkin.date_format'  =>  'La :attribute deve essere in formato AAAA-MM-GG',
+        'start_date.date_format'        =>  'La :attribute deve essere in formato AAAA-MM-GG',
+        'end_date.date_format'          =>  'La :attribute deve essere in formato AAAA-MM-GG',
 
     ],
 

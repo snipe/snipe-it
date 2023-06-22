@@ -71,8 +71,7 @@
                                     @foreach ($users as $user)
                                         <tr {!! ($user->isSuperUser() ? ' class="danger"':'') !!}>
                                             <td>
-                                              <input type="radio" name="merge_into_id" id="{{ $user->id }}" value="{{ $user->id }}" class="minimal">
-                                                <label for="{{ $user->id }}"> {{ $user->present()->fullName() }}</label>
+                                                <label class="form-control" for="{{ $user->id }}"><input type="radio" name="merge_into_id" id="{{ $user->id }}" value="{{ $user->id }}">  {{ $user->present()->fullName() }}</label>
                                             </td>
                                             <td>
                                                 {{ $user->email }}
@@ -111,7 +110,7 @@
                     </div> <!--/box-body-->
                     <div class="box-footer text-right">
                         <a class="btn btn-link pull-left" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-                        <button type="submit" class="btn btn-success"{{ (config('app.lock_passwords') ? ' disabled' : '') }} disabled="disabled"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('button.submit') }}</button>
+                        <button type="submit" class="btn btn-success"{{ (config('app.lock_passwords') ? ' disabled' : '') }} disabled><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('button.submit') }}</button>
                     </div><!-- /.box-footer -->
 
                     @foreach ($users as $user)
@@ -133,9 +132,15 @@
 
         $('button[type="submit"]').prop("disabled", true);
 
-        $('input').on('ifChecked', function(event) {
-            $(' button[type="submit"]').prop("disabled", false);
+        $("input[type='radio']").click(function () {
+            if($(this).is(':enabled')) {
+                $("button[type='submit']").prop("disabled", false);
+                $("button[type='submit']").removeAttr("disabled");
+            }
         });
+
+
+
 
     </script>
     @endif

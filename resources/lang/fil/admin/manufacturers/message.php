@@ -2,6 +2,7 @@
 
 return array(
 
+    'support_url_help' => 'Use <code>{LOCALE}</code> and <code>{SERIAL}</code> in your URL as variables to have those values auto-populate when viewing assets.',
     'does_not_exist' => 'Ang Tagapagsagawa ay hindi umiiral.',
     'assoc_users'	 => 'Ang tagapagsagawa ay kasalukuyang naiugnay sa hindi bumaba sa isang modelo at hindi maaaring mai-delete. Mangyaring i-update ang iyong mga modelo upang hindi na mag-reperens sa tagapagsagawang ito at paki-subokang muli. ',
 

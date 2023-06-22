@@ -12,5 +12,5 @@ return array(
     'remaining' 			             => 'Fennmaradó',
     'total' 			                 => 'Összesen',
     'update'                            => 'Alkatrész frissítés',
-    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
+    'checkin_limit'            => 'A visszavett mennyiségnek egyenlőnek, vagy kisebbnek kell lennie, mint: :assigned_qty'
 );

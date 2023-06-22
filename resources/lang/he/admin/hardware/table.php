@@ -8,6 +8,7 @@ return [
     'change' 		=> 'בפנים בחוץ',
     'checkout_date' => 'תבדוק את התאריך',
     'checkoutto' 	=> 'נבדק',
+    'components_cost' => 'עלות הרכיבים הכוללת',
     'current_value' => 'הערך הנוכחי',
     'diff' 			=> 'דיף',
     'dl_csv' 		=> 'הורד CSV',

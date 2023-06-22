@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Restore Asset',
     'pending'  					=> 'Pending',
     'undeployable'  			=> 'Undeployable',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'View Asset',
     'csv_error' => 'You have an error in your CSV file:',
     'import_text' => '
@@ -42,5 +43,6 @@ return [
     'error_messages' => 'Error messages:',
     'success_messages' => 'Success messages:',
     'alert_details' => 'Please see below for details.',
-    'custom_export' => 'Custom Export'
+    'custom_export' => 'Custom Export',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];

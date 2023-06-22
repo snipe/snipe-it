@@ -35,9 +35,9 @@ class BulkAssetsController extends Controller
     {
         // dd($request->all());
         // dd(Session::get('ids')); 
-        
-        $this->authorize('update', Asset::class);
-        
+
+        $this->authorize('view', Asset::class);
+      
         if (! $request->filled('ids')) {
             return redirect()->back()->with('error', trans('admin/hardware/message.update.no_assets_selected'));
         }
@@ -68,19 +68,33 @@ class BulkAssetsController extends Controller
         if ($request->filled('bulk_actions')) {
             switch ($request->input('bulk_actions')) {
                 case 'labels':
+                    $this->authorize('view', Asset::class);
                     return view('hardware/labels')
                         ->with('assets', Asset::find($asset_ids))
                         ->with('settings', Setting::getSettings())
                         ->with('bulkedit', true)
                         ->with('count', 0);
+
                 case 'delete':
+                    $this->authorize('delete', Asset::class);
                     $assets = Asset::with('assignedTo', 'location')->find($asset_ids);
                     $assets->each(function ($asset) {
                         $this->authorize('delete', $asset);
                     });
 
                     return view('hardware/bulk-delete')->with('assets', $assets);
+                   
+                case 'restore':
+                    $this->authorize('update', Asset::class);
+                    $assets = Asset::withTrashed()->find($asset_ids); 
+                    $assets->each(function ($asset) {
+                        $this->authorize('delete', $asset);
+                    });
+
+                    return view('hardware/bulk-restore')->with('assets', $assets);
+
                 case 'edit':
+                    $this->authorize('update', Asset::class);
                     return view('hardware/bulk')
                         ->with('assets', $asset_ids)
                         ->with('statuslabel_list', Helper::statusLabelList())
@@ -178,7 +192,7 @@ class BulkAssetsController extends Controller
                 }
 
                 if ($request->filled('purchase_cost')) {
-                    $this->update_array['purchase_cost'] =  Helper::ParseCurrency($request->input('purchase_cost'));
+                    $this->update_array['purchase_cost'] =  $request->input('purchase_cost');
                 }
 
                 if ($request->filled('company_id')) {
@@ -398,6 +412,20 @@ class BulkAssetsController extends Controller
             return redirect()->route('hardware.bulkcheckout.show')->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($errors);
         } catch (ModelNotFoundException $e) {
             return redirect()->route('hardware.bulkcheckout.show')->with('error', $e->getErrors());
+        }
+        
+    }
+    public function restore(Request $request) {
+        $this->authorize('update', Asset::class);
+       $assetIds = $request->get('ids');
+      if (empty($assetIds)) {
+          return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.restore.nothing_updated'));
+        } else {
+            foreach ($assetIds as $key => $assetId) {
+                    $asset = Asset::withTrashed()->find($assetId);
+                    $asset->restore(); 
+            } 
+        return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.restore.success'));
         }
     }
 }

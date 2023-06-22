@@ -68,6 +68,7 @@ class ManufacturersController extends Controller
         $manufacturer->user_id = Auth::id();
         $manufacturer->url = $request->input('url');
         $manufacturer->support_url = $request->input('support_url');
+        $manufacturer->warranty_lookup_url = $request->input('warranty_lookup_url');
         $manufacturer->support_phone = $request->input('support_phone');
         $manufacturer->support_email = $request->input('support_email');
         $manufacturer = $request->handleImages($manufacturer);
@@ -123,10 +124,11 @@ class ManufacturersController extends Controller
             return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.does_not_exist'));
         }
 
-        // Save the  data
+        // Save the data
         $manufacturer->name = $request->input('name');
         $manufacturer->url = $request->input('url');
         $manufacturer->support_url = $request->input('support_url');
+        $manufacturer->warranty_lookup_url = $request->input('warranty_lookup_url');
         $manufacturer->support_phone = $request->input('support_phone');
         $manufacturer->support_email = $request->input('support_email');
 

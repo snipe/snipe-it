@@ -12,5 +12,8 @@ return [
     'remember_me'                   => '記住我',
     'username_help_top'                 => '輸入您的<strong>使用者名稱</strong>透過電子郵件發送密碼重設連結',
     'username_help_bottom'          => 'Your username and email address <em>may</em> be the same, but may not be, depending on your configuration. If you cannot remember your username, contact your administrator. <br><br><strong>Usernames without an associated email address will not be emailed a password reset link.</strong> ',
-    ];
+    'google_login'                  => 'Or login with Google Workspace',
+    'google_login_failed'           => 'Google Login failed, please try again.',
+
+];
 

@@ -67,6 +67,8 @@ return [
         'array'   => 'Ní mór go mbeadh míreanna min ar a laghad ag an tréith.',
     ],
     'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'An roghnaithe: tá tréith neamhbhailí.',
     'numeric'              => 'An: Ní mór tréith a bheith ina líon.',
     'present'              => 'Ní mór an réimse tréith a bheith i láthair.',

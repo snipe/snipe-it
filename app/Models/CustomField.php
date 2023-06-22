@@ -52,6 +52,7 @@ class CustomField extends Model
         'name' => 'required|unique:custom_fields',
         'element' => 'required|in:text,listbox,textarea,checkbox,radio',
         'field_encrypted' => 'nullable|boolean',
+        'auto_add_to_fieldsets' => 'boolean',
     ];
 
     /**
@@ -69,6 +70,8 @@ class CustomField extends Model
         'show_in_email',
         'is_unique',
         'display_in_user_view',
+        'auto_add_to_fieldsets',
+
     ];
 
     /**
@@ -308,9 +311,9 @@ class CustomField extends Model
             $arr_parts = explode('|', $arr[$x]);
             if ($arr_parts[0] != '') {
                 if (array_key_exists('1', $arr_parts)) {
-                    $result[$arr_parts[0]] = $arr_parts[1];
+                    $result[$arr_parts[0]] = trim($arr_parts[1]);
                 } else {
-                    $result[$arr_parts[0]] = $arr_parts[0];
+                    $result[$arr_parts[0]] = trim($arr_parts[0]);
                 }
             }
         }

@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'مدل به روزرسانی نشده است، لطفا دوباره تلاش کنید',
-        'success' => 'مدل با موفقیت به روز رسانی شد.'
+        'success' => 'مدل با موفقیت به روز رسانی شد.',
     ),
 
     'delete' => array(
@@ -32,13 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'هیچ فیلدی تغییر نکرده بود، بنابراین چیزی به روز نشد.',
-        'success' 		=> 'مدل های به روز شده'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'هیچ مدلی انتخاب نشده بود، بنابراین هیچ چیز حذف نشد.',
-        'success' 		    => ':success_count مدل(های) حذف شد!
-',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> 'مدل(های) :success_count حذف شدند، اما :fail_count حذف نشدند زیرا هنوز دارایی های مرتبط با آنها هستند.
 '
     ),

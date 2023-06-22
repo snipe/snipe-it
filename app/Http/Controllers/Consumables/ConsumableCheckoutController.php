@@ -24,9 +24,16 @@ class ConsumableCheckoutController extends Controller
      */
     public function create($consumableId)
     {
-        if (is_null($consumable = Consumable::find($consumableId))) {
+
+        if (is_null($consumable = Consumable::with('users')->find($consumableId))) {
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
         }
+
+        // Make sure there is at least one available to checkout
+        if ($consumable->numRemaining() <= 0){
+            return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.checkout.unavailable'));
+        }
+
         $this->authorize('checkout', $consumable);
 
         return view('consumables/checkout', compact('consumable'));
@@ -44,11 +51,17 @@ class ConsumableCheckoutController extends Controller
      */
     public function store(Request $request, $consumableId)
     {
-        if (is_null($consumable = Consumable::find($consumableId))) {
+        if (is_null($consumable = Consumable::with('users')->find($consumableId))) {
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
         }
 
         $this->authorize('checkout', $consumable);
+
+        // Make sure there is at least one available to checkout
+        if ($consumable->numRemaining() <= 0) {
+            return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.checkout.unavailable'));
+        }
+
 
         $admin_user = Auth::user();
         $assigned_to = e($request->input('assigned_to'));

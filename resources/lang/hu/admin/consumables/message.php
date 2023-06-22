@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'A kellék nem lett kiadva, próbálkozz újra',
         'success' 		=> 'A kellék sikeresen kiadva.',
-        'user_does_not_exist' => 'Érvénytelen felhasználó. Kérem, próbálja újra.'
+        'user_does_not_exist' => 'Érvénytelen felhasználó. Kérem, próbálja újra.',
+         'unavailable'      => 'Nincs elegendő fogyóeszköz amit ki lehetne adni. Ellenőrizd a kiadható mennyiséget. ',
     ),
 
     'checkin' => array(

@@ -10,6 +10,7 @@ return array(
     'support_email'   		=> 'Palaikymas el. Paštu',
     'support_phone'   		=> 'Palaikymas telefonu',
     'support_url'   		=> 'Palaikymo URL',
+    'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Atnaujinti gamintoją',
     'url'   				=> 'URL',
 

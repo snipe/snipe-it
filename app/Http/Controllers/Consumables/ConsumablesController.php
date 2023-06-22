@@ -68,6 +68,7 @@ class ConsumablesController extends Controller
         $consumable = new Consumable();
         $consumable->name                   = $request->input('name');
         $consumable->category_id            = $request->input('category_id');
+        $consumable->supplier_id            = $request->input('supplier_id');
         $consumable->location_id            = $request->input('location_id');
         $consumable->company_id             = Company::getIdForCurrentUser($request->input('company_id'));
         $consumable->order_number           = $request->input('order_number');
@@ -76,7 +77,7 @@ class ConsumablesController extends Controller
         $consumable->model_number           = $request->input('model_number');
         $consumable->item_no                = $request->input('item_no');
         $consumable->purchase_date          = $request->input('purchase_date');
-        $consumable->purchase_cost          = Helper::ParseCurrency($request->input('purchase_cost'));
+        $consumable->purchase_cost          = $request->input('purchase_cost');
         $consumable->qty                    = $request->input('qty');
         $consumable->user_id                = Auth::id();
         $consumable->notes                  = $request->input('notes');
@@ -144,6 +145,7 @@ class ConsumablesController extends Controller
 
         $consumable->name                   = $request->input('name');
         $consumable->category_id            = $request->input('category_id');
+        $consumable->supplier_id            = $request->input('supplier_id');
         $consumable->location_id            = $request->input('location_id');
         $consumable->company_id             = Company::getIdForCurrentUser($request->input('company_id'));
         $consumable->order_number           = $request->input('order_number');
@@ -152,7 +154,7 @@ class ConsumablesController extends Controller
         $consumable->model_number           = $request->input('model_number');
         $consumable->item_no                = $request->input('item_no');
         $consumable->purchase_date          = $request->input('purchase_date');
-        $consumable->purchase_cost          = Helper::ParseCurrency($request->input('purchase_cost'));
+        $consumable->purchase_cost          = $request->input('purchase_cost');
         $consumable->qty                    = Helper::ParseFloat($request->input('qty'));
         $consumable->notes                  = $request->input('notes');
 

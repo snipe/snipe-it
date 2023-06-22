@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Restabilirea activului',
     'pending'  					=> 'In asteptare',
     'undeployable'  			=> 'Nelansabil',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Vizualizeaza activ',
     'csv_error' => 'Aveți o eroare în fișierul dvs. CSV:',
     'import_text' => '
@@ -42,5 +43,6 @@ return [
     'error_messages' => 'Mesaje de eroare:',
     'success_messages' => 'Mesaje de succes:',
     'alert_details' => 'Vezi mai jos pentru detalii.',
-    'custom_export' => 'Export date personalizat'
+    'custom_export' => 'Export date personalizat',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];

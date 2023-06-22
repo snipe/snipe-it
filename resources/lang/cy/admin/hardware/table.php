@@ -8,6 +8,7 @@ return [
     'change' 		=> 'Mewn/Allan',
     'checkout_date' => 'Dyddiad Allan',
     'checkoutto' 	=> 'Allan',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Current Value',
     'diff' 			=> 'Gwahaniaeth',
     'dl_csv' 		=> 'Lawrlwytho CSV',

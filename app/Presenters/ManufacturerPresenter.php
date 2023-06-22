@@ -47,7 +47,7 @@ class ManufacturerPresenter extends Presenter
                 'switchable' => true,
                 'title' => trans('admin/manufacturers/table.url'),
                 'visible' => true,
-                'formatter' => 'linkFormatter',
+                'formatter' => 'externalLinkFormatter',
             ],
             [
                 'field' => 'support_url',
@@ -56,7 +56,7 @@ class ManufacturerPresenter extends Presenter
                 'switchable' => true,
                 'title' => trans('admin/manufacturers/table.support_url'),
                 'visible' => true,
-                'formatter' => 'linkFormatter',
+                'formatter' => 'externalLinkFormatter',
             ],
 
             [
@@ -77,6 +77,15 @@ class ManufacturerPresenter extends Presenter
                 'title' => trans('admin/manufacturers/table.support_email'),
                 'visible' => true,
                 'formatter' => 'emailFormatter',
+            ],
+            [
+                'field' => 'warranty_lookup_url',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('admin/manufacturers/table.warranty_lookup_url'),
+                'visible' => false,
+                'formatter' => 'externalLinkFormatter',
             ],
 
             [

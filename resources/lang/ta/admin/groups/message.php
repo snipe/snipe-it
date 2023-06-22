@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'குழு ஏற்கனவே உள்ளது!',
-    'group_not_found'     => 'குழு [: id] இல்லை.',
+    'group_not_found'     => 'Group ID :id does not exist.',
     'group_name_required' => 'பெயர் புலம் தேவை',
 
     'success' => array(

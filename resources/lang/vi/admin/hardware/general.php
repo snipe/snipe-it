@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Phục hồi tài sản',
     'pending'  					=> 'Đang chờ',
     'undeployable'  			=> 'Không cho phép cấp phát',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Xem tài sản',
     'csv_error' => 'Có lỗi trong file CSV của bạn:',
     'import_text' => '
@@ -42,5 +43,6 @@ return [
     'error_messages' => 'Thông báo lỗi:',
     'success_messages' => 'Thông báo thành công:',
     'alert_details' => 'Xem bên dưới để biết thêm chi tiết.',
-    'custom_export' => 'Lựa chọn xuất'
+    'custom_export' => 'Lựa chọn xuất',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];

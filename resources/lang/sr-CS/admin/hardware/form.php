@@ -2,11 +2,14 @@
 
 return [
     'bulk_delete'		=> 'Potvrda grupnog brisanja imovine',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> 'Pregledajte stavke za grupno brisanje. Jednom izbrisana, ta se sredstva mogu vratiti, ali više neće biti povezana s korisnicima koji su trenutno dodeljeni.',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'Izbrisaćete: asset_count assets.',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'Grupno ažuriranje imovine',
     'bulk_update_help'	=> 'Ova forma vam omogućava da ažururate više stavki odjednom. Popunite samo polja koja želite da izmenite. Nepopunjena polja ostaće nepromenjena. ',
-    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
+    'bulk_update_warn'	=> 'Sada ćete izmeniti svojstva jedne imovine.|Sada ćete izmeniti svojstva :asset_count imovina.',
     'checkedout_to'		=> 'Checked Out To',
     'checkout_date'		=> 'Checkout Date',
     'checkin_date'		=> 'Checkin Date',
@@ -45,7 +48,7 @@ return [
     'asset_location_update_default' => 'Izmeni samo predefinisanu lokaciju',
     'asset_not_deployable' => 'Status imovine je nezaduživo. Ova imovina se ne može zadužiti.',
     'asset_deployable' => 'Status imovine je zaduživo. Ova imovina se može zadužiti.',
-    'processing_spinner' => 'Obrada...',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Opcione informacije',
     'order_details'   => 'Informacije o nabavci'
 ];

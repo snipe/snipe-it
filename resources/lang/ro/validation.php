@@ -67,6 +67,8 @@ return [
         'array'   => 'Atributul:: trebuie să aibă cel puțin: min.',
     ],
     'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => ':attribute selectat nu e valid.',
     'numeric'              => ':attribute trebuie sa fie un numar.',
     'present'              => 'Câmpul atributului trebuie să fie prezent.',

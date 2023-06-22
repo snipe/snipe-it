@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'ยังไม่ได้ปรับปรุงโมเดล กรุณาลองใหม่อีกครั้ง',
-        'success' => 'ปรับปรุงโมเดลเรียบร้อยแล้ว'
+        'success' => 'ปรับปรุงโมเดลเรียบร้อยแล้ว',
     ),
 
     'delete' => array(
@@ -32,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'ไม่มีการเปลี่ยนแปลงเขตข้อมูลดังนั้นไม่มีอะไรที่ได้รับการปรับปรุง',
-        'success' 		=> 'อัปเดตโมเดลแล้ว'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'ไม่มีการเลือกรายการใด ๆ ดังนั้นจึงไม่มีสิ่งใดถูกลบ',
-        'success' 		    => ': แบบจำลอง success_count ลบ',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ': success_count โมเดลถูกลบแล้วอย่างไรก็ตาม: ไม่สามารถลบข้อมูล fail_count เนื่องจากยังมีเนื้อหาที่เชื่อมโยงอยู่'
     ),
 

@@ -50,7 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
         
         Route::get('{locationId}/clone',
             [LocationsController::class, 'getClone']
-        )->name('clone/license');
+        )->name('clone/location');
 
         Route::get(
             '{locationId}/printassigned',
@@ -192,6 +192,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
 
     Route::get('oauth', [SettingsController::class, 'api'])->name('settings.oauth.index');
 
+    Route::get('google', [SettingsController::class, 'getGoogleLoginSettings'])->name('settings.google.index');
+    Route::post('google', [SettingsController::class, 'postGoogleLoginSettings'])->name('settings.google.save');
+
     Route::get('purge', [SettingsController::class, 'getPurge'])->name('settings.purge.index');
     Route::post('purge', [SettingsController::class, 'postPurge'])->name('settings.purge.save');
 
@@ -291,7 +294,8 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
     Route::get('accept/{id}', [Account\AcceptanceController::class, 'create'])
         ->name('account.accept.item');
 
-    Route::post('accept/{id}', [Account\AcceptanceController::class, 'store']);
+    Route::post('accept/{id}', [Account\AcceptanceController::class, 'store'])
+        ->name('account.store-acceptance');
 
     Route::get(
         'print',
@@ -452,8 +456,6 @@ Route::group(['middleware' => 'web'], function () {
         [LoginController::class, 'postTwoFactorAuth']
     );
 
-
-
     Route::post(
         'password/email',
         [ForgotPasswordController::class, 'sendResetLinkEmail']
@@ -482,7 +484,9 @@ Route::group(['middleware' => 'web'], function () {
     )->name('password.email')->middleware('throttle:forgotten_password');
 
 
-
+     // Socialite Google login
+    Route::get('google', 'App\Http\Controllers\GoogleAuthController@redirectToGoogle')->name('google.redirect');
+    Route::get('google/callback', 'App\Http\Controllers\GoogleAuthController@handleGoogleCallback')->name('google.callback');
 
 
     Route::get(

@@ -6833,7 +6833,7 @@ button.close {
 }
 /*# sourceMappingURL=bootstrap.css.map */
 /*!
- * Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  * Copyright 2023 Fonticons, Inc.
  */
@@ -21545,131 +21545,10 @@ a.ui-button:active,
 	box-shadow: 0px 0px 5px #666666;
 }
 
-/* iCheck plugin Minimal skin, blue
------------------------------------ */
-.icheckbox_minimal-blue,
-.iradio_minimal-blue {
-    display: inline-block;
-    *display: inline;
-    vertical-align: middle;
-    margin: 0;
-    padding: 0;
-    width: 18px;
-    height: 18px;
-    background: url(blue.png) no-repeat;
-    border: none;
-    cursor: pointer;
-}
-
-.icheckbox_minimal-blue {
-    background-position: 0 0;
-}
-    .icheckbox_minimal-blue.hover {
-        background-position: -20px 0;
-    }
-    .icheckbox_minimal-blue.checked {
-        background-position: -40px 0;
-    }
-    .icheckbox_minimal-blue.disabled {
-        background-position: -60px 0;
-        cursor: default;
-    }
-    .icheckbox_minimal-blue.checked.disabled {
-        background-position: -80px 0;
-    }
-
-.iradio_minimal-blue {
-    background-position: -100px 0;
-}
-    .iradio_minimal-blue.hover {
-        background-position: -120px 0;
-    }
-    .iradio_minimal-blue.checked {
-        background-position: -140px 0;
-    }
-    .iradio_minimal-blue.disabled {
-        background-position: -160px 0;
-        cursor: default;
-    }
-    .iradio_minimal-blue.checked.disabled {
-        background-position: -180px 0;
-    }
-
-/* Retina support */
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-       only screen and (-moz-min-device-pixel-ratio: 1.5),
-       only screen and (-o-min-device-pixel-ratio: 3/2),
-       only screen and (min-device-pixel-ratio: 1.5) {
-    .icheckbox_minimal-blue,
-    .iradio_minimal-blue {
-        background-image: url(blue@2x.png);
-        -webkit-background-size: 200px 20px;
-        background-size: 200px 20px;
-    }
-}
-/* iCheck plugin Minimal skin, black
------------------------------------ */
-.icheckbox_minimal,
-.iradio_minimal {
-    display: inline-block;
-    *display: inline;
-    vertical-align: middle;
-    margin: 0;
-    padding: 0;
-    width: 18px;
-    height: 18px;
-    background: url(minimal.png) no-repeat;
-    border: none;
-    cursor: pointer;
-}
-
-.icheckbox_minimal {
-    background-position: 0 0;
-}
-    .icheckbox_minimal.hover {
-        background-position: -20px 0;
-    }
-    .icheckbox_minimal.checked {
-        background-position: -40px 0;
-    }
-    .icheckbox_minimal.disabled {
-        background-position: -60px 0;
-        cursor: default;
-    }
-    .icheckbox_minimal.checked.disabled {
-        background-position: -80px 0;
-    }
-
-.iradio_minimal {
-    background-position: -100px 0;
-}
-    .iradio_minimal.hover {
-        background-position: -120px 0;
-    }
-    .iradio_minimal.checked {
-        background-position: -140px 0;
-    }
-    .iradio_minimal.disabled {
-        background-position: -160px 0;
-        cursor: default;
-    }
-    .iradio_minimal.checked.disabled {
-        background-position: -180px 0;
-    }
-
-/* HiDPI support */
-@media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
-    .icheckbox_minimal,
-    .iradio_minimal {
-        background-image: url(minimal@2x.png);
-        -webkit-background-size: 200px 20px;
-        background-size: 200px 20px;
-    }
-}
 /*!
- * Datepicker for Bootstrap v1.9.0 (https://github.com/uxsolutions/bootstrap-datepicker)
+ * Datepicker for Bootstrap v1.10.0 (https://github.com/uxsolutions/bootstrap-datepicker)
  *
- * Licensed under the Apache License v2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+ * Licensed under the Apache License v2.0 (https://www.apache.org/licenses/LICENSE-2.0)
  */
 
 .datepicker {
@@ -22506,9 +22385,11 @@ a.ui-button:active,
 /*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImVra28tbGlnaHRib3guY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGVBQ0UsOEJBQXlCLEFBQXpCLHVCQUF5QixBQUN6QixzQkFBb0IsQUFBcEIsbUJBQW9CLEFBQ3BCLHFCQUF3QixBQUF4Qix1QkFBd0IsQUFDeEIseUJBQTZCLENBQzlCLEFBQ0QseUJBQ0UsaUJBQW1CLENBQ3BCLEFBQ0QsZ0RBQ0Usa0JBQW1CLEFBQ25CLE1BQU8sQUFDUCxPQUFRLEFBQ1IsU0FBVSxBQUNWLFFBQVMsQUFDVCxVQUFZLENBQ2IsQUFDRCxzQkFDRSxXQUFZLEFBQ1osV0FBYSxDQUNkLEFBQ0QsMkJBQ0UsVUFBYSxBQUNiLGtCQUFtQixBQUNuQixNQUFPLEFBQ1AsT0FBUSxBQUNSLFdBQVksQUFDWixZQUFhLEFBQ2Isb0JBQWMsQUFBZCxZQUFjLENBQ2YsQUFDRCw2QkFDRSxXQUFRLEFBQVIsT0FBUSxBQUNSLG9CQUFjLEFBQWQsYUFBYyxBQUNkLHNCQUFvQixBQUFwQixtQkFBb0IsQUFDcEIsVUFBVyxBQUNYLHVCQUF5QixBQUN6QixXQUFZLEFBQ1osZUFBZ0IsQUFDaEIsU0FBYSxDQUNkLEFBQ0QsK0JBQ0Usb0JBQWEsQUFBYixXQUFhLENBQ2QsQUFDRCxvQ0FDRSxZQUFjLENBQ2YsQUFDRCxrQ0FDRSxjQUFnQixDQUNqQixBQUNELDZDQUNFLGdCQUFrQixDQUNuQixBQUNELG1DQUNFLG9CQUFzQixDQUN2QixBQUNELG1DQUNFLFlBQWMsQ0FDZixBQUNELHNDQUNFLGVBQWdCLEFBQ2hCLGlCQUFtQixDQUNwQixBQUNELHVCQUNFLFVBQVcsQUFDWCxvQkFBc0IsQ0FDdkIsQUFDRCw2QkFDRSxZQUFjLENBQ2YsQUFDRCw2QkFDRSxlQUFpQixDQUNsQixBQUNELHNCQUNFLGtCQUFtQixBQUNuQixNQUFPLEFBQ1AsT0FBUSxBQUNSLFNBQVUsQUFDVixRQUFTLEFBQ1QsV0FBWSxBQUNaLG9CQUFjLEFBQWQsYUFBYyxBQUVkLDBCQUF1QixBQUF2QixzQkFBdUIsQUFFdkIscUJBQXdCLEFBQXhCLHVCQUF3QixBQUV4QixzQkFBb0IsQUFBcEIsa0JBQW9CLENBQ3JCLEFBQ0QsMEJBQ0UsV0FBWSxBQUNaLFlBQWEsQUFDYixrQkFBbUIsQUFDbkIsaUJBQW1CLENBQ3BCLEFBQ0QsOEJBQ0UsV0FBWSxBQUNaLFlBQWEsQUFDYixrQkFBbUIsQUFDbkIsc0JBQXVCLEFBQ3ZCLFdBQWEsQUFDYixrQkFBbUIsQUFDbkIsTUFBTyxBQUNQLE9BQVEsQUFDUixtQ0FBNkMsQ0FDOUMsQUFDRCx5Q0FDRSxtQkFBcUIsQ0FDdEIsQUFDRCw0Q0FDRSxxQkFBdUIsQ0FDeEIsQUFVRCxhQUNFLE1BRUUsbUJBQW9CLEFBQ3BCLDBCQUE0QixDQUM3QixBQUNELElBQ0UsbUJBQW9CLEFBQ3BCLDBCQUE0QixDQUM3QixDQUNGIiwiZmlsZSI6ImVra28tbGlnaHRib3guY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmVra28tbGlnaHRib3gge1xuICBkaXNwbGF5OiBmbGV4ICFpbXBvcnRhbnQ7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBwYWRkaW5nLXJpZ2h0OiAwcHghaW1wb3J0YW50O1xufVxuLmVra28tbGlnaHRib3gtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xufVxuLmVra28tbGlnaHRib3gtY29udGFpbmVyID4gZGl2LmVra28tbGlnaHRib3gtaXRlbSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAwO1xuICBsZWZ0OiAwO1xuICBib3R0b206IDA7XG4gIHJpZ2h0OiAwO1xuICB3aWR0aDogMTAwJTtcbn1cbi5la2tvLWxpZ2h0Ym94IGlmcmFtZSB7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG59XG4uZWtrby1saWdodGJveC1uYXYtb3ZlcmxheSB7XG4gIHotaW5kZXg6IDEwMDtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IDA7XG4gIGxlZnQ6IDA7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIGRpc3BsYXk6IGZsZXg7XG59XG4uZWtrby1saWdodGJveC1uYXYtb3ZlcmxheSBhIHtcbiAgZmxleDogMTtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogb3BhY2l0eSAwLjVzO1xuICBjb2xvcjogI2ZmZjtcbiAgZm9udC1zaXplOiAzMHB4O1xuICB6LWluZGV4OiAxMDA7XG59XG4uZWtrby1saWdodGJveC1uYXYtb3ZlcmxheSBhID4gKiB7XG4gIGZsZXgtZ3JvdzogMTtcbn1cbi5la2tvLWxpZ2h0Ym94LW5hdi1vdmVybGF5IGEgPiAqOmZvY3VzIHtcbiAgb3V0bGluZTogbm9uZTtcbn1cbi5la2tvLWxpZ2h0Ym94LW5hdi1vdmVybGF5IGEgc3BhbiB7XG4gIHBhZGRpbmc6IDAgMzBweDtcbn1cbi5la2tvLWxpZ2h0Ym94LW5hdi1vdmVybGF5IGE6bGFzdC1jaGlsZCBzcGFuIHtcbiAgdGV4dC1hbGlnbjogcmlnaHQ7XG59XG4uZWtrby1saWdodGJveC1uYXYtb3ZlcmxheSBhOmhvdmVyIHtcbiAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xufVxuLmVra28tbGlnaHRib3gtbmF2LW92ZXJsYXkgYTpmb2N1cyB7XG4gIG91dGxpbmU6IG5vbmU7XG59XG4uZWtrby1saWdodGJveC1uYXYtb3ZlcmxheSBhLmRpc2FibGVkIHtcbiAgY3Vyc29yOiBkZWZhdWx0O1xuICB2aXNpYmlsaXR5OiBoaWRkZW47XG59XG4uZWtrby1saWdodGJveCBhOmhvdmVyIHtcbiAgb3BhY2l0eTogMTtcbiAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xufVxuLmVra28tbGlnaHRib3ggLm1vZGFsLWRpYWxvZyB7XG4gIGRpc3BsYXk6IG5vbmU7XG59XG4uZWtrby1saWdodGJveCAubW9kYWwtZm9vdGVyIHtcbiAgdGV4dC1hbGlnbjogbGVmdDtcbn1cbi5la2tvLWxpZ2h0Ym94LWxvYWRlciB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAwO1xuICBsZWZ0OiAwO1xuICBib3R0b206IDA7XG4gIHJpZ2h0OiAwO1xuICB3aWR0aDogMTAwJTtcbiAgZGlzcGxheTogZmxleDtcbiAgLyogZXN0YWJsaXNoIGZsZXggY29udGFpbmVyICovXG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gIC8qIG1ha2UgbWFpbiBheGlzIHZlcnRpY2FsICovXG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAvKiBjZW50ZXIgaXRlbXMgdmVydGljYWxseSwgaW4gdGhpcyBjYXNlICovXG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG59XG4uZWtrby1saWdodGJveC1sb2FkZXIgPiBkaXYge1xuICB3aWR0aDogNDBweDtcbiAgaGVpZ2h0OiA0MHB4O1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbn1cbi5la2tvLWxpZ2h0Ym94LWxvYWRlciA+IGRpdiA+IGRpdiB7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIGJvcmRlci1yYWRpdXM6IDUwJTtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2ZmZjtcbiAgb3BhY2l0eTogMC42O1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMDtcbiAgbGVmdDogMDtcbiAgYW5pbWF0aW9uOiBzay1ib3VuY2UgMnMgaW5maW5pdGUgZWFzZS1pbi1vdXQ7XG59XG4uZWtrby1saWdodGJveC1sb2FkZXIgPiBkaXYgPiBkaXY6bGFzdC1jaGlsZCB7XG4gIGFuaW1hdGlvbi1kZWxheTogLTFzO1xufVxuLm1vZGFsLWRpYWxvZyAuZWtrby1saWdodGJveC1sb2FkZXIgPiBkaXYgPiBkaXYge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjMzMzO1xufVxuQC13ZWJraXQta2V5ZnJhbWVzIHNrLWJvdW5jZSB7XG4gIDAlLFxuICAxMDAlIHtcbiAgICAtd2Via2l0LXRyYW5zZm9ybTogc2NhbGUoMCk7XG4gIH1cbiAgNTAlIHtcbiAgICAtd2Via2l0LXRyYW5zZm9ybTogc2NhbGUoMSk7XG4gIH1cbn1cbkBrZXlmcmFtZXMgc2stYm91bmNlIHtcbiAgMCUsXG4gIDEwMCUge1xuICAgIHRyYW5zZm9ybTogc2NhbGUoMCk7XG4gICAgLXdlYmtpdC10cmFuc2Zvcm06IHNjYWxlKDApO1xuICB9XG4gIDUwJSB7XG4gICAgdHJhbnNmb3JtOiBzY2FsZSgxKTtcbiAgICAtd2Via2l0LXRyYW5zZm9ybTogc2NhbGUoMSk7XG4gIH1cbn1cbiJdfQ== */
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
- * version: 1.20.2
+ * version: 1.21.4
  * https://github.com/wenzhixin/bootstrap-table/
  */
+/* stylelint-disable annotation-no-unknown, max-line-length */
+/* stylelint-enable annotation-no-unknown, max-line-length */
 .bootstrap-table .fixed-table-toolbar::after {
   content: "";
   display: block;
@@ -22614,6 +22495,11 @@ a.ui-button:active,
   background-position: right;
   background-repeat: no-repeat;
   padding-right: 30px !important;
+}
+
+.bootstrap-table .fixed-table-container .table thead th .sortable.sortable-center {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
 }
 
 .bootstrap-table .fixed-table-container .table thead th .both {
@@ -22840,7 +22726,7 @@ a.ui-button:active,
 }
 
 .bootstrap-table.bootstrap4 .pagination-lg .page-link, .bootstrap-table.bootstrap5 .pagination-lg .page-link {
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .bootstrap-table.bootstrap5 .float-left {
@@ -22873,7 +22759,7 @@ div.fixed-table-scroll-outer {
   50% {
     opacity: 1;
   }
-  to {
+  100% {
     opacity: 0;
   }
 }
@@ -23336,6 +23222,9 @@ a.accordion-header {
   width: 50px;
   padding-top: 10px;
 }
+.pull-text-right {
+  text-align: right !important;
+}
 .main-header .sidebar-toggle:before {
   content: "\f0c9";
   font-weight: 900;
@@ -23377,6 +23266,9 @@ a.accordion-header {
 }
 .btn-info.btn-outline {
   color: #5bc0de;
+}
+.btn-warning {
+  background-color: #f39c12 !important;
 }
 .btn-warning.btn-outline {
   color: #f0ad4e;
@@ -23830,10 +23722,10 @@ th.css-accessory > .th-inner::before {
 .select2-container--default .select2-selection--multiple {
   border-radius: 0px;
 }
-.bs-checkbox input {
-  zoom: 1.5;
-}
 @media screen and (max-width: 511px) {
+  .tab-content .tab-pane .alert-block {
+    margin-top: 120px;
+  }
   .sidebar-menu {
     margin-top: 160px;
   }
@@ -23853,6 +23745,146 @@ th.css-accessory > .th-inner::before {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+/** Form-stuff overrides for checkboxes and stuff **/
+label.form-control {
+  display: grid;
+  grid-template-columns: 1.8em auto;
+  gap: 0.5em;
+  border: 0px;
+  padding-left: 0px;
+  background-color: inherit;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+label.form-control--disabled {
+  color: #959495;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+/** --------------------------------------- **/
+/** Start checkbox styles to replace iCheck **/
+/** --------------------------------------- **/
+input[type="checkbox"] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  /* For iOS < 15 to remove gradient background */
+  background-color: #fff;
+  /* Not removed via appearance */
+  margin: 0;
+  font: inherit;
+  color: #959495;
+  width: 1.8em;
+  height: 1.8em;
+  border: 0.05em solid;
+  border-radius: 0em;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+  /*Windows High Contrast Mode*/
+}
+/** This sets the display of a checkbox, and what the "fill" checkmark should look like */
+input[type="checkbox"]::before {
+  /** If you want to use the non-checkbox, filled square, use this instead **/
+  box-shadow: inset 1em 1em #d3d3d3;
+  content: "";
+  width: 1em;
+  height: 1em;
+  -webkit-clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+          clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transform: scale(0);
+  transform-origin: bottom left;
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #428bca;
+  /* Windows High Contrast Mode */
+  background-color: CanvasText;
+}
+/** This sets the size of the scale up for the shape we defined above **/
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+/** This sets the scale and color of the DISABLED but CHECKED checkbox */
+input[type=checkbox]:disabled::before,
+input[type=radio]:disabled::before {
+  content: "";
+  width: 1em;
+  height: 1em;
+  transform: scale(1);
+  box-shadow: inset 1em 1em #d3d3d3;
+}
+/* This sets the scale and style of a DISABLED checkbox that is NOT checked */
+input[type=checkbox]:disabled:not(:checked)::before,
+input[type=radio]:disabled:not(:checked)::before {
+  content: "";
+  transform: scale(0);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+/** this is the color of the checkbox and content on a disabled, checked box **/
+input[type=checkbox]:disabled,
+input[type=radio]:disabled {
+  --form-control-color: #d3d3d3;
+  color: #959495;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+/** Radio styles to replace iCheck **/
+input[type="radio"] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
+  color: #959495;
+  width: 1.8em;
+  height: 1.8em;
+  border: 0.05em solid;
+  border-radius: 50%;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+}
+input[type="radio"]::before {
+  content: "";
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #428bca;
+}
+input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+/**
+* This addresses the column selector in bootstrap-table. Without these two lines, the
+* checkbox and the <span></span> with the label text that BS tables generates will
+* end up on two different lines and it looks assy.
+ */
+.dropdown-item-marker input[type=checkbox] {
+  font-size: 10px;
+}
+.bootstrap-table .fixed-table-toolbar li.dropdown-item-marker label {
+  font-weight: normal;
+  display: grid;
+  grid-template-columns: 0.1em auto;
+  gap: 1.5em;
+}
+.container.row-striped .col-md-6 {
+  overflow-wrap: anywhere;
+}
+.nav-tabs-custom > .nav-tabs > li {
+  z-index: 1;
+}
+.select2-container .select2-search--inline .select2-search__field {
+  padding-left: 15px;
+}
+/** --------------------------------------- **/
+/** End checkbox styles to replace iCheck   **/
+/** --------------------------------------- **/
 
 
 .select2-container {
@@ -24428,6 +24460,9 @@ a.accordion-header {
   width: 50px;
   padding-top: 10px;
 }
+.pull-text-right {
+  text-align: right !important;
+}
 .main-header .sidebar-toggle:before {
   content: "\f0c9";
   font-weight: 900;
@@ -24469,6 +24504,9 @@ a.accordion-header {
 }
 .btn-info.btn-outline {
   color: #5bc0de;
+}
+.btn-warning {
+  background-color: #f39c12 !important;
 }
 .btn-warning.btn-outline {
   color: #f0ad4e;
@@ -24922,10 +24960,10 @@ th.css-accessory > .th-inner::before {
 .select2-container--default .select2-selection--multiple {
   border-radius: 0px;
 }
-.bs-checkbox input {
-  zoom: 1.5;
-}
 @media screen and (max-width: 511px) {
+  .tab-content .tab-pane .alert-block {
+    margin-top: 120px;
+  }
   .sidebar-menu {
     margin-top: 160px;
   }
@@ -24945,4 +24983,144 @@ th.css-accessory > .th-inner::before {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+/** Form-stuff overrides for checkboxes and stuff **/
+label.form-control {
+  display: grid;
+  grid-template-columns: 1.8em auto;
+  gap: 0.5em;
+  border: 0px;
+  padding-left: 0px;
+  background-color: inherit;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+label.form-control--disabled {
+  color: #959495;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+/** --------------------------------------- **/
+/** Start checkbox styles to replace iCheck **/
+/** --------------------------------------- **/
+input[type="checkbox"] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  /* For iOS < 15 to remove gradient background */
+  background-color: #fff;
+  /* Not removed via appearance */
+  margin: 0;
+  font: inherit;
+  color: #959495;
+  width: 1.8em;
+  height: 1.8em;
+  border: 0.05em solid;
+  border-radius: 0em;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+  /*Windows High Contrast Mode*/
+}
+/** This sets the display of a checkbox, and what the "fill" checkmark should look like */
+input[type="checkbox"]::before {
+  /** If you want to use the non-checkbox, filled square, use this instead **/
+  box-shadow: inset 1em 1em #d3d3d3;
+  content: "";
+  width: 1em;
+  height: 1em;
+  -webkit-clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+          clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transform: scale(0);
+  transform-origin: bottom left;
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #428bca;
+  /* Windows High Contrast Mode */
+  background-color: CanvasText;
+}
+/** This sets the size of the scale up for the shape we defined above **/
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+/** This sets the scale and color of the DISABLED but CHECKED checkbox */
+input[type=checkbox]:disabled::before,
+input[type=radio]:disabled::before {
+  content: "";
+  width: 1em;
+  height: 1em;
+  transform: scale(1);
+  box-shadow: inset 1em 1em #d3d3d3;
+}
+/* This sets the scale and style of a DISABLED checkbox that is NOT checked */
+input[type=checkbox]:disabled:not(:checked)::before,
+input[type=radio]:disabled:not(:checked)::before {
+  content: "";
+  transform: scale(0);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+/** this is the color of the checkbox and content on a disabled, checked box **/
+input[type=checkbox]:disabled,
+input[type=radio]:disabled {
+  --form-control-color: #d3d3d3;
+  color: #959495;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+/** Radio styles to replace iCheck **/
+input[type="radio"] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
+  color: #959495;
+  width: 1.8em;
+  height: 1.8em;
+  border: 0.05em solid;
+  border-radius: 50%;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+}
+input[type="radio"]::before {
+  content: "";
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #428bca;
+}
+input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+/**
+* This addresses the column selector in bootstrap-table. Without these two lines, the
+* checkbox and the <span></span> with the label text that BS tables generates will
+* end up on two different lines and it looks assy.
+ */
+.dropdown-item-marker input[type=checkbox] {
+  font-size: 10px;
+}
+.bootstrap-table .fixed-table-toolbar li.dropdown-item-marker label {
+  font-weight: normal;
+  display: grid;
+  grid-template-columns: 0.1em auto;
+  gap: 1.5em;
+}
+.container.row-striped .col-md-6 {
+  overflow-wrap: anywhere;
+}
+.nav-tabs-custom > .nav-tabs > li {
+  z-index: 1;
+}
+.select2-container .select2-search--inline .select2-search__field {
+  padding-left: 15px;
+}
+/** --------------------------------------- **/
+/** End checkbox styles to replace iCheck   **/
+/** --------------------------------------- **/
 

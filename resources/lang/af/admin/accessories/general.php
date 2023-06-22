@@ -16,5 +16,7 @@ return array(
     'update'  							=> 'Opdatering bywerk',
     'use_default_eula'					=> 'Gebruik eerder die <a href="#" data-toggle="modal" data-target="#eulaModal">primary standaard EULA</a>.',
     'use_default_eula_disabled'			=> '<del>Gebruik die primêre standaardverlof in plaas daarvan.</del> Geen primêre standaard EULA is ingestel nie. Voeg asseblief een by Instellings.',
+    'clone'                             => 'Clone Accessory',
+    'delete_disabled'                   => 'This accessory cannot be deleted yet because some items are still checked out.',
 
 );

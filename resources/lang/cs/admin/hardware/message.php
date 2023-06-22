@@ -23,6 +23,8 @@ return [
     'restore' => [
         'error'   		=> 'Majetek se nepodařilo obnovit, zkuste to prosím později',
         'success' 		=> 'Majetek byl v pořádku obnoven.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
@@ -49,8 +51,8 @@ return [
         'success'               => 'Váš soubor byl importován',
         'file_delete_success'   => 'Váš soubor byl úspěšně odstraněn',
         'file_delete_error'      => 'Soubor nelze odstranit',
-        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
-        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'header_row_has_malformed_characters' => 'Jeden nebo více sloupců obsahuje v záhlaví poškozené UTF-8 znaky',
+        'content_row_has_malformed_characters' => 'Jedna nebo více hodnot v prvním řádku obsahu obsahuje poškozené UTF-8 znaky',
     ],
 
 

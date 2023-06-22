@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Mehr Informationen',
 
-    'audit_help' => 'Mit dem aktivieren dieser Option wird der Asset-Datensatz an diesen neuen Ort angepasst. Wenn diese Option nicht aktiviert wird, wird nur der Ort im Audit-Log angezeigt.<br><br>Falls das Asset ausgecheckt ist, ändert sich nicht die Position der Person, des Assets oder der Position, an der es ausgecheckt wird.',
+    'audit_help' => 'Mit dem aktivieren dieser Option wird der Asset-Datensatz an diesen neuen Ort angepasst. Wenn diese Option nicht aktiviert wird, wird der Ort nur im Audit-Log angezeigt.<br><br>Falls das Asset ausgecheckt ist, ändert sich der Ort der Person, des Assets oder des Orts, an den es ausgecheckt ist, nicht.',
 
     'assets' => 'Assets sind Elemente, die mit Seriennummer oder einem Asset-Tag versehen sind. Sie sind meist höhere Werte, bei denen die Identifizierung eines bestimmten Gegenstands von Bedeutung ist.',
 

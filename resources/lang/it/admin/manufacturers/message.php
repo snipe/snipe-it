@@ -2,6 +2,7 @@
 
 return array(
 
+    'support_url_help' => 'Usa <code>{LOCALE}</code> e <code>{SERIAL}</code> nell\'URL come variabili per avere i valori riempiti automaticamente durante la visualizzazione dei beni.',
     'does_not_exist' => 'Il produttore non esiste.',
     'assoc_users'	 => 'Questo produttore è attualmente associato con almeno un modello e non può essere eliminato. Si prega di aggiornare i modelli di riferimento e riprovare. ',
 

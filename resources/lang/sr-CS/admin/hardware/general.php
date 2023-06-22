@@ -14,8 +14,8 @@ return [
     'deleted'  					=> 'Imovina je obrisana.',
     'edit'  					=> 'Uređivanje imovine',
     'model_deleted'  			=> 'Ovaj Model osnovnog sredstva je izbrisan. Morate da vratite model da bi ste mogli da vratite sredstvo.',
-    'model_invalid'             => 'The Model of this Asset is invalid.',
-    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
+    'model_invalid'             => 'Model ove imovine je neispravan.',
+    'model_invalid_fix'         => 'Ova imovinu bi trebalo izmeniti da bi se ovo ispravilo pre pokušaja zaduživanja ili razduživanja.',
     'requestable'               => 'Može da se potražuje',
     'requested'				    => 'Zatraženo',
     'not_requestable'           => 'Ne može da se potražuje',
@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Restore Asset',
     'pending'  					=> 'U čekanju',
     'undeployable'  			=> 'Ne može da se razmesti',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Prikaz imovine',
     'csv_error' => 'Postoji greška u tvojoj CSV datoteci:',
     'import_text' => '
@@ -35,5 +36,6 @@ Otpremite CSV koji sadrži istoriju osnovnog sredstva. Sredstva i korisnici MORA
     'error_messages' => 'Poruka o grešci:',
     'success_messages' => 'Poruke o uspehu:',
     'alert_details' => 'Za detalje pogledajte ispod.',
-    'custom_export' => 'Uobičajen izvoz'
+    'custom_export' => 'Uobičajen izvoz',
+    'mfg_warranty_lookup' => 'Pretraga statusa :manufacturer garancije',
 ];

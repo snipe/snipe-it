@@ -16,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Ni diweddarwyd y model, ceisiwch eto o.g.y.dd',
-        'success' => 'Model wedi diweddaru\'n llwyddiannus.'
+        'success' => 'Model wedi diweddaru\'n llwyddiannus.',
     ),
 
     'delete' => array(
@@ -32,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Dim newid mewn manylder, felly dim byd i diweddaru.',
-        'success' 		=> 'Modelau wedi diweddaru.'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Dim modelau wedi dewis, felly dim byd i\'w ddileu.',
-        'success' 		    => ':success_count model(au) wedi dileu!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ':success_count model(au) wedi\'i dileu, :fail_count heb eu ddileu gan bod asedau wedi perthnasu iddo.'
     ),
 

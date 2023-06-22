@@ -67,6 +67,8 @@ return [
         'array'   => 'O :attribute deve ter pelo menos :min items.',
     ],
     'starts_with'          => 'O atributo deve começar com um dos seguintes valores.',
+    'ends_with'            => 'O :attribute deve terminar com um dos seguintes: :values.',
+
     'not_in'               => 'O :attribute selecionado é inválido.',
     'numeric'              => 'O :attribute deve ser um número.',
     'present'              => 'O campo:attribute deve estar presente.',
@@ -124,13 +126,13 @@ return [
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
         // people won't know how to format. 
-        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
-        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
-        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'purchase_date.date_format'     => 'O :attribute deve ser uma data válida em formato DD-MM-YYYY',
+        'last_audit_date.date_format'   =>  'O :attribute deve ser uma data válida em formato DD-MM-YYYY hh:mm:ss',
+        'expiration_date.date_format'   =>  'O :attribute deve ser uma data válida em formato DD-MM-YYYY',
+        'termination_date.date_format'  =>  'O :attribute deve ser uma data válida em formato DD-MM-YYYY',
+        'expected_checkin.date_format'  =>  'O :attribute deve ser uma data válida em formato DD-MM-YYYY',
+        'start_date.date_format'        =>  'O :attribute deve ser uma data válida em formato DD-MM-YYYY',
+        'end_date.date_format'          =>  'O :attribute deve ser uma data válida em formato DD-MM-YYYY',
 
     ],
 

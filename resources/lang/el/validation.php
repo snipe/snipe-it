@@ -67,6 +67,8 @@ return [
         'array'   => 'Το χαρακτηριστικό: πρέπει να έχει τουλάχιστον: λεπτά στοιχεία.',
     ],
     'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'Το επιλεγμένο: χαρακτηριστικό δεν είναι έγκυρο.',
     'numeric'              => 'Το χαρακτηριστικό πρέπει να είναι ένας αριθμός.',
     'present'              => 'Πρέπει να υπάρχει το πεδίο ιδιοτήτων: attribute.',

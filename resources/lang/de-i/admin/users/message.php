@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Du hast diesen Gegenstand erfolgreich abgelehnt.',
     'bulk_manager_warn'	        => 'Deine Benutzer wurden erfolgreich aktualisiert, aber Dein Manager-Eintrag wurde nicht gespeichert, da der Manager, den Du ausgewählt hast, auch in der zu bearbeitenden Liste war, und Benutzer dürfen nicht ihr eigener Manager sein. Bitte wähle Deine Benutzer erneut aus, ohne den Manager.',
     'user_exists'               => 'Benutzer existiert bereits!',
-    'user_not_found'            => 'Benutzer [:id] existiert nicht.',
+    'user_not_found'            => 'Benutzer existiert nicht.',
     'user_login_required'       => 'Das Loginfeld ist erforderlich',
     'user_password_required'    => 'Das Passswortfeld ist erforderlich.',
     'insufficient_permissions'  => 'Unzureichende Berechtigungen.',

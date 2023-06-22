@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Ha declinado con éxito este equipo.',
     'bulk_manager_warn'	        => 'Sus usuarios han sido correctamente actualizados, de todos modos la entrada de administrador no fue guardada porque el administrador seleccionado también estaba en la lista de usuarios a ser editada, y los usuarios no pueden ser sus propior administradores. Vuelva a seleccionar los usuarios, excluyendo al administrador.',
     'user_exists'               => 'El Usuario ya existe!',
-    'user_not_found'            => 'Usuario [:id] no existe.',
+    'user_not_found'            => 'El usuario no existe.',
     'user_login_required'       => 'El campo Usuario es obligatorio',
     'user_password_required'    => 'El password es obligatorio.',
     'insufficient_permissions'  => 'No tiene permiso.',
@@ -15,7 +15,7 @@ return array(
     'password_resets_sent'      => 'Los usuarios seleccionados que están activados y tienen una dirección de correo electrónico válida han sido enviados un enlace de restablecimiento de contraseña.',
     'password_reset_sent'       => '¡Se ha enviado un enlace de restablecimiento de contraseña a :email!',
     'user_has_no_email'         => 'Este usuario no tiene una dirección de correo electrónico en su perfil.',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'user_has_no_assets_assigned'   => 'Este usuario no tiene ningún activo asignado',
 
 
     'success' => array(
@@ -61,7 +61,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => 'Este usuario no tiene ningún correo electrónico.',
+        'success' => 'El usuario ha sido notificado sobre su inventario actual.'
     )
 );

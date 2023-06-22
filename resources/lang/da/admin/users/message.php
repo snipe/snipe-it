@@ -6,16 +6,16 @@ return array(
     'declined'                  => 'Du har afvist dette aktiv.',
     'bulk_manager_warn'	        => 'Dine brugere er blevet opdateret, men din administratorindgang blev ikke gemt, fordi den valgte leder også var på brugerlisten, der skulle redigeres, og brugerne er måske ikke deres egen administrator. Vælg venligst dine brugere igen, undtagen manager.',
     'user_exists'               => 'Bruger eksistere allerede!',
-    'user_not_found'            => 'Bruger [: id] findes ikke.',
+    'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Login-feltet er påkrævet',
     'user_password_required'    => 'Adgangskoden er påkrævet.',
     'insufficient_permissions'  => 'Utilstrækkelige tilladelser.',
     'user_deleted_warning'      => 'Denne bruger er blevet slettet. Du skal gendanne denne bruger for at redigere dem eller tildele dem nye aktiver.',
     'ldap_not_configured'        => 'LDAP-integration er ikke konfigureret til denne installation.',
     'password_resets_sent'      => 'De valgte brugere, der er aktiveret og har en gyldig e-mail-adresser, har fået tilsendt et link til nulstilling af adgangskode.',
-    'password_reset_sent'       => 'A password reset link has been sent to :email!',
-    'user_has_no_email'         => 'This user does not have an email address in their profile.',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'password_reset_sent'       => 'Et link til nulstilling af adgangskode er blevet sendt til :email!',
+    'user_has_no_email'         => 'Denne bruger har ikke en email-adresse i deres profil.',
+    'user_has_no_assets_assigned'   => 'Denne bruger er ikke tildelt nogen aktiver',
 
 
     'success' => array(
@@ -61,7 +61,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => 'Denne bruger har ikke indsat en email.',
+        'success' => 'Brugeren er blevet underrettet om deres aktuelle beholdning.'
     )
 );

@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Demirbaşı Geri Getir',
     'pending'  					=> 'Bekliyor',
     'undeployable'  			=> 'Dağtılamaz',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Demirbaşı Görüntüle',
     'csv_error' => 'CSV dosyanızda bir hata var:',
     'import_text' => '
@@ -41,5 +42,6 @@ return [
     'error_messages' => 'Hata mesajı:',
     'success_messages' => 'Başarı mesajı:',
     'alert_details' => 'Detaylar için aşağıyı okuyun.',
-    'custom_export' => 'Özel Dışarı Aktar'
+    'custom_export' => 'Özel Dışarı Aktar',
+    'mfg_warranty_lookup' => ':Üretici garantisinin durumuna bakma',
 ];

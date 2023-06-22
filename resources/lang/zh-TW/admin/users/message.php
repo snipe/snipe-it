@@ -6,7 +6,7 @@ return array(
     'declined'                  => '您已拒絕這項資產。',
     'bulk_manager_warn'	        => '您的使用者已成功更新，但主管條目未保存，因為您選擇的主管也在要編輯的使用者列表中，使用者不能是自己的主管。 請再次選擇您的使用者並排除主管。',
     'user_exists'               => '使用者已存在！',
-    'user_not_found'            => '使用者 [:id] 不存在',
+    'user_not_found'            => 'User does not exist.',
     'user_login_required'       => '登入欄位是必需的',
     'user_password_required'    => '密碼欄位是必需的',
     'insufficient_permissions'  => '權限不足',

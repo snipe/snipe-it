@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'لم يتم إخراج الملحق، الرجاء المحاولة مرة أخرى',
         'success' 		=> 'تم إخراج الملحق بنجاح.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'هذا المستخدم خاطئ، الرجاء المحاولة مرة أخرى.'
     ),
 

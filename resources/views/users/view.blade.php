@@ -122,7 +122,8 @@
         @endcan
 
         @can('update', \App\Models\User::class)
-          <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal">
+          <li class="pull-right">
+              <a href="#" data-toggle="modal" data-target="#uploadFileModal">
               <span class="hidden-xs"><i class="fas fa-paperclip" aria-hidden="true"></i></span>
               <span class="hidden-lg hidden-md hidden-xl"><i class="fas fa-paperclip fa-2x" aria-hidden="true"></i></span>
               <span class="hidden-xs hidden-sm">{{ trans('button.upload') }}</span>
@@ -519,23 +520,23 @@
                     </div>
                     @endif
 
-                    <!-- login enabled -->
+                    <!-- vip -->
                     <div class="row">
                       <div class="col-md-3">
                         {{ trans('admin/users/general.vip_label') }}
                       </div>
                       <div class="col-md-9">
-                        {!! ($user->vip=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                        {!! ($user->vip=='1') ? '<i class="fas fa-check fa-fw fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
                       </div>
                     </div> 
                     
-                    <!-- login enabled -->
+                    <!-- remote -->
                      <div class="row">
                       <div class="col-md-3">
                         {{ trans('admin/users/general.remote') }}
                       </div>
                       <div class="col-md-9">
-                        {!! ($user->remote=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                        {!! ($user->remote=='1') ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
                       </div>
                     </div>
 
@@ -545,17 +546,28 @@
                         {{ trans('general.login_enabled') }}
                       </div>
                       <div class="col-md-9">
-                        {!! ($user->activated=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                        {!! ($user->activated=='1') ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
                       </div>
                     </div>
 
-                    <!-- LDAP -->
+                   <!-- auto assign license -->
+                   <div class="row">
+                       <div class="col-md-3">
+                           {{ trans('general.autoassign_licenses') }}
+                       </div>
+                       <div class="col-md-9">
+                           {!! ($user->autoassign_licenses=='1') ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                       </div>
+                   </div>
+
+
+                   <!-- LDAP -->
                     <div class="row">
                       <div class="col-md-3">
                           LDAP
                       </div>
                       <div class="col-md-9">
-                        {!! ($user->ldap_import=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                        {!! ($user->ldap_import=='1') ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
 
                       </div>
                     </div>
@@ -569,7 +581,7 @@
                             </div>
                             <div class="col-md-9">
                           
-                              {!! ($user->two_factor_active()) ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                              {!! ($user->two_factor_active()) ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
                           
                             </div>
                           </div>
@@ -580,7 +592,7 @@
                               {{ trans('admin/users/general.two_factor_enrolled') }}
                             </div>
                             <div class="col-md-9" id="two_factor_reset_toggle">
-                              {!! ($user->two_factor_active_and_enrolled()) ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                              {!! ($user->two_factor_active_and_enrolled()) ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
 
                             </div>
                           </div>
@@ -590,11 +602,11 @@
                             <!-- 2FA reset -->
                             <div class="row">
                               <div class="col-md-3">
-                          
+
                               </div>
-                              <div class="col-md-9" style="margin-top: 10px;">
+                              <div class="col-md-9">
                                 
-                                <a class="btn btn-default btn-sm pull-left" id="two_factor_reset" style="margin-right: 10px;"> 
+                                <a class="btn btn-default btn-sm" id="two_factor_reset" style="margin-right: 10px; margin-top: 10px;">
                                   {{ trans('admin/settings/general.two_factor_reset') }}
                                 </a>
                                 <span id="two_factor_reseticon">
@@ -1031,9 +1043,9 @@ $(function () {
       dataType: 'json',
 
       success: function (data) {
-        $("#two_factor_reset_toggle").html('').html('<i class="fas fa-times text-danger" aria-hidden="true"></i> {{ trans('general.no') }}');
+        $("#two_factor_reset_toggle").html('').html('<span class="text-danger"><i class="fas fa-times" aria-hidden="true"></i> {{ trans('general.no') }}</span>');
         $("#two_factor_reseticon").html('');
-        $("#two_factor_resetstatus").html('<i class="fas fa-check text-success"></i>' + data.message);
+        $("#two_factor_resetstatus").html('<span class="text-success"><i class="fas fa-check"></i> ' + data.message + '</span>');
 
       },
 

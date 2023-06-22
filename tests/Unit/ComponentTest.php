@@ -5,10 +5,13 @@ use App\Models\Category;
 use App\Models\Company;
 use App\Models\Component;
 use App\Models\Location;
+use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class ComponentTest extends TestCase
 {
+    use InteractsWithSettings;
+
     public function testAComponentBelongsToACompany()
     {
         $component = Component::factory()

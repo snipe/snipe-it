@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Az eszközt sikeresen csökkentetted.',
     'bulk_manager_warn'	        => 'A felhasználók sikeresen frissültek, azonban a kezelői bejegyzést nem mentette el, mert a kiválasztott kezelő a szerkesztőben is szerepel a felhasználók listájában, és a felhasználók nem lehetnek saját kezelőik. Kérjük, ismét válassza ki a felhasználókat, kivéve a kezelőt.',
     'user_exists'               => 'Felhasználó már létezik!',
-    'user_not_found'            => 'A felhasználó [: id] nem létezik.',
+    'user_not_found'            => 'Felhasználó nem létezik.',
     'user_login_required'       => 'A bejelentkezési mező kötelező',
     'user_password_required'    => 'A jelszó szükséges.',
     'insufficient_permissions'  => 'Nem megfelelő engedélyek.',

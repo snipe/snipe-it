@@ -6,7 +6,7 @@ return array(
     'declined'                  => '你已拒绝此项资产。',
     'bulk_manager_warn'	        => '您的用户已成功更新，但是您的经理条目未保存，因为您选择的经理也在要编辑的用户列表中，用户可能不是自己的经理。请再次选择您的用户，不包括经理。',
     'user_exists'               => '用户已经存在!',
-    'user_not_found'            => '用户[:id] 不存在',
+    'user_not_found'            => '用户不存在。',
     'user_login_required'       => '登陆字段是必须的',
     'user_password_required'    => '密码为必填项',
     'insufficient_permissions'  => '权限不足',
