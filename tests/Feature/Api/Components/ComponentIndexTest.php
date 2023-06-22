@@ -6,13 +6,11 @@ use App\Models\Company;
 use App\Models\Component;
 use App\Models\User;
 use Laravel\Passport\Passport;
-use Tests\Support\InteractsWithResponses;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class ComponentIndexTest extends TestCase
 {
-    use InteractsWithResponses;
     use InteractsWithSettings;
 
     public function testComponentIndexAdheresToCompanyScoping()
@@ -29,35 +27,35 @@ class ComponentIndexTest extends TestCase
         $this->settings->disableMultipleFullCompanySupport();
 
         Passport::actingAs($superUser);
-        $response = $this->getJson(route('api.components.index'));
-        $this->assertResponseContainsInRows($response, $componentA);
-        $this->assertResponseContainsInRows($response, $componentB);
+        $this->getJson(route('api.components.index'))
+            ->assertResponseContainsInRows($componentA)
+            ->assertResponseContainsInRows($componentB);
 
         Passport::actingAs($userInCompanyA);
-        $response = $this->getJson(route('api.components.index'));
-        $this->assertResponseContainsInRows($response, $componentA);
-        $this->assertResponseContainsInRows($response, $componentB);
+        $this->getJson(route('api.components.index'))
+            ->assertResponseContainsInRows($componentA)
+            ->assertResponseContainsInRows($componentB);
 
         Passport::actingAs($userInCompanyB);
-        $response = $this->getJson(route('api.components.index'));
-        $this->assertResponseContainsInRows($response, $componentA);
-        $this->assertResponseContainsInRows($response, $componentB);
+        $this->getJson(route('api.components.index'))
+            ->assertResponseContainsInRows($componentA)
+            ->assertResponseContainsInRows($componentB);
 
         $this->settings->enableMultipleFullCompanySupport();
 
         Passport::actingAs($superUser);
-        $response = $this->getJson(route('api.components.index'));
-        $this->assertResponseContainsInRows($response, $componentA);
-        $this->assertResponseContainsInRows($response, $componentB);
+        $this->getJson(route('api.components.index'))
+            ->assertResponseContainsInRows($componentA)
+            ->assertResponseContainsInRows($componentB);
 
         Passport::actingAs($userInCompanyA);
-        $response = $this->getJson(route('api.components.index'));
-        $this->assertResponseContainsInRows($response, $componentA);
-        $this->assertResponseDoesNotContainInRows($response, $componentB);
+        $this->getJson(route('api.components.index'))
+            ->assertResponseContainsInRows($componentA)
+            ->assertResponseDoesNotContainInRows($componentB);
 
         Passport::actingAs($userInCompanyB);
-        $response = $this->getJson(route('api.components.index'));
-        $this->assertResponseDoesNotContainInRows($response, $componentA);
-        $this->assertResponseContainsInRows($response, $componentB);
+        $this->getJson(route('api.components.index'))
+            ->assertResponseDoesNotContainInRows($componentA)
+            ->assertResponseContainsInRows($componentB);
     }
 }

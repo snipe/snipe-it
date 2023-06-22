@@ -6,13 +6,11 @@ use App\Models\Company;
 use App\Models\Department;
 use App\Models\User;
 use Laravel\Passport\Passport;
-use Tests\Support\InteractsWithResponses;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class DepartmentsIndexTest extends TestCase
 {
-    use InteractsWithResponses;
     use InteractsWithSettings;
 
     public function testDepartmentsIndexAdheresToCompanyScoping()
@@ -33,35 +31,35 @@ class DepartmentsIndexTest extends TestCase
         $this->settings->disableMultipleFullCompanySupport();
 
         Passport::actingAs($superUser);
-        $response = $this->getJson(route('api.departments.index'));
-        $this->assertResponseContainsInRows($response, $departmentA);
-        $this->assertResponseContainsInRows($response, $departmentB);
+        $this->getJson(route('api.departments.index'))
+            ->assertResponseContainsInRows($departmentA)
+            ->assertResponseContainsInRows($departmentB);
 
         Passport::actingAs($userInCompanyA);
-        $response = $this->getJson(route('api.departments.index'));
-        $this->assertResponseContainsInRows($response, $departmentA);
-        $this->assertResponseContainsInRows($response, $departmentB);
+        $this->getJson(route('api.departments.index'))
+            ->assertResponseContainsInRows($departmentA)
+            ->assertResponseContainsInRows($departmentB);
 
         Passport::actingAs($userInCompanyB);
-        $response = $this->getJson(route('api.departments.index'));
-        $this->assertResponseContainsInRows($response, $departmentA);
-        $this->assertResponseContainsInRows($response, $departmentB);
+        $this->getJson(route('api.departments.index'))
+            ->assertResponseContainsInRows($departmentA)
+            ->assertResponseContainsInRows($departmentB);
 
         $this->settings->enableMultipleFullCompanySupport();
 
         Passport::actingAs($superUser);
-        $response = $this->getJson(route('api.departments.index'));
-        $this->assertResponseContainsInRows($response, $departmentA);
-        $this->assertResponseContainsInRows($response, $departmentB);
+        $this->getJson(route('api.departments.index'))
+            ->assertResponseContainsInRows($departmentA)
+            ->assertResponseContainsInRows($departmentB);
 
         Passport::actingAs($userInCompanyA);
-        $response = $this->getJson(route('api.departments.index'));
-        $this->assertResponseContainsInRows($response, $departmentA);
-        $this->assertResponseDoesNotContainInRows($response, $departmentB);
+        $this->getJson(route('api.departments.index'))
+            ->assertResponseContainsInRows($departmentA)
+            ->assertResponseDoesNotContainInRows($departmentB);
 
         Passport::actingAs($userInCompanyB);
-        $response = $this->getJson(route('api.departments.index'));
-        $this->assertResponseDoesNotContainInRows($response, $departmentA);
-        $this->assertResponseContainsInRows($response, $departmentB);
+        $this->getJson(route('api.departments.index'))
+            ->assertResponseDoesNotContainInRows($departmentA)
+            ->assertResponseContainsInRows($departmentB);
     }
 }

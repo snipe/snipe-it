@@ -5,13 +5,11 @@ namespace Tests\Feature\Api\Users;
 use App\Models\Company;
 use App\Models\User;
 use Laravel\Passport\Passport;
-use Tests\Support\InteractsWithResponses;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class UsersIndexTest extends TestCase
 {
-    use InteractsWithResponses;
     use InteractsWithSettings;
 
     public function testUsersIndexAdheresToCompanyScoping()
@@ -32,35 +30,35 @@ class UsersIndexTest extends TestCase
         $this->settings->disableMultipleFullCompanySupport();
 
         Passport::actingAs($superUser);
-        $response = $this->getJson(route('api.users.index'));
-        $this->assertResponseContainsInRows($response, $userA, 'first_name');
-        $this->assertResponseContainsInRows($response, $userB, 'first_name');
+        $this->getJson(route('api.users.index'))
+        ->assertResponseContainsInRows($userA, 'first_name')
+        ->assertResponseContainsInRows($userB, 'first_name');
 
         Passport::actingAs($userInCompanyA);
-        $response = $this->getJson(route('api.users.index'));
-        $this->assertResponseContainsInRows($response, $userA, 'first_name');
-        $this->assertResponseContainsInRows($response, $userB, 'first_name');
+        $this->getJson(route('api.users.index'))
+        ->assertResponseContainsInRows($userA, 'first_name')
+        ->assertResponseContainsInRows($userB, 'first_name');
 
         Passport::actingAs($userInCompanyB);
-        $response = $this->getJson(route('api.users.index'));
-        $this->assertResponseContainsInRows($response, $userA, 'first_name');
-        $this->assertResponseContainsInRows($response, $userB, 'first_name');
+        $this->getJson(route('api.users.index'))
+        ->assertResponseContainsInRows($userA, 'first_name')
+        ->assertResponseContainsInRows($userB, 'first_name');
 
         $this->settings->enableMultipleFullCompanySupport();
 
         Passport::actingAs($superUser);
-        $response = $this->getJson(route('api.users.index'));
-        $this->assertResponseContainsInRows($response, $userA, 'first_name');
-        $this->assertResponseContainsInRows($response, $userB, 'first_name');
+        $this->getJson(route('api.users.index'))
+        ->assertResponseContainsInRows($userA, 'first_name')
+        ->assertResponseContainsInRows($userB, 'first_name');
 
         Passport::actingAs($userInCompanyA);
-        $response = $this->getJson(route('api.users.index'));
-        $this->assertResponseContainsInRows($response, $userA, 'first_name');
-        $this->assertResponseDoesNotContainInRows($response, $userB, 'first_name');
+        $this->getJson(route('api.users.index'))
+        ->assertResponseContainsInRows($userA, 'first_name')
+        ->assertResponseDoesNotContainInRows($userB, 'first_name');
 
         Passport::actingAs($userInCompanyB);
-        $response = $this->getJson(route('api.users.index'));
-        $this->assertResponseDoesNotContainInRows($response, $userA, 'first_name');
-        $this->assertResponseContainsInRows($response, $userB, 'first_name');
+        $this->getJson(route('api.users.index'))
+        ->assertResponseDoesNotContainInRows($userA, 'first_name')
+        ->assertResponseContainsInRows($userB, 'first_name');
     }
 }

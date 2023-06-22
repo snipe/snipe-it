@@ -6,13 +6,11 @@ use App\Models\Asset;
 use App\Models\Company;
 use App\Models\User;
 use Laravel\Passport\Passport;
-use Tests\Support\InteractsWithResponses;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class RequestableAssetsTest extends TestCase
 {
-    use InteractsWithResponses;
     use InteractsWithSettings;
 
     public function testViewingRequestableAssetsRequiresCorrectPermission()
@@ -27,10 +25,10 @@ class RequestableAssetsTest extends TestCase
         $nonRequestableAsset = Asset::factory()->nonrequestable()->create(['asset_tag' => 'non-requestable']);
 
         Passport::actingAs(User::factory()->viewRequestableAssets()->create());
-        $response = $this->getJson(route('api.assets.requestable'))->assertOk();
-
-        $this->assertResponseContainsInRows($response, $requestableAsset, 'asset_tag');
-        $this->assertResponseDoesNotContainInRows($response, $nonRequestableAsset, 'asset_tag');
+        $this->getJson(route('api.assets.requestable'))
+            ->assertOk()
+            ->assertResponseContainsInRows($requestableAsset, 'asset_tag')
+            ->assertResponseDoesNotContainInRows($nonRequestableAsset, 'asset_tag');
     }
 
     public function testRequestableAssetsAreScopedToCompanyWhenMultipleCompanySupportEnabled()
@@ -47,35 +45,35 @@ class RequestableAssetsTest extends TestCase
         $this->settings->disableMultipleFullCompanySupport();
 
         Passport::actingAs($superUser);
-        $response = $this->getJson(route('api.assets.requestable'));
-        $this->assertResponseContainsInRows($response, $assetA, 'asset_tag');
-        $this->assertResponseContainsInRows($response, $assetB, 'asset_tag');
+        $this->getJson(route('api.assets.requestable'))
+            ->assertResponseContainsInRows($assetA, 'asset_tag')
+            ->assertResponseContainsInRows($assetB, 'asset_tag');
 
         Passport::actingAs($userInCompanyA);
-        $response = $this->getJson(route('api.assets.requestable'));
-        $this->assertResponseContainsInRows($response, $assetA, 'asset_tag');
-        $this->assertResponseContainsInRows($response, $assetB, 'asset_tag');
+        $this->getJson(route('api.assets.requestable'))
+            ->assertResponseContainsInRows($assetA, 'asset_tag')
+            ->assertResponseContainsInRows($assetB, 'asset_tag');
 
         Passport::actingAs($userInCompanyB);
-        $response = $this->getJson(route('api.assets.requestable'));
-        $this->assertResponseContainsInRows($response, $assetA, 'asset_tag');
-        $this->assertResponseContainsInRows($response, $assetB, 'asset_tag');
+        $this->getJson(route('api.assets.requestable'))
+            ->assertResponseContainsInRows($assetA, 'asset_tag')
+            ->assertResponseContainsInRows($assetB, 'asset_tag');
 
         $this->settings->enableMultipleFullCompanySupport();
 
         Passport::actingAs($superUser);
-        $response = $this->getJson(route('api.assets.requestable'));
-        $this->assertResponseContainsInRows($response, $assetA, 'asset_tag');
-        $this->assertResponseContainsInRows($response, $assetB, 'asset_tag');
+        $this->getJson(route('api.assets.requestable'))
+            ->assertResponseContainsInRows($assetA, 'asset_tag')
+            ->assertResponseContainsInRows($assetB, 'asset_tag');
 
         Passport::actingAs($userInCompanyA);
-        $response = $this->getJson(route('api.assets.requestable'));
-        $this->assertResponseContainsInRows($response, $assetA, 'asset_tag');
-        $this->assertResponseDoesNotContainInRows($response, $assetB, 'asset_tag');
+        $this->getJson(route('api.assets.requestable'))
+            ->assertResponseContainsInRows($assetA, 'asset_tag')
+            ->assertResponseDoesNotContainInRows($assetB, 'asset_tag');
 
         Passport::actingAs($userInCompanyB);
-        $response = $this->getJson(route('api.assets.requestable'));
-        $this->assertResponseDoesNotContainInRows($response, $assetA, 'asset_tag');
-        $this->assertResponseContainsInRows($response, $assetB, 'asset_tag');
+        $this->getJson(route('api.assets.requestable'))
+            ->assertResponseDoesNotContainInRows($assetA, 'asset_tag')
+            ->assertResponseContainsInRows($assetB, 'asset_tag');
     }
 }
