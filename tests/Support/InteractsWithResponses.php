@@ -40,7 +40,7 @@ trait InteractsWithResponses
     {
         if (is_null($model->{$property})) {
             throw new RuntimeException(
-                "The property ({$property}) is null on the model which isn't helpful for comparison."
+                "The property ({$property}) either does not exist or is null on the model which isn't helpful for comparison."
             );
         }
     }
