@@ -530,12 +530,9 @@ class ReportsController extends Controller
                 $header[] = trans('general.status');
             }
 
-            if ($request->filled('checkout_date')) {
-                $header[] = trans('admin/hardware/table.checkout_date');
-            }
-
-            if ($request->filled('expected_checkin')) {
-                $header[] = trans('admin/hardware/form.expected_checkin');
+            if ($request->filled('warranty')) {
+                $header[] = trans('admin/hardware/form.warranty');
+                $header[] = trans('admin/hardware/form.warranty_expires');
             }
 
             if ($request->filled('depreciation')) {
@@ -544,9 +541,12 @@ class ReportsController extends Controller
                 $header[] = trans('admin/hardware/form.fully_depreciated');
             }
 
-            if ($request->filled('warranty')) {
-                $header[] = trans('admin/hardware/form.warranty');
-                $header[] = trans('admin/hardware/form.warranty_expires');
+            if ($request->filled('checkout_date')) {
+                $header[] = trans('admin/hardware/table.checkout_date');
+            }
+
+            if ($request->filled('expected_checkin')) {
+                $header[] = trans('admin/hardware/form.expected_checkin');
             }
 
             if ($request->filled('created_at')) {
