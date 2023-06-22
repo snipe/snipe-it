@@ -44,7 +44,8 @@ class ComponentsController extends Controller
                 'notes',
             ];
 
-        $components = Component::with('company', 'location', 'category', 'assets', 'supplier');
+        $components = Component::select('components.*')
+            ->with('company', 'location', 'category', 'assets', 'supplier');
 
         if ($request->filled('search')) {
             $components = $components->TextSearch($request->input('search'));
