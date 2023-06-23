@@ -6,7 +6,6 @@ use App\Models\Asset;
 use App\Models\Company;
 use App\Models\User;
 use Illuminate\Testing\Fluent\AssertableJson;
-use Laravel\Passport\Passport;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
@@ -18,14 +17,14 @@ class AssetIndexTest extends TestCase
     {
         Asset::factory()->count(3)->create();
 
-        Passport::actingAs(User::factory()->superuser()->create());
-        $this->getJson(
-            route('api.assets.index', [
-                'sort' => 'name',
-                'order' => 'asc',
-                'offset' => '0',
-                'limit' => '20',
-            ]))
+        $this->actingAsForApi(User::factory()->superuser()->create())
+            ->getJson(
+                route('api.assets.index', [
+                    'sort' => 'name',
+                    'order' => 'asc',
+                    'offset' => '0',
+                    'limit' => '20',
+                ]))
             ->assertOk()
             ->assertJsonStructure([
                 'total',
@@ -47,35 +46,35 @@ class AssetIndexTest extends TestCase
 
         $this->settings->disableMultipleFullCompanySupport();
 
-        Passport::actingAs($superUser);
-        $this->getJson(route('api.assets.index'))
+        $this->actingAsForApi($superUser)
+            ->getJson(route('api.assets.index'))
             ->assertResponseContainsInRows($assetA, 'asset_tag')
             ->assertResponseContainsInRows($assetB, 'asset_tag');
 
-        Passport::actingAs($userInCompanyA);
-        $this->getJson(route('api.assets.index'))
+        $this->actingAsForApi($userInCompanyA)
+            ->getJson(route('api.assets.index'))
             ->assertResponseContainsInRows($assetA, 'asset_tag')
             ->assertResponseContainsInRows($assetB, 'asset_tag');
 
-        Passport::actingAs($userInCompanyB);
-        $this->getJson(route('api.assets.index'))
+        $this->actingAsForApi($userInCompanyB)
+            ->getJson(route('api.assets.index'))
             ->assertResponseContainsInRows($assetA, 'asset_tag')
             ->assertResponseContainsInRows($assetB, 'asset_tag');
 
         $this->settings->enableMultipleFullCompanySupport();
 
-        Passport::actingAs($superUser);
-        $this->getJson(route('api.assets.index'))
+        $this->actingAsForApi($superUser)
+            ->getJson(route('api.assets.index'))
             ->assertResponseContainsInRows($assetA, 'asset_tag')
             ->assertResponseContainsInRows($assetB, 'asset_tag');
 
-        Passport::actingAs($userInCompanyA);
-        $this->getJson(route('api.assets.index'))
+        $this->actingAsForApi($userInCompanyA)
+            ->getJson(route('api.assets.index'))
             ->assertResponseContainsInRows($assetA, 'asset_tag')
             ->assertResponseDoesNotContainInRows($assetB, 'asset_tag');
 
-        Passport::actingAs($userInCompanyB);
-        $this->getJson(route('api.assets.index'))
+        $this->actingAsForApi($userInCompanyB)
+            ->getJson(route('api.assets.index'))
             ->assertResponseDoesNotContainInRows($assetA, 'asset_tag')
             ->assertResponseContainsInRows($assetB, 'asset_tag');
     }

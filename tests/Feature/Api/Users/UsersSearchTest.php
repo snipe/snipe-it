@@ -3,7 +3,6 @@
 namespace Tests\Feature\Api\Users;
 
 use App\Models\User;
-use Laravel\Passport\Passport;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
@@ -16,8 +15,9 @@ class UsersSearchTest extends TestCase
         User::factory()->create(['first_name' => 'Luke', 'last_name' => 'Skywalker']);
         User::factory()->create(['first_name' => 'Darth', 'last_name' => 'Vader']);
 
-        Passport::actingAs(User::factory()->viewUsers()->create());
-        $response = $this->getJson(route('api.users.index', ['search' => 'luke sky']))->assertOk();
+        $response = $this->actingAsForApi(User::factory()->viewUsers()->create())
+            ->getJson(route('api.users.index', ['search' => 'luke sky']))
+            ->assertOk();
 
         $results = collect($response->json('rows'));
 

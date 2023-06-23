@@ -5,7 +5,6 @@ namespace Tests\Feature\Api\Assets;
 use App\Models\Asset;
 use App\Models\Company;
 use App\Models\User;
-use Laravel\Passport\Passport;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
@@ -18,9 +17,9 @@ class AssetsForSelectListTest extends TestCase
         Asset::factory()->create(['asset_tag' => '0001']);
         Asset::factory()->create(['asset_tag' => '0002']);
 
-        Passport::actingAs(User::factory()->create());
-
-        $response = $this->getJson(route('assets.selectlist', ['search' => '000']))->assertOk();
+        $response = $this->actingAsForApi(User::factory()->create())
+            ->getJson(route('assets.selectlist', ['search' => '000']))
+            ->assertOk();
 
         $results = collect($response->json('results'));
 
@@ -42,35 +41,35 @@ class AssetsForSelectListTest extends TestCase
 
         $this->settings->disableMultipleFullCompanySupport();
 
-        Passport::actingAs($superUser);
-        $this->getJson(route('assets.selectlist', ['search' => '000']))
+        $this->actingAsForApi($superUser)
+            ->getJson(route('assets.selectlist', ['search' => '000']))
             ->assertResponseContainsInResults($assetA)
             ->assertResponseContainsInResults($assetB);
 
-        Passport::actingAs($userInCompanyA);
-        $this->getJson(route('assets.selectlist', ['search' => '000']))
+        $this->actingAsForApi($userInCompanyA)
+            ->getJson(route('assets.selectlist', ['search' => '000']))
             ->assertResponseContainsInResults($assetA)
             ->assertResponseContainsInResults($assetB);
 
-        Passport::actingAs($userInCompanyB);
-        $this->getJson(route('assets.selectlist', ['search' => '000']))
+        $this->actingAsForApi($userInCompanyB)
+            ->getJson(route('assets.selectlist', ['search' => '000']))
             ->assertResponseContainsInResults($assetA)
             ->assertResponseContainsInResults($assetB);
 
         $this->settings->enableMultipleFullCompanySupport();
 
-        Passport::actingAs($superUser);
-        $this->getJson(route('assets.selectlist', ['search' => '000']))
+        $this->actingAsForApi($superUser)
+            ->getJson(route('assets.selectlist', ['search' => '000']))
             ->assertResponseContainsInResults($assetA)
             ->assertResponseContainsInResults($assetB);
 
-        Passport::actingAs($userInCompanyA);
-        $this->getJson(route('assets.selectlist', ['search' => '000']))
+        $this->actingAsForApi($userInCompanyA)
+            ->getJson(route('assets.selectlist', ['search' => '000']))
             ->assertResponseContainsInResults($assetA)
             ->assertResponseDoesNotContainInResults($assetB);
 
-        Passport::actingAs($userInCompanyB);
-        $this->getJson(route('assets.selectlist', ['search' => '000']))
+        $this->actingAsForApi($userInCompanyB)
+            ->getJson(route('assets.selectlist', ['search' => '000']))
             ->assertResponseDoesNotContainInResults($assetA)
             ->assertResponseContainsInResults($assetB);
     }

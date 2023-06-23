@@ -5,7 +5,6 @@ namespace Tests\Feature\Api\Users;
 use App\Models\Company;
 use App\Models\User;
 use Illuminate\Testing\Fluent\AssertableJson;
-use Laravel\Passport\Passport;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
@@ -17,8 +16,8 @@ class UsersForSelectListTest extends TestCase
     {
         $users = User::factory()->superuser()->count(3)->create();
 
-        Passport::actingAs($users->first());
-        $this->getJson(route('api.users.selectlist'))
+        $this->actingAsForApi($users->first())
+            ->getJson(route('api.users.selectlist'))
             ->assertOk()
             ->assertJsonStructure([
                 'results',
@@ -34,8 +33,9 @@ class UsersForSelectListTest extends TestCase
     {
         User::factory()->create(['first_name' => 'Luke', 'last_name' => 'Skywalker']);
 
-        Passport::actingAs(User::factory()->create());
-        $response = $this->getJson(route('api.users.selectlist', ['search' => 'luke sky']))->assertOk();
+        $response = $this->actingAsForApi(User::factory()->create())
+            ->getJson(route('api.users.selectlist', ['search' => 'luke sky']))
+            ->assertOk();
 
         $results = collect($response->json('results'));
 
@@ -57,8 +57,9 @@ class UsersForSelectListTest extends TestCase
             ->has(User::factory()->state(['first_name' => 'Darth', 'last_name' => 'Vader', 'username' => 'dvader']))
             ->create();
 
-        Passport::actingAs($jedi->users->first());
-        $response = $this->getJson(route('api.users.selectlist'))->assertOk();
+        $response = $this->actingAsForApi($jedi->users->first())
+            ->getJson(route('api.users.selectlist'))
+            ->assertOk();
 
         $results = collect($response->json('results'));
 
@@ -85,8 +86,9 @@ class UsersForSelectListTest extends TestCase
             ->has(User::factory()->state(['first_name' => 'Darth', 'last_name' => 'Vader', 'username' => 'dvader']))
             ->create();
 
-        Passport::actingAs($jedi->users->first());
-        $response = $this->getJson(route('api.users.selectlist', ['search' => 'a']))->assertOk();
+        $response = $this->actingAsForApi($jedi->users->first())
+            ->getJson(route('api.users.selectlist', ['search' => 'a']))
+            ->assertOk();
 
         $results = collect($response->json('results'));
 

@@ -5,7 +5,6 @@ namespace Tests\Feature\Api\Components;
 use App\Models\Company;
 use App\Models\Component;
 use App\Models\User;
-use Laravel\Passport\Passport;
 use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
@@ -26,35 +25,35 @@ class ComponentIndexTest extends TestCase
 
         $this->settings->disableMultipleFullCompanySupport();
 
-        Passport::actingAs($superUser);
-        $this->getJson(route('api.components.index'))
+        $this->actingAsForApi($superUser)
+            ->getJson(route('api.components.index'))
             ->assertResponseContainsInRows($componentA)
             ->assertResponseContainsInRows($componentB);
 
-        Passport::actingAs($userInCompanyA);
-        $this->getJson(route('api.components.index'))
+        $this->actingAsForApi($userInCompanyA)
+            ->getJson(route('api.components.index'))
             ->assertResponseContainsInRows($componentA)
             ->assertResponseContainsInRows($componentB);
 
-        Passport::actingAs($userInCompanyB);
-        $this->getJson(route('api.components.index'))
+        $this->actingAsForApi($userInCompanyB)
+            ->getJson(route('api.components.index'))
             ->assertResponseContainsInRows($componentA)
             ->assertResponseContainsInRows($componentB);
 
         $this->settings->enableMultipleFullCompanySupport();
 
-        Passport::actingAs($superUser);
-        $this->getJson(route('api.components.index'))
+        $this->actingAsForApi($superUser)
+            ->getJson(route('api.components.index'))
             ->assertResponseContainsInRows($componentA)
             ->assertResponseContainsInRows($componentB);
 
-        Passport::actingAs($userInCompanyA);
-        $this->getJson(route('api.components.index'))
+        $this->actingAsForApi($userInCompanyA)
+            ->getJson(route('api.components.index'))
             ->assertResponseContainsInRows($componentA)
             ->assertResponseDoesNotContainInRows($componentB);
 
-        Passport::actingAs($userInCompanyB);
-        $this->getJson(route('api.components.index'))
+        $this->actingAsForApi($userInCompanyB)
+            ->getJson(route('api.components.index'))
             ->assertResponseDoesNotContainInRows($componentA)
             ->assertResponseContainsInRows($componentB);
     }
