@@ -121,7 +121,7 @@
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
         <strong>{{ trans('general.notification_error') }} </strong>
-       trans('general.notification_bulk_error_hint')
+       {{ trans('general.notification_bulk_error_hint') }}
             @foreach($messages as $message) 
                 <br> {{ $message }}
             @endforeach
