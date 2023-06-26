@@ -253,23 +253,29 @@ class BulkAssetsController extends Controller
                     Asset::find($assetId)->update($this->update_array);
                 } 
             } // endforeach ($assets)
-            ray($error_bag); 
+            ray(['error_bag1' => $error_bag]); 
             if(!empty($error_bag)) {
             //    $errors = collect($error_bag)->unique(); 
             //   foreach ($errors as $key => $value) {
             //    ray($value->message); 
             //   }
                 $errors = [];
-                foreach ($error_bag as $key => $value) {
-                    foreach($value as $key => $value) {
-                            $errors[] = $value; 
+               //find the customfield name from the name of the messagebag items 
+                foreach ($error_bag as $key => $bag) {
+                   ray($bag->keys()); 
+                  foreach($bag->keys() as $key => $value) {
+                        CustomField::where('db_column', $value)->get()->map(function($item) use (&$errors) {
+                            $errors[] = $item->name; 
+                        });
                     }
-                } 
-                ray($error_bag); 
-                Session::save('ids', $assets);
+                }
+                ray(['error_bag2' => $errors]); 
+                 
+                // Session::save('ids', $assets);
+               
                  
                 // return redirect()->route('hardware/bulkedit'); 
-                return redirect()->back()->with('bulk_errors', $errors);
+                return redirect($bulk_back_url)->with('bulk_errors', array_unique($errors));
               }
             return redirect($bulk_back_url)->with('success', trans('admin/hardware/message.update.success'));
         }
