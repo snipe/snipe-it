@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
 use Schema;
 use Watson\Validating\ValidatingTrait;
-// use App\Models\SnipeModel;
 class CustomField extends Model
 {
     use HasFactory;
