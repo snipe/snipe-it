@@ -4,9 +4,10 @@ return [
 
     'id'      => 'ID',
     'months'   => 'Months',
+    'days'     => 'Days',
     'term'   => 'Term',
     'title'      => 'Name ',
-    'term_type'=> 'Unit of Calculation',
+
     'depreciation_min' => 'Floor Value',
 
 ];

@@ -67,12 +67,6 @@ class DepreciationReportPresenter extends Presenter
                 "title" => trans('general.depreciation'),
                 "visible" => true,
             ], [
-                "field" => "number_of_months",
-                "searchable" => true,
-                "sortable" => true,
-                "title" => trans('admin/depreciations/general.number_of_months'),
-                "visible" => true,
-            ],  [
                 "field" => "status",
                 "searchable" => true,
                 "sortable" => true,
@@ -144,12 +138,18 @@ class DepreciationReportPresenter extends Presenter
                 "title" => trans('admin/hardware/table.book_value'),
                 "footerFormatter" => 'sumFormatter',
                 "class" => "text-right",
-            ], [
-                "field" => "monthly_depreciation",
+            ],  [
+                "field" => "term_length",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('admin/depreciations/general.term_length'),
+                "visible" => true,
+            ],[
+                "field" => "rate_of_depreciation",
                 "searchable" => true,
                 "sortable" => true,
                 "visible" => true,
-                "title" => trans('admin/hardware/table.monthly_depreciation')
+                "title" => trans('admin/hardware/table.rate_of_depreciation')
             ],[
                 "field" => "diff",
                 "searchable" => false,
