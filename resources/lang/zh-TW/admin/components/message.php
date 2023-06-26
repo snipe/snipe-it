@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> '組件借出失敗。請再試一次。',
         'success' 		=> '借出組件成功。',
-        'user_does_not_exist' => '使用者不正確。請再試一次。'
+        'user_does_not_exist' => '使用者不正確。請再試一次。',
+        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

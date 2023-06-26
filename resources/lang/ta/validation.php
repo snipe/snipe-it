@@ -67,6 +67,8 @@ return [
         'array'   => ': பண்புக்கூறு குறைந்தபட்சம்: நிமிடம் உருப்படிகள் வேண்டும்.',
     ],
     'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'தேர்ந்தெடுக்கப்பட்ட: பண்பு தவறானது.',
     'numeric'              => 'பண்புக்கூறு: ஒரு எண் இருக்க வேண்டும்.',
     'present'              => ': பண்புக்கூறு களஞ்சியம் இருக்க வேண்டும்.',

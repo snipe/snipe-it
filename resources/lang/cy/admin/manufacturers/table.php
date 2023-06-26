@@ -10,6 +10,7 @@ return array(
     'support_email'   		=> 'Ebost Cefnogaeth',
     'support_phone'   		=> 'Rhif ffôn cefnogaeth',
     'support_url'   		=> 'Wefan cefnogaeth',
+    'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Diweddaru Gwneuthyrwr',
     'url'   				=> 'URL',
 

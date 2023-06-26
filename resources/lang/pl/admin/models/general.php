@@ -6,7 +6,7 @@ return array(
     'deleted'  					        => 'Ten model został usunięty.',
     'bulk_delete'               => 'Zbiorcze usuwanie modeli aktywów',
     'bulk_delete_help'               => 'Użyj poniższych pól wyboru, aby potwierdzić usunięcie wybranych modeli zasobów. Modele zasobów z którymi są powiązane zasoby, nie mogą zostać usunięte, dopóki zasoby nie zostaną powiązane z innym modelem.',
-    'bulk_delete_warn'          => 'You are about to delete one asset model.|You are about to delete :model_count asset models.',
+    'bulk_delete_warn'          => 'Usuniesz model zasobu.|Usuniesz :model_count modele/modeli zasobów.',
     'restore'                   => 'Przywróć Model',
     'requestable'               => 'Użytkownicy mogą zażądać tego modelu',
 	'show_mac_address'			      => 'Pokaż pole MAC adresu tego modelu w aktywach',

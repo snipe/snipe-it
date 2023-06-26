@@ -71,7 +71,8 @@ class AssetMaintenancesController extends Controller
                                 'asset_tag',
                                 'asset_name',
                                 'user_id',
-                                'supplier'
+                                'supplier',
+                                'is_warranty',
                             ];
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';

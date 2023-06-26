@@ -44,8 +44,7 @@ return [
     'backups_upload'            => 'نسخه پشتیبان را دانلود کنید',
     'backups_path'              => 'نسخه‌های پشتیبان روی سرور در <code>:path</code> ذخیره می‌شوند
 ',
-    'backups_restore_warning'   => 'از دکمه بازیابی استفاده کنید <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span> </small> برای بازیابی از نسخه پشتیبان قبلی. (این در حال حاضر با ذخیره‌سازی فایل S3 یا Docker کار نمی‌کند.<br><br><strong>کل پایگاه داده :app_name شما و هر فایل آپلود شده به طور کامل با آنچه در فایل پشتیبان است جایگزین می‌شود</strong>.
-',
+    'backups_restore_warning'   => 'Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to restore from a previous backup. (This does not currently work with S3 file storage or Docker.)<br><br>Your <strong>entire :app_name database and any uploaded files will be completely replaced</strong> by what\'s in the backup file.  ',
     'backups_logged_out'         => 'همه کاربران موجود، از جمله شما، پس از تکمیل بازیابی شما از سیستم خارج می شوند.
 ',
     'backups_large'             => 'پشتیبان‌گیری‌های بسیار بزرگ ممکن است در تلاش بازیابی به پایان برسد و ممکن است همچنان نیاز باشد از طریق خط فرمان اجرا شوند.
@@ -121,6 +120,8 @@ return [
 ',
      'ldap_client_tls_key'       => 'کلید TLS سمت مشتری LDAP
 ',
+    'ldap_location'             => 'LDAP Location',
+'ldap_location_help'             => 'The Ldap Location field should be used if <strong>an OU is not being used in the Base Bind DN.</strong> Leave this blank if an OU search is being used.',
     'ldap_login_test_help'      => 'یک نام کاربری و رمز عبور LDAP معتبر از DN پایه ای که در بالا مشخص کرده اید وارد کنید تا بررسی کنید که آیا ورود به سیستم LDAP شما به درستی پیکربندی شده است یا خیر. ابتدا باید تنظیمات LDAP به روز شده خود را ذخیره کنید.
 ',
     'ldap_login_sync_help'      => 'این فقط آزمایش می کند که LDAP می تواند به درستی همگام شود. اگر درخواست احراز هویت LDAP شما صحیح نباشد، کاربران ممکن است هنوز نتوانند وارد سیستم شوند. ابتدا باید تنظیمات LDAP به روز شده خود را ذخیره کنید.
@@ -478,4 +479,9 @@ return [
 ',
     'slack_test' => 'تست <i class="fab fa-slack"></i> یکپارچه سازی
 ',
+    'google_callback_help' => 'This should be entered as the callback URL in your Google OAuth app settings in your organization&apos;s <strong><a href="https://console.cloud.google.com/" target="_blank">Google developer console <i class="fa fa-external-link" aria-hidden="true"></i></a></strong>.',
+    'google_login'      => 'Google Workspace Login Settings',
+    'enable_google_login'  => 'Enable users to login with Google Workspace',
+    'enable_google_login_help'  => 'Users will not be automatically provisioned. They must have an existing account here AND in Google Workspace, and their username here must match their Google Workspace email address. ',
+
 ];

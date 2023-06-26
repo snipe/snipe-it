@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Restaurar ativo',
     'pending'  					=> 'Pendente',
     'undeployable'  			=> 'Não implementável',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Ver Artigo',
     'csv_error' => 'You have an error in your CSV file:',
     'import_text' => '

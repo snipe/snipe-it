@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Whakaorangia te Ahua',
     'pending'  					=> 'Kei te tatari',
     'undeployable'  			=> 'Kaore e taea',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Tirohia te Ahua',
     'csv_error' => 'You have an error in your CSV file:',
     'import_text' => '

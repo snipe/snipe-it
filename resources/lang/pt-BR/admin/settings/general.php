@@ -86,6 +86,8 @@ return [
     'ldap_settings'             => 'Configurações LDAP',
     'ldap_client_tls_cert_help' => 'Certificado e chave TLS do Client-Side para conexões LDAP geralmente são úteis apenas em configurações do Google Workspace com "Secure LDAP". Ambas são necessárias.',
      'ldap_client_tls_key'       => 'Chave TLS do lado do cliente LDAP',
+    'ldap_location'             => 'Localização LDAP',
+'ldap_location_help'             => 'O campo de Localização do dap deve ser usado se <strong>um OU não estiver sendo usado no DNS de vinculação base.</strong> Deixe em branco se uma busca OU estiver sendo usada.',
     'ldap_login_test_help'      => 'Digite um nome de usuário e senha LDAP válidos a partir do DN base que você especificou acima para testar se seu login LDAP está configurado corretamente. VOCÊ DEVE SALVAR AS CONFIGURAÇÕES LDAP ATUALIZADAS PRIMEIRAMENTE.',
     'ldap_login_sync_help'      => 'Isso apenas prova que LDAP sincroniza corretamente. Se o autenticador query LDAP não estiver correto, usuários ainda não poderão realizar o login. VOCÊ DEVE PRIMEIRO SALVAR AS NOVAS CONFIGURAÇÕES DO LDAP.',
     'ldap_manager'              => 'Gerenciador LDAP',
@@ -328,4 +330,9 @@ return [
     'setup_migration_create_user' => 'Próximo: Criar Usuário',
     'ldap_settings_link' => 'Página de configurações LDAP',
     'slack_test' => 'Testar <i class="fab fa-slack"></i> Integração',
+    'google_callback_help' => 'Isto deve ser inserido como a URL de callback em suas configurações de aplicativo Google OAuth na sua organização&apos;s <strong><a href="https://console.cloud.google.com/" target="_blank">console de desenvolvedor do Google <i class="fa fa-external-link" aria-hidden="true"></i></a></strong>.',
+    'google_login'      => 'Configurações de login do Google Workspace',
+    'enable_google_login'  => 'Permitir que os usuários façam login com o Google Workspace',
+    'enable_google_login_help'  => 'Os usuários não serão fornecidos automaticamente. Eles devem ter uma conta existente aqui E no Google Workspace e seu nome de usuário deve corresponder ao endereço de e-mail do Google Workspace. ',
+
 ];

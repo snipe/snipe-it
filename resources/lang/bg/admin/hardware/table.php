@@ -8,6 +8,7 @@ return [
     'change' 		=> 'Предоставяне',
     'checkout_date' => 'Дата на изписване',
     'checkoutto' 	=> 'Изписан',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Текуща стойност',
     'diff' 			=> 'Разлика',
     'dl_csv' 		=> 'Сваляне на CSV',

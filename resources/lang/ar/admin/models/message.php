@@ -32,14 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'لم يتم تغيير أي حقول، لذلك لم يتم تحديث أي شيء.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+        'success' 		=> 'تم تحديث النموذج بنجاح. |تم تحديث :model_count نموذج بنجاح.',
+        'warn'          => 'أنت على وشك تحديث خصائص النموذج التالي model: |أنت على وشك تعديل خصائص :model_count models:',
 
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'لم يتم اختيار أي موديلات، لذلك لم يتم حذف أي شيء.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => 'تم حذف النموذج!|تم حذف :success_count نموذج!',
         'success_partial' 	=> 'تم حذف:success_count: من الموديلات، ومع ذلك تعذر حذف fail_count: نظرًا لأنها لا تزال تحتوي على أصول مقترنة بها.'
     ),
 

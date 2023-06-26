@@ -32,14 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Nincsenek mezők megváltoztak, így semmi sem frissült.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'success' 		=> 'Eszköz modell sikeresen frissítve. Összesen |:model_count eszköz frissítve.',
         'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
 
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Nem voltak eszközök kiválasztva, így semmi sem lett törölve.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => 'Eszköz modell törölve! Összesen |:success_count eszköz törölve!',
         'success_partial' 	=> ': success_count modell(ek) törlésre kerültek, azonban ennyit nem sikerült törölni: a fail_count , mert még hozzárendelt eszközökkel rendelkeznek.'
     ),
 

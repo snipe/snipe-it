@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Níor sheiceáil amach an méid inmhuirearaithe, déan iarracht arís',
         'success' 		=> 'Seiceáil inbhuanaithe go rathúil.',
-        'user_does_not_exist' => 'Tá an úsáideoir neamhbhailí. Arís, le d\'thoil.'
+        'user_does_not_exist' => 'Tá an úsáideoir neamhbhailí. Arís, le d\'thoil.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

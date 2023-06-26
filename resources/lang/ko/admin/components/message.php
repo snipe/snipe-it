@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> '부품이 반출되지 않았습니다. 다시 시도해 주세요.',
         'success' 		=> '부품이 반출 되었습니다.',
-        'user_does_not_exist' => '잘못된 사용자 입니다. 다시 시도해 주세요.'
+        'user_does_not_exist' => '잘못된 사용자 입니다. 다시 시도해 주세요.',
+        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

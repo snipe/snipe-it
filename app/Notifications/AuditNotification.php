@@ -23,6 +23,7 @@ class AuditNotification extends Notification
     public function __construct($params)
     {
         //
+        $this->settings = Setting::getSettings();
         $this->params = $params;
     }
 
@@ -43,9 +44,12 @@ class AuditNotification extends Notification
 
     public function toSlack()
     {
+        $channel = ($this->settings->webhook_channel) ? $this->settings->webhook_channel : '';
         return (new SlackMessage)
             ->success()
             ->content(class_basename(get_class($this->params['item'])).' Audited')
+            ->from(($this->settings->webhook_botname) ? $this->settings->webhook_botname : 'Snipe-Bot')
+            ->to($channel)
             ->attachment(function ($attachment) {
                 $item = $this->params['item'];
                 $admin_user = $this->params['admin'];

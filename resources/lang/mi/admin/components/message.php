@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Kāore i tutakina te wāhanga, tēnā whakamātau anō',
         'success' 		=> 'Kua tohua te Waeine.',
-        'user_does_not_exist' => 'He muhu te kaiwhakamahi. Tena ngana ano.'
+        'user_does_not_exist' => 'He muhu te kaiwhakamahi. Tena ngana ano.',
+        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

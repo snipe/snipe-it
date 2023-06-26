@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Taasta vara',
     'pending'  					=> 'Ootel',
     'undeployable'  			=> 'Kasutuselevõtmatu',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Vaata vahendit',
     'csv_error' => 'Sul on viga CSV failis:',
     'import_text' => '

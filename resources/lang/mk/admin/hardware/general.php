@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Врати основно средство',
     'pending'  					=> 'Во чекање',
     'undeployable'  			=> 'Нераспоредливи',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Преглед на основно средство',
     'csv_error' => 'You have an error in your CSV file:',
     'import_text' => '

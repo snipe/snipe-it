@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Obnoviť majetok',
     'pending'  					=> 'Čakajúce',
     'undeployable'  			=> 'Nevyskladniteľný',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Zobraziť majetok',
     'csv_error' => 'You have an error in your CSV file:',
     'import_text' => '

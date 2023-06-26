@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Asset wiederherstellen',
     'pending'  					=> 'Ausstehende',
     'undeployable'  			=> 'Nicht einsetzbar',
+    'undeployable_tooltip'  	=> 'Dieses Asset hat eine Statusbezeichnung, die nicht einsetzbar ist und zu diesem Zeitpunkt nicht ausgecheckt werden kann.',
     'view'  					=> 'Asset ansehen',
     'csv_error' => 'Es gibt einen Fehler in der CSV-Datei:',
     'import_text' => '

@@ -48,7 +48,7 @@ return [
     'asset_location_update_default' => 'Uppdatera endast standardplats',
     'asset_not_deployable' => 'Denna tillgångs status kan inte distribueras. Denna tillgång kan inte checkas ut.',
     'asset_deployable' => 'Denna status är distribuerbar. Denna tillgång kan checkas ut.',
-    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'processing_spinner' => 'Bearbetar... (Detta kan ta lite tid på stora filer)',
     'optional_infos'  => 'Valfri information',
     'order_details'   => 'Beställningsrelaterad information'
 ];

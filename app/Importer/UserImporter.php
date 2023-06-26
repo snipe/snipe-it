@@ -42,16 +42,21 @@ class UserImporter extends ItemImporter
     public function createUserIfNotExists(array $row)
     {
         // Pull the records from the CSV to determine their values
+        $this->item['id'] = $this->findCsvMatch($row, 'id');
         $this->item['username'] = $this->findCsvMatch($row, 'username');
         $this->item['first_name'] = $this->findCsvMatch($row, 'first_name');
         $this->item['last_name'] = $this->findCsvMatch($row, 'last_name');
         $this->item['email'] = $this->findCsvMatch($row, 'email');
+        $this->item['gravatar'] = $this->findCsvMatch($row, 'gravatar');
         $this->item['phone'] = $this->findCsvMatch($row, 'phone_number');
+        $this->item['website'] = $this->findCsvMatch($row, 'website');
         $this->item['jobtitle'] = $this->findCsvMatch($row, 'jobtitle');
         $this->item['address'] = $this->findCsvMatch($row, 'address');
         $this->item['city'] = $this->findCsvMatch($row, 'city');
         $this->item['state'] = $this->findCsvMatch($row, 'state');
         $this->item['country'] = $this->findCsvMatch($row, 'country');
+        $this->item['start_date'] = $this->findCsvMatch($row, 'start_date');
+        $this->item['end_date'] = $this->findCsvMatch($row, 'end_date');
         $this->item['zip'] = $this->findCsvMatch($row, 'zip');
         $this->item['activated'] = ($this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')) == 1) ? '1' : 0;
         $this->item['employee_num'] = $this->findCsvMatch($row, 'employee_num');
@@ -72,13 +77,18 @@ class UserImporter extends ItemImporter
             $user_formatted_array = User::generateFormattedNameFromFullName($user_full_name, Setting::getSettings()->username_format);
             $this->item['username'] = $user_formatted_array['username'];
         }
-        
-        $user = User::where('username', $this->item['username'])->first();
-        if ($user) {
-            if (! $this->updating) {
-                $this->log('A matching User '.$this->item['name'].' already exists.  ');
-                \Log::debug('A matching User '.$this->item['name'].' already exists.  ');
 
+        // Check if a numeric ID was passed. If it does, use that above all else.
+        if ((array_key_exists('id', $this->item) && ($this->item['id'] != "") && (is_numeric($this->item['id']))))  {
+            $user = User::find($this->item['id']);
+        } else {
+            $user = User::where('username', $this->item['username'])->first();
+        }
+
+        if ($user) {
+
+            if (! $this->updating) {
+                \Log::debug('A matching User '.$this->item['name'].' already exists.  ');
                 return;
             }
             $this->log('Updating User');
@@ -105,7 +115,6 @@ class UserImporter extends ItemImporter
         $user->fill($this->sanitizeItemForStoring($user));
 
         if ($user->save()) {
-            // $user->logCreate('Imported using CSV Importer');
             $this->log('User '.$this->item['name'].' was created');
 
             if (($user->email) && ($user->activated == '1')) {

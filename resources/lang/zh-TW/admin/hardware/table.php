@@ -8,6 +8,7 @@ return [
     'change' 		=> '進/出',
     'checkout_date' => '借出日期',
     'checkoutto' 	=> '已借出',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Current Value',
     'diff' 			=> '價差',
     'dl_csv' 		=> '下載CSV檔',

@@ -67,6 +67,8 @@ return [
         'array'   => ':attribute muss mindestens :min Elemente enthalten.',
     ],
     'starts_with'          => ':attribute muss mit einem der folgenden Werte beginnen: :values.',
+    'ends_with'            => ':attribute muss mit einem der folgenden Werte enden: :values.',
+
     'not_in'               => 'Auswahl :attribute ist ungültig.',
     'numeric'              => ':attribute muss eine Zahl sein.',
     'present'              => ':attribute muss vorhanden sein.',

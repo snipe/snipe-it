@@ -8,6 +8,7 @@ return [
     'change' 		=> 'In / Out',
     'checkout_date' => 'Rā Rārangi',
     'checkoutto' 	=> 'Kua Mataarahia',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Current Value',
     'diff' 			=> 'Tuhinga o mua',
     'dl_csv' 		=> 'Tikiake CSV',

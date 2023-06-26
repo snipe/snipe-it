@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Restore Asset',
     'pending'  					=> 'U čekanju',
     'undeployable'  			=> 'Ne može da se razmesti',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Prikaz imovine',
     'csv_error' => 'Postoji greška u tvojoj CSV datoteci:',
     'import_text' => '

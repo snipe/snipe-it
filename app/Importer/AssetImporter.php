@@ -12,7 +12,10 @@ class AssetImporter extends ItemImporter
     public function __construct($filename)
     {
         parent::__construct($filename);
-        $this->defaultStatusLabelId = Statuslabel::first()->id;
+
+        if (!is_null(Statuslabel::first())) {
+            $this->defaultStatusLabelId = Statuslabel::first()->id;
+        }
     }
 
     protected function handle($row)
@@ -132,10 +135,9 @@ class AssetImporter extends ItemImporter
             }
         }
 
-        // FIXME: this disables model validation.  Need to find a way to avoid double-logs without breaking everything.
-        // $asset->unsetEventDispatcher();
+
         if ($asset->save()) {
-            $asset->logCreate('Imported using csv importer');
+            $asset->logCreate(trans('general.importer.import_note'));
             $this->log('Asset '.$this->item['name'].' with serial number '.$this->item['serial'].' was created');
 
             // If we have a target to checkout to, lets do so.

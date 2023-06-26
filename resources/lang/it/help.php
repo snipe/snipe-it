@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Ulteriori Informazioni',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'Selezionando questa casella verranno modificati le posizioni dei beni. Non selezionandola, il luogo verrà semplicemente annotato nel log di controllo.<br><br>Nota che se questo bene è assegnato, non modificherà la posizione della persona, bene o posizione a cui è assegnato.',
 
     'assets' => 'Assets sono elementi tracciati con il numero di serie o il tag. Tendono ad essere elementi di valore più elevato, ove è importante identificare un elemento specifico.',
 

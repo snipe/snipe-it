@@ -67,6 +67,8 @@ return [
         'array'   => 'Atrybut: musi zawierać co najmniej: min.',
     ],
     'starts_with'          => ':attribute musi zaczynać się jednym z następujących wartości: :values.',
+    'ends_with'            => ':attribute musi kończyć się jedną z następujących wartości: :values.',
+
     'not_in'               => 'Wybrany :attribute jest nieprawidłowy.',
     'numeric'              => ':attribute musi być liczbą.',
     'present'              => ':attribute nie może być puste.',

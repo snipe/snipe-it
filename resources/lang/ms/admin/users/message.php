@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Anda telah berjaya menolak aset ini.',
     'bulk_manager_warn'	        => 'Pengguna anda telah berjaya dikemas kini, namun entri pengurus anda tidak disimpan kerana pengurus yang anda pilih juga dalam senarai pengguna untuk diedit, dan pengguna mungkin bukan pengurus mereka sendiri. Sila pilih pengguna anda sekali lagi, tidak termasuk pengurus.',
     'user_exists'               => 'Pengguna telah wujud!',
-    'user_not_found'            => 'Pengguna [:id] tidak wujud.',
+    'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Ruangan log masuk diperlukan',
     'user_password_required'    => 'Ruangan kata kunci diperlukan.',
     'insufficient_permissions'  => 'Tidak cukup kuasa.',

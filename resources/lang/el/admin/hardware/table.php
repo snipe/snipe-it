@@ -8,6 +8,7 @@ return [
     'change' 		=> 'Εισερχόμενα/Εξερχόμενα',
     'checkout_date' => 'Ημερομηνία αποχώρησης',
     'checkoutto' 	=> 'Checked Out',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Current Value',
     'diff' 			=> 'Diff',
     'dl_csv' 		=> 'Κατεβάστε το CSV',

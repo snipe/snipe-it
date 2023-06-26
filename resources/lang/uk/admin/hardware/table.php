@@ -8,6 +8,7 @@ return [
     'change' 		=> 'In/Out',
     'checkout_date' => 'Дата видачі',
     'checkoutto' 	=> 'Видано',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Current Value',
     'diff' 			=> 'Різниця',
     'dl_csv' 		=> 'Завантажити CSV',

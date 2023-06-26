@@ -86,6 +86,8 @@ return [
     'ldap_settings'             => 'Impostazioni LDAP',
     'ldap_client_tls_cert_help' => 'Il Certificato e la Chiave TLS Client per le connessioni LDAP sono di solito richieste solo nelle configurazioni di Google Workspace con "Secure LDAP".',
      'ldap_client_tls_key'       => 'Chiave TLS client LDAP',
+    'ldap_location'             => 'Posizione LDAP',
+'ldap_location_help'             => 'Il campo Posizione LDAP deve essere usato se <strong>una OU non viene utilizzata nella Base Bind DN</strong> Lascia vuoto se viene usata la ricerca OU.',
     'ldap_login_test_help'      => 'Immettere un nome utente e una password LDAP validi dal DN di base specificato in precedenza per verificare se il login LDAP è configurato correttamente. DEVI SALVARE LE IMPOSTAZIONI LDAP AGGIORNATE PRIMA.',
     'ldap_login_sync_help'      => 'Questo verifica solamente che LDAP possa sincronizzare correttamente. Se la tua query di autenticazione LDAP non è corretta, gli utenti potrebbero non essere ancora in grado di accedere. DEVI SALVARE LE IMPOSTAZIONI LDAP PRIMA DI EFFETTUARE QUESTO TEST.',
     'ldap_manager'              => 'Manager LDAP',
@@ -328,4 +330,9 @@ return [
     'setup_migration_create_user' => 'Successivo: Crea Utente',
     'ldap_settings_link' => 'Impostazioni LDAP',
     'slack_test' => 'Test <i class="fab fa-slack"></i> Integrazione',
+    'google_callback_help' => 'Inserisci qeusto URL come URL di callback nelle impostazioni della tua app Google OAuth nella <strong><a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console<i class="fa fa-external-link" aria-hidden="true"></i></a></strong> della tua organizzazione.',
+    'google_login'      => 'Impostazioni Accesso Google Workspace',
+    'enable_google_login'  => 'Consenti agli utenti di accedere con Google Workspace',
+    'enable_google_login_help'  => 'Gli utenti non verranno creati automaticamente. Devono avere SIA un account qui CHE in Google Workspace e il loro nome utente qui deve corrispondere al loro indirizzo email di Google Workspace. ',
+
 ];

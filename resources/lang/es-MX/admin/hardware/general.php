@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Restaurar equipo',
     'pending'  					=> 'Pendiente',
     'undeployable'  			=> 'No desplegable',
+    'undeployable_tooltip'  	=> 'Este activo tiene una etiqueta de estado que no es desplegable y no puede ser asignado en este momento.',
     'view'  					=> 'Ver Equipo',
     'csv_error' => 'Hay un error en su archivo CSV:',
     'import_text' => '

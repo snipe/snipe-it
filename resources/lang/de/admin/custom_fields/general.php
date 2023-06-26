@@ -49,4 +49,6 @@ return [
     'unique' => 'Einzigartig',
     'display_in_user_view' => 'Erlaube dem Benutzer, an den das Asset herausgegeben wurde, diese Werte auf der Seite "Zugeordnete Assets anzeigen" anzeigen zu lassen',
     'display_in_user_view_table' => 'Für Benutzer sichtbar',
+    'auto_add_to_fieldsets' => 'Automatisch zu jedem neuen Feldsatz hinzufügen',
+    'add_to_preexisting_fieldsets' => 'Zu allen existierenden Feldsätzen hinzufügen',
 ];

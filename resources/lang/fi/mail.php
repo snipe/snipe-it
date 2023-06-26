@@ -74,6 +74,7 @@ return [
     'your_credentials' => 'Snipe-IT - kirjautumistietosi',
     'Accessory_Checkin_Notification' => 'Oheistarvike palautettu',
     'Asset_Checkin_Notification' => 'Laite palautettu',
+    'Asset_Checkout_Notification' => 'Asset checked out',
     'License_Checkin_Notification' => 'Lisenssi palautettu',
     'Expected_Checkin_Report' => 'Odotettujen palautuspäivien raportti',
     'Expected_Checkin_Notification' => 'Muistutus: :name palautuspäivä lähestyy',

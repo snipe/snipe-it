@@ -74,6 +74,7 @@ return [
     'your_credentials' => '您的 Snipe-IT 憑證',
     'Accessory_Checkin_Notification' => '配件繳回',
     'Asset_Checkin_Notification' => '資產繳回',
+    'Asset_Checkout_Notification' => 'Asset checked out',
     'License_Checkin_Notification' => '授權繳回',
     'Expected_Checkin_Report' => '預計資產繳回報告',
     'Expected_Checkin_Notification' => '提醒: :name 接近繳回最後期限',

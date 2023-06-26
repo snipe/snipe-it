@@ -17,5 +17,6 @@ return array(
     'use_default_eula'					=> 'Umesto ovoga upotrebite <a href="#" data-toggle="modal" data-target="#eulaModal">primarnu postavku EULA</a>.',
     'use_default_eula_disabled'			=> '<del>Koristi osnovnu, default EULA.</del> Nema primarne, default EULA. Dodajte jednu u Postavke.',
     'clone'                             => 'Kloniraj pribor',
+    'delete_disabled'                   => 'This accessory cannot be deleted yet because some items are still checked out.',
 
 );

@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
+    'does_not_exist' => 'Лицензии не существует или у вас нет разрешения на её просмотр.',
     'user_does_not_exist' => 'Пользователь не существует.',
     'asset_does_not_exist' 	=> 'Актив который вы пытаетесь ассоциировать с этой лицензией не существует.',
     'owner_doesnt_match_asset' => 'Владелец актива, который вы пытаетесь связать с этой лицензией, отличается от выбранного в списке пользователя.',

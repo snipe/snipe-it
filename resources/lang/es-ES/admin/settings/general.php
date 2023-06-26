@@ -32,7 +32,7 @@ return [
     'backups_restoring'         => 'Restaurar desde copia de seguridad',
     'backups_upload'            => 'Cargar Copia de Seguridad',
     'backups_path'              => 'Las copias de seguridad en el servidor se almacenan en <code>:path</code>',
-    'backups_restore_warning'   => 'Utilice el botón de restauración <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> para restaurar desde una copia de seguridad anterior. (Actualmente esto no funciona con almacenamiento de archivos S3 o Docker.<br><br>Su <strong>base de datos completa de :app_name y cualquier archivo subido será completamente reemplazado</strong> por lo que hay en el archivo de copia de seguridad.  ',
+    'backups_restore_warning'   => 'Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to restore from a previous backup. (This does not currently work with S3 file storage or Docker.)<br><br>Your <strong>entire :app_name database and any uploaded files will be completely replaced</strong> by what\'s in the backup file.  ',
     'backups_logged_out'         => 'Todos los usuarios existentes, incluido usted, se cerrarán una vez que la restauración haya finalizado.',
     'backups_large'             => 'Las copias de seguridad muy grandes pueden agotar el tiempo de espera en el intento de restauración y todavía pueden necesitar ser ejecutadas a través de la línea de comandos. ',
     'barcode_settings'			=> 'Configuración de Código de Barras',
@@ -86,6 +86,8 @@ return [
     'ldap_settings'             => 'Ajustes LDAP',
     'ldap_client_tls_cert_help' => 'El certificado TLS del cliente y la clave para las conexiones LDAP normalmente sólo son útiles en las configuraciones de Google Workspace con "LDAP Seguro". Ambas son requeridas.',
      'ldap_client_tls_key'       => 'Llave TLS del cliente LDAP',
+    'ldap_location'             => 'LDAP Location',
+'ldap_location_help'             => 'The Ldap Location field should be used if <strong>an OU is not being used in the Base Bind DN.</strong> Leave this blank if an OU search is being used.',
     'ldap_login_test_help'      => 'Introduce un nombre de usuario LDAP válido y una contraseña de la DN base que especificaste anteriormente para probar si tu inicio de sesión LDAP está configurado correctamente. DEBES GUARDAR TUS CONFIGURACIONES LDAP ACTUALIZADAS PRIMERO.',
     'ldap_login_sync_help'      => 'Esto sólo prueba que LDAP puede sincronizarse correctamente. Si tu solicitud de Autenticación LDAP no es correcta, los usuarios aún no podrían iniciar sesión. DEBES GUARDAR TUS CONFIGURACIONES LDAP ACTUALIZADAS PRIMERO.',
     'ldap_manager'              => 'Gestor LDAP',
@@ -328,4 +330,9 @@ return [
     'setup_migration_create_user' => 'Siguiente: Crear usuario',
     'ldap_settings_link' => 'Página de ajustes LDAP',
     'slack_test' => 'Prueba de integración de <i class="fab fa-slack"></i>',
+    'google_callback_help' => 'This should be entered as the callback URL in your Google OAuth app settings in your organization&apos;s <strong><a href="https://console.cloud.google.com/" target="_blank">Google developer console <i class="fa fa-external-link" aria-hidden="true"></i></a></strong>.',
+    'google_login'      => 'Google Workspace Login Settings',
+    'enable_google_login'  => 'Enable users to login with Google Workspace',
+    'enable_google_login_help'  => 'Users will not be automatically provisioned. They must have an existing account here AND in Google Workspace, and their username here must match their Google Workspace email address. ',
+
 ];

@@ -17,5 +17,6 @@ return array(
     'use_default_eula'					=> 'Használja inkább az <a href="#" data-toggle="modal" data-target="#eulaModal">alapértelmezett EULA</a>-t.',
     'use_default_eula_disabled'			=> '<del>Használja inkább az alapértelmezett EULA-t.</del> Nincs alapértelmezett EULA beállítva. Kérem adjon hozzá egyet a Beállításokban!',
     'clone'                             => 'Clone Accessory',
+    'delete_disabled'                   => 'A tartozék még nem törölhető, mert még néhány belőle ki van adva.',
 
 );
