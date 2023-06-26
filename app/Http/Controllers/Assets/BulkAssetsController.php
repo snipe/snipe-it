@@ -15,9 +15,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\AssetCheckoutRequest;
 use App\Models\CustomField;
-use Illuminate\Support\Collection;
-
-use function Amp\Promise\wait;
 
 class BulkAssetsController extends Controller
 {
@@ -35,6 +32,7 @@ class BulkAssetsController extends Controller
     public function edit(Request $request)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         $this->authorize('view', Asset::class);
 
 =======
@@ -44,6 +42,10 @@ class BulkAssetsController extends Controller
         $this->authorize('update', Asset::class);
         
 >>>>>>> b2c2097e8 (just more troubleshooting stuff, still no solution)
+=======
+        $this->authorize('view', Asset::class);
+      
+>>>>>>> 2a352619f (clean up)
         if (! $request->filled('ids')) {
             return redirect()->back()->with('error', trans('admin/hardware/message.update.no_assets_selected'));
         }
@@ -64,12 +66,6 @@ class BulkAssetsController extends Controller
         foreach($models as $model) {
             $modelNames[] = $model->model->name;
         } 
-
-        // $custom_fields = new Collection(); 
-        // foreach ($models as $asset_key => $asset) {
-        //     $custom_fields->push($asset->model->customFields); 
-        // } 
-        $custom_fields = $asset_custom_field->pluck('model.fieldset.fields')->flatten()->unique('id'); 
 
         if ($request->filled('bulk_actions')) {
             switch ($request->input('bulk_actions')) {
@@ -104,7 +100,6 @@ class BulkAssetsController extends Controller
                     return view('hardware/bulk')
                         ->with('assets', $asset_ids)
                         ->with('statuslabel_list', Helper::statusLabelList())
-                        // ->with('custom_fields', $custom_fields)
                         ->with('models', $models->pluck(['model'])) 
                         ->with('modelNames', $modelNames);
             }
@@ -123,7 +118,6 @@ class BulkAssetsController extends Controller
      */
     public function update(Request $request)
     {
-    //    dd(request()->headers->get('referer')); 
         $this->authorize('update', Asset::class);
         $error_bag = [];
 
@@ -167,7 +161,6 @@ class BulkAssetsController extends Controller
             || ($request->anyFilled($custom_field_columns))
 
         ) {
-        //    dd($assets); 
             foreach ($assets as $assetId) {
 
                 $this->update_array = [];
@@ -258,29 +251,17 @@ class BulkAssetsController extends Controller
                 } else {
                     Asset::find($assetId)->update($this->update_array);
                 } 
-            } // endforeach ($assets)
-            ray(['error_bag1' => $error_bag]); 
+            } 
             if(!empty($error_bag)) {
-            //    $errors = collect($error_bag)->unique(); 
-            //   foreach ($errors as $key => $value) {
-            //    ray($value->message); 
-            //   }
                 $errors = [];
                //find the customfield name from the name of the messagebag items 
                 foreach ($error_bag as $key => $bag) {
-                   ray($bag->keys()); 
                   foreach($bag->keys() as $key => $value) {
                         CustomField::where('db_column', $value)->get()->map(function($item) use (&$errors) {
                             $errors[] = $item->name; 
                         });
                     }
                 }
-                ray(['error_bag2' => $errors]); 
-                 
-                // Session::save('ids', $assets);
-               
-                 
-                // return redirect()->route('hardware/bulkedit'); 
                 return redirect($bulk_back_url)->with('bulk_errors', array_unique($errors));
               }
             return redirect($bulk_back_url)->with('success', trans('admin/hardware/message.update.success'));
