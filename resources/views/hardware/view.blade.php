@@ -654,8 +654,11 @@
                                             </div>
                                             <div class="col-md-6">
                                                 {{ $asset->depreciation->name }}
-                                                ({{ $asset->depreciation->months }}
-                                                {{ trans('admin/hardware/form.months') }})
+                                                ({{ $asset->depreciation->term_length }}
+                                                    @if($asset->depreciation->term_type =='months')
+                                                         {{ trans('admin/depreciations/table.months') }})
+                                                    @else{{ trans('admin/depreciations/table.days') }})
+                                                    @endif
                                             </div>
                                         </div>
                                         <div class="row">
