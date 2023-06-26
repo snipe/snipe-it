@@ -652,10 +652,14 @@
         }
     }
 
+    function auditImageFormatter(value){
+        if (value){
+            return '<a href="' + value.url + '" data-toggle="lightbox" data-type="image"><img src="' + value.url + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive"></a>'
+        }
+    }
+
 
    function imageFormatter(value, row) {
-
-
 
         if (value) {
 

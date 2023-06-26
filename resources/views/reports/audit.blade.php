@@ -34,7 +34,7 @@
 
                         <thead>
                         <tr>
-                            <th class="col-sm-1" data-field="image" data-visible="false" data-formatter="imageFormatter">{{ trans('admin/hardware/table.image') }}</th>
+                            <th class="col-sm-1" data-field="file" data-visible="false" data-formatter="auditImageFormatter">{{ trans('admin/hardware/table.image') }}</th>
                             <th class="col-sm-2" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.audit') }}</th>
                             <th class="col-sm-2" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
                             <th class="col-sm-2" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
