@@ -22,7 +22,7 @@
     <div class="callout callout-warning">
       <i class="fas fa-exclamation-triangle"></i> {{ trans_choice('admin/hardware/form.bulk_update_warn', count($assets), ['asset_count' => count($assets)]) }}
         @if (count($models) > 0)
-            made up of {{count($models)}} models
+            {{ trans_choice('admin/hardware/form.bulk_update_with_custom_field', count($models), ['asset_model_count' => count($models)]) }} 
         @endif 
     </div>
 

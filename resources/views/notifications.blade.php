@@ -121,7 +121,7 @@
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
         <strong>{{ trans('general.notification_error') }} </strong>
-       The following fields had validation errors and were not edited: 
+       trans('general.notification_bulk_error_hint')
             @foreach($messages as $message) 
                 <br> {{ $message }}
             @endforeach
