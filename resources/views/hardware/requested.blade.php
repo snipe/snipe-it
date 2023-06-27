@@ -24,7 +24,7 @@
                        'id' => 'bulkForm']) }}
                     <div class="row">
                         <div class="col-md-12">
-
+                    {{ Form::close() }}
         @if ($requestedItems->count() > 0)
         <div class="table-responsive">
             <table
@@ -51,7 +51,7 @@
                         <th class="col-md-2" data-sortable="true">{{ trans('admin/hardware/form.expected_checkin') }}</th>
                         <th class="col-md-3" data-sortable="true">{{ trans('admin/hardware/table.requesting_user') }}</th>
                         <th class="col-md-2">{{ trans('admin/hardware/table.requested_date') }}</th>
-                        <th class="col-md-1">{{ trans('general.checkin').'/'.trans('general.checkout') }}</th>
+                        <th class="col-md-1" colspan="2">{{ trans('button.actions') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -103,6 +103,9 @@
                                 @endif
                             </td>
                             <td>{{ App\Helpers\Helper::getFormattedDateObject($request->created_at, 'datetime', false) }}</td>
+                            <td>
+                                    <form action="{{ config('app.url') }}/account/request-asset/{{ $request->requestable->id }}'" method="POST">@csrf<button class="btn btn-danger btn-sm" data-tooltip="true" title="Cancel this item request">{{ trans('button.cancel') }}</button></form>
+                            </td>
                             <td>
                                 @if ($request->itemType() == "asset")
                                     @if ($request->requestable->assigned_to=='')
