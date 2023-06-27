@@ -104,7 +104,12 @@
                             </td>
                             <td>{{ App\Helpers\Helper::getFormattedDateObject($request->created_at, 'datetime', false) }}</td>
                             <td>
-                                    <form action="{{ config('app.url') }}/account/request-asset/{{ $request->requestable->id }}'" method="POST">@csrf<button class="btn btn-danger btn-sm" data-tooltip="true" title="Cancel this item request">{{ trans('button.cancel') }}</button></form>
+                                {{ Form::open([
+                                    'method' => 'POST',
+                                    'route' => ['account/request-asset', $request->requestable->id],
+                                    ]) }}
+                                    <button class="btn btn-danger btn-sm" data-tooltip="true" title="Cancel this item request">{{ trans('button.cancel') }}</button>
+                                {{ Form::close() }}
                             </td>
                             <td>
                                 @if ($request->itemType() == "asset")
