@@ -156,14 +156,6 @@ class AssetMaintenance extends Model implements ICompanyableChild
         return $this->belongsTo(\App\Models\User::class, 'assigned_to')
             ->withTrashed();
     }
-<<<<<<< HEAD
-    public function repairerAssigned()
-    {
-        return $this->belongsTo(\App\Models\User::class, 'repairer')
-            ->withTrashed();
-    }
-=======
->>>>>>> parent of f160ba555 (adds maintenance location and repairer)
 
     public function supplier()
     {
