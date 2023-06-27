@@ -103,6 +103,7 @@ class AssetMaintenancesController extends Controller
         $assetMaintenance->is_warranty = $request->input('is_warranty');
         $assetMaintenance->cost = $request->input('cost');
         $assetMaintenance->notes = $request->input('notes');
+        $assetMaintenance->assigned_to = $request->input('assigned_to');
         $asset = Asset::find($request->input('asset_id'));
 
         if ((! Company::isCurrentUserHasAccess($asset)) && ($asset != null)) {
@@ -213,6 +214,7 @@ class AssetMaintenancesController extends Controller
         $assetMaintenance->supplier_id = $request->input('supplier_id');
         $assetMaintenance->is_warranty = $request->input('is_warranty');
         $assetMaintenance->cost =  $request->input('cost');
+        $assetMaintenance->assigned_to = $request->input('assigned_to');
         $assetMaintenance->notes = $request->input('notes');
 
         $asset = Asset::find(request('asset_id'));

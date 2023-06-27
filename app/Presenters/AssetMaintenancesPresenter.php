@@ -62,7 +62,7 @@ class AssetMaintenancesPresenter extends Presenter
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
-                'title' => trans('general.checked_out_to'),
+                'title' => trans('general.repair_assignee'),
                 'visible' => false,
                 'formatter' => 'usersLinkObjFormatter',
             ],

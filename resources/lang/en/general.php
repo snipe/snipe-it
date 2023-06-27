@@ -325,7 +325,7 @@ return [
     'setup_done'            => 'Finished!',
     'bulk_edit_about_to'    => 'You are about to edit the following: ',
     'checked_out'           => 'Checked Out',
-    'checked_out_to'        => 'Checked out to',
+    'repair_assignee'        => 'Repair Assignee',
     'fields'                => 'Fields',
     'last_checkout'         => 'Last Checkout',
     'due_to_checkin'        => 'The following :count items are due to be checked in soon:',
