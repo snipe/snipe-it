@@ -123,7 +123,9 @@
         <strong>{{ trans('general.notification_error') }} </strong>
        {{ trans('general.notification_bulk_error_hint') }}
             @foreach($messages as $message) 
-                <br> {{ $message }}
+                <ul>
+                    <li>{{ $message }}</li>
+                </ul> 
             @endforeach
     </div>
 </div>
