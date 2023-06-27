@@ -43,7 +43,7 @@
       <div class="box-body">
         @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/hardware/table.asset_tag'), 'fieldname' => 'asset_id', 'required' => 'true'])
         @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id', 'required' => 'true'])
-        @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.repairer'), 'fieldname' => 'assigned_to'])
+        @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.repair_assignee'), 'fieldname' => 'assigned_to'])
         @include ('partials.forms.edit.maintenance_type')
 
         <!-- Title -->
