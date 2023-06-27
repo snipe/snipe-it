@@ -64,7 +64,6 @@ class AssetMaintenancesController extends Controller
                                 'title',
                                 'asset_maintenance_time',
                                 'asset_maintenance_type',
-                                'asset_maintenance_location',
                                 'cost',
                                 'start_date',
                                 'completion_date',
@@ -72,7 +71,6 @@ class AssetMaintenancesController extends Controller
                                 'asset_tag',
                                 'asset_name',
                                 'user_id',
-                                'repairer',
                                 'supplier'
                             ];
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';

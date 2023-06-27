@@ -29,7 +29,6 @@ class AssetMaintenance extends Model implements ICompanyableChild
         'asset_id'               => 'required|integer',
         'supplier_id'            => 'required|integer',
         'assigned_to'            => 'integer',
-        'repairer'               => 'integer',
         'asset_maintenance_type' => 'required',
         'title'                  => 'required|max:100',
         'is_warranty'            => 'boolean',
@@ -157,11 +156,14 @@ class AssetMaintenance extends Model implements ICompanyableChild
         return $this->belongsTo(\App\Models\User::class, 'assigned_to')
             ->withTrashed();
     }
+<<<<<<< HEAD
     public function repairerAssigned()
     {
         return $this->belongsTo(\App\Models\User::class, 'repairer')
             ->withTrashed();
     }
+=======
+>>>>>>> parent of f160ba555 (adds maintenance location and repairer)
 
     public function supplier()
     {
