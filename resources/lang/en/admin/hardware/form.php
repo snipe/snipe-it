@@ -12,6 +12,7 @@ return [
     'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'bulk_update_with_custom_field' => 'Note the assets are :asset_model_count different types of models.',
     'bulk_update_model_prefix' => 'On Models:', 
+    'bulk_update_custom_field_unique' => 'This is a unique field and can not be bulk edited.',
     'checkedout_to'		=> 'Checked Out To',
     'checkout_date'		=> 'Checkout Date',
     'checkin_date'		=> 'Checkin Date',

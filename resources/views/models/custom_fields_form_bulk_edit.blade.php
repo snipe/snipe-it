@@ -20,15 +20,6 @@
     <div class="form-group{{ $errors->has($field->db_column_name()) ? ' has-error' : '' }}">
       <label for="{{ $field->db_column_name() }}" class="col-md-3 control-label">{{ $field->name }} </label>
       <div class="col-md-7 col-sm-12{{ ($field->pivot->required=='1') ? ' required' : '' }}">
-    {{-- @if ($field->is_unique)
-        <div>
-       <label>
-            <input type="text" class="col-md-6 form-control" disabled value="this is unique can't be edited"> 
-           {{ $field->name }} 
-            </label> 
-        </div> 
-    @else --}}
-
 
           @if ($field->element!='text')
               <!-- Listbox -->
@@ -38,7 +29,7 @@
 
               @elseif ($field->element=='textarea')
                 @if($field->is_unique)
-                    <input type="text" class="form-control" disabled value="This is a unique field and can not be edited">
+                    <input type="text" class="form-control" disabled value="{{ trans('/admin/hardware/form.bulk_update_custom_field_unique') }}">
                 @endif
                 @if(!$field->is_unique) 
                     <textarea class="col-md-6 form-control" id="{{ $field->db_column_name() }}" name="{{ $field->db_column_name() }}">{{ Request::old($field->db_column_name(),(isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : $field->defaultValue($model->id))) }}</textarea>
@@ -82,7 +73,7 @@
                     
                     @if (($field->field_encrypted=='0') || (Gate::allows('admin')))
                         @if ($field->is_unique) 
-                                <input type="text" class="form-control" disabled value="This is a unique field and can not be edited">
+                                <input type="text" class="form-control" disabled value="{{trans('/admin/hardware/form.bulk_update_custom_field_unique')}}">
                             @endif  
                         @if(!$field->is_unique) 
                                 <input type="text" value="{{ Request::old($field->db_column_name(),(isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : $field->defaultValue($model->id))) }}" id="{{ $field->db_column_name() }}" class="form-control" name="{{ $field->db_column_name() }}" placeholder="Enter {{ strtolower($field->format) }} text">
@@ -98,10 +89,6 @@
         @if ($field->help_text!='')
             <p class="help-block">{{ $field->help_text }}</p>
         @endif
-        {{-- @if ($field->is_unique)
-            <p class="help-block">Unique, Can't Be Bulk Updated</p> 
-        @endif --}}
-
 
         <p>{{ trans('admin/hardware/form.bulk_update_model_prefix') }}
              @foreach($field->assetModels() as $assetModel) 
@@ -131,7 +118,6 @@
 
 
     </div>
-   {{-- @endif  --}}
   @endforeach
 @endif
  @endforeach 
