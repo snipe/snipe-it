@@ -215,8 +215,8 @@ class BulkAssetsController extends Controller
                 if($custom_fields_present) { 
                     $asset = Asset::find($assetId); 
                     $assetCustomFields = $asset->model()->first()->fieldset; 
-                    if($assetCustomFields?->fields) {
-                            foreach ($assetCustomFields?->fields as $field) { 
+                    if($assetCustomFields && $assetCustomFields->fields) {
+                            foreach ($assetCustomFields->fields as $field) { 
                                 if (array_key_exists($field->db_column, $this->update_array)) {
                                         $asset->{$field->db_column} = $this->update_array[$field->db_column]; 
                                         $saved = $asset->save();    
