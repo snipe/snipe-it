@@ -38,7 +38,7 @@ class AssetsTransformer
             'byod' => ($asset->byod ? true : false),
 
             'model_number' => (($asset->model) && ($asset->model->model_number)) ? e($asset->model->model_number) : null,
-            'eol' => ($asset->model->eol != '') ? $asset->model->eol : null,
+            'eol' => (($asset->model) && ($asset->model->eol != '')) ? $asset->model->eol : null,
             'asset_eol_date' => ($asset->asset_eol_date != '') ? Helper::getFormattedDateObject($asset->asset_eol_date, 'date') : null,
             'status_label' => ($asset->assetstatus) ? [
                 'id' => (int) $asset->assetstatus->id,
