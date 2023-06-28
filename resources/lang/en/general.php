@@ -459,7 +459,7 @@ return [
         'checked_out_to_email' => 'Checked Out to: Email',
         'checked_out_to_tag' => 'Checked Out to: Asset Tag',
         'manager_first_name' => 'Manager First Name',
-        'manager_last_name' => 'Manager First Name',
+        'manager_last_name' => 'Manager Last Name',
         'manager_full_name' => 'Manager Full Name',
         'manager_username' => 'Manager Username',
         'checkout_type' => 'Checkout Type',
