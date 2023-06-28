@@ -74,6 +74,7 @@ return [
     'your_credentials' => 'Вашите идентификационни данни за Snipe-IT',
     'Accessory_Checkin_Notification' => 'Аксесоарат е вписан',
     'Asset_Checkin_Notification' => 'Актива е вписан',
+    'Asset_Checkout_Notification' => 'Asset checked out',
     'License_Checkin_Notification' => 'Лиценза е вписан',
     'Expected_Checkin_Report' => 'Очакван рапорт за вписване на актив',
     'Expected_Checkin_Notification' => 'Напомняне: :name крайната дата за вписване наближава',

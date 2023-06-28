@@ -17,5 +17,6 @@ return array(
     'use_default_eula'					=> 'Brug den <a href="#" data-toggle="modal" data-target="#eulaModal">primære standard slutbrugerlicens</a> i stedet for.',
     'use_default_eula_disabled'			=> '<del>Brug den primære standard slutbrugerlicens i stedet for.</del> Ingen primær standard slutbrugerlicens er defineret. Tilføj en under indstillinger.',
     'clone'                             => 'Clone Accessory',
+    'delete_disabled'                   => 'This accessory cannot be deleted yet because some items are still checked out.',
 
 );

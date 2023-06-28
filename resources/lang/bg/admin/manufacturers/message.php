@@ -2,6 +2,7 @@
 
 return array(
 
+    'support_url_help' => 'Use <code>{LOCALE}</code> and <code>{SERIAL}</code> in your URL as variables to have those values auto-populate when viewing assets.',
     'does_not_exist' => 'Несъществуващ производител.',
     'assoc_users'	 => 'Този производител е асоцииран с поне един от моделите и не може да бъде изтрит. Моля, променете връзките на моделите по отношение на този производител и опитайте отново. ',
 

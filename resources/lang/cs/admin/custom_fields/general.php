@@ -49,4 +49,6 @@ return [
     'unique' => 'Unikátní',
     'display_in_user_view' => 'Povolit uživateli vyhledat tyto hodnoty na stránce Zobrazit přiřazené položky',
     'display_in_user_view_table' => 'Viditelné pro uživatele',
+    'auto_add_to_fieldsets' => 'Automatically add this to every new fieldset',
+    'add_to_preexisting_fieldsets' => 'Add to any existing fieldsets',
 ];

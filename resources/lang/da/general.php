@@ -92,6 +92,7 @@ return [
     'debug_warning_text'    => 'Denne applikation kører i produktionstilstand med debugging aktiveret. Dette kan udsætte følsomme data, hvis din ansøgning er tilgængelig for omverdenen. Deaktiver fejlsøgningsmodus ved at indstille værdien <code>APP_DEBUG</code> i din <code>.env</code> fil til <code>false</code>.',
     'delete'  				=> 'Slet',
     'delete_confirm'  		=> 'Er du sikker på at du vil slette :item?',
+    'delete_confirm_no_undo' => 'Are you sure you wish to delete :item? This can not be undone.',
     'deleted'  				=> 'Slettet',
     'delete_seats'  		=> 'Slettede pladser',
     'deletion_failed'       => 'Sletning mislykkedes',
@@ -439,4 +440,13 @@ return [
     'setup_migration_output' => 'Migration output:',
     'setup_migration_create_user' => 'Next: Create User',
     'importer_generic_error'    => 'Your file import is complete, but we did receive an error. This is usually caused by third-party API throttling from a notification webhook (such as Slack) and would not have interfered with the import itself, but you should confirm this.',
+    'confirm' => 'Confirm',
+    'autoassign_licenses' => 'Auto-Assign Licenses',
+    'autoassign_licenses_help' => 'Allow this user to have licenses assigned via the bulk-assign license UI or cli tools.',
+    'autoassign_licenses_help_long' => 'This allows a user to be have licenses assigned via the bulk-assign license UI or cli tools. (For example, you might not want contractors to be auto-assigned a license you would provide to only staff members. You can still individually assign licenses to those users, but they will not be included in the Checkout License to All Users functions.)',
+    'no_autoassign_licenses_help' => 'Do not include user for bulk-assigning through the license UI or cli tools.',
+    'modal_confirm_generic'      => 'Are you sure?',
+    'cannot_be_deleted'      => 'This item cannot be deleted',
+    'undeployable_tooltip'      => 'This item cannot be checked out. Check the quantity remaining.',
+
 ];

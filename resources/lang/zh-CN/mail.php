@@ -74,6 +74,7 @@ return [
     'your_credentials' => '您的 Snipe-IT 登录凭据',
     'Accessory_Checkin_Notification' => '配件已签入',
     'Asset_Checkin_Notification' => '资产已签入',
+    'Asset_Checkout_Notification' => '资产已借出',
     'License_Checkin_Notification' => '许可证已签入',
     'Expected_Checkin_Report' => '预期的资产检查报告',
     'Expected_Checkin_Notification' => '提醒：:name 签入截止日期已接近。',

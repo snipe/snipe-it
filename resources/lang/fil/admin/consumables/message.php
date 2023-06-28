@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Ang consumable ay hindi nai-check out, mangyaring subukang muli',
         'success' 		=> 'Ang consumable ay matagumpay na nai-check out.',
-        'user_does_not_exist' => 'Ang user na iyon ay hindi balido. Mangyaring subukang muli.'
+        'user_does_not_exist' => 'Ang user na iyon ay hindi balido. Mangyaring subukang muli.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

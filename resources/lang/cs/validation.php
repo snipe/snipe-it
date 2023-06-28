@@ -67,6 +67,8 @@ return [
         'array'   => 'Atribut musí mít alespoň: min položky.',
     ],
     'starts_with'          => ':attribute musí končit jednou z následujících hodnot: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'Zvolený :attribute je neplatný.',
     'numeric'              => ':attribute musí být číslo.',
     'present'              => 'Pole atributu musí být přítomno.',

@@ -8,6 +8,7 @@ return [
     'change' 		=> 'Гадуур нь',
     'checkout_date' => 'Тооцоо хийх өдөр',
     'checkoutto' 	=> 'Нь шалгаж',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Current Value',
     'diff' 			=> 'Diff',
     'dl_csv' 		=> 'CSV татаж авах',

@@ -50,5 +50,5 @@ return [
     'email_credentials_text' => 'Email my credentials to the email address above',
     'next_save_user' => 'Next: Save User',
     'all_assigned_list_generation' => 'تم إنشاؤها في:',
-    'email_user_creds_on_create' => 'Email this user their credentials?',
+    'email_user_creds_on_create' => 'إرسال بيانات دخول هذا المستخدم بالبريد الإلكتروني؟',
 ];

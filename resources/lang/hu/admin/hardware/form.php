@@ -48,7 +48,7 @@ return [
     'asset_location_update_default' => 'Csak az alapértelmezett helyszín frissítése',
     'asset_not_deployable' => 'Az eszköz még nem kiadásra kész, még nem kiadható.',
     'asset_deployable' => 'Az eszköz kiadásra kész, kiadható.',
-    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'processing_spinner' => 'Feldolgozás folyamatban... (Nagyméretű fájlok esetében ez eltarthat egy darabig)',
     'optional_infos'  => 'Nem kötelező információk',
     'order_details'   => 'Megrendeléssel kapcsolatos információk'
 ];

@@ -49,4 +49,6 @@ return [
     'unique' => 'Jedinstven',
     'display_in_user_view' => 'Dozvoli zaduženom korisniku da vidi ove vrednosti na njihovoj stranici pregleda zadužene imovine',
     'display_in_user_view_table' => 'Vidljivo korisniku',
+    'auto_add_to_fieldsets' => 'Automatically add this to every new fieldset',
+    'add_to_preexisting_fieldsets' => 'Add to any existing fieldsets',
 ];

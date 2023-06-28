@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => '그룹이 이미 존재합니다!',
-    'group_not_found'     => 'Group ID :id does not exist.',
+    'group_not_found'     => '그룹 ID :id가 존재하지 않습니다.',
     'group_name_required' => '이름 항목을 입력해주세요.',
 
     'success' => array(

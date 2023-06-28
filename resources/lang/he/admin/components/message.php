@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'הרכיב לא נבדק, נסה שוב',
         'success' 		=> 'רכיב הוצא בהצלחה.',
-        'user_does_not_exist' => 'משתמש זה אינו חוקי. בבקשה נסה שוב.'
+        'user_does_not_exist' => 'משתמש זה אינו חוקי. בבקשה נסה שוב.',
+        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

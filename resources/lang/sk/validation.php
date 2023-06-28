@@ -67,6 +67,8 @@ return [
         'array'   => 'The :attribute must have at least :min items.',
     ],
     'starts_with'          => ':attribute musí začínať jedným z nasledujúcich výrazov: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'The selected :attribute is invalid.',
     'numeric'              => 'The :attribute must be a number.',
     'present'              => 'The :attribute field must be present.',

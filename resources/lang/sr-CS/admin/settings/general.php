@@ -32,7 +32,7 @@ return [
     'backups_restoring'         => 'Vraćanje rezervne kopije',
     'backups_upload'            => 'Učitavanje rezervne kopije',
     'backups_path'              => 'Rezervne kopije se čuvaju na <code>:path</code>',
-    'backups_restore_warning'   => 'Koristite dugme za vraćanje <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small>za vraćanje iz prethodne rezervne kopije. (Ovo trenutno ne funkcioniše sa S3 skladištem datoteka ili Docker-om.<br><br>Vaša <strong>cela :app_name baza podataka i sve otpremljene datoteke biće u potpunosti zamenjene</strong> onim što se nalazi u datoteci rezervne kopije.  ',
+    'backups_restore_warning'   => 'Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to restore from a previous backup. (This does not currently work with S3 file storage or Docker.)<br><br>Your <strong>entire :app_name database and any uploaded files will be completely replaced</strong> by what\'s in the backup file.  ',
     'backups_logged_out'         => 'Svi postojeći korisnici, uključujući i vas, biće odjavljeni kada se vraćanje završi.',
     'backups_large'             => 'Veoma velike rezervne kopije mogu da istekne tokom pokušaja vraćanja i možda će morati da se pokrenu preko komandne linije. ',
     'barcode_settings'			=> 'Podešavanja barkoda',
@@ -86,6 +86,8 @@ return [
     'ldap_settings'             => 'LDAP podešavanja',
     'ldap_client_tls_cert_help' => 'TLS sertifikat i ključ na strani klijenta za LDAP veze su obično korisni samo u Google Workspace konfiguracijama sa „Secure LDAP-om“. Oba su obavezna.',
      'ldap_client_tls_key'       => 'LDAP klijentski TLS ključ',
+    'ldap_location'             => 'LDAP Location',
+'ldap_location_help'             => 'The Ldap Location field should be used if <strong>an OU is not being used in the Base Bind DN.</strong> Leave this blank if an OU search is being used.',
     'ldap_login_test_help'      => 'Unesite važeće LDAP korisničko ime i lozinku iz osnovnog DN-a koji ste naveli iznad da biste proverili da li je vaša LDAP prijava ispravno konfigurisana. PRVO MORATE SAČUVATI VAŠA AŽURIRANA LDAP PODEŠAVANJA.',
     'ldap_login_sync_help'      => 'Ovo samo testira da LDAP može ispravno da se sinhronizuje. Ako vaš upit za LDAP autentifikaciju nije tačan, korisnici možda i dalje neće moći da se prijave. PRVO MORATE SAČUVATI VAŠA AŽURIRANA LDAP PODEŠAVANJA.',
     'ldap_manager'              => 'LDAP Menadžer',
@@ -332,4 +334,9 @@ return [
     'setup_migration_create_user' => 'Sledeće: Kreirajte korisnika',
     'ldap_settings_link' => 'LDAP podešavanja stranice',
     'slack_test' => 'Testirajte <i class="fab fa-slack"></i> integraciju',
+    'google_callback_help' => 'This should be entered as the callback URL in your Google OAuth app settings in your organization&apos;s <strong><a href="https://console.cloud.google.com/" target="_blank">Google developer console <i class="fa fa-external-link" aria-hidden="true"></i></a></strong>.',
+    'google_login'      => 'Google Workspace Login Settings',
+    'enable_google_login'  => 'Enable users to login with Google Workspace',
+    'enable_google_login_help'  => 'Users will not be automatically provisioned. They must have an existing account here AND in Google Workspace, and their username here must match their Google Workspace email address. ',
+
 ];

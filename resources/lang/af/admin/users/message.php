@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Jy het hierdie bate suksesvol geweier.',
     'bulk_manager_warn'	        => 'Jou gebruikers is suksesvol opgedateer, maar jou bestuurderinskrywing is nie gestoor nie, want die bestuurder wat jy gekies het, was ook in die gebruikerslys om geredigeer te word, en gebruikers mag nie hul eie bestuurder wees nie. Kies asseblief u gebruikers weer, behalwe die bestuurder.',
     'user_exists'               => 'Gebruiker bestaan ​​reeds!',
-    'user_not_found'            => 'Gebruiker [: id] bestaan ​​nie.',
+    'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Die aanmeldingsveld is nodig',
     'user_password_required'    => 'Die wagwoord is nodig.',
     'insufficient_permissions'  => 'Onvoldoende Toestemmings.',

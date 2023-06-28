@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Restaurar Ativo',
     'pending'  					=> 'Pendente',
     'undeployable'  			=> 'Não implementável',
+    'undeployable_tooltip'  	=> 'Este ativo possui uma etiqueta de status que não é implantável e não pode ser check-out no momento.',
     'view'  					=> 'Ver Ativo',
     'csv_error' => 'Você tem um erro no seu arquivo CSV:',
     'import_text' => '

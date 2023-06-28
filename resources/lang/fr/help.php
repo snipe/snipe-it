@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Plus d\'info',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'Cocher cette case va modifier l\'enregistrement de l\'actif pour refléter ce nouvel emplacement. Laisser décoché notera simplement l\'emplacement dans le journal d\'audit.<br><br>Notez que si cette ressource est affectée, cela ne changera pas l\'emplacement de la personne, de la ressource ou de l\'emplacement auquel elle est affectée.',
 
     'assets' => 'Les actifs sont des éléments suivis par le numéro de série ou la balise d\'actif. Ils ont tendance à être des éléments de valeur plus élevée lorsque l\'identification d\'un élément spécifique importe.',
 

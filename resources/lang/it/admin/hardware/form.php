@@ -48,7 +48,7 @@ return [
     'asset_location_update_default' => 'Aggiorna solo la posizione predefinita',
     'asset_not_deployable' => 'Lo stato del bene è "Non Assegnabile". Non puoi fare il check-out di questo bene.',
     'asset_deployable' => 'Lo stato del bene è "Assegnabile". Puoi fare il check-out di questo bene.',
-    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'processing_spinner' => 'Elaborazione... (Può volerci un po\' su file di grandi dimensioni)',
     'optional_infos'  => 'Informazioni Opzionali',
     'order_details'   => 'Informazioni relative all\'ordine'
 ];

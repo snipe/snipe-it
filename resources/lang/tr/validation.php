@@ -67,6 +67,8 @@ return [
         'array'   => ': Özelliği en az: dakika öğesine sahip olmalıdır.',
     ],
     'starts_with'          => 'Özellik aşağıdaki değerlerden biriyle başlamalıdır.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => ':attribute geçersiz.',
     'numeric'              => ':attribute sayı olmalıdır.',
     'present'              => ': Attribute alanı bulunmalıdır.',

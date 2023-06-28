@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Herstel Asset',
     'pending'  					=> 'In behandeling',
     'undeployable'  			=> 'Niet uitgeefbaar',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Bekijk Asset',
     'csv_error' => 'Je hebt een fout in je CSV-bestand:',
     'import_text' => '

@@ -8,6 +8,7 @@ return [
     'change' 		=> 'Giriş/Çıkış',
     'checkout_date' => 'Çıkış Tarihi',
     'checkoutto' 	=> 'Çıkış Yapıldı',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Mevcut Değer',
     'diff' 			=> 'Fark',
     'dl_csv' 		=> 'CSV Dosyasını İndir',

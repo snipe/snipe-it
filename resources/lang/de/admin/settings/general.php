@@ -32,7 +32,7 @@ return [
     'backups_restoring'         => 'Aus Backup wiederherstellen',
     'backups_upload'            => 'Backup hochladen',
     'backups_path'              => 'Sicherungen auf dem Server werden in <code>:path</code> gespeichert',
-    'backups_restore_warning'   => 'Wählen Sie die Wiederherstellung <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> um ein Backup wieder herzustellen. (Funktioniert derzeit nicht mit S3 Datenspeicher oder Docker)<br><br>Die <strong>gesamte :app_name Datebank und alle Uploads werden mit den Inhalten des Backups überschrieben</strong>.  ',
+    'backups_restore_warning'   => 'Klicke den Wiederherstellungs-Knopf <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> um ein Backup wiederherzustellen. (Funktioniert derzeit nicht mit S3 Datenspeicher oder Docker.)<br><br><strong>Die gesamte :app_name Datenbank und alle hochgeladenen Dateien werden mit den Inhalten des Backups überschrieben.</strong>  ',
     'backups_logged_out'         => 'Alle vorhandenen Benutzer, auch Sie, werden abgemeldet, sobald Ihre Wiederherstellung abgeschlossen ist.',
     'backups_large'             => 'Sehr große Sicherungen können beim Wiederherstellungsversuch ausfallen (Time-Out) und müssen eventuell über die Kommandozeile ausgeführt werden. ',
     'barcode_settings'			=> 'Barcode Einstellungen',
@@ -86,6 +86,8 @@ return [
     'ldap_settings'             => 'LDAP Einstellungen',
     'ldap_client_tls_cert_help' => 'Client-seitige TLS-Zertifikat und Schlüssel für LDAP Verbindungen sind in der Regel nur in Google Workspace Konfigurationen mit "Secure LDAP" nützlich. Beide werden benötigt.',
      'ldap_client_tls_key'       => 'LDAP Client-seitiger TLS-Schlüssel',
+    'ldap_location'             => 'LDAP Standort',
+'ldap_location_help'             => 'Das Feld LDAP Standort sollte verwendet werden, wenn <strong>keine OU im Basis Bind DN verwendet wird.</strong> Leer lassen, wenn eine OU-Suche verwendet wird.',
     'ldap_login_test_help'      => 'Geben Sie einen gültigen LDAP-Benutzernamen und ein Passwort von der oben angegebenen Basis-DN ein, um zu testen, ob Ihre LDAP-Anmeldung korrekt konfiguriert ist. SIE MÜSSEN IHRE AKTUALISIERTEN LDAP-EINSTELLUNGEN ZUERST SPEICHERN.',
     'ldap_login_sync_help'      => 'Dies testet nur, ob LDAP korrekt synchronisiert werden kann. Wenn Ihre LDAP-Authentifizierungsabfrage nicht korrekt ist, können sich Benutzer möglicherweise nicht anmelden. SIE MÜSSEN IHRE AKTUALISIERTEN LDAP-EINSTELLUNGEN ZUERST SPEICHERN.',
     'ldap_manager'              => 'LDAP Manager',
@@ -328,4 +330,9 @@ return [
     'setup_migration_create_user' => 'Weiter: Benutzer erstellen',
     'ldap_settings_link' => 'LDAP Einstellungsseite',
     'slack_test' => '<i class="fab fa-slack"></i> Integration testen',
+    'google_callback_help' => 'Dies sollte als Callback-URL in den Google OAuth App-Einstellungen in deinem Unternehmen eingegeben werden&apos;s <strong><a href="https://console.cloud.google.com/" target="_blank">Google Developer Konsole <i class="fa fa-external-link" aria-hidden="true"></i></a></strong>.',
+    'google_login'      => 'Google Workspace Anmeldeeinstellungen',
+    'enable_google_login'  => 'Anmelden mit Google Workspace für Benutzer aktivieren',
+    'enable_google_login_help'  => 'Benutzer werden nicht automatisch bereitgestellt. Sie müssen ein bestehendes Konto hier UND in Google Workspace haben, und ihr Benutzername muss mit der E-Mail-Adresse von Google Workspace übereinstimmen. ',
+
 ];

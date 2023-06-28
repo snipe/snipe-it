@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'วัสดุสิ้นเปลืองยังไม่ถูกเช็คเอ้าท์ กรุณาลองใหม่อีกครั้ง',
         'success' 		=> 'เช็คเอ้าท์วัสดุสิ้นเปลืองแล้ว',
-        'user_does_not_exist' => 'ผู้ใช้งานไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง.'
+        'user_does_not_exist' => 'ผู้ใช้งานไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

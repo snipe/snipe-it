@@ -49,4 +49,6 @@ return [
     'unique' => 'Einstakt',
     'display_in_user_view' => 'Leyfa útskráðum notanda að skoða þessi gildi á síðunni Skoða úthlutaðar eignir',
     'display_in_user_view_table' => 'Sýnileg notenda',
+    'auto_add_to_fieldsets' => 'Automatically add this to every new fieldset',
+    'add_to_preexisting_fieldsets' => 'Add to any existing fieldsets',
 ];

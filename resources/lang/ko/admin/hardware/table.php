@@ -8,6 +8,7 @@ return [
     'change' 		=> '입/출',
     'checkout_date' => '반출 일자',
     'checkoutto' 	=> '반출 확인',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Current Value',
     'diff' 			=> '차액',
     'dl_csv' 		=> 'CSV로 내려받기',

@@ -74,6 +74,7 @@ return [
     'your_credentials' => 'Thông tin về Snipe-IT của bạn',
     'Accessory_Checkin_Notification' => 'Phụ kiện đã cấp phát thành công',
     'Asset_Checkin_Notification' => 'Tài sản đã cấp phát thành công',
+    'Asset_Checkout_Notification' => 'Asset checked out',
     'License_Checkin_Notification' => 'Giấy phép đã cấp phát thành công',
     'Expected_Checkin_Report' => 'Báo cáo mong muốn cấp phát tài sản',
     'Expected_Checkin_Notification' => 'Nhắn nhở: hạn chót cấp phát cho :name gần đến',

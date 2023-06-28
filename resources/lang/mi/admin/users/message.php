@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Kua paopao angitu koe ki tenei taonga.',
     'bulk_manager_warn'	        => 'Kua angitu te whakahoutia o nga kaiwhakamahi, heoi kihai i tohua to tautuhinga kaiwhakahaere no te mea ko te kaiwhakahaere i tohua e koe i roto i te rarangi kaiwhakamahi kia whakatikaia, kaore ano hoki nga kaiwhakamahi i to ratou ake kaiwhakahaere. Tēnā koa tīpako anō i ō kaiwhakamahi, kaore i te kaiwhakahaere.',
     'user_exists'               => 'Kua noho kē te Kaiwhakamahi!',
-    'user_not_found'            => 'Kāore te Kaiwhakamahi [: id] i te tīariari.',
+    'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Kei te hiahiatia te mara takiuru',
     'user_password_required'    => 'Kei te hiahiatia te kupuhipa.',
     'insufficient_permissions'  => 'Nga Whakaae Korero.',

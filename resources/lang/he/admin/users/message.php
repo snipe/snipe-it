@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'דחיית את הנכס הזה בהצלחה.',
     'bulk_manager_warn'	        => 'המשתמשים שלך עודכנו בהצלחה, אך רשומת המנהל שלך לא נשמרה מפני שהמנהל שבחרת נבחר גם ברשימת המשתמשים כדי לערוך, והמשתמשים לא יכולים להיות המנהל שלהם. בחר שוב את המשתמשים שלך, למעט המנהל.',
     'user_exists'               => 'משתמש כבר קיים!',
-    'user_not_found'            => 'משתמש [: id] אינו קיים.',
+    'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'יש להזין את שדה הכניסה',
     'user_password_required'    => 'נדרשת הסיסמה.',
     'insufficient_permissions'  => 'הרשאות לא מספיקות.',

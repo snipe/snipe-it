@@ -8,6 +8,7 @@ return [
     'change' 		=> 'In / Amach',
     'checkout_date' => 'Dáta Seiceáil',
     'checkoutto' 	=> 'Seiceáil Amach',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Current Value',
     'diff' 			=> 'Diff',
     'dl_csv' 		=> 'Íoslódáil CSV',

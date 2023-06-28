@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Komponent is nie nagegaan nie, probeer asseblief weer',
         'success' 		=> 'Komponent is suksesvol nagegaan.',
-        'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer asseblief weer.'
+        'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer asseblief weer.',
+        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

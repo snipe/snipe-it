@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Jūs sėkmingai atšaukėte šią įrangą.',
     'bulk_manager_warn'	        => 'Jūsų vartotojai buvo sėkmingai atnaujinti, tačiau jūsų valdytojo įrašas nebuvo išsaugotas, nes pasirinktas valdytojas taip pat buvo naudotojo sąraše, kurį reikia redaguoti, o vartotojai gali būti ne jų valdytojai. Prašome vėl pasirinkti naudotojus, išskyrus valdytoją.',
     'user_exists'               => 'Naudotojas jau yra!',
-    'user_not_found'            => 'Naudotojas [:id] neegzistuoja.',
+    'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Prisijungimo laukelis privalomas',
     'user_password_required'    => 'Slaptažodis būtinas.',
     'insufficient_permissions'  => 'Nepakankamos teisės.',

@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'مواد مصرفی بررسی نشد ، دوباره سعی کنید.',
         'success' 		=> 'مواد مصرفی بررسی شد.',
-        'user_does_not_exist' => 'کاربر نامعتبر است لطفا دوباره امتحان کنید.'
+        'user_does_not_exist' => 'کاربر نامعتبر است لطفا دوباره امتحان کنید.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

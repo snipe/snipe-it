@@ -75,6 +75,7 @@ return [
     'your_credentials' => 'Your Snipe-IT credentials',
     'Accessory_Checkin_Notification' => 'Accessory checked in',
     'Asset_Checkin_Notification' => 'Asset checked in',
+    'Asset_Checkout_Notification' => 'Asset checked out',
     'License_Checkin_Notification' => 'License checked in',
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',

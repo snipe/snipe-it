@@ -17,5 +17,6 @@ return array(
     'use_default_eula'					=> 'Наместо ова, користете <a href="#" data-toggle="modal" data-target="#eulaModal">стандардни Услови за користење</a>.',
     'use_default_eula_disabled'			=> '<del>Наместо тоа користете стандардни Услови за користење.</del> Не се внесени стандардни Услови за користење. Ве молиме внесете ги во Поставки.',
     'clone'                             => 'Clone Accessory',
+    'delete_disabled'                   => 'This accessory cannot be deleted yet because some items are still checked out.',
 
 );

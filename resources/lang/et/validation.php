@@ -67,6 +67,8 @@ return [
         'array'   => 'Atribuudil peab olema vähemalt: min kirjeid.',
     ],
     'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'Valitud atribuut on kehtetu.',
     'numeric'              => 'Atribuut peab olema number.',
     'present'              => 'Atribuudiväli peab olema kohal.',

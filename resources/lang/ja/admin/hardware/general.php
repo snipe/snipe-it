@@ -23,6 +23,7 @@ return [
     'restore'  					=> '資産を復元',
     'pending'  					=> 'ペンディング',
     'undeployable'  			=> '配備不可',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> '資産を表示',
     'csv_error' => 'CSVファイルにエラーがあります:',
     'import_text' => '

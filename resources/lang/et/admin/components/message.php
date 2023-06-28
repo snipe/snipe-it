@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Komponenti ei kontrollitud, palun proovige uuesti',
         'success' 		=> 'Komponent on edukalt välja võetud.',
-        'user_does_not_exist' => 'Vale kasutaja. Palun proovi uuesti.'
+        'user_does_not_exist' => 'Vale kasutaja. Palun proovi uuesti.',
+        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

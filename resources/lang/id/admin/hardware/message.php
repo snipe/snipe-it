@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Peringatan: </strong> Aset ini telah di tandai sebagai aset yang tak dapat digunakan.
                         Jika status ini telah berubah, silahkan perbarui status aset.',
     'does_not_exist' 	=> 'Aset tidak ada.',
-    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
+    'does_not_exist_or_not_requestable' => 'Aset tersebut tidak ada atau tidak dapat di minta.',
     'assoc_users'	 	=> 'Aset ini sudah diberikan kepada pengguna dan tidak dapat di hapus. Silahkan cek aset terlebih dahulu kemudian coba hapus kembali. ',
 
     'create' => [
@@ -17,14 +17,14 @@ return [
         'error'   			=> 'Gagal perbarui aset, silahkan coba kembali',
         'success' 			=> 'Sukses perbarui aset.',
         'nothing_updated'	=>  'Tidak ada kolom yang dipilih, jadi tidak ada yang diperbaharui.',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'no_assets_selected'  =>  'Tidak ada aset yang dipilih, jadi tidak ada yang diperbarui.',
     ],
 
     'restore' => [
         'error'   		=> 'Aset gagal dikembalikan, silahkan coba lagi',
         'success' 		=> 'Aset berhasil dikembalikan.',
-        'bulk_success' 		=> 'Asset restored successfully.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'bulk_success' 		=> 'Aset berhasil dikembalikan.',
+        'nothing_updated'   => 'Tidak ada aset yang dipilih, jadi tidak ada yang dipulihkan.', 
     ],
 
     'audit' => [
