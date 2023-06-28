@@ -37,7 +37,12 @@
                   Request::old($field->db_column_name(),(isset($item) ? Helper::gracefulDecrypt($field, htmlspecialchars($item->{$field->db_column_name()}, ENT_QUOTES)) : $field->defaultValue($model->id))), ['class'=>'format select2 form-control']) }}
 
               @elseif ($field->element=='textarea')
+                @if($field->is_unique)
+                <input type="text" class="form-control" disabled value="This is a unique field and can not be edited">
+                @endif
+                @if(!$field->is_unique) 
                   <textarea class="col-md-6 form-control" id="{{ $field->db_column_name() }}" name="{{ $field->db_column_name() }}">{{ Request::old($field->db_column_name(),(isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : $field->defaultValue($model->id))) }}</textarea>
+                 @endif 
               @elseif ($field->element=='checkbox')
                     <!-- Checkboxes -->
                   @foreach ($field->formatFieldValuesAsArray() as $key => $value)
