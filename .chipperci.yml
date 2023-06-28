@@ -14,6 +14,11 @@ on:
       - master
       - develop
 
+  pull_request:
+    branches:
+      - master
+      - develop
+
 pipeline:
   - name: Setup
     cmd: |
