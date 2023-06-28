@@ -17,11 +17,6 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-body">
-                    {{ Form::open([
-                      'method' => 'POST',
-                      'route' => ['hardware/bulkedit'],
-                      'class' => 'form-inline',
-                       'id' => 'bulkForm']) }}
                     <div class="row">
                         <div class="col-md-12">
 
@@ -51,7 +46,7 @@
                         <th class="col-md-2" data-sortable="true">{{ trans('admin/hardware/form.expected_checkin') }}</th>
                         <th class="col-md-3" data-sortable="true">{{ trans('admin/hardware/table.requesting_user') }}</th>
                         <th class="col-md-2">{{ trans('admin/hardware/table.requested_date') }}</th>
-                        <th class="col-md-1" colspan="2">{{ trans('button.actions') }}</th>
+                        <th class="col-md-1">{{ trans('button.actions') }}</th> <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -143,7 +138,6 @@
                 </div>
             </div>
         </div>
-        {{ Form::close() }}
     </div> <!-- .col-md-12> -->
 </div> <!-- .row -->
 @stop
