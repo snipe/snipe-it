@@ -233,15 +233,15 @@ class BulkAssetsController extends Controller
                             foreach ($assetCustomFields?->fields as $field) { 
                                 if (array_key_exists($field->db_column, $this->update_array)) {
                                         $asset->{$field->db_column} = $this->update_array[$field->db_column]; 
-                                        $asset->save();    
+                                        $saved = $asset->save();    
+                                        if(!$saved) {
+                                            $error_bag[] = $asset->getErrors();
+                                        }
                                         continue; 
                                 } else { 
                                         $array = $this->update_array; 
                                         array_except($array, $field->db_column); 
-                                        // $asset->update($array); 
                                         $asset->save($array); 
-                                        //call update on parent model 
-                                        // $asset->save();
                                     }     
                                     if (!$asset->save()) {
                                         $error_bag[] = $asset->getErrors();
