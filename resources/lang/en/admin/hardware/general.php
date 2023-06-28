@@ -19,7 +19,7 @@ return [
     'requestable'               => 'Requestable',
     'requested'				    => 'Requested',
     'not_requestable'           => 'Not Requestable',
-    'requestable_status_warning' => 'Do not change  requestable status',
+    'requestable_status_warning' => 'Do not change requestable status',
     'restore'  					=> 'Restore Asset',
     'pending'  					=> 'Pending',
     'undeployable'  			=> 'Undeployable',
