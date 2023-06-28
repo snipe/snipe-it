@@ -214,7 +214,6 @@ class Importer extends Component
             'model_notes' => trans('general.item_notes', ['item' => trans('admin/hardware/form.model')]),
             'manufacturer' => trans('general.manufacturer'),
             'order_number' => trans('general.order_number'),
-            'notes' => trans('general.notes'),
             'image' => trans('general.importer.image_filename'),
             /**
              * Checkout fields:
