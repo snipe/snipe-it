@@ -128,7 +128,7 @@ class ViewAssetsController extends Controller
                 $settings->notify(new RequestAssetCancelation($data));
             }
 
-            return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
+            return redirect()->back()->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
         } else {
             $item->request();
             if (($settings->alert_email != '') && ($settings->alerts_enabled == '1') && (! config('app.lock_passwords'))) {
