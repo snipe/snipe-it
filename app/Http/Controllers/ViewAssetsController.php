@@ -121,7 +121,7 @@ class ViewAssetsController extends Controller
 
         if (($item_request = $item->isRequestedBy($user)) || $cancel_by_admin) {
             $item->cancelRequest($requestingUser);
-            $data['item_quantity'] = $item_request->qty;
+            $data['item_quantity'] = ($item_request) ? $item_request->qty : 1;
             $logaction->logaction('request_canceled');
 
             if (($settings->alert_email != '') && ($settings->alerts_enabled == '1') && (! config('app.lock_passwords'))) {
