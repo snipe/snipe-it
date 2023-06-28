@@ -24,7 +24,7 @@
                        'id' => 'bulkForm']) }}
                     <div class="row">
                         <div class="col-md-12">
-                    {{ Form::close() }}
+
         @if ($requestedItems->count() > 0)
         <div class="table-responsive">
             <table
@@ -108,7 +108,7 @@
                                     'method' => 'POST',
                                     'route' => ['account/request-item', $request->itemType(), $request->requestable->id, true, $request->requestingUser()->id],
                                     ]) }}
-                                    <button class="btn btn-danger btn-sm" data-tooltip="true" title="Cancel this item request">{{ trans('button.cancel') }}</button>
+                                    <button class="btn btn-warning btn-sm" data-tooltip="true" title="{{ trans('general.cancel_request') }}">{{ trans('button.cancel') }}</button>
                                 {{ Form::close() }}
                             </td>
                             <td>
@@ -143,6 +143,7 @@
                 </div>
             </div>
         </div>
+        {{ Form::close() }}
     </div> <!-- .col-md-12> -->
 </div> <!-- .row -->
 @stop
