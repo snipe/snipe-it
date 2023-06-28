@@ -80,7 +80,7 @@
         @endif
 
 
-        <p>On Models:
+        <p>{{ trans('admin/hardware/form.bulk_update_model_prefix') }}
              @foreach($field->assetModels() as $assetModel) 
                 @if(in_array($assetModel->name, $modelNames)) 
                     {{$assetModel->name}}{{($loop->last) ? '' : ', '}}
