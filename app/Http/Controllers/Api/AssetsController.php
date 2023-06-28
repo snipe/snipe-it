@@ -115,7 +115,7 @@ class AssetsController extends Controller
             $allowed_columns[] = $field->db_column_name();
         }
 
-        $assets = Company::scopeCompanyables(Asset::select('assets.*'), 'company_id', 'assets')
+        $assets = Asset::select('assets.*')
             ->with('location', 'assetstatus', 'company', 'defaultLoc','assignedTo',
                 'model.category', 'model.manufacturer', 'model.fieldset','supplier'); //it might be tempting to add 'assetlog' here, but don't. It blows up update-heavy users.
 
@@ -480,7 +480,7 @@ class AssetsController extends Controller
     public function selectlist(Request $request)
     {
 
-        $assets = Company::scopeCompanyables(Asset::select([
+        $assets = Asset::select([
             'assets.id',
             'assets.name',
             'assets.asset_tag',
@@ -488,7 +488,7 @@ class AssetsController extends Controller
             'assets.assigned_to',
             'assets.assigned_type',
             'assets.status_id',
-            ])->with('model', 'assetstatus', 'assignedTo')->NotArchived(), 'company_id', 'assets');
+            ])->with('model', 'assetstatus', 'assignedTo')->NotArchived();
 
         if ($request->filled('assetStatusType') && $request->input('assetStatusType') === 'RTD') {
             $assets = $assets->RTD();
@@ -1033,9 +1033,10 @@ class AssetsController extends Controller
     {
         $this->authorize('viewRequestable', Asset::class);
 
-        $assets = Company::scopeCompanyables(Asset::select('assets.*'), 'company_id', 'assets')
+        $assets = Asset::select('assets.*')
             ->with('location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
-                'model.category', 'model.manufacturer', 'model.fieldset', 'supplier')->requestableAssets();
+                'model.category', 'model.manufacturer', 'model.fieldset', 'supplier')
+            ->requestableAssets();
 
         $offset = request('offset', 0);
         $limit = $request->input('limit', 50);
