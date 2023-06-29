@@ -1136,7 +1136,7 @@ class SettingsController extends Controller
     public function postBackups()
     {
         if (! config('app.lock_passwords')) {
-            Artisan::call('snipeit:backup', ['--filename' => 'manual-backup-'.date('Y-m-d-H:i:s')]);
+            Artisan::call('snipeit:backup', ['--filename' => 'manual-backup-'.date('Y-m-d-H-i-s')]);
             $output = Artisan::output();
 
             // Backup completed
