@@ -43,7 +43,7 @@ class LdapSettingsForm extends Component
       public        $ldaptest_password;
       public        $ldap_sync_test_users;
       public        $keys = [];
-      public        $ldap_message = [];
+      public        $ldap_message;
 
 
     protected $rules = [
@@ -180,7 +180,7 @@ class LdapSettingsForm extends Component
 
         \Log::debug('Preparing to test LDAP connection');
 
-        $ldap_message = []; //where we collect together test messages
+         //where we collect together test messages
         try {
             $connection = Ldap::connectToLdap();
             try {
@@ -205,7 +205,6 @@ class LdapSettingsForm extends Component
                     ];
                 });
                 if ($users->count() > 0) {
-
                         $this->ldap_sync_test_users = $users;
                 } else {
                     $message['user_sync'] = [
@@ -220,60 +219,60 @@ class LdapSettingsForm extends Component
             \Log::debug('Connection failed but we cannot debug it any further on our end.');
 
         }
-    }}
+    }
 
-//    public function ldaptestlogin()
-//    {
-//
-//        if ($this->setting->ldap_enabled != '1') {
-//            \Log::debug('LDAP is not enabled. Cannot test.');
-//            return response()->json(['message' => 'LDAP is not enabled, cannot test.'], 400);
-//        }
-//
-//
-//        $rules = array(
-//            'ldaptest_user' => 'required',
-//            'ldaptest_password' => 'required'
-//        );
-//
-//        $validator = Validator::make($request->all(), $rules);
-//        if ($validator->fails()) {
-//            \Log::debug('LDAP Validation test failed.');
-//            $validation_errors = implode(' ',$validator->errors()->all());
-//            return response()->json(['message' => $validator->errors()->all()], 400);
-//        }
-//
-//
-//
-//        \Log::debug('Preparing to test LDAP login');
-//        try {
-//            $connection = Ldap::connectToLdap();
-//            try {
-//                Ldap::bindAdminToLdap($connection);
-//                \Log::debug('Attempting to bind to LDAP for LDAP test');
-//                try {
-//                    $ldap_user = Ldap::findAndBindUserLdap($this->ldaptest_user, $this->ldaptest_password);
-//                    if ($ldap_user) {
-//                        \Log::debug('It worked! '. $this->ldaptest_user.' successfully binded to LDAP.');
-//                        return response()->json(['message' => 'It worked! '. $this->ldaptest_user.' successfully binded to LDAP.'], 200);
-//                    }
-//                    return response()->json(['message' => 'Login Failed. '. $this->ldaptest_user.' did not successfully bind to LDAP.'], 400);
-//
-//                } catch (\Exception $e) {
-//                    \Log::debug('LDAP login failed');
-//                    return response()->json(['message' => $e->getMessage()], 400);
-//                }
-//
-//            } catch (\Exception $e) {
-//                \Log::debug('Bind failed');
-//                return response()->json(['message' => $e->getMessage()], 400);
-//                //return response()->json(['message' => $e->getMessage()], 500);
-//            }
-//        } catch (\Exception $e) {
-//            \Log::debug('Connection failed');
-//            return response()->json(['message' => $e->getMessage()], 500);
-//        }
-//
-//
-//    }
-//}
+    public function ldaptestlogin()
+    {
+
+        if ($this->setting->ldap_enabled != '1') {
+            \Log::debug('LDAP is not enabled. Cannot test.');
+            return response()->json(['message' => 'LDAP is not enabled, cannot test.'], 400);
+        }
+
+
+        $rules = array(
+            'ldaptest_user' => 'required',
+            'ldaptest_password' => 'required'
+        );
+
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            \Log::debug('LDAP Validation test failed.');
+            $validation_errors = implode(' ',$validator->errors()->all());
+            return response()->json(['message' => $validator->errors()->all()], 400);
+        }
+
+
+
+        \Log::debug('Preparing to test LDAP login');
+        try {
+            $connection = Ldap::connectToLdap();
+            try {
+                Ldap::bindAdminToLdap($connection);
+                \Log::debug('Attempting to bind to LDAP for LDAP test');
+                try {
+                    $ldap_user = Ldap::findAndBindUserLdap($this->ldaptest_user, $this->ldaptest_password);
+                    if ($ldap_user) {
+                        \Log::debug('It worked! '. $this->ldaptest_user.' successfully binded to LDAP.');
+                        return response()->json(['message' => 'It worked! '. $this->ldaptest_user.' successfully binded to LDAP.'], 200);
+                    }
+                    return response()->json(['message' => 'Login Failed. '. $this->ldaptest_user.' did not successfully bind to LDAP.'], 400);
+
+                } catch (\Exception $e) {
+                    \Log::debug('LDAP login failed');
+                    return response()->json(['message' => $e->getMessage()], 400);
+                }
+
+            } catch (\Exception $e) {
+                \Log::debug('Bind failed');
+                return response()->json(['message' => $e->getMessage()], 400);
+                //return response()->json(['message' => $e->getMessage()], 500);
+            }
+        } catch (\Exception $e) {
+            \Log::debug('Connection failed');
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
+
+
+    }
+}

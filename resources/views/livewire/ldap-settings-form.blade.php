@@ -557,9 +557,7 @@
                                     </div>
                                     @if(isset($ldap_sync_test_users))
                                         <div class="col-md-9 col-md-offset-3">
-                                            <p><i class="fas fa-exclamation-triangle text-danger"></i></p>
-                                           {{$ldap_message}}
-                                            <i class="fas fa-check" aria-hidden="true"></i>
+                                            <p class="text-success"><i class="fas fa-check text-success"></i>{{" ".trans('admin/settings/general.ldap_sync_test_success')}} </p>
                                             <br />
                                             <div id="ldapad_test_results" class="well well-sm">
                                                 <table class="table table-bordered table-condensed" style="background-color: #fff">
