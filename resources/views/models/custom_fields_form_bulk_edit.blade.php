@@ -90,7 +90,7 @@
             <p class="help-block">{{ $field->help_text }}</p>
         @endif
 
-        <p>{{ trans('admin/hardware/form.bulk_update_model_prefix') }}
+        <p>{{ trans('admin/hardware/form.bulk_update_model_prefix') }}: 
              @foreach($field->assetModels() as $assetModel) 
                 @if(in_array($assetModel->name, $modelNames)) 
                     {{$assetModel->name}}{{($loop->last) ? '' : ', '}}
