@@ -63,7 +63,7 @@ class AssetModelsTransformer
             'default_fieldset_values' => $default_field_values,
             'eol' => ($assetmodel->eol > 0) ? $assetmodel->eol.' months' : 'None',
             'requestable' => ($assetmodel->requestable == '1') ? true : false,
-            'notes' => e($assetmodel->notes),
+            'notes' => Helper::parseEscapedMarkedown($assetmodel->notes),
             'created_at' => Helper::getFormattedDateObject($assetmodel->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($assetmodel->updated_at, 'datetime'),
             'deleted_at' => Helper::getFormattedDateObject($assetmodel->deleted_at, 'datetime'),
