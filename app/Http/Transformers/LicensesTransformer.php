@@ -34,7 +34,7 @@ class LicensesTransformer
             'depreciation' => ($license->depreciation) ? ['id' => (int) $license->depreciation->id,'name'=> e($license->depreciation->name)] : null,
             'purchase_cost' => Helper::formatCurrencyOutput($license->purchase_cost),
             'purchase_cost_numeric' => $license->purchase_cost,
-            'notes' => e($license->notes),
+            'notes' => Helper::parseEscapedMarkedown($license->notes),
             'expiration_date' => Helper::getFormattedDateObject($license->expiration_date, 'date'),
             'seats' => (int) $license->seats,
             'free_seats_count' => (int) $license->free_seats_count,

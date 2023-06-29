@@ -82,7 +82,7 @@ class ViewAssetsController extends Controller
         return view('account/requestable-assets', compact('assets', 'models'));
     }
 
-    public function getRequestItem(Request $request, $itemType, $itemId = null)
+    public function getRequestItem(Request $request, $itemType, $itemId = null, $cancel_by_admin = false, $requestingUser = null)
     {
         $item = null;
         $fullItemType = 'App\\Models\\'.studly_case($itemType);
@@ -119,16 +119,16 @@ class ViewAssetsController extends Controller
 
         $settings = Setting::getSettings();
 
-        if ($item_request = $item->isRequestedBy($user)) {
-            $item->cancelRequest();
-            $data['item_quantity'] = $item_request->qty;
+        if (($item_request = $item->isRequestedBy($user)) || $cancel_by_admin) {
+            $item->cancelRequest($requestingUser);
+            $data['item_quantity'] = ($item_request) ? $item_request->qty : 1;
             $logaction->logaction('request_canceled');
 
             if (($settings->alert_email != '') && ($settings->alerts_enabled == '1') && (! config('app.lock_passwords'))) {
                 $settings->notify(new RequestAssetCancelation($data));
             }
 
-            return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
+            return redirect()->back()->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
         } else {
             $item->request();
             if (($settings->alert_email != '') && ($settings->alerts_enabled == '1') && (! config('app.lock_passwords'))) {

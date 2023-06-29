@@ -39,7 +39,7 @@ class ConsumablesTransformer
             'purchase_cost'  => Helper::formatCurrencyOutput($consumable->purchase_cost),
             'purchase_date'  => Helper::getFormattedDateObject($consumable->purchase_date, 'date'),
             'qty'           => (int) $consumable->qty,
-            'notes'         => ($consumable->notes) ? e($consumable->notes) : null,
+            'notes'         => ($consumable->notes) ? Helper::parseEscapedMarkedown($consumable->notes) : null,
             'created_at' => Helper::getFormattedDateObject($consumable->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($consumable->updated_at, 'datetime'),
         ];

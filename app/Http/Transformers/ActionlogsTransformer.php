@@ -110,7 +110,7 @@ class ActionlogsTransformer
                 'type' => e($actionlog->targetType()),
             ] : null,
 
-            'note'          => ($actionlog->note) ? e($actionlog->note): null,
+            'note'          => ($actionlog->note) ? Helper::parseEscapedMarkedown($actionlog->note): null,
             'signature_file'   => ($actionlog->accept_signature) ? route('log.signature.view', ['filename' => $actionlog->accept_signature ]) : null,
             'log_meta'          => ((isset($clean_meta)) && (is_array($clean_meta))) ? $clean_meta: null,
             'action_date'   => ($actionlog->action_date) ? Helper::getFormattedDateObject($actionlog->action_date, 'datetime'): Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
