@@ -125,6 +125,8 @@ class AssetsController extends Controller
             $assets->InModelList($non_deprecable_models->toArray());
         }
 
+
+
         // These are used by the API to query against specific ID numbers.
         // They are also used by the individual searches on detail pages like
         // locations, etc.
@@ -136,12 +138,11 @@ class AssetsController extends Controller
             }
         }
 
-
-        // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $assets->count()) ? $assets->count() : abs($request->input('offset'));
-        $limit = app('api_limit_value');
-
-        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        if ((! is_null($filter)) && (count($filter)) > 0) {
+            $assets->ByFilter($filter);
+        } elseif ($request->filled('search')) {
+            $assets->TextSearch($request->input('search'));
+        }
 
         // This is used by the audit reporting routes
         if (Gate::allows('audit', Asset::class)) {
@@ -154,7 +155,6 @@ class AssetsController extends Controller
                     break;
             }
         }
-
 
 
         // This is used by the sidenav, mostly
@@ -206,7 +206,7 @@ class AssetsController extends Controller
                 break;
             case 'Deployed':
                 // more sad, horrible workarounds for laravel bugs when doing full text searches
-                $assets->where('assets.assigned_to', '>', '0');
+                $assets->whereNotNull('assets.assigned_to');
                 break;
             case 'byod':
                 // This is kind of redundant, since we already check for byod=1 above, but this keeps the
@@ -231,12 +231,6 @@ class AssetsController extends Controller
 
         }
 
-
-        if ((! is_null($filter)) && (count($filter)) > 0) {
-            $assets->ByFilter($filter);
-        } elseif ($request->filled('search')) {
-            $assets->TextSearch($request->input('search'));
-        }
 
         // Leave these under the TextSearch scope, else the fuzziness will override the specific ID (status ID, etc) requested
         if ($request->filled('status_id')) {
@@ -313,7 +307,8 @@ class AssetsController extends Controller
         // in the allowed_columns array)
         $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'assets.created_at';
 
-
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        
         switch ($sort_override) {
             case 'model':
                 $assets->OrderModels($order);
@@ -349,6 +344,10 @@ class AssetsController extends Controller
                 break;
         }
 
+
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $assets->count()) ? $assets->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
 
         $total = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
