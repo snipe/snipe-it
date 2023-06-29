@@ -17,11 +17,6 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-body">
-                    {{ Form::open([
-                      'method' => 'POST',
-                      'route' => ['hardware/bulkedit'],
-                      'class' => 'form-inline',
-                       'id' => 'bulkForm']) }}
                     <div class="row">
                         <div class="col-md-12">
 
@@ -51,7 +46,7 @@
                         <th class="col-md-2" data-sortable="true">{{ trans('admin/hardware/form.expected_checkin') }}</th>
                         <th class="col-md-3" data-sortable="true">{{ trans('admin/hardware/table.requesting_user') }}</th>
                         <th class="col-md-2">{{ trans('admin/hardware/table.requested_date') }}</th>
-                        <th class="col-md-1">{{ trans('general.checkin').'/'.trans('general.checkout') }}</th>
+                        <th class="col-md-1">{{ trans('button.actions') }}</th> <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -103,6 +98,14 @@
                                 @endif
                             </td>
                             <td>{{ App\Helpers\Helper::getFormattedDateObject($request->created_at, 'datetime', false) }}</td>
+                            <td>
+                                {{ Form::open([
+                                    'method' => 'POST',
+                                    'route' => ['account/request-item', $request->itemType(), $request->requestable->id, true, $request->requestingUser()->id],
+                                    ]) }}
+                                    <button class="btn btn-warning btn-sm" data-tooltip="true" title="{{ trans('general.cancel_request') }}">{{ trans('button.cancel') }}</button>
+                                {{ Form::close() }}
+                            </td>
                             <td>
                                 @if ($request->itemType() == "asset")
                                     @if ($request->requestable->assigned_to=='')
