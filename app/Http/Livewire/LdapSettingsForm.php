@@ -43,6 +43,7 @@ class LdapSettingsForm extends Component
       public        $ldaptest_password;
       public        $ldap_sync_test_users;
       public        $keys = [];
+      public        $ldap_message = [];
 
 
     protected $rules = [
@@ -167,49 +168,6 @@ class LdapSettingsForm extends Component
 //            }
 //        }
     }
-    public function buildLdapTestResults($ldap_sync_test_users)
-    {
-
-        $html = '<ul style="list-style: none;padding-left: 5px;">';
-        $html .= '</ul>';
-        $html .= '<div>{{ trans("admin/settings/message.ldap.sync_success") }}</div>';
-        $html .= '<table class="table table-bordered table-condensed" style="background-color: #fff">';
-        $html .= $this->buildLdapResultsTableHeader();
-        $html .= $this->buildLdapResultsTableBody($ldap_sync_test_users);
-        $html .= '</table>';
-        return $html;
-    }
-
-    public function buildLdapResultsTableHeader()
-    {
-        // Build the HTML table header
-
-        $header = '<thead><tr>';
-        foreach ( $this->keys as $key) {
-            $header .= '<th>' . $key . '</th>';
-        }
-
-        $header .= "</tr></thead>";
-
-        return $header;
-    }
-
-    public function buildLdapResultsTableBody($users)
-    {
-        // Build the HTML table body
-        $body = '<tbody>';
-        foreach ($users as $user) {
-            $body .= '<tr><td>' . $user->employee_number .
-                '</td><td>' . $user->username .
-                '</td><td>' . $user->firstname .
-                '</td><td>' . $user->lastname .
-                '</td><td>' . $user->email .
-                '</td></tr>';
-        }
-        $body .= "</tbody>";
-        return $body;
-    }
-
     public function ldaptest()
     {
         $settings = Setting::getSettings();
@@ -222,16 +180,18 @@ class LdapSettingsForm extends Component
 
         \Log::debug('Preparing to test LDAP connection');
 
-        $message = []; //where we collect together test messages
+        $ldap_message = []; //where we collect together test messages
         try {
             $connection = Ldap::connectToLdap();
             try {
-                $message['bind'] = ['message' => 'Successfully bound to LDAP server.'];
+                $ldap_message['bind'] = ['message' => 'Successfully bound to LDAP server.'];
                 \Log::debug('attempting to bind to LDAP for LDAP test');
                 Ldap::bindAdminToLdap($connection);
-                $message['login'] = [
+                $ldap_message['login'] = [
                     'message' => 'Successfully connected to LDAP server.',
                 ];
+            $this->ldap_message = json_encode($ldap_message);
+
 
                 $users = collect(Ldap::findLdapUsers(null,10))->filter(function ($value, $key) {
                     return is_int($key);
@@ -246,9 +206,7 @@ class LdapSettingsForm extends Component
                 });
                 if ($users->count() > 0) {
 
-                        $this->ldap_sync_test_users = json_decode($users);
-//                        $this->buildLdapTestResults($this->ldap_sync_test_users);
-
+                        $this->ldap_sync_test_users = $users;
                 } else {
                     $message['user_sync'] = [
                         'message' => 'Connection to LDAP was successful, however there were no users returned from your query. You should confirm the Base Bind DN above.',
