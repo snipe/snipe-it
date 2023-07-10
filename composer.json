@@ -50,7 +50,7 @@
     "laravel/tinker": "^2.6",
     "laravel/ui": "^3.3",
     "laravelcollective/html": "^6.2",
-    "lcobucci/clock": "1.2.0|2.0.0",
+    "lcobucci/clock": "^1.2.0|^2.0.0",
     "lcobucci/jwt": "^3.4.5|^4.0.4",
     "league/csv": "^9.7",
     "league/flysystem-aws-s3-v3": "^1.0",
