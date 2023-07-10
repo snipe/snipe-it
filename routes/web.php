@@ -281,7 +281,7 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
     )->name('account/request-asset');
 
     Route::post(
-        'request/{itemType}/{itemId}',
+        'request/{itemType}/{itemId}/{cancel_by_admin?}/{requestingUser?}',
         [ViewAssetsController::class, 'getRequestItem']
     )->name('account/request-item');
 

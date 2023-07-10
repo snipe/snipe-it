@@ -32,7 +32,7 @@ class AccessoriesTransformer
             'model_number' => ($accessory->model_number) ? e($accessory->model_number) : null,
             'category' => ($accessory->category) ? ['id' => $accessory->category->id, 'name'=> e($accessory->category->name)] : null,
             'location' => ($accessory->location) ? ['id' => $accessory->location->id, 'name'=> e($accessory->location->name)] : null,
-            'notes' => ($accessory->notes) ? e($accessory->notes) : null,
+            'notes' => ($accessory->notes) ? Helper::parseEscapedMarkedown($accessory->notes) : null,
             'qty' => ($accessory->qty) ? (int) $accessory->qty : null,
             'purchase_date' => ($accessory->purchase_date) ? Helper::getFormattedDateObject($accessory->purchase_date, 'date') : null,
             'purchase_cost' => Helper::formatCurrencyOutput($accessory->purchase_cost),

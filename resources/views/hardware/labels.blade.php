@@ -52,7 +52,7 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
     }
     img.barcode {
         display:block;
-        margin-top:-7px;
+        margin-top:-14px;
         width: 100%;
     }
     div.label-logo {

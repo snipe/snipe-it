@@ -68,6 +68,7 @@
     "watson/validating": "^7.0"
   },
   "require-dev": {
+    "brianium/paratest": "^v6.4.4",
     "fakerphp/faker": "^1.16",
     "laravel/dusk": "^6.25",
     "mockery/mockery": "^1.4",

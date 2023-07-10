@@ -115,7 +115,7 @@ class AssetsController extends Controller
             $allowed_columns[] = $field->db_column_name();
         }
 
-        $assets = Company::scopeCompanyables(Asset::select('assets.*'), 'company_id', 'assets')
+        $assets = Asset::select('assets.*')
             ->with('location', 'assetstatus', 'company', 'defaultLoc','assignedTo',
                 'model.category', 'model.manufacturer', 'model.fieldset','supplier'); //it might be tempting to add 'assetlog' here, but don't. It blows up update-heavy users.
 
@@ -124,6 +124,8 @@ class AssetsController extends Controller
             $non_deprecable_models = AssetModel::select('id')->whereNotNull('depreciation_id')->get();
             $assets->InModelList($non_deprecable_models->toArray());
         }
+
+
 
         // These are used by the API to query against specific ID numbers.
         // They are also used by the individual searches on detail pages like
@@ -136,12 +138,11 @@ class AssetsController extends Controller
             }
         }
 
-
-        // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $assets->count()) ? $assets->count() : abs($request->input('offset'));
-        $limit = app('api_limit_value');
-
-        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        if ((! is_null($filter)) && (count($filter)) > 0) {
+            $assets->ByFilter($filter);
+        } elseif ($request->filled('search')) {
+            $assets->TextSearch($request->input('search'));
+        }
 
         // This is used by the audit reporting routes
         if (Gate::allows('audit', Asset::class)) {
@@ -154,7 +155,6 @@ class AssetsController extends Controller
                     break;
             }
         }
-
 
 
         // This is used by the sidenav, mostly
@@ -206,7 +206,7 @@ class AssetsController extends Controller
                 break;
             case 'Deployed':
                 // more sad, horrible workarounds for laravel bugs when doing full text searches
-                $assets->where('assets.assigned_to', '>', '0');
+                $assets->whereNotNull('assets.assigned_to');
                 break;
             case 'byod':
                 // This is kind of redundant, since we already check for byod=1 above, but this keeps the
@@ -231,12 +231,6 @@ class AssetsController extends Controller
 
         }
 
-
-        if ((! is_null($filter)) && (count($filter)) > 0) {
-            $assets->ByFilter($filter);
-        } elseif ($request->filled('search')) {
-            $assets->TextSearch($request->input('search'));
-        }
 
         // Leave these under the TextSearch scope, else the fuzziness will override the specific ID (status ID, etc) requested
         if ($request->filled('status_id')) {
@@ -313,7 +307,8 @@ class AssetsController extends Controller
         // in the allowed_columns array)
         $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'assets.created_at';
 
-
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        
         switch ($sort_override) {
             case 'model':
                 $assets->OrderModels($order);
@@ -349,6 +344,10 @@ class AssetsController extends Controller
                 break;
         }
 
+
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $assets->count()) ? $assets->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
 
         $total = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
@@ -480,7 +479,7 @@ class AssetsController extends Controller
     public function selectlist(Request $request)
     {
 
-        $assets = Company::scopeCompanyables(Asset::select([
+        $assets = Asset::select([
             'assets.id',
             'assets.name',
             'assets.asset_tag',
@@ -488,7 +487,7 @@ class AssetsController extends Controller
             'assets.assigned_to',
             'assets.assigned_type',
             'assets.status_id',
-            ])->with('model', 'assetstatus', 'assignedTo')->NotArchived(), 'company_id', 'assets');
+            ])->with('model', 'assetstatus', 'assignedTo')->NotArchived();
 
         if ($request->filled('assetStatusType') && $request->input('assetStatusType') === 'RTD') {
             $assets = $assets->RTD();
@@ -1033,9 +1032,10 @@ class AssetsController extends Controller
     {
         $this->authorize('viewRequestable', Asset::class);
 
-        $assets = Company::scopeCompanyables(Asset::select('assets.*'), 'company_id', 'assets')
+        $assets = Asset::select('assets.*')
             ->with('location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
-                'model.category', 'model.manufacturer', 'model.fieldset', 'supplier')->requestableAssets();
+                'model.category', 'model.manufacturer', 'model.fieldset', 'supplier')
+            ->requestableAssets();
 
         $offset = request('offset', 0);
         $limit = $request->input('limit', 50);

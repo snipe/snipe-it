@@ -53,7 +53,7 @@ class UsersTransformer
                     'id' => (int) $user->userloc->id,
                     'name'=> e($user->userloc->name),
                 ] : null,
-                'notes'=> e($user->notes),
+                'notes'=> Helper::parseEscapedMarkedown($user->notes),
                 'permissions' => $user->decodePermissions(),
                 'activated' => ($user->activated == '1') ? true : false,
                 'autoassign_licenses' => ($user->autoassign_licenses == '1') ? true : false,

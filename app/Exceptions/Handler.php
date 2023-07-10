@@ -75,7 +75,12 @@ class Handler extends ExceptionHandler
 
         // Handle SCIM exceptions
         if ($e instanceof SCIMException) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'Invalid SCIM Request'), 400);
+            try {
+                $e->report(); // logs as 'debug', so shouldn't get too noisy
+            } catch(\Exception $reportException) {
+                //do nothing
+            }
+            return $e->render($request); // ALL SCIMExceptions have the 'render()' method
         }
 
         // Handle standard requests that fail because Carbon cannot parse the date on validation (when a submitted date value is definitely not a date)
