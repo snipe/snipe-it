@@ -4882,7 +4882,7 @@
     }
   };
 
-  var VERSION = '1.21.4';
+  var VERSION = '1.22.0';
   var bootstrapVersion = Utils.getBootstrapVersion();
   var CONSTANTS = {
     3: {
@@ -4970,7 +4970,7 @@
       },
       html: {
         dataToggle: 'data-bs-toggle',
-        toolbarDropdown: ['<div class="dropdown-menu dropdown-menu-right">', '</div>'],
+        toolbarDropdown: ['<div class="dropdown-menu dropdown-menu-end">', '</div>'],
         toolbarDropdownItem: '<label class="dropdown-item dropdown-item-marker">%s</label>',
         pageDropdown: ['<div class="dropdown-menu">', '</div>'],
         pageDropdownItem: '<a class="dropdown-item %s" href="#">%s</a>',
@@ -5327,6 +5327,7 @@
     sorter: undefined,
     visible: true,
     switchable: true,
+    switchableLabel: undefined,
     cardVisible: true,
     searchable: true,
     formatter: undefined,
@@ -5337,7 +5338,7 @@
     escape: undefined,
     events: undefined
   };
-  var METHODS = ['getOptions', 'refreshOptions', 'getData', 'getSelections', 'load', 'append', 'prepend', 'remove', 'removeAll', 'insertRow', 'updateRow', 'getRowByUniqueId', 'updateByUniqueId', 'removeByUniqueId', 'updateCell', 'updateCellByUniqueId', 'showRow', 'hideRow', 'getHiddenRows', 'showColumn', 'hideColumn', 'getVisibleColumns', 'getHiddenColumns', 'showAllColumns', 'hideAllColumns', 'mergeCells', 'checkAll', 'uncheckAll', 'checkInvert', 'check', 'uncheck', 'checkBy', 'uncheckBy', 'refresh', 'destroy', 'resetView', 'showLoading', 'hideLoading', 'togglePagination', 'toggleFullscreen', 'toggleView', 'resetSearch', 'filterBy', 'scrollTo', 'getScrollPosition', 'selectPage', 'prevPage', 'nextPage', 'toggleDetailView', 'expandRow', 'collapseRow', 'expandRowByUniqueId', 'collapseRowByUniqueId', 'expandAllRows', 'collapseAllRows', 'updateColumnTitle', 'updateFormatText'];
+  var METHODS = ['getOptions', 'refreshOptions', 'getData', 'getSelections', 'load', 'append', 'prepend', 'remove', 'removeAll', 'insertRow', 'updateRow', 'getRowByUniqueId', 'updateByUniqueId', 'removeByUniqueId', 'updateCell', 'updateCellByUniqueId', 'showRow', 'hideRow', 'getHiddenRows', 'showColumn', 'hideColumn', 'getVisibleColumns', 'getHiddenColumns', 'showAllColumns', 'hideAllColumns', 'mergeCells', 'checkAll', 'uncheckAll', 'checkInvert', 'check', 'uncheck', 'checkBy', 'uncheckBy', 'refresh', 'destroy', 'resetView', 'showLoading', 'hideLoading', 'togglePagination', 'toggleFullscreen', 'toggleView', 'resetSearch', 'filterBy', 'sortBy', 'scrollTo', 'getScrollPosition', 'selectPage', 'prevPage', 'nextPage', 'toggleDetailView', 'expandRow', 'collapseRow', 'expandRowByUniqueId', 'collapseRowByUniqueId', 'expandAllRows', 'collapseAllRows', 'updateColumnTitle', 'updateFormatText'];
   var EVENTS = {
     'all.bs.table': 'onAll',
     'click-row.bs.table': 'onClickRow',
@@ -5944,6 +5945,13 @@
         }
       }
     }, {
+      key: "sortBy",
+      value: function sortBy(params) {
+        this.options.sortName = params.field;
+        this.options.sortOrder = params.hasOwnProperty('sortOrder') ? params.sortOrder : 'asc';
+        this._sort();
+      }
+    }, {
       key: "onSort",
       value: function onSort(_ref) {
         var type = _ref.type,
@@ -5972,11 +5980,16 @@
             this.options.sortOrder = this.columns[this.fieldsColumnsIndex[$this.data('field')]].sortOrder || this.columns[this.fieldsColumnsIndex[$this.data('field')]].order;
           }
         }
-        this.trigger('sort', this.options.sortName, this.options.sortOrder);
         $this.add($this_).data('order', this.options.sortOrder);
 
         // Assign the correct sortable arrow
         this.getCaret();
+        this._sort();
+      }
+    }, {
+      key: "_sort",
+      value: function _sort() {
+        this.trigger('sort', this.options.sortName, this.options.sortOrder);
         if (this.options.sidePagination === 'server' && this.options.serverSort) {
           this.options.pageNumber = 1;
           this.initServer(this.options.silentSort);
@@ -6056,7 +6069,7 @@
             render: false,
             html: function html() {
               var html = [];
-              html.push("<div class=\"keep-open ".concat(_this4.constants.classes.buttonsDropdown, "\" title=\"").concat(opts.formatColumns(), "\">\n            <button class=\"").concat(_this4.constants.buttonsClass, " dropdown-toggle\" type=\"button\" ").concat(_this4.constants.dataToggle, "=\"dropdown\"\n            aria-label=\"").concat(opts.formatColumns(), "\" title=\"").concat(opts.formatColumns(), "\">\n            ").concat(opts.showButtonIcons ? Utils.sprintf(_this4.constants.html.icon, opts.iconsPrefix, opts.icons.columns) : '', "\n            ").concat(opts.showButtonText ? opts.formatColumns() : '', "\n            ").concat(_this4.constants.html.dropdownCaret, "\n            </button>\n            ").concat(_this4.constants.html.toolbarDropdown[0]));
+              html.push("<div class=\"keep-open ".concat(_this4.constants.classes.buttonsDropdown, "\">\n            <button class=\"").concat(_this4.constants.buttonsClass, " dropdown-toggle\" type=\"button\" ").concat(_this4.constants.dataToggle, "=\"dropdown\"\n            aria-label=\"").concat(opts.formatColumns(), "\" title=\"").concat(opts.formatColumns(), "\">\n            ").concat(opts.showButtonIcons ? Utils.sprintf(_this4.constants.html.icon, opts.iconsPrefix, opts.icons.columns) : '', "\n            ").concat(opts.showButtonText ? opts.formatColumns() : '', "\n            ").concat(_this4.constants.html.dropdownCaret, "\n            </button>\n            ").concat(_this4.constants.html.toolbarDropdown[0]));
               if (opts.showColumnsSearch) {
                 html.push(Utils.sprintf(_this4.constants.html.toolbarDropdownItem, Utils.sprintf('<input type="text" class="%s" name="columnsSearch" placeholder="%s" autocomplete="off">', _this4.constants.classes.input, opts.formatSearch())));
                 html.push(_this4.constants.html.toolbarDropdownSeparator);
@@ -6084,7 +6097,7 @@
                 var checked = column.visible ? ' checked="checked"' : '';
                 var disabled = visibleColumns <= opts.minimumCountColumns && checked ? ' disabled="disabled"' : '';
                 if (column.switchable) {
-                  html.push(Utils.sprintf(_this4.constants.html.toolbarDropdownItem, Utils.sprintf('<input type="checkbox" data-field="%s" value="%s"%s%s> <span>%s</span>', column.field, i, checked, disabled, column.title)));
+                  html.push(Utils.sprintf(_this4.constants.html.toolbarDropdownItem, Utils.sprintf('<input type="checkbox" data-field="%s" value="%s"%s%s> <span>%s</span>', column.field, i, checked, disabled, column.switchableLabel ? column.switchableLabel : column.title)));
                   switchableCount++;
                 }
               });
@@ -6106,12 +6119,19 @@
               buttonHtml = buttonConfig.html;
             }
           } else {
-            buttonHtml = "<button class=\"".concat(this.constants.buttonsClass, "\" type=\"button\" name=\"").concat(buttonName, "\"");
+            var buttonClass = this.constants.buttonsClass;
+            if (buttonConfig.hasOwnProperty('attributes') && buttonConfig.attributes.class) {
+              buttonClass += " ".concat(buttonConfig.attributes.class);
+            }
+            buttonHtml = "<button class=\"".concat(buttonClass, "\" type=\"button\" name=\"").concat(buttonName, "\"");
             if (buttonConfig.hasOwnProperty('attributes')) {
               for (var _i5 = 0, _Object$entries5 = Object.entries(buttonConfig.attributes); _i5 < _Object$entries5.length; _i5++) {
                 var _Object$entries5$_i = _slicedToArray(_Object$entries5[_i5], 2),
                   attributeName = _Object$entries5$_i[0],
                   value = _Object$entries5$_i[1];
+                if (attributeName === 'class') {
+                  continue;
+                }
                 buttonHtml += " ".concat(attributeName, "=\"").concat(value, "\"");
               }
             }
