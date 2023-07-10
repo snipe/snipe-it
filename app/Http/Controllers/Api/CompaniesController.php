@@ -27,6 +27,8 @@ class CompaniesController extends Controller
         $allowed_columns = [
             'id',
             'name',
+            'phone',
+            'fax',
             'created_at',
             'updated_at',
             'users_count',
