@@ -596,6 +596,7 @@
                         </form>
 
                             <!-- LDAP Login test -->
+                    <form>
                             <div class="col-md-11 col-md-offset-1">
                                 <div class="form-group">
                                     <div class="col-md-3">
@@ -605,12 +606,11 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <input type="text" wire:model.lazy="ldaptest_user" id="ldaptest_user" class="form-control" placeholder="LDAP username">
-                                                @error('ldaptest_user')<span class="error text-danger">{{$message}}</span> @enderror
-        {{$ldaptest_user}}
+                                                {!! $errors->first('ldaptest_user', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                             </div>
                                             <div class="col-md-4">
                                                 <input type="password" wire:model.lazy="ldaptest_password" id="ldaptest_password" class="form-control" placeholder="LDAP password">
-                                                @error('ldaptest_password')<span class="error text-danger">{{$message}}</span> @enderror
+                                                {!! $errors->first('ldaptest_password', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                             </div>
                                             <div class="col-md-3">
                                                 <a href="#"  wire:click.prevent="ldaptestlogin" {{ $setting->demoMode }} class="btn btn-default btn-sm" id="ldaptestlogin" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test')}}</a>
@@ -619,7 +619,31 @@
                                     </div>
                                     <div class="col-md-9 col-md-offset-3">
                                         <span id="ldaptestloginicon"></span>
-                                        <span id="ldaptestloginresult"></span>
+                                        @if(session()->has('success'))
+                                            <div class="alert alert-success fade in">
+                                                {{session('success')}}
+                                            </div>
+                                        @endif
+                                        @if(session()->has('bind_fail'))
+                                            <div class="alert alert-danger fade in">
+                                                {{session('bind_fail')}}
+                                            </div>
+                                        @endif
+                                        @if(session()->has('login_fail'))
+                                            <div class="alert alert-danger fade in">
+                                                {{session('login_fail')}}
+                                            </div>
+                                        @endif
+                                        @if(session()->has('bind_fail_general'))
+                                            <div class="alert alert-danger fade in">
+                                                {{session('bind_fail_general')}}
+                                            </div>
+                                        @endif
+                                        @if(session()->has('connection_fail'))
+                                            <div class="alert alert-danger fade in">
+                                                {{session('connection_fail')}}
+                                            </div>
+                                        @endif
                                         <span id="ldaptestloginstatus"></span>
                                     </div>
                                     <div class="col-md-9 col-md-offset-3">
@@ -628,7 +652,7 @@
 
                                 </div>
                             </div>
-
+                    </form>
 
                         <!-- LDAP Forgotten password -->
                         <div class="form-group {{ $errors->has('custom_forgot_pass_url') ? 'error' : '' }}">
@@ -636,19 +660,15 @@
                                 {{ Form::label('custom_forgot_pass_url', trans('admin/settings/general.custom_forgot_pass_url')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::text('custom_forgot_pass_url', Request::old('custom_forgot_pass_url', $setting->custom_forgot_pass_url), ['class' => 'form-control','placeholder' => trans('general.example') .'https://my.ldapserver-forgotpass.com', $setting->demoMode]) }}
+                                <input  wire:model.lazy="custom_forgot_pass_url" type="text" class="form-control" value="{{old('custom_forgot_pass_url', $custom_forgot_pass_url)}}" placeholder="{{trans('general.example') .' https://my.ldapserver-forgotpass.com'}}">
                                 <p class="help-block">{{ trans('admin/settings/general.custom_forgot_pass_url_help') }}</p>
                                 {!! $errors->first('custom_forgot_pass_url', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @if (config('app.lock_passwords')===true)
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
                                 @endif
                             </div>
-                        </div><!-- LDAP Server -->
+                        </div>
                     @endif
-
-
-
-
                     </div>
 
                 </div> <!--/.box-body-->

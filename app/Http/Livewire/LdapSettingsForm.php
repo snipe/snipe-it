@@ -31,7 +31,7 @@ class LdapSettingsForm extends Component
       public bool   $is_ad;
       public bool   $ldap_tls;
       public bool   $ldap_pw_sync;
-//    public        $custom_forgot_pass_url,
+      public        $custom_forgot_pass_url;
       public        $ldap_jobtitle;
       public        $ldap_country;
       public        $ldap_dept;
@@ -142,7 +142,6 @@ class LdapSettingsForm extends Component
         $this->setting->ldap_dept                 = $this->ldap_dept;
         $this->setting->ldap_client_tls_cert      = $this->ldap_client_tls_cert;
         $this->setting->ldap_client_tls_key       = $this->ldap_client_tls_key;
-
         $this->setting->save();
     }
     public function ldapsynctest()
@@ -215,23 +214,25 @@ class LdapSettingsForm extends Component
                     $ldap_user = Ldap::findAndBindUserLdap($this->ldaptest_user, $this->ldaptest_password);
                     if ($ldap_user) {
                         \Log::debug('It worked! '. $this->ldaptest_user.' successfully binded to LDAP.');
-                        return response()->json(['message' => 'It worked! '. $this->ldaptest_user.' successfully binded to LDAP.'], 200);
+                        return session()->flash('success','It worked!'. $this->ldatest_user.' succesfully binded to LDAP.');
                     }
-                    return response()->json(['message' => 'Login Failed. '. $this->ldaptest_user.' did not successfully bind to LDAP.'], 400);
+                    return  session()->flash('bind_fail', 'Login Failed. '. $this->ldaptest_user.' did not successfully bind to LDAP.');
 
                 } catch (\Exception $e) {
                     \Log::debug('LDAP login failed');
-                    return response()->json(['message' => $e->getMessage()], 400);
+                    return  session()->flash('login_fail', 'Login Failed. '. $this->ldaptest_user.' did not successfully bind to LDAP.');
+
                 }
 
             } catch (\Exception $e) {
-                \Log::debug('Bind failed here');
-                return response()->json(['message' => $e->getMessage()], 400);
-                //return response()->json(['message' => $e->getMessage()], 500);
+                \Log::debug('Bind failed');
+
+                return session()->flash('bind_fail_general','Could not bind to LDAP: Invalid credentials');
+
             }
         } catch (\Exception $e) {
             \Log::debug('Connection failed');
-            return response()->json(['message' => $e->getMessage()], 500);
+            return session()->flash('connection_fail','Connection failed.');
         }
 
     }
