@@ -15,9 +15,7 @@ on:
       - develop
 
   pull_request:
-    branches:
-      - master/.*
-      - develop/.*
+    branches: .*
 
 pipeline:
   - name: Setup
