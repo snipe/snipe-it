@@ -115,26 +115,26 @@
 @section('moar_scripts')
     <script type="text/javascript">
         $(document).ready(function () {
-            let textarea = $('textarea[name="eula_text"]');
+            let eula = $('textarea[name="eula_text"]');
             let useDefaultEula = $('input[name="use_default_eula"]');
             let shouldSendEmail = $('input[name="checkin_email"]')
             let message = $('#email_will_be_sent_message');
 
             function handleEulaChange() {
-                if (textarea.val().trim() !== '' || useDefaultEula.is(":checked")) {
+                if (eula.val().trim() !== '' || useDefaultEula.is(":checked")) {
                     shouldSendEmail.prop('checked', true);
                     shouldSendEmail.prop('disabled', true);
                     message.show();
-                    textarea.prop('disabled', useDefaultEula.is(":checked"));
+                    eula.prop('disabled', useDefaultEula.is(":checked"));
                 } else {
                     shouldSendEmail.prop('checked', false);
                     shouldSendEmail.prop('disabled', false);
                     message.hide();
-                    textarea.prop('disabled', useDefaultEula.is(":checked"));
+                    eula.prop('disabled', useDefaultEula.is(":checked"));
                 }
             }
 
-            textarea.on('change keyup', function () {
+            eula.on('change keyup', function () {
                 handleEulaChange();
             });
 
