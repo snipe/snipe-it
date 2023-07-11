@@ -73,9 +73,11 @@
         {{ Form::checkbox('checkin_email', '1', old('checkin_email', $item->checkin_email), ['aria-label'=>'checkin_email']) }}
         {{ trans('admin/categories/general.checkin_email') }}
         </label>
+        <span id="email_will_be_sent_message" class="help-block">
+            An email will be sent to the user because a EULA is set for this category.
+        </span>
     </div>
 </div>
-
 
 @include ('partials.forms.edit.image-upload', ['image_path' => app('categories_upload_path')])
 
@@ -108,4 +110,32 @@
 
 
 
+@stop
+
+@section('moar_scripts')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            let textarea = $('textarea[name="eula_text"]');
+            let shouldSendEmail = $('input[name="checkin_email"]')
+            let message = $('#email_will_be_sent_message');
+
+            function handleEulaChange() {
+                if (textarea.val().trim() !== '') {
+                    shouldSendEmail.prop('checked', true);
+                    shouldSendEmail.prop('disabled', true);
+                    message.show();
+                } else {
+                    shouldSendEmail.prop('checked', false);
+                    shouldSendEmail.prop('disabled', false);
+                    message.hide();
+                }
+            }
+
+            textarea.on('change keyup', function() {
+                handleEulaChange();
+            });
+
+            handleEulaChange();
+        });
+    </script>
 @stop
