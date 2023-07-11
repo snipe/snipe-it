@@ -29,7 +29,7 @@ class Helper
         $Parsedown->setSafeMode(true);
 
         if ($str) {
-            return $Parsedown->text($str);
+            return $Parsedown->line($str);
         }
     }
 
