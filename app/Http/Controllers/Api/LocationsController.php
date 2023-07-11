@@ -37,6 +37,8 @@ class LocationsController extends Controller
             'locations.city',
             'locations.state',
             'locations.zip',
+            'locations.phone',
+            'locations.fax',
             'locations.country',
             'locations.parent_id',
             'locations.manager_id',

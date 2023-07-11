@@ -60,6 +60,8 @@ final class CompaniesController extends Controller
 
         $company = new Company;
         $company->name = $request->input('name');
+        $company->phone = $request->input('phone');
+        $company->fax = $request->input('fax');
 
         $company = $request->handleImages($company);
 
@@ -111,6 +113,8 @@ final class CompaniesController extends Controller
         $this->authorize('update', $company);
 
         $company->name = $request->input('name');
+        $company->phone = $request->input('phone');
+        $company->fax = $request->input('fax');
 
         $company = $request->handleImages($company);
 
