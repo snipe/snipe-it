@@ -101,10 +101,10 @@ class AssetsTransformer
             foreach ($asset->model->fieldset->fields as $field) {
                 if ($field->isFieldDecryptable($asset->{$field->db_column})) {
                     $decrypted = Helper::gracefulDecrypt($field, $asset->{$field->db_column});
-                    $value = (Gate::allows('superadmin')) ? $decrypted : strtoupper(trans('admin/custom_fields/general.encrypted'));
+                    $value = (Gate::allows('superadmin') || Gate::allows('admin')) ? $decrypted : strtoupper(trans('admin/custom_fields/general.encrypted'));
 
                     if ($field->format == 'DATE'){
-                        if (Gate::allows('superadmin')){
+                        if (Gate::allows('superadmin') || Gate::allows('admin')){
                             $value = Helper::getFormattedDateObject($value, 'date', false);
                         } else {
                            $value = strtoupper(trans('admin/custom_fields/general.encrypted'));
