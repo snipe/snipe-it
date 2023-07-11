@@ -29,6 +29,16 @@ class Helper
         $Parsedown->setSafeMode(true);
 
         if ($str) {
+            return $Parsedown->text($str);
+        }
+    }
+
+    public static function parseEscapedMarkedownInline($str = null)
+    {
+        $Parsedown = new \Parsedown();
+        $Parsedown->setSafeMode(true);
+
+        if ($str) {
             return $Parsedown->line($str);
         }
     }
