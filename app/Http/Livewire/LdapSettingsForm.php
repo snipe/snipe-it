@@ -7,6 +7,7 @@ use App\Models\Setting;
 use App\Models\Group;
 use Livewire\Component;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Validator;
 
 class LdapSettingsForm extends Component
 {
@@ -45,11 +46,15 @@ class LdapSettingsForm extends Component
       public        $keys = [];
       public        $ldap_message;
 
+//      protected $listeners = ['ldapsynctest' => 'ldapSyncTest'];
+
 
     protected $rules = [
           'ldap_username_field' => 'not_in:sAMAccountName',
           'ldap_auth_filter_query' => 'not_in:uid=samaccountname|required_if:ldap_enabled,1',
           'ldap_filter' => 'nullable|regex:"^[^(]"|required_if:ldap_enabled,1',
+//          'ldaptest_user' => 'required',
+//          'ldaptest_password' => 'required'
       ];
       protected  array $messages = [
               'ldap_username_field.not_in' => '<code>sAMAccountName</code> (mixed case) will likely not work. You should use <code>samaccountname</code> (lowercase) instead. ',
@@ -107,8 +112,6 @@ class LdapSettingsForm extends Component
 
     public function submit(){
 
-//        $this->validate($this->rules,$this->messages, $field );
-
         $this->setting->ldap_enabled              = $this->ldap_enabled;
         $this->setting->ldap_server               = $this->ldap_server;
         $this->setting->ldap_server_cert_ignore   = $this->ldap_server_cert_ignore;
@@ -141,34 +144,7 @@ class LdapSettingsForm extends Component
 
         $this->setting->save();
     }
-    public function ldapsynctest()
-    {
-
-        $this->ldapad_test_results = '<i class="fas fa-spinner spin"></i> ' . trans('admin/settings/message.ldap.testing');
-        $response = $this->ldaptest();
-
-
-//        if ($response->successful()) {
-//            $this->ldapad_test_results = $this->buildLdapTestResults($response->json());
-//        } else {
-//            $this->ldapad_test_results = '<i class="fas fa-exclamation-triangle text-danger"></i> ';
-//            if ($response->status() === 500) {
-//                $this->ldapad_test_results .= trans('admin/settings/message.ldap.500');
-//            } elseif ($response->status() === 400) {
-//                $errorMessage = '';
-//                if (isset($response->json()['user_sync'])) {
-//                    $errorMessage = $response->json()['user_sync']['message'];
-//                }
-//                if (isset($response->json()['message'])) {
-//                    $errorMessage = $response->json()['message'];
-//                }
-//                $this->ldapad_test_results .= $errorMessage;
-//            } else {
-//                $this->ldapad_test_results .= trans('admin/settings/message.ldap.error');
-//            }
-//        }
-    }
-    public function ldaptest()
+    public function ldapSyncTest()
     {
         $settings = Setting::getSettings();
         $this->keys= [trans('admin/settings/general.employee_number'),
@@ -184,14 +160,10 @@ class LdapSettingsForm extends Component
         try {
             $connection = Ldap::connectToLdap();
             try {
-                $ldap_message['bind'] = ['message' => 'Successfully bound to LDAP server.'];
+                $this->ldap_message = 'Successfully bound to LDAP server.';
                 \Log::debug('attempting to bind to LDAP for LDAP test');
                 Ldap::bindAdminToLdap($connection);
-                $ldap_message['login'] = [
-                    'message' => 'Successfully connected to LDAP server.',
-                ];
-            $this->ldap_message = json_encode($ldap_message);
-
+                $this->ldap_message .= ' Successfully connected to LDAP server.';
 
                 $users = collect(Ldap::findLdapUsers(null,10))->filter(function ($value, $key) {
                     return is_int($key);
@@ -207,9 +179,7 @@ class LdapSettingsForm extends Component
                 if ($users->count() > 0) {
                         $this->ldap_sync_test_users = $users;
                 } else {
-                    $message['user_sync'] = [
-                        'message' => 'Connection to LDAP was successful, however there were no users returned from your query. You should confirm the Base Bind DN above.',
-                    ];
+                        $this->ldap_message .= ' Connection to LDAP was successful, however there were no users returned from your query. You should confirm the Base Bind DN above.';
                 }
             } catch (\Exception $e) {
                 \Log::debug('Bind failed');
@@ -223,26 +193,13 @@ class LdapSettingsForm extends Component
 
     public function ldaptestlogin()
     {
+//        $validated_user_fields= $this->validate();
 
-        if ($this->setting->ldap_enabled != '1') {
-            \Log::debug('LDAP is not enabled. Cannot test.');
-            return response()->json(['message' => 'LDAP is not enabled, cannot test.'], 400);
-        }
-
-
-        $rules = array(
-            'ldaptest_user' => 'required',
-            'ldaptest_password' => 'required'
-        );
-
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            \Log::debug('LDAP Validation test failed.');
-            $validation_errors = implode(' ',$validator->errors()->all());
-            return response()->json(['message' => $validator->errors()->all()], 400);
-        }
-
-
+//        if ($validator->fails()) {
+//            \Log::debug('LDAP Validation test failed.');
+//            $validation_errors = implode(' ',$validator->errors()->all());
+//            return response()->json(['message' => $validator->errors()->all()], 400);
+//        }
 
         \Log::debug('Preparing to test LDAP login');
         try {

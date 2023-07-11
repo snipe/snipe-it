@@ -553,11 +553,11 @@
                                         {{ Form::label('test_ldap_sync', 'Test LDAP Sync') }}
                                     </div>
                                     <div class="col-md-9" id="ldaptestrow">
-                                        <button type='submit' wire:click.prevent="ldapsynctest" {{ $setting->demoMode }} class="btn btn-default btn-sm pull-left" id="ldapsynctest" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test_sync') }}</button>
+                                        <button type='submit' wire:click.prevent="ldapSyncTest" {{ $setting->demoMode }} class="btn btn-default btn-sm pull-left" id="ldapsynctest" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test_sync') }}</button>
                                     </div>
                                     @if(isset($ldap_sync_test_users))
                                         <div class="col-md-9 col-md-offset-3">
-                                            <p class="text-success"><i class="fas fa-check text-success"></i>{{" ".trans('admin/settings/general.ldap_sync_test_success')}} </p>
+                                            <p class="text-success"><i class="fas fa-check text-success"></i>{{$ldap_message}} </p>
                                             <br />
                                             <div id="ldapad_test_results" class="well well-sm">
                                                 <table class="table table-bordered table-condensed" style="background-color: #fff">
@@ -594,7 +594,7 @@
                                 </div>
                             </div>
                         </form>
-                        <form wire:click.prevent="logintest">
+                        <form wire:click.prevent="ldaptestlogin">
                             <!-- LDAP Login test -->
                             <div class="col-md-11 col-md-offset-1">
                                 <div class="form-group">
@@ -605,12 +605,14 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <input type="text" wire:model="ldaptest_user" id="ldaptest_user" class="form-control" placeholder="LDAP username">
+                                                @error('ldaptest_user')<span class="error">{{$message}}</span> @enderror
                                             </div>
                                             <div class="col-md-4">
                                                 <input type="password" wire:model="ldaptest_password" id="ldaptest_password" class="form-control" placeholder="LDAP password">
+                                                @error('ldaptest_password')<span class="error">{{$message}}</span> @enderror
                                             </div>
                                             <div class="col-md-3">
-                                                <a class="btn btn-default btn-sm" id="ldaptestlogin" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test') }}</a>
+                                                <button type="submit"  {{ $setting->demoMode }} class="btn btn-default btn-sm" id="ldaptestlogin" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test')}}</button>
                                             </div>
 
 
