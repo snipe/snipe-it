@@ -649,6 +649,10 @@ class ReportsController extends Controller
                 $assets->whereBetween('assets.expected_checkin', [$request->input('expected_checkin_start'), $request->input('expected_checkin_end')]);
             }
 
+            if (($request->filled('eol')) && ($request->filled('eol'))) {
+                $assets->whereBetween('assets.eol', [$request->input('eol_start'), $request->input('eol_end')]);
+            }
+
             if (($request->filled('last_audit_start')) && ($request->filled('last_audit_end'))) {
                 $assets->whereBetween('assets.last_audit_date', [$request->input('last_audit_start'), $request->input('last_audit_end')]);
             }
