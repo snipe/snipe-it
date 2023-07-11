@@ -27,7 +27,7 @@ class CompaniesTransformer
                 'id' => (int) $company->id,
                 'name' => e($company->name),
                 'phone' => ($company->phone!='') ? e($company->phone): null,
-                'fax' => ($company->phone!='') ? e($company->fax): null,
+                'fax' => ($company->fax!='') ? e($company->fax): null,
                 'image' =>   ($company->image) ? Storage::disk('public')->url('companies/'.e($company->image)) : null,
                 'created_at' => Helper::getFormattedDateObject($company->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($company->updated_at, 'datetime'),

@@ -44,7 +44,7 @@ class LocationsTransformer
                 'country' => ($location->country) ? e($location->country) : null,
                 'zip' => ($location->zip) ? e($location->zip) : null,
                 'phone' => ($location->phone!='') ? e($location->phone): null,
-                'fax' => ($location->phone!='') ? e($location->fax): null,
+                'fax' => ($location->fax!='') ? e($location->fax): null,
                 'assigned_assets_count' => (int) $location->assigned_assets_count,
                 'assets_count'    => (int) $location->assets_count,
                 'rtd_assets_count'    => (int) $location->rtd_assets_count,

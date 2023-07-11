@@ -42,7 +42,7 @@ class CompanyPresenter extends Presenter
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
-                'title' => trans('admin/suppliers/table.phone'),
+                'title' => trans('admin/suppliers/table.fax'),
                 'visible' => false,
                 'formatter'    => 'phoneFormatter',
             ], [
