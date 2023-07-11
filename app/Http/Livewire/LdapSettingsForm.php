@@ -45,16 +45,17 @@ class LdapSettingsForm extends Component
       public        $ldap_sync_test_users;
       public        $keys = [];
       public        $ldap_message;
+      public        $test_login;
 
-//      protected $listeners = ['ldapsynctest' => 'ldapSyncTest'];
+
 
 
     protected $rules = [
           'ldap_username_field' => 'not_in:sAMAccountName',
           'ldap_auth_filter_query' => 'not_in:uid=samaccountname|required_if:ldap_enabled,1',
           'ldap_filter' => 'nullable|regex:"^[^(]"|required_if:ldap_enabled,1',
-//          'ldaptest_user' => 'required',
-//          'ldaptest_password' => 'required'
+          'ldaptest_user' => 'required',
+          'ldaptest_password' => 'required'
       ];
       protected  array $messages = [
               'ldap_username_field.not_in' => '<code>sAMAccountName</code> (mixed case) will likely not work. You should use <code>samaccountname</code> (lowercase) instead. ',
@@ -144,7 +145,7 @@ class LdapSettingsForm extends Component
 
         $this->setting->save();
     }
-    public function ldapSyncTest()
+    public function ldapsynctest()
     {
         $settings = Setting::getSettings();
         $this->keys= [trans('admin/settings/general.employee_number'),
@@ -190,18 +191,21 @@ class LdapSettingsForm extends Component
 
         }
     }
+    public function updated(){
+        $this->test_login = Validator::make(
+            [ 'username' => $this->ldaptest_user,
+                'password' => $this->ldaptest_password,
+            ],
+            $this->rules
+        )->validate();
+    }
 
     public function ldaptestlogin()
     {
-//        $validated_user_fields= $this->validate();
-
-//        if ($validator->fails()) {
-//            \Log::debug('LDAP Validation test failed.');
-//            $validation_errors = implode(' ',$validator->errors()->all());
-//            return response()->json(['message' => $validator->errors()->all()], 400);
-//        }
+        $this->validate($this->rules);
 
         \Log::debug('Preparing to test LDAP login');
+
         try {
             $connection = Ldap::connectToLdap();
             try {
@@ -221,7 +225,7 @@ class LdapSettingsForm extends Component
                 }
 
             } catch (\Exception $e) {
-                \Log::debug('Bind failed');
+                \Log::debug('Bind failed here');
                 return response()->json(['message' => $e->getMessage()], 400);
                 //return response()->json(['message' => $e->getMessage()], 500);
             }
@@ -229,7 +233,6 @@ class LdapSettingsForm extends Component
             \Log::debug('Connection failed');
             return response()->json(['message' => $e->getMessage()], 500);
         }
-
 
     }
 }
