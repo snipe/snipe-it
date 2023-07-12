@@ -169,6 +169,7 @@ return [
     | - localStorage: use this if you have a LOT of custom fields and are getting a REQUEST TOO LARGE error
     | - sessionStorage
     |
+    | More info: https://bootstrap-table.com/docs/extensions/cookie/#cookiestorage
     */
 
     'bs_table_storage' => env('BS_TABLE_STORAGE', 'cookieStorage'),
