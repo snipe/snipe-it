@@ -31,7 +31,6 @@ class LdapSettingsForm extends Component
       public bool   $is_ad;
       public bool   $ldap_tls;
       public bool   $ldap_pw_sync;
-      public        $custom_forgot_pass_url;
       public        $ldap_jobtitle;
       public        $ldap_country;
       public        $ldap_dept;
@@ -46,6 +45,7 @@ class LdapSettingsForm extends Component
       public        $keys = [];
       public        $ldap_message;
       public        $test_login;
+      public        $custom_forgot_pass_url;
 
 
 
@@ -94,19 +94,18 @@ class LdapSettingsForm extends Component
         $this->ad_append_domain          = $this->setting->ad_append_domain;
         $this->ldap_tls                  = $this->setting->ldap_tls;
         $this->ldap_pw_sync              = $this->setting->ldap_pw_sync;
-        $this->custom_forgot_pass_url    = $this->setting->custom_forgot_pass_url;
         $this->ldap_phone_field          = $this->setting->ldap_phone_field;
         $this->ldap_jobtitle             = $this->setting->ldap_jobtitle;
         $this->ldap_country              = $this->setting->ldap_country;
         $this->ldap_dept                 = $this->setting->ldap_dept;
         $this->ldap_client_tls_cert      = $this->setting->ldap_client_tls_cert;
         $this->ldap_client_tls_key       = $this->setting->ldap_client_tls_key;
-
+        $this->custom_forgot_pass_url    = $this->setting->custom_forgot_pass_url;
 
     }
 
-    public function render()
-    {
+    public function render(){
+
         return view('livewire.ldap-settings-form');
     }
 
@@ -135,13 +134,14 @@ class LdapSettingsForm extends Component
         $this->setting->ad_append_domain          = $this->ad_append_domain;
         $this->setting->ldap_tls                  = $this->ldap_tls;
         $this->setting->ldap_pw_sync              = $this->ldap_pw_sync;
-        $this->setting->custom_forgot_pass_url    = $this->custom_forgot_pass_url;
         $this->setting->ldap_phone_field          = $this->ldap_phone_field;
         $this->setting->ldap_jobtitle             = $this->ldap_jobtitle;
         $this->setting->ldap_country              = $this->ldap_country;
         $this->setting->ldap_dept                 = $this->ldap_dept;
         $this->setting->ldap_client_tls_cert      = $this->ldap_client_tls_cert;
         $this->setting->ldap_client_tls_key       = $this->ldap_client_tls_key;
+        $this->setting->custom_forgot_pass_url    = $this->custom_forgot_pass_url;
+
         $this->setting->save();
     }
     public function ldapsynctest()
@@ -165,7 +165,8 @@ class LdapSettingsForm extends Component
                 Ldap::bindAdminToLdap($connection);
                 $this->ldap_message .= ' Successfully connected to LDAP server.';
 
-                $users = collect(Ldap::findLdapUsers(null,10))->filter(function ($value, $key) {
+                $users = collect(Ldap::findLdapUsers(null,10))
+                    ->filter(function ($value, $key) {
                     return is_int($key);
                 })->slice(0, 10)->map(function ($item) use ($settings) {
                     return (object) [
@@ -176,8 +177,10 @@ class LdapSettingsForm extends Component
                         'email'           => $item[$settings['ldap_email']][0] ?? null,
                     ];
                 });
-                if ($users->count() > 0) {
-                        $this->ldap_sync_test_users = $users;
+                if (isset($users)) {
+
+                    $this->ldap_sync_test_users = $users->toArray();
+
                 } else {
                         $this->ldap_message .= ' Connection to LDAP was successful, however there were no users returned from your query. You should confirm the Base Bind DN above.';
                 }
@@ -191,16 +194,14 @@ class LdapSettingsForm extends Component
         }
     }
     public function updated(){
-        $this->test_login = Validator::make(
-            [ 'username' => $this->ldaptest_user,
-                'password' => $this->ldaptest_password,
-            ],
-            $this->rules
-        )->validate();
+        $this->ldap_sync_test_users = null;
+
     }
 
     public function ldaptestlogin()
     {
+        $this->ldap_sync_test_users = null;
+
         $this->validate($this->rules);
 
         \Log::debug('Preparing to test LDAP login');

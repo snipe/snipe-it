@@ -580,7 +580,6 @@
                                                         @endforeach
                                                     </tbody>
                                                 </table>
-
                                             </div>
                                         </div>
                                     @endif
@@ -596,7 +595,7 @@
                         </form>
 
                             <!-- LDAP Login test -->
-                    <form>
+                    <form wire:submit.prevent="ldaptestlogin">
                             <div class="col-md-11 col-md-offset-1">
                                 <div class="form-group">
                                     <div class="col-md-3">
@@ -605,15 +604,16 @@
                                     <div class="col-md-9">
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <input type="text" wire:model.lazy="ldaptest_user" id="ldaptest_user" class="form-control" placeholder="LDAP username">
+                                                <input type="text" wire:model.defer="ldaptest_user" id="ldaptest_user" class="form-control" placeholder="LDAP username">
                                                 {!! $errors->first('ldaptest_user', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="password" wire:model.lazy="ldaptest_password" id="ldaptest_password" class="form-control" placeholder="LDAP password">
+                                                <input type="password" wire:model.defer="ldaptest_password" id="ldaptest_password" class="form-control" placeholder="LDAP password">
                                                 {!! $errors->first('ldaptest_password', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                             </div>
                                             <div class="col-md-3">
-                                                <a href="#"  wire:click.prevent="ldaptestlogin" {{ $setting->demoMode }} class="btn btn-default btn-sm" id="ldaptestlogin" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test')}}</a>
+                                                <button type='submit' {{ $setting->demoMode }} class="btn btn-default btn-sm pull-left" id="ldaptestlogin" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test') }}</button>
+{{--                                                <a href="#"  wire:click.prevent="ldaptestlogin" {{ $setting->demoMode }} class="btn btn-default btn-sm" id="ldaptestlogin" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test')}}</a>--}}
                                             </div>
                                         </div>
                                     </div>
@@ -653,8 +653,10 @@
                                 </div>
                             </div>
                     </form>
+                    @endif
 
                         <!-- LDAP Forgotten password -->
+                    <div class="col-md-11 col-md-offset-1">
                         <div class="form-group {{ $errors->has('custom_forgot_pass_url') ? 'error' : '' }}">
                             <div class="col-md-3">
                                 {{ Form::label('custom_forgot_pass_url', trans('admin/settings/general.custom_forgot_pass_url')) }}
@@ -668,10 +670,9 @@
                                 @endif
                             </div>
                         </div>
-                    @endif
                     </div>
 
-                </div> <!--/.box-body-->
+
                 <div class="box-footer">
                     <div class="text-left col-md-6">
                         <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
@@ -680,16 +681,16 @@
                         <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                     </div>
 
-                </div>
+                </div><!--footer-->
 
             </div> <!-- /box -->
 
         </div> <!-- /.col-md-8-->
-    </form>
-
-
-
+    </div>
+    </div>
+</form>
 </div>
+
 @push('moar_scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
