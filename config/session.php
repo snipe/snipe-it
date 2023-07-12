@@ -158,4 +158,19 @@ return [
 
     'secure' => env('SECURE_COOKIES', false),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Bootstrap Table Storage Type
+    |--------------------------------------------------------------------------
+    |
+    | Set the storage that this Bootstrap Table will use.
+    | Valid options are:
+    | - cookieStorage
+    | - localStorage: use this if you have a LOT of custom fields and are getting a REQUEST TOO LARGE error
+    | - sessionStorage
+    |
+    */
+
+    'bs_table_storage' => env('BS_TABLE_STORAGE', 'cookieStorage'),
+
 ];
