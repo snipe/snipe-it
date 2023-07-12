@@ -89,7 +89,7 @@
                             @endif
                             </td>
                             <td>
-                                @if ($request->requestingUser())
+                                @if ($request->requestingUser() && !$request->requestingUser()->trashed())
                                 <a href="{{ config('app.url') }}/users/{{ $request->requestingUser()->id }}">
                                     {{ $request->requestingUser()->present()->fullName() }}
                                 </a>

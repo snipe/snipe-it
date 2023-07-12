@@ -27,15 +27,24 @@ class LicenseImporter extends ItemImporter
      * @since 4.0
      * @param array $row
      * @return License|mixed|null
+     * updated @author Jes Vinsmoke
+     * @since 6.1
+     *
      */
     public function createLicenseIfNotExists(array $row)
     {
         $editingLicense = false;
-        $license = License::where('name', $this->item['name'])
+        $license = License::where('serial', $this->item['serial'])->where('name', $this->item['name'])
                     ->first();
         if ($license) {
             if (! $this->updating) {
-                $this->log('A matching License '.$this->item['name'].' with serial '.$this->item['serial'].' already exists');
+
+                if($this->item['serial'] != "") {
+                    $this->log('A matching License ' . $this->item['name'] . ' with serial ' . $this->item['serial'] . ' already exists');
+                }
+                else {
+                    $this->log('A matching License ' . $this->item['name'] . ' with no serial number already exists');
+                }
 
                 return;
             }
@@ -57,6 +66,10 @@ class LicenseImporter extends ItemImporter
         $this->item['maintained'] = $this->findCsvMatch($row, 'maintained');
         $this->item['purchase_order'] = $this->findCsvMatch($row, 'purchase_order');
         $this->item['reassignable'] = $this->findCsvMatch($row, 'reassignable');
+        if($this->item['reassignable'] == "")
+        {
+            $this->item['reassignable'] = 1;
+        }
         $this->item['seats'] = $this->findCsvMatch($row, 'seats');
         
         $this->item["termination_date"] = null;

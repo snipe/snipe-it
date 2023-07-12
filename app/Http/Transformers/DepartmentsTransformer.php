@@ -26,6 +26,8 @@ class DepartmentsTransformer
             $array = [
                 'id' => (int) $department->id,
                 'name' => e($department->name),
+                'phone' => ($department->phone!='') ? e($department->phone): null,
+                'fax' => ($department->fax!='') ? e($department->fax): null,
                 'image' =>   ($department->image) ? Storage::disk('public')->url(app('departments_upload_url').e($department->image)) : null,
                 'company' => ($department->company) ? [
                     'id' => (int) $department->company->id,
