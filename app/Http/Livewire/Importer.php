@@ -284,6 +284,8 @@ class Importer extends Component
             'maintained' => trans('admin/licenses/form.maintained'),
             'checkout_class' => trans('general.importer.checkout_type'),
             'serial' => trans('general.license_serial'),
+            'email' => trans('general.importer.checked_out_to_email'),
+            'username' => trans('general.importer.checked_out_to_username'),
         ];
 
         $this->users_fields  = [
