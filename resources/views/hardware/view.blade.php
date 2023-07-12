@@ -919,7 +919,7 @@
                                                 </li>
                                             @endif
 
-                                            @if((isset($asset->assignedTo)) && ($asset->assignedTo->department!=''))
+                                            @if((isset($asset->assignedTo)) && ($asset->assignedTo->department))
                                                 <li>{{ trans('admin/hardware/general.user_department') }}: {{ $asset->assignedTo->department->name}}</li>
                                             @endif
 
