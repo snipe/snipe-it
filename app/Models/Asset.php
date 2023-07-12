@@ -703,7 +703,7 @@ class Asset extends Depreciable
      */
     public function model()
     {
-        return $this->belongsTo(\App\Models\AssetModel::class, 'model_id')->withTrashed();
+        return $this->belongsTo(\App\Models\AssetModel::class, 'model_id')->withTrashed()->withDefault();
     }
 
     /**
