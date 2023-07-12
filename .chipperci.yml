@@ -21,7 +21,9 @@ pipeline:
   - name: Setup
     cmd: |
       cp -v .env.example .env
-      
+#     This is simply to allow passing the guard in TestCase@setUp()
+#     https://chipperci.com/docs/builds/env
+      touch .env.testing
       composer install --no-interaction --prefer-dist --optimize-autoloader
 
   - name: Generate Key
