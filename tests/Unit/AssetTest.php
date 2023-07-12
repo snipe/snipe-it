@@ -12,6 +12,17 @@ class AssetTest extends TestCase
 {
     use InteractsWithSettings;
 
+    public function testAutoIncrement()
+    {
+        $this->settings->enableAutoIncrement();
+
+        $a = Asset::factory()->create(['asset_tag' => Asset::autoincrement_asset() ]);
+        $b = Asset::factory()->create(['asset_tag' => Asset::autoincrement_asset() ]);
+
+        $this->assertModelExists($a);
+        $this->assertModelExists($b);
+
+    }
     public function testAutoIncrementCollision()
     {
         $this->settings->enableAutoIncrement();
@@ -125,7 +136,7 @@ class AssetTest extends TestCase
         $this->assertModelExists($final);
         $this->assertEquals($final->asset_tag, $final_result);
     }
-    
+
     public function testWarrantyExpiresAttribute()
     {
 
