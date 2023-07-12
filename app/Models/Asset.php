@@ -390,7 +390,9 @@ class Asset extends Depreciable
      */
     public function depreciation()
     {
-        return $this->model->belongsTo(\App\Models\Depreciation::class, 'depreciation_id');
+        if ($this->model) {
+            return $this->model->belongsTo(\App\Models\Depreciation::class, 'depreciation_id');
+        }
     }
 
 
