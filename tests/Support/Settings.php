@@ -56,6 +56,17 @@ class Settings
         ]);
     }
 
+    public function enableAutoIncrement(): Settings
+    {
+        return $this->update([
+            'auto_increment_assets' => 1,
+            'auto_increment_prefix' => 'ABCD',
+            'next_auto_tag_base' => '123',
+            'zerofill_count' => 5
+        ]);
+
+    }
+
     /**
      * @param array $attributes Attributes to modify in the application's settings.
      */
