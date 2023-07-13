@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
@@ -32,7 +33,8 @@ class DenormalizedEolAndAddColumnForExplicitDateToAssets extends Migration
             if ($model) {
                 $eol = $model->eol;
                 if ($eol) {
-                    $asset_eol_date = date('Y-m-d', strtotime($asset->asset_purchase_date . ' + ' . $eol . ' months'));
+                   //getting rid of the weird date($asset->asset_purchase_date, strtotime('+'.$eol.' months') thing because it was weird
+                    $asset_eol_date = Carbon::parse($asset->asset_purchase_date)->addMonths($eol)->format('Y-m-d');
                     DB::table('assets')->where('id', $asset->id)->update(['asset_eol_date' => $asset_eol_date]);
                 }
             }
