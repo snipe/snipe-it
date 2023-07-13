@@ -919,6 +919,10 @@
                                                 </li>
                                             @endif
 
+                                            @if((isset($asset->assignedTo)) && ($asset->assignedTo->department))
+                                                <li>{{ trans('admin/hardware/general.user_department') }}: {{ $asset->assignedTo->department->name}}</li>
+                                            @endif
+
                                             @if (isset($asset->location))
                                                 <li>{{ $asset->location->name }}</li>
                                                 <li>{{ $asset->location->address }}
