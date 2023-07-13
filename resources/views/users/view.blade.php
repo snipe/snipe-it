@@ -633,7 +633,7 @@
                         {{ trans('admin/users/table.notes') }}
                       </div>
                       <div class="col-md-9">
-                        {{ $user->notes }}
+                          {!! nl2br(Helper::parseEscapedMarkedownInline($user->notes)) !!}
                       </div>
 
                     </div>

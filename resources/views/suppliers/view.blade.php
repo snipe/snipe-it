@@ -338,7 +338,7 @@
               @endif
 
               @if ($supplier->notes!='')
-                  <li><i class="fa fa-comment"></i> {{ $supplier->notes }}</li>
+                  <li><i class="fa fa-comment"></i> {!! nl2br(Helper::parseEscapedMarkedownInline($supplier->notes)) !!}</li>
               @endif
 
           </ul>
