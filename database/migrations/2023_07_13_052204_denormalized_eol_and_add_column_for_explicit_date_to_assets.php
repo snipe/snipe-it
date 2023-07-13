@@ -22,8 +22,9 @@ class DenormalizedEolAndAddColumnForExplicitDateToAssets extends Migration
         // this is really just a scratch pad for the next step... but it might actually work? 
         // need to check out some things before trying it out, specifically whether or not 
         // asset_eol_date is only actually set when it's custom
-        $customEolAssets = DB::table('assets')->whereNotNull('eol_explicit')->get();
-        foreach ($customEolAssets as $asset) {
+        $explicitEolAssets = DB::table('assets')->whereNotNull('eol_explicit')->get();
+        //maybe try if ->diffInMonths($asset->eol_explicit) or something to determine explicit date
+        foreach ($explicitEolAssets as $asset) {
             DB::table('assets')->where('id', $asset->id)->update(['asset_eol_date' => $asset->eol_explicit]);
         }
         
