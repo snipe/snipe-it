@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\AssetModel;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
@@ -90,6 +91,9 @@ class AssetModelsController extends Controller
 
         // Was it created?
         if ($model->save()) {
+            if ($request->filled('eol')) {
+                $model->assets()->whereNotNull('purchase_date')->whereNull('eol_explicit')->update(['asset_eol_date' => DB::raw('DATE_ADD(purchase_date, INTERVAL '.$model->eol.' MONTH)')]); 
+            } 
             if ($this->shouldAddDefaultValues($request->input())) {
                 if (!$this->assignCustomFieldsDefaultValues($model, $request->input('default_values'))){
                     return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.fieldset_default_value.error'));
@@ -171,8 +175,13 @@ class AssetModelsController extends Controller
                 }
             }
         }
-
+       
+      
+       
         if ($model->save()) {
+            if ($model->wasChanged('eol')) {
+                    $model->assets()->whereNotNull('purchase_date')->whereNull('eol_explicit')->update(['asset_eol_date' => DB::raw('DATE_ADD(purchase_date, INTERVAL '.$model->eol.' MONTH)')]); 
+                }
             return redirect()->route('models.index')->with('success', trans('admin/models/message.update.success'));
         }
 
