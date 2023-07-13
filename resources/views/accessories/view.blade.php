@@ -287,7 +287,7 @@
               </strong>
           </div>
           <div class="col-md-9">
-              {!! nl2br(e($accessory->notes)) !!}
+              {!! nl2br(Helper::parseEscapedMarkedownInline($accessory->notes)) !!}
           </div>
        </div>
 
