@@ -639,10 +639,10 @@ class ReportsController extends Controller
             }
 
             if (($request->filled('created_start')) && ($request->filled('created_end'))) {
-                $assets->whereBetween('assets.created_at', [$request->input('created_start'), $request->input('created_end')]);
+                $assets->whereBetween(\DB::raw('DATE(assets.created_at)'), [$request->input('created_start'), $request->input('created_end')]);
             }
             if (($request->filled('checkout_date_start')) && ($request->filled('checkout_date_end'))) {
-                $assets->whereBetween('assets.last_checkout', [$request->input('checkout_date_start'), $request->input('checkout_date_end')]);
+                $assets->whereBetween(\DB::raw('DATE(assets.last_checkout)'), [$request->input('checkout_date_start'), $request->input('checkout_date_end') ]);
             }
 
             if (($request->filled('expected_checkin_start')) && ($request->filled('expected_checkin_end'))) {
@@ -650,7 +650,7 @@ class ReportsController extends Controller
             }
 
             if (($request->filled('last_audit_start')) && ($request->filled('last_audit_end'))) {
-                $assets->whereBetween('assets.last_audit_date', [$request->input('last_audit_start'), $request->input('last_audit_end')]);
+                $assets->whereBetween(\DB::raw('DATE(assets.last_audit_date)'), [$request->input('last_audit_start'), $request->input('last_audit_end')]);
             }
 
             if (($request->filled('next_audit_start')) && ($request->filled('next_audit_end'))) {
