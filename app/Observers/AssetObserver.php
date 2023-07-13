@@ -98,4 +98,15 @@ class AssetObserver
         $logAction->user_id = Auth::id();
         $logAction->logaction('delete');
     }
+   
+    public function saving(Asset $asset)
+    {
+       //turning this off for right now so i can check out the note in the migration
+
+        //calculate and set the EOL date if it is not already set
+        // if(is_null($asset->asset_eol_date) && !is_null($asset->asset_purchase_date) && !is_null($asset->model()->get()->eol)){
+        //     $asset->asset_eol_date = date('Y-m-d', strtotime($asset->asset_purchase_date . ' + ' . $asset->asset_warranty_months . ' months'));
+        // }
+
+    }
 }
