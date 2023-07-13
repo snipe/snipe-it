@@ -72,6 +72,7 @@ class Asset extends Depreciable
 
     protected $casts = [
         'purchase_date' => 'date',
+        'asset_eol_date' => 'date',
         'last_checkout' => 'datetime',
         'last_checkin' => 'datetime',
         'expected_checkin' => 'date',
