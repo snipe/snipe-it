@@ -49,6 +49,7 @@ class CustomFieldsTransformer
             'required'   =>  (($field->pivot) && ($field->pivot->required=='1')) ? true : false,
             'display_in_user_view' =>  ($field->display_in_user_view =='1') ? true : false,
             'auto_add_to_fieldsets' =>  ($field->auto_add_to_fieldsets == '1') ? true : false,
+            'show_in_listview'  => ($field->show_in_listview == '1') ? true : false,
             'created_at' => Helper::getFormattedDateObject($field->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($field->updated_at, 'datetime'),
         ];
