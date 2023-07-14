@@ -53,6 +53,7 @@ class CustomField extends Model
         'element' => 'required|in:text,listbox,textarea,checkbox,radio',
         'field_encrypted' => 'nullable|boolean',
         'auto_add_to_fieldsets' => 'boolean',
+        'show_in_listview' => 'boolean',
     ];
 
     /**
@@ -71,6 +72,7 @@ class CustomField extends Model
         'is_unique',
         'display_in_user_view',
         'auto_add_to_fieldsets',
+        'show_in_listview',
 
     ];
 
