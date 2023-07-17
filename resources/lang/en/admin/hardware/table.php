@@ -6,6 +6,7 @@ return [
     'asset_model'       => 'Model',
     'book_value'  	=> 'Current Value',
     'change' 		=> 'In/Out',
+    'checkin_date' => 'Checkin Date',
     'checkout_date' => 'Checkout Date',
     'checkoutto' 	=> 'Checked Out',
     'components_cost' => 'Total Components Cost',

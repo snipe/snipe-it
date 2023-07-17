@@ -545,6 +545,10 @@ class ReportsController extends Controller
                 $header[] = trans('admin/hardware/table.checkout_date');
             }
 
+            if ($request->filled('checkin_date')) {
+                $header[] = trans('admin/hardware/table.checkin_date');
+            }
+
             if ($request->filled('expected_checkin')) {
                 $header[] = trans('admin/hardware/form.expected_checkin');
             }
@@ -592,7 +596,7 @@ class ReportsController extends Controller
 
             $assets = \App\Models\Company::scopeCompanyables(Asset::select('assets.*'))->with(
                 'location', 'assetstatus', 'company', 'defaultLoc', 'assignedTo',
-                'model.category', 'model.manufacturer', 'supplier');
+                'model.category', 'model.manufacturer', 'supplier', 'lastCheckin');
             
             if ($request->filled('by_location_id')) {
                 $assets->whereIn('assets.location_id', $request->input('by_location_id'));
@@ -643,6 +647,10 @@ class ReportsController extends Controller
             }
             if (($request->filled('checkout_date_start')) && ($request->filled('checkout_date_end'))) {
                 $assets->whereBetween('assets.last_checkout', [$request->input('checkout_date_start'), $request->input('checkout_date_end')]);
+            }
+
+            if (($request->filled('checkin_date_start')) && ($request->filled('checkin_date_end'))) {
+                $assets->whereBetween('assets.last_checkin', [$request->input('checkin_date_start'), $request->input('checkin_date_end')]);
             }
 
             if (($request->filled('expected_checkin_start')) && ($request->filled('expected_checkin_end'))) {
@@ -824,6 +832,10 @@ class ReportsController extends Controller
 
                     if ($request->filled('checkout_date')) {
                         $row[] = ($asset->last_checkout) ? $asset->last_checkout : '';
+                    }
+
+                    if ($request->filled('checkin_date')) {
+                        $row[] = ($asset->lastCheckin) ? $asset->lastCheckin->action_date : '';
                     }
 
                     if ($request->filled('expected_checkin')) {
