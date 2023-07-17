@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Asset;
 use Carbon\Carbon;
+use Carbon\CarbonInterval;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
@@ -18,23 +20,26 @@ class DenormalizedEolAndAddColumnForExplicitDateToAssets extends Migration
         Schema::table('assets', function (Blueprint $table) {
             $table->date('eol_explicit')->after('asset_eol_date')->nullable();
         });
+      
        
-        // this is really just a scratch pad for the next step... but it might actually work? 
-        // need to check out some things before trying it out, specifically whether or not 
-        // asset_eol_date is only actually set when it's custom
-        $explicitEolAssets = DB::table('assets')->whereNotNull('eol_explicit')->get();
-        //maybe try if ->diffInMonths($asset->eol_explicit) or something to determine explicit date
-        foreach ($explicitEolAssets as $asset) {
-            DB::table('assets')->where('id', $asset->id)->update(['asset_eol_date' => $asset->eol_explicit]);
+        // Update the eol_explicit column with the value from asset_eol_date if it exists and is different from the calculated value
+        $assetsWithEolDates = Asset::whereNotNull('asset_eol_date')->get();
+        foreach($assetsWithEolDates as $asset) {
+            if($asset->asset_eol_date && $asset->asset_purchase_date) {
+                $months = Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->asset_purchase_date);
+                if($months != $asset->model->eol) {
+                    DB::table('assets')->find($asset->id)->update(['eol_explicit' => $asset->asset_eol_date]);
+                }
+            }
         }
-        
+
+        // Update the asset_eol_date column with the calculated value if it doesn't exist 
         $assets = DB::table('assets')->whereNull('asset_eol_date')->get();
         foreach ($assets as $asset) {
-            $model = DB::table('models')->where('id', $asset->model_id)->first();
+            $model = Asset::find($asset->id)->model;
             if ($model) {
                 $eol = $model->eol;
                 if ($eol) {
-                   //getting rid of the weird date($asset->asset_purchase_date, strtotime('+'.$eol.' months') thing because it was weird
                     $asset_eol_date = Carbon::parse($asset->asset_purchase_date)->addMonths($eol)->format('Y-m-d');
                     DB::table('assets')->where('id', $asset->id)->update(['asset_eol_date' => $asset_eol_date]);
                 }
