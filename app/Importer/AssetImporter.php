@@ -4,6 +4,7 @@ namespace App\Importer;
 
 use App\Models\Asset;
 use App\Models\Statuslabel;
+use Carbon\Carbon;
 
 class AssetImporter extends ItemImporter
 {
@@ -63,6 +64,7 @@ class AssetImporter extends ItemImporter
             $asset_tag = Asset::autoincrement_asset();
         }
 
+
         $asset = Asset::where(['asset_tag'=> (string) $asset_tag])->first();
         if ($asset) {
             if (! $this->updating) {
@@ -116,10 +118,15 @@ class AssetImporter extends ItemImporter
         if (isset($this->item['next_audit_date'])) {
             $item['next_audit_date'] = $this->item['next_audit_date'];
         }
-
+       
         $item['asset_eol_date'] = null;
         if (isset($this->item['asset_eol_date'])) {
             $item['asset_eol_date'] = $this->item['asset_eol_date'];
+        }
+
+        $item['eol_explicit'] = null;
+        if (isset($this->item['eol_explicit'])) {
+            $item['eol_explicit'] = $this->item['eol_explicit'];
         }
 
         if ($editingAsset) {
@@ -134,9 +141,14 @@ class AssetImporter extends ItemImporter
                 $asset->{$custom_field} = $val;
             }
         }
+       
+        if(($item['asset_eol_date'] == null) && ($item['eol_explicit'] == null) && ($asset->model->eol != null) && ($asset->asset_purchase_date != null)){
+            $asset->asset_eol_date = Carbon::parse($asset->asset_purchase_date)->addMonths($asset->model->eol)->format('Y-m-d');
+        }
 
 
         if ($asset->save()) {
+
             $asset->logCreate(trans('general.importer.import_note'));
             $this->log('Asset '.$this->item['name'].' with serial number '.$this->item['serial'].' was created');
 
