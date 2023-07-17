@@ -289,9 +289,9 @@
               </div>
           </div>
 
-          <!-- Checkin Date -->
+          <!-- Last Checkin Date -->
           <div class="form-group checkin-range">
-              <label for="checkin_date" class="col-md-3 control-label">{{ trans('general.checkin') }} {{  trans('general.range') }}</label>
+              <label for="checkin_date" class="col-md-3 control-label">{{ trans('general.last') }} {{ trans('general.checkin') }} {{  trans('general.range') }}</label>
               <div class="input-daterange input-group col-md-6" id="datepicker">
                   <input type="text" class="form-control" name="checkin_date_start" aria-label="checkin_date_start">
                   <span class="input-group-addon">to</span>
