@@ -649,9 +649,9 @@ class ReportsController extends Controller
                 $assets->whereBetween('assets.last_checkout', [$request->input('checkout_date_start'), $request->input('checkout_date_end')]);
             }
 
-            if (($request->filled('checkin_date_start')) && ($request->filled('checkin_date_end'))) {
-                $assets->whereBetween('assets.last_checkin', [$request->input('checkin_date_start'), $request->input('checkin_date_end')]);
-            }
+//            if (($request->filled('checkin_date_start')) && ($request->filled('checkin_date_end'))) {
+//                $assets->whereBetween('assets.last_checkin', [$request->input('checkin_date_start'), $request->input('checkin_date_end')]);
+//            }
 
             if (($request->filled('expected_checkin_start')) && ($request->filled('expected_checkin_end'))) {
                 $assets->whereBetween('assets.expected_checkin', [$request->input('expected_checkin_start'), $request->input('expected_checkin_end')]);
