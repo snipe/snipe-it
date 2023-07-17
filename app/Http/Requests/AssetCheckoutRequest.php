@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Statuslabel;
+
 class AssetCheckoutRequest extends Request
 {
     /**
@@ -28,6 +30,11 @@ class AssetCheckoutRequest extends Request
             'status_id'             => 'exists:status_labels,id,deployable,1',
             'checkout_to_type'      => 'required|in:asset,location,user',
         ];
+
+        // if using the 'deployed' status-type, change the status_id rule
+        if (Statuslabel::has_deployed_statuses()) {
+            $rules['status_id'] = 'exists:status_labels,id,deployed,1';
+        }
 
         return $rules;
     }

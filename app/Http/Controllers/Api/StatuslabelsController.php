@@ -46,6 +46,8 @@ class StatuslabelsController extends Controller
                 $statuslabels = $statuslabels->Archived();
             } elseif (strtolower($request->input('status_type')) == 'deployable') {
                 $statuslabels = $statuslabels->Deployable();
+            } elseif (strtolower($request->input('status_type')) == 'deployed') {
+                $statuslabels = $statuslabels->Deployed();
             } elseif (strtolower($request->input('status_type')) == 'undeployable') {
                 $statuslabels = $statuslabels->Undeployable();
             }

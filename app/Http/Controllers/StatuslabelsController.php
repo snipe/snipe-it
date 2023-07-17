@@ -78,6 +78,7 @@ class StatuslabelsController extends Controller
         $statusLabel->user_id = Auth::id();
         $statusLabel->notes = $request->input('notes');
         $statusLabel->deployable = $statusType['deployable'];
+        $statusLabel->deployed = $statusType['deployed'];
         $statusLabel->pending = $statusType['pending'];
         $statusLabel->archived = $statusType['archived'];
         $statusLabel->color = $request->input('color');
@@ -110,7 +111,7 @@ class StatuslabelsController extends Controller
 
         $use_statuslabel_type = $item->getStatuslabelType();
 
-        $statuslabel_types = ['' => trans('admin/hardware/form.select_statustype')] + ['undeployable' => trans('admin/hardware/general.undeployable')] + ['pending' => trans('admin/hardware/general.pending')] + ['archived' => trans('admin/hardware/general.archived')] + ['deployable' => trans('admin/hardware/general.deployable')];
+        $statuslabel_types = ['' => trans('admin/hardware/form.select_statustype')] + ['undeployable' => trans('admin/hardware/general.undeployable')] + ['pending' => trans('admin/hardware/general.pending')] + ['archived' => trans('admin/hardware/general.archived')] + ['deployable' => trans('admin/hardware/general.deployable')] + ['deployed' => trans('general.deployed')];
 
         return view('statuslabels/edit', compact('item', 'statuslabel_types'))->with('use_statuslabel_type', $use_statuslabel_type);
     }

@@ -462,10 +462,17 @@ class Helper
      * @since [v2.5]
      * @return array
      */
-    public static function statusLabelList()
+    public static function statusLabelList($for_checkin = false)
     {
-        $statuslabel_list = ['' => trans('general.select_statuslabel')] + Statuslabel::orderBy('default_label', 'desc')->orderBy('name', 'asc')->orderBy('deployable', 'desc')
-                ->pluck('name', 'id')->toArray();
+
+        $statusquery = Statuslabel::orderBy('default_label', 'desc')->orderBy('name', 'asc')->orderBy('deployable', 'desc');
+
+        if (Statuslabel::has_deployed_statuses() && $for_checkin) {
+            $statusquery->where("deployed","!=","1");
+        }
+
+        $statuslabel_list = ['' => trans('general.select_statuslabel')] +
+            $statusquery->pluck('name', 'id')->toArray();
 
         return $statuslabel_list;
     }
@@ -491,6 +498,14 @@ class Helper
         return $statuslabel_list;
     }
 
+    public static function deployedStatusLabelList()
+    {
+        return Statuslabel::where('deployed', '=', '1')->orderBy('default_label', 'desc')
+            ->orderBy('name', 'asc')
+            ->orderBy('deployed', 'desc')
+            ->pluck('name', 'id')->toArray();
+    }
+
     /**
      * Get the list of status label types in an array to make a dropdown menu
      *
@@ -503,6 +518,7 @@ class Helper
         $statuslabel_types =
               ['' => trans('admin/hardware/form.select_statustype')]
             + ['deployable' => trans('admin/hardware/general.deployable')]
+            + ['deployed' => trans('general.deployed')]
             + ['pending' => trans('admin/hardware/general.pending')]
             + ['undeployable' => trans('admin/hardware/general.undeployable')]
             + ['archived' => trans('admin/hardware/general.archived')];
