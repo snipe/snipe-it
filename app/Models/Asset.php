@@ -637,6 +637,18 @@ class Asset extends Depreciable
             ->withTrashed();
     }
 
+    public function lastCheckin()
+    {
+        return $this->hasOne(Actionlog::class, 'item_id')
+            ->ofMany(
+                ['id' => 'max'],
+                function ($query) {
+                    $query->where('item_type', '=', self::class)
+                        ->where('action_type', '=', 'checkin from');
+                })
+            ->withTrashed();
+    }
+
     /**
      * Get the asset's user requests
      *
