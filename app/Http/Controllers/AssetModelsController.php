@@ -93,7 +93,8 @@ class AssetModelsController extends Controller
         // Was it created?
         if ($model->save()) {
             if ($request->filled('eol')) {
-                $model->assets()->whereNotNull('purchase_date')->whereNull('eol_explicit')->update(['asset_eol_date' => DB::raw('DATE_ADD(purchase_date, INTERVAL '.$model->eol.' MONTH)')]); 
+                $newEol = $model->eol; 
+                $model->assets()->whereNotNull('purchase_date')->whereNull('eol_explicit')->update(['asset_eol_date' => DB::raw('DATE_ADD(purchase_date, INTERVAL :newEol MONTH)', ['newEol' => $newEol])]); 
             } 
             if ($this->shouldAddDefaultValues($request->input())) {
                 if (!$this->assignCustomFieldsDefaultValues($model, $request->input('default_values'))){
@@ -182,7 +183,8 @@ class AssetModelsController extends Controller
        
         if ($model->save()) {
             if ($model->wasChanged('eol')) {
-                    $model->assets()->whereNotNull('purchase_date')->whereNull('eol_explicit')->update(['asset_eol_date' => DB::raw('DATE_ADD(purchase_date, INTERVAL '.$model->eol.' MONTH)')]); 
+                    $newEol = $model->eol; 
+                    $model->assets()->whereNotNull('purchase_date')->whereNull('eol_explicit')->update(['asset_eol_date' => DB::raw('DATE_ADD(purchase_date, INTERVAL :newEol MONTH)', ['newEol' => $newEol])]); 
                 }
             return redirect()->route('models.index')->with('success', trans('admin/models/message.update.success'));
         }
