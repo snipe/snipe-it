@@ -312,9 +312,12 @@ class AssetsController extends Controller
         $asset->purchase_cost = $request->input('purchase_cost', null);
         if ($request->filled('purchase_date') && !$request->filled('asset_eol_date')) {
             $asset->asset_eol_date = Carbon::parse($request->input('purchase_date'))->addMonths($asset->model->eol)->format('Y-m-d');
-        } else {
+        } elseif ($request->filled('asset_eol_date')) {
+           $asset->explicit_eol = request('explicit_eol', null); 
+        } 
+        else {
             $asset->purchase_date = $request->input('purchase_date', null);
-            $asset->asset_eol_date  = request('asset_eol_date', null);
+            $asset->asset_eol_date  = request('asset_eol_date', $asset->present()->eol_date());
         }
 
 
