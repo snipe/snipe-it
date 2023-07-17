@@ -73,9 +73,10 @@
         {{ Form::checkbox('checkin_email', '1', old('checkin_email', $item->checkin_email), ['aria-label'=>'checkin_email']) }}
         {{ trans('admin/categories/general.checkin_email') }}
         </label>
-        <span id="email_will_be_sent_message" class="help-block">
+        <div id="email_will_be_sent_message" class="callout callout-info">
+            <i class="far fa-envelope"></i>
             An email will be sent to the user because a EULA is set for this category.
-        </span>
+        </div>
     </div>
 </div>
 
