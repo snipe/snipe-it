@@ -142,6 +142,11 @@
               </label>
 
               <label class="form-control">
+                {{ Form::checkbox('checkin_date', '1', '1') }}
+                {{ trans('general.last') }} {{ trans('admin/hardware/table.checkin_date') }}
+              </label>
+
+              <label class="form-control">
                 {{ Form::checkbox('expected_checkin', '1', '1') }}
                 {{ trans('admin/hardware/form.expected_checkin') }}
               </label>
