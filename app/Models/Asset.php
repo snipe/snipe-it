@@ -641,6 +641,7 @@ class Asset extends Depreciable
     {
         return $this->hasOne(Actionlog::class, 'item_id')
             ->ofMany(
+                // @todo: should this be using action_date instead?
                 ['id' => 'max'],
                 function ($query) {
                     $query->where('item_type', '=', self::class)
