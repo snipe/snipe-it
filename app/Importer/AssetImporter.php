@@ -128,6 +128,10 @@ class AssetImporter extends ItemImporter
         if (isset($this->item['eol_explicit'])) {
             $item['eol_explicit'] = $this->item['eol_explicit'];
         }
+       
+        if(($item['asset_eol_date'] == null) && ($item['eol_explicit'] == null) && ($asset->model->eol != null) && ($asset->asset_purchase_date != null)){
+            $asset->asset_eol_date = Carbon::parse($asset->asset_purchase_date)->addMonths($asset->model->eol)->format('Y-m-d');
+        }
 
         if ($editingAsset) {
             $asset->update($item);
@@ -142,11 +146,6 @@ class AssetImporter extends ItemImporter
             }
         }
        
-        if(($item['asset_eol_date'] == null) && ($item['eol_explicit'] == null) && ($asset->model->eol != null) && ($asset->asset_purchase_date != null)){
-            $asset->asset_eol_date = Carbon::parse($asset->asset_purchase_date)->addMonths($asset->model->eol)->format('Y-m-d');
-        }
-
-
         if ($asset->save()) {
 
             $asset->logCreate(trans('general.importer.import_note'));
