@@ -384,7 +384,7 @@ class AssetsController extends Controller
 
         if ($asset->save()) {
            if($asset->wasChanged('purchase_date')){
-                $model->assets()->whereNotNull('purchase_date')->whereNull('eol_explicit')->update(['asset_eol_date' => DB::raw('DATE_ADD(purchase_date, INTERVAL '.$model->eol.' MONTH)')]);  
+                $asset->asset_eol_date = Carbon::parse($asset->purchase_date)->addMonths($asset->model->eol)->format('Y-m-d'); 
             }
             return redirect()->route('hardware.show', $assetId)
                 ->with('success', trans('admin/hardware/message.update.success'));
