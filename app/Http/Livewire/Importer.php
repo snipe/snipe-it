@@ -315,7 +315,7 @@ class Importer extends Component
             'gravatar' => trans('general.importer.gravatar'),
             'start_date'    => trans('general.start_date'),
             'end_date'   => trans('general.end_date'),
-            'employee_number'   => trans('general.employee_number'),
+            'employee_num'   => trans('general.employee_number'),
         ];
 
         $this->locations_fields  = [
