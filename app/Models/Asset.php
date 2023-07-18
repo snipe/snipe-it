@@ -73,6 +73,7 @@ class Asset extends Depreciable
     protected $casts = [
         'purchase_date' => 'date',
         'asset_eol_date' => 'date',
+        'eol_explicit' => 'boolean', 
         'last_checkout' => 'datetime',
         'expected_checkin' => 'date',
         'last_audit_date' => 'datetime',
@@ -87,7 +88,6 @@ class Asset extends Depreciable
         'created_at'     => 'datetime',
         'updated_at'   => 'datetime',
         'deleted_at'  => 'datetime',
-        'eol_explicit' => 'boolean',
     ];
 
     protected $rules = [
@@ -106,7 +106,8 @@ class Asset extends Depreciable
         'serial'          => 'unique_serial|nullable',
         'purchase_cost'   => 'numeric|nullable|gte:0',
         'supplier_id'     => 'exists:suppliers,id|nullable',
-        'asset_eol_date'  => 'date_format:Y-m-d|nullable',
+        //something not working here... 
+        // 'asset_eol_date'  => 'date_format:Y-m-d|nullable',
         'eol_explicit'    => 'boolean|nullable',
     ];
 
@@ -138,9 +139,9 @@ class Asset extends Depreciable
         'expected_checkin',
         'byod',
         'asset_eol_date',
+        'eol_explicit', 
         'last_audit_date',
         'next_audit_date',
-        'eol_explicit', 
     ];
 
     use Searchable;
