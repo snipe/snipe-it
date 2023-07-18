@@ -424,4 +424,12 @@ class UserFactory extends Factory
         });
     }
 
+    public function canEditOwnLocation()
+    {
+        return $this->state(function () {
+            return [
+                'permissions' => '{"self.edit_location":"1"}',
+            ];
+        });
+    }
 }
