@@ -212,9 +212,12 @@ class LdapSync extends Command
                 $item['manager'] = $results[$i][$ldap_result_manager][0] ?? '';
                 $item['location'] = $results[$i][$ldap_result_location][0] ?? '';
 
-                $location = Location::firstOrCreate([
-                    'name' => $item['location'],
-                ]);
+                // ONLY if you are using the "ldap_location" option *AND* you have an actual result
+                if ($ldap_result_location && $item['location']) {
+                        $location = Location::firstOrCreate([
+                                'name' => $item['location'],
+                        ]);
+                }
                 $department = Department::firstOrCreate([
                     'name' => $item['department'],
                 ]);
