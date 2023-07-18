@@ -649,6 +649,13 @@ class Asset extends Depreciable
             ->withTrashed();
     }
 
+    public function scopeLastCheckinBetween($query, $start, $end)
+    {
+        return $query->whereHas('lastCheckin', function ($query) use ($start, $end) {
+            $query->whereBetween('action_date', [$start, $end]);
+        });
+    }
+
     /**
      * Get the asset's user requests
      *
