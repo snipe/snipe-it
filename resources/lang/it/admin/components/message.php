@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Il Componente non è stato controllato, si prega di riprovare',
         'success' 		=> 'Componente controllato con successo.',
-        'user_does_not_exist' => 'Questo utente non è valido. Riprova.'
+        'user_does_not_exist' => 'Questo utente non è valido. Riprova.',
+        'unavailable'      => 'Non ci sono abbastanza componenti: rimangono :remaining , servono :requested ',
     ),
 
     'checkin' => array(

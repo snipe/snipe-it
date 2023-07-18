@@ -67,6 +67,8 @@ return [
         'array'   => 'Ko te: me whai i te huanga: iti rawa nga taonga.',
     ],
     'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'Ko te mea i tīpakohia: he muhu te huanga.',
     'numeric'              => 'Ko te: me tohu he huanga.',
     'present'              => 'Ko te: ko te waahi tohu kia noho.',

@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Demirbaşı Geri Getir',
     'pending'  					=> 'Bekliyor',
     'undeployable'  			=> 'Dağtılamaz',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Demirbaşı Görüntüle',
     'csv_error' => 'CSV dosyanızda bir hata var:',
     'import_text' => '

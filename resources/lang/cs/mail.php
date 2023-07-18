@@ -74,6 +74,7 @@ return [
     'your_credentials' => 'Vaše pověření Snipe-IT',
     'Accessory_Checkin_Notification' => 'Příslušenství přidáno v',
     'Asset_Checkin_Notification' => 'Majetek přidán v',
+    'Asset_Checkout_Notification' => 'Asset checked out',
     'License_Checkin_Notification' => 'Licence přidána v',
     'Expected_Checkin_Report' => 'Předpokládaný report o dostupném majetku',
     'Expected_Checkin_Notification' => 'Připomenutí: blížící se lhůta pro :name',

@@ -67,6 +67,8 @@ return [
         'array'   => 'L\'attribut: doit avoir au moins: éléments min.',
     ],
     'starts_with'          => 'L\'attribut :attribute doit commencer par l\'une des valeurs suivantes : :values.',
+    'ends_with'            => 'Le champ :attribute doit se terminer par une des valeurs suivantes : :values.',
+
     'not_in'               => 'L\'attribut ":attribute" est invalide.',
     'numeric'              => 'L\'attribut ":attribute" doit être un nombre.',
     'present'              => 'Le champ d\'attribut: doit être présent.',

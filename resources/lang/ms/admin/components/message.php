@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Komponen tidak diperiksa, sila cuba lagi',
         'success' 		=> 'Komponen diperiksa dengan jayanya.',
-        'user_does_not_exist' => 'Pengguna itu tidak sah. Sila cuba lagi.'
+        'user_does_not_exist' => 'Pengguna itu tidak sah. Sila cuba lagi.',
+        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

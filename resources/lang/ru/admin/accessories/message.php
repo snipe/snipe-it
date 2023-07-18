@@ -24,7 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Ошибка при выдаче аксессуара. Повторите попытку',
         'success' 		=> 'Аксессуар успешно выдан.',
-        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
+        'unavailable'   => 'Нет доступных аксессуаров для выдачи. Проверьте их количество',
         'user_does_not_exist' => 'Этот пользователь является недопустимым. Пожалуйста, попробуйте еще раз.'
     ),
 

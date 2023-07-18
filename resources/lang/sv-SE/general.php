@@ -92,6 +92,7 @@ return [
     'debug_warning_text'    => 'Programmet körs i produktionsläge med debugging aktiverat. Detta kan avslöja känslig data om din ansökan är tillgänglig för omvärlden. Inaktivera felsökningsläge genom att ange värdet <code>APP_DEBUG</code> i filen <code>.env</code> till <code>false</code>.',
     'delete'  				=> 'Ta bort',
     'delete_confirm'  		=> 'Är du säker på att du vill radera: föremål?',
+    'delete_confirm_no_undo' => 'Är du säker på att du vill ta bort :item? Detta kan inte ångras.',
     'deleted'  				=> 'Raderad',
     'delete_seats'  		=> 'Borttagna platser',
     'deletion_failed'       => 'Borttagning misslyckades',
@@ -438,5 +439,14 @@ return [
     'setup_successful_migrations' => 'Dina databastabeller har skapats',
     'setup_migration_output' => 'Migrationsresultat:',
     'setup_migration_create_user' => 'Nästa: Skapa användare',
-    'importer_generic_error'    => 'Your file import is complete, but we did receive an error. This is usually caused by third-party API throttling from a notification webhook (such as Slack) and would not have interfered with the import itself, but you should confirm this.',
+    'importer_generic_error'    => 'Din filimport är klar, men vi fick ett fel. Detta orsakas vanligtvis av tredje parts API strypning från en anmälan webhook (såsom Slack) och skulle inte ha stört själva importen, men du bör bekräfta detta.',
+    'confirm' => 'Bekräfta',
+    'autoassign_licenses' => 'Auto-tilldela licenser',
+    'autoassign_licenses_help' => 'Allow this user to have licenses assigned via the bulk-assign license UI or cli tools.',
+    'autoassign_licenses_help_long' => 'Detta gör det möjligt för en användare att ha licenser tilldelade via bulk-tilldela licens UI eller cli verktyg. (Du kanske till exempel inte vill att entreprenörerna ska tilldelas en licens som du skulle tillhandahålla till endast personalmedlemmar. Du kan fortfarande individuellt tilldela licenser till dessa användare, men de kommer inte att inkluderas i Tilldela licens för alla användarfunktioner.)',
+    'no_autoassign_licenses_help' => 'Inkludera inte användare för bulk-tilldelning genom licens UI eller cli verktyg.',
+    'modal_confirm_generic'      => 'Är du säker?',
+    'cannot_be_deleted'      => 'Det här objektet kan inte raderas',
+    'undeployable_tooltip'      => 'Det här objektet kan inte checkas ut. Kolla antalet kvar.',
+
 ];

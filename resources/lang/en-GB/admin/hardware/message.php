@@ -17,14 +17,14 @@ return [
         'error'   			=> 'Asset was not updated, please try again',
         'success' 			=> 'Asset updated successfully.',
         'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'no_assets_selected'  =>  'Nothing was updated because no assets were selected.',
     ],
 
     'restore' => [
         'error'   		=> 'Asset was not restored, please try again',
         'success' 		=> 'Asset restored successfully.',
         'bulk_success' 		=> 'Asset restored successfully.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'nothing_updated'   => 'Nothing was restored because no assets were selected.', 
     ],
 
     'audit' => [

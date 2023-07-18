@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Восстановить актив',
     'pending'  					=> 'Ожидание',
     'undeployable'  			=> 'Выданные',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Показать актив',
     'csv_error' => 'У вас ошибка в вашем CSV-файле:',
     'import_text' => '

@@ -67,6 +67,8 @@ return [
         'array'   => ':attribute 最少要有 :min 個項目',
     ],
     'starts_with'          => ':attribute 必須以下列之一做為開頭: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => '選擇的 :attribute 無效',
     'numeric'              => ':attribute 必須是數字',
     'present'              => '：屬性字段必須存在。',

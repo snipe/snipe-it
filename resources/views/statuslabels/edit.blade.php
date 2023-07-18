@@ -75,7 +75,7 @@
 
         $(function() {
             $('.color').colorpicker({
-                color: '#AA3399',
+                color: `{{ old('color', $item->color) ?: '#AA3399' }}`,
                 format: 'hex'
             });
         });

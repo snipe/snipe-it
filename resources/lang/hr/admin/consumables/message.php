@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Potrošnja nije provjerena, pokušajte ponovo',
         'success' 		=> 'Isporuka potrošnog materijala uspješno je provjerena.',
-        'user_does_not_exist' => 'Taj je korisnik nevažeći. Molim te pokušaj ponovno.'
+        'user_does_not_exist' => 'Taj je korisnik nevažeći. Molim te pokušaj ponovno.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Spotřební materiál se nepodařilo přidělit, pokuste se o to znovu',
         'success' 		=> 'Spotřební materiál byl v pořádku přidělen.',
-        'user_does_not_exist' => 'Tento uživatel není platný, zkuste to prosím jinak.'
+        'user_does_not_exist' => 'Tento uživatel není platný, zkuste to prosím jinak.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

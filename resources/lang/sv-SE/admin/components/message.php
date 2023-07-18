@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Komponenten var inte utcheckad, försök igen',
         'success' 		=> 'Komponent utcheckad framgångsrikt.',
-        'user_does_not_exist' => 'Den användaren är ogiltig. Var god försök igen.'
+        'user_does_not_exist' => 'Den användaren är ogiltig. Var god försök igen.',
+        'unavailable'      => 'Inte tillräckligt med komponenter kvar: :remaining kvar, :requested efterfrågat ',
     ),
 
     'checkin' => array(

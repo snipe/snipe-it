@@ -11,7 +11,7 @@ return array(
 
     'two_factor' => array(
         'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
+        'success'               => 'Ви успішно увійшли в систему.',
         'code_required'         => 'Two-factor code is required.',
         'invalid_code'          => 'Two-factor code is invalid.',
     ),
@@ -23,7 +23,7 @@ return array(
 
     'logout' => array(
         'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
+        'success' => 'Ви успішно вийшли з системи.',
     ),
 
     'signup' => array(
@@ -38,7 +38,7 @@ return array(
 
     'forgot-password-confirm' => array(
         'error'   => 'There was a problem while trying to reset your password, please try again.',
-        'success' => 'Your password has been successfully reset.',
+        'success' => 'Ваш пароль успішно скинуто.',
     ),
 
 

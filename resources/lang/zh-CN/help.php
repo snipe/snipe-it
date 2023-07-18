@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => '更多信息',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => '勾选此框将编辑资产记录以反映其新的位置。不勾选它将只标记盘点记录中的位置。<br><br>注意此资产已借出，它不会改变它借出至的个人、资产或位置。',
 
     'assets' => '资产是指按序号或资产标签跟踪的物品，往往是指识别某一具体物品的价值较高的物品。',
 

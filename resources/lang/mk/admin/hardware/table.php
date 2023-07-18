@@ -8,6 +8,7 @@ return [
     'change' 		=> 'Раздолжи/Задолжи',
     'checkout_date' => 'Датум на задолжување',
     'checkoutto' 	=> 'Задолжен на',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Current Value',
     'diff' 			=> 'Разлика',
     'dl_csv' 		=> 'Преземи CSV',

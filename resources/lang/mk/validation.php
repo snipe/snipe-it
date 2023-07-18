@@ -67,6 +67,8 @@ return [
         'array'   => ':attribute мора да содржи најмалку :min ставки.',
     ],
     'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'Избраниот :attribute не е валиден.',
     'numeric'              => ':attribute мора да биде број.',
     'present'              => 'Полето :attribute е задолжително.',

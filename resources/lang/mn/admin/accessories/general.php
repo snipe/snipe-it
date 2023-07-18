@@ -17,5 +17,6 @@ return array(
     'use_default_eula'					=> 'Оронд нь <a href="#" data-toggle="modal" data-target="#eulaModal">програмын үндсэн EULA</a>-г ашиглаарай.',
     'use_default_eula_disabled'			=> '<del> оронд үндсэн анхдагч EULA ашигла.</del> Үндсэн анхдагч EULA тохируулагдаагүй байна. Тохиргоо дотроос нэгийг нэмж оруулна уу.',
     'clone'                             => 'Clone Accessory',
+    'delete_disabled'                   => 'This accessory cannot be deleted yet because some items are still checked out.',
 
 );

@@ -52,14 +52,12 @@
 }
 
 .btn, .btn:hover {
-  color: #000;
 
   &.btn-primary, .btn-primary:link {
     background-color: var(--button-default);
     border-color: var(--button-default);
     color: #545454;
   }
-
 
   &a.btn-primary:hover {
     background-color: var(--button-hover);
@@ -77,7 +75,12 @@
     color: #545454;
   }
 }
-
+a.actions {
+  color:#fff !important;
+}
+a:visited.label-default, a:link.label-default{
+  color:#444;
+}
 /**
 The dropdown is white, so use a darker color
  */
@@ -158,14 +161,11 @@ h2.task_menu{
   background: linear-gradient(to bottom, var(--header) 0%,var(--header) 100%);
   border-color: var(--header);
 }
-.label-default{
-  background-color:var(--back-sub);
-}
 a.btn.btn-default{
   color:var(--nav-link);
 }
 .bootstrap-table .fixed-table-container .table thead th .sortable {
-  color: var(--nav-link);
+  color: var(--text-main);
 }
 .bootstrap-table .fixed-table-toolbar .columns label {
   color:#000;
@@ -355,11 +355,8 @@ input[type=text], input[type=search] {
 .skin-yellow-dark .main-header .navbar .dropdown-menu li a {
   color: var(--header);
 }
-div.th-inner{
+tr th div.th-inner {
   color:var(--text-main);
-}
-.fixed-table-body thead th .th-inner, .skin-yellow-dark, .skin-yellow {
-  background-color: var(--header)!important;
 }
 .tab-content, .tab-pane {
   background-color: var(--back-main);

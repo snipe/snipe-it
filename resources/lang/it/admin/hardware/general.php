@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Ripristina Asset',
     'pending'  					=> 'In attesa',
     'undeployable'  			=> 'Non Distribuilbile',
+    'undeployable_tooltip'  	=> 'Questo bene ha una etichetta che lo rende non distribuibile, il check-out non può avvenire.',
     'view'  					=> 'Vedi Asset',
     'csv_error' => 'C\'è un errore nel file CSV:',
     'import_text' => '

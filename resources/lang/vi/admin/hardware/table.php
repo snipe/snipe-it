@@ -8,6 +8,7 @@ return [
     'change' 		=> 'Vào/Ra',
     'checkout_date' => 'Ngày checkout',
     'checkoutto' 	=> 'Đã checkout',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Giá trị hiện tại',
     'diff' 			=> 'Khác nhau',
     'dl_csv' 		=> 'Tải tập tin CSV xuống',

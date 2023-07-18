@@ -1,10 +1,10 @@
 <?php
 
 return array(
-	'eula_text'      			=> 'Licence d\'utilisation',
+	'eula_text'      			=> 'CLUF',
     'id'      					=> 'ID',
     'parent'   					=> 'Parent',
     'require_acceptance'      	=> 'Acceptation',
-    'title'      				=> 'Nom de Catégorie',
+    'title'      				=> 'Nom de la catégorie d\'actif',
 
 );

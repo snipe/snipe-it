@@ -98,6 +98,11 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'start_date'              => 'nullable|date_format:Y-m-d',
         'end_date'                => 'nullable|date_format:Y-m-d|after_or_equal:start_date',
         'autoassign_licenses'     => 'boolean',
+        'address'                 => 'max:191|nullable',
+        'city'                    => 'max:191|nullable',
+        'state'                   => 'min:2|max:191|nullable',
+        'country'                 => 'min:2|max:191|nullable',
+        'zip'                     => 'max:10|nullable',
     ];
 
     /**
@@ -639,13 +644,13 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function scopeSimpleNameSearch($query, $search)
     {
-           $query = $query->where('first_name', 'LIKE', '%'.$search.'%')
-               ->orWhere('last_name', 'LIKE', '%'.$search.'%')
-               ->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%{$search}%"]);
-
-        return $query;
+        return $query->where('first_name', 'LIKE', '%' . $search . '%')
+            ->orWhere('last_name', 'LIKE', '%' . $search . '%')
+            ->orWhereMultipleColumns([
+                'users.first_name',
+                'users.last_name',
+            ], $search);
     }
-
 
     /**
      * Run additional, advanced searches.
@@ -655,9 +660,11 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function advancedTextSearch(Builder $query, array $terms) {
-
         foreach($terms as $term) {
-            $query = $query->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%{$term}%"]);
+            $query->orWhereMultipleColumns([
+                'users.first_name',
+                'users.last_name',
+            ], $term);
         }
 
         return $query;

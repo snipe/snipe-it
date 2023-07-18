@@ -195,6 +195,9 @@ a.accordion-header {
 .btn-info.btn-outline {
   color: #5bc0de;
 }
+.btn-warning{
+  background-color:#f39c12 !important;
+}
 
 .btn-warning.btn-outline {
   color: #f0ad4e;
@@ -499,14 +502,14 @@ h4 {
   background: #FFFFFF;
   border-top: 1px solid #dddddd;
   display: table-row;
-  
+
 }
 
 .row-new-striped > .row:nth-of-type(odd)  {
   background-color: #F8F8F8;
   border-top: 1px solid #dddddd;
   display: table-row;
-  
+
 }
 
 .row-new-striped div {
@@ -670,6 +673,9 @@ th.css-accessory > .th-inner::before
 }
 
 @media screen and (max-width: 511px){
+  .tab-content .tab-pane .alert-block {
+    margin-top: 120px
+  }
   .sidebar-menu{
     margin-top:160px;
   }
@@ -740,7 +746,7 @@ input[type="checkbox"] {
 
 input[type="checkbox"]::before {
 
-/** If you want to use the non-checkbox, filled square, use this instead **/
+  /** If you want to use the non-checkbox, filled square, use this instead **/
   content: "";
   width: 1em;
   height: 1em;
@@ -837,6 +843,18 @@ input[type="radio"]:checked::before {
   display: grid;
   grid-template-columns: .1em auto;
   gap: 1.5em;
+}
+
+.container.row-striped .col-md-6 {
+  overflow-wrap:anywhere;
+}
+
+.nav-tabs-custom > .nav-tabs > li {
+  z-index: 1;
+}
+
+.select2-container .select2-search--inline .select2-search__field{
+  padding-left:15px;
 }
 
 /** --------------------------------------- **/

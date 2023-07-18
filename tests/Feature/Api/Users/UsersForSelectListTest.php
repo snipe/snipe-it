@@ -30,6 +30,19 @@ class UsersForSelectListTest extends TestCase
             ->assertJson(fn(AssertableJson $json) => $json->has('results', 3)->etc());
     }
 
+    public function testUsersCanBeSearchedByFirstAndLastName()
+    {
+        User::factory()->create(['first_name' => 'Luke', 'last_name' => 'Skywalker']);
+
+        Passport::actingAs(User::factory()->create());
+        $response = $this->getJson(route('api.users.selectlist', ['search' => 'luke sky']))->assertOk();
+
+        $results = collect($response->json('results'));
+
+        $this->assertEquals(1, $results->count());
+        $this->assertTrue($results->pluck('text')->contains(fn($text) => str_contains($text, 'Luke')));
+    }
+
     public function testUsersScopedToCompanyWhenMultipleFullCompanySupportEnabled()
     {
         $this->settings->enableMultipleFullCompanySupport();

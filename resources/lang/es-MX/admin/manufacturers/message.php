@@ -2,6 +2,7 @@
 
 return array(
 
+    'support_url_help' => 'Utilice <code>{LOCALE}</code> y <code>{SERIAL}</code> en su URL como variables para que estos valores se rellenen automáticamente al ver los activos.',
     'does_not_exist' => 'Fabricante inexistente.',
     'assoc_users'	 => 'Este Fabricante está asociado al menos a un modelo y no puede ser eliminado',
 

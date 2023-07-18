@@ -10,6 +10,7 @@ return array(
     'support_email'   		=> 'Ondersteunings-e-pos',
     'support_phone'   		=> 'Ondersteuningsfoon',
     'support_url'   		=> 'Ondersteunings-URL',
+    'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Update Fabrikant',
     'url'   				=> 'URL',
 

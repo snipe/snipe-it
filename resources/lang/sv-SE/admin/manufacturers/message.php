@@ -2,6 +2,7 @@
 
 return array(
 
+    'support_url_help' => 'Använd <code>{LOCALE}</code> och <code>{SERIAL}</code> i din URL som variabler för att få dessa värden automatiskt fyllda när du visar tillgångar.',
     'does_not_exist' => 'Tillverkaren existerar inte.',
     'assoc_users'	 => 'Tillverkaren är för tillfället associerad med en modell och kan inte tas bort. Vänligen uppdatera dina modeller till att inte vara associerade med denna tillverkare och försök igen. ',
 

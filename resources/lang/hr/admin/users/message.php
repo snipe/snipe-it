@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Uspješno ste odbili ovaj materijal.',
     'bulk_manager_warn'	        => 'Vaši su korisnici uspješno ažurirani, ali vaš unos upravitelja nije spremljen jer je upravitelj koji ste odabrali također bio na popisu korisnika koji se uređuje, a korisnici možda nisu vlastiti upravitelj. Ponovno odaberite svoje korisnike, isključujući upravitelja.',
     'user_exists'               => 'Korisnik već postoji!',
-    'user_not_found'            => 'Korisnik [: id] ne postoji.',
+    'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Potrebno je polje za prijavu',
     'user_password_required'    => 'Zaporka je potrebna.',
     'insufficient_permissions'  => 'Nedovoljna dozvola.',

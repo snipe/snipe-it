@@ -12,6 +12,7 @@ use App\Models\CheckoutRequest;
 use App\Models\Company;
 use App\Models\Location;
 use App\Models\Setting;
+use App\Models\Statuslabel;
 use App\Models\User;
 use Auth;
 use Carbon\Carbon;
@@ -323,6 +324,12 @@ class AssetsController extends Controller
         $asset->requestable = $request->filled('requestable');
         $asset->rtd_location_id = $request->input('rtd_location_id', null);
         $asset->byod = $request->input('byod', 0);
+
+        $status = Statuslabel::find($asset->status_id);
+
+        if($status->archived){
+            $asset->assigned_to = null;
+        }
 
         if ($asset->assigned_to == '') {
             $asset->location_id = $request->input('rtd_location_id', null);

@@ -2,6 +2,7 @@
 
 return array(
 
+    'support_url_help' => 'Use <code>{LOCALE}</code> and <code>{SERIAL}</code> in your URL as variables to have those values auto-populate when viewing assets.',
     'does_not_exist' => 'Valmistajaa ei löydy.',
     'assoc_users'	 => 'Valmistaja on määritetty käyttöön yhdelle tai useammalle mallille joten sitä ei voida poistaa. Poista valmistaja käytöstä kaikilta malleilta ja yritä uudelleen. ',
 

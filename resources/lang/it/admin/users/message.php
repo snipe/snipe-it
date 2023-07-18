@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Hai rifiutato con successo questo prodotto.',
     'bulk_manager_warn'	        => 'I tuoi utenti sono stati aggiornati con successo, tuttavia la voce del gestore non è stata salvata perché il gestore selezionato è stato anche nell\'elenco utenti da modificare e gli utenti potrebbero non essere il proprio gestore. Seleziona nuovamente i tuoi utenti, esclusi il gestore.',
     'user_exists'               => 'Utente già esistente!',
-    'user_not_found'            => 'L\'utente [:id] non esite.',
+    'user_not_found'            => 'L\'utente non esiste.',
     'user_login_required'       => 'È necessario il campo login',
     'user_password_required'    => 'È richiesta la password.',
     'insufficient_permissions'  => 'Permessi Insufficienti.',

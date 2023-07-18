@@ -140,8 +140,8 @@ return [
     |
     */
 
-    'sendmail' => '/usr/sbin/sendmail -bs',
-
+    'sendmail' => env('SENDMAIL_PATH', ini_get('sendmail_path')),
+ 
     'markdown' => [
         'theme' => 'default',
         'paths' => [
