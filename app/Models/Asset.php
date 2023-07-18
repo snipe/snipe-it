@@ -107,7 +107,8 @@ class Asset extends Depreciable
         'serial'          => 'unique_serial|nullable',
         'purchase_cost'   => 'numeric|nullable|gte:0',
         'supplier_id'     => 'exists:suppliers,id|nullable',
-        'asset_eol_date'  => 'date_format:Y-m-d|nullable',
+        //something not working here...
+        // 'asset_eol_date'  => 'date_format:Y-m-d|nullable',
         'eol_explicit'    => 'boolean|nullable',
         'byod'            => 'boolean',
     ];
@@ -142,7 +143,7 @@ class Asset extends Depreciable
         'asset_eol_date',
         'last_audit_date',
         'next_audit_date',
-        'eol_explicit',
+        'eol_explicit', 
     ];
 
     use Searchable;
