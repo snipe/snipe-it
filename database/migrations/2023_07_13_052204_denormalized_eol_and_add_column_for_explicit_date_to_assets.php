@@ -28,7 +28,6 @@ class DenormalizedEolAndAddColumnForExplicitDateToAssets extends Migration
                 if($months != $asset->model->eol) {
                     $asset->update(['eol_explicit' => true]);
                 }
-
             }
         }
 

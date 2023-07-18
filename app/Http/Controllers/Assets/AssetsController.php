@@ -386,7 +386,7 @@ class AssetsController extends Controller
 
 
         if ($asset->save()) {
-           if($asset->wasChanged('purchase_date')){
+           if($asset->wasChanged('purchase_date') && !$asset->explicit_eol){
                 $asset->asset_eol_date = Carbon::parse($asset->purchase_date)->addMonths($asset->model->eol)->format('Y-m-d'); 
             }
             return redirect()->route('hardware.show', $assetId)
