@@ -155,8 +155,8 @@ class AssetPresenter extends Presenter
                 'class' => 'text-right',
             ], [
                 "field" => "book_value",
-                "searchable" => true,
-                "sortable" => true,
+                "searchable" => false,
+                "sortable" => false,
                 "title" => trans('admin/hardware/table.book_value'),
                 "footerFormatter" => 'sumFormatter',
                 "class" => "text-right",
