@@ -553,8 +553,8 @@ class Helper
             'license' => trans('general.license'),
         ];
 
-        if($selection != null){
-            return $category_types[$selection];
+        if ($selection != null){
+            return $category_types[strtolower($selection)];
         }
         else
         return $category_types;
