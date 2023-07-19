@@ -33,6 +33,16 @@ class Helper
         }
     }
 
+    public static function parseEscapedMarkedownInline($str = null)
+    {
+        $Parsedown = new \Parsedown();
+        $Parsedown->setSafeMode(true);
+
+        if ($str) {
+            return $Parsedown->line($str);
+        }
+    }
+
     /**
      * The importer has formatted number strings since v3,
      * so the value might be a string, or an integer.
@@ -543,8 +553,8 @@ class Helper
             'license' => trans('general.license'),
         ];
 
-        if($selection != null){
-            return $category_types[$selection];
+        if ($selection != null){
+            return $category_types[strtolower($selection)];
         }
         else
         return $category_types;

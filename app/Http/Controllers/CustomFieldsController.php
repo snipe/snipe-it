@@ -109,6 +109,7 @@ class CustomFieldsController extends Controller
             "is_unique" => $request->get("is_unique", 0),
             "display_in_user_view" => $display_in_user_view,
             "auto_add_to_fieldsets" => $request->get("auto_add_to_fieldsets", 0),
+            "show_in_listview" => $request->get("show_in_listview", 0),
             "user_id" => Auth::id()
         ]);
 
@@ -265,6 +266,7 @@ class CustomFieldsController extends Controller
         $field->is_unique     = $request->get("is_unique", 0);
         $field->display_in_user_view = $display_in_user_view;
         $field->auto_add_to_fieldsets = $request->get("auto_add_to_fieldsets", 0);
+        $field->show_in_listview = $request->get("show_in_listview", 0);
 
         if ($request->get('format') == 'CUSTOM REGEX') {
             $field->format = e($request->get('custom_format'));

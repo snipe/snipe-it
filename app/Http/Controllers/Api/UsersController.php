@@ -78,12 +78,6 @@ class UsersController extends Controller
         $users = Company::scopeCompanyables($users);
 
 
-        if (($request->filled('deleted')) && ($request->input('deleted') == 'true')) {
-            $users = $users->onlyTrashed();
-        } elseif (($request->filled('all')) && ($request->input('all') == 'true')) {
-            $users = $users->withTrashed();
-        }
-
         if ($request->filled('activated')) {
             $users = $users->where('users.activated', '=', $request->input('activated'));
         }
@@ -272,6 +266,12 @@ class UsersController extends Controller
                 break;
         }
 
+        if (($request->filled('deleted')) && ($request->input('deleted') == 'true')) {
+            $users = $users->onlyTrashed();
+        } elseif (($request->filled('all')) && ($request->input('all') == 'true')) {
+            $users = $users->withTrashed();
+        }
+        
         $total = $users->count();
         $users = $users->skip($offset)->take($limit)->get();
 

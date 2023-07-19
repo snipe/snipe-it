@@ -413,7 +413,7 @@ return [
     'integration_option'    => 'Integration Option',
     'log_does_not_exist'    => 'No matching log record exists.',
     'merge_users'           => 'Merge Users',
-    'merge_information' =>  'This will merge the :count users into a single user. Select the user you wish to merge the others into below, and the associated assets, licences, etc will be moved over to the selected user and the other users will be marked as deleted.',
+    'merge_information' =>  'This will merge the :count users into a single user. Select the user you wish to merge the others into below, and the associated assets, licenses, etc will be moved over to the selected user and the other users will be marked as deleted.',
     'warning_merge_information' => 'This action CANNOT be undone and should ONLY be used when you need to merge users because of a bad import or sync. Be sure to run a backup first.',
     'no_users_selected'     => 'No users selected',
     'not_enough_users_selected'     => 'At least :count users must be selected',
