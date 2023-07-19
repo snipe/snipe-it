@@ -106,6 +106,13 @@ return [
             'display'    => true,
         ],
 
+        [
+            'permission' => 'assets.view.encrypted_custom_fields',
+            'label'      => 'View and Modify Encrypted Custom Fields',
+            'note'       => '',
+            'display'    => true,
+        ],
+
     ],
 
     'Accessories' => [
