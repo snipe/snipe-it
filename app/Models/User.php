@@ -465,6 +465,22 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         return $this->belongsToMany(Asset::class, 'checkout_requests', 'user_id', 'requestable_id')->whereNull('canceled_at');
     }
 
+    /**
+     * Set a common string when the user has been imported/synced from:
+     *
+     * - LDAP without password syncing
+     * - SCIM
+     * - CSV import where no password was provided
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v6.2.0]
+     * @return string
+     */
+    public function noPassword()
+    {
+        return "*** NO PASSWORD ***";
+    }
+
 
     /**
      * Query builder scope to return NOT-deleted users

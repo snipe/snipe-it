@@ -362,7 +362,13 @@ class UsersController extends Controller
             $user->permissions = $permissions_array;
         }
 
-        $tmp_pass = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 40);
+        // 
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->get('password'));
+        } else {
+            $user->password = $user->noPassword();
+        }
+
         $user->password = bcrypt($request->get('password', $tmp_pass));
 
         app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
