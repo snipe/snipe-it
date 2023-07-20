@@ -1,0 +1,2 @@
+[mysqldump]
+column-statistics=0

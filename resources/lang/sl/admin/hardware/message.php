@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Opozorilo: </strong> To sredstvo je bilo označeno kot trenutno nerazdeljeno. Če se je ta status spremenil, posodobite status sredstva.',
     'does_not_exist' 	=> 'Sredstvo ne obstaja.',
-    'does_not_exist_or_not_requestable' => 'Dober poskus. To sredstvo ne obstaja ali ga ni mogoče zahtevati.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'To sredstvo je trenutno izdano uporabniku in ga ni mogoče izbrisati. Najprej preverite sredstvo in poskusite znova izbrisati. ',
 
     'create' => [
@@ -16,17 +16,21 @@ return [
         'error'   			=> 'Sredstvo ni bilo posodobljeno, poskusite znova',
         'success' 			=> 'Sredstvo je uspešno posodobljeno.',
         'nothing_updated'	=>  'Nobeno polje ni bilo izbrana, zato nebo nič posodobljeno.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [
         'error'   		=> 'Sredstvo ni bilo obnovljeno, poskusite znova',
         'success' 		=> 'Sredstvo je bilo uspešno obnovljeno.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
         'error'   		=> 'Revizija sredstva je bila neuspešna. Prosim poskusite ponovno.',
         'success' 		=> 'Revizija sredstva je uspešno zabeležena.',
     ],
+
 
     'deletefile' => [
         'error'   => 'Datoteka ni izbrisana. Prosim poskusite ponovno.',
@@ -46,7 +50,10 @@ return [
         'success'               => 'Vaša datoteka je bila uvožena',
         'file_delete_success'   => 'Vaša datoteka je bila uspešno izbrisana',
         'file_delete_error'      => 'Datoteke ni bilo mogoče izbrisati',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Ali ste prepričani, da želite izbrisati to sredstvo?',

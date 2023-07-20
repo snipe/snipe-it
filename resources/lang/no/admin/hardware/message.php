@@ -17,17 +17,21 @@ return [
         'error'   			=> 'Eiendelen ble ikke oppdatert, prøv igjen',
         'success' 			=> 'Oppdatering av eiendel vellykket.',
         'nothing_updated'	=>  'Ingen felter er valgt, så ingenting ble endret.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [
         'error'   		=> 'Eiendel ble ikke gjenopprettet. Prøv igjen',
         'success' 		=> 'Vellykket gjenoppretting av eiendel.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
         'error'   		=> 'Asset audit var mislykket. Prøv på nytt.',
         'success' 		=> 'Asset audit ble logget.',
     ],
+
 
     'deletefile' => [
         'error'   => 'Fil ble ikke slettet. Prøv igjen.',
@@ -47,7 +51,10 @@ return [
         'success'               => 'Filen har blitt importert',
         'file_delete_success'   => 'Filen har blitt slettet',
         'file_delete_error'      => 'Filen kunne ikke bli slettet',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Er du sikker på at du vil slette eiendelen?',

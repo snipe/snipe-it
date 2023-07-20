@@ -17,7 +17,7 @@
     <div class="row">
         <!-- left column -->
         <div class="col-md-7">
-            <form class="form-horizontal" method="post" action="{{ route('component.checkin.save', $component_assets->id) }}" autocomplete="off">
+            <form class="form-horizontal" method="post" action="{{ route('components.checkin.store', $component_assets->id) }}" autocomplete="off">
                 {{csrf_field()}}
 
                 <div class="box box-default">
@@ -42,7 +42,7 @@
                                 <input type="text" class="form-control" name="checkin_qty" aria-label="checkin_qty" value="{{ old('assigned_qty', $component_assets->assigned_qty) }}">
                             </div>
                             <div class="col-md-9 col-md-offset-2">
-                            <p class="help-block">Must be {{ $component_assets->assigned_qty }} or less.</p>
+                            <p class="help-block">{{ trans('admin/components/general.checkin_limit', ['assigned_qty' => $component_assets->assigned_qty]) }}</p>
                             {!! $errors->first('checkin_qty', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i>
                             :message</span>') !!}
                             </div>

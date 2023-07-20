@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'Mae defnyddiwr wedi canslo cais am eitem ar y wefan',
     'a_user_requested' => 'Mae defnyddiwr wedi gwneud cais am eitem ar y wefan',
     'accessory_name' => 'Enw Ategolyn:',
@@ -41,6 +43,7 @@ return [
     'login_first_admin' => 'Mewngofnodi i\'ch gosodiad Snipe-IT newydd gan ddefnyddio\'r manylion isod:',
     'login' => 'Mewngofnodi:',
     'Low_Inventory_Report' => 'Adroddiad Inventory Isel',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Nifer Lleiaf',
     'name' => 'Enw',
     'new_item_checked' => 'Mae eitem newydd wedi\'i gwirio o dan eich enw, mae\'r manylion isod.',
@@ -60,7 +63,7 @@ return [
     'test_mail_text' => 'Prawf yw hwn o\'r System Rheoli Asedau Snipe-IT. Os cawsoch chi hwn, mae\'r ebostyn gweithio :)',
     'the_following_item' => 'Mae\'r eitem yma wedi nodi i fewn: ',
     'low_inventory_alert' => 'Mae yna :count eitem sy\'n is na\'r isafswm neu a fydd yn isel cyn bo hir. | Mae yna :count eitemau sy\'n is na\'r isafswm neu a fydd yn isel cyn bo hir.',
-    'assets_warrantee_alert' => 'Mae yna :count ased gyda gwarant yn dod i ben yn ystod y :threshold dydd nesaf | Mae :count asedau gyda gwarantau yn dod i ben yn y :threshold diwrnod nesaf.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'Mae yna :count trwydded yn dod i ben yn ystod y :threshold diwrnod nesaf | Mae :count trwyddedau yn dod i ben yn y :threshold diwrnod nesaf.',
     'to_reset' => 'I ailosod eich cyfrinair :web, cwblhewch y ffurflen hon:',
     'type' => 'Math',
@@ -72,9 +75,11 @@ return [
     'your_credentials' => 'Eich manylion defnyddiwr Snipe-IT',
     'Accessory_Checkin_Notification' => 'Accessory checked in',
     'Asset_Checkin_Notification' => 'Asset checked in',
+    'Asset_Checkout_Notification' => 'Asset checked out',
     'License_Checkin_Notification' => 'License checked in',
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'your_assets' => 'View Your Assets',
+    'rights_reserved' => 'All rights reserved.',
 ];

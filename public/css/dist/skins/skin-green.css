@@ -2,6 +2,24 @@
  * Skin: Green
  * ----------
  */
+:root {
+  --background: #222;
+  --back-main: #333;
+  --back-sub: #3d4144;
+  --back-sub-alt: rgba(0, 0, 0, 0.36);
+  --button-default: #005a31;
+  --button-primary: #002715;
+  --button-hover: #000d07;
+  --header: #00a65a;
+  /* Use same as Header picker */
+  --text-main: #BBB;
+  --text-sub: #9b9b9b;
+  --link: #00a65a;
+  /* Use same as Header picker, lighten by 70% */
+  --visited-link: #00f383;
+  /* Use same as Header picker, lighten by 70% */
+  --hover-link: #0dff90;
+}
 .skin-green .main-header .navbar {
   background-color: #00a65a;
 }
@@ -36,7 +54,7 @@
     background-color: rgba(255, 255, 255, 0.1);
   }
   .skin-green .main-header .navbar .dropdown-menu li a {
-    color: #fff;
+    color: #333;
   }
   .skin-green .main-header .navbar .dropdown-menu li a:hover {
     background: #008d4c;
@@ -149,6 +167,22 @@
   background-color: #000d07;
   color: #fff;
 }
+a.btn-info:link,
+a.btn-warning:link,
+a.btn-danger:link {
+  color: #FFF;
+}
+a.btn-info:visited,
+a.btn-warning:visited,
+a.btn-danger:visited {
+  color: #FFF;
+}
+a:link {
+  color: var(--link);
+}
+a:visited {
+  color: var(--visited-link);
+}
 a {
   color: #00a65a;
 }
@@ -160,6 +194,9 @@ a:visited {
 }
 .text-primary {
   color: #004023;
+}
+.far fa-life-ring {
+  color: var(--link);
 }
 .fixed-table-container tbody .selected td {
   background-color: #fff8af;

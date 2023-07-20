@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>警告: </strong>该资产目前已经被标记为不可被分配，如果该资产状态已经改变，请刷新。',
     'does_not_exist' 	=> '资产不存在',
-    'does_not_exist_or_not_requestable' => '已重试，那个资产不存在或不可申请。',
+    'does_not_exist_or_not_requestable' => '该资产不存在或不可申领。',
     'assoc_users'	 	=> '这个资产目前已经借给某个用户，不能被删除，请检查资产信息，然后再尝试删除。',
 
     'create' => [
@@ -16,17 +16,21 @@ return [
         'error'   			=> '资产更新失败，请重试。',
         'success' 			=> '资产更新成功。',
         'nothing_updated'	=>  '一个也没有选，所以什么也不会更新。',
+        'no_assets_selected'  =>  '没有选择任何资产，因此没有更新任何内容。',
     ],
 
     'restore' => [
         'error'   		=> '资产未被恢复，请重试。',
         'success' 		=> '资产恢复成功。',
+        'bulk_success' 		=> '资产已成功恢复。',
+        'nothing_updated'   => '没有选择任何资产，所以没有恢复。', 
     ],
 
     'audit' => [
         'error'   		=> '尝试一下',
         'success' 		=> '资产审计已成功记录。',
     ],
+
 
     'deletefile' => [
         'error'   => '文件删除失败，请重试',
@@ -46,7 +50,10 @@ return [
         'success'               => '您的文件已被导入',
         'file_delete_success'   => '您的文件已成功删除',
         'file_delete_error'      => '该文件无法被删除',
+        'header_row_has_malformed_characters' => '标题行中的一个或多个属性包含格式错误的 UTF-8 字符',
+        'content_row_has_malformed_characters' => '第一行内容中的一个或多个属性包含格式错误的 UTF-8 字符',
     ],
+
 
     'delete' => [
         'confirm'   	=> '你确定要删除这个资产吗？',

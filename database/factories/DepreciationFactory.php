@@ -2,16 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Depreciation;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
-/*
-|--------------------------------------------------------------------------
-| Asset Model Factories
-|--------------------------------------------------------------------------
-|
-| Factories related exclusively to creating models ..
-|
-*/
 
 class DepreciationFactory extends Factory
 {
@@ -20,7 +13,7 @@ class DepreciationFactory extends Factory
      *
      * @var string
      */
-    protected $model = \App\Models\Depreciation::class;
+    protected $model = Depreciation::class;
 
     /**
      * Define the model's default state.
@@ -30,7 +23,9 @@ class DepreciationFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => 1,
+            'name' => $this->faker->catchPhrase(),
+            'user_id' => User::factory()->superuser(),
+            'months' => 36,
         ];
     }
 

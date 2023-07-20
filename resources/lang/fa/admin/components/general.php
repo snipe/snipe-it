@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'component_name'                  => 'نام اجزا',
     'checkin'                             => 'کامپوننت قفل های دسترسی',
     'checkout'                             => 'کامپیوننت پرداخت',
@@ -12,4 +12,5 @@ return [
     'remaining' 			             => 'یاقیمانده',
     'total' 			                 => 'مجموع',
     'update'                            => 'بروزرسانی کامپیوننت',
-];
+    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
+);

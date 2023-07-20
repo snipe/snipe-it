@@ -4,10 +4,12 @@ return [
 
     'asset_tag'   	=> 'Etiqueta',
     'asset_model'       => 'Modelo',
-    'book_value'  	=> 'Valor',
+    'book_value'  	=> 'Valor Actual',
     'change' 		=> 'Operación',
     'checkout_date' => 'Fecha de asignación',
     'checkoutto' 	=> 'Asignado',
+    'components_cost' => 'Total Components Cost',
+    'current_value' => 'Valor Actual',
     'diff' 			=> 'Diferencia',
     'dl_csv' 		=> 'Descargar CSV',
     'eol' 			=> 'EOL',
@@ -18,8 +20,12 @@ return [
     'serial'   		=> 'N. Serie',
     'status'   		=> 'Estado',
     'title'      	=> 'Equipo ',
-    'image'		=> 'Imagen de dispositivo',
+    'image'		    => 'Imagen de dispositivo',
     'days_without_acceptance' => 'Días Sin Aceptación',
     'monthly_depreciation' => 'Depreciación mensual',
-
+    'assigned_to'    => 'Asignado a',
+    'requesting_user' => 'Solicitando usuario',
+    'requested_date' => 'Fecha solicitada',
+    'changed'       => 'Cambiado',
+    'icon' => 'Ícono',
 ];

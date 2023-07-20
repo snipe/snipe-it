@@ -4,7 +4,7 @@ namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
 use App\Models\License;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 
 class LicensesTransformer
@@ -31,9 +31,10 @@ class LicensesTransformer
             'purchase_order' => e($license->purchase_order),
             'purchase_date' => Helper::getFormattedDateObject($license->purchase_date, 'date'),
             'termination_date' => Helper::getFormattedDateObject($license->termination_date, 'date'),
-            'depreciation' => ($license->depreciation) ? ['id' => (int) $license->depreciation->id, 'name'=> e($license->depreciation->name)] : null,
-            'purchase_cost' => e($license->purchase_cost),
-            'notes' => e($license->notes),
+            'depreciation' => ($license->depreciation) ? ['id' => (int) $license->depreciation->id,'name'=> e($license->depreciation->name)] : null,
+            'purchase_cost' => Helper::formatCurrencyOutput($license->purchase_cost),
+            'purchase_cost_numeric' => $license->purchase_cost,
+            'notes' => Helper::parseEscapedMarkedownInline($license->notes),
             'expiration_date' => Helper::getFormattedDateObject($license->expiration_date, 'date'),
             'seats' => (int) $license->seats,
             'free_seats_count' => (int) $license->free_seats_count,
@@ -45,7 +46,9 @@ class LicensesTransformer
             'category' =>  ($license->category) ? ['id' => (int) $license->category->id, 'name'=> e($license->category->name)] : null,
             'created_at' => Helper::getFormattedDateObject($license->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($license->updated_at, 'datetime'),
+            'deleted_at' => Helper::getFormattedDateObject($license->deleted_at, 'datetime'),
             'user_can_checkout' => (bool) ($license->free_seats_count > 0),
+
         ];
 
         $permissions_array['available_actions'] = [
@@ -53,7 +56,7 @@ class LicensesTransformer
             'checkin' => Gate::allows('checkin', License::class),
             'clone' => Gate::allows('create', License::class),
             'update' => Gate::allows('update', License::class),
-            'delete' => Gate::allows('delete', License::class),
+            'delete' => (Gate::allows('delete', License::class) && ($license->seats == $license->availCount()->count())) ? true : false,
         ];
 
         $array += $permissions_array;
@@ -65,4 +68,7 @@ class LicensesTransformer
     {
         return (new DatatablesTransformer)->transformDatatables($licenses);
     }
+
+
+
 }

@@ -6,5 +6,6 @@ return [
     'months'   => 'Mēneši',
     'term'   => 'Termiņš',
     'title'      => 'Nosaukums',
+    'depreciation_min' => 'Zemākā vērtība',
 
 ];

@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Varoitus: </strong> Tämä laite  ei ole käytettävävissä.
                         Jos laitteen tila on muuttunut, päivitä laitteen tila sen asetuksista.',
     'does_not_exist' 	=> 'Laitetta ei löydy.',
-    'does_not_exist_or_not_requestable' => 'Hyvä yritys. Tätä laitetta ei ole tai se ei ole pyydettävissä.',
+    'does_not_exist_or_not_requestable' => 'Tätä laitetta ei ole tai se ei ole pyydettävissä.',
     'assoc_users'	 	=> 'Tämä laite on luovutettu käyttäjälle joten sitä ei voida poistaa. Palauta laite ensin käyttäjältä ja yritä uudelleen. ',
 
     'create' => [
@@ -17,17 +17,21 @@ return [
         'error'   			=> 'Laitetta ei päivitetty, yritä uudelleen',
         'success' 			=> 'Laite päivitetty onnistuneesti.',
         'nothing_updated'	=>  'Mitään kenttiä ei valittu, joten mitään ei päivitetty.',
+        'no_assets_selected'  =>  'Laitetta ei ollut valittuna, joten mitään ei muutettu.',
     ],
 
     'restore' => [
         'error'   		=> 'Laitetta ei palautettu, ole hyvä ja yritä uudelleen',
         'success' 		=> 'Laite palautettiin onnistuneesti.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
         'error'   		=> 'Laitteen tarkastus epäonnistui. Yritä uudelleen.',
         'success' 		=> 'Laitteen tarkastus kirjattu.',
     ],
+
 
     'deletefile' => [
         'error'   => 'Tiedostoa ei poistettu. Ole hyvä ja yritä uudelleen.',
@@ -47,7 +51,10 @@ return [
         'success'               => 'Tiedostosi on tuotu',
         'file_delete_success'   => 'Tiedosto on poistettu onnistuneesti',
         'file_delete_error'      => 'Tiedostoa ei voitu poistaa',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Oletko varma että haluat poistaa tämän laitteen?',

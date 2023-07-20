@@ -74,10 +74,11 @@ class AssetMaintenance extends Model implements ICompanyableChild
             trans('admin/asset_maintenances/general.maintenance') => trans('admin/asset_maintenances/general.maintenance'),
             trans('admin/asset_maintenances/general.repair')      => trans('admin/asset_maintenances/general.repair'),
             trans('admin/asset_maintenances/general.upgrade')     => trans('admin/asset_maintenances/general.upgrade'),
-            'PAT test'      => 'PAT test',
+            trans('admin/asset_maintenances/general.pat_test')     => trans('admin/asset_maintenances/general.pat_test'),
             trans('admin/asset_maintenances/general.calibration')     => trans('admin/asset_maintenances/general.calibration'),
-            'Software Support'      => trans('admin/asset_maintenances/general.software_support'),
-            'Hardware Support'      => trans('admin/asset_maintenances/general.hardware_support'),
+            trans('admin/asset_maintenances/general.software_support')      => trans('admin/asset_maintenances/general.software_support'),
+            trans('admin/asset_maintenances/general.hardware_support')      => trans('admin/asset_maintenances/general.hardware_support'),
+            trans('admin/asset_maintenances/general.configuration_change')     => trans('admin/asset_maintenances/general.configuration_change'),
         ];
     }
 
@@ -94,8 +95,8 @@ class AssetMaintenance extends Model implements ICompanyableChild
      */
     public function setCostAttribute($value)
     {
-        $value = Helper::ParseFloat($value);
-        if ($value == '0.0') {
+        $value = Helper::ParseCurrency($value);
+        if ($value == 0) {
             $value = null;
         }
         $this->attributes['cost'] = $value;
@@ -161,6 +162,20 @@ class AssetMaintenance extends Model implements ICompanyableChild
      * BEGIN QUERY SCOPES
      * -----------------------------------------------
      **/
+
+    /**
+     * Query builder scope to order on a supplier
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  string                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderBySupplier($query, $order)
+    {
+        return $query->leftJoin('suppliers as suppliers_maintenances', 'asset_maintenances.supplier_id', '=', 'suppliers_maintenances.id')
+            ->orderBy('suppliers_maintenances.name', $order);
+    }
 
     /**
      * Query builder scope to order on admin user

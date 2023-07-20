@@ -1,20 +1,24 @@
 <?php
 
-return [
+return array(
 
     'accepted'                  => 'Bu aksesuarı başarıyla kabul ettiniz.',
     'declined'                  => 'Bu varlığı başarıyla reddettiniz.',
     'bulk_manager_warn'	        => 'Kullanıcılarınızın başarıyla güncelleştirildi, ancak kaydedilmedi Yöneticisi giriş Yöneticisi\'ni seçtiğiniz çünkü aynı zamanda düzenlenecek kullanıcı listesinde oldu ve kullanıcıların kendi yöneticisi olmayabilir. Yine, yönetici hariç olmak üzere, kullanıcılarınızı seçiniz.',
     'user_exists'               => 'Kullanıcı zaten var!',
-    'user_not_found'            => 'Kullanıcı [:id] yok.',
+    'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Oturum açma alanı gerekli',
     'user_password_required'    => 'Şifre Gerekli.',
     'insufficient_permissions'  => 'Yetersiz izinler.',
     'user_deleted_warning'      => 'Bu kullanıcı silindi. Bunları düzenlemek veya onları yeni varlıklar atamak için bu kullanıcı geri yüklemek gerekir.',
     'ldap_not_configured'        => 'LDAP entegrasyonu bu yükleme için yapılandırılmamış.',
-    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
+    'password_resets_sent'      => 'Etkinleştirilmiş ve geçerli bir e-posta adresine sahip seçilen kullanıcılara şifre sıfırlama bağlantısı gönderildi.',
+    'password_reset_sent'       => ':email! adresine bir şifre sıfırlama bağlantısı gönderildi!',
+    'user_has_no_email'         => 'Bu kullanıcının profilinde bir e-posta adresi yok.',
+    'user_has_no_assets_assigned'   => 'Bu kullanıcının atanmış herhangi bir varlığı yok',
 
-    'success' => [
+
+    'success' => array(
         'create'    => 'Kullanıcı başarıyla oluşturuldu.',
         'update'    => 'Kullanıcı başarıyla güncelleştirildi.',
         'update_bulk'    => 'Kullanıcılar başarıyla güncelleştirildi!',
@@ -25,9 +29,9 @@ return [
         'unsuspend' => 'Kullanıcı erişimi açıldı.',
         'restored'  => 'Kullanıcı başarıyla geri yüklendi.',
         'import'    => 'Kullanıcılar başarıyla içe aktarıldı.',
-    ],
+    ),
 
-    'error' => [
+    'error' => array(
         'create' => 'Kullanıcı oluştururken bir sorun oluştu. Lütfen yeniden deneyin.',
         'update' => 'Kullanıcı oluştururken bir sorun oluştu. Lütfen yeniden deneyin.',
         'delete' => 'Kullanıcı silinirken bir problem oluştu. Lütfen tekrar deneyin.',
@@ -42,18 +46,22 @@ return [
         'ldap_could_not_search' => 'LDAP sunucusuna bağlanamadı. LDAP yapılandırma dosyası LDAP sunucusu yapılandırmanızda gözden geçirin. <br> LDAP sunucusundan Hata:',
         'ldap_could_not_get_entries' => 'LDAP sunucusuna bağlanamadı. LDAP yapılandırma dosyası LDAP sunucusu yapılandırmanızda gözden geçirin. <br> LDAP sunucusundan Hata:',
         'password_ldap' => 'Bu hesabın parolası LDAP / Active Directory tarafından yönetilir. Lütfen şifrenizi değiştirmek için BT departmanınızla iletişime geçin.',
-    ],
+    ),
 
-    'deletefile' => [
+    'deletefile' => array(
         'error'   => 'Dosya silinemedi. Lütfen tekrar deneyin.',
         'success' => 'Dosya silindi.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Dosya(lar) yüklenemedi. Lütfen tekrar deneyin.',
         'success' => 'Dosya(lar) yüklendi.',
         'nofiles' => 'Yükleme için hiç bir dosya seçmediniz',
         'invalidfiles' => 'Bir veya daha fazla dosya çok büyük veya izin verilmeyen bir dosya türü. İzin verilen dosya türleri png, Gif, jpg, doc, docx, pdf, txt.',
-    ],
+    ),
 
-];
+    'inventorynotification' => array(
+        'error'   => 'Bu kullanıcının e-posta grubu yok.',
+        'success' => 'Kullanıcı, mevcut envanteri hakkında bilgilendirildi.'
+    )
+);

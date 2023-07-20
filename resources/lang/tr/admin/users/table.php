@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Aktif',
     'allow'  				=> 'Kabul Et',
     'checkedout'  			=> 'Demirbaşlar',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'E-Posta',
     'employee_num'      	=> 'Çalışan No.',
     'first_name' 			=> 'Ad',
-    'groupnotes'			=> 'Kullanıcıya atamak için bir grup seçin, Kullanıcı yetkilerini atandığı gruptan alacaktır.',
+    'groupnotes'			=> 'Kullanıcıya atanacak bir grup seçin, kullanıcının atandığı grubun izinlerini aldığını unutmayın. Grupların seçimini kaldırmak için ctrl+tıklama (veya MacOS\'ta cmd+tıklama) tuşlarını kullanın.',
     'id'         			=> 'ID',
     'inherit'  				=> 'Devral',
     'job' 					=> 'İş Ünvanı',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Geçerli Kullanıcıları Göster',
     'show_deleted'          => 'Silinen Kullanıcıları Göster',
     'title' 				=> 'Başlık',
-    'to_restore_them'		=> 'geri yüklemek için.',
+	'to_restore_them'		=> 'geri yüklemek için.',
     'updateuser' 			=> 'Kullanıcıyı Güncelle',
     'username' 				=> 'Kullanıcı Adı',
-    'user_deleted_text' 	=> 'Bu kullanıcı silindi olarak işaretlenmiş.',
+	'user_deleted_text' 	=> 'Bu kullanıcı silindi olarak işaretlenmiş.',
     'username_note' 		=> '(Bu yalnızca Active Directory bağlama için kullanılır, giriş için değildir.)',
     'cloneuser'             => 'Kullanıcıyı Kopyala',
     'viewusers' 			=> 'Kullanıcıları Görüntüle',
-];
+);

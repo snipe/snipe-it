@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Assets;
 
+use App\Models\Actionlog;
 use App\Helpers\Helper;
 use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Controllers\Controller;
@@ -10,6 +11,8 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+use App\Http\Requests\AssetCheckoutRequest;
 
 class BulkAssetsController extends Controller
 {
@@ -26,32 +29,50 @@ class BulkAssetsController extends Controller
      */
     public function edit(Request $request)
     {
-        $this->authorize('update', Asset::class);
+        $this->authorize('view', Asset::class);
 
         if (! $request->filled('ids')) {
-            return redirect()->back()->with('error', 'No assets selected');
+            return redirect()->back()->with('error', trans('admin/hardware/message.update.no_assets_selected'));
         }
 
-        $asset_ids = array_keys($request->input('ids'));
+        // Figure out where we need to send the user after the update is complete, and store that in the session
+        $bulk_back_url = request()->headers->get('referer');
+        session(['bulk_back_url' => $bulk_back_url]);
+
+        $asset_ids = array_values(array_unique($request->input('ids')));
 
         if ($request->filled('bulk_actions')) {
             switch ($request->input('bulk_actions')) {
                 case 'labels':
+                    $this->authorize('view', Asset::class);
                     return view('hardware/labels')
                         ->with('assets', Asset::find($asset_ids))
                         ->with('settings', Setting::getSettings())
                         ->with('bulkedit', true)
                         ->with('count', 0);
+
                 case 'delete':
+                    $this->authorize('delete', Asset::class);
                     $assets = Asset::with('assignedTo', 'location')->find($asset_ids);
                     $assets->each(function ($asset) {
                         $this->authorize('delete', $asset);
                     });
 
                     return view('hardware/bulk-delete')->with('assets', $assets);
+                   
+                case 'restore':
+                    $this->authorize('update', Asset::class);
+                    $assets = Asset::withTrashed()->find($asset_ids); 
+                    $assets->each(function ($asset) {
+                        $this->authorize('delete', $asset);
+                    });
+
+                    return view('hardware/bulk-restore')->with('assets', $assets);
+
                 case 'edit':
+                    $this->authorize('update', Asset::class);
                     return view('hardware/bulk')
-                        ->with('assets', request('ids'))
+                        ->with('assets', $asset_ids)
                         ->with('statuslabel_list', Helper::statusLabelList());
             }
         }
@@ -71,10 +92,15 @@ class BulkAssetsController extends Controller
     {
         $this->authorize('update', Asset::class);
 
-        \Log::debug($request->input('ids'));
+        // Get the back url from the session and then destroy the session
+        $bulk_back_url = route('hardware.index');
+        if ($request->session()->has('bulk_back_url')) {
+            $bulk_back_url = $request->session()->pull('bulk_back_url');
+        }
+
 
         if (! $request->filled('ids') || count($request->input('ids')) <= 0) {
-            return redirect()->route('hardware.index')->with('warning', trans('No assets selected, so nothing was updated.'));
+            return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.update.no_assets_selected'));
         }
 
         $assets = array_keys($request->input('ids'));
@@ -90,8 +116,14 @@ class BulkAssetsController extends Controller
             || ($request->filled('company_id'))
             || ($request->filled('status_id'))
             || ($request->filled('model_id'))
+            || ($request->filled('next_audit_date'))
+            || ($request->filled('null_purchase_date'))
+            || ($request->filled('null_expected_checkin_date'))
+            || ($request->filled('null_next_audit_date'))
+
         ) {
             foreach ($assets as $assetId) {
+
                 $this->update_array = [];
 
                 $this->conditionallyAddItem('purchase_date')
@@ -101,10 +133,23 @@ class BulkAssetsController extends Controller
                     ->conditionallyAddItem('requestable')
                     ->conditionallyAddItem('status_id')
                     ->conditionallyAddItem('supplier_id')
-                    ->conditionallyAddItem('warranty_months');
+                    ->conditionallyAddItem('warranty_months')
+                    ->conditionallyAddItem('next_audit_date');
+
+                if ($request->input('null_purchase_date')=='1') {
+                    $this->update_array['purchase_date'] = null;
+                }
+
+                if ($request->input('null_expected_checkin_date')=='1') {
+                    $this->update_array['expected_checkin'] = null;
+                }
+
+                if ($request->input('null_next_audit_date')=='1') {
+                    $this->update_array['next_audit_date'] = null;
+                }
 
                 if ($request->filled('purchase_cost')) {
-                    $this->update_array['purchase_cost'] = Helper::ParseFloat($request->input('purchase_cost'));
+                    $this->update_array['purchase_cost'] =  $request->input('purchase_cost');
                 }
 
                 if ($request->filled('company_id')) {
@@ -121,16 +166,36 @@ class BulkAssetsController extends Controller
                     }
                 }
 
+                $changed = [];
+                $asset = Asset::where('id' ,$assetId)->get();
+
+                foreach ($this->update_array as $key => $value) {
+                    if ($this->update_array[$key] != $asset->toArray()[0][$key]) {
+                        $changed[$key]['old'] = $asset->toArray()[0][$key];
+                        $changed[$key]['new'] = $this->update_array[$key];
+                    }
+                }
+
+                $logAction = new Actionlog();
+                $logAction->item_type = Asset::class;
+                $logAction->item_id = $assetId;
+                $logAction->created_at =  date("Y-m-d H:i:s");
+                $logAction->user_id = Auth::id();
+                $logAction->log_meta = json_encode($changed);
+                $logAction->logaction('update');
+
                 DB::table('assets')
                     ->where('id', $assetId)
                     ->update($this->update_array);
             } // endforeach
 
-            return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.update.success'));
-            // no values given, nothing to update
+            return redirect($bulk_back_url)->with('success', trans('admin/hardware/message.update.success'));
+
+
         }
 
-        return redirect()->route('hardware.index')->with('warning', trans('admin/hardware/message.update.nothing_updated'));
+        // no values given, nothing to update
+        return redirect($bulk_back_url)->with('warning', trans('admin/hardware/message.update.nothing_updated'));
     }
 
     /**
@@ -167,6 +232,11 @@ class BulkAssetsController extends Controller
     {
         $this->authorize('delete', Asset::class);
 
+        $bulk_back_url = route('hardware.index');
+        if ($request->session()->has('bulk_back_url')) {
+            $bulk_back_url = $request->session()->pull('bulk_back_url');
+        }
+
         if ($request->filled('ids')) {
             $assets = Asset::find($request->get('ids'));
             foreach ($assets as $asset) {
@@ -178,11 +248,11 @@ class BulkAssetsController extends Controller
                     ->update($update_array);
             } // endforeach
 
-            return redirect()->to('hardware')->with('success', trans('admin/hardware/message.delete.success'));
+            return redirect($bulk_back_url)->with('success', trans('admin/hardware/message.delete.success'));
             // no values given, nothing to update
         }
 
-        return redirect()->to('hardware')->with('info', trans('admin/hardware/message.delete.nothing_updated'));
+        return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.delete.nothing_updated'));
     }
 
     /**
@@ -201,15 +271,18 @@ class BulkAssetsController extends Controller
      * Process Multiple Checkout Request
      * @return View
      */
-    public function storeCheckout(Request $request)
+    public function storeCheckout(AssetCheckoutRequest $request)
     {
+
+        $this->authorize('checkout', Asset::class);
+
         try {
             $admin = Auth::user();
 
             $target = $this->determineCheckoutTarget();
 
             if (! is_array($request->get('selected_assets'))) {
-                return redirect()->route('hardware/bulkcheckout')->withInput()->with('error', trans('admin/hardware/message.checkout.no_assets_selected'));
+                return redirect()->route('hardware.bulkcheckout.show')->withInput()->with('error', trans('admin/hardware/message.checkout.no_assets_selected'));
             }
 
             $asset_ids = array_filter($request->get('selected_assets'));
@@ -237,7 +310,8 @@ class BulkAssetsController extends Controller
                 foreach ($asset_ids as $asset_id) {
                     $asset = Asset::findOrFail($asset_id);
                     $this->authorize('checkout', $asset);
-                    $error = $asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), null);
+
+                    $error = $asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), $asset->name, null);
 
                     if ($target->location_id != '') {
                         $asset->location_id = $target->location_id;
@@ -256,9 +330,23 @@ class BulkAssetsController extends Controller
                 return redirect()->to('hardware')->with('success', trans('admin/hardware/message.checkout.success'));
             }
             // Redirect to the asset management page with error
-            return redirect()->to('hardware/bulk-checkout')->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($errors);
+            return redirect()->route('hardware.bulkcheckout.show')->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($errors);
         } catch (ModelNotFoundException $e) {
-            return redirect()->to('hardware/bulk-checkout')->with('error', $e->getErrors());
+            return redirect()->route('hardware.bulkcheckout.show')->with('error', $e->getErrors());
+        }
+        
+    }
+    public function restore(Request $request) {
+        $this->authorize('update', Asset::class);
+       $assetIds = $request->get('ids');
+      if (empty($assetIds)) {
+          return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.restore.nothing_updated'));
+        } else {
+            foreach ($assetIds as $key => $assetId) {
+                    $asset = Asset::withTrashed()->find($assetId);
+                    $asset->restore(); 
+            } 
+        return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.restore.success'));
         }
     }
 }

@@ -17,11 +17,6 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-body">
-                    {{ Form::open([
-                      'method' => 'POST',
-                      'route' => ['hardware/bulkedit'],
-                      'class' => 'form-inline',
-                       'id' => 'bulkForm']) }}
                     <div class="row">
                         <div class="col-md-12">
 
@@ -49,10 +44,9 @@
                         <th class="col-md-2">Item Name</th>
                         <th class="col-md-2" data-sortable="true">{{ trans('admin/hardware/table.location') }}</th>
                         <th class="col-md-2" data-sortable="true">{{ trans('admin/hardware/form.expected_checkin') }}</th>
-                        <th class="col-md-3" data-sortable="true">Requesting User</th>
-                        <th class="col-md-2">Requested Date</th>
-                        <th class="col-md-1"></th>
-                        <th class="col-md-1"></th>
+                        <th class="col-md-3" data-sortable="true">{{ trans('admin/hardware/table.requesting_user') }}</th>
+                        <th class="col-md-2">{{ trans('admin/hardware/table.requested_date') }}</th>
+                        <th class="col-md-1">{{ trans('button.actions') }}</th> <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,7 +59,7 @@
                                 @if (($request->itemType() == "asset") && ($request->requestable))
                                     <a href="{{ $request->requestable->getImageUrl() }}" data-toggle="lightbox" data-type="image"><img src="{{ $request->requestable->getImageUrl() }}" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive" alt="{{ $request->requestable->name }}"></a>
                                 @elseif (($request->itemType() == "asset_model") && ($request->requestable))
-                                        <a href="{{ url('/') }}/uploads/models/{{ $request->requestable->image }}" data-toggle="lightbox" data-type="image"><img src="{{ url('/') }}/uploads/models/{{ $request->requestable->image }}" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive" alt="{{ $request->requestable->name }}"></a>
+                                        <a href="{{ config('app.url') }}/uploads/models/{{ $request->requestable->image }}" data-toggle="lightbox" data-type="image"><img src="{{ config('app.url') }}/uploads/models/{{ $request->requestable->image }}" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive" alt="{{ $request->requestable->name }}"></a>
                                 @endif
 
 
@@ -73,11 +67,11 @@
                             <td>
 
                             @if ($request->itemType() == "asset")
-                            <a href="{{ url('/') }}/hardware/{{ $request->requestable->id }}">
+                            <a href="{{ config('app.url') }}/hardware/{{ $request->requestable->id }}">
                                 {{ $request->name() }}
                             </a>
                             @elseif ($request->itemType() == "asset_model")
-                                <a href="{{ url('/') }}/models/{{ $request->requestable->id }}">
+                                <a href="{{ config('app.url') }}/models/{{ $request->requestable->id }}">
                                     {{ $request->name() }}
                                 </a>
                              @endif
@@ -95,8 +89,8 @@
                             @endif
                             </td>
                             <td>
-                                @if ($request->requestingUser())
-                                <a href="{{ url('/') }}/users/{{ $request->requestingUser()->id }}">
+                                @if ($request->requestingUser() && !$request->requestingUser()->trashed())
+                                <a href="{{ config('app.url') }}/users/{{ $request->requestingUser()->id }}">
                                     {{ $request->requestingUser()->present()->fullName() }}
                                 </a>
                                @else
@@ -105,11 +99,19 @@
                             </td>
                             <td>{{ App\Helpers\Helper::getFormattedDateObject($request->created_at, 'datetime', false) }}</td>
                             <td>
+                                {{ Form::open([
+                                    'method' => 'POST',
+                                    'route' => ['account/request-item', $request->itemType(), $request->requestable->id, true, $request->requestingUser()->id],
+                                    ]) }}
+                                    <button class="btn btn-warning btn-sm" data-tooltip="true" title="{{ trans('general.cancel_request') }}">{{ trans('button.cancel') }}</button>
+                                {{ Form::close() }}
+                            </td>
+                            <td>
                                 @if ($request->itemType() == "asset")
                                     @if ($request->requestable->assigned_to=='')
-                                        <a href="{{ url('/') }}/hardware/{{ $request->requestable->id }}/checkout" class="btn btn-sm bg-maroon" data-tooltip="true" title="Check this item out to a user">{{ trans('general.checkout') }}</a>
+                                        <a href="{{ config('app.url') }}/hardware/{{ $request->requestable->id }}/checkout" class="btn btn-sm bg-maroon" data-tooltip="true" title="{{ trans('general.checkout_user_tooltip') }}">{{ trans('general.checkout') }}</a>
                                         @else
-                                        <a href="{{ url('/') }}/hardware/{{ $request->requestable->id }}/checkin" class="btn btn-sm bg-purple" data-tooltip="true" title="Check this itemi">{{ trans('general.checkin') }}</a>
+                                        <a href="{{ config('app.url') }}/hardware/{{ $request->requestable->id }}/checkin" class="btn btn-sm bg-purple" data-tooltip="true" title="{{ trans('general.checkin_toolip') }}">{{ trans('general.checkin') }}</a>
                                     @endif
 
                                 @endif

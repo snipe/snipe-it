@@ -4726,7 +4726,6 @@ fieldset[disabled] .btn-yahoo.focus {
 .select2-results__option {
   padding: 6px 12px;
   -moz-user-select: none;
-   -ms-user-select: none;
        user-select: none;
   -webkit-user-select: none;
 }

@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    PHP Info
+    {{ trans('admin/settings/general.php_info') }}
     @parent
 @stop
 
@@ -19,7 +19,7 @@
         <div class="col-md-12">
             <div class="box box-default">
                 <div class="box-header">
-                    <h2 class="box-title">PHP Info</h2>
+                    <h2 class="box-title">{{ trans('admin/settings/general.php_info') }}</h2>
                 </div>
                 <div class="box-body">
 

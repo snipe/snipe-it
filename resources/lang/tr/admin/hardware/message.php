@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Uyarı:</strong> Bu demirbaş dağıtılamaz olarak işlaretlenmiş.
                         Eğer durumu değişti ise, lütfen Demirbaş Durumu\'nu güncelleyiniz.',
     'does_not_exist' 	=> 'Demirbaş mevcut değil.',
-    'does_not_exist_or_not_requestable' => 'İyi denemeydi. Bu varlık mevcut değil veya talep edilebilir değil.',
+    'does_not_exist_or_not_requestable' => 'Bu varlık mevcut değil veya talep edilebilir değil.',
     'assoc_users'	 	=> 'Bu demirbaş kullanıcıya çıkış yapılmış olaran görülüyor ve silinemez. Lütfen önce demirbaş girişi yapınız, ardından tekrar siliniz. ',
 
     'create' => [
@@ -17,17 +17,21 @@ return [
         'error'   			=> 'Demirbaş güncellenemedi, lütfen tekrar deneyin',
         'success' 			=> 'Demirbaş güncellendi.',
         'nothing_updated'	=>  'Hiçbir alan seçilmedi, dolayısıyla hiç bir alan güncellenmedi.',
+        'no_assets_selected'  =>  'Hiçbir varlık seçilmedi, bu nedenle hiçbir şey güncellenmedi.',
     ],
 
     'restore' => [
         'error'   		=> 'Demirbaş geri getirilemedi, lütfen tekrar deneyin',
         'success' 		=> 'Demirbaş geri getirildi.',
+        'bulk_success' 		=> 'Varlık başarı ile geri yüklendi.',
+        'nothing_updated'   => 'Herhangi bir varlık seçili olmadığı için hiçbirşey geri yüklenmedi.', 
     ],
 
     'audit' => [
         'error'   		=> 'Varlık denetimi başarısız oldu. Lütfen tekrar deneyin.',
         'success' 		=> 'Varlık denetimi başarıyla günlüğe kaydedildi.',
     ],
+
 
     'deletefile' => [
         'error'   => 'Dosya silinemedi. Lütfen tekrar deneyin.',
@@ -47,7 +51,10 @@ return [
         'success'               => 'Dosyanızı içe aktarıldı',
         'file_delete_success'   => 'Dosyanız başarıyla silindi',
         'file_delete_error'      => 'Dosya silenemedi',
+        'header_row_has_malformed_characters' => 'Başlık bilgisindeki bir veya daha fazla öznitelik, hatalı UTF-8 karakterleri içeriyor',
+        'content_row_has_malformed_characters' => 'Başlıktaki ilk satırda bir veya daha fazla öznitelik, hatalı biçimlendirilmiş UTF-8 karakterleri içeriyor',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Demirbaşı silmek istediğinize emin misiniz?',

@@ -6,5 +6,6 @@ return [
     'months'   => 'Måneder',
     'term'   => 'Term',
     'title'      => 'Navn ',
+    'depreciation_min' => 'Bæreværdi',
 
 ];

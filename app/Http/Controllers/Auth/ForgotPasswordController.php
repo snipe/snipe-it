@@ -29,6 +29,7 @@ class ForgotPasswordController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->middleware('throttle:5,1', ['except' => 'showLinkRequestForm']);
     }
 
     /**
@@ -66,7 +67,7 @@ class ForgotPasswordController extends Controller
          * Once we have attempted to send the link, we will examine the response
          * then see the message we need to show to the user. Finally, we'll send out a proper response.
          */
-
+        
         $response = null;
 
         try {
@@ -81,6 +82,8 @@ class ForgotPasswordController extends Controller
             \Log::info('Password reset attempt: User '.$request->input('username').'failed with exception: '.$e );
         }
 
+        // Prevent timing attack to enumerate users.
+        usleep(500000 + random_int(0, 1500000));
 
         if ($response === \Password::RESET_LINK_SENT) {
             \Log::info('Password reset attempt: User '.$request->input('username').' WAS found, password reset sent');

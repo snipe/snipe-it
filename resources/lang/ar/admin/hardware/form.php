@@ -2,11 +2,14 @@
 
 return [
     'bulk_delete'		=> 'تاكيد إجراء حذف للاُصول المحددة',
+    'bulk_restore'      => 'تأكيد استعادة الأصول بالجملة', 
   'bulk_delete_help'	=> 'الرجاء مراجعة الأصول المحددة للحذف أدناه. بمجرد الحذف، يمكن استعادة هذه الأصول، لكنها لن تكون مرتبطة مع أي من المستخدمين اللذين تم اخراج الأصول لهم من قبل.',
+  'bulk_restore_help'	=> 'مراجعة الأصول للاستعادة بالجملة أدناه. بمجرد إعادتها لن تكون هذه الأصول مرتبطة بأي مستعملين سبق تعيينهم.',
   'bulk_delete_warn'	=> 'أنت على وشك حذف :asset_count من الأصول.',
+  'bulk_restore_warn'	=> 'أنت على وشك استعادة :asset_count الأصول.',
     'bulk_update'		=> 'تحديث للأصول المحددة',
     'bulk_update_help'	=> 'يتيح لك هذا النموذج تحديث عدة أصول دفعة واحدة. قم بملء الحقول التي تحتاج إلى تغييرها. ستظل أية حقول فارغة بدون تغيير. ',
-    'bulk_update_warn'	=> 'أنت على وشك تعديل خصائص :asset_count من الأصول.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'تم الاخراج إلى',
     'checkout_date'		=> 'تاريخ الاخراج',
     'checkin_date'		=> 'تاريخ الادخال',
@@ -40,4 +43,12 @@ return [
     'warranty'			=> 'الضمان',
         'warranty_expires'		=> 'انتهاء مدة صلاحية الضمان',
     'years'				=> 'سنوات',
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'معالجة... (قد يستغرق هذا بعض الوقت على ملفات كبيرة)',
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information'
 ];

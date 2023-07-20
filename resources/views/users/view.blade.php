@@ -31,7 +31,7 @@
             <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}
-              {!! ($user->assets->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->assets->count().'</badge>' : '' !!}
+              {!! ($user->assets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
             </span>
           </a>
         </li>
@@ -42,7 +42,7 @@
             <i class="far fa-save fa-2x"></i>
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}
-              {!! ($user->licenses->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->licenses->count().'</badge>' : '' !!}
+              {!! ($user->licenses->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->licenses->count()).'</badge>' : '' !!}
             </span>
           </a>
         </li>
@@ -53,7 +53,7 @@
             <i class="far fa-keyboard fa-2x"></i>
             </span> 
             <span class="hidden-xs hidden-sm">{{ trans('general.accessories') }}
-              {!! ($user->accessories->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->accessories->count().'</badge>' : '' !!}
+              {!! ($user->accessories->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->accessories->count()).'</badge>' : '' !!}
             </span>
           </a>
         </li>
@@ -61,9 +61,10 @@
         <li>
           <a href="#consumables" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fas fa-tint fa-2x"></i></span>
+                <i class="fas fa-tint fa-2x"></i>
+            </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.consumables') }}
-              {!! ($user->consumables->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->consumables->count().'</badge>' : '' !!}
+              {!! ($user->consumables->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->consumables->count()).'</badge>' : '' !!}
             </span>
           </a>
         </li>
@@ -71,9 +72,10 @@
         <li>
           <a href="#files" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="far fa-file fa-2x"></i></span>
+                <i class="far fa-file fa-2x"></i>
+            </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.file_uploads') }}
-              {!! ($user->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->uploads->count().'</badge>' : '' !!}
+              {!! ($user->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->uploads->count()).'</badge>' : '' !!}
             </span>
           </a>
         </li>
@@ -81,7 +83,8 @@
         <li>
           <a href="#history" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fas fa-history fa-2x"></i></span>
+                <i class="fas fa-history fa-2x"></i>
+            </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.history') }}</span>
           </a>
         </li>
@@ -92,7 +95,7 @@
             <span class="hidden-lg hidden-md">
               <i class="fas fa-map-marker-alt fa-2x"></i></span>
             <span class="hidden-xs hidden-sm">{{ trans('admin/users/table.managed_locations') }}
-              {!! ($user->managedLocations->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->managedLocations->count().'</badge>' : '' !!}
+              {!! ($user->managedLocations->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->managedLocations->count()).'</badge>' : '' !!}
           </a>
         </li>
         @endif
@@ -110,7 +113,7 @@
             </a>
             <ul class="dropdown-menu">
               <li><a href="{{ route('users.edit', $user->id) }}">{{ trans('admin/users/general.edit') }}</a></li>
-              <li><a href="{{ route('clone/user', $user->id) }}">{{ trans('admin/users/general.clone') }}</a></li>
+              <li><a href="{{ route('users.clone.show', $user->id) }}">{{ trans('admin/users/general.clone') }}</a></li>
               @if ((Auth::user()->id !== $user->id) && (!config('app.lock_passwords')) && ($user->deleted_at==''))
                 <li><a href="{{ route('users.destroy', $user->id) }}">{{ trans('button.delete') }}</a></li>
               @endif
@@ -119,7 +122,8 @@
         @endcan
 
         @can('update', \App\Models\User::class)
-          <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal">
+          <li class="pull-right">
+              <a href="#" data-toggle="modal" data-target="#uploadFileModal">
               <span class="hidden-xs"><i class="fas fa-paperclip" aria-hidden="true"></i></span>
               <span class="hidden-lg hidden-md hidden-xl"><i class="fas fa-paperclip fa-2x" aria-hidden="true"></i></span>
               <span class="hidden-xs hidden-sm">{{ trans('button.upload') }}</span>
@@ -138,11 +142,6 @@
                 <div class="callout callout-warning">
                   <i class="icon fas fa-exclamation-triangle"></i>
                   {{ trans('admin/users/message.user_deleted_warning') }}
-                  @can('update', $user)
-                      <a href="{{ route('restore/user', $user->id) }}">
-                        {{ trans('admin/users/general.restore_user') }}
-                      </a>
-                  @endcan
                 </div>
               </div>
             @endif
@@ -155,7 +154,7 @@
               <div class="col-md-12 text-center">
                 
                  @if (($user->isSuperUser()) || ($user->hasAccess('admin')))
-                    <i class="fas fa-crown fa-2x {{  ($user->isSuperUser()) ? 'text-danger' : ' text-orange'}}"></i>
+                    <i class="fas fa-crown fa-2x{{  ($user->isSuperUser()) ? ' text-danger' : ' text-orange'}}"></i>
                     <div class="{{  ($user->isSuperUser()) ? 'text-danger' : ' text-orange'}}" style="font-weight: bold">{{  ($user->isSuperUser()) ? 'superadmin' : 'admin'}}</div>
                   @endif
 
@@ -175,24 +174,47 @@
 
               @can('create', $user)
                 <div class="col-md-12" style="padding-top: 5px;">
-                  <a href="{{ route('clone/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/users/general.clone') }}</a>
+                  <a href="{{ route('users.clone.show', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/users/general.clone') }}</a>
                 </div>
                @endcan
 
                 @can('view', $user)
                 <div class="col-md-12" style="padding-top: 5px;">
+                @if($user->allAssignedCount() != '0') 
                   <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print" target="_blank" rel="noopener">{{ trans('admin/users/general.print_assigned') }}</a>
+                  @else
+                  <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_assets_assigned') }}">{{ trans('admin/users/general.print_assigned') }}</button>
+                @endif
                 </div>
                 @endcan
 
+                @can('view', $user)
+                  <div class="col-md-12" style="padding-top: 5px;">
+                  @if(!empty($user->email) && ($user->allAssignedCount() != '0'))
+                    <form action="{{ route('users.email',['userId'=> $user->id]) }}" method="POST">
+                      {{ csrf_field() }}
+                      <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener">{{ trans('admin/users/general.email_assigned') }}</button>
+                    </form>
+                  @elseif(!empty($user->email) && ($user->allAssignedCount() == '0'))
+                      <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_assets_assigned') }}">{{ trans('admin/users/general.email_assigned') }}</button>
+                  @else
+                      <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_email') }}">{{ trans('admin/users/general.email_assigned') }}</button>
+                  @endif
+                  </div>
+                @endcan
+
                 @can('update', $user)
-                  @if (($user->activated == '1') && ($user->email != '') && ($user->ldap_import == '0'))
-                      <div class="col-md-12" style="padding-top: 5px;">
-                        <form action="{{ route('users.password',['userId'=> $user->id]) }}" method="POST">
+                  @if (($user->activated == '1') && ($user->ldap_import == '0'))
+                  <div class="col-md-12" style="padding-top: 5px;">
+                    @if($user->email != '')
+                      <form action="{{ route('users.password',['userId'=> $user->id]) }}" method="POST">
                           {{ csrf_field() }}
-                          <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('button.send_password_link') }}</button>
-                        </form>
-                      </div>
+                      <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('button.send_password_link') }}</button>
+                      </form>
+                    @else
+                      <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_email') }}">{{ trans('button.send_password_link') }}</button> 
+                    @endif
+                  </div>
                   @endif
                 @endcan
 
@@ -217,7 +239,10 @@
                     </div>
                   @else
                     <div class="col-md-12" style="padding-top: 5px;">
-                      <a href="{{ route('restore/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.restore') }}</a>
+                        <form method="POST" action="{{ route('users.restore.store', $user->id) }}">
+                            @csrf
+                            <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.restore') }}</button>
+                        </form>
                     </div>
                   @endif
                 @endcan
@@ -268,12 +293,12 @@
                       <div class="col-md-9">
 
                         @if ($user->isSuperUser())
-                          <label class="label label-danger"><i class="fas fa-crown" title="superuser"></i></label> {{ $user->username }}
+                          <label class="label label-danger"><i class="fas fa-crown" title="superuser"></i></label>&nbsp;
                         @elseif ($user->hasAccess('admin'))
-                          <label class="label label-warning"><i class="fas fa-crown" title="superuser"></i></label> {{ $user->username }}
+                          <label class="label label-warning"><i class="fas fa-crown" title="admin"></i></label>&nbsp;
                         @endif
+                         {{ $user->username }}
 
-                      
                       </div>
 
                     </div>
@@ -297,6 +322,9 @@
                           @endif
                           @if ($user->country)
                             {{ $user->country }}
+                          @endif
+                          @if ($user->zip)
+                              {{ $user->zip }}
                           @endif
 
                       </div>
@@ -325,6 +353,30 @@
                           @endif
                         </div>
                       </div>
+
+                   <!-- start date -->
+                   @if ($user->start_date)
+                       <div class="row">
+                           <div class="col-md-3">
+                               {{ trans('general.start_date') }}
+                           </div>
+                           <div class="col-md-9">
+                               {{ \App\Helpers\Helper::getFormattedDateObject($user->start_date, 'date', false) }}
+                           </div>
+                       </div>
+                   @endif
+
+                   <!-- end date -->
+                   @if ($user->end_date)
+                       <div class="row">
+                           <div class="col-md-3">
+                               {{ trans('general.end_date') }}
+                           </div>
+                           <div class="col-md-9">
+                               {{ \App\Helpers\Helper::getFormattedDateObject($user->end_date, 'date', false) }}
+                           </div>
+                       </div>
+                   @endif
 
                     @if ($user->jobtitle)
                      <!-- jobtitle -->
@@ -453,10 +505,40 @@
                       </div>
                       <div class="col-md-9">
                         {{ \App\Helpers\Helper::getFormattedDateObject($user->created_at, 'datetime')['formatted']}}
+
+                          @if ($user->createdBy)
+                              -
+                              @if ($user->createdBy->deleted_at=='')
+                                  <a href="{{ route('users.show', ['user' => $user->created_by]) }}">{{ $user->createdBy->present()->fullName }}</a>
+                              @else
+                                  <del>{{ $user->createdBy->present()->fullName }}</del>
+                              @endif
+
+
+                          @endif
                       </div>
                     </div>
                     @endif
 
+                    <!-- vip -->
+                    <div class="row">
+                      <div class="col-md-3">
+                        {{ trans('admin/users/general.vip_label') }}
+                      </div>
+                      <div class="col-md-9">
+                        {!! ($user->vip=='1') ? '<i class="fas fa-check fa-fw fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                      </div>
+                    </div> 
+                    
+                    <!-- remote -->
+                     <div class="row">
+                      <div class="col-md-3">
+                        {{ trans('admin/users/general.remote') }}
+                      </div>
+                      <div class="col-md-9">
+                        {!! ($user->remote=='1') ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                      </div>
+                    </div>
 
                     <!-- login enabled -->
                     <div class="row">
@@ -464,17 +546,28 @@
                         {{ trans('general.login_enabled') }}
                       </div>
                       <div class="col-md-9">
-                        {!! ($user->activated=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                        {!! ($user->activated=='1') ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
                       </div>
                     </div>
 
-                    <!-- LDAP -->
+                   <!-- auto assign license -->
+                   <div class="row">
+                       <div class="col-md-3">
+                           {{ trans('general.autoassign_licenses') }}
+                       </div>
+                       <div class="col-md-9">
+                           {!! ($user->autoassign_licenses=='1') ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                       </div>
+                   </div>
+
+
+                   <!-- LDAP -->
                     <div class="row">
                       <div class="col-md-3">
                           LDAP
                       </div>
                       <div class="col-md-9">
-                        {!! ($user->ldap_import=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                        {!! ($user->ldap_import=='1') ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
 
                       </div>
                     </div>
@@ -488,7 +581,7 @@
                             </div>
                             <div class="col-md-9">
                           
-                              {!! ($user->two_factor_active()) ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                              {!! ($user->two_factor_active()) ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
                           
                             </div>
                           </div>
@@ -499,7 +592,7 @@
                               {{ trans('admin/users/general.two_factor_enrolled') }}
                             </div>
                             <div class="col-md-9" id="two_factor_reset_toggle">
-                              {!! ($user->two_factor_active_and_enrolled()) ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                              {!! ($user->two_factor_active_and_enrolled()) ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
 
                             </div>
                           </div>
@@ -509,11 +602,11 @@
                             <!-- 2FA reset -->
                             <div class="row">
                               <div class="col-md-3">
-                          
+
                               </div>
-                              <div class="col-md-9" style="margin-top: 10px;">
+                              <div class="col-md-9">
                                 
-                                <a class="btn btn-default btn-sm pull-left" id="two_factor_reset" style="margin-right: 10px;"> 
+                                <a class="btn btn-default btn-sm" id="two_factor_reset" style="margin-right: 10px; margin-top: 10px;">
                                   {{ trans('admin/settings/general.two_factor_reset') }}
                                 </a>
                                 <span id="two_factor_reseticon">
@@ -540,7 +633,7 @@
                         {{ trans('admin/users/table.notes') }}
                       </div>
                       <div class="col-md-9">
-                        {{ $user->notes }}
+                          {!! nl2br(Helper::parseEscapedMarkedownInline($user->notes)) !!}
                       </div>
 
                     </div>
@@ -554,10 +647,13 @@
           </div> <!--/.row-->
         </div><!-- /.tab-pane -->
 
-
         <div class="tab-pane" id="asset">
           <!-- checked out assets table -->
-          <div class="table-responsive table-striped">
+
+            @include('partials.asset-bulk-actions')
+
+            <div class="table table-responsive">
+
             <table
                     data-click-to-select="true"
                     data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
@@ -567,12 +663,15 @@
                     data-search="true"
                     data-side-pagination="server"
                     data-show-columns="true"
+                    data-show-fullscreen="true"
                     data-show-export="true"
                     data-show-footer="true"
                     data-show-refresh="true"
                     data-sort-order="asc"
                     data-sort-name="name"
-                    data-toolbar="#toolbar"
+                    data-toolbar="#assetsBulkEditToolbar"
+                    data-bulk-button-id="#bulkAssetEditButton"
+                    data-bulk-form-id="#assetsBulkForm"
                     id="userAssetsListingTable"
                     class="table table-striped snipe-table"
                     data-url="{{ route('api.assets.index',['assigned_to' => e($user->id), 'assigned_type' => 'App\Models\User']) }}"
@@ -594,6 +693,7 @@
                     data-pagination="true"
                     data-side-pagination="client"
                     data-show-columns="true"
+                    data-show-fullscreen="true"
                     data-show-export="true"
                     data-show-footer="true"
                     data-show-refresh="true"
@@ -629,7 +729,7 @@
                     @endcan
                   </td>
                   <td class="col-md-2">
-                    {{ $license->purchase_cost }}
+                    {{ Helper::formatCurrencyOutput($license->purchase_cost) }}
                   </td>
                   <td>
                     {{ $license->purchase_order }}
@@ -659,6 +759,7 @@
                     data-pagination="true"
                     data-side-pagination="client"
                     data-show-columns="true"
+                    data-show-fullscreen="true"
                     data-show-export="true"
                     data-show-footer="true"
                     data-show-refresh="true"
@@ -671,21 +772,23 @@
                     }'>
               <thead>
                 <tr>
-                  <th class="col-md-5">{{ trans('general.name') }}</th>
-                  <th class="col-md-6" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
-                  <th class="col-md-1 hidden-print">{{ trans('general.action') }}</th>
+                    <th class="col-md-5">{{ trans('general.name') }}</th>
+                    <th class-="col-md-5" data-fieldname="note">{{ trans('general.notes') }}</th>
+                    <th class="col-md-1" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
+                    <th class="col-md-1 hidden-print">{{ trans('general.action') }}</th>
                 </tr>
               </thead>
               <tbody>
                   @foreach ($user->accessories as $accessory)
                   <tr>
                     <td>{!!$accessory->present()->nameUrl()!!}</td>
-                    <td>
-                      {!! $accessory->purchase_cost !!}
-                    </td>
+                      <td>{!! $accessory->pivot->note !!}</td>
+                      <td>
+                      {!! Helper::formatCurrencyOutput($accessory->purchase_cost) !!}
+                      </td>
                     <td class="hidden-print">
                       @can('checkin', $accessory)
-                        <a href="{{ route('checkin/accessory', array('accessoryID'=> $accessory->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
+                        <a href="{{ route('accessories.checkin.show', array('accessoryID'=> $accessory->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
                       @endcan
                     </td>
                   </tr>
@@ -705,6 +808,7 @@
                     data-pagination="true"
                     data-side-pagination="client"
                     data-show-columns="true"
+                    data-show-fullscreen="true"
                     data-show-export="true"
                     data-show-footer="true"
                     data-show-refresh="true"
@@ -717,9 +821,10 @@
                     }'>
               <thead>
                 <tr>
-                  <th class="col-md-6">{{ trans('general.name') }}</th>
+                  <th class="col-md-3">{{ trans('general.name') }}</th>
                   <th class="col-md-2" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
-                  <th class="col-md-4">{{ trans('general.date') }}</th>
+                  <th class="col-md-2">{{ trans('general.date') }}</th>
+                    <th class="col-md-5">{{ trans('general.notes') }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -727,9 +832,10 @@
                 <tr>
                   <td>{!! $consumable->present()->nameUrl() !!}</td>
                   <td>
-                    {!! $consumable->purchase_cost !!}
+                    {!! Helper::formatCurrencyOutput($consumable->purchase_cost) !!}
                   </td>
-                  <td>{{ $consumable->created_at }}</td>
+                  <td>{{ Helper::getFormattedDateObject($consumable->pivot->created_at, 'datetime',  false) }}</td>
+                  <td>{{ $consumable->pivot->note }}</td>
                 </tr>
                 @endforeach
               </tbody>
@@ -742,38 +848,95 @@
 
             <div class="col-md-12 col-sm-12">
               <div class="table-responsive">
-                <table id="files-table" class="display table table-striped">
+                  <table
+                          data-cookie-id-table="userUploadsTable"
+                          data-id-table="userUploadsTable"
+                          id="userUploadsTable"
+                          data-search="true"
+                          data-pagination="true"
+                          data-side-pagination="client"
+                          data-show-columns="true"
+                          data-show-fullscreen="true"
+                          data-show-export="true"
+                          data-show-footer="true"
+                          data-toolbar="#upload-toolbar"
+                          data-show-refresh="true"
+                          data-sort-order="asc"
+                          data-sort-name="name"
+                          class="table table-striped snipe-table"
+                          data-export-options='{
+                    "fileName": "export-license-uploads-{{ str_slug($user->name) }}-{{ date('Y-m-d') }}",
+                    "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","delete","download","icon"]
+                    }'>
+
                   <thead>
                     <tr>
-                      <th class="col-md-5">{{ trans('general.notes') }}</th>
-                      <th class="col-md-5"><span class="line"></span>{{ trans('general.file_name') }}</th>
-                      <th class="col-md-2">{{ trans('general.download') }}</th>
-                      <th class="col-md-2">{{ trans('general.delete') }}</th>
+                        <th data-visible="true" data-field="icon" data-sortable="true">{{trans('general.file_type')}}</th>
+                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="image">{{ trans('general.image') }}</th>
+                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="filename" data-sortable="true">{{ trans('general.file_name') }}</th>
+                        <th class="col-md-1" data-searchable="true" data-visible="true" data-field="filesize">{{ trans('general.filesize') }}</th>
+                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="notes" data-sortable="true">{{ trans('general.notes') }}</th>
+                        <th class="col-md-1" data-searchable="true" data-visible="true" data-field="download">{{ trans('general.download') }}</th>
+                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="created_at" data-sortable="true">{{ trans('general.created_at') }}</th>
+                        <th class="col-md-1" data-searchable="true" data-visible="true" data-field="actions">{{ trans('table.actions') }}</th>
                     </tr>
                   </thead>
                   <tbody>
                     @foreach ($user->uploads as $file)
-                    <tr>
-                      <td>
-                        @if ($file->note)
-                        {{ $file->note }}
-                        @endif
-                      </td>
-                      <td>
-                      {{ $file->filename }}
-                      </td>
-                      <td>
-                        @if ($file->filename)
-                        <a href="{{ route('show/userfile', [$user->id, $file->id]) }}" class="btn btn-default">{{ trans('general.download') }}</a>
-                        @endif
-                      </td>
-                      <td>
-                        @can('update', $user)
-                        <a class="btn delete-asset btn-danger btn-sm hidden-print" href="{{ route('userfile.destroy', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?"><i class="fas fa-trash icon-white" aria-hidden="true"></i><span class="sr-only">Delete</span></a>
-                        @endcan
-                      </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <i class="{{ Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i>
+                                <span class="sr-only">{{ Helper::filetype_icon($file->filename) }}</span>
+
+                            </td>
+                            <td>
+                                @if (($file->filename) && (Storage::exists('private_uploads/users/'.$file->filename)))
+                                   @if (Helper::checkUploadIsImage($file->get_src('users')))
+                                        <a href="{{ route('show/userfile', ['userId' => $user->id, 'fileId' => $file->id, 'download' => 'false']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show/userfile', ['userId' => $user->id, 'fileId' => $file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
+                                    @else
+                                        {{ trans('general.preview_not_available') }}
+                                    @endif
+                                @else
+                                    <i class="fa fa-times text-danger" aria-hidden="true"></i>
+                                        {{ trans('general.file_not_found') }}
+                                @endif
+                            </td>
+                            <td>
+                                {{ $file->filename }}
+                            </td>
+                            <td data-value="{{ (Storage::exists('private_uploads/users/'.$file->filename)) ? Storage::size('private_uploads/users/'.$file->filename) : '' }}">
+                                {{ (Storage::exists('private_uploads/users/'.$file->filename)) ? Helper::formatFilesizeUnits(Storage::size('private_uploads/users/'.$file->filename)) : '' }}
+                            </td>
+
+                            <td>
+                                @if ($file->note)
+                                    {{ $file->note }}
+                                @endif
+                            </td>
+                            <td>
+                                @if ($file->filename)
+                                    @if (Storage::exists('private_uploads/users/'.$file->filename))
+                                        <a href="{{ route('show/userfile', [$user->id, $file->id]) }}" class="btn btn-default">
+                                            <i class="fas fa-download" aria-hidden="true"></i>
+                                            <span class="sr-only">{{ trans('general.download') }}</span>
+                                        </a>
+                                    @endif
+                                @endif
+                            </td>
+                            <td>{{ $file->created_at }}</td>
+
+                            <td>
+                                <a class="btn delete-asset btn-danger btn-sm hidden-print" href="{{ route('userfile.destroy', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?">
+                                    <i class="fa fa-trash icon-white" aria-hidden="true"></i>
+                                    <span class="sr-only">{{ trans('general.delete') }}</span>
+                                </a>
+                            </td>
+
+
+
+                        </tr>
                     @endforeach
+
                   </tbody>
                 </table>
               </div>
@@ -784,6 +947,7 @@
         <div class="tab-pane" id="history">
           <div class="table-responsive">
 
+
             <table
                     data-click-to-select="true"
                     data-cookie-id-table="usersHistoryTable"
@@ -792,10 +956,10 @@
                     data-search="true"
                     data-side-pagination="server"
                     data-show-columns="true"
+                    data-show-fullscreen="true"
                     data-show-export="true"
                     data-show-refresh="true"
                     data-sort-order="desc"
-                    data-toolbar="#toolbar"
                     id="usersHistoryTable"
                     class="table table-striped snipe-table"
                     data-url="{{ route('api.activity.index', ['target_id' => $user->id, 'target_type' => 'user']) }}"
@@ -806,11 +970,18 @@
               <thead>
               <tr>
                 <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter">Icon</th>
-                <th class="col-sm-3" data-field="created_at" data-formatter="dateDisplayFormatter" data-sortable="true">{{ trans('general.date') }}</th>
-                <th class="col-sm-2" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
-                <th class="col-sm-2" data-field="action_type">{{ trans('general.action') }}</th>
-                <th class="col-sm-3" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
-                <th class="col-sm-2" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
+                <th data-field="created_at" data-formatter="dateDisplayFormatter" data-sortable="true">{{ trans('general.date') }}</th>
+                  <th data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
+                  <th data-field="action_type">{{ trans('general.action') }}</th>
+                  <th data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
+                  <th data-field="note">{{ trans('general.notes') }}</th>
+                  @if  ($snipeSettings->require_accept_signature=='1')
+                      <th data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
+                  @endif
+                  <th data-field="item.serial" data-visible="false">{{ trans('admin/hardware/table.serial') }}</th>
+                  <th data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
+
+
               </tr>
               </thead>
             </table>
@@ -820,7 +991,7 @@
 
         <div class="tab-pane" id="managed">
           <div class="table-responsive">
-            <table class="display table table-striped">
+            <table class="table display table-striped">
               <thead>
                 <tr>
                   <th class="col-md-8">{{ trans('general.name') }}</th>
@@ -872,9 +1043,9 @@ $(function () {
       dataType: 'json',
 
       success: function (data) {
-        $("#two_factor_reset_toggle").html('').html('<i class="fas fa-times text-danger" aria-hidden="true"></i> {{ trans('general.no') }}');
+        $("#two_factor_reset_toggle").html('').html('<span class="text-danger"><i class="fas fa-times" aria-hidden="true"></i> {{ trans('general.no') }}</span>');
         $("#two_factor_reseticon").html('');
-        $("#two_factor_resetstatus").html('<i class="fas fa-check text-success"></i>' + data.message);
+        $("#two_factor_resetstatus").html('<span class="text-success"><i class="fas fa-check"></i> ' + data.message + '</span>');
 
       },
 

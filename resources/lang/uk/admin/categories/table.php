@@ -1,10 +1,10 @@
 <?php
 
-return [
-    'eula_text'      			=> 'EULA',
+return array(
+	'eula_text'      			=> 'EULA',
     'id'      					=> 'ID',
     'parent'   					=> 'Батьківський',
-    'require_acceptance'      	=> 'Acceptance',
+    'require_acceptance'      	=> 'Схвалення',
     'title'      				=> 'Назва категорії актива',
 
-];
+);

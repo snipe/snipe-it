@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'checkout'                          => 'Checkout מתכלה למשתמש',
     'consumable_name'                   => 'שם מתכלה',
     'create'                            => 'צור מתכלים',
@@ -8,4 +8,4 @@ return [
     'remaining' 			            => 'נוֹתָר',
     'total' 			                => 'סה"כ',
     'update'                            => 'עדכון מתכלה',
-];
+);

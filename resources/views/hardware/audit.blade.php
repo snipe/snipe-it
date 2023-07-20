@@ -55,16 +55,14 @@
 
                     <!-- Update location -->
                         <div class="form-group">
-                            <div class="col-sm-offset-3 col-md-9">
-                                <label>
-                                    <input type="checkbox" value="1" name="update_location" class="minimal" {{ Request::old('update_location') == '1' ? ' checked="checked"' : '' }}> Update asset location
+
+                            <div class="col-md-8 col-md-offset-3">
+                                <label class="form-control">
+                                    <input type="checkbox" value="1" name="update_location" {{ Request::old('update_location') == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/hardware/form.asset_location') }}
                                 </label>
-
-                                @include ('partials.more-info', ['helpText' => trans('help.audit_help'), 'helpPosition' => 'right'])
-
-
-
+                                <p class="help-block">{!! trans('help.audit_help') !!}</p>
                             </div>
+
                         </div>
 
 
@@ -72,7 +70,7 @@
                         <div class="form-group {{ $errors->has('next_audit_date') ? 'error' : '' }}">
                             {{ Form::label('name', trans('general.next_audit_date'), array('class' => 'col-md-3 control-label')) }}
                             <div class="col-md-9">
-                                <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                                <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-clear-btn="true">
                                     <input type="text" class="form-control" placeholder="{{ trans('general.next_audit_date') }}" name="next_audit_date" id="next_audit_date" value="{{ old('next_audit_date', $next_audit_date) }}">
                                     <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
                                 </div>

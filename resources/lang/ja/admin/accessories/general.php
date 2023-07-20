@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'accessory_category' 				=> '付属品カテゴリー',
     'accessory_name'  					=> '付属品名',
     'checkout'  							=> '付属品の貸し出し',
@@ -12,9 +12,11 @@ return [
     'require_acceptance'				=> 'このカテゴリの資産を承認するための利用者が必要です。',
     'no_default_eula'					=> 'EULAの初期値が見つかりませんでした。最低1つは設定して下さい。',
     'total'  							=> '合計',
-    'remaining'  						=> '利用可',
+    'remaining'  						=> '利用可能',
     'update'  							=> '付属品を更新',
     'use_default_eula'					=> '<a href="#" data-toggle="modal" data-target="#eulaModal">初期設定EULA</a> を代わりに利用する。',
     'use_default_eula_disabled'			=> '<del>初期設定EULAを代わりに利用する。</del> 初期設定EULAが設定されていません。一つは追加してください。',
+    'clone'                             => '付属品を複製',
+    'delete_disabled'                   => 'This accessory cannot be deleted yet because some items are still checked out.',
 
-];
+);

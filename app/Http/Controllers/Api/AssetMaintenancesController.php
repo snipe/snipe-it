@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Input;
  */
 class AssetMaintenancesController extends Controller
 {
+
+
     /**
      *  Generates the JSON response for asset maintenances listing view.
      *
@@ -32,7 +34,9 @@ class AssetMaintenancesController extends Controller
      */
     public function index(Request $request)
     {
-        $maintenances = AssetMaintenance::with('asset', 'asset.model', 'asset.location', 'supplier', 'asset.company', 'admin');
+        $this->authorize('view', Asset::class);
+
+        $maintenances = AssetMaintenance::select('asset_maintenances.*')->with('asset', 'asset.model', 'asset.location', 'asset.defaultLoc', 'supplier', 'asset.company', 'admin');
 
         if ($request->filled('search')) {
             $maintenances = $maintenances->TextSearch($request->input('search'));
@@ -42,12 +46,18 @@ class AssetMaintenancesController extends Controller
             $maintenances->where('asset_id', '=', $request->input('asset_id'));
         }
 
-        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
-        // case we override with the actual count, so we should return 0 items.
-        $offset = (($maintenances) && ($request->get('offset') > $maintenances->count())) ? $maintenances->count() : $request->get('offset', 0);
+        if ($request->filled('supplier_id')) {
+            $maintenances->where('supplier_id', '=', $request->input('supplier_id'));
+        }
 
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+        if ($request->filled('asset_maintenance_type')) {
+            $maintenances->where('asset_maintenance_type', '=', $request->input('asset_maintenance_type'));
+        }
+
+
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $maintenances->count()) ? $maintenances->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
 
         $allowed_columns = [
                                 'id',
@@ -61,6 +71,8 @@ class AssetMaintenancesController extends Controller
                                 'asset_tag',
                                 'asset_name',
                                 'user_id',
+                                'supplier',
+                                'is_warranty',
                             ];
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
@@ -68,6 +80,9 @@ class AssetMaintenancesController extends Controller
         switch ($sort) {
             case 'user_id':
                 $maintenances = $maintenances->OrderAdmin($order);
+                break;
+            case 'supplier':
+                $maintenances = $maintenances->OrderBySupplier($order);
                 break;
             case 'asset_tag':
                 $maintenances = $maintenances->OrderByTag($order);
@@ -82,9 +97,11 @@ class AssetMaintenancesController extends Controller
 
         $total = $maintenances->count();
         $maintenances = $maintenances->skip($offset)->take($limit)->get();
-
         return (new AssetMaintenancesTransformer())->transformAssetMaintenances($maintenances, $total);
+
+
     }
+
 
     /**
      *  Validates and stores the new asset maintenance
@@ -97,11 +114,12 @@ class AssetMaintenancesController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('update', Asset::class);
         // create a new model instance
         $assetMaintenance = new AssetMaintenance();
         $assetMaintenance->supplier_id = $request->input('supplier_id');
         $assetMaintenance->is_warranty = $request->input('is_warranty');
-        $assetMaintenance->cost = e($request->input('cost'));
+        $assetMaintenance->cost =  $request->input('cost');
         $assetMaintenance->notes = e($request->input('notes'));
         $asset = Asset::find(e($request->input('asset_id')));
 
@@ -129,9 +147,11 @@ class AssetMaintenancesController extends Controller
         // Was the asset maintenance created?
         if ($assetMaintenance->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $assetMaintenance, trans('admin/asset_maintenances/message.create.success')));
+
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, $assetMaintenance->getErrors()));
+
     }
 
     /**
@@ -146,6 +166,7 @@ class AssetMaintenancesController extends Controller
      */
     public function update(Request $request, $assetMaintenanceId = null)
     {
+        $this->authorize('update', Asset::class);
         // Check if the asset maintenance exists
         $assetMaintenance = AssetMaintenance::findOrFail($assetMaintenanceId);
 
@@ -155,7 +176,7 @@ class AssetMaintenancesController extends Controller
 
         $assetMaintenance->supplier_id = e($request->input('supplier_id'));
         $assetMaintenance->is_warranty = e($request->input('is_warranty'));
-        $assetMaintenance->cost = Helper::ParseFloat(e($request->input('cost')));
+        $assetMaintenance->cost =  $request->input('cost');
         $assetMaintenance->notes = e($request->input('notes'));
 
         $asset = Asset::find(request('asset_id'));
@@ -192,6 +213,7 @@ class AssetMaintenancesController extends Controller
         // Was the asset maintenance created?
         if ($assetMaintenance->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $assetMaintenance, trans('admin/asset_maintenances/message.edit.success')));
+
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, $assetMaintenance->getErrors()));
@@ -208,6 +230,7 @@ class AssetMaintenancesController extends Controller
      */
     public function destroy($assetMaintenanceId)
     {
+        $this->authorize('update', Asset::class);
         // Check if the asset maintenance exists
         $assetMaintenance = AssetMaintenance::findOrFail($assetMaintenanceId);
 
@@ -218,6 +241,8 @@ class AssetMaintenancesController extends Controller
         $assetMaintenance->delete();
 
         return response()->json(Helper::formatStandardApiResponse('success', $assetMaintenance, trans('admin/asset_maintenances/message.delete.success')));
+
+
     }
 
     /**
@@ -231,11 +256,13 @@ class AssetMaintenancesController extends Controller
      */
     public function show($assetMaintenanceId)
     {
+        $this->authorize('view', Asset::class);
         $assetMaintenance = AssetMaintenance::findOrFail($assetMaintenanceId);
         if (! Company::isCurrentUserHasAccess($assetMaintenance->asset)) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'You cannot view a maintenance for that asset'));
         }
 
         return (new AssetMaintenancesTransformer())->transformAssetMaintenance($assetMaintenance);
+
     }
 }

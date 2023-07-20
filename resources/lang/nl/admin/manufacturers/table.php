@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_manufacturers_title'    => 'Over fabrikanten',
     'about_manufacturers_text'  => 'Fabrikanten zijn de bedrijven die uw assets maken. U kunt hier belangrijke contactinformatie over hen opslaan, die wordt weergegeven op de detailpagina van uw asset.',
     'asset_manufacturers'	=> 'Asset fabrikanten',
@@ -10,7 +10,8 @@ return [
     'support_email'   		=> 'Ondersteuning E-mail',
     'support_phone'   		=> 'Ondersteuning telefoonnummer',
     'support_url'   		=> 'Ondersteuning URL',
+    'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Wijzig Fabrikant',
     'url'   				=> 'URL',
 
-];
+);

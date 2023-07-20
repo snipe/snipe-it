@@ -55,17 +55,28 @@ class LocationPresenter extends Presenter
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
-                'title' =>  trans('admin/locations/table.assets_rtd'),
+                'title' =>  trans('admin/locations/message.current_location'),
                 'visible' => true,
             ],
+
+            [
+                'field' => 'rtd_assets_count',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'title' =>  trans('admin/hardware/form.default_location'),
+                'visible' => false,
+            ],
+
             [
                 'field' => 'assigned_assets_count',
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
-                'title' =>  trans('admin/locations/table.assets_checkedout'),
+                'title' =>  trans('admin/locations/message.assigned_assets'),
                 'visible' => true,
             ],
+
             [
                 'field' => 'users_count',
                 'searchable' => false,
@@ -89,6 +100,14 @@ class LocationPresenter extends Presenter
                 'switchable' => true,
                 'title' =>  trans('admin/locations/table.address'),
                 'visible' => true,
+            ],
+            [
+                'field' => 'address2',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' =>  trans('admin/locations/table.address'),
+                'visible' => false,
             ],
             [
                 'field' => 'city',
@@ -121,6 +140,24 @@ class LocationPresenter extends Presenter
                 'switchable' => true,
                 'title' =>  trans('admin/locations/table.country'),
                 'visible' => false,
+            ],
+            [
+                'field' => 'phone',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('admin/users/table.phone'),
+                'visible' => false,
+                'formatter'    => 'phoneFormatter',
+            ],
+            [
+                'field' => 'fax',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('admin/suppliers/table.fax'),
+                'visible' => false,
+                'formatter'    => 'phoneFormatter',
             ],
             [
                 'field' => 'ldap_ou',

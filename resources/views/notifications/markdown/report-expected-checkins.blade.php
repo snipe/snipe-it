@@ -1,16 +1,16 @@
 @component('mail::message')
 # {{ trans('mail.hello') }},
 
-The following {{ $assets->count() }} items are due to be checked in soon:
+{{ trans('general.due_to_checkin', array('count' => $assets->count())) }}
 
 @component('mail::table')
-| Asset | Checked Out to | Expected Checkin |
+| {{ trans('general.assets') }} | {{ trans('general.checked_out_to') }} | {{ trans('general.expected_checkin') }} |
 | ------------- | ------------- | ------------- |
 @foreach ($assets as $asset)
 @php
 $checkin = Helper::getFormattedDateObject($asset->expected_checkin, 'date');
 @endphp
-| [{{ $asset->present()->name }}]({{ route('hardware.show', ['hardware' => $asset->id]) }}) | [{{ $asset->assigned->present()->fullName }}]({{ route('users.show', ['user'=>$asset->assigned->id]) }})  | {{ $checkin['formatted'] }}
+| [{{ $asset->present()->name }}]({{ route('hardware.show', ['hardware' => $asset->id]) }}) | [{{ $asset->assigned->present()->fullName }}]({{ route($asset->targetShowRoute().'.show', [$asset->assigned->id]) }})  | {{ $checkin['formatted'] }}
 @endforeach
 @endcomponent
 

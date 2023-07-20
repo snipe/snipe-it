@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'asset'             => 'Ased',
     'checkin'           => 'Nodi i mewn',
@@ -18,5 +18,5 @@ return [
     'to_email'          => 'Ebost wedi trwyddedu',
     'to_name'           => 'Enw wedi trwyddedu',
     'update'            => 'Diweddaru Trwydded',
-    'checkout_help'     => 'Fedrwch nodi trwydded allan yn erbyn ased neu person. Fedrwch dewis y ddau ond rhaid i\'r person cydfynd hefo perchenog yr ased.',
-];
+    'checkout_help'     => 'Fedrwch nodi trwydded allan yn erbyn ased neu person. Fedrwch dewis y ddau ond rhaid i\'r person cydfynd hefo perchenog yr ased.'
+);

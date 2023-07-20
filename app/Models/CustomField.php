@@ -21,22 +21,22 @@ class CustomField extends Model
      *
      * @var array
      */
-    const PREDEFINED_FORMATS = [
-        'ANY' => '',
-        'CUSTOM REGEX' => '',
-        'ALPHA' => 'alpha',
-        'ALPHA-DASH' => 'alpha_dash',
-        'NUMERIC' => 'numeric',
-        'ALPHA-NUMERIC' => 'alpha_num',
-        'EMAIL' => 'email',
-        'DATE' => 'date',
-        'URL' => 'url',
-        'IP' => 'ip',
-        'IPV4' => 'ipv4',
-        'IPV6' => 'ipv6',
-        'MAC' => 'regex:/^[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}$/',
-        'BOOLEAN' => 'boolean',
-    ];
+    public const PREDEFINED_FORMATS = [
+            'ANY'           => '',
+            'CUSTOM REGEX'  => '',
+            'ALPHA'         => 'alpha',
+            'ALPHA-DASH'    => 'alpha_dash',
+            'NUMERIC'       => 'numeric',
+            'ALPHA-NUMERIC' => 'alpha_num',
+            'EMAIL'         => 'email',
+            'DATE'          => 'date',
+            'URL'           => 'url',
+            'IP'            => 'ip',
+            'IPV4'          => 'ipv4',
+            'IPV6'          => 'ipv6',
+            'MAC'           => 'regex:/^[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}$/',
+            'BOOLEAN'       => 'boolean',
+        ];
 
     public $guarded = [
         'id',
@@ -48,7 +48,13 @@ class CustomField extends Model
      *
      * @var array
      */
-    protected $rules = [];
+    protected $rules = [
+        'name' => 'required|unique:custom_fields',
+        'element' => 'required|in:text,listbox,textarea,checkbox,radio',
+        'field_encrypted' => 'nullable|boolean',
+        'auto_add_to_fieldsets' => 'boolean',
+        'show_in_listview' => 'boolean',
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -63,6 +69,11 @@ class CustomField extends Model
         'field_encrypted',
         'help_text',
         'show_in_email',
+        'is_unique',
+        'display_in_user_view',
+        'auto_add_to_fieldsets',
+        'show_in_listview',
+
     ];
 
     /**
@@ -109,7 +120,7 @@ class CustomField extends Model
         self::created(function ($custom_field) {
             // Column already exists on the assets table - nothing to do here.
             // This *shouldn't* happen in the wild.
-            if (Schema::hasColumn($custom_field->getTableName(), $custom_field->convertUnicodeDbSlug())) {
+            if (Schema::hasColumn($custom_field->getTableName(), $custom_field->db_column)) {
                 return false;
             }
 
@@ -155,7 +166,7 @@ class CustomField extends Model
         self::deleting(function ($custom_field) {
 
             return Schema::table($custom_field->getTableName(), function ($table) use ($custom_field) {
-                $table->dropColumn($custom_field->convertUnicodeDbSlug());
+                $table->dropColumn($custom_field->db_column);
             });
         });
     }
@@ -260,7 +271,7 @@ class CustomField extends Model
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     * @return string
      */
     public function db_column_name()
     {
@@ -325,9 +336,9 @@ class CustomField extends Model
             $arr_parts = explode('|', $arr[$x]);
             if ($arr_parts[0] != '') {
                 if (array_key_exists('1', $arr_parts)) {
-                    $result[$arr_parts[0]] = $arr_parts[1];
+                    $result[$arr_parts[0]] = trim($arr_parts[1]);
                 } else {
-                    $result[$arr_parts[0]] = $arr_parts[0];
+                    $result[$arr_parts[0]] = trim($arr_parts[0]);
                 }
             }
         }
@@ -365,7 +376,7 @@ class CustomField extends Model
         $id = $this->id ? $this->id : 'xx';
 
         if (! function_exists('transliterator_transliterate')) {
-            $long_slug = '_snipeit_'.str_slug(\Patchwork\Utf8::utf8_encode(trim($name)), '_');
+            $long_slug = '_snipeit_'.str_slug(mb_convert_encoding(trim($name),"UTF-8"), '_');
         } else {
             $long_slug = '_snipeit_'.Utf8Slugger::slugify($name, '_');
         }
@@ -383,15 +394,9 @@ class CustomField extends Model
     public function validationRules($regex_format = null)
     {
         return [
-            'name' => 'required|unique:custom_fields',
-            'element' => [
-                'required',
-                Rule::in(['text', 'listbox',  'textarea', 'checkbox', 'radio']),
-            ],
             'format' => [
                 Rule::in(array_merge(array_keys(self::PREDEFINED_FORMATS), self::PREDEFINED_FORMATS, [$regex_format])),
-            ],
-            'field_encrypted' => 'nullable|boolean',
+            ]
         ];
     }
 

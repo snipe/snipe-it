@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'checkout'                          => 'Checkout forbrugsvarer til bruger',
     'consumable_name'                   => 'Forbrugelighedsnavn',
     'create'                            => 'Opret forbrugsstoffer',
@@ -8,4 +8,4 @@ return [
     'remaining' 			            => 'Resterende',
     'total' 			                => 'Total',
     'update'                            => 'Opdater forbrugsstoffer',
-];
+);

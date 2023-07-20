@@ -4,7 +4,7 @@ namespace App\Http\Transformers;
 
 use App\Models\License;
 use App\Models\LicenseSeat;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 
 class LicenseSeatsTransformer

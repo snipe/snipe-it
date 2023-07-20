@@ -4,7 +4,7 @@ namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
 use App\Models\Accessory;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
 
@@ -32,13 +32,14 @@ class AccessoriesTransformer
             'model_number' => ($accessory->model_number) ? e($accessory->model_number) : null,
             'category' => ($accessory->category) ? ['id' => $accessory->category->id, 'name'=> e($accessory->category->name)] : null,
             'location' => ($accessory->location) ? ['id' => $accessory->location->id, 'name'=> e($accessory->location->name)] : null,
-            'notes' => ($accessory->notes) ? e($accessory->notes) : null,
+            'notes' => ($accessory->notes) ? Helper::parseEscapedMarkedownInline($accessory->notes) : null,
             'qty' => ($accessory->qty) ? (int) $accessory->qty : null,
             'purchase_date' => ($accessory->purchase_date) ? Helper::getFormattedDateObject($accessory->purchase_date, 'date') : null,
             'purchase_cost' => Helper::formatCurrencyOutput($accessory->purchase_cost),
             'order_number' => ($accessory->order_number) ? e($accessory->order_number) : null,
             'min_qty' => ($accessory->min_amt) ? (int) $accessory->min_amt : null,
-            'remaining_qty' => $accessory->numRemaining(),
+            'remaining_qty' => (int) $accessory->numRemaining(),
+            'users_count' =>  $accessory->users_count,
 
             'created_at' => Helper::getFormattedDateObject($accessory->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($accessory->updated_at, 'datetime'),
@@ -50,6 +51,8 @@ class AccessoriesTransformer
             'checkin' =>  false,
             'update' => Gate::allows('update', Accessory::class),
             'delete' => Gate::allows('delete', Accessory::class),
+            'clone' => Gate::allows('create', Accessory::class),
+            
         ];
 
         $permissions_array['user_can_checkout'] = false;
@@ -68,8 +71,6 @@ class AccessoriesTransformer
         $array = [];
 
         foreach ($accessory_users as $user) {
-            \Log::debug(print_r($user->pivot, true));
-            \Log::debug(print_r($user->pivot, true));
             $array[] = [
 
                 'assigned_pivot_id' => $user->pivot->id,
@@ -79,7 +80,7 @@ class AccessoriesTransformer
                 'first_name'=> e($user->first_name),
                 'last_name'=> e($user->last_name),
                 'employee_number' =>  e($user->employee_num),
-                'checkout_notes' => $user->pivot->note,
+                'checkout_notes' => e($user->pivot->note),
                 'last_checkout' => Helper::getFormattedDateObject($user->pivot->created_at, 'datetime'),
                 'type' => 'user',
                 'available_actions' => ['checkin' => true],

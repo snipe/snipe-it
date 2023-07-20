@@ -9,6 +9,7 @@ use App\Models\Accessory;
 use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Redirect;
 
 /** This controller handles all actions related to Accessories for
@@ -62,23 +63,25 @@ class AccessoriesController extends Controller
     public function store(ImageUploadRequest $request)
     {
         $this->authorize(Accessory::class);
+        
         // create a new model instance
         $accessory = new Accessory();
 
         // Update the accessory data
-        $accessory->name = request('name');
-        $accessory->category_id = request('category_id');
-        $accessory->location_id = request('location_id');
-        $accessory->min_amt = request('min_amt');
-        $accessory->company_id = Company::getIdForCurrentUser(request('company_id'));
-        $accessory->order_number = request('order_number');
-        $accessory->manufacturer_id = request('manufacturer_id');
-        $accessory->model_number = request('model_number');
-        $accessory->purchase_date = request('purchase_date');
-        $accessory->purchase_cost = Helper::ParseFloat(request('purchase_cost'));
-        $accessory->qty = request('qty');
-        $accessory->user_id = Auth::user()->id;
-        $accessory->supplier_id = request('supplier_id');
+        $accessory->name                    = request('name');
+        $accessory->category_id             = request('category_id');
+        $accessory->location_id             = request('location_id');
+        $accessory->min_amt                 = request('min_amt');
+        $accessory->company_id              = Company::getIdForCurrentUser(request('company_id'));
+        $accessory->order_number            = request('order_number');
+        $accessory->manufacturer_id         = request('manufacturer_id');
+        $accessory->model_number            = request('model_number');
+        $accessory->purchase_date           = request('purchase_date');
+        $accessory->purchase_cost           = request('purchase_cost');
+        $accessory->qty                     = request('qty');
+        $accessory->user_id                 = Auth::user()->id;
+        $accessory->supplier_id             = request('supplier_id');
+        $accessory->notes                   = request('notes');
 
         $accessory = $request->handleImages($accessory);
 
@@ -101,6 +104,7 @@ class AccessoriesController extends Controller
      */
     public function edit($accessoryId = null)
     {
+
         if ($item = Accessory::find($accessoryId)) {
             $this->authorize($item);
 
@@ -108,6 +112,35 @@ class AccessoriesController extends Controller
         }
 
         return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
+
+    }
+
+    /**
+     * Returns a view that presents a form to clone an accessory.
+     *
+     * @author [J. Vinsmoke]
+     * @param int $accessoryId
+     * @since [v6.0]
+     * @return View
+     */
+    public function getClone($accessoryId = null)
+    {
+
+        $this->authorize('create', Accesory::class);
+
+        // Check if the asset exists
+        if (is_null($accessory_to_clone = Accessory::find($accessoryId))) {
+            // Redirect to the asset management page
+            return redirect()->route('accessory.index')->with('error', trans('admin/accessories/message.does_not_exist'));
+        }
+
+        $accessory = clone $accessory_to_clone;
+        $accessory->id = null;
+        $accessory->location_id = null;
+
+        return view('accessories/edit')
+            ->with('item', $accessory);
+        
     }
 
     /**
@@ -121,31 +154,45 @@ class AccessoriesController extends Controller
      */
     public function update(ImageUploadRequest $request, $accessoryId = null)
     {
-        if (is_null($accessory = Accessory::find($accessoryId))) {
+        if ($accessory = Accessory::withCount('users as users_count')->find($accessoryId)) {
+
+            $this->authorize($accessory);
+
+            $validator = Validator::make($request->all(), [
+                "qty" => "required|numeric|min:$accessory->users_count"
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+
+
+
+            // Update the accessory data
+            $accessory->name = request('name');
+            $accessory->location_id = request('location_id');
+            $accessory->min_amt = request('min_amt');
+            $accessory->category_id = request('category_id');
+            $accessory->company_id = Company::getIdForCurrentUser(request('company_id'));
+            $accessory->manufacturer_id = request('manufacturer_id');
+            $accessory->order_number = request('order_number');
+            $accessory->model_number = request('model_number');
+            $accessory->purchase_date = request('purchase_date');
+            $accessory->purchase_cost = request('purchase_cost');
+            $accessory->qty = request('qty');
+            $accessory->supplier_id = request('supplier_id');
+            $accessory->notes = request('notes');
+
+            $accessory = $request->handleImages($accessory);
+
+            // Was the accessory updated?
+            if ($accessory->save()) {
+                return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.update.success'));
+            }
+        } else {
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
-        }
-
-        $this->authorize($accessory);
-
-        // Update the accessory data
-        $accessory->name = request('name');
-        $accessory->location_id = request('location_id');
-        $accessory->min_amt = request('min_amt');
-        $accessory->category_id = request('category_id');
-        $accessory->company_id = Company::getIdForCurrentUser(request('company_id'));
-        $accessory->manufacturer_id = request('manufacturer_id');
-        $accessory->order_number = request('order_number');
-        $accessory->model_number = request('model_number');
-        $accessory->purchase_date = request('purchase_date');
-        $accessory->purchase_cost = request('purchase_cost');
-        $accessory->qty = request('qty');
-        $accessory->supplier_id = request('supplier_id');
-
-        $accessory = $request->handleImages($accessory);
-
-        // Was the accessory updated?
-        if ($accessory->save()) {
-            return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.update.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($accessory->getErrors());
@@ -167,6 +214,7 @@ class AccessoriesController extends Controller
 
         $this->authorize($accessory);
 
+
         if ($accessory->hasUsers() > 0) {
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.assoc_users', ['count'=> $accessory->hasUsers()]));
         }
@@ -184,6 +232,7 @@ class AccessoriesController extends Controller
         return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.delete.success'));
     }
 
+
     /**
      * Returns a view that invokes the ajax table which  contains
      * the content for the accessory detail view, which is generated in getDataView.
@@ -197,7 +246,7 @@ class AccessoriesController extends Controller
      */
     public function show($accessoryID = null)
     {
-        $accessory = Accessory::find($accessoryID);
+        $accessory = Accessory::withCount('users as users_count')->find($accessoryID);
         $this->authorize('view', $accessory);
         if (isset($accessory->id)) {
             return view('accessories/view', compact('accessory'));

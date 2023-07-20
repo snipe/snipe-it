@@ -25,7 +25,7 @@ class Actionlog extends SnipeModel
 
     protected $table = 'action_logs';
     public $timestamps = true;
-    protected $fillable = ['created_at', 'item_type', 'user_id', 'item_id', 'action_type', 'note', 'target_id', 'target_type'];
+    protected $fillable = ['created_at', 'item_type', 'user_id', 'item_id', 'action_type', 'note', 'target_id', 'target_type', 'stored_eula'];
 
     use Searchable;
 
@@ -34,7 +34,7 @@ class Actionlog extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['action_type', 'note', 'log_meta'];
+    protected $searchableAttributes = ['action_type', 'note', 'log_meta','user_id'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -43,6 +43,9 @@ class Actionlog extends SnipeModel
      */
     protected $searchableRelations = [
         'company' => ['name'],
+        'admin' => ['first_name','last_name','username', 'email'],
+        'user'  => ['first_name','last_name','username', 'email'],
+        'assets'  => ['asset_tag','name'],
     ];
 
     /**
@@ -69,6 +72,7 @@ class Actionlog extends SnipeModel
         });
     }
 
+
     /**
      * Establishes the actionlog -> item relationship
      *
@@ -91,6 +95,19 @@ class Actionlog extends SnipeModel
     public function company()
     {
         return $this->hasMany(\App\Models\Company::class, 'id', 'company_id');
+    }
+
+
+    /**
+     * Establishes the actionlog -> asset relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function assets()
+    {
+        return $this->hasMany(\App\Models\Asset::class, 'id', 'item_id');
     }
 
     /**
@@ -125,6 +142,7 @@ class Actionlog extends SnipeModel
         return camel_case(class_basename($this->target_type));
     }
 
+
     /**
      * Establishes the actionlog -> uploads relationship
      *
@@ -152,6 +170,19 @@ class Actionlog extends SnipeModel
     }
 
     /**
+     * Establishes the actionlog -> admin user relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function admin()
+    {
+        return $this->belongsTo(User::class, 'user_id')
+                    ->withTrashed();
+    }
+
+    /**
      * Establishes the actionlog -> user relationship
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -160,8 +191,8 @@ class Actionlog extends SnipeModel
      */
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id')
-                    ->withTrashed();
+        return $this->belongsTo(User::class, 'target_id')
+            ->withTrashed();
     }
 
     /**
@@ -187,6 +218,7 @@ class Actionlog extends SnipeModel
     {
         return $this->belongsTo(\App\Models\Location::class, 'location_id')->withTrashed();
     }
+
 
     /**
      * Check if the file exists, and if it does, force a download

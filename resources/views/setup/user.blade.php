@@ -1,15 +1,14 @@
 @extends('layouts/setup')
-
-{{-- Page title --}}
+{{ trans('admin/users/table.createuser') }}
 @section('title')
-Create a User ::
+{{ trans('admin/users/general.create_user') }} ::
 @parent
 @stop
 
 {{-- Page content --}}
 @section('content')
 
-<p> This is the account information you'll use to access the site for the first time.  </p>
+<p>{{ trans('admin/users/general.create_user_page_explanation') }}</p>
 
 <form action="{{ route('setup.user.save') }}" method="POST">
   {{ csrf_field() }}
@@ -37,7 +36,7 @@ Create a User ::
     </div>
 
     <!-- Currency -->
-    <div class="form-group col-lg-6{{  (Helper::checkIfRequired(\App\Models\User::class, 'default_currency')) ? ' required' : '' }} {{$errors->has('default_currency') ? 'error' : ''}}">
+    <div class="form-group col-lg-6{{  (Helper::checkIfRequired(\App\Models\Setting::class, 'default_currency')) ? ' required' : '' }} {{$errors->has('default_currency') ? 'error' : ''}}">
       {{ Form::label('default_currency', trans('admin/settings/general.default_currency')) }}
       {{ Form::text('default_currency', Request::old('default_currency'), array('class' => 'form-control','placeholder' => 'USD', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
 
@@ -157,10 +156,10 @@ Create a User ::
 
     <!-- Email credentials -->
     <div class="form-group col-lg-12">
-      <label>Email credentials</label>
+      <label>{{ trans('admin/users/general.email_credentials') }}</label>
       <div class="checkbox">
         <label>
-          <input type="checkbox" value="1" name="email_creds">Email my credentials to the email address above
+          <input type="checkbox" value="1" name="email_creds">{{ trans('admin/users/general.email_credentials_text') }}
         </label>
       </div>
     </div>
@@ -168,7 +167,7 @@ Create a User ::
 @stop
 
 @section('button')
-  <button class="btn btn-primary">Next: Save User</button>
+  <button class="btn btn-primary">{{ trans('admin/users/general.next_save_user') }}</button>
 </form>
 @parent
 @stop

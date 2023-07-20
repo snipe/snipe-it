@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'component_name'                  => 'Nom du composant',
     'checkin'                             => 'Dissocier un composant',
     'checkout'                             => 'Attribuer un composant',
@@ -12,4 +12,5 @@ return [
     'remaining' 			             => 'Restant',
     'total' 			                 => 'Total',
     'update'                            => 'Mettre à jour un composant',
-];
+    'checkin_limit'            => 'Le montant enregistré doit être égal ou inférieur à :assigned_qty'
+);

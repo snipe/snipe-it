@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_manufacturers_title'    => 'Üreticiler hakkında',
     'about_manufacturers_text'  => 'Üreticiler varlıkları oluşturan şirketledir. Önemli servis sağlayıcı bilgilerinizi burada saklayabilirsiniz. Varlıkların detay kısmında bu bilgilere ulaşabilirsiniz.',
     'asset_manufacturers'	=> 'Demirbaş Üreticileri',
@@ -10,7 +10,8 @@ return [
     'support_email'   		=> 'Destek Maili',
     'support_phone'   		=> 'Destek telefonu',
     'support_url'   		=> 'Destek URL\'si',
+    'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Üretici Güncelle',
     'url'   				=> 'URL',
 
-];
+);

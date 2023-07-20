@@ -1,36 +1,38 @@
 <?php
 
-return [
+return array(
 
-    'does_not_exist' => 'Accessoire [:id] bestaat niet.',
-    'assoc_users'	 => 'Deze accessoire heeft op dit moment :count items uitgecheckt aan gebruikers. Check alsjeblieft de accessoire in en probeer opnieuw. ',
+    'does_not_exist' => 'Het accessoire [:id] bestaat niet.',
+    'assoc_users'	 => 'Dit accessoire heeft op dit moment :count items uitgecheckt aan gebruikers. Check het accessoire in en probeer het opnieuw. ',
 
-    'create' => [
-        'error'   => 'Accessoire is niet gecreëerd, Probeer alsjeblieft opnieuw.',
-        'success' => 'Accessoire succesvol aangemaakt.',
-    ],
+    'create' => array(
+        'error'   => 'Het accessoire is niet aangemaakt. Probeer het opnieuw.',
+        'success' => 'Het accessoire is aangemaakt.'
+    ),
 
-    'update' => [
-        'error'   => 'Accessoire is niet geüpdatet, Probeer alsjeblieft opnieuw',
-        'success' => 'Accessoire succesvol geupdate.',
-    ],
+    'update' => array(
+        'error'   => 'Het accessoire is niet bijgewerkt. Probeer het opnieuw.',
+        'success' => 'Het accessoire is bijgewerkt.'
+    ),
 
-    'delete' => [
-        'confirm'   => 'Weet u zeker dat u dit accessoire wilt verwijderen?',
-        'error'   => 'Er was een probleem met verwijderen van het accessoire. Probeer het opnieuw.',
-        'success' => 'Het accessoire is succesvol verwijderd.',
-    ],
+    'delete' => array(
+        'confirm'   => 'Weet je zeker dat je dit accessoire wilt verwijderen?',
+        'error'   => 'Er is een probleem opgetreden bij het verwijderen van het accessoire. Probeer het opnieuw.',
+        'success' => 'Het accessoire is verwijderd.'
+    ),
 
-     'checkout' => [
-        'error'   		=> 'Accessoire is niet uitgecheckt, probeer alsjeblieft opnieuw',
-        'success' 		=> 'Accessoire is succesvol uitgecheckt.',
-        'user_does_not_exist' => 'Deze gebruiker is ongeldig. Probeer het opnieuw.',
-    ],
+     'checkout' => array(
+        'error'   		=> 'Het accessoire is niet uitgecheckt. Probeer het opnieuw.',
+        'success' 		=> 'Het accessoire is uitgecheckt.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
+        'user_does_not_exist' => 'Deze gebruiker is ongeldig. Probeer het opnieuw.'
+    ),
 
-    'checkin' => [
-        'error'   		=> 'Accessoire is niet ingecheckt. Probeer alsjeblieft opnieuw',
-        'success' 		=> 'Accessoire succesvol ingecheckt.',
-        'user_does_not_exist' => 'Deze gebruiker is ongeldig. Probeer het opnieuw.',
-    ],
+    'checkin' => array(
+        'error'   		=> 'Het accessoire is niet ingecheckt. Probeer het opnieuw.',
+        'success' 		=> 'Het accessoire is ingecheckt.',
+        'user_does_not_exist' => 'Deze gebruiker is ongeldig. Probeer het opnieuw.'
+    )
 
-];
+
+);

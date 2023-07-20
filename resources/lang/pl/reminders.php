@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,9 @@ return [
     |
     */
 
-    'password' => 'Hasło musi mieć minimum 6 znaków i musi być potwierdzone.',
+    "password" => "Hasło musi mieć minimum 6 znaków i musi być potwierdzone.",
+    "user"     => "Login lub e-mail jest niepoprawny",
+    "token"    => 'Token resetowania hasła jest nieprawidłowy lub wygasł, lub nie pasuje do podanej nazwy użytkownika.',
+    'sent'	   => 'Jeśli w systemie istnieje podany użytkownik z prawidłowym adresem e-mail, hasło odzyskiwania zostało wysłane na e-mail.',
 
-    'user'     => 'Login lub e-mail jest niepoprawny',
-
-    'token'    => 'Token resetu hasła jest niepoprawny.',
-
-    'sent' => 'Jeśli adres e-mail jest poprawny , przypomnienie hasła zostanie wysłane!',
-
-];
+);

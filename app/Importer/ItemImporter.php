@@ -60,8 +60,8 @@ class ItemImporter extends Importer
             $this->item['department_id'] = $this->createOrFetchDepartment($item_department);
         }
 
-        $item_manager_first_name = $this->findCsvMatch($row, 'manage_first_name');
-        $item_manager_last_name = $this->findCsvMatch($row, 'manage_last_name');
+        $item_manager_first_name = $this->findCsvMatch($row, 'manager_first_name');
+        $item_manager_last_name = $this->findCsvMatch($row, 'manager_last_name');
 
         if ($this->shouldUpdateField($item_manager_first_name)) {
             $this->item['manager_id'] = $this->fetchManager($item_manager_first_name, $item_manager_last_name);
@@ -74,8 +74,24 @@ class ItemImporter extends Importer
 
         $this->item['purchase_date'] = null;
         if ($this->findCsvMatch($row, 'purchase_date') != '') {
-            $this->item['purchase_date'] = date('Y-m-d 00:00:01', strtotime($this->findCsvMatch($row, 'purchase_date')));
+            $this->item['purchase_date'] = date('Y-m-d', strtotime($this->findCsvMatch($row, 'purchase_date')));
         }
+
+        $this->item['last_audit_date'] = null;
+        if ($this->findCsvMatch($row, 'last_audit_date') != '') {
+            $this->item['last_audit_date'] = date('Y-m-d', strtotime($this->findCsvMatch($row, 'last_audit_date')));
+        }
+
+        $this->item['next_audit_date'] = null;
+        if ($this->findCsvMatch($row, 'next_audit_date') != '') {
+            $this->item['next_audit_date'] = date('Y-m-d', strtotime($this->findCsvMatch($row, 'next_audit_date')));
+        }
+
+        $this->item['asset_eol_date'] = null;
+        if ($this->findCsvMatch($row, 'asset_eol_date') != '') {
+            $this->item['asset_eol_date'] = date('Y-m-d', strtotime($this->findCsvMatch($row, 'asset_eol_date')));
+        }
+
         $this->item['qty'] = $this->findCsvMatch($row, 'quantity');
         $this->item['requestable'] = $this->findCsvMatch($row, 'requestable');
         $this->item['user_id'] = $this->user_id;
@@ -92,16 +108,16 @@ class ItemImporter extends Importer
     /**
      * Parse row to determine what (if anything) we should checkout to.
      * @param  array $row CSV Row being parsed
-     * @return SnipeModel      Model to be checked out to
+     * @return ?SnipeModel      Model to be checked out to
      */
     protected function determineCheckout($row)
     {
-        // We only support checkout-to-location for asset, so short circuit otherwise.
-        if (get_class($this) != AssetImporter::class) {
-            return $this->createOrFetchUser($row);
+        // Locations don't get checked out to anyone/anything
+        if (get_class($this) == LocationImporter::class) {
+            return;
         }
 
-        if (strtolower($this->item['checkout_class']) === 'location') {
+        if (strtolower($this->item['checkout_class']) === 'location' && $this->findCsvMatch($row, 'checkout_location') != null ) {
             return Location::findOrFail($this->createOrFetchLocation($this->findCsvMatch($row, 'checkout_location')));
         }
 
@@ -178,6 +194,7 @@ class ItemImporter extends Importer
      */
     public function createOrFetchAssetModel(array $row)
     {
+        $condition = array();
         $asset_model_name = $this->findCsvMatch($row, 'asset_model');
         $asset_modelNumber = $this->findCsvMatch($row, 'model_number');
         // TODO: At the moment, this means  we can't update the model number if the model name stays the same.
@@ -189,8 +206,16 @@ class ItemImporter extends Importer
         } elseif ((empty($asset_model_name)) && (empty($asset_modelNumber))) {
             $asset_model_name = 'Unknown';
         }
+
+        if ((!empty($asset_model_name)) && (empty($asset_modelNumber))) {
+            $condition[] = ['name', '=', $asset_model_name];
+        } elseif ((!empty($asset_model_name)) && (!empty($asset_modelNumber))) {
+            $condition[] = ['name', '=', $asset_model_name];
+            $condition[] = ['model_number', '=', $asset_modelNumber];
+        }
+
         $editingModel = $this->updating;
-        $asset_model = AssetModel::where(['name' => $asset_model_name, 'model_number' => $asset_modelNumber])->first();
+        $asset_model = AssetModel::where($condition)->first();
 
         if ($asset_model) {
             if (! $this->updating) {
@@ -201,7 +226,12 @@ class ItemImporter extends Importer
             $this->log('Matching Model found, updating it.');
             $item = $this->sanitizeItemForStoring($asset_model, $editingModel);
             $item['name'] = $asset_model_name;
-            $item['model_number'] = $asset_modelNumber;
+            $item['notes'] = $this->findCsvMatch($row, 'model_notes');
+
+            if(!empty($asset_modelNumber)){
+                $item['model_number'] = $asset_modelNumber;
+            }
+
             $asset_model->update($item);
             $asset_model->save();
             $this->log('Asset Model Updated');
@@ -214,6 +244,7 @@ class ItemImporter extends Importer
         $item = $this->sanitizeItemForStoring($asset_model, $editingModel);
         $item['name'] = $asset_model_name;
         $item['model_number'] = $asset_modelNumber;
+        $item['notes'] = $this->findCsvMatch($row, 'model_notes');
 
         $asset_model->fill($item);
         $item = null;
@@ -264,8 +295,7 @@ class ItemImporter extends Importer
 
             return $category->id;
         }
-
-        $this->logError($category, 'Category "'.$asset_category.'"');
+        $this->logError($category, 'Category "'. $asset_category. '"');
 
         return null;
     }
@@ -356,7 +386,6 @@ class ItemImporter extends Importer
         }
 
         $this->logError($status, 'Status "'.$asset_statuslabel_name.'"');
-
         return null;
     }
 

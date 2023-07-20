@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,9 @@ return [
     |
     */
 
-    'password' => 'Adgangskoder skal være seks tegn og svare til bekræftelsen.',
+    "password" => "Adgangskoder skal være seks tegn og svare til bekræftelsen.",
+    "user"     => "Brugernavn eller email adresse er forkert",
+    "token"    => 'Denne nøgle til nulstilling af adgangskode er ugyldig, udløbet eller stemmer ikke overens med det angivne brugernavn.',
+    'sent'	   => 'Hvis brugeren findes med en gyldig email-adresse i vores system, er der blevet sendt en e-mail til gendannelse af adgangskoden.',
 
-    'user'     => 'Brugernavn eller email adresse er forkert',
-
-    'token'    => 'Denne adgangskode nulstillingstoken er ugyldig.',
-
-    'sent' => 'Hvis en tilsvarende email adresse blev fundet, er der afsendt en påmindelse om adgangskode!',
-
-];
+);

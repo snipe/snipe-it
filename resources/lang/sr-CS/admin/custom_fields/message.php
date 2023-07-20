@@ -1,52 +1,63 @@
 <?php
 
-return [
+return array(
 
-    'field' => [
-        'invalid'   => 'That field does not exist.',
-        'already_added'   => 'Field already added',
+    'field' => array(
+        'invalid'   => 'Oznaka statusa ne postoji.',
+        'already_added'   => 'Polje je već dodato',
 
-        'create' => [
-            'error'   => 'Field was not created, please try again.',
-            'success' => 'Field created successfully.',
-            'assoc_success' => 'Field successfully added to fieldset.',
-        ],
+        'create' => array(
+            'error'   => 'Polje nije kreirano, pokušajte ponovo.',
+            'success' => 'Polje je uspešno kreirano.',
+            'assoc_success' => 'Polje je uspešno dodato u grupu polja.'
+        ),
 
-        'update' => [
-            'error'   => 'Field was not updated, please try again',
-            'success' => 'Field updated successfully.',
-        ],
+        'update' => array(
+            'error'   => 'Polje nije kreirano, pokušajte ponovo',
+            'success' => 'Polje je uspešno kreirano.'
+        ),
 
-        'delete' => [
-            'confirm'   	=> 'Are you sure you wish to delete this field?',
-            'error'   => 'There was an issue deleting the field. Please try again.',
-            'success' => 'The field was deleted successfully.',
-            'in_use'   => 'Field is still in use.',
-        ],
+        'delete' => array(
+            'confirm'   	=> 'Jeste li sigurni da želite izbrisati ovo polje?',
+            'error'   => 'Postoji problem sa brisanjem ovog polja. Molimo Vas pokušajte ponovo.',
+            'success' => 'Polje je uspešno izbrisano.',
+            'in_use'   => 'Polje je u upotrebi.',
+        )
 
-    ],
+    ),
 
-    'fieldset' => [
+    'fieldset' => array(
 
-        'does_not_exist' => 'Fieldset does not exist',
+        'does_not_exist' => 'Grupa polja ne postoji',
 
-        'create' => [
-            'error'   => 'Fieldset was not created, please try again.',
-            'success' => 'Fieldset created successfully.',
-        ],
+        'create' => array(
+            'error'   => 'Polje nije kreirano, pokušajte ponovo.',
+            'success' => 'Grupa polja je uspešno kreirana.'
+        ),
 
-        'update' => [
-            'error'   => 'Fieldset was not updated, please try again',
-            'success' => 'Fieldset updated successfully.',
-        ],
+        'update' => array(
+            'error'   => 'Grupa polja nije ažurirana, pokušajte ponovo',
+            'success' => 'Grupa polja je uspešno ažurirana.'
+        ),
 
-        'delete' => [
-            'confirm'   	=> 'Are you sure you wish to delete this fieldset?',
-            'error'   => 'There was an issue deleting the fieldset. Please try again.',
-            'success' => 'The fieldset was deleted successfully.',
-            'in_use'   => 'Fieldset is still in use.',
-        ],
+        'delete' => array(
+            'confirm'   	=> 'Jeste li sigurni da želite da izbrišete ovo polje?',
+            'error'   => 'Postoji problem sa brisanjem ove grupe polja. Molimo Vas pokušajte ponovo.',
+            'success' => 'Grupa polja je uspešno obrisana.',
+            'in_use'   => 'Polje je u upotrebi.',
+        )
 
-    ],
+    ),
 
-];
+    'fieldset_default_value' => array(
+
+        'error' => 'Greška u veriifikaciji podrazumevanih vrednosti grupe polja.',
+
+    ),
+
+
+
+
+
+
+);

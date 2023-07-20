@@ -9,6 +9,8 @@
         'maintenance'        => 'Manutenção',
         'upgrade'            => 'Melhorar',
         'calibration'        => 'Calibração',
-        'software_support'   => 'Software Support',
-        'hardware_support'   => 'Hardware Support',
+        'software_support'   => 'Apoio ao Software',
+        'hardware_support'   => 'Apoio para Hardware',
+        'configuration_change'   => 'Configuration Change',
+        'pat_test'           => 'Teste PAT',
     ];

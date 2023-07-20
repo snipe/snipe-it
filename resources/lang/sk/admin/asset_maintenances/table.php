@@ -3,6 +3,6 @@
     return [
         'title'         => 'Asset Maintenance',
         'asset_name'    => 'Asset Name',
-        'is_warranty'   => 'Warranty',
-        'dl_csv'        => 'Download CSV'
+        'is_warranty'   => 'Záruka',
+        'dl_csv'        => 'Download CSV',
     ];

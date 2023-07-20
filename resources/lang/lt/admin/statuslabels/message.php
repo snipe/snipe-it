@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'Šis turtas niekam negali būti priskirtas.',
-        'deployable'   => 'Šį turtą galima patikrinti. Kai jie bus priskirti, jie prisiims <i class="fas fa-circle text-blue"></i> <strong>Darbuoto</strong> meta statusą.',
+        'deployable'   => 'Ši įranga gali būti išduodama. Išdavus įrangą, jos būsena bus pakeista į <i class="fas fa-circle text-blue"></i> <strong>Naudojama</strong>.',
         'archived'   => 'Šio turto negalima patikrinti ir jis bus rodomas tik archyvuotame rodinyje. Tai naudinga, jei norite išsaugoti informaciją apie turtą, skirtą biudžetui / istoriniams tikslams, bet išlaikyti juos kasdieniame turto sąraše.',
         'pending'   => 'Šis turtas dar negali būti priskirtas visiems, dažnai naudojamas daiktams, kurie yra remontuojami, tačiau tikimasi, kad jie grįš į apyvartą.',
     ],

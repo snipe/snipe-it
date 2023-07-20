@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Amaran: </strong> Aset ini telah ditandakan sebagai tidak boleh dikehendaki. Jika status ini telah berubah, sila kemas kini status aset.',
     'does_not_exist' 	=> 'Harta tidak wujud.',
-    'does_not_exist_or_not_requestable' => 'Cubaan yang baik. Aset itu tidak wujud atau tidak boleh diminta.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Harta ini sekarang telah diagihkan kepada pengguna dan tidak boleh dihapuskan. Sila semak status harta ini dahulu, dan kemudian cuba semula. ',
 
     'create' => [
@@ -16,17 +16,21 @@ return [
         'error'   			=> 'Harta gagal dikemaskini, sila cuba semula',
         'success' 			=> 'Harta berjaya dikemaskini.',
         'nothing_updated'	=>  'Tiada medan dipilih, jadi tiada apa yang dikemas kini.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [
         'error'   		=> 'Aset tidak dipulihkan, sila cuba lagi',
         'success' 		=> 'Aset dipulihkan dengan jayanya.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
         'error'   		=> 'Audit aset tidak berjaya. Sila cuba lagi.',
         'success' 		=> 'Audit aset berjaya log.',
     ],
+
 
     'deletefile' => [
         'error'   => 'Fail tidak dipadam. Sila cuba lagi.',
@@ -46,7 +50,10 @@ return [
         'success'               => 'Fail anda telah diimport',
         'file_delete_success'   => 'Fail anda telah berjaya dihapuskan',
         'file_delete_error'      => 'Fail tidak dapat dipadamkan',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Anda pasti anda ingin hapuskan harta ini?',

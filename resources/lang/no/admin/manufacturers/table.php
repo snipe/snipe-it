@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_manufacturers_title'    => 'Om produsenter',
     'about_manufacturers_text'  => 'Produsenter er firmaer som lager dine eiendeler. Du kan lagre viktig kundestøtte kontaktinformasjon om dem her, som vises på sidene om asset-detaljer.',
     'asset_manufacturers'	=> 'Eiendelsprodusenter',
@@ -10,7 +10,8 @@ return [
     'support_email'   		=> 'Støtte epost',
     'support_phone'   		=> 'Støttetelefon',
     'support_url'   		=> 'Support URL',
+    'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Endre produsent',
     'url'   				=> 'URL',
 
-];
+);

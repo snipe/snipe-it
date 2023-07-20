@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'ใช้งาน',
     'allow'  				=> 'อนุญาต',
     'checkedout'  			=> 'ทรัพย์สิน',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'อีเมล',
     'employee_num'      	=> 'เลขพนักงาน',
     'first_name' 			=> 'ชื่อ',
-    'groupnotes'			=> 'เลือกกลุ่มเพื่อกำหนดให้ผู้ใช้งาน ซึ่งผู้ใช้งานจะได้รับสิทธิ์การใช้งานตามสิทธิ์การใช้งานของกลุ่มนั้นๆ ตามที่ได้กำหนด',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'รหัส',
     'inherit'  				=> 'สืบทอด',
     'job' 					=> 'ลักษณะงาน',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'แสดงผู้ใช้งานปัจจุบัน',
     'show_deleted'          => 'แสดงผู้ใช้งานที่ถูกลบแล้ว',
     'title' 				=> 'ชื่อเรื่อง',
-    'to_restore_them'		=> 'เพื่อเรียกคืน',
+	'to_restore_them'		=> 'เพื่อเรียกคืน',
     'updateuser' 			=> 'แก้ไขผู้ใช้งาน',
     'username' 				=> 'ชื่อผู้ใช้',
-    'user_deleted_text' 	=> 'ผู้ใช้นี้ถูกทำเครื่องหมายว่าลบแล้ว',
+	'user_deleted_text' 	=> 'ผู้ใช้นี้ถูกทำเครื่องหมายว่าลบแล้ว',
     'username_note' 		=> '(ส่วนนี้มีผลเฉพาะกับ Active Directory เท่านั้น ไม่ใช่สำหรับการเข้าสู่ระบบ)',
     'cloneuser'             => 'คัดลอกผู้ใช้งาน',
     'viewusers' 			=> 'ดูผู้ใช้งาน',
-];
+);

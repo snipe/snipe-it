@@ -7,10 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetFileRequest;
 use App\Models\Actionlog;
 use App\Models\License;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use enshrined\svgSanitize\Sanitizer;
 
 class LicenseFilesController extends Controller
 {
@@ -37,26 +37,39 @@ class LicenseFilesController extends Controller
                     Storage::makeDirectory('private_uploads/licenses', 775);
                 }
 
-                $upload_success = false;
                 foreach ($request->file('file') as $file) {
-                    $file_name = 'license-'.$license->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$file->getClientOriginalExtension())).'.'.$file->getClientOriginalExtension();
 
-                    $upload_success = $file->storeAs('private_uploads/licenses', $file_name);
-                    // $upload_success = $file->storeAs('private_uploads/licenses/'.$file_name, $file);
+                    $extension = $file->getClientOriginalExtension();
+                    $file_name = 'license-'.$license->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
+
+
+                        // Check for SVG and sanitize it
+                        if ($extension == 'svg') {
+                            \Log::debug('This is an SVG');
+                            \Log::debug($file_name);
+
+                                $sanitizer = new Sanitizer();
+                                $dirtySVG = file_get_contents($file->getRealPath());
+                                $cleanSVG = $sanitizer->sanitize($dirtySVG);
+
+                                try {
+                                    Storage::put('private_uploads/licenses/'.$file_name, $cleanSVG);
+                                } catch (\Exception $e) {
+                                    \Log::debug('Upload no workie :( ');
+                                    \Log::debug($e);
+                                }
+
+                        } else {
+                            Storage::put('private_uploads/licenses/'.$file_name, file_get_contents($file));
+                        }
 
                     //Log the upload to the log
                     $license->logUpload($file_name, e($request->input('notes')));
                 }
 
-                // This being called from a modal seems to confuse redirect()->back()
-                // It thinks we should go to the dashboard.  As this is only used
-                // from the modal at present, hardcode the redirect.  Longterm
-                // maybe we evaluate something else.
-                if ($upload_success) {
-                    return redirect()->route('licenses.show', $license->id)->with('success', trans('admin/licenses/message.upload.success'));
-                }
 
-                return redirect()->route('licenses.show', $license->id)->with('error', trans('admin/licenses/message.upload.error'));
+                    return redirect()->route('licenses.show', $license->id)->with('success', trans('admin/licenses/message.upload.success'));
+
             }
 
             return redirect()->route('licenses.show', $license->id)->with('error', trans('admin/licenses/message.upload.nofiles'));
@@ -78,29 +91,30 @@ class LicenseFilesController extends Controller
      */
     public function destroy($licenseId = null, $fileId = null)
     {
-        $license = License::find($licenseId);
+        if ($license = License::find($licenseId)) {
 
-        // the asset is valid
-        if (isset($license->id)) {
             $this->authorize('update', $license);
-            $log = Actionlog::find($fileId);
 
-            // Remove the file if one exists
-            if (Storage::exists('licenses/'.$log->filename)) {
-                try {
-                    Storage::delete('licenses/'.$log->filename);
-                } catch (\Exception $e) {
-                    \Log::debug($e);
+            if ($log = Actionlog::find($fileId)) {
+
+                // Remove the file if one exists
+                if (Storage::exists('licenses/'.$log->filename)) {
+                    try {
+                        Storage::delete('licenses/'.$log->filename);
+                    } catch (\Exception $e) {
+                        \Log::debug($e);
+                    }
                 }
+                
+                $log->delete();
+
+                return redirect()->back()
+                    ->with('success', trans('admin/hardware/message.deletefile.success'));
             }
 
-            $log->delete();
-
-            return redirect()->back()
-                ->with('success', trans('admin/hardware/message.deletefile.success'));
+            return redirect()->route('licenses.index')->with('error', trans('general.log_does_not_exist'));
         }
 
-        // Redirect to the licence management page
         return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist'));
     }
 
@@ -116,12 +130,12 @@ class LicenseFilesController extends Controller
      */
     public function show($licenseId = null, $fileId = null, $download = true)
     {
-        \Log::info('Private filesystem is: '.config('filesystems.default'));
         $license = License::find($licenseId);
 
         // the license is valid
         if (isset($license->id)) {
             $this->authorize('view', $license);
+            $this->authorize('licenses.files', $license);
 
             if (! $log = Actionlog::find($fileId)) {
                 return response('No matching record for that asset/file', 500)
@@ -153,10 +167,11 @@ class LicenseFilesController extends Controller
                     }
 
                     return StorageHelper::downloader($file);
+
                 }
             }
         }
 
-        return redirect()->route('license.index')->with('error', trans('admin/licenses/message.does_not_exist', ['id' => $fileId]));
+        return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist', ['id' => $fileId]));
     }
 }

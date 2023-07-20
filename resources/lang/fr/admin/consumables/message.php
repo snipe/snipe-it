@@ -1,35 +1,37 @@
 <?php
 
-return [
+return array(
 
-    'does_not_exist' => 'Cette fourniture n\'existe pas.',
+    'does_not_exist' => 'Ce consommable n\'existe pas.',
 
-    'create' => [
-        'error'   => 'La fourniture n\'a pas été créé, veuillez réessayer.',
-        'success' => 'La fourniture a été créé correctement.',
-    ],
+    'create' => array(
+        'error'   => 'Le consommable n\'a pas été créé, merci de réessayer.',
+        'success' => 'Le consommable a été créé correctement.'
+    ),
 
-    'update' => [
-        'error'   => 'La fourniture n\'a pas été actualisé, veuillez réessayer',
-        'success' => 'La fourniture a été actualisé correctement.',
-    ],
+    'update' => array(
+        'error'   => 'Le consommable n\'a pas été mis-à-jour, merci de réessayer',
+        'success' => 'Le consommable a été mis-à-jour.'
+    ),
 
-    'delete' => [
-        'confirm'   => 'Êtes-vous certain de vouloir détruire cette fourniture ?',
-        'error'   => 'Il y a eu un problème en détruisant la fourniture. Veuillez réessayer.',
-        'success' => 'La fourniture a été détruite correctement.',
-    ],
+    'delete' => array(
+        'confirm'   => 'Êtes-vous certain·e de vouloir supprimer ce consommable ?',
+        'error'   => 'Il y a eu un problème lors de la suppression du consommable. Merci de réessayer.',
+        'success' => 'Le consommable a été supprimé correctement.'
+    ),
 
-     'checkout' => [
-        'error'   		=> 'La fourniture n\'a pas été attribué correctement, veuillez réessayer',
-        'success' 		=> 'La fourniture a été attribué correctement.',
-        'user_does_not_exist' => 'Cet utilisateur est invalide. Veuillez réessayer.',
-    ],
+     'checkout' => array(
+        'error'   		=> 'Le consommable n\'a pas été attribué correctement, merci de réessayer',
+        'success' 		=> 'Le consommable a été attribué correctement.',
+        'user_does_not_exist' => 'Cet·te utilisateur·trice est invalide. Merci de réessayer.',
+         'unavailable'      => 'Il n\'y a pas assez de consommables pour cette attribution. Veuillez vérifier la quantité restante. ',
+    ),
 
-    'checkin' => [
-        'error'   		=> 'La fourniture n\'a pas été dissocié correctement, veuillez réessayer',
-        'success' 		=> 'La fourniture à été dissocié correctement.',
-        'user_does_not_exist' => 'Cet utilisateur est invalide. Veuillez réessayer.',
-    ],
+    'checkin' => array(
+        'error'   		=> 'Le consommable n\'a pas été dissocié correctement, merci de réessayer',
+        'success' 		=> 'Le consommable a été dissocié correctement.',
+        'user_does_not_exist' => 'Cet·te utilisateur·trice est invalide. Merci de réessayer.'
+    )
 
-];
+
+);

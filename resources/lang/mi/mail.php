@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'Kua whakakorea e tetahi kaiwhakamahi tetahi tonoemi i runga i te paetukutuku',
     'a_user_requested' => 'Kua tono tetahi kaiwhakamahi i tetahi mea i runga i te paetukutuku',
     'accessory_name' => 'Ingoa Whakauru:',
@@ -41,6 +43,7 @@ return [
     'login_first_admin' => 'Whakauru ki to taahiranga hou Snipe-IT ma te whakamahi i nga taipitopito kei raro nei:',
     'login' => 'Whakauru:',
     'Low_Inventory_Report' => 'Pūrongo Inventory Low',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Min QTY',
     'name' => 'Ingoa',
     'new_item_checked' => 'Kua tohua tetahi mea hou i raro i to ingoa, kei raro iho nga korero.',
@@ -59,7 +62,7 @@ return [
     'test_mail_text' => 'He whakamatautau tenei mai i te Pūnaha Whakahaere Utu Snipe-IT. Mena kua whiwhi koe i tenei, kei te mahi te miihana :)',
     'the_following_item' => 'Kua tohua te mea e whai ake nei i:',
     'low_inventory_alert' => 'There is :count item that is below minimum inventory or will soon be low.|There are :count items that are below minimum inventory or will soon be low.',
-    'assets_warrantee_alert' => 'There is :count asset with a warrantee expiring in the next :threshold days.|There are :count assets with warrantees expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'to_reset' => 'Hei tautuhi i to: kupuhipa tukutuku, whakaoti i tenei puka:',
     'type' => 'Momo',
@@ -71,9 +74,11 @@ return [
     'your_credentials' => 'Nga tohu tohu Snipe-IT',
     'Accessory_Checkin_Notification' => 'Accessory checked in',
     'Asset_Checkin_Notification' => 'Asset checked in',
+    'Asset_Checkout_Notification' => 'Asset checked out',
     'License_Checkin_Notification' => 'License checked in',
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'your_assets' => 'View Your Assets',
+    'rights_reserved' => 'All rights reserved.',
 ];

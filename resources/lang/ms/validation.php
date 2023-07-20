@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => 'The: attribute must be a file.',
     'filled'               => ': Bidang atribut mesti mempunyai nilai.',
     'image'                => ':attribute mesti imej.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'Piliah :attribute tidak sah.',
     'in_array'             => 'The: bidang atribut tidak wujud di: lain.',
     'integer'              => ':attribute mesti integer.',
     'ip'                   => ':attribute mesti alamat IP yang sah.',
     'ipv4'                 => 'The: attribute mestilah alamat IPv4 yang sah.',
     'ipv6'                 => 'The: atribut mestilah alamat IPv6 yang sah.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'The: attribute mestilah rentetan JSON yang sah.',
     'max'                  => [
         'numeric' => ':attribute tidak boleh lebih besar dari :max.',
@@ -64,6 +66,9 @@ return array(
         'string'  => ':attribute mesti sekurang2nya :min characters.',
         'array'   => 'The: atribut mesti mempunyai sekurang-kurangnya: item min.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'Piliah :attribute tidak sah.',
     'numeric'              => ':attribute mesti nombor.',
     'present'              => 'Yang: bidang atribut mesti ada.',
@@ -88,19 +93,16 @@ return array(
     'unique'               => ':attribute telah diambil.',
     'uploaded'             => 'The: attribute gagal untuk dimuat naik.',
     'url'                  => ':attribute format tidak sah.',
-    "unique_undeleted"     => ":attribute mesti unik.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
-
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
+    'unique_undeleted'     => ':attribute mesti unik.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
 
 
     /*
@@ -115,11 +117,23 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Bidang: atribut mengandungi aksara yang tidak dibenarkan.",
-        "email_array"      => "Satu atau lebih alamat e-mel tidak sah.",
-        "hashed_pass"      => "Kata laluan semasa anda tidak betul",
+        'alpha_space' => 'Bidang: atribut mengandungi aksara yang tidak dibenarkan.',
+        'email_array'      => 'Satu atau lebih alamat e-mel tidak sah.',
+        'hashed_pass'      => 'Kata laluan semasa anda tidak betul',
         'dumbpwd'          => 'Kata laluan itu terlalu umum.',
-        "statuslabel_type" => "Anda mesti memilih jenis label status yang sah",
+        'statuslabel_type' => 'Anda mesti memilih jenis label status yang sah',
+
+        // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
+        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // people won't know how to format. 
+        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
+        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
+        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+
     ],
 
     /*
@@ -135,4 +149,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

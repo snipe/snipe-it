@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'id'                        => 'ID',
     'name'                      => 'Název Oddělení',
@@ -8,4 +8,4 @@ return [
     'location'                  => 'Umístění',
     'create'                    => 'Vytvořit Oddělení',
     'update'                    => 'Aktualizovat Oddělení',
-    ];
+    );

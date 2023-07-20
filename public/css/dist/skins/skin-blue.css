@@ -36,7 +36,7 @@
     background-color: rgba(255, 255, 255, 0.1);
   }
   .skin-blue .main-header .navbar .dropdown-menu li a {
-    color: #fff;
+    color: #333;
   }
   .skin-blue .main-header .navbar .dropdown-menu li a:hover {
     background: #367fa9;
@@ -123,7 +123,7 @@
   border-bottom-left-radius: 0;
 }
 .skin-blue.layout-top-nav .main-header > .logo .logo-variant {
-  background-color: none;
+  background-color: unset;
 }
 .btn.btn-primary,
 btn-sm.btn-primary,
@@ -133,7 +133,7 @@ btn-sm .btn-primary:link,
 .btn:hover .btn-primary:link {
   background-color: #307095;
   border-color: #23536f;
-  color: #fff;
+  color: #fff !important;
 }
 .btna.btn-primary:hover,
 btn-sma.btn-primary:hover,
@@ -172,17 +172,54 @@ a.btn-danger:hover,
 .btn-danger:visited {
   color: #fff;
 }
-a {
-  color: #3c8dbc;
+.btn-default:link,
+a.btn-default:hover,
+.btn-default:visited {
+  color: #505156;
 }
-a:hover {
-  color: #23536f;
+:root {
+  --button-default: #505156;
+  --button-primary: #1d455b;
+  --button-hover: #173648;
+  --header: #3c8dbc;
+  /* Use same as Header picker */
+  --text-main: #BBB;
+  --text-sub: #9b9b9b;
+  --link: #296282;
+  /* Use same as Header picker, lighten by 70% */
+  --visited-link: #5fa4cc;
+  /* Use same as Header picker, lighten by 70% */
+  --hover-link: #86bad8;
+  /* Use same as Header picker, lighten by 70% */
+  --nav-link: #FFF;
+  /* Use same as Header picker */
+  --light-link: #fff;
+  /* Use same as Header picker */
+}
+a.btn-info:link,
+a.btn-warning:link,
+a.btn-danger:link {
+  color: #FFF;
+}
+a.btn-info:visited,
+a.btn-warning:visited,
+a.btn-danger:visited {
+  color: #FFF;
+}
+a:link {
+  color: var(--link);
 }
 a:visited {
-  color: #3c8dbc;
+  color: var(--visited-link);
+}
+a:hover {
+  color: var(--hover-link);
 }
 .text-primary {
   color: #23536f;
+}
+.far fa-life-ring {
+  color: var(--link);
 }
 .fixed-table-container tbody .selected td {
   background-color: #fff8af;
@@ -193,5 +230,10 @@ a:visited {
 .search-highlight,
 .search-highlight:hover {
   background-color: #e9d15b;
+}
+a.settings_button:link,
+a.settings_button:visited,
+a.settings_button:hover {
+  color: #3c8dbc;
 }
 

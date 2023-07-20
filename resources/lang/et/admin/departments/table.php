@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'id'                        => 'ID',
     'name'                      => 'Osakonna nimi',
@@ -8,4 +8,4 @@ return [
     'location'                  => 'Asukoht',
     'create'                    => 'Loo osakond',
     'update'                    => 'Uuenda osakonda',
-    ];
+    );

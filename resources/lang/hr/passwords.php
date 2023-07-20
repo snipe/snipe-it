@@ -1,6 +1,8 @@
 <?php
 
 return [
-    'sent'	        => 'Veza lozinke je poslana!',
-    'user'			=> 'Nije pronađen niti jedan aktivni korisnik sa tim e-mailom.',
+    'sent'	        => 'Ako odgovarajući korisnik s valjanom adresom e-pošte postoji u sustavu, poslan je email za oporavak lozinke.',
+    'user'			=> 'Ako odgovarajući korisnik s valjanom adresom e-pošte postoji u sustavu, poslan je email za oporavak lozinke.',
+    'token'         => 'Token za poništavanje zaporke nije valjan, istekao je ili ne odgovara navedenom korisničkom računu.',
+    'reset'         => 'Vaša lozinka je resetirana!',
 ];

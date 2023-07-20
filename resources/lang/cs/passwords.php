@@ -1,6 +1,8 @@
 <?php
 
 return [
-    'sent'	        => 'Váš odkaz s heslem byl odeslán!',
-    'user'			=> 'Nebyl nalezen žádný aktivní uživatel s takovým e-mailem.',
+    'sent'	        => 'Pokud v našem systému existuje uživatel s touto emailovou adresou, byl odeslán e-mail pro obnovení hesla.',
+    'user'			=> 'Pokud v našem systému existuje uživatel s touto emailovou adresou, byl odeslán e-mail pro obnovení hesla.',
+    'token'         => 'Tento token pro obnovení hesla je neplatný, vypršel, nebo se neshoduje s zadaným uživatelským jménem.',
+    'reset'         => 'Heslo úspěšně změněno!',
 ];

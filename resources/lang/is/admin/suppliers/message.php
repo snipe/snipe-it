@@ -11,7 +11,7 @@ return array(
     ),
 
     'update' => array(
-        'error'   => 'Supplier was not updated, please try again',
+        'error'   => 'Þessi birgi var ekki skráður. Vinsamlegast reyndu aftur',
         'success' => 'Supplier updated successfully.'
     ),
 

@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'Een gebruiker heeft een artikel geaccepteerd',
+    'acceptance_asset_declined' => 'Een gebruiker heeft een artikel geweigerd',
     'a_user_canceled' => 'Een gebruiker heeft een verzoek om een item op de website geannuleerd',
     'a_user_requested' => 'Een gebruiker heeft een item op de website aangevraagd',
     'accessory_name' => 'Accessoire Naam:',
@@ -29,7 +31,7 @@ return [
     'days' => 'Dagen',
     'expecting_checkin_date' => 'Verwachte incheck datum:',
     'expires' => 'Verloopt',
-    'Expiring_Assets_Report' => 'Rapportage verlopende assets.',
+    'Expiring_Assets_Report' => 'Rapport van verlopen activa',
     'Expiring_Licenses_Report' => 'Rapportage verlopende licenties.',
     'hello' => 'Hallo',
     'hi' => 'Hoi',
@@ -41,6 +43,7 @@ return [
     'login_first_admin' => 'Meld u aan op uw nieuwe Snipe-IT installatie met onderstaande inloggegevens:',
     'login' => 'Login:',
     'Low_Inventory_Report' => 'Lage inventarisrapport',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Minimale hoeveelheid',
     'name' => 'Naam',
     'new_item_checked' => 'Een nieuw item is onder uw naam uitgecheckt, details staan hieronder.',
@@ -61,7 +64,7 @@ return [
     'the_following_item' => 'Het volgende item is ingecheckt: ',
     'low_inventory_alert' => 'Er is :count item dat onder de minimumvoorraad ligt of binnenkort laag zal zijn.|Er zijn :count items die onder de minimumvoorraad zijn of binnenkort laag zullen zijn.',
     'assets_warrantee_alert' => 'Er is :count asset met een garantie die afloopt in de volgende :threshold dagen.|Er zijn :count assets met garanties die vervallen in de volgende :threshold dagen.',
-    'license_expiring_alert' => 'Er is :count licentie die afloopt in de volgende :threshold dagen. | Er zijn :count licenties die vervallen in de volgende :threshold dagen.',
+    'license_expiring_alert' => 'Er is :count licentie die afloopt in de volgende :threshold dagen.|Er zijn :count licenties die vervallen in de volgende :threshold dagen.',
     'to_reset' => 'Vul dit formulier in om je :web wachtwoord te resetten:',
     'type' => 'Type',
     'upcoming-audits' => 'Er is :count asset die binnen :threshold dagen gecontroleerd moet worden.|Er zijn :count assets die binnen :threshold dagen gecontroleerd moeten worden.',
@@ -72,9 +75,11 @@ return [
     'your_credentials' => 'Je Snipe-IT inloggegevens',
     'Accessory_Checkin_Notification' => 'Accessoire ingecheckt',
     'Asset_Checkin_Notification' => 'Asset ingecheckt',
+    'Asset_Checkout_Notification' => 'Asset checked out',
     'License_Checkin_Notification' => 'Licentie ingecheckt',
     'Expected_Checkin_Report' => 'Verwachte asset check in rapport',
     'Expected_Checkin_Notification' => 'Herinnering: :name check in deadline nadert',
     'Expected_Checkin_Date' => 'Een asset uitgecheckt aan jou moet worden ingecheckt op :date',
-    'your_assets' => 'Bekijk je assets',
+    'your_assets' => 'Bekijk je activa',
+    'rights_reserved' => 'All rights reserved.',
 ];

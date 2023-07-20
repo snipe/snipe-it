@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'component_name'                  => 'Nome do componente',
     'checkin'                             => 'Devolução do componente',
     'checkout'                             => 'Atribuição de componente',
@@ -12,4 +12,5 @@ return [
     'remaining' 			             => 'Restante',
     'total' 			                 => 'Total',
     'update'                            => 'Atualizar componente',
-];
+    'checkin_limit'            => 'Valor verificado em deve ser igual ou menor que :assigned_qty'
+);

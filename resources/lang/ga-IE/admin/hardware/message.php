@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Marradh: </strong> Tá an tsócmhainn seo marcáilte mar atá inghníomhaithe faoi láthair. Má d\'athraigh an stádas seo, déan an stádas sócmhainne a nuashonrú.',
     'does_not_exist' 	=> 'Níl sócmhainn ann.',
-    'does_not_exist_or_not_requestable' => 'Iarracht deas. Níl an tsócmhainn sin ann nó níl sé inghlactha.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Faoi láthair déanfar an tsócmhainn seo a sheiceáil chuig úsáideoir agus ní féidir é a scriosadh. Déan seiceáil ar an tsócmhainn sa chéad uair, agus déan iarracht ansin scriosadh arís.',
 
     'create' => [
@@ -16,17 +16,21 @@ return [
         'error'   			=> 'Níor tugadh nuashonrú ar an tsócmhainn, déan iarracht arís',
         'success' 			=> 'Nuashonraíodh sócmhainn go rathúil',
         'nothing_updated'	=>  'Níor roghnaíodh réimsí ar bith, mar sin níor nuashonraíodh aon rud.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [
         'error'   		=> 'Níor cuireadh an tsócmhainn ar ais, déan iarracht arís',
         'success' 		=> 'Aisghabháil sócmhainne go rathúil.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
         'error'   		=> 'Níor éirigh leis an iniúchadh sócmhainne. Arís, le d\'thoil.',
         'success' 		=> 'Iniúchadh sócmhainne logáilte go rathúil.',
     ],
+
 
     'deletefile' => [
         'error'   => 'Ní scriosadh an comhad. Arís, le d\'thoil.',
@@ -46,7 +50,10 @@ return [
         'success'               => 'Tá do chomhad iompórtáilte',
         'file_delete_success'   => 'Tá do chomhad scriosta go rathúil',
         'file_delete_error'      => 'Níorbh fhéidir an comhad a scriosadh',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'An bhfuil tú cinnte gur mian leat an tsócmhainn seo a scriosadh?',

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => 'Atributas turi būti failas.',
     'filled'               => 'Atributo laukas turi turėti reikšmę.',
     'image'                => ':attribute privalo būti paveikslėlis.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'Pasirinktas :attribute neteisingas.',
     'in_array'             => 'Atributo laukas neegzistuoja: kitame.',
     'integer'              => ':attribute turi būti sveikas skaičius.',
     'ip'                   => ':attribute privalo būti tinkamas IP adresas.',
     'ipv4'                 => 'Atributas turi būti galiojantis IPv4 adresas.',
     'ipv6'                 => 'Atributas turi būti galiojantis IPv6 adresas.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'Atributas turi būti galiojantis JSON eilutė.',
     'max'                  => [
         'numeric' => ':attribute negali būti didesnis nei :max.',
@@ -64,6 +66,9 @@ return array(
         'string'  => ':attribute privalo būti bent :min ženklai.',
         'array'   => 'Atributui turi būti bent: min elementai.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'Pasirinktas :attribute neteisingas.',
     'numeric'              => ':attribute privalo būti skaičius.',
     'present'              => 'Atributo laukas turi būti.',
@@ -88,19 +93,16 @@ return array(
     'unique'               => ':attribute jau užimtas.',
     'uploaded'             => 'Nepavyko įkelti atributo.',
     'url'                  => ':attribute formatas neteisingas.',
-    "unique_undeleted"     => ":attribute turi būti unikalus.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
-
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
+    'unique_undeleted'     => ':attribute turi būti unikalus.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
 
 
     /*
@@ -115,11 +117,23 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Lauke: atributo lauke yra simbolis, kuris nėra leidžiamas.",
-        "email_array"      => "Vienas ar keli el. Pašto adresai yra netinkami.",
-        "hashed_pass"      => "Jūsų dabartinis slaptažodis yra neteisingas",
+        'alpha_space' => 'Lauke: atributo lauke yra simbolis, kuris nėra leidžiamas.',
+        'email_array'      => 'Vienas ar keli el. Pašto adresai yra netinkami.',
+        'hashed_pass'      => 'Jūsų dabartinis slaptažodis yra neteisingas',
         'dumbpwd'          => 'Šis slaptažodis yra per dažnas.',
-        "statuslabel_type" => "Turite pasirinkti tinkamą statuso etiketės tipą",
+        'statuslabel_type' => 'Turite pasirinkti tinkamą statuso etiketės tipą',
+
+        // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
+        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // people won't know how to format. 
+        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
+        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
+        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+
     ],
 
     /*
@@ -135,4 +149,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

@@ -11,4 +11,6 @@
         'calibration'        => 'Kalibrointi',
         'software_support'   => 'Ohjelmiston tuki',
         'hardware_support'   => 'Laitteiston tuki',
+        'configuration_change'   => 'Konfiguraation muutos',
+        'pat_test'           => 'PAT(Portable appliance testing) Testi',
     ];

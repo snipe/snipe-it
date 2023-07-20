@@ -10,5 +10,7 @@ return [
     'group_admin' 	 		=> 'Grupas administrators',
     'allow' 	 			=> 'Atļaut',
     'deny' 	 				=> 'Liegties',
-
+    'permission'            => 'Piekļuves tiesības',
+    'grant'                 => 'Piešķirt',
+    'no_permissions'        => 'Šai grupai nav nevienu pieejas tiesību.'
 ];

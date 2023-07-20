@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,9 @@ return [
     |
     */
 
-    'password' => 'Parool peab olema kuus tähemärki ja peab klappima kinnitusega.',
+    "password" => "Parool peab olema kuus tähemärki ja peab klappima kinnitusega.",
+    "user"     => "Kasutajanimi või parool on vale",
+    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
+    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
 
-    'user'     => 'Kasutajanimi või parool on vale',
-
-    'token'    => 'See parooli taastamise kood on vale.',
-
-    'sent' => 'Kui me leidsime klappiva e-maili aadressi, siis saatsime sellele parooli meeldetuletuse!',
-
-];
+);

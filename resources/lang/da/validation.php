@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => 'Attributten skal være en fil.',
     'filled'               => 'Attributfeltet skal have en værdi.',
     'image'                => ':attribute skal være et billede.',
+    'import_field_empty'    => 'Værdien for :fieldname kan ikke være null.',
     'in'                   => 'Det valgte :attribute er ugyldigt.',
     'in_array'             => 'Attributfeltet findes ikke i: andet.',
     'integer'              => ':attribute skal være et heltal.',
     'ip'                   => ':attribute skal være en gyldig IP adresse.',
     'ipv4'                 => 'Attributten skal være en gyldig IPv4-adresse.',
     'ipv6'                 => 'Attributten skal være en gyldig IPv6-adresse.',
+    'is_unique_department' => ':attribute skal være unik for denne virksomhedsplacering',
     'json'                 => 'Attributten skal være en gyldig JSON-streng.',
     'max'                  => [
         'numeric' => ':attribute må ikke overstige :max.',
@@ -64,6 +66,9 @@ return array(
         'string'  => ':attribute skal mindst være :min tegn.',
         'array'   => 'Attributten skal have mindst: min elementer.',
     ],
+    'starts_with'          => ':attribute skal starte med en af følgende: :values',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'Den valgte :attribute er ugyldig.',
     'numeric'              => ':attribute skal være et tal.',
     'present'              => 'Attributfeltet skal være til stede.',
@@ -88,19 +93,16 @@ return array(
     'unique'               => ':attribute er allerede taget.',
     'uploaded'             => 'Attributtet kunne ikke uploades.',
     'url'                  => ':attribute formatet er ugyldigt.',
-    "unique_undeleted"     => ":attribute skal være unik.",
-    "non_circular"         => ":attribute må ikke oprette en cirkulær reference.",
-
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
+    'unique_undeleted'     => ':attribute skal være unik.',
+    'non_circular'         => ':attribute må ikke oprette en cirkulær reference.',
+    'disallow_same_pwd_as_user_fields' => 'Adgangskoden må ikke være det samme som brugernavnet.',
+    'letters'              => 'Adgangskoden skal indeholde mindst ét bogstav.',
+    'numbers'              => 'Adgangskoden skal indeholde mindst ét tal.',
+    'case_diff'            => 'Adgangskoden skal bruge både store og små bogstaver.',
+    'symbols'              => 'Adgangskoden skal indeholde specialtegn.',
+    'gte'                  => [
+        'numeric'          => 'Værdien må ikke være negativ'
+    ],
 
 
     /*
@@ -115,11 +117,23 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Attributfeltet indeholder et tegn, der ikke er tilladt.",
-        "email_array"      => "En eller flere e-mailadresser er ugyldige.",
-        "hashed_pass"      => "Din nuværende adgangskode er forkert",
+        'alpha_space' => 'Attributfeltet indeholder et tegn, der ikke er tilladt.',
+        'email_array'      => 'En eller flere e-mailadresser er ugyldige.',
+        'hashed_pass'      => 'Din nuværende adgangskode er forkert',
         'dumbpwd'          => 'Denne adgangskode er for almindelig.',
-        "statuslabel_type" => "Du skal vælge en gyldig statusetiketype",
+        'statuslabel_type' => 'Du skal vælge en gyldig statusetiketype',
+
+        // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
+        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // people won't know how to format. 
+        'purchase_date.date_format'     => ':attribute skal være en gyldig dato i YYYY-MM-DD format',
+        'last_audit_date.date_format'   =>  ':attribute skal være en gyldig dato i YYYY-MM-DD hh:mm:ss format',
+        'expiration_date.date_format'   =>  ':attribute skal være en gyldig dato i YYYY-MM-DD format',
+        'termination_date.date_format'  =>  ':attribute skal være en gyldig dato i YYYY-MM-DD format',
+        'expected_checkin.date_format'  =>  ':attribute skal være en gyldig dato i YYYY-MM-DD format',
+        'start_date.date_format'        =>  ':attribute skal være en gyldig dato i YYYY-MM-DD format',
+        'end_date.date_format'          =>  ':attribute skal være en gyldig dato i YYYY-MM-DD format',
+
     ],
 
     /*
@@ -135,4 +149,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

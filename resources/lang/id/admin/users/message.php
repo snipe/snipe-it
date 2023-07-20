@@ -1,20 +1,24 @@
 <?php
 
-return [
+return array(
 
     'accepted'                  => 'Anda sukses menerima aset ini.',
     'declined'                  => 'Anda sukses menolak aset ini.',
     'bulk_manager_warn'	        => 'Pengguna Anda telah berhasil diperbarui, namun entri pengelola Anda tidak disimpan karena manajer yang Anda pilih juga ada dalam daftar pengguna untuk diedit, dan pengguna mungkin bukan manajer mereka sendiri. Silakan pilih pengguna Anda lagi, tidak termasuk manajernya.',
     'user_exists'               => 'Pengguna sudah ada!',
-    'user_not_found'            => 'Pengguna [:id] tidak terdaftar.',
+    'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Kolom login wajib di-isi',
     'user_password_required'    => 'Kata sandi wajib di-isi.',
     'insufficient_permissions'  => 'Tidak ada hak akses.',
     'user_deleted_warning'      => 'Pengguna ini telah di hapus. Anda harus kembalikan dahulu pengguna ini jika ingin menyunting atau di berikan hak kelola aset.',
     'ldap_not_configured'        => 'Integrasi LDAP belum dikonfigurasi untuk instalasi ini.',
-    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
+    'password_resets_sent'      => 'Pengguna terpilih yang diaktifkan dan memiliki alamat email yang valid telah dikirimi tautan pengaturan ulang kata sandi.',
+    'password_reset_sent'       => 'Tautan reset kata sandi telah dikirim ke :email!',
+    'user_has_no_email'         => 'This user does not have an email address in their profile.',
+    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
 
-    'success' => [
+
+    'success' => array(
         'create'    => 'Pengguna sukses di buat.',
         'update'    => 'Pengguna sukses di perbarui.',
         'update_bulk'    => 'Pengguna berhasil diperbarui!',
@@ -25,9 +29,9 @@ return [
         'unsuspend' => 'Pengguna sukses tidak di tangguhkan.',
         'restored'  => 'Pengguna sukses di kembalikan.',
         'import'    => 'Sukses mengimpor pengguna.',
-    ],
+    ),
 
-    'error' => [
+    'error' => array(
         'create' => 'Terdapat kesalahan ketika membuat pengguna. Silahkan coba kembali.',
         'update' => 'Terdapat masalah ketika memperbarui pengguna. Silahkan coba kembali.',
         'delete' => 'Terdapat masalah ketika menghapus pengguna. Silahkan coba kembali.',
@@ -42,18 +46,22 @@ return [
         'ldap_could_not_search' => 'Gagal mencari server LDAP. Silahkan cek konfigurasi server LDAP di berkas config LDAP. <br>Eror dari server LDAP:',
         'ldap_could_not_get_entries' => 'Gagal menerima catatan dari server LDAP. Silahkan cek konfigurasi server LDAP di berkas config LDAP. <br>Eror dari server LDAP:',
         'password_ldap' => 'Kata sandi untuk akun ini dikelola oleh LDAP / Active Directory. Silakan menghubungi departemen TI Anda untuk mengganti kata sandi Anda.',
-    ],
+    ),
 
-    'deletefile' => [
+    'deletefile' => array(
         'error'   => 'Berkas belum terhapus. Silahkan coba kembali.',
         'success' => 'Berkas sukses di hapus.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Berkas belum terunggah. Silakan coba kembali.',
         'success' => 'Berkas sukses terunggah.',
         'nofiles' => 'Anda belum memilih berkas untuk di unggah',
         'invalidfiles' => 'Satu atau lebih dari file Anda terlalu besar atau jenis berkas yang tidak diperbolehkan. Tipe file diizinkan adalah png, gif, jpg, doc, docx, pdf, dan txt.',
-    ],
+    ),
 
-];
+    'inventorynotification' => array(
+        'error'   => 'This user has no email set.',
+        'success' => 'The user has been notified about their current inventory.'
+    )
+);

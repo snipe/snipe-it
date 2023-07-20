@@ -6,17 +6,43 @@ return [
     'archived'  				=> '已存档',
     'asset'  					=> '资产',
     'bulk_checkout'             => '分配资产',
+    'bulk_checkin'              => '归还资产',
     'checkin'  					=> '借入资产',
     'checkout'  				=> '借出资产',
     'clone'  					=> '复制资产',
     'deployable'  				=> '可部署',
-    'deleted'  					=> '该资产已删除。 <a href="/hardware/:asset_id/restore">点击此处恢复</a>.',
+    'deleted'  					=> '此资产已被删除。',
     'edit'  					=> '编辑资产',
-    'model_deleted'  			=> '这个资产模型将被删除，恢复资产之前需要先恢复模型。<br/> <a href="/hardware/models/:model_id/restore">单击这里备份模型</a>.',
+    'model_deleted'  			=> '这个资源模型已被删除。您必须先还原模型才能还原素材。',
+    'model_invalid'             => '此资产的型号无效。',
+    'model_invalid_fix'         => '在尝试归还或借出资产之前，应编辑资产以更正此问题。',
     'requestable'               => '可申领',
     'requested'				    => '已申请',
+    'not_requestable'           => '不可申领',
+    'requestable_status_warning' => '不可更改申领状态',
     'restore'  					=> '还原资产',
     'pending'  					=> '待处理',
     'undeployable'  			=> '不可部署',
+    'undeployable_tooltip'  	=> '此资产的状态标签为不可部署，此时无法借出。',
     'view'  					=> '查看资产',
+    'csv_error' => '您的CSV文件中有一个错误：',
+    'import_text' => '
+<p>
+    上传一个包含资产历史的CSV文件。“资产”和“用户”必须已存在于系统中，否则将被跳过。历史导入的匹配资产是针对资产标签进行的。我们将尝试根据您提供的用户名以及您在下面选择的条件找到匹配的用户。如果您未选择以下任何条件，它只会尝试匹配您在“管理”&gt; “常规设置”中配置的用户名格式。
+    </p>
+
+    <p>CSV 文件中包含的字段必须与以下标题匹配：<strong>资产标签、姓名、借出日期、归还日期</strong>。任何其他字段都将被忽略。 </p>
+
+    <p>归还日期：空白或未来的归还日期会将物品借出给关联的用户。不包含“归还日期”列，将创建一个今天日期的归还日期</p>
+    ',
+    'csv_import_match_f-l' => '尝试按“名、姓 (jane.smith)” 格式匹配用户',
+    'csv_import_match_initial_last' => '尝试按“名首字母、姓 (jsmith)” 格式匹配用户',
+    'csv_import_match_first' => '尝试按“名 (jane)” 格式匹配用户',
+    'csv_import_match_email' => '尝试按“电子邮件”匹配用户作为用户名',
+    'csv_import_match_username' => '尝试按用户名匹配用户',
+    'error_messages' => '错误信息：',
+    'success_messages' => '成功信息：',
+    'alert_details' => '请参阅下面的详细信息。',
+    'custom_export' => '自定义导出',
+    'mfg_warranty_lookup' => ':manufacturer 保修状态查询',
 ];

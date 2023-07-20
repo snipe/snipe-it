@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => ':attribute musi być plikiem.',
     'filled'               => 'Pole :attribute musi posiadać wartość.',
     'image'                => ':attribute musi być obrazkiem.',
+    'import_field_empty'    => 'Wartość dla :fieldname nie może być pusta.',
     'in'                   => 'Wybrane :attribute jest niewłaściwe.',
     'in_array'             => 'Pole: attribute nie istnieje w: other.',
     'integer'              => ':attribute must musi być liczbą całkowitą.',
     'ip'                   => ':attribute musi być poprawnym adresem IP.',
     'ipv4'                 => 'Atrybut: musi być prawidłowym adresem IPv4.',
     'ipv6'                 => 'Atrybut: musi być prawidłowym adresem IPv6.',
+    'is_unique_department' => ':attribute musi być unikatowy dla tej firmy',
     'json'                 => 'Atrybut: musi być prawidłowym ciągiem JSON.',
     'max'                  => [
         'numeric' => ':attribute nie może być większy niż :max.',
@@ -64,6 +66,9 @@ return array(
         'string'  => ':attribute musi być posiadać minimum :min znaki.',
         'array'   => 'Atrybut: musi zawierać co najmniej: min.',
     ],
+    'starts_with'          => ':attribute musi zaczynać się jednym z następujących wartości: :values.',
+    'ends_with'            => ':attribute musi kończyć się jedną z następujących wartości: :values.',
+
     'not_in'               => 'Wybrany :attribute jest nieprawidłowy.',
     'numeric'              => ':attribute musi być liczbą.',
     'present'              => ':attribute nie może być puste.',
@@ -88,19 +93,16 @@ return array(
     'unique'               => ':attribute został już wzięty.',
     'uploaded'             => 'Nie udało się przesłać atrybutu:.',
     'url'                  => 'Format pola :attribute jest niewłaściwy.',
-    "unique_undeleted"     => "Wartość :attribute musi być unikalna.",
-    "non_circular"         => ":attribute nie może tworzyć odwołań cyklicznych.",
-
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
+    'unique_undeleted'     => 'Wartość :attribute musi być unikalna.',
+    'non_circular'         => ':attribute nie może tworzyć odwołań cyklicznych.',
+    'disallow_same_pwd_as_user_fields' => 'Hasło nie może być takie samo jak nazwa użytkownika.',
+    'letters'              => 'Hasło musi zawierać co najmniej jedną literę.',
+    'numbers'              => 'Hasło musi zawierać co najmniej jedną cyfrę.',
+    'case_diff'            => 'Hasło musi zawierać małe i wielkie litery.',
+    'symbols'              => 'Hasło musi zawierać znaki specjalne.',
+    'gte'                  => [
+        'numeric'          => 'Wartość nie może być ujemna'
+    ],
 
 
     /*
@@ -115,11 +117,23 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Pole: attribute zawiera znak, który nie jest dozwolony.",
-        "email_array"      => "Jeden lub więcej adresów e-mail jest nieprawidłowy.",
-        "hashed_pass"      => "Twoje bieżące hasło jest niepoprawne",
+        'alpha_space' => 'Pole: attribute zawiera znak, który nie jest dozwolony.',
+        'email_array'      => 'Jeden lub więcej adresów e-mail jest nieprawidłowy.',
+        'hashed_pass'      => 'Twoje bieżące hasło jest niepoprawne',
         'dumbpwd'          => 'To hasło jest zbyt powszechne.',
-        "statuslabel_type" => "Musisz wybrać odpowiedni typ etykiety statusu",
+        'statuslabel_type' => 'Musisz wybrać odpowiedni typ etykiety statusu',
+
+        // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
+        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // people won't know how to format. 
+        'purchase_date.date_format'     => ':attribute musi być prawidłową datą w formacie YYYY-MM-DD',
+        'last_audit_date.date_format'   =>  ':attribute musi być prawidłową datą w formacie YYYY-MM-DD hh:mm:ss',
+        'expiration_date.date_format'   =>  ':attribute musi być prawidłową datą w formacie YYYY-MM-DD',
+        'termination_date.date_format'  =>  ':attribute musi być prawidłową datą w formacie YYYY-MM-DD',
+        'expected_checkin.date_format'  =>  ':attribute musi być prawidłową datą w formacie YYYY-MM-DD',
+        'start_date.date_format'        =>  ':attribute musi być prawidłową datą w formacie YYYY-MM-DD',
+        'end_date.date_format'          =>  ':attribute musi być prawidłową datą w formacie YYYY-MM-DD',
+
     ],
 
     /*
@@ -135,4 +149,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

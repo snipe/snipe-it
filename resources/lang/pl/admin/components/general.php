@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'component_name'                  => 'Nazwa składnika',
     'checkin'                             => 'Odbiór składnika',
     'checkout'                             => 'Wydanie składnika',
@@ -12,4 +12,5 @@ return [
     'remaining' 			             => 'Pozostało',
     'total' 			                 => 'Suma',
     'update'                            => 'Aktualizacja składnika',
-];
+    'checkin_limit'            => 'Ilość przyjęta musi być równa lub mniejsza niż :assigned_qty'
+);

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Helpers;
-
 use App\Models\Accessory;
 use App\Models\Component;
 use App\Models\Consumable;
@@ -13,6 +12,7 @@ use App\Models\Statuslabel;
 use Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Image;
+use Carbon\Carbon;
 
 class Helper
 {
@@ -23,12 +23,23 @@ class Helper
      * @since [v2.0]
      * @return string
      */
-    public static function parseEscapedMarkedown($str)
+    public static function parseEscapedMarkedown($str = null)
     {
         $Parsedown = new \Parsedown();
+        $Parsedown->setSafeMode(true);
 
         if ($str) {
-            return $Parsedown->text(e($str));
+            return $Parsedown->text($str);
+        }
+    }
+
+    public static function parseEscapedMarkedownInline($str = null)
+    {
+        $Parsedown = new \Parsedown();
+        $Parsedown->setSafeMode(true);
+
+        if ($str) {
+            return $Parsedown->line($str);
         }
     }
 
@@ -333,7 +344,11 @@ class Helper
             '#92896B',
         ];
 
+        $total_colors = count($colors);
 
+        if ($index >= $total_colors) {
+            $index = $index - $total_colors;
+        }
 
         return $colors[$index];
     }
@@ -402,6 +417,19 @@ class Helper
      */
     public static function ParseFloat($floatString)
     {
+        /*******
+         * 
+         * WARNING: This does conversions based on *locale* - a Unix-ey-like thing.
+         * 
+         * Everything else in the system tends to convert based on the Snipe-IT settings
+         * 
+         * So it's very likely this is *not* what you want - instead look for the new
+         * 
+         * ParseCurrency($currencyString)
+         * 
+         * Which should be directly below here
+         * 
+         */
         $LocaleInfo = localeconv();
         $floatString = str_replace(',', '', $floatString);
         $floatString = str_replace($LocaleInfo['decimal_point'], '.', $floatString);
@@ -415,6 +443,26 @@ class Helper
         $floatString = str_replace($currencySymbol, '', $floatString);
 
         return floatval($floatString);
+    }
+    
+    /**
+     * Format currency using comma or period for thousands, and period or comma for decimal, based on settings.
+     * 
+     * @author [B. Wetherington] [<bwetherington@grokability.com>]
+     * @since [v5.2]
+     * @return Float
+     */
+    public static function ParseCurrency($currencyString) {
+        $without_currency = str_replace(Setting::getSettings()->default_currency, '', $currencyString); //generally shouldn't come up, since we don't do this in fields, but just in case it does...
+        if(Setting::getSettings()->digit_separator=='1.234,56') {
+            //EU format
+            $without_thousands = str_replace('.', '', $without_currency);
+            $corrected_decimal = str_replace(',', '.', $without_thousands);
+        } else {
+            $without_thousands = str_replace(',', '', $without_currency);
+            $corrected_decimal = $without_thousands;  // decimal is already OK
+        }
+        return floatval($corrected_decimal);
     }
 
     /**
@@ -494,20 +542,23 @@ class Helper
      * @since [v2.5]
      * @return array
      */
-    public static function categoryTypeList()
+    public static function categoryTypeList($selection=null)
     {
         $category_types = [
             '' => '',
-            'accessory' => 'Accessory',
-            'asset' => 'Asset',
-            'consumable' => 'Consumable',
-            'component' => 'Component',
-            'license' => 'License',
+            'accessory' => trans('general.accessory'),
+            'asset' => trans('general.asset'),
+            'consumable' => trans('general.consumable'),
+            'component' => trans('general.component'),
+            'license' => trans('general.license'),
         ];
 
+        if ($selection != null){
+            return $category_types[strtolower($selection)];
+        }
+        else
         return $category_types;
     }
-
     /**
      * Get the list of custom fields in an array to make a dropdown menu
      *
@@ -591,7 +642,7 @@ class Helper
     {
         $consumables = Consumable::withCount('consumableAssignments as consumable_assignments_count')->whereNotNull('min_amt')->get();
         $accessories = Accessory::withCount('users as users_count')->whereNotNull('min_amt')->get();
-        $components = Component::withCount('assets as assets_count')->whereNotNull('min_amt')->get();
+        $components = Component::whereNotNull('min_amt')->get();
 
         $avail_consumables = 0;
         $items_array = [];
@@ -636,7 +687,7 @@ class Helper
         }
 
         foreach ($components as $component) {
-            $avail = $component->qty - $component->assets_count;
+            $avail = $component->numRemaining();
             if ($avail < ($component->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
                 if ($component->qty > 0) {
                     $percent = number_format((($avail / $component->qty) * 100), 0);
@@ -809,6 +860,16 @@ class Helper
         return preg_replace('/\s+/u', '_', trim($string));
     }
 
+    /**
+     * Return an array (or null) of the the raw and formatted date object for easy use in
+     * the API and the bootstrap table listings.
+     *
+     * @param $date
+     * @param $type
+     * @param $array
+     * @return array|string|null
+     */
+
     public static function getFormattedDateObject($date, $type = 'datetime', $array = true)
     {
         if ($date == '') {
@@ -816,21 +877,42 @@ class Helper
         }
 
         $settings = Setting::getSettings();
-        $tmp_date = new \Carbon($date);
 
-        if ($type == 'datetime') {
-            $dt['datetime'] = $tmp_date->format('Y-m-d H:i:s');
-            $dt['formatted'] = $tmp_date->format($settings->date_display_format.' '.$settings->time_display_format);
-        } else {
-            $dt['date'] = $tmp_date->format('Y-m-d');
-            $dt['formatted'] = $tmp_date->format($settings->date_display_format);
+        /**
+         * Wrap this in a try/catch so that if Carbon crashes, for example if the $date value
+         * isn't actually valid, we don't crash out completely.
+         *
+         * While this *shouldn't* typically happen since we validate dates before entering them
+         * into the database (and we use date/datetime fields for native fields in the system),
+         * it is a possible scenario that a custom field could be created as an "ANY" field, data gets
+         * added, and then the custom field format gets edited later. If someone put bad data in the
+         * database before then - or if they manually edited the field's value - it will crash.
+         *
+         */
+
+
+        try {
+            $tmp_date = new \Carbon($date);
+
+            if ($type == 'datetime') {
+                $dt['datetime'] = $tmp_date->format('Y-m-d H:i:s');
+                $dt['formatted'] = $tmp_date->format($settings->date_display_format.' '.$settings->time_display_format);
+            } else {
+                $dt['date'] = $tmp_date->format('Y-m-d');
+                $dt['formatted'] = $tmp_date->format($settings->date_display_format);
+            }
+
+            if ($array == 'true') {
+                return $dt;
+            }
+
+            return $dt['formatted'];
+
+        } catch (\Exception $e) {
+            \Log::warning($e);
+            return $date.' (Invalid '.$type.' value.)';
         }
 
-        if ($array == 'true') {
-            return $dt;
-        }
-
-        return $dt['formatted'];
     }
 
     // Nicked from Drupal :)
@@ -1025,5 +1107,131 @@ class Helper
         }
 
         return $file_name;
+    }
+
+
+    /**
+     * Universal helper to show file size in human-readable formats
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since 5.0
+     *
+     * @return string[]
+     */
+    public static function formatFilesizeUnits($bytes)
+    {
+        if ($bytes >= 1073741824)
+        {
+            $bytes = number_format($bytes / 1073741824, 2) . ' GB';
+        }
+        elseif ($bytes >= 1048576)
+        {
+            $bytes = number_format($bytes / 1048576, 2) . ' MB';
+        }
+        elseif ($bytes >= 1024)
+        {
+            $bytes = number_format($bytes / 1024, 2) . ' KB';
+        }
+        elseif ($bytes > 1)
+        {
+            $bytes = $bytes . ' bytes';
+        }
+        elseif ($bytes == 1)
+        {
+            $bytes = $bytes . ' byte';
+        }
+        else
+        {
+            $bytes = '0 bytes';
+        }
+
+        return $bytes;
+    }
+
+    /**
+     * This is weird but used by the side nav to determine which URL to point the user to
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since 5.0
+     *
+     * @return string[]
+     */
+    public static function SettingUrls(){
+        $settings=['#','fields.index', 'statuslabels.index', 'models.index', 'categories.index', 'manufacturers.index', 'suppliers.index', 'departments.index', 'locations.index', 'companies.index', 'depreciations.index'];
+
+        return $settings;
+        }
+
+
+    /**
+     * Generic helper (largely used by livewire right now) that returns the font-awesome icon
+     * for the object type.
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since 6.1.0
+     *
+     * @return string
+     */
+    public static function iconTypeByItem($item) {
+
+        switch ($item) {
+            case 'asset':
+                return 'fas fa-barcode';
+                break;
+            case 'accessory':
+                return 'fas fa-keyboard';
+                break;
+            case 'component':
+                return 'fas fa-hdd';
+                break;
+            case 'consumable':
+                return 'fas fa-tint';
+                break;
+            case 'license':
+                return 'far fa-save';
+                break;
+            case 'location':
+                return 'fas fa-map-marker-alt';
+                break;
+            case 'user':
+                return 'fas fa-user';
+                break;
+        }
+
+    }
+
+
+     /*
+     * This is a shorter way to see if the app is in demo mode.
+     *
+     * This makes it cleanly available in blades and in controllers, e.g.
+     *
+     * Blade:
+     * {{ Helper::isDemoMode() ? ' disabled' : ''}} for form blades where we need to disable a form
+     *
+     * Controller:
+     * if (Helper::isDemoMode()) {
+     *      // don't allow the thing
+     * }
+     * @todo - use this everywhere else in the app where we have very long if/else config('app.lock_passwords') stuff
+     */
+    public static function isDemoMode() {
+        if (config('app.lock_passwords') === true) {
+            return true;
+            \Log::debug('app locked!');
+        }
+
+        return false;
+    }
+
+
+    /*
+     * I know it's gauche  to return a shitty HTML string, but this is just a helper and since it will be the same every single time,
+     * it seemed pretty safe to do here. Don't you judge me.
+     */
+    public static function showDemoModeFieldWarning() {
+        if (Helper::isDemoMode()) {
+            return "<p class=\"text-warning\"><i class=\"fas fa-lock\"></i>" . trans('general.feature_disabled') . "</p>";
+        }
     }
 }

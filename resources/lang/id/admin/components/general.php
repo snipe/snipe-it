@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'component_name'                  => 'Nama Komponen',
     'checkin'                             => 'Komponen Masuk',
     'checkout'                             => 'Komponen Keluar',
@@ -12,4 +12,5 @@ return [
     'remaining' 			             => 'Sisa',
     'total' 			                 => 'Total',
     'update'                            => 'Perbarui Komponen',
-];
+    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
+);

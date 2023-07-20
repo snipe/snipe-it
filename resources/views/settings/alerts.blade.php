@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Update Alert Settings
+    {{ trans('admin/settings/general.alert_title') }}
     @parent
 @stop
 
@@ -32,7 +32,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fas fa-bell"></i> Alerts
+                        <i class="fas fa-bell"></i> {{ trans('admin/settings/general.alerts') }}
                     </h2>
                 </div>
                 <div class="box-body">
@@ -42,23 +42,21 @@
 
                         <!-- Alerts Enabled -->
                         <div class="form-group {{ $errors->has('alerts_enabled') ? 'error' : '' }}">
-                            <div class="col-md-3">
-                                {{ Form::label('alerts_enabled', trans('admin/settings/general.alerts_enabled')) }}
-                            </div>
-                            <div class="col-md-5">
-                                {{ Form::checkbox('alerts_enabled', '1', Request::old('alerts_enabled', $setting->alerts_enabled),array('class' => 'minimal')) }}
-                                {{ trans('general.yes') }}
+                            <div class="col-md-9 col-md-offset-3">
+                                <label class="form-control">
+                                    {{ Form::checkbox('alerts_enabled', '1', Request::old('alerts_enabled', $setting->alerts_enabled)) }}
+                                    {{  trans('admin/settings/general.alerts_enabled') }}
+                                </label>
                             </div>
                         </div>
 
                         <!-- Menu Alerts Enabled -->
                         <div class="form-group {{ $errors->has('show_alerts_in_menu') ? 'error' : '' }}">
-                            <div class="col-md-3">
-                                {{ Form::label('show_alerts_in_menu', trans('admin/settings/general.show_alerts_in_menu')) }}
-                            </div>
-                            <div class="col-md-5">
-                                {{ Form::checkbox('show_alerts_in_menu', '1', Request::old('show_alerts_in_menu', $setting->show_alerts_in_menu),array('class' => 'minimal')) }}
-                                {{ trans('general.yes') }}
+                            <div class="col-md-9 col-md-offset-3">
+                                <label class="form-control">
+                                    {{ Form::checkbox('show_alerts_in_menu', '1', Request::old('show_alerts_in_menu', $setting->show_alerts_in_menu)) }}
+                                    {{ trans('admin/settings/general.show_alerts_in_menu') }}
+                                </label>
                             </div>
                         </div>
 
@@ -73,7 +71,7 @@
                                 {{ Form::text('alert_email', old('alert_email', $setting->alert_email), array('class' => 'form-control','placeholder' => 'admin@yourcompany.com')) }}
                                 {!! $errors->first('alert_email', '<span class="alert-msg" aria-hidden="true">:message</span><br>') !!}
 
-                                <p class="help-block">Email addresses or distribution lists you want alerts to be sent to, comma separated</p>
+                                <p class="help-block">{{ trans('admin/settings/general.alert_email_help') }}</p>
 
 
                             </div>

@@ -4,7 +4,7 @@ namespace App\Http\Transformers;
 
 use App\Models\PredefinedKit;
 use App\Models\SnipeModel;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 
 /**

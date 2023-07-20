@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>คำเตือน: </strong> สินทรัพย์นี้ถูกกำหนดสถานะให้ไม่สามารถใช้งานได้ หากสถานะนี้ถูกเปลี่ยน กรุณาอัพเดทสถานะสินทรัพย์ด้วย',
     'does_not_exist' 	=> 'ไม่มีสินทรัพย์',
-    'does_not_exist_or_not_requestable' => 'พยายามได้ดี. เนื้อหาดังกล่าวไม่มีอยู่หรือไม่ได้รับการร้องขอ',
+    'does_not_exist_or_not_requestable' => 'สินทรัพย์นั้นไม่มีอยู่หรือไม่สามารถร้องขอได้',
     'assoc_users'	 	=> 'ขณะนี้มีการตรวจสอบเนื้อหานี้แก่ผู้ใช้และไม่สามารถลบออกได้ โปรดตรวจสอบเนื้อหาเป็นครั้งแรกจากนั้นลองลบอีกครั้ง',
 
     'create' => [
@@ -16,17 +16,21 @@ return [
         'error'   			=> 'ไม่ได้อัปเดตเนื้อหาโปรดลองอีกครั้ง',
         'success' 			=> 'อัปเดตเนื้อหาสำเร็จแล้ว',
         'nothing_updated'	=>  'ไม่มีการเลือกเขตข้อมูลดังนั้นไม่มีการอัปเดตอะไรเลย',
+        'no_assets_selected'  =>  'ไม่มีการเลือกรายการสินทรัพย์ จึงไม่มีการอัพเดท',
     ],
 
     'restore' => [
         'error'   		=> 'ไม่ได้กู้คืนเนื้อหาโปรดลองอีกครั้ง',
         'success' 		=> 'กู้คืนเนื้อหาเรียบร้อยแล้ว',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
         'error'   		=> 'การตรวจสอบสินทรัพย์ไม่สำเร็จ กรุณาลองอีกครั้ง.',
         'success' 		=> 'บันทึกการตรวจสอบสินทรัพย์สำเร็จแล้ว',
     ],
+
 
     'deletefile' => [
         'error'   => 'ไฟล์ไม่ถูกลบ กรุณาลองอีกครั้ง.',
@@ -46,7 +50,10 @@ return [
         'success'               => 'ไฟล์ของคุณถูกนำเข้าแล้ว',
         'file_delete_success'   => 'ไฟล์ของคุณถูกลบเรียบร้อยแล้ว',
         'file_delete_error'      => 'ไม่สามารถลบไฟล์ได้',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'คุณแน่ใจหรือไม่ว่าต้องการลบเนื้อหานี้',

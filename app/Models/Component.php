@@ -33,10 +33,11 @@ class Component extends SnipeModel
         'name'           => 'required|min:3|max:255',
         'qty'            => 'required|integer|min:1',
         'category_id'    => 'required|integer|exists:categories,id',
-        'company_id'     => 'integer|nullable',
+        'supplier_id'    => 'nullable|integer|exists:suppliers,id',
+        'company_id'     => 'integer|nullable|exists:companies,id',
         'min_amt'        => 'integer|min:0|nullable',
-        'purchase_date'  => 'date|nullable',
-        'purchase_cost'  => 'numeric|nullable',
+        'purchase_date'   => 'date_format:Y-m-d|nullable',
+        'purchase_cost'  => 'numeric|nullable|gte:0',
     ];
 
     /**
@@ -57,6 +58,7 @@ class Component extends SnipeModel
     protected $fillable = [
         'category_id',
         'company_id',
+        'supplier_id',
         'location_id',
         'name',
         'purchase_cost',
@@ -65,6 +67,7 @@ class Component extends SnipeModel
         'order_number',
         'qty',
         'serial',
+        'notes',
     ];
 
     use Searchable;
@@ -74,7 +77,7 @@ class Component extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['name', 'order_number', 'serial', 'purchase_cost', 'purchase_date'];
+    protected $searchableAttributes = ['name', 'order_number', 'serial', 'purchase_cost', 'purchase_date', 'notes'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -85,7 +88,26 @@ class Component extends SnipeModel
         'category'     => ['name'],
         'company'      => ['name'],
         'location'     => ['name'],
+        'supplier'     => ['name'],
     ];
+
+
+    /**
+     * Establishes the components -> action logs -> uploads relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v6.1.13]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function uploads()
+    {
+        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')
+            ->where('item_type', '=', self::class)
+            ->where('action_type', '=', 'uploaded')
+            ->whereNotNull('filename')
+            ->orderBy('created_at', 'desc');
+    }
+
 
     /**
      * Establishes the component -> location relationship
@@ -108,7 +130,7 @@ class Component extends SnipeModel
      */
     public function assets()
     {
-        return $this->belongsToMany(\App\Models\Asset::class, 'components_assets')->withPivot('id', 'assigned_qty', 'created_at', 'user_id');
+        return $this->belongsToMany(\App\Models\Asset::class, 'components_assets')->withPivot('id', 'assigned_qty', 'created_at', 'user_id', 'note');
     }
 
     /**
@@ -147,6 +169,18 @@ class Component extends SnipeModel
     public function category()
     {
         return $this->belongsTo(\App\Models\Category::class, 'category_id');
+    }
+
+    /**
+     * Establishes the item -> supplier relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v6.1.1]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function supplier()
+    {
+        return $this->belongsTo(\App\Models\Supplier::class, 'supplier_id');
     }
 
     /**
@@ -227,5 +261,18 @@ class Component extends SnipeModel
     public function scopeOrderCompany($query, $order)
     {
         return $query->leftJoin('companies', 'components.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
+    }
+
+    /**
+     * Query builder scope to order on supplier
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderSupplier($query, $order)
+    {
+        return $query->leftJoin('suppliers', 'components.supplier_id', '=', 'suppliers.id')->orderBy('suppliers.name', $order);
     }
 }

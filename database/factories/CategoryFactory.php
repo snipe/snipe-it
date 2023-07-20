@@ -2,16 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
-/*
-|--------------------------------------------------------------------------
-| Category Factories
-|--------------------------------------------------------------------------
-|
-| Factories related exclusively to creating categories and the various states..
-|
-*/
+use App\Models\Category;
 
 class CategoryFactory extends Factory
 {
@@ -20,7 +13,7 @@ class CategoryFactory extends Factory
      *
      * @var string
      */
-    protected $model = \App\Models\Category::class;
+    protected $model = Category::class;
 
     /**
      * Define the model's default state.
@@ -30,162 +23,153 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
+            'name' => $this->faker->catchPhrase(),
+            'category_type' => 'asset',
             'checkin_email' => $this->faker->boolean(),
             'eula_text' => $this->faker->paragraph(),
             'require_acceptance' => false,
             'use_default_eula' => $this->faker->boolean(),
-            'user_id' => 1,
+            'user_id' => User::factory()->superuser(),
         ];
     }
 
+    // usage: Category::factory()->assetLaptopCategory();
     public function assetLaptopCategory()
     {
-        return $this->state(function () {
-            return [
-                'name' => 'Laptops',
-                'category_type' => 'asset',
-                'require_acceptance' => true,
-            ];
-        });
+        return $this->state([
+            'name' => 'Laptops',
+            'category_type' => 'asset',
+            'require_acceptance' => true,
+        ]);
     }
 
+    // usage: Category::factory()->assetDesktopCategory();
     public function assetDesktopCategory()
     {
-        return $this->state(function () {
-            return [
-                'name' => 'Desktops',
-                'category_type' => 'asset',
-            ];
-        });
+        return $this->state([
+            'name' => 'Desktops',
+            'category_type' => 'asset',
+            'require_acceptance' => true,
+        ]);
     }
 
+    // usage: Category::factory()->assetDisplayCategory();
     public function assetDisplayCategory()
     {
-        return $this->state(function () {
-            return [
-                'name' => 'Displays',
-                'category_type' => 'asset',
-            ];
-        });
+        return $this->state([
+            'name' => 'Displays',
+            'category_type' => 'asset',
+        ]);
     }
 
-    public function assetTabletCategory()
-    {
-        return $this->state(function () {
-            return [
-                'name' => 'Tablets',
-                'category_type' => 'asset',
-            ];
-        });
-    }
+     // usage: Category::factory()->assetTabletCategory();
+     public function assetTabletCategory()
+     {
+         return $this->state([
+             'name' => 'Tablets',
+             'category_type' => 'asset',
+         ]);
+     }
 
-    public function assetMobileCategory()
-    {
-        return $this->state(function () {
-            return [
-                'name' => 'Mobile Phones',
-                'category_type' => 'asset',
-            ];
-        });
-    }
+     // usage: Category::factory()->assetMobileCategory();
+     public function assetMobileCategory()
+     {
+         return $this->state([
+             'name' => 'Mobile Phones',
+             'category_type' => 'asset',
+         ]);
+     }
 
-    public function assetConferenceCategory()
-    {
-        return $this->state(function () {
-            return [
-                'name' => 'Conference Phones',
-                'category_type' => 'asset',
-            ];
-        });
-    }
+     // usage: Category::factory()->assetConferenceCategory();
+     public function assetConferenceCategory()
+     {
+         return $this->state([
+             'name' => 'Conference Phones',
+             'category_type' => 'asset',
+         ]);
+     }
 
-    public function assetVoipCategory()
-    {
-        return $this->state(function () {
-            return [
-                'name' => 'VOIP Phones',
-                'category_type' => 'asset',
-            ];
-        });
-    }
 
-    public function accessoryKeyboardCategory()
-    {
-        return $this->state(function () {
-            return [
-                'name' => 'Keyboards',
-                'category_type' => 'accessory',
-            ];
-        });
-    }
+     // usage: Category::factory()->assetVoipCategory();
+     public function assetVoipCategory()
+     {
+         return $this->state([
+             'name' => 'VOIP Phones',
+             'category_type' => 'asset',
+         ]);
+     }
 
-    public function accessoryMouseCategory()
-    {
-        return $this->state(function () {
-            return [
-                'name' => 'Mouse',
-                'category_type' => 'accessory',
-            ];
-        });
-    }
+     // usage: Category::factory()->accessoryKeyboardCategory();
+     public function accessoryKeyboardCategory()
+     {
+         return $this->state([
+             'name' => 'Keyboards',
+             'category_type' => 'accessory',
+         ]);
+     }
 
-    public function componentHddCategory()
-    {
-        return $this->state(function () {
-            return [
-                'name' => 'HDD/SSD',
-                'category_type' => 'component',
-            ];
-        });
-    }
 
-    public function componentRamCategory()
-    {
-        return $this->state(function () {
-            return [
-                'name' => 'RAM',
-                'category_type' => 'component',
-            ];
-        });
-    }
+     // usage: Category::factory()->accessoryMouseCategory();
+     public function accessoryMouseCategory()
+     {
+         return $this->state([
+             'name' => 'Mouse',
+             'category_type' => 'accessory',
+         ]);
+     }
 
-    public function consumablePaperCategory()
-    {
-        return $this->state(function () {
-            return [
-                'name' => 'Printer Paper',
-                'category_type' => 'consumable',
-            ];
-        });
-    }
+     // usage: Category::factory()->componentHddCategory();
+     public function componentHddCategory()
+     {
+         return $this->state([
+             'name' => 'HDD/SSD',
+             'category_type' => 'component',
+         ]);
+     }
 
-    public function consumableInkCategory()
-    {
-        return $this->state(function () {
-            return [
-                'name' => 'Printer Ink',
-                'category_type' => 'consumable',
-            ];
-        });
-    }
+     // usage: Category::factory()->componentRamCategory();
+     public function componentRamCategory()
+     {
+         return $this->state([
+             'name' => 'RAM',
+             'category_type' => 'component',
+         ]);
+     }
 
-    public function licenseGraphicsCategory()
-    {
-        return $this->state(function () {
-            return [
-                'name' => 'Graphics Software',
-                'category_type' => 'license',
-            ];
-        });
-    }
+     // usage: Category::factory()->consumablePaperCategory();
+     public function consumablePaperCategory()
+     {
+         return $this->state([
+             'name' => 'Printer Paper',
+             'category_type' => 'consumable',
+         ]);
+     }
 
-    public function licenseOfficeCategory()
-    {
-        return $this->state(function () {
-            return [
-                'name' => 'Office Software',
-                'category_type' => 'license',
-            ];
-        });
-    }
+     // usage: Category::factory()->consumableInkCategory();
+     public function consumableInkCategory()
+     {
+         return $this->state([
+             'name' => 'Printer Ink',
+             'category_type' => 'consumable',
+         ]);
+     }
+
+     // usage: Category::factory()->licenseGraphicsCategory();
+     public function licenseGraphicsCategory()
+     {
+         return $this->state([
+             'name' => 'Graphics Software',
+             'category_type' => 'license',
+         ]);
+     }
+
+     // usage: Category::factory()->licenseGraphicsCategory();
+     public function licenseOfficeCategory()
+     {
+         return $this->state([
+             'name' => 'Office Software',
+             'category_type' => 'license',
+         ]);
+     }
+
 }

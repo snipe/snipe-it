@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Active',
     'allow'  				=> 'Дозволити',
     'checkedout'  			=> 'Активи',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'Email',
     'employee_num'      	=> '№ співробітника',
     'first_name' 			=> 'Ім\'я',
-    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Успадкувати',
     'job' 					=> 'Посада',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Показати поточних користувачів',
     'show_deleted'          => 'Показати видалених користувачів',
     'title' 				=> 'Назва',
-    'to_restore_them'		=> 'щоб відновити їх.',
+	'to_restore_them'		=> 'щоб відновити їх.',
     'updateuser' 			=> 'Оновити користувача',
     'username' 				=> 'Ім\'я кристувача',
-    'user_deleted_text' 	=> 'Цього користувача було позначено видаленим.',
+	'user_deleted_text' 	=> 'Цього користувача було позначено видаленим.',
     'username_note' 		=> '(This is used for Active Directory binding only, not for login.)',
     'cloneuser'             => 'Клонувати користувача',
     'viewusers' 			=> 'Переглянути користувачів',
-];
+);

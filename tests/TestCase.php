@@ -1,35 +1,42 @@
 <?php
 
-class TestCase extends Illuminate\Foundation\Testing\TestCase
+namespace Tests;
+
+use App\Http\Middleware\SecurityHeaders;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use RuntimeException;
+use Tests\Support\CustomTestMacros;
+use Tests\Support\InteractsWithAuthentication;
+use Tests\Support\InteractsWithSettings;
+
+abstract class TestCase extends BaseTestCase
 {
-    /**
-     * The base URL to use while testing the application.
-     *
-     * @var string
-     */
-    protected $baseUrl = 'http://localhost:8000';
+    use CreatesApplication;
+    use CustomTestMacros;
+    use InteractsWithAuthentication;
+    use LazilyRefreshDatabase;
 
-    /**
-     * Creates the application.
-     *
-     * @return \Illuminate\Foundation\Application
-     */
-    public function createApplication()
-    {
-        $app = require __DIR__.'/../bootstrap/app.php';
-        $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
-
-        return $app;
-    }
+    private array $globallyDisabledMiddleware = [
+        SecurityHeaders::class,
+    ];
 
     protected function setUp(): void
     {
-        parent::setUp();
-    }
+        if (!file_exists(realpath(__DIR__ . '/../') . '/.env.testing')) {
+            throw new RuntimeException(
+                '.env.testing file does not exist. Aborting to avoid wiping your local database'
+            );
+        }
 
-    protected function tearDown(): void
-    {
-        //Artisan::call('migrate:reset');
-        parent::tearDown();
+        parent::setUp();
+
+        $this->withoutMiddleware($this->globallyDisabledMiddleware);
+
+        if (collect(class_uses_recursive($this))->contains(InteractsWithSettings::class)) {
+            $this->initializeSettings();
+        }
+
+        $this->registerCustomMacros();
     }
 }

@@ -79,6 +79,8 @@ class LocationsController extends Controller
         $location->ldap_ou = $request->input('ldap_ou');
         $location->manager_id = $request->input('manager_id');
         $location->user_id = Auth::id();
+        $location->phone = request('phone');
+        $location->fax = request('fax');
 
         $location = $request->handleImages($location);
 
@@ -139,6 +141,8 @@ class LocationsController extends Controller
         $location->state = $request->input('state');
         $location->country = $request->input('country');
         $location->zip = $request->input('zip');
+        $location->phone = request('phone');
+        $location->fax = request('fax');
         $location->ldap_ou = $request->input('ldap_ou');
         $location->manager_id = $request->input('manager_id');
 
@@ -211,23 +215,65 @@ class LocationsController extends Controller
 
     public function print_assigned($id)
     {
-        $location = Location::where('id', $id)->first();
-        $parent = Location::where('id', $location->parent_id)->first();
-        $manager = User::where('id', $location->manager_id)->first();
-        $users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
-        $assets = Asset::where('assigned_to', $id)->where('assigned_type', Location::class)->with('model', 'model.category')->get();
 
-        return view('locations/print')->with('assets', $assets)->with('users', $users)->with('location', $location)->with('parent', $parent)->with('manager', $manager);
+        if ($location = Location::where('id', $id)->first()) {
+            $parent = Location::where('id', $location->parent_id)->first();
+            $manager = User::where('id', $location->manager_id)->first();
+            $users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
+            $assets = Asset::where('assigned_to', $id)->where('assigned_type', Location::class)->with('model', 'model.category')->get();
+            return view('locations/print')->with('assets', $assets)->with('users', $users)->with('location', $location)->with('parent', $parent)->with('manager', $manager);
+
+        }
+
+        return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist'));
+
+
+
     }
+
+
+    /**
+     * Returns a view that presents a form to clone a location.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $locationId
+     * @since [v6.0.14]
+     * @return View
+     */
+    public function getClone($locationId = null)
+    {
+        $this->authorize('create', Location::class);
+
+        // Check if the asset exists
+        if (is_null($location_to_clone = Location::find($locationId))) {
+            // Redirect to the asset management page
+            return redirect()->route('licenses.index')->with('error', trans('admin/locations/message.does_not_exist'));
+        }
+
+        $location = clone $location_to_clone;
+
+        // unset these values
+        $location->id = null;
+        $location->image = null;
+
+        return view('locations/edit')
+            ->with('item', $location);
+    }
+
 
     public function print_all_assigned($id)
     {
-        $location = Location::where('id', $id)->first();
-        $parent = Location::where('id', $location->parent_id)->first();
-        $manager = User::where('id', $location->manager_id)->first();
-        $users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
-        $assets = Asset::where('location_id', $id)->with('model', 'model.category')->get();
+        if ($location = Location::where('id', $id)->first()) {
+            $parent = Location::where('id', $location->parent_id)->first();
+            $manager = User::where('id', $location->manager_id)->first();
+            $users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
+            $assets = Asset::where('location_id', $id)->with('model', 'model.category')->get();
+            return view('locations/print')->with('assets', $assets)->with('users', $users)->with('location', $location)->with('parent', $parent)->with('manager', $manager);
 
-        return view('locations/print')->with('assets', $assets)->with('users', $users)->with('location', $location)->with('parent', $parent)->with('manager', $manager);
+        }
+        return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist'));
+
+
+
     }
 }

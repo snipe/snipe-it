@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'Un utente ha accettato un elemento',
+    'acceptance_asset_declined' => 'Un utente ha rifiutato un elemento',
     'a_user_canceled' => 'Un utente ha annullato una richiesta di articolo sul sito web',
     'a_user_requested' => 'Un utente ha richiesto un elemento tramite il sito web',
     'accessory_name' => 'Nome accessorio:',
@@ -41,6 +43,7 @@ return [
     'login_first_admin' => 'Accedi alla nuova installazione di Snipe-IT utilizzando le seguenti credenziali:',
     'login' => 'Accesso:',
     'Low_Inventory_Report' => 'Rapporto di inventario basso',
+    'inventory_report' => 'Rapporto Inventario',
     'min_QTY' => 'Min QTY',
     'name' => 'Nome',
     'new_item_checked' => 'Un nuovo elemento è stato controllato sotto il tuo nome, i dettagli sono sotto.',
@@ -59,7 +62,7 @@ return [
     'test_mail_text' => 'Questo è un test del Snipe-IT Asset Management System. Se hai questo, la posta è in funzione :)',
     'the_following_item' => 'La seguente voce è stata selezionata:',
     'low_inventory_alert' => 'C\'è :count elemento che è al di sotto del livello di scorta minima o lo sarà a breve. |Ci sono :count elementi che sono al di sotto del livello di scorta minima o lo saranno a breve.',
-    'assets_warrantee_alert' => 'C\'è :count bene con una garanzia in scadenza tra :threshold giorni.|Ci sono :count beni che hanno le garanzie in scandenza tra :threshold giorni.',
+    'assets_warrantee_alert' => 'C\'è :count bene con garanzia in scadenza nei prossimi :threshold giorni.|Ci sono :count beni con garanzia in scadenza nei prossimi :threshold giorni.',
     'license_expiring_alert' => 'Tra :threshold giorni sta per scadere :count licenza. |Tra :threshold giorni stanno per scadere :count licenze.',
     'to_reset' => 'Per reimpostare la tua password web, compila questo modulo:',
     'type' => 'Tipo',
@@ -71,9 +74,11 @@ return [
     'your_credentials' => 'Le tue credenziali Snipe-IT',
     'Accessory_Checkin_Notification' => 'Checkin accessorio avvenuto',
     'Asset_Checkin_Notification' => 'Checkin asset avvenuto',
+    'Asset_Checkout_Notification' => 'Check-out del bene avvenuto',
     'License_Checkin_Notification' => 'Checkin licenza avvenuto',
     'Expected_Checkin_Report' => 'Rapporto restituzione attesa del bene',
     'Expected_Checkin_Notification' => 'Promemoria: scadenza riconsegna :name in avvicinamento',
     'Expected_Checkin_Date' => 'Un asset assegnato a te deve essere ricontrollato il :date',
     'your_assets' => 'Visualizza i tuoi assets',
+    'rights_reserved' => 'Tutti i diritti riservati.',
 ];

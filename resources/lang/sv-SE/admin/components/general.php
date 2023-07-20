@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'component_name'                  => 'Komponentnamn',
     'checkin'                             => 'Checka in komponent',
     'checkout'                             => 'Checka ut komponent',
@@ -12,4 +12,5 @@ return [
     'remaining' 			             => 'Återstående',
     'total' 			                 => 'Totalt',
     'update'                            => 'Uppdatera komponent',
-];
+    'checkin_limit'            => 'Incheckad mängd måste vara lika med eller mindre än :assigned_qty'
+);

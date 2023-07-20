@@ -7,25 +7,10 @@
 @parent
 @stop
 
-{{-- Right header --}}
-@section('header_right')
-<div class="btn-group pull-right">
-  @can('update', $license)
-    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
-        <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" role="menu">
-        <li role="menuitem"><a href="{{ route('licenses.edit', ['license' => $license->id]) }}">{{ trans('admin/licenses/general.edit') }}</a></li>
-        <li role="menuitem"><a href="{{ route('clone/license', $license->id) }}">{{ trans('admin/licenses/general.clone') }}</a></li>
-    </ul>
-   @endcan
-</div>
-@stop
-
 {{-- Page content --}}
 @section('content')
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-9">
 
     <!-- Custom Tabs -->
     <div class="nav-tabs-custom">
@@ -47,20 +32,22 @@
               <i class="far fa-list-alt fa-2x" aria-hidden="true"></i>
               </span>
               <span class="hidden-xs hidden-sm">{{ trans('admin/licenses/form.seats') }}</span>
-              <badge class="badge badge-secondary">{{ $license->availCount()->count() }} / {{ $license->seats }}</badge>
+              <span class="badge badge-secondary">{{ number_format($license->availCount()->count()) }} / {{ number_format($license->seats) }}</span>
 
             </a>
         </li>
-        
+
+        @can('licenses.files', $license)
         <li>
           <a href="#files" data-toggle="tab">
             <span class="hidden-lg hidden-md">
             <i class="far fa-file fa-2x" aria-hidden="true"></i></span>
             <span class="hidden-xs hidden-sm">{{ trans('general.file_uploads') }}
-              {!! ($license->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.$license->uploads->count().'</badge>' : '' !!}
+              {!! ($license->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($license->uploads->count()).'</badge>' : '' !!}
             </span>
           </a>
         </li>
+        @endcan
 
         <li>
           <a href="#history" data-toggle="tab">
@@ -69,21 +56,7 @@
             <span class="hidden-xs hidden-sm">{{ trans('general.history') }}</span>
           </a>
         </li>
-
-    
-        @can('update', $license)
-          <li class="dropdown pull-right">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="fas fa-cog" aria-hidden="true"></i> {{ trans('button.actions') }}
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="{{ route('licenses.edit', $user->id) }}">{{ trans('admin/users/general.edit') }}</a></li>
-              <li><a href="{{ route('clone/license', $user->id) }}">{{ trans('admin/users/general.clone') }}</a></li>
-            </ul>
-          </li>
-        @endcan
-
+        
         @can('update', \App\Models\License::class)
           <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal">
               <i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}</a>
@@ -104,7 +77,7 @@
                       <strong>{{ trans('general.company') }}</strong>
                     </div>
                     <div class="col-md-9">
-                      {{ $license->company->name }}
+                      <a href="{{ route('companies.show', $license->company->id) }}">{{ $license->company->name }}</a>
                     </div>
                   </div>
                 @endif
@@ -338,6 +311,17 @@
                   </div>
                   @endif
 
+                  <div class="row">
+                    <div class="col-md-3">
+                      <strong>
+                        {{ trans('admin/licenses/form.maintained') }}
+                      </strong>
+                    </div>
+                    <div class="col-md-9">
+                      {!! $license->maintained ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no') !!}
+                    </div>
+                  </div>
+
                   @if (($license->seats) && ($license->seats) > 0)
                   <div class="row">
                     <div class="col-md-3">
@@ -360,7 +344,7 @@
                       </strong>
                     </div>
                     <div class="col-md-9">
-                      {{ $license->reassignable ? 'Yes' : 'No' }}
+                      {!! $license->reassignable ? '<i class="fas fa-check fa-fw text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times fa-fw text-danger" aria-hidden="true"></i> '.trans('general.no') !!}
                     </div>
                   </div>
 
@@ -373,15 +357,17 @@
                       </strong>
                     </div>
                     <div class="col-md-9">
-                      {!! nl2br(e($license->notes)) !!}
+                      {!! nl2br(Helper::parseEscapedMarkedownInline($license->notes)) !!}
                     </div>
                   </div>
                   @endif
 
               </div> <!-- end row-striped -->
             </div>
-            </div>
-          </div> <!-- end tab-pane -->
+
+
+          </div>
+       </div> <!-- end tab-pane -->
 
 
 
@@ -400,6 +386,7 @@
                         data-search="false"
                         data-side-pagination="server"
                         data-show-columns="true"
+                        data-show-fullscreen="true"
                         data-show-export="true"
                         data-show-refresh="true"
                         data-sort-order="asc"
@@ -419,7 +406,7 @@
           </div> <!--/.row-->
         </div> <!-- /.tab-pane -->
 
-        @can('files', $license)
+        @can('licenses.files', $license)
         <div class="tab-pane" id="files">
           <div class="table-responsive">
             <table
@@ -443,13 +430,14 @@
                     }'>
             <thead>
               <tr>
-                <th data-visible="true" aria-hidden="true">Icon</th>
-                <th class="col-md-3" data-field="file_name" data-visible="true" data-sortable="true" data-switchable="true">{{ trans('general.file_name') }}</th>
-                <th class="col-md-3" data-field="notes" data-visible="true" data-sortable="true" data-switchable="true">{{ trans('general.notes') }}</th>
-                <th class="col-md-2" data-field="created_at" data-visible="true"  data-sortable="true" data-switchable="true">{{ trans('general.created_at') }}</th>
-                <th class="col-md-2" data-searchable="true" data-visible="true">{{ trans('general.image') }}</th>
-                <th class="col-md-2" data-field="download" data-visible="true"  data-sortable="false" data-switchable="true">Download</th>
-                <th class="col-md-2" data-field="delete" data-visible="true"  data-sortable="false" data-switchable="true">Delete</th>
+                <th data-visible="true" data-field="icon" data-sortable="true">{{trans('general.file_type')}}</th>
+                <th class="col-md-2" data-searchable="true" data-visible="true" data-field="image">{{ trans('general.image') }}</th>
+                <th class="col-md-2" data-searchable="true" data-visible="true" data-field="filename" data-sortable="true">{{ trans('general.file_name') }}</th>
+                <th class="col-md-1" data-searchable="true" data-visible="true" data-field="filesize">{{ trans('general.filesize') }}</th>
+                <th class="col-md-2" data-searchable="true" data-visible="true" data-field="notes" data-sortable="true">{{ trans('general.notes') }}</th>
+                <th class="col-md-1" data-searchable="true" data-visible="true" data-field="download">{{ trans('general.download') }}</th>
+                <th class="col-md-2" data-searchable="true" data-visible="true" data-field="created_at" data-sortable="true">{{ trans('general.created_at') }}</th>
+                <th class="col-md-1" data-searchable="true" data-visible="true" data-field="actions">{{ trans('table.actions') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -462,41 +450,48 @@
 
                 </td>
                 <td>
-                  {{ $file->filename }}
-
+                  @if ($file->filename)
+                    @if ((Storage::exists('private_uploads/licenses/'.$file->filename)) && ( Helper::checkUploadIsImage($file->get_src('licenses'))))
+                      <a href="{{ route('show.licensefile', ['licenseId' => $license->id, 'fileId' => $file->id, 'download' => 'false']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show.licensefile', ['licenseId' => $license->id, 'fileId' => $file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
+                    @endif
+                  @endif
                 </td>
+                <td>
+                  @if (Storage::exists('private_uploads/licenses/'.$file->filename))
+                    {{ $file->filename }}
+                  @else
+                    <del>{{ $file->filename }}</del>
+                  @endif
+                </td>
+                <td data-value="{{ (Storage::exists('private_uploads/licenses/'.$file->filename)) ? Storage::size('private_uploads/licenses/'.$file->filename) : '' }}">
+                  {{ (Storage::exists('private_uploads/licenses/'.$file->filename)) ? Helper::formatFilesizeUnits(Storage::size('private_uploads/licenses/'.$file->filename)) : '' }}
+                </td>
+
                 <td>
                   @if ($file->note)
                     {{ $file->note }}
                   @endif
                 </td>
-                <td>{{ $file->created_at }}</td>
-                <td>
-                @if ($file->filename)
-                    @if ( Helper::checkUploadIsImage($file->get_src('licenses')))
-                      <a href="{{ route('show.licensefile', ['licenseId' => $license->id, 'fileId' => $file->id, 'download' => 'false']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show.licensefile', ['licenseId' => $license->id, 'fileId' => $file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
-                    @endif
-                @endif
-                </td>
                 <td>
                   @if ($file->filename)
                     <a href="{{ route('show.licensefile', [$license->id, $file->id, 'download' => 'true']) }}" class="btn btn-default">
                       <i class="fas fa-download" aria-hidden="true"></i>
-                      <span class="sr-only">Download</span>
+                      <span class="sr-only">{{ trans('general.download') }}</span>
                     </a>
                   @endif
                 </td>
+                <td>{{ $file->created_at }}</td>
                 <td>
-                  <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?">
+                  <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}" data-content="{{ trans('general.delete_confirm', ['item' => $file->filename]) }}" data-title="{{ trans('general.delete') }}">
                     <i class="fas fa-trash icon-white" aria-hidden="true"></i>
-                    <span class="sr-only">Delete</span>
+                    <span class="sr-only">{{ trans('general.delete') }}</span>
                   </a>
                 </td>
               </tr>
               @endforeach
             @else
               <tr>
-              <td colspan="6">{{ trans('general.no_results') }}</td>
+              <td colspan="8">{{ trans('general.no_results') }}</td>
               </tr>
             @endif
             </tbody>
@@ -543,12 +538,99 @@
               </table>
               </div>
             </div> <!-- /.col-md-12-->
+
+
           </div> <!-- /.row-->
         </div> <!-- /.tab-pane -->
+
       </div> <!-- /.tab-content -->
+
     </div> <!-- nav-tabs-custom -->
   </div>  <!-- /.col -->
+  <div class="col-md-3">
+
+    @can('update', $license)
+      <a href="{{ route('licenses.edit', $license->id) }}" class="btn btn-block btn-primary" style="margin-bottom: 10px;">{{ trans('admin/licenses/general.edit') }}</a>
+      <a href="{{ route('clone/license', $license->id) }}" class="btn btn-block btn-primary" style="margin-bottom: 10px;">{{ trans('admin/licenses/general.clone') }}</a>
+    @endcan
+
+    @can('checkout', $license)
+
+      @if ($license->availCount()->count() > 0)
+        <a href="{{ route('licenses.checkout', $license->id) }}" class="btn-block btn bg-maroon" style="margin-bottom: 10px;">
+          {{ trans('general.checkout') }}
+        </a>
+        <a href="#" class="btn-block btn bg-maroon" style="margin-bottom: 10px;" data-toggle="modal" data-tooltip="true" title="{{ trans('admin/licenses/general.bulk.checkout_all.enabled_tooltip') }}" data-target="#checkoutFromAllModal">
+          {{ trans('admin/licenses/general.bulk.checkout_all.button') }}
+        </a>
+
+      @else
+        <a href="{{ route('licenses.checkout', $license->id) }}" class="btn btn-block bg-maroon disabled" style="margin-bottom: 10px;">
+          {{ trans('general.checkout') }}
+        </a>
+        <span data-tooltip="true" title=" {{ trans('admin/licenses/general.bulk.checkout_all.disabled_tooltip') }}">
+                    <a href="#" class="btn btn-block bg-maroon disabled" style="margin-bottom: 10px;" data-tooltip="true" title="{{ trans('general.checkout') }}">
+                      {{ trans('admin/licenses/general.bulk.checkout_all.button') }}
+                    </a>
+                  </span>
+      @endif
+    @endcan
+
+    @can('checkin', $license)
+
+      @if (($license->seats - $license->availCount()->count()) > 0 )
+        <a href="#" class="btn btn-block bg-purple" style="margin-bottom: 25px;" data-toggle="modal" data-tooltip="true"  data-target="#checkinFromAllModal" data-content="{{ trans('general.sure_to_delete') }} data-title="{{  trans('general.delete') }}" onClick="return false;">
+          {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
+        </a>
+      @else
+        <span data-tooltip="true" title=" {{ trans('admin/licenses/general.bulk.checkin_all.disabled_tooltip') }}">
+            <a href="#" class="btn btn-block bg-purple disabled" style="margin-bottom: 25px;">
+             {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
+            </a>
+          </span>
+      @endif
+    @endcan
+
+    @can('delete', $license)
+
+      @if ($license->availCount()->count() == $license->seats)
+        <button class="btn btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.delete_confirm', ['item' => $license->name]) }}" data-target="#dataConfirmModal">
+          {{ trans('general.delete') }}
+        </button>
+      @else
+          <span data-tooltip="true" title=" {{ trans('admin/licenses/general.delete_disabled') }}">
+            <a href="#" class="btn btn-block btn-danger disabled">
+              {{ trans('general.delete') }}
+            </a>
+          </span>
+      @endif
+    @endcan
+  </div>
+
 </div> <!-- /.row -->
+
+
+@can('checkin', \App\Models\License::class)
+  @include ('modals.confirm-action',
+        [
+            'modal_name' => 'checkinFromAllModal',
+            'route' => route('licenses.bulkcheckin', $license->id),
+            'title' => trans('general.modal_confirm_generic'),
+            'body' => trans_choice('admin/licenses/general.bulk.checkin_all.modal', 2, ['checkedout_seats_count' => $checkedout_seats_count])
+        ])
+@endcan
+
+@can('checkout', \App\Models\License::class)
+  @include ('modals.confirm-action',
+        [
+            'modal_name' => 'checkoutFromAllModal',
+            'route' => route('licenses.bulkcheckout', $license->id),
+            'title' => trans('general.modal_confirm_generic'),
+            'body' => trans_choice('admin/licenses/general.bulk.checkout_all.modal', 2, ['available_seats_count' => $available_seats_count])
+        ])
+@endcan
+
+
 
 @can('update', \App\Models\License::class)
   @include ('modals.upload-file', ['item_type' => 'license', 'item_id' => $license->id])
@@ -558,6 +640,15 @@
 
 
 @section('moar_scripts')
+  <script>
+
+    $('#dataConfirmModal').on('show.bs.modal', function (event) {
+      var content = $(event.relatedTarget).data('content');
+      var title = $(event.relatedTarget).data('title');
+      $(this).find(".modal-body").text(content);
+      $(this).find(".modal-header").text(title);
+    });
+
+  </script>
   @include ('partials.bootstrap-table')
 @stop
-

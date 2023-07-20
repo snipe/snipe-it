@@ -1,10 +1,11 @@
 <?php
 
-return [
-    'dl_csv'      				=> 'Descargar CSV',
-    'eula_text'      			=> 'EULA',
+return array(
+	'dl_csv'      				=> 'Descargar CSV',
+	'eula_text'      			=> 'EULA',
     'id'      					=> 'ID',
     'require_acceptance'      	=> 'Aceptación',
     'title'      				=> 'Nombre accesorio',
 
-];
+
+);

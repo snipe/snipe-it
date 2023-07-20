@@ -1,40 +1,57 @@
 @component('mail::message')
 
-This is a reminder of the items currently checked out to you. If you feel this list is inaccurate (something is missing, or something appears here that you believe you never received), please email {{ config('mail.reply_to.name') }} at {{ config('mail.reply_to.address') }}.
-
+{{ trans('general.reminder_checked_out_items', array('reply_to_name' => config('mail.reply_to.name'), 'reply_to_address' => config('mail.reply_to.address')))}}
 
 @component('mail::table')
 
 @if ($assets->count() > 0)
 
-## {{ $assets->count() }} Assets
+## {{ $assets->count() }} {{ trans('general.assets') }}
 
 <table width="100%">
-<tr><th align="left">{{ trans('mail.name') }} </th><th align="left">{{ trans('mail.asset_tag') }}</th></tr>
+    <tr><th align="left">{{ trans('mail.name') }} </th><th align="left">{{ trans('mail.asset_tag') }}</th><th align="left">{{ trans('admin/hardware/table.serial') }}</th> <th></th> </tr>
 @foreach($assets as $asset)
-<tr><td>{{ $asset->present()->name }}</td><td> {{ $asset->asset_tag }} </td></tr>
+<tr>
+    <td>{{ $asset->present()->name }}</td>
+    <td> {{ $asset->asset_tag }} </td>
+    <td> {{ $asset->serial }} </td>
+    @if (($snipeSettings->show_images_in_email =='1') && $asset->getImageUrl())
+    <td>
+        <img src="{{ asset($asset->getImageUrl()) }}" alt="Asset" style="max-width: 64px;">
+    </td>
+    @endif
+</tr>
 @endforeach
 </table>
 @endif
 
 @if ($accessories->count() > 0)
-## {{ $accessories->count() }} Accessories
+## {{ $accessories->count() }} {{ trans('general.accessories') }}
 
 <table width="100%">
-<tr><th align="left">{{ trans('mail.name') }} </th></tr>
+    <tr><th align="left">{{ trans('mail.name') }} </th> <th></th> </tr>
 @foreach($accessories as $accessory)
-<tr><td>{{ $accessory->name }}</td></tr>
+<tr>
+    <td>{{ $accessory->name }}</td>
+    @if (($snipeSettings->show_images_in_email =='1') && $accessory->getImageUrl())
+    <td>
+        <img src="{{ asset($accessory->getImageUrl()) }}" alt="Accessory" style="max-width: 64px;">
+    </td>
+    @endif
+</tr>
 @endforeach
 </table>
 @endif
 
 @if ($licenses->count() > 0)
-## {{ $licenses->count() }} Licenses
+## {{ $licenses->count() }} {{ trans('general.licenses') }}
 
 <table width="100%">
-<tr><th align="left"{{ trans('mail.name') }} </th></tr>
+<tr><th align="left">{{ trans('mail.name') }} </th></tr>
 @foreach($licenses as $license)
-<tr><td>{{ $license->name }}</td></tr>
+<tr>
+    <td>{{ $license->name }}</td>
+</tr>
 @endforeach
 </table>
 @endif

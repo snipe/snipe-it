@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => ':attribute mora biti datoteka.',
     'filled'               => ':attribute mora imati vrednost.',
     'image'                => ':attribute mora biti slika.',
+    'import_field_empty'    => 'Vrednost za :fieldname ne može biti prazna.',
     'in'                   => 'Odabrani :attribute nije korektan.',
     'in_array'             => ':attribute polje ne postoji u :other.',
     'integer'              => ':attribute mora biti ceo broj.',
     'ip'                   => ':attribute mora biti važeća IP adresa.',
     'ipv4'                 => ':attribute mora biti važeća IPv4 adresa.',
     'ipv6'                 => ':attribute mora biti važeća IPv6 adresa.',
+    'is_unique_department' => ':attribute mora biti jedinstven za ovu Kompanijsku lokaciju',
     'json'                 => ':attribute mora biti ispravan JSON niz.',
     'max'                  => [
         'numeric' => ':attribute ne sme biti veći od :max.',
@@ -64,6 +66,9 @@ return array(
         'string'  => ':attribute mora biti najmanje :min znakova.',
         'array'   => ':attribute mora imati barem :min stavke.',
     ],
+    'starts_with'          => ':attribute mora da počne sa jednom od sledećih vrednosti: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'Odabrani :attribute nije ispravan.',
     'numeric'              => ':attribute mora biti broj.',
     'present'              => ':attribute polje mora biti prisutno.',
@@ -88,19 +93,16 @@ return array(
     'unique'               => ':attribute je već zauzet.',
     'uploaded'             => ':attribute nije prenet.',
     'url'                  => ':attribute format je neispravan.',
-    "unique_undeleted"     => ":attribute mora biti jedinstven.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
-
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
+    'unique_undeleted'     => ':attribute mora biti jedinstven.',
+    'non_circular'         => ':attribute ne sme da kreira cirkularnu referencu.',
+    'disallow_same_pwd_as_user_fields' => 'Lozinka ne može biti ista kao korisničko ime.',
+    'letters'              => 'Lozinka mora da sadrži barem jedno slovo.',
+    'numbers'              => 'Lozinka mora da sadrži barem jednu cifru.',
+    'case_diff'            => 'Lozinka mora da sadrži malo i veliko slovo.',
+    'symbols'              => 'Lozinka mora da sadrži simbole.',
+    'gte'                  => [
+        'numeric'          => 'Vrednost ne može biti negativna'
+    ],
 
 
     /*
@@ -115,11 +117,23 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => ":attribute polje sadrži znak koji nije dozvoljen.",
-        "email_array"      => "Jedna ili više email adresa nisu ispravne.",
-        "hashed_pass"      => "Vaša lozinka je neispravna",
+        'alpha_space' => ':attribute polje sadrži znak koji nije dozvoljen.',
+        'email_array'      => 'Jedna ili više email adresa nisu ispravne.',
+        'hashed_pass'      => 'Vaša lozinka je neispravna',
         'dumbpwd'          => 'Lozinka nije sigurna.',
-        "statuslabel_type" => "Morate odabrati ispravnu vrstu oznake statusa",
+        'statuslabel_type' => 'Morate odabrati ispravnu vrstu oznake statusa',
+
+        // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
+        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // people won't know how to format. 
+        'purchase_date.date_format'     => ':attribute mora biti ispravan datum u YYYY-MM-DD formatu',
+        'last_audit_date.date_format'   =>  ':attribute mora biti ispravan datum u YYYY-MM-DD hh:mm:ss formatu',
+        'expiration_date.date_format'   =>  ':attribute mora biti ispravan datum u YYYY-MM-DD formatu',
+        'termination_date.date_format'  =>  ':attribute mora biti ispravan datum u YYYY-MM-DD formatu',
+        'expected_checkin.date_format'  =>  ':attribute mora biti ispravan datum u YYYY-MM-DD formatu',
+        'start_date.date_format'        =>  ':attribute mora biti ispravan datum u YYYY-MM-DD formatu',
+        'end_date.date_format'          =>  ':attribute mora biti ispravan datum u YYYY-MM-DD formatu',
+
     ],
 
     /*
@@ -135,4 +149,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

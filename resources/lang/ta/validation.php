@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => 'பண்புக்கூறு ஒரு கோப்பாக இருக்க வேண்டும்.',
     'filled'               => 'பண்புக்கூறு துறையில் ஒரு மதிப்பு இருக்க வேண்டும்.',
     'image'                => 'பண்புக்கூறு: ஒரு படம் இருக்க வேண்டும்.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'தேர்ந்தெடுக்கப்பட்ட: பண்பு தவறானது.',
     'in_array'             => ': பண்புக்கூறு புலம் இல்லை: மற்றவை.',
     'integer'              => 'பண்புக்கூறு: ஒரு முழு எண்ணாக இருக்க வேண்டும்.',
     'ip'                   => 'பண்புக்கூறு: செல்லுபடியாகும் IP முகவரி இருக்க வேண்டும்.',
     'ipv4'                 => 'பண்புக்கூறு: செல்லுபடியாகும் IPv4 முகவரி இருக்க வேண்டும்.',
     'ipv6'                 => 'பண்புக்கூறு: செல்லுபடியாகும் IPv6 முகவரி இருக்க வேண்டும்.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'பண்புக்கூறு செல்லுபடியான JSON சரமாக இருக்க வேண்டும்.',
     'max'                  => [
         'numeric' => ': பண்புக்கூறு அதிகமாக இருக்கலாம்: அதிகபட்சம்.',
@@ -64,6 +66,9 @@ return array(
         'string'  => ': பண்புக்கூறு குறைந்தது: குறைந்த எழுத்துகள்.',
         'array'   => ': பண்புக்கூறு குறைந்தபட்சம்: நிமிடம் உருப்படிகள் வேண்டும்.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'தேர்ந்தெடுக்கப்பட்ட: பண்பு தவறானது.',
     'numeric'              => 'பண்புக்கூறு: ஒரு எண் இருக்க வேண்டும்.',
     'present'              => ': பண்புக்கூறு களஞ்சியம் இருக்க வேண்டும்.',
@@ -88,19 +93,16 @@ return array(
     'unique'               => ': பண்பு ஏற்கனவே ஏற்கப்பட்டுள்ளது.',
     'uploaded'             => ': பண்புக்கூறு பதிவேற்றத் தவறியது.',
     'url'                  => 'பண்புக்கூறு வடிவமைப்பு தவறானது.',
-    "unique_undeleted"     => "The :attribute must be unique.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
-
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
+    'unique_undeleted'     => 'The :attribute must be unique.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
 
 
     /*
@@ -115,11 +117,23 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "பண்புக்கூறு துறையில் அனுமதிக்கப்படாத ஒரு பாத்திரம் உள்ளது.",
-        "email_array"      => "ஒன்று அல்லது அதற்கு மேற்பட்ட மின்னஞ்சல் முகவரிகள் தவறானவை.",
-        "hashed_pass"      => "உங்கள் தற்போதைய கடவுச்சொல் தவறானது",
+        'alpha_space' => 'பண்புக்கூறு துறையில் அனுமதிக்கப்படாத ஒரு பாத்திரம் உள்ளது.',
+        'email_array'      => 'ஒன்று அல்லது அதற்கு மேற்பட்ட மின்னஞ்சல் முகவரிகள் தவறானவை.',
+        'hashed_pass'      => 'உங்கள் தற்போதைய கடவுச்சொல் தவறானது',
         'dumbpwd'          => 'அந்த கடவுச்சொல் மிகவும் பொதுவானது.',
-        "statuslabel_type" => "செல்லுபடியாகும் நிலை லேபிள் வகை தேர்ந்தெடுக்க வேண்டும்",
+        'statuslabel_type' => 'செல்லுபடியாகும் நிலை லேபிள் வகை தேர்ந்தெடுக்க வேண்டும்',
+
+        // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
+        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // people won't know how to format. 
+        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
+        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
+        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+
     ],
 
     /*
@@ -135,4 +149,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

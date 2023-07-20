@@ -5,6 +5,7 @@ namespace App\Models\Traits;
 use App\Models\Asset;
 use App\Models\CustomField;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 /**
  * This trait allows for cleaner searching of models,
@@ -162,6 +163,16 @@ trait Searchable
                         $query->orWhere($table.'.'.$column, 'LIKE', '%'.$term.'%');
                     }
                 }
+                // I put this here because I only want to add the concat one time in the end of the user relation search
+                if($relation == 'user') {
+                    $query->orWhereRaw(
+                            $this->buildMultipleColumnSearch([
+                                'users.first_name',
+                                'users.last_name',
+                            ]),
+                            ["%{$term}%"]
+                        );
+                }
             });
         }
 
@@ -191,7 +202,7 @@ trait Searchable
      */
     private function getSearchableAttributes()
     {
-        return isset($this->searchableAttributes) ? $this->searchableAttributes : [];
+        return $this->searchableAttributes ?? [];
     }
 
     /**
@@ -201,7 +212,7 @@ trait Searchable
      */
     private function getSearchableRelations()
     {
-        return isset($this->searchableRelations) ? $this->searchableRelations : [];
+        return $this->searchableRelations ?? [];
     }
 
     /**
@@ -252,5 +263,38 @@ trait Searchable
         }
 
         return $related->getTable();
+    }
+
+    /**
+     * Builds a search string for either MySQL or sqlite by separating the provided columns with a space.
+     *
+     * @param array $columns Columns to include in search string.
+     * @return string
+     */
+    private function buildMultipleColumnSearch(array $columns): string
+    {
+        $mappedColumns = collect($columns)->map(fn($column) => DB::getTablePrefix() . $column)->toArray();
+
+        $driver = config('database.connections.' . config('database.default') . '.driver');
+
+        if ($driver === 'sqlite') {
+            return implode("||' '||", $mappedColumns) . ' LIKE ?';
+        }
+
+        // Default to MySQL's concatenation method
+        return 'CONCAT(' . implode('," ",', $mappedColumns) . ') LIKE ?';
+    }
+
+    /**
+     * Search a string across multiple columns separated with a space.
+     *
+     * @param Builder $query
+     * @param array $columns - Columns to include in search string.
+     * @param $term
+     * @return Builder
+     */
+    public function scopeOrWhereMultipleColumns($query, array $columns, $term)
+    {
+        return $query->orWhereRaw($this->buildMultipleColumnSearch($columns), ["%{$term}%"]);
     }
 }

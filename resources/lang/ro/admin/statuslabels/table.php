@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about'      	=> 'Despre etichete status',
     'archived'      	=> 'Arhivat',
     'create'      	=> 'Creeaza eticheta status',
@@ -16,4 +16,4 @@ return [
     'title'      	=> 'Etichete status',
     'undeployable'  => 'Nelansabil',
     'update'      	=> 'Actualizeaza eticheta status',
-];
+);

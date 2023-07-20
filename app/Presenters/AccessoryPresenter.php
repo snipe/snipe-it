@@ -59,7 +59,9 @@ class AccessoryPresenter extends Presenter
                 'field' => 'manufacturer',
                 'searchable' => true,
                 'sortable' => true,
+                'switchable' => true,
                 'title' => trans('general.manufacturer'),
+                'visible' => false,
                 'formatter' => 'manufacturersLinkObjFormatter',
             ], [
                 'field' => 'supplier',
@@ -78,18 +80,25 @@ class AccessoryPresenter extends Presenter
             ], [
                 'field' => 'qty',
                 'searchable' => false,
-                'sortable' => false,
-                'title' => trans('admin/accessories/general.total'),
-            ],  [
-                'field' => 'min_qty',
-                'searchable' => false,
                 'sortable' => true,
-                'title' => trans('general.min_amt'),
+                'title' => trans('admin/accessories/general.total'),
             ], [
                 'field' => 'remaining_qty',
                 'searchable' => false,
                 'sortable' => false,
+                'visible' => false,
                 'title' => trans('admin/accessories/general.remaining'),
+            ],[
+                'field' => 'users_count',
+                'searchable' => false,
+                'sortable' => true,
+                'visible' => true,
+                'title' => trans('general.checked_out'),
+            ], [
+                'field' => 'min_qty',
+                'searchable' => false,
+                'sortable' => true,
+                'title' => trans('general.min_amt'),
             ], [
                 'field' => 'purchase_date',
                 'searchable' => true,
@@ -102,13 +111,21 @@ class AccessoryPresenter extends Presenter
                 'searchable' => true,
                 'sortable' => true,
                 'title' => trans('general.purchase_cost'),
-                'footerFormatter' => 'sumFormatter',
+                'footerFormatter' => 'sumFormatterQuantity',
+                'class' => 'text-right',
             ], [
                 'field' => 'order_number',
                 'searchable' => true,
                 'sortable' => true,
                 'visible' => false,
                 'title' => trans('general.order_number'),
+            ],[
+                'field' => 'notes',
+                'searchable' => true,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('general.notes'),
+                'formatter' => 'notesFormatter'
             ], [
                 'field' => 'change',
                 'searchable' => false,

@@ -2,11 +2,14 @@
 
 return [
     'bulk_delete'		=> 'Bekreft sletting av flere enheter',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> 'Se gjennom listen over enheter som er valgt for sletting. Etter sletting er det mulig å gjenopprette enheter, men nåværende koblinger til brukere vil ikke lenger finnes.',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'Du er i ferd med å slette :asset_count enheter.',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'Masseoppdater eiendeler',
     'bulk_update_help'	=> 'Dette skjemaet lar deg oppdatere flere eiendeler på en gang. Fyll kun ut feltene du ønsker å endre. Tomme felter forblir uendret. ',
-    'bulk_update_warn'	=> 'Du er på vei til å endre egenskapene til :asset_count eiendeler.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Utsjekket til',
     'checkout_date'		=> 'Utsjekkdato',
     'checkin_date'		=> 'Innsjekkdato',
@@ -40,4 +43,12 @@ return [
     'warranty'			=> 'Garanti',
         'warranty_expires'		=> 'Garantien utløper',
     'years'				=> 'år',
+    'asset_location' => 'Oppdater lokasjon for eiendelen',
+    'asset_location_update_default_current' => 'Oppdater standardlokasjon OG faktisk lokasjon',
+    'asset_location_update_default' => 'Oppdater bare standardlokasjon',
+    'asset_not_deployable' => 'Den eiendelstatusen gjør at denne eiendelen ikke kan sjekkes ut.',
+    'asset_deployable' => 'Den statusen gjør det mulig å sjekke ut denne eiendelen.',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information'
 ];

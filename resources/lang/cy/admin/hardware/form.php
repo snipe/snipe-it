@@ -2,11 +2,14 @@
 
 return [
     'bulk_delete'		=> 'Cadarnahu Dileu Nifer o Asedau',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> 'Adolygwch yr asedau ar gyfer dileu isod. Ar ôl eu dileu, gellir adfer yr asedau hyn, ond ni fyddant yn gysylltiedig mwyach ag unrhyw ddefnyddwyr y maent wedi\'u neilltuo iddynt ar hyn o bryd.',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'Rydych am dileu :asset_count assets.',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'Diweddaru Nifer o Asedau',
     'bulk_update_help'	=> 'Mae\'r ffurflen hon yn caniatáu ichi ddiweddaru nifer o asedau ar unwaith. Llenwch y meysydd sydd angen i chi eu newid yn unig. Bydd unrhyw bwlch a adewir yn wag yn aros yr un fath. ',
-    'bulk_update_warn'	=> 'Rydych am newid manylder am :asset_count o asedau.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Wedi aseinio i',
     'checkout_date'		=> 'Dyddiad allan',
     'checkin_date'		=> 'Dyddian i mewn',
@@ -40,4 +43,12 @@ return [
     'warranty'			=> 'Warant',
         'warranty_expires'		=> 'Warrant yn dod I ben',
     'years'				=> 'blynyddoedd',
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information'
 ];

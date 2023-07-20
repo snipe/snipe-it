@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_manufacturers_title'    => 'О производителях',
     'about_manufacturers_text'  => 'Производители - компании, создающие ваши активы. Вы можете хранить здесь важные контактные данные, которые будут отображаться вместе с подробностями о ваших активах.',
     'asset_manufacturers'	=> 'Производители оборудования',
@@ -10,7 +10,8 @@ return [
     'support_email'   		=> 'Электронная почта поддержки',
     'support_phone'   		=> 'Телефон поддержки',
     'support_url'   		=> 'Страница поддержки',
+    'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Обновить производителя',
     'url'   				=> 'Адрес',
 
-];
+);

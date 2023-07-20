@@ -2,11 +2,14 @@
 
 return [
     'bulk_delete'		=> 'Patvirtinkite masinio ištrynimo turinį',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> 'Peržiūrėkite įrangos ištrinimą žemiau. Ištrinus, įranga galima atstatyti, tačiau daugiau nebus priskirta jokiam vartotojam.',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'Jūs norite ištrinti :asset_count įranga.',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'Visa atnaujinama įranga',
     'bulk_update_help'	=> 'Ši forma leidžia jums atnaujinti kelias įrangas vienu metu. Prašome užpildykite laukelius, kuriuos reikia keisti. Visi laukeliai, kuriuos paliksite tuščius liks nepakeisti. ',
-    'bulk_update_warn'	=> 'Jūs ruošiatės keisti sekančius nustatymus :asset_count assets.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Išduota',
     'checkout_date'		=> 'Išdavimo data',
     'checkin_date'		=> 'Priėmimo data',
@@ -40,4 +43,12 @@ return [
     'warranty'			=> 'Garantija',
         'warranty_expires'		=> 'Garantija baigiasi',
     'years'				=> 'metai',
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'Ši įranga negali būti išduodama.',
+    'asset_deployable' => 'Ši įranga gali būti išduodama.',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information'
 ];

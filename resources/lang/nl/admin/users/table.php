@@ -1,16 +1,16 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Actief',
     'allow'  				=> 'Toestaan',
-    'checkedout'  			=> 'Assets',
+    'checkedout'  			=> 'Activa',
     'created_at' 			=> 'Aangemaakt',
     'createuser' 			=> 'Gebruiker aanmaken',
     'deny'  				=> 'Weigeren',
     'email'      			=> 'E-mail',
     'employee_num'      	=> 'Werknemersnummer',
     'first_name' 			=> 'Voornaam',
-    'groupnotes'			=> 'Selecteer een groep om toe te wijzen aan de gebruiker. Onthoud dat de gebruiker de rechten overneemt van de groep waaraan hij/zij wordt toegewezen.',
+    'groupnotes'			=> 'Selecteer een groep om toe te wijzen aan de gebruiker, onthoud dat een gebruiker de rechten aanneemt van de groep waaraan hij is toegewezen. Gebruik ctrl+click (of cmd+klik op MacOS) om groepen te deselecteren.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Overnemen',
     'job' 					=> 'Functie omschrijving',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Toon de huidige gebruikers',
     'show_deleted'          => 'Toon de verwijderde gebruikers',
     'title' 				=> 'Titel',
-    'to_restore_them'		=> 'om ze te herstellen.',
+	'to_restore_them'		=> 'om ze te herstellen.',
     'updateuser' 			=> 'Gebruiker bijwerken',
     'username' 				=> 'Gebruikersnaam',
-    'user_deleted_text' 	=> 'Deze gebruiker is gemarkeerd als verwijderd.',
+	'user_deleted_text' 	=> 'Deze gebruiker is gemarkeerd als verwijderd.',
     'username_note' 		=> '(Dit wordt enkel gebruikt om te koppelen met de Active Directory, niet om aan te melden.)',
     'cloneuser'             => 'Gebruiker dupliceren',
     'viewusers' 			=> 'Bekijk gebruikers',
-];
+);

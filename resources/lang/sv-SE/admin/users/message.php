@@ -1,20 +1,24 @@
 <?php
 
-return [
+return array(
 
     'accepted'                  => 'Du har framgångsrikt godkänt den här tillgången.',
     'declined'                  => 'Du har framgångsrikt nekat den här tillgången.',
     'bulk_manager_warn'	        => 'Dina användare har uppdaterats, men chefsfältet sparades inte eftersom den chef du valt även finns i användarlistan, en användare kanske inte ange sig själv som chef. Vänligen välj dina användare igen, med undantag av chefen.',
     'user_exists'               => 'Användaren existerar redan!',
-    'user_not_found'            => 'Användare [: id] existerar inte.',
+    'user_not_found'            => 'Användaren finns inte.',
     'user_login_required'       => 'Inloggningsfältet krävs',
     'user_password_required'    => 'Lösenordet krävs.',
     'insufficient_permissions'  => 'Otillräckliga tillstånd.',
     'user_deleted_warning'      => 'Den här användaren har raderats. Du måste återställa den här användaren för att redigera dem eller tilldela dem nya tillgångar.',
     'ldap_not_configured'        => 'LDAP-integrationen har inte konfigurerats för den här installationen.',
     'password_resets_sent'      => 'De valda användare som är aktiverade och har en giltig e-postadress har skickats en länk för att återställa lösenordet.',
+    'password_reset_sent'       => 'En återställningslänk för lösenord har skickats till :email!',
+    'user_has_no_email'         => 'Den här användaren har ingen e-postadress i sin profil.',
+    'user_has_no_assets_assigned'   => 'Den här användaren har inga tilldelade tillgångar',
 
-    'success' => [
+
+    'success' => array(
         'create'    => 'Användaren skapades med framgång.',
         'update'    => 'Användaren har uppdaterats.',
         'update_bulk'    => 'Användarna uppdaterades med framgång!',
@@ -25,9 +29,9 @@ return [
         'unsuspend' => 'Användaren blev framgångsrikt uppslagen.',
         'restored'  => 'Användaren lyckades återställas.',
         'import'    => 'Användare importerades framgångsrikt.',
-    ],
+    ),
 
-    'error' => [
+    'error' => array(
         'create' => 'Det var ett problem att skapa användaren. Var god försök igen.',
         'update' => 'Det gick inte att uppdatera användaren. Var god försök igen.',
         'delete' => 'Det gick inte att ta bort användaren. Var god försök igen.',
@@ -42,18 +46,22 @@ return [
         'ldap_could_not_search' => 'Det gick inte att söka på LDAP-servern. Kontrollera din LDAP-serverkonfiguration i LDAP-konfigurationsfilen. <br>Fel från LDAP-servern:',
         'ldap_could_not_get_entries' => 'Det gick inte att få poster från LDAP-servern. Kontrollera din LDAP-serverkonfiguration i LDAP-konfigurationsfilen. <br>Fel från LDAP-servern:',
         'password_ldap' => 'Lösenordet för det här kontot hanteras av LDAP / Active Directory. Vänligen kontakta din IT-avdelning för att ändra ditt lösenord.',
-    ],
+    ),
 
-    'deletefile' => [
+    'deletefile' => array(
         'error'   => 'Filen har inte tagits bort. Var god försök igen.',
         'success' => 'Filen har tagits bort.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Fil (er) inte uppladdade. Var god försök igen.',
         'success' => 'Filer som har laddats upp.',
         'nofiles' => 'Du valde inte några filer för uppladdning',
         'invalidfiles' => 'En eller flera av dina filer är för stora eller är en filtyp som inte är tillåten. Tillåtna filtyper är png, gif, jpg, doc, docx, pdf och txt.',
-    ],
+    ),
 
-];
+    'inventorynotification' => array(
+        'error'   => 'Den här användaren har ingen e-postadress.',
+        'success' => 'Användaren har meddelats om sitt nuvarande inventarie.'
+    )
+);

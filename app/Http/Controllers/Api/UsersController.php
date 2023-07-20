@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SaveUserRequest;
 use App\Http\Transformers\AccessoriesTransformer;
 use App\Http\Transformers\AssetsTransformer;
+use App\Http\Transformers\ConsumablesTransformer;
 use App\Http\Transformers\LicensesTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use App\Http\Transformers\UsersTransformer;
@@ -14,10 +15,12 @@ use App\Models\Asset;
 use App\Models\Company;
 use App\Models\License;
 use App\Models\User;
+use App\Notifications\CurrentInventory;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
@@ -35,6 +38,7 @@ class UsersController extends Controller
 
         $users = User::select([
             'users.activated',
+            'users.created_by',
             'users.address',
             'users.avatar',
             'users.city',
@@ -62,17 +66,17 @@ class UsersController extends Controller
             'users.updated_at',
             'users.username',
             'users.zip',
+            'users.remote',
             'users.ldap_import',
+            'users.start_date',
+            'users.end_date',
+            'users.vip',
+            'users.autoassign_licenses',
 
-        ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables')
+        ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy',)
             ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count');
         $users = Company::scopeCompanyables($users);
 
-        if (($request->filled('deleted')) && ($request->input('deleted') == 'true')) {
-            $users = $users->onlyTrashed();
-        } elseif (($request->filled('all')) && ($request->input('all') == 'true')) {
-            $users = $users->withTrashed();
-        }
 
         if ($request->filled('activated')) {
             $users = $users->where('users.activated', '=', $request->input('activated'));
@@ -84,6 +88,10 @@ class UsersController extends Controller
 
         if ($request->filled('location_id')) {
             $users = $users->where('users.location_id', '=', $request->input('location_id'));
+        }
+
+        if ($request->filled('created_by')) {
+            $users = $users->where('users.created_by', '=', $request->input('created_by'));
         }
 
         if ($request->filled('email')) {
@@ -130,19 +138,64 @@ class UsersController extends Controller
             $users = $users->where('users.manager_id','=',$request->input('manager_id'));
         }
 
+        if ($request->filled('ldap_import')) {
+            $users = $users->where('ldap_import', '=', $request->input('ldap_import'));
+        }
+
+        if ($request->filled('remote')) {
+            $users = $users->where('remote', '=', $request->input('remote'));
+        }
+
+        if ($request->filled('vip')) {
+            $users = $users->where('vip', '=', $request->input('vip'));
+        }
+
+        if ($request->filled('two_factor_enrolled')) {
+            $users = $users->where('two_factor_enrolled', '=', $request->input('two_factor_enrolled'));
+        }
+
+        if ($request->filled('two_factor_optin')) {
+            $users = $users->where('two_factor_optin', '=', $request->input('two_factor_optin'));
+        }
+
+        if ($request->filled('start_date')) {
+            $users = $users->where('users.start_date', '=', $request->input('start_date'));
+        }
+
+        if ($request->filled('end_date')) {
+            $users = $users->where('users.end_date', '=', $request->input('end_date'));
+        }
+
+        if ($request->filled('assets_count')) {
+           $users->has('assets', '=', $request->input('assets_count'));
+        }
+
+        if ($request->filled('consumables_count')) {
+            $users->has('consumables', '=', $request->input('consumables_count'));
+        }
+
+        if ($request->filled('licenses_count')) {
+            $users->has('licenses', '=', $request->input('licenses_count'));
+        }
+
+        if ($request->filled('accessories_count')) {
+            $users->has('accessories', '=', $request->input('accessories_count'));
+        }
+
+        if ($request->filled('autoassign_licenses')) {
+            $users->where('autoassign_licenses', '=', $request->input('autoassign_licenses'));
+        }
+
         if ($request->filled('search')) {
             $users = $users->TextSearch($request->input('search'));
         }
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $offset = (($users) && (request('offset') > $users->count())) ? 0 : request('offset', 0);
 
-        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
-        // case we override with the actual count, so we should return 0 items.
-        $offset = (($users) && ($request->get('offset') > $users->count())) ? $users->count() : $request->get('offset', 0);
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $users->count()) ? $users->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
 
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
 
         switch ($request->input('sort')) {
             case 'manager':
@@ -154,17 +207,58 @@ class UsersController extends Controller
             case 'department':
                 $users = $users->OrderDepartment($order);
                 break;
+            case 'created_by':
+                $users = $users->OrderByCreatedBy($order);
+                break;
             case 'company':
                 $users = $users->OrderCompany($order);
+                break;
+            case 'first_name':
+                $users->orderBy('first_name', $order);
+                $users->orderBy('last_name', $order);
+                break;
+            case 'last_name':
+                $users->orderBy('last_name', $order);
+                $users->orderBy('first_name', $order);
                 break;
             default:
                 $allowed_columns =
                     [
-                        'last_name', 'first_name', 'email', 'jobtitle', 'username', 'employee_num',
-                        'assets', 'accessories', 'consumables', 'licenses', 'groups', 'activated', 'created_at',
-                        'two_factor_enrolled', 'two_factor_optin', 'last_login', 'assets_count', 'licenses_count',
-                        'consumables_count', 'accessories_count', 'phone', 'address', 'city', 'state',
-                        'country', 'zip', 'id', 'ldap_import',
+                        'last_name',
+                        'first_name',
+                        'email',
+                        'jobtitle',
+                        'username',
+                        'employee_num',
+                        'assets',
+                        'accessories',
+                        'consumables',
+                        'licenses',
+                        'groups',
+                        'activated',
+                        'created_at',
+                        'two_factor_enrolled',
+                        'two_factor_optin',
+                        'last_login',
+                        'assets_count',
+                        'licenses_count',
+                        'consumables_count',
+                        'accessories_count',
+                        'phone',
+                        'address',
+                        'city',
+                        'state',
+                        'country',
+                        'zip',
+                        'id',
+                        'ldap_import',
+                        'two_factor_optin',
+                        'two_factor_enrolled',
+                        'remote',
+                        'vip',
+                        'start_date',
+                        'end_date',
+                        'autoassign_licenses',
                     ];
 
                 $sort = in_array($request->get('sort'), $allowed_columns) ? $request->get('sort') : 'first_name';
@@ -172,6 +266,12 @@ class UsersController extends Controller
                 break;
         }
 
+        if (($request->filled('deleted')) && ($request->input('deleted') == 'true')) {
+            $users = $users->onlyTrashed();
+        } elseif (($request->filled('all')) && ($request->input('all') == 'true')) {
+            $users = $users->withTrashed();
+        }
+        
         $total = $users->count();
         $users = $users->skip($offset)->take($limit)->get();
 
@@ -203,9 +303,11 @@ class UsersController extends Controller
         $users = Company::scopeCompanyables($users);
 
         if ($request->filled('search')) {
-            $users = $users->SimpleNameSearch($request->get('search'))
-                ->orWhere('username', 'LIKE', '%'.$request->get('search').'%')
-                ->orWhere('employee_num', 'LIKE', '%'.$request->get('search').'%');
+            $users = $users->where(function ($query) use ($request) {
+                $query->SimpleNameSearch($request->get('search'))
+                    ->orWhere('username', 'LIKE', '%'.$request->get('search').'%')
+                    ->orWhere('employee_num', 'LIKE', '%'.$request->get('search').'%');
+            });
         }
 
         $users = $users->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');
@@ -233,6 +335,8 @@ class UsersController extends Controller
         return (new SelectlistTransformer)->transformSelectlist($users);
     }
 
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -258,7 +362,7 @@ class UsersController extends Controller
             $user->permissions = $permissions_array;
         }
 
-        $tmp_pass = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 20);
+        $tmp_pass = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 40);
         $user->password = bcrypt($request->get('password', $tmp_pass));
 
         app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
@@ -291,6 +395,7 @@ class UsersController extends Controller
         return (new UsersTransformer)->transformUser($user);
     }
 
+
     /**
      * Update the specified resource in storage.
      *
@@ -320,6 +425,7 @@ class UsersController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Permission denied. You cannot update user information via API on the demo.'));
         }
 
+
         $user->fill($request->all());
         
         if ($user->id == $request->input('manager_id')) {
@@ -343,6 +449,8 @@ class UsersController extends Controller
             $user->permissions = $permissions_array;
         }
 
+
+
         // Update the location of any assets checked out to this user
         Asset::where('assigned_type', User::class)
             ->where('assigned_to', $user->id)->update(['location_id' => $request->input('location_id', null)]);
@@ -360,11 +468,19 @@ class UsersController extends Controller
 
             // Check if the request has groups passed and has a value
             if ($request->filled('groups')) {
+                $validator = Validator::make($request->all(), [
+                    'groups.*' => 'integer|exists:permission_groups,id',
+                ]);
+                
+                if ($validator->fails()){
+                    return response()->json(Helper::formatStandardApiResponse('error', null, $user->getErrors()));
+                }
                 $user->groups()->sync($request->input('groups'));
             // The groups field has been passed but it is null, so we should blank it out
             } elseif ($request->has('groups')) {
                 $user->groups()->sync([]);
             }
+
 
             return response()->json(Helper::formatStandardApiResponse('success', (new UsersTransformer)->transformUser($user), trans('admin/users/message.success.update')));
         }
@@ -427,13 +543,52 @@ class UsersController extends Controller
      * @param $userId
      * @return string JSON
      */
-    public function assets($id)
+    public function assets(Request $request, $id)
     {
         $this->authorize('view', User::class);
         $this->authorize('view', Asset::class);
         $assets = Asset::where('assigned_to', '=', $id)->where('assigned_type', '=', User::class)->with('model')->get();
 
-        return (new AssetsTransformer)->transformAssets($assets, $assets->count());
+        return (new AssetsTransformer)->transformAssets($assets, $assets->count(), $request);
+    }
+
+    /**
+     * Notify a specific user via email with all of their assigned assets.
+     *
+     * @author [Lukas Fehling] [<lukas.fehling@adabay.rocks>]
+     * @since [v6.0.13]
+     * @param Request $request
+     * @param $id
+     * @return string JSON
+     */
+    public function emailAssetList(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        if (empty($user->email)) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.inventorynotification.error')));
+        }
+
+        $user->notify((new CurrentInventory($user)));
+ 
+        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.inventorynotification.success')));
+    }
+
+    /**
+     * Return JSON containing a list of consumables assigned to a user.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @param $userId
+     * @return string JSON
+     */
+    public function consumables(Request $request, $id)
+    {
+        $this->authorize('view', User::class);
+        $this->authorize('view', Consumable::class);
+        $user = User::findOrFail($id);
+        $consumables = $user->consumables;
+        return (new ConsumablesTransformer)->transformConsumables($consumables, $consumables->count(), $request);
     }
 
     /**
@@ -466,10 +621,14 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
         $this->authorize('view', License::class);
-        $user = User::where('id', $id)->withTrashed()->first();
-        $licenses = $user->licenses()->get();
+        
+        if ($user = User::where('id', $id)->withTrashed()->first()) {
+            $licenses = $user->licenses()->get();
+            return (new LicensesTransformer())->transformLicenses($licenses, $licenses->count());
+        }
 
-        return (new LicensesTransformer())->transformLicenses($licenses, $licenses->count());
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found', compact('id'))));
+
     }
 
     /**
@@ -496,8 +655,9 @@ class UsersController extends Controller
                 return response()->json(['message' => trans('admin/settings/general.two_factor_reset_error')], 500);
             }
         }
-
         return response()->json(['message' => 'No ID provided'], 500);
+
+
     }
 
     /**

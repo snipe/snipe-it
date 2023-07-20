@@ -22,6 +22,13 @@ use Redirect;
  */
 class CustomFieldsetsController extends Controller
 {
+
+    public function index() 
+    {
+        return redirect()->route("fields.index")
+        ->with("error", trans('admin/custom_fields/message.fieldset.does_not_exist'));
+    }
+
     /**
      * Validates and stores a new custom field.
      *
@@ -68,9 +75,9 @@ class CustomFieldsetsController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', CustomFieldset::class);
+        $this->authorize('create', CustomField::class);
 
-        return view('custom_fields.fieldsets.edit');
+        return view('custom_fields.fieldsets.edit')->with('item', new CustomFieldset());
     }
 
     /**
@@ -84,19 +91,30 @@ class CustomFieldsetsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('create', CustomFieldset::class);
+        $this->authorize('create', CustomField::class);
 
-        $cfset = new CustomFieldset([
+        $fieldset = new CustomFieldset([
                 'name' => e($request->get('name')),
                 'user_id' => Auth::user()->id,
 //                'sub' =>
         ]);
 
-        $validator = Validator::make($request->all(), $cfset->rules);
-        if ($validator->passes()) {
-            $cfset->save();
+        $validator = Validator::make($request->all(), $fieldset->rules);
 
-            return redirect()->route('fieldsets.show', [$cfset->id])
+        if ($validator->passes()) {
+            $fieldset->save();
+
+            // Sync fieldset with auto_add_to_fieldsets
+            $fields = CustomField::select('id')->where('auto_add_to_fieldsets', '=', '1')->get();
+            if ($fields->count() > 0) {
+                foreach ($fields as $field) {
+                    $field_ids[] = $field->id;
+                }
+
+                $fieldset->fields()->sync($field_ids);
+            }
+
+            return redirect()->route('fieldsets.show', [$fieldset->id])
                 ->with('success', trans('admin/custom_fields/message.fieldset.create.success'));
         }
 
@@ -104,31 +122,52 @@ class CustomFieldsetsController extends Controller
     }
 
     /**
-     * What the actual fuck, Brady?
+     * Presents edit form for fieldset
      *
-     * @todo Uhh, build this?
-     * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+     * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param  int  $id
-     * @since [v1.8]
-     * @return Fuckall
+     * @since [v6.0.14]
+     * @return Redirect
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit($id)
     {
-        //
+        $this->authorize('create', CustomField::class);
+
+        if ($fieldset = CustomFieldset::find($id)) {
+            return view('custom_fields.fieldsets.edit')->with('item', $fieldset);
+        }
+
+        return redirect()->route('fields.index')->with('error', trans('admin/custom_fields/general.fieldset_does_not_exist', ['id' => $id]));
+
     }
 
     /**
-     * GET IN THE SEA BRADY.
+     * Saves updated fieldset data
      *
-     * @todo Uhh, build this too?
-     * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+     * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param  int  $id
-     * @since [v1.8]
-     * @return Fuckall
+     * @since [v6.0.14]
+     * @return Redirect
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
-        //
+        $this->authorize('create', CustomField::class);
+
+        if ($fieldset = CustomFieldset::find($id)) {
+
+            $fieldset->name = $request->input('name');
+
+            if ($fieldset->save()) {
+                return redirect()->route('fields.index')->with('success', trans('admin/custom_fields/general.fieldset_updated'));
+            }
+
+            return redirect()->back()->withInput()->withErrors($fieldset->getErrors());
+
+        }
+
+        return redirect()->route('fields.index')->with('error', trans('admin/custom_fields/general.fieldset_does_not_exist', ['id' => $id]));
     }
 
     /**
@@ -180,7 +219,7 @@ class CustomFieldsetsController extends Controller
                 }
             }
 
-            $results = $set->fields()->attach($request->input('field_id'), ['required' => ($request->input('required') == 'on'), 'order' => $request->input('order', 1)]);
+            $results = $set->fields()->attach($request->input('field_id'), ['required' => ($request->input('required') == 'on'), 'order' => (int)$request->input('order', 1)]);
 
             return redirect()->route('fieldsets.show', [$id])->with('success', trans('admin/custom_fields/message.field.create.assoc_success'));
         }
@@ -196,7 +235,7 @@ class CustomFieldsetsController extends Controller
      */
     public function makeFieldRequired($fieldset_id, $field_id)
     {
-        $this->authorize('update', CustomFieldset::class);
+        $this->authorize('update', CustomField::class);
         $field = CustomField::findOrFail($field_id);
         $fieldset = CustomFieldset::findOrFail($fieldset_id);
         $fields[$field->id] = ['required' => 1];
@@ -214,7 +253,7 @@ class CustomFieldsetsController extends Controller
      */
     public function makeFieldOptional($fieldset_id, $field_id)
     {
-        $this->authorize('update', CustomFieldset::class);
+        $this->authorize('update', CustomField::class);
         $field = CustomField::findOrFail($field_id);
         $fieldset = CustomFieldset::findOrFail($fieldset_id);
         $fields[$field->id] = ['required' => 0];

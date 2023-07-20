@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Aviso: </strong> Este artigo foi assinalado como "não implementável".
                         Se este estado mudou, por favor atualize o estado do artigo.',
     'does_not_exist' 	=> 'Artigo não existente.',
-    'does_not_exist_or_not_requestable' => 'Boa tentativa. Esse artigo não existe ou não é solicitável.',
+    'does_not_exist_or_not_requestable' => 'Esse artigo não existe ou não é solicitável.',
     'assoc_users'	 	=> 'Este artigo está correntemente alocado a um utilizador e não pode ser removido. Por favor devolva o artigo e de seguida tente remover novamente. ',
 
     'create' => [
@@ -17,17 +17,21 @@ return [
         'error'   			=> 'Artigo não foi atualizado. Por favor, tente novamente',
         'success' 			=> 'Artigo atualizado com sucesso.',
         'nothing_updated'	=>  'Nenhum atributo foi selecionado, portanto nada foi atualizado.',
+        'no_assets_selected'  =>  'Nenhum ativo foi selecionado, por isso nada foi atualizado.',
     ],
 
     'restore' => [
         'error'   		=> 'O Artigo não foi restaurado, por favor tente novamente',
         'success' 		=> 'Artigo restaurado com sucesso.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
         'error'   		=> 'A auditoria de ativos não teve êxito. Por favor, tente novamente.',
         'success' 		=> 'Auditoria de ativos logada com sucesso.',
     ],
+
 
     'deletefile' => [
         'error'   => 'Ficheiro não removido. Por favor, tente novamente.',
@@ -47,7 +51,10 @@ return [
         'success'               => 'O seu ficheiro foi importado',
         'file_delete_success'   => 'Ficheiro eliminado com sucesso',
         'file_delete_error'      => 'Não foi possível eliminar o ficheiro',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Tem a certeza de que pretende eliminar este artigo?',

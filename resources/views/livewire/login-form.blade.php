@@ -41,7 +41,7 @@
                                             <i class="fas fa-user" aria-hidden="true"></i> 
                                             {{ trans('admin/users/table.username')  }}
                                         </label>
-                                        <input class="form-control" placeholder="{{ trans('admin/users/table.username')  }}" name="username" type="text" autocomplete="off" wire:model="username" wire:model.defer="username" wire:model.lazy="username">
+                                        <input class="form-control" placeholder="{{ trans('admin/users/table.username')  }}" name="username" type="text" autocomplete="off" wire:model="username">
                                         @error('username') 
                                             <span class="alert-msg">
                                                 {{ $message }}
@@ -53,7 +53,7 @@
                                             <i class="fas fa-key" aria-hidden="true"></i> 
                                             {{ trans('admin/users/table.password')  }}
                                         </label>
-                                        <input class="form-control" placeholder="{{ trans('admin/users/table.password')  }}" name="password" type="password" wire:model="password" wire:model.lazy="password" wire:model.defer="password" autocomplete="off">
+                                        <input class="form-control" placeholder="{{ trans('admin/users/table.password')  }}" name="password" type="password" wire:model="password" autocomplete="off">
                                         @error('password') 
                                             <span class="alert-msg">
                                                 {{ $message }}
@@ -62,8 +62,9 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="checkbox">
-                                            <label style="margin-left: -20px;">
-                                                <input name="remember" type="checkbox" value="1" class="minimal"> {{ trans('auth/general.remember_me')  }}
+                                            <label class="form-control">
+                                                <input name="remember" type="checkbox" value="1">
+                                                {{ trans('auth/general.remember_me')  }}
                                             </label>
                                         </div>
                                 </div>

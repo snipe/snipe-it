@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'component_name'                  => 'Sastāvdaļas nosaukums',
     'checkin'                             => 'Reģistrēšanās sastāvdaļa',
     'checkout'                             => 'Checkout komponentu',
@@ -12,4 +12,5 @@ return [
     'remaining' 			             => 'Atlikušais',
     'total' 			                 => 'Kopā',
     'update'                            => 'Atjaunināt komponents',
-];
+    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
+);

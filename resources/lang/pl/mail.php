@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'Użytkownik zaakceptował zasób',
+    'acceptance_asset_declined' => 'Użytkownik odrzucił zasób',
     'a_user_canceled' => 'Użytkownik anulował zapotrzebowanie na sprzęt na stronie www',
     'a_user_requested' => 'Użytkownik zamówił pozycję na stronie internetowej',
     'accessory_name' => 'Nazwa sprzętu:',
@@ -9,7 +11,7 @@ return [
     'asset' => 'Sprzęt:',
     'asset_name' => 'Nazwa sprzętu:',
     'asset_requested' => 'Wystosowane zapotrzebowanie na sprzęt',
-    'asset_tag' => 'Artykół Tag',
+    'asset_tag' => 'Tag sprzętu',
     'assigned_to' => 'Przypisane do',
     'best_regards' => 'Pozdrawiam',
     'canceled' => 'Anulowane:',
@@ -41,6 +43,7 @@ return [
     'login_first_admin' => 'Zaloguj się do aplikacji Snipe-IT przy użyciu poniższych poświadczeń:',
     'login' => 'Login:',
     'Low_Inventory_Report' => 'Raport niskiego stanu zasobów',
+    'inventory_report' => 'Raport z magazynu',
     'min_QTY' => 'Min. ilość',
     'name' => 'Nazwa',
     'new_item_checked' => 'Nowy przedmiot przypisany do Ciebie został zwrócony, szczegóły poniżej.',
@@ -59,7 +62,7 @@ return [
     'test_mail_text' => 'To jest wiadomość testowa z aplikacji Snipe-IT Asset Management System. Jeśli otrzymałeś ją - poczta działa :)',
     'the_following_item' => 'Następujący sprzęt został otrzymany: ',
     'low_inventory_alert' => 'Istnieje: liczba przedmiot, który jest poniżej minimalnej ilości zapasów lub wkrótce ta wartość będzie niska. | Istnieją: policz przedmioty, które są poniżej minimalnej ilości zapasów lub wkrótce te wartości będą niskie.',
-    'assets_warrantee_alert' => 'Istnieje: liczba aktywo z wygasającą gwarancją w ciągu następnych: dni progowe. | Istnieje: liczba aktyw z wygasającą gwarancją w ciągu następnych: dni progowe.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'Istnieje: liczba licencja wygasająca w ciągu następnych: dni progowe. | Istnieje: liczba licencji wygasających w ciągu następnych: dni progowe.',
     'to_reset' => 'Aby zresetować hasło na :web, wypełnij ten formularz:',
     'type' => 'Typ',
@@ -71,9 +74,11 @@ return [
     'your_credentials' => 'Twoje poświadczenia :web',
     'Accessory_Checkin_Notification' => 'Akcesorium zwrócono',
     'Asset_Checkin_Notification' => 'Sprzęt zwrócono',
+    'Asset_Checkout_Notification' => 'Zasób wydany',
     'License_Checkin_Notification' => 'Akcesorium zwrócono',
     'Expected_Checkin_Report' => 'Oczekiwano raportu kontroli aktywów',
     'Expected_Checkin_Notification' => 'Przypomnienie: :name sprawdza termin zbliżający się',
     'Expected_Checkin_Date' => 'Zasób przypisany Tobie ma być zwrócony w dniu :date',
     'your_assets' => 'Zobacz swój sprzęt',
+    'rights_reserved' => 'Wszystkie prawa zastrzeżone.',
 ];

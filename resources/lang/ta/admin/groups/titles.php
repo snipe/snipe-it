@@ -10,5 +10,7 @@ return [
     'group_admin' 	 		=> 'குழு நிர்வாகம்',
     'allow' 	 			=> 'அனுமதி',
     'deny' 	 				=> 'மறு',
-
+    'permission'            => 'Permission',
+    'grant'                 => 'Grant',
+    'no_permissions'        => 'This group has no permissions.'
 ];

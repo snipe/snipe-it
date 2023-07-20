@@ -12,6 +12,7 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Events\CheckoutableCheckedIn;
 use App\Events\ComponentCheckedIn;
 use App\Models\Asset;
+use Illuminate\Support\Facades\Validator;
 
 class ComponentsController extends Controller
 {
@@ -40,14 +41,18 @@ class ComponentsController extends Controller
                 'purchase_cost',
                 'qty',
                 'image',
+                'notes',
             ];
 
-
-        $components = Company::scopeCompanyables(Component::select('components.*')
-            ->with('company', 'location', 'category', 'assets'));
+        $components = Component::select('components.*')
+            ->with('company', 'location', 'category', 'assets', 'supplier');
 
         if ($request->filled('search')) {
             $components = $components->TextSearch($request->input('search'));
+        }
+
+        if ($request->filled('name')) {
+            $components->where('name', '=', $request->input('name'));
         }
 
         if ($request->filled('company_id')) {
@@ -58,18 +63,22 @@ class ComponentsController extends Controller
             $components->where('category_id', '=', $request->input('category_id'));
         }
 
+        if ($request->filled('supplier_id')) {
+            $components->where('supplier_id', '=', $request->input('supplier_id'));
+        }
+
         if ($request->filled('location_id')) {
             $components->where('location_id', '=', $request->input('location_id'));
         }
 
-        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
-        // case we override with the actual count, so we should return 0 items.
-        $offset = (($components) && ($request->get('offset') > $components->count())) ? $components->count() : $request->get('offset', 0);
+        if ($request->filled('notes')) {
+            $components->where('notes','=',$request->input('notes'));
+        }
 
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $components->count()) ? $components->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
 
-        
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort_override =  $request->input('sort');
         $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'created_at';
@@ -83,6 +92,9 @@ class ComponentsController extends Controller
                 break;
             case 'company':
                 $components = $components->OrderCompany($order);
+                break;
+            case 'supplier':
+                $components = $components->OrderSupplier($order);
                 break;
             default:
                 $components = $components->orderBy($column_sort, $order);
@@ -216,20 +228,30 @@ class ComponentsController extends Controller
     public function checkout(Request $request, $componentId)
     {
         // Check if the component exists
-        if (is_null($component = Component::find($componentId))) {
+        if (!$component = Component::find($componentId)) {
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/components/message.does_not_exist')));
         }
 
         $this->authorize('checkout', $component);
 
+        $validator = Validator::make($request->all(), [
+            'asset_id'          => 'required|exists:assets,id',
+            'assigned_qty'      => "required|numeric|min:1|digits_between:1,".$component->numRemaining(),
+        ]);
 
-        if ($component->numRemaining() > $request->get('assigned_qty')) {
+        if ($validator->fails()) {
+            return response()->json(Helper::formatStandardApiResponse('error', $validator->errors()));
 
-            if (!$asset = Asset::find($request->input('assigned_to'))) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')));
-            }
+        }
 
-            // Update the accessory data
+        // Make sure there is at least one available to checkout
+        if ($component->numRemaining() <= $request->get('assigned_qty')) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/components/message.checkout.unavailable', ['remaining' => $component->numRemaining(), 'requested' => $request->get('assigned_qty')])));
+        }
+
+        if ($component->numRemaining() >= $request->get('assigned_qty')) {
+
+            $asset = Asset::find($request->input('assigned_to'));
             $component->assigned_to = $request->input('assigned_to');
 
             $component->assets()->attach($component->id, [
@@ -237,7 +259,8 @@ class ComponentsController extends Controller
                 'created_at' => \Carbon::now(),
                 'assigned_qty' => $request->get('assigned_qty', 1),
                 'user_id' => \Auth::id(),
-                'asset_id' => $request->get('assigned_to')
+                'asset_id' => $request->get('assigned_to'),
+                'note' => $request->get('note'),
             ]);
 
             $component->logCheckout($request->input('note'), $asset);
@@ -245,7 +268,7 @@ class ComponentsController extends Controller
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/components/message.checkout.success')));
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null, 'Not enough components remaining: '.$component->numRemaining().' remaining, '.$request->get('assigned_qty').' requested.'));
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/components/message.checkout.unavailable', ['remaining' => $component->numRemaining(), 'requested' => $request->get('assigned_qty')])));
     }
 
     /**

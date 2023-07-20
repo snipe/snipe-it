@@ -36,7 +36,7 @@
     background-color: rgba(255, 255, 255, 0.1);
   }
   .skin-orange .main-header .navbar .dropdown-menu li a {
-    color: #fff;
+    color: #333;
   }
   .skin-orange .main-header .navbar .dropdown-menu li a:hover {
     background: #e67e00;
@@ -150,16 +150,48 @@
   color: #fff;
 }
 a {
-  color: #FF8C00;
+  color: var(--link);
 }
 a:hover {
-  color: #995400;
+  color: var(--hover-link);
 }
 a:visited {
-  color: #FF8C00;
+  color: var(--visited-link);
 }
 .text-primary {
   color: #995400;
+}
+:root {
+  --button-default: #b36200;
+  --button-primary: #804600;
+  --button-hover: #663800;
+  --header: #FF8C00;
+  /* Use same as Header picker */
+  --text-main: #BBB;
+  --text-sub: #9b9b9b;
+  --link: #FF8C00;
+  /* Use same as Header picker, lighten by 70% */
+  --visited-link: #ffa333;
+  /* Use same as Header picker, lighten by 70% */
+  --hover-link: #ffaf4d;
+  /* Use same as Header picker, lighten by 70% */
+  --nav-link: #FFF;
+  /* Use same as Header picker */
+  --light-link: #fff;
+  /* Use same as Header picker */
+}
+a.btn-info:link,
+a.btn-warning:link,
+a.btn-danger:link {
+  color: #FFF;
+}
+a.btn-info:visited,
+a.btn-warning:visited,
+a.btn-danger:visited {
+  color: #FFF;
+}
+.far fa-life-ring {
+  color: var(--link);
 }
 .fixed-table-container tbody .selected td {
   background-color: #fff8af;

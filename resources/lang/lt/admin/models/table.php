@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'create'				=> 'Sukurti įrangos modelį',
     'created_at' 			=> 'Sukurta',
@@ -14,4 +14,4 @@ return [
     'update'				=> 'Atnaujinti įrangos modelį',
     'clone'				=> 'Kopijuoti modelį',
     'edit'				=> 'Taisyti modelį',
-];
+);

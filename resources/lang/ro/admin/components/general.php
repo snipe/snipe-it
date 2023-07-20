@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'component_name'                  => 'Numele componentei',
     'checkin'                             => 'Verificați componenta',
     'checkout'                             => 'Componenta de verificare',
@@ -12,4 +12,5 @@ return [
     'remaining' 			             => 'Rămas',
     'total' 			                 => 'Total',
     'update'                            => 'Actualizați componenta',
-];
+    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
+);

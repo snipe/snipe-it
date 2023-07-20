@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -43,12 +43,14 @@ return array(
     'file'                 => 'Die: Attribuut moet \'n lêer wees.',
     'filled'               => 'Die: Attribuut veld moet \'n waarde hê.',
     'image'                => 'Die: kenmerk moet \'n beeld wees.',
+    'import_field_empty'    => 'The value for :fieldname cannot be null.',
     'in'                   => 'Die gekose: attribuut is ongeldig.',
     'in_array'             => 'Die: attribuut veld bestaan ​​nie in: ander.',
     'integer'              => 'Die: Attribuut moet \'n heelgetal wees.',
     'ip'                   => 'Die: Attribuut moet \'n geldige IP-adres wees.',
     'ipv4'                 => 'Die: Attribuut moet \'n geldige IPv4-adres wees.',
     'ipv6'                 => 'Die: Attribuut moet \'n geldige IPv6-adres wees.',
+    'is_unique_department' => 'The :attribute must be unique to this Company Location',
     'json'                 => 'Die: Attribuut moet \'n geldige JSON-string wees.',
     'max'                  => [
         'numeric' => 'Die: Attribuut mag nie groter wees as: maksimum.',
@@ -64,6 +66,9 @@ return array(
         'string'  => 'Die: kenmerk moet ten minste wees: min karakters.',
         'array'   => 'Die: Attribuut moet ten minste: min items hê.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'Die gekose: attribuut is ongeldig.',
     'numeric'              => 'Die: Attribuut moet \'n nommer wees.',
     'present'              => 'Die: attribuut veld moet teenwoordig wees.',
@@ -88,19 +93,16 @@ return array(
     'unique'               => 'Die: Attribuut is reeds geneem.',
     'uploaded'             => 'Die: kenmerk kon nie opgelaai word nie.',
     'url'                  => 'Die: Attribuutformaat is ongeldig.',
-    "unique_undeleted"     => "The :attribute must be unique.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
-
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
+    'unique_undeleted'     => 'The :attribute must be unique.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
+    'letters'              => 'Password must contain at least one letter.',
+    'numbers'              => 'Password must contain at least one number.',
+    'case_diff'            => 'Password must use mixed case.',
+    'symbols'              => 'Password must contain symbols.',
+    'gte'                  => [
+        'numeric'          => 'Value cannot be negative'
+    ],
 
 
     /*
@@ -115,11 +117,23 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Die: attribuut veld bevat 'n karakter wat nie toegelaat word nie.",
-        "email_array"      => "Een of meer e-posadresse is ongeldig.",
-        "hashed_pass"      => "Jou huidige wagwoord is verkeerd",
+        'alpha_space' => 'Die: attribuut veld bevat \'n karakter wat nie toegelaat word nie.',
+        'email_array'      => 'Een of meer e-posadresse is ongeldig.',
+        'hashed_pass'      => 'Jou huidige wagwoord is verkeerd',
         'dumbpwd'          => 'Daardie wagwoord is te algemeen.',
-        "statuslabel_type" => "U moet 'n geldige statusetiket tipe kies",
+        'statuslabel_type' => 'U moet \'n geldige statusetiket tipe kies',
+
+        // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
+        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // people won't know how to format. 
+        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
+        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
+        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+
     ],
 
     /*
@@ -135,4 +149,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

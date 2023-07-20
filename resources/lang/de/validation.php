@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -16,7 +16,7 @@ return array(
     'accepted'             => ':attribute muss akzeptiert werden.',
     'active_url'           => ':attribute ist keine gültige URL.',
     'after'                => ':attribute muss ein Datum nach dem :date sein.',
-    'after_or_equal'       => 'Das Attribut: muss ein Datum nach oder gleich: date sein.',
+    'after_or_equal'       => 'Das :attribute muss ein Datum nach oder gleich :date sein.',
     'alpha'                => ':attribute darf nur aus Buchstaben bestehen.',
     'alpha_dash'           => ':attribute darf nur aus Buchstaben, Zahlen und Gedankenstrichen bestehen.',
     'alpha_num'            => ':attribute darf nur aus Buchstaben und Zahlen bestehen.',
@@ -43,12 +43,14 @@ return array(
     'file'                 => ':attribute muss eine Datei sein.',
     'filled'               => 'Das :attribute Feld muss einen Wert haben.',
     'image'                => ':attribute muss ein Bild sein.',
+    'import_field_empty'    => ':fieldname darf nicht leer sein.',
     'in'                   => 'Auswahl :attribute ist ungültig.',
     'in_array'             => 'Das Feld :attribute existiert nicht in :other.',
     'integer'              => ':attribute muss eine ganze Zahl sein.',
     'ip'                   => ':attribute muss eine gültige IP Adresse sein.',
     'ipv4'                 => ':attribute muss eine gültige IPv4 Adresse sein.',
     'ipv6'                 => ':attribute muss eine gültige IPv6 Adresse sein.',
+    'is_unique_department' => ':attribute muss einzigartig an diesem Standort sein',
     'json'                 => 'Das Attribut muss eine gültige JSON-Zeichenfolge sein.',
     'max'                  => [
         'numeric' => ':attribute darf nicht größer als :max sein.',
@@ -64,16 +66,19 @@ return array(
         'string'  => ':attribute benötigt mindestens :min Zeichen.',
         'array'   => ':attribute muss mindestens :min Elemente enthalten.',
     ],
+    'starts_with'          => ':attribute muss mit einem der folgenden Werte beginnen: :values.',
+    'ends_with'            => ':attribute muss mit einem der folgenden Werte enden: :values.',
+
     'not_in'               => 'Auswahl :attribute ist ungültig.',
     'numeric'              => ':attribute muss eine Zahl sein.',
-    'present'              => 'Das Attributfeld muss vorhanden sein.',
+    'present'              => ':attribute muss vorhanden sein.',
     'valid_regex'          => 'Dies ist kein gültiger Regex-Ausdruck. ',
     'regex'                => ':attribute Format ungültig.',
     'required'             => ':attribute Feld muss ausgefüllt sein.',
-    'required_if'          => ':attribute wird benötigt wenn :other :value entspricht.',
-    'required_unless'      => 'Das :attribute Feld ist erforderlich, es sei denn :other ist in :values.',
+    'required_if'          => ':attribute wird benötigt, wenn :other :value entspricht.',
+    'required_unless'      => ':attribute ist erforderlich, es sei denn :other ist in :values.',
     'required_with'        => ':attribute wird benötigt wenn :value ausgewählt ist.',
-    'required_with_all'    => 'Das: Attributfeld ist erforderlich, wenn: Werte vorhanden sind.',
+    'required_with_all'    => ':attribute field ist erforderlich, wenn :values vorhanden sind.',
     'required_without'     => ':attribute wird benötigt wenn :value nicht ausgewählt ist.',
     'required_without_all' => 'Das: Attributfeld ist erforderlich, wenn keine der folgenden Werte vorhanden sind:',
     'same'                 => ':attribute und :other müssen übereinstimmen.',
@@ -88,19 +93,16 @@ return array(
     'unique'               => ':attribute schon benutzt.',
     'uploaded'             => ':attribute konnte nicht hochgeladen werden.',
     'url'                  => ':attribute Format ist ungültig.',
-    "unique_undeleted"     => "Die Variable :attribute muss eindeutig sein.",
-    "non_circular"         => "Das :attribute darf keinen Zirkelbezug ergeben.",
-
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
+    'unique_undeleted'     => 'Die Variable :attribute muss eindeutig sein.',
+    'non_circular'         => 'Das :attribute darf keinen Zirkelbezug ergeben.',
+    'disallow_same_pwd_as_user_fields' => 'Das Passwort muss sich vom Nutzernamen unterscheiden.',
+    'letters'              => 'Das Passwort muss mindestens einen Buchstaben beinhalten.',
+    'numbers'              => 'Das Passwort muss mindestens eine Zahl beinhalten.',
+    'case_diff'            => 'Das Passwort muss Groß- und Kleinschreibung beinhalten.',
+    'symbols'              => 'Das Passwort muss Sonderzeichen beinhalten.',
+    'gte'                  => [
+        'numeric'          => 'Wert darf nicht negativ sein'
+    ],
 
 
     /*
@@ -115,11 +117,23 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Das :attribute Feld enthält ein nicht erlaubtes Zeichen.",
-        "email_array"      => "Eine oder mehrere Email Adressen sind ungültig.",
-        "hashed_pass"      => "Ihr derzeitiges Passwort ist nicht korrekt",
+        'alpha_space' => 'Das :attribute Feld enthält ein nicht erlaubtes Zeichen.',
+        'email_array'      => 'Eine oder mehrere Email Adressen sind ungültig.',
+        'hashed_pass'      => 'Ihr derzeitiges Passwort ist nicht korrekt',
         'dumbpwd'          => 'Das Passwort ist zu gebräuchlich.',
-        "statuslabel_type" => "Sie müssen einen gültigen Statuslabel-Typ auswählen",
+        'statuslabel_type' => 'Sie müssen einen gültigen Statuslabel-Typ auswählen',
+
+        // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
+        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // people won't know how to format. 
+        'purchase_date.date_format'     => ':attribute muss ein gültiges Datum im Format JJJJ-MM-TT sein',
+        'last_audit_date.date_format'   =>  ':attribute muss ein gültiges Datum im Format JJJJ-MM-TT hh:mm:ss sein',
+        'expiration_date.date_format'   =>  ':attribute muss ein gültiges Datum im Format JJJJ-MM-TT sein',
+        'termination_date.date_format'  =>  ':attribute muss ein gültiges Datum im Format JJJJ-MM-TT sein',
+        'expected_checkin.date_format'  =>  ':attribute muss ein gültiges Datum im Format JJJJ-MM-TT sein',
+        'start_date.date_format'        =>  ':attribute muss ein gültiges Datum im Format JJJJ-MM-TT sein',
+        'end_date.date_format'          =>  ':attribute muss ein gültiges Datum im Format JJJJ-MM-TT sein',
+
     ],
 
     /*
@@ -135,4 +149,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

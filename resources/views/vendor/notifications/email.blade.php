@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-
+{{-- TODO: Translate --}}
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -73,16 +73,26 @@ $style = [
                         <td style="{{ $style['email-masthead'] }}">
 
                             @if (($snipeSettings->show_images_in_email=='1' ) && ($snipeSettings::setupCompleted()))
+                                @php
+                                    $logo = '';
+                                    if ($snipeSettings->logo != ''){
+                                        $logo = $snipeSettings->logo;
+                                    }
+
+                                    if ($snipeSettings->email_logo != ''){
+                                        $logo = $snipeSettings->email_logo;
+                                    }
+                                @endphp
 
                                 @if ($snipeSettings->brand == '3')
-                                    @if ($snipeSettings->logo!='')
-                                        <img class="navbar-brand-img logo" style="max-width: 50px;" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+                                    @if ($logo!='')
+                                        <img class="navbar-brand-img logo" style="max-width: 50px;" src="{{ config('app.url') }}/uploads/{{ $logo }}">
                                     @endif
                                     {{ $snipeSettings->site_name }}
 
                                 @elseif ($snipeSettings->brand == '2')
-                                    @if ($snipeSettings->logo!='')
-                                        <img class="navbar-brand-img logo" style="max-width: 50px;" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+                                    @if ($logo!='')
+                                        <img class="navbar-brand-img logo" style="max-width: 50px;" src="{{ config('app.url') }}/uploads/{{ $logo }}">
                                     @endif
                                 @else
                                     {{ $snipeSettings->site_name }}
@@ -193,8 +203,8 @@ $style = [
                                     <td style="{{ $fontFamily }} {{ $style['email-footer_cell'] }}">
                                         <p style="{{ $style['paragraph-sub'] }}">
                                             &copy; {{ date('Y') }}
-                                            <a style="{{ $style['anchor'] }}" href="{{ url('/') }}" target="_blank">{{ $snipeSettings->site_name }}</a>.
-                                            All rights reserved.
+                                            <a style="{{ $style['anchor'] }}" href="{{ config('app.url') }}" target="_blank">{{ $snipeSettings->site_name }}</a>.
+                                            {{ trans('mail.rights_reserved') }}
                                         </p>
 
                                         @if ($snipeSettings->privacy_policy_link!='')

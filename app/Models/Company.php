@@ -45,7 +45,7 @@ final class Company extends SnipeModel
      * 
      * @var array
      */
-    protected $searchableAttributes = ['name', 'created_at', 'updated_at'];
+    protected $searchableAttributes = ['name', 'phone', 'fax', 'created_at', 'updated_at'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -59,7 +59,11 @@ final class Company extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'name',
+        'phone',
+        'fax',
+    ];
 
     private static function isFullMultipleCompanySupportEnabled()
     {
@@ -73,6 +77,10 @@ final class Company extends SnipeModel
         }
     }
 
+    /**
+     * Scoping table queries, determining if a logged in user is part of a company, and only allows
+     * that user to see items associated with that company
+     */
     private static function scopeCompanyablesDirectly($query, $column = 'company_id', $table_name = null)
     {
         if (Auth::user()) {
@@ -126,6 +134,11 @@ final class Company extends SnipeModel
         if (is_null($companyable)) {
             return false;
         } elseif (! static::isFullMultipleCompanySupportEnabled()) {
+            return true;
+        } elseif (!$companyable instanceof Company && !\Schema::hasColumn($companyable->getModel()->getTable(), 'company_id')) {
+            // This is primary for the gate:allows-check in location->isDeletable()
+            // Locations don't have a company_id so without this it isn't possible to delete locations with FullMultipleCompanySupport enabled
+            // because this function is called by SnipePermissionsPolicy->before()
             return true;
         } else {
             if (Auth::user()) {

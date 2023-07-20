@@ -29,7 +29,7 @@ class Department extends SnipeModel
     ];
 
     protected $rules = [
-        'name'                  => 'required|max:255',
+        'name'                  => 'required|max:255|is_unique_department',
         'location_id'           => 'numeric|nullable',
         'company_id'            => 'numeric|nullable',
         'manager_id'            => 'numeric|nullable',
@@ -43,6 +43,8 @@ class Department extends SnipeModel
     protected $fillable = [
         'user_id',
         'name',
+        'phone',
+        'fax',
         'location_id',
         'company_id',
         'manager_id',
@@ -56,7 +58,7 @@ class Department extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['name', 'notes'];
+    protected $searchableAttributes = ['name', 'notes', 'phone', 'fax'];
 
     /**
      * The relations and their attributes that should be included when searching the model.

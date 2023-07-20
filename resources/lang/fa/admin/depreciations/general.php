@@ -6,7 +6,13 @@ return [
     'asset_depreciations'  					=> 'استهلاک دارایی',
     'create'  					            => 'ایجاد استهلاک',
     'depreciation_name'  					=> 'نام استهلاک',
+    'depreciation_min'                      => 'ارزش کف استهلاک
+',
     'number_of_months'  					=> 'تعداد ماه ها',
     'update'  					            => 'کمبود به روزرسانی',
-
+    'depreciation_min'                      => 'حداقل ارزش پس از استهلاک
+',
+    'no_depreciations_warning'               => '<strong>هشدار: </strong>
+                      شما در حال حاضر هیچ استهلاکی تنظیم نکرده اید.
+                      لطفاً حداقل یک استهلاک برای مشاهده گزارش استهلاک تنظیم کنید.',
 ];

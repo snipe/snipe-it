@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\AssetsTransformer;
+use App\Http\Transformers\SelectlistTransformer;
 use App\Http\Transformers\StatuslabelsTransformer;
 use App\Models\Asset;
 use App\Models\Statuslabel;
 use Illuminate\Http\Request;
+use App\Http\Transformers\PieChartTransformer;
+use Illuminate\Support\Arr;
 
 class StatuslabelsController extends Controller
 {
@@ -30,12 +33,27 @@ class StatuslabelsController extends Controller
             $statuslabels = $statuslabels->TextSearch($request->input('search'));
         }
 
-        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
-        // case we override with the actual count, so we should return 0 items.
-        $offset = (($statuslabels) && ($request->get('offset') > $statuslabels->count())) ? $statuslabels->count() : $request->get('offset', 0);
+        if ($request->filled('name')) {
+            $statuslabels->where('name', '=', $request->input('name'));
+        }
 
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+
+        // if a status_type is passed, filter by that
+        if ($request->filled('status_type')) {
+            if (strtolower($request->input('status_type')) == 'pending') {
+                $statuslabels = $statuslabels->Pending();
+            } elseif (strtolower($request->input('status_type')) == 'archived') {
+                $statuslabels = $statuslabels->Archived();
+            } elseif (strtolower($request->input('status_type')) == 'deployable') {
+                $statuslabels = $statuslabels->Deployable();
+            } elseif (strtolower($request->input('status_type')) == 'undeployable') {
+                $statuslabels = $statuslabels->Undeployable();
+            }
+        }
+
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $statuslabels->count()) ? $statuslabels->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
@@ -80,8 +98,8 @@ class StatuslabelsController extends Controller
         if ($statuslabel->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $statuslabel, trans('admin/statuslabels/message.create.success')));
         }
-
         return response()->json(Helper::formatStandardApiResponse('error', null, $statuslabel->getErrors()));
+
     }
 
     /**
@@ -100,6 +118,7 @@ class StatuslabelsController extends Controller
         return (new StatuslabelsTransformer)->transformStatuslabel($statuslabel);
     }
 
+
     /**
      * Update the specified resource in storage.
      *
@@ -115,6 +134,7 @@ class StatuslabelsController extends Controller
         $statuslabel = Statuslabel::findOrFail($id);
         
         $request->except('deployable', 'pending', 'archived');
+
 
         if (! $request->filled('type')) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Status label type is required.'));
@@ -161,48 +181,62 @@ class StatuslabelsController extends Controller
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/statuslabels/message.assoc_assets')));
     }
 
+
+
      /**
      * Show a count of assets by status label for pie chart
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function getAssetCountByStatuslabel()
     {
         $this->authorize('view', Statuslabel::class);
-
         $statuslabels = Statuslabel::withCount('assets')->get();
-
-        $labels = [];
-        $points = [];
-        $default_color_count = 0;
-        $colors_array = [];
+        $total = Array();
 
         foreach ($statuslabels as $statuslabel) {
-            if ($statuslabel->assets_count > 0) {
-                $labels[] = $statuslabel->name.' ('.number_format($statuslabel->assets_count).')';
-                $points[] = $statuslabel->assets_count;
 
-                if ($statuslabel->color != '') {
-                    $colors_array[] = $statuslabel->color;
-                } else {
-                    $colors_array[] = Helper::defaultChartColors($default_color_count);
-                }
-                $default_color_count++;
+            $total[$statuslabel->name]['label'] = $statuslabel->name;
+            $total[$statuslabel->name]['count'] = $statuslabel->assets_count;
+
+            if ($statuslabel->color != '') {
+                $total[$statuslabel->name]['color'] = $statuslabel->color;
             }
         }
 
-        $result = [
-            'labels' => $labels,
-            'datasets' => [[
-                'data' => $points,
-                'backgroundColor' => $colors_array,
-                'hoverBackgroundColor' =>  $colors_array,
-            ]],
-        ];
+        return (new PieChartTransformer())->transformPieChartDate($total);
 
-        return $result;
+    }
+
+    /**
+     * Show a count of assets by meta status type for pie chart
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v6.0.11]
+     * @return array
+     */
+    public function getAssetCountByMetaStatus()
+    {
+        $this->authorize('view', Statuslabel::class);
+
+        $total['rtd']['label'] = trans('general.ready_to_deploy');
+        $total['rtd']['count'] = Asset::RTD()->count();
+
+        $total['deployed']['label'] = trans('general.deployed');
+        $total['deployed']['count'] = Asset::Deployed()->count();
+
+        $total['archived']['label'] = trans('general.archived');
+        $total['archived']['count'] = Asset::Archived()->count();
+
+        $total['pending']['label'] = trans('general.pending');
+        $total['pending']['count'] = Asset::Pending()->count();
+
+        $total['undeployable']['label'] = trans('general.undeployable');
+        $total['undeployable']['count'] = Asset::Undeployable()->count();
+
+        return (new PieChartTransformer())->transformPieChartDate($total);
     }
 
     /**
@@ -257,5 +291,46 @@ class StatuslabelsController extends Controller
         }
 
         return '0';
+    }
+
+    /**
+     * Gets a paginated collection for the select2 menus
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v6.1.1]
+     * @see \App\Http\Transformers\SelectlistTransformer
+     */
+    public function selectlist(Request $request)
+    {
+
+        $this->authorize('view.selectlists');
+        $statuslabels = Statuslabel::orderBy('default_label', 'desc')->orderBy('name', 'asc')->orderBy('deployable', 'desc');
+
+        if ($request->filled('search')) {
+            $statuslabels = $statuslabels->where('name', 'LIKE', '%'.$request->get('search').'%');
+        }
+
+        if ($request->filled('deployable')) {
+            $statuslabels = $statuslabels->where('deployable', '=', '1');
+        }
+
+        if ($request->filled('pending')) {
+            $statuslabels = $statuslabels->where('pending', '=', '1');
+        }
+
+        if ($request->filled('archived')) {
+            $statuslabels = $statuslabels->where('archived', '=', '1');
+        }
+
+        $statuslabels = $statuslabels->orderBy('name', 'ASC')->paginate(50);
+
+        // Loop through and set some custom properties for the transformer to use.
+        // This lets us have more flexibility in special cases like assets, where
+        // they may not have a ->name value but we want to display something anyway
+        foreach ($statuslabels as $statuslabel) {
+            $statuslabels->use_text = $statuslabel->name;
+        }
+
+        return (new SelectlistTransformer)->transformSelectlist($statuslabels);
     }
 }

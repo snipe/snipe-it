@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'component_name'                  => '組件名稱',
     'checkin'                             => '組件繳回',
     'checkout'                             => '組件借出',
@@ -12,4 +12,5 @@ return [
     'remaining' 			             => '剩餘',
     'total' 			                 => '總計',
     'update'                            => '更新組件',
-];
+    'checkin_limit'            => '借出數量必須等於或小於 :assigned_qty'
+);

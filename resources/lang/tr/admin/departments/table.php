@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'id'                        => 'ID',
     'name'                      => 'Bölüm Adı',
@@ -8,4 +8,4 @@ return [
     'location'                  => 'Konum',
     'create'                    => 'Bölüm Oluştur',
     'update'                    => 'Bölümü Güncelle',
-    ];
+    );

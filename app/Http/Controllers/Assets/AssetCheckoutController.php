@@ -27,7 +27,7 @@ class AssetCheckoutController extends Controller
     public function create($assetId)
     {
         // Check if the asset exists
-        if (is_null($asset = Asset::find(e($assetId)))) {
+        if (is_null($asset = Asset::with('company')->find(e($assetId)))) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
 
@@ -78,6 +78,15 @@ class AssetCheckoutController extends Controller
 
             if ($request->filled('status_id')) {
                 $asset->status_id = $request->get('status_id');
+            }
+
+            if(!empty($asset->licenseseats->all())){
+                if(request('checkout_to_type') == 'user') {
+                    foreach ($asset->licenseseats as $seat){
+                        $seat->assigned_to = $target->id;
+                        $seat->save();
+                    }
+                }
             }
 
             if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), $request->get('name'))) {

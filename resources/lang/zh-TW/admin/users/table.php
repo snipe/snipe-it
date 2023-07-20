@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> '啟用',
     'allow'  				=> '允許',
     'checkedout'  			=> '資產',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'Email',
     'employee_num'      	=> '員工編號',
     'first_name' 			=> '名',
-    'groupnotes'			=> '請選擇一個群組給使用者，注意，使用者將擁有該群組的所有權限。',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'ID',
     'inherit'  				=> '繼承',
     'job' 					=> '職稱',
@@ -28,11 +28,11 @@ return [
     'show_current'          => '顯示當前使用者',
     'show_deleted'          => '顯示已刪除使用者',
     'title' 				=> '職稱',
-    'to_restore_them'		=> '將它們還原。',
+	'to_restore_them'		=> '將它們還原。',
     'updateuser' 			=> '更新使用者',
     'username' 				=> '使用者名稱',
-    'user_deleted_text' 	=> '此使用者已被標記為刪除。',
+	'user_deleted_text' 	=> '此使用者已被標記為刪除。',
     'username_note' 		=> '（這是用來綁定 Active Directory，非用來登入）',
     'cloneuser'             => '複製使用者',
     'viewusers' 			=> '檢視使用者',
-];
+);

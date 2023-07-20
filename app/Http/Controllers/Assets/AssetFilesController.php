@@ -9,6 +9,7 @@ use App\Models\Actionlog;
 use App\Models\Asset;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
+use enshrined\svgSanitize\Sanitizer;
 
 class AssetFilesController extends Controller
 {
@@ -36,9 +37,29 @@ class AssetFilesController extends Controller
             }
 
             foreach ($request->file('file') as $file) {
+
                 $extension = $file->getClientOriginalExtension();
                 $file_name = 'hardware-'.$asset->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
+
+                // Check for SVG and sanitize it
+                if ($extension=='svg') {
+                    \Log::debug('This is an SVG');
+
+                        $sanitizer = new Sanitizer();
+                        $dirtySVG = file_get_contents($file->getRealPath());
+                        $cleanSVG = $sanitizer->sanitize($dirtySVG);
+
+                        try {
+                            Storage::put('private_uploads/assets/'.$file_name, $cleanSVG);
+                        } catch (\Exception $e) {
+                            \Log::debug('Upload no workie :( ');
+                            \Log::debug($e);
+                        }
+                } else {
                 Storage::put('private_uploads/assets/'.$file_name, file_get_contents($file));
+                }
+               
+                
                 $asset->logUpload($file_name, e($request->get('notes')));
             }
 
@@ -127,7 +148,6 @@ class AssetFilesController extends Controller
 
                 return redirect()->back()->with('success', trans('admin/hardware/message.deletefile.success'));
             }
-            $log->delete();
 
             return redirect()->back()
                 ->with('success', trans('admin/hardware/message.deletefile.success'));

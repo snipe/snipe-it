@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_suppliers_title' => 'A beszállítókról',
     'about_suppliers_text'  => 'A szállítók a tételek forrását nyomon követik',
     'address'               => 'Beszállító címe',
@@ -24,4 +24,4 @@ return [
     'view_assets_for'       => 'Eszközök megtekintése',
     'zip'                   => 'Irányítószám',
 
-];
+);

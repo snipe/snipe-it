@@ -1,20 +1,24 @@
 <?php
 
-return [
+return array(
 
     'accepted'                  => 'Úspěšně jste přijali tento majetek.',
     'declined'                  => 'Úspěšně jste odmítli tento majetek.',
     'bulk_manager_warn'	        => 'Uživatelé byli úspěšně aktualizováni, položka správce však nebyla uložena, protože správce, který jste si vybrali, byl také v seznamu uživatelů, který má být upraven, a uživatelé nemusí být jejich vlastní správce. Zvolte své uživatele znovu, kromě správce.',
     'user_exists'               => 'Uživatel již existuje!',
-    'user_not_found'            => 'Uživatel [:id] neexistuje.',
+    'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Přihlašovací pole je povinné',
     'user_password_required'    => 'Je vyžadováno heslo.',
     'insufficient_permissions'  => 'Nedostatečná oprávnění.',
     'user_deleted_warning'      => 'Tento uživatel byl smazán. Budete muset uživatele obnovit, aby jste ho mohli upravil nebo přidělil nové majetky.',
     'ldap_not_configured'        => 'Integrace LDAP nebyla pro tuto instalaci nakonfigurována.',
-    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
+    'password_resets_sent'      => 'Vybraným uživatelům, kteří jsou aktivováni a mají platné e-mailové adresy, byl zaslán odkaz pro obnovení hesla.',
+    'password_reset_sent'       => 'Odkaz pro obnovení hesla byl odeslán na :email!',
+    'user_has_no_email'         => 'Tento uživatel nemá e-mailovou adresu ve svém profilu.',
+    'user_has_no_assets_assigned'   => 'Tento uživatel nemá přiřazené žádné položky',
 
-    'success' => [
+
+    'success' => array(
         'create'    => 'Uživatel byl úspěšně vytvořen.',
         'update'    => 'Uživatel byl úspěšně aktualizován.',
         'update_bulk'    => 'Uživatelé byli úspěšně aktualizováni!',
@@ -25,9 +29,9 @@ return [
         'unsuspend' => 'Uživatel byl úspěšně zrušen.',
         'restored'  => 'Uživatel byl úspěšně obnoven.',
         'import'    => 'Uživatelé úspěšně naimportování.',
-    ],
+    ),
 
-    'error' => [
+    'error' => array(
         'create' => 'Vyskytl se problém při vytvářením uživatele. Zkuste to znovu.',
         'update' => 'Vyskytl se problém při aktualizování uživatele. Zkuste to znovu.',
         'delete' => 'Vyskytl se problém při mazání uživatele. Zkuste to znovu.',
@@ -42,18 +46,22 @@ return [
         'ldap_could_not_search' => 'Nelze vyhledat server LDAP. Zkontrolujte prosím konfiguraci serveru LDAP v konfiguračním souboru LDAP. <br>Chyba serveru LDAP:',
         'ldap_could_not_get_entries' => 'Nelze získat záznamy ze serveru LDAP. Zkontrolujte prosím konfiguraci serveru LDAP v konfiguračním souboru LDAP. <br>Chyba serveru LDAP:',
         'password_ldap' => 'Heslo pro tento účet je spravováno serverem LDAP / Active Directory. Obraťte se na oddělení IT a změňte heslo.',
-    ],
+    ),
 
-    'deletefile' => [
+    'deletefile' => array(
         'error'   => 'Soubor se nepodařilo smazat. Prosím zkuste to znovu.',
         'success' => 'Soubor byl úspěšně smazán.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Soubor(y) se nepodařilo nahrát. Prosím zkuste to znovu.',
         'success' => 'Soubor(y) byly v pořádku nahrány.',
         'nofiles' => 'Nevybrali jste žádné soubory pro nahrávání',
         'invalidfiles' => 'Jeden nebo více označených souborů je příliš velkých nebo nejsou podporované. Povolenými příponami jsou png, gif, jpg, doc, docx, pdf a txt.',
-    ],
+    ),
 
-];
+    'inventorynotification' => array(
+        'error'   => 'Tento uživatel nemá nastaven žádný e-mail.',
+        'success' => 'Uživatel byl informován o svém aktuálním majetku.'
+    )
+);

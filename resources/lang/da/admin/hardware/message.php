@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Advarsel: </strong> Dette aktiv er blevet markeret som uudnytteligt. Hvis denne status er ændret, skal du opdatere aktivstatus.',
     'does_not_exist' 	=> 'Asset eksisterer ikke.',
-    'does_not_exist_or_not_requestable' => 'Godt forsøgt. Det pågældende aktiv eksisterer ikke eller kan ikke anmodes om.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Dette aktiv er i øjeblikket tjekket ud til en bruger og kan ikke slettes. Kontroller aktivet først, og prøv derefter at slette igen.',
 
     'create' => [
@@ -16,17 +16,21 @@ return [
         'error'   			=> 'Akten blev ikke opdateret, prøv igen',
         'success' 			=> 'Asset opdateret med succes.',
         'nothing_updated'	=>  'Ingen felter blev valgt, så intet blev opdateret.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [
         'error'   		=> 'Akten blev ikke gendannet, prøv igen',
         'success' 		=> 'Asset restaureret med succes.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
         'error'   		=> 'Assetrevision mislykkedes. Prøv igen.',
         'success' 		=> 'Asset audit succesfuldt logget.',
     ],
+
 
     'deletefile' => [
         'error'   => 'Filen er ikke slettet. Prøv igen.',
@@ -46,7 +50,10 @@ return [
         'success'               => 'Din fil er blevet importeret',
         'file_delete_success'   => 'Din fil er blevet slettet korrekt',
         'file_delete_error'      => 'Filen kunne ikke slettes',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Er du sikker på, at du vil slette dette aktiv?',

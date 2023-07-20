@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Upozorenje: </strong> Ova je snimka označena kao trenutno nedjeljiva. Ako se ovaj status promijenio, ažurirajte status aktive.',
     'does_not_exist' 	=> 'Imovina ne postoji.',
-    'does_not_exist_or_not_requestable' => 'Dobar pokušaj. Ta imovina ne postoji ili nije potrebna.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Ovaj je entitet trenutno provjeren korisniku i ne može se izbrisati. Najprije provjerite snimljeni materijal, a zatim pokušajte ponovo ukloniti.',
 
     'create' => [
@@ -16,17 +16,21 @@ return [
         'error'   			=> 'Imovina nije ažurirana, pokušajte ponovo',
         'success' 			=> 'Imovina je uspješno ažurirana.',
         'nothing_updated'	=>  'Nije odabrano nijedno polje, tako da ništa nije ažurirano.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [
         'error'   		=> 'Imovina nije obnovljena, pokušajte ponovo',
         'success' 		=> 'Imovina je uspješno obnovljena.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
         'error'   		=> 'Revizija imovine nije uspjela. Molim te pokušaj ponovno.',
         'success' 		=> 'Uspjeh uspješno prijavljen.',
     ],
+
 
     'deletefile' => [
         'error'   => 'Datoteka nije izbrisana. Molim te pokušaj ponovno.',
@@ -46,7 +50,10 @@ return [
         'success'               => 'Vaša je datoteka uvezena',
         'file_delete_success'   => 'Vaša je datoteka uspješno izbrisana',
         'file_delete_error'      => 'Datoteka nije mogla biti izbrisana',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Jeste li sigurni da želite izbrisati ovaj materijal?',

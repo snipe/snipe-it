@@ -49,7 +49,7 @@ class ItemImportRequest extends FormRequest
                 $errorMessage = null;
 
                 if (is_null($fieldValue)) {
-                    $errorMessage = trans('validation.import_field_empty');
+                    $errorMessage = trans('validation.import_field_empty', ['fieldname' => $field]);
                     $this->errorCallback($import, $field, $errorMessage);
 
                     return $this->errors;
@@ -57,16 +57,13 @@ class ItemImportRequest extends FormRequest
             }
             // We submit as csv field: column, but the importer is happier if we flip it here.
             $fieldMappings = array_change_key_case(array_flip($import->field_map), CASE_LOWER);
-            // dd($fieldMappings);
         }
         $importer->setCallbacks([$this, 'log'], [$this, 'progress'], [$this, 'errorCallback'])
                  ->setUserId(Auth::id())
-                 ->setUpdating($this->has('import-update'))
-                 ->setShouldNotify($this->has('send-welcome'))
+                 ->setUpdating($this->get('import-update'))
+                 ->setShouldNotify($this->get('send-welcome'))
                  ->setUsernameFormat('firstname.lastname')
                  ->setFieldMappings($fieldMappings);
-        // $logFile = storage_path('logs/importer.log');
-        // \Log::useFiles($logFile);
         $importer->import();
 
         return $this->errors;

@@ -1,5 +1,5 @@
 <?php
 
-return [
-    'error'   => 'Morate odabrati barem jednu opciju.',
-];
+return array(
+    'error'   => 'Morate odabrati barem jednu opciju.'
+);

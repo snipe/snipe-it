@@ -1,10 +1,10 @@
 <?php
 
-return [
+return array(
     'about_suppliers_title' => 'Over leveranciers',
     'about_suppliers_text'  => 'Leveranciers worden gebruikt om de afkomst van items bij te houden',
     'address'               => 'Leverancier adres',
-    'assets'                => 'Assets',
+    'assets'                => 'Activa',
     'city'                  => 'Stad',
     'contact'               => 'Contact naam',
     'country'               => 'Land',
@@ -21,7 +21,7 @@ return [
     'update'                => 'Wijzig leverancier',
     'url'                   => 'URL',
     'view'                  => 'Bekijk leverancier',
-    'view_assets_for'       => 'Bekijk assets voor',
+    'view_assets_for'       => 'Activa bekijken',
     'zip'                   => 'Postcode',
 
-];
+);

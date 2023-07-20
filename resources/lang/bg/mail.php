@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'Потребител е отменил заявка за елемент в уебсайта',
     'a_user_requested' => 'Потребител е направил заявка за елемент в уебсайта',
     'accessory_name' => 'Име на аксесоар:',
@@ -41,6 +43,7 @@ return [
     'login_first_admin' => 'Влезте в своята Snipe-IT инсталация използвайки данните по-долу:',
     'login' => 'Вход:',
     'Low_Inventory_Report' => 'Доклад за нисък запас',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Минимално количество',
     'name' => 'Име',
     'new_item_checked' => 'Нов артикул беше изписан под вашете име, детайлите са отдолу.',
@@ -59,7 +62,7 @@ return [
     'test_mail_text' => 'Това е тест от Snipe-IT система за управление на активи. Ако сте получили това, email-а работи :)',
     'the_following_item' => 'Следният артикул беше вписан:',
     'low_inventory_alert' => 'Има :count артикул, който е под минималния праг за наличност или скоро ще се изчерпа.| Има :count артикула, които са под минималния праг за наличност или скоро ще се изчерпат.',
-    'assets_warrantee_alert' => 'Има :count актив с гаранция, която ще изтече в следващите :threshold дни.|Има :count активa с гаранция, която ще изтече в следващите :threshold дни.',
+    'assets_warrantee_alert' => 'Има :count актив(а) с гаранция, която ще изтече в следващите :threshold дни.|Има :count активa с гаранции, която ще изтече в следващите :threshold дни.',
     'license_expiring_alert' => 'Има :count лиценз, който изтича в следващите :threshold дни.|Има :count лиценза, които изтичат в следващите :threshold дни.',
     'to_reset' => 'За да нулирате вашата :web password, попълнете този формуляр:',
     'type' => 'Вид',
@@ -71,9 +74,11 @@ return [
     'your_credentials' => 'Вашите идентификационни данни за Snipe-IT',
     'Accessory_Checkin_Notification' => 'Аксесоарат е вписан',
     'Asset_Checkin_Notification' => 'Актива е вписан',
+    'Asset_Checkout_Notification' => 'Asset checked out',
     'License_Checkin_Notification' => 'Лиценза е вписан',
     'Expected_Checkin_Report' => 'Очакван рапорт за вписване на актив',
     'Expected_Checkin_Notification' => 'Напомняне: :name крайната дата за вписване наближава',
     'Expected_Checkin_Date' => 'Наближава срока за връщане на актив който е заведен на Вас, трябва да се върна на :date',
     'your_assets' => 'Преглед на вашите активи',
+    'rights_reserved' => 'All rights reserved.',
 ];

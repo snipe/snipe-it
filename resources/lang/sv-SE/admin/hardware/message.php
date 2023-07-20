@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Varning: </strong> Den här tillgången har markerats som omöjlig för närvarande. Om denna status har ändrats uppdaterar du tillgångsstatusen.',
     'does_not_exist' 	=> 'Tillgång existerar inte.',
-    'does_not_exist_or_not_requestable' => 'Bra försök. Den tillgången existerar inte eller är inte tillgänglig.',
+    'does_not_exist_or_not_requestable' => 'Den tillgången finns inte eller är inte önskvärd.',
     'assoc_users'	 	=> 'Denna tillgång kontrolleras för närvarande till en användare och kan inte raderas. Kontrollera tillgången först och försök sedan radera igen.',
 
     'create' => [
@@ -16,17 +16,21 @@ return [
         'error'   			=> 'Tillgången var inte uppdaterad, försök igen',
         'success' 			=> 'Asset uppdaterad framgångsrikt.',
         'nothing_updated'	=>  'Inga fält valdes, så ingenting uppdaterades.',
+        'no_assets_selected'  =>  'Inga tillgångar valdes, så ingenting uppdaterades.',
     ],
 
     'restore' => [
         'error'   		=> 'Tillgången återställdes inte, försök igen',
         'success' 		=> 'Tillgången återställs framgångsrikt.',
+        'bulk_success' 		=> 'Återställning av tillgång lyckades.',
+        'nothing_updated'   => 'Inga tillgångar valdes, så ingenting återställdes.', 
     ],
 
     'audit' => [
         'error'   		=> 'Inventeringen av tillgången misslyckades. Var god försök igen.',
         'success' 		=> 'Inventeringen av tillgången har loggats.',
     ],
+
 
     'deletefile' => [
         'error'   => 'Filen har inte tagits bort. Var god försök igen.',
@@ -46,7 +50,10 @@ return [
         'success'               => 'Din fil har importerats',
         'file_delete_success'   => 'Din fil har tagits bort',
         'file_delete_error'      => 'Filen kunde inte raderas',
+        'header_row_has_malformed_characters' => 'Ett eller flera attribut i rubrikraden innehåller felaktigt formatterade UTF-8-tecken',
+        'content_row_has_malformed_characters' => 'Ett eller flera attribut i den första raden av innehållet innehåller felaktigt formatterade UTF-8-tecken',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Är du säker på att du vill radera den här tillgången?',

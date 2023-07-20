@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Update Asset Tag Settings
+    {{ trans('admin/settings/general.asset_tag_title') }}
     @parent
 @stop
 
@@ -32,7 +32,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fas fa-list-ol"></i> Asset Tags
+                        <i class="fas fa-list-ol"></i> {{ trans('general.asset_tags') }}
                     </h4>
                 </div>
                 <div class="box-body">
@@ -43,11 +43,13 @@
                         <!-- auto ids -->
                         <div class="form-group">
                             <div class="col-md-5">
-                                {{ Form::label('auto_increment_assets', trans('admin/settings/general.asset_ids')) }}
+                                <strong>{{  trans('admin/settings/general.auto_increment_assets') }}</strong>
                             </div>
                             <div class="col-md-7">
-                                {{ Form::checkbox('auto_increment_assets', '1', old('auto_increment_assets', $setting->auto_increment_assets),array('class' => 'minimal', 'aria-label'=>'auto_increment_assets')) }}
-                                {{ trans('admin/settings/general.auto_increment_assets') }}
+                                <label class="form-control">
+                                    {{ Form::checkbox('auto_increment_assets', '1', old('auto_increment_assets', $setting->auto_increment_assets),array('aria-label'=>'auto_increment_assets')) }}
+                                    {{ trans('admin/settings/general.enabled') }}
+                                </label>
                             </div>
                         </div>
 

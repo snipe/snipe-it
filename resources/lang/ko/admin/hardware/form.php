@@ -2,11 +2,14 @@
 
 return [
     'bulk_delete'		=> '대량 자산 삭제 승인',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> '아래의 대량 자산 삭제 내용을 검토하십시오. 삭제하시면 복구할 수 없고, 현재 할당되어 있는 사용자와의 연결이 끊어집니다.',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> '삭제 대상: asset_count 개',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> '대량 자산 갱신',
     'bulk_update_help'	=> '이 양식은 한번에 여러개의 자산들을 갱신하게 해줍니다. 변경하고 싶은 항목만 채워 넣으세요. 빈란으로 남겨둔 항목들은 변경되지 않을 것입니다. ',
-    'bulk_update_warn'	=> '당신은 asset_count 자산들의 속성들을 편집하려 합니다.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> '반출 대상',
     'checkout_date'		=> '반출 일자',
     'checkin_date'		=> '반입 일자',
@@ -40,4 +43,12 @@ return [
     'warranty'			=> '보증',
         'warranty_expires'		=> '보증 만료일',
     'years'				=> '년',
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information'
 ];

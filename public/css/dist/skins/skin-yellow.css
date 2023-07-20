@@ -3,10 +3,10 @@
  * ----------
  */
 .skin-yellow .main-header .navbar {
-  background-color: #f39c12;
+  background-color: #FBCC34;
 }
 .skin-yellow .main-header .navbar .nav > li > a {
-  color: #fff;
+  color: rgba(255, 255, 255, 0.8);
 }
 .skin-yellow .main-header .navbar .nav > li > a:hover,
 .skin-yellow .main-header .navbar .nav > li > a:active,
@@ -19,31 +19,31 @@
   color: #f6f6f6;
 }
 .skin-yellow .main-header .navbar .sidebar-toggle {
-  color: #fff;
+  color: rgba(255, 255, 255, 0.8);
 }
 .skin-yellow .main-header .navbar .sidebar-toggle:hover {
   color: #f6f6f6;
   background: rgba(0, 0, 0, 0.1);
 }
 .skin-yellow .main-header .navbar .sidebar-toggle {
-  color: #fff;
+  color: #000;
 }
 .skin-yellow .main-header .navbar .sidebar-toggle:hover {
-  background-color: #e08e0b;
+  background-color: #fbc61b;
 }
 @media (max-width: 767px) {
   .skin-yellow .main-header .navbar .dropdown-menu li.divider {
     background-color: rgba(255, 255, 255, 0.1);
   }
   .skin-yellow .main-header .navbar .dropdown-menu li a {
-    color: #fff;
+    color: #333;
   }
   .skin-yellow .main-header .navbar .dropdown-menu li a:hover {
-    background: #e08e0b;
+    background: #fbc61b;
   }
 }
 .skin-yellow .main-header li.user-header {
-  background-color: #f39c12;
+  background-color: #FBCC34;
 }
 .skin-yellow .content-header {
   background: transparent;
@@ -68,7 +68,7 @@
 .skin-yellow .sidebar-menu > li.active > a {
   color: #fff;
   background: #1e282c;
-  border-left-color: #f39c12;
+  border-left-color: #FBCC34;
 }
 .skin-yellow .sidebar-menu > li > .treeview-menu {
   margin: 0 1px;
@@ -123,52 +123,98 @@
   border-bottom-left-radius: 0;
 }
 .skin-yellow.layout-top-nav .main-header > .logo .logo-variant {
+  color: #413F42;
   background-color: none;
 }
 .btn.btn-primary,
 .btn:hover.btn-primary,
 .btn .btn-primary:link,
 .btn:hover .btn-primary:link {
-  background-color: #c87f0a;
-  border-color: #976008;
-  color: #fff;
+  background-color: #f7be05;
+  border-color: #c59704;
+  color: var(--nav-link);
 }
 .btna.btn-primary:hover,
 .btn:hovera.btn-primary:hover {
-  background-color: #976008;
-  border-color: #976008;
-  color: #fff;
+  background-color: #c59704;
+  border-color: #c59704;
+  color: var(--nav-link);
 }
 .btn.btn-white:link,
 .btn:hover.btn-white:link {
-  background-color: #c87f0a;
-  color: #fff;
+  background-color: #f7be05;
+  color: var(--nav-link);
 }
 .btn.btn-white:hover,
 .btn:hover.btn-white:hover {
-  background-color: #674105;
-  color: #fff;
+  background-color: #937103;
+  color: var(--nav-link);
+}
+a.btn-info:link,
+a.btn-warning:link,
+a.btn-danger:link {
+  color: #FFF;
+}
+a.btn-info:visited,
+a.btn-warning:visited,
+a.btn-danger:visited {
+  color: #FFF;
 }
 a {
-  color: #f39c12;
+  color: var(--link);
 }
 a:hover {
-  color: #976008;
+  color: var(--hover-link);
 }
 a:visited {
-  color: #f39c12;
+  color: var(--visited-link);
 }
 .text-primary {
-  color: #976008;
+  color: #c59704;
+}
+:root {
+  --button-default: #deab04;
+  --button-primary: #ac8403;
+  --button-hover: #937103;
+  --header: #FBCC34;
+  /* Use same as Header picker */
+  --text-main: #BBB;
+  --text-sub: #9b9b9b;
+  --link: #5b585c;
+  /* Use same as Header picker, lighten by 70% */
+  --visited-link: #747176;
+  /* Use same as Header picker, lighten by 70% */
+  --hover-link: #b4b1b5;
+  /* Use same as Header picker, lighten by 70% */
+  --nav-link: #222;
+  /* Use same as Header picker */
+  --light-link: #fff;
+  /* Use same as Header picker */
 }
 .fixed-table-container tbody .selected td {
   background-color: #fff8af;
 }
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
-  background-color: #f39c12;
+  background-color: #FBCC34;
 }
 .search-highlight,
 .search-highlight:hover {
   background-color: #e9d15b;
+}
+.thead,
+.navbar-nav > li > a:link {
+  color: var(--nav-link);
+}
+.navbar-nav > li > a:visited {
+  color: var(--nav-link);
+}
+:hover {
+  color: var(--nav-link);
+}
+.skin-yellow .main-header .navbar .nav > li > a {
+  color: #413F42;
+}
+.far fa-life-ring {
+  color: var(--link);
 }
 

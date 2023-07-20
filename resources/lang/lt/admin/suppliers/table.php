@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_suppliers_title' => 'Apie tiekėjus',
     'about_suppliers_text'  => 'Tiekėjai naudojami daiktų šaltiniui stebėti',
     'address'               => 'Tiekėjo adresas',
@@ -24,4 +24,4 @@ return [
     'view_assets_for'       => 'Peržiūrėti įrangą šiam',
     'zip'                   => 'Pašto kodas',
 
-];
+);

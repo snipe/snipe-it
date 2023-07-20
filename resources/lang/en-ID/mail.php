@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'Pengguna sudah membatalkan permintaan item di situs web',
     'a_user_requested' => 'Pengguna sudah meminta sebuah item di situs web',
     'accessory_name' => 'Nama Aksesoris:',
@@ -41,6 +43,7 @@ return [
     'login_first_admin' => 'Login ke instalasi Snipe-IT baru Anda dengan menggunakan kredensial di bawah ini:',
     'login' => 'Masuk:',
     'Low_Inventory_Report' => 'Laporan Inventaris Rendah',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'QTY minimum',
     'name' => 'Nama',
     'new_item_checked' => 'Item baru sudah diperiksa atas nama anda, rinciannya dibawah ini.',
@@ -59,7 +62,7 @@ return [
     'test_mail_text' => 'Ini adalah uji coba dari Snipe-IT Asset Management System. Jika Anda mendapatkan ini, mail sedang bekerja :)',
     'the_following_item' => 'Item berikut telah diperiksa: ',
     'low_inventory_alert' => 'Ada :count item yang di bawah minimum persediaan atau akan segera habis.|Ada :count item yang di bawah minimum persediaan atau akan segera habis.',
-    'assets_warrantee_alert' => 'Ada :count aset yang masa garansinya tinggal :threshold hari lagi.|Ada :count aset yang garansinya tinggal :threshold hari lagi.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'Ada :count lisensi yang masa berlakunya akan habis dalam :threshold hari.|Ada :count lisensi yang masa berlakunya akan habis dalam :threshold hari.',
     'to_reset' => 'Untuk atur ulang kata sandi situs web: anda, lengkapi formulir ini:',
     'type' => 'Jenis',
@@ -71,9 +74,11 @@ return [
     'your_credentials' => 'Kredensial Snipe-IT Anda',
     'Accessory_Checkin_Notification' => 'Accessory checked in',
     'Asset_Checkin_Notification' => 'Asset checked in',
+    'Asset_Checkout_Notification' => 'Asset checked out',
     'License_Checkin_Notification' => 'License checked in',
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'your_assets' => 'View Your Assets',
+    'rights_reserved' => 'All rights reserved.',
 ];

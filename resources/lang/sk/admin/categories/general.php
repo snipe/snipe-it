@@ -18,5 +18,6 @@ return array(
     'update'  							=> 'Upraviť kategóriu',
     'use_default_eula'					=> 'Použiť <a href="#" data-toggle="modal" data-target="#eulaModal">predvolený dokument EULA</a> namiesto toho.',
     'use_default_eula_disabled'			=> '<del>Použiť namiesto toho predvolený dokument EULA.</del> Predvolený dokument EULA nie je nastavený. Prosím vyberte predvolený dokument v Nastaveniach.',
+    'use_default_eula_column'			=> 'Použiť predvolenú EULA',
 
 );

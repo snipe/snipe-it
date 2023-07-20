@@ -24,7 +24,7 @@ class RouteServiceProvider extends ServiceProvider
 
             $this->mapWebRoutes();
 
-            //
+            require base_path('routes/scim.php');
         });
     }
 
@@ -39,7 +39,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::group([
             'middleware' => 'web',
-            'namespace' => $this->namespace,
+//            'namespace' => $this->namespace, //okay, I don't know what this means, but somehow this might be a problem for us?
         ], function ($router) {
             require base_path('routes/web/hardware.php');
             require base_path('routes/web/models.php');
@@ -65,7 +65,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::group([
             'middleware' => 'auth:api',
-            'namespace' => $this->namespace,
+//            'namespace' => $this->namespace, // this might also be a problem? I don't really know :/
             'prefix' => 'api',
         ], function ($router) {
             require base_path('routes/api.php');
@@ -75,12 +75,22 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Configure the rate limiters for the application.
      *
+     * https://laravel.com/docs/8.x/routing#rate-limiting
+     *
      * @return void
      */
     protected function configureRateLimiting()
     {
+
+        // Rate limiter for API calls
         RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
+            return Limit::perMinute(config('app.api_throttle_per_minute'))->by(optional($request->user())->id ?: $request->ip());
         });
+
+        // Rate limiter for forgotten password requests
+        RateLimiter::for('forgotten_password', function (Request $request) {
+            return Limit::perMinute(config('auth.password_reset.max_attempts_per_min'))->by(optional($request->user())->id ?: $request->ip());
+        });
+
     }
 }

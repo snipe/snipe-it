@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong> تحذير: </strong> تم تحديد الحالة لهذا الأصل بانه غير قابل للتوزيع حاليا. إذا تغيرت هذه الحالة، يرجى تحديث حالة الأصل.',
     'does_not_exist' 	=> 'الأصل غير موجود.',
-    'does_not_exist_or_not_requestable' => 'محاولة جيدة. هذا الأصل غير موجود أو غير قابل للطلب.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'هذا الأصل مخرج حاليا لمستخدم ولا يمكن حذفه. يرجى التحقق من الأصل أولا، ثم حاول الحذف مرة أخرى. ',
 
     'create' => [
@@ -16,17 +16,21 @@ return [
         'error'   			=> 'لم يتم تحديث الأصل، يرجى إعادة المحاولة',
         'success' 			=> 'تم تحديث الأصل بنجاح.',
         'nothing_updated'	=>  'لم يتم اختيار أي حقول، لذلك لم يتم تحديث أي شيء.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [
         'error'   		=> 'لم تتم استعادة الأصل، يرجى إعادة المحاولة',
         'success' 		=> 'تمت استعادة الأصل بنجاح.',
+        'bulk_success' 		=> 'تمت استعادة الأصل بنجاح.',
+        'nothing_updated'   => 'ولم يتم اختيار أي أصول، وبالتالي لم يتم استعادة أي شيء.', 
     ],
 
     'audit' => [
         'error'   		=> 'لم تنجح مراجعة الأصل. حاول مرة اخرى.',
         'success' 		=> 'تم تسجيل تدقيق الأصل بنجاح.',
     ],
+
 
     'deletefile' => [
         'error'   => 'لم يتم حذف الملف. الرجاء المحاولة مرة اخرى.',
@@ -46,7 +50,10 @@ return [
         'success'               => 'تم استيراد الملف الخاص بك',
         'file_delete_success'   => 'تم حذف ملفك بنجاح',
         'file_delete_error'      => 'تعذر حذف الملف',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'هل تريد بالتأكيد حذف هذا الأصل؟',

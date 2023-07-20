@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'component_name'                  => 'கூறு பெயர்',
     'checkin'                             => 'செக்கோன் உபகரண',
     'checkout'                             => 'புதுப்பிப்பு உபகரண',
@@ -12,4 +12,5 @@ return [
     'remaining' 			             => 'மீதமுள்ள',
     'total' 			                 => 'மொத்த',
     'update'                            => 'உபகரணத்தை புதுப்பிக்கவும்',
-];
+    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
+);

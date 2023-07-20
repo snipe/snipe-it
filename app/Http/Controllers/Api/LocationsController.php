@@ -27,7 +27,7 @@ class LocationsController extends Controller
         $allowed_columns = [
             'id', 'name', 'address', 'address2', 'city', 'state', 'country', 'zip', 'created_at',
             'updated_at', 'manager_id', 'image',
-            'assigned_assets_count', 'users_count', 'assets_count', 'currency', 'ldap_ou', ];
+            'assigned_assets_count', 'users_count', 'assets_count','assigned_assets_count', 'assets_count', 'rtd_assets_count', 'currency', 'ldap_ou', ];
 
         $locations = Location::with('parent', 'manager', 'children')->select([
             'locations.id',
@@ -37,6 +37,8 @@ class LocationsController extends Controller
             'locations.city',
             'locations.state',
             'locations.zip',
+            'locations.phone',
+            'locations.fax',
             'locations.country',
             'locations.parent_id',
             'locations.manager_id',
@@ -47,19 +49,45 @@ class LocationsController extends Controller
             'locations.currency',
         ])->withCount('assignedAssets as assigned_assets_count')
             ->withCount('assets as assets_count')
+            ->withCount('rtd_assets as rtd_assets_count')
             ->withCount('users as users_count');
 
         if ($request->filled('search')) {
             $locations = $locations->TextSearch($request->input('search'));
         }
 
-        $offset = (($locations) && (request('offset') > $locations->count())) ? $locations->count() : request('offset', 0);
+        if ($request->filled('name')) {
+            $locations->where('locations.name', '=', $request->input('name'));
+        }
 
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+        if ($request->filled('address')) {
+            $locations->where('locations.address', '=', $request->input('address'));
+        }
+
+        if ($request->filled('address2')) {
+            $locations->where('locations.address2', '=', $request->input('address2'));
+        }
+
+        if ($request->filled('city')) {
+            $locations->where('locations.city', '=', $request->input('city'));
+        }
+
+        if ($request->filled('zip')) {
+            $locations->where('locations.zip', '=', $request->input('zip'));
+        }
+
+        if ($request->filled('country')) {
+            $locations->where('locations.country', '=', $request->input('country'));
+        }
+
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $locations->count()) ? $locations->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
+
+
 
         switch ($request->input('sort')) {
             case 'parent':
@@ -72,6 +100,7 @@ class LocationsController extends Controller
                 $locations->orderBy($sort, $order);
                 break;
         }
+
 
         $total = $locations->count();
         $locations = $locations->skip($offset)->take($limit)->get();
@@ -132,10 +161,13 @@ class LocationsController extends Controller
             ])
             ->withCount('assignedAssets as assigned_assets_count')
             ->withCount('assets as assets_count')
-            ->withCount('users as users_count')->findOrFail($id);
+            ->withCount('rtd_assets as rtd_assets_count')
+            ->withCount('users as users_count')
+            ->findOrFail($id);
 
         return (new LocationsTransformer)->transformLocation($location);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -155,8 +187,8 @@ class LocationsController extends Controller
         $location = $request->handleImages($location);
 
         if ($location->isValid()) {
-            $location->save();
 
+            $location->save();
             return response()->json(
                 Helper::formatStandardApiResponse(
                     'success',
@@ -221,6 +253,13 @@ class LocationsController extends Controller
      */
     public function selectlist(Request $request)
     {
+        // If a user is in the process of editing their profile, as determined by the referrer,
+        // then we check that they have permission to edit their own location.
+        // Otherwise, we do our normal check that they can view select lists.
+        $request->headers->get('referer') === route('profile')
+            ? $this->authorize('self.edit_location')
+            : $this->authorize('view.selectlists');
+
         $locations = Location::select([
             'locations.id',
             'locations.name',

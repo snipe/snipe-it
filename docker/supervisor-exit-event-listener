@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # A supervisor event listener which terminates supervisord if any of its child
 # processes enter the FATAL state.
 # https://stackoverflow.com/a/37527488/119527

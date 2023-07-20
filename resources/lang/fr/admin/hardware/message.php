@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Attention: </strong> Ce bien a été marqué non déployable.
                         Si ce statut a changé, veuillez l\'actualiser.',
     'does_not_exist' 	=> 'Ce bien n\'existe pas.',
-    'does_not_exist_or_not_requestable' => 'Cet actif n\'existe pas ou ne peux pas être réquisitionné.',
+    'does_not_exist_or_not_requestable' => 'Cet actif n\'existe pas ou ne peut pas être demandé.',
     'assoc_users'	 	=> 'Ce bien est marqué sorti par un utilisateur et ne peut être supprimé. Veuillez d\'abord cliquer sur Retour de Biens, et réessayer.',
 
     'create' => [
@@ -17,17 +17,21 @@ return [
         'error'   			=> 'Ce bien n\'a pas été actualisé, veuillez réessayer',
         'success' 			=> 'Bien actualisé correctement.',
         'nothing_updated'	=>  'Aucun champ n\'a été sélectionné, rien n\'a été actualisé.',
+        'no_assets_selected'  =>  'Aucune ressource n\'a été sélectionnée, rien n\'a donc été mis à jour.',
     ],
 
     'restore' => [
         'error'   		=> 'L\'actif n\'a pas été restauré, veuillez réessayer',
         'success' 		=> 'Actif restauré correctement.',
+        'bulk_success' 		=> 'Actif restauré avec succès.',
+        'nothing_updated'   => 'Aucun actif n\'a été sélectionné, donc rien n\'a été restauré.', 
     ],
 
     'audit' => [
         'error'   		=> 'Audit des actifs n\'a pas réussi. Veuillez réessayer.',
         'success' 		=> 'Audit des actifs consigné avec succès.',
     ],
+
 
     'deletefile' => [
         'error'   => 'Le fichier n\'a pas été détruit. Veuillez réessayer.',
@@ -47,7 +51,10 @@ return [
         'success'               => 'Votre fichier a bien été importé',
         'file_delete_success'   => 'Votre fichier a été correctement supprimé',
         'file_delete_error'      => 'Le fichier n’a pas pu être supprimé',
+        'header_row_has_malformed_characters' => 'Un ou plusieurs attributs dans la ligne d\'en-tête contiennent des caractères UTF-8 invalides',
+        'content_row_has_malformed_characters' => 'Un ou plusieurs attributs dans la première ligne de contenu contiennent des caractères UTF-8 invalides',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Etes-vous sûr de vouloir supprimer ce bien?',
@@ -73,9 +80,9 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Le bien n\'a pas été demandé, merci d\'essayer à nouveau',
-        'success' 		=> 'Le bien a été demandé correctement.',
-        'canceled'      => 'La demande de paiement a été annulée',
+        'error'   		=> 'L\'actif n\'a pas été demandé, merci d\'essayer à nouveau',
+        'success' 		=> 'L\'actif a été demandé avec succès.',
+        'canceled'      => 'La demande d\'association a été annulée avec succès',
     ],
 
 ];

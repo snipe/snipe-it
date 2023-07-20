@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'Ang gumagamit o user ay nag-kansela ng rekwest na aytem sa website',
     'a_user_requested' => 'Ang gumagamit ay nag-rekwest ng aytem sa website',
     'accessory_name' => 'Ang Pangalan ng Aksesorya:',
@@ -41,6 +43,7 @@ return [
     'login_first_admin' => 'Mag-login sa iyong bagong pag-install ng Snipe-IT gamit ang mga kredensyal sa ibaba:',
     'login' => 'Mag-login:',
     'Low_Inventory_Report' => 'Ang Mababang Report ng Imbentaryo',
+    'inventory_report' => 'Inventory Report',
     'min_QTY' => 'Ang Min QTY',
     'name' => 'Ang Pangalan',
     'new_item_checked' => 'Ang bagong aytem na nai-check out sa ilalim ng iyong pangalan, ang mga detalye ay nasa ibaba.',
@@ -59,7 +62,7 @@ return [
     'test_mail_text' => 'Ito ay isang test mula sa Snipe-IT Asset Management System. Kung natanggap mo ito, ang mail na ito ay gumagana :)',
     'the_following_item' => 'Ang mga sumusunod na mga aytem ay nai-check in: ',
     'low_inventory_alert' => 'There is :count item that is below minimum inventory or will soon be low.|There are :count items that are below minimum inventory or will soon be low.',
-    'assets_warrantee_alert' => 'There is :count asset with a warrantee expiring in the next :threshold days.|There are :count assets with warrantees expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'to_reset' => 'Para mai-reset ang iyong :web password, kumpletuhin ang form na ito:',
     'type' => 'Klase',
@@ -71,9 +74,11 @@ return [
     'your_credentials' => 'Ang iyong mga Kredensyal sa Snipe-IT',
     'Accessory_Checkin_Notification' => 'Accessory checked in',
     'Asset_Checkin_Notification' => 'Asset checked in',
+    'Asset_Checkout_Notification' => 'Asset checked out',
     'License_Checkin_Notification' => 'License checked in',
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'your_assets' => 'View Your Assets',
+    'rights_reserved' => 'All rights reserved.',
 ];

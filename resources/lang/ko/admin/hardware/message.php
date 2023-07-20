@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>경고: </strong> 이 자산은 현재 사용불가 상태입니다.
                         이 상태를 변경하시려면, 자산 상태를 갱신하세요.',
     'does_not_exist' 	=> '자산이 존재하지 않습니다.',
-    'does_not_exist_or_not_requestable' => '좋은 시도지만, 그 자산은 존재하지 않거나 요청가능하지 않습니다.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> '이 자산은 현재 사용자에게 반출 중이어서 삭제 할 수 없습니다. 먼저 자산을 확인해 보고 다시 삭제를 시도해 주세요. ',
 
     'create' => [
@@ -17,17 +17,21 @@ return [
         'error'   			=> '자산이 갱신되지 않았습니다. 다시 시도해 주세요.',
         'success' 			=> '자산이 갱신되었습니다.',
         'nothing_updated'	=>  '선택된 항목이 없어서, 갱신 되지 않습니다.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [
         'error'   		=> '자산이 복원되지 않았습니다. 다시 시도해 주세요.',
         'success' 		=> '자산이 복원되었습니다.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
         'error'   		=> '자산 감사가 실패했습니다. 다시 시도해 주세요.',
         'success' 		=> '자산 감사가 성공적으로 기록되었습니다.',
     ],
+
 
     'deletefile' => [
         'error'   => '파일이 삭제되지 않았습니다. 다시 시도해 주세요.',
@@ -47,7 +51,10 @@ return [
         'success'               => '파일에서 읽어오기가 완료되었습니다',
         'file_delete_success'   => '파일 삭제가 완료되었습니다',
         'file_delete_error'      => '파일을 삭제할 수 없습니다',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
+
 
     'delete' => [
         'confirm'   	=> '이 자산을 삭제하시겠습니까?',

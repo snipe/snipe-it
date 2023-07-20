@@ -11,4 +11,6 @@
         'calibration'        => 'Kalibrálás',
         'software_support'   => 'Szoftver támogatás',
         'hardware_support'   => 'Hardver támogatás',
+        'configuration_change'   => 'Konfiguráció módosítás',
+        'pat_test'           => 'PAT Teszt',
     ];

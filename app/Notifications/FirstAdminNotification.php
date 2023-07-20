@@ -24,7 +24,7 @@ class FirstAdminNotification extends Notification
         $this->_data['last_name'] = $content['last_name'];
         $this->_data['username'] = $content['username'];
         $this->_data['password'] = $content['password'];
-        $this->_data['url'] = url('/');
+        $this->_data['url'] = config('app.url');
     }
 
     /**

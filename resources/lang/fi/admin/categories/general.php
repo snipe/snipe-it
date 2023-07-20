@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'asset_categories' 					=> 'Laitekategoriat',
     'category_name'  					=> 'Kategorian nimi',
     'checkin_email'                     => 'Lähetä käyttäjälle sähköposti palautuksesta/luovutuksesta.',
@@ -18,5 +18,6 @@ return [
     'update'  							=> 'Päivitä kategoria',
     'use_default_eula'					=> 'Käytä <a href="#" data-toggle="modal" data-target="#eulaModal"> yleisiä käyttöehtoja</a>.',
     'use_default_eula_disabled'			=> '<del>Käytä yleisiä käyttöehtoja.</del> Yleisiä käyttöehtoja ei ole määritetty. Voit lisätä ne asetuksista.',
+    'use_default_eula_column'			=> 'Käytä yleisiä käyttöehtoja',
 
-];
+);

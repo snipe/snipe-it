@@ -3,7 +3,7 @@
 namespace App\Http\Transformers;
 
 use App\Models\Asset;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 
 class ComponentsAssetsTransformer
@@ -26,6 +26,7 @@ class ComponentsAssetsTransformer
             'created_at' => $asset->created_at->format('Y-m-d'),
             'qty' => $asset->components()->count(),
             'user_can_checkout' => $asset->availableForCheckout(),
+            'note' => e($asset->note),
         ];
 
         $permissions_array['available_actions'] = [
@@ -39,7 +40,7 @@ class ComponentsAssetsTransformer
 
         if ($asset->model->fieldset) {
             foreach ($asset->model->fieldset->fields as $field) {
-                $fields_array = [$field->name => $asset->{$field->convertUnicodeDbSlug()}];
+                $fields_array = [$field->name => $asset->{$field->db_column}];
                 $array += $fields_array;
             }
         }

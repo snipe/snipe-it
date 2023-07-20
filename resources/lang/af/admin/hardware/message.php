@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Waarskuwing: </strong> Hierdie bate is gemerk as tans onbruikbaar. As hierdie status verander het, verander asseblief die batestatus.',
     'does_not_exist' 	=> 'Bate bestaan ​​nie.',
-    'does_not_exist_or_not_requestable' => 'Goeie probeerslag. Daardie bate bestaan ​​nie of is nie versoekbaar nie.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Hierdie bate word tans na \'n gebruiker nagegaan en kan nie uitgevee word nie. Gaan asseblief die bate eers in, en probeer dan weer uitvee.',
 
     'create' => [
@@ -16,17 +16,21 @@ return [
         'error'   			=> 'Bate is nie opgedateer nie, probeer asseblief weer',
         'success' 			=> 'Bate is suksesvol opgedateer.',
         'nothing_updated'	=>  'Geen velde is gekies nie, dus niks is opgedateer nie.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [
         'error'   		=> 'Bate is nie herstel nie, probeer asseblief weer',
         'success' 		=> 'Bate herstel suksesvol.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
         'error'   		=> 'Bate-oudit was onsuksesvol. Probeer asseblief weer.',
         'success' 		=> 'Bate oudit suksesvol aangemeld.',
     ],
+
 
     'deletefile' => [
         'error'   => 'Lêer nie verwyder nie. Probeer asseblief weer.',
@@ -46,7 +50,10 @@ return [
         'success'               => 'Jou lêer is ingevoer',
         'file_delete_success'   => 'Jou lêer is suksesvol verwyder',
         'file_delete_error'      => 'Die lêer kon nie uitgevee word nie',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Is jy seker jy wil hierdie bate uitvee?',

@@ -26,7 +26,8 @@ class LicensesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', License::class);
-        $licenses = Company::scopeCompanyables(License::with('company', 'manufacturer', 'freeSeats', 'supplier', 'category')->withCount('freeSeats as free_seats_count'));
+
+        $licenses = License::with('company', 'manufacturer', 'supplier','category')->withCount('freeSeats as free_seats_count');
 
         if ($request->filled('company_id')) {
             $licenses->where('company_id', '=', $request->input('company_id'));
@@ -72,20 +73,30 @@ class LicensesController extends Controller
             $licenses->where('depreciation_id', '=', $request->input('depreciation_id'));
         }
 
-        if ($request->filled('supplier_id')) {
-            $licenses->where('supplier_id', '=', $request->input('supplier_id'));
+
+        if (($request->filled('maintained')) && ($request->input('maintained')=='true')) {
+            $licenses->where('maintained','=',1);
+        } elseif (($request->filled('maintained')) && ($request->input('maintained')=='false')) {
+            $licenses->where('maintained','=',0);
+        }
+
+        if (($request->filled('expires')) && ($request->input('expires')=='true')) {
+            $licenses->whereNotNull('expiration_date');
+        } elseif (($request->filled('expires')) && ($request->input('expires')=='false')) {
+            $licenses->whereNull('expiration_date');
         }
 
         if ($request->filled('search')) {
             $licenses = $licenses->TextSearch($request->input('search'));
         }
 
-        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
-        // case we override with the actual count, so we should return 0 items.
-        $offset = (($licenses) && ($request->get('offset') > $licenses->count())) ? $licenses->count() : $request->get('offset', 0);
+        if ($request->input('deleted')=='true') {
+            $licenses->onlyTrashed();
+        }
 
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $licenses->count()) ? $licenses->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 
@@ -134,8 +145,8 @@ class LicensesController extends Controller
         $total = $licenses->count();
 
         $licenses = $licenses->skip($offset)->take($limit)->get();
-
         return (new LicensesTransformer)->transformLicenses($licenses, $total);
+
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Активен',
     'allow'  				=> 'Разрешаване',
     'checkedout'  			=> 'Активи',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'Email',
     'employee_num'      	=> 'Номер на служител',
     'first_name' 			=> 'Собствено име',
-    'groupnotes'			=> 'Изберете група на потребителя. Той ще наследи правата, присвоени на групата.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'ID',
     'inherit'  				=> 'Наследяване',
     'job' 					=> 'Длъжност',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Преглед на текущите потребители',
     'show_deleted'          => 'Преглед на изтритите потребители',
     'title' 				=> 'Титла',
-    'to_restore_them'		=> 'да ги възстановите.',
+	'to_restore_them'		=> 'да ги възстановите.',
     'updateuser' 			=> 'Обновяване на потребител',
     'username' 				=> 'Потребителско име',
-    'user_deleted_text' 	=> 'Потребителят бе маркиран като изтрит.',
+	'user_deleted_text' 	=> 'Потребителят бе маркиран като изтрит.',
     'username_note' 		=> '(Използва се за достъп до Active Directory, а не за вход.)',
     'cloneuser'             => 'Копиране на потребител',
     'viewusers' 			=> 'Преглед на потребителите',
-];
+);

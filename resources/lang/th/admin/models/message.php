@@ -1,41 +1,46 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'ไม่มีโมเดลนี้',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'โมเดลนี้มีความสัมพันธ์กับสินทรัพย์หนึ่ง หรือมากกว่าในปัจจุบัน และจะไม่สามารถลบได้ กรุณาลบสินทรัพย์และลองอีกครั้ง ',
 
-    'create' => [
+
+    'create' => array(
         'error'   => 'ยังไม่ได้สร้างโมเดล กรุณาลองใหม่อีกครั้ง',
         'success' => 'สร้างโมเดียลเรียบร้อยแล้ว',
         'duplicate_set' => 'มีชื่อโมเดลสินทรัพย์ ผู้ผลิต และหมายเลขโมเดลแล้ว',
-    ],
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'ยังไม่ได้ปรับปรุงโมเดล กรุณาลองใหม่อีกครั้ง',
         'success' => 'ปรับปรุงโมเดลเรียบร้อยแล้ว',
-    ],
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'คุณแน่ใจที่จะลบโมเดลนี้?',
         'error'   => 'มีปัญหาระหว่างลบโมเดล กรุณาลองใหม่อีกครั้ง.',
-        'success' => 'ลบโมเดลเรียบร้อยแล้ว',
-    ],
+        'success' => 'ลบโมเดลเรียบร้อยแล้ว'
+    ),
 
-    'restore' => [
+    'restore' => array(
         'error'   		=> 'ยังไม่ได้กู้คืนโมเดล กรุณาลองใหม่อีกครั้ง',
-        'success' 		=> 'กู้คืนโมเดลเรียบร้อยแล้ว',
-    ],
+        'success' 		=> 'กู้คืนโมเดลเรียบร้อยแล้ว'
+    ),
 
-    'bulkedit' => [
+    'bulkedit' => array(
         'error'   		=> 'ไม่มีการเปลี่ยนแปลงเขตข้อมูลดังนั้นไม่มีอะไรที่ได้รับการปรับปรุง',
-        'success' 		=> 'อัปเดตโมเดลแล้ว',
-    ],
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
 
-    'bulkdelete' => [
+    ),
+
+    'bulkdelete' => array(
         'error'   		    => 'ไม่มีการเลือกรายการใด ๆ ดังนั้นจึงไม่มีสิ่งใดถูกลบ',
-        'success' 		    => ': แบบจำลอง success_count ลบ',
-        'success_partial' 	=> ': success_count โมเดลถูกลบแล้วอย่างไรก็ตาม: ไม่สามารถลบข้อมูล fail_count เนื่องจากยังมีเนื้อหาที่เชื่อมโยงอยู่',
-    ],
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success_partial' 	=> ': success_count โมเดลถูกลบแล้วอย่างไรก็ตาม: ไม่สามารถลบข้อมูล fail_count เนื่องจากยังมีเนื้อหาที่เชื่อมโยงอยู่'
+    ),
 
-];
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'accessory_category' 				=> 'Категория аксессуара',
     'accessory_name'  					=> 'Имя аксессуара',
     'checkout'  							=> 'Отвязать прочее',
@@ -16,5 +16,7 @@ return [
     'update'  							=> 'Обновить аксессуар',
     'use_default_eula'					=> 'Использовать <a href="#" data-toggle="modal" data-target="#eulaModal">главное пользовательское соглашение по умолчанию</a>.',
     'use_default_eula_disabled'			=> '<del>Использовать основное пользовательское соглашение.</del> Не задано основное пользовательское соглашение. Добавьте его в Настройках.',
+    'clone'                             => 'Клонировать аксессуар',
+    'delete_disabled'                   => 'This accessory cannot be deleted yet because some items are still checked out.',
 
-];
+);

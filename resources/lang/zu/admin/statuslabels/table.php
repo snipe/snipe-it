@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about'      	=> 'Mayelana namalebula wesimo',
     'archived'      	=> 'I-Archived',
     'create'      	=> 'Dala Ithebula Lesimo',
@@ -16,4 +16,4 @@ return [
     'title'      	=> 'Amalebula wesimo',
     'undeployable'  => 'Awuvumelekile',
     'update'      	=> 'Buyekeza i-Label yesimo',
-];
+);

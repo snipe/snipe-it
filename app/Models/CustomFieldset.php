@@ -114,7 +114,11 @@ class CustomFieldset extends Model
 
             if (($field->field_encrypted != '1') ||
                   (($field->field_encrypted == '1') && (Gate::allows('admin')))) {
-                $rule[] = ($field->pivot->required == '1') ? 'required' : 'nullable';
+                    $rule[] = ($field->pivot->required == '1') ? 'required' : 'nullable';
+            }
+
+            if ($field->is_unique == '1') {
+                    $rule[] = 'unique_undeleted';
             }
 
             array_push($rule, $field->attributes['format']);

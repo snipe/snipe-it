@@ -27,6 +27,8 @@ class CompaniesController extends Controller
         $allowed_columns = [
             'id',
             'name',
+            'phone',
+            'fax',
             'created_at',
             'updated_at',
             'users_count',
@@ -43,12 +45,15 @@ class CompaniesController extends Controller
             $companies->TextSearch($request->input('search'));
         }
 
-        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
-        // case we override with the actual count, so we should return 0 items.
-        $offset = (($companies) && ($request->get('offset') > $companies->count())) ? $companies->count() : $request->get('offset', 0);
+        if ($request->filled('name')) {
+            $companies->where('name', '=', $request->input('name'));
+        }
 
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $companies->count()) ? $companies->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
+
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
@@ -56,9 +61,10 @@ class CompaniesController extends Controller
 
         $total = $companies->count();
         $companies = $companies->skip($offset)->take($limit)->get();
-
         return (new CompaniesTransformer)->transformCompanies($companies, $total);
+
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -95,9 +101,10 @@ class CompaniesController extends Controller
     {
         $this->authorize('view', Company::class);
         $company = Company::findOrFail($id);
-
         return (new CompaniesTransformer)->transformCompany($company);
+
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -157,6 +164,7 @@ class CompaniesController extends Controller
      */
     public function selectlist(Request $request)
     {
+        $this->authorize('view.selectlists');
         $companies = Company::select([
             'companies.id',
             'companies.name',

@@ -1,20 +1,24 @@
 <?php
 
-return [
+return array(
 
     'accepted'                  => 'Este aceitou este ativo com sucesso.',
     'declined'                  => 'Você recusou com sucesso esse ativo.',
     'bulk_manager_warn'	        => 'Os usuários foram atualizados com êxito, no entanto seu Gerenciador de entrada não foi salvo porque o gerente selecionado estava também na lista de usuários a ser editado e usuários podem não ser seu próprio gerente. Por favor, selecione os usuários novamente, excluindo o gerente.',
     'user_exists'               => 'O usuário já existe!',
-    'user_not_found'            => 'O usuário [:id] não existe.',
+    'user_not_found'            => 'O usuário não existe.',
     'user_login_required'       => 'O campo de login é requerido',
     'user_password_required'    => 'A senha é requerida.',
     'insufficient_permissions'  => 'Permissões Insuficientes.',
     'user_deleted_warning'      => 'Este usuário foi deletado. Você terá que restaurar este usuário para editá-los ou atribui-lós novos bens.',
     'ldap_not_configured'        => 'Integração LDAP não foi configurada para esta instalação.',
     'password_resets_sent'      => 'Os usuários selecionados que são ativados e têm um endereço de e-mail válido receberam um link de redefinição de senha.',
+    'password_reset_sent'       => 'Um link de redefinição de senha foi enviado para :email!',
+    'user_has_no_email'         => 'Esse usuário não tem um endereço de e-mail no seu perfil.',
+    'user_has_no_assets_assigned'   => 'Este usuário não tem nenhum ativo atribuído',
 
-    'success' => [
+
+    'success' => array(
         'create'    => 'O usuário foi criado com sucesso.',
         'update'    => 'O usuário foi atualizado com sucesso.',
         'update_bulk'    => 'Usuários atualizados com sucesso!',
@@ -25,9 +29,9 @@ return [
         'unsuspend' => 'O usuário foi removido da suspensão com sucesso.',
         'restored'  => 'O usuário foi restaurado com sucesso.',
         'import'    => 'Usuários importados com sucesso.',
-    ],
+    ),
 
-    'error' => [
+    'error' => array(
         'create' => 'Houve um problema ao criar o usuário. Tente novamente.',
         'update' => 'Houve um problema ao atualizar o usuário. Tente novamente.',
         'delete' => 'Houve um problema ao excluir o usuário. Tente novamente.',
@@ -42,18 +46,22 @@ return [
         'ldap_could_not_search' => 'Não foi possível procurar o servidor LDAP. Por favor verifique as configurações do servidor LDAP no arquivo de configurações.<br>Erro do Servidor LDAP:',
         'ldap_could_not_get_entries' => 'Não foi possível obter informações do servidor LDAP. Por favor verifique as configurações do servidor LDAP no arquivo de configurações.<br>Erro do Servidor LDAP:',
         'password_ldap' => 'A senha desta conta é gerenciada pelo LDAP / Active Directory. Entre em contato com seu departamento de TI para alterar sua senha. ',
-    ],
+    ),
 
-    'deletefile' => [
+    'deletefile' => array(
         'error'   => 'Arquivo não deletado. Por favor tente novamente.',
         'success' => 'Arquivo foi deletado com sucesso.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Arquivo(s) não carregados. Por favor tente novamente.',
         'success' => 'Arquivo(s) carregados com sucesso.',
         'nofiles' => 'Você não selecionou nenhum arquivo para carregar',
         'invalidfiles' => 'Um ou mais de seus arquivos são muito grande ou o tipo de arquivo não é permitido. Tipos permitidos são png, gif, jpg, doc, docx, pdf e txt.',
-    ],
+    ),
 
-];
+    'inventorynotification' => array(
+        'error'   => 'Este usuário não tem e-mail definido.',
+        'success' => 'O usuário foi notificado sobre seu inventário atual.'
+    )
+);

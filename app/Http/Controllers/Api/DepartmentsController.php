@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\DepartmentsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use App\Models\Company;
 use App\Models\Department;
 use Auth;
 use Illuminate\Http\Request;
@@ -26,27 +27,42 @@ class DepartmentsController extends Controller
         $this->authorize('view', Department::class);
         $allowed_columns = ['id', 'name', 'image', 'users_count'];
 
-        $departments = Department::select([
+        $departments = Company::scopeCompanyables(Department::select(
             'departments.id',
             'departments.name',
+            'departments.phone',
+            'departments.fax',
             'departments.location_id',
             'departments.company_id',
             'departments.manager_id',
             'departments.created_at',
             'departments.updated_at',
-            'departments.image',
-        ])->with('users')->with('location')->with('manager')->with('company')->withCount('users as users_count');
+            'departments.image'),
+             "company_id", "departments")->with('users')->with('location')->with('manager')->with('company')->withCount('users as users_count');
 
         if ($request->filled('search')) {
             $departments = $departments->TextSearch($request->input('search'));
         }
 
-        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
-        // case we override with the actual count, so we should return 0 items.
-        $offset = (($departments) && ($request->get('offset') > $departments->count())) ? $departments->count() : $request->get('offset', 0);
+        if ($request->filled('name')) {
+            $departments->where('name', '=', $request->input('name'));
+        }
 
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+        if ($request->filled('company_id')) {
+            $departments->where('company_id', '=', $request->input('company_id'));
+        }
+
+        if ($request->filled('manager_id')) {
+            $departments->where('manager_id', '=', $request->input('manager_id'));
+        }
+
+        if ($request->filled('location_id')) {
+            $departments->where('location_id', '=', $request->input('location_id'));
+        }
+
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $departments->count()) ? $departments->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
@@ -65,8 +81,8 @@ class DepartmentsController extends Controller
 
         $total = $departments->count();
         $departments = $departments->skip($offset)->take($limit)->get();
-
         return (new DepartmentsTransformer)->transformDepartments($departments, $total);
+
     }
 
     /**
@@ -90,8 +106,8 @@ class DepartmentsController extends Controller
         if ($department->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $department, trans('admin/departments/message.create.success')));
         }
-
         return response()->json(Helper::formatStandardApiResponse('error', null, $department->getErrors()));
+
     }
 
     /**
@@ -133,6 +149,7 @@ class DepartmentsController extends Controller
         return response()->json(Helper::formatStandardApiResponse('error', null, $department->getErrors()));
     }
 
+
     /**
      * Validates and deletes selected department.
      *
@@ -152,8 +169,8 @@ class DepartmentsController extends Controller
         }
 
         $department->delete();
-
         return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/departments/message.delete.success')));
+
     }
 
     /**
@@ -165,6 +182,8 @@ class DepartmentsController extends Controller
      */
     public function selectlist(Request $request)
     {
+
+        $this->authorize('view.selectlists');
         $departments = Department::select([
             'id',
             'name',

@@ -24,9 +24,16 @@ class ConsumableCheckoutController extends Controller
      */
     public function create($consumableId)
     {
-        if (is_null($consumable = Consumable::find($consumableId))) {
+
+        if (is_null($consumable = Consumable::with('users')->find($consumableId))) {
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
         }
+
+        // Make sure there is at least one available to checkout
+        if ($consumable->numRemaining() <= 0){
+            return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.checkout.unavailable'));
+        }
+
         $this->authorize('checkout', $consumable);
 
         return view('consumables/checkout', compact('consumable'));
@@ -44,11 +51,17 @@ class ConsumableCheckoutController extends Controller
      */
     public function store(Request $request, $consumableId)
     {
-        if (is_null($consumable = Consumable::find($consumableId))) {
+        if (is_null($consumable = Consumable::with('users')->find($consumableId))) {
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
         }
 
         $this->authorize('checkout', $consumable);
+
+        // Make sure there is at least one available to checkout
+        if ($consumable->numRemaining() <= 0) {
+            return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.checkout.unavailable'));
+        }
+
 
         $admin_user = Auth::user();
         $assigned_to = e($request->input('assigned_to'));
@@ -56,7 +69,7 @@ class ConsumableCheckoutController extends Controller
         // Check if the user exists
         if (is_null($user = User::find($assigned_to))) {
             // Redirect to the consumable management page with error
-            return redirect()->route('checkout/consumable', $consumable)->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'));
+            return redirect()->route('consumables.checkout.show', $consumable)->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'))->withInput();
         }
 
         // Update the consumable data
@@ -66,6 +79,7 @@ class ConsumableCheckoutController extends Controller
             'consumable_id' => $consumable->id,
             'user_id' => $admin_user->id,
             'assigned_to' => e($request->input('assigned_to')),
+            'note' => $request->input('note'),
         ]);
 
         event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note')));

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_manufacturers_title'    => 'حول الشركات المصنعة',
     'about_manufacturers_text'  => 'الشركات المصنعة هي الشركات التي تقوم بتصنيع الأصول الخاصة بك. يمكنك تخزين معلومات الاتصال بالدعم المهمة عنها هنا، والتي سيتم عرضها على صفحات تفاصيل الأصول.',
     'asset_manufacturers'	=> 'مصنعي الأصول',
@@ -10,7 +10,8 @@ return [
     'support_email'   		=> 'دعم البريد الإلكتروني',
     'support_phone'   		=> 'دعم الهاتف',
     'support_url'   		=> 'رابط الدعم التقني',
+    'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'تحديث الشركة المصنعة',
     'url'   				=> 'الرابط',
 
-];
+);

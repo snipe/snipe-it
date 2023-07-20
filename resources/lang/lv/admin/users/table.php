@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Aktīvs',
     'allow'  				=> 'Atļaut',
     'checkedout'  			=> 'Aktīvi',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'E-pasts',
     'employee_num'      	=> 'Darbinieku skaits',
     'first_name' 			=> 'Vārds',
-    'groupnotes'			=> 'Izvēlieties grupu, kas piešķirta lietotājam, atcerieties, ka lietotājs uzņemas piešķirtās grupas atļaujas.',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned. Use ctrl+click (or cmd+click on MacOS) to deselect groups.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Mantot',
     'job' 					=> 'Amata nosaukums',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Rādīt pašreizējos lietotājus',
     'show_deleted'          => 'Rādīt izdzēstos lietotājus',
     'title' 				=> 'Nosaukums',
-    'to_restore_them'		=> 'lai tos atjaunotu.',
+	'to_restore_them'		=> 'lai tos atjaunotu.',
     'updateuser' 			=> 'Atjaunināt lietotāju',
     'username' 				=> 'Lietotājvārds',
-    'user_deleted_text' 	=> 'Šis lietotājs ir atzīmēts kā izdzēsts.',
+	'user_deleted_text' 	=> 'Šis lietotājs ir atzīmēts kā izdzēsts.',
     'username_note' 		=> '(To izmanto tikai Active Directory saistošai, nevis pieteikšanās.)',
     'cloneuser'             => 'Klons lietotājs',
     'viewusers' 			=> 'Skatīt lietotājus',
-];
+);

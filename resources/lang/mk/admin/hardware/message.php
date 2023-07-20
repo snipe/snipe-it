@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Предупредување:</strong> Ова основно средство е означено како нераспоредливо. Ако овој статус е променет, ве молиме да го ажурирате статусот на средството.',
     'does_not_exist' 	=> 'Основното средство не постои.',
-    'does_not_exist_or_not_requestable' => 'Добар обид. Тоа основно средство не постои или не може да биде побарано.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Ова средство е задолжено на корисник и не може да се избрише. Проверете го, а потоа пробајте повторно да го избришете. ',
 
     'create' => [
@@ -16,17 +16,21 @@ return [
         'error'   			=> 'Основното средство не е ажурирано, обидете се повторно',
         'success' 			=> 'Основното средство е успешно ажурирано.',
         'nothing_updated'	=>  'Не беа избрани полиња, затоа ништо не беше ажурирано.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [
         'error'   		=> 'Основното средство не е вратено, обидете се повторно',
         'success' 		=> 'Основното средство е успешно вратено.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
         'error'   		=> 'Ревизијата на основни средства беше неуспешна. Обидете се повторно.',
         'success' 		=> 'Ревизијата на основни средства е логирана.',
     ],
+
 
     'deletefile' => [
         'error'   => 'Датотеката не се избриша. Обидете се повторно.',
@@ -46,7 +50,10 @@ return [
         'success'               => 'Вашата датотека е увезена',
         'file_delete_success'   => 'Вашата датотека е избришана',
         'file_delete_error'      => 'Датотеката не можеше да се избрише',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Дали сте сигурни дека сакате да го избришете ова основно средство?',

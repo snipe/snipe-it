@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Aktywny',
     'allow'  				=> 'Pozwól',
     'checkedout'  			=> 'Aktywa',
@@ -10,7 +10,7 @@ return [
     'email'      			=> 'E-mail',
     'employee_num'      	=> 'Numer pracownika',
     'first_name' 			=> 'Imię',
-    'groupnotes'			=> 'Wybierz grupę w której przypiszesz użytkownika, dostanie on prawa grupy do której zostanie przypisany.',
+    'groupnotes'			=> 'Wybierz grupę do przypisania użytkownikowi, pamiętaj, że użytkownik korzysta z uprawnień grupy, do której jest przypisany. Użyj ctrl+click (lub cmd+click na MacOS), aby odznaczyć grupy.',
     'id'         			=> 'ID',
     'inherit'  				=> 'Dziedziczy',
     'job' 					=> 'Stanowisko',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Pokaż bieżących użytkowników',
     'show_deleted'          => 'Pokaż usuniętych użytkowników',
     'title' 				=> 'Tytuł',
-    'to_restore_them'		=> 'aby je przywrócić.',
+	'to_restore_them'		=> 'aby je przywrócić.',
     'updateuser' 			=> 'Zaktualizuj użytkownika',
     'username' 				=> 'Nazwa użytkownika',
-    'user_deleted_text' 	=> 'Ten użytkownik został oznaczony jako usunięty.',
+	'user_deleted_text' 	=> 'Ten użytkownik został oznaczony jako usunięty.',
     'username_note' 		=> '(to jest używane do połączenia do Active Directory, nie do logowania)',
     'cloneuser'             => 'Kopiuj Użytkownika',
     'viewusers' 			=> 'Przeglądaj użytkowników',
-];
+);

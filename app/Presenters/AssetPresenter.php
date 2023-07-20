@@ -102,7 +102,7 @@ class AssetPresenter extends Presenter
                 'field' => 'employee_number',
                 'searchable' => false,
                 'sortable' => false,
-                'title' => trans('admin/users/table.employee_num'),
+                'title' => trans('general.employee_number'),
                 'visible' => false,
                 'formatter' => 'employeeNumFormatter',
             ], [
@@ -141,12 +141,26 @@ class AssetPresenter extends Presenter
                 'title' => trans('general.purchase_date'),
                 'formatter' => 'dateDisplayFormatter',
             ], [
+                'field' => 'age',
+                'searchable' => true,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('general.age'),
+            ], [
                 'field' => 'purchase_cost',
                 'searchable' => true,
                 'sortable' => true,
                 'title' => trans('general.purchase_cost'),
                 'footerFormatter' => 'sumFormatter',
+                'class' => 'text-right',
             ], [
+                "field" => "book_value",
+                "searchable" => false,
+                "sortable" => false,
+                "title" => trans('admin/hardware/table.book_value'),
+                "footerFormatter" => 'sumFormatter',
+                "class" => "text-right",
+            ],[
                 'field' => 'order_number',
                 'searchable' => true,
                 'sortable' => true,
@@ -156,9 +170,16 @@ class AssetPresenter extends Presenter
             ], [
                 'field' => 'eol',
                 'searchable' => false,
-                'sortable' => false,
+                'sortable' => true,
                 'visible' => false,
                 'title' => trans('general.eol'),
+            ],
+            [
+                'field' => 'asset_eol_date',
+                'searchable' => true,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('admin/hardware/form.eol_date'),
                 'formatter' => 'dateDisplayFormatter',
             ], [
                 'field' => 'warranty_months',
@@ -243,6 +264,14 @@ class AssetPresenter extends Presenter
                 'visible' => false,
                 'title' => trans('general.next_audit_date'),
                 'formatter' => 'dateDisplayFormatter',
+            ], [
+                'field' => 'byod',
+                'searchable' => false,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('general.byod'),
+                'formatter' => 'trueFalseFormatter',
+
             ],
         ];
 
@@ -262,7 +291,7 @@ class AssetPresenter extends Presenter
         // name can break the listings page. - snipe
         foreach ($fields as $field) {
             $layout[] = [
-                'field' => 'custom_fields.'.$field->convertUnicodeDbSlug(),
+                'field' => 'custom_fields.'.$field->db_column,
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
@@ -270,7 +299,7 @@ class AssetPresenter extends Presenter
                 'formatter'=> 'customFieldsFormatter',
                 'escape' => true,
                 'class' => ($field->field_encrypted == '1') ? 'css-padlock' : '',
-                'visible' => true,
+                'visible' => ($field->show_in_listview == '1') ? true : false,
             ];
         }
 
@@ -497,10 +526,10 @@ class AssetPresenter extends Presenter
     }
 
     /**
-     * Date the warantee expires.
+     * Date the warranty expires.
      * @return false|string
      */
-    public function warrantee_expires()
+    public function warranty_expires()
     {
         if (($this->purchase_date) && ($this->warranty_months)) {
             $date = date_create($this->purchase_date);
@@ -510,6 +539,18 @@ class AssetPresenter extends Presenter
         }
 
         return false;
+    }
+
+    /**
+     * Used to take user created warranty URL and dynamically fill in the needed values per asset
+     * @return string
+     */
+    public function dynamicWarrantyUrl()
+    {
+        $warranty_lookup_url = $this->model->model->manufacturer->warranty_lookup_url;
+        $url = (str_replace('{LOCALE}',\App\Models\Setting::getSettings()->locale,$warranty_lookup_url));
+        $url = (str_replace('{SERIAL}',$this->model->serial,$url));
+        return $url;
     }
 
     /**

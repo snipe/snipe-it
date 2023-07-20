@@ -84,6 +84,37 @@ var baseUrl = $('meta[name="baseUrl"]').attr('content');
     var Components = {};
     Components.modals = {};
 
+    // confirm restore modal
+    Components.modals.confirmRestore = function() {
+        var $el = $('table');
+
+        var events = {
+            'click': function(evnt) {
+                var $context = $(this);
+                var $restoreConfirmModal = $('#restoreConfirmModal');
+                var href = $context.attr('href');
+                var message = $context.attr('data-content');
+                var title = $context.attr('data-title');
+
+                $('#restoreConfirmModalLabel').text(title);
+                $restoreConfirmModal.find('.modal-body').text(message);
+                $('#restoreForm').attr('action', href);
+                $restoreConfirmModal.modal({
+                    show: true
+                });
+                return false;
+            }
+        };
+
+        var render = function() {
+            $el.on('click', '.restore-asset', events['click']);
+        };
+
+        return {
+            render: render
+        };
+    };
+
     // confirm delete modal
     Components.modals.confirmDelete = function() {
         var $el = $('table');
@@ -121,6 +152,7 @@ var baseUrl = $('meta[name="baseUrl"]').attr('content');
      * Component definition stays out of load event, execution only happens.
      */
     $(function() {
+        new Components.modals.confirmRestore().render();
         new Components.modals.confirmDelete().render();
     });
 }(jQuery, window.snipeit.settings));
@@ -153,14 +185,6 @@ $(document).ready(function () {
         }
      });
 
-     /*
-     * iCheck checkbox plugin
-     */
-
-     $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-         checkboxClass: 'icheckbox_minimal-blue',
-         radioClass: 'iradio_minimal-blue'
-     });
 
 
      /*
@@ -301,11 +325,11 @@ $(document).ready(function () {
                 });
 				
 				// makes sure we're not selecting the same thing twice for multiples
-				var filteredResponse = response.items.filter(function(item) {
+				var filteredResponse = response.results.filter(function(item) {
 					return currentlySelected.indexOf(+item.id) < 0;
 				});
 
-				var first = (currentlySelected.length > 0) ? filteredResponse[0] : response.items[0];
+				var first = (currentlySelected.length > 0) ? filteredResponse[0] : response.results[0];
 				
 				if(first && first.id) {
 					first.selected = true;
@@ -390,12 +414,12 @@ $(document).ready(function () {
         var safe_html = root_div.get(0).outerHTML;
         var old_html = formatDatalist(datalist);
         if(safe_html != old_html) {
-            console.log("HTML MISMATCH: ");
-            console.log("FormatDatalistSafe: ");
+            //console.log("HTML MISMATCH: ");
+            //console.log("FormatDatalistSafe: ");
             // console.dir(root_div.get(0));
-            console.log(safe_html);
-            console.log("FormatDataList: ");
-            console.log(old_html);
+            //console.log(safe_html);
+            //console.log("FormatDataList: ");
+            //console.log(old_html);
         }
         return root_div;
 
@@ -508,10 +532,16 @@ $(document).ready(function () {
         var id = '#' + $this.attr('id');
         var status = id + '-status';
         var $status = $(status);
+        var delete_id = $(id + '-deleteCheckbox');
+        var preview_container = $(id + '-previewContainer');
+
+
+
         $status.removeClass('text-success').removeClass('text-danger');
         $(status + ' .goodfile').remove();
         $(status + ' .badfile').remove();
         $(status + ' .previewSize').hide();
+        preview_container.hide();
         $(id + '-info').html('');
 
         var max_size = $this.data('maxsize');
@@ -519,20 +549,18 @@ $(document).ready(function () {
 
         for (var i = 0; i < this.files.length; i++) {
             total_size += this.files[i].size;
-            $(id + '-info').append('<span class="label label-default">' + this.files[i].name + ' (' + formatBytes(this.files[i].size) + ')</span> ');
+            $(id + '-info').append('<span class="label label-default">' + htmlEntities(this.files[i].name) + ' (' + formatBytes(this.files[i].size) + ')</span> ');
         }
-
-        console.log('Max size is: ' + max_size);
-        console.log('Real size is: ' + total_size);
 
         if (total_size > max_size) {
             $status.addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fas fa-times"></i> ').append('<span class="previewSize"> Upload is ' + formatBytes(total_size) + '.</span>');
         } else {
-
             $status.addClass('text-success').removeClass('help-block').prepend('<i class="goodfile fas fa-check"></i> ');
             var $preview =  $(id + '-imagePreview');
             readURL(this, $preview);
             $preview.fadeIn();
+            preview_container.fadeIn();
+            delete_id.hide();
         }
 
 
@@ -540,6 +568,9 @@ $(document).ready(function () {
 
 });
 
+function htmlEntities(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
 
 
 
@@ -566,3 +597,32 @@ $(document).ready(function () {
     };
     
 })(jQuery);
+
+/**
+ * Universal Livewire Select2 integration
+ *
+ * How to use:
+ *
+ * 1. Set the class of your select2 elements to 'livewire-select2').
+ * 2. Name your element to match a property in your Livewire component
+ * 3. Add an attribute called 'data-livewire-component' that points to $_instance->id (via `{{ }}` if you're in a blade,
+ *    or just $_instance->id if not).
+ */
+$(function () {
+    $('.livewire-select2').select2()
+
+    $(document).on('select2:select', '.livewire-select2', function (event) {
+        var target = $(event.target)
+        if(!event.target.name || !target.data('livewire-component')) {
+            console.error("You need to set both name (which should match a Livewire property) and data-livewire-component on your Livewire-ed select2 elements!")
+            console.error("For data-livewire-component, you probably want to use $_instance->id or {{ $_instance->id }}, as appropriate")
+            return false
+        }
+        window.livewire.find(target.data('livewire-component')).set(event.target.name, this.options[this.selectedIndex].value)
+    })
+
+    window.livewire.hook('message.processed', function (el,component) {
+        $('.livewire-select2').select2();
+    });
+
+})

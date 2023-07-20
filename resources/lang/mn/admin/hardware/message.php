@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Анхааруулга: </strong> Энэ хөрөнгө нь одоогоор хүчингүй болсон гэж тэмдэглэгдсэн байна. Хэрэв энэ байдал өөрчлөгдсөн бол хөрөнгийн статусыг шинэчлэнэ үү.',
     'does_not_exist' 	=> 'Хөрөнгө байхгүй байна.',
-    'does_not_exist_or_not_requestable' => 'Сайхан оролдлого. Энэ хөрөнгө байхгүй эсвэл хүсэлт гаргаагүй.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Энэ хөрөнгийг одоогоор хэрэглэгчид шалгаж, устгах боломжгүй байна. Эхлээд хөрөнгийг шалгаж үзээд дараа нь устга.',
 
     'create' => [
@@ -16,17 +16,21 @@ return [
         'error'   			=> 'Хөрөнгийн шинэчлэлт хийгдээгүй тул дахин оролдоно уу',
         'success' 			=> 'Акт амжилттай шинэчлэгдсэн.',
         'nothing_updated'	=>  'Ямар ч талбар сонгогдоогүй тул шинэчлэгдээгүй байна.',
+        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
     ],
 
     'restore' => [
         'error'   		=> 'Хөрөнгө сэргээгээгүй байна, дахин оролдоно уу',
         'success' 		=> 'Хөрөнгийн амжилттай сэргээгдэв.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
         'error'   		=> 'Хөрөнгийн аудит амжилтгүй болсон. Дахин оролдоно уу.',
         'success' 		=> 'Хөрөнгийн аудит амжилттай нэвтэрсэн байна.',
     ],
+
 
     'deletefile' => [
         'error'   => 'Файлыг устгаагүй байна. Дахин оролдоно уу.',
@@ -46,7 +50,10 @@ return [
         'success'               => 'Таны файл импортлогдсон байна',
         'file_delete_success'   => 'Таны файл амжилттай болсон байна',
         'file_delete_error'      => 'Файл устгагдах боломжгүй байна',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Та энэ хөрөнгийг устгахыг хүсч байна уу?',

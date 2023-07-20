@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'asset_categories' 					=> 'Ang mga Kategorya ng Asset',
     'category_name'  					=> 'Ang Pangalan ng Kategorya',
     'checkin_email'                     => 'Padalhan ng email yung user pag mag-checkin/checkout.',
@@ -18,5 +18,6 @@ return [
     'update'  							=> 'I-update ang Katergorya',
     'use_default_eula'					=> 'Sa halip ay gamitin ang <a href="#" data-toggle="modal" data-target="#eulaModal">ang pangunahing default ng EULA</a>.',
     'use_default_eula_disabled'			=> '<del>Sa halip ay gumamit ng pangunahing default na EULA.</del> Walang pangunahing default na EULA na nai-set. Paki-dagdag ng isa sa mga setting.',
+    'use_default_eula_column'			=> 'Use default EULA',
 
-];
+);

@@ -41,7 +41,7 @@
             @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'assigned_to', 'required'=> 'true'])
 
 
-            @if ($consumable->requireAcceptance() || $consumable->getEula() || ($snipeSettings->slack_endpoint!=''))
+            @if ($consumable->requireAcceptance() || $consumable->getEula() || ($snipeSettings->webhook_endpoint!=''))
               <div class="form-group notification-callout">
                 <div class="col-md-8 col-md-offset-3">
                   <div class="callout callout-info">
@@ -58,9 +58,9 @@
                         <br>
                     @endif
 
-                    @if ($snipeSettings->slack_endpoint!='')
+                    @if ($snipeSettings->webhook_endpoint!='')
                         <i class="fab fa-slack"></i>
-                        A slack message will be sent
+                        {{ trans('general.webhook_msg_note') }}
                     @endif
                   </div>
                 </div>
@@ -70,13 +70,13 @@
           <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
             <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
             <div class="col-md-7">
-              <textarea class="col-md-6 form-control" id="note" name="note">{{ old('note', $consumable->note) }}</textarea>
+              <textarea class="col-md-6 form-control" name="note">{{ old('note') }}</textarea>
               {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
         </div> <!-- .box-body -->
         <div class="box-footer">
-          <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
+          <a class="btn btn-link" href="{{ route('consumables.show', ['consumable'=> $consumable->id]) }}">{{ trans('button.cancel') }}</a>
           <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
        </div>
       </div>

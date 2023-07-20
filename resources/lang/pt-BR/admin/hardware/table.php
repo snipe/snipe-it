@@ -4,10 +4,12 @@ return [
 
     'asset_tag'   	=> 'Marcação do Ativo',
     'asset_model'       => 'Modelo',
-    'book_value'  	=> 'Valor',
+    'book_value'  	=> 'Valor Atual',
     'change' 		=> 'Entrada/Saída',
     'checkout_date' => 'Data de saída',
     'checkoutto' 	=> 'check-out',
+    'components_cost' => 'Custo Total de Componentes',
+    'current_value' => 'Valor Atual',
     'diff' 			=> 'Diferença',
     'dl_csv' 		=> 'Baixar CSV',
     'eol' 			=> 'EOL',
@@ -18,8 +20,12 @@ return [
     'serial'   		=> 'Serial',
     'status'   		=> 'Status',
     'title'      	=> 'Ativo ',
-    'image'		=> 'Imagem do equipamento',
+    'image'		    => 'Imagem do equipamento',
     'days_without_acceptance' => 'Dias sem que fosse aceito',
     'monthly_depreciation' => 'Depreciação Mensal',
-
+    'assigned_to'    => 'Atribuído a',
+    'requesting_user' => 'Usuário solicitante',
+    'requested_date' => 'Data de Solicitação',
+    'changed'       => 'Alterado',
+    'icon' => 'Ícone',
 ];

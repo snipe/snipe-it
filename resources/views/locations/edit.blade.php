@@ -17,6 +17,9 @@
 <!-- Manager-->
 @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/users/table.manager'), 'fieldname' => 'manager_id'])
 
+@include ('partials.forms.edit.phone')
+@include ('partials.forms.edit.fax')
+
 <!-- Currency -->
 <div class="form-group {{ $errors->has('currency') ? ' has-error' : '' }}">
     <label for="currency" class="col-md-3 control-label">
@@ -43,68 +46,6 @@
     </div>
 @endif
 
-<!-- Image -->
-@if (($item->image) && ($item->image!=''))
-    <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
-        <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
-        <div class="col-md-9">
-            <label for="image_delete">
-                {{ Form::checkbox('image_delete', '1', old('image_delete'), array('class' => 'minimal', 'aria-label'=>'required')) }}
-            </label>
-            <br>
-            <img src="{{ url('/') }}/uploads/locations/{{ $item->image }}" alt="Image for {{ $item->name }}">
-            {!! $errors->first('image_delete', '<span class="alert-msg" aria-hidden="true"><br>:message</span>') !!}
-        </div>
-    </div>
-@endif
-
-@include ('partials.forms.edit.image-upload')
+@include ('partials.forms.edit.image-upload', ['image_path' => app('locations_upload_path')])
 @stop
 
-@if (!$item->id)
-@section('moar_scripts')
-<script nonce="{{ csrf_token() }}">
-
-    var $eventSelect = $(".parent");
-    $eventSelect.on("change", function () { parent_details($eventSelect.val()); });
-    $(function() {
-        var parent_loc = $(".parent option:selected").val();
-        if(parent_loc!=''){
-            parent_details(parent_loc);
-        }
-    });
-
-    function parent_details(id) {
-
-        if (id) {
-//start ajax request
-$.ajax({
-    type: 'GET',
-    url: "{{url('/') }}/api/locations/"+id+"/check",
-//force to handle it as text
-dataType: "text",
-success: function(data) {
-    var json = $.parseJSON(data);
-    $("#city").val(json.city);
-    $("#address").val(json.address);
-    $("#address2").val(json.address2);
-    $("#state").val(json.state);
-    $("#zip").val(json.zip);
-    $(".country").select2("val",json.country);
-}
-});
-} else {
-    $("#city").val('');
-    $("#address").val('');
-    $("#address2").val('');
-    $("#state").val('');
-    $("#zip").val('');
-    $(".country").select2("val",'');
-}
-
-
-
-};
-</script>
-@stop
-@endif

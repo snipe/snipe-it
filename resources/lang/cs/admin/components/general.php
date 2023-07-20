@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'component_name'                  => 'Název dílu',
     'checkin'                             => 'Převzít díl',
     'checkout'                             => 'Předat díl',
@@ -12,4 +12,5 @@ return [
     'remaining' 			             => 'Zbývá',
     'total' 			                 => 'Celkem',
     'update'                            => 'Upravit díl',
-];
+    'checkin_limit'            => 'Přijaté množství musí odpovídat, nebo být nižší než :assigned_qty'
+);

@@ -4,10 +4,12 @@ return [
 
     'asset_tag'   	=> 'Clib Sócmhainní',
     'asset_model'       => 'Mionsamhail',
-    'book_value'  	=> 'Luach',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'In / Amach',
     'checkout_date' => 'Dáta Seiceáil',
     'checkoutto' 	=> 'Seiceáil Amach',
+    'components_cost' => 'Total Components Cost',
+    'current_value' => 'Current Value',
     'diff' 			=> 'Diff',
     'dl_csv' 		=> 'Íoslódáil CSV',
     'eol' 			=> 'EOL',
@@ -18,8 +20,12 @@ return [
     'serial'   		=> 'Sraithuimhir',
     'status'   		=> 'Stádas',
     'title'      	=> 'Sócmhainn',
-    'image'		=> 'Íomhá Gléas',
+    'image'		    => 'Íomhá Gléas',
     'days_without_acceptance' => 'Laethanta Gan Glactha',
     'monthly_depreciation' => 'Monthly Depreciation',
-
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
 ];

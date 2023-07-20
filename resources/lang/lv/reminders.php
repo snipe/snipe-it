@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,9 @@ return [
     |
     */
 
-    'password' => 'Parolēm jābūt sešām rakstzīmēm un jāatbilst apstiprinājumam.',
+    "password" => "Parolēm jābūt sešām rakstzīmēm un jāatbilst apstiprinājumam.",
+    "user"     => "Lietotājvārds vai e-pasta adrese ir nepareiza",
+    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
+    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
 
-    'user'     => 'Lietotājvārds vai e-pasta adrese ir nepareiza',
-
-    'token'    => 'Šis paroles atiestatīšanas marķieris nav derīgs.',
-
-    'sent' => 'Ja tika atrasta atbilstoša e-pasta adrese, tika nosūtīts paroles atgādinājums!',
-
-];
+);

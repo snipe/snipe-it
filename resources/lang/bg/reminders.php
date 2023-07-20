@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,9 @@ return [
     |
     */
 
-    'password' => 'Паролата трябва да бъде поне 6 символа и да съвпада с потвърждението.',
+    "password" => "Паролата трябва да бъде поне 6 символа и да съвпада с потвърждението.",
+    "user"     => "Грешно потребителско име или имейл адрес",
+    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
+    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
 
-    'user'     => 'Грешно потребителско име или имейл адрес',
-
-    'token'    => 'Връзката за възстановяване на паролата е невалидна.',
-
-    'sent' => 'Ако е зададен email, на потребителя ще бъде изпратена връзка за възстановяване на паролата.',
-
-];
+);

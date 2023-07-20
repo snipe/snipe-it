@@ -17,17 +17,21 @@ return [
         'error'   			=> 'Equipo no actualizado, intentalo de nuevo',
         'success' 			=> 'Equipo actualizado.',
         'nothing_updated'	=>  'Ningún campo fue seleccionado, por lo que nada ha sido actualizado.',
+        'no_assets_selected'  =>  'Ningún recurso fue seleccionado, por lo que no se actualizó nada.',
     ],
 
     'restore' => [
         'error'   		=> 'El equipo no fue restaurado, por favor intente nuevamente',
         'success' 		=> 'Equipo restaurado correctamente.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
         'error'   		=> 'La auditoría de activos no tuvo éxito. Vuelve a intentarlo.',
         'success' 		=> 'Auditoría de activos registrada correctamente.',
     ],
+
 
     'deletefile' => [
         'error'   => 'Archivo no eliminado. Por favor, vuelva a intentarlo.',
@@ -47,7 +51,10 @@ return [
         'success'               => 'Tu archivo ha sido importado',
         'file_delete_success'   => 'Tu archivo ha sido eliminado con éxito',
         'file_delete_error'      => 'No pudimos eliminar tu archivo',
+        'header_row_has_malformed_characters' => 'Uno o más atributos en la fila del encabezado contienen caracteres UTF-8 mal formados',
+        'content_row_has_malformed_characters' => 'Uno o más atributos en la primera fila de contenido contienen caracteres UTF-8 mal formados',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Estás seguro que quieres eliminar el equipo?',

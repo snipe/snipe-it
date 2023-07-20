@@ -2,11 +2,14 @@
 
 return [
     'bulk_delete'		=> 'Massenlöschung von Assets bestätigen',
+    'bulk_restore'      => 'Massenwiederherstellung von Assets bestätigen', 
   'bulk_delete_help'	=> 'Überprüfen Sie die nachfolgenden Assets für die Massenlöschung. Sobald diese gelöscht sind, können diese zwar wiederhergestellt werden, sind aber dem aktuellen Nutzer nicht mehr zugeordnet.',
+  'bulk_restore_help'	=> 'Überprüfen Sie die Assets für die Massenwiederherstellung. Sobald sie wiederhergestellt sind, werden diese Assets nicht mit Benutzern assoziiert, denen sie zuvor zugewiesen wurden.',
   'bulk_delete_warn'	=> 'Sie sind im Begriff :asset_count Assets zu löschen.',
+  'bulk_restore_warn'	=> 'Sie sind dabei, :asset_count Assets wiederherzustellen.',
     'bulk_update'		=> 'Massenaktualisierung von Assets',
-    'bulk_update_help'	=> 'Diese Eingabemaske erlaubt Ihnen die Aktualisierung von mehrere Assets zugleich. Füllen Sie die Felder aus welche Sie ändern möchten. Alle leeren Felder bleiben unverändert. ',
-    'bulk_update_warn'	=> 'Sie sind dabei die Eigenschaften von :asset_count Assets zu bearbeiten.',
+    'bulk_update_help'	=> 'Diese Eingabemaske erlaubt Ihnen die Aktualisierung von mehreren Assets zugleich. Füllen Sie die Felder aus welche Sie ändern möchten. Alle leeren Felder bleiben unverändert. ',
+    'bulk_update_warn'	=> 'Sie sind dabei, die Eigenschaften eines einzelnen Assets zu bearbeiten. |Sie sind dabei, die Eigenschaften von :asset_count Assets zu bearbeiten.',
     'checkedout_to'		=> 'Herausgegeben an',
     'checkout_date'		=> 'Herausgabedatum',
     'checkin_date'		=> 'Rücknahmedatum',
@@ -40,4 +43,12 @@ return [
     'warranty'			=> 'Garantie',
         'warranty_expires'		=> 'Garantie Ablaufdatum',
     'years'				=> 'Jahre',
+    'asset_location' => 'Standort des Assets aktualisieren',
+    'asset_location_update_default_current' => 'Standardort und aktuellen Standort aktualisieren',
+    'asset_location_update_default' => 'Nur den Standardort aktualisieren',
+    'asset_not_deployable' => 'Dieses Asset ist nicht verfügbar und kann nicht herausgegeben werden.',
+    'asset_deployable' => 'Dieses Asset ist verfügbar und kann herausgegeben werden.',
+    'processing_spinner' => 'Verarbeitung... (Dies kann bei großen Dateien etwas Zeit in Anspruch nehmen)',
+    'optional_infos'  => 'Optionale Informationen',
+    'order_details'   => 'Bestellinformationen'
 ];

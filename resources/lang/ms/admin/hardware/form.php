@@ -2,11 +2,14 @@
 
 return [
     'bulk_delete'		=> 'Sahkan Pemutihan Aset Pukal',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> 'Semak aset untuk penghapusan pukal di bawah. Sebaik sahaja dipadam, aset ini dapat dipulihkan, tetapi mereka tidak lagi akan dikaitkan dengan mana-mana pengguna yang mereka buat sekarang.',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'Anda akan hapus: asset_count aset.',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'Aset Kemas Kini Pukal',
     'bulk_update_help'	=> 'Borang ini membolehkan anda mengemas kini berbilang aset sekaligus. Hanya isikan medan yang perlu anda ubah. Mana-mana medan yang dibiarkan kosong akan kekal tidak berubah.',
-    'bulk_update_warn'	=> 'Anda akan menyunting sifat aset aset_count.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Agihkan Kepada',
     'checkout_date'		=> 'Tarikh Checkout',
     'checkin_date'		=> 'Tarikh daftar masuk',
@@ -40,4 +43,12 @@ return [
     'warranty'			=> 'Waranti',
         'warranty_expires'		=> 'Tamat Tempoh Waranti',
     'years'				=> 'tahun',
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information'
 ];

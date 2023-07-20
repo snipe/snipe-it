@@ -81,7 +81,7 @@ use Carbon\Carbon;
       <div class="row">
         <div class="col-md-3 col-sm-3" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
           <strong>{{ trans('admin/asset_maintenances/form.cost') }}: </strong>
-          {{ sprintf( trans( 'general.currency' ) . '%01.2f', $assetMaintenance->cost) }}
+          {{ trans( 'general.currency' ) . Helper::formatCurrencyOutput($assetMaintenance->cost) }}
         </div>
         <div class="col-md-3 col-sm-3" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
           <strong>{{ trans('admin/asset_maintenances/form.is_warranty') }}: </strong>
@@ -93,7 +93,7 @@ use Carbon\Carbon;
       <div class="row">
         <div class="col-md-12 col-sm-12" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
           <strong>{{ trans('admin/asset_maintenances/form.notes') }}: </strong>
-          {{ $assetMaintenance->notes }}
+          {!! nl2br(Helper::parseEscapedMarkedownInline($assetMaintenance->notes)) !!}
         </div>
       </div>
       <!-- 5th Row End -->

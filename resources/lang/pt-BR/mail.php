@@ -1,6 +1,8 @@
 <?php
 
-return array(
+return [
+    'acceptance_asset_accepted' => 'Um usuário aceitou um item',
+    'acceptance_asset_declined' => 'Um usuário recusou um item',
     'a_user_canceled' => 'Um usuário cancelou uma requisição no website',
     'a_user_requested' => 'Um usuário requisitou um item no website',
     'accessory_name' => 'Nome do Acessório:',
@@ -41,6 +43,7 @@ return array(
     'login_first_admin' => 'Faça login na sua instalação do Snipe-IT usando os dados abaixo:',
     'login' => 'Login:',
     'Low_Inventory_Report' => 'Relatório de baixas de inventario',
+    'inventory_report' => 'Relatório de Inventário',
     'min_QTY' => 'Qtde. Min',
     'name' => 'Nome',
     'new_item_checked' => 'Um novo item foi feito Check-out em seu nome, detalhes abaixo.',
@@ -59,7 +62,7 @@ return array(
     'test_mail_text' => 'Isto é um e-mail de teste do Snipe-IT Asset Management System. Se você recebeu essa mensagem, quer dizer que o e-mail está funcionando :)',
     'the_following_item' => 'O Item a seguir foi devolvido: ',
     'low_inventory_alert' => 'Há um :count que está abaixo do estoque mínimo ou em breve estará abaixo. | Existem :count items que estão abaixo do estoque mínimo ou em breve estarão baixos.',
-    'assets_warrantee_alert' => 'Há um :count ativo com a garantia expirando nos próximos :threshold dias. | Existem :count ativos com a garantia expirando nos próximos :threshold dias.',
+    'assets_warrantee_alert' => 'Há um :count ativo com a garantia expirando nos próximos :threshold dias. Existem :count ativos com a garantia expirando nos próximos :threshold dias.',
     'license_expiring_alert' => 'Há uma :count licença expirando nos próximos :threshold dias. | Existem :count licenças expirand nos próximos :threshold dias.',
     'to_reset' => 'Para fazer reset da senha do :web, preencha este formulário:',
     'type' => 'Tipo',
@@ -71,9 +74,11 @@ return array(
     'your_credentials' => 'Suas credenciais do Snipe-IT',
     'Accessory_Checkin_Notification' => 'Ativo verificado em',
     'Asset_Checkin_Notification' => 'Ativo verificado em',
+    'Asset_Checkout_Notification' => 'Ativo retornado',
     'License_Checkin_Notification' => 'Licença verificada em',
     'Expected_Checkin_Report' => 'Relatório de check-in de ativos esperado',
     'Expected_Checkin_Notification' => 'Lembrete: :name prazo de devolução aproximando',
     'Expected_Checkin_Date' => 'Um ativo com check-out para você deve ser verificado novamente em :date',
-    'your_assets' => 'Ver seus ativos'
-);
+    'your_assets' => 'Ver seus ativos',
+    'rights_reserved' => 'Todos os direitos reservados.',
+];

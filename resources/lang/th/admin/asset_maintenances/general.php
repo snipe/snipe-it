@@ -11,4 +11,6 @@
         'calibration'        => 'การเปรียบเทียบค่า',
         'software_support'   => 'การสนับสนุน Software',
         'hardware_support'   => 'การสนับสนุน Hardware',
+        'configuration_change'   => 'เปลี่ยนการตั้งค่า',
+        'pat_test'           => 'การทดสอบสินค้าอันตราย',
     ];

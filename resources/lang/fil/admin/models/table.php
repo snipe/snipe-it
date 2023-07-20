@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'create'				=> 'Magsagawa ng Modelo ng Asset',
     'created_at' 			=> 'Naisagawa sa',
@@ -14,4 +14,4 @@ return [
     'update'				=> 'I-update ang Modelo ng Asset',
     'clone'				=> 'I-clone ang Modelo',
     'edit'				=> 'I-edit ang Modelo',
-];
+);

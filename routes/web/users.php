@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Users;
+use App\Http\Controllers\Users\UserFilesController;
 use Illuminate\Support\Facades\Route;
 
 // User Management
@@ -37,7 +38,7 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
             Users\UsersController::class, 
             'getClone'
         ]
-    )->name('clone/user');
+    )->name('users.clone.show');
 
     Route::post(
         '{userId}/clone',
@@ -45,15 +46,15 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
             Users\UsersController::class, 
             'postCreate'
         ]
-    )->name('clone/user');
+    )->name('users.clone.store');
 
-    Route::get(
+    Route::post(
         '{userId}/restore',
         [
             Users\UsersController::class, 
             'getRestore'
         ]
-    )->name('restore/user');
+    )->name('users.restore.store');
 
     Route::get(
         '{userId}/unsuspend',
@@ -104,12 +105,28 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
     )->name('users.print');
 
     Route::post(
+        '{userId}/email',
+        [
+            Users\UsersController::class,
+            'emailAssetList'
+        ]
+    )->name('users.email');
+
+    Route::post(
         'bulkedit',
         [
             Users\BulkUsersController::class, 
             'edit'
         ]
     )->name('users/bulkedit');
+
+    Route::post(
+        'merge',
+        [
+            Users\BulkUsersController::class,
+            'merge'
+        ]
+    )->name('users.merge.save');
 
 
     Route::post(

@@ -31,6 +31,7 @@ class BulkAssetModelsController extends Controller
 
             // If deleting....
             if ($request->input('bulk_actions') == 'delete') {
+                $this->authorize('delete', AssetModel::class);
                 $valid_count = 0;
                 foreach ($models as $model) {
                     if ($model->assets_count == 0) {
@@ -42,7 +43,7 @@ class BulkAssetModelsController extends Controller
 
                 // Otherwise display the bulk edit screen
             }
-
+            $this->authorize('update', AssetModel::class);
             $nochange = ['NC' => 'No Change'];
 
             return view('models/bulk-edit', compact('models'))
@@ -64,6 +65,8 @@ class BulkAssetModelsController extends Controller
      */
     public function update(Request $request)
     {
+        $this->authorize('update', AssetModel::class);
+      
         $models_raw_array = $request->input('ids');
         $update_array = [];
 
@@ -80,11 +83,16 @@ class BulkAssetModelsController extends Controller
             $update_array['depreciation_id'] = $request->input('depreciation_id');
         }
 
+        if ($request->filled('requestable') != '') {
+            $update_array['requestable'] = $request->input('requestable');
+        }
+
+
         if (count($update_array) > 0) {
             AssetModel::whereIn('id', $models_raw_array)->update($update_array);
 
             return redirect()->route('models.index')
-                ->with('success', trans('admin/models/message.bulkedit.success'));
+                ->with('success', trans_choice('admin/models/message.bulkedit.success', count($models_raw_array), ['model_count' => count($models_raw_array)]));
         }
 
         return redirect()->route('models.index')
@@ -101,6 +109,8 @@ class BulkAssetModelsController extends Controller
      */
     public function destroy(Request $request)
     {
+        $this->authorize('delete', AssetModel::class);
+      
         $models_raw_array = $request->input('ids');
 
         if ((is_array($models_raw_array)) && (count($models_raw_array) > 0)) {

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about'      	=> 'O statusie',
     'archived'      	=> 'Zarchiwizowane',
     'create'      	=> 'Stwórz Status',
@@ -16,4 +16,4 @@ return [
     'title'      	=> 'Status',
     'undeployable'  => 'Niemożliwe do wdrożenia',
     'update'      	=> 'Zaktualizuj Status',
-];
+);

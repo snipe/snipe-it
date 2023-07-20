@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Figyelem: </strong> Ez az eszköz pillanatnyilag  nem kiadható. Ha ez a helyzet változott, kérjük, frissítse az eszköz állapotát.',
     'does_not_exist' 	=> 'Eszköz nem létezik.',
-    'does_not_exist_or_not_requestable' => 'Szép próbálkozás. Az eszköz nem létezik, vagy nem igényelhető.',
+    'does_not_exist_or_not_requestable' => 'Az eszköz nem létezik vagy nem igényelhető.',
     'assoc_users'	 	=> 'Ez az eszköz jelenleg ki van jelölve egy felhasználónak, és nem törölhető. Kérjük, először ellenőrizze az eszközt, majd próbálja meg újra törölni.',
 
     'create' => [
@@ -16,17 +16,21 @@ return [
         'error'   			=> 'Az eszköz nem frissült, próbálkozzon újra',
         'success' 			=> 'Az eszköz sikeresen frissült.',
         'nothing_updated'	=>  'Nem választottak ki mezőket, így semmi sem frissült.',
+        'no_assets_selected'  =>  'Egyetlen eszköz sem volt kiválasztva, így semmi sem frissült.',
     ],
 
     'restore' => [
         'error'   		=> 'Az eszköz nem állt helyre, kérjük, próbálkozzon újra',
         'success' 		=> 'Az eszköz sikeresen visszaállítva.',
+        'bulk_success' 		=> 'Az eszköz sikeresen visszaállítva.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
         'error'   		=> 'Az eszközellenőrzés sikertelen volt. Kérlek próbáld újra.',
         'success' 		=> 'Az eszközellenőrzés sikeresen be van jelentkezve.',
     ],
+
 
     'deletefile' => [
         'error'   => 'A fájl nem törölve. Kérlek próbáld újra.',
@@ -46,7 +50,10 @@ return [
         'success'               => 'A fájlt importálta',
         'file_delete_success'   => 'A fájlt sikeresen törölték',
         'file_delete_error'      => 'A fájlt nem sikerült törölni',
+        'header_row_has_malformed_characters' => 'A fejlécsorban egy vagy több attribútum hibás formájú UTF-8 karaktereket tartalmaz',
+        'content_row_has_malformed_characters' => 'A tartalom első sorában egy vagy több attribútum hibás formájú UTF-8 karaktereket tartalmaz',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Biztos benne, hogy törli ezt az elemet?',

@@ -4,7 +4,8 @@ return [
 
     'undeployable' 		=> '<strong> اخطار: </ strong> این دارایی به برانگیز گزارش شده است که در حال حاضر undeployable. اگر این وضعیت تغییر کرده است، لطفا به روز رسانی وضعیت دارایی.',
     'does_not_exist' 	=> 'دارایی وجود ندارد.',
-    'does_not_exist_or_not_requestable' => 'دوباره تلاش کنید . این دارایی وجود ندارد.',
+    'does_not_exist_or_not_requestable' => 'آن دارایی وجود ندارد یا قابل درخواست نیست.
+',
     'assoc_users'	 	=> 'این دارایی در حال حاضر به یک کاربر چک کردن و پاک نمی شود. لطفا دارایی در اولین بار چک کنید، و سپس سعی کنید دوباره حذف کنید.',
 
     'create' => [
@@ -16,17 +17,22 @@ return [
         'error'   			=> 'دارایی به روز نیست، لطفا دوباره امتحان کنید',
         'success' 			=> 'دارایی ها با موفقیت به روز رسانی.',
         'nothing_updated'	=>  'هیچ زمینه، انتخاب شدند تا هیچ چیز به روز شد.',
+        'no_assets_selected'  =>  'هیچ دارایی انتخاب نشد، بنابراین چیزی به‌روزرسانی نشد.
+',
     ],
 
     'restore' => [
         'error'   		=> 'دارایی بازیابی نشد، لطفا دوباره تلاش کنید',
         'success' 		=> 'دارایی با موفقیت بازیابی شد.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
         'error'   		=> 'ممیزی دارایی ناموفق بود. لطفا دوباره تلاش کنید.',
         'success' 		=> 'حسابرسی املاک با موفقیت وارد شد',
     ],
+
 
     'deletefile' => [
         'error'   => 'فایل حذف نمی شود. لطفا دوباره تلاش کنید.',
@@ -46,7 +52,10 @@ return [
         'success'               => 'فایل شما وارد شده است',
         'file_delete_success'   => 'فایل شما با موفقیت حذف شده است',
         'file_delete_error'      => 'فایل قابل حذف نشد',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'آیا شما مطمئن هستید که می خواهید این تنظیمات دارایی را حذف کنید؟',

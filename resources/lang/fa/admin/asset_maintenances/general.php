@@ -8,7 +8,11 @@
         'repair'             => 'بازسازی',
         'maintenance'        => 'نگهداشت',
         'upgrade'            => 'ارتقا',
-        'calibration'        => 'Calibration',
-        'software_support'   => 'Software Support',
-        'hardware_support'   => 'Hardware Support',
+        'calibration'        => 'کالیبره کردن',
+        'software_support'   => 'پشتیبانی نرم‌افزار',
+        'hardware_support'   => 'پشتیبانی سخت‌افزار',
+        'configuration_change'   => 'تغییرات پیکربندی:
+',
+        'pat_test'           => 'تست PAT
+',
     ];

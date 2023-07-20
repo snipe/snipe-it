@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Upozorenje: </strong> Ovaj resurs, imovina je označena kao trenutno nedeljiva. Ako se ovaj status promenio, ažurirajte status imovine.',
     'does_not_exist' 	=> 'Imovina ne postoji.',
-    'does_not_exist_or_not_requestable' => 'Dobar pokušaj. Ta imovina ne postoji ili nije moguće da se potražuje.',
+    'does_not_exist_or_not_requestable' => 'Imovina ne postoji ili se ne može zatražiti.',
     'assoc_users'	 	=> 'Ovaj je resurs trenutno poveren korisniku i ne može se izbrisati. Najprije proverite resurs, a zatim ponovo pokušajte brisanje. ',
 
     'create' => [
@@ -16,17 +16,21 @@ return [
         'error'   			=> 'Imovina nije ažurirana, pokušajte ponovo',
         'success' 			=> 'Imovina je uspešno ažurirana.',
         'nothing_updated'	=>  'Nije odabrano nijedno polje, tako da ništa nije ažurirano.',
+        'no_assets_selected'  =>  'Nije odabrano nijedno polje, tako da ništa nije ažurirano.',
     ],
 
     'restore' => [
         'error'   		=> 'Imovina nije obnovljena, pokušajte ponovo',
         'success' 		=> 'Imovina je uspešno obnovljena.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
         'error'   		=> 'Provera imovine nije uspela. Molim pokušajte ponovo.',
         'success' 		=> 'Provera imovine uspešno je evidentirana.',
     ],
+
 
     'deletefile' => [
         'error'   => 'Fajl nije izbrisan. Molim pokušajte ponovo.',
@@ -46,7 +50,10 @@ return [
         'success'               => 'Vaš fajl je importovan',
         'file_delete_success'   => 'Vaš je fajl uspešno izbrisan',
         'file_delete_error'      => 'Fajl nime moguće izbrisati',
+        'header_row_has_malformed_characters' => 'Jedan ili više atributa u redu zaglavlja sadrži loše formatirane UTF-8 karaktere',
+        'content_row_has_malformed_characters' => 'Jedan ili više atributa u prvom redu sadržaja sadrži loše formatirane UTF-8 karaktere',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Jeste li sigurni da želite izbrisati ovaj resurs?',

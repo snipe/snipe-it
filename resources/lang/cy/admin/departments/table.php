@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'id'                        => 'Rhif Unigryw',
     'name'                      => 'Enw Adran',
@@ -8,4 +8,4 @@ return [
     'location'                  => 'Lleoliad',
     'create'                    => 'Creu Adran',
     'update'                    => 'Diweddaru Adran',
-    ];
+    );

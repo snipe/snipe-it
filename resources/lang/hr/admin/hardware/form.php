@@ -2,11 +2,14 @@
 
 return [
     'bulk_delete'		=> 'Potvrda opcije brisanja brisanja',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> 'U nastavku pregledajte materijale za skupnu brisanje. Nakon što se izbrisati, ta se sredstva mogu vratiti, ali više neće biti povezana s korisnicima kojima su trenutačno dodijeljeni.',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'Izbrisat ćete: asset_count assets.',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'Skupna aktivacija ažuriranja',
     'bulk_update_help'	=> 'Ovaj vam obrazac omogućuje ažuriranje više imovine odjednom. Popunite polja koja su vam potrebna za promjenu. Sva polja koja su ostala prazna ostat će nepromijenjena.',
-    'bulk_update_warn'	=> 'Namjeravate urediti svojstva: imovine asset_count.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Provjereno',
     'checkout_date'		=> 'Datum kupnje',
     'checkin_date'		=> 'Datum čekanja',
@@ -40,4 +43,12 @@ return [
     'warranty'			=> 'garancija',
         'warranty_expires'		=> 'Jamstvo istječe',
     'years'				=> 'godina',
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'optional_infos'  => 'Optional Information',
+    'order_details'   => 'Order Related Information'
 ];
