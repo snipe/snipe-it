@@ -286,6 +286,7 @@ class Importer extends Component
             'serial' => trans('general.license_serial'),
             'email' => trans('general.importer.checked_out_to_email'),
             'username' => trans('general.importer.checked_out_to_username'),
+            'manufacturer' => trans('general.manufacturer'),
         ];
 
         $this->users_fields  = [
