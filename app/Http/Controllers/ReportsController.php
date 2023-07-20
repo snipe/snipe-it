@@ -501,7 +501,6 @@ class ReportsController extends Controller
                 $header[] = trans('general.zip');
             }
 
-
             if ($request->filled('assigned_to')) {
                 $header[] = trans('admin/hardware/table.checkoutto');
                 $header[] = trans('general.type');
@@ -532,13 +531,14 @@ class ReportsController extends Controller
             }
 
             if ($request->filled('warranty')) {
-                $header[] = 'Warranty';
-                $header[] = 'Warranty Expires';
+                $header[] = trans('admin/hardware/form.warranty');
+                $header[] = trans('admin/hardware/form.warranty_expires');
             }
+
             if ($request->filled('depreciation')) {
-                $header[] = 'Value';
-                $header[] = 'Diff';
-                $header[] = 'Fully Depreciated';
+                $header[] = trans('admin/hardware/table.book_value');
+                $header[] = trans('admin/hardware/table.diff');
+                $header[] = trans('admin/hardware/form.fully_depreciated');
             }
 
             if ($request->filled('checkout_date')) {
