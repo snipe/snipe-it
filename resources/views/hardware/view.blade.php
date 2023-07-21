@@ -75,8 +75,7 @@
         @if (!$asset->model)
             <div class="col-md-12">
                 <div class="callout callout-danger">
-                    <h2>{{ trans('admin/models/message.no_association') }}</h2>
-                        <p>{{ trans('admin/models/message.no_association_fix') }}</p>
+                      <p><strong>{{ trans('admin/models/message.no_association') }}</strong> {{ trans('admin/models/message.no_association_fix') }}</p>
                 </div>
             </div>
         @endif
@@ -183,7 +182,7 @@
                           </span>
                         <span class="hidden-xs hidden-sm">
                             {{ trans('general.additional_files') }}
-                            {!! ($asset->model->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($asset->model->uploads->count()).'</badge>' : '' !!}
+                            {!! ($asset->model) && ($asset->model->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($asset->model->uploads->count()).'</badge>' : '' !!}
                           </span>
                     </a>
                     </li>
@@ -626,7 +625,7 @@
                                                 {{ $asset->warranty_months }}
                                                 {{ trans('admin/hardware/form.months') }}
 
-                                                @if (($asset->model->manufacturer) && ($asset->model->manufacturer->warranty_lookup_url!=''))
+                                                @if (($asset->model) && ($asset->model->manufacturer) && ($asset->model->manufacturer->warranty_lookup_url!=''))
                                                     <a href="{{ $asset->present()->dynamicWarrantyUrl() }}" target="_blank">
                                                         <i class="fa fa-external-link" aria-hidden="true"><span class="sr-only">{{ trans('admin/hardware/general.mfg_warranty_lookup', ['manufacturer' => $asset->model->manufacturer->name]) }}</span></i>
                                                     </a>
@@ -1305,7 +1304,7 @@
                         <div class="row">
                             <div class="col-md-12">
 
-                                @if ($asset->model->uploads->count() > 0)
+                                @if (($asset->model) && ($asset->model->uploads->count() > 0))
                                     <table
                                             class="table table-striped snipe-table"
                                             id="assetModelFileHistory"
