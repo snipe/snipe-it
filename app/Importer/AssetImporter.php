@@ -3,6 +3,7 @@
 namespace App\Importer;
 
 use App\Models\Asset;
+use App\Models\AssetModel;
 use App\Models\Statuslabel;
 use Carbon\Carbon;
 
@@ -121,15 +122,19 @@ class AssetImporter extends ItemImporter
        
         $item['asset_eol_date'] = null;
         if (isset($this->item['asset_eol_date'])) {
-            $item['asset_eol_date'] = $this->item['asset_eol_date'];
+            if(!is_null($this->item['model_id'])) {
+               $model = AssetModel::find($this->createOrFetchAssetModel($row, $this->item['model_id']));
+                if(is_null($model->eol)) {
+                     $item['asset_eol_date'] = $this->item['asset_eol_date'];
+                     $item['eol_explicit'] = true;
+                } else {
+                    $item['asset_eol_date'] = Carbon::parse($this->item['asset_eol_date'])->addMonths($model->eol)->format('Y-m-d');
+                }
+            } 
         }
 
         $item['eol_explicit'] = null;
-        if (isset($this->item['eol_explicit'])) {
-            $item['eol_explicit'] = $this->item['eol_explicit'];
-        }
-       
-        if(($item['asset_eol_date'] == null) && ($item['eol_explicit'] == null) && ($asset->model->eol != null) && ($asset->asset_purchase_date != null)){
+        if(($item['asset_eol_date'] == null) && ($asset->model->eol != null) && ($asset->asset_purchase_date != null)){
             $asset->asset_eol_date = Carbon::parse($asset->asset_purchase_date)->addMonths($asset->model->eol)->format('Y-m-d');
         }
 

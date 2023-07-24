@@ -309,16 +309,7 @@ class AssetsController extends Controller
         $asset->warranty_months = $request->input('warranty_months', null);
         $asset->purchase_cost = $request->input('purchase_cost', null);
         $asset->purchase_date = $request->input('purchase_date', null); 
-        if ($request->filled('purchase_date') && !$request->filled('asset_eol_date')) {
-            $asset->purchase_date = $request->input('purchase_date', null); 
-            $asset->asset_eol_date = Carbon::parse($request->input('purchase_date'))->addMonths($asset->model->eol)->format('Y-m-d');
-        } elseif ($request->filled('asset_eol_date')) {
-           $asset->eol_explicit = request('eol_explicit', null); 
-        } 
-        else {
-            $asset->purchase_date = $request->input('purchase_date', null);
-            $asset->asset_eol_date  = request('asset_eol_date', $asset->present()->eol_date());
-        }
+        $asset->asset_eol_date  = request('asset_eol_date', null);
         
 
         $asset->supplier_id = $request->input('supplier_id', null);
@@ -390,10 +381,6 @@ class AssetsController extends Controller
 
 
         if ($asset->save()) {
-           if($asset->wasChanged('purchase_date') && $asset->eol_explicit == false){
-                $asset_eol_date = Carbon::parse($asset->purchase_date)->addMonths($asset->model->eol)->format('Y-m-d'); 
-                $asset->update(['asset_eol_date' => $asset_eol_date]); 
-            }
             return redirect()->route('hardware.show', $assetId)
                 ->with('success', trans('admin/hardware/message.update.success'));
         }
