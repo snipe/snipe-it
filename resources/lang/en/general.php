@@ -264,7 +264,7 @@ return [
     'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Suppliers',
-    'sure_to_delete'        => 'Are you sure you wish to delete',
+    'sure_to_delete'        => 'Are you sure you wish to delete?',
     'submit'				=> 'Submit',
     'target'                => 'Target',
     'time_and_date_display' => 'Time and Date Display',
