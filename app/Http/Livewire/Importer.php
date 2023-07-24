@@ -271,6 +271,8 @@ class Importer extends Component
             'asset_tag' => trans('general.importer.checked_out_to_tag'),
             'expiration_date' => trans('admin/licenses/form.expiration'),
             'full_name' => trans('general.importer.checked_out_to_fullname'),
+            'username' => trans('general.importer.checked_out_to_username'),
+            'email' => trans('general.importer.checked_out_to_email'),
             'license_email' => trans('admin/licenses/form.to_email'),
             'license_name' => trans('admin/licenses/form.to_name'),
             'purchase_order' => trans('admin/licenses/form.purchase_order'),
