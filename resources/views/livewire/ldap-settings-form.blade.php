@@ -459,7 +459,7 @@
                             </div>
                         </div>
                     </div>
-{{--                        <!-- LDAP Manager -->--}}
+                        <!-- LDAP Manager -->
                         <div class="col-md-11 col-md-offset-1">
                             <div class="form-group {{ $errors->has('ldap_dept') ? 'error' : '' }}">
                                 <div class="col-md-3">
@@ -493,7 +493,7 @@
                         </div>
                     </div>
 
-{{--                <!-- LDAP Phone -->--}}
+                <!-- LDAP Phone -->
                     <div class="col-md-11 col-md-offset-1">
                         <div class="form-group {{ $errors->has('ldap_phone') ? 'error' : '' }}">
                             <div class="col-md-3">
@@ -555,9 +555,31 @@
                                     <div class="col-md-9" id="ldaptestrow">
                                         <button type='submit' wire:click.prevent="ldapsynctest" {{ $setting->demoMode }} class="btn btn-default btn-sm pull-left" id="ldapsynctest" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test_sync') }}</button>
                                     </div>
+                                    <div class="col-md-9 col-md-offset-3">
+                                    @if(session()->has('sync_success'))
+                                    <div class="alert alert-success fade in">
+                                        {{session('sync_success')}}
+                                    </div>
+                                    @endif
+                                    @if(session()->has('sync_empty'))
+                                        <div class="alert alert-warning fade in">
+                                            {{session('sync_empty')}}
+                                        </div>
+                                    @endif
+                                    @if(session()->has('sync_bind_fail'))
+                                        <div class="alert alert-danger fade in">
+                                            {{session('sync_bind_fail')}}
+                                        </div>
+                                    @endif
+                                    @if(session()->has('unknown_sync_fail'))
+                                        <div class="alert alert-danger fade in">
+                                            {{session('unknown_sync_fail')}}
+                                        </div>
+                                    @endif
+                                    </div>
                                     @if(isset($ldap_sync_test_users))
                                         <div class="col-md-9 col-md-offset-3">
-                                            <p class="text-success"><i class="fas fa-check text-success"></i>{{$ldap_message}} </p>
+
                                             <br />
                                             <div id="ldapad_test_results" class="well well-sm">
                                                 <table class="table table-bordered table-condensed" style="background-color: #fff">
@@ -653,7 +675,7 @@
                                 </div>
                             </div>
                     </form>
-                    @endif
+
 
                         <!-- LDAP Forgotten password -->
                     <div class="col-md-11 col-md-offset-1">
@@ -671,7 +693,7 @@
                             </div>
                         </div>
                     </div>
-
+                @endif
 
                 <div class="box-footer">
                     <div class="text-left col-md-6">
@@ -691,17 +713,3 @@
 </form>
 </div>
 
-@push('moar_scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            Livewire.on('closeModal', function () {
-                closeModal();
-            });
-
-            Livewire.on('showModal', function () {
-                showModal();
-            });
-        });
-    </script>
-
-@endpush

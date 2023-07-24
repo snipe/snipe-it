@@ -178,22 +178,26 @@ class LdapSettingsForm extends Component
                     ];
                 });
                 if (isset($users)) {
-
                     $this->ldap_sync_test_users = $users->toArray();
+                    return session()->flash('sync_success', $this->ldap_message);
 
                 } else {
-                        $this->ldap_message .= ' Connection to LDAP was successful, however there were no users returned from your query. You should confirm the Base Bind DN above.';
+                    return session()->flash('sync_empty',' Connection to LDAP was successful, however there were no users returned from your query. You should confirm the Base Bind DN above.' );
+
                 }
             } catch (\Exception $e) {
                 \Log::debug('Bind failed');
                 \Log::debug("Exception was: ".$e->getMessage());
+                return session()->flash('sync_bind_fail', 'Bind failed');
             }
         } catch (\Exception $e) {
             \Log::debug('Connection failed but we cannot debug it any further on our end.');
+                return session()->flash('unknown_sync_fail');
 
         }
     }
     public function updated(){
+
         $this->ldap_sync_test_users = null;
 
     }
