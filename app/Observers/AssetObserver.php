@@ -6,6 +6,7 @@ use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Setting;
 use Auth;
+use Carbon\Carbon;
 
 class AssetObserver
 {
@@ -122,12 +123,23 @@ class AssetObserver
    
     public function saving(Asset $asset)
     {
-       //turning this off for right now so i can check out the note in the migration
+        //determine if calculated eol and then calculate it - this should only happen on a new asset
+        if(is_null($asset->asset_eol_date) && !is_null($asset->asset_purchase_date) && !is_null($asset->model->eol)){
+            $asset->asset_eol_date = $asset->purchase_date->addMonths($asset->model->eol)->format('Y-m-d');  
+        } 
 
-        //calculate and set the EOL date if it is not already set
-        // if(is_null($asset->asset_eol_date) && !is_null($asset->asset_purchase_date) && !is_null($asset->model()->get()->eol)){
-        //     $asset->asset_eol_date = date('Y-m-d', strtotime($asset->asset_purchase_date . ' + ' . $asset->asset_warranty_months . ' months'));
-        // }
+       //determine if explicit and set eol_explit to true 
+       if(!is_null($asset->asset_eol_date) && !is_null($asset->purchase_date) || ($asset->isDirty($asset->asset_eol_date) || $asset->isDirty($asset->purchase_date))) { 
+            if($asset->model->eol) { 
+                $months = Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date); 
+                if($months != $asset->model->eol) {
+                    $asset->eol_explicit = true;
+                } 
+            } else {
+                $asset->eol_explicit = true;
+            }
+       } 
+      
 
     }
 }

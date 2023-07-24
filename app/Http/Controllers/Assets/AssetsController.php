@@ -17,7 +17,6 @@ use App\Models\Statuslabel;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\View\Label;
-use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;

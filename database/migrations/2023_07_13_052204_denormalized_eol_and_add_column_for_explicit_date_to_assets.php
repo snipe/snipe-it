@@ -25,8 +25,12 @@ class DenormalizedEolAndAddColumnForExplicitDateToAssets extends Migration
         foreach($assetsWithEolDates as $asset) {
             if($asset->asset_eol_date && $asset->purchase_date) {
                 $months = Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date);
-                if($months != $asset->model->eol) {
-                    $asset->update(['eol_explicit' => true]);
+                if($asset->model->eol) { 
+                    if($months != $asset->model->eol) {
+                        $asset->update(['eol_explicit' => true]);
+                    }
+                } else {
+                    $asset->update(['eol_explcit' => true]);
                 }
             }
         }
