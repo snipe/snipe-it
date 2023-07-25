@@ -143,7 +143,7 @@
 
               <label class="form-control">
                 {{ Form::checkbox('checkin_date', '1', '1') }}
-                {{ trans('general.last') }} {{ trans('admin/hardware/table.checkin_date') }}
+                {{ trans('admin/hardware/table.last_checkin_date') }}
               </label>
 
               <label class="form-control">
@@ -296,10 +296,10 @@
 
           <!-- Last Checkin Date -->
           <div class="form-group checkin-range">
-              <label for="checkin_date" class="col-md-3 control-label">{{ trans('general.last') }} {{ trans('general.checkin') }} {{  trans('general.range') }}</label>
+              <label for="checkin_date" class="col-md-3 control-label">{{ trans('admin/hardware/table.last_checkin_date') }}</label>
               <div class="input-daterange input-group col-md-6" id="datepicker">
                   <input type="text" class="form-control" name="checkin_date_start" aria-label="checkin_date_start">
-                  <span class="input-group-addon">to</span>
+                  <span class="input-group-addon">{{ strtolower(trans('general.to')) }}</span>
                   <input type="text" class="form-control" name="checkin_date_end" aria-label="checkin_date_end">
               </div>
           </div>

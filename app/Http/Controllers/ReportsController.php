@@ -546,7 +546,7 @@ class ReportsController extends Controller
             }
 
             if ($request->filled('checkin_date')) {
-                $header[] = trans('general.last') . ' ' . trans('admin/hardware/table.checkin_date');
+                $header[] = trans('admin/hardware/table.last_checkin_date');
             }
 
             if ($request->filled('expected_checkin')) {
