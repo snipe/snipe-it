@@ -835,7 +835,9 @@ class ReportsController extends Controller
                     }
 
                     if ($request->filled('checkin_date')) {
-                        $row[] = ($asset->lastCheckin) ? $asset->lastCheckin->action_date : '';
+                        $row[] = ($asset->lastCheckin)
+                            ? Carbon::parse($asset->lastCheckin->action_date)->format('Y-m-d')
+                            : '';
                     }
 
                     if ($request->filled('expected_checkin')) {
