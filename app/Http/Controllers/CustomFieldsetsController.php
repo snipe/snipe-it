@@ -51,13 +51,12 @@ class CustomFieldsetsController extends Controller
             $maxid = 0;
             foreach ($cfset->fields as $field) {
                 if ($field->pivot->order > $maxid) {
-                    $maxid = $field->pivot->order;
+                    $maxid = ($field->pivot->order);
                 }
                 if (isset($custom_fields_list[$field->id])) {
                     unset($custom_fields_list[$field->id]);
                 }
             }
-
             return view('custom_fields.fieldsets.view')->with('custom_fieldset', $cfset)->with('maxid', $maxid + 1)->with('custom_fields_list', $custom_fields_list);
         }
 
