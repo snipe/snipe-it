@@ -650,7 +650,13 @@ class ReportsController extends Controller
             }
 
             if (($request->filled('checkin_date_start')) && ($request->filled('checkin_date_end'))) {
-                $assets->with('lastCheckin')->lastCheckinBetween($request->input('checkin_date_start'), $request->input('checkin_date_end'));
+                $assets->with('lastCheckin')
+                    ->whereHas('lastCheckin', function ($query) use ($request) {
+                        $query->whereBetween('action_date', [
+                            $request->input('checkin_date_start'),
+                            $request->input('checkin_date_end')
+                        ]);
+                    });
             }
 
             if (($request->filled('expected_checkin_start')) && ($request->filled('expected_checkin_end'))) {
