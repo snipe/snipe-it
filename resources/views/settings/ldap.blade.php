@@ -20,7 +20,7 @@
         }
     </style>
 
-    git checkout -b bug/sc-19126if ((!function_exists('ldap_connect')) || (!function_exists('ldap_set_option')) || (!function_exists('ldap_bind')))
+    @if ((!function_exists('ldap_connect')) || (!function_exists('ldap_set_option')) || (!function_exists('ldap_bind')))
         <div class="row">
             <div class="col-md-12">
                 <div class="col-md-12">
