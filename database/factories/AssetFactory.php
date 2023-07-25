@@ -8,6 +8,7 @@ use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AssetFactory extends Factory
@@ -48,6 +49,17 @@ class AssetFactory extends Factory
             'last_checkout' => null,
         ];
     }
+   
+    
+    public function configure()
+    {
+        return $this->afterMaking(function (Asset $asset) {
+            // $asset->asset_eol_date = Carbon::parse($asset->purchase_date)->addMonths($asset->model->eol)->format('Y-m-d'); 
+            $asset->asset_eol_date = $this->faker->boolean(5) 
+                ? Carbon::parse($asset->purchase_date)->addMonths(rand(0, 20))->format('Y-m-d')
+                : Carbon::parse($asset->purchase_date)->addMonths($asset->model->eol)->format('Y-m-d'); 
+        });
+    } 
 
     public function laptopMbp()
     {
@@ -338,4 +350,5 @@ class AssetFactory extends Factory
     {
         return $this->state(['requestable' => false]);
     }
+   
 }

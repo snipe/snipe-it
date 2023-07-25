@@ -108,7 +108,8 @@ class AssetObserver
         } 
 
        //determine if explicit and set eol_explit to true 
-       if(!is_null($asset->asset_eol_date) && !is_null($asset->purchase_date) || ($asset->isDirty($asset->asset_eol_date) || $asset->isDirty($asset->purchase_date))) { 
+      //conditions might need more work 
+       if(!is_null($asset->asset_eol_date) && !is_null($asset->purchase_date)) { 
             if($asset->model->eol) { 
                 $months = Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date); 
                 if($months != $asset->model->eol) {
