@@ -25,7 +25,7 @@ class LogInputRequests
                 ) {
                     $userId = $request->user() ? $request->user()->id : 'NA';
 
-                    Log::info(
+                    Log::debug(
                         "User: $userId, Path: $request->path(), 
                   Submission:" . json_encode($request->updates)
                     );
