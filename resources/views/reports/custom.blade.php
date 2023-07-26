@@ -304,12 +304,12 @@
             </div>
 
               <!-- EoL Date -->
-              <div class="form-group eol-range">
-                  <label for="eol" class="col-md-3 control-label">{{ trans('admin/hardware/form.eol_date') }}</label>
+              <div class="form-group asset_eol_date-range">
+                  <label for="asset_eol_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.eol_date') }}</label>
                   <div class="input-daterange input-group col-md-6" id="datepicker">
-                      <input type="text" class="form-control" name="eol_start" aria-label="eol_start">
+                      <input type="text" class="form-control" name="asset_eol_date_start" aria-label="asset_eol_date_start">
                       <span class="input-group-addon">to</span>
-                      <input type="text" class="form-control" name="eol_end" aria-label="eol_end">
+                      <input type="text" class="form-control" name="asset_eol_date_end" aria-label="asset_eol_date_end">
                   </div>
               </div>
 
@@ -401,7 +401,7 @@
           format: 'yyyy-mm-dd'
       });
 
-      $('.eol-range .input-daterange').datepicker({
+      $('.asset_eol_date-range .input-daterange').datepicker({
           clearBtn: true,
           todayHighlight: true,
           format: 'yyyy-mm-dd'
