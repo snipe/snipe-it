@@ -723,8 +723,8 @@ class ReportsController extends Controller
                         $row[] = ($asset->purchase_cost) ? Helper::formatCurrencyOutput($asset->purchase_cost) : '';
                     }
 
-                    if ($request->filled('eol')) {
-                        $row[] = ($asset->purchase_date != '') ? $asset->present()->eol_date() : '';
+                    if ($request->filled('asset_eol_date')) {
+                        $row[] = ($asset->purchase_date != '') ? $asset->asset_eol_date : '';
                     }
 
                     if ($request->filled('order')) {
