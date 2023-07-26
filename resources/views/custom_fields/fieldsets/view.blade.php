@@ -51,7 +51,7 @@
                 </span>
               </td>
               @endcan
-              <td class="index">{{$field->pivot->order}}</td>
+              <td class="index">{{$field->pivot->order + 1}}</td>
               <td>{{$field->name}}</td>
               <td>{{$field->format}}</td>
               <td>{{$field->element}}</td>
