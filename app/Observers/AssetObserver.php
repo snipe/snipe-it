@@ -43,7 +43,9 @@ class AssetObserver
                 if ($asset->getRawOriginal()[$key] != $asset->getAttributes()[$key]) {
                     $changed[$key]['old'] = $asset->getRawOriginal()[$key];
                     $changed[$key]['new'] = $asset->getAttributes()[$key];
+                    dd($this->changedInfo($changed,$asset));
                 }
+
 	    }
 
 	    if (empty($changed)){
@@ -59,6 +61,21 @@ class AssetObserver
             $logAction->logaction('update');
         }
     }
+    public function changedInfo($changed, $asset){
+        $relationships_to_check = ['company_id', 'rtd_location_id', 'model_id','supplier_id' ];
+        $list_of_change = [] ;
+
+                if(array_key_exists('rtd_location_id',$changed)) {
+                    $list_of_change[] = $asset->defaultloc->name;
+                }
+               if(array_key_exists('model_id', $changed)) {
+                   $list_of_change[] = $asset->model->name;
+               }
+
+            return $list_of_change;
+
+        }
+
 
     /**
      * Listen to the Asset created event, and increment
