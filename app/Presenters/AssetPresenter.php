@@ -283,7 +283,7 @@ class AssetPresenter extends Presenter
         // don't junk up the REST API with tons of custom fields that don't apply
 
         $fields = CustomField::whereHas('fieldset', function ($query) {
-            $query->whereHas('models');
+            $query->whereHas('models'); // BING - something here is bust. fieldset no longer has 'models'
         })->get();
 
         // Note: We do not need to e() escape the field names here, as they are already escaped when

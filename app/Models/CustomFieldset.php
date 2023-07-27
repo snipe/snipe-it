@@ -51,7 +51,7 @@ class CustomFieldset extends Model
      * @since [v3.0]
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function customizable()
+    public function customizable() // HATE this name. Should be something else.
     {
         /************************************
          * 

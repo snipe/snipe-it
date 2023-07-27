@@ -10,6 +10,7 @@ use App\Http\Traits\UniqueSerialTrait;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Acceptable;
 use App\Models\Traits\Customizable;
+use App\Models\Traits\HasCustomFields;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use AssetPresenter;
@@ -39,10 +40,11 @@ class Asset extends Depreciable
     public const ASSET = 'asset';
     public const USER = 'user';
 
-    use Acceptable, Customizable;
-    protected $custom_field_pivot_class = AssetModel::class; //wait, why is this a string?!
-    protected $custom_field_pivot_id = "model_id";
+    use Acceptable, HasCustomFields;
 
+    public function getFieldset(): ?CustomFieldset {
+        return $this->model->fieldset;
+    }
     /**
      * Run after the checkout acceptance was declined by the user
      * 
@@ -197,26 +199,6 @@ class Asset extends Depreciable
      */
     public function save(array $params = [])
     {
-        if ($this->model_id != '') {
-            $model = AssetModel::find($this->model_id);
-
-            if (($model) && ($model->fieldset)) {
-
-                foreach ($model->fieldset->fields as $field){
-                    if($field->format == 'BOOLEAN'){
-                        $this->{$field->db_column} = filter_var($this->{$field->db_column}, FILTER_VALIDATE_BOOLEAN);
-                    }
-                }
-
-                $this->rules += $model->fieldset->validation_rules();
-
-                foreach ($this->model->fieldset->fields as $field){
-                    if($field->format == 'BOOLEAN'){
-                        $this->{$field->db_column} = filter_var($this->{$field->db_column}, FILTER_VALIDATE_BOOLEAN);
-                    }
-                }
-            }
-        }
 
 
 

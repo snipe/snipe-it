@@ -148,7 +148,7 @@ class AssetModel extends SnipeModel
      */
     public function fieldset()
     {
-        return $this->belongsTo(\App\Models\CustomFieldset::class, 'fieldset_id');
+        return $this->belongsTo(CustomFieldset::class, 'fieldset_id');
     }
 
     /**
