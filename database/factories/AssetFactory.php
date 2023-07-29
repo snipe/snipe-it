@@ -54,7 +54,8 @@ class AssetFactory extends Factory
     public function configure()
     {
         return $this->afterMaking(function (Asset $asset) {
-            // $asset->asset_eol_date = Carbon::parse($asset->purchase_date)->addMonths($asset->model->eol)->format('Y-m-d'); 
+            // calculates the EOL date most of the time, but sometimes sets a random date so we have some explicits
+            // the explicit boolean gets set in the saving() method on the observer 
             $asset->asset_eol_date = $this->faker->boolean(5) 
                 ? Carbon::parse($asset->purchase_date)->addMonths(rand(0, 20))->format('Y-m-d')
                 : Carbon::parse($asset->purchase_date)->addMonths($asset->model->eol)->format('Y-m-d'); 

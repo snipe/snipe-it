@@ -122,21 +122,25 @@ class AssetImporter extends ItemImporter
        
         $item['asset_eol_date'] = null;
         if (isset($this->item['asset_eol_date'])) {
-            if(!is_null($this->item['model_id'])) {
-               $model = AssetModel::find($this->createOrFetchAssetModel($row, $this->item['model_id']));
+                $model = AssetModel::find($this->createOrFetchAssetModel($row, $this->item['model_id']));
+                ray(['model!' => $model]); 
                 if(is_null($model->eol)) {
-                     $item['asset_eol_date'] = $this->item['asset_eol_date'];
-                     $item['eol_explicit'] = true;
-                } else {
-                    $item['asset_eol_date'] = Carbon::parse($this->item['asset_eol_date'])->addMonths($model->eol)->format('Y-m-d');
+                    $item['asset_eol_date'] = Carbon::parse($this->item['asset_eol_date'])->format('Y-m-d');
+                    $item['eol_explicit'] = true; 
+                } elseif (!is_null($model->eol) && !is_null($this->item['purchase_date'])) { 
+                    ray('EOL is not null'); 
+                    $item['asset_eol_date'] = Carbon::parse($this->item['purchase_date'])->addMonths($model->eol)->format('Y-m-d'); 
                 }
-            } 
         }
 
-        $item['eol_explicit'] = null;
-        if(($item['asset_eol_date'] == null) && ($asset->model->eol != null) && ($asset->asset_purchase_date != null)){
-            $asset->asset_eol_date = Carbon::parse($asset->asset_purchase_date)->addMonths($asset->model->eol)->format('Y-m-d');
-        }
+        // if(($item['asset_eol_date'] == null) && ($asset->model?->eol != null) && ($asset->asset_purchase_date != null)){
+        //     $asset->eol_explicit = false; 
+        //     $asset->asset_eol_date = Carbon::parse($asset->asset_purchase_date)->addMonths($asset->model->eol)->format('Y-m-d');
+        // } else {
+        //     $asset->eol_explicit = true; 
+        //     $parsedDate = Carbon::parse($this->item['asset_eol_date']); 
+        //     $asset->asset_eol_date = $parsedDate->format('Y-m-d'); 
+        // }
 
         if ($editingAsset) {
             $asset->update($item);
