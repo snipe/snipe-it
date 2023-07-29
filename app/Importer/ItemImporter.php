@@ -10,6 +10,7 @@ use App\Models\Manufacturer;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
+use Carbon\Carbon;
 
 class ItemImporter extends Importer
 {
@@ -87,10 +88,13 @@ class ItemImporter extends Importer
             $this->item['next_audit_date'] = date('Y-m-d', strtotime($this->findCsvMatch($row, 'next_audit_date')));
         }
 
-        $this->item['asset_eol_date'] = null;
-        if ($this->findCsvMatch($row, 'asset_eol_date') != '') {
-            $this->item['asset_eol_date'] = date('Y-m-d', strtotime($this->findCsvMatch($row, 'asset_eol_date')));
-        }
+        // $this->item['asset_eol_date'] = null;
+        // if ($this->findCsvMatch($row, 'asset_eol_date') != '') { 
+        //    ray()->clearAll(); 
+        //     ray('item importer line 93'); 
+        //    return; 
+        //     $this->item['asset_eol_date'] = Carbon::parse($this->findCsvMatch($row, 'asset_eol_date'))->format('Y-m-d');
+        // }
 
         $this->item['qty'] = $this->findCsvMatch($row, 'quantity');
         $this->item['requestable'] = $this->findCsvMatch($row, 'requestable');
