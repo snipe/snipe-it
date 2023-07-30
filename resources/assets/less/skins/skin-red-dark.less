@@ -58,8 +58,6 @@
   }
 }
 
-
-
 .btn, .btn:hover {
   color: #fff;
 
@@ -135,6 +133,32 @@ a {
   color: var(--back-main);
 }
 
+//pagination
+.pagination > li >a{
+  color: var(--light-link);
+  background-color: var(--back-main);
+}
+.pagination > .active > a {
+  background-color: var(--visited-link);
+  border-color: var(--light-link);
+}
+.pagination > .active > a:hover{
+  background-color: var(--hover-link);
+}
+.tasks-menu > .dropdown-menu > li .menu{
+  background-color: var(--back-main);
+}
+
+.tasks-menu > .dropdown-menu > li .menu > li > a:hover .progress{
+  background-color: var(--background);
+}
+h2.task_menu{
+  color:var(--link);
+}
+.navbar-custom-menu > .navbar-nav > li > .dropdown-menu{
+  background-color:var(--back-main);
+  color:var(--link);
+}
 .main-header .navbar, .main-header .logo {
   background-color: var(--header);
   background: -webkit-linear-gradient(top,  var(--header) 0%,var(--header) 100%);
@@ -161,13 +185,11 @@ a {
 a:link {
   color: var(--link);
 }
-
-a:visited {
-  color: var(--nav-link);
-}
-
 a:hover {
   color: var(--hover-link);
+}
+a:visited {
+  color: var(--nav-link);
 }
 .far fa-life-ring{
   color:var(--link);
@@ -209,7 +231,6 @@ body {
 }
 .btn-default{
   background-color: var(--back-sub);
-  color: var(--link);
 }
 
 .btn-default dropdown-toggle {
@@ -356,7 +377,6 @@ input[type=text], input[type=search] {
 }
 .table-striped>tbody>tr:nth-of-type(even){
   background-color: var(--back-sub-alt);
-  color: var(--text-alt);
 }
 #webui>div>div>div>div>div>table>tbody>tr>td>a>i.fa, .box-body, .box-footer, .box-header {
   color: var(--text-main);
@@ -365,21 +385,31 @@ input[type=text], input[type=search] {
 .box-header.with-border {
   border-bottom: #000;
 }
+#upload-table tbody > tr.warning > td,#upload-table h3,#upload-table p{
+  background-color:#fcf8e3;
+  color:#000;
+}
 
 a {
   color: var(--link);
 
   &:link {
-    color: var(--link)  }
+    color: var(--nav-link);
+  }
   &:hover {
-    color: var(--hover-link);
+    color: var(--nav-link);
     text-decoration: underline;
   }
   &:visited {
-    color: var(--visited-link)
+    color: var(--nav-link);
   }
 }
-
+#customFieldsTable a[href*='/models'] {
+  color: var(--back-sub);
+}
+#customFieldsTable a[href*='/fieldsets']{
+  background-color: transparent;
+}
 .row-striped {
   vertical-align: top;
   line-height: 2.6;

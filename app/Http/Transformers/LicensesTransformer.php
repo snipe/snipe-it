@@ -4,7 +4,7 @@ namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
 use App\Models\License;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 
 class LicensesTransformer
@@ -34,7 +34,7 @@ class LicensesTransformer
             'depreciation' => ($license->depreciation) ? ['id' => (int) $license->depreciation->id,'name'=> e($license->depreciation->name)] : null,
             'purchase_cost' => Helper::formatCurrencyOutput($license->purchase_cost),
             'purchase_cost_numeric' => $license->purchase_cost,
-            'notes' => e($license->notes),
+            'notes' => Helper::parseEscapedMarkedownInline($license->notes),
             'expiration_date' => Helper::getFormattedDateObject($license->expiration_date, 'date'),
             'seats' => (int) $license->seats,
             'free_seats_count' => (int) $license->free_seats_count,
@@ -56,7 +56,7 @@ class LicensesTransformer
             'checkin' => Gate::allows('checkin', License::class),
             'clone' => Gate::allows('create', License::class),
             'update' => Gate::allows('update', License::class),
-            'delete' => Gate::allows('delete', License::class),
+            'delete' => (Gate::allows('delete', License::class) && ($license->seats == $license->availCount()->count())) ? true : false,
         ];
 
         $array += $permissions_array;

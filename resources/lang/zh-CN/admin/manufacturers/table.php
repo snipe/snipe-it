@@ -10,6 +10,7 @@ return array(
     'support_email'   		=> '邮件客服支持',
     'support_phone'   		=> '电话客服支持',
     'support_url'   		=> '网站客服支持',
+    'warranty_lookup_url'   => '保修查询URL',
     'update'				=> '更新制造商',
     'url'   				=> 'URL',
 

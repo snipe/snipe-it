@@ -2,11 +2,14 @@
 
 return [
     'bulk_delete'		=> 'Potvrzení hromadného odstranění majetku',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> 'Zkontrolujte seznam odstraňovaného majetku níže. Jakmile jej potvrdíte, nebude možné tento majetek obnovit a budou zrušeny i vazby na uživatele, kteří jej měli v držení.',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'Chystáte se odstranit :asset_count položek majetku.',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'Hromadná aktualizace majetku',
     'bulk_update_help'	=> 'Tento formulář umožňuje hromadnou editaci majetku. Vyplňte pouze položky, které chcete změnit. Jakékoliv prázné položky zůstanou nezměněny. ',
-    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
+    'bulk_update_warn'	=> 'Chystáte se upravit vlastnosti 1 položky.|Chystáte se upravit vlastnosti :asset_count položek.',
     'checkedout_to'		=> 'Vydané komu',
     'checkout_date'		=> 'Datum vydání',
     'checkin_date'		=> 'Datum převzetí',
@@ -40,12 +43,12 @@ return [
     'warranty'			=> 'Záruka',
         'warranty_expires'		=> 'Záruka končí',
     'years'				=> 'roky',
-    'asset_location' => 'Update Asset Location',
-    'asset_location_update_default_current' => 'Update default location AND actual location',
-    'asset_location_update_default' => 'Update only default location',
-    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
-    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
-    'processing_spinner' => 'Zpracovává se...',
-    'optional_infos'  => 'Optional Information',
-    'order_details'   => 'Order Related Information'
+    'asset_location' => 'Upravit umístění',
+    'asset_location_update_default_current' => 'Aktualizovat výchozí umístění A aktuální umístění',
+    'asset_location_update_default' => 'Aktualizovat pouze výchozí umístění',
+    'asset_not_deployable' => 'Tento majetek nelze vyskladnit.',
+    'asset_deployable' => 'Tento majetek lze vyskladnit.',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'optional_infos'  => 'Volitelné informace',
+    'order_details'   => 'Informace související s objednávkou'
 ];

@@ -27,6 +27,9 @@ return [
     'used_by_models'   		    => 'Used By Models',
     'order'   		            => 'Order',
     'create_fieldset'         => 'New Fieldset',
+    'update_fieldset'         => 'Update Fieldset',
+    'fieldset_does_not_exist'   => 'Fieldset :id does not exist',
+    'fieldset_updated'         => 'Fieldset updated',
     'create_fieldset_title' => 'Create a new fieldset',
     'create_field'            => 'New Custom Field',
     'create_field_title' => 'Create a new custom field',
@@ -46,4 +49,6 @@ return [
     'unique' => 'Unique',
     'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
     'display_in_user_view_table' => 'Visible to User',
+    'auto_add_to_fieldsets' => 'Automatically add this to every new fieldset',
+    'add_to_preexisting_fieldsets' => 'Add to any existing fieldsets',
 ];

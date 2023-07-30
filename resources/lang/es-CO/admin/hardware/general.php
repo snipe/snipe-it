@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Este activo ha sido borrado.',
     'edit'  					=> 'Editar Equipo',
     'model_deleted'  			=> 'El modelo de este activo ha sido borrado. Debe restaurar el modelo antes de restaurar o crear el activo.',
+    'model_invalid'             => 'El modelo de este activo no es válido.',
+    'model_invalid_fix'         => 'El Activo debe ser editado para corregir esto antes de intentar retirarlo o asignarlo.',
     'requestable'               => 'Puede Solicitarse',
     'requested'				    => 'Solicitado',
     'not_requestable'           => 'No solicitable',
@@ -21,6 +23,7 @@ return [
     'restore'  					=> 'Restaurar equipo',
     'pending'  					=> 'Equipos Pendiente',
     'undeployable'  			=> 'No desplegable',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Ver Equipo',
     'csv_error' => 'Tiene un error en su archivo CSV:',
     'import_text' => '
@@ -40,5 +43,6 @@ return [
     'error_messages' => 'Mensajes de error:',
     'success_messages' => 'Mensajes de éxito:',
     'alert_details' => 'Por favor vea abajo para más detalles.',
-    'custom_export' => 'Exportación personalizada'
+    'custom_export' => 'Exportación personalizada',
+    'mfg_warranty_lookup' => 'Búsqueda del estado de Garantía para :manufacturer',
 ];

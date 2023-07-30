@@ -30,7 +30,7 @@ return [
     'asset_model'               => 'Model',
     'asset_serial'              => 'Nr seryjny',
     'asset_location'            => 'Lokalizacja',
-    'asset_checked_out'         => 'Checked Out',
+    'asset_checked_out'         => 'Wydane',
     'asset_expected_checkin'    => 'Przewidywana data zwrotu',
     'date'                      => 'Data:',
     'signed_by_asset_auditor'   => 'Podpisane przez (Audytor aktywów):',

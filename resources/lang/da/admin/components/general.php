@@ -12,4 +12,5 @@ return array(
     'remaining' 			             => 'Resterende',
     'total' 			                 => 'Total',
     'update'                            => 'Opdater Komponent',
+    'checkin_limit'            => 'Antal tjekket ind skal være lig med eller mindre end :assigned_qty'
 );

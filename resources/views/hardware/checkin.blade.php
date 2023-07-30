@@ -46,13 +46,13 @@
 
                           @else
                             <span class="text-danger text-bold">
-                      <i class="fas fa-exclamation-triangle"></i>This asset's model is invalid!
-                      The asset <a href="{{ route('hardware.edit', $asset->id) }}">should be edited</a> to correct this before attempting to check it in or out.</span>
+                      <i class="fas fa-exclamation-triangle"></i>{{ trans('admin/hardware/general.model_invalid')}}
+                      <a href="{{ route('hardware.edit', $asset->id) }}"></a> {{ trans('admin/hardware/general.model_invalid_fix')}}</span>
                           @endif
                         </p>
                       </div>
                     </div>
-
+ 
 
                     <!-- Asset Name -->
                     <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
@@ -73,7 +73,7 @@
                       </div>
                     </div>
 
-                  @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id', 'help_text' => ($asset->defaultLoc) ? 'You can choose to check this asset in to a location other than the default location of '.$asset->defaultLoc->name.' if one is set.' : null])
+                  @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id', 'help_text' => ($asset->defaultLoc) ? 'You can choose to check this asset in to a location other than the default location of '.$asset->defaultLoc->name.' if one is set.' : null, 'hide_location_radio' => true])
 
                   <!-- Checkout/Checkin Date -->
                     <div class="form-group{{ $errors->has('checkin_at') ? ' has-error' : '' }}">

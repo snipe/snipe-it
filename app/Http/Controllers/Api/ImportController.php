@@ -10,6 +10,7 @@ use App\Models\Asset;
 use App\Models\Company;
 use App\Models\Import;
 use Artisan;
+use Illuminate\Database\Eloquent\JsonEncodingException;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -35,7 +36,7 @@ class ImportController extends Controller
      * Process and store a CSV upload file.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store()
     {
@@ -56,7 +57,7 @@ class ImportController extends Controller
                     'text/tsv', ])) {
                     $results['error'] = 'File type must be CSV. Uploaded file is '.$file->getMimeType();
 
-                    return response()->json(Helper::formatStandardApiResponse('error', null, $results['error']), 500);
+                    return response()->json(Helper::formatStandardApiResponse('error', null, $results['error']), 422);
                 }
 
                 //TODO: is there a lighter way to do this?
@@ -64,7 +65,19 @@ class ImportController extends Controller
                     ini_set('auto_detect_line_endings', '1');
                 }
                 $reader = Reader::createFromFileObject($file->openFile('r')); //file pointer leak?
-                $import->header_row = $reader->fetchOne(0);
+
+                try {
+                    $import->header_row = $reader->fetchOne(0);
+                } catch (JsonEncodingException $e) {
+                    return response()->json(
+                        Helper::formatStandardApiResponse(
+                            'error',
+                            null,
+                            trans('admin/hardware/message.import.header_row_has_malformed_characters')
+                        ),
+                        422
+                    );
+                }
 
                 //duplicate headers check
                 $duplicate_headers = [];
@@ -82,11 +95,22 @@ class ImportController extends Controller
                     }
                 }
                 if (count($duplicate_headers) > 0) {
-                    return response()->json(Helper::formatStandardApiResponse('error', null, implode('; ', $duplicate_headers)), 500); //should this be '4xx'?
+                    return response()->json(Helper::formatStandardApiResponse('error', null, implode('; ', $duplicate_headers)),422);
                 }
 
-                // Grab the first row to display via ajax as the user picks fields
-                $import->first_row = $reader->fetchOne(1);
+                try {
+                    // Grab the first row to display via ajax as the user picks fields
+                    $import->first_row = $reader->fetchOne(1);
+                } catch (JsonEncodingException $e) {
+                    return response()->json(
+                        Helper::formatStandardApiResponse(
+                            'error',
+                            null,
+                            trans('admin/hardware/message.import.content_row_has_malformed_characters')
+                        ),
+                        422
+                    );
+                }
 
                 $date = date('Y-m-d-his');
                 $fixed_filename = str_slug($file->getClientOriginalName());
@@ -102,18 +126,25 @@ class ImportController extends Controller
                 }
                 $file_name = date('Y-m-d-his').'-'.$fixed_filename;
                 $import->file_path = $file_name;
+                $import->filesize = null;
+
+                if (!file_exists($path.'/'.$file_name)) {
+                    return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.file_not_found')), 500);
+                }
+
                 $import->filesize = filesize($path.'/'.$file_name);
+                
                 $import->save();
                 $results[] = $import;
             }
             $results = (new ImportsTransformer)->transformImports($results);
 
-            return [
+            return response()->json([
                 'files' => $results,
-            ];
+            ]);
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.feature_disabled')), 500);
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.feature_disabled')), 422);
     }
 
     /**
@@ -129,7 +160,7 @@ class ImportController extends Controller
         // Run a backup immediately before processing
         if ($request->get('run-backup')) {
             \Log::debug('Backup manually requested via importer');
-            Artisan::call('backup:run');
+            Artisan::call('snipeit:backup', ['--filename' => 'pre-import-backup-'.date('Y-m-d-H:i:s')]);
         } else {
             \Log::debug('NO BACKUP requested via importer');
         }
@@ -161,6 +192,9 @@ class ImportController extends Controller
                 break;
             case 'user':
                 $redirectTo = 'users.index';
+                break;
+            case 'location':
+                $redirectTo = 'locations.index';
                 break;
         }
 

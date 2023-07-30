@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'وسیله چک نشده بود. لطفا دوباره امتحان کنید',
         'success' 		=> 'وسیله با موفقیت چک شد.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'کاربر نامعتبر است. لطفا دوباره امتحان کنید.'
     ),
 

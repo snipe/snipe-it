@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => 'Загвар байхгүй байна.',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Энэ загвар одоогоор нэг буюу хэд хэдэн хөрөнгөтэй холбоотой бөгөөд устгаж болохгүй. Хөрөнгө устгаж, дараа нь устгахыг оролдоно уу.',
 
 
@@ -14,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Загвар шинэчлэгдсэнгүй, дахин оролдоно уу',
-        'success' => 'Загвар амжилттай болсон.'
+        'success' => 'Загвар амжилттай болсон.',
     ),
 
     'delete' => array(
@@ -30,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Ямар ч талбар өөрчлөгдсөнгүй тул шинэчлэгдээгүй байна.',
-        'success' 		=> 'Загвар шинэчилсэн.'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Ямар ч загвар сонгогдоогүй тул юу ч устаагүй.',
-        'success' 		    => ':success_count ширхэг загвар устсан!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ':success_count ширхэг загвар устсан ба :fail_count ширхэг загвар одоо хүртэл хөрөнгөтэй холбоотой байгаа тул устаагүй.'
     ),
 

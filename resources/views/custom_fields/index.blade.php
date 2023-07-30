@@ -21,7 +21,7 @@
         <h2 class="box-title">{{ trans('admin/custom_fields/general.fieldsets') }}</h2>
         <div class="box-tools pull-right">
           @can('create', \App\Models\CustomFieldset::class)
-          <a href="{{ route('fieldsets.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="{{ trans('admin/custom_fields/general.create_fieldset_title') }}">{{ trans('admin/custom_fields/general.create_fieldset') }}</a>
+          <a href="{{ route('fieldsets.create') }}" class="btn btn-sm btn-primary" data-tooltip="true" title="{{ trans('admin/custom_fields/general.create_fieldset_title') }}">{{ trans('admin/custom_fields/general.create_fieldset') }}</a>
           @endcan
         </div>
       </div><!-- /.box-header -->
@@ -69,8 +69,18 @@
                 @endforeach
               </td>
               <td>
+
+                <nobr>
+
+                @can('update', $fieldset)
+                  <a href="{{ route('fieldsets.edit', $fieldset->id) }}" class="btn btn-warning btn-sm">
+                    <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                    <span class="sr-only">{{ trans('button.edit') }}</span>
+                  </a>
+                @endcan
+
                 @can('delete', $fieldset)
-                {{ Form::open(['route' => array('fieldsets.destroy', $fieldset->id), 'method' => 'delete']) }}
+                {{ Form::open(['route' => array('fieldsets.destroy', $fieldset->id), 'method' => 'delete','style' => 'display:inline-block']) }}
                   @if($fieldset->models->count() > 0)
                   <button type="submit" class="btn btn-danger btn-sm disabled" disabled><i class="fas fa-trash"></i></button>
                   @else
@@ -78,6 +88,7 @@
                   @endif
                 {{ Form::close() }}
                 @endcan
+                  </nobr>
               </td>
             </tr>
             @endforeach
@@ -100,7 +111,7 @@
         <h2 class="box-title">{{ trans('admin/custom_fields/general.custom_fields') }}</h2>
         <div class="box-tools pull-right">
           @can('create', \App\Models\CustomField::class)
-          <a href="{{ route('fields.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="{{ trans('admin/custom_fields/general.create_field_title') }}">{{ trans('admin/custom_fields/general.create_field') }}</a>
+          <a href="{{ route('fields.create') }}" class="btn btn-sm btn-primary" data-tooltip="true" title="{{ trans('admin/custom_fields/general.create_field_title') }}">{{ trans('admin/custom_fields/general.create_field') }}</a>
           @endcan
         </div>
 
@@ -134,6 +145,9 @@
               <th data-sortable="true"><i class="fa fa-lock" aria-hidden="true"></i>
                 <span class="hidden-xs hidden-sm hidden-md hidden-lg">{{ trans('admin/custom_fields/general.encrypted') }}</span>
               </th>
+              <th data-sortable="true"><i class="fa fa-list" aria-hidden="true"></i>
+                <span class="hidden-xs hidden-sm hidden-md hidden-lg">{{ trans('admin/custom_fields/general.show_in_listview_short') }}</span>
+              </th>
               <th data-visible="false" data-sortable="true"><i class="fa fa-eye" aria-hidden="true"><span class="sr-only">Visible to User</span></i></th>
               <th data-sortable="true" data-searchable="true"><i class="fa fa-envelope" aria-hidden="true"><span class="sr-only">Show in Email</span></i></th>
               <th data-sortable="true" data-searchable="true">{{ trans('admin/custom_fields/general.field_element_short') }}</th>
@@ -157,6 +171,7 @@
               </td>
               <td>{{ $field->format }}</td>
               <td>{!!  ($field->field_encrypted=='1' ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times text-danger"></i>') !!}</td>
+              <td>{!!  ($field->show_in_listview=='1' ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times text-danger"></i>') !!}</td>
               <td>{!!  ($field->display_in_user_view=='1' ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times text-danger"></i>') !!}</td>
               <td class='text-center'>{!! ($field->show_in_email=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fas fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
               <td>{{ $field->element }}</td>
@@ -167,26 +182,29 @@
               </td>
               <td>
                 <nobr>
+                  {{ Form::open(array('route' => array('fields.destroy', $field->id), 'method' => 'delete', 'style' => 'display:inline-block')) }}
                   @can('update', $field)
-                <a href="{{ route('fields.edit', $field->id) }}" class="btn btn-warning btn-sm">
-                  <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                  <span class="sr-only">{{ trans('button.edit') }}</span>
-                </a>
+                    <a href="{{ route('fields.edit', $field->id) }}" class="btn btn-warning btn-sm">
+                      <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                      <span class="sr-only">{{ trans('button.edit') }}</span>
+                    </a>
                 @endcan
+
                 @can('delete', $field)
-                {{ Form::open(array('route' => array('fields.destroy', $field->id), 'method' => 'delete', 'style' => 'display:inline-block')) }}
-                @if($field->fieldset->count()>0)
-                <button type="submit" class="btn btn-danger btn-sm disabled" disabled>
-                  <i class="fas fa-trash" aria-hidden="true"></i>
-                  <span class="sr-only">{{ trans('button.delete') }}</span></button>
-                @else
-                <button type="submit" class="btn btn-danger btn-sm">
-                  <i class="fas fa-trash" aria-hidden="true"></i>
-                  <span class="sr-only">{{ trans('button.delete') }}</span>
-                </button>
-                @endif
-                {{ Form::close() }}
+
+                  @if($field->fieldset->count()>0)
+                    <button type="submit" class="btn btn-danger btn-sm disabled" disabled>
+                      <i class="fas fa-trash" aria-hidden="true"></i>
+                      <span class="sr-only">{{ trans('button.delete') }}</span></button>
+                  @else
+                    <button type="submit" class="btn btn-danger btn-sm">
+                      <i class="fas fa-trash" aria-hidden="true"></i>
+                      <span class="sr-only">{{ trans('button.delete') }}</span>
+                    </button>
+                  @endif
+
                 @endcan
+                  {{ Form::close() }}
                 </nobr>
               </td>
             </tr>

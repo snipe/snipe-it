@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Đọc thêm',
 
-    'audit_help' => 'Chọn hộp này sẽ chỉnh sửa bản ghi nội dung để phản ánh vị trí mới này. Bỏ chọn nó sẽ chỉ ghi lại vị trí trong nhật ký kiểm tra. <br> <br> Lưu ý rằng nội dung này đã được kiểm tra, nó sẽ không thay đổi vị trí của người, tài sản hoặc vị trí mà nó được kiểm tra.',
+    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
     'assets' => 'Nội dung là các mục được theo dõi bằng số sê-ri hoặc thẻ nội dung. Chúng có xu hướng trở thành những mặt hàng có giá trị cao hơn khi việc xác định một mặt hàng cụ thể rất quan trọng.',
 

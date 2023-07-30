@@ -12,4 +12,5 @@ return array(
     'remaining' 			             => 'Restant',
     'total' 			                 => 'Total',
     'update'                            => 'Mettre à jour un composant',
+    'checkin_limit'            => 'Le montant enregistré doit être égal ou inférieur à :assigned_qty'
 );

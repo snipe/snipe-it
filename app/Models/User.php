@@ -61,7 +61,11 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'remote',
         'start_date',
         'end_date',
-        'scim_externalid'
+        'scim_externalid',
+        'avatar',
+        'gravatar',
+        'vip',
+        'autoassign_licenses',
     ];
 
     protected $casts = [
@@ -69,17 +73,12 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'manager_id'   => 'integer',
         'location_id'  => 'integer',
         'company_id'   => 'integer',
+        'vip'      => 'boolean',
+        'created_at'   => 'datetime',
+        'updated_at'   => 'datetime',
+        'deleted_at'   => 'datetime',
+        'autoassign_licenses'    => 'boolean',
     ];
-
-
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
-        'start_date',
-        'end_date',
-    ];
-
 
     /**
      * Model validation rules
@@ -96,8 +95,14 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'website'                 => 'url|nullable|max:191',
         'manager_id'              => 'nullable|exists:users,id|cant_manage_self',
         'location_id'             => 'exists:locations,id|nullable',
-        'start_date'              => 'nullable|date',
-        'end_date'                => 'nullable|date|after_or_equal:start_date',
+        'start_date'              => 'nullable|date_format:Y-m-d',
+        'end_date'                => 'nullable|date_format:Y-m-d|after_or_equal:start_date',
+        'autoassign_licenses'     => 'boolean',
+        'address'                 => 'max:191|nullable',
+        'city'                    => 'max:191|nullable',
+        'state'                   => 'min:2|max:191|nullable',
+        'country'                 => 'min:2|max:191|nullable',
+        'zip'                     => 'max:10|nullable',
     ];
 
     /**
@@ -259,20 +264,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         return $this->last_name.', '.$this->first_name.' ('.$this->username.')';
     }
 
-    /**
-     * The url for slack notifications.
-     * Used by Notifiable trait.
-     * @return mixed
-     */
-    public function routeNotificationForSlack()
-    {
-        // At this point the endpoint is the same for everything.
-        //  In the future this may want to be adapted for individual notifications.
-        $this->endpoint = \App\Models\Setting::getSettings()->slack_endpoint;
-
-        return $this->endpoint;
-    }
-
 
     /**
      * Establishes the user -> assets relationship
@@ -283,7 +274,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function assets()
     {
-        return $this->morphMany(\App\Models\Asset::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
+        return $this->morphMany(\App\Models\Asset::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed()->orderBy('id');
     }
 
     /**
@@ -311,7 +302,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     public function accessories()
     {
         return $this->belongsToMany(\App\Models\Accessory::class, 'accessories_users', 'assigned_to', 'accessory_id')
-            ->withPivot('id', 'created_at', 'note')->withTrashed();
+            ->withPivot('id', 'created_at', 'note')->withTrashed()->orderBy('accessory_id');
     }
 
     /**
@@ -653,13 +644,13 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function scopeSimpleNameSearch($query, $search)
     {
-           $query = $query->where('first_name', 'LIKE', '%'.$search.'%')
-               ->orWhere('last_name', 'LIKE', '%'.$search.'%')
-               ->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%$search%"]);
-
-        return $query;
+        return $query->where('first_name', 'LIKE', '%' . $search . '%')
+            ->orWhere('last_name', 'LIKE', '%' . $search . '%')
+            ->orWhereMultipleColumns([
+                'users.first_name',
+                'users.last_name',
+            ], $search);
     }
-
 
     /**
      * Run additional, advanced searches.
@@ -669,9 +660,11 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function advancedTextSearch(Builder $query, array $terms) {
-
         foreach($terms as $term) {
-            $query = $query->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%$term%"]);
+            $query->orWhereMultipleColumns([
+                'users.first_name',
+                'users.last_name',
+            ], $term);
         }
 
         return $query;

@@ -12,4 +12,5 @@ return array(
     'remaining' 			             => 'Verbleibend',
     'total' 			                 => 'Gesamt',
     'update'                            => 'Komponente aktualisieren',
+    'checkin_limit'            => 'Die angegebene Menge muss gleich oder kleiner sein als :assigned_qty'
 );

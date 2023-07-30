@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Ukufinyelela akuzange kuhlolwe, sicela uzame futhi',
         'success' 		=> 'Ukufinyelela kufakwe ngempumelelo.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Lo msebenzisi awuvumelekile. Ngicela uzame futhi.'
     ),
 

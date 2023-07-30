@@ -18,8 +18,6 @@ mix
       "./node_modules/@fortawesome/fontawesome-free/css/all.css",
       "./public/css/build/AdminLTE.css",
       "./node_modules/jquery-ui-bundle/jquery-ui.css",
-      "./node_modules/admin-lte/plugins/iCheck/minimal/blue.css",
-      "./node_modules/icheck/skins/minimal/minimal.css",
       "./node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.css",
       "./node_modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css",
       "./node_modules/blueimp-file-upload/css/jquery.fileupload.css",
@@ -34,13 +32,6 @@ mix
   )
   .version();
 
-mix.copy(
-  [
-    "./node_modules/icheck/skins/minimal/blue.png",
-    "./node_modules/icheck/skins/minimal/blue@2x.png",
-  ],
-  "./public/css"
-);
 
 /**
  * Copy, minify and version signature-pad.css
@@ -174,7 +165,6 @@ mix.combine(
     "./node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js",
     "./node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js",
     "./node_modules/ekko-lightbox/dist/ekko-lightbox.js",
-    "./node_modules/icheck/icheck.js", //definite problem here :(
     "./resources/assets/js/extensions/pGenerator.jquery.js",
     "./node_modules/chart.js/dist/Chart.js",
     "./resources/assets/js/signature_pad.js",

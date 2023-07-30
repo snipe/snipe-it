@@ -22,6 +22,8 @@ return [
     'restore' => [
         'error'   		=> 'Ifa alizange libuyiselwe, sicela uzame futhi',
         'success' 		=> 'Ifa libuyiselwe ngempumelelo.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
@@ -48,6 +50,8 @@ return [
         'success'               => 'Ifayela lakho lifakiwe',
         'file_delete_success'   => 'Ifayela lakho lisusiwe ngempumelelo',
         'file_delete_error'      => 'Ifayela alikwazanga ukususwa',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
 
 

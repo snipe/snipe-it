@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => 'மாதிரி இல்லை.',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'தற்போது இந்த மாதிரி ஒன்று ஒன்று அல்லது அதற்கு மேற்பட்ட சொத்துக்களுடன் தொடர்புடையது மற்றும் நீக்கப்பட முடியாது. சொத்துக்களை நீக்கிவிட்டு மீண்டும் நீக்குவதற்கு முயற்சிக்கவும்.',
 
 
@@ -14,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'மாதிரி புதுப்பிக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்',
-        'success' => 'மாடல் வெற்றிகரமாக புதுப்பிக்கப்பட்டது.'
+        'success' => 'மாடல் வெற்றிகரமாக புதுப்பிக்கப்பட்டது.',
     ),
 
     'delete' => array(
@@ -30,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'எந்த துறைகளும் மாற்றப்படவில்லை, அதனால் எதுவும் புதுப்பிக்கப்படவில்லை.',
-        'success' 		=> 'மாதிரிகள் புதுப்பிக்கப்பட்டன.'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'No models were selected, so nothing was deleted.',
-        'success' 		    => ':success_count model(s) deleted!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ':success_count model(s) were deleted, however :fail_count were unable to be deleted because they still have assets associated with them.'
     ),
 

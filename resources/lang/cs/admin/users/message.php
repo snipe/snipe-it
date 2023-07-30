@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Úspěšně jste odmítli tento majetek.',
     'bulk_manager_warn'	        => 'Uživatelé byli úspěšně aktualizováni, položka správce však nebyla uložena, protože správce, který jste si vybrali, byl také v seznamu uživatelů, který má být upraven, a uživatelé nemusí být jejich vlastní správce. Zvolte své uživatele znovu, kromě správce.',
     'user_exists'               => 'Uživatel již existuje!',
-    'user_not_found'            => 'Uživatel [:id] neexistuje.',
+    'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Přihlašovací pole je povinné',
     'user_password_required'    => 'Je vyžadováno heslo.',
     'insufficient_permissions'  => 'Nedostatečná oprávnění.',
@@ -14,8 +14,8 @@ return array(
     'ldap_not_configured'        => 'Integrace LDAP nebyla pro tuto instalaci nakonfigurována.',
     'password_resets_sent'      => 'Vybraným uživatelům, kteří jsou aktivováni a mají platné e-mailové adresy, byl zaslán odkaz pro obnovení hesla.',
     'password_reset_sent'       => 'Odkaz pro obnovení hesla byl odeslán na :email!',
-    'user_has_no_email'         => 'This user does not have an email address in their profile.',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'user_has_no_email'         => 'Tento uživatel nemá e-mailovou adresu ve svém profilu.',
+    'user_has_no_assets_assigned'   => 'Tento uživatel nemá přiřazené žádné položky',
 
 
     'success' => array(
@@ -61,7 +61,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => 'Tento uživatel nemá nastaven žádný e-mail.',
+        'success' => 'Uživatel byl informován o svém aktuálním majetku.'
     )
 );

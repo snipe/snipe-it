@@ -6,8 +6,8 @@ return array(
     'assoc_users'	 => 'Platsen är associerad med minst en användare och kan inte tas bort. Vänligen uppdatera dina användare så dom inte refererar till denna plats och försök igen.',
     'assoc_assets'	 => 'Platsen är associerad med minst en tillgång och kan inte tas bort. Vänligen uppdatera dina tillgångar så dom inte refererar till denna plats och försök igen. ',
     'assoc_child_loc'	 => 'Denna plats är för närvarande överliggande för minst en annan plats och kan inte tas bort. Vänligen uppdatera dina platser så dom inte längre refererar till denna och försök igen.',
-    'assigned_assets' => 'Assigned Assets',
-    'current_location' => 'Current Location',
+    'assigned_assets' => 'Tilldelade tillgångar',
+    'current_location' => 'Nuvarande plats',
 
 
     'create' => array(

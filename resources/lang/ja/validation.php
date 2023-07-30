@@ -43,14 +43,14 @@ return [
     'file'                 => ':attribute はファイルにして下さい。',
     'filled'               => ':attribute フィールドは空に出来ません。',
     'image'                => ':attribute は画像にして下さい。',
-    'import_field_empty'    => 'The value for :fieldname cannot be null.',
+    'import_field_empty'    => ':fieldname の値は null にはできません。',
     'in'                   => '選択された :attribute は不正です。',
     'in_array'             => ':attribute フィールドが :other に存在しません。',
     'integer'              => ':attribute は整数にして下さい。',
     'ip'                   => ':attribute は有効なIPアドレスにして下さい。',
     'ipv4'                 => ':attribute は有効なIPアドレスにして下さい。',
     'ipv6'                 => ':attribute は有効なIPv6アドレスにして下さい。',
-    'is_unique_department' => 'The :attribute must be unique to this Company Location',
+    'is_unique_department' => ':attribute は、この会社の場所に一意である必要があります。',
     'json'                 => ':attribute は有効なJSON文字列にして下さい。',
     'max'                  => [
         'numeric' => ':attribute は :max 以上にして下さい。',
@@ -67,6 +67,8 @@ return [
         'array'   => ':attribute は少なくとも :min 以上にして下さい。',
     ],
     'starts_with'          => ':attribute は、いずれかの値で始まる必要があります: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => '選択された :attribute は不正です。',
     'numeric'              => ':attribute は数字にして下さい。',
     'present'              => ':attribute フィールドは必須です。',
@@ -114,23 +116,24 @@ return [
     |
     */
 
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
-
     'custom' => [
         'alpha_space' => ':attribute フィールドに、禁止文字列が含まれています。',
         'email_array'      => '1 つまたは複数の電子メール アドレスが無効です。',
         'hashed_pass'      => '現在のパスワードが正しくありません。',
         'dumbpwd'          => 'そのパスワードはあまりにも脆弱です。',
         'statuslabel_type' => '有効なステータスラベルの種類を選択する必要があります。',
+
+        // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
+        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // people won't know how to format. 
+        'purchase_date.date_format'     => ':attribute は YYYY-MM-DD 形式の有効な日付にして下さい',
+        'last_audit_date.date_format'   =>  ':attribute は YYYY-MM-DD hh:mm:ss 形式の有効な日時にして下さい',
+        'expiration_date.date_format'   =>  ':attribute は YYYY-MM-DD 形式の有効な日付にして下さい',
+        'termination_date.date_format'  =>  ':attribute は YYYY-MM-DD 形式の有効な日付にして下さい',
+        'expected_checkin.date_format'  =>  ':attribute は YYYY-MM-DD 形式の有効な日付にして下さい',
+        'start_date.date_format'        =>  ':attribute は YYYY-MM-DD 形式の有効な日付にして下さい',
+        'end_date.date_format'          =>  ':attribute は YYYY-MM-DD 形式の有効な日付にして下さい',
+
     ],
 
     /*

@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Más información',
 
-    'audit_help' => 'Al marcar esta casilla se editará el activo para reflejar esta nueva ubicación. Dejarla desmarcada simplemente anotará la ubicación en la auditoría.<br><br>Tenga en cuenta que este activo está asignado, no se cambiará la ubicación de la persona, activo o ubicación de donde está asignado.',
+    'audit_help' => 'Al marcar esta casilla se editará el registro de activos para reflejar esta nueva ubicación. Dejarla desmarcada simplemente se notará la ubicación en el registro de auditoría.<br><br>Tenga en cuenta que si este activo está desprotegido, no cambiará la ubicación de la persona, el activo o la ubicación en la que está verificado.',
 
     'assets' => 'Los activos son elementos rastreados por número de serie o etiqueta de activos. Suelen ser artículos de alto valor donde la identificación del activo importa.',
 

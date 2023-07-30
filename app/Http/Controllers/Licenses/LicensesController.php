@@ -6,6 +6,8 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\License;
+use App\Models\LicenseSeat;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -86,7 +88,7 @@ class LicensesController extends Controller
         $license->name              = $request->input('name');
         $license->notes             = $request->input('notes');
         $license->order_number      = $request->input('order_number');
-        $license->purchase_cost     = Helper::ParseCurrency($request->input('purchase_cost'));
+        $license->purchase_cost     = $request->input('purchase_cost');
         $license->purchase_date     = $request->input('purchase_date');
         $license->purchase_order    = $request->input('purchase_order');
         $license->purchase_order    = $request->input('purchase_order');
@@ -164,7 +166,7 @@ class LicensesController extends Controller
         $license->name              = $request->input('name');
         $license->notes             = $request->input('notes');
         $license->order_number      = $request->input('order_number');
-        $license->purchase_cost     = Helper::ParseCurrency($request->input('purchase_cost'));
+        $license->purchase_cost     = $request->input('purchase_cost');
         $license->purchase_date     = $request->input('purchase_date');
         $license->purchase_order    = $request->input('purchase_order');
         $license->reassignable      = $request->input('reassignable', 0);
@@ -205,7 +207,7 @@ class LicensesController extends Controller
         if ($license->assigned_seats_count == 0) {
             // Delete the license and the associated license seats
             DB::table('license_seats')
-                ->where('id', $license->id)
+                ->where('license_id', $license->id)
                 ->update(['assigned_to' => null, 'asset_id' => null]);
 
             $licenseSeats = $license->licenseseats();
@@ -233,16 +235,40 @@ class LicensesController extends Controller
     {
         $license = License::with('assignedusers')->find($licenseId);
 
-        if ($license) {
-            $this->authorize('view', $license);
-
-            return view('licenses/view', compact('license'));
+        if (!$license) {
+            return redirect()->route('licenses.index')
+            ->with('error', trans('admin/licenses/message.does_not_exist'));
         }
 
-        return redirect()->route('licenses.index')
-            ->with('error', trans('admin/licenses/message.does_not_exist'));
+        $users_count = User::where('autoassign_licenses', '1')->count();
+        $total_seats_count = $license->totalSeatsByLicenseID();
+        $available_seats_count = $license->availCount()->count();
+        $checkedout_seats_count = ($total_seats_count - $available_seats_count);
+
+        \Log::debug('Total: '.$total_seats_count);
+        \Log::debug('Users: '.$users_count);
+        \Log::debug('Available: '.$available_seats_count);
+        \Log::debug('Checkedout: '.$checkedout_seats_count);
+
+
+        $this->authorize('view', $license);
+        return view('licenses.view', compact('license'))
+            ->with('users_count', $users_count)
+            ->with('total_seats_count', $total_seats_count)
+            ->with('available_seats_count', $available_seats_count)
+            ->with('checkedout_seats_count', $checkedout_seats_count);
+
     }
 
+
+    /**
+     * Returns a view with prepopulated data for clone
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $licenseId
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function getClone($licenseId = null)
     {
         if (is_null($license_to_clone = License::find($licenseId))) {

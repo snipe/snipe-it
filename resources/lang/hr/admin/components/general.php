@@ -12,4 +12,5 @@ return array(
     'remaining' 			             => 'ostali',
     'total' 			                 => 'ukupno',
     'update'                            => 'Ažuriraj komponentu',
+    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
 );

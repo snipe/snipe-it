@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => 'Model bestaat niet.',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Dit model is momenteel gekoppeld met één of meer assets en kan niet worden verwijderd. Verwijder de assets en probeer het opnieuw. ',
 
 
@@ -14,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Model is niet gewijzigd, probeer het opnieuw',
-        'success' => 'Model met succes gewijzigd.'
+        'success' => 'Model met succes gewijzigd.',
     ),
 
     'delete' => array(
@@ -30,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Er was geen veld geselecteerd dus is er niks gewijzigd.',
-        'success' 		=> 'Modellen bijgewerkt.'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Er waren geen modellen geselecteerd, er is dus niets verwijderd.',
-        'success' 		    => ':success_count model(s) verwijderd!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ':success_count model(len) werden verwijderd, maar : fail_count konden niet worden verwijderd omdat er nog steeds assets aan gekoppeld zijn.'
     ),
 

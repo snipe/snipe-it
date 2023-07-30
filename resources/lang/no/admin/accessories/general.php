@@ -16,5 +16,7 @@ return array(
     'update'  							=> 'Oppdater tilbehør',
     'use_default_eula'					=> 'Bruk <a href="#" data-toggle="modal" data-target="#eulaModal">standard EULA</a> i stedet.',
     'use_default_eula_disabled'			=> '<del>Bruk standard EULA i stedet.</del> Ingen standard EULA er satt. Legg til en i Innstillinger.',
+    'clone'                             => 'Clone Accessory',
+    'delete_disabled'                   => 'This accessory cannot be deleted yet because some items are still checked out.',
 
 );

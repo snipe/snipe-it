@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => 'Model bestaan ​​nie.',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Hierdie model word tans geassosieer met een of meer bates en kan nie verwyder word nie. Verwyder asseblief die bates en probeer dan weer uitvee.',
 
 
@@ -14,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Model is nie opgedateer nie, probeer asseblief weer',
-        'success' => 'Model suksesvol opgedateer.'
+        'success' => 'Model suksesvol opgedateer.',
     ),
 
     'delete' => array(
@@ -30,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Geen velde is verander nie, so niks is opgedateer nie.',
-        'success' 		=> 'Modelle opgedateer.'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'No models were selected, so nothing was deleted.',
-        'success' 		    => ':success_count model(s) deleted!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ':success_count model(s) were deleted, however :fail_count were unable to be deleted because they still have assets associated with them.'
     ),
 

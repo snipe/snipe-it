@@ -12,4 +12,5 @@ return array(
     'remaining' 			             => 'Остаток',
     'total' 			                 => 'Всего',
     'update'                            => 'Обновить компонент',
+    'checkin_limit'            => 'Количество должно быть меньше или равно :assigned_qty'
 );

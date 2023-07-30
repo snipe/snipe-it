@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'See vara on kustutatud.',
     'edit'  					=> 'Muuda vahendit',
     'model_deleted'  			=> 'See vara mudel on kustutatud. Enne vara taastamist peab taastama mudeli.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Taotletav',
     'requested'				    => 'Taotletud',
     'not_requestable'           => 'Mittetaotletav',
@@ -21,6 +23,7 @@ return [
     'restore'  					=> 'Taasta vara',
     'pending'  					=> 'Ootel',
     'undeployable'  			=> 'Kasutuselevõtmatu',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Vaata vahendit',
     'csv_error' => 'Sul on viga CSV failis:',
     'import_text' => '
@@ -40,5 +43,6 @@ return [
     'error_messages' => 'Tõrked:',
     'success_messages' => 'Õnnestumised:',
     'alert_details' => 'Palun vaata allolevaid üksikasju.',
-    'custom_export' => 'Custom Export'
+    'custom_export' => 'Custom Export',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];

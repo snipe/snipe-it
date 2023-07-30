@@ -67,6 +67,8 @@ return [
         'array'   => 'Thuộc tính: phải có ít nhất: min items.',
     ],
     'starts_with'          => 'Trường :attribute phải kết thúc bằng một trong những giá trị sau: :values',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => ':attribute đã chọn không hợp lý.',
     'numeric'              => ':attribute phải là một số.',
     'present'              => 'Trường thuộc tính: phải có mặt.',
@@ -114,23 +116,24 @@ return [
     |
     */
 
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
-
     'custom' => [
         'alpha_space' => 'Trường: attribute chứa một ký tự không được phép.',
         'email_array'      => 'Một hoặc nhiều địa chỉ email không hợp lệ.',
         'hashed_pass'      => 'Mật khẩu hiện tại của bạn không chính xác',
         'dumbpwd'          => 'Mật khẩu đó quá phổ biến.',
         'statuslabel_type' => 'Bạn phải chọn một loại nhãn tình trạng hợp lệ',
+
+        // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
+        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // people won't know how to format. 
+        'purchase_date.date_format'     => 'The :attribute must be a valid date in YYYY-MM-DD format',
+        'last_audit_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD hh:mm:ss format',
+        'expiration_date.date_format'   =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'termination_date.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+        'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
+
     ],
 
     /*

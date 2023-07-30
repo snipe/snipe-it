@@ -101,6 +101,7 @@ class AssetsController extends Controller
             'checkin_counter',
             'requests_counter',
             'byod',
+            'asset_eol_date',
         ];
 
         $filter = [];
@@ -114,7 +115,7 @@ class AssetsController extends Controller
             $allowed_columns[] = $field->db_column_name();
         }
 
-        $assets = Company::scopeCompanyables(Asset::select('assets.*'), 'company_id', 'assets')
+        $assets = Asset::select('assets.*')
             ->with('location', 'assetstatus', 'company', 'defaultLoc','assignedTo',
                 'model.category', 'model.manufacturer', 'model.fieldset','supplier'); //it might be tempting to add 'assetlog' here, but don't. It blows up update-heavy users.
 
@@ -124,10 +125,11 @@ class AssetsController extends Controller
             $assets->InModelList($non_deprecable_models->toArray());
         }
 
+
+
         // These are used by the API to query against specific ID numbers.
         // They are also used by the individual searches on detail pages like
         // locations, etc.
-
 
         // Search custom fields by column name
         foreach ($all_custom_fields as $field) {
@@ -136,75 +138,11 @@ class AssetsController extends Controller
             }
         }
 
-
-        if ($request->filled('status_id')) {
-            $assets->where('assets.status_id', '=', $request->input('status_id'));
+        if ((! is_null($filter)) && (count($filter)) > 0) {
+            $assets->ByFilter($filter);
+        } elseif ($request->filled('search')) {
+            $assets->TextSearch($request->input('search'));
         }
-
-        if ($request->filled('asset_tag')) {
-            $assets->where('assets.asset_tag', '=', $request->input('asset_tag'));
-        }
-
-        if ($request->filled('serial')) {
-            $assets->where('assets.serial', '=', $request->input('serial'));
-        }
-
-        if ($request->input('requestable') == 'true') {
-            $assets->where('assets.requestable', '=', '1');
-        }
-
-        if ($request->filled('model_id')) {
-            $assets->InModelList([$request->input('model_id')]);
-        }
-
-        if ($request->filled('category_id')) {
-            $assets->InCategory($request->input('category_id'));
-        }
-
-        if ($request->filled('location_id')) {
-            $assets->where('assets.location_id', '=', $request->input('location_id'));
-        }
-
-        if ($request->filled('rtd_location_id')) {
-            $assets->where('assets.rtd_location_id', '=', $request->input('rtd_location_id'));
-        }
-
-        if ($request->filled('supplier_id')) {
-            $assets->where('assets.supplier_id', '=', $request->input('supplier_id'));
-        }
-
-        if (($request->filled('assigned_to')) && ($request->filled('assigned_type'))) {
-            $assets->where('assets.assigned_to', '=', $request->input('assigned_to'))
-                ->where('assets.assigned_type', '=', $request->input('assigned_type'));
-        }
-
-        if ($request->filled('company_id')) {
-            $assets->where('assets.company_id', '=', $request->input('company_id'));
-        }
-
-        if ($request->filled('manufacturer_id')) {
-            $assets->ByManufacturer($request->input('manufacturer_id'));
-        }
-
-        if ($request->filled('depreciation_id')) {
-            $assets->ByDepreciationId($request->input('depreciation_id'));
-        }
-
-        if ($request->filled('byod')) {
-            $assets->where('assets.byod', '=', $request->input('byod'));
-        }
-
-        $request->filled('order_number') ? $assets = $assets->where('assets.order_number', '=', e($request->get('order_number'))) : '';
-
-        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
-        // case we override with the actual count, so we should return 0 items.
-        $offset = (($assets) && ($request->get('offset') > $assets->count())) ? $assets->count() : $request->get('offset', 0);
-
-
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
-
-        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 
         // This is used by the audit reporting routes
         if (Gate::allows('audit', Asset::class)) {
@@ -217,7 +155,6 @@ class AssetsController extends Controller
                     break;
             }
         }
-
 
 
         // This is used by the sidenav, mostly
@@ -269,7 +206,7 @@ class AssetsController extends Controller
                 break;
             case 'Deployed':
                 // more sad, horrible workarounds for laravel bugs when doing full text searches
-                $assets->where('assets.assigned_to', '>', '0');
+                $assets->whereNotNull('assets.assigned_to');
                 break;
             case 'byod':
                 // This is kind of redundant, since we already check for byod=1 above, but this keeps the
@@ -295,12 +232,71 @@ class AssetsController extends Controller
         }
 
 
-        if ((! is_null($filter)) && (count($filter)) > 0) {
-            $assets->ByFilter($filter);
-        } elseif ($request->filled('search')) {
-            $assets->TextSearch($request->input('search'));
+        // Leave these under the TextSearch scope, else the fuzziness will override the specific ID (status ID, etc) requested
+        if ($request->filled('status_id')) {
+            $assets->where('assets.status_id', '=', $request->input('status_id'));
         }
 
+        if ($request->filled('asset_tag')) {
+            $assets->where('assets.asset_tag', '=', $request->input('asset_tag'));
+        }
+
+        if ($request->filled('serial')) {
+            $assets->where('assets.serial', '=', $request->input('serial'));
+        }
+
+        if ($request->input('requestable') == 'true') {
+            $assets->where('assets.requestable', '=', '1');
+        }
+
+        if ($request->filled('model_id')) {
+            $assets->InModelList([$request->input('model_id')]);
+        }
+
+        if ($request->filled('category_id')) {
+            $assets->InCategory($request->input('category_id'));
+        }
+
+        if ($request->filled('location_id')) {
+            $assets->where('assets.location_id', '=', $request->input('location_id'));
+        }
+
+        if ($request->filled('rtd_location_id')) {
+            $assets->where('assets.rtd_location_id', '=', $request->input('rtd_location_id'));
+        }
+
+        if ($request->filled('supplier_id')) {
+            $assets->where('assets.supplier_id', '=', $request->input('supplier_id'));
+        }
+
+        if ($request->filled('asset_eol_date')) {
+            $assets->where('assets.asset_eol_date', '=', $request->input('asset_eol_date'));
+        }
+
+        if (($request->filled('assigned_to')) && ($request->filled('assigned_type'))) {
+            $assets->where('assets.assigned_to', '=', $request->input('assigned_to'))
+                ->where('assets.assigned_type', '=', $request->input('assigned_type'));
+        }
+
+        if ($request->filled('company_id')) {
+            $assets->where('assets.company_id', '=', $request->input('company_id'));
+        }
+
+        if ($request->filled('manufacturer_id')) {
+            $assets->ByManufacturer($request->input('manufacturer_id'));
+        }
+
+        if ($request->filled('depreciation_id')) {
+            $assets->ByDepreciationId($request->input('depreciation_id'));
+        }
+
+        if ($request->filled('byod')) {
+            $assets->where('assets.byod', '=', $request->input('byod'));
+        }
+
+        if ($request->filled('order_number')) {
+            $assets->where('assets.order_number', '=', $request->get('order_number'));
+        }
 
         // This is kinda gross, but we need to do this because the Bootstrap Tables
         // API passes custom field ordering as custom_fields.fieldname, and we have to strip
@@ -311,7 +307,8 @@ class AssetsController extends Controller
         // in the allowed_columns array)
         $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'assets.created_at';
 
-
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        
         switch ($sort_override) {
             case 'model':
                 $assets->OrderModels($order);
@@ -347,6 +344,10 @@ class AssetsController extends Controller
                 break;
         }
 
+
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $assets->count()) ? $assets->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
 
         $total = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
@@ -460,7 +461,7 @@ class AssetsController extends Controller
     {
         $this->authorize('view', Asset::class);
         $this->authorize('view', License::class);
-        $asset = Asset::where('id', $id)->withTrashed()->first();
+        $asset = Asset::where('id', $id)->withTrashed()->firstorfail();
         $licenses = $asset->licenses()->get();
 
         return (new LicensesTransformer())->transformLicenses($licenses, $licenses->count());
@@ -478,7 +479,7 @@ class AssetsController extends Controller
     public function selectlist(Request $request)
     {
 
-        $assets = Company::scopeCompanyables(Asset::select([
+        $assets = Asset::select([
             'assets.id',
             'assets.name',
             'assets.asset_tag',
@@ -486,7 +487,7 @@ class AssetsController extends Controller
             'assets.assigned_to',
             'assets.assigned_type',
             'assets.status_id',
-            ])->with('model', 'assetstatus', 'assignedTo')->NotArchived(), 'company_id', 'assets');
+            ])->with('model', 'assetstatus', 'assignedTo')->NotArchived();
 
         if ($request->filled('assetStatusType') && $request->input('assetStatusType') === 'RTD') {
             $assets = $assets->RTD();
@@ -544,20 +545,23 @@ class AssetsController extends Controller
         $asset->model_id                = $request->get('model_id');
         $asset->order_number            = $request->get('order_number');
         $asset->notes                   = $request->get('notes');
-        $asset->asset_tag               = $request->get('asset_tag', Asset::autoincrement_asset());
+        $asset->asset_tag               = $request->get('asset_tag', Asset::autoincrement_asset()); //yup, problem :/
+        // NO IT IS NOT!!! This is never firing; we SHOW the asset_tag you're going to get, so it *will* be filled in!
         $asset->user_id                 = Auth::id();
         $asset->archived                = '0';
         $asset->physical                = '1';
         $asset->depreciate              = '0';
         $asset->status_id               = $request->get('status_id', 0);
         $asset->warranty_months         = $request->get('warranty_months', null);
-        $asset->purchase_cost           = Helper::ParseCurrency($request->get('purchase_cost')); // this is the API's store method, so I don't know that I want to do this? Confusing. FIXME (or not?!)
+        $asset->purchase_cost           = $request->get('purchase_cost');
+        $asset->asset_eol_date          = $request->get('asset_eol_date', $asset->present()->eol_date());
         $asset->purchase_date           = $request->get('purchase_date', null);
         $asset->assigned_to             = $request->get('assigned_to', null);
         $asset->supplier_id             = $request->get('supplier_id');
         $asset->requestable             = $request->get('requestable', 0);
         $asset->rtd_location_id         = $request->get('rtd_location_id', null);
         $asset->location_id             = $request->get('rtd_location_id', null);
+
 
         /**
         * this is here just legacy reasons. Api\AssetController
@@ -572,6 +576,7 @@ class AssetsController extends Controller
         // Update custom fields in the database.
         // Validation for these fields is handled through the AssetRequest form request
         $model = AssetModel::find($request->get('model_id'));
+
         if (($model) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
 
@@ -829,7 +834,6 @@ class AssetsController extends Controller
 
         } elseif (request('checkout_to_type') == 'asset') {
             $target = Asset::where('id', '!=', $asset_id)->find(request('assigned_asset'));
-            $asset->location_id = $target->rtd_location_id;
             // Override with the asset's location_id if it has one
             $asset->location_id = (($target) && (isset($target->location_id))) ? $target->location_id : '';
             $error_payload['target_id'] = $request->input('assigned_asset');
@@ -857,7 +861,8 @@ class AssetsController extends Controller
         $checkout_at = request('checkout_at', date('Y-m-d H:i:s'));
         $expected_checkin = request('expected_checkin', null);
         $note = request('note', null);
-        $asset_name = request('name', null);
+        // Using `->has` preserves the asset name if the name parameter was not included in request.
+        $asset_name = request()->has('name') ? request('name') : $asset->name;
 
         // Set the location ID to the RTD location id if there is one
         // Wait, why are we doing this? This overrides the stuff we set further up, which makes no sense.
@@ -937,18 +942,21 @@ class AssetsController extends Controller
      * @since [v6.0]
      * @return JsonResponse
      */
-    public function checkinByTag(Request $request)
+    public function checkinByTag(Request $request, $tag = null)
     {
         $this->authorize('checkin', Asset::class);
-        $asset = Asset::where('asset_tag', $request->input('asset_tag'))->first();
+        if(null == $tag && null !== ($request->input('asset_tag'))) {
+            $tag = $request->input('asset_tag');
+        }
+        $asset = Asset::where('asset_tag', $tag)->first();
 
         if ($asset) {
             return $this->checkin($request, $asset->id);
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', [
-            'asset'=> e($request->input('asset_tag'))
-        ], 'Asset with tag '.e($request->input('asset_tag')).' not found'));
+            'asset'=> e($tag)
+        ], 'Asset with tag '.e($tag).' not found'));
     }
 
 
@@ -1025,9 +1033,10 @@ class AssetsController extends Controller
     {
         $this->authorize('viewRequestable', Asset::class);
 
-        $assets = Company::scopeCompanyables(Asset::select('assets.*'), 'company_id', 'assets')
+        $assets = Asset::select('assets.*')
             ->with('location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
-                'model.category', 'model.manufacturer', 'model.fieldset', 'supplier')->requestableAssets();
+                'model.category', 'model.manufacturer', 'model.fieldset', 'supplier')
+            ->requestableAssets();
 
         $offset = request('offset', 0);
         $limit = $request->input('limit', 50);

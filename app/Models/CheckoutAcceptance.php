@@ -3,25 +3,33 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
 class CheckoutAcceptance extends Model
 {
-    use SoftDeletes, Notifiable;
+    use HasFactory, SoftDeletes, Notifiable;
 
     protected $casts = [
         'accepted_at' => 'datetime',
         'declined_at' => 'datetime',
     ];
 
-    // Get the mail recipient from the config
-    public function routeNotificationForMail(): string
+    /**
+     * Get the mail recipient from the config
+     *
+     * @return mixed|string|null
+     */
+    public function routeNotificationForMail()
     {
         // At this point the endpoint is the same for everything.
         //  In the future this may want to be adapted for individual notifications.
-        return (config('mail.reply_to.address')) ? config('mail.reply_to.address') : '' ;
+        $recipients_string = explode(',', Setting::getSettings()->alert_email);
+        $recipients = array_map('trim', $recipients_string);
+
+        return array_filter($recipients);
     }
 
     /**

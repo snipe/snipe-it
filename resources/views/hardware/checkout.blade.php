@@ -26,6 +26,16 @@
                     </div>
                     <div class="box-body">
                     {{csrf_field()}}
+                        @if ($asset->company && $asset->company->name)
+                            <div class="form-group">
+                                {{ Form::label('model', trans('general.company'), array('class' => 'col-md-3 control-label')) }}
+                                <div class="col-md-8">
+                                    <p class="form-control-static">
+                                        {{ $asset->company->name }}
+                                    </p>
+                                </div>
+                            </div>
+                        @endif
                     <!-- AssetModel name -->
                         <div class="form-group">
                             {{ Form::label('model', trans('admin/hardware/form.model'), array('class' => 'col-md-3 control-label')) }}
@@ -33,11 +43,10 @@
                                 <p class="form-control-static">
                                     @if (($asset->model) && ($asset->model->name))
                                         {{ $asset->model->name }}
-
                                     @else
                                         <span class="text-danger text-bold">
-                  <i class="fas fa-exclamation-triangle"></i>This asset's model is invalid!
-                  The asset <a href="{{ route('hardware.edit', $asset->id) }}">should be edited</a> to correct this before attempting to check it in or out.</span>
+                  <i class="fas fa-exclamation-triangle"></i>{{ trans('admin/hardware/general.model_invalid')}}
+                  <a href="{{ route('hardware.edit', $asset->id) }}"></a> {{ trans('admin/hardware/general.model_invalid_fix')}}</span>
                                     @endif
                                 </p>
                             </div>
@@ -105,7 +114,7 @@
                             </div>
                         </div>
 
-                        @if ($asset->requireAcceptance() || $asset->getEula() || ($snipeSettings->slack_endpoint!=''))
+                        @if ($asset->requireAcceptance() || $asset->getEula() || ($snipeSettings->webhook_endpoint!=''))
                             <div class="form-group notification-callout">
                                 <div class="col-md-8 col-md-offset-3">
                                     <div class="callout callout-info">
@@ -122,9 +131,9 @@
                                             <br>
                                         @endif
 
-                                        @if ($snipeSettings->slack_endpoint!='')
+                                        @if ($snipeSettings->webhook_endpoint!='')
                                             <i class="fab fa-slack" aria-hidden="true"></i>
-                                            {{ trans('general.slack_msg_note')}}
+                                            {{ trans('general.webhook_msg_note') }}
                                         @endif
                                     </div>
                                 </div>

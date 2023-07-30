@@ -14,6 +14,8 @@ return [
     'deleted'  					=> '此资产已被删除。',
     'edit'  					=> '编辑资产',
     'model_deleted'  			=> '这个资源模型已被删除。您必须先还原模型才能还原素材。',
+    'model_invalid'             => '此资产的型号无效。',
+    'model_invalid_fix'         => '在尝试归还或借出资产之前，应编辑资产以更正此问题。',
     'requestable'               => '可申领',
     'requested'				    => '已申请',
     'not_requestable'           => '不可申领',
@@ -21,6 +23,7 @@ return [
     'restore'  					=> '还原资产',
     'pending'  					=> '待处理',
     'undeployable'  			=> '不可部署',
+    'undeployable_tooltip'  	=> '此资产的状态标签为不可部署，此时无法借出。',
     'view'  					=> '查看资产',
     'csv_error' => '您的CSV文件中有一个错误：',
     'import_text' => '
@@ -40,5 +43,6 @@ return [
     'error_messages' => '错误信息：',
     'success_messages' => '成功信息：',
     'alert_details' => '请参阅下面的详细信息。',
-    'custom_export' => '自定义导出'
+    'custom_export' => '自定义导出',
+    'mfg_warranty_lookup' => ':manufacturer 保修状态查询',
 ];

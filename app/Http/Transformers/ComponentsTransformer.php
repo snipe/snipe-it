@@ -4,7 +4,7 @@ namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
 use App\Models\Component;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
 
@@ -37,6 +37,7 @@ class ComponentsTransformer
                 'id' => (int) $component->category->id,
                 'name' => e($component->category->name),
             ] : null,
+            'supplier' => ($component->supplier) ? ['id' => $component->supplier->id, 'name'=> e($component->supplier->name)] : null,
             'order_number'  => e($component->order_number),
             'purchase_date' =>  Helper::getFormattedDateObject($component->purchase_date, 'date'),
             'purchase_cost' => Helper::formatCurrencyOutput($component->purchase_cost),
@@ -45,7 +46,7 @@ class ComponentsTransformer
                 'id' => (int) $component->company->id,
                 'name' => e($component->company->name),
             ] : null,
-            'notes' => ($component->notes) ? e($component->notes) : null,
+            'notes' => ($component->notes) ? Helper::parseEscapedMarkedownInline($component->notes) : null,
             'created_at' => Helper::getFormattedDateObject($component->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($component->updated_at, 'datetime'),
             'user_can_checkout' =>  ($component->numRemaining() > 0) ? 1 : 0,

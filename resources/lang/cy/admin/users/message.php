@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Rydych wedi llwyddo I wrthod yr ased yma.',
     'bulk_manager_warn'	        => 'Mae eich defnyddwyr wedi diweddaru\'n llwyddiannus ond mae\'r blwch rheolwr heb newid gan fod y rheolwr yn y rhestr o defnyddwyr. Dewisiwch eto heb cynnwys y rheolwr.',
     'user_exists'               => 'Defnyddiwr yn bodoli yn barod!',
-    'user_not_found'            => 'Nid yw defnyddiwr [:id] yn bodoli.',
+    'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Mae angen llenwi\'r maes login',
     'user_password_required'    => 'Rhaid gosod cyfrinair.',
     'insufficient_permissions'  => 'Diffyg Hawliau.',

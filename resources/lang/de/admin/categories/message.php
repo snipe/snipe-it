@@ -13,7 +13,8 @@ return array(
 
     'update' => array(
         'error'   => 'Die Kategorie konnte nicht aktualisiert werden, bitte versuchen Sie es erneut',
-        'success' => 'Die Kategorie wurde erfolgreich aktualisiert.'
+        'success' => 'Die Kategorie wurde erfolgreich aktualisiert.',
+        'cannot_change_category_type'   => 'Sie können den Kategorietyp nicht ändern, nachdem er erstellt wurde',
     ),
 
     'delete' => array(

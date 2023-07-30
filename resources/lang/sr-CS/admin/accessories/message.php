@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Pribor nije potvrdjen, pokušajte ponovo',
         'success' 		=> 'Pribor je uspešno proveren.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Korisnik nevažeći. Molim pokušajte ponovo.'
     ),
 

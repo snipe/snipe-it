@@ -27,6 +27,9 @@ return [
     'used_by_models'   		    => 'Използвани от модели ',
     'order'   		            => 'Ред',
     'create_fieldset'         => 'Нов Fieldset',
+    'update_fieldset'         => 'Update Fieldset',
+    'fieldset_does_not_exist'   => 'Fieldset :id does not exist',
+    'fieldset_updated'         => 'Fieldset updated',
     'create_fieldset_title' => 'Създай нова група от полета',
     'create_field'            => 'Ново персонализирано поле',
     'create_field_title' => 'Създай ново персонализирано поле',
@@ -46,4 +49,6 @@ return [
     'unique' => 'Unique',
     'display_in_user_view' => 'Allow the checked out user to view these values in their View Assigned Assets page',
     'display_in_user_view_table' => 'Visible to User',
+    'auto_add_to_fieldsets' => 'Automatically add this to every new fieldset',
+    'add_to_preexisting_fieldsets' => 'Add to any existing fieldsets',
 ];

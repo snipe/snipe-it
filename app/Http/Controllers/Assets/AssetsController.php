@@ -12,12 +12,13 @@ use App\Models\CheckoutRequest;
 use App\Models\Company;
 use App\Models\Location;
 use App\Models\Setting;
+use App\Models\Statuslabel;
 use App\Models\User;
 use App\View\Label;
 use Auth;
 use Carbon\Carbon;
 use DB;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
@@ -141,8 +142,9 @@ class AssetsController extends Controller
             $asset->depreciate              = '0';
             $asset->status_id               = request('status_id');
             $asset->warranty_months         = request('warranty_months', null);
-            $asset->purchase_cost           = Helper::ParseCurrency($request->get('purchase_cost'));
+            $asset->purchase_cost           = request('purchase_cost');
             $asset->purchase_date           = request('purchase_date', null);
+            $asset->asset_eol_date          = request('asset_eol_date', $asset->present()->eol_date());
             $asset->assigned_to             = request('assigned_to', null);
             $asset->supplier_id             = request('supplier_id', null);
             $asset->requestable             = request('requestable', 0);
@@ -312,7 +314,9 @@ class AssetsController extends Controller
 
         $asset->status_id = $request->input('status_id', null);
         $asset->warranty_months = $request->input('warranty_months', null);
-        $asset->purchase_cost = Helper::ParseCurrency($request->input('purchase_cost', null));
+        $asset->purchase_cost = $request->input('purchase_cost', null);
+        $asset->asset_eol_date  = request('asset_eol_date', null);
+
         $asset->purchase_date = $request->input('purchase_date', null);
         $asset->supplier_id = $request->input('supplier_id', null);
         $asset->expected_checkin = $request->input('expected_checkin', null);
@@ -321,6 +325,12 @@ class AssetsController extends Controller
         $asset->requestable = $request->filled('requestable');
         $asset->rtd_location_id = $request->input('rtd_location_id', null);
         $asset->byod = $request->input('byod', 0);
+
+        $status = Statuslabel::find($asset->status_id);
+
+        if($status->archived){
+            $asset->assigned_to = null;
+        }
 
         if ($asset->assigned_to == '') {
             $asset->location_id = $request->input('rtd_location_id', null);
@@ -628,7 +638,11 @@ class AssetsController extends Controller
         $csv->setHeaderOffset(0);
         $header = $csv->getHeader();
         $isCheckinHeaderExplicit = in_array('checkin date', (array_map('strtolower', $header)));
-        $results = $csv->getRecords();
+        try {
+            $results = $csv->getRecords();
+        } catch (\Exception $e) {
+            return back()->with('error', trans('general.error_in_import_file', ['error' => $e->getMessage()]));
+        } 
         $item = [];
         $status = [];
         $status['error'] = [];
@@ -764,7 +778,7 @@ class AssetsController extends Controller
     }
 
     /**
-     * Retore a deleted asset.
+     * Restore a deleted asset.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId

@@ -5,19 +5,12 @@ use App\Models\Category;
 use App\Models\Company;
 use App\Models\Component;
 use App\Models\Location;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Tests\Unit\BaseTest;
+use Tests\Support\InteractsWithSettings;
+use Tests\TestCase;
 
-class ComponentTest extends BaseTest
+class ComponentTest extends TestCase
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
-
-
+    use InteractsWithSettings;
 
     public function testAComponentBelongsToACompany()
     {

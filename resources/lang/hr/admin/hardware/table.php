@@ -8,6 +8,7 @@ return [
     'change' 		=> 'In / Out',
     'checkout_date' => 'Datum kupnje',
     'checkoutto' 	=> 'Odjavio',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Current Value',
     'diff' 			=> 'diff',
     'dl_csv' 		=> 'Preuzmite CSV',

@@ -4,7 +4,7 @@ namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
 use App\Models\Manufacturer;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
 
@@ -29,6 +29,7 @@ class ManufacturersTransformer
                 'url' => e($manufacturer->url),
                 'image' =>   ($manufacturer->image) ? Storage::disk('public')->url('manufacturers/'.e($manufacturer->image)) : null,
                 'support_url' => e($manufacturer->support_url),
+                'warranty_lookup_url' => e($manufacturer->warranty_lookup_url),
                 'support_phone' => e($manufacturer->support_phone),
                 'support_email' => e($manufacturer->support_email),
                 'assets_count' => (int) $manufacturer->assets_count,

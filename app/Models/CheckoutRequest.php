@@ -18,7 +18,7 @@ class CheckoutRequest extends Model
 
     public function requestingUser()
     {
-        return $this->user()->first();
+        return $this->user()->withTrashed()->first();
     }
 
     public function requestedItem()

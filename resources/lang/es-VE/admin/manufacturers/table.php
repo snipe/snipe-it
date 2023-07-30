@@ -10,6 +10,7 @@ return array(
     'support_email'   		=> 'Correo de soporte',
     'support_phone'   		=> 'Teléfono de Soporte',
     'support_url'   		=> 'URL de Soporte',
+    'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Actualizar Fabricante',
     'url'   				=> 'URL',
 

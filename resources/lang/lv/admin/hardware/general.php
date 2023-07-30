@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Šis pamatlīdzeklis ir izdzēsts.',
     'edit'  					=> 'Rediģēt īpašumu',
     'model_deleted'  			=> 'Šis pamatlīdzekļu modelis ir dzēsts. Jums ir jāatjauno modelis pirms drīkstiet atjaunot pamatlīdzekli.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Pieļaujams',
     'requested'				    => 'Pieprasīts',
     'not_requestable'           => 'Nav pieprasāms',
@@ -21,6 +23,7 @@ return [
     'restore'  					=> 'Atjaunot aktīvus',
     'pending'  					=> 'Gaida',
     'undeployable'  			=> 'Nodarbināms',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Skatīt aktīvu',
     'csv_error' => 'Jūsu CSV failā ir kļūda:',
     'import_text' => '
@@ -40,5 +43,6 @@ return [
     'error_messages' => 'Error messages:',
     'success_messages' => 'Success messages:',
     'alert_details' => 'Lūdzu skatiet zemāk.',
-    'custom_export' => 'Custom Export'
+    'custom_export' => 'Custom Export',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];

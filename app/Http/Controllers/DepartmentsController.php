@@ -170,6 +170,8 @@ class DepartmentsController extends Controller
         $department->manager_id = ($request->filled('manager_id') ? $request->input('manager_id') : null);
         $department->location_id = ($request->filled('location_id') ? $request->input('location_id') : null);
         $department->company_id = ($request->filled('company_id') ? $request->input('company_id') : null);
+        $department->phone = $request->input('phone');
+        $department->fax = $request->input('fax');
 
         $department = $request->handleImages($department);
 

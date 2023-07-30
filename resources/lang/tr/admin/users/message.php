@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Bu varlığı başarıyla reddettiniz.',
     'bulk_manager_warn'	        => 'Kullanıcılarınızın başarıyla güncelleştirildi, ancak kaydedilmedi Yöneticisi giriş Yöneticisi\'ni seçtiğiniz çünkü aynı zamanda düzenlenecek kullanıcı listesinde oldu ve kullanıcıların kendi yöneticisi olmayabilir. Yine, yönetici hariç olmak üzere, kullanıcılarınızı seçiniz.',
     'user_exists'               => 'Kullanıcı zaten var!',
-    'user_not_found'            => 'Kullanıcı [:id] yok.',
+    'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Oturum açma alanı gerekli',
     'user_password_required'    => 'Şifre Gerekli.',
     'insufficient_permissions'  => 'Yetersiz izinler.',
@@ -14,8 +14,8 @@ return array(
     'ldap_not_configured'        => 'LDAP entegrasyonu bu yükleme için yapılandırılmamış.',
     'password_resets_sent'      => 'Etkinleştirilmiş ve geçerli bir e-posta adresine sahip seçilen kullanıcılara şifre sıfırlama bağlantısı gönderildi.',
     'password_reset_sent'       => ':email! adresine bir şifre sıfırlama bağlantısı gönderildi!',
-    'user_has_no_email'         => 'This user does not have an email address in their profile.',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'user_has_no_email'         => 'Bu kullanıcının profilinde bir e-posta adresi yok.',
+    'user_has_no_assets_assigned'   => 'Bu kullanıcının atanmış herhangi bir varlığı yok',
 
 
     'success' => array(
@@ -61,7 +61,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => 'Bu kullanıcının e-posta grubu yok.',
+        'success' => 'Kullanıcı, mevcut envanteri hakkında bilgilendirildi.'
     )
 );

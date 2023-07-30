@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Acest activ a fost șters.',
     'edit'  					=> 'Editeaza activ',
     'model_deleted'  			=> 'Acest model de active a fost șters. Trebuie să restaurați modelul înainte de a putea restaura activul.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Requestable',
     'requested'				    => 'Solicitat',
     'not_requestable'           => 'Nu poate fi solicitat',
@@ -21,6 +23,7 @@ return [
     'restore'  					=> 'Restabilirea activului',
     'pending'  					=> 'In asteptare',
     'undeployable'  			=> 'Nelansabil',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Vizualizeaza activ',
     'csv_error' => 'Aveți o eroare în fișierul dvs. CSV:',
     'import_text' => '
@@ -40,5 +43,6 @@ return [
     'error_messages' => 'Mesaje de eroare:',
     'success_messages' => 'Mesaje de succes:',
     'alert_details' => 'Vezi mai jos pentru detalii.',
-    'custom_export' => 'Export date personalizat'
+    'custom_export' => 'Export date personalizat',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];

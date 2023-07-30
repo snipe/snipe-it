@@ -43,14 +43,14 @@ return [
     'file'                 => '：属性必须是一个文件。',
     'filled'               => '：属性字段必须有一个值。',
     'image'                => ':attribute 必须是图片格式',
-    'import_field_empty'    => 'The value for :fieldname cannot be null.',
+    'import_field_empty'    => ':fieldname 的值不能为空。',
     'in'                   => '选择的 :attribute 无效',
     'in_array'             => '：属性字段不存在于：其他。',
     'integer'              => ':attribute 必须是整数',
     'ip'                   => ':attribute 必须是有效IP',
     'ipv4'                 => '：属性必须是有效的IPv4地址。',
     'ipv6'                 => '：属性必须是有效的IPv6地址。',
-    'is_unique_department' => 'The :attribute must be unique to this Company Location',
+    'is_unique_department' => ':attribute 必须是唯一的公司地理位置',
     'json'                 => '：属性必须是有效的JSON字符串。',
     'max'                  => [
         'numeric' => ':attribute 不大于 :max',
@@ -67,6 +67,8 @@ return [
         'array'   => '：属性必须至少有：最小项。',
     ],
     'starts_with'          => ':attribute 必须以以下一个开始：:values',
+    'ends_with'            => ':attribute 必须以: :values 其中一个结尾。',
+
     'not_in'               => '选择的 :attribute 无效',
     'numeric'              => ':attribute 必须是数字',
     'present'              => '：属性字段必须存在。',
@@ -114,23 +116,24 @@ return [
     |
     */
 
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
-
     'custom' => [
         'alpha_space' => '：属性字段包含不允许的字符。',
         'email_array'      => '一个或多个电子邮件地址无效。',
         'hashed_pass'      => '您当前的密码不正确',
         'dumbpwd'          => '那个密码太常见了。',
         'statuslabel_type' => '您必须选择有效的状态标签类型',
+
+        // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
+        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // people won't know how to format. 
+        'purchase_date.date_format'     => ':attribute 必须是 YYYY-MM-DD 格式的有效日期',
+        'last_audit_date.date_format'   =>  ':attribute 必须是 YYYY-MM-DD hh:mm:ss 格式的有效日期',
+        'expiration_date.date_format'   =>  ':attribute 必须是 YYYY-MM-DD 格式的有效日期',
+        'termination_date.date_format'  =>  ':attribute 必须是 YYYY-MM-DD 格式的有效日期',
+        'expected_checkin.date_format'  =>  ':attribute 必须是 YYYY-MM-DD 格式的有效日期',
+        'start_date.date_format'        =>  ':attribute 必须是 YYYY-MM-DD 格式的有效日期',
+        'end_date.date_format'          =>  ':attribute 必须是 YYYY-MM-DD 格式的有效日期',
+
     ],
 
     /*

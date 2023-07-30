@@ -1,7 +1,9 @@
 <?php
 (PHP_SAPI !== 'cli' || isset($_SERVER['HTTP_USER_AGENT'])) && die('Access denied.');
 
-$required_php_min = '7.4.0';
+$php_min_works = '7.4.0';
+$php_max_wontwork = '8.2.0';
+
 
 if ((strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') || (!function_exists('posix_getpwuid'))) {
 	echo "Skipping user check as it is not supported on Windows or Posix is not installed on this server. \n";
@@ -43,7 +45,6 @@ echo "--------------------------------------------------------\n\n";
 
 // Check the .env looks ok
 $env = file('.env');
-$env_error_count = 0;
 $env_good = '';
 $env_bad = '';
 
@@ -85,15 +86,13 @@ foreach ($env as $line_num => $line) {
 
         if ($env_key == 'APP_KEY') {
             if (($env_value=='')  || (strlen($env_value) < 20)) {
-                $env_bad .= "✘ APP_KEY ERROR in your .env on line #'.$show_line_num.': Your APP_KEY should not be blank. Run `php artisan key:generate` to generate one.\n";
+                $env_bad .= "✘ APP_KEY ERROR in your .env on line #'.{$show_line_num}.': Your APP_KEY should not be blank. Run `php artisan key:generate` to generate one.\n";
             } else {
                 $env_good .= "√ Your APP_KEY is not blank. \n";
             }
         }
 
         if ($env_key == 'APP_URL') {
-
-            $app_url_length = strlen($env_value);
 
             if (($env_value!="null") && ($env_value!="")) {
                 $env_good .= '√ Your APP_URL is not null or blank. It is set to '.$env_value."\n";
@@ -126,12 +125,12 @@ echo $env_good;
 
 if ($env_bad !='') {
 
-    echo "\n--------------------- !! ERROR !! ----------------------\n";
+    echo "!!!!!!!!!!!!!!!!!!!!!!!!!! .ENV FILE ERROR !!!!!!!!!!!!!!!!!!!!!!!!!!\n";
     echo "Your .env file is misconfigured. Upgrade cannot continue.\n";
     echo "--------------------------------------------------------\n\n";
     echo $env_bad;
     echo "\n\n--------------------------------------------------------\n";
-    echo "ABORTING THE INSTALLER  \n";
+    echo "!!!!!!!!!!!!!!!!!!!!!!!!! ABORTING THE UPGRADER !!!!!!!!!!!!!!!!!!!!!!\n";
     echo "Please correct the issues above in ".getcwd()."/.env and try again.\n";
     echo "--------------------------------------------------------\n";
     exit;
@@ -139,21 +138,22 @@ if ($env_bad !='') {
 
 
 echo "\n--------------------------------------------------------\n";
-echo "STEP 2: Checking PHP requirements: \n";
+echo "STEP 2: Checking PHP requirements: (Required PHP >=". $php_min_works. " - <".$php_max_wontwork.") \n";
 echo "--------------------------------------------------------\n\n";
 
-if (version_compare(PHP_VERSION, $required_php_min, '<')) {
-    echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ERROR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
-    echo "This version of PHP (".PHP_VERSION.") is not compatible with Snipe-IT.\n";
-    echo "Snipe-IT requires PHP version ".$required_php_min." or greater. Please upgrade \n";
-    echo "your version of PHP (web/php-fcgi and cli) and try running this script again.\n\n\n";
-    exit;
+if ((version_compare(phpversion(), $php_min_works, '>=')) && (version_compare(phpversion(), $php_max_wontwork, '<'))) {
+
+    echo "√ Current PHP version: (" . phpversion() . ") is at least " . $php_min_works . " and less than ".$php_max_wontwork."! Continuing... \n";
+    echo sprintf("FYI: The php.ini used by this PHP is: %s\n\n", get_cfg_var('cfg_file_path'));
 
 } else {
-    echo "Current PHP version: (" . PHP_VERSION . ") is at least ".$required_php_min." - continuing... \n";
-    echo sprintf("FYI: The php.ini used by this PHP is: %s\n\n", get_cfg_var('cfg_file_path'));
+    echo "!!!!!!!!!!!!!!!!!!!!!!!!! PHP VERSION ERROR !!!!!!!!!!!!!!!!!!!!!!!!!\n";
+    echo "This version of PHP (".phpversion().") is NOT compatible with Snipe-IT.\n";
+    echo "Snipe-IT requires PHP versions between ".$php_min_works." and ".$php_max_wontwork.".\n";
+    echo "Please install a compatible version of PHP and re-run this script again. \n";
+    echo "!!!!!!!!!!!!!!!!!!!!!!!!! ABORTING THE UPGRADER !!!!!!!!!!!!!!!!!!!!!!\n";
+    exit;
 }
-
 
 echo "Checking Required PHP extensions... \n\n";
 
@@ -179,6 +179,10 @@ $required_exts_array =
         'zip',
     ];
 
+$recommended_exts_array =
+    [
+        'sodium', //note that extensions need to be in BOTH the $required_exts_array and this one to be 'optional'
+    ];
 $ext_missing = '';
 $ext_installed = '';
 
@@ -208,8 +212,10 @@ foreach ($required_exts_array as $required_ext) {
             }
 
         // If this isn't an either/or option, just add it to the string of errors conventionally
-        } else {
+        } elseif (!in_array($required_ext, $recommended_exts_array)){
             $ext_missing .=  '✘ MISSING PHP EXTENSION: '.$required_ext."\n";
+        } else {
+            $ext_installed .= '- '.$required_ext." is *NOT* installed, but is recommended...\n";
         }
 
     // The required extension string was found in the array of installed extensions - yay!
@@ -452,11 +458,11 @@ echo "--------------------------------------------------------\n\n";
 
 
 function str_begins($haystack, $needle) {
-    return 0 === substr_compare($haystack, $needle, 0, strlen($needle));
+    return (substr_compare($haystack, $needle, 0, strlen($needle)) === 0);
 }
 
 function str_ends($haystack,  $needle) {
-    return 0 === substr_compare($haystack, $needle, -strlen($needle));
+    return (substr_compare($haystack, $needle, -strlen($needle)) === 0);
 }
 
 

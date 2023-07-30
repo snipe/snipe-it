@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'この資産を却下しました。',
     'bulk_manager_warn'	        => 'あなたの利用者は正常に更新されました。しかしながら、あなたの管理者エントリーは保存されませんでした。あなたが選択した管理者が、編集対象の利用者一覧に選択されていたため更新されませんでした。および利用者は彼ら自身の管理者でない場合があります。再度、管理者を除いた上で、あなたの利用者を選択してください。',
     'user_exists'               => '利用者が既に存在しています!',
-    'user_not_found'            => '利用者 [:id] は、存在していません。',
+    'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'ログインフィールドが必要です。',
     'user_password_required'    => 'パスワードが必要です。',
     'insufficient_permissions'  => '権限が不足しています。',
@@ -15,7 +15,7 @@ return array(
     'password_resets_sent'      => '有効なメールアドレスを持っている選択されたユーザーにパスワードリセットのリンクが送信されました。',
     'password_reset_sent'       => 'パスワードリセットのURLが:emailに送信されました。',
     'user_has_no_email'         => 'このユーザーのプロフィールにはメールアドレスがありません。',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'user_has_no_assets_assigned'   => 'このユーザーにはアセットが割り当てられていません',
 
 
     'success' => array(
@@ -61,7 +61,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => 'このユーザーにはメールアドレスが設定されていません。',
+        'success' => 'ユーザーに現在の在庫について通知されました。'
     )
 );

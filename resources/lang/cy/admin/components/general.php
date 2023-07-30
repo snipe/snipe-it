@@ -12,4 +12,5 @@ return array(
     'remaining' 			             => 'Yn weddill',
     'total' 			                 => 'Cyfanswm',
     'update'                            => 'Diweddaru Cydran',
+    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
 );

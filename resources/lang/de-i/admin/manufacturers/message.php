@@ -2,6 +2,7 @@
 
 return array(
 
+    'support_url_help' => 'Verwenden Sie <code>{LOCALE}</code> und <code>{SERIAL}</code> in Ihrer URL als Variablen, um diese Werte beim Anzeigen von Assets automatisch auszufüllen.',
     'does_not_exist' => 'Hersteller existiert nicht.',
     'assoc_users'	 => 'Dieser Hersteller ist derzeit bereits mit einem Model verknüpft und kann nicht gelöscht werden. Bitte trenne Deine Modelle von diesem Hersteller und versuche es erneut. ',
 

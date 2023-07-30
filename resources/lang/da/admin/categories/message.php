@@ -13,7 +13,8 @@ return array(
 
     'update' => array(
         'error'   => 'Kategorien blev ikke opdateret, prøv igen',
-        'success' => 'Kategorien blev opdateret.'
+        'success' => 'Kategorien blev opdateret.',
+        'cannot_change_category_type'   => 'Du kan ikke ændre kategoritypen, når først den er blevet oprettet',
     ),
 
     'delete' => array(

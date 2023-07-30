@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Tämä laite on poistettu.',
     'edit'  					=> 'Muokkaa laitetta',
     'model_deleted'  			=> 'Laitemalli on poistettu. Voit palauttaa laitteen kun olet ensin palauttanut poistetun laitemallin.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Pyydettävissä',
     'requested'				    => 'Pyydetty',
     'not_requestable'           => 'Ei pyydettävissä',
@@ -21,6 +23,7 @@ return [
     'restore'  					=> 'Palauta laite',
     'pending'  					=> 'Odottaa',
     'undeployable'  			=> 'Ei käytettävissä',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Näytä laite',
     'csv_error' => 'Sinulla on virhe CSV tiedostossasi:',
     'import_text' => '
@@ -40,5 +43,6 @@ return [
     'error_messages' => 'Virheilmoitukset:',
     'success_messages' => 'Onnistuneet:',
     'alert_details' => 'Tarkempia tietoja on alla.',
-    'custom_export' => 'Mukautettu vienti'
+    'custom_export' => 'Mukautettu vienti',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];

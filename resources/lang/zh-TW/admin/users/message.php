@@ -6,7 +6,7 @@ return array(
     'declined'                  => '您已拒絕這項資產。',
     'bulk_manager_warn'	        => '您的使用者已成功更新，但主管條目未保存，因為您選擇的主管也在要編輯的使用者列表中，使用者不能是自己的主管。 請再次選擇您的使用者並排除主管。',
     'user_exists'               => '使用者已存在！',
-    'user_not_found'            => '使用者 [:id] 不存在',
+    'user_not_found'            => 'User does not exist.',
     'user_login_required'       => '登入欄位是必需的',
     'user_password_required'    => '密碼欄位是必需的',
     'insufficient_permissions'  => '權限不足',
@@ -15,7 +15,7 @@ return array(
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
     'password_reset_sent'       => '密碼重置連結已傳送至 :email',
     'user_has_no_email'         => '該使用者的個人資料尚未填寫電子郵件。',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'user_has_no_assets_assigned'   => '該用戶未擁有已分配資產',
 
 
     'success' => array(
@@ -61,7 +61,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => '該用戶未設定email',
+        'success' => '已就當前資產通知此用戶'
     )
 );

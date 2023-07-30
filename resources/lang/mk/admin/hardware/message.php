@@ -22,6 +22,8 @@ return [
     'restore' => [
         'error'   		=> 'Основното средство не е вратено, обидете се повторно',
         'success' 		=> 'Основното средство е успешно вратено.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
@@ -48,6 +50,8 @@ return [
         'success'               => 'Вашата датотека е увезена',
         'file_delete_success'   => 'Вашата датотека е избришана',
         'file_delete_error'      => 'Датотеката не можеше да се избрише',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
 
 

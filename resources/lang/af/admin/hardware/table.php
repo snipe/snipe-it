@@ -8,6 +8,7 @@ return [
     'change' 		=> 'In uit',
     'checkout_date' => 'Checkout Datum',
     'checkoutto' 	=> 'Gekontroleer',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Current Value',
     'diff' 			=> 'diff',
     'dl_csv' 		=> 'Laai CSV af',

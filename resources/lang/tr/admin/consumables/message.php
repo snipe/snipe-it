@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Sarf malzemesi çıkışı yapılamadı, lütfen tekrar deneyin',
         'success' 		=> 'Sarf malzemesi çıkışı yapıldı.',
-        'user_does_not_exist' => 'Bu kullanıcı geçersiz. Lütfen tekrar deneyin.'
+        'user_does_not_exist' => 'Bu kullanıcı geçersiz. Lütfen tekrar deneyin.',
+         'unavailable'      => 'Bu zimmetleme işlemi için yeterli sarf malzeme kalmamış. Lütfen stok miktarını kontrol edin.',
     ),
 
     'checkin' => array(

@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Pomyślnie odrzuciłeś ten składnik aktywów.',
     'bulk_manager_warn'	        => 'Użytkownicy zostały pomyślnie zaktualizowane, jednak Twój wpis manager nie został zapisany, bo dyrektor wybrano był również na liście użytkowników do edycji i użytkowników nie może być ich Menedżer. Wybierz użytkowników, z wyjątkiem Menedżera.',
     'user_exists'               => 'Użytkownik już istnieje!',
-    'user_not_found'            => 'User [:id] nie istnieje.',
+    'user_not_found'            => 'Użytkownik nie istnieje.',
     'user_login_required'       => 'Pole login jest wymagane',
     'user_password_required'    => 'Pole hasło jest wymagane.',
     'insufficient_permissions'  => 'Brak uprawnień.',
@@ -15,7 +15,7 @@ return array(
     'password_resets_sent'      => 'Wybrani użytkownicy, którzy są aktywni i mają prawidłowe adresy e-mail, otrzymali link do resetowania hasła.',
     'password_reset_sent'       => 'Link umożliwiający zresetowanie hasła został wysłany na :email!',
     'user_has_no_email'         => 'Ten użytkownik nie ma adresu e-mail w swoim profilu.',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'user_has_no_assets_assigned'   => 'Ten użytkownik nie ma żadnych przypisanych aktywów',
 
 
     'success' => array(
@@ -61,7 +61,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => 'Ten użytkownik nie ma ustawionego adresu e-mail.',
+        'success' => 'Użytkownik został powiadomiony o swoich aktualnych zasobach.'
     )
 );

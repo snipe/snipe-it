@@ -12,4 +12,5 @@ return array(
     'remaining' 			             => 'Zbývá',
     'total' 			                 => 'Celkem',
     'update'                            => 'Upravit díl',
+    'checkin_limit'            => 'Přijaté množství musí odpovídat, nebo být nižší než :assigned_qty'
 );

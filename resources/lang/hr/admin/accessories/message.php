@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'The accessory [:id] does not exist.',
+    'does_not_exist' => 'Dodatna oprema [:id] ne postoji.',
     'assoc_users'	 => 'Ovaj pribor trenutačno ima: brojčanu stavku označenu korisnicima. Provjerite pribor i pokušajte ponovo.',
 
     'create' => array(
@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Dodatak nije provjeren, pokušajte ponovo',
         'success' 		=> 'Usluga je uspješno provjerena.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Taj je korisnik nevažeći. Molim te pokušaj ponovno.'
     ),
 

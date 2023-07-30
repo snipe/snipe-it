@@ -29,6 +29,23 @@ class SettingsServiceProvider extends ServiceProvider
             $view->with('snipeSettings', Setting::getSettings());
         });
 
+
+        // Make sure the limit is actually set, is an integer and does not exceed system limits
+        \App::singleton('api_limit_value', function () {
+            $limit = config('app.max_results');
+
+            if ((abs(intval(request('limit'))) > 0) && (abs(request('limit')) <= config('app.max_results'))) {
+                $limit = abs(request('limit'));
+            }
+            \Log::debug('Max in env: '.config('app.max_results'));
+            \Log::debug('Original requested limit: '.request('limit'));
+            \Log::debug('Modified limit: '.$limit);
+            \Log::debug('------------------------------');
+
+            return $limit;
+        });
+
+
         /**
          * Set some common variables so that they're globally available.
          * The paths should always be public (versus private uploads)
@@ -150,6 +167,7 @@ class SettingsServiceProvider extends ServiceProvider
         // Set the monetary locale to the configured locale to make helper::parseFloat work.
         setlocale(LC_MONETARY, config('app.locale'));
         setlocale(LC_NUMERIC, config('app.locale'));
+        
     }
 
     /**

@@ -43,14 +43,14 @@ return [
     'file'                 => 'Estte :attribute debe ser un archivo.',
     'filled'               => 'El campo :attribute debe tener un valor.',
     'image'                => 'El :attribute debe ser una imagen.',
-    'import_field_empty'    => 'The value for :fieldname cannot be null.',
+    'import_field_empty'    => 'El valor para :fieldname no puede ser nulo.',
     'in'                   => 'El :attribute seleccionado es inválido.',
     'in_array'             => 'El :attribute no existe en :other.',
     'integer'              => 'El :attribute debe ser un número entero.',
     'ip'                   => 'El :attribute debe ser una dirección IP correcta.',
     'ipv4'                 => 'El :atrribute debe ser una dirección IPv4 válida.',
     'ipv6'                 => 'El :atrribute debe ser una dirección IPv6 válida.',
-    'is_unique_department' => 'The :attribute must be unique to this Company Location',
+    'is_unique_department' => 'El atributo :attribute debe ser único para esta ubicación de la empresa',
     'json'                 => 'El :atrribute debe ser una dirección IPv4 válida.',
     'max'                  => [
         'numeric' => 'El :attribute no debe ser mayor que :max kilobytes.',
@@ -67,6 +67,8 @@ return [
         'array'   => 'El :attribute debe ser como mínimo de :min kilobytes.',
     ],
     'starts_with'          => 'El :attribute debe comenzar con uno de los siguientes: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'El :attribute seleccionado es inválido.',
     'numeric'              => 'El :attribute debe ser un número entero.',
     'present'              => 'El campo :attribute debe tener un valor.',
@@ -114,23 +116,24 @@ return [
     |
     */
 
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
-
     'custom' => [
         'alpha_space' => 'El campo :attribute contiene un caracter que no está permitido.',
         'email_array'      => 'Una o más direcciones de correo electrónico no son válidas.',
         'hashed_pass'      => 'Tu contraseña actual es incorrecta',
         'dumbpwd'          => 'Esa contraseña es muy común.',
         'statuslabel_type' => 'Debe seleccionar un tipo de etiqueta de estado válido',
+
+        // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
+        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // people won't know how to format. 
+        'purchase_date.date_format'     => 'El :attribute debe ser una fecha válida en formato AAAA-MM-DD',
+        'last_audit_date.date_format'   =>  'El :attribute debe ser una fecha válida en formato AAAA-MM-DD hh:mm:ss',
+        'expiration_date.date_format'   =>  'El :attribute debe ser una fecha válida en formato AAAA-MM-DD',
+        'termination_date.date_format'  =>  'El :attribute debe ser una fecha válida en formato AAAA-MM-DD',
+        'expected_checkin.date_format'  =>  'El :attribute debe ser una fecha válida en formato AAAA-MM-DD',
+        'start_date.date_format'        =>  'El :attribute debe ser una fecha válida en formato AAAA-MM-DD',
+        'end_date.date_format'          =>  'El :attribute debe ser una fecha válida en formato AAAA-MM-DD',
+
     ],
 
     /*

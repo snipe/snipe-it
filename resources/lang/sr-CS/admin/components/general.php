@@ -12,4 +12,5 @@ return array(
     'remaining' 			             => 'Preostalo',
     'total' 			                 => 'Ukupno',
     'update'                            => 'Ažuriraj komponentu',
+    'checkin_limit'            => 'Količina prijavljenih mora biti jednaka ili manja od :assigned_qty'
 );

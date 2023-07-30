@@ -12,7 +12,10 @@ class AssetImporter extends ItemImporter
     public function __construct($filename)
     {
         parent::__construct($filename);
-        $this->defaultStatusLabelId = Statuslabel::first()->id;
+
+        if (!is_null(Statuslabel::first())) {
+            $this->defaultStatusLabelId = Statuslabel::first()->id;
+        }
     }
 
     protected function handle($row)
@@ -60,7 +63,7 @@ class AssetImporter extends ItemImporter
             $asset_tag = Asset::autoincrement_asset();
         }
 
-        $asset = Asset::where(['asset_tag'=> $asset_tag])->first();
+        $asset = Asset::where(['asset_tag'=> (string) $asset_tag])->first();
         if ($asset) {
             if (! $this->updating) {
                 $this->log('A matching Asset '.$asset_tag.' already exists');
@@ -76,10 +79,12 @@ class AssetImporter extends ItemImporter
         }
         $this->item['notes'] = $this->findCsvMatch($row, 'asset_notes');
         $this->item['image'] = $this->findCsvMatch($row, 'image');
-        $this->item['requestable'] = $this->fetchHumanBoolean($this->findCsvMatch($row, 'requestable'));
-        $asset->requestable = $this->fetchHumanBoolean($this->findCsvMatch($row, 'requestable'));
+        $this->item['requestable'] = ($this->fetchHumanBoolean($this->findCsvMatch($row, 'requestable')) == 1) ? '1' : 0;
+        $asset->requestable = $this->item['requestable'];
         $this->item['warranty_months'] = intval($this->findCsvMatch($row, 'warranty_months'));
         $this->item['model_id'] = $this->createOrFetchAssetModel($row);
+        $this->item['byod'] = ($this->fetchHumanBoolean($this->findCsvMatch($row, 'byod')) == 1) ? '1' : 0;
+
 
         // If no status ID is found
         if (! array_key_exists('status_id', $this->item) && ! $editingAsset) {
@@ -112,6 +117,11 @@ class AssetImporter extends ItemImporter
             $item['next_audit_date'] = $this->item['next_audit_date'];
         }
 
+        $item['asset_eol_date'] = null;
+        if (isset($this->item['asset_eol_date'])) {
+            $item['asset_eol_date'] = $this->item['asset_eol_date'];
+        }
+
         if ($editingAsset) {
             $asset->update($item);
         } else {
@@ -125,17 +135,16 @@ class AssetImporter extends ItemImporter
             }
         }
 
-        //FIXME: this disables model validation.  Need to find a way to avoid double-logs without breaking everything.
-        // $asset->unsetEventDispatcher();
+
         if ($asset->save()) {
-            $asset->logCreate('Imported using csv importer');
+            $asset->logCreate(trans('general.importer.import_note'));
             $this->log('Asset '.$this->item['name'].' with serial number '.$this->item['serial'].' was created');
 
             // If we have a target to checkout to, lets do so.
             //-- user_id is a property of the abstract class Importer, which this class inherits from and it's setted by
             //-- the class that needs to use it (command importer or GUI importer inside the project).
             if (isset($target)) {
-                $asset->fresh()->checkOut($target, $this->user_id, date('Y-m-d H:i:s'));
+                $asset->fresh()->checkOut($target, $this->user_id, date('Y-m-d H:i:s'), null, $asset->notes, $asset->name);
             }
 
             return;

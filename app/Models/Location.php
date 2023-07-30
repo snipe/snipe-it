@@ -26,11 +26,12 @@ class Location extends SnipeModel
     protected $table = 'locations';
     protected $rules = [
         'name'          => 'required|min:2|max:255|unique_undeleted',
-        'city'          => 'min:2|max:255|nullable',
-        'country'       => 'min:2|max:255|nullable',
-        'address'       => 'max:80|nullable',
-        'address2'      => 'max:80|nullable',
-        'zip'           => 'min:3|max:10|nullable',
+        'address'       => 'max:191|nullable',
+        'address2'      => 'max:191|nullable',
+        'city'          => 'max:191|nullable',
+        'state'         => 'min:2|max:191|nullable',
+        'country'       => 'min:2|max:191|nullable',
+        'zip'           => 'max:10|nullable',
         'manager_id'    => 'exists:users,id|nullable',
         'parent_id'     => 'non_circular:locations,id',
     ];
@@ -65,6 +66,8 @@ class Location extends SnipeModel
         'state',
         'country',
         'zip',
+        'phone',
+        'fax',
         'ldap_ou',
         'currency',
         'manager_id',
@@ -79,7 +82,7 @@ class Location extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['name', 'address', 'city', 'state', 'zip', 'created_at', 'ldap_ou'];
+    protected $searchableAttributes = ['name', 'address', 'city', 'state', 'zip', 'created_at', 'ldap_ou', 'phone', 'fax'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -267,7 +270,7 @@ class Location extends SnipeModel
 
         foreach ($locations_with_children[$parent_id] as $location) {
             $location->use_text = $prefix.' '.$location->name;
-            $location->use_image = ($location->image) ? url('/').'/uploads/locations/'.$location->image : null;
+            $location->use_image = ($location->image) ? config('app.url').'/uploads/locations/'.$location->image : null;
             $results[] = $location;
             //now append the children. (if we have any)
             if (array_key_exists($location->id, $locations_with_children)) {

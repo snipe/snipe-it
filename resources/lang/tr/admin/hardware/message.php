@@ -23,6 +23,8 @@ return [
     'restore' => [
         'error'   		=> 'Demirbaş geri getirilemedi, lütfen tekrar deneyin',
         'success' 		=> 'Demirbaş geri getirildi.',
+        'bulk_success' 		=> 'Varlık başarı ile geri yüklendi.',
+        'nothing_updated'   => 'Herhangi bir varlık seçili olmadığı için hiçbirşey geri yüklenmedi.', 
     ],
 
     'audit' => [
@@ -49,6 +51,8 @@ return [
         'success'               => 'Dosyanızı içe aktarıldı',
         'file_delete_success'   => 'Dosyanız başarıyla silindi',
         'file_delete_error'      => 'Dosya silenemedi',
+        'header_row_has_malformed_characters' => 'Başlık bilgisindeki bir veya daha fazla öznitelik, hatalı UTF-8 karakterleri içeriyor',
+        'content_row_has_malformed_characters' => 'Başlıktaki ilk satırda bir veya daha fazla öznitelik, hatalı biçimlendirilmiş UTF-8 karakterleri içeriyor',
     ],
 
 

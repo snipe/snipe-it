@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Вы успешно отклонили актив.',
     'bulk_manager_warn'	        => 'Ваши пользователи были успешно обновлены, однако запись менеджера не была сохранена, потому что выбранный менеджер также присутствовал в редактируемом списке пользователей, и пользователи не могут быть менеджерами самим себе. Пожалуйста выберите ваших пользователей снова, за исключением их менеджера.',
     'user_exists'               => 'Пользователь уже существует!',
-    'user_not_found'            => 'Пользователь [:id] не существует.',
+    'user_not_found'            => 'Пользователь не существует.',
     'user_login_required'       => 'Поле "Логин" является обязательным',
     'user_password_required'    => 'Поле "Пароль" является обязательным.',
     'insufficient_permissions'  => 'Недостаточно прав.',
@@ -14,8 +14,8 @@ return array(
     'ldap_not_configured'        => 'Интеграция с LDAP не настроена для этой инсталляции.',
     'password_resets_sent'      => 'Ссылка для сброса пароля была отправлена выбранным пользователям которые имеют действительный адрес электронной почты а активированы.',
     'password_reset_sent'       => 'Ссылка для сброса пароля была отправлена на адрес :email!',
-    'user_has_no_email'         => 'This user does not have an email address in their profile.',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'user_has_no_email'         => 'У этого пользователя нет адреса электронной почты в его профиле.',
+    'user_has_no_assets_assigned'   => 'У этого пользователя нет назначенных активов',
 
 
     'success' => array(
@@ -61,7 +61,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => 'У этого пользователя нет электронной почты.',
+        'success' => 'Пользователь был уведомлен о своем текущем инвентаре.'
     )
 );

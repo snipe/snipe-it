@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => 'Kāore te tauira i te tīariari.',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Kei te hono tenei tauira ki te kotahi, neke atu ranei nga rawa, kaore e taea te muku. Nganahia nga rawa, ka ngana ki te muku ano.',
 
 
@@ -14,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Kāore i te whakahouhia te tauira, na me ngana ano',
-        'success' => 'He pai te whakahoutanga o te tauira.'
+        'success' => 'He pai te whakahoutanga o te tauira.',
     ),
 
     'delete' => array(
@@ -30,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Kaore i whakarereke nga mara, naore i whakahoutia.',
-        'success' 		=> 'Kua whakahoutia nga tauira.'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'No models were selected, so nothing was deleted.',
-        'success' 		    => ':success_count model(s) deleted!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ':success_count model(s) were deleted, however :fail_count were unable to be deleted because they still have assets associated with them.'
     ),
 

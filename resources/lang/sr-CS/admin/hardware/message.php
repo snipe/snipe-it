@@ -22,6 +22,8 @@ return [
     'restore' => [
         'error'   		=> 'Imovina nije obnovljena, pokušajte ponovo',
         'success' 		=> 'Imovina je uspešno obnovljena.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
@@ -48,6 +50,8 @@ return [
         'success'               => 'Vaš fajl je importovan',
         'file_delete_success'   => 'Vaš je fajl uspešno izbrisan',
         'file_delete_error'      => 'Fajl nime moguće izbrisati',
+        'header_row_has_malformed_characters' => 'Jedan ili više atributa u redu zaglavlja sadrži loše formatirane UTF-8 karaktere',
+        'content_row_has_malformed_characters' => 'Jedan ili više atributa u prvom redu sadržaja sadrži loše formatirane UTF-8 karaktere',
     ],
 
 

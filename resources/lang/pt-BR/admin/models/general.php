@@ -6,7 +6,7 @@ return array(
     'deleted'  					        => 'Este modelo foi excluído.',
     'bulk_delete'               => 'Bulk deletar modelos de ativos',
     'bulk_delete_help'               => 'Use a caixa abaixo para confirmar a exlusão dos modelos de ativos selecionados. Modelos de ativos que tem ativos associados a eles não podem ser deletados a não ser que esses ativos sejam associados a um modelo diferente.',
-    'bulk_delete_warn'          => 'Você está prestes a exluir :model_count asset models.',
+    'bulk_delete_warn'          => 'Você está prestes a excluir um modelo de ativo.|Você está prestes a excluir :model_count modelos de ativos.',
     'restore'                   => 'Restaurar Modelo',
     'requestable'               => 'Usuários podem solicitar este modelo',
 	'show_mac_address'			      => 'Exibir o campo de endereço MAC nos ativos neste modelo',

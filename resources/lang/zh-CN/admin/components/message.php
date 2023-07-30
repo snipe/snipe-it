@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> '借出组件失败，请重试。',
         'success' 		=> '借出组件成功。',
-        'user_does_not_exist' => '无效用户，请重试。'
+        'user_does_not_exist' => '无效用户，请重试。',
+        'unavailable'      => '还没有足够的组件: :remaining 件剩余, :requested 件需求 ',
     ),
 
     'checkin' => array(

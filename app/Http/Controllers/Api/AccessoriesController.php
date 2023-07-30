@@ -26,7 +26,10 @@ class AccessoriesController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('view', Accessory::class);
+        if ($request->user()->cannot('reports.view')) {
+            $this->authorize('view', Accessory::class);
+        }
+
 
         // This array is what determines which fields should be allowed to be sorted on ON the table itself, no relations
         // Relations will be handled in query scopes a little further down.
@@ -41,10 +44,13 @@ class AccessoriesController extends Controller
                 'min_amt',
                 'company_id',
                 'notes',
+                'users_count',
+                'qty',
             ];
 
 
-        $accessories = Accessory::select('accessories.*')->with('category', 'company', 'manufacturer', 'users', 'location', 'supplier');
+        $accessories = Accessory::select('accessories.*')->with('category', 'company', 'manufacturer', 'users', 'location', 'supplier')
+                                ->withCount('users as users_count');
 
         if ($request->filled('search')) {
             $accessories = $accessories->TextSearch($request->input('search'));
@@ -74,12 +80,9 @@ class AccessoriesController extends Controller
             $accessories->where('notes','=',$request->input('notes'));
         }
 
-        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
-        // case we override with the actual count, so we should return 0 items.
-        $offset = (($accessories) && ($request->get('offset') > $accessories->count())) ? $accessories->count() : $request->get('offset', 0);
-
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $accessories->count()) ? $accessories->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort_override =  $request->input('sort');
@@ -147,7 +150,7 @@ class AccessoriesController extends Controller
     public function show($id)
     {
         $this->authorize('view', Accessory::class);
-        $accessory = Accessory::findOrFail($id);
+        $accessory = Accessory::withCount('users as users_count')->findOrFail($id);
 
         return (new AccessoriesTransformer)->transformAccessory($accessory);
     }

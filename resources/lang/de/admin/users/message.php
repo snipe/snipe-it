@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Sie haben diesen Gegenstand abgelehnt.',
     'bulk_manager_warn'	        => 'Benutzer erfolgreich geändert. Vorgesetzter sollte auch bearbeitet werden und konnte nicht angepasst werden, weil er sich nicht selbst als Vorgesetzter eingetragen haben kann. Bitte Benutzer ohne den Vorgesetzten nochmal bearbeiten.',
     'user_exists'               => 'Benutzer existiert bereits!',
-    'user_not_found'            => 'Benutzer [:id] existiert nicht.',
+    'user_not_found'            => 'Benutzer existiert nicht.',
     'user_login_required'       => 'Das Loginfeld ist erforderlich',
     'user_password_required'    => 'Das Passswortfeld ist erforderlich.',
     'insufficient_permissions'  => 'Unzureichende Berechtigungen.',
@@ -62,6 +62,6 @@ return array(
 
     'inventorynotification' => array(
         'error'   => 'Für diesen Benutzer ist keine E-Mail-Adresse hinterlegt.',
-        'success' => 'The user has been notified about their current inventory.'
+        'success' => 'Der Benutzer wurde über sein aktuelles Inventar informiert.'
     )
 );

@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Questo bene è stato eliminato.',
     'edit'  					=> 'Modifica Asset',
     'model_deleted'  			=> 'Questo modello di asset è stato eliminato. Devi ripristinare il modello prima di poter ripristinare il bene.',
+    'model_invalid'             => 'Il modello di questo bene non è valido.',
+    'model_invalid_fix'         => 'Il bene deve essere modificato per correggerlo prima di farne il check in o il check out.',
     'requestable'               => 'Disponibile',
     'requested'				    => 'richiesto',
     'not_requestable'           => 'Non Richiedibili',
@@ -21,6 +23,7 @@ return [
     'restore'  					=> 'Ripristina Asset',
     'pending'  					=> 'In attesa',
     'undeployable'  			=> 'Non Distribuilbile',
+    'undeployable_tooltip'  	=> 'Questo bene ha una etichetta che lo rende non distribuibile, il check-out non può avvenire.',
     'view'  					=> 'Vedi Asset',
     'csv_error' => 'C\'è un errore nel file CSV:',
     'import_text' => '
@@ -40,5 +43,6 @@ return [
     'error_messages' => 'Messaggi di errore:',
     'success_messages' => 'Messaggi di successo:',
     'alert_details' => 'Leggere sotto per maggiori dettagli.',
-    'custom_export' => 'Esportazione Personalizzata'
+    'custom_export' => 'Esportazione Personalizzata',
+    'mfg_warranty_lookup' => ':manufacturer Cerca Stato Garanzia',
 ];

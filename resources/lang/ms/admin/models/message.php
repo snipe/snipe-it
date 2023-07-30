@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => 'Model tidak wujud.',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Model ini sekarang disekutukan dengan sekurang2nya satu atau lebih harta dan tidak boleh dihapuskan. Sila kemaskini harta, dan kemudian cuba lagi. ',
 
 
@@ -14,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Model gagal dikemaskin, sila cuba lagi',
-        'success' => 'Model berjaya dikemaskini.'
+        'success' => 'Model berjaya dikemaskini.',
     ),
 
     'delete' => array(
@@ -30,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Tiada medan berubah, jadi tiada apa yang dikemas kini.',
-        'success' 		=> 'Model dikemas kini.'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Tiada model dipilih, jadi tiada apa yang dipadamkan.',
-        'success' 		    => ':success_count model(s) dipadamkan!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ':success_count model(s) telah dipadamkan, namun :fail_count tidak dapat dipadamkan kerana mereka masih mempunyai aset yang dikaitkan dengannya.'
     ),
 

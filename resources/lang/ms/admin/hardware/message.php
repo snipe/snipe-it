@@ -22,6 +22,8 @@ return [
     'restore' => [
         'error'   		=> 'Aset tidak dipulihkan, sila cuba lagi',
         'success' 		=> 'Aset dipulihkan dengan jayanya.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
@@ -48,6 +50,8 @@ return [
         'success'               => 'Fail anda telah diimport',
         'file_delete_success'   => 'Fail anda telah berjaya dihapuskan',
         'file_delete_error'      => 'Fail tidak dapat dipadamkan',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
 
 

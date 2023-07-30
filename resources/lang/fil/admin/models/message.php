@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => 'Ang modelo ay hindi umiiral.',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Ang modelong ito ay kasalukuyang nai-ugnay sa isa o higit pang mga asset at hindi maaaring mai-delete. Paki-delete ng mga model na ito, at pagkatapos subukang i-delete muli. ',
 
 
@@ -14,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Ang modelo ay hindi nai-update, mangyaring subukang muli',
-        'success' => 'Ang modelo ay matagumpay na nai-update.'
+        'success' => 'Ang modelo ay matagumpay na nai-update.',
     ),
 
     'delete' => array(
@@ -30,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Walang nabagong mga field, kaya walang nai-update.',
-        'success' 		=> 'Ang mga modelo ay naiupdate na.'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Walang napiling mga model, kaya walang nai-delete.',
-        'success' 		    => ':success_count model(s) na-delete na!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ':success_count ang mga modelo ay na-delete na, gayunpaman ::success_count ang mga modelo ay hindi mai-delete dahil sa mayron pa silang asset na naiuugnay sa kanila.'
     ),
 

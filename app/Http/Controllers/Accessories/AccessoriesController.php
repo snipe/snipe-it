@@ -63,6 +63,7 @@ class AccessoriesController extends Controller
     public function store(ImageUploadRequest $request)
     {
         $this->authorize(Accessory::class);
+        
         // create a new model instance
         $accessory = new Accessory();
 
@@ -76,12 +77,11 @@ class AccessoriesController extends Controller
         $accessory->manufacturer_id         = request('manufacturer_id');
         $accessory->model_number            = request('model_number');
         $accessory->purchase_date           = request('purchase_date');
-        $accessory->purchase_cost           = Helper::ParseCurrency(request('purchase_cost'));
+        $accessory->purchase_cost           = request('purchase_cost');
         $accessory->qty                     = request('qty');
         $accessory->user_id                 = Auth::user()->id;
         $accessory->supplier_id             = request('supplier_id');
         $accessory->notes                   = request('notes');
-
 
         $accessory = $request->handleImages($accessory);
 
@@ -115,6 +115,33 @@ class AccessoriesController extends Controller
 
     }
 
+    /**
+     * Returns a view that presents a form to clone an accessory.
+     *
+     * @author [J. Vinsmoke]
+     * @param int $accessoryId
+     * @since [v6.0]
+     * @return View
+     */
+    public function getClone($accessoryId = null)
+    {
+
+        $this->authorize('create', Accesory::class);
+
+        // Check if the asset exists
+        if (is_null($accessory_to_clone = Accessory::find($accessoryId))) {
+            // Redirect to the asset management page
+            return redirect()->route('accessory.index')->with('error', trans('admin/accessories/message.does_not_exist'));
+        }
+
+        $accessory = clone $accessory_to_clone;
+        $accessory->id = null;
+        $accessory->location_id = null;
+
+        return view('accessories/edit')
+            ->with('item', $accessory);
+        
+    }
 
     /**
      * Save edited Accessory from form post
@@ -127,43 +154,45 @@ class AccessoriesController extends Controller
      */
     public function update(ImageUploadRequest $request, $accessoryId = null)
     {
-        if (is_null($accessory = Accessory::find($accessoryId))) {
+        if ($accessory = Accessory::withCount('users as users_count')->find($accessoryId)) {
+
+            $this->authorize($accessory);
+
+            $validator = Validator::make($request->all(), [
+                "qty" => "required|numeric|min:$accessory->users_count"
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+
+
+
+            // Update the accessory data
+            $accessory->name = request('name');
+            $accessory->location_id = request('location_id');
+            $accessory->min_amt = request('min_amt');
+            $accessory->category_id = request('category_id');
+            $accessory->company_id = Company::getIdForCurrentUser(request('company_id'));
+            $accessory->manufacturer_id = request('manufacturer_id');
+            $accessory->order_number = request('order_number');
+            $accessory->model_number = request('model_number');
+            $accessory->purchase_date = request('purchase_date');
+            $accessory->purchase_cost = request('purchase_cost');
+            $accessory->qty = request('qty');
+            $accessory->supplier_id = request('supplier_id');
+            $accessory->notes = request('notes');
+
+            $accessory = $request->handleImages($accessory);
+
+            // Was the accessory updated?
+            if ($accessory->save()) {
+                return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.update.success'));
+            }
+        } else {
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
-        }
-
-        $min = $accessory->numCheckedOut();
-        $validator = Validator::make($request->all(), [
-            "qty" => "required|numeric|min:$min"
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        $this->authorize($accessory);
-
-        // Update the accessory data
-        $accessory->name                    = request('name');
-        $accessory->location_id             = request('location_id');
-        $accessory->min_amt                 = request('min_amt');
-        $accessory->category_id             = request('category_id');
-        $accessory->company_id              = Company::getIdForCurrentUser(request('company_id'));
-        $accessory->manufacturer_id         = request('manufacturer_id');
-        $accessory->order_number            = request('order_number');
-        $accessory->model_number            = request('model_number');
-        $accessory->purchase_date           = request('purchase_date');
-        $accessory->purchase_cost           = Helper::ParseCurrency(request('purchase_cost'));
-        $accessory->qty                     = request('qty');
-        $accessory->supplier_id             = request('supplier_id');
-        $accessory->notes                   = request('notes');
-
-        $accessory = $request->handleImages($accessory);
-
-        // Was the accessory updated?
-        if ($accessory->save()) {
-            return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.update.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($accessory->getErrors());
@@ -217,7 +246,7 @@ class AccessoriesController extends Controller
      */
     public function show($accessoryID = null)
     {
-        $accessory = Accessory::find($accessoryID);
+        $accessory = Accessory::withCount('users as users_count')->find($accessoryID);
         $this->authorize('view', $accessory);
         if (isset($accessory->id)) {
             return view('accessories/view', compact('accessory'));

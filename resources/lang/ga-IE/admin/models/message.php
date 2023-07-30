@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => 'Níl múnla ann.',
+    'no_association' => 'NO MODEL ASSOCIATED.',
+    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
     'assoc_users'	 => 'Tá an tsamhail seo bainteach le sócmhainní amháin nó níos mó faoi láthair agus ní féidir é a scriosadh. Scrios na sócmhainní, agus ansin déan iarracht a scriosadh arís.',
 
 
@@ -14,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Níor nuashonraíodh an tsamhail, déan iarracht arís',
-        'success' => 'Modúl nuashonraithe go rathúil'
+        'success' => 'Modúl nuashonraithe go rathúil',
     ),
 
     'delete' => array(
@@ -30,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Níor athraíodh aon réimsí, mar sin níor nuashonraíodh aon rud.',
-        'success' 		=> 'Modhanna nuashonraithe.'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'No models were selected, so nothing was deleted.',
-        'success' 		    => ':success_count model(s) deleted!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ':success_count model(s) were deleted, however :fail_count were unable to be deleted because they still have assets associated with them.'
     ),
 

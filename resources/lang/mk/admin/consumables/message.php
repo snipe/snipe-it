@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Потрошниот материјал не е задолжен, обидете се повторно',
         'success' 		=> 'Потрошниот материјал е успешно задолжен.',
-        'user_does_not_exist' => 'Тој корисник е неважечки. Обидете се повторно.'
+        'user_does_not_exist' => 'Тој корисник е неважечки. Обидете се повторно.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

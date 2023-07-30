@@ -22,6 +22,8 @@ return [
     'restore' => [
         'error'   		=> 'சொத்து மீட்டமைக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்',
         'success' 		=> 'சொத்து வெற்றிகரமாக மீட்டமைக்கப்பட்டது.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
@@ -48,6 +50,8 @@ return [
         'success'               => 'உங்கள் கோப்பு இறக்குமதி செய்யப்பட்டது',
         'file_delete_success'   => 'உங்கள் கோப்பு வெற்றிகரமாக நீக்கப்பட்டது',
         'file_delete_error'      => 'கோப்பை நீக்க முடியவில்லை',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
 
 

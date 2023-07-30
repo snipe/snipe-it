@@ -4,7 +4,7 @@ namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
 use App\Models\AssetModel;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
 
@@ -63,7 +63,7 @@ class AssetModelsTransformer
             'default_fieldset_values' => $default_field_values,
             'eol' => ($assetmodel->eol > 0) ? $assetmodel->eol.' months' : 'None',
             'requestable' => ($assetmodel->requestable == '1') ? true : false,
-            'notes' => e($assetmodel->notes),
+            'notes' => Helper::parseEscapedMarkedownInline($assetmodel->notes),
             'created_at' => Helper::getFormattedDateObject($assetmodel->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($assetmodel->updated_at, 'datetime'),
             'deleted_at' => Helper::getFormattedDateObject($assetmodel->deleted_at, 'datetime'),

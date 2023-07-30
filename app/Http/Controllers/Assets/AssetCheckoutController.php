@@ -27,7 +27,7 @@ class AssetCheckoutController extends Controller
     public function create($assetId)
     {
         // Check if the asset exists
-        if (is_null($asset = Asset::find(e($assetId)))) {
+        if (is_null($asset = Asset::with('company')->find(e($assetId)))) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
 

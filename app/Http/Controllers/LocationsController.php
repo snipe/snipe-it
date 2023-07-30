@@ -79,6 +79,8 @@ class LocationsController extends Controller
         $location->ldap_ou = $request->input('ldap_ou');
         $location->manager_id = $request->input('manager_id');
         $location->user_id = Auth::id();
+        $location->phone = request('phone');
+        $location->fax = request('fax');
 
         $location = $request->handleImages($location);
 
@@ -139,6 +141,8 @@ class LocationsController extends Controller
         $location->state = $request->input('state');
         $location->country = $request->input('country');
         $location->zip = $request->input('zip');
+        $location->phone = request('phone');
+        $location->fax = request('fax');
         $location->ldap_ou = $request->input('ldap_ou');
         $location->manager_id = $request->input('manager_id');
 
@@ -226,6 +230,36 @@ class LocationsController extends Controller
 
 
     }
+
+
+    /**
+     * Returns a view that presents a form to clone a location.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $locationId
+     * @since [v6.0.14]
+     * @return View
+     */
+    public function getClone($locationId = null)
+    {
+        $this->authorize('create', Location::class);
+
+        // Check if the asset exists
+        if (is_null($location_to_clone = Location::find($locationId))) {
+            // Redirect to the asset management page
+            return redirect()->route('licenses.index')->with('error', trans('admin/locations/message.does_not_exist'));
+        }
+
+        $location = clone $location_to_clone;
+
+        // unset these values
+        $location->id = null;
+        $location->image = null;
+
+        return view('locations/edit')
+            ->with('item', $location);
+    }
+
 
     public function print_all_assigned($id)
     {

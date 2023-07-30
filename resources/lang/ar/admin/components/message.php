@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'لم تتم عملية اخراج المكون، الرجاء المحاولة مرة اخرى',
         'success' 		=> 'تم إخراج المكون بنجاح.',
-        'user_does_not_exist' => 'هذا المستخدم خاطئ، الرجاء المحاولة مرة أخرى.'
+        'user_does_not_exist' => 'هذا المستخدم خاطئ، الرجاء المحاولة مرة أخرى.',
+        'unavailable'      => 'لا توجد عناصر كافية remaining: :remaining متبقية، :requested مطلوبة ',
     ),
 
     'checkin' => array(

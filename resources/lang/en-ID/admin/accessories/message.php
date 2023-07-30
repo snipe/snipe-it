@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'The accessory [:id] does not exist.',
+    'does_not_exist' => 'Aksesori itu tidak ada.',
     'assoc_users'	 => 'Aksesori saat ini memiliki :count item untuk pengguna. Silahkan cek di aksesoris dan dan coba lagi. ',
 
     'create' => array(
@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Aksesori belum diperiksa, silakan coba lagi',
         'success' 		=> 'Aksesori berhasil diperiksa.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Pengguna yang tidak valid. Silakan coba lagi.'
     ),
 

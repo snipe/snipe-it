@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Materiał eksploatacyjny nie został wydany, spróbuj ponownie',
         'success' 		=> 'Materiał eksploatacyjny został wydany pomyślnie.',
-        'user_does_not_exist' => 'Użytkownik nie istnieje. Spróbuj ponownie.'
+        'user_does_not_exist' => 'Użytkownik nie istnieje. Spróbuj ponownie.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

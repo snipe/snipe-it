@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Você recusou com sucesso esse ativo.',
     'bulk_manager_warn'	        => 'Os usuários foram atualizados com êxito, no entanto seu Gerenciador de entrada não foi salvo porque o gerente selecionado estava também na lista de usuários a ser editado e usuários podem não ser seu próprio gerente. Por favor, selecione os usuários novamente, excluindo o gerente.',
     'user_exists'               => 'O usuário já existe!',
-    'user_not_found'            => 'O usuário [:id] não existe.',
+    'user_not_found'            => 'O usuário não existe.',
     'user_login_required'       => 'O campo de login é requerido',
     'user_password_required'    => 'A senha é requerida.',
     'insufficient_permissions'  => 'Permissões Insuficientes.',
@@ -15,7 +15,7 @@ return array(
     'password_resets_sent'      => 'Os usuários selecionados que são ativados e têm um endereço de e-mail válido receberam um link de redefinição de senha.',
     'password_reset_sent'       => 'Um link de redefinição de senha foi enviado para :email!',
     'user_has_no_email'         => 'Esse usuário não tem um endereço de e-mail no seu perfil.',
-    'user_has_no_assets_assigned'   => 'This user does not have any assets assigned',
+    'user_has_no_assets_assigned'   => 'Este usuário não tem nenhum ativo atribuído',
 
 
     'success' => array(
@@ -61,7 +61,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'This user has no email set.',
-        'success' => 'The user has been notified about their current inventory.'
+        'error'   => 'Este usuário não tem e-mail definido.',
+        'success' => 'O usuário foi notificado sobre seu inventário atual.'
     )
 );

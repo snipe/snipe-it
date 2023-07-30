@@ -8,6 +8,7 @@ return [
     'change' 		=> 'In/Out',
     'checkout_date' => 'Data przypisania',
     'checkoutto' 	=> 'Data wypisania',
+    'components_cost' => 'Całkowity koszt składników',
     'current_value' => 'Aktualna Wartość',
     'diff' 			=> 'Różnica',
     'dl_csv' 		=> 'Pobierz CSV',

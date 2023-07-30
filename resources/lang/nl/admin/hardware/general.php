@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'about_assets_title'           => 'Over assets',
+    'about_assets_title'           => 'Over activa',
     'about_assets_text'            => 'Assets zijn items die worden bijgehouden op serienummer of een tag van het product. Het zijn meestal items met een hogere waarde waarbij het identificeren van een specifiek item belangrijk is.',
     'archived'  				=> 'Gearchiveerd',
     'asset'  					=> 'Asset',
-    'bulk_checkout'             => 'Asset uitchecken',
-    'bulk_checkin'              => 'Assets inchecken',
+    'bulk_checkout'             => 'Activa uitgeven',
+    'bulk_checkin'              => 'Activa innemen',
     'checkin'  					=> 'Asset inchecken',
     'checkout'  				=> 'Asset uitchecken',
     'clone'  					=> 'Dupliceer Asset',
@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Deze asset is verwijderd.',
     'edit'  					=> 'Asset bewerken',
     'model_deleted'  			=> 'Dit Assets model is verwijderd. U moet het model herstellen voordat u het Asset kunt herstellen.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Aanvraagbaar',
     'requested'				    => 'Aangevraagd',
     'not_requestable'           => 'Niet aanvraagbaar',
@@ -21,6 +23,7 @@ return [
     'restore'  					=> 'Herstel Asset',
     'pending'  					=> 'In behandeling',
     'undeployable'  			=> 'Niet uitgeefbaar',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Bekijk Asset',
     'csv_error' => 'Je hebt een fout in je CSV-bestand:',
     'import_text' => '
@@ -40,5 +43,6 @@ return [
     'error_messages' => 'Foutmeldingen:',
     'success_messages' => 'Succesvolle berichten:',
     'alert_details' => 'Zie hieronder voor details.',
-    'custom_export' => 'Aangepaste export'
+    'custom_export' => 'Aangepaste export',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];

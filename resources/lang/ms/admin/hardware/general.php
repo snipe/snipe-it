@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Aset ini telah dipadamkan.',
     'edit'  					=> 'Kemaskini Harta',
     'model_deleted'  			=> 'Model Aset ini telah dipadamkan. Anda mesti kembalikan model sebelum anda boleh kembalikan Aset.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Diminta',
     'requested'				    => 'Diminta',
     'not_requestable'           => 'Not Requestable',
@@ -21,6 +23,7 @@ return [
     'restore'  					=> 'Pulihkan Asset',
     'pending'  					=> 'Menunggu',
     'undeployable'  			=> 'Tidak dapat dipisahkan',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Papar Harta',
     'csv_error' => 'You have an error in your CSV file:',
     'import_text' => '
@@ -40,5 +43,6 @@ return [
     'error_messages' => 'Error messages:',
     'success_messages' => 'Success messages:',
     'alert_details' => 'Please see below for details.',
-    'custom_export' => 'Custom Export'
+    'custom_export' => 'Custom Export',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];

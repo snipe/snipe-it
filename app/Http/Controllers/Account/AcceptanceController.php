@@ -121,7 +121,6 @@ class AcceptanceController extends Controller
         $pdf_filename = 'accepted-eula-'.date('Y-m-d-h-i-s').'.pdf';
         $sig_filename='';
 
-
         if ($request->input('asset_acceptance') == 'accepted') {
 
             /**
@@ -153,12 +152,14 @@ class AcceptanceController extends Controller
                 }
             }
 
-
             // this is horrible
             switch($acceptance->checkoutable_type){
                 case 'App\Models\Asset':
                         $pdf_view_route ='account.accept.accept-asset-eula';
                         $asset_model = AssetModel::find($item->model_id);
+                        if (!$asset_model) {
+                            return redirect()->back()->with('error', trans('admin/models/message.does_not_exist'));
+                        }
                         $display_model = $asset_model->name;
                         $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
                 break;
@@ -167,7 +168,7 @@ class AcceptanceController extends Controller
                         $pdf_view_route ='account.accept.accept-accessory-eula';
                         $accessory = Accessory::find($item->id);
                         $display_model = $accessory->name;
-                        $assigned_to = User::find($item->assignedTo);
+                        $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
                 break;
 
                 case 'App\Models\LicenseSeat':
@@ -222,8 +223,8 @@ class AcceptanceController extends Controller
                 'item_model' => $display_model,
                 'item_serial' => $item->serial,
                 'eula' => $item->getEula(),
-                'check_out_date' => Carbon::parse($acceptance->created_at)->format($branding_settings->date_display_format),
-                'accepted_date' => Carbon::parse($acceptance->accepted_at)->format($branding_settings->date_display_format),
+                'check_out_date' => Carbon::parse($acceptance->created_at)->format('Y-m-d'),
+                'accepted_date' => Carbon::parse($acceptance->accepted_at)->format('Y-m-d'),
                 'assigned_to' => $assigned_to,
                 'company_name' => $branding_settings->site_name,
                 'signature' => ($sig_filename) ? storage_path() . '/private_uploads/signatures/' . $sig_filename : null,
@@ -250,11 +251,15 @@ class AcceptanceController extends Controller
             // This is the most horriblest
             switch($acceptance->checkoutable_type){
                 case 'App\Models\Asset':
+                    $asset_model = AssetModel::find($item->model_id);
+                    $display_model = $asset_model->name;
                     $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
                     break;
 
                 case 'App\Models\Accessory':
-                    $assigned_to = User::find($item->assignedTo);
+                    $accessory = Accessory::find($item->id);
+                    $display_model = $accessory->name;
+                    $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
                     break;
 
                 case 'App\Models\LicenseSeat':
@@ -266,6 +271,8 @@ class AcceptanceController extends Controller
                     break;
 
                 case 'App\Models\Consumable':
+                    $consumable = Consumable::find($item->id);
+                    $display_model = $consumable->name;
                     $assigned_to = User::find($acceptance->assigned_to_id)->present()->fullName;
                     break;
             }
@@ -273,7 +280,7 @@ class AcceptanceController extends Controller
                 'item_tag' => $item->asset_tag,
                 'item_model' => $display_model,
                 'item_serial' => $item->serial,
-                'declined_date' => Carbon::parse($acceptance->accepted_at)->format($branding_settings->date_display_format),
+                'declined_date' => Carbon::parse($acceptance->declined_at)->format('Y-m-d'),
                 'assigned_to' => $assigned_to,
                 'company_name' => $branding_settings->site_name,
                 'date_settings' => $branding_settings->date_display_format,

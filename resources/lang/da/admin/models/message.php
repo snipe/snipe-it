@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => 'Model findes ikke.',
+    'no_association' => 'INGEN MODEL TILKNYTTET.',
+    'no_association_fix' => 'Dette vil ødelægge ting på underlige og forfærdelige måder. Rediger dette aktiv nu for at tildele det en model.',
     'assoc_users'	 => 'Denne model er knyttet til en eller flere aktiver og ikke kan slettes. Slet venligst aktiver, og prøv derefter at slette igen. ',
 
 
@@ -14,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Modellen blev ikke opdateret, prøv igen',
-        'success' => 'Model opdateret.'
+        'success' => 'Model opdateret.',
     ),
 
     'delete' => array(
@@ -30,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Ingen felter blev ændret, så intet er blevet opdateret.',
-        'success' 		=> 'Modeller opdateret.'
+        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
+        'warn'          => 'You are about to update the properies of the following model: |You are about to edit the properties of the following :model_count models:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Ingen modeller blev valgt, så intet blev slettet.',
-        'success' 		    => ':success_count model(ler) slettet!',
+        'success' 		    => 'Model deleted!|:success_count models deleted!',
         'success_partial' 	=> ':success_count model(ler) blev slettet; men :fail_count kunne ikke slettes fordi de stadig har aktiver knyttet til sig.'
     ),
 

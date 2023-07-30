@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'This asset has been deleted.',
     'edit'  					=> 'Edit Asset',
     'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Requestable',
     'requested'				    => 'Requested',
     'not_requestable'           => 'Not Requestable',
@@ -21,6 +23,7 @@ return [
     'restore'  					=> 'Restore Asset',
     'pending'  					=> 'Pending',
     'undeployable'  			=> 'Undeployable',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'View Asset',
     'csv_error' => 'You have an error in your CSV file:',
     'import_text' => '
@@ -40,5 +43,6 @@ return [
     'error_messages' => 'Error messages:',
     'success_messages' => 'Success messages:',
     'alert_details' => 'Please see below for details.',
-    'custom_export' => 'Custom Export'
+    'custom_export' => 'Custom Export',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];

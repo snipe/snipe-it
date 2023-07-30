@@ -6,11 +6,11 @@ return [
     'asset_depreciations'  					=> 'Amortizaciones',
     'create'  					            => 'Crear Amortización',
     'depreciation_name'  					=> 'Nombre Amortización',
-    'depreciation_min'                      => 'Valor mínimo de amortización',
+    'depreciation_min'                      => 'Valor mínimo de depreciación',
     'number_of_months'  					=> 'Meses',
     'update'  					            => 'Actualizar Amortización',
     'depreciation_min'                      => 'Valor mínimo después de depreciado',
     'no_depreciations_warning'               => '<strong>Advertencia: </strong>
-                      No tiene ninguna amortización configurada.
-                      Por favor, configure al menos una amortización para ver el informe de amortizaciones.',
+                      No tiene ninguna depreciación configurada.
+                      Por favor, configure al menos una depreciación para ver el informe de depreciación.',
 ];

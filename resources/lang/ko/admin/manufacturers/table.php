@@ -10,6 +10,7 @@ return array(
     'support_email'   		=> '지원 이메일',
     'support_phone'   		=> '지원 전화',
     'support_url'   		=> '지원 URL',
+    'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> '제조업체 갱신',
     'url'   				=> 'URL',
 

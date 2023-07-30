@@ -17,6 +17,8 @@ return [
     'edit'  					=> 'ویرایش دارایی',
     'model_deleted'  			=> 'این مدل دارایی حذف شده است. قبل از اینکه بتوانید Asset را بازیابی کنید، باید مدل را بازیابی کنید.
 ',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'در خواست شد',
     'requested'				    => 'درخواست شده',
     'not_requestable'           => 'غیر قابل درخواست
@@ -26,6 +28,7 @@ return [
     'restore'  					=> 'بازیابی دارایی',
     'pending'  					=> 'در انتظار',
     'undeployable'  			=> 'غیرقابل گسترش',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'نمایش دارایی ها
 ',
     'csv_error' => 'شما یک خطا در فایل CSV خود دارید:
@@ -53,5 +56,6 @@ return [
     'alert_details' => 'لطفا برای جزئیات زیر را ببینید.
 ',
     'custom_export' => 'صادرات سفارشی
-'
+',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];

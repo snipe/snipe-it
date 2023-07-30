@@ -13,7 +13,7 @@
 
                 $.ajax({
                     type: 'GET',
-                    url: '{{ url('/') }}/api/v1/users/' + userid + '/assets',
+                    url: '{{ config('app.url') }}/api/v1/users/' + userid + '/assets',
                     headers: {
                         "X-Requested-With": 'XMLHttpRequest',
                         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
@@ -45,7 +45,7 @@
                                 } else {
                                     table_html += "<td></td> ";
                                 }
-                                table_html += '<td><a href="{{ url('/') }}/hardware/' + asset.id + '">';
+                                table_html += '<td><a href="{{ config('app.url') }}/hardware/' + asset.id + '">';
 
                                 if ((asset.name == '') && (asset.name != null)) {
                                     table_html += " " + asset.model.name;
@@ -60,7 +60,7 @@
                                 table_html += "</tr>";
                             }
                         } else {
-                            table_html += '<tr><td colspan="4">No assets checked out to '+ $('.js-data-user-ajax').find('option:selected').text() + ' yet!</td></tr>';
+                            table_html += '<tr><td colspan="4">{{ trans('admin/users/message.user_has_no_assets_assigned') }}</td></tr>';
                         }
                         $('#current_assets_content').html(table_html + '</tbody></table></div></div>');
 

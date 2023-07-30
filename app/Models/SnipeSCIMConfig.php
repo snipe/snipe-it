@@ -12,94 +12,9 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
 {
     public function getUserConfig()
     {
-        $config = parent::getUserConfig();
-
         // Much of this is copied verbatim from the library, then adjusted for our needs
-        $config['class'] = SCIMUser::class;
 
-        unset($config['mapping']['example:name:space']);
-
-        $config['map_unmapped'] = false; // anything we don't explicitly map will _not_ show up.
-
-        $core_namespace = 'urn:ietf:params:scim:schemas:core:2.0:User';
-        $core = $core_namespace.':'; 
-        $mappings =& $config['mapping'][$core_namespace]; //grab this entire key, we don't want to be repeating ourselves
-
-        //username - *REQUIRED*
-        $config['validations'][$core.'userName'] = 'required';
-        $mappings['userName'] = AttributeMapping::eloquent('username');
-
-        //human name - *FIRST NAME REQUIRED*
-        $config['validations'][$core.'name.givenName'] = 'required';
-        $config['validations'][$core.'name.familyName'] = 'string'; //not required
-
-        $mappings['name']['familyName'] = AttributeMapping::eloquent("last_name");
-        $mappings['name']['givenName'] = AttributeMapping::eloquent("first_name");
-        $mappings['name']['formatted'] = (new AttributeMapping())->ignoreWrite()->setRead(
-            function (&$object) {
-                return $object->getFullNameAttribute();
-            } 
-        );
-
-        // externalId support
-        $config['validations'][$core.'externalId'] = 'string|nullable'; // not required, but supported mostly just for Okta
-        // note that the mapping is *not* namespaced like the other $mappings
-        $config['mapping']['externalId'] = AttributeMapping::eloquent('scim_externalid');
-
-        $config['validations'][$core.'emails'] = 'nullable|array';         // emails are not required in Snipe-IT...
-        $config['validations'][$core.'emails.*.value'] = 'email'; // ...(had to remove the recommended 'required' here)
-
-        $mappings['emails'] = [[
-            "value" => AttributeMapping::eloquent("email"),
-            "display" => null,
-            "type" => AttributeMapping::constant("work")->ignoreWrite(),
-            "primary" => AttributeMapping::constant(true)->ignoreWrite()
-        ]];
-
-        //active
-        $config['validations'][$core.'active'] = 'boolean';
-
-        $mappings['active'] = AttributeMapping::eloquent('activated');
-
-        //phone
-        $config['validations'][$core.'phoneNumbers'] = 'nullable|array';
-        $config['validations'][$core.'phoneNumbers.*.value'] = 'string'; // another one where want to say 'we don't _need_ a phone number, but if you have one it better have a value.
-
-        $mappings['phoneNumbers'] = [[
-            "value" => AttributeMapping::eloquent("phone"),
-            "display" => null,
-            "type" => AttributeMapping::constant("work")->ignoreWrite(),
-            "primary" => AttributeMapping::constant(true)->ignoreWrite()
-        ]];
-
-        //address
-        $config['validations'][$core.'addresses'] = 'nullable|array';
-        $config['validations'][$core.'addresses.*.streetAddress'] = 'string';
-        $config['validations'][$core.'addresses.*.locality'] = 'string';
-        $config['validations'][$core.'addresses.*.region'] = 'nullable|string';
-        $config['validations'][$core.'addresses.*.postalCode'] = 'nullable|string';
-        $config['validations'][$core.'addresses.*.country'] = 'string';
-
-        $mappings['addresses'] = [[
-            'type' => AttributeMapping::constant("work")->ignoreWrite(),
-            'formatted' => AttributeMapping::constant("n/a")->ignoreWrite(), // TODO - is this right? This doesn't look right.
-            'streetAddress' => AttributeMapping::eloquent("address"),
-            'locality' => AttributeMapping::eloquent("city"),
-            'region' => AttributeMapping::eloquent("state"),
-            'postalCode' => AttributeMapping::eloquent("zip"),
-            'country' => AttributeMapping::eloquent("country"),
-            'primary' => AttributeMapping::constant(true)->ignoreWrite() //this isn't in the example?
-        ]];
-
-        //title
-        $config['validations'][$core.'title'] = 'string';
-        $mappings['title'] = AttributeMapping::eloquent('jobtitle');
-
-        //Preferred Language
-        $config['validations'][$core.'preferredLanguage'] = 'string';
-        $mappings['preferredLanguage'] = AttributeMapping::eloquent('locale');
-
-        /* 
+        /*
           more snipe-it attributes I'd like to check out (to map to 'enterprise' maybe?):
          - website
          - notes?
@@ -108,66 +23,216 @@ class SnipeSCIMConfig extends \ArieTimmerman\Laravel\SCIMServer\SCIMConfig
          - company_id to "organization?"
         */
 
-        $enterprise_namespace = 'urn:ietf:params:scim:schemas:extension:enterprise:2.0:User';
-        $ent = $enterprise_namespace.':';
 
-        // we remove the 'example' namespace and add the Enterprise one
-        $config['mapping']['schemas'] = AttributeMapping::constant( [$core_namespace, $enterprise_namespace] )->ignoreWrite();
+        $user_prefix = 'urn:ietf:params:scim:schemas:core:2.0:User:';
+        $enterprise_prefix = 'urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:';
 
-        $config['validations'][$ent.'employeeNumber'] = 'string';
-        $config['validations'][$ent.'department'] = 'string';
-        $config['validations'][$ent.'manager'] = 'nullable';
-        $config['validations'][$ent.'manager.value'] = 'string';
+        return [
 
-        $config['mapping'][$enterprise_namespace] = [
-            'employeeNumber' => AttributeMapping::eloquent('employee_num'),
-            'department' =>(new AttributeMapping())->setAdd( // FIXME parent?
-                function ($value, &$object) {
-                    $department = Department::where("name", $value)->first();
-                    if ($department) {
-                        $object->department_id = $department->id;
-                    }
-                }
-                )->setReplace(
-                    function ($value, &$object) {
-                        $department = Department::where("name", $value)->first();
-                        if ($department) {
-                            $object->department_id = $department->id;
-                        }
-                    }
-                )->setRead(
+            // Set to 'null' to make use of auth.providers.users.model (App\User::class)
+            'class' => SCIMUser::class,
+
+            'validations' => [
+                $user_prefix . 'userName' => 'required',
+                $user_prefix . 'name.givenName' => 'required',
+                $user_prefix . 'name.familyName' => 'nullable|string',
+                $user_prefix . 'externalId' => 'nullable|string',
+                $user_prefix . 'emails' => 'nullable|array',
+                $user_prefix . 'emails.*.value' => 'nullable|email',
+                $user_prefix . 'active' => 'boolean',
+                $user_prefix . 'phoneNumbers' => 'nullable|array',
+                $user_prefix . 'phoneNumbers.*.value' => 'nullable|string',
+                $user_prefix . 'addresses' => 'nullable|array',
+                $user_prefix . 'addresses.*.streetAddress' => 'nullable|string',
+                $user_prefix . 'addresses.*.locality' => 'nullable|string',
+                $user_prefix . 'addresses.*.region' => 'nullable|string',
+                $user_prefix . 'addresses.*.postalCode' => 'nullable|string',
+                $user_prefix . 'addresses.*.country' => 'nullable|string',
+                $user_prefix . 'title' => 'nullable|string',
+                $user_prefix . 'preferredLanguage' => 'nullable|string',
+
+                // Enterprise validations:
+                $enterprise_prefix . 'employeeNumber' => 'nullable|string',
+                $enterprise_prefix . 'department' => 'nullable|string',
+                $enterprise_prefix . 'manager' => 'nullable',
+                $enterprise_prefix . 'manager.value' => 'nullable|string'
+            ],
+
+            'singular' => 'User',
+            'schema' => [Schema::SCHEMA_USER],
+
+            //eager loading
+            'withRelations' => [],
+            'map_unmapped' => false,
+//            'unmapped_namespace' => 'urn:ietf:params:scim:schemas:laravel:unmapped',
+            'description' => 'User Account',
+
+            // Map a SCIM attribute to an attribute of the object.
+            'mapping' => [
+
+                'id' => (new AttributeMapping())->setRead(
                     function (&$object) {
-                        return $object->department ? $object->department->name : null;
-                    } 
-                ),
-            'manager' => [
-                // FIXME - manager writes are disabled. This kinda works but it leaks errors all over the place. Not cool.
-                // '$ref' => (new AttributeMapping())->ignoreWrite()->ignoreRead(),
-                // 'displayName' => (new AttributeMapping())->ignoreWrite()->ignoreRead(),
-                // NOTE: you could probably do a 'plain' Eloquent mapping here, but we don't for future-proofing
-                'value' => (new AttributeMapping())->setAdd(
-                    function ($value, &$object) {
-                        $manager = User::find($value);
-                        if ($manager) {
-                            $object->manager_id = $manager->id;
-                        }
+                        return (string)$object->id;
                     }
+                )->disableWrite(),
+
+                'externalId' => AttributeMapping::eloquent('scim_externalid'), // FIXME - I have a PR that changes a lot of this.
+
+                'meta' => [
+                    'created' => AttributeMapping::eloquent("created_at")->disableWrite(),
+                    'lastModified' => AttributeMapping::eloquent("updated_at")->disableWrite(),
+
+                    'location' => (new AttributeMapping())->setRead(
+                        function ($object) {
+                            return route(
+                                'scim.resource',
+                                [
+                                    'resourceType' => 'Users',
+                                    'resourceObject' => $object->id
+                                ]
+                            );
+                        }
+                    )->disableWrite(),
+
+                    'resourceType' => AttributeMapping::constant("User")
+                ],
+
+                'schemas' => AttributeMapping::constant(
+                    [
+                        'urn:ietf:params:scim:schemas:core:2.0:User',
+                        'urn:ietf:params:scim:schemas:extension:enterprise:2.0:User'
+                    ]
+                )->ignoreWrite(),
+
+                'urn:ietf:params:scim:schemas:core:2.0:User' => [
+
+                    'userName' => AttributeMapping::eloquent("username"),
+
+                    'name' => [
+                        'formatted' => (new AttributeMapping())->ignoreWrite()->setRead(
+                            function (&$object) {
+                                return $object->getFullNameAttribute();
+                            }
+                        ),
+                        'familyName' => AttributeMapping::eloquent("last_name"),
+                        'givenName' => AttributeMapping::eloquent("first_name"),
+                        'middleName' => null,
+                        'honorificPrefix' => null,
+                        'honorificSuffix' => null
+                    ],
+
+                    'displayName' => null,
+                    'nickName' => null,
+                    'profileUrl' => null,
+                    'title' => AttributeMapping::eloquent('jobtitle'),
+                    'userType' => null,
+                    'preferredLanguage' => AttributeMapping::eloquent('locale'), // Section 5.3.5 of [RFC7231]
+                    'locale' => null, // see RFC5646
+                    'timezone' => null, // see RFC6557
+                    'active' => AttributeMapping::eloquent('activated'),
+
+                    'password' => AttributeMapping::eloquent('password')->disableRead(),
+
+                    // Multi-Valued Attributes
+                    'emails' => [[
+                        "value" => AttributeMapping::eloquent("email"),
+                        "display" => null,
+                        "type" => AttributeMapping::constant("work")->ignoreWrite(),
+                        "primary" => AttributeMapping::constant(true)->ignoreWrite()
+                    ]],
+
+                    'phoneNumbers' => [[
+                        "value" => AttributeMapping::eloquent("phone"),
+                        "display" => null,
+                        "type" => AttributeMapping::constant("work")->ignoreWrite(),
+                        "primary" => AttributeMapping::constant(true)->ignoreWrite()
+                    ]],
+
+                    'ims' => [[
+                        "value" => null,
+                        "display" => null,
+                        "type" => null,
+                        "primary" => null
+                    ]], // Instant messaging addresses for the User
+
+                    'photos' => [[
+                        "value" => null,
+                        "display" => null,
+                        "type" => null,
+                        "primary" => null
+                    ]],
+
+                    'addresses' => [[
+                        'type' => AttributeMapping::constant("work")->ignoreWrite(),
+                        'formatted' => AttributeMapping::constant("n/a")->ignoreWrite(), // TODO - is this right? This doesn't look right.
+                        'streetAddress' => AttributeMapping::eloquent("address"),
+                        'locality' => AttributeMapping::eloquent("city"),
+                        'region' => AttributeMapping::eloquent("state"),
+                        'postalCode' => AttributeMapping::eloquent("zip"),
+                        'country' => AttributeMapping::eloquent("country"),
+                        'primary' => AttributeMapping::constant(true)->ignoreWrite() //this isn't in the example?
+                    ]],
+
+                    'groups' => [[
+                        'value' => null,
+                        '$ref' => null,
+                        'display' => null,
+                        'type' => null,
+                    ]],
+
+                    'entitlements' => null,
+                    'roles' => null,
+                    'x509Certificates' => null
+                ],
+
+                'urn:ietf:params:scim:schemas:extension:enterprise:2.0:User' => [
+                    'employeeNumber' => AttributeMapping::eloquent('employee_num'),
+                    'department' => (new AttributeMapping())->setAdd( // FIXME parent?
+                        function ($value, &$object) {
+                            $department = Department::where("name", $value)->first();
+                            if ($department) {
+                                $object->department_id = $department->id;
+                            }
+                        }
                     )->setReplace(
                         function ($value, &$object) {
-                            $manager = User::find($value);
-                            if ($manager) {
-                                $object->manager_id = $manager->id;
+                            $department = Department::where("name", $value)->first();
+                            if ($department) {
+                                $object->department_id = $department->id;
                             }
                         }
                     )->setRead(
                         function (&$object) {
-                            return $object->manager_id;
-                        } 
+                            return $object->department ? $object->department->name : null;
+                        }
                     ),
+                    'manager' => [
+                        // FIXME - manager writes are disabled. This kinda works but it leaks errors all over the place. Not cool.
+                        // '$ref' => (new AttributeMapping())->ignoreWrite()->ignoreRead(),
+                        // 'displayName' => (new AttributeMapping())->ignoreWrite()->ignoreRead(),
+                        // NOTE: you could probably do a 'plain' Eloquent mapping here, but we don't for future-proofing
+                        'value' => (new AttributeMapping())->setAdd(
+                            function ($value, &$object) {
+                                $manager = User::find($value);
+                                if ($manager) {
+                                    $object->manager_id = $manager->id;
+                                }
+                            }
+                        )->setReplace(
+                            function ($value, &$object) {
+                                $manager = User::find($value);
+                                if ($manager) {
+                                    $object->manager_id = $manager->id;
+                                }
+                            }
+                        )->setRead(
+                            function (&$object) {
+                                return $object->manager_id;
+                            }
+                        ),
+                    ]
+                ]
             ]
         ];
-
-        return $config;
     }
-
 }

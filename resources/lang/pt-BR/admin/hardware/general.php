@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Este modelo foi excluído.',
     'edit'  					=> 'Editar Ativo',
     'model_deleted'  			=> 'Este modelo de Ativos foi excluído. Você deve restaurar o modelo antes de restaurar o Ativo.',
+    'model_invalid'             => 'O modelo deste ativo é inválido.',
+    'model_invalid_fix'         => 'O Ativo deve ser editado para corrigir isso antes de tentar verificá-lo ou verificá-lo.',
     'requestable'               => 'Solicitável',
     'requested'				    => 'Solicitado',
     'not_requestable'           => 'Não solicitável',
@@ -21,6 +23,7 @@ return [
     'restore'  					=> 'Restaurar Ativo',
     'pending'  					=> 'Pendente',
     'undeployable'  			=> 'Não implementável',
+    'undeployable_tooltip'  	=> 'Este ativo possui uma etiqueta de status que não é implantável e não pode ser check-out no momento.',
     'view'  					=> 'Ver Ativo',
     'csv_error' => 'Você tem um erro no seu arquivo CSV:',
     'import_text' => '
@@ -40,5 +43,6 @@ return [
     'error_messages' => 'Mensagens de erro:',
     'success_messages' => 'Mensagens de sucesso:',
     'alert_details' => 'Por favor, veja abaixo para detalhes.',
-    'custom_export' => 'Exportação Personalizada'
+    'custom_export' => 'Exportação Personalizada',
+    'mfg_warranty_lookup' => ':manufacturer Busca por Situação de Garantia',
 ];

@@ -43,7 +43,7 @@ class CheckoutLicenseSeatNotification extends Notification
     {
         $notifyBy = [];
 
-        if (Setting::getSettings()->slack_endpoint != '') {
+        if (Setting::getSettings()->webhook_endpoint != '') {
             $notifyBy[] = 'slack';
         }
 
@@ -84,7 +84,8 @@ class CheckoutLicenseSeatNotification extends Notification
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
-        $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot';
+        $botname = ($this->settings->webhook_botname) ? $this->settings->webhook_botname : 'Snipe-Bot';
+        $channel = ($this->settings->webhook_channel) ? $this->settings->webhook_channel : '';
 
         $fields = [
             'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
@@ -94,6 +95,7 @@ class CheckoutLicenseSeatNotification extends Notification
         return (new SlackMessage)
             ->content(':arrow_up: :floppy_disk: License Checked Out')
             ->from($botname)
+            ->to($channel)
             ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
                 $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
                     ->fields($fields)

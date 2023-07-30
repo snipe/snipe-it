@@ -22,6 +22,8 @@ return [
     'restore' => [
         'error'   		=> 'Хөрөнгө сэргээгээгүй байна, дахин оролдоно уу',
         'success' 		=> 'Хөрөнгийн амжилттай сэргээгдэв.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
@@ -48,6 +50,8 @@ return [
         'success'               => 'Таны файл импортлогдсон байна',
         'file_delete_success'   => 'Таны файл амжилттай болсон байна',
         'file_delete_error'      => 'Файл устгагдах боломжгүй байна',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
 
 

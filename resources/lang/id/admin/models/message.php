@@ -3,6 +3,8 @@
 return array(
 
     'does_not_exist' => 'Model tidak ada.',
+    'no_association' => 'TIDAK ADA MODEL TERKAIT.',
+    'no_association_fix' => 'Ini akan merusak banyak hal dengan cara yang aneh dan mengerikan. Edit aset ini sekarang untuk menetapkannya sebagai model.',
     'assoc_users'	 => 'Saat ini model tersebut terhubung dengan 1 atau lebih dengan aset dan tidak dapat di hapus. Silahkan hapus aset terlebih dahulu, kemudian coba hapus kembali. ',
 
 
@@ -14,7 +16,7 @@ return array(
 
     'update' => array(
         'error'   => 'Model gagal diperbarui, silahkan coba kembali',
-        'success' => 'Sukses memperbarui Model.'
+        'success' => 'Sukses memperbarui Model.',
     ),
 
     'delete' => array(
@@ -30,12 +32,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Tidak ada bidang yang berubah, jadi tidak ada yang diperbarui.',
-        'success' 		=> 'Model diperbarui'
+        'success' 		=> 'Model berhasil diperbarui. |:model_count model berhasil diperbarui.',
+        'warn'          => 'Anda akan memperbarui properti dari model berikut: |Anda akan mengedit properti dari :model_count model berikut:',
+
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Tidak ada model yang dipilih, jadi tidak ada yang dihapus.',
-        'success' 		    => ':success_count model dihapus!',
+        'success' 		    => 'Model dihapus!|:success_count model dihapus!',
         'success_partial' 	=> ':success_count model telah dihapus, tetapi :fail_count tidak dapat dihapus karena masih memiliki aset yang terkait dengannya.'
     ),
 

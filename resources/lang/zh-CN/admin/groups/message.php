@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => '分组已经存在',
-    'group_not_found'     => '分组[:id]不存在',
+    'group_not_found'     => '分组 ID :id 不存在。',
     'group_name_required' => '名称为必填项',
 
     'success' => array(

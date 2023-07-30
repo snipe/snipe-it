@@ -16,5 +16,7 @@ return array(
     'update'  							=> 'Aggiorna Accessorio',
     'use_default_eula'					=> 'Usa <a href="#" data-toggle="modal" data-target="#eulaModal">L\'EULA predefinita</a> invece.',
     'use_default_eula_disabled'			=> '<del>Usa L\'EULA predefinita.</del> Nessuna EULA predefinita è in uso. Per favore aggiungine una nei Settaggi.',
+    'clone'                             => 'Clona Accessorio',
+    'delete_disabled'                   => 'Questo accessorio non può essere cancellato perché alcuni elementi sono ancora assegnati.',
 
 );

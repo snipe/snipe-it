@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Több információ',
 
-    'audit_help' => 'Ha bejelöli ezt a négyzetet, az eszközrekordot úgy szerkeszti, hogy az tükrözze az új helyet. A jelölőnégyzet kipipálásának kihagyásával a hely egyszerűen felkerül az ellenőrzési naplóba.<br><br>Vegye figyelembe, hogy ha ez az eszköz ki van jelölve, akkor az nem változtatja meg a személy, az eszköz vagy a helyszín helyét, ahová ki van jelölve.',
+    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
     'assets' => 'Az eszközök sorozatszám vagy eszközcímke alapján nyomon követhető tételek.  Ezek általában nagyobb értékű tételek, ahol egy adott tétel azonosítása fontos.',
 

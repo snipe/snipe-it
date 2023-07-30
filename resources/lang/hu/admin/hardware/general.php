@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Az eszköz törölve lett.',
     'edit'  					=> 'Eszköz módosítása',
     'model_deleted'  			=> 'Ennek az eszköznek a modellje törölve lett. Elösszőr a modellt vissza kell állítani, utánna lehet csak az eszközt visszaállítani.',
+    'model_invalid'             => 'Ennek az eszköznek a modellje érvénytelen.',
+    'model_invalid_fix'         => 'Az eszközt módosítani kell a javításához, mielőtt megkísérli a kiadását vagy visszavételét.',
     'requestable'               => 'lehívási',
     'requested'				    => 'Kérve',
     'not_requestable'           => 'Nem kérhető',
@@ -21,6 +23,7 @@ return [
     'restore'  					=> 'Visszaállítás eszköz',
     'pending'  					=> 'Függőben',
     'undeployable'  			=> 'Nem telepíthető',
+    'undeployable_tooltip'  	=> 'Az eszköz jelenleg az állapotcímkéje szerint nem helyezhezhető üzembe és nem adható ki.',
     'view'  					=> 'Eszköz megtekintése',
     'csv_error' => 'Hiba van a CSV fájlban:',
     'import_text' => '
@@ -40,5 +43,6 @@ return [
     'error_messages' => 'Hibaüzenetek:',
     'success_messages' => 'Sikeres üzenetek:',
     'alert_details' => 'A részleteket lásd alább.',
-    'custom_export' => 'Egyéni export'
+    'custom_export' => 'Egyéni export',
+    'mfg_warranty_lookup' => ':manufacturer jótállási információk ellenőrzése',
 ];

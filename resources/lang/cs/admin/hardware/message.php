@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Varování:</strong> Toto zařízení bylo označeno jako momentálně nepřiřaditelné.
                         Pokud se na jeho stavu něco změnilo, upravte jej.',
     'does_not_exist' 	=> 'Majetek nenalezen.',
-    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
+    'does_not_exist_or_not_requestable' => 'Tento majetek neexistuje nebo jej nelze vyskladnit.',
     'assoc_users'	 	=> 'Majetek je předán svému uživateli a nelze jej odstranit. Před odstraněním jej nejprve převezměte. ',
 
     'create' => [
@@ -17,12 +17,14 @@ return [
         'error'   			=> 'Majetek se nepodařilo upravit, zkuste to prosím znovu',
         'success' 			=> 'Majetek úspěšně aktualizován.',
         'nothing_updated'	=>  'Nebyla zvolena žádná pole, nic se tedy neupravilo.',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'no_assets_selected'  =>  'Nebyl zvolen žádný majetek, nic se tedy neupravilo.',
     ],
 
     'restore' => [
         'error'   		=> 'Majetek se nepodařilo obnovit, zkuste to prosím později',
         'success' 		=> 'Majetek byl v pořádku obnoven.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
@@ -49,6 +51,8 @@ return [
         'success'               => 'Váš soubor byl importován',
         'file_delete_success'   => 'Váš soubor byl úspěšně odstraněn',
         'file_delete_error'      => 'Soubor nelze odstranit',
+        'header_row_has_malformed_characters' => 'Jeden nebo více sloupců obsahuje v záhlaví poškozené UTF-8 znaky',
+        'content_row_has_malformed_characters' => 'Jedna nebo více hodnot v prvním řádku obsahu obsahuje poškozené UTF-8 znaky',
     ],
 
 

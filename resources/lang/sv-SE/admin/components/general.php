@@ -12,4 +12,5 @@ return array(
     'remaining' 			             => 'Återstående',
     'total' 			                 => 'Totalt',
     'update'                            => 'Uppdatera komponent',
+    'checkin_limit'            => 'Incheckad mängd måste vara lika med eller mindre än :assigned_qty'
 );

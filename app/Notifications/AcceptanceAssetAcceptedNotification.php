@@ -40,10 +40,15 @@ class AcceptanceAssetAcceptedNotification extends Notification
     public function via()
     {
 
-        $notifyBy[] = 'mail';
+        $notifyBy = ['mail'];
 
         return $notifyBy;
 
+    }
+
+    public function shouldSend($notifiable, $channel)
+    {
+        return $this->settings->alerts_enabled && ! empty($this->settings->alert_email);
     }
 
     /**

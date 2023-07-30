@@ -2,7 +2,7 @@
 
 return [
     'acceptance_asset_accepted' => 'Un usuario ha aceptado un artículo',
-    'acceptance_asset_declined' => 'A user has declined an item',
+    'acceptance_asset_declined' => 'Un usuario ha rechazado un artículo',
     'a_user_canceled' => 'El usuario ha cancelado el item solicitado en la pagina Web',
     'a_user_requested' => 'Un usuario a solicitado un item en la pagina Web',
     'accessory_name' => 'Nombre de accesorio:',
@@ -43,6 +43,7 @@ return [
     'login_first_admin' => 'Inicie sesión en su nueva instalación de Snipe-IT con las credenciales siguientes:',
     'login' => 'Entrar:',
     'Low_Inventory_Report' => 'Reporte de inventario bajo',
+    'inventory_report' => 'Reporte de Inventario',
     'min_QTY' => 'Cantidad mínima',
     'name' => 'Nombre',
     'new_item_checked' => 'Un nuevo artículo se ha extraído bajo su nombre, los detalles están a continuación.',
@@ -61,7 +62,7 @@ return [
     'test_mail_text' => 'Esto es una prueba desde el sistema de gestión de activos de Snipe-IT. Si tienes esto, correo está funcionando :)',
     'the_following_item' => 'El siguiente artículo ha sido devuelto: ',
     'low_inventory_alert' => 'Hay :count item por debajo del inventario mínimo o próximo a bajar.|Hay are :count elementos por debajo del inventario mínimo o próximos a bajar.',
-    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'Hay :count activo con su garantía que expira en los próximos :threshold days.|Hay :count activos con garantías que expiran en los siguientes :threshold days.',
     'license_expiring_alert' => 'Hay :count licencia que expira en los próximos :threshold días. | Hay :count licencias que expiran en los próximos :threshold días.',
     'to_reset' => 'Para restaurar tu contraseña de :web, rellena este formulario:',
     'type' => 'Tipo',
@@ -73,9 +74,11 @@ return [
     'your_credentials' => 'Tus credenciales de Snipe-IT',
     'Accessory_Checkin_Notification' => 'Accesorio devuelto',
     'Asset_Checkin_Notification' => 'Activo devuelto',
+    'Asset_Checkout_Notification' => 'Activo asignado',
     'License_Checkin_Notification' => 'Licencia devuelta',
     'Expected_Checkin_Report' => 'Informe de devolución de activo esperado',
     'Expected_Checkin_Notification' => 'Recordatorio: :name se acerca la fecha de devolución',
     'Expected_Checkin_Date' => 'Un activo asignado a ti debe ser devuelto en :date',
     'your_assets' => 'Ver tus activos',
+    'rights_reserved' => 'Todos los derechos reservados.',
 ];

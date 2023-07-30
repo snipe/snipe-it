@@ -1,8 +1,10 @@
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
- * version: 1.20.2
+ * version: 1.22.0
  * https://github.com/wenzhixin/bootstrap-table/
  */
+/* stylelint-disable annotation-no-unknown, max-line-length */
+/* stylelint-enable annotation-no-unknown, max-line-length */
 .bootstrap-table .fixed-table-toolbar::after {
   content: "";
   display: block;
@@ -108,6 +110,11 @@
   background-position: right;
   background-repeat: no-repeat;
   padding-right: 30px !important;
+}
+
+.bootstrap-table .fixed-table-container .table thead th .sortable.sortable-center {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
 }
 
 .bootstrap-table .fixed-table-container .table thead th .both {
@@ -334,7 +341,7 @@
 }
 
 .bootstrap-table.bootstrap4 .pagination-lg .page-link, .bootstrap-table.bootstrap5 .pagination-lg .page-link {
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .bootstrap-table.bootstrap5 .float-left {
@@ -367,7 +374,7 @@ div.fixed-table-scroll-outer {
   50% {
     opacity: 1;
   }
-  to {
+  100% {
     opacity: 0;
   }
 }

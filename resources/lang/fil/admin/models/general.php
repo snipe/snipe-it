@@ -6,7 +6,7 @@ return array(
     'deleted'  					        => 'This model has been deleted.',
     'bulk_delete'               => 'Ang Maramihang Pag-delete sa mga Modelo ng Asset',
     'bulk_delete_help'               => 'Gamitin ang mga checkboxes sa ibaba para i-komperma ang pag-delete sa mga napiling mga modelo ng asset. Ang mga modelo ng asset na mayroong mga asset na nai-ugnay sa mga ito ay hindi pwedeng i-delete hanggang sa ang lahat ng mga asset ay nai-ugnay sa ibat-ibang modelo.',
-    'bulk_delete_warn'          => 'Ikaw ay mag-delete ng :model_count mga modelo ng asset.',
+    'bulk_delete_warn'          => 'You are about to delete one asset model.|You are about to delete :model_count asset models.',
     'restore'                   => 'Ibalik sa dati ang Modelo',
     'requestable'               => 'Ang mga gumagamit ay pwedeng mag-rekwest ng modelong ito',
 	'show_mac_address'			      => 'Ipakita ang field MAC address sa mga asset ng modelong ito',
