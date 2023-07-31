@@ -6,7 +6,7 @@ return array(
     'deleted'  					        => 'This model has been deleted.',
     'bulk_delete'               => 'Масовно бришење на модели',
     'bulk_delete_help'               => 'Користете ги полињата подолу за да го потврдите бришењето на избраните модели. Моделите кои имаат основни средства поврзани со нив не може да се избришат додека средствата не се поврзанат со друг модел.',
-    'bulk_delete_warn'          => 'Ќе избришете :model_count модели.',
+    'bulk_delete_warn'          => 'You are about to delete one asset model.|You are about to delete :model_count asset models.',
     'restore'                   => 'Врати модел',
     'requestable'               => 'Корисниците може да го побараат овој модел',
 	'show_mac_address'			      => 'Покажи поле за MAC адреса во основните средства од овој модел',

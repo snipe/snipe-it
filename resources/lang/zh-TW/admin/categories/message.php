@@ -14,7 +14,7 @@ return array(
     'update' => array(
         'error'   => '更新類別失敗，請重試。',
         'success' => '更新類別成功。',
-        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
+        'cannot_change_category_type'   => '類別類型一旦建立就不可更改',
     ),
 
     'delete' => array(

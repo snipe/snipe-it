@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Gjenopprett eiendel',
     'pending'  					=> 'Under arbeid',
     'undeployable'  			=> 'Ikke utleverbar',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Vis eiendel',
     'csv_error' => 'Du har en feil i din CSV-fil:',
     'import_text' => '
@@ -42,5 +43,6 @@ return [
     'error_messages' => 'Feilmeldinger:',
     'success_messages' => 'Suksessmeldinger:',
     'alert_details' => 'Vennligst se nedenfor for detaljer.',
-    'custom_export' => 'Egendefinert eksport'
+    'custom_export' => 'Egendefinert eksport',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];

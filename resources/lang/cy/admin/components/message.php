@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Cydran heb ei nodi allan, ceisiwch eto o. g. y. dd',
         'success' 		=> 'Cydran wedi nodi allan yn llwyddiannus.',
-        'user_does_not_exist' => 'Nid yw\'r defnyddiwr yna yn ddilys. Ceisiwch eto o. g. y. dd.'
+        'user_does_not_exist' => 'Nid yw\'r defnyddiwr yna yn ddilys. Ceisiwch eto o. g. y. dd.',
+        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

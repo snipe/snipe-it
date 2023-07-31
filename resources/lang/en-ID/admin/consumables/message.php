@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Consumable tidak diperiksa, silakan coba lagi',
         'success' 		=> 'Consumable berhasil diperiksa.',
-        'user_does_not_exist' => 'Pengguna tidak valid. Silakan coba lagi.'
+        'user_does_not_exist' => 'Pengguna tidak valid. Silakan coba lagi.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

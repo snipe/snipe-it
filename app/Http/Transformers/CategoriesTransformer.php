@@ -38,6 +38,9 @@ class CategoriesTransformer
             case 'component':
                 $category->item_count = $category->components_count;
                 break;
+            case 'license':
+                $category->item_count = $category->licenses_count;
+                break;
             default:
                 $category->item_count = 0;
         }

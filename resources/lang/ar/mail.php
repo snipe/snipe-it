@@ -74,6 +74,7 @@ return [
     'your_credentials' => 'أوراق اعتماد قنص-إيت الخاص بك',
     'Accessory_Checkin_Notification' => 'تم تسحيل الملحق',
     'Asset_Checkin_Notification' => 'تم تسجيل الأصل',
+    'Asset_Checkout_Notification' => 'Asset checked out',
     'License_Checkin_Notification' => 'تم تسجيل الرخصة',
     'Expected_Checkin_Report' => 'تقرير تسجيل الأصول المتوقع',
     'Expected_Checkin_Notification' => 'تذكير: تاريخ تحقق :name يقترب من الموعد النهائي',

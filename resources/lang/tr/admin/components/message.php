@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Bileşeni çıkışı yapılamadı, lütfen tekrar deneyin',
         'success' 		=> 'Bileşen çıkışı başarıyla yapıldı.',
-        'user_does_not_exist' => 'Bu kullanıcı geçersiz. Lütfen tekrar deneyin.'
+        'user_does_not_exist' => 'Bu kullanıcı geçersiz. Lütfen tekrar deneyin.',
+        'unavailable'      => 'Yeterli bileşen kalmadı: : miktar miktar, :talep edilen talep edilen',
     ),
 
     'checkin' => array(

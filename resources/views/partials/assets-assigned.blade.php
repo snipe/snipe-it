@@ -13,7 +13,7 @@
 
                 $.ajax({
                     type: 'GET',
-                    url: '{{ url('/') }}/api/v1/users/' + userid + '/assets',
+                    url: '{{ config('app.url') }}/api/v1/users/' + userid + '/assets',
                     headers: {
                         "X-Requested-With": 'XMLHttpRequest',
                         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
@@ -45,7 +45,7 @@
                                 } else {
                                     table_html += "<td></td> ";
                                 }
-                                table_html += '<td><a href="{{ url('/') }}/hardware/' + asset.id + '">';
+                                table_html += '<td><a href="{{ config('app.url') }}/hardware/' + asset.id + '">';
 
                                 if ((asset.name == '') && (asset.name != null)) {
                                     table_html += " " + asset.model.name;

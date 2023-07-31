@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'El componente no hizo check out, intentalo de nuevo',
         'success' 		=> 'Check out del componente satisfactorio.',
-        'user_does_not_exist' => 'El usuario es invalido, intentalo de nuevo.'
+        'user_does_not_exist' => 'El usuario es invalido, intentalo de nuevo.',
+        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

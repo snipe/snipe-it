@@ -2,6 +2,7 @@
 
 return array(
 
+    'support_url_help' => 'Use <code>{LOCALE}</code> and <code>{SERIAL}</code> in your URL as variables to have those values auto-populate when viewing assets.',
     'does_not_exist' => 'Tootjat ei eksisteeri.',
     'assoc_users'	 => 'Selle tootjaga on seotud vähemalt üks mudel ja seda ei saa kustutada. Palun uuenda oma mudeleid, et need ei kasutaks seda tootjat ning seejärel proovi uuesti. ',
 

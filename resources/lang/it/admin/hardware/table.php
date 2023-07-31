@@ -8,6 +8,7 @@ return [
     'change' 		=> 'Dentro/Fuori',
     'checkout_date' => 'Data di estrazione',
     'checkoutto' 	=> 'Estratto',
+    'components_cost' => 'Costo Totale Componenti',
     'current_value' => 'Valore Attuale',
     'diff' 			=> 'Differenza',
     'dl_csv' 		=> 'Scarica CSV',

@@ -2,8 +2,11 @@
 
 return [
     'bulk_delete'		=> 'Kinnita kahendite hulgi kustutamine',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> 'Kontrolli alltoodud vahendid hulgi kustutamiseks. Kui oled need kustutanud, võib neid veel taastada, kuid neid ei saa enam seostada kasutajatega, kellega nad hetkel seotud on.',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'Sa hakkad kustsutama :asset_count vahendit.',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'Uuenduste hulgihaldus',
     'bulk_update_help'	=> 'See vorm võimaldab teil korraga mitme vara värskendada. Täitke ainult väljad, mida tuleb muuta. Kõik tühjad tühikud jäävad muutmata.',
     'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
@@ -45,7 +48,7 @@ return [
     'asset_location_update_default' => 'Uuenda ainult vaikimisi asukohta',
     'asset_not_deployable' => 'Selle vahendi olek ei luba seda väljastada.',
     'asset_deployable' => 'Selle vahendi olek lubab seda väljastada.',
-    'processing_spinner' => 'Töötlemine...',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Valikuline teave',
     'order_details'   => 'Tellimusega seonduv teave'
 ];

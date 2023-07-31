@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> '부속품이 반출되지 않았습니다. 다시 시도해 주세요.',
         'success' 		=> '부속품이 반출 되었습니다.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => '잘못된 사용자 입니다. 다시 시도해 주세요.'
     ),
 

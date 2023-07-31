@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Το στοιχείο δεν έχει ελεγχθεί, δοκιμάστε ξανά',
         'success' 		=> 'Η συνιστώσα ολοκληρώθηκε με επιτυχία.',
-        'user_does_not_exist' => 'Αυτός ο χρήστης δεν είναι έγκυρος. Παρακαλώ δοκιμάστε ξανά.'
+        'user_does_not_exist' => 'Αυτός ο χρήστης δεν είναι έγκυρος. Παρακαλώ δοκιμάστε ξανά.',
+        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

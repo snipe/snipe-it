@@ -74,6 +74,7 @@ return [
     'your_credentials' => 'Din Snipe-IT konto',
     'Accessory_Checkin_Notification' => 'Tilbehør sjekket inn',
     'Asset_Checkin_Notification' => 'Eiendel sjekket inn',
+    'Asset_Checkout_Notification' => 'Asset checked out',
     'License_Checkin_Notification' => 'Lisens sjekket inn',
     'Expected_Checkin_Report' => 'Rapport over forventet innsjekking av eiendeler',
     'Expected_Checkin_Notification' => 'Påminnelse: Innsjekkingsfrist for :name nærmer seg',

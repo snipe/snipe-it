@@ -33,7 +33,8 @@ class Component extends SnipeModel
         'name'           => 'required|min:3|max:255',
         'qty'            => 'required|integer|min:1',
         'category_id'    => 'required|integer|exists:categories,id',
-        'company_id'     => 'integer|nullable',
+        'supplier_id'    => 'nullable|integer|exists:suppliers,id',
+        'company_id'     => 'integer|nullable|exists:companies,id',
         'min_amt'        => 'integer|min:0|nullable',
         'purchase_date'   => 'date_format:Y-m-d|nullable',
         'purchase_cost'  => 'numeric|nullable|gte:0',
@@ -57,6 +58,7 @@ class Component extends SnipeModel
     protected $fillable = [
         'category_id',
         'company_id',
+        'supplier_id',
         'location_id',
         'name',
         'purchase_cost',
@@ -86,6 +88,7 @@ class Component extends SnipeModel
         'category'     => ['name'],
         'company'      => ['name'],
         'location'     => ['name'],
+        'supplier'     => ['name'],
     ];
 
 
@@ -169,6 +172,18 @@ class Component extends SnipeModel
     }
 
     /**
+     * Establishes the item -> supplier relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v6.1.1]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function supplier()
+    {
+        return $this->belongsTo(\App\Models\Supplier::class, 'supplier_id');
+    }
+
+    /**
      * Establishes the component -> action logs relationship
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -246,5 +261,18 @@ class Component extends SnipeModel
     public function scopeOrderCompany($query, $order)
     {
         return $query->leftJoin('companies', 'components.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
+    }
+
+    /**
+     * Query builder scope to order on supplier
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderSupplier($query, $order)
+    {
+        return $query->leftJoin('suppliers', 'components.supplier_id', '=', 'suppliers.id')->orderBy('suppliers.name', $order);
     }
 }

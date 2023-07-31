@@ -8,6 +8,7 @@ return [
     'change' 		=> 'ادخال \\ اخراج',
     'checkout_date' => 'تاريخ الاخراج',
     'checkoutto' 	=> 'الاخراج',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Current Value',
     'diff' 			=> 'الفرق',
     'dl_csv' 		=> 'التنزيل كملف CSV',

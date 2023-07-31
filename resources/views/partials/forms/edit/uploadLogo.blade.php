@@ -47,8 +47,8 @@
     @if (($setting->$logoVariable!='') && (Storage::disk('public')->exists(e($snipeSettings->$logoVariable))))
 
     <div class="col-md-9 col-md-offset-3">
-        <label id="{{ $logoId }}-deleteCheckbox" for="{{ $logoClearVariable }}" style="font-weight: normal">
-            {{ Form::checkbox($logoClearVariable, '1', Request::old($logoClearVariable),array('class' => 'minimal')) }}
+        <label id="{{ $logoId }}-deleteCheckbox" for="{{ $logoClearVariable }}" style="font-weight: normal" class="form-control">
+            {{ Form::checkbox($logoClearVariable, '1', Request::old($logoClearVariable)) }}
             Remove current {{ ucwords(str_replace('_', ' ', $logoVariable)) }} image
         </label>
     </div>

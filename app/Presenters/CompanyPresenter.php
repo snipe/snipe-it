@@ -30,6 +30,22 @@ class CompanyPresenter extends Presenter
                 'visible' => true,
                 'formatter' => 'companiesLinkFormatter',
             ], [
+                'field' => 'phone',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('admin/users/table.phone'),
+                'visible' => false,
+                'formatter'    => 'phoneFormatter',
+            ], [
+                'field' => 'fax',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('admin/suppliers/table.fax'),
+                'visible' => false,
+                'formatter'    => 'phoneFormatter',
+            ], [
                 'field' => 'image',
                 'searchable' => false,
                 'sortable' => true,

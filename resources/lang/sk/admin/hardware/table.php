@@ -8,6 +8,7 @@ return [
     'change' 		=> 'Vsetup/Výstup',
     'checkout_date' => 'Dátum odovzdania',
     'checkoutto' 	=> 'Odovzdané',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Current Value',
     'diff' 			=> 'Rozdiel',
     'dl_csv' 		=> 'Stiahnuť CSV',

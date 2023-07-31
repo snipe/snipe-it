@@ -10,6 +10,7 @@ return array(
     'support_email'   		=> 'Az e-mail támogatása',
     'support_phone'   		=> 'Telefon támogatás',
     'support_url'   		=> 'Támogatási URL',
+    'warranty_lookup_url'   => 'Jótállást ellenőrző link',
     'update'				=> 'Gyártó frissítése',
     'url'   				=> 'URL',
 

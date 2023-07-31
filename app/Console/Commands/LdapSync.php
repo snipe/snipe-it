@@ -62,6 +62,7 @@ class LdapSync extends Command
         $ldap_result_phone = Setting::getSettings()->ldap_phone_field;
         $ldap_result_jobtitle = Setting::getSettings()->ldap_jobtitle;
         $ldap_result_country = Setting::getSettings()->ldap_country;
+        $ldap_result_location = Setting::getSettings()->ldap_location;
         $ldap_result_dept = Setting::getSettings()->ldap_dept;
         $ldap_result_manager = Setting::getSettings()->ldap_manager;
         $ldap_default_group = Setting::getSettings()->ldap_default_group;
@@ -208,8 +209,14 @@ class LdapSync extends Command
                 $item['country'] = $results[$i][$ldap_result_country][0] ?? '';
                 $item['department'] = $results[$i][$ldap_result_dept][0] ?? '';
                 $item['manager'] = $results[$i][$ldap_result_manager][0] ?? '';
+                $item['location'] = $results[$i][$ldap_result_location][0] ?? '';
 
-
+                // ONLY if you are using the "ldap_location" option *AND* you have an actual result
+                if ($ldap_result_location && $item['location']) {
+                        $location = Location::firstOrCreate([
+                                'name' => $item['location'],
+                        ]);
+                }
                 $department = Department::firstOrCreate([
                     'name' => $item['department'],
                 ]);
@@ -252,11 +259,13 @@ class LdapSync extends Command
             }
             if($ldap_result_country != null){
                 $user->country = $item['country'];
+
             }
             if($ldap_result_dept  != null){
                     $user->department_id = $department->id;
             }
             if($ldap_result_manager != null){
+              
                 if($item['manager'] != null) {
                     // Check Cache first
                     if (isset($manager_cache[$item['manager']])) {

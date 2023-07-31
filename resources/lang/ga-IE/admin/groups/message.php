@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'Tá grúpa ann cheana!',
-    'group_not_found'     => 'Níl grúpa [: id] ann.',
+    'group_not_found'     => 'Group ID :id does not exist.',
     'group_name_required' => 'Tá an réimse ainmnithe ag teastáil',
 
     'success' => array(

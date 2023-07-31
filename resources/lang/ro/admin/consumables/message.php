@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Consumul nu a fost verificat, încercați din nou',
         'success' 		=> 'Consumul a fost verificat cu succes.',
-        'user_does_not_exist' => 'Acest utilizator este nevalid. Vă rugăm să încercați din nou.'
+        'user_does_not_exist' => 'Acest utilizator este nevalid. Vă rugăm să încercați din nou.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

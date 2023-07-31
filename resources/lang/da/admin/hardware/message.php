@@ -22,6 +22,8 @@ return [
     'restore' => [
         'error'   		=> 'Akten blev ikke gendannet, prøv igen',
         'success' 		=> 'Asset restaureret med succes.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [

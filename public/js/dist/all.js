@@ -35001,9 +35001,9 @@ var effectsEffectTransfer = effect;
 }));
 
 /*!
- * Datepicker for Bootstrap v1.9.0 (https://github.com/uxsolutions/bootstrap-datepicker)
+ * Datepicker for Bootstrap v1.10.0 (https://github.com/uxsolutions/bootstrap-datepicker)
  *
- * Licensed under the Apache License v2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+ * Licensed under the Apache License v2.0 (https://www.apache.org/licenses/LICENSE-2.0)
  */
 
 (function(factory){
@@ -35063,7 +35063,7 @@ var effectsEffectTransfer = effect;
 			replace: function(new_array){
 				if (!new_array)
 					return;
-				if (!$.isArray(new_array))
+				if (!Array.isArray(new_array))
 					new_array = [new_array];
 				this.clear();
 				this.push.apply(this, new_array);
@@ -35105,9 +35105,15 @@ var effectsEffectTransfer = effect;
 		this.isInput = this.element.is('input');
 		this.inputField = this.isInput ? this.element : this.element.find('input');
 		this.component = this.element.hasClass('date') ? this.element.find('.add-on, .input-group-addon, .input-group-append, .input-group-prepend, .btn') : false;
-		if (this.component && this.component.length === 0)
+		if (this.component && this.component.length === 0){
 			this.component = false;
-		this.isInline = !this.component && this.element.is('div');
+    }
+
+		if (this.o.isInline === null){
+			this.isInline = !this.component && !this.isInput;
+		} else {
+			this.isInline = this.o.isInline;
+		}
 
 		this.picker = $(DPGlobal.template);
 
@@ -35178,7 +35184,7 @@ var effectsEffectTransfer = effect;
 		},
 
 		_resolveDaysOfWeek: function(daysOfWeek){
-			if (!$.isArray(daysOfWeek))
+			if (!Array.isArray(daysOfWeek))
 				daysOfWeek = daysOfWeek.split(/[,\s]*/);
 			return $.map(daysOfWeek, Number);
 		},
@@ -35265,7 +35271,7 @@ var effectsEffectTransfer = effect;
 			o.daysOfWeekHighlighted = this._resolveDaysOfWeek(o.daysOfWeekHighlighted||[]);
 
 			o.datesDisabled = o.datesDisabled||[];
-			if (!$.isArray(o.datesDisabled)) {
+			if (!Array.isArray(o.datesDisabled)) {
 				o.datesDisabled = o.datesDisabled.split(',');
 			}
 			o.datesDisabled = $.map(o.datesDisabled, function(d){
@@ -35572,16 +35578,15 @@ var effectsEffectTransfer = effect;
 
 		clearDates: function(){
 			this.inputField.val('');
-			this.update();
 			this._trigger('changeDate');
-
+			this.update();
 			if (this.o.autoclose) {
 				this.hide();
 			}
 		},
 
 		setDates: function(){
-			var args = $.isArray(arguments[0]) ? arguments[0] : arguments;
+			var args = Array.isArray(arguments[0]) ? arguments[0] : arguments;
 			this.update.apply(this, args);
 			this._trigger('changeDate');
 			this.setValue();
@@ -35589,7 +35594,7 @@ var effectsEffectTransfer = effect;
 		},
 
 		setUTCDates: function(){
-			var args = $.isArray(arguments[0]) ? arguments[0] : arguments;
+			var args = Array.isArray(arguments[0]) ? arguments[0] : arguments;
 			this.setDates.apply(this, $.map(args, this._utc_to_local));
 			return this;
 		},
@@ -36041,7 +36046,7 @@ var effectsEffectTransfer = effect;
 
 				//Check if uniqueSort exists (supported by jquery >=1.12 and >=2.2)
 				//Fallback to unique function for older jquery versions
-				if ($.isFunction($.uniqueSort)) {
+				if (typeof $.uniqueSort === "function") {
 					clsName = $.uniqueSort(clsName);
 				} else {
 					clsName = $.unique(clsName);
@@ -36573,12 +36578,12 @@ var effectsEffectTransfer = effect;
 
 			if (new_date < this.dates[j]){
 				// Date being moved earlier/left
-				while (j >= 0 && new_date < this.dates[j]){
+				while (j >= 0 && new_date < this.dates[j] && (this.pickers[j].element.val() || "").length > 0) {
 					this.pickers[j--].setUTCDate(new_date);
 				}
 			} else if (new_date > this.dates[k]){
 				// Date being moved later/right
-				while (k < l && new_date > this.dates[k]){
+				while (k < l && new_date > this.dates[k] && (this.pickers[k].element.val() || "").length > 0) {
 					this.pickers[k++].setUTCDate(new_date);
 				}
 			}
@@ -36692,6 +36697,7 @@ var effectsEffectTransfer = effect;
 		endDate: Infinity,
 		forceParse: true,
 		format: 'mm/dd/yyyy',
+		isInline: null,
 		keepEmptyValues: false,
 		keyboardNavigation: true,
 		language: 'en',
@@ -37009,7 +37015,7 @@ var effectsEffectTransfer = effect;
 
 	/* DATEPICKER VERSION
 	 * =================== */
-	$.fn.datepicker.version = '1.9.0';
+	$.fn.datepicker.version = '1.10.0';
 
 	$.fn.datepicker.deprecated = function(msg){
 		var console = window.console;
@@ -37708,516 +37714,6 @@ var Lightbox = (function ($) {
 //# sourceMappingURL=ekko-lightbox.js.map
 
 }(jQuery);
-
-/*!
- * iCheck v1.0.2, http://git.io/arlzeA
- * ===================================
- * Powerful jQuery and Zepto plugin for checkboxes and radio buttons customization
- *
- * (c) 2013 Damir Sultanov, http://fronteed.com
- * MIT Licensed
- */
-
-(function($) {
-
-  // Cached vars
-  var _iCheck = 'iCheck',
-    _iCheckHelper = _iCheck + '-helper',
-    _checkbox = 'checkbox',
-    _radio = 'radio',
-    _checked = 'checked',
-    _unchecked = 'un' + _checked,
-    _disabled = 'disabled',
-    _determinate = 'determinate',
-    _indeterminate = 'in' + _determinate,
-    _update = 'update',
-    _type = 'type',
-    _click = 'click',
-    _touch = 'touchbegin.i touchend.i',
-    _add = 'addClass',
-    _remove = 'removeClass',
-    _callback = 'trigger',
-    _label = 'label',
-    _cursor = 'cursor',
-    _mobile = /ipad|iphone|ipod|android|blackberry|windows phone|opera mini|silk/i.test(navigator.userAgent);
-
-  // Plugin init
-  $.fn[_iCheck] = function(options, fire) {
-
-    // Walker
-    var handle = 'input[type="' + _checkbox + '"], input[type="' + _radio + '"]',
-      stack = $(),
-      walker = function(object) {
-        object.each(function() {
-          var self = $(this);
-
-          if (self.is(handle)) {
-            stack = stack.add(self);
-          } else {
-            stack = stack.add(self.find(handle));
-          }
-        });
-      };
-
-    // Check if we should operate with some method
-    if (/^(check|uncheck|toggle|indeterminate|determinate|disable|enable|update|destroy)$/i.test(options)) {
-
-      // Normalize method's name
-      options = options.toLowerCase();
-
-      // Find checkboxes and radio buttons
-      walker(this);
-
-      return stack.each(function() {
-        var self = $(this);
-
-        if (options == 'destroy') {
-          tidy(self, 'ifDestroyed');
-        } else {
-          operate(self, true, options);
-        }
-
-        // Fire method's callback
-        if ($.isFunction(fire)) {
-          fire();
-        }
-      });
-
-    // Customization
-    } else if (typeof options == 'object' || !options) {
-
-      // Check if any options were passed
-      var settings = $.extend({
-          checkedClass: _checked,
-          disabledClass: _disabled,
-          indeterminateClass: _indeterminate,
-          labelHover: true
-        }, options),
-
-        selector = settings.handle,
-        hoverClass = settings.hoverClass || 'hover',
-        focusClass = settings.focusClass || 'focus',
-        activeClass = settings.activeClass || 'active',
-        labelHover = !!settings.labelHover,
-        labelHoverClass = settings.labelHoverClass || 'hover',
-
-        // Setup clickable area
-        area = ('' + settings.increaseArea).replace('%', '') | 0;
-
-      // Selector limit
-      if (selector == _checkbox || selector == _radio) {
-        handle = 'input[type="' + selector + '"]';
-      }
-
-      // Clickable area limit
-      if (area < -50) {
-        area = -50;
-      }
-
-      // Walk around the selector
-      walker(this);
-
-      return stack.each(function() {
-        var self = $(this);
-
-        // If already customized
-        tidy(self);
-
-        var node = this,
-          id = node.id,
-
-          // Layer styles
-          offset = -area + '%',
-          size = 100 + (area * 2) + '%',
-          layer = {
-            position: 'absolute',
-            top: offset,
-            left: offset,
-            display: 'block',
-            width: size,
-            height: size,
-            margin: 0,
-            padding: 0,
-            background: '#fff',
-            border: 0,
-            opacity: 0
-          },
-
-          // Choose how to hide input
-          hide = _mobile ? {
-            position: 'absolute',
-            visibility: 'hidden'
-          } : area ? layer : {
-            position: 'absolute',
-            opacity: 0
-          },
-
-          // Get proper class
-          className = node[_type] == _checkbox ? settings.checkboxClass || 'i' + _checkbox : settings.radioClass || 'i' + _radio,
-
-          // Find assigned labels
-          label = $(_label + '[for="' + id + '"]').add(self.closest(_label)),
-
-          // Check ARIA option
-          aria = !!settings.aria,
-
-          // Set ARIA placeholder
-          ariaID = _iCheck + '-' + Math.random().toString(36).substr(2,6),
-
-          // Parent & helper
-          parent = '<div class="' + className + '" ' + (aria ? 'role="' + node[_type] + '" ' : ''),
-          helper;
-
-        // Set ARIA "labelledby"
-        if (aria) {
-          label.each(function() {
-            parent += 'aria-labelledby="';
-
-            if (this.id) {
-              parent += this.id;
-            } else {
-              this.id = ariaID;
-              parent += ariaID;
-            }
-
-            parent += '"';
-          });
-        }
-
-        // Wrap input
-        parent = self.wrap(parent + '/>')[_callback]('ifCreated').parent().append(settings.insert);
-
-        // Layer addition
-        helper = $('<ins class="' + _iCheckHelper + '"/>').css(layer).appendTo(parent);
-
-        // Finalize customization
-        self.data(_iCheck, {o: settings, s: self.attr('style')}).css(hide);
-        !!settings.inheritClass && parent[_add](node.className || '');
-        !!settings.inheritID && id && parent.attr('id', _iCheck + '-' + id);
-        parent.css('position') == 'static' && parent.css('position', 'relative');
-        operate(self, true, _update);
-
-        // Label events
-        if (label.length) {
-          label.on(_click + '.i mouseover.i mouseout.i ' + _touch, function(event) {
-            var type = event[_type],
-              item = $(this);
-
-            // Do nothing if input is disabled
-            if (!node[_disabled]) {
-
-              // Click
-              if (type == _click) {
-                if ($(event.target).is('a')) {
-                  return;
-                }
-                operate(self, false, true);
-
-              // Hover state
-              } else if (labelHover) {
-
-                // mouseout|touchend
-                if (/ut|nd/.test(type)) {
-                  parent[_remove](hoverClass);
-                  item[_remove](labelHoverClass);
-                } else {
-                  parent[_add](hoverClass);
-                  item[_add](labelHoverClass);
-                }
-              }
-
-              if (_mobile) {
-                event.stopPropagation();
-              } else {
-                return false;
-              }
-            }
-          });
-        }
-
-        // Input events
-        self.on(_click + '.i focus.i blur.i keyup.i keydown.i keypress.i', function(event) {
-          var type = event[_type],
-            key = event.keyCode;
-
-          // Click
-          if (type == _click) {
-            return false;
-
-          // Keydown
-          } else if (type == 'keydown' && key == 32) {
-            if (!(node[_type] == _radio && node[_checked])) {
-              if (node[_checked]) {
-                off(self, _checked);
-              } else {
-                on(self, _checked);
-              }
-            }
-
-            return false;
-
-          // Keyup
-          } else if (type == 'keyup' && node[_type] == _radio) {
-            !node[_checked] && on(self, _checked);
-
-          // Focus/blur
-          } else if (/us|ur/.test(type)) {
-            parent[type == 'blur' ? _remove : _add](focusClass);
-          }
-        });
-
-        // Helper events
-        helper.on(_click + ' mousedown mouseup mouseover mouseout ' + _touch, function(event) {
-          var type = event[_type],
-
-            // mousedown|mouseup
-            toggle = /wn|up/.test(type) ? activeClass : hoverClass;
-
-          // Do nothing if input is disabled
-          if (!node[_disabled]) {
-
-            // Click
-            if (type == _click) {
-              operate(self, false, true);
-
-            // Active and hover states
-            } else {
-
-              // State is on
-              if (/wn|er|in/.test(type)) {
-
-                // mousedown|mouseover|touchbegin
-                parent[_add](toggle);
-
-              // State is off
-              } else {
-                parent[_remove](toggle + ' ' + activeClass);
-              }
-
-              // Label hover
-              if (label.length && labelHover && toggle == hoverClass) {
-
-                // mouseout|touchend
-                label[/ut|nd/.test(type) ? _remove : _add](labelHoverClass);
-              }
-            }
-
-            if (_mobile) {
-              event.stopPropagation();
-            } else {
-              return false;
-            }
-          }
-        });
-      });
-    } else {
-      return this;
-    }
-  };
-
-  // Do something with inputs
-  function operate(input, direct, method) {
-    var node = input[0],
-      state = /er/.test(method) ? _indeterminate : /bl/.test(method) ? _disabled : _checked,
-      active = method == _update ? {
-        checked: node[_checked],
-        disabled: node[_disabled],
-        indeterminate: input.attr(_indeterminate) == 'true' || input.attr(_determinate) == 'false'
-      } : node[state];
-
-    // Check, disable or indeterminate
-    if (/^(ch|di|in)/.test(method) && !active) {
-      on(input, state);
-
-    // Uncheck, enable or determinate
-    } else if (/^(un|en|de)/.test(method) && active) {
-      off(input, state);
-
-    // Update
-    } else if (method == _update) {
-
-      // Handle states
-      for (var each in active) {
-        if (active[each]) {
-          on(input, each, true);
-        } else {
-          off(input, each, true);
-        }
-      }
-
-    } else if (!direct || method == 'toggle') {
-
-      // Helper or label was clicked
-      if (!direct) {
-        input[_callback]('ifClicked');
-      }
-
-      // Toggle checked state
-      if (active) {
-        if (node[_type] !== _radio) {
-          off(input, state);
-        }
-      } else {
-        on(input, state);
-      }
-    }
-  }
-
-  // Add checked, disabled or indeterminate state
-  function on(input, state, keep) {
-    var node = input[0],
-      parent = input.parent(),
-      checked = state == _checked,
-      indeterminate = state == _indeterminate,
-      disabled = state == _disabled,
-      callback = indeterminate ? _determinate : checked ? _unchecked : 'enabled',
-      regular = option(input, callback + capitalize(node[_type])),
-      specific = option(input, state + capitalize(node[_type]));
-
-    // Prevent unnecessary actions
-    if (node[state] !== true) {
-
-      // Toggle assigned radio buttons
-      if (!keep && state == _checked && node[_type] == _radio && node.name) {
-        var form = input.closest('form'),
-          inputs = 'input[name="' + node.name + '"]';
-
-        inputs = form.length ? form.find(inputs) : $(inputs);
-
-        inputs.each(function() {
-          if (this !== node && $(this).data(_iCheck)) {
-            off($(this), state);
-          }
-        });
-      }
-
-      // Indeterminate state
-      if (indeterminate) {
-
-        // Add indeterminate state
-        node[state] = true;
-
-        // Remove checked state
-        if (node[_checked]) {
-          off(input, _checked, 'force');
-        }
-
-      // Checked or disabled state
-      } else {
-
-        // Add checked or disabled state
-        if (!keep) {
-          node[state] = true;
-        }
-
-        // Remove indeterminate state
-        if (checked && node[_indeterminate]) {
-          off(input, _indeterminate, false);
-        }
-      }
-
-      // Trigger callbacks
-      callbacks(input, checked, state, keep);
-    }
-
-    // Add proper cursor
-    if (node[_disabled] && !!option(input, _cursor, true)) {
-      parent.find('.' + _iCheckHelper).css(_cursor, 'default');
-    }
-
-    // Add state class
-    parent[_add](specific || option(input, state) || '');
-
-    // Set ARIA attribute
-    if (!!parent.attr('role') && !indeterminate) {
-      parent.attr('aria-' + (disabled ? _disabled : _checked), 'true');
-    }
-
-    // Remove regular state class
-    parent[_remove](regular || option(input, callback) || '');
-  }
-
-  // Remove checked, disabled or indeterminate state
-  function off(input, state, keep) {
-    var node = input[0],
-      parent = input.parent(),
-      checked = state == _checked,
-      indeterminate = state == _indeterminate,
-      disabled = state == _disabled,
-      callback = indeterminate ? _determinate : checked ? _unchecked : 'enabled',
-      regular = option(input, callback + capitalize(node[_type])),
-      specific = option(input, state + capitalize(node[_type]));
-
-    // Prevent unnecessary actions
-    if (node[state] !== false) {
-
-      // Toggle state
-      if (indeterminate || !keep || keep == 'force') {
-        node[state] = false;
-      }
-
-      // Trigger callbacks
-      callbacks(input, checked, callback, keep);
-    }
-
-    // Add proper cursor
-    if (!node[_disabled] && !!option(input, _cursor, true)) {
-      parent.find('.' + _iCheckHelper).css(_cursor, 'pointer');
-    }
-
-    // Remove state class
-    parent[_remove](specific || option(input, state) || '');
-
-    // Set ARIA attribute
-    if (!!parent.attr('role') && !indeterminate) {
-      parent.attr('aria-' + (disabled ? _disabled : _checked), 'false');
-    }
-
-    // Add regular state class
-    parent[_add](regular || option(input, callback) || '');
-  }
-
-  // Remove all traces
-  function tidy(input, callback) {
-    if (input.data(_iCheck)) {
-
-      // Remove everything except input
-      input.parent().html(input.attr('style', input.data(_iCheck).s || ''));
-
-      // Callback
-      if (callback) {
-        input[_callback](callback);
-      }
-
-      // Unbind events
-      input.off('.i').unwrap();
-      $(_label + '[for="' + input[0].id + '"]').add(input.closest(_label)).off('.i');
-    }
-  }
-
-  // Get some option
-  function option(input, state, regular) {
-    if (input.data(_iCheck)) {
-      return input.data(_iCheck).o[state + (regular ? '' : 'Class')];
-    }
-  }
-
-  // Capitalize some string
-  function capitalize(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
-  // Executable handlers
-  function callbacks(input, checked, callback, keep) {
-    if (!keep) {
-      if (checked) {
-        input[_callback]('ifToggled');
-      }
-
-      input[_callback]('ifChanged')[_callback]('if' + capitalize(callback));
-    }
-  }
-})(window.jQuery || window.Zepto);
 
 /*!
  * pGenerator jQuery Plugin v1.0.5
@@ -60178,14 +59674,6 @@ $(document).ready(function () {
     }
   });
   /*
-  * iCheck checkbox plugin
-  */
-
-  $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-    checkboxClass: 'icheckbox_minimal-blue',
-    radioClass: 'iradio_minimal-blue'
-  });
-  /*
   * Select2
   */
 
@@ -60560,26 +60048,14 @@ function htmlEntities(str) {
   };
 })(jQuery);
 /**
- * Universal Livewire Select2 and iCheck integration
+ * Universal Livewire Select2 integration
  *
  * How to use:
  *
- * 1. Set the class of your select2 elements to 'livewire-select2' and your icheck elements to 'livewire-icheck' (as appropriate).
- *    (For iCheck, you may still need to apply the other iCheck classes like 'minimal' or 'iCheck')
+ * 1. Set the class of your select2 elements to 'livewire-select2').
  * 2. Name your element to match a property in your Livewire component
  * 3. Add an attribute called 'data-livewire-component' that points to $_instance->id (via `{{ }}` if you're in a blade,
  *    or just $_instance->id if not).
- * 4. For iCheck, you need to wrap the 'checkbox' element with wire:ignore - perhaps in the <label> if it wraps the
- *    <input> element, or just put a <span wire:ignore></span> around just the input element.
- * 5. If you have dynamically shown/hidden checkboxes, you might need to initialize iCheck on them on component page-load.
- *    Just use $('.livewire-icheck').iCheck(), or for the minimal-style, use:
- *
- *    $('input[type="checkbox"].minimal.livewire-icheck, input[type="radio"].minimal.livewire-icheck').iCheck({
- *          checkboxClass: 'icheckbox_minimal-blue',
- *          radioClass: 'iradio_minimal-blue'
- *      });
- *
- *    (which is stolen from above here in this JS file)
  */
 
 
@@ -60597,16 +60073,7 @@ $(function () {
     window.livewire.find(target.data('livewire-component')).set(event.target.name, this.options[this.selectedIndex].value);
   });
   window.livewire.hook('message.processed', function (el, component) {
-    $('.livewire-select2').select2(); //$('.livewire-icheck').iCheck(); //this seems to blow up pretty badly.
-  });
-  $(document).on('ifToggled', '.livewire-icheck', function (event) {
-    if (!event.target.name || !$(event.target).data('livewire-component')) {
-      console.error("You need to set both name (which should match a Livewire property) and data-livewire-component on your iCheck elements!");
-      console.error("For data-livewire-component, you probably want to use $_instance->id or {{ $_instance->id }}, as appropriate");
-      return false;
-    }
-
-    window.livewire.find($(event.target).data('livewire-component')).set(event.target.name, event.target.checked);
+    $('.livewire-select2').select2();
   });
 });
 
@@ -93073,8 +92540,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AuthorizedClients_vue_vue_type_template_id_2ee9fe67_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AuthorizedClients_vue_vue_type_template_id_2ee9fe67_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   render: () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AuthorizedClients_vue_vue_type_template_id_2ee9fe67_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   staticRenderFns: () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AuthorizedClients_vue_vue_type_template_id_2ee9fe67_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AuthorizedClients_vue_vue_type_template_id_2ee9fe67_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AuthorizedClients.vue?vue&type=template&id=2ee9fe67&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/js/components/passport/AuthorizedClients.vue?vue&type=template&id=2ee9fe67&scoped=true&");
 
@@ -93090,8 +92557,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Clients_vue_vue_type_template_id_5d1d7d82_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Clients_vue_vue_type_template_id_5d1d7d82_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   render: () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Clients_vue_vue_type_template_id_5d1d7d82_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   staticRenderFns: () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Clients_vue_vue_type_template_id_5d1d7d82_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Clients_vue_vue_type_template_id_5d1d7d82_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Clients.vue?vue&type=template&id=5d1d7d82&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/js/components/passport/Clients.vue?vue&type=template&id=5d1d7d82&scoped=true&");
 
@@ -93107,8 +92574,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonalAccessTokens_vue_vue_type_template_id_89c53f18_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonalAccessTokens_vue_vue_type_template_id_89c53f18_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   render: () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonalAccessTokens_vue_vue_type_template_id_89c53f18_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   staticRenderFns: () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonalAccessTokens_vue_vue_type_template_id_89c53f18_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PersonalAccessTokens_vue_vue_type_template_id_89c53f18_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PersonalAccessTokens.vue?vue&type=template&id=89c53f18&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/js/components/passport/PersonalAccessTokens.vue?vue&type=template&id=89c53f18&scoped=true&");
 
@@ -93124,8 +92591,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */   render: () => (/* binding */ render),
+/* harmony export */   staticRenderFns: () => (/* binding */ staticRenderFns)
 /* harmony export */ });
 var render = function() {
   var _vm = this
@@ -93238,8 +92705,8 @@ render._withStripped = true
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */   render: () => (/* binding */ render),
+/* harmony export */   staticRenderFns: () => (/* binding */ staticRenderFns)
 /* harmony export */ });
 var render = function() {
   var _vm = this
@@ -93814,8 +93281,8 @@ render._withStripped = true
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */   render: () => (/* binding */ render),
+/* harmony export */   staticRenderFns: () => (/* binding */ staticRenderFns)
 /* harmony export */ });
 var render = function() {
   var _vm = this
@@ -94338,9 +93805,9 @@ function normalizeComponent (
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Http": () => (/* binding */ Http),
-/* harmony export */   "Resource": () => (/* binding */ Resource),
-/* harmony export */   "Url": () => (/* binding */ Url),
+/* harmony export */   Http: () => (/* binding */ Http),
+/* harmony export */   Resource: () => (/* binding */ Resource),
+/* harmony export */   Url: () => (/* binding */ Url),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /*!

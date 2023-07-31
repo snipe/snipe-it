@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'L\'accessorio non è stato estratto, si prega di riprovare',
         'success' 		=> 'Accessorio estratto con successo.',
+        'unavailable'   => 'Accessorio non disponibile per il check-out. Controlla la quantità disponibile',
         'user_does_not_exist' => 'Questo utente non è valido. Riprova.'
     ),
 

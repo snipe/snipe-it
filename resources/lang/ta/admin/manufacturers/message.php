@@ -2,6 +2,7 @@
 
 return array(
 
+    'support_url_help' => 'Use <code>{LOCALE}</code> and <code>{SERIAL}</code> in your URL as variables to have those values auto-populate when viewing assets.',
     'does_not_exist' => 'உற்பத்தியாளர் இல்லை.',
     'assoc_users'	 => 'இந்த உற்பத்தியாளர் தற்போது குறைந்தது ஒரு மாதிரியுடன் தொடர்புடையது மற்றும் நீக்கப்பட முடியாது. இந்த உற்பத்தியாளரை இனி குறிப்பிடுவதற்கு உங்கள் மாதிரியைப் புதுப்பிக்கவும் மீண்டும் முயற்சிக்கவும்.',
 

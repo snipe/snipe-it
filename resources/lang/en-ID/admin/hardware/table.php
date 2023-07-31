@@ -8,6 +8,7 @@ return [
     'change' 		=> 'Masuk/keluar',
     'checkout_date' => 'Tanggal Check out',
     'checkoutto' 	=> 'Memeriksa',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Current Value',
     'diff' 			=> 'Diff',
     'dl_csv' 		=> 'Unduh CSV',

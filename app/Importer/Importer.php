@@ -27,57 +27,14 @@ abstract class Importer
     protected $updating;
     /**
      * Default Map of item fields->csv names
+     *
+     * This has been moved into Livewire/Importer.php to be more granular.
+     * @todo - remove references to this property since we don't use it anymore.
+     *
      * @var array
      */
     private $defaultFieldMap = [
-        'asset_tag' => 'asset tag',
-        'activated' => 'activated',
-        'category' => 'category',
-        'checkout_class' => 'checkout type', // Supports Location or User for assets.  Using checkout_class instead of checkout_type because type exists on asset already.
-        'checkout_location' => 'checkout location',
-        'company' => 'company',
-        'item_name' => 'item name',
-        'item_number' => 'item number',
-        'image' => 'image',
-        'expiration_date' => 'expiration date',
-        'location' => 'location',
-        'notes' => 'notes',
-        'license_email' => 'licensed to email',
-        'license_name' => 'licensed to name',
-        'maintained' => 'maintained',
-        'manufacturer' => 'manufacturer',
-        'asset_model' => 'model name',
-        'model_number' => 'model number',
-        'order_number' => 'order number',
-        'purchase_cost' => 'purchase cost',
-        'purchase_date' => 'purchase date',
-        'purchase_order' => 'purchase order',
-        'qty' => 'quantity',
-        'reassignable' => 'reassignable',
-        'requestable' => 'requestable',
-        'seats' => 'seats',
-        'serial' => 'serial number',
-        'status' => 'status',
-        'supplier' => 'supplier',
-        'termination_date' => 'termination date',
-        'warranty_months' => 'warranty',
-        'full_name' => 'full name',
-        'email' => 'email',
-        'username' => 'username',
-        'address' => 'address',
-        'city' => 'city',
-        'state' => 'state',
-        'country' => 'country',
-        'jobtitle' => 'job title',
-        'employee_num' => 'employee number',
-        'phone_number' => 'phone number',
-        'first_name' => 'first name',
-        'last_name' => 'last name',
-        'department' => 'department',
-        'manager_first_name' => 'manager first name',
-        'manager_last_name' => 'manager last name',
-        'min_amt' => 'minimum quantity',
-        'remote' => 'remote',
+
     ];
     /**
      * Map of item fields->csv names
@@ -119,7 +76,7 @@ abstract class Importer
         } else {
             $this->csv = Reader::createFromString($file);
         }
-        $this->tempPassword = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 20);
+        $this->tempPassword = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 40);
     }
 
     // Cached Values for import lookups
@@ -198,11 +155,11 @@ abstract class Importer
         $val = $default;
         $key = $this->lookupCustomKey($key);
 
-        $this->log("Custom Key: ${key}");
+       // $this->log("Custom Key: ${key}");
         if (array_key_exists($key, $array)) {
             $val = Encoding::toUTF8(trim($array[$key]));
         }
-        $this->log("${key}: ${val}");
+        //$this->log("${key}: ${val}");
         return $val;
     }
 
@@ -280,10 +237,13 @@ abstract class Importer
      * @return User Model w/ matching name
      * @internal param array $user_array User details parsed from csv
      */
-    protected function createOrFetchUser($row)
+    protected function createOrFetchUser($row, $type = 'user')
     {
+
         $user_array = [
             'full_name' => $this->findCsvMatch($row, 'full_name'),
+            'first_name' => $this->findCsvMatch($row, 'first_name'),
+            'last_name' => $this->findCsvMatch($row, 'last_name'),
             'email'     => $this->findCsvMatch($row, 'email'),
             'manager_id'=>  '',
             'department_id' =>  '',
@@ -292,48 +252,53 @@ abstract class Importer
             'remote'    => $this->fetchHumanBoolean(($this->findCsvMatch($row, 'remote'))),
         ];
 
-        // Maybe we're lucky and the user already exists.
-        if ($user = User::where('username', $user_array['username'])->first()) {
-            $this->log('User '.$user_array['username'].' already exists');
-
-            return $user;
+        if ($type == 'manager') {
+            $user_array['full_name'] = $this->findCsvMatch($row, 'manager');
+            $user_array['username'] = $this->findCsvMatch($row, 'manager_username');
         }
 
-        // If the full name is empty, bail out--we need this to extract first name (at the very least)
-        if (empty($user_array['full_name'])) {
-            $this->log('Insufficient user data provided (Full name is required)- skipping user creation, just adding asset');
+        // Maybe we're lucky and the username was passed and it already exists.
+        if (!empty($user_array['username'])) {
+            if ($user = User::where('username', $user_array['username'])->first()) {
+                $this->log('User '.$user_array['username'].' already exists');
+                return $user;
+            }
+        }
 
+
+        // If the full name and username is empty, bail out--we need this to extract first name (at the very least)
+        if ((empty($user_array['username'])) && (empty($user_array['full_name'])) && (empty($user_array['first_name']))) {
+            $this->log('Insufficient user data provided (Full name, first name or username is required) - skipping user creation.');
+            \Log::debug('User array: ');
+            \Log::debug(print_r($user_array, true));
+            \Log::debug(print_r($row, true));
             return false;
         }
 
-        // Is the user actually an ID?
-        if ($user = $this->findUserByNumber($user_array['full_name'])) {
-            return $user;
-        }
-        $this->log('User does not appear to be an id with number: '.$user_array['full_name'].'.  Continuing through our processes');
 
         // Populate email if it does not exist.
         if (empty($user_array['email'])) {
             $user_array['email'] = User::generateEmailFromFullName($user_array['full_name']);
         }
 
-        $user_formatted_array = User::generateFormattedNameFromFullName($user_array['full_name'], Setting::getSettings()->username_format);
-        $user_array['first_name'] = $user_formatted_array['first_name'];
-        $user_array['last_name'] = $user_formatted_array['last_name'];
+        if (empty($user_array['first_name'])) {
+            // Get some fields for first name and last name based off of full name
+            $user_formatted_array = User::generateFormattedNameFromFullName($user_array['full_name'], Setting::getSettings()->username_format);
+            $user_array['first_name'] = $user_formatted_array['first_name'];
+            $user_array['last_name'] = $user_formatted_array['last_name'];
+        }
 
         if (empty($user_array['username'])) {
             $user_array['username'] = $user_formatted_array['username'];
             if ($this->usernameFormat == 'email') {
                 $user_array['username'] = $user_array['email'];
             }
-        }
 
-        // Does this ever actually fire??
-        // Check for a matching user after trying to guess username.
-        if ($user = User::where('username', $user_array['username'])->first()) {
-            $this->log('User '.$user_array['username'].' already exists');
-
-            return $user;
+            // Check for a matching username one more time after trying to guess username.
+            if ($user = User::where('username', $user_array['username'])->first()) {
+                $this->log('User '.$user_array['username'].' already exists');
+                return $user;
+            }
         }
 
         // If at this point we have not found a username or first name, bail out in shame.
@@ -341,7 +306,7 @@ abstract class Importer
             return false;
         }
 
-        // No Luck, let's create one.
+        // No luck finding a user on username or first name, let's create one.
         $user = new User;
         $user->first_name = $user_array['first_name'];
         $user->last_name = $user_array['last_name'];
@@ -356,9 +321,9 @@ abstract class Importer
 
         if ($user->save()) {
             $this->log('User '.$user_array['username'].' created');
-
             return $user;
         }
+
         $this->logError($user, 'User "'.$user_array['username'].'" was not able to be created.');
 
         return false;

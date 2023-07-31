@@ -8,6 +8,7 @@ return [
     'change' 		=> 'Prejeto/Izdano',
     'checkout_date' => 'Datum Izdaje',
     'checkoutto' 	=> 'Izdano',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Current Value',
     'diff' 			=> 'Razlika',
     'dl_csv' 		=> 'Prenesi CSV',

@@ -6,67 +6,6 @@
     @parent
 @stop
 
-{{-- Right header --}}
-@section('header_right')
-
-
-    @can('manage', \App\Models\Asset::class)
-        @if ($asset->deleted_at=='')
-        <div class="dropdown pull-right">
-            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu pull-right" role="menu">
-                
-                @if (($asset->assetstatus) && ($asset->assetstatus->deployable=='1'))
-                    @if (($asset->assigned_to != '') && ($asset->deleted_at==''))
-                        @can('checkin', \App\Models\Asset::class)
-                            <li role="menuitem">
-                                <a href="{{ route('hardware.checkin.create', $asset->id) }}">
-                                    {{ trans('admin/hardware/general.checkin') }}
-                                </a>
-                            </li>
-                        @endcan
-                    @elseif (($asset->assigned_to == '') && ($asset->deleted_at==''))
-                        @can('checkout', \App\Models\Asset::class)
-                            <li role="menuitem">
-                                <a href="{{ route('hardware.checkout.create', $asset->id)  }}">
-                                    {{ trans('admin/hardware/general.checkout') }}
-                                </a>
-                            </li>
-                        @endcan
-                    @endif
-                @endif
-
-                @can('update', \App\Models\Asset::class)
-                    <li role="menuitem">
-                        <a href="{{ route('hardware.edit', $asset->id) }}">
-                            {{ trans('admin/hardware/general.edit') }}
-                        </a>
-                    </li>
-                @endcan
-
-                @can('create', \App\Models\Asset::class)
-                    <li role="menuitem">
-                        <a href="{{ route('clone/hardware', $asset->id) }}">
-                            {{ trans('admin/hardware/general.clone') }}
-                        </a>
-                    </li>
-                @endcan
-
-                @can('audit', \App\Models\Asset::class)
-                    <li role="menuitem">
-                        <a href="{{ route('asset.audit.create', $asset->id)  }}">
-                            {{ trans('general.audit') }}
-                        </a>
-                    </li>
-                @endcan
-            </ul>
-        </div>
-        @endif
-    @endcan
-@stop
-
 {{-- Page content --}}
 @section('content')
 
@@ -75,8 +14,7 @@
         @if (!$asset->model)
             <div class="col-md-12">
                 <div class="callout callout-danger">
-                    <h2>{{ trans('admin/models/message.no_association') }}</h2>
-                        <p>{{ trans('admin/models/message.no_association_fix') }}</p>
+                      <p><strong>{{ trans('admin/models/message.no_association') }}</strong> {{ trans('admin/models/message.no_association_fix') }}</p>
                 </div>
             </div>
         @endif
@@ -183,7 +121,7 @@
                           </span>
                         <span class="hidden-xs hidden-sm">
                             {{ trans('general.additional_files') }}
-                            {!! ($asset->model->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($asset->model->uploads->count()).'</badge>' : '' !!}
+                            {!! ($asset->model) && ($asset->model->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($asset->model->uploads->count()).'</badge>' : '' !!}
                           </span>
                     </a>
                     </li>
@@ -342,8 +280,9 @@
                                                     @if (($asset->model) && ($asset->model->manufacturer->url))
                                                         <li>
                                                             <i class="fas fa-globe-americas" aria-hidden="true"></i>
-                                                            <a href="{{ $asset->model->manufacturer->url }}">
+                                                            <a href="{{ $asset->model->manufacturer->url }}" target="_blank">
                                                                 {{ $asset->model->manufacturer->url }}
+                                                                <i class="fa fa-external-link" aria-hidden="true"></i>
                                                             </a>
                                                         </li>
                                                     @endif
@@ -351,8 +290,19 @@
                                                     @if (($asset->model) && ($asset->model->manufacturer->support_url))
                                                         <li>
                                                             <i class="far fa-life-ring" aria-hidden="true"></i>
-                                                            <a href="{{ $asset->model->manufacturer->support_url }}">
+                                                            <a href="{{ $asset->model->manufacturer->support_url }}" target="_blank">
                                                                 {{ $asset->model->manufacturer->support_url }}
+                                                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                            </a>
+                                                        </li>
+                                                    @endif
+
+                                                    @if (($asset->model->manufacturer) && ($asset->model->manufacturer->warranty_lookup_url!=''))
+                                                        <li>
+                                                            <i class="far fa-wrench" aria-hidden="true"></i>
+                                                            <a href="{{ $asset->present()->dynamicWarrantyUrl() }}" target="_blank">
+                                                                {{ $asset->present()->dynamicWarrantyUrl() }}
+                                                                <i class="fa fa-external-link" aria-hidden="true"><span class="sr-only">{{ trans('admin/hardware/general.mfg_warranty_lookup', ['manufacturer' => $asset->model->manufacturer->name]) }}</span></i>
                                                             </a>
                                                         </li>
                                                     @endif
@@ -456,11 +406,11 @@
                                                 </div>
                                                 <div class="col-md-6{{ (($field->format=='URL') && ($asset->{$field->db_column_name()}!='')) ? ' ellipsis': '' }}">
                                                     @if ($field->field_encrypted=='1')
-                                                        <i class="fas fa-lock" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}"></i>
+                                                        <i class="fas fa-lock" data-tooltip="true" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}"></i>
                                                     @endif
 
                                                     @if ($field->isFieldDecryptable($asset->{$field->db_column_name()} ))
-                                                        @can('superuser')
+                                                        @can('assets.view.encrypted_custom_fields')
                                                             @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
                                                                 <a href="{{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}" target="_new">{{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}</a>
                                                             @elseif (($field->format=='DATE') && ($asset->{$field->db_column_name()}!=''))
@@ -530,6 +480,25 @@
                                             </div>
                                         </div>
                                     @endif
+                                    @if(($asset->components->count() > 0) && ($asset->purchase_cost))
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <strong>
+                                                    {{ trans('admin/hardware/table.components_cost') }}
+                                                </strong>
+                                            </div>
+                                            <div class="col-md-6">
+                                                @if (($asset->id) && ($asset->location))
+                                                    {{ $asset->location->currency }}
+                                                @elseif (($asset->id) && ($asset->location))
+                                                    {{ $asset->location->currency }}
+                                                @else
+                                                    {{ $snipeSettings->default_currency }}
+                                                @endif
+                                                {{Helper::formatCurrencyOutput($asset->getComponentCost())}}
+                                            </div>
+                                        </div>
+                                    @endif
                                     @if (($asset->model) && ($asset->depreciation) && ($asset->purchase_date))
                                         <div class="row">
                                             <div class="col-md-2">
@@ -595,20 +564,10 @@
                                                 {{ $asset->warranty_months }}
                                                 {{ trans('admin/hardware/form.months') }}
 
-                                                @if ($asset->serial && $asset->model->manufacturer)
-                                                    @if ((strtolower($asset->model->manufacturer->name) == "apple") || (str_starts_with(str_replace(' ','',strtolower($asset->model->manufacturer->name)),"appleinc")))
-                                                    <a href="https://checkcoverage.apple.com/us/{{ \App\Models\Setting::getSettings()->locale  }}/?sn={{ $asset->serial }}" target="_blank">
-                                                        <i class="fa-brands fa-apple" aria-hidden="true"><span class="sr-only">{{ trans('hardware/general.mfg_warranty_lookup') }}</span></i>
+                                                @if (($asset->model) && ($asset->model->manufacturer) && ($asset->model->manufacturer->warranty_lookup_url!=''))
+                                                    <a href="{{ $asset->present()->dynamicWarrantyUrl() }}" target="_blank">
+                                                        <i class="fa fa-external-link" aria-hidden="true"><span class="sr-only">{{ trans('admin/hardware/general.mfg_warranty_lookup', ['manufacturer' => $asset->model->manufacturer->name]) }}</span></i>
                                                     </a>
-                                                    @elseif ((strtolower($asset->model->manufacturer->name) == "dell") || (str_starts_with(str_replace(' ','',strtolower($asset->model->manufacturer->name)),"dellinc")))
-                                                    <a href="https://www.dell.com/support/home/en-us?app=warranty" target="_blank">
-                                                        <img src="/img/demo/manufacturers/dellicon.png" style="width:25px;height:25px;"><span class="sr-only">{{ trans('hardware/general.mfg_warranty_lookup') }}</span></i>
-                                                    </a>
-                                                    @elseif ((strtolower($asset->model->manufacturer->name) == "lenovo") || (str_starts_with(str_replace(' ','',strtolower($asset->model->manufacturer->name)),"lenovoinc")))
-                                                    <a href="https://pcsupport.lenovo.com/us/en/warrantylookup#/" target="_blank">
-                                                        <img src="/img/demo/manufacturers/lenovoicon.png" style="width:25px;height:25px;"><span class="sr-only">{{ trans('hardware/general.mfg_warranty_lookup') }}</span></i>
-                                                    </a>
-                                                    @endif
                                                 @endif
                                             </div>
                                         </div>
@@ -721,7 +680,7 @@
                                             </strong>
                                         </div>
                                         <div class="col-md-6">
-                                            {!! nl2br(e($asset->notes)) !!}
+                                            {!! nl2br(Helper::parseEscapedMarkedownInline($asset->notes)) !!}
                                         </div>
                                     </div>
 
@@ -864,17 +823,73 @@
                             <div class="col-md-4">
 
                                 @if (($asset->image) || (($asset->model) && ($asset->model->image!='')))
-
-
                                     <div class="text-center col-md-12" style="padding-bottom: 15px;">
                                         <a href="{{ ($asset->getImageUrl()) ? $asset->getImageUrl() : null }}" data-toggle="lightbox">
                                             <img src="{{ ($asset->getImageUrl()) ? $asset->getImageUrl() : null }}" class="assetimg img-responsive" alt="{{ $asset->getDisplayNameAttribute() }}">
                                         </a>
                                     </div>
+                                @else
+                                    <!-- generic image goes here -->
                                 @endif
 
+                                    <!-- Start side button column -->
+
+                                    @if (($asset->assetstatus) && ($asset->assetstatus->deployable=='1'))
+                                        @if (($asset->assigned_to != '') && ($asset->deleted_at==''))
+                                            @can('checkin', \App\Models\Asset::class)
+                                                <div class="col-md-12">
+                                                    <a href="{{ route('hardware.checkin.create', $asset->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">
+                                                        {{ trans('admin/hardware/general.checkin') }}
+                                                    </a>
+                                                </div>
+                                            @endcan
+                                        @elseif (($asset->assigned_to == '') && ($asset->deleted_at==''))
+                                            @can('checkout', \App\Models\Asset::class)
+                                                <div class="col-md-12" style="padding-top: 5px;">
+                                                    <a href="{{ route('hardware.checkout.create', $asset->id)  }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">
+                                                        {{ trans('admin/hardware/general.checkout') }}
+                                                    </a>
+                                                </div>
+                                            @endcan
+                                        @endif
+                                    @endif
+
+
+                                    @can('update', $asset)
+                                        <div class="col-md-12" style="padding-top: 5px;">
+                                            <a href="{{ route('hardware.edit', $asset->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">
+                                                {{ trans('admin/hardware/general.edit') }}
+                                            </a>
+                                        </div>
+                                    @endcan
+
+                                    @can('create', $asset)
+                                        <div class="col-md-12" style="padding-top: 5px;">
+                                            <a href="{{ route('clone/hardware', $asset->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">
+                                                {{ trans('admin/hardware/general.clone') }}
+                                            </a>
+                                        </div>
+                                    @endcan
+
+                                    @can('audit', \App\Models\Asset::class)
+                                        <div class="col-md-12" style="padding-top: 5px;">
+                                            <a href="{{ route('asset.audit.create', $asset->id)  }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">
+                                                {{ trans('general.audit') }}
+                                            </a>
+                                        </div>
+                                    @endcan
+
+                                    @can('delete', $asset)
+                                        @if ($asset->deleted_at=='')
+                                            <div class="col-md-12" style="padding-top: 30px; padding-bottom: 30px;">
+                                                <button class="btn btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.sure_to_delete', ['item' => $asset->asset_tag]) }}" data-target="#dataConfirmModal">{{ trans('general.delete') }} </button>
+                                                <span class="sr-only">{{ trans('general.delete') }}</span>
+                                            </div>
+                                        @endif
+                                    @endcan
+
                                 @if ($asset->deleted_at!='')
-                                    <div class="text-center col-md-12" style="padding-bottom: 15px;">
+                                    <div class="text-center col-md-12" style="padding-top: 30px; padding-bottom: 30px;">
                                         <form method="POST" action="{{ route('restore/hardware', ['assetId' => $asset->id]) }}">
                                         @csrf 
                                         <button class="btn btn-danger col-md-12">{{ trans('general.restore') }}</button>
@@ -887,11 +902,13 @@
                                 @endif
 
                                 @if (($asset->assignedTo) && ($asset->deleted_at==''))
-                                    <h2>{{ trans('admin/hardware/form.checkedout_to') }}</h2>
+                                    <div style="text-align: left">
+                                        <h2>{{ trans('admin/hardware/form.checkedout_to') }}</h2>
                                         <p>
                                         @if($asset->checkedOutToUser()) <!-- Only users have avatars currently-->
                                             <img src="{{ $asset->assignedTo->present()->gravatar() }}" class="user-image-inline" alt="{{ $asset->assignedTo->present()->fullName() }}">
                                             @endif
+                                        </p>
                                             {!! $asset->assignedTo->present()->glyph() . ' ' .$asset->assignedTo->present()->nameUrl() !!}
                                         </p>
 
@@ -910,6 +927,10 @@
                                                 </li>
                                             @endif
 
+                                            @if((isset($asset->assignedTo)) && ($asset->assignedTo->department))
+                                                <li>{{ trans('admin/hardware/general.user_department') }}: {{ $asset->assignedTo->department->name}}</li>
+                                            @endif
+
                                             @if (isset($asset->location))
                                                 <li>{{ $asset->location->name }}</li>
                                                 <li>{{ $asset->location->address }}
@@ -925,7 +946,16 @@
                                                     {{ $asset->location->state }} {{ $asset->location->zip }}
                                                 </li>
                                             @endif
+                                                <li>
+                                                    <i class="fas fa-calendar"></i> {{ trans('admin/hardware/form.checkout_date') }}: {{ Helper::getFormattedDateObject($asset->last_checkout, 'date', false) }}
+                                                </li>
+                                            @if (isset($asset->expected_checkin))
+                                                <li>
+                                                    <i class="fas fa-calendar"></i> {{ trans('admin/hardware/form.expected_checkin') }}: {{ Helper::getFormattedDateObject($asset->expected_checkin, 'date', false) }}
+                                                </li>
+                                            @endif
                                         </ul>
+                                    </div>
 
                                 @endif
                             </div> <!-- div.col-md-4 -->
@@ -1154,17 +1184,15 @@
                       data-cookie="true">
                 <thead>
                 <tr>
-                  <th data-visible="true" style="width: 40px;" class="hidden-xs">{{ trans('admin/hardware/table.icon') }}</th>
+                  <th data-visible="true" data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter">{{ trans('admin/hardware/table.icon') }}</th>
                   <th class="col-sm-2" data-visible="true" data-field="action_date" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
                   <th class="col-sm-1" data-visible="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
                   <th class="col-sm-1" data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
                   <th class="col-sm-2" data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
                   <th class="col-sm-2" data-visible="true" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
                   <th class="col-sm-2" data-field="note">{{ trans('general.notes') }}</th>
-                    @if  ($snipeSettings->require_accept_signature=='1')
-                        <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
-                    @endif
-                    <th class="col-md-3" data-visible="false" data-field="file" data-visible="false"  data-formatter="fileUploadFormatter">{{ trans('general.download') }}</th>
+                  <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
+                  <th class="col-md-3" data-visible="false" data-field="file" data-visible="false"  data-formatter="fileUploadFormatter">{{ trans('general.download') }}</th>
                   <th class="col-sm-2" data-field="log_meta" data-visible="true" data-formatter="changeLogFormatter">{{ trans('admin/hardware/table.changed')}}</th>
                 </tr>
                 </thead>
@@ -1274,7 +1302,7 @@
                         <div class="row">
                             <div class="col-md-12">
 
-                                @if ($asset->model->uploads->count() > 0)
+                                @if (($asset->model) && ($asset->model->uploads->count() > 0))
                                     <table
                                             class="table table-striped snipe-table"
                                             id="assetModelFileHistory"
@@ -1378,6 +1406,16 @@
 @stop
 
 @section('moar_scripts')
+    <script>
+
+        $('#dataConfirmModal').on('show.bs.modal', function (event) {
+            var content = $(event.relatedTarget).data('content');
+            var title = $(event.relatedTarget).data('title');
+            $(this).find(".modal-body").text(content);
+            $(this).find(".modal-header").text(title);
+        });
+
+    </script>
     @include ('partials.bootstrap-table')
 
 @stop

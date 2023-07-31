@@ -6,7 +6,7 @@ return array(
     'declined'                  => '이 자산이 거부되었습니다.',
     'bulk_manager_warn'	        => '사용자가 성공적으로 갱신되었지만, 선택한 관리자가 편집할 사용자 목록에도 있었고, 사용자가 자신의 관리자가 아니 어서 관리자 항목이 저장되지 않았습니다. 관리자를 제외한 사용자를 다시 선택하십시오.',
     'user_exists'               => '사용자가 이미 존재합니다!',
-    'user_not_found'            => '사용자 [:id]는 존재하지 않습니다.',
+    'user_not_found'            => 'User does not exist.',
     'user_login_required'       => '로그인 항목을 입력해 주세요.',
     'user_password_required'    => '비밀번호를 입력해 주세요.',
     'insufficient_permissions'  => '승인 불충분.',

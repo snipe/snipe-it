@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'To sredstev ste uspešno zavrnili.',
     'bulk_manager_warn'	        => 'Vaši uporabniki so bili uspešno posodobljeni, vendar vnos v upravitelju ni bil shranjen, ker je bil izbran upravitelj tudi na seznamu uporabnikov, ki ga je treba urediti, uporabniki pa morda niso njihovi lastniki. Prosimo, izberite svoje uporabnike, razen upravitelja.',
     'user_exists'               => 'Uporabnik že obstaja!',
-    'user_not_found'            => 'Uporabnik [: id] ne obstaja.',
+    'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Polje za prijavo je obvezno',
     'user_password_required'    => 'Geslo je obvezno.',
     'insufficient_permissions'  => 'Nezadostna dovoljenja.',

@@ -123,6 +123,7 @@ class AssetModelPresenter extends Presenter
                 'switchable' => true,
                 'title' => trans('general.notes'),
                 'visible' => false,
+                'formatter' => 'notesFormatter',
             ],
             [
                 'field' => 'created_at',
@@ -210,7 +211,7 @@ class AssetModelPresenter extends Presenter
     public function imageUrl()
     {
         if (! empty($this->image)) {
-            return '<img src="'.url('/').'/uploads/models/'.$this->image.'" alt="'.$this->name.'" height="50" width="50">';
+            return '<img src="'.config('app.url').'/uploads/models/'.$this->image.'" alt="'.$this->name.'" height="50" width="50">';
         }
 
         return '';
@@ -223,7 +224,7 @@ class AssetModelPresenter extends Presenter
     public function imageSrc()
     {
         if (! empty($this->image)) {
-            return url('/').'/uploads/models/'.$this->image;
+            return config('app.url').'/uploads/models/'.$this->image;
         }
 
         return '';

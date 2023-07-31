@@ -95,8 +95,8 @@ class AssetMaintenance extends Model implements ICompanyableChild
      */
     public function setCostAttribute($value)
     {
-        $value = Helper::ParseFloat($value);
-        if ($value == '0.0') {
+        $value = Helper::ParseCurrency($value);
+        if ($value == 0) {
             $value = null;
         }
         $this->attributes['cost'] = $value;

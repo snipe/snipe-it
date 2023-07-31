@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Ulteriori Informazioni',
 
-    'audit_help' => 'Selezionando questa casella verrà modificato l\'asset per riflettere la nuova località, altrimenti verrà semplicemente menzionato nel registro di audit.<br><br>Se l\'asset è già assegnato, non cambierà la località dell\'utente, dell\'asset o la località a cui è assegnato.',
+    'audit_help' => 'Selezionando questa casella verranno modificati le posizioni dei beni. Non selezionandola, il luogo verrà semplicemente annotato nel log di controllo.<br><br>Nota che se questo bene è assegnato, non modificherà la posizione della persona, bene o posizione a cui è assegnato.',
 
     'assets' => 'Assets sono elementi tracciati con il numero di serie o il tag. Tendono ad essere elementi di valore più elevato, ove è importante identificare un elemento specifico.',
 

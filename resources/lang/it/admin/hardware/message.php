@@ -23,6 +23,8 @@ return [
     'restore' => [
         'error'   		=> 'Il bene non è stato ripristinato, riprova',
         'success' 		=> 'Bene ripristinato con successo.',
+        'bulk_success' 		=> 'Bene ripristinato con successo.',
+        'nothing_updated'   => 'Nessun bene selezionato, non è stato ripristinato nulla.', 
     ],
 
     'audit' => [
@@ -49,8 +51,8 @@ return [
         'success'               => 'Il file è stato importato con successo',
         'file_delete_success'   => 'Il file è stato cancellato con successo',
         'file_delete_error'      => 'Impossibile eliminare il file',
-        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
-        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'header_row_has_malformed_characters' => 'Uno o più attributi nella riga d\'intestazione contengono caratteri UTF-8 malformati',
+        'content_row_has_malformed_characters' => 'Uno o più attributi nella prima riga del contenuto contengono caratteri UTF-8 malformati',
     ],
 
 

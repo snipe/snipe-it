@@ -24,7 +24,7 @@ class WelcomeNotification extends Notification
         $this->_data['last_name'] = htmlspecialchars_decode($content['last_name']);
         $this->_data['username'] = htmlspecialchars_decode($content['username']);
         $this->_data['password'] = htmlspecialchars_decode($content['password']);
-        $this->_data['url'] = url('/');
+        $this->_data['url'] = config('app.url');
     }
 
     /**

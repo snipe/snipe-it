@@ -53,9 +53,9 @@
                                             <input class="form-control" placeholder="{{ trans('admin/users/table.password')  }}" name="password" type="password" id="password" autocomplete="off">
                                             {!! $errors->first('password', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                                         </div>
-                                        <div class="checkbox">
-                                            <label style="margin-left: -20px;">
-                                                <input name="remember" type="checkbox" value="1" class="minimal"> {{ trans('auth/general.remember_me')  }}
+                                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                            <label class="form-control">
+                                                <input name="remember" type="checkbox" value="1"> {{ trans('auth/general.remember_me')  }}
                                             </label>
                                         </div>
                                     </fieldset>
@@ -64,7 +64,7 @@
                             </div> <!-- end row -->
 
                             @if (!config('app.require_saml') && $snipeSettings->saml_enabled)
-                            <div class="row ">
+                            <div class="row">
                                 <div class="text-right col-md-12">
                                     <a href="{{ route('saml.login')  }}">{{ trans('auth/general.saml_login')  }}</a>
                                 </div>
@@ -73,21 +73,31 @@
                         </div>
                         <div class="box-footer">
                             @if (config('app.require_saml'))
-                            <a class="btn btn-lg btn-primary btn-block" href="{{ route('saml.login')  }}">{{ trans('auth/general.saml_login')  }}</a>
+                                <a class="btn btn-primary btn-block" href="{{ route('saml.login')  }}">{{ trans('auth/general.saml_login')  }}</a>
                             @else
-                            <button class="btn btn-lg btn-primary btn-block">{{ trans('auth/general.login')  }}</button>
+                                <button class="btn btn-primary btn-block">{{ trans('auth/general.login')  }}</button>
                             @endif
-                        </div>
-                        <div class="text-right col-md-12 col-sm-12 col-xs-12" style="padding-top: 10px;">
+
                             @if ($snipeSettings->custom_forgot_pass_url)
-                                <a href="{{ $snipeSettings->custom_forgot_pass_url  }}" rel="noopener">{{ trans('auth/general.forgot_password')  }}</a>
+                                <div class="col-md-12 text-right" style="padding-top: 15px;">
+                                    <a href="{{ $snipeSettings->custom_forgot_pass_url  }}" rel="noopener">{{ trans('auth/general.forgot_password')  }}</a>
+                                </div>
                             @elseif (!config('app.require_saml'))
-                                <a href="{{ route('password.request')  }}">{{ trans('auth/general.forgot_password')  }}</a>
+                                <div class="col-md-12 text-right" style="padding-top: 15px;">
+                                    <a href="{{ route('password.request')  }}">{{ trans('auth/general.forgot_password')  }}</a>
+                                </div>
                             @endif
 
-
                         </div>
+
                     </div> <!-- end login box -->
+
+                    @if (($snipeSettings->google_login=='1') && ($snipeSettings->google_client_id!='') && ($snipeSettings->google_client_secret!=''))
+
+                        <a href="{{ route('google.redirect')  }}" class="btn btn-block btn-social btn-google">
+                            <i class="fa-brands fa-google"></i> {{ trans('auth/general.google_login') }}
+                        </a>
+                    @endif
 
                 </div> <!-- col-md-4 -->
 

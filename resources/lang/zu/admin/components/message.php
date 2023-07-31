@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Ingxenye ayizange ihlolwe, sicela uzame futhi',
         'success' 		=> 'Ingxenye ihloliwe ngempumelelo.',
-        'user_does_not_exist' => 'Lo msebenzisi awuvumelekile. Ngicela uzame futhi.'
+        'user_does_not_exist' => 'Lo msebenzisi awuvumelekile. Ngicela uzame futhi.',
+        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

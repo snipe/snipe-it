@@ -67,6 +67,8 @@ return [
         'array'   => ':attribute on oltava vähintään :min nimikettä.',
     ],
     'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'Valittu :attribute on virheellinen.',
     'numeric'              => ':attribute tulee olla numero.',
     'present'              => ':attribute kentän on oltava määritettynä.',

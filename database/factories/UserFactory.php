@@ -65,6 +65,20 @@ class UserFactory extends Factory
         });
     }
 
+    public function testAdmin()
+    {
+        return $this->state(function () {
+            return [
+                'first_name' => 'Alison',
+                'last_name' => 'Gianotto',
+                'username' => 'agianotto@grokability.com',
+                'avatar' => '2.jpg',
+                'email' => 'agianotto@grokability.com',
+                'permissions' => '{"superuser":"1"}',
+            ];
+        });
+    }
+
     public function superuser()
     {
         return $this->state(function () {
@@ -257,6 +271,15 @@ class UserFactory extends Factory
         });
     }
 
+    public function viewDepartments()
+    {
+        return $this->state(function () {
+            return [
+                'permissions' => '{"departments.view":"1"}',
+            ];
+        });
+    }
+
     public function viewLicenses()
     {
         return $this->state(function () {
@@ -401,4 +424,12 @@ class UserFactory extends Factory
         });
     }
 
+    public function canEditOwnLocation()
+    {
+        return $this->state(function () {
+            return [
+                'permissions' => '{"self.edit_location":"1"}',
+            ];
+        });
+    }
 }

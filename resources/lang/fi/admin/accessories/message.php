@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Oheistarviketta ei luovutettu, yritä uudelleen',
         'success' 		=> 'Oheistarvike luovutettiin onnistuneesti.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Käyttäjä on virheellinen. Yritä uudelleen.'
     ),
 

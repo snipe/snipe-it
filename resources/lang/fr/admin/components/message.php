@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Le composant n\'a pas été libéré, merci d\'essayer à nouveau',
         'success' 		=> 'Le composant a bien été libéré.',
-        'user_does_not_exist' => 'Cet utilisateur n\'est pas valide. Merci d\'essayer à nouveau.'
+        'user_does_not_exist' => 'Cet utilisateur n\'est pas valide. Merci d\'essayer à nouveau.',
+        'unavailable'      => 'Pas assez de composants restants : :remaining restant, :requested requis ',
     ),
 
     'checkin' => array(

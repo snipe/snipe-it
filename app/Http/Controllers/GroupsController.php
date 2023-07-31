@@ -92,7 +92,7 @@ class GroupsController extends Controller
             return view('groups.edit', compact('group', 'permissions', 'selected_array', 'groupPermissions'));
         }
 
-        return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found'));
+        return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found', ['id' => $id]));
     }
 
     /**
@@ -107,7 +107,7 @@ class GroupsController extends Controller
     public function update(Request $request, $id = null)
     {
         if (! $group = Group::find($id)) {
-            return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
+            return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found', ['id' => $id]));
         }
         $group->name = $request->input('name');
         $group->permissions = json_encode($request->input('permission'));
@@ -133,14 +133,13 @@ class GroupsController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function destroy($id = null)
+    public function destroy($id)
     {
         if (! config('app.lock_passwords')) {
             if (! $group = Group::find($id)) {
-                return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
+                return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found', ['id' => $id]));
             }
             $group->delete();
-            // Redirect to the group management page
             return redirect()->route('groups.index')->with('success', trans('admin/groups/message.success.delete'));
         }
 
@@ -164,6 +163,6 @@ class GroupsController extends Controller
             return view('groups/view', compact('group'));
         }
 
-        return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
+        return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found', ['id' => $id]));
     }
 }

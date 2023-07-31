@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Transformers\CustomFieldsetsTransformer;
 use App\Http\Transformers\CustomFieldsTransformer;
 use App\Models\CustomFieldset;
+use App\Models\CustomField;
 use Illuminate\Http\Request;
 use Redirect;
 use View;
@@ -94,6 +95,18 @@ class CustomFieldsetsController extends Controller
         $fieldset->fill($request->all());
 
         if ($fieldset->save()) {
+            // Sync fieldset with auto_add_to_fieldsets
+            $fields = CustomField::select('id')->where('auto_add_to_fieldsets', '=', '1')->get();
+
+            if ($fields->count() > 0) {
+
+                foreach ($fields as $field) {
+                    $field_ids[] = $field->id;
+                }
+
+                $fieldset->fields()->sync($field_ids);
+            }
+
             return response()->json(Helper::formatStandardApiResponse('success', $fieldset, trans('admin/custom_fields/message.fieldset.create.success')));
         }
 

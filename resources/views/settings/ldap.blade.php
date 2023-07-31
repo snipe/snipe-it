@@ -22,6 +22,5 @@
 
     @livewire('ldap-settings-form')
 
-
 @stop
 

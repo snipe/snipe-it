@@ -8,6 +8,7 @@ return [
     'change' 		=> 'Příjem/Výdej',
     'checkout_date' => 'Datum vydání',
     'checkoutto' 	=> 'Vydané',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Aktuální hodnota',
     'diff' 			=> 'Rozdíl',
     'dl_csv' 		=> 'Stáhnout CSV',

@@ -10,6 +10,7 @@ return array(
     'support_email'   		=> 'Дэмжлэг Имэйл',
     'support_phone'   		=> 'Утасны дэмжлэг',
     'support_url'   		=> 'Дэмжих URL',
+    'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Үйлдвэрлэгчийг шинэчлэх',
     'url'   				=> 'URL',
 

@@ -8,6 +8,7 @@ return [
     'change' 		=> 'In / Out',
     'checkout_date' => 'ชำระเงินวันที่',
     'checkoutto' 	=> 'เช็คเอาท์',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Current Value',
     'diff' 			=> 'diff',
     'dl_csv' 		=> 'ดาวน์โหลด CSV',

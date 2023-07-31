@@ -23,6 +23,8 @@ return [
     'restore' => [
         'error'   		=> 'Το ενεργητικό δεν έχει αποκατασταθεί, δοκιμάστε ξανά',
         'success' 		=> 'Τα πάγια επαναφέρθηκαν επιτυχώς.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [

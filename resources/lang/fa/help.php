@@ -15,8 +15,7 @@ return [
 
     'more_info_title' => 'اطلاعات بیشتر',
 
-    'audit_help' => 'با علامت زدن این کادر، سابقه دارایی برای منعکس کردن این مکان جدید ویرایش می شود. بدون علامت گذاشتن آن، به سادگی مکان در گزارش حسابرسی یادداشت می شود.<br><br>توجه داشته باشید که این دارایی بررسی شده است، مکان شخص، دارایی یا مکانی که در آن بررسی شده است را تغییر نمی دهد.
-',
+    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
     'assets' => 'دارایی ها مواردی هستند که توسط شماره سریال یا برچسب دارایی دنبال می شوند. آنها تمایل دارند که مقادیر ارزش بیشتری داشته باشند که در آن شناسایی یک مورد خاص موردنیاز باشد.',
 

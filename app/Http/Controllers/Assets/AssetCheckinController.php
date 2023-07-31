@@ -94,14 +94,18 @@ class AssetCheckinController extends Controller
             \Log::debug('Manually override the location IDs');
             \Log::debug('Original Location ID: '.$asset->location_id);
             $asset->location_id = '';
-            \Log::debug('New RTD Location ID: '.$asset->location_id);
+            \Log::debug('New Location ID: '.$asset->location_id);
         }
 
         $asset->location_id = $asset->rtd_location_id;
 
         if ($request->filled('location_id')) {
             \Log::debug('NEW Location ID: '.$request->get('location_id'));
-            $asset->location_id = e($request->get('location_id'));
+            $asset->location_id = $request->get('location_id');
+
+            if ($request->get('update_default_location') == 0){
+                $asset->rtd_location_id = $request->get('location_id');
+            }
         }
 
         $checkin_at = date('Y-m-d H:i:s');

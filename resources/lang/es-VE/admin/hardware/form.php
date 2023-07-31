@@ -2,8 +2,11 @@
 
 return [
     'bulk_delete'		=> 'Confirmar Eliminación Masiva de Activos',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> 'Revisa los activos para eliminación masiva abajo. Una vez borrados, estos activos pueden ser restaurados, pero no estarán asociados con ningún usuario al que estén asignados actualmente.',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'Vas a eliminar :asset_count activos.',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'Actualización Masiva de Activos',
     'bulk_update_help'	=> 'Este formulario te permite actualizar múltiples activos de una vez. Sólo llena los campos que necesites cambiar. Cualquier campo dejado en blanco permanecerá sin cambios. ',
     'bulk_update_warn'	=> 'Está a punto de editar las propiedades de un solo activo.|Está a punto de editar las propiedades de :asset_count activos.',
@@ -45,7 +48,7 @@ return [
     'asset_location_update_default' => 'Actualizar sólo la ubicación predeterminada',
     'asset_not_deployable' => 'Ese estado de activos no es desplegable. Este activo no puede ser verificado.',
     'asset_deployable' => 'Ese estado es desplegable. Este activo puede ser revisado.',
-    'processing_spinner' => 'Procesando...',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Información opcional',
     'order_details'   => 'Información relacionada con el pedido'
 ];
