@@ -178,8 +178,6 @@ class Ldap extends Model
 
 			if (! $ldapbind = @ldap_bind($connection, $ldap_username, $ldap_pass)) {
 				throw new Exception('Could not bind to LDAP: '.ldap_error($connection));
-
-
 			}
 			// TODO - this just "falls off the end" but the function states that it should return true or false
 			// unfortunately, one of the use cases for this function is wrong and *needs* for that failure mode to fire
