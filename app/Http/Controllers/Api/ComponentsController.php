@@ -235,7 +235,7 @@ class ComponentsController extends Controller
         $this->authorize('checkout', $component);
 
         $validator = Validator::make($request->all(), [
-            'asset_id'          => 'required|exists:assets,id',
+            'assigned_to'          => 'required|exists:assets,id',
             'assigned_qty'      => "required|numeric|min:1|digits_between:1,".$component->numRemaining(),
         ]);
 
