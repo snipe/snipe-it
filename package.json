@@ -34,7 +34,7 @@
         "bootstrap-colorpicker": "^2.5.3",
         "bootstrap-datepicker": "^1.10.0",
         "bootstrap-less": "^3.3.8",
-        "bootstrap-table": "1.22.0",
+        "bootstrap-table": "1.22.1",
         "chart.js": "^2.9.4",
         "css-loader": "^4.0.0",
         "ekko-lightbox": "^5.1.1",
@@ -51,7 +51,7 @@
         "papaparse": "^4.3.3",
         "select2": "4.0.13",
         "sheetjs": "^2.0.0",
-        "tableexport.jquery.plugin": "1.27.0",
+        "tableexport.jquery.plugin": "1.28.0",
         "tether": "^1.4.0",
         "vue-resource": "^1.5.2",
         "webpack": "^5.87.0"
