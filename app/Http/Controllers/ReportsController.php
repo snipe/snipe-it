@@ -639,10 +639,16 @@ class ReportsController extends Controller
             }
 
             if (($request->filled('created_start')) && ($request->filled('created_end'))) {
-                $assets->whereBetween('assets.created_at', [$request->input('created_start'), $request->input('created_end')]);
+                $created_start = \Carbon::parse($request->input('created_start'))->startOfDay();
+                $created_end = \Carbon::parse($request->input('created_end'))->endOfDay();
+                
+                $assets->whereBetween('assets.created_at', [$created_start, $created_end]);
             }
             if (($request->filled('checkout_date_start')) && ($request->filled('checkout_date_end'))) {
-                $assets->whereBetween('assets.last_checkout', [$request->input('checkout_date_start'), $request->input('checkout_date_end')]);
+                $checkout_start = \Carbon::parse($request->input('checkout_date_start'))->startOfDay();
+                $checkout_end = \Carbon::parse($request->input('checkout_date_end'))->endOfDay();
+
+                $assets->whereBetween('assets.last_checkout', [$checkout_start, $checkout_end]);
             }
 
             if (($request->filled('expected_checkin_start')) && ($request->filled('expected_checkin_end'))) {
@@ -650,7 +656,10 @@ class ReportsController extends Controller
             }
 
             if (($request->filled('last_audit_start')) && ($request->filled('last_audit_end'))) {
-                $assets->whereBetween('assets.last_audit_date', [$request->input('last_audit_start'), $request->input('last_audit_end')]);
+                $last_audit_start = \Carbon::parse($request->input('last_audit_start'))->startOfDay();
+                $last_audit_end = \Carbon::parse($request->input('last_audit_end'))->endOfDay();
+
+                $assets->whereBetween('assets.last_audit_date', [$last_audit_start, $last_audit_end]);
             }
 
             if (($request->filled('next_audit_start')) && ($request->filled('next_audit_end'))) {
