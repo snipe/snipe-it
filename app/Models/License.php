@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Watson\Validating\ValidatingTrait;
+use App\Models\Traits\Loggable;
 
 class License extends Depreciable
 {

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use App\Helpers\Helper;
 use Watson\Validating\ValidatingTrait;
+use App\Models\Traits\Loggable;
 
 
 /**

@@ -7,12 +7,13 @@ use App\Notifications\CheckinLicenseNotification;
 use App\Notifications\CheckoutLicenseNotification;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Traits\Loggable;
 
 class LicenseSeat extends SnipeModel implements ICompanyableChild
 {
     use CompanyableChildTrait;
     use SoftDeletes;
-    use Loggable;
+    use Loggable; 
 
     protected $presenter = \App\Presenters\LicenseSeatPresenter::class;
     use Presentable;

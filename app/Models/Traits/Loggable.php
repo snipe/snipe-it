@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Traits;
 
 use App\Models\Setting;
 use App\Notifications\AuditNotification;
