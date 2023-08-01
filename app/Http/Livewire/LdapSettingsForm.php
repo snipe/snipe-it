@@ -152,12 +152,6 @@ class LdapSettingsForm extends Component
     public function ldapsynctest()
     {
         $settings = Setting::getSettings();
-        $this->keys= [trans('admin/settings/general.employee_number'),
-                      trans('mail.username'),
-                      trans('general.first_name'),
-                      trans('general.last_name'),
-                      trans('general.email'),
-                     ];
 
         \Log::debug('Preparing to test LDAP connection');
 
@@ -193,7 +187,7 @@ class LdapSettingsForm extends Component
             } catch (\Exception $e) {
                 \Log::debug('Bind failed');
                 \Log::debug("Exception was: ".$e->getMessage());
-                return session()->flash('sync_bind_fail', 'Bind failed');
+                return session()->flash('sync_bind_fail', 'Bind failed. Be sure to save settings first.');
             }
         } catch (\Exception $e) {
             \Log::debug('Connection failed but we cannot debug it any further on our end.');
