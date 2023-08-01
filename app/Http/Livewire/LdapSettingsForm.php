@@ -142,6 +142,7 @@ class LdapSettingsForm extends Component
             $this->setting->ldap_client_tls_key = $this->ldap_client_tls_key;
             $this->setting->custom_forgot_pass_url = $this->custom_forgot_pass_url;
         }
+        $this->ldap_sync_test_users=null;
 
         $this->setting->save();
         $this->setting->update_client_side_cert_files();
@@ -187,7 +188,7 @@ class LdapSettingsForm extends Component
             } catch (\Exception $e) {
                 \Log::debug('Bind failed');
                 \Log::debug("Exception was: ".$e->getMessage());
-                return session()->flash('sync_bind_fail', 'Bind failed. Be sure to save settings first.');
+                return session()->flash('sync_bind_fail', 'Bind failed. Be sure: 1) LDAP settings are filled correctly and saved. 2) Bind Username and Password are correct.  ');
             }
         } catch (\Exception $e) {
             \Log::debug('Connection failed but we cannot debug it any further on our end.');
