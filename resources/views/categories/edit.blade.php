@@ -133,8 +133,8 @@
             let messageSpan = $('#email_will_be_sent_message');
 
             let messages = {
-                global: 'An email will be sent to the user because the global EULA is being used.',
-                local: 'An email will be sent to the user because a EULA is set for this category.',
+                global: '{{ trans('admin/categories/general.email_will_be_sent_due_to_global_eula') }}',
+                local: '{{ trans('admin/categories/general.email_will_be_sent_due_to_category_eula') }}',
             };
 
             function handleEulaChange() {
