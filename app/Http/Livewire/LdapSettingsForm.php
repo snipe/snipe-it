@@ -143,6 +143,9 @@ class LdapSettingsForm extends Component
         $this->setting->custom_forgot_pass_url    = $this->custom_forgot_pass_url;
 
         $this->setting->save();
+        session()->flash('saved', 'Settings Saved.');
+        $this->emit('alert_remove');
+
     }
     public function ldapsynctest()
     {
