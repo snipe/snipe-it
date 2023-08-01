@@ -24,7 +24,7 @@ class UserObserver
    
     // SnipeLog::admin()->item($user)->actionType('user-saved')->user(Auth::user());
    
-    SnipeLog::admin('user-saved')->item($user)->actor(Auth::user());
+    // SnipeLog::admin('user-saved')->item($user)->actor(Auth::user());
 
     // SnipeLog::admin('user-updated')->user(Auth::user())->target($user)->note('user observer');
 
