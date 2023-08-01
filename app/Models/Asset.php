@@ -71,19 +71,6 @@ class Asset extends Depreciable
     */
     protected $injectUniqueIdentifier = true;
 
-    // We set these as protected dates so that they will be easily accessible via Carbon
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
-        'purchase_date',
-        'last_checkout',
-        'expected_checkin',
-        'last_audit_date',
-        'next_audit_date'
-    ];
-
-
     protected $casts = [
         'purchase_date' => 'date',
         'last_checkout' => 'datetime',
@@ -97,11 +84,14 @@ class Asset extends Depreciable
         'rtd_company_id' => 'integer',
         'supplier_id'    => 'integer',
         'byod'           => 'boolean',
+        'created_at'     => 'datetime',
+        'updated_at'   => 'datetime',
+        'deleted_at'  => 'datetime',
     ];
 
     protected $rules = [
         'name'            => 'max:255|nullable',
-        'model_id'        => 'required|integer|exists:models,id',
+        'model_id'        => 'required|integer|exists:models,id,deleted_at,NULL',
         'status_id'       => 'required|integer|exists:status_labels,id',
         'company_id'      => 'integer|nullable',
         'warranty_months' => 'numeric|nullable|digits_between:0,240',
@@ -401,7 +391,7 @@ class Asset extends Depreciable
      */
     public function depreciation()
     {
-        return $this->model->belongsTo(\App\Models\Depreciation::class, 'depreciation_id');
+        return $this->hasOneThrough(\App\Models\Depreciation::class,\App\Models\AssetModel::class,'id','id','model_id','depreciation_id');
     }
 
 
@@ -414,7 +404,7 @@ class Asset extends Depreciable
      */
     public function components()
     {
-        return $this->belongsToMany('\App\Models\Component', 'components_assets', 'asset_id', 'component_id')->withPivot('id', 'assigned_qty', 'created_at')->withTrashed();
+        return $this->belongsToMany('\App\Models\Component', 'components_assets', 'asset_id', 'component_id')->withPivot('id', 'assigned_qty', 'created_at');
     }
 
 
@@ -796,24 +786,17 @@ class Asset extends Depreciable
      * @since [v4.0]
      * @return string | false
      */
-    public static function autoincrement_asset()
+    public static function autoincrement_asset(int $additional_increment = 0)
     {
         $settings = \App\Models\Setting::getSettings();
 
 
         if ($settings->auto_increment_assets == '1') {
-            $temp_asset_tag = \DB::table('assets')
-                ->where('physical', '=', '1')
-                ->max('asset_tag');
-
-            $asset_tag_digits = preg_replace('/\D/', '', $temp_asset_tag);
-            $asset_tag = preg_replace('/^0*/', '', $asset_tag_digits);
-
             if ($settings->zerofill_count > 0) {
-                return $settings->auto_increment_prefix.self::zerofill($settings->next_auto_tag_base, $settings->zerofill_count);
+                return $settings->auto_increment_prefix.self::zerofill($settings->next_auto_tag_base + $additional_increment, $settings->zerofill_count);
             }
 
-            return $settings->auto_increment_prefix.$settings->next_auto_tag_base;
+            return $settings->auto_increment_prefix.($settings->next_auto_tag_base + $additional_increment);
         } else {
             return false;
         }
@@ -920,7 +903,13 @@ class Asset extends Depreciable
 
         return false;
     }
-
+    public function getComponentCost(){
+        $cost = 0;
+        foreach($this->components as $component) {
+            $cost += $component->pivot->assigned_qty*$component->purchase_cost;
+        }
+        return $cost;
+    }
 
     /**
     * -----------------------------------------------
@@ -952,8 +941,10 @@ class Asset extends Depreciable
                 ->orWhere('assets_users.first_name', 'LIKE', '%'.$term.'%')
                 ->orWhere('assets_users.last_name', 'LIKE', '%'.$term.'%')
                 ->orWhere('assets_users.username', 'LIKE', '%'.$term.'%')
-                ->orWhereRaw('CONCAT('.DB::getTablePrefix().'assets_users.first_name," ",'.DB::getTablePrefix().'assets_users.last_name) LIKE ?', ["%$term%"]);
-
+                ->orWhereMultipleColumns([
+                    'assets_users.first_name',
+                    'assets_users.last_name',
+                ], $term);
         }
 
         /**
@@ -1348,7 +1339,10 @@ class Asset extends Depreciable
                 })->orWhere(function ($query) use ($search) {
                     $query->where('assets_users.first_name', 'LIKE', '%'.$search.'%')
                         ->orWhere('assets_users.last_name', 'LIKE', '%'.$search.'%')
-                        ->orWhereRaw('CONCAT('.DB::getTablePrefix().'assets_users.first_name," ",'.DB::getTablePrefix().'assets_users.last_name) LIKE ?', ["%$search%"])
+                        ->orWhereMultipleColumns([
+                            'assets_users.first_name',
+                            'assets_users.last_name',
+                        ], $search)
                         ->orWhere('assets_users.username', 'LIKE', '%'.$search.'%')
                         ->orWhere('assets_locations.name', 'LIKE', '%'.$search.'%')
                         ->orWhere('assigned_assets.name', 'LIKE', '%'.$search.'%');
@@ -1566,7 +1560,7 @@ class Asset extends Depreciable
     */
     public function scopeOrderModelNumber($query, $order)
     {
-        return $query->join('models', 'assets.model_id', '=', 'models.id')->orderBy('models.model_number', $order);
+        return $query->leftJoin('models as model_number_sort', 'assets.model_id', '=', 'model_number_sort.id')->orderBy('model_number_sort.model_number', $order);
     }
 
 
@@ -1667,7 +1661,7 @@ class Asset extends Depreciable
     public function scopeOrderManufacturer($query, $order)
     {
         return $query->join('models as order_asset_model', 'assets.model_id', '=', 'order_asset_model.id')
-            ->join('manufacturers as manufacturer_order', 'order_asset_model.manufacturer_id', '=', 'manufacturer_order.id')
+            ->leftjoin('manufacturers as manufacturer_order', 'order_asset_model.manufacturer_id', '=', 'manufacturer_order.id')
             ->orderBy('manufacturer_order.name', $order);
     }
 

@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'நுகர்வோர் சரிபார்க்கப்படவில்லை, தயவு செய்து மீண்டும் முயற்சிக்கவும்',
         'success' 		=> 'நுகர்வோர் வெற்றிகரமாக சோதிக்கப்பட்டது.',
-        'user_does_not_exist' => 'அந்த பயனர் தவறானது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.'
+        'user_does_not_exist' => 'அந்த பயனர் தவறானது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

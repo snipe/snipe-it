@@ -50,6 +50,8 @@ class ActionlogPresenter extends Presenter
             return 'far fa-save';
         } elseif ($this->itemType() == 'component') {
             return 'far fa-hdd';
+        } elseif ($this->itemType() == 'user') {
+            return 'fa-solid fa-people-arrows';
         }
 
     }

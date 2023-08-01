@@ -54,14 +54,14 @@ class ReportsController extends Controller
             'note',
         ];
 
+
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $actionlogs->count()) ? $actionlogs->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
+
         $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
         $order = ($request->input('order') == 'asc') ? 'asc' : 'desc';
-        $offset = request('offset', 0);
         $total = $actionlogs->count();
-
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
-
 
         $actionlogs = $actionlogs->orderBy($sort, $order)->skip($offset)->take($limit)->get();
 

@@ -25,11 +25,16 @@ class AccessoryCheckoutController extends Controller
     public function create($accessoryId)
     {
         // Check if the accessory exists
-        if (is_null($accessory = Accessory::find($accessoryId))) {
+        if (is_null($accessory = Accessory::withCount('users as users_count')->find($accessoryId))) {
             // Redirect to the accessory management page with error
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.not_found'));
         }
 
+        // Make sure there is at least one available to checkout
+        if ($accessory->numRemaining() <= 0){
+            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.checkout.unavailable'));
+        }
+        
         if ($accessory->category) {
             $this->authorize('checkout', $accessory);
 
@@ -55,16 +60,22 @@ class AccessoryCheckoutController extends Controller
     public function store(Request $request, $accessoryId)
     {
         // Check if the accessory exists
-        if (is_null($accessory = Accessory::find($accessoryId))) {
+        if (is_null($accessory = Accessory::withCount('users as users_count')->find($accessoryId))) {
             // Redirect to the accessory management page with error
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.user_not_found'));
         }
 
         $this->authorize('checkout', $accessory);
 
-        if (! $user = User::find($request->input('assigned_to'))) {
+        if (!$user = User::find($request->input('assigned_to'))) {
             return redirect()->route('accessories.checkout.show', $accessory->id)->with('error', trans('admin/accessories/message.checkout.user_does_not_exist'));
         }
+
+        // Make sure there is at least one available to checkout
+        if ($accessory->numRemaining() <= 0){
+            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.checkout.unavailable'));
+        }
+
 
         // Update the accessory data
         $accessory->assigned_to = e($request->input('assigned_to'));

@@ -67,6 +67,8 @@ return [
         'array'   => 'Atributui turi būti bent: min elementai.',
     ],
     'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'Pasirinktas :attribute neteisingas.',
     'numeric'              => ':attribute privalo būti skaičius.',
     'present'              => 'Atributo laukas turi būti.',

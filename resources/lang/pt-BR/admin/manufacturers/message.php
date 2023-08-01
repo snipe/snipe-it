@@ -2,6 +2,7 @@
 
 return array(
 
+    'support_url_help' => 'Use <code>{LOCALE}</code> e <code>{SERIAL}</code> em sua URL como variáveis para ter esses valores auto-povoados na visualização de ativos.',
     'does_not_exist' => 'O fabricante não existe.',
     'assoc_users'	 => 'Este fabricante está no momento associado com pelo menos um modelo e não pode ser excluído. Atualize seus modelos para não referenciarem mais este fabricante e tente novamente. ',
 

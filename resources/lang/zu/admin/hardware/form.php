@@ -2,8 +2,11 @@
 
 return [
     'bulk_delete'		=> 'Qinisekisa u-Bulk Susa amafa',
+    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
   'bulk_delete_help'	=> 'Buyekeza amafa wokususwa okuningi ngezansi. Uma usususiwe, la mafa angabuyiselwa, kodwa ngeke ahlanganiswe nanoma yimuphi abasebenzisi okwamanje abelwe wona.',
+  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'Uzosusa: impahla ye-asethi_diza.',
+  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'Ukuvuselela amafa we-Bulk',
     'bulk_update_help'	=> 'Leli fomu likuvumela ukuthi ubuyekeze amafa amaningi ngesikhathi esisodwa. Gcwalisa kuphela amasimu okudingayo ukuguqula. Noma yiziphi izinkambu ezishiywe zingenakushintshwa.',
     'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
@@ -45,7 +48,7 @@ return [
     'asset_location_update_default' => 'Update only default location',
     'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
     'asset_deployable' => 'That status is deployable. This asset can be checked out.',
-    'processing_spinner' => 'Processing...',
+    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Optional Information',
     'order_details'   => 'Order Related Information'
 ];

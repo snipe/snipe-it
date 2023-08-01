@@ -1,14 +1,14 @@
 @extends('layouts/setup')
-{{ trans('admin/user/table.createuser') }}
+{{ trans('admin/users/table.createuser') }}
 @section('title')
-{{ trans('admin/user/general.create_user') }} ::
+{{ trans('admin/users/general.create_user') }} ::
 @parent
 @stop
 
 {{-- Page content --}}
 @section('content')
 
-<p>{{ trans('admin/user/general.create_user_page_explanation') }}</p>
+<p>{{ trans('admin/users/general.create_user_page_explanation') }}</p>
 
 <form action="{{ route('setup.user.save') }}" method="POST">
   {{ csrf_field() }}
@@ -156,10 +156,10 @@
 
     <!-- Email credentials -->
     <div class="form-group col-lg-12">
-      <label>{{ trans('admin/user/general.email_credentials') }}</label>
+      <label>{{ trans('admin/users/general.email_credentials') }}</label>
       <div class="checkbox">
         <label>
-          <input type="checkbox" value="1" name="email_creds">{{ trans('admin/user/general.email_credentials_text') }}
+          <input type="checkbox" value="1" name="email_creds">{{ trans('admin/users/general.email_credentials_text') }}
         </label>
       </div>
     </div>
@@ -167,7 +167,7 @@
 @stop
 
 @section('button')
-  <button class="btn btn-primary">{{ trans('admin/user/general.next_save_user') }}</button>
+  <button class="btn btn-primary">{{ trans('admin/users/general.next_save_user') }}</button>
 </form>
 @parent
 @stop

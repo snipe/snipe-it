@@ -4,7 +4,7 @@ namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
 use App\Models\Company;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
 
@@ -26,6 +26,8 @@ class CompaniesTransformer
             $array = [
                 'id' => (int) $company->id,
                 'name' => e($company->name),
+                'phone' => ($company->phone!='') ? e($company->phone): null,
+                'fax' => ($company->fax!='') ? e($company->fax): null,
                 'image' =>   ($company->image) ? Storage::disk('public')->url('companies/'.e($company->image)) : null,
                 'created_at' => Helper::getFormattedDateObject($company->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($company->updated_at, 'datetime'),

@@ -74,6 +74,7 @@ return [
     'your_credentials' => 'Kredensial Snipe-IT Anda',
     'Accessory_Checkin_Notification' => 'Aksesoris Kembali',
     'Asset_Checkin_Notification' => 'Aset Kembali',
+    'Asset_Checkout_Notification' => 'Asset checked out',
     'License_Checkin_Notification' => 'Lisensi Kembali',
     'Expected_Checkin_Report' => 'Laporan check-in aset yang diharapkan',
     'Expected_Checkin_Notification' => 'Pengingat: :name mendekati batas waktu check-in [Dikembalikan]',

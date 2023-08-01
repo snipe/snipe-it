@@ -45,7 +45,7 @@ final class Company extends SnipeModel
      * 
      * @var array
      */
-    protected $searchableAttributes = ['name', 'created_at', 'updated_at'];
+    protected $searchableAttributes = ['name', 'phone', 'fax', 'created_at', 'updated_at'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -59,7 +59,11 @@ final class Company extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'name',
+        'phone',
+        'fax',
+    ];
 
     private static function isFullMultipleCompanySupportEnabled()
     {

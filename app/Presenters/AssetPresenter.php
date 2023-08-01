@@ -154,6 +154,13 @@ class AssetPresenter extends Presenter
                 'footerFormatter' => 'sumFormatter',
                 'class' => 'text-right',
             ], [
+                "field" => "book_value",
+                "searchable" => false,
+                "sortable" => false,
+                "title" => trans('admin/hardware/table.book_value'),
+                "footerFormatter" => 'sumFormatter',
+                "class" => "text-right",
+            ],[
                 'field' => 'order_number',
                 'searchable' => true,
                 'sortable' => true,
@@ -292,7 +299,7 @@ class AssetPresenter extends Presenter
                 'formatter'=> 'customFieldsFormatter',
                 'escape' => true,
                 'class' => ($field->field_encrypted == '1') ? 'css-padlock' : '',
-                'visible' => true,
+                'visible' => ($field->show_in_listview == '1') ? true : false,
             ];
         }
 
@@ -532,6 +539,18 @@ class AssetPresenter extends Presenter
         }
 
         return false;
+    }
+
+    /**
+     * Used to take user created warranty URL and dynamically fill in the needed values per asset
+     * @return string
+     */
+    public function dynamicWarrantyUrl()
+    {
+        $warranty_lookup_url = $this->model->model->manufacturer->warranty_lookup_url;
+        $url = (str_replace('{LOCALE}',\App\Models\Setting::getSettings()->locale,$warranty_lookup_url));
+        $url = (str_replace('{SERIAL}',$this->model->serial,$url));
+        return $url;
     }
 
     /**

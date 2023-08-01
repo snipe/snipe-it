@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Bạn đã từ chối tài sản này thành công.',
     'bulk_manager_warn'	        => 'Người dùng của bạn đã được cập nhật thành công, tuy nhiên mục nhập của người quản lý của bạn không được lưu bởi vì người quản lý bạn đã chọn cũng nằm trong danh sách người dùng cần chỉnh sửa, và người dùng không phải là người quản lý của họ. Vui lòng chọn người dùng của bạn một lần nữa, ngoại trừ người quản lý.',
     'user_exists'               => 'Người dùng thật sự tồn tại!',
-    'user_not_found'            => 'Người dùng [:id] không tồn tại.',
+    'user_not_found'            => 'User does not exist.',
     'user_login_required'       => 'Trường đăng nhập thì bắt buộc',
     'user_password_required'    => 'Mật khẩu thì bắt buộc.',
     'insufficient_permissions'  => 'Không có đủ quyền.',

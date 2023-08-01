@@ -67,6 +67,8 @@ return [
         'array'   => 'Thuộc tính: phải có ít nhất: min items.',
     ],
     'starts_with'          => 'Trường :attribute phải kết thúc bằng một trong những giá trị sau: :values',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => ':attribute đã chọn không hợp lý.',
     'numeric'              => ':attribute phải là một số.',
     'present'              => 'Trường thuộc tính: phải có mặt.',

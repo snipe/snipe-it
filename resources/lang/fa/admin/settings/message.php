@@ -42,15 +42,12 @@ return [
         'authentication_success' => 'کاربر در برابر LDAP با موفقیت احراز هویت شد!
 '
     ],
-    'slack' => [
-        'sending' => 'ارسال پیام تست Slack...
-',
-        'success_pt1' => 'موفقیت! بررسی کنید
-',
-        'success_pt2' => 'برای پیام آزمایشی خود کانال را ارسال کنید و حتماً برای ذخیره تنظیمات خود روی ذخیره در زیر کلیک کنید.
-',
-        '500' => 'خطای سرور',
-        'error' => 'Something went wrong. Slack responded with: :error_message',
+    'webhook' => [
+        'sending' => 'Sending :app test message...',
+        'success_pt1' => 'Success! Check the ',
+        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
+        '500' => '500 Server Error.',
+        'error' => 'Something went wrong. :app responded with: :error_message',
         'error_misc' => 'Something went wrong. :( ',
     ]
 ];

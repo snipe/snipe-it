@@ -33,12 +33,12 @@ return [
         'testing_authentication' => 'LDAP kimlik doğrulaması deneniyor...',
         'authentication_success' => 'LDAP kullanıcı kimliği başarıyla doğrulandı!'
     ],
-    'slack' => [
-        'sending' => 'Slack test mesajı gönderiliyor...',
-        'success_pt1' => 'Başarılı! Kontrol edin ',
-        'success_pt2' => ' test mesajınız için kanal seçin ve ayarlarınızı kaydetmek için aşağıdaki KAYDET\'i tıkladığınızdan emin olun.',
-        '500' => '500 Sunucu Hatası.',
-        'error' => 'Bir şeyler ters gitti. Slack şöyle bir hata döndürdü: :error_message',
-        'error_misc' => 'Bir şeyler yanlış gitti :( ',
+    'webhook' => [
+        'sending' => 'Sending :app test message...',
+        'success_pt1' => 'Success! Check the ',
+        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
+        '500' => '500 Server Error.',
+        'error' => 'Something went wrong. :app responded with: :error_message',
+        'error_misc' => 'Something went wrong. :( ',
     ]
 ];

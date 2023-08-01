@@ -10,6 +10,7 @@ return array(
     'support_email'   		=> 'Atbalsta e-pastu',
     'support_phone'   		=> 'Atbalsta tālruni',
     'support_url'   		=> 'Atbalsta URL',
+    'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Atjaunināt ražotāju',
     'url'   				=> 'URL',
 

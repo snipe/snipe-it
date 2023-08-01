@@ -482,6 +482,20 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             ]
         )->name('api.assets.checkout.bytag');
 
+        Route::post('bytag/{any}/checkin',
+            [
+                Api\AssetsController::class,
+                'checkinbytag'
+            ]
+        )->name('api.asset.checkinbytagPath');
+
+        Route::post('checkinbytag',
+            [
+                Api\AssetsController::class,
+                'checkinbytag'
+            ]
+        )->name('api.asset.checkinbytag');
+
         Route::get('byserial/{any}',
             [
                 Api\AssetsController::class, 
@@ -510,13 +524,6 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             'checkin'
         ]
         )->name('api.asset.checkin');
-
-        Route::post('checkinbytag',
-            [
-                Api\AssetsController::class,
-                'checkinbytag'
-            ]
-        )->name('api.asset.checkinbytag');
 
         Route::post('{id}/checkout',
         [
@@ -868,6 +875,13 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                     'checkIfDeployable'
                 ]
             )->name('api.statuslabels.deployable');
+
+            Route::get('selectlist',
+                [
+                    Api\StatuslabelsController::class,
+                    'selectlist'
+                ]
+            )->name('api.statuslabels.selectlist');
 
         }); 
     

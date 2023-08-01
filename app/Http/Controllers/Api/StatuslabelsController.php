@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\AssetsTransformer;
+use App\Http\Transformers\SelectlistTransformer;
 use App\Http\Transformers\StatuslabelsTransformer;
 use App\Models\Asset;
 use App\Models\Statuslabel;
@@ -50,12 +51,9 @@ class StatuslabelsController extends Controller
             }
         }
 
-        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
-        // case we override with the actual count, so we should return 0 items.
-        $offset = (($statuslabels) && ($request->get('offset') > $statuslabels->count())) ? $statuslabels->count() : $request->get('offset', 0);
-
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $statuslabels->count()) ? $statuslabels->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
@@ -293,5 +291,46 @@ class StatuslabelsController extends Controller
         }
 
         return '0';
+    }
+
+    /**
+     * Gets a paginated collection for the select2 menus
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v6.1.1]
+     * @see \App\Http\Transformers\SelectlistTransformer
+     */
+    public function selectlist(Request $request)
+    {
+
+        $this->authorize('view.selectlists');
+        $statuslabels = Statuslabel::orderBy('default_label', 'desc')->orderBy('name', 'asc')->orderBy('deployable', 'desc');
+
+        if ($request->filled('search')) {
+            $statuslabels = $statuslabels->where('name', 'LIKE', '%'.$request->get('search').'%');
+        }
+
+        if ($request->filled('deployable')) {
+            $statuslabels = $statuslabels->where('deployable', '=', '1');
+        }
+
+        if ($request->filled('pending')) {
+            $statuslabels = $statuslabels->where('pending', '=', '1');
+        }
+
+        if ($request->filled('archived')) {
+            $statuslabels = $statuslabels->where('archived', '=', '1');
+        }
+
+        $statuslabels = $statuslabels->orderBy('name', 'ASC')->paginate(50);
+
+        // Loop through and set some custom properties for the transformer to use.
+        // This lets us have more flexibility in special cases like assets, where
+        // they may not have a ->name value but we want to display something anyway
+        foreach ($statuslabels as $statuslabel) {
+            $statuslabels->use_text = $statuslabel->name;
+        }
+
+        return (new SelectlistTransformer)->transformSelectlist($statuslabels);
     }
 }

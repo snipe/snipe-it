@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Cet accessoire n\'est pas attribué. Veuillez réessayer',
         'success' 		=> 'Accessoire attribué correctement.',
+        'unavailable'   => 'L\'accessoire n\'est pas disponible à l\'affectation. Vérifiez la quantité disponible',
         'user_does_not_exist' => 'Cet utilisateur est inexistant. Veuillez réessayer.'
     ),
 

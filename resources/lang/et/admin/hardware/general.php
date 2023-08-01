@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Taasta vara',
     'pending'  					=> 'Ootel',
     'undeployable'  			=> 'Kasutuselevõtmatu',
+    'undeployable_tooltip'  	=> 'This asset has a status label that is undeployable and cannot be checked out at this time.',
     'view'  					=> 'Vaata vahendit',
     'csv_error' => 'Sul on viga CSV failis:',
     'import_text' => '
@@ -42,5 +43,6 @@ return [
     'error_messages' => 'Tõrked:',
     'success_messages' => 'Õnnestumised:',
     'alert_details' => 'Palun vaata allolevaid üksikasju.',
-    'custom_export' => 'Custom Export'
+    'custom_export' => 'Custom Export',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];

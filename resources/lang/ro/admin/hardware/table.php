@@ -8,6 +8,7 @@ return [
     'change' 		=> 'Predat/Primit',
     'checkout_date' => 'Data predare',
     'checkoutto' 	=> 'Predat',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Valoarea Curentă',
     'diff' 			=> 'Diferenta',
     'dl_csv' 		=> 'Descarca CSV',

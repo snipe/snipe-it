@@ -24,6 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Níor seiceáladh an Cúntóir amach, déan iarracht arís',
         'success' 		=> 'Rinne an cúntóir a sheiceáil go rathúil.',
+        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
         'user_does_not_exist' => 'Tá an úsáideoir neamhbhailí. Arís, le d\'thoil.'
     ),
 

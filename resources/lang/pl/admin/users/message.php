@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Pomyślnie odrzuciłeś ten składnik aktywów.',
     'bulk_manager_warn'	        => 'Użytkownicy zostały pomyślnie zaktualizowane, jednak Twój wpis manager nie został zapisany, bo dyrektor wybrano był również na liście użytkowników do edycji i użytkowników nie może być ich Menedżer. Wybierz użytkowników, z wyjątkiem Menedżera.',
     'user_exists'               => 'Użytkownik już istnieje!',
-    'user_not_found'            => 'User [:id] nie istnieje.',
+    'user_not_found'            => 'Użytkownik nie istnieje.',
     'user_login_required'       => 'Pole login jest wymagane',
     'user_password_required'    => 'Pole hasło jest wymagane.',
     'insufficient_permissions'  => 'Brak uprawnień.',

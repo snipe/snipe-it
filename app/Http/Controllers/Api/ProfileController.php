@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Laravel\Passport\TokenRepository;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use DB;
 
 class ProfileController extends Controller

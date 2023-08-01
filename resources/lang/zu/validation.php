@@ -67,6 +67,8 @@ return [
         'array'   => 'I: i-attribut kumele ibe okungenani: min min.',
     ],
     'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'Okukhethiwe: imfanelo ayivumelekile.',
     'numeric'              => 'I: imfanelo kufanele ibe inombolo.',
     'present'              => 'I: insimu yemfanelo kufanele ibe khona.',

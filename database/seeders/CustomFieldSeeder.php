@@ -38,24 +38,34 @@ class CustomFieldSeeder extends Seeder
             [
                 'custom_field_id' => '1',
                 'custom_fieldset_id' => '1',
+                'order' => 0,
+                'required' => 0,
             ],
             [
                 'custom_field_id' => '2',
                 'custom_fieldset_id' => '1',
+                'order' => 0,
+                'required' => 0,
             ],
             [
-              'custom_field_id' => '3',
-              'custom_fieldset_id' => '2',
+                'custom_field_id' => '3',
+                'custom_fieldset_id' => '2',
+                'order' => 0,
+                'required' => 0,
             ],
             [
-              'custom_field_id' => '4',
-              'custom_fieldset_id' => '2',
+                'custom_field_id' => '4',
+                'custom_fieldset_id' => '2',
+                'order' => 0,
+                'required' => 0,
             ],
             [
-              'custom_field_id' => '5',
-              'custom_fieldset_id' => '2',
+                'custom_field_id' => '5',
+                'custom_fieldset_id' => '2',
+                'order' => 0,
+                'required' => 0,
             ],
 
-      ]);
+        ]);
     }
 }

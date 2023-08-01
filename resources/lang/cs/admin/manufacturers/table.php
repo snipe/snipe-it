@@ -10,6 +10,7 @@ return array(
     'support_email'   		=> 'Emailová podpora',
     'support_phone'   		=> 'Telefonní podpora',
     'support_url'   		=> 'URL podpory',
+    'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Upravit Výrobce',
     'url'   				=> 'URL',
 

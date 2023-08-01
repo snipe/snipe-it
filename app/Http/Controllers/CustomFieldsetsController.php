@@ -93,16 +93,27 @@ class CustomFieldsetsController extends Controller
     {
         $this->authorize('create', CustomField::class);
 
-        $cfset = new CustomFieldset([
+        $fieldset = new CustomFieldset([
                 'name' => e($request->get('name')),
                 'user_id' => Auth::user()->id,
         ]);
 
-        $validator = Validator::make($request->all(), $cfset->rules);
-        if ($validator->passes()) {
-            $cfset->save();
+        $validator = Validator::make($request->all(), $fieldset->rules);
 
-            return redirect()->route('fieldsets.show', [$cfset->id])
+        if ($validator->passes()) {
+            $fieldset->save();
+
+            // Sync fieldset with auto_add_to_fieldsets
+            $fields = CustomField::select('id')->where('auto_add_to_fieldsets', '=', '1')->get();
+            if ($fields->count() > 0) {
+                foreach ($fields as $field) {
+                    $field_ids[] = $field->id;
+                }
+
+                $fieldset->fields()->sync($field_ids);
+            }
+
+            return redirect()->route('fieldsets.show', [$fieldset->id])
                 ->with('success', trans('admin/custom_fields/message.fieldset.create.success'));
         }
 

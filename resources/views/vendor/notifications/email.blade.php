@@ -86,13 +86,13 @@ $style = [
 
                                 @if ($snipeSettings->brand == '3')
                                     @if ($logo!='')
-                                        <img class="navbar-brand-img logo" style="max-width: 50px;" src="{{ url('/') }}/uploads/{{ $logo }}">
+                                        <img class="navbar-brand-img logo" style="max-width: 50px;" src="{{ config('app.url') }}/uploads/{{ $logo }}">
                                     @endif
                                     {{ $snipeSettings->site_name }}
 
                                 @elseif ($snipeSettings->brand == '2')
                                     @if ($logo!='')
-                                        <img class="navbar-brand-img logo" style="max-width: 50px;" src="{{ url('/') }}/uploads/{{ $logo }}">
+                                        <img class="navbar-brand-img logo" style="max-width: 50px;" src="{{ config('app.url') }}/uploads/{{ $logo }}">
                                     @endif
                                 @else
                                     {{ $snipeSettings->site_name }}
@@ -203,7 +203,7 @@ $style = [
                                     <td style="{{ $fontFamily }} {{ $style['email-footer_cell'] }}">
                                         <p style="{{ $style['paragraph-sub'] }}">
                                             &copy; {{ date('Y') }}
-                                            <a style="{{ $style['anchor'] }}" href="{{ url('/') }}" target="_blank">{{ $snipeSettings->site_name }}</a>.
+                                            <a style="{{ $style['anchor'] }}" href="{{ config('app.url') }}" target="_blank">{{ $snipeSettings->site_name }}</a>.
                                             {{ trans('mail.rights_reserved') }}
                                         </p>
 

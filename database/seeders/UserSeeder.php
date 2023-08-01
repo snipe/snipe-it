@@ -2,7 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Company;
+use App\Models\Department;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
@@ -17,11 +20,60 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::truncate();
-        User::factory()->count(1)->firstAdmin()->create();
-        User::factory()->count(1)->snipeAdmin()->create();
-        User::factory()->count(3)->superuser()->create();
-        User::factory()->count(3)->admin()->create();
-        User::factory()->count(50)->viewAssets()->create();
+
+        if (! Company::count()) {
+            $this->call(CompanySeeder::class);
+        }
+
+        $companyIds = Company::all()->pluck('id');
+
+        if (! Department::count()) {
+            $this->call(DepartmentSeeder::class);
+        }
+
+        $departmentIds = Department::all()->pluck('id');
+
+        User::factory()->count(1)->firstAdmin()
+            ->state(new Sequence(fn($sequence) => [
+                'company_id' => $companyIds->random(),
+                'department_id' => $departmentIds->random(),
+            ]))
+            ->create();
+
+        User::factory()->count(1)->snipeAdmin()
+            ->state(new Sequence(fn($sequence) => [
+                'company_id' => $companyIds->random(),
+                'department_id' => $departmentIds->random(),
+            ]))
+            ->create();
+
+        User::factory()->count(1)->testAdmin()
+            ->state(new Sequence(fn($sequence) => [
+                'company_id' => $companyIds->random(),
+                'department_id' => $departmentIds->random(),
+            ]))
+            ->create();
+
+        User::factory()->count(3)->superuser()
+            ->state(new Sequence(fn($sequence) => [
+                'company_id' => $companyIds->random(),
+                'department_id' => $departmentIds->random(),
+            ]))
+            ->create();
+
+        User::factory()->count(3)->admin()
+            ->state(new Sequence(fn($sequence) => [
+                'company_id' => $companyIds->random(),
+                'department_id' => $departmentIds->random(),
+            ]))
+            ->create();
+
+        User::factory()->count(50)->viewAssets()
+            ->state(new Sequence(fn($sequence) => [
+                'company_id' => $companyIds->random(),
+                'department_id' => $departmentIds->random(),
+            ]))
+            ->create();
 
         $src = public_path('/img/demo/avatars/');
         $dst = 'avatars'.'/';

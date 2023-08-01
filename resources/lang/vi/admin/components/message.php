@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Hợp phần đã không được kiểm tra, hãy thử lại',
         'success' 		=> 'Thành phần được kiểm tra thành công.',
-        'user_does_not_exist' => 'Người dùng đó không hợp lệ. Vui lòng thử lại.'
+        'user_does_not_exist' => 'Người dùng đó không hợp lệ. Vui lòng thử lại.',
+        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

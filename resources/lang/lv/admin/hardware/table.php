@@ -8,6 +8,7 @@ return [
     'change' 		=> 'Iekšā ārā',
     'checkout_date' => 'Izrakstīšanās datums',
     'checkoutto' 	=> 'Izrakstīts',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Current Value',
     'diff' 			=> 'Atšķirība',
     'dl_csv' 		=> 'Lejupielādējiet CSV',

@@ -10,6 +10,7 @@ return array(
     'support_email'   		=> 'Email wsparcia technicznego',
     'support_phone'   		=> 'Telefon wsparcia technicznego',
     'support_url'   		=> 'Adres WWW wsparcia technicznego',
+    'warranty_lookup_url'   => 'Warranty Lookup URL',
     'update'				=> 'Zaktualizuj Producenta',
     'url'   				=> 'Adres WWW',
 

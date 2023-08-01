@@ -2,6 +2,7 @@
 
 return array(
 
+    'support_url_help' => 'Use <code>{LOCALE}</code> and <code>{SERIAL}</code> in your URL as variables to have those values auto-populate when viewing assets.',
     'does_not_exist' => 'Κατασκευαστής δεν υπάρχει.',
     'assoc_users'	 => 'Αυτό κατασκευαστής σχετίζεται με τουλάχιστον ένα μοντέλο και δεν μπορεί να διαγραφεί. Παρακαλούμε να ενημερώσετε τα μοντέλα σας προκειμένου να μην αναφέρονται σε αυτόν τον κατασκευαστή και δοκιμάστε ξανά. ',
 

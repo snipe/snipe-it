@@ -8,6 +8,7 @@ return [
     'change' 		=> 'உள்ளே வெளியே',
     'checkout_date' => 'புதுப்பிப்பு தேதி',
     'checkoutto' 	=> 'சரிபார்க்கப்பட்டது',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Current Value',
     'diff' 			=> 'வேறுபாடு',
     'dl_csv' 		=> 'CSV ஐ பதிவிறக்குக',

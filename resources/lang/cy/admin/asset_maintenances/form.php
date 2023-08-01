@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Manylion Cynnal a Chadw',
+        'asset_maintenance_type' => 'Asset Maintenance Type',
         'title'                  => 'Teitl',
-        'start_date'             => 'Wedi cychwyn',
-        'completion_date'        => 'Wedi cwbwlhau',
+        'start_date'             => 'Start Date',
+        'completion_date'        => 'Completion Date',
         'cost'                   => 'Cost',
         'is_warranty'            => 'Gwelliant Gwarant',
-        'asset_maintenance_time' => 'Dyddiau',
+        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
         'notes'                  => 'Nodiadau',
-        'update'                 => 'Diweddaru',
-        'create'                 => 'Creu'
+        'update'                 => 'Update Asset Maintenance',
+        'create'                 => 'Create Asset Maintenance'
     ];

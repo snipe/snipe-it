@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Komponenta ni bila izdana, poskusite znova',
         'success' 		=> 'Komponenta je bila uspešno izdana.',
-        'user_does_not_exist' => 'Ta uporabnik ni veljaven. Prosim poskusite ponovno.'
+        'user_does_not_exist' => 'Ta uporabnik ni veljaven. Prosim poskusite ponovno.',
+        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(

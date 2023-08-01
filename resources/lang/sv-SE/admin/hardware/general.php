@@ -14,8 +14,8 @@ return [
     'deleted'  					=> 'Denna tillgång har tagits bort.',
     'edit'  					=> 'Redigera tillgång',
     'model_deleted'  			=> 'Denna tillgångsmodell har tagits bort. Du måste återställa modellen innan du kan återställa tillgången.',
-    'model_invalid'             => 'The Model of this Asset is invalid.',
-    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
+    'model_invalid'             => 'Modellen för denna tillgång är ogiltig.',
+    'model_invalid_fix'         => 'Tillgången bör redigeras för att rätta till detta innan du försöker checka in eller ut.',
     'requestable'               => 'Tillgängliga',
     'requested'				    => 'Begärda',
     'not_requestable'           => 'Inte begärbar',
@@ -23,6 +23,7 @@ return [
     'restore'  					=> 'Återställ tillgången',
     'pending'  					=> 'Väntande',
     'undeployable'  			=> 'Undeployable',
+    'undeployable_tooltip'  	=> 'Denna tillgång har en statusetikett som inte går att distribuera och som inte kan checkas ut just nu.',
     'view'  					=> 'Visa tillgång',
     'csv_error' => 'Du har ett fel i din CSV-fil:',
     'import_text' => '
@@ -42,5 +43,6 @@ return [
     'error_messages' => 'Felmeddelanden:',
     'success_messages' => 'Lyckade meddelande:',
     'alert_details' => 'Se nedan för detaljer.',
-    'custom_export' => 'Anpassad export'
+    'custom_export' => 'Anpassad export',
+    'mfg_warranty_lookup' => ':manufacturer Garantistatus Uppsök',
 ];

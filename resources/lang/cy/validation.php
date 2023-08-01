@@ -67,6 +67,8 @@ return [
         'array'   => 'Rhaid i\'r :attribute cael o leiaf :min o eitemau.',
     ],
     'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+
     'not_in'               => 'Mae\'r :attribute a dewisir yn annilys.',
     'numeric'              => 'Rhaid i\'r :attribute bod yn rhif.',
     'present'              => 'Rhaid i\'r maes :attribute bod yn presennol.',

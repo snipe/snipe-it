@@ -155,7 +155,7 @@
 
                       <td>
                         @if ($file->note)
-                          {{ $file->note }}
+                          {!! nl2br(Helper::parseEscapedMarkedownInline($file->note)) !!}
                         @endif
                       </td>
                       <td>
@@ -275,7 +275,7 @@
       </strong>
               </div>
     <div class="col-md-12">
-      {!! nl2br(e($consumable->notes)) !!}
+      {!! nl2br(Helper::parseEscapedMarkedownInline($consumable->notes)) !!}
             </div>
           </div>
   @endif

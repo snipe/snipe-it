@@ -4,10 +4,13 @@ namespace Tests\Unit;
 use App\Models\Category;
 use App\Models\AssetModel;
 use App\Models\Asset;
+use Tests\Support\InteractsWithSettings;
 use Tests\TestCase;
 
 class CategoryTest extends TestCase
 {
+    use InteractsWithSettings;
+
     public function testFailsEmptyValidation()
     {
         // An Asset requires a name, a qty, and a category_id.
@@ -26,7 +29,7 @@ class CategoryTest extends TestCase
 
     public function testACategoryCanHaveAssets()
     {
-       $category = Category::factory()->assetDesktopCategory();
+       $category = Category::factory()->assetDesktopCategory()->create();
 
        // Generate 5 models via factory
        $models =  AssetModel::factory()

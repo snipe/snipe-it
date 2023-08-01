@@ -22,6 +22,8 @@ return [
     'restore' => [
         'error'   		=> '恢復資產失敗，請重試。',
         'success' 		=> '恢復資產成功。',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [

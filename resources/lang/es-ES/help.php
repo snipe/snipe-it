@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Más información',
 
-    'audit_help' => 'Marcando esta casilla podrá editar el registro de activos reflejando su nueva ubicación. Dejándola sin marcar simplemente anotaremos la ubicación en el registro de auditoria.<br><br>Tenga en cuenta que si este activo ha si requerido, no se podrá cambiara la ubicación de la persona, Activo o ubicación en la que esta requerido.',
+    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
     'assets' => 'Los activos son elementos con número de serie o etiqueta de activos.  Tienden a ser artículos de alto valor donde es importante identificar un elemento específico.',
 

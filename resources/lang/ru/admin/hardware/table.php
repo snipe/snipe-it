@@ -8,6 +8,7 @@ return [
     'change' 		=> 'Отвязан/Привязан',
     'checkout_date' => 'Дата привязки',
     'checkoutto' 	=> 'Привязан',
+    'components_cost' => 'Total Components Cost',
     'current_value' => 'Текущее значение',
     'diff' 			=> 'Разн',
     'dl_csv' 		=> 'Загрузить CSV',

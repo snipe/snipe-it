@@ -57,6 +57,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="col-md-1" data-field="image" data-formatter="imageFormatter" data-sortable="true">{{ trans('general.image') }}</th>
+                                                <th class="col-md-2" data-field="asset_tag" data-sortable="true" >{{ trans('general.asset_tag') }}</th>                                                
                                                 <th class="col-md-2" data-field="model" data-sortable="true">{{ trans('admin/hardware/table.asset_model') }}</th>
                                                 <th class="col-md-2" data-field="model_number" data-sortable="true">{{ trans('admin/models/table.modelnumber') }}</th>
                                                 <th class="col-md-2" data-field="name" data-sortable="true">{{ trans('admin/hardware/form.name') }}</th>
@@ -78,7 +79,7 @@
                         <div class="col-md-12">
 
                             @if ($models->count() > 0)
-                            <h2>{{ trans('general.requestable_models') }}</h4>
+                            <h2>{{ trans('general.requestable_models') }}</h2>
                                 <table
                                         name="requested-assets"
                                         data-toolbar="#toolbar"
@@ -104,8 +105,8 @@
                                                 <td>
 
                                                     @if ($requestableModel->image)
-                                                        <a href="{{ url('/') }}/uploads/models/{{ $requestableModel->image }}" data-toggle="lightbox" data-type="image">
-                                                            <img src="{{ url('/') }}/uploads/models/{{ $requestableModel->image }}" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive">
+                                                        <a href="{{ config('app.url') }}/uploads/models/{{ $requestableModel->image }}" data-toggle="lightbox" data-type="image">
+                                                            <img src="{{ config('app.url') }}/uploads/models/{{ $requestableModel->image }}" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive">
                                                         </a>
                                                     @endif
 
@@ -113,7 +114,7 @@
 
                                                 <td>
                                                     @can('view', \App\Models\AssetModel::class)
-                                                        <a href="{{ url('/') }}'/models/'.{{ $requestableModel->id }}) }}">{{ $requestableModel->name }}</a>
+                                                        <a href="{{ route('models.show', ['model' => $requestableModel->id]) }}">{{ $requestableModel->name }}</a>
                                                     @else
                                                         {{ $requestableModel->name }}
                                                     @endcan

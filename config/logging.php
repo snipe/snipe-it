@@ -112,27 +112,31 @@ $config = [
             'handler' => \Rollbar\Laravel\MonologHandler::class,
             'access_token' => env('ROLLBAR_TOKEN'),
             'level' => env('ROLLBAR_LEVEL', 'error'),
-            'check_ignore' => function($isUncaught, $args, $payload) {
-                if (App::environment('production') && is_object($args) && get_class($args) == Rollbar\ErrorWrapper::class && $args->errorLevel == E_WARNING ) {
-                    \Log::info("IGNORING E_WARNING in production mode: ".$args->getMessage());
-                    return true; // "TRUE - you should ignore it!"
-                }
-                $needle = "ArieTimmerman\\Laravel\\SCIMServer\\Exceptions\\SCIMException";
-                if (App::environment('production') && is_string($args) && strncmp($args, $needle, strlen($needle) ) === 0 ) {
-                    \Log::info("String: '$args' looks like a SCIM Exception; ignoring error");
-                    return true; //yes, *do* ignore it
-                }
-                return false;
-            },
         ],
     ],
 
 ];
 
 
-// Only add rollbar if the .env has a rollbar token
 if ((env('APP_ENV')=='production') && (env('ROLLBAR_TOKEN'))) {
+    // Only add rollbar if the .env has a rollbar token
     $config['channels']['stack']['channels'] = ['single', 'rollbar'];
+
+    // and only add the rollbar filter under the same conditions
+    // Note: it will *not* be cacheable
+    $config['channels']['rollbar']['check_ignore'] = function ($isUncaught, $args, $payload) {
+        if (App::environment('production') && is_object($args) && get_class($args) == Rollbar\ErrorWrapper::class && $args->errorLevel == E_WARNING ) {
+            \Log::info("IGNORING E_WARNING in production mode: ".$args->getMessage());
+            return true; // "TRUE - you should ignore it!"
+        }
+        $needle = "ArieTimmerman\\Laravel\\SCIMServer\\Exceptions\\SCIMException";
+        if (App::environment('production') && is_string($args) && strncmp($args, $needle, strlen($needle) ) === 0 ) {
+            \Log::info("String: '$args' looks like a SCIM Exception; ignoring error");
+            return true; //yes, *do* ignore it
+        }
+        return false;
+    };
+
 }
 
 

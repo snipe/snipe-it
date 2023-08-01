@@ -71,17 +71,12 @@ class UsersController extends Controller
             'users.start_date',
             'users.end_date',
             'users.vip',
+            'users.autoassign_licenses',
 
         ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy',)
             ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count');
         $users = Company::scopeCompanyables($users);
 
-
-        if (($request->filled('deleted')) && ($request->input('deleted') == 'true')) {
-            $users = $users->onlyTrashed();
-        } elseif (($request->filled('all')) && ($request->input('all') == 'true')) {
-            $users = $users->withTrashed();
-        }
 
         if ($request->filled('activated')) {
             $users = $users->where('users.activated', '=', $request->input('activated'));
@@ -187,19 +182,19 @@ class UsersController extends Controller
             $users->has('accessories', '=', $request->input('accessories_count'));
         }
 
+        if ($request->filled('autoassign_licenses')) {
+            $users->where('autoassign_licenses', '=', $request->input('autoassign_licenses'));
+        }
+
         if ($request->filled('search')) {
             $users = $users->TextSearch($request->input('search'));
         }
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $offset = (($users) && (request('offset') > $users->count())) ? 0 : request('offset', 0);
 
-        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
-        // case we override with the actual count, so we should return 0 items.
-        $offset = (($users) && ($request->get('offset') > $users->count())) ? $users->count() : $request->get('offset', 0);
-
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $users->count()) ? $users->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
 
 
         switch ($request->input('sort')) {
@@ -217,6 +212,14 @@ class UsersController extends Controller
                 break;
             case 'company':
                 $users = $users->OrderCompany($order);
+                break;
+            case 'first_name':
+                $users->orderBy('first_name', $order);
+                $users->orderBy('last_name', $order);
+                break;
+            case 'last_name':
+                $users->orderBy('last_name', $order);
+                $users->orderBy('first_name', $order);
                 break;
             default:
                 $allowed_columns =
@@ -255,6 +258,7 @@ class UsersController extends Controller
                         'vip',
                         'start_date',
                         'end_date',
+                        'autoassign_licenses',
                     ];
 
                 $sort = in_array($request->get('sort'), $allowed_columns) ? $request->get('sort') : 'first_name';
@@ -262,6 +266,12 @@ class UsersController extends Controller
                 break;
         }
 
+        if (($request->filled('deleted')) && ($request->input('deleted') == 'true')) {
+            $users = $users->onlyTrashed();
+        } elseif (($request->filled('all')) && ($request->input('all') == 'true')) {
+            $users = $users->withTrashed();
+        }
+        
         $total = $users->count();
         $users = $users->skip($offset)->take($limit)->get();
 
@@ -352,7 +362,7 @@ class UsersController extends Controller
             $user->permissions = $permissions_array;
         }
 
-        $tmp_pass = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 20);
+        $tmp_pass = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 40);
         $user->password = bcrypt($request->get('password', $tmp_pass));
 
         app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');

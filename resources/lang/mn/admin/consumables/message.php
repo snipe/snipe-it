@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Боломжийн талаар шалгаагүй байна, дахин оролдоно уу',
         'success' 		=> 'Боломжийн талаар амжилттай шалгасан.',
-        'user_does_not_exist' => 'Энэ хэрэглэгч буруу байна. Дахин оролдоно уу.'
+        'user_does_not_exist' => 'Энэ хэрэглэгч буруу байна. Дахин оролдоно уу.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

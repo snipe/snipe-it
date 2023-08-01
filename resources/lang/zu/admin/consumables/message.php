@@ -23,7 +23,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Ukuthengwa akuzange kuhlolwe, sicela uzame futhi',
         'success' 		=> 'Ukuthengwa kuhloliwe ngempumelelo.',
-        'user_does_not_exist' => 'Lo msebenzisi awuvumelekile. Ngicela uzame futhi.'
+        'user_does_not_exist' => 'Lo msebenzisi awuvumelekile. Ngicela uzame futhi.',
+         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
     ),
 
     'checkin' => array(

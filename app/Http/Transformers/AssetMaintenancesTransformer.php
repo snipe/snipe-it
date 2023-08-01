@@ -5,7 +5,7 @@ namespace App\Http\Transformers;
 use App\Helpers\Helper;
 use App\Models\Asset;
 use App\Models\AssetMaintenance;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 
 class AssetMaintenancesTransformer
@@ -45,7 +45,11 @@ class AssetMaintenancesTransformer
                 'name'=> e($assetmaintenance->asset->location->name),
 
             ] : null,
-            'notes'         => ($assetmaintenance->notes) ? e($assetmaintenance->notes) : null,
+            'rtd_location' => ($assetmaintenance->asset->defaultLoc) ? [
+                'id' => (int) $assetmaintenance->asset->defaultLoc->id,
+                'name'=> e($assetmaintenance->asset->defaultLoc->name),
+            ] : null,
+            'notes'         => ($assetmaintenance->notes) ? Helper::parseEscapedMarkedownInline($assetmaintenance->notes) : null,
             'supplier'      => ($assetmaintenance->supplier) ? ['id' => $assetmaintenance->supplier->id, 'name'=> e($assetmaintenance->supplier->name)] : null,
             'cost'          => Helper::formatCurrencyOutput($assetmaintenance->cost),
             'asset_maintenance_type'          => e($assetmaintenance->asset_maintenance_type),
@@ -55,6 +59,7 @@ class AssetMaintenancesTransformer
             'user_id'    => ($assetmaintenance->admin) ? ['id' => $assetmaintenance->admin->id, 'name'=> e($assetmaintenance->admin->getFullNameAttribute())] : null,
             'created_at' => Helper::getFormattedDateObject($assetmaintenance->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($assetmaintenance->updated_at, 'datetime'),
+            'is_warranty'=> $assetmaintenance->is_warranty,
 
         ];
 
