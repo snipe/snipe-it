@@ -244,8 +244,6 @@ class LdapSync extends Command
             if($ldap_result_first_name != null){
                 $user->first_name = $item['firstname'];
             }
-            if($ldap_result_active_flag  != null){
-            }
             if($ldap_result_emp_num  != null){
                 $user->employee_num = e($item['employee_number']);
             }
