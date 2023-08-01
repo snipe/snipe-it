@@ -75,7 +75,7 @@
         </label>
         <div id="email_will_be_sent" class="callout callout-info">
             <i class="far fa-envelope"></i>
-            <span>An email will be sent to the user because a EULA is set for this category.</span>
+            <span id="email_will_be_sent_message"></span>
         </div>
     </div>
 </div>
@@ -116,21 +116,36 @@
 @section('moar_scripts')
     <script type="text/javascript">
         $(document).ready(function () {
+            function checkAndDisableEmailCheckbox() {
+                shouldSendEmail.prop('checked', true);
+                shouldSendEmail.prop('disabled', true);
+            }
+
+            function uncheckAndEnableEmailCheckbox() {
+                shouldSendEmail.prop('checked', false);
+                shouldSendEmail.prop('disabled', false);
+            }
+
             let eula = $('textarea[name="eula_text"]');
             let useDefaultEula = $('input[name="use_default_eula"]');
             let shouldSendEmail = $('input[name="checkin_email"]')
-            let messageElement = $('#email_will_be_sent');
+            let messageWrapper = $('#email_will_be_sent');
+            let messageSpan = $('#email_will_be_sent_message');
+
+            let messages = {
+                global: 'An email will be sent to the user because the global EULA is being used.',
+                local: 'An email will be sent to the user because a EULA is set for this category.',
+            };
 
             function handleEulaChange() {
                 if (eula.val().trim() !== '' || useDefaultEula.is(":checked")) {
-                    shouldSendEmail.prop('checked', true);
-                    shouldSendEmail.prop('disabled', true);
-                    messageElement.show();
+                    checkAndDisableEmailCheckbox();
+                    useDefaultEula.is(":checked") ? messageSpan.text(messages.global) : messageSpan.text(messages.local);
+                    messageWrapper.show();
                     eula.prop('disabled', useDefaultEula.is(":checked"));
                 } else {
-                    shouldSendEmail.prop('checked', false);
-                    shouldSendEmail.prop('disabled', false);
-                    messageElement.hide();
+                    uncheckAndEnableEmailCheckbox();
+                    messageWrapper.hide();
                     eula.prop('disabled', useDefaultEula.is(":checked"));
                 }
             }
