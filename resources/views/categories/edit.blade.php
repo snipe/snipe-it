@@ -73,9 +73,9 @@
         {{ Form::checkbox('checkin_email', '1', old('checkin_email', $item->checkin_email), ['aria-label'=>'checkin_email']) }}
         {{ trans('admin/categories/general.checkin_email') }}
         </label>
-        <div id="email_will_be_sent_message" class="callout callout-info">
+        <div id="email_will_be_sent" class="callout callout-info">
             <i class="far fa-envelope"></i>
-            An email will be sent to the user because a EULA is set for this category.
+            <span>An email will be sent to the user because a EULA is set for this category.</span>
         </div>
     </div>
 </div>
@@ -119,18 +119,18 @@
             let eula = $('textarea[name="eula_text"]');
             let useDefaultEula = $('input[name="use_default_eula"]');
             let shouldSendEmail = $('input[name="checkin_email"]')
-            let message = $('#email_will_be_sent_message');
+            let messageElement = $('#email_will_be_sent');
 
             function handleEulaChange() {
                 if (eula.val().trim() !== '' || useDefaultEula.is(":checked")) {
                     shouldSendEmail.prop('checked', true);
                     shouldSendEmail.prop('disabled', true);
-                    message.show();
+                    messageElement.show();
                     eula.prop('disabled', useDefaultEula.is(":checked"));
                 } else {
                     shouldSendEmail.prop('checked', false);
                     shouldSendEmail.prop('disabled', false);
-                    message.hide();
+                    messageElement.hide();
                     eula.prop('disabled', useDefaultEula.is(":checked"));
                 }
             }
