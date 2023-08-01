@@ -186,7 +186,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
     Route::post('labels', [SettingsController::class, 'postLabels'])->name('settings.labels.save');
 
     Route::get('ldap', [SettingsController::class, 'getLdapSettings'])->name('settings.ldap.index');
-    Route::post('ldap', [SettingsController::class, 'postLdapSettings'])->name('settings.ldap.save');
 
     Route::get('phpinfo', [SettingsController::class, 'getPhpInfo'])->name('settings.phpinfo.index');
 
@@ -520,13 +519,3 @@ Route::middleware(['auth'])->get(
     '/',
     [DashboardController::class, 'index']
 )->name('home');
-/*
-|--------------------------------------------------------------------------
-| Livewire Routes
-|--------------------------------------------------------------------------
-|
-|
-|
-*/
-Route::get('ldap',
-    [\App\Http\Livewire\LdapSettingsForm::class, 'ldaptest'])->name('ldaptest');

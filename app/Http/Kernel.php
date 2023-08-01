@@ -45,9 +45,6 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\AssetCountForSidebar::class,
             \Illuminate\Session\Middleware\AuthenticateSession::class,
         ],
-        'for_livewire'=>[
-            \App\Http\Middleware\LogInputRequests::class,
-        ],
 
         'api' => [
             'auth:api',

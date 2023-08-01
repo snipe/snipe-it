@@ -111,38 +111,40 @@ class LdapSettingsForm extends Component
 
 
     public function submit(){
-
-        $this->setting->ldap_enabled              = $this->ldap_enabled;
-        $this->setting->ldap_server               = $this->ldap_server;
-        $this->setting->ldap_server_cert_ignore   = $this->ldap_server_cert_ignore;
-        $this->setting->ldap_uname                = $this->ldap_uname;
-        $this->setting->ldap_pword                = Crypt::encrypt($this->ldap_pword);
-        $this->setting->ldap_basedn               = $this->ldap_basedn;
-        $this->setting->ldap_default_group        = $this->ldap_default_group;
-        $this->setting->ldap_filter               = $this->ldap_filter;
-        $this->setting->ldap_username_field       = $this->ldap_username_field;
-        $this->setting->ldap_lname_field          = $this->ldap_lname_field;
-        $this->setting->ldap_fname_field          = $this->ldap_fname_field;
-        $this->setting->ldap_auth_filter_query    = $this->ldap_auth_filter_query;
-        $this->setting->ldap_version              = $this->ldap_version;
-        $this->setting->ldap_active_flag          = $this->ldap_active_flag;
-        $this->setting->ldap_emp_num              = $this->ldap_emp_num;
-        $this->setting->ldap_email                = $this->ldap_email;
-        $this->setting->ldap_manager              = $this->ldap_manager;
-        $this->setting->ad_domain                 = $this->ad_domain;
-        $this->setting->is_ad                     = $this->is_ad;
-        $this->setting->ad_append_domain          = $this->ad_append_domain;
-        $this->setting->ldap_tls                  = $this->ldap_tls;
-        $this->setting->ldap_pw_sync              = $this->ldap_pw_sync;
-        $this->setting->ldap_phone_field          = $this->ldap_phone_field;
-        $this->setting->ldap_jobtitle             = $this->ldap_jobtitle;
-        $this->setting->ldap_country              = $this->ldap_country;
-        $this->setting->ldap_dept                 = $this->ldap_dept;
-        $this->setting->ldap_client_tls_cert      = $this->ldap_client_tls_cert;
-        $this->setting->ldap_client_tls_key       = $this->ldap_client_tls_key;
-        $this->setting->custom_forgot_pass_url    = $this->custom_forgot_pass_url;
+        if (! config('app.lock_passwords') === true) {
+            $this->setting->ldap_enabled = $this->ldap_enabled;
+            $this->setting->ldap_server = $this->ldap_server;
+            $this->setting->ldap_server_cert_ignore = $this->ldap_server_cert_ignore;
+            $this->setting->ldap_uname = $this->ldap_uname;
+            $this->setting->ldap_pword = Crypt::encrypt($this->ldap_pword);
+            $this->setting->ldap_basedn = $this->ldap_basedn;
+            $this->setting->ldap_default_group = $this->ldap_default_group;
+            $this->setting->ldap_filter = $this->ldap_filter;
+            $this->setting->ldap_username_field = $this->ldap_username_field;
+            $this->setting->ldap_lname_field = $this->ldap_lname_field;
+            $this->setting->ldap_fname_field = $this->ldap_fname_field;
+            $this->setting->ldap_auth_filter_query = $this->ldap_auth_filter_query;
+            $this->setting->ldap_version = $this->ldap_version;
+            $this->setting->ldap_active_flag = $this->ldap_active_flag;
+            $this->setting->ldap_emp_num = $this->ldap_emp_num;
+            $this->setting->ldap_email = $this->ldap_email;
+            $this->setting->ldap_manager = $this->ldap_manager;
+            $this->setting->ad_domain = $this->ad_domain;
+            $this->setting->is_ad = $this->is_ad;
+            $this->setting->ad_append_domain = $this->ad_append_domain;
+            $this->setting->ldap_tls = $this->ldap_tls;
+            $this->setting->ldap_pw_sync = $this->ldap_pw_sync;
+            $this->setting->ldap_phone_field = $this->ldap_phone_field;
+            $this->setting->ldap_jobtitle = $this->ldap_jobtitle;
+            $this->setting->ldap_country = $this->ldap_country;
+            $this->setting->ldap_dept = $this->ldap_dept;
+            $this->setting->ldap_client_tls_cert = $this->ldap_client_tls_cert;
+            $this->setting->ldap_client_tls_key = $this->ldap_client_tls_key;
+            $this->setting->custom_forgot_pass_url = $this->custom_forgot_pass_url;
+        }
 
         $this->setting->save();
+        $this->setting->update_client_side_cert_files();
         session()->flash('saved', 'Settings Saved.');
         $this->emit('alert_remove');
 

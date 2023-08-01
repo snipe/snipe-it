@@ -585,9 +585,11 @@
                                                 <table class="table table-bordered table-condensed" style="background-color: #fff">
                                                     <thead>
                                                         <tr>
-                                                            @foreach($keys as $key)
-                                                            <th>{{$key}}</th>
-                                                            @endforeach
+                                                            <th>{{ trans('admin/settings/general.employee_number') }}</th>
+                                                            <th>{{ trans('mail.username') }}</th>
+                                                            <th>{{ trans('general.first_name') }}</th>
+                                                            <th>{{ trans('general.last_name') }}</th>
+                                                            <th>{{ trans('general.email') }}</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>

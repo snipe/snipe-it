@@ -81,7 +81,7 @@ return [
     |
     */
 
-    'middleware_group' => ['web', 'for_livewire'],
+    'middleware_group' => 'web',
 
     /*
     |--------------------------------------------------------------------------
