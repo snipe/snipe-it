@@ -59,13 +59,14 @@ class CategoryEditFormTest extends TestCase
             ->assertSet('sendCheckInEmail', true);
     }
 
-    public function testSendEmailCheckboxCheckedWhenUseDefaultEulaSelected()
+    public function testSendEmailCheckboxCheckedAndEulaTextDisabledWhenUseDefaultEulaSelected()
     {
         Livewire::test(CategoryEditForm::class, [
             'sendCheckInEmail' => false,
             'useDefaultEula' => false,
         ])->assertSet('sendCheckInEmail', false)
             ->set('useDefaultEula', true)
-            ->assertSet('sendCheckInEmail', true);
+            ->assertSet('sendCheckInEmail', true)
+            ->assertSet('eulaTextDisabled', true);
     }
 }

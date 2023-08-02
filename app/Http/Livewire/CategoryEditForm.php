@@ -48,4 +48,9 @@ class CategoryEditForm extends Component
 
         return trans('admin/categories/general.email_will_be_sent_due_to_category_eula');
     }
+
+    public function getEulaTextDisabledProperty()
+    {
+        return $this->useDefaultEula;
+    }
 }
