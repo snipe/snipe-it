@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'Clone Asset',
     'deployable'  				=> 'Deployable',
     'deleted'  					=> 'This asset has been deleted.',
+    'delete_confirm'            => 'Are you sure you want to delete this asset?',
     'edit'  					=> 'Edit Asset',
     'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
     'model_invalid'             => 'The Model of this Asset is invalid.',
