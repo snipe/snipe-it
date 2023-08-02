@@ -6,20 +6,20 @@ use Livewire\Component;
 
 class CategoryEditForm extends Component
 {
-    public $checkinEmail;
-
     public $defaultEulaText;
 
     public $eulaText;
 
     public $requireAcceptance;
 
+    public $sendCheckInEmail;
+
     public $useDefaultEula;
 
     public function mount()
     {
         if ($this->eulaText || $this->useDefaultEula) {
-            $this->checkinEmail = true;
+            $this->sendCheckInEmail = true;
         }
     }
 
@@ -31,7 +31,7 @@ class CategoryEditForm extends Component
     public function updated($property, $value)
     {
         if (in_array($property, ['eulaText', 'useDefaultEula']) && ($this->eulaText || $this->useDefaultEula)) {
-            $this->checkinEmail = (bool)$value;
+            $this->sendCheckInEmail = (bool)$value;
         }
     }
 

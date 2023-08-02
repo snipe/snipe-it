@@ -41,7 +41,7 @@
     <div class="form-group">
         <div class="col-md-9 col-md-offset-3">
             <label class="form-control">
-                {{ Form::checkbox('checkin_email', '1', null, ['wire:model' => 'checkinEmail', 'aria-label'=>'checkin_email']) }}
+                {{ Form::checkbox('checkin_email', '1', null, ['wire:model' => 'sendCheckInEmail', 'aria-label'=>'checkin_email']) }}
                 {{ trans('admin/categories/general.checkin_email') }}
             </label>
             @if ($this->shouldDisplayEmailMessage)
