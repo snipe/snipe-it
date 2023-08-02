@@ -30,8 +30,8 @@ class CategoryEditForm extends Component
 
     public function updated($property, $value)
     {
-        if (in_array($property, ['eulaText', 'useDefaultEula']) && ($this->eulaText || $this->useDefaultEula)) {
-            $this->sendCheckInEmail = (bool)$value;
+        if (in_array($property, ['eulaText', 'useDefaultEula'])) {
+            $this->sendCheckInEmail = $this->eulaText || $this->useDefaultEula;
         }
     }
 
@@ -52,5 +52,10 @@ class CategoryEditForm extends Component
     public function getEulaTextDisabledProperty()
     {
         return $this->useDefaultEula;
+    }
+
+    public function getSendCheckInEmailDisabledProperty()
+    {
+        return $this->eulaText || $this->useDefaultEula;
     }
 }
