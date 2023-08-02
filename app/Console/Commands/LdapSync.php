@@ -243,7 +243,7 @@ class LdapSync extends Command
                 $user->jobtitle = $item['jobtitle'];
                 $user->country = $item['country'];
                 $user->department_id = $department->id;
-                $user->location_id = $location->id;
+                $user->location_id = $location ? $location->id : null;
 
                 if($item['manager'] != null) {
                     // Check Cache first
