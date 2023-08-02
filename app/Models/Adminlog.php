@@ -9,7 +9,14 @@ class AdminLog extends SnipeModel
 {
     use HasFactory;
    
-    protected $fillable = ['created_at', 'item_type', 'user_id', 'item_id', 'action_type', 'note'];
+    protected $fillable = [
+        'created_at', 
+        'item_type', 
+        'user_id', 
+        'item_id', 
+        'action_type', 
+        'note'
+    ];
    
     public function user()
     {
@@ -34,24 +41,5 @@ class AdminLog extends SnipeModel
     {
        $this->user_id = $user->id; 
        return $this;
-    }
-   
-    public function __destruct()
-    {
-       ray()->clearAll(); 
-        ray('adminlog destructed'); 
-       if ($this->item_id && $this->item_type && $this->action_type) {
-           ray('adminlog saved'); 
-           $this->save();
-            ray()->showApp(); 
-           ray()->confetti();
-         } else {
-            ray()->notify('shits busted');  
-            ray('adminlog not saved');  
-        //    throw new \Exception("Required Methods improperly called on SnipeLog::admin", 1);
-            
-          
-         }
-        
     }
 }
