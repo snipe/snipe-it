@@ -147,9 +147,8 @@ class LdapSettingsForm extends Component
         $this->setting->save();
         $this->setting->update_client_side_cert_files();
         session()->flash('saved', 'Settings Saved.');
-        $this->emit('alert_remove');
-
     }
+
     public function ldapsynctest()
     {
         $settings = Setting::getSettings();

@@ -44,7 +44,7 @@
                                     @error('$ldap_enabled')<span class="error">{{$message}}@enderror
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
-                                    <input wire:model="ldap_enabled" type="checkbox" value="{{old('$ldap_enabled', $ldap_enabled)}}"  >
+                                    <input wire:model="ldap_enabled" type="checkbox" value="{{old('$ldap_enabled', $ldap_enabled)}}"" >
                                     @error('$ldap_enabled')<span class="error">{{$message}}@enderror
                                 {{ trans('admin/settings/general.ldap_enabled') }}
                                 @endif
@@ -695,20 +695,20 @@
                             </div>
                         </div>
                     </div>
+                    <div class="pull-right col-md-8">
+                        @if(session()->has('saved'))
+                            <div class="alert alert-success fade in" style="text-align:center; margin-left:-14px; margin-right:15px">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                {{ session('saved') }}
+                            </div>
+                        @endif
+                    </div>
                 @endif
-
-                <div class="box-footer" style="display: flex; justify-content: space-between;">
+                <div class="box-footer">
                     <div class="text-left col-md-6">
                         <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                     </div>
-                    <div class="text-right pull-right col-md-6" >
-                    @if(session()->has('saved'))
-                        <div class="alert alert-success fade in" style="text-align:center;">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                            {{ session('saved') }}
-                        </div>
-                    @endif
-                    </div>
+
                     <div class="text-right pull-right col-md-6" >
                         <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                     </div>
@@ -722,14 +722,4 @@
     </div>
 </form>
 </div>
-@section('moar_scripts')
-    <script>
-    $(document).ready(function(){
-    window.livewire.on('alert_remove',()=>{
-    setTimeout(function(){ $(".alert-success").fadeOut('fast');
-    }, 2500); // 2.5 secs
-    });
-    });
-    </script>
-@stop
 
