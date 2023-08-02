@@ -22,6 +22,7 @@ trait Loggable
                 $model->logAdmin(actionType: 'settings-updated', note: 'settings observer');  
                 break; 
             case User::class:
+                $model->logAdmin(actionType: 'user-updated', note: 'user observer'); 
                 break; 
             // etc... 
             default:
@@ -287,7 +288,7 @@ trait Loggable
             $changed = []; 
             $new = $this->getDirty();
             $old = $this->getRawOriginal();       
-            if ($actionType == 'password-updated') {
+            if ($this->isDirty('password')) {
                 $changed['new']['password'] = '********';
                 $changed['old']['password'] = '********';
             } else {
