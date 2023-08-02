@@ -2,6 +2,7 @@
 
 namespace App\Models\Traits;
 
+use App\Models\AdminLog;
 use App\Models\Setting;
 use App\Notifications\AuditNotification;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +17,11 @@ trait Loggable
     public function log()
     {
         return $this->morphMany(Actionlog::class, 'item');
+    }
+   
+    public function adminLog()
+    {
+        return $this->morphMany(Adminlog::class, 'item');
     }
 
     /**
@@ -284,15 +290,25 @@ trait Loggable
 
             $user = Auth::user(); 
         
-            $log = new Adminlog();
-            $log->user_id = $user->id;
-            $log->action_type = $actionType ? $actionType : null; 
-            $log->item_type = static::class; 
-            $log->item_id = $this->id; 
-            $log->note = $note ? $note : null; 
-            $log->log_meta = json_encode($changed); 
+            // $log = new Adminlog();
+            // $log->user_id = $user->id;
+            // $log->action_type = $actionType ? $actionType : null; 
+            // $log->item_type = static::class; 
+            // $log->item_id = $this->id; 
+            // $log->note = $note ? $note : null; 
+            // $log->log_meta = json_encode($changed); 
         
-            $log->save();
+            // $log->save();
+            if(static::class == User::class && static::saved()) {
+                AdminLog::create([
+                    'user_id' => $user->id,
+                    'action_type' => $actionType ? $actionType : null,
+                    'item_type' => static::class,
+                    'item_id' => $this->id,
+                    'note' => $note ? $note : null,
+                    'log_meta' => json_encode($changed)
+                ]);
+            }
        } else {
             return;
        } 
