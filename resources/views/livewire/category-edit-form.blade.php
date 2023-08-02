@@ -44,7 +44,7 @@
                 {{ Form::checkbox('checkin_email', '1', null, ['wire:model' => 'checkinEmail', 'aria-label'=>'checkin_email']) }}
                 {{ trans('admin/categories/general.checkin_email') }}
             </label>
-            @if ($this->displayEmailMessage)
+            @if ($this->shouldDisplayEmailMessage)
                 <div class="callout callout-info">
                     <i class="far fa-envelope"></i>
                     <span>{{ $this->emailMessage }}</span>
