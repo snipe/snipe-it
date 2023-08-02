@@ -7,30 +7,55 @@ use App\Models\AdminLog;
 use App\Models\Asset;
 use App\Models\License;
 use App\Models\LicenseSeat;
+use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\AuditNotification;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
 trait Loggable
 {
     public static function bootLoggable() { 
-        static::saved(function($model) {
-           switch (static::class) {
-            case Setting::class:
-                $model->logAdmin(actionType: 'saved', note: 'settings trait');  
-                break; 
-            case User::class:
-                $model->logAdmin(actionType: 'saved', note: 'user trait'); 
-                break; 
-            // etc... 
-            default:
-                //nothing for now
-                break;
-           } 
+       
+        static::eventsToBeRecorded()->each(function ($event) {
+            ray($event);
         });
+
+        // static::saved(function($model) {
+        //    switch (static::class) {
+        //     case Setting::class:
+        //         $model->logAdmin(actionType: 'saved', note: 'settings trait');  
+        //         break; 
+        //     case User::class:
+        //         $model->logAdmin(actionType: 'saved', note: 'user trait'); 
+        //         break; 
+        //     // etc... 
+        //     default:
+        //         //nothing for now
+        //         break;
+        //    } 
+        // });
     }
+   
+    protected static function eventsToBeRecorded(): Collection
+    {
+       $events = collect(); 
+        if (isset(static::$recordEvents)) {
+            // ray(static::$recordEvents); 
+            $events = collect(static::$recordEvents);
+        } 
+
+        
+
+        if (collect(class_uses_recursive(static::class))->contains(SoftDeletes::class)) {
+            $events->push('restored');
+        }
+
+        return $events;
+    }
+
     
     /**
      * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>

@@ -30,10 +30,17 @@ use App\Models\Traits\Loggable;
 class Asset extends Depreciable
 {
 
+
     protected $presenter = \App\Presenters\AssetPresenter::class;
 
     use CompanyableTrait;
     use HasFactory, Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait, UniqueSerialTrait;
+
+    // loggable settings
+    // public function recordEvents()
+    // {
+    //     return ['created', 'updated', 'deleted'];
+    // }
 
     public const LOCATION = 'location';
     public const ASSET = 'asset';
