@@ -8,11 +8,28 @@ use App\Models\Asset;
 use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\Setting;
+use App\Models\User;
 use App\Notifications\AuditNotification;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 trait Loggable
 {
+    public static function bootLoggable() { 
+        static::saved(function($model) {
+           switch (static::class) {
+            case Setting::class:
+                $model->logAdmin(actionType: 'settings-updated', note: 'settings observer');  
+                break; 
+            case User::class:
+                break; 
+            // etc... 
+            default:
+                break;
+           } 
+        });
+    }
+    
     /**
      * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
      * @since [v3.4]
@@ -286,35 +303,32 @@ trait Loggable
            if (is_null($providedValue)) { 
             unset($changed['new']['updated_at'], $changed['old']['updated_at']);
            } 
-           
-            // if (!is_null($value)) {
-            //     $changed['new']['value'] = $value;
-            //     // $changed['old']['value'] = $value;
-            // }
 
             $user = Auth::user(); 
+            
+            $log = new Adminlog();
+            $log->user_id = $user->id;
+            $log->action_type = $actionType ? $actionType : null; 
+            $log->item_type = static::class; 
+            $log->item_id = $this->id; 
+            $log->note = $note ? $note : null; 
+            $log->log_meta = json_encode($changed); 
         
-            // $log = new Adminlog();
-            // $log->user_id = $user->id;
-            // $log->action_type = $actionType ? $actionType : null; 
-            // $log->item_type = static::class; 
-            // $log->item_id = $this->id; 
-            // $log->note = $note ? $note : null; 
-            // $log->log_meta = json_encode($changed); 
-        
-            // $log->save();
-            if(static::class == User::class && static::saved()) {
-                AdminLog::create([
-                    'user_id' => $user->id,
-                    'action_type' => $actionType ? $actionType : null,
-                    'item_type' => static::class,
-                    'item_id' => $this->id,
-                    'note' => $note ? $note : null,
-                    'log_meta' => json_encode($changed)
-                ]);
-            }
+            $log->save();
+            // if(static::class == User::class && static::saved()) {
+            //     AdminLog::create([
+            //         'user_id' => $user->id,
+            //         'action_type' => $actionType ? $actionType : null,
+            //         'item_type' => static::class,
+            //         'item_id' => $this->id,
+            //         'note' => $note ? $note : null,
+            //         'log_meta' => json_encode($changed)
+            //     ]);
+            // }
        } else {
             return;
        } 
     }
+   
+    
 }
