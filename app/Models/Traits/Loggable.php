@@ -19,13 +19,14 @@ trait Loggable
         static::saved(function($model) {
            switch (static::class) {
             case Setting::class:
-                $model->logAdmin(actionType: 'settings-updated', note: 'settings observer');  
+                $model->logAdmin(actionType: 'saved', note: 'settings trait');  
                 break; 
             case User::class:
-                $model->logAdmin(actionType: 'user-updated', note: 'user observer'); 
+                $model->logAdmin(actionType: 'saved', note: 'user trait'); 
                 break; 
             // etc... 
             default:
+                //nothing for now
                 break;
            } 
         });
