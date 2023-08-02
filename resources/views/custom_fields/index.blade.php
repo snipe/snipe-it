@@ -42,7 +42,7 @@
         <h2 class="box-title">{{ trans('admin/custom_fields/general.fieldsets') }}</h2>
         <div class="box-tools pull-right">
           @can('create', \App\Models\CustomFieldset::class)
-          <a href="{{ route('fieldsets.create',['tab' => Request::query('tab',0)])) }}" class="btn btn-sm btn-primary" data-tooltip="true" title="{{ trans('admin/custom_fields/general.create_fieldset_title') }}">{{ trans('admin/custom_fields/general.create_fieldset') }}</a>
+          <a href="{{ route('fieldsets.create',['tab' => Request::query('tab',0)]) }}" class="btn btn-sm btn-primary" data-tooltip="true" title="{{ trans('admin/custom_fields/general.create_fieldset_title') }}">{{ trans('admin/custom_fields/general.create_fieldset') }}</a>
           @endcan
         </div>
       </div><!-- /.box-header -->

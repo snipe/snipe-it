@@ -51,8 +51,10 @@ class CustomFieldset extends Model
      * @since [v3.0]
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function customizable() // HATE this name. Should be something else.
+    public function customizable() // FIXME HATE this name. Should be something else. 'getFieldsetUsers'?
     {
+        // so maybe this is a static method on 'Asset' (for example) that takes a Fieldset?
+        // Asset::getFieldestUsers($fieldset_id) ????
         /************************************
          * 
          * WARNING:
@@ -71,7 +73,7 @@ class CustomFieldset extends Model
         $customizable_class_name = $this->type; //TODO - copypasta from Customizable trait?
         \Log::info("Customizable Class name is: ".$customizable_class_name);
         $customizable_class = new $customizable_class_name;
-        $pivot_class_name = $customizable_class->getPivotClass();
+        $pivot_class_name = $customizable_class->getPivotClass(); // FIXME - this is no longer correct
 
         return $pivot_class_name::where("fieldset_id", "=", $this->id)->get(); // I *have* tested this in Tinker and it *does* seem to work.
 

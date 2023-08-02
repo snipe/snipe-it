@@ -9,7 +9,6 @@ use App\Models\CustomFieldset;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Redirect;
-use Illuminate\Http\Request;
 
 
 /**
@@ -118,7 +117,7 @@ class CustomFieldsController extends Controller
             "display_in_user_view" => $display_in_user_view,
             "auto_add_to_fieldsets" => $request->get("auto_add_to_fieldsets", 0),
             "show_in_listview" => $request->get("show_in_listview", 0),
-            "user_id" => Auth::id()
+            "user_id" => Auth::id(),
             'type' => self::$tabs[$request->get('tab')]
         ]);
 

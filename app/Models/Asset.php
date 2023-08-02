@@ -45,6 +45,11 @@ class Asset extends Depreciable
     public function getFieldset(): ?CustomFieldset {
         return $this->model->fieldset;
     }
+
+    public static function getFieldsetUsers($fieldset_id) {
+        Asset::where("")
+        return self::where()
+    }
     /**
      * Run after the checkout acceptance was declined by the user
      * 
