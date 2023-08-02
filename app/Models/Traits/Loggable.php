@@ -2,7 +2,11 @@
 
 namespace App\Models\Traits;
 
+use App\Models\Actionlog;
 use App\Models\AdminLog;
+use App\Models\Asset;
+use App\Models\License;
+use App\Models\LicenseSeat;
 use App\Models\Setting;
 use App\Notifications\AuditNotification;
 use Illuminate\Support\Facades\Auth;
