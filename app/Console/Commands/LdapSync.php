@@ -195,6 +195,7 @@ class LdapSync extends Command
 
         }
 
+
         for ($i = 0; $i < $results['count']; $i++) {
                 $item = [];
                 $item['username'] = $results[$i][$ldap_result_username][0] ?? '';
@@ -233,39 +234,17 @@ class LdapSync extends Command
                     $item['createorupdate'] = 'created';
                 }
 
-            //If a sync option is not filled in on the LDAP settings don't populate the user field
-            if($ldap_result_username  != null){
-                $user->username = $item['username'];
-            }
-            if($ldap_result_last_name != null){
-                $user->last_name = $item['lastname'];
-            }
-            if($ldap_result_first_name != null){
                 $user->first_name = $item['firstname'];
-            }
-            if($ldap_result_active_flag  != null){
-            }
-            if($ldap_result_emp_num  != null){
-                $user->employee_num = e($item['employee_number']);
-            }
-            if($ldap_result_email != null){
+                $user->last_name = $item['lastname'];
+                $user->username = $item['username'];
                 $user->email = $item['email'];
-            }
-            if($ldap_result_phone != null){
+                $user->employee_num = e($item['employee_number']);
                 $user->phone = $item['telephone'];
-            }
-            if($ldap_result_jobtitle != null){
                 $user->jobtitle = $item['jobtitle'];
-            }
-            if($ldap_result_country != null){
                 $user->country = $item['country'];
+                $user->department_id = $department->id;
+                $user->location_id = $location ? $location->id : null;
 
-            }
-            if($ldap_result_dept  != null){
-                    $user->department_id = $department->id;
-            }
-            if($ldap_result_manager != null){
-              
                 if($item['manager'] != null) {
                     // Check Cache first
                     if (isset($manager_cache[$item['manager']])) {
@@ -305,7 +284,7 @@ class LdapSync extends Command
 
                     }
                 }
-            }
+
                 // Sync activated state for Active Directory.
                 if ( !empty($ldap_result_active_flag)) { // IF we have an 'active' flag set....
                     // ....then *most* things that are truthy will activate the user. Anything falsey will deactivate them.
