@@ -18,12 +18,21 @@ class CategoryEditForm extends Component
 
     public function mount()
     {
-
+        if ($this->eulaText || $this->useDefaultEula) {
+            $this->checkinEmail = true;
+        }
     }
 
     public function render()
     {
         return view('livewire.category-edit-form');
+    }
+
+    public function updated($property, $value)
+    {
+        if (in_array($property, ['eulaText', 'useDefaultEula']) && ($this->eulaText || $this->useDefaultEula)) {
+            $this->checkinEmail = (bool)$value;
+        }
     }
 
     public function getShouldDisplayEmailMessageProperty(): bool
