@@ -41,9 +41,11 @@
             <tbody>
               @foreach ($acceptances as $acceptance)
               <tr>
+                @if ($acceptance->checkoutable)
                 <td>{{ ($acceptance->checkoutable) ? $acceptance->checkoutable->present()->name : '' }}</td>
                 <td><a href="{{ route('account.accept.item', $acceptance) }}" class="btn btn-default btn-sm">{{ trans('general.accept_decline') }}</a></td>
               </tr>
+              @endif
               @endforeach
             </tbody>
           </table>

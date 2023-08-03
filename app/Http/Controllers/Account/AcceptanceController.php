@@ -69,7 +69,7 @@ class AcceptanceController extends Controller
         }
 
         if (! Company::isCurrentUserHasAccess($acceptance->checkoutable)) {
-            return redirect()->route('account.accept')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->route('account.accept')->with('error', trans('general.error_user_company'));
         }
 
         return view('account/accept.create', compact('acceptance'));
