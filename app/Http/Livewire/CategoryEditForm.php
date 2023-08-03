@@ -10,14 +10,17 @@ class CategoryEditForm extends Component
 
     public $eulaText;
 
+    public $originalSendCheckInEmailValue;
+
     public $requireAcceptance;
 
     public $sendCheckInEmail;
-
     public $useDefaultEula;
 
     public function mount()
     {
+        $this->originalSendCheckInEmailValue = $this->sendCheckInEmail;
+
         if ($this->eulaText || $this->useDefaultEula) {
             $this->sendCheckInEmail = true;
         }
@@ -30,9 +33,11 @@ class CategoryEditForm extends Component
 
     public function updated($property, $value)
     {
-        if (in_array($property, ['eulaText', 'useDefaultEula'])) {
-            $this->sendCheckInEmail = $this->eulaText || $this->useDefaultEula;
+        if (! in_array($property, ['eulaText', 'useDefaultEula'])) {
+            return;
         }
+
+        $this->sendCheckInEmail = $this->eulaText || $this->useDefaultEula ? true : $this->originalSendCheckInEmailValue;
     }
 
     public function getShouldDisplayEmailMessageProperty(): bool

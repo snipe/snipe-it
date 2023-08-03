@@ -70,5 +70,27 @@ class CategoryEditFormTest extends TestCase
             ->assertSet('eulaTextDisabled', true)
             ->assertSet('sendCheckInEmailDisabled', true);
     }
+
+    public function testSendEmailCheckboxEnabledAndSetToOriginalValueWhenNoCategoryEulaAndNotUsingGlobalEula()
+    {
+        Livewire::test(CategoryEditForm::class, [
+            'eulaText' => 'Some Content',
+            'sendCheckInEmail' => false,
+            'useDefaultEula' => true,
+        ])
+            ->set('useDefaultEula', false)
+            ->set('eulaText', '')
+            ->assertSet('sendCheckInEmail', false)
+            ->assertSet('sendCheckInEmailDisabled', false);
+
+        Livewire::test(CategoryEditForm::class, [
+            'eulaText' => 'Some Content',
+            'sendCheckInEmail' => true,
+            'useDefaultEula' => true,
+        ])
+            ->set('useDefaultEula', false)
+            ->set('eulaText', '')
+            ->assertSet('sendCheckInEmail', true)
+            ->assertSet('sendCheckInEmailDisabled', false);
     }
 }
