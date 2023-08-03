@@ -13,22 +13,23 @@
 @section('content')
 
 @can('view', \App\Models\CustomFieldset::class)
-{{--<div class="row">--}}
-{{--  <div calss="col-md-12">--}}
-{{--    <div class="box box-default">--}}
-{{--      <div class="box-body">--}}
+<div class="row">
+  <div calss="col-md-12">
+    <div class="box box-default">
+      <div class="box-body">
 
-{{--        <div class="nav-tabs-custom">--}}
-{{--          <ul class="nav nav-tabs">--}}
-{{--            <li class="active"><a href="{{ route("fieldsets.index",["tab" => 0]) }}">Asset Custom Fields</a></li>--}}
-{{--            <li><a href="{{ route("fieldsets.index",["tab" => 1]) }}">Users</a></li>--}}
-{{--            <li><a href="{{ route("fieldsets.index",["tab" => 2]) }}">Accessories</a></li>--}}
-{{--          </ul>--}}
-{{--        </div>--}}
-{{--      </div>--}}
-{{--    </div>--}}
-{{--  </div>--}}
-{{--</div>--}}
+        <div class="nav-tabs-custom">
+          <ul class="nav nav-tabs">
+            <li {!! !Request::query('tab') ? 'class="active"': '' !!}><a href="{{ route("fields.index",["tab" => 0]) }}">Asset Custom Fields</a></li>
+            <li {!! Request::query('tab') == 1 ? 'class="active"': '' !!}><a href="{{ route("fields.index",["tab" => 1]) }}">Users</a></li>
+            <li {!! Request::query('tab') == 2 ? 'class="active"': '' !!}><a href="{{ route("fields.index",["tab" => 2]) }}">Accessories</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+TAB IS: {{ Request::query('tab') }}
 <div class="row">
   <a href="?tab=0">Asset</a>
   <a href="?tab=1">Users</a>

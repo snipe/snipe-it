@@ -574,6 +574,15 @@ class Helper
     }
 
     /**
+     * Get all of the different types of custom fields there are
+     */
+    static $itemtypes_having_custom_fields = [
+        0 => \App\Models\Asset::class,
+        1 => \App\Models\User::class,
+        2 => \App\Models\Accessory::class
+    ];
+
+    /**
      * Get the list of custom field formats in an array to make a dropdown menu
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]

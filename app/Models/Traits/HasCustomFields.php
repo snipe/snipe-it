@@ -5,7 +5,7 @@ namespace App\Models\Traits;
 use App\Models\AssetModel;
 use App\Models\CustomFieldset;
 use Illuminate\Support\Facades\Event;
-use phpDocumentor\Reflection\Types\Collection;
+use Illuminate\Support\Collection;
 
 /*********************************
  * Trait HasCustomFields
@@ -31,7 +31,7 @@ trait HasCustomFields
      }
     abstract public function getFieldset(): ?CustomFieldset; // TODO - check version compatibilikty?
 
-    abstract public static function getFielsetUsers(int $fieldset_id): Collection;
+    abstract public static function getFieldsetUsers(int $fieldset_id): Collection;
 
     public static function augmentValidationRulesForCustomFields(array $data) {
         $model = $data[0]; /* model is the actual _instance_ of the object whose class uses HasCustomFields */

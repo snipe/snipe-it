@@ -54,6 +54,7 @@ class CustomField extends Model
         'field_encrypted' => 'nullable|boolean',
         'auto_add_to_fieldsets' => 'boolean',
         'show_in_listview' => 'boolean',
+        'type' => 'required'
     ];
 
     /**
@@ -75,17 +76,6 @@ class CustomField extends Model
         'show_in_listview',
 
     ];
-
-    /**
-     * This is confusing, since it's actually the custom fields table that
-     * we're usually modifying, but since we alter the assets table, we have to
-     * say that here, otherwise the new fields get added onto the custom fields
-     * table instead of the assets table.
-     *
-     * @author [Brady Wetherington] [<uberbrady@gmail.com>]
-     * @since [v3.0]
-     */
-    //public static $table_name = 'assets'; //we should now determine this from 'type' I guess?
 
     /**
      * Convert the custom field's name property to a db-safe string.

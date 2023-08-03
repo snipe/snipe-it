@@ -22,11 +22,6 @@ use Redirect;
  */
 class CustomFieldsController extends Controller
 {
-    static $tabs = [
-        0 => \App\Models\Asset::class,
-        1 => \App\Models\User::class,
-        2 => \App\Models\Accessory::class
-    ];
 
     /**
      * Returns a view with a listing of custom fields.
@@ -40,8 +35,8 @@ class CustomFieldsController extends Controller
     {
         $this->authorize('view', CustomField::class);
 
-        $fieldsets = CustomFieldset::with('fields')->where("type",self::$tabs[$request->get('tab',0)])->get(); //cannot eager-load 'customizable' because it's not a relation
-        $fields = CustomField::with('fieldset')->where("type",self::$tabs[$request->get('tab',0)])->get();
+        $fieldsets = CustomFieldset::with('fields')->where("type", Helper::$itemtypes_having_custom_fields[$request->get('tab',0)])->get(); //cannot eager-load 'customizable' because it's not a relation
+        $fields = CustomField::with('fieldset')->where("type", Helper::$itemtypes_having_custom_fields[$request->get('tab',0)])->get();
 
         return view('custom_fields.index')->with('custom_fieldsets', $fieldsets)->with('custom_fields', $fields);
     }
@@ -118,8 +113,9 @@ class CustomFieldsController extends Controller
             "auto_add_to_fieldsets" => $request->get("auto_add_to_fieldsets", 0),
             "show_in_listview" => $request->get("show_in_listview", 0),
             "user_id" => Auth::id(),
-            'type' => self::$tabs[$request->get('tab')]
         ]);
+        // not mass-assignable; must be manual
+        $field->type = Helper::$itemtypes_having_custom_fields[$request->get('tab')];
 
 
         if ($request->filled('custom_format')) {

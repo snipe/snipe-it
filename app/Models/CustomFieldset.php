@@ -72,10 +72,11 @@ class CustomFieldset extends Model
         // does it make sense to do a Trait check here, or is the actual trait *usage* enough?
         $customizable_class_name = $this->type; //TODO - copypasta from Customizable trait?
         \Log::info("Customizable Class name is: ".$customizable_class_name);
-        $customizable_class = new $customizable_class_name;
-        $pivot_class_name = $customizable_class->getPivotClass(); // FIXME - this is no longer correct
-
-        return $pivot_class_name::where("fieldset_id", "=", $this->id)->get(); // I *have* tested this in Tinker and it *does* seem to work.
+        return $customizable_class_name::getFieldsetUsers($this->id);
+//        $customizable_class = new $customizable_class_name;
+//        $pivot_class_name = $customizable_class->getPivotClass(); // FIXME - this is no longer correct
+//
+//        return $pivot_class_name::where("fieldset_id", "=", $this->id)->get(); // I *have* tested this in Tinker and it *does* seem to work.
 
         /**************************
          * 
@@ -84,8 +85,8 @@ class CustomFieldset extends Model
          *  `$classname::where("fieldset_id", "=", $this->id)` - but that's not directly possible
          * So we have to use this strange contraption below
          */
-        $query_builder = call_user_func( [$class_name, "where"], "fieldset_id", "=", $this->id); //this *should* return a standard Eloquent Query Builder object
-        return $query_builder->get(); //we may want to pull this 'get' and let the caller call get on their own? Not sure. Trying to keep it acting like a relation still.
+//        $query_builder = call_user_func( [$class_name, "where"], "fieldset_id", "=", $this->id); //this *should* return a standard Eloquent Query Builder object
+//        return $query_builder->get(); //we may want to pull this 'get' and let the caller call get on their own? Not sure. Trying to keep it acting like a relation still.
     }
 
     /**

@@ -20,6 +20,7 @@ use DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
 
@@ -46,9 +47,8 @@ class Asset extends Depreciable
         return $this->model->fieldset;
     }
 
-    public static function getFieldsetUsers($fieldset_id) {
-        Asset::where("")
-        return self::where()
+    public static function getFieldsetUsers(int $fieldset_id): Collection {
+        return AssetModel::where("fieldset_id",$fieldset_id)->get();
     }
     /**
      * Run after the checkout acceptance was declined by the user
