@@ -50,6 +50,9 @@
                     <span>{{ $this->emailMessage }}</span>
                 </div>
             @endif
+            @if ($this->sendCheckInEmailDisabled)
+                <input type="hidden" name="checkin_email" wire:model="sendCheckInEmail" />
+            @endif
         </div>
     </div>
 </div>
