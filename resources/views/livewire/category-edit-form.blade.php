@@ -8,6 +8,9 @@
             <p class="help-block">{!! trans('admin/settings/general.eula_markdown') !!} </p>
             {!! $errors->first('eula_text', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
         </div>
+        @if ($this->eulaTextDisabled)
+            <input type="hidden" name="eula_text" wire:model="eulaText" />
+        @endif
     </div>
 
     <!-- Use default checkbox -->
