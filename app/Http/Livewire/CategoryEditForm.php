@@ -15,6 +15,7 @@ class CategoryEditForm extends Component
     public $requireAcceptance;
 
     public $sendCheckInEmail;
+
     public $useDefaultEula;
 
     public function mount()
@@ -56,7 +57,7 @@ class CategoryEditForm extends Component
 
     public function getEulaTextDisabledProperty()
     {
-        return (bool) $this->useDefaultEula;
+        return (bool)$this->useDefaultEula;
     }
 
     public function getSendCheckInEmailDisabledProperty()
