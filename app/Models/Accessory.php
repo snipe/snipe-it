@@ -26,7 +26,6 @@ class Accessory extends SnipeModel
     use Loggable, Presentable;
     use SoftDeletes;
 
-    protected $table = 'accessories';
     protected $casts = [
         'purchase_date' => 'datetime',
         'requestable' => 'boolean',    ];
@@ -100,6 +99,15 @@ class Accessory extends SnipeModel
         'requestable',
         'notes',
     ];
+   
+    protected static $recordEvents = ['saved'];
+   
+    public $source; 
+    
+    public function __construct($source = null)
+    {
+       $this->source = $source; 
+    }
 
 
 

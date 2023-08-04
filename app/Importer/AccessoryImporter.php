@@ -41,7 +41,7 @@ class AccessoryImporter extends ItemImporter
             return;
         }
         $this->log('No Matching Accessory, Creating a new one');
-        $accessory = new Accessory();
+        $accessory = new Accessory('csv importer');
         $this->item['model_number'] = $this->findCsvMatch($row, "model_number");
         $this->item['min_amt'] = $this->findCsvMatch($row, "min_amt");
         $accessory->fill($this->sanitizeItemForStoring($accessory));

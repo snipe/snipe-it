@@ -2,6 +2,7 @@
 
 namespace App\Models\Traits;
 
+use App\Models\Accessory;
 use App\Models\Actionlog;
 use App\Models\AdminLog;
 use App\Models\Asset;
@@ -18,36 +19,44 @@ use Illuminate\Support\Facades\Auth;
 trait Loggable
 {
     public static function bootLoggable() { 
+       ray('fuck offfffffffff'); 
+        ray(static::class);
        
-        static::eventsToBeRecorded()->each(function ($event) {
-            ray($event);
-        });
-
-        // static::saved(function($model) {
-        //    switch (static::class) {
-        //     case Setting::class:
-        //         $model->logAdmin(actionType: 'saved', note: 'settings trait');  
-        //         break; 
-        //     case User::class:
-        //         $model->logAdmin(actionType: 'saved', note: 'user trait'); 
-        //         break; 
-        //     // etc... 
-        //     default:
-        //         //nothing for now
-        //         break;
-        //    } 
-        // });
+       //loops through the events to be recorded (defined in the model)
+       //and then calls the proper method for each model 
+       static::eventsToBeRecorded()->each(function ($event) {
+            // should be able to listen for the checkin and checkout events here as well
+            // and then call the logCheckout and logCheckin methods   
+            static::$event(function ($model) use ($event) {
+                switch (static::class) {
+                    case Setting::class:
+                        $model->logAdmin(actionType: $event, note: 'settings trait');  
+                        break; 
+                    case User::class:
+                        $model->logAdmin(actionType: $event, note: 'user trait'); 
+                        break; 
+                    case Asset::class:
+                        $model->logCreate(event: $event, note: 'asset trait boot method');
+                        break; 
+                    case Accessory::class:
+                        $model->logCreate(event: $event, note: 'accessory trait boot method'); 
+                        break; 
+                    // etc... 
+                    default:
+                    //do nothing for now
+                    break;
+                   } 
+           });
+       }); 
     }
    
     protected static function eventsToBeRecorded(): Collection
     {
+       //returns the events to be recorded for each model - uses the $recordEvents property defined in each model 
        $events = collect(); 
         if (isset(static::$recordEvents)) {
-            // ray(static::$recordEvents); 
             $events = collect(static::$recordEvents);
         } 
-
-        
 
         if (collect(class_uses_recursive(static::class))->contains(SoftDeletes::class)) {
             $events->push('restored');
@@ -261,7 +270,7 @@ trait Loggable
      * @since [v3.5]
      * @return \App\Models\Actionlog
      */
-    public function logCreate($note = null)
+    public function logCreate($note = null, $event = 'poop')
     {
         $user_id = -1;
         if (Auth::user()) {
@@ -278,7 +287,7 @@ trait Loggable
         $log->location_id = null;
         $log->note = $note;
         $log->user_id = $user_id;
-        $log->logaction('create');
+        $log->logaction($event);
         $log->save();
 
         return $log;

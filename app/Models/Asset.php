@@ -37,10 +37,7 @@ class Asset extends Depreciable
     use HasFactory, Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait, UniqueSerialTrait;
 
     // loggable settings
-    // public function recordEvents()
-    // {
-    //     return ['created', 'updated', 'deleted'];
-    // }
+    protected static $recordEvents = ['created']; 
 
     public const LOCATION = 'location';
     public const ASSET = 'asset';
