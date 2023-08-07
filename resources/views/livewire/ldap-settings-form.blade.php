@@ -648,19 +648,22 @@
                         @endif
                     </div><!--col-md-11 col-md-offset-1-->
 
-                    <div class="box-footer" style="width:auto; clear:both;">
-                        <div class="text-left col-md-4" style="float: left; width: 10%;">
+                    <div class="box-footer" style="display: flex; justify-content:space-between;">
+                        <div class="text-left pull-left col-md-4">
                             <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                         </div>
-                        <div class="col-md-4" style="float:left; width: 80%;">
+                        <div class="col-md-4">
                             @if(session()->has('saved'))
-                                <div class="alert alert-success fade in" style="text-align:center; height:35px; margin-left:40px; margin-right:79px;">
-                                    <button type="button" class="close" data-dismiss="alert">×</button>
-                                    {{ session('saved') }}
+                                <div class="alert alert-success fade in" style="text-align:center; height:35px; margin: auto;">
+                                    <div style="margin-top:-8px;">
+                                        <button type="button" class="close" data-dismiss="alert" style="margin-top:-3px;">×</button>
+                                        {{ session('saved') }}
+                                    </div>
+
                                 </div>
                             @endif
                         </div>
-                        <div class="text-right col-md-4" style="float: left; width: 10%;">
+                        <div class="text-right  col-md-4">
                             <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                         </div>
 
