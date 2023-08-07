@@ -20,7 +20,7 @@ on:
 pipeline:
   - name: Setup
     cmd: |
-      cp -v .env.testing .env
+      cp -v .env.testing.example .env
       composer install --no-interaction --prefer-dist --optimize-autoloader
 
   - name: Generate Key
