@@ -37,11 +37,11 @@ pipeline:
 
   - name: PHPUnit Unit Tests
     cmd: |
-      # phpunit --testsuite Unit
+      # php artisan test --testsuite Unit
 
   - name: PHPUnit Feature Tests
     cmd: |
-      # phpunit --testsuite Feature
+      # php artisan test --testsuite Feature
 
 #  - name: Browser Tests
 #    cmd: |
