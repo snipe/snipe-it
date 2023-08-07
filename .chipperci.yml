@@ -21,6 +21,7 @@ pipeline:
   - name: Setup
     cmd: |
       cp -v .env.testing.example .env
+      touch .env.testing
       composer install --no-interaction --prefer-dist --optimize-autoloader
 
   - name: Generate Key
