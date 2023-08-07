@@ -33,15 +33,15 @@ pipeline:
 
   - name: Run Migrations
     cmd: |
-      # php artisan migrate --force
+      php artisan migrate --force
 
   - name: PHPUnit Unit Tests
     cmd: |
-      # php artisan test --testsuite Unit
+      php artisan test --testsuite Unit
 
   - name: PHPUnit Feature Tests
     cmd: |
-      # php artisan test --testsuite Feature
+      php artisan test --testsuite Feature
 
 #  - name: Browser Tests
 #    cmd: |
