@@ -973,7 +973,12 @@
 
             $(function () {
 
-                $('[data-tooltip="true"]').tooltip();
+                // Invoke Bootstrap 3's tooltip
+                $('[data-tooltip="true"]').tooltip({
+                    container: 'body',
+                    animation: true,
+                });
+                
                 $('[data-toggle="popover"]').popover();
                 $('.select2 span').addClass('needsclick');
                 $('.select2 span').removeAttr('title');
