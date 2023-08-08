@@ -43,6 +43,16 @@ class Asset extends Depreciable
 
     use Acceptable, HasCustomFields;
 
+    protected $observables = ['validating','validated']; //huh. okay? FIXME - this is not the right way
+
+//    public static function boot()
+//    {
+//          I think \Event::listen is ONLY for the event service provider, not for here.
+//        \Event::listen(['validating','eloquent.validating.*'],function ($modelName, $event, $data) {
+//            \Log::debug("Heard event within Asset class: $modelName, $event with data: ".print_r($data,true));
+//        });
+//    }
+
     public function getFieldset(): ?CustomFieldset {
         return $this->model->fieldset;
     }
@@ -196,20 +206,6 @@ class Asset extends Depreciable
         }
         $this->attributes['expected_checkin'] = $value;
     }
-
-    /**
-     * This handles the custom field validation for assets
-     *
-     * @var array
-     */
-    public function save(array $params = [])
-    {
-
-
-
-        return parent::save($params);
-    }
-
 
     public function getDisplayNameAttribute()
     {
