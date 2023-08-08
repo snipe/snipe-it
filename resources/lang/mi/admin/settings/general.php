@@ -25,6 +25,7 @@ return [
     'audit_warning_days'        => 'Poari Whakatupato Aitea',
     'audit_warning_days_help'   => 'E hia nga ra i mua i te wa e tika ana kia whakatupato koe ki a koe i te wa e tika ana nga moni mo te tirotiro?',
     'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
+    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Taapiri (kōwhiringa)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'Ngā Pūrua',

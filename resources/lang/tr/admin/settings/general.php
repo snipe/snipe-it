@@ -25,6 +25,7 @@ return [
     'audit_warning_days'        => 'Denetim Uyarı Eşiği',
     'audit_warning_days_help'   => 'Mal varlığının denetime tabi olması gerektiği zaman sizi kaç gün öncesinden uyarmalıyız?',
     'auto_increment_assets'		=> 'Otomatik olarak artan varlık etiketi oluşturun',
+    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Ünvan (opsiyonel)',
     'auto_incrementing_help'    => 'Bunu ayarlamak için önce otomatik artan varlık etiketlerini etkinleştirin',
     'backups'					=> 'Yedekler',

@@ -25,6 +25,7 @@ return [
     'audit_warning_days'        => 'Trothwy Rhybuddio Awdit',
     'audit_warning_days_help'   => 'Sawl diwrnod o flaen llaw ddylswn rhybuddio chi o asedau sydd angen awdit?',
     'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
+    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Rhagddodiad (dewisol)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'Copi wrth gefn',

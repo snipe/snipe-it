@@ -723,6 +723,7 @@ class SettingsController extends Controller
         $setting->auto_increment_assets = $request->input('auto_increment_assets', '0');
         $setting->zerofill_count = $request->input('zerofill_count');
         $setting->next_auto_tag_base = $request->input('next_auto_tag_base');
+        $setting->asset_search_exact = $request->input('asset_search_exact');
 
         if ($setting->save()) {
             return redirect()->route('settings.index')

@@ -25,6 +25,7 @@ return [
     'audit_warning_days'        => 'Ngưỡng cảnh báo kiểm tra',
     'audit_warning_days_help'   => 'Bao nhiêu ngày trước chúng tôi nên cảnh báo bạn khi tài sản đến hạn kiểm toán?',
     'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
+    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Tiền tố (tùy chọn)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'Sao lưu',

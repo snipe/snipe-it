@@ -25,6 +25,7 @@ return [
     'audit_warning_days'        => 'Umbral de advertencia de auditoría',
     'audit_warning_days_help'   => '¿Con cuántos días de antelación debemos advertirle cuándo se deben auditar los activos?',
     'auto_increment_assets'		=> 'Generar etiquetas de activos que incrementan automáticamente',
+    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Prefijo (opcional)',
     'auto_incrementing_help'    => 'Primero habilite etiquetas de activos auto-incrementantes para configurar esto',
     'backups'					=> 'Copias de seguridad',

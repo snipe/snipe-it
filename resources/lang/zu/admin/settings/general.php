@@ -25,6 +25,7 @@ return [
     'audit_warning_days'        => 'I-Audit Warning Threshold',
     'audit_warning_days_help'   => 'Zingaki izinsuku kusengaphambili kufanele sikuxwayise uma izimpahla zifanele ukuhlolwa?',
     'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
+    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Isiqalo (okukhethwa kukho)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'Izipele',

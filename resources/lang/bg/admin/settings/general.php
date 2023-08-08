@@ -25,6 +25,7 @@ return [
     'audit_warning_days'        => 'Праг за предупреждение за одит',
     'audit_warning_days_help'   => 'Колко дни предварително трябва да ви предупреждаваме, когато активите са дължими за одит?',
     'auto_increment_assets'		=> 'Автоматично генериране на инвентарни номера на активите',
+    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Префикс (незадължително)',
     'auto_incrementing_help'    => 'Първо включете автоматично генериране на инвентарни номера, за да включите тази опция',
     'backups'					=> 'Архивиране',

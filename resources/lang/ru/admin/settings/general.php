@@ -25,6 +25,7 @@ return [
     'audit_warning_days'        => 'Предупреждающий порог предупреждения',
     'audit_warning_days_help'   => 'За сколько дней мы должны предупредить вас, когда активы подлежат аудиту?',
     'auto_increment_assets'		=> 'Генерировать метки активов авто увеличением',
+    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Префикс ( не обязательно )',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'Резервные копии',

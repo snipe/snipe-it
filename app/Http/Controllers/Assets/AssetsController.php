@@ -455,9 +455,16 @@ class AssetsController extends Controller
      */
     public function getAssetByTag(Request $request)
     {
+        $settings = Setting::getSettings();
         $topsearch = ($request->get('topsearch') == 'true');
 
-        if (! $asset = Asset::where('asset_tag', '=', $request->get('assetTag'))->first()) {
+        $asset = Asset::where('asset_tag', '=', $request->get('assetTag'))->first();
+        if(! $settings-> asset_search_exact ) {
+            $asset = Asset::where('asset_tag', 'LIKE', '%' . $request->get('assetTag') . '%')
+                            ->orderBy('asset_tag','asc')
+                            ->first();
+        }
+        if (! $asset) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
         $this->authorize('view', $asset);

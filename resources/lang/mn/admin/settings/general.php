@@ -25,6 +25,7 @@ return [
     'audit_warning_days'        => 'Аудитын анхааруулах босго',
     'audit_warning_days_help'   => 'Хөрөнгө аудит хийхэд бэлэн байх үед танд хэдэн өдөр урьдчилан урьдчилан анхааруулах ёстой вэ?',
     'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
+    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Угтвар (заавал биш)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'Нөөцлөлтүүд',

@@ -25,6 +25,7 @@ return [
     'audit_warning_days'        => 'Próg ostrzegania przed audytem',
     'audit_warning_days_help'   => 'Ile dni wcześniej powinniśmy ostrzec Cię, gdy majątek ma zostać poddany audytowi?',
     'auto_increment_assets'		=> 'Generuj automatycznie zwiększanjące się tagi zasobów',
+    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Prefix (opcjonalnie)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'Kopie zapasowe',

@@ -25,6 +25,7 @@ return [
     'audit_warning_days'        => '監査警告しきい値',
     'audit_warning_days_help'   => '資産の監査期限は何日前に警告する必要がありますか？',
     'auto_increment_assets'		=> '資産タグを自動採番で生成',
+    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'プレフィクス (オプション)',
     'auto_incrementing_help'    => 'この初期値を使って資産タグの自動採番を有効化',
     'backups'					=> 'バックアップ',

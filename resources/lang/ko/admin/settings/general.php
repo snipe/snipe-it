@@ -25,6 +25,7 @@ return [
     'audit_warning_days'        => '감사 경고 임계값',
     'audit_warning_days_help'   => '자산 회계 감사가 예정되어 있을 때 몇 일 전에 경고할까요?',
     'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
+    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> '접두사 (부가적)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> '예비품',

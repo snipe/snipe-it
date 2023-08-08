@@ -25,6 +25,7 @@ return [
     'audit_warning_days'        => 'Prah výstrahy auditu',
     'audit_warning_days_help'   => 'Kolik dní předem bychom vás měli varovat, když jsou aktiva splatná pro audit?',
     'auto_increment_assets'		=> 'Generovat automatické inventární číslo položek',
+    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Předpona (volitnelná)',
     'auto_incrementing_help'    => 'Pro nastavení musíte nejdřív povolit automatickou generaci inventárních čísel',
     'backups'					=> 'Zálohy',

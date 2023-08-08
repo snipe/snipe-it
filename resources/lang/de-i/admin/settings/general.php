@@ -25,6 +25,7 @@ return [
     'audit_warning_days'        => 'Audit-Warnschwelle',
     'audit_warning_days_help'   => 'Wie viele Tage im Voraus sollen wir Dich warnen, wenn Assets zur Prüfung fällig werden?',
     'auto_increment_assets'		=> 'Erzeugen von fortlaufenden Asset Tags',
+    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Präfix (optional)',
     'auto_incrementing_help'    => 'Aktiviere zuerst fortlaufende Asset Tags um dies zu setzen',
     'backups'					=> 'Backups',

@@ -25,6 +25,7 @@ return [
     'audit_warning_days'        => 'Prag za opozorilo o reviziji',
     'audit_warning_days_help'   => 'Koliko dni vnaprej vas opozorimo, kdaj so sredstva namenjena za revizijo?',
     'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
+    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Predpona (neobvezno)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'Varnostna kopija',

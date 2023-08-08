@@ -25,6 +25,7 @@ return [
     'audit_warning_days'        => 'Prah výstrahy auditu',
     'audit_warning_days_help'   => 'Koľko dní dopredu by sme vás mali upozorňovať, keď je majetok čakajúci na audit?',
     'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
+    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Predpona (volitelna)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'Zálohy',

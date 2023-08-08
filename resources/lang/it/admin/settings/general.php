@@ -25,6 +25,7 @@ return [
     'audit_warning_days'        => 'Soglia di allarme di controllo',
     'audit_warning_days_help'   => 'Quanti giorni in anticipo dovremmo avvisare quando i beni sono dovuti per il controllo?',
     'auto_increment_assets'		=> 'Genera tag beni ad incremento automatico',
+    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Prefisso (Opzionale)',
     'auto_incrementing_help'    => 'Attiva i tag beni ad incremento automatico per impostarlo',
     'backups'					=> 'Backups',

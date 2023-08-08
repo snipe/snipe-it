@@ -25,6 +25,7 @@ return [
     'audit_warning_days'        => 'Tarkastuksen ennakkovaroitus',
     'audit_warning_days_help'   => 'Kuinka monta päivää etukäteen varoitamme, kun laitteet on tarkoitus tarkastaa?',
     'auto_increment_assets'		=> 'Luo automaattisesti kasvavat laitetunnisteet',
+    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Etuliite (valinnainen)',
     'auto_incrementing_help'    => 'Valitaksesi tämän, ota ensin käyttöön automaattisesti kasvavat laitetunnisteet',
     'backups'					=> 'Varmuuskopiot',

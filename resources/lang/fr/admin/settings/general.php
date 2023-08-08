@@ -25,6 +25,7 @@ return [
     'audit_warning_days'        => 'Seuil d\'avertissement d\'audit',
     'audit_warning_days_help'   => 'Combien de jours à l\'avance devrions-nous vous avertir lorsque les actifs doivent être vérifiés?',
     'auto_increment_assets'		=> 'Générer des numéros d\'inventaire auto-incrémentés',
+    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Préfixe (optionnel)',
     'auto_incrementing_help'    => 'Activez l\'auto-incrémentation des numéros d\'inventaire avant de sélectionner cette option',
     'backups'					=> 'Sauvegardes',

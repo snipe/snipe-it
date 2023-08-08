@@ -25,6 +25,7 @@ return [
     'audit_warning_days'        => '稽核警告閾值',
     'audit_warning_days_help'   => '當資產到期時，我們應該提前幾天提前審核？',
     'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
+    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> '前綴(可選)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> '備份',
