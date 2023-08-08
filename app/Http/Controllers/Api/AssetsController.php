@@ -573,6 +573,7 @@ class AssetsController extends Controller
 
         $asset = $request->handleImages($asset);
 
+        $asset->customFill($request, Auth::user(), true);
         // Update custom fields in the database.
         // Validation for these fields is handled through the AssetRequest form request
         $model = AssetModel::find($request->get('model_id'));
@@ -585,7 +586,7 @@ class AssetsController extends Controller
 
                 // If input value is null, use custom field's default value
                 if ($field_val == null) {
-                    \Log::debug('Field value for '.$field->db_column.' is null');
+                    \Log::debug('Field value for '.$field->db_column.' is null'); //dammit.
                     $field_val = $field->defaultValue($request->get('model_id'));
                     // I *think* we can invert this - to AssetMode::find($request->get('model_id'))->defaultValues() or whatever?
                     // actually, no, we don't have to.  The field itself knows its 'type', right?

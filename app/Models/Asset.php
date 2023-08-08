@@ -45,16 +45,12 @@ class Asset extends Depreciable
 
     protected $observables = ['validating','validated']; //huh. okay? FIXME - this is not the right way
 
-//    public static function boot()
-//    {
-//          I think \Event::listen is ONLY for the event service provider, not for here.
-//        \Event::listen(['validating','eloquent.validating.*'],function ($modelName, $event, $data) {
-//            \Log::debug("Heard event within Asset class: $modelName, $event with data: ".print_r($data,true));
-//        });
-//    }
-
     public function getFieldset(): ?CustomFieldset {
         return $this->model->fieldset;
+    }
+
+    public function getFieldsetKey() {
+        return $this->model; //EXPERIMENTAL - but this would probably do it :/
     }
 
     public static function getFieldsetUsers(int $fieldset_id): Collection {
