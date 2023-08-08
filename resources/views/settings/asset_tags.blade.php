@@ -90,20 +90,7 @@
                             </div>
                         </div>
 
-                        <!-- auto ids -->
-                        <div class="form-group">
-                            <div class="col-md-5">
-                                <strong>{{  trans('admin/settings/general.auto_increment_assets') }}</strong>
-                            </div>
-                            <div class="col-md-7">
-                                <label class="form-control">
-                                    {{ Form::checkbox('auto_increment_assets', '1', old('auto_increment_assets', $setting->auto_increment_assets),array('aria-label'=>'auto_increment_assets')) }}
-                                    {{ trans('admin/settings/general.enabled') }}
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- auto ids -->
+                        <!-- asset_search_exact -->
                         <div class="form-group">
                             <div class="col-md-5">
                                 <strong>{{  trans('admin/settings/general.asset_search_exact') }}</strong>
