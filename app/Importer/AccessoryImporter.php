@@ -49,6 +49,7 @@ class AccessoryImporter extends ItemImporter
         //FIXME: this disables model validation.  Need to find a way to avoid double-logs without breaking everything.
         // $accessory->unsetEventDispatcher();
         if ($accessory->save()) {
+            // this log is still here because the Accessory model seems to not fire eloquent events
             $accessory->logCreate('Imported using CSV Importer');
             $this->log('Accessory '.$this->item['name'].' was created');
 

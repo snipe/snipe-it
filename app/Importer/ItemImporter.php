@@ -14,6 +14,8 @@ use App\Models\User;
 class ItemImporter extends Importer
 {
     protected $item;
+   
+    protected static $fromImporter = true;
 
     public function __construct($filename)
     {

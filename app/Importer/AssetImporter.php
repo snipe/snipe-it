@@ -137,7 +137,10 @@ class AssetImporter extends ItemImporter
 
 
         if ($asset->save()) {
-            $asset->logCreate(trans('general.importer.import_note'));
+            // this calls the method that triggers the import event - see app/Models/Traits/Importable.php
+            $asset->import(); 
+            //XXX this should be moved to the Loggable trait though I do need to figure out how to provide "importer" context
+            // I'm actually not sure what this does... i'm assuming a debug log
             $this->log('Asset '.$this->item['name'].' with serial number '.$this->item['serial'].' was created');
 
             // If we have a target to checkout to, lets do so.

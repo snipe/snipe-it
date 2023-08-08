@@ -87,6 +87,7 @@ class LicenseImporter extends ItemImporter
         //FIXME: this disables model validation.  Need to find a way to avoid double-logs without breaking everything.
         // $license->unsetEventDispatcher();
         if ($license->save()) {
+            //XXX this should move to the Loggable trait - and I need to figure out how to provide 'importer' context 
             $license->logCreate('Imported using csv importer');
             $this->log('License '.$this->item['name'].' with serial number '.$this->item['serial'].' was created');
 

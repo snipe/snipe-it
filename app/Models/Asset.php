@@ -21,6 +21,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
 use App\Models\Traits\Loggable;
+use App\Models\Traits\Importable;
+use Illuminate\Database\Eloquent\Concerns\HasEvents;
 
 /**
  * Model for Assets.
@@ -35,10 +37,13 @@ class Asset extends Depreciable
 
     use CompanyableTrait;
     use HasFactory, Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait, UniqueSerialTrait;
-
+    use Importable; 
+   
+    // protected $observables = ['imported'];
+   
     // loggable settings
-    protected static $recordEvents = ['created']; 
-
+    protected static $recordEvents = ['created', 'imported']; 
+   
     public const LOCATION = 'location';
     public const ASSET = 'asset';
     public const USER = 'user';

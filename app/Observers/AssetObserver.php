@@ -96,12 +96,12 @@ class AssetObserver
             }
         }
 
-        $logAction = new Actionlog();
-        $logAction->item_type = Asset::class; // can we instead say $logAction->item = $asset ?
-        $logAction->item_id = $asset->id;
-        $logAction->created_at = date('Y-m-d H:i:s');
-        $logAction->user_id = Auth::id();
-        $logAction->logaction('create');
+        // $logAction = new Actionlog();
+        // $logAction->item_type = Asset::class; // can we instead say $logAction->item = $asset ?
+        // $logAction->item_id = $asset->id;
+        // $logAction->created_at = date('Y-m-d H:i:s');
+        // $logAction->user_id = Auth::id();
+        // $logAction->logaction('create');
     }
 
     /**

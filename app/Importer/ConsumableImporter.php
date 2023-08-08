@@ -48,6 +48,7 @@ class ConsumableImporter extends ItemImporter
         //FIXME: this disables model validation.  Need to find a way to avoid double-logs without breaking everything.
         $consumable->unsetEventDispatcher();
         if ($consumable->save()) {
+            //XXX this should move to the Loggable trait - and I need to figure out how to provide 'importer' context 
             $consumable->logCreate('Imported using CSV Importer');
             $this->log('Consumable '.$this->item['name'].' was created');
 

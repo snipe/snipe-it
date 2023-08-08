@@ -51,6 +51,7 @@ class ComponentImporter extends ItemImporter
         //FIXME: this disables model validation.  Need to find a way to avoid double-logs without breaking everything.
         $component->unsetEventDispatcher();
         if ($component->save()) {
+            //XXX this should move to the Loggable trait - and I need to figure out how to provide 'importer' context 
             $component->logCreate('Imported using CSV Importer');
             $this->log('Component '.$this->item['name'].' was created');
 

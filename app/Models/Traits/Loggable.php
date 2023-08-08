@@ -15,13 +15,12 @@ use App\Notifications\AuditNotification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use ReflectionClass;
+use ReflectionMethod;
 
 trait Loggable
 {
     public static function bootLoggable() { 
-       ray('fuck offfffffffff'); 
-        ray(static::class);
-       
        //loops through the events to be recorded (defined in the model)
        //and then calls the proper method for each model 
        static::eventsToBeRecorded()->each(function ($event) {
@@ -39,7 +38,11 @@ trait Loggable
                         $model->logCreate(event: $event, note: 'asset trait boot method');
                         break; 
                     case Accessory::class:
+                        // accessory seems to not fire eloquent events??? 
                         $model->logCreate(event: $event, note: 'accessory trait boot method'); 
+                        break; 
+                    case License::class:
+                        $model->logCreate(event: $event, note: 'license trait boot method'); 
                         break; 
                     // etc... 
                     default:
@@ -52,8 +55,9 @@ trait Loggable
    
     protected static function eventsToBeRecorded(): Collection
     {
-       //returns the events to be recorded for each model - uses the $recordEvents property defined in each model 
-       $events = collect(); 
+        
+        //returns the events to be recorded - uses the $recordEvents property defined in each model 
+        $events = collect(); 
         if (isset(static::$recordEvents)) {
             $events = collect(static::$recordEvents);
         } 
@@ -61,7 +65,7 @@ trait Loggable
         if (collect(class_uses_recursive(static::class))->contains(SoftDeletes::class)) {
             $events->push('restored');
         }
-
+       
         return $events;
     }
 
@@ -319,6 +323,11 @@ trait Loggable
     }
    
     public function logAdmin($actionType = null, $note = null, $providedValue = null) {
+        $reflection = new ReflectionClass($this);
+        $methods = collect($reflection->getNamespaceName()); 
+
+        // $filteredMethods = $methods->filter(fn (ReflectionMethod $method) => str_contains($method->name, 'import')); 
+        ray($methods);   
        if($this->isDirty()) { 
             $changed = []; 
             $new = $this->getDirty();
@@ -343,7 +352,7 @@ trait Loggable
             $user = Auth::user(); 
             
             $log = new Adminlog();
-            $log->user_id = $user->id;
+            $log->user_id = $user->id ?? 1;
             $log->action_type = $actionType ? $actionType : null; 
             $log->item_type = static::class; 
             $log->item_id = $this->id; 
