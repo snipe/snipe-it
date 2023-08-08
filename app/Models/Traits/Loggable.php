@@ -21,11 +21,9 @@ use ReflectionMethod;
 trait Loggable
 {
     public static function bootLoggable() { 
-       //loops through the events to be recorded (defined in the model)
-       //and then calls the proper method for each model 
-       static::eventsToBeRecorded()->each(function ($event) {
-            // should be able to listen for the checkin and checkout events here as well
-            // and then call the logCheckout and logCheckin methods   
+        //loops through the events to be recorded (defined in the model)
+        //and then calls the proper method for each model 
+        static::eventsToBeRecorded()->each(function ($event) {
             static::$event(function ($model) use ($event) {
                 switch (static::class) {
                     case Setting::class:
@@ -44,13 +42,15 @@ trait Loggable
                     case License::class:
                         $model->logCreate(event: $event, note: 'license trait boot method'); 
                         break; 
-                    // etc... 
-                    default:
-                    //do nothing for now
-                    break;
-                   } 
-           });
-       }); 
+                        // should be able to listen for the checkin and checkout events here as well 
+                        // as long as they're manually declared in the model $recordEvents property 
+                        // etc... 
+                        default:
+                        //do nothing for now
+                        break;
+                    } 
+            });
+        }); 
     }
    
     protected static function eventsToBeRecorded(): Collection
@@ -323,11 +323,6 @@ trait Loggable
     }
    
     public function logAdmin($actionType = null, $note = null, $providedValue = null) {
-        $reflection = new ReflectionClass($this);
-        $methods = collect($reflection->getNamespaceName()); 
-
-        // $filteredMethods = $methods->filter(fn (ReflectionMethod $method) => str_contains($method->name, 'import')); 
-        ray($methods);   
        if($this->isDirty()) { 
             $changed = []; 
             $new = $this->getDirty();
@@ -360,16 +355,6 @@ trait Loggable
             $log->log_meta = json_encode($changed); 
         
             $log->save();
-            // if(static::class == User::class && static::saved()) {
-            //     AdminLog::create([
-            //         'user_id' => $user->id,
-            //         'action_type' => $actionType ? $actionType : null,
-            //         'item_type' => static::class,
-            //         'item_id' => $this->id,
-            //         'note' => $note ? $note : null,
-            //         'log_meta' => json_encode($changed)
-            //     ]);
-            // }
        } else {
             return;
        } 

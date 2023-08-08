@@ -5,7 +5,7 @@ namespace App\Observers;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Setting;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class AssetObserver
 {
@@ -70,6 +70,9 @@ class AssetObserver
      */
     public function created(Asset $asset)
     {
+        // i feel like maybe this should be an interface or something? this could help with some double logging issues 
+        // or maybe just on the model itself? 
+        // ask brady about this and why it's in the observer  
         if ($settings = Setting::getSettings()) {
             $tag = $asset->asset_tag;
             $prefix = $settings->auto_increment_prefix;
