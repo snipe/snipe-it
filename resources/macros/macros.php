@@ -63,7 +63,7 @@ Form::macro('date_display_format', function ($name = 'date_display_format', $sel
     }
     $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:250px" aria-label="'.$name.'">';
     foreach ($date_display_formats as $format => $date_display_format) {
-        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'">'.$date_display_format.'</option> ';
+        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'">'.$format.' (Example: '.$date_display_format.')</option> ';
     }
 
     $select .= '</select>';
