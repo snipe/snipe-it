@@ -25,7 +25,6 @@ return [
     'audit_warning_days'        => 'Ambang Peringatan Audit',
     'audit_warning_days_help'   => 'Berapa hari sebelumnya yang harus kami peringatkan saat aset akan dilelang?',
     'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
-    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Awalan (pilihan)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'Cadangan',

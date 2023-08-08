@@ -25,7 +25,6 @@ return [
     'audit_warning_days'        => 'Prag de avertizare privind auditul',
     'audit_warning_days_help'   => 'Câte zile în avans trebuie să vă avertizăm când activele sunt scadente pentru audit?',
     'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
-    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Prefix (optional)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'Copiile de rezervă',

@@ -25,7 +25,6 @@ return [
     'audit_warning_days'        => 'Limiar de aviso de auditoria',
     'audit_warning_days_help'   => 'Com quantos dias de antecedência deseja ser avisado sobre a verificação de seus ativos?',
     'auto_increment_assets'		=> 'Gerar auto insercao de etiquetas de ativos',
-    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Prefixo (opcional)',
     'auto_incrementing_help'    => 'Permitir auto insercao dessa tag de ativo antes de configurar isto',
     'backups'					=> 'Backups',

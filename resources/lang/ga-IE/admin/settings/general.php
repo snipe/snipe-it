@@ -25,7 +25,6 @@ return [
     'audit_warning_days'        => 'Tairseach Rabhaidh Iniúchta',
     'audit_warning_days_help'   => 'Cé mhéad lá roimh ré ba chóir dúinn rabhadh a thabhairt duit nuair a bhíonn sócmhainní dlite le hiniúchadh?',
     'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
-    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Réimse (roghnach)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'Cúltacaí',

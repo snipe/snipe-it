@@ -25,7 +25,6 @@ return [
     'audit_warning_days'        => 'เกณฑ์การตรวจสอบคำเตือน',
     'audit_warning_days_help'   => 'เราควรเตือนล่วงหน้ากี่วันเมื่อสินทรัพย์มีกำหนดการตรวจสอบ?',
     'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
-    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Prefix (ส่วนเสริม)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'สำรอง',

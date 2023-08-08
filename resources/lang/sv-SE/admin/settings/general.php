@@ -25,7 +25,6 @@ return [
     'audit_warning_days'        => 'Gränsvärde för varning om nästa inventering',
     'audit_warning_days_help'   => 'Hur många dagar i förväg vill du bli varnad när det närmar sig revision av tillgångar?',
     'auto_increment_assets'		=> 'Generera automatisk ökning av tillgångstaggar',
-    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Prefix (frivilligt)',
     'auto_incrementing_help'    => 'Aktivera automatisk ökning av anläggningstillgångar först innan du ställer in detta',
     'backups'					=> 'Säkerhetskopior',

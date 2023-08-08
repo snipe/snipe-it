@@ -25,7 +25,6 @@ return [
     'audit_warning_days'        => 'Audit terskelverdi for advarsel',
     'audit_warning_days_help'   => 'Hvor mange dager i forveien bør vi advare deg når eiendeler forfaller for overvåking?',
     'auto_increment_assets'		=> 'Generer automatisk økende eiendelsmerker',
-    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Prefiks (valgfritt)',
     'auto_incrementing_help'    => 'Slå på automatisk økende eiendelsmerker for å velge dette',
     'backups'					=> 'Sikkerhetskopier',

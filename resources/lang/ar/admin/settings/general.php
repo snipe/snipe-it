@@ -25,7 +25,6 @@ return [
     'audit_warning_days'        => 'عتبة تحذير التدقيق',
     'audit_warning_days_help'   => 'كم يوما مقدما يجب أن نحذركم عندما تكون الأصول مستحقة للتدقيق؟',
     'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
-    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'البادئة (اختياري)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'النسخ الإحتياطية',

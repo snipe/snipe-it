@@ -25,7 +25,6 @@ return [
     'audit_warning_days'        => 'Ambang Amaran Audit',
     'audit_warning_days_help'   => 'Berapa hari lebih awal haruskah kami memberi amaran kepada anda apabila aset perlu untuk pengauditan?',
     'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
-    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Awalan (pilihan)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'Sandaran',

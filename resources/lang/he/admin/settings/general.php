@@ -25,7 +25,6 @@ return [
     'audit_warning_days'        => 'סף אזהרות ביקורת',
     'audit_warning_days_help'   => 'כמה ימים מראש עלינו להזהיר אותך כאשר הנכסים צפויים לביקורת?',
     'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
-    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'קידומת (אופציונלי)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'גיבויים',

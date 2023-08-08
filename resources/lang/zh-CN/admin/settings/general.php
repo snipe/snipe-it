@@ -25,7 +25,6 @@ return [
     'audit_warning_days'        => '盘点开始提醒',
     'audit_warning_days_help'   => '需要提前多少天让我们通知您需要盘点资产？',
     'auto_increment_assets'		=> '生成自动递增的资产标签',
-    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> '前缀（可选）',
     'auto_incrementing_help'    => '先启用自动递增资产标签来设置这个',
     'backups'					=> '备份',

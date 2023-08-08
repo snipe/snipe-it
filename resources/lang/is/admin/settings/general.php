@@ -25,7 +25,6 @@ return [
     'audit_warning_days'        => 'Audit Warning Threshold',
     'audit_warning_days_help'   => 'Með hversu margra daga fyrirvara eigum við að vara þig við því að komið sé að því að framkvæma úttektir á eignum?',
     'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
-    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Forskeyti (valkvætt)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'Öryggisafrit',

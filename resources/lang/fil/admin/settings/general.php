@@ -25,7 +25,6 @@ return [
     'audit_warning_days'        => 'Ang Warning Threshold ng Audit',
     'audit_warning_days_help'   => 'Mga ilang araw na makaadvans kami sa pagpaalala sa iyo kapag ang mga asset ay nakasaad na para sa pag-audit?',
     'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
-    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Ang prefix (opsyonal)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'Mga backup',

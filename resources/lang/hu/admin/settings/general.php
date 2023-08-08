@@ -25,7 +25,6 @@ return [
     'audit_warning_days'        => 'Ellenőrzési figyelmeztető küszöbérték',
     'audit_warning_days_help'   => 'Hány nappal előre figyelmeztetni kell Önt arra, hogy az eszközöknek az ellenőrzésre van szükségük?',
     'auto_increment_assets'		=> 'Automatikusan növekvő eszközazonosítók generálása',
-    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Előtag (opcionális)',
     'auto_incrementing_help'    => 'Először engedélyezze az eszközazonosítók automatikus növelését, hogy ezt beállítsa',
     'backups'					=> 'Biztonsági mentések',

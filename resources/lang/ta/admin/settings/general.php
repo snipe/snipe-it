@@ -25,7 +25,6 @@ return [
     'audit_warning_days'        => 'தணிக்கை எச்சரிக்கை புராணம்',
     'audit_warning_days_help'   => 'தணிக்கைக்கு ஆட்கள் தடையின்றி எத்தனை நாட்கள் முன்கூட்டியே நாம் எச்சரிக்க வேண்டும்?',
     'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
-    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'முன்னுரிமை (விரும்பினால்)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'காப்புப்பிரதிகளில்',

@@ -25,7 +25,6 @@ return [
     'audit_warning_days'        => 'Audit Warning Threshold',
     'audit_warning_days_help'   => 'How many days in advance should we warn you when assets are due for auditing?',
     'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
-    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Prefix (optional)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'Резервні копії',

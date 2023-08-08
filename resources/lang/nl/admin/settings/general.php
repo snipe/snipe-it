@@ -25,7 +25,6 @@ return [
     'audit_warning_days'        => 'Audit waarschuwingsdrempel',
     'audit_warning_days_help'   => 'Hoeveel dagen op voorhand moeten we je waarschuwen wanneer assets gecontroleerd moeten worden?',
     'auto_increment_assets'		=> 'Genereer automatisch verhogen van asset Id\'s',
-    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Voorvoegsel (niet verplicht)',
     'auto_incrementing_help'    => 'Schakel eerst automatisch verhogen van asset Id\'s in om dit in te stellen',
     'backups'					=> 'Back-ups',

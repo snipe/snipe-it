@@ -25,7 +25,6 @@ return [
     'audit_warning_days'        => 'Revīzijas brīdinājuma slieksnis',
     'audit_warning_days_help'   => 'Cik dienas iepriekš mēs brīdinātu jūs, kad aktīvi ir jāmaksā par revīziju?',
     'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
-    'asset_search_exact'		=> 'Search for Exact Tag in Top Search',
     'auto_increment_prefix'		=> 'Prefikss (pēc izvēles)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'Rezerves kopijas',
