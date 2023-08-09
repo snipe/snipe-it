@@ -44,7 +44,7 @@
         "jquery-ui": "^1.13.2",
         "jquery-ui-bundle": "^1.12.1",
         "jquery.iframe-transport": "^1.0.0",
-        "jspdf-autotable": "^3.5.24",
+        "jspdf-autotable": "^3.5.30",
         "less": "^4.1.2",
         "less-loader": "^5.0",
         "list.js": "^1.5.0",
@@ -54,6 +54,6 @@
         "tableexport.jquery.plugin": "1.28.0",
         "tether": "^1.4.0",
         "vue-resource": "^1.5.2",
-        "webpack": "^5.87.0"
+        "webpack": "^5.88.2"
     }
 }
