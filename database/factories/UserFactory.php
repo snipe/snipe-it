@@ -432,4 +432,13 @@ class UserFactory extends Factory
             ];
         });
     }
+
+    public function canViewReports()
+    {
+        return $this->state(function () {
+            return [
+                'permissions' => '{"reports.view":"1"}',
+            ];
+        });
+    }
 }
