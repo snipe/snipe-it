@@ -30,7 +30,7 @@ class UserFactory extends Factory
             'locale' => 'en',
             'notes' => 'Created by DB seeder',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'permissions' => '{"user":"0"}',
+            'permissions' => '{}',
             'phone' => $this->faker->phoneNumber(),
             'state' => $this->faker->stateAbbr(),
             'username' => $this->faker->username(),
