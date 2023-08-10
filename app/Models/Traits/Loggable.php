@@ -274,7 +274,7 @@ trait Loggable
      * @since [v3.5]
      * @return \App\Models\Actionlog
      */
-    public function logCreate($note = null, $event = 'poop')
+    public function logCreate($note = null, $event = 'poop'): Actionlog
     {
         $user_id = -1;
         if (Auth::user()) {
@@ -302,7 +302,7 @@ trait Loggable
      * @since [v3.4]
      * @return \App\Models\Actionlog
      */
-    public function logUpload($filename, $note)
+    public function logUpload($filename, $note): Actionlog
     {
         $log = new Actionlog;
         if (static::class == LicenseSeat::class) {
@@ -322,7 +322,8 @@ trait Loggable
         return $log;
     }
    
-    public function logAdmin($actionType = null, $note = null, $providedValue = null) {
+    public function logAdmin($actionType = null, $note = null, $providedValue = null)
+    {
        if($this->isDirty()) { 
             $changed = []; 
             $new = $this->getDirty();
@@ -355,9 +356,10 @@ trait Loggable
             $log->log_meta = json_encode($changed); 
         
             $log->save();
+            return $log;
        } else {
-            return;
-       } 
+           return;
+       }
     }
    
     
