@@ -24,7 +24,7 @@ trait CustomTestMacros
             function (Model $model, string $property = 'name') use ($guardAgainstNullProperty) {
                 $guardAgainstNullProperty($model, $property);
 
-                Assert::assertTrue(collect($this['rows'])->pluck($property)->contains($model->{$property}));
+                Assert::assertTrue(collect($this['rows'])->pluck($property)->contains(e($model->{$property})));
 
                 return $this;
             }
@@ -35,7 +35,7 @@ trait CustomTestMacros
             function (Model $model, string $property = 'name') use ($guardAgainstNullProperty) {
                 $guardAgainstNullProperty($model, $property);
 
-                Assert::assertFalse(collect($this['rows'])->pluck($property)->contains($model->{$property}));
+                Assert::assertFalse(collect($this['rows'])->pluck($property)->contains(e($model->{$property})));
 
                 return $this;
             }
@@ -46,7 +46,7 @@ trait CustomTestMacros
             function (Model $model, string $property = 'id') use ($guardAgainstNullProperty) {
                 $guardAgainstNullProperty($model, $property);
 
-                Assert::assertTrue(collect($this->json('results'))->pluck('id')->contains($model->{$property}));
+                Assert::assertTrue(collect($this->json('results'))->pluck('id')->contains(e($model->{$property})));
 
                 return $this;
             }
@@ -57,7 +57,7 @@ trait CustomTestMacros
             function (Model $model, string $property = 'id') use ($guardAgainstNullProperty) {
                 $guardAgainstNullProperty($model, $property);
 
-                Assert::assertFalse(collect($this->json('results'))->pluck('id')->contains($model->{$property}));
+                Assert::assertFalse(collect($this->json('results'))->pluck('id')->contains(e($model->{$property})));
 
                 return $this;
             }
