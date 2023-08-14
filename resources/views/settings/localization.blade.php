@@ -58,17 +58,15 @@
                             <div class="col-md-3">
                                 {{ Form::label('time_display_format', trans('general.time_and_date_display')) }}
                             </div>
-                            <div class="col-md-10">
+                            <div class="col-md-5">
                                 {!! Form::date_display_format('date_display_format', Request::old('date_display_format', $setting->date_display_format), 'select2') !!}
                             </div>
                             <div class="col-md-3">
                                 {!! Form::time_display_format('time_display_format', Request::old('time_display_format', $setting->time_display_format), 'select2') !!}
+                            </div>
+                            
+                            {!! $errors->first('time_display_format', '<div class="col-md-9 col-md-offset-3"><span class="alert-msg" aria-hidden="true">:message</span> </div>') !!}
 
-                            </div>
-                            {!! $errors->first('time_display_format', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                            <div class="col-md-11 col-offset-3">
-                                <p class="help-block">The date shown in the drop-down is just an example to display the different date formats. It is not meant to reflect today's date.</p>
-                            </div>
                         </div>
 
                         <!-- Currency -->
