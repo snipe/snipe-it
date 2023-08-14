@@ -113,11 +113,6 @@
       function statusLabelTypeFormatter (row, value) {
 
           switch (value.type) {
-              case 'deployed':
-                  text_color = 'blue';
-                  icon_style = 'fa-circle';
-                  trans  = '{{ strtolower(trans('general.deployed')) }}';
-                  break;
               case 'deployable':
                   text_color = 'green';
                   icon_style = 'fa-circle';
@@ -127,11 +122,11 @@
               case 'pending':
                   text_color = 'orange';
                   icon_style = 'fa-circle';
-                  trans  = '{{ strtolower(trans('general.deployed')) }}';
+                  trans  = '{{ strtolower(trans('general.pending')) }}';
 
                   break;
               case 'undeployable':
-                  text_color = 'orange';
+                  text_color = 'red';
                   icon_style = 'fa-circle';
                   trans  ='{{ trans('admin/statuslabels/table.undeployable') }}';
 
