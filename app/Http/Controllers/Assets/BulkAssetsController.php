@@ -240,6 +240,8 @@ class BulkAssetsController extends Controller
         if ($request->filled('ids')) {
             $assets = Asset::find($request->get('ids'));
             foreach ($assets as $asset) {
+                //TODO: this should perform a delete and *then* update assigned_to to null and whatever else needs to happen
+                //(right now it doesn't fire the delete event so nothing's logged etc)
                 $update_array['deleted_at'] = date('Y-m-d H:i:s');
                 $update_array['assigned_to'] = null;
 
