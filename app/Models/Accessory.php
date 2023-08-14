@@ -32,6 +32,16 @@ class Accessory extends SnipeModel
 
     use Searchable;
     use Acceptable;
+
+    public function declinedCheckout(User $declinedBy, $signature)
+    {
+        if (is_null($accessory_user = \DB::table('accessories_users')->where('assigned_to', $declinedBy->id)->where('accessory_id', $this->id)->latest('created_at'))) {
+            // Redirect to the accessory management page with error
+            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
+        }
+
+        $accessory_user->limit(1)->delete();
+    }
     
     /**
      * The attributes that should be included when searching the model.
