@@ -61,7 +61,7 @@
                                 {!! Form::date_display_format('date_display_format', Request::old('date_display_format', $setting->date_display_format), 'select2') !!}
 
                                 {!! Form::time_display_format('time_display_format', Request::old('time_display_format', $setting->time_display_format), 'select2') !!}
-
+                                <p class="help-block">{{ trans('general.time_and_date_display_help_text') }}</p>
                                 {!! $errors->first('time_display_format', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>

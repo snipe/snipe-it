@@ -268,6 +268,7 @@ return [
     'submit'				=> 'Submit',
     'target'                => 'Target',
     'time_and_date_display' => 'Time and Date Display',
+    'time_and_date_display_help_text' => 'The date is only a representative example to show how a date would look in every format and doesn\'t reflect the actual system date',
     'total_assets'			=> 'total assets',
     'total_licenses'		=> 'total licenses',
     'total_accessories'		=> 'total accessories',
