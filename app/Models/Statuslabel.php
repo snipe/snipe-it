@@ -74,14 +74,14 @@ class Statuslabel extends SnipeModel
     public function getStatuslabelType()
     {
         if (($this->pending == '1') && ($this->archived == '0') && ($this->deployable == '0')) {
-            return trans('admin/statuslabels/table.pending');
+            return 'pending';
         } elseif (($this->pending == '0') && ($this->archived == '1') && ($this->deployable == '0')) {
-            return trans('admin/statuslabels/table.archived');
+            return 'archived';
         } elseif (($this->pending == '0') && ($this->archived == '0') && ($this->deployable == '0')) {
-            return trans('admin/statuslabels/table.undeployable');
+            return 'undeployable';
         }
 
-        return trans('admin/statuslabels/table.deployable');
+        return 'deployable';
     }
 
     /**
