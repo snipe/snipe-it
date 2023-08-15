@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => '群組已存在',
-    'group_not_found'     => 'Group ID :id does not exist.',
+    'group_not_found'     => '群組 ID :id 不存在。',
     'group_name_required' => '名稱欄位必填',
 
     'success' => array(

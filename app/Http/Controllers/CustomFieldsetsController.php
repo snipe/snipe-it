@@ -95,7 +95,7 @@ class CustomFieldsetsController extends Controller
         $this->authorize('create', CustomField::class);
 
         $fieldset = new CustomFieldset([
-                'name' => e($request->get('name')),
+                'name' => $request->get('name'),
                 'user_id' => Auth::user()->id,
                 'type' => Helper::$itemtypes_having_custom_fields[$request->get('tab')]
 //                'sub' =>

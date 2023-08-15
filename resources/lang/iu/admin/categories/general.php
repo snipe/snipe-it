@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Clone Category',
     'create'  							=> 'Create Category',
     'edit'                              => 'Edit Category',
+    'email_will_be_sent_due_to_global_eula' => 'An email will be sent to the user because the global EULA is being used.',
+    'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
     'eula_text'							=> 'Category EULA',
     'eula_text_help'					=> 'This field allows you to customize your EULAs for specific types of assets. If you only have one EULA for all of your assets, you can check the box below to use the primary default.',
     'name'                              => 'Category Name',

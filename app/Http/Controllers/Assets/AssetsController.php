@@ -752,7 +752,7 @@ class AssetsController extends Controller
     }
 
     /**
-     * Retore a deleted asset.
+     * Restore a deleted asset.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId

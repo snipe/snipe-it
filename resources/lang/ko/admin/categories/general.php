@@ -8,6 +8,8 @@ return array(
     'clone'                             => '분류 복제',
     'create'  							=> '분류 생성',
     'edit'                              => '분류 수정',
+    'email_will_be_sent_due_to_global_eula' => 'An email will be sent to the user because the global EULA is being used.',
+    'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
     'eula_text'							=> '분류 사용권 계약서',
     'eula_text_help'					=> '이 필드는 특정 유형의 자산들에 대한 사용권 계약서들을 지정할 수 있게 해 줍니다. 당신의 모든 자산들에게 단 하나의 사용권 계약서만 가지고 있다면, 첫번째를 기본으로 사용하도록 아래의 상자에 체크할 수 있습니다.',
     'name'                              => '분류 명',

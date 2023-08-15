@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'O modelo não existe.',
-    'no_association' => 'NENHUM MODEL ASSOCIADO.',
+    'no_association' => 'ATENÇÃO! O modelo de ativo para este item é inválido ou está faltando!',
     'no_association_fix' => 'Isso quebrará as coisas de maneiras estranhas e horríveis. Edite este equipamento agora para atribuir um modelo a ele.',
     'assoc_users'	 => 'Este modelo está no momento associado com um ou mais ativos e não pode ser excluído. Exclua os ativos e então tente excluir novamente. ',
 

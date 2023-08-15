@@ -23,7 +23,7 @@ return array(
         [
             'checkin_all'           => [
                 'button'            => 'Alle Plätze zurücknehmen',
-                'modal'             => 'Diese Aktion wird einen Sitz zurücknehmen. | Diese Aktion wird alle :checkedout_seats_count Sitze für diese Lizenz zurücknehmen.',
+                'modal'             => 'Diese Aktion wird einen Sitz zurücknehmen. | Diese Aktion wird alle :checkedout_seats_count Plätze für diese Lizenz zurücknehmen.',
                 'enabled_tooltip'   => 'ALLE Plätze für diese Lizenz zurücknehmen, sowohl von Benutzern als auch von Assets',
                 'disabled_tooltip'  => 'Es ist deaktiviert, da derzeit keine Plätze zum herausgegeben verfügbar sind',
                 'success'           => 'Lizenz erfolgreich zurückgenommen! | Alle Lizenzen wurden erfolgreich zurückgenommen!',
@@ -34,7 +34,7 @@ return array(
                 'button'                => 'Alle Plätze herausgeben',
                 'modal'                 => 'Diese Aktion wird einen Platz für den ersten verfügbaren Benutzer herausgeben. | Diese Aktion wird alle :available_seats_count Plätze an die ersten verfügbaren Benutzer herausgeben. Ein Benutzer wird als verfügbar für diesen Platz betrachtet, wenn er diese Lizenz noch nicht zugewiesen hat und die "Lizenzen automatisch zuweisen" Eigenschaft auf dem Benutzerkonto aktiviert ist.',
                 'enabled_tooltip'   => 'ALLE Plätze (oder so viele wie verfügbar sind) an ALLE Benutzer herausgeben',
-                'disabled_tooltip'  => 'Dies ist deaktiviert, da derzeit keine Sitze verfügbar sind',
+                'disabled_tooltip'  => 'Dies ist deaktiviert, da derzeit keine Plätze verfügbar sind',
                 'success'           => 'Lizenz erfolgreich herausgegeben! | Alle :count Lizenzen wurden erfolgreich herausgegeben!',
                 'error_no_seats'    => 'Es gibt keine verbleibenden Plätze für diese Lizenz.',
                 'warn_not_enough_seats'    => ':count Benutzern wurde diese Lizenz zugewiesen, aber es gibt keine verfügbaren Lizenzplätze mehr.',

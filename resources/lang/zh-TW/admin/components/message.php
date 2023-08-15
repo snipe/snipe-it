@@ -24,7 +24,7 @@ return array(
         'error'   		=> '組件借出失敗。請再試一次。',
         'success' 		=> '借出組件成功。',
         'user_does_not_exist' => '使用者不正確。請再試一次。',
-        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
+        'unavailable'      => '組件剩餘不足：剩餘 :remaining ，申請 :requested',
     ),
 
     'checkin' => array(
