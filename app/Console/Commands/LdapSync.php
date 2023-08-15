@@ -262,6 +262,10 @@ class LdapSync extends Command
             if($ldap_result_dept  != null){
                 $user->department_id = $department->id;
             }
+            if($ldap_result_location != null){
+                $user->location_id = $location ? $location->id : null;
+            }
+
             if($ldap_result_manager != null){
                 if($item['manager'] != null) {
                     // Check Cache first

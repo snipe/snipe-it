@@ -590,7 +590,7 @@ class ReportsController extends Controller
             $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
             \Log::debug('Added headers: '.$executionTime);
 
-            $assets = \App\Models\Company::scopeCompanyables(Asset::select('assets.*'))->with(
+            $assets = Asset::select('assets.*')->with(
                 'location', 'assetstatus', 'company', 'defaultLoc', 'assignedTo',
                 'model.category', 'model.manufacturer', 'supplier');
             
