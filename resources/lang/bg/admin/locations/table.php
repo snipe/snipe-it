@@ -33,8 +33,8 @@ return [
     'asset_checked_out'         => 'Изписано на',
     'asset_expected_checkin'    => 'Очаквана дата на вписване',
     'date'                      => 'Дата:',
-    'signed_by_asset_auditor'   => 'Signed By (Asset Auditor):',
-    'signed_by_finance_auditor' => 'Signed By (Finance Auditor):',
-    'signed_by_location_manager' => 'Signed By (Location Manager):',
-    'signed_by'                 => 'Signed Off By:',
+    'signed_by_asset_auditor'   => 'Подписан от (проверяващ):',
+    'signed_by_finance_auditor' => 'Подписан от (счетоводител):',
+    'signed_by_location_manager' => 'Подписан от (мениджър):',
+    'signed_by'                 => 'Подписано от:',
 ];

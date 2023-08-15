@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Klooni kategooria',
     'create'  							=> 'Uus kategooria',
     'edit'                              => 'Muuda kategooriat',
+    'email_will_be_sent_due_to_global_eula' => 'An email will be sent to the user because the global EULA is being used.',
+    'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
     'eula_text'							=> 'Kategooria EULA',
     'eula_text_help'					=> 'Selle välja abil saad oma EULA-t kohendada konkreetsele vahendi tüübile sobivaks. Kui sul on ainult üks EULA kõigile vahenditele, võid märkida valiku siin all, et kasutada peamist vaikimisi versiooni.',
     'name'                              => 'Kategooria nimi',

@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'لا يمكن اخراج هذه الأصول لأي شخص.',
-        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
+        'deployable'   => 'يمكن اخراج هذه الأصول. بعد تعيينهم، سيتم اعطاءها الحالة <i class="fas fa-circle text-blue"></i> <strong>تم التوزيع</strong>.',
         'archived'   => 'لا اخراج هذه الأصول، ولن تظهر إلا في المؤرشفة. وهذا مفيد للاحتفاظ بالمعلومات عن الأصول لأغراض الميزانية / التاريخية وايضا الاحتفاظ بها خارج قائمة الأصول اليومية.',
         'pending'   => 'لا يمكن بعد اخراج هذه الأصول لأي شخص، غالبا ما تستخدم للأصول اللتي قيد الصيانة، ولكن من المتوقع أن تعود إلى الاستخدام.',
     ],

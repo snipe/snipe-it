@@ -9,7 +9,7 @@ return [
   'bulk_restore_warn'	=> 'أنت على وشك استعادة :asset_count الأصول.',
     'bulk_update'		=> 'تحديث للأصول المحددة',
     'bulk_update_help'	=> 'يتيح لك هذا النموذج تحديث عدة أصول دفعة واحدة. قم بملء الحقول التي تحتاج إلى تغييرها. ستظل أية حقول فارغة بدون تغيير. ',
-    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
+    'bulk_update_warn'	=> 'أنت على وشك تعديل خصائص أصل واحد.<unk> أنت على وشك تعديل خصائص :asset_count الأصول.',
     'checkedout_to'		=> 'تم الاخراج إلى',
     'checkout_date'		=> 'تاريخ الاخراج',
     'checkin_date'		=> 'تاريخ الادخال',

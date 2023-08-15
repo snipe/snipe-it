@@ -46,6 +46,14 @@ class CompanyPresenter extends Presenter
                 'visible' => false,
                 'formatter'    => 'phoneFormatter',
             ], [
+                'field' => 'email',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('admin/suppliers/table.email'),
+                'visible' => true,
+				'formatter' => 'emailFormatter',
+            ], [
                 'field' => 'image',
                 'searchable' => false,
                 'sortable' => true,

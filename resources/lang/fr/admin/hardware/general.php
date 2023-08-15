@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'Cloner le Bien',
     'deployable'  				=> 'Déployable',
     'deleted'  					=> 'Cet actif a été supprimé.',
+    'delete_confirm'            => 'Are you sure you want to delete this asset?',
     'edit'  					=> 'Editer le Bien',
     'model_deleted'  			=> 'Ce modèle d\'actifs a été supprimé. Vous devez restaurer le modèle avant de pouvoir restaurer l\'actif.',
     'model_invalid'             => 'Le modèle de cette ressource n\'est pas valide.',
@@ -19,7 +20,7 @@ return [
     'requestable'               => 'Demandable',
     'requested'				    => 'Demandé',
     'not_requestable'           => 'Non demandable',
-    'requestable_status_warning' => 'Ne pas modifier la demandabilité',
+    'requestable_status_warning' => 'Ne pas modifier l\'état demandable',
     'restore'  					=> 'Restaurer l\'actif',
     'pending'  					=> 'En attente',
     'undeployable'  			=> 'Non déployable',
@@ -45,4 +46,5 @@ return [
     'alert_details' => 'Voir ci-dessous pour plus de détails.',
     'custom_export' => 'Exportation personnalisée',
     'mfg_warranty_lookup' => 'Vérification de la garantie :manufacturer',
+    'user_department' => 'Département de l\'utilisateur·trice',
 ];

@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Klona kategorija',
     'create'  							=> 'Izveidot kategoriju',
     'edit'                              => 'Rediģēt kategoriju',
+    'email_will_be_sent_due_to_global_eula' => 'An email will be sent to the user because the global EULA is being used.',
+    'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
     'eula_text'							=> 'EULA kategorija',
     'eula_text_help'					=> 'Šis lauks ļauj jums pielāgot jūsu EULA konkrētu veidu aktīviem. Ja jums ir tikai viens EULA visiem jūsu aktīviem, varat atzīmēt zemāk esošo lodziņu, lai izmantotu galveno noklusējuma funkciju.',
     'name'                              => 'Kategorijas nosaukums',

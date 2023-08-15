@@ -57,6 +57,7 @@
     "rollbar/rollbar-laravel": "^8.0",
     "spatie/laravel-backup": "^8.0",
     "tecnickcom/tc-lib-barcode": "^1.15",
+    "tecnickcom/tcpdf": "^6.5",
     "unicodeveloper/laravel-password": "^1.0",
     "watson/validating": "^8.1"
   },

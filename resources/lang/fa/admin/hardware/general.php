@@ -14,6 +14,7 @@ return [
     'deployable'  				=> 'گسترش',
     'deleted'  					=> 'این دارایی حذف شده است.
 ',
+    'delete_confirm'            => 'Are you sure you want to delete this asset?',
     'edit'  					=> 'ویرایش دارایی',
     'model_deleted'  			=> 'این مدل دارایی حذف شده است. قبل از اینکه بتوانید Asset را بازیابی کنید، باید مدل را بازیابی کنید.
 ',
@@ -23,8 +24,7 @@ return [
     'requested'				    => 'درخواست شده',
     'not_requestable'           => 'غیر قابل درخواست
 ',
-    'requestable_status_warning' => 'وضعیت درخواستی را تغییر ندهید
-',
+    'requestable_status_warning' => 'Do not change requestable status',
     'restore'  					=> 'بازیابی دارایی',
     'pending'  					=> 'در انتظار',
     'undeployable'  			=> 'غیرقابل گسترش',
@@ -58,4 +58,5 @@ return [
     'custom_export' => 'صادرات سفارشی
 ',
     'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
+    'user_department' => 'User Department',
 ];

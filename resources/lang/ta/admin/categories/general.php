@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'குளோன் வகை',
     'create'  							=> 'பகுப்பு உருவாக்கவும்',
     'edit'                              => 'திருத்து பகுப்பு',
+    'email_will_be_sent_due_to_global_eula' => 'An email will be sent to the user because the global EULA is being used.',
+    'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
     'eula_text'							=> 'பகுப்பு EULA',
     'eula_text_help'					=> 'குறிப்பிட்ட வகை சொத்துக்களை உங்கள் EULA களை தனிப்பயனாக்க இந்தத் துறை உங்களை அனுமதிக்கிறது. உங்களுடைய அனைத்து சொத்துக்களுக்கும் ஒரே ஒரு EULA மட்டுமே இருந்தால், முதன்மை இயல்புநிலையைப் பயன்படுத்த கீழே உள்ள பெட்டியை நீங்கள் பார்க்கலாம்.',
     'name'                              => 'வகை பெயர்',

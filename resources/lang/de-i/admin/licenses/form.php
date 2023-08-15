@@ -11,7 +11,7 @@ return array(
     'name'              => 'Software Name',
     'no_depreciation'   => 'Nicht abschreiben',
     'purchase_order'    => 'Auftragsnummer',
-    'reassignable'      => 'Zuweisbar',
+    'reassignable'      => 'Mehrmals verwendbar',
     'remaining_seats'   => 'Verbleibende Lizenzen',
     'seats'             => 'Lizenzen',
     'termination_date'  => 'Kündigungsdatum',

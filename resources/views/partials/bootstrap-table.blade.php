@@ -699,6 +699,25 @@
         }
     }
 
+    function labelPerPageFormatter(value, row, index, field) {
+        if (row) {
+            if (!row.hasOwnProperty('sheet_info')) { return 1; }
+            else { return row.sheet_info.labels_per_page; }
+        }
+    }
+
+    function labelRadioFormatter(value, row, index, field) {
+        if (row) {
+            return row.name == '{{ str_replace("\\", "\\\\", $snipeSettings->label2_template) }}';
+        }
+    }
+
+    function labelSizeFormatter(value, row) {
+        if (row) {
+            return row.width + ' x ' + row.height + ' ' + row.unit;
+        }
+    }
+
     function cleanFloat(number) {
         if(!number) { // in a JavaScript context, meaning, if it's null or zero or unset
             return 0.0;

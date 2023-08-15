@@ -59,9 +59,9 @@ Form::macro('date_display_format', function ($name = 'date_display_format', $sel
     ];
 
     foreach ($formats as $format) {
-        $date_display_formats[$format] = Carbon::parse(date('Y').'-'.date('m').'-25')->format($format);
+        $date_display_formats[$format] = Carbon::parse(date('Y-m-d'))->format($format);
     }
-    $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:250px" aria-label="'.$name.'">';
+    $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:100%" aria-label="'.$name.'">';
     foreach ($date_display_formats as $format => $date_display_format) {
         $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'">'.$date_display_format.'</option> ';
     }
