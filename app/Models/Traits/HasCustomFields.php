@@ -43,33 +43,34 @@ trait HasCustomFields
         ]);
     }
 
-    abstract public function getFieldset(): ?CustomFieldset; // TODO - check version compatibilikty?
-
-    public function experimentalgetFieldset(): ?CustomFieldset {
+    /***************
+     * @return CustomFieldset|null
+     *
+     * This function by default will use the "getFieldsetKey() method to
+     * return the customFieldset (or null) for this particular item. If
+     * necessary, you can override this method if your getFieldsetKey()
+     * cannot respond to `->fieldset` or `->id`.
+     */
+    public function getFieldset(): ?CustomFieldset {
         $pivot = $this->getFieldsetKey();
         if(is_int($pivot)) { //why does this look just like the other thing? (below, look for is_int()
             return Fieldset::find($pivot);
         }
         return $pivot->fieldset;
     }
-    /*********
-     * I mean, I could make this be:
-     * $this->getKey()->fieldset - or let it be overriden (for example, for Users which will have just one?)
-     * (or maybe if $this->getKey() is integer, return that, otherwise return $this->getKey()->fieldset?
-     *
-     * Man, I really did prefer the other way. UGH. It's so simple - "give me the fieldset for your $item"
-     *
-     * I mean, I guess another way you could go is to have YET ANOTHER (UGHHHHHH) method, that returns
-     * default values? But then you have to keep re-implementing that, everywhere. That SUUUUUUCKS.
-     *
-     * Or maybe we have you pass in your default values? Let it be not this thing's concern? BLECH.
-     *
-     * or maybe we add a withPivot() to get pivot values? or maybe just a leftJoin() ?
-     *
-     *
-     *
-     */
 
+    /**********************
+     * @return Object|int|null
+     * (if this is in PHP 8.0, can we just put that as the signature?)
+     *
+     * This is the main method you have to override. It should either return an
+     * Object who you can call `->fieldset` on and get a fieldset object, and als
+     * be able to call `->id` on to get a unique key to be able to show custom fields.
+     * For example, for Assets, the element that is returned is the 'model' for the Asset.
+     * For something like Users, which will probably have only one universal set of custom fields,
+     * it should just return the Fieldset ID for it. Or, if there are no custom fields, it should
+     * return null
+     */
     abstract public function getFieldsetKey(); // : Object|int|null ????
 
     abstract public static function getFieldsetUsers(int $fieldset_id): Collection;
@@ -110,25 +111,9 @@ trait HasCustomFields
             return;
         }
 
-        return DefaultValuesForCustomFields::
-            where('custom_field_id',$field->id) // ->where('type',self::class)
-            ->where('asset_model_id',$key_id)->first()->default_value;
-        /*
-        SELECT * from models_custom_fields
-        WHERE
-        custom_field_id=$field->id AND asset_model_id=$key_id AND type=self::class ????
-         */
-
-        /*
-         * So this is a bit of a weird one, and I'm trying to think it through.
-         *
-         * I like the idea of using Laravel's polymorphism to do this type of thing. Wait, that doesn't work.
-         * Because then I'll have Asset #1 having default-values-for-custom fields, and then Asset #2 having that...
-         * That's not what I want. It really *should* be an actual Model, right?
-         * I mean, if you want to use Polymorphism, then sure.
-         *
-         *
-         */
+        return DefaultValuesForCustomFields::where('type',self::class)
+            ->where('custom_field_id',$field->id)
+            ->where('item_pivot_id',$key_id)->first()->default_value;
     }
 
     public function customFill(Request $request, User $user, bool $shouldSetDefaults = false) {
@@ -141,7 +126,7 @@ trait HasCustomFields
                     $field_value = $request->input($field->db_column);
                 }
 
-                if ($shouldSetDefaults && $field_value === '') { //FIXME - null-safe? empty-string safe? 0-safe?
+                if ($shouldSetDefaults && (is_null($field_value) || $field_value === '')) { //FIXME - null-safe? empty-string safe? 0-safe?
                     $field_value = $this->getDefaultValue($field);
                 } // FIXME - also be sure anywhere *else* we use default values!
                 if ($field->field_encrypted == '1') {

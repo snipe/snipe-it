@@ -10,11 +10,12 @@ class DefaultValuesForCustomFields extends Model
 {
     use HasFactory;
 
-    protected $table = "models_custom_fields"; // FIXME
+    public $timestamps = false;
+    //protected $table = "models_custom_fields"; // FIXME
 
     public function pivot() {
         //should return a Model?
-        return $this->belongsTo('models'); //fartsville
+        return $this->belongsTo('models'); // FIXME - fartsville
     }
 
     public function field() {
