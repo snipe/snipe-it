@@ -40,17 +40,21 @@
                     <div class="col-md-11 col-md-offset-1">
 
                         <!-- New Label Engine -->
-                        <div class="form-group {{ $errors->has('label2_enable') ? 'error' : '' }}">
-                            <div class="col-md-3">
-                                {{ Form::label('label2_enable', trans('admin/settings/general.label2_enable')) }}
-                            </div>
-                            <div class="col-md-9">
-                                {{ Form::checkbox('label2_enable', '1', old('label2_enable', $setting->label2_enable, [ 'class'=>'minimal', 'aria-label'=>'label2_enable' ])) }}
-                                {{ trans('general.yes') }}
-                                {!! $errors->first('label2_enable', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                                <p class="help-block">{!! trans('admin/settings/general.label2_enable_help') !!}</p>
-                            </div>
-                        </div>
+{{--                        <div class="form-group" {{ $errors->has('label2_enable') ? 'error' : '' }}">--}}
+{{--                            <div class="col-md-7 col-md-offset-3">--}}
+{{--                                <label for="label2_enable" class="form-control">--}}
+{{--                                    <input type="checkbox" value="1" name="label2_enable" {{ (old('label2_enable', $setting->label2_enable)) == '1' ? ' checked="checked"' : '' }} aria-label="label2_enable">--}}
+{{--                                    {{ Form::label('label2_enable', trans('admin/settings/general.label2_enable')) }}--}}
+
+{{--                                </label>--}}
+{{--                                {!! $errors->first('label2_enable', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}--}}
+{{--                                <p class="help-block">--}}
+{{--                                    {!! trans('admin/settings/general.label2_enable_help') !!}--}}
+{{--                                </p>--}}
+
+{{--                            </div>--}}
+{{--                        </div>--}}
+
 
                         @if ($setting->label2_enable)
                             <!-- New Settings -->
