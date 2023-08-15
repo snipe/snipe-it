@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Asset Maintenance Type',
+        'asset_maintenance_type' => 'Object onderhoudstype',
         'title'                  => 'Titel',
         'start_date'             => 'Begindatum',
-        'completion_date'        => 'Completion Date',
+        'completion_date'        => 'Einddatum',
         'cost'                   => 'Kostprijs',
         'is_warranty'            => 'Garantieverbetering',
-        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
+        'asset_maintenance_time' => 'Hersteltermijn (aantal dagen)',
         'notes'                  => 'Notities',
-        'update'                 => 'Update Asset Maintenance',
-        'create'                 => 'Create Asset Maintenance'
+        'update'                 => 'Object onderhoud bijwerken',
+        'create'                 => 'Object onderhoud aanmaken'
     ];

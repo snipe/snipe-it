@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Model ne postoji.',
-    'no_association' => 'NEMA POVEZANOG MODELA.',
+    'no_association' => 'UPOZORENJE! Model za ovu stavku je ili pogrešan ili nedostaje!',
     'no_association_fix' => 'Ovo će polomiti stvari na čudne i užasne načine. Uredite odmah ovu imovinu da bi ste je povezali sa modelom.',
     'assoc_users'	 => 'Ovaj je model trenutno povezan s jednom ili više imovina i ne može se izbrisati. Izbrišite imovinu pa pokušajte ponovo. ',
 

@@ -24,7 +24,7 @@ return array(
         'error'   		=> '構成部品はチェックアウトされませんでした。もう一度、やり直して下さい。',
         'success' 		=> '構成部品は正常にチェックアウトされました。',
         'user_does_not_exist' => '利用者が正しくありません。もう一度試して下さい。',
-        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
+        'unavailable'      => '残りのコンポーネントが不足しています: :remaining, :requested ',
     ),
 
     'checkin' => array(

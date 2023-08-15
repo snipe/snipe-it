@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Копиране на категория',
     'create'  							=> 'Създаване на категория',
     'edit'                              => 'Редакция на категория',
+    'email_will_be_sent_due_to_global_eula' => 'An email will be sent to the user because the global EULA is being used.',
+    'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
     'eula_text'							=> 'Категория EULA',
     'eula_text_help'					=> 'Това поле позволява да задавате различни EULA за всеки тип активи. Ако имате обща EULA за всички активи, можете да използвате кутийката по-долу за да използвате една обща по подразбиране.',
     'name'                              => 'Име на категория',
