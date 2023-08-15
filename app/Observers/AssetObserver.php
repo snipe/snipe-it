@@ -9,7 +9,6 @@ use App\Models\Location;
 use App\Models\Company;
 use App\Models\Setting;
 use App\Models\Supplier;
-use Illuminate\Database\Eloquent\Model;
 use Auth;
 
 class AssetObserver
