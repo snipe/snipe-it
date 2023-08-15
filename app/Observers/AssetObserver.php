@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Setting;
+use Illuminate\Support\Facades\Cache;
 use Auth;
 
 class AssetObserver
@@ -39,14 +40,14 @@ class AssetObserver
         {
             $changed = [];
 
+
             foreach ($asset->getRawOriginal() as $key => $value) {
                 if ($asset->getRawOriginal()[$key] != $asset->getAttributes()[$key]) {
                     $changed[$key]['old'] = $asset->getRawOriginal()[$key];
                     $changed[$key]['new'] = $asset->getAttributes()[$key];
-                    dd($this->changedInfo($changed,$asset));
                 }
-
 	    }
+               $changed= $this->changedInfo($changed, $asset);
 
 	    if (empty($changed)){
 	        return;
@@ -62,17 +63,23 @@ class AssetObserver
         }
     }
     public function changedInfo($changed, $asset){
-        $relationships_to_check = ['company_id', 'rtd_location_id', 'model_id','supplier_id' ];
+        $relationships_to_check = ['company_id', 'rtd_location_id', 'model_id','supplier_id', 'location_id' ];
         $list_of_change = [] ;
 
                 if(array_key_exists('rtd_location_id',$changed)) {
-                    $list_of_change[] = $asset->defaultloc->name;
+                    $changed['rtd_location_id']['new'] = $asset->defaultloc->name;
                 }
                if(array_key_exists('model_id', $changed)) {
-                   $list_of_change[] = $asset->model->name;
+                   $changed['model_id']['new'] = $asset->model->name;
                }
-
-            return $list_of_change;
+                if(array_key_exists('company_id', $changed)) {
+                    $changed['company_id']['new'] = $asset->company->name;
+                }
+                if(array_key_exists('supplier_id', $changed)) {
+                    $changed['supplier_id']['new'] = $asset->supplier->name;
+                }
+            return $changed;
+//            dd($changed);
 
         }
 
