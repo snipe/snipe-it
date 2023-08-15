@@ -46,7 +46,7 @@
                 <td><a href="{{ route('account.accept.item', $acceptance) }}" class="btn btn-default btn-sm">{{ trans('general.accept_decline') }}</a></td>
                 @else
                 <td> ----- </td>
-                <td> {{ trans('general.error_user_company_accpept_view') }} </td>
+                <td> {{ trans('general.error_user_company_accept_view') }} </td>
                 @endif
               </tr>
               @endforeach
