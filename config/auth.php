@@ -132,4 +132,16 @@ return [
 
     'password_timeout' =>  env('PASSWORD_CONFIRM_TIMEOUT', 10800),
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Login form autocomplete
+    |--------------------------------------------------------------------------
+    |
+    | Determine whether to include autocomplete="off" on the login form. Some users may want to disable
+    | autocomplete for compliance with security requirements.
+    |
+    */
+    'login_autocomplete' => env('LOGIN_AUTOCOMPLETE', false),
+
 ];
