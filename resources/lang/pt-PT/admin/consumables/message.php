@@ -24,7 +24,7 @@ return array(
         'error'   		=> 'O consumível não foi alocado. Por favor, tente novamente',
         'success' 		=> 'Consumível alocado com sucesso.',
         'user_does_not_exist' => 'O utilizador é inválido. Por favor, tente novamente.',
-         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
+         'unavailable'      => 'Não há consumíveis suficientes para esta entrega. Por favor, verifique a quantidade restante. ',
     ),
 
     'checkin' => array(

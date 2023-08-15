@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Kategorie duplizieren',
     'create'  							=> 'Kategorie erstellen',
     'edit'                              => 'Kategorie bearbeiten',
+    'email_will_be_sent_due_to_global_eula' => 'Eine E-Mail wird an den Benutzer gesendet, da die globale EULA verwendet wird.',
+    'email_will_be_sent_due_to_category_eula' => 'Eine E-Mail wird an den Benutzer gesendet, da eine EULA für diese Kategorie festgelegt ist.',
     'eula_text'							=> 'Kategorie EULA',
     'eula_text_help'					=> 'Dieses Feld erlaubt Ihnen die EULA für bestimmte Asset Typen anzupassen. Wenn Sie nur eine EULA für alle Assets haben, aktivieren Sie die Checkbox unterhalb um die Standard-EULA zu verwenden.',
     'name'                              => 'Kategoriename',

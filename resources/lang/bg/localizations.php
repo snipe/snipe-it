@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Select a language',
+    'select_language' => 'Избор на език',
     'languages' => [
         'en'=> 'English, US',
         'en-GB'=> 'English, UK',

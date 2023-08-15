@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Nhân đôi Danh mục',
     'create'  							=> 'Tạo hạng mục',
     'edit'                              => 'Chính sửa hạng mục',
+    'email_will_be_sent_due_to_global_eula' => 'An email will be sent to the user because the global EULA is being used.',
+    'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
     'eula_text'							=> 'Danh mục EULA',
     'eula_text_help'					=> 'Đây là trường cho phép bạn điều chỉnh EULA cho những loại tài sản riêng biệt. Nếu bạn chỉ có một EULA cho tất cả tài sản, bạn có thể nhấn chọn vào ô bên dưới để sử dụng như là giá trị mặc định.',
     'name'                              => 'tên danh mục',

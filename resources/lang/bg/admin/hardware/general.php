@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'Копиране на актив',
     'deployable'  				=> 'Може да бъде предоставен',
     'deleted'  					=> 'Този актив беше изтрит.',
+    'delete_confirm'            => 'Are you sure you want to delete this asset?',
     'edit'  					=> 'Редакция на актив',
     'model_deleted'  			=> 'Този Модел на актив беше изтрит. Вие трябва да възстановите този модел преди да можете да възстановите актива.',
     'model_invalid'             => 'The Model of this Asset is invalid.',
@@ -19,7 +20,7 @@ return [
     'requestable'               => 'Може да бъде изискван',
     'requested'				    => 'Изискан',
     'not_requestable'           => 'Не може да бъде изискан',
-    'requestable_status_warning' => 'Да не се сменя статуса за изискване',
+    'requestable_status_warning' => 'Do not change requestable status',
     'restore'  					=> 'Възстановяване на актив',
     'pending'  					=> 'Предстоящ',
     'undeployable'  			=> 'Не може да бъде предоставян',
@@ -45,4 +46,5 @@ return [
     'alert_details' => 'Please see below for details.',
     'custom_export' => 'Custom Export',
     'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
+    'user_department' => 'User Department',
 ];

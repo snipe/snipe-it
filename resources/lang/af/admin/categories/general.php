@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Klone Kategorie',
     'create'  							=> 'Skep Kategorie',
     'edit'                              => 'Wysig Kategorie',
+    'email_will_be_sent_due_to_global_eula' => 'An email will be sent to the user because the global EULA is being used.',
+    'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
     'eula_text'							=> 'Kategorie EULA',
     'eula_text_help'					=> 'Hierdie veld laat u toe om u EULA\'s vir spesifieke soorte bates aan te pas. As u slegs een EULA vir al u bates het, kan u die onderstaande boks selekteer om die primêre standaard te gebruik.',
     'name'                              => 'Kategorie Naam',

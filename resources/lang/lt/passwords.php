@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'sent'	        => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
-    'user'			=> 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
-    'token'         => 'This password reset token is invalid or expired, or does not match the username provided.',
-    'reset'         => 'Your password has been reset!',
+    'sent'	        => 'Jei mūsų sistemoje yra atitinkantis naudotojas su galiojančiu el. pašto adresu, bus išsiųstas slaptažodžio atkūrimo el. laiškas.',
+    'user'			=> 'Jei mūsų sistemoje yra atitinkantis naudotojas su galiojančiu el. pašto adresu, bus išsiųstas slaptažodžio atkūrimo el. laiškas.',
+    'token'         => 'Šis slaptažodžio atkūrimo raktas yra netinkamas, pasibaigęs jo galiojimas arba nesutampa su vartotojo vardu.',
+    'reset'         => 'Jūsų slaptažodis atkurtas!',
 ];

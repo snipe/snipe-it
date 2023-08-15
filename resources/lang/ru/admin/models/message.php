@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Модель не существует.',
-    'no_association' => 'НЕТ СВЯЗАННОЙ МОДЕЛИ.',
+    'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
     'no_association_fix' => 'Это странно и ужасно сломает вещи. Отредактируйте этот актив сейчас, чтобы назначить ему модель.',
     'assoc_users'	 => 'Данная модель связана с одним или несколькими активами, и не может быть удалена. Удалите либо измените связанные активы. ',
 

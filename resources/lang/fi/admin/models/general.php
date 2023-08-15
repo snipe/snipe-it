@@ -6,7 +6,7 @@ return array(
     'deleted'  					        => 'Tämä malli on poistettu.',
     'bulk_delete'               => 'Massapoista laitemalleja',
     'bulk_delete_help'               => 'Käytä alla olevia valintaruutuja vahvistaaksesi laitemallien poistaminen. Laitemalleja, joissa on niihin liittyviä laitteita, ei voida poistaa ennen kuin laitteet on liitetty toiseen malliin.',
-    'bulk_delete_warn'          => 'You are about to delete one asset model.|You are about to delete :model_count asset models.',
+    'bulk_delete_warn'          => 'Olet poistamassa yhden laitemallin.|Olet poistamassa :model_count laitemallia.',
     'restore'                   => 'Palauta malli',
     'requestable'               => 'Käyttäjät voivat pyytää tätä mallia',
 	'show_mac_address'			      => 'Näytä MAC-osoitekenttä tämän mallin laitteille',
