@@ -25,19 +25,19 @@
     {{csrf_field()}}
 
     <div class="row">
-        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+        <div class="col-sm-10 col-sm-offset-1 col-md-10">
 
 
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
                         <i class="fas fa-tags"></i> {{ trans('admin/settings/general.labels') }}
-                    </h4>
+                    </h2>
                 </div>
                 <div class="box-body">
 
 
-                    <div class="col-md-11 col-md-offset-1">
+                    <div class="col-md-12">
 
                         <!-- New Label Engine -->
 {{--                        <div class="form-group" {{ $errors->has('label2_enable') ? 'error' : '' }}">--}}
@@ -60,9 +60,8 @@
                             <!-- New Settings -->
 
                             <!-- Template -->
-                            <div class="form-group {{ $errors->has('label2_template') ? 'error' : '' }}">
+                            <div class="form-group{{ $errors->has('label2_template') ? ' has-error' : '' }}">
                                 <div class="col-md-3">
-                                    {{ Form::label('label2_template', trans('admin/settings/general.label2_template')) }}
                                     @include('partials.label2-preview')
                                 </div>
                                 <div class="col-md-9">
@@ -98,9 +97,9 @@
                             </div>
 
                             <!-- Title -->
-                            <div class="form-group {{ $errors->has('label2_title') ? 'error' : '' }}">
-                                <div class="col-md-3">
-                                    {{ Form::label('label2_title', trans('admin/settings/general.label2_title')) }}
+                            <div class="form-group{{ $errors->has('label2_title') ? ' has-error' : '' }}">
+                                <div class="col-md-3 text-right">
+                                    {{ Form::label('label2_title', trans('admin/settings/general.label2_title'), ['class'=>'control-label']) }}
                                 </div>
                                 <div class="col-md-9">
                                     {{ Form::text('label2_title', old('label2_title', $setting->label2_title), [ 'class'=>'form-control', 'placeholder'=>$setting->qr_text, 'aria-label'=>'label2_title' ]) }}
@@ -119,9 +118,9 @@
                             </div>
 
                             <!-- Use Asset Logo -->
-                            <div class="form-group {{ $errors->has('label2_asset_logo') ? 'error' : '' }}">
-                                <div class="col-md-3">
-                                    {{ Form::label('label2_asset_logo', trans('admin/settings/general.label2_asset_logo')) }}
+                            <div class="form-group{{ $errors->has('label2_asset_logo') ? '  has-error' : '' }}">
+                                <div class="col-md-3 text-right">
+                                    {{ Form::label('label2_asset_logo', trans('admin/settings/general.label2_asset_logo'), ['class'=>'control-label']) }}
                                 </div>
                                 <div class="col-md-9">
                                     {{ Form::checkbox('label2_asset_logo', '1', old('label2_asset_logo', $setting->label2_asset_logo, [ 'class'=>'minimal', 'aria-label'=>'label2_asset_logo' ])) }}
@@ -130,11 +129,11 @@
                                     <p class="help-block">{!! trans('admin/settings/general.label2_asset_logo_help', ['setting_name' => trans('admin/settings/general.brand').' &gt; '.trans('admin/settings/general.label_logo')]) !!}</p>
                                 </div>
                             </div>
-                            
+
                             <!-- 1D Barcode Type -->
                             <div class="form-group{{ $errors->has('label2_1d_type') ? ' has-error' : '' }}">
-                                <div class="col-md-3">
-                                    {{ Form::label('label2_1d_type', trans('admin/settings/general.label2_1d_type')) }}
+                                <div class="col-md-3 text-right">
+                                    {{ Form::label('label2_1d_type', trans('admin/settings/general.label2_1d_type'), ['class'=>'control-label']) }}
                                 </div>
                                 <div class="col-md-9">
                                     @php
@@ -153,7 +152,7 @@
                                     {!! $errors->first('label2_1d_type', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                                     <p class="help-block">
                                         {{ trans('admin/settings/general.label2_1d_type_help') }}.
-                                        {!! 
+                                        {!!
                                             trans('admin/settings/general.help_default_will_use', [
                                                 'default' => trans('admin/settings/general.default'),
                                                 'setting_name' => trans('admin/settings/general.barcodes').' &gt; '.trans('admin/settings/general.alt_barcode_type'),
@@ -162,11 +161,11 @@
                                     </p>
                                 </div>
                             </div>
-                            
+
                             <!-- 2D Barcode Type -->
                             <div class="form-group{{ $errors->has('label2_2d_type') ? ' has-error' : '' }}">
-                                <div class="col-md-3">
-                                    {{ Form::label('label2_2d_type', trans('admin/settings/general.label2_2d_type')) }}
+                                <div class="col-md-3 text-right">
+                                    {{ Form::label('label2_2d_type', trans('admin/settings/general.label2_2d_type'), ['class'=>'control-label']) }}
                                 </div>
                                 <div class="col-md-9">
                                     @php
@@ -182,7 +181,7 @@
                                     {!! $errors->first('label2_2d_type', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                                     <p class="help-block">
                                         {{ trans('admin/settings/general.label2_2d_type_help', ['current' => $setting->barcode_type]) }}.
-                                        {!! 
+                                        {!!
                                             trans('admin/settings/general.help_default_will_use', [
                                                 'default' => trans('admin/settings/general.default'),
                                                 'setting_name' => trans('admin/settings/general.barcodes').' &gt; '.trans('admin/settings/general.barcode_type'),
@@ -191,11 +190,11 @@
                                     </p>
                                 </div>
                             </div>
-                            
+
                             <!-- 2D Barcode Target -->
                             <div class="form-group{{ $errors->has('label2_2d_target') ? ' has-error' : '' }}">
-                                <div class="col-md-3">
-                                    {{ Form::label('label2_2d_target', trans('admin/settings/general.label2_2d_target')) }}
+                                <div class="col-md-3 text-right">
+                                    {{ Form::label('label2_2d_target', trans('admin/settings/general.label2_2d_target'), ['class'=>'control-label']) }}
                                 </div>
                                 <div class="col-md-9">
                                     {{ Form::select('label2_2d_target', ['hardware_id'=>'/hardware/{id} ('.trans('admin/settings/general.default').')', 'ht_tag'=>'/ht/{asset_tag}'], old('label2_2d_target', $setting->label2_2d_target), [ 'class'=>'select2 col-md-4', 'aria-label'=>'label2_2d_target' ]) }}
@@ -206,7 +205,7 @@
 
                             <!-- Fields -->
                             <div class="form-group {{ $errors->has('label2_fields') ? 'error' : '' }}">
-                                <div class="col-md-3">
+                                <div class="col-md-3 text-right">
                                     {{ Form::label('label2_fields', trans('admin/settings/general.label2_fields')) }}
                                 </div>
                                 <div class="col-md-9">
@@ -217,7 +216,7 @@
                             </div>
 
                             @include('partials.bootstrap-table')
-                        
+
                         @else
                             <!-- Hidden version of new settings -->
                             {{ Form::hidden('label2_template', old('label2_template', $setting->label2_template)) }}
@@ -251,9 +250,9 @@
                         @else
 
                             <!-- Legacy settings -->
-                            <div class="form-group {{ $errors->has('labels_per_page') ? 'error' : '' }}">
-                                <div class="col-md-3">
-                                    {{ Form::label('labels_per_page', trans('admin/settings/general.labels_per_page')) }}
+                            <div class="form-group{{ $errors->has('labels_per_page') ? ' has-error' : '' }}">
+                                <div class="col-md-3 text-right">
+                                    {{ Form::label('labels_per_page', trans('admin/settings/general.labels_per_page'), ['class'=>'control-label']) }}
                                 </div>
                                 <div class="col-md-9">
                                     {{ Form::text('labels_per_page', old('labels_per_page', $setting->labels_per_page), ['class' => 'form-control','style' => 'width: 100px;', 'aria-label'=>'labels_per_page']) }}
@@ -261,9 +260,9 @@
                                 </div>
                             </div>
 
-                            <div class="form-group {{ $errors->has('labels_fontsize') ? 'error' : '' }}">
-                                <div class="col-md-3">
-                                    {{ Form::label('labels_fontsize', trans('admin/settings/general.labels_fontsize')) }}
+                            <div class="form-group{{ $errors->has('labels_fontsize') ? ' has-error' : '' }}">
+                                <div class="col-md-3 text-right">
+                                    {{ Form::label('labels_fontsize', trans('admin/settings/general.labels_fontsize'), ['class'=>'control-label']) }}
                                 </div>
                                 <div class="col-md-2">
                                     <div class="input-group">
@@ -276,9 +275,9 @@
                                 </div>
                             </div>
 
-                            <div class="form-group {{ $errors->has('labels_width') ? 'error' : '' }}">
-                                <div class="col-md-3">
-                                    {{ Form::label('labels_width', trans('admin/settings/general.label_dimensions')) }}
+                            <div class="form-group{{ $errors->has('labels_width') ? ' has-error' : '' }}">
+                                <div class="col-md-3 text-right">
+                                    {{ Form::label('labels_width', trans('admin/settings/general.label_dimensions'), ['class'=>'control-label']) }}
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
@@ -298,8 +297,8 @@
                                 </div>
                             </div>
 
-                            <div class="form-group {{ $errors->has('labels_display_sgutter') ? 'error' : '' }}">
-                                <div class="col-md-3">
+                            <div class="form-group{{ $errors->has('labels_display_sgutter') ? ' has-error' : '' }}">
+                                <div class="col-md-3 text-right">
                                     {{ Form::label('labels_display_sgutter', trans('admin/settings/general.label_gutters')) }}
                                 </div>
                                 <div class="col-md-3">
@@ -320,8 +319,8 @@
                                 </div>
                             </div>
 
-                            <div class="form-group {{ $errors->has('labels_pmargin_top') ? 'error' : '' }}">
-                                <div class="col-md-3">
+                            <div class="form-group{{ $errors->has('labels_pmargin_top') ? ' has-error' : '' }}">
+                                <div class="col-md-3 text-right">
                                     {{ Form::label('labels_pmargin_top', trans('admin/settings/general.page_padding')) }}
                                 </div>
                                 <div class="col-md-3">
@@ -351,9 +350,9 @@
                                 </div>
                             </div>
 
-                            <div class="form-group {{ (($errors->has('labels_pageheight')) || $errors->has('labels_pagewidth')) ? 'error' : '' }}">
-                                <div class="col-md-3">
-                                    {{ Form::label('labels_pagewidth', trans('admin/settings/general.page_dimensions')) }}
+                            <div class="form-group{{ (($errors->has('labels_pageheight')) || $errors->has('labels_pagewidth')) ? ' has-error' : '' }}">
+                                <div class="col-md-3 text-right">
+                                    {{ Form::label('labels_pagewidth', trans('admin/settings/general.page_dimensions'), ['class'=>'control-label']) }}
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
@@ -374,8 +373,8 @@
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-3">
-                                {{ Form::label('labels_display', trans('admin/settings/general.label_fields')) }}
+                                <div class="col-md-3 text-right">
+                                {{ Form::label('labels_display', trans('admin/settings/general.label_fields'), ['class' => 'control-label']) }}
                                 </div>
                                 <div class="col-md-9">
                                         <label class="form-control">
