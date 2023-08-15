@@ -453,6 +453,7 @@ return [
     'item_notes' => ':item Notes',
     'item_name_var' => ':item Name',
     'error_user_company' => 'User and Asset companies missmatch',
+    'error_user_company_accpept_view' => 'User and Asset companies doesn\'t match so you can\'t accept nor deny it, please check with your manager',
     'importer' => [
         'checked_out_to_fullname' => 'Checked Out to: Full Name',
         'checked_out_to_first_name' => 'Checked Out to: First Name',

@@ -44,8 +44,11 @@
                 @if ($acceptance->checkoutable)
                 <td>{{ ($acceptance->checkoutable) ? $acceptance->checkoutable->present()->name : '' }}</td>
                 <td><a href="{{ route('account.accept.item', $acceptance) }}" class="btn btn-default btn-sm">{{ trans('general.accept_decline') }}</a></td>
+                @else
+                <td> ----- </td>
+                <td> {{ trans('general.error_user_company_accpept_view') }} </td>
+                @endif
               </tr>
-              @endif
               @endforeach
             </tbody>
           </table>
