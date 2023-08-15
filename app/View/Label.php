@@ -88,7 +88,7 @@ class Label implements View
 
                 if ($template->getSupportTitle()) {
                     $title = !empty($settings->label2_title) ?
-                        str_ireplace(':company', $asset->company->name, $settings->label2_title) :
+                        str_ireplace('{COMPANY}', $asset->company->name, $settings->label2_title) :
                         $settings->qr_text;
                     if (!empty($title)) $assetData->put('title', $title);
                 }
