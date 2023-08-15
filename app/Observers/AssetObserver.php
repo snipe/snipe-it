@@ -4,8 +4,12 @@ namespace App\Observers;
 
 use App\Models\Actionlog;
 use App\Models\Asset;
+use App\Models\AssetModel;
+use App\Models\Location;
+use App\Models\Company;
 use App\Models\Setting;
-use Illuminate\Support\Facades\Cache;
+use App\Models\Supplier;
+use Illuminate\Database\Eloquent\Model;
 use Auth;
 
 class AssetObserver
@@ -47,6 +51,7 @@ class AssetObserver
                     $changed[$key]['new'] = $asset->getAttributes()[$key];
                 }
 	    }
+
                $changed= $this->changedInfo($changed, $asset);
 
 	    if (empty($changed)){
@@ -62,24 +67,32 @@ class AssetObserver
             $logAction->logaction('update');
         }
     }
+    /**
+     * This takes the ids of the changed attributes and returns the names instead for the history view of an Asset
+     *
+     * @param  $asset
+     * @return void
+     */
     public function changedInfo($changed, $asset){
-        $relationships_to_check = ['company_id', 'rtd_location_id', 'model_id','supplier_id', 'location_id' ];
-        $list_of_change = [] ;
 
                 if(array_key_exists('rtd_location_id',$changed)) {
+                    $changed['rtd_location_id']['old'] = Location::find($changed['rtd_location_id']['old'])->name;
                     $changed['rtd_location_id']['new'] = $asset->defaultloc->name;
                 }
                if(array_key_exists('model_id', $changed)) {
+                   $changed['model_id']['old'] = AssetModel::find($changed['model_id']['old'])->name;
                    $changed['model_id']['new'] = $asset->model->name;
                }
                 if(array_key_exists('company_id', $changed)) {
+                    $changed['company_id']['old'] = Company::find($changed['company_id']['old'])->name;
                     $changed['company_id']['new'] = $asset->company->name;
                 }
                 if(array_key_exists('supplier_id', $changed)) {
+                    $changed['supplier_id']['old'] = Supplier::find($changed['supplier_id']['old'])->name;
                     $changed['supplier_id']['new'] = $asset->supplier->name;
                 }
+
             return $changed;
-//            dd($changed);
 
         }
 
