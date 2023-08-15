@@ -336,7 +336,7 @@ return [
     'label2_template_help'    => 'Select which template to use for label generation',
     'label2_title'            => 'Title',
     'label2_title_help'       => 'The title to show on labels that support it',
-    'label2_title_help_phold' => 'The placeholder <code>&colon;company</code> will be replaced with the asset&apos;s company name',
+    'label2_title_help_phold' => 'The placeholder <code>{COMPANY}</code> will be replaced with the asset&apos;s company name',
     'label2_asset_logo'       => 'Use Asset Logo',
     'label2_asset_logo_help'  => 'Use the logo of the asset&apos;s assigned company, rather than the value at <code>:setting_name</code>',
     'label2_1d_type'          => '1D Barcode Type',
