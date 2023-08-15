@@ -2,11 +2,11 @@
 
 return [
     'bulk_delete'		=> 'A tömeges törlési eszközök megerősítése',
-    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
+    'bulk_restore'      => 'Az eszközök tömeges helyreállításának megerősítése', 
   'bulk_delete_help'	=> 'Tömeges törléshez tekintse át az eszközöket. Ha törli az eszközöket, azok visszaállíthatók, de többé nem lesznek hozzárendelve a korábban hozzárendelt felhasználókhoz.',
-  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
+  'bulk_restore_help'	=> 'Tekintse át az alábbi eszközöket a tömeges helyreállításhoz. A visszaállítás után ezek az eszközök nem lesznek társítva a korábban hozzárendelt felhasználókhoz.',
   'bulk_delete_warn'	=> 'Le akarod törölni a :asset_count eszközt.',
-  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
+  'bulk_restore_warn'	=> 'Vissza készül állítani :asset_count eszközt.',
     'bulk_update'		=> 'Tömeges eszköz frissítés',
     'bulk_update_help'	=> 'Ez az űrlap segít frissíteni több eszközt egyszerre. Csak töltsd ki a változtatni kívánt mezőket. Mindent amit üresen hagysz az változatlan marad. ',
     'bulk_update_warn'	=> 'Egyetlen eszköz tulajdonságait kívánja szerkeszteni.|:asset_count eszköz tulajdonságait kívánja szerkeszteni.',

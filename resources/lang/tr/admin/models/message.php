@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Model mevcut değil.',
-    'no_association' => 'İlişkilendirilmiş bir model bulunmamaktadır.',
+    'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
     'no_association_fix' => 'Bu değişiklik bazı şeylerin garip ve tuhaf bir şekilde bozulmasına yol açabilir. Bu varlığı bir modelle ilişkilendirmek için düzeltin.',
     'assoc_users'	 => 'Model bir ya da daha çok demirbaş ile ilişkili ve silinemez. Lütfen demirbaşları silin ve tekrar deneyin. ',
 

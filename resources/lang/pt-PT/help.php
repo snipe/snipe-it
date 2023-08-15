@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Mais Informações',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'Marcar esta caixa irá editar o registo de artigos para refletir esse novo local. Deixando-o desmarcado irá simplesmente escrever o local no log de auditoria.<br><br>Note que se este ativo for entregue, não irá alterar a localização da pessoa, ativo ou local para onde é entregue.',
 
     'assets' => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
 

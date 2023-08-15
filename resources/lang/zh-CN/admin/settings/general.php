@@ -87,11 +87,10 @@ return [
     'ldap_client_tls_cert_help' => 'LDAP 连接的客户端TLS 证书和密钥通常仅用于谷歌工作空间配置，两者都是必需的。',
      'ldap_client_tls_key'       => 'LDAP 客户端TLS 密钥',
     'ldap_location'             => 'LDAP 位置',
-'ldap_location_help'             => '如果在 Base Bind DN 中没有使用 <strong>则Ldap 位置字段。</strong> 如果正在使用 OU 搜索，请将此留空。
-如果<strong>在 Base Bind DN 中没有使用OU，则应使用Ldap Location字段</strong>如果正在使用OU搜索，请将此项留空。',
+'ldap_location_help'             => '如果<strong>在 Base Bind DN 中没有使用OU</strong>，则LDAP 位置字段应当被使用；如果正在使用OU Search，请将此项留空。',
     'ldap_login_test_help'      => '根据你指定的base DN，输入有效的LDAP用户名和密码，以测试您的LDAP登录是否配置正确。当然您必须先保存您更改的LDAP设置。',
     'ldap_login_sync_help'      => '这只证明了LDAP同步正确。如果您的LDAP身份验证查询设置不正确，用户可能仍然无法登录。当然您必须先保存您的LDAP设置。',
-    'ldap_manager'              => 'LDAP 管理器',
+    'ldap_manager'              => 'LDAP 领导（Manager）',
     'ldap_server'               => 'LDAP 服务器',
     'ldap_server_help'          => '这应以ldap:// (for unencrypted or TLS)或 ldaps:// (for SSL)开头',
     'ldap_server_cert'			=> '检验LDAP的SSL证书',

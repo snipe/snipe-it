@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'Copia Asset',
     'deployable'  				=> 'Assegnabile',
     'deleted'  					=> 'Questo bene è stato eliminato.',
+    'delete_confirm'            => 'Sei sicuro di voler eliminare questo bene?',
     'edit'  					=> 'Modifica Asset',
     'model_deleted'  			=> 'Questo modello di asset è stato eliminato. Devi ripristinare il modello prima di poter ripristinare il bene.',
     'model_invalid'             => 'Il modello di questo bene non è valido.',
@@ -45,4 +46,5 @@ return [
     'alert_details' => 'Leggere sotto per maggiori dettagli.',
     'custom_export' => 'Esportazione Personalizzata',
     'mfg_warranty_lookup' => ':manufacturer Cerca Stato Garanzia',
+    'user_department' => 'Dipartimento Utente',
 ];

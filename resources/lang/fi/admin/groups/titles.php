@@ -10,7 +10,7 @@ return [
     'group_admin' 	 		=> 'Ryhmän ylläpitäjä',
     'allow' 	 			=> 'Salli',
     'deny' 	 				=> 'Estä',
-    'permission'            => 'Permission',
-    'grant'                 => 'Grant',
-    'no_permissions'        => 'This group has no permissions.'
+    'permission'            => 'Käyttöoikeus',
+    'grant'                 => 'Myönnä',
+    'no_permissions'        => 'Tällä ryhmällä ei ole oikeuksia.'
 ];

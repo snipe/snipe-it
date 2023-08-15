@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Model findes ikke.',
-    'no_association' => 'INGEN MODEL TILKNYTTET.',
+    'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
     'no_association_fix' => 'Dette vil ødelægge ting på underlige og forfærdelige måder. Rediger dette aktiv nu for at tildele det en model.',
     'assoc_users'	 => 'Denne model er knyttet til en eller flere aktiver og ikke kan slettes. Slet venligst aktiver, og prøv derefter at slette igen. ',
 

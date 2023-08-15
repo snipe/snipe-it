@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Duplikovať kategóriu',
     'create'  							=> 'Vytvoriť kategóriu',
     'edit'                              => 'Upraviť kategóriu',
+    'email_will_be_sent_due_to_global_eula' => 'An email will be sent to the user because the global EULA is being used.',
+    'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
     'eula_text'							=> 'Kategória EULA',
     'eula_text_help'					=> 'Toto políčko umožňuje prispôsobiť dokument EULA špecifikcému typu majetku. Ak máte iba jeden dokument EULA pre všetky typy majetku, môžete oznaciť možnosť nižšie, aby sa použil predvolený dokument.',
     'name'                              => 'Názov kategórie',

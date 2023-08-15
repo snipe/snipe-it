@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'Клонировать актив',
     'deployable'  				=> 'Доступные',
     'deleted'  					=> 'Этот актив был удален.',
+    'delete_confirm'            => 'Are you sure you want to delete this asset?',
     'edit'  					=> 'Редактировать актив',
     'model_deleted'  			=> 'Эта модель была удалена. Вы должны восстановить модель прежде, чем сможете восстановить актив.',
     'model_invalid'             => 'Модель этого актива недействительна.',
@@ -19,7 +20,7 @@ return [
     'requestable'               => 'Готов к выдаче',
     'requested'				    => 'Запрошенное',
     'not_requestable'           => 'Не подлежит запросу',
-    'requestable_status_warning' => 'Не изменять запрашиваемый статус',
+    'requestable_status_warning' => 'Do not change requestable status',
     'restore'  					=> 'Восстановить актив',
     'pending'  					=> 'Ожидание',
     'undeployable'  			=> 'Выданные',
@@ -44,4 +45,5 @@ return [
     'alert_details' => 'Подробности смотрите ниже.',
     'custom_export' => 'Пользовательский экспорт',
     'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
+    'user_department' => 'User Department',
 ];

@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Clonar Categoría',
     'create'  							=> 'Crear Categoría',
     'edit'                              => 'Editar Categoría',
+    'email_will_be_sent_due_to_global_eula' => 'An email will be sent to the user because the global EULA is being used.',
+    'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
     'eula_text'							=> 'Categoría EULA',
     'eula_text_help'					=> 'Este campo permite personalizar sus EULAs para tipos específicos de equipos. Si solo tiene un EULA para todos sus equipos, puede seleccionar la siguiente opción para usar el valor por defecto.',
     'name'                              => 'Nombre de la categoría',

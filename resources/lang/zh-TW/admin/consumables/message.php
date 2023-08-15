@@ -24,7 +24,7 @@ return array(
         'error'   		=> '耗材領取失敗，請重試。',
         'success' 		=> '耗材領取成功。',
         'user_does_not_exist' => '使用者不正確。請再試一次。',
-         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
+         'unavailable'      => '借出的耗材不足。請檢查剩餘數量。',
     ),
 
     'checkin' => array(

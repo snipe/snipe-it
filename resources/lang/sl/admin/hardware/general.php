@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'Klonska sredstvo',
     'deployable'  				=> 'Razdeljeno',
     'deleted'  					=> 'To sredstvo je bilo izbrisano.',
+    'delete_confirm'            => 'Are you sure you want to delete this asset?',
     'edit'  					=> 'Urejanje sredstva',
     'model_deleted'  			=> 'Model tega sredstva je bil izbrisan. Pred obnovitvijo sredstva je potrebno obnoviti model.',
     'model_invalid'             => 'The Model of this Asset is invalid.',
@@ -19,7 +20,7 @@ return [
     'requestable'               => 'Zahtevano',
     'requested'				    => 'Zahtevano',
     'not_requestable'           => 'Not Requestable',
-    'requestable_status_warning' => 'Do not change  requestable status',
+    'requestable_status_warning' => 'Do not change requestable status',
     'restore'  					=> 'Obnovitev sredstev',
     'pending'  					=> 'Na čakanju',
     'undeployable'  			=> 'Nerazdeljeno',
@@ -45,4 +46,5 @@ return [
     'alert_details' => 'Please see below for details.',
     'custom_export' => 'Custom Export',
     'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
+    'user_department' => 'User Department',
 ];
