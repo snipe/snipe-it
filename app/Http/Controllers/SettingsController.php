@@ -883,7 +883,7 @@ class SettingsController extends Controller
         }
 
         if ($setting->save()) {
-            return redirect()->route('settings.index')
+            return redirect()->route('settings.labels.index')
                 ->with('success', trans('admin/settings/message.update.success'));
         }
 
