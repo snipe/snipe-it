@@ -30,7 +30,7 @@ class DenormalizedEolAndAddColumnForExplicitDateToAssets extends Migration
                         $asset->update(['eol_explicit' => true]);
                     }
                 } else {
-                    $asset->update(['eol_explcit' => true]);
+                    $asset->update(['eol_explicit' => true]);
                 }
             }
         }
