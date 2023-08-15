@@ -1253,16 +1253,25 @@ class Helper
      */
     public static function getUnitConversionFactor($unit) {
         switch (strtolower($unit)) {
-            case 'mm': return 1.0;
-            case 'cm': return 10.0;
-            case 'm':  return 1000.0;
-            case 'in': return 25.4;
-            case 'ft': return 12 * static::getUnitConversionFactor('in');
-            case 'yd': return 3 * static::getUnitConversionFactor('ft');
-            case 'pt': return (1/72) * static::getUnitConversionFactor('in');
-            default: throw new \InvalidArgumentException('Unit: \''.$unit.'\' is not supported');
+            case 'mm':
+                return 1.0;
+            case 'cm':
+                return 10.0;
+            case 'm':
+                return 1000.0;
+            case 'in':
+                return 25.4;
+            case 'ft':
+                return 12 * static::getUnitConversionFactor('in');
+            case 'yd':
+                return 3 * static::getUnitConversionFactor('ft');
+            case 'pt':
+                return (1 / 72) * static::getUnitConversionFactor('in');
+            default:
+                throw new \InvalidArgumentException('Unit: \'' . $unit . '\' is not supported');
 
-        return false;
+                return false;
+        }
     }
 
 
