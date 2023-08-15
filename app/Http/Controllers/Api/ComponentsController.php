@@ -13,6 +13,7 @@ use App\Events\CheckoutableCheckedIn;
 use App\Events\ComponentCheckedIn;
 use App\Models\Asset;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Query\Builder;
 
 class ComponentsController extends Controller
 {
@@ -209,6 +210,21 @@ class ComponentsController extends Controller
         $limit = $request->input('limit', 50);
         $total = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
+
+        if ($request->filled('search')) {
+            $assets = $component->assets()
+                                         ->where(function ($query) use ($request) {
+                                             $search_str = '%' . $request->input('search') . '%';
+                                             $query->where('name', 'like', $search_str)
+                                                   ->orWhereIn('model_id', function (Builder $query) use ($request) {
+                                                        $search_str = '%' . $request->input('search') . '%';
+                                                        $query->selectRaw('id')->from('models')->where('name', 'like', $search_str);
+                                                    })
+                                                   ->orWhere('asset_tag', 'like', $search_str);
+                                         })
+                                         ->get();
+            $total = $assets->count();
+        }
 
         return (new ComponentsTransformer)->transformCheckedoutComponents($assets, $total);
     }
