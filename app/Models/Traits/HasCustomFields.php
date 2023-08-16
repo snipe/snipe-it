@@ -113,7 +113,7 @@ trait HasCustomFields
 
         return DefaultValuesForCustomFields::where('type',self::class)
             ->where('custom_field_id',$field->id)
-            ->where('item_pivot_id',$key_id)->first()->default_value;
+            ->where('item_pivot_id',$key_id)->first()?->default_value;
     }
 
     public function customFill(Request $request, User $user, bool $shouldSetDefaults = false) {

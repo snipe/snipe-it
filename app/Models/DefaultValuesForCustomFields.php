@@ -5,13 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Watson\Validating\ValidatingTrait;
 
 class DefaultValuesForCustomFields extends Model
 {
-    use HasFactory;
+    use HasFactory, ValidatingTrait;
+
+    protected $rules = [
+        'type' => 'required'
+    ];
 
     public $timestamps = false;
-    //protected $table = "models_custom_fields"; // FIXME
 
     public function pivot() {
         //should return a Model?

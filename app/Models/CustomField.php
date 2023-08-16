@@ -200,7 +200,7 @@ class CustomField extends Model
      * @since [v3.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function defaultValues()
+    public function defaultValues() // FIXME
     {
         /*  eeek, another direct reference to an AssetModel!!
             So I think there might be a way to do this, but it won't be a 'straight relation' anymore.
@@ -219,7 +219,7 @@ class CustomField extends Model
             query all of the custom_fields_defaults or whatever I end up calling it with both my *type* ahd the value of my pivot field.
             TODO - delete these comments once I have this working and can even frickin' explain it, halfway-reasonably.
         */
-        return $this->belongsToMany(\App\Models\AssetModel::class, 'models_custom_fields')->withPivot('default_value');
+        return $this->belongsToMany(\App\Models\AssetModel::class, 'models_custom_fields')->withPivot('default_value'); // FIXME !!!
     }
 
     /**
@@ -229,7 +229,7 @@ class CustomField extends Model
      * @param  int $modelId
      * @return string
      */
-    public function defaultValue($modelId) //FIXME rename this (the variable name)
+    public function defaultValue($modelId) //FIXME *KEEP* - uncomplicate this please (and generalize)
     {
         /* if we *can* figure out how to fix defaultValues, this will work as-is
         (barring the renaming that we will want to do)

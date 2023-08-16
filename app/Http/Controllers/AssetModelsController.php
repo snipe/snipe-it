@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\AssetModel;
+use App\Models\DefaultValuesForCustomFields;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\View;
@@ -483,11 +484,10 @@ class AssetModelsController extends Controller
         }
 
         foreach ($defaultValues as $customFieldId => $defaultValue) {
-            if(is_array($defaultValue)){
-                $model->defaultValues()->attach($customFieldId, ['default_value' => implode(', ', $defaultValue)]);
-            }elseif ($defaultValue) {
-                $model->defaultValues()->attach($customFieldId, ['default_value' => $defaultValue]);
+            if(is_array($defaultValue)) {
+                $defaultValue = implode(', ', $defaultValue);
             }
+            DefaultValuesForCustomFields::updateOrCreate(['custom_field_id' => $customFieldId,'item_pivot_id' => $model->id], ['default_value' => $defaultValue]);
         }
         return true;
     }
@@ -499,6 +499,6 @@ class AssetModelsController extends Controller
      */
     private function removeCustomFieldsDefaultValues(AssetModel $model)
     {
-        $model->defaultValues()->detach();
+        $model->defaultValues()->detach(); //FIXME or accept this?
     }
 }

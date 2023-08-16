@@ -30,7 +30,7 @@ class CustomFieldSetDefaultValuesForModel extends Component
             $this->fields = CustomFieldset::find($this->fieldset_id)->fields;
         } 
 
-        $this->add_default_values = ($this->model->defaultValues->count() > 0);
+        $this->add_default_values = ($this->model->defaultValues->count() > 0); //FIXME? Maybe?
     }
 
     public function updatedFieldsetId()

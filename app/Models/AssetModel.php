@@ -158,9 +158,9 @@ class AssetModel extends SnipeModel
      * @since [v4.3]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function defaultValues()
+    public function defaultValues() // FIXME or DELETEME
     {
-        return $this->belongsToMany(\App\Models\CustomField::class, 'models_custom_fields')->withPivot('default_value');
+        return $this->belongsToMany(\App\Models\CustomField::class, 'default_values_for_custom_fields')->wherePivot(['i dunno' => 'man'])->withPivot('default_value'); // FIXME!!!
     }
 
     /**
