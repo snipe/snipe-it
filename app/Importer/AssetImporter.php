@@ -122,7 +122,7 @@ class AssetImporter extends ItemImporter
        
         $item['asset_eol_date'] = null;
         if (isset($this->item['asset_eol_date'])) {
-                $model = AssetModel::find($this->createOrFetchAssetModel($row, $this->item['model_id']));
+                $model = AssetModel::find($this->item['model_id']);
                 if(is_null($model->eol)) {
                     $item['asset_eol_date'] = Carbon::parse($this->item['asset_eol_date'])->format('Y-m-d');
                     $item['eol_explicit'] = true; 
