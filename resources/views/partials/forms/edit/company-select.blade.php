@@ -9,8 +9,6 @@
                     <option value="{{ $company_id }}" selected="selected" role="option" aria-selected="true"  role="option">
                         {{ (\App\Models\Company::find($company_id)) ? \App\Models\Company::find($company_id)->name : '' }}
                     </option>
-                @else
-                    <option value="" role="option">{{ trans('general.select_company') }}</option>
                 @endif
             </select>
         </div>
@@ -26,8 +24,6 @@
                     <option value="{{ $company_id }}" selected="selected">
                         {{ (\App\Models\Company::find($company_id)) ? \App\Models\Company::find($company_id)->name : '' }}
                     </option>
-                @else
-                    <option value="">{{ trans('general.select_company') }}</option>
                 @endif
             </select>
         </div>

@@ -9,10 +9,7 @@
                 <option value="{{ $model_id }}" selected="selected">
                     {{ (\App\Models\AssetModel::find($model_id)) ? \App\Models\AssetModel::find($model_id)->name : '' }}
                 </option>
-            @else
-                <option value=""  role="option">{{ trans('general.select_model') }}</option>
             @endif
-
         </select>
     </div>
     <div class="col-md-1 col-sm-1 text-left">
