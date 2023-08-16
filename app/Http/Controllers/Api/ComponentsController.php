@@ -204,26 +204,28 @@ class ComponentsController extends Controller
         $this->authorize('view', \App\Models\Asset::class);
         
         $component = Component::findOrFail($id);
-        $assets = $component->assets();
-
+        
         $offset = request('offset', 0);
         $limit = $request->input('limit', 50);
-        $total = $assets->count();
-        $assets = $assets->skip($offset)->take($limit)->get();
-
+        
         if ($request->filled('search')) {
             $assets = $component->assets()
-                                         ->where(function ($query) use ($request) {
-                                             $search_str = '%' . $request->input('search') . '%';
-                                             $query->where('name', 'like', $search_str)
-                                                   ->orWhereIn('model_id', function (Builder $query) use ($request) {
-                                                        $search_str = '%' . $request->input('search') . '%';
-                                                        $query->selectRaw('id')->from('models')->where('name', 'like', $search_str);
-                                                    })
-                                                   ->orWhere('asset_tag', 'like', $search_str);
+                                ->where(function ($query) use ($request) {
+                                    $search_str = '%' . $request->input('search') . '%';
+                                    $query->where('name', 'like', $search_str)
+                                            ->orWhereIn('model_id', function (Builder $query) use ($request) {
+                                                $search_str = '%' . $request->input('search') . '%';
+                                                $query->selectRaw('id')->from('models')->where('name', 'like', $search_str);
+                                            })
+                                            ->orWhere('asset_tag', 'like', $search_str);
                                          })
                                          ->get();
             $total = $assets->count();
+        } else {
+            $assets = $component->assets();
+            
+            $total = $assets->count();
+            $assets = $assets->skip($offset)->take($limit)->get();
         }
 
         return (new ComponentsTransformer)->transformCheckedoutComponents($assets, $total);
