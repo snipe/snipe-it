@@ -34,20 +34,18 @@ class DenormalizedEolAndAddColumnForExplicitDateToAssets extends Migration
                 }
             }
         }
+        unset($assetsWithEolDates);
 
         // Update the asset_eol_date column with the calculated value if it doesn't exist 
         $assets = Asset::whereNull('asset_eol_date')->get();
         foreach ($assets as $asset) {
             $model = Asset::find($asset->id)->model;
-            if ($model) {
-                $eol = $model->eol;
-                if ($eol) {
-                    $asset_eol_date = Carbon::parse($asset->purchase_date)->addMonths($eol)->format('Y-m-d');
+            if (!empty($model->eol)) {
+                    $asset_eol_date = Carbon::parse($asset->purchase_date)->addMonths($model->eol)->format('Y-m-d');
                     $asset->update(['asset_eol_date' => $asset_eol_date]);
                 }
             }
         }
-    }
 
     /**
      * Reverse the migrations.
