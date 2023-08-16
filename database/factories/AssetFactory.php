@@ -9,6 +9,7 @@ use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AssetFactory extends Factory
@@ -57,10 +58,10 @@ class AssetFactory extends Factory
             // calculates the EOL date most of the time, but sometimes sets a random date so we have some explicits
             // the explicit boolean gets set in the saving() method on the observer 
             $asset->asset_eol_date = $this->faker->boolean(5) 
-                ? Carbon::parse($asset->purchase_date)->addMonths(rand(0, 20))->format('Y-m-d')
-                : Carbon::parse($asset->purchase_date)->addMonths($asset->model->eol)->format('Y-m-d'); 
+                ? CarbonImmutable::parse($asset->purchase_date)->addMonths(rand(0, 20))->format('Y-m-d')
+                : CarbonImmutable::parse($asset->purchase_date)->addMonths($asset->model->eol)->format('Y-m-d');
         });
-    } 
+    }
 
     public function laptopMbp()
     {
