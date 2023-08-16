@@ -7,12 +7,17 @@ use App\Helpers\Helper;
 use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
+use App\Models\AssetModel;
+use App\Models\Company;
+use App\Models\Location;
 use App\Models\Setting;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\AssetCheckoutRequest;
+
 
 class BulkAssetsController extends Controller
 {
@@ -169,12 +174,19 @@ class BulkAssetsController extends Controller
                 $changed = [];
                 $asset = Asset::where('id' ,$assetId)->get();
 
+//                $asset_subset = $asset->map( function ($subset) {
+//                    return collect($subset->toArray())
+//                        ->only('rtd_location_id','location_id', 'model_id', 'company_id', 'supplier_id')
+//                        ->all();
+//                });
+
                 foreach ($this->update_array as $key => $value) {
                     if ($this->update_array[$key] != $asset->toArray()[0][$key]) {
                         $changed[$key]['old'] = $asset->toArray()[0][$key];
                         $changed[$key]['new'] = $this->update_array[$key];
                     }
                 }
+                $changed= $this->bulkChangedInfo($changed);
 
                 $logAction = new Actionlog();
                 $logAction->item_type = Asset::class;
@@ -196,6 +208,48 @@ class BulkAssetsController extends Controller
 
         // no values given, nothing to update
         return redirect($bulk_back_url)->with('warning', trans('admin/hardware/message.update.nothing_updated'));
+    }
+    /**
+     * This takes the ids of the changed attributes and returns the names instead for the history view of an Asset
+     *
+     * @param  $asset
+     * @return void
+     */
+    public function bulkChangedInfo($changed){
+
+        if(array_key_exists('rtd_location_id',$changed)) {
+            $changed['rtd_location_id']['old'] = $changed['rtd_location_id']['old'] ? Location::find($changed['rtd_location_id']['old'])->name : 'unassigned';
+            $changed['rtd_location_id']['new'] =Location::find($changed['rtd_location_id']['new'])->name;
+            $changed['Default Location'] = $changed['rtd_location_id'];
+            unset($changed['rtd_location_id']);
+        }
+        if(array_key_exists('location_id', $changed)) {
+            $changed['location_id']['old'] = $changed['location_id']['old'] ? Location::find($changed['location_id']['old'])->name : 'unassigned';
+            $changed['location_id']['new'] = Location::find($changed['location_id']['new'])->name;
+            $changed['Current Location'] = $changed['location_id'];
+            unset($changed['location_id']);
+        }
+        if(array_key_exists('model_id', $changed)) {
+            $changed['model_id']['old'] = $changed['model_id']['old'] ? AssetModel::find($changed['model_id']['old'])->name : 'unassigned';
+            $changed['model_id']['new'] = AssetModel::find($changed['model_id']['new'])->name;
+            $changed['Model'] = $changed['model_id'];
+            unset($changed['model_id']);
+        }
+        if(array_key_exists('company_id', $changed)) {
+            $changed['company_id']['old'] = $changed['company_id']['old'] ? Company::find($changed['company_id']['old'])->name : 'unassigned';
+            $changed['company_id']['new'] = Company::find($changed['company_id']['new'])->name;
+            $changed['Company'] = $changed['company_id'];
+            unset($changed['company_id']);
+        }
+        if(array_key_exists('supplier_id', $changed)) {
+            $changed['supplier_id']['old'] = $changed['supplier_id']['old'] ? Supplier::find($changed['supplier_id']['old'])->name : 'unassigned';
+            $changed['supplier_id']['new'] = Supplier::find($changed['supplier_id']['new'])->name;
+            $changed['Supplier'] = $changed['supplier_id'];
+            unset($changed['supplier_id']);
+        }
+
+        return $changed;
+
     }
 
     /**
