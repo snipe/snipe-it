@@ -11,13 +11,12 @@ use App\Models\AssetModel;
 use App\Models\Company;
 use App\Models\Location;
 use App\Models\Setting;
-use App\Models\Supplier;
+use App\View\Label;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\AssetCheckoutRequest;
-
 
 class BulkAssetsController extends Controller
 {
@@ -50,7 +49,7 @@ class BulkAssetsController extends Controller
             switch ($request->input('bulk_actions')) {
                 case 'labels':
                     $this->authorize('view', Asset::class);
-                    return view('hardware/labels')
+                    return (new Label)
                         ->with('assets', Asset::find($asset_ids))
                         ->with('settings', Setting::getSettings())
                         ->with('bulkedit', true)
@@ -173,12 +172,6 @@ class BulkAssetsController extends Controller
 
                 $changed = [];
                 $asset = Asset::where('id' ,$assetId)->get();
-
-//                $asset_subset = $asset->map( function ($subset) {
-//                    return collect($subset->toArray())
-//                        ->only('rtd_location_id','location_id', 'model_id', 'company_id', 'supplier_id')
-//                        ->all();
-//                });
 
                 foreach ($this->update_array as $key => $value) {
                     if ($this->update_array[$key] != $asset->toArray()[0][$key]) {
