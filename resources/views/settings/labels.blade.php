@@ -128,7 +128,7 @@
 
                                     <label class="form-control">
                                         <input type="checkbox" value="1" name="label2_asset_logo"{{ ((old('label2_asset_logo') == '1') || ($setting->label2_asset_logo) == '1') ? ' checked="checked"' : '' }} aria-label="label2_asset_logo">
-                                        {{ trans('general.yes') }}
+                                        {{ Form::label('label2_asset_logo', trans('admin/settings/general.label2_asset_logo')) }}
                                     </label>
                                     <p class="help-block">
                                         {!! trans('admin/settings/general.label2_asset_logo_help', ['setting_name' => trans('admin/settings/general.brand').' &gt; '.trans('admin/settings/general.label_logo')]) !!}
