@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'Klon tillgång',
     'deployable'  				=> 'Deployable',
     'deleted'  					=> 'Denna tillgång har tagits bort.',
+    'delete_confirm'            => 'Är du säker du vill radera denna tillgång?',
     'edit'  					=> 'Redigera tillgång',
     'model_deleted'  			=> 'Denna tillgångsmodell har tagits bort. Du måste återställa modellen innan du kan återställa tillgången.',
     'model_invalid'             => 'Modellen för denna tillgång är ogiltig.',
@@ -45,4 +46,5 @@ return [
     'alert_details' => 'Se nedan för detaljer.',
     'custom_export' => 'Anpassad export',
     'mfg_warranty_lookup' => ':manufacturer Garantistatus Uppsök',
+    'user_department' => 'Användares avdelning',
 ];

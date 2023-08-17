@@ -14,7 +14,7 @@ return array(
     'update' => array(
         'error'   => 'A categoria não foi actualizada, por favor tenta novamente',
         'success' => 'A categoria foi actualizada com sucesso.',
-        'cannot_change_category_type'   => 'You cannot change the category type once it has been created',
+        'cannot_change_category_type'   => 'Não pode alterar o tipo de categoria depois de ter sido criado',
     ),
 
     'delete' => array(

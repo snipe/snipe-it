@@ -44,7 +44,7 @@ return [
     'not_remote_label' => 'Bu uzak bir kullanıcı değil',
     'vip_label' => 'VIP user',
     'vip_help' => 'Organizasyonunuzdaki kişileri özel bir şekilde belirtmek, işaretlemek istiyor iseniz bu yardımcı olabilir.',
-    'create_user' => 'Create a user',
+    'create_user' => 'Kullanıcı oluştur',
     'create_user_page_explanation' => 'This is the account information you will use to access the site for the first time.',
     'email_credentials' => 'Email credentials',
     'email_credentials_text' => 'Email my credentials to the email address above',

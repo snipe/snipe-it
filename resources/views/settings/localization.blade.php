@@ -38,7 +38,7 @@
                 <div class="box-body">
 
 
-                    <div class="col-md-11 col-md-offset-1">
+                    <div class="col-md-12">
 
                         <!-- Language -->
                         <div class="form-group {{ $errors->has('site_name') ? 'error' : '' }}">
@@ -52,18 +52,21 @@
                             </div>
                         </div>
 
+
                         <!-- Date format -->
                         <div class="form-group {{ $errors->has('time_display_format') ? 'error' : '' }}">
                             <div class="col-md-3">
                                 {{ Form::label('time_display_format', trans('general.time_and_date_display')) }}
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-5">
                                 {!! Form::date_display_format('date_display_format', Request::old('date_display_format', $setting->date_display_format), 'select2') !!}
-
-                                {!! Form::time_display_format('time_display_format', Request::old('time_display_format', $setting->time_display_format), 'select2') !!}
-
-                                {!! $errors->first('time_display_format', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
+                            <div class="col-md-3">
+                                {!! Form::time_display_format('time_display_format', Request::old('time_display_format', $setting->time_display_format), 'select2') !!}
+                            </div>
+                            
+                            {!! $errors->first('time_display_format', '<div class="col-md-9 col-md-offset-3"><span class="alert-msg" aria-hidden="true">:message</span> </div>') !!}
+
                         </div>
 
                         <!-- Currency -->

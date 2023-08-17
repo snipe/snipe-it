@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Копировать категорию',
     'create'  							=> 'Создать категорию',
     'edit'                              => 'Редактировать категорию',
+    'email_will_be_sent_due_to_global_eula' => 'An email will be sent to the user because the global EULA is being used.',
+    'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
     'eula_text'							=> 'Категория EULA',
     'eula_text_help'					=> 'Это поле позволяет персонализировать пользовательские соглашения для определенных типов активов. Если у вас только одно пользовательское соглашение для всех активов, вы можете отметить чекбокс внизу, чтобы использовать основное соглашение по умолчанию.',
     'name'                              => 'Название категории',

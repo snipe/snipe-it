@@ -70,6 +70,7 @@
     "spatie/laravel-backup": "^6.16",
     "symfony/polyfill-mbstring": "^1.22",
     "tecnickcom/tc-lib-barcode": "^1.15",
+    "tecnickcom/tcpdf": "^6.5",
     "unicodeveloper/laravel-password": "^1.0",
     "watson/validating": "^6.1"
   },

@@ -51,4 +51,7 @@ return [
     'display_in_user_view_table' => 'Für Benutzer sichtbar',
     'auto_add_to_fieldsets' => 'Automatisch zu jedem neuen Feldsatz hinzufügen',
     'add_to_preexisting_fieldsets' => 'Zu allen existierenden Feldsätzen hinzufügen',
+    'show_in_listview' => 'Standardmäßig in Listenansichten anzeigen. Berechtigte Benutzer können weiterhin über die Spaltenauswahl ein-/ausblenden.',
+    'show_in_listview_short' => 'In Listen anzeigen',
+
 ];

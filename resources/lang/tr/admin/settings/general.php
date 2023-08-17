@@ -200,7 +200,7 @@ return [
     'show_images_in_email'     => 'E-postalarda resimleri göster',
     'show_images_in_email_help'   => 'Snipe-IT kurulumunuz bir VPN\'in ya da kapalı bir ağın arkasındaysa ve ağ dışındaki kullanıcılar bu kurulumda sunulan görüntüleri e-postalarına yükleyemezse bu kutunun işaretini kaldırın.',
     'site_name'                 => 'Site Adı',
-    'integrations'               => 'Integrations',
+    'integrations'               => 'Entegrasyonlar',
     'slack'                     => 'Slack',
     'general_webhook'           => 'General Webhook',
     'webhook'                   => ':app',

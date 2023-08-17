@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Clona Categoria',
     'create'  							=> 'Crea Categoria',
     'edit'                              => 'Modifica Categoria',
+    'email_will_be_sent_due_to_global_eula' => 'Dato che la EULA globale è attivata, verrà inviata una mail all\'utente.',
+    'email_will_be_sent_due_to_category_eula' => 'Siccome è stata impostata una EULA per questa categoria, verrà inviata una mail all\'utente.',
     'eula_text'							=> 'Categoria EULA',
     'eula_text_help'					=> 'Questo campo consente di personalizzare le EULA per specifici tipi di beni. Se avete solo un EULA per tutti i vostri beni, è possibile selezionare la casella di seguito per utilizzare il valore predefinito.',
     'name'                              => 'Nome della categoria',

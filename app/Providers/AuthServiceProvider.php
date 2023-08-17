@@ -146,6 +146,11 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
+        Gate::define('assets.view.encrypted_custom_fields', function ($user) {
+            if($user->hasAccess('assets.view.encrypted_custom_fields')){
+                return true;
+            }
+        });
 
         // -----------------------------------------
         // Reports
