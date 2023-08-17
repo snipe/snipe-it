@@ -69,38 +69,40 @@ class AssetObserver
     /**
      * This takes the ids of the changed attributes and returns the names instead for the history view of an Asset
      *
-     * @param  $asset
-     * @return void
+     * @param  Asset $asset
+     * @param  array $changed
+     * @return array
      */
-    public static function changedInfo($changed, $asset){
+    public static function changedInfo(array $changed, Asset $asset): array
+    {
 
                 if(array_key_exists('rtd_location_id',$changed)) {
-                    $changed['rtd_location_id']['old'] = $changed['rtd_location_id']['old'] ? Location::find($changed['rtd_location_id']['old'])->name : 'unassigned';
-                    $changed['rtd_location_id']['new'] = $asset->defaultloc->name;
+                    $changed['rtd_location_id']['old'] = $changed['rtd_location_id']['old'] ? Location::find($changed['rtd_location_id']['old'])->name : trans('general.unassigned');
+                    $changed['rtd_location_id']['new'] = $changed['rtd_location_id']['new'] ? $asset->defaultloc->name : trans('general.unassigned');
                     $changed['Default Location'] = $changed['rtd_location_id'];
                     unset($changed['rtd_location_id']);
                 }
                 if(array_key_exists('location_id', $changed)) {
-                    $changed['location_id']['old'] = $changed['location_id']['old'] ? Location::find($changed['location_id']['old'])->name : 'unassigned';
-                    $changed['location_id']['new'] = $asset->defaultloc->name;
+                    $changed['location_id']['old'] = $changed['location_id']['old'] ? Location::find($changed['location_id']['old'])->name : trans('general.unassigned');
+                    $changed['location_id']['new'] = $changed['location_id']['new'] ? $asset->defaultloc->name : trans('general.unassigned');
                     $changed['Current Location'] = $changed['location_id'];
                     unset($changed['location_id']);
                 }
                 if(array_key_exists('model_id', $changed)) {
                     $changed['model_id']['old'] = AssetModel::find($changed['model_id']['old'])->name;
-                    $changed['model_id']['new'] = $asset->model->name;
+                    $changed['model_id']['new'] = $asset->model->name; /* model is required at asset creation */
                     $changed['Model'] = $changed['model_id'];
                     unset($changed['model_id']);
                 }
                 if(array_key_exists('company_id', $changed)) {
-                    $changed['company_id']['old'] = $changed['company_id']['old'] ? Company::find($changed['company_id']['old'])->name : 'unassigned';
-                    $changed['company_id']['new'] = $asset->company->name;
+                    $changed['company_id']['old'] = $changed['company_id']['old'] ? Company::find($changed['company_id']['old'])->name : trans('general.unassigned');
+                    $changed['company_id']['new'] = $changed['company_id']['new'] ? $asset->company->name : trans('general.unassigned');
                     $changed['Company'] = $changed['company_id'];
                     unset($changed['company_id']);
                 }
                 if(array_key_exists('supplier_id', $changed)) {
-                    $changed['supplier_id']['old'] = $changed['supplier_id']['old'] ? Supplier::find($changed['supplier_id']['old'])->name : 'unassigned';
-                    $changed['supplier_id']['new'] = $asset->supplier->name;
+                    $changed['supplier_id']['old'] = $changed['supplier_id']['old'] ? Supplier::find($changed['supplier_id']['old'])->name : trans('general.unassigned');
+                    $changed['supplier_id']['new'] = $changed['supplier_id']['new'] ? $asset->supplier->name : trans('general.unassigned');
                     $changed['Supplier'] = $changed['supplier_id'];
                     unset($changed['supplier_id']);
                 }

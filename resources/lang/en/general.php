@@ -273,6 +273,7 @@ return [
     'total_accessories'		=> 'total accessories',
     'total_consumables'		=> 'total consumables',
     'type'  				=> 'Type',
+    'unassigned'            => 'Unassigned',
     'undeployable'			=> 'Un-deployable',
     'unknown_admin'			=> 'Unknown Admin',
     'username_format'		=> 'Username Format',
