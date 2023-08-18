@@ -73,6 +73,7 @@ class Asset extends Depreciable
     protected $casts = [
         'purchase_date' => 'date',
         'asset_eol_date' => 'date',
+        'eol_explicit' => 'boolean', 
         'last_checkout' => 'datetime',
         'last_checkin' => 'datetime',
         'expected_checkin' => 'date',
@@ -141,9 +142,10 @@ class Asset extends Depreciable
         'expected_checkin',
         'byod',
         'asset_eol_date',
+        'eol_explicit', 
         'last_audit_date',
         'next_audit_date',
-        'eol_explicit', 
+        'eol_explicit',
     ];
 
     use Searchable;
