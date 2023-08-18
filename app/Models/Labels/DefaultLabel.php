@@ -37,7 +37,7 @@ class DefaultLabel extends RectangleSheet
     private int $columns;
     private int $rows;
 
-    
+
     public function __construct() {
         $settings = Setting::getSettings();
 
@@ -62,6 +62,16 @@ class DefaultLabel extends RectangleSheet
 
         $this->columns = ($usableWidth + $this->labelSpacingH) / ($this->labelWidth + $this->labelSpacingH);
         $this->rows = ($usableHeight + $this->labelSpacingV) / ($this->labelHeight + $this->labelSpacingV);
+
+        // Make sure the columns and rows are never zero, since that scenario should never happen
+        if ($this->columns == 0) {
+            $this->columns = 1;
+        }
+
+        if ($this->rows == 0) {
+            $this->rows = 1;
+        }
+
     }
 
     public function getUnit()   { return 'in'; }
@@ -85,7 +95,7 @@ class DefaultLabel extends RectangleSheet
     public function getLabelMarginBottom() { return 0; }
     public function getLabelMarginLeft()   { return 0; }
     public function getLabelMarginRight()  { return 0; }
-    
+
     public function getLabelColumnSpacing() { return $this->labelSpacingH; }
     public function getLabelRowSpacing()    { return $this->labelSpacingV; }
 
@@ -106,7 +116,7 @@ class DefaultLabel extends RectangleSheet
         $textY = 0;
         $textX1 = 0;
         $textX2 = $this->getLabelWidth();
-        
+
         // 1D Barcode
         if ($record->get('barcode1d')) {
             static::write1DBarcode(
@@ -115,7 +125,7 @@ class DefaultLabel extends RectangleSheet
                 $this->getLabelWidth() - 0.1, self::BARCODE1D_SIZE
             );
         }
-        
+
         // 2D Barcode
         if ($record->get('barcode2d')) {
             static::write2DBarcode(
