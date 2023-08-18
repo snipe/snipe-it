@@ -194,7 +194,7 @@ class Importer extends Component
         ];
 
         $this->assets_fields = [
-            'asset_eol_date' => 'Asset EOL DAte', 
+            'asset_eol_date' => trans('general.eol'),
             'company' => trans('general.company'),
             'location' => trans('general.location'),
             'item_name' => trans('general.item_name_var', ['item' => trans('general.asset')]),

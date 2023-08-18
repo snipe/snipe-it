@@ -3,6 +3,7 @@
 namespace App\Presenters;
 
 use App\Models\CustomField;
+use Carbon\Carbon;
 use DateTime;
 
 /**
@@ -422,7 +423,12 @@ class AssetPresenter extends Presenter
     public function eol_date()
     {
         if (($this->purchase_date) && ($this->model->model) && ($this->model->model->eol)) {
-            return $this->purchase_date->addMonths($this->model->model->eol)->format('Y-m-d'); 
+            //if the purchase date is an instance of carbon
+            if($this->purchase_date instanceof \Carbon\Carbon){
+                return $this->purchase_date->addMonths($this->model->model->eol)->format('Y-m-d');
+            } else {
+                return Carbon::parse($this->purchase_date)->addMonths($this->model->model->eol)->format('Y-m-d');
+            }
         }
     }
 
