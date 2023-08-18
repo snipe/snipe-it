@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Validator;
 use League\Csv\Reader;
 use Redirect;
 use Response;
-use Illuminate\View\View;
+use Illuminate\Support\Facades\View;
 
 /**
  * This class controls all actions related to assets for
@@ -308,7 +308,7 @@ class AssetsController extends Controller
         $asset->status_id = $request->input('status_id', null);
         $asset->warranty_months = $request->input('warranty_months', null);
         $asset->purchase_cost = $request->input('purchase_cost', null);
-        $asset->purchase_date = $request->input('purchase_date', null); 
+        $asset->purchase_date = $request->input('purchase_date', $asset->present()->eol_date());
         $asset->asset_eol_date  = request('asset_eol_date', null);
 
         $asset->supplier_id = $request->input('supplier_id', null);
