@@ -131,7 +131,9 @@ class AssetObserver
 
        //determine if explicit and set eol_explit to true 
       //conditions might need more work 
-       if(!is_null($asset->asset_eol_date) && !is_null($asset->purchase_date)) { 
+       if(!is_null($asset->asset_eol_date) && !is_null($asset->purchase_date)) {
+            //TODO: so, what if you _don't_ set a purchase date, but you *DO* set an eol date, is that an explicit eol?
+            //I'd imagine so but this doesn't do that yet. Confirm Monday
             if($asset->model->eol) { 
                 $months = Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date); 
                 if($months != $asset->model->eol) {

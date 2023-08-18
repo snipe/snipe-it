@@ -388,10 +388,6 @@ class AssetsController extends Controller
 
 
         if ($asset->save()) {
-           if($asset->wasChanged('purchase_date') && $asset->eol_explicit == false){
-                $asset_eol_date = Carbon::parse($asset->purchase_date)->addMonths($asset->model->eol)->format('Y-m-d');
-                $asset->update(['asset_eol_date' => $asset_eol_date]);
-            }
             return redirect()->route('hardware.show', $assetId)
                 ->with('success', trans('admin/hardware/message.update.success'));
         }
@@ -459,12 +455,11 @@ class AssetsController extends Controller
      * @since [v3.0]
      * @return Redirect
      */
-    public function getAssetByTag(Request $request, $tag=null)
+    public function getAssetByTag(Request $request)
     {
-        $tag = $tag ? $tag : $request->get('assetTag');
         $topsearch = ($request->get('topsearch') == 'true');
 
-        if (! $asset = Asset::where('asset_tag', '=', $tag)->first()) {
+        if (! $asset = Asset::where('asset_tag', '=', $request->get('assetTag'))->first()) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
         $this->authorize('view', $asset);
@@ -561,11 +556,9 @@ class AssetsController extends Controller
             $asset = Asset::find($assetId);
             $this->authorize('view', $asset);
 
-            return (new Label())
-                ->with('assets', collect([ $asset ]))
+            return view('hardware/labels')
+                ->with('assets', Asset::find($asset))
                 ->with('settings', Setting::getSettings())
-                ->with('template', request()->get('template'))
-                ->with('offset', request()->get('offset'))
                 ->with('bulkedit', false)
                 ->with('count', 0);
         }
@@ -783,7 +776,7 @@ class AssetsController extends Controller
     }
 
     /**
-     * Restore a deleted asset.
+     * Retore a deleted asset.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
