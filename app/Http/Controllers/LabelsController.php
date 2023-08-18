@@ -30,7 +30,7 @@ class LabelsController extends Controller
         $exampleAsset = new Asset();
 
         $exampleAsset->id = 999999;
-        $exampleAsset->name = 'AST-AB-CD-1234';
+        $exampleAsset->name = 'JEN-867-5309';
         $exampleAsset->asset_tag = 'TCA-00001';
         $exampleAsset->serial = 'SN9876543210';
 
