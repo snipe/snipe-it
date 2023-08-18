@@ -86,7 +86,7 @@ class DefaultLabel extends RectangleSheet
 
     public function getColumns() { return $this->columns; }
     public function getRows()    { return $this->rows; }
-    public function getLabelBorder() { return 0.01; }
+    public function getLabelBorder() { return 0; }
 
     public function getLabelWidth()  { return $this->labelWidth; }
     public function getLabelHeight() { return $this->labelHeight; }
