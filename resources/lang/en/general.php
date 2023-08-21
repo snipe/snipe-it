@@ -283,6 +283,7 @@ return [
     'user'					=> 'User',
     'accepted'			    => 'accepted',
     'declined'			    => 'declined',
+    'unassigned'            => 'Unassigned',
     'unaccepted_asset_report' => 'Unaccepted Assets',
     'users'                 => 'Users',
     'viewall'				=> 'View All',
