@@ -545,6 +545,10 @@ class ReportsController extends Controller
                 $header[] = trans('admin/hardware/table.checkout_date');
             }
 
+            if ($request->filled('checkin_date')) {
+                $header[] = trans('admin/hardware/table.last_checkin_date');
+            }
+
             if ($request->filled('expected_checkin')) {
                 $header[] = trans('admin/hardware/form.expected_checkin');
             }
@@ -649,6 +653,13 @@ class ReportsController extends Controller
                 $checkout_end = \Carbon::parse($request->input('checkout_date_end'))->endOfDay();
 
                 $assets->whereBetween('assets.last_checkout', [$checkout_start, $checkout_end]);
+            }
+
+            if (($request->filled('checkin_date_start')) && ($request->filled('checkin_date_end'))) {
+                $assets->whereBetween('last_checkin', [
+                    Carbon::parse($request->input('checkin_date_start'))->startOfDay(),
+                    Carbon::parse($request->input('checkin_date_end'))->endOfDay(),
+                ]);
             }
 
             if (($request->filled('expected_checkin_start')) && ($request->filled('expected_checkin_end'))) {
@@ -833,6 +844,12 @@ class ReportsController extends Controller
 
                     if ($request->filled('checkout_date')) {
                         $row[] = ($asset->last_checkout) ? $asset->last_checkout : '';
+                    }
+
+                    if ($request->filled('checkin_date')) {
+                        $row[] = ($asset->last_checkin)
+                            ? Carbon::parse($asset->last_checkin)->format('Y-m-d')
+                            : '';
                     }
 
                     if ($request->filled('expected_checkin')) {
