@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Asset Maintenance Type',
+        'asset_maintenance_type' => 'Laitteen huollon tyyppi',
         'title'                  => 'Otsikko',
-        'start_date'             => 'Start Date',
-        'completion_date'        => 'Completion Date',
+        'start_date'             => 'Aloituspäivämäärä',
+        'completion_date'        => 'Valmistumispäivämäärä',
         'cost'                   => 'Kustannus',
         'is_warranty'            => 'Takuun parannus',
-        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
+        'asset_maintenance_time' => 'Laitteen huoltoaika (päivissä)',
         'notes'                  => 'Muistiinpanot',
-        'update'                 => 'Update Asset Maintenance',
-        'create'                 => 'Create Asset Maintenance'
+        'update'                 => 'Muokkaa laitehuoltoa',
+        'create'                 => 'Luo laitehuolto'
     ];

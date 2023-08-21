@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Ang Kategrya ay I-clone',
     'create'  							=> 'Magsagawa ng Kategorya',
     'edit'                              => 'I-edit ang Kategorya',
+    'email_will_be_sent_due_to_global_eula' => 'An email will be sent to the user because the global EULA is being used.',
+    'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
     'eula_text'							=> 'Ang Kategorya ng EULA',
     'eula_text_help'					=> 'Ang field na ito ay nagpapahintulot ss iyo na mag-customize ng iyong EULA para sa partikular na uri ng mga asset. Kung mayroon kalang isang EULA para sa lahat ng iyong mga asset, maaari mong i-check ang box sa ibaba para magamit ang pangunahing default.',
     'name'                              => 'Ang Pangalan ng Katergorya',

@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Le modèle n\'existe pas.',
-    'no_association' => 'AUCUN MODELE ASSOCIÉ.',
+    'no_association' => 'ATTENTION ! Le modèle d\'actif pour cet objet est invalide ou manquant !',
     'no_association_fix' => 'Cela va casser les choses de manière bizarre et horrible. Modifiez cette ressource maintenant pour lui assigner un modèle.',
     'assoc_users'	 => 'Ce modèle est actuellement associé à au moins un actif et ne peut pas être supprimé. Veuillez supprimer les actifs associés et essayer à nouveau. ',
 

@@ -2,7 +2,7 @@
 
 return [
     'bulk_delete'		=> 'Потвърдете масовото изтриване на активи',
-    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
+    'bulk_restore'      => 'Потвърдете масовото възстановяване на активите', 
   'bulk_delete_help'	=> 'Прегледайте активите, маркирани за масово изтриване. Веднъж изтрити, активите могат да бъдат възстановени, но те вече няма да бъдат асоциирани с потребителите, на които са изписани в момента.',
   'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
   'bulk_delete_warn'	=> 'Ще бъдат изтрити :asset_count актива.',

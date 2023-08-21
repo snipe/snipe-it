@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Catagóir Clón',
     'create'  							=> 'Cruthaigh Catagóir',
     'edit'                              => 'Cuir Catagóir',
+    'email_will_be_sent_due_to_global_eula' => 'An email will be sent to the user because the global EULA is being used.',
+    'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
     'eula_text'							=> 'Catagóir EULA',
     'eula_text_help'					=> 'Ceadaíonn an réimse seo duit do chuid EULA a shaincheapadh le haghaidh cineálacha sonracha sócmhainní. Mura bhfuil EULA amháin agat ar do chuid sócmhainní go léir, is féidir leat an bosca thíos a sheiceáil chun an réamhshocraithe a úsáid.',
     'name'                              => 'Ainm Chatagóir',

@@ -1,9 +1,9 @@
 <?php
 
 return array(
-    'personal_api_keys' => 'Personal API Keys',
-    'api_key_warning' => 'When generating an API token, be sure to copy it down immediately as they
-                    will not be visible to you again.',
+    'personal_api_keys' => 'Asmeniniai API raktai',
+    'api_key_warning' => 'Generuodami API prieigos raktą būtinai nedelsdami nukopijuokite jį, nes jis
+                    nebebus daugiau matomas.',
     'api_base_url' => 'Your API base url is located at:',
     'api_base_url_endpoint' => '/&lt;endpoint&gt;',
     'api_token_expiration_time' => 'API tokens are set to expire in:',

@@ -17,6 +17,6 @@ return array(
     'use_default_eula'					=> '用<a href="#" data-toggle="modal" data-target="#eulaModal">預設EULA（最終使用者許可協議）</a>進行替換',
     'use_default_eula_disabled'			=> '<del>使用預設EULA（最終使用者許可協議）</del>沒有設定預設EULA（最終使用者許可協議），請在設定中新增一個。',
     'clone'                             => '複製配件',
-    'delete_disabled'                   => 'This accessory cannot be deleted yet because some items are still checked out.',
+    'delete_disabled'                   => '因有部分項目仍被借出，此配件尚無法刪除。',
 
 );

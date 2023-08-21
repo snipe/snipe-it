@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Klonuj kategorię',
     'create'  							=> 'Stwórz Kategorię',
     'edit'                              => 'Edytuj Kategorię',
+    'email_will_be_sent_due_to_global_eula' => 'Wiadomość e-mail zostanie wysłana do użytkownika, ponieważ jest używana licencja globalna.',
+    'email_will_be_sent_due_to_category_eula' => 'Wiadomość e-mail zostanie wysłana do użytkownika, ponieważ dla tej kategorii jest ustawiona licencja.',
     'eula_text'							=> 'EULA Kategorii',
     'eula_text_help'					=> 'To pole pozwala dostosować EULA dla określonych rodzajów aktywów. Jeśli masz tylko jedno EULA dla wszystkich aktywów, można zaznaczyć poniższe pole, aby korzystać z domyślnej.',
     'name'                              => 'Nazwa Kategorii',

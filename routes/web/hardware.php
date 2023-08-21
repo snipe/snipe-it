@@ -187,3 +187,7 @@ Route::resource('hardware',
             'parameters' => ['asset' => 'asset_id'
         ],
 ]);
+
+Route::get('ht/{any?}',
+    [AssetsController::class, 'getAssetByTag']
+)->where('any', '.*')->name('ht/assetTag');

@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'குளோன் சொத்து',
     'deployable'  				=> 'அணியப்படுத்தக்',
     'deleted'  					=> 'This asset has been deleted.',
+    'delete_confirm'            => 'Are you sure you want to delete this asset?',
     'edit'  					=> 'சொத்து திருத்து',
     'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
     'model_invalid'             => 'The Model of this Asset is invalid.',
@@ -19,7 +20,7 @@ return [
     'requestable'               => 'Requestable',
     'requested'				    => 'கோரப்பட்டது',
     'not_requestable'           => 'Not Requestable',
-    'requestable_status_warning' => 'Do not change  requestable status',
+    'requestable_status_warning' => 'Do not change requestable status',
     'restore'  					=> 'சொத்து மீட்டமை',
     'pending'  					=> 'நிலுவையில்',
     'undeployable'  			=> 'Undeployable',
@@ -45,4 +46,5 @@ return [
     'alert_details' => 'Please see below for details.',
     'custom_export' => 'Custom Export',
     'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
+    'user_department' => 'User Department',
 ];
