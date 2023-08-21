@@ -109,6 +109,23 @@ Form::macro('digit_separator', function ($name = 'digit_separator', $selected = 
     return $select;
 });
 
+
+Form::macro('name_display_format', function ($name = 'name_display_format', $selected = null, $class = null) {
+    $formats = [
+        'first_last' => trans('general.firstname_lastname_display'),
+        'last_first' => trans('general.lastname_firstname_display'),
+    ];
+
+    $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%" aria-label="'.$name.'">';
+    foreach ($formats as $format => $label) {
+        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$label.'</option> '."\n";
+    }
+
+    $select .= '</select>';
+
+    return $select;
+});
+
 /**
  * Barcode macro
  * Generates the dropdown menu of available 1D barcodes
