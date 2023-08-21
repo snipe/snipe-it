@@ -606,6 +606,16 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
     ); // end imports API routes
 
 
+        /**
+         * Labels API routes
+         */
+        Route::group(['prefix' => 'labels'], function() {
+            Route::get('{name}', [ Api\LabelsController::class, 'show'])
+                ->where('name', '.*')
+                ->name('api.labels.show');
+            Route::get('', [ Api\LabelsController::class, 'index'])
+                ->name('api.labels.index');
+        });
 
         /**
          * Licenses API routes

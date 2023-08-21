@@ -1414,6 +1414,12 @@ class Asset extends Depreciable
                     });
                 }
 
+                if ($fieldname == 'rtd_location') {
+                    $query->whereHas('defaultLoc', function ($query) use ($search_val) {
+                        $query->where('locations.name', 'LIKE', '%'.$search_val.'%');
+                    });
+                }
+
                 if ($fieldname =='assigned_to') {
                     $query->whereHasMorph('assignedTo', [User::class], function ($query) use ($search_val) {
                         $query->where(function ($query) use ($search_val) {
