@@ -655,10 +655,11 @@ class ReportsController extends Controller
                 $assets->whereBetween('assets.last_checkout', [$checkout_start, $checkout_end]);
             }
 
-            if (($request->filled('checkin_date_start')) && ($request->filled('checkin_date_end'))) {
+            if (($request->filled('checkin_date_start'))) {
                 $assets->whereBetween('last_checkin', [
                     Carbon::parse($request->input('checkin_date_start'))->startOfDay(),
-                    Carbon::parse($request->input('checkin_date_end'))->endOfDay(),
+                    // use today's date is `checkin_date_end` is not provided
+                    Carbon::parse($request->input('checkin_date_end', now()))->endOfDay(),
                 ]);
             }
 
