@@ -433,7 +433,7 @@ class UserPresenter extends Presenter
      */
     public function nameUrl()
     {
-        return (string) link_to_route('users.show', $this->fullName(), $this->id);
+        return (string) link_to_route('users.show', $this->getFullNameAttribute(), $this->id);
     }
 
     /**
