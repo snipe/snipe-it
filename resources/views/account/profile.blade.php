@@ -46,7 +46,7 @@
         <!-- Language -->
         <div class="form-group {{ $errors->has('locale') ? 'has-error' : '' }}">
           <label class="col-md-3 control-label" for="locale">{{ trans('general.language') }}</label>
-          <div class="col-md-9">
+          <div class="col-md-7">
 
             @if (!config('app.lock_passwords'))
               {!! Form::locales('locale', old('locale', $user->locale), 'select2') !!}
