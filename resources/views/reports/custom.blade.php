@@ -7,8 +7,33 @@
 @stop
 
 @section('header_right')
-<a href="{{ URL::previous() }}" class="btn btn-primary pull-right">
-  {{ trans('general.back') }}</a>
+       <div>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+            {{ trans('general.create') }}
+            <strong class="caret"></strong>
+        </a>
+        <ul class="dropdown-menu" style="position:relative;">
+            @can('create', \App\Models\Asset::class)
+                <li {!! (Request::is('hardware/create') ? 'class="active>"' : '') !!}>
+                    <a href="{{ route('hardware.create') }}" tabindex="-1">
+                        <i class="fas fa-barcode fa-fw" aria-hidden="true"></i>
+                        {{ trans('general.asset') }}
+                    </a>
+                </li>
+            @endcan
+                @can('create', \App\Models\Asset::class)
+                    <li {!! (Request::is('hardware/create') ? 'class="active>"' : '') !!}>
+                        <a href="{{ route('hardware.create') }}" tabindex="-1">
+                            <i class="fas fa-barcode fa-fw" aria-hidden="true"></i>
+                            {{ trans('general.asset') }}
+                        </a>
+                    </li>
+                @endcan
+        </ul>
+<a href="#" class="btn btn-primary">
+  {{ trans('admin/reports/general.apply_template') }}</a>
+<a href="#" class="btn btn-primary">
+  {{ trans('admin/reports/general.save_template') }}</a></div>
 @stop
 
 
