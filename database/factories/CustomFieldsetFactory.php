@@ -43,4 +43,13 @@ class CustomFieldsetFactory extends Factory
             ];
         });
     }
+
+    public function complicated()
+    {
+        return $this->state(function () {
+            return [
+                'name' => 'sldkfjsldkfjsdlkjf' //FIXME
+            ];
+        });
+    }
 }

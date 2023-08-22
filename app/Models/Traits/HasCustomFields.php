@@ -37,6 +37,7 @@ trait HasCustomFields
     public function initializeHasCustomFields()
     {
         // FIXME - does not work. The Internet says that this is too 'late' - needs to happen in boot(???)
+        // FIXME (I think this is all done with bootHasCustomFields - that's doing the heavy lifting here)
         $this->addObservableEvents([ //is this it? i think this is needed from that blog post
             'validating',
             'eloquent.validating:*' // i think this isn't doing what I was expecting
@@ -64,16 +65,26 @@ trait HasCustomFields
      * (if this is in PHP 8.0, can we just put that as the signature?)
      *
      * This is the main method you have to override. It should either return an
-     * Object who you can call `->fieldset` on and get a fieldset object, and als
+     * Object who you can call `->fieldset` on and get a fieldset object, and also
      * be able to call `->id` on to get a unique key to be able to show custom fields.
      * For example, for Assets, the element that is returned is the 'model' for the Asset.
      * For something like Users, which will probably have only one universal set of custom fields,
      * it should just return the Fieldset ID for it. Or, if there are no custom fields, it should
      * return null
      */
-    abstract public function getFieldsetKey(); // : Object|int|null ????
+    abstract public function getFieldsetKey(): Object|int|null; // php v8 minimum, GOOD. TODO
 
-    abstract public static function getFieldsetUsers(int $fieldset_id): Collection;
+    /***********************
+     * @param int $fieldset_id
+     * @return Collection
+     *
+     * This is the main method you need to override to return a list of things that are *using* this fieldset
+     * The format is an array with keys: a URL, and values. So, for assets, it might return
+     * {
+     *    "models/14" => "MacBook Pro 13 (model no: 12345)"
+     * }
+     */
+    abstract public static function getFieldsetUsers(int $fieldset_id): array;
 
     public static function augmentValidationRulesForCustomFields($model) {
         \Log::debug("Augmenting validation rules for custom fields!!!!!!");
@@ -111,6 +122,7 @@ trait HasCustomFields
             return;
         }
 
+        // TODO - begninng to think my custom scope really should be just an integer :/
         return DefaultValuesForCustomFields::where('type',self::class)
             ->where('custom_field_id',$field->id)
             ->where('item_pivot_id',$key_id)->first()?->default_value;

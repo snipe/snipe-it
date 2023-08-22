@@ -20,6 +20,7 @@
 
         <div class="nav-tabs-custom">
           <ul class="nav nav-tabs">
+            {{-- TODO - generalize this so it's less 'hardcoded' --}}
             <li {!! !Request::query('tab') ? 'class="active"': '' !!}><a href="{{ route("fields.index",["tab" => 0]) }}">Asset Custom Fields</a></li>
             <li {!! Request::query('tab') == 1 ? 'class="active"': '' !!}><a href="{{ route("fields.index",["tab" => 1]) }}">Users</a></li>
             <li {!! Request::query('tab') == 2 ? 'class="active"': '' !!}><a href="{{ route("fields.index",["tab" => 2]) }}">Accessories</a></li>
@@ -28,12 +29,6 @@
       </div>
     </div>
   </div>
-</div>
-TAB IS: {{ Request::query('tab') }}
-<div class="row">
-  <a href="?tab=0">Asset</a>
-  <a href="?tab=1">Users</a>
-  <a href="?tab=2">Accessories</a>
 </div>
 <div class="row">
   <div class="col-md-12">
@@ -69,7 +64,7 @@ TAB IS: {{ Request::query('tab') }}
             <tr>
               <th>{{ trans('general.name') }}</th>
               <th>{{ trans('admin/custom_fields/general.qty_fields') }}</th>
-              <th>{{ trans('admin/custom_fields/general.used_by_models') }}</th>
+              <th>{{ trans('admin/custom_fields/general.used_by_models') }}{{-- FIXME --}}</th>
               <th>{{ trans('table.actions') }}</th>
             </tr>
           </thead>
@@ -85,9 +80,9 @@ TAB IS: {{ Request::query('tab') }}
                 {{ $fieldset->fields->count() }}
               </td>
               <td>
-                @foreach($fieldset->customizable() as $customizable)
-                  {{-- <a href="{{ route('models.show', $model->id) }}" class="label label-default">{{ $model->name }}{{ ($model->model_number) ? ' ('.$model->model_number.')' : '' }}</a> --}}
-                  {{ get_class($customizable) }}: {{ $customizable->name }}<br />
+                @foreach($fieldset->customizable() as $url => $name)
+                  <a href="{{ $url }}" class="label label-default">{{ $name }}</a>
+                  {{-- get_class($customizable) }}: {{ $customizable->name<br /> --}}
                 @endforeach
               </td>
               <td>
@@ -103,7 +98,7 @@ TAB IS: {{ Request::query('tab') }}
 
                 @can('delete', $fieldset)
                 {{ Form::open(['route' => array('fieldsets.destroy', $fieldset->id), 'method' => 'delete','style' => 'display:inline-block']) }}
-                  @if($fieldset->customizable()->count() > 0)
+                  @if(count($fieldset->customizable()) > 0 /* TODO - hate 'customizable' */)
                   <button type="submit" class="btn btn-danger btn-sm disabled" disabled><i class="fas fa-trash"></i></button>
                   @else
                   <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>

@@ -159,7 +159,7 @@ class AssetModelsController extends Controller
         $model->notes = $request->input('notes');
         $model->requestable = $request->input('requestable', '0');
 
-        $this->removeCustomFieldsDefaultValues($model);
+        DefaultValuesForCustomFields::forPivot($model, Asset::class)->delete();
 
         if ($request->input('fieldset_id') == '') {
             $model->fieldset_id = null;
@@ -492,13 +492,4 @@ class AssetModelsController extends Controller
         return true;
     }
 
-    /**
-     * Removes all default values
-     *
-     * @return void
-     */
-    private function removeCustomFieldsDefaultValues(AssetModel $model)
-    {
-        $model->defaultValues()->detach(); //FIXME or accept this?
-    }
 }

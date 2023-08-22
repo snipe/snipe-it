@@ -45,16 +45,20 @@ class Asset extends Depreciable
 
     protected $observables = ['validating','validated']; //huh. okay? FIXME - this is not the right way
 
-    public function getFieldset(): ?CustomFieldset {
+    public function getFieldset(): ?CustomFieldset { //FIXME - we don't need this anymore.
         return $this->model->fieldset;
     }
 
-    public function getFieldsetKey() {
-        return $this->model; //EXPERIMENTAL - but this would probably do it :/
+    public function getFieldsetKey(): object|int|null {
+        return $this->model;
     }
 
-    public static function getFieldsetUsers(int $fieldset_id): Collection {
-        return AssetModel::where("fieldset_id",$fieldset_id)->get();
+    public static function getFieldsetUsers(int $fieldset_id): array {
+        $models = [];
+        foreach(AssetModel::where("fieldset_id",$fieldset_id)->get() as $model) {
+            $models[route('models.show', $model->id)] = $model->name.(($model->model_number) ? ' ('.$model->model_number.')' : '');
+        }
+        return $models;
     }
     /**
      * Run after the checkout acceptance was declined by the user

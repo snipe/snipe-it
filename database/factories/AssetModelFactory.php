@@ -429,4 +429,20 @@ class AssetModelFactory extends Factory
             ];
         });
     }
+
+    public function complicated()
+    {
+        return $this->state(function () {
+            return [
+                'name' => 'Complicated fieldset'
+                'fields' => [
+                    CustomField::factory()->macAddress(),
+                    CustomField::factory()->date_field()????
+                    CustomField::factory()->text_field_that_is_required? // it's a pivot?
+                        ->hasAttached(
+            )
+                ]
+            ];
+        })>hasAttached(/* the custom field */, ['required' => true]);
+    }
 }

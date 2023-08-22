@@ -35,7 +35,7 @@ class CustomFieldsetsController extends Controller
     public function index()
     {
         $this->authorize('index', CustomField::class);
-        $fieldsets = CustomFieldset::withCount('fields as fields_count', 'models as models_count')->get(); //FIXME maybe customizables_count or something? - also this won't work as is, customizables is *NOT* a relation!
+        $fieldsets = CustomFieldset::withCount('fields as fields_count')->get();
 
         return (new CustomFieldsetsTransformer)->transformCustomFieldsets($fieldsets, $fieldsets->count());
     }

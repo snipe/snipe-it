@@ -575,6 +575,8 @@ class Helper
 
     /**
      * Get all of the different types of custom fields there are
+     * TODO - how to make this more general? Or more useful? or more dynamic?
+     * idea - key of classname, *value* of trans? (thus having to make this a method, which is fine)
      */
     static $itemtypes_having_custom_fields = [
         0 => \App\Models\Asset::class,

@@ -152,18 +152,6 @@ class AssetModel extends SnipeModel
     }
 
     /**
-     * Establishes the model -> custom field default values relationship
-     *
-     * @author hannah tinkler
-     * @since [v4.3]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
-     */
-    public function defaultValues() // FIXME or DELETEME
-    {
-        return $this->belongsToMany(\App\Models\CustomField::class, 'default_values_for_custom_fields')->wherePivot(['i dunno' => 'man'])->withPivot('default_value'); // FIXME!!!
-    }
-
-    /**
      * Gets the full url for the image
      *
      * @todo this should probably be moved

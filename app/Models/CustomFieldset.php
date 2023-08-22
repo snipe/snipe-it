@@ -124,7 +124,11 @@ class CustomFieldset extends Model
                     $rule[] = 'unique_undeleted';
             }
 
-            array_push($rule, $field->attributes['format']);
+            if($field->format == 'date') {
+                $rule[] = 'date_format:Y-m-d';
+            } else {
+                array_push($rule, $field->attributes['format']);
+            }
             $rules[$field->db_column_name()] = $rule;
         }
 

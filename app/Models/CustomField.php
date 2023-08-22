@@ -194,51 +194,23 @@ class CustomField extends Model
     }
 
     /**
-     * Establishes the customfield -> default values relationship
-     *
-     * @author Hannah Tinkler
-     * @since [v3.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
-     */
-    public function defaultValues() // FIXME
-    {
-        /*  eeek, another direct reference to an AssetModel!!
-            So I think there might be a way to do this, but it won't be a 'straight relation' anymore.
-            We know our own 'type' right? it's $this->type, and that's a class.
-            (I mean, shit, should I do a polymorphic relationship, and maybe that would "just work"?)
-            Well, if I can't, then I can just programatically do what I need - 
-
-            I know my type.
-            I can look at the class of my type and find out my table name.
-            I can query that table. 
-
-            models_custom_fields is a tough one, but maybe we just migrate that into 'custom_field_default_values'?
-            oh, but how could I tell the difference between asset->model_id 7's default values, versus accessories->category_id 7's default values?
-            Maybe another morphy 'type' value here? I could see it.
-            Anyhow, I ought to be able to do that - figure out my the name of the field that holds my pivot field, figure out my type,
-            query all of the custom_fields_defaults or whatever I end up calling it with both my *type* ahd the value of my pivot field.
-            TODO - delete these comments once I have this working and can even frickin' explain it, halfway-reasonably.
-        */
-        return $this->belongsToMany(\App\Models\AssetModel::class, 'models_custom_fields')->withPivot('default_value'); // FIXME !!!
-    }
-
-    /**
-     * Returns the default value for a given model using the defaultValues
+     * Returns the default value for a given 'item' using the defaultValues
      * relationship
      *
      * @param  int $modelId
      * @return string
      */
-    public function defaultValue($modelId) //FIXME *KEEP* - uncomplicate this please (and generalize)
+    public function defaultValue($pivot_id)
     {
-        /* if we *can* figure out how to fix defaultValues, this will work as-is
-        (barring the renaming that we will want to do)
+        /*
+           below, you might think you need to add:
+
+           where('type', $this->type),
+
+           but the type can be inferred from by the custom_field itself (which also has a type)
+           can't use forPivot() here because we don't have an object yet. (TODO?)
         */
-        return $this->defaultValues->filter(function ($item) use ($modelId) {
-            return $item->pivot->asset_model_id == $modelId;
-        })->map(function ($item) {
-            return $item->pivot->default_value;
-        })->first();
+        DefaultValuesForCustomFields::where('item_pivot_id', $pivot_id)->where('custom_field_id',$this->id)->first()?->default_value; //TODO - php8-only operator!
     }
 
     /**
