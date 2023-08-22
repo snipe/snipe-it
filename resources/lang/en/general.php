@@ -123,7 +123,6 @@ return [
     'firstname_lastname_display'	=> 'First Name Last Name (Jane Smith)',
     'lastname_firstname_display'	=> 'Last Name First Name (Smith Jane)',
     'name_display_format'	=> 'Name Display Format',
-    'name_display_help'	    => 'This is generally only used in countries where it is common to write  ',
     'first'					=> 'First',
     'firstnamelastname'     => 'First Name Last Name (janesmith@example.com)',
     'lastname_firstinitial' => 'Last Name First Initial (smith_j@example.com)',
