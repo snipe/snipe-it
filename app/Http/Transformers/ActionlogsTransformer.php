@@ -52,12 +52,18 @@ class ActionlogsTransformer
 
             if ($meta_array) {
                 foreach ($meta_array as $fieldname => $fieldata) {
-                    $clean_meta[$fieldname]['old'] = $this->clean_field($fieldata->old);
-                    $clean_meta[$fieldname]['new'] = $this->clean_field($fieldata->new);
-                }
+                    if ((strlen($this->clean_field($fieldata->old)) == 200) || (strlen($this->clean_field($fieldata->new))== 200)) {
+                        $clean_meta[$fieldname]['old'] = "encrypted";
+                        $clean_meta[$fieldname]['new'] = "encrypted";
+                    } else {
+                        $clean_meta[$fieldname]['old'] = $this->clean_field($fieldata->old);
+                        $clean_meta[$fieldname]['new'] = $this->clean_field($fieldata->new);
+                    }
 
+                }
+                \Log::info("Clean Meta is: " . print_r($clean_meta, true));
+                $clean_meta = $this->changedInfo($clean_meta);
             }
-            $clean_meta= $this->changedInfo($clean_meta);
         }
 
         $file_url = '';
@@ -120,7 +126,7 @@ class ActionlogsTransformer
             'log_meta'          => ((isset($clean_meta)) && (is_array($clean_meta))) ? $clean_meta: null,
             'action_date'   => ($actionlog->action_date) ? Helper::getFormattedDateObject($actionlog->action_date, 'datetime'): Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
         ];
-        //\Log::info("Clean Meta is: ".print_r($clean_meta,true));
+//        \Log::info("Clean Meta is: ".print_r($clean_meta,true));
 
         //dd($array);
         return $array;
@@ -175,6 +181,11 @@ class ActionlogsTransformer
             $clean_meta['supplier_id']['new'] = $clean_meta['supplier_id']['new'] ? "[id: ".$clean_meta['supplier_id']['new']."] ".Supplier::find($clean_meta['supplier_id']['new'])->name : trans('general.unassigned');
             $clean_meta['Supplier'] = $clean_meta['supplier_id'];
             unset($clean_meta['supplier_id']);
+        }
+        if(array_key_exists('asset_eol_date', $clean_meta)) {
+
+            $clean_meta['EOL date'] = $clean_meta['asset_eol_date'];
+            unset($clean_meta['asset_eol_date']);
         }
 
         return $clean_meta;
