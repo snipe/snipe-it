@@ -115,6 +115,23 @@
 @endif
 
 
+@if ($messages = Session::get('bulk_errors'))
+<div class="col-md-12">
+    <div class="alert alert alert-danger fade in">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
+        <strong>{{ trans('general.notification_error') }} </strong>
+       {{ trans('general.notification_bulk_error_hint') }}
+            @foreach($messages as $message) 
+                <ul>
+                    <li>{{ $message }}</li>
+                </ul> 
+            @endforeach
+    </div>
+</div>
+@endif
+
+
 @if ($message = Session::get('warning'))
 <div class="col-md-12">
     <div class="alert alert-warning fade in">
