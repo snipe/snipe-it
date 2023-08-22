@@ -125,7 +125,7 @@ class CustomFieldsetsController extends Controller
         $this->authorize('delete', CustomField::class);
         $fieldset = CustomFieldset::findOrFail($id);
 
-        $modelsCount = $fieldset->models->count(); //this one needs changing! FIXME
+        $modelsCount = $fieldset->customizable()->count();
         $fieldsCount = $fieldset->fields->count();
 
         if (($modelsCount > 0) || ($fieldsCount > 0)) {

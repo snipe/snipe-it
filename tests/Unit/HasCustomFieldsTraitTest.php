@@ -42,9 +42,12 @@ class HasCustomFieldsTraitTest extends TestCase
 
     public function testDate()
     {
+//        \Log::error("uh, what the heck is going on here?!");
         $asset = Asset::factory()->withComplicatedCustomFields()->make();
         $asset->_snipeit_plain_text_3 = 'some text';
         $asset->_snipeit_date_4 = '1/2/2023';
+//        $asset->save();
+//        dd($asset);
         $this->assertFalse($asset->save(),'Should fail due to incorrectly formatted date.');
     }
 
@@ -62,6 +65,15 @@ class HasCustomFieldsTraitTest extends TestCase
         $asset->_snipeit_date_4 = "2023-01-02";
         $asset->_snipeit_mac_address_explicit_2 = "ff:ff:ff:ff:ff:ff";
         $this->assertTrue($asset->save(),"Asset should've saved okay, the one required field was filled out, and so were the others");
+    }
+
+    public function testJsonPost()
+    {
+        $asset = Asset::factory()->withComplicatedCustomFields()->make();
+        $response = $this->postJson('/api/v1/hardware', [
+
+        ]);
+        $response->assertStatus(200);
     }
 
 }
