@@ -112,7 +112,7 @@ class MoveUploadsToNewDisk extends Command
                     $filename = basename($private_upload[$x]);
 
                     try {
-                        Storage::put($private_type . '/' . $filename, file_get_contents($private_upload[$i]));
+                        Storage::put($private_type . '/' . $filename, file_get_contents($private_upload[$x]));
                         $new_url = Storage::url($private_type . '/' . $filename, $filename);
                         $this->info($type_count . '. PRIVATE: ' . $filename . ' was copied to ' . $new_url);
                     } catch (\Exception $e) {
