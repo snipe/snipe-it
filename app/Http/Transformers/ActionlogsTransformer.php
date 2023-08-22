@@ -56,7 +56,7 @@ class ActionlogsTransformer
                 foreach ($meta_array as $fieldname => $fieldata) {
                     if( str_starts_with($fieldname, '_snipeit_')){
 
-                        if( $custom_field->where('name', '=', $fieldname)->where('field_encrypted', true)){
+                        if( $custom_field->where('db_column', '=', $fieldname)->where('field_encrypted', true)){
                             $clean_meta[$fieldname]['old'] = "encrypted";
                             $clean_meta[$fieldname]['new'] = "encrypted";
                         }
