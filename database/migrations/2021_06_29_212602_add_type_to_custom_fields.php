@@ -18,9 +18,9 @@ class AddTypeToCustomFields extends Migration
     {
         Schema::table('custom_fields', function (Blueprint $table) {
             //
-            $table->text('type');
+            $table->text('type')->default('App\\Models\\Asset'); // TODO this default is needed for a not-nullable column, I guess? I don't like this because it will silently 'fix' errors we should properly 'fix'
         });
-        CustomField::query()->update(['type' => Asset::class]);
+        CustomField::query()->update(['type' => Asset::class]); // TODO - is this still necessary with that 'default'?
     }
 
     /**

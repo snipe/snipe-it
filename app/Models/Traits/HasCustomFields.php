@@ -20,8 +20,6 @@ use App\Models\DefaultValuesForCustomFields;
 
 trait HasCustomFields
 {
-    private bool $_filled = false;
-
     protected static function bootHasCustomFields()
     {
         // https://tech.chrishardie.com/2022/define-fire-listen-custom-laravel-model-events-trait/
@@ -150,18 +148,5 @@ trait HasCustomFields
                 }
             }
         }
-    }
-
-    public function save($options = []) {
-        \Log::debug("Trait save method invoked");
-        // FIXME - warning!!!!!!!!
-        // I think this won't work if you try to do a Test or a console command - e.g.
-        // $x = new Model(); $x->save() - will throw exception because filled was never called :(
-        // CONFIRMED VIA TINKER - POOP. FIXME!!!!
-        if (!$this->_filled) {
-            \Log::debug("Failed to do 'filled' error - kerplowee");
-            throw new \Exception("You must customFill() custom fields out before saving!");
-        }
-        parent::save($options);
     }
 }

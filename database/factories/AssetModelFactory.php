@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\AssetModel;
+use App\Models\CustomField;
 use App\Models\CustomFieldset;
 use App\Models\Depreciation;
 use App\Models\Manufacturer;
@@ -435,14 +436,7 @@ class AssetModelFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'Complicated fieldset'
-                'fields' => [
-                    CustomField::factory()->macAddress(),
-                    CustomField::factory()->date_field()????
-                    CustomField::factory()->text_field_that_is_required? // it's a pivot?
-                        ->hasAttached(
-            )
-                ]
             ];
-        })>hasAttached(/* the custom field */, ['required' => true]);
+        })->for(CustomFieldSet::factory()->complicated(),'fieldset');
     }
 }

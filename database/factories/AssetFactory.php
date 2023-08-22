@@ -339,7 +339,7 @@ class AssetFactory extends Factory
         return $this->state(['requestable' => false]);
     }
 
-    public function complicated()
+    public function withComplicatedCustomFields()
     {
         return $this->state(function () {
             return [

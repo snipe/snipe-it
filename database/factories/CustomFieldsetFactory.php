@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\CustomField;
 use App\Models\CustomFieldset;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -46,10 +47,13 @@ class CustomFieldsetFactory extends Factory
 
     public function complicated()
     {
+        //$mac = CustomField::factory()->macAddress()->create();
         return $this->state(function () {
             return [
-                'name' => 'sldkfjsldkfjsdlkjf' //FIXME
+                'name' => 'complicated'
             ];
-        });
+        })  ->hasAttached(CustomField::factory()->macAddress(),['required' => false, 'order' => 0],'fields')
+            ->hasAttached(CustomField::factory()->plainText(),['required' => true,'order' => 1],'fields')
+            ->hasAttached(CustomField::factory()->date(),['required' => false, 'order' => 2],'fields');
     }
 }

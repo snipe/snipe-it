@@ -18,7 +18,7 @@ class AddTypeToCustomFieldsets extends Migration
     {
         Schema::table('custom_fieldsets', function (Blueprint $table) {
             //
-            $table->text('type');
+            $table->text('type')->default('App\\Models\\Asset');
         });
         CustomFieldset::query()->update(['type' => Asset::class]);
     }
