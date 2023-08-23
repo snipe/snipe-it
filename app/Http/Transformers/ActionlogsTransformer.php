@@ -151,10 +151,11 @@ class ActionlogsTransformer
      * @param  array $clean_meta
      * @return array
      */
-    public function changedInfo(array $clean_meta)
-    {   $location = Location::withTrashed()->all();
-        $company = Company::withTrashed()->all();
-        $supplier = Supplier::withTrashed()->all();
+    public function changedInfo(array $clean_meta) {
+
+        $location = Location::withTrashed()->get();
+        $company = Company::withTrashed()->get();
+        $supplier = Supplier::withTrashed()->get();
         $model = AssetModel::withTrashed()->get();
 
 
