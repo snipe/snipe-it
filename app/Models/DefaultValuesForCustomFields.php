@@ -17,17 +17,18 @@ class DefaultValuesForCustomFields extends Model
 
     public $timestamps = false;
 
-    public function pivot() {
-        //should return a Model?
-        return $this->belongsTo('models'); // FIXME - fartsville
-    }
-
     public function field() {
         return $this->belongsTo('custom_fields');
     }
 
-    // TODO: might be getting overly-fancy here; maybe just want to do an ID?
+    // There is, effectively, another 'relation' here, but it's weirdly polymorphic
+    // and impossible to represent in Laravel.
+    // we have a 'type', and we have an 'item_pivot_id' -
+    // For example, in Assets the 'type' would be App\Models\Asset, and the 'item_pivot_id' would be a model_id
+    // I can't come up with any way to represent this in Laravel/Eloquent
+
+    // TODO: might be getting overly-fancy here; maybe just want to do an ID? Instead of an Eloquent Model?
     public function scopeForPivot(Builder $query, Model $item, string $class) {
-        return $query->where('item_pivot_id', $item->id)->where('type', $class); //FIXME - test.
+        return $query->where('item_pivot_id', $item->id)->where('type', $class);
     }
 }

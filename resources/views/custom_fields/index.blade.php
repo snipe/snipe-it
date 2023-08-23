@@ -80,7 +80,7 @@
                 {{ $fieldset->fields->count() }}
               </td>
               <td>
-                @foreach($fieldset->customizable() as $url => $name)
+                @foreach($fieldset->customizables() as $url => $name)
                   <a href="{{ $url }}" class="label label-default">{{ $name }}</a>
                   {{-- get_class($customizable) }}: {{ $customizable->name<br /> --}}
                 @endforeach
@@ -98,7 +98,7 @@
 
                 @can('delete', $fieldset)
                 {{ Form::open(['route' => array('fieldsets.destroy', $fieldset->id), 'method' => 'delete','style' => 'display:inline-block']) }}
-                  @if(count($fieldset->customizable()) > 0 /* TODO - hate 'customizable' */)
+                  @if(count($fieldset->customizables()) > 0 /* TODO - hate 'customizables' */)
                   <button type="submit" class="btn btn-danger btn-sm disabled" disabled><i class="fas fa-trash"></i></button>
                   @else
                   <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>

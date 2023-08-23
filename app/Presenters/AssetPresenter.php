@@ -4,6 +4,7 @@ namespace App\Presenters;
 
 use App\Models\Asset;
 use App\Models\CustomField;
+use App\Models\CustomFieldset;
 use DateTime;
 
 /**
@@ -283,12 +284,16 @@ class AssetPresenter extends Presenter
         // models. We only pass the fieldsets that pertain to each asset (via their model) so that we
         // don't junk up the REST API with tons of custom fields that don't apply
 
-        // FIXME - I'm not sure this is the right approach!
-//        $fields = CustomField::whereHas('fieldset', function ($query) {
-//            $query->whereHas('models'); // BING - something here is bust. fieldset no longer has 'models'
-//        })->get();
-        $fields = CustomField::where("type", Asset::class)->get();
+        //only get fieldsets that have fields
+        $fieldsets = CustomFieldset::where("type", Asset::class)->whereHas('fields')->get();
+        $ids = [];
+        foreach($fieldsets as $fieldset) {
+            if (count($fieldset->customizables()) > 0) { //only get fieldsets that are 'in use'
+                $ids[] = $fieldset->id;
+            }
+        }
 
+        $fields = CustomField::whereIn('id',$ids)->get();
         // Note: We do not need to e() escape the field names here, as they are already escaped when
         // they are presented in the blade view. If we escape them here, custom fields with quotes in their
         // name can break the listings page. - snipe

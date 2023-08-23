@@ -43,12 +43,6 @@ class Asset extends Depreciable
 
     use Acceptable, HasCustomFields;
 
-    protected $observables = ['validating','validated']; //huh. okay? FIXME - this is not the right way
-
-    public function getFieldset(): ?CustomFieldset { //FIXME - we don't need this anymore.
-        return $this->model->fieldset;
-    }
-
     public function getFieldsetKey(): object|int|null {
         return $this->model;
     }

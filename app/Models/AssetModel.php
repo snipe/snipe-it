@@ -146,9 +146,10 @@ class AssetModel extends SnipeModel
      * @since [v2.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function fieldset() //FIXME?!? or USEME?
+    public function fieldset()
     {
-        return $this->belongsTo(CustomFieldset::class, 'fieldset_id');
+        // this is actually OK - we don't *need* to do this, but it's okay to make references from Model to fieldset
+        return $this->belongsTo(\App\Models\CustomFieldset::class, 'fieldset_id');
     }
 
     /**

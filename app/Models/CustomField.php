@@ -77,10 +77,6 @@ class CustomField extends Model
 
     ];
 
-    public static $table_name = 'assets'; //this is no longer in use, but is needed for some migrations (I think?)
-    // or maybe we do a back-in-time edit-migration on /Users/uberbrady/Documents/grokability/snipe-it/database/migrations/2017_01_25_063357_fix_utf8_custom_field_column_names.php:26 ???
-    // TODO or maybe FIXME?
-
     /**
      * Convert the custom field's name property to a db-safe string.
      *
@@ -167,10 +163,9 @@ class CustomField extends Model
 
     public function getTableName()
     {
-        //FIXME - this is dangerous; I bet you could find a sneaky way to inject a weird class and do something 'bad' here.
         $type = $this->type;
         $instance = new $type();
-        return $instance->getTable(); //okay, THIS seems to want the 'type' to be the *final target* of the relation...
+        return $instance->getTable();
     }
 
     /**

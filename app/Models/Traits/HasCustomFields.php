@@ -30,22 +30,11 @@ trait HasCustomFields
             self::augmentValidationRulesForCustomFields($model);
         });
     }
-    // Register the existence of the publishing model event
-
-    public function initializeHasCustomFields()
-    {
-        // FIXME - does not work. The Internet says that this is too 'late' - needs to happen in boot(???)
-        // FIXME (I think this is all done with bootHasCustomFields - that's doing the heavy lifting here)
-        $this->addObservableEvents([ //is this it? i think this is needed from that blog post
-            'validating',
-            'eloquent.validating:*' // i think this isn't doing what I was expecting
-        ]);
-    }
 
     /***************
      * @return CustomFieldset|null
      *
-     * This function by default will use the "getFieldsetKey() method to
+     * This function by default will use the "getFieldsetKey()" method to
      * return the customFieldset (or null) for this particular item. If
      * necessary, you can override this method if your getFieldsetKey()
      * cannot respond to `->fieldset` or `->id`.
@@ -105,17 +94,14 @@ trait HasCustomFields
 
     public function getDefaultValue(CustomField $field)
     {
-        // FIXME - should rename that table, and add a column for something-type? or is the namespacedness enough?
         $pivot = $this->getFieldsetKey(); // TODO - feels copypasta-ish?
-        \Log::debug("PIVOT IS: $pivot");
         $key_id = null;
-        if(is_int($pivot)) { //*WHY* does this code repeat?!
+
+        if( is_int($pivot) ) { // TODO: *WHY* does this code repeat?!
             $key_id = $pivot; // now we're done
-        } elseif(is_object($pivot)) {
-            $key_id = $pivot?->id; //PHP 8.0 ONLY!!!! TODO or FIXME ?
+        } elseif( is_object($pivot) ) {
+            $key_id = $pivot?->id;
         }
-        \Log::debug("Key_id is: $key_id");
-        \Log::debug("field_id is: ".$field->id);
         if(is_null($key_id)) {
             return;
         }
@@ -136,9 +122,9 @@ trait HasCustomFields
                     $field_value = $request->input($field->db_column);
                 }
 
-                if ($shouldSetDefaults && (is_null($field_value) || $field_value === '')) { //FIXME - null-safe? empty-string safe? 0-safe?
+                if ($shouldSetDefaults && (is_null($field_value) || $field_value === '')) {
                     $field_value = $this->getDefaultValue($field);
-                } // FIXME - also be sure anywhere *else* we use default values!
+                }
                 if ($field->field_encrypted == '1') {
                     if ($user->can('admin')) {
                         $this->{$field->db_column} = \Crypt::encrypt($field_value);

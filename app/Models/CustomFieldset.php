@@ -51,7 +51,7 @@ class CustomFieldset extends Model
      * @since [v3.0]
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function customizable() // FIXME HATE this name. Should be something else. 'getFieldsetUsers'?
+    public function customizables() // TODO - I don't like this name, but I can't think of anything better
     {
         $customizable_class_name = $this->type; //TODO - copypasta from Customizable trait?
         \Log::debug("Customizable Class name is: ".$customizable_class_name);

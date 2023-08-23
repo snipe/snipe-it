@@ -17,7 +17,6 @@ class AddTypeColumnToDefaultValuesForCustomFields extends Migration
             $table->text('type')->default('App\\Models\\Asset');
             $table->renameColumn('asset_model_id','item_pivot_id');
         });
-        // \App\Models\DefaultValuesForCustomFields::query()->update(['type' => 'App\\Models\\Asset']); // FIXME? TODO? Dunno?
     }
 
     /**
