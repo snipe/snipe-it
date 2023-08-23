@@ -152,10 +152,10 @@ class ActionlogsTransformer
      * @return array
      */
     public function changedInfo(array $clean_meta)
-    {   $location = Location::all();
-        $company = Company::all();
-        $supplier = Supplier::all();
-        $model = AssetModel::all();
+    {   $location = Location::withTrashed()->get();
+        $company = Company::withTrashed()->get();
+        $supplier = Supplier::withTrashed()->get();
+        $model = AssetModel::withTrashed()->get();
 
 
         if(array_key_exists('rtd_location_id',$clean_meta)) {
