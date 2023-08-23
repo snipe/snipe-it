@@ -128,6 +128,13 @@ class LicenseCheckinController extends Controller
         $license = License::findOrFail($licenseId);
         $this->authorize('checkin', $license);
 
+        if (! $license->reassignable) {
+            // Not allowed to checkin
+            Session::flash('error', 'License not reassignable.');
+
+            return redirect()->back()->withInput();
+        }
+
         $licenseSeatsByUser = LicenseSeat::where('license_id', '=', $licenseId)
             ->whereNotNull('assigned_to')
             ->with('user')
