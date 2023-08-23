@@ -247,21 +247,12 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function getFullNameAttribute()
     {
-        return $this->first_name.' '.$this->last_name;
-    }
+        $setting = Setting::getSettings();
 
-    /**
-     * Returns the complete name attribute with username
-     *
-     * @todo refactor this so it's less repetitive and dumb
-     *
-     * @author A. Gianotto <snipe@snipe.net>
-     * @since [v2.0]
-     * @return string
-     */
-    public function getCompleteNameAttribute()
-    {
-        return $this->last_name.', '.$this->first_name.' ('.$this->username.')';
+        if ($setting->name_display_format=='last_first') {
+            return ($this->last_name) ? $this->last_name.' '.$this->first_name : $this->first_name;
+        }
+        return $this->last_name ? $this->first_name.' '.$this->last_name : $this->first_name;
     }
 
 

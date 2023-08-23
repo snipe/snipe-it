@@ -328,7 +328,7 @@
                                             <i class="fas fa-users" aria-hidden="true"></i>
                                         @endif
 
-                                        <span class="hidden-xs">{{ Auth::user()->first_name }} <strong
+                                        <span class="hidden-xs">{{ Auth::user()->getFullNameAttribute() }} <strong
                                                     class="caret"></strong></span>
                                     </a>
                                     <ul class="dropdown-menu">

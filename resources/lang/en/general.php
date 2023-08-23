@@ -120,6 +120,9 @@ return [
     'firstname_lastname_underscore_format' => 'First Name Last Name (jane_smith@example.com)',
     'lastnamefirstinitial_format' =>  'Last Name First Initial (smithj@example.com)',
     'firstintial_dot_lastname_format' => 'First Initial Last Name (j.smith@example.com)',
+    'firstname_lastname_display'	=> 'First Name Last Name (Jane Smith)',
+    'lastname_firstname_display'	=> 'Last Name First Name (Smith Jane)',
+    'name_display_format'	=> 'Name Display Format',
     'first'					=> 'First',
     'firstnamelastname'     => 'First Name Last Name (janesmith@example.com)',
     'lastname_firstinitial' => 'Last Name First Initial (smith_j@example.com)',
@@ -454,6 +457,8 @@ return [
     'serial_number'        => 'Serial Number',
     'item_notes' => ':item Notes',
     'item_name_var' => ':item Name',
+    'error_user_company' => 'User and Asset companies missmatch',
+    'error_user_company_accept_view' => 'An Asset assigned to you belongs to a different company so you can\'t accept nor deny it, please check with your manager',
     'importer' => [
         'checked_out_to_fullname' => 'Checked Out to: Full Name',
         'checked_out_to_first_name' => 'Checked Out to: First Name',

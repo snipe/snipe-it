@@ -159,8 +159,8 @@ class ActionlogsTransformer
             unset($clean_meta['location_id']);
         }
         if(array_key_exists('model_id', $clean_meta)) {
-            $clean_meta['model_id']['old'] = "[id: ".$clean_meta['model_id']['old']."] ".AssetModel::find($clean_meta['model_id']['old'])->name;
-            $clean_meta['model_id']['new'] = "[id: ".$clean_meta['model_id']['new']."] ".AssetModel::find($clean_meta['model_id']['new'])->name; /* model is required at asset creation */
+            $clean_meta['model_id']['old'] = "[id: ".$clean_meta['model_id']['old']."] ".AssetModel::withTrashed()->find($clean_meta['model_id']['old'])->name;
+            $clean_meta['model_id']['new'] = "[id: ".$clean_meta['model_id']['new']."] ".AssetModel::withTrashed()->find($clean_meta['model_id']['new'])->name; /* model is required at asset creation */
             $clean_meta['Model'] = $clean_meta['model_id'];
             unset($clean_meta['model_id']);
         }
