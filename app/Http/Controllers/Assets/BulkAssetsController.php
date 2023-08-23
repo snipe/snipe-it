@@ -31,21 +31,8 @@ class BulkAssetsController extends Controller
      */
     public function edit(Request $request)
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
-        $this->authorize('view', Asset::class);
-
-=======
-        // dd($request->all());
-        // dd(Session::get('ids')); 
-        
-        $this->authorize('update', Asset::class);
-        
->>>>>>> b2c2097e8 (just more troubleshooting stuff, still no solution)
-=======
         $this->authorize('view', Asset::class);
       
->>>>>>> 2a352619f (clean up)
         if (! $request->filled('ids')) {
             return redirect()->back()->with('error', trans('admin/hardware/message.update.no_assets_selected'));
         }

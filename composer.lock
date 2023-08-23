@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
     "content-hash": "f30d1bebf56af36eb55a56d093b54650",
-=======
-    "content-hash": "117e3e13f1e5354b18e6a5a7ad38641b",
->>>>>>> 6b6bb6140 (Bump nyholm/psr7 to 1.6.1)
     "packages": [
         {
             "name": "alek13/slack",
