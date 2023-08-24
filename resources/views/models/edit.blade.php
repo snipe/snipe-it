@@ -33,6 +33,11 @@
     </div>
 </div>
 
+@php
+    if (is_null($item->id)){
+        $item->id = $item->getOriginal('id');
+    }
+@endphp
 <!-- Custom Fieldset -->
 @livewire('custom-field-set-default-values-for-model',["model_id" => $item->id])
 
