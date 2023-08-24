@@ -711,7 +711,6 @@ class Helper
         foreach ($asset_models as $asset_model){
 
             $used= new Asset();
-            dd($asset_model->id);
             $count =$used->where('model_id', '==', $asset_model->id)->count();
             $avail = Asset::withCount('model as model_count');
             if ($avail < ($asset_model->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
