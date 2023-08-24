@@ -710,22 +710,22 @@ class Helper
 //            dd($asset_models);
         foreach ($asset_models as $asset_model){
 
-            $used= new Asset();
-            $count =$used->where('model_id', '==', $asset_model->id)->count();
-            $avail = Asset::withCount('model as model_count');
-            if ($avail < ($asset_model->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
-                if ($asset_model->qty > 0) {
-                    $percent = number_format((($avail / $asset_model->qty) * 100), 0);
+            $asset = new Asset();
+            $total_owned = $asset->where('model_id', '=', $asset_model->id)->count();
+            $avail = $asset->where('model_id', '=', $asset_model->id)->whereNull('assigned_to')->count();
+
+            if ($avail < ($asset_model->min_amt)+ \App\Models\Setting::getSettings()->alert_threshold) {
+                if ($avail > 0) {
+                    $percent = number_format((($avail / $total_owned) * 100), 0);
                 } else {
                     $percent = 100;
                 }
-
-                $items_array[$all_count]['id'] = $accessory->id;
-                $items_array[$all_count]['name'] = $accessory->name;
-                $items_array[$all_count]['type'] = 'accessories';
+                $items_array[$all_count]['id'] = $asset_model->id;
+                $items_array[$all_count]['name'] = $asset_model->name;
+                $items_array[$all_count]['type'] = 'models';
                 $items_array[$all_count]['percent'] = $percent;
                 $items_array[$all_count]['remaining'] = $avail;
-                $items_array[$all_count]['min_amt'] = $accessory->min_amt;
+                $items_array[$all_count]['min_amt'] = $asset_model->min_amt;
                 $all_count++;
             }
         }
