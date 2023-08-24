@@ -34,12 +34,13 @@
 </div>
 
 @php
-    if (is_null($item->id)){
-        $item->id = $item->getOriginal('id');
+    $model_id = $item->id;
+    if (is_null($model_id)){
+        $model_id = $item->getOriginal('id');
     }
 @endphp
 <!-- Custom Fieldset -->
-@livewire('custom-field-set-default-values-for-model',["model_id" => $item->id])
+@livewire('custom-field-set-default-values-for-model',["model_id" => $model_id])
 
 @include ('partials.forms.edit.notes')
 @include ('partials.forms.edit.requestable', ['requestable_text' => trans('admin/models/general.requestable')])
