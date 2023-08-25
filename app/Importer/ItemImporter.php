@@ -11,6 +11,7 @@ use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
 use Carbon\CarbonImmutable;
+use Illuminate\Support\Facades\Log;
 
 class ItemImporter extends Importer
 {
@@ -89,10 +90,19 @@ class ItemImporter extends Importer
         }
 
         $this->item['asset_eol_date'] = null;
-        if ($this->findCsvMatch($row, 'asset_eol_date') != '') {
-            if(!empty($this->findCsvMatch($row, 'asset_eol_date'))) {
-                $this->item['asset_eol_date'] = CarbonImmutable::parse($this->findCsvMatch($row, 'asset_eol_date'));
-            }
+            if($this->findCsvMatch($row, 'asset_eol_date') != '') {
+                $csvMatch = $this->findCsvMatch($row, 'asset_eol_date');
+                try {
+                    $this->item['asset_eol_date'] = CarbonImmutable::parse($csvMatch)->format('Y-m-d');
+                } catch (\Exception $e) {
+                    Log::alert($e->getMessage());
+                    $this->log('Error parsing date: '.$csvMatch);
+                }
+        } elseif ($this->createOrFetchAssetModel($row) != null) {
+                //woof this is ugly
+                if($eol = AssetModel::find($this->createOrFetchAssetModel($row))->eol) {
+                    $this->item['asset_eol_date'] = CarbonImmutable::parse($this->findCsvMatch($row, 'purchase_date'))->addMonths($eol)->format('Y-m-d');
+                }
         }
 
         $this->item['qty'] = $this->findCsvMatch($row, 'quantity');
