@@ -16,6 +16,7 @@ use App\Http\Controllers\ManufacturersController;
 use App\Http\Controllers\ModalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\SavedReportsController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\StatuslabelsController;
 use App\Http\Controllers\SuppliersController;
@@ -356,6 +357,7 @@ Route::group(['middleware' => ['auth']], function () {
     )->name('reports/export/accessories');
     Route::get('reports/custom', [ReportsController::class, 'getCustomReport'])->name('reports/custom');
     Route::post('reports/custom', [ReportsController::class, 'postCustom']);
+    Route::post('reports/savedtemplate', [SavedReportsController::class, 'store'])->name('savedreports/store');
 
     Route::get(
         'reports/activity',

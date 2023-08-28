@@ -11,6 +11,7 @@ use App\Models\CheckoutAcceptance;
 use App\Models\CustomField;
 use App\Models\Depreciation;
 use App\Models\License;
+use App\Models\SavedReport;
 use App\Models\Setting;
 use App\Notifications\CheckoutAssetNotification;
 use Carbon\Carbon;
@@ -391,8 +392,9 @@ class ReportsController extends Controller
     {
         $this->authorize('reports.view');
         $customfields = CustomField::get();
+        $saved_reports = SavedReport::get();
 
-        return view('reports/custom')->with('customfields', $customfields);
+        return view('reports/custom')->with('customfields', $customfields)->with('saved_reports', $saved_reports);
     }
 
     /**

@@ -7,33 +7,6 @@
 @stop
 
 @section('header_right')
-       <div>
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" tabindex="-1">
-            {{ trans('general.create') }}
-            <strong class="caret"></strong>
-        </a>
-        <ul class="dropdown-menu" style="position:relative;">
-            @can('create', \App\Models\Asset::class)
-                <li {!! (Request::is('hardware/create') ? 'class="active>"' : '') !!}>
-                    <a href="{{ route('hardware.create') }}" tabindex="-1">
-                        <i class="fas fa-barcode fa-fw" aria-hidden="true"></i>
-                        {{ trans('general.asset') }}
-                    </a>
-                </li>
-            @endcan
-                @can('create', \App\Models\Asset::class)
-                    <li {!! (Request::is('hardware/create') ? 'class="active>"' : '') !!}>
-                        <a href="{{ route('hardware.create') }}" tabindex="-1">
-                            <i class="fas fa-barcode fa-fw" aria-hidden="true"></i>
-                            {{ trans('general.asset') }}
-                        </a>
-                    </li>
-                @endcan
-        </ul>
-<a href="#" class="btn btn-primary">
-  {{ trans('admin/reports/general.apply_template') }}</a>
-<a href="#" class="btn btn-primary">
-  {{ trans('admin/reports/general.save_template') }}</a></div>
 @stop
 
 
@@ -43,7 +16,7 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
 
-    {{ Form::open(['method' => 'post', 'class' => 'form-horizontal']) }}
+    {{ Form::open(['method' => 'post', 'class' => 'form-horizontal', 'id' => 'custom-report-form']) }}
     {{csrf_field()}}
 
     <!-- Horizontal Form -->
@@ -386,6 +359,44 @@
       </div> <!--/.box.box-default-->
     {{ Form::close() }}
   </div>
+
+    <div class="col-md-2">
+        <a href="#" class="btn btn-primary">
+            {{ trans('admin/reports/general.apply_and_generate') }}</a><br>
+        <form method="post" id="savetemplateform" action="{{ route("savedreports/store") }}">
+            @csrf
+             <input type="hidden" id="savetemplateoptions">
+                <button class = "btn btn-primary">
+                {{ trans('admin/reports/general.save_template') }}
+                </button>
+        </form>
+        <br>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+            {{ trans('admin/reports/general.select_template') }}
+            <strong class="caret"></strong>
+        </a>
+        <ul class="dropdown-menu">
+            @foreach($saved_reports as $report)
+                <li>
+                {{ $report->name }}
+                </li>
+            @endforeach
+        </ul>
+        {{ $fieldname = $report->name }}
+        <select class="js-data-ajax" data-endpoint="locations" data-placeholder="{{ trans('admin/reports/general.select_template') }}" name="{{ $fieldname }}" style="width: 100%" id="{{ $fieldname }}_location_select" aria-label="{{ $fieldname }}" {!!  ((isset($item)) && (Helper::checkIfRequired($item, $fieldname))) ? ' data-validation="required" required' : '' !!}{{ (isset($multiple) && ($multiple=='true')) ? " multiple='multiple'" : '' }}>
+            @if ($report->name!='')
+                <option value="{{ $fieldname }}" selected="selected" role="option" aria-selected="true"  role="option">
+                    @foreach($saved_reports as $report)
+                        <li>
+                            {{ $report->name }}
+                        </li>
+                    @endforeach
+                </option>
+            @else
+                <option value=""  role="option">{{ trans('admin/reports/general.select_template') }}</option>
+            @endif
+        </select>
+    </div>
 </div>
 
 @stop
@@ -427,6 +438,16 @@
 
       $("#checkAll").change(function () {
         $("input:checkbox").prop('checked', $(this).prop("checked"));
+      });
+
+      $("#savetemplateform").submit(function(e) {
+          e.preventDefault(e);
+          let elements = Array.from(document.getElementById("custom-report-form").elements).map(item=>item.name);
+          console.log(elements);
+
+          $("#savetemplateoptions").val(elements)
+          //    set hidden input to variable
+          //    submit the form
       });
 
   </script>

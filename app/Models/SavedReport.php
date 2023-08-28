@@ -9,9 +9,6 @@ class SavedReport extends Model
 {
     use HasFactory;
 
-    here be really sexy dragons
-
-
     /**
      * The attributes that should be cast.
      *
@@ -19,5 +16,11 @@ class SavedReport extends Model
      */
     protected $casts = [
         'options' => 'array',
+    ];
+
+    protected $fillable = [
+        'user_id',
+        'name',
+        'options',
     ];
 }
