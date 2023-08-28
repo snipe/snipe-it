@@ -52,6 +52,8 @@ class ActionlogsTransformer
         if (($actionlog->log_meta) && ($actionlog->log_meta!='')) {
             $meta_array = json_decode($actionlog->log_meta);
 
+            $clean_meta = [];
+
             if ($meta_array) {
                 foreach ($meta_array as $fieldname => $fieldata) {
                     if( str_starts_with($fieldname, '_snipeit_')){
@@ -65,6 +67,7 @@ class ActionlogsTransformer
                         $clean_meta[$fieldname]['new'] = $this->clean_field($fieldata->new);
                     }
                 }
+
                 $clean_meta = $this->changedInfo($clean_meta);
             }
         }
@@ -129,8 +132,10 @@ class ActionlogsTransformer
             'log_meta'          => ((isset($clean_meta)) && (is_array($clean_meta))) ? $clean_meta: null,
             'action_date'   => ($actionlog->action_date) ? Helper::getFormattedDateObject($actionlog->action_date, 'datetime'): Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
         ];
+
 //        \Log::info("Clean Meta is: ".print_r($clean_meta,true));
         //dd($array);
+
         return $array;
     }
 
