@@ -368,9 +368,7 @@ class UsersController extends Controller
         } else {
             $user->password = $user->noPassword();
         }
-
-        $user->password = bcrypt($request->get('password', $tmp_pass));
-
+        
         app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
         
         if ($user->save()) {
