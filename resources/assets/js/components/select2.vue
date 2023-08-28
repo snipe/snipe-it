@@ -25,7 +25,7 @@
                 .select2({
                     data: this.options
                 })
-                .on('change', function() { vm.$emit('input', this.value) } )
+                .on('change', function() { vm.$dispatch('input', this.value) } )
                 .val(this.value).trigger('change');
         },
         watch: {
@@ -35,7 +35,7 @@
             options: function (options) {
                 var vm = this;
                 $(this.$el).select2('destroy').empty().select2({data: options})
-                .on('change', function() { vm.$emit('input', this.value) } )
+                .on('change', function() { vm.$dispatch('input', this.value) } )
                 .val(this.value).trigger('change');
             },
             destroyed: function() {

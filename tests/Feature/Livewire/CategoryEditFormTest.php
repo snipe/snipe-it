@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Livewire;
 
-use App\Http\Livewire\CategoryEditForm;
+use App\Livewire\CategoryEditForm;
 use Livewire\Livewire;
 use Tests\TestCase;
 

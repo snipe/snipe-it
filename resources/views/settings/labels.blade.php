@@ -62,6 +62,8 @@
 
 
                         @if ($setting->label2_enable)
+                            {{-- Yes, this is gross, but this is the *ONLY* place we use this! --}}
+                            {{ \Livewire\Livewire::forceAssetInjection() }}
                             <!-- New Settings -->
 
                             <!-- Template -->

@@ -152,7 +152,7 @@
                                                                         'data-placeholder' => trans('general.select_var', ['thing' => trans('general.import_type')]),
                                                                         'placeholder' => '', //needed so that the form-helper will put an empty option first
                                                                         'data-minimum-results-for-search' => '-1', // Remove this if the list gets long enough that we need to search
-                                                                        'data-livewire-component' => $_instance->id
+                                                                        'data-livewire-component' => $_instance->getId()
                                                                     ]) }}
                                                                     @if ($activeFile->import_type === 'asset' && $snipeSettings->auto_increment_assets == 0)
                                                                         <p class="help-block">
@@ -164,7 +164,7 @@
 
                                                             <div class="form-group col-md-9 col-md-offset-3">
                                                                 <label class="form-control">
-                                                                    <input type="checkbox" name="update" data-livewire-component="{{ $_instance->id }}" wire:model="update">
+                                                                    <input type="checkbox" name="update" data-livewire-component="{{ $_instance->getId() }}" wire:model="update">
                                                                     {{ trans('general.update_existing_values') }}
                                                                 </label>
                                                                 @if ($activeFile->import_type === 'asset' && $snipeSettings->auto_increment_assets == 1 && $update)
@@ -174,12 +174,12 @@
                                                                 @endif
 
                                                                 <label class="form-control">
-                                                                    <input type="checkbox" name="send_welcome" data-livewire-component="{{ $_instance->id }}" wire:model="send_welcome">
+                                                                    <input type="checkbox" name="send_welcome" data-livewire-component="{{ $_instance->getId() }}" wire:model="send_welcome">
                                                                     {{ trans('general.send_welcome_email_to_users') }}
                                                                 </label>
 
                                                                 <label class="form-control">
-                                                                    <input type="checkbox" name="run_backup" data-livewire-component="{{ $_instance->id }}" wire:model="run_backup">
+                                                                    <input type="checkbox" name="run_backup" data-livewire-component="{{ $_instance->getId() }}" wire:model="run_backup">
                                                                     {{ trans('general.back_before_importing') }}
                                                                 </label>
 
@@ -225,7 +225,7 @@
                                                                                         'class' => 'mappings livewire-select2',
                                                                                         'placeholder' => trans('general.importer.do_not_import'),
                                                                                         'style' => 'min-width: 100%',
-                                                                                        'data-livewire-component' => $_instance->id
+                                                                                        'data-livewire-component' => $_instance->getId()
                                                                                     ],[
                                                                                         '-' => ['disabled' => true] // this makes the "-----" line unclickable
                                                                                     ])

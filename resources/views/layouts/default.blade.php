@@ -82,8 +82,6 @@
     <script src="{{ url(asset('js/html5shiv.js')) }}" nonce="{{ csrf_token() }}"></script>
     <script src="{{ url(asset('js/respond.js')) }}" nonce="{{ csrf_token() }}"></script>
 
-    @livewireStyles
-
 </head>
 
 @if (($snipeSettings) && ($snipeSettings->allow_user_skin==1) && Auth::check() && Auth::user()->present()->skin != '')
@@ -947,7 +945,6 @@
 
         {{-- Javascript files --}}
         <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
-        <script defer src="{{ url(mix('js/dist/all-defer.js')) }}" nonce="{{ csrf_token() }}"></script>
 
         <!-- v5-beta: This pGenerator call must remain here for v5 - until fixed - so that the JS password generator works for the user create modal. -->
         <script src="{{ url('js/pGenerator.jquery.js') }}"></script>
@@ -963,13 +960,13 @@
 
 
             // ignore: 'input[type=hidden]' is required here to validate the select2 lists
-            $.validate({
-                form: '#create-form',
-                modules: 'date, toggleDisabled',
-                disabledFormFilter: '#create-form',
-                showErrorDialogs: true,
-                ignore: 'input[type=hidden]'
-            });
+            // $.validate({ // FIXME! This shouldn't be commented out!
+            //     form: '#create-form',
+            //     modules: 'date, toggleDisabled',
+            //     disabledFormFilter: '#create-form',
+            //     showErrorDialogs: true,
+            //     ignore: 'input[type=hidden]'
+            // });
 
 
             $(function () {
@@ -1020,8 +1017,6 @@
         @endif
 
         @include('partials.bpay')
-
-        @livewireScripts
 
         </body>
 </html>
