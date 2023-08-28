@@ -286,6 +286,7 @@ class AssetModelsController extends Controller
         return view('models/edit')
             ->with('depreciation_list', Helper::depreciationList())
             ->with('item', $model)
+            ->with('model_id', $model_to_clone->id)
             ->with('clone_model', $model_to_clone);
     }
 
