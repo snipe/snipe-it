@@ -74,9 +74,9 @@ class AssetObserver
             $tag = $asset->asset_tag;
             $prefix = $settings->auto_increment_prefix;
             $number = substr($tag, strlen($prefix));
-            // IF - auto_increment_assets is on, AND (the prefix matches the start of the tag OR there is no prefix)
+            // IF - auto_increment_assets is on, AND (there is no prefix OR the prefix matches the start of the tag)
             //      AND the rest of the string after the prefix is all digits, THEN...
-            if ($settings->auto_increment_assets && (strpos($tag, $prefix) === 0 || $prefix=='') && preg_match('/\d+/',$number) === 1) {
+            if ($settings->auto_increment_assets && ($prefix=='' || strpos($tag, $prefix) === 0) && preg_match('/\d+/',$number) === 1) {
                 // new way of auto-trueing-up auto_increment ID's
                 $next_asset_tag = intval($number, 10) + 1;
                 // we had to use 'intval' because the $number could be '01234' and

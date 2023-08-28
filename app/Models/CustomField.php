@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
 use Schema;
 use Watson\Validating\ValidatingTrait;
-
 class CustomField extends Model
 {
     use HasFactory;
@@ -181,6 +180,11 @@ class CustomField extends Model
     public function fieldset()
     {
         return $this->belongsToMany(\App\Models\CustomFieldset::class);
+    }
+   
+    public function assetModels()
+    {
+       return $this->fieldset()->with('models')->get()->pluck('models')->flatten()->unique('id'); 
     }
 
     /**
