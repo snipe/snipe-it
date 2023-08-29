@@ -9,6 +9,7 @@ class SavedReportsController extends Controller
     //a method to the madness
     public function store(Request $request)
     {
+
     dd($request->all());
 
     }

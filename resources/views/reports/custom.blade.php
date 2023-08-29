@@ -361,41 +361,47 @@
   </div>
 
     <div class="col-md-2">
-        <a href="#" class="btn btn-primary">
-            {{ trans('admin/reports/general.apply_and_generate') }}</a><br>
-        <form method="post" id="savetemplateform" action="{{ route("savedreports/store") }}">
-            @csrf
-             <input type="hidden" id="savetemplateoptions">
-                <button class = "btn btn-primary">
-                {{ trans('admin/reports/general.save_template') }}
-                </button>
-        </form>
-        <br>
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" tabindex="-1">
-            {{ trans('admin/reports/general.select_template') }}
+        <div style=padding-bottom:5px>
+            <a href="#" class="btn btn-primary">
+               {{ trans('admin/reports/general.apply_and_generate') }}</a>
+        </div>
+        <div style=padding-bottom:5px>
+            <form method="post" id="savetemplateform" action="{{ route("savedreports/store") }}">
+                @csrf
+                    <input type="hidden" id="savetemplateoptions" name="options">
+                    <button class = "btn btn-primary">
+                        {{ trans('admin/reports/general.save_template') }}
+                    </button>
+            </form>
+        </div>
+        <div style=padding-bottom:5px>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" tabindex="-1" style="border:1px solid black">
+                {{ trans('admin/reports/general.select_template') }}
             <strong class="caret"></strong>
-        </a>
-        <ul class="dropdown-menu">
-            @foreach($saved_reports as $report)
-                <li>
-                {{ $report->name }}
-                </li>
-            @endforeach
-        </ul>
-        {{ $fieldname = $report->name }}
-        <select class="js-data-ajax" data-endpoint="locations" data-placeholder="{{ trans('admin/reports/general.select_template') }}" name="{{ $fieldname }}" style="width: 100%" id="{{ $fieldname }}_location_select" aria-label="{{ $fieldname }}" {!!  ((isset($item)) && (Helper::checkIfRequired($item, $fieldname))) ? ' data-validation="required" required' : '' !!}{{ (isset($multiple) && ($multiple=='true')) ? " multiple='multiple'" : '' }}>
-            @if ($report->name!='')
-                <option value="{{ $fieldname }}" selected="selected" role="option" aria-selected="true"  role="option">
-                    @foreach($saved_reports as $report)
-                        <li>
-                            {{ $report->name }}
-                        </li>
-                    @endforeach
-                </option>
-            @else
-                <option value=""  role="option">{{ trans('admin/reports/general.select_template') }}</option>
-            @endif
-        </select>
+            </a>
+            <ul class="dropdown-menu">
+                @foreach($saved_reports as $report)
+                    <li>
+                        {{ $report->name }}
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+
+{{--        {{ $fieldname = $report->name }}--}}
+{{--        <select class="js-data-ajax" data-endpoint="locations" data-placeholder="{{ trans('admin/reports/general.select_template') }}" name="{{ $fieldname }}" style="width: 100%" id="{{ $fieldname }}_location_select" aria-label="{{ $fieldname }}" {!!  ((isset($item)) && (Helper::checkIfRequired($item, $fieldname))) ? ' data-validation="required" required' : '' !!}{{ (isset($multiple) && ($multiple=='true')) ? " multiple='multiple'" : '' }}>--}}
+{{--            @if ($report->name!='')--}}
+{{--                <option value="{{ $fieldname }}" selected="selected" role="option" aria-selected="true"  role="option">--}}
+{{--                    @foreach($saved_reports as $report)--}}
+{{--                        <li>--}}
+{{--                            {{ $report->name }}--}}
+{{--                        </li>--}}
+{{--                    @endforeach--}}
+{{--                </option>--}}
+{{--            @else--}}
+{{--                <option value=""  role="option">{{ trans('admin/reports/general.select_template') }}</option>--}}
+{{--            @endif--}}
+{{--        </select>--}}
     </div>
 </div>
 
@@ -447,7 +453,7 @@
 
           $("#savetemplateoptions").val(elements)
           //    set hidden input to variable
-          //    submit the form
+          e.currentTarget.submit();
       });
 
   </script>
