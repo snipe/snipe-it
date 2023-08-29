@@ -153,7 +153,6 @@ class ActionlogsTransformer
      */
     public function changedInfo(array $clean_meta)
     {   $location = Location::withTrashed()->get();
-        $company = Company::withTrashed()->get();
         $supplier = Supplier::withTrashed()->get();
         $model = AssetModel::withTrashed()->get();
 
@@ -179,8 +178,14 @@ class ActionlogsTransformer
             unset($clean_meta['model_id']);
         }
         if(array_key_exists('company_id', $clean_meta)) {
-            $clean_meta['company_id']['old'] = $clean_meta['company_id']['old'] ? "[id: ".$clean_meta['company_id']['old']."]".$company->find($clean_meta['company_id']['old'])->name : trans('general.unassigned');
-            $clean_meta['company_id']['new'] = $clean_meta['company_id']['new'] ? "[id: ".$clean_meta['company_id']['new']."] ".$company->find($clean_meta['company_id']['new'])->name : trans('general.unassigned');
+            $oldCompany = Company::find($clean_meta['company_id']['old']);
+            $oldCompanyName = $oldCompany->name ?? trans('admin/companies/message.deleted');
+
+            $newCompany = Company::find($clean_meta['company_id']['new']);
+            $newCompanyName = $newCompany->name ?? trans('admin/companies/message.deleted');
+
+            $clean_meta['company_id']['old'] = $clean_meta['company_id']['old'] ? "[id: ".$clean_meta['company_id']['old']."] ". $oldCompanyName : trans('general.unassigned');
+            $clean_meta['company_id']['new'] = $clean_meta['company_id']['new'] ? "[id: ".$clean_meta['company_id']['new']."] ". $newCompanyName : trans('general.unassigned');
             $clean_meta['Company'] = $clean_meta['company_id'];
             unset($clean_meta['company_id']);
         }
