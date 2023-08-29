@@ -390,6 +390,11 @@ img.navbar-brand-img,
 .dropdown-menu > li > a {
   color: #354044;
 }
+.hide-readonly {
+  background-color: white;
+  color: #555555;
+  cursor: text;
+}
 #sort tr.cansort {
   border-radius: 2px;
   padding: 10px;

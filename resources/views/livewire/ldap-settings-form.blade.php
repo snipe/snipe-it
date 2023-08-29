@@ -264,7 +264,7 @@
                                     {{ Form::label('ldap_pword', trans('admin/settings/general.ldap_pword')) }}
                                 </div>
                                 <div class="col-md-9">
-                                    <input  wire:model.lazy="ldap_pword" type="password" class="form-control"  placeholder="{{trans('general.example') .'binduserpassword'}}" >
+                                    <input  wire:model.lazy="ldap_pword" type="password" class="form-control"  placeholder="{{trans('general.example') .'binduserpassword'}}">
                                     {!! $errors->first('ldap_pword', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                     @if (config('app.lock_passwords')===true)
                                         <input  wire:model.lazy="ldap_pword" type="password" class="form-control"  placeholder="{{trans('general.example') .'binduserpassword'}} " disabled>
