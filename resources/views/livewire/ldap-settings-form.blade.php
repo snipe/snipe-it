@@ -16,6 +16,8 @@
         <!-- CSRF Token -->
         {{csrf_field()}}
 
+        <input type="hidden" name="username" value="{{ Request::old('username', $user->username) }}">
+
         <!-- this is a hack to prevent Chrome from trying to autocomplete fields -->
         <input type="text" name="prevent_autofill" id="prevent_autofill" value="" style="display:none;" />
         <input type="password" name="password_fake" id="password_fake" value="" style="display:none;" />
@@ -249,7 +251,7 @@
                                     {{ Form::label('ldap_uname', trans('admin/settings/general.ldap_uname')) }}
                                 </div>
                                 <div class="col-md-9">
-                                    <input  wire:model.lazy="ldap_uname" type="text" class="form-control" value="{{old('ldap_uname', $ldap_uname)}}" placeholder="{{trans('general.example') .'ldap://ldap.example.com'}} " >
+                                    <input  wire:model.lazy="ldap_uname" type="text" class="form-control" value="{{old('ldap_uname', $ldap_uname)}}"  autocomplete="off" placeholder="{{trans('general.example') .'ldap://ldap.example.com'}} " >
                                     {!! $errors->first('ldap_uname', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                     @if (config('app.lock_passwords')===true)
                                         <input  wire:model.lazy="ldap_uname" type="text" class="form-control" value="{{old('ldap_uname', $ldap_uname)}}" placeholder="{{trans('general.example') .'ldap://ldap.example.com'}} " disabled>
@@ -264,7 +266,7 @@
                                     {{ Form::label('ldap_pword', trans('admin/settings/general.ldap_pword')) }}
                                 </div>
                                 <div class="col-md-9">
-                                    <input  wire:model.lazy="ldap_pword" type="password" class="form-control"  placeholder="{{trans('general.example') .'binduserpassword'}}">
+                                    <input  wire:model.lazy="ldap_pword" type="password" class="form-control hide-readonly"  autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
                                     {!! $errors->first('ldap_pword', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                     @if (config('app.lock_passwords')===true)
                                         <input  wire:model.lazy="ldap_pword" type="password" class="form-control"  placeholder="{{trans('general.example') .'binduserpassword'}} " disabled>
@@ -584,7 +586,7 @@
                                                     {!! $errors->first('ldaptest_user', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="password" wire:model.defer="ldaptest_password" id="ldaptest_password" class="form-control" placeholder="LDAP password">
+                                                    <input type="password" wire:model.defer="ldaptest_password" id="ldaptest_password" class="form-control hide-readonly" placeholder="LDAP password" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
                                                     {!! $errors->first('ldaptest_password', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                                 </div>
                                                 <div class="col-md-3">
