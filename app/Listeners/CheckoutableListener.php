@@ -79,8 +79,8 @@ class CheckoutableListener
         /**
          * Send the appropriate notification
          */
-        $acceptances = CheckoutAcceptance::where('checkoutable_id', $event->checkoutable->id)
-                                        ->where('assigned_to_id', $event->checkedOutTo->id)
+        $acceptances = CheckoutAcceptance::where('checkoutable_id', $event->checkoutable->id ?? null)
+                                        ->where('assigned_to_id', $event->checkedOutTo->id ?? null)
                                         ->get();
 
         foreach($acceptances as $acceptance){
