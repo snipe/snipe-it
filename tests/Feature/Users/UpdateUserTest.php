@@ -22,7 +22,7 @@ class UpdateUserTest extends TestCase
                 'activated' => 1,
             ]);
 
-        $this->assertTrue($user->refresh()->activated);
+        $this->assertEquals(1, $user->refresh()->activated);
     }
 
     public function testUsersCanBeDeactivated()
@@ -39,7 +39,7 @@ class UpdateUserTest extends TestCase
                 // 'activated' => 0,
             ]);
 
-        $this->assertFalse($user->refresh()->activated);
+        $this->assertEquals(0, $user->refresh()->activated);
     }
 
     public function testUsersUpdatingThemselvesDoNotDeactivateTheirAccount()
@@ -56,6 +56,6 @@ class UpdateUserTest extends TestCase
                 // 'activated' => 0,
             ]);
 
-        $this->assertTrue($admin->refresh()->activated);
+        $this->assertEquals(1, $admin->refresh()->activated);
     }
 }
