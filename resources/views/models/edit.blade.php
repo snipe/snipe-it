@@ -34,7 +34,8 @@
 </div>
 
 <!-- Custom Fieldset -->
-@livewire('custom-field-set-default-values-for-model',["model_id" => $item->id])
+<!-- If $item->id is null we are cloning the model and we need the $model_id variable -->
+@livewire('custom-field-set-default-values-for-model',["model_id" => $item->id ?? $model_id ?? null  ])
 
 @include ('partials.forms.edit.notes')
 @include ('partials.forms.edit.requestable', ['requestable_text' => trans('admin/models/general.requestable')])
