@@ -3,6 +3,7 @@
 namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
+use App\Models\CustomField;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
@@ -79,6 +80,52 @@ class UsersTransformer
                 'last_login' => Helper::getFormattedDateObject($user->last_login, 'datetime'),
                 'deleted_at' => ($user->deleted_at) ? Helper::getFormattedDateObject($user->deleted_at, 'datetime') : null,
             ];
+
+        // FIXME <start> - this is all copypasta stolen from AssetsTransformer
+        if (CustomField::where('type',User::class)->count() > 0) { //FIXME - crappy hack
+            $fields_array = [];
+
+            foreach (CustomField::where('type',User::class)->get() as $field) {
+                if ($field->isFieldDecryptable($user->{$field->db_column})) {
+                    $decrypted = Helper::gracefulDecrypt($field, $user->{$field->db_column});
+                    $value = (Gate::allows('assets.view.encrypted_custom_fields')) ? $decrypted : strtoupper(trans('admin/custom_fields/general.encrypted'));
+
+                    if ($field->format == 'DATE'){
+                        if (Gate::allows('assets.view.encrypted_custom_fields')){
+                            $value = Helper::getFormattedDateObject($value, 'date', false);
+                        } else {
+                            $value = strtoupper(trans('admin/custom_fields/general.encrypted'));
+                        }
+                    }
+
+                    $fields_array[$field->name] = [
+                        'field' => e($field->db_column),
+                        'value' => e($value),
+                        'field_format' => $field->format,
+                        'element' => $field->element,
+                    ];
+
+                } else {
+                    $value = $user->{$field->db_column};
+
+                    if (($field->format == 'DATE') && (!is_null($value)) && ($value!='')){
+                        $value = Helper::getFormattedDateObject($value, 'date', false);
+                    }
+
+                    $fields_array[$field->name] = [
+                        'field' => e($field->db_column),
+                        'value' => e($value),
+                        'field_format' => $field->format,
+                        'element' => $field->element,
+                    ];
+                }
+
+                $array['custom_fields'] = $fields_array;
+            }
+        } else {
+            $array['custom_fields'] = new \stdClass; // HACK to force generation of empty object instead of empty list
+        }
+        // FIXME <end> - all stolen from AssetsTransformer
 
         $permissions_array['available_actions'] = [
             'update' => (Gate::allows('update', User::class) && ($user->deleted_at == '')),

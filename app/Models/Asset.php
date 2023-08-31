@@ -216,7 +216,7 @@ class Asset extends Depreciable
         }
         $this->attributes['expected_checkin'] = $value;
     }
-    
+
     public function getDisplayNameAttribute()
     {
         return $this->present()->name();
