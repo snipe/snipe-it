@@ -11,15 +11,28 @@ class UsersUpdateTest extends TestCase
 {
     use InteractsWithSettings;
 
-    public function testSomething()
+
+    public function testCanUpdateUserViaPatch()
     {
-        $this->withoutExceptionHandling();
+        $this->markTestIncomplete();
+    }
+
+    public function testCanUpdateUserViaPut()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testDepartmentPatching()
+    {
         $admin = User::factory()->superuser()->create();
         $user = User::factory()->forDepartment(['name' => 'Department A'])->create();
         $department = Department::factory()->create();
 
         $this->actingAsForApi($admin)->patch(route('api.users.update', $user), [
-            'department_id' => ['id' => $department->id]
+            // This isn't valid but doesn't return an error
+            'department_id' => ['id' => $department->id],
+            // This is the correct syntax
+            // 'department_id' => $department->id,
         ])->assertOk();
 
         $this->assertTrue(
