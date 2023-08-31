@@ -13,6 +13,7 @@ use App\Http\Transformers\SelectlistTransformer;
 use App\Http\Transformers\UsersTransformer;
 use App\Models\Asset;
 use App\Models\Company;
+use App\Models\CustomField;
 use App\Models\License;
 use App\Models\User;
 use App\Notifications\CurrentInventory;
@@ -36,7 +37,7 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
 
-        $users = User::select([
+        $allowed_columns = [
             'users.activated',
             'users.created_by',
             'users.address',
@@ -73,7 +74,12 @@ class UsersController extends Controller
             'users.vip',
             'users.autoassign_licenses',
 
-        ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy',)
+        ];
+
+        foreach(CustomField::where('type', User::class)->get() as $field) {
+            $allowed_columns[] = $field->db_column_name();
+        }
+        $users = User::select()->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy',)
             ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count');
         $users = Company::scopeCompanyables($users);
 
