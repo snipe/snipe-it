@@ -82,7 +82,6 @@ class Asset extends Depreciable
         'location_id'    => 'integer',
         'rtd_company_id' => 'integer',
         'supplier_id'    => 'integer',
-        'byod'           => 'boolean',
         'created_at'     => 'datetime',
         'updated_at'   => 'datetime',
         'deleted_at'  => 'datetime',
@@ -105,6 +104,7 @@ class Asset extends Depreciable
         'purchase_cost'   => 'numeric|nullable|gte:0',
         'supplier_id'     => 'exists:suppliers,id|nullable',
         'asset_eol_date'  => 'date|max:10|min:10|nullable',
+        'byod'            => 'boolean',
     ];
 
   /**

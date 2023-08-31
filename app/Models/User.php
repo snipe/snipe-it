@@ -69,15 +69,12 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     ];
 
     protected $casts = [
-        'activated'    => 'boolean',
         'manager_id'   => 'integer',
         'location_id'  => 'integer',
         'company_id'   => 'integer',
-        'vip'      => 'boolean',
         'created_at'   => 'datetime',
         'updated_at'   => 'datetime',
         'deleted_at'   => 'datetime',
-        'autoassign_licenses'    => 'boolean',
     ];
 
     /**
@@ -103,6 +100,9 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'state'                   => 'min:2|max:191|nullable',
         'country'                 => 'min:2|max:191|nullable',
         'zip'                     => 'max:10|nullable',
+        'vip'                     => 'boolean',
+        'remote'                  => 'boolean',
+        'activated'               => 'boolean',
     ];
 
     /**
