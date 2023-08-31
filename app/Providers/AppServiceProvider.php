@@ -75,12 +75,7 @@ class AppServiceProvider extends ServiceProvider
         // Only load rollbar if there is a rollbar key and the app is in production
         if (($this->app->environment('production')) && (config('logging.channels.rollbar.access_token'))) {
             $this->app->register(\Rollbar\Laravel\RollbarServiceProvider::class);
-        } 
-
-        // Only load dusk's service provider if the app is in local or develop mode
-        if ($this->app->environment(['local', 'develop'])) {
-            $this->app->register(\Laravel\Dusk\DuskServiceProvider::class);
-        } 
+        }
 
         $this->app->singleton('ArieTimmerman\Laravel\SCIMServer\SCIMConfig', SnipeSCIMConfig::class); // this overrides the default SCIM configuration with our own
     
