@@ -320,7 +320,7 @@ class AssetPresenter extends Presenter
             }
         }
 
-        $fields = CustomField::whereIn('id',$ids)->get();
+        $fields = CustomField::whereIn('id',$ids)->get(); // FIXME: d'oh! this is wrong. We just got fieldsets, above. Now we're getting fields?
         // Note: We do not need to e() escape the field names here, as they are already escaped when
         // they are presented in the blade view. If we escape them here, custom fields with quotes in their
         // name can break the listings page. - snipe

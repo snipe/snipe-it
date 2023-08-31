@@ -3,7 +3,12 @@
 namespace App\Presenters;
 
 use App\Helpers\Helper;
+use App\Models\Asset;
+use App\Models\CustomField;
+use App\Models\CustomFieldset;
 use App\Models\Setting;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
@@ -407,6 +412,41 @@ class UserPresenter extends Presenter
                 'formatter' => 'usersActionsFormatter',
             ],
         ];
+
+        // TODO - FIXME - this is all copy-pasta'ed from the AssetPresenter! <start>
+        //only get fieldsets that have fields
+        $fieldsets = CustomFieldset::where("type", User::class)->whereHas('fields')->get();
+        $ids = [];
+        foreach($fieldsets as $fieldset) {
+            if (count($fieldset->customizables()) > 0) { //only get fieldsets that are 'in use'
+                \Log::debug("Found a fieldset! It's: ".$fieldset->id);
+                $ids[] = $fieldset->id;
+            } else {
+                \Log::debug("Didn't find fieldset: ".$fieldset->id);
+            }
+        }
+
+        $fields = CustomField::whereHas('fieldset', function (Builder $query) use($ids) {
+            $query->whereIn('custom_fieldsets.id', $ids);
+        })->get();
+        // Note: We do not need to e() escape the field names here, as they are already escaped when
+        // they are presented in the blade view. If we escape them here, custom fields with quotes in their
+        // name can break the listings page. - snipe
+        foreach ($fields as $field) {
+            \Log::debug("iterating through fields!");
+            $layout[] = [
+                'field' => 'custom_fields.'.$field->db_column,
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => $field->name,
+                'formatter'=> 'customFieldsFormatter',
+                'escape' => true,
+                'class' => ($field->field_encrypted == '1') ? 'css-padlock' : '',
+                'visible' => ($field->show_in_listview == '1') ? true : false,
+            ];
+        }
+        // FIXME - end copy-pasta from AssetPresenter! </end>
 
         return json_encode($layout);
     }

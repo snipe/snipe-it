@@ -44,7 +44,7 @@ class CustomFieldsetsController extends Controller
         $this->authorize('view', $cfset);
 
         if ($cfset) {
-            $custom_fields_list = ['' => 'Add New Field to Fieldset'] + CustomField::pluck('name', 'id')->toArray();
+            $custom_fields_list = ['' => 'Add New Field to Fieldset'] + CustomField::where('type', $cfset->type)->pluck('name', 'id')->toArray();
 
             $maxid = 0;
             foreach ($cfset->fields as $field) {
