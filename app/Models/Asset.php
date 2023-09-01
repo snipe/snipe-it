@@ -332,6 +332,13 @@ class Asset extends Depreciable
             }
         }
 
+        $originalValues = $this->getRawOriginal();
+
+        // attempt to detect change in value if different from today's date
+        if ($checkout_at && strpos($checkout_at, date('Y-m-d')) === false) {
+            $originalValues['action_date'] = date('Y-m-d H:i:s');
+        }
+
         if ($this->save()) {
             if (is_int($admin)) {
                 $checkedOutBy = User::findOrFail($admin);
@@ -340,7 +347,7 @@ class Asset extends Depreciable
             } else {
                 $checkedOutBy = Auth::user();
             }
-            event(new CheckoutableCheckedOut($this, $target, $checkedOutBy, $note));
+            event(new CheckoutableCheckedOut($this, $target, $checkedOutBy, $note, $originalValues));
 
             $this->increment('checkout_counter', 1);
 
