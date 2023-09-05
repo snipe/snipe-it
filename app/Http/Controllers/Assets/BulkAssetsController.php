@@ -58,8 +58,14 @@ class BulkAssetsController extends Controller
             switch ($request->input('bulk_actions')) {
                 case 'labels':
                     $this->authorize('view', Asset::class);
+                    $assets_found = Asset::find($asset_ids);
+                    
+                    if ($assets_found->isEmpty()){
+                        return redirect()->back();
+                    }
+
                     return (new Label)
-                        ->with('assets', Asset::find($asset_ids))
+                        ->with('assets', $assets_found)
                         ->with('settings', Setting::getSettings())
                         ->with('bulkedit', true)
                         ->with('count', 0);
