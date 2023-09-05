@@ -42,7 +42,7 @@ trait HasCustomFields
     public function getFieldset(): ?CustomFieldset {
         $pivot = $this->getFieldsetKey();
         if(is_int($pivot)) { //why does this look just like the other thing? (below, look for is_int()
-            return Fieldset::find($pivot);
+            return CustomFieldset::find($pivot);
         }
         return $pivot->fieldset;
     }
@@ -113,7 +113,6 @@ trait HasCustomFields
     }
 
     public function customFill(Request $request, User $user, bool $shouldSetDefaults = false) {
-        $this->_filled = true;
         if ($this->getFieldset()) {
             foreach ($this->getFieldset()->fields as $field) {
                 if (is_array($request->input($field->db_column))) {

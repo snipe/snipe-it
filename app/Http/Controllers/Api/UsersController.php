@@ -410,7 +410,9 @@ class UsersController extends Controller
         }
 
         app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
-        
+
+        $user->customFill($request,Auth::user());
+
         if ($user->save()) {
             if ($request->filled('groups')) {
                 $user->groups()->sync($request->input('groups'));
@@ -482,6 +484,12 @@ class UsersController extends Controller
             if ($request->filled('password')) {
                 $user->password = bcrypt($request->input('password'));
             }
+
+        app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
+
+        $user->customFill($request,Auth::user());
+
+        if ($user->save()) {
 
             // We need to use has()  instead of filled()
             // here because we need to overwrite permissions
