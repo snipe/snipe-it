@@ -75,20 +75,17 @@
 
     <div id='custom_fields_content'>
         <!-- Custom Fields -->
-        @if ($item->model && $item->model->fieldset)
-        <?php $model = $item->model; ?>
-        @endif
         @if (Request::old('model_id'))
             @php
-                $model = \App\Models\AssetModel::find(old('model_id'));
+                $item->model = \App\Models\AssetModel::find(old('model_id'));
             @endphp
         @elseif (isset($selected_model))
             @php
-                $model = $selected_model;
+                $item->model_id = $selected_model;
             @endphp
         @endif
-        @if (isset($model) && $model)
-        @include("models/custom_fields_form",["model" => $model])
+        @if ($item->getFieldset())
+        @include("models/custom_fields_form",["item" => $item])
         @endif
     </div>
 

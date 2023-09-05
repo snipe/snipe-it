@@ -372,7 +372,9 @@ class UsersController extends Controller
         $user->password = bcrypt($request->get('password', $tmp_pass));
 
         app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
-        
+
+        $user->customFill($request,Auth::user());
+
         if ($user->save()) {
             if ($request->filled('groups')) {
                 $user->groups()->sync($request->input('groups'));
@@ -463,7 +465,9 @@ class UsersController extends Controller
 
         
         app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
-          
+
+        $user->customFill($request,Auth::user());
+
         if ($user->save()) {
 
             // Sync group memberships:

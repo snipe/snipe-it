@@ -133,6 +133,9 @@ class UsersController extends Controller
         // we have to invoke the
         app(ImageUploadRequest::class)->handleImages($user, 600, 'avatar', 'avatars', 'avatar');
 
+        \Log::info("About to call customFill, in the 'store' controller!!!");
+        $user->customFill($request, Auth::user());
+
         if ($user->save()) {
             if ($request->filled('groups')) {
                 $user->groups()->sync($request->input('groups'));
@@ -300,6 +303,8 @@ class UsersController extends Controller
         // Handle uploaded avatar
         app(ImageUploadRequest::class)->handleImages($user, 600, 'avatar', 'avatars', 'avatar');
 
+        \Log::debug("calling custom fill from the UPDATE method!");
+        $user->customFill($request, Auth::user());
         //\Log::debug(print_r($user, true));
 
         // Was the user updated?
