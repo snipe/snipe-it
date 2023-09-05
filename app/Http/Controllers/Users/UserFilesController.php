@@ -139,18 +139,25 @@ class UserFilesController extends Controller
 
         // the license is valid
         if (isset($user->id)) {
+
             $this->authorize('view', $user);
 
             $log = Actionlog::find($fileId);
-            $file = $log->get_src('users');
+            $file = 'private_uploads/users/'.$log->filename;
+
+            // Display the file inline
+            if (request('inline') == 'true') {
+                $headers = [
+                    'Content-Disposition' => 'inline',
+                ];
+                return Storage::download($file, $log->filename, $headers);
+            }
 
             return Response::download($file); //FIXME this doesn't use the new StorageHelper yet, but it's complicated...
         }
-        // Prepare the error message
-        $error = trans('admin/users/message.user_not_found', ['id' => $userId]);
 
-        // Redirect to the licence management page
-        return redirect()->route('users.index')->with('error', $error);
+        // Redirect to the user management page if the user doesn't exist
+        return redirect()->route('users.index')->with('error',  trans('admin/users/message.user_not_found', ['id' => $userId]));
     }
 
 }

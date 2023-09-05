@@ -937,9 +937,13 @@
                             <td>
                                 @if ($file->filename)
                                     @if (Storage::exists('private_uploads/users/'.$file->filename))
-                                        <a href="{{ route('show/userfile', [$user->id, $file->id]) }}" class="btn btn-default">
+                                        <a href="{{ route('show/userfile', [$user->id, $file->id]) }}" class="btn btn-sm btn-default">
                                             <i class="fas fa-download" aria-hidden="true"></i>
                                             <span class="sr-only">{{ trans('general.download') }}</span>
+                                        </a>
+
+                                        <a href="{{ route('show/userfile', [$user->id, $file->id, 'inline' => 'true']) }}" class="btn btn-sm btn-default" target="_blank">
+                                            <i class="fa fa-external-link" aria-hidden="true"></i>
                                         </a>
                                     @endif
                                 @endif
