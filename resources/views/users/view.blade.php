@@ -913,7 +913,7 @@
                             <td>
                                 @if (($file->filename) && (Storage::exists('private_uploads/users/'.$file->filename)))
                                    @if (Helper::checkUploadIsImage($file->get_src('users')))
-                                        <a href="{{ route('show/userfile', ['userId' => $user->id, 'fileId' => $file->id, 'download' => 'false']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show/userfile', ['userId' => $user->id, 'fileId' => $file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
+                                        <a href="{{ route('show/userfile', [$user->id, $file->id, 'inline' => 'true']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show/userfile', [$user->id, $file->id, 'inline' => 'true']) }}" class="img-thumbnail" style="max-width: 50px;"></a>
                                     @else
                                         {{ trans('general.preview_not_available') }}
                                     @endif
