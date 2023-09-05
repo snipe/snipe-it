@@ -402,7 +402,9 @@ class UsersController extends Controller
         }
 
         app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
-        
+
+        $user->customFill($request,Auth::user());
+
         if ($user->save()) {
             if ($request->filled('groups')) {
                 $user->groups()->sync($request->input('groups'));
@@ -502,7 +504,9 @@ class UsersController extends Controller
 
         
         app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
-          
+
+        $user->customFill($request,Auth::user());
+
         if ($user->save()) {
 
             // Check if the request has groups passed and has a value, AND that the user us a superuser
