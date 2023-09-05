@@ -39,10 +39,6 @@ class Label implements View
         $assets = $this->data->get('assets');
         $offset = $this->data->get('offset');
         $template = $this->data->get('template');
-        
-        if ($assets->isEmpty()){
-            return redirect()->back();
-        }
 
         // If disabled, pass to legacy view
         if ((!$settings->label2_enable) && (!$template)) {
