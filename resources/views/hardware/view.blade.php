@@ -676,74 +676,8 @@
                                         </div>
                                     </div>
 
-                                    <!-- requestable -->
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <strong>{{ trans('admin/hardware/general.requestable') }}</strong>
-                                        </div>
-                                        <div class="col-md-9">
-                                            {!! ($asset->requestable=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
-                                        </div>
-                                    </div>
 
-                                    @if (($asset->model) && ($asset->model->fieldset))
-                                        @foreach($asset->model->fieldset->fields as $field)
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <strong>
-                                                        {{ $field->name }}
-                                                    </strong>
-                                                </div>
-                                                <div class="col-md-9{{ (($field->format=='URL') && ($asset->{$field->db_column_name()}!='')) ? ' ellipsis': '' }}">
-                                                    @if (($field->field_encrypted=='1') && ($asset->{$field->db_column_name()}!=''))
-
-                                                        <i class="fas fa-lock" data-tooltip="true" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}" onclick="showHideEncValue(this)" id="text-{{ $field->id }}"></i>
-                                                    @endif
-
-                                                    @if ($field->isFieldDecryptable($asset->{$field->db_column_name()} ))
-                                                        @can('assets.view.encrypted_custom_fields')
-                                                            @php
-                                                                $fieldSize=strlen(Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}))
-                                                            @endphp
-                                                            @if ($fieldSize>0)
-                                                                <span id="text-{{ $field->id }}-to-hide">{{ str_repeat('*', $fieldSize) }}</span>
-                                                                <span class="js-copy-{{ $field->id }} hidden-print" id="text-{{ $field->id }}-to-show" style="font-size: 0px;">
-                                                                @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
-                                                                        <a href="{{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}" target="_new">{{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}</a>
-                                                                    @elseif (($field->format=='DATE') && ($asset->{$field->db_column_name()}!=''))
-                                                                        {{ \App\Helpers\Helper::gracefulDecrypt($field, \App\Helpers\Helper::getFormattedDateObject($asset->{$field->db_column_name()}, 'date', false)) }}
-                                                                    @else
-                                                                        {{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}
-                                                                    @endif
-                                                                </span>
-                                                                <i class="fa-regular fa-clipboard js-copy-link hidden-print" data-clipboard-target=".js-copy-{{ $field->id }}" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
-                                                                    <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
-                                                                </i>
-                                                            @endif
-                                                        @else
-                                                            {{ strtoupper(trans('admin/custom_fields/general.encrypted')) }}
-                                                        @endcan
-
-                                                    @else
-                                                        @if (($field->format=='BOOLEAN') && ($asset->{$field->db_column_name()}!=''))
-                                                            {!! ($asset->{$field->db_column_name()} == 1) ? "<span class='fas fa-check-circle' style='color:green' />" : "<span class='fas fa-times-circle' style='color:red' />" !!}
-                                                        @elseif (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
-                                                            <a href="{{ $asset->{$field->db_column_name()} }}" target="_new">{{ $asset->{$field->db_column_name()} }}</a>
-                                                        @elseif (($field->format=='DATE') && ($asset->{$field->db_column_name()}!=''))
-                                                            {{ \App\Helpers\Helper::getFormattedDateObject($asset->{$field->db_column_name()}, 'date', false) }}
-                                                        @else
-                                                            {!! nl2br(e($asset->{$field->db_column_name()})) !!}
-                                                        @endif
-
-                                                    @endif
-
-                                                    @if ($asset->{$field->db_column_name()}=='')
-                                                        &nbsp;
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @endif
+                                        @include('partials.custom-fields-view', ['item' => $asset,'width' => 2])
 
 
                                     @if ($asset->purchase_date)
