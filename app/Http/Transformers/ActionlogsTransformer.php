@@ -161,6 +161,7 @@ class ActionlogsTransformer
     {   $location = Location::withTrashed()->get();
         $supplier = Supplier::withTrashed()->get();
         $model = AssetModel::withTrashed()->get();
+        $company = Company::withTrashed()->get();
 
 
         if(array_key_exists('rtd_location_id',$clean_meta)) {
@@ -191,10 +192,10 @@ class ActionlogsTransformer
         }
         if(array_key_exists('company_id', $clean_meta)) {
 
-            $oldCompany = Company::find($clean_meta['company_id']['old']);
+            $oldCompany = $company->find($clean_meta['company_id']['old']);
             $oldCompanyName = $oldCompany->name ?? trans('admin/companies/message.deleted');
 
-            $newCompany = Company::find($clean_meta['company_id']['new']);
+            $newCompany = $company->find($clean_meta['company_id']['new']);
             $newCompanyName = $newCompany->name ?? trans('admin/companies/message.deleted');
 
             $clean_meta['company_id']['old'] = $clean_meta['company_id']['old'] ? "[id: ".$clean_meta['company_id']['old']."] ". $oldCompanyName : trans('general.unassigned');
@@ -204,10 +205,10 @@ class ActionlogsTransformer
         }
         if(array_key_exists('supplier_id', $clean_meta)) {
 
-            $oldSupplier = Supplier::find($clean_meta['supplier_id']['old']);
+            $oldSupplier = $supplier->find($clean_meta['supplier_id']['old']);
             $oldSupplierName = $oldSupplier->name ?? trans('admin/suppliers/message.deleted');
 
-            $newSupplier = Supplier::find($clean_meta['supplier_id']['new']);
+            $newSupplier = $supplier->find($clean_meta['supplier_id']['new']);
             $newSupplierName = $newSupplier->name ?? trans('admin/suppliers/message.deleted');
 
             $clean_meta['supplier_id']['old'] = $clean_meta['supplier_id']['old'] ? "[id: ".$clean_meta['supplier_id']['old']."] ". $oldSupplierName : trans('general.unassigned');
