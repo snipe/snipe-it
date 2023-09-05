@@ -452,6 +452,21 @@
           console.log(elements);
 
           $("#savetemplateoptions").val(elements)
+
+          let formElement = document.getElementById('custom-report-form')
+
+          let inputsAsArray = Array.from(formElement.elements)
+
+          inputsAsArray.map(function(item){
+              // not a real method
+              if (item.isACheckbox()){
+                  return {name: item.name, type: checkbox, checked: item.checked};
+              }
+
+              if (item.isASelect){
+                  return {name:item.name, type: select, selected: [item.elements]}
+              }
+          })
           //    set hidden input to variable
           e.currentTarget.submit();
       });
