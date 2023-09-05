@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Gate;
  *
  * The 'present' method is designed for when you're trying to generate fieldlists for use in Bootstrap tables
  *  - typically the 'dataTableLayout' method
- * 
+ *
  *********************/
 class CustomFieldHelper {
 
