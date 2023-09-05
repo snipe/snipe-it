@@ -2,6 +2,7 @@
 
 namespace App\Presenters;
 
+use App\Helpers\CustomFieldHelper;
 use App\Helpers\Helper;
 use App\Models\Asset;
 use App\Models\CustomField;
@@ -412,19 +413,8 @@ class UserPresenter extends Presenter
         // name can break the listings page. - snipe
         foreach ($fields as $field) {
             \Log::debug("iterating through fields!");
-            $layout[] = [
-                'field' => 'custom_fields.'.$field->db_column,
-                'searchable' => true,
-                'sortable' => true,
-                'switchable' => true,
-                'title' => $field->name,
-                'formatter'=> 'customFieldsFormatter',
-                'escape' => true,
-                'class' => ($field->field_encrypted == '1') ? 'css-padlock' : '',
-                'visible' => ($field->show_in_listview == '1') ? true : false,
-            ];
+            $layout[] = CustomFieldHelper::present($field);
         }
-        // FIXME - end copy-pasta from AssetPresenter! </end>
 
         return json_encode($layout);
     }

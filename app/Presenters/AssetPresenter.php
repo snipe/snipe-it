@@ -2,6 +2,7 @@
 
 namespace App\Presenters;
 
+use App\Helpers\CustomFieldHelper;
 use App\Models\Asset;
 use App\Models\CustomField;
 use Carbon\CarbonImmutable;
@@ -315,17 +316,7 @@ class AssetPresenter extends Presenter
         // they are presented in the blade view. If we escape them here, custom fields with quotes in their
         // name can break the listings page. - snipe
         foreach ($fields as $field) {
-            $layout[] = [
-                'field' => 'custom_fields.'.$field->db_column,
-                'searchable' => true,
-                'sortable' => true,
-                'switchable' => true,
-                'title' => $field->name,
-                'formatter'=> 'customFieldsFormatter',
-                'escape' => true,
-                'class' => ($field->field_encrypted == '1') ? 'css-padlock' : '',
-                'visible' => ($field->show_in_listview == '1') ? true : false,
-            ];
+            $layout[] = CustomFieldHelper::present($field);
         }
 
         $layout[] = [
