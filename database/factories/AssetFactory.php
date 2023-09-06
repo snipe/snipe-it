@@ -352,5 +352,4 @@ class AssetFactory extends Factory
     {
         return $this->state(['requestable' => false]);
     }
-   
 }
