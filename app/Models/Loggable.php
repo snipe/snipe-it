@@ -144,7 +144,7 @@ trait Loggable
         }
 
         $changed = [];
-        $originalValues = array_intersect_key($originalValues, array_flip(['action_date','name','status_id','location_id','expected_checkin']));
+        $originalValues = array_intersect_key($originalValues, array_flip(['action_date','name','status_id','location_id','rtd_location_id','expected_checkin']));
 
         foreach ($originalValues as $key => $value) {
             if ($key == 'action_date' && $value != $action_date) {
