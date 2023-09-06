@@ -95,11 +95,10 @@ class ItemImporter extends Importer
                 try {
                     $this->item['asset_eol_date'] = CarbonImmutable::parse($csvMatch)->format('Y-m-d');
                 } catch (\Exception $e) {
-                    Log::alert($e->getMessage());
-                    $this->log('Error parsing date: '.$csvMatch);
+                    Log::info($e->getMessage());
+                    $this->log('Unable to parse date: '.$csvMatch);
                 }
         } elseif ($this->createOrFetchAssetModel($row) != null) {
-                //woof this is ugly
                 if($eol = AssetModel::find($this->createOrFetchAssetModel($row))->eol) {
                     $this->item['asset_eol_date'] = CarbonImmutable::parse($this->findCsvMatch($row, 'purchase_date'))->addMonths($eol)->format('Y-m-d');
                 }
