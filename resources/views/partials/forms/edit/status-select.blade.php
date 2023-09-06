@@ -5,23 +5,24 @@
 
     <div class="col-md-7{{  ((isset($required)) && ($required=='true')) ? ' required' : '' }}">
         <select class="js-data-ajax" data-endpoint="statuslabels" data-placeholder="{{ trans('general.select_statuslabel') }}" name="{{ $fieldname }}" style="width: 100%" id="status_select_id" aria-label="{{ $fieldname }}" {!!  ((isset($item)) && (Helper::checkIfRequired($item, $fieldname))) ? ' data-validation="required" required' : '' !!}{{ (isset($multiple) && ($multiple=='true')) ? " multiple='multiple'" : '' }}>
-            @if($multiple)
-                @if($status_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
-                    <option value="{{ $status_id }}" selected="selected" role="option" aria-selected="true"  role="option">
-                        {{ (\App\Models\Category::find($status_id)) ? \App\Models\Category::find($status_id)->name : '' }}
-                    </option>
+            @isset($multiple)
+                @if($multiple)
+                    @if($status_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
+                        <option value="{{ $status_id }}" selected="selected" role="option" aria-selected="true"  role="option">
+                            {{ (\App\Models\Category::find($status_id)) ? \App\Models\Category::find($status_id)->name : '' }}
+                        </option>
+                    @endif
                 @endif
-            @endif
-            @if(!$multiple)
-                @if($status_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
-                    <option value="{{ $status_id }}" selected="selected" role="option" aria-selected="true"  role="option">
-                        {{ (\App\Models\Category::find($status_id)) ? \App\Models\Category::find($status_id)->name : '' }}
-                    </option>
-                @else
-                    <option value="">{{ trans('general.select_statuslabel') }}</option>
+                @if(!$multiple)
+                    @if($status_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
+                        <option value="{{ $status_id }}" selected="selected" role="option" aria-selected="true"  role="option">
+                            {{ (\App\Models\Category::find($status_id)) ? \App\Models\Category::find($status_id)->name : '' }}
+                        </option>
+                    @else
+                        <option value="">{{ trans('general.select_statuslabel') }}</option>
+                    @endif
                 @endif
-            @endif
-
+            @endisset
         </select>
     </div>
 

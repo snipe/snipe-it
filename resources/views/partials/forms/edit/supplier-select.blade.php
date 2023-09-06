@@ -4,22 +4,24 @@
 
     <div class="col-md-7{{ (isset($item) && (Helper::checkIfRequired($item, $fieldname))) ? ' required' : '' }}">
         <select class="js-data-ajax" data-endpoint="suppliers" data-placeholder="{{ trans('general.select_supplier') }}" name="{{ $fieldname }}" style="width: 100%" id="supplier_select" aria-label="{{ $fieldname }}"{{ (isset($multiple) && ($multiple=='true')) ? " multiple='multiple'" : '' }}>
-            @if($multiple)
-                @if($supplier_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
-                    <option value="{{ $supplier_id }}" selected="selected" role="option" aria-selected="true"  role="option">
-                        {{ (\App\Models\Category::find($supplier_id)) ? \App\Models\Category::find($supplier_id)->name : '' }}
-                    </option>
+            @isset($multiple)
+                @if($multiple)
+                    @if($supplier_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
+                        <option value="{{ $supplier_id }}" selected="selected" role="option" aria-selected="true"  role="option">
+                            {{ (\App\Models\Category::find($supplier_id)) ? \App\Models\Category::find($supplier_id)->name : '' }}
+                        </option>
+                    @endif
                 @endif
-            @endif
-            @if(!$multiple)
-                @if($supplier_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
-                    <option value="{{ $supplier_id }}" selected="selected" role="option" aria-selected="true"  role="option">
-                        {{ (\App\Models\Category::find($supplier_id)) ? \App\Models\Category::find($supplier_id)->name : '' }}
-                    </option>
-                @else
-                    <option value="">{{ trans('general.select_supplier') }}</option>
+                @if(!$multiple)
+                    @if($supplier_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
+                        <option value="{{ $supplier_id }}" selected="selected" role="option" aria-selected="true"  role="option">
+                            {{ (\App\Models\Category::find($supplier_id)) ? \App\Models\Category::find($supplier_id)->name : '' }}
+                        </option>
+                    @else
+                        <option value="">{{ trans('general.select_supplier') }}</option>
+                    @endif
                 @endif
-            @endif
+            @endisset
         </select>
     </div>
 
