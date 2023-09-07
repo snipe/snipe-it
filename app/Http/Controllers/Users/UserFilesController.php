@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Users;
 
+use App\Helpers\StorageHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetFileRequest;
 use App\Models\Actionlog;
@@ -143,17 +144,17 @@ class UserFilesController extends Controller
             $this->authorize('view', $user);
 
             $log = Actionlog::find($fileId);
-            $file = 'private_uploads/users/'.$log->filename;
 
             // Display the file inline
             if (request('inline') == 'true') {
                 $headers = [
                     'Content-Disposition' => 'inline',
                 ];
-                return Storage::download($file, $log->filename, $headers);
+                return Storage::download('private_uploads/users/'.$log->filename, $log->filename, $headers);
             }
 
-            return Response::download($file); //FIXME this doesn't use the new StorageHelper yet, but it's complicated...
+            return Storage::download('private_uploads/users/'.$log->filename);
+
         }
 
         // Redirect to the user management page if the user doesn't exist
