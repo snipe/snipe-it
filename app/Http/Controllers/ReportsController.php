@@ -1021,7 +1021,7 @@ class ReportsController extends Controller
 
         $assetsForReport = $acceptances
             ->filter(function ($acceptance) {
-                return $acceptance->checkoutable_type == 'App\Models\Asset';
+                return $acceptance->checkoutable_type == 'App\Models\Asset' && $acceptance->checkoutable->checkedOutToUser();
             })
             ->map(function($acceptance) {
                 return ['assetItem' => $acceptance->checkoutable, 'acceptance' => $acceptance];
