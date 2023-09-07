@@ -26,8 +26,6 @@ class UsersUpdateTest extends TestCase
 
         $user = User::factory()->create([
             'activated' => false,
-            'two_factor_enrolled' => false,
-            'two_factor_optin' => false,
             'remote' => false,
             'vip' => false,
         ]);
@@ -47,8 +45,6 @@ class UsersUpdateTest extends TestCase
                 'employee_num' => '1111',
                 'notes' => 'Pretty good artist',
                 'company_id' => $company->id,
-                'two_factor_enrolled' => true,
-                'two_factor_optin' => true,
                 'department_id' => $department->id,
                 'location_id' => $location->id,
                 'remote' => true,
@@ -73,9 +69,6 @@ class UsersUpdateTest extends TestCase
         $this->assertEquals('1111', $user->employee_num);
         $this->assertEquals('Pretty good artist', $user->notes);
         $this->assertTrue($user->company->is($company));
-        // @todo:
-        // $this->assertEquals(1, $user->two_factor_enrolled);
-        // $this->assertEquals(1, $user->two_factor_optin);
         $this->assertTrue($user->department->is($department));
         $this->assertTrue($user->location->is($location));
         $this->assertEquals(1, $user->remote);
