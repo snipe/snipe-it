@@ -39,8 +39,7 @@ class UsersUpdateTest extends TestCase
                 'username' => 'mabel',
                 'password' => 'super-secret',
                 'email' => 'mabel@onlymurderspod.com',
-                // @todo:
-                // 'permissions' => '',
+                'permissions' => '{"a.new.permission":"1"}',
                 'activated' => true,
                 'phone' => '619-555-5555',
                 'jobtitle' => 'Host',
@@ -66,6 +65,7 @@ class UsersUpdateTest extends TestCase
         $this->assertEquals('mabel', $user->username);
         $this->assertTrue(Hash::check('super-secret', $user->password));
         $this->assertEquals('mabel@onlymurderspod.com', $user->email);
+        $this->assertArrayHasKey('a.new.permission', $user->decodePermissions());
         $this->assertTrue($user->activated);
         $this->assertEquals('619-555-5555', $user->phone);
         $this->assertEquals('Host', $user->jobtitle);
