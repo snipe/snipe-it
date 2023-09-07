@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use League\Csv\Reader;
 use Illuminate\View\View;
 
@@ -306,7 +307,7 @@ class AssetsController extends Controller
         $asset->status_id = $request->input('status_id', null);
         $asset->warranty_months = $request->input('warranty_months', null);
         $asset->purchase_cost = $request->input('purchase_cost', null);
-        $asset->purchase_date = $request->input('purchase_date', null); 
+        $asset->purchase_date = $request->input('purchase_date', null);
         if ($request->filled('purchase_date') && !$request->filled('asset_eol_date')) {
             $asset->purchase_date = $request->input('purchase_date', null);
             $asset->asset_eol_date = Carbon::parse($request->input('purchase_date'))->addMonths($asset->model->eol)->format('Y-m-d');
