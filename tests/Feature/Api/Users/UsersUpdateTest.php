@@ -15,11 +15,6 @@ class UsersUpdateTest extends TestCase
 {
     use InteractsWithSettings;
 
-    public function testValidationForUpdatingUserViaPatch()
-    {
-        $this->markTestIncomplete();
-    }
-
     public function testCanUpdateUserViaPatch()
     {
         $admin = User::factory()->superuser()->create();
@@ -38,7 +33,7 @@ class UsersUpdateTest extends TestCase
         ]);
 
         $this->actingAsForApi($admin)
-            ->patch(route('api.users.update', $user), [
+            ->patchJson(route('api.users.update', $user), [
                 'first_name' => 'Mabel',
                 'last_name' => 'Mora',
                 'username' => 'mabel',
@@ -107,22 +102,12 @@ class UsersUpdateTest extends TestCase
         $this->markTestIncomplete();
     }
 
-    public function testDepartmentPatching()
+    public function testDepartmentValidation()
     {
-        $admin = User::factory()->superuser()->create();
-        $user = User::factory()->forDepartment(['name' => 'Department A'])->create();
-        $department = Department::factory()->create();
-
-        $this->actingAsForApi($admin)->patch(route('api.users.update', $user), [
-            // This isn't valid but doesn't return an error
-            'department_id' => ['id' => $department->id],
-            // This is the correct syntax
-            // 'department_id' => $department->id,
-        ])->assertOk();
-
-        $this->assertTrue(
-            $user->fresh()->department()->is($department),
-            'User is not associated with expected department'
-        );
+        $this->actingAsForApi(User::factory()->superuser()->create())
+            ->patchJson(route('api.users.update', User::factory()->create()), [
+            // This isn't valid but was not returning an error
+            'department_id' => ['id' => 1],
+        ])->assertJsonValidationErrorFor('department_id');
     }
 }
