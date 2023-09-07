@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "411741edf87445a87a6b771e1d370a09",
+    "content-hash": "6a7666957fcf514f54340bf80ad18726",
     "packages": [
         {
             "name": "alek13/slack",
@@ -77,13 +77,13 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/arietimmerman/laravel-scim-server.git",
-                "reference": "351937587b0120e0083b38a98d81f050bd18aa67"
+                "url": "https://github.com/grokability/laravel-scim-server.git",
+                "reference": "dda6dfb60d70fb6cca4b8d4ce1c5f4c19deaab2d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arietimmerman/laravel-scim-server/zipball/351937587b0120e0083b38a98d81f050bd18aa67",
-                "reference": "351937587b0120e0083b38a98d81f050bd18aa67",
+                "url": "https://api.github.com/repos/grokability/laravel-scim-server/zipball/dda6dfb60d70fb6cca4b8d4ce1c5f4c19deaab2d",
+                "reference": "dda6dfb60d70fb6cca4b8d4ce1c5f4c19deaab2d",
                 "shasum": ""
             },
             "require": {
@@ -115,7 +115,11 @@
                     "ArieTimmerman\\Laravel\\SCIMServer\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "ArieTimmerman\\Laravel\\SCIMServer\\Tests\\": "tests"
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -127,10 +131,9 @@
             ],
             "description": "Laravel Package for creating a SCIM server",
             "support": {
-                "issues": "https://github.com/arietimmerman/laravel-scim-server/issues",
-                "source": "https://github.com/arietimmerman/laravel-scim-server/tree/v0.6.3"
+                "source": "https://github.com/grokability/laravel-scim-server/tree/master"
             },
-            "time": "2023-07-24T18:45:13+00:00"
+            "time": "2023-09-07T16:45:26+00:00"
         },
         {
             "name": "aws/aws-crt-php",
