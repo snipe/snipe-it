@@ -106,8 +106,8 @@ class UsersUpdateTest extends TestCase
     {
         $this->actingAsForApi(User::factory()->superuser()->create())
             ->patchJson(route('api.users.update', User::factory()->create()), [
-            // This isn't valid but was not returning an error
-            'department_id' => ['id' => 1],
-        ])->assertJsonValidationErrorFor('department_id');
+                // This isn't valid but was not returning an error
+                'department_id' => ['id' => 1],
+            ])->assertJsonValidationErrorFor('department_id');
     }
 }
