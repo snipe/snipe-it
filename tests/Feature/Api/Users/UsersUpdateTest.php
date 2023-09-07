@@ -56,32 +56,32 @@ class UsersUpdateTest extends TestCase
             ->assertOk();
 
         $user->refresh();
-        $this->assertEquals('Mabel', $user->first_name);
-        $this->assertEquals('Mora', $user->last_name);
-        $this->assertEquals('mabel', $user->username);
-        $this->assertTrue(Hash::check('super-secret', $user->password));
-        $this->assertEquals('mabel@onlymurderspod.com', $user->email);
-        $this->assertArrayHasKey('a.new.permission', $user->decodePermissions());
-        $this->assertTrue($user->activated);
-        $this->assertEquals('619-555-5555', $user->phone);
-        $this->assertEquals('Host', $user->jobtitle);
-        $this->assertTrue($user->manager->is($manager));
-        $this->assertEquals('1111', $user->employee_num);
-        $this->assertEquals('Pretty good artist', $user->notes);
-        $this->assertTrue($user->company->is($company));
-        $this->assertTrue($user->department->is($department));
-        $this->assertTrue($user->location->is($location));
-        $this->assertEquals(1, $user->remote);
-        $this->assertTrue($user->groups->contains($groupA));
-        $this->assertTrue($user->vip);
-        $this->assertEquals('2021-08-01', $user->start_date);
-        $this->assertEquals('2025-12-31', $user->end_date);
+        $this->assertEquals('Mabel', $user->first_name, 'First name was not updated');
+        $this->assertEquals('Mora', $user->last_name, 'Last name was not updated');
+        $this->assertEquals('mabel', $user->username, 'Username was not updated');
+        $this->assertTrue(Hash::check('super-secret', $user->password), 'Password was not updated');
+        $this->assertEquals('mabel@onlymurderspod.com', $user->email, 'Email was not updated');
+        $this->assertArrayHasKey('a.new.permission', $user->decodePermissions(), 'Permissions were not updated');
+        $this->assertTrue((bool)$user->activated, 'User not marked as activated');
+        $this->assertEquals('619-555-5555', $user->phone, 'Phone was not updated');
+        $this->assertEquals('Host', $user->jobtitle, 'Job title was not updated');
+        $this->assertTrue($user->manager->is($manager), 'Manager was not updated');
+        $this->assertEquals('1111', $user->employee_num, 'Employee number was not updated');
+        $this->assertEquals('Pretty good artist', $user->notes, 'Notes was not updated');
+        $this->assertTrue($user->company->is($company), 'Company was not updated');
+        $this->assertTrue($user->department->is($department), 'Department was not updated');
+        $this->assertTrue($user->location->is($location), 'Location was not updated');
+        $this->assertEquals(1, $user->remote, 'Remote was not updated');
+        $this->assertTrue($user->groups->contains($groupA), 'Groups were not updated');
+        $this->assertEquals(1, $user->vip, 'VIP was not updated');
+        $this->assertEquals('2021-08-01', $user->start_date, 'Start date was not updated');
+        $this->assertEquals('2025-12-31', $user->end_date, 'End date was not updated');
 
         // `groups` can be an id or array or ids
         $this->patch(route('api.users.update', $user), ['groups' => [$groupA->id, $groupB->id]]);
 
         $user->refresh();
-        $this->assertTrue($user->groups->contains($groupA));
-        $this->assertTrue($user->groups->contains($groupB));
+        $this->assertTrue($user->groups->contains($groupA), 'Not part of expected group');
+        $this->assertTrue($user->groups->contains($groupB), 'Not part of expected group');
     }
 }
