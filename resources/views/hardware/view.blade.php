@@ -706,7 +706,7 @@
                                                 @else
                                                     {{ trans('general.na_no_purchase_date') }}
                                                 @endif
-                                                {{--@if ($asset->eol_explicit)
+                                                @if ($asset->eol_explicit)
                                                     <i class="fas fa-exclamation-triangle text-orange"
                                                        aria-hidden="true"
                                                        data-tooltip="true"
@@ -714,17 +714,7 @@
                                                        data-title="Explicit EOL"
                                                        title="Explicit EOL">
                                                     </i>
-                                                @endif--}}
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-2">
-                                                <strong>
-                                                    Explicit EOL
-                                                </strong>
-                                            </div>
-                                            <div class="col-md-6">
-                                                {{ $asset->eol_explicit ? 'Yes' : 'No' }}
+                                                @endif
                                             </div>
                                         </div>
                                     @endif
