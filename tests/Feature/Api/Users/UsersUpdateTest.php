@@ -62,7 +62,7 @@ class UsersUpdateTest extends TestCase
         $this->assertTrue(Hash::check('super-secret', $user->password), 'Password was not updated');
         $this->assertEquals('mabel@onlymurderspod.com', $user->email, 'Email was not updated');
         $this->assertArrayHasKey('a.new.permission', $user->decodePermissions(), 'Permissions were not updated');
-        $this->assertTrue($user->activated, 'User not marked as activated');
+        $this->assertEquals(1, $user->activated, 'User not marked as activated');
         $this->assertEquals('619-555-5555', $user->phone, 'Phone was not updated');
         $this->assertEquals('Host', $user->jobtitle, 'Job title was not updated');
         $this->assertTrue($user->manager->is($manager), 'Manager was not updated');
@@ -73,7 +73,7 @@ class UsersUpdateTest extends TestCase
         $this->assertTrue($user->location->is($location), 'Location was not updated');
         $this->assertEquals(1, $user->remote, 'Remote was not updated');
         $this->assertTrue($user->groups->contains($groupA), 'Groups were not updated');
-        $this->assertTrue($user->vip, 'VIP was not updated');
+        $this->assertEquals(1, $user->vip, 'VIP was not updated');
         $this->assertEquals('2021-08-01', $user->start_date, 'Start date was not updated');
         $this->assertEquals('2025-12-31', $user->end_date, 'End date was not updated');
 
