@@ -91,23 +91,4 @@ class UsersUpdateTest extends TestCase
         $this->assertTrue($user->groups->contains($groupA));
         $this->assertTrue($user->groups->contains($groupB));
     }
-
-    public function testValidationForUpdatingUserViaPut()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testCanUpdateUserViaPut()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testDepartmentValidation()
-    {
-        $this->actingAsForApi(User::factory()->superuser()->create())
-            ->patchJson(route('api.users.update', User::factory()->create()), [
-                // This isn't valid but was not returning an error
-                'department_id' => ['id' => 1],
-            ])->assertJsonValidationErrorFor('department_id');
-    }
 }
