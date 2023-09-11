@@ -126,12 +126,13 @@ class AccessoriesController extends Controller
     public function getClone($accessoryId = null)
     {
 
-        $this->authorize('create', Accesory::class);
+        $this->authorize('create', Accessory::class);
 
         // Check if the asset exists
         if (is_null($accessory_to_clone = Accessory::find($accessoryId))) {
             // Redirect to the asset management page
-            return redirect()->route('accessory.index')->with('error', trans('admin/accessories/message.does_not_exist'));
+            return redirect()->route('accessories.index')
+                ->with('error', trans('admin/accessories/message.does_not_exist', ['id' => $accessoryId]));
         }
 
         $accessory = clone $accessory_to_clone;

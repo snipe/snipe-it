@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-{{ trans('general.hello_name', array('name' => $user->present()->fullName())) }}
+{{ trans('general.hello_name', array('name' => $user->present()->getFullNameAttribute())) }}
 @parent
 @stop
 

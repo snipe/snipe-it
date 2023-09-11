@@ -80,5 +80,5 @@ return [
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
     'your_assets' => 'View Your Assets',
-    'rights_reserved' => 'All rights reserved.',
+    'rights_reserved' => 'Visos teisės saugomos.',
 ];

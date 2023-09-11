@@ -6,7 +6,7 @@ return array(
     'deleted'  					        => '此型號已被刪除.',
     'bulk_delete'               => '批次刪除資產型號',
     'bulk_delete_help'               => '使用下面的核取方塊確認刪除選定的資產型號。不能刪除具有資產與之關聯的資產模型。',
-    'bulk_delete_warn'          => 'You are about to delete one asset model.|You are about to delete :model_count asset models.',
+    'bulk_delete_warn'          => '您即將刪除一個資產型號。|您即將刪除 :model_count 個資產型號。',
     'restore'                   => '恢復型號',
     'requestable'               => '使用者可申請此型號',
 	'show_mac_address'			      => '在型號資產中顯示MAC地址',

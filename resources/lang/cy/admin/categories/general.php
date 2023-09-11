@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Dyblygu Categori',
     'create'  							=> 'Creu Categori Newydd',
     'edit'                              => 'Golygu Categori',
+    'email_will_be_sent_due_to_global_eula' => 'An email will be sent to the user because the global EULA is being used.',
+    'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
     'eula_text'							=> 'CTDT Categori',
     'eula_text_help'					=> 'Mae\'r blwch yma yn caniatau i chi addasu eich CTDTs ar gyfer mathau penodol o asedau. Os ydych yn defnyddio un CTDT ar gyfer eich asedau yna cewch ticio\'r blwch isod i defnyddio\'r fersiwn diofyn.',
     'name'                              => 'Enw\'r categori',

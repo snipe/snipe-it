@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Клонирај Категорија',
     'create'  							=> 'Креирај категорија',
     'edit'                              => 'Уреди категорија',
+    'email_will_be_sent_due_to_global_eula' => 'An email will be sent to the user because the global EULA is being used.',
+    'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
     'eula_text'							=> 'Категорија - Услови за користење',
     'eula_text_help'					=> 'Ова поле ви овозможува да ги прилагодите вашите Услови за користење за сите видови на средства. Ако имате само едни Услови за користење за сите ваши основни средства, можете да вклучите подолу да се користaт стандардните Услови за користење.',
     'name'                              => 'Име на категорија',

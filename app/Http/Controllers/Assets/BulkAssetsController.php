@@ -8,11 +8,13 @@ use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
 use App\Models\Setting;
+use App\View\Label;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\AssetCheckoutRequest;
+use App\Models\CustomField;
 
 class BulkAssetsController extends Controller
 {
@@ -30,7 +32,7 @@ class BulkAssetsController extends Controller
     public function edit(Request $request)
     {
         $this->authorize('view', Asset::class);
-
+      
         if (! $request->filled('ids')) {
             return redirect()->back()->with('error', trans('admin/hardware/message.update.no_assets_selected'));
         }
@@ -40,13 +42,30 @@ class BulkAssetsController extends Controller
         session(['bulk_back_url' => $bulk_back_url]);
 
         $asset_ids = array_values(array_unique($request->input('ids')));
+       
+        //custom fields logic
+        $asset_custom_field = Asset::with(['model.fieldset.fields', 'model'])->whereIn('id', $asset_ids)->whereHas('model', function ($query) {
+            return $query->where('fieldset_id', '!=', null);
+        })->get();
+
+        $models = $asset_custom_field->unique('model_id');  
+        $modelNames = [];
+        foreach($models as $model) {
+            $modelNames[] = $model->model->name;
+        } 
 
         if ($request->filled('bulk_actions')) {
             switch ($request->input('bulk_actions')) {
                 case 'labels':
                     $this->authorize('view', Asset::class);
-                    return view('hardware/labels')
-                        ->with('assets', Asset::find($asset_ids))
+                    $assets_found = Asset::find($asset_ids);
+                    
+                    if ($assets_found->isEmpty()){
+                        return redirect()->back();
+                    }
+
+                    return (new Label)
+                        ->with('assets', $assets_found)
                         ->with('settings', Setting::getSettings())
                         ->with('bulkedit', true)
                         ->with('count', 0);
@@ -73,7 +92,9 @@ class BulkAssetsController extends Controller
                     $this->authorize('update', Asset::class);
                     return view('hardware/bulk')
                         ->with('assets', $asset_ids)
-                        ->with('statuslabel_list', Helper::statusLabelList());
+                        ->with('statuslabel_list', Helper::statusLabelList())
+                        ->with('models', $models->pluck(['model'])) 
+                        ->with('modelNames', $modelNames);
             }
         }
 
@@ -91,6 +112,7 @@ class BulkAssetsController extends Controller
     public function update(Request $request)
     {
         $this->authorize('update', Asset::class);
+        $error_bag = [];
 
         // Get the back url from the session and then destroy the session
         $bulk_back_url = route('hardware.index');
@@ -99,12 +121,21 @@ class BulkAssetsController extends Controller
         }
 
 
-        if (! $request->filled('ids') || count($request->input('ids')) <= 0) {
+      $custom_field_columns = CustomField::all()->pluck('db_column')->toArray(); 
+     
+        if(Session::exists('ids')) {
+            $assets = Session::get('ids'); 
+        } elseif (! $request->filled('ids') || count($request->input('ids')) <= 0) {
             return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.update.no_assets_selected'));
         }
-
+         
         $assets = array_keys($request->input('ids'));
-
+        
+       if ($request->anyFilled($custom_field_columns)) {
+           $custom_fields_present = true;
+         } else {
+           $custom_fields_present = false;
+         }
         if (($request->filled('purchase_date'))
             || ($request->filled('expected_checkin'))
             || ($request->filled('purchase_cost'))
@@ -120,6 +151,7 @@ class BulkAssetsController extends Controller
             || ($request->filled('null_purchase_date'))
             || ($request->filled('null_expected_checkin_date'))
             || ($request->filled('null_next_audit_date'))
+            || ($request->anyFilled($custom_field_columns))
 
         ) {
             foreach ($assets as $assetId) {
@@ -135,6 +167,9 @@ class BulkAssetsController extends Controller
                     ->conditionallyAddItem('supplier_id')
                     ->conditionallyAddItem('warranty_months')
                     ->conditionallyAddItem('next_audit_date');
+                    foreach ($custom_field_columns as $key => $custom_field_column) {
+                        $this->conditionallyAddItem($custom_field_column); 
+                   } 
 
                 if ($request->input('null_purchase_date')=='1') {
                     $this->update_array['purchase_date'] = null;
@@ -167,11 +202,11 @@ class BulkAssetsController extends Controller
                 }
 
                 $changed = [];
-                $asset = Asset::where('id' ,$assetId)->get();
+                $assetCollection = Asset::where('id' ,$assetId)->get();
 
                 foreach ($this->update_array as $key => $value) {
-                    if ($this->update_array[$key] != $asset->toArray()[0][$key]) {
-                        $changed[$key]['old'] = $asset->toArray()[0][$key];
+                    if ($this->update_array[$key] != $assetCollection->toArray()[0][$key]) {
+                        $changed[$key]['old'] = $assetCollection->toArray()[0][$key];
                         $changed[$key]['new'] = $this->update_array[$key];
                     }
                 }
@@ -183,17 +218,47 @@ class BulkAssetsController extends Controller
                 $logAction->user_id = Auth::id();
                 $logAction->log_meta = json_encode($changed);
                 $logAction->logaction('update');
-
-                DB::table('assets')
-                    ->where('id', $assetId)
-                    ->update($this->update_array);
-            } // endforeach
-
+ 
+                if($custom_fields_present) { 
+                    $asset = Asset::find($assetId); 
+                    $assetCustomFields = $asset->model()->first()->fieldset; 
+                    if($assetCustomFields && $assetCustomFields->fields) {
+                            foreach ($assetCustomFields->fields as $field) { 
+                                if (array_key_exists($field->db_column, $this->update_array)) {
+                                        $asset->{$field->db_column} = $this->update_array[$field->db_column]; 
+                                        $saved = $asset->save();    
+                                        if(!$saved) {
+                                            $error_bag[] = $asset->getErrors();
+                                        }
+                                        continue; 
+                                } else { 
+                                        $array = $this->update_array; 
+                                        array_except($array, $field->db_column); 
+                                        $asset->save($array); 
+                                    }     
+                                    if (!$asset->save()) {
+                                        $error_bag[] = $asset->getErrors();
+                                } 
+                    } 
+                }
+                } else {
+                    Asset::find($assetId)->update($this->update_array);
+                } 
+            } 
+            if(!empty($error_bag)) {
+                $errors = [];
+               //find the customfield name from the name of the messagebag items 
+                foreach ($error_bag as $key => $bag) {
+                  foreach($bag->keys() as $key => $value) {
+                        CustomField::where('db_column', $value)->get()->map(function($item) use (&$errors) {
+                            $errors[] = $item->name; 
+                        });
+                    }
+                }
+                return redirect($bulk_back_url)->with('bulk_errors', array_unique($errors));
+              }
             return redirect($bulk_back_url)->with('success', trans('admin/hardware/message.update.success'));
-
-
         }
-
         // no values given, nothing to update
         return redirect($bulk_back_url)->with('warning', trans('admin/hardware/message.update.nothing_updated'));
     }

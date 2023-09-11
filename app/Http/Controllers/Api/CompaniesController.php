@@ -27,6 +27,9 @@ class CompaniesController extends Controller
         $allowed_columns = [
             'id',
             'name',
+            'phone',
+            'fax',
+            'email',
             'created_at',
             'updated_at',
             'users_count',
@@ -45,6 +48,10 @@ class CompaniesController extends Controller
 
         if ($request->filled('name')) {
             $companies->where('name', '=', $request->input('name'));
+        }
+
+		if ($request->filled('email')) {
+            $companies->where('email', '=', $request->input('email'));
         }
 
 
@@ -166,6 +173,7 @@ class CompaniesController extends Controller
         $companies = Company::select([
             'companies.id',
             'companies.name',
+            'companies.email',
             'companies.image',
         ]);
 

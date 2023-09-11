@@ -10,6 +10,7 @@ use App\Http\Controllers\DepreciationsController;
 use App\Http\Controllers\GroupsController;
 use App\Http\Controllers\HealthController;
 use App\Http\Controllers\ImportsController;
+use App\Http\Controllers\LabelsController;
 use App\Http\Controllers\LocationsController;
 use App\Http\Controllers\ManufacturersController;
 use App\Http\Controllers\ModalController;
@@ -39,8 +40,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('categories', CategoriesController::class, [
         'parameters' => ['category' => 'category_id'],
     ]);
-
-
+  
+    /*
+    * Labels
+    */
+    Route::get(
+        'labels/{labelName}',
+        [LabelsController::class, 'show']
+    )->where('labelName', '.*')->name('labels.show');
 
     /*
      * Locations
@@ -66,9 +73,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('locations', LocationsController::class, [
         'parameters' => ['location' => 'location_id'],
     ]);
-
-
-
 
 
     /*
@@ -281,7 +285,7 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
     )->name('account/request-asset');
 
     Route::post(
-        'request/{itemType}/{itemId}',
+        'request/{itemType}/{itemId}/{cancel_by_admin?}/{requestingUser?}',
         [ViewAssetsController::class, 'getRequestItem']
     )->name('account/request-item');
 

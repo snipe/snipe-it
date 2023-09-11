@@ -71,12 +71,33 @@ class AssetObserver
     public function created(Asset $asset)
     {
         if ($settings = Setting::getSettings()) {
-            $settings->increment('next_auto_tag_base');
-            $settings->save();
+            $tag = $asset->asset_tag;
+            $prefix = $settings->auto_increment_prefix;
+            $number = substr($tag, strlen($prefix));
+            // IF - auto_increment_assets is on, AND (there is no prefix OR the prefix matches the start of the tag)
+            //      AND the rest of the string after the prefix is all digits, THEN...
+            if ($settings->auto_increment_assets && ($prefix=='' || strpos($tag, $prefix) === 0) && preg_match('/\d+/',$number) === 1) {
+                // new way of auto-trueing-up auto_increment ID's
+                $next_asset_tag = intval($number, 10) + 1;
+                // we had to use 'intval' because the $number could be '01234' and
+                // might get interpreted in Octal instead of decimal
+
+                // only modify the 'next' one if it's *bigger* than the stored base
+                //
+                if($next_asset_tag > $settings->next_auto_tag_base) {
+                    $settings->next_auto_tag_base = $next_asset_tag;
+                    $settings->save();
+                }
+
+            } else {
+                // legacy method
+                $settings->increment('next_auto_tag_base');
+                $settings->save();
+            }
         }
 
         $logAction = new Actionlog();
-        $logAction->item_type = Asset::class;
+        $logAction->item_type = Asset::class; // can we instead say $logAction->item = $asset ?
         $logAction->item_id = $asset->id;
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->user_id = Auth::id();

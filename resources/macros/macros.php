@@ -11,7 +11,7 @@ Form::macro('locales', function ($name = 'locale', $selected = null, $class = nu
 
     $idclause = (!is_null($id)) ? $id : '';
 
-    $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:350px"'.$idclause.' aria-label="'.$name.'" data-placeholder="'.trans('localizations.select_language').'">';
+    $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:100%"'.$idclause.' aria-label="'.$name.'" data-placeholder="'.trans('localizations.select_language').'">';
     $select .= '<option value=""  role="option">'.trans('localizations.select_language').'</option>';
 
     // Pull the autoglossonym array from the localizations translation file
@@ -59,9 +59,9 @@ Form::macro('date_display_format', function ($name = 'date_display_format', $sel
     ];
 
     foreach ($formats as $format) {
-        $date_display_formats[$format] = Carbon::parse(date('Y').'-'.date('m').'-25')->format($format);
+        $date_display_formats[$format] = Carbon::parse(date('Y-m-d'))->format($format);
     }
-    $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:250px" aria-label="'.$name.'">';
+    $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:100%" aria-label="'.$name.'">';
     foreach ($date_display_formats as $format => $date_display_format) {
         $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'">'.$date_display_format.'</option> ';
     }
@@ -102,6 +102,23 @@ Form::macro('digit_separator', function ($name = 'digit_separator', $selected = 
     $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:120px">';
     foreach ($formats as $format_inner) {
         $select .= '<option value="'.$format_inner.'"'.($selected == $format_inner ? ' selected="selected"' : '').'>'.$format_inner.'</option> ';
+    }
+
+    $select .= '</select>';
+
+    return $select;
+});
+
+
+Form::macro('name_display_format', function ($name = 'name_display_format', $selected = null, $class = null) {
+    $formats = [
+        'first_last' => trans('general.firstname_lastname_display'),
+        'last_first' => trans('general.lastname_firstname_display'),
+    ];
+
+    $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%" aria-label="'.$name.'">';
+    foreach ($formats as $format => $label) {
+        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$label.'</option> '."\n";
     }
 
     $select .= '</select>';

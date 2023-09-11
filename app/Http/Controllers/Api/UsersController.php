@@ -75,14 +75,7 @@ class UsersController extends Controller
 
         ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy',)
             ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count');
-        $users = Company::scopeCompanyables($users);
 
-
-        if (($request->filled('deleted')) && ($request->input('deleted') == 'true')) {
-            $users = $users->onlyTrashed();
-        } elseif (($request->filled('all')) && ($request->input('all') == 'true')) {
-            $users = $users->withTrashed();
-        }
 
         if ($request->filled('activated')) {
             $users = $users->where('users.activated', '=', $request->input('activated'));
@@ -272,6 +265,14 @@ class UsersController extends Controller
                 break;
         }
 
+        if (($request->filled('deleted')) && ($request->input('deleted') == 'true')) {
+            $users = $users->onlyTrashed();
+        } elseif (($request->filled('all')) && ($request->input('all') == 'true')) {
+            $users = $users->withTrashed();
+        }
+
+        $users = Company::scopeCompanyables($users);
+        
         $total = $users->count();
         $users = $users->skip($offset)->take($limit)->get();
 

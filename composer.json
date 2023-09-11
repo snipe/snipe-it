@@ -50,7 +50,7 @@
     "laravel/tinker": "^2.6",
     "laravel/ui": "^3.3",
     "laravelcollective/html": "^6.2",
-    "lcobucci/clock": "1.2.0|2.0.0",
+    "lcobucci/clock": "^1.2.0|^2.0.0",
     "lcobucci/jwt": "^3.4.5|^4.0.4",
     "league/csv": "^9.7",
     "league/flysystem-aws-s3-v3": "^1.0",
@@ -70,12 +70,13 @@
     "spatie/laravel-backup": "^6.16",
     "symfony/polyfill-mbstring": "^1.22",
     "tecnickcom/tc-lib-barcode": "^1.15",
+    "tecnickcom/tcpdf": "^6.5",
     "unicodeveloper/laravel-password": "^1.0",
     "watson/validating": "^6.1"
   },
   "require-dev": {
+    "brianium/paratest": "^6.6",
     "fakerphp/faker": "^1.16",
-    "laravel/dusk": "^6.25",
     "mockery/mockery": "^1.4",
     "nunomaduro/larastan": "^1.0",
     "nunomaduro/phpinsights": "^2.7",
@@ -84,7 +85,7 @@
     "squizlabs/php_codesniffer": "^3.5",
     "symfony/css-selector": "^4.4",
     "symfony/dom-crawler": "^4.4",
-    "vimeo/psalm": "^5.6"
+    "vimeo/psalm": "^5.13"
   },
   "extra": {
     "laravel": {
@@ -105,7 +106,6 @@
   },
   "autoload-dev": {
     "classmap": [
-      "tests/DuskTestCase.php",
       "tests/TestCase.php"
     ],
     "psr-4": {

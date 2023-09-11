@@ -1,10 +1,10 @@
 <?php
 return array (
-  'app_version' => 'v6.1.1-pre',
-  'full_app_version' => 'v6.1.1-pre - build 10778-gfc5b02e39',
-  'build_version' => '10778',
+  'app_version' => 'v6.2.0-pre',
+  'full_app_version' => 'v6.2.0-pre - build 11391-g319cb2305',
+  'build_version' => '11391',
   'prerelease_version' => '',
-  'hash_version' => 'gfc5b02e39',
-  'full_hash' => 'v6.1.1-pre-536-gfc5b02e39',
+  'hash_version' => 'g319cb2305',
+  'full_hash' => 'v6.2.0-pre-451-g319cb2305',
   'branch' => 'develop',
 );

@@ -24,7 +24,7 @@ class UsersTransformer
         $array = [
                 'id' => (int) $user->id,
                 'avatar' => e($user->present()->gravatar),
-                'name' => e($user->first_name).' '.e($user->last_name),
+                'name' => e($user->getFullNameAttribute()),
                 'first_name' => e($user->first_name),
                 'last_name' => e($user->last_name),
                 'username' => e($user->username),
@@ -53,7 +53,7 @@ class UsersTransformer
                     'id' => (int) $user->userloc->id,
                     'name'=> e($user->userloc->name),
                 ] : null,
-                'notes'=> e($user->notes),
+                'notes'=> Helper::parseEscapedMarkedownInline($user->notes),
                 'permissions' => $user->decodePermissions(),
                 'activated' => ($user->activated == '1') ? true : false,
                 'autoassign_licenses' => ($user->autoassign_licenses == '1') ? true : false,

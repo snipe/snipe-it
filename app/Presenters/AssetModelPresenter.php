@@ -123,6 +123,7 @@ class AssetModelPresenter extends Presenter
                 'switchable' => true,
                 'title' => trans('general.notes'),
                 'visible' => false,
+                'formatter' => 'notesFormatter',
             ],
             [
                 'field' => 'created_at',

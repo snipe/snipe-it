@@ -115,7 +115,7 @@ class AssetsController extends Controller
             $allowed_columns[] = $field->db_column_name();
         }
 
-        $assets = Company::scopeCompanyables(Asset::select('assets.*'), 'company_id', 'assets')
+        $assets = Asset::select('assets.*')
             ->with('location', 'assetstatus', 'company', 'defaultLoc','assignedTo',
                 'model.category', 'model.manufacturer', 'model.fieldset','supplier'); //it might be tempting to add 'assetlog' here, but don't. It blows up update-heavy users.
 
@@ -124,6 +124,8 @@ class AssetsController extends Controller
             $non_deprecable_models = AssetModel::select('id')->whereNotNull('depreciation_id')->get();
             $assets->InModelList($non_deprecable_models->toArray());
         }
+
+
 
         // These are used by the API to query against specific ID numbers.
         // They are also used by the individual searches on detail pages like
@@ -136,6 +138,101 @@ class AssetsController extends Controller
             }
         }
 
+        if ((! is_null($filter)) && (count($filter)) > 0) {
+            $assets->ByFilter($filter);
+        } elseif ($request->filled('search')) {
+            $assets->TextSearch($request->input('search'));
+        }
+
+        // This is used by the audit reporting routes
+        if (Gate::allows('audit', Asset::class)) {
+            switch ($audit) {
+                case 'due':
+                    $assets->DueOrOverdueForAudit($settings);
+                    break;
+                case 'overdue':
+                    $assets->overdueForAudit($settings);
+                    break;
+            }
+        }
+
+
+        // This is used by the sidenav, mostly
+
+        // We switched from using query scopes here because of a Laravel bug
+        // related to fulltext searches on complex queries.
+        // I am sad. :(
+        switch ($request->input('status')) {
+            case 'Deleted':
+                $assets->onlyTrashed();
+                break;
+            case 'Pending':
+                $assets->join('status_labels AS status_alias', function ($join) {
+                    $join->on('status_alias.id', '=', 'assets.status_id')
+                        ->where('status_alias.deployable', '=', 0)
+                        ->where('status_alias.pending', '=', 1)
+                        ->where('status_alias.archived', '=', 0);
+                });
+                break;
+            case 'RTD':
+                $assets->whereNull('assets.assigned_to')
+                    ->join('status_labels AS status_alias', function ($join) {
+                        $join->on('status_alias.id', '=', 'assets.status_id')
+                            ->where('status_alias.deployable', '=', 1)
+                            ->where('status_alias.pending', '=', 0)
+                            ->where('status_alias.archived', '=', 0);
+                    });
+                break;
+            case 'Undeployable':
+                $assets->Undeployable();
+                break;
+            case 'Archived':
+                $assets->join('status_labels AS status_alias', function ($join) {
+                    $join->on('status_alias.id', '=', 'assets.status_id')
+                        ->where('status_alias.deployable', '=', 0)
+                        ->where('status_alias.pending', '=', 0)
+                        ->where('status_alias.archived', '=', 1);
+                });
+                break;
+            case 'Requestable':
+                $assets->where('assets.requestable', '=', 1)
+                    ->join('status_labels AS status_alias', function ($join) {
+                        $join->on('status_alias.id', '=', 'assets.status_id')
+                            ->where('status_alias.deployable', '=', 1)
+                            ->where('status_alias.pending', '=', 0)
+                            ->where('status_alias.archived', '=', 0);
+                    });
+
+                break;
+            case 'Deployed':
+                // more sad, horrible workarounds for laravel bugs when doing full text searches
+                $assets->whereNotNull('assets.assigned_to');
+                break;
+            case 'byod':
+                // This is kind of redundant, since we already check for byod=1 above, but this keeps the
+                // sidebar nav links a little less chaotic
+                $assets->where('assets.byod', '=', '1');
+                break;
+            default:
+
+                if ((! $request->filled('status_id')) && ($settings->show_archived_in_list != '1')) {
+                    // terrible workaround for complex-query Laravel bug in fulltext
+                    $assets->join('status_labels AS status_alias', function ($join) {
+                        $join->on('status_alias.id', '=', 'assets.status_id')
+                            ->where('status_alias.archived', '=', 0);
+                    });
+
+                    // If there is a status ID, don't take show_archived_in_list into consideration
+                } else {
+                    $assets->join('status_labels AS status_alias', function ($join) {
+                        $join->on('status_alias.id', '=', 'assets.status_id');
+                    });
+                }
+
+        }
+
+
+        // Leave these under the TextSearch scope, else the fuzziness will override the specific ID (status ID, etc) requested
         if ($request->filled('status_id')) {
             $assets->where('assets.status_id', '=', $request->input('status_id'));
         }
@@ -197,109 +294,9 @@ class AssetsController extends Controller
             $assets->where('assets.byod', '=', $request->input('byod'));
         }
 
-        $request->filled('order_number') ? $assets = $assets->where('assets.order_number', '=', e($request->get('order_number'))) : '';
-
-        // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $assets->count()) ? $assets->count() : abs($request->input('offset'));
-        $limit = app('api_limit_value');
-
-        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-
-        // This is used by the audit reporting routes
-        if (Gate::allows('audit', Asset::class)) {
-            switch ($audit) {
-                case 'due':
-                    $assets->DueOrOverdueForAudit($settings);
-                    break;
-                case 'overdue':
-                    $assets->overdueForAudit($settings);
-                    break;
-            }
+        if ($request->filled('order_number')) {
+            $assets->where('assets.order_number', '=', $request->get('order_number'));
         }
-
-
-
-        // This is used by the sidenav, mostly
-
-        // We switched from using query scopes here because of a Laravel bug
-        // related to fulltext searches on complex queries.
-        // I am sad. :(
-        switch ($request->input('status')) {
-            case 'Deleted':
-                $assets->onlyTrashed();
-                break;
-            case 'Pending':
-                $assets->join('status_labels AS status_alias', function ($join) {
-                    $join->on('status_alias.id', '=', 'assets.status_id')
-                        ->where('status_alias.deployable', '=', 0)
-                        ->where('status_alias.pending', '=', 1)
-                        ->where('status_alias.archived', '=', 0);
-                });
-                break;
-            case 'RTD':
-                $assets->whereNull('assets.assigned_to')
-                    ->join('status_labels AS status_alias', function ($join) {
-                        $join->on('status_alias.id', '=', 'assets.status_id')
-                            ->where('status_alias.deployable', '=', 1)
-                            ->where('status_alias.pending', '=', 0)
-                            ->where('status_alias.archived', '=', 0);
-                    });
-                break;
-            case 'Undeployable':
-                $assets->Undeployable();
-                break;
-            case 'Archived':
-                $assets->join('status_labels AS status_alias', function ($join) {
-                    $join->on('status_alias.id', '=', 'assets.status_id')
-                        ->where('status_alias.deployable', '=', 0)
-                        ->where('status_alias.pending', '=', 0)
-                        ->where('status_alias.archived', '=', 1);
-                });
-                break;
-            case 'Requestable':
-                $assets->where('assets.requestable', '=', 1)
-                    ->join('status_labels AS status_alias', function ($join) {
-                        $join->on('status_alias.id', '=', 'assets.status_id')
-                            ->where('status_alias.deployable', '=', 1)
-                            ->where('status_alias.pending', '=', 0)
-                            ->where('status_alias.archived', '=', 0);
-                    });
-
-                break;
-            case 'Deployed':
-                // more sad, horrible workarounds for laravel bugs when doing full text searches
-                $assets->where('assets.assigned_to', '>', '0');
-                break;
-            case 'byod':
-                // This is kind of redundant, since we already check for byod=1 above, but this keeps the
-                // sidebar nav links a little less chaotic
-                $assets->where('assets.byod', '=', '1');
-                break;
-            default:
-
-                if ((! $request->filled('status_id')) && ($settings->show_archived_in_list != '1')) {
-                    // terrible workaround for complex-query Laravel bug in fulltext
-                    $assets->join('status_labels AS status_alias', function ($join) {
-                        $join->on('status_alias.id', '=', 'assets.status_id')
-                            ->where('status_alias.archived', '=', 0);
-                    });
-
-                    // If there is a status ID, don't take show_archived_in_list into consideration
-                } else {
-                    $assets->join('status_labels AS status_alias', function ($join) {
-                        $join->on('status_alias.id', '=', 'assets.status_id');
-                    });
-                }
-
-        }
-
-
-        if ((! is_null($filter)) && (count($filter)) > 0) {
-            $assets->ByFilter($filter);
-        } elseif ($request->filled('search')) {
-            $assets->TextSearch($request->input('search'));
-        }
-
 
         // This is kinda gross, but we need to do this because the Bootstrap Tables
         // API passes custom field ordering as custom_fields.fieldname, and we have to strip
@@ -310,7 +307,8 @@ class AssetsController extends Controller
         // in the allowed_columns array)
         $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'assets.created_at';
 
-
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        
         switch ($sort_override) {
             case 'model':
                 $assets->OrderModels($order);
@@ -346,6 +344,10 @@ class AssetsController extends Controller
                 break;
         }
 
+
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $assets->count()) ? $assets->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
 
         $total = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
@@ -477,7 +479,7 @@ class AssetsController extends Controller
     public function selectlist(Request $request)
     {
 
-        $assets = Company::scopeCompanyables(Asset::select([
+        $assets = Asset::select([
             'assets.id',
             'assets.name',
             'assets.asset_tag',
@@ -485,7 +487,7 @@ class AssetsController extends Controller
             'assets.assigned_to',
             'assets.assigned_type',
             'assets.status_id',
-            ])->with('model', 'assetstatus', 'assignedTo')->NotArchived(), 'company_id', 'assets');
+            ])->with('model', 'assetstatus', 'assignedTo')->NotArchived();
 
         if ($request->filled('assetStatusType') && $request->input('assetStatusType') === 'RTD') {
             $assets = $assets->RTD();
@@ -543,7 +545,8 @@ class AssetsController extends Controller
         $asset->model_id                = $request->get('model_id');
         $asset->order_number            = $request->get('order_number');
         $asset->notes                   = $request->get('notes');
-        $asset->asset_tag               = $request->get('asset_tag', Asset::autoincrement_asset());
+        $asset->asset_tag               = $request->get('asset_tag', Asset::autoincrement_asset()); //yup, problem :/
+        // NO IT IS NOT!!! This is never firing; we SHOW the asset_tag you're going to get, so it *will* be filled in!
         $asset->user_id                 = Auth::id();
         $asset->archived                = '0';
         $asset->physical                = '1';
@@ -902,6 +905,7 @@ class AssetsController extends Controller
 
         $asset->expected_checkin = null;
         $asset->last_checkout = null;
+        $asset->last_checkin = now();
         $asset->assigned_to = null;
         $asset->assignedTo()->disassociate($asset);
         $asset->accepted = null;
@@ -921,10 +925,14 @@ class AssetsController extends Controller
         }
         
         $checkin_at = $request->filled('checkin_at') ? $request->input('checkin_at').' '. date('H:i:s') : date('Y-m-d H:i:s');
+        $originalValues = $asset->getRawOriginal();
 
+        if (($request->filled('checkin_at')) && ($request->get('checkin_at') != date('Y-m-d'))) {
+            $originalValues['action_date'] = $checkin_at;
+        }
 
         if ($asset->save()) {
-            event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at));
+            event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at, $originalValues));
 
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.success')));
         }
@@ -1030,9 +1038,10 @@ class AssetsController extends Controller
     {
         $this->authorize('viewRequestable', Asset::class);
 
-        $assets = Company::scopeCompanyables(Asset::select('assets.*'), 'company_id', 'assets')
+        $assets = Asset::select('assets.*')
             ->with('location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
-                'model.category', 'model.manufacturer', 'model.fieldset', 'supplier')->requestableAssets();
+                'model.category', 'model.manufacturer', 'model.fieldset', 'supplier')
+            ->requestableAssets();
 
         $offset = request('offset', 0);
         $limit = $request->input('limit', 50);

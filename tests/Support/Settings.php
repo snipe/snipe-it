@@ -33,6 +33,11 @@ class Settings
         return $this->update(['full_multiple_companies_support' => 1]);
     }
 
+    public function disableMultipleFullCompanySupport(): Settings
+    {
+        return $this->update(['full_multiple_companies_support' => 0]);
+    }
+
     public function enableWebhook(): Settings
     {
         return $this->update([
@@ -49,6 +54,17 @@ class Settings
             'webhook_endpoint' => '',
             'webhook_channel' => '',
         ]);
+    }
+
+    public function enableAutoIncrement(): Settings
+    {
+        return $this->update([
+            'auto_increment_assets' => 1,
+            'auto_increment_prefix' => 'ABCD',
+            'next_auto_tag_base' => '123',
+            'zerofill_count' => 5
+        ]);
+
     }
 
     /**

@@ -78,7 +78,9 @@
 a.actions {
   color:#fff !important;
 }
-
+a:visited.label-default, a:link.label-default{
+  color:#444;
+}
 /**
 The dropdown is white, so use a darker color
  */
@@ -158,9 +160,6 @@ h2.task_menu{
   background: -webkit-linear-gradient(top,  var(--header) 0%,var(--header) 100%);
   background: linear-gradient(to bottom, var(--header) 0%,var(--header) 100%);
   border-color: var(--header);
-}
-.label-default{
-  background-color:var(--back-sub);
 }
 a.btn.btn-default{
   color:var(--nav-link);

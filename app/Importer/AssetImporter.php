@@ -12,7 +12,10 @@ class AssetImporter extends ItemImporter
     public function __construct($filename)
     {
         parent::__construct($filename);
-        $this->defaultStatusLabelId = Statuslabel::first()->id;
+
+        if (!is_null(Statuslabel::first())) {
+            $this->defaultStatusLabelId = Statuslabel::first()->id;
+        }
     }
 
     protected function handle($row)

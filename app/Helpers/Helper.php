@@ -33,6 +33,16 @@ class Helper
         }
     }
 
+    public static function parseEscapedMarkedownInline($str = null)
+    {
+        $Parsedown = new \Parsedown();
+        $Parsedown->setSafeMode(true);
+
+        if ($str) {
+            return $Parsedown->line($str);
+        }
+    }
+
     /**
      * The importer has formatted number strings since v3,
      * so the value might be a string, or an integer.
@@ -543,8 +553,8 @@ class Helper
             'license' => trans('general.license'),
         ];
 
-        if($selection != null){
-            return $category_types[$selection];
+        if ($selection != null){
+            return $category_types[strtolower($selection)];
         }
         else
         return $category_types;
@@ -1210,8 +1220,58 @@ class Helper
             return true;
             \Log::debug('app locked!');
         }
-
+        
         return false;
+    }
+
+  
+    /**
+     * Conversion between units of measurement
+     *
+     * @author Grant Le Roux <grant.leroux+snipe-it@gmail.com>
+     * @since 5.0
+     * @param float  $value    Measurement value to convert
+     * @param string $srcUnit  Source unit of measurement
+     * @param string $dstUnit  Destination unit of measurement
+     * @param int    $round    Round the result to decimals (Default false - No rounding)
+     * @return float
+     */
+    public static function convertUnit($value, $srcUnit, $dstUnit, $round=false) {
+        $srcFactor = static::getUnitConversionFactor($srcUnit);
+        $dstFactor = static::getUnitConversionFactor($dstUnit);
+        $output = $value * $srcFactor / $dstFactor;
+        return ($round !== false) ? round($output, $round) : $output;
+    }
+  
+    /**
+     * Get conversion factor from unit of measurement to mm
+     *
+     * @author Grant Le Roux <grant.leroux+snipe-it@gmail.com>
+     * @since 5.0
+     * @param string $unit  Unit of measurement
+     * @return float
+     */
+    public static function getUnitConversionFactor($unit) {
+        switch (strtolower($unit)) {
+            case 'mm':
+                return 1.0;
+            case 'cm':
+                return 10.0;
+            case 'm':
+                return 1000.0;
+            case 'in':
+                return 25.4;
+            case 'ft':
+                return 12 * static::getUnitConversionFactor('in');
+            case 'yd':
+                return 3 * static::getUnitConversionFactor('ft');
+            case 'pt':
+                return (1 / 72) * static::getUnitConversionFactor('in');
+            default:
+                throw new \InvalidArgumentException('Unit: \'' . $unit . '\' is not supported');
+
+                return false;
+        }
     }
 
 

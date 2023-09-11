@@ -14,6 +14,7 @@ use App\Models\Location;
 use App\Models\Setting;
 use App\Models\Statuslabel;
 use App\Models\User;
+use App\View\Label;
 use Auth;
 use Carbon\Carbon;
 use DB;
@@ -453,11 +454,12 @@ class AssetsController extends Controller
      * @since [v3.0]
      * @return Redirect
      */
-    public function getAssetByTag(Request $request)
+    public function getAssetByTag(Request $request, $tag=null)
     {
+        $tag = $tag ? $tag : $request->get('assetTag');
         $topsearch = ($request->get('topsearch') == 'true');
 
-        if (! $asset = Asset::where('asset_tag', '=', $request->get('assetTag'))->first()) {
+        if (! $asset = Asset::where('asset_tag', '=', $tag)->first()) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
         $this->authorize('view', $asset);
@@ -554,9 +556,11 @@ class AssetsController extends Controller
             $asset = Asset::find($assetId);
             $this->authorize('view', $asset);
 
-            return view('hardware/labels')
-                ->with('assets', Asset::find($asset))
+            return (new Label())
+                ->with('assets', collect([ $asset ]))
                 ->with('settings', Setting::getSettings())
+                ->with('template', request()->get('template'))
+                ->with('offset', request()->get('offset'))
                 ->with('bulkedit', false)
                 ->with('count', 0);
         }
@@ -774,7 +778,7 @@ class AssetsController extends Controller
     }
 
     /**
-     * Retore a deleted asset.
+     * Restore a deleted asset.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId

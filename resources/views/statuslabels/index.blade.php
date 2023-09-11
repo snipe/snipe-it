@@ -111,25 +111,34 @@
       }
 
       function statusLabelTypeFormatter (row, value) {
+
           switch (value.type) {
-              case 'deployed':
-                  text_color = 'blue';
-                  icon_style = 'fa-circle';
-                  break;
               case 'deployable':
                   text_color = 'green';
                   icon_style = 'fa-circle';
+                  trans  = '{{ strtolower(trans('admin/hardware/general.deployable')) }}';
+
                   break;
               case 'pending':
                   text_color = 'orange';
                   icon_style = 'fa-circle';
+                  trans  = '{{ strtolower(trans('general.pending')) }}';
+
+                  break;
+              case 'undeployable':
+                  text_color = 'red';
+                  icon_style = 'fa-circle';
+                  trans  ='{{ trans('admin/statuslabels/table.undeployable') }}';
+
                   break;
               default:
                   text_color = 'red';
                   icon_style = 'fa-times';
+                  trans  = '{{ strtolower(trans('general.archived')) }}';
+
           }
 
-          var typename_lower = value.type;
+          var typename_lower = trans;
           var typename = typename_lower.charAt(0).toUpperCase() + typename_lower.slice(1);
           return '<i class="fa ' + icon_style + ' text-' + text_color + '"></i> ' + typename;
 

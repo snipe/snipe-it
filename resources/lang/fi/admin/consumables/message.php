@@ -24,7 +24,7 @@ return array(
         'error'   		=> 'Kulutustarviketta ei luovutettu, yritä uudelleen',
         'success' 		=> 'Kulutustarvike luovutettiin.',
         'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.',
-         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
+         'unavailable'      => 'Ei riittävästi kulutustarvikkeita tätä lainausta varten. Tarkista jäljellä oleva määrä. ',
     ),
 
     'checkin' => array(

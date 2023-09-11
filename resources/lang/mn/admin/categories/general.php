@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Ангиллыг хуулж үүсгэх',
     'create'  							=> 'Ангилал үүсгэх',
     'edit'                              => 'Ангилал засах',
+    'email_will_be_sent_due_to_global_eula' => 'An email will be sent to the user because the global EULA is being used.',
+    'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
     'eula_text'							=> 'Ангиллын EULA',
     'eula_text_help'					=> 'Тодорхой нэг ангиллын хөрөнгийн хувьд EULA-г өөрчлөх боломж олгоно. Бүх хөрөнгийн хувьд EULA нь ижилхэн бол та доорхыг чагталж стандарт EULA-г ашиглаж болно.',
     'name'                              => 'Ангиллын нэр',

@@ -23,8 +23,8 @@ return [
     'restore' => [
         'error'   		=> 'El equipo no fue restaurado, por favor intente nuevamente',
         'success' 		=> 'Equipo restaurado correctamente.',
-        'bulk_success' 		=> 'Asset restored successfully.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'bulk_success' 		=> 'Equipo restaurado correctamente.',
+        'nothing_updated'   => 'No se seleccionaron activos, por lo que no se restauró nada.', 
     ],
 
     'audit' => [

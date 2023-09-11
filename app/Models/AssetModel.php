@@ -150,6 +150,11 @@ class AssetModel extends SnipeModel
     {
         return $this->belongsTo(\App\Models\CustomFieldset::class, 'fieldset_id');
     }
+   
+    public function customFields()
+    {
+       return $this->fieldset()->first()->fields(); 
+    }
 
     /**
      * Establishes the model -> custom field default values relationship

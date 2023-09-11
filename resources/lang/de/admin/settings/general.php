@@ -333,6 +333,6 @@ return [
     'google_callback_help' => 'Dies sollte als Callback-URL in den Google OAuth App-Einstellungen in deinem Unternehmen eingegeben werden&apos;s <strong><a href="https://console.cloud.google.com/" target="_blank">Google Developer Konsole <i class="fa fa-external-link" aria-hidden="true"></i></a></strong>.',
     'google_login'      => 'Google Workspace Anmeldeeinstellungen',
     'enable_google_login'  => 'Anmelden mit Google Workspace für Benutzer aktivieren',
-    'enable_google_login_help'  => 'Benutzer werden nicht automatisch bereitgestellt. Sie müssen ein bestehendes Konto hier UND in Google Workspace haben, und ihr Benutzername muss mit der E-Mail-Adresse von Google Workspace übereinstimmen. ',
+    'enable_google_login_help'  => 'Benutzer werden nicht automatisch bereitgestellt. Sie müssen ein bestehendes Konto hier UND in Google Workspace haben, und Ihr Benutzername muss mit der E-Mail-Adresse von Google Workspace übereinstimmen. ',
 
 ];

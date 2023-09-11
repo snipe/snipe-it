@@ -23,59 +23,13 @@
     </div>
 </div>
 
-
-
-<!-- EULA text -->
-<div class="form-group {{ $errors->has('eula_text') ? 'error' : '' }}">
-    <label for="eula_text" class="col-md-3 control-label">{{ trans('admin/categories/general.eula_text') }}</label>
-    <div class="col-md-7">
-        {{ Form::textarea('eula_text', old('eula_text', $item->eula_text), array('class' => 'form-control', 'aria-label'=>'eula_text')) }}
-        <p class="help-block">{!! trans('admin/categories/general.eula_text_help') !!} </p>
-        <p class="help-block">{!! trans('admin/settings/general.eula_markdown') !!} </p>
-
-        {!! $errors->first('eula_text', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-    </div>
-</div>
-
-<!-- Use default checkbox -->
-<div class="form-group">
-    <div class="col-md-9 col-md-offset-3">
-        @if ($snipeSettings->default_eula_text!='')
-            <label class="form-control">
-                {{ Form::checkbox('use_default_eula', '1', old('use_default_eula', $item->use_default_eula), ['aria-label'=>'use_default_eula']) }}
-                {!! trans('admin/categories/general.use_default_eula') !!}
-            </label>
-        @else
-            <label class="form-control form-control--disabled">
-                {{ Form::checkbox('use_default_eula', '0', old('use_default_eula'), ['class'=>'disabled','disabled' => 'disabled', 'aria-label'=>'use_default_eula']) }}
-                <span>{!! trans('admin/categories/general.use_default_eula_disabled') !!}</span>
-            </label>
-        @endif
-    </div>
-</div>
-
-
-<!-- Require Acceptance -->
-<div class="form-group">
-    <div class="col-md-9 col-md-offset-3">
-        <label class="form-control">
-        {{ Form::checkbox('require_acceptance', '1', old('require_acceptance', $item->require_acceptance), ['aria-label'=>'require_acceptance']) }}
-        {{ trans('admin/categories/general.require_acceptance') }}
-        </label>
-    </div>
-</div>
-
-
-<!-- Email on Checkin -->
-<div class="form-group">
-    <div class="col-md-9 col-md-offset-3">
-        <label class="form-control">
-        {{ Form::checkbox('checkin_email', '1', old('checkin_email', $item->checkin_email), ['aria-label'=>'checkin_email']) }}
-        {{ trans('admin/categories/general.checkin_email') }}
-        </label>
-    </div>
-</div>
-
+<livewire:category-edit-form
+    :default-eula-text="$snipeSettings->default_eula_text"
+    :eula-text="old('eula_text', $item->eula_text)"
+    :require-acceptance="old('require_acceptance', $item->require_acceptance)"
+    :send-check-in-email="old('checkin_email', $item->checkin_email)"
+    :use-default-eula="old('use_default_eula', $item->use_default_eula)"
+/>
 
 @include ('partials.forms.edit.image-upload', ['image_path' => app('categories_upload_path')])
 

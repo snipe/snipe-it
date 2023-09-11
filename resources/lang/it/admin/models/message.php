@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Il modello non esiste.',
-    'no_association' => 'NESSUN MODELLO ASSOCIATO.',
+    'no_association' => 'ATTENZIONE! Il modello di bene per questo oggetto non è valido o è mancante!',
     'no_association_fix' => 'Ciò romperà cose in modi strani e brutti. Modifica questo bene per assegnargli un modello.',
     'assoc_users'	 => 'Questo modello è attualmente associato ad uno o più beni e non può essere eliminato. Eliminare i beni e poi provare a eliminare nuovamente. ',
 

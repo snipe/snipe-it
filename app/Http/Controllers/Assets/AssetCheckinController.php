@@ -68,6 +68,7 @@ class AssetCheckinController extends Controller
 
         $asset->expected_checkin = null;
         $asset->last_checkout = null;
+        $asset->last_checkin = now();
         $asset->assigned_to = null;
         $asset->assignedTo()->disassociate($asset);
         $asset->assigned_type = null;
@@ -94,18 +95,25 @@ class AssetCheckinController extends Controller
             \Log::debug('Manually override the location IDs');
             \Log::debug('Original Location ID: '.$asset->location_id);
             $asset->location_id = '';
-            \Log::debug('New RTD Location ID: '.$asset->location_id);
+            \Log::debug('New Location ID: '.$asset->location_id);
         }
 
         $asset->location_id = $asset->rtd_location_id;
 
         if ($request->filled('location_id')) {
             \Log::debug('NEW Location ID: '.$request->get('location_id'));
-            $asset->location_id = e($request->get('location_id'));
+            $asset->location_id = $request->get('location_id');
+
+            if ($request->get('update_default_location') == 0){
+                $asset->rtd_location_id = $request->get('location_id');
+            }
         }
+
+        $originalValues = $asset->getRawOriginal();
 
         $checkin_at = date('Y-m-d H:i:s');
         if (($request->filled('checkin_at')) && ($request->get('checkin_at') != date('Y-m-d'))) {
+            $originalValues['action_date'] = $checkin_at;
             $checkin_at = $request->get('checkin_at');
         }
 
@@ -128,7 +136,7 @@ class AssetCheckinController extends Controller
 
         // Was the asset updated?
         if ($asset->save()) {
-            event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at));
+            event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at, $originalValues));
 
             if ((isset($user)) && ($backto == 'user')) {
                 return redirect()->route('users.show', $user->id)->with('success', trans('admin/hardware/message.checkin.success'));

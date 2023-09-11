@@ -590,6 +590,7 @@ class SettingsController extends Controller
         $setting->date_display_format = $request->input('date_display_format');
         $setting->time_display_format = $request->input('time_display_format');
         $setting->digit_separator = $request->input('digit_separator');
+        $setting->name_display_format = $request->input('name_display_format');
 
         if ($setting->save()) {
             return redirect()->route('settings.index')
@@ -827,6 +828,14 @@ class SettingsController extends Controller
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
+        $setting->label2_enable = $request->input('label2_enable');
+        $setting->label2_template = $request->input('label2_template');
+        $setting->label2_title = $request->input('label2_title');
+        $setting->label2_asset_logo = $request->input('label2_asset_logo');
+        $setting->label2_1d_type = $request->input('label2_1d_type');
+        $setting->label2_2d_type = $request->input('label2_2d_type');
+        $setting->label2_2d_target = $request->input('label2_2d_target');
+        $setting->label2_fields = $request->input('label2_fields');
         $setting->labels_per_page = $request->input('labels_per_page');
         $setting->labels_width = $request->input('labels_width');
         $setting->labels_height = $request->input('labels_height');
@@ -875,7 +884,7 @@ class SettingsController extends Controller
         }
 
         if ($setting->save()) {
-            return redirect()->route('settings.index')
+            return redirect()->route('settings.labels.index')
                 ->with('success', trans('admin/settings/message.update.success'));
         }
 
@@ -1136,7 +1145,7 @@ class SettingsController extends Controller
     public function postBackups()
     {
         if (! config('app.lock_passwords')) {
-            Artisan::call('snipeit:backup', ['--filename' => 'manual-backup-'.date('Y-m-d-H:i:s')]);
+            Artisan::call('snipeit:backup', ['--filename' => 'manual-backup-'.date('Y-m-d-H-i-s')]);
             $output = Artisan::output();
 
             // Backup completed

@@ -118,12 +118,21 @@
               </div>
           </div>
 
-          <!-- Auto-Add to Future Fieldsets  -->
+
+
+              <!-- Auto-Add to Future Fieldsets  -->
           <div class="form-group {{ $errors->has('auto_add_to_fieldsets') ? ' has-error' : '' }}"  id="auto_add_to_fieldsets">
               <div class="col-md-9 col-md-offset-3">
                   <label class="form-control">
                       <input type="checkbox" name="auto_add_to_fieldsets" aria-label="auto_add_to_fieldsets" value="1"{{ (old('auto_add_to_fieldsets') || $field->auto_add_to_fieldsets) ? ' checked="checked"' : '' }}>
                       {{ trans('admin/custom_fields/general.auto_add_to_fieldsets') }}
+                  </label>
+              </div>
+
+              <div class="col-md-9 col-md-offset-3">
+                  <label class="form-control">
+                      <input type="checkbox" name="show_in_listview" aria-label="show_in_listview" value="1"{{ (old('show_in_listview') || $field->show_in_listview) ? ' checked="checked"' : '' }}>
+                      {{ trans('admin/custom_fields/general.show_in_listview') }}
                   </label>
               </div>
 

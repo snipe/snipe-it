@@ -55,6 +55,7 @@
             stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
             undefinedText: '',
             iconsPrefix: 'fa',
+            cookieStorage: '{{ config('session.bs_table_storage') }}',
             cookie: true,
             cookieExpire: '2y',
             mobileResponsive: true,
@@ -652,10 +653,14 @@
         }
     }
 
+    function auditImageFormatter(value){
+        if (value){
+            return '<a href="' + value.url + '" data-toggle="lightbox" data-type="image"><img src="' + value.url + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive"></a>'
+        }
+    }
+
 
    function imageFormatter(value, row) {
-
-
 
         if (value) {
 
@@ -691,6 +696,25 @@
         console.dir(value);
         if ((value) && (value.filename) && (value.url)) {
             return '<a href="' + value.url + '">' + value.filename + '</a>';
+        }
+    }
+
+    function labelPerPageFormatter(value, row, index, field) {
+        if (row) {
+            if (!row.hasOwnProperty('sheet_info')) { return 1; }
+            else { return row.sheet_info.labels_per_page; }
+        }
+    }
+
+    function labelRadioFormatter(value, row, index, field) {
+        if (row) {
+            return row.name == '{{ str_replace("\\", "\\\\", $snipeSettings->label2_template) }}';
+        }
+    }
+
+    function labelSizeFormatter(value, row) {
+        if (row) {
+            return row.width + ' x ' + row.height + ' ' + row.unit;
         }
     }
 

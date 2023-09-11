@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Cloner la catégorie',
     'create'  							=> 'Créer une catégorie',
     'edit'                              => 'Modifier la catégorie',
+    'email_will_be_sent_due_to_global_eula' => 'An email will be sent to the user because the global EULA is being used.',
+    'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
     'eula_text'							=> 'Catégorie de licence d\'utilisation',
     'eula_text_help'					=> 'Ce champ vous permet de configurer vos licences d\'utilisation pour chaque type d\'actif. Si vous avez une seule licence pour tous vos actifs, vous pouvez cocher la case ci-dessous pour utiliser celle par défaut.',
     'name'                              => 'Nom de la catégorie',
