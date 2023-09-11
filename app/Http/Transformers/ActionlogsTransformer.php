@@ -121,9 +121,7 @@ class ActionlogsTransformer
             'log_meta'          => ((isset($clean_meta)) && (is_array($clean_meta))) ? $clean_meta: null,
             'action_date'   => ($actionlog->action_date) ? Helper::getFormattedDateObject($actionlog->action_date, 'datetime'): Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
         ];
-        //\Log::info("Clean Meta is: ".print_r($clean_meta,true));
 
-        //dd($array);
         return $array;
     }
 

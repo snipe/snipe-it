@@ -707,7 +707,7 @@ class Helper
                 $all_count++;
             }
         }
-//            dd($asset_models);
+
         foreach ($asset_models as $asset_model){
 
             $asset = new Asset();
