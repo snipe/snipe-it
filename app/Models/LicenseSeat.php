@@ -48,7 +48,10 @@ class LicenseSeat extends SnipeModel implements ICompanyableChild
      */
     public function requireAcceptance()
     {
-        return $this->license->category->require_acceptance;
+        if ($this->license && $this->license->category) {
+            return $this->license->category->require_acceptance;
+        }
+        return false;
     }
 
     public function getEula()

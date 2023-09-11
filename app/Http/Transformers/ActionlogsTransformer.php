@@ -3,6 +3,7 @@ namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
 use App\Models\Actionlog;
+use App\Models\CustomField;
 use App\Models\Setting;
 use App\Models\Company;
 use App\Models\Supplier;
@@ -42,6 +43,7 @@ class ActionlogsTransformer
     public function transformActionlog (Actionlog $actionlog, $settings = null)
     {
         $icon = $actionlog->present()->icon();
+        $custom_field = CustomField::all();
         if ($actionlog->filename!='') {
             $icon =  e(\App\Helpers\Helper::filetype_icon($actionlog->filename));
         }
@@ -54,9 +56,18 @@ class ActionlogsTransformer
 
             if ($meta_array) {
                 foreach ($meta_array as $fieldname => $fieldata) {
-                    $clean_meta[$fieldname]['old'] = $this->clean_field($fieldata->old);
-                    $clean_meta[$fieldname]['new'] = $this->clean_field($fieldata->new);
+                    if( str_starts_with($fieldname, '_snipeit_')){
+                        if( $custom_field->where('db_column', '=', $fieldname)->where('field_encrypted', true)){
+                            $clean_meta[$fieldname]['old'] = "encrypted";
+                            $clean_meta[$fieldname]['new'] = "encrypted";
+                        }
+                    }
+                     else {
+                        $clean_meta[$fieldname]['old'] = $this->clean_field($fieldata->old);
+                        $clean_meta[$fieldname]['new'] = $this->clean_field($fieldata->new);
+                    }
                 }
+
             }
             $clean_meta= $this->changedInfo($clean_meta);
         }
@@ -122,6 +133,9 @@ class ActionlogsTransformer
             'action_date'   => ($actionlog->action_date) ? Helper::getFormattedDateObject($actionlog->action_date, 'datetime'): Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
         ];
 
+//        \Log::info("Clean Meta is: ".print_r($clean_meta,true));
+        //dd($array);
+
         return $array;
     }
 
@@ -142,38 +156,69 @@ class ActionlogsTransformer
      * @param  array $clean_meta
      * @return array
      */
+
     public function changedInfo(array $clean_meta)
-    {
+    {   $location = Location::withTrashed()->get();
+        $supplier = Supplier::withTrashed()->get();
+        $model = AssetModel::withTrashed()->get();
+        $company = Company::get();
+
 
         if(array_key_exists('rtd_location_id',$clean_meta)) {
-            $clean_meta['rtd_location_id']['old'] = $clean_meta['rtd_location_id']['old'] ? "[id: ".$clean_meta['rtd_location_id']['old']."] ". Location::find($clean_meta['rtd_location_id']['old'])->name : trans('general.unassigned');
-            $clean_meta['rtd_location_id']['new'] = $clean_meta['rtd_location_id']['new'] ? "[id: ".$clean_meta['rtd_location_id']['new']."] ". Location::find($clean_meta['rtd_location_id']['new'])->name : trans('general.unassigned');
+            $clean_meta['rtd_location_id']['old'] = $clean_meta['rtd_location_id']['old'] ? "[id: ".$clean_meta['rtd_location_id']['old']."] ". $location->find($clean_meta['rtd_location_id']['old'])->name : trans('general.unassigned');
+            $clean_meta['rtd_location_id']['new'] = $clean_meta['rtd_location_id']['new'] ? "[id: ".$clean_meta['rtd_location_id']['new']."] ". $location->find($clean_meta['rtd_location_id']['new'])->name : trans('general.unassigned');
             $clean_meta['Default Location'] = $clean_meta['rtd_location_id'];
             unset($clean_meta['rtd_location_id']);
         }
         if(array_key_exists('location_id', $clean_meta)) {
-            $clean_meta['location_id']['old'] = $clean_meta['location_id']['old'] ? "[id: ".$clean_meta['location_id']['old']."] ".Location::find($clean_meta['location_id']['old'])->name : trans('general.unassigned');
-            $clean_meta['location_id']['new'] = $clean_meta['location_id']['new'] ? "[id: ".$clean_meta['location_id']['new']."] ".Location::find($clean_meta['location_id']['new'])->name : trans('general.unassigned');
+            $clean_meta['location_id']['old'] = $clean_meta['location_id']['old'] ? "[id: ".$clean_meta['location_id']['old']."] ".$location->find($clean_meta['location_id']['old'])->name : trans('general.unassigned');
+            $clean_meta['location_id']['new'] = $clean_meta['location_id']['new'] ? "[id: ".$clean_meta['location_id']['new']."] ".$location->find($clean_meta['location_id']['new'])->name : trans('general.unassigned');
             $clean_meta['Current Location'] = $clean_meta['location_id'];
             unset($clean_meta['location_id']);
         }
         if(array_key_exists('model_id', $clean_meta)) {
-            $clean_meta['model_id']['old'] = "[id: ".$clean_meta['model_id']['old']."] ".AssetModel::withTrashed()->find($clean_meta['model_id']['old'])->name;
-            $clean_meta['model_id']['new'] = "[id: ".$clean_meta['model_id']['new']."] ".AssetModel::withTrashed()->find($clean_meta['model_id']['new'])->name; /* model is required at asset creation */
+
+            $oldModel = $model->find($clean_meta['model_id']['old']);
+            $oldModelName = $oldModel->name ?? trans('admin/models/message.deleted');
+
+            $newModel = $model->find($clean_meta['model_id']['new']);
+            $newModelName = $newModel->name ?? trans('admin/models/message.deleted');
+
+            $clean_meta['model_id']['old'] = "[id: ".$clean_meta['model_id']['old']."] ".$oldModelName;
+            $clean_meta['model_id']['new'] = "[id: ".$clean_meta['model_id']['new']."] ".$newModelName; /** model is required at asset creation */
+
             $clean_meta['Model'] = $clean_meta['model_id'];
             unset($clean_meta['model_id']);
         }
         if(array_key_exists('company_id', $clean_meta)) {
-            $clean_meta['company_id']['old'] = $clean_meta['company_id']['old'] ? "[id: ".$clean_meta['company_id']['old']."]".Company::find($clean_meta['company_id']['old'])->name : trans('general.unassigned');
-            $clean_meta['company_id']['new'] = $clean_meta['company_id']['new'] ? "[id: ".$clean_meta['company_id']['new']."] ".Company::find($clean_meta['company_id']['new'])->name : trans('general.unassigned');
+
+            $oldCompany = $company->find($clean_meta['company_id']['old']);
+            $oldCompanyName = $oldCompany->name ?? trans('admin/companies/message.deleted');
+
+            $newCompany = $company->find($clean_meta['company_id']['new']);
+            $newCompanyName = $newCompany->name ?? trans('admin/companies/message.deleted');
+
+            $clean_meta['company_id']['old'] = $clean_meta['company_id']['old'] ? "[id: ".$clean_meta['company_id']['old']."] ". $oldCompanyName : trans('general.unassigned');
+            $clean_meta['company_id']['new'] = $clean_meta['company_id']['new'] ? "[id: ".$clean_meta['company_id']['new']."] ". $newCompanyName : trans('general.unassigned');
             $clean_meta['Company'] = $clean_meta['company_id'];
             unset($clean_meta['company_id']);
         }
         if(array_key_exists('supplier_id', $clean_meta)) {
-            $clean_meta['supplier_id']['old'] = $clean_meta['supplier_id']['old'] ? "[id: ".$clean_meta['supplier_id']['old']."] ".Supplier::find($clean_meta['supplier_id']['old'])->name : trans('general.unassigned');
-            $clean_meta['supplier_id']['new'] = $clean_meta['supplier_id']['new'] ? "[id: ".$clean_meta['supplier_id']['new']."] ".Supplier::find($clean_meta['supplier_id']['new'])->name : trans('general.unassigned');
+
+            $oldSupplier = $supplier->find($clean_meta['supplier_id']['old']);
+            $oldSupplierName = $oldSupplier->name ?? trans('admin/suppliers/message.deleted');
+
+            $newSupplier = $supplier->find($clean_meta['supplier_id']['new']);
+            $newSupplierName = $newSupplier->name ?? trans('admin/suppliers/message.deleted');
+
+            $clean_meta['supplier_id']['old'] = $clean_meta['supplier_id']['old'] ? "[id: ".$clean_meta['supplier_id']['old']."] ". $oldSupplierName : trans('general.unassigned');
+            $clean_meta['supplier_id']['new'] = $clean_meta['supplier_id']['new'] ? "[id: ".$clean_meta['supplier_id']['new']."] ". $newSupplierName : trans('general.unassigned');
             $clean_meta['Supplier'] = $clean_meta['supplier_id'];
             unset($clean_meta['supplier_id']);
+        }
+        if(array_key_exists('asset_eol_date', $clean_meta)) {
+            $clean_meta['EOL date'] = $clean_meta['asset_eol_date'];
+            unset($clean_meta['asset_eol_date']);
         }
 
         return $clean_meta;

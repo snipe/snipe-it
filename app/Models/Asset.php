@@ -73,6 +73,7 @@ class Asset extends Depreciable
     protected $casts = [
         'purchase_date' => 'date',
         'last_checkout' => 'datetime',
+        'last_checkin' => 'datetime',
         'expected_checkin' => 'date',
         'last_audit_date' => 'datetime',
         'next_audit_date' => 'date',
@@ -82,7 +83,6 @@ class Asset extends Depreciable
         'location_id'    => 'integer',
         'rtd_company_id' => 'integer',
         'supplier_id'    => 'integer',
-        'byod'           => 'boolean',
         'created_at'     => 'datetime',
         'updated_at'   => 'datetime',
         'deleted_at'  => 'datetime',
@@ -105,6 +105,7 @@ class Asset extends Depreciable
         'purchase_cost'   => 'numeric|nullable|gte:0',
         'supplier_id'     => 'exists:suppliers,id|nullable',
         'asset_eol_date'  => 'date|max:10|min:10|nullable',
+        'byod'            => 'boolean',
     ];
 
   /**
@@ -332,6 +333,13 @@ class Asset extends Depreciable
             }
         }
 
+        $originalValues = $this->getRawOriginal();
+
+        // attempt to detect change in value if different from today's date
+        if ($checkout_at && strpos($checkout_at, date('Y-m-d')) === false) {
+            $originalValues['action_date'] = date('Y-m-d H:i:s');
+        }
+
         if ($this->save()) {
             if (is_int($admin)) {
                 $checkedOutBy = User::findOrFail($admin);
@@ -340,7 +348,7 @@ class Asset extends Depreciable
             } else {
                 $checkedOutBy = Auth::user();
             }
-            event(new CheckoutableCheckedOut($this, $target, $checkedOutBy, $note));
+            event(new CheckoutableCheckedOut($this, $target, $checkedOutBy, $note, $originalValues));
 
             $this->increment('checkout_counter', 1);
 

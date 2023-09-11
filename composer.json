@@ -77,7 +77,6 @@
   "require-dev": {
     "brianium/paratest": "^6.6",
     "fakerphp/faker": "^1.16",
-    "laravel/dusk": "^6.25",
     "mockery/mockery": "^1.4",
     "nunomaduro/larastan": "^1.0",
     "nunomaduro/phpinsights": "^2.7",
@@ -107,7 +106,6 @@
   },
   "autoload-dev": {
     "classmap": [
-      "tests/DuskTestCase.php",
       "tests/TestCase.php"
     ],
     "psr-4": {
