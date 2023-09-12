@@ -124,8 +124,8 @@ class AssetObserver
     public function saving(Asset $asset)
     {
         //determine if calculated eol and then calculate it - this should only happen on a new asset
-        if(is_null($asset->asset_eol_date) && !is_null($asset->asset_purchase_date) && !is_null($asset->model->eol)){
-            $asset->asset_eol_date = $asset->purchase_date->addMonths($asset->model->eol)->format('Y-m-d');  
+        if(is_null($asset->asset_eol_date) && !is_null($asset->purchase_date) && !is_null($asset->model->eol)){
+            $asset->asset_eol_date = $asset->purchase_date->addMonths($asset->model->eol)->format('Y-m-d');
             $asset->eol_explicit = false; 
         } 
 
