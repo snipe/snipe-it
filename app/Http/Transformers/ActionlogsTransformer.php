@@ -68,8 +68,8 @@ class ActionlogsTransformer
                     }
                 }
 
-                $clean_meta = $this->changedInfo($clean_meta);
             }
+            $clean_meta= $this->changedInfo($clean_meta);
         }
 
         $file_url = '';
