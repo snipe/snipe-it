@@ -19,15 +19,14 @@ use Illuminate\Support\Facades\Auth;
 use App\View\Label;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use League\Csv\Reader;
-use Redirect;
-use Response;
-use Illuminate\View\View;
+use Illuminate\Support\Facades\Redirect;
 
 /**
  * This class controls all actions related to assets for
