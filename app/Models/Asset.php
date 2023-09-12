@@ -89,7 +89,6 @@ class Asset extends Depreciable
         'created_at'     => 'datetime',
         'updated_at'   => 'datetime',
         'deleted_at'  => 'datetime',
-        'eol_explicit' => 'boolean',
     ];
 
     protected $rules = [
@@ -108,8 +107,7 @@ class Asset extends Depreciable
         'serial'          => 'unique_serial|nullable',
         'purchase_cost'   => 'numeric|nullable|gte:0',
         'supplier_id'     => 'exists:suppliers,id|nullable',
-        //something not working here...
-        // 'asset_eol_date'  => 'date_format:Y-m-d|nullable',
+        //'asset_eol_date'  => 'date_format:Y-m-d|nullable',
         'eol_explicit'    => 'boolean|nullable',
         'byod'            => 'boolean',
     ];
@@ -145,6 +143,7 @@ class Asset extends Depreciable
         'eol_explicit', 
         'last_audit_date',
         'next_audit_date',
+        'asset_eol_date',
         'eol_explicit',
     ];
 
