@@ -26,7 +26,7 @@ class FixAssetModelMinQtyNullability extends Migration
     public function down()
     {
         Schema::table('models', function (Blueprint $table) {
-            $table->integer('min_amt')->default(null)->change();
+            $table->integer('min_amt')->nullable(false)->change();
         });
     }
 }
