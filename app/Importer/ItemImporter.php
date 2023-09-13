@@ -245,7 +245,6 @@ class ItemImporter extends Importer
             $this->log('Asset Model Updated');
 
             return $asset_model->id;
-        //    here
         }
         $this->log('No Matching Model, Creating a new one');
 
