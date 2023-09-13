@@ -52,7 +52,20 @@ class BulkAssetsController extends Controller
         $modelNames = [];
         foreach($models as $model) {
             $modelNames[] = $model->model->name;
-        } 
+        }
+
+        if ($request->filled('checkin')){
+            $this->authorize('update', Asset::class);
+            $assets = Asset::with('assignedTo')->find($asset_ids);
+            $assets->each(function ($asset) {
+                $this->authorize('checkin', $asset);
+            });
+            $checkin= new AssetCheckinController();
+            foreach($assets as $asset){
+                $checkin->store($asset);
+            }
+            return view('hardware/bulk-delete')->with('assets', $assets);
+        }
 
         if ($request->filled('bulk_actions')) {
             switch ($request->input('bulk_actions')) {
@@ -72,7 +85,6 @@ class BulkAssetsController extends Controller
                     });
 
                     return view('hardware/bulk-delete')->with('assets', $assets);
-                   
                 case 'restore':
                     $this->authorize('update', Asset::class);
                     $assets = Asset::withTrashed()->find($asset_ids); 

@@ -651,7 +651,13 @@
           <!-- checked out assets table -->
 
             @include('partials.asset-bulk-actions')
-            <button class="btn btn-primary" id="{{ (isset($id_button)) ? $id_button : 'bulkAssetEditButton' }}" disabled>{{ trans('button.checkin_and_delete') }}</button>
+
+            @can('update', \App\Models\Asset::class)
+
+                    <button type="submit" class="btn btn-primary" id="{{ (isset($id_button)) ? $id_button : 'bulkAssetEditButton' }}" value="checkin" disabled>{{ trans('button.checkin_all') }}</button>
+
+            @endcan
+
             <div class="table table-responsive">
 
             <table
