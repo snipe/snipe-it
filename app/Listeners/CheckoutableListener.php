@@ -142,9 +142,11 @@ class CheckoutableListener
         $notifiables = collect();
 
         /**
-         * Notify the user who checked out the item
+         * Notify who checked out the item as long as the model can route notifications
          */
-        $notifiables->push($event->checkedOutTo);
+        if (method_exists($event->checkedOutTo, 'routeNotificationFor')) {
+            $notifiables->push($event->checkedOutTo);
+        }
 
         /**
          * Notify Admin users if the settings is activated
