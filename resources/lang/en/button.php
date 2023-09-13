@@ -4,6 +4,7 @@ return [
     'actions' 	                => 'Actions',
     'add'    	                => 'Add New',
     'cancel'                    => 'Cancel',
+    'checkin_all'  	            => 'Checkin All',
     'checkin_and_delete'  	    => 'Checkin All / Delete User',
     'delete'  	                => 'Delete',
     'edit'    	                => 'Edit',

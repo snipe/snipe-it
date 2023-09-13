@@ -651,7 +651,7 @@
           <!-- checked out assets table -->
 
             @include('partials.asset-bulk-actions')
-
+            <button class="btn btn-primary" id="{{ (isset($id_button)) ? $id_button : 'bulkAssetEditButton' }}" disabled>{{ trans('button.checkin_and_delete') }}</button>
             <div class="table table-responsive">
 
             <table
