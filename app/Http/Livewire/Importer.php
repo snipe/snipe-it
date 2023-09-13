@@ -194,7 +194,8 @@ class Importer extends Component
         ];
 
         $this->assets_fields = [
-            'asset_eol_date' => trans('general.eol'),
+            //'asset_eol_date' => trans('general.eol'),
+            'asset_eol_date' => 'asset_eol_date',
             'company' => trans('general.company'),
             'location' => trans('general.location'),
             'item_name' => trans('general.item_name_var', ['item' => trans('general.asset')]),
@@ -216,7 +217,7 @@ class Importer extends Component
             'manufacturer' => trans('general.manufacturer'),
             'order_number' => trans('general.order_number'),
             'image' => trans('general.importer.image_filename'),
-            'asset_eol_date' => trans('admin/hardware/form.eol_date'),
+            //'asset_eol_date' => trans('admin/hardware/form.eol_date'),
             /**
              * Checkout fields:
              * Assets can be checked out to other assets, people, or locations, but we currently

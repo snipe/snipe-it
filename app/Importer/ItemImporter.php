@@ -99,7 +99,14 @@ class ItemImporter extends Importer
                     $this->log('Unable to parse date: '.$csvMatch);
                 }
         } elseif ($this->createOrFetchAssetModel($row) != null) {
-                if($eol = AssetModel::find($this->createOrFetchAssetModel($row))->eol) {
+                if(AssetModel::find($this->createOrFetchAssetModel($row))->eol && $this->findCsvMatch($row, 'purchase_date') != '') {
+                    $eol = AssetModel::find($this->createOrFetchAssetModel($row))->eol;
+                    $months = CarbonImmutable::parse($this->findCsvMatch($row, 'asset_eol_date'))->diffInMonths($this->findCsvMatch($row, 'purchase_date'));
+                    if($months != $eol) {
+                        $this->item['eol_explicit'] = true;
+                    } else {
+                        $this->item['eol_explicit'] = false;
+                    }
                     $this->item['asset_eol_date'] = CarbonImmutable::parse($this->findCsvMatch($row, 'purchase_date'))->addMonths($eol)->format('Y-m-d');
                 }
         }
