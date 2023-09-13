@@ -18,17 +18,8 @@ use Watson\Validating\ValidatingTrait;
 
 class Location extends SnipeModel
 {
-    function __construct() {
-        parent::__construct();
-        // This is a workaround for backward compatibility with older versions where locations doesn't get scoped.
-        // Normaly we would only add 'use CompanyableTrait;', but this has to be conditional on the setting.
-        // So instead of using the trait, add the scope directly if no backward compatibility is used
-        if (Setting::getSettings()->scope_locations_fmcs) {
-            static::addGlobalScope(new CompanyableScope);
-        }
-    }
-
     use HasFactory;
+    use CompanyableTrait;
 
     protected $presenter = \App\Presenters\LocationPresenter::class;
     use Presentable;
