@@ -654,7 +654,7 @@
 
             @can('update', \App\Models\Asset::class)
 
-                    <button type="submit" class="btn btn-primary" id="{{ (isset($id_button)) ? $id_button : 'bulkAssetEditButton' }}" value="checkin" disabled>{{ trans('button.checkin_all') }}</button>
+                <button type="submit" class="btn btn-primary" id="{{ (isset($id_button)) ? $id_button : 'checkInAll' }}" value="checkin" disabled><a href="{{route('hardware/bulkedit')}}">{{ trans('button.checkin_all') }}</a></button>
 
             @endcan
 
@@ -676,7 +676,7 @@
                     data-sort-order="asc"
                     data-sort-name="name"
                     data-toolbar="#assetsBulkEditToolbar"
-                    data-bulk-button-id="#bulkAssetEditButton"
+                    data-bulk-button-id="#bulkAssetEditButton, #checkInAll"
                     data-bulk-form-id="#assetsBulkForm"
                     id="userAssetsListingTable"
                     class="table table-striped snipe-table"
