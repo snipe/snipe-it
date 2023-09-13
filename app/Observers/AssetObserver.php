@@ -140,7 +140,9 @@ class AssetObserver
        } elseif (!is_null($asset->asset_eol_date) && is_null($asset->purchase_date)) {
            $asset->eol_explicit = true;
        }
-      
+       if ((!is_null($asset->asset_eol_date)) && (!is_null($asset->purchase_date)) && (is_null($asset->model->eol))) {
+           $asset->eol_explicit = true;
+       }
 
     }
 }
