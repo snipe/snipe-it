@@ -24,7 +24,7 @@
             <div class="box">
                 <div class="box-body">
                     <div class="alert alert-warning">
-                        <strong><i class="fa fa-warning info" aria-hidden="true"></i> {{ trans('general.warning', ['warning'=> trans('general.errors_importing')]) }}</strong>
+                        <strong><i class="fa fa-2x fa-warning info" aria-hidden="true"></i> {{ trans('general.warning', ['warning'=> trans('general.errors_importing')]) }}</strong>
                     </div>
 
                     <div class="errors-table">
@@ -65,17 +65,18 @@
                         <div class="row">
 
                             <div class="col-md-12">
+
                                 @if($progress != -1)
-                                    <div class="col-md-9" style="padding-bottom:20px" id='progress-container'>
-                                        <div class="progress progress-striped-active" style="margin-top: 8px"> {{-- so someof these values are in importer.vue! --}}
+                                    <div class="col-md-10 col-sm-5 col-xs-12" style="height: 35px;" id='progress-container'>
+                                        <div class="progress progress-striped-active" style="height: 100%;">
                                             <div id='progress-bar' class="progress-bar {{ $progress_bar_class }}" role="progressbar" style="width: {{ $progress }}%">
-                                                <span id='progress-text'>{{ $progress_message }}</span>
+                                                <h4 id="progress-text">{!! $progress_message  !!}</h4>
                                             </div>
                                         </div>
                                     </div>
                                 @endif
 
-                                <div class="col-md-3 text-right pull-right">
+                                <div class="col-md-2 col-sm-5 col-xs-12 text-right pull-right">
 
                                     <!-- The fileinput-button span is used to style the file input field as button -->
                                     @if (!config('app.lock_passwords'))
@@ -289,7 +290,7 @@
             dataType: 'json',
             done: function(e, data) {
                 @this.progress_bar_class = 'progress-bar-success';
-                @this.progress_message = '{{ trans('general.notification_success') }}'; // TODO - we're already round-tripping to the server here - I'd love it if we could get internationalized text here
+                @this.progress_message = '<i class="fas fa-check faa-pulse animated"></i> {{ trans('general.notification_success') }}';
                 @this.progress = 100;
             },
             add: function(e, data) {
@@ -302,17 +303,12 @@
             },
             progress: function(e, data) {
                 @this.progress = parseInt((data.loaded / data.total * 100, 10));
-                @this.progress_message = @this.progress+'% Complete'; // TODO - make this use general.percent_complete as a translation, passing :percent as a variable
+                @this.progress_message = '{{ trans('general.uploading') }}';
             },
-            fail: function(e, data) {
+            fail: function() {
                 @this.progress_bar_class = "progress-bar-danger";
                 @this.progress = 100;
-
-                var error_message = ''
-                for(var i in data.jqXHR.responseJSON.messages) {
-                    error_message += i+": "+data.jqXHR.responseJSON.messages[i].join(", ")
-                }
-                @this.progress_message = error_message;
+                @this.progress_message = '<i class="fas fa-exclamation-triangle faa-pulse animated"></i> {{ trans('general.upload_error') }}';
             }
         })
 

@@ -369,9 +369,9 @@ return [
     'notification_error'    => 'Error:',
     'notification_error_hint' => 'Please check the form below for errors',
     'notification_bulk_error_hint' => 'The following fields had validation errors and were not edited:',
-    'notification_success'  => 'Success:',
-    'notification_warning'   => 'Warning:',
-    'notification_info'      => 'Info:',
+    'notification_success'  => 'Success',
+    'notification_warning'   => 'Warning',
+    'notification_info'      => 'Info',
     'asset_information'     => 'Asset Information',
     'model_name'            => 'Model Name',
     'asset_name'            => 'Asset Name',
@@ -481,5 +481,8 @@ return [
         'address2' => 'Address Line 2',
         'import_note' => 'Imported using csv importer',
     ],
+    'percent_complete' => '% complete',
+    'uploading' => 'Uploading... ',
+    'upload_error' => 'Error uploading file. Please check that there are no empty trailing rows.'
 
 ];
