@@ -48,10 +48,10 @@ class DenormalizedEolAndAddColumnForExplicitDateToAssets extends Migration
                 if (!empty($model->eol) && !empty($asset->purchase_date)) {
                     try {
                         $asset_eol_date = CarbonImmutable::parse($asset->purchase_date)->addMonths($model->eol)->format('Y-m-d');
+                        $asset->update(['asset_eol_date' => $asset_eol_date]);
                     } catch (\Exception $e) {
                         Log::info('purchase date invalid for asset '.$asset->id);
                     }
-                    $asset->update(['asset_eol_date' => $asset_eol_date]);
                 }
             }
         });
