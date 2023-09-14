@@ -168,9 +168,14 @@
                                             </td>
                                             <td>
                                                 @if (($file->filename) && (Storage::exists('private_uploads/assetmodels/'.$file->filename)))
-                                                    <a href="{{ route('show/modelfile', [$model->id, $file->id]) }}" class="btn btn-default">
+                                                    <a href="{{ route('show/modelfile', [$model->id, $file->id]) }}" class="btn btn-sm btn-default">
                                                         <i class="fas fa-download" aria-hidden="true"></i>
                                                     </a>
+
+                                                    <a href="{{ route('show/modelfile', [$model->id, $file->id, 'inline'=>'true']) }}" class="btn btn-sm btn-default" target="_blank">
+                                                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                    </a>
+
                                                 @endif
                                             </td>
                                             <td>

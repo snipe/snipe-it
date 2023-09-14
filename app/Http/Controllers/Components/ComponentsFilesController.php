@@ -132,7 +132,7 @@ class ComponentsFilesController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function show($componentId = null, $fileId = null, $download = true)
+    public function show($componentId = null, $fileId = null)
     {
         \Log::debug('Private filesystem is: '.config('filesystems.default'));
         $component = Component::find($componentId);
@@ -157,21 +157,17 @@ class ComponentsFilesController extends Controller
                     ->header('Content-Type', 'text/plain');
             } else {
 
+                // Display the file inline
+                if (request('inline') == 'true') {
+                    $headers = [
+                        'Content-Disposition' => 'inline',
+                    ];
+                    return Storage::download($file, $log->filename, $headers);
+                }
+
                 if (config('filesystems.default') == 'local') { // TODO - is there any way to fix this at the StorageHelper layer?
                     return StorageHelper::downloader($file);
-                } else {
-                    if ($download != 'true') {
-                        \Log::debug('display the file');
-                        if ($contents = file_get_contents(Storage::url($file))) { // TODO - this will fail on private S3 files or large public ones
-                            return Response::make(Storage::url($file)->header('Content-Type', mime_content_type($file)));
-                        }
-
-                        return JsonResponse::create(['error' => 'Failed validation: '], 500);
-                    }
-
-                    return StorageHelper::downloader($file);
-
-                }
+                } 
             }
         }
 

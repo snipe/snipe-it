@@ -142,6 +142,11 @@
               </label>
 
               <label class="form-control">
+                {{ Form::checkbox('checkin_date', '1', '1') }}
+                {{ trans('admin/hardware/table.last_checkin_date') }}
+              </label>
+
+              <label class="form-control">
                 {{ Form::checkbox('expected_checkin', '1', '1') }}
                 {{ trans('admin/hardware/form.expected_checkin') }}
               </label>
@@ -289,6 +294,16 @@
               </div>
           </div>
 
+          <!-- Last Checkin Date -->
+          <div class="form-group checkin-range">
+              <label for="checkin_date" class="col-md-3 control-label">{{ trans('admin/hardware/table.last_checkin_date') }}</label>
+              <div class="input-daterange input-group col-md-6" id="datepicker">
+                  <input type="text" class="form-control" name="checkin_date_start" aria-label="checkin_date_start">
+                  <span class="input-group-addon">{{ strtolower(trans('general.to')) }}</span>
+                  <input type="text" class="form-control" name="checkin_date_end" aria-label="checkin_date_end">
+              </div>
+          </div>
+
             <!-- Expected Checkin Date -->
             <div class="form-group expected_checkin-range">
               <label for="expected_checkin_start" class="col-md-3 control-label">{{ trans('admin/hardware/form.expected_checkin') }}</label>
@@ -375,6 +390,13 @@
           format: 'yyyy-mm-dd'
       });
       $('.checkout-range .input-daterange').datepicker({
+          clearBtn: true,
+          todayHighlight: true,
+          endDate: '0d',
+          format: 'yyyy-mm-dd'
+      });
+
+      $('.checkin-range .input-daterange').datepicker({
           clearBtn: true,
           todayHighlight: true,
           endDate: '0d',

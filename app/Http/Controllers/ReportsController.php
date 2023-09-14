@@ -545,6 +545,10 @@ class ReportsController extends Controller
                 $header[] = trans('admin/hardware/table.checkout_date');
             }
 
+            if ($request->filled('checkin_date')) {
+                $header[] = trans('admin/hardware/table.last_checkin_date');
+            }
+
             if ($request->filled('expected_checkin')) {
                 $header[] = trans('admin/hardware/form.expected_checkin');
             }
@@ -649,6 +653,14 @@ class ReportsController extends Controller
                 $checkout_end = \Carbon::parse($request->input('checkout_date_end'))->endOfDay();
 
                 $assets->whereBetween('assets.last_checkout', [$checkout_start, $checkout_end]);
+            }
+
+            if (($request->filled('checkin_date_start'))) {
+                $assets->whereBetween('last_checkin', [
+                    Carbon::parse($request->input('checkin_date_start'))->startOfDay(),
+                    // use today's date is `checkin_date_end` is not provided
+                    Carbon::parse($request->input('checkin_date_end', now()))->endOfDay(),
+                ]);
             }
 
             if (($request->filled('expected_checkin_start')) && ($request->filled('expected_checkin_end'))) {
@@ -835,6 +847,12 @@ class ReportsController extends Controller
                         $row[] = ($asset->last_checkout) ? $asset->last_checkout : '';
                     }
 
+                    if ($request->filled('checkin_date')) {
+                        $row[] = ($asset->last_checkin)
+                            ? Carbon::parse($asset->last_checkin)->format('Y-m-d')
+                            : '';
+                    }
+
                     if ($request->filled('expected_checkin')) {
                         $row[] = ($asset->expected_checkin) ? $asset->expected_checkin : '';
                     }
@@ -1003,7 +1021,12 @@ class ReportsController extends Controller
 
         $assetsForReport = $acceptances
             ->filter(function ($acceptance) {
-                return $acceptance->checkoutable_type == 'App\Models\Asset';
+                $acceptance_checkoutable_flag = false;
+                if ($acceptance->checkoutable){
+                    $acceptance_checkoutable_flag = $acceptance->checkoutable->checkedOutToUser();
+                }
+                
+                return $acceptance->checkoutable_type == 'App\Models\Asset' && $acceptance_checkoutable_flag;
             })
             ->map(function($acceptance) {
                 return ['assetItem' => $acceptance->checkoutable, 'acceptance' => $acceptance];
