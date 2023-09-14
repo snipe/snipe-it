@@ -252,13 +252,10 @@ class Ldap extends Model
             $user->last_name = $item['lastname'];
             $user->username = $item['username'];
             $user->email = $item['email'];
+            $user->password = $user->noPassword();
 
             if (Setting::getSettings()->ldap_pw_sync == '1') {
-
                 $user->password = bcrypt($password);
-            } else {
-                $pass = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 25);
-                $user->password = bcrypt($pass);
             }
 
             $user->activated = 1;
@@ -268,7 +265,7 @@ class Ldap extends Model
             if ($user->save()) {
                 return $user;
             } else {
-                LOG::debug('Could not create user.'.$user->getErrors());
+                \Log::debug('Could not create user.'.$user->getErrors());
                 throw new Exception('Could not create user: '.$user->getErrors());
             }
         }

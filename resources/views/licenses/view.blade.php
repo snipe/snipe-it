@@ -582,17 +582,23 @@
     @endcan
 
     @can('checkin', $license)
-
-      @if (($license->seats - $license->availCount()->count()) > 0 )
-        <a href="#" class="btn btn-block bg-purple" style="margin-bottom: 25px;" data-toggle="modal" data-tooltip="true"  data-target="#checkinFromAllModal" data-content="{{ trans('general.sure_to_delete') }} data-title="{{  trans('general.delete') }}" onClick="return false;">
-          {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
-        </a>
-      @else
+  
+      @if (($license->seats - $license->availCount()->count()) <= 0 )
         <span data-tooltip="true" title=" {{ trans('admin/licenses/general.bulk.checkin_all.disabled_tooltip') }}">
             <a href="#" class="btn btn-block bg-purple disabled" style="margin-bottom: 25px;">
              {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
             </a>
-          </span>
+        </span>
+      @elseif (! $license->reassignable)
+        <span data-tooltip="true" title=" {{ trans('admin/licenses/general.bulk.checkin_all.disabled_tooltip_reassignable') }}">
+            <a href="#" class="btn btn-block bg-purple disabled" style="margin-bottom: 25px;">
+             {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
+            </a>
+        </span>
+      @else
+        <a href="#" class="btn btn-block bg-purple" style="margin-bottom: 25px;" data-toggle="modal" data-tooltip="true"  data-target="#checkinFromAllModal" data-content="{{ trans('general.sure_to_delete') }} data-title="{{  trans('general.delete') }}" onClick="return false;">
+          {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
+        </a>
       @endif
     @endcan
 

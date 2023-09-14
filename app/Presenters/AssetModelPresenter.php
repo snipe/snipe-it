@@ -66,6 +66,14 @@ class AssetModelPresenter extends Presenter
                 'visible' => true,
             ],
             [
+                'field' => 'min_amt',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('mail.min_QTY'),
+                'visible' => true,
+            ],
+            [
                 'field' => 'assets_count',
                 'searchable' => false,
                 'sortable' => true,
