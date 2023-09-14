@@ -26,7 +26,7 @@
                 <div class="box-body">
                     <div class="alert alert-warning">
 
-                        <h4><i class="fa fa-2x fa-warning info" aria-hidden="true"></i> {{ trans('general.warning', ['warning'=> trans('general.errors_importing')]) }}</h4>
+                        <i class="fa fa-warning info" aria-hidden="true"></i> <strong>{{ trans('general.warning', ['warning'=> trans('general.errors_importing')]) }}</strong>
                     </div>
 
                     <div class="errors-table">
