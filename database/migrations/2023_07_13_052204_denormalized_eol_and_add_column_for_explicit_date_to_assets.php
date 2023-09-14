@@ -22,7 +22,7 @@ class DenormalizedEolAndAddColumnForExplicitDateToAssets extends Migration
 
 
         // Update the eol_explicit column with the value from asset_eol_date if it exists and is different from the calculated value
-        Asset::whereNotNull('asset_eol_date')->chunk(500, function ($assetsWithEolDates) {
+        Asset::whereNotNull('asset_eol_date')->chunkById(500, function ($assetsWithEolDates) {
             foreach ($assetsWithEolDates as $asset) {
                 if ($asset->asset_eol_date && $asset->purchase_date) {
                     try {
@@ -42,7 +42,7 @@ class DenormalizedEolAndAddColumnForExplicitDateToAssets extends Migration
         });
 
         // Update the asset_eol_date column with the calculated value if it doesn't exist 
-        Asset::whereNull('asset_eol_date')->chunk(500, function ($assets) {
+        Asset::whereNull('asset_eol_date')->chunkById(500, function ($assets) {
             foreach ($assets as $asset) {
                 $model = Asset::find($asset->id)->model;
                 if (!empty($model->eol) && !empty($asset->purchase_date)) {
