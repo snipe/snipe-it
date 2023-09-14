@@ -9,7 +9,7 @@
 {{-- alert --}}
 @if($message != '')
     <div class="col-md-12" class="{{ $message_type }}">
-        <div class="alert alert-{{ $this->message_type }} ">
+        <div class="alert alert-{{ $this->message_type }}">
             <button type="button" class="close" wire:click="$set('message','')">&times;</button>
             @if($message_type == 'success')
                 <i class="fas fa-check faa-pulse animated" aria-hidden="true"></i>
