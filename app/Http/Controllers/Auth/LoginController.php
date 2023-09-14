@@ -191,9 +191,11 @@ class LoginController extends Controller
 
              $ldap_attr = Ldap::parseAndMapLdapAttributes($ldap_user);
 
+            $user->password = $user->noPassword();
             if (Setting::getSettings()->ldap_pw_sync=='1') {
                 $user->password = bcrypt($request->input('password'));
             }
+
             $user->email = $ldap_attr['email'];
             $user->first_name = $ldap_attr['firstname'];
             $user->last_name = $ldap_attr['lastname']; //FIXME (or TODO?) - do we need to map additional fields that we now support? E.g. country, phone, etc.

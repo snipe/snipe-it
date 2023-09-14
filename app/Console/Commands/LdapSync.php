@@ -180,10 +180,6 @@ class LdapSync extends Command
             }
         }
 
-        /* Create user account entries in Snipe-IT */
-        $tmp_pass = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 20);
-        $pass = bcrypt($tmp_pass);
-
         $manager_cache = [];
 
         if($ldap_default_group != null) {
@@ -229,7 +225,7 @@ class LdapSync extends Command
                 } else {
                     // Creating a new user.
                     $user = new User;
-                    $user->password = $pass;
+                    $user->password = $user->noPassword();
                     $user->activated = 1; // newly created users can log in by default, unless AD's UAC is in use, or an active flag is set (below)
                     $item['createorupdate'] = 'created';
                 }
