@@ -344,7 +344,10 @@
                 @else
 
                     <div class="col-md-12" style="padding-bottom: 10px;">
-                        <a href="{{ route('models.destroy', $model->id) }}" style="width: 100%;" class="btn btn-sm btn-danger hidden-print">{{ trans('general.delete') }}</a>
+                        <form action="{{ route('models.destroy', $model->id)  }}" method='POST'>
+                            @csrf @method('DELETE')
+                            <button style="width: 100%;" class="btn btn-sm btn-danger hidden-print">{{ trans('general.delete') }}</button>
+                        </form>
                     </div>
                 @endif
            @endcan
