@@ -19,8 +19,13 @@
         @endcan
         @else
         @can('update', \App\Models\Asset::class)
-            <option value="edit">{{ trans('button.edit') }}</option>
+            <option value="edit">{{trans('button.edit')}}</option>
         @endcan
+        @if(isset($checkin) && ($checkin))
+            @can('checkin', \App\Models\Asset::class)
+                <option value="checkin">{{trans('button.checkin_all')}}</option>
+            @endcan
+        @endif
         @can('delete', \App\Models\Asset::class)
             <option value="delete">{{ trans('button.delete') }}</option>
         @endcan

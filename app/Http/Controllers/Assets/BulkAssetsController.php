@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Assets;
 
+use App\Events\CheckoutableCheckedIn;
+use App\Http\Requests\AssetCheckinRequest;
 use App\Models\Actionlog;
 use App\Helpers\Helper;
 use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
+use App\Models\CheckoutAcceptance;
 use App\Models\Setting;
 use App\View\Label;
 use Illuminate\Http\Request;
@@ -23,17 +26,17 @@ class BulkAssetsController extends Controller
     /**
      * Display the bulk edit page.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
      * @return View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      * @internal param int $assetId
      * @since [v2.0]
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @author [A. Gianotto] [<snipe@snipe.net>]
      */
     public function edit(Request $request)
     {
         $this->authorize('view', Asset::class);
-      
-        if (! $request->filled('ids')) {
+
+        if (!$request->filled('ids')) {
             return redirect()->back()->with('error', trans('admin/hardware/message.update.no_assets_selected'));
         }
 
@@ -42,29 +45,21 @@ class BulkAssetsController extends Controller
         session(['bulk_back_url' => $bulk_back_url]);
 
         $asset_ids = array_values(array_unique($request->input('ids')));
-       
+
         //custom fields logic
         $asset_custom_field = Asset::with(['model.fieldset.fields', 'model'])->whereIn('id', $asset_ids)->whereHas('model', function ($query) {
             return $query->where('fieldset_id', '!=', null);
         })->get();
 
-        $models = $asset_custom_field->unique('model_id');  
+        $models = $asset_custom_field->unique('model_id');
         $modelNames = [];
-        foreach($models as $model) {
+        foreach ($models as $model) {
             $modelNames[] = $model->model->name;
         }
 
-        if ($request->filled('checkin')){
-            $this->authorize('update', Asset::class);
-            $assets = Asset::with('assignedTo')->find($asset_ids);
-            $assets->each(function ($asset) {
-                $this->authorize('checkin', $asset);
-            });
-            $checkin= new AssetCheckinController();
-            foreach($assets as $asset){
-                $checkin->store($asset);
-            }
-            return view('hardware/bulk-delete')->with('assets', $assets);
+        if ($request->filled('checkin')) {
+
+            return view('users/{assignedTo}/#asset')->with('assets', $assets);
         }
 
         if ($request->filled('bulk_actions')) {
@@ -76,7 +71,6 @@ class BulkAssetsController extends Controller
                         ->with('settings', Setting::getSettings())
                         ->with('bulkedit', true)
                         ->with('count', 0);
-
                 case 'delete':
                     $this->authorize('delete', Asset::class);
                     $assets = Asset::with('assignedTo', 'location')->find($asset_ids);
@@ -87,7 +81,7 @@ class BulkAssetsController extends Controller
                     return view('hardware/bulk-delete')->with('assets', $assets);
                 case 'restore':
                     $this->authorize('update', Asset::class);
-                    $assets = Asset::withTrashed()->find($asset_ids); 
+                    $assets = Asset::withTrashed()->find($asset_ids);
                     $assets->each(function ($asset) {
                         $this->authorize('delete', $asset);
                     });
@@ -99,8 +93,18 @@ class BulkAssetsController extends Controller
                     return view('hardware/bulk')
                         ->with('assets', $asset_ids)
                         ->with('statuslabel_list', Helper::statusLabelList())
-                        ->with('models', $models->pluck(['model'])) 
+                        ->with('models', $models->pluck(['model']))
                         ->with('modelNames', $modelNames);
+                case 'checkin':
+                    $this->authorize('checkin', Asset::class);
+                    $assets = Asset::with('assignedTo')->find($asset_ids);
+                    $assets->each(function ($asset) {
+                        $this->authorize('checkin', $asset);
+                    });
+                    foreach ($assets as $asset) {
+                        $this->bulkCheckin($asset);
+                    }
+                    return redirect()->route('users.show', Auth::id() . '#asset');
             }
         }
 
@@ -110,8 +114,8 @@ class BulkAssetsController extends Controller
     /**
      * Save bulk edits
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
      * @return Redirect
+     * @author [A. Gianotto] [<snipe@snipe.net>]
      * @internal param array $assets
      * @since [v2.0]
      */
@@ -127,21 +131,21 @@ class BulkAssetsController extends Controller
         }
 
 
-      $custom_field_columns = CustomField::all()->pluck('db_column')->toArray(); 
-     
-        if(Session::exists('ids')) {
-            $assets = Session::get('ids'); 
-        } elseif (! $request->filled('ids') || count($request->input('ids')) <= 0) {
+        $custom_field_columns = CustomField::all()->pluck('db_column')->toArray();
+
+        if (Session::exists('ids')) {
+            $assets = Session::get('ids');
+        } elseif (!$request->filled('ids') || count($request->input('ids')) <= 0) {
             return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.update.no_assets_selected'));
         }
-         
+
         $assets = array_keys($request->input('ids'));
-        
-       if ($request->anyFilled($custom_field_columns)) {
-           $custom_fields_present = true;
-         } else {
-           $custom_fields_present = false;
-         }
+
+        if ($request->anyFilled($custom_field_columns)) {
+            $custom_fields_present = true;
+        } else {
+            $custom_fields_present = false;
+        }
         if (($request->filled('purchase_date'))
             || ($request->filled('expected_checkin'))
             || ($request->filled('purchase_cost'))
@@ -173,24 +177,24 @@ class BulkAssetsController extends Controller
                     ->conditionallyAddItem('supplier_id')
                     ->conditionallyAddItem('warranty_months')
                     ->conditionallyAddItem('next_audit_date');
-                    foreach ($custom_field_columns as $key => $custom_field_column) {
-                        $this->conditionallyAddItem($custom_field_column); 
-                   } 
+                foreach ($custom_field_columns as $key => $custom_field_column) {
+                    $this->conditionallyAddItem($custom_field_column);
+                }
 
-                if ($request->input('null_purchase_date')=='1') {
+                if ($request->input('null_purchase_date') == '1') {
                     $this->update_array['purchase_date'] = null;
                 }
 
-                if ($request->input('null_expected_checkin_date')=='1') {
+                if ($request->input('null_expected_checkin_date') == '1') {
                     $this->update_array['expected_checkin'] = null;
                 }
 
-                if ($request->input('null_next_audit_date')=='1') {
+                if ($request->input('null_next_audit_date') == '1') {
                     $this->update_array['next_audit_date'] = null;
                 }
 
                 if ($request->filled('purchase_cost')) {
-                    $this->update_array['purchase_cost'] =  $request->input('purchase_cost');
+                    $this->update_array['purchase_cost'] = $request->input('purchase_cost');
                 }
 
                 if ($request->filled('company_id')) {
@@ -208,7 +212,7 @@ class BulkAssetsController extends Controller
                 }
 
                 $changed = [];
-                $assetCollection = Asset::where('id' ,$assetId)->get();
+                $assetCollection = Asset::where('id', $assetId)->get();
 
                 foreach ($this->update_array as $key => $value) {
                     if ($this->update_array[$key] != $assetCollection->toArray()[0][$key]) {
@@ -220,49 +224,49 @@ class BulkAssetsController extends Controller
                 $logAction = new Actionlog();
                 $logAction->item_type = Asset::class;
                 $logAction->item_id = $assetId;
-                $logAction->created_at =  date("Y-m-d H:i:s");
+                $logAction->created_at = date("Y-m-d H:i:s");
                 $logAction->user_id = Auth::id();
                 $logAction->log_meta = json_encode($changed);
                 $logAction->logaction('update');
- 
-                if($custom_fields_present) { 
-                    $asset = Asset::find($assetId); 
-                    $assetCustomFields = $asset->model()->first()->fieldset; 
-                    if($assetCustomFields && $assetCustomFields->fields) {
-                            foreach ($assetCustomFields->fields as $field) { 
-                                if (array_key_exists($field->db_column, $this->update_array)) {
-                                        $asset->{$field->db_column} = $this->update_array[$field->db_column]; 
-                                        $saved = $asset->save();    
-                                        if(!$saved) {
-                                            $error_bag[] = $asset->getErrors();
-                                        }
-                                        continue; 
-                                } else { 
-                                        $array = $this->update_array; 
-                                        array_except($array, $field->db_column); 
-                                        $asset->save($array); 
-                                    }     
-                                    if (!$asset->save()) {
-                                        $error_bag[] = $asset->getErrors();
-                                } 
-                    } 
-                }
+
+                if ($custom_fields_present) {
+                    $asset = Asset::find($assetId);
+                    $assetCustomFields = $asset->model()->first()->fieldset;
+                    if ($assetCustomFields && $assetCustomFields->fields) {
+                        foreach ($assetCustomFields->fields as $field) {
+                            if (array_key_exists($field->db_column, $this->update_array)) {
+                                $asset->{$field->db_column} = $this->update_array[$field->db_column];
+                                $saved = $asset->save();
+                                if (!$saved) {
+                                    $error_bag[] = $asset->getErrors();
+                                }
+                                continue;
+                            } else {
+                                $array = $this->update_array;
+                                array_except($array, $field->db_column);
+                                $asset->save($array);
+                            }
+                            if (!$asset->save()) {
+                                $error_bag[] = $asset->getErrors();
+                            }
+                        }
+                    }
                 } else {
                     Asset::find($assetId)->update($this->update_array);
-                } 
-            } 
-            if(!empty($error_bag)) {
+                }
+            }
+            if (!empty($error_bag)) {
                 $errors = [];
-               //find the customfield name from the name of the messagebag items 
+                //find the customfield name from the name of the messagebag items
                 foreach ($error_bag as $key => $bag) {
-                  foreach($bag->keys() as $key => $value) {
-                        CustomField::where('db_column', $value)->get()->map(function($item) use (&$errors) {
-                            $errors[] = $item->name; 
+                    foreach ($bag->keys() as $key => $value) {
+                        CustomField::where('db_column', $value)->get()->map(function ($item) use (&$errors) {
+                            $errors[] = $item->name;
                         });
                     }
                 }
                 return redirect($bulk_back_url)->with('bulk_errors', array_unique($errors));
-              }
+            }
             return redirect($bulk_back_url)->with('success', trans('admin/hardware/message.update.success'));
         }
         // no values given, nothing to update
@@ -277,7 +281,7 @@ class BulkAssetsController extends Controller
 
     /**
      * Adds parameter to update array for an item if it exists in request
-     * @param  string $field field name
+     * @param string $field field name
      * @return BulkAssetsController Model for Chaining
      */
     protected function conditionallyAddItem($field)
@@ -292,10 +296,10 @@ class BulkAssetsController extends Controller
     /**
      * Save bulk deleted.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param Request $request
      * @return View
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @author [A. Gianotto] [<snipe@snipe.net>]
      * @internal param array $assets
      * @since [v2.0]
      */
@@ -352,7 +356,7 @@ class BulkAssetsController extends Controller
 
             $target = $this->determineCheckoutTarget();
 
-            if (! is_array($request->get('selected_assets'))) {
+            if (!is_array($request->get('selected_assets'))) {
                 return redirect()->route('hardware.bulkcheckout.show')->withInput()->with('error', trans('admin/hardware/message.checkout.no_assets_selected'));
             }
 
@@ -396,7 +400,7 @@ class BulkAssetsController extends Controller
                 }
             });
 
-            if (! $errors) {
+            if (!$errors) {
                 // Redirect to the new asset page
                 return redirect()->to('hardware')->with('success', trans('admin/hardware/message.checkout.success'));
             }
@@ -405,19 +409,110 @@ class BulkAssetsController extends Controller
         } catch (ModelNotFoundException $e) {
             return redirect()->route('hardware.bulkcheckout.show')->with('error', $e->getErrors());
         }
-        
+
     }
-    public function restore(Request $request) {
+
+    public function restore(Request $request)
+    {
         $this->authorize('update', Asset::class);
-       $assetIds = $request->get('ids');
-      if (empty($assetIds)) {
-          return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.restore.nothing_updated'));
+        $assetIds = $request->get('ids');
+        if (empty($assetIds)) {
+            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.restore.nothing_updated'));
         } else {
             foreach ($assetIds as $key => $assetId) {
-                    $asset = Asset::withTrashed()->find($assetId);
-                    $asset->restore(); 
-            } 
-        return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.restore.success'));
+                $asset = Asset::withTrashed()->find($assetId);
+                $asset->restore();
+            }
+            return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.restore.success'));
+        }
+    }
+
+    public function bulkCheckin(AssetCheckinRequest $request, $assetId)
+    {
+
+
+        // Check if the asset exists
+        if (is_null($asset = Asset::find($assetId))) {
+            // Redirect to the asset management page with error
+            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
+        }
+
+        if (is_null($target = $asset->assignedTo)) {
+            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.already_checked_in'));
+        }
+        $this->authorize('checkin', $asset);
+
+        if ($asset->assignedType() == Asset::USER) {
+            $user = $asset->assignedTo;
+        }
+
+        $asset->expected_checkin = null;
+        $asset->last_checkout = null;
+        $asset->assigned_to = null;
+        $asset->assignedTo()->disassociate($asset);
+        $asset->assigned_type = null;
+        $asset->accepted = null;
+        $asset->name = $request->get('name');
+
+        if ($request->filled('status_id')) {
+            $asset->status_id = e($request->get('status_id'));
+        }
+
+        // This is just meant to correct legacy issues where some user data would have 0
+        // as a location ID, which isn't valid. Later versions of Snipe-IT have stricter validation
+        // rules, so it's necessary to fix this for long-time users. It's kinda gross, but will help
+        // people (and their data) in the long run
+
+        if ($asset->rtd_location_id == '0') {
+            \Log::debug('Manually override the RTD location IDs');
+            \Log::debug('Original RTD Location ID: ' . $asset->rtd_location_id);
+            $asset->rtd_location_id = '';
+            \Log::debug('New RTD Location ID: ' . $asset->rtd_location_id);
+        }
+
+        if ($asset->location_id == '0') {
+            \Log::debug('Manually override the location IDs');
+            \Log::debug('Original Location ID: ' . $asset->location_id);
+            $asset->location_id = '';
+            \Log::debug('New Location ID: ' . $asset->location_id);
+        }
+
+        $asset->location_id = $asset->rtd_location_id;
+
+        if ($request->filled('location_id')) {
+            \Log::debug('NEW Location ID: ' . $request->get('location_id'));
+            $asset->location_id = $request->get('location_id');
+
+            if ($request->get('update_default_location') == 0) {
+                $asset->rtd_location_id = $request->get('location_id');
+            }
+        }
+
+        $checkin_at = date('Y-m-d H:i:s');
+        if (($request->filled('checkin_at')) && ($request->get('checkin_at') != date('Y-m-d'))) {
+            $checkin_at = $request->get('checkin_at');
+        }
+
+        if (!empty($asset->licenseseats->all())) {
+            foreach ($asset->licenseseats as $seat) {
+                $seat->assigned_to = null;
+                $seat->save();
+            }
+        }
+
+        // Get all pending Acceptances for this asset and delete them
+        $acceptances = CheckoutAcceptance::pending()->whereHasMorph('checkoutable',
+            [Asset::class],
+            function (Builder $query) use ($asset) {
+                $query->where('id', $asset->id);
+            })->get();
+        $acceptances->map(function ($acceptance) {
+            $acceptance->delete();
+        });
+
+        // Was the asset updated?
+        if ($asset->save()) {
+            event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at));
         }
     }
 }

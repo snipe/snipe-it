@@ -650,11 +650,12 @@
         <div class="tab-pane" id="asset">
           <!-- checked out assets table -->
 
-            @include('partials.asset-bulk-actions')
+            @include('partials.asset-bulk-actions', ['checkin' => true])
 
             @can('update', \App\Models\Asset::class)
-
+                <form method="post">
                 <button type="submit" class="btn btn-primary" id="{{ (isset($id_button)) ? $id_button : 'checkInAll' }}" value="checkin" disabled><a href="{{route('hardware/bulkedit')}}">{{ trans('button.checkin_all') }}</a></button>
+                </form>
 
             @endcan
 
