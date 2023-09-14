@@ -1,5 +1,5 @@
 @extends('layouts/setup')
-{{ trans('admin/users/table.createuser') }}
+
 @section('title')
 {{ trans('admin/users/general.create_user') }} ::
 @parent
