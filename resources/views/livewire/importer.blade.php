@@ -8,7 +8,7 @@
 
 {{-- alert --}}
 @if($message != '')
-    <div class="col-md-12" class="{{ $message_type }}">
+    <div class="col-md-12" class="{{ $message_type }}">dvfds
         <div class="alert alert-{{ $this->message_type }} ">
             <button type="button" class="close" wire:click="$set('message','')">&times;</button>
             @if($message_type == 'success')
@@ -20,11 +20,13 @@
     </div>
 @endif
 
-@if($import_errors)
+        @if($import_errors)
+          <div class="col-md-12">
             <div class="box">
                 <div class="box-body">
                     <div class="alert alert-warning">
-                        <strong><i class="fa fa-2x fa-warning info" aria-hidden="true"></i> {{ trans('general.warning', ['warning'=> trans('general.errors_importing')]) }}</strong>
+
+                        <h4><i class="fa fa-2x fa-warning info" aria-hidden="true"></i> {{ trans('general.warning', ['warning'=> trans('general.errors_importing')]) }}</h4>
                     </div>
 
                     <div class="errors-table">
@@ -57,6 +59,7 @@
                     </div>
                 </div>
             </div>
+       </div>
 @endif
 
             <div class="col-md-9">
