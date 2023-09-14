@@ -79,13 +79,15 @@ class CheckoutableListener
         /**
          * Send the appropriate notification
          */
-        $acceptances = CheckoutAcceptance::where('checkoutable_id', $event->checkoutable->id)
-                                        ->where('assigned_to_id', $event->checkedOutTo->id)
-                                        ->get();
+        if ($event->checkedOutTo && $event->checkoutable){
+            $acceptances = CheckoutAcceptance::where('checkoutable_id', $event->checkoutable->id)
+                                            ->where('assigned_to_id', $event->checkedOutTo->id)
+                                            ->get();
 
-        foreach($acceptances as $acceptance){
-            if($acceptance->isPending()){
-                $acceptance->delete();
+            foreach($acceptances as $acceptance){
+                if($acceptance->isPending()){
+                    $acceptance->delete();
+                }
             }
         }
 
