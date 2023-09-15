@@ -268,6 +268,8 @@ return [
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Suppliers',
     'sure_to_delete'        => 'Are you sure you wish to delete',
+    'sure_to_delete_var'    => 'Are you sure you wish to delete :item?',
+    'delete_what'           => 'Delete :item',
     'submit'				=> 'Submit',
     'target'                => 'Target',
     'time_and_date_display' => 'Time and Date Display',
