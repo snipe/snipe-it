@@ -142,8 +142,8 @@ class AssetPresenter extends Presenter
                 'formatter' => 'dateDisplayFormatter',
             ], [
                 'field' => 'age',
-                'searchable' => true,
-                'sortable' => true,
+                'searchable' => false,
+                'sortable' => false,
                 'visible' => false,
                 'title' => trans('general.age'),
             ], [
