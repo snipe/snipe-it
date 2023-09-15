@@ -51,8 +51,9 @@
                 }
             },
             stickyHeader: true,
+            stickyHeaderOffsetLeft: parseInt($('body').css('padding-left'), 10),
+            stickyHeaderOffsetRight: parseInt($('body').css('padding-right'), 10),
             locale: locale,
-            stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
             undefinedText: '',
             iconsPrefix: 'fa',
             cookieStorage: '{{ config('session.bs_table_storage') }}',
