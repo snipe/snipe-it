@@ -56,12 +56,6 @@ class BulkAssetsController extends Controller
         foreach ($models as $model) {
             $modelNames[] = $model->model->name;
         }
-
-        if ($request->filled('checkin')) {
-
-            return view('users/{assignedTo}/#asset')->with('assets', $assets);
-        }
-
         if ($request->filled('bulk_actions')) {
             switch ($request->input('bulk_actions')) {
                 case 'labels':
@@ -95,15 +89,19 @@ class BulkAssetsController extends Controller
                         ->with('statuslabel_list', Helper::statusLabelList())
                         ->with('models', $models->pluck(['model']))
                         ->with('modelNames', $modelNames);
+
                 case 'checkin':
                     $this->authorize('checkin', Asset::class);
                     $assets = Asset::with('assignedTo')->find($asset_ids);
                     $assets->each(function ($asset) {
                         $this->authorize('checkin', $asset);
                     });
-                    foreach ($assets as $asset) {
-                        $this->bulkCheckin($asset);
-                    }
+
+                    return view('hardware.bulk-checkin')
+                        ->with('assets', $assets)
+                        ->with('statusLabel_list', Helper::statusLabelList())
+                        ->with('models', $models->pluck(['model']));
+
                     return redirect()->route('users.show', Auth::id() . '#asset');
             }
         }
