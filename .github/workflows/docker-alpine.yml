@@ -63,7 +63,7 @@ jobs:
       # Get Metadata for docker_build step below
       - name: Sync metadata (tags, labels) from GitHub to Docker for 'snipe-it' image
         id: meta_build
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: snipe/snipe-it
           tags: ${{ env.IMAGE_TAGS }}
