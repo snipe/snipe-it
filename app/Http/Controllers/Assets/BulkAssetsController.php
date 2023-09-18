@@ -129,7 +129,6 @@ class BulkAssetsController extends Controller
             $bulk_back_url = $request->session()->pull('bulk_back_url');
         }
 
-
         $custom_field_columns = CustomField::all()->pluck('db_column')->toArray();
 
         if (Session::exists('ids')) {
@@ -426,10 +425,11 @@ class BulkAssetsController extends Controller
         }
     }
 
-    public function bulkCheckin(Request $request)
+    public function bulkCheckin(Request $request, $backto = null)
     {
         $assetIds =$request->get('ids');
-
+        $count = count($assetIds);
+        $user = '';
         foreach($assetIds as $assetId) {
             // Check if the asset exists
             if (is_null($asset = Asset::find($assetId))) {
@@ -515,6 +515,8 @@ class BulkAssetsController extends Controller
                 event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at));
             }
         }
-        return redirect()->route('users.show', Auth::id() . '#asset');
+        if ((isset($user))) {
+            return redirect()->route('users.show', $user->id)->with('success', trans('admin/hardware/message.checkin.multi_success', ['count' => $count ]));
+        }
     }
 }

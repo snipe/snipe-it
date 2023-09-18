@@ -171,7 +171,6 @@ Route::group(
         )->name('hardware/bulksave');
 
         // Bulk checkout / checkin
-        // Bulk checkout / checkin
         Route::get('bulkcheckout',
             [BulkAssetsController::class, 'showCheckout']
         )->name('hardware.bulkcheckout.show');

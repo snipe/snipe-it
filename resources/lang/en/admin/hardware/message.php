@@ -74,6 +74,7 @@ return [
     'checkin' => [
         'error'   		=> 'Asset was not checked in, please try again',
         'success' 		=> 'Asset checked in successfully.',
+        'multi_success' => ':count Assets checked in successfully',
         'user_does_not_exist' => 'That user is invalid. Please try again.',
         'already_checked_in'  => 'That asset is already checked in.',
 

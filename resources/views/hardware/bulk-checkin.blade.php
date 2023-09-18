@@ -26,7 +26,7 @@
 
         <div class="box-body">
           <div class="col-md-12">
-              <form class="form-horizontal" method="post" action="{{route('hardware.bulkcheckin')}}">
+              <form class="form-horizontal" method="post" action="{{route('hardware.bulkcheckin', ['backto' => 'user'])}}">
 
                 {{csrf_field()}}
 
