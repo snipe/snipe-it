@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Assets;
 
 use App\Events\CheckoutableCheckedIn;
-use App\Http\Requests\AssetCheckinRequest;
 use App\Models\Actionlog;
 use App\Helpers\Helper;
 use App\Http\Controllers\CheckInOutRequest;
@@ -18,6 +17,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\AssetCheckoutRequest;
 use App\Models\CustomField;
+use Illuminate\Database\Eloquent\Builder;
+use PHPStan\BetterReflection\Reflection\Adapter\FakeReflectionAttribute;
 
 class BulkAssetsController extends Controller
 {
@@ -93,16 +94,16 @@ class BulkAssetsController extends Controller
                 case 'checkin':
                     $this->authorize('checkin', Asset::class);
                     $assets = Asset::with('assignedTo')->find($asset_ids);
+                    $user = Auth::user();
                     $assets->each(function ($asset) {
                         $this->authorize('checkin', $asset);
                     });
 
                     return view('hardware.bulk-checkin')
                         ->with('assets', $assets)
+                        ->with('user', $user)
                         ->with('statusLabel_list', Helper::statusLabelList())
                         ->with('models', $models->pluck(['model']));
-
-                    return redirect()->route('users.show', Auth::id() . '#asset');
             }
         }
 
@@ -425,92 +426,95 @@ class BulkAssetsController extends Controller
         }
     }
 
-    public function bulkCheckin(AssetCheckinRequest $request, $assetId)
+    public function bulkCheckin(Request $request)
     {
+        $assetIds =$request->get('ids');
 
+        foreach($assetIds as $assetId) {
+            // Check if the asset exists
+            if (is_null($asset = Asset::find($assetId))) {
+                // Redirect to the asset management page with error
+                return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
+            }
 
-        // Check if the asset exists
-        if (is_null($asset = Asset::find($assetId))) {
-            // Redirect to the asset management page with error
-            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        }
+            if (is_null($target = $asset->assignedTo)) {
+                return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.already_checked_in'));
+            }
+            $this->authorize('checkin', $asset);
 
-        if (is_null($target = $asset->assignedTo)) {
-            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.already_checked_in'));
-        }
-        $this->authorize('checkin', $asset);
+            if ($asset->assignedType() == Asset::USER) {
+                $user = $asset->assignedTo;
+            }
 
-        if ($asset->assignedType() == Asset::USER) {
-            $user = $asset->assignedTo;
-        }
+            $asset->expected_checkin = null;
+            $asset->last_checkout = null;
+            $asset->assigned_to = null;
+            $asset->assignedTo()->disassociate($asset);
+            $asset->assigned_type = null;
+            $asset->accepted = null;
+            $asset->name = $request->get('name');
 
-        $asset->expected_checkin = null;
-        $asset->last_checkout = null;
-        $asset->assigned_to = null;
-        $asset->assignedTo()->disassociate($asset);
-        $asset->assigned_type = null;
-        $asset->accepted = null;
-        $asset->name = $request->get('name');
+            if ($request->filled('status_id')) {
+                $asset->status_id = e($request->get('status_id'));
+            }
 
-        if ($request->filled('status_id')) {
-            $asset->status_id = e($request->get('status_id'));
-        }
+            // This is just meant to correct legacy issues where some user data would have 0
+            // as a location ID, which isn't valid. Later versions of Snipe-IT have stricter validation
+            // rules, so it's necessary to fix this for long-time users. It's kinda gross, but will help
+            // people (and their data) in the long run
 
-        // This is just meant to correct legacy issues where some user data would have 0
-        // as a location ID, which isn't valid. Later versions of Snipe-IT have stricter validation
-        // rules, so it's necessary to fix this for long-time users. It's kinda gross, but will help
-        // people (and their data) in the long run
+            if ($asset->rtd_location_id == '0') {
+                \Log::debug('Manually override the RTD location IDs');
+                \Log::debug('Original RTD Location ID: ' . $asset->rtd_location_id);
+                $asset->rtd_location_id = '';
+                \Log::debug('New RTD Location ID: ' . $asset->rtd_location_id);
+            }
 
-        if ($asset->rtd_location_id == '0') {
-            \Log::debug('Manually override the RTD location IDs');
-            \Log::debug('Original RTD Location ID: ' . $asset->rtd_location_id);
-            $asset->rtd_location_id = '';
-            \Log::debug('New RTD Location ID: ' . $asset->rtd_location_id);
-        }
+            if ($asset->location_id == '0') {
+                \Log::debug('Manually override the location IDs');
+                \Log::debug('Original Location ID: ' . $asset->location_id);
+                $asset->location_id = '';
+                \Log::debug('New Location ID: ' . $asset->location_id);
+            }
 
-        if ($asset->location_id == '0') {
-            \Log::debug('Manually override the location IDs');
-            \Log::debug('Original Location ID: ' . $asset->location_id);
-            $asset->location_id = '';
-            \Log::debug('New Location ID: ' . $asset->location_id);
-        }
+            $asset->location_id = $asset->rtd_location_id;
 
-        $asset->location_id = $asset->rtd_location_id;
+            if ($request->filled('location_id')) {
+                \Log::debug('NEW Location ID: ' . $request->get('location_id'));
+                $asset->location_id = $request->get('location_id');
 
-        if ($request->filled('location_id')) {
-            \Log::debug('NEW Location ID: ' . $request->get('location_id'));
-            $asset->location_id = $request->get('location_id');
+                if ($request->get('update_default_location') == 0) {
+                    $asset->rtd_location_id = $request->get('location_id');
+                }
+            }
 
-            if ($request->get('update_default_location') == 0) {
-                $asset->rtd_location_id = $request->get('location_id');
+            $checkin_at = date('Y-m-d H:i:s');
+            if (($request->filled('checkin_at')) && ($request->get('checkin_at') != date('Y-m-d'))) {
+                $checkin_at = $request->get('checkin_at');
+            }
+
+            if (!empty($asset->licenseseats->all())) {
+                foreach ($asset->licenseseats as $seat) {
+                    $seat->assigned_to = null;
+                    $seat->save();
+                }
+            }
+
+            // Get all pending Acceptances for this asset and delete them
+            $acceptances = CheckoutAcceptance::pending()->whereHasMorph('checkoutable',
+                [Asset::class],
+                function (Builder $query) use ($asset) {
+                    $query->where('id', $asset->id);
+                })->get();
+            $acceptances->map(function ($acceptance) {
+                $acceptance->delete();
+            });
+
+            // Was the asset updated?
+            if ($asset->save()) {
+                event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at));
             }
         }
-
-        $checkin_at = date('Y-m-d H:i:s');
-        if (($request->filled('checkin_at')) && ($request->get('checkin_at') != date('Y-m-d'))) {
-            $checkin_at = $request->get('checkin_at');
-        }
-
-        if (!empty($asset->licenseseats->all())) {
-            foreach ($asset->licenseseats as $seat) {
-                $seat->assigned_to = null;
-                $seat->save();
-            }
-        }
-
-        // Get all pending Acceptances for this asset and delete them
-        $acceptances = CheckoutAcceptance::pending()->whereHasMorph('checkoutable',
-            [Asset::class],
-            function (Builder $query) use ($asset) {
-                $query->where('id', $asset->id);
-            })->get();
-        $acceptances->map(function ($acceptance) {
-            $acceptance->delete();
-        });
-
-        // Was the asset updated?
-        if ($asset->save()) {
-            event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at));
-        }
+        return redirect()->route('users.show', Auth::id() . '#asset');
     }
 }

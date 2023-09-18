@@ -26,7 +26,7 @@
 
         <div class="box-body">
           <div class="col-md-12">
-              <form class="form-horizontal" method="post">
+              <form class="form-horizontal" method="post" action="{{route('hardware.bulkcheckin')}}">
 
                 {{csrf_field()}}
 
@@ -42,7 +42,7 @@
                           @else
                             <span class="text-danger text-bold">
                       <i class="fas fa-exclamation-triangle"></i>{{ trans('admin/hardware/general.model_invalid')}}
-                      <a href="{{ route('hardware.bulkcheckin', $asset->id) }}"></a> {{ trans('admin/hardware/general.model_invalid_fix')}}</span>
+                      <a href="{{ route('hardware.edit', $asset->id) }}"></a> {{ trans('admin/hardware/general.model_invalid_fix')}}</span>
                           @endif
                         @endforeach
                         </p>
@@ -69,44 +69,47 @@
                       </div>
                     </div>
 
-                  @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id', 'help_text' => ($asset->defaultLoc) ? 'You can choose to check this asset in to a location other than the default location of '.$asset->defaultLoc->name.' if one is set.' : null, 'hide_location_radio' => true])
+                  @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id', 'help_text' => ($user->userloc->name) ? 'You can choose to check these assets in to a location other than the users location of '.$user->userloc->name.' if one is set.' : null])
 
-{{--                  <!-- Checkout/Checkin Date -->--}}
-{{--                    <div class="form-group{{ $errors->has('checkin_at') ? ' has-error' : '' }}">--}}
-{{--                      {{ Form::label('checkin_at', trans('admin/hardware/form.checkin_date'), array('class' => 'col-md-3 control-label')) }}--}}
-{{--                      <div class="col-md-8">--}}
-{{--                        <div class="input-group col-md-5 required">--}}
-{{--                          <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">--}}
-{{--                            <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="checkin_at" id="checkin_at" value="{{ old('checkin_at', date('Y-m-d')) }}">--}}
-{{--                            <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>--}}
-{{--                          </div>--}}
-{{--                          {!! $errors->first('checkin_at', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}--}}
-{{--                        </div>--}}
-{{--                      </div>--}}
-{{--                    </div>--}}
+                  <!-- Checkout/Checkin Date -->
+                    <div class="form-group{{ $errors->has('checkin_at') ? ' has-error' : '' }}">
+                      {{ Form::label('checkin_at', trans('admin/hardware/form.checkin_date'), array('class' => 'col-md-3 control-label')) }}
+                      <div class="col-md-8">
+                        <div class="input-group col-md-5 required">
+                          <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
+                            <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="checkin_at" id="checkin_at" value="{{ old('checkin_at', date('Y-m-d')) }}">
+                            <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
+                          </div>
+                          {!! $errors->first('checkin_at', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                        </div>
+                      </div>
+                    </div>
 
 
-{{--                    <!-- Note -->--}}
-{{--                    <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">--}}
+                    <!-- Note -->
+                    <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
 
-{{--                      {{ Form::label('note', trans('admin/hardware/form.notes'), array('class' => 'col-md-3 control-label')) }}--}}
+                      {{ Form::label('note', trans('admin/hardware/form.notes'), array('class' => 'col-md-3 control-label')) }}
 
-{{--                      <div class="col-md-8">--}}
-{{--                  <textarea class="col-md-6 form-control" id="note"--}}
-{{--                            name="note">{{ old('note', $asset->note) }}</textarea>--}}
-{{--                        {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}--}}
-{{--                      </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="box-footer">--}}
-{{--                      <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>--}}
-{{--                      <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkin') }}</button>--}}
-{{--                    </div>--}}
-{{--                  </form>--}}
-{{--          </div> <!--/.col-md-12-->--}}
-{{--        </div> <!--/.box-body-->--}}
+                    <div class="col-md-8">
+                       <textarea class="col-md-6 form-control" id="note"
+                            name="note">{{ old('note', $asset->note) }}</textarea>
+                        {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                    </div>
+                    </div>
+                    <div class="box-footer">
+                      <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
+                      <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkin') }}</button>
+                    </div>
+                    @foreach ($assets as $key => $value)
+                      <input type="hidden" name="ids[]" value="{{$value->id}}">
+                    @endforeach
+                  </form>
+          </div> <!--/.col-md-12-->
+        </div> <!--/.box-body-->
 
-{{--      </div> <!--/.box.box-default-->--}}
-{{--    </div>--}}
+      </div> <!--/.box.box-default-->
+    </div>
   </div>
 
 @stop
