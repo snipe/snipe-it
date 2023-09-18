@@ -26,6 +26,7 @@ mix
       "./node_modules/bootstrap-table/dist/bootstrap-table.css",
       "./public/css/build/app.css",
       "./node_modules/select2/dist/css/select2.css",
+      "./resources/assets/css/dragtable.css",
       "./public/css/build/overrides.css",
     ],
     "./public/css/dist/all.css"
@@ -142,7 +143,8 @@ mix
   .combine(
     [
       "./node_modules/bootstrap-table/dist/bootstrap-table.css",
-      "./node_modules/bootstrap-table/dist//extensions/sticky-header/bootstrap-table-sticky-header.css",
+      "./node_modules/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.css",
+      "./node_modules/dragtable/dragtable.css",
     ],
     "public/css/dist/bootstrap-table.css"
   )
@@ -180,7 +182,9 @@ mix.combine(
 mix
   .combine(
         [
+            "./resources/assets/js/dragtable.js",
             './node_modules/bootstrap-table/dist/bootstrap-table.js',
+            "./resources/assets/js/bootstrap-table-reorder-columns.js",
             './node_modules/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.js',
             './node_modules/bootstrap-table/dist/extensions/export/bootstrap-table-export.js',
             './node_modules/bootstrap-table/dist/extensions/cookie/bootstrap-table-cookie.js',
