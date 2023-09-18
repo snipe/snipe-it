@@ -81,7 +81,6 @@ class UsersController extends Controller
         }
         $users = User::select()->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy',)
             ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count');
-        $users = Company::scopeCompanyables($users);
 
 
         if ($request->filled('activated')) {
@@ -277,6 +276,8 @@ class UsersController extends Controller
         } elseif (($request->filled('all')) && ($request->input('all') == 'true')) {
             $users = $users->withTrashed();
         }
+
+        $users = Company::scopeCompanyables($users);
         
         $total = $users->count();
         $users = $users->skip($offset)->take($limit)->get();

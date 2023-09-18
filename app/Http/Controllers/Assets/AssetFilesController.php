@@ -79,7 +79,7 @@ class AssetFilesController extends Controller
      * @return View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function show($assetId = null, $fileId = null, $download = true)
+    public function show($assetId = null, $fileId = null)
     {
         $asset = Asset::find($assetId);
         // the asset is valid
@@ -103,12 +103,13 @@ class AssetFilesController extends Controller
                     ->header('Content-Type', 'text/plain');
             }
 
-            if ($download != 'true') {
-                if ($contents = file_get_contents(Storage::url($file))) {
-                    return Response::make(Storage::url($file)->header('Content-Type', mime_content_type($file)));
-                }
+            if (request('inline') == 'true') {
 
-                return JsonResponse::create(['error' => 'Failed validation: '], 500);
+                $headers = [
+                    'Content-Disposition' => 'inline',
+                ];
+
+                return Storage::download($file, $log->filename, $headers);
             }
 
             return StorageHelper::downloader($file);
