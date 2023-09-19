@@ -143,7 +143,6 @@ class Asset extends Depreciable
         'last_audit_date',
         'next_audit_date',
         'asset_eol_date',
-        'eol_explicit',
     ];
 
     use Searchable;
