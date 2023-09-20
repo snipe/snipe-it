@@ -92,11 +92,6 @@ class AssetModelsController extends Controller
 
         // Was it created?
         if ($model->save()) {
-            if ($request->filled('eol')) {
-                $newEol = $model->eol; 
-                $model->assets()->whereNotNull('purchase_date')->where('eol_explicit', false)
-                    ->update(['asset_eol_date' => DB::raw('DATE_ADD(purchase_date, INTERVAL :newEol MONTH)', ['newEol' => $newEol])]); 
-            } 
             if ($this->shouldAddDefaultValues($request->input())) {
                 if (!$this->assignCustomFieldsDefaultValues($model, $request->input('default_values'))){
                     return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.fieldset_default_value.error'));
@@ -186,9 +181,7 @@ class AssetModelsController extends Controller
             if ($model->wasChanged('eol')) {
                     $newEol = $model->eol; 
                     $model->assets()->whereNotNull('purchase_date')->where('eol_explicit', false)
-                        //this DB::raw is so that we can use an ->update() which is _much_ faster than foreaching
-                        //but, laravel doesn't have a way to access a column inside an update 
-                        ->update(['asset_eol_date' => DB::raw('DATE_ADD(purchase_date, INTERVAL :newEol MONTH)', ['newEol' => $newEol])]); 
+                        ->update(['asset_eol_date' => DB::raw('DATE_ADD(purchase_date, INTERVAL ' . $newEol . ' MONTH)')]);
                 }
             return redirect()->route('models.index')->with('success', trans('admin/models/message.update.success'));
         }
