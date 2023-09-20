@@ -291,10 +291,10 @@ class AssetsController extends Controller
     /**
      * Validate and process asset edit form.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
-     * @since [v1.0]
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse|Redirect
+     *@since [v1.0]
+     * @author [A. Gianotto] [<snipe@snipe.net>]
      */
     public function update(ImageUploadRequest $request, $assetId = null)
     {
@@ -309,7 +309,7 @@ class AssetsController extends Controller
         $asset->warranty_months = $request->input('warranty_months', null);
         $asset->purchase_cost = $request->input('purchase_cost', null);
         $asset->purchase_date = $request->input('purchase_date', null); 
-        if ($request->filled('purchase_date') && !$request->filled('asset_eol_date')) {
+        if ($request->filled('purchase_date') && !$request->filled('asset_eol_date') && $asset->model->eol) {
             $asset->purchase_date = $request->input('purchase_date', null); 
             $asset->asset_eol_date = Carbon::parse($request->input('purchase_date'))->addMonths($asset->model->eol)->format('Y-m-d');
         } elseif ($request->filled('asset_eol_date')) {
