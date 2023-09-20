@@ -14,6 +14,7 @@ return [
     'deleted'  					=> 'This asset has been deleted.',
     'delete_confirm'            => 'Are you sure you want to delete this asset?',
     'edit'  					=> 'Edit Asset',
+    'bulk_location_help'        => 'You can choose to check these assets in to a location other than the users location of :user_loc if one is set.',
     'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
     'model_invalid'             => 'The Model of this Asset is invalid.',
     'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',

@@ -69,7 +69,7 @@
                       </div>
                     </div>
 
-                  @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id', 'help_text' => ($user->userloc->name) ? 'You can choose to check these assets in to a location other than the users location of '.$user->userloc->name.' if one is set.' : null])
+                  @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id', 'help_text' => ($user->userloc->name) ? trans('admin/hardware/general.bulk_location_help',['user_loc' => $user->userloc->name]) : null])
 
                   <!-- Checkout/Checkin Date -->
                     <div class="form-group{{ $errors->has('checkin_at') ? ' has-error' : '' }}">
