@@ -33,11 +33,11 @@ class UserFactory extends Factory
             'permissions' => '{}',
             'phone' => $this->faker->phoneNumber(),
             'state' => $this->faker->stateAbbr(),
-            'username' => $this->faker->username(),
+            'username' => $this->faker->unique()->username(),
             'zip' => $this->faker->postcode(),
         ];
     }
-    
+
     public function firstAdmin()
     {
         return $this->state(function () {
