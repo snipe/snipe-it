@@ -180,10 +180,6 @@ class LdapSync extends Command
             }
         }
 
-        /* Create user account entries in Snipe-IT */
-        $tmp_pass = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 20);
-        $pass = bcrypt($tmp_pass);
-
         $manager_cache = [];
 
         if($ldap_default_group != null) {
@@ -229,22 +225,44 @@ class LdapSync extends Command
                 } else {
                     // Creating a new user.
                     $user = new User;
-                    $user->password = $pass;
+                    $user->password = $user->noPassword();
                     $user->activated = 1; // newly created users can log in by default, unless AD's UAC is in use, or an active flag is set (below)
                     $item['createorupdate'] = 'created';
                 }
 
-                $user->first_name = $item['firstname'];
-                $user->last_name = $item['lastname'];
+            //If a sync option is not filled in on the LDAP settings don't populate the user field
+            if($ldap_result_username  != null){
                 $user->username = $item['username'];
-                $user->email = $item['email'];
+            }
+            if($ldap_result_last_name != null){
+                $user->last_name = $item['lastname'];
+            }
+            if($ldap_result_first_name != null){
+                $user->first_name = $item['firstname'];
+            }
+            if($ldap_result_emp_num  != null){
                 $user->employee_num = e($item['employee_number']);
+            }
+            if($ldap_result_email != null){
+                $user->email = $item['email'];
+            }
+            if($ldap_result_phone != null){
                 $user->phone = $item['telephone'];
+            }
+            if($ldap_result_jobtitle != null){
                 $user->jobtitle = $item['jobtitle'];
+            }
+            if($ldap_result_country != null){
                 $user->country = $item['country'];
+            }
+            if($ldap_result_dept  != null){
                 $user->department_id = $department->id;
+            }
+            if($ldap_result_location != null){
                 $user->location_id = $location ? $location->id : null;
+            }
 
+            if($ldap_result_manager != null){
                 if($item['manager'] != null) {
                     // Check Cache first
                     if (isset($manager_cache[$item['manager']])) {
@@ -284,6 +302,7 @@ class LdapSync extends Command
 
                     }
                 }
+            }
 
                 // Sync activated state for Active Directory.
                 if ( !empty($ldap_result_active_flag)) { // IF we have an 'active' flag set....

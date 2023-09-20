@@ -18,6 +18,15 @@
         .checkbox label {
             padding-right: 40px;
         }
+
+        /*
+           Don't make the password field *look* readonly - this is for usability, so admins don't think they can't edit this field.
+         */
+        .form-control[readonly] {
+            background-color: white;
+            color: #555555;
+            cursor:text;
+        }
     </style>
 
     @livewire('ldap-settings-form')
