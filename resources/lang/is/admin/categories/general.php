@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Afrita Vöruflokk',
     'create'  							=> 'Stofna vöruflokk',
     'edit'                              => 'Breyta vöruflokk',
+    'email_will_be_sent_due_to_global_eula' => 'An email will be sent to the user because the global EULA is being used.',
+    'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
     'eula_text'							=> 'Vöruflokkur fyrir notendaskilmála',
     'eula_text_help'					=> 'Þessi reitur gerir þér kleift að sérsníða notendaskilmála fyrir ákveðinn búnað. Ef þú hefur aðeins einn notendaskilmála fyrir allan þinn búnað þá skaltu haka í reitinn fyrir neðan sem notar sömu skilmálana fyrir allann þann búnað.',
     'name'                              => 'Heiti vöruflokks',

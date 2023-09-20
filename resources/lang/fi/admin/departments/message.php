@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Osastoa ei ole olemassa.',
-    'department_already_exists' => 'A department already exists with that name at this company location. Or choose a more specific name for this department. ',
+    'department_already_exists' => 'Osasto on jo olemassa tällä nimellä tässä yrityksen sijainnissa, tai, valitse tarkempi nimi tälle osastolle. ',
     'assoc_users'	 => 'Tällä osastolla on tällä hetkellä vähintään yksi käyttäjä, eikä sitä voi poistaa. Poista käyttäjiltä viitaus tähän osastoon ja yritä uudelleen. ',
     'create' => array(
         'error'   => 'Osastoa ei luotu, yritä uudelleen.',

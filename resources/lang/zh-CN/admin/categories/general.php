@@ -8,6 +8,8 @@ return array(
     'clone'                             => '克隆分类',
     'create'  							=> '创建分类',
     'edit'                              => '编辑分类',
+    'email_will_be_sent_due_to_global_eula' => '将向用户发送一封电子邮件，因为正在使用全局的EULA。',
+    'email_will_be_sent_due_to_category_eula' => '将向用户发送一封电子邮件，因为已为此类别设置了一个 EULA 。',
     'eula_text'							=> '类别的最终用户许可协议',
     'eula_text_help'					=> '此字段允许您自定义的EULA（最终用户许可协议）为特定类型的资产。如果您所有资产只有一个EULA（最终用户许可协议），你可以检查下面的框中使用默认设置。',
     'name'                              => '分类名称',

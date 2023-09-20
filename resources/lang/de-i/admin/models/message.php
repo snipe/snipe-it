@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Modell existiert nicht.',
-    'no_association' => 'KEIN MODELL ZUGEORDNET.',
+    'no_association' => 'WARNUNG! Das Asset Modell für dieses Element ist ungültig oder fehlt!',
     'no_association_fix' => 'Dies wird Dinge auf seltsame und schreckliche Weise zerstören. Bearbeite dieses Asset jetzt, um ihm ein Modell zuzuordnen.',
     'assoc_users'	 => 'Dieses Modell ist zur Zeit mit einem oder mehreren Assets verknüpft und kann nicht gelöscht werden. Bitte lösche die Assets und versuche dann erneut, das Modell zu löschen. ',
 

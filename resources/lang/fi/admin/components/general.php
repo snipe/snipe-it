@@ -12,5 +12,5 @@ return array(
     'remaining' 			             => 'Jäljellä',
     'total' 			                 => 'Yhteensä',
     'update'                            => 'Päivitä komponentti',
-    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
+    'checkin_limit'            => 'Palautettujen määrä pitää olla suurempi tai yhtä suuri kuin :assigned_qty'
 );

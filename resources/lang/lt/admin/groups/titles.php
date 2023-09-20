@@ -10,7 +10,7 @@ return [
     'group_admin' 	 		=> 'Gruopės administratorius',
     'allow' 	 			=> 'Leisti',
     'deny' 	 				=> 'Neleisti',
-    'permission'            => 'Permission',
-    'grant'                 => 'Grant',
-    'no_permissions'        => 'This group has no permissions.'
+    'permission'            => 'Teises',
+    'grant'                 => 'Suteikti',
+    'no_permissions'        => 'Ši grupė neturi teisių.'
 ];

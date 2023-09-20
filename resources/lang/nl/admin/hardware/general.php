@@ -12,6 +12,7 @@ return [
     'clone'  					=> 'Dupliceer Asset',
     'deployable'  				=> 'Uitgeefbaar',
     'deleted'  					=> 'Deze asset is verwijderd.',
+    'delete_confirm'            => 'Are you sure you want to delete this asset?',
     'edit'  					=> 'Asset bewerken',
     'model_deleted'  			=> 'Dit Assets model is verwijderd. U moet het model herstellen voordat u het Asset kunt herstellen.',
     'model_invalid'             => 'The Model of this Asset is invalid.',
@@ -19,7 +20,7 @@ return [
     'requestable'               => 'Aanvraagbaar',
     'requested'				    => 'Aangevraagd',
     'not_requestable'           => 'Niet aanvraagbaar',
-    'requestable_status_warning' => 'Verander de aanvraagbare status niet',
+    'requestable_status_warning' => 'Do not change requestable status',
     'restore'  					=> 'Herstel Asset',
     'pending'  					=> 'In behandeling',
     'undeployable'  			=> 'Niet uitgeefbaar',
@@ -45,4 +46,5 @@ return [
     'alert_details' => 'Zie hieronder voor details.',
     'custom_export' => 'Aangepaste export',
     'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
+    'user_department' => 'User Department',
 ];

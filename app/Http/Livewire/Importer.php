@@ -215,6 +215,7 @@ class Importer extends Component
             'manufacturer' => trans('general.manufacturer'),
             'order_number' => trans('general.order_number'),
             'image' => trans('general.importer.image_filename'),
+            'asset_eol_date' => trans('admin/hardware/form.eol_date'),
             /**
              * Checkout fields:
              * Assets can be checked out to other assets, people, or locations, but we currently

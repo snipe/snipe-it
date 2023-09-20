@@ -8,6 +8,8 @@ return array(
     'clone'                             => 'Isigaba se-clone',
     'create'  							=> 'Dala Isigaba',
     'edit'                              => 'Hlela Isigaba',
+    'email_will_be_sent_due_to_global_eula' => 'An email will be sent to the user because the global EULA is being used.',
+    'email_will_be_sent_due_to_category_eula' => 'An email will be sent to the user because a EULA is set for this category.',
     'eula_text'							=> 'Isigaba EULA',
     'eula_text_help'					=> 'Le nsimu ikuvumela ukuthi wenze ngezifiso ama-EULA akho ngezinhlobo ezithile zezimpahla. Uma unayo i-EULA eyodwa yezimpahla zakho zonke, ungabheka ibhokisi elingezansi ukuthi usebenzise okuzenzakalelayo okuzenzakalelayo.',
     'name'                              => 'Igama lesigaba',

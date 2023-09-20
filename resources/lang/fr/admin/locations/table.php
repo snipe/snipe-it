@@ -19,7 +19,7 @@ return [
     'locations'                 => 'Lieux',
     'parent'                    => 'Parent',
     'currency'                  => 'Devise de l\'emplacement',
-    'ldap_ou'                   => 'Recherche LDAP',
+    'ldap_ou'                   => 'OU LDAP correspondante',
     'user_name'                 => 'Nom d\'utilisateur ',
     'department'                => 'Service',
     'location'                  => 'Emplacement',

@@ -75,7 +75,6 @@ class UsersController extends Controller
 
         ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy',)
             ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count');
-        $users = Company::scopeCompanyables($users);
 
 
         if ($request->filled('activated')) {
@@ -271,6 +270,8 @@ class UsersController extends Controller
         } elseif (($request->filled('all')) && ($request->input('all') == 'true')) {
             $users = $users->withTrashed();
         }
+
+        $users = Company::scopeCompanyables($users);
         
         $total = $users->count();
         $users = $users->skip($offset)->take($limit)->get();
@@ -362,8 +363,12 @@ class UsersController extends Controller
             $user->permissions = $permissions_array;
         }
 
-        $tmp_pass = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 40);
-        $user->password = bcrypt($request->get('password', $tmp_pass));
+        // 
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->get('password'));
+        } else {
+            $user->password = $user->noPassword();
+        }
 
         app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
         

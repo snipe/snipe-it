@@ -2,9 +2,9 @@
 
 return [
     'info'   => 'Valitse vaihtoehdot jotka haluat laiteraportillesi.',
-    'deleted_user' => 'Deleted user',
-    'send_reminder' => 'Send reminder',
-    'reminder_sent' => 'Reminder sent',
-    'acceptance_deleted' => 'Acceptance request deleted',
-    'acceptance_request' => 'Acceptance request'
+    'deleted_user' => 'Poistettu käyttäjä',
+    'send_reminder' => 'Lähetä muistutus',
+    'reminder_sent' => 'Muistutus lähetetty',
+    'acceptance_deleted' => 'Käyttöoikeuspyyntö poistettu',
+    'acceptance_request' => 'Käyttöoikeuspyyntö'
 ];

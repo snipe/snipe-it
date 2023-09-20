@@ -1,24 +1,15 @@
 @push('css')
-<link rel="stylesheet" href="{{ url(mix('css/dist/bootstrap-table.css')) }}">
-
+    <link rel="stylesheet" href="{{ url(mix('css/dist/bootstrap-table.css')) }}">
 @endpush
 
 @push('js')
 
 <script src="{{ url(mix('js/dist/bootstrap-table.js')) }}"></script>
+
 <script nonce="{{ csrf_token() }}">
     $(function () {
+
         var locale = '{{ config('app.locale') }}';
-
-        var stickyHeaderOffsetY = 0;
-
-        if ( $('.navbar-fixed-top').css('height') ) {
-            stickyHeaderOffsetY = +$('.navbar-fixed-top').css('height').replace('px','');
-        }
-        if ( $('.navbar-fixed-top').css('margin-bottom') ) {
-            stickyHeaderOffsetY += +$('.navbar-fixed-top').css('margin-bottom').replace('px','');
-        }
-
         var blockedFields = "searchable,sortable,switchable,title,visible,formatter,class".split(",");
 
         var keyBlocked = function(key) {
@@ -31,6 +22,7 @@
         }
 
         $('.snipe-table').bootstrapTable('destroy').each(function () {
+
             data_export_options = $(this).attr('data-export-options');
             export_options = data_export_options ? JSON.parse(data_export_options) : {};
             export_options['htmlContent'] = false; // this is already the default; but let's be explicit about it
@@ -50,9 +42,11 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             },
+            reorderableColumns: true,
             stickyHeader: true,
+            stickyHeaderOffsetLeft: parseInt($('body').css('padding-left'), 10),
+            stickyHeaderOffsetRight: parseInt($('body').css('padding-right'), 10),
             locale: locale,
-            stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
             undefinedText: '',
             iconsPrefix: 'fa',
             cookieStorage: '{{ config('session.bs_table_storage') }}',
@@ -99,6 +93,7 @@
             }
 
             });
+
         });
     });
 
@@ -696,6 +691,25 @@
         console.dir(value);
         if ((value) && (value.filename) && (value.url)) {
             return '<a href="' + value.url + '">' + value.filename + '</a>';
+        }
+    }
+
+    function labelPerPageFormatter(value, row, index, field) {
+        if (row) {
+            if (!row.hasOwnProperty('sheet_info')) { return 1; }
+            else { return row.sheet_info.labels_per_page; }
+        }
+    }
+
+    function labelRadioFormatter(value, row, index, field) {
+        if (row) {
+            return row.name == '{{ str_replace("\\", "\\\\", $snipeSettings->label2_template) }}';
+        }
+    }
+
+    function labelSizeFormatter(value, row) {
+        if (row) {
+            return row.width + ' x ' + row.height + ' ' + row.unit;
         }
     }
 

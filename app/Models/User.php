@@ -69,15 +69,12 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     ];
 
     protected $casts = [
-        'activated'    => 'boolean',
         'manager_id'   => 'integer',
         'location_id'  => 'integer',
         'company_id'   => 'integer',
-        'vip'      => 'boolean',
         'created_at'   => 'datetime',
         'updated_at'   => 'datetime',
         'deleted_at'   => 'datetime',
-        'autoassign_licenses'    => 'boolean',
     ];
 
     /**
@@ -103,6 +100,9 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'state'                   => 'min:2|max:191|nullable',
         'country'                 => 'min:2|max:191|nullable',
         'zip'                     => 'max:10|nullable',
+        'vip'                     => 'boolean',
+        'remote'                  => 'boolean',
+        'activated'               => 'boolean',
     ];
 
     /**
@@ -247,21 +247,12 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function getFullNameAttribute()
     {
-        return $this->first_name.' '.$this->last_name;
-    }
+        $setting = Setting::getSettings();
 
-    /**
-     * Returns the complete name attribute with username
-     *
-     * @todo refactor this so it's less repetitive and dumb
-     *
-     * @author A. Gianotto <snipe@snipe.net>
-     * @since [v2.0]
-     * @return string
-     */
-    public function getCompleteNameAttribute()
-    {
-        return $this->last_name.', '.$this->first_name.' ('.$this->username.')';
+        if ($setting->name_display_format=='last_first') {
+            return ($this->last_name) ? $this->last_name.' '.$this->first_name : $this->first_name;
+        }
+        return $this->last_name ? $this->first_name.' '.$this->last_name : $this->first_name;
     }
 
 
@@ -463,6 +454,22 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     public function checkoutRequests()
     {
         return $this->belongsToMany(Asset::class, 'checkout_requests', 'user_id', 'requestable_id')->whereNull('canceled_at');
+    }
+
+    /**
+     * Set a common string when the user has been imported/synced from:
+     *
+     * - LDAP without password syncing
+     * - SCIM
+     * - CSV import where no password was provided
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v6.2.0]
+     * @return string
+     */
+    public function noPassword()
+    {
+        return "*** NO PASSWORD ***";
     }
 
 
@@ -758,5 +765,27 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     public function preferredLocale()
     {
         return $this->locale;
+    }
+    public function getUserTotalCost(){
+        $asset_cost= 0;
+        $license_cost= 0;
+        $accessory_cost= 0;
+        foreach ($this->assets as $asset){
+            $asset_cost += $asset->purchase_cost;
+            $this->asset_cost = $asset_cost;
+        }
+        foreach ($this->licenses as $license){
+            $license_cost += $license->purchase_cost;
+            $this->license_cost = $license_cost;
+        }
+        foreach ($this->accessories as $accessory){
+            $accessory_cost += $accessory->purchase_cost;
+            $this->accessory_cost = $accessory_cost;
+        }
+
+        $this->total_user_cost = ($asset_cost + $accessory_cost + $license_cost);
+
+
+        return $this;
     }
 }

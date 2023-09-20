@@ -12,6 +12,7 @@ return [
     'clone'  					=> '复制资产',
     'deployable'  				=> '可部署',
     'deleted'  					=> '此资产已被删除。',
+    'delete_confirm'            => '您确定要删除此资产吗？',
     'edit'  					=> '编辑资产',
     'model_deleted'  			=> '这个资源模型已被删除。您必须先还原模型才能还原素材。',
     'model_invalid'             => '此资产的型号无效。',
@@ -45,4 +46,5 @@ return [
     'alert_details' => '请参阅下面的详细信息。',
     'custom_export' => '自定义导出',
     'mfg_warranty_lookup' => ':manufacturer 保修状态查询',
+    'user_department' => '用户部门',
 ];

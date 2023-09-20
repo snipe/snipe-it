@@ -59920,12 +59920,16 @@ $(document).ready(function () {
         $('#assigned_user').hide();
         $('#assigned_location').hide();
         $('.notification-callout').fadeOut();
+        $('[name="assigned_location"]').val('').trigger('change.select2');
+        $('[name="assigned_user"]').val('').trigger('change.select2');
       } else if (assignto_type == 'location') {
         $('#current_assets_box').fadeOut();
         $('#assigned_asset').hide();
         $('#assigned_user').hide();
         $('#assigned_location').show();
         $('.notification-callout').fadeOut();
+        $('[name="assigned_asset"]').val('').trigger('change.select2');
+        $('[name="assigned_user"]').val('').trigger('change.select2');
       } else {
         $('#assigned_asset').hide();
         $('#assigned_user').show();
@@ -59936,6 +59940,8 @@ $(document).ready(function () {
         }
 
         $('.notification-callout').fadeIn();
+        $('[name="assigned_asset"]').val('').trigger('change.select2');
+        $('[name="assigned_location"]').val('').trigger('change.select2');
       }
     });
   }); // ------------------------------------------------
