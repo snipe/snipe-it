@@ -325,13 +325,6 @@ class AssetsController extends Controller
                $asset->eol_explicit = true;
            }
         }
-        else {
-            $asset->purchase_date = $request->input('purchase_date', null);
-            $asset->asset_eol_date  = request('asset_eol_date', $asset->present()->eol_date());
-        }
-
-
-        $asset->purchase_date = $request->input('purchase_date', null);
         $asset->supplier_id = $request->input('supplier_id', null);
         $asset->expected_checkin = $request->input('expected_checkin', null);
 
