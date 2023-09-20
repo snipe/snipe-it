@@ -106,7 +106,7 @@ class Asset extends Depreciable
         'serial'          => 'unique_serial|nullable',
         'purchase_cost'   => 'numeric|nullable|gte:0',
         'supplier_id'     => 'exists:suppliers,id|nullable',
-        //'asset_eol_date'  => 'date_format:Y-m-d|nullable',
+        'asset_eol_date'  => 'date|nullable',
         'eol_explicit'    => 'boolean|nullable',
         'byod'            => 'boolean',
     ];
