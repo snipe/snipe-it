@@ -669,7 +669,7 @@
                     data-sort-order="asc"
                     data-sort-name="name"
                     data-toolbar="#assetsBulkEditToolbar"
-                    data-bulk-button-id="#bulkAssetEditButton, #checkInAll"
+                    data-bulk-button-id="#bulkAssetEditButton"
                     data-bulk-form-id="#assetsBulkForm"
                     id="userAssetsListingTable"
                     class="table table-striped snipe-table"

@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Requests\AssetCheckoutRequest;
 use App\Models\CustomField;
 use Illuminate\Database\Eloquent\Builder;
-use PHPStan\BetterReflection\Reflection\Adapter\FakeReflectionAttribute;
 
 class BulkAssetsController extends Controller
 {
@@ -427,9 +426,10 @@ class BulkAssetsController extends Controller
 
     public function bulkCheckin(Request $request, $backto = null)
     {
-        $assetIds =$request->get('ids');
+        $assetIds = $request->get('ids');
         $count = count($assetIds);
         $user = '';
+
         foreach($assetIds as $assetId) {
             // Check if the asset exists
             if (is_null($asset = Asset::find($assetId))) {

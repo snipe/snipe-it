@@ -8,7 +8,6 @@ return [
   'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
   'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
     'bulk_update'		=> 'Bulk Update Assets',
-    'bulk_checkin'      => 'Bulk Checkin Assets',
     'bulk_update_help'	=> 'This form allows you to update multiple assets at once. Only fill in the fields you need to change. Any fields left blank will remain unchanged. ',
     'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'bulk_update_with_custom_field' => 'Note the assets are :asset_model_count different types of models.',
