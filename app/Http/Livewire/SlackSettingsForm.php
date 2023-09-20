@@ -22,8 +22,11 @@ class SlackSettingsForm extends Component
 
     public Setting $setting;
 
+    public $webhook_endpoint_rules;
+
+
     protected $rules = [
-        'webhook_endpoint'                      => 'url|required_with:webhook_channel|starts_with:https://hooks.slack.com/services|nullable',
+        'webhook_endpoint'                      => 'url|required_with:webhook_channel|starts_with:http://,https://,ftp://,irc://|nullable',
         'webhook_channel'                       => 'required_with:webhook_endpoint|starts_with:#|nullable',
         'webhook_botname'                       => 'string|nullable',
     ];
@@ -65,9 +68,8 @@ class SlackSettingsForm extends Component
     }
     public function updated($field) {
 
-        if($this->webhook_selected != 'general') {
             $this->validateOnly($field, $this->rules);
-        }
+
     }
 
     public function updatedWebhookSelected() {
