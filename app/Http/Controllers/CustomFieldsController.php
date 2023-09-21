@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Http\Requests\CustomFieldRequest;
 use App\Models\CustomField;
 use App\Models\CustomFieldset;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -33,6 +34,10 @@ class CustomFieldsController extends Controller
     public function index(Request $request): View
     {
         $this->authorize('view', CustomField::class);
+        if ($request->input('tab') == 1) {
+            // Users section, make sure to auto-create the first fieldset if so
+            CustomFieldset::firstOrCreate(['type' => Helper::$itemtypes_having_custom_fields[1]], ['name' => 'default']);
+        }
 
         $fieldsets = CustomFieldset::with('fields')->where("type", Helper::$itemtypes_having_custom_fields[$request->get('tab', 0)])->get(); //cannot eager-load 'customizable' because it's not a relation
         $fields = CustomField::with('fieldset')->where("type", Helper::$itemtypes_having_custom_fields[$request->get('tab', 0)])->get();
@@ -64,7 +69,7 @@ class CustomFieldsController extends Controller
     public function create(Request $request) : View
     {
         $this->authorize('create', CustomField::class);
-        $fieldsets = CustomFieldset::get();
+        $fieldsets = CustomFieldset::where('type', Helper::$itemtypes_having_custom_fields[$request->get('tab')])->get();
 
         return view('custom_fields.fields.edit', [
             'predefinedFormats' => Helper::predefined_formats(),
@@ -122,7 +127,10 @@ class CustomFieldsController extends Controller
 
             // Sync fields with fieldsets
             $fieldset_array = $request->input('associate_fieldsets');
-            if ($request->has('associate_fieldsets') && (is_array($fieldset_array))) {
+            if ($request->get('tab') == 1) {
+                $fieldset_array = [CustomFieldset::firstOrCreate(['type' => User::class], ['name' => 'default'])->id => true];
+            }
+            if (($request->has('associate_fieldsets') || $request->get('tab') == 1) && (is_array($fieldset_array))) {
                 $field->fieldset()->sync(array_keys($fieldset_array));
             } else {
                 $field->fieldset()->sync([]);
@@ -178,11 +186,15 @@ class CustomFieldsController extends Controller
         if ($field = CustomField::find($field_id)) {
             $this->authorize('delete', $field);
 
+            if ($field->type == User::class) {
+                $field->fieldset()->detach(); // remove from 'default' group (and others, if they exist in the future!)
+            }
             if (($field->fieldset) && ($field->fieldset->count() > 0)) {
                 return redirect()->back()->withErrors(['message' => 'Field is in-use']);
             }
+            $type = $field->type;
             $field->delete();
-            return redirect()->route('fields.index', ['tab' => Request::query('tab', 0)])
+            return redirect()->route('fields.index', ['tab' => array_search($type, Helper::$itemtypes_having_custom_fields)])
                 ->with('success', trans('admin/custom_fields/message.field.delete.success'));
         }
 

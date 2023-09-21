@@ -661,7 +661,7 @@ class Helper
     static $itemtypes_having_custom_fields = [
         0 => \App\Models\Asset::class,
         1 => \App\Models\User::class,
-        2 => \App\Models\Accessory::class
+        // 2 => \App\Models\Accessory::class
     ];
 
     /**
