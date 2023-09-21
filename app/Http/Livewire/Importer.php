@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\CustomField;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 use App\Models\Import;
@@ -161,6 +162,11 @@ class Importer extends Component
 
     public function mount()
     {
+        if (Session::has('error_message')) {
+            $this->message = Session::get('error_message');
+            $this->message_type = 'danger';
+        }
+
         $this->authorize('import');
         $this->progress = -1; // '-1' means 'don't show the progressbar'
         $this->progress_bar_class = 'progress-bar-warning';
@@ -484,8 +490,16 @@ class Importer extends Component
 
     public function selectFile($id)
     {
+        $this->clearMessage();
 
         $this->activeFile = Import::find($id);
+
+        if (!$this->activeFile) {
+            Session::flash('error_message', trans('admin/hardware/message.import.file_missing'));
+
+            return redirect()->route('imports.index');
+        }
+
         $this->field_map = null;
         foreach($this->activeFile->header_row as $element) {
             if(isset($this->activeFile->field_map[$element])) {
@@ -518,6 +532,12 @@ class Importer extends Component
                 }
             }
         }
+    }
+
+    public function clearMessage()
+    {
+        $this->message = null;
+        $this->message_type = null;
     }
 
     public function render()

@@ -303,6 +303,7 @@
                 };
                 data.process().done( function () {data.submit();});
                 @this.progress = 0;
+                @this.clearMessage();
             },
             progress: function(e, data) {
                 @this.progress = parseInt((data.loaded / data.total * 100, 10));
