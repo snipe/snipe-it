@@ -33,6 +33,9 @@
     </div>
   </div>
 </div>
+{{-- Do not show fieldsets for Users' customf ields --}}
+@if(Request::query('tab') != 1)
+
 <div class="row">
   <div class="col-md-12">
     <div class="box box-default">
@@ -134,6 +137,7 @@
 
 
 </div> <!-- .row-->
+@endif
 @endcan
 @can('view', \App\Models\CustomField::class)
 <div class="row">
@@ -222,7 +226,8 @@
                 <nobr>
                   {{ Form::open(array('route' => array('fields.destroy', $field->id), 'method' => 'delete', 'style' => 'display:inline-block')) }}
                   @can('update', $field)
-                    <a href="{{ route('fields.edit', $field->id) }}" class="btn btn-warning btn-sm" data-tooltip="true" title="{{ trans('general.update') }}">
+                        <a href="{{ route('fields.edit', $field->id) }}?tab={{ array_search($field->type, Helper::$itemtypes_having_custom_fields) }}"
+                           class="btn btn-warning btn-sm" data-tooltip="true" title="{{ trans('general.update') }}">
                       <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                       <span class="sr-only">{{ trans('button.edit') }}</span>
                     </a>
@@ -230,7 +235,7 @@
 
                 @can('delete', $field)
 
-                  @if($field->fieldset->count()>0)
+                        @if($field->fieldset->count()>0 && Request::query('tab') != 1 )
                     <button type="submit" class="btn btn-danger btn-sm disabled" data-tooltip="true" title="{{ trans('general.cannot_be_deleted') }}" disabled>
                       <i class="fas fa-trash" aria-hidden="true"></i>
                       <span class="sr-only">{{ trans('button.delete') }}</span></button>
