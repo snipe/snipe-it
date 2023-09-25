@@ -2,7 +2,7 @@
 
 return array(
 
-    'support_url_help' => 'Use <code>{LOCALE}</code> and <code>{SERIAL}</code> in your URL as variables to have those values auto-populate when viewing assets.',
+    'support_url_help' => 'Variables <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, and <code>{MODEL_NAME}</code> may be used in your URL to have those values auto-populate when viewing assets - for example https://support.apple.com/{LOCALE}/{SERIAL}.',
     'does_not_exist' => 'Kaore te kaihoko i te tīariari.',
     'assoc_users'	 => 'Ko tenei kaiwhakanao e whai ana ki tetahi tauira kotahi, kaore e taea te muku. Whakaorangia nga tauira kia kore koe e tohu i tenei kaihanga me te ngana ano.',
 

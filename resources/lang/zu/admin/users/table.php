@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Bonisa Abasebenzisi Abasusiwe',
     'title' 				=> 'Isihloko',
 	'to_restore_them'		=> 'ukuze ubuyisele.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'Buyekeza Umsebenzisi',
     'username' 				=> 'Igama lomsebenzisi',
 	'user_deleted_text' 	=> 'Lo msebenzisi umakwe njengosusiwe.',

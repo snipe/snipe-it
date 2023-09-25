@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'Preuzmite CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'iskaznica',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> 'Mjesto',
     'purchase_cost'	=> 'cijena',
     'purchase_date'	=> 'kupljen',

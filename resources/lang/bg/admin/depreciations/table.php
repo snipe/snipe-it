@@ -6,6 +6,6 @@ return [
     'months'   => 'Месеци',
     'term'   => 'Срок',
     'title'      => 'Име',
-    'depreciation_min' => 'Floor Value',
+    'depreciation_min' => 'Минимална стойност',
 
 ];

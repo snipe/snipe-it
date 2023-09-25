@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'Lejupielādējiet CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> 'Atrašanās vieta',
     'purchase_cost'	=> 'Izmaksas',
     'purchase_date'	=> 'Iegādāts',

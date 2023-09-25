@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'Laai CSV af',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> 'plek',
     'purchase_cost'	=> 'koste',
     'purchase_date'	=> 'gekoop',

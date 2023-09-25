@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Näita kustutatud kasutajaid',
     'title' 				=> 'Pealkiri',
 	'to_restore_them'		=> 'neid taastada.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'Uuenda kasutajat',
     'username' 				=> 'Kasutajanimi',
 	'user_deleted_text' 	=> 'See kasutaja on märgitud kustutatuks.',

@@ -49,9 +49,9 @@ return [
     'unique' => 'Уникальный',
     'display_in_user_view' => 'Разрешить владельцу актива просматривать эти значения на странице Просмотр Назначенных Активов',
     'display_in_user_view_table' => 'Видимый для пользователя',
-    'auto_add_to_fieldsets' => 'Automatically add this to every new fieldset',
-    'add_to_preexisting_fieldsets' => 'Add to any existing fieldsets',
-    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector.',
-    'show_in_listview_short' => 'Show in lists',
+    'auto_add_to_fieldsets' => 'Автоматически добавлять это к каждому новому набору полей',
+    'add_to_preexisting_fieldsets' => 'Добавить в любые существующие наборы полей',
+    'show_in_listview' => 'Показывать в списках по умолчанию. Авторизованные пользователи по-прежнему смогут показывать/скрывать через селектор столбцов.',
+    'show_in_listview_short' => 'Показать в списках',
 
 ];

@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Хасагдсан хэрэглэгчдийг харуулах',
     'title' 				=> 'Гарчиг',
 	'to_restore_them'		=> 'тэднийг сэргээх.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'Хэрэглэгчийг шинэчлэх',
     'username' 				=> 'Хэрэглэгчийн нэр',
 	'user_deleted_text' 	=> 'Энэ хэрэглэгчийг устгасан гэж тэмдэглэсэн.',

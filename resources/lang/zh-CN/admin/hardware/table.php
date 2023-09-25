@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> '下载CSV格式',
     'eol' 			=> '寿命',
     'id'      		=> '编号',
+    'last_checkin_date' => '上次归还日期',
     'location' 		=> '位置',
     'purchase_cost'	=> '花费',
     'purchase_date'	=> '已购买',

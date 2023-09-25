@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Mostrar Usuarios Eliminados',
     'title' 				=> 'Título',
 	'to_restore_them'		=> 'para restaurarlos.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'Actualizar Usuario',
     'username' 				=> 'Nombre de usuario',
 	'user_deleted_text' 	=> 'Este usuario ha sido marcado como borrado.',

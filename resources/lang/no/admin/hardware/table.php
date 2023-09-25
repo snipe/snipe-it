@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'Last ned CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> 'Plassering',
     'purchase_cost'	=> 'Kostnad',
     'purchase_date'	=> 'Kjøpt',

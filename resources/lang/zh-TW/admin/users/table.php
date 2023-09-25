@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => '顯示已刪除使用者',
     'title' 				=> '職稱',
 	'to_restore_them'		=> '將它們還原。',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> '更新使用者',
     'username' 				=> '使用者名稱',
 	'user_deleted_text' 	=> '此使用者已被標記為刪除。',

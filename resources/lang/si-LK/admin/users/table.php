@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Show Deleted Users',
     'title' 				=> 'Title',
 	'to_restore_them'		=> 'to restore them.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'Update User',
     'username' 				=> 'Username',
 	'user_deleted_text' 	=> 'This user has been marked as deleted.',

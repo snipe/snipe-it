@@ -22,8 +22,8 @@ return [
     'restore' => [
         'error'   		=> 'Imovina nije obnovljena, pokušajte ponovo',
         'success' 		=> 'Imovina je uspešno obnovljena.',
-        'bulk_success' 		=> 'Asset restored successfully.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'bulk_success' 		=> 'Imovina je uspešno vraćena.',
+        'nothing_updated'   => 'Nijedna imovina nije izabrana, zato ništa nije vraćeno.', 
     ],
 
     'audit' => [

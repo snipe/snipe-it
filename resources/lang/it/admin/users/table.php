@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Visualizza utenti eliminati',
     'title' 				=> 'Titolo',
 	'to_restore_them'		=> 'per ripristinarli.',
+    'total_assets_cost'     => "Costo Totale Beni",
     'updateuser' 			=> 'Aggiornamento utente',
     'username' 				=> 'Username',
 	'user_deleted_text' 	=> 'Questo utente è stato contrassegnato come eliminato.',

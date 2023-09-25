@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'CSV Dosyasını İndir',
     'eol' 			=> 'Ömür Süresi',
     'id'      		=> 'ID',
+    'last_checkin_date' => 'Son zimmet teslim tarihi',
     'location' 		=> 'Konum',
     'purchase_cost'	=> 'Ücret',
     'purchase_date'	=> 'Satın alındı',

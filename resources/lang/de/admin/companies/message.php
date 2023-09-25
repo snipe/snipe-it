@@ -2,6 +2,7 @@
 
 return [
     'does_not_exist' => 'Firma existiert nicht.',
+    'deleted'        => 'Gelöschte Firma',
     'assoc_users'    => 'Diese Firma ist mit mindestens einem Modell verknüpft und kann nicht gelöscht werden. Bitte ändere die Modelle um die Verknüpfung zu lösen. ',
     'create' => [
         'error'   => 'Firma wurde nicht erstellt. Bitte versuchen Sie es erneut.',

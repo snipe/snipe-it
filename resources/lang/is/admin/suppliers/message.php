@@ -2,6 +2,7 @@
 
 return array(
 
+    'deleted' => 'Birgja eytt',
     'does_not_exist' => 'Þessi birgir er ekki til.',
 
 

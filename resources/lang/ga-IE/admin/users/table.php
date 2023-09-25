@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Taispeáin Úsáideoirí Scriosta',
     'title' 				=> 'Teideal',
 	'to_restore_them'		=> 'iad a chur ar ais.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'Nuashonraigh Úsáideoir',
     'username' 				=> 'Ainm Úsáideora',
 	'user_deleted_text' 	=> 'Marcáladh an t-úsáideoir seo mar a scriosadh é.',

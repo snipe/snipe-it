@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Zeige gelöschte Benutzer',
     'title' 				=> 'Titel',
 	'to_restore_them'		=> 'zum Wiederherstellen.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'Benutzer aktualisieren',
     'username' 				=> 'Benutzername',
 	'user_deleted_text' 	=> 'Dieser Benutzer wurde als gelöscht markiert.',

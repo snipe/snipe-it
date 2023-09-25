@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Afficher les utilisateurs supprimés',
     'title' 				=> 'Titre',
 	'to_restore_them'		=> 'pour les restaurer.',
+    'total_assets_cost'     => "Coût total des actifs",
     'updateuser' 			=> 'Mettre à jour l\'utilisateur',
     'username' 				=> 'Nom d\'utilisateur',
 	'user_deleted_text' 	=> 'Cet utilisateur a été marqué comme supprimé.',

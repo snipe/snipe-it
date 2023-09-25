@@ -2,6 +2,7 @@
 
 return array(
 
+    'deleted' => 'Deleted supplier',
     'does_not_exist' => '공급자가 존재하지 않습니다.',
 
 
