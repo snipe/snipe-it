@@ -358,7 +358,7 @@
         <h2 class="box-title">{{ trans('admin/settings/general.system') }}</h2>
       </div>
       <div class="box-body">
-        <div class="container row-striped col-md-12">
+        <div class="container row row-striped" style="width:97%">
 
           <!-- row -->
           <div class="row">
@@ -442,7 +442,7 @@
 
           </div>
 
-
+        </div>
           </div>
           <!--/ row -->
         </div>
