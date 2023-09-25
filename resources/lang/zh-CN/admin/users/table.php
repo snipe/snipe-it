@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => '已删除用户',
     'title' 				=> '职位',
 	'to_restore_them'		=> '恢复它们。',
+    'total_assets_cost'     => "总资产成本",
     'updateuser' 			=> '更新用户',
     'username' 				=> '用户名',
 	'user_deleted_text' 	=> '此用户已被标记为已删除。',

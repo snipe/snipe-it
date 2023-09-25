@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Rādīt izdzēstos lietotājus',
     'title' 				=> 'Nosaukums',
 	'to_restore_them'		=> 'lai tos atjaunotu.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'Atjaunināt lietotāju',
     'username' 				=> 'Lietotājvārds',
 	'user_deleted_text' 	=> 'Šis lietotājs ir atzīmēts kā izdzēsts.',

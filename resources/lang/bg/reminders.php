@@ -15,7 +15,7 @@ return array(
 
     "password" => "Паролата трябва да бъде поне 6 символа и да съвпада с потвърждението.",
     "user"     => "Грешно потребителско име или имейл адрес",
-    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
-    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
+    "token"    => 'Заявката за ресет на парола е невалидна, изтекла или не съвпада за потребителското име.',
+    'sent'	   => 'Ако има такъв потребител с валиден е-майл адрес в нашата система, ще му изпратим е-майл.',
 
 );

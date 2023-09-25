@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'CSVダウンロード',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> '場所',
     'purchase_cost'	=> 'コスト',
     'purchase_date'	=> '購入済',

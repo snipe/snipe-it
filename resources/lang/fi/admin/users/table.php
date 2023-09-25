@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Näytä poistetut käyttäjät',
     'title' 				=> 'Titteli',
 	'to_restore_them'		=> 'palauttaa ne.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'Päivitä käyttäjä',
     'username' 				=> 'Käyttäjätunnus',
 	'user_deleted_text' 	=> 'Tämä käyttäjä on merkitty poistetuksi.',

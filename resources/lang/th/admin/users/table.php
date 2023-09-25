@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'แสดงผู้ใช้งานที่ถูกลบแล้ว',
     'title' 				=> 'ชื่อเรื่อง',
 	'to_restore_them'		=> 'เพื่อเรียกคืน',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'แก้ไขผู้ใช้งาน',
     'username' 				=> 'ชื่อผู้ใช้',
 	'user_deleted_text' 	=> 'ผู้ใช้นี้ถูกทำเครื่องหมายว่าลบแล้ว',

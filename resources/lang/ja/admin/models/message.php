@@ -2,6 +2,7 @@
 
 return array(
 
+    'deleted' => 'Deleted asset model',
     'does_not_exist' => '型番が存在しません。',
     'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
     'no_association_fix' => 'モデルを割り当てるために今すぐこの資産を編集してください。',

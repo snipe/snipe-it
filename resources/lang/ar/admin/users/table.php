@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'عرض المستخدمين المحذوفين',
     'title' 				=> 'المسمى الوظيفي',
 	'to_restore_them'		=> 'لاستعادتها.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'تحديث المستخدم',
     'username' 				=> 'اسم المستخدم',
 	'user_deleted_text' 	=> 'تم وضع علامة على هذا المستخدم على أنه محذوف.',

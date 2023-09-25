@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'Landa i-CSV',
     'eol' 			=> 'I-EOL',
     'id'      		=> 'ID',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> 'Indawo',
     'purchase_cost'	=> 'Izindleko',
     'purchase_date'	=> 'Kuthengwe',

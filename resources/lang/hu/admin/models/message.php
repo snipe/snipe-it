@@ -2,6 +2,7 @@
 
 return array(
 
+    'deleted' => 'Törölt eszköz modell',
     'does_not_exist' => 'Modell nem létezik.',
     'no_association' => 'FIGYELEM! Az eszköz modell hiányzik, vagy nem érvényes!',
     'no_association_fix' => 'Ez furcsa és szörnyű módokon fogja szétzúzni a dolgokat. Szerkeszd ezt az eszközt most, és rendeld hozzá egy modellhez.',

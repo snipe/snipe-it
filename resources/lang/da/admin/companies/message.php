@@ -2,6 +2,7 @@
 
 return [
     'does_not_exist' => 'Virksomheden eksisterer ikke.',
+    'deleted'        => 'Deleted company',
     'assoc_users'    => 'Denne virksomhed er knyttet til mindst én model og kan ikke slettes. Opdater venligst dine modeller for at ikke længere henvise til dette selskab, og prøv igen. ',
     'create' => [
         'error'   => 'Virksomheden blev ikke oprettet, prøve igen.',

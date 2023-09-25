@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'CSV로 내려받기',
     'eol' 			=> '폐기일',
     'id'      		=> '아이디',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> '위치',
     'purchase_cost'	=> '원가',
     'purchase_date'	=> '구매',

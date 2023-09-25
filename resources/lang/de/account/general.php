@@ -2,7 +2,7 @@
 
 return array(
     'personal_api_keys' => 'Persönliche API-Schlüssel',
-    'api_key_warning' => 'Wenn Sie ein API-Token generieren, stellen Sie sicher, dass Sie es sofort nach kopieren, da es
+    'api_key_warning' => 'Wenn Sie ein API-Token generieren, stellen Sie sicher, dass Sie diesen sofort kopieren, da er
                     nicht mehr für Sie sichtbar sein wird.',
     'api_base_url' => 'Ihre API Basis-URL befindet sich unter:',
     'api_base_url_endpoint' => '/&lt;Endpunkt&gt;',

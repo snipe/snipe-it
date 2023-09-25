@@ -2,6 +2,7 @@
 
 return [
     'does_not_exist' => 'Kompanija neegzistuoja.',
+    'deleted'        => 'Deleted company',
     'assoc_users'    => 'Ši kompanija šiuo metu susieta su mažiausiai viena įranga ir negali būti ištrinta. prašome atnaujinkite savo įrangą, kad nebūtų nuorodų į šią kompaniją ir bandykite iš naujo. ',
     'create' => [
         'error'   => 'Kompanija nebuvo sukurta, prašome bandykite dar kartą.',

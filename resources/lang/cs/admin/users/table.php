@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Zobraz smazané uživatele',
     'title' 				=> 'Název',
 	'to_restore_them'		=> 'obnovit.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'Aktualizace uživatele',
     'username' 				=> 'Uživatelské jméno',
 	'user_deleted_text' 	=> 'Tento uživatel byl označen jako smazaný.',

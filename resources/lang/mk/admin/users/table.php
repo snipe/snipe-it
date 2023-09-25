@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Прикажи ги избришаните корисници',
     'title' 				=> 'Наслов',
 	'to_restore_them'		=> 'да се вратат.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'Ажурирај го корисникот',
     'username' 				=> 'Корисничко име',
 	'user_deleted_text' 	=> 'Овој корисник е обележан како избришан.',

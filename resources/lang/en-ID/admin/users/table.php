@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Tampilkan pengguna yang dihapus',
     'title' 				=> 'Judul',
 	'to_restore_them'		=> 'untuk mengembalikan mereka.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'Perbarui pengguna',
     'username' 				=> 'Nama pengguna',
 	'user_deleted_text' 	=> 'Pengguna ini sudah ditandai sebagai sudah terhapus.',

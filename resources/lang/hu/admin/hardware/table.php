@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'Cvs letöltése',
     'eol' 			=> 'Lejárat',
     'id'      		=> 'ID',
+    'last_checkin_date' => 'Utolsó kiadás dátuma',
     'location' 		=> 'Helyszín',
     'purchase_cost'	=> 'Költség',
     'purchase_date'	=> 'Megvásárolva',

@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => '削除されたユーザーを表示',
     'title' 				=> '役職',
 	'to_restore_them'		=> 'それらを復元します。',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> '利用者を更新',
     'username' 				=> 'ユーザ名',
 	'user_deleted_text' 	=> 'この利用者は、削除済みとしてマークされています。',

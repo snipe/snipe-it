@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'Lawrlwytho CSV',
     'eol' 			=> 'DB',
     'id'      		=> 'Rhif Unigryw',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> 'Lleoliad',
     'purchase_cost'	=> 'Cost',
     'purchase_date'	=> 'Dyddiad Pwrcasu',

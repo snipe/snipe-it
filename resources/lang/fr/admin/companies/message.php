@@ -2,6 +2,7 @@
 
 return [
     'does_not_exist' => 'La compagnie n\'existe pas.',
+    'deleted'        => 'Société supprimée',
     'assoc_users'    => 'Cette compagnie est actuellement associée à au moins un modèle et ne peut être supprimée. veuillez actualiser vos modèles afin de ne plus référencer cette compagnie et ressayer. ',
     'create' => [
         'error'   => 'La compagnie n\'a pas été créé, veuillez réessayer.',

@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'Tải tập tin CSV xuống',
     'eol' 			=> 'EOL',
     'id'      		=> 'Định danh',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> 'Vị trí',
     'purchase_cost'	=> 'Chi phí',
     'purchase_date'	=> 'Đã mua',

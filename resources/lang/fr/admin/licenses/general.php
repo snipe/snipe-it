@@ -26,6 +26,7 @@ return array(
                 'modal'             => 'Cette action désassociera un siège. | Cette action désassociera :checkedout_seats_count sièges pour cette licence.',
                 'enabled_tooltip'   => 'Désassocier TOUS les sièges de cette licence, à la fois des utilisateurs·trices et des actifs',
                 'disabled_tooltip'  => 'Ceci est désactivé car il n\'y a pas de siège actuellement associé',
+                'disabled_tooltip_reassignable'  => 'This is disabled because the License is not reassignable',
                 'success'           => 'Licence désassociée avec succès ! | Toutes les licences ont été désassociées avec succès !',
                 'log_msg'           => 'Désassociée via l\'outil de gestion des licences en volume',
             ],

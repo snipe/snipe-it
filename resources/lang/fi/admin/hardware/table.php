@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'Lataa CSV',
     'eol' 			=> 'Elinaika',
     'id'      		=> 'Tunnus',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> 'Sijainti',
     'purchase_cost'	=> 'Kustannus',
     'purchase_date'	=> 'Ostopäivämäärä',

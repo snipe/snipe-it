@@ -1,14 +1,14 @@
 <?php
 
 return array(
-    'about'      	=> 'Info Statusbezeichnung',
+    'about'      	=> 'Über Statusbezeichnungen',
     'archived'      	=> 'Archiviert',
     'create'      	=> 'Statusbezeichnung erstellen',
     'color'      	=> 'Diagrammfarbe',
     'default_label' => 'Standardbezeichnung',
     'default_label_help' => 'Dies wird verwendet, um sicherzustellen, dass die am häufigsten verwendeten Statusbeschriftungen beim Erstellen / Bearbeiten von Assets oben im Auswahlfeld angezeigt werden.',
     'deployable'      	=> 'Einsetzbar',
-    'info'      	=> 'Statusbezeichnungen werden eingesetzt, um diverse Zustände Ihrer Assets zu beschreiben. Diese können z. B. in Reparatur sein, gestohlen oder verloren worden sein. Sie können neue Statusbezeichnungen für einsetzbare, ausstehende und archivierte Assets erstellen.',
+    'info'      	=> 'Statusbezeichnungen werden eingesetzt, um diverse Zustände Ihrer Assets zu beschreiben. Diese können z. B. in Reparatur, gestohlen oder verloren sein. Sie können neue Statusbezeichnungen für einsetzbare, ausstehende und archivierte Assets erstellen.',
     'name'      	=> 'Statusname',
     'pending'      	=> 'Ausstehend',
     'status_type'   => 'Statustyp',

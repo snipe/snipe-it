@@ -2,7 +2,7 @@
 
 return array(
 
-    'support_url_help' => 'Käytä <code>{LOCALE}</code> ja <code>{SERIAL}</code> URL -osoitteessasi muuttujina niiden automaattiseksi huomioimiseksi laitteita katsottaessa.',
+    'support_url_help' => 'Variables <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, and <code>{MODEL_NAME}</code> may be used in your URL to have those values auto-populate when viewing assets - for example https://support.apple.com/{LOCALE}/{SERIAL}.',
     'does_not_exist' => 'Valmistajaa ei löydy.',
     'assoc_users'	 => 'Valmistaja on määritetty käyttöön yhdelle tai useammalle mallille joten sitä ei voida poistaa. Poista valmistaja käytöstä kaikilta malleilta ja yritä uudelleen. ',
 
