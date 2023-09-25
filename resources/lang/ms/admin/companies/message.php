@@ -2,6 +2,7 @@
 
 return [
     'does_not_exist' => 'Syarikat tidak wujud.',
+    'deleted'        => 'Deleted company',
     'assoc_users'    => 'Syarikat ini kini dikaitkan dengan sekurang-kurangnya satu model dan tidak boleh dipadamkan. Sila kemas kini model anda untuk tidak lagi merujuk syarikat ini dan cuba lagi.',
     'create' => [
         'error'   => 'Syarikat tidak dicipta, sila cuba lagi.',

@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'I-download ang CSV',
     'eol' 			=> 'Ang EOL',
     'id'      		=> 'Ang ID',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> 'Ang Lokasyon',
     'purchase_cost'	=> 'Ang Presyo',
     'purchase_date'	=> 'Nabili na',

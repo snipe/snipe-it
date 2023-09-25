@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Prikaži izbrisane korisnike',
     'title' 				=> 'Titula',
 	'to_restore_them'		=> 'vratiti ih.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'Ažuriranje korisnika',
     'username' 				=> 'Korisničko ime',
 	'user_deleted_text' 	=> 'Ovaj je korisnik označen kao izbrisan.',

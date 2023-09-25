@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Wys verwyderde gebruikers',
     'title' 				=> 'Titel',
 	'to_restore_them'		=> 'om hulle te herstel.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'Update gebruiker',
     'username' 				=> 'Gebruikersnaam',
 	'user_deleted_text' 	=> 'Hierdie gebruiker is gemerk as verwyder.',

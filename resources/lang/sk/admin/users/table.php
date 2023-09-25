@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Zobraziť ostránených používateľov',
     'title' 				=> 'Titul',
 	'to_restore_them'		=> 'na obnovenie.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'Upraviť používateľa',
     'username' 				=> 'Používateľské meno',
 	'user_deleted_text' 	=> 'Tento používateľ bol označený ako odstránený.',

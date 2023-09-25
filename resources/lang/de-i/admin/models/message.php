@@ -2,6 +2,7 @@
 
 return array(
 
+    'deleted' => 'Gelöschtes Asset-Modell',
     'does_not_exist' => 'Modell existiert nicht.',
     'no_association' => 'WARNUNG! Das Asset Modell für dieses Element ist ungültig oder fehlt!',
     'no_association_fix' => 'Dies wird Dinge auf seltsame und schreckliche Weise zerstören. Bearbeite dieses Asset jetzt, um ihm ein Modell zuzuordnen.',

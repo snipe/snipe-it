@@ -2,6 +2,7 @@
 
 return [
     'does_not_exist' => 'Kompānija neeksistē.',
+    'deleted'        => 'Deleted company',
     'assoc_users'    => 'Šobrīd šis uzņēmums ir saistīts ar vismaz vienu modeli, un to nevar izdzēst. Lūdzu, atjauniniet savus modeļus, lai vairs neuzrādītu šo uzņēmumu, un mēģiniet vēlreiz.',
     'create' => [
         'error'   => 'Uzņēmums netika izveidots, lūdzu, mēģiniet vēlreiz.',

@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'Unduh CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> 'Lokasi',
     'purchase_cost'	=> 'Biaya',
     'purchase_date'	=> 'Dibeli',

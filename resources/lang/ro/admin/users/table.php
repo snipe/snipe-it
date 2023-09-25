@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Afișați utilizatorii șterși',
     'title' 				=> 'Titlu',
 	'to_restore_them'		=> 'pentru a le restabili.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'Actualizeaza utilizator',
     'username' 				=> 'Utilizator',
 	'user_deleted_text' 	=> 'Acest utilizator a fost marcat ca șters.',

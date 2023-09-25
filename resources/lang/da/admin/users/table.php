@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Vis slettede brugere',
     'title' 				=> 'Titel',
 	'to_restore_them'		=> 'at genoprette dem.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'Opdatere bruger',
     'username' 				=> 'Brugernavn',
 	'user_deleted_text' 	=> 'Denne bruger er blevet markeret som slettede.',

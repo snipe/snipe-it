@@ -10,7 +10,7 @@ return array(
     'maintained'        => 'Verwaltet',
     'name'              => 'Software Name',
     'no_depreciation'   => 'Nicht abschreiben',
-    'purchase_order'    => 'Auftragsnummer',
+    'purchase_order'    => 'Bestellnummer',
     'reassignable'      => 'Mehrmals verwendbar',
     'remaining_seats'   => 'Verbleibende Aktivierungen',
     'seats'             => 'Lizenzen',

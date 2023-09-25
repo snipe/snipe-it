@@ -2,6 +2,7 @@
 
 return array(
 
+    'deleted' => 'Изтрит доставчик',
     'does_not_exist' => 'Несъществуващ доставчик.',
 
 

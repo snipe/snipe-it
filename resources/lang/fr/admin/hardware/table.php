@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'Télécharger en CSV',
     'eol' 			=> 'Fin de vie',
     'id'      		=> 'ID',
+    'last_checkin_date' => 'Date de dernière dissociation',
     'location' 		=> 'Lieu',
     'purchase_cost'	=> 'Coût',
     'purchase_date'	=> 'Acheté',

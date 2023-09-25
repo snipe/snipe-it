@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'Hlaða niður CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> 'Staðsetning',
     'purchase_cost'	=> 'Innkaupsverð',
     'purchase_date'	=> 'Keypt',

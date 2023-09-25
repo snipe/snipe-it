@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Sýna eydda notendur',
     'title' 				=> 'Titill',
 	'to_restore_them'		=> 'to restore them.',
+    'total_assets_cost'     => "Heildarkostnaður búnaðar",
     'updateuser' 			=> 'Uppfæra notenda',
     'username' 				=> 'Notendanafn',
 	'user_deleted_text' 	=> 'This user has been marked as deleted.',

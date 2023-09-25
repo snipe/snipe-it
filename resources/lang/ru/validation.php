@@ -67,7 +67,7 @@ return [
         'array'   => 'Атрибут: должен содержать не менее: мин.',
     ],
     'starts_with'          => ':attribute должен начинаться с одного из следующих значений: :values.',
-    'ends_with'            => 'The :attribute must end with one of the following: :values.',
+    'ends_with'            => 'Атрибут :attribute должен заканчиваться одним из следующих значений: :values.',
 
     'not_in'               => 'Выбранный :attribute неправильный.',
     'numeric'              => ':attribute должно быть числом.',

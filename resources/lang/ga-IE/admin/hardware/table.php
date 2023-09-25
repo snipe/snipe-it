@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'Íoslódáil CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> 'Suíomh',
     'purchase_cost'	=> 'Costas',
     'purchase_date'	=> 'Ceannacháin',

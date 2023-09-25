@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Mostrar Usuários Excluídos',
     'title' 				=> 'Título',
 	'to_restore_them'		=> 'para restaurar ele(a).',
+    'total_assets_cost'     => "Custo Total de Ativos",
     'updateuser' 			=> 'Atualizar Usuário',
     'username' 				=> 'Usuário',
 	'user_deleted_text' 	=> 'Este usuário foi marcado como deletado.',

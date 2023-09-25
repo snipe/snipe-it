@@ -2,6 +2,7 @@
 
 return array(
 
+    'deleted' => 'Deleted asset model',
     'does_not_exist' => 'الموديل غير موجود.',
     'no_association' => 'تحذير! نموذج الأصول لهذا العنصر غير صالح أو مفقود!',
     'no_association_fix' => 'سيؤدي هذا إلى كسر الأمور بطرق غريبة وفظيعة. قم بتعديل هذا الأصل الآن لربطه بنموذج.',

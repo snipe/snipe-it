@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'Завантажити CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> 'Розташування',
     'purchase_cost'	=> 'Вартість',
     'purchase_date'	=> 'Придбано',

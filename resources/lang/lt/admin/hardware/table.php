@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'Atsisiųti CSV fromatu',
     'eol' 			=> 'Nurašymo data',
     'id'      		=> 'ID',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> 'Vieta',
     'purchase_cost'	=> 'Kaina',
     'purchase_date'	=> 'Nupirkta',

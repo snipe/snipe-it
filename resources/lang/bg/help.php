@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Допълнителна информация',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'Отмятането на това поле, ще редактира записа, за да се отрази новото местоположение. Оставайки това поле без отметка ще се отрази местоположението на актива само при одит.<br><br>Ако актива е изписан няма да се смени леговата локация.',
 
     'assets' => 'Дълготрайни материални активи (ДМА), за кратко активи, се приемат всички материални ресурси на предприятието, които се използват повече от един отчетен период (за стопански и други цели). Проследават се по техния сериен или инвентарен номер.',
 

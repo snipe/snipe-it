@@ -24,7 +24,7 @@ return array(
         'error'   		=> 'Verbruiksartikel is niet uitgecheckt, probeer het opnieuw',
         'success' 		=> 'Verbruiksartikel is met succes uitgecheckt.',
         'user_does_not_exist' => 'Deze gebruiker is ongeldig. Probeer het opnieuw.',
-         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
+         'unavailable'      => 'Er zijn niet genoeg verbruiksartikelen om uit te checken. Controleer de resterende hoeveelheid. ',
     ),
 
     'checkin' => array(

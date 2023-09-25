@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Dangos Defnyddwyr sydd wedi\'i dileu',
     'title' 				=> 'Teitl',
 	'to_restore_them'		=> 'i adfer nhw.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'Diweddaru Defnyddiwr',
     'username' 				=> 'Enw defnyddiwr',
 	'user_deleted_text' 	=> 'Mae\'r defnyddiwr hwn wedi\'i farcio fel un sydd wedi\'i ddileu.',

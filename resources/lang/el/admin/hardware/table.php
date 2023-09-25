@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'Κατεβάστε το CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> 'Τοποθεσία',
     'purchase_cost'	=> 'Κόστος',
     'purchase_date'	=> 'Αγοράστηκε',

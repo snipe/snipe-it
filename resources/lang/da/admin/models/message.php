@@ -2,6 +2,7 @@
 
 return array(
 
+    'deleted' => 'Deleted asset model',
     'does_not_exist' => 'Model findes ikke.',
     'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
     'no_association_fix' => 'Dette vil ødelægge ting på underlige og forfærdelige måder. Rediger dette aktiv nu for at tildele det en model.',
