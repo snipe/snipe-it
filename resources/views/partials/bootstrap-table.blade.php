@@ -42,7 +42,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             },
-            reorderableColumns: true,
+            // reorderableColumns: true,
             stickyHeader: true,
             stickyHeaderOffsetLeft: parseInt($('body').css('padding-left'), 10),
             stickyHeaderOffsetRight: parseInt($('body').css('padding-right'), 10),

@@ -484,8 +484,17 @@ class Importer extends Component
 
     public function selectFile($id)
     {
+        $this->clearMessage();
 
         $this->activeFile = Import::find($id);
+
+        if (!$this->activeFile) {
+            $this->message = trans('admin/hardware/message.import.file_missing');
+            $this->message_type = 'danger';
+
+            return;
+        }
+
         $this->field_map = null;
         foreach($this->activeFile->header_row as $element) {
             if(isset($this->activeFile->field_map[$element])) {
@@ -518,6 +527,12 @@ class Importer extends Component
                 }
             }
         }
+    }
+
+    public function clearMessage()
+    {
+        $this->message = null;
+        $this->message_type = null;
     }
 
     public function render()
