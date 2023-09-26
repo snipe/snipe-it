@@ -459,7 +459,7 @@ return [
     'serial_number'        => 'Serial Number',
     'item_notes' => ':item Notes',
     'item_name_var' => ':item Name',
-    'error_user_company' => 'User and Asset companies missmatch',
+    'error_user_company' => 'Checkout target company and asset company do not match',
     'error_user_company_accept_view' => 'An Asset assigned to you belongs to a different company so you can\'t accept nor deny it, please check with your manager',
     'importer' => [
         'checked_out_to_fullname' => 'Checked Out to: Full Name',
