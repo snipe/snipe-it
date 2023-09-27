@@ -346,6 +346,11 @@
                                 <option value="location.name">Location Name</option>
                                 <option value="location.phone">Location Phone</option>
                             </optgroup>
+                            <optgroup label="Custom Fields">
+                                @foreach($customFields as $customField)
+                                    <option value="{{ $customField->db_column }}">{{ $customField->name }}</option>
+                                @endforeach
+                            </optgroup>
                         </select>
                     </div>
                 </template>
