@@ -304,7 +304,52 @@
                         <label style="grid-area: label-title">Label</label>
                         <input style="grid-area: label-field" x-model="option.label" />
                         <label style="grid-area: source-title">DataSource</label>
-                        <input style="grid-area: source-field" x-model="option.datasource" />
+                        {{--<input style="grid-area: source-field" x-model="option.datasource" />--}}
+                        <select style="grid-area: source-field">
+                            <optgroup label="Asset">
+                                <option value="asset_eol_date">EOL Date</option>
+                                <option value="asset_tag">Asset Tag</option>
+                                <option value="byod">BYOD</option>
+                                <option value="expected_checkin">Expected Checkin</option>
+                                <option value="name">Name</option>
+                                <option value="order_number">Order Number</option>
+                                <option value="purchase_cost">Purchase Cost</option>
+                                <option value="purchase_date">Purchase Date</option>
+                                <option value="serial">Serial</option>
+                            </optgroup>
+                            <optgroup label="Asset Model">
+                                <option value="model.model_number">Asset Model Number</option>
+                                <option value="model.name">Asset Model Name</option>
+                            </optgroup>
+                            <optgroup label="Manufacturer">
+                                <option value="model.manufacturer.name">name</option>
+                                <option value="model.manufacturer.support_email">support_email</option>
+                                <option value="model.manufacturer.support_phone">support_phone</option>
+                                <option value="model.manufacturer.support_url">support_url</option>
+                            </optgroup>
+                            <optgroup label="Category">
+                                <option value="model.category.name">name</option>
+                            </optgroup>
+                            <optgroup label="Status">
+                                <option value="assetstatus.name">name</option>
+                            </optgroup>
+                            <optgroup label="Supplier">
+                                <option value="supplier.name">name</option>
+                            </optgroup>
+                            <optgroup label="Default Location">
+                                <option value="defaultLoc.name">name</option>
+                                <option value="defaultLoc.phone">phone</option>
+                            </optgroup>
+                            <optgroup label="Company">
+                                <option value="company.email">email</option>
+                                <option value="company.name">name</option>
+                                <option value="company.phone">phone</option>
+                            </optgroup>
+                            <optgroup label="Location">
+                                <option value="location.name">name</option>
+                                <option value="location.phone">phone</option>
+                            </optgroup>
+                        </select>
                     </div>
                 </template>
             </template>
