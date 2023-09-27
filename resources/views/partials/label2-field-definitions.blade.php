@@ -304,13 +304,10 @@
                         <label style="grid-area: label-title">Label</label>
                         <input style="grid-area: label-field" x-model="option.label" />
                         <label style="grid-area: source-title">DataSource</label>
-                        {{--<input style="grid-area: source-field" x-model="option.datasource" />--}}
                         <select style="grid-area: source-field" x-model="option.datasource">
                             <optgroup label="Asset">
                                 <option value="asset_tag">Asset Tag</option>
-                                <option value="byod">Asset BYOD</option>
                                 <option value="asset_eol_date">Asset EOL Date</option>
-                                <option value="expected_checkin">Asset Expected Checkin</option>
                                 <option value="name">Asset Name</option>
                                 <option value="order_number">Asset Order Number</option>
                                 <option value="purchase_cost">Asset Purchase Cost</option>
