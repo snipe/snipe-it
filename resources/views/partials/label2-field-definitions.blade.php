@@ -305,49 +305,49 @@
                         <input style="grid-area: label-field" x-model="option.label" />
                         <label style="grid-area: source-title">DataSource</label>
                         {{--<input style="grid-area: source-field" x-model="option.datasource" />--}}
-                        <select style="grid-area: source-field">
+                        <select style="grid-area: source-field" x-model="option.datasource">
                             <optgroup label="Asset">
-                                <option value="asset_eol_date">EOL Date</option>
                                 <option value="asset_tag">Asset Tag</option>
-                                <option value="byod">BYOD</option>
-                                <option value="expected_checkin">Expected Checkin</option>
-                                <option value="name">Name</option>
-                                <option value="order_number">Order Number</option>
-                                <option value="purchase_cost">Purchase Cost</option>
-                                <option value="purchase_date">Purchase Date</option>
-                                <option value="serial">Serial</option>
+                                <option value="byod">Asset BYOD</option>
+                                <option value="asset_eol_date">Asset EOL Date</option>
+                                <option value="expected_checkin">Asset Expected Checkin</option>
+                                <option value="name">Asset Name</option>
+                                <option value="order_number">Asset Order Number</option>
+                                <option value="purchase_cost">Asset Purchase Cost</option>
+                                <option value="purchase_date">Asset Purchase Date</option>
+                                <option value="serial">Asset Serial</option>
                             </optgroup>
                             <optgroup label="Asset Model">
                                 <option value="model.model_number">Asset Model Number</option>
                                 <option value="model.name">Asset Model Name</option>
                             </optgroup>
                             <optgroup label="Manufacturer">
-                                <option value="model.manufacturer.name">name</option>
-                                <option value="model.manufacturer.support_email">support_email</option>
-                                <option value="model.manufacturer.support_phone">support_phone</option>
-                                <option value="model.manufacturer.support_url">support_url</option>
+                                <option value="model.manufacturer.name">Manufacturer Name</option>
+                                <option value="model.manufacturer.support_email">Manufacturer Support Email</option>
+                                <option value="model.manufacturer.support_phone">Manufacturer Support Phone</option>
+                                <option value="model.manufacturer.support_url">Manufacturer Support URL</option>
                             </optgroup>
                             <optgroup label="Category">
-                                <option value="model.category.name">name</option>
+                                <option value="model.category.name">Category Name</option>
                             </optgroup>
                             <optgroup label="Status">
-                                <option value="assetstatus.name">name</option>
+                                <option value="assetstatus.name">Status</option>
                             </optgroup>
                             <optgroup label="Supplier">
-                                <option value="supplier.name">name</option>
+                                <option value="supplier.name">Supplier Name</option>
                             </optgroup>
                             <optgroup label="Default Location">
-                                <option value="defaultLoc.name">name</option>
-                                <option value="defaultLoc.phone">phone</option>
+                                <option value="defaultLoc.name">Default Location Name</option>
+                                <option value="defaultLoc.phone">Default Location Phone</option>
                             </optgroup>
                             <optgroup label="Company">
-                                <option value="company.email">email</option>
-                                <option value="company.name">name</option>
-                                <option value="company.phone">phone</option>
+                                <option value="company.email">Company Email</option>
+                                <option value="company.name">Company Name</option>
+                                <option value="company.phone">Company Phone</option>
                             </optgroup>
                             <optgroup label="Location">
-                                <option value="location.name">name</option>
-                                <option value="location.phone">phone</option>
+                                <option value="location.name">Location Name</option>
+                                <option value="location.phone">Location Phone</option>
                             </optgroup>
                         </select>
                     </div>
