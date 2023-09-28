@@ -19,7 +19,7 @@ class FieldOption {
         // we want to avoid returning the property directly
         // and instead return the entity's presented name.
         if ($dataPath[0] === 'assignedTo'){
-           return $asset->assignedTo->present()->fullName();
+            return $asset->assignedTo ?  $asset->assignedTo->present()->fullName() : null;
         }
         
         return $dataPath->reduce(function ($myValue, $path) {
