@@ -46,6 +46,7 @@ class AssetModelsController extends Controller
                 'requestable',
                 'assets_count',
                 'category',
+                'fieldset',
             ];
 
         $assetmodels = AssetModel::select([
