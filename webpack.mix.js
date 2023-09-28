@@ -26,7 +26,6 @@ mix
       "./node_modules/bootstrap-table/dist/bootstrap-table.css",
       "./public/css/build/app.css",
       "./node_modules/select2/dist/css/select2.css",
-      "./resources/assets/css/dragtable.css",
       "./public/css/build/overrides.css",
     ],
     "./public/css/dist/all.css"
@@ -144,6 +143,7 @@ mix
     [
       "./node_modules/bootstrap-table/dist/bootstrap-table.css",
       "./node_modules/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.css",
+     "./resources/assets/css/dragtable.css",
     ],
     "public/css/dist/bootstrap-table.css"
   )
