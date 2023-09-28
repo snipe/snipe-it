@@ -275,6 +275,7 @@ class Importer extends Component
             'license_email' => trans('admin/licenses/form.to_email'),
             'license_name' => trans('admin/licenses/form.to_name'),
             'purchase_order' => trans('admin/licenses/form.purchase_order'),
+            'order_number' => trans('general.order_number'),
             'reassignable' => trans('admin/licenses/form.reassignable'),
             'seats' => trans('admin/licenses/form.seats'),
             'notes' => trans('general.notes'),
