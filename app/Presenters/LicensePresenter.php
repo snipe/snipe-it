@@ -255,6 +255,14 @@ class LicensePresenter extends Presenter
                 'formatter' => 'locationsLinkObjFormatter',
             ],
             [
+                'field' => 'notes',
+                'searchable' => false,
+                'sortable' => false,
+                'visible' => false,
+                'title' => trans('general.notes'),
+                'formatter' => 'notesFormatter'
+            ],
+            [
                 'field' => 'checkincheckout',
                 'searchable' => false,
                 'sortable' => false,
