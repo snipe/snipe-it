@@ -1,5 +1,5 @@
 {
-    "/js/build/app.js": "/js/build/app.js?id=b52b79848c81c9b523b9dd92baf6a41e",
+    "/js/build/app.js": "/js/build/app.js?id=41293fc7aa00ece89fd524e1e0e31a68",
     "/css/dist/skins/skin-blue.css": "/css/dist/skins/skin-blue.css?id=f677207c6cf9678eb539abecb408c374",
     "/css/build/overrides.css": "/css/build/overrides.css?id=5166569ede5a36802eadeea982686ca6",
     "/css/build/app.css": "/css/build/app.css?id=b612c48e78fece2e1e8042ae24cc5f1e",
@@ -32,7 +32,7 @@
     "/css/dist/bootstrap-table.css": "/css/dist/bootstrap-table.css?id=2bd29fa7f9d666800c246a52ce708633",
     "/js/build/vendor.js": "/js/build/vendor.js?id=917784d6fe54bcfe39656e0ded1b43e4",
     "/js/dist/bootstrap-table.js": "/js/dist/bootstrap-table.js?id=1f678160a05960c3087fb8263168ff41",
-    "/js/dist/all.js": "/js/dist/all.js?id=89422bf0d28a2a4cb74078a48c0a0cb1",
+    "/js/dist/all.js": "/js/dist/all.js?id=1a069f231b257b1ad4e3751302705f97",
     "/js/dist/all-defer.js": "/js/dist/all-defer.js?id=07e52318da2cdf3171c4d88113f25fb6",
     "/css/dist/skins/skin-green.min.css": "/css/dist/skins/skin-green.min.css?id=0a82a6ae6bb4e58fe62d162c4fb50397",
     "/css/dist/skins/skin-green-dark.min.css": "/css/dist/skins/skin-green-dark.min.css?id=e36e83c2aa3c3afdbb8ebe2c0309e91d",

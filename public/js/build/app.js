@@ -1502,7 +1502,9 @@ $(function () {
     select = link.data("select");
     refreshSelector = link.data("refresh");
     $('#createModal').load(link.attr('href'), function () {
-      //do we need to re-select2 this, after load? Probably.
+      // this sets the focus to be the name field
+      $('#modal-name').focus(); //do we need to re-select2 this, after load? Probably.
+
       $('#createModal').find('select.select2').select2(); // Initialize the ajaxy select2 with images.
       // This is a copy/paste of the code from snipeit.js, would be great to only have this in one place.
 
