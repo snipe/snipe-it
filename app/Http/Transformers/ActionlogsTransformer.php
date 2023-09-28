@@ -43,9 +43,10 @@ class ActionlogsTransformer
     public function transformActionlog (Actionlog $actionlog, $settings = null)
     {
         $icon = $actionlog->present()->icon();
-        $custom_field = CustomField::all();
+        $custom_fields = CustomField::all();
+
         if ($actionlog->filename!='') {
-            $icon =  e(\App\Helpers\Helper::filetype_icon($actionlog->filename));
+            $icon =  Helper::filetype_icon($actionlog->filename);
         }
 
         // This is necessary since we can't escape special characters within a JSON object
@@ -55,17 +56,29 @@ class ActionlogsTransformer
             $clean_meta = [];
 
             if ($meta_array) {
+
                 foreach ($meta_array as $fieldname => $fieldata) {
-                    if( str_starts_with($fieldname, '_snipeit_')){
-                        if( $custom_field->where('db_column', '=', $fieldname)->where('field_encrypted', true)){
-                            $clean_meta[$fieldname]['old'] = "encrypted";
-                            $clean_meta[$fieldname]['new'] = "encrypted";
+
+                    $clean_meta[$fieldname]['old'] = $this->clean_field($fieldata->old);
+                    $clean_meta[$fieldname]['new'] = $this->clean_field($fieldata->new);
+
+                    // this is a custom field
+                    if (str_starts_with($fieldname, '_snipeit_')) {
+                        
+                        foreach ($custom_fields as $custom_field) {
+
+                            if ($custom_field->db_column == $fieldname) {
+
+                                if ($custom_field->field_encrypted == '1') {
+                                    $clean_meta[$fieldname]['old'] = "************";
+                                    $clean_meta[$fieldname]['new'] = "************";
+                                }
+
+                            }
+
                         }
                     }
-                     else {
-                        $clean_meta[$fieldname]['old'] = $this->clean_field($fieldata->old);
-                        $clean_meta[$fieldname]['new'] = $this->clean_field($fieldata->new);
-                    }
+
                 }
 
             }
