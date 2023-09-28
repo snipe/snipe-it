@@ -291,4 +291,9 @@ class AssetModel extends SnipeModel
     {
         return $query->leftJoin('categories', 'models.category_id', '=', 'categories.id')->orderBy('categories.name', $order);
     }
+
+    public function scopeOrderFieldset($query, $order)
+    {
+        return $query->leftJoin('custom_fieldsets', 'models.fieldset_id', '=', 'custom_fieldsets.id')->orderBy('custom_fieldsets.name', $order);
+    }
 }
