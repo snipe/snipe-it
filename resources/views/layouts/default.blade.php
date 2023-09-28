@@ -959,6 +959,11 @@
 
         <script nonce="{{ csrf_token() }}">
 
+            var clipboard = new ClipboardJS('.js-copy-link');
+
+            clipboard.on('success', function(e) {
+                $('.js-copy-link').tooltip('hide').attr('data-original-title', '{{ trans('general.copied') }}').tooltip('show');
+            });
 
             // ignore: 'input[type=hidden]' is required here to validate the select2 lists
             $.validate({

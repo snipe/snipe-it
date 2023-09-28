@@ -485,6 +485,8 @@ return [
     ],
     'percent_complete' => '% complete',
     'uploading' => 'Uploading... ',
-    'upload_error' => 'Error uploading file. Please check that there are no empty trailing rows.'
+    'upload_error' => 'Error uploading file. Please check that there are no empty trailing rows.',
+    'copy_to_clipboard' => 'Copy to Clipboard',
+    'copied' => 'Copied!',
 
 ];
