@@ -76,7 +76,7 @@ class LicenseCheckinController extends Controller
 
         // Declare the rules for the form validation
         $rules = [
-            'note'   => 'string|nullable',
+            'notes'   => 'string|nullable',
         ];
 
         // Create a new validator instance from our validation rules
@@ -97,6 +97,7 @@ class LicenseCheckinController extends Controller
         // Update the asset data
         $licenseSeat->assigned_to = null;
         $licenseSeat->asset_id = null;
+        $licenseSeat->notes = $request->input('notes');
 
         // Was the asset updated?
         if ($licenseSeat->save()) {
