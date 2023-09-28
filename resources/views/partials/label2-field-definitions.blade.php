@@ -313,6 +313,7 @@
                                 <option value="purchase_cost">Asset Purchase Cost</option>
                                 <option value="purchase_date">Asset Purchase Date</option>
                                 <option value="serial">Asset Serial</option>
+                                <option value="assignedTo">Assigned To</option>
                             </optgroup>
                             <optgroup label="Asset Model">
                                 <option value="model.model_number">Asset Model Number</option>
