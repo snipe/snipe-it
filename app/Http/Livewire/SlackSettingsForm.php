@@ -26,9 +26,12 @@ class SlackSettingsForm extends Component
 
 
     protected $rules = [
-        'webhook_endpoint'                      => 'url|required_with:webhook_channel|starts_with:http://,https://,ftp://,irc://,https://hooks.slack.com/services/|nullable',
+        'webhook_endpoint'                      => 'required_with:webhook_channel|starts_with:http://,https://,ftp://,irc://,https://hooks.slack.com/services/|url|nullable',
         'webhook_channel'                       => 'required_with:webhook_endpoint|starts_with:#|nullable',
         'webhook_botname'                       => 'string|nullable',
+    ];
+    public $messages = [
+        'webhook_endpoint.starts_with'          => 'your webhook endpoint should begin with http://, https:// or other protocol.',
     ];
 
     public function mount() {
@@ -120,8 +123,8 @@ class SlackSettingsForm extends Component
         try {
             $test = $webhook->post($this->webhook_endpoint, ['body' => $payload]);
 
-            if($test->getStatusCode() == 302){
-                return session()->flash('error' , 'This endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint');
+            if(($test->getStatusCode() == 302)||($test->getStatusCode() == 301)){
+                return session()->flash('error' , 'ERROR: 301/302 '.$this->webhook_endpoint.' returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.');
             }
             $this->isDisabled='';
             $this->save_button = trans('general.save');
