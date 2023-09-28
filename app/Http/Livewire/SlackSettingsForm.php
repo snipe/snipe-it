@@ -124,11 +124,11 @@ class SlackSettingsForm extends Component
             $test = $webhook->post($this->webhook_endpoint, ['body' => $payload]);
 
             if(($test->getStatusCode() == 302)||($test->getStatusCode() == 301)){
-                return session()->flash('error' , 'ERROR: 301/302 '.$this->webhook_endpoint.' returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.');
+                return session()->flash('error' , trans('admin/settings/message.webhook.error_redirect', ['endpoint' => $this->webhook_endpoint]));
             }
             $this->isDisabled='';
             $this->save_button = trans('general.save');
-            return session()->flash('success' , 'Your '.$this->webhook_name.' Integration works!');
+            return session()->flash('success' , trans('admin/settings/message.webhook.success', ['webhook_name' => $this->webhook_name]));
 
         } catch (\Exception $e) {
 
