@@ -49,11 +49,11 @@
             </div>
 
             <!-- Note -->
-            <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
+            <div class="form-group {{ $errors->has('notes') ? 'error' : '' }}">
                 <label for="note" class="col-md-2 control-label">{{ trans('admin/hardware/form.notes') }}</label>
                 <div class="col-md-7">
-                    <textarea class="col-md-6 form-control" id="note" name="note">{{ old('note', $licenseSeat->note) }}</textarea>
-                    {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                    <textarea class="col-md-6 form-control" id="notes" name="notes"></textarea>
+                    {!! $errors->first('notes', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                 </div>
             </div>
                         <div class="box-footer">
