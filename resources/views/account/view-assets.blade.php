@@ -405,6 +405,7 @@
                       <th class="col-md-2" data-switchable="true" data-visible="true">{{ trans('general.name') }}</th>
                       <th class="col-md-2" data-switchable="true" data-visible="true">{{ trans('admin/hardware/table.asset_model') }}</th>
                       <th class="col-md-3" data-switchable="true" data-visible="true">{{ trans('admin/hardware/table.serial') }}</th>
+                      <th class="col-md-3" data-switchable="true" data-visible="true">{{ trans('general.location') }}</th>
                       @can('self.view_purchase_cost')
                         <th class="col-md-6" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
                       @endcan
@@ -442,6 +443,7 @@
                           @endif
                         </td>
                         <td>{{ $asset->serial }}</td>
+                        <td>{{ $asset->defaultLoc->name }}</td>
 
                         @can('self.view_purchase_cost')
                         <td>
