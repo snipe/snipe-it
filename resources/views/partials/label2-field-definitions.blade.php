@@ -307,17 +307,16 @@
                         <select style="grid-area: source-field" x-model="option.datasource">
                             <optgroup label="Asset">
                                 <option value="asset_tag">Asset Tag</option>
-                                <option value="asset_eol_date">Asset EOL Date</option>
                                 <option value="name">Asset Name</option>
-                                <option value="order_number">Asset Order Number</option>
-                                <option value="purchase_cost">Asset Purchase Cost</option>
-                                <option value="purchase_date">Asset Purchase Date</option>
                                 <option value="serial">Asset Serial</option>
+                                <option value="asset_eol_date">Asset EOL Date</option>
+                                <option value="order_number">Asset Order Number</option>
+                                <option value="purchase_date">Asset Purchase Date</option>
                                 <option value="assignedTo">Assigned To</option>
                             </optgroup>
                             <optgroup label="Asset Model">
-                                <option value="model.model_number">Asset Model Number</option>
                                 <option value="model.name">Asset Model Name</option>
+                                <option value="model.model_number">Asset Model Number</option>
                             </optgroup>
                             <optgroup label="Manufacturer">
                                 <option value="model.manufacturer.name">Manufacturer Name</option>
@@ -338,14 +337,14 @@
                                 <option value="defaultLoc.name">Default Location Name</option>
                                 <option value="defaultLoc.phone">Default Location Phone</option>
                             </optgroup>
+                            <optgroup label="Location">
+                                <option value="location.name">Location Name</option>
+                                <option value="location.phone">Location Phone</option>
+                            </optgroup>
                             <optgroup label="Company">
                                 <option value="company.email">Company Email</option>
                                 <option value="company.name">Company Name</option>
                                 <option value="company.phone">Company Phone</option>
-                            </optgroup>
-                            <optgroup label="Location">
-                                <option value="location.name">Location Name</option>
-                                <option value="location.phone">Location Phone</option>
                             </optgroup>
                             <optgroup label="Custom Fields">
                                 @foreach($customFields as $customField)
