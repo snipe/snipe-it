@@ -459,7 +459,7 @@ return [
     'serial_number'        => 'Numero Seriale',
     'item_notes' => ':item Note',
     'item_name_var' => ':item Nome',
-    'error_user_company' => 'Le aziende del bene e dell\'utente non combaciano',
+    'error_user_company' => 'L\'azienda in cui fare il check-out e quella del bene non corrispondono',
     'error_user_company_accept_view' => 'Un bene assegnato a te appartiene a un\'altra azienda. Non puoi accettarlo né rifiutarlo. Parlane col tuo manager',
     'importer' => [
         'checked_out_to_fullname' => 'Check-out fatto a: Nome Cognome',
@@ -485,6 +485,8 @@ return [
     ],
     'percent_complete' => '% completato',
     'uploading' => 'Caricamento... ',
-    'upload_error' => 'Errore nel caricamento del file. Controlla che non ci siano righe vuote alla fine.'
+    'upload_error' => 'Errore nel caricamento del file. Controlla che non ci siano righe vuote alla fine.',
+    'copy_to_clipboard' => 'Copia negli Appunti',
+    'copied' => 'Copied!',
 
 ];

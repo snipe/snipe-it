@@ -357,4 +357,10 @@ return [
     'google_login'      => 'Google Workspace 登入設定',
     'enable_google_login'  => '允許使用者使用 Google Workspace 登入',
     'enable_google_login_help'  => '使用者將不會自動建立。他們必須在這裡和 Google Workspace 中都有現有的帳戶，並且他們在這裡的使用者名稱必須與他們的 Google Workspace 電子郵件地址相符。',
+    'mail_reply_to' => 'Mail Reply-To Address',
+    'mail_from' => 'Mail From Address',
+    'database_driver' => 'Database Driver',
+    'bs_table_storage' => 'Table Storage',
+    'timezone' => 'Timezone',
+
 ];

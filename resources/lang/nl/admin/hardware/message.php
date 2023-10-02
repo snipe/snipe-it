@@ -51,6 +51,7 @@ return [
         'success'               => 'Je bestand is geïmporteerd',
         'file_delete_success'   => 'Je bestand is succesvol verwijderd',
         'file_delete_error'      => 'Het bestand kon niet worden verwijderd',
+        'file_missing' => 'The file selected is missing',
         'header_row_has_malformed_characters' => 'Een of meer attributen in de kopregel bevatten ongeldige UTF-8-tekens',
         'content_row_has_malformed_characters' => 'Een of meer attributen in de eerste rij inhoud bevat ongeldige UTF-8 tekens',
     ],

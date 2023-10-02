@@ -459,7 +459,7 @@ return [
     'serial_number'        => 'Sarjanumero',
     'item_notes' => ':item muistiinpanot',
     'item_name_var' => ':item nimi',
-    'error_user_company' => 'User and Asset companies missmatch',
+    'error_user_company' => 'Checkout target company and asset company do not match',
     'error_user_company_accept_view' => 'An Asset assigned to you belongs to a different company so you can\'t accept nor deny it, please check with your manager',
     'importer' => [
         'checked_out_to_fullname' => 'Lainattu: koko nimi',
@@ -485,6 +485,8 @@ return [
     ],
     'percent_complete' => '% complete',
     'uploading' => 'Uploading... ',
-    'upload_error' => 'Error uploading file. Please check that there are no empty trailing rows.'
+    'upload_error' => 'Error uploading file. Please check that there are no empty trailing rows.',
+    'copy_to_clipboard' => 'Copy to Clipboard',
+    'copied' => 'Copied!',
 
 ];

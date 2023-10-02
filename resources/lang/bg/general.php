@@ -459,7 +459,7 @@ return [
     'serial_number'        => 'Сериен номер',
     'item_notes' => ':item бележки',
     'item_name_var' => ':item Име',
-    'error_user_company' => 'Несъответсвие между фирмата на потребителя и актива',
+    'error_user_company' => 'Checkout target company and asset company do not match',
     'error_user_company_accept_view' => 'Актива заведен на вас пренадлежи към друга фирма, затова не можете да го приемете или откажете. Свържете се с вашият администратор',
     'importer' => [
         'checked_out_to_fullname' => 'Изписан на: Full Name',
@@ -485,6 +485,8 @@ return [
     ],
     'percent_complete' => '% завърешен',
     'uploading' => 'Качване... ',
-    'upload_error' => 'Грешка при качване. Проверете да няма празни редове в края.'
+    'upload_error' => 'Грешка при качване. Проверете да няма празни редове в края.',
+    'copy_to_clipboard' => 'Copy to Clipboard',
+    'copied' => 'Copied!',
 
 ];

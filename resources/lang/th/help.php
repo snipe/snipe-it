@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'more_info_title' => 'More Info',
+    'more_info_title' => 'ข้อมูลเพิ่มเติม',
 
     'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 

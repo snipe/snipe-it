@@ -49,6 +49,6 @@ return [
     'email_credentials' => 'Hitelesítő adatok elküldése',
     'email_credentials_text' => 'Hitelesítő adatok elküldése a fenti címre',
     'next_save_user' => 'Következő: Felhasználó mentése',
-    'all_assigned_list_generation' => 'Generated on:',
+    'all_assigned_list_generation' => 'Létrehozva:',
     'email_user_creds_on_create' => 'Email this user their credentials?',
 ];

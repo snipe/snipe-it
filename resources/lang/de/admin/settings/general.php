@@ -356,4 +356,10 @@ return [
     'google_login'      => 'Google Workspace Anmeldeeinstellungen',
     'enable_google_login'  => 'Anmelden mit Google Workspace für Benutzer aktivieren',
     'enable_google_login_help'  => 'Benutzer werden nicht automatisch bereitgestellt. Sie müssen ein bestehendes Konto hier UND in Google Workspace haben, und Ihr Benutzername muss mit der E-Mail-Adresse von Google Workspace übereinstimmen. ',
+    'mail_reply_to' => 'Mail Reply-To Address',
+    'mail_from' => 'Mail From Address',
+    'database_driver' => 'Database Driver',
+    'bs_table_storage' => 'Table Storage',
+    'timezone' => 'Timezone',
+
 ];

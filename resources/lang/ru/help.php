@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Подробнее',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'Установка этого флажка приведет к изменению записи об активе с учетом нового местоположения. Если флажок не установлен, то местоположение будет просто отмечено в журнале аудита.<br><br>Обратите внимание, что если этот актив выписан, то он не изменит местоположение человека, актива или места, на которое он выписан.',
 
     'assets' => 'Активы - это предметы, отслеживаемые по серийному номеру или тегу актива. Они обычно являются более ценными предметами для определения конкретного предмета.',
 

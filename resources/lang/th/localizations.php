@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Select a language',
+    'select_language' => 'เลือกภาษา',
     'languages' => [
         'en'=> 'English, US',
         'en-GB'=> 'English, UK',
@@ -30,6 +30,7 @@ return [
         'ga-IE'=> 'Irish',
         'it'=> 'Italian',
         'ja'=> 'Japanese',
+        'km' => 'Khmer',
         'ko'=> 'Korean',
         'lv'=>'Latvian',
         'lt'=> 'Lithuanian',

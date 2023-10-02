@@ -459,7 +459,7 @@ return [
     'serial_number'        => 'Serienummer',
     'item_notes' => ':item notities',
     'item_name_var' => ':item naam',
-    'error_user_company' => 'Gebruikers- en bedrijven voor asset komen niet overeen',
+    'error_user_company' => 'Uitcheck bestemming en activa van bedrijf komen niet overeen',
     'error_user_company_accept_view' => 'Een aan u toegewezen asset is eigendom van een ander bedrijf. U kunt dit dus niet accepteren of weigeren. Neem contact op met uw manager',
     'importer' => [
         'checked_out_to_fullname' => 'Uitgecheckt aan: Volledige naam',
@@ -485,6 +485,8 @@ return [
     ],
     'percent_complete' => '% voltooid',
     'uploading' => 'Uploaden... ',
-    'upload_error' => 'Fout bij uploaden van bestand. Controleer of er geen lege rijen zijn.'
+    'upload_error' => 'Fout bij uploaden van bestand. Controleer of er geen lege rijen zijn.',
+    'copy_to_clipboard' => 'Copy to Clipboard',
+    'copied' => 'Copied!',
 
 ];

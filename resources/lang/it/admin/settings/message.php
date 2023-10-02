@@ -35,10 +35,12 @@ return [
     ],
     'webhook' => [
         'sending' => 'Invio a :app un messaggio di prova...',
+        'success' => 'La tua integrazione :webhook_name funziona!',
         'success_pt1' => 'Successo! Controlla il canale ',
         'success_pt2' => ' con il messaggio di prova, e assicurati di fare clic su SALVA qui sotto per memorizzare le impostazioni.',
         '500' => 'Errore del server 500.',
         'error' => 'Qualcosa è andato storto. :app ha risposto con: :error_message',
+        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
         'error_misc' => 'Qualcosa è andato storto. :( ',
     ]
 ];

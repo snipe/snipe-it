@@ -50,6 +50,7 @@ return [
         'success'               => 'Fișierul dvs. a fost importat',
         'file_delete_success'   => 'Fișierul dvs. a fost șters cu succes',
         'file_delete_error'      => 'Fișierul nu a putut fi șters',
+        'file_missing' => 'The file selected is missing',
         'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
         'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
