@@ -356,4 +356,10 @@ return [
     'google_login'      => 'Inloggningsinställningar för Google Workspace',
     'enable_google_login'  => 'Aktivera inloggning med Google Workspace',
     'enable_google_login_help'  => 'Användarna kommer inte att tilldelas automatiskt. De måste ha ett befintligt konto här OCH i Google Workspace, och deras användarnamn här måste matcha deras e-postadress för Google Workspace. ',
+    'mail_reply_to' => 'Mail Reply-To Address',
+    'mail_from' => 'Mail From Address',
+    'database_driver' => 'Database Driver',
+    'bs_table_storage' => 'Table Storage',
+    'timezone' => 'Timezone',
+
 ];

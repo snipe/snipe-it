@@ -51,6 +51,7 @@ return [
         'success'               => 'Tiedostosi on tuotu',
         'file_delete_success'   => 'Tiedosto on poistettu onnistuneesti',
         'file_delete_error'      => 'Tiedostoa ei voitu poistaa',
+        'file_missing' => 'The file selected is missing',
         'header_row_has_malformed_characters' => 'Yksi tai useampi otsikkorivin attribuutti sisältää epämuodostuneita UTF-8 merkkejä',
         'content_row_has_malformed_characters' => 'Yksi tai useampi ensimmäisen sisältörivin attribuutti sisältää epämuodostuneita UTF-8 merkkejä',
     ],

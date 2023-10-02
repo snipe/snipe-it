@@ -359,4 +359,10 @@ return [
     'google_login'      => 'Google ワークスペースのログイン設定',
     'enable_google_login'  => 'Google ワークスペースでログインするユーザーを有効にする',
     'enable_google_login_help'  => 'ユーザーは自動的にプロビジョニングされません。 ここでは既存のアカウントとGoogle Workspaceのアカウントが必要です。ここではユーザー名がGoogleワークスペースのメールアドレスと一致している必要があります。 ',
+    'mail_reply_to' => 'Mail Reply-To Address',
+    'mail_from' => 'Mail From Address',
+    'database_driver' => 'Database Driver',
+    'bs_table_storage' => 'Table Storage',
+    'timezone' => 'Timezone',
+
 ];

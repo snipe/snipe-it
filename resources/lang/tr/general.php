@@ -462,7 +462,7 @@ Context | Request Context
     'serial_number'        => 'Serial Number',
     'item_notes' => ':item Notes',
     'item_name_var' => ':item Name',
-    'error_user_company' => 'Kullanıcı ve ürün şirketleri uyuşmazlığı',
+    'error_user_company' => 'Checkout target company and asset company do not match',
     'error_user_company_accept_view' => 'Size zimmetlenen ürün başka bir şirkete ait. Kabul yada red edemezsin. Lütfen durumu yöneticinize iletiniz.',
     'importer' => [
         'checked_out_to_fullname' => 'Checked Out to: Full Name',
@@ -488,6 +488,8 @@ Context | Request Context
     ],
     'percent_complete' => '% complete',
     'uploading' => 'Uploading... ',
-    'upload_error' => 'Error uploading file. Please check that there are no empty trailing rows.'
+    'upload_error' => 'Error uploading file. Please check that there are no empty trailing rows.',
+    'copy_to_clipboard' => 'Copy to Clipboard',
+    'copied' => 'Copied!',
 
 ];

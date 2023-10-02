@@ -459,7 +459,7 @@ return [
     'serial_number'        => 'Numer seryjny',
     'item_notes' => ':item Notatki',
     'item_name_var' => ':Item Nazwa',
-    'error_user_company' => 'User and Asset companies missmatch',
+    'error_user_company' => 'Checkout target company and asset company do not match',
     'error_user_company_accept_view' => 'An Asset assigned to you belongs to a different company so you can\'t accept nor deny it, please check with your manager',
     'importer' => [
         'checked_out_to_fullname' => 'Checked Out to: Full Name',
@@ -485,6 +485,8 @@ return [
     ],
     'percent_complete' => '% complete',
     'uploading' => 'Uploading... ',
-    'upload_error' => 'Error uploading file. Please check that there are no empty trailing rows.'
+    'upload_error' => 'Error uploading file. Please check that there are no empty trailing rows.',
+    'copy_to_clipboard' => 'Copy to Clipboard',
+    'copied' => 'Copied!',
 
 ];

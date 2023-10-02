@@ -50,6 +50,7 @@ return [
         'success'               => 'Вашият файл беше въведен.',
         'file_delete_success'   => 'Вашият файл беше изтрит успешно.',
         'file_delete_error'      => 'Файлът не е в състояние да бъде изтрит',
+        'file_missing' => 'The file selected is missing',
         'header_row_has_malformed_characters' => 'Един или повече атрибути на заглавния ред съдържат неправилни UTF-8 символи',
         'content_row_has_malformed_characters' => 'Един или повече атрибути на заглавния ред съдържат неправилни UTF-8 символи',
     ],

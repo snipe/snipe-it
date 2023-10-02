@@ -356,4 +356,10 @@ return [
     'google_login'      => 'Ustawienia logowania Google Workspace',
     'enable_google_login'  => 'Włącz logowanie przez Google Workspace',
     'enable_google_login_help'  => 'Użytkownicy nie będą automatycznie tworzeni. Muszą mieć istniejące konto tutaj i w Google Workspace, a ich nazwa użytkownika musi pasować do ich adresu e-mail w obszarze roboczym Google. ',
+    'mail_reply_to' => 'Mail Reply-To Address',
+    'mail_from' => 'Mail From Address',
+    'database_driver' => 'Database Driver',
+    'bs_table_storage' => 'Table Storage',
+    'timezone' => 'Timezone',
+
 ];

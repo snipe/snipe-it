@@ -26,7 +26,7 @@ return array(
                 'modal'             => 'Ova radnja će razdužiti jedno mesto. | Ova radnja će razdužiti svih :checkedout_seats_count mesta za ovu licencu.',
                 'enabled_tooltip'   => 'Razduži SVA mesta za ovu licencu od korisnika i imovine',
                 'disabled_tooltip'  => 'Ovo je onemogućeno jer trenutno nema zaduženih mesta',
-                'disabled_tooltip_reassignable'  => 'This is disabled because the License is not reassignable',
+                'disabled_tooltip_reassignable'  => 'Ovo je onemogućeno jer Licenca nije premestiva',
                 'success'           => 'Licenca je uspešno razdužena! | Sve licence su uspešno razdužene!',
                 'log_msg'           => 'Razduženo grupnim razduživanjem u ekranu licenci',
             ],

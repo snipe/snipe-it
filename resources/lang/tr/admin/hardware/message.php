@@ -51,6 +51,7 @@ return [
         'success'               => 'Dosyanızı içe aktarıldı',
         'file_delete_success'   => 'Dosyanız başarıyla silindi',
         'file_delete_error'      => 'Dosya silenemedi',
+        'file_missing' => 'The file selected is missing',
         'header_row_has_malformed_characters' => 'Başlık bilgisindeki bir veya daha fazla öznitelik, hatalı UTF-8 karakterleri içeriyor',
         'content_row_has_malformed_characters' => 'Başlıktaki ilk satırda bir veya daha fazla öznitelik, hatalı biçimlendirilmiş UTF-8 karakterleri içeriyor',
     ],

@@ -356,4 +356,10 @@ return [
     'google_login'      => 'Configuración de inicio de sesión de Google Workspace',
     'enable_google_login'  => 'Permitir a los usuarios iniciar sesión con Google Workspace',
     'enable_google_login_help'  => 'Los usuarios no serán provistos automáticamente. Deben tener una cuenta existente aquí AND en Google Workspace, y su nombre de usuario debe coincidir con su dirección de correo electrónico de Google Workspace. ',
+    'mail_reply_to' => 'Mail Reply-To Address',
+    'mail_from' => 'Mail From Address',
+    'database_driver' => 'Database Driver',
+    'bs_table_storage' => 'Table Storage',
+    'timezone' => 'Timezone',
+
 ];

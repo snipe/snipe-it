@@ -35,10 +35,12 @@ return [
     ],
     'webhook' => [
         'sending' => 'Slanje :app probne poruke...',
+        'success' => 'Vaša :webhook_name integracija funkcioniše!',
         'success_pt1' => 'Uspešno! Proverite ',
         'success_pt2' => ' kanal za vašu probnu poruku i obavezno kliknite na SAČUVAJ ispod da biste sačuvali svoja podešavanja.',
         '500' => '500 Greška servera.',
         'error' => 'Nešto nije u redu. :app je adgovorila sa: :error_message',
+        'error_redirect' => 'ERROR: 301/302 :endpoint vraća preusmerenje. Zbog bezbednosnih razloga, mi ne sledimo preusmerenja. Molim vas koristite direktnu krajnju tačku.',
         'error_misc' => 'Nešto nije u redu. :( ',
     ]
 ];
