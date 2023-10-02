@@ -21,6 +21,8 @@ class Field {
 
     public static function makeArray(Field $field, Asset $asset) {
         return $field->getOptions()
+            // filter out any null accidental FieldOptions
+            ->filter()
             ->map(fn($option) => $option->toArray($asset))
             ->filter(fn($result) => $result['value'] != null);
     }
