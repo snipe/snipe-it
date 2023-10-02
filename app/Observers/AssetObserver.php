@@ -6,6 +6,7 @@ use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Setting;
 use Auth;
+use Carbon\Carbon;
 
 class AssetObserver
 {
@@ -118,5 +119,30 @@ class AssetObserver
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->user_id = Auth::id();
         $logAction->logaction('delete');
+    }
+   
+    public function saving(Asset $asset)
+    {
+        //determine if calculated eol and then calculate it - this should only happen on a new asset
+        if(is_null($asset->asset_eol_date) && !is_null($asset->purchase_date) && !is_null($asset->model->eol)){
+            $asset->asset_eol_date = $asset->purchase_date->addMonths($asset->model->eol)->format('Y-m-d');
+            $asset->eol_explicit = false; 
+        } 
+
+       //determine if explicit and set eol_explit to true 
+       if(!is_null($asset->asset_eol_date) && !is_null($asset->purchase_date)) {
+            if($asset->model->eol) {
+                $months = Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date); 
+                if($months != $asset->model->eol) {
+                    $asset->eol_explicit = true;
+                }
+            }
+       } elseif (!is_null($asset->asset_eol_date) && is_null($asset->purchase_date)) {
+           $asset->eol_explicit = true;
+       }
+       if ((!is_null($asset->asset_eol_date)) && (!is_null($asset->purchase_date)) && (is_null($asset->model->eol))) {
+           $asset->eol_explicit = true;
+       }
+
     }
 }

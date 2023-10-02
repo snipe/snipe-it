@@ -660,6 +660,15 @@
                                                 @else
                                                     {{ trans('general.na_no_purchase_date') }}
                                                 @endif
+                                                @if ($asset->eol_explicit)
+                                                    <i class="fas fa-exclamation-triangle text-orange"
+                                                       aria-hidden="true"
+                                                       data-tooltip="true"
+                                                       data-placement="top"
+                                                       data-title="Explicit EOL"
+                                                       title="Explicit EOL">
+                                                    </i>
+                                                @endif
                                             </div>
                                         </div>
                                     @endif

@@ -3,6 +3,7 @@
 namespace App\Presenters;
 
 use App\Models\CustomField;
+use Carbon\CarbonImmutable;
 use DateTime;
 
 /**
@@ -429,10 +430,7 @@ class AssetPresenter extends Presenter
     public function eol_date()
     {
         if (($this->purchase_date) && ($this->model->model) && ($this->model->model->eol)) {
-            $date = date_create($this->purchase_date);
-            date_add($date, date_interval_create_from_date_string($this->model->model->eol.' months'));
-
-            return date_format($date, 'Y-m-d');
+            return CarbonImmutable::parse($this->purchase_date)->addMonths($this->model->model->eol)->format('Y-m-d');
         }
     }
 
