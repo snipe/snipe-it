@@ -35,10 +35,12 @@ return [
     ],
     'webhook' => [
         'sending' => 'Sending :app test message...',
+        'success' => 'Je :webhook_name integratie werkt!',
         'success_pt1' => 'Success! Check the ',
         'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
         '500' => '500 Server Error.',
         'error' => 'Something went wrong. :app responded with: :error_message',
+        'error_redirect' => 'FOUT: 301/302 :endpoint geeft een omleiding. Om veiligheidsredenen volgen we geen omleidingen. Gebruik het werkelijke eindpunt.',
         'error_misc' => 'Something went wrong. :( ',
     ]
 ];

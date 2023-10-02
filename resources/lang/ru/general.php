@@ -430,7 +430,7 @@ return [
     'merged_log_this_user_from' => 'Merged user ID :from_id (:from_username) into this user (ID :to_id - :to_username)',
     'clear_and_save'            => 'Очистить и сохранить',
     'update_existing_values'    => 'Обновить существующие значения?',
-    'auto_incrementing_asset_tags_disabled_so_tags_required' => 'Generating auto-incrementing asset tags is disabled so all rows need to have the "Asset Tag" column populated.',
+    'auto_incrementing_asset_tags_disabled_so_tags_required' => 'Генерация автоинкрементных тегов активов отключена, поэтому во всех строках должен быть заполнен столбец "Asset Tag".',
     'auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created' => 'Примечание: включен автоинкремент для счетчика тегов активов. Поэтому теги будут созданы для строк с пустым полем "Тег Актива". Строки с заполненным полем "Тег актива" будут обновлены в соответствии с предоставленной информацией.',
     'send_welcome_email_to_users'   => 'Отправить приветственное письмо для новых пользователей?',
     'back_before_importing'     => 'Сделать бекап перед импортом?',
@@ -455,11 +455,11 @@ return [
     'no_autoassign_licenses_help' => 'Do not include user for bulk-assigning through the license UI or cli tools.',
     'modal_confirm_generic'      => 'Are you sure?',
     'cannot_be_deleted'      => 'This item cannot be deleted',
-    'undeployable_tooltip'      => 'This item cannot be checked out. Check the quantity remaining.',
+    'undeployable_tooltip'      => 'Этот элемент не может быть выдан. Проверьте оставшееся количество.',
     'serial_number'        => 'Serial Number',
     'item_notes' => ':item Заметки',
     'item_name_var' => ':item Name',
-    'error_user_company' => 'User and Asset companies missmatch',
+    'error_user_company' => 'Компания-получатель актива не соответствует компании-владельцу актива',
     'error_user_company_accept_view' => 'An Asset assigned to you belongs to a different company so you can\'t accept nor deny it, please check with your manager',
     'importer' => [
         'checked_out_to_fullname' => 'Checked Out to: Full Name',
@@ -485,6 +485,8 @@ return [
     ],
     'percent_complete' => '% завершено',
     'uploading' => 'Загрузка... ',
-    'upload_error' => 'Ошибка загрузки файла. Пожалуйста, проверьте, что в конце файла нет пустых строк.'
+    'upload_error' => 'Ошибка загрузки файла. Пожалуйста, проверьте, что в конце файла нет пустых строк.',
+    'copy_to_clipboard' => 'Copy to Clipboard',
+    'copied' => 'Copied!',
 
 ];

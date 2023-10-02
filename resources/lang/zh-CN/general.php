@@ -459,7 +459,7 @@ return [
     'serial_number'        => '序列号',
     'item_notes' => ':item 备注',
     'item_name_var' => ':item 名称',
-    'error_user_company' => '用户和资产公司不匹配',
+    'error_user_company' => 'Checkout target company and asset company do not match',
     'error_user_company_accept_view' => '分配给您的资产属于另一家公司，所以您不能接受或拒绝它，请与您的经理联系。',
     'importer' => [
         'checked_out_to_fullname' => '借出给: Full Name',
@@ -485,6 +485,8 @@ return [
     ],
     'percent_complete' => '% 完成',
     'uploading' => '正在上传... ',
-    'upload_error' => 'Error uploading file. Please check that there are no empty trailing rows.'
+    'upload_error' => 'Error uploading file. Please check that there are no empty trailing rows.',
+    'copy_to_clipboard' => '复制到剪贴板',
+    'copied' => '已复制！',
 
 ];

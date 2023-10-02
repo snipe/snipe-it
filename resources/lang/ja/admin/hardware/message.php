@@ -51,6 +51,7 @@ return [
         'success'               => 'ファイルはインポートされました。',
         'file_delete_success'   => 'ファイルを削除しました。',
         'file_delete_error'      => 'ファイルが削除出来ませんでした。',
+        'file_missing' => 'The file selected is missing',
         'header_row_has_malformed_characters' => 'ヘッダー行の1つ以上の属性に不正な形式のUTF-8文字が含まれています',
         'content_row_has_malformed_characters' => 'コンテンツの最初の行の1つまたは複数の属性に不正な形式のUTF-8文字が含まれています',
     ],

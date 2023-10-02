@@ -459,7 +459,7 @@ return [
     'serial_number'        => 'Numéro de série',
     'item_notes' => 'Notes :item',
     'item_name_var' => 'Nom :item',
-    'error_user_company' => 'Les sociétés de l\'utilisateur·trice et de l\'actif ne correspondent pas',
+    'error_user_company' => 'Checkout target company and asset company do not match',
     'error_user_company_accept_view' => 'Un actif qui vous est assigné appartient à une autre société ; vous ne pouvez pas l\'accepter ou le refuser. Veuillez contacter votre manager',
     'importer' => [
         'checked_out_to_fullname' => 'Associé à : nom complet',
@@ -485,6 +485,8 @@ return [
     ],
     'percent_complete' => '% complete',
     'uploading' => 'Uploading... ',
-    'upload_error' => 'Error uploading file. Please check that there are no empty trailing rows.'
+    'upload_error' => 'Error uploading file. Please check that there are no empty trailing rows.',
+    'copy_to_clipboard' => 'Copy to Clipboard',
+    'copied' => 'Copied!',
 
 ];

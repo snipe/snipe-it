@@ -459,7 +459,7 @@ return [
     'serial_number'        => 'Seriennummer',
     'item_notes' => ':item Notizen',
     'item_name_var' => ':item Name',
-    'error_user_company' => 'Benutzer und Asset Unternehmen stimmen nicht überein',
+    'error_user_company' => 'Checkout target company and asset company do not match',
     'error_user_company_accept_view' => 'Ein Asset, welches dir zugewiesen wurde, gehört einem anderen Unternehmen, sodass du es nicht akzeptieren oder ablehnen kannst. Bitte prüfe das mit deinem Vorgesetzten',
     'importer' => [
         'checked_out_to_fullname' => 'Herausgegeben an: Voller Name',
@@ -485,6 +485,8 @@ return [
     ],
     'percent_complete' => '% vollständig',
     'uploading' => 'Hochladen... ',
-    'upload_error' => 'Fehler beim Hochladen der Datei. Bitte überprüfe, dass es keine leeren Leerzeilen gibt.'
+    'upload_error' => 'Fehler beim Hochladen der Datei. Bitte überprüfe, dass es keine leeren Leerzeilen gibt.',
+    'copy_to_clipboard' => 'In Zwischenablage kopieren',
+    'copied' => 'Kopiert!',
 
 ];

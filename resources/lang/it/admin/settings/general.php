@@ -356,4 +356,10 @@ return [
     'google_login'      => 'Impostazioni Accesso Google Workspace',
     'enable_google_login'  => 'Consenti agli utenti di accedere con Google Workspace',
     'enable_google_login_help'  => 'Gli utenti non verranno creati automaticamente. Devono avere SIA un account qui CHE in Google Workspace e il loro nome utente qui deve corrispondere al loro indirizzo email di Google Workspace. ',
+    'mail_reply_to' => 'Indirizzo Mail Reply-To',
+    'mail_from' => 'Indirizzo Da:',
+    'database_driver' => 'Driver del database',
+    'bs_table_storage' => 'Archiviazione Tabella',
+    'timezone' => 'Fuso orario',
+
 ];
