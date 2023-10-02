@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Actionlog;
+use Illuminate\Support\Facades\Log;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\CheckoutRequest;
@@ -14,26 +15,18 @@ use App\Models\Location;
 use App\Models\Setting;
 use App\Models\Statuslabel;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\View\Label;
-use Auth;
 use Carbon\Carbon;
-use DB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Cookie;
-use Input;
-use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Validator;
 use League\Csv\Reader;
-use League\Csv\Statement;
-use Paginator;
-use Redirect;
-use Response;
-use Slack;
-use Str;
-use TCPDF;
-use View;
+use Illuminate\Support\Facades\Redirect;
 
 /**
  * This class controls all actions related to assets for
@@ -173,9 +166,9 @@ class AssetsController extends Controller
                     if ($field->field_encrypted == '1') {
                         if (Gate::allows('admin')) {
                             if (is_array($request->input($field->db_column))) {
-                                $asset->{$field->db_column} = \Crypt::encrypt(implode(', ', $request->input($field->db_column)));
+                                $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
                             } else {
-                                $asset->{$field->db_column} = \Crypt::encrypt($request->input($field->db_column));
+                                $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
                             }
                         }
                     } else {
@@ -298,10 +291,10 @@ class AssetsController extends Controller
     /**
      * Validate and process asset edit form.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
-     * @since [v1.0]
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse|Redirect
+     *@since [v1.0]
+     * @author [A. Gianotto] [<snipe@snipe.net>]
      */
     public function update(ImageUploadRequest $request, $assetId = null)
     {
@@ -315,9 +308,23 @@ class AssetsController extends Controller
         $asset->status_id = $request->input('status_id', null);
         $asset->warranty_months = $request->input('warranty_months', null);
         $asset->purchase_cost = $request->input('purchase_cost', null);
-        $asset->asset_eol_date  = request('asset_eol_date', null);
-
-        $asset->purchase_date = $request->input('purchase_date', null);
+        $asset->purchase_date = $request->input('purchase_date', null); 
+        if ($request->filled('purchase_date') && !$request->filled('asset_eol_date') && $asset->model->eol) {
+            $asset->purchase_date = $request->input('purchase_date', null); 
+            $asset->asset_eol_date = Carbon::parse($request->input('purchase_date'))->addMonths($asset->model->eol)->format('Y-m-d');
+        } elseif ($request->filled('asset_eol_date')) {
+           $asset->asset_eol_date = $request->input('asset_eol_date', null);
+           $months = Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date);
+           if($asset->model->eol) {
+               if($months != $asset->model->eol) {
+                   $asset->eol_explicit = true;
+               } else {
+                   $asset->eol_explicit = false;
+               }
+           } else {
+               $asset->eol_explicit = true;
+           }
+        }
         $asset->supplier_id = $request->input('supplier_id', null);
         $asset->expected_checkin = $request->input('expected_checkin', null);
 
@@ -342,7 +349,7 @@ class AssetsController extends Controller
                 unlink(public_path().'/uploads/assets/'.$asset->image);
                 $asset->image = '';
             } catch (\Exception $e) {
-                \Log::info($e);
+                Log::info($e);
             }
         }
 
@@ -370,9 +377,9 @@ class AssetsController extends Controller
                 if ($field->field_encrypted == '1') {
                     if (Gate::allows('admin')) {
                         if (is_array($request->input($field->db_column))) {
-                            $asset->{$field->db_column} = \Crypt::encrypt(implode(', ', $request->input($field->db_column)));
+                            $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
                         } else {
-                            $asset->{$field->db_column} = \Crypt::encrypt($request->input($field->db_column));
+                            $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
                         }
                     }
                 } else {
@@ -420,7 +427,7 @@ class AssetsController extends Controller
             try {
                 Storage::disk('public')->delete('assets'.'/'.$asset->image);
             } catch (\Exception $e) {
-                \Log::debug($e);
+                Log::debug($e);
             }
         }
 
@@ -535,7 +542,7 @@ class AssetsController extends Controller
 
                     return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
                 } catch (\Exception $e) {
-                    \Log::debug('The barcode format is invalid.');
+                    Log::debug('The barcode format is invalid.');
 
                     return response(file_get_contents(public_path('uploads/barcodes/invalid_barcode.gif')))->header('Content-type', 'image/gif');
                 }
@@ -856,7 +863,7 @@ class AssetsController extends Controller
             'next_audit_date' => 'date|nullable',
         ];
 
-        $validator = \Validator::make($request->all(), $rules);
+        $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
             return response()->json(Helper::formatStandardApiResponse('error', null, $validator->errors()->all()));
@@ -873,7 +880,7 @@ class AssetsController extends Controller
         // Check to see if they checked the box to update the physical location,
         // not just note it in the audit notes
         if ($request->input('update_location') == '1') {
-            \Log::debug('update location in audit');
+            Log::debug('update location in audit');
             $asset->location_id = $request->input('location_id');
         }
 
