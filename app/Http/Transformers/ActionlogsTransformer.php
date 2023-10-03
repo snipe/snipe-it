@@ -178,7 +178,7 @@ class ActionlogsTransformer
         $company = Company::get();
 
 
-            if(array_key_exists('rtd_location_id',$clean_meta)) {
+        if(array_key_exists('rtd_location_id',$clean_meta)) {
             $clean_meta['rtd_location_id']['old'] = $clean_meta['rtd_location_id']['old'] ? "[id: ".$clean_meta['rtd_location_id']['old']."] ". $location->find($clean_meta['rtd_location_id']['old'])->name : trans('general.unassigned');
             $clean_meta['rtd_location_id']['new'] = $clean_meta['rtd_location_id']['new'] ? "[id: ".$clean_meta['rtd_location_id']['new']."] ". $location->find($clean_meta['rtd_location_id']['new'])->name : trans('general.unassigned');
             $clean_meta['Default Location'] = $clean_meta['rtd_location_id'];
@@ -234,7 +234,7 @@ class ActionlogsTransformer
             $clean_meta['EOL date'] = $clean_meta['asset_eol_date'];
             unset($clean_meta['asset_eol_date']);
      
-  }
+        }
 
         return $clean_meta;
      
