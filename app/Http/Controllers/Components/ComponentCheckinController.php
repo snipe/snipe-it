@@ -30,7 +30,6 @@ class ComponentCheckinController extends Controller
 
         // This could probably be done more cleanly but I am very tired. - @snipe
         if ($component_assets = DB::table('components_assets')->find($component_asset_id)) {
-
             if (is_null($component = Component::find($component_assets->component_id))) {
                 return redirect()->route('components.index')->with('error', trans('admin/components/messages.not_found'));
             }
