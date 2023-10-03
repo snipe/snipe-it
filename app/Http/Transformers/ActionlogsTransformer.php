@@ -175,6 +175,7 @@ class ActionlogsTransformer
         $supplier = Supplier::withTrashed()->get();
         $model = AssetModel::withTrashed()->get();
         $company = Company::get();
+        $custom_fields = CustomField::all();
 
 
         if(array_key_exists('rtd_location_id',$clean_meta)) {
@@ -233,6 +234,18 @@ class ActionlogsTransformer
             $clean_meta['EOL date'] = $clean_meta['asset_eol_date'];
             unset($clean_meta['asset_eol_date']);
         }
+
+        foreach ($clean_meta as $fieldname => $value){
+            if (str_starts_with($fieldname, '_snipeit_')) { 
+                foreach ($custom_fields as $custom_field) {
+                    if ($custom_field->db_column == $fieldname) {
+                        $clean_meta[$custom_field->name] = $clean_meta[$fieldname];
+                        unset($clean_meta[$fieldname]);
+                    }
+                }
+            }    
+        }        
+        
 
         return $clean_meta;
 
