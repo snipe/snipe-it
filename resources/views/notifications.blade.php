@@ -3,7 +3,7 @@
     <div class="alert alert-danger fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
-        <strong>{{ trans('general.notification_error') }}</strong>
+        <strong>{{ trans('general.notification_error') }}:</strong>
          {{ trans('general.notification_error_hint') }}
     </div>
 </div>
@@ -16,7 +16,7 @@
         <div class="alert alert-success fade in">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <i class="fas fa-check faa-pulse animated"></i>
-            <strong>{{ trans('general.notification_success') }} </strong>
+            <strong>{{ trans('general.notification_success') }}: </strong>
             {{ $message }}
         </div>
     </div>
@@ -28,7 +28,7 @@
     <div class="alert alert-success fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <i class="fas fa-check faa-pulse animated"></i>
-        <strong>{{ trans('general.notification_success') }} </strong>
+        <strong>{{ trans('general.notification_success') }}: </strong>
         {{ $message }}
     </div>
 </div>
@@ -67,7 +67,7 @@
             <div class="alert alert-info fade in">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 <i class="fas fa-info-circle faa-pulse animated"></i>
-                <strong>{{ trans('general.consumable_information') }} </strong>
+                <strong>{{ trans('general.consumable_information') }}</strong>
                 <ul><li><b>{{ trans('general.consumable_name') }}</b> {{ $consumable->name }}</li></ul>
             </div>
         </div>
@@ -120,7 +120,7 @@
     <div class="alert alert alert-danger fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
-        <strong>{{ trans('general.notification_error') }} </strong>
+        <strong>{{ trans('general.notification_error') }}: </strong>
        {{ trans('general.notification_bulk_error_hint') }}
             @foreach($messages as $message) 
                 <ul>
@@ -137,7 +137,7 @@
     <div class="alert alert-warning fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
-        <strong>{{ trans('general.notification_warning') }} </strong>
+        <strong>{{ trans('general.notification_warning') }}: </strong>
         {{ $message }}
     </div>
 </div>
@@ -149,7 +149,7 @@
     <div class="alert alert-info fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <i class="fas fa-info-circle faa-pulse animated"></i>
-        <strong>{{ trans('general.notification_info') }} </strong>
+        <strong>{{ trans('general.notification_info') }}: </strong>
         {{ $message }}
     </div>
 </div>

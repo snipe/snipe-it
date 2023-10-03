@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'CSV ஐ பதிவிறக்குக',
     'eol' 			=> ', EOL',
     'id'      		=> 'ஐடி',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> 'இருப்பிடம்',
     'purchase_cost'	=> 'செலவு',
     'purchase_date'	=> 'வாங்கப்பட்டது',

@@ -2,6 +2,7 @@
 
 return [
     'does_not_exist' => 'Företaget finns inte.',
+    'deleted'        => 'Deleted company',
     'assoc_users'    => 'Detta företag är för närvarande är associerade med minst en modell och kan inte tas bort. Vänligen uppdatera din modeller för att inte längre referera till detta företag och försök igen. ',
     'create' => [
         'error'   => 'Företaget skapades inte, försök igen.',

@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'Tikiake CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> 'Wāhi',
     'purchase_cost'	=> 'Te utu',
     'purchase_date'	=> 'Kua hokona',

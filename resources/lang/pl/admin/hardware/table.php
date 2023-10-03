@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'Pobierz CSV',
     'eol' 			=> 'Koniec licencji',
     'id'      		=> 'ID',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> 'Lokalizacja',
     'purchase_cost'	=> 'Koszt',
     'purchase_date'	=> 'Zakup',

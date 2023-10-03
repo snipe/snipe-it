@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Показати видалених користувачів',
     'title' 				=> 'Назва',
 	'to_restore_them'		=> 'щоб відновити їх.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'Оновити користувача',
     'username' 				=> 'Ім\'я кристувача',
 	'user_deleted_text' 	=> 'Цього користувача було позначено видаленим.',

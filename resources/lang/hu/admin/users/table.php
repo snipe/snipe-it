@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'A törölt felhasználók megjelenítése',
     'title' 				=> 'Cím',
 	'to_restore_them'		=> 'visszaállítani őket.',
+    'total_assets_cost'     => "Eszközök összes költsége",
     'updateuser' 			=> 'Felhasználó frissítése',
     'username' 				=> 'Felhasználónév',
 	'user_deleted_text' 	=> 'Ezt a felhasználót törölték.',

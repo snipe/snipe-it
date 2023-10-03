@@ -26,6 +26,7 @@ return array(
                 'modal'             => 'Esto activará el checkin de un asiento. | Esta acción registrará todos los asientos :checkedout_seats_count para esta licencia.',
                 'enabled_tooltip'   => 'Checkin TODOS los asientos para esta licencia tanto de usuarios como de activos',
                 'disabled_tooltip'  => 'This is disabled because there are no seats currently checked out',
+                'disabled_tooltip_reassignable'  => 'This is disabled because the License is not reassignable',
                 'success'           => 'License successfully checked in! | All licenses were successfully checked in!',
                 'log_msg'           => 'Checked in via bulk license checkout in license GUI',
             ],

@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'CSV татаж авах',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> 'Байршил',
     'purchase_cost'	=> 'Зардал',
     'purchase_date'	=> 'Худалдан авсан',

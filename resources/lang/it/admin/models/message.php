@@ -2,6 +2,7 @@
 
 return array(
 
+    'deleted' => 'Modello bene eliminato',
     'does_not_exist' => 'Il modello non esiste.',
     'no_association' => 'ATTENZIONE! Il modello di bene per questo oggetto non è valido o è mancante!',
     'no_association_fix' => 'Ciò romperà cose in modi strani e brutti. Modifica questo bene per assegnargli un modello.',

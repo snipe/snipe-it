@@ -26,6 +26,7 @@ return array(
                 'modal'             => 'Diese Aktion wird einen Sitz zurücknehmen. | Diese Aktion wird alle :checkedout_seats_count Sitze für diese Lizenz zurücknehmen.',
                 'enabled_tooltip'   => 'ALLE Plätze für diese Lizenz zurücknehmen, sowohl von Benutzern als auch von Assets',
                 'disabled_tooltip'  => 'Es ist deaktiviert, da derzeit keine Plätze zum herausgegeben verfügbar sind',
+                'disabled_tooltip_reassignable'  => 'Dies ist deaktiviert, da die Lizenz nicht zuweisbar ist',
                 'success'           => 'Lizenz erfolgreich zurückgenommen! | Alle Lizenzen wurden erfolgreich zurückgenommen!',
                 'log_msg'           => 'Zurückgenommen über Massen-Zurücknehmen in der Lizenzübersicht',
             ],

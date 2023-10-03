@@ -2,6 +2,7 @@
 
 return array(
 
+    'deleted' => 'Törölt beszállító',
     'does_not_exist' => 'Beszállító nem létezik.',
 
 

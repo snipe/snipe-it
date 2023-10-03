@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Tunjukkan Pengguna Dipadamkan',
     'title' 				=> 'Tajuk',
 	'to_restore_them'		=> 'untuk memulihkannya.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'Kemaskini Pengguna',
     'username' 				=> 'Nama pengguna',
 	'user_deleted_text' 	=> 'Pengguna ini telah ditandakan sebagai dipadamkan.',

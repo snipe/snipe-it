@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Ipakita ang Nai-delete na mga User',
     'title' 				=> 'Ang Pamagat',
 	'to_restore_them'		=> 'upang ibalik sa dati.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'I-update ang User',
     'username' 				=> 'Ang pangalan ng gumagamit',
 	'user_deleted_text' 	=> 'Ang user na ito ay namarkahang nai-delete na.',

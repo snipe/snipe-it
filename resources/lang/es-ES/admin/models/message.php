@@ -2,8 +2,9 @@
 
 return array(
 
+    'deleted' => 'Modelo del activo eliminado',
     'does_not_exist' => 'Modelo inexistente.',
-    'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
+    'no_association' => 'ADVERTENCIA! El modelo del activo para este ítem es inválido o no existe!',
     'no_association_fix' => 'Esto romperá cosas de formas extrañas y horribles. Edite este activo ahora para asignarle un modelo.',
     'assoc_users'	 => 'Este modelo está asignado a uno o más equipos y no puede ser eliminado',
 

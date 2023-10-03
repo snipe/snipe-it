@@ -24,7 +24,7 @@ return array(
         'error'   		=> 'Component is niet uitgecheckt, probeer het nogmaals',
         'success' 		=> 'Component succesvol uitgecheckt.',
         'user_does_not_exist' => 'Deze gebruiker is ongeldig. Probeer het opnieuw.',
-        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
+        'unavailable'      => 'Er zijn niet genoeg componenten over: :resterend, :requested gevraagd ',
     ),
 
     'checkin' => array(

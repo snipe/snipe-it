@@ -46,7 +46,7 @@ return [
     'inventory_report' => 'Bestandsbericht',
     'min_QTY' => 'Mindestmenge',
     'name' => 'Name',
-    'new_item_checked' => 'Ein neuer Gegenstand wurde unter Ihrem Namen ausgecheckt. Details folgen.',
+    'new_item_checked' => 'Ein neuer Gegenstand wurde unter Ihrem Namen ausgecheckt. Details finden Sie weiter unten.',
     'password' => 'Passwort:',
     'password_reset' => 'Passwort zurücksetzen',
 

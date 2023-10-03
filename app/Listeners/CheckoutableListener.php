@@ -79,13 +79,15 @@ class CheckoutableListener
         /**
          * Send the appropriate notification
          */
-        $acceptances = CheckoutAcceptance::where('checkoutable_id', $event->checkoutable->id)
-                                        ->where('assigned_to_id', $event->checkedOutTo->id)
-                                        ->get();
+        if ($event->checkedOutTo && $event->checkoutable){
+            $acceptances = CheckoutAcceptance::where('checkoutable_id', $event->checkoutable->id)
+                                            ->where('assigned_to_id', $event->checkedOutTo->id)
+                                            ->get();
 
-        foreach($acceptances as $acceptance){
-            if($acceptance->isPending()){
-                $acceptance->delete();
+            foreach($acceptances as $acceptance){
+                if($acceptance->isPending()){
+                    $acceptance->delete();
+                }
             }
         }
 
@@ -142,9 +144,11 @@ class CheckoutableListener
         $notifiables = collect();
 
         /**
-         * Notify the user who checked out the item
+         * Notify who checked out the item as long as the model can route notifications
          */
-        $notifiables->push($event->checkedOutTo);
+        if (method_exists($event->checkedOutTo, 'routeNotificationFor')) {
+            $notifiables->push($event->checkedOutTo);
+        }
 
         /**
          * Notify Admin users if the settings is activated

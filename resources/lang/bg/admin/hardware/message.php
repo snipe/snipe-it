@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Внимание:</strong> Този актив е маркиран като невъзможен за предоставяне. Ако статусът е променен, моля обновете актива.',
     'does_not_exist' 	=> 'Активът не съществува.',
-    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
+    'does_not_exist_or_not_requestable' => 'Актива не съществува или не може да бъде предоставян.',
     'assoc_users'	 	=> 'Активът е изписан на потребител и не може да бъде изтрит. Моля впишете го обратно и след това опитайте да го изтриете отново.',
 
     'create' => [
@@ -16,14 +16,14 @@ return [
         'error'   			=> 'Активът не беше обновен. Моля опитайте отново.',
         'success' 			=> 'Активът обновен успешно.',
         'nothing_updated'	=>  'Няма избрани полета, съответно нищо не беше обновено.',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'no_assets_selected'  =>  'Няма избрани активи, така че нищо не бе обновено.',
     ],
 
     'restore' => [
         'error'   		=> 'Активът не беше възстановен. Моля опитайте отново.',
         'success' 		=> 'Активът възстановен успешно.',
-        'bulk_success' 		=> 'Asset restored successfully.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'bulk_success' 		=> 'Активът възстановен успешно.',
+        'nothing_updated'   => 'Няма избрани активи, така че нищо не бе възстановено.', 
     ],
 
     'audit' => [
@@ -50,8 +50,9 @@ return [
         'success'               => 'Вашият файл беше въведен.',
         'file_delete_success'   => 'Вашият файл беше изтрит успешно.',
         'file_delete_error'      => 'Файлът не е в състояние да бъде изтрит',
-        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
-        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'file_missing' => 'The file selected is missing',
+        'header_row_has_malformed_characters' => 'Един или повече атрибути на заглавния ред съдържат неправилни UTF-8 символи',
+        'content_row_has_malformed_characters' => 'Един или повече атрибути на заглавния ред съдържат неправилни UTF-8 символи',
     ],
 
 

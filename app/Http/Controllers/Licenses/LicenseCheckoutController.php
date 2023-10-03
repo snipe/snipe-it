@@ -63,6 +63,7 @@ class LicenseCheckoutController extends Controller
 
         $licenseSeat = $this->findLicenseSeatToCheckout($license, $seatId);
         $licenseSeat->user_id = Auth::id();
+        $licenseSeat->notes = $request->input('notes');
         
 
         $checkoutMethod = 'checkoutTo'.ucwords(request('checkout_to_type'));

@@ -16,6 +16,7 @@ return [
     'dl_csv' 		=> 'دانلود CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'شناسه',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> 'مکان',
     'purchase_cost'	=> 'هزینه',
     'purchase_date'	=> 'خریداری شده',

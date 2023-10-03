@@ -2,6 +2,7 @@
 
 return array(
 
+    'deleted' => 'Deleted asset model',
     'does_not_exist' => 'Malli ei löydy.',
     'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
     'no_association_fix' => 'Tämä tulee rikkomaam asioita oudoilla ja kauhistuttavilla tavoilla. Muokkaa tätä laitetta nyt määrittääksesi sille mallin.',

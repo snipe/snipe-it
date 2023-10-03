@@ -44,12 +44,6 @@
  * http://jquery.org/license
  */
 
-/*!
- * vue-resource v1.5.3
- * https://github.com/pagekit/vue-resource
- * Released under the MIT License.
- */
-
 /**
  * @license
  * Lodash <https://lodash.com/>

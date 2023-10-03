@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Whakaatu Kaiwhakamahi Kua Mukua',
     'title' 				=> 'Taitara',
 	'to_restore_them'		=> 'ki te whakaora ia ratou.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'Whakahōu Kaiwhakamahi',
     'username' 				=> 'Ingoa Kaiwhakamahi',
 	'user_deleted_text' 	=> 'Kua tohua tenei kaiwhakamahi kia mukua.',

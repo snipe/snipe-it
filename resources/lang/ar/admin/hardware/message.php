@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong> تحذير: </strong> تم تحديد الحالة لهذا الأصل بانه غير قابل للتوزيع حاليا. إذا تغيرت هذه الحالة، يرجى تحديث حالة الأصل.',
     'does_not_exist' 	=> 'الأصل غير موجود.',
-    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
+    'does_not_exist_or_not_requestable' => 'ذالك الأصل غير موجود أو غير قابل للطلب.',
     'assoc_users'	 	=> 'هذا الأصل مخرج حاليا لمستخدم ولا يمكن حذفه. يرجى التحقق من الأصل أولا، ثم حاول الحذف مرة أخرى. ',
 
     'create' => [
@@ -16,7 +16,7 @@ return [
         'error'   			=> 'لم يتم تحديث الأصل، يرجى إعادة المحاولة',
         'success' 			=> 'تم تحديث الأصل بنجاح.',
         'nothing_updated'	=>  'لم يتم اختيار أي حقول، لذلك لم يتم تحديث أي شيء.',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
+        'no_assets_selected'  =>  'لم يتم اختيار أي أصول، لذلك لم يتم تحديث أي شيء.',
     ],
 
     'restore' => [
@@ -50,6 +50,7 @@ return [
         'success'               => 'تم استيراد الملف الخاص بك',
         'file_delete_success'   => 'تم حذف ملفك بنجاح',
         'file_delete_error'      => 'تعذر حذف الملف',
+        'file_missing' => 'The file selected is missing',
         'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
         'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],

@@ -51,6 +51,7 @@ return [
         'success'               => 'Votre fichier a bien été importé',
         'file_delete_success'   => 'Votre fichier a été correctement supprimé',
         'file_delete_error'      => 'Le fichier n’a pas pu être supprimé',
+        'file_missing' => 'The file selected is missing',
         'header_row_has_malformed_characters' => 'Un ou plusieurs attributs dans la ligne d\'en-tête contiennent des caractères UTF-8 invalides',
         'content_row_has_malformed_characters' => 'Un ou plusieurs attributs dans la première ligne de contenu contiennent des caractères UTF-8 invalides',
     ],

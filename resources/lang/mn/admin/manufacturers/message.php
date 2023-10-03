@@ -2,7 +2,7 @@
 
 return array(
 
-    'support_url_help' => 'Use <code>{LOCALE}</code> and <code>{SERIAL}</code> in your URL as variables to have those values auto-populate when viewing assets.',
+    'support_url_help' => 'Variables <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, and <code>{MODEL_NAME}</code> may be used in your URL to have those values auto-populate when viewing assets - for example https://support.apple.com/{LOCALE}/{SERIAL}.',
     'does_not_exist' => 'Үйлдвэрлэгч байхгүй байна.',
     'assoc_users'	 => 'Энэ үйлдвэр нь одоогоор хамгийн багадаа нэг загвартай холбоотой бөгөөд устгах боломжгүй. Энэ загварыг дахин үйлдвэрлэхээ больсон загвараа шинэчлээд дахин оролдоно уу.',
 

@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'நீக்கப்பட்ட பயனர்களைக் காண்பி',
     'title' 				=> 'தலைப்பு',
 	'to_restore_them'		=> 'அவற்றை மீட்டெடுக்க',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'பயனர் புதுப்பிக்கவும்',
     'username' 				=> 'பயனர்பெயர்',
 	'user_deleted_text' 	=> 'இந்த பயனர் நீக்கப்பட்டதாக குறிக்கப்பட்டுள்ளது.',

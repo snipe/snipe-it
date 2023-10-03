@@ -221,7 +221,11 @@
                                                 <strong>{{ trans('admin/hardware/form.serial') }}</strong>
                                             </div>
                                             <div class="col-md-6">
-                                                {{ $asset->serial  }}
+                                                <span class="js-copy">{{ $asset->serial  }}</span>
+
+                                                <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
+                                                    <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
+                                                </i>
                                             </div>
                                         </div>
                                     @endif
@@ -655,6 +659,15 @@
                                                 {{ Carbon::parse($asset->asset_eol_date)->diffForHumans(['parts' => 2]) }}
                                                 @else
                                                     {{ trans('general.na_no_purchase_date') }}
+                                                @endif
+                                                @if ($asset->eol_explicit)
+                                                    <i class="fas fa-exclamation-triangle text-orange"
+                                                       aria-hidden="true"
+                                                       data-tooltip="true"
+                                                       data-placement="top"
+                                                       data-title="Explicit EOL"
+                                                       title="Explicit EOL">
+                                                    </i>
                                                 @endif
                                             </div>
                                         </div>

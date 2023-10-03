@@ -23,8 +23,8 @@ return [
     'restore' => [
         'error'   		=> 'Asset is niet hersteld, probeer het opnieuw',
         'success' 		=> 'Asset is succesvol hersteld.',
-        'bulk_success' 		=> 'Asset restored successfully.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'bulk_success' 		=> 'Asset is succesvol hersteld.',
+        'nothing_updated'   => 'Er zijn geen assets geselecteerd, er is dus niets hersteld.', 
     ],
 
     'audit' => [
@@ -51,8 +51,9 @@ return [
         'success'               => 'Je bestand is geïmporteerd',
         'file_delete_success'   => 'Je bestand is succesvol verwijderd',
         'file_delete_error'      => 'Het bestand kon niet worden verwijderd',
-        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
-        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'file_missing' => 'The file selected is missing',
+        'header_row_has_malformed_characters' => 'Een of meer attributen in de kopregel bevatten ongeldige UTF-8-tekens',
+        'content_row_has_malformed_characters' => 'Een of meer attributen in de eerste rij inhoud bevat ongeldige UTF-8 tekens',
     ],
 
 

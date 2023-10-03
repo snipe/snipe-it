@@ -29,6 +29,7 @@ return array(
     'show_deleted'          => 'Εμφάνιση διαγραμμένων χρηστών',
     'title' 				=> 'Τίτλος',
 	'to_restore_them'		=> 'για την αποκατάστασή τους.',
+    'total_assets_cost'     => "Total Assets Cost",
     'updateuser' 			=> 'Ενημέρωση χρήστη',
     'username' 				=> 'Όνομα χρήστη',
 	'user_deleted_text' 	=> 'Αυτός ο χρήστης έχει επισημανθεί ως διαγραμμένος.',

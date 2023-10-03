@@ -14,6 +14,7 @@ return [
     'dl_csv' 		=> 'ดาวน์โหลด CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
+    'last_checkin_date' => 'Last Checkin Date',
     'location' 		=> 'ที่ตั้ง',
     'purchase_cost'	=> 'ราคา',
     'purchase_date'	=> 'สั่งซื้อ',

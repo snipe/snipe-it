@@ -2,14 +2,17 @@
 
 return [
     'bulk_delete'		=> 'Bevestig bulk verwijdering van assets',
-    'bulk_restore'      => 'Confirm Bulk Restore Assets', 
+    'bulk_restore'      => 'Bevestig bulk herstel van assets', 
   'bulk_delete_help'	=> 'Bekijk de assets voor bulkverwijdering hieronder. Eenmaal verwijderd, kunnen deze assets worden hersteld, maar ze zullen niet langer geassocieerd worden met gebruikers waaraan ze momenteel zijn toegewezen.',
-  'bulk_restore_help'	=> 'Review the assets for bulk restoration below. Once restored, these assets will not be associated with any users they were previously assigned to.',
+  'bulk_restore_help'	=> 'Bekijk hieronder de items voor bulk herstel. Eenmaal hersteld, worden deze middelen niet meer gekoppeld aan gebruikers waaraan ze eerder waren toegewezen.',
   'bulk_delete_warn'	=> 'Je staat op het punt om :asset_count assets te verwijderen.',
-  'bulk_restore_warn'	=> 'You are about to restore :asset_count assets.',
+  'bulk_restore_warn'	=> 'U staat op het punt om :asset_count asset te herstellen.',
     'bulk_update'		=> 'Meerdere activa bijwerken',
     'bulk_update_help'	=> 'Met dit formulier kun je meerdere assets tegelijk bijwerken. Vul alleen de velden in die je moet wijzigen. Alle lege velden blijven ongewijzigd. ',
     'bulk_update_warn'	=> 'Je staat op het punt om de eigenschappen van één bezitting te bewerken. Je staat op het punt om de eigenschappen van :asset_count bezittingen te bewerken.',
+    'bulk_update_with_custom_field' => 'Let op: de assets zijn :asset_model_count verschillende soorten modellen.',
+    'bulk_update_model_prefix' => 'Op modellen', 
+    'bulk_update_custom_field_unique' => 'Dit is een uniek veld en kan niet in bulk worden bewerkt.',
     'checkedout_to'		=> 'Uitgecheckt aan',
     'checkout_date'		=> 'Uitgecheckt datum',
     'checkin_date'		=> 'Ingecheckt datum',
@@ -48,7 +51,7 @@ return [
     'asset_location_update_default' => 'Update alleen standaard locatie',
     'asset_not_deployable' => 'Deze Asset status is niet uitgeefbaar. Dit Asset kan niet uitgegeven worden.',
     'asset_deployable' => 'Deze status is uitgeefbaar. Dit Asset kan uitgegeven worden.',
-    'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
+    'processing_spinner' => 'Verwerken... (Dit kan enige tijd duren bij grote bestanden)',
     'optional_infos'  => 'Optionele informatie',
     'order_details'   => 'Bestelling Gerelateerde Informatie'
 ];

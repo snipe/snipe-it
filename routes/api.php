@@ -280,16 +280,8 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                 Api\ConsumablesController::class, 
                 'getDataView'
             ]
-        )->name('api.consumables.showUsers');
+        )->name('api.consumables.show.users');
 
-
-        // This is LEGACY endpoint URL and should be removed in the next major release
-        Route::get('view/{id}/users',
-              [
-                  Api\ConsumablesController::class,
-                  'getDataView'
-              ]
-        )->name('api.consumables.showUsers');
 
         Route::post('{consumable}/checkout',
             [

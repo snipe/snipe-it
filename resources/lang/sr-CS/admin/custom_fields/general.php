@@ -49,9 +49,9 @@ return [
     'unique' => 'Jedinstven',
     'display_in_user_view' => 'Dozvoli zaduženom korisniku da vidi ove vrednosti na njihovoj stranici pregleda zadužene imovine',
     'display_in_user_view_table' => 'Vidljivo korisniku',
-    'auto_add_to_fieldsets' => 'Automatically add this to every new fieldset',
-    'add_to_preexisting_fieldsets' => 'Add to any existing fieldsets',
-    'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector.',
-    'show_in_listview_short' => 'Show in lists',
+    'auto_add_to_fieldsets' => 'Automatski dodati ovo svakoj novoj grupi polja',
+    'add_to_preexisting_fieldsets' => 'Dodaj svim postojećim grupama polja',
+    'show_in_listview' => 'Prikaži podrazumevano u novim listama. Potvrđeni korisnici će i dalje moći da je prikažu i sakriju putem izbornika kolona.',
+    'show_in_listview_short' => 'Prikaži u listama',
 
 ];

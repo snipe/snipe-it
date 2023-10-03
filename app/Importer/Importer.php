@@ -28,7 +28,7 @@ abstract class Importer
     /**
      * Default Map of item fields->csv names
      *
-     * This has been moved into Livewire/Importer.php to be more granular.
+     * This has been moved into app/Http/Livewire/Importer.php to be more granular.
      * @todo - remove references to this property since we don't use it anymore.
      *
      * @var array

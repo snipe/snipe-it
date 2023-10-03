@@ -12,7 +12,7 @@ return [
     'none_models'                       => 'No hay suficientes activos disponibles para :model para asignar. :qty son requeridos. ',
     'none_licenses'                     => 'No hay suficientes licencias disponibles para :license para asignar. :qty son requeridos. ',
     'none_consumables'                  => 'No hay suficientes unidades disponibles de :consumable para asignar. :qty son requeridas. ',
-    'none_accessory'                    => 'No hay suficientes unidades disponibles de :accessory para asignar. :qty son requeridas. ',
+    'none_accessory'                    => 'No hay suficientes unidades disponibles de :accesory para asignar. :qty son requeridas. ',
     'append_accessory'                  => 'Añadir accesorio',
     'update_appended_accessory'         => 'Actualizar accesorio adjunto',
     'append_consumable'                 => 'Añadir consumible',

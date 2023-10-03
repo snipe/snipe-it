@@ -12,7 +12,7 @@ return [
     'clone'  					=> 'Cloner le Bien',
     'deployable'  				=> 'Déployable',
     'deleted'  					=> 'Cet actif a été supprimé.',
-    'delete_confirm'            => 'Are you sure you want to delete this asset?',
+    'delete_confirm'            => 'Êtes-vous sûr·e de vouloir supprimer cet actif ?',
     'edit'  					=> 'Editer le Bien',
     'model_deleted'  			=> 'Ce modèle d\'actifs a été supprimé. Vous devez restaurer le modèle avant de pouvoir restaurer l\'actif.',
     'model_invalid'             => 'Le modèle de cette ressource n\'est pas valide.',
