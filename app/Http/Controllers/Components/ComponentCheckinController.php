@@ -43,7 +43,7 @@ class ComponentCheckinController extends Controller
             return view('components/checkin', compact('component_assets', 'component', 'asset'));
         }
 
-//        return redirect()->route('components.index')->with('error', trans('admin/components/messages.not_found'));
+        return redirect()->route('components.index')->with('error', trans('admin/components/messages.not_found'));
     }
 
     /**
