@@ -175,8 +175,7 @@ class ActionlogsTransformer
     {   $location = Location::withTrashed()->get();
         $supplier = Supplier::withTrashed()->get();
         $model = AssetModel::withTrashed()->get();
-        $company = Company::get();
-        $custom_fields = CustomField::all();
+        $company = Company::get();();
 
 
         if(array_key_exists('rtd_location_id',$clean_meta)) {
@@ -239,7 +238,3 @@ class ActionlogsTransformer
         return $clean_meta;
 
     }
-
-
-
-}
