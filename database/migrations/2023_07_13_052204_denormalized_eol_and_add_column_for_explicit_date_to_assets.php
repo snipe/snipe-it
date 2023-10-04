@@ -23,7 +23,6 @@ class DenormalizedEolAndAddColumnForExplicitDateToAssets extends Migration
 
 
         // Update the eol_explicit column with the value from asset_eol_date if it exists and is different from the calculated value
-        $assetsToUpdateEolExplicit = [];
             Asset::whereNotNull('asset_eol_date')->with('model')->chunkById(500, function ($assetsWithEolDates) {
                 foreach ($assetsWithEolDates as $asset) {
                     if ($asset->asset_eol_date && $asset->purchase_date) {
@@ -34,31 +33,30 @@ class DenormalizedEolAndAddColumnForExplicitDateToAssets extends Migration
                         }
                         if ($asset->model->eol) {
                             if ($months != $asset->model->eol) {
-                                 $assetsToUpdateEolExplicit = $asset->id;
-                                //$asset->update(['eol_explicit' => true]);
+                                $asset->update(['eol_explicit' => true]);
                             }
                         } else {
-                            $assetsToUpdateEolExplicit = $asset->id;
-                            //$asset->update(['eol_explicit' => true]);
+                            $asset->update(['eol_explicit' => true]);
                         }
                     }
                 }
             });
-        Asset::whereIn('id', $assetsToUpdateEolExplicit)->update(['eol_explicit' => true]);
 
         // Update the asset_eol_date column with the calculated value if it doesn't exist
-            Asset::whereNull('asset_eol_date')->with('model')->chunkById(500, function ($assets) {
-                foreach ($assets as $asset) {
-                    if ($asset->model->eol && $asset->purchase_date) {
-                        try {
-                            $asset_eol_date = CarbonImmutable::parse($asset->purchase_date)->addMonths($asset->model->eol)->format('Y-m-d');
-                            $asset->update(['asset_eol_date' => $asset_eol_date]);
-                        } catch (\Exception $e) {
-                            Log::info('purchase date invalid for asset ' . $asset->id);
-                        }
-                    }
-                }
-            });
+        //    Asset::whereNull('asset_eol_date')->with('model')->chunkById(500, function ($assets) {
+        //        foreach ($assets as $asset) {
+        //            if ($asset->model->eol && $asset->purchase_date) {
+        //                try {
+        //                    $asset_eol_date = CarbonImmutable::parse($asset->purchase_date)->addMonths($asset->model->eol)->format('Y-m-d');
+        //                    $asset->update(['asset_eol_date' => $asset_eol_date]);
+        //                } catch (\Exception $e) {
+        //                    Log::info('purchase date invalid for asset ' . $asset->id);
+        //                }
+        //            }
+        //        }
+        //    });
+            Asset::whereNull('asset_eol_date')->whereNotNull('purchase_date')->has('model')
+                ->update(['asset_eol_date' => DB::raw('LEFT JOIN models ON assets.model_id = models.id) DATE_ADD(purchase_date, INTERVAL models.eol MONTH)')]);
     }
 
 
