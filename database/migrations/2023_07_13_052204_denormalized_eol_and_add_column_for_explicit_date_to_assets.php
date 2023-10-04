@@ -23,8 +23,7 @@ class DenormalizedEolAndAddColumnForExplicitDateToAssets extends Migration
 
 
         // Update the eol_explicit column with the value from asset_eol_date if it exists and is different from the calculated value
-        //$assetsToUpdateEolExplicit = [];
-        DB::transaction(function() {
+        $assetsToUpdateEolExplicit = [];
             Asset::whereNotNull('asset_eol_date')->with('model')->chunkById(500, function ($assetsWithEolDates) {
                 foreach ($assetsWithEolDates as $asset) {
                     if ($asset->asset_eol_date && $asset->purchase_date) {
@@ -35,20 +34,19 @@ class DenormalizedEolAndAddColumnForExplicitDateToAssets extends Migration
                         }
                         if ($asset->model->eol) {
                             if ($months != $asset->model->eol) {
-                                 //$assetToUpdateEolExplicit = $asset->id;
+                                 $assetsToUpdateEolExplicit = $asset->id;
                                 $asset->update(['eol_explicit' => true]);
                             }
                         } else {
+                            $assetsToUpdateEolExplicit = $asset->id;
                             $asset->update(['eol_explicit' => true]);
                         }
                     }
                 }
             });
-        });
-        //Asset::whereIn('id', $assetToUpdateEolExplicit)->update(['eol_explicit' => true]);
+        Asset::whereIn('id', $assetsToUpdateEolExplicit)->update(['eol_explicit' => true]);
 
         // Update the asset_eol_date column with the calculated value if it doesn't exist
-        DB::transaction(function () {
             Asset::whereNull('asset_eol_date')->with('model')->chunkById(500, function ($assets) {
                 foreach ($assets as $asset) {
                     if ($asset->model->eol && $asset->purchase_date) {
@@ -61,7 +59,6 @@ class DenormalizedEolAndAddColumnForExplicitDateToAssets extends Migration
                     }
                 }
             });
-        });
     }
 
 
