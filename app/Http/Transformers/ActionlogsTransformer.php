@@ -178,14 +178,34 @@ class ActionlogsTransformer
 
 
         if(array_key_exists('rtd_location_id',$clean_meta)) {
-            $clean_meta['rtd_location_id']['old'] = $clean_meta['rtd_location_id']['old'] ? "[id: ".$clean_meta['rtd_location_id']['old']."] ". $location->find($clean_meta['rtd_location_id']['old'])->name : trans('general.unassigned');
-            $clean_meta['rtd_location_id']['new'] = $clean_meta['rtd_location_id']['new'] ? "[id: ".$clean_meta['rtd_location_id']['new']."] ". $location->find($clean_meta['rtd_location_id']['new'])->name : trans('general.unassigned');
+            if (!is_null($location->find($clean_meta['rtd_location_id']['old']))) {
+                $clean_meta['rtd_location_id']['old'] = $clean_meta['rtd_location_id']['old'] ? "[id: " . $clean_meta['rtd_location_id']['old'] . "] " . $location->find($clean_meta['rtd_location_id']['old'])->name : trans('general.unassigned');
+             }
+            else{
+                $clean_meta['rtd_location_id']['old'] = "[id: " . $clean_meta['rtd_location_id']['old'] . "] " .trans('general.deleted_loc');
+            }
+            if(!is_null($location->find($clean_meta['rtd_location_id']['new']))) {
+                $clean_meta['rtd_location_id']['new'] = $clean_meta['rtd_location_id']['new'] ? "[id: " . $clean_meta['rtd_location_id']['new'] . "] " . $location->find($clean_meta['rtd_location_id']['new'])->name : trans('general.unassigned');
+            }
+            else{
+                $clean_meta['rtd_location_id']['new'] = "[id: " . $clean_meta['rtd_location_id']['new'] . "] " .trans('general.deleted_loc');
+            }
             $clean_meta['Default Location'] = $clean_meta['rtd_location_id'];
             unset($clean_meta['rtd_location_id']);
         }
         if(array_key_exists('location_id', $clean_meta)) {
-            $clean_meta['location_id']['old'] = $clean_meta['location_id']['old'] ? "[id: ".$clean_meta['location_id']['old']."] ".$location->find($clean_meta['location_id']['old'])->name : trans('general.unassigned');
-            $clean_meta['location_id']['new'] = $clean_meta['location_id']['new'] ? "[id: ".$clean_meta['location_id']['new']."] ".$location->find($clean_meta['location_id']['new'])->name : trans('general.unassigned');
+            if (!is_null($location->find($clean_meta['location_id']['old']))) {
+                $clean_meta['location_id']['old'] = $clean_meta['location_id']['old'] ? "[id: " . $clean_meta['location_id']['old'] . "] " . $location->find($clean_meta['location_id']['old'])->name : trans('general.unassigned');
+            }
+            else {
+                $clean_meta['location_id']['old'] = "[id: " . $clean_meta['location_id']['old'] . "] " .trans('general.deleted_loc');
+            }
+            if (!is_null($location->find($clean_meta['location_id']['new']))) {
+                $clean_meta['location_id']['new'] = $clean_meta['location_id']['new'] ? "[id: " . $clean_meta['location_id']['new'] . "] " . $location->find($clean_meta['location_id']['new'])->name : trans('general.unassigned');
+            }
+            else {
+                $clean_meta['location_id']['new'] = "[id: " . $clean_meta['location_id']['new'] . "] " .trans('general.deleted_loc');
+            }
             $clean_meta['Current Location'] = $clean_meta['location_id'];
             unset($clean_meta['location_id']);
         }
