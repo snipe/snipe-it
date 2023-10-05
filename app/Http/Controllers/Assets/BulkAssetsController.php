@@ -7,7 +7,11 @@ use App\Helpers\Helper;
 use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
+use App\Models\AssetModel;
+use App\Models\Company;
+use App\Models\Location;
 use App\Models\Setting;
+use App\Models\Supplier;
 use App\View\Label;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -210,6 +214,7 @@ class BulkAssetsController extends Controller
                         $changed[$key]['new'] = $this->update_array[$key];
                     }
                 }
+                $changed = $this->changedInfo($changed);
 
                 $logAction = new Actionlog();
                 $logAction->item_type = Asset::class;
@@ -413,5 +418,79 @@ class BulkAssetsController extends Controller
             } 
         return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.restore.success'));
         }
+    }
+    /**
+     * This takes the ids of the changed attributes and returns the names instead for the history view of an Asset
+     *
+     * @param  array $clean_meta
+     * @return array
+     */
+
+    public function changedInfo(array $changed)
+    {   $location = Location::withTrashed()->get();
+        $supplier = Supplier::withTrashed()->get();
+        $model = AssetModel::withTrashed()->get();
+        $company = Company::get();
+
+
+        if(array_key_exists('rtd_location_id',$changed)) {
+            $changed['rtd_location_id']['old'] = $changed['rtd_location_id']['old'] ? "[id: " . $changed['rtd_location_id']['old'] . "] " . $location->find($changed['rtd_location_id']['old'])->name : trans('general.unassigned');
+            $changed['rtd_location_id']['new'] = $changed['rtd_location_id']['new'] ? "[id: " . $changed['rtd_location_id']['new'] . "] " . $location->find($changed['rtd_location_id']['new'])->name : trans('general.unassigned');
+            $changed['Default Location'] = $changed['rtd_location_id'];
+            unset($changed['rtd_location_id']);
+        }
+        if(array_key_exists('location_id', $changed)) {
+            $changed['location_id']['old'] = $changed['location_id']['old'] ? "[id: " . $changed['location_id']['old'] . "] " . $location->find($changed['location_id']['old'])->name : trans('general.unassigned');
+            $changed['location_id']['new'] = $changed['location_id']['new'] ? "[id: " . $changed['location_id']['new'] . "] " . $location->find($changed['location_id']['new'])->name : trans('general.unassigned');
+            $changed['Current Location'] = $changed['location_id'];
+            unset($changed['location_id']);
+        }
+        if(array_key_exists('model_id', $changed)) {
+
+            $oldModel = $model->find($changed['model_id']['old']);
+            $oldModelName = $oldModel->name ?? trans('admin/models/message.deleted');
+
+            $newModel = $model->find($changed['model_id']['new']);
+            $newModelName = $newModel->name ?? trans('admin/models/message.deleted');
+
+            $changed['model_id']['old'] = "[id: ".$changed['model_id']['old']."] ".$oldModelName;
+            $changed['model_id']['new'] = "[id: ".$changed['model_id']['new']."] ".$newModelName; /** model is required at asset creation */
+
+            $changed['Model'] = $changed['model_id'];
+            unset($changed['model_id']);
+        }
+        if(array_key_exists('company_id', $changed)) {
+
+            $oldCompany = $company->find($changed['company_id']['old']);
+            $oldCompanyName = $oldCompany->name ?? trans('admin/companies/message.deleted');
+
+            $newCompany = $company->find($changed['company_id']['new']);
+            $newCompanyName = $newCompany->name ?? trans('admin/companies/message.deleted');
+
+            $changed['company_id']['old'] = $changed['company_id']['old'] ? "[id: ".$changed['company_id']['old']."] ". $oldCompanyName : trans('general.unassigned');
+            $changed['company_id']['new'] = $changed['company_id']['new'] ? "[id: ".$changed['company_id']['new']."] ". $newCompanyName : trans('general.unassigned');
+            $changed['Company'] = $changed['company_id'];
+            unset($changed['company_id']);
+        }
+        if(array_key_exists('supplier_id', $changed)) {
+
+            $oldSupplier = $supplier->find($changed['supplier_id']['old']);
+            $oldSupplierName = $oldSupplier->name ?? trans('admin/suppliers/message.deleted');
+
+            $newSupplier = $supplier->find($changed['supplier_id']['new']);
+            $newSupplierName = $newSupplier->name ?? trans('admin/suppliers/message.deleted');
+
+            $changed['supplier_id']['old'] = $changed['supplier_id']['old'] ? "[id: ".$changed['supplier_id']['old']."] ". $oldSupplierName : trans('general.unassigned');
+            $changed['supplier_id']['new'] = $changed['supplier_id']['new'] ? "[id: ".$changed['supplier_id']['new']."] ". $newSupplierName : trans('general.unassigned');
+            $changed['Supplier'] = $changed['supplier_id'];
+            unset($changed['supplier_id']);
+        }
+        if(array_key_exists('asset_eol_date', $changed)) {
+            $changed['EOL date'] = $changed['asset_eol_date'];
+            unset($changed['asset_eol_date']);
+        }
+
+        return $changed;
+
     }
 }
