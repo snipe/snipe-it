@@ -532,7 +532,7 @@
     function changeLogFormatter(value) {
         var result = '';
             for (var index in value) {
-                result += index + ': <span style="color:+value[index].color+;"><del>' + value[index].old + '</del> </span> <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i> ' + value[index].new + '<br>'
+                result += index + ': <del>' + value[index].old + '</del>  <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i> ' + value[index].new + '<br>'
             }
 
         return result;
