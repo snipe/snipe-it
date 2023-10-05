@@ -17,7 +17,7 @@
     <div class="row">
         <!-- left column -->
         <div class="col-md-7">
-            <form class="form-horizontal" method="post" action="{{ route('components.checkin.store', $component_assets->id) }}" autocomplete="off">
+            <form class="form-horizontal" method="post" action="{{ route('components.checkin.store', [$component_assets->id, 'backto' => 'asset']) }}" autocomplete="off">
                 {{csrf_field()}}
 
                 <div class="box box-default">
