@@ -136,6 +136,11 @@ class UserFilesController extends Controller
      */
     public function show($userId = null, $fileId = null)
     {
+
+        if (empty($fileId)) {
+            return redirect()->route('users.show')->with('error', 'Invalid file request');
+        }
+
         $user = User::find($userId);
 
         // the license is valid
@@ -143,7 +148,7 @@ class UserFilesController extends Controller
 
             $this->authorize('view', $user);
 
-            if ($log = Actionlog::find($fileId)->whereNotNull('filename')->where('item_id', $user->id)->first()) {
+            if ($log = Actionlog::whereNotNull('filename')->where('item_id', $user->id)->find($fileId)) {
 
                 // Display the file inline
                 if (request('inline') == 'true') {
