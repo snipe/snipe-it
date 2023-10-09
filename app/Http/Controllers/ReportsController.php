@@ -1063,9 +1063,6 @@ class ReportsController extends Controller
         } else {
             $logItem_res = $assetItem->checkouts()->where('created_at', '=', $acceptance->created_at)->get();
 
-            \Log::debug('Acceptance created at: '.$acceptance->created_at);
-            \Log::debug(print_r($logItem_res, true));
-
             if ($logItem_res->isEmpty()){
                 \Log::debug('Acceptance date mismatch');
                 return redirect()->route('reports/unaccepted_assets')->with('error', trans('general.bad_data'));
