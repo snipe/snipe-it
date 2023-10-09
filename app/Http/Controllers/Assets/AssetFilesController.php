@@ -86,7 +86,7 @@ class AssetFilesController extends Controller
         if (isset($asset->id)) {
             $this->authorize('view', $asset);
 
-            if (! $log = Actionlog::find($fileId)) {
+            if (! $log = Actionlog::find($fileId)->whereNotNull('filename')->where('item_id', $asset->id)->first()) {
                 return response('No matching record for that asset/file', 500)
                     ->header('Content-Type', 'text/plain');
             }
