@@ -368,8 +368,8 @@ Route::group(['middleware' => ['auth']], function () {
         'reports/unaccepted_assets/{deleted?}',
         [ReportsController::class, 'getAssetAcceptanceReport']
     )->name('reports/unaccepted_assets');
-    Route::get(
-        'reports/unaccepted_assets/{acceptanceId}/sent_reminder',
+    Route::post(
+        'reports/unaccepted_assets/sent_reminder',
         [ReportsController::class, 'sentAssetAcceptanceReminder']
     )->name('reports/unaccepted_assets_sent_reminder');
     Route::delete(
