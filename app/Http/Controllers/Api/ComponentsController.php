@@ -263,7 +263,7 @@ class ComponentsController extends Controller
         }
 
         // Make sure there is at least one available to checkout
-        if ($component->numRemaining() <= $request->get('assigned_qty')) {
+        if ($component->numRemaining() < $request->get('assigned_qty')) {
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/components/message.checkout.unavailable', ['remaining' => $component->numRemaining(), 'requested' => $request->get('assigned_qty')])));
         }
 
