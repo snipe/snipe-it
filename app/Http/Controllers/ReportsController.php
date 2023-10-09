@@ -1043,27 +1043,37 @@ class ReportsController extends Controller
      * @throws \Illuminate\Auth\Access\AuthorizationException
      * @version v1.0
      */
-    public function sentAssetAcceptanceReminder($acceptanceId = null)
+    public function sentAssetAcceptanceReminder(Request $request)
     {
         $this->authorize('reports.view');
 
-        if (!$acceptance = CheckoutAcceptance::pending()->find($acceptanceId)) {
+        if (!$acceptance = CheckoutAcceptance::pending()->find($request->input('acceptance_id'))) {
+            \Log::debug('No pending acceptances');
             // Redirect to the unaccepted assets report page with error
             return redirect()->route('reports/unaccepted_assets')->with('error', trans('general.bad_data'));
         }
+
         $assetItem = $acceptance->checkoutable;
 
+        \Log::debug(print_r($assetItem, true));
+
         if (is_null($acceptance->created_at)){
+            \Log::debug('No acceptance created_at');
             return redirect()->route('reports/unaccepted_assets')->with('error', trans('general.bad_data'));
         } else {
             $logItem_res = $assetItem->checkouts()->where('created_at', '=', $acceptance->created_at)->get();
+
+            \Log::debug('Acceptance created at: '.$acceptance->created_at);
+            \Log::debug(print_r($logItem_res, true));
+
             if ($logItem_res->isEmpty()){
+                \Log::debug('Acceptance date mismatch');
                 return redirect()->route('reports/unaccepted_assets')->with('error', trans('general.bad_data'));
             }
             $logItem = $logItem_res[0];
         }
 
-        if(!$assetItem->assignedTo->locale){
+        if (!$assetItem->assignedTo->locale){
             Notification::locale(Setting::getSettings()->locale)->send(
                 $assetItem->assignedTo,
                 new CheckoutAssetNotification($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note)
