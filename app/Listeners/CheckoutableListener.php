@@ -18,6 +18,7 @@ use App\Notifications\CheckoutAccessoryNotification;
 use App\Notifications\CheckoutAssetNotification;
 use App\Notifications\CheckoutConsumableNotification;
 use App\Notifications\CheckoutLicenseSeatNotification;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Notification;
 use Exception;
 use Log;
@@ -61,6 +62,16 @@ class CheckoutableListener
                 );
             }
         } catch (Exception $e) {
+            if ($e instanceof ClientException){
+                $statusCode = $e->getResponse()->getStatusCode();
+                // If status code is in 400 range, we don't want to log it as an error
+                // @todo: 300 and 500 as well?
+                if ($statusCode >= 400 && $statusCode < 500) {
+                    Log::debug("Exception caught during checkout notification: ".$e->getMessage());
+                    return;
+                }
+            }
+
             Log::error("Exception caught during checkout notification: ".$e->getMessage());
         }
     }
