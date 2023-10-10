@@ -98,11 +98,6 @@ class CheckoutableListener
         }
 
         try {
-            if ($this->shouldSendWebhookNotification()) {
-                Notification::route('slack', Setting::getSettings()->webhook_endpoint)
-                    ->notify($this->getCheckinNotification($event));
-            }
-
             // Use default locale
             if (! $event->checkedOutTo->locale) {
                 Notification::locale(Setting::getSettings()->locale)->send(
@@ -115,7 +110,17 @@ class CheckoutableListener
                     $this->getCheckinNotification($event)
                 );
             }
+
+            if ($this->shouldSendWebhookNotification()) {
+                Notification::route('slack', Setting::getSettings()->webhook_endpoint)
+                    ->notify($this->getCheckinNotification($event));
+            }
         } catch (Exception $e) {
+            if ($e instanceof ClientException){
+                Log::debug("Exception caught during checkout notification: ".$e->getMessage());
+                return;
+            }
+
             Log::error("Exception caught during checkin notification: ".$e->getMessage());
         }
     }      
