@@ -45,11 +45,6 @@ class CheckoutableListener
         $acceptance = $this->getCheckoutAcceptance($event);       
 
         try {
-            if ($this->shouldSendWebhookNotification()) {
-                Notification::route('slack', Setting::getSettings()->webhook_endpoint)
-                    ->notify($this->getCheckoutNotification($event));
-            }
-
             if (! $event->checkedOutTo->locale) {
                 Notification::locale(Setting::getSettings()->locale)->send(
                     $this->getNotifiables($event),
@@ -60,6 +55,11 @@ class CheckoutableListener
                     $this->getNotifiables($event),
                     $this->getCheckoutNotification($event, $acceptance)
                 );
+            }
+
+            if ($this->shouldSendWebhookNotification()) {
+                Notification::route('slack', Setting::getSettings()->webhook_endpoint)
+                    ->notify($this->getCheckoutNotification($event));
             }
         } catch (Exception $e) {
             if ($e instanceof ClientException){
