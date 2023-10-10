@@ -42,7 +42,7 @@ class CheckoutableListener
         /**
          * Make a checkout acceptance and attach it in the notification
          */
-        $acceptance = $this->getCheckoutAcceptance($event);       
+        $acceptance = $this->getCheckoutAcceptance($event);
 
         try {
             if (! $event->checkedOutTo->locale) {
@@ -61,12 +61,11 @@ class CheckoutableListener
                 Notification::route('slack', Setting::getSettings()->webhook_endpoint)
                     ->notify($this->getCheckoutNotification($event));
             }
-        } catch (Exception $e) {
-            if ($e instanceof ClientException){
-                Log::debug("Exception caught during checkout notification: ".$e->getMessage());
-                return;
-            }
-
+        }
+        catch (ClientException $e){
+            Log::debug("Exception caught during checkout notification: ".$e->getMessage());
+        }
+        catch (Exception $e) {
             Log::error("Exception caught during checkout notification: ".$e->getMessage());
         }
     }
@@ -115,12 +114,11 @@ class CheckoutableListener
                 Notification::route('slack', Setting::getSettings()->webhook_endpoint)
                     ->notify($this->getCheckinNotification($event));
             }
-        } catch (Exception $e) {
-            if ($e instanceof ClientException){
-                Log::debug("Exception caught during checkout notification: ".$e->getMessage());
-                return;
-            }
-
+        }
+        catch (ClientException $e){
+            Log::debug("Exception caught during checkout notification: ".$e->getMessage());
+        }
+        catch (Exception $e) {
             Log::error("Exception caught during checkin notification: ".$e->getMessage());
         }
     }      
