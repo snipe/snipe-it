@@ -119,40 +119,37 @@ class Ldap extends Model
 
         \Log::debug('Filter query: '.$filterQuery);
 
-        if (! $ldapbind = @ldap_bind($connection, $userDn, $password)) {
-            \Log::debug("Status of binding user: $userDn to directory: (directly!) ".($ldapbind ? "success" : "FAILURE"));
-            if (! $ldapbind = self::bindAdminToLdap($connection)) {
-                /*
-                 * TODO PLEASE:
-                 *
-                 * this isn't very clear, so it's important to note: the $ldapbind value is never correctly returned - we never 'return true' from self::bindAdminToLdap() (the function
-                 * just "falls off the end" without ever explictly returning 'true')
-                 *
-                 * but it *does* have an interesting side-effect of checking for the LDAP password being incorrectly encrypted with the wrong APP_KEY, so I'm leaving it in for now.
-                 *
-                 * If it *did* correctly return 'true' on a succesful bind, it would _probably_ allow users to log in with an incorrect password. Which would be horrible!
-                 *
-                 * Let's definitely fix this at the next refactor!!!!
-                 *
-                 */
+        if ($ldapbind = @ldap_bind($connection, $userDn, $password)) { // IF you can bind user 
+                \Log::debug("Status of binding user: $userDn to directory: (directly!) ".($ldapbind ? "success" : "FAILURE"));
+                $settings = Setting::getSettings();
+                $connection = Ldap::connectToLdap();
+
+		$ldapbind = self::bindAdminToLdap($connection); // rebind to app account for the search
+		/* 
+		 * As far as i comprehend the logic, from before, this should raise the error in appkey too.
+		 * 
+		*/
+
+
                 \Log::debug("Status of binding Admin user: $userDn to directory instead: ".($ldapbind ? "success" : "FAILURE"));
-                return false;
-            }
-        }
 
-        if (! $results = ldap_search($connection, $baseDn, $filterQuery)) {
-            throw new Exception('Could not search LDAP: ');
-        }
+		// felt like we should try those only if the user was ok
 
-        if (! $entry = ldap_first_entry($connection, $results)) {
-            return false;
-        }
+                if (! $results = ldap_search($connection, $baseDn, $filterQuery)) {
+                    throw new Exception('Could not search LDAP: ');
+                }
 
-        if (! $user = ldap_get_attributes($connection, $entry)) {
-            return false;
-        }
+                if (! $entry = ldap_first_entry($connection, $results)) {
+                    return false;
+                }
 
-        return array_change_key_case($user);
+                if (! $user = ldap_get_attributes($connection, $entry)) {
+                    return false;
+                }
+
+                return array_change_key_case($user);
+        }
+        return false; // If user didn't bound correctly.
     }
 
     /**
