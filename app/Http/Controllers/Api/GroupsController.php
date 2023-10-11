@@ -63,7 +63,7 @@ class GroupsController extends Controller
         $group = new Group;
 
         $group->name = $request->input('name');
-        $group->permissions = $request->input('permissions'); // Todo - some JSON validation stuff here
+        $group->permissions = json_encode($request->input('permissions')); // Todo - some JSON validation stuff here
 
         if ($group->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $group, trans('admin/groups/message.create.success')));
