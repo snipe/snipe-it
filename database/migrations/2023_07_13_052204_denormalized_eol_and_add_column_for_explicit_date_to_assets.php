@@ -42,13 +42,13 @@ class DenormalizedEolAndAddColumnForExplicitDateToAssets extends Migration
                 }
             });
 
-        DB::table('assets')
+        DB::table(  'assets')
             ->whereNull('asset_eol_date')
             ->whereNotNull('purchase_date')
             ->whereNotNull('model_id')
             ->join('models', 'assets.model_id', '=', 'models.id')
             ->update([
-                'asset_eol_date' => DB::raw('DATE_ADD(purchase_date, INTERVAL models.eol MONTH)')
+                'asset_eol_date' => DB::raw('DATE_ADD(purchase_date, INTERVAL ' . DB::getTablePrefix() . 'models.eol MONTH)')
             ]);
     }
 
