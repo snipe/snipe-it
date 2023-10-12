@@ -42,7 +42,7 @@ class DenormalizedEolAndAddColumnForExplicitDateToAssets extends Migration
                 }
             });
 
-        DB::table(  'assets')
+        DB::table('assets')
             ->whereNull('asset_eol_date')
             ->whereNotNull('purchase_date')
             ->whereNotNull('model_id')
