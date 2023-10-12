@@ -92,7 +92,7 @@ class BulkAssetsController extends Controller
                     $company_check= Asset::findMany($asset_ids)->pluck('company_id')->unique();
 
                     if($company_check->count() > 1){
-                        return redirect()->back()->with('warning', true);
+                       Session::put('company_uniq', 1);
                     }
                     $this->authorize('update', Asset::class);
                     return view('hardware/bulk')
