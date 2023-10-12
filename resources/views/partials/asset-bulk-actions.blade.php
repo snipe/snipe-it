@@ -31,3 +31,10 @@
     <button class="btn btn-primary" id="{{ (isset($id_button)) ? $id_button : 'bulkAssetEditButton' }}" disabled>{{ trans('button.go') }}</button>
     {{ Form::close() }}
 </div>
+@if(!empty(Session::get('warning')) && Session::get('warning') == true)
+    <script>
+        $(function() {
+            $('#myModal').modal('show');
+        });
+    </script>
+@endif
