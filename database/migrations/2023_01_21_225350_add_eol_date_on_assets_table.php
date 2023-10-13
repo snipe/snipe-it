@@ -17,8 +17,17 @@ class AddEolDateOnAssetsTable extends Migration
     {
 
         Schema::table('assets', function (Blueprint $table) {
+            
             if (!Schema::hasColumn('assets', 'asset_eol_date')) {
                 $table->date('asset_eol_date')->after('purchase_date')->nullable()->default(null);
+            }
+
+            // This is a temporary shim so we don't have to modify the asset observer for migrations where
+            // there is a large version difference. (See the AssetObserver notes). This column gets created
+            // later in 2023_07_13_052204_denormalized_eol_and_add_column_for_explicit_date_to_assets.php
+            // but we have to temporarily create it now so the save method below doesn't break
+            if (!Schema::hasColumn('assets', 'eol_explicit')) {
+                $table->boolean('eol_explicit')->default(false)->after('asset_eol_date');
             }
         });
 
