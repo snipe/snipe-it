@@ -10,6 +10,8 @@ use App\Models\Supplier;
 use App\Models\Location;
 use App\Models\AssetModel;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Facades\Crypt;
 
 class ActionlogsTransformer
 {
@@ -69,9 +71,36 @@ class ActionlogsTransformer
 
                             if ($custom_field->db_column == $fieldname) {
 
-                                if ($custom_field->field_encrypted == '1') {
-                                    $clean_meta[$fieldname]['old'] = "************";
-                                    $clean_meta[$fieldname]['new'] = "************";
+                                if ($custom_field->field_encrypted == '1')  {
+
+                                    // Unset these fields. We need to decrypt them, since even if the decrypted value
+                                    // didn't change, their value in the DB will, so we have to compare the unencrypted version
+                                    // to see if the values actually did change
+                                    unset($clean_meta[$fieldname]);
+                                    unset($clean_meta[$fieldname]);
+
+                                    $enc_old = '';
+                                    $enc_new = '';
+
+                                    try  {
+                                        $enc_old = \Crypt::decryptString($this->clean_field($fieldata->old));
+                                    } catch (\Exception $e) {
+                                        \Log::debug('Could not decrypt field - maybe the key changed?');
+                                    }
+
+                                    try {
+                                        $enc_new = \Crypt::decryptString($this->clean_field($fieldata->new));
+                                    } catch (\Exception $e) {
+                                        \Log::debug('Could not decrypt field - maybe the key changed?');
+                                    }
+
+                                    if ($enc_old != $enc_new) {
+                                        \Log::debug('custom fields do not match');
+                                        $clean_meta[$fieldname]['old'] = "************";
+                                        $clean_meta[$fieldname]['new'] = "************";
+                                    }
+
+
                                 }
 
                             }
@@ -178,15 +207,31 @@ class ActionlogsTransformer
 
 
         if(array_key_exists('rtd_location_id',$clean_meta)) {
-            $clean_meta['rtd_location_id']['old'] = $clean_meta['rtd_location_id']['old'] ? "[id: ".$clean_meta['rtd_location_id']['old']."] ". e($location->find($clean_meta['rtd_location_id']['old'])->name) : trans('general.unassigned');
-            $clean_meta['rtd_location_id']['new'] = $clean_meta['rtd_location_id']['new'] ? "[id: ".$clean_meta['rtd_location_id']['new']."] ". e($location->find($clean_meta['rtd_location_id']['new'])->name) : trans('general.unassigned');
+
+            $oldRtd = $location->find($clean_meta['rtd_location_id']['old']);
+            $oldRtdName = $oldRtd ? e($oldRtd->name) : trans('general.deleted');
+
+            $newRtd = $location->find($clean_meta['rtd_location_id']['new']);
+            $newRtdName = $newRtd ? e($newRtd->name) : trans('general.deleted');
+
+            $clean_meta['rtd_location_id']['old'] = $clean_meta['rtd_location_id']['old'] ? "[id: ".$clean_meta['rtd_location_id']['old']."] ". $oldRtdName : '';
+            $clean_meta['rtd_location_id']['new'] = $clean_meta['rtd_location_id']['new'] ? "[id: ".$clean_meta['rtd_location_id']['new']."] ". $newRtdName : '';
             $clean_meta['Default Location'] = $clean_meta['rtd_location_id'];
             unset($clean_meta['rtd_location_id']);
         }
 
+
         if (array_key_exists('location_id', $clean_meta)) {
-            $clean_meta['location_id']['old'] = $clean_meta['location_id']['old'] ? "[id: ".$clean_meta['location_id']['old']."] ".e($location->find($clean_meta['location_id']['old'])->name): trans('general.unassigned');
-            $clean_meta['location_id']['new'] = $clean_meta['location_id']['new'] ? "[id: ".$clean_meta['location_id']['new']."] ".e($location->find($clean_meta['location_id']['new'])->name) : trans('general.unassigned');
+
+            $oldLocation = $location->find($clean_meta['location_id']['old']);
+            $oldLocationName = $oldLocation ? e($oldLocation->name) : trans('general.deleted');
+
+            $newLocation = $location->find($clean_meta['location_id']['new']);
+            $newLocationName = $newLocation ? e($newLocation->name) : trans('general.deleted');
+
+
+            $clean_meta['location_id']['old'] = $clean_meta['location_id']['old'] ? "[id: ".$clean_meta['location_id']['old']."] ". $oldLocationName : '';
+            $clean_meta['location_id']['new'] = $clean_meta['location_id']['new'] ? "[id: ".$clean_meta['location_id']['new']."] ". $newLocationName : '';
             $clean_meta['Current Location'] = $clean_meta['location_id'];
             unset($clean_meta['location_id']);
         }
