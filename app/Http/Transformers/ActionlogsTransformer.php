@@ -214,7 +214,7 @@ class ActionlogsTransformer
             $newRtd = $location->find($clean_meta['rtd_location_id']['new']);
             $newRtdName = $newRtd ? e($newRtd->name) : trans('general.deleted');
 
-            $clean_meta['rtd_location_id']['old'] = $clean_meta['rtd_location_id']['old'] ? "[id: ".$clean_meta['rtd_location_id']['old']."] ". $oldRtdName : 'foo';
+            $clean_meta['rtd_location_id']['old'] = $clean_meta['rtd_location_id']['old'] ? "[id: ".$clean_meta['rtd_location_id']['old']."] ". $oldRtdName : '';
             $clean_meta['rtd_location_id']['new'] = $clean_meta['rtd_location_id']['new'] ? "[id: ".$clean_meta['rtd_location_id']['new']."] ". $newRtdName : trans('general.unassigned');
             $clean_meta['Default Location'] = $clean_meta['rtd_location_id'];
             unset($clean_meta['rtd_location_id']);
