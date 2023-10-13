@@ -129,7 +129,8 @@ class AssetObserver
      *
      * For example, if there is a database migration that's a bit older and modifies an asset, if the save
      * fires before a field gets created in a later migration and that field in the later migration
-     * is used in this observer, it doesn't actually exist yet and the migration will break.
+     * is used in this observer, it doesn't actually exist yet and the migration will break unless we
+     * use saveQuietly() in the migration which skips this observer.
      *
      * @see https://github.com/snipe/snipe-it/issues/13723#issuecomment-1761315938
      */

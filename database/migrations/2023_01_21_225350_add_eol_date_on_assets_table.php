@@ -23,6 +23,8 @@ class AddEolDateOnAssetsTable extends Migration
         });
 
         // Chunk the model query to get the models that do have an EOL date
+        // We use saveQuietly() here to skip the AssetObserver, since it modifies fields
+        // that do not yet exist on the assets table.
         AssetModel::whereNotNull('eol')->chunk(10, function ($models) {
             foreach ($models as $model) {
                 foreach ($model->assets as $asset) {
