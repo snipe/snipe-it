@@ -11,6 +11,9 @@ use App\Models\Asset;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AssetUpdated;
+
 class AssetCheckoutController extends Controller
 {
     use CheckInOutRequest;
@@ -66,6 +69,29 @@ class AssetCheckoutController extends Controller
 
             $asset = $this->updateAssetLocation($asset, $target);
 
+            //Speichert die Firma, wenn diese im DropDown ausgewählt wurde
+            if ($request->filled('company_id')) {
+                $oldCompanyId = $asset->company_id;
+                $oldCompany = $asset->company->name;
+
+                $company_id = $request->get('company_id');
+            
+                // Speichern Sie die Firma in der Asset-Tabelle
+                $asset->company_id = $company_id;
+                $asset->save();
+            
+                // Bekommen der gewünschten Infos und speichern diese in Variabeln
+                $checkOutNote = $request->get('note');
+                $targetMail = $target->email;
+                $newCompany = \App\Models\Company::find($company_id)->name ?? '';
+
+                if ($company_id != $oldCompanyId){
+                    // E-Mail senden
+                    Mail::to('jan-niklas.schubert@gum-automation.de')->send(new AssetUpdated($asset, $oldCompany, $newCompany, $targetMail, $checkOutNote));
+                }
+            }
+
+
             $checkout_at = date('Y-m-d H:i:s');
             if (($request->filled('checkout_at')) && ($request->get('checkout_at') != date('Y-m-d'))) {
                 $checkout_at = $request->get('checkout_at');
@@ -89,6 +115,10 @@ class AssetCheckoutController extends Controller
                 }
             }
 
+            // Fügen Sie weitere Informationen zum Asset hinzu, je nach Bedarf.
+
+            $asset->save();
+
             $settings = \App\Models\Setting::getSettings();
 
             // We have to check whether $target->company_id is null here since locations don't have a company yet
@@ -97,7 +127,7 @@ class AssetCheckoutController extends Controller
                     return redirect()->to("hardware/$assetId/checkout")->with('error', trans('general.error_user_company'));
                 }
             }
-            
+
             if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), $request->get('name'))) {
                 return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkout.success'));
             }

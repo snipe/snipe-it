@@ -26,16 +26,8 @@
                     </div>
                     <div class="box-body">
                     {{csrf_field()}}
-                        @if ($asset->company && $asset->company->name)
-                            <div class="form-group">
-                                {{ Form::label('model', trans('general.company'), array('class' => 'col-md-3 control-label')) }}
-                                <div class="col-md-8">
-                                    <p class="form-control-static">
-                                        {{ $asset->company->name }}
-                                    </p>
-                                </div>
-                            </div>
-                        @endif
+                    <!--SCHUBII CODE | Dropdown für Firmen beim ausgeben -->
+                    @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
                     <!-- AssetModel name -->
                         <div class="form-group">
                             {{ Form::label('model', trans('admin/hardware/form.model'), array('class' => 'col-md-3 control-label')) }}
