@@ -215,7 +215,7 @@ class ActionlogsTransformer
             $newRtdName = $newRtd ? e($newRtd->name) : trans('general.deleted');
 
             $clean_meta['rtd_location_id']['old'] = $clean_meta['rtd_location_id']['old'] ? "[id: ".$clean_meta['rtd_location_id']['old']."] ". $oldRtdName : '';
-            $clean_meta['rtd_location_id']['new'] = $clean_meta['rtd_location_id']['new'] ? "[id: ".$clean_meta['rtd_location_id']['new']."] ". $newRtdName : trans('general.unassigned');
+            $clean_meta['rtd_location_id']['new'] = $clean_meta['rtd_location_id']['new'] ? "[id: ".$clean_meta['rtd_location_id']['new']."] ". $newRtdName : '';
             $clean_meta['Default Location'] = $clean_meta['rtd_location_id'];
             unset($clean_meta['rtd_location_id']);
         }
@@ -230,8 +230,8 @@ class ActionlogsTransformer
             $newLocationName = $newLocation ? e($newLocation->name) : trans('general.deleted');
 
 
-            $clean_meta['location_id']['old'] = $clean_meta['location_id']['old'] ? "[id: ".$clean_meta['location_id']['old']."] ". $oldLocationName : trans('general.deleted');
-            $clean_meta['location_id']['new'] = $clean_meta['location_id']['new'] ? "[id: ".$clean_meta['location_id']['new']."] ". $newLocationName : trans('general.unassigned');
+            $clean_meta['location_id']['old'] = $clean_meta['location_id']['old'] ? "[id: ".$clean_meta['location_id']['old']."] ". $oldLocationName : '';
+            $clean_meta['location_id']['new'] = $clean_meta['location_id']['new'] ? "[id: ".$clean_meta['location_id']['new']."] ". $newLocationName : '';
             $clean_meta['Current Location'] = $clean_meta['location_id'];
             unset($clean_meta['location_id']);
         }
