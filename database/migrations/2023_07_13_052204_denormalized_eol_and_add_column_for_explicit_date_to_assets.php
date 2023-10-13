@@ -18,7 +18,9 @@ class DenormalizedEolAndAddColumnForExplicitDateToAssets extends Migration
     public function up()
     {
         Schema::table('assets', function (Blueprint $table) {
-            $table->boolean('eol_explicit')->default(false)->after('asset_eol_date');
+            if (!Schema::hasColumn('assets', 'eol_explicit')) {
+                $table->boolean('eol_explicit')->default(false)->after('asset_eol_date');
+            }
         });
 
 
