@@ -192,7 +192,7 @@ class UsersController extends Controller
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $users->count()) ? $users->count() : abs($request->input('offset'));
+        $offset = ($request->input('offset') > $users->count()) ? $users->count() : app('api_offset_value');
         $limit = app('api_limit_value');
 
 
