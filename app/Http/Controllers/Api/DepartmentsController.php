@@ -61,7 +61,7 @@ class DepartmentsController extends Controller
         }
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $departments->count()) ? $departments->count() : abs($request->input('offset'));
+        $offset = ($request->input('offset') > $departments->count()) ? $departments->count() : app('api_offset_value');
         $limit = app('api_limit_value');
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
