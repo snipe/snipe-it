@@ -56,7 +56,7 @@ class ReportsController extends Controller
 
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $actionlogs->count()) ? $actionlogs->count() : abs($request->input('offset'));
+        $offset = ($request->input('offset') > $actionlogs->count()) ? $actionlogs->count() : app('api_offset_value');
         $limit = app('api_limit_value');
 
         $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
