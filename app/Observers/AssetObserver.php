@@ -120,17 +120,30 @@ class AssetObserver
         $logAction->user_id = Auth::id();
         $logAction->logaction('delete');
     }
-   
+
+    /**
+     * Executes every time an asset is saved.
+     *
+     * This matters specifically because any database fields affected here MUST already exist on
+     * the assets table (and/or any related models), or related migrations WILL fail.
+     *
+     * For example, if there is a database migration that's a bit older and modifies an asset, if the save
+     * fires before a field gets created in a later migration and that field in the later migration
+     * is used in this observer, it doesn't actually exist yet and the migration will break unless we
+     * use saveQuietly() in the migration which skips this observer.
+     *
+     * @see https://github.com/snipe/snipe-it/issues/13723#issuecomment-1761315938
+     */
     public function saving(Asset $asset)
     {
-        //determine if calculated eol and then calculate it - this should only happen on a new asset
-        if(is_null($asset->asset_eol_date) && !is_null($asset->purchase_date) && !is_null($asset->model->eol)){
+        // determine if calculated eol and then calculate it - this should only happen on a new asset
+        if (is_null($asset->asset_eol_date) && !is_null($asset->purchase_date) && !is_null($asset->model->eol)){
             $asset->asset_eol_date = $asset->purchase_date->addMonths($asset->model->eol)->format('Y-m-d');
             $asset->eol_explicit = false; 
         } 
 
-       //determine if explicit and set eol_explit to true 
-       if(!is_null($asset->asset_eol_date) && !is_null($asset->purchase_date)) {
+       // determine if explicit and set eol_explicit to true
+       if (!is_null($asset->asset_eol_date) && !is_null($asset->purchase_date)) {
             if($asset->model->eol) {
                 $months = Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date); 
                 if($months != $asset->model->eol) {

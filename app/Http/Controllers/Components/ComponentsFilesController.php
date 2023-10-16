@@ -142,7 +142,7 @@ class ComponentsFilesController extends Controller
             $this->authorize('view', $component);
             $this->authorize('components.files', $component);
 
-            if (! $log = Actionlog::find($fileId)) {
+            if (! $log = Actionlog::whereNotNull('filename')->where('item_id', $component->id)->find($fileId)) {
                 return response('No matching record for that asset/file', 500)
                     ->header('Content-Type', 'text/plain');
             }

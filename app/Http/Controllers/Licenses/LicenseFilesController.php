@@ -137,7 +137,7 @@ class LicenseFilesController extends Controller
             $this->authorize('view', $license);
             $this->authorize('licenses.files', $license);
 
-            if (! $log = Actionlog::find($fileId)) {
+            if (! $log = Actionlog::whereNotNull('filename')->where('item_id', $license->id)->find($fileId)) {
                 return response('No matching record for that asset/file', 500)
                     ->header('Content-Type', 'text/plain');
             }

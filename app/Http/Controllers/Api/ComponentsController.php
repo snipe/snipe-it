@@ -77,7 +77,7 @@ class ComponentsController extends Controller
         }
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $components->count()) ? $components->count() : abs($request->input('offset'));
+        $offset = ($request->input('offset') > $components->count()) ? $components->count() : app('api_offset_value');
         $limit = app('api_limit_value');
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
@@ -263,7 +263,7 @@ class ComponentsController extends Controller
         }
 
         // Make sure there is at least one available to checkout
-        if ($component->numRemaining() <= $request->get('assigned_qty')) {
+        if ($component->numRemaining() < $request->get('assigned_qty')) {
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/components/message.checkout.unavailable', ['remaining' => $component->numRemaining(), 'requested' => $request->get('assigned_qty')])));
         }
 
