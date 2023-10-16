@@ -108,13 +108,17 @@ class LdapSync extends Command
         $location = null; // TODO - this would be better called "$default_location", which is more explicit about its purpose
 
         if ($this->option('location') != '') {
-            $location = Location::where('name', '=', $this->option('location'))->first();
-            Log::debug('Location name '.$this->option('location').' passed');
-            Log::debug('Importing to '.$location->name.' ('.$location->id.')');
+            if ($location = Location::where('name', '=', $this->option('location'))->first()) {
+                Log::debug('Location name '.$this->option('location').' passed');
+                Log::debug('Importing to '.$location->name.' ('.$location->id.')');
+            }
+
         } elseif ($this->option('location_id') != '') {
-            $location = Location::where('id', '=', $this->option('location_id'))->first();
-            Log::debug('Location ID '.$this->option('location_id').' passed');
-            Log::debug('Importing to '.$location->name.' ('.$location->id.')');
+            if ($location = Location::where('id', '=', $this->option('location_id'))->first()) {
+                Log::debug('Location ID '.$this->option('location_id').' passed');
+                Log::debug('Importing to '.$location->name.' ('.$location->id.')');
+            }
+
         }
 
         if (! isset($location)) {
