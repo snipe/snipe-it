@@ -200,16 +200,17 @@
   </div> <!--/.col-md-8-->
 </div>
 @stop
+@livewire('modal-components')
 
 
 @section('moar_scripts')
   @if(!empty(Session::get('company_uniq')))
     <script>
-      $(function() {
-        $('#MultiCompanyAlert').modal('show');
-      });
+      // $(function() {
+      //   $('#MultiCompanyAlert').modal('show');
+      // });
       $( "click" ).on( "click", function() {
-       window.livewire.emit('multiCompanyAcknowledge');
+       window.livewire.emit('modal-components');
 
       } );
     </script>

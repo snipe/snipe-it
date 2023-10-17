@@ -28,7 +28,7 @@
         @endif
     </select>
 
-    <button class="btn btn-primary" id="{{ (isset($id_button)) ? $id_button : 'bulkAssetEditButton' }}" disabled>{{ trans('button.go') }}</button>
+    <button class="btn btn-primary" id="{{ (isset($id_button)) ? $id_button : 'bulkAssetEditButton' }}" wire:click="checkSession" disabled>{{ trans('button.go') }}</button>
     {{ Form::close() }}
 </div>
 
