@@ -220,7 +220,9 @@ class Asset extends Depreciable
             }
         }
 
-
+        if (!is_array($params)){
+            return false;
+        }
 
         return parent::save($params);
     }
