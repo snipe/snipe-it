@@ -92,6 +92,10 @@ class Setting extends Model
         'google_client_secret',
     ];
 
+    protected $casts = [
+        'label2_asset_logo' => 'boolean',
+    ];
+
     /**
      * Get the app settings.
      *  Cache is expired on Setting model saved in EventServiceProvider.

@@ -281,9 +281,11 @@ abstract class Importer
             $user_array['email'] = User::generateEmailFromFullName($user_array['full_name']);
         }
 
+        // Get some variables for $user_formatted_array in case we need them later
+        $user_formatted_array = User::generateFormattedNameFromFullName($user_array['full_name'], Setting::getSettings()->username_format);
+
         if (empty($user_array['first_name'])) {
             // Get some fields for first name and last name based off of full name
-            $user_formatted_array = User::generateFormattedNameFromFullName($user_array['full_name'], Setting::getSettings()->username_format);
             $user_array['first_name'] = $user_formatted_array['first_name'];
             $user_array['last_name'] = $user_formatted_array['last_name'];
         }
