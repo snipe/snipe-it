@@ -90,7 +90,8 @@ class BulkAssetsController extends Controller
 
                 case 'edit':
                     $company_check= Asset::findMany($asset_ids)->pluck('company_id')->unique();
-
+//                    $user_check= Asset::with('assignedTo')->select('company_id')->unique();
+//                    dd($company_check->count());
                     if($company_check->count() > 1){
                        Session::put('company_uniq', 1);
                     }

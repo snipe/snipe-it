@@ -107,6 +107,6 @@
 @stop
 
 @section('moar_scripts')
-@include('partials.bootstrap-table')
 
+  @include('partials.bootstrap-table')
 @stop
