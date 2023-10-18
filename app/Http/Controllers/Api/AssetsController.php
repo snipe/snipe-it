@@ -530,7 +530,6 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param \App\Http\Requests\ImageUploadRequest $request
      * @since [v4.0]
-     * @return JsonResponse
      */
     public function store(ImageUploadRequest $request)
     {
@@ -579,6 +578,10 @@ class AssetsController extends Controller
 
         if (($model) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
+                //reduce "array to string conversion" exceptions - ideally we'd handle this in a form request, but this works for now
+                if(is_array($request->input($field->db_column, null))) {
+                    return response()->json(Helper::formatStandardApiResponse('error', null, 'This custom field can not be an array', 200));
+                }
 
                 // Set the field value based on what was sent in the request
                 $field_val = $request->input($field->db_column, null);
