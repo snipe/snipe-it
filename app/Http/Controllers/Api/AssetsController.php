@@ -295,7 +295,7 @@ class AssetsController extends Controller
         }
 
         if ($request->filled('order_number')) {
-            $assets->where('assets.order_number', '=', $request->get('order_number'));
+            $assets->where('assets.order_number', '=', strval($request->get('order_number')));
         }
 
         // This is kinda gross, but we need to do this because the Bootstrap Tables
