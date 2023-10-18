@@ -23,6 +23,7 @@ use Input;
 use League\Csv\Reader;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use League\Csv\EscapeFormula;
+use App\Http\Requests\CustomAssetReportRequest;
 
 
 /**
@@ -403,10 +404,11 @@ class ReportsController extends Controller
      * @since [v1.0]
      * @return \Illuminate\Http\Response
      */
-    public function postCustom(Request $request)
+    public function postCustom(CustomAssetReportRequest $request)
     {
         ini_set('max_execution_time', env('REPORT_TIME_LIMIT', 12000)); //12000 seconds = 200 minutes
         $this->authorize('reports.view');
+
 
         \Debugbar::disable();
         $customfields = CustomField::get();
@@ -645,7 +647,7 @@ class ReportsController extends Controller
             if (($request->filled('created_start')) && ($request->filled('created_end'))) {
                 $created_start = \Carbon::parse($request->input('created_start'))->startOfDay();
                 $created_end = \Carbon::parse($request->input('created_end'))->endOfDay();
-                
+
                 $assets->whereBetween('assets.created_at', [$created_start, $created_end]);
             }
             if (($request->filled('checkout_date_start')) && ($request->filled('checkout_date_end'))) {
@@ -656,22 +658,22 @@ class ReportsController extends Controller
             }
 
             if (($request->filled('checkin_date_start'))) {
-                $assets->whereBetween('last_checkin', [
-                    Carbon::parse($request->input('checkin_date_start'))->startOfDay(),
-                    // use today's date is `checkin_date_end` is not provided
-                    Carbon::parse($request->input('checkin_date_end', now()))->endOfDay(),
-                ]);
+                    $assets->whereBetween('last_checkin', [
+                        Carbon::parse($request->input('checkin_date_start'))->startOfDay(),
+                        // use today's date is `checkin_date_end` is not provided
+                        Carbon::parse($request->input('checkin_date_end', now()))->endOfDay(),
+                    ]);
             }
 
             if (($request->filled('expected_checkin_start')) && ($request->filled('expected_checkin_end'))) {
-                $assets->whereBetween('assets.expected_checkin', [$request->input('expected_checkin_start'), $request->input('expected_checkin_end')]);
+                    $assets->whereBetween('assets.expected_checkin', [$request->input('expected_checkin_start'), $request->input('expected_checkin_end')]);
             }
 
             if (($request->filled('last_audit_start')) && ($request->filled('last_audit_end'))) {
-                $last_audit_start = \Carbon::parse($request->input('last_audit_start'))->startOfDay();
-                $last_audit_end = \Carbon::parse($request->input('last_audit_end'))->endOfDay();
+                    $last_audit_start = \Carbon::parse($request->input('last_audit_start'))->startOfDay();
+                    $last_audit_end = \Carbon::parse($request->input('last_audit_end'))->endOfDay();
 
-                $assets->whereBetween('assets.last_audit_date', [$last_audit_start, $last_audit_end]);
+                    $assets->whereBetween('assets.last_audit_date', [$last_audit_start, $last_audit_end]);
             }
 
             if (($request->filled('next_audit_start')) && ($request->filled('next_audit_end'))) {
