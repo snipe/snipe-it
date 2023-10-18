@@ -582,11 +582,6 @@ class AssetsController extends Controller
                 // Set the field value based on what was sent in the request
                 $field_val = $request->input($field->db_column, null);
 
-                //reduce "array to string conversion" exceptions - ideally we'd handle this in a form request, but this works for now
-                if(is_array($field_val)) {
-                    return response()->json(Helper::formatStandardApiResponse('error', null, 'This custom field can not be an array', 200));
-                }
-
                 // If input value is null, use custom field's default value
                 if ($field_val == null) {
                     \Log::debug('Field value for '.$field->db_column.' is null');
