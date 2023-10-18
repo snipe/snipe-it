@@ -530,7 +530,6 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param \App\Http\Requests\ImageUploadRequest $request
      * @since [v4.0]
-     * @return JsonResponse
      */
     public function store(ImageUploadRequest $request)
     {
