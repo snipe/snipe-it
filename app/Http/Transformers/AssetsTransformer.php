@@ -7,6 +7,7 @@ use App\Models\Asset;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
+use Carbon\Carbon;
 
 
 class AssetsTransformer
@@ -38,7 +39,7 @@ class AssetsTransformer
             'byod' => ($asset->byod ? true : false),
 
             'model_number' => (($asset->model) && ($asset->model->model_number)) ? e($asset->model->model_number) : null,
-            'eol' => (($asset->model) && ($asset->model->eol != '')) ? $asset->model->eol : null,
+            'eol' => (($asset->asset_eol_date != '') && ($asset->purchase_date != '')) ? Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date).' months' : null,
             'asset_eol_date' => ($asset->asset_eol_date != '') ? Helper::getFormattedDateObject($asset->asset_eol_date, 'date') : null,
             'status_label' => ($asset->assetstatus) ? [
                 'id' => (int) $asset->assetstatus->id,
