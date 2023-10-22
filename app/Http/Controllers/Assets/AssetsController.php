@@ -137,7 +137,7 @@ class AssetsController extends Controller
             $asset->warranty_months         = request('warranty_months', null);
             $asset->purchase_cost           = request('purchase_cost');
             $asset->purchase_date           = request('purchase_date', null);
-            $asset->asset_eol_date          = request('asset_eol_date', $asset->present()->eol_date());
+            $asset->asset_eol_date          = request('asset_eol_date', null);
             $asset->assigned_to             = request('assigned_to', null);
             $asset->supplier_id             = request('supplier_id', null);
             $asset->requestable             = request('requestable', 0);
@@ -309,14 +309,15 @@ class AssetsController extends Controller
         $asset->warranty_months = $request->input('warranty_months', null);
         $asset->purchase_cost = $request->input('purchase_cost', null);
         $asset->purchase_date = $request->input('purchase_date', null); 
-        if ($request->filled('purchase_date') && !$request->filled('asset_eol_date') && $asset->model->eol) {
+        if ($request->filled('purchase_date') && !$request->filled('asset_eol_date') && ($asset->model->eol > 0)) {
             $asset->purchase_date = $request->input('purchase_date', null); 
             $asset->asset_eol_date = Carbon::parse($request->input('purchase_date'))->addMonths($asset->model->eol)->format('Y-m-d');
+            $asset->eol_explicit = false;
         } elseif ($request->filled('asset_eol_date')) {
            $asset->asset_eol_date = $request->input('asset_eol_date', null);
            $months = Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date);
            if($asset->model->eol) {
-               if($months != $asset->model->eol) {
+               if($months != $asset->model->eol > 0) {
                    $asset->eol_explicit = true;
                } else {
                    $asset->eol_explicit = false;
@@ -324,6 +325,9 @@ class AssetsController extends Controller
            } else {
                $asset->eol_explicit = true;
            }
+        } elseif (!$request->filled('asset_eol_date') && (($asset->model->eol) == 0)) {
+           $asset->asset_eol_date = null;
+		   $asset->eol_explicit = false;
         }
         $asset->supplier_id = $request->input('supplier_id', null);
         $asset->expected_checkin = $request->input('expected_checkin', null);
