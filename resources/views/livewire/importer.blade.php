@@ -239,6 +239,11 @@
                                                                             <div class="col-md-5">
                                                                                 <p class="form-control-static">{{ str_limit($activeFile->first_row[$index], 50, '...') }}</p>
                                                                             </div>
+									@else
+									    @php
+										$statusText = trans('general.empty_file');
+										$statusType = 'info';
+									    @endphp
 									@endif
                                                                         </div><!-- /div row -->
                                                                     @endforeach
