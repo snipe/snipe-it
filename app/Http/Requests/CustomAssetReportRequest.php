@@ -22,9 +22,6 @@ class CustomAssetReportRequest extends Request
     public function rules()
     {
         return [
-            'purchase_date'         => 'date|date_format:Y-m-d|nullable',
-            'checkout_date'         => 'date|date_format:Y-m-d|nullable',
-            'checkin_date'          => 'date|date_format:Y-m-d|nullable',
             'purchase_start'        => 'date|date_format:Y-m-d|nullable',
             'purchase_end'          => 'date|date_format:Y-m-d|nullable',
             'created_start'         => 'date|date_format:Y-m-d|nullable',
