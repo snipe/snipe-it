@@ -241,7 +241,7 @@
                                                                             </div>
 									@else
 									    @php
-										$statusText = trans('general.empty_file');
+										$statusText = trans('help.empty_file');
 										$statusType = 'info';
 									    @endphp
 									@endif
