@@ -88,7 +88,7 @@
               }
               @endphp
             <div class="col-md-8 required">
-              {{ Form::select("format",Helper::predefined_formats(), ($field_format == '') ? $field->format : $field_format, array('class'=>'format select2 form-control', 'aria-label'=>'format')) }}
+              {{ Form::select("format",Helper::predefined_formats(), ($field_format == '') ? $field->format : $field_format, array('class'=>'format select2 form-control', 'aria-label'=>'format', 'style' => 'width:100%;')) }}
               {!! $errors->first('format', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
