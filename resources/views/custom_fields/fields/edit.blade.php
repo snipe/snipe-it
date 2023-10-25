@@ -136,6 +136,13 @@
                   </label>
               </div>
 
+              <div class="col-md-9 col-md-offset-3">
+                  <label class="form-control">
+                      <input type="checkbox" name="show_in_requestable_list" aria-label="show_in_requestable_list" value="1"{{ (old('show_in_requestable_list') || $field->show_in_requestable_list) ? ' checked="checked"' : '' }}>
+                      {{ trans('admin/custom_fields/general.show_in_requestable_list') }}
+                  </label>
+              </div>
+
               @if (!$field->id)
               <!-- Encrypted  -->
                   <div class="col-md-9 col-md-offset-3">
