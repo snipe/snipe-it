@@ -950,6 +950,7 @@ class Asset extends Depreciable
                 ->orWhere('assets_users.first_name', 'LIKE', '%'.$term.'%')
                 ->orWhere('assets_users.last_name', 'LIKE', '%'.$term.'%')
                 ->orWhere('assets_users.username', 'LIKE', '%'.$term.'%')
+                ->orWhere('assets_users.employee_num', 'LIKE', '%'.$term.'%')
                 ->orWhereMultipleColumns([
                     'assets_users.first_name',
                     'assets_users.last_name',
@@ -1359,7 +1360,8 @@ class Asset extends Depreciable
                     ->orWhere('assets.asset_tag', 'LIKE', '%'.$search.'%')
                     ->orWhere('assets.serial', 'LIKE', '%'.$search.'%')
                     ->orWhere('assets.order_number', 'LIKE', '%'.$search.'%')
-                    ->orWhere('assets.notes', 'LIKE', '%'.$search.'%');
+                    ->orWhere('assets.notes', 'LIKE', '%'.$search.'%')
+                    ->orWhere('assets_users.employee_num', 'LIKE', '%'.$search.'%');
             }
 
         })->withTrashed()->whereNull('assets.deleted_at'); //workaround for laravel bug
