@@ -54,6 +54,7 @@ return [
     'add_to_preexisting_fieldsets' => 'Add to any existing fieldsets',
     'show_in_listview' => 'Show in list views by default. Authorized users will still be able to show/hide via the column selector',
     'show_in_listview_short' => 'Show in lists',
-    'show_in_requestable_list' => 'Show value in requestable assets list',
+    'show_in_requestable_list_short' => 'Show in requestable assets list.',
+    'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown.',
 
 ];
