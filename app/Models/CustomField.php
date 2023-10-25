@@ -250,8 +250,6 @@ class CustomField extends Model
     /**
      * Gets the DB column name.
      *
-     * @todo figure out if this is still needed? I don't know WTF it's for.
-     *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
      * @return string
