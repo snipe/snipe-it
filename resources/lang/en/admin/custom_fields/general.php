@@ -56,5 +56,6 @@ return [
     'show_in_listview_short' => 'Show in lists',
     'show_in_requestable_list_short' => 'Show in requestable assets list.',
     'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
+    'encrypted_options' => 'This field is encrypted, so some display options will not be available.',
 
 ];
