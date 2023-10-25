@@ -14,7 +14,7 @@ class AddShowInRequestableToCustomFields extends Migration
     public function up()
     {
         Schema::table('custom_fields', function (Blueprint $table) {
-            $table->boolean('show_in_requestable_list')->after('show_in_email')->default(0);
+            $table->boolean('show_in_requestable_list')->after('show_in_email')->nullable()->default(0);
         });
     }
 
