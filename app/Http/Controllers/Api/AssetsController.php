@@ -48,7 +48,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v4.0]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request, $audit = null) 
     {
@@ -443,7 +443,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v4.0]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Request $request, $id)
     {
@@ -474,7 +474,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
-     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function selectlist(Request $request)
     {
@@ -530,6 +530,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param \App\Http\Requests\ImageUploadRequest $request
      * @since [v4.0]
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(ImageUploadRequest $request)
     {
@@ -638,7 +639,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param \App\Http\Requests\ImageUploadRequest $request
      * @since [v4.0]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(ImageUploadRequest $request, $id)
     {
@@ -719,7 +720,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v4.0]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
@@ -748,7 +749,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v5.1.18]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function restore(Request $request, $assetId = null)
     {
@@ -788,7 +789,7 @@ class AssetsController extends Controller
      * @author [N. Butler]
      * @param string $tag
      * @since [v6.0.5]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function checkoutByTag(AssetCheckoutRequest $request, $tag)
     {
@@ -804,7 +805,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v4.0]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function checkout(AssetCheckoutRequest $request, $asset_id)
     {
@@ -888,7 +889,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v4.0]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function checkin(Request $request, $asset_id)
     {
@@ -944,7 +945,7 @@ class AssetsController extends Controller
      *
      * @author [A. Janes] [<ajanes@adagiohealth.org>]
      * @since [v6.0]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function checkinByTag(Request $request, $tag = null)
     {
@@ -970,7 +971,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $id
      * @since [v4.0]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function audit(Request $request)
 
