@@ -7,7 +7,7 @@ use Livewire\Component;
 
 use App\Models\Import;
 use Storage;
-
+use Livewire\WithFileUploads;
 use Log;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -15,17 +15,13 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Importer extends Component
 {
     use AuthorizesRequests;
+    use WithFileUploads;
 
     public $files;
-
-    public $progress; //upload progress - '-1' means don't show
-    public $progress_message;
-    public $progress_bar_class;
-
     public $message; //status/error message?
     public $message_type; //success/error?
 
-    //originally from ImporterFile
+    // originally from ImporterFile
     public $import_errors; //
     public ?Import $activeFile = null;
     public $importTypes;
@@ -162,8 +158,6 @@ class Importer extends Component
     public function mount()
     {
         $this->authorize('import');
-        $this->progress = -1; // '-1' means 'don't show the progressbar'
-        $this->progress_bar_class = 'progress-bar-warning';
         $this->importTypes = [
             'asset' =>      trans('general.assets'),
             'accessory' =>  trans('general.accessories'),
