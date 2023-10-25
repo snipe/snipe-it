@@ -1360,7 +1360,7 @@ class Asset extends Depreciable
                     ->orWhere('assets.asset_tag', 'LIKE', '%'.$search.'%')
                     ->orWhere('assets.serial', 'LIKE', '%'.$search.'%')
                     ->orWhere('assets.order_number', 'LIKE', '%'.$search.'%')
-                    ->orWhere('assets.notes', 'LIKE', '%'.$search.'%')
+                    ->orWhere('assets.notes', 'LIKE', '%'.$search.'%');
             }
 
         })->withTrashed()->whereNull('assets.deleted_at'); //workaround for laravel bug
