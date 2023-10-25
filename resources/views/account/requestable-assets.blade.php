@@ -67,7 +67,7 @@
                                                 <th class="col-md-2" data-field="expected_checkin" data-formatter="dateDisplayFormatter" data-sortable="true">{{ trans('admin/hardware/form.expected_checkin') }}</th>
 
                                                 @foreach(\App\Models\CustomField::get() as $field)
-                                                    @if ($field->show_in_requestable_list=='1')
+                                                    @if (($field->field_encrypted=='0') && ($field->show_in_requestable_list=='1'))
                                                         <th class="col-md-2" data-field="custom_fields.{{ $field->db_column }}" data-sortable="true">{{ $field->name }}</th>
                                                     @endif
                                                 @endforeach
