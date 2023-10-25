@@ -786,7 +786,17 @@ class Asset extends Depreciable
         return $this->belongsTo(\App\Models\Location::class, 'location_id');
     }
 
-
+    /**
+     * Establishes the asset -> checkout_requests relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v6.2.4]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function requests()
+    {
+        return $this->belongsToMany(\App\Models\Asset::class, 'checkout_requests', 'requestable_id', 'user_id')->where('requestable_type','=',\App\Models\Asset::class);
+    }
 
     /**
      * Get the next autoincremented asset tag
