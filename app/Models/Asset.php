@@ -949,6 +949,7 @@ class Asset extends Depreciable
                 ->orWhere('assets_users.first_name', 'LIKE', '%'.$term.'%')
                 ->orWhere('assets_users.last_name', 'LIKE', '%'.$term.'%')
                 ->orWhere('assets_users.username', 'LIKE', '%'.$term.'%')
+                ->orWhere('assets_users.employee_num', 'LIKE', '%'.$term.'%')
                 ->orWhereMultipleColumns([
                     'assets_users.first_name',
                     'assets_users.last_name',
