@@ -375,7 +375,7 @@
             </form>
         </div>
         <div style=padding-bottom:5px>
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" tabindex="-1" style="border:1px solid black">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" tabindex="-1" >
                 {{ trans('admin/reports/general.select_template') }}
             <strong class="caret"></strong>
             </a>
@@ -388,20 +388,21 @@
             </ul>
         </div>
 
-{{--        {{ $fieldname = $report->name }}--}}
-{{--        <select class="js-data-ajax" data-endpoint="locations" data-placeholder="{{ trans('admin/reports/general.select_template') }}" name="{{ $fieldname }}" style="width: 100%" id="{{ $fieldname }}_location_select" aria-label="{{ $fieldname }}" {!!  ((isset($item)) && (Helper::checkIfRequired($item, $fieldname))) ? ' data-validation="required" required' : '' !!}{{ (isset($multiple) && ($multiple=='true')) ? " multiple='multiple'" : '' }}>--}}
-{{--            @if ($report->name!='')--}}
-{{--                <option value="{{ $fieldname }}" selected="selected" role="option" aria-selected="true"  role="option">--}}
-{{--                    @foreach($saved_reports as $report)--}}
-{{--                        <li>--}}
-{{--                            {{ $report->name }}--}}
-{{--                        </li>--}}
-{{--                    @endforeach--}}
-{{--                </option>--}}
-{{--            @else--}}
-{{--                <option value=""  role="option">{{ trans('admin/reports/general.select_template') }}</option>--}}
-{{--            @endif--}}
-{{--        </select>--}}
+
+        {{ $fieldname = $report->name }}
+        <select class="js-data-ajax" data-endpoint="locations" data-placeholder="{{ trans('admin/reports/general.select_template') }}" name="{{ $fieldname }}" style="width: 100%" id="{{ $fieldname }}_location_select" aria-label="{{ $fieldname }}" {!!  ((isset($item)) && (Helper::checkIfRequired($item, $fieldname))) ? ' data-validation="required" required' : '' !!}{{ (isset($multiple) && ($multiple=='true')) ? " multiple='multiple'" : '' }}>
+            @if ($report->name!='')
+                <option value="{{ $fieldname }}" selected="selected" role="option" aria-selected="true"  role="option">
+                    @foreach($saved_reports as $report)
+                        <li>
+                            {{ $report->name }}
+                        </li>
+                    @endforeach
+                </option>
+            @else
+                <option value=""  role="option">{{ trans('admin/reports/general.select_template') }}</option>
+            @endif
+        </select>
     </div>
 </div>
 
