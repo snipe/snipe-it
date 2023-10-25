@@ -237,7 +237,7 @@ class AssetsTransformer
             foreach ($asset->model->fieldset->fields as $field) {
 
                 // Only display this if it's allowed via the custom field setting
-                if ($field->show_in_requestable_list == '1') {
+                if (($field->field_encrypted=='0') && ($field->show_in_requestable_list=='1')) {
 
                     $value = $asset->{$field->db_column};
                     if (($field->format == 'DATE') && (!is_null($value)) && ($value != '')) {
@@ -255,8 +255,8 @@ class AssetsTransformer
 
 
         $permissions_array['available_actions'] = [
-            'cancel' => ($asset->requests->find(Auth::user()->id)) ? true : false,
-            'request' => ($asset->requests->find(Auth::user()->id)) ? false : true,
+            'cancel' => ($asset->isRequestedBy(\Auth::user())) ? true : false,
+            'request' => ($asset->isRequestedBy(\Auth::user())) ? false : true,
         ];
 
         $array += $permissions_array;
