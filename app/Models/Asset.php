@@ -787,7 +787,6 @@ class Asset extends Depreciable
     }
 
 
-
     /**
      * Get the next autoincremented asset tag
      *

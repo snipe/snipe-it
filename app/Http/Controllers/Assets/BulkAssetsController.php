@@ -195,8 +195,14 @@ class BulkAssetsController extends Controller
                 }
 
                 if ($request->filled('rtd_location_id')) {
-                    $this->update_array['rtd_location_id'] = $request->input('rtd_location_id');
+                    if (($request->filled('update_real_loc')) && (($request->input('update_real_loc')) == '0')) {
+                        $this->update_array['rtd_location_id'] = $request->input('rtd_location_id');
+                    }
                     if (($request->filled('update_real_loc')) && (($request->input('update_real_loc')) == '1')) {
+                        $this->update_array['location_id'] = $request->input('rtd_location_id');
+                        $this->update_array['rtd_location_id'] = $request->input('rtd_location_id');
+                    }
+                    if (($request->filled('update_real_loc')) && (($request->input('update_real_loc')) == '2')) {
                         $this->update_array['location_id'] = $request->input('rtd_location_id');
                     }
                 }
