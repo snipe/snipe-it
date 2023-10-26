@@ -88,7 +88,7 @@ class CustomFieldFactory extends Factory
             return [
                 'name' => 'Test Encrypted',
                 'field_encrypted' => '1',
-                'help_text' => 'This is a test encrypted field.',
+                'help_text' => 'This is a sample encrypted field.',
             ];
         });
     }
@@ -98,9 +98,19 @@ class CustomFieldFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'Test Checkbox',
-                'help_text' => 'This is a test checkbox.',
+                'help_text' => 'This is a sample checkbox.',
                 'field_values' => "One\nTwo\nThree",
                 'element'   => 'checkbox',
+            ];
+        });
+    }
+
+    public function testRequired()
+    {
+        return $this->state(function () {
+            return [
+                'name' => 'Test Required',
+                'help_text' => 'This is a sample required field.',
             ];
         });
     }
