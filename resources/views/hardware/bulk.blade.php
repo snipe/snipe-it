@@ -62,7 +62,7 @@
              </div>
               <div class="col-md-5">
                 <label class="form-control">
-                  {{ Form::checkbox('null_expected_checkin_date', '1', false, ['checked' => 'false']) }}
+                  {{ Form::checkbox('null_expected_checkin_date', '1', false) }}
                   {{ trans_choice('general.set_to_null', count($assets), ['asset_count' => count($assets)]) }}
                 </label>
               </div>
