@@ -1089,6 +1089,7 @@ class AssetsController extends Controller
                 break;
             case 'location':
                 $assets->OrderLocation($order);
+                break;
             default:
                 $assets->orderBy($column_sort, $order);
                 break;
