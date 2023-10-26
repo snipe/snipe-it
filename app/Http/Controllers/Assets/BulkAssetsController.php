@@ -112,7 +112,8 @@ class BulkAssetsController extends Controller
     public function update(Request $request)
     {
         $this->authorize('update', Asset::class);
-        $error_bag = [];
+        $has_errors = 0;
+        $error_array = array();
 
         // Get the back url from the session and then destroy the session
         $bulk_back_url = route('hardware.index');
@@ -120,11 +121,9 @@ class BulkAssetsController extends Controller
             $bulk_back_url = $request->session()->pull('bulk_back_url');
         }
 
-        \Log::debug(print_r($request->all(), true));
-
        $custom_field_columns = CustomField::all()->pluck('db_column')->toArray();
      
-        if(Session::exists('ids')) {
+        if (Session::exists('ids')) {
             $assets = Session::get('ids'); 
         } elseif (! $request->filled('ids') || count($request->input('ids')) <= 0) {
             return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.update.no_assets_selected'));
@@ -157,7 +156,6 @@ class BulkAssetsController extends Controller
         ) {
             foreach ($assets as $assetId) {
 
-                \Log::debug('Asset ID is: '.$assetId);
                 $this->update_array = [];
 
                 $this->conditionallyAddItem('purchase_date')
@@ -221,14 +219,13 @@ class BulkAssetsController extends Controller
                         $changed[$key]['new'] = $this->update_array[$key];
                     }
                 }
-                \Log::debug('$this->update_array:');
-                \Log::debug(print_r($this->update_array, true));
-
-                \Log::debug('$changed');
-                \Log::debug(print_r($changed, true));
+//                \Log::debug('$this->update_array:');
+//                \Log::debug(print_r($this->update_array, true));
+//
+//                \Log::debug('$changed');
+//                \Log::debug(print_r($changed, true));
  
                 if ($custom_fields_present) {
-                    \Log::debug('Custom fields are present');
 
                     $model = $asset->model()->first();
                     // Make sure this model is valid
@@ -236,18 +233,15 @@ class BulkAssetsController extends Controller
 
                     if ($assetCustomFields && $assetCustomFields->fields) {
 
-                        \Log::debug('There are custom fields on '.$assetCustomFields->name);
 
                             foreach ($assetCustomFields->fields as $field) {
 
                                 if ((array_key_exists($field->db_column, $this->update_array)) && ($field->field_encrypted=='1')) {
-                                    \Log::debug('The custom field is encrypted!');
                                     $decrypted_old = Helper::gracefulDecrypt($field, $asset->{$field->db_column});
 
                                     // Check if the decrypted existing value is different than one we just submitted
                                     // and if not, pull it out of the object
                                     if ($decrypted_old != $this->update_array[$field->db_column]) {
-                                        \Log::debug('The decrypted existing value is different than the one submitted');
                                         $asset->{$field->db_column} = \Crypt::encrypt($this->update_array[$field->db_column]);
                                     } else {
                                         \Log::debug('The decrypted existing value is the same as the one submitted - unset it');
@@ -258,7 +252,6 @@ class BulkAssetsController extends Controller
                                 // These fields aren't encrypted, just carry on as usual
                                 } else {
                                     if ((array_key_exists($field->db_column, $this->update_array)) && ($asset->{$field->db_column} != $this->update_array[$field->db_column])) {
-                                        \Log::debug('The custom field value is different than the original one');
                                         $asset->{$field->db_column} = $this->update_array[$field->db_column];
                                     }
                                 }
@@ -269,41 +262,37 @@ class BulkAssetsController extends Controller
 
 
                 // Check if it passes validation, and then try to save
-                $has_errors = 0;
-                $error_array = array();
-
-                if ($asset->isValid()) {
-                    if ($asset->update($this->update_array)) {
-                        $logAction = new Actionlog();
-                        $logAction->item_type = Asset::class;
-                        $logAction->item_id = $assetId;
-                        $logAction->created_at =  date("Y-m-d H:i:s");
-                        $logAction->user_id = Auth::id();
-                        $logAction->log_meta = json_encode($changed);
-                        $logAction->logaction('update');
-                    }
-
-                    \Log::debug('New asset info:');
-                    \Log::debug('Model name: '.$asset->model->name);
-                    \Log::debug('Asset ID '.$asset->id.' with custom fields bulk edited successfully');
+                if ($asset->update($this->update_array)) {
+                    $logAction = new Actionlog();
+                    $logAction->item_type = Asset::class;
+                    $logAction->item_id = $assetId;
+                    $logAction->created_at =  date("Y-m-d H:i:s");
+                    $logAction->user_id = Auth::id();
+                    $logAction->log_meta = json_encode($changed);
+                    $logAction->logaction('update');
 
                 }  else {
-                    $has_errors++;
+
+                    \Log::debug('Error bag:');
                     \Log::debug(print_r($asset->getErrors(), true));
                     // Build the error array
                     foreach ($asset->getErrors()->toArray() as $key => $message) {
                         for ($x = 0; $x < count($message); $x++) {
-                            $error_array[][] = trans('general.asset').' '.$asset->id.': '.$message[$x];
+                            $error_array[$key][] = trans('general.asset') . ' ' . $asset->id . ': ' . $message[$x];
+                            $has_errors++;
                         }
                     }
-                }
+
+                } // end if saved
 
             } // end asset foreach
 
+            \Log::debug($has_errors.' errors');
             if ($has_errors > 0) {
-                \Log::debug('Ooops!');
-                dd($error_array);
-                return redirect($bulk_back_url)->with('bulk_errors', array_unique($error_array));
+                \Log::debug('Error array:');
+                \Log::debug(print_r($error_array, true));
+                //dd($error_array);
+                return redirect($bulk_back_url)->with('bulk_asset_errors', $error_array);
             }
 
             return redirect($bulk_back_url)->with('success', trans('admin/hardware/message.update.success'));
@@ -327,7 +316,6 @@ class BulkAssetsController extends Controller
     {
         if (request()->filled($field)) {
             $this->update_array[$field] = request()->input($field);
-            \Log::debug('Conditionally adding '.$field);
         }
 
         return $this;
