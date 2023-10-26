@@ -531,21 +531,16 @@
 
     function changeLogFormatter(value) {
 
-        console.dir(value);
         var result = '';
         var pretty_index = '';
-
-        console.error('first the formatter');
 
             for (var index in value) {
 
 
                 // Check if it's a custom field
                 if (index.startsWith('_snipeit_')) {
-                    console.error('It is a custom field');
                     pretty_index = index.replace("_snipeit_", "Custom:_");
                 } else {
-                    console.error('Not a custom field');
                     pretty_index = index;
                 }
 
