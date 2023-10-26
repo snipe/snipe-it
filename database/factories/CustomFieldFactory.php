@@ -81,4 +81,26 @@ class CustomFieldFactory extends Factory
             ];
         });
     }
+
+    public function testEncrypted()
+    {
+        return $this->state(function () {
+            return [
+                'name' => 'Test Encrypted',
+                'help_text' => 'This is a test encrypted field.',
+            ];
+        });
+    }
+
+    public function testCheckbox()
+    {
+        return $this->state(function () {
+            return [
+                'name' => 'Test Checkbox',
+                'help_text' => 'This is a test checkbox.',
+                'field_values' => "One\nTwo\nThree",
+                'element'   => 'checkbox',
+            ];
+        });
+    }
 }
