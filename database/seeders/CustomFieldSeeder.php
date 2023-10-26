@@ -35,7 +35,6 @@ class CustomFieldSeeder extends Seeder
         CustomField::factory()->count(1)->macAddress()->create();
         CustomField::factory()->count(1)->testEncrypted()->create();
         CustomField::factory()->count(1)->testCheckbox()->create();
-        CustomField::factory()->count(1)->testRequired()->create();
 
 
         DB::table('custom_field_custom_fieldset')->insert([
@@ -95,13 +94,6 @@ class CustomFieldSeeder extends Seeder
                 'custom_fieldset_id' => '1',
                 'order' => 0,
                 'required' => 0,
-            ],
-
-            [
-                'custom_field_id' => '8',
-                'custom_fieldset_id' => '1',
-                'order' => 0,
-                'required' => 1,
             ],
 
         ]);

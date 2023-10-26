@@ -105,13 +105,4 @@ class CustomFieldFactory extends Factory
         });
     }
 
-    public function testRequired()
-    {
-        return $this->state(function () {
-            return [
-                'name' => 'Test Required',
-                'help_text' => 'This is a sample required field.',
-            ];
-        });
-    }
 }
