@@ -744,7 +744,7 @@ class ReportsController extends Controller
                     }
 
                     if ($request->filled('eol')) {
-                        $row[] = ($asset->purchase_date != '') ? $asset->present()->eol_date() : '';
+                            $row[] = ($asset->asset_eol_date) ? $asset->asset_eol_date : '';
                     }
 
                     if ($request->filled('order')) {
