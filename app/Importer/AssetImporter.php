@@ -5,6 +5,9 @@ namespace App\Importer;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Statuslabel;
+use App\Models\User;
+use App\Events\CheckoutableCheckedIn;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class AssetImporter extends ItemImporter
@@ -142,6 +145,12 @@ class AssetImporter extends ItemImporter
             //-- user_id is a property of the abstract class Importer, which this class inherits from and it's setted by
             //-- the class that needs to use it (command importer or GUI importer inside the project).
             if (isset($target)) {
+                if (!is_null($asset->assigned_to)){
+                    if ($asset->assigned_to != $target->id){
+                        event(new CheckoutableCheckedIn($asset, User::find($asset->assigned_to), Auth::user(), $asset->notes, date('Y-m-d H:i:s')));
+                    }
+                }
+
                 $asset->fresh()->checkOut($target, $this->user_id, date('Y-m-d H:i:s'), null, $asset->notes, $asset->name);
             }
 

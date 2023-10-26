@@ -48,7 +48,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v4.0]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request, $audit = null) 
     {
@@ -443,7 +443,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v4.0]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Request $request, $id)
     {
@@ -474,7 +474,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
-     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function selectlist(Request $request)
     {
@@ -530,6 +530,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param \App\Http\Requests\ImageUploadRequest $request
      * @since [v4.0]
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(ImageUploadRequest $request)
     {
@@ -638,7 +639,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param \App\Http\Requests\ImageUploadRequest $request
      * @since [v4.0]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(ImageUploadRequest $request, $id)
     {
@@ -719,7 +720,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v4.0]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
@@ -748,7 +749,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v5.1.18]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function restore(Request $request, $assetId = null)
     {
@@ -788,7 +789,7 @@ class AssetsController extends Controller
      * @author [N. Butler]
      * @param string $tag
      * @since [v6.0.5]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function checkoutByTag(AssetCheckoutRequest $request, $tag)
     {
@@ -804,7 +805,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v4.0]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function checkout(AssetCheckoutRequest $request, $asset_id)
     {
@@ -888,7 +889,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v4.0]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function checkin(Request $request, $asset_id)
     {
@@ -944,7 +945,7 @@ class AssetsController extends Controller
      *
      * @author [A. Janes] [<ajanes@adagiohealth.org>]
      * @since [v6.0]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function checkinByTag(Request $request, $tag = null)
     {
@@ -970,7 +971,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $id
      * @since [v4.0]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function audit(Request $request)
 
@@ -1031,23 +1032,53 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function requestable(Request $request)
     {
         $this->authorize('viewRequestable', Asset::class);
 
+        $allowed_columns = [
+            'name',
+            'asset_tag',
+            'serial',
+            'model_number',
+            'image',
+            'purchase_cost',
+            'expected_checkin',
+        ];
+
+        $all_custom_fields = CustomField::all(); //used as a 'cache' of custom fields throughout this page load
+
+        foreach ($all_custom_fields as $field) {
+            $allowed_columns[] = $field->db_column_name();
+        }
+
         $assets = Asset::select('assets.*')
-            ->with('location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
-                'model.category', 'model.manufacturer', 'model.fieldset', 'supplier')
+            ->with('location', 'assetstatus', 'assetlog', 'company','assignedTo',
+                'model.category', 'model.manufacturer', 'model.fieldset', 'supplier', 'requests')
             ->requestableAssets();
 
-        $offset = request('offset', 0);
-        $limit = $request->input('limit', 50);
-        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+
+
+
         if ($request->filled('search')) {
             $assets->TextSearch($request->input('search'));
         }
+
+        // Search custom fields by column name
+        foreach ($all_custom_fields as $field) {
+            if ($request->filled($field->db_column_name())) {
+                $assets->where($field->db_column_name(), '=', $request->input($field->db_column_name()));
+            }
+        }
+
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort_override = str_replace('custom_fields.', '', $request->input('sort'));
+
+        // This handles all the pivot sorting (versus the assets.* fields
+        // in the allowed_columns array)
+        $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'assets.created_at';
 
         switch ($request->input('sort')) {
             case 'model':
@@ -1056,16 +1087,18 @@ class AssetsController extends Controller
             case 'model_number':
                 $assets->OrderModelNumber($order);
                 break;
-            case 'category':
-                $assets->OrderCategory($order);
-                break;
-            case 'manufacturer':
-                $assets->OrderManufacturer($order);
+            case 'location':
+                $assets->OrderLocation($order);
                 break;
             default:
-                $assets->orderBy('assets.created_at', $order);
+                $assets->orderBy($column_sort, $order);
                 break;
         }
+
+
+        // Make sure the offset and limit are actually integers and do not exceed system limits
+        $offset = ($request->input('offset') > $assets->count()) ? $assets->count() : app('api_offset_value');
+        $limit = app('api_limit_value');
 
         $total = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();

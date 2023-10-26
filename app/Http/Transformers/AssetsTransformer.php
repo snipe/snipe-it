@@ -8,7 +8,7 @@ use App\Models\Setting;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 use Carbon\Carbon;
-
+use Auth;
 
 class AssetsTransformer
 {
@@ -231,6 +231,29 @@ class AssetsTransformer
             'status'=> ($asset->assetstatus) ? $asset->present()->statusMeta : null,
             'assigned_to_self' => ($asset->assigned_to == \Auth::user()->id),
         ];
+
+        if (($asset->model) && ($asset->model->fieldset) && ($asset->model->fieldset->fields->count() > 0)) {
+            $fields_array = [];
+
+            foreach ($asset->model->fieldset->fields as $field) {
+
+                // Only display this if it's allowed via the custom field setting
+                if (($field->field_encrypted=='0') && ($field->show_in_requestable_list=='1')) {
+
+                    $value = $asset->{$field->db_column};
+                    if (($field->format == 'DATE') && (!is_null($value)) && ($value != '')) {
+                        $value = Helper::getFormattedDateObject($value, 'date', false);
+                    }
+
+                    $fields_array[$field->db_column] = e($value);
+                }
+
+                $array['custom_fields'] = $fields_array;
+            }
+        } else {
+            $array['custom_fields'] = new \stdClass; // HACK to force generation of empty object instead of empty list
+        }
+
 
         $permissions_array['available_actions'] = [
             'cancel' => ($asset->isRequestedBy(\Auth::user())) ? true : false,
