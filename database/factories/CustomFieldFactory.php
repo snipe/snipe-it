@@ -26,6 +26,7 @@ class CustomFieldFactory extends Factory
             'format' => '',
             'element' => 'text',
             'auto_add_to_fieldsets' => '0',
+            'show_in_requestable_list' => '0',
         ];
     }
 
@@ -66,6 +67,7 @@ class CustomFieldFactory extends Factory
             return [
                 'name' => 'CPU',
                 'help_text' => 'The speed of the processor on this device.',
+                'show_in_requestable_list' => '1',
             ];
         });
     }
