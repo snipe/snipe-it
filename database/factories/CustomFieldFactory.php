@@ -87,6 +87,7 @@ class CustomFieldFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'Test Encrypted',
+                'field_encrypted' => '1',
                 'help_text' => 'This is a test encrypted field.',
             ];
         });
