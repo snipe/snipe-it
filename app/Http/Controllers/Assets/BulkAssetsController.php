@@ -238,17 +238,26 @@ class BulkAssetsController extends Controller
                                 if ((array_key_exists($field->db_column, $this->update_array)) && ($field->field_encrypted=='1')) {
                                     $decrypted_old = Helper::gracefulDecrypt($field, $asset->{$field->db_column});
 
-                                    // Check if the decrypted existing value is different from one we just submitted
-                                    // and if not, pull it out of the object
+                                    /*
+                                     * Check if the decrypted existing value is different from one we just submitted
+                                     * and if not, pull it out of the object since it shouldn't really be updating at all.
+                                     * If we don't do this, it will try to re-encrypt it, and the same value encrypted two
+                                     * different times will have different values, so it will *look* like it was updated
+                                     * but it wasn't.
+                                     */
                                     if ($decrypted_old != $this->update_array[$field->db_column]) {
                                         $asset->{$field->db_column} = \Crypt::encrypt($this->update_array[$field->db_column]);
                                     } else {
-                                        \Log::debug('The decrypted existing value is the same as the one submitted - unset it');
+                                        /*
+                                         * Remove the encrypted custom field from the update_array, since nothing changed
+                                         */
                                         unset($this->update_array[$field->db_column]);
                                         unset($asset->{$field->db_column});
                                     }
 
-                                // These fields aren't encrypted, just carry on as usual
+                                /*
+                                 * These custom fields aren't encrypted, just carry on as usual
+                                 */
                                 } else {
 
 
