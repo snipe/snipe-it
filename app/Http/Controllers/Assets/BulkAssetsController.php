@@ -162,7 +162,6 @@ class BulkAssetsController extends Controller
                     ->conditionallyAddItem('expected_checkin')
                     ->conditionallyAddItem('order_number')
                     ->conditionallyAddItem('requestable')
-                    ->conditionallyAddItem('model_id')
                     ->conditionallyAddItem('status_id')
                     ->conditionallyAddItem('supplier_id')
                     ->conditionallyAddItem('warranty_months')
