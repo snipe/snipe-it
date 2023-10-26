@@ -210,35 +210,35 @@ class BulkAssetsController extends Controller
                 $changed = [];
                 $asset = Asset::find($assetId);
 
-                //dd($this->update_array);
-
                 foreach ($this->update_array as $key => $value) {
                     if ($this->update_array[$key] != $asset->{$key}) {
                         $changed[$key]['old'] = $asset->{$key};
                         $changed[$key]['new'] = $this->update_array[$key];
                     }
                 }
-//                \Log::debug('$this->update_array:');
-//                \Log::debug(print_r($this->update_array, true));
-//
-//                \Log::debug('$changed');
-//                \Log::debug(print_r($changed, true));
  
                 if ($custom_fields_present) {
 
                     $model = $asset->model()->first();
+
+                    // Use the rules of the new model fieldsets if the model changed
+                    if ($request->filled('model_id')) {
+                        $this->update_array['model_id'] =  $request->input('model_id');
+                        $model = \App\Models\AssetModel::find($request->input('model_id'));
+                    }
+
+
                     // Make sure this model is valid
-                    $assetCustomFields = ($model) ? $asset->model()->first()->fieldset : null;
+                    $assetCustomFields = ($model) ? $model->fieldset : null;
 
                     if ($assetCustomFields && $assetCustomFields->fields) {
-
 
                             foreach ($assetCustomFields->fields as $field) {
 
                                 if ((array_key_exists($field->db_column, $this->update_array)) && ($field->field_encrypted=='1')) {
                                     $decrypted_old = Helper::gracefulDecrypt($field, $asset->{$field->db_column});
 
-                                    // Check if the decrypted existing value is different than one we just submitted
+                                    // Check if the decrypted existing value is different from one we just submitted
                                     // and if not, pull it out of the object
                                     if ($decrypted_old != $this->update_array[$field->db_column]) {
                                         $asset->{$field->db_column} = \Crypt::encrypt($this->update_array[$field->db_column]);
@@ -252,6 +252,10 @@ class BulkAssetsController extends Controller
                                 } else {
                                     if ((array_key_exists($field->db_column, $this->update_array)) && ($asset->{$field->db_column} != $this->update_array[$field->db_column])) {
                                         $asset->{$field->db_column} = $this->update_array[$field->db_column];
+                                        if (is_array($this->update_array[$field->db_column])) {
+                                            $asset->{$field->db_column} = implode(', ', $this->update_array[$field->db_column]);
+                                        }
+
                                     }
                                 }
 
