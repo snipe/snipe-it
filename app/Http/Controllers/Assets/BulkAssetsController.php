@@ -250,12 +250,16 @@ class BulkAssetsController extends Controller
 
                                 // These fields aren't encrypted, just carry on as usual
                                 } else {
+
+
                                     if ((array_key_exists($field->db_column, $this->update_array)) && ($asset->{$field->db_column} != $this->update_array[$field->db_column])) {
-                                        $asset->{$field->db_column} = $this->update_array[$field->db_column];
+
+                                        // Check if this is an array, and if so, flatten it
                                         if (is_array($this->update_array[$field->db_column])) {
                                             $asset->{$field->db_column} = implode(', ', $this->update_array[$field->db_column]);
+                                        } else {
+                                            $asset->{$field->db_column} = $this->update_array[$field->db_column];
                                         }
-
                                     }
                                 }
 
@@ -264,20 +268,10 @@ class BulkAssetsController extends Controller
                 } // end custom fields handler
 
 
+
                 // Check if it passes validation, and then try to save
-                if ($asset->update($this->update_array)) {
-                    $logAction = new Actionlog();
-                    $logAction->item_type = Asset::class;
-                    $logAction->item_id = $assetId;
-                    $logAction->created_at =  date("Y-m-d H:i:s");
-                    $logAction->user_id = Auth::id();
-                    $logAction->log_meta = json_encode($changed);
-                    $logAction->logaction('update');
+                if (!$asset->update($this->update_array)) {
 
-                }  else {
-
-                    \Log::debug('Error bag:');
-                    \Log::debug(print_r($asset->getErrors(), true));
                     // Build the error array
                     foreach ($asset->getErrors()->toArray() as $key => $message) {
                         for ($x = 0; $x < count($message); $x++) {
@@ -286,7 +280,7 @@ class BulkAssetsController extends Controller
                         }
                     }
 
-                } // end if saved
+                }  // end if saved
 
             } // end asset foreach
 
