@@ -290,11 +290,7 @@ class BulkAssetsController extends Controller
 
             } // end asset foreach
 
-            \Log::debug($has_errors.' errors');
             if ($has_errors > 0) {
-                \Log::debug('Error array:');
-                \Log::debug(print_r($error_array, true));
-                //dd($error_array);
                 return redirect($bulk_back_url)->with('bulk_asset_errors', $error_array);
             }
 
