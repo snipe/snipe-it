@@ -173,7 +173,7 @@ class AssetPresenter extends Presenter
                 'searchable' => false,
                 'sortable' => true,
                 'visible' => false,
-                'title' => trans('general.eol'),
+                'title' => trans('admin/hardware/form.eol_rate'),
             ],
             [
                 'field' => 'asset_eol_date',
