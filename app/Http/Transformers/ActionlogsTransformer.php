@@ -3,6 +3,7 @@ namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
 use App\Models\Actionlog;
+use App\Models\Asset;
 use App\Models\CustomField;
 use App\Models\Setting;
 use App\Models\Company;
@@ -12,6 +13,7 @@ use App\Models\AssetModel;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Gate;
 
 class ActionlogsTransformer
 {
@@ -98,6 +100,13 @@ class ActionlogsTransformer
                                         \Log::debug('custom fields do not match');
                                         $clean_meta[$fieldname]['old'] = "************";
                                         $clean_meta[$fieldname]['new'] = "************";
+
+                                        // Display the changes if the user is an admin or superadmin
+                                        if (Gate::allows('admin')) {
+                                            $clean_meta[$fieldname]['old'] = ($enc_old) ? unserialize($enc_old): '';
+                                            $clean_meta[$fieldname]['new'] = ($enc_new) ? unserialize($enc_new): '';
+                                        }
+
                                     }
 
 

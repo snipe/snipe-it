@@ -11,7 +11,7 @@ use Carbon\Carbon;
 class AssetObserver
 {
     /**
-     * Listen to the User created event.
+     * Listen to the Asset updating event. This fires automatically every time an existing asset is saved.
      *
      * @param  Asset  $asset
      * @return void
