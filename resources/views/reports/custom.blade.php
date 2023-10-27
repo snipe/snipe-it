@@ -221,6 +221,38 @@
                 {{ trans('admin/users/table.title') }}
               </label>
 
+                <!-- new -->
+
+              <label class="form-control">
+                  {{ Form::checkbox('phone', '1', '1') }}
+                  {{ trans('admin/users/table.phone') }}
+              </label>
+
+              <label class="form-control">
+                  {{ Form::checkbox('user_address', '1', '1') }}
+                  {{ trans('general.address') }}
+              </label>
+
+              <label class="form-control">
+                  {{Form::checkbox('user_city', '1', '1')}}
+                  {{ trans('general.city') }}
+              </label>
+
+              <label class="form-control">
+                  {{Form::checkbox('user_state', '1', '1')}}
+                  {{ trans('general.state') }}
+              </label>
+
+              <label class="form-control">
+                  {{Form::checkbox('user_country', '1', '1')}}
+                  {{ trans('general.country') }}
+              </label>
+
+              <label class="form-control">
+                  {{Form::checkbox('user_zip', '1', '1')}}
+                  {{ trans('general.zip') }}
+              </label>
+
 
 
             @if ($customfields->count() > 0)
