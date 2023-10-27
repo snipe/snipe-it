@@ -133,7 +133,7 @@ class AssetObserver
      * use saveQuietly() in the migration which skips this observer.
      *
      * @see https://github.com/snipe/snipe-it/issues/13723#issuecomment-1761315938
-     */
+     
     public function saving(Asset $asset)
     {
         // determine if calculated eol and then calculate it - this should only happen on a new asset
@@ -158,4 +158,5 @@ class AssetObserver
        }
 
     }
+    */
 }
