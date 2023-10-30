@@ -6,13 +6,8 @@ use Illuminate\Http\Request;
 
 class SavedReportsController extends Controller
 {
-    //a method to the madness
     public function store(Request $request)
     {
-
-
-    dd($request->all());
-
+        dd('saved reports', $request->all());
     }
-
 }
