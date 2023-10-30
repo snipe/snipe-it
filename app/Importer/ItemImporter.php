@@ -372,7 +372,7 @@ class ItemImporter extends Importer
         if (empty($asset_statuslabel_name)) {
             return null;
         }
-        $status = Statuslabel::where(['name' => trim($asset_statuslabel_name]))->first();
+       $status = Statuslabel::where(['name' => trim($asset_statuslabel_name)])->first();
 
         if ($status) {
             $this->log('A matching Status '.$asset_statuslabel_name.' already exists');
