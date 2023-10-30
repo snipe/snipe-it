@@ -395,6 +395,7 @@ class ReportsController extends Controller
         return view('reports/custom')->with('customfields', $customfields);
     }
 
+
     /**
      * Exports the custom report to CSV
      *
