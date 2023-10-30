@@ -14,7 +14,7 @@
 @section('content')
 
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-8 col-md-offset-1">
 
     {{ Form::open(['method' => 'post', 'class' => 'form-horizontal', 'id' => 'custom-report-form']) }}
     {{csrf_field()}}
