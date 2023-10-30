@@ -199,20 +199,22 @@
     </form>
   </div> <!--/.col-md-8-->
 </div>
+
 @stop
-@livewire('modal-components')
+@livewire('modal-components', ['multiCompany' => $multiCompany])
 
 
 @section('moar_scripts')
-  @if(!empty(Session::get('company_uniq')))
-    <script>
-      // $(function() {
-      //   $('#MultiCompanyAlert').modal('show');
-      // });
-      $( "click" ).on( "click", function() {
-       window.livewire.emit('modal-components');
-
-      } );
-    </script>
-  @endif
+ @if($multiCompany)
+{{--    <script>--}}
+{{--      $(function() {--}}
+{{--        $('#MultiCompanyAlert').modal('show');--}}
+{{--      });--}}
+{{--    </script>--}}
+<script>
+  window.addEventListener('show-modal', event => {
+    alert('we are here');
+  })
+</script>
+ @endif
 @stop

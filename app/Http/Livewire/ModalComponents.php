@@ -9,16 +9,13 @@ use Livewire\Component;
 class ModalComponents extends Component
 {
     public $modal_change;
-    public $session_value;
+    public $multiCompany;
 
-    public function mount() {
-
+    public function mount($multiCompany) {
+        $this->multiCompany = $multiCompany;
+        $this->dispatchBrowserEvent('show-modal');
 }
     public function checkSession(){
-        $this->session_value = Session::get('company_uniq');
-        if(!empty($this->session_value)){
-            $this->dispatchBrowserEvent('showModal');
-        }
     }
     public function multiCompanyAcknowledge(Request $request, $action){
         dd('hi',$action);
