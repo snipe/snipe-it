@@ -201,7 +201,7 @@
 </div>
 
 @stop
-@livewire('modal-components', ['multiCompany' => $multiCompany])
+@livewire('modal-components', ['multiCompany' => $multiCompany, 'modal' => true])
 
 
 @section('moar_scripts')
