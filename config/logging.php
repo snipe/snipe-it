@@ -112,6 +112,7 @@ $config = [
             'handler' => \Rollbar\Laravel\MonologHandler::class,
             'access_token' => env('ROLLBAR_TOKEN'),
             'level' => env('ROLLBAR_LEVEL', 'error'),
+            'code_version' => config('version.full_app_version'),
         ],
     ],
 
