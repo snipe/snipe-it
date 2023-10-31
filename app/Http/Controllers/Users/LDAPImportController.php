@@ -56,6 +56,10 @@ class LDAPImportController extends Controller
         $ldap_results_json = Artisan::output();
         $ldap_results = json_decode($ldap_results_json, true);
 
+        if (!$ldap_results) {
+            return redirect()->back()->withInput()->with('error', trans('general.no_results'));
+        }
+
         // Direct user to appropriate status page.
         if ($ldap_results['error']) {
             return redirect()->back()->withInput()->with('error', $ldap_results['error_message']);
