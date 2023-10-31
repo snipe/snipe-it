@@ -81,7 +81,7 @@
                     <td>{{ $asset->asset_tag }}</td>
                     <td>{{ $asset->name }}</td>
                     <td>{{ (($asset->model) && ($asset->model->category)) ? $asset->model->category->name : trans('general.invalid_category') }}</td>
-                    <td>{{ $asset->model->name }}</td>
+                    <td>{{ ($asset->model) ? $asset->model->name : trans('general.invalid_model') }}</td>
                     <td>{{ $asset->serial }}</td>
                     <td>
                         {{ $asset->last_checkout }}</td>
