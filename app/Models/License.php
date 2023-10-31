@@ -32,10 +32,11 @@ class License extends Depreciable
     protected $guarded = 'id';
     protected $table = 'licenses';
 
+
     protected $casts = [
-        'purchase_date' => 'date',
-        'expiration_date' => 'date',
-        'termination_date' => 'date',
+        'purchase_date' => 'date:Y-m-d',
+        'expiration_date' => 'date:Y-m-d',
+        'termination_date' => 'date:Y-m-d',
         'category_id'  => 'integer',
         'company_id'   => 'integer',
     ];
