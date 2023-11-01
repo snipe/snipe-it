@@ -35,11 +35,11 @@ class StoreAssetRequest extends ImageUploadRequest
             parent::rules(),
         );
 
-            // unsets unique check here, that check cannot run twice.
-            $rules['asset_tags.*'] = $rules['asset_tag'];
-            unset($rules['asset_tag']);
-            $rules['serials.*'] = $rules['serial'];
-            unset($rules['serial']);
+        // unsets unique check here, that check cannot run twice.
+        $rules['asset_tags.*'] = $rules['asset_tag'];
+        unset($rules['asset_tag']);
+        $rules['serials.*'] = $rules['serial'];
+        unset($rules['serial']);
 
         return $rules;
     }
