@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use App\Helpers\Helper;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\AuthenticationException;
 use ArieTimmerman\Laravel\SCIMServer\Exceptions\SCIMException;
@@ -148,6 +149,11 @@ class Handler extends ExceptionHandler
         }
 
         return redirect()->guest('login');
+    }
+
+    protected function invalidJson($request, ValidationException $exception)
+    {
+        return response()->json(Helper::formatStandardApiResponse('error', null, $exception->errors()), 200);
     }
 
 

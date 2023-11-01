@@ -15,8 +15,8 @@ class StoreAssetRequest extends ImageUploadRequest
      */
     public function authorize(): bool
     {
-        //TODO: make sure this works
-        //return Gate::allows('create', new Asset);
+        // TODO: make sure this works
+        return Gate::allows('create', new Asset);
     }
 
     public function prepareForValidation(): void
@@ -36,13 +36,11 @@ class StoreAssetRequest extends ImageUploadRequest
             parent::rules(),
         );
 
-        if(!$this->expectsJson()) {
-            //accepts an array for the gui form
+            // unsets unique check here, that check cannot run twice.
             $rules['asset_tags.*'] = $rules['asset_tag'];
             unset($rules['asset_tag']);
             $rules['serials.*'] = $rules['serial'];
             unset($rules['serial']);
-        }
 
         return $rules;
     }
