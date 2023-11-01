@@ -100,7 +100,10 @@ class Asset extends Depreciable
         'expected_checkin' => 'date|nullable',
         'location_id'     => 'exists:locations,id|nullable',
         'rtd_location_id' => 'exists:locations,id|nullable',
-        'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
+        // okay, i know this looks scary - but it's not. it checks to see if the asset tag is unique, but only if the asset is not deleted - `NULL,NULL` says to ignore the unique rule if following conditions are met
+        // https://laracasts.com/discuss/channels/laravel/unique-validation-with-soft-delete
+        // this is tested and verified
+        'asset_tag'       => 'required|min:1|max:255|unique:assets,asset_tag,NULL,NULL,deleted_at,NULL',
         'purchase_date'   => 'date|date_format:Y-m-d|nullable',
         'serial'          => 'unique_serial|nullable',
         'purchase_cost'   => 'numeric|nullable|gte:0',
