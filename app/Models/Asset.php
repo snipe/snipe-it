@@ -91,7 +91,7 @@ class Asset extends Depreciable
 
     protected $rules = [
         'name'            => 'max:255|nullable',
-        'model_id'        => 'required|integer|exists:models,id,deleted_at,NULL',
+        'model_id'        => 'required|integer|exists:models,id,deleted_at,NULL|not_array',
         'status_id'       => 'required|integer|exists:status_labels,id',
         'company_id'      => 'integer|nullable',
         'warranty_months' => 'numeric|nullable|digits_between:0,240',
