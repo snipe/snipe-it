@@ -536,8 +536,6 @@ class AssetsController extends Controller
      */
     public function store(StoreAssetRequest $request)
     {
-        $this->authorize('create', Asset::class);
-
         $asset = new Asset();
         $asset->model()->associate(AssetModel::find((int) $request->get('model_id')));
 
