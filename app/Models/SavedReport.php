@@ -23,4 +23,30 @@ class SavedReport extends Model
         'name',
         'options',
     ];
+
+    public function checkmarkValue($property)
+    {
+        // Assuming we're using the null object pattern,
+        // return the default value if the object is not saved yet.
+        if (is_null($this->id)) {
+            return '1';
+        }
+
+        // Return the property's value if it exists
+        // and return the default value if not.
+        return $this->options[$property] ?? '0';
+    }
+
+    public function textValue($property)
+    {
+        // Assuming we're using the null object pattern,
+        // return the default value if the object is not saved yet.
+        if (is_null($this->id)) {
+            return '';
+        }
+
+        // Return the property's value if it exists
+        // and return the default value if not.
+        return $this->options[$property] ?? '';
+    }
 }

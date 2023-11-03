@@ -394,7 +394,13 @@ class ReportsController extends Controller
         $customfields = CustomField::get();
         $saved_reports = SavedReport::get();
 
-        return view('reports/custom')->with('customfields', $customfields)->with('saved_reports', $saved_reports);
+        return view('reports/custom', [
+            'customfields' => $customfields,
+            'saved_reports' => $saved_reports,
+            // @todo: temporary
+            'savedReport' => $saved_reports->first(),
+            // 'savedReport' => new SavedReport,
+        ]);
     }
 
     /**
