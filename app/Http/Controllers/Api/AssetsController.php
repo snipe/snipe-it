@@ -666,10 +666,11 @@ class AssetsController extends Controller
                 $request->offsetSet('image', $request->offsetGet('image_source'));
             }     
 
-            $asset = $request->handleImages($asset); 
+            $asset = $request->handleImages($asset);
+            $model = AssetModel::find($asset->model_id);
             
             // Update custom fields
-            if (($model = AssetModel::find($asset->model_id)) && (isset($model->fieldset))) {
+            if (($model) && (isset($model->fieldset))) {
                 foreach ($model->fieldset->fields as $field) {
                     if ($request->has($field->db_column)) {
                         if ($field->field_encrypted == '1') {
