@@ -218,7 +218,7 @@ class LdapSync extends Command
                 $item['manager'] = $results[$i][$ldap_result_manager][0] ?? '';
                 $item['location'] = $results[$i][$ldap_result_location][0] ?? '';
 
-		$useractivated = (array_key_exists('memberof', $results[$i]) && in_array(strtolower($ldap_login_group), array_map('strtolower', $results[$i]['memberof'])) || (!$ldap_login_group)) ? 1 : 0; //Reads the LDAP Login Group and set the permssion to login to 1 if user is in group
+		$useractivated = (array_key_exists('memberof', $results[$i]) && in_array(preg_replace('/\s*,\s*/', ',', strtolower($ldap_login_group)), array_map('strtolower', $results[$i]['memberof'])) || (!$ldap_login_group)) ? 1 : 0; //Reads the LDAP Login Group and set the permssion to login to 1 if user is in group
 
                 // ONLY if you are using the "ldap_location" option *AND* you have an actual result
                 if ($ldap_result_location && $item['location']) {
