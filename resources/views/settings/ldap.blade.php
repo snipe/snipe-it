@@ -289,6 +289,22 @@
                                 @endif
                             </div>
                         </div>
+			<!-- LDAP login group -->
+                         <div class="form-group {{ $errors->has('ldap_login_group') ? 'error' : '' }}">
+                             <div class="col-md-3">
+                                 {{ Form::label('ldap_login_group', trans('admin/settings/general.ldap_login_group')) }}
+                             </div>
+                             <div class="col-md-8">
+                                 {{ Form::text('ldap_login_group', Request::old('ldap_login_group', $setting->ldap_login_group), ['class' => 'form-control', 'placeholder' => trans('general.example') .'cn=logingroup,dc=example,dc=com', $setting->demoMode]) }}
+
+
+                                 {!! $errors->first('ldap_login_group', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                 @if (config('app.lock_passwords')===true)
+                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                 @endif
+                             </div>
+                         </div>
+
 
                         <!-- LDAP  username field-->
                         <div class="form-group {{ $errors->has('ldap_username_field') ? 'error' : '' }}">
