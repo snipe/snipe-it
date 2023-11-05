@@ -66,6 +66,7 @@ class LdapSync extends Command
         $ldap_result_dept = Setting::getSettings()->ldap_dept;
         $ldap_result_manager = Setting::getSettings()->ldap_manager;
         $ldap_default_group = Setting::getSettings()->ldap_default_group;
+	$ldap_login_group = Setting::getSettings()->ldap_login_group;
 
         try {
             $ldapconn = Ldap::connectToLdap();
@@ -217,6 +218,8 @@ class LdapSync extends Command
                 $item['manager'] = $results[$i][$ldap_result_manager][0] ?? '';
                 $item['location'] = $results[$i][$ldap_result_location][0] ?? '';
 
+		$useractivated = (array_key_exists('memberof', $results[$i]) && in_array(strtolower($ldap_login_group), array_map('strtolower', $results[$i]['memberof'])) || (!$ldap_login_group)) ? 1 : 0; //Reads the LDAP Login Group and set the permssion to login to 1 if user is in group
+
                 // ONLY if you are using the "ldap_location" option *AND* you have an actual result
                 if ($ldap_result_location && $item['location']) {
                         $location = Location::firstOrCreate([
@@ -358,8 +361,7 @@ class LdapSync extends Command
                     '1049088', // 0x100200 NORMAL_ACCOUNT, NOT_DELEGATED
                     '1114624', // 0x110200 NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD, NOT_DELEGATED,
                   ];
-                    $user->activated = (in_array($results[$i]['useraccountcontrol'][0], $enabled_accounts)) ? 1 : 0;
-
+		$user->activated = ((in_array($results[$i]['useraccountcontrol'][0], $enabled_accounts)) && $useractivated==1) ? 1 : 0;
                 // If we're not using AD, and there isn't an activated flag set, activate all users
                 } /* implied 'else' here - leave the $user->activated flag alone. Newly-created accounts will be active.
                 already-existing accounts will be however the administrator has set them */
