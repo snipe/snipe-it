@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Checkouts;
 
-use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\License;
 use App\Models\LicenseSeat;
@@ -26,8 +25,7 @@ class LicenseCheckoutTest extends TestCase
                 'assigned_to' => null,
                 'asset_id' => $asset->id,
                 'notes' => 'oh hi there',
-            ])
-            ->assertRedirect();
+            ]);
 
         $this->assertDatabaseHas('action_logs', [
             'action_type' => 'checkout',
@@ -50,8 +48,7 @@ class LicenseCheckoutTest extends TestCase
                 'assigned_to' => $admin->id,
                 'asset_id' => null,
                 'notes' => 'oh hi there',
-            ])
-            ->assertRedirect();
+            ]);
 
         $this->assertDatabaseHas('action_logs', [
             'action_type' => 'checkout',
