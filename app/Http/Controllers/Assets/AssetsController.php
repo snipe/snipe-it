@@ -62,6 +62,11 @@ class AssetsController extends Controller
         $this->authorize('index', Asset::class);
         $company = Company::find($request->input('company_id'));
 
+        $links = session()->has('links') ? session('links') : [];
+        $currentLink = request()->path(); 
+        array_unshift($links, $currentLink); 
+        session(['links' => $links]); 
+
         return view('hardware/index')->with('company', $company);
     }
 
@@ -840,6 +845,7 @@ class AssetsController extends Controller
         $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
         $asset = Asset::findOrFail($id);
 
+
         return view('hardware/audit')->with('asset', $asset)->with('next_audit_date', $dt)->with('locations_list');
     }
 
@@ -847,12 +853,24 @@ class AssetsController extends Controller
     {
         $this->authorize('audit', Asset::class);
 
+        $links = session()->has('links') ? session('links') : [];
+        $currentLink = request()->path(); 
+        array_unshift($links, $currentLink); 
+        session(['links' => $links]); 
+
+
         return view('hardware/audit-due');
     }
 
     public function overdueForAudit()
     {
         $this->authorize('audit', Asset::class);
+
+        $links = session()->has('links') ? session('links') : [];
+        $currentLink = request()->path(); 
+        array_unshift($links, $currentLink); 
+        session(['links' => $links]); 
+
 
         return view('hardware/audit-overdue');
     }
@@ -905,7 +923,7 @@ class AssetsController extends Controller
 
 
             $asset->logAudit($request->input('note'), $request->input('location_id'), $file_name);
-            return redirect()->route('assets.audit.due')->with('success', trans('admin/hardware/message.audit.success'));
+            return redirect(session('links')[0])->with('success', trans('admin/hardware/message.audit.success'));
         }
     }
 
@@ -921,5 +939,25 @@ class AssetsController extends Controller
         $requestedItems = $requestedItems->orderBy('created_at', 'desc')->get();
 
         return view('hardware/requested', compact('requestedItems'));
+    }
+
+    /**
+     * Displaying modal for audit
+     *
+     * @author [A. Rahardianto] [<veenone@gmail.com>]
+     * @param int $id
+     * @since [v6.0.8]
+     * @return View
+     */
+    public function show_modal($id)
+    {
+        $settings = Setting::getSettings();
+        $this->authorize('audit', Asset::class);
+        $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
+        $asset = Asset::findOrFail($id);
+
+
+        return view('modals/quickaudit')->with('asset', $asset)->with('next_audit_date', $dt)->with('locations_list');
+       
     }
 }

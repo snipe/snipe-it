@@ -289,6 +289,12 @@
                 actions += '<button class="btn btn-sm btn-warning" data-tooltip="true" title="{{ trans('general.restore') }}"><i class="fas fa-retweet"></i></button>&nbsp;';
             }
 
+            if ((row.available_actions.audit == true) && (dest == 'hardware'))
+            {
+                var url = '{{ route("auditmodal.show", ":id") }}';
+                url = url.replace(':id', row.id);
+                actions += '&nbsp;&nbsp;&nbsp;<a href="' +url+'" data-toggle="modal" data-target="#createModal"  data-select="category_select_id"  class="btn btn-sm bg-navy"><i class="fas fa-check-circle" aria-hidden="true"  data-tooltip="true" title="{{ trans('general.audit') }}"></i><span class="sr-only">{{ trans('general.audit') }}</span></a>';
+            }
             actions +='</nobr>';
             return actions;
 
