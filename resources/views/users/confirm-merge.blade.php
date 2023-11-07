@@ -48,6 +48,7 @@
                                         <th class="col-md-3">{{ trans('general.name') }}</th>
                                         <th class="col-md-3">{{ trans('general.email') }}</th>
                                         <th class="col-md-3">{{ trans('general.username') }}</th>
+                                        <th class="col-md-3">{{ trans('general.employee_number') }}</th>
                                         <th class="col-md-3">{{ trans('general.groups') }}</th>
                                         <th class="col-md-1 text-right">
                                             <i class="fas fa-barcode fa-fw" aria-hidden="true" style="font-size: 17px;"></i>
@@ -79,6 +80,9 @@
                                             </td>
                                             <td>
                                                 {{ $user->username }}
+                                            </td>
+                                            <td>
+                                                {{ $user->employee_num }}
                                             </td>
 
                                             <td>

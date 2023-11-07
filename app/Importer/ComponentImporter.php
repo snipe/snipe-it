@@ -28,8 +28,8 @@ class ComponentImporter extends ItemImporter
     {
         $component = null;
         $this->log('Creating Component');
-        $component = Component::where('name', $this->item['name'])
-                        ->where('serial', $this->item['serial'])
+        $component = Component::where('name', trim($this->item['name']))
+                        ->where('serial', trim($this->item['serial']))
                         ->first();
 
         if ($component) {
