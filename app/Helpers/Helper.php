@@ -349,7 +349,7 @@ class Helper
         $total_colors = count($colors);
 
         if ($index >= $total_colors) {
-            $index = $index - $total_colors;
+            $index = $index - $total_colors - 1;
         }
 
         return $colors[$index];
