@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\Models\Statuslabel;
+use Tests\TestCase;
 use App\Models\Asset;
 
 class DefaultColorKeyTest extends TestCase
