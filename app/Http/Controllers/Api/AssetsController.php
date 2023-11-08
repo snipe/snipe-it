@@ -102,6 +102,7 @@ class AssetsController extends Controller
             'requests_counter',
             'byod',
             'asset_eol_date',
+            'eol_explicit',
         ];
 
         $filter = [];
@@ -554,14 +555,22 @@ class AssetsController extends Controller
         $asset->status_id               = $request->get('status_id', 0);
         $asset->warranty_months         = $request->get('warranty_months', null);
         $asset->purchase_cost           = $request->get('purchase_cost');
-        $asset->asset_eol_date          = $request->get('asset_eol_date', $asset->present()->eol_date());
+        $asset->asset_eol_date          = $request->get('asset_eol_date', null);
         $asset->purchase_date           = $request->get('purchase_date', null);
         $asset->assigned_to             = $request->get('assigned_to', null);
         $asset->supplier_id             = $request->get('supplier_id');
         $asset->requestable             = $request->get('requestable', 0);
         $asset->rtd_location_id         = $request->get('rtd_location_id', null);
         $asset->location_id             = $request->get('rtd_location_id', null);
-
+		
+		/**
+        * rule of set up EOL date and explicit status during create asset
+		*/
+		if ($request->has('asset_eol_date')) {
+			$asset->eol_explicit = true;
+		} elseif ($request->has('purchase_date') && ($asset->model->eol > 0)) {
+			$asset->asset_eol_date = Carbon::parse($request->get('purchase_date'))->addMonths($asset->model->eol)->format('Y-m-d');
+		}
 
         /**
         * this is here just legacy reasons. Api\AssetController
@@ -658,6 +667,15 @@ class AssetsController extends Controller
             ($request->filled('rtd_location_id')) ?
                 $asset->location_id = $request->get('rtd_location_id') : null;
 
+			/**
+			* rule of set up EOL date and explicit status during update asset
+			*/
+			if ($request->filled('asset_eol_date')) {
+				$asset->eol_explicit = true;
+			} elseif ($request->filled('purchase_date') && ($asset->model->eol > 0) && !($asset->eol_explicit)) {
+				$asset->asset_eol_date = Carbon::parse($request->get('purchase_date'))->addMonths($asset->model->eol)->format('Y-m-d');
+			}
+            
             /**
             * this is here just legacy reasons. Api\AssetController
             * used image_source  once to allow encoded image uploads.
