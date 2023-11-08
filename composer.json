@@ -17,7 +17,7 @@
     }
   ],
   "require": {
-    "php": "8.0 - 8.2",
+    "php": "8.1 - 8.2",
     "ext-curl": "*",
     "ext-fileinfo": "*",
     "ext-json": "*",
