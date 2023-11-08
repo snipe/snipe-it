@@ -350,6 +350,10 @@ class Helper
 
         if ($index >= $total_colors) {
             $index = $index - $total_colors - 1;
+
+            if($index < 0) {
+                $index = 0;
+            }
         }
 
         return $colors[$index];
