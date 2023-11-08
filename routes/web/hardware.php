@@ -122,6 +122,7 @@ Route::group(
             [AssetCheckinController::class, 'store']
         )->name('hardware.checkin.store');
 
+        // Redirect old legacy /asset_id/view urls to the resource route version
         Route::get('{assetId}/view', function ($assetId) {
             return redirect()->route('hardware.show', ['hardware' => $assetId]);
         });
