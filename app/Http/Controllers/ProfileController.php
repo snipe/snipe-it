@@ -87,9 +87,8 @@ class ProfileController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @return View
      */
-    public function api()
+    public function api(): \Illuminate\Contracts\View\View
     {
 
         // Make sure the self.api permission has been granted
@@ -97,7 +96,7 @@ class ProfileController extends Controller
             abort(403);
         }
 
-        return view('account/api');
+        return view('account/api')->with('tokens', Auth::user()->tokens()->get());
     }
 
     /**

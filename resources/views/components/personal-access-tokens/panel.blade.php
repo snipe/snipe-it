@@ -1,6 +1,7 @@
 @props([
     'token_url' => url('oauth/personal-access-tokens'),
     'scopes_url' => url('oauth/scopes'),
+    'tokens' => [],
 ])
 
 <div>
@@ -21,6 +22,61 @@
                 </a>
             </div>
         </div>
+        <div class="panel-body">
+            <!-- No Tokens Notice -->
+            @if($tokens->count() === 0)
+                <p class="m-b-none"
+                >
+                    You have not created any personal access tokens.
+                </p>
+            @endif
+
+            <!-- Personal Access Tokens -->
+            <table class="table table-borderless m-b-none">
+                @if($tokens->count() > 0)
+                    <thead>
+                    <tr>
+                        <th class="col-md-3">Name</th>
+                        <th class="col-md-2">Created</th>
+                        <th class="col-md-2">Expires</th>
+                        <th class="col-md-2"><span class="sr-only">Delete</span></th>
+                    </tr>
+                    </thead>
+                @endif
+
+                <tbody>
+                <tr>
+                    <!-- Client Name -->
+                    @foreach($tokens as $token)
+                        <td style="vertical-align: middle;">
+                            {{ $token->name }}
+                        </td>
+
+                        <td style="vertical-align: middle;">
+                            {{ $token->created_at }}
+                        </td>
+
+                        <td style="vertical-align: middle;">
+                            {{ $token->expires_at }}
+                        </td>
+                    @endforeach
+
+                    <!-- Delete Button -->
+                    <td style="vertical-align: middle;" class="text-right">
+                        <a class="action-link btn btn-danger btn-sm" @click="revoke(token)">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
     </div>
+
+    <!-- Create Token Modal -->
+    <x-personal-access-tokens.create-token-modal />
 
 </div>
