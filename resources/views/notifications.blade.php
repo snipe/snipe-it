@@ -35,6 +35,18 @@
 @endif
 
 
+@if ($message = Session::get('success-unescaped'))
+    <div class="col-md-12">
+        <div class="alert alert-success fade in">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <i class="fas fa-check faa-pulse animated"></i>
+            <strong>{{ trans('general.notification_success') }}: </strong>
+            {!!  $message !!}
+        </div>
+    </div>
+@endif
+
+
 @if ($assets = Session::get('assets'))
     @foreach ($assets as $asset)
         <div class="col-md-12">
