@@ -96,7 +96,9 @@ class ProfileController extends Controller
             abort(403);
         }
 
-        return view('account/api')->with('tokens', Auth::user()->tokens()->get());
+        return view('account/api', [
+            'tokens' => Auth::user()->tokens()->get(),
+        ]);
     }
 
     /**
