@@ -18,6 +18,8 @@
                         token-url="{{ url('oauth/personal-access-tokens') }}"
                         scopes-url="{{ url('oauth/scopes') }}">
                     </passport-personal-access-tokens>
+                    {{-- New Component --}}
+                    <x-personal-access-tokens.panel />
                  @else
                      <p class="help-block">{{ trans('general.feature_disabled') }}</p>
                 @endif
