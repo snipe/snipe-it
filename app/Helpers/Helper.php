@@ -354,6 +354,9 @@ class Helper
             if($index < 0) {
                 $index = 0;
             }
+            elseif($index > 255) {
+                $index = 255;
+            }
         }
 
         return $colors[$index];
