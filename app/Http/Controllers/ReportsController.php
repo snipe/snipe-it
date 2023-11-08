@@ -539,23 +539,23 @@ class ReportsController extends Controller
             }
 
             if ($request->filled('user_address')) {
-                $header[] = trans('general.user') .' '. trans('general.address');
+                $header[] = trans('admin/reports/general.custom_export.user_address');
             }
 
             if ($request->filled('user_city')) {
-                $header[] = trans('general.user') .' '. trans('general.city');
+                $header[] = trans('admin/reports/general.custom_export.user_city');
             }
 
             if ($request->filled('user_state')) {
-                $header[] = trans('general.user') .' '. trans('general.state');
+                $header[] = trans('admin/reports/general.custom_export.user_state');
             }
 
             if ($request->filled('user_country')) {
-                $header[] = trans('general.user') .' '. trans('general.country');
+                $header[] = trans('admin/reports/general.custom_export.user_country');
             }
 
             if ($request->filled('user_zip')) {
-                $header[] = trans('general.user') .' '. trans('general.zip');
+                $header[] = trans('admin/reports/general.custom_export.user_zip');
             }
 
             if ($request->filled('status')) {
