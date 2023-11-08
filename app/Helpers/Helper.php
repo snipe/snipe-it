@@ -349,13 +349,18 @@ class Helper
         $total_colors = count($colors);
 
         if ($index >= $total_colors) {
+
+            \Log::error('Status label count is '.$index.' and exceeds the allowed count of 256.');
+            //patch fix for array key overflow (color count starts at 1, array starts at 0)
             $index = $index - $total_colors - 1;
 
+            //constraints to keep result in 0-265 range. This should never be needed, but if something happens
+            //to create this many status labels and it DOES happen, this will keep it from failing at least.
             if($index < 0) {
                 $index = 0;
             }
-            elseif($index > 255) {
-                $index = 255;
+            elseif($index > 265) {
+                $index = 265;
             }
         }
 
