@@ -43,6 +43,15 @@
                                         </div>
                                     </div>
                                     @endif
+                                <!-- Broken/Needs Replacement Checkbox -->
+                                <div class="form-group">
+                                    <div class="col-sm-offset-3 col-sm-9">
+                                        <label class="form-control">
+                                            <input type="checkbox" value="1" name="is_broken" id="is_broken">
+                                            {{ trans('admin/accessories/general.is_broken') }}
+                                        </label>
+                                    </div>
+                                </div>
 
                                     <!-- Note -->
                                     <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">

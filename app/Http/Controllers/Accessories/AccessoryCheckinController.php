@@ -57,7 +57,7 @@ class AccessoryCheckinController extends Controller
         }
 
         $accessory = Accessory::find($accessory_user->accessory_id);
-
+        $notes = $request->input('note');
         $this->authorize('checkin', $accessory);
 
         $checkin_at = date('Y-m-d');
@@ -68,8 +68,12 @@ class AccessoryCheckinController extends Controller
         // Was the accessory updated?
         if (DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {
             $return_to = e($accessory_user->assigned_to);
+            if($request->input('is_broken') == 1){
+                (DB::table('accessories')->decrement('qty'));
+              $notes .= " ".trans('admin/accessories/general.is_broken');
+            }
 
-            event(new CheckoutableCheckedIn($accessory, User::find($return_to), Auth::user(), $request->input('note'), $checkin_at));
+            event(new CheckoutableCheckedIn($accessory, User::find($return_to), Auth::user(), $notes, $checkin_at));
 
             return redirect()->route('accessories.show', $accessory->id)->with('success', trans('admin/accessories/message.checkin.success'));
         }
