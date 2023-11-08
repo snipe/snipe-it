@@ -79,4 +79,7 @@
     <!-- Create Token Modal -->
     <x-personal-access-tokens.create-token-modal />
 
+    <!-- View New Token Modal -->
+    <x-personal-access-tokens.view-new-token />
+
 </div>
