@@ -73,10 +73,14 @@ class Helper
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.3]
-     * @return array
+     * @return string
      */
-    public static function defaultChartColors($index = 0)
+    public static function defaultChartColors(int $index = 0)
     {
+        if ($index < 0) {
+            $index = 0;
+        }
+
         $colors = [
             '#008941',
             '#FF4A46',
@@ -359,8 +363,8 @@ class Helper
             if($index < 0) {
                 $index = 0;
             }
-            elseif($index > 265) {
-                $index = 265;
+            elseif($index >($total_colors - 1)) {
+                $index = $total_colors - 1;
             }
         }
 
