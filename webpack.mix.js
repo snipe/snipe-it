@@ -154,7 +154,7 @@ mix.combine(
     "./resources/assets/js/extensions/pGenerator.jquery.js",
     "./node_modules/chart.js/dist/Chart.js",
     "./resources/assets/js/signature_pad.js",
-    //"./node_modules/jquery-form-validator/form-validator/jquery.form-validator.js", //problem?
+    "./node_modules/jquery-form-validator/form-validator/jquery.form-validator.js",
     "./node_modules/list.js/dist/list.js",
     "./node_modules/clipboard/dist/clipboard.js",
   ],
