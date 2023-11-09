@@ -60,6 +60,9 @@ jobs:
       - name: Generate key
         run: php artisan key:generate
 
+      - name: Migrate Database
+        run: php artisan migrate
+
       - name: Install Passport
         run: php artisan passport:install
 
