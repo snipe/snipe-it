@@ -60,6 +60,14 @@ jobs:
       - name: Generate key
         run: php artisan key:generate
 
+      - name: Migrate Database
+        env:
+          DB_CONNECTION: mysql
+          DB_DATABASE: snipeit
+          DB_PORT: ${{ job.services.mysql.ports[3306] }}
+          DB_USERNAME: root
+        run: php artisan migrate --force
+
       - name: Install Passport
         env:
           DB_CONNECTION: mysql
