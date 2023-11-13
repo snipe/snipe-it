@@ -130,12 +130,7 @@ class BulkAssetsController extends Controller
         }
          
         $assets = array_keys($request->input('ids'));
-        
-       if ($request->anyFilled($custom_field_columns)) {
-           $custom_fields_present = true;
-         } else {
-           $custom_fields_present = false;
-         }
+
         if (($request->filled('purchase_date'))
             || ($request->filled('expected_checkin'))
             || ($request->filled('purchase_cost'))
@@ -154,6 +149,7 @@ class BulkAssetsController extends Controller
             || ($request->anyFilled($custom_field_columns))
 
         ) {
+
             foreach ($assets as $assetId) {
 
                 $this->update_array = [];
@@ -216,9 +212,7 @@ class BulkAssetsController extends Controller
                         $changed[$key]['new'] = $this->update_array[$key];
                     }
                 }
- 
-                if ($custom_fields_present) {
-
+                
                     $model = $asset->model()->first();
 
                     // Use the rules of the new model fieldsets if the model changed
@@ -274,8 +268,6 @@ class BulkAssetsController extends Controller
 
                             } // endforeach
                     } // end custom field check
-                } // end custom fields handler
-
 
 
                 // Check if it passes validation, and then try to save
