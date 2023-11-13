@@ -91,7 +91,7 @@ class Asset extends Depreciable
 
     protected $rules = [
         'name'            => 'max:255|nullable',
-        'model_id'        => 'required|integer|exists:models,id,deleted_at,NULL',
+        'model_id'        => 'required|integer|exists:models,id,deleted_at,NULL|not_array',
         'status_id'       => 'required|integer|exists:status_labels,id',
         'company_id'      => 'integer|nullable',
         'warranty_months' => 'numeric|nullable|digits_between:0,240',
@@ -100,7 +100,7 @@ class Asset extends Depreciable
         'expected_checkin' => 'date|nullable',
         'location_id'     => 'exists:locations,id|nullable',
         'rtd_location_id' => 'exists:locations,id|nullable',
-        'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
+        'asset_tag'      => 'required|min:1|max:255|unique_undeleted:assets,asset_tag',
         'purchase_date'   => 'date|date_format:Y-m-d|nullable',
         'serial'          => 'unique_serial|nullable',
         'purchase_cost'   => 'numeric|nullable|gte:0',

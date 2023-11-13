@@ -144,7 +144,7 @@ class AssetImporter extends ItemImporter
             // If we have a target to checkout to, lets do so.
             //-- user_id is a property of the abstract class Importer, which this class inherits from and it's setted by
             //-- the class that needs to use it (command importer or GUI importer inside the project).
-            if (isset($target)) {
+            if (isset($target) && ($target !== false)) {
                 if (!is_null($asset->assigned_to)){
                     if ($asset->assigned_to != $target->id){
                         event(new CheckoutableCheckedIn($asset, User::find($asset->assigned_to), Auth::user(), $asset->notes, date('Y-m-d H:i:s')));

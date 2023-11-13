@@ -7,6 +7,7 @@ use App\Helpers\StorageHelper;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SettingsSamlRequest;
 use App\Http\Requests\SetupUserRequest;
+use App\Models\CustomField;
 use App\Models\Group;
 use App\Models\Setting;
 use App\Models\Asset;
@@ -809,9 +810,10 @@ class SettingsController extends Controller
      */
     public function getLabels()
     {
-        $setting = Setting::getSettings();
-
-        return view('settings.labels', compact('setting'));
+        return view('settings.labels', [
+            'setting' => Setting::getSettings(),
+            'customFields' => CustomField::all(),
+        ]);
     }
 
     /**
