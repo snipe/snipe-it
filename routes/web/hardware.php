@@ -186,8 +186,11 @@ Route::resource('hardware',
         AssetsController::class, 
         [
             'middleware' => ['auth'],
-            'parameters' => ['asset' => 'asset_id'],
-            'names' => ['show' => 'view'],
+            'parameters' => ['asset' => 'asset_id',
+                'names' => [
+                    'show' => 'view',
+                ],
+        ],
 ]);
 
 Route::get('ht/{any?}',
