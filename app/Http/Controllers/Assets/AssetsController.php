@@ -204,12 +204,8 @@ class AssetsController extends Controller
         }
 
         if ($success) {
-            // Redirect to the asset listing page
-            $minutes = 518400;
-            // dd( $_POST['options']);
-            // Cookie::queue(Cookie::make('optional_info', json_decode($_POST['options']), $minutes));
             return redirect()->route('hardware.index')
-                ->with('success', trans('admin/hardware/message.create.success'));
+                ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', $asset->id), 'id', 'tag' => $asset->asset_tag]));
                
       
         }
