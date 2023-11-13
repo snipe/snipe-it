@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Events\CheckoutableCheckedIn;
+use App\Http\Requests\StoreAssetRequest;
 use Illuminate\Support\Facades\Gate;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
@@ -32,6 +33,7 @@ use Str;
 use TCPDF;
 use Validator;
 use Route;
+
 
 /**
  * This class controls all actions related to assets for
@@ -532,10 +534,8 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(ImageUploadRequest $request)
+    public function store(StoreAssetRequest $request)
     {
-        $this->authorize('create', Asset::class);
-
         $asset = new Asset();
         $asset->model()->associate(AssetModel::find((int) $request->get('model_id')));
 
