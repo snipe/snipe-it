@@ -231,7 +231,7 @@ class ValidationServiceProvider extends ServiceProvider
                         ->whereNotNull('company_id')
                         ->whereNotNull('location_id')
                         ->where('id', '!=', $data['id'])
-                        ->count();
+                        ->count('name');
 
                     return $count < 1;
                 }else // for entering in new departments
@@ -241,7 +241,7 @@ class ValidationServiceProvider extends ServiceProvider
                     ->where('company_id', $data['company_id'])
                     ->whereNotNull('company_id')
                     ->whereNotNull('location_id')
-                    ->count();
+                    ->count('name');
 
                 return $count < 1;
             }
