@@ -788,4 +788,21 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
 
         return $this;
     }
+    public function scopeUserLocation($query, $location, $search){
+
+
+        return $query->where('location_id','=', $location)
+            ->where('first_name', 'LIKE', '%' . $search . '%')
+            ->orWhere('email', 'LIKE', '%' . $search . '%')
+            ->orWhere('first_name', 'LIKE', '%' . $search . '%')
+            ->orWhere('permissions', 'LIKE', '%' . $search . '%')
+            ->orWhere('country', 'LIKE', '%' . $search . '%')
+            ->orWhere('phone', 'LIKE', '%' . $search . '%')
+            ->orWhere('jobtitle', 'LIKE', '%' . $search . '%')
+            ->orWhere('employee_num', 'LIKE', '%' . $search . '%')
+            ->orWhere('username', 'LIKE', '%' . $search . '%');
+
+
+
+    }
 }
