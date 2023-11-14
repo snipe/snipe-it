@@ -1,6 +1,6 @@
 @props([
     'title' => 'Create Token',
-    ''
+    'errors' => false,
 ])
 
 <!-- Create Token Modal -->
@@ -11,25 +11,27 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
                 <h4 class="modal-title">
-                    Create Token
+                    {{ $title }}
                 </h4>
             </div>
 
             <div class="modal-body">
                 <!-- Form Errors -->
-                <div class="alert alert-danger"
-{{--                     v-if="form.errors.length > 0"--}}
-                >
-                    <p><strong>Whoops!</strong> Something went wrong!</p>
-                    <br>
-                    <ul>
-                        <li
-{{--                                v-for="error in form.errors"--}}
-                        >
-{{--                            {{ error }}--}}
-                        </li>
-                    </ul>
-                </div>
+                @if($errors === true)
+                    <div class="alert alert-danger"
+    {{--                     v-if="form.errors.length > 0"--}}
+                    >
+                        <p><strong>Whoops!</strong> Something went wrong!</p>
+                        <br>
+                        <ul>
+                            <li
+    {{--                                v-for="error in form.errors"--}}
+                            >
+    {{--                            {{ error }}--}}
+                            </li>
+                        </ul>
+                    </div>
+                @endif
 
                 <!-- Create Token Form -->
                 <form class="form-horizontal" role="form"
@@ -47,28 +49,28 @@
                     </div>
 
                     <!-- Scopes -->
-                    <div class="form-group"
+{{--                    <div class="form-group"--}}
 {{--                         v-if="scopes.length > 0"--}}
-                    >
-                        <label class="col-md-4 control-label">Scopes</label>
+{{--                    >--}}
+{{--                        <label class="col-md-4 control-label">Scopes</label>--}}
 
-                        <div class="col-md-6">
-                            <div
+{{--                        <div class="col-md-6">--}}
+{{--                            <div--}}
 {{--                                    v-for="scope in scopes"--}}
-                            >
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"
+{{--                            >--}}
+{{--                                <div class="checkbox">--}}
+{{--                                    <label>--}}
+{{--                                        <input type="checkbox"--}}
 {{--                                               @click="toggleScope(scope.id)"--}}
 {{--                                               :checked="scopeIsAssigned(scope.id)"--}}
-                                        >
+{{--                                        >--}}
 
 {{--                                        {{ scope.id }}--}}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+{{--                                    </label>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                 </form>
             </div>
 
