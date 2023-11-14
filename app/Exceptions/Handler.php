@@ -150,6 +150,11 @@ class Handler extends ExceptionHandler
         return redirect()->guest('login');
     }
 
+    protected function invalidJson($request, ValidationException $exception)
+    {
+        return response()->json(Helper::formatStandardApiResponse('error', null, $exception->errors()), 200);
+    }
+
 
     /** 
      * A list of the inputs that are never flashed for validation exceptions.

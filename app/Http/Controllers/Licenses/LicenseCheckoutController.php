@@ -105,7 +105,7 @@ class LicenseCheckoutController extends Controller
             $licenseSeat->assigned_to = $target->assigned_to;
         }
         if ($licenseSeat->save()) {
-            event(new CheckoutableCheckedOut($licenseSeat, $target, Auth::user(), request('note')));
+            event(new CheckoutableCheckedOut($licenseSeat, $target, Auth::user(), request('notes')));
 
             return true;
         }
@@ -122,7 +122,7 @@ class LicenseCheckoutController extends Controller
         $licenseSeat->assigned_to = request('assigned_to');
 
         if ($licenseSeat->save()) {
-            event(new CheckoutableCheckedOut($licenseSeat, $target, Auth::user(), request('note')));
+            event(new CheckoutableCheckedOut($licenseSeat, $target, Auth::user(), request('notes')));
 
             return true;
         }

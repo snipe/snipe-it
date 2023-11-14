@@ -631,7 +631,7 @@
                                         </div>
                                     @endif
 
-                                    @if (($asset->model) && ($asset->model->eol))
+                                    @if (($asset->asset_eol_date) && ($asset->purchase_date))
                                         <div class="row">
                                             <div class="col-md-2">
                                                 <strong>
@@ -639,7 +639,7 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                {{ $asset->model->eol }}
+                                                {{ Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date) }}
                                                 {{ trans('admin/hardware/form.months') }}
 
                                             </div>
@@ -650,6 +650,9 @@
                                             <div class="col-md-2">
                                                 <strong>
                                                     {{ trans('admin/hardware/form.eol_date') }}
+                                                    @if ($asset->purchase_date)
+														{!! $asset->asset_eol_date < date("Y-m-d") ? '<i class="fas fa-exclamation-triangle text-orange" aria-hidden="true"></i>' : '' !!}
+                                                    @endif
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">

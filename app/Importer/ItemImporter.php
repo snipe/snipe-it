@@ -372,7 +372,7 @@ class ItemImporter extends Importer
         if (empty($asset_statuslabel_name)) {
             return null;
         }
-        $status = Statuslabel::where(['name' => $asset_statuslabel_name])->first();
+       $status = Statuslabel::where(['name' => trim($asset_statuslabel_name)])->first();
 
         if ($status) {
             $this->log('A matching Status '.$asset_statuslabel_name.' already exists');
@@ -381,7 +381,7 @@ class ItemImporter extends Importer
         }
         $this->log('Creating a new status');
         $status = new Statuslabel();
-        $status->name = $asset_statuslabel_name;
+        $status->name = trim($asset_statuslabel_name);
 
         $status->deployable = 1;
         $status->pending = 0;
@@ -420,7 +420,7 @@ class ItemImporter extends Importer
 
         //Otherwise create a manufacturer.
         $manufacturer = new Manufacturer();
-        $manufacturer->name = $item_manufacturer;
+        $manufacturer->name = trim($item_manufacturer);
         $manufacturer->user_id = $this->user_id;
 
         if ($manufacturer->save()) {
