@@ -970,7 +970,11 @@
                 errorClass: 'help-block form-error',
                 errorElement: 'span',
                 errorPlacement: function(error, element) {
-                    element.parents('.required').append(error);
+                    $(element).hasClass('select2')
+                        // If the element is a select2 then place the error above the input
+                        ? element.parents('.required').append(error)
+                        // Otherwise place it after
+                        : error.insertAfter(element);
                 },
                 highlight: function(inputElement) {
                     $(inputElement).parent().addClass('has-error');
