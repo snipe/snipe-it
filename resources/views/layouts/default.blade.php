@@ -966,7 +966,16 @@
             });
 
             $('#create-form').validate({
-                ignore: 'input[type=hidden]'
+                ignore: 'input[type=hidden]',
+                errorClass: 'help-block form-error',
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    element.parents('.required').append(error);
+                },
+                highlight: function(inputElement) {
+                    $(inputElement).parent().addClass('has-error');
+                    $(inputElement).closest('.help-block').remove();
+                },
             });
 
 
