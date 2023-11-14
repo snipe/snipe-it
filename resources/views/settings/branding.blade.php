@@ -52,7 +52,7 @@
                                     <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
                                     {{ Form::text('site_name',
-                                        Request::old('site_name', $setting->site_name), array('class' => 'form-control','placeholder' => 'Snipe-IT Asset Management', 'data-validation' => 'required')) }}
+                                        Request::old('site_name', $setting->site_name), array('class' => 'form-control','placeholder' => 'Snipe-IT Asset Management', 'required' => 'required')) }}
                                 @endif
                                 {!! $errors->first('site_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
