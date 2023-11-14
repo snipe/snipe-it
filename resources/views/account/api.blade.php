@@ -14,10 +14,10 @@
             <div class="col-md-8">
 
                  @if (!config('app.lock_passwords'))
-{{--                    <passport-personal-access-tokens--}}
-{{--                        token-url="{{ url('oauth/personal-access-tokens') }}"--}}
-{{--                        scopes-url="{{ url('oauth/scopes') }}">--}}
-{{--                    </passport-personal-access-tokens>--}}
+                    <passport-personal-access-tokens
+                        token-url="{{ url('oauth/personal-access-tokens') }}"
+                        scopes-url="{{ url('oauth/scopes') }}">
+                    </passport-personal-access-tokens>
                     {{-- New Component --}}
                     <x-personal-access-tokens.panel :tokens="$tokens" />
                  @else

@@ -43,11 +43,11 @@
                     </tr>
                     </thead>
                 @endif
-
+                    @foreach($tokens as $token)
                 <tbody>
                 <tr>
                     <!-- Client Name -->
-                    @foreach($tokens as $token)
+
                         <td style="vertical-align: middle;">
                             {{ $token->name }}
                         </td>
@@ -59,7 +59,7 @@
                         <td style="vertical-align: middle;">
                             {{ $token->expires_at }}
                         </td>
-                    @endforeach
+
 
                     <!-- Delete Button -->
                     <td style="vertical-align: middle;" class="text-right">
@@ -68,6 +68,7 @@
                         </a>
                     </td>
                 </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>

@@ -90,7 +90,6 @@ class ProfileController extends Controller
      */
     public function api(): \Illuminate\Contracts\View\View
     {
-
         // Make sure the self.api permission has been granted
         if (!Gate::allows('self.api')) {
             abort(403);
