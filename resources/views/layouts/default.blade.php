@@ -965,12 +965,7 @@
                 $('.js-copy-link').tooltip('hide').attr('data-original-title', '{{ trans('general.copied') }}').tooltip('show');
             });
 
-            // ignore: 'input[type=hidden]' is required here to validate the select2 lists
-            $.validate({
-                form: '#create-form',
-                modules: 'date, toggleDisabled',
-                disabledFormFilter: '#create-form',
-                showErrorDialogs: true,
+            $('#create-form').validate({
                 ignore: 'input[type=hidden]'
             });
 
