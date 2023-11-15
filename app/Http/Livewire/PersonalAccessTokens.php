@@ -20,7 +20,7 @@ class PersonalAccessTokens extends Component
     public function rules(): array
     {
         return [
-            'name' => 'required',
+            'name' => 'required|string|max:255',
             'scopes' => 'nullable|array',
         ];
     }
@@ -36,10 +36,5 @@ class PersonalAccessTokens extends Component
         //this needs safety (though the scope of auth::user might kind of do it...)
         //seems like it does, test more
         Auth::user()->tokens()->find($tokenId)->delete();
-    }
-
-    public function getTokensProperty(): array
-    {
-        return Auth::user()->tokens;
     }
 }
