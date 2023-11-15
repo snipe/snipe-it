@@ -1,15 +1,11 @@
 @extends('layouts/default')
-
 {{-- Page title --}}
 @section('title')
     {{ trans('account/general.personal_api_keys') }}
     @parent
 @stop
-
 {{-- Page content --}}
 @section('content')
-
-
         <div class="row">
             <div class="col-md-8">
 

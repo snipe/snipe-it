@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -30,7 +31,10 @@ class PersonalAccessTokens extends Component
 
     public function deleteToken($tokenId): void
     {
-        Auth::user()->tokens()->where('id', $tokenId)->delete();
+        Log::info('poo');
+        //this needs safety (though the scope of auth::user might kind of do it...)
+        //seems like it does, test more
+        Auth::user()->tokens()->find($tokenId)->delete();
     }
 
     public function getTokensProperty(): array

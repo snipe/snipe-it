@@ -1,19 +1,8 @@
-@props([
-    'token_url' => url('oauth/personal-access-tokens'),
-    'scopes_url' => url('oauth/scopes'),
-])
-
 <div>
-    <p>New Personal Access Token Component</p>
-    <div>
-        <p>{{ $token_url }}</p>
-        <p>{{ $scopes_url }}</p>
-    </div>
-
+    <p>New Livewire Personal Access Token Component</p>
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="text-right" style="display: flex; justify-content: space-between; align-items: center;">
-
                 <a class="btn btn-info btn-sm action-link pull-right"
                    onclick="$('#modal-create-token').modal('show');"
                 >
@@ -46,7 +35,6 @@
                     <tbody>
                     <tr>
                         <!-- Client Name -->
-
                         <td style="vertical-align: middle;">
                             {{ $token->name }}
                         </td>
@@ -58,28 +46,23 @@
                         <td style="vertical-align: middle;">
                             {{ $token->expires_at }}
                         </td>
-
-
+<td style="vertical-align: middle;">
+                            {{ $token->id }}
+                        </td>
                         <!-- Delete Button -->
                         <td style="vertical-align: middle;" class="text-right">
-                            <a class="action-link btn btn-danger btn-sm" wire:click="deleteToken({{ $token->id }})">
+                            <a class="action-link btn btn-danger btn-sm" wire:click="deleteToken('{{ $token->id }}')">
                                 <i class="fas fa-trash"></i>
                             </a>
                         </td>
                     </tr>
-                    @endforeach
                     </tbody>
+                @endforeach
             </table>
         </div>
-
-
-
     </div>
-
     <!-- Create Token Modal -->
     <x-personal-access-tokens.create-token-modal />
-
     <!-- View New Token Modal -->
     <x-personal-access-tokens.view-new-token />
-
 </div>
