@@ -98,6 +98,7 @@
 
                             <div class="col-md-6">
                                 <input id="create-token-name" type="text" aria-label="name" class="form-control" name="name"
+                                       {{-- defer because it's submitting if i don't --}}
                                        wire:model.defer="name"
                                 >
                             </div>
