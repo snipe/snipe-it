@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\Asset;
 use App\Models\Department;
 use App\Models\Setting;
 use DB;
