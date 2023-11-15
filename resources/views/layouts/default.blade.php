@@ -965,6 +965,7 @@
                 $('.js-copy-link').tooltip('hide').attr('data-original-title', '{{ trans('general.copied') }}').tooltip('show');
             });
 
+            // Reference: https://jqueryvalidation.org/validate/
             $('#create-form').validate({
                 ignore: 'input[type=hidden]',
                 errorClass: 'help-block form-error',
@@ -979,6 +980,10 @@
                 highlight: function(inputElement) {
                     $(inputElement).parent().addClass('has-error');
                     $(inputElement).closest('.help-block').remove();
+                },
+                onfocusout: function(element) {
+                    // console.log($(element).valid());
+                    return $(element).valid();
                 },
             });
 
