@@ -35,9 +35,6 @@ class StoreAssetRequest extends ImageUploadRequest
             parent::rules(),
         );
 
-        // temporary fix for unique serials
-        unset($rules['serial']);
-
         return $rules;
     }
 }
