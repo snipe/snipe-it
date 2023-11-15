@@ -46,9 +46,6 @@
                         <td style="vertical-align: middle;">
                             {{ $token->expires_at }}
                         </td>
-<td style="vertical-align: middle;">
-                            {{ $token->id }}
-                        </td>
                         <!-- Delete Button -->
                         <td style="vertical-align: middle;" class="text-right">
                             <a class="action-link btn btn-danger btn-sm" wire:click="deleteToken('{{ $token->id }}')">
