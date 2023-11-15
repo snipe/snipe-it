@@ -144,5 +144,6 @@
         </div>
     </div>
     <!-- View New Token Modal -->
+    <div>{{ $newTokenString }}</div>
     <x-personal-access-tokens.view-new-token />
 </div>

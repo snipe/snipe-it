@@ -10,6 +10,8 @@ use Livewire\Component;
 class PersonalAccessTokens extends Component
 {
     public $name;
+
+    public $newTokenString;
     public function render()
     {
         return view('livewire.personal-access-tokens', [
@@ -27,7 +29,11 @@ class PersonalAccessTokens extends Component
 
     public function createToken(): void
     {
-       Auth::user()->createToken($this->name);
+       $newToken = Auth::user()->createToken($this->name);
+
+       $this->newTokenString = $newToken->accessToken;
+
+       Log::alert($newToken);
     }
 
     public function deleteToken($tokenId): void
