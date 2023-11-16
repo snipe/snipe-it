@@ -95,6 +95,7 @@
                             <div class="col-md-6">
                                 <input id="create-token-name" type="text" aria-label="name" class="form-control"
                                        name="name"
+                                       wire:keydown.enter="createToken(name)"
                                        {{-- defer because it's submitting as i type if i don't --}}
                                        wire:model.defer="name"
                                 >
@@ -148,7 +149,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button " class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
                     <h4 class="modal-title">
                         Personal Access Token
@@ -177,6 +178,11 @@
         window.addEventListener('tokenCreated', token => {
             $('#modal-create-token').modal('hide');
             $('#modal-access-token').modal('show');
+        })
+        window.addEventListener("keydown", function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+            }
         })
     </script>
 </div>
