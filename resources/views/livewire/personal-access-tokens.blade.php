@@ -173,9 +173,7 @@
         </div>
     </div>
         <script>
-            // this is so amazingly simple
             window.addEventListener('tokenCreated', token => {
-                console.log(token);
                 $('#modal-create-token').modal('hide');
                 $('#modal-access-token').modal('show');
             })
