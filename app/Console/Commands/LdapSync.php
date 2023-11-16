@@ -83,7 +83,7 @@ class LdapSync extends Command
         $summary = [];
 
         try {
-            if ( $this->option('location_id') != '') {
+            if ( !empty($this->option('location_id')) != '') {
                 $location_ou= Location::where('id', '=', $this->option('location_id'))->value('ldap_ou');
                 $search_base = $location_ou;
                 Log::debug('Importing users from specified location OU: \"'.$search_base.'\".');
