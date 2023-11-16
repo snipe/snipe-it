@@ -304,7 +304,54 @@
                         <label style="grid-area: label-title">Label</label>
                         <input style="grid-area: label-field" x-model="option.label" />
                         <label style="grid-area: source-title">DataSource</label>
-                        <input style="grid-area: source-field" x-model="option.datasource" />
+                        <select style="grid-area: source-field" x-model="option.datasource">
+                            <optgroup label="Asset">
+                                <option value="asset_tag">Asset Tag</option>
+                                <option value="name">Asset Name</option>
+                                <option value="serial">Asset Serial</option>
+                                <option value="asset_eol_date">Asset EOL Date</option>
+                                <option value="order_number">Asset Order Number</option>
+                                <option value="purchase_date">Asset Purchase Date</option>
+                                <option value="assignedTo">Assigned To</option>
+                            </optgroup>
+                            <optgroup label="Asset Model">
+                                <option value="model.name">Asset Model Name</option>
+                                <option value="model.model_number">Asset Model Number</option>
+                            </optgroup>
+                            <optgroup label="Manufacturer">
+                                <option value="model.manufacturer.name">Manufacturer Name</option>
+                                <option value="model.manufacturer.support_email">Manufacturer Support Email</option>
+                                <option value="model.manufacturer.support_phone">Manufacturer Support Phone</option>
+                                <option value="model.manufacturer.support_url">Manufacturer Support URL</option>
+                            </optgroup>
+                            <optgroup label="Category">
+                                <option value="model.category.name">Category Name</option>
+                            </optgroup>
+                            <optgroup label="Status">
+                                <option value="assetstatus.name">Status</option>
+                            </optgroup>
+                            <optgroup label="Supplier">
+                                <option value="supplier.name">Supplier Name</option>
+                            </optgroup>
+                            <optgroup label="Default Location">
+                                <option value="defaultLoc.name">Default Location Name</option>
+                                <option value="defaultLoc.phone">Default Location Phone</option>
+                            </optgroup>
+                            <optgroup label="Location">
+                                <option value="location.name">Location Name</option>
+                                <option value="location.phone">Location Phone</option>
+                            </optgroup>
+                            <optgroup label="Company">
+                                <option value="company.email">Company Email</option>
+                                <option value="company.name">Company Name</option>
+                                <option value="company.phone">Company Phone</option>
+                            </optgroup>
+                            <optgroup label="Custom Fields">
+                                @foreach($customFields as $customField)
+                                    <option value="{{ $customField->db_column }}">{{ $customField->name }}</option>
+                                @endforeach
+                            </optgroup>
+                        </select>
                     </div>
                 </template>
             </template>

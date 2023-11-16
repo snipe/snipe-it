@@ -6,7 +6,6 @@ use App\Events\AssetCheckedOut;
 use App\Events\CheckoutableCheckedOut;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Helpers\Helper;
-use App\Http\Traits\UniqueSerialTrait;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Acceptable;
 use App\Models\Traits\Searchable;
@@ -32,7 +31,7 @@ class Asset extends Depreciable
     protected $presenter = \App\Presenters\AssetPresenter::class;
 
     use CompanyableTrait;
-    use HasFactory, Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait, UniqueSerialTrait;
+    use HasFactory, Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait;
 
     public const LOCATION = 'location';
     public const ASSET = 'asset';
@@ -91,7 +90,7 @@ class Asset extends Depreciable
 
     protected $rules = [
         'name'            => 'max:255|nullable',
-        'model_id'        => 'required|integer|exists:models,id,deleted_at,NULL',
+        'model_id'        => 'required|integer|exists:models,id,deleted_at,NULL|not_array',
         'status_id'       => 'required|integer|exists:status_labels,id',
         'company_id'      => 'integer|nullable',
         'warranty_months' => 'numeric|nullable|digits_between:0,240',
@@ -100,7 +99,7 @@ class Asset extends Depreciable
         'expected_checkin' => 'date|nullable',
         'location_id'     => 'exists:locations,id|nullable',
         'rtd_location_id' => 'exists:locations,id|nullable',
-        'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
+        'asset_tag'      => 'required|min:1|max:255|unique_undeleted:assets,asset_tag|not_array',
         'purchase_date'   => 'date|date_format:Y-m-d|nullable',
         'serial'          => 'unique_serial|nullable',
         'purchase_cost'   => 'numeric|nullable|gte:0',
