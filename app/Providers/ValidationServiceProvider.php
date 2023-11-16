@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Department;
+use App\Models\Setting;
 use DB;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rule;
@@ -71,6 +72,17 @@ class ValidationServiceProvider extends ServiceProvider
                     return $count < 1;
                 }
             });
+
+
+        Validator::extend('unique_serial', function ($attribute, $value, $parameters, $validator) {
+            if(Setting::getSettings()->unique_serial == '1') {
+                $count = DB::table('assets')->select('id')->where('serial', '=', $value)->whereNull('deleted_at')->count();
+
+                return $count < 1;
+            } else {
+                return true;
+            }
+        });
 
         // Prevent circular references
         //
