@@ -48,6 +48,8 @@ class ValidationServiceProvider extends ServiceProvider
         // Unique only if undeleted
         // This works around the use case where multiple deleted items have the same unique attribute.
         // (I think this is a bug in Laravel's validator?)
+        // $parameters is the rule parameters, like `unique_undeleted:users,id` - $parameters[0] is users, $parameters[1] is id
+        // the UniqueUndeletedTrait prefills these so you can just use `unique_undeleted` in your rules (but this would only work directly in the model)
         Validator::extend('unique_undeleted', function ($attribute, $value, $parameters, $validator) {
             if (count($parameters)) {
                 $count = DB::table($parameters[0])->select('id')->where($attribute, '=', $value)->whereNull('deleted_at')->where('id', '!=', $parameters[1])->count();
@@ -231,6 +233,10 @@ class ValidationServiceProvider extends ServiceProvider
             else {
                 return true;
             }
+        });
+
+        Validator::extend('not_array', function ($attribute, $value, $parameters, $validator) {
+            return !is_array($value);
         });
     }
 

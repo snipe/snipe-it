@@ -95,6 +95,7 @@ return [
     'url'                  => 'The :attribute format is invalid.',
     'unique_undeleted'     => 'The :attribute must be unique.',
     'non_circular'         => 'The :attribute must not create a circular reference.',
+    'not_array'            => 'The :attribute field cannot be an array.',
     'disallow_same_pwd_as_user_fields' => 'Password cannot be the same as the username.',
     'letters'              => 'Password must contain at least one letter.',
     'numbers'              => 'Password must contain at least one number.',

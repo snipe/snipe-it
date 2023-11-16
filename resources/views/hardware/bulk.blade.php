@@ -62,7 +62,7 @@
              </div>
               <div class="col-md-5">
                 <label class="form-control">
-                  {{ Form::checkbox('null_expected_checkin_date', '1', false, ['checked' => 'false']) }}
+                  {{ Form::checkbox('null_expected_checkin_date', '1', false) }}
                   {{ trans_choice('general.set_to_null', count($assets), ['asset_count' => count($assets)]) }}
                 </label>
               </div>
@@ -92,9 +92,13 @@
                   {{ Form::radio('update_real_loc', '1', old('update_real_loc'), ['checked'=> 'checked', 'aria-label'=>'update_real_loc']) }}
                   {{ trans('admin/hardware/form.asset_location_update_default_current') }}
                 </label>
+              <label class="form-control">
+                {{ Form::radio('update_real_loc', '0', old('update_real_loc'), ['aria-label'=>'update_default_loc']) }}
+                {{ trans('admin/hardware/form.asset_location_update_default') }}
+              </label>
                 <label class="form-control">
-                  {{ Form::radio('update_real_loc', '0', old('update_real_loc'), ['aria-label'=>'update_default_loc']) }}
-                  {{ trans('admin/hardware/form.asset_location_update_default') }}
+                  {{ Form::radio('update_real_loc', '2', old('update_real_loc'), ['aria-label'=>'update_default_loc']) }}
+                  {{ trans('admin/hardware/form.asset_location_update_actual') }}
                 </label>
 
             </div>

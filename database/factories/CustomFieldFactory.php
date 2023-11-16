@@ -26,6 +26,7 @@ class CustomFieldFactory extends Factory
             'format' => '',
             'element' => 'text',
             'auto_add_to_fieldsets' => '0',
+            'show_in_requestable_list' => '0',
         ];
     }
 
@@ -66,6 +67,7 @@ class CustomFieldFactory extends Factory
             return [
                 'name' => 'CPU',
                 'help_text' => 'The speed of the processor on this device.',
+                'show_in_requestable_list' => '1',
             ];
         });
     }
@@ -79,4 +81,28 @@ class CustomFieldFactory extends Factory
             ];
         });
     }
+
+    public function testEncrypted()
+    {
+        return $this->state(function () {
+            return [
+                'name' => 'Test Encrypted',
+                'field_encrypted' => '1',
+                'help_text' => 'This is a sample encrypted field.',
+            ];
+        });
+    }
+
+    public function testCheckbox()
+    {
+        return $this->state(function () {
+            return [
+                'name' => 'Test Checkbox',
+                'help_text' => 'This is a sample checkbox.',
+                'field_values' => "One\nTwo\nThree",
+                'element'   => 'checkbox',
+            ];
+        });
+    }
+
 }

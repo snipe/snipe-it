@@ -18,7 +18,7 @@ class LdapSync extends Command
      *
      * @var string
      */
-    protected $signature = 'snipeit:ldap-sync {--location=} {--location_id=} {--base_dn=} {--filter=} {--summary} {--json_summary}';
+    protected $signature = 'snipeit:ldap-sync {--location=} {--location_id=*} {--base_dn=} {--filter=} {--summary} {--json_summary}';
 
     /**
      * The console command description.
@@ -83,7 +83,15 @@ class LdapSync extends Command
         $summary = [];
 
         try {
-            if ($this->option('base_dn') != '') {
+            if ( $this->option('location_id') != '') {
+
+                foreach($this->option('location_id') as $location_id){
+                    $location_ou= Location::where('id', '=', $location_id)->value('ldap_ou');
+                    $search_base = $location_ou;
+                    Log::debug('Importing users from specified location OU: \"'.$search_base.'\".');
+                 }
+            }
+            else if ($this->option('base_dn') != '') {
                 $search_base = $this->option('base_dn');
                 Log::debug('Importing users from specified base DN: \"'.$search_base.'\".');
             } else {
@@ -106,21 +114,21 @@ class LdapSync extends Command
 
         /* Determine which location to assign users to by default. */
         $location = null; // TODO - this would be better called "$default_location", which is more explicit about its purpose
+            if ($this->option('location') != '') {
+                if ($location = Location::where('name', '=', $this->option('location'))->first()) {
+                    Log::debug('Location name ' . $this->option('location') . ' passed');
+                    Log::debug('Importing to ' . $location->name . ' (' . $location->id . ')');
+                }
 
-        if ($this->option('location') != '') {
-            if ($location = Location::where('name', '=', $this->option('location'))->first()) {
-                Log::debug('Location name '.$this->option('location').' passed');
-                Log::debug('Importing to '.$location->name.' ('.$location->id.')');
+            } elseif ($this->option('location_id') != '') {
+                foreach($this->option('location_id') as $location_id) {
+                if ($location = Location::where('id', '=', $location_id)->first()) {
+                    Log::debug('Location ID ' . $location_id . ' passed');
+                    Log::debug('Importing to ' . $location->name . ' (' . $location->id . ')');
+                }
+
             }
-
-        } elseif ($this->option('location_id') != '') {
-            if ($location = Location::where('id', '=', $this->option('location_id'))->first()) {
-                Log::debug('Location ID '.$this->option('location_id').' passed');
-                Log::debug('Importing to '.$location->name.' ('.$location->id.')');
-            }
-
         }
-
         if (! isset($location)) {
             Log::debug('That location is invalid or a location was not provided, so no location will be assigned by default.');
         }

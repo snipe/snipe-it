@@ -101,7 +101,7 @@ class LicenseCheckinController extends Controller
 
         // Was the asset updated?
         if ($licenseSeat->save()) {
-            event(new CheckoutableCheckedIn($licenseSeat, $return_to, Auth::user(), $request->input('note')));
+            event(new CheckoutableCheckedIn($licenseSeat, $return_to, Auth::user(), $request->input('notes')));
 
             if ($backTo == 'user') {
                 return redirect()->route('users.show', $return_to->id)->with('success', trans('admin/licenses/message.checkin.success'));
