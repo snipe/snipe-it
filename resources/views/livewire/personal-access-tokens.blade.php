@@ -59,7 +59,7 @@
         </div>
     </div>
     <!-- Create Token Modal -->
-    <div class="modal fade" id="modal-create-token" tabindex="-1" role="dialog">
+    <div wire:ignore.self class="modal fade" id="modal-create-token" tabindex="-1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -143,7 +143,43 @@
             </div>
         </div>
     </div>
+
     <!-- View New Token Modal -->
-    <div>{{ $newTokenString }}</div>
-    <x-personal-access-tokens.view-new-token />
+    <div class="modal fade" id="modal-access-token" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button " class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                    <h4 class="modal-title">
+                        Personal Access Token
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+                    <p>
+                        Here is your new personal access token. This is the only time it will be shown so don't lose it!
+                        You may now use this token to make API requests.
+                    </p>
+
+                    <pre><code>
+                            {{ $newTokenString }}
+                </code></pre>
+                </div>
+
+                <!-- Modal Actions -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        <script>
+            // this is so amazingly simple
+            window.addEventListener('tokenCreated', token => {
+                console.log(token);
+                $('#modal-create-token').modal('hide');
+                $('#modal-access-token').modal('show');
+            })
+        </script>
 </div>

@@ -10,8 +10,8 @@ use Livewire\Component;
 class PersonalAccessTokens extends Component
 {
     public $name;
-
     public $newTokenString;
+
     public function render()
     {
         return view('livewire.personal-access-tokens', [
@@ -33,12 +33,11 @@ class PersonalAccessTokens extends Component
 
        $this->newTokenString = $newToken->accessToken;
 
-       Log::alert($newToken);
+       $this->dispatchBrowserEvent('tokenCreated', $newToken->accessToken);
     }
 
     public function deleteToken($tokenId): void
     {
-        Log::info('poo');
         //this needs safety (though the scope of auth::user might kind of do it...)
         //seems like it does, test more
         Auth::user()->tokens()->find($tokenId)->delete();
