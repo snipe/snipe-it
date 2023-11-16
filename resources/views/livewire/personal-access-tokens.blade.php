@@ -72,17 +72,15 @@
 
                 <div class="modal-body">
                     <!-- Form Errors -->
-                    @if($errors === true)
+                    @if($errors->has('name'))
                         <div class="alert alert-danger"
-                                {{--                     v-if="form.errors.length > 0"--}}
                         >
                             <p><strong>Whoops!</strong> Something went wrong!</p>
                             <br>
                             <ul>
                                 <li
-                                        {{--                                v-for="error in form.errors"--}}
                                 >
-                                    {{--                            {{ error }}--}}
+                                    @error('name') <span class="error">{{ $message }}</span> @enderror
                                 </li>
                             </ul>
                         </div>
@@ -90,7 +88,6 @@
 
                     <!-- Create Token Form -->
                     <form class="form-horizontal" role="form"
-                            {{--                      @submit.prevent="store"--}}
                     >
                         <!-- Name -->
                         <div class="form-group">
@@ -98,13 +95,15 @@
 
                             <div class="col-md-6">
                                 <input id="create-token-name" type="text" aria-label="name" class="form-control" name="name"
-                                       {{-- defer because it's submitting if i don't --}}
+                                       {{-- defer because it's submitting as i type if i don't --}}
                                        wire:model.defer="name"
                                 >
                             </div>
+
                         </div>
 
                         <!-- Scopes -->
+                        {{-- Seems like scopes was never working, I couldn't figure out how to enable the feature if it was --}}
                         {{--                    <div class="form-group"--}}
                         {{--                         v-if="scopes.length > 0"--}}
                         {{--                    >--}}
@@ -163,8 +162,8 @@
                     </p>
 
                     <pre><code>
-                            {{ $newTokenString }}
-                </code></pre>
+                            {{ e($newTokenString) }}
+                    </code></pre>
                 </div>
 
                 <!-- Modal Actions -->

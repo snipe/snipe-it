@@ -23,12 +23,13 @@ class PersonalAccessTokens extends Component
     {
         return [
             'name' => 'required|string|max:255',
-            'scopes' => 'nullable|array',
         ];
     }
 
     public function createToken(): void
     {
+       $this->validate();
+
        $newToken = Auth::user()->createToken($this->name);
 
        $this->newTokenString = $newToken->accessToken;
