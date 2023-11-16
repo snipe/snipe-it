@@ -1,5 +1,4 @@
 <div>
-    <p>New Livewire Personal Access Token Component</p>
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="text-right" style="display: flex; justify-content: space-between; align-items: center;">
