@@ -93,7 +93,8 @@
                             <label class="col-md-4 control-label" for="name">Name</label>
 
                             <div class="col-md-6">
-                                <input id="create-token-name" type="text" aria-label="name" class="form-control" name="name"
+                                <input id="create-token-name" type="text" aria-label="name" class="form-control"
+                                       name="name"
                                        {{-- defer because it's submitting as i type if i don't --}}
                                        wire:model.defer="name"
                                 >
@@ -133,7 +134,7 @@
                     <button type="button" class="btn primary" data-dismiss="modal">Close</button>
 
                     <button type="button" class="btn btn-primary"
-                                                    wire:click="createToken(name)"
+                            wire:click="createToken(name)"
                     >
                         Create
                     </button>
@@ -172,10 +173,10 @@
             </div>
         </div>
     </div>
-        <script>
-            window.addEventListener('tokenCreated', token => {
-                $('#modal-create-token').modal('hide');
-                $('#modal-access-token').modal('show');
-            })
-        </script>
+    <script>
+        window.addEventListener('tokenCreated', token => {
+            $('#modal-create-token').modal('hide');
+            $('#modal-access-token').modal('show');
+        })
+    </script>
 </div>
