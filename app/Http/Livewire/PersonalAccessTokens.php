@@ -12,6 +12,13 @@ class PersonalAccessTokens extends Component
     public $name;
     public $newTokenString;
 
+    protected $listeners = ['openModal' => 'autoFocusModalEvent'];
+
+    public function autoFocusModalEvent()
+    {
+        $this->dispatchBrowserEvent('autoFocusModal');
+    }
+
     public function render()
     {
         return view('livewire.personal-access-tokens', [

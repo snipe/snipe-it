@@ -4,6 +4,7 @@
             <div class="text-right" style="display: flex; justify-content: space-between; align-items: center;">
                 <a class="btn btn-info btn-sm action-link pull-right"
                    onclick="$('#modal-create-token').modal('show');"
+                   wire:click="$emit('openModal')"
                 >
                     Create New Token
                 </a>
@@ -98,6 +99,7 @@
                                        wire:keydown.enter="createToken(name)"
                                        {{-- defer because it's submitting as i type if i don't --}}
                                        wire:model.defer="name"
+                                       autofocus
                                 >
                             </div>
 
@@ -175,10 +177,16 @@
         </div>
     </div>
     <script>
-        window.addEventListener('tokenCreated', token => {
+        window.addEventListener('tokenCreated', function() {
             $('#modal-create-token').modal('hide');
             $('#modal-access-token').modal('show');
         })
+        window.addEventListener('autoFocusModal', function() {
+            $('#modal-create-token').on('shown.bs.modal', function() {
+                $(this).find('[autofocus]').focus();
+            });
+        })
+        // was trying to do a submit on the form when enter was pressed
         window.addEventListener("keydown", function (event) {
             if (event.key === 'Enter') {
                 event.preventDefault();
