@@ -164,9 +164,7 @@
                         You may now use this token to make API requests.
                     </p>
 
-                    <pre><code>
-                            {{ e($newTokenString) }}
-                    </code></pre>
+                    <pre><code>{{ $newTokenString }}</code></pre>
                 </div>
 
                 <!-- Modal Actions -->
@@ -177,7 +175,7 @@
         </div>
     </div>
     <script>
-        window.addEventListener('tokenCreated', function() {
+        window.addEventListener('tokenCreated', token => {
             $('#modal-create-token').modal('hide');
             $('#modal-access-token').modal('show');
         })
