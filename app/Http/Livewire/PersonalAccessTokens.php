@@ -14,7 +14,8 @@ class PersonalAccessTokens extends Component
 
     protected $listeners = ['openModal' => 'autoFocusModalEvent'];
 
-    public function autoFocusModalEvent()
+    //this is just an annoying thing to make the modal input autofocus
+    public function autoFocusModalEvent(): void
     {
         $this->dispatchBrowserEvent('autoFocusModal');
     }
