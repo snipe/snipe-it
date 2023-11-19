@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class UsersController extends Controller
 {
@@ -185,7 +186,9 @@ class UsersController extends Controller
             $users->where('autoassign_licenses', '=', $request->input('autoassign_licenses'));
         }
 
-        if ($request->filled('search')) {
+        if ($request->filled('location_id') != '') {
+            $users = $users->UserLocation($request->input('location_id'), $request->input('search'));
+         } else {
             $users = $users->TextSearch($request->input('search'));
         }
 
@@ -530,7 +533,7 @@ class UsersController extends Controller
                 try {
                     Storage::disk('public')->delete('avatars/'.$user->avatar);
                 } catch (\Exception $e) {
-                    \Log::debug($e);
+                    Log::debug($e);
                 }
             }
 
