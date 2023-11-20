@@ -23,6 +23,13 @@ class BulkAssetsController extends Controller
     /**
      * Display the bulk edit page.
      *
+     * This method is super weird because it's kinda of like a controller within a controller.
+     * It's main function is to determine what the bulk action in, and then return a view with
+     * the information that view needs, be it bulk delete, bulk edit, restore, etc.
+     *
+     * This is something that made sense at the time, but sort of doesn't make sense now. A JS front-end to determine form
+     * action would make a lot more sense here and make things a lot more clear.
+     *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @return View
      * @internal param int $assetId
@@ -32,7 +39,9 @@ class BulkAssetsController extends Controller
     public function edit(Request $request)
     {
         $this->authorize('view', Asset::class);
-      
+
+        \Log::debug('Bulk action was triggered: '.$request->input('bulk_actions'));
+
         if (! $request->filled('ids')) {
             return redirect()->back()->with('error', trans('admin/hardware/message.update.no_assets_selected'));
         }
@@ -41,60 +50,45 @@ class BulkAssetsController extends Controller
         $bulk_back_url = request()->headers->get('referer');
         session(['bulk_back_url' => $bulk_back_url]);
 
-        $asset_ids = array_values(array_unique($request->input('ids')));
-       
-        //custom fields logic
-        $asset_custom_field = Asset::with(['model.fieldset.fields', 'model'])->whereIn('id', $asset_ids)->whereHas('model', function ($query) {
-            return $query->where('fieldset_id', '!=', null);
-        })->get();
-
-        $models = $asset_custom_field->unique('model_id');  
-        $modelNames = [];
-        foreach($models as $model) {
-            $modelNames[] = $model->model->name;
-        } 
+        $asset_ids = $request->input('ids');
+        $assets = Asset::with('assignedTo', 'location', 'model')->find($asset_ids);
 
         if ($request->filled('bulk_actions')) {
+
+
             switch ($request->input('bulk_actions')) {
                 case 'labels':
                     $this->authorize('view', Asset::class);
-                    $assets_found = Asset::find($asset_ids);
-                    
-                    if ($assets_found->isEmpty()){
-                        return redirect()->back();
-                    }
 
                     return (new Label)
-                        ->with('assets', $assets_found)
+                        ->with('assets', $assets)
                         ->with('settings', Setting::getSettings())
                         ->with('bulkedit', true)
                         ->with('count', 0);
 
                 case 'delete':
                     $this->authorize('delete', Asset::class);
-                    $assets = Asset::with('assignedTo', 'location')->find($asset_ids);
-                    $assets->each(function ($asset) {
-                        $this->authorize('delete', $asset);
+                    $assets->each(function ($assets) {
+                        $this->authorize('delete', $assets);
                     });
 
                     return view('hardware/bulk-delete')->with('assets', $assets);
                    
                 case 'restore':
+                    \Log::debug('We seem to be bulk restoring');
                     $this->authorize('update', Asset::class);
-                    $assets = Asset::withTrashed()->find($asset_ids); 
                     $assets->each(function ($asset) {
                         $this->authorize('delete', $asset);
                     });
-
                     return view('hardware/bulk-restore')->with('assets', $assets);
 
                 case 'edit':
                     $this->authorize('update', Asset::class);
+                    \Log::debug('We seem to be bulk editing');
+
                     return view('hardware/bulk')
-                        ->with('assets', $asset_ids)
-                        ->with('statuslabel_list', Helper::statusLabelList())
-                        ->with('models', $models->pluck(['model'])) 
-                        ->with('modelNames', $modelNames);
+                        ->with('assets', $assets)
+                        ->with('statuslabel_list', Helper::statusLabelList());
             }
         }
 
@@ -115,27 +109,35 @@ class BulkAssetsController extends Controller
         $has_errors = 0;
         $error_array = array();
 
+
+        print_r($assets, true);
         // Get the back url from the session and then destroy the session
         $bulk_back_url = route('hardware.index');
+
         if ($request->session()->has('bulk_back_url')) {
             $bulk_back_url = $request->session()->pull('bulk_back_url');
         }
 
        $custom_field_columns = CustomField::all()->pluck('db_column')->toArray();
+
+        \Log::debug('Custom fields columns: ');
+        \Log::debug(print_r($custom_field_columns, true));
      
-        if (Session::exists('ids')) {
-            $assets = Session::get('ids'); 
-        } elseif (! $request->filled('ids') || count($request->input('ids')) <= 0) {
+        if (! $request->filled('ids') || count($request->input('ids')) == 0) {
             return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.update.no_assets_selected'));
         }
-         
-        $assets = array_keys($request->input('ids'));
-        
-       if ($request->anyFilled($custom_field_columns)) {
+
+        // $assetsIds = array_keys($request->input('ids'));
+        $assets = Asset::find($request->input('ids'));
+
+        // We should tighten checks here - burpsuite could punch through this I'd pull the custom fields for new and old here
+        if ($request->anyFilled($custom_field_columns)) {
            $custom_fields_present = true;
          } else {
            $custom_fields_present = false;
          }
+
+        // If ANY of these are filled, prepare to update the values on the assets
         if (($request->filled('purchase_date'))
             || ($request->filled('expected_checkin'))
             || ($request->filled('purchase_cost'))
@@ -154,7 +156,8 @@ class BulkAssetsController extends Controller
             || ($request->anyFilled($custom_field_columns))
 
         ) {
-            foreach ($assets as $assetId) {
+            // Let's loop through those assets and build an update array
+            foreach ($assets as $asset) {
 
                 $this->update_array = [];
 
@@ -186,7 +189,6 @@ class BulkAssetsController extends Controller
                     $this->update_array['purchase_cost'] =  $request->input('purchase_cost');
                 }
 
-
                 if ($request->filled('company_id')) {
                     $this->update_array['company_id'] = $request->input('company_id');
                     if ($request->input('company_id') == 'clear') {
@@ -195,20 +197,23 @@ class BulkAssetsController extends Controller
                 }
 
                 if ($request->filled('rtd_location_id')) {
+
                     if (($request->filled('update_real_loc')) && (($request->input('update_real_loc')) == '0')) {
                         $this->update_array['rtd_location_id'] = $request->input('rtd_location_id');
                     }
+
                     if (($request->filled('update_real_loc')) && (($request->input('update_real_loc')) == '1')) {
                         $this->update_array['location_id'] = $request->input('rtd_location_id');
                         $this->update_array['rtd_location_id'] = $request->input('rtd_location_id');
                     }
+
                     if (($request->filled('update_real_loc')) && (($request->input('update_real_loc')) == '2')) {
                         $this->update_array['location_id'] = $request->input('rtd_location_id');
                     }
+
                 }
 
                 $changed = [];
-                $asset = Asset::find($assetId);
 
                 foreach ($this->update_array as $key => $value) {
                     if ($this->update_array[$key] != $asset->{$key}) {
@@ -216,20 +221,25 @@ class BulkAssetsController extends Controller
                         $changed[$key]['new'] = $this->update_array[$key];
                     }
                 }
- 
+
+                \Log::debug(print_r($changed, true));
+
+                $existing_assetmodel = $asset->model;
+                $updated_model = $request->input('model_id');
+
+                // Use the rules of the new model fieldsets if the model changed
+                if (($request->filled('model_id')) && ($request->filled('model_id')!=$existing_assetmodel->id)) {
+                    \Log::debug('Old and new models are different - change from '.$asset->model->id.' to model '.$request->input('model_id'));
+                    $this->update_array['model_id'] =  $request->input('model_id');
+                    $updated_model = \App\Models\AssetModel::find($request->input('model_id'));
+                }
+
+
+                /** Start all the custom fields shenanigans */
                 if ($custom_fields_present) {
 
-                    $model = $asset->model()->first();
-
-                    // Use the rules of the new model fieldsets if the model changed
-                    if ($request->filled('model_id')) {
-                        $this->update_array['model_id'] =  $request->input('model_id');
-                        $model = \App\Models\AssetModel::find($request->input('model_id'));
-                    }
-
-
                     // Make sure this model is valid
-                    $assetCustomFields = ($model) ? $model->fieldset : null;
+                    $assetCustomFields = ($updated_model) ? $updated_model->fieldset : null;
 
                     if ($assetCustomFields && $assetCustomFields->fields) {
 
@@ -260,7 +270,6 @@ class BulkAssetsController extends Controller
                                  */
                                 } else {
 
-
                                     if ((array_key_exists($field->db_column, $this->update_array)) && ($asset->{$field->db_column} != $this->update_array[$field->db_column])) {
 
                                         // Check if this is an array, and if so, flatten it
@@ -278,6 +287,7 @@ class BulkAssetsController extends Controller
 
 
 
+                \Log::debug(print_r($this->update_array, true));
                 // Check if it passes validation, and then try to save
                 if (!$asset->update($this->update_array)) {
 

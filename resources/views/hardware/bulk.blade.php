@@ -19,11 +19,10 @@
 
     <p>{{ trans('admin/hardware/form.bulk_update_help') }}</p>
 
+
+
     <div class="callout callout-warning">
       <i class="fas fa-exclamation-triangle"></i> {{ trans_choice('admin/hardware/form.bulk_update_warn', count($assets), ['asset_count' => count($assets)]) }}
-        @if (count($models) > 0)
-            {{ trans_choice('admin/hardware/form.bulk_update_with_custom_field', count($models), ['asset_model_count' => count($models)]) }} 
-        @endif 
     </div>
 
     <form class="form-horizontal" method="post" action="{{ route('hardware/bulksave') }}" autocomplete="off" role="form">
@@ -189,7 +188,7 @@
             </div>
           </div>
 
-            @include("models/custom_fields_form_bulk_edit",["models" => $models])
+
       
           @foreach ($assets as $key => $value)
             <input type="hidden" name="ids[{{ $value }}]" value="1">
