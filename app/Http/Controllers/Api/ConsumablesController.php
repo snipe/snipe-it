@@ -266,6 +266,14 @@ class ConsumablesController extends Controller
             \Log::debug('No enough remaining');
         }
 
+        // Make sure there is a valid category
+        if (!$consumable->category){
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.invalid_item_category_single', ['type' => trans('general.consumable')])));
+
+            return redirect()->route('consumables.index')->with('error', trans('general.invalid_item_category_single', ['type' => trans('general.consumable')]));
+        }
+
+
         // Check if the user exists - @TODO:  this should probably be handled via validation, not here??
         if (!$user = User::find($request->input('assigned_to'))) {
             // Return error message
