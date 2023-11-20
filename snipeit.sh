@@ -419,214 +419,216 @@ set_dbpass () {
 case $distro in
   Debian)
     if [[ "$version" =~ ^11 ]]; then
-    # Install for Debian 11.x
-    set_fqdn
-    set_dbpass
-    tzone=$(cat /etc/timezone)
+        # Install for Debian 11.x
+        set_fqdn
+        set_dbpass
+        tzone=$(cat /etc/timezone)
 
-    echo "* Adding PHP repository."
-    log "apt-get install -y apt-transport-https lsb-release ca-certificates"
-    log "wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg"
-    echo "deb https://packages.sury.org/php/ $codename main" > /etc/apt/sources.list.d/php.list
+        echo "* Adding PHP repository."
+        log "apt-get install -y apt-transport-https lsb-release ca-certificates"
+        log "wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg"
+        echo "deb https://packages.sury.org/php/ $codename main" > /etc/apt/sources.list.d/php.list
 
-    echo -n "* Updating installed packages."
-    log "apt-get update && apt-get -y upgrade" & pid=$!
-    progress
+        echo -n "* Updating installed packages."
+        log "apt-get update && apt-get -y upgrade" & pid=$!
+        progress
 
-    echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-    PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php7.4 php7.4 php7.4-mcrypt php7.4-curl php7.4-mysql php7.4-gd php7.4-ldap php7.4-zip php7.4-mbstring php7.4-xml php7.4-bcmath curl git unzip"
-    install_packages
+        echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+        PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2 php8.2-mcrypt php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
+        install_packages
 
-    echo "* Configuring Apache."
-    create_virtualhost
-    /usr/sbin/a2enmod rewrite
-    /usr/sbin/a2ensite $APP_NAME.conf
-    rename_default_vhost
+        echo "* Configuring Apache."
+        create_virtualhost
+        /usr/sbin/a2enmod rewrite
+        /usr/sbin/a2ensite $APP_NAME.conf
+        rename_default_vhost
 
-    set_hosts
+        set_hosts
 
-    install_snipeit
+        install_snipeit
 
-    echo "* Restarting Apache httpd."
-    /usr/sbin/service apache2 restart
+        echo "* Restarting Apache httpd."
+        /usr/sbin/service apache2 restart
 
-    echo "* Clearing cache and setting final permissions."
-    chmod 777 -R $APP_PATH/storage/framework/cache/
-    run_as_app_user "php $APP_PATH/artisan cache:clear"
-    chmod 775 -R $APP_PATH/storage/
+        echo "* Clearing cache and setting final permissions."
+        chmod 777 -R $APP_PATH/storage/framework/cache/
+        run_as_app_user "php $APP_PATH/artisan cache:clear"
+        chmod 775 -R $APP_PATH/storage/
 
-  elif [[ "$version" =~ ^10 ]]; then
-    # Install for Debian 10.x
-    set_fqdn
-    set_dbpass
-    tzone=$(cat /etc/timezone)
+    elif [[ "$version" =~ ^11 ]]; then
+        # Install for Debian 11.x
+        set_fqdn
+        set_dbpass
+        tzone=$(cat /etc/timezone)
 
-    echo "* Adding PHP repository."
-    log "apt-get install -y apt-transport-https lsb-release ca-certificates"
-    log "wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg"
-    echo "deb https://packages.sury.org/php/ $codename main" > /etc/apt/sources.list.d/php.list
+        echo "* Adding PHP repository."
+        log "apt-get install -y apt-transport-https lsb-release ca-certificates"
+        log "wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg"
+        echo "deb https://packages.sury.org/php/ $codename main" > /etc/apt/sources.list.d/php.list
 
-    echo -n "* Updating installed packages."
-    log "apt-get update && apt-get -y upgrade" & pid=$!
-    progress
+        echo -n "* Updating installed packages."
+        log "apt-get update && apt-get -y upgrade" & pid=$!
+        progress
 
-    echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-    PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php7.4 php7.4 php7.4-mcrypt php7.4-curl php7.4-mysql php7.4-gd php7.4-ldap php7.4-zip php7.4-mbstring php7.4-xml php7.4-bcmath curl git unzip"
-    install_packages
+        echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+        PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2 php8.2-mcrypt php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
+        install_packages
 
-    echo "* Configuring Apache."
-    create_virtualhost
-    /usr/sbin/a2enmod rewrite
-    /usr/sbin/a2ensite $APP_NAME.conf
-    rename_default_vhost
+        echo "* Configuring Apache."
+        create_virtualhost
+        /usr/sbin/a2enmod rewrite
+        /usr/sbin/a2ensite $APP_NAME.conf
+        rename_default_vhost
 
-    set_hosts
+        set_hosts
 
-    install_snipeit
+        install_snipeit
 
-    echo "* Restarting Apache httpd."
-    /usr/sbin/service apache2 restart
+        echo "* Restarting Apache httpd."
+        /usr/sbin/service apache2 restart
 
-    echo "* Clearing cache and setting final permissions."
-    chmod 777 -R $APP_PATH/storage/framework/cache/
-    run_as_app_user "php $APP_PATH/artisan cache:clear"
-    chmod 775 -R $APP_PATH/storage/
+        echo "* Clearing cache and setting final permissions."
+        chmod 777 -R $APP_PATH/storage/framework/cache/
+        run_as_app_user "php $APP_PATH/artisan cache:clear"
+        chmod 775 -R $APP_PATH/storage/
 
-  elif [[ "$version" =~ ^9 ]]; then
-    eol
-    exit 1
-  else
-    echo "Unsupported Debian version. Version found: $version"
-    exit 1
-  fi
+    elif [[ "$version" =~ ^10 ]]; then
+        # Install for Debian 10.x
+        set_fqdn
+        set_dbpass
+        tzone=$(cat /etc/timezone)
+
+        echo "* Adding PHP repository."
+        log "apt-get install -y apt-transport-https lsb-release ca-certificates"
+        log "wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg"
+        echo "deb https://packages.sury.org/php/ $codename main" > /etc/apt/sources.list.d/php.list
+
+        echo -n "* Updating installed packages."
+        log "apt-get update && apt-get -y upgrade" & pid=$!
+        progress
+
+        echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+        PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2 php8.2-mcrypt php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
+        install_packages
+
+        echo "* Configuring Apache."
+        create_virtualhost
+        /usr/sbin/a2enmod rewrite
+        /usr/sbin/a2ensite $APP_NAME.conf
+        rename_default_vhost
+
+        set_hosts
+
+        install_snipeit
+
+        echo "* Restarting Apache httpd."
+        /usr/sbin/service apache2 restart
+
+        echo "* Clearing cache and setting final permissions."
+        chmod 777 -R $APP_PATH/storage/framework/cache/
+        run_as_app_user "php $APP_PATH/artisan cache:clear"
+        chmod 775 -R $APP_PATH/storage/
+
+    elif [[ "$version" =~ ^9 ]]; then
+        eol
+        exit 1
+    else
+        echo "Unsupported Debian version. Version found: $version"
+        exit 1
+    fi
   ;;
   Ubuntu)
-if [ "${version//./}" -ge "2204" ]; then
-    # Install for Ubuntu 22.04
-    set_fqdn
-    set_dbpass
-    tzone=$(cat /etc/timezone)
+    if [ "${version//./}" -ge "2204" ]; then
+        # Install for Ubuntu 22.04
+        set_fqdn
+        set_dbpass
+        tzone=$(cat /etc/timezone)
 
-    echo -n "* Updating installed packages."
-    log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
-    progress
+        echo -n "* Updating installed packages."
+        log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
+        progress
 
-    echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-    PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip"
-    install_packages
+        echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+        PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip"
+        install_packages
 
-    echo "* Configuring Apache."
-    create_virtualhost
-    log "phpenmod mcrypt"
-    log "phpenmod mbstring"
-    log "a2enmod rewrite"
-    log "a2ensite $APP_NAME.conf"
-    rename_default_vhost
+        echo "* Configuring Apache."
+        create_virtualhost
+        log "phpenmod mcrypt"
+        log "phpenmod mbstring"
+        log "a2enmod rewrite"
+        log "a2ensite $APP_NAME.conf"
+        rename_default_vhost
 
-    set_hosts
+        set_hosts
 
-    echo "* Starting MariaDB."
-    log "systemctl start mariadb.service"
+        echo "* Starting MariaDB."
+        log "systemctl start mariadb.service"
 
-    install_snipeit
+        install_snipeit
 
-    echo "* Restarting Apache httpd."
-    log "systemctl restart apache2"
+        echo "* Restarting Apache httpd."
+        log "systemctl restart apache2"
 
-    echo "* Clearing cache and setting final permissions."
-    chmod 777 -R $APP_PATH/storage/framework/cache/
-    log "run_as_app_user php $APP_PATH/artisan cache:clear"
-    chmod 775 -R $APP_PATH/storage/
-  elif [ "${version//./}" == "2110" ]; then
-    # Ubuntu 21.10 is no longer supported
-    echo "Unsupported Ubuntu version. Version found: $version"
-    exit 1
-  elif [ "${version//./}" == "2004" ]; then
-    # Install for Ubuntu 20.04
-    set_fqdn
-    set_dbpass
-    tzone=$(cat /etc/timezone)
+        echo "* Clearing cache and setting final permissions."
+        chmod 777 -R $APP_PATH/storage/framework/cache/
+        log "run_as_app_user php $APP_PATH/artisan cache:clear"
+        chmod 775 -R $APP_PATH/storage/
+    elif [ "${version//./}" == "2110" ]; then
+        # Ubuntu 21.10 is no longer supported
+        echo "Unsupported Ubuntu version. Version found: $version"
+        exit 1
+    elif [ "${version//./}" == "2004" ]; then
+        # Install for Ubuntu 20.04
+        set_fqdn
+        set_dbpass
+        tzone=$(cat /etc/timezone)
 
-    echo -n "* Updating installed packages."
-    log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
-    progress
+        echo -n "* Updating installed packages."
+        log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
+        progress
 
-    echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-    PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip"
-    install_packages
+        echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+        PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip"
+        install_packages
 
-    echo "* Configuring Apache."
-    create_virtualhost
-    log "phpenmod mcrypt"
-    log "phpenmod mbstring"
-    log "a2enmod rewrite"
-    log "a2ensite $APP_NAME.conf"
-    rename_default_vhost
+        echo "* Configuring Apache."
+        create_virtualhost
+        log "phpenmod mcrypt"
+        log "phpenmod mbstring"
+        log "a2enmod rewrite"
+        log "a2ensite $APP_NAME.conf"
+        rename_default_vhost
 
-    set_hosts
+        set_hosts
 
-    echo "* Starting MariaDB."
-    log "systemctl start mariadb.service"
+        echo "* Starting MariaDB."
+        log "systemctl start mariadb.service"
 
-    install_snipeit
+        install_snipeit
 
-    echo "* Restarting Apache httpd."
-    log "systemctl restart apache2"
+        echo "* Restarting Apache httpd."
+        log "systemctl restart apache2"
 
-    echo "* Clearing cache and setting final permissions."
-    chmod 777 -R $APP_PATH/storage/framework/cache/
-    log "run_as_app_user php $APP_PATH/artisan cache:clear"
-    chmod 775 -R $APP_PATH/storage/
-  elif [ "${version//./}" == "1804" ]; then
-    # Install for Ubuntu 18.04+
-    set_fqdn
-    set_dbpass
-    tzone=$(cat /etc/timezone)
-
-    echo -n "* Updating installed packages."
-    log "apt-get update"
-    log "DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
-    progress
-    log "add-apt-repository -y ppa:ondrej/php"
-
-    echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-    PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip"
-    install_packages
-
-    echo "* Configuring Apache."
-    create_virtualhost
-    log "phpenmod mcrypt"
-    log "phpenmod mbstring"
-    log "a2enmod rewrite"
-    log "a2ensite $APP_NAME.conf"
-    rename_default_vhost
-
-    set_hosts
-
-    echo "* Starting MariaDB."
-    log "systemctl start mariadb.service"
-
-    install_snipeit
-
-    echo "* Restarting Apache httpd."
-    log "systemctl restart apache2"
-
-    echo "* Clearing cache and setting final permissions."
-    chmod 777 -R $APP_PATH/storage/framework/cache/
-    log "run_as_app_user php $APP_PATH/artisan cache:clear"
-    chmod 775 -R $APP_PATH/storage/
-  else
-    echo "Unsupported Ubuntu version. Version found: $version"
-    exit 1
-  fi
-  ;;
+        echo "* Clearing cache and setting final permissions."
+        chmod 777 -R $APP_PATH/storage/framework/cache/
+        log "run_as_app_user php $APP_PATH/artisan cache:clear"
+        chmod 775 -R $APP_PATH/storage/
+    elif [ "${version//./}" == "1804" ]; then
+        eol
+        exit 1
+    else
+        echo "Unsupported Ubuntu version. Version found: $version"
+        exit 1
+    fi
+    ;;
   Raspbian)
-  if [[ "$version" =~ ^10 ]]; then
-    # Install for Raspbian 9.x
-    set_fqdn
-    set_dbpass
-    tzone=$(cat /etc/timezone)
-    cat >/etc/apt/sources.list.d/10-buster.list <<EOL
+    if [[ "$version" =~ ^10 ]]; then
+        # Install for Raspbian 9.x
+        set_fqdn
+        set_dbpass
+        tzone=$(cat /etc/timezone)
+        cat >/etc/apt/sources.list.d/10-buster.list <<EOL
 deb http://mirrordirector.raspbian.org/raspbian/ buster main contrib non-free rpi
 EOL
 
@@ -640,221 +642,221 @@ Pin: release n=buster
 Pin-Priority: 750
 EOL
 
-    echo -n "* Updating installed packages."
-    log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
-    progress
+        echo -n "* Updating installed packages."
+        log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
+        progress
 
-    echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-    PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php7.2 php7.2 php7.2-mcrypt php7.2-curl php7.2-mysql php7.2-gd php7.2-ldap php7.2-zip php7.2-mbstring php7.2-xml php7.2-bcmath curl git unzip"
-    install_packages
+        echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+        PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php7.2 php7.2 php7.2-mcrypt php7.2-curl php7.2-mysql php7.2-gd php7.2-ldap php7.2-zip php7.2-mbstring php7.2-xml php7.2-bcmath curl git unzip"
+        install_packages
 
-    echo "* Configuring Apache."
-    create_virtualhost
-    log "phpenmod mcrypt"
-    log "phpenmod mbstring"
-    log "a2enmod rewrite"
-    log "a2ensite $APP_NAME.conf"
+        echo "* Configuring Apache."
+        create_virtualhost
+        log "phpenmod mcrypt"
+        log "phpenmod mbstring"
+        log "a2enmod rewrite"
+        log "a2ensite $APP_NAME.conf"
 
-    set_hosts
+        set_hosts
 
-    echo "* Starting MariaDB."
-    log "systemctl start mariadb.service"
+        echo "* Starting MariaDB."
+        log "systemctl start mariadb.service"
 
-    echo "* Securing MariaDB."
-    /usr/bin/mysql_secure_installation
+        echo "* Securing MariaDB."
+        /usr/bin/mysql_secure_installation
 
-    install_snipeit
+        install_snipeit
 
-    echo "* Restarting Apache httpd."
-    log "systemctl restart apache2"
-  else
-    echo "Unsupported Raspbian version. Version found: $version"
-    exit 1
-  fi
+        echo "* Restarting Apache httpd."
+        log "systemctl restart apache2"
+    else
+        echo "Unsupported Raspbian version. Version found: $version"
+        exit 1
+    fi
   ;;
   Centos)
-  if [[ "$version" =~ ^6 ]]; then
-    eol
-    exit 1
-  elif [[ "$version" =~ ^7 ]]; then
-    # Install for CentOS/Redhat 7
-    set_fqdn
-    set_dbpass
-    tzone=$(timedatectl | gawk -F'[: ]' ' $9 ~ /zone/ {print $11}');
+    if [[ "$version" =~ ^6 ]]; then
+        eol
+        exit 1
+    elif [[ "$version" =~ ^7 ]]; then
+        # Install for CentOS/Redhat 7
+        set_fqdn
+        set_dbpass
+        tzone=$(timedatectl | gawk -F'[: ]' ' $9 ~ /zone/ {print $11}');
 
-    echo "* Adding Remi and EPEL-Release repositories."
-    log "yum -y install wget epel-release yum-utils" & pid=$!
-    progress
-    log "yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm" & pid=$!
-    progress
-    log "yum-config-manager --enable remi-php74"
+        echo "* Adding Remi and EPEL-Release repositories."
+        log "yum -y install wget epel-release yum-utils" & pid=$!
+        progress
+        log "yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm" & pid=$!
+        progress
+        log "yum-config-manager --enable remi-php82"
 
-    echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-    PACKAGES="httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-embedded php-gd php-mbstring php-mcrypt php-ldap php-json php-simplexml php-process php-zip"
-    install_packages
+        echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+        PACKAGES="httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-embedded php-gd php-mbstring php-mcrypt php-ldap php-json php-simplexml php-process php-zip"
+        install_packages
 
-    echo "* Configuring Apache."
-    create_virtualhost
+        echo "* Configuring Apache."
+        create_virtualhost
 
-    set_hosts
+        set_hosts
 
-    echo "* Setting MariaDB to start on boot and starting MariaDB."
-    log "systemctl enable mariadb.service"
-    log "systemctl start mariadb.service"
+        echo "* Setting MariaDB to start on boot and starting MariaDB."
+        log "systemctl enable mariadb.service"
+        log "systemctl start mariadb.service"
 
-    install_snipeit
+        install_snipeit
 
-    set_firewall
+        set_firewall
 
-    echo "* Setting Apache httpd to start on boot and starting service."
-    log "systemctl enable httpd.service"
-    log "systemctl restart httpd.service"
+        echo "* Setting Apache httpd to start on boot and starting service."
+        log "systemctl enable httpd.service"
+        log "systemctl restart httpd.service"
 
-    echo "* Clearing cache and setting final permissions."
-    chmod 777 -R $APP_PATH/storage/framework/cache/
-    log "run_as_app_user php $APP_PATH/artisan cache:clear"
-    chmod 775 -R $APP_PATH/storage/
+        echo "* Clearing cache and setting final permissions."
+        chmod 777 -R $APP_PATH/storage/framework/cache/
+        log "run_as_app_user php $APP_PATH/artisan cache:clear"
+        chmod 775 -R $APP_PATH/storage/
 
-    set_selinux
+        set_selinux
 
-  elif [[ "$version" =~ ^8 ]]; then
-    # Install for CentOS/Redhat 8
-    set_fqdn
-    set_dbpass
-    tzone=$(timedatectl | grep "Time zone" | awk 'BEGIN { FS"("}; {print $3}');
+    elif [[ "$version" =~ ^8 ]]; then
+        # Install for CentOS/Redhat 8
+        set_fqdn
+        set_dbpass
+        tzone=$(timedatectl | grep "Time zone" | awk 'BEGIN { FS"("}; {print $3}');
 
-    echo "* Adding Remi and EPEL-Release repositories."
-    log "yum -y install wget epel-release yum-utils" & pid=$!
-    progress
-    log "yum -y install https://rpms.remirepo.net/enterprise/remi-release-8.rpm" & pid=$!
-    progress
-    log "rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-remi.el8"
-    log "dnf -y module enable php:remi-7.4" & pid=$!
-    progress
+        echo "* Adding Remi and EPEL-Release repositories."
+        log "yum -y install wget epel-release yum-utils" & pid=$!
+        progress
+        log "yum -y install https://rpms.remirepo.net/enterprise/remi-release-8.rpm" & pid=$!
+        progress
+        log "rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-remi.el8"
+        log "dnf -y module enable php:remi-8.2" & pid=$!
+        progress
 
-    echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-    PACKAGES="httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-embedded php-gd php-mbstring php-mcrypt php-ldap php-json php-simplexml php-process php-zip"
-    install_packages
+        echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+        PACKAGES="httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-embedded php-gd php-mbstring php-mcrypt php-ldap php-json php-simplexml php-process php-zip"
+        install_packages
 
-    echo "* Configuring Apache."
-    create_virtualhost
+        echo "* Configuring Apache."
+        create_virtualhost
 
-    set_hosts
+        set_hosts
 
-    echo "* Setting MariaDB to start on boot and starting MariaDB."
-    log "systemctl enable mariadb.service"
-    log "systemctl start mariadb.service"
+        echo "* Setting MariaDB to start on boot and starting MariaDB."
+        log "systemctl enable mariadb.service"
+        log "systemctl start mariadb.service"
 
-    install_snipeit
+        install_snipeit
 
-    set_firewall
+        set_firewall
 
-    echo "* Setting Apache httpd to start on boot and starting service."
-    log "systemctl enable httpd.service"
-    log "systemctl restart httpd.service"
+        echo "* Setting Apache httpd to start on boot and starting service."
+        log "systemctl enable httpd.service"
+        log "systemctl restart httpd.service"
 
-    echo "* Clearing cache and setting final permissions."
-    chmod 777 -R $APP_PATH/storage/framework/cache/
-    log "run_as_app_user php $APP_PATH/artisan cache:clear"
-    chmod 775 -R $APP_PATH/storage/
+        echo "* Clearing cache and setting final permissions."
+        chmod 777 -R $APP_PATH/storage/framework/cache/
+        log "run_as_app_user php $APP_PATH/artisan cache:clear"
+        chmod 775 -R $APP_PATH/storage/
 
-    set_selinux
+        set_selinux
 
-  elif [[ "$version" =~ ^9 ]]; then
-    # Install for CentOS/Redhat 9
-    set_fqdn
-    set_dbpass
-    tzone=$(timedatectl | grep "Time zone" | awk 'BEGIN { FS"("}; {print $3}');
+    elif [[ "$version" =~ ^9 ]]; then
+        # Install for CentOS/Redhat 9
+        set_fqdn
+        set_dbpass
+        tzone=$(timedatectl | grep "Time zone" | awk 'BEGIN { FS"("}; {print $3}');
 
-    echo "* Adding EPEL-release repository."
-    log "dnf -y install wget epel-release" & pid=$!
-    progress
+        echo "* Adding EPEL-release repository."
+        log "dnf -y install wget epel-release" & pid=$!
+        progress
 
-    echo "* Installing Apache httpd, PHP, MariaDB, and other requirements."
-    PACKAGES="httpd mariadb-server git unzip php-mysqlnd php-bcmath php-cli php-embedded php-gd php-mbstring php-ldap php-simplexml php-process php-sodium php-pecl-zip php-fpm"
-    install_packages
+        echo "* Installing Apache httpd, PHP, MariaDB, and other requirements."
+        PACKAGES="httpd mariadb-server git unzip php-mysqlnd php-bcmath php-cli php-embedded php-gd php-mbstring php-ldap php-simplexml php-process php-sodium php-pecl-zip php-fpm"
+        install_packages
 
-    echo "* Configuring Apache."
-    create_virtualhost
+        echo "* Configuring Apache."
+        create_virtualhost
 
-    set_hosts
+        set_hosts
 
-    echo "* Setting MariaDB to start on boot and starting MariaDB."
-    log "systemctl enable mariadb.service"
-    log "systemctl start mariadb.service"
+        echo "* Setting MariaDB to start on boot and starting MariaDB."
+        log "systemctl enable mariadb.service"
+        log "systemctl start mariadb.service"
 
-    install_snipeit
+        install_snipeit
 
-    set_firewall & pid=$!
-    progress
+        set_firewall & pid=$!
+        progress
 
-    echo "* Setting Apache httpd to start on boot and starting service."
-    log "systemctl enable httpd.service"
-    log "systemctl restart httpd.service"
+        echo "* Setting Apache httpd to start on boot and starting service."
+        log "systemctl enable httpd.service"
+        log "systemctl restart httpd.service"
 
-    echo "* Setting php-fpm to start on boot and starting service."
-    log "systemctl enable php-fpm.service"
-    log "systemctl restart php-fpm.service"
+        echo "* Setting php-fpm to start on boot and starting service."
+        log "systemctl enable php-fpm.service"
+        log "systemctl restart php-fpm.service"
 
-    echo "* Clearing cache and setting final permissions."
-    chmod 777 -R $APP_PATH/storage/framework/cache/
-    log "run_as_app_user php $APP_PATH/artisan cache:clear"
-    chmod 775 -R $APP_PATH/storage/
+        echo "* Clearing cache and setting final permissions."
+        chmod 777 -R $APP_PATH/storage/framework/cache/
+        log "run_as_app_user php $APP_PATH/artisan cache:clear"
+        chmod 775 -R $APP_PATH/storage/
 
-    set_selinux
+        set_selinux
 
-  else
-    echo "Unsupported CentOS version. Version found: $version"
-    exit 1
-  fi
+    else
+        echo "Unsupported CentOS version. Version found: $version"
+        exit 1
+    fi
   ;;
   Fedora)
-  if [[ "$version" =~ ^36 ]]; then
-    # Install for Fedora 36+
-    set_fqdn
-    set_dbpass
-    tzone=$(timedatectl | grep "Time zone" | awk 'BEGIN { FS"("}; {print $3}');
+    if [[ "$version" =~ ^36 ]]; then
+        # Install for Fedora 36+
+        set_fqdn
+        set_dbpass
+        tzone=$(timedatectl | grep "Time zone" | awk 'BEGIN { FS"("}; {print $3}');
 
-    echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-    PACKAGES="wget httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-cli php-common php-embedded php-gd php-mbstring php-mcrypt php-ldap php-simplexml php-process php-sodium php-pecl-zip php-fpm"
-    install_packages
+        echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+        PACKAGES="wget httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-cli php-common php-embedded php-gd php-mbstring php-mcrypt php-ldap php-simplexml php-process php-sodium php-pecl-zip php-fpm"
+        install_packages
 
-    echo "* Configuring Apache."
-    create_virtualhost
+        echo "* Configuring Apache."
+        create_virtualhost
 
-    set_hosts
+        set_hosts
 
-    echo "* Setting MariaDB to start on boot and starting MariaDB."
-    log "systemctl enable mariadb.service"
-    log "systemctl start mariadb.service"
+        echo "* Setting MariaDB to start on boot and starting MariaDB."
+        log "systemctl enable mariadb.service"
+        log "systemctl start mariadb.service"
 
-    install_snipeit
+        install_snipeit
 
-    set_firewall & pid=$!
-    progress
+        set_firewall & pid=$!
+        progress
 
-    echo "* Setting Apache httpd to start on boot and starting service."
-    log "systemctl enable httpd.service"
-    log "systemctl restart httpd.service"
+        echo "* Setting Apache httpd to start on boot and starting service."
+        log "systemctl enable httpd.service"
+        log "systemctl restart httpd.service"
 
-    echo "* Setting php-fpm to start on boot and starting service."
-    log "systemctl enable php-fpm.service"
-    log "systemctl restart php-fpm.service"
+        echo "* Setting php-fpm to start on boot and starting service."
+        log "systemctl enable php-fpm.service"
+        log "systemctl restart php-fpm.service"
 
-    echo "* Clearing cache and setting final permissions."
-    chmod 777 -R $APP_PATH/storage/framework/cache/
-    log "run_as_app_user php $APP_PATH/artisan cache:clear"
-    chmod 775 -R $APP_PATH/storage/
+        echo "* Clearing cache and setting final permissions."
+        chmod 777 -R $APP_PATH/storage/framework/cache/
+        log "run_as_app_user php $APP_PATH/artisan cache:clear"
+        chmod 775 -R $APP_PATH/storage/
 
-    set_selinux
-  else
-    echo "Unsupported Fedora version. Version found: $version"
-    exit 1
-  fi
+        set_selinux
+    else
+        echo "Unsupported Fedora version. Version found: $version"
+        exit 1
+    fi
   ;;
   *)
-  echo "Your OS was not detected correctly."
-  exit 1
+    echo "Your OS was not detected correctly."
+    exit 1
 esac
 
 setupmail=default
