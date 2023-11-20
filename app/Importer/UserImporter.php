@@ -61,7 +61,7 @@ class UserImporter extends ItemImporter
         $this->item['activated'] = ($this->fetchHumanBoolean(trim($this->findCsvMatch($row, 'activated'))) == 1) ? '1' : 0;
         $this->item['employee_num'] = trim($this->findCsvMatch($row, 'employee_num'));
         $this->item['department_id'] = trim($this->createOrFetchDepartment(trim($this->findCsvMatch($row, 'department'))));
-        $this->item['manager_id'] = $this->fetchManager($this->findCsvMatch($row, 'manager_first_name'), $this->findCsvMatch($row, 'manager_last_name'));
+        $this->item['manager_id'] = $this->fetchManager(trim($this->findCsvMatch($row, 'manager_first_name')), trim($this->findCsvMatch($row, 'manager_last_name')));
         $this->item['remote'] = ($this->fetchHumanBoolean(trim($this->findCsvMatch($row, 'remote'))) == 1 ) ? '1' : 0;
         $this->item['vip'] = ($this->fetchHumanBoolean(trim($this->findCsvMatch($row, 'vip'))) ==1 ) ? '1' : 0;
         $this->item['autoassign_licenses'] = ($this->fetchHumanBoolean(trim($this->findCsvMatch($row, 'autoassign_licenses'))) ==1 ) ? '1' : 0;
