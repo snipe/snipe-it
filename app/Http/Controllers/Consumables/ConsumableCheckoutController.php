@@ -36,7 +36,7 @@ class ConsumableCheckoutController extends Controller
 
         // Make sure there is a valid category
         if (!$consumable->category){
-            return redirect()->route('consumables.index')->with('error', trans('general.invalid_item_category_single', ['type' => trans('general.consumable')]));
+            return redirect()->route('consumables.edit', ['consumable' => $consumable->id])->with('error', trans('general.invalid_item_category_single', ['type' => trans('general.consumable')]));
         }
 
         $this->authorize('checkout', $consumable);
