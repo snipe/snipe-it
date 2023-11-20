@@ -2,6 +2,10 @@
     {{ trans('general.import') }}
     @parent
 @stop
+
+
+
+
 <div>
     {{-- Livewire requires a 'master' <div>, above --}}
         <div class="row">
@@ -65,39 +69,50 @@
             <div class="col-md-9">
                 <div class="box">
                     <div class="box-body">
-                        <div class="row">
 
-                            <div class="col-md-12">
+                        @if (!config('app.lock_passwords'))
+                             <div class="row">
+                                <div class="col-md-12">
 
-                                @if($progress != -1)
-                                    <div class="col-md-10 col-sm-5 col-xs-12" style="height: 35px;" id='progress-container'>
-                                        <div class="progress progress-striped-active" style="height: 100%;">
-                                            <div id='progress-bar' class="progress-bar {{ $progress_bar_class }}" role="progressbar" style="width: {{ $progress }}%">
-                                                <h4 id="progress-text">{!! $progress_message  !!}</h4>
+                                    <div  style="height: 35px;" x-data="{ isUploading: false, progress: 0 }"
+                                            x-on:livewire-upload-start="isUploading = true"
+                                            x-on:livewire-upload-finish="isUploading = false"
+                                            x-on:livewire-upload-error="isUploading = false"
+                                            x-on:livewire-upload-progress="progress = $event.detail.progress">
+
+                                            <!-- Progress Bar *Container* - not the bar itself-->
+                                            <div x-show="isUploading" class="col-md-10" style="height: 35px;" id="nprogress">
+                                                <progress max="100" x-bind:value="progress" class="col-md-12" style="min-height: 100%">
+                                                    YAY!
+                                                </progress>
                                             </div>
-                                        </div>
+
+                                            <div class="col-md-2 col-sm-5 col-xs-12 text-right pull-right">
+
+                                                <!-- Form/File Input -->
+                                                <form wire:submit.prevent="saveUploadedFiles">
+                                                    <label class="btn btn-default col-md-12 col-xs-12" aria-hidden="true">
+                                                        <i class="fas fa-paperclip" aria-hidden="true"></i>
+                                                         {{ trans('button.select_file')  }}
+
+                                                        <input type="file" name="files[]" wire:model="files" class="js-uploadFile" id="uploadFile" data-maxsize="{{ Helper::file_upload_max_size() }}" accept="text/csv" style="display:none;" aria-label="files" aria-hidden="true" multiple>
+                                                    </label>
+
+                                                    @error('files')
+                                                        <span class="error">
+                                                            {{ $message }}
+                                                        </span>
+                                                    @enderror
+                                                </form>
+                                                <!-- End Form/File Input -->
+
+                                            </div>
                                     </div>
-                                @endif
-
-                                <div class="col-md-2 col-sm-5 col-xs-12 text-right pull-right">
-
-                                    <!-- The fileinput-button span is used to style the file input field as button -->
-                                    @if (!config('app.lock_passwords'))
-                                        <span class="btn btn-primary fileinput-button">
-                                        <span>{{ trans('button.select_file') }}</span>
-                                         <!-- The file input field used as target for the file upload widget -->
-                                        <label for="files[]"><span class="sr-only">{{ trans('admin/importer/general.select_file') }}</span></label>
-                                        <input id="fileupload" type="file" name="files[]" data-url="{{ route('api.imports.index') }}" accept="text/csv" aria-label="files[]">
-                                        </span>
-                                    @endif
-
-                                </div>
-
+                               </div>
                             </div>
 
+                        @endif
 
-
-                        </div>
                         <div class="row">
                             <div class="col-md-12 table-responsive" style="padding-top: 30px;">
                                 <table data-pagination="true"
@@ -294,34 +309,6 @@
 </div>
 @push('js')
     <script>
-
-        {{-- TODO: Maybe change this to the file upload thing that's baked-in to Livewire? --}}
-        $('#fileupload').fileupload({
-            dataType: 'json',
-            done: function(e, data) {
-                @this.progress_bar_class = 'progress-bar-success';
-                @this.progress_message = '<i class="fas fa-check faa-pulse animated"></i> {{ trans('general.notification_success') }}';
-                @this.progress = 100;
-            },
-            add: function(e, data) {
-                data.headers = {
-                    "X-Requested-With": 'XMLHttpRequest',
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-                };
-                data.process().done( function () {data.submit();});
-                @this.progress = 0;
-                @this.clearMessage();
-            },
-            progress: function(e, data) {
-                @this.progress = parseInt((data.loaded / data.total * 100, 10));
-                @this.progress_message = '{{ trans('general.uploading') }}';
-            },
-            fail: function() {
-                @this.progress_bar_class = "progress-bar-danger";
-                @this.progress = 100;
-                @this.progress_message = '<i class="fas fa-exclamation-triangle faa-pulse animated"></i> {{ trans('general.upload_error') }}';
-            }
-        })
 
         // For the importFile part:
         $(function () {

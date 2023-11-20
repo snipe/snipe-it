@@ -84,6 +84,14 @@
 
     @livewireStyles
 
+
+    <style>
+        #nprogress .bar {
+            background: red;
+            color: red;
+        }
+    </style>
+
 </head>
 
 @if (($snipeSettings) && ($snipeSettings->allow_user_skin==1) && Auth::check() && Auth::user()->present()->skin != '')
