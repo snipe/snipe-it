@@ -87,7 +87,7 @@ class BulkAssetsController extends Controller
                     \Log::debug('We seem to be bulk editing');
 
                     return view('hardware/bulk')
-                        ->with('assets', $assets)
+                        ->with('assets', $asset_ids)
                         ->with('statuslabel_list', Helper::statusLabelList());
             }
         }
@@ -109,8 +109,6 @@ class BulkAssetsController extends Controller
         $has_errors = 0;
         $error_array = array();
 
-
-        print_r($assets, true);
         // Get the back url from the session and then destroy the session
         $bulk_back_url = route('hardware.index');
 
@@ -120,15 +118,24 @@ class BulkAssetsController extends Controller
 
        $custom_field_columns = CustomField::all()->pluck('db_column')->toArray();
 
-        \Log::debug('Custom fields columns: ');
-        \Log::debug(print_r($custom_field_columns, true));
+//        \Log::debug('ALL Custom fields columns - these may or may not apply: ');
+//        \Log::debug(print_r($custom_field_columns, true));
      
         if (! $request->filled('ids') || count($request->input('ids')) == 0) {
             return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.update.no_assets_selected'));
         }
 
         // $assetsIds = array_keys($request->input('ids'));
-        $assets = Asset::find($request->input('ids'));
+        \Log::debug('Request IDs:');
+        \Log::debug(print_r(array_keys($request->input('ids')), true));
+
+        $assets = Asset::whereIn('id', array_keys($request->input('ids')))->get();
+
+        \Log::debug('Affected asset list: ');
+        foreach ($assets as $log_asset) {
+            \Log::debug(' - Asset affected: '.$log_asset->asset_tag);
+        }
+
 
         // We should tighten checks here - burpsuite could punch through this I'd pull the custom fields for new and old here
         if ($request->anyFilled($custom_field_columns)) {
@@ -161,18 +168,22 @@ class BulkAssetsController extends Controller
 
                 $this->update_array = [];
 
+                // Leave out model_id and sttaus here because we do math on that later. We have to d some extra
+                // validation and checks on those two
                 $this->conditionallyAddItem('purchase_date')
                     ->conditionallyAddItem('expected_checkin')
                     ->conditionallyAddItem('order_number')
                     ->conditionallyAddItem('requestable')
-                    ->conditionallyAddItem('status_id')
                     ->conditionallyAddItem('supplier_id')
                     ->conditionallyAddItem('warranty_months')
                     ->conditionallyAddItem('next_audit_date');
                     foreach ($custom_field_columns as $key => $custom_field_column) {
                         $this->conditionallyAddItem($custom_field_column); 
-                   } 
+                   }
 
+                /**
+                 * Blank out fields that were requested to be blanked out via checkbox
+                 */
                 if ($request->input('null_purchase_date')=='1') {
                     $this->update_array['purchase_date'] = null;
                 }
@@ -213,6 +224,27 @@ class BulkAssetsController extends Controller
 
                 }
 
+                $existing_assetmodel = $asset->model;
+
+
+                // Use the new model_id and add it to the existing $this
+                if (($request->filled('model_id')) && ($request->input('model_id')!= $existing_assetmodel->id)) {
+                    \Log::debug('Old and new models are different - change from '.$asset->model->id.' to model '.$request->input('model_id'));
+                    $this->update_array['model_id'] =  $request->input('model_id');
+                    $updated_model = \App\Models\AssetModel::find($request->input('model_id'));
+                }
+
+                $existing_status = $asset->statuslabel;
+
+                // Use the new status_id and add it to the existing $this
+                if (($request->filled('status_id')) && ($request->input('status_id')!= $existing_status->id)) {
+                    \Log::debug('Old and new models are different - change from '.$asset->statuslabel->id.' to model '.$request->input('status_id'));
+                    $this->update_array['status_id'] =  $request->input('status_id');
+                    $updated_status = \App\Models\Statuslabel::find($request->input('status_id'));
+                }
+
+
+                // Anything that happens past this WILL NOT BE logged in the edit log
                 $changed = [];
 
                 foreach ($this->update_array as $key => $value) {
@@ -222,17 +254,10 @@ class BulkAssetsController extends Controller
                     }
                 }
 
+                \Log::debug('What changed?');
                 \Log::debug(print_r($changed, true));
 
-                $existing_assetmodel = $asset->model;
-                $updated_model = $request->input('model_id');
 
-                // Use the rules of the new model fieldsets if the model changed
-                if (($request->filled('model_id')) && ($request->filled('model_id')!=$existing_assetmodel->id)) {
-                    \Log::debug('Old and new models are different - change from '.$asset->model->id.' to model '.$request->input('model_id'));
-                    $this->update_array['model_id'] =  $request->input('model_id');
-                    $updated_model = \App\Models\AssetModel::find($request->input('model_id'));
-                }
 
 
                 /** Start all the custom fields shenanigans */
