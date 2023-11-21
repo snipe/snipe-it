@@ -87,7 +87,6 @@ class ValidationServiceProvider extends ServiceProvider
          * Same as unique_undeleted but taking the combination of two columns as unique constrain.
          * This uses the Validator::replacer('two_column_unique_undeleted') below for nicer translations.
          */
-
         Validator::extend('two_column_unique_undeleted', function ($attribute, $value, $parameters, $validator) {
             if (count($parameters)) {
                 $count = DB::table($parameters[0])
