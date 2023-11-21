@@ -99,15 +99,16 @@ class Asset extends Depreciable
         'expected_checkin' => 'date|nullable',
         'location_id'     => 'exists:locations,id|nullable',
         'rtd_location_id' => 'exists:locations,id|nullable',
-        'asset_tag'      => 'required|min:1|max:255|unique_undeleted:assets,asset_tag|not_array',
+        'asset_tag'       => 'required|min:1|max:255|unique_undeleted:assets,asset_tag|not_array',
         'purchase_date'   => 'date|date_format:Y-m-d|nullable',
-        'serial'          => 'unique_serial|nullable',
+        'serial'          => 'unique_undeleted:assets,serial|nullable',
         'purchase_cost'   => 'numeric|nullable|gte:0',
         'supplier_id'     => 'exists:suppliers,id|nullable',
         'asset_eol_date'  => 'date|nullable',
         'eol_explicit'    => 'boolean|nullable',
         'byod'            => 'boolean',
     ];
+
 
   /**
    * The attributes that are mass assignable.
