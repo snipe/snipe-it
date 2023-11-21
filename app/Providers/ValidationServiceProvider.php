@@ -86,6 +86,13 @@ class ValidationServiceProvider extends ServiceProvider
          *
          * Same as unique_undeleted but taking the combination of two columns as unique constrain.
          * This uses the Validator::replacer('two_column_unique_undeleted') below for nicer translations.
+         *
+         * $parameters[0] - the name of the first table we're looking at
+         * $parameters[1] - the ID (this will be 0 on new creations)
+         * $parameters[2] - the name of the second table we're looking at
+         * $parameters[3] - the value that the request is passing for the second table we're
+         *                  checking for uniqueness across
+         *
          */
         Validator::extend('two_column_unique_undeleted', function ($attribute, $value, $parameters, $validator) {
             if (count($parameters)) {
@@ -107,6 +114,9 @@ class ValidationServiceProvider extends ServiceProvider
          *
          * This is invoked automatically by Validator::extend('two_column_unique_undeleted') above and
          * produces a translation like: "The name value must be unique across categories and category type."
+         *
+         * The $parameters passed coincide with the ones the two_column_unique_undeleted custom validator above
+         * uses, so $parameter[0] is the first table and so $parameter[2] is the second table.
          */
         Validator::replacer('two_column_unique_undeleted', function($message, $attribute, $rule, $parameters) {
             $message = str_replace(':table1', $parameters[0], $message);
