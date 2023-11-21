@@ -7,6 +7,8 @@ use App\Helpers\Helper;
 use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
+use App\Models\AssetModel;
+use App\Models\Statuslabel;
 use App\Models\Setting;
 use App\View\Label;
 use Illuminate\Http\Request;
@@ -174,6 +176,8 @@ class BulkAssetsController extends Controller
                     ->conditionallyAddItem('expected_checkin')
                     ->conditionallyAddItem('order_number')
                     ->conditionallyAddItem('requestable')
+                    ->conditionallyAddItem('model_id')
+                    ->conditionallyAddItem('status_id')
                     ->conditionallyAddItem('supplier_id')
                     ->conditionallyAddItem('warranty_months')
                     ->conditionallyAddItem('next_audit_date');
@@ -224,25 +228,6 @@ class BulkAssetsController extends Controller
 
                 }
 
-                $existing_assetmodel = $asset->model;
-
-
-                // Use the new model_id and add it to the existing $this
-                if (($request->filled('model_id')) && ($request->input('model_id')!= $existing_assetmodel->id)) {
-                    \Log::debug('Old and new models are different - change from '.$asset->model->id.' to model '.$request->input('model_id'));
-                    $this->update_array['model_id'] =  $request->input('model_id');
-                    $updated_model = \App\Models\AssetModel::find($request->input('model_id'));
-                }
-
-                $existing_status = $asset->statuslabel;
-
-                // Use the new status_id and add it to the existing $this
-                if (($request->filled('status_id')) && ($request->input('status_id')!= $existing_status->id)) {
-                    \Log::debug('Old and new models are different - change from '.$asset->statuslabel->id.' to model '.$request->input('status_id'));
-                    $this->update_array['status_id'] =  $request->input('status_id');
-                    $updated_status = \App\Models\Statuslabel::find($request->input('status_id'));
-                }
-
 
                 // Anything that happens past this WILL NOT BE logged in the edit log
                 $changed = [];
@@ -256,15 +241,14 @@ class BulkAssetsController extends Controller
 
                 \Log::debug('What changed?');
                 \Log::debug(print_r($changed, true));
-
-
-
+                
 
                 /** Start all the custom fields shenanigans */
                 if ($custom_fields_present) {
 
                     // Make sure this model is valid
-                    $assetCustomFields = ($updated_model) ? $updated_model->fieldset : null;
+                    // ALISON - FIX THIS BEFORE PUSHING
+                    $assetCustomFields = ($request->input('model_id')) ? $request->input('model_id')->fieldset : null;
 
                     if ($assetCustomFields && $assetCustomFields->fields) {
 
