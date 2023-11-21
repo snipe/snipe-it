@@ -80,9 +80,14 @@ class ValidationServiceProvider extends ServiceProvider
                 return $count < 1;
             }
         });
+        
+        /**
+         * Unique if undeleted for two columns
+         *
+         * Same as unique_undeleted but taking the combination of two columns as unique constrain.
+         * This uses the Validator::replacer('two_column_unique_undeleted') below for nicer translations.
+         */
 
-        // Unique if undeleted for two columns
-        // Same as unique_undeleted but taking the combination of two columns as unique constrain.
         Validator::extend('two_column_unique_undeleted', function ($attribute, $value, $parameters, $validator) {
             if (count($parameters)) {
                 $count = DB::table($parameters[0])
@@ -93,6 +98,24 @@ class ValidationServiceProvider extends ServiceProvider
 
                 return $count < 1;
             }
+        });
+
+
+        /**
+         * This is the validator replace static method that allows us to pass the $parameters of the table names
+         * into the translation string in validation.two_column_unique_undeleted for two_column_unique_undeleted
+         * validation messages.
+         *
+         * This is invoked automatically by Validator::extend('two_column_unique_undeleted') above and
+         * produces a translation like: "The name value must be unique across categories and category type."
+         */
+        Validator::replacer('two_column_unique_undeleted', function($message, $attribute, $rule, $parameters) {
+            $message = str_replace(':table1', $parameters[0], $message);
+            $message = str_replace(':table2', $parameters[2], $message);
+
+            // Change underscores to spaces for a friendlier display
+            $message = str_replace('_', ' ', $message);
+            return $message;
         });
 
 
